@@ -1,0 +1,38 @@
+﻿<Window x:Class="TR2Randomizer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TR2Randomizer"
+        mc:Ignorable="d"
+        Title="TR2 Rando" Height="720" Width="1280">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="TR2 Item Randomizer!" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" Grid.Row="0" Grid.ColumnSpan="2"/>
+        <Button Name="RandomizeSecrets" Content="Randomize Secrets" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" MinHeight="50" MinWidth="200" Click="RandomizeSecrets_Click" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}"/>
+        <TextBox Name="SecretsSeedEntry" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="SecretsSeedEntry_PreviewTextInput" MaxLength="9"/>
+        <ProgressBar Name="SecretsRandomizeProgress" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" MinHeight="25" Minimum="0" Maximum="18" Value="{Binding Path=(local:ReplacementStatusManager.LevelProgress)}" Margin="5"/>
+        <Label Content="Seed" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
+        <Button Name="RandomizeItems" Content="Randomize Items (Soon)" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" MinHeight="50" MinWidth="200" IsEnabled="False" Click="RandomizeItems_Click"/>
+        <TextBox Name="ItemsSeedEntry" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="ItemsSeedEntry_PreviewTextInput" MaxLength="9"/>
+        <Label Content="Seed" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
+        <Button Name="RandomizeEnemies" Content="Randomize Enemies (Soon)" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" MinHeight="50" MinWidth="200" IsEnabled="False" Click="RandomizeEnemies_Click"/>
+        <TextBox Name="EnemiesSeedEntry" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="EnemiesSeedEntry_PreviewTextInput" MaxLength="9"/>
+        <Label Content="Seed" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
+        <Label Content="Note: Ensure this tool is placed in a directory containing all level files and trmod." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" Grid.Row="4" Grid.ColumnSpan="1"/>
+        <Label Content="Modification of level files is performed by TRMod, a tool written by b122251." VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="10" Grid.Row="4" Grid.ColumnSpan="1"/>
+        <Button Name="TrackLaraEPC" Content="Track Lara (EPC)" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" MinHeight="30" MinWidth="200" IsEnabled="True" Click="TrackLaraEPC_Click"/>
+        <Button Name="TrackLaraUK" Content="Track Lara (UK Box)" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" MinHeight="30" MinWidth="200" IsEnabled="True" Click="TrackLaraUK_Click"/>
+        <Label Content="Launches a seperate process for tracking Lara's location. The location provided by this window can be used for locations in locations.json." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" Grid.Row="4" Grid.Column="1"/>
+    </Grid>
+</Window>
