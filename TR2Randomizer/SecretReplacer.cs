@@ -566,11 +566,45 @@ namespace TR2Randomizer
                 WindowStyle = ProcessWindowStyle.Hidden
             };
 
-            foreach (Location loc in LevelLocations)
+            trmodLaunch.Arguments = lvl.Name + " LIST " + lvl.Name + ".trmlist";
+
+            var trmod = Process.Start(trmodLaunch);
+
+            trmod.WaitForExit(1000);
+
+            List<string> FileOutput = new List<string>(File.ReadAllLines(lvl.Name + ".trmlist"));
+
+            File.Delete(lvl.Name + ".trmlist");
+
+            int index = 0;
+            bool FirstJade = true;
+
+            foreach (string Item in FileOutput)
+            {   
+                if (Item.Contains("Item(191"))
+                {
+                    if (FirstJade == false)
+                    {
+                        lvl.JadeSecret.Location = LevelLocations[0];
+                        trmodLaunch.Arguments = lvl.Name + lvl.JadeSecret.TRMODReplaceCommand;
+                        trmod = Process.Start(trmodLaunch);
+                        trmod.WaitForExit(1000);
+                        index++;
+                    }
+                    else
+                    {
+                        // Ignore first Jade
+                        FirstJade = false;
+                        continue;
+                    }
+                }     
+            }
+
+            for (int i = index; i < LevelLocations.Count; i++)
             {
-                lvl.JadeSecret.Location = loc;
+                lvl.JadeSecret.Location = LevelLocations[i];
                 trmodLaunch.Arguments = lvl.Name + lvl.JadeSecret.TRMODAddCommand;
-                var trmod = Process.Start(trmodLaunch);
+                trmod = Process.Start(trmodLaunch);
                 trmod.WaitForExit(1000);
             }
         }
