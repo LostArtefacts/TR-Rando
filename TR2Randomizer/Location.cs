@@ -15,5 +15,19 @@ namespace TR2Randomizer
         public int Y { get; set; }
 
         public int Room { get; set; }
+
+        public bool RequiresGlitch { get; set; }
+
+        public Difficulty Difficulty { get; set; }
+
+        public Location()
+        {
+            X = 0;
+            Y = 0;
+            Z = 0;
+            Room = 0;
+            RequiresGlitch = false;
+            Difficulty = Difficulty.Easy;
+        }
     }
 }

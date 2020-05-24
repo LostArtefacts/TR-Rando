@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Difficulty.cs" />
     <Compile Include="LevelNames.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="ReplacementStatusManager.cs" />
