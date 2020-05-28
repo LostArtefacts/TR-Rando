@@ -13,9 +13,9 @@ namespace TRLevelReader.Model
     {
         public uint Version { get; set; }
 
-        //public TRColour[] Palette { get; set; }
+        public TRColour[] Palette { get; set; }
 
-        //public TRColour4[] Palette16 { get; set; }
+        public TRColour4[] Palette16 { get; set; }
 
         public uint NumImages { get; set; }
 
