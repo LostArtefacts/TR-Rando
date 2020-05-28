@@ -44,6 +44,8 @@
     <Compile Include="Model\TR2Level.cs" />
     <Compile Include="Model\TRColour.cs" />
     <Compile Include="Model\TRColour4.cs" />
+    <Compile Include="Model\TRTexImage16.cs" />
+    <Compile Include="Model\TRTexImage8.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

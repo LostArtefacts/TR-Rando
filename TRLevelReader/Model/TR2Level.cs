@@ -19,9 +19,9 @@ namespace TRLevelReader.Model
 
         public uint NumImages { get; set; }
 
-        //public TRTexImage8[] Images8 { get; set; }
+        public TRTexImage8[] Images8 { get; set; }
 
-        //public TRTexImage16[] Images16 { get; set; }
+        public TRTexImage16[] Images16 { get; set; }
 
         public uint Unused { get; set; }
 
