@@ -27,7 +27,7 @@ namespace TRLevelReader.Model
 
         public ushort NumRooms { get; set; }
 
-        //public TR2Room[] Rooms { get; set; }
+        public TR2Room[] Rooms { get; set; }
 
         public uint NumFloorData { get; set; }
 
@@ -35,7 +35,7 @@ namespace TRLevelReader.Model
 
         public uint NumMeshData { get; set; }
 
-        //public TRMesh[] Meshes { get; set; }
+        public TRMesh[] Meshes { get; set; }
 
         public uint NumMeshPointers { get; set; }
 

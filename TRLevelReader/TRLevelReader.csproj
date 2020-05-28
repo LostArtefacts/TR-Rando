@@ -50,6 +50,7 @@
     <Compile Include="Model\TRColour4.cs" />
     <Compile Include="Model\TRFace3.cs" />
     <Compile Include="Model\TRFace4.cs" />
+    <Compile Include="Model\TRMesh.cs" />
     <Compile Include="Model\TRRoomData.cs" />
     <Compile Include="Model\TRRoomInfo.cs" />
     <Compile Include="Model\TRRoomPortal.cs" />
