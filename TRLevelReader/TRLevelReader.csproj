@@ -42,10 +42,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\TR2Level.cs" />
+    <Compile Include="Model\TR2Room.cs" />
+    <Compile Include="Model\TR2RoomLight.cs" />
+    <Compile Include="Model\TR2RoomStaticMesh.cs" />
+    <Compile Include="Model\TR2RoomVertex.cs" />
     <Compile Include="Model\TRColour.cs" />
     <Compile Include="Model\TRColour4.cs" />
+    <Compile Include="Model\TRFace3.cs" />
+    <Compile Include="Model\TRFace4.cs" />
+    <Compile Include="Model\TRRoomData.cs" />
+    <Compile Include="Model\TRRoomInfo.cs" />
+    <Compile Include="Model\TRRoomPortal.cs" />
+    <Compile Include="Model\TRRoomSector.cs" />
+    <Compile Include="Model\TRRoomSprite.cs" />
     <Compile Include="Model\TRTexImage16.cs" />
     <Compile Include="Model\TRTexImage8.cs" />
+    <Compile Include="Model\TRVertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
