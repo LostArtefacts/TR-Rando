@@ -75,15 +75,15 @@ namespace TRLevelReader.Model
 
         public uint NumObjectTextures { get; set; }
 
-        //public TRObjectTexture[] ObjectTextures { get; set; }
+        public TRObjectTexture[] ObjectTextures { get; set; }
 
         public uint NumSpriteTextures { get; set; }
 
-        //public TRSpriteTexture[] SpriteTextures { get; set; }
+        public TRSpriteTexture[] SpriteTextures { get; set; }
 
         public uint NumSpriteSequences { get; set; }
 
-        //public TRSpriteSequence[] SpriteSequences { get; set; }
+        public TRSpriteSequence[] SpriteSequences { get; set; }
 
         public uint NumCameras { get; set; }
 

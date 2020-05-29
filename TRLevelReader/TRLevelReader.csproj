@@ -58,11 +58,15 @@
     <Compile Include="Model\TRMesh.cs" />
     <Compile Include="Model\TRMeshTreeNode.cs" />
     <Compile Include="Model\TRModel.cs" />
+    <Compile Include="Model\TRObjectTexture.cs" />
+    <Compile Include="Model\TRObjectTextureVert.cs" />
     <Compile Include="Model\TRRoomData.cs" />
     <Compile Include="Model\TRRoomInfo.cs" />
     <Compile Include="Model\TRRoomPortal.cs" />
     <Compile Include="Model\TRRoomSector.cs" />
     <Compile Include="Model\TRRoomSprite.cs" />
+    <Compile Include="Model\TRSpriteSequence.cs" />
+    <Compile Include="Model\TRSpriteTexture.cs" />
     <Compile Include="Model\TRStateChange.cs" />
     <Compile Include="Model\TRStaticMesh.cs" />
     <Compile Include="Model\TRTexImage16.cs" />
