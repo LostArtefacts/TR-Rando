@@ -87,15 +87,15 @@ namespace TRLevelReader.Model
 
         public uint NumCameras { get; set; }
 
-        //public TRCamera[] Cameras { get; set; }
+        public TRCamera[] Cameras { get; set; }
 
         public uint NumSoundSources { get; set; }
 
-        //public TRSoundSource[] SoundSources { get; set; }
+        public TRSoundSource[] SoundSources { get; set; }
 
         public uint NumBoxes { get; set; }
 
-        //public TR2Box Boxes { get; set; }
+        public TR2Box Boxes { get; set; }
 
         public uint NumOverlaps { get; set; }
 
