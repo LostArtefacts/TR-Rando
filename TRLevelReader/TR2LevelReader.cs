@@ -22,10 +22,11 @@ namespace TRLevelReader
             }
 
             TR2Level level = new TR2Level();
-            int bytesRead = 0;
 
             using (BinaryReader reader = new BinaryReader(File.Open(Filename, FileMode.Open)))
             {
+                int bytesRead = 0;
+
                 Log.LogF("File opened");
 
                 level.Version = reader.ReadUInt32();
@@ -37,9 +38,41 @@ namespace TRLevelReader
                 }
 
                 level.Palette = PopulateColourPalette(reader.ReadBytes((int)MAX_PALETTE_SIZE * 3));
+                bytesRead += (int)(sizeof(byte) * (MAX_PALETTE_SIZE * 3));
                 level.Palette16 = PopulateColourPalette16(reader.ReadBytes((int)MAX_PALETTE_SIZE * 4));
+                bytesRead += (int)(sizeof(byte) * (MAX_PALETTE_SIZE * 4));
 
-                bytesRead += (level.Palette.Count() + level.Palette16.Count());
+                level.NumImages = reader.ReadUInt32();
+                bytesRead += sizeof(uint);
+
+                level.Images8 = new TRTexImage8[level.NumImages];
+                level.Images16 = new TRTexImage16[level.NumImages];
+
+                //Initialize the texture arrays
+                for (int i = 0; i < level.NumImages; i++)
+                {
+                    level.Images8[i] = new TRTexImage8();
+                    level.Images16[i] = new TRTexImage16();
+                }
+
+                //For each texture8 there are 256 * 256 bytes (65536) we can just do a straight byte read
+                for (int i = 0; i < level.NumImages; i++)
+                {
+                    level.Images8[i].Pixels = reader.ReadBytes(256 * 256);
+                    bytesRead += (sizeof(byte) * (256 * 256));
+                }                
+
+                //For each texture16 there are 256 * 256 * 2 bytes (131072)
+                for (int i = 0; i < level.NumImages; i++)
+                {
+                    for (int j = 0; j < (256 * 256); j++)
+                    {
+                        level.Images16[i].Pixels[j] = reader.ReadUInt16();
+                        bytesRead += sizeof(ushort);
+                    }
+                }
+
+                Log.LogF("Bytes Read: " + bytesRead.ToString());
             }
 
             return level;

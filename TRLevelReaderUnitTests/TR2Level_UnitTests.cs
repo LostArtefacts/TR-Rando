@@ -551,7 +551,10 @@ namespace TRLevelReaderUnitTests
                 Assert.AreEqual(ExpectedPalette16[i].Red, lvl.Palette16[i].Red);
                 Assert.AreEqual(ExpectedPalette16[i].Green, lvl.Palette16[i].Green);
                 Assert.AreEqual(ExpectedPalette16[i].Blue, lvl.Palette16[i].Blue);
-            }            
+            }
+
+            //Images/Textures
+            Assert.AreEqual((uint)11, lvl.NumImages);
         }
 
         [TestMethod]
