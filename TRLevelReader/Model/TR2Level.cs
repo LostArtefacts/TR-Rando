@@ -43,7 +43,7 @@ namespace TRLevelReader.Model
 
         public uint NumAnimations { get; set; }
 
-        //public TRAnimation[] Animations { get; set; }
+        public TRAnimation[] Animations { get; set; }
 
         public uint NumStateChanges { get; set; }
 
