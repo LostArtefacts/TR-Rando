@@ -182,6 +182,35 @@ namespace TRLevelReader
 
                         RoomData.Sprites[j] = face;
                     }
+
+                    //Store what we just read
+                    room.RoomData = RoomData;
+
+                    //Portals
+                    room.NumPortals = reader.ReadUInt16();
+                    room.Portals = new TRRoomPortal[room.NumPortals];
+                    for (int j = 0; j < room.NumPortals; j++)
+                    {
+                        TRRoomPortal portal = new TRRoomPortal
+                        {
+                            AdjoiningRoom = reader.ReadUInt16(),
+
+                            Normal = new TRVertex
+                            {
+                                X = reader.ReadInt16(),
+                                Y = reader.ReadInt16(),
+                                Z = reader.ReadInt16()
+                            },
+
+                            Vertices = new TRVertex[]
+                            {
+                                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                            }
+                        };
+                    }
                 }
                 #endregion
 
