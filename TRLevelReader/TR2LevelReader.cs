@@ -104,84 +104,84 @@ namespace TRLevelReader
                     TRRoomData RoomData = new TRRoomData();
 
                     //Room vertices
-                    RoomData.NumVertices = reader.ReadInt16();
-                    RoomData.Vertices = new TR2RoomVertex[RoomData.NumVertices];
-                    for (int j = 0; j < RoomData.NumVertices; j++)
-                    {
-                        TR2RoomVertex vertex = new TR2RoomVertex
-                        {
-                            Vertex = new TRVertex
-                            {
-                                X = reader.ReadInt16(),
-                                Y = reader.ReadInt16(),
-                                Z = reader.ReadInt16()
-                            },
+                    //RoomData.NumVertices = Convert.ToInt16(room.Data[0]);
+                    //RoomData.Vertices = new TR2RoomVertex[RoomData.NumVertices];
+                    //for (int j = 0; j < RoomData.NumVertices; j++)
+                    //{
+                    //    TR2RoomVertex vertex = new TR2RoomVertex
+                    //    {
+                    //        Vertex = new TRVertex
+                    //        {
+                    //            X = reader.ReadInt16(),
+                    //            Y = reader.ReadInt16(),
+                    //            Z = reader.ReadInt16()
+                    //        },
 
-                            Lighting = reader.ReadInt16(),
+                    //        Lighting = reader.ReadInt16(),
 
-                            Attributes = reader.ReadUInt16(),
+                    //        Attributes = reader.ReadUInt16(),
 
-                            Lighting2 = reader.ReadInt16()
-                        };
+                    //        Lighting2 = reader.ReadInt16()
+                    //    };
 
-                        RoomData.Vertices[j] = vertex;
-                    }
+                    //    RoomData.Vertices[j] = vertex;
+                    //}
 
-                    //Room rectangles
-                    RoomData.NumRectangles = reader.ReadInt16();
-                    RoomData.Rectangles = new TRFace4[RoomData.NumRectangles];
-                    for (int j = 0; j < RoomData.NumRectangles; j++)
-                    {
-                        TRFace4 face = new TRFace4
-                        {
-                            Vertices = new ushort[]
-                            {
-                                reader.ReadUInt16(),
-                                reader.ReadUInt16(),
-                                reader.ReadUInt16(),
-                                reader.ReadUInt16()
-                            },
+                    ////Room rectangles
+                    //RoomData.NumRectangles = reader.ReadInt16();
+                    //RoomData.Rectangles = new TRFace4[RoomData.NumRectangles];
+                    //for (int j = 0; j < RoomData.NumRectangles; j++)
+                    //{
+                    //    TRFace4 face = new TRFace4
+                    //    {
+                    //        Vertices = new ushort[]
+                    //        {
+                    //            reader.ReadUInt16(),
+                    //            reader.ReadUInt16(),
+                    //            reader.ReadUInt16(),
+                    //            reader.ReadUInt16()
+                    //        },
 
-                            Texture = reader.ReadUInt16()
-                        };
+                    //        Texture = reader.ReadUInt16()
+                    //    };
 
-                        RoomData.Rectangles[j] = face;
-                    }
+                    //    RoomData.Rectangles[j] = face;
+                    //}
 
-                    //Room triangles
-                    RoomData.NumTriangles = reader.ReadInt16();
-                    RoomData.Triangles = new TRFace3[RoomData.NumTriangles];
-                    for (int j = 0; j < RoomData.NumTriangles; j++)
-                    {
-                        TRFace3 face = new TRFace3
-                        {
-                            Vertices = new ushort[]
-                            {
-                                reader.ReadUInt16(),
-                                reader.ReadUInt16(),
-                                reader.ReadUInt16()
-                            },
+                    ////Room triangles
+                    //RoomData.NumTriangles = reader.ReadInt16();
+                    //RoomData.Triangles = new TRFace3[RoomData.NumTriangles];
+                    //for (int j = 0; j < RoomData.NumTriangles; j++)
+                    //{
+                    //    TRFace3 face = new TRFace3
+                    //    {
+                    //        Vertices = new ushort[]
+                    //        {
+                    //            reader.ReadUInt16(),
+                    //            reader.ReadUInt16(),
+                    //            reader.ReadUInt16()
+                    //        },
 
-                            Texture = reader.ReadUInt16()
-                        };
+                    //        Texture = reader.ReadUInt16()
+                    //    };
 
-                        RoomData.Triangles[j] = face;
-                    }
+                    //    RoomData.Triangles[j] = face;
+                    //}
 
-                    //Room sprites
-                    RoomData.NumSprites = reader.ReadInt16();
-                    RoomData.Sprites = new TRRoomSprite[RoomData.NumSprites];
-                    for (int j = 0; j < RoomData.NumSprites; j++)
-                    {
-                        TRRoomSprite face = new TRRoomSprite
-                        {
-                            Vertex = reader.ReadInt16(),
+                    ////Room sprites
+                    //RoomData.NumSprites = reader.ReadInt16();
+                    //RoomData.Sprites = new TRRoomSprite[RoomData.NumSprites];
+                    //for (int j = 0; j < RoomData.NumSprites; j++)
+                    //{
+                    //    TRRoomSprite face = new TRRoomSprite
+                    //    {
+                    //        Vertex = reader.ReadInt16(),
 
-                            Texture = reader.ReadInt16()
-                        };
+                    //        Texture = reader.ReadInt16()
+                    //    };
 
-                        RoomData.Sprites[j] = face;
-                    }
+                    //    RoomData.Sprites[j] = face;
+                    //}
 
                     //Store what we just read
                     room.RoomData = RoomData;
@@ -254,6 +254,30 @@ namespace TRLevelReader
 
                         room.Lights[j] = light;
                     }
+
+                    //Static meshes
+                    room.NumStaticMeshes = reader.ReadUInt16();
+                    room.StaticMeshes = new TR2RoomStaticMesh[room.NumStaticMeshes];
+                    for (int j = 0; j < room.NumStaticMeshes; j++)
+                    {
+                        TR2RoomStaticMesh mesh = new TR2RoomStaticMesh
+                        {
+                            X = reader.ReadUInt32(),
+                            Y = reader.ReadUInt32(),
+                            Z = reader.ReadUInt32(),
+                            Rotation = reader.ReadUInt16(),
+                            Intensity1 = reader.ReadUInt16(),
+                            Intensity2 = reader.ReadUInt16(),
+                            MeshID = reader.ReadUInt16()
+                        };
+
+                        room.StaticMeshes[j] = mesh;
+                    }
+
+                    room.AlternateRoom = reader.ReadInt16();
+                    room.Flags = reader.ReadInt16();
+
+                    level.Rooms[i] = room;
                 }
                 #endregion
 
