@@ -109,13 +109,13 @@ namespace TRLevelReader.Model
 
         public uint NumEntities { get; set; }
 
-        //public TR2Entity[] Entities { get; set; }
+        public TR2Entity[] Entities { get; set; }
 
         public byte[] LightMap { get; set; }
         
         public ushort NumCinematicFrames { get; set; }
 
-        //public TRCinematicFrame[] CinematicFrames { get; set; }
+        public TRCinematicFrame[] CinematicFrames { get; set; }
 
         public ushort NumDemoData { get; set; }
 
@@ -125,7 +125,7 @@ namespace TRLevelReader.Model
 
         public uint NumSoundDetails { get; set; }
 
-        //public TRSoundDetails SoundDetails { get; set; }
+        public TRSoundDetails SoundDetails { get; set; }
 
         public uint NumSampleIndices { get; set; }
 

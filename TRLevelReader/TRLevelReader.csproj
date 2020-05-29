@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Model\FixedPointTypes.cs" />
     <Compile Include="Model\TR2Box.cs" />
+    <Compile Include="Model\TR2Entity.cs" />
     <Compile Include="Model\TR2Level.cs" />
     <Compile Include="Model\TR2Room.cs" />
     <Compile Include="Model\TR2RoomLight.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Model\TRAnimDispatch.cs" />
     <Compile Include="Model\TRBoundingBox.cs" />
     <Compile Include="Model\TRCamera.cs" />
+    <Compile Include="Model\TRCinematicFrame.cs" />
     <Compile Include="Model\TRColour.cs" />
     <Compile Include="Model\TRColour4.cs" />
     <Compile Include="Model\TRFace3.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Model\TRRoomPortal.cs" />
     <Compile Include="Model\TRRoomSector.cs" />
     <Compile Include="Model\TRRoomSprite.cs" />
+    <Compile Include="Model\TRSoundDetails.cs" />
     <Compile Include="Model\TRSoundSource.cs" />
     <Compile Include="Model\TRSpriteSequence.cs" />
     <Compile Include="Model\TRSpriteTexture.cs" />
