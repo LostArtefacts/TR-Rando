@@ -204,5 +204,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj">
+      <Project>{226c4a3a-4fbb-4c15-aed4-c9248eb3a144}</Project>
+      <Name>TRLevelReader</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
