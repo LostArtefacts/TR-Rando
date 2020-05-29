@@ -76,6 +76,30 @@ namespace TRLevelReader
                 level.NumRooms = reader.ReadUInt16();
                 bytesRead += (sizeof(ushort));
 
+                level.Rooms = new TR2Room[level.NumRooms];
+
+                for (int i = 0; i < level.NumRooms; i++)
+                {
+                    TR2Room room = new TR2Room();
+
+                    //Grab info
+                    room.Info = new TRRoomInfo
+                    {
+                        X = reader.ReadInt32(),
+                        Z = reader.ReadInt32(),
+                        YBottom = reader.ReadInt32(),
+                        YTop = reader.ReadInt32()
+                    };
+
+                    //Grab data
+                    room.NumDataWords = reader.ReadUInt32();
+                    room.Data = new ushort[room.NumDataWords];
+                    for (int j = 0; j < room.NumDataWords; j++)
+                    {
+                        room.Data[j] = reader.ReadUInt16();
+                    }
+                }
+
                 Log.LogF("Bytes Read: " + bytesRead.ToString());
             }
 

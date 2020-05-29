@@ -8,12 +8,16 @@ namespace TRLevelReader.Model
 {
     public class TR2RoomVertex
     {
+        //6 bytes
         public TRVertex Vertex { get; set; }
 
+        //2 bytes
         public short Lighting { get; set; }
 
+        //2 bytes
         public ushort Attributes { get; set; }
 
+        //2 bytes
         public short Lighting2 { get; set; }
     }
 }

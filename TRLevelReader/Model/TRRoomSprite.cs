@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TRLevelReader.Model
 {
+    // 4 bytes
     public class TRRoomSprite
     {
         public short Vertex { get; set; }
