@@ -76,6 +76,7 @@ namespace TRLevelReader
                 level.NumRooms = reader.ReadUInt16();
                 bytesRead += (sizeof(ushort));
 
+                #region Rooms
                 level.Rooms = new TR2Room[level.NumRooms];
 
                 for (int i = 0; i < level.NumRooms; i++)
@@ -98,7 +99,91 @@ namespace TRLevelReader
                     {
                         room.Data[j] = reader.ReadUInt16();
                     }
+
+                    //Grab detailed room data
+                    TRRoomData RoomData = new TRRoomData();
+
+                    //Room vertices
+                    RoomData.NumVertices = reader.ReadInt16();
+                    RoomData.Vertices = new TR2RoomVertex[RoomData.NumVertices];
+                    for (int j = 0; j < RoomData.NumVertices; j++)
+                    {
+                        TR2RoomVertex vertex = new TR2RoomVertex
+                        {
+                            Vertex = new TRVertex
+                            {
+                                X = reader.ReadInt16(),
+                                Y = reader.ReadInt16(),
+                                Z = reader.ReadInt16()
+                            },
+
+                            Lighting = reader.ReadInt16(),
+
+                            Attributes = reader.ReadUInt16(),
+
+                            Lighting2 = reader.ReadInt16()
+                        };
+
+                        RoomData.Vertices[j] = vertex;
+                    }
+
+                    //Room rectangles
+                    RoomData.NumRectangles = reader.ReadInt16();
+                    RoomData.Rectangles = new TRFace4[RoomData.NumRectangles];
+                    for (int j = 0; j < RoomData.NumRectangles; j++)
+                    {
+                        TRFace4 face = new TRFace4
+                        {
+                            Vertices = new ushort[]
+                            {
+                                reader.ReadUInt16(),
+                                reader.ReadUInt16(),
+                                reader.ReadUInt16(),
+                                reader.ReadUInt16()
+                            },
+
+                            Texture = reader.ReadUInt16()
+                        };
+
+                        RoomData.Rectangles[j] = face;
+                    }
+
+                    //Room triangles
+                    RoomData.NumTriangles = reader.ReadInt16();
+                    RoomData.Triangles = new TRFace3[RoomData.NumTriangles];
+                    for (int j = 0; j < RoomData.NumTriangles; j++)
+                    {
+                        TRFace3 face = new TRFace3
+                        {
+                            Vertices = new ushort[]
+                            {
+                                reader.ReadUInt16(),
+                                reader.ReadUInt16(),
+                                reader.ReadUInt16()
+                            },
+
+                            Texture = reader.ReadUInt16()
+                        };
+
+                        RoomData.Triangles[j] = face;
+                    }
+
+                    //Room sprites
+                    RoomData.NumSprites = reader.ReadInt16();
+                    RoomData.Sprites = new TRRoomSprite[RoomData.NumSprites];
+                    for (int j = 0; j < RoomData.NumSprites; j++)
+                    {
+                        TRRoomSprite face = new TRRoomSprite
+                        {
+                            Vertex = reader.ReadInt16(),
+
+                            Texture = reader.ReadInt16()
+                        };
+
+                        RoomData.Sprites[j] = face;
+                    }
                 }
+                #endregion
 
                 Log.LogF("Bytes Read: " + bytesRead.ToString());
             }
