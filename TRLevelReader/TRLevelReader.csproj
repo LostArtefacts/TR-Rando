@@ -48,6 +48,8 @@
     <Compile Include="Model\TR2RoomStaticMesh.cs" />
     <Compile Include="Model\TR2RoomVertex.cs" />
     <Compile Include="Model\TRAnimation.cs" />
+    <Compile Include="Model\TRAnimCommand.cs" />
+    <Compile Include="Model\TRAnimDispatch.cs" />
     <Compile Include="Model\TRColour.cs" />
     <Compile Include="Model\TRColour4.cs" />
     <Compile Include="Model\TRFace3.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Model\TRRoomPortal.cs" />
     <Compile Include="Model\TRRoomSector.cs" />
     <Compile Include="Model\TRRoomSprite.cs" />
+    <Compile Include="Model\TRStateChange.cs" />
     <Compile Include="Model\TRTexImage16.cs" />
     <Compile Include="Model\TRTexImage8.cs" />
     <Compile Include="Model\TRVertex.cs" />

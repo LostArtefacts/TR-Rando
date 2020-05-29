@@ -47,15 +47,15 @@ namespace TRLevelReader.Model
 
         public uint NumStateChanges { get; set; }
 
-        //public TRStateChange[] StateChanges { get; set; }
+        public TRStateChange[] StateChanges { get; set; }
 
         public uint NumAnimDispatches { get; set; }
 
-        //public TRAnimDispatch[] AnimDispatches { get; set; }
+        public TRAnimDispatch[] AnimDispatches { get; set; }
 
         public uint NumAnimCommands { get; set; }
 
-        //public TRAnimCommand[] AnimCommands { get; set; }
+        public TRAnimCommand[] AnimCommands { get; set; }
 
         public uint NumMeshTrees { get; set; }
 
