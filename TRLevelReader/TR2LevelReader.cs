@@ -72,6 +72,10 @@ namespace TRLevelReader
                     }
                 }
 
+                level.Unused = reader.ReadUInt32();
+                level.NumRooms = reader.ReadUInt16();
+                bytesRead += (sizeof(ushort));
+
                 Log.LogF("Bytes Read: " + bytesRead.ToString());
             }
 

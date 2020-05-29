@@ -553,8 +553,11 @@ namespace TRLevelReaderUnitTests
                 Assert.AreEqual(ExpectedPalette16[i].Blue, lvl.Palette16[i].Blue);
             }
 
-            //Images/Textures
+            //Images/Textures - ToDo actual content of them against expected.
             Assert.AreEqual((uint)11, lvl.NumImages);
+
+            //Rooms
+            Assert.AreEqual((ushort)84, lvl.NumRooms);
         }
 
         [TestMethod]
