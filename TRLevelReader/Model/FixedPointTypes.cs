@@ -6,17 +6,10 @@ using System.Threading.Tasks;
 
 namespace TRLevelReader.Model
 {
-    public class FixedFloat
+    public class FixedFloat<T, U>
     {
-        public short Whole { get; set; }
+        public T Whole { get; set; }
 
-        public ushort Fraction { get; set; }
-    }
-
-    public class FixedShortFloat
-    {
-        public byte Whole { get; set; }
-
-        public byte Fraction { get; set; }
+        public U Fraction { get; set; }
     }
 }
