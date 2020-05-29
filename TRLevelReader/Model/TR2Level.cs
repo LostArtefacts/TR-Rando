@@ -59,7 +59,7 @@ namespace TRLevelReader.Model
 
         public uint NumMeshTrees { get; set; }
 
-        //public TRMeshTreeNode[] MeshTrees { get; set; }
+        public TRMeshTreeNode[] MeshTrees { get; set; }
 
         public uint NumFrames { get; set; }
 
@@ -67,11 +67,11 @@ namespace TRLevelReader.Model
 
         public uint NumModels { get; set; }
 
-        //public TRModel[] Models { get; set; }
+        public TRModel[] Models { get; set; }
 
         public uint NumStaticMeshes { get; set; }
 
-        //public TRStaticMesh[] StaticMeshes { get; set; }
+        public TRStaticMesh[] StaticMeshes { get; set; }
 
         public uint NumObjectTextures { get; set; }
 
