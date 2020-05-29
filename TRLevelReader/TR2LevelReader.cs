@@ -210,6 +210,49 @@ namespace TRLevelReader
                                 new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
                             }
                         };
+
+                        room.Portals[j] = portal;
+                    }
+
+                    //Sectors
+                    room.NumZSectors = reader.ReadUInt16();
+                    room.NumXSectors = reader.ReadUInt16();
+                    room.SectorList = new TRRoomSector[room.NumXSectors * room.NumZSectors];
+                    for (int j = 0; j < (room.NumXSectors * room.NumZSectors); j++)
+                    {
+                        TRRoomSector sector = new TRRoomSector
+                        {
+                            FDIndex = reader.ReadUInt16(),
+                            BoxIndex = reader.ReadUInt16(),
+                            RoomBelow = reader.ReadByte(),
+                            Floor = reader.ReadSByte(),
+                            RoomAbove = reader.ReadByte(),
+                            Ceiling = reader.ReadSByte()
+                        };
+
+                        room.SectorList[j] = sector;
+                    }
+
+                    //Lighting
+                    room.AmbientIntensity = reader.ReadInt16();
+                    room.AmbientIntensity2 = reader.ReadInt16();
+                    room.LightMode = reader.ReadInt16();
+                    room.NumLights = reader.ReadUInt16();
+                    room.Lights = new TR2RoomLight[room.NumLights];
+                    for (int j = 0; j < room.NumLights; j++)
+                    {
+                        TR2RoomLight light = new TR2RoomLight
+                        {
+                            X = reader.ReadInt32(),
+                            Y = reader.ReadInt32(),
+                            Z = reader.ReadInt32(),
+                            Intensity1 = reader.ReadUInt16(),
+                            Intensity2 = reader.ReadUInt16(),
+                            Fade1 = reader.ReadUInt32(),
+                            Fade2 = reader.ReadUInt32()
+                        };
+
+                        room.Lights[j] = light;
                     }
                 }
                 #endregion
