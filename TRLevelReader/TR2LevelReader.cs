@@ -206,6 +206,28 @@ namespace TRLevelReader
                 {
                     level.FloorData[i] = reader.ReadUInt16();
                 }
+
+                #region MeshData
+                //This tells us how much mesh data (# of words/uint16s) coming up
+                //just like the rooms previously.
+                level.NumMeshData = reader.ReadUInt32();
+                ushort[] TempMeshData = new ushort[level.NumMeshData];
+
+                for (int i = 0; i < level.NumMeshData; i++)
+                {
+                    TempMeshData[i] = reader.ReadUInt16();
+                }
+
+                level.NumMeshPointers = reader.ReadUInt32();
+                level.MeshPointers = new uint[level.NumMeshPointers];
+
+                for (int i = 0; i < level.NumMeshPointers; i++)
+                {
+                    level.MeshPointers[i] = reader.ReadUInt32();
+                }
+
+                level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, TempMeshData);
+                #endregion
             }
 
             return level;
@@ -366,6 +388,13 @@ namespace TRLevelReader
             Debug.Assert(RoomDataOffset == room.NumDataWords);
 
             return RoomData;
+        }
+
+        private static TRMesh[] ConstructMeshData(uint DataCount, uint NumPointers, ushort[] MeshData)
+        {
+            TRMesh[] meshes = new TRMesh[NumPointers];
+
+            return meshes;
         }
     }
 }
