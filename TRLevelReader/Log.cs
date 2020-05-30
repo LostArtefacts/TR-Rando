@@ -25,7 +25,7 @@ namespace TRLevelReader
         {
             if (AllowVerboseLogging)
             {
-                File.AppendAllText("log_v.txt", obj.ToString() + "\n");
+                LogV(obj.ToString());
             }          
         }
 
