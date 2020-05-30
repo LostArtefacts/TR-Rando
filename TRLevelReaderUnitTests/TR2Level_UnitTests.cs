@@ -14,7 +14,9 @@ namespace TRLevelReaderUnitTests
         [TestMethod]
         public void GreatWall_ReadTest()
         {
-            TR2Level lvl = TR2LevelReader.ReadLevel("wall.tr2");
+            TR2LevelReader reader = new TR2LevelReader();
+
+            TR2Level lvl = reader.ReadLevel("wall.tr2");
 
             #region Expected Palettes
             TRColour[] ExpectedPalette8 = new TRColour[]
@@ -563,13 +565,15 @@ namespace TRLevelReaderUnitTests
         [TestMethod]
         public void TR3_ReadTest()
         {
-            Assert.ThrowsException<NotImplementedException>(() => TR2LevelReader.ReadLevel("jungle.tr2"));
+            TR2LevelReader reader = new TR2LevelReader();
+            Assert.ThrowsException<NotImplementedException>(() => reader.ReadLevel("jungle.tr2"));
         }
 
         [TestMethod]
         public void Other_ReadTest()
         {
-            Assert.ThrowsException<NotImplementedException>(() => TR2LevelReader.ReadLevel("joby5.trc"));
+            TR2LevelReader reader = new TR2LevelReader();
+            Assert.ThrowsException<NotImplementedException>(() => reader.ReadLevel("joby5.trc"));
         }
     }
 }

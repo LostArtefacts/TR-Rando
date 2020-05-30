@@ -9,13 +9,13 @@ using TRLevelReader.Model;
 
 namespace TRLevelReader
 {
-    public static class TR2LevelReader
+    public class TR2LevelReader
     {
-        private static readonly uint TR2VersionHeader = 0x0000002D;
+        private readonly uint TR2VersionHeader = 0x0000002D;
 
         private const uint MAX_PALETTE_SIZE = 256;
 
-        public static TR2Level ReadLevel(string Filename)
+        public TR2Level ReadLevel(string Filename)
         {
             if (!Filename.ToUpper().Contains("TR2"))
             {
@@ -300,6 +300,32 @@ namespace TRLevelReader
                 }
                 #endregion
 
+                #region MeshTrees
+                level.NumMeshTrees = reader.ReadUInt32();
+                level.MeshTrees = new TRMeshTreeNode[level.NumMeshTrees];
+
+                for (int i = 0; i < level.NumMeshTrees; i++)
+                {
+                    TRMeshTreeNode node = new TRMeshTreeNode()
+                    {
+                        Flags = reader.ReadUInt32(),
+                        OffsetX = reader.ReadInt32(),
+                        OffsetY = reader.ReadInt32(),
+                        OffsetZ = reader.ReadInt32()
+                    };
+
+                    level.MeshTrees[i] = node;
+                }
+
+                level.NumFrames = reader.ReadUInt32();
+                level.Frames = new ushort[level.NumFrames];
+
+                for (int i = 0; i < level.NumFrames; i++)
+                {
+                    level.Frames[i] = reader.ReadUInt16();
+                }
+                #endregion
+
                 Log.LogF("Bytes Read: " + reader.BaseStream.Position.ToString() + "/" + reader.BaseStream.Length.ToString());
             }
 
@@ -331,7 +357,7 @@ namespace TRLevelReader
             return colourPalette;
         }
 
-        private static TRColour4[] PopulateColourPalette16(byte[] palette)
+        private TRColour4[] PopulateColourPalette16(byte[] palette)
         {
             TRColour4[] colourPalette = new TRColour4[MAX_PALETTE_SIZE];
 
@@ -359,7 +385,7 @@ namespace TRLevelReader
             return colourPalette;
         }
 
-        private static TRRoomData ConvertToRoomData(TR2Room room)
+        private TRRoomData ConvertToRoomData(TR2Room room)
         {
             int RoomDataOffset = 0;
 
@@ -463,7 +489,7 @@ namespace TRLevelReader
             return RoomData;
         }
 
-        private static TRMesh[] ConstructMeshData(uint DataCount, uint NumPointers, ushort[] MeshData)
+        private TRMesh[] ConstructMeshData(uint DataCount, uint NumPointers, ushort[] MeshData)
         {
             //Track where we are in mesh data
             int MeshDataOffset = 0;
