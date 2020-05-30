@@ -24,13 +24,94 @@ namespace TRLevelReader
         public static void LogV(object obj)
         {
             if (AllowVerboseLogging)
+            {
                 File.AppendAllText("log_v.txt", obj.ToString() + "\n");
+            }          
+        }
+
+        public static void LogV(object[] obj)
+        {
+            if (AllowVerboseLogging)
+            {
+                for (int i = 0; i < obj.Count(); i++)
+                {
+                    LogV(obj[i].ToString());
+                }
+            }
+        }
+
+        public static void LogV(byte[] obj)
+        {
+            if (AllowVerboseLogging)
+            {
+                for (int i = 0; i < obj.Count(); i++)
+                {
+                    LogV(obj[i].ToString());
+                }
+            }
+        }
+
+        public static void LogV(ushort[] obj)
+        {
+            if (AllowVerboseLogging)
+            {
+                for (int i = 0; i < obj.Count(); i++)
+                {
+                    LogV(obj[i].ToString());
+                }
+            }
+        }
+
+        public static void LogV(uint[] obj)
+        {
+            if (AllowVerboseLogging)
+            {
+                for (int i = 0; i < obj.Count(); i++)
+                {
+                    LogV(obj[i].ToString());
+                }
+            }
+        }
+
+        public static void LogV(sbyte[] obj)
+        {
+            if (AllowVerboseLogging)
+            {
+                for (int i = 0; i < obj.Count(); i++)
+                {
+                    LogV(obj[i].ToString());
+                }
+            }
+        }
+
+        public static void LogV(short[] obj)
+        {
+            if (AllowVerboseLogging)
+            {
+                for (int i = 0; i < obj.Count(); i++)
+                {
+                    LogV(obj[i].ToString());
+                }
+            }
+        }
+
+        public static void LogV(int[] obj)
+        {
+            if (AllowVerboseLogging)
+            {
+                for (int i = 0; i < obj.Count(); i++)
+                {
+                    LogV(obj[i].ToString());
+                }
+            }
         }
 
         public static void LogV(string text)
         {
             if (AllowVerboseLogging)
+            {
                 File.AppendAllText("log_v.txt", text + "\n");
+            }
         }
     }
 }
