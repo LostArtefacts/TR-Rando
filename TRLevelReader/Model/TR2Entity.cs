@@ -25,5 +25,22 @@ namespace TRLevelReader.Model
         public short Intensity2 { get; set; }
 
         public ushort Flags { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" TypeID: " + TypeID);
+            sb.Append(" Room: " + Room);
+            sb.Append(" X: " + X);
+            sb.Append(" Y: " + Y);
+            sb.Append(" Z: " + Z);
+            sb.Append(" Angle: " + Angle);
+            sb.Append(" Int1: " + Intensity1);
+            sb.Append(" Int2: " + Intensity2);
+            sb.Append(" Flags " + Flags.ToString("0x{0:X4}"));
+
+            return sb.ToString();
+        }
     }
 }

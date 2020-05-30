@@ -11,5 +11,15 @@ namespace TRLevelReader.Model
         public T Whole { get; set; }
 
         public U Fraction { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" Whole: " + Whole);
+            sb.Append(" Fraction: " + Fraction);
+
+            return sb.ToString();
+        }
     }
 }

@@ -19,5 +19,19 @@ namespace TRLevelReader.Model
         public short TrueFloor { get; set; }
 
         public short OverlapIndex { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" ZMin: " + ZMin);
+            sb.Append(" ZMax: " + ZMax);
+            sb.Append(" XMin: " + XMin);
+            sb.Append(" XMax: " + XMax);
+            sb.Append(" TrueFloor: " + TrueFloor);
+            sb.Append(" OverlapIndex: " + OverlapIndex);
+
+            return sb.ToString();
+        }
     }
 }
