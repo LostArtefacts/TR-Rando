@@ -18,5 +18,15 @@ namespace TRLevelReader
         {
             File.AppendAllText("log.txt", text + "\n");
         }
+
+        public static void LogV(object obj)
+        {
+            File.AppendAllText("log_v.txt", obj.ToString());
+        }
+
+        public static void LogV(string text)
+        {
+            File.AppendAllText("log_v.txt", text + "\n");
+        }
     }
 }
