@@ -34,6 +34,7 @@ namespace TR2Randomizer
 
             ReplacementStatusManager.CanRandomize = true;
             ReplacementStatusManager.LevelProgress = 0;
+            ReplacementStatusManager.AllowHard = false;
         }
 
         private void SecretsSeedEntry_PreviewTextInput(object sender, TextCompositionEventArgs e)

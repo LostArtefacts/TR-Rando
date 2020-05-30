@@ -509,17 +509,24 @@ namespace TR2Randomizer
                     return;
                 }
 
-                lvl.GoldSecret.Location = LevelLocations[_generator.Next(0, LevelLocations.Count)];
+                do
+                {
+                    lvl.GoldSecret.Location = LevelLocations[_generator.Next(0, LevelLocations.Count)];
+                } while (lvl.GoldSecret.Location.Difficulty == Difficulty.Hard);
+                
 
                 do
                 {
                     lvl.JadeSecret.Location = LevelLocations[_generator.Next(0, LevelLocations.Count)];
-                } while (lvl.JadeSecret.Location.Room == lvl.GoldSecret.Location.Room);
+                } while ((lvl.JadeSecret.Location.Room == lvl.GoldSecret.Location.Room) || 
+                        (lvl.JadeSecret.Location.Difficulty == Difficulty.Hard));
 
                 do
                 {
                     lvl.StoneSecret.Location = LevelLocations[_generator.Next(0, LevelLocations.Count)];
-                } while (lvl.StoneSecret.Location.Room == lvl.GoldSecret.Location.Room || lvl.StoneSecret.Location.Room == lvl.JadeSecret.Location.Room);
+                } while ((lvl.StoneSecret.Location.Room == lvl.GoldSecret.Location.Room) || 
+                        (lvl.StoneSecret.Location.Room == lvl.JadeSecret.Location.Room) ||
+                        (lvl.StoneSecret.Location.Difficulty == Difficulty.Hard));
 
                 if (lvl.DoesLevelHaveSecrets())
                 {
