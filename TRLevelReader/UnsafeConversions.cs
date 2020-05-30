@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TRLevelReader
+{
+    internal static class UnsafeConversions
+    {
+        public static short UShortToShort(ushort val)
+        {
+            return unchecked((short)val);
+        }
+    }
+}
