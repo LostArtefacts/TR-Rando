@@ -106,27 +106,7 @@ namespace TRLevelReader
                 room.Portals = new TRRoomPortal[room.NumPortals];
                 for (int j = 0; j < room.NumPortals; j++)
                 {
-                    TRRoomPortal portal = new TRRoomPortal
-                    {
-                        AdjoiningRoom = reader.ReadUInt16(),
-
-                        Normal = new TRVertex
-                        {
-                            X = reader.ReadInt16(),
-                            Y = reader.ReadInt16(),
-                            Z = reader.ReadInt16()
-                        },
-
-                        Vertices = new TRVertex[]
-                        {
-                            new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                            new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                            new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                            new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                        }
-                    };
-
-                    room.Portals[j] = portal;
+                    room.Portals[j] = ReadRoomPortal();
                 }
 
                 //Sectors
@@ -494,6 +474,29 @@ namespace TRLevelReader
             Debug.Assert(RoomDataOffset == room.NumDataWords);
 
             return RoomData;
+        }
+
+        private TRRoomPortal ReadRoomPortal()
+        {
+            return new TRRoomPortal
+            {
+                AdjoiningRoom = reader.ReadUInt16(),
+
+                Normal = new TRVertex
+                {
+                    X = reader.ReadInt16(),
+                    Y = reader.ReadInt16(),
+                    Z = reader.ReadInt16()
+                },
+
+                Vertices = new TRVertex[]
+                {
+                    new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                    new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                    new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                    new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                }
+            };
         }
 
         private TRMesh[] ConstructMeshData(uint DataCount, uint NumPointers, ushort[] MeshData)
