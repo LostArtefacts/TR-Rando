@@ -392,7 +392,192 @@ namespace TRLevelReader
 
         private static TRMesh[] ConstructMeshData(uint DataCount, uint NumPointers, ushort[] MeshData)
         {
+            //Track where we are in mesh data
+            int MeshDataOffset = 0;
+
+            //Temp storage for forming an int from two ushorts 
+            ushort LowBytes;
+            ushort HighBytes;
+
+            //We know the amount of meshes via NumPointers and we know amount of mesh data via DataCount
+            //The mesh data as uint16s/words are stored in MeshData
+
+            //We need to pack that data into the objects
             TRMesh[] meshes = new TRMesh[NumPointers];
+
+            for (int i = 0; i < NumPointers; i++)
+            {
+                TRMesh mesh = new TRMesh();
+
+                //Centre
+                mesh.Centre.X = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                MeshDataOffset++;
+                mesh.Centre.Y = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                MeshDataOffset++;
+                mesh.Centre.Z = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                MeshDataOffset++;
+
+                //Coll Radius
+                LowBytes = MeshData[MeshDataOffset];
+                MeshDataOffset++;
+                HighBytes = MeshData[MeshDataOffset];
+                MeshDataOffset++;
+
+                mesh.CollRadius = LowBytes | HighBytes;
+
+                //Vertices
+                mesh.NumVetices = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                MeshDataOffset++;
+                mesh.Vertices = new TRVertex[mesh.NumVetices];
+
+                for (int j = 0; j < mesh.NumVetices; j++)
+                {
+                    TRVertex v = new TRVertex();
+
+                    v.X = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                    MeshDataOffset++;
+                    v.Y = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                    MeshDataOffset++;
+                    v.Z = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                    MeshDataOffset++;
+
+                    mesh.Vertices[j] = v;
+                }
+
+                //Lights or Normals
+                mesh.NumNormals = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                MeshDataOffset++;
+
+                if (mesh.NumNormals > 0)
+                {
+                    mesh.Normals = new TRVertex[mesh.NumNormals];
+
+                    for (int j = 0; j < mesh.NumNormals; j++)
+                    {
+                        TRVertex v = new TRVertex();
+
+                        v.X = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                        MeshDataOffset++;
+                        v.Y = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                        MeshDataOffset++;
+                        v.Z = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                        MeshDataOffset++;
+
+                        mesh.Normals[j] = v;
+                    }
+                }
+                else
+                {
+                    mesh.Lights = new short[Math.Abs(mesh.NumNormals)];
+
+                    for (int j = 0; j < mesh.Lights.Count(); j++)
+                    {
+                        mesh.Lights[j] = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                        MeshDataOffset++;
+                    }
+                }
+
+                //Textured Rectangles
+                mesh.NumTexturedRectangles = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                MeshDataOffset++;
+                mesh.TexturedRectangles = new TRFace4[mesh.NumTexturedRectangles];
+
+                for (int j = 0; j < mesh.NumTexturedRectangles; j++)
+                {
+                    TRFace4 face = new TRFace4();
+
+                    face.Vertices = new ushort[4];
+
+                    face.Vertices[0] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Vertices[1] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Vertices[2] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Vertices[3] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Texture = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+
+                    mesh.TexturedRectangles[j] = face;
+                }
+
+                //Textured Triangles
+                mesh.NumTexturedTriangles = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                MeshDataOffset++;
+                mesh.TexturedTriangles = new TRFace3[mesh.NumTexturedTriangles];
+
+                for (int j = 0; j < mesh.NumTexturedTriangles; j++)
+                {
+                    TRFace3 face = new TRFace3();
+
+                    face.Vertices = new ushort[3];
+
+                    face.Vertices[0] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Vertices[1] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Vertices[2] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Texture = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+
+                    mesh.TexturedTriangles[j] = face;
+                }
+
+                //Coloured Rectangles
+                mesh.NumColouredRectangles = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                MeshDataOffset++;
+                mesh.ColouredRectangles = new TRFace4[mesh.NumColouredRectangles];
+
+                for (int j = 0; j < mesh.NumColouredRectangles; j++)
+                {
+                    TRFace4 face = new TRFace4();
+
+                    face.Vertices = new ushort[4];
+
+                    face.Vertices[0] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Vertices[1] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Vertices[2] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Vertices[3] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Texture = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+
+                    mesh.ColouredRectangles[j] = face;
+                }
+
+                //Coloured Triangles
+                mesh.NumColouredTriangles = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                MeshDataOffset++;
+                mesh.ColouredTriangles = new TRFace3[mesh.NumColouredTriangles];
+
+                for (int j = 0; j < mesh.NumColouredTriangles; j++)
+                {
+                    TRFace3 face = new TRFace3();
+
+                    face.Vertices = new ushort[3];
+
+                    face.Vertices[0] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Vertices[1] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Vertices[2] = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+                    face.Texture = MeshData[MeshDataOffset];
+                    MeshDataOffset++;
+
+                    mesh.ColouredTriangles[j] = face;
+                }
+
+                meshes[i] = mesh;
+            }
+
+            //The offset should match the total amount of data.
+            Debug.Assert(MeshDataOffset == DataCount);
 
             return meshes;
         }

@@ -52,5 +52,10 @@ namespace TRLevelReader.Model
 
         //NumColouredTriangles * 8 bytes
         public TRFace3[] ColouredTriangles { get; set; }
+
+        public TRMesh()
+        {
+            Centre = new TRVertex { X = 0, Y = 0, Z = 0 };
+        }
     }
 }

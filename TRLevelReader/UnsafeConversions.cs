@@ -12,5 +12,10 @@ namespace TRLevelReader
         {
             return unchecked((short)val);
         }
+
+        public static int UIntToInt(uint val)
+        {
+            return unchecked((int)val);
+        }
     }
 }
