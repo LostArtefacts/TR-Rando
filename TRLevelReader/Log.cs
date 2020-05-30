@@ -9,6 +9,8 @@ namespace TRLevelReader
 {
     internal static class Log
     {
+        public const bool AllowVerboseLogging = true;
+
         public static void LogC(string text)
         {
             Console.WriteLine(text);
@@ -21,12 +23,14 @@ namespace TRLevelReader
 
         public static void LogV(object obj)
         {
-            File.AppendAllText("log_v.txt", obj.ToString());
+            if (AllowVerboseLogging)
+                File.AppendAllText("log_v.txt", obj.ToString() + "\n");
         }
 
         public static void LogV(string text)
         {
-            File.AppendAllText("log_v.txt", text + "\n");
+            if (AllowVerboseLogging)
+                File.AppendAllText("log_v.txt", text + "\n");
         }
     }
 }
