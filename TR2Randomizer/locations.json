@@ -3685,7 +3685,9 @@
 			"X": 15259,
 			"Z": 2971,
 			"Y": 512,
-			"Room": 14
+			"Room": 14,
+			"RequiresGlitch": false,
+                        "Difficulty" : "Hard"
 		},
 		{
 			"X": 7077,
@@ -3787,19 +3789,25 @@
 			"X": 2153,
 			"Z": 7267,
 			"Y": 1803,
-			"Room": 70
+			"Room": 70,
+			"RequiresGlitch": false,
+                        "Difficulty" : "Hard"
 		},
 		{
 			"X": 6043,
 			"Z": 4197,
 			"Y": 1730,
-			"Room": 70
+			"Room": 70,
+			"RequiresGlitch": false,
+                        "Difficulty" : "Hard"
 		},
 		{
 			"X": 1955,
 			"Z": 6043,
 			"Y": 1033,
-			"Room": 70
+			"Room": 70,
+			"RequiresGlitch": false,
+                        "Difficulty" : "Hard"
 		},
 		{
 			"X": 1125,
