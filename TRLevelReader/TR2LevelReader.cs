@@ -29,18 +29,17 @@ namespace TRLevelReader
             }
 
             TR2Level level = new TR2Level();
-
             reader = new BinaryReader(File.Open(Filename, FileMode.Open));
-            
             Log.LogF("File opened");
 
+            //Version
             level.Version = reader.ReadUInt32();
-
             if (level.Version != TR2VersionHeader)
             {
                 throw new NotImplementedException("File reader only suppors TR2 levels");
             }
 
+            //Colour palettes and textures
             level.Palette = PopulateColourPalette(reader.ReadBytes((int)MAX_PALETTE_SIZE * 3));
             level.Palette16 = PopulateColourPalette16(reader.ReadBytes((int)MAX_PALETTE_SIZE * 4));
 
@@ -71,9 +70,9 @@ namespace TRLevelReader
                 }
             }
 
+            //Rooms
             level.Unused = reader.ReadUInt32();
             level.NumRooms = reader.ReadUInt16();
-
             level.Rooms = new TR2Room[level.NumRooms];
 
             for (int i = 0; i < level.NumRooms; i++)
@@ -105,7 +104,7 @@ namespace TRLevelReader
                 room.Portals = new TRRoomPortal[room.NumPortals];
                 for (int j = 0; j < room.NumPortals; j++)
                 {
-                    room.Portals[j] = ReadRoomPortal();
+                    room.Portals[j] = TR2FileReadUtilities.ReadRoomPortal(reader);
                 }
 
                 //Sectors
@@ -114,7 +113,7 @@ namespace TRLevelReader
                 room.SectorList = new TRRoomSector[room.NumXSectors * room.NumZSectors];
                 for (int j = 0; j < (room.NumXSectors * room.NumZSectors); j++)
                 {
-                    room.SectorList[j] = ReadRoomSector();
+                    room.SectorList[j] = TR2FileReadUtilities.ReadRoomSector(reader);
                 }
 
                 //Lighting
@@ -125,7 +124,7 @@ namespace TRLevelReader
                 room.Lights = new TR2RoomLight[room.NumLights];
                 for (int j = 0; j < room.NumLights; j++)
                 {
-                    room.Lights[j] = ReadRoomLight();
+                    room.Lights[j] = TR2FileReadUtilities.ReadRoomLight(reader);
                 }
 
                 //Static meshes
@@ -133,7 +132,7 @@ namespace TRLevelReader
                 room.StaticMeshes = new TR2RoomStaticMesh[room.NumStaticMeshes];
                 for (int j = 0; j < room.NumStaticMeshes; j++)
                 {
-                    room.StaticMeshes[j] = ReadRoomStaticMesh();
+                    room.StaticMeshes[j] = TR2FileReadUtilities.ReadRoomStaticMesh(reader);
                 }
 
                 room.AlternateRoom = reader.ReadInt16();
@@ -142,6 +141,7 @@ namespace TRLevelReader
                 level.Rooms[i] = room;
             }
 
+            //Floordata
             level.NumFloorData = reader.ReadUInt32();
             level.FloorData = new ushort[level.NumFloorData];
 
@@ -150,6 +150,7 @@ namespace TRLevelReader
                 level.FloorData[i] = reader.ReadUInt16();
             }
 
+            //Mesh Data
             //This tells us how much mesh data (# of words/uint16s) coming up
             //just like the rooms previously.
             level.NumMeshData = reader.ReadUInt32();
@@ -160,6 +161,7 @@ namespace TRLevelReader
                 TempMeshData[i] = reader.ReadUInt16();
             }
 
+            //Mesh Pointers
             level.NumMeshPointers = reader.ReadUInt32();
             level.MeshPointers = new uint[level.NumMeshPointers];
 
@@ -168,49 +170,86 @@ namespace TRLevelReader
                 level.MeshPointers[i] = reader.ReadUInt32();
             }
 
+            //Mesh Construction
             //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, TempMeshData);
 
+            //Animations
             level.NumAnimations = reader.ReadUInt32();
             level.Animations = new TRAnimation[level.NumAnimations];
             for (int i = 0; i < level.NumAnimations; i++)
             {
-                level.Animations[i] = ReadAnimation();
+                level.Animations[i] = TR2FileReadUtilities.ReadAnimation(reader);
             }
 
+            //State Changes
             level.NumStateChanges = reader.ReadUInt32();
             level.StateChanges = new TRStateChange[level.NumStateChanges];
             for (int i = 0; i < level.NumStateChanges; i++)
             {
-                level.StateChanges[i] = ReadStateChange();
+                level.StateChanges[i] = TR2FileReadUtilities.ReadStateChange(reader);
             }
 
+            //Animation Dispatches
             level.NumAnimDispatches = reader.ReadUInt32();
             level.AnimDispatches = new TRAnimDispatch[level.NumAnimDispatches];
             for (int i = 0; i < level.NumAnimDispatches; i++)
             {
-                level.AnimDispatches[i] = ReadAnimDispatch();
+                level.AnimDispatches[i] = TR2FileReadUtilities.ReadAnimDispatch(reader);
             }
 
+            //Animation Commands
             level.NumAnimCommands = reader.ReadUInt32();
             level.AnimCommands = new TRAnimCommand[level.NumAnimCommands];
             for (int i = 0; i < level.NumAnimCommands; i++)
             {
-                level.AnimCommands[i] = ReadAnimCommand();
+                level.AnimCommands[i] = TR2FileReadUtilities.ReadAnimCommand(reader);
             }
 
+            //Mesh Trees
             level.NumMeshTrees = reader.ReadUInt32();
             level.MeshTrees = new TRMeshTreeNode[level.NumMeshTrees];
             for (int i = 0; i < level.NumMeshTrees; i++)
             {
-                level.MeshTrees[i] = ReadMeshTreeNode();
+                level.MeshTrees[i] = TR2FileReadUtilities.ReadMeshTreeNode(reader);
             }
 
+            //Frames
             level.NumFrames = reader.ReadUInt32();
             level.Frames = new ushort[level.NumFrames];
             for (int i = 0; i < level.NumFrames; i++)
             {
                 level.Frames[i] = reader.ReadUInt16();
             }
+
+            //Models
+
+            //Static Meshes
+
+            //Object Textures
+
+            //Sprite Textures
+
+            //Sprite Sequences
+
+            //Cameras
+
+            //Sound Sources
+
+            //Boxes
+
+            //Overlaps & Zones
+
+            //Animated Textures
+
+            //Entities
+
+            //Light Map
+
+            //Cinematic Frames
+
+            //Demo Data
+
+            //Sound Map, Sound Details and Samples
 
             Log.LogF("Bytes Read: " + reader.BaseStream.Position.ToString() + "/" + reader.BaseStream.Length.ToString());
 
@@ -374,70 +413,6 @@ namespace TRLevelReader
             Debug.Assert(RoomDataOffset == room.NumDataWords);
 
             return RoomData;
-        }
-
-        private TRRoomPortal ReadRoomPortal()
-        {
-            return new TRRoomPortal
-            {
-                AdjoiningRoom = reader.ReadUInt16(),
-
-                Normal = new TRVertex
-                {
-                    X = reader.ReadInt16(),
-                    Y = reader.ReadInt16(),
-                    Z = reader.ReadInt16()
-                },
-
-                Vertices = new TRVertex[]
-                {
-                    new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                    new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                    new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                    new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                }
-            };
-        }
-
-        private TRRoomSector ReadRoomSector()
-        {
-            return new TRRoomSector
-            {
-                FDIndex = reader.ReadUInt16(),
-                BoxIndex = reader.ReadUInt16(),
-                RoomBelow = reader.ReadByte(),
-                Floor = reader.ReadSByte(),
-                RoomAbove = reader.ReadByte(),
-                Ceiling = reader.ReadSByte()
-            };
-        }
-
-        private TR2RoomLight ReadRoomLight()
-        {
-            return new TR2RoomLight
-            {
-                X = reader.ReadInt32(),
-                Y = reader.ReadInt32(),
-                Z = reader.ReadInt32(),
-                Intensity1 = reader.ReadUInt16(),
-                Intensity2 = reader.ReadUInt16(),
-                Fade1 = reader.ReadUInt32(),
-                Fade2 = reader.ReadUInt32()
-            };
-        }
-
-        private TR2RoomStaticMesh ReadRoomStaticMesh()
-        {
-            return new TR2RoomStaticMesh
-            {
-                X = reader.ReadUInt32(),
-                Y = reader.ReadUInt32(),
-                Z = reader.ReadUInt32(),
-                Rotation = reader.ReadUInt16(),
-                Intensity1 = reader.ReadUInt16(),
-                Intensity2 = reader.ReadUInt16(),
-                MeshID = reader.ReadUInt16()
-            };
         }
 
         private TRMesh[] ConstructMeshData(uint DataCount, uint NumPointers, ushort[] MeshData)
@@ -630,75 +605,6 @@ namespace TRLevelReader
             Debug.Assert(MeshDataOffset == DataCount);
 
             return meshes;
-        }
-
-        private TRAnimation ReadAnimation()
-        {
-            return new TRAnimation
-            {
-                FrameOffset = reader.ReadUInt32(),
-                FrameRate = reader.ReadByte(),
-                FrameSize = reader.ReadByte(),
-                StateID = reader.ReadUInt16(),
-                Speed = new FixedFloat<short, ushort>
-                {
-                    Whole = reader.ReadInt16(),
-                    Fraction = reader.ReadUInt16()
-                },
-                Accel = new FixedFloat<short, ushort>
-                {
-                    Whole = reader.ReadInt16(),
-                    Fraction = reader.ReadUInt16()
-                },
-                FrameStart = reader.ReadUInt16(),
-                FrameEnd = reader.ReadUInt16(),
-                NextAnimation = reader.ReadUInt16(),
-                NextFrame = reader.ReadUInt16(),
-                NumStateChanges = reader.ReadUInt16(),
-                StateChangeOffset = reader.ReadUInt16(),
-                NumAnimCommands = reader.ReadUInt16(),
-                AnimCommand = reader.ReadUInt16()
-            };
-        }
-
-        private TRStateChange ReadStateChange()
-        {
-            return new TRStateChange()
-            {
-                StateID = reader.ReadUInt16(),
-                NumAnimDispatches = reader.ReadUInt16(),
-                AnimDispatch = reader.ReadUInt16()
-            };
-        }
-
-        private TRAnimDispatch ReadAnimDispatch()
-        {
-            return new TRAnimDispatch()
-            {
-                Low = reader.ReadInt16(),
-                High = reader.ReadInt16(),
-                NextAnimation = reader.ReadInt16(),
-                NextFrame = reader.ReadInt16()
-            };
-        }
-
-        private TRAnimCommand ReadAnimCommand()
-        {
-            return new TRAnimCommand()
-            {
-                Value = reader.ReadInt16()
-            };
-        }
-
-        private TRMeshTreeNode ReadMeshTreeNode()
-        {
-            return new TRMeshTreeNode()
-            {
-                Flags = reader.ReadUInt32(),
-                OffsetX = reader.ReadInt32(),
-                OffsetY = reader.ReadInt32(),
-                OffsetZ = reader.ReadInt32()
-            };
         }
     }
 }
