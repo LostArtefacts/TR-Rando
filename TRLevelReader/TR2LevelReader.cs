@@ -199,7 +199,13 @@ namespace TRLevelReader
                 }
                 #endregion
 
-                Log.LogF("Bytes Read: " + bytesRead.ToString());
+                level.NumFloorData = reader.ReadUInt32();
+                level.FloorData = new ushort[level.NumFloorData];
+
+                for (int i = 0; i < level.NumFloorData; i++)
+                {
+                    level.FloorData[i] = reader.ReadUInt16();
+                }
             }
 
             return level;
