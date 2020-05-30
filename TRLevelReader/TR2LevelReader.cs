@@ -12,8 +12,14 @@ namespace TRLevelReader
     public class TR2LevelReader
     {
         private readonly uint TR2VersionHeader = 0x0000002D;
-
         private const uint MAX_PALETTE_SIZE = 256;
+
+        private BinaryReader reader;
+
+        public TR2LevelReader()
+        {
+
+        }
 
         public TR2Level ReadLevel(string Filename)
         {
@@ -24,310 +30,311 @@ namespace TRLevelReader
 
             TR2Level level = new TR2Level();
 
-            using (BinaryReader reader = new BinaryReader(File.Open(Filename, FileMode.Open)))
+            reader = new BinaryReader(File.Open(Filename, FileMode.Open));
+            
+            Log.LogF("File opened");
+
+            level.Version = reader.ReadUInt32();
+
+            if (level.Version != TR2VersionHeader)
             {
-                Log.LogF("File opened");
+                throw new NotImplementedException("File reader only suppors TR2 levels");
+            }
 
-                level.Version = reader.ReadUInt32();
+            level.Palette = PopulateColourPalette(reader.ReadBytes((int)MAX_PALETTE_SIZE * 3));
+            level.Palette16 = PopulateColourPalette16(reader.ReadBytes((int)MAX_PALETTE_SIZE * 4));
 
-                if (level.Version != TR2VersionHeader)
+            level.NumImages = reader.ReadUInt32();
+
+            level.Images8 = new TRTexImage8[level.NumImages];
+            level.Images16 = new TRTexImage16[level.NumImages];
+
+            //Initialize the texture arrays
+            for (int i = 0; i < level.NumImages; i++)
+            {
+                level.Images8[i] = new TRTexImage8();
+                level.Images16[i] = new TRTexImage16();
+            }
+
+            //For each texture8 there are 256 * 256 bytes (65536) we can just do a straight byte read
+            for (int i = 0; i < level.NumImages; i++)
+            {
+                level.Images8[i].Pixels = reader.ReadBytes(256 * 256);
+            }                
+
+            //For each texture16 there are 256 * 256 * 2 bytes (131072)
+            for (int i = 0; i < level.NumImages; i++)
+            {
+                for (int j = 0; j < (256 * 256); j++)
                 {
-                    throw new NotImplementedException("File reader only suppors TR2 levels");
+                    level.Images16[i].Pixels[j] = reader.ReadUInt16();
+                }
+            }
+
+            level.Unused = reader.ReadUInt32();
+            level.NumRooms = reader.ReadUInt16();
+
+            #region Rooms
+            level.Rooms = new TR2Room[level.NumRooms];
+
+            for (int i = 0; i < level.NumRooms; i++)
+            {
+                TR2Room room = new TR2Room();
+
+                //Grab info
+                room.Info = new TRRoomInfo
+                {
+                    X = reader.ReadInt32(),
+                    Z = reader.ReadInt32(),
+                    YBottom = reader.ReadInt32(),
+                    YTop = reader.ReadInt32()
+                };
+
+                //Grab data
+                room.NumDataWords = reader.ReadUInt32();
+                room.Data = new ushort[room.NumDataWords];
+                for (int j = 0; j < room.NumDataWords; j++)
+                {
+                    room.Data[j] = reader.ReadUInt16();
                 }
 
-                level.Palette = PopulateColourPalette(reader.ReadBytes((int)MAX_PALETTE_SIZE * 3));
-                level.Palette16 = PopulateColourPalette16(reader.ReadBytes((int)MAX_PALETTE_SIZE * 4));
+                //Store what we just read
+                room.RoomData = ConvertToRoomData(room);
 
-                level.NumImages = reader.ReadUInt32();
-
-                level.Images8 = new TRTexImage8[level.NumImages];
-                level.Images16 = new TRTexImage16[level.NumImages];
-
-                //Initialize the texture arrays
-                for (int i = 0; i < level.NumImages; i++)
+                //Portals
+                room.NumPortals = reader.ReadUInt16();
+                room.Portals = new TRRoomPortal[room.NumPortals];
+                for (int j = 0; j < room.NumPortals; j++)
                 {
-                    level.Images8[i] = new TRTexImage8();
-                    level.Images16[i] = new TRTexImage16();
-                }
-
-                //For each texture8 there are 256 * 256 bytes (65536) we can just do a straight byte read
-                for (int i = 0; i < level.NumImages; i++)
-                {
-                    level.Images8[i].Pixels = reader.ReadBytes(256 * 256);
-                }                
-
-                //For each texture16 there are 256 * 256 * 2 bytes (131072)
-                for (int i = 0; i < level.NumImages; i++)
-                {
-                    for (int j = 0; j < (256 * 256); j++)
+                    TRRoomPortal portal = new TRRoomPortal
                     {
-                        level.Images16[i].Pixels[j] = reader.ReadUInt16();
-                    }
+                        AdjoiningRoom = reader.ReadUInt16(),
+
+                        Normal = new TRVertex
+                        {
+                            X = reader.ReadInt16(),
+                            Y = reader.ReadInt16(),
+                            Z = reader.ReadInt16()
+                        },
+
+                        Vertices = new TRVertex[]
+                        {
+                            new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                            new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                            new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                            new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
+                        }
+                    };
+
+                    room.Portals[j] = portal;
                 }
 
-                level.Unused = reader.ReadUInt32();
-                level.NumRooms = reader.ReadUInt16();
-
-                #region Rooms
-                level.Rooms = new TR2Room[level.NumRooms];
-
-                for (int i = 0; i < level.NumRooms; i++)
+                //Sectors
+                room.NumZSectors = reader.ReadUInt16();
+                room.NumXSectors = reader.ReadUInt16();
+                room.SectorList = new TRRoomSector[room.NumXSectors * room.NumZSectors];
+                for (int j = 0; j < (room.NumXSectors * room.NumZSectors); j++)
                 {
-                    TR2Room room = new TR2Room();
+                    TRRoomSector sector = new TRRoomSector
+                    {
+                        FDIndex = reader.ReadUInt16(),
+                        BoxIndex = reader.ReadUInt16(),
+                        RoomBelow = reader.ReadByte(),
+                        Floor = reader.ReadSByte(),
+                        RoomAbove = reader.ReadByte(),
+                        Ceiling = reader.ReadSByte()
+                    };
 
-                    //Grab info
-                    room.Info = new TRRoomInfo
+                    room.SectorList[j] = sector;
+                }
+
+                //Lighting
+                room.AmbientIntensity = reader.ReadInt16();
+                room.AmbientIntensity2 = reader.ReadInt16();
+                room.LightMode = reader.ReadInt16();
+                room.NumLights = reader.ReadUInt16();
+                room.Lights = new TR2RoomLight[room.NumLights];
+                for (int j = 0; j < room.NumLights; j++)
+                {
+                    TR2RoomLight light = new TR2RoomLight
                     {
                         X = reader.ReadInt32(),
+                        Y = reader.ReadInt32(),
                         Z = reader.ReadInt32(),
-                        YBottom = reader.ReadInt32(),
-                        YTop = reader.ReadInt32()
+                        Intensity1 = reader.ReadUInt16(),
+                        Intensity2 = reader.ReadUInt16(),
+                        Fade1 = reader.ReadUInt32(),
+                        Fade2 = reader.ReadUInt32()
                     };
 
-                    //Grab data
-                    room.NumDataWords = reader.ReadUInt32();
-                    room.Data = new ushort[room.NumDataWords];
-                    for (int j = 0; j < room.NumDataWords; j++)
-                    {
-                        room.Data[j] = reader.ReadUInt16();
-                    }
-
-                    //Store what we just read
-                    room.RoomData = ConvertToRoomData(room);
-
-                    //Portals
-                    room.NumPortals = reader.ReadUInt16();
-                    room.Portals = new TRRoomPortal[room.NumPortals];
-                    for (int j = 0; j < room.NumPortals; j++)
-                    {
-                        TRRoomPortal portal = new TRRoomPortal
-                        {
-                            AdjoiningRoom = reader.ReadUInt16(),
-
-                            Normal = new TRVertex
-                            {
-                                X = reader.ReadInt16(),
-                                Y = reader.ReadInt16(),
-                                Z = reader.ReadInt16()
-                            },
-
-                            Vertices = new TRVertex[]
-                            {
-                                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                                new TRVertex { X = reader.ReadInt16(), Y = reader.ReadInt16(), Z = reader.ReadInt16() },
-                            }
-                        };
-
-                        room.Portals[j] = portal;
-                    }
-
-                    //Sectors
-                    room.NumZSectors = reader.ReadUInt16();
-                    room.NumXSectors = reader.ReadUInt16();
-                    room.SectorList = new TRRoomSector[room.NumXSectors * room.NumZSectors];
-                    for (int j = 0; j < (room.NumXSectors * room.NumZSectors); j++)
-                    {
-                        TRRoomSector sector = new TRRoomSector
-                        {
-                            FDIndex = reader.ReadUInt16(),
-                            BoxIndex = reader.ReadUInt16(),
-                            RoomBelow = reader.ReadByte(),
-                            Floor = reader.ReadSByte(),
-                            RoomAbove = reader.ReadByte(),
-                            Ceiling = reader.ReadSByte()
-                        };
-
-                        room.SectorList[j] = sector;
-                    }
-
-                    //Lighting
-                    room.AmbientIntensity = reader.ReadInt16();
-                    room.AmbientIntensity2 = reader.ReadInt16();
-                    room.LightMode = reader.ReadInt16();
-                    room.NumLights = reader.ReadUInt16();
-                    room.Lights = new TR2RoomLight[room.NumLights];
-                    for (int j = 0; j < room.NumLights; j++)
-                    {
-                        TR2RoomLight light = new TR2RoomLight
-                        {
-                            X = reader.ReadInt32(),
-                            Y = reader.ReadInt32(),
-                            Z = reader.ReadInt32(),
-                            Intensity1 = reader.ReadUInt16(),
-                            Intensity2 = reader.ReadUInt16(),
-                            Fade1 = reader.ReadUInt32(),
-                            Fade2 = reader.ReadUInt32()
-                        };
-
-                        room.Lights[j] = light;
-                    }
-
-                    //Static meshes
-                    room.NumStaticMeshes = reader.ReadUInt16();
-                    room.StaticMeshes = new TR2RoomStaticMesh[room.NumStaticMeshes];
-                    for (int j = 0; j < room.NumStaticMeshes; j++)
-                    {
-                        TR2RoomStaticMesh mesh = new TR2RoomStaticMesh
-                        {
-                            X = reader.ReadUInt32(),
-                            Y = reader.ReadUInt32(),
-                            Z = reader.ReadUInt32(),
-                            Rotation = reader.ReadUInt16(),
-                            Intensity1 = reader.ReadUInt16(),
-                            Intensity2 = reader.ReadUInt16(),
-                            MeshID = reader.ReadUInt16()
-                        };
-
-                        room.StaticMeshes[j] = mesh;
-                    }
-
-                    room.AlternateRoom = reader.ReadInt16();
-                    room.Flags = reader.ReadInt16();
-
-                    level.Rooms[i] = room;
-                }
-                #endregion
-
-                level.NumFloorData = reader.ReadUInt32();
-                level.FloorData = new ushort[level.NumFloorData];
-
-                for (int i = 0; i < level.NumFloorData; i++)
-                {
-                    level.FloorData[i] = reader.ReadUInt16();
+                    room.Lights[j] = light;
                 }
 
-                #region MeshData
-                //This tells us how much mesh data (# of words/uint16s) coming up
-                //just like the rooms previously.
-                level.NumMeshData = reader.ReadUInt32();
-                ushort[] TempMeshData = new ushort[level.NumMeshData];
-
-                for (int i = 0; i < level.NumMeshData; i++)
+                //Static meshes
+                room.NumStaticMeshes = reader.ReadUInt16();
+                room.StaticMeshes = new TR2RoomStaticMesh[room.NumStaticMeshes];
+                for (int j = 0; j < room.NumStaticMeshes; j++)
                 {
-                    TempMeshData[i] = reader.ReadUInt16();
-                }
-
-                level.NumMeshPointers = reader.ReadUInt32();
-                level.MeshPointers = new uint[level.NumMeshPointers];
-
-                for (int i = 0; i < level.NumMeshPointers; i++)
-                {
-                    level.MeshPointers[i] = reader.ReadUInt32();
-                }
-
-                //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, TempMeshData);
-                #endregion
-
-                #region Animation
-                level.NumAnimations = reader.ReadUInt32();
-                level.Animations = new TRAnimation[level.NumAnimations];
-
-                for (int i = 0; i < level.NumAnimations; i++)
-                {
-                    TRAnimation anim = new TRAnimation
+                    TR2RoomStaticMesh mesh = new TR2RoomStaticMesh
                     {
-                        FrameOffset = reader.ReadUInt32(),
-                        FrameRate = reader.ReadByte(),
-                        FrameSize = reader.ReadByte(),
-                        StateID = reader.ReadUInt16(),
-                        Speed = new FixedFloat<short, ushort>
-                        {
-                            Whole = reader.ReadInt16(),
-                            Fraction = reader.ReadUInt16()
-                        },
-                        Accel = new FixedFloat<short, ushort>
-                        {
-                            Whole = reader.ReadInt16(),
-                            Fraction = reader.ReadUInt16()
-                        },
-                        FrameStart = reader.ReadUInt16(),
-                        FrameEnd = reader.ReadUInt16(),
-                        NextAnimation = reader.ReadUInt16(),
-                        NextFrame = reader.ReadUInt16(),
-                        NumStateChanges = reader.ReadUInt16(),
-                        StateChangeOffset = reader.ReadUInt16(),
-                        NumAnimCommands = reader.ReadUInt16(),
-                        AnimCommand = reader.ReadUInt16()
+                        X = reader.ReadUInt32(),
+                        Y = reader.ReadUInt32(),
+                        Z = reader.ReadUInt32(),
+                        Rotation = reader.ReadUInt16(),
+                        Intensity1 = reader.ReadUInt16(),
+                        Intensity2 = reader.ReadUInt16(),
+                        MeshID = reader.ReadUInt16()
                     };
 
-                    level.Animations[i] = anim;
+                    room.StaticMeshes[j] = mesh;
                 }
 
-                level.NumStateChanges = reader.ReadUInt32();
-                level.StateChanges = new TRStateChange[level.NumStateChanges];
+                room.AlternateRoom = reader.ReadInt16();
+                room.Flags = reader.ReadInt16();
 
-                for (int i = 0; i < level.NumStateChanges; i++)
-                {
-                    TRStateChange sch = new TRStateChange()
-                    {
-                        StateID = reader.ReadUInt16(),
-                        NumAnimDispatches = reader.ReadUInt16(),
-                        AnimDispatch = reader.ReadUInt16()
-                    };
-
-                    level.StateChanges[i] = sch;
-                }
-
-                level.NumAnimDispatches = reader.ReadUInt32();
-                level.AnimDispatches = new TRAnimDispatch[level.NumAnimDispatches];
-
-                for (int i = 0; i < level.NumAnimDispatches; i++)
-                {
-                    TRAnimDispatch dispatch = new TRAnimDispatch()
-                    {
-                        Low = reader.ReadInt16(),
-                        High = reader.ReadInt16(),
-                        NextAnimation = reader.ReadInt16(),
-                        NextFrame = reader.ReadInt16()
-                    };
-
-                    level.AnimDispatches[i] = dispatch;
-                }
-
-                level.NumAnimCommands = reader.ReadUInt32();
-                level.AnimCommands = new TRAnimCommand[level.NumAnimCommands];
-
-                for (int i = 0; i < level.NumAnimCommands; i++)
-                {
-                    TRAnimCommand cmd = new TRAnimCommand()
-                    {
-                        Value = reader.ReadInt16()
-                    };
-
-                    level.AnimCommands[i] = cmd;
-                }
-                #endregion
-
-                #region MeshTrees
-                level.NumMeshTrees = reader.ReadUInt32();
-                level.MeshTrees = new TRMeshTreeNode[level.NumMeshTrees];
-
-                for (int i = 0; i < level.NumMeshTrees; i++)
-                {
-                    TRMeshTreeNode node = new TRMeshTreeNode()
-                    {
-                        Flags = reader.ReadUInt32(),
-                        OffsetX = reader.ReadInt32(),
-                        OffsetY = reader.ReadInt32(),
-                        OffsetZ = reader.ReadInt32()
-                    };
-
-                    level.MeshTrees[i] = node;
-                }
-
-                level.NumFrames = reader.ReadUInt32();
-                level.Frames = new ushort[level.NumFrames];
-
-                for (int i = 0; i < level.NumFrames; i++)
-                {
-                    level.Frames[i] = reader.ReadUInt16();
-                }
-                #endregion
-
-                Log.LogF("Bytes Read: " + reader.BaseStream.Position.ToString() + "/" + reader.BaseStream.Length.ToString());
+                level.Rooms[i] = room;
             }
+            #endregion
+
+            level.NumFloorData = reader.ReadUInt32();
+            level.FloorData = new ushort[level.NumFloorData];
+
+            for (int i = 0; i < level.NumFloorData; i++)
+            {
+                level.FloorData[i] = reader.ReadUInt16();
+            }
+
+            #region MeshData
+            //This tells us how much mesh data (# of words/uint16s) coming up
+            //just like the rooms previously.
+            level.NumMeshData = reader.ReadUInt32();
+            ushort[] TempMeshData = new ushort[level.NumMeshData];
+
+            for (int i = 0; i < level.NumMeshData; i++)
+            {
+                TempMeshData[i] = reader.ReadUInt16();
+            }
+
+            level.NumMeshPointers = reader.ReadUInt32();
+            level.MeshPointers = new uint[level.NumMeshPointers];
+
+            for (int i = 0; i < level.NumMeshPointers; i++)
+            {
+                level.MeshPointers[i] = reader.ReadUInt32();
+            }
+
+            //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, TempMeshData);
+            #endregion
+
+            #region Animation
+            level.NumAnimations = reader.ReadUInt32();
+            level.Animations = new TRAnimation[level.NumAnimations];
+
+            for (int i = 0; i < level.NumAnimations; i++)
+            {
+                TRAnimation anim = new TRAnimation
+                {
+                    FrameOffset = reader.ReadUInt32(),
+                    FrameRate = reader.ReadByte(),
+                    FrameSize = reader.ReadByte(),
+                    StateID = reader.ReadUInt16(),
+                    Speed = new FixedFloat<short, ushort>
+                    {
+                        Whole = reader.ReadInt16(),
+                        Fraction = reader.ReadUInt16()
+                    },
+                    Accel = new FixedFloat<short, ushort>
+                    {
+                        Whole = reader.ReadInt16(),
+                        Fraction = reader.ReadUInt16()
+                    },
+                    FrameStart = reader.ReadUInt16(),
+                    FrameEnd = reader.ReadUInt16(),
+                    NextAnimation = reader.ReadUInt16(),
+                    NextFrame = reader.ReadUInt16(),
+                    NumStateChanges = reader.ReadUInt16(),
+                    StateChangeOffset = reader.ReadUInt16(),
+                    NumAnimCommands = reader.ReadUInt16(),
+                    AnimCommand = reader.ReadUInt16()
+                };
+
+                level.Animations[i] = anim;
+            }
+
+            level.NumStateChanges = reader.ReadUInt32();
+            level.StateChanges = new TRStateChange[level.NumStateChanges];
+
+            for (int i = 0; i < level.NumStateChanges; i++)
+            {
+                TRStateChange sch = new TRStateChange()
+                {
+                    StateID = reader.ReadUInt16(),
+                    NumAnimDispatches = reader.ReadUInt16(),
+                    AnimDispatch = reader.ReadUInt16()
+                };
+
+                level.StateChanges[i] = sch;
+            }
+
+            level.NumAnimDispatches = reader.ReadUInt32();
+            level.AnimDispatches = new TRAnimDispatch[level.NumAnimDispatches];
+
+            for (int i = 0; i < level.NumAnimDispatches; i++)
+            {
+                TRAnimDispatch dispatch = new TRAnimDispatch()
+                {
+                    Low = reader.ReadInt16(),
+                    High = reader.ReadInt16(),
+                    NextAnimation = reader.ReadInt16(),
+                    NextFrame = reader.ReadInt16()
+                };
+
+                level.AnimDispatches[i] = dispatch;
+            }
+
+            level.NumAnimCommands = reader.ReadUInt32();
+            level.AnimCommands = new TRAnimCommand[level.NumAnimCommands];
+
+            for (int i = 0; i < level.NumAnimCommands; i++)
+            {
+                TRAnimCommand cmd = new TRAnimCommand()
+                {
+                    Value = reader.ReadInt16()
+                };
+
+                level.AnimCommands[i] = cmd;
+            }
+            #endregion
+
+            #region MeshTrees
+            level.NumMeshTrees = reader.ReadUInt32();
+            level.MeshTrees = new TRMeshTreeNode[level.NumMeshTrees];
+
+            for (int i = 0; i < level.NumMeshTrees; i++)
+            {
+                TRMeshTreeNode node = new TRMeshTreeNode()
+                {
+                    Flags = reader.ReadUInt32(),
+                    OffsetX = reader.ReadInt32(),
+                    OffsetY = reader.ReadInt32(),
+                    OffsetZ = reader.ReadInt32()
+                };
+
+                level.MeshTrees[i] = node;
+            }
+
+            level.NumFrames = reader.ReadUInt32();
+            level.Frames = new ushort[level.NumFrames];
+
+            for (int i = 0; i < level.NumFrames; i++)
+            {
+                level.Frames[i] = reader.ReadUInt16();
+            }
+            #endregion
+
+            Log.LogF("Bytes Read: " + reader.BaseStream.Position.ToString() + "/" + reader.BaseStream.Length.ToString());
+
+            reader.Close();
 
             return level;
         }
