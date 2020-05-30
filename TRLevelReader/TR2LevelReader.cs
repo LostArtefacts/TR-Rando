@@ -26,12 +26,9 @@ namespace TRLevelReader
 
             using (BinaryReader reader = new BinaryReader(File.Open(Filename, FileMode.Open)))
             {
-                int bytesRead = 0;
-
                 Log.LogF("File opened");
 
                 level.Version = reader.ReadUInt32();
-                bytesRead += sizeof(uint);
 
                 if (level.Version != TR2VersionHeader)
                 {
@@ -39,12 +36,9 @@ namespace TRLevelReader
                 }
 
                 level.Palette = PopulateColourPalette(reader.ReadBytes((int)MAX_PALETTE_SIZE * 3));
-                bytesRead += (int)(sizeof(byte) * (MAX_PALETTE_SIZE * 3));
                 level.Palette16 = PopulateColourPalette16(reader.ReadBytes((int)MAX_PALETTE_SIZE * 4));
-                bytesRead += (int)(sizeof(byte) * (MAX_PALETTE_SIZE * 4));
 
                 level.NumImages = reader.ReadUInt32();
-                bytesRead += sizeof(uint);
 
                 level.Images8 = new TRTexImage8[level.NumImages];
                 level.Images16 = new TRTexImage16[level.NumImages];
@@ -60,7 +54,6 @@ namespace TRLevelReader
                 for (int i = 0; i < level.NumImages; i++)
                 {
                     level.Images8[i].Pixels = reader.ReadBytes(256 * 256);
-                    bytesRead += (sizeof(byte) * (256 * 256));
                 }                
 
                 //For each texture16 there are 256 * 256 * 2 bytes (131072)
@@ -69,13 +62,11 @@ namespace TRLevelReader
                     for (int j = 0; j < (256 * 256); j++)
                     {
                         level.Images16[i].Pixels[j] = reader.ReadUInt16();
-                        bytesRead += sizeof(ushort);
                     }
                 }
 
                 level.Unused = reader.ReadUInt32();
                 level.NumRooms = reader.ReadUInt16();
-                bytesRead += (sizeof(ushort));
 
                 #region Rooms
                 level.Rooms = new TR2Room[level.NumRooms];
@@ -226,8 +217,90 @@ namespace TRLevelReader
                     level.MeshPointers[i] = reader.ReadUInt32();
                 }
 
-                level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, TempMeshData);
+                //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, TempMeshData);
                 #endregion
+
+                #region Animation
+                level.NumAnimations = reader.ReadUInt32();
+                level.Animations = new TRAnimation[level.NumAnimations];
+
+                for (int i = 0; i < level.NumAnimations; i++)
+                {
+                    TRAnimation anim = new TRAnimation
+                    {
+                        FrameOffset = reader.ReadUInt32(),
+                        FrameRate = reader.ReadByte(),
+                        FrameSize = reader.ReadByte(),
+                        StateID = reader.ReadUInt16(),
+                        Speed = new FixedFloat<short, ushort>
+                        {
+                            Whole = reader.ReadInt16(),
+                            Fraction = reader.ReadUInt16()
+                        },
+                        Accel = new FixedFloat<short, ushort>
+                        {
+                            Whole = reader.ReadInt16(),
+                            Fraction = reader.ReadUInt16()
+                        },
+                        FrameStart = reader.ReadUInt16(),
+                        FrameEnd = reader.ReadUInt16(),
+                        NextAnimation = reader.ReadUInt16(),
+                        NextFrame = reader.ReadUInt16(),
+                        NumStateChanges = reader.ReadUInt16(),
+                        StateChangeOffset = reader.ReadUInt16(),
+                        NumAnimCommands = reader.ReadUInt16(),
+                        AnimCommand = reader.ReadUInt16()
+                    };
+
+                    level.Animations[i] = anim;
+                }
+
+                level.NumStateChanges = reader.ReadUInt32();
+                level.StateChanges = new TRStateChange[level.NumStateChanges];
+
+                for (int i = 0; i < level.NumStateChanges; i++)
+                {
+                    TRStateChange sch = new TRStateChange()
+                    {
+                        StateID = reader.ReadUInt16(),
+                        NumAnimDispatches = reader.ReadUInt16(),
+                        AnimDispatch = reader.ReadUInt16()
+                    };
+
+                    level.StateChanges[i] = sch;
+                }
+
+                level.NumAnimDispatches = reader.ReadUInt32();
+                level.AnimDispatches = new TRAnimDispatch[level.NumAnimDispatches];
+
+                for (int i = 0; i < level.NumAnimDispatches; i++)
+                {
+                    TRAnimDispatch dispatch = new TRAnimDispatch()
+                    {
+                        Low = reader.ReadInt16(),
+                        High = reader.ReadInt16(),
+                        NextAnimation = reader.ReadInt16(),
+                        NextFrame = reader.ReadInt16()
+                    };
+
+                    level.AnimDispatches[i] = dispatch;
+                }
+
+                level.NumAnimCommands = reader.ReadUInt32();
+                level.AnimCommands = new TRAnimCommand[level.NumAnimCommands];
+
+                for (int i = 0; i < level.NumAnimCommands; i++)
+                {
+                    TRAnimCommand cmd = new TRAnimCommand()
+                    {
+                        Value = reader.ReadInt16()
+                    };
+
+                    level.AnimCommands[i] = cmd;
+                }
+                #endregion
+
+                Log.LogF("Bytes Read: " + reader.BaseStream.Position.ToString() + "/" + reader.BaseStream.Length.ToString());
             }
 
             return level;
