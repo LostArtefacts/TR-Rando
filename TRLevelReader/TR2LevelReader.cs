@@ -227,66 +227,156 @@ namespace TRLevelReader
             level.NumModels = reader.ReadUInt32();
             level.Models = new TRModel[level.NumModels];
 
+            for (int i = 0; i < level.NumModels; i++)
+            {
+                level.Models[i] = TR2FileReadUtilities.ReadModel(reader);
+            }
+
             //Static Meshes
             level.NumStaticMeshes = reader.ReadUInt32();
             level.StaticMeshes = new TRStaticMesh[level.NumStaticMeshes];
+
+            for (int i = 0; i < level.NumStaticMeshes; i++)
+            {
+                level.StaticMeshes[i] = TR2FileReadUtilities.ReadStaticMesh(reader);
+            }
 
             //Object Textures
             level.NumObjectTextures = reader.ReadUInt32();
             level.ObjectTextures = new TRObjectTexture[level.NumObjectTextures];
 
+            for (int i = 0; i < level.NumObjectTextures; i++)
+            {
+                level.ObjectTextures[i] = TR2FileReadUtilities.ReadObjectTexture(reader);
+            }
+
             //Sprite Textures
             level.NumSpriteTextures = reader.ReadUInt32();
             level.SpriteTextures = new TRSpriteTexture[level.NumSpriteTextures];
+
+            for (int i = 0; i < level.NumSpriteTextures; i++)
+            {
+                level.SpriteTextures[i] = TR2FileReadUtilities.ReadSpriteTexture(reader);
+            }
 
             //Sprite Sequences
             level.NumSpriteSequences = reader.ReadUInt32();
             level.SpriteSequences = new TRSpriteSequence[level.NumSpriteSequences];
 
+            for (int i = 0; i < level.NumSpriteSequences; i++)
+            {
+                level.SpriteSequences[i] = TR2FileReadUtilities.ReadSpriteSequence(reader);
+            }
+
             //Cameras
             level.NumCameras = reader.ReadUInt32();
             level.Cameras = new TRCamera[level.NumCameras];
+
+            for (int i = 0; i < level.NumCameras; i++)
+            {
+                level.Cameras[i] = TR2FileReadUtilities.ReadCamera(reader);
+            }
 
             //Sound Sources
             level.NumSoundSources = reader.ReadUInt32();
             level.SoundSources = new TRSoundSource[level.NumSoundSources];
 
+            for (int i = 0; i < level.NumSoundSources; i++)
+            {
+                level.SoundSources[i] = TR2FileReadUtilities.ReadSoundSource(reader);
+            }
+
             //Boxes
             level.NumBoxes = reader.ReadUInt32();
             level.Boxes = new TR2Box[level.NumBoxes];
+
+            for (int i = 0; i < level.NumBoxes; i++)
+            {
+                level.Boxes[i] = TR2FileReadUtilities.ReadBox(reader);
+            }
 
             //Overlaps & Zones
             level.NumOverlaps = reader.ReadUInt32();
             level.Overlaps = new ushort[level.NumOverlaps];
             level.Zones = new short[10 * level.NumBoxes];
 
+            for (int i = 0; i < level.NumOverlaps; i++)
+            {
+                level.Overlaps[i] = reader.ReadUInt16();
+            }
+
+            for (int i = 0; i < level.Zones.Count(); i++)
+            {
+                level.Zones[i] = reader.ReadInt16();
+            }
+
             //Animated Textures
             level.NumAnimatedTextures = reader.ReadUInt32();
             level.AnimatedTextures = new ushort[level.NumAnimatedTextures];
+
+            for (int i = 0; i < level.NumAnimatedTextures; i++)
+            {
+                level.AnimatedTextures[i] = reader.ReadUInt16();
+            }
 
             //Entities
             level.NumEntities = reader.ReadUInt32();
             level.Entities = new TR2Entity[level.NumEntities];
 
+            for (int i = 0; i < level.NumEntities; i++)
+            {
+                level.Entities[i] = TR2FileReadUtilities.ReadEntity(reader);
+            }
+
             //Light Map - 32 * 256 = 8192 bytes
             level.LightMap = new byte[32 * 256];
+
+            for (int i = 0; i < level.LightMap.Count(); i++)
+            {
+                level.LightMap[i] = reader.ReadByte();
+            }
 
             //Cinematic Frames
             level.NumCinematicFrames = reader.ReadUInt16();
             level.CinematicFrames = new TRCinematicFrame[level.NumCinematicFrames];
 
+            for (int i = 0; i < level.NumCinematicFrames; i++)
+            {
+                level.CinematicFrames[i] = TR2FileReadUtilities.ReadCinematicFrame(reader);
+            }
+
             //Demo Data
             level.NumDemoData = reader.ReadUInt16();
             level.DemoData = new byte[level.NumDemoData];
+
+            for (int i = 0; i < level.NumDemoData; i++)
+            {
+                level.DemoData[i] = reader.ReadByte();
+            }
 
             //Sound Map (370 shorts = 740 bytes) & Sound Details
             level.SoundMap = new short[370];
             level.NumSoundDetails = reader.ReadUInt32();
             level.SoundDetails = new TRSoundDetails[level.NumSoundDetails];
 
+            for (int i = 0; i < level.SoundMap.Count(); i++)
+            {
+                level.SoundMap[i] = reader.ReadInt16();
+            }
+
+            for (int i = 0; i < level.NumSoundDetails; i++)
+            {
+                level.SoundDetails[i] = TR2FileReadUtilities.ReadSoundDetails(reader);
+            }
+
             //Samples
             level.NumSampleIndices = reader.ReadUInt32();
             level.SampleIndices = new uint[level.NumSampleIndices];
+
+            for (int i = 0; i < level.NumSampleIndices; i++)
+            {
+                level.SampleIndices[i] = reader.ReadUInt32();
+            }
 
             Log.LogF("Bytes Read: " + reader.BaseStream.Position.ToString() + "/" + reader.BaseStream.Length.ToString());
 
