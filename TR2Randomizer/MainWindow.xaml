@@ -34,6 +34,6 @@
         <Button Name="TrackLaraEPC" Content="Track Lara (EPC)" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" MinHeight="30" MinWidth="200" IsEnabled="True" Click="TrackLaraEPC_Click"/>
         <Button Name="TrackLaraUK" Content="Track Lara (UK Box)" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" MinHeight="30" MinWidth="200" IsEnabled="True" Click="TrackLaraUK_Click"/>
         <Label Content="Launches a seperate process for tracking Lara's location. The location provided by this window can be used for locations in locations.json." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" Grid.Row="4" Grid.Column="1"/>
-        <CheckBox Name="EnableHardCheckBox" Content="Enable Hard Secrets" Grid.Row="1" VerticalContentAlignment="Center" Margin="5" IsChecked="{Binding Path=(local:ReplacementStatusManager.AllowHard)}"/>
+        <CheckBox Name="EnableHardCheckBox" Content="Enable Hard Secrets" Grid.Row="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="5" MaxWidth="275" IsChecked="{Binding Path=(local:ReplacementStatusManager.AllowHard)}"/>
     </Grid>
 </Window>
