@@ -19,10 +19,5 @@ namespace TRLevelReader.Model
 
         //2 bytes
         public short Lighting2 { get; set; }
-
-        public TR2RoomVertex()
-        {
-            Vertex = new TRVertex();
-        }
     }
 }

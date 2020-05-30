@@ -143,5 +143,186 @@ namespace TRLevelReader
                 OffsetZ = reader.ReadInt32()
             };
         }
+
+        public static TRModel ReadModel(BinaryReader reader)
+        {
+            return new TRModel()
+            {
+                ID = reader.ReadUInt32(),
+                NumMeshes = reader.ReadUInt16(),
+                StartingMesh = reader.ReadUInt16(),
+                MeshTree = reader.ReadUInt32(),
+                FrameOffset = reader.ReadUInt32(),
+                Animation = reader.ReadUInt16()
+            };
+        }
+
+        public static TRStaticMesh ReadStaticMesh(BinaryReader reader)
+        {
+            return new TRStaticMesh()
+            {
+                ID = reader.ReadUInt32(),
+                Mesh = reader.ReadUInt16(),
+                VisibilityBox = new TRBoundingBox
+                {
+                    MinX = reader.ReadInt16(),
+                    MaxX = reader.ReadInt16(),
+                    MinY = reader.ReadInt16(),
+                    MaxY = reader.ReadInt16(),
+                    MinZ = reader.ReadInt16(),
+                    MaxZ = reader.ReadInt16()
+                },
+                CollisionBox = new TRBoundingBox
+                {
+                    MinX = reader.ReadInt16(),
+                    MaxX = reader.ReadInt16(),
+                    MinY = reader.ReadInt16(),
+                    MaxY = reader.ReadInt16(),
+                    MinZ = reader.ReadInt16(),
+                    MaxZ = reader.ReadInt16()
+                },
+                Flags = reader.ReadUInt16()
+            };
+        }
+
+        public static TRObjectTexture ReadObjectTexture(BinaryReader reader)
+        {
+            return new TRObjectTexture()
+            {
+                Attribute = reader.ReadUInt16(),
+                AtlasAndFlag = reader.ReadUInt16(),
+                Vertices = new TRObjectTextureVert[]
+                {
+                    new TRObjectTextureVert 
+                    {
+                        XCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                    },
+
+                    new TRObjectTextureVert
+                    {
+                        XCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                    },
+
+                    new TRObjectTextureVert
+                    {
+                        XCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                    },
+
+                    new TRObjectTextureVert
+                    {
+                        XCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                    }
+                }
+            };
+        }
+
+        public static TRSpriteTexture ReadSpriteTexture(BinaryReader reader)
+        {
+            return new TRSpriteTexture()
+            {
+                Atlas = reader.ReadUInt16(),
+                X = reader.ReadByte(),
+                Y = reader.ReadByte(),
+                Width = reader.ReadUInt16(),
+                Height = reader.ReadUInt16(),
+                LeftSide = reader.ReadInt16(),
+                TopSide = reader.ReadInt16(),
+                RightSide = reader.ReadInt16(),
+                BottomSide = reader.ReadInt16()
+            };
+        }
+
+        public static TRSpriteSequence ReadSpriteSequence(BinaryReader reader)
+        {
+            return new TRSpriteSequence()
+            {
+                SpriteID = reader.ReadInt32(),
+                NegativeLength = reader.ReadInt16(),
+                Offset = reader.ReadInt16()
+            };
+        }
+
+        public static TRCamera ReadCamera(BinaryReader reader)
+        {
+            return new TRCamera()
+            {
+                X = reader.ReadInt32(),
+                Y = reader.ReadInt32(),
+                Z = reader.ReadInt32(),
+                Room = reader.ReadInt16(),
+                Flag = reader.ReadUInt16()
+            };
+        }
+
+        public static TRSoundSource ReadSoundSource(BinaryReader reader)
+        {
+            return new TRSoundSource()
+            {
+                X = reader.ReadInt32(),
+                Y = reader.ReadInt32(),
+                Z = reader.ReadInt32(),
+                SoundID = reader.ReadUInt16(),
+                Flags = reader.ReadUInt16()
+            };
+        }
+
+        public static TR2Box ReadBox(BinaryReader reader)
+        {
+            return new TR2Box()
+            {
+                ZMin = reader.ReadByte(),
+                ZMax = reader.ReadByte(),
+                XMin = reader.ReadByte(),
+                XMax = reader.ReadByte(),
+                TrueFloor = reader.ReadInt16(),
+                OverlapIndex = reader.ReadInt16()
+            };
+        }
+
+        public static TR2Entity ReadEntity(BinaryReader reader)
+        {
+            return new TR2Entity()
+            {
+                TypeID = reader.ReadInt16(),
+                Room = reader.ReadInt16(),
+                X = reader.ReadInt32(),
+                Y = reader.ReadInt32(),
+                Z = reader.ReadInt32(),
+                Angle = reader.ReadInt16(),
+                Intensity1 = reader.ReadInt16(),
+                Intensity2 = reader.ReadInt16(),
+                Flags = reader.ReadUInt16()
+            };
+        }
+
+        public static TRCinematicFrame ReadCinematicFrame(BinaryReader reader)
+        {
+            return new TRCinematicFrame()
+            {
+                TargetX = reader.ReadInt16(),
+                TargetY = reader.ReadInt16(),
+                TargetZ = reader.ReadInt16(),
+                PosZ = reader.ReadInt16(),
+                PosY = reader.ReadInt16(),
+                PosX = reader.ReadInt16(),
+                FOV = reader.ReadInt16(),
+                Roll = reader.ReadInt16()
+            };
+        }
+
+        public static TRSoundDetails ReadSoundDetails(BinaryReader reader)
+        {
+            return new TRSoundDetails()
+            {
+                Sample = reader.ReadUInt16(),
+                Volume = reader.ReadUInt16(),
+                Chance = reader.ReadUInt16(),
+                Characteristics = reader.ReadUInt16()
+            };
+        }
     }
 }

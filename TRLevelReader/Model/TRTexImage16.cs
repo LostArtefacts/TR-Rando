@@ -9,10 +9,5 @@ namespace TRLevelReader.Model
     public class TRTexImage16
     {
         public ushort[] Pixels { get; set; }
-
-        public TRTexImage16()
-        {
-            Pixels = new ushort[256 * 256];
-        }
     }
 }

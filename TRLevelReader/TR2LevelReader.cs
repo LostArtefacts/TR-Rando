@@ -64,7 +64,9 @@ namespace TRLevelReader
             //For each texture16 there are 256 * 256 * 2 bytes (131072)
             for (int i = 0; i < level.NumImages; i++)
             {
-                for (int j = 0; j < (256 * 256); j++)
+                level.Images16[i].Pixels = new ushort[256 * 256];
+
+                for (int j = 0; j < level.Images16[i].Pixels.Count(); j++)
                 {
                     level.Images16[i].Pixels[j] = reader.ReadUInt16();
                 }
@@ -222,34 +224,69 @@ namespace TRLevelReader
             }
 
             //Models
+            level.NumModels = reader.ReadUInt32();
+            level.Models = new TRModel[level.NumModels];
 
             //Static Meshes
+            level.NumStaticMeshes = reader.ReadUInt32();
+            level.StaticMeshes = new TRStaticMesh[level.NumStaticMeshes];
 
             //Object Textures
+            level.NumObjectTextures = reader.ReadUInt32();
+            level.ObjectTextures = new TRObjectTexture[level.NumObjectTextures];
 
             //Sprite Textures
+            level.NumSpriteTextures = reader.ReadUInt32();
+            level.SpriteTextures = new TRSpriteTexture[level.NumSpriteTextures];
 
             //Sprite Sequences
+            level.NumSpriteSequences = reader.ReadUInt32();
+            level.SpriteSequences = new TRSpriteSequence[level.NumSpriteSequences];
 
             //Cameras
+            level.NumCameras = reader.ReadUInt32();
+            level.Cameras = new TRCamera[level.NumCameras];
 
             //Sound Sources
+            level.NumSoundSources = reader.ReadUInt32();
+            level.SoundSources = new TRSoundSource[level.NumSoundSources];
 
             //Boxes
+            level.NumBoxes = reader.ReadUInt32();
+            level.Boxes = new TR2Box[level.NumBoxes];
 
             //Overlaps & Zones
+            level.NumOverlaps = reader.ReadUInt32();
+            level.Overlaps = new ushort[level.NumOverlaps];
+            level.Zones = new short[10 * level.NumBoxes];
 
             //Animated Textures
+            level.NumAnimatedTextures = reader.ReadUInt32();
+            level.AnimatedTextures = new ushort[level.NumAnimatedTextures];
 
             //Entities
+            level.NumEntities = reader.ReadUInt32();
+            level.Entities = new TR2Entity[level.NumEntities];
 
-            //Light Map
+            //Light Map - 32 * 256 = 8192 bytes
+            level.LightMap = new byte[32 * 256];
 
             //Cinematic Frames
+            level.NumCinematicFrames = reader.ReadUInt16();
+            level.CinematicFrames = new TRCinematicFrame[level.NumCinematicFrames];
 
             //Demo Data
+            level.NumDemoData = reader.ReadUInt16();
+            level.DemoData = new byte[level.NumDemoData];
 
-            //Sound Map, Sound Details and Samples
+            //Sound Map (370 shorts = 740 bytes) & Sound Details
+            level.SoundMap = new short[370];
+            level.NumSoundDetails = reader.ReadUInt32();
+            level.SoundDetails = new TRSoundDetails[level.NumSoundDetails];
+
+            //Samples
+            level.NumSampleIndices = reader.ReadUInt32();
+            level.SampleIndices = new uint[level.NumSampleIndices];
 
             Log.LogF("Bytes Read: " + reader.BaseStream.Position.ToString() + "/" + reader.BaseStream.Length.ToString());
 
@@ -326,7 +363,10 @@ namespace TRLevelReader
 
             for (int j = 0; j < RoomData.NumVertices; j++)
             {
-                TR2RoomVertex vertex = new TR2RoomVertex();
+                TR2RoomVertex vertex = new TR2RoomVertex()
+                {
+                    Vertex = new TRVertex()
+                };
 
                 vertex.Vertex.X = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
                 RoomDataOffset++;
@@ -435,12 +475,16 @@ namespace TRLevelReader
                 TRMesh mesh = new TRMesh();
 
                 //Centre
-                mesh.Centre.X = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                TRVertex centre = new TRVertex();
+
+                centre.X = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
                 MeshDataOffset++;
-                mesh.Centre.Y = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                centre.Y = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
                 MeshDataOffset++;
-                mesh.Centre.Z = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                centre.Z = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
                 MeshDataOffset++;
+
+                mesh.Centre = centre;
 
                 //Coll Radius
                 LowBytes = MeshData[MeshDataOffset];

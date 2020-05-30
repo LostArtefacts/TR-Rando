@@ -224,7 +224,7 @@ namespace TRLevelReader.Model
         /// <summary>
         /// NumBoxes * 8 bytes
         /// </summary>
-        public TR2Box Boxes { get; set; }
+        public TR2Box[] Boxes { get; set; }
 
         /// <summary>
         /// 4 bytes
@@ -299,7 +299,7 @@ namespace TRLevelReader.Model
         /// <summary>
         /// NumSoundDetails * 8 bytes
         /// </summary>
-        public TRSoundDetails SoundDetails { get; set; }
+        public TRSoundDetails[] SoundDetails { get; set; }
 
         /// <summary>
         /// 4 bytes
