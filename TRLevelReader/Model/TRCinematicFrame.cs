@@ -23,5 +23,21 @@ namespace TRLevelReader.Model
         public short FOV { get; set; }
 
         public short Roll { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" TargetX: " + TargetX);
+            sb.Append(" TargetY: " + TargetY);
+            sb.Append(" TargetZ: " + TargetZ);
+            sb.Append(" PosZ: " + PosZ);
+            sb.Append(" PosY: " + PosY);
+            sb.Append(" PosX: " + PosX);
+            sb.Append(" FOV: " + FOV);
+            sb.Append(" Roll: " + Roll);
+
+            return sb.ToString();
+        }
     }
 }

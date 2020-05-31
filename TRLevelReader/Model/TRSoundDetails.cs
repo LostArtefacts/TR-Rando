@@ -15,5 +15,17 @@ namespace TRLevelReader.Model
         public ushort Chance { get; set; }
 
         public ushort Characteristics { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" Sample: " + Sample);
+            sb.Append(" Volume: " + Volume);
+            sb.Append(" Chance: " + Chance);
+            sb.Append(" Characteristics: " + Characteristics.ToString("0x{0:X4}"));
+
+            return sb.ToString();
+        }
     }
 }

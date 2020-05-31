@@ -19,5 +19,19 @@ namespace TRLevelReader.Model
         public uint FrameOffset { get; set; }
 
         public ushort Animation { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" ID: " + ID);
+            sb.Append(" NumMeshes: " + NumMeshes);
+            sb.Append(" StartingMesh: " + StartingMesh);
+            sb.Append(" MeshTree: " + MeshTree);
+            sb.Append(" FrameOffset: " + FrameOffset);
+            sb.Append(" Animation: " + Animation);
+
+            return sb.ToString();
+        }
     }
 }

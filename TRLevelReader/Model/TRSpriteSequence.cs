@@ -13,5 +13,16 @@ namespace TRLevelReader.Model
         public short NegativeLength { get; set; }
 
         public short Offset { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" SpriteID: " + SpriteID);
+            sb.Append(" NegativeLength: " + NegativeLength);
+            sb.Append(" Offset: " + Offset);
+
+            return sb.ToString();
+        }
     }
 }

@@ -15,5 +15,17 @@ namespace TRLevelReader.Model
         public int YBottom { get; set; }
 
         public int YTop { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" X: " + X);
+            sb.Append(" Z: " + Z);
+            sb.Append(" YBottom: " + YBottom);
+            sb.Append(" YTop: " + YTop);
+
+            return sb.ToString();
+        }
     }
 }

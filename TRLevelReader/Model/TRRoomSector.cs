@@ -19,5 +19,19 @@ namespace TRLevelReader.Model
         public byte RoomAbove { get; set; }
 
         public sbyte Ceiling { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" FDIndex: " + FDIndex);
+            sb.Append(" BoxIndex: " + BoxIndex);
+            sb.Append(" RoomBelow: " + RoomBelow);
+            sb.Append(" Floor: " + Floor);
+            sb.Append(" RoomAbove: " + RoomAbove);
+            sb.Append(" Ceiling: " + Ceiling);
+
+            return sb.ToString();
+        }
     }
 }

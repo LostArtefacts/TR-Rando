@@ -15,5 +15,17 @@ namespace TRLevelReader.Model
         public byte Blue { get; set; }
 
         public byte Unused { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" Red: " + Red);
+            sb.Append(" Green: " + Green);
+            sb.Append(" Blue: " + Blue);
+            sb.Append(" Unused: " + Unused);
+
+            return sb.ToString();
+        }
     }
 }

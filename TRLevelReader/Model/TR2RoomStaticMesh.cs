@@ -21,5 +21,20 @@ namespace TRLevelReader.Model
         public ushort Intensity2 { get; set; }
 
         public ushort MeshID { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" X: " + X);
+            sb.Append(" Y: " + Y);
+            sb.Append(" Z: " + Z);
+            sb.Append(" Rotation: " + Rotation);
+            sb.Append(" Int1: " + Intensity1);
+            sb.Append(" Int2: " + Intensity2);
+            sb.Append(" MeshID: " + MeshID);
+
+            return sb.ToString();
+        }
     }
 }

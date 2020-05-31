@@ -17,5 +17,18 @@ namespace TRLevelReader.Model
         public TRBoundingBox CollisionBox { get; set; }
 
         public ushort Flags { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" ID: " + ID);
+            sb.Append(" Mesh: " + Mesh);
+            sb.Append(" VisibilityBox: {" + VisibilityBox.ToString() + "} ");
+            sb.Append(" CollisionBox: {" + CollisionBox.ToString() + "} ");
+            sb.Append(" Flags: " + Flags.ToString("0x{0:X4}"));
+
+            return sb.ToString();
+        }
     }
 }

@@ -17,5 +17,18 @@ namespace TRLevelReader.Model
         public short Room { get; set; }
 
         public ushort Flag { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" X: " + X);
+            sb.Append(" Y: " + Y);
+            sb.Append(" Z: " + Z);
+            sb.Append(" Room: " + Room);
+            sb.Append(" Flag: " + Flag.ToString("0x{0:X4}"));
+
+            return sb.ToString();
+        }
     }
 }

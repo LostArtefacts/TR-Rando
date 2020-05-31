@@ -47,15 +47,7 @@ namespace TRLevelReader
             //Colour palettes and textures
             level.Palette = PopulateColourPalette(reader.ReadBytes((int)MAX_PALETTE_SIZE * 3));
 
-            Log.LogV("-----Palette:");
-            Log.LogV(level.Palette);
-            Log.LogV("Position: " + reader.BaseStream.Position);
-
             level.Palette16 = PopulateColourPalette16(reader.ReadBytes((int)MAX_PALETTE_SIZE * 4));
-
-            Log.LogV("-----Palette16:");
-            Log.LogV(level.Palette16);
-            Log.LogV("Position: " + reader.BaseStream.Position);
 
             level.NumImages = reader.ReadUInt32();
 
@@ -75,10 +67,6 @@ namespace TRLevelReader
                 level.Images8[i].Pixels = reader.ReadBytes(256 * 256);
             }
 
-            Log.LogV("-----Texture8:");
-            Log.LogV(level.Images8);
-            Log.LogV("Position: " + reader.BaseStream.Position);
-
             //For each texture16 there are 256 * 256 * 2 bytes (131072)
             for (int i = 0; i < level.NumImages; i++)
             {
@@ -89,10 +77,6 @@ namespace TRLevelReader
                     level.Images16[i].Pixels[j] = reader.ReadUInt16();
                 }
             }
-
-            Log.LogV("-----Texture16:");
-            Log.LogV(level.Images16);
-            Log.LogV("Position: " + reader.BaseStream.Position);
 
             //Rooms
             level.Unused = reader.ReadUInt32();
@@ -178,10 +162,6 @@ namespace TRLevelReader
                 level.FloorData[i] = reader.ReadUInt16();
             }
 
-            Log.LogV("-----Floordata:");
-            Log.LogV(level.FloorData);
-            Log.LogV("Position: " + reader.BaseStream.Position);
-
             //Mesh Data
             //This tells us how much mesh data (# of words/uint16s) coming up
             //just like the rooms previously.
@@ -193,10 +173,6 @@ namespace TRLevelReader
                 TempMeshData[i] = reader.ReadUInt16();
             }
 
-            Log.LogV("-----Mesh Data:");
-            Log.LogV(TempMeshData);
-            Log.LogV("Position: " + reader.BaseStream.Position);
-
             //Mesh Pointers
             level.NumMeshPointers = reader.ReadUInt32();
             level.MeshPointers = new uint[level.NumMeshPointers];
@@ -205,10 +181,6 @@ namespace TRLevelReader
             {
                 level.MeshPointers[i] = reader.ReadUInt32();
             }
-
-            Log.LogV("-----Mesh Pointers:");
-            Log.LogV(level.MeshPointers);
-            Log.LogV("Position: " + reader.BaseStream.Position);
 
             //Mesh Construction
             level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, TempMeshData);

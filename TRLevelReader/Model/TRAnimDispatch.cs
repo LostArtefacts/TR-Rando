@@ -15,5 +15,17 @@ namespace TRLevelReader.Model
         public short NextAnimation { get; set; }
 
         public short NextFrame { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" Low: " + Low);
+            sb.Append(" High: " + High);
+            sb.Append(" NextAnimation: " + NextAnimation);
+            sb.Append(" NextFrame: " + NextFrame);
+
+            return sb.ToString();
+        }
     }
 }

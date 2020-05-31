@@ -12,5 +12,15 @@ namespace TRLevelReader.Model
         public short Vertex { get; set; }
 
         public short Texture { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" Vertex: " + Vertex);
+            sb.Append("Texture: " + Texture);
+
+            return sb.ToString();
+        }
     }
 }

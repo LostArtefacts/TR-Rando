@@ -25,5 +25,22 @@ namespace TRLevelReader.Model
         public short RightSide { get; set; }
 
         public short BottomSide { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" Atlas: " + Atlas);
+            sb.Append(" X: " + X);
+            sb.Append(" Y: " + Y);
+            sb.Append(" Width: " + Width);
+            sb.Append(" Height: " + Height);
+            sb.Append(" LeftSide: " + LeftSide);
+            sb.Append(" TopSide: " + TopSide);
+            sb.Append(" RightSide: " + RightSide);
+            sb.Append(" BottomSide: " + BottomSide);
+
+            return sb.ToString();
+        }
     }
 }

@@ -17,5 +17,18 @@ namespace TRLevelReader.Model
         public ushort SoundID { get; set; }
 
         public ushort Flags { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" X: " + X);
+            sb.Append(" Y: " + Y);
+            sb.Append(" Z: " + Z);
+            sb.Append(" SoundID: " + SoundID);
+            sb.Append(" Flags: " + Flags.ToString("0x{0:X4}"));
+
+            return sb.ToString();
+        }
     }
 }

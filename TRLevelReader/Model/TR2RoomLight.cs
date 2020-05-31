@@ -21,5 +21,20 @@ namespace TRLevelReader.Model
         public uint Fade1 { get; set; }
 
         public uint Fade2 { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" X: " + X);
+            sb.Append(" Y: " + Y);
+            sb.Append(" Z: " + Z);
+            sb.Append(" Int1: " + Intensity1);
+            sb.Append(" Int2: " + Intensity2);
+            sb.Append(" Fade1: " + Fade1);
+            sb.Append(" Fade2: " + Fade2);
+
+            return sb.ToString();
+        }
     }
 }
