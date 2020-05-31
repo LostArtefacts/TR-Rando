@@ -254,6 +254,7 @@ namespace TRLevelReader
 
             //Mesh Trees
             level.NumMeshTrees = reader.ReadUInt32();
+            level.NumMeshTrees /= 4;
             level.MeshTrees = new TRMeshTreeNode[level.NumMeshTrees];
             for (int i = 0; i < level.NumMeshTrees; i++)
             {
