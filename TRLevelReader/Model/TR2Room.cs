@@ -61,5 +61,14 @@ namespace TRLevelReader.Model
 
         //2 bytes
         public short Flags { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(base.ToString());
+
+            sb.Append(" RoomInfo: { " + Info.ToString() + "}");
+
+            return sb.ToString();
+        }
     }
 }

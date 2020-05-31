@@ -257,10 +257,6 @@ namespace TRLevelReader
                 level.Frames[i] = reader.ReadUInt16();
             }
 
-            Log.LogV("-----Frames:");
-            Log.LogV(level.Frames);
-            Log.LogV("Position: " + reader.BaseStream.Position);
-
             //Models
             level.NumModels = reader.ReadUInt32();
             level.Models = new TRModel[level.NumModels];
@@ -380,11 +376,6 @@ namespace TRLevelReader
                 level.Zones[i] = reader.ReadInt16();
             }
 
-            Log.LogV("-----Overlaps + Zones:");
-            Log.LogV(level.Overlaps);
-            Log.LogV(level.Zones);
-            Log.LogV("Position: " + reader.BaseStream.Position);
-
             //Animated Textures
             level.NumAnimatedTextures = reader.ReadUInt32();
             level.AnimatedTextures = new ushort[level.NumAnimatedTextures];
@@ -393,10 +384,6 @@ namespace TRLevelReader
             {
                 level.AnimatedTextures[i] = reader.ReadUInt16();
             }
-
-            Log.LogV("-----Animated Textures:");
-            Log.LogV(level.AnimatedTextures);
-            Log.LogV("Position: " + reader.BaseStream.Position);
 
             //Entities
             level.NumEntities = reader.ReadUInt32();
@@ -418,10 +405,6 @@ namespace TRLevelReader
             {
                 level.LightMap[i] = reader.ReadByte();
             }
-
-            Log.LogV("-----LightMap:");
-            Log.LogV(level.LightMap);
-            Log.LogV("Position: " + reader.BaseStream.Position);
 
             //Cinematic Frames
             level.NumCinematicFrames = reader.ReadUInt16();
@@ -445,10 +428,6 @@ namespace TRLevelReader
                 level.DemoData[i] = reader.ReadByte();
             }
 
-            Log.LogV("-----Demo Data:");
-            Log.LogV(level.DemoData);
-            Log.LogV("Position: " + reader.BaseStream.Position);
-
             //Sound Map (370 shorts = 740 bytes) & Sound Details
             level.SoundMap = new short[370];
             level.NumSoundDetails = reader.ReadUInt32();
@@ -458,10 +437,6 @@ namespace TRLevelReader
             {
                 level.SoundMap[i] = reader.ReadInt16();
             }
-
-            Log.LogV("-----Sound Map:");
-            Log.LogV(level.SoundMap);
-            Log.LogV("Position: " + reader.BaseStream.Position);
 
             for (int i = 0; i < level.NumSoundDetails; i++)
             {
@@ -480,10 +455,6 @@ namespace TRLevelReader
             {
                 level.SampleIndices[i] = reader.ReadUInt32();
             }
-
-            Log.LogV("-----Samples:");
-            Log.LogV(level.SampleIndices);
-            Log.LogV("Position: " + reader.BaseStream.Position);
 
             Log.LogV("Bytes Read: " + reader.BaseStream.Position.ToString() + "/" + reader.BaseStream.Length.ToString());
 
