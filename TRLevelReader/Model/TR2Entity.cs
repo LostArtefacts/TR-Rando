@@ -38,7 +38,7 @@ namespace TRLevelReader.Model
             sb.Append(" Angle: " + Angle);
             sb.Append(" Int1: " + Intensity1);
             sb.Append(" Int2: " + Intensity2);
-            sb.Append(" Flags " + Flags.ToString("0x{0:X4}"));
+            sb.Append(" Flags " + Flags.ToString("X4"));
 
             return sb.ToString();
         }

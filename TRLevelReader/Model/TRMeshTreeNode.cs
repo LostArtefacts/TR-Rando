@@ -20,7 +20,7 @@ namespace TRLevelReader.Model
         {
             StringBuilder sb = new StringBuilder(base.ToString());
 
-            sb.Append(" Flags: " + Flags.ToString("0x{0:X8}"));
+            sb.Append(" Flags: " + Flags.ToString("X8"));
             sb.Append(" OffsetX: " + OffsetX);
             sb.Append(" OffsetY: " + OffsetY);
             sb.Append(" OffsetZ: " + OffsetZ);

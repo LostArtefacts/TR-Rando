@@ -41,7 +41,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Version:");
-            Log.LogV(level.Version);
+            Log.LogV(level.Version.ToString("X8"));
             Log.LogV("Position: " + reader.BaseStream.Position);
 
             //Colour palettes and textures
@@ -77,6 +77,10 @@ namespace TRLevelReader
                     level.Images16[i].Pixels[j] = reader.ReadUInt16();
                 }
             }
+
+            Log.LogV("-----Palettes & Textures:");
+            Log.LogV("Images: " + level.NumImages);
+            Log.LogV("Position: " + reader.BaseStream.Position);
 
             //Rooms
             level.Unused = reader.ReadUInt32();
@@ -150,6 +154,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Rooms:");
+            Log.LogV(level.NumRooms);
             Log.LogV(level.Rooms);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -161,6 +166,10 @@ namespace TRLevelReader
             {
                 level.FloorData[i] = reader.ReadUInt16();
             }
+
+            Log.LogV("-----Floordata:");
+            Log.LogV("Count: " + level.NumFloorData);
+            Log.LogV("Position: " + reader.BaseStream.Position);
 
             //Mesh Data
             //This tells us how much mesh data (# of words/uint16s) coming up
@@ -183,10 +192,12 @@ namespace TRLevelReader
             }
 
             //Mesh Construction
-            level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, TempMeshData);
+            //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, TempMeshData);
 
             Log.LogV("-----Meshes:");
-            Log.LogV(level.Meshes);
+            Log.LogV("Mesh Pointers: " + level.NumMeshPointers);
+            Log.LogV("Mesh Data Words: " + level.NumMeshData);
+            //Log.LogV(level.Meshes);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
             //Animations
@@ -198,6 +209,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Animations:");
+            Log.LogV("Count: " + level.NumAnimations);
             Log.LogV(level.Animations);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -210,6 +222,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----State Changes:");
+            Log.LogV("Count: " + level.NumStateChanges);
             Log.LogV(level.StateChanges);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -222,6 +235,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Animation Dispatches:");
+            Log.LogV("Count: " + level.NumAnimDispatches);
             Log.LogV(level.AnimDispatches);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -234,6 +248,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Animation Commands:");
+            Log.LogV("Count: " + level.NumAnimCommands);
             Log.LogV(level.AnimCommands);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -246,6 +261,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Mesh Trees:");
+            Log.LogV("Count: " + level.NumMeshTrees);
             Log.LogV(level.MeshTrees);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -257,6 +273,10 @@ namespace TRLevelReader
                 level.Frames[i] = reader.ReadUInt16();
             }
 
+            Log.LogV("-----Frames:");
+            Log.LogV("Count: " + level.NumFrames);
+            Log.LogV("Position: " + reader.BaseStream.Position);
+
             //Models
             level.NumModels = reader.ReadUInt32();
             level.Models = new TRModel[level.NumModels];
@@ -267,6 +287,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Models:");
+            Log.LogV("Count: " + level.NumModels);
             Log.LogV(level.Models);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -280,6 +301,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Static Meshes:");
+            Log.LogV("Count: " + level.NumStaticMeshes);
             Log.LogV(level.StaticMeshes);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -293,6 +315,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Object Textures:");
+            Log.LogV("Count: " + level.NumObjectTextures);
             Log.LogV(level.ObjectTextures);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -306,6 +329,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Sprite Textures:");
+            Log.LogV("Count: " + level.NumSpriteTextures);
             Log.LogV(level.SpriteTextures);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -319,6 +343,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Sprite Sequences:");
+            Log.LogV("Count: " + level.NumSpriteSequences);
             Log.LogV(level.SpriteSequences);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -332,6 +357,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Cameras:");
+            Log.LogV("Count: " + level.NumCameras);
             Log.LogV(level.Cameras);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -345,6 +371,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Sound Sources:");
+            Log.LogV("Count: " + level.NumSoundSources);
             Log.LogV(level.SoundSources);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -358,6 +385,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Boxes:");
+            Log.LogV("Count: " + level.NumBoxes);
             Log.LogV(level.Boxes);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -376,6 +404,11 @@ namespace TRLevelReader
                 level.Zones[i] = reader.ReadInt16();
             }
 
+            Log.LogV("-----Zones & Overlaps:");
+            Log.LogV("NumOverlaps: " + level.NumOverlaps);
+            Log.LogV("NumZones: " + level.Zones.Count());
+            Log.LogV("Position: " + reader.BaseStream.Position);
+
             //Animated Textures
             level.NumAnimatedTextures = reader.ReadUInt32();
             level.AnimatedTextures = new ushort[level.NumAnimatedTextures];
@@ -384,6 +417,10 @@ namespace TRLevelReader
             {
                 level.AnimatedTextures[i] = reader.ReadUInt16();
             }
+
+            Log.LogV("-----Animated Textures:");
+            Log.LogV("Count: " + level.NumAnimatedTextures);
+            Log.LogV("Position: " + reader.BaseStream.Position);
 
             //Entities
             level.NumEntities = reader.ReadUInt32();
@@ -395,6 +432,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Entities:");
+            Log.LogV("Count: " + level.NumEntities);
             Log.LogV(level.Entities);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -406,6 +444,8 @@ namespace TRLevelReader
                 level.LightMap[i] = reader.ReadByte();
             }
 
+            Log.LogV("-----Lightmap: " + reader.BaseStream.Position);
+
             //Cinematic Frames
             level.NumCinematicFrames = reader.ReadUInt16();
             level.CinematicFrames = new TRCinematicFrame[level.NumCinematicFrames];
@@ -416,6 +456,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Cinematic Frames:");
+            Log.LogV("Count: " + level.NumCinematicFrames);
             Log.LogV(level.CinematicFrames);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -428,15 +469,20 @@ namespace TRLevelReader
                 level.DemoData[i] = reader.ReadByte();
             }
 
+            Log.LogV("-----Demo Data: Count - " + level.NumDemoData + " Position - " + reader.BaseStream.Position);
+
             //Sound Map (370 shorts = 740 bytes) & Sound Details
             level.SoundMap = new short[370];
-            level.NumSoundDetails = reader.ReadUInt32();
-            level.SoundDetails = new TRSoundDetails[level.NumSoundDetails];
 
             for (int i = 0; i < level.SoundMap.Count(); i++)
             {
                 level.SoundMap[i] = reader.ReadInt16();
             }
+
+            Log.LogV("-----Sound Map: " + reader.BaseStream.Position);
+
+            level.NumSoundDetails = reader.ReadUInt32();
+            level.SoundDetails = new TRSoundDetails[level.NumSoundDetails];
 
             for (int i = 0; i < level.NumSoundDetails; i++)
             {
@@ -444,6 +490,7 @@ namespace TRLevelReader
             }
 
             Log.LogV("-----Sound Details:");
+            Log.LogV("Count: " + level.NumSoundDetails);
             Log.LogV(level.SoundDetails);
             Log.LogV("Position: " + reader.BaseStream.Position);
 
@@ -456,7 +503,10 @@ namespace TRLevelReader
                 level.SampleIndices[i] = reader.ReadUInt32();
             }
 
-            Log.LogV("Bytes Read: " + reader.BaseStream.Position.ToString() + "/" + reader.BaseStream.Length.ToString());
+            Log.LogV("-----Samples:");
+            Log.LogV("Count: " + level.NumSampleIndices);
+
+            Log.LogV("Total Bytes Read: " + reader.BaseStream.Position.ToString() + "/" + reader.BaseStream.Length.ToString());
 
             Debug.Assert(reader.BaseStream.Position == reader.BaseStream.Length);
 

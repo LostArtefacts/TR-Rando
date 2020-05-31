@@ -14,7 +14,7 @@ namespace TRLevelReader.Model
         {
             StringBuilder sb = new StringBuilder(base.ToString());
 
-            sb.Append(" Value: " + Value.ToString("0x{0:X4}"));
+            sb.Append(" Value: " + Value.ToString("X4"));
 
             return sb.ToString();
         }

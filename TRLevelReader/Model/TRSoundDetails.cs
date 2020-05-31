@@ -23,7 +23,7 @@ namespace TRLevelReader.Model
             sb.Append(" Sample: " + Sample);
             sb.Append(" Volume: " + Volume);
             sb.Append(" Chance: " + Chance);
-            sb.Append(" Characteristics: " + Characteristics.ToString("0x{0:X4}"));
+            sb.Append(" Characteristics: " + Characteristics.ToString("X4"));
 
             return sb.ToString();
         }

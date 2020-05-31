@@ -26,7 +26,7 @@ namespace TRLevelReader.Model
             sb.Append(" Y: " + Y);
             sb.Append(" Z: " + Z);
             sb.Append(" Room: " + Room);
-            sb.Append(" Flag: " + Flag.ToString("0x{0:X4}"));
+            sb.Append(" Flag: " + Flag.ToString("X4"));
 
             return sb.ToString();
         }

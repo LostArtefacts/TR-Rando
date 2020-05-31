@@ -18,7 +18,7 @@ namespace TRLevelReader.Model
             StringBuilder sb = new StringBuilder(base.ToString());
 
             sb.Append(" Vertex: " + Vertex);
-            sb.Append("Texture: " + Texture);
+            sb.Append(" Texture: " + Texture);
 
             return sb.ToString();
         }

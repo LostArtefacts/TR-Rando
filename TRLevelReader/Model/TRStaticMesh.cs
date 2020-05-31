@@ -26,7 +26,7 @@ namespace TRLevelReader.Model
             sb.Append(" Mesh: " + Mesh);
             sb.Append(" VisibilityBox: {" + VisibilityBox.ToString() + "} ");
             sb.Append(" CollisionBox: {" + CollisionBox.ToString() + "} ");
-            sb.Append(" Flags: " + Flags.ToString("0x{0:X4}"));
+            sb.Append(" Flags: " + Flags.ToString("X4"));
 
             return sb.ToString();
         }
