@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TR2Entity
+    public class TR2Entity : ISerializableCompact
     {
         public short TypeID { get; set; }
 
@@ -41,6 +43,27 @@ namespace TRLevelReader.Model
             sb.Append(" Flags " + Flags.ToString("X4"));
 
             return sb.ToString();
+        }
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(TypeID);
+                    writer.Write(Room);
+                    writer.Write(X);
+                    writer.Write(Y);
+                    writer.Write(Z);
+                    writer.Write(Angle);
+                    writer.Write(Intensity1);
+                    writer.Write(Intensity2);
+                    writer.Write(Flags);
+                }
+
+                return stream.ToArray();
+            }
         }
     }
 }

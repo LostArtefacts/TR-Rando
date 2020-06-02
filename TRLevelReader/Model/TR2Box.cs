@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TR2Box
+    public class TR2Box : ISerializableCompact
     {
         public byte ZMin { get; set; }
 
@@ -32,6 +34,24 @@ namespace TRLevelReader.Model
             sb.Append(" OverlapIndex: " + OverlapIndex);
 
             return sb.ToString();
+        }
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(ZMin);
+                    writer.Write(ZMax);
+                    writer.Write(XMin);
+                    writer.Write(XMax);
+                    writer.Write(TrueFloor);
+                    writer.Write(OverlapIndex);
+                }
+
+                return stream.ToArray();
+            }
         }
     }
 }
