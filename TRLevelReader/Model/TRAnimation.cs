@@ -17,10 +17,10 @@ namespace TRLevelReader.Model
         public ushort StateID { get; set; }
 
         //fixed Speed - 4 bytes (2 for whole 2 for frac);
-        public FixedFloat<short, ushort> Speed { get; set; }
+        public FixedFloat32 Speed { get; set; }
 
         //fixed Accel - 4 bytes (2 for whole 2 for frac);
-        public FixedFloat<short, ushort> Accel { get; set; }
+        public FixedFloat32 Accel { get; set; }
 
         public ushort FrameStart { get; set; }
 

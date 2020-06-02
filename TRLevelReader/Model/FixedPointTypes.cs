@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
@@ -20,6 +22,40 @@ namespace TRLevelReader.Model
             sb.Append(" Fraction: " + Fraction);
 
             return sb.ToString();
+        }
+    }
+
+    public sealed class FixedFloat32 : FixedFloat<short, ushort>, ISerializableCompact
+    {
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(Whole);
+                    writer.Write(Fraction);
+                }
+
+                return stream.ToArray();
+            }
+        }
+    }
+
+    public sealed class FixedFloat16 : FixedFloat<byte, byte>, ISerializableCompact
+    {
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(Whole);
+                    writer.Write(Fraction);
+                }
+
+                return stream.ToArray();
+            }
         }
     }
 }

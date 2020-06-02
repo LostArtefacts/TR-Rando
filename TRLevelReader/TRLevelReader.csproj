@@ -80,6 +80,7 @@
     <Compile Include="Model\TRTexImage8.cs" />
     <Compile Include="Model\TRVertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\ISerializableCompact.cs" />
     <Compile Include="TR2FileReadUtilities.cs" />
     <Compile Include="TR2LevelReader.cs" />
     <Compile Include="UnsafeConversions.cs" />

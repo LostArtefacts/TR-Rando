@@ -83,12 +83,12 @@ namespace TRLevelReader
                 FrameRate = reader.ReadByte(),
                 FrameSize = reader.ReadByte(),
                 StateID = reader.ReadUInt16(),
-                Speed = new FixedFloat<short, ushort>
+                Speed = new FixedFloat32
                 {
                     Whole = reader.ReadInt16(),
                     Fraction = reader.ReadUInt16()
                 },
-                Accel = new FixedFloat<short, ushort>
+                Accel = new FixedFloat32
                 {
                     Whole = reader.ReadInt16(),
                     Fraction = reader.ReadUInt16()
@@ -195,26 +195,26 @@ namespace TRLevelReader
                 {
                     new TRObjectTextureVert 
                     {
-                        XCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
-                        YCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                        XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                     },
 
                     new TRObjectTextureVert
                     {
-                        XCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
-                        YCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                        XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                     },
 
                     new TRObjectTextureVert
                     {
-                        XCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
-                        YCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                        XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                     },
 
                     new TRObjectTextureVert
                     {
-                        XCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
-                        YCoordinate = new FixedFloat<byte, byte> { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                        XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
                     }
                 }
             };
