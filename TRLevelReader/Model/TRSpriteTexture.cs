@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TRSpriteTexture
+    public class TRSpriteTexture : ISerializableCompact
     {
         public ushort Atlas { get; set; }
 
@@ -41,6 +43,27 @@ namespace TRLevelReader.Model
             sb.Append(" BottomSide: " + BottomSide);
 
             return sb.ToString();
+        }
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(Atlas);
+                    writer.Write(X);
+                    writer.Write(Y);
+                    writer.Write(Width);
+                    writer.Write(Height);
+                    writer.Write(LeftSide);
+                    writer.Write(TopSide);
+                    writer.Write(RightSide);
+                    writer.Write(BottomSide);
+                }
+
+                return stream.ToArray();
+            }
         }
     }
 }

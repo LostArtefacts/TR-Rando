@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TRRoomInfo
+    public class TRRoomInfo : ISerializableCompact
     {
         public int X { get; set; }
 
@@ -26,6 +28,22 @@ namespace TRLevelReader.Model
             sb.Append(" YTop: " + YTop);
 
             return sb.ToString();
+        }
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(X);
+                    writer.Write(Z);
+                    writer.Write(YBottom);
+                    writer.Write(YTop);
+                }
+
+                return stream.ToArray();
+            }
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TRSoundSource
+    public class TRSoundSource : ISerializableCompact
     {
         public int X { get; set; }
 
@@ -29,6 +31,23 @@ namespace TRLevelReader.Model
             sb.Append(" Flags: " + Flags.ToString("X4"));
 
             return sb.ToString();
+        }
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(X);
+                    writer.Write(Y);
+                    writer.Write(Z);
+                    writer.Write(SoundID);
+                    writer.Write(Flags);
+                }
+
+                return stream.ToArray();
+            }
         }
     }
 }

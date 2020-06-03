@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
     //6 bytes
-    public class TRVertex
+    public class TRVertex : ISerializableCompact
     {
         public short X { get; set; }
 
@@ -24,6 +26,21 @@ namespace TRLevelReader.Model
             sb.Append(" Z: " + Z);
 
             return sb.ToString();
+        }
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(X);
+                    writer.Write(Y);
+                    writer.Write(Z);
+                }
+
+                return stream.ToArray();
+            }
         }
     }
 }
