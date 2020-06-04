@@ -177,6 +177,24 @@
     <None Include="xian.TR2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Zones\BOAT.TR2-Zones.json" />
+    <None Include="Zones\CATACOMB.TR2-Zones.json" />
+    <None Include="Zones\DECK.TR2-Zones.json" />
+    <None Include="Zones\EMPRTOMB.TR2-Zones.json" />
+    <None Include="Zones\FLOATING.TR2-Zones.json" />
+    <None Include="Zones\HOUSE.TR2-Zones.json" />
+    <None Include="Zones\ICECAVE.TR2-Zones.json" />
+    <None Include="Zones\KEEL.TR2-Zones.json" />
+    <None Include="Zones\LIVING.TR2-Zones.json" />
+    <None Include="Zones\MONASTRY.TR2-Zones.json" />
+    <None Include="Zones\OPERA.TR2-Zones.json" />
+    <None Include="Zones\PLATFORM.TR2-Zones.json" />
+    <None Include="Zones\RIG.TR2-Zones.json" />
+    <None Include="Zones\SKIDOO.TR2-Zones.json" />
+    <None Include="Zones\UNWATER.TR2-Zones.json" />
+    <None Include="Zones\VENICE.TR2-Zones.json" />
+    <None Include="Zones\WALL.TR2-Zones.json" />
+    <None Include="Zones\XIAN.TR2-Zones.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -210,5 +228,6 @@
       <Name>TRLevelReader</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
