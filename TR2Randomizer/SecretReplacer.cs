@@ -621,7 +621,7 @@ namespace TR2Randomizer
 
         private ZonedLocationCollection AssignLocationsToZones(TRLevel lvl, List<Location> locations)
         {
-            Dictionary<int, List<int>> ZoneMap = JsonConvert.DeserializeObject<Dictionary<int, List<int>>>(File.ReadAllText(lvl.Name + "-Zones.json"));
+            Dictionary<int, List<int>> ZoneMap = JsonConvert.DeserializeObject<Dictionary<int, List<int>>>(File.ReadAllText(Directory.GetCurrentDirectory() + "\\Zones\\" + lvl.Name + "-Zones.json"));
 
             return new ZonedLocationCollection
             {
