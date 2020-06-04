@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 
@@ -509,21 +510,23 @@ namespace TR2Randomizer
                     return;
                 }
 
+                ZonedLocationCollection ZonedLocations = AssignLocationsToZones(lvl, LevelLocations);
+
                 do
                 {
-                    lvl.GoldSecret.Location = LevelLocations[_generator.Next(0, LevelLocations.Count)];
+                    lvl.GoldSecret.Location = ZonedLocations.ZoneOneLocations[_generator.Next(0, LevelLocations.Count)];
                 } while (lvl.GoldSecret.Location.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false);
                 
 
                 do
                 {
-                    lvl.JadeSecret.Location = LevelLocations[_generator.Next(0, LevelLocations.Count)];
+                    lvl.JadeSecret.Location = ZonedLocations.ZoneTwoLocations[_generator.Next(0, LevelLocations.Count)];
                 } while ((lvl.JadeSecret.Location.Room == lvl.GoldSecret.Location.Room) || 
                         (lvl.JadeSecret.Location.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
 
                 do
                 {
-                    lvl.StoneSecret.Location = LevelLocations[_generator.Next(0, LevelLocations.Count)];
+                    lvl.StoneSecret.Location = ZonedLocations.ZoneThreeLocations[_generator.Next(0, LevelLocations.Count)];
                 } while ((lvl.StoneSecret.Location.Room == lvl.GoldSecret.Location.Room) || 
                         (lvl.StoneSecret.Location.Room == lvl.JadeSecret.Location.Room) ||
                         (lvl.StoneSecret.Location.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
@@ -614,6 +617,26 @@ namespace TR2Randomizer
                 trmod = Process.Start(trmodLaunch);
                 trmod.WaitForExit(1000);
             }
+        }
+
+        private ZonedLocationCollection AssignLocationsToZones(TRLevel lvl, List<Location> locations)
+        {
+            Dictionary<int, List<int>> ZoneMap = JsonConvert.DeserializeObject<Dictionary<int, List<int>>>(File.ReadAllText(lvl.Name + "-Zones.json"));
+
+            return new ZonedLocationCollection
+            {
+                ZoneOneLocations = (from loc in locations
+                                    where ZoneMap[0].Contains(loc.Room)
+                                    select loc).ToList(),
+
+                ZoneTwoLocations = (from loc in locations
+                                    where ZoneMap[1].Contains(loc.Room)
+                                    select loc).ToList(),
+                
+                ZoneThreeLocations = (from loc in locations
+                                      where ZoneMap[2].Contains(loc.Room)
+                                      select loc).ToList()
+            };
         }
 
         public void Replace(int seed)

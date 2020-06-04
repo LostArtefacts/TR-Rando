@@ -81,6 +81,7 @@
     <Compile Include="SecretType.cs" />
     <Compile Include="TRItem.cs" />
     <Compile Include="TRLevel.cs" />
+    <Compile Include="ZonedLocationCollection.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
