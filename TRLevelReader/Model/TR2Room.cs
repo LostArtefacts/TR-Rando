@@ -73,11 +73,6 @@ namespace TRLevelReader.Model
                 {
                     writer.Write(Info.Serialize());
                     writer.Write(NumDataWords);
-                    
-                    foreach (ushort word in Data)
-                    {
-                        writer.Write(word);
-                    }
 
                     writer.Write(RoomData.Serialize());
                     writer.Write(NumPortals);

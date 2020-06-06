@@ -75,6 +75,11 @@ namespace TRLevelReader.Model
         public uint NumMeshData { get; set; }
 
         /// <summary>
+        /// 2 * NumMeshData, holds the raw data stored in Meshes
+        /// </summary>
+        public ushort[] RawMeshData { get; set; }
+
+        /// <summary>
         /// Variable
         /// </summary>
         public TRMesh[] Meshes { get; set; }
@@ -337,7 +342,12 @@ namespace TRLevelReader.Model
                     writer.Write(NumFloorData);
                     foreach (ushort data in FloorData) { writer.Write(data); }
                     writer.Write(NumMeshData);
-                    foreach (TRMesh mesh in Meshes) { writer.Write(mesh.Serialize()); }
+
+                    //Because mesh construction still hasnt been resolved, we will
+                    //just write the raw mesh data as words for testing
+                    //foreach (TRMesh mesh in Meshes) { writer.Write(mesh.Serialize()); }
+                    foreach (ushort word in RawMeshData) { writer.Write(word); }
+
                     writer.Write(NumMeshPointers);
                     foreach (uint ptr in MeshPointers) { writer.Write(ptr); }
                     writer.Write(NumAnimations);

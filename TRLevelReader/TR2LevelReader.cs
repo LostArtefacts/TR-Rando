@@ -175,11 +175,11 @@ namespace TRLevelReader
             //This tells us how much mesh data (# of words/uint16s) coming up
             //just like the rooms previously.
             level.NumMeshData = reader.ReadUInt32();
-            ushort[] TempMeshData = new ushort[level.NumMeshData];
+            level.RawMeshData = new ushort[level.NumMeshData];
 
             for (int i = 0; i < level.NumMeshData; i++)
             {
-                TempMeshData[i] = reader.ReadUInt16();
+                level.RawMeshData[i] = reader.ReadUInt16();
             }
 
             //Mesh Pointers
@@ -192,7 +192,7 @@ namespace TRLevelReader
             }
 
             //Mesh Construction
-            //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, TempMeshData);
+            //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, level.RawMeshData);
 
             Log.LogV("-----Meshes:");
             Log.LogV("Mesh Pointers: " + level.NumMeshPointers);
