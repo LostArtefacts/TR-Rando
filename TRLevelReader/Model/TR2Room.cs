@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.DesignerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TR2Room
+    public class TR2Room : ISerializableCompact
     {
         //16 bytes
         public TRRoomInfo Info { get; set; }
@@ -61,6 +64,61 @@ namespace TRLevelReader.Model
 
         //2 bytes
         public short Flags { get; set; }
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(Info.Serialize());
+                    writer.Write(NumDataWords);
+                    
+                    foreach (ushort word in Data)
+                    {
+                        writer.Write(word);
+                    }
+
+                    writer.Write(RoomData.Serialize());
+                    writer.Write(NumPortals);
+
+                    foreach (TRRoomPortal portal in Portals)
+                    {
+                        writer.Write(portal.Serialize());
+                    }
+
+                    writer.Write(NumZSectors);
+                    writer.Write(NumXSectors);
+
+                    foreach (TRRoomSector sector in SectorList)
+                    {
+                        writer.Write(sector.Serialize());
+                    }
+
+                    writer.Write(AmbientIntensity);
+                    writer.Write(AmbientIntensity2);
+                    writer.Write(LightMode);
+                    writer.Write(NumLights);
+
+                    foreach (TR2RoomLight light in Lights)
+                    {
+                        writer.Write(light.Serialize());
+                    }
+
+                    writer.Write(NumStaticMeshes);
+
+                    foreach (TR2RoomStaticMesh mesh in StaticMeshes)
+                    {
+                        writer.Write(mesh.Serialize());
+                    }
+
+                    writer.Write(AlternateRoom);
+                    writer.Write(Flags);
+                }
+
+                return stream.ToArray();
+            }
+        }
 
         public override string ToString()
         {
