@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TRMesh
+    public class TRMesh : ISerializableCompact
     {
         //6 Bytes
         public TRVertex Centre { get; set; }
@@ -52,5 +54,66 @@ namespace TRLevelReader.Model
 
         //NumColouredTriangles * 8 bytes
         public TRFace3[] ColouredTriangles { get; set; }
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(Centre.Serialize());
+                    writer.Write(CollRadius);
+                    writer.Write(NumVetices);
+                    
+                    foreach (TRVertex vert in Vertices)
+                    {
+                        writer.Write(vert.Serialize());
+                    }
+
+                    writer.Write(NumNormals);
+
+                    if (NumNormals > 0)
+                    {
+                        foreach (TRVertex normal in Normals)
+                        {
+                            writer.Write(normal.Serialize());
+                        }
+                    }
+                    else
+                    {
+                        foreach (ushort light in Lights)
+                        {
+                            writer.Write(light);
+                        }
+                    }
+
+                    writer.Write(NumTexturedRectangles);
+                    foreach (TRFace4 face in TexturedRectangles)
+                    {
+                        writer.Write(face.Serialize());
+                    }
+
+                    writer.Write(NumTexturedTriangles);
+                    foreach (TRFace3 face in TexturedTriangles)
+                    {
+                        writer.Write(face.Serialize());
+                    }
+
+                    writer.Write(NumColouredRectangles);
+                    foreach (TRFace4 face in ColouredRectangles)
+                    {
+                        writer.Write(face.Serialize());
+                    }
+
+                    writer.Write(NumColouredTriangles);
+                    foreach (TRFace3 face in ColouredTriangles)
+                    {
+                        writer.Write(face.Serialize());
+                    }
+                }
+
+                return stream.ToArray();
+            }
+        }
     }
 }

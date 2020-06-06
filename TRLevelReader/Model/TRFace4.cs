@@ -1,18 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
     //10 bytes - rosetta stone says 12, i think thats a mistype/miscalc
-    public class TRFace4
+    public class TRFace4 : ISerializableCompact
     {
         //4 vertices in a quad
         public ushort[] Vertices { get; set; }
 
         public ushort Texture { get; set; }
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    foreach(ushort vert in Vertices)
+                    {
+                        writer.Write(vert);
+                    }
+
+                    writer.Write(Texture);
+                }
+
+                return stream.ToArray();
+            }
+        }
 
         public override string ToString()
         {

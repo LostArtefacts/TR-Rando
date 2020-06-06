@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TRAnimation
+    public class TRAnimation : ISerializableCompact
     {
         public uint FrameOffset { get; set; }
 
@@ -37,5 +39,31 @@ namespace TRLevelReader.Model
         public ushort NumAnimCommands { get; set; }
 
         public ushort AnimCommand { get; set; }
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(FrameOffset);
+                    writer.Write(FrameRate);
+                    writer.Write(FrameSize);
+                    writer.Write(StateID);
+                    writer.Write(Speed.Serialize());
+                    writer.Write(Accel.Serialize());
+                    writer.Write(FrameStart);
+                    writer.Write(FrameEnd);
+                    writer.Write(NextAnimation);
+                    writer.Write(NextFrame);
+                    writer.Write(NumStateChanges);
+                    writer.Write(StateChangeOffset);
+                    writer.Write(NumAnimCommands);
+                    writer.Write(AnimCommand);
+                }
+
+                return stream.ToArray();
+            }
+        }
     }
 }

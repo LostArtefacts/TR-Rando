@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TRRoomData
+    public class TRRoomData : ISerializableCompact
     {
         // 2 bytes
         public short NumVertices { get; set; }
@@ -31,5 +33,44 @@ namespace TRLevelReader.Model
 
         // NumSprites * 4 bytes bytes
         public TRRoomSprite[] Sprites { get; set; }
+
+        public byte[] Serialize()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(NumVertices);
+
+                    foreach (TR2RoomVertex vert in Vertices)
+                    {
+                        writer.Write(vert.Serialize());
+                    }
+
+                    writer.Write(NumRectangles);
+
+                    foreach (TRFace4 face in Rectangles)
+                    {
+                        writer.Write(face.Serialize());
+                    }
+
+                    writer.Write(NumTriangles);
+
+                    foreach (TRFace3 face in Triangles)
+                    {
+                        writer.Write(face.Serialize());
+                    }
+
+                    writer.Write(NumSprites);
+
+                    foreach (TRRoomSprite sprite in Sprites)
+                    {
+                        writer.Write(sprite.Serialize());
+                    }
+                }
+
+                return stream.ToArray();
+            }
+        }
     }
 }
