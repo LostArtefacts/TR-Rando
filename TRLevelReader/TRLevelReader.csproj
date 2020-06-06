@@ -83,6 +83,7 @@
     <Compile Include="Serialization\ISerializableCompact.cs" />
     <Compile Include="TR2FileReadUtilities.cs" />
     <Compile Include="TR2LevelReader.cs" />
+    <Compile Include="TR2LevelWriter.cs" />
     <Compile Include="UnsafeConversions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
