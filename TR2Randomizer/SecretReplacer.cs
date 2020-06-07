@@ -30,7 +30,8 @@ namespace TR2Randomizer
         {
             PlaceAll = false;
 
-            _levels = LevelNames.AsList;
+            //_levels = LevelNames.AsList;
+            _levels = new List<string> { LevelNames.GW };
 
             _reader = new TR2LevelReader();
             _writer = new TR2LevelWriter();
