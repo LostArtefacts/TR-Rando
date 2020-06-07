@@ -30,8 +30,7 @@ namespace TR2Randomizer
         {
             PlaceAll = false;
 
-            //_levels = LevelNames.AsList;
-            _levels = new List<string> { LevelNames.GW };
+            _levels = LevelNames.AsList;
 
             _reader = new TR2LevelReader();
             _writer = new TR2LevelWriter();
@@ -53,6 +52,24 @@ namespace TR2Randomizer
                 Location GoldSecret;
                 Location JadeSecret;
                 Location StoneSecret;
+
+                //If there a are no locations in a zone, open up the whole pool as a choice for a secret.
+                //This shouldn't really ever happen, but in development I have simply split the levels in
+                //3 parts for testing, so there may be areas with no location.
+                if (ZonedLocations.ZoneOneLocations.Count == 0)
+                {
+                    ZonedLocations.ZoneOneLocations = LevelLocations;
+                }
+                
+                if (ZonedLocations.ZoneTwoLocations.Count == 0)
+                {
+                    ZonedLocations.ZoneTwoLocations = LevelLocations;
+                }
+                
+                if (ZonedLocations.ZoneThreeLocations.Count == 0)
+                {
+                    ZonedLocations.ZoneThreeLocations = LevelLocations;
+                }
 
                 //Find suitable locations, ensuring they are zoned, do not share a room and difficulty.
                 do
