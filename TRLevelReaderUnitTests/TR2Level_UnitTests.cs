@@ -10,8 +10,6 @@ namespace TRLevelReaderUnitTests
     [TestClass]
     public class TR2Level_UnitTests
     {
-        private static readonly uint TR2VersionHeader = 0x0000002D;
-
         [TestMethod]
         public void GreatWall_ReadTest()
         {
