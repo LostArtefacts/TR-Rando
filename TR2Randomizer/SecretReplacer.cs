@@ -7,14 +7,22 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 
+using TRLevelReader.Model;
+using TRLevelReader.Serialization;
+
 using Newtonsoft.Json;
+using TRLevelReader;
+using TRLevelReader.Model.Enums;
 
 namespace TR2Randomizer
 {
     public class SecretReplacer
     {
-        private List<TRLevel> _TR2LevelList;
+        private TR2LevelReader _reader;
+        private TR2LevelWriter _writer;
+        private TR2Level _levelInstance;
         private Random _generator;
+        private List<string> _levels;
 
         public bool PlaceAll { get; set; }
         
@@ -22,606 +30,143 @@ namespace TR2Randomizer
         {
             PlaceAll = false;
 
-            _TR2LevelList = new List<TRLevel>
-            {
-                new TRLevel
-                {
-                    Name = LevelNames.GW,
+            _levels = LevelNames.AsList;
 
-                    GoldSecret = new TRItem
-                    {
-                        ID = 105,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 77,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 21,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.VENICE,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 114,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 100,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 43,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.BARTOLI,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 50,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 125,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 107,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.OPERA,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 44,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 214,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 215,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.RIG,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 108,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 94,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 77,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.DA,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 118,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 5,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 88,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.FATHOMS,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 67,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 42,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 13,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.DORIA,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 6,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 9,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 5,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.LQ,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 77,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 56,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 2,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.DECK,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 90,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 75,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 22,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.TIBET,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 103,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 10,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 3,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.MONASTERY,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 168,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 207,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 21,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.COT,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 87,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 141,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 12,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.CHICKEN,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 142,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 6,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 2,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.XIAN,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 224,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 195,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 30,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.FLOATER,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 38,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 23,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 9,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.LAIR,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 66,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 67,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 68,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-
-                new TRLevel
-                {
-                    Name = LevelNames.HOME,
-
-                    GoldSecret = new TRItem
-                    {
-                        ID = 108,
-                        OID = (int)SecretType.Gold,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    JadeSecret = new TRItem
-                    {
-                        ID = 109,
-                        OID = (int)SecretType.Jade,
-                        Params = " 0 -1 -1 0000"
-                    },
-
-                    StoneSecret = new TRItem
-                    {
-                        ID = 110,
-                        OID = (int)SecretType.Stone,
-                        Params = " 0 -1 -1 0000"
-                    }
-                },
-            };
+            _reader = new TR2LevelReader();
+            _writer = new TR2LevelWriter();
         }
 
-        private void LaunchTRMod(TRLevel lvl, List<Location> LevelLocations)
+        private void RandomizeSecrets(List<Location> LevelLocations, string lvlname)
         {
             if (LevelLocations.Count > 2)
             {
-                ProcessStartInfo trmodLaunch = new ProcessStartInfo
-                {
-                    FileName = "trmod.exe",
-                    WindowStyle = ProcessWindowStyle.Hidden
-                };
-
                 if (PlaceAll)
                 {
-                    PlaceAllSecrets(lvl, LevelLocations);
+                    PlaceAllSecrets(lvlname, LevelLocations);
                     return;
                 }
 
-                ZonedLocationCollection ZonedLocations = AssignLocationsToZones(lvl, LevelLocations);
+                //Apply zoning to the locations to ensure they are spread out.
+                ZonedLocationCollection ZonedLocations = AssignLocationsToZones(lvlname, LevelLocations);
 
+                Location GoldSecret;
+                Location JadeSecret;
+                Location StoneSecret;
+
+                //Find suitable locations, ensuring they are zoned, do not share a room and difficulty.
                 do
                 {
-                    lvl.GoldSecret.Location = ZonedLocations.ZoneOneLocations[_generator.Next(0, LevelLocations.Count)];
-                } while (lvl.GoldSecret.Location.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false);
+                    GoldSecret = ZonedLocations.ZoneOneLocations[_generator.Next(0, LevelLocations.Count)];
+                } while (GoldSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false);
                 
 
                 do
                 {
-                    lvl.JadeSecret.Location = ZonedLocations.ZoneTwoLocations[_generator.Next(0, LevelLocations.Count)];
-                } while ((lvl.JadeSecret.Location.Room == lvl.GoldSecret.Location.Room) || 
-                        (lvl.JadeSecret.Location.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
+                    JadeSecret = ZonedLocations.ZoneTwoLocations[_generator.Next(0, LevelLocations.Count)];
+                } while ((JadeSecret.Room == GoldSecret.Room) || 
+                        (JadeSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
 
                 do
                 {
-                    lvl.StoneSecret.Location = ZonedLocations.ZoneThreeLocations[_generator.Next(0, LevelLocations.Count)];
-                } while ((lvl.StoneSecret.Location.Room == lvl.GoldSecret.Location.Room) || 
-                        (lvl.StoneSecret.Location.Room == lvl.JadeSecret.Location.Room) ||
-                        (lvl.StoneSecret.Location.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
+                    StoneSecret = ZonedLocations.ZoneThreeLocations[_generator.Next(0, LevelLocations.Count)];
+                } while ((StoneSecret.Room == GoldSecret.Room) || 
+                        (StoneSecret.Room == JadeSecret.Room) ||
+                        (StoneSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
 
-                if (lvl.DoesLevelHaveSecrets())
+                //Does the level contain the entities?
+                int GoldIndex = Array.FindIndex(_levelInstance.Entities, ent => (ent.TypeID == (short)TR2Entities.GoldSecret_S_P));
+                int JadeIndex = Array.FindIndex(_levelInstance.Entities, ent => (ent.TypeID == (short)TR2Entities.JadeSecret_S_P));
+                int StoneIndex = Array.FindIndex(_levelInstance.Entities, ent => (ent.TypeID == (short)TR2Entities.StoneSecret_S_P));
+
+                //Check if we could find instances of the secret entities, if not, we need to add not edit.
+                if (GoldIndex != -1)
                 {
-                    trmodLaunch.Arguments = lvl.Name + lvl.GoldSecret.TRMODReplaceCommand;
-                    var trmod = Process.Start(trmodLaunch);
-
-                    trmod.WaitForExit(1000);
-
-                    trmodLaunch.Arguments = lvl.Name + lvl.JadeSecret.TRMODReplaceCommand;
-                    trmod = Process.Start(trmodLaunch);
-
-                    trmod.WaitForExit(1000);
-
-                    trmodLaunch.Arguments = lvl.Name + lvl.StoneSecret.TRMODReplaceCommand;
-                    trmod = Process.Start(trmodLaunch);
-
-                    trmod.WaitForExit(1000);
+                    _levelInstance.Entities[GoldIndex].Room = Convert.ToInt16(GoldSecret.Room);
+                    _levelInstance.Entities[GoldIndex].X = GoldSecret.X;
+                    _levelInstance.Entities[GoldIndex].Y = GoldSecret.Y;
+                    _levelInstance.Entities[GoldIndex].Z = GoldSecret.Z;
                 }
                 else
                 {
-                    trmodLaunch.Arguments = lvl.Name + lvl.GoldSecret.TRMODAddCommand;
-                    var trmod = Process.Start(trmodLaunch);
+                    TR2Entity GoldEntity = new TR2Entity
+                    {
+                        TypeID = (int)TR2Entities.GoldSecret_S_P,
+                        Room = Convert.ToInt16(GoldSecret.Room),
+                        X = GoldSecret.X,
+                        Y = GoldSecret.Y,
+                        Z = GoldSecret.Z,
+                        Angle = 0,
+                        Intensity1 = -1,
+                        Intensity2 = -1,
+                        Flags = 0
+                    };
 
-                    trmod.WaitForExit(1000);
+                    _levelInstance.Entities.Append(GoldEntity);
+                    _levelInstance.NumEntities++;
+                }
 
-                    trmodLaunch.Arguments = lvl.Name + lvl.JadeSecret.TRMODAddCommand;
-                    trmod = Process.Start(trmodLaunch);
+                if (JadeIndex != -1)
+                {
+                    _levelInstance.Entities[JadeIndex].Room = Convert.ToInt16(JadeSecret.Room);
+                    _levelInstance.Entities[JadeIndex].X = JadeSecret.X;
+                    _levelInstance.Entities[JadeIndex].Y = JadeSecret.Y;
+                    _levelInstance.Entities[JadeIndex].Z = JadeSecret.Z;
+                }
+                else
+                {
+                    TR2Entity JadeEntity = new TR2Entity
+                    {
+                        TypeID = (int)TR2Entities.JadeSecret_S_P,
+                        Room = Convert.ToInt16(JadeSecret.Room),
+                        X = JadeSecret.X,
+                        Y = JadeSecret.Y,
+                        Z = JadeSecret.Z,
+                        Angle = 0,
+                        Intensity1 = -1,
+                        Intensity2 = -1,
+                        Flags = 0
+                    };
 
-                    trmod.WaitForExit(1000);
+                    _levelInstance.Entities.Append(JadeEntity);
+                    _levelInstance.NumEntities++;
+                }
 
-                    trmodLaunch.Arguments = lvl.Name + lvl.StoneSecret.TRMODAddCommand;
-                    trmod = Process.Start(trmodLaunch);
+                if (StoneIndex != -1)
+                {
+                    _levelInstance.Entities[StoneIndex].Room = Convert.ToInt16(StoneSecret.Room);
+                    _levelInstance.Entities[StoneIndex].X = StoneSecret.X;
+                    _levelInstance.Entities[StoneIndex].Y = StoneSecret.Y;
+                    _levelInstance.Entities[StoneIndex].Z = StoneSecret.Z;
+                }
+                else
+                {
+                    TR2Entity StoneEntity = new TR2Entity
+                    {
+                        TypeID = (int)TR2Entities.StoneSecret_S_P,
+                        Room = Convert.ToInt16(StoneSecret.Room),
+                        X = StoneSecret.X,
+                        Y = StoneSecret.Y,
+                        Z = StoneSecret.Z,
+                        Angle = 0,
+                        Intensity1 = -1,
+                        Intensity2 = -1,
+                        Flags = 0
+                    };
 
-                    trmod.WaitForExit(1000);
+                    _levelInstance.Entities.Append(StoneEntity);
+                    _levelInstance.NumEntities++;
                 }
             }
         }
 
-        private void PlaceAllSecrets(TRLevel lvl, List<Location> LevelLocations)
+        private void PlaceAllSecrets(string lvl, List<Location> LevelLocations)
         {
-            ProcessStartInfo trmodLaunch = new ProcessStartInfo
-            {
-                FileName = "trmod.exe",
-                WindowStyle = ProcessWindowStyle.Hidden
-            };
-
-            trmodLaunch.Arguments = lvl.Name + " LIST " + lvl.Name + ".trmlist";
-
-            var trmod = Process.Start(trmodLaunch);
-
-            trmod.WaitForExit(1000);
-
-            List<string> FileOutput = new List<string>(File.ReadAllLines(lvl.Name + ".trmlist"));
-
-            File.Delete(lvl.Name + ".trmlist");
-
-            int index = 0;
-            bool FirstJade = true;
-
-            foreach (string Item in FileOutput)
-            {   
-                if (Item.Contains("Item(191"))
-                {
-                    if (FirstJade == false)
-                    {
-                        lvl.JadeSecret.Location = LevelLocations[0];
-                        trmodLaunch.Arguments = lvl.Name + lvl.JadeSecret.TRMODReplaceCommand;
-                        trmod = Process.Start(trmodLaunch);
-                        trmod.WaitForExit(1000);
-                        index++;
-                    }
-                    else
-                    {
-                        // Ignore first Jade
-                        FirstJade = false;
-                        continue;
-                    }
-                }     
-            }
-
-            for (int i = index; i < LevelLocations.Count; i++)
-            {
-                lvl.JadeSecret.Location = LevelLocations[i];
-                trmodLaunch.Arguments = lvl.Name + lvl.JadeSecret.TRMODAddCommand;
-                trmod = Process.Start(trmodLaunch);
-                trmod.WaitForExit(1000);
-            }
+            
         }
 
-        private ZonedLocationCollection AssignLocationsToZones(TRLevel lvl, List<Location> locations)
+        private ZonedLocationCollection AssignLocationsToZones(string lvl, List<Location> locations)
         {
-            Dictionary<int, List<int>> ZoneMap = JsonConvert.DeserializeObject<Dictionary<int, List<int>>>(File.ReadAllText(Directory.GetCurrentDirectory() + "\\Zones\\" + lvl.Name + "-Zones.json"));
+            Dictionary<int, List<int>> ZoneMap = JsonConvert.DeserializeObject<Dictionary<int, List<int>>>(File.ReadAllText(Directory.GetCurrentDirectory() + "\\Zones\\" + lvl + "-Zones.json"));
 
             return new ZonedLocationCollection
             {
@@ -647,9 +192,17 @@ namespace TR2Randomizer
 
             Dictionary<string, List<Location>> Locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("locations.json"));
 
-            foreach (TRLevel lvl in _TR2LevelList)
+            foreach (string lvl in _levels)
             {
-                LaunchTRMod(lvl, Locations[lvl.Name]);
+                //Read the level into a level object
+                _levelInstance = _reader.ReadLevel(lvl);
+
+                //Apply the modifications
+                RandomizeSecrets(Locations[lvl], lvl);
+
+                //Write back the level file
+                _writer.WriteLevelToFile(_levelInstance, lvl);
+
                 ReplacementStatusManager.LevelProgress++;
             }
 

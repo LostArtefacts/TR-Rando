@@ -78,9 +78,6 @@
     <Compile Include="Location.cs" />
     <Compile Include="ReplacementStatusManager.cs" />
     <Compile Include="SecretReplacer.cs" />
-    <Compile Include="SecretType.cs" />
-    <Compile Include="TRItem.cs" />
-    <Compile Include="TRLevel.cs" />
     <Compile Include="ZonedLocationCollection.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -241,9 +238,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="getcoords_uk.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="trmod.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

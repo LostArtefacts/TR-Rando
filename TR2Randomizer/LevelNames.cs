@@ -26,5 +26,33 @@ namespace TR2Randomizer
         public const string FLOATER     = "FLOATING.TR2";
         public const string LAIR        = "XIAN.TR2";
         public const string HOME        = "HOUSE.TR2";
+
+        public static List<string> AsList
+        {
+            get
+            {
+                return new List<string>
+                {
+                    GW,
+                    VENICE,
+                    BARTOLI,
+                    OPERA,
+                    RIG,
+                    DA,
+                    FATHOMS,
+                    DORIA,
+                    LQ,
+                    DECK,
+                    TIBET,
+                    MONASTERY,
+                    COT,
+                    CHICKEN,
+                    XIAN,
+                    FLOATER,
+                    LAIR,
+                    HOME
+                };
+            }
+        }
     }
 }
