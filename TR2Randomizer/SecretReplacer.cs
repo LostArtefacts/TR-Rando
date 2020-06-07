@@ -192,7 +192,60 @@ namespace TR2Randomizer
 
         private void PlaceAllSecrets(string lvl, List<Location> LevelLocations)
         {
-            
+            List<TR2Entity> ents = _levelInstance.Entities.ToList();
+
+            bool SecretsRemain = true;
+
+            while (SecretsRemain)
+            {
+                int i;
+
+                //Remove any existing secrets
+                for (i = 0; i < ents.Count; i++)
+                {
+                    if (ents[i].TypeID == (int)TR2Entities.StoneSecret_S_P ||
+                        ents[i].TypeID == (int)TR2Entities.JadeSecret_S_P ||
+                        ents[i].TypeID == (int)TR2Entities.GoldSecret_S_P)
+                    {
+                        ents.RemoveAt(i);
+                        i--;
+                        break;
+                    }
+                };
+
+                //We have exhausted the list and found nothing, if we exited early try again
+                if (i == ents.Count)
+                {
+                    SecretsRemain = false;
+                }
+            }
+
+            //Add new entities
+            foreach (Location loc in LevelLocations)
+            {
+                Location copy = loc;
+
+                if (loc.IsInRoomSpace)
+                {
+                    copy = TransformToLevelSpace(loc);
+                }
+
+                ents.Add(new TR2Entity
+                {
+                    TypeID = (int)TR2Entities.JadeSecret_S_P,
+                    Room = Convert.ToInt16(copy.Room),
+                    X = copy.X,
+                    Y = copy.Y,
+                    Z = copy.Z,
+                    Angle = 0,
+                    Intensity1 = -1,
+                    Intensity2 = -1,
+                    Flags = 0
+                });
+            }
+
+            _levelInstance.NumEntities = (uint)ents.Count;
+            _levelInstance.Entities = ents.ToArray();
         }
 
         private ZonedLocationCollection AssignLocationsToZones(string lvl, List<Location> locations)
