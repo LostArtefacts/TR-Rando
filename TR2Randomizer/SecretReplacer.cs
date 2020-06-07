@@ -126,7 +126,9 @@ namespace TR2Randomizer
                         Flags = 0
                     };
 
-                    _levelInstance.Entities.Append(GoldEntity);
+                    List<TR2Entity> ents = _levelInstance.Entities.ToList();
+                    ents.Add(GoldEntity);
+                    _levelInstance.Entities = ents.ToArray();
                     _levelInstance.NumEntities++;
                 }
 
@@ -152,7 +154,9 @@ namespace TR2Randomizer
                         Flags = 0
                     };
 
-                    _levelInstance.Entities.Append(JadeEntity);
+                    List<TR2Entity> ents = _levelInstance.Entities.ToList();
+                    ents.Add(JadeEntity);
+                    _levelInstance.Entities = ents.ToArray();
                     _levelInstance.NumEntities++;
                 }
 
@@ -178,7 +182,9 @@ namespace TR2Randomizer
                         Flags = 0
                     };
 
-                    _levelInstance.Entities.Append(StoneEntity);
+                    List<TR2Entity> ents = _levelInstance.Entities.ToList();
+                    ents.Add(StoneEntity);
+                    _levelInstance.Entities = ents.ToArray();
                     _levelInstance.NumEntities++;
                 }
             }
