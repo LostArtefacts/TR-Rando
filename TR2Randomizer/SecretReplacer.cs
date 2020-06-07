@@ -57,22 +57,29 @@ namespace TR2Randomizer
                 //Find suitable locations, ensuring they are zoned, do not share a room and difficulty.
                 do
                 {
-                    GoldSecret = ZonedLocations.ZoneOneLocations[_generator.Next(0, LevelLocations.Count)];
+                    GoldSecret = ZonedLocations.ZoneThreeLocations[_generator.Next(0, ZonedLocations.ZoneThreeLocations.Count)];
                 } while (GoldSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false);
                 
 
                 do
                 {
-                    JadeSecret = ZonedLocations.ZoneTwoLocations[_generator.Next(0, LevelLocations.Count)];
+                    JadeSecret = ZonedLocations.ZoneTwoLocations[_generator.Next(0, ZonedLocations.ZoneTwoLocations.Count)];
                 } while ((JadeSecret.Room == GoldSecret.Room) || 
                         (JadeSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
 
                 do
                 {
-                    StoneSecret = ZonedLocations.ZoneThreeLocations[_generator.Next(0, LevelLocations.Count)];
+                    StoneSecret = ZonedLocations.ZoneOneLocations[_generator.Next(0, ZonedLocations.ZoneOneLocations.Count)];
                 } while ((StoneSecret.Room == GoldSecret.Room) || 
                         (StoneSecret.Room == JadeSecret.Room) ||
                         (StoneSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
+
+                //Due to TRMod only accepting room space coords entities are actually stored in level space. So include some
+                //calls to support a transformation of any locations that are specified in room space to maintain backwards compatbility
+                //with older locations and support locations that are specified in both level or room space.
+                GoldSecret = TransformToLevelSpace(GoldSecret);
+                JadeSecret = TransformToLevelSpace(JadeSecret);
+                StoneSecret = TransformToLevelSpace(StoneSecret);
 
                 //Does the level contain the entities?
                 int GoldIndex = Array.FindIndex(_levelInstance.Entities, ent => (ent.TypeID == (short)TR2Entities.GoldSecret_S_P));
@@ -183,6 +190,18 @@ namespace TR2Randomizer
                                       where ZoneMap[2].Contains(loc.Room)
                                       select loc).ToList()
             };
+        }
+
+        private Location TransformToLevelSpace(Location loc)
+        {
+            if (loc.IsInRoomSpace)
+            {
+                loc.X = (loc.X + _levelInstance.Rooms[loc.Room].Info.X);
+                loc.Y = (_levelInstance.Rooms[loc.Room].Info.YBottom - loc.Y);
+                loc.Z = (loc.Z + _levelInstance.Rooms[loc.Room].Info.Z);
+            }
+
+            return loc;
         }
 
         public void Replace(int seed)

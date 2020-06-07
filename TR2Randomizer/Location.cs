@@ -20,6 +20,8 @@ namespace TR2Randomizer
 
         public Difficulty Difficulty { get; set; }
 
+        public bool IsInRoomSpace { get; set; }
+
         public Location()
         {
             X = 0;
@@ -28,6 +30,7 @@ namespace TR2Randomizer
             Room = 0;
             RequiresGlitch = false;
             Difficulty = Difficulty.Easy;
+            IsInRoomSpace = true;
         }
     }
 }
