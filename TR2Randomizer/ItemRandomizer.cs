@@ -5,8 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TR2Randomizer.Utilities;
 using TRLevelReader;
+using TRLevelReader.Helpers;
 using TRLevelReader.Model;
+using TRLevelReader.Model.Enums;
 
 namespace TR2Randomizer
 {
@@ -54,9 +57,23 @@ namespace TR2Randomizer
 
         private void RepositionItems(List<Location> ItemLocs)
         {
-            List<int> EntityIndexCollection = new List<int>();
+            //We are currently looking for any ammo or key items
+            List<TR2Entities> targetents = TR2EntityUtilities.GetListOfGunAmmoTypes();
+            targetents.AddRange(TR2EntityUtilities.GetListOfKeyItemTypes());
 
+            foreach (TR2Entity ent in _levelInstance.Entities)
+            {
+                if (targetents.Contains((TR2Entities)ent.TypeID))
+                {
+                    Location RandomLocation = ItemLocs[_generator.Next(0, ItemLocs.Count)];
 
+                    RandomLocation = SpatialConverters.TransformToLevelSpace(RandomLocation, _levelInstance.Rooms[RandomLocation.Room]);
+
+                    ent.X = RandomLocation.X;
+                    ent.Y = RandomLocation.Y;
+                    ent.Z = RandomLocation.Z;
+                }
+            }
         }
     }
 }

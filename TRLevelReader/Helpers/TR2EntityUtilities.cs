@@ -45,7 +45,11 @@ namespace TRLevelReader.Helpers
                 TR2Entities.Key1_S_P,
                 TR2Entities.Key2_S_P,
                 TR2Entities.Key3_S_P,
-                TR2Entities.Key4_S_P
+                TR2Entities.Key4_S_P,
+                TR2Entities.Puzzle1_S_P,
+                TR2Entities.Puzzle2_S_P,
+                TR2Entities.Puzzle3_S_P,
+                TR2Entities.Puzzle4_S_P
             };
         }
     }

@@ -32,6 +32,7 @@ namespace TR2Randomizer
             InitializeComponent();
 
             _replacer = new SecretReplacer();
+            _itemrandomizer = new ItemRandomizer();
 
             ReplacementStatusManager.CanRandomize = true;
             ReplacementStatusManager.LevelProgress = 0;
