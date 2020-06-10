@@ -13,6 +13,7 @@ using TRLevelReader.Serialization;
 using Newtonsoft.Json;
 using TRLevelReader;
 using TRLevelReader.Model.Enums;
+using TR2Randomizer.Utilities;
 
 namespace TR2Randomizer
 {
@@ -94,9 +95,9 @@ namespace TR2Randomizer
                 //Due to TRMod only accepting room space coords entities are actually stored in level space. So include some
                 //calls to support a transformation of any locations that are specified in room space to maintain backwards compatbility
                 //with older locations and support locations that are specified in both level or room space.
-                GoldSecret = TransformToLevelSpace(GoldSecret);
-                JadeSecret = TransformToLevelSpace(JadeSecret);
-                StoneSecret = TransformToLevelSpace(StoneSecret);
+                GoldSecret = SpatialConverters.TransformToLevelSpace(GoldSecret, _levelInstance.Rooms[GoldSecret.Room]);
+                JadeSecret = SpatialConverters.TransformToLevelSpace(JadeSecret, _levelInstance.Rooms[JadeSecret.Room]);
+                StoneSecret = SpatialConverters.TransformToLevelSpace(StoneSecret, _levelInstance.Rooms[StoneSecret.Room]);
 
                 //Does the level contain the entities?
                 int GoldIndex = Array.FindIndex(_levelInstance.Entities, ent => (ent.TypeID == (short)TR2Entities.GoldSecret_S_P));
@@ -227,7 +228,7 @@ namespace TR2Randomizer
 
                 if (loc.IsInRoomSpace)
                 {
-                    copy = TransformToLevelSpace(loc);
+                    copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Rooms[loc.Room]);
                 }
 
                 ents.Add(new TR2Entity
@@ -266,18 +267,6 @@ namespace TR2Randomizer
                                       where ZoneMap[2].Contains(loc.Room)
                                       select loc).ToList()
             };
-        }
-
-        private Location TransformToLevelSpace(Location loc)
-        {
-            if (loc.IsInRoomSpace)
-            {
-                loc.X = (loc.X + _levelInstance.Rooms[loc.Room].Info.X);
-                loc.Y = (_levelInstance.Rooms[loc.Room].Info.YBottom - loc.Y);
-                loc.Z = (loc.Z + _levelInstance.Rooms[loc.Room].Info.Z);
-            }
-
-            return loc;
         }
 
         public void Replace(int seed)

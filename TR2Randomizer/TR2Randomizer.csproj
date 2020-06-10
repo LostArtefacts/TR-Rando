@@ -74,10 +74,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Difficulty.cs" />
+    <Compile Include="ItemRandomizer.cs" />
     <Compile Include="LevelNames.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="ReplacementStatusManager.cs" />
     <Compile Include="SecretReplacer.cs" />
+    <Compile Include="Utilities\SpatialConverters.cs" />
     <Compile Include="ZonedLocationCollection.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -25,6 +25,7 @@ namespace TR2Randomizer
     public partial class MainWindow : Window
     {
         private SecretReplacer _replacer;
+        private ItemRandomizer _itemrandomizer;
 
         public MainWindow()
         {
@@ -77,7 +78,13 @@ namespace TR2Randomizer
 
         private void RandomizeItems_Click(object sender, RoutedEventArgs e)
         {
+            if (ItemsSeedEntry.Text != string.Empty)
+            {
+                int seed = Convert.ToInt32(ItemsSeedEntry.Text);
 
+                Thread ItemRandomizeThread = new Thread(() => _itemrandomizer.Randomize(seed));
+                ItemRandomizeThread.Start();
+            }
         }
 
         private void RandomizeEnemies_Click(object sender, RoutedEventArgs e)

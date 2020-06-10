@@ -23,7 +23,7 @@
         <TextBox Name="SecretsSeedEntry" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="SecretsSeedEntry_PreviewTextInput" MaxLength="9"/>
         <ProgressBar Name="SecretsRandomizeProgress" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" MinHeight="25" Minimum="0" Maximum="18" Value="{Binding Path=(local:ReplacementStatusManager.LevelProgress)}" Margin="5"/>
         <Label Content="Seed" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
-        <Button Name="RandomizeItems" Content="Randomize Items (Soon)" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" MinHeight="50" MinWidth="200" IsEnabled="False" Click="RandomizeItems_Click"/>
+        <Button Name="RandomizeItems" Content="Randomize Items" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" MinHeight="50" MinWidth="200" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}" Click="RandomizeItems_Click"/>
         <TextBox Name="ItemsSeedEntry" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="ItemsSeedEntry_PreviewTextInput" MaxLength="9"/>
         <Label Content="Seed" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
         <Button Name="RandomizeEnemies" Content="Randomize Enemies (Soon)" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" MinHeight="50" MinWidth="200" IsEnabled="False" Click="RandomizeEnemies_Click"/>

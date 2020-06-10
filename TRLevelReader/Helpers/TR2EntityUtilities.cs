@@ -16,12 +16,37 @@ namespace TRLevelReader.Helpers
 
         public static List<TR2Entities> GetListOfGunAmmoTypes()
         {
-            throw new NotImplementedException();
+            return new List<TR2Entities>
+            {
+                TR2Entities.Pistols_S_P,
+                TR2Entities.Shotgun_S_P,
+                TR2Entities.Automags_S_P,
+                TR2Entities.Uzi_S_P,
+                TR2Entities.Harpoon_S_P,
+                TR2Entities.M16_S_P,
+                TR2Entities.GrenadeLauncher_S_P,
+                TR2Entities.PistolAmmo_S_P,
+                TR2Entities.ShotgunAmmo_S_P,
+                TR2Entities.AutoAmmo_S_P,
+                TR2Entities.UziAmmo_S_P,
+                TR2Entities.HarpoonAmmo_S_P,
+                TR2Entities.M16Ammo_S_P,
+                TR2Entities.Grenades_S_P,
+                TR2Entities.SmallMed_S_P,
+                TR2Entities.LargeMed_S_P,
+                TR2Entities.Flares_S_P,
+            };
         }
 
         public static List<TR2Entities> GetListOfKeyItemTypes()
         {
-            throw new NotImplementedException();
+            return new List<TR2Entities>
+            {
+                TR2Entities.Key1_S_P,
+                TR2Entities.Key2_S_P,
+                TR2Entities.Key3_S_P,
+                TR2Entities.Key4_S_P
+            };
         }
     }
 }
