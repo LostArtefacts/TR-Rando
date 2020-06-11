@@ -9,16 +9,25 @@ namespace TR2Randomizer.Utilities
 {
     internal static class SpatialConverters
     {
-        internal static Location TransformToLevelSpace(Location loc, TR2Room room)
+        internal static Location TransformToLevelSpace(Location loc, TRRoomInfo room)
         {
             if (loc.IsInRoomSpace)
             {
-                loc.X = (loc.X + room.Info.X);
-                loc.Y = (room.Info.YBottom - loc.Y);
-                loc.Z = (loc.Z + room.Info.Z);
+                return new Location
+                {
+                    Room = loc.Room,
+                    X = (loc.X + room.X),
+                    Y = (room.YBottom - loc.Y),
+                    Z = (loc.Z + room.Z),
+                    Difficulty = loc.Difficulty,
+                    IsInRoomSpace = loc.IsInRoomSpace,
+                    RequiresGlitch = loc.RequiresGlitch
+                };
             }
-
-            return loc;
+            else
+            {
+                return loc;
+            }
         }
     }
 }

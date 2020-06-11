@@ -95,9 +95,9 @@ namespace TR2Randomizer
                 //Due to TRMod only accepting room space coords entities are actually stored in level space. So include some
                 //calls to support a transformation of any locations that are specified in room space to maintain backwards compatbility
                 //with older locations and support locations that are specified in both level or room space.
-                GoldSecret = SpatialConverters.TransformToLevelSpace(GoldSecret, _levelInstance.Rooms[GoldSecret.Room]);
-                JadeSecret = SpatialConverters.TransformToLevelSpace(JadeSecret, _levelInstance.Rooms[JadeSecret.Room]);
-                StoneSecret = SpatialConverters.TransformToLevelSpace(StoneSecret, _levelInstance.Rooms[StoneSecret.Room]);
+                GoldSecret = SpatialConverters.TransformToLevelSpace(GoldSecret, _levelInstance.Rooms[GoldSecret.Room].Info);
+                JadeSecret = SpatialConverters.TransformToLevelSpace(JadeSecret, _levelInstance.Rooms[JadeSecret.Room].Info);
+                StoneSecret = SpatialConverters.TransformToLevelSpace(StoneSecret, _levelInstance.Rooms[StoneSecret.Room].Info);
 
                 //Does the level contain the entities?
                 int GoldIndex = Array.FindIndex(_levelInstance.Entities, ent => (ent.TypeID == (short)TR2Entities.GoldSecret_S_P));
@@ -224,12 +224,7 @@ namespace TR2Randomizer
             //Add new entities
             foreach (Location loc in LevelLocations)
             {
-                Location copy = loc;
-
-                if (loc.IsInRoomSpace)
-                {
-                    copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Rooms[loc.Room]);
-                }
+                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Rooms[loc.Room].Info);
 
                 ents.Add(new TR2Entity
                 {

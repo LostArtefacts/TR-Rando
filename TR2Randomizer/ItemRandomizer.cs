@@ -59,19 +59,19 @@ namespace TR2Randomizer
         {
             //We are currently looking for any ammo or key items
             List<TR2Entities> targetents = TR2EntityUtilities.GetListOfGunAmmoTypes();
-            targetents.AddRange(TR2EntityUtilities.GetListOfKeyItemTypes());
 
-            foreach (TR2Entity ent in _levelInstance.Entities)
+            for (int i = 0; i < _levelInstance.Entities.Count(); i++)
             {
-                if (targetents.Contains((TR2Entities)ent.TypeID))
+                if (targetents.Contains((TR2Entities)_levelInstance.Entities[i].TypeID))
                 {
                     Location RandomLocation = ItemLocs[_generator.Next(0, ItemLocs.Count)];
 
-                    RandomLocation = SpatialConverters.TransformToLevelSpace(RandomLocation, _levelInstance.Rooms[RandomLocation.Room]);
+                    Location GlobalizedRandomLocation = SpatialConverters.TransformToLevelSpace(RandomLocation, _levelInstance.Rooms[RandomLocation.Room].Info);
 
-                    ent.X = RandomLocation.X;
-                    ent.Y = RandomLocation.Y;
-                    ent.Z = RandomLocation.Z;
+                    _levelInstance.Entities[i].Room = Convert.ToInt16(GlobalizedRandomLocation.Room);
+                    _levelInstance.Entities[i].X = GlobalizedRandomLocation.X;
+                    _levelInstance.Entities[i].Y = GlobalizedRandomLocation.Y;
+                    _levelInstance.Entities[i].Z = GlobalizedRandomLocation.Z;
                 }
             }
         }
