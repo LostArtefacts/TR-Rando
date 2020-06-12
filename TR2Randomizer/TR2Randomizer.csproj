@@ -74,6 +74,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Difficulty.cs" />
+    <Compile Include="EnemyRandomizer.cs" />
     <Compile Include="ItemRandomizer.cs" />
     <Compile Include="LevelNames.cs" />
     <Compile Include="Location.cs" />

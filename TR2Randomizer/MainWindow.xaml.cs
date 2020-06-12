@@ -26,6 +26,7 @@ namespace TR2Randomizer
     {
         private SecretReplacer _replacer;
         private ItemRandomizer _itemrandomizer;
+        private EnemyRandomizer _enemyrandomizer;
 
         public MainWindow()
         {
@@ -33,6 +34,7 @@ namespace TR2Randomizer
 
             _replacer = new SecretReplacer();
             _itemrandomizer = new ItemRandomizer();
+            _enemyrandomizer = new EnemyRandomizer();
 
             ReplacementStatusManager.CanRandomize = true;
             ReplacementStatusManager.LevelProgress = 0;
@@ -90,7 +92,13 @@ namespace TR2Randomizer
 
         private void RandomizeEnemies_Click(object sender, RoutedEventArgs e)
         {
+            if (EnemiesSeedEntry.Text != string.Empty)
+            {
+                int seed = Convert.ToInt32(EnemiesSeedEntry.Text);
 
+                Thread EnemyRandomizeThread = new Thread(() => _enemyrandomizer.Randomize(seed));
+                EnemyRandomizeThread.Start();
+            }
         }
 
         private void TrackLaraEPC_Click(object sender, RoutedEventArgs e)

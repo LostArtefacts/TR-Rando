@@ -11,7 +11,47 @@ namespace TRLevelReader.Helpers
     {
         public static List<TR2Entities> GetListOfEnemyTypes()
         {
-            throw new NotImplementedException();
+            return new List<TR2Entities>
+            {
+                TR2Entities.Doberman,
+                TR2Entities.MaskedGoon1,
+                TR2Entities.MaskedGoon2,
+                TR2Entities.MaskedGoon3,
+                TR2Entities.Knifethrower,
+                TR2Entities.ShotgunGoon,
+                TR2Entities.Rat,
+                TR2Entities.Shark,
+                TR2Entities.YellowMorayEel,
+                TR2Entities.BlackMorayEel,
+                TR2Entities.Barracuda,
+                TR2Entities.ScubaDiver,
+                TR2Entities.Gunman1,
+                TR2Entities.Gunman2,
+                TR2Entities.StickWieldingGoon1,
+                TR2Entities.StickWieldingGoon2,
+                TR2Entities.FlamethrowerGoon,
+                TR2Entities.Spider,
+                TR2Entities.GiantSpider,
+                TR2Entities.Crow,
+                TR2Entities.TigerOrSnowLeopard,
+                TR2Entities.MarcoBartoli,
+                TR2Entities.XianGuardSpear,
+                TR2Entities.XianGuardSpearStatue,
+                TR2Entities.XianGuardSword,
+                TR2Entities.XianGuardSwordStatue,
+                TR2Entities.Yeti,
+                TR2Entities.BirdMonster,
+                TR2Entities.Eagle,
+                TR2Entities.Mercenary1,
+                TR2Entities.Mercenary2,
+                TR2Entities.Mercenary3,
+                TR2Entities.MercSnowmobDriver,
+                TR2Entities.MonkWithLongStick,
+                TR2Entities.MonkWithKnifeStick,
+                TR2Entities.TRex,
+                TR2Entities.Monk,
+                TR2Entities.Winston
+            };
         }
 
         public static List<TR2Entities> GetListOfGunAmmoTypes()
