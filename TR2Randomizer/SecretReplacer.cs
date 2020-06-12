@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using TRLevelReader;
 using TRLevelReader.Model.Enums;
 using TR2Randomizer.Utilities;
+using TRLevelReader.Helpers;
 
 namespace TR2Randomizer
 {

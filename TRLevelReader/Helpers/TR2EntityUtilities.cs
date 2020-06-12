@@ -54,6 +54,14 @@ namespace TRLevelReader.Helpers
             };
         }
 
+        public static Dictionary<string, List<TR2Entities>> GetEnemyTypeDictionary()
+        {
+            return new Dictionary<string, List<TR2Entities>>
+            {
+                { LevelNames.GW, new List<TR2Entities>{} }
+            };
+        }
+
         public static List<TR2Entities> GetListOfGunAmmoTypes()
         {
             return new List<TR2Entities>

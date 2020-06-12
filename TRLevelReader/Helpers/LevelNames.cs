@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TR2Randomizer
+namespace TRLevelReader.Helpers
 {
     public static class LevelNames
     {
