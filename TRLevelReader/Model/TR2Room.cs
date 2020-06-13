@@ -65,6 +65,14 @@ namespace TRLevelReader.Model
         //2 bytes
         public short Flags { get; set; }
 
+        public bool ContainsWater 
+        {
+            get
+            {
+                return ((Flags & 0x01) > 0);
+            }
+        }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())
