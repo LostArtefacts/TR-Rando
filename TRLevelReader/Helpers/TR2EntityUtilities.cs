@@ -181,5 +181,27 @@ namespace TRLevelReader.Helpers
             return (entity == TR2Entities.Shark || entity == TR2Entities.YellowMorayEel || entity == TR2Entities.BlackMorayEel ||
                 entity == TR2Entities.Barracuda || entity == TR2Entities.ScubaDiver);
         }
+
+        public static bool CanDropPickups(TR2Entities entity)
+        {
+            return (entity == TR2Entities.Doberman ||
+                    entity == TR2Entities.MaskedGoon1 ||
+                    entity == TR2Entities.MaskedGoon2 ||
+                    entity == TR2Entities.MaskedGoon3 ||
+                    entity == TR2Entities.Knifethrower ||
+                    entity == TR2Entities.ShotgunGoon ||
+                    entity == TR2Entities.Gunman1 ||
+                    entity == TR2Entities.Gunman2 ||
+                    entity == TR2Entities.StickWieldingGoon1 ||
+                    entity == TR2Entities.StickWieldingGoon2 ||
+                    entity == TR2Entities.FlamethrowerGoon ||
+                    entity == TR2Entities.XianGuardSpear ||
+                    entity == TR2Entities.XianGuardSword ||
+                    entity == TR2Entities.Mercenary1 ||
+                    entity == TR2Entities.Mercenary2 ||
+                    entity == TR2Entities.Mercenary3 ||
+                    entity == TR2Entities.MonkWithLongStick ||
+                    entity == TR2Entities.MonkWithKnifeStick);
+        }
     }
 }
