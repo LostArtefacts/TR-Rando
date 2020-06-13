@@ -145,6 +145,16 @@ namespace TRLevelReader.Helpers
             };
         }
 
+        public static bool IsGunType(TR2Entities entity)
+        {
+            return (entity == TR2Entities.Shotgun_S_P ||
+                    entity == TR2Entities.Automags_S_P ||
+                    entity == TR2Entities.Uzi_S_P ||
+                    entity == TR2Entities.Harpoon_S_P ||
+                    entity == TR2Entities.M16_S_P ||
+                    entity == TR2Entities.GrenadeLauncher_S_P); 
+        }
+
         public static List<TR2Entities> GetListOfAmmoTypes()
         {
             return new List<TR2Entities>
@@ -161,6 +171,19 @@ namespace TRLevelReader.Helpers
             };
         }
 
+        public static bool IsAmmoType(TR2Entities entity)
+        {
+            return (entity == TR2Entities.ShotgunAmmo_S_P ||
+                    entity == TR2Entities.AutoAmmo_S_P ||
+                    entity == TR2Entities.UziAmmo_S_P ||
+                    entity == TR2Entities.HarpoonAmmo_S_P ||
+                    entity == TR2Entities.M16Ammo_S_P ||
+                    entity == TR2Entities.Grenades_S_P ||
+                    entity == TR2Entities.SmallMed_S_P ||
+                    entity == TR2Entities.LargeMed_S_P ||
+                    entity == TR2Entities.Flares_S_P);
+        }
+
         public static List<TR2Entities> GetListOfKeyItemTypes()
         {
             return new List<TR2Entities>
@@ -172,14 +195,42 @@ namespace TRLevelReader.Helpers
                 TR2Entities.Puzzle1_S_P,
                 TR2Entities.Puzzle2_S_P,
                 TR2Entities.Puzzle3_S_P,
-                TR2Entities.Puzzle4_S_P
+                TR2Entities.Puzzle4_S_P,
+                TR2Entities.Quest1_S_P,
+                TR2Entities.Quest2_S_P
             };
+        }
+
+        public static bool IsKeyItemType(TR2Entities entity)
+        {
+            return (entity == TR2Entities.Key1_S_P ||
+                    entity == TR2Entities.Key2_S_P ||
+                    entity == TR2Entities.Key3_S_P ||
+                    entity == TR2Entities.Key4_S_P ||
+                    entity == TR2Entities.Puzzle1_S_P ||
+                    entity == TR2Entities.Puzzle2_S_P ||
+                    entity == TR2Entities.Puzzle3_S_P ||
+                    entity == TR2Entities.Puzzle4_S_P ||
+                    entity == TR2Entities.Quest1_S_P ||
+                    entity == TR2Entities.Quest2_S_P);
         }
 
         public static bool IsWaterCreature(TR2Entities entity)
         {
             return (entity == TR2Entities.Shark || entity == TR2Entities.YellowMorayEel || entity == TR2Entities.BlackMorayEel ||
                 entity == TR2Entities.Barracuda || entity == TR2Entities.ScubaDiver);
+        }
+
+        public static List<TR2Entities> WaterCreatures()
+        {
+            return new List<TR2Entities>
+            {
+                TR2Entities.Shark,
+                TR2Entities.Barracuda,
+                TR2Entities.YellowMorayEel,
+                TR2Entities.BlackMorayEel,
+                TR2Entities.ScubaDiver
+            };
         }
 
         public static bool CanDropPickups(TR2Entities entity)
@@ -202,6 +253,31 @@ namespace TRLevelReader.Helpers
                     entity == TR2Entities.Mercenary3 ||
                     entity == TR2Entities.MonkWithLongStick ||
                     entity == TR2Entities.MonkWithKnifeStick);
+        }
+
+        public static List<TR2Entities> DroppableEnemyTypes()
+        {
+            return new List<TR2Entities>
+            {
+                TR2Entities.Doberman,
+                TR2Entities.MaskedGoon1,
+                TR2Entities.MaskedGoon2,
+                TR2Entities.MaskedGoon3,
+                TR2Entities.Knifethrower,
+                TR2Entities.ShotgunGoon,
+                TR2Entities.Gunman1,
+                TR2Entities.Gunman2,
+                TR2Entities.StickWieldingGoon1,
+                TR2Entities.StickWieldingGoon2,
+                TR2Entities.FlamethrowerGoon,
+                TR2Entities.XianGuardSpear,
+                TR2Entities.XianGuardSword,
+                TR2Entities.Mercenary1,
+                TR2Entities.Mercenary2,
+                TR2Entities.Mercenary3,
+                TR2Entities.MonkWithLongStick,
+                TR2Entities.MonkWithKnifeStick
+        };
         }
     }
 }
