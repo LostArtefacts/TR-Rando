@@ -132,18 +132,23 @@ namespace TRLevelReader.Helpers
             };
         }
 
-        public static List<TR2Entities> GetListOfGunAmmoTypes()
+        public static List<TR2Entities> GetListOfGunTypes()
         {
             return new List<TR2Entities>
             {
-                TR2Entities.Pistols_S_P,
                 TR2Entities.Shotgun_S_P,
                 TR2Entities.Automags_S_P,
                 TR2Entities.Uzi_S_P,
                 TR2Entities.Harpoon_S_P,
                 TR2Entities.M16_S_P,
                 TR2Entities.GrenadeLauncher_S_P,
-                TR2Entities.PistolAmmo_S_P,
+            };
+        }
+
+        public static List<TR2Entities> GetListOfAmmoTypes()
+        {
+            return new List<TR2Entities>
+            {
                 TR2Entities.ShotgunAmmo_S_P,
                 TR2Entities.AutoAmmo_S_P,
                 TR2Entities.UziAmmo_S_P,

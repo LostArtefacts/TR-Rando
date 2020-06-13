@@ -11,7 +11,7 @@ namespace TR2Randomizer.Randomizers
 {
     public class ItemRandomizer : RandomizerBase
     {
-
+        private int _planeCargoWeaponIndex;
         public ItemRandomizer() : base()
         {
         }
@@ -29,6 +29,12 @@ namespace TR2Randomizer.Randomizers
                 //Read the level into a level object
                 _levelInstance = _reader.ReadLevel(lvl);
 
+                //#44 - Randomize OR pistol type
+                if (lvl == LevelNames.RIG)
+                {
+                    RandomizeORPistol();
+                }
+
                 //Apply the modifications
                 RepositionItems(Locations[lvl]);
 
@@ -44,12 +50,13 @@ namespace TR2Randomizer.Randomizers
 
         private void RepositionItems(List<Location> ItemLocs)
         {
-            //We are currently looking for any ammo or key items
-            List<TR2Entities> targetents = TR2EntityUtilities.GetListOfGunAmmoTypes();
+            //We are currently looking guns + ammo
+            List<TR2Entities> targetents = TR2EntityUtilities.GetListOfGunTypes();
+            targetents.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
 
             for (int i = 0; i < _levelInstance.Entities.Count(); i++)
             {
-                if (targetents.Contains((TR2Entities)_levelInstance.Entities[i].TypeID))
+                if (targetents.Contains((TR2Entities)_levelInstance.Entities[i].TypeID) && (i != _planeCargoWeaponIndex))
                 {
                     Location RandomLocation = ItemLocs[_generator.Next(0, ItemLocs.Count)];
 
@@ -60,6 +67,28 @@ namespace TR2Randomizer.Randomizers
                     _levelInstance.Entities[i].Y = GlobalizedRandomLocation.Y;
                     _levelInstance.Entities[i].Z = GlobalizedRandomLocation.Z;
                 }
+            }
+        }
+
+        private void RandomizeORPistol()
+        {
+            //#44 - Agreed to keep it there but randomize its type.
+            _planeCargoWeaponIndex = Array.FindIndex(_levelInstance.Entities, 
+                e => (  e.TypeID == (int)TR2Entities.Pistols_S_P || 
+                        e.TypeID == (int)TR2Entities.Shotgun_S_P ||
+                        e.TypeID == (int)TR2Entities.Automags_S_P ||
+                        e.TypeID == (int)TR2Entities.Uzi_S_P ||
+                        e.TypeID == (int)TR2Entities.Harpoon_S_P ||
+                        e.TypeID == (int)TR2Entities.M16_S_P ||
+                        e.TypeID == (int)TR2Entities.GrenadeLauncher_S_P) && (e.Room == 1));
+
+            //Is there something in the plane cargo?
+            if (_planeCargoWeaponIndex != -1)
+            {
+                List<TR2Entities> ReplacementWeapons = TR2EntityUtilities.GetListOfGunTypes();
+                ReplacementWeapons.Add(TR2Entities.Pistols_S_P);
+
+                _levelInstance.Entities[_planeCargoWeaponIndex].TypeID = (short)ReplacementWeapons[_generator.Next(0, ReplacementWeapons.Count)];
             }
         }
     }
