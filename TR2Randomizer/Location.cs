@@ -22,6 +22,8 @@ namespace TR2Randomizer
 
         public bool IsInRoomSpace { get; set; }
 
+        public bool IsItem { get; set; }
+
         public Location()
         {
             X = 0;
@@ -31,6 +33,7 @@ namespace TR2Randomizer
             RequiresGlitch = false;
             Difficulty = Difficulty.Easy;
             IsInRoomSpace = true;
+            IsItem = false;
         }
     }
 }

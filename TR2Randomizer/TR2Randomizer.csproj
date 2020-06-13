@@ -138,6 +138,9 @@
     <None Include="icecave.TR2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="item_locations.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="keel.TR2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
