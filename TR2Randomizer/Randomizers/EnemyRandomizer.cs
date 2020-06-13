@@ -48,11 +48,13 @@ namespace TR2Randomizer.Randomizers
                 List<TR2Entity> SharedItems = new List<TR2Entity>(Array.FindAll(_levelInstance.Entities, e => ((e.X == _levelInstance.Entities[i].X) 
                 && (e.Y == _levelInstance.Entities[i].Y) && (e.Z == _levelInstance.Entities[i].Z))));
 
+                List<TR2Entities> DroppableEnemies = TR2EntityUtilities.DroppableEnemyTypes()[lvl];
+
                 //Is it an entity we are keen on replacing?
                 if (EnemyTypes.Contains((TR2Entities)_levelInstance.Entities[i].TypeID))
                 {
                     //Do multiple entities share one location?
-                    if (SharedItems.Count > 1)
+                    if ((SharedItems.Count > 1) && (DroppableEnemies.Count != 0))
                     {
                         //Are any entities sharing a location a droppable pickup?
                         bool IsPickupItem = false;
@@ -73,8 +75,6 @@ namespace TR2Randomizer.Randomizers
                         if (!TR2EntityUtilities.CanDropPickups((TR2Entities)_levelInstance.Entities[i].TypeID) && IsPickupItem)
                         {
                             //Ensure the new random entity can drop pickups
-                            List<TR2Entities> DroppableEnemies = TR2EntityUtilities.DroppableEnemyTypes();
-
                             _levelInstance.Entities[i].TypeID = (short)DroppableEnemies[_generator.Next(0, DroppableEnemies.Count)];
                         }
                     }

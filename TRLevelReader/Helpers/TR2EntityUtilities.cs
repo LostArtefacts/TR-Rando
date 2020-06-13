@@ -255,29 +255,82 @@ namespace TRLevelReader.Helpers
                     entity == TR2Entities.MonkWithKnifeStick);
         }
 
-        public static List<TR2Entities> DroppableEnemyTypes()
+        public static Dictionary<string, List<TR2Entities>> DroppableEnemyTypes()
         {
-            return new List<TR2Entities>
+            return new Dictionary<string, List<TR2Entities>>
             {
-                TR2Entities.Doberman,
-                TR2Entities.MaskedGoon1,
-                TR2Entities.MaskedGoon2,
-                TR2Entities.MaskedGoon3,
-                TR2Entities.Knifethrower,
-                TR2Entities.ShotgunGoon,
-                TR2Entities.Gunman1,
-                TR2Entities.Gunman2,
-                TR2Entities.StickWieldingGoon1,
-                TR2Entities.StickWieldingGoon2,
-                TR2Entities.FlamethrowerGoon,
-                TR2Entities.XianGuardSpear,
-                TR2Entities.XianGuardSword,
-                TR2Entities.Mercenary1,
-                TR2Entities.Mercenary2,
-                TR2Entities.Mercenary3,
-                TR2Entities.MonkWithLongStick,
-                TR2Entities.MonkWithKnifeStick
-        };
+                { LevelNames.GW,
+                    new List<TR2Entities>{ }
+                },
+
+                { LevelNames.VENICE,
+                    new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.StickWieldingGoon1, TR2Entities.MaskedGoon1 }
+                },
+
+                { LevelNames.BARTOLI,
+                    new List<TR2Entities>{ TR2Entities.StickWieldingGoon1, TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.StickWieldingGoon1 }
+                },
+
+                { LevelNames.OPERA,
+                    new List<TR2Entities>{ TR2Entities.StickWieldingGoon1, TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Rat, TR2Entities.StickWieldingGoon1, TR2Entities.ShotgunGoon }
+                },
+
+                { LevelNames.RIG,
+                    new List<TR2Entities>{ TR2Entities.Gunman2, TR2Entities.StickWieldingGoon1, TR2Entities.Doberman, TR2Entities.Gunman1 }
+                },
+
+                { LevelNames.DA,
+                    new List<TR2Entities>{ TR2Entities.FlamethrowerGoon, TR2Entities.StickWieldingGoon1, TR2Entities.Doberman, TR2Entities.Gunman1, TR2Entities.Gunman2 }
+                },
+
+                { LevelNames.FATHOMS,
+                    new List<TR2Entities>{ TR2Entities.Gunman1, TR2Entities.StickWieldingGoon1 }
+                },
+
+                { LevelNames.DORIA,
+                    new List<TR2Entities>{ TR2Entities.Gunman1, TR2Entities.StickWieldingGoon1, TR2Entities.Gunman2 }
+                },
+
+                { LevelNames.LQ,
+                    new List<TR2Entities>{ TR2Entities.StickWieldingGoon2, TR2Entities.StickWieldingGoon1, TR2Entities.Gunman1 }
+                },
+
+                { LevelNames.DECK,
+                    new List<TR2Entities>{ TR2Entities.StickWieldingGoon1, TR2Entities.FlamethrowerGoon, TR2Entities.Gunman1 }
+                },
+
+                { LevelNames.TIBET,
+                    new List<TR2Entities>{ TR2Entities.Mercenary2, TR2Entities.Mercenary3 }
+                },
+
+                { LevelNames.MONASTERY,
+                    new List<TR2Entities>{ TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Mercenary1, TR2Entities.Mercenary2 }
+                },
+
+                { LevelNames.COT,
+                    new List<TR2Entities>{ TR2Entities.Mercenary1, TR2Entities.Mercenary2 }
+                },
+
+                { LevelNames.CHICKEN,
+                    new List<TR2Entities>{ }
+                },
+
+                { LevelNames.XIAN,
+                    new List<TR2Entities>{ }
+                },
+
+                { LevelNames.FLOATER,
+                    new List<TR2Entities>{ TR2Entities.XianGuardSword, TR2Entities.XianGuardSpear, TR2Entities.Knifethrower }
+                },
+
+                { LevelNames.LAIR,
+                    new List<TR2Entities>{ TR2Entities.Knifethrower, TR2Entities.XianGuardSpear }
+                },
+
+                { LevelNames.HOME,
+                    new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.ShotgunGoon, TR2Entities.StickWieldingGoon1 }
+                },
+            };
         }
     }
 }
