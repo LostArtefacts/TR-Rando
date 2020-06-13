@@ -1,32 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TRLevelReader;
 using TRLevelReader.Helpers;
-using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 
-namespace TR2Randomizer
+namespace TR2Randomizer.Randomizers
 {
-    public class EnemyRandomizer
+    public class EnemyRandomizer : RandomizerBase
     {
-        private TR2LevelReader _reader;
-        private TR2LevelWriter _writer;
-        private TR2Level _levelInstance;
-        private Random _generator;
-        private List<string> _levels;
-
-        public EnemyRandomizer()
+        public EnemyRandomizer() : base()
         {
-            _levels = LevelNames.AsList;
-
-            _reader = new TR2LevelReader();
-            _writer = new TR2LevelWriter();
         }
 
-        public void Randomize(int seed)
+        public override void Randomize(int seed)
         {
             ReplacementStatusManager.CanRandomize = false;
 

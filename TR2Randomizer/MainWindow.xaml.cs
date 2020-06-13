@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Threading;
+using TR2Randomizer.Randomizers;
 
 namespace TR2Randomizer
 {
@@ -65,7 +66,7 @@ namespace TR2Randomizer
             {
                 _replacer.PlaceAll = true;
 
-                Thread ReplaceThread = new Thread(() => _replacer.Replace(1));
+                Thread ReplaceThread = new Thread(() => _replacer.Randomize(1));
                 ReplaceThread.Start();
             }
             else
@@ -74,7 +75,7 @@ namespace TR2Randomizer
 
                 int seed = Convert.ToInt32(SecretsSeedEntry.Text);
 
-                Thread ReplaceThread = new Thread(() => _replacer.Replace(seed));
+                Thread ReplaceThread = new Thread(() => _replacer.Randomize(seed));
                 ReplaceThread.Start();
             }
         }

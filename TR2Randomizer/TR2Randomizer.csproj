@@ -74,11 +74,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Difficulty.cs" />
-    <Compile Include="EnemyRandomizer.cs" />
-    <Compile Include="ItemRandomizer.cs" />
+    <Compile Include="Randomizers\EnemyRandomizer.cs" />
+    <Compile Include="Randomizers\IRandomizer.cs" />
+    <Compile Include="Randomizers\ItemRandomizer.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="Randomizers\RandomizerBase.cs" />
     <Compile Include="ReplacementStatusManager.cs" />
-    <Compile Include="SecretReplacer.cs" />
+    <Compile Include="Randomizers\SecretReplacer.cs" />
     <Compile Include="Utilities\SpatialConverters.cs" />
     <Compile Include="ZonedLocationCollection.cs" />
     <Page Include="MainWindow.xaml">

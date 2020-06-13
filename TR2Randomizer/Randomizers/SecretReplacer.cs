@@ -1,41 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
-
 using TRLevelReader.Model;
-using TRLevelReader.Serialization;
-
 using Newtonsoft.Json;
-using TRLevelReader;
 using TRLevelReader.Model.Enums;
 using TR2Randomizer.Utilities;
-using TRLevelReader.Helpers;
 
-namespace TR2Randomizer
+namespace TR2Randomizer.Randomizers
 {
-    public class SecretReplacer
+    public class SecretReplacer : RandomizerBase
     {
-        private TR2LevelReader _reader;
-        private TR2LevelWriter _writer;
-        private TR2Level _levelInstance;
-        private Random _generator;
-        private List<string> _levels;
-
         public bool PlaceAll { get; set; }
         
-        public SecretReplacer()
+        public SecretReplacer() : base()
         {
             PlaceAll = false;
-
-            _levels = LevelNames.AsList;
-
-            _reader = new TR2LevelReader();
-            _writer = new TR2LevelWriter();
         }
 
         private void RandomizeSecrets(List<Location> LevelLocations, string lvlname)
@@ -265,7 +245,7 @@ namespace TR2Randomizer
             };
         }
 
-        public void Replace(int seed)
+        public override void Randomize(int seed)
         {
             ReplacementStatusManager.CanRandomize = false;
 
