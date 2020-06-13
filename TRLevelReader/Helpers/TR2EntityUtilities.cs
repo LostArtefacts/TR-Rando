@@ -175,5 +175,11 @@ namespace TRLevelReader.Helpers
                 TR2Entities.Puzzle4_S_P
             };
         }
+
+        public static bool IsWaterCreature(TR2Entities entity)
+        {
+            return (entity == TR2Entities.Shark || entity == TR2Entities.YellowMorayEel || entity == TR2Entities.BlackMorayEel ||
+                entity == TR2Entities.Barracuda || entity == TR2Entities.ScubaDiver);
+        }
     }
 }
