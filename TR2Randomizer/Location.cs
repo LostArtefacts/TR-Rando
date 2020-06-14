@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRViewInterop.Routes;
 
 namespace TR2Randomizer
 {
@@ -34,6 +35,14 @@ namespace TR2Randomizer
             Difficulty = Difficulty.Easy;
             IsInRoomSpace = true;
             IsItem = false;
+        }
+
+        public Location(TRViewLocation loc)
+        {
+            X = loc.X;
+            Y = loc.Y;
+            Z = loc.Z;
+            Room = loc.Room;
         }
     }
 }

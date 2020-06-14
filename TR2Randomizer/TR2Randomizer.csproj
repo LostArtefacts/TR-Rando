@@ -265,6 +265,10 @@
       <Project>{226c4a3a-4fbb-4c15-aed4-c9248eb3a144}</Project>
       <Name>TRLevelReader</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TRViewInterop\TRViewInterop.csproj">
+      <Project>{31290b2e-015e-41d6-86b8-5f9085d29c86}</Project>
+      <Name>TRViewInterop</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

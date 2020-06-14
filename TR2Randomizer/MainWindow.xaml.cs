@@ -17,6 +17,10 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Threading;
 using TR2Randomizer.Randomizers;
+using TRViewInterop.Routes;
+using Newtonsoft.Json;
+using System.IO;
+using TRLevelReader.Helpers;
 
 namespace TR2Randomizer
 {
@@ -110,6 +114,76 @@ namespace TR2Randomizer
         private void TrackLaraUK_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("getcoords_uk.exe");
+        }
+
+        private void ImportLocations_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "route"; // Default file name
+            dlg.DefaultExt = ".tvr"; // Default file extension
+            dlg.Filter = "TRView Route (.tvr)|*.tvr"; // Filter files by extension
+
+            // Show open file dialog box
+            bool? result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+
+                //Convert to a list of int locations that are scaled to TR world
+                List<TRViewLocation> routeLocations = RouteToLocationsConverter.Convert(filename);
+
+                //What level are we importing for?
+                string level = LevelNames.AsList[ImportLevel.SelectedIndex];
+
+                //What locations do we want to import for? secrets or items
+                Dictionary<string, List<Location>> Locations;
+                if (LocationType.SelectedIndex == 0)
+                {
+                    Locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("locations.json"));
+
+                    foreach (TRViewLocation loc in routeLocations)
+                    {
+                        Locations[level].Add(new Location
+                        {
+                            X = loc.X,
+                            Y = loc.Y,
+                            Z = loc.Z,
+                            Room = loc.Room,
+                            IsInRoomSpace = false,
+                            Difficulty = Difficulty.Easy,
+                            IsItem = false,
+                            RequiresGlitch = false
+                        });
+                    }
+
+                    File.WriteAllText("locations.json", JsonConvert.SerializeObject(Locations));
+                }
+                else
+                {
+                    Locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("item_locations.json"));
+
+                    foreach (TRViewLocation loc in routeLocations)
+                    {
+                        Locations[level].Add(new Location
+                        {
+                            X = loc.X,
+                            Y = loc.Y,
+                            Z = loc.Z,
+                            Room = loc.Room,
+                            IsInRoomSpace = false,
+                            Difficulty = Difficulty.Easy,
+                            IsItem = true,
+                            RequiresGlitch = false
+                        });
+                    }
+
+                    File.WriteAllText("item_locations.json", JsonConvert.SerializeObject(Locations));
+                }
+            }
         }
     }
 }

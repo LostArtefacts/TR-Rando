@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRLevelReader", "TRLevelRea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRLevelReaderUnitTests", "TRLevelReaderUnitTests\TRLevelReaderUnitTests.csproj", "{4364B084-8063-4D82-A12C-008D6482E3E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRViewInterop", "TRViewInterop\TRViewInterop.csproj", "{31290B2E-015E-41D6-86B8-5F9085D29C86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4364B084-8063-4D82-A12C-008D6482E3E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4364B084-8063-4D82-A12C-008D6482E3E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4364B084-8063-4D82-A12C-008D6482E3E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31290B2E-015E-41D6-86B8-5F9085D29C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31290B2E-015E-41D6-86B8-5F9085D29C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31290B2E-015E-41D6-86B8-5F9085D29C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31290B2E-015E-41D6-86B8-5F9085D29C86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
