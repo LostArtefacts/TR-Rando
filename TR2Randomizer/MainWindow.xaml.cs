@@ -160,7 +160,7 @@ namespace TR2Randomizer
                         });
                     }
 
-                    File.WriteAllText("locations.json", JsonConvert.SerializeObject(Locations));
+                    File.WriteAllText("locations.json", JsonConvert.SerializeObject(Locations, Formatting.Indented));
                 }
                 else
                 {
@@ -181,7 +181,7 @@ namespace TR2Randomizer
                         });
                     }
 
-                    File.WriteAllText("item_locations.json", JsonConvert.SerializeObject(Locations));
+                    File.WriteAllText("item_locations.json", JsonConvert.SerializeObject(Locations, Formatting.Indented));
                 }
             }
         }
