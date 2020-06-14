@@ -147,7 +147,7 @@ namespace TR2Randomizer
 
                     foreach (TRViewLocation loc in routeLocations)
                     {
-                        Locations[level].Add(new Location
+                        Location NewLocation = new Location
                         {
                             X = loc.X,
                             Y = loc.Y,
@@ -157,7 +157,12 @@ namespace TR2Randomizer
                             Difficulty = Difficulty.Easy,
                             IsItem = false,
                             RequiresGlitch = false
-                        });
+                        };
+
+                        if (!Locations[level].Any(n => (n.X == NewLocation.X) && (n.Y == NewLocation.Y) && (n.Z == NewLocation.Z)))
+                        {
+                            Locations[level].Add(NewLocation);
+                        }
                     }
 
                     File.WriteAllText("locations.json", JsonConvert.SerializeObject(Locations, Formatting.Indented));
@@ -168,7 +173,7 @@ namespace TR2Randomizer
 
                     foreach (TRViewLocation loc in routeLocations)
                     {
-                        Locations[level].Add(new Location
+                        Location NewLocation = new Location
                         {
                             X = loc.X,
                             Y = loc.Y,
@@ -178,7 +183,12 @@ namespace TR2Randomizer
                             Difficulty = Difficulty.Easy,
                             IsItem = true,
                             RequiresGlitch = false
-                        });
+                        };
+
+                        if (!Locations[level].Any( n => (n.X == NewLocation.X) && (n.Y == NewLocation.Y) && (n.Z == NewLocation.Z)))
+                        {
+                            Locations[level].Add(NewLocation);
+                        }
                     }
 
                     File.WriteAllText("item_locations.json", JsonConvert.SerializeObject(Locations, Formatting.Indented));
