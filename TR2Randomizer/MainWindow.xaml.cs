@@ -159,7 +159,7 @@ namespace TR2Randomizer
                             RequiresGlitch = false
                         };
 
-                        if (!Locations[level].Any(n => (n.X == NewLocation.X) && (n.Y == NewLocation.Y) && (n.Z == NewLocation.Z)))
+                        if (!Locations[level].Any(n => (n.X == NewLocation.X) && (n.Y == NewLocation.Y) && (n.Z == NewLocation.Z) && (n.Room == NewLocation.Room)))
                         {
                             Locations[level].Add(NewLocation);
                         }
@@ -185,7 +185,7 @@ namespace TR2Randomizer
                             RequiresGlitch = false
                         };
 
-                        if (!Locations[level].Any( n => (n.X == NewLocation.X) && (n.Y == NewLocation.Y) && (n.Z == NewLocation.Z)))
+                        if (!Locations[level].Any( n => (n.X == NewLocation.X) && (n.Y == NewLocation.Y) && (n.Z == NewLocation.Z) && (n.Room == NewLocation.Room)))
                         {
                             Locations[level].Add(NewLocation);
                         }
