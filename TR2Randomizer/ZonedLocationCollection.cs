@@ -8,8 +8,6 @@ namespace TR2Randomizer
 {
     class ZonedLocationCollection
     {
-        public List<Location> ZoneOneLocations { get; set; }
-        public List<Location> ZoneTwoLocations { get; set; }
-        public List<Location> ZoneThreeLocations { get; set; }
+        public Dictionary<int, List<Location>> ZoneAppliedLocations { get; set; }
     }
 }

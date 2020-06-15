@@ -83,6 +83,7 @@
     <Compile Include="Randomizers\SecretReplacer.cs" />
     <Compile Include="Utilities\SpatialConverters.cs" />
     <Compile Include="ZonedLocationCollection.cs" />
+    <Compile Include="Zones\LevelZones.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

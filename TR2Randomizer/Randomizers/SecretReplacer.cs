@@ -6,6 +6,8 @@ using TRLevelReader.Model;
 using Newtonsoft.Json;
 using TRLevelReader.Model.Enums;
 using TR2Randomizer.Utilities;
+using TR2Randomizer.Zones;
+using System.Security.Policy;
 
 namespace TR2Randomizer.Randomizers
 {
@@ -38,37 +40,38 @@ namespace TR2Randomizer.Randomizers
                 //If there a are no locations in a zone, open up the whole pool as a choice for a secret.
                 //This shouldn't really ever happen, but in development I have simply split the levels in
                 //3 parts for testing, so there may be areas with no location.
-                if (ZonedLocations.ZoneOneLocations.Count == 0)
+                if (ZonedLocations.ZoneAppliedLocations[(int)LevelZones.StoneSecretZone].Count == 0)
                 {
-                    ZonedLocations.ZoneOneLocations = LevelLocations;
+                    ZonedLocations.ZoneAppliedLocations[(int)LevelZones.StoneSecretZone] = LevelLocations;
                 }
                 
-                if (ZonedLocations.ZoneTwoLocations.Count == 0)
+                if (ZonedLocations.ZoneAppliedLocations[(int)LevelZones.JadeSecretZone].Count == 0)
                 {
-                    ZonedLocations.ZoneTwoLocations = LevelLocations;
+                    ZonedLocations.ZoneAppliedLocations[(int)LevelZones.JadeSecretZone] = LevelLocations;
                 }
                 
-                if (ZonedLocations.ZoneThreeLocations.Count == 0)
+                if (ZonedLocations.ZoneAppliedLocations[(int)LevelZones.GoldSecretZone].Count == 0)
                 {
-                    ZonedLocations.ZoneThreeLocations = LevelLocations;
+                    ZonedLocations.ZoneAppliedLocations[(int)LevelZones.GoldSecretZone] = LevelLocations;
                 }
 
                 //Find suitable locations, ensuring they are zoned, do not share a room and difficulty.
+                //Location = ZoneLocations[ZoneGroup][LocationInZoneGroup]
                 do
                 {
-                    GoldSecret = ZonedLocations.ZoneThreeLocations[_generator.Next(0, ZonedLocations.ZoneThreeLocations.Count)];
+                    GoldSecret = ZonedLocations.ZoneAppliedLocations[(int)LevelZones.GoldSecretZone][_generator.Next(0, ZonedLocations.ZoneAppliedLocations[(int)LevelZones.GoldSecretZone].Count)];
                 } while (GoldSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false);
                 
 
                 do
                 {
-                    JadeSecret = ZonedLocations.ZoneTwoLocations[_generator.Next(0, ZonedLocations.ZoneTwoLocations.Count)];
+                    JadeSecret = ZonedLocations.ZoneAppliedLocations[(int)LevelZones.JadeSecretZone][_generator.Next(0, ZonedLocations.ZoneAppliedLocations[(int)LevelZones.JadeSecretZone].Count)];
                 } while ((JadeSecret.Room == GoldSecret.Room) || 
                         (JadeSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
 
                 do
                 {
-                    StoneSecret = ZonedLocations.ZoneOneLocations[_generator.Next(0, ZonedLocations.ZoneOneLocations.Count)];
+                    StoneSecret = ZonedLocations.ZoneAppliedLocations[(int)LevelZones.StoneSecretZone][_generator.Next(0, ZonedLocations.ZoneAppliedLocations[(int)LevelZones.StoneSecretZone].Count)];
                 } while ((StoneSecret.Room == GoldSecret.Room) || 
                         (StoneSecret.Room == JadeSecret.Room) ||
                         (StoneSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
@@ -229,20 +232,24 @@ namespace TR2Randomizer.Randomizers
         {
             Dictionary<int, List<int>> ZoneMap = JsonConvert.DeserializeObject<Dictionary<int, List<int>>>(File.ReadAllText(Directory.GetCurrentDirectory() + "\\Zones\\" + lvl + "-Zones.json"));
 
-            return new ZonedLocationCollection
+            ZonedLocationCollection zones = new ZonedLocationCollection()
             {
-                ZoneOneLocations = (from loc in locations
-                                    where ZoneMap[0].Contains(loc.Room)
-                                    select loc).ToList(),
-
-                ZoneTwoLocations = (from loc in locations
-                                    where ZoneMap[1].Contains(loc.Room)
-                                    select loc).ToList(),
-                
-                ZoneThreeLocations = (from loc in locations
-                                      where ZoneMap[2].Contains(loc.Room)
-                                      select loc).ToList()
+                ZoneAppliedLocations = new Dictionary<int, List<Location>>()
             };
+
+            zones.ZoneAppliedLocations.Add((int)LevelZones.StoneSecretZone, (from loc in locations
+                                                                             where ZoneMap[(int)LevelZones.StoneSecretZone].Contains(loc.Room)
+                                                                             select loc).ToList());
+
+            zones.ZoneAppliedLocations.Add((int)LevelZones.JadeSecretZone, (from loc in locations
+                                                                            where ZoneMap[(int)LevelZones.JadeSecretZone].Contains(loc.Room)
+                                                                            select loc).ToList());
+
+            zones.ZoneAppliedLocations.Add((int)LevelZones.GoldSecretZone, (from loc in locations
+                                                                            where ZoneMap[(int)LevelZones.GoldSecretZone].Contains(loc.Room)
+                                                                            select loc).ToList());
+
+            return zones;
         }
 
         public override void Randomize(int seed)
