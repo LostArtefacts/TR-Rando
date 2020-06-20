@@ -3266,8 +3266,8 @@
 			"IsInRoomSpace": false
 		},
 		{
-			"X": 58372,
-			"Z": 6063,
+			"X": 6063,
+			"Z": 58372,
 			"Y": -4885,
 			"Room": 67,
 			"RequiresGlitch": false,
