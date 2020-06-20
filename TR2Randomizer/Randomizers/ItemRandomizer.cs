@@ -22,7 +22,7 @@ namespace TR2Randomizer.Randomizers
 
             _generator = new Random(seed);
 
-            Dictionary<string, List<Location>> Locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("locations.json"));
+            Dictionary<string, List<Location>> Locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText("item_locations.json"));
 
             foreach (string lvl in _levels)
             {
@@ -50,22 +50,25 @@ namespace TR2Randomizer.Randomizers
 
         private void RepositionItems(List<Location> ItemLocs)
         {
-            //We are currently looking guns + ammo
-            List<TR2Entities> targetents = TR2EntityUtilities.GetListOfGunTypes();
-            targetents.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
-
-            for (int i = 0; i < _levelInstance.Entities.Count(); i++)
+            if (ItemLocs.Count > 0)
             {
-                if (targetents.Contains((TR2Entities)_levelInstance.Entities[i].TypeID) && (i != _planeCargoWeaponIndex))
+                //We are currently looking guns + ammo
+                List<TR2Entities> targetents = TR2EntityUtilities.GetListOfGunTypes();
+                targetents.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
+
+                for (int i = 0; i < _levelInstance.Entities.Count(); i++)
                 {
-                    Location RandomLocation = ItemLocs[_generator.Next(0, ItemLocs.Count)];
+                    if (targetents.Contains((TR2Entities)_levelInstance.Entities[i].TypeID) && (i != _planeCargoWeaponIndex))
+                    {
+                        Location RandomLocation = ItemLocs[_generator.Next(0, ItemLocs.Count)];
 
-                    Location GlobalizedRandomLocation = SpatialConverters.TransformToLevelSpace(RandomLocation, _levelInstance.Rooms[RandomLocation.Room].Info);
+                        Location GlobalizedRandomLocation = SpatialConverters.TransformToLevelSpace(RandomLocation, _levelInstance.Rooms[RandomLocation.Room].Info);
 
-                    _levelInstance.Entities[i].Room = Convert.ToInt16(GlobalizedRandomLocation.Room);
-                    _levelInstance.Entities[i].X = GlobalizedRandomLocation.X;
-                    _levelInstance.Entities[i].Y = GlobalizedRandomLocation.Y;
-                    _levelInstance.Entities[i].Z = GlobalizedRandomLocation.Z;
+                        _levelInstance.Entities[i].Room = Convert.ToInt16(GlobalizedRandomLocation.Room);
+                        _levelInstance.Entities[i].X = GlobalizedRandomLocation.X;
+                        _levelInstance.Entities[i].Y = GlobalizedRandomLocation.Y;
+                        _levelInstance.Entities[i].Z = GlobalizedRandomLocation.Z;
+                    }
                 }
             }
         }

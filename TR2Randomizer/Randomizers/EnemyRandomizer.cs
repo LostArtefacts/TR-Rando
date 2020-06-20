@@ -66,6 +66,9 @@ namespace TR2Randomizer.Randomizers
                             IsPickupItem = (TR2EntityUtilities.IsAmmoType(EntType)) ||
                                             (TR2EntityUtilities.IsGunType(EntType)) ||
                                             (TR2EntityUtilities.IsKeyItemType(EntType));
+
+                            if (IsPickupItem)
+                                break;
                         }
 
                         //Generate a location
