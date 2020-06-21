@@ -3145,6 +3145,7 @@
 			"Y": -3630,
 			"Room": 78,
 			"RequiresGlitch": false,
+			"IsInRoomSpace": false,
                         "Difficulty" : "Hard"
 		},
 		{
@@ -3153,6 +3154,7 @@
 			"Y": -3098,
 			"Room": 78,
 			"RequiresGlitch": false,
+			"IsInRoomSpace": false,
                         "Difficulty" : "Hard"
 		},
 		{
@@ -3161,19 +3163,22 @@
 			"Y": -2339,
 			"Room": 78,
 			"RequiresGlitch": false,
+			"IsInRoomSpace": false,
                         "Difficulty" : "Hard"
 		},
 		{
 			"X": 70699,
 			"Z": 14367,
 			"Y": -3576,
-			"Room": 81
+			"Room": 81,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 79832,
 			"Z": 37846,
 			"Y": 3840,
 			"Room": 34,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 73713,
@@ -3181,6 +3186,7 @@
 			"Y": -3867,
 			"Room": 6,
 			"RequiresGlitch": false,
+			"IsInRoomSpace": false,
                         "Difficulty" : "Hard"
 		},
 		{
@@ -3189,6 +3195,7 @@
 			"Y": -3812,
 			"Room": 76,
 			"RequiresGlitch": false,
+			"IsInRoomSpace": false,
                         "Difficulty" : "Hard"
 		},
 		{
@@ -3197,6 +3204,7 @@
 			"Y": -4155,
 			"Room": 23,
 			"RequiresGlitch": false,
+			"IsInRoomSpace": false,
                         "Difficulty" : "Hard"
 		},
 		{
@@ -3205,99 +3213,115 @@
 			"Y": -4124,
 			"Room": 25,
 			"RequiresGlitch": false,
+			"IsInRoomSpace": false,
                         "Difficulty" : "Hard"
 		},
 		{
 			"X": 51295,
 			"Z": 70713,
 			"Y": 256,
-			"Room": 136
+			"Room": 136,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 66618,
 			"Z": 70697,
 			"Y": 0,
-			"Room": 138
+			"Room": 138,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 27113,
 			"Z": 85869,
 			"Y": -2243,
-			"Room": 116
+			"Room": 116,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 17416,
 			"Z": 85955,
 			"Y": -3611,
-			"Room": 116
+			"Room": 116,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 31208,
 			"Z": 87690,
 			"Y": -2682,
-			"Room": 116
+			"Room": 116,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 31225,
 			"Z": 98818,
 			"Y": -3841,
-			"Room": 14
+			"Room": 14,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 3181,
 			"Z": 76871,
 			"Y": -3300,
-			"Room": 74
+			"Room": 74,
+			"IsInRoomSpace": false
 		},
 		{
-			"X": 58372,
-			"Z": 6063,
+			"X": 6063,
+			"Z": 58372,
 			"Y": -4885,
 			"Room": 67,
 			"RequiresGlitch": false,
+			"IsInRoomSpace": false,
                         "Difficulty" : "Hard"
 		},
 		{
 			"X": 47058,
 			"Z": 11211,
 			"Y": 290,
-			"Room": 103
+			"Room": 103,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 24043,
 			"Z": 12801,
 			"Y": 3072,
-			"Room": 112
+			"Room": 112,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 14294,
 			"Z": 22528,
 			"Y": 3047,
-			"Room": 125
+			"Room": 125,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 25635,
 			"Z": 24620,
 			"Y": 8960,
-			"Room": 127
+			"Room": 127,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 12251,
 			"Z": 31793,
 			"Y": 15616,
-			"Room": 146
+			"Room": 146,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 25559,
 			"Z": 20487,
 			"Y": 3072,
-			"Room": 112
+			"Room": 112,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 60449,
 			"Z": 55254,
 			"Y": 245,
-			"Room": 62
+			"Room": 62,
+			"IsInRoomSpace": false
 		}
 	],
 	"MONASTRY.TR2": [
@@ -3479,25 +3503,29 @@
 			"X": 79837,
 			"Z": 8595,
 			"Y": 2924,
-			"Room": 27
+			"Room": 27,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 32701,
 			"Z": 42052,
 			"Y": 0,
-			"Room": 53
+			"Room": 53,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 60500,
 			"Z": 40954,
 			"Y": 0,
-			"Room": 65
+			"Room": 65,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 61399,
 			"Z": 61403,
 			"Y": 0,
-			"Room": 70
+			"Room": 70,
+			"IsInRoomSpace": false
 		}
 	],
 	"CATACOMB.TR2": [
@@ -3807,7 +3835,8 @@
 			"X": 45022,
 			"Z": 29201,
 			"Y": 12544,
-			"Room": 7
+			"Room": 7,
+			"IsInRoomSpace": false
 		},
 		
 	],
@@ -4246,13 +4275,15 @@
 			"X": 49214,
 			"Z": 51234,
 			"Y": -9472,
-			"Room": 43
+			"Room": 43,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 41024,
 			"Z": 63427,
 			"Y": -9232,
-			"Room": 44
+			"Room": 44,
+			"IsInRoomSpace": false
 		}
 	],
 	"XIAN.TR2": [
