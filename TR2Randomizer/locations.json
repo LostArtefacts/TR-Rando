@@ -4535,6 +4535,55 @@
 			"Z": 1320,
 			"Y": 256,
 			"Room": 73
-		}
+		},
+		{
+			"X": 27053,
+			"Z": 62956,
+			"Y": 0,
+			"Room": 27,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 35822,
+			"Z": 61378,
+			"Y": 2304,
+			"Room": 51,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 32287,
+			"Z": 57841,
+			"Y": -2048,
+			"Room": 28,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 33737,
+			"Z": 84050,
+			"Y": 0,
+			"Room": 34,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 61380,
+			"Z": 73792,
+			"Y": -1024,
+			"Room": 19,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 46103,
+			"Z": 91630,
+			"Y": 0,
+			"Room": 22,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 16420,
+			"Z": 98257,
+			"Y": -1024,
+			"Room": 24,
+			"IsInRoomSpace": false,
+		}			
 	]
 }
