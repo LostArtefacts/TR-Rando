@@ -3860,7 +3860,20 @@
 			"Room": 7,
 			"IsInRoomSpace": false
 		},
-		
+		{
+			"X": 42974,
+			"Z": 49194,
+			"Y": 8192,
+			"Room": 15,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 31694,
+			"Z": 30682,
+			"Y": 7196,
+			"Room": 56,
+			"IsInRoomSpace": false
+		}
 	],
 	"EMPRTOMB.TR2": [
 		{
