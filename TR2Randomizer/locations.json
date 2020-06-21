@@ -4284,6 +4284,56 @@
 			"Y": -9232,
 			"Room": 44,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 10139,
+			"Z": 6043,
+			"Y": 0,
+			"Room": 136
+		},
+		{
+			"X": 1125,
+			"Z": 1125,
+			"Y": 0,
+			"Room": 136
+		},
+		{
+			"X": 7067,
+			"Z": 7067,
+			"Y": 512,
+			"Room": 39,
+			"RequiresGlitch": false,
+                        "Difficulty" : "Hard"
+		},
+		{
+			"X": 45552,
+			"Z": 40460,
+			"Y": -5639,
+			"Room": 66,
+			"Difficulty" : "Hard",
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 44467,
+			"Z": 42067,
+			"Y": -9604,
+			"Room": 61,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 44467,
+			"Z": 56256,
+			"Y": -1747,
+			"Room": 28,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 46120,
+			"Z": 42165,
+			"Y": -8353,
+			"Room": 65,
+			"Difficulty" : "Hard",
+			"IsInRoomSpace": false
 		}
 	],
 	"XIAN.TR2": [
