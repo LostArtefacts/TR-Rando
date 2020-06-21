@@ -31,47 +31,31 @@ namespace TR2Randomizer.Randomizers
                 }
 
                 //Apply zoning to the locations to ensure they are spread out.
-                ZonedLocationCollection ZonedLocations = AssignLocationsToZones(lvlname, LevelLocations);
+                ZonedLocationCollection ZonedLocations = new ZonedLocationCollection();
+
+                ZonedLocations.PopulateZones(lvlname, LevelLocations, ZonePopulationMethod.SecretsOnly);
 
                 Location GoldSecret;
                 Location JadeSecret;
                 Location StoneSecret;
 
-                //If there a are no locations in a zone, open up the whole pool as a choice for a secret.
-                //This shouldn't really ever happen, but in development I have simply split the levels in
-                //3 parts for testing, so there may be areas with no location.
-                if (ZonedLocations.ZoneAppliedLocations[(int)LevelZones.StoneSecretZone].Count == 0)
-                {
-                    ZonedLocations.ZoneAppliedLocations[(int)LevelZones.StoneSecretZone] = LevelLocations;
-                }
-                
-                if (ZonedLocations.ZoneAppliedLocations[(int)LevelZones.JadeSecretZone].Count == 0)
-                {
-                    ZonedLocations.ZoneAppliedLocations[(int)LevelZones.JadeSecretZone] = LevelLocations;
-                }
-                
-                if (ZonedLocations.ZoneAppliedLocations[(int)LevelZones.GoldSecretZone].Count == 0)
-                {
-                    ZonedLocations.ZoneAppliedLocations[(int)LevelZones.GoldSecretZone] = LevelLocations;
-                }
-
                 //Find suitable locations, ensuring they are zoned, do not share a room and difficulty.
                 //Location = ZoneLocations[ZoneGroup][LocationInZoneGroup]
                 do
                 {
-                    GoldSecret = ZonedLocations.ZoneAppliedLocations[(int)LevelZones.GoldSecretZone][_generator.Next(0, ZonedLocations.ZoneAppliedLocations[(int)LevelZones.GoldSecretZone].Count)];
+                    GoldSecret = ZonedLocations.GoldZone[_generator.Next(0, ZonedLocations.GoldZone.Count)];
                 } while (GoldSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false);
                 
 
                 do
                 {
-                    JadeSecret = ZonedLocations.ZoneAppliedLocations[(int)LevelZones.JadeSecretZone][_generator.Next(0, ZonedLocations.ZoneAppliedLocations[(int)LevelZones.JadeSecretZone].Count)];
+                    JadeSecret = ZonedLocations.JadeZone[_generator.Next(0, ZonedLocations.JadeZone.Count)];
                 } while ((JadeSecret.Room == GoldSecret.Room) || 
                         (JadeSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
 
                 do
                 {
-                    StoneSecret = ZonedLocations.ZoneAppliedLocations[(int)LevelZones.StoneSecretZone][_generator.Next(0, ZonedLocations.ZoneAppliedLocations[(int)LevelZones.StoneSecretZone].Count)];
+                    StoneSecret = ZonedLocations.StoneZone[_generator.Next(0, ZonedLocations.StoneZone.Count)];
                 } while ((StoneSecret.Room == GoldSecret.Room) || 
                         (StoneSecret.Room == JadeSecret.Room) ||
                         (StoneSecret.Difficulty == Difficulty.Hard && ReplacementStatusManager.AllowHard == false));
@@ -226,30 +210,6 @@ namespace TR2Randomizer.Randomizers
 
             _levelInstance.NumEntities = (uint)ents.Count;
             _levelInstance.Entities = ents.ToArray();
-        }
-
-        private ZonedLocationCollection AssignLocationsToZones(string lvl, List<Location> locations)
-        {
-            Dictionary<int, List<int>> ZoneMap = JsonConvert.DeserializeObject<Dictionary<int, List<int>>>(File.ReadAllText(Directory.GetCurrentDirectory() + "\\Zones\\" + lvl + "-Zones.json"));
-
-            ZonedLocationCollection zones = new ZonedLocationCollection()
-            {
-                ZoneAppliedLocations = new Dictionary<int, List<Location>>()
-            };
-
-            zones.ZoneAppliedLocations.Add((int)LevelZones.StoneSecretZone, (from loc in locations
-                                                                             where ZoneMap[(int)LevelZones.StoneSecretZone].Contains(loc.Room)
-                                                                             select loc).ToList());
-
-            zones.ZoneAppliedLocations.Add((int)LevelZones.JadeSecretZone, (from loc in locations
-                                                                            where ZoneMap[(int)LevelZones.JadeSecretZone].Contains(loc.Room)
-                                                                            select loc).ToList());
-
-            zones.ZoneAppliedLocations.Add((int)LevelZones.GoldSecretZone, (from loc in locations
-                                                                            where ZoneMap[(int)LevelZones.GoldSecretZone].Contains(loc.Room)
-                                                                            select loc).ToList());
-
-            return zones;
         }
 
         public override void Randomize(int seed)
