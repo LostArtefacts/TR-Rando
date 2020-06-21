@@ -3666,6 +3666,28 @@
 			"Z": 5265,
 			"Y": 559,
 			"Room": 0
+		},
+		{
+			"X": 22502,
+			"Z": 45016,
+			"Y": -251,
+			"Room": 1,
+			"Difficulty" : "Hard",
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 16420,
+			"Z": 37926,
+			"Y": -1763,
+			"Room": 7,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 11163,
+			"Z": 1125,
+			"Y": 461,
+			"Room": 66,
+			"IsInRoomSpace": false
 		}
 	],
 	"ICECAVE.TR2": [
