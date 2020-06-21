@@ -23,4 +23,12 @@ namespace TR2Randomizer.Zones
         Quest2Zone,
         ItemZones
     }
+
+    enum ZonePopulationMethod
+    {
+        SecretsOnly,
+        KeyPuzzleQuestOnly,
+        GeneralOnly,
+        Full
+    }
 }
