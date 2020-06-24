@@ -3666,6 +3666,28 @@
 			"Z": 5265,
 			"Y": 559,
 			"Room": 0
+		},
+		{
+			"X": 22502,
+			"Z": 45016,
+			"Y": -251,
+			"Room": 1,
+			"Difficulty" : "Hard",
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 16420,
+			"Z": 37926,
+			"Y": -1763,
+			"Room": 7,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 11163,
+			"Z": 1125,
+			"Y": 461,
+			"Room": 66,
+			"IsInRoomSpace": false
 		}
 	],
 	"ICECAVE.TR2": [
@@ -3838,7 +3860,20 @@
 			"Room": 7,
 			"IsInRoomSpace": false
 		},
-		
+		{
+			"X": 42974,
+			"Z": 49194,
+			"Y": 8192,
+			"Room": 15,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 31694,
+			"Z": 30682,
+			"Y": 7196,
+			"Room": 56,
+			"IsInRoomSpace": false
+		}
 	],
 	"EMPRTOMB.TR2": [
 		{
@@ -4284,6 +4319,56 @@
 			"Y": -9232,
 			"Room": 44,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 10139,
+			"Z": 6043,
+			"Y": 0,
+			"Room": 136
+		},
+		{
+			"X": 1125,
+			"Z": 1125,
+			"Y": 0,
+			"Room": 136
+		},
+		{
+			"X": 7067,
+			"Z": 7067,
+			"Y": 512,
+			"Room": 39,
+			"RequiresGlitch": false,
+                        "Difficulty" : "Hard"
+		},
+		{
+			"X": 45552,
+			"Z": 40460,
+			"Y": -5639,
+			"Room": 66,
+			"Difficulty" : "Hard",
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 44467,
+			"Z": 42067,
+			"Y": -9604,
+			"Room": 61,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 44467,
+			"Z": 56256,
+			"Y": -1747,
+			"Room": 28,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 46120,
+			"Z": 42165,
+			"Y": -8353,
+			"Room": 65,
+			"Difficulty" : "Hard",
+			"IsInRoomSpace": false
 		}
 	],
 	"XIAN.TR2": [
@@ -4342,15 +4427,27 @@
 			"Room": 21
 		},
 		{
-			"X": 7367,
+			"X": 7067,
 			"Z": 4196,
-			"Y": 99,
+			"Y": 999,
 			"Room": 21
 		},
 		{
 			"X": 1125,
 			"Z": 13208,
 			"Y": 1331,
+			"Room": 21
+		},
+		{
+			"X": 1947,
+			"Z": 19355,
+			"Y": 2279,
+			"Room": 21
+		},
+		{
+			"X": 6635,
+			"Z": 19355,
+			"Y": 2279,
 			"Room": 21
 		}
 	],
@@ -4450,6 +4547,55 @@
 			"Z": 1320,
 			"Y": 256,
 			"Room": 73
-		}
+		},
+		{
+			"X": 27053,
+			"Z": 62956,
+			"Y": 0,
+			"Room": 27,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 35822,
+			"Z": 61378,
+			"Y": 2304,
+			"Room": 51,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 32287,
+			"Z": 57841,
+			"Y": -2048,
+			"Room": 28,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 33737,
+			"Z": 84050,
+			"Y": 0,
+			"Room": 34,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 61380,
+			"Z": 73792,
+			"Y": -1024,
+			"Room": 19,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 46103,
+			"Z": 91630,
+			"Y": 0,
+			"Room": 22,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 16420,
+			"Z": 98257,
+			"Y": -1024,
+			"Room": 24,
+			"IsInRoomSpace": false,
+		}			
 	]
 }
