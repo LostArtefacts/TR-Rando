@@ -50,6 +50,18 @@ namespace TRLevelReader.Model
 
             return sb.ToString();
         }
+
+        public Textile16Pixel[] To32BPPFormat()
+        {
+            Textile16Pixel[] pixels = new Textile16Pixel[256 * 256];
+
+            for (int i = 0; i < pixels.Length; i++)
+            {
+                pixels[i] = new Textile16Pixel { Value = this.Pixels[i] };
+            }
+
+            return pixels;
+        }
     }
 
     //256 * 256
