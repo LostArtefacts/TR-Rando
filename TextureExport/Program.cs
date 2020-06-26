@@ -47,7 +47,7 @@ namespace TextureExport
 
                 Marshal.Copy(pixelCollection.ToArray(), 0, bitmapData.Scan0, pixelCollection.Count);
                 bmp.UnlockBits(bitmapData);
-                bmp.Save(lvl + index + ".bmp");
+                bmp.Save(lvl + index + ".png");
 
                 index++;
             }
