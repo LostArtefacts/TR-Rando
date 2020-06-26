@@ -161,6 +161,10 @@ namespace TR2Randomizer.Randomizers
 
         private void PlaceAllSecrets(string lvl, List<Location> LevelLocations)
         {
+            ZonedLocationCollection ZonedLocations = new ZonedLocationCollection();
+
+            ZonedLocations.PopulateZones(lvl, LevelLocations, ZonePopulationMethod.SecretsOnly);
+
             List<TR2Entity> ents = _levelInstance.Entities.ToList();
 
             bool SecretsRemain = true;
@@ -190,13 +194,49 @@ namespace TR2Randomizer.Randomizers
             }
 
             //Add new entities
-            foreach (Location loc in LevelLocations)
+            foreach (Location loc in ZonedLocations.StoneZone)
+            {
+                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Rooms[loc.Room].Info);
+
+                ents.Add(new TR2Entity
+                {
+                    TypeID = (int)TR2Entities.StoneSecret_S_P,
+                    Room = Convert.ToInt16(copy.Room),
+                    X = copy.X,
+                    Y = copy.Y,
+                    Z = copy.Z,
+                    Angle = 0,
+                    Intensity1 = -1,
+                    Intensity2 = -1,
+                    Flags = 0
+                });
+            }
+
+            foreach (Location loc in ZonedLocations.JadeZone)
             {
                 Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Rooms[loc.Room].Info);
 
                 ents.Add(new TR2Entity
                 {
                     TypeID = (int)TR2Entities.JadeSecret_S_P,
+                    Room = Convert.ToInt16(copy.Room),
+                    X = copy.X,
+                    Y = copy.Y,
+                    Z = copy.Z,
+                    Angle = 0,
+                    Intensity1 = -1,
+                    Intensity2 = -1,
+                    Flags = 0
+                });
+            }
+
+            foreach (Location loc in ZonedLocations.GoldZone)
+            {
+                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Rooms[loc.Room].Info);
+
+                ents.Add(new TR2Entity
+                {
+                    TypeID = (int)TR2Entities.GoldSecret_S_P,
                     Room = Convert.ToInt16(copy.Room),
                     X = copy.X,
                     Y = copy.Y,
