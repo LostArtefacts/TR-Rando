@@ -10,12 +10,12 @@ namespace TRLevelReader.Helpers
     {
         internal static byte To32BPP(byte input)
         {
-            return Convert.ToByte((input / 31) * (255));
+            return Convert.ToByte(input * 255 / 31);
         }
 
         internal static byte From32BPP(byte input)
         {
-            return Convert.ToByte((input / 255) * (31));
+            throw new NotImplementedException();
         }
     }
 }

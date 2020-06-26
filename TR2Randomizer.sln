@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRLevelReaderUnitTests", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRViewInterop", "TRViewInterop\TRViewInterop.csproj", "{31290B2E-015E-41D6-86B8-5F9085D29C86}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{5F1A11E5-F541-4E3B-B331-93574EE4C629}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureExport", "TextureExport\TextureExport.csproj", "{108D4840-3E84-466F-B5DE-AF00EECA8103}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{31290B2E-015E-41D6-86B8-5F9085D29C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31290B2E-015E-41D6-86B8-5F9085D29C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31290B2E-015E-41D6-86B8-5F9085D29C86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{108D4840-3E84-466F-B5DE-AF00EECA8103}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{108D4840-3E84-466F-B5DE-AF00EECA8103}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{108D4840-3E84-466F-B5DE-AF00EECA8103}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{108D4840-3E84-466F-B5DE-AF00EECA8103}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{108D4840-3E84-466F-B5DE-AF00EECA8103} = {5F1A11E5-F541-4E3B-B331-93574EE4C629}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B68A2054-7393-4B0D-9004-0E92FB8324FC}

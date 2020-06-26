@@ -77,7 +77,7 @@ namespace TRLevelReader.Model
         { 
             get
             {
-                return Convert.ToByte(Value & 0x7C00);
+                return Convert.ToByte((Value & 0x7C00) >> 10);
             }
         }
 
@@ -109,7 +109,7 @@ namespace TRLevelReader.Model
         { 
             get
             {
-                return Convert.ToByte(Value & 0x03E0);
+                return Convert.ToByte((Value & 0x03E0) >> 5);
             }
         }
 
@@ -125,7 +125,7 @@ namespace TRLevelReader.Model
         { 
             get
             {
-                return Convert.ToByte(Value & 0x8000);
+                return Convert.ToByte((Value & 0x8000) >> 15);
             }
         }
 
@@ -141,6 +141,14 @@ namespace TRLevelReader.Model
                 {
                     return 0x00;
                 }
+            }
+        }
+
+        public byte[] RGB32
+        {
+            get
+            {
+                return new byte[] { Blue, Green, Red, Transparency };
             }
         }
 
