@@ -34,7 +34,7 @@
         <TextBox Name="EnemiesSeedEntry" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="EnemiesSeedEntry_PreviewTextInput" MaxLength="9"/>
         <Label Content="Seed" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
         
-        <Label Content="Note: Ensure this tool is placed in a directory containing all level files and trmod." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" Grid.Row="4" Grid.ColumnSpan="1"/>
+        <Label Content="Note: Ensure this tool is placed in a directory containing all level files" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" Grid.Row="4" Grid.ColumnSpan="1"/>
         
         <Button Name="TrackLaraEPC" Content="Track Lara (EPC)" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" MinHeight="30" MinWidth="200" IsEnabled="True" Click="TrackLaraEPC_Click"/>
         <Button Name="TrackLaraUK" Content="Track Lara (UK Box)" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" MinHeight="30" MinWidth="200" IsEnabled="True" Click="TrackLaraUK_Click"/>
@@ -69,5 +69,7 @@
         </ComboBox>
 
         <Button Name="ImportLocations" Grid.Column="0" Grid.Row="4" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Import TVR file" Click="ImportLocations_Click"/>
+
+        <Button Name="TextureInject" Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Texture Injection Test" Click="TextureInject_Click"/>
     </Grid>
 </Window>

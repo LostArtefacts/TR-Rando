@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace TRLevelReader.Helpers
 {
-    internal static class TextileToBitmapConverter
+    public static class TextileToBitmapConverter
     {
-        internal static byte To32BPP(byte input)
+        public static byte To32BPP(byte input)
         {
             return Convert.ToByte(input * 255 / 31);
         }
 
-        internal static byte From32BPP(byte input)
+        public static byte From32BPP(byte input)
         {
-            throw new NotImplementedException();
+            return Convert.ToByte(input * 31 / 255);
         }
     }
 }

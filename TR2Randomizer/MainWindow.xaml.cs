@@ -20,7 +20,11 @@ using TR2Randomizer.Randomizers;
 using TRViewInterop.Routes;
 using Newtonsoft.Json;
 using System.IO;
+
 using TRLevelReader.Helpers;
+using TRLevelReader.Model;
+using TRLevelReader;
+using TRTexture16Importer;
 
 namespace TR2Randomizer
 {
@@ -194,6 +198,26 @@ namespace TR2Randomizer
                     File.WriteAllText("item_locations.json", JsonConvert.SerializeObject(Locations, Formatting.Indented));
                 }
             }
+        }
+
+        private void TextureInject_Click(object sender, RoutedEventArgs e)
+        {
+            TR2Level instance = new TR2Level();
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2LevelWriter writer = new TR2LevelWriter();
+
+            instance = reader.ReadLevel(LevelNames.FLOATER);
+
+            string CurrentDir = Directory.GetCurrentDirectory();
+
+            Directory.SetCurrentDirectory(CurrentDir + "\\TexturePacks\\FLOATING\\Floating_Blue");
+
+            for (int i = 0; i < instance.NumImages; i++)
+            {
+                instance.Images16[i].Pixels = T16Importer.ImportFrom32PNG(LevelNames.FLOATER + i + ".png");
+            }
+
+            writer.WriteLevelToFile(instance, LevelNames.FLOATER);
         }
     }
 }
