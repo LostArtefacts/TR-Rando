@@ -71,5 +71,6 @@
         <Button Name="ImportLocations" Grid.Column="0" Grid.Row="4" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Import TVR file" Click="ImportLocations_Click"/>
 
         <Button Name="TextureInject" Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Texture Injection Test" Click="TextureInject_Click"/>
+        <TextBox Name="PackDirectory" Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Left" MinHeight="20" MaxHeight="20" MinWidth="200" MaxWidth="200"/>
     </Grid>
 </Window>

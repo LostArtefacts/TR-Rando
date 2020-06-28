@@ -206,18 +206,24 @@ namespace TR2Randomizer
             TR2LevelReader reader = new TR2LevelReader();
             TR2LevelWriter writer = new TR2LevelWriter();
 
-            instance = reader.ReadLevel(LevelNames.FLOATER);
-
             string CurrentDir = Directory.GetCurrentDirectory();
 
-            Directory.SetCurrentDirectory(CurrentDir + "\\TexturePacks\\FLOATING\\Floating_Blue");
+            string LvlName = LevelNames.AsList[ImportLevel.SelectedIndex];
+
+            instance = reader.ReadLevel(LvlName);
+
+            int ExtensionIndex = LvlName.IndexOf('.');
+
+            Directory.SetCurrentDirectory(CurrentDir + "\\TexturePacks\\" + LvlName.Remove(ExtensionIndex)+ "\\" + PackDirectory.Text);
 
             for (int i = 0; i < instance.NumImages; i++)
             {
-                instance.Images16[i].Pixels = T16Importer.ImportFrom32PNG(LevelNames.FLOATER + i + ".png");
+                instance.Images16[i].Pixels = T16Importer.ImportFrom32PNG(LvlName + i + ".png");
             }
 
-            writer.WriteLevelToFile(instance, LevelNames.FLOATER);
+            writer.WriteLevelToFile(instance, LvlName);
+
+            Directory.SetCurrentDirectory(CurrentDir);
         }
     }
 }
