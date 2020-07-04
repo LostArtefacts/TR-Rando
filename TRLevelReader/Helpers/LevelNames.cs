@@ -27,6 +27,12 @@ namespace TRLevelReader.Helpers
         public const string LAIR        = "XIAN.TR2";
         public const string HOME        = "HOUSE.TR2";
 
+        public const string COLDWAR     = "level1.TR2";
+        public const string FOOLGOLD    = "level2.TR2";
+        public const string FURNACE     = "level3.TR2";
+        public const string KINGDOM     = "level4.tr2";
+        public const string VEGAS       = "level5.tr2";
+
         public static List<string> AsList
         {
             get
@@ -51,6 +57,21 @@ namespace TRLevelReader.Helpers
                     FLOATER,
                     LAIR,
                     HOME
+                };
+            }
+        }
+
+        public static List<string> AsListGold
+        {
+            get
+            {
+                return new List<string>
+                {
+                    COLDWAR,
+                    FOOLGOLD,
+                    FURNACE,
+                    KINGDOM,
+                    VEGAS
                 };
             }
         }
