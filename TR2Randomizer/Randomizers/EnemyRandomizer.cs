@@ -43,6 +43,14 @@ namespace TR2Randomizer.Randomizers
 
             for (int i = 0; i < _levelInstance.Entities.Count(); i++)
             {
+                //#60 - Ice Palace - Room 143 chicken man must remain to avoid softlock.
+                if (lvl == LevelNames.CHICKEN && 
+                    _levelInstance.Entities[i].Room == 143 &&
+                    _levelInstance.Entities[i].TypeID == (int)TR2Entities.BirdMonster)
+                {
+                    continue;
+                }
+
                 //#45 - Check to see if any items are at the same location as the enemy.
                 //If there are we need to ensure that the new random enemy type is one that can drop items.
                 List<TR2Entity> SharedItems = new List<TR2Entity>(Array.FindAll(_levelInstance.Entities, e => ((e.X == _levelInstance.Entities[i].X) 
