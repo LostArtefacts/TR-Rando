@@ -36,6 +36,7 @@ namespace TR2Randomizer
         private SecretReplacer _replacer;
         private ItemRandomizer _itemrandomizer;
         private EnemyRandomizer _enemyrandomizer;
+        private TextureRandomizer _texrandomizer;
 
         public MainWindow()
         {
@@ -44,6 +45,7 @@ namespace TR2Randomizer
             _replacer = new SecretReplacer();
             _itemrandomizer = new ItemRandomizer();
             _enemyrandomizer = new EnemyRandomizer();
+            _texrandomizer = new TextureRandomizer();
 
             ReplacementStatusManager.CanRandomize = true;
             ReplacementStatusManager.LevelProgress = 0;
@@ -224,6 +226,23 @@ namespace TR2Randomizer
             writer.WriteLevelToFile(instance, LvlName);
 
             Directory.SetCurrentDirectory(CurrentDir);
+        }
+
+        private void TextureSeedEntry_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void RandomizeTextures_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextureSeedEntry.Text != string.Empty)
+            {
+                int seed = Convert.ToInt32(TextureSeedEntry.Text);
+
+                Thread TextureRandomizeThread = new Thread(() => _texrandomizer.Randomize(seed));
+                TextureRandomizeThread.Start();
+            }
         }
     }
 }

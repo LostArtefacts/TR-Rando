@@ -79,6 +79,7 @@
     <Compile Include="Randomizers\ItemRandomizer.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Randomizers\RandomizerBase.cs" />
+    <Compile Include="Randomizers\TextureRandomizer.cs" />
     <Compile Include="ReplacementStatusManager.cs" />
     <Compile Include="Randomizers\SecretReplacer.cs" />
     <Compile Include="Utilities\SpatialConverters.cs" />
