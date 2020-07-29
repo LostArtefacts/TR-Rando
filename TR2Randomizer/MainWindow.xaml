@@ -15,8 +15,12 @@
             </MenuItem>
         </Menu>
         <StatusBar x:Name="MainStatusBar" DockPanel.Dock="Bottom">
-            <StatusBarItem>
+            <StatusBarItem DockPanel.Dock="Left">
                 <TextBlock x:Name="MainStatusBarText"/>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem HorizontalContentAlignment="Stretch">
+                <ProgressBar Name="SecretsRandomizeProgress" VerticalAlignment="Bottom" MinHeight="15" Minimum="0" Maximum="18" Value="{Binding Path=(local:ReplacementStatusManager.LevelProgress)}"/>
             </StatusBarItem>
         </StatusBar>
 
@@ -37,7 +41,6 @@
 
             <Button Name="RandomizeSecrets" Content="Randomize Secrets" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" MinHeight="50" MinWidth="200" Click="RandomizeSecrets_Click" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}"/>
             <TextBox Name="SecretsSeedEntry" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="SecretsSeedEntry_PreviewTextInput" MaxLength="9"/>
-            <ProgressBar Name="SecretsRandomizeProgress" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" MinHeight="25" Minimum="0" Maximum="18" Value="{Binding Path=(local:ReplacementStatusManager.LevelProgress)}" Margin="5"/>
             <Label Content="Seed" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
 
             <Button Name="RandomizeItems" Content="Randomize Items" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" MinHeight="50" MinWidth="200" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}" Click="RandomizeItems_Click"/>
