@@ -1,6 +1,8 @@
 # TR2-Rando
 Tomb Raider II Item Randomizer
 
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando.PNG)
+
 # Thanks
 * Eycore - Lots of ideas and locations
 * Nenad_ - Lots of ideas and locations
