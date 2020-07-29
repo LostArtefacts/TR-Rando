@@ -23,7 +23,7 @@ namespace TR2Randomizer.Randomizers
 
             foreach (string lvl in _levels)
             {
-                _levelInstance = _reader.ReadLevel(lvl);
+                _levelInstance = LoadLevel(lvl);
 
                 string appDir = Directory.GetCurrentDirectory();
 
@@ -61,7 +61,7 @@ namespace TR2Randomizer.Randomizers
                 //Restore app working directory
                 Directory.SetCurrentDirectory(appDir);
 
-                _writer.WriteLevelToFile(_levelInstance, lvl);
+                SaveLevel(_levelInstance, lvl);
 
                 ReplacementStatusManager.LevelProgress++;
             }

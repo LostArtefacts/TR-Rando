@@ -27,7 +27,7 @@ namespace TR2Randomizer.Randomizers
             foreach (string lvl in _levels)
             {
                 //Read the level into a level object
-                _levelInstance = _reader.ReadLevel(lvl);
+                _levelInstance = LoadLevel(lvl);
 
                 //#44 - Randomize OR pistol type
                 if (lvl == LevelNames.RIG)
@@ -39,7 +39,7 @@ namespace TR2Randomizer.Randomizers
                 RepositionItems(Locations[lvl]);
 
                 //Write back the level file
-                _writer.WriteLevelToFile(_levelInstance, lvl);
+                SaveLevel(_levelInstance, lvl);
 
                 ReplacementStatusManager.LevelProgress++;
             }

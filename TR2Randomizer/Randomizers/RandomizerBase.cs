@@ -17,17 +17,8 @@ namespace TR2Randomizer.Randomizers
         protected TR2Level _levelInstance;
         protected Random _generator;
         protected List<string> _levels;
-        protected string _basePath;
 
-        public string BasePath 
-        {
-            get => _basePath;
-            set
-            {
-                _basePath = value;
-                _levels = LevelNames.AsList.Select(x => Path.Combine(_basePath, x)).ToList();
-            }
-        }
+        public string BasePath { get; set; }
 
         public abstract void Randomize(int seed);
 
@@ -37,6 +28,18 @@ namespace TR2Randomizer.Randomizers
 
             _reader = new TR2LevelReader();
             _writer = new TR2LevelWriter();
+        }
+
+        public TR2Level LoadLevel(string name)
+        {
+            string fullPath = Path.Combine(BasePath, name);
+            return _reader.ReadLevel(fullPath);
+        }
+
+        public void SaveLevel(TR2Level level, string name)
+        {
+            string fullPath = Path.Combine(BasePath, name);
+            _writer.WriteLevelToFile(level, fullPath);
         }
     }
 }
