@@ -23,3 +23,6 @@ Tomb Raider II Item Randomizer
 * Items - Randomizes standard pickups (excluding Key Items, not yet implemented).
 * Enemies - Randomizes the types of enemies you encounter.
 * Textures - Randomly applies a texture pack to a level, using packs found in the TexturePacks folder, feel free to copy the format and add your own!
+
+# Download
+https://github.com/DanzaG/TR2-Rando/releases/tag/V1.0
