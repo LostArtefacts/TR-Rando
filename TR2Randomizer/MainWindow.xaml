@@ -5,72 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TR2Randomizer"
         mc:Ignorable="d"
+        Loaded="MainWindow_OnLoad"
         Title="TR2 Rando" Height="720" Width="1280">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        
-        <Label Content="TR2 Item Randomizer!" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" Grid.Row="0" Grid.ColumnSpan="2"/>
-        
-        <Button Name="RandomizeSecrets" Content="Randomize Secrets" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" MinHeight="50" MinWidth="200" Click="RandomizeSecrets_Click" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}"/>
-        <TextBox Name="SecretsSeedEntry" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="SecretsSeedEntry_PreviewTextInput" MaxLength="9"/>
-        <ProgressBar Name="SecretsRandomizeProgress" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" MinHeight="25" Minimum="0" Maximum="18" Value="{Binding Path=(local:ReplacementStatusManager.LevelProgress)}" Margin="5"/>
-        <Label Content="Seed" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
-        
-        <Button Name="RandomizeItems" Content="Randomize Items" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" MinHeight="50" MinWidth="200" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}" Click="RandomizeItems_Click"/>
-        <TextBox Name="ItemsSeedEntry" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="ItemsSeedEntry_PreviewTextInput" MaxLength="9"/>
-        <Label Content="Seed" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
-        
-        <Button Name="RandomizeEnemies" Content="Randomize Enemies" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" MinHeight="50" MinWidth="200" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}" Click="RandomizeEnemies_Click"/>
-        <TextBox Name="EnemiesSeedEntry" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="EnemiesSeedEntry_PreviewTextInput" MaxLength="9"/>
-        <Label Content="Seed" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
+    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
+        <Menu Name="MainMenu" DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open" IsCheckable="true" Click="MenuItem_Click">
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <StatusBar x:Name="MainStatusBar" DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="MainStatusBarText"/>
+            </StatusBarItem>
+        </StatusBar>
 
-        <Button Name="RandomizeTextures" Content="Randomize Textures" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4" MinHeight="50" MinWidth="200" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}" Click="RandomizeTextures_Click"/>
-        <TextBox Name="TextureSeedEntry" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="TextureSeedEntry_PreviewTextInput" MaxLength="9"/>
-        <Label Content="Seed" Grid.Row="4" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Label Content="Note: Ensure this tool is placed in a directory containing all level files" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" Grid.Row="4" Grid.ColumnSpan="1" Visibility="Hidden"/>
+            <Label Content="TR2 Item Randomizer!" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" Grid.Row="0" Grid.ColumnSpan="2"/>
 
-        <CheckBox Name="EnableHardCheckBox" Content="Enable Hard Secrets" Grid.Row="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="5" MaxWidth="275" IsChecked="{Binding Path=(local:ReplacementStatusManager.AllowHard)}"/>
-        
-        <ComboBox Name="LocationType" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedIndex="0" Visibility="Hidden">
-            <ComboBoxItem Content="Secrets"/>
-            <ComboBoxItem Content="Items"/>
-        </ComboBox>
-        
-        <ComboBox Name="ImportLevel" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center" SelectedIndex="0" Visibility="Hidden">
-            <ComboBoxItem Content="WALL.TR2"/>
-            <ComboBoxItem Content="BOAT.TR2"/>
-            <ComboBoxItem Content="VENICE.TR2"/>
-            <ComboBoxItem Content="OPERA.TR2"/>
-            <ComboBoxItem Content="RIG.TR2"/>
-            <ComboBoxItem Content="PLATFORM.TR2"/>
-            <ComboBoxItem Content="UNWATER.TR2"/>
-            <ComboBoxItem Content="KEEL.TR2"/>
-            <ComboBoxItem Content="LIVING.TR2"/>
-            <ComboBoxItem Content="DECK.TR2"/>
-            <ComboBoxItem Content="SKIDOO.TR2"/>
-            <ComboBoxItem Content="MONASTRY.TR2"/>
-            <ComboBoxItem Content="CATACOMB.TR2"/>
-            <ComboBoxItem Content="ICECAVE.TR2"/>
-            <ComboBoxItem Content="EMPRTOMB.TR2"/>
-            <ComboBoxItem Content="FLOATING.TR2"/>
-            <ComboBoxItem Content="XIAN.TR2"/>
-            <ComboBoxItem Content="HOUSE.TR2"/>
-        </ComboBox>
+            <Button Name="RandomizeSecrets" Content="Randomize Secrets" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" MinHeight="50" MinWidth="200" Click="RandomizeSecrets_Click" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}"/>
+            <TextBox Name="SecretsSeedEntry" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="SecretsSeedEntry_PreviewTextInput" MaxLength="9"/>
+            <ProgressBar Name="SecretsRandomizeProgress" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" MinHeight="25" Minimum="0" Maximum="18" Value="{Binding Path=(local:ReplacementStatusManager.LevelProgress)}" Margin="5"/>
+            <Label Content="Seed" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
 
-        <Button Name="ImportLocations" Grid.Column="0" Grid.Row="4" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Import TVR file" Click="ImportLocations_Click" Visibility="Hidden"/>
+            <Button Name="RandomizeItems" Content="Randomize Items" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" MinHeight="50" MinWidth="200" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}" Click="RandomizeItems_Click"/>
+            <TextBox Name="ItemsSeedEntry" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="ItemsSeedEntry_PreviewTextInput" MaxLength="9"/>
+            <Label Content="Seed" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
 
-        <Button Name="TextureInject" Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Texture Injection Test" Click="TextureInject_Click" Visibility="Hidden"/>
-        <TextBox Name="PackDirectory" Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Left" MinHeight="20" MaxHeight="20" MinWidth="200" MaxWidth="200" Visibility="Hidden"/>
-    </Grid>
+            <Button Name="RandomizeEnemies" Content="Randomize Enemies" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" MinHeight="50" MinWidth="200" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}" Click="RandomizeEnemies_Click"/>
+            <TextBox Name="EnemiesSeedEntry" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="EnemiesSeedEntry_PreviewTextInput" MaxLength="9"/>
+            <Label Content="Seed" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
+
+            <Button Name="RandomizeTextures" Content="Randomize Textures" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4" MinHeight="50" MinWidth="200" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}" Click="RandomizeTextures_Click"/>
+            <TextBox Name="TextureSeedEntry" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="TextureSeedEntry_PreviewTextInput" MaxLength="9"/>
+            <Label Content="Seed" Grid.Row="4" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
+
+            <Label Content="Note: Ensure this tool is placed in a directory containing all level files" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" Grid.Row="4" Grid.ColumnSpan="1" Visibility="Hidden"/>
+
+            <CheckBox Name="EnableHardCheckBox" Content="Enable Hard Secrets" Grid.Row="1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="5" MaxWidth="275" IsChecked="{Binding Path=(local:ReplacementStatusManager.AllowHard)}"/>
+
+            <ComboBox Name="LocationType" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedIndex="0" Visibility="Hidden">
+                <ComboBoxItem Content="Secrets"/>
+                <ComboBoxItem Content="Items"/>
+            </ComboBox>
+
+            <ComboBox Name="ImportLevel" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center" SelectedIndex="0" Visibility="Hidden">
+                <ComboBoxItem Content="WALL.TR2"/>
+                <ComboBoxItem Content="BOAT.TR2"/>
+                <ComboBoxItem Content="VENICE.TR2"/>
+                <ComboBoxItem Content="OPERA.TR2"/>
+                <ComboBoxItem Content="RIG.TR2"/>
+                <ComboBoxItem Content="PLATFORM.TR2"/>
+                <ComboBoxItem Content="UNWATER.TR2"/>
+                <ComboBoxItem Content="KEEL.TR2"/>
+                <ComboBoxItem Content="LIVING.TR2"/>
+                <ComboBoxItem Content="DECK.TR2"/>
+                <ComboBoxItem Content="SKIDOO.TR2"/>
+                <ComboBoxItem Content="MONASTRY.TR2"/>
+                <ComboBoxItem Content="CATACOMB.TR2"/>
+                <ComboBoxItem Content="ICECAVE.TR2"/>
+                <ComboBoxItem Content="EMPRTOMB.TR2"/>
+                <ComboBoxItem Content="FLOATING.TR2"/>
+                <ComboBoxItem Content="XIAN.TR2"/>
+                <ComboBoxItem Content="HOUSE.TR2"/>
+            </ComboBox>
+
+            <Button Name="ImportLocations" Grid.Column="0" Grid.Row="4" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Import TVR file" Click="ImportLocations_Click" Visibility="Hidden"/>
+
+            <Button Name="TextureInject" Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Texture Injection Test" Click="TextureInject_Click" Visibility="Hidden"/>
+            <TextBox Name="PackDirectory" Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Left" MinHeight="20" MaxHeight="20" MinWidth="200" MaxWidth="200" Visibility="Hidden"/>
+        </Grid>
+    </DockPanel>
 </Window>
