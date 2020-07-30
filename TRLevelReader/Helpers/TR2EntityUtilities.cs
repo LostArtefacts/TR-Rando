@@ -246,8 +246,6 @@ namespace TRLevelReader.Helpers
                     entity == TR2Entities.StickWieldingGoon1 ||
                     entity == TR2Entities.StickWieldingGoon2 ||
                     entity == TR2Entities.FlamethrowerGoon ||
-                    entity == TR2Entities.XianGuardSpear ||
-                    entity == TR2Entities.XianGuardSword ||
                     entity == TR2Entities.Mercenary1 ||
                     entity == TR2Entities.Mercenary2 ||
                     entity == TR2Entities.Mercenary3 ||
