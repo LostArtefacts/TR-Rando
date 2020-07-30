@@ -25,6 +25,7 @@ using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader;
 using TRTexture16Importer;
+using System.Windows.Forms;
 
 namespace TR2Randomizer
 {
@@ -37,6 +38,24 @@ namespace TR2Randomizer
         private ItemRandomizer _itemrandomizer;
         private EnemyRandomizer _enemyrandomizer;
         private TextureRandomizer _texrandomizer;
+        private string _baseDataPath;
+
+        private string BaseDataPath
+        {
+            get => _baseDataPath;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    _baseDataPath = value;
+                    _replacer.BasePath = value;
+                    _itemrandomizer.BasePath = value;
+                    _enemyrandomizer.BasePath = value;
+                    _texrandomizer.BasePath = value;
+                    MainStatusBarText.Text = $"Data folder: {value}";
+                }
+            }
+        }
 
         public MainWindow()
         {
@@ -50,6 +69,11 @@ namespace TR2Randomizer
             ReplacementStatusManager.CanRandomize = true;
             ReplacementStatusManager.LevelProgress = 0;
             ReplacementStatusManager.AllowHard = false;
+        }
+
+        private void MainWindow_OnLoad(object sender, RoutedEventArgs e)
+        {
+            BaseDataPath = Directory.GetCurrentDirectory();
         }
 
         private void SecretsSeedEntry_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -243,6 +267,14 @@ namespace TR2Randomizer
                 Thread TextureRandomizeThread = new Thread(() => _texrandomizer.Randomize(seed));
                 TextureRandomizeThread.Start();
             }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new FolderBrowserDialog();
+            dialog.ShowDialog();
+            if (!string.IsNullOrEmpty(dialog.SelectedPath))
+                BaseDataPath = dialog.SelectedPath;
         }
     }
 }

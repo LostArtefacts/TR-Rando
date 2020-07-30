@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace TR2Randomizer.Randomizers
         protected Random _generator;
         protected List<string> _levels;
 
+        public string BasePath { get; set; }
+
         public abstract void Randomize(int seed);
 
         public RandomizerBase()
@@ -25,6 +28,18 @@ namespace TR2Randomizer.Randomizers
 
             _reader = new TR2LevelReader();
             _writer = new TR2LevelWriter();
+        }
+
+        public TR2Level LoadLevel(string name)
+        {
+            string fullPath = Path.Combine(BasePath, name);
+            return _reader.ReadLevel(fullPath);
+        }
+
+        public void SaveLevel(TR2Level level, string name)
+        {
+            string fullPath = Path.Combine(BasePath, name);
+            _writer.WriteLevelToFile(level, fullPath);
         }
     }
 }
