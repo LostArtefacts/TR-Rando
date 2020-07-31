@@ -71,7 +71,7 @@ namespace TR2Randomizer.Randomizers
                         {
                             TR2Entities EntType = (TR2Entities)ent.TypeID;
 
-                            IsPickupItem = (TR2EntityUtilities.IsAmmoType(EntType)) ||
+                            IsPickupItem = (TR2EntityUtilities.IsUtilityType(EntType)) ||
                                             (TR2EntityUtilities.IsGunType(EntType)) ||
                                             (TR2EntityUtilities.IsKeyItemType(EntType));
 

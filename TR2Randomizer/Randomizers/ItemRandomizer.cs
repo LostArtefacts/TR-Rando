@@ -31,7 +31,7 @@ namespace TR2Randomizer.Randomizers
                 //Read the level into a level object
                 _levelInstance = LoadLevel(lvl);
 
-                if (lvl == LevelNames.RIG) { FindPlaneCargoIndex(); }
+                if (lvl == LevelNames.RIG) { CleanPlaneCargo(); FindPlaneCargoIndex(); }
 
                 //Apply the modifications
                 RepositionItems(Locations[lvl]);
@@ -85,6 +85,23 @@ namespace TR2Randomizer.Randomizers
                         e.TypeID == (int)TR2Entities.Harpoon_S_P ||
                         e.TypeID == (int)TR2Entities.M16_S_P ||
                         e.TypeID == (int)TR2Entities.GrenadeLauncher_S_P) && (e.Room == 1));
+        }
+
+        private void CleanPlaneCargo()
+        {
+            //In relation to #66 to ensure successive randomizations don't pollute the entity list
+            List<TR2Entity> Entities = _levelInstance.Entities.ToList();
+
+            int index = Entities.FindIndex(e => (e.Room == 1 && TR2EntityUtilities.IsAmmoType((TR2Entities)e.TypeID)));
+
+            while (index != -1 && index < Entities.Count)
+            {
+                Entities.RemoveAt(index);
+                _levelInstance.NumEntities--;
+                index = Entities.FindIndex(e => (e.Room == 1 && TR2EntityUtilities.IsAmmoType((TR2Entities)e.TypeID)));
+            }
+
+            _levelInstance.Entities = Entities.ToArray();
         }
 
         private void RandomizeORPistol()
