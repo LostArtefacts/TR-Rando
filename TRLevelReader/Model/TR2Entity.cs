@@ -8,7 +8,7 @@ using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TR2Entity : ISerializableCompact
+    public class TR2Entity : ISerializableCompact, ICloneable
     {
         public short TypeID { get; set; }
 
@@ -64,6 +64,16 @@ namespace TRLevelReader.Model
 
                 return stream.ToArray();
             }
+        }
+
+        public TR2Entity Clone()
+        {
+            return (TR2Entity)this.MemberwiseClone();
+        }
+
+        object ICloneable.Clone()
+        {
+            return Clone();
         }
     }
 }
