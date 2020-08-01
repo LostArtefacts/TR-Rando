@@ -127,7 +127,7 @@ namespace TRLevelReader.Helpers
                 },
 
                 { LevelNames.HOME, 
-                    new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.ShotgunGoon, TR2Entities.StickWieldingGoon1 } 
+                    new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.StickWieldingGoon1 } 
                 },
             };
         }
