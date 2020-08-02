@@ -12,11 +12,11 @@ Tomb Raider II Item Randomizer
 # Usage
 * Extract the release archive somewhere on your PC
 * Make a backup of your original level files for safe keeping
-* Copy all the level files to the TR2Randomizer.exe directory
 * Start the application
+* Using the File -> Open toolbar, select the directory containing the level files you want to apply the rando to.
 * Enter a seed and select a randomize option, can be performed in any order and multiple times if you wish
-* The changes will be applied to the levels in the TR2Randomizer directory
-* Copy them to your TR2 DATA folder and they are ready to play!
+* The changes will be applied to the specified levels.
+* Copy them to your TR2 DATA folder (if they are not already) and they are ready to play!
 
 # Types
 * Secrets - Randomizes locations of secrets, they are ordered based on casual play order, so you should expect to find a stone before jade.
@@ -25,4 +25,4 @@ Tomb Raider II Item Randomizer
 * Textures - Randomly applies a texture pack to a level, using packs found in the TexturePacks folder, feel free to copy the format and add your own!
 
 # Download
-https://github.com/DanzaG/TR2-Rando/releases/tag/V1.0
+https://github.com/DanzaG/TR2-Rando/releases/tag/V1.1b2
