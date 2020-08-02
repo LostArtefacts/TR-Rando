@@ -328,11 +328,11 @@ namespace TRLevelReader.Helpers
                 },
 
                 { LevelNames.FLOATER,
-                    new List<TR2Entities>{ TR2Entities.XianGuardSword, TR2Entities.XianGuardSpear, TR2Entities.Knifethrower }
+                    new List<TR2Entities>{ TR2Entities.Knifethrower }
                 },
 
                 { LevelNames.LAIR,
-                    new List<TR2Entities>{ TR2Entities.Knifethrower, TR2Entities.XianGuardSpear }
+                    new List<TR2Entities>{ TR2Entities.Knifethrower }
                 },
 
                 { LevelNames.HOME,

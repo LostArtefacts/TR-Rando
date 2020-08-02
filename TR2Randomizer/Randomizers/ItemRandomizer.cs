@@ -32,12 +32,16 @@ namespace TR2Randomizer.Randomizers
                 _levelInstance = LoadLevel(lvl);
 
                 if (lvl == LevelNames.RIG) { CleanPlaneCargo(); FindPlaneCargoIndex(); }
+                if (lvl == LevelNames.HOME) { InjectHSHWeaponTextures(); CleanHSHCloset(); }
 
                 //Apply the modifications
                 RepositionItems(Locations[lvl]);
 
                 //#44 - Randomize OR pistol type
                 if (lvl == LevelNames.RIG) { RandomizeORPistol(); }
+                
+                //#47 - Randomize the HSH weapon closet
+                if (lvl == LevelNames.HOME) { PopulateHSHCloset(); }
 
                 //Write back the level file
                 SaveLevel(_levelInstance, lvl);
@@ -160,6 +164,21 @@ namespace TR2Randomizer.Randomizers
 
             _levelInstance.NumEntities += count;
             _levelInstance.Entities = ents.ToArray();
+        }
+
+        private void InjectHSHWeaponTextures()
+        {
+
+        }
+
+        private void CleanHSHCloset()
+        {
+
+        }
+
+        private void PopulateHSHCloset()
+        {
+
         }
     }
 }
