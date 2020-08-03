@@ -4351,6 +4351,13 @@
 			"Room": 65,
 			"Difficulty" : "Hard",
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 2646,
+			"Z": 2649,
+			"Y": -600,
+			"Room": 42,
+			"Difficulty" : "Hard"
 		}
 	],
 	"XIAN.TR2": [
