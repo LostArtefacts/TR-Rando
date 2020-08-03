@@ -39,6 +39,7 @@ namespace TR2Randomizer
         private EnemyRandomizer _enemyrandomizer;
         private TextureRandomizer _texrandomizer;
         private string _baseDataPath;
+        private Random _rng = new Random();
 
         private string BaseDataPath
         {
@@ -69,6 +70,8 @@ namespace TR2Randomizer
             ReplacementStatusManager.CanRandomize = true;
             ReplacementStatusManager.LevelProgress = 0;
             ReplacementStatusManager.AllowHard = false;
+
+            RandomizeAllSeeds();
         }
 
         private void MainWindow_OnLoad(object sender, RoutedEventArgs e)
@@ -112,6 +115,30 @@ namespace TR2Randomizer
                 Thread ReplaceThread = new Thread(() => _replacer.Randomize(seed));
                 ReplaceThread.Start();
             }
+        }
+
+        private void RandomizeEnemiesSeed()
+        {
+            int seed = _rng.Next(0, int.MaxValue);
+            EnemiesSeedEntry.Text = seed.ToString();
+        }
+
+        private void RandomizeItemsSeed()
+        {
+            int seed = _rng.Next(0, int.MaxValue);
+            ItemsSeedEntry.Text = seed.ToString();
+        }
+
+        private void RandomizeSecretsSeed()
+        {
+            int seed = _rng.Next(0, int.MaxValue);
+            SecretsSeedEntry.Text = seed.ToString();
+        }
+
+        private void RandomizeTexturesSeed()
+        {
+            int seed = _rng.Next(0, int.MaxValue);
+            TextureSeedEntry.Text = seed.ToString();
         }
 
         private void RandomizeItems_Click(object sender, RoutedEventArgs e)
@@ -275,6 +302,19 @@ namespace TR2Randomizer
             dialog.ShowDialog();
             if (!string.IsNullOrEmpty(dialog.SelectedPath))
                 BaseDataPath = dialog.SelectedPath;
+        }
+
+        private void RandomizeAllSeeds()
+        {
+            RandomizeSecretsSeed();
+            RandomizeItemsSeed();
+            RandomizeEnemiesSeed();
+            RandomizeTexturesSeed();
+        }
+
+        private void RandomizeAllSeeds_Click(object sender, RoutedEventArgs e)
+        {
+            RandomizeAllSeeds();
         }
     }
 }
