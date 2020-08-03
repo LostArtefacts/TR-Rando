@@ -311,5 +311,10 @@ namespace TR2Randomizer
             RandomizeEnemiesSeed();
             RandomizeTexturesSeed();
         }
+
+        private void RandomizeAllSeeds_Click(object sender, RoutedEventArgs e)
+        {
+            RandomizeAllSeeds();
+        }
     }
 }
