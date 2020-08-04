@@ -4353,11 +4353,40 @@
 			"IsInRoomSpace": false
 		},
 		{
+			"X": 83047,
+			"Z": 57376,
+			"Y": -8005,
+			"Room": 153,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 68677,
+			"Z": 69614,
+			"Y": -5800,
+			"Room": 104,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 49041,
+			"Z": 55298,
+			"Y": -8446,
+			"Room": 24,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 22014,
+			"Z": 65517,
+			"Y": -9742,
+			"Room": 90,
+			"IsInRoomSpace": false
+		},
+		{
 			"X": 2646,
 			"Z": 2649,
 			"Y": -600,
 			"Room": 42,
-			"Difficulty" : "Hard"
+			"Difficulty" : "Hard",
+			"RequiresGlitch": true,
 		}
 	],
 	"XIAN.TR2": [
@@ -4585,6 +4614,20 @@
 			"Y": -1024,
 			"Room": 24,
 			"IsInRoomSpace": false,
-		}			
+		},
+		{
+			"X": 48281,
+			"Z": 92199,
+			"Y": 2560,
+			"Room": 79,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 41945,
+			"Z": 92194,
+			"Y": 2560,
+			"Room": 81,
+			"IsInRoomSpace": false
+		}
 	]
 }
