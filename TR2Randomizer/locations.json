@@ -959,6 +959,20 @@
 			"Z": 1544,
 			"Y": 2669,
 			"Room": 17
+		},
+		{
+			"X": 66481,
+			"Z": 20247,
+			"Y": 4352,
+			"Room": 86,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 67613,
+			"Z": 22523,
+			"Y": 5120,
+			"Room": 139,
+			"IsInRoomSpace": false
 		}
 	],
 	"OPERA.TR2": [
