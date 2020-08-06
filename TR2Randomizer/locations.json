@@ -335,8 +335,22 @@
 			"Z": 8674,
 			"Y": 0,
 			"Room": 65
-		}
-		
+		},
+		{
+			"X": 40913,
+			"Z": 35874,
+			"Y": 1328,
+			"Room": 77
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 62989,
+			"Z": 22600,
+			"Y": 2430,
+			"Room": 35
+			"IsInRoomSpace": false,
+             		"Difficulty" : "Hard"
+		}	
 	],
 	"BOAT.TR2": [
 		{
