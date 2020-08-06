@@ -357,6 +357,7 @@
 			"Y": -4,
 			"Room": 3,
 			"RequiresGlitch": false,
+			"IsInRoomSpace": false,
                         "Difficulty" : "Hard"
 		}
 	],
