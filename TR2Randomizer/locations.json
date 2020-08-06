@@ -350,7 +350,15 @@
 			"Room": 35
 			"IsInRoomSpace": false,
              		"Difficulty" : "Hard"
-		}	
+		},
+		{
+			"X": 48549,
+			"Z": 34816,
+			"Y": -4,
+			"Room": 3,
+			"RequiresGlitch": false,
+                        "Difficulty" : "Hard"
+		}
 	],
 	"BOAT.TR2": [
 		{
