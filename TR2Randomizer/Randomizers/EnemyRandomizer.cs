@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Media.Animation;
+using TR2Randomizer.Utilities;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
@@ -98,8 +100,46 @@ namespace TR2Randomizer.Randomizers
                     {
                         _levelInstance.Entities[i].TypeID = (short)EnemyTypes[_generator.Next(0, EnemyTypes.Count)];
                     }
+
+                    short room = _levelInstance.Entities[i].Room;
+
+                    if (!TR2EntityUtilities.IsWaterCreature((TR2Entities)_levelInstance.Entities[i].TypeID) 
+                        && _levelInstance.Rooms[room].ContainsWater)
+                    {
+                        if (!PerformDraining(lvl, room))
+                        {
+                            //Draining cannot be performed so make the entity a water creature.
+                            TR2Entities ent;
+
+                            //Make sure water creature can appear on level
+                            do
+                            {
+                                ent = TR2EntityUtilities.WaterCreatures()[_generator.Next(0, TR2EntityUtilities.WaterCreatures().Count)];
+                            } while (!EnemyTypes.Contains(ent));
+
+                            _levelInstance.Entities[i].TypeID = (short)ent;
+                        }
+                    }
                 }
             }
+        }
+
+        private bool PerformDraining(string lvl, short room)
+        {
+            foreach (List<int> area in RoomWaterUtilities.RoomRemovalWaterMap[lvl])
+            {
+                if (area.Contains(room))
+                {
+                    foreach (int filledRoom in area)
+                    {
+                        _levelInstance.Rooms[filledRoom].Drain();
+                    }
+
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

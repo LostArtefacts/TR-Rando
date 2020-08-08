@@ -83,6 +83,7 @@
     <Compile Include="Randomizers\TextureRandomizer.cs" />
     <Compile Include="ReplacementStatusManager.cs" />
     <Compile Include="Randomizers\SecretReplacer.cs" />
+    <Compile Include="Utilities\RoomWaterUtilities.cs" />
     <Compile Include="Utilities\SpatialConverters.cs" />
     <Compile Include="ZonedLocationCollection.cs" />
     <Compile Include="Zones\LevelZones.cs" />
