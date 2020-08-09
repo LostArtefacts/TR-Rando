@@ -119,7 +119,7 @@ namespace TR2Randomizer
 
         private int GenerateSeed()
         {
-            const int max = int.MaxValue;
+            const int max = 1000000000;
             return _rng.Next(0, max);
         }
 
