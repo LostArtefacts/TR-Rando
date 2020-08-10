@@ -117,28 +117,30 @@ namespace TR2Randomizer
             }
         }
 
+        private int GenerateSeed()
+        {
+            const int max = 1000000000;
+            return _rng.Next(0, max);
+        }
+
         private void RandomizeEnemiesSeed()
         {
-            int seed = _rng.Next(0, int.MaxValue);
-            EnemiesSeedEntry.Text = seed.ToString();
+            EnemiesSeedEntry.Text = GenerateSeed().ToString();
         }
 
         private void RandomizeItemsSeed()
         {
-            int seed = _rng.Next(0, int.MaxValue);
-            ItemsSeedEntry.Text = seed.ToString();
+            ItemsSeedEntry.Text = GenerateSeed().ToString();
         }
 
         private void RandomizeSecretsSeed()
         {
-            int seed = _rng.Next(0, int.MaxValue);
-            SecretsSeedEntry.Text = seed.ToString();
+            SecretsSeedEntry.Text = GenerateSeed().ToString();
         }
 
         private void RandomizeTexturesSeed()
         {
-            int seed = _rng.Next(0, int.MaxValue);
-            TextureSeedEntry.Text = seed.ToString();
+            TextureSeedEntry.Text = GenerateSeed().ToString();
         }
 
         private void RandomizeItems_Click(object sender, RoutedEventArgs e)
