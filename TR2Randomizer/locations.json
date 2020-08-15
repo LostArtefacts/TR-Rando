@@ -4753,6 +4753,13 @@
 			"Y": 0,
 			"Room": 9,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 29167,
+			"Z": 92176,
+			"Y": 2560,
+			"Room": 59,
+			"IsInRoomSpace": false
 		}
 	]
 }
