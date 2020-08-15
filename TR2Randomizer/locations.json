@@ -4255,6 +4255,12 @@
 			"Y": -5649,
 			"Room": 92,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 2147,
+			"Z": 2049,
+			"Y": 0,
+			"Room": 50
 		}
 	],
 	"FLOATING.TR2": [
