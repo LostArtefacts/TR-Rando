@@ -4283,6 +4283,13 @@
 			"Y": 0,
 			"Room": 117,
 			"Difficulty" : "Hard"
+		},
+		{
+			"X": 48624,
+			"Z": 22508,
+			"Y": 19982,
+			"Room": 118,
+			"IsInRoomSpace": false
 		}
 	],
 	"FLOATING.TR2": [
