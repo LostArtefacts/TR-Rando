@@ -4268,7 +4268,8 @@
 			"Z": 44197,
 			"Y": 15780,
 			"Room": 38,
-			"IsInRoomSpace": false
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
 		},
 		{
 			"X": 74792,
