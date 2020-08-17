@@ -3922,6 +3922,13 @@
 			"Y": 5905,
 			"Room": 85,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 75731,
+			"Z": 67547,
+			"Y": 3328,
+			"Room": 150,
+			"IsInRoomSpace": false
 		}
 	],
 	"EMPRTOMB.TR2": [
