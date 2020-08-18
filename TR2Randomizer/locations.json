@@ -3936,6 +3936,69 @@
 			"Y": 3328,
 			"Room": 150,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 77847,
+			"Z": 70933,
+			"Y": 5493,
+			"Room": 94,
+			"IsInRoomSpace": false
+		}
+		{
+			"X": 62436,
+			"Z": 66582,
+			"Y": -242,
+			"Room": 99,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 59363,
+			"Z": 67559,
+			"Y": 1536,
+			"Room": 135,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 42989,
+			"Z": 59414,
+			"Y": 7950,
+			"Room": 64,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 40937,
+			"Z": 49182,
+			"Y": 3860,
+			"Room": 63,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 29620,
+			"Z": 49991,
+			"Y": 10950,
+			"Room": 29,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 32661,
+			"Z": 43989,
+			"Y": 10240,
+			"Room": 29,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 32821,
+			"Z": 40851,
+			"Y": 10000,
+			"Room": 24,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 36208,
+			"Z": 18032,
+			"Y": 3962,
+			"Room": 73,
+			"IsInRoomSpace": false
 		}
 	],
 	"EMPRTOMB.TR2": [
