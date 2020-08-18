@@ -3350,6 +3350,69 @@
 			"Y": 245,
 			"Room": 62,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 73756,
+			"Z": 28701,
+			"Y": 6172,
+			"Room": 1,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 77854,
+			"Z": 28703,
+			"Y": 2343,
+			"Room": 0,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 76769,
+			"Z": 28695,
+			"Y": 2575,
+			"Room": 0,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 72722,
+			"Z": 27622,
+			"Y": 6148,
+			"Room": 19,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 68620,
+			"Z": 70588,
+			"Y": 0,
+			"Room": 138,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 31717,
+			"Z": 95213,
+			"Y": 3595,
+			"Room": 132,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 19426,
+			"Z": 775,
+			"Y": 58390,
+			"Room": 97,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 19455,
+			"Z": 65137,
+			"Y": 0,
+			"Room": 63,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 16416,
+			"Z": 49115,
+			"Y": -4076,
+			"Room": 68,
+			"IsInRoomSpace": false
 		}
 	],
 	"MONASTRY.TR2": [
