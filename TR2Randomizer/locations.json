@@ -4300,6 +4300,35 @@
 			"Y": 19982,
 			"Room": 118,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 7230,
+			"Z": 61420,
+			"Y": -23040,
+			"Room": 45,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 24546,
+			"Z": 53221,
+			"Y": 16662,
+			"Room": 9,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 74723,
+			"Z": 54297,
+			"Y": 21504,
+			"Room": 77,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 35664,
+			"Z": 60442,
+			"Y": 11600,
+			"Room": 106,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
 		}
 	],
 	"FLOATING.TR2": [
