@@ -68,6 +68,8 @@ namespace TR2Randomizer.Randomizers
                         _levelInstance.Entities[i].X = GlobalizedRandomLocation.X;
                         _levelInstance.Entities[i].Y = GlobalizedRandomLocation.Y;
                         _levelInstance.Entities[i].Z = GlobalizedRandomLocation.Z;
+                        _levelInstance.Entities[i].Intensity1 = -1;
+                        _levelInstance.Entities[i].Intensity2 = -1;
                     }
                 }
             }
