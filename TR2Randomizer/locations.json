@@ -3766,6 +3766,41 @@
 			"Y": 4366,
 			"Room": 98,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 19453,
+			"Z": 45056,
+			"Y": -263,
+			"Room": 1,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 24605,
+			"Z": 45027,
+			"Y": 3328,
+			"Room": 4,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 43355,
+			"Z": 46405,
+			"Y": 9216,
+			"Room": 79,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 16412,
+			"Z": 44005,
+			"Y": 3620,
+			"Room": 35,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 44012,
+			"Z": 65046,
+			"Y": 1820,
+			"Room": 48,
+			"IsInRoomSpace": false
 		}
 	],
 	"ICECAVE.TR2": [
