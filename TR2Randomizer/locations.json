@@ -3548,6 +3548,56 @@
 			"Y": 0,
 			"Room": 70,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 92184,
+			"Z": 19470,
+			"Y": 4130,
+			"Room": 24,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 81905,
+			"Z": 15116,
+			"Y": 0,
+			"Room": 15,
+			"IsInRoomSpace": false
+		},	
+		{
+			"X": 52741,
+			"Z": 50176,
+			"Y": -1030,
+			"Room": 60,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 37835,
+			"Z": 54265,
+			"Y": -763,
+			"Room": 39,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 48098,
+			"Z": 31721,
+			"Y": 2048,
+			"Room": 155,
+			"IsInRoomSpace": false
+		},	
+		{
+			"X": 68632,
+			"Z": 53281,
+			"Y": -4620,
+			"Room": 76,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 73217,
+			"Z": 67612,
+			"Y": -4608,
+			"Room": 55,
+			"IsInRoomSpace": false
 		}
 	],
 	"CATACOMB.TR2": [
