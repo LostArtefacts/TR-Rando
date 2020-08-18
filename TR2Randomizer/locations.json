@@ -4505,6 +4505,41 @@
 			"Room": 51,
 			"Difficulty" : "Hard",
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 36889,
+			"Z": 57339,
+			"Y": -7100,
+			"Room": 25,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 38912,
+			"Z": 41894,
+			"Y": -7685,
+			"Room": 60,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 28184,
+			"Z": 68600,
+			"Y": -256,
+			"Room": 112,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 34795,
+			"Z": 64538,
+			"Y": 0,
+			"Room": 77,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 28650,
+			"Z": 83937,
+			"Y": -1280,
+			"Room": 86,
+			"IsInRoomSpace": false
 		}
 	],
 	"XIAN.TR2": [
