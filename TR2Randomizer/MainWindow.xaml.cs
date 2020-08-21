@@ -39,6 +39,7 @@ namespace TR2Randomizer
         private EnemyRandomizer _enemyrandomizer;
         private TextureRandomizer _texrandomizer;
         private string _baseDataPath;
+        private Random _rng = new Random();
 
         private string BaseDataPath
         {
@@ -69,6 +70,8 @@ namespace TR2Randomizer
             ReplacementStatusManager.CanRandomize = true;
             ReplacementStatusManager.LevelProgress = 0;
             ReplacementStatusManager.AllowHard = false;
+
+            RandomizeAllSeeds();
         }
 
         private void MainWindow_OnLoad(object sender, RoutedEventArgs e)
@@ -112,6 +115,32 @@ namespace TR2Randomizer
                 Thread ReplaceThread = new Thread(() => _replacer.Randomize(seed));
                 ReplaceThread.Start();
             }
+        }
+
+        private int GenerateSeed()
+        {
+            const int max = 1000000000;
+            return _rng.Next(0, max);
+        }
+
+        private void RandomizeEnemiesSeed()
+        {
+            EnemiesSeedEntry.Text = GenerateSeed().ToString();
+        }
+
+        private void RandomizeItemsSeed()
+        {
+            ItemsSeedEntry.Text = GenerateSeed().ToString();
+        }
+
+        private void RandomizeSecretsSeed()
+        {
+            SecretsSeedEntry.Text = GenerateSeed().ToString();
+        }
+
+        private void RandomizeTexturesSeed()
+        {
+            TextureSeedEntry.Text = GenerateSeed().ToString();
         }
 
         private void RandomizeItems_Click(object sender, RoutedEventArgs e)
@@ -275,6 +304,19 @@ namespace TR2Randomizer
             dialog.ShowDialog();
             if (!string.IsNullOrEmpty(dialog.SelectedPath))
                 BaseDataPath = dialog.SelectedPath;
+        }
+
+        private void RandomizeAllSeeds()
+        {
+            RandomizeSecretsSeed();
+            RandomizeItemsSeed();
+            RandomizeEnemiesSeed();
+            RandomizeTexturesSeed();
+        }
+
+        private void RandomizeAllSeeds_Click(object sender, RoutedEventArgs e)
+        {
+            RandomizeAllSeeds();
         }
     }
 }

@@ -39,6 +39,16 @@
 
             <Label Content="TR2 Item Randomizer!" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" Grid.Row="0" Grid.ColumnSpan="2"/>
 
+            <Button Name="RandomizeAllSeedsButton"
+                    Content="Randomize Seeds"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    MinHeight="50"
+                    MinWidth="200"
+                    Click="RandomizeAllSeeds_Click" />
+
             <Button Name="RandomizeSecrets" Content="Randomize Secrets" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" MinHeight="50" MinWidth="200" Click="RandomizeSecrets_Click" IsEnabled="{Binding Path=(local:ReplacementStatusManager.CanRandomize)}"/>
             <TextBox Name="SecretsSeedEntry" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MinWidth="200" PreviewTextInput="SecretsSeedEntry_PreviewTextInput" MaxLength="9"/>
             <Label Content="Seed" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"/>
