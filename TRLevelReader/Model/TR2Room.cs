@@ -73,6 +73,16 @@ namespace TRLevelReader.Model
             }
         }
 
+        public void Fill()
+        {
+            Flags |= 0x01;
+        }
+
+        public void Drain()
+        {
+            Flags &= ~(0x01);
+        }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())

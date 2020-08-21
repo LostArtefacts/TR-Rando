@@ -25,6 +25,8 @@ namespace TR2Randomizer
 
         public bool IsItem { get; set; }
 
+        public bool VehicleRequired { get; set; }
+
         public Location()
         {
             X = 0;
@@ -35,6 +37,7 @@ namespace TR2Randomizer
             Difficulty = Difficulty.Easy;
             IsInRoomSpace = true;
             IsItem = false;
+            VehicleRequired = false;
         }
 
         public Location(TRViewLocation loc)

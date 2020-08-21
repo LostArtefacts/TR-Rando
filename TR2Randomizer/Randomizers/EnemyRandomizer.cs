@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Media.Animation;
+using TR2Randomizer.Utilities;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
@@ -43,11 +45,16 @@ namespace TR2Randomizer.Randomizers
 
             for (int i = 0; i < _levelInstance.Entities.Count(); i++)
             {
-                //#60 - Ice Palace - Room 143 chicken man must remain to avoid softlock.
                 if (lvl == LevelNames.CHICKEN && 
                     _levelInstance.Entities[i].Room == 143 &&
                     _levelInstance.Entities[i].TypeID == (int)TR2Entities.BirdMonster)
                 {
+                    //#60 - Ice Palace - Room 143 chicken man must remain to avoid softlock.
+                    continue;
+                }
+                else if (lvl == LevelNames.HOME && _levelInstance.Entities[i].TypeID == (int)TR2Entities.ShotgunGoon)
+                {
+                    //#62 - Avoid randomizing shotgun goon in HSH
                     continue;
                 }
 
@@ -71,7 +78,7 @@ namespace TR2Randomizer.Randomizers
                         {
                             TR2Entities EntType = (TR2Entities)ent.TypeID;
 
-                            IsPickupItem = (TR2EntityUtilities.IsAmmoType(EntType)) ||
+                            IsPickupItem = (TR2EntityUtilities.IsUtilityType(EntType)) ||
                                             (TR2EntityUtilities.IsGunType(EntType)) ||
                                             (TR2EntityUtilities.IsKeyItemType(EntType));
 
@@ -93,8 +100,46 @@ namespace TR2Randomizer.Randomizers
                     {
                         _levelInstance.Entities[i].TypeID = (short)EnemyTypes[_generator.Next(0, EnemyTypes.Count)];
                     }
+
+                    short room = _levelInstance.Entities[i].Room;
+
+                    if (!TR2EntityUtilities.IsWaterCreature((TR2Entities)_levelInstance.Entities[i].TypeID) 
+                        && _levelInstance.Rooms[room].ContainsWater)
+                    {
+                        if (!PerformDraining(lvl, room))
+                        {
+                            //Draining cannot be performed so make the entity a water creature.
+                            TR2Entities ent;
+
+                            //Make sure water creature can appear on level
+                            do
+                            {
+                                ent = TR2EntityUtilities.WaterCreatures()[_generator.Next(0, TR2EntityUtilities.WaterCreatures().Count)];
+                            } while (!EnemyTypes.Contains(ent));
+
+                            _levelInstance.Entities[i].TypeID = (short)ent;
+                        }
+                    }
                 }
             }
+        }
+
+        private bool PerformDraining(string lvl, short room)
+        {
+            foreach (List<int> area in RoomWaterUtilities.RoomRemovalWaterMap[lvl])
+            {
+                if (area.Contains(room))
+                {
+                    foreach (int filledRoom in area)
+                    {
+                        _levelInstance.Rooms[filledRoom].Drain();
+                    }
+
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

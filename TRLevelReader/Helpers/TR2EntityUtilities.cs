@@ -127,7 +127,7 @@ namespace TRLevelReader.Helpers
                 },
 
                 { LevelNames.HOME, 
-                    new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.ShotgunGoon, TR2Entities.StickWieldingGoon1 } 
+                    new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.StickWieldingGoon1 } 
                 },
             };
         }
@@ -171,7 +171,7 @@ namespace TRLevelReader.Helpers
             };
         }
 
-        public static bool IsAmmoType(TR2Entities entity)
+        public static bool IsUtilityType(TR2Entities entity)
         {
             return (entity == TR2Entities.ShotgunAmmo_S_P ||
                     entity == TR2Entities.AutoAmmo_S_P ||
@@ -182,6 +182,16 @@ namespace TRLevelReader.Helpers
                     entity == TR2Entities.SmallMed_S_P ||
                     entity == TR2Entities.LargeMed_S_P ||
                     entity == TR2Entities.Flares_S_P);
+        }
+
+        public static bool IsAmmoType(TR2Entities entity)
+        {
+            return (entity == TR2Entities.ShotgunAmmo_S_P ||
+                    entity == TR2Entities.AutoAmmo_S_P ||
+                    entity == TR2Entities.UziAmmo_S_P ||
+                    entity == TR2Entities.HarpoonAmmo_S_P ||
+                    entity == TR2Entities.M16Ammo_S_P ||
+                    entity == TR2Entities.Grenades_S_P);
         }
 
         public static List<TR2Entities> GetListOfKeyItemTypes()
@@ -246,8 +256,6 @@ namespace TRLevelReader.Helpers
                     entity == TR2Entities.StickWieldingGoon1 ||
                     entity == TR2Entities.StickWieldingGoon2 ||
                     entity == TR2Entities.FlamethrowerGoon ||
-                    entity == TR2Entities.XianGuardSpear ||
-                    entity == TR2Entities.XianGuardSword ||
                     entity == TR2Entities.Mercenary1 ||
                     entity == TR2Entities.Mercenary2 ||
                     entity == TR2Entities.Mercenary3 ||
@@ -320,11 +328,11 @@ namespace TRLevelReader.Helpers
                 },
 
                 { LevelNames.FLOATER,
-                    new List<TR2Entities>{ TR2Entities.XianGuardSword, TR2Entities.XianGuardSpear, TR2Entities.Knifethrower }
+                    new List<TR2Entities>{ TR2Entities.Knifethrower }
                 },
 
                 { LevelNames.LAIR,
-                    new List<TR2Entities>{ TR2Entities.Knifethrower, TR2Entities.XianGuardSpear }
+                    new List<TR2Entities>{ TR2Entities.Knifethrower }
                 },
 
                 { LevelNames.HOME,
