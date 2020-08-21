@@ -3313,7 +3313,8 @@
 			"X": 5221,
 			"Z": 1947,
 			"Y": 0,
-			"Room": 3
+			"Room": 3,
+			"VehicleRequired" : True
 		},
 		{
 			"X": 13413,
@@ -3399,7 +3400,8 @@
 			"Room": 6,
 			"RequiresGlitch": false,
 			"IsInRoomSpace": false,
-                        "Difficulty" : "Hard"
+                        "Difficulty" : "Hard",
+			"VehicleRequired" : True
 		},
 		{
 			"X": 99784,
@@ -3408,7 +3410,8 @@
 			"Room": 76,
 			"RequiresGlitch": false,
 			"IsInRoomSpace": false,
-                        "Difficulty" : "Hard"
+                        "Difficulty" : "Hard",
+			"VehicleRequired" : True
 		},
 		{
 			"X": 81134,
@@ -3417,7 +3420,8 @@
 			"Room": 23,
 			"RequiresGlitch": false,
 			"IsInRoomSpace": false,
-                        "Difficulty" : "Hard"
+                        "Difficulty" : "Hard",
+			"VehicleRequired" : True
 		},
 		{
 			"X": 80994,
@@ -3426,7 +3430,8 @@
 			"Room": 25,
 			"RequiresGlitch": false,
 			"IsInRoomSpace": false,
-                        "Difficulty" : "Hard"
+                        "Difficulty" : "Hard",
+			"VehicleRequired" : True
 		},
 		{
 			"X": 51295,
@@ -3597,7 +3602,16 @@
 			"Y": -4076,
 			"Room": 68,
 			"IsInRoomSpace": false
-		}
+		},
+		{
+            		"X": 32744,
+           		"Z": 2622,
+            		"Y": -3333,
+            		"Room": 107,
+            		"IsInRoomSpace": false,
+            		"Difficulty" : "Hard",
+			"VehicleRequired" : True
+        	}
 	],
 	"MONASTRY.TR2": [
 		{
