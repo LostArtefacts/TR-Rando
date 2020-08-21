@@ -2807,6 +2807,82 @@
 			"Y": 1280,
 			"Room": 7,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 87966,
+			"Z": 82747,
+			"Y": 3316,
+			"Room": 3,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 74159,
+			"Z": 86517,
+			"Y": 296,
+			"Room": 0,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 62578,
+			"Z": 70867,
+			"Y": 1792,
+			"Room": 6,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 60195,
+			"Z": 74362,
+			"Y": -450,
+			"Room": 6,
+			"IsInRoomSpace": false
+		},	
+		{
+			"X": 72707,
+			"Z": 51235,
+			"Y": -1792,
+			"Room": 18,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 74734,
+			"Z": 58173,
+			"Y": -1513,
+			"Room": 16,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 53234,
+			"Z": 71627,
+			"Y": -2230,
+			"Room": 61,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 48002,
+			"Z": 61440,
+			"Y": 1209,
+			"Room": 69,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 59467,
+			"Z": 45555,
+			"Y": -3071,
+			"Room": 21,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 68610,
+			"Z": 35936,
+			"Y": -2048,
+			"Room": 42,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
 		}
 	],
 	"DECK.TR2": [
