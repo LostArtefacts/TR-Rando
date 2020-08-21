@@ -1906,7 +1906,8 @@
 			"X": 2524,
 			"Z": 19156,
 			"Y": 1493,
-			"Room": 51
+			"Room": 51,
+			"Difficulty" : "Hard"
 		}
 	],
 	"UNWATER.TR2": [
