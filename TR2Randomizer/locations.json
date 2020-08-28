@@ -998,6 +998,21 @@
 			"Y": 5120,
 			"Room": 139,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 34888,
+			"Z": 21991,
+			"Y": 1846,
+			"Room": 130,
+			"IsInRoomSpace" : false
+		},
+		{
+			"X": 41270,
+			"Z": 27356,
+			"Y": 4185,
+			"Room": 43,
+			"IsInRoomSpace" : false,
+			"Difficulty" : "Hard"
 		}
 	],
 	"OPERA.TR2": [
