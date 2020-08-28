@@ -565,7 +565,7 @@
 			"Z": 21504,
 			"Y": -1310,
 			"Room": 0,
-			IsInRoomSpace: false,
+			"IsInRoomSpace" : false,
 			"Difficulty" : "Hard"
 		},
 		{
@@ -573,7 +573,7 @@
 			"Z": 38912,
 			"Y": -2985,
 			"Room": 7,
-			IsInRoomSpace: false,
+			"IsInRoomSpace" : false,
 			"Difficulty" : "Hard"
 		},
 		{
@@ -581,7 +581,7 @@
 			"Z": 51324,
 			"Y": -1970,
 			"Room": 88,
-			IsInRoomSpace: false,
+			"IsInRoomSpace" : false,
 			"Difficulty" : "Hard"
 		}
 	],
