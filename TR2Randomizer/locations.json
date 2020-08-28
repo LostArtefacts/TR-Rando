@@ -559,6 +559,30 @@
 			"Z": 4608,
 			"Y": 1154,
 			"Room": 109
+		},
+		{
+			"X": 58867,
+			"Z": 21504,
+			"Y": -1310,
+			"Room": 0,
+			IsInRoomSpace: false,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 60447,
+			"Z": 38912,
+			"Y": -2985,
+			"Room": 7,
+			IsInRoomSpace: false,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 59350,
+			"Z": 51324,
+			"Y": -1970,
+			"Room": 88,
+			IsInRoomSpace: false,
+			"Difficulty" : "Hard"
 		}
 	],
 	"VENICE.TR2": [
