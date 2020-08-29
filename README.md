@@ -26,3 +26,6 @@ Tomb Raider II Item Randomizer
 
 # Download
 https://github.com/DanzaG/TR2-Rando/releases/tag/V1.1b2
+
+# Installation
+https://www.youtube.com/watch?v=MpNBfZgE0Fc
