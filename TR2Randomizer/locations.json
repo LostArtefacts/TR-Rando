@@ -1686,6 +1686,29 @@
 			"Z": 9115,
 			"Y": 0,
 			"Room": 43
+		},
+		{
+	        	"X": 27605,
+			"Z": 77824,
+			"Y": -2986,
+			"Room": 90,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
+		},
+		{
+	        	"X": 18350,
+			"Z": 72708,
+			"Y": -8704,
+			"Room": 50,
+			"IsInRoomSpace": false
+		},
+		{
+			"X": 37888,
+			"Z": 40880,
+			"Y": 2560,
+			"Room": 99,
+			"IsInRoomSpace" : false,
+			"Difficulty" : "Hard"
 		}
 	],
 	"PLATFORM.TR2": [
