@@ -1978,6 +1978,14 @@
 			"Room": 7,
 			"IsInRoomSpace": false,
 			"Difficulty" : "Hard"
+		},
+		{
+			"X": 45015,
+			"Z": 85110,
+			"Y": -5120,
+			"Room": 10,
+			"IsInRoomSpace" : false,
+			"Difficulty" : "Hard"
 		}
 	],
 	"UNWATER.TR2": [
