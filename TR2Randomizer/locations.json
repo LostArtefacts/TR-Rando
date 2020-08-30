@@ -3528,7 +3528,8 @@
 			"Room": 67,
 			"RequiresGlitch": false,
 			"IsInRoomSpace": false,
-                        "Difficulty" : "Hard"
+                        "Difficulty" : "Hard",
+			"VehicleRequired" : true
 		},
 		{
 			"X": 47058,
