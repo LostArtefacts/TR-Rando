@@ -2267,6 +2267,43 @@
 			"Room": 51,
 			"RequiresGlitch": false,
                         "Difficulty" : "Hard"
+		},
+		{
+			"X": 9288,
+			"Z": 46210,
+			"Y": -568,
+			"Room": 6,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 56159,
+			"Z": 52100,
+			"Y": -14498,
+			"Room": 51,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 57548,
+			"Z": 66475,
+			"Y": -512,
+			"Room": 9,
+			"IsInRoomSpace": false,
+		},
+		{
+			"X": 9898,
+			"Z": 12721,
+			"Y": 6714,
+			"Room": 54,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 11726,
+			"Z": 10458,
+			"Y": 6714,
+			"Room": 59,
+			"Difficulty" : "Hard"
 		}
 	],
 	"KEEL.TR2": [
