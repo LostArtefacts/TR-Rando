@@ -129,6 +129,16 @@ namespace TRLevelReader.Helpers
                 { LevelNames.HOME, 
                     new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.StickWieldingGoon1 } 
                 },
+
+                { "all",
+                    new List<TR2Entities>{ TR2Entities.Crow, TR2Entities.TigerOrSnowLeopard, TR2Entities.Spider, TR2Entities.TRex,
+                    TR2Entities.Doberman, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.StickWieldingGoon1, TR2Entities.MaskedGoon1, TR2Entities.Rat, TR2Entities.ShotgunGoon,
+                    TR2Entities.Gunman2, TR2Entities.Gunman1, TR2Entities.ScubaDiver, TR2Entities.FlamethrowerGoon, TR2Entities.Shark, TR2Entities.Barracuda, TR2Entities.YellowMorayEel,
+                    TR2Entities.StickWieldingGoon2, TR2Entities.BlackMorayEel, TR2Entities.Eagle, TR2Entities.Mercenary2, TR2Entities.Mercenary3, TR2Entities.MercSnowmobDriver,
+                    TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Mercenary1, TR2Entities.Yeti, TR2Entities.GiantSpider,
+                    TR2Entities.XianGuardSword, TR2Entities.XianGuardSpear, TR2Entities.Knifethrower
+                    }
+                }
             };
         }
 
@@ -338,6 +348,13 @@ namespace TRLevelReader.Helpers
                 { LevelNames.HOME,
                     new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.ShotgunGoon, TR2Entities.StickWieldingGoon1 }
                 },
+
+                { "all",
+                    new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.ShotgunGoon, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Rat, 
+                    TR2Entities.StickWieldingGoon1, TR2Entities.Gunman2, TR2Entities.Gunman1, TR2Entities.FlamethrowerGoon, TR2Entities.StickWieldingGoon2,
+                    TR2Entities.Mercenary2, TR2Entities.Mercenary3, TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Mercenary1, TR2Entities.Knifethrower
+                    }
+                }
             };
         }
     }
