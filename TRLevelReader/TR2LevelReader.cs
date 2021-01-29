@@ -174,6 +174,7 @@ namespace TRLevelReader
 
             //Mesh Construction
             //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, level.RawMeshData);
+            level.Meshes = ConstructMeshData(level.MeshPointers, level.RawMeshData);
 
             //Animations
             level.NumAnimations = reader.ReadUInt32();
@@ -547,7 +548,101 @@ namespace TRLevelReader
             return RoomData;
         }
 
-        private TRMesh[] ConstructMeshData(uint DataCount, uint NumPointers, ushort[] MeshData)
+        private TRMesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
+        {
+            byte[] target = new byte[rawMeshData.Length * 2];
+            Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);
+
+            // The mesh pointer list can contain duplicates so use a map to 
+            // make sure we don't read more than we should on each iteration
+            Dictionary<uint, TRMesh> meshMap = new Dictionary<uint, TRMesh>();
+            using (MemoryStream ms = new MemoryStream(target))
+            using (BinaryReader br = new BinaryReader(ms))
+            {
+                foreach (uint meshPointer in meshPointers)
+                {
+                    if (meshMap.ContainsKey(meshPointer))
+                    {
+                        continue;
+                    }
+
+                    TRMesh mesh = new TRMesh();
+                    meshMap.Add(meshPointer, mesh);
+
+                    br.BaseStream.Position = meshPointer;
+
+                    //Centre
+                    mesh.Centre = TR2FileReadUtilities.ReadVertex(br);
+
+                    //CollRadius
+                    mesh.CollRadius = br.ReadInt32();
+
+                    //Vertices
+                    mesh.NumVertices = br.ReadInt16();
+                    mesh.Vertices = new TRVertex[mesh.NumVertices];
+                    for (int i = 0; i < mesh.NumVertices; i++)
+                    {
+                        mesh.Vertices[i] = TR2FileReadUtilities.ReadVertex(br);
+                    }
+
+                    //Lights or Normals
+                    mesh.NumNormals = br.ReadInt16();
+                    if (mesh.NumNormals > 0)
+                    {
+                        mesh.Normals = new TRVertex[mesh.NumNormals];
+                        for (int i = 0; i < mesh.NumNormals; i++)
+                        {
+                            mesh.Normals[i] = TR2FileReadUtilities.ReadVertex(br);
+                        }
+                    }
+                    else
+                    {
+                        mesh.Lights = new short[Math.Abs(mesh.NumNormals)];
+                        for (int i = 0; i < mesh.Lights.Length; i++)
+                        {
+                            mesh.Lights[i] = br.ReadInt16();
+                        }
+                    }
+
+                    //Textured Rectangles
+                    mesh.NumTexturedRectangles = br.ReadInt16();
+                    mesh.TexturedRectangles = new TRFace4[mesh.NumTexturedRectangles];
+                    for (int i = 0; i < mesh.NumTexturedRectangles; i++)
+                    {
+                        mesh.TexturedRectangles[i] = TR2FileReadUtilities.ReadTRFace4(br);
+                    }
+
+                    //Textured Triangles
+                    mesh.NumTexturedTriangles = br.ReadInt16();
+                    mesh.TexturedTriangles = new TRFace3[mesh.NumTexturedTriangles];
+                    for (int i = 0; i < mesh.NumTexturedTriangles; i++)
+                    {
+                        mesh.TexturedTriangles[i] = TR2FileReadUtilities.ReadTRFace3(br);
+                    }
+
+                    //Coloured Rectangles
+                    mesh.NumColouredRectangles = br.ReadInt16();
+                    mesh.ColouredRectangles = new TRFace4[mesh.NumColouredRectangles];
+                    for (int i = 0; i < mesh.NumColouredRectangles; i++)
+                    {
+                        mesh.ColouredRectangles[i] = TR2FileReadUtilities.ReadTRFace4(br);
+                    }
+
+                    //Coloured Triangles
+                    mesh.NumColouredTriangles = br.ReadInt16();
+                    mesh.ColouredTriangles = new TRFace3[mesh.NumColouredTriangles];
+                    for (int i = 0; i < mesh.NumColouredTriangles; i++)
+                    {
+                        mesh.ColouredTriangles[i] = TR2FileReadUtilities.ReadTRFace3(br);
+                    }
+                }
+            }
+
+            return meshMap.Values.ToArray();
+        }
+
+        #region Unused previous ConstructMeshData
+        /*private TRMesh[] ConstructMeshData(uint DataCount, uint NumPointers, ushort[] MeshData)
         {
             //Track where we are in mesh data
             int MeshDataOffset = 0;
@@ -587,11 +682,11 @@ namespace TRLevelReader
                 mesh.CollRadius = LowBytes | HighBytes;
 
                 //Vertices
-                mesh.NumVetices = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
+                mesh.NumVertices = UnsafeConversions.UShortToShort(MeshData[MeshDataOffset]);
                 MeshDataOffset++;
-                mesh.Vertices = new TRVertex[mesh.NumVetices];
+                mesh.Vertices = new TRVertex[mesh.NumVertices];
 
-                for (int j = 0; j < mesh.NumVetices; j++)
+                for (int j = 0; j < mesh.NumVertices; j++)
                 {
                     TRVertex v = new TRVertex();
 
@@ -741,6 +836,7 @@ namespace TRLevelReader
             Debug.Assert(MeshDataOffset == DataCount);
 
             return meshes;
-        }
+        }*/
+        #endregion
     }
 }

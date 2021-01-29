@@ -17,7 +17,7 @@ namespace TRLevelReader.Model
         public int CollRadius { get; set; }
 
         //2 Bytes
-        public short NumVetices { get; set; }
+        public short NumVertices { get; set; }
 
         //NumVertices * 6 Bytes
         public TRVertex[] Vertices { get; set; }
@@ -63,7 +63,7 @@ namespace TRLevelReader.Model
                 {
                     writer.Write(Centre.Serialize());
                     writer.Write(CollRadius);
-                    writer.Write(NumVetices);
+                    writer.Write(NumVertices);
                     
                     foreach (TRVertex vert in Vertices)
                     {
