@@ -324,6 +324,45 @@ namespace TRLevelReader.Model
 
         }
 
+        /// <summary>
+        /// Inserts a new mesh and returns the its index in MeshPointers.
+        /// </summary>
+        public int InsertMesh(TRMesh newMesh)
+        {
+            //get the final mesh we currently have
+            TRMesh lastMesh = Meshes[Meshes.Length - 1];
+            //new mesh pointer will be the current final mesh's pointer plus its length
+            newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
+
+            List<TRMesh> meshes = Meshes.ToList();
+            meshes.Add(newMesh);
+            Meshes = meshes.ToArray();
+            
+            List<uint> pointers = MeshPointers.ToList();
+            pointers.Add(newMesh.Pointer);
+            MeshPointers = pointers.ToArray();
+            NumMeshPointers++;
+
+            //NumMeshData needs the additional mesh size added
+            NumMeshData += (uint)newMesh.Serialize().Length / 2;
+
+            //the pointer index will be the final index in the array
+            return MeshPointers.Length - 1;
+        }
+
+        /// <summary>
+        /// Inserts a new mesh tree node and returns its index in MeshTrees. 
+        /// </summary>
+        public int InsertMeshTreeNode(TRMeshTreeNode newNode)
+        {
+            List<TRMeshTreeNode> nodes = MeshTrees.ToList();
+            nodes.Add(newNode);
+            MeshTrees = nodes.ToArray();
+            NumMeshTrees++;
+
+            return MeshTrees.Length - 1;
+        }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())
@@ -345,8 +384,8 @@ namespace TRLevelReader.Model
 
                     //Because mesh construction still hasnt been resolved, we will
                     //just write the raw mesh data as words for testing
-                    //foreach (TRMesh mesh in Meshes) { writer.Write(mesh.Serialize()); }
-                    foreach (ushort word in RawMeshData) { writer.Write(word); }
+                    foreach (TRMesh mesh in Meshes) { writer.Write(mesh.Serialize()); }
+                    //foreach (ushort word in RawMeshData) { writer.Write(word); }
 
                     writer.Write(NumMeshPointers);
                     foreach (uint ptr in MeshPointers) { writer.Write(ptr); }

@@ -539,7 +539,7 @@ namespace TRLevelReader
                 RoomDataOffset++;
                 face.Texture = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
                 RoomDataOffset++;
-                
+
                 RoomData.Sprites[j] = face;
             }
 
@@ -553,23 +553,25 @@ namespace TRLevelReader
             byte[] target = new byte[rawMeshData.Length * 2];
             Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);
 
-            // The mesh pointer list can contain duplicates so use a map to 
-            // make sure we don't read more than we should on each iteration
-            Dictionary<uint, TRMesh> meshMap = new Dictionary<uint, TRMesh>();
+            // The mesh pointer list can contain duplicates so we must make
+            // sure to iterate over distinct values only
+            meshPointers = meshPointers.Distinct().ToArray();
+
+            List<TRMesh> meshes = new List<TRMesh>();
+
             using (MemoryStream ms = new MemoryStream(target))
             using (BinaryReader br = new BinaryReader(ms))
             {
-                foreach (uint meshPointer in meshPointers)
+                for (int i = 0; i < meshPointers.Length; i++)
                 {
-                    if (meshMap.ContainsKey(meshPointer))
-                    {
-                        continue;
-                    }
-
                     TRMesh mesh = new TRMesh();
-                    meshMap.Add(meshPointer, mesh);
+                    meshes.Add(mesh);
 
+                    uint meshPointer = meshPointers[i];         
                     br.BaseStream.Position = meshPointer;
+
+                    //Pointer
+                    mesh.Pointer = meshPointer;
 
                     //Centre
                     mesh.Centre = TR2FileReadUtilities.ReadVertex(br);
@@ -580,9 +582,9 @@ namespace TRLevelReader
                     //Vertices
                     mesh.NumVertices = br.ReadInt16();
                     mesh.Vertices = new TRVertex[mesh.NumVertices];
-                    for (int i = 0; i < mesh.NumVertices; i++)
+                    for (int j = 0; j < mesh.NumVertices; j++)
                     {
-                        mesh.Vertices[i] = TR2FileReadUtilities.ReadVertex(br);
+                        mesh.Vertices[j] = TR2FileReadUtilities.ReadVertex(br);
                     }
 
                     //Lights or Normals
@@ -590,55 +592,68 @@ namespace TRLevelReader
                     if (mesh.NumNormals > 0)
                     {
                         mesh.Normals = new TRVertex[mesh.NumNormals];
-                        for (int i = 0; i < mesh.NumNormals; i++)
+                        for (int j = 0; j < mesh.NumNormals; j++)
                         {
-                            mesh.Normals[i] = TR2FileReadUtilities.ReadVertex(br);
+                            mesh.Normals[j] = TR2FileReadUtilities.ReadVertex(br);
                         }
                     }
                     else
                     {
                         mesh.Lights = new short[Math.Abs(mesh.NumNormals)];
-                        for (int i = 0; i < mesh.Lights.Length; i++)
+                        for (int j = 0; j < mesh.Lights.Length; j++)
                         {
-                            mesh.Lights[i] = br.ReadInt16();
+                            mesh.Lights[j] = br.ReadInt16();
                         }
                     }
 
                     //Textured Rectangles
                     mesh.NumTexturedRectangles = br.ReadInt16();
                     mesh.TexturedRectangles = new TRFace4[mesh.NumTexturedRectangles];
-                    for (int i = 0; i < mesh.NumTexturedRectangles; i++)
+                    for (int j = 0; j < mesh.NumTexturedRectangles; j++)
                     {
-                        mesh.TexturedRectangles[i] = TR2FileReadUtilities.ReadTRFace4(br);
+                        mesh.TexturedRectangles[j] = TR2FileReadUtilities.ReadTRFace4(br);
                     }
 
                     //Textured Triangles
                     mesh.NumTexturedTriangles = br.ReadInt16();
                     mesh.TexturedTriangles = new TRFace3[mesh.NumTexturedTriangles];
-                    for (int i = 0; i < mesh.NumTexturedTriangles; i++)
+                    for (int j = 0; j < mesh.NumTexturedTriangles; j++)
                     {
-                        mesh.TexturedTriangles[i] = TR2FileReadUtilities.ReadTRFace3(br);
+                        mesh.TexturedTriangles[j] = TR2FileReadUtilities.ReadTRFace3(br);
                     }
 
                     //Coloured Rectangles
                     mesh.NumColouredRectangles = br.ReadInt16();
                     mesh.ColouredRectangles = new TRFace4[mesh.NumColouredRectangles];
-                    for (int i = 0; i < mesh.NumColouredRectangles; i++)
+                    for (int j = 0; j < mesh.NumColouredRectangles; j++)
                     {
-                        mesh.ColouredRectangles[i] = TR2FileReadUtilities.ReadTRFace4(br);
+                        mesh.ColouredRectangles[j] = TR2FileReadUtilities.ReadTRFace4(br);
                     }
 
                     //Coloured Triangles
                     mesh.NumColouredTriangles = br.ReadInt16();
                     mesh.ColouredTriangles = new TRFace3[mesh.NumColouredTriangles];
-                    for (int i = 0; i < mesh.NumColouredTriangles; i++)
+                    for (int j = 0; j < mesh.NumColouredTriangles; j++)
                     {
-                        mesh.ColouredTriangles[i] = TR2FileReadUtilities.ReadTRFace3(br);
+                        mesh.ColouredTriangles[j] = TR2FileReadUtilities.ReadTRFace3(br);
+                    }
+
+                    // There seems to be some redundant data at the end of some meshes so we
+                    // need to store this in the mesh to ensure writes are consistent. It 
+                    // could possibly be that one of the above reads isn't quite right, e.g.
+                    // reading a short instead of an int somewhere, as the difference always
+                    // seems to be either 0 or 2, but everything appears accurate according to
+                    // Rosetta.
+                    long nextPointer = i < meshPointers.Length - 1 ? meshPointers[i + 1] : br.BaseStream.Length;
+                    int diff = (int)(nextPointer - br.BaseStream.Position);
+                    if (diff > 0)
+                    {
+                        mesh.TrailingData = br.ReadBytes(diff);
                     }
                 }
             }
 
-            return meshMap.Values.ToArray();
+            return meshes.ToArray();
         }
 
         #region Unused previous ConstructMeshData

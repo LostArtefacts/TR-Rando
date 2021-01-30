@@ -10,6 +10,10 @@ namespace TRLevelReader.Model
 {
     public class TRMesh : ISerializableCompact
     {
+        //Held for convenience here but is not included in serialisation
+        //Value matches that in containing pointer array
+        public uint Pointer { get; set; }
+
         //6 Bytes
         public TRVertex Centre { get; set; }
 
@@ -54,6 +58,9 @@ namespace TRLevelReader.Model
 
         //NumColouredTriangles * 8 bytes
         public TRFace3[] ColouredTriangles { get; set; }
+
+        //Some meshes appear to have trailing data
+        internal byte[] TrailingData { get; set; }
 
         public byte[] Serialize()
         {
@@ -109,6 +116,11 @@ namespace TRLevelReader.Model
                     foreach (TRFace3 face in ColouredTriangles)
                     {
                         writer.Write(face.Serialize());
+                    }
+
+                    if (TrailingData != null)
+                    {
+                        writer.Write(TrailingData);
                     }
                 }
 
