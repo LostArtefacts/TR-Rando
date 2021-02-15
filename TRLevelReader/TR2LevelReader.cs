@@ -638,18 +638,12 @@ namespace TRLevelReader
                         mesh.ColouredTriangles[j] = TR2FileReadUtilities.ReadTRFace3(br);
                     }
 
-                    // There seems to be some redundant data at the end of some meshes so we
-                    // need to store this in the mesh to ensure writes are consistent. It 
-                    // could possibly be that one of the above reads isn't quite right, e.g.
-                    // reading a short instead of an int somewhere, as the difference always
-                    // seems to be either 0 or 2, but everything appears accurate according to
-                    // Rosetta.
-                    long nextPointer = i < meshPointers.Length - 1 ? meshPointers[i + 1] : br.BaseStream.Length;
-                    int diff = (int)(nextPointer - br.BaseStream.Position);
-                    if (diff > 0)
-                    {
-                        mesh.TrailingData = br.ReadBytes(diff);
-                    }
+                    // There may be alignment padding at the end of the mesh, but rather than
+                    // storing it, when the mesh is serialized the alignment should be considered.
+                    // It seems to be 4-byte alignment for mesh data. The basestream position is
+                    // moved to the next pointer in the next iteration, so we don't need to process
+                    // the additional data here.
+                    // See https://www.tombraiderforums.com/archive/index.php/t-215247.html
                 }
             }
 

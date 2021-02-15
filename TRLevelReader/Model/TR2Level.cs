@@ -325,7 +325,7 @@ namespace TRLevelReader.Model
         }
 
         /// <summary>
-        /// Inserts a new mesh and returns the its index in MeshPointers.
+        /// Inserts a new mesh and returns its index in MeshPointers.
         /// </summary>
         public int InsertMesh(TRMesh newMesh)
         {
