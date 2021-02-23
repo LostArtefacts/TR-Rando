@@ -1,0 +1,576 @@
+{
+  "WAD": "tr2audio.wad",
+  "Tracks": [
+    {
+      "ID": 0,
+      "Name": "Blank",
+      "Offset": 0,
+      "Length": 0,
+      "Categories": [
+        0,
+        3
+      ]
+    },
+    {
+      "ID": 3,
+      "Name": "Great Wall Cutscene",
+      "Offset": 0,
+      "Length": 2798586,
+      "Categories": [
+        5
+      ]
+    },
+    {
+      "ID": 4,
+      "Name": "Opera House Cutscene",
+      "Offset": 2798586,
+      "Length": 3722318,
+      "Categories": [
+        5
+      ]
+    },
+    {
+      "ID": 5,
+      "Name": "Diving Area Cutscene",
+      "Offset": 6520904,
+      "Length": 4409678,
+      "Categories": [
+        5
+      ]
+    },
+    {
+      "ID": 6,
+      "Name": "Welcome Back",
+      "Offset": 10930582,
+      "Length": 313252,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 7,
+      "Name": "Training 1",
+      "Offset": 11243834,
+      "Length": 286372,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 8,
+      "Name": "Training 2",
+      "Offset": 11530206,
+      "Length": 224078,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 9,
+      "Name": "Training 3",
+      "Offset": 11754284,
+      "Length": 224932,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 10,
+      "Name": "Training 4",
+      "Offset": 11979216,
+      "Length": 255652,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 11,
+      "Name": "Training 5",
+      "Offset": 12234868,
+      "Length": 426318,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 12,
+      "Name": "Training 6",
+      "Offset": 12661186,
+      "Length": 569252,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 13,
+      "Name": "Training 7",
+      "Offset": 13230438,
+      "Length": 335866,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 14,
+      "Name": "Training 8",
+      "Offset": 13566304,
+      "Length": 355492,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 15,
+      "Name": "Training 9",
+      "Offset": 13921796,
+      "Length": 224078,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 16,
+      "Name": "Training 10",
+      "Offset": 14145874,
+      "Length": 224078,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 17,
+      "Name": "Training 11",
+      "Offset": 14369952,
+      "Length": 224506,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 18,
+      "Name": "Training 12",
+      "Offset": 14594458,
+      "Length": 352932,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 19,
+      "Name": "Training 13",
+      "Offset": 14947390,
+      "Length": 224078,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 20,
+      "Name": "Training 14",
+      "Offset": 15171468,
+      "Length": 224078,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 21,
+      "Name": "Training 15",
+      "Offset": 15395546,
+      "Length": 224078,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 22,
+      "Name": "Training 16",
+      "Offset": 15619624,
+      "Length": 224078,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 23,
+      "Name": "Training 17",
+      "Offset": 15843702,
+      "Length": 224078,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 27,
+      "Name": "Shower Scene",
+      "Offset": 16067780,
+      "Length": 596986,
+      "Categories": [
+        5,
+        4
+      ]
+    },
+    {
+      "ID": 28,
+      "Name": "Dragon Death",
+      "Offset": 16664766,
+      "Length": 352078,
+      "Categories": [
+        5
+      ]
+    },
+    {
+      "ID": 29,
+      "Name": "Feel Free",
+      "Offset": 17016844,
+      "Length": 224078,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 30,
+      "Name": "Xian Cutscene",
+      "Offset": 17240922,
+      "Length": 1723812,
+      "Categories": [
+        5
+      ]
+    },
+    {
+      "ID": 31,
+      "Name": "Caves Ambience",
+      "Offset": 18964734,
+      "Length": 3844772,
+      "Categories": [
+        3,
+        2
+      ]
+    },
+    {
+      "ID": 32,
+      "Name": "Water Ambience",
+      "Offset": 22809506,
+      "Length": 3832826,
+      "Categories": [
+        3,
+        2
+      ]
+    },
+    {
+      "ID": 33,
+      "Name": "Wind Ambience",
+      "Offset": 26642332,
+      "Length": 5390158,
+      "Categories": [
+        3,
+        2
+      ]
+    },
+    {
+      "ID": 34,
+      "Name": "Heartbeat Ambience",
+      "Offset": 32032490,
+      "Length": 5945252,
+      "Categories": [
+        3,
+        2
+      ]
+    },
+    {
+      "ID": 35,
+      "Name": "Danger 1",
+      "Offset": 37977742,
+      "Length": 312398,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 36,
+      "Name": "Danger 2",
+      "Offset": 38290140,
+      "Length": 212132,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 37,
+      "Name": "Danger 3",
+      "Offset": 38502272,
+      "Length": 591012,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 38,
+      "Name": "Sacred",
+      "Offset": 39093284,
+      "Length": 1806158,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 39,
+      "Name": "Awe",
+      "Offset": 40899442,
+      "Length": 700238,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 40,
+      "Name": "Venice Violins",
+      "Offset": 41599680,
+      "Length": 5149518,
+      "Categories": [
+        1,
+        2
+      ]
+    },
+    {
+      "ID": 41,
+      "Name": "End of Level",
+      "Offset": 46749198,
+      "Length": 453626,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 42,
+      "Name": "Mystical",
+      "Offset": 47202824,
+      "Length": 429732,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 43,
+      "Name": "Revelation 1",
+      "Offset": 47632556,
+      "Length": 538958,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 44,
+      "Name": "Be Careful 1",
+      "Offset": 48171514,
+      "Length": 634532,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 45,
+      "Name": "Chandelier Room",
+      "Offset": 48806046,
+      "Length": 1954212,
+      "Categories": [
+        1,
+        2
+      ]
+    },
+    {
+      "ID": 46,
+      "Name": "Drama",
+      "Offset": 50760258,
+      "Length": 1132452,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 47,
+      "Name": "Secret",
+      "Offset": 51892710,
+      "Length": 204026,
+      "Categories": [
+        4
+      ]
+    },
+    {
+      "ID": 48,
+      "Name": "It's Coming! 1",
+      "Offset": 52096736,
+      "Length": 511226,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 49,
+      "Name": "It's Coming! 2",
+      "Offset": 52607962,
+      "Length": 382798,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 50,
+      "Name": "Warning 1",
+      "Offset": 52990760,
+      "Length": 459172,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 51,
+      "Name": "Warning 2",
+      "Offset": 53449932,
+      "Length": 333732,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 52,
+      "Name": "Skidoo Techno",
+      "Offset": 53783664,
+      "Length": 5283066,
+      "Categories": [
+        1,
+        2
+      ]
+    },
+    {
+      "ID": 53,
+      "Name": "Skidoo Percussion",
+      "Offset": 59066730,
+      "Length": 2346318,
+      "Categories": [
+        1,
+        2
+      ]
+    },
+    {
+      "ID": 54,
+      "Name": "Synth Pads",
+      "Offset": 61413048,
+      "Length": 307706,
+      "Categories": [
+        1
+      ]
+    },
+    {
+      "ID": 55,
+      "Name": "Revelation 2",
+      "Offset": 61720754,
+      "Length": 1411066,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 56,
+      "Name": "Be Careful 2",
+      "Offset": 63131820,
+      "Length": 377678,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 57,
+      "Name": "Revelation 3",
+      "Offset": 63509498,
+      "Length": 1634638,
+      "Categories": [
+        1,
+        2
+      ]
+    },
+    {
+      "ID": 58,
+      "Name": "Industrial Ambience",
+      "Offset": 65144136,
+      "Length": 6770852,
+      "Categories": [
+        3,
+        2
+      ]
+    },
+    {
+      "ID": 59,
+      "Name": "Spooky Ambience",
+      "Offset": 71914988,
+      "Length": 6775972,
+      "Categories": [
+        3,
+        2
+      ]
+    },
+    {
+      "ID": 60,
+      "Name": "Barkhang",
+      "Offset": 78690960,
+      "Length": 3446266,
+      "Categories": [
+        1,
+        2
+      ]
+    },
+    {
+      "ID": 61,
+      "Name": "Gong",
+      "Offset": 82137226,
+      "Length": 819278,
+      "Categories": [
+        1,
+        4
+      ]
+    },
+    {
+      "ID": 62,
+      "Name": "OK, Marco",
+      "Offset": 82956504,
+      "Length": 756558,
+      "Categories": [
+        5
+      ]
+    },
+    {
+      "ID": 63,
+      "Name": "Home Sweet Home",
+      "Offset": 83713062,
+      "Length": 631118,
+      "Categories": [
+        5
+      ]
+    },
+    {
+      "ID": 64,
+      "Name": "Main Theme",
+      "Offset": 84344180,
+      "Length": 5396132,
+      "Categories": [
+        2
+      ]
+    }
+  ]
+}
