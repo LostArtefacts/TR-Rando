@@ -44,6 +44,9 @@
     <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -86,14 +89,26 @@
     <Compile Include="Model\ManagedSeed.cs" />
     <Compile Include="Model\ControllerOptions.cs" />
     <Compile Include="Model\ProfileString.cs" />
+    <Compile Include="Updates\Update.cs" />
+    <Compile Include="Updates\UpdateChecker.cs" />
+    <Compile Include="Updates\UpdateEventArgs.cs" />
     <Compile Include="Windows\GlobalSeedWindow.xaml.cs">
       <DependentUpon>GlobalSeedWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\OpenProgressWindow.xaml.cs">
+      <DependentUpon>OpenProgressWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\RandomizeProgressWindow.xaml.cs">
       <DependentUpon>RandomizeProgressWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\RestoreProgressWindow.xaml.cs">
+      <DependentUpon>RestoreProgressWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UpdateAvailableWindow.xaml.cs">
+      <DependentUpon>UpdateAvailableWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\EditorControl.xaml">
       <SubType>Designer</SubType>
@@ -163,7 +178,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\OpenProgressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\RandomizeProgressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\RestoreProgressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UpdateAvailableWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,4 +234,12 @@
     <Resource Include="Resources\rando.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>rmdir /S /Q Lib</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>mkdir Lib
+move /Y *.dll Lib
+move /Y *.xml Lib</PostBuildEvent>
+  </PropertyGroup>
 </Project>

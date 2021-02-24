@@ -7,6 +7,7 @@ using System.Windows.Navigation;
 using TR2RandomizerCore;
 using TR2RandomizerView.Events;
 using TR2RandomizerView.Model;
+using TR2RandomizerView.Updates;
 
 namespace TR2RandomizerView.Windows
 {
@@ -196,6 +197,8 @@ namespace TR2RandomizerView.Windows
             _editionStatusText.DataContext = _folderStatusText.DataContext = _editorControl;
             IsEditorActive = false;
 
+            UpdateChecker.Instance.UpdateAvailable += UpdateChecker_UpdateAvailable; ;
+
             MinWidth = Width;
             MinHeight = Height;
         }
@@ -260,7 +263,14 @@ namespace TR2RandomizerView.Windows
 
         private void RefreshHistoryMenu()
         {
-            RecentFolders = new RecentFolderList(this);
+            if (Dispatcher.CheckAccess())
+            {
+                RecentFolders = new RecentFolderList(this);
+            }
+            else
+            {
+                Dispatcher.Invoke(RefreshHistoryMenu);
+            }
         }
 
         public void OpenDataFolder(RecentFolder folder)
@@ -378,12 +388,43 @@ namespace TR2RandomizerView.Windows
 
         private void CheckForUpdateCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            try
+            {
+                if (UpdateChecker.Instance.CheckForUpdates())
+                {
+                    ShowUpdateWindow();
+                }
+                else
+                {
+                    MessageWindow.ShowMessage(string.Format("The current version of {0} is up to date.", AppTitle));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageWindow.ShowError(ex.Message);
+            }
+        }
 
+        private void UpdateChecker_UpdateAvailable(object sender, UpdateEventArgs e)
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.Invoke(() => UpdateChecker_UpdateAvailable(sender, e));
+            }
+            else
+            {
+                _updateAvailableMenu.Visibility = Visibility.Visible;
+            }
         }
 
         private void UpdateAvailableMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            ShowUpdateWindow();
+        }
 
+        private void ShowUpdateWindow()
+        {
+            new UpdateAvailableWindow().ShowDialog();
         }
 
         private void AboutCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)

@@ -1,0 +1,26 @@
+﻿<Window x:Class="TR2RandomizerView.Windows.OpenProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        Icon="..\Resources\rando.ico"
+        Title="Opening Data Folder" Height="110" Width="400">
+
+    <StackPanel Margin="10">
+        <TextBlock
+            Text="{Binding ProgressDescription}"
+            FontSize="12"/>
+
+        <ProgressBar 
+            Margin="0,5,0,0"
+            Value="{Binding ProgressValue}" 
+            Maximum="{Binding ProgressTarget}"
+            Height="20"/>
+    </StackPanel>
+</Window>

@@ -1,0 +1,99 @@
+﻿<Window x:Class="TR2RandomizerView.Windows.UpdateAvailableWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        ShowInTaskbar="False"
+        Icon="..\Resources\rando.ico"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterOwner"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        Title="Update Available" Height="400" Width="550">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.ColumnSpan="2"
+                       Margin="0,0,0,5"
+                       Text="A new version of TR II Randomizer is available."/>
+
+            <TextBlock Grid.Row="1"
+                       Margin="20,0,10,3"
+                       FontWeight="Bold"
+                       Text="Current Version"/>
+            <TextBlock Grid.Row="1"
+                       Grid.Column="1"
+                       Text="{Binding CurrentVersion}"/>
+
+            <TextBlock Grid.Row="2"
+                       Margin="20,0,10,3"
+                       FontWeight="Bold"
+                       Text="New Version"/>
+            <TextBlock Grid.Row="2"
+                       Grid.Column="1"
+                       Text="{Binding NewVersion}"/>
+
+            <TextBlock Grid.Row="3"
+                       Margin="20,0,10,3"
+                       FontWeight="Bold"
+                       Text="Publish Date"/>
+            <TextBlock Grid.Row="3"
+                       Grid.Column="1"
+                       Text="{Binding PublishDate}"/>
+
+            <Border BorderBrush="#ccc"
+                    BorderThickness="1"
+                    Margin="0,7,0,0"
+                    Grid.Row="4"
+                    Grid.ColumnSpan="2">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock Text="{Binding UpdateBody}"
+                               TextWrapping="Wrap"
+                               Padding="5"/>
+                </ScrollViewer>
+            </Border>
+
+        </Grid>
+
+        <Border BorderThickness="0 1 0 0"
+                BorderBrush="#ccc"
+                Background="#eee"
+                Grid.Row="1">
+            <StackPanel Width="180" 
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Content="_Visit GitHub"
+                        IsDefault="True"
+                        Width="90"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,10,0"
+                        Click="GitHubButton_Click"/>
+
+                <Button Content="_Cancel"
+                        IsCancel="True"
+                        Width="70"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

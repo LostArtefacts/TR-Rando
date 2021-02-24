@@ -207,9 +207,23 @@ namespace TR2RandomizerView.Controls
         {
             if (MessageWindow.ShowConfirm("The files that were backed up when this folder was first opened will be copied back to the original directory.\n\nDo you wish to proceed?"))
             {
-                Controller.Restore();
-                Reload();
-                MessageWindow.ShowMessage("The restore completed successfully.");
+                RestoreProgressWindow rpw = new RestoreProgressWindow(Controller);
+                try
+                {
+                    if (rpw.ShowDialog() ?? false)
+                    {
+                        Reload();
+                        MessageWindow.ShowMessage("The restore completed successfully.");
+                    }
+                    else if (rpw.RestoreException != null)
+                    {
+                        throw rpw.RestoreException;
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageWindow.ShowError(e.Message);
+                }
             }
         }
 

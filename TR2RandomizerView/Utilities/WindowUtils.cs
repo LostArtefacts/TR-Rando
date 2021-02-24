@@ -104,8 +104,8 @@ namespace TR2RandomizerView.Utilities
 
         #region SystemMenu
         /**
-         * Based on the folliwng system menu sequencing in Windows. Removed unneccasry entries
-         * based on the Form's properties.
+         * Based on the folliwng system menu sequencing in Windows. Removes unneccasry entries
+         * based on the Window's properties.
          * 
          * 0 Restore
          * 1 Move

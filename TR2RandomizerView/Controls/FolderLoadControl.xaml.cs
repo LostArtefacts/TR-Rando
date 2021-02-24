@@ -88,7 +88,7 @@ namespace TR2RandomizerView.Controls
             using (CommonOpenFileDialog dlg = new CommonOpenFileDialog())
             {
                 dlg.IsFolderPicker = true;
-                dlg.Title = ((App)Application.Current).Title + " : Select Data Folder";
+                dlg.Title = "Select Data Folder";
                 if (dlg.ShowDialog(WindowUtils.GetActiveWindowHandle()) == CommonFileDialogResult.Ok)
                 {
                     OpenDataFolder(dlg.FileName);
@@ -103,10 +103,17 @@ namespace TR2RandomizerView.Controls
 
         public void OpenDataFolder(string folderPath)
         {
+            OpenProgressWindow opw = new OpenProgressWindow(folderPath);
             try
             {
-                TR2RandomizerController controller = TR2RandomizerCoord.Instance.Open(folderPath);
-                DataFolderOpened?.Invoke(this, new DataFolderEventArgs(folderPath, controller));
+                if (opw.ShowDialog() ?? false)
+                {
+                    DataFolderOpened?.Invoke(this, new DataFolderEventArgs(folderPath, opw.OpenedController));
+                }
+                else if (opw.OpenException != null)
+                {
+                    throw opw.OpenException;
+                }
             }
             catch (Exception e)
             {
