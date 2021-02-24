@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Helpers\Difficulty.cs" />
     <Compile Include="Helpers\Location.cs" />
+    <Compile Include="Helpers\TROpenRestoreEventArgs.cs" />
     <Compile Include="Helpers\TRRandomizationCategory.cs" />
     <Compile Include="Helpers\TRRandomizationEventArgs.cs" />
     <Compile Include="Randomizers\TR2LevelRandomizer.cs" />

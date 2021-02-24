@@ -19,6 +19,7 @@ namespace TR2RandomizerCore
             // If there is a checksum mismatch, we will just ignore the previous backup and open the folder afresh
             _editor = TRCoord.Instance.Open(directoryPath, TRScriptOpenOption.DiscardBackup);
             _editor.SaveProgressChanged += Editor_SaveProgressChanged;
+            _editor.RestoreProgressChanged += Editor_RestoreProgressChanged;
             StoreExternalOrganisations();
         }
 
@@ -241,9 +242,19 @@ namespace TR2RandomizerCore
             RandomizationProgressChanged?.Invoke(this, _randoEventArgs);
         }
 
+        public event EventHandler<TROpenRestoreEventArgs> RestoreProgressChanged;
+        private TROpenRestoreEventArgs _restoreEventArgs;
+
         public void Restore()
         {
+            _restoreEventArgs = new TROpenRestoreEventArgs();
             _editor.Restore();
+        }
+
+        private void Editor_RestoreProgressChanged(object sender, TRBackupRestoreEventArgs e)
+        {
+            _restoreEventArgs.Copy(e);
+            RestoreProgressChanged?.Invoke(this, _restoreEventArgs);
         }
 
         public void ImportSettings(string filePath)

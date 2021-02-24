@@ -16,7 +16,13 @@ namespace TR2RandomizerCore.Randomizers
     {
         // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
         // into predefined locations. See FindAndCleanUnarmedPistolLocation below.
-        private int _unarmedLevelPistolIndex = -1;
+        private int _unarmedLevelPistolIndex;
+        private readonly Dictionary<string, Location> _pistolLocations;
+
+        public ItemRandomizer()
+        {
+            _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, Location>>(File.ReadAllText(@"Resources\unarmed_locations.json"));
+        }
 
         public override void Randomize(int seed)
         {
@@ -85,13 +91,11 @@ namespace TR2RandomizerCore.Randomizers
 
         private void FindAndCleanUnarmedPistolLocation(TR23ScriptedLevel lvl)
         {
-            Dictionary<string, Location> pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, Location>>(File.ReadAllText(@"Resources\unarmed_locations.json"));
-
             string lvlFile = lvl.LevelFileBaseName.ToUpper();
             Location levelPistolLocation = null;
-            if (pistolLocations.ContainsKey(lvlFile))
+            if (_pistolLocations.ContainsKey(lvlFile))
             {
-                levelPistolLocation = pistolLocations[lvlFile];
+                levelPistolLocation = _pistolLocations[lvlFile];
                 CleanUnarmedPistolLocation(levelPistolLocation);
             }
 

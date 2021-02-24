@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TR2RandomizerCore.Helpers;
 using TR2RandomizerCore.Randomizers;
 using TRGE.Coord;
 using TRGE.Core;
@@ -25,6 +26,9 @@ namespace TR2RandomizerCore
         public IReadOnlyList<string> History => TRCoord.Instance.History;
         public event EventHandler HistoryChanged;
 
+        public event EventHandler<TROpenRestoreEventArgs> OpenProgressChanged;
+        private TROpenRestoreEventArgs _openEventArgs;
+
         public string ConfigDirectory => TRCoord.Instance.ConfigDirectory;
         public string ConfigFilePath => TRCoord.Instance.ConfigFilePath;
 
@@ -32,11 +36,19 @@ namespace TR2RandomizerCore
         {
             TRCoord.Instance.HistoryChanged += TRCoord_HistoryChanged;
             TRCoord.Instance.HistoryAdded += TRCoord_HistoryChanged;
+
+            TRCoord.Instance.BackupProgressChanged += TRCoord_BackupProgressChanged; ;
         }
 
         private void TRCoord_HistoryChanged(object sender, EventArgs e)
         {
             HistoryChanged?.Invoke(this, e);
+        }
+
+        private void TRCoord_BackupProgressChanged(object sender, TRBackupRestoreEventArgs e)
+        {
+            _openEventArgs.Copy(e);
+            OpenProgressChanged.Invoke(this, _openEventArgs);
         }
 
         /// <summary>
@@ -59,6 +71,7 @@ namespace TR2RandomizerCore
 
         public TR2RandomizerController Open(string directoryPath)
         {
+            _openEventArgs = new TROpenRestoreEventArgs();
             return new TR2RandomizerController(directoryPath);
         }
 
