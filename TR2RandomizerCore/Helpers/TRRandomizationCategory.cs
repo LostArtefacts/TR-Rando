@@ -4,6 +4,7 @@
     {
         None,
         Script,
+        PreRandomize,
         Randomize,
         Commit,
         Cancel

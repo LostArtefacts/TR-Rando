@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TRGE.Core;
+﻿using TRGE.Core;
 
 namespace TR2RandomizerCore.Helpers
 {
@@ -39,14 +34,15 @@ namespace TR2RandomizerCore.Helpers
             switch (category)
             {
                 case TRSaveCategory.Scripting:
+                    return TRRandomizationCategory.Script;       // TRGE is saving script data
                 case TRSaveCategory.LevelFile:
-                    return TRRandomizationCategory.Script;
+                    return TRRandomizationCategory.PreRandomize; // TRGE is applying any pre-randomization work to level files
                 case TRSaveCategory.Custom:
-                    return TRRandomizationCategory.Randomize;
+                    return TRRandomizationCategory.Randomize;    // TR2LevelRandomizer is running
                 case TRSaveCategory.Cancel:
-                    return TRRandomizationCategory.Cancel;
+                    return TRRandomizationCategory.Cancel;       // The operation has been cancelled externally
                 case TRSaveCategory.Commit:
-                    return TRRandomizationCategory.Commit;
+                    return TRRandomizationCategory.Commit;       // TRGE is commiting the changes to the original data directory
                 default:
                     return TRRandomizationCategory.None;
             }
