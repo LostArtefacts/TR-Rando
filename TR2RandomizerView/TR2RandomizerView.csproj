@@ -228,7 +228,6 @@
       <Name>TR2RandomizerCore</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\rando.ico" />
     <Resource Include="Resources\rando.png" />

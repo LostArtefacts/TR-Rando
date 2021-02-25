@@ -101,22 +101,8 @@
         </DataTemplate>
     </Window.Resources>
 
-    <DockPanel>
-        <!--<DockPanel.Resources>
-            <Style TargetType="Control" x:Key="BoolToVis">
-                <Setter Property="Visibility" Value="Visible"/>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding AdvancedToolsEnabled}" Value="True">
-                        <Setter Property="Visibility" Value="Visible"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding AdvancedToolsEnabled}" Value="False">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </DockPanel.Resources>-->
-        
-        <Menu DockPanel.Dock="Top">
+    <DockPanel>        
+        <Menu DockPanel.Dock="Top" Background="#fff">
             <MenuItem Header="_File">
                 <MenuItem Header="_Open" 
                           Command="cmds:WindowCommands.Open"/>
@@ -205,6 +191,8 @@
 
             <MenuItem Header="_Update Available"
                       x:Name="_updateAvailableMenu"
+                      FontWeight="Bold"
+                      Foreground="#0D60A6"
                       Visibility="Collapsed"
                       Click="UpdateAvailableMenuItem_Click"/>
         </Menu>

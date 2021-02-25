@@ -56,7 +56,7 @@ namespace TR2RandomizerView.Windows
         public RestoreProgressWindow(TR2RandomizerController controller)
         {
             InitializeComponent();
-            Owner = WindowUtils.GetActiveWindow();
+            Owner = WindowUtils.GetActiveWindow(this);
             DataContext = this;
             _complete = false;
             _controller = controller;

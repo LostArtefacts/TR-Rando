@@ -59,7 +59,7 @@ namespace TR2RandomizerView.Windows
         public AboutWindow()
         {
             InitializeComponent();
-            Owner = WindowUtils.GetActiveWindow();
+            Owner = WindowUtils.GetActiveWindow(this);
             DataContext = this;
 
             App app = (App)Application.Current;

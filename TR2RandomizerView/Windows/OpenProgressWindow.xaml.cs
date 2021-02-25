@@ -57,7 +57,7 @@ namespace TR2RandomizerView.Windows
         public OpenProgressWindow(string folderPath)
         {
             InitializeComponent();
-            Owner = WindowUtils.GetActiveWindow();
+            Owner = WindowUtils.GetActiveWindow(this);
             DataContext = this;
             _complete = false;
             _folderPath = folderPath;

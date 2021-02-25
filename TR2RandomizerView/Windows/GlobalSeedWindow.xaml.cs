@@ -25,7 +25,7 @@ namespace TR2RandomizerView.Windows
         public GlobalSeedWindow(int minSeed, int maxSeed, int seedValue)
         {
             InitializeComponent();
-            Owner = WindowUtils.GetActiveWindow();
+            Owner = WindowUtils.GetActiveWindow(this);
 
             _seedControl.MinValue = minSeed;
             _seedControl.MaxValue = maxSeed;
@@ -35,6 +35,7 @@ namespace TR2RandomizerView.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             WindowUtils.TidyMenu(this);
+            _seedControl.Focus();
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)

@@ -56,7 +56,7 @@ namespace TR2RandomizerView.Windows
         public RandomizeProgressWindow(TR2RandomizerController controller, ControllerOptions options)
         {
             InitializeComponent();
-            Owner = WindowUtils.GetActiveWindow();
+            Owner = WindowUtils.GetActiveWindow(this);
             DataContext = this;
             _controller = controller;
             _options = options;
@@ -127,6 +127,9 @@ namespace TR2RandomizerView.Windows
                         {
                             case TRRandomizationCategory.Script:
                                 ProgressDescription = "Randomizing script data";
+                                break;
+                            case TRRandomizationCategory.PreRandomize:
+                                ProgressDescription = "Preparing level files";
                                 break;
                             case TRRandomizationCategory.Randomize:
                                 ProgressDescription = "Randomizing level files";

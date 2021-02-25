@@ -71,7 +71,7 @@ namespace TR2RandomizerView.Windows
         public UpdateAvailableWindow()
         {
             InitializeComponent();
-            Owner = WindowUtils.GetActiveWindow();
+            Owner = WindowUtils.GetActiveWindow(this);
             DataContext = this;
 
             Update update = UpdateChecker.Instance.LatestUpdate;
