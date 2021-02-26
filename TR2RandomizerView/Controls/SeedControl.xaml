@@ -20,14 +20,11 @@
         <Border Grid.Column="1"
                 BorderBrush="#666"
                 BorderThickness="0,1,1,1">
-        <Button Grid.Column="1"
-                BorderThickness="0"
-                Content="&#x1f500;"
-                FontSize="13" 
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                ToolTip="Randomize Seed"
-                Click="RandomizeButton_Click"/>
+            <Button Grid.Column="1"
+                    Content="..\Resources\arrows.png"
+                    Style="{StaticResource SmallControlButton}"
+                    ToolTip="Randomize Seed"
+                    Click="RandomizeButton_Click"/>
         </Border>
     </Grid>
 </UserControl>

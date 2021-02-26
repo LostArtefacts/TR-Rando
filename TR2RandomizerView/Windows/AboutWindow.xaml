@@ -32,7 +32,7 @@
         <StackPanel Grid.Column="1">
             <TextBlock FontSize="16"
                        FontWeight="Bold"
-                       Foreground="#094577">
+                       Foreground="{StaticResource ThemeColour7}">
                 <TextBlock.Text>
                     <MultiBinding StringFormat="{}{0} {1}">
                         <Binding Path="AppTitle"/>

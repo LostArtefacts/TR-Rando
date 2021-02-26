@@ -14,7 +14,7 @@
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:RecentFolder}">
-            <Grid Margin="0,8">
+            <Grid Margin="0,8" HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="24"/>
                     <ColumnDefinition Width="*"/>
@@ -51,7 +51,7 @@
                    Source="..\Resources\rando.png"/>
             
             <TextBlock Text="{Binding AppTitle}"
-                       Foreground="#094577"
+                       Foreground="{StaticResource ThemeColour7}"
                        VerticalAlignment="Center"
                        FontSize="40"
                        Margin="10,0,0,2"

@@ -192,7 +192,7 @@
             <MenuItem Header="_Update Available"
                       x:Name="_updateAvailableMenu"
                       FontWeight="Bold"
-                      Foreground="#0D60A6"
+                      Foreground="{StaticResource ThemeColour8}"
                       Visibility="Collapsed"
                       Click="UpdateAvailableMenuItem_Click"/>
         </Menu>
