@@ -94,6 +94,7 @@
     <None Include="Resources\locations.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\TextureUpdates.zip" />
     <None Include="Resources\tr2audio.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
