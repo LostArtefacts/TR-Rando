@@ -26,7 +26,7 @@ Tomb Raider II Item Randomizer
 * Sunsets - Randomizes what levels have bartoli sunset effect.
 
 # Download
-https://github.com/DanzaG/TR2-Rando/releases/tag/V1.1b2
+https://github.com/DanzaG/TR2-Rando/releases/download/V1.2.1/V1.2.1.zip
 
 # Installation
 https://www.youtube.com/watch?v=MpNBfZgE0Fc
