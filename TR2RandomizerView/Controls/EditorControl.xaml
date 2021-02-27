@@ -1,0 +1,217 @@
+﻿<UserControl x:Class="TR2RandomizerView.Controls.EditorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cmds="clr-namespace:TR2RandomizerView.Commands"
+             xmlns:ctrl="clr-namespace:TR2RandomizerView.Controls"
+             mc:Ignorable="d" 
+             Background="#fff"
+             AllowDrop="True" Drop="EditorControl_Drop"
+             d:DesignHeight="700" d:DesignWidth="1200">    
+    
+    <Grid x:Name="_editorGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ctrl:ManagedSeedControl
+            Grid.Row="0"
+            Grid.Column="0"
+            IsActive="{Binding RandomizeLevelSequencing, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Level Sequencing"
+            Text="Change the order in which levels are played. Required items will always be available (e.g. the Seraph for Barkhang Monastery) regardless of when the level is reached."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding LevelSequencingSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+        <ctrl:ManagedSeedIntControl 
+            Grid.Row="1"
+            Grid.Column="0"
+            IsActive="{Binding RandomizeUnarmedLevels, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Unarmed Levels"
+            Text="Change the levels in which Lara loses her weapons. The pistols (or potentially another weapon) will be added to any new unarmed levels for Lara to find."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding UnarmedLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomInt="{Binding UnarmedLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomIntMinValue="1"
+            CustomIntMaxValue="{Binding LevelCount}"
+            CustomIntTitle="Number of levels"/>
+
+        <ctrl:ManagedSeedIntControl 
+            Grid.Row="2"
+            Grid.Column="0"
+            IsActive="{Binding RandomizeAmmolessLevels, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Ammoless Levels"
+            Text="Change the levels in which Lara loses her ammo, medi-packs and flares at the start. Note that no extra ammo will be added to these levels for Lara to find."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding AmmolessLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomInt="{Binding AmmolessLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomIntMinValue="1"
+            CustomIntMaxValue="{Binding LevelCount}"
+            CustomIntTitle="Number of levels"/>
+
+        <ctrl:ManagedSeedIntControl
+            Grid.Row="3"
+            Grid.Column="0"
+            IsActive="{Binding RandomizeSunsets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Sunsets"
+            Text="Change the levels that have sunsets. The lighting will gradually fade over 20 minutes, similar to Bartoli's Hideout. Sunset state resets if the game is reloaded."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding SunsetsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomInt="{Binding SunsetCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomIntMinValue="1"
+            CustomIntMaxValue="{Binding LevelCount}"
+            CustomIntTitle="Number of levels"/>
+
+        <ctrl:ManagedSeedBoolControl
+            Grid.Row="0"
+            Grid.Column="1"
+            IsActive="{Binding RandomizeSecrets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Secrets"
+            Text="Randomize the locations of secrets. These are ordered based on casual play order, so you should expect to find a stone before jade. Enabling hard secrets may require glitches to collect them."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBool="{Binding HardSecrets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle="Enable hard secrets"/>
+
+        <ctrl:ManagedSeedControl
+            Grid.Row="1" 
+            Grid.Column="1"
+            IsActive="{Binding RandomizeItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Items"
+            Text="Randomizes standard pickups in each level. Key items will not be randomized."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding ItemSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+        <ctrl:ManagedSeedControl
+            Grid.Row="2" 
+            Grid.Column="1"
+            IsActive="{Binding RandomizeEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Enemies"
+            Text="Randomize the types of enemies you encounter in each level."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding EnemySeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+        <ctrl:ManagedSeedControl
+            Grid.Row="3"
+            Grid.Column="1"
+            IsActive="{Binding RandomizeTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Textures"
+            Text="Randomly apply a texture pack to each level."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding TextureSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+        <ctrl:ManagedSeedControl
+            Grid.Row="0"
+            Grid.Column="2"
+            IsActive="{Binding RandomizeSecretRewards, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Secret Rewards"
+            Text="Change the items that are rewarded to Lara for collecting all secrets in each level. Rewards are selected randomly on a generosity scale. Note that while flares may be rewarded, the sprite for these does not show on screen."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding SecretRewardSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+        <ctrl:ManagedSeedBoolControl
+            Grid.Row="1"
+            Grid.Column="2"
+            IsActive="{Binding RandomizeAudioTracks, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Audio Tracks"
+            Text="Change the ambient tracks for each level, including the title screen, plus the sound to play when a secret is found (this is a global setting, not per level). Tick the option below to allow blank tracks in levels."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBool="{Binding RandomAudioTracksIncludeBlank, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle="Include blank tracks"/>
+
+        <Border Grid.Row="2"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                BorderBrush="#0E7709"
+                BorderThickness="1"
+                Background="#D8FCD6"
+                CornerRadius="5"
+                Margin="5">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Options"
+                           Padding="0,0,0,5"
+                           FontWeight="Bold"
+                           Grid.ColumnSpan="2"/>
+
+                    <TextBlock Grid.Row="1"
+                               Margin="0,0,15,0"
+                               Text="Randomize the seed for each selected element."
+                               TextWrapping="Wrap"/>
+
+                    <Button Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,0,0,15"
+                            Width="140"
+                            Content="Randomize Seeds" 
+                            Style="{StaticResource AltCallToAction}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Command="cmds:WindowCommands.RandomizeSeeds"
+                            />
+
+                    <TextBlock Grid.Row="2"
+                               Margin="0,0,15,0"
+                               Text="Set a global seed for each selected element."
+                               TextWrapping="Wrap"/>
+
+                    <Button Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="0,0,0,15"
+                            Content="Apply Global Seed" 
+                            Width="140"
+                            Style="{StaticResource AltCallToAction}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Command="cmds:WindowCommands.CreateGlobalSeed"
+                            />
+                </Grid>
+
+                <Button Grid.Row="2"
+                        Style="{StaticResource CallToAction}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom"
+                        FontSize="24"                        
+                        Content="Randomize!"
+                        Command="cmds:WindowCommands.Randomize"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

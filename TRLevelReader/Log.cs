@@ -9,7 +9,11 @@ namespace TRLevelReader
 {
     internal static class Log
     {
-        public const bool AllowVerboseLogging = false;
+        public static readonly bool AllowVerboseLogging;
+        static Log()
+        {
+            AllowVerboseLogging = false;
+        }
 
         public static void LogC(string text)
         {

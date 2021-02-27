@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="TR2RandomizerView.Controls.FolderLoadControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cmds="clr-namespace:TR2RandomizerView.Commands"
+             xmlns:vm="clr-namespace:TR2RandomizerView.Model"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Control.Resources>
+        <DataTemplate DataType="{x:Type vm:RecentFolderList}">
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding RecentFolders}"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:RecentFolder}">
+            <Grid Margin="0,8" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="24"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="{Binding DisplayIndex}"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           Margin="0,0,5,0"/>
+
+                <Border Grid.Column="1" 
+                        BorderThickness="0,0,0,0" 
+                        BorderBrush="#999" 
+                        VerticalAlignment="Center">
+                    <TextBlock Text="{Binding FolderPath}"/>
+                </Border>
+            </Grid>
+        </DataTemplate>
+    </Control.Resources>
+
+    <Grid Margin="5"
+          x:Name="_content">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <Image Width="40"
+                   Source="..\Resources\rando.png"/>
+            
+            <TextBlock Text="{Binding AppTitle}"
+                       Foreground="{StaticResource ThemeColour7}"
+                       VerticalAlignment="Center"
+                       FontSize="40"
+                       Margin="10,0,0,2"
+                       FontWeight="Bold"/>
+        </StackPanel>
+        
+        <StackPanel 
+            Grid.Row="1" 
+            Margin="0,10"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Stretch" 
+            Orientation="Horizontal">
+            <TextBlock 
+                Text="Open a Tomb Raider Data folder to get started. The folder must contain the TOMBPC.dat file and *.tr2 level files." 
+                VerticalAlignment="Center"/>
+            <Button 
+                Padding="15,4" 
+                Margin="20,0,0,0" 
+                Content="Browse" 
+                VerticalAlignment="Center"
+                Command="cmds:WindowCommands.Open"/>
+        </StackPanel>
+
+        <GroupBox 
+            Grid.Row="2" 
+            x:Name="_historyBox"
+            Visibility="{Binding RecentFoldersVisibility}">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="_historyIcon" 
+                           Width="18" 
+                           Height="18"/>
+
+                    <TextBlock Margin="5,0,0,0" 
+                               Text="Recent Folders"/>
+                </StackPanel>
+            </GroupBox.Header>
+
+            <ListView 
+                x:Name="_historyListView" 
+                Margin="10" 
+                SelectionChanged="HistoryListView_SelectionChanged" 
+                MouseMove="HistoryListView_MouseMove"
+                ItemsSource="{Binding RecentFolders}"/>
+        </GroupBox>
+    </Grid>
+</UserControl>

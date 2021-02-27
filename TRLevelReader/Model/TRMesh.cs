@@ -10,6 +10,10 @@ namespace TRLevelReader.Model
 {
     public class TRMesh : ISerializableCompact
     {
+        //Held for convenience here but is not included in serialisation
+        //Value matches that in containing pointer array
+        public uint Pointer { get; set; }
+
         //6 Bytes
         public TRVertex Centre { get; set; }
 
@@ -17,7 +21,7 @@ namespace TRLevelReader.Model
         public int CollRadius { get; set; }
 
         //2 Bytes
-        public short NumVetices { get; set; }
+        public short NumVertices { get; set; }
 
         //NumVertices * 6 Bytes
         public TRVertex[] Vertices { get; set; }
@@ -58,58 +62,63 @@ namespace TRLevelReader.Model
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
+                writer.Write(Centre.Serialize());
+                writer.Write(CollRadius);
+                writer.Write(NumVertices);
+
+                foreach (TRVertex vert in Vertices)
                 {
-                    writer.Write(Centre.Serialize());
-                    writer.Write(CollRadius);
-                    writer.Write(NumVetices);
-                    
-                    foreach (TRVertex vert in Vertices)
-                    {
-                        writer.Write(vert.Serialize());
-                    }
+                    writer.Write(vert.Serialize());
+                }
 
-                    writer.Write(NumNormals);
+                writer.Write(NumNormals);
 
-                    if (NumNormals > 0)
+                if (NumNormals > 0)
+                {
+                    foreach (TRVertex normal in Normals)
                     {
-                        foreach (TRVertex normal in Normals)
-                        {
-                            writer.Write(normal.Serialize());
-                        }
+                        writer.Write(normal.Serialize());
                     }
-                    else
+                }
+                else
+                {
+                    foreach (ushort light in Lights)
                     {
-                        foreach (ushort light in Lights)
-                        {
-                            writer.Write(light);
-                        }
+                        writer.Write(light);
                     }
+                }
 
-                    writer.Write(NumTexturedRectangles);
-                    foreach (TRFace4 face in TexturedRectangles)
-                    {
-                        writer.Write(face.Serialize());
-                    }
+                writer.Write(NumTexturedRectangles);
+                foreach (TRFace4 face in TexturedRectangles)
+                {
+                    writer.Write(face.Serialize());
+                }
 
-                    writer.Write(NumTexturedTriangles);
-                    foreach (TRFace3 face in TexturedTriangles)
-                    {
-                        writer.Write(face.Serialize());
-                    }
+                writer.Write(NumTexturedTriangles);
+                foreach (TRFace3 face in TexturedTriangles)
+                {
+                    writer.Write(face.Serialize());
+                }
 
-                    writer.Write(NumColouredRectangles);
-                    foreach (TRFace4 face in ColouredRectangles)
-                    {
-                        writer.Write(face.Serialize());
-                    }
+                writer.Write(NumColouredRectangles);
+                foreach (TRFace4 face in ColouredRectangles)
+                {
+                    writer.Write(face.Serialize());
+                }
 
-                    writer.Write(NumColouredTriangles);
-                    foreach (TRFace3 face in ColouredTriangles)
-                    {
-                        writer.Write(face.Serialize());
-                    }
+                writer.Write(NumColouredTriangles);
+                foreach (TRFace3 face in ColouredTriangles)
+                {
+                    writer.Write(face.Serialize());
+                }
+
+                // 4-byte alignment for mesh data
+                long padding = writer.BaseStream.Position % 4;
+                for (int i = 0; i < padding; i++)
+                {
+                    writer.Write((byte)0);
                 }
 
                 return stream.ToArray();
