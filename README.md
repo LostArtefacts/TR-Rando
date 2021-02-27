@@ -11,7 +11,7 @@ Tomb Raider II Item Randomizer
 * JW-dev/Bahamete - For initial work on script randomization
 * Lahm86 - For his massive contributions to improving the randomizer - massive thanks. Please check out his project for randomizing the script files here: https://github.com/lahm86/TRGameflowEditor TRGE is the base for all script randomization features in this program.
 
-![TR2 Rando UI](https://github.com/DanzaG/TR2-Rando/blob/master/UI.PNG)
+![TR2 Rando UI](https://github.com/DanzaG/TR2-Rando/blob/master/UI.png)
 
 # Types
 * Secrets - Randomizes locations of secrets, they are ordered based on casual play order, so you should expect to find a stone before jade.
