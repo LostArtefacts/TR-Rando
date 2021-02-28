@@ -48,7 +48,7 @@ namespace TR2RandomizerCore.Randomizers
                 }
 
                 //Apply the modifications
-                RepositionItems(locations[lvl.LevelFileBaseName.ToUpper()], lvl.LevelFileBaseName.ToUpper());
+                RepositionItems(locations[lvl.LevelFileBaseName.ToUpper()], lvl.LevelFileBaseName.ToUpper(), false);
 
                 //#44 - Randomize OR pistol type
                 if (lvl.RemovesWeapons) { RandomizeORPistol(); }
@@ -63,7 +63,7 @@ namespace TR2RandomizerCore.Randomizers
             }
         }
 
-        private void RepositionItems(List<Location> ItemLocs, string lvl)
+        private void RepositionItems(List<Location> ItemLocs, string lvl, bool includeKey)
         {
             if (ItemLocs.Count > 0)
             {
@@ -72,7 +72,10 @@ namespace TR2RandomizerCore.Randomizers
                 targetents.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
 
                 //And also key items...
-                targetents.AddRange(TR2EntityUtilities.GetListOfKeyItemTypes());
+                if (includeKey)
+                {
+                    targetents.AddRange(TR2EntityUtilities.GetListOfKeyItemTypes());
+                }
 
                 //It's important to now start zoning key items as softlocks must be avoided.
                 ZonedLocationCollection ZonedLocations = new ZonedLocationCollection();
