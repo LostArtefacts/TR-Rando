@@ -289,6 +289,14 @@ namespace TR2RandomizerCore.Randomizers
                 ReplacementWeapons.Add(TR2Entities.Pistols_S_P);
 
                 TR2Entities Weap = ReplacementWeapons[_generator.Next(0, ReplacementWeapons.Count)];
+                if (_scriptedLevelInstance.Is(LevelNames.CHICKEN))
+                {
+                    // Grenade Launcher and Harpoon cannot trigger the bells in Ice Palace
+                    while (Weap.Equals(TR2Entities.GrenadeLauncher_S_P) || Weap.Equals(TR2Entities.Harpoon_S_P))
+                    {
+                        Weap = ReplacementWeapons[_generator.Next(0, ReplacementWeapons.Count)];
+                    }
+                }
 
                 TR2Entity unarmedLevelWeapons = _levelInstance.Entities[_unarmedLevelPistolIndex];
 
