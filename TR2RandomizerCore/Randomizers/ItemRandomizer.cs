@@ -275,7 +275,7 @@ namespace TR2RandomizerCore.Randomizers
             {TR2Entities.Shotgun_S_P, 8},
             {TR2Entities.Automags_S_P, 4},
             {TR2Entities.Uzi_S_P, 4},
-            {TR2Entities.Harpoon_S_P, 10},
+            {TR2Entities.Harpoon_S_P, 24},
             {TR2Entities.M16_S_P, 2},
             {TR2Entities.GrenadeLauncher_S_P, 4},
         };
