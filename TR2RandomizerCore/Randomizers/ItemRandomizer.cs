@@ -256,7 +256,7 @@ namespace TR2RandomizerCore.Randomizers
                 // would be. This is to preserve item indices as the pistols have index 4 - to remove them completely
                 // would mean anything that points to higher item indices (triggers etc) would need to change. The clips
                 // can be safely randomized - it's just the index that needs to remain the same.
-                if (_scriptedLevelInstance.Is("RIG"))
+                if (_scriptedLevelInstance.Is(LevelNames.RIG))
                 {
                     TR2Entity cargoEntity = existingInjections.FirstOrDefault();
                     entities.RemoveAll(e => existingInjections.Contains(e) && e != cargoEntity);
@@ -304,6 +304,8 @@ namespace TR2RandomizerCore.Randomizers
                 if (_startingAmmoToGive.ContainsKey(Weap))
                 {
                     ammoToGive = _startingAmmoToGive[Weap];
+                    if (_scriptedLevelInstance.Is(LevelNames.LAIR))
+                        ammoToGive *= 6;
                 }
 
                 //#68 - Provide some additional ammo for a weapon if not pistols
