@@ -359,6 +359,15 @@
 			"RequiresGlitch": false,
 			"IsInRoomSpace": false,
                         "Difficulty" : "Hard"
+		},
+		{
+			"X": 60445,
+			"Z": 70687,
+			"Y": 14885,
+			"Room": 58,
+			"RequiresGlitch": false,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
 		}
 	],
 	"BOAT.TR2": [
@@ -1710,6 +1719,15 @@
 			"Room": 99,
 			"IsInRoomSpace" : false,
 			"Difficulty" : "Hard"
+		},
+		{
+			"X": 46060,
+			"Z": 32796,
+			"Y": -1280,
+			"Room": 83,
+			"RequiresGlitch": false,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
 		}
 	],
 	"PLATFORM.TR2": [
@@ -1987,6 +2005,14 @@
 			"Room": 10,
 			"IsInRoomSpace" : false,
 			"Difficulty" : "Hard"
+		},
+		{
+			"X": 40147,
+			"Z": 86514,
+			"Y": -9216,
+			"Room": 80,
+			"RequiresGlitch": false,
+			"IsInRoomSpace": false
 		}
 	],
 	"UNWATER.TR2": [
@@ -4857,6 +4883,15 @@
 			"Z": 60442,
 			"Y": 11600,
 			"Room": 106,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
+		},
+		{
+			"X": 45090,
+			"Z": 16359,
+			"Y": 14592,
+			"Room": 121,
+			"RequiresGlitch": false,
 			"IsInRoomSpace": false,
 			"Difficulty" : "Hard"
 		}
