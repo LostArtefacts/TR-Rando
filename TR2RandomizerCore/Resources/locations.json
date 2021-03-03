@@ -5135,6 +5135,14 @@
 			"Y": -1280,
 			"Room": 86,
 			"IsInRoomSpace": false
+		},
+		{
+			"X": 35868,
+			"Z": 63442,
+			"Y": -11509,
+			"Room": 41,
+			"RequiresGlitch": false,
+			"IsInRoomSpace": false
 		}
 	],
 	"XIAN.TR2": [
