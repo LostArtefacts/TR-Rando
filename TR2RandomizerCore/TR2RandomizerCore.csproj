@@ -44,11 +44,11 @@
     <Reference Include="System.Xml" />
     <Reference Include="TRGE.Coord, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\TR2 Rando\TRGE_0.9.2-beta\Lib\TRGE.Coord.dll</HintPath>
+      <HintPath>..\..\TRGameflowEditor\TRGE.Coord\bin\Debug\TRGE.Coord.dll</HintPath>
     </Reference>
     <Reference Include="TRGE.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\TR2 Rando\V1.2.2\Lib\TRGE.Core.dll</HintPath>
+      <HintPath>..\..\TRGameflowEditor\TRGE.Core\bin\Debug\TRGE.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
