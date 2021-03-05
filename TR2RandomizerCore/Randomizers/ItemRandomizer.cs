@@ -15,6 +15,8 @@ namespace TR2RandomizerCore.Randomizers
 {
     public class ItemRandomizer : RandomizerBase
     {
+        public bool IncludeKeyItems { get; set; }
+
         // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
         // into predefined locations. See FindAndCleanUnarmedPistolLocation below.
         private int _unarmedLevelPistolIndex;
@@ -48,7 +50,7 @@ namespace TR2RandomizerCore.Randomizers
                 }
 
                 //Apply the modifications
-                RepositionItems(locations[lvl.LevelFileBaseName.ToUpper()], lvl.LevelFileBaseName.ToUpper(), false);
+                RepositionItems(locations[lvl.LevelFileBaseName.ToUpper()], lvl.LevelFileBaseName.ToUpper());
 
                 //#44 - Randomize OR pistol type
                 if (lvl.RemovesWeapons) { RandomizeORPistol(); }
@@ -63,7 +65,7 @@ namespace TR2RandomizerCore.Randomizers
             }
         }
 
-        private void RepositionItems(List<Location> ItemLocs, string lvl, bool includeKey)
+        private void RepositionItems(List<Location> ItemLocs, string lvl)
         {
             if (ItemLocs.Count > 0)
             {
@@ -72,7 +74,7 @@ namespace TR2RandomizerCore.Randomizers
                 targetents.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
 
                 //And also key items...
-                if (includeKey)
+                if (IncludeKeyItems)
                 {
                     targetents.AddRange(TR2EntityUtilities.GetListOfKeyItemTypes());
                 }

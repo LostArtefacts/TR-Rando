@@ -105,7 +105,8 @@ namespace TR2RandomizerCore.Randomizers
                 {
                     Levels = levels,
                     BasePath = wipDirectory,
-                    SaveMonitor = monitor
+                    SaveMonitor = monitor,
+                    IncludeKeyItems = true //Replace with config.
                 }.Randomize(ItemSeed);
             }
 
