@@ -13,8 +13,8 @@ namespace TR2RandomizerView.Model
         private readonly ManagedSeedNumeric _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl;
         private readonly ManagedSeedBool _audioTrackControl;
 
-        private readonly ManagedSeed _randomItemsControl, _randomEnemiesControl, _randomTexturesControl;
-        private readonly ManagedSeedBool _randomSecretsControl;
+        private readonly ManagedSeed _randomEnemiesControl, _randomTexturesControl;
+        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl;
 
         private int _levelCount;
 
@@ -244,6 +244,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool IncludeKeyItems
+        {
+            get => _randomItemsControl.CustomBool;
+            set
+            {
+                _randomItemsControl.CustomBool = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool RandomizeEnemies
         {
             get => _randomEnemiesControl.IsActive;
@@ -302,7 +312,7 @@ namespace TR2RandomizerView.Model
             _sunsetLevelsControl = new ManagedSeedNumeric();
             _audioTrackControl = new ManagedSeedBool();
 
-            _randomItemsControl = new ManagedSeed();
+            _randomItemsControl = new ManagedSeedBool();
             _randomEnemiesControl = new ManagedSeed();
             _randomSecretsControl = new ManagedSeedBool();
             _randomTexturesControl = new ManagedSeed();
@@ -338,6 +348,7 @@ namespace TR2RandomizerView.Model
 
             RandomizeItems = _controller.RandomizeItems;
             ItemSeed = _controller.ItemSeed;
+            IncludeKeyItems = _controller.IncludeKeyItems;
 
             RandomizeEnemies = _controller.RandomizeEnemies;
             EnemySeed = _controller.EnemySeed;
@@ -479,6 +490,7 @@ namespace TR2RandomizerView.Model
 
             _controller.RandomizeItems = RandomizeItems;
             _controller.ItemSeed = ItemSeed;
+            _controller.IncludeKeyItems = IncludeKeyItems;
 
             _controller.RandomizeEnemies = RandomizeEnemies;
             _controller.EnemySeed = EnemySeed;

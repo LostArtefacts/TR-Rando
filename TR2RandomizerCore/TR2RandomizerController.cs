@@ -209,6 +209,12 @@ namespace TR2RandomizerCore
             get => LevelRandomizer.HardSecrets;
             set => LevelRandomizer.HardSecrets = value;
         }
+
+        public bool IncludeKeyItems
+        {
+            get => LevelRandomizer.IncludeKeyItems;
+            set => LevelRandomizer.IncludeKeyItems = value;
+        }
         #endregion
 
         #region TREditor Passthrough

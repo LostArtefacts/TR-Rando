@@ -88,15 +88,17 @@
             CustomBool="{Binding HardSecrets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomBoolTitle="Enable hard secrets"/>
 
-        <ctrl:ManagedSeedControl
+        <ctrl:ManagedSeedBoolControl
             Grid.Row="1" 
             Grid.Column="1"
             IsActive="{Binding RandomizeItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Items"
-            Text="Randomizes standard pickups in each level. Key items will not be randomized."
+            Text="Randomizes standard pickups in each level."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding ItemSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            SeedValue="{Binding ItemSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBool="{Binding IncludeKeyItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle="Enable key items"/>
 
         <ctrl:ManagedSeedControl
             Grid.Row="2" 
