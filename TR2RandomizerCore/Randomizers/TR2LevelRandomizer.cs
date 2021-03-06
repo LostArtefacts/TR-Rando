@@ -19,6 +19,7 @@ namespace TR2RandomizerCore.Randomizers
         internal int TextureSeed { get; set; }
 
         internal bool HardSecrets { get; set; }
+        internal bool IncludeKeyItems { get; set; }
 
         internal TR2LevelRandomizer(TRDirectoryIOArgs args)
             : base(args) { }
@@ -37,6 +38,7 @@ namespace TR2RandomizerCore.Randomizers
             TextureSeed = config.GetInt("TextureSeed", defaultSeed);
 
             HardSecrets = config.GetBool("HardSecrets");
+            IncludeKeyItems = config.GetBool("IncludeKeyItems");
         }
 
         protected override void StoreConfig(Config config)
@@ -52,6 +54,7 @@ namespace TR2RandomizerCore.Randomizers
             config["TextureSeed"] = TextureSeed;
 
             config["HardSecrets"] = HardSecrets;
+            config["IncludeKeyItems"] = IncludeKeyItems;
         }
 
         protected override int GetSaveTarget(int numLevels)
@@ -105,7 +108,8 @@ namespace TR2RandomizerCore.Randomizers
                 {
                     Levels = levels,
                     BasePath = wipDirectory,
-                    SaveMonitor = monitor
+                    SaveMonitor = monitor,
+                    IncludeKeyItems = IncludeKeyItems
                 }.Randomize(ItemSeed);
             }
 

@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="TRGE.Coord, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TRGameflowEditor\TRGE.Coord\bin\Debug\TRGE.Coord.dll</HintPath>
+      <HintPath>..\..\TRGameflowEditor\TRGE.Core\bin\Debug\TRGE.Coord.dll</HintPath>
     </Reference>
     <Reference Include="TRGE.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -75,6 +75,10 @@ namespace TR2RandomizerView.Model
             }
 
             BuildRandoString(_itemsID, controller.RandomizeItems, controller.ItemSeed, seeds, sb);
+            if (controller.RandomizeItems && controller.IncludeKeyItems)
+            {
+                sb.Append(_boolID);
+            }
             BuildRandoString(_enemiesID, controller.RandomizeEnemies, controller.EnemySeed, seeds, sb);
             BuildRandoString(_secretsID, controller.RandomizeSecrets, controller.SecretSeed, seeds, sb);
             if (controller.RandomizeSecrets && controller.HardSecrets)
@@ -162,7 +166,7 @@ namespace TR2RandomizerView.Model
 
             int unarmedLevelCount = -1, ammolessLevelCount = -1, sunsetCount = -1;
 
-            bool blankTracks = false, hardSecrets = false;
+            bool blankTracks = false, includeKeyItems = false, hardSecrets = false;
 
             for (int i = 0; i < randoElements.Length; i++)
             {
@@ -271,6 +275,9 @@ namespace TR2RandomizerView.Model
                         case _secretsID:
                             hardSecrets = c == _boolID;
                             break;
+                        case _itemsID:
+                            includeKeyItems = c == _boolID;
+                            break;
                     }
                 }
             }
@@ -303,6 +310,7 @@ namespace TR2RandomizerView.Model
 
             controller.RandomAudioTracksIncludeBlank = blankTracks;
             controller.HardSecrets = hardSecrets;
+            controller.IncludeKeyItems = includeKeyItems;
         }
     }
 }

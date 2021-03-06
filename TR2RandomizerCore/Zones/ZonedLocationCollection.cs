@@ -171,75 +171,57 @@ namespace TR2RandomizerCore.Zones
 
             if (popMethod == ZonePopulationMethod.KeyPuzzleQuestOnly || popMethod == ZonePopulationMethod.Full)
             {
+                //We don't fall back to populating with all locations for these as if there is no set defined we don't want to open
+                //up the full pool otherwise softlock city - Danza.
+
                 _zoneAppliedLocations.Add((int)LevelZones.Key1Zone, (from loc in locations
                                                                      where ZoneMap[(int)LevelZones.Key1Zone].Contains(loc.Room)
                                                                      select loc).ToList());
 
-                if (!DoesZoneHaveLocations((int)LevelZones.Key1Zone))
-                    _zoneAppliedLocations[(int)LevelZones.Key1Zone] = locations;
 
                 _zoneAppliedLocations.Add((int)LevelZones.Key2Zone, (from loc in locations
                                                                      where ZoneMap[(int)LevelZones.Key2Zone].Contains(loc.Room)
                                                                      select loc).ToList());
 
-                if (!DoesZoneHaveLocations((int)LevelZones.Key2Zone))
-                    _zoneAppliedLocations[(int)LevelZones.Key2Zone] = locations;
 
                 _zoneAppliedLocations.Add((int)LevelZones.Key3Zone, (from loc in locations
                                                                      where ZoneMap[(int)LevelZones.Key3Zone].Contains(loc.Room)
                                                                      select loc).ToList());
 
-                if (!DoesZoneHaveLocations((int)LevelZones.Key3Zone))
-                    _zoneAppliedLocations[(int)LevelZones.Key3Zone] = locations;
 
                 _zoneAppliedLocations.Add((int)LevelZones.Key4Zone, (from loc in locations
                                                                      where ZoneMap[(int)LevelZones.Key4Zone].Contains(loc.Room)
                                                                      select loc).ToList());
 
-                if (!DoesZoneHaveLocations((int)LevelZones.Key4Zone))
-                    _zoneAppliedLocations[(int)LevelZones.Key4Zone] = locations;
 
                 _zoneAppliedLocations.Add((int)LevelZones.Puzzle1Zone, (from loc in locations
                                                                         where ZoneMap[(int)LevelZones.Puzzle1Zone].Contains(loc.Room)
                                                                         select loc).ToList());
 
-                if (!DoesZoneHaveLocations((int)LevelZones.Puzzle1Zone))
-                    _zoneAppliedLocations[(int)LevelZones.Puzzle1Zone] = locations;
 
                 _zoneAppliedLocations.Add((int)LevelZones.Puzzle2Zone, (from loc in locations
                                                                         where ZoneMap[(int)LevelZones.Puzzle2Zone].Contains(loc.Room)
                                                                         select loc).ToList());
 
-                if (!DoesZoneHaveLocations((int)LevelZones.Puzzle2Zone))
-                    _zoneAppliedLocations[(int)LevelZones.Puzzle2Zone] = locations;
-
                 _zoneAppliedLocations.Add((int)LevelZones.Puzzle3Zone, (from loc in locations
                                                                         where ZoneMap[(int)LevelZones.Puzzle3Zone].Contains(loc.Room)
                                                                         select loc).ToList());
 
-                if (!DoesZoneHaveLocations((int)LevelZones.Puzzle3Zone))
-                    _zoneAppliedLocations[(int)LevelZones.Puzzle3Zone] = locations;
 
                 _zoneAppliedLocations.Add((int)LevelZones.Puzzle4Zone, (from loc in locations
                                                                         where ZoneMap[(int)LevelZones.Puzzle4Zone].Contains(loc.Room)
                                                                         select loc).ToList());
 
-                if (!DoesZoneHaveLocations((int)LevelZones.Puzzle4Zone))
-                    _zoneAppliedLocations[(int)LevelZones.Puzzle4Zone] = locations;
 
                 _zoneAppliedLocations.Add((int)LevelZones.Quest1Zone, (from loc in locations
                                                                        where ZoneMap[(int)LevelZones.Puzzle4Zone].Contains(loc.Room)
                                                                        select loc).ToList());
 
-                if (!DoesZoneHaveLocations((int)LevelZones.Quest1Zone))
-                    _zoneAppliedLocations[(int)LevelZones.Quest1Zone] = locations;
 
                 _zoneAppliedLocations.Add((int)LevelZones.Quest2Zone, (from loc in locations
                                                                        where ZoneMap[(int)LevelZones.Puzzle4Zone].Contains(loc.Room)
                                                                        select loc).ToList());
 
-                if (!DoesZoneHaveLocations((int)LevelZones.Quest2Zone))
-                    _zoneAppliedLocations[(int)LevelZones.Quest2Zone] = locations;
             }
 
             if (popMethod == ZonePopulationMethod.GeneralOnly || popMethod == ZonePopulationMethod.Full)
