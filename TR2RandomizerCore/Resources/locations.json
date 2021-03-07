@@ -1154,7 +1154,9 @@
 			"X": 1188,
 			"Z": 2860,
 			"Y": 356,
-			"Room": 164
+			"Room": 164,
+			"RequiresGlitch": true,
+			"Difficulty" : "Hard"
 		},
 		{
 			"X": 1125,
