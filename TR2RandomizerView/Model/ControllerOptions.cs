@@ -294,6 +294,17 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        private bool _developmentMode;
+        public bool DevelopmentMode
+        {
+            get => _developmentMode;
+            set
+            {
+                _developmentMode = value;
+                FirePropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void FirePropertyChanged([CallerMemberName] string name = null)
@@ -501,6 +512,8 @@ namespace TR2RandomizerView.Model
 
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
+
+            _controller.DevelopmentMode = DevelopmentMode;
         }
 
         public void Unload()

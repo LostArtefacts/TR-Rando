@@ -64,6 +64,10 @@
                         CanExecute="ExportSettingsCommandBinding_CanExecute"
                         Executed="ExportCommandBinding_Executed"/>
 
+        <CommandBinding Command="cmds:WindowCommands.DevelopmentMode"
+                        CanExecute="EditorActiveCommandBinding_CanExecute"
+                        Executed="DevelopmentModeCommandBinding_Executed" />
+
         <CommandBinding Command="cmds:WindowCommands.GitHub"
                         Executed="GitHubCommandBinding_Executed"/>
 
@@ -170,6 +174,13 @@
 
                 <MenuItem Header="Export Settings"
                           Command="cmds:WindowCommands.ExportSettings"/>
+
+                <Separator/>
+
+                <MenuItem Header="Development Mode"
+                          Command="cmds:WindowCommands.DevelopmentMode"
+                          x:Name="DevelopmentModeMenuItem"
+                          ToolTip="Unplayable. Displays all secret and item locations."/>
             </MenuItem>
 
             <MenuItem Header="_Help">
