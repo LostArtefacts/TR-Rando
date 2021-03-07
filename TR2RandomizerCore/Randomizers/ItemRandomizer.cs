@@ -42,7 +42,7 @@ namespace TR2RandomizerCore.Randomizers
                 LoadLevelInstance(lvl);
 
                 FindAndCleanUnarmedPistolLocation(lvl);
-                
+
                 if (lvl.Is(LevelNames.HOME))
                 {
                     InjectHSHWeaponTextures();
@@ -54,7 +54,7 @@ namespace TR2RandomizerCore.Randomizers
 
                 //#44 - Randomize OR pistol type
                 if (lvl.RemovesWeapons) { RandomizeORPistol(); }
-                
+
                 //#47 - Randomize the HSH weapon closet
                 if (lvl.Is(LevelNames.HOME)) { PopulateHSHCloset(); }
 
@@ -63,6 +63,36 @@ namespace TR2RandomizerCore.Randomizers
 
                 SaveMonitor.FireSaveStateChanged(1);
             }
+        }
+
+        // roomNumber is specified if ONLY that room is to be populated
+        private void PlaceAllItems(List<Location> locations, int roomNumber = -1)
+        {
+            List<TR2Entity> ents = _levelInstance.Entities.ToList();
+
+            foreach (Location loc in locations)
+            {
+                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Rooms[loc.Room].Info);
+
+                if (roomNumber == -1 || roomNumber == copy.Room)
+                {
+                    ents.Add(new TR2Entity
+                    {
+                        TypeID = (int)TR2Entities.LargeMed_S_P,
+                        Room = Convert.ToInt16(copy.Room),
+                        X = copy.X,
+                        Y = copy.Y,
+                        Z = copy.Z,
+                        Angle = 0,
+                        Intensity1 = -1,
+                        Intensity2 = -1,
+                        Flags = 0
+                    });
+                }
+            }
+
+            _levelInstance.NumEntities = (uint)ents.Count;
+            _levelInstance.Entities = ents.ToArray();
         }
 
         private void RepositionItems(List<Location> ItemLocs, string lvl)
@@ -269,7 +299,7 @@ namespace TR2RandomizerCore.Randomizers
                 }
                 _levelInstance.NumEntities = (uint)entities.Count;
                 _levelInstance.Entities = entities.ToArray();
-            }            
+            }
         }
 
         private readonly Dictionary<TR2Entities, uint> _startingAmmoToGive = new Dictionary<TR2Entities, uint>()
