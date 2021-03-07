@@ -14,20 +14,18 @@ namespace TR2RandomizerCore.Randomizers
 {
     public class SecretReplacer : RandomizerBase
     {
-        //public bool PlaceAll { get; set; }
-        private bool PlaceAll; //removed from public interface
         public bool AllowHard { get; set; }
+        public bool IsDevelopmentModeOn { get; set; }
         
         public SecretReplacer() : base()
         {
-            PlaceAll = false;
         }
 
         private void RandomizeSecrets(List<Location> LevelLocations, TR23ScriptedLevel lvl)
         {
             if (LevelLocations.Count > 2)
             {
-                if (false && PlaceAll)
+                if (IsDevelopmentModeOn)
                 {
                     PlaceAllSecrets(lvl, LevelLocations);
                     return;

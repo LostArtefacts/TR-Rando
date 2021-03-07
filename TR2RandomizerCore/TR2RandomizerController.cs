@@ -215,6 +215,12 @@ namespace TR2RandomizerCore
             get => LevelRandomizer.IncludeKeyItems;
             set => LevelRandomizer.IncludeKeyItems = value;
         }
+
+        public bool DevelopmentMode
+        {
+            get => LevelRandomizer.DevelopmentMode;
+            set => LevelRandomizer.DevelopmentMode = value;
+        }
         #endregion
 
         #region TREditor Passthrough

@@ -19,26 +19,32 @@ namespace TR2RandomizerView.Commands
 
             ImportSettings.InputGestures.Add(new KeyGesture(Key.I, ModifierKeys.Control));
             ExportSettings.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Control));
+            DevelopmentMode.InputGestures.Add(new KeyGesture(Key.D, ModifierKeys.Control));
 
             GitHub.InputGestures.Add(new KeyGesture(Key.F1));
         }
 
+        // File
         public static readonly RoutedUICommand Open = new RoutedUICommand();
         public static readonly RoutedUICommand Randomize = new RoutedUICommand();
         public static readonly RoutedUICommand Close = new RoutedUICommand();
         public static readonly RoutedUICommand EmptyRecent = new RoutedUICommand();
         public static readonly RoutedUICommand Exit = new RoutedUICommand();
 
+        // Edit
         public static readonly RoutedUICommand SelectAll = new RoutedUICommand();
         public static readonly RoutedUICommand DeSelectAll = new RoutedUICommand();
         public static readonly RoutedUICommand RandomizeSeeds = new RoutedUICommand();
         public static readonly RoutedUICommand CreateGlobalSeed = new RoutedUICommand();
 
+        // Tools
         public static readonly RoutedUICommand ShowBackup = new RoutedUICommand();
         public static readonly RoutedUICommand Restore = new RoutedUICommand();
         public static readonly RoutedUICommand ImportSettings = new RoutedUICommand();
         public static readonly RoutedUICommand ExportSettings = new RoutedUICommand();
+        public static readonly RoutedUICommand DevelopmentMode = new RoutedUICommand();
 
+        // Help
         public static readonly RoutedUICommand GitHub = new RoutedUICommand();
         public static readonly RoutedUICommand Discord = new RoutedUICommand();
         public static readonly RoutedUICommand CheckForUpdate = new RoutedUICommand();

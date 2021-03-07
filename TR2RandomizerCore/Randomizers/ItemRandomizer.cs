@@ -16,6 +16,7 @@ namespace TR2RandomizerCore.Randomizers
     public class ItemRandomizer : RandomizerBase
     {
         public bool IncludeKeyItems { get; set; }
+        public bool IsDevelopmentModeOn { get; set; }
 
         // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
         // into predefined locations. See FindAndCleanUnarmedPistolLocation below.
@@ -97,6 +98,12 @@ namespace TR2RandomizerCore.Randomizers
 
         private void RepositionItems(List<Location> ItemLocs, string lvl)
         {
+            if (IsDevelopmentModeOn)
+            {
+                PlaceAllItems(ItemLocs);
+                return;
+            }
+
             if (ItemLocs.Count > 0)
             {
                 //We are currently looking guns + ammo
