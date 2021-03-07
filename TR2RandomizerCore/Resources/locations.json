@@ -6246,6 +6246,14 @@
 			"Room": 92,
 			"RequiresGlitch": true,
 			"Difficulty" : "Hard"
+		},
+		{
+			"X": 23575,
+			"Z": 48098,
+			"Y": 23552,
+			"Room": 12,
+			"IsInRoomSpace": false,
+			"Difficulty" : "Hard"
 		}
 	],
 	"FLOATING.TR2": [
