@@ -334,7 +334,8 @@
       "Length": 5149518,
       "Categories": [
         1,
-        2
+        2,
+        3
       ]
     },
     {
@@ -379,7 +380,7 @@
     },
     {
       "ID": 45,
-      "Name": "Chandelier Room",
+      "Name": "Vertigo",
       "Offset": 48806046,
       "Length": 1954212,
       "Categories": [

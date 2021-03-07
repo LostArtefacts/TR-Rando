@@ -55,13 +55,13 @@ namespace TR2RandomizerCore
         /// Initialises the interop values between this application and TRGE.
         /// </summary>
         /// <param name="applicationID">The ID for this application, used in the application config file name.</param>
-        /// <param name="modificationStamp">The text to inject into the passport and inventory titles to show that this application has modified the game.</param>
         /// <param name="version">The current version of the executing assembly e.g. 1.0.0</param>
         /// <param name="taggedVersion">The tagged version of the current release e.g. 1.0.0-beta</param>
-        public void Initialise(string applicationID, string modificationStamp, string version, string taggedVersion)
+        /// <param name="modificationStamp">The text to inject into the passport and inventory titles to show that this application has modified the game.</param>
+        public void Initialise(string applicationID, string version, string taggedVersion, ModificationStamp modificationStamp)
         {
             TRInterop.ExecutingVersionName = applicationID;
-            TRInterop.ScriptModificationStamp = modificationStamp;
+            modificationStamp.ApplyTo(TRInterop.ScriptModificationStamp);
             TRInterop.ExecutingVersion = version;
             TRInterop.TaggedVersion = taggedVersion;
             TRInterop.RandomisationSupported = true;

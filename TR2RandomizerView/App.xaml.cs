@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using TR2RandomizerCore;
+using TR2RandomizerCore.Helpers;
 using TR2RandomizerView.Utilities;
 
 namespace TR2RandomizerView
@@ -64,7 +65,12 @@ namespace TR2RandomizerView
                 TaggedVersion = "v" + Version;
             }
 
-            TR2RandomizerCoord.Instance.Initialise("TR2Rando", "Modified by TR2Rando", Version, TaggedVersion);
+            TR2RandomizerCoord.Instance.Initialise("TR2Rando", Version, TaggedVersion, new ModificationStamp
+            {
+                English = "Modified by TR2Rando",
+                French = "Modifi)e par TR2Rando",
+                German = "Ge~andert von TR2Rando"
+            });
         }
     }
 }
