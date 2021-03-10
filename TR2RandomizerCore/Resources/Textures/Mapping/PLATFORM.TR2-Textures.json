@@ -1,0 +1,115 @@
+{
+  "Offshore.Acid": [
+    {
+      "Segment": 0,
+      "Tile": 2,
+      "X": 128,
+      "Y": 64
+    },
+    {
+      "Segment": 1,
+      "Tile": 2,
+      "X": 192,
+      "Y": 64
+    },
+    {
+      "Segment": 2,
+      "Tile": 2,
+      "X": 0,
+      "Y": 128
+    },
+    {
+      "Segment": 3,
+      "Tile": 2,
+      "X": 64,
+      "Y": 128
+    },
+    {
+      "Segment": 4,
+      "Tile": 2,
+      "X": 0,
+      "Y": 192
+    },
+    {
+      "Segment": 5,
+      "Tile": 12,
+      "X": 235,
+      "Y": 249
+    },
+    {
+      "Segment": 5,
+      "Tile": 12,
+      "X": 235,
+      "Y": 249
+    },
+    {
+      "Segment": 6,
+      "Tile": 12,
+      "X": 242,
+      "Y": 248
+    },
+    {
+      "Segment": 7,
+      "Tile": 13,
+      "X": 242,
+      "Y": 161
+    },
+    {
+      "Segment": 8,
+      "Tile": 13,
+      "X": 80,
+      "Y": 208
+    },
+    {
+      "Segment": 9,
+      "Tile": 15,
+      "X": 183,
+      "Y": 50
+    }
+  ],
+
+  "Offshore.Cordon": [
+    {
+      "Segment": 0,
+      "Tile": 0,
+      "X": 0,
+      "Y": 192
+    },
+    {
+      "Segment": 1,
+      "Tile": 0,
+      "X": 128,
+      "Y": 192
+    },
+    {
+      "Segment": 2,
+      "Tile": 0,
+      "X": 64,
+      "Y": 192
+    },
+    {
+      "Segment": 3,
+      "Tile": 4,
+      "X": 136,
+      "Y": 162
+    },
+    {
+      "Segment": 4,
+      "Tile": 2,
+      "X": 64,
+      "Y": 198
+    },
+    {
+      "Segment": 4,
+      "Tile": 3,
+      "X": 0,
+      "Y": 134
+    },
+    {
+      "Segment": 5,
+      "Tile": 1,
+      "X": 64,
+      "Y": 128
+    }
+  ]
+}
