@@ -6,9 +6,12 @@ namespace TR2RandomizerCore.Randomizers
 {
     public class TextureRandomizer : RandomizerBase
     {
+        public bool AllowDefaults { get; set; }
+
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
+            int min = AllowDefaults ? -1 : 0;
 
             // TODO: Split the processing into separate threads to boost performance
 
@@ -30,11 +33,10 @@ namespace TR2RandomizerCore.Randomizers
                             foreach (TextureSource source in levelMap.Mapping.Keys)
                             {
                                 string[] availableTextures = source.Textures;
-                                int rand = _generator.Next(-1, availableTextures.Length);
+                                int rand = _generator.Next(min, availableTextures.Length);
                                 if (rand == -1)
                                 {
-                                    // Leave the standard texture for this particular source. Possibly make a UI option
-                                    // so some defaults can remain, or otherwise that everything possible should be changed.
+                                    // Leave the standard texture for this particular source.
                                     continue;
                                 }
                                 

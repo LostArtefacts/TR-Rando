@@ -150,6 +150,27 @@
     }
   ],
 
+  "Lara.Socks": [
+    {
+      "Segment": 0,
+      "Tile": 11,
+      "X": 240,
+      "Y": 48
+    },
+    {
+      "Segment": 1,
+      "Tile": 11,
+      "X": 240,
+      "Y": 80
+    },
+    {
+      "Segment": 2,
+      "Tile": 11,
+      "X": 0,
+      "Y": 88
+    }
+  ],
+
   "Lara.Top.Sun": [
     {
       "Segment": 0,
@@ -269,74 +290,56 @@
     },
     {
       "Segment": 18,
-      "Tile": 11,
-      "X": 240,
-      "Y": 48
-    },
-    {
-      "Segment": 19,
       "Tile": 12,
       "X": 88,
       "Y": 64
     },
     {
-      "Segment": 20,
+      "Segment": 19,
       "Tile": 12,
       "X": 208,
       "Y": 64
     },
     {
-      "Segment": 21,
+      "Segment": 20,
       "Tile": 8,
       "X": 232,
       "Y": 240,
       "Clip": "0, 0, 24, 16"
     },
     {
-      "Segment": 21,
+      "Segment": 20,
       "Tile": 10,
       "X": 32,
       "Y": 224,
       "Clip": "24, 0, 24, 16"
     },
     {
-      "Segment": 22,
+      "Segment": 21,
       "Tile": 11,
       "X": 16,
       "Y": 232
     },
     {
-      "Segment": 23,
+      "Segment": 22,
       "Tile": 8,
       "X": 152,
       "Y": 176
     },
     {
-      "Segment": 24,
+      "Segment": 23,
       "Tile": 11,
       "X": 224,
       "Y": 232
     },
     {
-      "Segment": 25,
-      "Tile": 11,
-      "X": 240,
-      "Y": 80
-    },
-    {
-      "Segment": 26,
-      "Tile": 11,
-      "X": 0,
-      "Y": 88
-    },
-    {
-      "Segment": 27,
+      "Segment": 24,
       "Tile": 12,
       "X": 112,
       "Y": 232
     },
     {
-      "Segment": 28,
+      "Segment": 25,
       "Tile": 12,
       "X": 96,
       "Y": 232

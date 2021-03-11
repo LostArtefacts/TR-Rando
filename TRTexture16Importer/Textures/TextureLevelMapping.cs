@@ -50,6 +50,11 @@ namespace TRTexture16Importer.Textures
             List<Rectangle> segments = source.TextureMap[colour];
             foreach (TextureTarget target in Mapping[source])
             {
+                if (target.Segment < 0 || target.Segment >= segments.Count)
+                {
+                    throw new IndexOutOfRangeException(string.Format("Segment {0} is invalid for texture source {1}.", target.Segment, source.PNGPath));
+                }
+
                 GetBitmapGraphics(target.Tile).Draw(source, target, segments[target.Segment]);
             }
         }
