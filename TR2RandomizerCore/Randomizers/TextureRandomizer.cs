@@ -10,6 +10,7 @@ namespace TR2RandomizerCore.Randomizers
 
         public override void Randomize(int seed)
         {
+            AllowDefaults = false;
             _generator = new Random(seed);
             int min = AllowDefaults ? -1 : 0;
 
