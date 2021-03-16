@@ -94,6 +94,9 @@
     <None Include="Resources\locations.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Mapping\HOUSE.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Mapping\EMPRTOMB.TR2-Textures.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -163,6 +166,10 @@
     </None>
     <None Include="Resources\Textures\Source\Lara\Bobble\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Lara\Bobble\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Lara\DressingGown\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Lara\DressingGown\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Source\Lara\DivingSuit\Layers\Segments.psd" />
@@ -345,6 +352,10 @@
     </Content>
     <Content Include="Resources\Textures\Source\Lara\Bobble\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Lara\Bobble\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Lara\DressingGown\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Lara\DressingGown\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Lara\DivingSuit\Layers\Segments.png" />

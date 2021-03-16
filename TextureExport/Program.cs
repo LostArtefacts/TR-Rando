@@ -18,7 +18,13 @@ namespace TextureExport
             TR2Level instance;
             TR2LevelReader reader = new TR2LevelReader();
 
-            if (args[0] == "gold")
+            if (args[0].ToLower().EndsWith(".tr2"))
+            {
+                instance = reader.ReadLevel(args[0]);
+
+                ExportAllTexturesToPng(args[0], instance);
+            }
+            else if (args[0] == "gold")
             {
                 foreach (string lvl in LevelNames.AsListGold)
                 {
