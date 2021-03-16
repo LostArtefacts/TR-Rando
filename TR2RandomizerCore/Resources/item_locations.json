@@ -17245,16 +17245,6 @@
       "IsItem": true
     },
     {
-      "X": 48775,
-      "Z": 34358,
-      "Y": -5632,
-      "Room": 30,
-      "RequiresGlitch": false,
-      "Difficulty": 0,
-      "IsInRoomSpace": false,
-      "IsItem": true
-    },
-    {
       "X": 48772,
       "Z": 35399,
       "Y": -5632,
@@ -17277,16 +17267,6 @@
     {
       "X": 48627,
       "Z": 38390,
-      "Y": -5632,
-      "Room": 30,
-      "RequiresGlitch": false,
-      "Difficulty": 0,
-      "IsInRoomSpace": false,
-      "IsItem": true
-    },
-    {
-      "X": 48608,
-      "Z": 39393,
       "Y": -5632,
       "Room": 30,
       "RequiresGlitch": false,
