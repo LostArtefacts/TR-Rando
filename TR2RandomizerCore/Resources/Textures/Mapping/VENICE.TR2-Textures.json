@@ -1,152 +1,145 @@
 {
-  "Venice.Awning": [
+  "Flame": [
     {
       "Segment": 0,
-      "Tile": 4,
-      "X": 0,
-      "Y": 128
-    },
-    {
-      "Segment": 0,
-      "Tile": 7,
-      "X": 192,
-      "Y": 192
-    },
-    {
-      "Segment": 0,
-      "Tile": 6,
-      "X": 0,
-      "Y": 224,
-      "Clip": "0, 48, 64, 16"
+      "Tile": 5,
+      "X": 156,
+      "Y": 66
     },
     {
       "Segment": 1,
       "Tile": 5,
-      "X": 192,
-      "Y": 0
+      "X": 68,
+      "Y": 66
     },
     {
       "Segment": 2,
-      "Tile": 6,
+      "Tile": 14,
+      "X": 161,
+      "Y": 0
+    },
+    {
+      "Segment": 3,
+      "Tile": 14,
+      "X": 2,
+      "Y": 41
+    },
+    {
+      "Segment": 4,
+      "Tile": 5,
+      "X": 1,
+      "Y": 132
+    },
+    {
+      "Segment": 5,
+      "Tile": 5,
+      "X": 81,
+      "Y": 128
+    },
+    {
+      "Segment": 6,
+      "Tile": 5,
+      "X": 170,
+      "Y": 130
+    },
+    {
+      "Segment": 7,
+      "Tile": 5,
+      "X": 80,
+      "Y": 184
+    },
+    {
+      "Segment": 8,
+      "Tile": 5,
       "X": 0,
-      "Y": 240
+      "Y": 192
     },
     {
-      "Segment": 2,
-      "Tile": 10,
-      "X": 104,
-      "Y": 0
-    }
-  ],
-
-  "Venice.BarberPole": [
-    {
-      "Segment": 0,
-      "Tile": 9,
-      "X": 224,
-      "Y": 64
+      "Segment": 9,
+      "Tile": 14,
+      "X": 169,
+      "Y": 53
     },
     {
-      "Segment": 1,
-      "Tile": 9,
-      "X": 128,
+      "Segment": 10,
+      "Tile": 14,
+      "X": 74,
+      "Y": 58
+    },
+    {
+      "Segment": 11,
+      "Tile": 14,
+      "X": 4,
+      "Y": 95
+    },
+    {
+      "Segment": 12,
+      "Tile": 14,
+      "X": 221,
+      "Y": 136
+    },
+    {
+      "Segment": 13,
+      "Tile": 14,
+      "X": 189,
+      "Y": 205
+    },
+    {
+      "Segment": 14,
+      "Tile": 14,
+      "X": 138,
+      "Y": 61
+    },
+    {
+      "Segment": 15,
+      "Tile": 15,
+      "X": 82,
+      "Y": 36
+    },
+    {
+      "Segment": 16,
+      "Tile": 15,
+      "X": 195,
+      "Y": 52
+    },
+    {
+      "Segment": 17,
+      "Tile": 15,
+      "X": 219,
+      "Y": 53
+    },
+    {
+      "Segment": 18,
+      "Tile": 15,
+      "X": 108,
+      "Y": 59
+    },
+    {
+      "Segment": 19,
+      "Tile": 15,
+      "X": 132,
       "Y": 56
     }
   ],
 
-  "Vehicles.Boat": [
+  "Lara.Bobble": [
     {
       "Segment": 0,
-      "Tile": 8,
-      "X": 128,
-      "Y": 48
+      "Tile": 12,
+      "X": 160,
+      "Y": 24
     },
     {
       "Segment": 1,
-      "Tile": 8,
-      "X": 160,
-      "Y": 72
-    },
-    {
-      "Segment": 2,
-      "Tile": 8,
-      "X": 88,
+      "Tile": 11,
+      "X": 240,
       "Y": 176
     },
     {
-      "Segment": 3,
-      "Tile": 10,
-      "X": 168,
-      "Y": 0
-    },
-    {
-      "Segment": 4,
-      "Tile": 9,
-      "X": 88,
-      "Y": 16
-    },
-    {
-      "Segment": 5,
-      "Tile": 9,
-      "X": 120,
-      "Y": 16
-    },
-    {
-      "Segment": 6,
-      "Tile": 10,
-      "X": 192,
-      "Y": 0
-    },
-    {
-      "Segment": 7,
-      "Tile": 10,
-      "X": 48,
-      "Y": 136
-    },
-    {
-      "Segment": 8,
-      "Tile": 10,
-      "X": 112,
-      "Y": 136
-    },
-    {
-      "Segment": 9,
-      "Tile": 11,
-      "X": 96,
-      "Y": 96
-    },
-    {
-      "Segment": 10,
-      "Tile": 11,
-      "X": 120,
-      "Y": 96
-    },
-    {
-      "Segment": 11,
-      "Tile": 12,
-      "X": 216,
-      "Y": 208
-    },
-    {
-      "Segment": 12,
-      "Tile": 12,
-      "X": 224,
-      "Y": 208
-    }
-  ],
-
-  "Venice.Floor": [
-    {
-      "Segment": 0,
-      "Tile": 2,
-      "X": 160,
-      "Y": 0
-    },
-    {
       "Segment": 1,
-      "Tile": 2,
-      "X": 128,
-      "Y": 32
+      "Tile": 13,
+      "X": 80,
+      "Y": 0
     }
   ],
 
@@ -343,6 +336,186 @@
       "Tile": 12,
       "X": 96,
       "Y": 232
+    }
+  ],
+
+  "Skybox": "#7898A0",
+
+  "Vehicles.Boat": [
+    {
+      "Segment": 0,
+      "Tile": 8,
+      "X": 128,
+      "Y": 48
+    },
+    {
+      "Segment": 1,
+      "Tile": 8,
+      "X": 160,
+      "Y": 72
+    },
+    {
+      "Segment": 2,
+      "Tile": 8,
+      "X": 88,
+      "Y": 176
+    },
+    {
+      "Segment": 3,
+      "Tile": 10,
+      "X": 168,
+      "Y": 0
+    },
+    {
+      "Segment": 4,
+      "Tile": 9,
+      "X": 88,
+      "Y": 16
+    },
+    {
+      "Segment": 5,
+      "Tile": 9,
+      "X": 120,
+      "Y": 16
+    },
+    {
+      "Segment": 6,
+      "Tile": 10,
+      "X": 192,
+      "Y": 0
+    },
+    {
+      "Segment": 7,
+      "Tile": 10,
+      "X": 48,
+      "Y": 136
+    },
+    {
+      "Segment": 8,
+      "Tile": 10,
+      "X": 112,
+      "Y": 136
+    },
+    {
+      "Segment": 9,
+      "Tile": 11,
+      "X": 96,
+      "Y": 96
+    },
+    {
+      "Segment": 10,
+      "Tile": 11,
+      "X": 120,
+      "Y": 96
+    },
+    {
+      "Segment": 11,
+      "Tile": 12,
+      "X": 216,
+      "Y": 208
+    },
+    {
+      "Segment": 12,
+      "Tile": 12,
+      "X": 224,
+      "Y": 208
+    }
+  ],
+
+  "Venice.Awning": [
+    {
+      "Segment": 0,
+      "Tile": 4,
+      "X": 0,
+      "Y": 128
+    },
+    {
+      "Segment": 0,
+      "Tile": 7,
+      "X": 192,
+      "Y": 192
+    },
+    {
+      "Segment": 0,
+      "Tile": 6,
+      "X": 0,
+      "Y": 224,
+      "Clip": "0, 48, 64, 16"
+    },
+    {
+      "Segment": 1,
+      "Tile": 5,
+      "X": 192,
+      "Y": 0
+    },
+    {
+      "Segment": 2,
+      "Tile": 6,
+      "X": 0,
+      "Y": 240
+    },
+    {
+      "Segment": 2,
+      "Tile": 10,
+      "X": 104,
+      "Y": 0
+    }
+  ],
+
+  "Venice.BarberPole": [
+    {
+      "Segment": 0,
+      "Tile": 9,
+      "X": 224,
+      "Y": 64
+    },
+    {
+      "Segment": 1,
+      "Tile": 9,
+      "X": 128,
+      "Y": 56
+    }
+  ],
+
+  "Venice.Floor": [
+    {
+      "Segment": 0,
+      "Tile": 2,
+      "X": 160,
+      "Y": 0
+    },
+    {
+      "Segment": 1,
+      "Tile": 2,
+      "X": 128,
+      "Y": 32
+    }
+  ],
+
+  "Venice.Sky.Bartoli": [
+    {
+      "Segment": 1,
+      "Tile": 7,
+      "X": 64,
+      "Y": 128
+    },
+    {
+      "Segment": 2,
+      "Tile": 7,
+      "X": 128,
+      "Y": 128
+    },
+    {
+      "Segment": 3,
+      "Tile": 7,
+      "X": 0,
+      "Y": 144
+    },
+    {
+      "Segment": 4,
+      "Tile": 7,
+      "X": 192,
+      "Y": 128
     }
   ]
 }

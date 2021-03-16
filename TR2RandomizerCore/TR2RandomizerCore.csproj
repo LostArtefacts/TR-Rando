@@ -94,7 +94,31 @@
     <None Include="Resources\locations.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Mapping\EMPRTOMB.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Mapping\ICECAVE.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Mapping\CATACOMB.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Mapping\MONASTRY.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Mapping\SKIDOO.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Mapping\DECK.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Mapping\PLATFORM.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Mapping\KEEL.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Mapping\LIVING.TR2-Textures.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Mapping\UNWATER.TR2-Textures.json">
@@ -115,39 +139,91 @@
     <None Include="Resources\Textures\Mapping\WALL.TR2-Textures.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Textures\Source\Decking\Segments.json">
+    <None Include="Resources\Textures\Source\Enemies\Barney\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Enemies\Barracuda\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Enemies\Barracuda\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Enemies\Monks\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Enemies\Monks\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Enemies\Spider\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Enemies\Steve\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Enemies\Steve\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Flame\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Flame\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\GreatWall\Sky\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\GreatWall\Sky\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Lara\Bobble\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Lara\Bobble\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Lara\DivingSuit\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Lara\DivingSuit\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Lara\Socks\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Lara\Socks\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Lara\Top\Snow\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Lara\Top\Snow\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Lara\Top\Sun\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Offshore\Acid\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Offshore\Acid\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Offshore\Cordon\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Offshore\Cordon\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Offshore\Plane\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Offshore\Plane\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Offshore\Sub\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Offshore\Sub\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Offshore\Tank\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Offshore\Tank\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Seraph\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Seraph\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Tibet\Bell\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Tibet\Bell\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Tibet\Gate\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Tibet\Gate\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Tibet\Sky\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Tibet\Sky\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Vehicles\Boat\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Vehicles\Skidoo\Turbo\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Vehicles\Skidoo\Turbo\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Venice\Awning\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Venice\Awning\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Venice\BarberPole\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Venice\BarberPole\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -163,10 +239,20 @@
     <None Include="Resources\Textures\Source\Enemies\Spider\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Venice\Curtains\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Venice\Curtains\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Venice\Floor\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Venice\Floor\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Venice\Sky\Bartoli\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Venice\Sky\Bartoli\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Venice\Sky\Boat\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Venice\Sky\Boat\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\tr2audio.json">
@@ -230,62 +316,122 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\Textures\Source\Lara\Top\Snow\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Resources\Textures\Source\Enemies\Barney\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Enemies\Barney\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Enemies\Barracuda\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Enemies\Barracuda\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Enemies\Monks\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Enemies\Monks\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Enemies\Spider\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Enemies\Steve\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Enemies\Steve\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Flame\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Flame\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\GreatWall\Sky\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\GreatWall\Sky\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Lara\Bobble\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Lara\Bobble\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Lara\DivingSuit\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Lara\DivingSuit\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Lara\Socks\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Lara\Socks\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Lara\Top\Snow\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Lara\Top\Snow\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Lara\Top\Sun\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Lara\Top\Sun\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Offshore\Acid\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Offshore\Acid\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Offshore\Cordon\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Offshore\Cordon\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Offshore\Plane\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Offshore\Plane\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Offshore\Sub\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Offshore\Sub\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Offshore\Tank\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Offshore\Tank\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Seraph\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Seraph\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Tibet\Bell\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Tibet\Bell\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Tibet\Gate\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Tibet\Gate\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Tibet\Sky\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Tibet\Sky\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Vehicles\Boat\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Vehicles\Skidoo\Turbo\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Vehicles\Skidoo\Turbo\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Venice\Awning\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Venice\Awning\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Venice\BarberPole\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Venice\BarberPole\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Vehicles\Boat\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Textures\Source\Decking\Segments.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Textures\Source\Enemies\Spider\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Venice\Curtains\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Venice\Curtains\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Venice\Floor\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Venice\Floor\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Venice\Sky\Bartoli\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Venice\Sky\Bartoli\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Venice\Sky\Boat\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Venice\Sky\Boat\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -57,6 +57,7 @@ namespace TRTexture16Importer.Textures
             return new TextureSource
             {
                 PNGPath = png,
+                ChangeSkyBox = png.ToUpper().Contains(@"\SKY\"), // TODO: make explicit in JSON
                 TextureMap = JsonConvert.DeserializeObject<Dictionary<string, List<Rectangle>>>(File.ReadAllText(mapping))
             };
         }

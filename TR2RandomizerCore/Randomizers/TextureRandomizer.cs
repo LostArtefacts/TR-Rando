@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using TRGE.Core;
+using TRLevelReader.Model;
 using TRTexture16Importer.Textures;
 
 namespace TR2RandomizerCore.Randomizers
@@ -40,7 +43,7 @@ namespace TR2RandomizerCore.Randomizers
                                     // Leave the standard texture for this particular source.
                                     continue;
                                 }
-                                
+
                                 levelMap.RedrawTargets(source, availableTextures[rand]);
                             }
                         }

@@ -4,15 +4,23 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+using TRLevelReader.Helpers;
 using TRLevelReader.Model;
+using TRLevelReader.Model.Enums;
 using TRTexture16Importer.Helpers;
 
 namespace TRTexture16Importer.Textures
 {
     public class TextureLevelMapping : IDisposable
     {
+        private static readonly Color _defaultSkyBox = Color.FromArgb(88, 152, 184);
+        private static readonly int _tileWidth = 256;
+        private static readonly int _tileHeight = 256;
+
         public Dictionary<TextureSource, List<TextureTarget>> Mapping { get; set; }
+        public Color DefaultSkyBox { get; set; }
 
         private readonly Dictionary<int, BitmapGraphics> _tileMap;
         private readonly TR2Level _level;
@@ -31,23 +39,32 @@ namespace TRTexture16Importer.Textures
                 return null;
             }
 
-            Dictionary<string, List<TextureTarget>> rawMapping = JsonConvert.DeserializeObject<Dictionary<string, List<TextureTarget>>>(File.ReadAllText(mapFile));
+            SortedDictionary<string, object> rawMapping = JsonConvert.DeserializeObject<SortedDictionary<string, object>>(File.ReadAllText(mapFile));
             Dictionary<TextureSource, List<TextureTarget>> mapping = new Dictionary<TextureSource, List<TextureTarget>>();
+            Color skyBoxColour = _defaultSkyBox;
+
             foreach (string sourceName in rawMapping.Keys)
             {
-                TextureSource source = database.Get(sourceName);
-                mapping[source] = rawMapping[sourceName];
+                if (sourceName.ToUpper().Equals("SKYBOX"))
+                {
+                    skyBoxColour = ColorTranslator.FromHtml(rawMapping[sourceName].ToString());
+                }
+                else
+                {
+                    mapping[database.Get(sourceName)] = JsonConvert.DeserializeObject<List<TextureTarget>>(rawMapping[sourceName].ToString());
+                }
             }
 
             return new TextureLevelMapping(level)
             {
-                Mapping = mapping
+                Mapping = mapping,
+                DefaultSkyBox = skyBoxColour
             };
         }
 
-        public void RedrawTargets(TextureSource source, string colour)
+        public void RedrawTargets(TextureSource source, string variant)
         {
-            List<Rectangle> segments = source.TextureMap[colour];
+            List<Rectangle> segments = source.TextureMap[variant];
             foreach (TextureTarget target in Mapping[source])
             {
                 if (target.Segment < 0 || target.Segment >= segments.Count)
@@ -57,18 +74,49 @@ namespace TRTexture16Importer.Textures
 
                 GetBitmapGraphics(target.Tile).Draw(source, target, segments[target.Segment]);
             }
+
+            if (source.ChangeSkyBox)
+            {
+                TRMesh skybox = TR2LevelUtilities.GetModelFirstMesh(_level, TR2Entities.Skybox_H);
+                if (skybox != null)
+                {
+                    int skyColourIndex = _level.Palette16.ToList().FindIndex
+                    (
+                        e => e.Red == DefaultSkyBox.R && e.Green == DefaultSkyBox.G && e.Blue == DefaultSkyBox.B
+                    );
+
+                    // Let's use the final palette index
+                    int newColourIndex = _level.Palette16.Length - 1;
+                    Color c = source.Bitmap.GetPixel(segments[0].X, segments[0].Y);
+                    _level.Palette16[newColourIndex] = new TRColour4
+                    {
+                        Red = c.R,
+                        Green = c.G,
+                        Blue = c.B,
+                        Unused = 0
+                    };
+
+                    foreach (TRFace3 t in skybox.ColouredTriangles)
+                    {
+                        byte[] arr = BitConverter.GetBytes(t.Texture);
+                        int highByte = Convert.ToInt32(arr[1]);
+                        if (highByte == skyColourIndex)
+                        {
+                            arr[1] = (byte)newColourIndex;
+                            t.Texture = BitConverter.ToUInt16(arr, 0);
+                        }
+                    }
+                }
+            }
         }
 
         private BitmapGraphics GetBitmapGraphics(int tile)
         {
             if (!_tileMap.ContainsKey(tile))
             {
-                const int width = 256;
-                const int height = 256;
-
                 TRTexImage16 tex = _level.Images16[tile];
 
-                Bitmap bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
+                Bitmap bmp = new Bitmap(_tileWidth, _tileHeight, PixelFormat.Format32bppArgb);
                 BitmapData bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
                 List<byte> pixelCollection = new List<byte>();
