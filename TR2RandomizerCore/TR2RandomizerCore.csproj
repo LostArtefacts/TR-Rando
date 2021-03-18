@@ -164,6 +164,14 @@
     <None Include="Resources\Textures\Source\GreatWall\Sky\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\HSH\Tiles\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\HSH\Tiles\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\HSH\Paintings\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\HSH\Paintings\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Source\Lara\Bobble\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Lara\Bobble\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -348,6 +356,14 @@
     </Content>
     <Content Include="Resources\Textures\Source\GreatWall\Sky\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\GreatWall\Sky\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\HSH\Tiles\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\HSH\Tiles\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\HSH\Paintings\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\HSH\Paintings\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Lara\Bobble\Layers\Segments.png" />

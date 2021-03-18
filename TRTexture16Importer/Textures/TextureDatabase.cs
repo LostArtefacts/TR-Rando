@@ -58,7 +58,7 @@ namespace TRTexture16Importer.Textures
             {
                 PNGPath = png,
                 ChangeSkyBox = png.ToUpper().Contains(@"\SKY\"), // TODO: make explicit in JSON
-                TextureMap = JsonConvert.DeserializeObject<Dictionary<string, List<Rectangle>>>(File.ReadAllText(mapping))
+                VariantMap = JsonConvert.DeserializeObject<Dictionary<string, List<Rectangle>>>(File.ReadAllText(mapping))
             };
         }
     }

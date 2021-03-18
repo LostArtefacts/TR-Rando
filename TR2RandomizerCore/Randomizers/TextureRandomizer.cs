@@ -36,15 +36,15 @@ namespace TR2RandomizerCore.Randomizers
                         {
                             foreach (TextureSource source in levelMap.Mapping.Keys)
                             {
-                                string[] availableTextures = source.Textures;
-                                int rand = _generator.Next(min, availableTextures.Length);
+                                string[] variants = source.Variants;
+                                int rand = _generator.Next(min, variants.Length);
                                 if (rand == -1)
                                 {
                                     // Leave the standard texture for this particular source.
                                     continue;
                                 }
 
-                                levelMap.RedrawTargets(source, availableTextures[rand]);
+                                levelMap.RedrawTargets(source, variants[rand]);
                             }
                         }
                     }

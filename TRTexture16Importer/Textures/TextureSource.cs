@@ -9,9 +9,9 @@ namespace TRTexture16Importer.Textures
     {
         public string PNGPath { get; set; }
         public bool ChangeSkyBox { get; set; }
-        public Dictionary<string, List<Rectangle>> TextureMap { get; set; }
+        public Dictionary<string, List<Rectangle>> VariantMap { get; set; }
 
-        public string[] Textures => TextureMap.Keys.ToArray();
+        public string[] Variants => VariantMap.Keys.ToArray();
 
         private Bitmap _bitmap;
         public Bitmap Bitmap

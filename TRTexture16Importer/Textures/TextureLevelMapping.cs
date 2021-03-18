@@ -64,7 +64,7 @@ namespace TRTexture16Importer.Textures
 
         public void RedrawTargets(TextureSource source, string variant)
         {
-            List<Rectangle> segments = source.TextureMap[variant];
+            List<Rectangle> segments = source.VariantMap[variant];
             foreach (TextureTarget target in Mapping[source])
             {
                 if (target.Segment < 0 || target.Segment >= segments.Count)
