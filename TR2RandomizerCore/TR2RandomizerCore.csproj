@@ -164,6 +164,22 @@
     <None Include="Resources\Textures\Source\GreatWall\Sky\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\HSH\Carpet\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\HSH\Carpet\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\HSH\Cushions\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\HSH\Cushions\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\HSH\Duvet\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\HSH\Duvet\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\HSH\Marble\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\HSH\Marble\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Source\HSH\Tiles\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\HSH\Tiles\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -356,6 +372,22 @@
     </Content>
     <Content Include="Resources\Textures\Source\GreatWall\Sky\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\GreatWall\Sky\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\HSH\Carpet\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\HSH\Carpet\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\HSH\Cushions\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\HSH\Cushions\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\HSH\Duvet\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\HSH\Duvet\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\HSH\Marble\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\HSH\Marble\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\HSH\Tiles\Layers\Segments.png" />

@@ -122,6 +122,114 @@
     }
   ],
 
+  "HSH.Carpet": [
+    {
+      "Segment": 0,
+      "Tile": 2,
+      "X": 0,
+      "Y": 192
+    },
+    {
+      "Segment": 1,
+      "Tile": 3,
+      "X": 192,
+      "Y": 192
+    }
+  ],
+
+  "HSH.Cushions": [
+    {
+      "Segment": 0,
+      "Tile": 10,
+      "X": 184,
+      "Y": 168
+    }
+  ],
+
+  "HSH.Duvet": [
+    {
+      "Segment": 0,
+      "Tile": 7,
+      "X": 128,
+      "Y": 0
+    },
+    {
+      "Segment": 1,
+      "Tile": 10,
+      "X": 64,
+      "Y": 72
+    },
+    {
+      "Segment": 2,
+      "Tile": 10,
+      "X": 80,
+      "Y": 40
+    }
+  ],
+
+  "HSH.Marble": [
+    {
+      "Segment": 0,
+      "Tile": 6,
+      "X": 192,
+      "Y": 128
+    },
+    {
+      "Segment": 1,
+      "Tile": 10,
+      "X": 128,
+      "Y": 72
+    },
+    {
+      "Segment": 2,
+      "Tile": 6,
+      "X": 0,
+      "Y": 128
+    },
+    {
+      "Segment": 3,
+      "Tile": 6,
+      "X": 0,
+      "Y": 192
+    },
+    {
+      "Segment": 4,
+      "Tile": 6,
+      "X": 0,
+      "Y": 247
+    },
+    {
+      "Segment": 5,
+      "Tile": 6,
+      "X": 192,
+      "Y": 209
+    },
+    {
+      "Segment": 6,
+      "Tile": 6,
+      "X": 145,
+      "Y": 145
+    },
+    {
+      "Segment": 7,
+      "Tile": 6,
+      "X": 0,
+      "Y": 202
+    },
+    {
+      "Segment": 8,
+      "Tile": 6,
+      "X": 145,
+      "Y": 155
+    },
+    {
+      "Segment": 9,
+      "Tile": 6,
+      "X": 115,
+      "Y": 64
+    }
+  ],
+
   "HSH.Paintings": [
     {
       "Segment": 0,
