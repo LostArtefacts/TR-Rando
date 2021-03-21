@@ -406,6 +406,21 @@
     }
   ],
 
+  "Venice.Floor": [
+    {
+      "Segment": 0,
+      "Tile": 1,
+      "X": 32,
+      "Y": 128
+    },
+    {
+      "Segment": 1,
+      "Tile": 1,
+      "X": 0,
+      "Y": 160
+    }
+  ],
+
   "Venice.Sky.Boat": [
     {
       "Segment": 1,
