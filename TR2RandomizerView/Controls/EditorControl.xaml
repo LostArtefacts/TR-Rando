@@ -44,7 +44,7 @@
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding UnarmedLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding UnarmedLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomIntMinValue="1"
+            CustomIntMinValue="0"
             CustomIntMaxValue="{Binding LevelCount}"
             CustomIntTitle="Number of levels"/>
 
@@ -58,7 +58,7 @@
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding AmmolessLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding AmmolessLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomIntMinValue="1"
+            CustomIntMinValue="0"
             CustomIntMaxValue="{Binding LevelCount}"
             CustomIntTitle="Number of levels"/>
 
@@ -72,7 +72,7 @@
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding SunsetsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding SunsetCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomIntMinValue="1"
+            CustomIntMinValue="0"
             CustomIntMaxValue="{Binding LevelCount}"
             CustomIntTitle="Number of levels"/>
 
