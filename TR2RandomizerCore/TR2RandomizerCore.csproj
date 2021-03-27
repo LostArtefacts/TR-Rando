@@ -94,6 +94,9 @@
     <None Include="Resources\locations.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Mapping\XIAN.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Mapping\FLOATING.TR2-Textures.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -145,13 +148,21 @@
     <None Include="Resources\Textures\Mapping\WALL.TR2-Textures.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Enemies\Dragon\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Enemies\Dragon\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Source\Enemies\Barney\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Enemies\Barracuda\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Enemies\Barracuda\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Textures\Source\Enemies\Guard\Layers\Segments.psd" />
-    <None Include="Resources\Textures\Source\Enemies\Guard\Segments.json">
+    <None Include="Resources\Textures\Source\Enemies\Guard\Spear\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Enemies\Guard\Spear\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Enemies\Guard\Sword\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Enemies\Guard\Sword\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Source\Enemies\Monks\Layers\Segments.psd" />
@@ -173,6 +184,10 @@
     </None>
     <None Include="Resources\Textures\Source\Hazards\Boulder\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Hazards\Boulder\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Hazards\Spikes\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Hazards\Spikes\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Source\HSH\Carpet\Layers\Segments.psd" />
@@ -256,6 +271,13 @@
     <None Include="Resources\Textures\Source\Tibet\Sky\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Underwater\Lifeboat\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Underwater\Lifeboat\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Underwater\MariaTheme\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Source\Vehicles\Boat\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Vehicles\Skidoo\Turbo\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Vehicles\Skidoo\Turbo\Segments.json">
@@ -295,6 +317,10 @@
     </None>
     <None Include="Resources\Textures\Source\Venice\Sky\Boat\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Venice\Sky\Boat\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Water\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Water\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Source\Xian\Islands\Layers\Segments.psd" />
@@ -376,6 +402,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Resources\Textures\Source\Enemies\Dragon\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Enemies\Dragon\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Textures\Source\Enemies\Barney\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Enemies\Barney\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -384,8 +414,12 @@
     <Content Include="Resources\Textures\Source\Enemies\Barracuda\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Textures\Source\Enemies\Guard\Layers\Segments.png" />
-    <Content Include="Resources\Textures\Source\Enemies\Guard\Segments.png">
+    <Content Include="Resources\Textures\Source\Enemies\Guard\Spear\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Enemies\Guard\Spear\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Enemies\Guard\Sword\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Enemies\Guard\Sword\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Enemies\Monks\Layers\Segments.png" />
@@ -407,6 +441,10 @@
     </Content>
     <Content Include="Resources\Textures\Source\Hazards\Boulder\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Hazards\Boulder\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Hazards\Spikes\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Hazards\Spikes\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\HSH\Carpet\Layers\Segments.png" />
@@ -493,6 +531,13 @@
     <Content Include="Resources\Textures\Source\Tibet\Sky\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Underwater\Lifeboat\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Underwater\Lifeboat\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Underwater\MariaTheme\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Textures\Source\Vehicles\Boat\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Vehicles\Skidoo\Turbo\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Vehicles\Skidoo\Turbo\Segments.png">
@@ -526,6 +571,10 @@
     </Content>
     <Content Include="Resources\Textures\Source\Venice\Sky\Boat\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Venice\Sky\Boat\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Water\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Water\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Xian\Islands\Layers\Segments.png" />

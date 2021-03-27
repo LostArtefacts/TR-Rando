@@ -1,5 +1,140 @@
 {
-  "Enemies.Guard": [
+  "Enemies.Guard.Spear": [
+    {
+      "Segment": 0,
+      "Tile": 10,
+      "X": 176,
+      "Y": 192
+    },
+    {
+      "Segment": 1,
+      "Tile": 9,
+      "X": 96,
+      "Y": 192
+    },
+    {
+      "Segment": 2,
+      "Tile": 10,
+      "X": 224,
+      "Y": 208
+    },
+    {
+      "Segment": 3,
+      "Tile": 11,
+      "X": 72,
+      "Y": 200
+    },
+    {
+      "Segment": 4,
+      "Tile": 10,
+      "X": 24,
+      "Y": 32
+    },
+    {
+      "Segment": 5,
+      "Tile": 12,
+      "X": 160,
+      "Y": 0
+    },
+    {
+      "Segment": 6,
+      "Tile": 13,
+      "X": 24,
+      "Y": 168
+    },
+    {
+      "Segment": 7,
+      "Tile": 13,
+      "X": 200,
+      "Y": 120
+    },
+    {
+      "Segment": 8,
+      "Tile": 13,
+      "X": 112,
+      "Y": 96
+    },
+    {
+      "Segment": 9,
+      "Tile": 13,
+      "X": 0,
+      "Y": 16
+    },
+    {
+      "Segment": 10,
+      "Tile": 13,
+      "X": 208,
+      "Y": 0
+    },
+    {
+      "Segment": 11,
+      "Tile": 11,
+      "X": 120,
+      "Y": 80
+    },
+    {
+      "Segment": 12,
+      "Tile": 11,
+      "X": 0,
+      "Y": 88
+    },
+    {
+      "Segment": 13,
+      "Tile": 12,
+      "X": 144,
+      "Y": 112
+    },
+    {
+      "Segment": 14,
+      "Tile": 13,
+      "X": 152,
+      "Y": 96
+    },
+    {
+      "Segment": 15,
+      "Tile": 13,
+      "X": 152,
+      "Y": 120
+    },
+    {
+      "Segment": 16,
+      "Tile": 13,
+      "X": 176,
+      "Y": 120
+    },
+    {
+      "Segment": 17,
+      "Tile": 12,
+      "X": 0,
+      "Y": 192
+    },
+    {
+      "Segment": 18,
+      "Tile": 13,
+      "X": 72,
+      "Y": 96
+    },
+    {
+      "Segment": 19,
+      "Tile": 13,
+      "X": 136,
+      "Y": 120
+    },
+    {
+      "Segment": 20,
+      "Tile": 13,
+      "X": 232,
+      "Y": 128
+    },
+    {
+      "Segment": 21,
+      "Tile": 12,
+      "X": 192,
+      "Y": 112
+    }
+  ],
+
+  "Enemies.Guard.Sword": [
     {
       "Segment": 0,
       "Tile": 13,
@@ -9,272 +144,275 @@
     {
       "Segment": 1,
       "Tile": 12,
-      "X": 160,
-      "Y": 0
-    },
-    {
-      "Segment": 2,
-      "Tile": 12,
-      "X": 176,
-      "Y": 120
-    },
-    {
-      "Segment": 3,
-      "Tile": 12,
       "X": 0,
       "Y": 32
     },
     {
-      "Segment": 4,
+      "Segment": 2,
       "Tile": 12,
       "X": 192,
       "Y": 16
     },
     {
-      "Segment": 5,
+      "Segment": 3,
       "Tile": 13,
-      "X": 208,
-      "Y": 0
+      "X": 72,
+      "Y": 136
     },
     {
-      "Segment": 6,
-      "Tile": 12,
-      "X": 192,
-      "Y": 112
+      "Segment": 4,
+      "Tile": 13,
+      "X": 0,
+      "Y": 48
     },
     {
-      "Segment": 7,
+      "Segment": 5,
       "Tile": 9,
       "X": 112,
       "Y": 136
     },
     {
-      "Segment": 8,
-      "Tile": 11,
-      "X": 72,
-      "Y": 200
-    },
-    {
-      "Segment": 9,
-      "Tile": 9,
-      "X": 96,
-      "Y": 192
-    },
-    {
-      "Segment": 10,
-      "Tile": 9,
-      "X": 128,
-      "Y": 208
-    },
-    {
-      "Segment": 11,
-      "Tile": 10,
-      "X": 176,
-      "Y": 192
-    },
-    {
-      "Segment": 12,
-      "Tile": 10,
-      "X": 248,
-      "Y": 208
-    },
-    {
-      "Segment": 13,
-      "Tile": 12,
-      "X": 0,
-      "Y": 192
-    },
-    {
-      "Segment": 14,
+      "Segment": 6,
       "Tile": 12,
       "X": 168,
       "Y": 184
     },
     {
-      "Segment": 15,
-      "Tile": 13,
-      "X": 0,
-      "Y": 16
+      "Segment": 7,
+      "Tile": 9,
+      "X": 128,
+      "Y": 208
     },
     {
-      "Segment": 16,
-      "Tile": 13,
-      "X": 72,
-      "Y": 136
-    },
-    {
-      "Segment": 17,
-      "Tile": 13,
-      "X": 24,
-      "Y": 168
-    },
-    {
-      "Segment": 18,
-      "Tile": 12,
-      "X": 96,
-      "Y": 192
-    },
-    {
-      "Segment": 19,
-      "Tile": 12,
-      "X": 232,
-      "Y": 128
-    },
-    {
-      "Segment": 20,
+      "Segment": 8,
       "Tile": 11,
-      "X": 0,
-      "Y": 88
+      "X": 72,
+      "Y": 224
     },
     {
-      "Segment": 21,
+      "Segment": 9,
       "Tile": 11,
       "X": 48,
       "Y": 208
     },
     {
-      "Segment": 22,
-      "Tile": 13,
-      "X": 72,
-      "Y": 96
+      "Segment": 10,
+      "Tile": 12,
+      "X": 176,
+      "Y": 120
     },
     {
-      "Segment": 23,
+      "Segment": 11,
       "Tile": 13,
-      "X": 224,
+      "X": 16,
+      "Y": 48
+    },
+    {
+      "Segment": 12,
+      "Tile": 13,
+      "X": 48,
       "Y": 136
     },
     {
-      "Segment": 24,
-      "Tile": 10,
-      "X": 224,
-      "Y": 208
-    },
-    {
-      "Segment": 25,
-      "Tile": 10,
-      "X": 24,
-      "Y": 32
-    },
-    {
-      "Segment": 26,
-      "Tile": 12,
-      "X": 104,
-      "Y": 136
-    },
-    {
-      "Segment": 27,
-      "Tile": 11,
-      "X": 144,
-      "Y": 224
-    },
-    {
-      "Segment": 28,
-      "Tile": 11,
-      "X": 216,
-      "Y": 216
-    },
-    {
-      "Segment": 29,
-      "Tile": 13,
-      "X": 208,
-      "Y": 128
-    },
-    {
-      "Segment": 30,
-      "Tile": 12,
-      "X": 144,
-      "Y": 112
-    },
-    {
-      "Segment": 31,
+      "Segment": 13,
       "Tile": 13,
       "X": 40,
       "Y": 136
     },
     {
-      "Segment": 32,
+      "Segment": 14,
       "Tile": 13,
-      "X": 200,
-      "Y": 120
+      "X": 16,
+      "Y": 136
     },
     {
-      "Segment": 33,
+      "Segment": 15,
+      "Tile": 12,
+      "X": 96,
+      "Y": 192
+    },
+    {
+      "Segment": 16,
+      "Tile": 13,
+      "X": 208,
+      "Y": 128
+    },
+    {
+      "Segment": 17,
+      "Tile": 13,
+      "X": 240,
+      "Y": 128
+    },
+    {
+      "Segment": 18,
+      "Tile": 13,
+      "X": 224,
+      "Y": 136
+    },
+    {
+      "Segment": 19,
+      "Tile": 12,
+      "X": 104,
+      "Y": 136
+    },
+    {
+      "Segment": 20,
       "Tile": 11,
-      "X": 120,
-      "Y": 80
+      "X": 144,
+      "Y": 224
     },
     {
-      "Segment": 34,
+      "Segment": 21,
+      "Tile": 11,
+      "X": 216,
+      "Y": 216
+    },
+    {
+      "Segment": 22,
       "Tile": 12,
       "X": 0,
       "Y": 144
     },
     {
-      "Segment": 35,
-      "Tile": 13,
-      "X": 136,
-      "Y": 120
+      "Segment": 23,
+      "Tile": 12,
+      "X": 232,
+      "Y": 128
     },
     {
-      "Segment": 36,
-      "Tile": 13,
-      "X": 112,
-      "Y": 96
-    },
-    {
-      "Segment": 37,
-      "Tile": 13,
-      "X": 152,
-      "Y": 96
-    },
-    {
-      "Segment": 38,
+      "Segment": 24,
       "Tile": 13,
       "X": 232,
       "Y": 96
     },
     {
-      "Segment": 39,
+      "Segment": 25,
       "Tile": 13,
       "X": 72,
       "Y": 168
+    }
+  ],
+
+  "Flame": [
+    {
+      "Segment": 0,
+      "Tile": 6,
+      "X": 4,
+      "Y": 66
     },
     {
-      "Segment": 40,
-      "Tile": 13,
-      "X": 152,
+      "Segment": 1,
+      "Tile": 6,
+      "X": 132,
+      "Y": 2
+    },
+    {
+      "Segment": 2,
+      "Tile": 6,
+      "X": 153,
+      "Y": 176
+    },
+    {
+      "Segment": 3,
+      "Tile": 6,
+      "X": 2,
+      "Y": 185
+    },
+    {
+      "Segment": 4,
+      "Tile": 6,
+      "X": 89,
+      "Y": 68
+    },
+    {
+      "Segment": 5,
+      "Tile": 6,
+      "X": 1,
+      "Y": 128
+    },
+    {
+      "Segment": 6,
+      "Tile": 6,
+      "X": 170,
+      "Y": 66
+    },
+    {
+      "Segment": 7,
+      "Tile": 6,
+      "X": 168,
       "Y": 120
     },
     {
-      "Segment": 41,
-      "Tile": 13,
-      "X": 176,
-      "Y": 120
+      "Segment": 8,
+      "Tile": 6,
+      "X": 88,
+      "Y": 128
     },
     {
-      "Segment": 42,
+      "Segment": 9,
       "Tile": 13,
-      "X": 48,
-      "Y": 136
+      "X": 128,
+      "Y": 189
     },
     {
-      "Segment": 43,
+      "Segment": 10,
       "Tile": 13,
-      "X": 16,
-      "Y": 136
+      "X": 2,
+      "Y": 195
     },
     {
-      "Segment": 44,
-      "Tile": 13,
-      "X": 0,
-      "Y": 48
+      "Segment": 11,
+      "Tile": 14,
+      "X": 4,
+      "Y": 7
     },
     {
-      "Segment": 45,
-      "Tile": 13,
-      "X": 16,
-      "Y": 48
+      "Segment": 12,
+      "Tile": 14,
+      "X": 197,
+      "Y": 80
+    },
+    {
+      "Segment": 13,
+      "Tile": 14,
+      "X": 64,
+      "Y": 44
+    },
+    {
+      "Segment": 14,
+      "Tile": 6,
+      "X": 227,
+      "Y": 182
+    },
+    {
+      "Segment": 15,
+      "Tile": 14,
+      "X": 229,
+      "Y": 44
+    },
+    {
+      "Segment": 16,
+      "Tile": 14,
+      "X": 123,
+      "Y": 128
+    },
+    {
+      "Segment": 17,
+      "Tile": 14,
+      "X": 3,
+      "Y": 133
+    },
+    {
+      "Segment": 18,
+      "Tile": 14,
+      "X": 28,
+      "Y": 137
+    },
+    {
+      "Segment": 19,
+      "Tile": 14,
+      "X": 52,
+      "Y": 134
     }
   ],
 
@@ -284,6 +422,245 @@
       "Tile": 9,
       "X": 32,
       "Y": 0
+    }
+  ],
+
+  "Hazards.Spikes": [
+    {
+      "Segment": 1,
+      "Tile": 10,
+      "X": 248,
+      "Y": 208
+    },
+    {
+      "Segment": 2,
+      "Tile": 10,
+      "X": 248,
+      "Y": 232
+    }
+  ],
+
+  "Lara.Bobble": [
+    {
+      "Segment": 0,
+      "Tile": 12,
+      "X": 24,
+      "Y": 67
+    },
+    {
+      "Segment": 1,
+      "Tile": 11,
+      "X": 200,
+      "Y": 225
+    },
+    {
+      "Segment": 1,
+      "Tile": 12,
+      "X": 0,
+      "Y": 225
+    }
+  ],
+
+  "Lara.Socks": [
+    {
+      "Segment": 0,
+      "Tile": 9,
+      "X": 240,
+      "Y": 104
+    },
+    {
+      "Segment": 1,
+      "Tile": 11,
+      "X": 240,
+      "Y": 128
+    },
+    {
+      "Segment": 2,
+      "Tile": 11,
+      "X": 240,
+      "Y": 160
+    }
+  ],
+
+  "Lara.Top.Sun": [
+    {
+      "Segment": 0,
+      "Tile": 9,
+      "X": 171,
+      "Y": 72
+    },
+    {
+      "Segment": 1,
+      "Tile": 10,
+      "X": 208,
+      "Y": 240
+    },
+    {
+      "Segment": 2,
+      "Tile": 11,
+      "X": 120,
+      "Y": 24
+    },
+    {
+      "Segment": 3,
+      "Tile": 11,
+      "X": 184,
+      "Y": 0,
+      "Clip": "0, 0, 40, 16"
+    },
+    {
+      "Segment": 3,
+      "Tile": 11,
+      "X": 0,
+      "Y": 32,
+      "Clip": "0, 16, 40, 16"
+    },
+    {
+      "Segment": 4,
+      "Tile": 12,
+      "X": 232,
+      "Y": 176
+    },
+    {
+      "Segment": 5,
+      "Tile": 9,
+      "X": 72,
+      "Y": 104
+    },
+    {
+      "Segment": 6,
+      "Tile": 12,
+      "X": 208,
+      "Y": 200
+    },
+    {
+      "Segment": 7,
+      "Tile": 12,
+      "X": 136,
+      "Y": 48
+    },
+    {
+      "Segment": 8,
+      "Tile": 11,
+      "X": 96,
+      "Y": 120
+    },
+    {
+      "Segment": 9,
+      "Tile": 12,
+      "X": 112,
+      "Y": 200
+    },
+    {
+      "Segment": 10,
+      "Tile": 11,
+      "X": 184,
+      "Y": 16
+    },
+    {
+      "Segment": 11,
+      "Tile": 12,
+      "X": 40,
+      "Y": 160
+    },
+    {
+      "Segment": 12,
+      "Tile": 12,
+      "X": 128,
+      "Y": 200
+    },
+    {
+      "Segment": 13,
+      "Tile": 10,
+      "X": 208,
+      "Y": 64
+    },
+    {
+      "Segment": 14,
+      "Tile": 9,
+      "X": 216,
+      "Y": 64
+    },
+    {
+      "Segment": 15,
+      "Tile": 12,
+      "X": 192,
+      "Y": 176
+    },
+    {
+      "Segment": 16,
+      "Tile": 12,
+      "X": 224,
+      "Y": 208
+    },
+    {
+      "Segment": 17,
+      "Tile": 9,
+      "X": 0,
+      "Y": 232
+    },
+    {
+      "Segment": 18,
+      "Tile": 9,
+      "X": 224,
+      "Y": 248
+    },
+    {
+      "Segment": 19,
+      "Tile": 10,
+      "X": 128,
+      "Y": 248
+    },
+    {
+      "Segment": 20,
+      "Tile": 10,
+      "X": 88,
+      "Y": 216
+    },
+    {
+      "Segment": 21,
+      "Tile": 9,
+      "X": 120,
+      "Y": 88
+    },
+    {
+      "Segment": 22,
+      "Tile": 12,
+      "X": 232,
+      "Y": 48
+    },
+    {
+      "Segment": 23,
+      "Tile": 12,
+      "X": 208,
+      "Y": 48
+    },
+    {
+      "Segment": 24,
+      "Tile": 12,
+      "X": 96,
+      "Y": 200
+    },
+    {
+      "Segment": 25,
+      "Tile": 11,
+      "X": 42,
+      "Y": 32
+    }
+  ],
+
+  "Water": [
+    {
+      "Segment": 0,
+      "Tile": 1,
+      "X": 128,
+      "Y": 128
+    },
+    {
+      "Segment": 1,
+      "Tile": 1,
+      "X": 0,
+      "Y": 192
     }
   ],
 

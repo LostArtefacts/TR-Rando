@@ -122,18 +122,49 @@
     }
   ],
 
+  "Hazards.Spikes": [
+    {
+      "Segment": 0,
+      "Tile": 9,
+      "X": 112,
+      "Y": 176,
+      "Clip": "0, 0, 16, 8"
+    },
+    {
+      "Segment": 0,
+      "Tile": 9,
+      "X": 128,
+      "Y": 176,
+      "Clip": "0, 8, 16, 8"
+    },
+    {
+      "Segment": 0,
+      "Tile": 9,
+      "X": 144,
+      "Y": 176,
+      "Clip": "0, 16, 16, 8"
+    },
+    {
+      "Segment": 0,
+      "Tile": 9,
+      "X": 160,
+      "Y": 176,
+      "Clip": "8, 16, 8, 8"
+    }
+  ],
+
   "Lara.Bobble": [
     {
       "Segment": 0,
       "Tile": 9,
-      "X": 241,
-      "Y": 184
+      "X": 240,
+      "Y": 195
     },
     {
       "Segment": 1,
       "Tile": 10,
       "X": 40,
-      "Y": 80
+      "Y": 81
     }
   ],
 
@@ -253,30 +284,59 @@
 
   "Lara.Top.Sun": [
     {
-      "Segment": 3,
+      "Segment": 0,
       "Tile": 7,
       "X": 195,
       "Y": 0
     },
     {
-      "Segment": 10,
-      "Tile": 9,
-      "X": 144,
-      "Y": 32,
-      "Clip": "8, 0, 24, 8"
-    },
-    {
-      "Segment": 13,
+      "Segment": 2,
       "Tile": 6,
       "X": 232,
       "Y": 240,
       "Clip": "0, 0, 24, 16"
     },
     {
-      "Segment": 16,
+      "Segment": 19,
+      "Tile": 9,
+      "X": 144,
+      "Y": 32,
+      "Clip": "8, 0, 24, 8"
+    },
+    {
+      "Segment": 25,
       "Tile": 8,
       "X": 42,
       "Y": 184
+    }
+  ],
+
+  "Skybox": "#5898B8",
+
+  "Tibet.Sky": [
+    {
+      "Segment": 1,
+      "Tile": 5,
+      "X": 136,
+      "Y": 192
+    },
+    {
+      "Segment": 2,
+      "Tile": 6,
+      "X": 0,
+      "Y": 0
+    },
+    {
+      "Segment": 3,
+      "Tile": 6,
+      "X": 64,
+      "Y": 0
+    },
+    {
+      "Segment": 4,
+      "Tile": 6,
+      "X": 128,
+      "Y": 0
     }
   ]
 }
