@@ -51,7 +51,7 @@ namespace TR2RandomizerCore.Utilities
             },
             { LevelNames.LQ, new List<List<int>>
                 {
-                    new List<int>() { 28, 32, 72, 77 }
+                    //No drain areas defined for now
                 }
             },
             { LevelNames.DECK, new List<List<int>>

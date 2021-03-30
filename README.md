@@ -10,6 +10,7 @@ Tomb Raider II Item Randomizer
 * b122251 - For TRMod, which was used initially to modify the levels prior to the native implementation, fantastic command-line tool you can grab here: https://core-design.com/community_trmod.html
 * JW-dev/Bahamete - For initial work on script randomization
 * Lahm86 - For his massive contributions to improving the randomizer - massive thanks. Please check out his project for randomizing the script files here: https://github.com/lahm86/TRGameflowEditor TRGE is the base for all script randomization features in this program.
+* Anopob - For various contributions and bug fixes!
 
 ![TR2 Rando UI](https://github.com/DanzaG/TR2-Rando/blob/master/UI.png)
 

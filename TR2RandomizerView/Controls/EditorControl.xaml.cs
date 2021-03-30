@@ -288,6 +288,11 @@ namespace TR2RandomizerView.Controls
             }
         }
 
+        public void SetDevelopmentMode(bool flag)
+        {
+            _options.DevelopmentMode = flag;
+        }
+
         public void RandomizeAllSeeds()
         {
             if (_options.RandomizationPossible)

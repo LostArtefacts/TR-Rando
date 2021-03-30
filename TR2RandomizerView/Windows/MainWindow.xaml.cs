@@ -368,6 +368,12 @@ namespace TR2RandomizerView.Windows
             }
         }
 
+        private void DevelopmentModeCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            DevelopmentModeMenuItem.IsChecked = !DevelopmentModeMenuItem.IsChecked;
+            _editorControl.SetDevelopmentMode(DevelopmentModeMenuItem.IsChecked);
+        }
+
         private void EditorFolder_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(e.Uri.AbsoluteUri);

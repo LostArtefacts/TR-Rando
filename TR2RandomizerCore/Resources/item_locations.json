@@ -2813,7 +2813,7 @@
     {
       "X": 25363,
       "Z": 36287,
-      "Y": -512,
+      "Y": -256,
       "Room": 4,
       "RequiresGlitch": false,
       "Difficulty": 0,
@@ -4653,7 +4653,7 @@
     {
       "X": 58929,
       "Z": 71258,
-      "Y": 12800,
+      "Y": 13056,
       "Room": 59,
       "RequiresGlitch": false,
       "Difficulty": 0,
@@ -4703,7 +4703,7 @@
     {
       "X": 58909,
       "Z": 72211,
-      "Y": 12800,
+      "Y": 13056,
       "Room": 59,
       "RequiresGlitch": false,
       "Difficulty": 0,
@@ -5465,6 +5465,1426 @@
       "Z": 74242,
       "Y": 26503,
       "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 67067,
+      "Z": 30170,
+      "Y": 4079,
+      "Room": 35,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 68079,
+      "Z": 33237,
+      "Y": 4498,
+      "Room": 35,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 69103,
+      "Z": 32228,
+      "Y": 3446,
+      "Room": 35,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 67059,
+      "Z": 31277,
+      "Y": 4872,
+      "Room": 36,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 67085,
+      "Z": 32211,
+      "Y": 5229,
+      "Room": 36,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 68043,
+      "Z": 32180,
+      "Y": 4967,
+      "Room": 36,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 68132,
+      "Z": 39470,
+      "Y": 5632,
+      "Room": 36,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 64951,
+      "Z": 35291,
+      "Y": 5741,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 65051,
+      "Z": 36151,
+      "Y": 5766,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 65053,
+      "Z": 37408,
+      "Y": 5767,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 66121,
+      "Z": 35358,
+      "Y": 6034,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 66028,
+      "Z": 36438,
+      "Y": 6011,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 66070,
+      "Z": 37422,
+      "Y": 6021,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 67097,
+      "Z": 36458,
+      "Y": 6144,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 67060,
+      "Z": 37321,
+      "Y": 6144,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 68169,
+      "Z": 37349,
+      "Y": 6290,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 68118,
+      "Z": 36373,
+      "Y": 6277,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 68105,
+      "Z": 35404,
+      "Y": 6617,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 68212,
+      "Z": 34369,
+      "Y": 6912,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 69194,
+      "Z": 34334,
+      "Y": 6912,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 69159,
+      "Z": 35412,
+      "Y": 6613,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 69149,
+      "Z": 36397,
+      "Y": 6400,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 69194,
+      "Z": 37405,
+      "Y": 6400,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 69196,
+      "Z": 38339,
+      "Y": 6174,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 69175,
+      "Z": 39512,
+      "Y": 5737,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50729,
+      "Z": 36379,
+      "Y": 1536,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51678,
+      "Z": 36343,
+      "Y": 1536,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52737,
+      "Z": 36341,
+      "Y": 1536,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53761,
+      "Z": 36350,
+      "Y": 1536,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51719,
+      "Z": 35313,
+      "Y": 1278,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52737,
+      "Z": 35304,
+      "Y": 1536,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53757,
+      "Z": 35325,
+      "Y": 1536,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50751,
+      "Z": 34318,
+      "Y": 399,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51731,
+      "Z": 34319,
+      "Y": 908,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52733,
+      "Z": 34271,
+      "Y": 1135,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53782,
+      "Z": 34263,
+      "Y": 1259,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50673,
+      "Z": 33344,
+      "Y": 268,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51685,
+      "Z": 33303,
+      "Y": 511,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52672,
+      "Z": 33295,
+      "Y": 756,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53774,
+      "Z": 33219,
+      "Y": 880,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51703,
+      "Z": 32252,
+      "Y": 251,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52675,
+      "Z": 32260,
+      "Y": 624,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51685,
+      "Z": 31275,
+      "Y": 242,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52755,
+      "Z": 31305,
+      "Y": 644,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53710,
+      "Z": 31236,
+      "Y": 883,
+      "Room": 33,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 42505,
+      "Z": 32280,
+      "Y": -495,
+      "Room": 0,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 42450,
+      "Z": 31304,
+      "Y": -1010,
+      "Room": 0,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40461,
+      "Z": 32309,
+      "Y": -262,
+      "Room": 0,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40422,
+      "Z": 31290,
+      "Y": -738,
+      "Room": 0,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 44535,
+      "Z": 29212,
+      "Y": -1410,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 44520,
+      "Z": 30293,
+      "Y": -688,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 43493,
+      "Z": 30219,
+      "Y": -1274,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 42437,
+      "Z": 30258,
+      "Y": -1539,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41441,
+      "Z": 30147,
+      "Y": -1822,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40419,
+      "Z": 30174,
+      "Y": -1673,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39435,
+      "Z": 30201,
+      "Y": -1414,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 38394,
+      "Z": 30211,
+      "Y": -1148,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 37358,
+      "Z": 30214,
+      "Y": -888,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 36327,
+      "Z": 30248,
+      "Y": -881,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 35272,
+      "Z": 30195,
+      "Y": -1172,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33309,
+      "Z": 30147,
+      "Y": -2213,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 32262,
+      "Z": 30217,
+      "Y": -1790,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 31205,
+      "Z": 30182,
+      "Y": -1548,
+      "Room": 2,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 42495,
+      "Z": 37345,
+      "Y": 7160,
+      "Room": 9,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41492,
+      "Z": 38424,
+      "Y": 7535,
+      "Room": 9,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40416,
+      "Z": 38408,
+      "Y": 7805,
+      "Room": 9,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 38341,
+      "Z": 38417,
+      "Y": 7149,
+      "Room": 9,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39413,
+      "Z": 39480,
+      "Y": 7134,
+      "Room": 9,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40444,
+      "Z": 39421,
+      "Y": 7425,
+      "Room": 9,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41516,
+      "Z": 39374,
+      "Y": 7170,
+      "Room": 9,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40484,
+      "Z": 40489,
+      "Y": 6478,
+      "Room": 9,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39386,
+      "Z": 40480,
+      "Y": 6484,
+      "Room": 9,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 10718,
+      "Z": 43565,
+      "Y": 4096,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 11719,
+      "Z": 43559,
+      "Y": 4096,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 10806,
+      "Z": 44546,
+      "Y": 4096,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 11709,
+      "Z": 44523,
+      "Y": 4096,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 10877,
+      "Z": 45542,
+      "Y": 4096,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 11731,
+      "Z": 45588,
+      "Y": 4096,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 10840,
+      "Z": 46597,
+      "Y": 4096,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 11758,
+      "Z": 46667,
+      "Y": 4096,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 10791,
+      "Z": 47587,
+      "Y": 4096,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 11820,
+      "Z": 47618,
+      "Y": 4096,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 10742,
+      "Z": 48625,
+      "Y": 4220,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 11781,
+      "Z": 48652,
+      "Y": 4227,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 10780,
+      "Z": 49627,
+      "Y": 4470,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 11812,
+      "Z": 49638,
+      "Y": 4473,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 10813,
+      "Z": 50716,
+      "Y": 4608,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 11862,
+      "Z": 50691,
+      "Y": 4608,
+      "Room": 46,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47401,
+      "Z": 60636,
+      "Y": 7168,
+      "Room": 55,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53792,
+      "Z": 78383,
+      "Y": 11632,
+      "Room": 59,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52720,
+      "Z": 78276,
+      "Y": 11286,
+      "Room": 59,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52730,
+      "Z": 77305,
+      "Y": 11517,
+      "Room": 59,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 84459,
+      "Z": 68101,
+      "Y": 20480,
+      "Room": 65,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 86540,
+      "Z": 69103,
+      "Y": 19844,
+      "Room": 65,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 85511,
+      "Z": 69084,
+      "Y": 20101,
+      "Room": 65,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 83450,
+      "Z": 69138,
+      "Y": 19956,
+      "Room": 65,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 83369,
+      "Z": 68063,
+      "Y": 20480,
+      "Room": 65,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 84447,
+      "Z": 69228,
+      "Y": 20480,
+      "Room": 65,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 32229,
+      "Z": 38378,
+      "Y": 2561,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 31227,
+      "Z": 38380,
+      "Y": 2683,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 31239,
+      "Z": 39424,
+      "Y": 2944,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 31304,
+      "Z": 40453,
+      "Y": 3072,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 31257,
+      "Z": 41528,
+      "Y": 2929,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 31272,
+      "Z": 42550,
+      "Y": 2532,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33236,
+      "Z": 43484,
+      "Y": 2816,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34306,
+      "Z": 43553,
+      "Y": 2944,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 35368,
+      "Z": 43509,
+      "Y": 3072,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 36373,
+      "Z": 43503,
+      "Y": 3072,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 37398,
+      "Z": 43565,
+      "Y": 3205,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 38408,
+      "Z": 43516,
+      "Y": 3328,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39460,
+      "Z": 43530,
+      "Y": 3190,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40498,
+      "Z": 43539,
+      "Y": 3072,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41464,
+      "Z": 43580,
+      "Y": 3198,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 42493,
+      "Z": 43525,
+      "Y": 3328,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 43575,
+      "Z": 43540,
+      "Y": 3044,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45570,
+      "Z": 43596,
+      "Y": 2944,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45606,
+      "Z": 42485,
+      "Y": 3214,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45576,
+      "Z": 41451,
+      "Y": 3591,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45564,
+      "Z": 40448,
+      "Y": 3711,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45543,
+      "Z": 39388,
+      "Y": 3568,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45515,
+      "Z": 38408,
+      "Y": 3316,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47616,
+      "Z": 38377,
+      "Y": 2554,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47634,
+      "Z": 39408,
+      "Y": 2807,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47624,
+      "Z": 40397,
+      "Y": 2941,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47670,
+      "Z": 41555,
+      "Y": 2781,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47622,
+      "Z": 42477,
+      "Y": 2439,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47620,
+      "Z": 43526,
+      "Y": 2174,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 31232,
+      "Z": 45610,
+      "Y": 373,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 32252,
+      "Z": 37382,
+      "Y": 1796,
+      "Room": 7,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48631,
+      "Z": 43517,
+      "Y": 1922,
+      "Room": 24,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48640,
+      "Z": 42482,
+      "Y": 2182,
+      "Room": 24,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48611,
+      "Z": 41449,
+      "Y": 2572,
+      "Room": 24,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48639,
+      "Z": 40422,
+      "Y": 2688,
+      "Room": 24,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48652,
+      "Z": 39418,
+      "Y": 2555,
+      "Room": 24,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48644,
+      "Z": 38369,
+      "Y": 2295,
+      "Room": 24,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 30158,
+      "Z": 43588,
+      "Y": 2163,
+      "Room": 23,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 30224,
+      "Z": 42513,
+      "Y": 2427,
+      "Room": 23,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 30219,
+      "Z": 41502,
+      "Y": 2811,
+      "Room": 23,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 30194,
+      "Z": 40494,
+      "Y": 2940,
+      "Room": 23,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 30215,
+      "Z": 39395,
+      "Y": 2810,
+      "Room": 23,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 30176,
+      "Z": 38403,
+      "Y": 2553,
+      "Room": 23,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54787,
+      "Z": 31231,
+      "Y": -1024,
+      "Room": 3,
       "RequiresGlitch": false,
       "Difficulty": 0,
       "IsInRoomSpace": false,
@@ -8157,6 +9577,2656 @@
       "Z": 52767,
       "Y": -1792,
       "Room": 96,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33281,
+      "Z": 50729,
+      "Y": -2933,
+      "Room": 77,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34301,
+      "Z": 50737,
+      "Y": -2931,
+      "Room": 77,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 35312,
+      "Z": 50701,
+      "Y": -2940,
+      "Room": 77,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33282,
+      "Z": 56871,
+      "Y": -2304,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33296,
+      "Z": 57832,
+      "Y": -2304,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34276,
+      "Z": 57903,
+      "Y": -2304,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33270,
+      "Z": 58914,
+      "Y": -2816,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34256,
+      "Z": 58895,
+      "Y": -2816,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 35292,
+      "Z": 58882,
+      "Y": -2816,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 35344,
+      "Z": 57860,
+      "Y": -768,
+      "Room": 110,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 35278,
+      "Z": 58811,
+      "Y": -768,
+      "Room": 110,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34289,
+      "Z": 58872,
+      "Y": -768,
+      "Room": 110,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34325,
+      "Z": 57861,
+      "Y": -512,
+      "Room": 110,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33330,
+      "Z": 57861,
+      "Y": -512,
+      "Room": 110,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33283,
+      "Z": 58907,
+      "Y": -767,
+      "Room": 110,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 64017,
+      "Z": 50665,
+      "Y": -256,
+      "Room": 148,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 63048,
+      "Z": 49672,
+      "Y": 768,
+      "Room": 149,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 64047,
+      "Z": 49259,
+      "Y": 768,
+      "Room": 149,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 65023,
+      "Z": 49689,
+      "Y": 768,
+      "Room": 149,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 63049,
+      "Z": 48686,
+      "Y": 767,
+      "Room": 149,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 64042,
+      "Z": 48605,
+      "Y": 767,
+      "Room": 149,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 62961,
+      "Z": 47645,
+      "Y": 767,
+      "Room": 149,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 63909,
+      "Z": 47652,
+      "Y": 768,
+      "Room": 149,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 64909,
+      "Z": 47674,
+      "Y": 768,
+      "Room": 149,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 65024,
+      "Z": 48640,
+      "Y": 768,
+      "Room": 149,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 64014,
+      "Z": 47615,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 64036,
+      "Z": 48619,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 64009,
+      "Z": 49583,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 63005,
+      "Z": 48626,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 62983,
+      "Z": 49618,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 61973,
+      "Z": 49602,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 61957,
+      "Z": 48599,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 61922,
+      "Z": 47589,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 60929,
+      "Z": 49566,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 60971,
+      "Z": 48562,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 60943,
+      "Z": 47591,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 59921,
+      "Z": 47590,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 59951,
+      "Z": 48528,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 58870,
+      "Z": 47566,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 58895,
+      "Z": 48554,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 58917,
+      "Z": 49601,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 58847,
+      "Z": 50613,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 57884,
+      "Z": 50591,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 57858,
+      "Z": 49597,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 57886,
+      "Z": 48550,
+      "Y": -2048,
+      "Room": 150,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 58891,
+      "Z": 64030,
+      "Y": 0,
+      "Room": 147,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 58876,
+      "Z": 66120,
+      "Y": 512,
+      "Room": 147,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 57852,
+      "Z": 65933,
+      "Y": 512,
+      "Room": 147,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 59928,
+      "Z": 66975,
+      "Y": 512,
+      "Room": 147,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 58910,
+      "Z": 66976,
+      "Y": 512,
+      "Room": 147,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 57878,
+      "Z": 67042,
+      "Y": 512,
+      "Room": 147,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 59605,
+      "Z": 65345,
+      "Y": 512,
+      "Room": 147,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 22012,
+      "Z": 64038,
+      "Y": -767,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 20951,
+      "Z": 64007,
+      "Y": -1024,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 19920,
+      "Z": 63963,
+      "Y": -1280,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 18894,
+      "Z": 64023,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 18962,
+      "Z": 62904,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 19983,
+      "Z": 62995,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 21031,
+      "Z": 62947,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 22014,
+      "Z": 62962,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 18961,
+      "Z": 62007,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 20018,
+      "Z": 62057,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 21033,
+      "Z": 62008,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 22035,
+      "Z": 61984,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 18956,
+      "Z": 60964,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 20010,
+      "Z": 60941,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 21014,
+      "Z": 60972,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 22065,
+      "Z": 60976,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 20002,
+      "Z": 59876,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 22277,
+      "Z": 59652,
+      "Y": -1536,
+      "Room": 151,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40400,
+      "Z": 24018,
+      "Y": 2699,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39401,
+      "Z": 24010,
+      "Y": 2682,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40463,
+      "Z": 23010,
+      "Y": 2819,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39428,
+      "Z": 22983,
+      "Y": 2831,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40499,
+      "Z": 22060,
+      "Y": 2931,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39461,
+      "Z": 22015,
+      "Y": 2953,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40486,
+      "Z": 21037,
+      "Y": 2934,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39471,
+      "Z": 21060,
+      "Y": 2955,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40501,
+      "Z": 19956,
+      "Y": 2799,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39448,
+      "Z": 19943,
+      "Y": 2816,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 40478,
+      "Z": 18947,
+      "Y": 2680,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39410,
+      "Z": 18951,
+      "Y": 2684,
+      "Room": 53,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50600,
+      "Z": 38261,
+      "Y": 0,
+      "Room": 18,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41490,
+      "Z": 40461,
+      "Y": 0,
+      "Room": 29,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 42491,
+      "Z": 40463,
+      "Y": 0,
+      "Room": 29,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 43532,
+      "Z": 40437,
+      "Y": 0,
+      "Room": 29,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 44543,
+      "Z": 40446,
+      "Y": 0,
+      "Room": 29,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 80385,
+      "Z": 58884,
+      "Y": 897,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 81304,
+      "Z": 58856,
+      "Y": 890,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 81369,
+      "Z": 59933,
+      "Y": 886,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 82283,
+      "Z": 58923,
+      "Y": 906,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 82381,
+      "Z": 59843,
+      "Y": 1023,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 82513,
+      "Z": 60957,
+      "Y": 404,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 82499,
+      "Z": 61979,
+      "Y": 400,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 82540,
+      "Z": 62969,
+      "Y": 411,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 83479,
+      "Z": 58885,
+      "Y": 770,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 83474,
+      "Z": 59954,
+      "Y": 1156,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 83471,
+      "Z": 60956,
+      "Y": 899,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 83468,
+      "Z": 61970,
+      "Y": 1023,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 83533,
+      "Z": 63025,
+      "Y": 627,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 84483,
+      "Z": 63029,
+      "Y": 626,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 84504,
+      "Z": 62033,
+      "Y": 875,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 84504,
+      "Z": 60976,
+      "Y": 1139,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 84518,
+      "Z": 59977,
+      "Y": 1170,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 84472,
+      "Z": 58925,
+      "Y": 907,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 85495,
+      "Z": 58919,
+      "Y": 780,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 85457,
+      "Z": 59955,
+      "Y": 907,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 85522,
+      "Z": 60990,
+      "Y": 891,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 85529,
+      "Z": 61937,
+      "Y": 889,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 85473,
+      "Z": 63006,
+      "Y": 512,
+      "Room": 130,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48636,
+      "Z": 37308,
+      "Y": 1536,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47596,
+      "Z": 37360,
+      "Y": 1536,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46608,
+      "Z": 37391,
+      "Y": 1288,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46623,
+      "Z": 36405,
+      "Y": 1525,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47609,
+      "Z": 36361,
+      "Y": 1787,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48675,
+      "Z": 36346,
+      "Y": 1794,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46646,
+      "Z": 35326,
+      "Y": 1676,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49488,
+      "Z": 36641,
+      "Y": 1394,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47610,
+      "Z": 35397,
+      "Y": 1826,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48603,
+      "Z": 35378,
+      "Y": 1817,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46658,
+      "Z": 34331,
+      "Y": 1424,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47686,
+      "Z": 34323,
+      "Y": 1536,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48731,
+      "Z": 34334,
+      "Y": 1536,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46591,
+      "Z": 33301,
+      "Y": 1285,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47622,
+      "Z": 33337,
+      "Y": 1422,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48598,
+      "Z": 33331,
+      "Y": 1420,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49701,
+      "Z": 33225,
+      "Y": 1256,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49638,
+      "Z": 34326,
+      "Y": 1292,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49701,
+      "Z": 35282,
+      "Y": 1357,
+      "Room": 11,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 44545,
+      "Z": 37295,
+      "Y": 855,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 43516,
+      "Z": 37326,
+      "Y": 999,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 42476,
+      "Z": 37403,
+      "Y": 1037,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41429,
+      "Z": 37289,
+      "Y": 842,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41436,
+      "Z": 38434,
+      "Y": 1143,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 42522,
+      "Z": 38437,
+      "Y": 1280,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 43487,
+      "Z": 38461,
+      "Y": 1399,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 44548,
+      "Z": 38475,
+      "Y": 1406,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45577,
+      "Z": 38391,
+      "Y": 1280,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45581,
+      "Z": 39438,
+      "Y": 1148,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 44542,
+      "Z": 39427,
+      "Y": 1279,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 43476,
+      "Z": 39429,
+      "Y": 1397,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 42542,
+      "Z": 39433,
+      "Y": 1280,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41433,
+      "Z": 39465,
+      "Y": 1142,
+      "Room": 30,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46555,
+      "Z": 42490,
+      "Y": 1261,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46611,
+      "Z": 41455,
+      "Y": 1280,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46574,
+      "Z": 40439,
+      "Y": 1141,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46565,
+      "Z": 39450,
+      "Y": 1266,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46519,
+      "Z": 38433,
+      "Y": 1389,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47625,
+      "Z": 38448,
+      "Y": 1536,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47604,
+      "Z": 39486,
+      "Y": 1536,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47658,
+      "Z": 40452,
+      "Y": 1536,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47610,
+      "Z": 41530,
+      "Y": 1422,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47584,
+      "Z": 42552,
+      "Y": 1536,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48638,
+      "Z": 38403,
+      "Y": 1536,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48664,
+      "Z": 42443,
+      "Y": 1536,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48692,
+      "Z": 41405,
+      "Y": 1391,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48603,
+      "Z": 40497,
+      "Y": 1395,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48637,
+      "Z": 39390,
+      "Y": 1536,
+      "Room": 14,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49645,
+      "Z": 43540,
+      "Y": 1279,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48616,
+      "Z": 43610,
+      "Y": 1385,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47625,
+      "Z": 43562,
+      "Y": 1397,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46505,
+      "Z": 43581,
+      "Y": 1093,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46583,
+      "Z": 44536,
+      "Y": 1145,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47623,
+      "Z": 44597,
+      "Y": 1421,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48627,
+      "Z": 44530,
+      "Y": 1404,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49681,
+      "Z": 44610,
+      "Y": 1292,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49678,
+      "Z": 45581,
+      "Y": 1404,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48682,
+      "Z": 45565,
+      "Y": 1536,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47555,
+      "Z": 45553,
+      "Y": 1536,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46523,
+      "Z": 45637,
+      "Y": 1245,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46517,
+      "Z": 46590,
+      "Y": 1242,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47631,
+      "Z": 46629,
+      "Y": 1536,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48702,
+      "Z": 46629,
+      "Y": 1261,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49721,
+      "Z": 46632,
+      "Y": 1117,
+      "Room": 15,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46602,
+      "Z": 32283,
+      "Y": 1275,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47646,
+      "Z": 32248,
+      "Y": 1409,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48660,
+      "Z": 32183,
+      "Y": 1426,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49726,
+      "Z": 32257,
+      "Y": 1263,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46631,
+      "Z": 31226,
+      "Y": 1417,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47619,
+      "Z": 31249,
+      "Y": 1536,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48617,
+      "Z": 31254,
+      "Y": 1536,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49676,
+      "Z": 31287,
+      "Y": 1404,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46613,
+      "Z": 30220,
+      "Y": 1413,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47620,
+      "Z": 30241,
+      "Y": 1536,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48645,
+      "Z": 30193,
+      "Y": 1536,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49701,
+      "Z": 30166,
+      "Y": 1398,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46558,
+      "Z": 29217,
+      "Y": 1399,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47623,
+      "Z": 29196,
+      "Y": 1536,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48649,
+      "Z": 29189,
+      "Y": 1536,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49716,
+      "Z": 29200,
+      "Y": 1394,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46613,
+      "Z": 28159,
+      "Y": 1413,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47547,
+      "Z": 28210,
+      "Y": 1536,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48599,
+      "Z": 28186,
+      "Y": 1536,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49687,
+      "Z": 28192,
+      "Y": 1402,
+      "Room": 10,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34303,
+      "Z": 38434,
+      "Y": 776,
+      "Room": 66,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33272,
+      "Z": 38463,
+      "Y": 782,
+      "Room": 66,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33283,
+      "Z": 39337,
+      "Y": 899,
+      "Room": 66,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34341,
+      "Z": 39346,
+      "Y": 886,
+      "Room": 66,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34396,
+      "Z": 40464,
+      "Y": 872,
+      "Room": 66,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33227,
+      "Z": 40471,
+      "Y": 882,
+      "Room": 66,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33294,
+      "Z": 41495,
+      "Y": 899,
+      "Room": 66,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34338,
+      "Z": 41522,
+      "Y": 887,
+      "Room": 66,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34262,
+      "Z": 42464,
+      "Y": 906,
+      "Room": 66,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 33289,
+      "Z": 42409,
+      "Y": 898,
+      "Room": 66,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 28120,
+      "Z": 59920,
+      "Y": 1043,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 27099,
+      "Z": 59944,
+      "Y": 1280,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 26115,
+      "Z": 59966,
+      "Y": 1790,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 25073,
+      "Z": 59967,
+      "Y": 2048,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 24080,
+      "Z": 59915,
+      "Y": 1544,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 24066,
+      "Z": 60953,
+      "Y": 1537,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 25055,
+      "Z": 60947,
+      "Y": 1915,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 26061,
+      "Z": 60928,
+      "Y": 1688,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 27154,
+      "Z": 60987,
+      "Y": 1137,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 28225,
+      "Z": 60995,
+      "Y": 846,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 28165,
+      "Z": 61896,
+      "Y": 879,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 27107,
+      "Z": 61917,
+      "Y": 1143,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 26055,
+      "Z": 61933,
+      "Y": 1564,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 25078,
+      "Z": 61907,
+      "Y": 1792,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 24068,
+      "Z": 62010,
+      "Y": 1253,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 25143,
+      "Z": 62988,
+      "Y": 1307,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 26147,
+      "Z": 62998,
+      "Y": 1399,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 27178,
+      "Z": 62962,
+      "Y": 1280,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 28186,
+      "Z": 62994,
+      "Y": 1010,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 28208,
+      "Z": 63997,
+      "Y": 872,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 27165,
+      "Z": 63938,
+      "Y": 1167,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 26155,
+      "Z": 63902,
+      "Y": 1397,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 25058,
+      "Z": 63997,
+      "Y": 1265,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 25136,
+      "Z": 65060,
+      "Y": 1164,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 26144,
+      "Z": 65040,
+      "Y": 1143,
+      "Room": 108,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79344,
+      "Z": 63012,
+      "Y": 1132,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78335,
+      "Z": 63026,
+      "Y": 1626,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77332,
+      "Z": 62985,
+      "Y": 1657,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77319,
+      "Z": 61932,
+      "Y": 2044,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78367,
+      "Z": 61958,
+      "Y": 1921,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79374,
+      "Z": 61882,
+      "Y": 1272,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79385,
+      "Z": 60928,
+      "Y": 1395,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78376,
+      "Z": 60885,
+      "Y": 2048,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77366,
+      "Z": 60962,
+      "Y": 1933,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77299,
+      "Z": 59948,
+      "Y": 1916,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78364,
+      "Z": 59905,
+      "Y": 1792,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79399,
+      "Z": 59912,
+      "Y": 1516,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79342,
+      "Z": 58833,
+      "Y": 1544,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78336,
+      "Z": 58805,
+      "Y": 1901,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77282,
+      "Z": 58864,
+      "Y": 1656,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77346,
+      "Z": 57886,
+      "Y": 1553,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78322,
+      "Z": 57905,
+      "Y": 1792,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79412,
+      "Z": 57846,
+      "Y": 1640,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79402,
+      "Z": 56786,
+      "Y": 1375,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78303,
+      "Z": 56818,
+      "Y": 1792,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77332,
+      "Z": 56841,
+      "Y": 1546,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77303,
+      "Z": 55802,
+      "Y": 1531,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78351,
+      "Z": 55854,
+      "Y": 1908,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79341,
+      "Z": 55824,
+      "Y": 1545,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79354,
+      "Z": 54753,
+      "Y": 1538,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78307,
+      "Z": 54771,
+      "Y": 1792,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77349,
+      "Z": 54809,
+      "Y": 1673,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77359,
+      "Z": 53831,
+      "Y": 1902,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78365,
+      "Z": 53801,
+      "Y": 1909,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79377,
+      "Z": 53746,
+      "Y": 1527,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79387,
+      "Z": 52739,
+      "Y": 1778,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78265,
+      "Z": 52727,
+      "Y": 2048,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77316,
+      "Z": 52755,
+      "Y": 2048,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 77271,
+      "Z": 51721,
+      "Y": 1796,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 78322,
+      "Z": 51710,
+      "Y": 1791,
+      "Room": 103,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 79314,
+      "Z": 51680,
+      "Y": 1543,
+      "Room": 103,
       "RequiresGlitch": false,
       "Difficulty": 0,
       "IsInRoomSpace": false,
@@ -13175,16 +17245,6 @@
       "IsItem": true
     },
     {
-      "X": 48775,
-      "Z": 34358,
-      "Y": -5632,
-      "Room": 30,
-      "RequiresGlitch": false,
-      "Difficulty": 0,
-      "IsInRoomSpace": false,
-      "IsItem": true
-    },
-    {
       "X": 48772,
       "Z": 35399,
       "Y": -5632,
@@ -13207,16 +17267,6 @@
     {
       "X": 48627,
       "Z": 38390,
-      "Y": -5632,
-      "Room": 30,
-      "RequiresGlitch": false,
-      "Difficulty": 0,
-      "IsInRoomSpace": false,
-      "IsItem": true
-    },
-    {
-      "X": 48608,
-      "Z": 39393,
       "Y": -5632,
       "Room": 30,
       "RequiresGlitch": false,
@@ -15789,6 +19839,1706 @@
       "Z": 26118,
       "Y": 4608,
       "Room": 73,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49659,
+      "Z": 21910,
+      "Y": 4608,
+      "Room": 59,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49663,
+      "Z": 20993,
+      "Y": 4608,
+      "Room": 59,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49683,
+      "Z": 18932,
+      "Y": 4608,
+      "Room": 59,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49680,
+      "Z": 17877,
+      "Y": 4608,
+      "Room": 59,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48681,
+      "Z": 18933,
+      "Y": 4608,
+      "Room": 59,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47611,
+      "Z": 18948,
+      "Y": 4608,
+      "Room": 59,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46581,
+      "Z": 18962,
+      "Y": 4608,
+      "Room": 59,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48634,
+      "Z": 17950,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47657,
+      "Z": 17913,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46589,
+      "Z": 18923,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46608,
+      "Z": 20004,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46602,
+      "Z": 21006,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46587,
+      "Z": 22046,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47607,
+      "Z": 19974,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47611,
+      "Z": 20999,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47582,
+      "Z": 22046,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47649,
+      "Z": 23069,
+      "Y": 1536,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48652,
+      "Z": 23032,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48679,
+      "Z": 21981,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48662,
+      "Z": 20997,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49662,
+      "Z": 18874,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49664,
+      "Z": 19944,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49690,
+      "Z": 20975,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49693,
+      "Z": 21999,
+      "Y": 2560,
+      "Room": 79,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50695,
+      "Z": 20983,
+      "Y": 2560,
+      "Room": 80,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50697,
+      "Z": 21990,
+      "Y": 2560,
+      "Room": 80,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50656,
+      "Z": 23016,
+      "Y": 2560,
+      "Room": 80,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45528,
+      "Z": 19964,
+      "Y": 2560,
+      "Room": 120,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45570,
+      "Z": 20997,
+      "Y": 2560,
+      "Room": 120,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45557,
+      "Z": 22061,
+      "Y": 2560,
+      "Room": 120,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 60980,
+      "Z": 19991,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 62012,
+      "Z": 19992,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 63053,
+      "Z": 19989,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 64043,
+      "Z": 19944,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 65101,
+      "Z": 19975,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 66011,
+      "Z": 19936,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 66096,
+      "Z": 18939,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 66092,
+      "Z": 17917,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 65271,
+      "Z": 18207,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 65067,
+      "Z": 18958,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 64060,
+      "Z": 18938,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 63036,
+      "Z": 19022,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 62985,
+      "Z": 17920,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 61981,
+      "Z": 19005,
+      "Y": 4352,
+      "Room": 86,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 70125,
+      "Z": 22980,
+      "Y": 5120,
+      "Room": 139,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 68165,
+      "Z": 23005,
+      "Y": 5120,
+      "Room": 139,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 69219,
+      "Z": 21984,
+      "Y": 5120,
+      "Room": 139,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 68132,
+      "Z": 22002,
+      "Y": 5120,
+      "Room": 139,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 69201,
+      "Z": 22921,
+      "Y": 5120,
+      "Room": 139,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54773,
+      "Z": 28148,
+      "Y": 2304,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54790,
+      "Z": 27120,
+      "Y": 2303,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53745,
+      "Z": 25069,
+      "Y": 2304,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52722,
+      "Z": 25088,
+      "Y": 2304,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51708,
+      "Z": 25057,
+      "Y": 2304,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51716,
+      "Z": 28158,
+      "Y": 1536,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52737,
+      "Z": 28147,
+      "Y": 1536,
+      "Room": 82,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54768,
+      "Z": 26072,
+      "Y": -512,
+      "Room": 83,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54759,
+      "Z": 25075,
+      "Y": -512,
+      "Room": 83,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53741,
+      "Z": 24011,
+      "Y": 1792,
+      "Room": 84,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53746,
+      "Z": 24072,
+      "Y": -512,
+      "Room": 81,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 43516,
+      "Z": 20011,
+      "Y": 4352,
+      "Room": 70,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 42495,
+      "Z": 18989,
+      "Y": 4352,
+      "Room": 70,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41480,
+      "Z": 18971,
+      "Y": 4352,
+      "Room": 70,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41471,
+      "Z": 19991,
+      "Y": 4352,
+      "Room": 70,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 43183,
+      "Z": 19224,
+      "Y": 4352,
+      "Room": 70,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41790,
+      "Z": 20738,
+      "Y": 4352,
+      "Room": 70,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49600,
+      "Z": 36351,
+      "Y": 5888,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48648,
+      "Z": 36347,
+      "Y": 5888,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47612,
+      "Z": 36371,
+      "Y": 5888,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46572,
+      "Z": 36302,
+      "Y": 5120,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48571,
+      "Z": 37363,
+      "Y": 5888,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47584,
+      "Z": 37320,
+      "Y": 5888,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46546,
+      "Z": 37377,
+      "Y": 5376,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46585,
+      "Z": 38408,
+      "Y": 5632,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46612,
+      "Z": 39450,
+      "Y": 5888,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47640,
+      "Z": 39454,
+      "Y": 5888,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47660,
+      "Z": 38421,
+      "Y": 5888,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48624,
+      "Z": 38338,
+      "Y": 5888,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48597,
+      "Z": 39408,
+      "Y": 5888,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48611,
+      "Z": 40430,
+      "Y": 5888,
+      "Room": 37,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48585,
+      "Z": 41458,
+      "Y": 5888,
+      "Room": 40,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50761,
+      "Z": 36337,
+      "Y": 5888,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50729,
+      "Z": 37369,
+      "Y": 5888,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50664,
+      "Z": 38408,
+      "Y": 6144,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50680,
+      "Z": 39432,
+      "Y": 6400,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50696,
+      "Z": 40469,
+      "Y": 6656,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51741,
+      "Z": 41482,
+      "Y": 5888,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52745,
+      "Z": 41455,
+      "Y": 5888,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53808,
+      "Z": 41473,
+      "Y": 5888,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53790,
+      "Z": 40454,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52755,
+      "Z": 40446,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51736,
+      "Z": 40440,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51755,
+      "Z": 39508,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52774,
+      "Z": 39414,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53793,
+      "Z": 39403,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54816,
+      "Z": 39396,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54812,
+      "Z": 38384,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53751,
+      "Z": 38449,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52765,
+      "Z": 38400,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51714,
+      "Z": 38392,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51705,
+      "Z": 37393,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52767,
+      "Z": 37382,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53794,
+      "Z": 37393,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54820,
+      "Z": 37401,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53753,
+      "Z": 36315,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52799,
+      "Z": 36337,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51746,
+      "Z": 36366,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51693,
+      "Z": 35347,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52717,
+      "Z": 35315,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52736,
+      "Z": 34314,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51709,
+      "Z": 34337,
+      "Y": 6912,
+      "Room": 39,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54800,
+      "Z": 35287,
+      "Y": 7424,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54786,
+      "Z": 34293,
+      "Y": 7680,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54794,
+      "Z": 33284,
+      "Y": 7936,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 54711,
+      "Z": 32135,
+      "Y": 8192,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 53754,
+      "Z": 32239,
+      "Y": 8448,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52714,
+      "Z": 32269,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52771,
+      "Z": 33325,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52752,
+      "Z": 34312,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 52724,
+      "Z": 35376,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 51766,
+      "Z": 35302,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 50691,
+      "Z": 35323,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 49655,
+      "Z": 35327,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 48644,
+      "Z": 35330,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 47653,
+      "Z": 35371,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 46598,
+      "Z": 34292,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 45618,
+      "Z": 34278,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 44519,
+      "Z": 34319,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 43513,
+      "Z": 34308,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 43537,
+      "Z": 35290,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 42497,
+      "Z": 35344,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41456,
+      "Z": 35357,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 41479,
+      "Z": 36367,
+      "Y": 8704,
+      "Room": 51,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34275,
+      "Z": 33297,
+      "Y": -256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 35338,
+      "Z": 33291,
+      "Y": 255,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 35334,
+      "Z": 34305,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 35311,
+      "Z": 35335,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34314,
+      "Z": 35335,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 36340,
+      "Z": 33275,
+      "Y": 255,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 36373,
+      "Z": 34294,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 36344,
+      "Z": 35365,
+      "Y": -256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 37409,
+      "Z": 35322,
+      "Y": -256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 37380,
+      "Z": 34311,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 37367,
+      "Z": 33274,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 38404,
+      "Z": 33275,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 38407,
+      "Z": 34313,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 38415,
+      "Z": 35331,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39443,
+      "Z": 35316,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39468,
+      "Z": 34261,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 39450,
+      "Z": 33257,
+      "Y": 256,
+      "Room": 131,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 36372,
+      "Z": 35245,
+      "Y": 256,
+      "Room": 145,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34260,
+      "Z": 35393,
+      "Y": -512,
+      "Room": 145,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34304,
+      "Z": 34316,
+      "Y": -1024,
+      "Room": 145,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 34318,
+      "Z": 34313,
+      "Y": -2048,
+      "Room": 135,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 57879,
+      "Z": 22057,
+      "Y": 5888,
+      "Room": 126,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 58838,
+      "Z": 22018,
+      "Y": 6005,
+      "Room": 126,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 58839,
+      "Z": 23070,
+      "Y": 6005,
+      "Room": 126,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 58866,
+      "Z": 24112,
+      "Y": 6012,
+      "Room": 126,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 58828,
+      "Z": 25154,
+      "Y": 6003,
+      "Room": 126,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 66039,
+      "Z": 25074,
+      "Y": 6144,
+      "Room": 126,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 73194,
+      "Z": 41496,
+      "Y": 6656,
+      "Room": 154,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 73221,
+      "Z": 40442,
+      "Y": 6526,
+      "Room": 154,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 73249,
+      "Z": 39457,
+      "Y": 6519,
+      "Room": 154,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 73219,
+      "Z": 38320,
+      "Y": 6656,
+      "Room": 154,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 73242,
+      "Z": 37419,
+      "Y": 6656,
+      "Room": 154,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 73242,
+      "Z": 36293,
+      "Y": 6521,
+      "Room": 154,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 73248,
+      "Z": 35349,
+      "Y": 6519,
+      "Room": 154,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 73244,
+      "Z": 34280,
+      "Y": 6656,
+      "Room": 154,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 73255,
+      "Z": 33270,
+      "Y": 6656,
+      "Room": 154,
+      "RequiresGlitch": false,
+      "Difficulty": 0,
+      "IsInRoomSpace": false,
+      "IsItem": true
+    },
+    {
+      "X": 73191,
+      "Z": 32239,
+      "Y": 6391,
+      "Room": 154,
       "RequiresGlitch": false,
       "Difficulty": 0,
       "IsInRoomSpace": false,
