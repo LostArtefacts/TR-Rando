@@ -204,6 +204,12 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.TextureSeed = value;
         }
 
+        public bool PersistTextures
+        {
+            get => LevelRandomizer.PersistTextureVariants;
+            set => LevelRandomizer.PersistTextureVariants = value;
+        }
+
         public bool HardSecrets
         {
             get => LevelRandomizer.HardSecrets;

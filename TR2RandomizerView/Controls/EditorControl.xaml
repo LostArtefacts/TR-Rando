@@ -44,7 +44,7 @@
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding UnarmedLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding UnarmedLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomIntMinValue="1"
+            CustomIntMinValue="0"
             CustomIntMaxValue="{Binding LevelCount}"
             CustomIntTitle="Number of levels"/>
 
@@ -58,7 +58,7 @@
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding AmmolessLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding AmmolessLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomIntMinValue="1"
+            CustomIntMinValue="0"
             CustomIntMaxValue="{Binding LevelCount}"
             CustomIntTitle="Number of levels"/>
 
@@ -72,7 +72,7 @@
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding SunsetsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding SunsetCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomIntMinValue="1"
+            CustomIntMinValue="0"
             CustomIntMaxValue="{Binding LevelCount}"
             CustomIntTitle="Number of levels"/>
 
@@ -110,15 +110,17 @@
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding EnemySeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
-        <ctrl:ManagedSeedControl
+        <ctrl:ManagedSeedBoolControl
             Grid.Row="3"
             Grid.Column="1"
             IsActive="{Binding RandomizeTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Textures"
-            Text="Randomly apply a texture pack to each level."
+            Text="Randomly apply texture packs to each level. If you choose to persist textures, each unique texture (e.g. Lara's diving suit) will be randomized only once, otherwise they can be different in each level."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding TextureSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            SeedValue="{Binding TextureSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBool="{Binding PersistTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle="Persist textures"/>
 
         <ctrl:ManagedSeedControl
             Grid.Row="0"

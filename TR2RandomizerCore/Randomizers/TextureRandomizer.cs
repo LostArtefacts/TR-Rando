@@ -15,8 +15,6 @@ namespace TR2RandomizerCore.Randomizers
         public TextureRandomizer()
         {
             _persistentVariants = new Dictionary<AbstractTextureSource, string>();
-
-            PersistVariants = false;
         }
 
         public override void Randomize(int seed)

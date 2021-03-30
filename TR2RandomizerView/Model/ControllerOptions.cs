@@ -13,8 +13,8 @@ namespace TR2RandomizerView.Model
         private readonly ManagedSeedNumeric _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl;
         private readonly ManagedSeedBool _audioTrackControl;
 
-        private readonly ManagedSeed _randomEnemiesControl, _randomTexturesControl;
-        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl;
+        private readonly ManagedSeed _randomEnemiesControl;
+        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomTexturesControl;
 
         private int _levelCount;
 
@@ -294,6 +294,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool PersistTextures
+        {
+            get => _randomTexturesControl.CustomBool;
+            set
+            {
+                _randomTexturesControl.CustomBool = value;
+                FirePropertyChanged();
+            }
+        }
+
         private bool _developmentMode;
         public bool DevelopmentMode
         {
@@ -326,7 +336,7 @@ namespace TR2RandomizerView.Model
             _randomItemsControl = new ManagedSeedBool();
             _randomEnemiesControl = new ManagedSeed();
             _randomSecretsControl = new ManagedSeedBool();
-            _randomTexturesControl = new ManagedSeed();
+            _randomTexturesControl = new ManagedSeedBool();
         }
 
         public void Load(TR2RandomizerController controller)
@@ -370,6 +380,7 @@ namespace TR2RandomizerView.Model
 
             RandomizeTextures = _controller.RandomizeTextures;
             TextureSeed = _controller.TextureSeed;
+            PersistTextures = _controller.PersistTextures;
         }
 
         public void RandomizeActiveSeeds()
@@ -512,6 +523,7 @@ namespace TR2RandomizerView.Model
 
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
+            _controller.PersistTextures = PersistTextures;
 
             _controller.DevelopmentMode = DevelopmentMode;
         }
