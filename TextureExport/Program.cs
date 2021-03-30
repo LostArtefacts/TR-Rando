@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using TRLevelReader;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -18,11 +15,13 @@ namespace TextureExport
             TR2Level instance;
             TR2LevelReader reader = new TR2LevelReader();
 
+            bool htmlMode = args.Length > 1 && args[1].ToLower() == "html";
+
             if (args[0].ToLower().EndsWith(".tr2"))
             {
                 instance = reader.ReadLevel(args[0]);
 
-                ExportAllTexturesToPng(args[0], instance);
+                ExportAllTextures(args[0], instance, htmlMode);
             }
             else if (args[0] == "gold")
             {
@@ -30,7 +29,7 @@ namespace TextureExport
                 {
                     instance = reader.ReadLevel(lvl);
 
-                    ExportAllTexturesToPng(lvl, instance);
+                    ExportAllTextures(lvl, instance, htmlMode);
                 }
             }
             else if (args[0] == "orig")
@@ -39,8 +38,23 @@ namespace TextureExport
                 {
                     instance = reader.ReadLevel(lvl);
 
-                    ExportAllTexturesToPng(lvl, instance);
+                    ExportAllTextures(lvl, instance, htmlMode);
                 }
+            }
+        }
+
+        static void ExportAllTextures(string lvl, TR2Level inst, bool htmlMode)
+        {
+            if (htmlMode)
+            {
+                using (HtmlTileBuilder builder = new HtmlTileBuilder(inst))
+                {
+                    builder.ExportAllTexturesToHtml(lvl);
+                }
+            }
+            else
+            {
+                ExportAllTexturesToPng(lvl, inst);
             }
         }
 
@@ -53,8 +67,8 @@ namespace TextureExport
 
             foreach (TRTexImage16 tex in inst.Images16)
             {
-                Bitmap bmp = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-                var bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), System.Drawing.Imaging.ImageLockMode.WriteOnly, bmp.PixelFormat);
+                Bitmap bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
+                var bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, bmp.PixelFormat);
 
                 List<byte> pixelCollection = new List<byte>();
                 

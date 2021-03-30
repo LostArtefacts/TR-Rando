@@ -1,450 +1,452 @@
 {
-  "Flame": [
-    {
-      "Segment": 0,
-      "Tile": 5,
-      "X": 4,
-      "Y": 66
-    },
-    {
-      "Segment": 1,
-      "Tile": 5,
-      "X": 132,
-      "Y": 2
-    },
-    {
-      "Segment": 2,
-      "Tile": 13,
-      "X": 96,
-      "Y": 80
-    },
-    {
-      "Segment": 3,
-      "Tile": 13,
-      "X": 170,
-      "Y": 81
-    },
-    {
-      "Segment": 4,
-      "Tile": 5,
-      "X": 89,
-      "Y": 68
-    },
-    {
-      "Segment": 5,
-      "Tile": 5,
-      "X": 1,
-      "Y": 128
-    },
-    {
-      "Segment": 6,
-      "Tile": 5,
-      "X": 170,
-      "Y": 66
-    },
-    {
-      "Segment": 7,
-      "Tile": 5,
-      "X": 168,
-      "Y": 120
-    },
-    {
-      "Segment": 8,
-      "Tile": 5,
-      "X": 0,
-      "Y": 184
-    },
-    {
-      "Segment": 9,
-      "Tile": 13,
-      "X": 8,
-      "Y": 93
-    },
-    {
-      "Segment": 10,
-      "Tile": 1,
-      "X": 2,
-      "Y": 67
-    },
-    {
-      "Segment": 11,
-      "Tile": 13,
-      "X": 189,
-      "Y": 135
-    },
-    {
-      "Segment": 12,
-      "Tile": 5,
-      "X": 218,
-      "Y": 6
-    },
-    {
-      "Segment": 13,
-      "Tile": 14,
-      "X": 144,
-      "Y": 4
-    }
-  ],
+  "Static": {
+    "Flame": [
+      {
+        "Segment": 0,
+        "Tile": 5,
+        "X": 4,
+        "Y": 66
+      },
+      {
+        "Segment": 1,
+        "Tile": 5,
+        "X": 132,
+        "Y": 2
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 96,
+        "Y": 80
+      },
+      {
+        "Segment": 3,
+        "Tile": 13,
+        "X": 170,
+        "Y": 81
+      },
+      {
+        "Segment": 4,
+        "Tile": 5,
+        "X": 89,
+        "Y": 68
+      },
+      {
+        "Segment": 5,
+        "Tile": 5,
+        "X": 1,
+        "Y": 128
+      },
+      {
+        "Segment": 6,
+        "Tile": 5,
+        "X": 170,
+        "Y": 66
+      },
+      {
+        "Segment": 7,
+        "Tile": 5,
+        "X": 168,
+        "Y": 120
+      },
+      {
+        "Segment": 8,
+        "Tile": 5,
+        "X": 0,
+        "Y": 184
+      },
+      {
+        "Segment": 9,
+        "Tile": 13,
+        "X": 8,
+        "Y": 93
+      },
+      {
+        "Segment": 10,
+        "Tile": 1,
+        "X": 2,
+        "Y": 67
+      },
+      {
+        "Segment": 11,
+        "Tile": 13,
+        "X": 189,
+        "Y": 135
+      },
+      {
+        "Segment": 12,
+        "Tile": 5,
+        "X": 218,
+        "Y": 6
+      },
+      {
+        "Segment": 13,
+        "Tile": 14,
+        "X": 144,
+        "Y": 4
+      }
+    ],
 
-  "Lara.Bobble": [
-    {
-      "Segment": 0,
-      "Tile": 11,
-      "X": 56,
-      "Y": 211
-    },
-    {
-      "Segment": 1,
-      "Tile": 11,
-      "X": 224,
-      "Y": 129
-    },
-    {
-      "Segment": 1,
-      "Tile": 12,
-      "X": 184,
-      "Y": 145
-    }
-  ],
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 11,
+        "X": 56,
+        "Y": 211
+      },
+      {
+        "Segment": 1,
+        "Tile": 11,
+        "X": 224,
+        "Y": 129
+      },
+      {
+        "Segment": 1,
+        "Tile": 12,
+        "X": 184,
+        "Y": 145
+      }
+    ],
 
-  "Lara.Socks": [
-    {
-      "Segment": 0,
-      "Tile": 10,
-      "X": 240,
-      "Y": 0
-    },
-    {
-      "Segment": 1,
-      "Tile": 11,
-      "X": 48,
-      "Y": 80
-    },
-    {
-      "Segment": 2,
-      "Tile": 11,
-      "X": 96,
-      "Y": 80
-    }
-  ],
+    "Lara.Socks": [
+      {
+        "Segment": 0,
+        "Tile": 10,
+        "X": 240,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 11,
+        "X": 48,
+        "Y": 80
+      },
+      {
+        "Segment": 2,
+        "Tile": 11,
+        "X": 96,
+        "Y": 80
+      }
+    ],
 
-  "Lara.Top.Sun": [
-    {
-      "Segment": 0,
-      "Tile": 8,
-      "X": 3,
-      "Y": 120
-    },
-    {
-      "Segment": 1,
-      "Tile": 8,
-      "X": 64,
-      "Y": 144
-    },
-    {
-      "Segment": 2,
-      "Tile": 10,
-      "X": 32,
-      "Y": 160
-    },
-    {
-      "Segment": 3,
-      "Tile": 10,
-      "X": 168,
-      "Y": 144
-    },
-    {
-      "Segment": 4,
-      "Tile": 9,
-      "X": 232,
-      "Y": 72
-    },
-    {
-      "Segment": 5,
-      "Tile": 8,
-      "X": 248,
-      "Y": 240
-    },
-    {
-      "Segment": 6,
-      "Tile": 10,
-      "X": 136,
-      "Y": 224
-    },
-    {
-      "Segment": 7,
-      "Tile": 11,
-      "X": 56,
-      "Y": 184
-    },
-    {
-      "Segment": 8,
-      "Tile": 10,
-      "X": 96,
-      "Y": 240
-    },
-    {
-      "Segment": 9,
-      "Tile": 12,
-      "X": 0,
-      "Y": 120
-    },
-    {
-      "Segment": 10,
-      "Tile": 10,
-      "X": 104,
-      "Y": 152
-    },
-    {
-      "Segment": 11,
-      "Tile": 10,
-      "X": 64,
-      "Y": 176
-    },
-    {
-      "Segment": 12,
-      "Tile": 10,
-      "X": 96,
-      "Y": 216
-    },
-    {
-      "Segment": 13,
-      "Tile": 6,
-      "X": 208,
-      "Y": 248
-    },
-    {
-      "Segment": 14,
-      "Tile": 8,
-      "X": 128,
-      "Y": 88
-    },
-    {
-      "Segment": 15,
-      "Tile": 8,
-      "X": 184,
-      "Y": 232
-    },
-    {
-      "Segment": 16,
-      "Tile": 11,
-      "X": 216,
-      "Y": 200
-    },
-    {
-      "Segment": 17,
-      "Tile": 8,
-      "X": 168,
-      "Y": 96
-    },
-    {
-      "Segment": 18,
-      "Tile": 9,
-      "X": 192,
-      "Y": 248
-    },
-    {
-      "Segment": 19,
-      "Tile": 10,
-      "X": 104,
-      "Y": 144
-    },
-    {
-      "Segment": 20,
-      "Tile": 10,
-      "X": 216,
-      "Y": 72
-    },
-    {
-      "Segment": 21,
-      "Tile": 11,
-      "X": 232,
-      "Y": 168
-    },
-    {
-      "Segment": 22,
-      "Tile": 11,
-      "X": 200,
-      "Y": 184
-    },
-    {
-      "Segment": 23,
-      "Tile": 11,
-      "X": 176,
-      "Y": 184
-    },
-    {
-      "Segment": 24,
-      "Tile": 12,
-      "X": 232,
-      "Y": 112
-    },
-    {
-      "Segment": 25,
-      "Tile": 10,
-      "X": 74,
-      "Y": 168
-    }
-  ],
+    "Lara.Top.Sun": [
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 3,
+        "Y": 120
+      },
+      {
+        "Segment": 1,
+        "Tile": 8,
+        "X": 64,
+        "Y": 144
+      },
+      {
+        "Segment": 2,
+        "Tile": 10,
+        "X": 32,
+        "Y": 160
+      },
+      {
+        "Segment": 3,
+        "Tile": 10,
+        "X": 168,
+        "Y": 144
+      },
+      {
+        "Segment": 4,
+        "Tile": 9,
+        "X": 232,
+        "Y": 72
+      },
+      {
+        "Segment": 5,
+        "Tile": 8,
+        "X": 248,
+        "Y": 240
+      },
+      {
+        "Segment": 6,
+        "Tile": 10,
+        "X": 136,
+        "Y": 224
+      },
+      {
+        "Segment": 7,
+        "Tile": 11,
+        "X": 56,
+        "Y": 184
+      },
+      {
+        "Segment": 8,
+        "Tile": 10,
+        "X": 96,
+        "Y": 240
+      },
+      {
+        "Segment": 9,
+        "Tile": 12,
+        "X": 0,
+        "Y": 120
+      },
+      {
+        "Segment": 10,
+        "Tile": 10,
+        "X": 104,
+        "Y": 152
+      },
+      {
+        "Segment": 11,
+        "Tile": 10,
+        "X": 64,
+        "Y": 176
+      },
+      {
+        "Segment": 12,
+        "Tile": 10,
+        "X": 96,
+        "Y": 216
+      },
+      {
+        "Segment": 13,
+        "Tile": 6,
+        "X": 208,
+        "Y": 248
+      },
+      {
+        "Segment": 14,
+        "Tile": 8,
+        "X": 128,
+        "Y": 88
+      },
+      {
+        "Segment": 15,
+        "Tile": 8,
+        "X": 184,
+        "Y": 232
+      },
+      {
+        "Segment": 16,
+        "Tile": 11,
+        "X": 216,
+        "Y": 200
+      },
+      {
+        "Segment": 17,
+        "Tile": 8,
+        "X": 168,
+        "Y": 96
+      },
+      {
+        "Segment": 18,
+        "Tile": 9,
+        "X": 192,
+        "Y": 248
+      },
+      {
+        "Segment": 19,
+        "Tile": 10,
+        "X": 104,
+        "Y": 144
+      },
+      {
+        "Segment": 20,
+        "Tile": 10,
+        "X": 216,
+        "Y": 72
+      },
+      {
+        "Segment": 21,
+        "Tile": 11,
+        "X": 232,
+        "Y": 168
+      },
+      {
+        "Segment": 22,
+        "Tile": 11,
+        "X": 200,
+        "Y": 184
+      },
+      {
+        "Segment": 23,
+        "Tile": 11,
+        "X": 176,
+        "Y": 184
+      },
+      {
+        "Segment": 24,
+        "Tile": 12,
+        "X": 232,
+        "Y": 112
+      },
+      {
+        "Segment": 25,
+        "Tile": 10,
+        "X": 74,
+        "Y": 168
+      }
+    ],
 
-  "Skybox": "#206898",
+    "Skybox": "#206898",
 
-  "Vehicles.Boat": [
-    {
-      "Segment": 0,
-      "Tile": 8,
-      "X": 48,
-      "Y": 0
-    },
-    {
-      "Segment": 1,
-      "Tile": 8,
-      "X": 160,
-      "Y": 40
-    },
-    {
-      "Segment": 2,
-      "Tile": 8,
-      "X": 104,
-      "Y": 136
-    },
-    {
-      "Segment": 3,
-      "Tile": 8,
-      "X": 144,
-      "Y": 192
-    },
-    {
-      "Segment": 4,
-      "Tile": 8,
-      "X": 224,
-      "Y": 200
-    },
-    {
-      "Segment": 5,
-      "Tile": 8,
-      "X": 80,
-      "Y": 216
-    },
-    {
-      "Segment": 6,
-      "Tile": 9,
-      "X": 64,
-      "Y": 144
-    },
-    {
-      "Segment": 7,
-      "Tile": 9,
-      "X": 224,
-      "Y": 232
-    },
-    {
-      "Segment": 8,
-      "Tile": 10,
-      "X": 232,
-      "Y": 32
-    },
-    {
-      "Segment": 9,
-      "Tile": 11,
-      "X": 160,
-      "Y": 0
-    },
-    {
-      "Segment": 10,
-      "Tile": 11,
-      "X": 184,
-      "Y": 0
-    },
-    {
-      "Segment": 11,
-      "Tile": 11,
-      "X": 152,
-      "Y": 152
-    },
-    {
-      "Segment": 12,
-      "Tile": 12,
-      "X": 248,
-      "Y": 24
-    }
-  ],
+    "Vehicles.Boat": [
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 48,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 8,
+        "X": 160,
+        "Y": 40
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 104,
+        "Y": 136
+      },
+      {
+        "Segment": 3,
+        "Tile": 8,
+        "X": 144,
+        "Y": 192
+      },
+      {
+        "Segment": 4,
+        "Tile": 8,
+        "X": 224,
+        "Y": 200
+      },
+      {
+        "Segment": 5,
+        "Tile": 8,
+        "X": 80,
+        "Y": 216
+      },
+      {
+        "Segment": 6,
+        "Tile": 9,
+        "X": 64,
+        "Y": 144
+      },
+      {
+        "Segment": 7,
+        "Tile": 9,
+        "X": 224,
+        "Y": 232
+      },
+      {
+        "Segment": 8,
+        "Tile": 10,
+        "X": 232,
+        "Y": 32
+      },
+      {
+        "Segment": 9,
+        "Tile": 11,
+        "X": 160,
+        "Y": 0
+      },
+      {
+        "Segment": 10,
+        "Tile": 11,
+        "X": 184,
+        "Y": 0
+      },
+      {
+        "Segment": 11,
+        "Tile": 11,
+        "X": 152,
+        "Y": 152
+      },
+      {
+        "Segment": 12,
+        "Tile": 12,
+        "X": 248,
+        "Y": 24
+      }
+    ],
 
-  "Venice.Awning": [
-    {
-      "Segment": 0,
-      "Tile": 3,
-      "X": 64,
-      "Y": 128
-    },
-    {
-      "Segment": 1,
-      "Tile": 4,
-      "X": 128,
-      "Y": 0
-    },
-    {
-      "Segment": 2,
-      "Tile": 9,
-      "X": 0,
-      "Y": 160
-    }
-  ],
+    "Venice.Awning": [
+      {
+        "Segment": 0,
+        "Tile": 3,
+        "X": 64,
+        "Y": 128
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 0,
+        "Y": 160
+      }
+    ],
 
-  "Venice.BarberPole": [
-    {
-      "Segment": 0,
-      "Tile": 9,
-      "X": 232,
-      "Y": 0
-    },
-    {
-      "Segment": 1,
-      "Tile": 9,
-      "X": 80,
-      "Y": 0
-    }
-  ],
+    "Venice.BarberPole": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 232,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 9,
+        "X": 80,
+        "Y": 0
+      }
+    ],
 
-  "Venice.Floor": [
-    {
-      "Segment": 0,
-      "Tile": 1,
-      "X": 32,
-      "Y": 128
-    },
-    {
-      "Segment": 1,
-      "Tile": 1,
-      "X": 0,
-      "Y": 160
-    }
-  ],
+    "Venice.Floor": [
+      {
+        "Segment": 0,
+        "Tile": 1,
+        "X": 32,
+        "Y": 128
+      },
+      {
+        "Segment": 1,
+        "Tile": 1,
+        "X": 0,
+        "Y": 160
+      }
+    ],
 
-  "Venice.Sky.Boat": [
-    {
-      "Segment": 1,
-      "Tile": 7,
-      "X": 128,
-      "Y": 128
-    },
-    {
-      "Segment": 2,
-      "Tile": 7,
-      "X": 192,
-      "Y": 128
-    },
-    {
-      "Segment": 3,
-      "Tile": 7,
-      "X": 0,
-      "Y": 192
-    },
-    {
-      "Segment": 4,
-      "Tile": 7,
-      "X": 64,
-      "Y": 192
-    }
-  ]
+    "Venice.Sky.Boat": [
+      {
+        "Segment": 1,
+        "Tile": 7,
+        "X": 128,
+        "Y": 128
+      },
+      {
+        "Segment": 2,
+        "Tile": 7,
+        "X": 192,
+        "Y": 128
+      },
+      {
+        "Segment": 3,
+        "Tile": 7,
+        "X": 0,
+        "Y": 192
+      },
+      {
+        "Segment": 4,
+        "Tile": 7,
+        "X": 64,
+        "Y": 192
+      }
+    ]
+  }
 }

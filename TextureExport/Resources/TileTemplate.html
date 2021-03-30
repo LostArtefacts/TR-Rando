@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>{Title}</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        .tile {
+            display: inline-block;
+            margin: 10px;
+            width: 256px;
+            height: 256px;
+            position: relative;
+        }
+
+        .tile img {
+            display: inline-block;
+            position: absolute;
+        }
+
+        .tile img:hover {
+            outline: 1px solid red;
+            outline-offset: -1px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(document).tooltip({
+                track: true,
+                show: false,
+                hide: false,
+                content: function (callback) {
+                    callback($(this).prop("title").replace(/;/g, "<br />"));
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+{Tiles}
+</body>
+</html>

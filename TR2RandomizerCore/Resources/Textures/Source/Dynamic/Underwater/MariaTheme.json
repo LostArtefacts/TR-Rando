@@ -1,0 +1,28 @@
+{
+  "BlackWhite": {
+    "Saturation": 0
+  },
+  "Dark": {
+    "Saturation": 0,
+    "Brightness": 60
+  },
+  "OrangeBlue": {
+    "Hue": 180,
+    "Saturation": 50
+  },
+  "PinkTeal": {
+    "Hue": -20,
+    "Saturation": 25
+  },
+  "PurpleGreen": {
+    "Hue": 50,
+    "Saturation": 50
+  },
+  "PurpleYellow": {
+    "Hue": 30
+  },
+  "YellowBlue": {
+    "Hue": -160,
+    "Saturation": 75
+  }
+}

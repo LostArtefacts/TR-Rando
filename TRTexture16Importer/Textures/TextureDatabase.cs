@@ -3,40 +3,69 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using TRTexture16Importer.Helpers;
+using TRTexture16Importer.Textures.Source;
 
 namespace TRTexture16Importer.Textures
 {
     public class TextureDatabase : IDisposable
     {
-        private readonly Dictionary<string, TextureSource> _sources;
+        private readonly Dictionary<string, DynamicTextureSource> _dynamicSources;
+        private readonly Dictionary<string, StaticTextureSource> _staticSources;
 
         public TextureDatabase()
         {
-            _sources = new Dictionary<string, TextureSource>();
+            _dynamicSources = new Dictionary<string, DynamicTextureSource>();
+            _staticSources = new Dictionary<string, StaticTextureSource>();
         }
 
         public void Dispose()
         {
-            foreach (TextureSource source in _sources.Values)
+            foreach (StaticTextureSource source in _staticSources.Values)
             {
                 source.Dispose();
             }
         }
 
-        public TextureSource Get(string name)
+        public DynamicTextureSource GetDynamicSource(string name)
         {
             name = name.ToUpper();
-            if (!_sources.ContainsKey(name))
+            if (!_dynamicSources.ContainsKey(name))
             {
-                _sources[name] = LoadSource(name);
+                _dynamicSources[name] = LoadDynamicSource(name);
             }
 
-            return _sources[name];
+            return _dynamicSources[name];
         }
 
-        private TextureSource LoadSource(string name)
+        public StaticTextureSource GetStaticSource(string name)
         {
-            string dir = Path.Combine(@"Resources\Textures\Source", name.Replace(".", @"\"));
+            name = name.ToUpper();
+            if (!_staticSources.ContainsKey(name))
+            {
+                _staticSources[name] = LoadStaticSource(name);
+            }
+
+            return _staticSources[name];
+        }
+
+        private DynamicTextureSource LoadDynamicSource(string name)
+        {
+            string source = @"Resources\Textures\Source\Dynamic\" + name.Replace(".", @"\") + ".json";
+            if (!File.Exists(source))
+            {
+                throw new IOException(string.Format("Missing texture pack source JSON ({0})", source));
+            }
+
+            return new DynamicTextureSource
+            {
+                OperationMap = JsonConvert.DeserializeObject<Dictionary<string, HSBOperation>>(File.ReadAllText(source))
+            };
+        }
+
+        private StaticTextureSource LoadStaticSource(string name)
+        {
+            string dir = Path.Combine(@"Resources\Textures\Source\Static", name.Replace(".", @"\"));
             if (!Directory.Exists(dir))
             {
                 throw new IOException(string.Format("Missing texture pack source folder ({0})", name));
@@ -54,7 +83,7 @@ namespace TRTexture16Importer.Textures
                 throw new IOException(string.Format("Missing texture pack source JSON ({0})", mapping));
             }
 
-            return new TextureSource
+            return new StaticTextureSource
             {
                 PNGPath = png,
                 ChangeSkyBox = png.ToUpper().Contains(@"\SKY\"), // TODO: make explicit in JSON

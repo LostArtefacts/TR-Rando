@@ -1,0 +1,19 @@
+{
+  "BluePink": {
+    "Hue": 156
+  },
+  "Lime": {
+    "Hue": 30
+  },
+  "Orange": {
+    "Hue": -15
+  },
+  "PurpleGreen": {
+    "Hue": 50,
+    "Saturation": 50
+  },
+  "YellowBlue": {
+    "Hue": -160,
+    "Saturation": 75
+  }
+}

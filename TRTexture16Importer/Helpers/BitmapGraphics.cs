@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using TRTexture16Importer.Textures;
+using TRTexture16Importer.Textures.Source;
+using TRTexture16Importer.Textures.Target;
 
 namespace TRTexture16Importer.Helpers
 {
@@ -15,7 +16,30 @@ namespace TRTexture16Importer.Helpers
             Graphics = Graphics.FromImage(Bitmap);
         }
 
-        public void Draw(TextureSource source, TextureTarget target, Rectangle sourceSegment)
+        public void AdjustHSB(Rectangle rect, HSBOperation operation)
+        {
+            int yEnd = rect.Y + rect.Height;
+            int xEnd = rect.X + rect.Width;
+            for (int y = rect.Y; y < yEnd; y++)
+            {
+                for (int x = rect.X; x < xEnd; x++)
+                {
+                    Bitmap.SetPixel(x, y, ApplyHSBOperation(Bitmap.GetPixel(x, y), operation));
+                }
+            }
+        }
+
+        private Color ApplyHSBOperation(Color c, HSBOperation operation)
+        {
+            HSB hsb = c.ToHSB();
+            hsb.H = operation.ModifyHue(hsb.H);
+            hsb.S = operation.ModifySaturation(hsb.S);
+            hsb.B = operation.ModifyBrightness(hsb.B);
+
+            return hsb.ToColour();
+        }
+
+        public void ImportSegment(StaticTextureSource source, StaticTextureTarget target, Rectangle sourceSegment)
         {
             Rectangle sourceRectangle = sourceSegment;
             if (target.ClipRequired)

@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using TRGE.Core;
-using TRLevelReader.Model;
 using TRTexture16Importer.Textures;
+using TRTexture16Importer.Textures.Source;
 
 namespace TR2RandomizerCore.Randomizers
 {
     public class TextureRandomizer : RandomizerBase
     {
-        public bool AllowDefaults { get; set; }
+        private readonly Dictionary<AbstractTextureSource, string> _persistentVariants;
+
+        public bool PersistVariants { get; set; }
+
+        public TextureRandomizer()
+        {
+            _persistentVariants = new Dictionary<AbstractTextureSource, string>();
+
+            PersistVariants = false;
+        }
 
         public override void Randomize(int seed)
         {
-            AllowDefaults = false;
             _generator = new Random(seed);
-            int min = AllowDefaults ? -1 : 0;
-
+            
             // TODO: Split the processing into separate threads to boost performance
 
             using (TextureDatabase textureDatabase = new TextureDatabase())
@@ -34,17 +40,14 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         if (levelMap != null)
                         {
-                            foreach (TextureSource source in levelMap.Mapping.Keys)
+                            foreach (DynamicTextureSource source in levelMap.DynamicMapping.Keys)
                             {
-                                string[] variants = source.Variants;
-                                int rand = _generator.Next(min, variants.Length);
-                                if (rand == -1)
-                                {
-                                    // Leave the standard texture for this particular source.
-                                    continue;
-                                }
+                                levelMap.RedrawDynamicTargets(source, GetSourceVariant(source));
+                            }
 
-                                levelMap.RedrawTargets(source, variants[rand]);
+                            foreach (StaticTextureSource source in levelMap.StaticMapping.Keys)
+                            {
+                                levelMap.RedrawStaticTargets(source, GetSourceVariant(source));
                             }
                         }
                     }
@@ -54,6 +57,23 @@ namespace TR2RandomizerCore.Randomizers
                     SaveMonitor.FireSaveStateChanged(1);
                 }
             }
+        }
+
+        private string GetSourceVariant(AbstractTextureSource source)
+        {
+            if (PersistVariants && _persistentVariants.ContainsKey(source))
+            {
+                return _persistentVariants[source];
+            }
+
+            string[] variants = source.Variants;
+            string variant = variants[_generator.Next(0, variants.Length)];
+
+            if (PersistVariants)
+            {
+                _persistentVariants[source] = variant;
+            }
+            return variant;
         }
     }
 }

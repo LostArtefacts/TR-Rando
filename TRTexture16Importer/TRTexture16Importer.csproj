@@ -46,12 +46,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\BitmapGraphics.cs" />
+    <Compile Include="Helpers\ColourExtensions.cs" />
+    <Compile Include="Helpers\HSB.cs" />
+    <Compile Include="Helpers\HSBOperation.cs" />
     <Compile Include="T16Importer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Textures\Source\AbstractTextureSource.cs" />
+    <Compile Include="Textures\Source\DynamicTextureSource.cs" />
+    <Compile Include="Textures\Target\DynamicTextureTarget.cs" />
     <Compile Include="Textures\TextureDatabase.cs" />
     <Compile Include="Textures\TextureLevelMapping.cs" />
-    <Compile Include="Textures\TextureSource.cs" />
-    <Compile Include="Textures\TextureTarget.cs" />
+    <Compile Include="Textures\Source\StaticTextureSource.cs" />
+    <Compile Include="Textures\Target\StaticTextureTarget.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj">

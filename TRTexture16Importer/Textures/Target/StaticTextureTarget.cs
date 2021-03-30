@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 
-namespace TRTexture16Importer.Textures
+namespace TRTexture16Importer.Textures.Target
 {
-    public class TextureTarget
+    public class StaticTextureTarget
     {
         private static readonly Rectangle _noClip = new Rectangle(-1, -1, 0, 0);
 
@@ -19,7 +19,7 @@ namespace TRTexture16Importer.Textures
 
         public bool ClipRequired => Clip != _noClip;
 
-        public TextureTarget()
+        public StaticTextureTarget()
         {
             Clip = _noClip;
         }
