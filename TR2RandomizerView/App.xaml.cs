@@ -68,8 +68,8 @@ namespace TR2RandomizerView
             TR2RandomizerCoord.Instance.Initialise("TR2Rando", Version, TaggedVersion, new ModificationStamp
             {
                 English = "Modified by TR2Rando",
-                French = "Modifi)e par TR2Rando",
-                German = "Ge~andert von TR2Rando"
+                French = "Modifié par TR2Rando",
+                German = "Geändert von TR2Rando"
             });
         }
     }
