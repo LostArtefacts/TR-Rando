@@ -168,6 +168,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Label Content="Options"
@@ -206,6 +207,16 @@
                             VerticalAlignment="Top"
                             Command="cmds:WindowCommands.CreateGlobalSeed"
                             />
+
+                    <TextBlock Grid.Row="3"
+                               Margin="0,0,15,0"
+                               Text="Disable demos from showing in the title screen to prevent spoilers."
+                               TextWrapping="Wrap"/>
+                    
+                    <CheckBox Grid.Row="3"
+                              Grid.Column="1"
+                              Content="Disable Demos"
+                              IsChecked="{Binding DisableDemos, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 </Grid>
 
                 <Button Grid.Row="2"

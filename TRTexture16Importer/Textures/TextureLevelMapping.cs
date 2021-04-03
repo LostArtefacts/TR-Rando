@@ -81,6 +81,18 @@ namespace TRTexture16Importer.Textures
             };
         }
 
+        public void RedrawTargets(AbstractTextureSource source, string variant)
+        {
+            if (source is DynamicTextureSource dynamicSource)
+            {
+                RedrawDynamicTargets(dynamicSource, variant);
+            }
+            else if (source is StaticTextureSource staticSource)
+            {
+                RedrawStaticTargets(staticSource, variant);
+            }
+        }
+
         public void RedrawDynamicTargets(DynamicTextureSource source, string variant)
         {
             HSBOperation op = source.OperationMap[variant];

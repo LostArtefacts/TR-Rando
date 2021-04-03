@@ -69,7 +69,7 @@ namespace TR2RandomizerCore.Randomizers
             if (RandomizeSecrets)  target += numLevels;
             if (RandomizeItems)    target += numLevels;
             if (RandomizeEnemies)  target += numLevels;
-            if (RandomizeTextures) target += numLevels;
+            if (RandomizeTextures) target += numLevels * 2;
             return target;
         }
 

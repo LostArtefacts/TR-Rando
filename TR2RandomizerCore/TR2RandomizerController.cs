@@ -138,6 +138,12 @@ namespace TR2RandomizerCore
             get => ScriptEditor.RandomGameTracksIncludeBlank;
             set => ScriptEditor.RandomGameTracksIncludeBlank = value;
         }
+
+        public bool DisableDemos
+        {
+            get => !ScriptEditor.DemosEnabled;
+            set => ScriptEditor.DemosEnabled = !value;
+        }
         #endregion
 
         #region LevelRandomizer Passthrough

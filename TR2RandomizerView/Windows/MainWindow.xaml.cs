@@ -246,6 +246,7 @@ namespace TR2RandomizerView.Windows
         {
             IsEditorDirty = e.IsDirty;
             EditorCanExport = e.CanExport;
+            _developmentModeMenuItem.IsChecked = _editorControl.DevelopmentMode;
             if (e.ReloadRequested)
             {
                 _editorControl.Unload();
@@ -370,8 +371,7 @@ namespace TR2RandomizerView.Windows
 
         private void DevelopmentModeCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            DevelopmentModeMenuItem.IsChecked = !DevelopmentModeMenuItem.IsChecked;
-            _editorControl.SetDevelopmentMode(DevelopmentModeMenuItem.IsChecked);
+            _developmentModeMenuItem.IsChecked = _editorControl.DevelopmentMode = !_editorControl.DevelopmentMode;
         }
 
         private void EditorFolder_RequestNavigate(object sender, RequestNavigateEventArgs e)

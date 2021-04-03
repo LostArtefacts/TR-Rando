@@ -57,6 +57,12 @@ namespace TR2RandomizerView.Controls
 
         public TR2RandomizerController Controller;
 
+        public bool DevelopmentMode
+        {
+            get => _options.DevelopmentMode;
+            set => _options.DevelopmentMode = value;
+        }
+
         public EditorControl()
         {
             InitializeComponent();
@@ -286,11 +292,6 @@ namespace TR2RandomizerView.Controls
                     }
                 }
             }
-        }
-
-        public void SetDevelopmentMode(bool flag)
-        {
-            _options.DevelopmentMode = flag;
         }
 
         public void RandomizeAllSeeds()
