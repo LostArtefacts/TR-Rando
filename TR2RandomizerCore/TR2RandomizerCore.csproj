@@ -262,6 +262,10 @@
     <None Include="Resources\Textures\Source\Static\Offshore\Tank\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Static\Secrets\Layers\Segments.psd" />
+    <None Include="Resources\Textures\Source\Static\Secrets\Segments.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Source\Static\Seraph\Layers\Segments.psd" />
     <None Include="Resources\Textures\Source\Static\Seraph\Segments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -517,6 +521,10 @@
     </Content>
     <Content Include="Resources\Textures\Source\Static\Offshore\Tank\Layers\Segments.png" />
     <Content Include="Resources\Textures\Source\Static\Offshore\Tank\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Static\Secrets\Layers\Segments.png" />
+    <Content Include="Resources\Textures\Source\Static\Secrets\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Static\Seraph\Layers\Segments.png" />

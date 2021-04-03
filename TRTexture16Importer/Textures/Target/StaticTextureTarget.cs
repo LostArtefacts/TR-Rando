@@ -19,9 +19,12 @@ namespace TRTexture16Importer.Textures.Target
 
         public bool ClipRequired => Clip != _noClip;
 
+        public bool Clear { get; set; }
+
         public StaticTextureTarget()
         {
             Clip = _noClip;
+            Clear = false;
         }
     }
 }
