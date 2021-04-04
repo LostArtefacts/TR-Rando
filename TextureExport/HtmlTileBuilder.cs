@@ -194,19 +194,19 @@ namespace TextureExport
 
                         StringBuilder tooltip = new StringBuilder();
                         tooltip.Append("Tile: " + tile);
-                        tooltip.Append(string.Format(";Rectangle: [{0}, {1}, {2}, {3}]", mr.R.Y, mr.R.X, mr.R.Width, mr.R.Height));
+                        tooltip.Append(string.Format(";Rectangle: [{0}, {1}, {2}, {3}]", mr.R.X, mr.R.Y, mr.R.Width, mr.R.Height));
 
                         if (mr.ObjectTextureIndices.Count > 0)
                         {
                             string inds = string.Join(", ", mr.ObjectTextureIndices);
                             tiles.Append(string.Format("data-objects=\"{0}\" ", inds));
-                            tooltip.Append(";Object Texture Indices: " + inds);
+                            tooltip.Append(";Object Texture Ind").Append(mr.ObjectTextureIndices.Count == 1 ? "ex: " : "ices: ").Append(inds);
                         }
                         if (mr.SpriteTextureIndices.Count > 0)
                         {
                             string inds = string.Join(", ", mr.SpriteTextureIndices);
                             tiles.Append(string.Format("data-sprites=\"{0}\" ", inds));
-                            tooltip.Append(";Sprite Texture Indices: " + inds);
+                            tooltip.Append(";Sprite Texture Ind").Append(mr.SpriteTextureIndices.Count == 1 ? "ex: " : "ices: ").Append(inds);
                         }
 
                         tiles.Append(string.Format("title=\"{0}\" />", tooltip));

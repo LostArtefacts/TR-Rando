@@ -1,4 +1,7 @@
 {
+  "BlackWhite": {
+    "Saturation": 0
+  },
   "BluePink": {
     "Hue": 156
   },
@@ -6,7 +9,11 @@
     "Hue": 30
   },
   "Orange": {
-    "Hue": -15
+    "Hue": -20
+  },
+  "PinkTeal": {
+    "Hue": -30,
+    "Saturation": 75
   },
   "PurpleGreen": {
     "Hue": 50,

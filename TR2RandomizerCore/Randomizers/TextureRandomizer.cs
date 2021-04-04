@@ -11,11 +11,12 @@ namespace TR2RandomizerCore.Randomizers
 {
     public class TextureRandomizer : RandomizerBase
     {
-        private const uint _maxThreads = 2;
+        private const uint _maxThreads = 3;
 
         private readonly Dictionary<AbstractTextureSource, string> _persistentVariants;
         private readonly object _monitorLock, _drawLock, _writeLock;
         private TextureDatabase _textureDatabase;
+        private Exception _processorException;
 
         public bool PersistVariants { get; set; }
 
@@ -30,7 +31,7 @@ namespace TR2RandomizerCore.Randomizers
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
-
+            
             List<TextureProcessor> processors = new List<TextureProcessor>();
             int levelSplit = (int)(Levels.Count / _maxThreads);
             foreach (TR23ScriptedLevel lvl in Levels)
@@ -63,6 +64,11 @@ namespace TR2RandomizerCore.Randomizers
                     processor.Join();
                 }
             }
+
+            if (_processorException != null)
+            {
+                throw _processorException;
+            }
         }
 
         private string GetSourceVariant(AbstractTextureSource source)
@@ -93,12 +99,31 @@ namespace TR2RandomizerCore.Randomizers
             }
         }
 
+        private void RedrawTargets(TextureLevelMapping mapping, AbstractTextureSource source, string variant)
+        {
+            lock (_drawLock)
+            {
+                mapping.RedrawTargets(source, variant);
+            }
+        }
+
         private bool TriggerProgress()
         {
             lock (_monitorLock)
             {
                 SaveMonitor.FireSaveStateChanged(1);
-                return !SaveMonitor.IsCancelled;
+                return !SaveMonitor.IsCancelled && _processorException == null;
+            }
+        }
+
+        private void HandleException(Exception e)
+        {
+            lock (_monitorLock)
+            {
+                if (_processorException == null)
+                {
+                    _processorException = e;
+                }
             }
         }
 
@@ -135,48 +160,62 @@ namespace TR2RandomizerCore.Randomizers
                 // Load the level mapping and variants outwith the processor thread
                 // to ensure the RNG selected for each level/texture remains consistent
                 // between randomization sessions.
-                List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(_holders.Keys);
-                foreach (TR2CombinedLevel level in levels)
+                try
                 {
-                    TextureLevelMapping mapping = _outer.GetMapping(level);
-                    if (mapping != null)
+                    List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(_holders.Keys);
+                    foreach (TR2CombinedLevel level in levels)
                     {
-                        _holders[level] = new TextureHolder(mapping, _outer);
+                        TextureLevelMapping mapping = _outer.GetMapping(level);
+                        if (mapping != null)
+                        {
+                            _holders[level] = new TextureHolder(mapping, _outer);
+                        }
+                        else
+                        {
+                            _holders.Remove(level);
+                        }
                     }
-                    else
-                    {
-                        _holders.Remove(level);
-                    }
-                }
 
-                _thread.Start();
+                    _thread.Start();
+                }
+                catch (Exception e)
+                {
+                    _outer.HandleException(e);
+                }
             }
 
             internal void Join()
             {
-                _thread.Join();
+                if (_thread.ThreadState != ThreadState.Unstarted)
+                {
+                    _thread.Join();
+                }
             }
 
             private void Process()
             {
-                foreach (TR2CombinedLevel level in _holders.Keys)
+                try
                 {
-                    using (TextureHolder holder = _holders[level])
+                    foreach (TR2CombinedLevel level in _holders.Keys)
                     {
-                        foreach (AbstractTextureSource source in holder.Variants.Keys)
+                        using (TextureHolder holder = _holders[level])
                         {
-                            lock (_outer._drawLock)
+                            foreach (AbstractTextureSource source in holder.Variants.Keys)
                             {
-                                holder.Mapping.RedrawTargets(source, holder.Variants[source]);
+                                _outer.RedrawTargets(holder.Mapping, source, holder.Variants[source]);
                             }
                         }
-                    }
 
-                    _outer.SaveLevel(level.LevelData, level.LevelScript.LevelFileBaseName);
-                    if (!_outer.TriggerProgress())
-                    {
-                        break;
+                        _outer.SaveLevel(level.LevelData, level.LevelScript.LevelFileBaseName);
+                        if (!_outer.TriggerProgress())
+                        {
+                            break;
+                        }
                     }
+                }
+                catch (Exception e)
+                {
+                    _outer.HandleException(e);
                 }
             }
         }
