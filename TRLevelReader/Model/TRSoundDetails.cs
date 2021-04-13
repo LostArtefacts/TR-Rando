@@ -17,6 +17,7 @@ namespace TRLevelReader.Model
         public ushort Chance { get; set; }
 
         public ushort Characteristics { get; set; }
+        public int NumSounds => (Characteristics & 0x00FC) >> 2; // get bits 2-7
 
         public override string ToString()
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using TRTexture16Importer.Textures.Source;
 using TRTexture16Importer.Textures.Target;
 
@@ -58,14 +59,29 @@ namespace TRTexture16Importer.Helpers
                 // For the likes of Golden Mask secrets, which have different
                 // dimensions as compared with the dragons, we need to clear
                 // the rectangle first.
-                GraphicsPath path = new GraphicsPath();
-                path.AddRectangle(targetRectangle);
-                Graphics.SetClip(path);
-                Graphics.Clear(Color.Transparent);
-                Graphics.ResetClip();
+                Delete(targetRectangle);
             }
 
             Graphics.DrawImage(source.Bitmap, targetRectangle, sourceRectangle, GraphicsUnit.Pixel);
+        }
+
+        public void Delete(Rectangle rect)
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddRectangle(rect);
+            Graphics.SetClip(path);
+            Graphics.Clear(Color.Transparent);
+            Graphics.ResetClip();
+        }
+
+        public void Import(Bitmap bitmap, Rectangle rect)
+        {
+            Graphics.DrawImage(bitmap, rect);//, sourceRectangle, GraphicsUnit.Pixel);
+        }
+
+        public Bitmap Extract(Rectangle rect, PixelFormat format = PixelFormat.Format32bppArgb)
+        {
+            return Bitmap.Clone(rect, format);
         }
 
         public void Dispose()

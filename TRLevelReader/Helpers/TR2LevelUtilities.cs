@@ -7,14 +7,71 @@ namespace TRLevelReader.Helpers
 {
     public static class TR2LevelUtilities
     {
-        public static TRMesh GetModelFirstMesh(TR2Level level, TR2Entities entity)
+        public static TRModel GetModel(TR2Level level, TR2Entities entity)
         {
             int i = level.Models.ToList().FindIndex(e => e.ID == (uint)entity);
             if (i != -1)
             {
-                return GetMesh(level, level.Models[i].StartingMesh);
+                return level.Models[i];
             }
             return null;
+        }
+
+        public static TRMesh GetModelFirstMesh(TR2Level level, TR2Entities entity)
+        {
+            TRModel model = GetModel(level, entity);
+            if (model != null)
+            {
+                return GetModelFirstMesh(level, model);
+            }
+            return null;
+        }
+
+        public static TRMesh GetModelFirstMesh(TR2Level level, TRModel model)
+        {
+            return GetMesh(level, model.StartingMesh);
+        }
+
+        public static TRMeshTreeNode[] GetModelMeshTrees(TR2Level level, TR2Entities entity)
+        {
+            TRModel model = GetModel(level, entity);
+            if (model != null)
+            {
+                return GetModelMeshTrees(level, model);
+            }
+            return null;
+        }
+
+        public static TRMeshTreeNode[] GetModelMeshTrees(TR2Level level, TRModel model)
+        {
+            List<TRMeshTreeNode> nodes = new List<TRMeshTreeNode>();
+            int index = (int)model.MeshTree / 4;
+            for (int i = 0; i < model.NumMeshes; i++)
+            {
+                nodes.Add(level.MeshTrees[index + i]);
+            }
+            return nodes.ToArray();
+        }
+
+        public static TRMesh[] GetModelMeshes(TR2Level level, TR2Entities entity)
+        {
+            TRModel model = GetModel(level, entity);
+            if (model != null)
+            {
+                return GetModelMeshes(level, model);
+            }
+            return null;
+        }
+
+        public static TRMesh[] GetModelMeshes(TR2Level level, TRModel model)
+        {
+            List<TRMesh> meshes = new List<TRMesh>();
+            int meshPointer = model.StartingMesh;
+            for (int j = 0; j < model.NumMeshes; j++)
+            {
+                meshes.Add(GetMesh(level, meshPointer + j));
+            }
+            return meshes.ToArray();
         }
 
         public static TRMesh GetMesh(TR2Level level, int meshPointer)
@@ -70,5 +127,7 @@ namespace TRLevelReader.Helpers
 
             return level.MeshTrees.Length - 1;
         }
+
+        
     }
 }

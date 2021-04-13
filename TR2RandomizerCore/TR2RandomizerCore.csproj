@@ -78,6 +78,10 @@
       <Project>{226c4a3a-4fbb-4c15-aed4-c9248eb3a144}</Project>
       <Name>TRLevelReader</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TRModelTransporter\TRModelTransporter.csproj">
+      <Project>{6ce83d8e-30e4-4ce1-9228-8657ef186a17}</Project>
+      <Name>TRModelTransporter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TRTexture16Importer\TRTexture16Importer.csproj">
       <Project>{29f10c62-f4d8-4aca-91ed-6920ae3f1ac0}</Project>
       <Name>TRTexture16Importer</Name>
