@@ -13,8 +13,9 @@ namespace TR2RandomizerView.Model
         private readonly ManagedSeedNumeric _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl;
         private readonly ManagedSeedBool _audioTrackControl;
 
-        private readonly ManagedSeed _randomEnemiesControl, _randomTexturesControl;
-        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl;
+        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl;
+
+        private bool _disableDemos;
 
         private int _levelCount;
 
@@ -274,6 +275,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool CrossLevelEnemies
+        {
+            get => _randomEnemiesControl.CustomBool;
+            set
+            {
+                _randomEnemiesControl.CustomBool = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool RandomizeTextures
         {
             get => _randomTexturesControl.IsActive;
@@ -294,6 +305,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool PersistTextures
+        {
+            get => _randomTexturesControl.CustomBool;
+            set
+            {
+                _randomTexturesControl.CustomBool = value;
+                FirePropertyChanged();
+            }
+        }
+
         private bool _developmentMode;
         public bool DevelopmentMode
         {
@@ -301,6 +322,16 @@ namespace TR2RandomizerView.Model
             set
             {
                 _developmentMode = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool DisableDemos
+        {
+            get => _disableDemos;
+            set
+            {
+                _disableDemos = value;
                 FirePropertyChanged();
             }
         }
@@ -324,9 +355,9 @@ namespace TR2RandomizerView.Model
             _audioTrackControl = new ManagedSeedBool();
 
             _randomItemsControl = new ManagedSeedBool();
-            _randomEnemiesControl = new ManagedSeed();
+            _randomEnemiesControl = new ManagedSeedBool();
             _randomSecretsControl = new ManagedSeedBool();
-            _randomTexturesControl = new ManagedSeed();
+            _randomTexturesControl = new ManagedSeedBool();
         }
 
         public void Load(TR2RandomizerController controller)
@@ -363,6 +394,7 @@ namespace TR2RandomizerView.Model
 
             RandomizeEnemies = _controller.RandomizeEnemies;
             EnemySeed = _controller.EnemySeed;
+            CrossLevelEnemies = _controller.CrossLevelEnemies;
 
             RandomizeSecrets = _controller.RandomizeSecrets;
             SecretSeed = _controller.SecretSeed;
@@ -370,6 +402,10 @@ namespace TR2RandomizerView.Model
 
             RandomizeTextures = _controller.RandomizeTextures;
             TextureSeed = _controller.TextureSeed;
+            PersistTextures = _controller.PersistTextures;
+
+            DevelopmentMode = _controller.DevelopmentMode;
+            DisableDemos = _controller.DisableDemos;
         }
 
         public void RandomizeActiveSeeds()
@@ -505,6 +541,7 @@ namespace TR2RandomizerView.Model
 
             _controller.RandomizeEnemies = RandomizeEnemies;
             _controller.EnemySeed = EnemySeed;
+            _controller.CrossLevelEnemies = CrossLevelEnemies;
 
             _controller.RandomizeSecrets = RandomizeSecrets;
             _controller.SecretSeed = SecretSeed;
@@ -512,8 +549,10 @@ namespace TR2RandomizerView.Model
 
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
+            _controller.PersistTextures = PersistTextures;
 
             _controller.DevelopmentMode = DevelopmentMode;
+            _controller.DisableDemos = DisableDemos;
         }
 
         public void Unload()

@@ -179,7 +179,7 @@
 
                 <MenuItem Header="Development Mode"
                           Command="cmds:WindowCommands.DevelopmentMode"
-                          x:Name="DevelopmentModeMenuItem"
+                          x:Name="_developmentModeMenuItem"
                           ToolTip="Unplayable. Displays all secret and item locations."/>
             </MenuItem>
 

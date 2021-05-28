@@ -44,7 +44,9 @@
     <Compile Include="Helpers\LevelNames.cs" />
     <Compile Include="Helpers\TextileToBitmapConverter.cs" />
     <Compile Include="Helpers\TR2EntityUtilities.cs" />
+    <Compile Include="Helpers\TR2LevelUtilities.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="Model\Enums\TR2AnimCommand.cs" />
     <Compile Include="Model\Enums\TR2Entities.cs" />
     <Compile Include="Model\FixedPointTypes.cs" />
     <Compile Include="Model\TR2Box.cs" />

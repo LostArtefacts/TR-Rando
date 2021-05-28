@@ -1,0 +1,2356 @@
+{
+  "Remapping": [
+    {
+      "OriginalTile": 8,
+      "OriginalIndex": 517,
+      "OriginalBounds": "160, 72, 88, 24",
+      "NewTile": 8,
+      "NewIndex": 546,
+      "NewBounds": "128, 48, 112, 24",
+      "AdjustmentPoint": "128, 48"
+    },
+    {
+      "OriginalTile": 8,
+      "OriginalIndex": 1471,
+      "OriginalBounds": "48, 104, 64, 32",
+      "NewTile": 7,
+      "NewIndex": 1472,
+      "NewBounds": "0, 208, 64, 48",
+      "AdjustmentPoint": "0, 208"
+    },
+    {
+      "OriginalTile": 8,
+      "OriginalIndex": 1109,
+      "OriginalBounds": "0, 120, 48, 40",
+      "NewTile": 8,
+      "NewIndex": 1102,
+      "NewBounds": "0, 64, 48, 56",
+      "AdjustmentPoint": "0, 80"
+    },
+    {
+      "OriginalTile": 8,
+      "OriginalIndex": 508,
+      "OriginalBounds": "24, 168, 64, 24",
+      "NewTile": 8,
+      "NewIndex": 507,
+      "NewBounds": "104, 152, 72, 24",
+      "AdjustmentPoint": "104, 152"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 1134,
+      "OriginalBounds": "0, 0, 16, 88",
+      "NewTile": 7,
+      "NewIndex": 1478,
+      "NewBounds": "208, 0, 32, 96",
+      "AdjustmentPoint": "216, 0"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 185,
+      "OriginalBounds": "48, 0, 40, 32",
+      "NewTile": 9,
+      "NewIndex": 397,
+      "NewBounds": "200, 0, 40, 32",
+      "AdjustmentPoint": "200, 0"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 1047,
+      "OriginalBounds": "48, 32, 32, 40",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "152, 200"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 411,
+      "OriginalBounds": "168, 0, 32, 40",
+      "NewTile": 9,
+      "NewIndex": 207,
+      "NewBounds": "16, 0, 32, 40",
+      "AdjustmentPoint": "16, 0"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 1476,
+      "OriginalBounds": "192, 64, 32, 40",
+      "NewTile": 7,
+      "NewIndex": 1472,
+      "NewBounds": "0, 208, 64, 48",
+      "AdjustmentPoint": "16, 208"
+    },
+    {
+      "OriginalTile": 8,
+      "OriginalIndex": 1073,
+      "OriginalBounds": "232, 192, 24, 48",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "152, 192"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 1396,
+      "OriginalBounds": "144, 104, 48, 24",
+      "NewTile": 8,
+      "NewIndex": 1403,
+      "NewBounds": "24, 216, 48, 32",
+      "AdjustmentPoint": "24, 216"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 186,
+      "OriginalBounds": "192, 104, 32, 32",
+      "NewTile": 9,
+      "NewIndex": 406,
+      "NewBounds": "0, 128, 32, 32",
+      "AdjustmentPoint": "0, 128"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 1159,
+      "OriginalBounds": "96, 192, 64, 16",
+      "NewTile": 7,
+      "NewIndex": 1158,
+      "NewBounds": "80, 64, 64, 64",
+      "AdjustmentPoint": "80, 64"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 1112,
+      "OriginalBounds": "192, 168, 32, 32",
+      "NewTile": 9,
+      "NewIndex": 1113,
+      "NewBounds": "16, 40, 32, 40",
+      "AdjustmentPoint": "16, 40"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 1086,
+      "OriginalBounds": "160, 168, 32, 32",
+      "NewTile": 1,
+      "NewIndex": 1590,
+      "NewBounds": "128, 192, 64, 64",
+      "AdjustmentPoint": "160, 192"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 203,
+      "OriginalBounds": "48, 112, 32, 32",
+      "NewTile": 9,
+      "NewIndex": 407,
+      "NewBounds": "144, 128, 32, 32",
+      "AdjustmentPoint": "144, 128"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 1083,
+      "OriginalBounds": "96, 152, 32, 32",
+      "NewTile": 1,
+      "NewIndex": 1590,
+      "NewBounds": "128, 192, 64, 64",
+      "AdjustmentPoint": "128, 224"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 1085,
+      "OriginalBounds": "0, 160, 32, 32",
+      "NewTile": 1,
+      "NewIndex": 1590,
+      "NewBounds": "128, 192, 64, 64",
+      "AdjustmentPoint": "128, 192"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 1084,
+      "OriginalBounds": "128, 160, 32, 32",
+      "NewTile": 1,
+      "NewIndex": 1590,
+      "NewBounds": "128, 192, 64, 64",
+      "AdjustmentPoint": "160, 224"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 1155,
+      "OriginalBounds": "0, 0, 8, 128",
+      "NewTile": 6,
+      "NewIndex": 1153,
+      "NewBounds": "192, 0, 64, 128",
+      "AdjustmentPoint": "248, 0"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 1540,
+      "OriginalBounds": "104, 0, 64, 16",
+      "NewTile": 6,
+      "NewIndex": 1452,
+      "NewBounds": "0, 224, 64, 32",
+      "AdjustmentPoint": "0, 240"
+    },
+    {
+      "OriginalTile": 6,
+      "OriginalIndex": 1149,
+      "OriginalBounds": "248, 128, 8, 128",
+      "NewTile": 6,
+      "NewIndex": 1147,
+      "NewBounds": "64, 0, 64, 128",
+      "AdjustmentPoint": "64, 0"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 1061,
+      "OriginalBounds": "216, 0, 24, 40",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "160, 200"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 1148,
+      "OriginalBounds": "240, 0, 8, 112",
+      "NewTile": 6,
+      "NewIndex": 1147,
+      "NewBounds": "64, 0, 64, 128",
+      "AdjustmentPoint": "120, 8"
+    },
+    {
+      "OriginalTile": 8,
+      "OriginalIndex": 1137,
+      "OriginalBounds": "248, 40, 8, 112",
+      "NewTile": 6,
+      "NewIndex": 1138,
+      "NewBounds": "0, 0, 64, 128",
+      "AdjustmentPoint": "56, 8"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 168,
+      "OriginalBounds": "176, 88, 24, 32",
+      "NewTile": 10,
+      "NewIndex": 274,
+      "NewBounds": "104, 104, 24, 32",
+      "AdjustmentPoint": "104, 104"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 272,
+      "OriginalBounds": "128, 104, 24, 32",
+      "NewTile": 10,
+      "NewIndex": 171,
+      "NewBounds": "200, 88, 24, 32",
+      "AdjustmentPoint": "200, 88"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 1057,
+      "OriginalBounds": "32, 192, 24, 32",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "160, 208"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 905,
+      "OriginalBounds": "0, 200, 32, 24",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "152, 216"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 711,
+      "OriginalBounds": "112, 168, 24, 32",
+      "NewTile": 9,
+      "NewIndex": 713,
+      "NewBounds": "32, 144, 32, 32",
+      "AdjustmentPoint": "32, 144"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 170,
+      "OriginalBounds": "8, 104, 24, 32",
+      "NewTile": 10,
+      "NewIndex": 277,
+      "NewBounds": "152, 104, 24, 32",
+      "AdjustmentPoint": "152, 104"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 273,
+      "OriginalBounds": "80, 104, 24, 32",
+      "NewTile": 8,
+      "NewIndex": 167,
+      "NewBounds": "0, 224, 24, 32",
+      "AdjustmentPoint": "0, 224"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 169,
+      "OriginalBounds": "208, 40, 24, 32",
+      "NewTile": 10,
+      "NewIndex": 276,
+      "NewBounds": "56, 104, 24, 32",
+      "AdjustmentPoint": "56, 104"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 1111,
+      "OriginalBounds": "200, 200, 32, 24",
+      "NewTile": 9,
+      "NewIndex": 1113,
+      "NewBounds": "16, 40, 32, 40",
+      "AdjustmentPoint": "16, 40"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 700,
+      "OriginalBounds": "56, 160, 32, 24",
+      "NewTile": 9,
+      "NewIndex": 624,
+      "NewBounds": "208, 136, 32, 32",
+      "AdjustmentPoint": "208, 144"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 623,
+      "OriginalBounds": "32, 160, 24, 32",
+      "NewTile": 9,
+      "NewIndex": 624,
+      "NewBounds": "208, 136, 32, 32",
+      "AdjustmentPoint": "208, 136"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 1135,
+      "OriginalBounds": "8, 0, 8, 88",
+      "NewTile": 7,
+      "NewIndex": 1478,
+      "NewBounds": "208, 0, 32, 96",
+      "AdjustmentPoint": "208, 0"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 1133,
+      "OriginalBounds": "0, 0, 8, 88",
+      "NewTile": 7,
+      "NewIndex": 1478,
+      "NewBounds": "208, 0, 32, 96",
+      "AdjustmentPoint": "232, 0"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 1364,
+      "OriginalBounds": "16, 48, 8, 80",
+      "NewTile": 7,
+      "NewIndex": 1367,
+      "NewBounds": "240, 0, 16, 96",
+      "AdjustmentPoint": "240, 16"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 1125,
+      "OriginalBounds": "208, 0, 8, 80",
+      "NewTile": 9,
+      "NewIndex": 1126,
+      "NewBounds": "240, 0, 16, 80",
+      "AdjustmentPoint": "248, 0"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 903,
+      "OriginalBounds": "192, 0, 16, 40",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "168, 200"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 1235,
+      "OriginalBounds": "96, 40, 40, 16",
+      "NewTile": 10,
+      "NewIndex": 1231,
+      "NewBounds": "120, 208, 48, 16",
+      "AdjustmentPoint": "128, 208"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 403,
+      "OriginalBounds": "152, 56, 24, 24",
+      "NewTile": 11,
+      "NewIndex": 177,
+      "NewBounds": "216, 48, 24, 24",
+      "AdjustmentPoint": "216, 48"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 902,
+      "OriginalBounds": "0, 152, 24, 24",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "152, 192"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 416,
+      "OriginalBounds": "24, 64, 24, 24",
+      "NewTile": 11,
+      "NewIndex": 191,
+      "NewBounds": "88, 56, 24, 24",
+      "AdjustmentPoint": "88, 56"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 633,
+      "OriginalBounds": "120, 120, 24, 24",
+      "NewTile": 10,
+      "NewIndex": 636,
+      "NewBounds": "88, 160, 24, 32",
+      "AdjustmentPoint": "88, 168"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 733,
+      "OriginalBounds": "168, 120, 24, 24",
+      "NewTile": 10,
+      "NewIndex": 738,
+      "NewBounds": "136, 160, 32, 24",
+      "AdjustmentPoint": "144, 160"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 658,
+      "OriginalBounds": "216, 96, 24, 24",
+      "NewTile": 10,
+      "NewIndex": 655,
+      "NewBounds": "200, 144, 32, 24",
+      "AdjustmentPoint": "208, 144"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 820,
+      "OriginalBounds": "24, 128, 24, 24",
+      "NewTile": 10,
+      "NewIndex": 825,
+      "NewBounds": "0, 176, 32, 24",
+      "AdjustmentPoint": "8, 176"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 641,
+      "OriginalBounds": "48, 104, 24, 24",
+      "NewTile": 10,
+      "NewIndex": 644,
+      "NewBounds": "232, 144, 24, 32",
+      "AdjustmentPoint": "232, 144"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 685,
+      "OriginalBounds": "96, 120, 24, 24",
+      "NewTile": 10,
+      "NewIndex": 622,
+      "NewBounds": "0, 152, 32, 24",
+      "AdjustmentPoint": "8, 152"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 1045,
+      "OriginalBounds": "24, 152, 24, 24",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "160, 216"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 677,
+      "OriginalBounds": "240, 144, 16, 32",
+      "NewTile": 9,
+      "NewIndex": 624,
+      "NewBounds": "208, 136, 32, 32",
+      "AdjustmentPoint": "208, 136"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 678,
+      "OriginalBounds": "224, 200, 16, 32",
+      "NewTile": 9,
+      "NewIndex": 624,
+      "NewBounds": "208, 136, 32, 32",
+      "AdjustmentPoint": "224, 136"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 1157,
+      "OriginalBounds": "128, 240, 64, 8",
+      "NewTile": 6,
+      "NewIndex": 1153,
+      "NewBounds": "192, 0, 64, 128",
+      "AdjustmentPoint": "192, 0"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 1154,
+      "OriginalBounds": "64, 240, 64, 8",
+      "NewTile": 6,
+      "NewIndex": 1153,
+      "NewBounds": "192, 0, 64, 128",
+      "AdjustmentPoint": "192, 120"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1145,
+      "OriginalBounds": "0, 0, 8, 64",
+      "NewTile": 7,
+      "NewIndex": 1142,
+      "NewBounds": "144, 0, 64, 64",
+      "AdjustmentPoint": "144, 0"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1144,
+      "OriginalBounds": "8, 0, 8, 64",
+      "NewTile": 7,
+      "NewIndex": 1142,
+      "NewBounds": "144, 0, 64, 64",
+      "AdjustmentPoint": "184, 0"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1160,
+      "OriginalBounds": "16, 0, 8, 64",
+      "NewTile": 7,
+      "NewIndex": 1142,
+      "NewBounds": "144, 0, 64, 64",
+      "AdjustmentPoint": "176, 0"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 594,
+      "OriginalBounds": "128, 200, 32, 16",
+      "NewTile": 10,
+      "NewIndex": 565,
+      "NewBounds": "136, 136, 32, 24",
+      "AdjustmentPoint": "136, 136"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 1140,
+      "OriginalBounds": "232, 40, 8, 64",
+      "NewTile": 7,
+      "NewIndex": 1141,
+      "NewBounds": "80, 0, 64, 64",
+      "AdjustmentPoint": "136, 0"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 589,
+      "OriginalBounds": "240, 112, 16, 32",
+      "NewTile": 9,
+      "NewIndex": 606,
+      "NewBounds": "176, 136, 32, 32",
+      "AdjustmentPoint": "176, 136"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 1143,
+      "OriginalBounds": "128, 232, 64, 8",
+      "NewTile": 7,
+      "NewIndex": 1142,
+      "NewBounds": "144, 0, 64, 64",
+      "AdjustmentPoint": "144, 40"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 596,
+      "OriginalBounds": "160, 200, 32, 16",
+      "NewTile": 10,
+      "NewIndex": 565,
+      "NewBounds": "136, 136, 32, 24",
+      "AdjustmentPoint": "136, 144"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 1072,
+      "OriginalBounds": "192, 216, 16, 32",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "168, 208"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 930,
+      "OriginalBounds": "160, 216, 32, 16",
+      "NewTile": 10,
+      "NewIndex": 928,
+      "NewBounds": "168, 192, 32, 24",
+      "AdjustmentPoint": "168, 200"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 923,
+      "OriginalBounds": "64, 224, 32, 16",
+      "NewTile": 10,
+      "NewIndex": 920,
+      "NewBounds": "136, 184, 32, 24",
+      "AdjustmentPoint": "136, 184"
+    },
+    {
+      "OriginalTile": 8,
+      "OriginalIndex": 112,
+      "OriginalBounds": "192, 40, 56, 8",
+      "NewTile": 10,
+      "NewIndex": 111,
+      "NewBounds": "96, 56, 56, 16",
+      "AdjustmentPoint": "96, 56"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 593,
+      "OriginalBounds": "32, 32, 16, 24",
+      "NewTile": 11,
+      "NewIndex": 615,
+      "NewBounds": "176, 0, 16, 40",
+      "AdjustmentPoint": "176, 8"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 979,
+      "OriginalBounds": "176, 136, 24, 16",
+      "NewTile": 11,
+      "NewIndex": 968,
+      "NewBounds": "144, 144, 24, 24",
+      "AdjustmentPoint": "144, 152"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 602,
+      "OriginalBounds": "56, 32, 16, 24",
+      "NewTile": 11,
+      "NewIndex": 603,
+      "NewBounds": "168, 96, 24, 24",
+      "AdjustmentPoint": "176, 96"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 807,
+      "OriginalBounds": "240, 112, 16, 24",
+      "NewTile": 10,
+      "NewIndex": 809,
+      "NewBounds": "56, 184, 32, 24",
+      "AdjustmentPoint": "56, 184"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 826,
+      "OriginalBounds": "184, 88, 16, 24",
+      "NewTile": 10,
+      "NewIndex": 825,
+      "NewBounds": "0, 176, 32, 24",
+      "AdjustmentPoint": "0, 176"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 283,
+      "OriginalBounds": "104, 24, 24, 16",
+      "NewTile": 10,
+      "NewIndex": 233,
+      "NewBounds": "32, 104, 24, 32",
+      "AdjustmentPoint": "32, 104"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 840,
+      "OriginalBounds": "16, 96, 16, 24",
+      "NewTile": 11,
+      "NewIndex": 843,
+      "NewBounds": "48, 128, 24, 24",
+      "AdjustmentPoint": "48, 128"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 816,
+      "OriginalBounds": "224, 88, 16, 24",
+      "NewTile": 10,
+      "NewIndex": 825,
+      "NewBounds": "0, 176, 32, 24",
+      "AdjustmentPoint": "16, 176"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 901,
+      "OriginalBounds": "200, 136, 16, 24",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "152, 192"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 909,
+      "OriginalBounds": "240, 136, 16, 24",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "168, 192"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1124,
+      "OriginalBounds": "216, 160, 16, 24",
+      "NewTile": 9,
+      "NewIndex": 1126,
+      "NewBounds": "240, 0, 16, 80",
+      "AdjustmentPoint": "240, 24"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1059,
+      "OriginalBounds": "152, 144, 24, 16",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "160, 224"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1056,
+      "OriginalBounds": "216, 144, 24, 16",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "160, 192"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1058,
+      "OriginalBounds": "112, 152, 24, 16",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "160, 200"
+    },
+    {
+      "OriginalTile": 2,
+      "OriginalIndex": 64,
+      "OriginalBounds": "152, 112, 24, 16",
+      "NewTile": 2,
+      "NewIndex": 61,
+      "NewBounds": "128, 112, 24, 16",
+      "AdjustmentPoint": "128, 112"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 1049,
+      "OriginalBounds": "120, 88, 8, 48",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "176, 192"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 1065,
+      "OriginalBounds": "248, 96, 8, 48",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "160, 192"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1050,
+      "OriginalBounds": "96, 144, 16, 24",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "168, 216"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1034,
+      "OriginalBounds": "176, 152, 16, 24",
+      "NewTile": 11,
+      "NewIndex": 969,
+      "NewBounds": "168, 144, 24, 24",
+      "AdjustmentPoint": "168, 144"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1504,
+      "OriginalBounds": "0, 216, 48, 8",
+      "NewTile": 11,
+      "NewIndex": 1499,
+      "NewBounds": "192, 248, 64, 8",
+      "AdjustmentPoint": "208, 248"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1505,
+      "OriginalBounds": "160, 208, 16, 24",
+      "NewTile": 12,
+      "NewIndex": 1507,
+      "NewBounds": "56, 0, 16, 32",
+      "AdjustmentPoint": "56, 0"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1482,
+      "OriginalBounds": "112, 208, 48, 8",
+      "NewTile": 10,
+      "NewIndex": 1480,
+      "NewBounds": "80, 224, 48, 16",
+      "AdjustmentPoint": "80, 224"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1017,
+      "OriginalBounds": "152, 128, 24, 16",
+      "NewTile": 11,
+      "NewIndex": 942,
+      "NewBounds": "216, 144, 24, 24",
+      "AdjustmentPoint": "216, 152"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1066,
+      "OriginalBounds": "248, 8, 8, 48",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "168, 192"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 804,
+      "OriginalBounds": "96, 96, 16, 24",
+      "NewTile": 10,
+      "NewIndex": 809,
+      "NewBounds": "56, 184, 32, 24",
+      "AdjustmentPoint": "72, 184"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 668,
+      "OriginalBounds": "144, 48, 16, 24",
+      "NewTile": 10,
+      "NewIndex": 655,
+      "NewBounds": "200, 144, 32, 24",
+      "AdjustmentPoint": "216, 144"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 649,
+      "OriginalBounds": "128, 48, 16, 24",
+      "NewTile": 10,
+      "NewIndex": 655,
+      "NewBounds": "200, 144, 32, 24",
+      "AdjustmentPoint": "200, 144"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 731,
+      "OriginalBounds": "192, 64, 16, 24",
+      "NewTile": 10,
+      "NewIndex": 738,
+      "NewBounds": "136, 160, 32, 24",
+      "AdjustmentPoint": "136, 160"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 718,
+      "OriginalBounds": "160, 88, 24, 16",
+      "NewTile": 10,
+      "NewIndex": 714,
+      "NewBounds": "168, 160, 24, 32",
+      "AdjustmentPoint": "168, 176"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 672,
+      "OriginalBounds": "176, 48, 16, 24",
+      "NewTile": 11,
+      "NewIndex": 673,
+      "NewBounds": "24, 104, 24, 24",
+      "AdjustmentPoint": "24, 104"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 982,
+      "OriginalBounds": "0, 144, 24, 16",
+      "NewTile": 11,
+      "NewIndex": 964,
+      "NewBounds": "120, 144, 24, 24",
+      "AdjustmentPoint": "120, 144"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 751,
+      "OriginalBounds": "232, 64, 16, 24",
+      "NewTile": 10,
+      "NewIndex": 738,
+      "NewBounds": "136, 160, 32, 24",
+      "AdjustmentPoint": "152, 160"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 753,
+      "OriginalBounds": "104, 72, 16, 24",
+      "NewTile": 11,
+      "NewIndex": 756,
+      "NewBounds": "192, 120, 24, 24",
+      "AdjustmentPoint": "192, 120"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1481,
+      "OriginalBounds": "40, 232, 40, 8",
+      "NewTile": 10,
+      "NewIndex": 1480,
+      "NewBounds": "80, 224, 48, 16",
+      "AdjustmentPoint": "80, 224"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1290,
+      "OriginalBounds": "120, 224, 40, 8",
+      "NewTile": 8,
+      "NewIndex": 431,
+      "NewBounds": "24, 248, 48, 8",
+      "AdjustmentPoint": "24, 248"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1531,
+      "OriginalBounds": "248, 208, 8, 40",
+      "NewTile": 8,
+      "NewIndex": 1532,
+      "NewBounds": "176, 152, 40, 40",
+      "AdjustmentPoint": "176, 152"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 506,
+      "OriginalBounds": "224, 208, 8, 40",
+      "NewTile": 10,
+      "NewIndex": 511,
+      "NewBounds": "192, 0, 24, 40",
+      "AdjustmentPoint": "192, 0"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1494,
+      "OriginalBounds": "240, 208, 8, 40",
+      "NewTile": 8,
+      "NewIndex": 1492,
+      "NewBounds": "48, 64, 64, 40",
+      "AdjustmentPoint": "48, 64"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1210,
+      "OriginalBounds": "80, 224, 40, 8",
+      "NewTile": 11,
+      "NewIndex": 1209,
+      "NewBounds": "216, 16, 40, 16",
+      "AdjustmentPoint": "216, 24"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1489,
+      "OriginalBounds": "232, 208, 8, 40",
+      "NewTile": 8,
+      "NewIndex": 1488,
+      "NewBounds": "192, 0, 64, 40",
+      "AdjustmentPoint": "232, 0"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 1324,
+      "OriginalBounds": "0, 232, 40, 8",
+      "NewTile": 11,
+      "NewIndex": 1221,
+      "NewBounds": "0, 176, 72, 8",
+      "AdjustmentPoint": "8, 176"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 775,
+      "OriginalBounds": "160, 32, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 773,
+      "NewBounds": "16, 80, 24, 16",
+      "AdjustmentPoint": "16, 80"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1163,
+      "OriginalBounds": "248, 48, 8, 32",
+      "NewTile": 12,
+      "NewIndex": 1165,
+      "NewBounds": "24, 0, 8, 64",
+      "AdjustmentPoint": "24, 32"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1365,
+      "OriginalBounds": "144, 112, 16, 16",
+      "NewTile": 7,
+      "NewIndex": 1367,
+      "NewBounds": "240, 0, 16, 96",
+      "AdjustmentPoint": "240, 0"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1038,
+      "OriginalBounds": "0, 80, 32, 8",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "152, 192"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1166,
+      "OriginalBounds": "160, 80, 8, 32",
+      "NewTile": 12,
+      "NewIndex": 1165,
+      "NewBounds": "24, 0, 8, 64",
+      "AdjustmentPoint": "24, 0"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1128,
+      "OriginalBounds": "128, 80, 16, 16",
+      "NewTile": 7,
+      "NewIndex": 1478,
+      "NewBounds": "208, 0, 32, 96",
+      "AdjustmentPoint": "216, 56"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1031,
+      "OriginalBounds": "168, 72, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 1028,
+      "NewBounds": "32, 128, 24, 16",
+      "AdjustmentPoint": "32, 128"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 774,
+      "OriginalBounds": "128, 32, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 778,
+      "NewBounds": "40, 80, 24, 16",
+      "AdjustmentPoint": "48, 80"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 761,
+      "OriginalBounds": "48, 32, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 757,
+      "NewBounds": "208, 72, 16, 24",
+      "AdjustmentPoint": "208, 80"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 763,
+      "OriginalBounds": "80, 32, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 764,
+      "NewBounds": "0, 80, 16, 24",
+      "AdjustmentPoint": "0, 88"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1000,
+      "OriginalBounds": "112, 64, 16, 16",
+      "NewTile": 11,
+      "NewIndex": 988,
+      "NewBounds": "48, 152, 24, 24",
+      "AdjustmentPoint": "56, 152"
+    },
+    {
+      "OriginalTile": 14,
+      "OriginalIndex": 63,
+      "OriginalBounds": "112, 143, 16, 16",
+      "NewTile": 5,
+      "NewIndex": 60,
+      "NewBounds": "228, 232, 16, 16",
+      "AdjustmentPoint": "228, 232"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 206,
+      "OriginalBounds": "240, 152, 16, 16",
+      "NewTile": 13,
+      "NewIndex": 410,
+      "NewBounds": "64, 0, 16, 16",
+      "AdjustmentPoint": "64, 0"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 320,
+      "OriginalBounds": "200, 240, 16, 16",
+      "NewTile": 10,
+      "NewIndex": 328,
+      "NewBounds": "176, 120, 48, 16",
+      "AdjustmentPoint": "176, 120"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 802,
+      "OriginalBounds": "144, 248, 32, 8",
+      "NewTile": 10,
+      "NewIndex": 809,
+      "NewBounds": "56, 184, 32, 24",
+      "AdjustmentPoint": "56, 200"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 759,
+      "OriginalBounds": "112, 248, 32, 8",
+      "NewTile": 11,
+      "NewIndex": 765,
+      "NewBounds": "96, 208, 32, 16",
+      "AdjustmentPoint": "96, 208"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 847,
+      "OriginalBounds": "216, 248, 32, 8",
+      "NewTile": 11,
+      "NewIndex": 851,
+      "NewBounds": "128, 216, 32, 16",
+      "AdjustmentPoint": "128, 216"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 214,
+      "OriginalBounds": "128, 232, 16, 16",
+      "NewTile": 13,
+      "NewIndex": 418,
+      "NewBounds": "96, 0, 16, 16",
+      "AdjustmentPoint": "96, 0"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 232,
+      "OriginalBounds": "16, 240, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 260,
+      "NewBounds": "144, 24, 16, 24",
+      "AdjustmentPoint": "144, 32"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 691,
+      "OriginalBounds": "160, 16, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 695,
+      "NewBounds": "0, 64, 24, 16",
+      "AdjustmentPoint": "8, 64"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 426,
+      "OriginalBounds": "80, 0, 16, 16",
+      "NewTile": 11,
+      "NewIndex": 222,
+      "NewBounds": "240, 176, 16, 16",
+      "AdjustmentPoint": "240, 176"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 681,
+      "OriginalBounds": "112, 16, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 680,
+      "NewBounds": "32, 56, 16, 24",
+      "AdjustmentPoint": "32, 56"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1500,
+      "OriginalBounds": "32, 128, 32, 8",
+      "NewTile": 11,
+      "NewIndex": 1499,
+      "NewBounds": "192, 248, 64, 8",
+      "AdjustmentPoint": "200, 248"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 585,
+      "OriginalBounds": "192, 0, 16, 16",
+      "NewTile": 10,
+      "NewIndex": 565,
+      "NewBounds": "136, 136, 32, 24",
+      "AdjustmentPoint": "136, 136"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 727,
+      "OriginalBounds": "192, 32, 16, 16",
+      "NewTile": 11,
+      "NewIndex": 726,
+      "NewBounds": "0, 216, 16, 32",
+      "AdjustmentPoint": "0, 232"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 569,
+      "OriginalBounds": "240, 0, 16, 16",
+      "NewTile": 11,
+      "NewIndex": 615,
+      "NewBounds": "176, 0, 16, 40",
+      "AdjustmentPoint": "176, 0"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 692,
+      "OriginalBounds": "192, 16, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 693,
+      "NewBounds": "96, 56, 24, 16",
+      "AdjustmentPoint": "96, 56"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1161,
+      "OriginalBounds": "144, 80, 16, 16",
+      "NewTile": 6,
+      "NewIndex": 1164,
+      "NewBounds": "0, 128, 72, 96",
+      "AdjustmentPoint": "56, 208"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1069,
+      "OriginalBounds": "64, 72, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 1063,
+      "NewBounds": "24, 144, 24, 16",
+      "AdjustmentPoint": "32, 144"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1070,
+      "OriginalBounds": "80, 72, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 1067,
+      "NewBounds": "48, 144, 24, 16",
+      "AdjustmentPoint": "48, 144"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 860,
+      "OriginalBounds": "64, 48, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 864,
+      "NewBounds": "56, 112, 24, 16",
+      "AdjustmentPoint": "64, 112"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 861,
+      "OriginalBounds": "96, 48, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 862,
+      "NewBounds": "32, 112, 24, 16",
+      "AdjustmentPoint": "32, 112"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 610,
+      "OriginalBounds": "80, 248, 32, 8",
+      "NewTile": 10,
+      "NewIndex": 565,
+      "NewBounds": "136, 136, 32, 24",
+      "AdjustmentPoint": "136, 152"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 359,
+      "OriginalBounds": "48, 0, 16, 16",
+      "NewTile": 10,
+      "NewIndex": 370,
+      "NewBounds": "176, 72, 56, 16",
+      "AdjustmentPoint": "176, 72"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 813,
+      "OriginalBounds": "0, 48, 16, 16",
+      "NewTile": 12,
+      "NewIndex": 848,
+      "NewBounds": "16, 120, 16, 24",
+      "AdjustmentPoint": "16, 120"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 575,
+      "OriginalBounds": "224, 0, 16, 16",
+      "NewTile": 9,
+      "NewIndex": 606,
+      "NewBounds": "176, 136, 32, 32",
+      "AdjustmentPoint": "176, 136"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 929,
+      "OriginalBounds": "200, 64, 32, 8",
+      "NewTile": 10,
+      "NewIndex": 928,
+      "NewBounds": "168, 192, 32, 24",
+      "AdjustmentPoint": "168, 208"
+    },
+    {
+      "OriginalTile": 5,
+      "OriginalIndex": 57,
+      "OriginalBounds": "240, 80, 15, 16",
+      "NewTile": 5,
+      "NewIndex": 56,
+      "NewBounds": "240, 64, 15, 16",
+      "AdjustmentPoint": "240, 64"
+    },
+    {
+      "OriginalTile": 5,
+      "OriginalIndex": 58,
+      "OriginalBounds": "240, 96, 15, 16",
+      "NewTile": 5,
+      "NewIndex": 56,
+      "NewBounds": "240, 64, 15, 16",
+      "AdjustmentPoint": "240, 64"
+    },
+    {
+      "OriginalTile": 8,
+      "OriginalIndex": 435,
+      "OriginalBounds": "24, 160, 24, 8",
+      "NewTile": 13,
+      "NewIndex": 1291,
+      "NewBounds": "0, 104, 32, 8",
+      "AdjustmentPoint": "8, 104"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 391,
+      "OriginalBounds": "80, 32, 8, 24",
+      "NewTile": 6,
+      "NewIndex": 187,
+      "NewBounds": "64, 224, 8, 24",
+      "AdjustmentPoint": "64, 224"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 1019,
+      "OriginalBounds": "96, 192, 24, 8",
+      "NewTile": 12,
+      "NewIndex": 939,
+      "NewBounds": "72, 160, 24, 16",
+      "AdjustmentPoint": "72, 160"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 823,
+      "OriginalBounds": "152, 128, 8, 24",
+      "NewTile": 11,
+      "NewIndex": 843,
+      "NewBounds": "48, 128, 24, 24",
+      "AdjustmentPoint": "56, 128"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 934,
+      "OriginalBounds": "192, 80, 24, 8",
+      "NewTile": 11,
+      "NewIndex": 942,
+      "NewBounds": "216, 144, 24, 24",
+      "AdjustmentPoint": "216, 152"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 910,
+      "OriginalBounds": "56, 136, 8, 24",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "168, 192"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 959,
+      "OriginalBounds": "208, 128, 24, 8",
+      "NewTile": 11,
+      "NewIndex": 964,
+      "NewBounds": "120, 144, 24, 24",
+      "AdjustmentPoint": "120, 144"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1020,
+      "OriginalBounds": "232, 128, 24, 8",
+      "NewTile": 12,
+      "NewIndex": 1030,
+      "NewBounds": "216, 128, 24, 16",
+      "AdjustmentPoint": "216, 128"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1040,
+      "OriginalBounds": "160, 136, 24, 8",
+      "NewTile": 12,
+      "NewIndex": 1067,
+      "NewBounds": "48, 144, 24, 16",
+      "AdjustmentPoint": "48, 144"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 980,
+      "OriginalBounds": "24, 144, 24, 8",
+      "NewTile": 12,
+      "NewIndex": 976,
+      "NewBounds": "0, 160, 24, 16",
+      "AdjustmentPoint": "0, 160"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1048,
+      "OriginalBounds": "208, 136, 24, 8",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "160, 192"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1052,
+      "OriginalBounds": "232, 136, 24, 8",
+      "NewTile": 8,
+      "NewIndex": 1046,
+      "NewBounds": "152, 192, 32, 48",
+      "AdjustmentPoint": "160, 208"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 973,
+      "OriginalBounds": "112, 144, 24, 8",
+      "NewTile": 11,
+      "NewIndex": 969,
+      "NewBounds": "168, 144, 24, 24",
+      "AdjustmentPoint": "168, 160"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 972,
+      "OriginalBounds": "32, 136, 24, 8",
+      "NewTile": 12,
+      "NewIndex": 976,
+      "NewBounds": "0, 160, 24, 16",
+      "AdjustmentPoint": "0, 168"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 967,
+      "OriginalBounds": "0, 144, 24, 8",
+      "NewTile": 12,
+      "NewIndex": 947,
+      "NewBounds": "112, 136, 24, 16",
+      "AdjustmentPoint": "112, 144"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1178,
+      "OriginalBounds": "184, 136, 8, 24",
+      "NewTile": 12,
+      "NewIndex": 1165,
+      "NewBounds": "24, 0, 8, 64",
+      "AdjustmentPoint": "24, 0"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 1018,
+      "OriginalBounds": "200, 192, 24, 8",
+      "NewTile": 12,
+      "NewIndex": 1036,
+      "NewBounds": "24, 160, 24, 16",
+      "AdjustmentPoint": "24, 160"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 719,
+      "OriginalBounds": "200, 136, 24, 8",
+      "NewTile": 10,
+      "NewIndex": 714,
+      "NewBounds": "168, 160, 24, 32",
+      "AdjustmentPoint": "168, 184"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 921,
+      "OriginalBounds": "64, 144, 24, 8",
+      "NewTile": 11,
+      "NewIndex": 942,
+      "NewBounds": "216, 144, 24, 24",
+      "AdjustmentPoint": "216, 160"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1369,
+      "OriginalBounds": "192, 152, 24, 8",
+      "NewTile": 12,
+      "NewIndex": 1361,
+      "NewBounds": "88, 200, 24, 16",
+      "AdjustmentPoint": "88, 208"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1520,
+      "OriginalBounds": "168, 152, 8, 24",
+      "NewTile": 11,
+      "NewIndex": 1518,
+      "NewBounds": "168, 176, 24, 24",
+      "AdjustmentPoint": "168, 176"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1344,
+      "OriginalBounds": "64, 152, 24, 8",
+      "NewTile": 12,
+      "NewIndex": 1345,
+      "NewBounds": "88, 184, 24, 16",
+      "AdjustmentPoint": "88, 184"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 736,
+      "OriginalBounds": "104, 128, 8, 24",
+      "NewTile": 11,
+      "NewIndex": 756,
+      "NewBounds": "192, 120, 24, 24",
+      "AdjustmentPoint": "200, 120"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1352,
+      "OriginalBounds": "144, 152, 24, 8",
+      "NewTile": 12,
+      "NewIndex": 1347,
+      "NewBounds": "112, 192, 24, 16",
+      "AdjustmentPoint": "112, 200"
+    },
+    {
+      "OriginalTile": 8,
+      "OriginalIndex": 271,
+      "OriginalBounds": "88, 168, 16, 8",
+      "NewTile": 9,
+      "NewIndex": 279,
+      "NewBounds": "64, 248, 80, 8",
+      "AdjustmentPoint": "96, 248"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1244,
+      "OriginalBounds": "240, 168, 8, 16",
+      "NewTile": 13,
+      "NewIndex": 1243,
+      "NewBounds": "32, 96, 16, 16",
+      "AdjustmentPoint": "40, 96"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 666,
+      "OriginalBounds": "240, 152, 8, 16",
+      "NewTile": 13,
+      "NewIndex": 646,
+      "NewBounds": "64, 16, 16, 16",
+      "AdjustmentPoint": "64, 16"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1424,
+      "OriginalBounds": "144, 184, 16, 8",
+      "NewTile": 10,
+      "NewIndex": 1422,
+      "NewBounds": "8, 0, 16, 64",
+      "AdjustmentPoint": "8, 8"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1425,
+      "OriginalBounds": "176, 184, 16, 8",
+      "NewTile": 10,
+      "NewIndex": 1422,
+      "NewBounds": "8, 0, 16, 64",
+      "AdjustmentPoint": "8, 48"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1007,
+      "OriginalBounds": "192, 160, 8, 16",
+      "NewTile": 12,
+      "NewIndex": 1028,
+      "NewBounds": "32, 128, 24, 16",
+      "AdjustmentPoint": "48, 128"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1427,
+      "OriginalBounds": "192, 184, 16, 8",
+      "NewTile": 10,
+      "NewIndex": 1420,
+      "NewBounds": "24, 0, 16, 64",
+      "AdjustmentPoint": "24, 56"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1011,
+      "OriginalBounds": "160, 160, 8, 16",
+      "NewTile": 13,
+      "NewIndex": 995,
+      "NewBounds": "48, 72, 16, 16",
+      "AdjustmentPoint": "56, 72"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 769,
+      "OriginalBounds": "200, 96, 16, 8",
+      "NewTile": 12,
+      "NewIndex": 764,
+      "NewBounds": "0, 80, 16, 24",
+      "AdjustmentPoint": "0, 96"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1326,
+      "OriginalBounds": "8, 184, 16, 8",
+      "NewTile": 11,
+      "NewIndex": 1209,
+      "NewBounds": "216, 16, 40, 16",
+      "AdjustmentPoint": "232, 24"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 317,
+      "OriginalBounds": "176, 128, 16, 8",
+      "NewTile": 10,
+      "NewIndex": 328,
+      "NewBounds": "176, 120, 48, 16",
+      "AdjustmentPoint": "176, 120"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 361,
+      "OriginalBounds": "128, 152, 16, 8",
+      "NewTile": 12,
+      "NewIndex": 373,
+      "NewBounds": "184, 8, 56, 8",
+      "AdjustmentPoint": "184, 8"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 981,
+      "OriginalBounds": "184, 160, 8, 16",
+      "NewTile": 11,
+      "NewIndex": 968,
+      "NewBounds": "144, 144, 24, 24",
+      "AdjustmentPoint": "160, 152"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 780,
+      "OriginalBounds": "0, 160, 16, 8",
+      "NewTile": 12,
+      "NewIndex": 778,
+      "NewBounds": "40, 80, 24, 16",
+      "AdjustmentPoint": "48, 88"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1362,
+      "OriginalBounds": "72, 184, 16, 8",
+      "NewTile": 7,
+      "NewIndex": 1367,
+      "NewBounds": "240, 0, 16, 96",
+      "AdjustmentPoint": "240, 80"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1252,
+      "OriginalBounds": "0, 176, 8, 16",
+      "NewTile": 10,
+      "NewIndex": 1251,
+      "NewBounds": "64, 88, 56, 16",
+      "AdjustmentPoint": "112, 88"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1240,
+      "OriginalBounds": "176, 168, 8, 16",
+      "NewTile": 10,
+      "NewIndex": 1241,
+      "NewBounds": "8, 88, 56, 16",
+      "AdjustmentPoint": "56, 88"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1211,
+      "OriginalBounds": "232, 160, 8, 16",
+      "NewTile": 11,
+      "NewIndex": 1209,
+      "NewBounds": "216, 16, 40, 16",
+      "AdjustmentPoint": "248, 16"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1217,
+      "OriginalBounds": "96, 168, 16, 8",
+      "NewTile": 13,
+      "NewIndex": 1218,
+      "NewBounds": "168, 88, 16, 16",
+      "AdjustmentPoint": "168, 88"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 836,
+      "OriginalBounds": "16, 160, 8, 16",
+      "NewTile": 13,
+      "NewIndex": 815,
+      "NewBounds": "240, 32, 16, 16",
+      "AdjustmentPoint": "240, 32"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1039,
+      "OriginalBounds": "200, 160, 8, 16",
+      "NewTile": 12,
+      "NewIndex": 1063,
+      "NewBounds": "24, 144, 24, 16",
+      "AdjustmentPoint": "24, 144"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 749,
+      "OriginalBounds": "248, 152, 8, 16",
+      "NewTile": 13,
+      "NewIndex": 728,
+      "NewBounds": "16, 32, 16, 16",
+      "AdjustmentPoint": "16, 32"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1327,
+      "OriginalBounds": "24, 184, 16, 8",
+      "NewTile": 11,
+      "NewIndex": 1325,
+      "NewBounds": "192, 40, 16, 40",
+      "AdjustmentPoint": "192, 40"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1366,
+      "OriginalBounds": "56, 184, 16, 8",
+      "NewTile": 7,
+      "NewIndex": 1367,
+      "NewBounds": "240, 0, 16, 96",
+      "AdjustmentPoint": "240, 8"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1323,
+      "OriginalBounds": "216, 176, 16, 8",
+      "NewTile": 10,
+      "NewIndex": 471,
+      "NewBounds": "200, 224, 32, 8",
+      "AdjustmentPoint": "208, 224"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1114,
+      "OriginalBounds": "224, 160, 8, 16",
+      "NewTile": 11,
+      "NewIndex": 1106,
+      "NewBounds": "96, 224, 32, 16",
+      "AdjustmentPoint": "96, 224"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 480,
+      "OriginalBounds": "80, 208, 8, 16",
+      "NewTile": 12,
+      "NewIndex": 339,
+      "NewBounds": "64, 240, 16, 16",
+      "AdjustmentPoint": "72, 240"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 609,
+      "OriginalBounds": "48, 64, 16, 8",
+      "NewTile": 12,
+      "NewIndex": 618,
+      "NewBounds": "128, 216, 32, 8",
+      "AdjustmentPoint": "128, 216"
+    },
+    {
+      "OriginalTile": 11,
+      "OriginalIndex": 697,
+      "OriginalBounds": "0, 120, 16, 8",
+      "NewTile": 12,
+      "NewIndex": 695,
+      "NewBounds": "0, 64, 24, 16",
+      "AdjustmentPoint": "8, 72"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 452,
+      "OriginalBounds": "120, 56, 8, 16",
+      "NewTile": 13,
+      "NewIndex": 459,
+      "NewBounds": "128, 0, 16, 16",
+      "AdjustmentPoint": "128, 0"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 372,
+      "OriginalBounds": "232, 48, 8, 16",
+      "NewTile": 10,
+      "NewIndex": 370,
+      "NewBounds": "176, 72, 56, 16",
+      "AdjustmentPoint": "224, 72"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 487,
+      "OriginalBounds": "224, 72, 8, 16",
+      "NewTile": 13,
+      "NewIndex": 488,
+      "NewBounds": "144, 0, 16, 16",
+      "AdjustmentPoint": "152, 0"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1501,
+      "OriginalBounds": "240, 184, 16, 8",
+      "NewTile": 11,
+      "NewIndex": 1499,
+      "NewBounds": "192, 248, 64, 8",
+      "AdjustmentPoint": "208, 248"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1127,
+      "OriginalBounds": "48, 168, 16, 8",
+      "NewTile": 9,
+      "NewIndex": 1126,
+      "NewBounds": "240, 0, 16, 80",
+      "AdjustmentPoint": "240, 8"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 896,
+      "OriginalBounds": "72, 160, 16, 8",
+      "NewTile": 13,
+      "NewIndex": 891,
+      "NewBounds": "232, 48, 16, 16",
+      "AdjustmentPoint": "232, 48"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 892,
+      "OriginalBounds": "96, 160, 16, 8",
+      "NewTile": 13,
+      "NewIndex": 891,
+      "NewBounds": "232, 48, 16, 16",
+      "AdjustmentPoint": "232, 56"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 866,
+      "OriginalBounds": "24, 160, 16, 8",
+      "NewTile": 12,
+      "NewIndex": 864,
+      "NewBounds": "56, 112, 24, 16",
+      "AdjustmentPoint": "64, 120"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 855,
+      "OriginalBounds": "56, 160, 16, 8",
+      "NewTile": 13,
+      "NewIndex": 870,
+      "NewBounds": "152, 48, 16, 16",
+      "AdjustmentPoint": "152, 48"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1289,
+      "OriginalBounds": "112, 176, 8, 16",
+      "NewTile": 10,
+      "NewIndex": 433,
+      "NewBounds": "152, 240, 40, 16",
+      "AdjustmentPoint": "152, 240"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1101,
+      "OriginalBounds": "208, 160, 16, 8",
+      "NewTile": 12,
+      "NewIndex": 1098,
+      "NewBounds": "72, 16, 56, 8",
+      "AdjustmentPoint": "72, 16"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1517,
+      "OriginalBounds": "0, 192, 16, 8",
+      "NewTile": 12,
+      "NewIndex": 1521,
+      "NewBounds": "72, 0, 64, 8",
+      "AdjustmentPoint": "72, 0"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1215,
+      "OriginalBounds": "136, 168, 16, 8",
+      "NewTile": 11,
+      "NewIndex": 1223,
+      "NewBounds": "120, 168, 72, 8",
+      "AdjustmentPoint": "128, 168"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1013,
+      "OriginalBounds": "248, 192, 8, 8",
+      "NewTile": 11,
+      "NewIndex": 969,
+      "NewBounds": "168, 144, 24, 24",
+      "AdjustmentPoint": "168, 152"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 32,
+      "OriginalBounds": "224, 168, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 353,
+      "NewBounds": "128, 112, 8, 8",
+      "AdjustmentPoint": "128, 112"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 35,
+      "OriginalBounds": "232, 104, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 323,
+      "NewBounds": "152, 96, 8, 8",
+      "AdjustmentPoint": "152, 96"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 54,
+      "OriginalBounds": "192, 160, 8, 8",
+      "NewTile": 11,
+      "NewIndex": 87,
+      "NewBounds": "0, 184, 32, 16",
+      "AdjustmentPoint": "8, 192"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 183,
+      "OriginalBounds": "192, 240, 8, 8",
+      "NewTile": 13,
+      "NewIndex": 387,
+      "NewBounds": "72, 192, 8, 8",
+      "AdjustmentPoint": "72, 192"
+    },
+    {
+      "OriginalTile": 10,
+      "OriginalIndex": 7,
+      "OriginalBounds": "0, 128, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 11,
+      "NewBounds": "160, 232, 16, 16",
+      "AdjustmentPoint": "160, 240"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 387,
+      "OriginalBounds": "72, 192, 8, 8",
+      "NewTile": 13,
+      "NewIndex": 418,
+      "NewBounds": "96, 0, 16, 16",
+      "AdjustmentPoint": "96, 4"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1005,
+      "OriginalBounds": "8, 200, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 945,
+      "NewBounds": "56, 128, 24, 16",
+      "AdjustmentPoint": "72, 128"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1003,
+      "OriginalBounds": "16, 200, 8, 8",
+      "NewTile": 13,
+      "NewIndex": 989,
+      "NewBounds": "232, 64, 16, 16",
+      "AdjustmentPoint": "232, 72"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1232,
+      "OriginalBounds": "192, 200, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 1234,
+      "NewBounds": "128, 16, 56, 8",
+      "AdjustmentPoint": "165, 16"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1014,
+      "OriginalBounds": "216, 192, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 998,
+      "NewBounds": "176, 248, 24, 8",
+      "AdjustmentPoint": "176, 248"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 324,
+      "OriginalBounds": "88, 176, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 331,
+      "NewBounds": "128, 8, 56, 8",
+      "AdjustmentPoint": "165, 8"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1182,
+      "OriginalBounds": "120, 200, 8, 8",
+      "NewTile": 13,
+      "NewIndex": 1183,
+      "NewBounds": "48, 144, 8, 24",
+      "AdjustmentPoint": "48, 160"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 343,
+      "OriginalBounds": "160, 112, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 339,
+      "NewBounds": "64, 240, 16, 16",
+      "AdjustmentPoint": "72, 240"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 952,
+      "OriginalBounds": "240, 192, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 939,
+      "NewBounds": "72, 160, 24, 16",
+      "AdjustmentPoint": "72, 160"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 951,
+      "OriginalBounds": "232, 192, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 945,
+      "NewBounds": "56, 128, 24, 16",
+      "AdjustmentPoint": "56, 128"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1479,
+      "OriginalBounds": "160, 208, 8, 8",
+      "NewTile": 10,
+      "NewIndex": 1480,
+      "NewBounds": "80, 224, 48, 16",
+      "AdjustmentPoint": "80, 224"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 620,
+      "OriginalBounds": "200, 192, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 618,
+      "NewBounds": "128, 216, 32, 8",
+      "AdjustmentPoint": "136, 216"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 327,
+      "OriginalBounds": "64, 80, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 428,
+      "NewBounds": "192, 152, 8, 8",
+      "AdjustmentPoint": "192, 152"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 310,
+      "OriginalBounds": "248, 248, 8, 8",
+      "NewTile": 11,
+      "NewIndex": 350,
+      "NewBounds": "40, 232, 8, 16",
+      "AdjustmentPoint": "40, 240"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1229,
+      "OriginalBounds": "248, 200, 8, 8",
+      "NewTile": 13,
+      "NewIndex": 1175,
+      "NewBounds": "112, 200, 8, 8",
+      "AdjustmentPoint": "112, 200"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 428,
+      "OriginalBounds": "192, 152, 8, 8",
+      "NewTile": 11,
+      "NewIndex": 21,
+      "NewBounds": "64, 48, 24, 24",
+      "AdjustmentPoint": "67, 55"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 8,
+      "OriginalBounds": "88, 64, 8, 8",
+      "NewTile": 11,
+      "NewIndex": 106,
+      "NewBounds": "48, 72, 40, 8",
+      "AdjustmentPoint": "48, 72"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 353,
+      "OriginalBounds": "128, 112, 8, 8",
+      "NewTile": 13,
+      "NewIndex": 410,
+      "NewBounds": "64, 0, 16, 16",
+      "AdjustmentPoint": "64, 0"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 230,
+      "OriginalBounds": "80, 88, 8, 8",
+      "NewTile": 6,
+      "NewIndex": 281,
+      "NewBounds": "64, 248, 80, 8",
+      "AdjustmentPoint": "64, 248"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 246,
+      "OriginalBounds": "200, 88, 8, 8",
+      "NewTile": 9,
+      "NewIndex": 279,
+      "NewBounds": "64, 248, 80, 8",
+      "AdjustmentPoint": "104, 248"
+    },
+    {
+      "OriginalTile": 12,
+      "OriginalIndex": 247,
+      "OriginalBounds": "136, 88, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 260,
+      "NewBounds": "144, 24, 16, 24",
+      "AdjustmentPoint": "152, 24"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 503,
+      "OriginalBounds": "192, 192, 8, 8",
+      "NewTile": 8,
+      "NewIndex": 526,
+      "NewBounds": "160, 96, 88, 24",
+      "AdjustmentPoint": "160, 112"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 308,
+      "OriginalBounds": "224, 184, 8, 8",
+      "NewTile": 10,
+      "NewIndex": 328,
+      "NewBounds": "176, 120, 48, 16",
+      "AdjustmentPoint": "176, 128"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1502,
+      "OriginalBounds": "168, 208, 8, 8",
+      "NewTile": 11,
+      "NewIndex": 1499,
+      "NewBounds": "192, 248, 64, 8",
+      "AdjustmentPoint": "192, 248"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 898,
+      "OriginalBounds": "208, 192, 8, 8",
+      "NewTile": 13,
+      "NewIndex": 891,
+      "NewBounds": "232, 48, 16, 16",
+      "AdjustmentPoint": "232, 56"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 307,
+      "OriginalBounds": "248, 112, 8, 8",
+      "NewTile": 11,
+      "NewIndex": 350,
+      "NewBounds": "40, 232, 8, 16",
+      "AdjustmentPoint": "40, 232"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 961,
+      "OriginalBounds": "0, 200, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 1023,
+      "NewBounds": "192, 160, 24, 16",
+      "AdjustmentPoint": "192, 160"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 497,
+      "OriginalBounds": "168, 192, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 496,
+      "NewBounds": "208, 24, 16, 24",
+      "AdjustmentPoint": "208, 29"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1175,
+      "OriginalBounds": "112, 200, 8, 8",
+      "NewTile": 13,
+      "NewIndex": 783,
+      "NewBounds": "144, 128, 8, 24",
+      "AdjustmentPoint": "144, 137"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1162,
+      "OriginalBounds": "48, 200, 8, 8",
+      "NewTile": 6,
+      "NewIndex": 1164,
+      "NewBounds": "0, 128, 72, 96",
+      "AdjustmentPoint": "64, 216"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1191,
+      "OriginalBounds": "152, 200, 8, 8",
+      "NewTile": 13,
+      "NewIndex": 1192,
+      "NewBounds": "160, 200, 8, 8",
+      "AdjustmentPoint": "160, 200"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1177,
+      "OriginalBounds": "88, 200, 8, 8",
+      "NewTile": 15,
+      "NewIndex": 142,
+      "NewBounds": "240, 48, 8, 16",
+      "AdjustmentPoint": "240, 55"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1187,
+      "OriginalBounds": "144, 200, 8, 8",
+      "NewTile": 13,
+      "NewIndex": 1184,
+      "NewBounds": "128, 200, 8, 8",
+      "AdjustmentPoint": "128, 200"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1288,
+      "OriginalBounds": "24, 208, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 1276,
+      "NewBounds": "48, 176, 16, 24",
+      "AdjustmentPoint": "48, 181"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1228,
+      "OriginalBounds": "184, 200, 8, 8",
+      "NewTile": 11,
+      "NewIndex": 1209,
+      "NewBounds": "216, 16, 40, 16",
+      "AdjustmentPoint": "224, 24"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 460,
+      "OriginalBounds": "112, 192, 8, 8",
+      "NewTile": 12,
+      "NewIndex": 437,
+      "NewBounds": "48, 64, 8, 16",
+      "AdjustmentPoint": "48, 72"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1099,
+      "OriginalBounds": "24, 200, 8, 8",
+      "NewTile": 13,
+      "NewIndex": 1096,
+      "NewBounds": "32, 80, 16, 16",
+      "AdjustmentPoint": "32, 80"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1224,
+      "OriginalBounds": "176, 200, 8, 8",
+      "NewTile": 11,
+      "NewIndex": 1223,
+      "NewBounds": "120, 168, 72, 8",
+      "AdjustmentPoint": "120, 168"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 1184,
+      "OriginalBounds": "128, 200, 8, 8",
+      "NewTile": 11,
+      "NewIndex": 1190,
+      "NewBounds": "216, 0, 40, 16",
+      "AdjustmentPoint": "216, 0"
+    },
+    {
+      "OriginalTile": 13,
+      "OriginalIndex": 955,
+      "OriginalBounds": "224, 192, 8, 8",
+      "NewTile": 11,
+      "NewIndex": 942,
+      "NewBounds": "216, 144, 24, 24",
+      "AdjustmentPoint": "224, 144"
+    }
+  ],
+  "Dependencies": [
+    {
+      "Entities": [
+        17,
+        121,
+        154,
+        159
+      ],
+      "TileIndex": 13,
+      "Bounds": "144, 128, 8, 24"
+    }
+  ]
+}

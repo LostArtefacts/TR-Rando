@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using TR2RandomizerCore.Helpers;
 using TR2RandomizerCore.Randomizers;
 using TRGE.Coord;
 using TRGE.Core;
+using TRLevelReader.Helpers;
 
 namespace TR2RandomizerCore
 {
@@ -138,6 +140,12 @@ namespace TR2RandomizerCore
             get => ScriptEditor.RandomGameTracksIncludeBlank;
             set => ScriptEditor.RandomGameTracksIncludeBlank = value;
         }
+
+        public bool DisableDemos
+        {
+            get => !ScriptEditor.DemosEnabled;
+            set => ScriptEditor.DemosEnabled = !value;
+        }
         #endregion
 
         #region LevelRandomizer Passthrough
@@ -204,6 +212,12 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.TextureSeed = value;
         }
 
+        public bool PersistTextures
+        {
+            get => LevelRandomizer.PersistTextureVariants;
+            set => LevelRandomizer.PersistTextureVariants = value;
+        }
+
         public bool HardSecrets
         {
             get => LevelRandomizer.HardSecrets;
@@ -220,6 +234,12 @@ namespace TR2RandomizerCore
         {
             get => LevelRandomizer.DevelopmentMode;
             set => LevelRandomizer.DevelopmentMode = value;
+        }
+
+        public bool CrossLevelEnemies
+        {
+            get => LevelRandomizer.CrossLevelEnemies;
+            set => LevelRandomizer.CrossLevelEnemies = value;
         }
         #endregion
 

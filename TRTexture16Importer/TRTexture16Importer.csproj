@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -42,8 +45,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="P16Importer.cs" />
+    <Compile Include="Helpers\BitmapGraphics.cs" />
+    <Compile Include="Helpers\ColourExtensions.cs" />
+    <Compile Include="Helpers\HSB.cs" />
+    <Compile Include="Helpers\HSBOperation.cs" />
     <Compile Include="T16Importer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Textures\Source\AbstractTextureSource.cs" />
+    <Compile Include="Textures\Source\DynamicTextureSource.cs" />
+    <Compile Include="Textures\Target\DynamicTextureTarget.cs" />
+    <Compile Include="Textures\TextureDatabase.cs" />
+    <Compile Include="Textures\TextureGrouping.cs" />
+    <Compile Include="Textures\TextureLevelMapping.cs" />
+    <Compile Include="Textures\Source\StaticTextureSource.cs" />
+    <Compile Include="Textures\Target\StaticTextureTarget.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj">
@@ -51,5 +67,9 @@
       <Name>TRLevelReader</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

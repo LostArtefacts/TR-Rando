@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Windows;
+using System.Windows.Shell;
 using TR2RandomizerCore;
 using TR2RandomizerCore.Helpers;
 using TR2RandomizerView.Model;
@@ -66,6 +67,10 @@ namespace TR2RandomizerView.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             WindowUtils.TidyMenu(this);
+            Owner.TaskbarItemInfo = new TaskbarItemInfo
+            {
+                ProgressState = TaskbarItemProgressState.Normal
+            };
             new Thread(Randomize).Start();
         }
 
@@ -92,6 +97,7 @@ namespace TR2RandomizerView.Windows
                     WindowUtils.EnableCloseButton(this, true);
                     if (error != null)
                     {
+                        Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Error;
                         MessageWindow.ShowError(error.Message);
                         DialogResult = false;
                     }
@@ -99,6 +105,7 @@ namespace TR2RandomizerView.Windows
                     {
                         DialogResult = !_cancelled;
                     }
+                    Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
                 });
             }
         }
@@ -117,6 +124,8 @@ namespace TR2RandomizerView.Windows
                 {
                     ProgressTarget = e.ProgressTarget;
                     ProgressValue = e.ProgressValue;
+                    Owner.TaskbarItemInfo.ProgressValue = ((double)ProgressValue) / ProgressTarget;
+
                     if (e.CustomDescription != null)
                     {
                         ProgressDescription = e.CustomDescription;

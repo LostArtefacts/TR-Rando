@@ -57,6 +57,12 @@ namespace TR2RandomizerView.Controls
 
         public TR2RandomizerController Controller;
 
+        public bool DevelopmentMode
+        {
+            get => _options.DevelopmentMode;
+            set => _options.DevelopmentMode = value;
+        }
+
         public EditorControl()
         {
             InitializeComponent();
@@ -145,6 +151,14 @@ namespace TR2RandomizerView.Controls
             {
                 ShowInvalidSelectionMessage();
                 return false;
+            }
+
+            if (_options.DevelopmentMode)
+            {
+                if (!MessageWindow.ShowConfirm("Development mode is switched on and so the generated level files will not be playable.\n\nDo you wish to continue?"))
+                {
+                    return false;
+                }
             }
 
             RandomizeProgressWindow spw = new RandomizeProgressWindow(Controller, _options);
@@ -286,11 +300,6 @@ namespace TR2RandomizerView.Controls
                     }
                 }
             }
-        }
-
-        public void SetDevelopmentMode(bool flag)
-        {
-            _options.DevelopmentMode = flag;
         }
 
         public void RandomizeAllSeeds()

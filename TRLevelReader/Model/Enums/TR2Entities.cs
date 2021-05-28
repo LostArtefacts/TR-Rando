@@ -100,6 +100,7 @@ namespace TRLevelReader.Model.Enums
         BouncePad,
         SpikyCeiling,
         TibetanBell,
+        SnowmobileWake_S_H = 90,
         SnowmobileBelt = 91,
         WheelKnob,
         SmallWallSwitch,
@@ -241,12 +242,14 @@ namespace TRLevelReader.Model.Enums
         FlareSparks_S_H = 235,
         Glow_S_H,
         Ricochet_S_H = 238,
+        XianGuardSparkles_S_H = 239, // shows when XianGuardSword is hovering
         Gunflare_H = 240,
         M16Gunflare_H,
         CameraTarget_N = 243,
         WaterfallMist_N,
-        Harpoon_U,
-        Placeholder2_N = 247,
+        ScubaHarpoonProjectile_H, // a repeat of HarpoonProjectile_H
+        FireBlast_S_H, // a repeat of Explosion_S_H, used by Dragon and Flamethrower
+        KnifeProjectile_H = 247, // thrown by Knifethrower in Floater/DL
         GrenadeProjectile_H,
         HarpoonProjectile_H,
         LavaParticles_S_H,
@@ -262,6 +265,28 @@ namespace TRLevelReader.Model.Enums
         Winston,
         LaraCutscenePlacement_N = 262,
         ShotgunShowerAnimation_H,
-        DragonExplosionEmitter_N
+        DragonExplosionEmitter_N,
+
+        // We split some entities here to allow us to differentiate between the different textures they
+        // use. Entity type IDs within levels must always be TigerOrSnowLeopard for the first 3, or
+        // StickWieldingGoon1 for the rest - these aliases should only be used for selecting the models.
+        BengalTiger = 1000, 
+        SnowLeopard,        
+        WhiteTiger,
+        StickWieldingGoon1Bandana,
+        StickWieldingGoon1BlackJacket,
+        StickWieldingGoon1BodyWarmer,
+        StickWieldingGoon1GreenVest,
+        StickWieldingGoon1WhiteVest,
+        BarracudaUnwater, //40F, MD, LQ, Deck
+        BarracudaIce,     //CoT, Ice Palace
+        BarracudaXian,    //Temple
+
+        // These splits allow us to import misc animations into levels that do not have LaraMiscAnim_H
+        // already defined, otherwise Lara tends to void when killed by these enemies and this sometimes crashes
+        // the game. For levels that already have misc animations, the death animation will default to "normal".
+        LaraMiscAnim_H_Ice = 2000, // Death-by-Yeti, Gong action
+        LaraMiscAnim_H_Unwater,    // Death-by-Shark, opening wheel door
+        LaraMiscAnim_H_Xian        // Death-by-Guard, inspecting dagger
     }
 }

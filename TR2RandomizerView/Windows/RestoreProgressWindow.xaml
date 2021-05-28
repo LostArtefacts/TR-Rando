@@ -10,17 +10,55 @@
         Loaded="Window_Loaded"
         Closing="Window_Closing"
         Icon="..\Resources\rando.ico"
-        Title="Restoring Data Folder" Height="110" Width="400">
+        Title="Restoring Data Folder" Height="100" Width="400">
 
-    <StackPanel Margin="10">
-        <TextBlock
+    <Grid Margin="10,10,10,15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock 
             Text="{Binding ProgressDescription}"
-            FontSize="12"/>
+            FontSize="12"
+            VerticalAlignment="Bottom"/>
+
+        <Image
+            Grid.Column="1"
+            Source="..\Resources\loading.png"
+            Width="16"
+            Height="16"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            RenderTransformOrigin="0.5, 0.5">
+            <Image.RenderTransform>
+                <RotateTransform x:Name="noFreeze" />
+            </Image.RenderTransform>
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Image.RenderTransform).(RotateTransform.Angle)"
+                                To="360" 
+                                Duration="0:0:1" 
+                                RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Image.Triggers>
+        </Image>
 
         <ProgressBar 
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Stretch"
             Margin="0,5,0,0"
             Value="{Binding ProgressValue}" 
-            Maximum="{Binding ProgressTarget}"
-            Height="20"/>
-    </StackPanel>
+            Maximum="{Binding ProgressTarget}"/>
+    </Grid>
 </Window>

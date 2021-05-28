@@ -1,0 +1,730 @@
+{
+  "Grouping": [
+    {
+      "Leader": "Fire.Explosion",
+      "Followers": [
+        "Fire.Flame"
+      ]
+    },
+    {
+      "Leader": "Lara.Top.Sun",
+      "Followers": [
+        "Lara.Socks"
+      ]
+    }
+  ],
+
+  "Static": {
+    "Enemies.Steve": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 216,
+        "Y": 168
+      },
+      {
+        "Segment": 1,
+        "Tile": 9,
+        "X": 72,
+        "Y": 192
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 96,
+        "Y": 192
+      },
+      {
+        "Segment": 3,
+        "Tile": 10,
+        "X": 208,
+        "Y": 160
+      },
+      {
+        "Segment": 4,
+        "Tile": 11,
+        "X": 192,
+        "Y": 96
+      },
+      {
+        "Segment": 5,
+        "Tile": 7,
+        "X": 224,
+        "Y": 128
+      },
+      {
+        "Segment": 6,
+        "Tile": 8,
+        "X": 120,
+        "Y": 152
+      },
+      {
+        "Segment": 7,
+        "Tile": 7,
+        "X": 248,
+        "Y": 0
+      },
+      {
+        "Segment": 8,
+        "Tile": 9,
+        "X": 0,
+        "Y": 192
+      },
+      {
+        "Segment": 9,
+        "Tile": 11,
+        "X": 80,
+        "Y": 112
+      },
+      {
+        "Segment": 10,
+        "Tile": 10,
+        "X": 152,
+        "Y": 160
+      },
+      {
+        "Segment": 11,
+        "Tile": 12,
+        "X": 128,
+        "Y": 8
+      }
+    ],
+
+    "Enemies.StickGoon.Bandana": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 0,
+        "Y": 112
+      },
+      {
+        "Segment": 1,
+        "Tile": 7,
+        "X": 160,
+        "Y": 160
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 208,
+        "Y": 0
+      },
+      {
+        "Segment": 3,
+        "Tile": 7,
+        "X": 160,
+        "Y": 40
+      },
+      {
+        "Segment": 4,
+        "Tile": 11,
+        "X": 32,
+        "Y": 40
+      },
+      {
+        "Segment": 5,
+        "Tile": 11,
+        "X": 32,
+        "Y": 160
+      },
+      {
+        "Segment": 6,
+        "Tile": 10,
+        "X": 64,
+        "Y": 96
+      },
+      {
+        "Segment": 7,
+        "Tile": 11,
+        "X": 0,
+        "Y": 168
+      },
+      {
+        "Segment": 8,
+        "Tile": 10,
+        "X": 88,
+        "Y": 232
+      },
+      {
+        "Segment": 9,
+        "Tile": 10,
+        "X": 216,
+        "Y": 224
+      },
+      {
+        "Segment": 10,
+        "Tile": 9,
+        "X": 192,
+        "Y": 0
+      },
+      {
+        "Segment": 11,
+        "Tile": 9,
+        "X": 224,
+        "Y": 0
+      },
+      {
+        "Segment": 12,
+        "Tile": 11,
+        "X": 32,
+        "Y": 168
+      },
+      {
+        "Segment": 13,
+        "Tile": 9,
+        "X": 128,
+        "Y": 0
+      }
+    ],
+
+    "Fire.Explosion": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 156,
+        "Y": 66
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 68,
+        "Y": 66
+      },
+      {
+        "Segment": 2,
+        "Tile": 12,
+        "X": 161,
+        "Y": 80
+      },
+      {
+        "Segment": 3,
+        "Tile": 12,
+        "X": 2,
+        "Y": 121
+      },
+      {
+        "Segment": 4,
+        "Tile": 4,
+        "X": 1,
+        "Y": 132
+      },
+      {
+        "Segment": 5,
+        "Tile": 4,
+        "X": 81,
+        "Y": 128
+      },
+      {
+        "Segment": 6,
+        "Tile": 4,
+        "X": 170,
+        "Y": 130
+      },
+      {
+        "Segment": 7,
+        "Tile": 4,
+        "X": 80,
+        "Y": 184
+      },
+      {
+        "Segment": 8,
+        "Tile": 4,
+        "X": 0,
+        "Y": 192
+      },
+      {
+        "Segment": 9,
+        "Tile": 12,
+        "X": 169,
+        "Y": 133
+      },
+      {
+        "Segment": 10,
+        "Tile": 12,
+        "X": 2,
+        "Y": 200
+      },
+      {
+        "Segment": 11,
+        "Tile": 12,
+        "X": 68,
+        "Y": 209
+      },
+      {
+        "Segment": 12,
+        "Tile": 13,
+        "X": 0,
+        "Y": 44
+      },
+      {
+        "Segment": 13,
+        "Tile": 13,
+        "X": 220,
+        "Y": 58
+      }
+    ],
+
+    "Fire.Flame": [
+      {
+        "Segment": 0,
+        "Tile": 13,
+        "X": 228,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 13,
+        "X": 40,
+        "Y": 125
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 111,
+        "Y": 134
+      },
+      {
+        "Segment": 3,
+        "Tile": 13,
+        "X": 135,
+        "Y": 134
+      },
+      {
+        "Segment": 4,
+        "Tile": 13,
+        "X": 159,
+        "Y": 134
+      },
+      {
+        "Segment": 5,
+        "Tile": 13,
+        "X": 183,
+        "Y": 134
+      }
+    ],
+
+    "Fire.Flare": [
+      {
+        "Segment": 0,
+        "Tile": 12,
+        "X": 40,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 12,
+        "X": 96,
+        "Y": 8
+      },
+      {
+        "Segment": 2,
+        "Tile": 11,
+        "X": 208,
+        "Y": 216
+      },
+      {
+        "Segment": 3,
+        "Tile": 11,
+        "X": 192,
+        "Y": 216
+      },
+      {
+        "Segment": 4,
+        "Tile": 13,
+        "X": 59,
+        "Y": 78
+      },
+      {
+        "Segment": 5,
+        "Tile": 11,
+        "X": 216,
+        "Y": 16
+      }
+    ],
+
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 10,
+        "X": 216,
+        "Y": 147
+      },
+      {
+        "Segment": 1,
+        "Tile": 11,
+        "X": 32,
+        "Y": 81
+      }
+    ],
+
+    "Lara.Socks": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 48,
+        "Y": 160
+      },
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 224,
+        "Y": 168
+      },
+      {
+        "Segment": 2,
+        "Tile": 7,
+        "X": 192,
+        "Y": 40
+      }
+    ],
+
+    "Lara.Top.Sun": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 147,
+        "Y": 232
+      },
+      {
+        "Segment": 1,
+        "Tile": 9,
+        "X": 200,
+        "Y": 48
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 192,
+        "Y": 64
+      },
+      {
+        "Segment": 3,
+        "Tile": 9,
+        "X": 112,
+        "Y": 56,
+        "Clip": "0, 0, 40, 16"
+      },
+      {
+        "Segment": 3,
+        "Tile": 9,
+        "X": 0,
+        "Y": 72,
+        "Clip": "0, 16, 40, 16"
+      },
+      {
+        "Segment": 4,
+        "Tile": 11,
+        "X": 224,
+        "Y": 32
+      },
+      {
+        "Segment": 5,
+        "Tile": 8,
+        "X": 248,
+        "Y": 72
+      },
+      {
+        "Segment": 6,
+        "Tile": 12,
+        "X": 56,
+        "Y": 56
+      },
+      {
+        "Segment": 7,
+        "Tile": 10,
+        "X": 128,
+        "Y": 112,
+        "Clip": "24, 0, 24, 16"
+      },
+      {
+        "Segment": 7,
+        "Tile": 9,
+        "X": 64,
+        "Y": 56,
+        "Clip": "0, 0, 24, 16"
+      },
+      {
+        "Segment": 8,
+        "Tile": 6,
+        "X": 144,
+        "Y": 184
+      },
+      {
+        "Segment": 9,
+        "Tile": 11,
+        "X": 128,
+        "Y": 56
+      },
+      {
+        "Segment": 10,
+        "Tile": 9,
+        "X": 152,
+        "Y": 64
+      },
+      {
+        "Segment": 11,
+        "Tile": 10,
+        "X": 120,
+        "Y": 120
+      },
+      {
+        "Segment": 12,
+        "Tile": 10,
+        "X": 208,
+        "Y": 152
+      },
+      {
+        "Segment": 13,
+        "Tile": 11,
+        "X": 144,
+        "Y": 32
+      },
+      {
+        "Segment": 14,
+        "Tile": 8,
+        "X": 48,
+        "Y": 104
+      },
+      {
+        "Segment": 15,
+        "Tile": 11,
+        "X": 184,
+        "Y": 32
+      },
+      {
+        "Segment": 16,
+        "Tile": 10,
+        "X": 152,
+        "Y": 232
+      },
+      {
+        "Segment": 17,
+        "Tile": 8,
+        "X": 80,
+        "Y": 56
+      },
+      {
+        "Segment": 18,
+        "Tile": 8,
+        "X": 0,
+        "Y": 248
+      },
+      {
+        "Segment": 19,
+        "Tile": 9,
+        "X": 112,
+        "Y": 112
+      },
+      {
+        "Segment": 20,
+        "Tile": 8,
+        "X": 80,
+        "Y": 144
+      },
+      {
+        "Segment": 21,
+        "Tile": 7,
+        "X": 0,
+        "Y": 64
+      },
+      {
+        "Segment": 22,
+        "Tile": 10,
+        "X": 192,
+        "Y": 136
+      },
+      {
+        "Segment": 23,
+        "Tile": 10,
+        "X": 168,
+        "Y": 136
+      },
+      {
+        "Segment": 24,
+        "Tile": 11,
+        "X": 240,
+        "Y": 48
+      },
+      {
+        "Segment": 25,
+        "Tile": 9,
+        "X": 42,
+        "Y": 72
+      }
+    ],
+
+    "Offshore.Cordon": [
+      {
+        "Segment": 0,
+        "Tile": 0,
+        "X": 0,
+        "Y": 192
+      },
+      {
+        "Segment": 1,
+        "Tile": 0,
+        "X": 128,
+        "Y": 192
+      },
+      {
+        "Segment": 2,
+        "Tile": 0,
+        "X": 64,
+        "Y": 192
+      },
+      {
+        "Segment": 3,
+        "Tile": 5,
+        "X": 136,
+        "Y": 162
+      },
+      {
+        "Segment": 4,
+        "Tile": 3,
+        "X": 0,
+        "Y": 6
+      },
+      {
+        "Segment": 4,
+        "Tile": 3,
+        "X": 64,
+        "Y": 198
+      },
+      {
+        "Segment": 5,
+        "Tile": 1,
+        "X": 87,
+        "Y": 247
+      },
+      {
+        "Segment": 6,
+        "Tile": 1,
+        "X": 87,
+        "Y": 192
+      },
+      {
+        "Segment": 7,
+        "Tile": 1,
+        "X": 119,
+        "Y": 215
+      },
+      {
+        "Segment": 8,
+        "Tile": 1,
+        "X": 64,
+        "Y": 214
+      },
+      {
+        "Segment": 9,
+        "Tile": 0,
+        "X": 128,
+        "Y": 3
+      },
+      {
+        "Segment": 10,
+        "Tile": 0,
+        "X": 128,
+        "Y": 45
+      },
+      {
+        "Segment": 11,
+        "Tile": 11,
+        "X": 184,
+        "Y": 248
+      },
+      {
+        "Segment": 11,
+        "Tile": 11,
+        "X": 184,
+        "Y": 255
+      }
+    ],
+
+    "Offshore.Plane": [
+      {
+        "Segment": 0,
+        "Tile": 1,
+        "X": 0,
+        "Y": 128
+      },
+      {
+        "Segment": 1,
+        "Tile": 1,
+        "X": 64,
+        "Y": 64
+      },
+      {
+        "Segment": 2,
+        "Tile": 2,
+        "X": 0,
+        "Y": 192
+      },
+      {
+        "Segment": 3,
+        "Tile": 1,
+        "X": 128,
+        "Y": 80
+      },
+      {
+        "Segment": 4,
+        "Tile": 2,
+        "X": 128,
+        "Y": 128
+      },
+      {
+        "Segment": 5,
+        "Tile": 2,
+        "X": 192,
+        "Y": 128
+      },
+      {
+        "Segment": 6,
+        "Tile": 6,
+        "X": 176,
+        "Y": 128
+      },
+      {
+        "Segment": 7,
+        "Tile": 6,
+        "X": 64,
+        "Y": 168
+      }
+    ],
+
+    "Offshore.Tank": [
+      {
+        "Segment": 0,
+        "Tile": 5,
+        "X": 0,
+        "Y": 224
+      },
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 160,
+        "Y": 103
+      },
+      {
+        "Segment": 2,
+        "Tile": 6,
+        "X": 64,
+        "Y": 128
+      }
+    ],
+
+    "Water": [
+      {
+        "Segment": 0,
+        "Tile": 0,
+        "X": 0,
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "Tile": 0,
+        "X": 128,
+        "Y": 64
+      }
+    ]
+  }
+}

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using TRLevelReader.Helpers;
 
@@ -15,8 +10,14 @@ namespace TRTexture16Importer
     {
         public static ushort[] ImportFrom32PNG(string filename)
         {
-            Bitmap texture = new Bitmap(filename);
+            using (Bitmap texture = new Bitmap(filename))
+            {
+                return ImportFromBitmap(texture);
+            }
+        }
 
+        public static ushort[] ImportFromBitmap(Bitmap texture)
+        {
             ushort[] convertedPixels = new ushort[256 * 256];
 
             Debug.Assert(texture.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb);

@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>{Title}</title>
+    <style>
+        html, body {
+            height:100%;
+        }
+
+        body {
+            margin:0;
+            padding:0;
+            font-family:Arial, sans-serif;
+            font-size:16px;
+        }
+
+        #sidebar {
+            position:fixed;
+            top:0;
+            left:0;
+            width:226px;
+            box-sizing:border-box;
+            padding:10px;
+            height:100%;
+            background:#ddd;
+            overflow:auto;
+        }
+
+        #controls {
+            margin-bottom:10px;
+        }
+
+        #lvlsel {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        #indices {
+            display:none;
+        }
+
+        #sidebar textarea {
+            display:block;
+            border:1px solid #ccc;
+            background:#fff;
+            padding:3px;
+            height:150px;
+            width:100%;
+            box-sizing:border-box;
+            resize:none;
+            outline:none;
+            margin:5px 0;
+        }
+
+        #indices button {
+            display:inline-block;
+            
+        }
+
+        .prop {
+            line-height: 132%;
+        }
+
+        .indprop {
+            margin-left:10px;
+        }
+
+        #tiles {
+            width: calc(100% - 226px);
+            margin-left:226px;
+        }
+
+        .tile {
+            display: inline-block;
+            margin: 10px;
+            width: 256px;
+            height: 256px;
+            position: relative;
+        }
+
+        .imgselected .tile img {
+            opacity:0.5;
+        }
+
+        .tile img {
+            display: inline-block;
+            position: absolute;
+            transition: transform .2s;
+        }
+
+        .tile img:hover, .tile img.selected {
+            outline: 2px solid red;
+            outline-offset: -2px;
+            opacity: 1;
+            z-index: 999;
+        }
+
+        .singlesel .tile img.selected {
+            outline-width: 1px;
+            outline-offset: -1px;
+            transform: scale(2.0);
+            background: #fff;
+            z-index: 998;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            const tiles = $("#tiles");
+            const details = $("#details");
+            const levelSel = $("#lvlsel");
+            const multiCheck = $("#multisel");
+            const indicesBox = $("#indices");
+            const indicesContainer = $("textarea", indicesBox);
+
+            levelSel.change(function () {
+                window.location = levelSel.val();
+            });
+
+            let multimode = multiCheck.is(":checked");
+
+            multiCheck.change(function () {
+                multimode = multiCheck.is(":checked");
+                if (multimode) {
+                    tiles.removeClass("singlesel")
+                    indicesBox.show();
+                }
+                else {
+                    tiles.addClass("singlesel");
+                    indicesBox.hide();
+                    $(".selected").removeClass("selected");
+                    tiles.removeClass("imgselected");
+                    indicesContainer.val("");
+                }
+            });
+
+            $("button", indicesBox).click(function () {
+                let indices = indicesContainer.val().replace(/\s/g, "").split(",");
+                indices = indices.map(function (e) {
+                    return parseInt(e);
+                });
+
+                $(".selected").removeClass("selected");
+                tiles.removeClass("imgselected");
+
+                $("img").each(function () {
+                    const i = $(this);
+                    let itext;
+                    if (i[0].hasAttribute("data-objects")) {
+                        itext = i.attr("data-objects").split(";");
+                    }
+                    else {
+                        itext = i.attr("data-sprites").split(";");
+                    }
+
+                    for (let k = 0; k < itext.length; k++) {
+                        let t = parseInt(itext[k].split(":")[0]);
+                        if (indices.indexOf(t) != -1) {
+                            i.addClass("selected");
+                            tiles.addClass("imgselected");
+                            break;
+                        }
+                    }
+                });
+            });
+
+            $(".tile img").click(function () {
+                const t = $(this);
+                if (t.hasClass("selected")) {                    
+                    t.removeClass("selected");
+                    if ($(".selected").length == 0) {
+                        tiles.removeClass("imgselected");
+                    }
+                    details.html("");
+                }
+                else {
+                    if (!multimode) {
+                        $(".selected").removeClass("selected");
+                    }
+
+                    t.addClass("selected");
+                    tiles.addClass("imgselected");
+
+                    let markup = `<div class="prop">Tile: ${t.attr("data-tile")}</div>`;
+                    markup += `<div class="prop">Bounds: ${t.attr("data-rect")}</div>`;
+
+                    let textures;
+                    if (t[0].hasAttribute("data-objects")) {
+                        textures = t.attr("data-objects").split(";");
+                        markup += '<div class="prop">Object Texture';
+                    }
+                    else {
+                        textures = t.attr("data-sprites").split(";");
+                        markup += '<div class="prop">Sprite Texture';
+                    }
+
+                    if (textures.length > 1) {
+                        markup += "s";
+                    }
+                    markup += "</div>";
+
+                    for (let i = 0; i < textures.length; i++) {
+                        markup += `<div class="indprop">${textures[i]}</div>`;
+                    }
+
+                    let rectArr = JSON.parse(t.attr("data-rect"));
+                    const segObj = {
+                        "Segment": 0,
+                        "Tile": parseInt(t.attr("data-tile")),
+                        "X": rectArr[0],
+                        "Y": rectArr[1]
+                    };
+
+                    markup += `<textarea>${JSON.stringify(segObj, null, "  ")}</textarea>`;
+
+                    details.html(markup);
+                }
+
+                if (multimode) {
+                    const indexArr = [];
+                    $("img.selected").each(function () {
+                        const i = $(this);
+                        let itext;
+                        if (i[0].hasAttribute("data-objects")) {
+                            itext = i.attr("data-objects").split(";");
+                        }
+                        else {
+                            itext = i.attr("data-sprites").split(";");
+                        }
+
+                        const k = parseInt(itext[0].split(":")[0]);
+                        if (indexArr.indexOf(k) == -1) {
+                            indexArr.push(k);
+                        }
+                    });
+
+                    indexArr.sort((a, b) => a - b);
+                    indicesContainer.val(indexArr.join(", "));
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="sidebar">
+    <div id="controls">
+        <select id="lvlsel">{Levels}</select>
+        <input type="checkbox" id="multisel" /> <label for="multisel">Enable multi-selection</label>
+        <div id="indices">
+            <textarea></textarea>
+            <button>Update</button>
+        </div>
+    </div>
+    <div id="details">&nbsp;</div>
+</div>
+<div id="tiles" class="singlesel">{Tiles}</div>
+</body>
+</html>

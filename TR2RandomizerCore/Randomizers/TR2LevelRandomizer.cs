@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TR2RandomizerCore.Processors;
+using TR2RandomizerCore.Utilities;
 using TRGE.Coord;
 using TRGE.Core;
 
@@ -21,52 +23,67 @@ namespace TR2RandomizerCore.Randomizers
         internal bool HardSecrets { get; set; }
         internal bool IncludeKeyItems { get; set; }
         internal bool DevelopmentMode { get; set; }
+        internal bool PersistTextureVariants { get; set; }
+        internal bool CrossLevelEnemies { get; set; }
+
+        internal bool DeduplicateTextures => RandomizeTextures || (RandomizeEnemies && CrossLevelEnemies);
 
         internal TR2LevelRandomizer(TRDirectoryIOArgs args)
             : base(args) { }
 
         protected override void ApplyConfig(Config config)
         {
-            RandomizeSecrets = config.GetBool("RandomizeSecrets");
-            RandomizeItems = config.GetBool("RandomizeItems");
-            RandomizeEnemies = config.GetBool("RandomizeEnemies");
-            RandomizeTextures = config.GetBool("RandomizeTextures");
-
             int defaultSeed = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
-            SecretSeed = config.GetInt("SecretSeed", defaultSeed);
-            ItemSeed = config.GetInt("ItemSeed", defaultSeed);
-            EnemySeed = config.GetInt("EnemySeed", defaultSeed);
-            TextureSeed = config.GetInt("TextureSeed", defaultSeed);
 
-            HardSecrets = config.GetBool("HardSecrets");
-            IncludeKeyItems = config.GetBool("IncludeKeyItems");
-            DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
+            RandomizeSecrets = config.GetBool(nameof(RandomizeSecrets));
+            SecretSeed = config.GetInt(nameof(SecretSeed), defaultSeed);
+            HardSecrets = config.GetBool(nameof(HardSecrets));
+
+            RandomizeItems = config.GetBool(nameof(RandomizeItems));
+            ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
+            IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems));
+
+            RandomizeEnemies = config.GetBool(nameof(RandomizeEnemies));
+            EnemySeed = config.GetInt(nameof(EnemySeed), defaultSeed);
+            CrossLevelEnemies = config.GetBool(nameof(CrossLevelEnemies));
+
+            RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
+            TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
+            PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
+
+            DevelopmentMode = config.GetBool(nameof(DevelopmentMode));            
         }
 
         protected override void StoreConfig(Config config)
         {
-            config["RandomizeSecrets"] = RandomizeSecrets;
-            config["RandomizeItems"] = RandomizeItems;
-            config["RandomizeEnemies"] = RandomizeEnemies;
-            config["RandomizeTextures"] = RandomizeTextures;
+            config[nameof(RandomizeSecrets)] = RandomizeSecrets;
+            config[nameof(SecretSeed)] = SecretSeed;
+            config[nameof(HardSecrets)] = HardSecrets;
 
-            config["SecretSeed"] = SecretSeed;
-            config["ItemSeed"] = ItemSeed;
-            config["EnemySeed"] = EnemySeed;
-            config["TextureSeed"] = TextureSeed;
+            config[nameof(RandomizeItems)] = RandomizeItems;
+            config[nameof(ItemSeed)] = ItemSeed;
+            config[nameof(IncludeKeyItems)] = IncludeKeyItems;
 
-            config["HardSecrets"] = HardSecrets;
-            config["IncludeKeyItems"] = IncludeKeyItems;
-            config[nameof(DevelopmentMode)] = DevelopmentMode;
+            config[nameof(RandomizeEnemies)] = RandomizeEnemies;
+            config[nameof(EnemySeed)] = EnemySeed;
+            config[nameof(CrossLevelEnemies)] = CrossLevelEnemies;
+
+            config[nameof(RandomizeTextures)] = RandomizeTextures;
+            config[nameof(TextureSeed)] = TextureSeed;
+            config[nameof(PersistTextureVariants)] = PersistTextureVariants;
+
+            config[nameof(DevelopmentMode)] = DevelopmentMode;            
         }
 
         protected override int GetSaveTarget(int numLevels)
         {
+            // TODO: move these target calculations into the relevant classes - they don't belong here
             int target = base.GetSaveTarget(numLevels);
-            if (RandomizeSecrets)  target += numLevels;
-            if (RandomizeItems)    target += numLevels;
-            if (RandomizeEnemies)  target += numLevels;
-            if (RandomizeTextures) target += numLevels;
+            if (RandomizeSecrets)    target += numLevels;
+            if (RandomizeItems)      target += numLevels;
+            if (DeduplicateTextures) target += numLevels * 2;
+            if (RandomizeEnemies)    target += CrossLevelEnemies ? numLevels * 3 : numLevels;
+            if (RandomizeTextures)   target += numLevels * 3;
             return target;
         }
 
@@ -92,52 +109,76 @@ namespace TR2RandomizerCore.Randomizers
 
             string wipDirectory = _io.WIPOutputDirectory.FullName;
 
-            if (!monitor.IsCancelled && RandomizeSecrets)
+            // Texture monitoring is needed between enemy and texture randomization
+            // to track where imported enemies are placed.
+            using (TexturePositionMonitorBroker textureMonitor = new TexturePositionMonitorBroker())
             {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
-                new SecretReplacer
+                if (!monitor.IsCancelled && RandomizeSecrets)
                 {
-                    AllowHard = HardSecrets,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    SaveMonitor = monitor,
-                    IsDevelopmentModeOn = DevelopmentMode
-                }.Randomize(SecretSeed);
-            }
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
+                    new SecretReplacer
+                    {
+                        AllowHard = HardSecrets,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        IsDevelopmentModeOn = DevelopmentMode
+                    }.Randomize(SecretSeed);
+                }
 
-            if (!monitor.IsCancelled && RandomizeItems)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
-                new ItemRandomizer
+                if (!monitor.IsCancelled && DeduplicateTextures)
                 {
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    SaveMonitor = monitor,
-                    IncludeKeyItems = IncludeKeyItems,
-                    IsDevelopmentModeOn = DevelopmentMode
-                }.Randomize(ItemSeed);
-            }
+                    // This is needed to make as much space as possible available for cross-level enemies.
+                    // We do this if we are implementing cross-level enemies OR if randomizing textures,
+                    // as the texture mapping is optimised for levels that have been deduplicated.
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Deduplicating textures");
+                    new TextureDeduplicator
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor
+                    }.Deduplicate();
+                }
 
-            if (!monitor.IsCancelled && RandomizeEnemies)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
-                new EnemyRandomizer
+                if (!monitor.IsCancelled && RandomizeEnemies)
                 {
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    SaveMonitor = monitor
-                }.Randomize(EnemySeed);
-            }
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
+                    new EnemyRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        CrossLevelEnemies = CrossLevelEnemies,
+                        TextureMonitor = textureMonitor
+                    }.Randomize(EnemySeed);
+                }
 
-            if (!monitor.IsCancelled && RandomizeTextures)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing textures");
-                new TextureRandomizer
+                if (!monitor.IsCancelled && RandomizeItems)
                 {
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    SaveMonitor = monitor
-                }.Randomize(TextureSeed);
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
+                    new ItemRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        IncludeKeyItems = IncludeKeyItems,
+                        PerformEnemyWeighting = RandomizeEnemies && CrossLevelEnemies,
+                        IsDevelopmentModeOn = DevelopmentMode
+                    }.Randomize(ItemSeed);
+                }
+
+                if (!monitor.IsCancelled && RandomizeTextures)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing textures");
+                    new TextureRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        PersistVariants = PersistTextureVariants,
+                        TextureMonitor = textureMonitor
+                    }.Randomize(TextureSeed);
+                }
             }
         }
     }
