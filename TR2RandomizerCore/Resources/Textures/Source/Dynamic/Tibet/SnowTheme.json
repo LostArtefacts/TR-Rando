@@ -1,26 +1,28 @@
 {
-  "BlackWhite": {
-    "Saturation": 0
-  },
-  "BluePink": {
-    "Hue": 156
-  },
-  "Lime": {
-    "Hue": 30
-  },
-  "Orange": {
-    "Hue": -20
-  },
-  "PinkTeal": {
-    "Hue": -30,
-    "Saturation": 75
-  },
-  "PurpleGreen": {
-    "Hue": 50,
-    "Saturation": 50
-  },
-  "YellowBlue": {
-    "Hue": -160,
-    "Saturation": 75
+  "OperationMap": {
+    "BlackWhite": {
+      "Saturation": 0
+    },
+    "BluePink": {
+      "Hue": 156
+    },
+    "Lime": {
+      "Hue": 30
+    },
+    "Orange": {
+      "Hue": -20
+    },
+    "PinkTeal": {
+      "Hue": -30,
+      "Saturation": 75
+    },
+    "PurpleGreen": {
+      "Hue": 50,
+      "Saturation": 50
+    },
+    "YellowBlue": {
+      "Hue": -160,
+      "Saturation": 75
+    }
   }
 }

@@ -153,6 +153,14 @@ namespace TR2RandomizerView.Controls
                 return false;
             }
 
+            if (_options.DevelopmentMode)
+            {
+                if (!MessageWindow.ShowConfirm("Development mode is switched on and so the generated level files will not be playable.\n\nDo you wish to continue?"))
+                {
+                    return false;
+                }
+            }
+
             RandomizeProgressWindow spw = new RandomizeProgressWindow(Controller, _options);
             if (spw.ShowDialog() ?? false)
             {

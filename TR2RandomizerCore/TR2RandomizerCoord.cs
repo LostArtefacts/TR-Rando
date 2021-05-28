@@ -32,13 +32,7 @@ namespace TR2RandomizerCore
         public string ConfigDirectory => TRCoord.Instance.ConfigDirectory;
         public string ConfigFilePath => TRCoord.Instance.ConfigFilePath;
 
-        private TR2RandomizerCoord()
-        {
-            TRCoord.Instance.HistoryChanged += TRCoord_HistoryChanged;
-            TRCoord.Instance.HistoryAdded += TRCoord_HistoryChanged;
-
-            TRCoord.Instance.BackupProgressChanged += TRCoord_BackupProgressChanged; ;
-        }
+        private TR2RandomizerCoord() { }
 
         private void TRCoord_HistoryChanged(object sender, EventArgs e)
         {
@@ -67,6 +61,13 @@ namespace TR2RandomizerCore
             TRInterop.RandomisationSupported = true;
             TRLevelEditorFactory.RegisterEditor(TRVersion.TR2, typeof(TR2LevelRandomizer));
             TRLevelEditorFactory.RegisterEditor(TRVersion.TR2G, typeof(TR2LevelRandomizer));
+
+            // #125 Invoke TRCoord.Instance after defining TRInterop.ExecutingVersionName otherwise
+            // TRGE will not know the config file name to look for.
+            TRCoord.Instance.HistoryChanged += TRCoord_HistoryChanged;
+            TRCoord.Instance.HistoryAdded += TRCoord_HistoryChanged;
+
+            TRCoord.Instance.BackupProgressChanged += TRCoord_BackupProgressChanged;
         }
 
         public TR2RandomizerController Open(string directoryPath)

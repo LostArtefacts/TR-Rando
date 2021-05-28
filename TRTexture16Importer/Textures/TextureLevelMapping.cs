@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -23,6 +22,7 @@ namespace TRTexture16Importer.Textures
 
         public Dictionary<DynamicTextureSource, DynamicTextureTarget> DynamicMapping { get; set; }
         public Dictionary<StaticTextureSource, List<StaticTextureTarget>> StaticMapping { get; set; }
+        public List<TextureGrouping> StaticGrouping { get; set; }
         public Color DefaultSkyBox { get; set; }
 
         private readonly Dictionary<int, BitmapGraphics> _tileMap;
@@ -34,9 +34,9 @@ namespace TRTexture16Importer.Textures
             _tileMap = new Dictionary<int, BitmapGraphics>();
         }
 
-        public static TextureLevelMapping Get(TR2Level level, string lvlFile, TextureDatabase database)
+        public static TextureLevelMapping Get(TR2Level level, string mappingFilePrefix, TextureDatabase database, Dictionary<StaticTextureSource, List<StaticTextureTarget>> predefinedMapping = null, List<TR2Entities> entitiesToIgnore = null)
         {
-            string mapFile = Path.Combine(@"Resources\Textures\Mapping\", lvlFile + "-Textures.json");
+            string mapFile = Path.Combine(@"Resources\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
             if (!File.Exists(mapFile))
             {
                 return null;
@@ -44,31 +44,98 @@ namespace TRTexture16Importer.Textures
 
             Dictionary<DynamicTextureSource, DynamicTextureTarget> dynamicMapping = new Dictionary<DynamicTextureSource, DynamicTextureTarget>();
             Dictionary<StaticTextureSource, List<StaticTextureTarget>> staticMapping = new Dictionary<StaticTextureSource, List<StaticTextureTarget>>();
+            List<TextureGrouping> staticGrouping = new List<TextureGrouping>();
             Color skyBoxColour = _defaultSkyBox;
 
             Dictionary<string, object> rootMapping = JsonConvert.DeserializeObject<Dictionary<string, object>>(File.ReadAllText(mapFile));
+
+            // Read the dynamic mapping - this holds object and sprite texture indices for the level to which we will apply an HSB operation
             if (rootMapping.ContainsKey("Dynamic"))
             {
-                SortedDictionary<string, DynamicTextureTarget> mapping = JsonConvert.DeserializeObject<SortedDictionary<string, DynamicTextureTarget>>(rootMapping["Dynamic"].ToString());
+                SortedDictionary<string, Dictionary<int, List<Rectangle>>> mapping = JsonConvert.DeserializeObject<SortedDictionary<string, Dictionary<int, List<Rectangle>>>>(rootMapping["Dynamic"].ToString());
                 foreach (string sourceName in mapping.Keys)
                 {
                     DynamicTextureSource source = database.GetDynamicSource(sourceName);
-                    dynamicMapping[source] = mapping[sourceName];
+                    dynamicMapping[source] = new DynamicTextureTarget
+                    {
+                        TileTargets = mapping[sourceName]
+                    };
                 }
             }
 
+            // The static mapping contains basic texture segment source to tile target locations
             if (rootMapping.ContainsKey("Static"))
             {
                 SortedDictionary<string, object> mapping = JsonConvert.DeserializeObject<SortedDictionary<string, object>>(rootMapping["Static"].ToString());
                 foreach (string sourceName in mapping.Keys)
                 {
-                    if (sourceName.ToUpper().Equals("SKYBOX"))
+                    staticMapping[database.GetStaticSource(sourceName)] = JsonConvert.DeserializeObject<List<StaticTextureTarget>>(mapping[sourceName].ToString());
+                }
+            }
+
+            // We can group specific static sources together to guarantee they get themed
+            if (rootMapping.ContainsKey("Grouping"))
+            {                
+                List<Dictionary<string, object>> groupListData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(rootMapping["Grouping"].ToString());
+                foreach (IDictionary<string, object> groupData in groupListData)
+                {
+                    TextureGrouping grouping = new TextureGrouping
                     {
-                        skyBoxColour = ColorTranslator.FromHtml(mapping[sourceName].ToString());
+                        Leader = database.GetStaticSource(groupData["Leader"].ToString())
+                    };
+
+                    SortedSet<string> followers = JsonConvert.DeserializeObject<SortedSet<string>>(groupData["Followers"].ToString());
+                    foreach (string sourceName in followers)
+                    {
+                        grouping.Followers.Add(database.GetStaticSource(sourceName));
                     }
-                    else
+
+                    if (groupData.ContainsKey("ThemeAlternatives"))
                     {
-                        staticMapping[database.GetStaticSource(sourceName)] = JsonConvert.DeserializeObject<List<StaticTextureTarget>>(mapping[sourceName].ToString());
+                        Dictionary<string, Dictionary<string, string>> alternatives = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(groupData["ThemeAlternatives"].ToString());
+                        foreach (string theme in alternatives.Keys)
+                        {
+                            Dictionary<StaticTextureSource, string> map = new Dictionary<StaticTextureSource, string>();
+                            foreach (string sourceName in alternatives[theme].Keys)
+                            {
+                                map.Add(database.GetStaticSource(sourceName), alternatives[theme][sourceName]);
+                            }
+                            grouping.ThemeAlternatives.Add(theme, map);
+                        }
+                    }
+
+                    staticGrouping.Add(grouping);
+                }
+            }
+
+            // Allows for dynamic mapping to be targeted at levels e.g. when importing non-native
+            // models that are otherwise undefined in the default level JSON data.
+            if (predefinedMapping != null)
+            {
+                foreach (StaticTextureSource source in predefinedMapping.Keys)
+                {
+                    staticMapping[source] = predefinedMapping[source];
+                }
+            }
+
+            // If a level has had textures removed externally, but the JSON file has static
+            // imports ready for it, we need to make sure they are ignored.
+            if (entitiesToIgnore != null)
+            {
+                List<StaticTextureSource> sources = new List<StaticTextureSource>(staticMapping.Keys);
+                for (int i = 0; i < sources.Count; i++)
+                {
+                    StaticTextureSource source = sources[i];
+                    if (source.TextureEntities != null)
+                    {
+                        foreach (TR2Entities entity in source.TextureEntities)
+                        {
+                            if (entitiesToIgnore.Contains(entity))
+                            {
+                                staticMapping.Remove(source);
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -77,6 +144,7 @@ namespace TRTexture16Importer.Textures
             {
                 DynamicMapping = dynamicMapping,
                 StaticMapping = staticMapping,
+                StaticGrouping = staticGrouping,
                 DefaultSkyBox = skyBoxColour
             };
         }
@@ -97,63 +165,28 @@ namespace TRTexture16Importer.Textures
         {
             HSBOperation op = source.OperationMap[variant];
             DynamicTextureTarget target = DynamicMapping[source];
-            
-            foreach (int objectIndex in target.ObjectTextureIndices)
+
+            foreach (int tileIndex in target.TileTargets.Keys)
             {
-                TRObjectTexture texture = _level.ObjectTextures[objectIndex];
-                List<Point> points = new List<Point>();
-                foreach (TRObjectTextureVert vert in texture.Vertices)
+                BitmapGraphics bg = GetBitmapGraphics(tileIndex);
+                foreach (Rectangle rect in target.TileTargets[tileIndex])
                 {
-                    points.Add(VertToPoint(vert));
+                    bg.AdjustHSB(rect, op);
                 }
-
-                Rectangle rect = GetRect(points, texture);
-                GetBitmapGraphics(texture.AtlasAndFlag).AdjustHSB(rect, op);
             }
-
-            foreach (int spriteIndex in target.SpriteTextureIndices)
-            {
-                TRSpriteTexture texture = _level.SpriteTextures[spriteIndex];
-                Rectangle rect = new Rectangle(texture.X, texture.Y, (texture.Width + 1) / 256, (texture.Height + 1) / 256);
-                GetBitmapGraphics(texture.Atlas).AdjustHSB(rect, op);
-            }
-        }
-
-        private Point VertToPoint(TRObjectTextureVert vert)
-        {
-            int x = vert.XCoordinate.Fraction;
-            if (vert.XCoordinate.Whole == 255)
-            {
-                x++;
-            }
-
-            int y = vert.YCoordinate.Fraction;
-            if (vert.YCoordinate.Whole == 255)
-            {
-                y++;
-            }
-            return new Point(x, y);
-        }
-
-        private Rectangle GetRect(List<Point> points, TRObjectTexture texture)
-        {
-            TRObjectTextureVert lastVert = texture.Vertices[texture.Vertices.Length - 1];
-            if (lastVert.XCoordinate.Fraction == 0 && lastVert.XCoordinate.Whole == 0 && lastVert.YCoordinate.Fraction == 0 && lastVert.YCoordinate.Whole == 0)
-            {
-                // The texture is used as a triangle, so remove the final point so that we extend to the full rectangle
-                points.RemoveAt(points.Count - 1);
-            }
-
-            int minX = points.Min(p => p.X);
-            int minY = points.Min(p => p.Y);
-            int maxX = points.Max(p => p.X);
-            int maxY = points.Max(p => p.Y);
-
-            return new Rectangle(new Point(minX, minY), new Size(maxX - minX, maxY - minY));
         }
 
         public void RedrawStaticTargets(StaticTextureSource source, string variant)
         {
+            // This can happen if we have a source grouped for this level,
+            // but the source is actually only in place on certain conditions
+            // - an example is the flame in Venice, which is only added if
+            // the Flamethrower has been imported.
+            if (!StaticMapping.ContainsKey(source))
+            {
+                return;
+            }
+
             List<Rectangle> segments = source.VariantMap[variant];
             foreach (StaticTextureTarget target in StaticMapping[source])
             {
@@ -165,39 +198,74 @@ namespace TRTexture16Importer.Textures
                 GetBitmapGraphics(target.Tile).ImportSegment(source, target, segments[target.Segment]);
             }
 
-            if (source.ChangeSkyBox)
+            if (source.EntityColourMap != null)
             {
-                TRMesh skybox = TR2LevelUtilities.GetModelFirstMesh(_level, TR2Entities.Skybox_H);
-                if (skybox != null)
+                foreach (TR2Entities entity in source.EntityColourMap.Keys)
                 {
-                    int skyColourIndex = _level.Palette16.ToList().FindIndex
-                    (
-                        e => e.Red == DefaultSkyBox.R && e.Green == DefaultSkyBox.G && e.Blue == DefaultSkyBox.B
-                    );
-
-                    // Let's use the final palette index
-                    int newColourIndex = _level.Palette16.Length - 1;
-                    Color c = source.Bitmap.GetPixel(segments[0].X, segments[0].Y);
-                    _level.Palette16[newColourIndex] = new TRColour4
+                    TRMesh[] meshes = TR2LevelUtilities.GetModelMeshes(_level, entity);
+                    ISet<int> colourIndices = new HashSet<int>();
+                    foreach (TRMesh mesh in meshes)
                     {
-                        Red = c.R,
-                        Green = c.G,
-                        Blue = c.B,
-                        Unused = 0
-                    };
-
-                    foreach (TRFace3 t in skybox.ColouredTriangles)
-                    {
-                        byte[] arr = BitConverter.GetBytes(t.Texture);
-                        int highByte = Convert.ToInt32(arr[1]);
-                        if (highByte == skyColourIndex)
+                        foreach (TRFace4 t in mesh.ColouredRectangles)
                         {
-                            arr[1] = (byte)newColourIndex;
-                            t.Texture = BitConverter.ToUInt16(arr, 0);
+                            colourIndices.Add(BitConverter.GetBytes(t.Texture)[1]);
+                        }
+                        foreach (TRFace3 t in mesh.ColouredTriangles)
+                        {
+                            colourIndices.Add(BitConverter.GetBytes(t.Texture)[1]);
+                        }
+                    }
+
+                    Dictionary<int, int> remapIndices = new Dictionary<int, int>();
+                    foreach (Color targetColour in source.EntityColourMap[entity].Keys)
+                    {
+                        int matchedIndex = -1;
+                        foreach (int currentIndex in colourIndices)
+                        {
+                            TRColour4 currentColour = _level.Palette16[currentIndex];
+                            if (currentColour.Red == targetColour.R && currentColour.Green == targetColour.G && currentColour.Blue == targetColour.B)
+                            {
+                                matchedIndex = currentIndex;
+                            }
+                        }
+
+                        if (matchedIndex == -1)
+                        {
+                            continue;
+                        }
+
+                        // Extract the colour from the top-left of the rectangle specified in the source, and import that into the level
+                        int sourceRectangle = source.EntityColourMap[entity][targetColour];
+                        int newColourIndex = P16Importer.Import(_level, source.Bitmap.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
+                        remapIndices.Add(matchedIndex, newColourIndex);
+                    }
+
+                    // Remap the affected mesh textures to the newly inserted colours
+                    foreach (TRMesh mesh in meshes)
+                    {
+                        foreach (TRFace4 t in mesh.ColouredRectangles)
+                        {
+                            t.Texture = ConvertMeshTexture(t.Texture, remapIndices);
+                        }
+                        foreach (TRFace3 t in mesh.ColouredTriangles)
+                        {
+                            t.Texture = ConvertMeshTexture(t.Texture, remapIndices);
                         }
                     }
                 }
             }
+        }
+
+        private ushort ConvertMeshTexture(ushort texture, Dictionary<int, int> remapIndices)
+        {
+            byte[] arr = BitConverter.GetBytes(texture);
+            int highByte = Convert.ToInt32(arr[1]);
+            if (remapIndices.ContainsKey(highByte))
+            {
+                arr[1] = (byte)remapIndices[highByte];
+                return BitConverter.ToUInt16(arr, 0);
+            }
+            return texture;
         }
 
         private BitmapGraphics GetBitmapGraphics(int tile)

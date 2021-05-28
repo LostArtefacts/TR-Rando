@@ -1,4 +1,57 @@
 {
+  "Grouping": [
+    {
+      "Leader": "Lara.Top.Sun",
+      "Followers": [
+        "Lara.Socks"
+      ]
+    },
+    {
+      "Leader": "Xian.Stone",
+      "Followers": [
+        "Enemies.Guard.Spear",
+        "Fire.Explosion",
+        "Fire.Flame",
+        "Water",
+        "Xian.Building",
+        "Xian.Cracker",
+        "Xian.Lava",
+        "Xian.Metal",
+        "Xian.Misc",
+        "Xian.Rock"
+      ],
+      "ThemeAlternatives": {
+        "Furnace": {
+          "Fire.Explosion": "Yellow",
+          "Fire.Flame": "Yellow"
+        },
+        "Orange": {
+          "Xian.Lava": "Grey"
+        },
+        "Pink": {
+          "Xian.Lava": "Green"
+        },
+        "Purple": {
+          "Xian.Lava": "Yellow"
+        },
+        "Red": {
+          "Xian.Lava": "Black"
+        },
+        "Teal": {
+          "Fire.Explosion": "Yellow",
+          "Fire.Flame": "Yellow",
+          "Xian.Lava": "Black"
+        },
+        "White": {
+          "Xian.Lava": "Grey"
+        },
+        "Yellow": {
+          "Xian.Lava": "Purple"
+        }
+      }
+    }
+  ],
+
   "Static": {
     "Enemies.Dragon": [
       {
@@ -50,81 +103,39 @@
         "Y": 32
       },
       {
-        "Segment": 7,
-        "Tile": 5,
-        "X": 136,
-        "Y": 112,
-        "Clip": "0, 0, 64, 24"
-      },
-      {
-        "Segment": 7,
-        "Tile": 5,
-        "X": 136,
-        "Y": 200,
-        "Clip": "0, 0, 48, 24"
-      },
-      {
-        "Segment": 7,
-        "Tile": 5,
-        "X": 0,
-        "Y": 240,
-        "Clip": "0, 0, 64, 16"
-      },
-      {
-        "Segment": 7,
-        "Tile": 6,
-        "X": 160,
-        "Y": 80,
-        "Clip": "0, 0, 40, 24"
-      },
-      {
-        "Segment": 7,
-        "Tile": 7,
-        "X": 32,
-        "Y": 120,
-        "Clip": "0, 0, 40, 16"
-      },
-      {
         "Segment": 8,
         "Tile": 5,
         "X": 16,
         "Y": 176
       },
       {
-        "Segment": 8,
-        "Tile": 8,
-        "X": 72,
-        "Y": 120,
-        "Clip": "16, 0, 24, 16"
+        "Segment": 9,
+        "Tile": 6,
+        "X": 176,
+        "Y": 224
       },
       {
-        "Segment": 9,
+        "Segment": 10,
         "Tile": 6,
         "X": 104,
         "Y": 224
       },
       {
-        "Segment": 10,
-        "Tile": 7,
-        "X": 40,
-        "Y": 56
-      },
-      {
         "Segment": 11,
-        "Tile": 7,
-        "X": 104,
-        "Y": 48
+        "Tile": 6,
+        "X": 192,
+        "Y": 0
       },
       {
         "Segment": 12,
         "Tile": 7,
-        "X": 136,
-        "Y": 56
+        "X": 72,
+        "Y": 128
       },
       {
         "Segment": 13,
-        "Tile": 7,
-        "X": 192,
+        "Tile": 8,
+        "X": 160,
         "Y": 48
       },
       {
@@ -134,125 +145,52 @@
         "Y": 232
       },
       {
-        "Segment": 14,
-        "Tile": 8,
-        "X": 96,
-        "Y": 48,
-        "Clip": "0, 0, 32, 16"
-      },
-      {
         "Segment": 15,
-        "Tile": 6,
-        "X": 0,
-        "Y": 32
+        "Tile": 7,
+        "X": 40,
+        "Y": 56
       },
       {
         "Segment": 16,
-        "Tile": 6,
-        "X": 0,
-        "Y": 0
+        "Tile": 7,
+        "X": 104,
+        "Y": 48
       },
       {
         "Segment": 17,
-        "Tile": 6,
-        "X": 32,
-        "Y": 0
+        "Tile": 7,
+        "X": 136,
+        "Y": 56
       },
       {
         "Segment": 18,
-        "Tile": 6,
-        "X": 64,
-        "Y": 0
+        "Tile": 7,
+        "X": 192,
+        "Y": 48
       },
       {
         "Segment": 19,
         "Tile": 6,
-        "X": 96,
-        "Y": 0
-      },
-      {
-        "Segment": 20,
-        "Tile": 6,
-        "X": 128,
-        "Y": 0
-      },
-      {
-        "Segment": 21,
-        "Tile": 6,
-        "X": 160,
-        "Y": 0
-      },
-      {
-        "Segment": 22,
-        "Tile": 6,
-        "X": 192,
-        "Y": 0
-      },
-      {
-        "Segment": 23,
-        "Tile": 6,
         "X": 224,
         "Y": 32
       },
       {
-        "Segment": 24,
-        "Tile": 7,
-        "X": 16,
-        "Y": 0
-      },
-      {
-        "Segment": 25,
-        "Tile": 6,
-        "X": 176,
-        "Y": 224
-      },
-      {
-        "Segment": 26,
+        "Segment": 20,
         "Tile": 7,
         "X": 224,
         "Y": 48
       },
       {
-        "Segment": 27,
-        "Tile": 7,
-        "X": 72,
-        "Y": 128
-      },
-      {
-        "Segment": 28,
-        "Tile": 9,
-        "X": 32,
-        "Y": 0
-      },
-      {
-        "Segment": 29,
-        "Tile": 8,
-        "X": 160,
-        "Y": 48
-      },
-      {
-        "Segment": 30,
-        "Tile": 8,
-        "X": 152,
-        "Y": 112
-      },
-      {
-        "Segment": 31,
-        "Tile": 5,
-        "X": 16,
-        "Y": 104
-      },
-      {
-        "Segment": 32,
-        "Tile": 6,
-        "X": 200,
-        "Y": 224
-      },
-      {
-        "Segment": 33,
+        "Segment": 21,
         "Tile": 8,
         "X": 0,
         "Y": 24
+      },
+      {
+        "Segment": 22,
+        "Tile": 9,
+        "X": 32,
+        "Y": 0
       }
     ],
 
@@ -278,7 +216,7 @@
       {
         "Segment": 3,
         "Tile": 8,
-        "X": 192,
+        "X": 216,
         "Y": 0
       },
       {
@@ -295,146 +233,123 @@
       },
       {
         "Segment": 6,
-        "Tile": 9,
-        "X": 192,
-        "Y": 128
-      },
-      {
-        "Segment": 7,
-        "Tile": 9,
-        "X": 136,
-        "Y": 96,
-        "Clip": "0, 0, 16, 8"
-      },
-      {
-        "Segment": 7,
-        "Tile": 9,
-        "X": 160,
-        "Y": 96,
-        "Clip": "16, 0, 24, 8"
-      },
-      {
-        "Segment": 8,
-        "Tile": 9,
-        "X": 0,
-        "Y": 80
-      },
-      {
-        "Segment": 9,
-        "Tile": 9,
-        "X": 80,
-        "Y": 16
-      },
-      {
-        "Segment": 10,
-        "Tile": 9,
-        "X": 32,
-        "Y": 16
-      },
-      {
-        "Segment": 11,
-        "Tile": 7,
-        "X": 40,
-        "Y": 144
-      },
-      {
-        "Segment": 12,
-        "Tile": 7,
-        "X": 80,
-        "Y": 144
-      },
-      {
-        "Segment": 13,
-        "Tile": 8,
-        "X": 168,
-        "Y": 152
-      },
-      {
-        "Segment": 14,
-        "Tile": 9,
-        "X": 24,
-        "Y": 80
-      },
-      {
-        "Segment": 15,
         "Tile": 8,
         "X": 240,
         "Y": 248
       },
       {
-        "Segment": 16,
+        "Segment": 7,
         "Tile": 9,
         "X": 120,
         "Y": 96
       },
       {
-        "Segment": 17,
-        "Tile": 8,
-        "X": 160,
-        "Y": 200
+        "Segment": 8,
+        "Tile": 9,
+        "X": 208,
+        "Y": 128
       },
       {
-        "Segment": 18,
+        "Segment": 9,
         "Tile": 9,
-        "X": 248,
-        "Y": 72
-      },
-      {
-        "Segment": 18,
-        "Tile": 9,
-        "X": 0,
-        "Y": 80
-      },
-      {
-        "Segment": 19,
-        "Tile": 9,
-        "X": 152,
+        "X": 136,
         "Y": 96
       },
       {
-        "Segment": 20,
+        "Segment": 10,
         "Tile": 9,
-        "X": 176,
-        "Y": 104
+        "X": 24,
+        "Y": 80
       },
       {
-        "Segment": 21,
+        "Segment": 11,
         "Tile": 8,
-        "X": 0,
+        "X": 168,
         "Y": 152
+      },
+      {
+        "Segment": 12,
+        "Tile": 9,
+        "X": 32,
+        "Y": 16
+      },
+      {
+        "Segment": 13,
+        "Tile": 9,
+        "X": 48,
+        "Y": 16
+      },
+      {
+        "Segment": 14,
+        "Tile": 9,
+        "X": 64,
+        "Y": 16
+      },
+      {
+        "Segment": 15,
+        "Tile": 7,
+        "X": 40,
+        "Y": 144
+      },
+      {
+        "Segment": 16,
+        "Tile": 7,
+        "X": 80,
+        "Y": 144
+      },
+      {
+        "Segment": 17,
+        "Tile": 9,
+        "X": 80,
+        "Y": 16
       }
     ],
 
-    "Flame": [
+    "Enemies.Knifethrower": [
       {
         "Segment": 0,
-        "Tile": 3,
-        "X": 92,
-        "Y": 66
-      },
-      {
-        "Segment": 0,
-        "Tile": 3,
-        "X": 92,
-        "Y": 130
+        "Tile": 8,
+        "X": 224,
+        "Y": 88
       },
       {
         "Segment": 1,
-        "Tile": 3,
-        "X": 4,
-        "Y": 66
-      },
-      {
-        "Segment": 1,
-        "Tile": 3,
-        "X": 4,
-        "Y": 130
+        "Tile": 8,
+        "X": 32,
+        "Y": 240
       },
       {
         "Segment": 2,
+        "Tile": 8,
+        "X": 32,
+        "Y": 48
+      },
+      {
+        "Segment": 3,
+        "Tile": 6,
+        "X": 48,
+        "Y": 200
+      },
+      {
+        "Segment": 4,
+        "Tile": 6,
+        "X": 80,
+        "Y": 200
+      }
+    ],
+
+    "Fire.Explosion": [
+      {
+        "Segment": 0,
         "Tile": 3,
-        "X": 176,
-        "Y": 119
+        "X": 92,
+        "Y": 66
+      },
+      {
+        "Segment": 1,
+        "Tile": 3,
+        "X": 4,
+        "Y": 66
       },
       {
         "Segment": 2,
@@ -449,28 +364,10 @@
         "Y": 168
       },
       {
-        "Segment": 3,
-        "Tile": 10,
-        "X": 82,
-        "Y": 105
-      },
-      {
         "Segment": 4,
         "Tile": 9,
         "X": 1,
         "Y": 156
-      },
-      {
-        "Segment": 4,
-        "Tile": 9,
-        "X": 97,
-        "Y": 148
-      },
-      {
-        "Segment": 5,
-        "Tile": 3,
-        "X": 1,
-        "Y": 192
       },
       {
         "Segment": 5,
@@ -485,40 +382,16 @@
         "Y": 2
       },
       {
-        "Segment": 6,
-        "Tile": 10,
-        "X": 162,
-        "Y": 2
-      },
-      {
         "Segment": 7,
         "Tile": 10,
         "X": 80,
         "Y": 0
       },
       {
-        "Segment": 7,
-        "Tile": 10,
-        "X": 0,
-        "Y": 56
-      },
-      {
         "Segment": 8,
         "Tile": 10,
         "X": 80,
         "Y": 56
-      },
-      {
-        "Segment": 8,
-        "Tile": 10,
-        "X": 160,
-        "Y": 56
-      },
-      {
-        "Segment": 9,
-        "Tile": 9,
-        "X": 184,
-        "Y": 149
       },
       {
         "Segment": 9,
@@ -528,21 +401,9 @@
       },
       {
         "Segment": 10,
-        "Tile": 0,
-        "X": 130,
-        "Y": 3
-      },
-      {
-        "Segment": 10,
         "Tile": 10,
         "X": 2,
         "Y": 115
-      },
-      {
-        "Segment": 11,
-        "Tile": 1,
-        "X": 68,
-        "Y": 7
       },
       {
         "Segment": 11,
@@ -553,62 +414,92 @@
       {
         "Segment": 12,
         "Tile": 9,
-        "X": 48,
-        "Y": 222
-      },
-      {
-        "Segment": 12,
-        "Tile": 10,
-        "X": 218,
-        "Y": 198
-      },
-      {
-        "Segment": 13,
-        "Tile": 9,
-        "X": 80,
-        "Y": 212
-      },
-      {
-        "Segment": 13,
-        "Tile": 9,
         "X": 128,
         "Y": 212
       },
       {
-        "Segment": 14,
+        "Segment": 13,
+        "Tile": 10,
+        "X": 218,
+        "Y": 198
+      }
+    ],
+
+    "Fire.Flame": [
+      {
+        "Segment": 0,
         "Tile": 11,
-        "X": 82,
-        "Y": 6
+        "X": 80,
+        "Y": 0
       },
       {
-        "Segment": 15,
+        "Segment": 1,
         "Tile": 11,
-        "X": 106,
-        "Y": 4
+        "X": 104,
+        "Y": 0
       },
       {
-        "Segment": 16,
+        "Segment": 2,
         "Tile": 11,
-        "X": 131,
-        "Y": 4
+        "X": 128,
+        "Y": 0
       },
       {
-        "Segment": 17,
+        "Segment": 3,
         "Tile": 11,
-        "X": 155,
-        "Y": 5
+        "X": 152,
+        "Y": 0
       },
       {
-        "Segment": 18,
+        "Segment": 4,
         "Tile": 11,
-        "X": 180,
-        "Y": 9
+        "X": 176,
+        "Y": 0
       },
       {
-        "Segment": 19,
+        "Segment": 5,
         "Tile": 11,
-        "X": 204,
-        "Y": 6
+        "X": 200,
+        "Y": 0
+      }
+    ],
+
+    "Fire.Flare": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 64,
+        "Y": 80
+      },
+      {
+        "Segment": 1,
+        "Tile": 9,
+        "X": 224,
+        "Y": 88
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 144,
+        "Y": 56
+      },
+      {
+        "Segment": 3,
+        "Tile": 9,
+        "X": 128,
+        "Y": 56
+      },
+      {
+        "Segment": 4,
+        "Tile": 10,
+        "X": 11,
+        "Y": 195
+      },
+      {
+        "Segment": 5,
+        "Tile": 8,
+        "X": 208,
+        "Y": 184
       }
     ],
 
@@ -618,12 +509,6 @@
         "Tile": 8,
         "X": 0,
         "Y": 99
-      },
-      {
-        "Segment": 1,
-        "Tile": 7,
-        "X": 72,
-        "Y": 57
       },
       {
         "Segment": 1,
@@ -698,12 +583,6 @@
         "Tile": 5,
         "X": 248,
         "Y": 128
-      },
-      {
-        "Segment": 6,
-        "Tile": 8,
-        "X": 128,
-        "Y": 96
       },
       {
         "Segment": 6,
@@ -858,6 +737,67 @@
       }
     ],
 
+    "Xian.Building": [
+      {
+        "Segment": 0,
+        "Tile": 0,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 0,
+        "X": 64,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 0,
+        "X": 128,
+        "Y": 48,
+        "Clip": "0, 48, 64, 16"
+      },
+      {
+        "Segment": 4,
+        "Tile": 1,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 14,
+        "Tile": 1,
+        "X": 0,
+        "Y": 64
+      },
+      {
+        "Segment": 16,
+        "Tile": 1,
+        "X": 0,
+        "Y": 26
+      }
+    ],
+
+    "Xian.Cracker": [
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 72,
+        "Y": 128
+      },
+      {
+        "Segment": 3,
+        "Tile": 4,
+        "X": 128,
+        "Y": 128
+      },
+      {
+        "Segment": 6,
+        "Tile": 10,
+        "X": 216,
+        "Y": 152
+      }
+    ],
+
     "Xian.Lava": [
       {
         "Segment": 0,
@@ -921,6 +861,178 @@
       }
     ],
 
+    "Xian.Metal": [
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 192,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 5,
+        "Tile": 4,
+        "X": 184,
+        "Y": 128
+      },
+      {
+        "Segment": 8,
+        "Tile": 0,
+        "X": 128,
+        "Y": 64
+      },
+      {
+        "Segment": 9,
+        "Tile": 5,
+        "X": 248,
+        "Y": 64
+      },
+      {
+        "Segment": 13,
+        "Tile": 4,
+        "X": 136,
+        "Y": 208
+      },
+      {
+        "Segment": 14,
+        "Tile": 5,
+        "X": 72,
+        "Y": 64
+      },
+      {
+        "Segment": 15,
+        "Tile": 4,
+        "X": 248,
+        "Y": 144
+      },
+      {
+        "Segment": 16,
+        "Tile": 4,
+        "X": 248,
+        "Y": 216
+      },
+      {
+        "Segment": 18,
+        "Tile": 7,
+        "X": 16,
+        "Y": 168
+      },
+      {
+        "Segment": 19,
+        "Tile": 4,
+        "X": 64,
+        "Y": 248
+      }
+    ],
+
+    "Xian.Misc": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 0,
+        "Y": 128
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 184,
+        "Y": 192
+      },
+      {
+        "Segment": 2,
+        "Tile": 3,
+        "X": 179,
+        "Y": 222
+      },
+      {
+        "Segment": 3,
+        "Tile": 2,
+        "X": 199,
+        "Y": 132
+      }
+    ],
+
+    "Xian.Rock": [
+      {
+        "Segment": 0,
+        "Tile": 0,
+        "X": 192,
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "Tile": 0,
+        "X": 0,
+        "Y": 128
+      },
+      {
+        "Segment": 3,
+        "Tile": 0,
+        "X": 64,
+        "Y": 128
+      },
+      {
+        "Segment": 4,
+        "Tile": 0,
+        "X": 128,
+        "Y": 128
+      },
+      {
+        "Segment": 15,
+        "Tile": 2,
+        "X": 192,
+        "Y": 176,
+        "Clip": "0, 48, 64, 16"
+      },
+      {
+        "Segment": 16,
+        "Tile": 2,
+        "X": 0,
+        "Y": 192
+      },
+      {
+        "Segment": 22,
+        "Tile": 2,
+        "X": 64,
+        "Y": 192
+      },
+      {
+        "Segment": 25,
+        "Tile": 2,
+        "X": 192,
+        "Y": 192
+      },
+      {
+        "Segment": 26,
+        "Tile": 3,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 27,
+        "Tile": 3,
+        "X": 64,
+        "Y": 0
+      },
+      {
+        "Segment": 28,
+        "Tile": 3,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 29,
+        "Tile": 1,
+        "X": 192,
+        "Y": 0
+      }
+    ],
+
     "Xian.Stone": [
       {
         "Segment": 0,
@@ -957,7 +1069,7 @@
         "Tile": 4,
         "X": 72,
         "Y": 208,
-        "Clip": "0, 0, 64, 48"
+        "Clip": "0, 0, 64, 40"
       },
       {
         "Segment": 5,
@@ -1043,19 +1155,12 @@
       {
         "Segment": 18,
         "Tile": 0,
-        "X": 192,
-        "Y": 208,
-        "Clip": "0, 16, 64, 10"
-      },
-      {
-        "Segment": 18,
-        "Tile": 0,
         "X": 255,
         "Y": 192,
         "Clip": "63, 0, 1, 16"
       },
       {
-        "Segment": 24,
+        "Segment": 20,
         "Tile": 1,
         "X": 0,
         "Y": 0

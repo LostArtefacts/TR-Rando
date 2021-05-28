@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using TRTexture16Importer.Textures.Source;
 using TRTexture16Importer.Textures.Target;
 
@@ -9,26 +10,67 @@ namespace TRTexture16Importer.Helpers
 {
     public class BitmapGraphics : IDisposable
     {
-        public Bitmap Bitmap { get; set; }
-        public Graphics Graphics { get; set; }
+        private Bitmap _bitmap;
+        private int _width, _height;
+
+        public Bitmap Bitmap
+        {
+            get => _bitmap;
+            set
+            {
+                _bitmap = value;
+                _width = _bitmap.Width;
+                _height = _bitmap.Height;
+
+                Graphics = Graphics.FromImage(_bitmap);
+            }
+        }
+
+        public Graphics Graphics { get; private set; }
 
         public BitmapGraphics(Bitmap bitmap)
         {
             Bitmap = bitmap;
-            Graphics = Graphics.FromImage(Bitmap);
         }
 
         public void AdjustHSB(Rectangle rect, HSBOperation operation)
         {
-            int yEnd = rect.Y + rect.Height;
-            int xEnd = rect.X + rect.Width;
-            for (int y = rect.Y; y < yEnd; y++)
+            // This is about 25% faster than using GetPixel/SetPixel
+
+            BitmapData bd = Bitmap.LockBits(new Rectangle(0, 0, _width, _height), ImageLockMode.ReadWrite, Bitmap.PixelFormat);
+            int bytesPerPixel = Image.GetPixelFormatSize(Bitmap.PixelFormat) / 8;
+            int byteCount = bd.Stride * _height;
+            byte[] pixels = new byte[byteCount];
+            IntPtr ptrFirstPixel = bd.Scan0;
+            Marshal.Copy(ptrFirstPixel, pixels, 0, byteCount);
+
+            int startY = rect.Y;
+            int endY = rect.Y + rect.Height;
+            int startX = rect.X * bytesPerPixel;
+            int endX = startX + rect.Width * bytesPerPixel;
+
+            for (int y = startY; y < endY; y++)
             {
-                for (int x = rect.X; x < xEnd; x++)
+                int currentLine = y * bd.Stride;
+                for (int x = startX; x < endX; x += bytesPerPixel)
                 {
-                    Bitmap.SetPixel(x, y, ApplyHSBOperation(Bitmap.GetPixel(x, y), operation));
+                    int b = pixels[currentLine + x];
+                    int g = pixels[currentLine + x + 1];
+                    int r = pixels[currentLine + x + 2];
+                    int a = pixels[currentLine + x + 3];
+
+                    Color c = Color.FromArgb(a, r, g, b);
+                    c = ApplyHSBOperation(c, operation);
+
+                    pixels[currentLine + x] = c.B;
+                    pixels[currentLine + x + 1] = c.G;
+                    pixels[currentLine + x + 2] = c.R;
+                    pixels[currentLine + x + 3] = c.A;
                 }
             }
+
+            Marshal.Copy(pixels, 0, ptrFirstPixel, byteCount);
+            Bitmap.UnlockBits(bd);
         }
 
         private Color ApplyHSBOperation(Color c, HSBOperation operation)
@@ -53,7 +95,7 @@ namespace TRTexture16Importer.Helpers
             }
 
             Rectangle targetRectangle = new Rectangle(target.X, target.Y, sourceRectangle.Width, sourceRectangle.Height);
-
+            
             if (target.Clear)
             {
                 // For the likes of Golden Mask secrets, which have different
@@ -74,9 +116,15 @@ namespace TRTexture16Importer.Helpers
             Graphics.ResetClip();
         }
 
+        public void Fill(Rectangle rect, Color c)
+        {
+            Graphics.FillRectangle(new SolidBrush(c), rect);
+        }
+
         public void Import(Bitmap bitmap, Rectangle rect)
         {
-            Graphics.DrawImage(bitmap, rect);//, sourceRectangle, GraphicsUnit.Pixel);
+            Delete(rect);
+            Graphics.DrawImage(bitmap, rect);
         }
 
         public Bitmap Extract(Rectangle rect, PixelFormat format = PixelFormat.Format32bppArgb)

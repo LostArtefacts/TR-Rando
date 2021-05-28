@@ -100,34 +100,36 @@
             CustomBool="{Binding IncludeKeyItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomBoolTitle="Enable key items"/>
 
-        <ctrl:ManagedSeedControl
+        <ctrl:ManagedSeedBoolControl
             Grid.Row="2" 
             Grid.Column="1"
             IsActive="{Binding RandomizeEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Enemies"
-            Text="Randomize the types of enemies you encounter in each level."
+            Text="Randomize the types of enemies you encounter in each level. Select cross-level enemies to allow enemy types to appear in any level."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding EnemySeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            SeedValue="{Binding EnemySeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBool="{Binding CrossLevelEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle="Enable cross-level enemies"/>
 
         <ctrl:ManagedSeedBoolControl
             Grid.Row="3"
             Grid.Column="1"
             IsActive="{Binding RandomizeTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Textures"
-            Text="Randomly apply texture packs to each level. If you choose to persist textures, each unique texture (e.g. Lara's diving suit) will be randomized only once, otherwise they can be different in each level."
+            Text="Randomly apply texture packs to each level. If you choose to use persistent textures, each unique texture (e.g. Lara's diving suit) will be randomized only once, otherwise they can be different in each level."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding TextureSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomBool="{Binding PersistTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle="Persist textures"/>
+            CustomBoolTitle="Use persistent textures"/>
 
         <ctrl:ManagedSeedControl
             Grid.Row="0"
             Grid.Column="2"
             IsActive="{Binding RandomizeSecretRewards, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Secret Rewards"
-            Text="Change the items that are rewarded to Lara for collecting all secrets in each level. Rewards are selected randomly on a generosity scale. Note that while flares may be rewarded, the sprite for these does not show on screen."
+            Text="Change the items that are rewarded to Lara for collecting all secrets in each level. Rewards are selected randomly on a generosity scale."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding SecretRewardSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>

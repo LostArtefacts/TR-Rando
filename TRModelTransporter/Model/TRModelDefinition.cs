@@ -2,12 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
-using TRModelTransporter.Textures;
+using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Model
 {
@@ -16,18 +13,28 @@ namespace TRModelTransporter.Model
         [JsonIgnore]
         public TR2Entities Entity => (TR2Entities)Model.ID;
         [JsonIgnore]
+        public TR2Entities Alias { get; set; }
+        [JsonIgnore]
         public Bitmap Bitmap { get; set; }
+        [JsonIgnore]
+        public bool HasGraphics => ObjectTextures.Count > 0;
+        [JsonIgnore]
+        public bool IsDependencyOnly { get; set; }
 
         public Dictionary<int, PackedAnimation> Animations { get; set; }
+        public ushort[] AnimationFrames { get; set; }
+        public TRCinematicFrame[] CinematicFrames { get; set; }
         public Dictionary<int, TRColour4> Colours { get; set; }
         public TR2Entities[] Dependencies { get; set; }
-        public ushort[] Frames { get; set; }
+        public PackedSound HardcodedSound { get; set; }
         public TRMesh[] Meshes { get; set; }
         public TRMeshTreeNode[] MeshTrees { get; set; }
         public TRModel Model { get; set; }
+        public int ObjectTextureCost { get; set; }
         public Dictionary<int, List<IndexedTRObjectTexture>> ObjectTextures { get; set; }
-        public Rectangle[] ObjectTextureSegments { get; set; }
-        public int[] RandomTextureIndices { get; set; }
+        public Dictionary<TR2Entities, TRSpriteSequence> SpriteSequences { get; set; }
+        public Dictionary<TR2Entities, Dictionary<int, List<IndexedTRSpriteTexture>>> SpriteTextures { get; set; }
+        public Rectangle[] TextureSegments { get; set; }
 
         public void Dispose()
         {

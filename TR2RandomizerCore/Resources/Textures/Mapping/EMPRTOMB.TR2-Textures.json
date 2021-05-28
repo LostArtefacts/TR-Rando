@@ -1,69 +1,20 @@
 {
-  "Static": {
-    "Enemies.Barracuda": [
-      {
-        "Segment": 0,
-        "Tile": 9,
-        "X": 128,
-        "Y": 88
-      },
-      {
-        "Segment": 1,
-        "Tile": 9,
-        "X": 176,
-        "Y": 232
-      },
-      {
-        "Segment": 2,
-        "Tile": 12,
-        "X": 0,
-        "Y": 232
-      },
-      {
-        "Segment": 3,
-        "Tile": 11,
-        "X": 96,
-        "Y": 128
-      },
-      {
-        "Segment": 4,
-        "Tile": 11,
-        "X": 144,
-        "Y": 129
-      },
-      {
-        "Segment": 5,
-        "Tile": 11,
-        "X": 56,
-        "Y": 80
-      },
-      {
-        "Segment": 6,
-        "Tile": 11,
-        "X": 216,
-        "Y": 121
-      },
-      {
-        "Segment": 7,
-        "Tile": 10,
-        "X": 64,
-        "Y": 40
-      },
-      {
-        "Segment": 7,
-        "Tile": 11,
-        "X": 0,
-        "Y": 144,
-        "Clip": "0, 0, 48, 16"
-      },
-      {
-        "Segment": 8,
-        "Tile": 12,
-        "X": 96,
-        "Y": 152
-      }
-    ],
+  "Grouping": [
+    {
+      "Leader": "Fire.Explosion",
+      "Followers": [
+        "Fire.Flame"
+      ]
+    },
+    {
+      "Leader": "Lara.Top.Sun",
+      "Followers": [
+        "Lara.Socks"
+      ]
+    }
+  ],
 
+  "Static": {
     "Enemies.Spider": [
       {
         "Segment": 0,
@@ -79,7 +30,7 @@
       }
     ],
 
-    "Flame": [
+    "Fire.Explosion": [
       {
         "Segment": 0,
         "Tile": 6,
@@ -154,51 +105,93 @@
       },
       {
         "Segment": 12,
-        "Tile": 0,
-        "X": 194,
-        "Y": 102
-      },
-      {
-        "Segment": 13,
         "Tile": 14,
         "X": 0,
         "Y": 213
       },
       {
-        "Segment": 14,
+        "Segment": 13,
+        "Tile": 0,
+        "X": 194,
+        "Y": 102
+      }
+    ],
+
+    "Fire.Flame": [
+      {
+        "Segment": 0,
         "Tile": 14,
-        "X": 146,
-        "Y": 70
+        "X": 144,
+        "Y": 64
       },
       {
-        "Segment": 15,
+        "Segment": 1,
         "Tile": 15,
-        "X": 220,
-        "Y": 52
+        "X": 218,
+        "Y": 48
       },
       {
-        "Segment": 16,
+        "Segment": 2,
         "Tile": 15,
-        "X": 83,
-        "Y": 59
+        "X": 80,
+        "Y": 55
       },
       {
-        "Segment": 17,
+        "Segment": 3,
         "Tile": 15,
-        "X": 168,
-        "Y": 77
+        "X": 165,
+        "Y": 72
       },
       {
-        "Segment": 18,
+        "Segment": 4,
         "Tile": 15,
-        "X": 193,
-        "Y": 81
+        "X": 189,
+        "Y": 72
       },
       {
-        "Segment": 19,
+        "Segment": 5,
         "Tile": 15,
-        "X": 108,
-        "Y": 80
+        "X": 104,
+        "Y": 74
+      }
+    ],
+
+    "Fire.Flare": [
+      {
+        "Segment": 0,
+        "Tile": 12,
+        "X": 232,
+        "Y": 16
+      },
+      {
+        "Segment": 1,
+        "Tile": 13,
+        "X": 32,
+        "Y": 224
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 176,
+        "Y": 192
+      },
+      {
+        "Segment": 3,
+        "Tile": 13,
+        "X": 144,
+        "Y": 192
+      },
+      {
+        "Segment": 4,
+        "Tile": 15,
+        "X": 149,
+        "Y": 3
+      },
+      {
+        "Segment": 5,
+        "Tile": 13,
+        "X": 48,
+        "Y": 40
       }
     ],
 
@@ -223,12 +216,6 @@
         "Tile": 12,
         "X": 128,
         "Y": 137
-      },
-      {
-        "Segment": 1,
-        "Tile": 13,
-        "X": 64,
-        "Y": 105
       }
     ],
 
@@ -297,12 +284,6 @@
         "Tile": 11,
         "X": 24,
         "Y": 184
-      },
-      {
-        "Segment": 6,
-        "Tile": 13,
-        "X": 136,
-        "Y": 40
       },
       {
         "Segment": 6,

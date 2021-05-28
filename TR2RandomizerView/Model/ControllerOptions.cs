@@ -13,8 +13,7 @@ namespace TR2RandomizerView.Model
         private readonly ManagedSeedNumeric _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl;
         private readonly ManagedSeedBool _audioTrackControl;
 
-        private readonly ManagedSeed _randomEnemiesControl;
-        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomTexturesControl;
+        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl;
 
         private bool _disableDemos;
 
@@ -276,6 +275,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool CrossLevelEnemies
+        {
+            get => _randomEnemiesControl.CustomBool;
+            set
+            {
+                _randomEnemiesControl.CustomBool = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool RandomizeTextures
         {
             get => _randomTexturesControl.IsActive;
@@ -346,7 +355,7 @@ namespace TR2RandomizerView.Model
             _audioTrackControl = new ManagedSeedBool();
 
             _randomItemsControl = new ManagedSeedBool();
-            _randomEnemiesControl = new ManagedSeed();
+            _randomEnemiesControl = new ManagedSeedBool();
             _randomSecretsControl = new ManagedSeedBool();
             _randomTexturesControl = new ManagedSeedBool();
         }
@@ -385,6 +394,7 @@ namespace TR2RandomizerView.Model
 
             RandomizeEnemies = _controller.RandomizeEnemies;
             EnemySeed = _controller.EnemySeed;
+            CrossLevelEnemies = _controller.CrossLevelEnemies;
 
             RandomizeSecrets = _controller.RandomizeSecrets;
             SecretSeed = _controller.SecretSeed;
@@ -531,6 +541,7 @@ namespace TR2RandomizerView.Model
 
             _controller.RandomizeEnemies = RandomizeEnemies;
             _controller.EnemySeed = EnemySeed;
+            _controller.CrossLevelEnemies = CrossLevelEnemies;
 
             _controller.RandomizeSecrets = RandomizeSecrets;
             _controller.SecretSeed = SecretSeed;

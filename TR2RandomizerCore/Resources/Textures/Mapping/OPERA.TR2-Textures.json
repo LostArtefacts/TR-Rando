@@ -1,6 +1,42 @@
 {
+  "Grouping": [
+    {
+      "Leader": "Fire.Explosion",
+      "Followers": [
+        "Fire.Flame"
+      ]
+    },
+    {
+      "Leader": "Lara.Top.Sun",
+      "Followers": [
+        "Lara.Socks"
+      ]
+    }
+  ],
+
   "Static": {
-    "Flame": [
+    "Enemies.ShotgunGoon": [
+      {
+        "Segment": 0,
+        "Tile": 12,
+        "X": 144,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 9,
+        "X": 0,
+        "Y": 232
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 216,
+        "Y": 232
+      }
+    ],
+
+    "Fire.Explosion": [
       {
         "Segment": 0,
         "Tile": 5,
@@ -75,15 +111,54 @@
       },
       {
         "Segment": 12,
-        "Tile": 5,
-        "X": 218,
-        "Y": 46
-      },
-      {
-        "Segment": 13,
         "Tile": 14,
         "X": 0,
         "Y": 61
+      },
+      {
+        "Segment": 13,
+        "Tile": 5,
+        "X": 218,
+        "Y": 46
+      }
+    ],
+
+    "Fire.Flare": [
+      {
+        "Segment": 0,
+        "Tile": 13,
+        "X": 240,
+        "Y": 48
+      },
+      {
+        "Segment": 1,
+        "Tile": 13,
+        "X": 96,
+        "Y": 32
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 88,
+        "Y": 16
+      },
+      {
+        "Segment": 3,
+        "Tile": 13,
+        "X": 72,
+        "Y": 16
+      },
+      {
+        "Segment": 4,
+        "Tile": 5,
+        "X": 204,
+        "Y": 227
+      },
+      {
+        "Segment": 5,
+        "Tile": 12,
+        "X": 0,
+        "Y": 96
       }
     ],
 
@@ -93,12 +168,6 @@
         "Tile": 10,
         "X": 24,
         "Y": 139
-      },
-      {
-        "Segment": 1,
-        "Tile": 10,
-        "X": 200,
-        "Y": 137
       },
       {
         "Segment": 1,
@@ -173,12 +242,6 @@
         "Tile": 8,
         "X": 248,
         "Y": 80
-      },
-      {
-        "Segment": 6,
-        "Tile": 11,
-        "X": 72,
-        "Y": 128
       },
       {
         "Segment": 6,
@@ -329,13 +392,6 @@
         "X": 128,
         "Y": 192,
         "Clip": "0, 0, 64, 64"
-      },
-      {
-        "Segment": 1,
-        "Tile": 11,
-        "X": 32,
-        "Y": 96,
-        "Clip": "0, 56, 64, 8"
       },
       {
         "Segment": 2,

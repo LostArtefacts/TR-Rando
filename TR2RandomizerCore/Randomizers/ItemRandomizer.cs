@@ -17,15 +17,16 @@ namespace TR2RandomizerCore.Randomizers
     {
         public bool IncludeKeyItems { get; set; }
         public bool IsDevelopmentModeOn { get; set; }
+        public bool PerformEnemyWeighting { get; set; }
 
         // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
-        // into predefined locations. See FindAndCleanUnarmedPistolLocation below.
+        // into predefined locations. See FindUnarmedPistolsLocation below.
         private int _unarmedLevelPistolIndex;
-        private readonly Dictionary<string, Location> _pistolLocations;
+        private readonly Dictionary<string, List<Location>> _pistolLocations;
 
         public ItemRandomizer()
         {
-            _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, Location>>(File.ReadAllText(@"Resources\unarmed_locations.json"));
+            _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\unarmed_locations.json"));
         }
 
         public override void Randomize(int seed)
@@ -36,22 +37,13 @@ namespace TR2RandomizerCore.Randomizers
 
             foreach (TR23ScriptedLevel lvl in Levels)
             {
-                if (SaveMonitor.IsCancelled) return;
-                //SaveMonitor.FireSaveStateBeginning(TRSaveCategory.Custom, string.Format("Randomizing items in {0}", lvl.Name));
-
-                //Read the level into a level object
+                //Read the level into a combined data/script level object
                 LoadLevelInstance(lvl);
 
-                FindAndCleanUnarmedPistolLocation(lvl);
-
-                if (lvl.Is(LevelNames.HOME))
-                {
-                    InjectHSHWeaponTextures();
-                    CleanHSHCloset();
-                }
+                FindUnarmedPistolsLocation();
 
                 //Apply the modifications
-                RepositionItems(locations[lvl.LevelFileBaseName.ToUpper()], lvl.LevelFileBaseName.ToUpper());
+                RepositionItems(locations[_levelInstance.Name]);
 
                 //#44 - Randomize OR pistol type
                 if (lvl.RemovesWeapons) { RandomizeORPistol(); }
@@ -62,18 +54,21 @@ namespace TR2RandomizerCore.Randomizers
                 //Write back the level file
                 SaveLevelInstance();
 
-                SaveMonitor.FireSaveStateChanged(1);
+                if (!TriggerProgress())
+                {
+                    break;
+                }
             }
         }
 
         // roomNumber is specified if ONLY that room is to be populated
         private void PlaceAllItems(List<Location> locations, int roomNumber = -1)
         {
-            List<TR2Entity> ents = _levelInstance.Entities.ToList();
+            List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
 
             foreach (Location loc in locations)
             {
-                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Rooms[loc.Room].Info);
+                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info);
 
                 if (roomNumber == -1 || roomNumber == copy.Room)
                 {
@@ -92,11 +87,34 @@ namespace TR2RandomizerCore.Randomizers
                 }
             }
 
-            _levelInstance.NumEntities = (uint)ents.Count;
-            _levelInstance.Entities = ents.ToArray();
+            // Test unarmed locations
+            if (_pistolLocations.ContainsKey(_levelInstance.Name))
+            {
+                foreach (Location loc in _pistolLocations[_levelInstance.Name])
+                {
+                    if (roomNumber == -1 || roomNumber == loc.Room)
+                    {
+                        ents.Add(new TR2Entity
+                        {
+                            TypeID = (int)TR2Entities.Pistols_S_P,
+                            Room = (short)loc.Room,
+                            X = loc.X,
+                            Y = loc.Y,
+                            Z = loc.Z,
+                            Angle = 0,
+                            Intensity1 = -1,
+                            Intensity2 = -1,
+                            Flags = 0
+                        });
+                    }
+                }
+            }
+
+            _levelInstance.Data.NumEntities = (uint)ents.Count;
+            _levelInstance.Data.Entities = ents.ToArray();
         }
 
-        private void RepositionItems(List<Location> ItemLocs, string lvl)
+        private void RepositionItems(List<Location> ItemLocs)
         {
             if (IsDevelopmentModeOn)
             {
@@ -118,18 +136,18 @@ namespace TR2RandomizerCore.Randomizers
 
                 //It's important to now start zoning key items as softlocks must be avoided.
                 ZonedLocationCollection ZonedLocations = new ZonedLocationCollection();
-                ZonedLocations.PopulateZones(lvl, ItemLocs, ZonePopulationMethod.KeyPuzzleQuestOnly);
+                ZonedLocations.PopulateZones(_levelInstance.Name, ItemLocs, ZonePopulationMethod.KeyPuzzleQuestOnly);
 
-                for (int i = 0; i < _levelInstance.Entities.Count(); i++)
+                for (int i = 0; i < _levelInstance.Data.Entities.Count(); i++)
                 {
-                    if (targetents.Contains((TR2Entities)_levelInstance.Entities[i].TypeID) && (i != _unarmedLevelPistolIndex))
+                    if (targetents.Contains((TR2Entities)_levelInstance.Data.Entities[i].TypeID) && (i != _unarmedLevelPistolIndex))
                     {
                         Location RandomLocation = new Location();
                         bool FoundPossibleLocation = false;
 
-                        if (TR2EntityUtilities.IsKeyItemType((TR2Entities)_levelInstance.Entities[i].TypeID))
+                        if (TR2EntityUtilities.IsKeyItemType((TR2Entities)_levelInstance.Data.Entities[i].TypeID))
                         {
-                            TR2Entities type = (TR2Entities)_levelInstance.Entities[i].TypeID;
+                            TR2Entities type = (TR2Entities)_levelInstance.Data.Entities[i].TypeID;
 
                             // Apply zoning for key items
                             switch (type)
@@ -217,95 +235,60 @@ namespace TR2RandomizerCore.Randomizers
 
                         if (FoundPossibleLocation)
                         {
-                            Location GlobalizedRandomLocation = SpatialConverters.TransformToLevelSpace(RandomLocation, _levelInstance.Rooms[RandomLocation.Room].Info);
+                            Location GlobalizedRandomLocation = SpatialConverters.TransformToLevelSpace(RandomLocation, _levelInstance.Data.Rooms[RandomLocation.Room].Info);
 
-                            _levelInstance.Entities[i].Room = Convert.ToInt16(GlobalizedRandomLocation.Room);
-                            _levelInstance.Entities[i].X = GlobalizedRandomLocation.X;
-                            _levelInstance.Entities[i].Y = GlobalizedRandomLocation.Y;
-                            _levelInstance.Entities[i].Z = GlobalizedRandomLocation.Z;
-                            _levelInstance.Entities[i].Intensity1 = -1;
-                            _levelInstance.Entities[i].Intensity2 = -1;
+                            _levelInstance.Data.Entities[i].Room = Convert.ToInt16(GlobalizedRandomLocation.Room);
+                            _levelInstance.Data.Entities[i].X = GlobalizedRandomLocation.X;
+                            _levelInstance.Data.Entities[i].Y = GlobalizedRandomLocation.Y;
+                            _levelInstance.Data.Entities[i].Z = GlobalizedRandomLocation.Z;
+                            _levelInstance.Data.Entities[i].Intensity1 = -1;
+                            _levelInstance.Data.Entities[i].Intensity2 = -1;
                         }
                     }
                 }
             }
         }
 
-        private void FindAndCleanUnarmedPistolLocation(TR23ScriptedLevel lvl)
+        private void FindUnarmedPistolsLocation()
         {
-            string lvlFile = lvl.LevelFileBaseName.ToUpper();
-            Location levelPistolLocation = null;
-            if (_pistolLocations.ContainsKey(lvlFile))
+            // #66 - checks were previously performed to clean locations from previous
+            // randomization sessions to avoid item pollution. This is no longer required
+            // as randomization is now always performed on the original level files.
+
+            // # Default pistol locations are no longer limited to one per level.
+
+            _unarmedLevelPistolIndex = -1;
+
+            if (_levelInstance.Script.RemovesWeapons && _pistolLocations.ContainsKey(_levelInstance.Name))
             {
-                levelPistolLocation = _pistolLocations[lvlFile];
-                CleanUnarmedPistolLocation(levelPistolLocation);
-            }
-
-            if (lvl.RemovesWeapons && levelPistolLocation != null)
-            {
-                _unarmedLevelPistolIndex = FindUnarmedPistolIndex(levelPistolLocation);
-            }
-            else
-            {
-                _unarmedLevelPistolIndex = -1;
-            }
-        }
-
-        private int FindUnarmedPistolIndex(Location levelPistolLocation)
-        {
-            //#44 - Agreed to keep it there but randomize its type.
-            return Array.FindIndex(_levelInstance.Entities, e =>
-            (
-                e.TypeID == (int)TR2Entities.Pistols_S_P ||
-                e.TypeID == (int)TR2Entities.Shotgun_S_P ||
-                e.TypeID == (int)TR2Entities.Automags_S_P ||
-                e.TypeID == (int)TR2Entities.Uzi_S_P ||
-                e.TypeID == (int)TR2Entities.Harpoon_S_P ||
-                e.TypeID == (int)TR2Entities.M16_S_P ||
-                e.TypeID == (int)TR2Entities.GrenadeLauncher_S_P
-            ) &&
-            (
-                e.Room == levelPistolLocation.Room &&
-                e.X == levelPistolLocation.X &&
-                e.Y == levelPistolLocation.Y &&
-                e.Z == levelPistolLocation.Z
-            ));
-        }
-
-        private void CleanUnarmedPistolLocation(Location levelPistolLocation)
-        {
-            //In relation to #66 to ensure successive randomizations don't pollute the entity list
-            List<TR2Entity> entities = _levelInstance.Entities.ToList();
-
-            // We need to ensure x,y,z also match rather than just the room as TRGE could have added pistols
-            // (which may then have been randomized and/or ammo added) to a room that already had other ammo pickups.
-            IEnumerable<TR2Entity> existingInjections = entities.Where
-            (
-                e =>
-                    TR2EntityUtilities.IsAmmoType((TR2Entities)e.TypeID) &&
-                    e.Room == levelPistolLocation.Room &&
-                    e.X == levelPistolLocation.X &&
-                    e.Y == levelPistolLocation.Y &&
-                    e.Z == levelPistolLocation.Z
-            );
-
-            if (existingInjections.Count() > 0)
-            {
-                // For Rig, if it's no longer unarmed, TRGE will have added UZI clips where the pistols normally
-                // would be. This is to preserve item indices as the pistols have index 4 - to remove them completely
-                // would mean anything that points to higher item indices (triggers etc) would need to change. The clips
-                // can be safely randomized - it's just the index that needs to remain the same.
-                if (_scriptedLevelInstance.Is(LevelNames.RIG))
+                short pistolID = (short)TR2Entities.Pistols_S_P;
+                int pistolIndex = _levelInstance.Data.Entities.ToList().FindIndex(e => e.TypeID == pistolID);
+                if (pistolIndex != -1)
                 {
-                    TR2Entity cargoEntity = existingInjections.FirstOrDefault();
-                    entities.RemoveAll(e => existingInjections.Contains(e) && e != cargoEntity);
+                    // Sanity check that the location is one that we expect
+                    TR2Entity pistols = _levelInstance.Data.Entities[pistolIndex];
+                    Location pistolLocation = new Location
+                    {
+                        X = pistols.X,
+                        Y = pistols.Y,
+                        Z = pistols.Z,
+                        Room = pistols.Room
+                    };
+
+                    int match = _pistolLocations[_levelInstance.Name].FindIndex
+                    (
+                        location =>
+                            location.X == pistolLocation.X &&
+                            location.Y == pistolLocation.Y &&
+                            location.Z == pistolLocation.Z &&
+                            location.Room == pistolLocation.Room
+                    );
+
+                    if (match != -1)
+                    {
+                        _unarmedLevelPistolIndex = pistolIndex;
+                    }
                 }
-                else
-                {
-                    entities.RemoveAll(e => existingInjections.Contains(e));
-                }
-                _levelInstance.NumEntities = (uint)entities.Count;
-                _levelInstance.Entities = entities.ToArray();
             }
         }
 
@@ -328,7 +311,7 @@ namespace TR2RandomizerCore.Randomizers
                 ReplacementWeapons.Add(TR2Entities.Pistols_S_P);
 
                 TR2Entities Weap = ReplacementWeapons[_generator.Next(0, ReplacementWeapons.Count)];
-                if (_scriptedLevelInstance.Is(LevelNames.CHICKEN))
+                if (_levelInstance.Is(LevelNames.CHICKEN))
                 {
                     // Grenade Launcher and Harpoon cannot trigger the bells in Ice Palace
                     while (Weap.Equals(TR2Entities.GrenadeLauncher_S_P) || Weap.Equals(TR2Entities.Harpoon_S_P))
@@ -337,48 +320,107 @@ namespace TR2RandomizerCore.Randomizers
                     }
                 }
 
-                TR2Entity unarmedLevelWeapons = _levelInstance.Entities[_unarmedLevelPistolIndex];
+                TR2Entity unarmedLevelWeapons = _levelInstance.Data.Entities[_unarmedLevelPistolIndex];
 
                 uint ammoToGive = 0;
+                bool addPistols = false;
+                uint smallMediToGive = 0;
+                uint largeMediToGive = 0;
+
                 if (_startingAmmoToGive.ContainsKey(Weap))
                 {
                     ammoToGive = _startingAmmoToGive[Weap];
-                    if (_scriptedLevelInstance.Is(LevelNames.LAIR))
+                    if (PerformEnemyWeighting)
+                    {
+                        // Create a score based on each type of enemy in this level and increase the ammo count based on this
+                        EnemyDifficulty difficulty = EnemyUtilities.GetEnemyDifficulty(_levelInstance.GetEnemyEntities());
+                        ammoToGive *= (uint)difficulty;
+
+                        // Depending on how difficult the enemy combination is, allocate some extra helpers.
+                        addPistols = difficulty > EnemyDifficulty.Easy;
+
+                        if (difficulty == EnemyDifficulty.Medium || difficulty == EnemyDifficulty.Hard)
+                        {
+                            smallMediToGive++;
+                        }
+                        if (difficulty > EnemyDifficulty.Medium)
+                        {
+                            largeMediToGive++;
+                        }
+                        if (difficulty == EnemyDifficulty.VeryHard)
+                        {
+                            largeMediToGive++;
+                        }
+                    }
+                    else if (_levelInstance.Is(LevelNames.LAIR))
+                    {
                         ammoToGive *= 6;
+                    }
                 }
 
                 //#68 - Provide some additional ammo for a weapon if not pistols
-                switch (Weap)
+                if (Weap != TR2Entities.Pistols_S_P)
                 {
-                    case TR2Entities.Shotgun_S_P:
-                        AddORAmmo(TR2Entities.ShotgunAmmo_S_P, ammoToGive, unarmedLevelWeapons);
-                        break;
-                    case TR2Entities.Automags_S_P:
-                        AddORAmmo(TR2Entities.AutoAmmo_S_P, ammoToGive, unarmedLevelWeapons);
-                        break;
-                    case TR2Entities.Uzi_S_P:
-                        AddORAmmo(TR2Entities.UziAmmo_S_P, ammoToGive, unarmedLevelWeapons);
-                        break;
-                    case TR2Entities.Harpoon_S_P:
-                        AddORAmmo(TR2Entities.HarpoonAmmo_S_P, ammoToGive, unarmedLevelWeapons);
-                        break;
-                    case TR2Entities.M16_S_P:
-                        AddORAmmo(TR2Entities.M16Ammo_S_P, ammoToGive, unarmedLevelWeapons);
-                        break;
-                    case TR2Entities.GrenadeLauncher_S_P:
-                        AddORAmmo(TR2Entities.Grenades_S_P, ammoToGive, unarmedLevelWeapons);
-                        break;
-                    default:
-                        break;
+                    AddORAmmo(GetWeaponAmmo(Weap), ammoToGive, unarmedLevelWeapons);
                 }
 
                 unarmedLevelWeapons.TypeID = (short)Weap;
+
+                if (Weap != TR2Entities.Pistols_S_P)
+                {
+                    // If we haven't decided to add the pistols (i.e. for enemy difficulty)
+                    // add a 1/3 chance of getting them anyway.
+                    if (addPistols || _generator.Next(0, 3) == 0)
+                    {
+                        CopyEntity(unarmedLevelWeapons, TR2Entities.Pistols_S_P);
+                    }
+                }
+
+                for (int i = 0; i < smallMediToGive; i++)
+                {
+                    CopyEntity(unarmedLevelWeapons, TR2Entities.SmallMed_S_P);
+                }
+                for (int i = 0; i < largeMediToGive; i++)
+                {
+                    CopyEntity(unarmedLevelWeapons, TR2Entities.LargeMed_S_P);
+                }
+            }
+        }
+
+        private void CopyEntity(TR2Entity entity, TR2Entities newType)
+        {
+            List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
+            TR2Entity copy = entity.Clone();
+            copy.TypeID = (short)newType;
+            ents.Add(copy);
+            _levelInstance.Data.NumEntities++;
+            _levelInstance.Data.Entities = ents.ToArray();
+        }
+
+        private TR2Entities GetWeaponAmmo(TR2Entities weapon)
+        {
+            switch (weapon)
+            {
+                case TR2Entities.Shotgun_S_P:
+                    return TR2Entities.ShotgunAmmo_S_P;
+                case TR2Entities.Automags_S_P:
+                    return TR2Entities.AutoAmmo_S_P;
+                case TR2Entities.Uzi_S_P:
+                    return TR2Entities.UziAmmo_S_P;
+                case TR2Entities.Harpoon_S_P:
+                    return TR2Entities.HarpoonAmmo_S_P;
+                case TR2Entities.M16_S_P:
+                    return TR2Entities.M16Ammo_S_P;
+                case TR2Entities.GrenadeLauncher_S_P:
+                    return TR2Entities.Grenades_S_P;
+                default:
+                    return TR2Entities.PistolAmmo_S_P;
             }
         }
 
         private void AddORAmmo(TR2Entities ammoType, uint count, TR2Entity weapon)
         {
-            List<TR2Entity> ents = _levelInstance.Entities.ToList();
+            List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
 
             for (uint i = 0; i < count; i++)
             {
@@ -389,23 +431,49 @@ namespace TR2RandomizerCore.Randomizers
                 ents.Add(ammo);
             };
 
-            _levelInstance.NumEntities += count;
-            _levelInstance.Entities = ents.ToArray();
-        }
-
-        private void InjectHSHWeaponTextures()
-        {
-            // All textures, animations and moveables are available as standard in HSH via TRGE
-        }
-
-        private void CleanHSHCloset()
-        {
-
+            _levelInstance.Data.NumEntities += count;
+            _levelInstance.Data.Entities = ents.ToArray();
         }
 
         private void PopulateHSHCloset()
         {
+            List<TR2Entities> replacementWeapons = TR2EntityUtilities.GetListOfGunTypes();
+            if (_levelInstance.Script.RemovesWeapons)
+            {
+                replacementWeapons.Add(TR2Entities.Pistols_S_P);
+            }
 
+            // Pick a new weapon, but exclude the grenade launcher because it affects the kill
+            // count. Also exclude the harpoon as neither it nor the grenade launcher can break
+            // Lara's bedroom window, and the enemy there may have been randomized to one without
+            // a gun. Probably not a softlock scenario but safer to exclude for now.
+            TR2Entities replacementWeapon;
+            do
+            {
+                replacementWeapon = replacementWeapons[_generator.Next(0, replacementWeapons.Count)];
+            }
+            while (replacementWeapon == TR2Entities.GrenadeLauncher_S_P || replacementWeapon == TR2Entities.Harpoon_S_P);
+
+            TR2Entities replacementAmmo = GetWeaponAmmo(replacementWeapon);
+            
+            List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
+            foreach (TR2Entity entity in ents)
+            {
+                if (entity.Room != 57)
+                {
+                    continue;
+                }
+
+                TR2Entities entityType = (TR2Entities)entity.TypeID;
+                if (TR2EntityUtilities.IsGunType(entityType))
+                {
+                    entity.TypeID = (short)replacementWeapon;
+                }
+                else if (TR2EntityUtilities.IsAmmoType(entityType) && replacementWeapon != TR2Entities.Pistols_S_P)
+                {
+                    entity.TypeID = (short)replacementAmmo;
+                }
+            }
         }
     }
 }

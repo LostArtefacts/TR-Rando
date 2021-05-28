@@ -18,7 +18,7 @@ namespace TR2RandomizerView.Controls
 
         public static readonly DependencyProperty MinValueProperty = DependencyProperty.Register
         (
-            "MinValue", typeof(int), typeof(NumericUpDown), new PropertyMetadata(1)
+            "MinValue", typeof(int), typeof(NumericUpDown), new PropertyMetadata(0)
         );
 
         public static readonly DependencyProperty MaxValueProperty = DependencyProperty.Register

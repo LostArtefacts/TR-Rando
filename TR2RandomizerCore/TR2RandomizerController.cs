@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using TR2RandomizerCore.Helpers;
 using TR2RandomizerCore.Randomizers;
 using TRGE.Coord;
 using TRGE.Core;
+using TRLevelReader.Helpers;
 
 namespace TR2RandomizerCore
 {
@@ -232,6 +234,12 @@ namespace TR2RandomizerCore
         {
             get => LevelRandomizer.DevelopmentMode;
             set => LevelRandomizer.DevelopmentMode = value;
+        }
+
+        public bool CrossLevelEnemies
+        {
+            get => LevelRandomizer.CrossLevelEnemies;
+            set => LevelRandomizer.CrossLevelEnemies = value;
         }
         #endregion
 

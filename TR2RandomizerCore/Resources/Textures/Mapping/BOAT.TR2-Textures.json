@@ -1,6 +1,54 @@
 {
+  "Grouping": [
+    {
+      "Leader": "Fire.Explosion",
+      "Followers": [
+        "Fire.Flame"
+      ]
+    },
+    {
+      "Leader": "Lara.Top.Sun",
+      "Followers": [
+        "Lara.Socks"
+      ]
+    }
+  ],
+
   "Static": {
-    "Flame": [
+    "Enemies.StickGoon.BodyWarmer": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 9,
+        "X": 32,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 0,
+        "Y": 176
+      },
+      {
+        "Segment": 3,
+        "Tile": 9,
+        "X": 0,
+        "Y": 96
+      },
+      {
+        "Segment": 4,
+        "Tile": 12,
+        "X": 32,
+        "Y": 216
+      }
+    ],
+
+    "Fire.Explosion": [
       {
         "Segment": 0,
         "Tile": 5,
@@ -75,15 +123,54 @@
       },
       {
         "Segment": 12,
-        "Tile": 5,
-        "X": 218,
-        "Y": 6
-      },
-      {
-        "Segment": 13,
         "Tile": 14,
         "X": 144,
         "Y": 4
+      },
+      {
+        "Segment": 13,
+        "Tile": 5,
+        "X": 218,
+        "Y": 6
+      }
+    ],
+
+    "Fire.Flare": [
+      {
+        "Segment": 0,
+        "Tile": 13,
+        "X": 248,
+        "Y": 16
+      },
+      {
+        "Segment": 1,
+        "Tile": 13,
+        "X": 144,
+        "Y": 32
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 208,
+        "Y": 8
+      },
+      {
+        "Segment": 3,
+        "Tile": 13,
+        "X": 192,
+        "Y": 8
+      },
+      {
+        "Segment": 4,
+        "Tile": 14,
+        "X": 11,
+        "Y": 55
+      },
+      {
+        "Segment": 5,
+        "Tile": 12,
+        "X": 176,
+        "Y": 88
       }
     ],
 
@@ -93,12 +180,6 @@
         "Tile": 11,
         "X": 56,
         "Y": 211
-      },
-      {
-        "Segment": 1,
-        "Tile": 11,
-        "X": 224,
-        "Y": 129
       },
       {
         "Segment": 1,
@@ -165,12 +246,6 @@
         "Tile": 8,
         "X": 248,
         "Y": 240
-      },
-      {
-        "Segment": 6,
-        "Tile": 10,
-        "X": 136,
-        "Y": 224
       },
       {
         "Segment": 6,
@@ -294,8 +369,6 @@
       }
     ],
 
-    "Skybox": "#206898",
-
     "Vehicles.Boat": [
       {
         "Segment": 0,
@@ -306,14 +379,14 @@
       {
         "Segment": 1,
         "Tile": 8,
-        "X": 160,
-        "Y": 40
+        "X": 104,
+        "Y": 136
       },
       {
         "Segment": 2,
-        "Tile": 8,
-        "X": 104,
-        "Y": 136
+        "Tile": 11,
+        "X": 160,
+        "Y": 0
       },
       {
         "Segment": 3,
@@ -341,9 +414,9 @@
       },
       {
         "Segment": 7,
-        "Tile": 9,
-        "X": 224,
-        "Y": 232
+        "Tile": 11,
+        "X": 152,
+        "Y": 152
       },
       {
         "Segment": 8,
@@ -353,27 +426,15 @@
       },
       {
         "Segment": 9,
-        "Tile": 11,
-        "X": 160,
-        "Y": 0
+        "Tile": 9,
+        "X": 224,
+        "Y": 232
       },
       {
         "Segment": 10,
         "Tile": 11,
         "X": 184,
         "Y": 0
-      },
-      {
-        "Segment": 11,
-        "Tile": 11,
-        "X": 152,
-        "Y": 152
-      },
-      {
-        "Segment": 12,
-        "Tile": 12,
-        "X": 248,
-        "Y": 24
       }
     ],
 

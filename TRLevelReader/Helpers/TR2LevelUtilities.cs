@@ -48,7 +48,11 @@ namespace TRLevelReader.Helpers
             int index = (int)model.MeshTree / 4;
             for (int i = 0; i < model.NumMeshes; i++)
             {
-                nodes.Add(level.MeshTrees[index + i]);
+                int offset = index + i;
+                if (offset < level.MeshTrees.Length)
+                {
+                    nodes.Add(level.MeshTrees[offset]);
+                }
             }
             return nodes.ToArray();
         }

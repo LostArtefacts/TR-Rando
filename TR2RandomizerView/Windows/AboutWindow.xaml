@@ -54,11 +54,20 @@
             </TextBlock>
 
             <TextBlock>
-                Uses Script Editing from 
+                Script Editing provided by 
                 <Hyperlink ToolTip="https://github.com/lahm86/TRGameflowEditor"
                            NavigateUri="https://github.com/lahm86/TRGameflowEditor"
                            RequestNavigate="Hyperlink_RequestNavigate">
                      TRGameflowEditor
+                </Hyperlink>
+            </TextBlock>
+
+            <TextBlock>
+                Texture Packing provided by 
+                <Hyperlink ToolTip="https://github.com/lahm86/RectanglePacker"
+                           NavigateUri="https://github.com/lahm86/RectanglePacker"
+                           RequestNavigate="Hyperlink_RequestNavigate">
+                     RectanglePacker
                 </Hyperlink>
             </TextBlock>
 

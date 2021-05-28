@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using TRTexture16Importer.Helpers;
+using TRLevelReader.Model.Enums;
 using TRTexture16Importer.Textures.Source;
 
 namespace TRTexture16Importer.Textures
@@ -12,11 +11,13 @@ namespace TRTexture16Importer.Textures
     {
         private readonly Dictionary<string, DynamicTextureSource> _dynamicSources;
         private readonly Dictionary<string, StaticTextureSource> _staticSources;
+        private readonly Dictionary<TR2Entities, string> _entityMap;
 
         public TextureDatabase()
         {
             _dynamicSources = new Dictionary<string, DynamicTextureSource>();
             _staticSources = new Dictionary<string, StaticTextureSource>();
+            _entityMap = JsonConvert.DeserializeObject<Dictionary<TR2Entities, string>>(File.ReadAllText(@"Resources\Textures\Source\Static\entity_lookup.json"));
         }
 
         public void Dispose()
@@ -49,6 +50,15 @@ namespace TRTexture16Importer.Textures
             return _staticSources[name];
         }
 
+        public StaticTextureSource GetStaticSource(TR2Entities entity)
+        {
+            if (_entityMap.ContainsKey(entity))
+            {
+                return GetStaticSource(_entityMap[entity]);
+            }
+            return null;
+        }
+
         private DynamicTextureSource LoadDynamicSource(string name)
         {
             string source = @"Resources\Textures\Source\Dynamic\" + name.Replace(".", @"\") + ".json";
@@ -57,10 +67,7 @@ namespace TRTexture16Importer.Textures
                 throw new IOException(string.Format("Missing texture pack source JSON ({0})", source));
             }
 
-            return new DynamicTextureSource
-            {
-                OperationMap = JsonConvert.DeserializeObject<Dictionary<string, HSBOperation>>(File.ReadAllText(source))
-            };
+            return JsonConvert.DeserializeObject<DynamicTextureSource>(File.ReadAllText(source));
         }
 
         private StaticTextureSource LoadStaticSource(string name)
@@ -77,18 +84,15 @@ namespace TRTexture16Importer.Textures
                 throw new IOException(string.Format("Missing texture pack source PNG ({0})", png));
             }
 
-            string mapping = Path.Combine(dir, "Segments.json");
+            string mapping = Path.Combine(dir, "Data.json");
             if (!File.Exists(mapping))
             {
                 throw new IOException(string.Format("Missing texture pack source JSON ({0})", mapping));
             }
 
-            return new StaticTextureSource
-            {
-                PNGPath = png,
-                ChangeSkyBox = png.ToUpper().Contains(@"\SKY\"), // TODO: make explicit in JSON
-                VariantMap = JsonConvert.DeserializeObject<Dictionary<string, List<Rectangle>>>(File.ReadAllText(mapping))
-            };
+            StaticTextureSource source = JsonConvert.DeserializeObject<StaticTextureSource>(File.ReadAllText(mapping));
+            source.PNGPath = png;
+            return source;
         }
     }
 }

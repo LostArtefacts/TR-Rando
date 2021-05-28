@@ -243,6 +243,9 @@
   <ItemGroup>
     <Resource Include="Resources\arrows.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\loading.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>rmdir /S /Q Lib</PreBuildEvent>

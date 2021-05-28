@@ -1,0 +1,137 @@
+﻿using System.Collections.Generic;
+using TRLevelReader.Model;
+
+namespace TRModelTransporter.Helpers
+{
+    public static class TRModelExtensions
+    {
+        private static readonly FixedFloat16 _nullCoord = new FixedFloat16 { Fraction = 0, Whole = 0 };
+
+        public static void ResetUnusedTextures(this TR2Level level)
+        {
+            foreach (TRObjectTexture texture in level.ObjectTextures)
+            {
+                if (texture.AtlasAndFlag == ushort.MaxValue)
+                {
+                    texture.Invalidate();
+                }
+            }
+
+            foreach (TRSpriteTexture texture in level.SpriteTextures)
+            {
+                if (texture.Atlas == ushort.MaxValue)
+                {
+                    texture.Invalidate();
+                }
+            }
+        }
+
+        // See TextureTransportHandler.ResetUnusedTextures
+        public static bool IsValid(this TRObjectTexture texture)
+        {
+            if (texture.AtlasAndFlag == 0)
+            {
+                int coords = 0;
+                foreach (TRObjectTextureVert vert in texture.Vertices)
+                {
+                    coords += vert.XCoordinate.Whole + vert.XCoordinate.Fraction + vert.YCoordinate.Whole + vert.XCoordinate.Fraction;
+                }
+                return coords > 0;
+            }
+
+            return texture.AtlasAndFlag != ushort.MaxValue;
+        }
+
+        public static void Invalidate(this TRObjectTexture texture)
+        {
+            texture.AtlasAndFlag = 0;
+            foreach (TRObjectTextureVert vert in texture.Vertices)
+            {
+                vert.XCoordinate = vert.YCoordinate = _nullCoord;
+            }
+        }
+
+        // See TextureTransportHandler.ResetUnusedTextures
+        public static bool IsValid(this TRSpriteTexture texture)
+        {
+            if (texture.Atlas == 0)
+            {
+                if (texture.X == 0 && texture.Y == 0 && texture.Width == 1 && texture.Height == 1)
+                {
+                    return false;
+                }
+            }
+
+            return texture.Atlas != ushort.MaxValue;
+        }
+
+        public static void Invalidate(this TRSpriteTexture texture)
+        {
+            texture.Atlas = 0;
+            texture.X = texture.Y = 0;
+            texture.Width = texture.Height = 1;
+        }
+
+        public static List<int> GetInvalidObjectTextureIndices(this TR2Level level)
+        {
+            List<int> reusableIndices = new List<int>();
+            for (int i = 0; i < level.NumObjectTextures; i++)
+            {
+                if (!level.ObjectTextures[i].IsValid())
+                {
+                    reusableIndices.Add(i);
+                }
+            }
+            return reusableIndices;
+        }
+
+        public static int GetFreeObjectTextureCount(this TR2Level level)
+        {
+            return (2048 - (int)level.NumObjectTextures) + level.GetInvalidObjectTextureIndices().Count;
+        }
+
+        // Given a precompiled dictionary of old texture index to new, this will ensure that
+        // all Meshes and RoomData point to the new correct index.
+        public static void ReindexTextures(this TR2Level level, Dictionary<int, int> indexMap, bool defaultToOriginal = true)
+        {
+            if (indexMap.Count == 0)
+            {
+                return;
+            }
+
+            foreach (TRMesh mesh in level.Meshes)
+            {
+                foreach (TRFace4 rect in mesh.TexturedRectangles)
+                {
+                    rect.Texture = ConvertTextureReference(rect.Texture, indexMap, defaultToOriginal);
+                }
+                foreach (TRFace3 tri in mesh.TexturedTriangles)
+                {
+                    tri.Texture = ConvertTextureReference(tri.Texture, indexMap, defaultToOriginal);
+                }
+            }
+
+            foreach (TR2Room room in level.Rooms)
+            {
+                foreach (TRFace4 rect in room.RoomData.Rectangles)
+                {
+                    rect.Texture = ConvertTextureReference(rect.Texture, indexMap, defaultToOriginal);
+                }
+                foreach (TRFace3 tri in room.RoomData.Triangles)
+                {
+                    tri.Texture = ConvertTextureReference(tri.Texture, indexMap, defaultToOriginal);
+                }
+            }
+        }
+
+        private static ushort ConvertTextureReference(ushort textureReference, Dictionary<int, int> indexMap, bool defaultToOriginal)
+        {
+            if (indexMap.ContainsKey(textureReference))
+            {
+                return (ushort)indexMap[textureReference];
+            }
+
+            return defaultToOriginal ? textureReference : (ushort)0;
+        }
+    }
+}

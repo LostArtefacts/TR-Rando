@@ -21,20 +21,20 @@ namespace TR2RandomizerCore.Randomizers
         {
         }
 
-        private void RandomizeSecrets(List<Location> LevelLocations, TR23ScriptedLevel lvl)
+        private void RandomizeSecrets(List<Location> LevelLocations)
         {
             if (LevelLocations.Count > 2)
             {
                 if (IsDevelopmentModeOn)
                 {
-                    PlaceAllSecrets(lvl, LevelLocations);
+                    PlaceAllSecrets(LevelLocations);
                     return;
                 }
 
                 //Apply zoning to the locations to ensure they are spread out.
                 ZonedLocationCollection ZonedLocations = new ZonedLocationCollection();
 
-                ZonedLocations.PopulateZones(lvl.LevelFileBaseName.ToUpper(), LevelLocations, ZonePopulationMethod.SecretsOnly);
+                ZonedLocations.PopulateZones(_levelInstance.Name, LevelLocations, ZonePopulationMethod.SecretsOnly);
 
                 Location GoldSecret;
                 Location JadeSecret;
@@ -64,22 +64,22 @@ namespace TR2RandomizerCore.Randomizers
                 //Due to TRMod only accepting room space coords entities are actually stored in level space. So include some
                 //calls to support a transformation of any locations that are specified in room space to maintain backwards compatbility
                 //with older locations and support locations that are specified in both level or room space.
-                GoldSecret = SpatialConverters.TransformToLevelSpace(GoldSecret, _levelInstance.Rooms[GoldSecret.Room].Info);
-                JadeSecret = SpatialConverters.TransformToLevelSpace(JadeSecret, _levelInstance.Rooms[JadeSecret.Room].Info);
-                StoneSecret = SpatialConverters.TransformToLevelSpace(StoneSecret, _levelInstance.Rooms[StoneSecret.Room].Info);
+                GoldSecret = SpatialConverters.TransformToLevelSpace(GoldSecret, _levelInstance.Data.Rooms[GoldSecret.Room].Info);
+                JadeSecret = SpatialConverters.TransformToLevelSpace(JadeSecret, _levelInstance.Data.Rooms[JadeSecret.Room].Info);
+                StoneSecret = SpatialConverters.TransformToLevelSpace(StoneSecret, _levelInstance.Data.Rooms[StoneSecret.Room].Info);
 
                 //Does the level contain the entities?
-                int GoldIndex = Array.FindIndex(_levelInstance.Entities, ent => (ent.TypeID == (short)TR2Entities.GoldSecret_S_P));
-                int JadeIndex = Array.FindIndex(_levelInstance.Entities, ent => (ent.TypeID == (short)TR2Entities.JadeSecret_S_P));
-                int StoneIndex = Array.FindIndex(_levelInstance.Entities, ent => (ent.TypeID == (short)TR2Entities.StoneSecret_S_P));
+                int GoldIndex = Array.FindIndex(_levelInstance.Data.Entities, ent => (ent.TypeID == (short)TR2Entities.GoldSecret_S_P));
+                int JadeIndex = Array.FindIndex(_levelInstance.Data.Entities, ent => (ent.TypeID == (short)TR2Entities.JadeSecret_S_P));
+                int StoneIndex = Array.FindIndex(_levelInstance.Data.Entities, ent => (ent.TypeID == (short)TR2Entities.StoneSecret_S_P));
 
                 //Check if we could find instances of the secret entities, if not, we need to add not edit.
                 if (GoldIndex != -1)
                 {
-                    _levelInstance.Entities[GoldIndex].Room = Convert.ToInt16(GoldSecret.Room);
-                    _levelInstance.Entities[GoldIndex].X = GoldSecret.X;
-                    _levelInstance.Entities[GoldIndex].Y = GoldSecret.Y;
-                    _levelInstance.Entities[GoldIndex].Z = GoldSecret.Z;
+                    _levelInstance.Data.Entities[GoldIndex].Room = Convert.ToInt16(GoldSecret.Room);
+                    _levelInstance.Data.Entities[GoldIndex].X = GoldSecret.X;
+                    _levelInstance.Data.Entities[GoldIndex].Y = GoldSecret.Y;
+                    _levelInstance.Data.Entities[GoldIndex].Z = GoldSecret.Z;
                 }
                 else
                 {
@@ -96,18 +96,18 @@ namespace TR2RandomizerCore.Randomizers
                         Flags = 0
                     };
 
-                    List<TR2Entity> ents = _levelInstance.Entities.ToList();
+                    List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
                     ents.Add(GoldEntity);
-                    _levelInstance.Entities = ents.ToArray();
-                    _levelInstance.NumEntities++;
+                    _levelInstance.Data.Entities = ents.ToArray();
+                    _levelInstance.Data.NumEntities++;
                 }
 
                 if (JadeIndex != -1)
                 {
-                    _levelInstance.Entities[JadeIndex].Room = Convert.ToInt16(JadeSecret.Room);
-                    _levelInstance.Entities[JadeIndex].X = JadeSecret.X;
-                    _levelInstance.Entities[JadeIndex].Y = JadeSecret.Y;
-                    _levelInstance.Entities[JadeIndex].Z = JadeSecret.Z;
+                    _levelInstance.Data.Entities[JadeIndex].Room = Convert.ToInt16(JadeSecret.Room);
+                    _levelInstance.Data.Entities[JadeIndex].X = JadeSecret.X;
+                    _levelInstance.Data.Entities[JadeIndex].Y = JadeSecret.Y;
+                    _levelInstance.Data.Entities[JadeIndex].Z = JadeSecret.Z;
                 }
                 else
                 {
@@ -124,18 +124,18 @@ namespace TR2RandomizerCore.Randomizers
                         Flags = 0
                     };
 
-                    List<TR2Entity> ents = _levelInstance.Entities.ToList();
+                    List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
                     ents.Add(JadeEntity);
-                    _levelInstance.Entities = ents.ToArray();
-                    _levelInstance.NumEntities++;
+                    _levelInstance.Data.Entities = ents.ToArray();
+                    _levelInstance.Data.NumEntities++;
                 }
 
                 if (StoneIndex != -1)
                 {
-                    _levelInstance.Entities[StoneIndex].Room = Convert.ToInt16(StoneSecret.Room);
-                    _levelInstance.Entities[StoneIndex].X = StoneSecret.X;
-                    _levelInstance.Entities[StoneIndex].Y = StoneSecret.Y;
-                    _levelInstance.Entities[StoneIndex].Z = StoneSecret.Z;
+                    _levelInstance.Data.Entities[StoneIndex].Room = Convert.ToInt16(StoneSecret.Room);
+                    _levelInstance.Data.Entities[StoneIndex].X = StoneSecret.X;
+                    _levelInstance.Data.Entities[StoneIndex].Y = StoneSecret.Y;
+                    _levelInstance.Data.Entities[StoneIndex].Z = StoneSecret.Z;
                 }
                 else
                 {
@@ -152,21 +152,21 @@ namespace TR2RandomizerCore.Randomizers
                         Flags = 0
                     };
 
-                    List<TR2Entity> ents = _levelInstance.Entities.ToList();
+                    List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
                     ents.Add(StoneEntity);
-                    _levelInstance.Entities = ents.ToArray();
-                    _levelInstance.NumEntities++;
+                    _levelInstance.Data.Entities = ents.ToArray();
+                    _levelInstance.Data.NumEntities++;
                 }
             }
         }
 
-        private void PlaceAllSecrets(TR23ScriptedLevel lvl, List<Location> LevelLocations)
+        private void PlaceAllSecrets(List<Location> LevelLocations)
         {
             ZonedLocationCollection ZonedLocations = new ZonedLocationCollection();
 
-            ZonedLocations.PopulateZones(lvl.LevelFileBaseName.ToUpper(), LevelLocations, ZonePopulationMethod.SecretsOnly);
+            ZonedLocations.PopulateZones(_levelInstance.Name, LevelLocations, ZonePopulationMethod.SecretsOnly);
 
-            List<TR2Entity> ents = _levelInstance.Entities.ToList();
+            List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
 
             bool SecretsRemain = true;
 
@@ -197,7 +197,7 @@ namespace TR2RandomizerCore.Randomizers
             //Add new entities
             foreach (Location loc in ZonedLocations.StoneZone)
             {
-                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Rooms[loc.Room].Info);
+                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info);
 
                 ents.Add(new TR2Entity
                 {
@@ -215,7 +215,7 @@ namespace TR2RandomizerCore.Randomizers
 
             foreach (Location loc in ZonedLocations.JadeZone)
             {
-                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Rooms[loc.Room].Info);
+                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info);
 
                 ents.Add(new TR2Entity
                 {
@@ -233,7 +233,7 @@ namespace TR2RandomizerCore.Randomizers
 
             foreach (Location loc in ZonedLocations.GoldZone)
             {
-                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Rooms[loc.Room].Info);
+                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info);
 
                 ents.Add(new TR2Entity
                 {
@@ -249,8 +249,8 @@ namespace TR2RandomizerCore.Randomizers
                 });
             }
 
-            _levelInstance.NumEntities = (uint)ents.Count;
-            _levelInstance.Entities = ents.ToArray();
+            _levelInstance.Data.NumEntities = (uint)ents.Count;
+            _levelInstance.Data.Entities = ents.ToArray();
         }
 
         public override void Randomize(int seed)
@@ -261,19 +261,19 @@ namespace TR2RandomizerCore.Randomizers
 
             foreach (TR23ScriptedLevel lvl in Levels)
             {
-                if (SaveMonitor.IsCancelled) return;
-                //SaveMonitor.FireSaveStateBeginning(TRSaveCategory.Custom, string.Format("Randomizing secrets in {0}", lvl.Name));
-
                 //Read the level into a level object
                 LoadLevelInstance(lvl);
 
                 //Apply the modifications
-                RandomizeSecrets(Locations[lvl.LevelFileBaseName.ToUpper()], lvl);
+                RandomizeSecrets(Locations[_levelInstance.Name]);
 
                 //Write back the level file
                 SaveLevelInstance();
 
-                SaveMonitor.FireSaveStateChanged(1);
+                if (!TriggerProgress())
+                {
+                    break;
+                }
             }
         }
     }

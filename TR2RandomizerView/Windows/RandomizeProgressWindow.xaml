@@ -10,23 +10,64 @@
         Loaded="Window_Loaded"
         Closing="Window_Closing"
         Icon="..\Resources\rando.ico"
-        Title="Randomization In Progress" Height="140" Width="400">
+        SizeToContent="Height"
+        Title="Randomization In Progress" Width="440">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Margin="10">
-            <TextBlock Text="{Binding ProgressDescription}"
-                       FontSize="12"/>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock 
+                Text="{Binding ProgressDescription}"
+                FontSize="12"
+                VerticalAlignment="Bottom"/>
+
+            <!-- https://stackoverflow.com/a/56477427 -->
+            <Image
+                Grid.Column="1"
+                Source="..\Resources\loading.png"
+                Width="16"
+                Height="16"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                RenderTransformOrigin="0.5, 0.5">
+                <Image.RenderTransform>
+                    <RotateTransform x:Name="noFreeze" />
+                </Image.RenderTransform>
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="(Image.RenderTransform).(RotateTransform.Angle)"
+                                    To="360" 
+                                    Duration="0:0:1" 
+                                    RepeatBehavior="Forever" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
 
             <ProgressBar 
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                VerticalAlignment="Stretch"
                 Margin="0,5,0,0"
                 Value="{Binding ProgressValue}" 
-                Maximum="{Binding ProgressTarget}"
-                Height="20"/>
-        </StackPanel>
+                Maximum="{Binding ProgressTarget}"/>
+        </Grid>
 
         <Border BorderThickness="0 1 0 0"
                 BorderBrush="#ccc"
