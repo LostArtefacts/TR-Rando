@@ -3,6 +3,11 @@ Tomb Raider II Item Randomizer
 
 ![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando.PNG)
 
+# Additional Build Dependencies
+In addition to Newtonsoft.JSON, the following dependencies external to NuGet are required to build:
+* https://github.com/lahm86/TRGameflowEditor/releases/latest - TRGameflowEditor by Lahm.
+* https://github.com/lahm86/RectanglePacker/releases/latest - ReactanglePacker by Lahm.
+
 # Thanks
 * Eycore - Lots of ideas and locations
 * Nenad_ - Lots of ideas and locations
