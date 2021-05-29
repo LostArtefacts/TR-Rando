@@ -44,9 +44,7 @@ namespace TR2RandomizerCore.Utilities
             },
             { LevelNames.DORIA, new List<List<int>>
                 {
-                    new List<int>() { 19, 42, 112 },
-                    new List<int>() { 85, 94 },
-                    new List<int>() { 2, 6, 7, 87, 88, 99, 100, 101, 102, 103}
+                    //No drain areas defined for now
                 }
             },
             { LevelNames.LQ, new List<List<int>>
