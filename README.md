@@ -36,3 +36,12 @@ https://github.com/DanzaG/TR2-Rando/releases/download/V1.2.1/V1.2.1.zip
 
 # Installation
 https://www.youtube.com/watch?v=MpNBfZgE0Fc
+
+# Screenies
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando2.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando3.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando4.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando5.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando6.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando7.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando8.PNG)
