@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
+using TRLevelReader.Model.Enums;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 
@@ -85,10 +86,28 @@ namespace TextureExport
                     levelSel.Append(" value=\"").Append(lvl).Append(".html\">").Append(lvl).Append("</option>");
                 }
 
+                StringBuilder skyboxInfo = new StringBuilder();
+                Dictionary<int, TRColour4> skyColours = GetSkyBoxColours();
+                if (skyColours.Count > 0)
+                {
+                    skyboxInfo.Append("<div><span>Palette #</span><span>RGB</span><span>Swatch</span></div>");
+                    string rgbTpl = "<span>[{0}, {1}, {2}]</span>";
+                    string swatchTpl = "<span style=\"background:rgb({0},{1},{2})\">&nbsp;</span>"; ;
+                    foreach (int index in skyColours.Keys)
+                    {
+                        TRColour4 c = skyColours[index];
+                        skyboxInfo.Append("<div class=\"body-row\"><span>").Append(index).Append("</span>");
+                        skyboxInfo.Append(string.Format(rgbTpl, c.Red, c.Green, c.Blue));
+                        skyboxInfo.Append(string.Format(swatchTpl, c.Red, c.Green, c.Blue));
+                        skyboxInfo.Append("</div>");
+                    }
+                }
+
                 string tpl = File.ReadAllText(@"Resources\TileTemplate.html");
                 tpl = tpl.Replace("{Title}", filePath);
                 tpl = tpl.Replace("{Levels}", levelSel.ToString());
                 tpl = tpl.Replace("{Tiles}", tiles.ToString());
+                tpl = tpl.Replace("{SkyBox}", skyboxInfo.ToString());
 
                 File.WriteAllText(filePath + ".html", tpl);
             }
@@ -123,6 +142,33 @@ namespace TextureExport
                 }
             }
             return indices;
+        }
+
+        private Dictionary<int, TRColour4> GetSkyBoxColours()
+        {
+            Dictionary<int, TRColour4> colours = new Dictionary<int, TRColour4>();
+            TRMesh[] meshes = TR2LevelUtilities.GetModelMeshes(_level, TR2Entities.Skybox_H);
+            if (meshes != null)
+            {
+                ISet<int> colourIndices = new SortedSet<int>();
+                foreach (TRMesh mesh in meshes)
+                {
+                    foreach (TRFace4 t in mesh.ColouredRectangles)
+                    {
+                        colourIndices.Add(BitConverter.GetBytes(t.Texture)[1]);
+                    }
+                    foreach (TRFace3 t in mesh.ColouredTriangles)
+                    {
+                        colourIndices.Add(BitConverter.GetBytes(t.Texture)[1]);
+                    }
+                }
+
+                foreach (int i in colourIndices)
+                {
+                    colours.Add(i, _level.Palette16[i]);
+                }
+            }
+            return colours;
         }
 
         public void ExportAllTextureSegments(string filePath)
