@@ -155,8 +155,50 @@ namespace TR2RandomizerCore.Randomizers
                                 case TR2Entities.Puzzle1_S_P:
                                     if (ZonedLocations.Puzzle1Zone.Count > 0)
                                     {
-                                        RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
-                                        FoundPossibleLocation = true;
+                                        if (_levelInstance.Name == LevelNames.DA)
+                                        {
+                                            int burnerChipID = 120;
+                                            int consoleChipID = 7;
+
+                                            RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
+
+                                            //Special case - multiple chips
+                                            if (i == burnerChipID)
+                                            {
+                                                //Burner Chip
+                                                List<int> AllowedBurnerRooms = new List<int>() { 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 29, 30, 32, 34, 75, 80, 83, 84, 85, 86, 87, 88, 89 };
+
+                                                while (!AllowedBurnerRooms.Contains(RandomLocation.Room))
+                                                {
+                                                    RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
+                                                }
+
+                                                FoundPossibleLocation = true;
+                                            }
+                                            else if (i == consoleChipID)
+                                            {
+                                                //Center Console Chip
+                                                List<int> AllowedConsoleRooms = new List<int>() { 2, 12, 13, 14, 15, 16, 17, 21, 22, 23, 24, 25, 26, 29, 30, 32, 34, 35, 64, 65, 66, 68, 69, 70, 75, 80, 82, 83, 84, 85, 86, 87, 88, 89 };
+
+                                                while (!AllowedConsoleRooms.Contains(RandomLocation.Room))
+                                                {
+                                                    RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
+                                                }
+
+                                                FoundPossibleLocation = true;
+                                            }
+                                            else
+                                            {
+                                                //Shouldnt get here, but default handling just in case
+                                                RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
+                                                FoundPossibleLocation = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
+                                            FoundPossibleLocation = true;
+                                        }
                                     }
                                     break;
                                 case TR2Entities.Puzzle2_S_P:
@@ -183,8 +225,48 @@ namespace TR2RandomizerCore.Randomizers
                                 case TR2Entities.Key1_S_P:
                                     if (ZonedLocations.Key1Zone.Count > 0)
                                     {
-                                        RandomLocation = ZonedLocations.Key1Zone[_generator.Next(0, ZonedLocations.Key1Zone.Count)];
-                                        FoundPossibleLocation = true;
+                                        if (_levelInstance.Name == LevelNames.OPERA)
+                                        {
+                                            int startKeyID = 172;
+                                            int fanKeyID = 118;
+
+                                            //Special case - multiple keys
+                                            if (i == startKeyID)
+                                            {
+                                                //Start key
+                                                List<int> AllowedStartRooms = new List<int>() { 10, 23, 25, 27, 29, 30, 31, 32, 33, 35, 127, 162, 163 };
+
+                                                while (!AllowedStartRooms.Contains(RandomLocation.Room))
+                                                {
+                                                    RandomLocation = ZonedLocations.Key1Zone[_generator.Next(0, ZonedLocations.Key1Zone.Count)];
+                                                }
+
+                                                FoundPossibleLocation = true;
+                                            }
+                                            else if (i == fanKeyID)
+                                            {
+                                                //Fan area key
+                                                List<int> AllowedFanRooms = new List<int>() { 1, 5, 8, 16, 37, 38, 44, 46, 47, 48, 49, 50, 52, 53, 55, 57, 59, 60, 63, 65, 66, 67, 68, 69, 70, 71, 72, 75, 76, 77, 78, 82, 83, 86, 87, 88, 89, 90, 93, 95, 96, 100, 102, 103, 105, 107, 109, 111, 120, 132, 139, 141, 143, 144, 151, 153, 154, 155, 156, 158, 159, 161, 174, 176, 177, 178, 179, 183, 185, 187, 188, 189 };
+
+                                                while (!AllowedFanRooms.Contains(RandomLocation.Room))
+                                                {
+                                                    RandomLocation = ZonedLocations.Key1Zone[_generator.Next(0, ZonedLocations.Key1Zone.Count)];
+                                                }
+
+                                                FoundPossibleLocation = true;
+                                            }
+                                            else
+                                            {
+                                                //Shouldnt get here, but default handling just in case
+                                                RandomLocation = ZonedLocations.Key1Zone[_generator.Next(0, ZonedLocations.Key1Zone.Count)];
+                                                FoundPossibleLocation = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            RandomLocation = ZonedLocations.Key1Zone[_generator.Next(0, ZonedLocations.Key1Zone.Count)];
+                                            FoundPossibleLocation = true;
+                                        }
                                     }
                                     break;
                                 case TR2Entities.Key2_S_P:
