@@ -189,7 +189,6 @@ namespace TR2RandomizerCore.Randomizers
                                             }
                                             else
                                             {
-                                                //Shouldnt get here, but default handling just in case
                                                 RandomLocation = ZonedLocations.Puzzle1Zone[_generator.Next(0, ZonedLocations.Puzzle1Zone.Count)];
                                                 FoundPossibleLocation = true;
                                             }
@@ -257,7 +256,6 @@ namespace TR2RandomizerCore.Randomizers
                                             }
                                             else
                                             {
-                                                //Shouldnt get here, but default handling just in case
                                                 RandomLocation = ZonedLocations.Key1Zone[_generator.Next(0, ZonedLocations.Key1Zone.Count)];
                                                 FoundPossibleLocation = true;
                                             }
