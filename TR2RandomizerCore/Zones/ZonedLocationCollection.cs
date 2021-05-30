@@ -214,12 +214,12 @@ namespace TR2RandomizerCore.Zones
 
 
                 _zoneAppliedLocations.Add((int)LevelZones.Quest1Zone, (from loc in locations
-                                                                       where ZoneMap[(int)LevelZones.Puzzle4Zone].Contains(loc.Room)
+                                                                       where ZoneMap[(int)LevelZones.Quest1Zone].Contains(loc.Room)
                                                                        select loc).ToList());
 
 
                 _zoneAppliedLocations.Add((int)LevelZones.Quest2Zone, (from loc in locations
-                                                                       where ZoneMap[(int)LevelZones.Puzzle4Zone].Contains(loc.Room)
+                                                                       where ZoneMap[(int)LevelZones.Quest2Zone].Contains(loc.Room)
                                                                        select loc).ToList());
 
             }
