@@ -14,6 +14,8 @@ namespace TRModelTransporter.Transport
     {
         protected static readonly Dictionary<TR2Entities, TR2Entities[]> _entityDependencies = new Dictionary<TR2Entities, TR2Entities[]>
         {
+            [TR2Entities.TRex] =
+                new TR2Entities[] { TR2Entities.LaraMiscAnim_H_Wall },
             [TR2Entities.MaskedGoon2] =
                 new TR2Entities[] { TR2Entities.MaskedGoon1 },
             [TR2Entities.MaskedGoon3] =
@@ -67,6 +69,7 @@ namespace TRModelTransporter.Transport
             [TR2Entities.LaraMiscAnim_H_Ice] = TR2Entities.LaraMiscAnim_H,
             [TR2Entities.LaraMiscAnim_H_Unwater] = TR2Entities.LaraMiscAnim_H,
             [TR2Entities.LaraMiscAnim_H_Xian] = TR2Entities.LaraMiscAnim_H,
+            [TR2Entities.LaraMiscAnim_H_Wall] = TR2Entities.LaraMiscAnim_H,
             [TR2Entities.BarracudaIce] = TR2Entities.Barracuda,
             [TR2Entities.BarracudaUnwater] = TR2Entities.Barracuda,
             [TR2Entities.BarracudaXian] = TR2Entities.Barracuda
@@ -90,7 +93,7 @@ namespace TRModelTransporter.Transport
             },
             [TR2Entities.LaraMiscAnim_H] = new List<TR2Entities>
             {
-                TR2Entities.LaraMiscAnim_H_Ice, TR2Entities.LaraMiscAnim_H_Unwater, TR2Entities.LaraMiscAnim_H_Xian
+                TR2Entities.LaraMiscAnim_H_Ice, TR2Entities.LaraMiscAnim_H_Unwater, TR2Entities.LaraMiscAnim_H_Xian, TR2Entities.LaraMiscAnim_H_Wall
             }
         };
 

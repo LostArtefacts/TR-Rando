@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="TR2RandomizerView.Controls.ManagedSeedBoolBoolControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ctrl="clr-namespace:TR2RandomizerView.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <Border x:Name="_content"
+            Style="{StaticResource RandoElementBorder}">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <CheckBox IsChecked="{Binding IsActive, Mode=TwoWay}"
+                      FontWeight="Bold"
+                      Grid.ColumnSpan="2"
+                      Margin="0,0,0,5">
+                <Label Padding="0"
+                       Content="{Binding Title}"/>
+            </CheckBox>
+
+            <TextBlock Text="{Binding Text}"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       TextWrapping="Wrap"/>
+
+            <StackPanel Grid.Row="2"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Left">
+                <CheckBox IsEnabled="{Binding IsActive}"
+                          IsChecked="{Binding CustomBool1, Mode=TwoWay}"
+                          VerticalAlignment="Center"
+                          Margin="0,0,0,5">
+                    <Label Padding="0"
+                           Content="{Binding CustomBoolTitle1}"/>
+                </CheckBox>
+                <CheckBox IsEnabled="{Binding IsActive}"
+                          IsChecked="{Binding CustomBool2, Mode=TwoWay}"
+                          VerticalAlignment="Center"
+                          Margin="0,0,0,3">
+                    <Label Padding="0"
+                           Content="{Binding CustomBoolTitle2}"/>
+                </CheckBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom">
+                <Label IsEnabled="{Binding IsActive}"
+                       Content="Seed"
+                       VerticalAlignment="Center"
+                       Padding="0,0,5,0"/>
+
+                <ctrl:SeedControl IsEnabled="{Binding IsActive}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Center"
+                                  Value="{Binding SeedValue, Mode=TwoWay}"
+                                  MinValue="{Binding SeedMinValue}"
+                                  MaxValue="{Binding SeedMaxValue}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

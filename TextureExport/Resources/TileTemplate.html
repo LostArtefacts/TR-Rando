@@ -104,6 +104,39 @@
             background: #fff;
             z-index: 998;
         }
+
+        #skybox {
+            display:table;
+            position:absolute;
+            left:10px;
+            bottom:10px;
+            font-size:13px;
+            width:calc(100% - 20px);
+        }
+
+        #skybox:empty {
+            display:none;
+        }
+
+        #skybox:before {
+            display:block;
+            content:'SkyBox';
+            font-weight:bold;
+        }
+
+        #skybox div {
+            display:table-row;
+            font-weight:bold;
+        }
+
+        #skybox .body-row {
+            font-weight:normal;
+        }
+
+        #skybox span {
+            display:table-cell;
+            padding-right:3px;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script>
@@ -254,6 +287,7 @@
         </div>
     </div>
     <div id="details">&nbsp;</div>
+    <div id="skybox">{SkyBox}</div>
 </div>
 <div id="tiles" class="singlesel">{Tiles}</div>
 </body>

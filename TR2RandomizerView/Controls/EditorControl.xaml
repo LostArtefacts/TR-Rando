@@ -100,7 +100,7 @@
             CustomBool="{Binding IncludeKeyItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomBoolTitle="Enable key items"/>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedBoolBoolControl
             Grid.Row="2" 
             Grid.Column="1"
             IsActive="{Binding RandomizeEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -109,8 +109,10 @@
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding EnemySeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBool="{Binding CrossLevelEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle="Enable cross-level enemies"/>
+            CustomBool1="{Binding CrossLevelEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle1="Enable cross-level enemies"
+            CustomBool2="{Binding ProtectMonks, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle2="Avoid killing monks"/>
 
         <ctrl:ManagedSeedBoolControl
             Grid.Row="3"

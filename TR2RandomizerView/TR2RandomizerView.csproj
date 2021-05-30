@@ -71,6 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ManagedSeedBoolBoolControl.xaml.cs">
+      <DependentUpon>ManagedSeedBoolBoolControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ManagedSeedBoolControl.xaml.cs">
       <DependentUpon>ManagedSeedBoolControl.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\FolderLoadControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ManagedSeedBoolBoolControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

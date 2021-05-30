@@ -25,6 +25,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool DevelopmentMode { get; set; }
         internal bool PersistTextureVariants { get; set; }
         internal bool CrossLevelEnemies { get; set; }
+        internal bool ProtectMonks { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || (RandomizeEnemies && CrossLevelEnemies);
 
@@ -46,6 +47,7 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeEnemies = config.GetBool(nameof(RandomizeEnemies));
             EnemySeed = config.GetInt(nameof(EnemySeed), defaultSeed);
             CrossLevelEnemies = config.GetBool(nameof(CrossLevelEnemies));
+            ProtectMonks = config.GetBool(nameof(ProtectMonks));
 
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
@@ -67,6 +69,7 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeEnemies)] = RandomizeEnemies;
             config[nameof(EnemySeed)] = EnemySeed;
             config[nameof(CrossLevelEnemies)] = CrossLevelEnemies;
+            config[nameof(ProtectMonks)] = ProtectMonks;
 
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;
@@ -149,6 +152,7 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         CrossLevelEnemies = CrossLevelEnemies,
+                        ProtectMonks = ProtectMonks,
                         TextureMonitor = textureMonitor
                     }.Randomize(EnemySeed);
                 }
