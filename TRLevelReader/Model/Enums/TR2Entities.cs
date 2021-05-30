@@ -287,6 +287,7 @@ namespace TRLevelReader.Model.Enums
         // the game. For levels that already have misc animations, the death animation will default to "normal".
         LaraMiscAnim_H_Ice = 2000, // Death-by-Yeti, Gong action
         LaraMiscAnim_H_Unwater,    // Death-by-Shark, opening wheel door
-        LaraMiscAnim_H_Xian        // Death-by-Guard, inspecting dagger
+        LaraMiscAnim_H_Xian,       // Death-by-Guard, inspecting dagger
+        LaraMiscAnim_H_Wall        // Death-by-Barney
     }
 }
