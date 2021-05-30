@@ -188,6 +188,9 @@
     <None Include="Resources\Models\LaraMiscAnim_H_Unwater\Data.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Models\LaraMiscAnim_H_Wall\Data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Models\LaraMiscAnim_H_Xian\Data.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

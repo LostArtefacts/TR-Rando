@@ -18,6 +18,7 @@ namespace TR2RandomizerCore.Randomizers
         private Dictionary<TR2Entities, List<string>> _gameEnemyTracker;
 
         internal bool CrossLevelEnemies { get; set; }
+        internal bool ProtectMonks { get; set; }
         internal int MaxPackingAttempts { get; set; }
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
@@ -162,7 +163,7 @@ namespace TR2RandomizerCore.Randomizers
 
                 if (droppableEnemyRequired)
                 {
-                    List<TR2Entities> droppableEnemies = TR2EntityUtilities.GetCrossLevelDroppableEnemies();
+                    List<TR2Entities> droppableEnemies = TR2EntityUtilities.GetCrossLevelDroppableEnemies(!ProtectMonks);
                     newEntities.Add(droppableEnemies[_generator.Next(0, droppableEnemies.Count)]);
                 }
 
@@ -343,7 +344,7 @@ namespace TR2RandomizerCore.Randomizers
                     newEntityType = enemies.Available[_generator.Next(0, enemies.Available.Count)];
 
                     //Do we need to ensure the enemy can drop the item on the same tile?
-                    if (!TR2EntityUtilities.CanDropPickups(newEntityType) && isPickupItem)
+                    if (!TR2EntityUtilities.CanDropPickups(newEntityType, !ProtectMonks) && isPickupItem)
                     {
                         //Ensure the new random entity can drop pickups
                         newEntityType = enemies.Droppable[_generator.Next(0, enemies.Droppable.Count)];
@@ -361,7 +362,7 @@ namespace TR2RandomizerCore.Randomizers
                 if (level.Is(LevelNames.DA) && roomIndex == 77)
                 {
                     // Make sure the end level trigger isn't blocked by an unkillable enemy
-                    while (TR2EntityUtilities.IsHazardCreature(newEntityType))
+                    while (TR2EntityUtilities.IsHazardCreature(newEntityType) || (ProtectMonks && TR2EntityUtilities.IsMonk(newEntityType)))
                     {
                         newEntityType = enemies.Available[_generator.Next(0, enemies.Available.Count)];
                     }
@@ -572,7 +573,7 @@ namespace TR2RandomizerCore.Randomizers
                         _outer.RandomizeEnemies(level, new EnemyRandomizationCollection
                         {
                             Available = importedCollection.EntitiesToImport,
-                            Droppable = TR2EntityUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport),
+                            Droppable = TR2EntityUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.ProtectMonks),
                             Water = TR2EntityUtilities.FilterWaterEnemies(importedCollection.EntitiesToImport)
                         });
                     }

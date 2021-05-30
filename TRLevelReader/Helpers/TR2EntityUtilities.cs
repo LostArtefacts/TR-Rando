@@ -147,9 +147,9 @@ namespace TRLevelReader.Helpers
             };
         }
 
-        public static List<TR2Entities> GetCrossLevelDroppableEnemies()
+        public static List<TR2Entities> GetCrossLevelDroppableEnemies(bool monksAreKillable)
         {
-            return new List<TR2Entities>
+            List<TR2Entities> entities = new List<TR2Entities>
             {
                 TR2Entities.BengalTiger,
                 TR2Entities.Crow,
@@ -167,8 +167,6 @@ namespace TRLevelReader.Helpers
                 TR2Entities.Mercenary1,
                 TR2Entities.Mercenary2,
                 TR2Entities.Mercenary3,
-                TR2Entities.MonkWithKnifeStick,
-                TR2Entities.MonkWithLongStick,
                 TR2Entities.Rat,
                 TR2Entities.ShotgunGoon,
                 TR2Entities.SnowLeopard,
@@ -182,6 +180,15 @@ namespace TRLevelReader.Helpers
                 TR2Entities.WhiteTiger,
                 TR2Entities.Yeti
             };
+
+            // #131 Provides an option to exclude monks as having to be killed
+            if (monksAreKillable)
+            {
+                entities.Add(TR2Entities.MonkWithKnifeStick);
+                entities.Add(TR2Entities.MonkWithLongStick);
+            }
+
+            return entities;
         }
 
         // This is the full list of enemies including alias duplicates - used for 
@@ -516,9 +523,9 @@ namespace TRLevelReader.Helpers
             return waterEntities;
         }
 
-        public static bool CanDropPickups(TR2Entities entity)
+        public static bool CanDropPickups(TR2Entities entity, bool monksAreKillable)
         {
-            return GetCrossLevelDroppableEnemies().Contains(entity);
+            return GetCrossLevelDroppableEnemies(monksAreKillable).Contains(entity);
             /*return (entity == TR2Entities.Doberman ||
                     entity == TR2Entities.MaskedGoon1 ||
                     entity == TR2Entities.MaskedGoon2 ||
@@ -537,12 +544,17 @@ namespace TRLevelReader.Helpers
                     entity == TR2Entities.MonkWithKnifeStick);*/
         }
 
-        public static List<TR2Entities> FilterDroppableEnemies(List<TR2Entities> entities)
+        public static bool IsMonk(TR2Entities entity)
+        {
+            return entity == TR2Entities.MonkWithKnifeStick || entity == TR2Entities.MonkWithLongStick;
+        }
+
+        public static List<TR2Entities> FilterDroppableEnemies(List<TR2Entities> entities, bool monksAreKillable)
         {
             List<TR2Entities> droppableEntities = new List<TR2Entities>();
             foreach (TR2Entities entity in entities)
             {
-                if (CanDropPickups(entity))
+                if (CanDropPickups(entity, monksAreKillable))
                 {
                     droppableEntities.Add(entity);
                 }

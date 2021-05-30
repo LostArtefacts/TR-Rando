@@ -15,7 +15,7 @@ namespace TR2RandomizerView.Model
 
         private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl;
 
-        private bool _disableDemos;
+        private bool _disableDemos, _protectMonks;
 
         private int _levelCount;
 
@@ -336,6 +336,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool ProtectMonks
+        {
+            get => _protectMonks;
+            set
+            {
+                _protectMonks = value;
+                FirePropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void FirePropertyChanged([CallerMemberName] string name = null)
@@ -406,6 +416,7 @@ namespace TR2RandomizerView.Model
 
             DevelopmentMode = _controller.DevelopmentMode;
             DisableDemos = _controller.DisableDemos;
+            ProtectMonks = _controller.ProtectMonks;
         }
 
         public void RandomizeActiveSeeds()
@@ -553,6 +564,7 @@ namespace TR2RandomizerView.Model
 
             _controller.DevelopmentMode = DevelopmentMode;
             _controller.DisableDemos = DisableDemos;
+            _controller.ProtectMonks = ProtectMonks;
         }
 
         public void Unload()
