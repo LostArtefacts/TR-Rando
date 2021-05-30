@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RectanglePacker">
-      <HintPath>..\..\RectanglePacker\RectanglePacker\bin\Debug\RectanglePacker.dll</HintPath>
+      <HintPath>..\Deps\RectanglePacker.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

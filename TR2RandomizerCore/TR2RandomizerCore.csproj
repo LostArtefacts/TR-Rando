@@ -44,10 +44,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="TRGE.Coord">
-      <HintPath>..\..\TRGameflowEditor\TRGE.Coord\bin\Debug\TRGE.Coord.dll</HintPath>
+      <HintPath>..\Deps\TRGE.Coord.dll</HintPath>
     </Reference>
     <Reference Include="TRGE.Core">
-      <HintPath>..\..\TRGameflowEditor\TRGE.Coord\bin\Debug\TRGE.Core.dll</HintPath>
+      <HintPath>..\Deps\TRGE.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

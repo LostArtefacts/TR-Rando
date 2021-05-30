@@ -35,7 +35,7 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RectanglePacker">
-      <HintPath>..\..\RectanglePacker\RectanglePacker\bin\Debug\RectanglePacker.dll</HintPath>
+      <HintPath>..\Deps\RectanglePacker.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
