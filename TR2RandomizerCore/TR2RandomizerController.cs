@@ -146,6 +146,12 @@ namespace TR2RandomizerCore
             get => !ScriptEditor.DemosEnabled;
             set => ScriptEditor.DemosEnabled = !value;
         }
+
+        public bool ProtectMonks
+        {
+            get => LevelRandomizer.ProtectMonks;
+            set => LevelRandomizer.ProtectMonks = value;
+        }
         #endregion
 
         #region LevelRandomizer Passthrough
