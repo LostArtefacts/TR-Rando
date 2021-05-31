@@ -138,10 +138,14 @@ namespace TRFDControl
 
                         if (data.EndData)
                         {
+                            //End data (from what I understand) means there is no further functions for this sector.
+                            //E.G. Sector 52 on Xian has a slant function and portal function. EndData is not set on
+                            //slant function, but is on portal function as there are no further functions.
                             break;
                         }
                         else
                         {
+                            //There are further functions for this sector - continue parsing.
                             index++;
                         }
                     } 
