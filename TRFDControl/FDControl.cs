@@ -9,7 +9,8 @@ namespace TRFDControl
 {
     public class FDControl
     {
-        private List<FDEntry> entries;
+        //FDIndex - Entry
+        private Dictionary<int, FDEntry> entries = new Dictionary<int, FDEntry>();
 
         public void ParseFromLevel(TR2Level lvl)
         {
@@ -17,64 +18,131 @@ namespace TRFDControl
             {
                 foreach (TRRoomSector sector in room.SectorList)
                 {
+                    //Index into FData is FDIndex
+                    ushort index = sector.FDIndex;
+
                     //Index 0 is a dummy
-                    if (sector.FDIndex == 0)
+                    if (index == 0)
                     {
                         continue;
                     }
-
-                    FDSetup data = new FDSetup();
-
-                    while(data.EndData == false)
+                    
+                    while(true)
                     {
-                        data.Value = lvl.FloorData[sector.FDIndex];
+                        FDSetup data = new FDSetup()
+                        {
+                            Value = lvl.FloorData[index]
+                        };
 
                         switch ((FDFunctions)data.Function)
                         {
                             case FDFunctions.PortalSector:
+
+                                FDPortalEntry portal = new FDPortalEntry()
+                                {
+                                    Setup = new FDSetup() { Value = lvl.FloorData[index] },
+                                    Room = lvl.FloorData[++index]
+                                };
+
+                                entries.Add(sector.FDIndex, portal);
+
                                 break;
                             case FDFunctions.FloorSlant:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.CeilingSlant:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.Trigger:
+                                //Subfunction is FDTrigType...
+                                //Next uint is FDTrigSetup...
+                                //Chain of FDTrigActionListItem s following FDTrigSetup...
+
+                                FDTriggerEntry trig = new FDTriggerEntry()
+                                {
+                                    Setup = new FDSetup() { Value = lvl.FloorData[index] },
+                                    TrigSetup = new FDTrigSetup() {  Value = lvl.FloorData[++index] }
+                                };
+
+                                entries.Add(sector.FDIndex, trig);
+
                                 break;
                             case FDFunctions.KillLara:
+
+                                FDKillLaraEntry kill = new FDKillLaraEntry()
+                                {
+                                    Setup = new FDSetup() { Value = lvl.FloorData[index] }
+                                };
+
+                                entries.Add(sector.FDIndex, kill);
+
                                 break;
                             case FDFunctions.ClimbableWalls:
+
+                                FDClimbEntry climb = new FDClimbEntry()
+                                {
+                                    Setup = new FDSetup() { Value = lvl.FloorData[index] }
+                                };
+
+                                entries.Add(sector.FDIndex, climb);
+
                                 break;
                             case FDFunctions.FloorTriangulationNWSE_Solid:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.FloorTriangulationNESW_Solid:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.CeilingTriangulationNW_Solid:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.CeilingTriangulationNE_Solid:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.FloorTriangulationNWSE_SW:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.FloorTriangulationNWSE_NE:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.FloorTriangulationNESW_SW:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.FloorTriangulationNESW_NW:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.CeilingTriangulationNW_SW:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.CeilingTriangulationNW_NE:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.CeilingTriangulationNE_NW:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.CeilingTriangulationNE_SE:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.Monkeyswing:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.DeferredTriggeringOrMinecartRotateLeft:
+                                //Ignore for now...
                                 break;
                             case FDFunctions.MechBeetleOrMinecartRotateRight:
+                                //Ignore for now...
                                 break;
                             default:
                                 break;
+                        }
+
+                        if (data.EndData)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            index++;
                         }
                     } 
                 }

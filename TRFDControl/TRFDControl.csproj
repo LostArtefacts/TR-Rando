@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="FDActionListItem.cs" />
     <Compile Include="FDCameraAction.cs" />
+    <Compile Include="FDClimbDirection.cs" />
     <Compile Include="FDControl.cs" />
     <Compile Include="FDEntry.cs" />
     <Compile Include="FDFunctions.cs" />
