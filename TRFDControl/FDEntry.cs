@@ -72,6 +72,12 @@ namespace TRFDControl
 
     public class FDTriggerEntry : FDEntry
     {
+        public FDTriggerEntry()
+        {
+            TrigActionList = new List<FDActionListItem>();
+            CameraActionList = new List<FDCameraAction>();
+        }
+
         public FDTrigSetup TrigSetup { get; set; }
 
         public FDTrigType TrigType
@@ -83,5 +89,9 @@ namespace TRFDControl
         }
 
         public List<FDActionListItem> TrigActionList { get; set; }
+
+        public List<FDCameraAction> CameraActionList { get; set; }
+
+        public ushort SwitchOrKeyRef { get; set; }
     }
 }

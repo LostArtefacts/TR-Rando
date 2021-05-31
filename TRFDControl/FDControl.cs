@@ -9,8 +9,7 @@ namespace TRFDControl
 {
     public class FDControl
     {
-        //FDIndex - Entry
-        private Dictionary<int, FDEntry> entries = new Dictionary<int, FDEntry>();
+        public Dictionary<int, FDEntry> Entries = new Dictionary<int, FDEntry>(); //Key is Sector.FDIndex
 
         public void ParseFromLevel(TR2Level lvl)
         {
@@ -44,7 +43,7 @@ namespace TRFDControl
                                     Room = lvl.FloorData[++index]
                                 };
 
-                                entries.Add(sector.FDIndex, portal);
+                                Entries.Add(sector.FDIndex, portal);
 
                                 break;
                             case FDFunctions.FloorSlant:
@@ -54,9 +53,6 @@ namespace TRFDControl
                                 //Ignore for now...
                                 break;
                             case FDFunctions.Trigger:
-                                //Subfunction is FDTrigType...
-                                //Next uint is FDTrigSetup...
-                                //Chain of FDTrigActionListItem s following FDTrigSetup...
 
                                 FDTriggerEntry trig = new FDTriggerEntry()
                                 {
@@ -64,7 +60,38 @@ namespace TRFDControl
                                     TrigSetup = new FDTrigSetup() {  Value = lvl.FloorData[++index] }
                                 };
 
-                                entries.Add(sector.FDIndex, trig);
+                                if (trig.TrigType == FDTrigType.Switch || trig.TrigType == FDTrigType.Key)
+                                {
+                                    //First entry in action list is reference to switch/key entity for switch/key types.
+                                    trig.SwitchOrKeyRef = lvl.FloorData[++index];
+                                }
+
+                                //We don't know if there are any more yet.
+                                bool continueFDParse = false;
+
+                                //Parse trigactions
+                                do
+                                {
+                                    //New trigger action
+                                    FDActionListItem action = new FDActionListItem() { Value = lvl.FloorData[++index] };
+
+                                    //Add action
+                                    trig.TrigActionList.Add(action);
+
+                                    //Is there more?
+                                    continueFDParse = action.Continue;
+
+                                    if (action.TrigAction == FDTrigAction.Camera)
+                                    {
+                                        //Camera trig actions have a special extra uint16...
+                                        FDCameraAction camAction = new FDCameraAction() { Value = lvl.FloorData[++index] };
+
+                                        //Is there more?
+                                        continueFDParse = camAction.Continue;
+                                    }
+                                } while (index < lvl.NumFloorData && continueFDParse);
+
+                                Entries.Add(sector.FDIndex, trig);
 
                                 break;
                             case FDFunctions.KillLara:
@@ -74,7 +101,7 @@ namespace TRFDControl
                                     Setup = new FDSetup() { Value = lvl.FloorData[index] }
                                 };
 
-                                entries.Add(sector.FDIndex, kill);
+                                Entries.Add(sector.FDIndex, kill);
 
                                 break;
                             case FDFunctions.ClimbableWalls:
@@ -84,7 +111,7 @@ namespace TRFDControl
                                     Setup = new FDSetup() { Value = lvl.FloorData[index] }
                                 };
 
-                                entries.Add(sector.FDIndex, climb);
+                                Entries.Add(sector.FDIndex, climb);
 
                                 break;
                             case FDFunctions.FloorTriangulationNWSE_Solid:
