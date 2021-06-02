@@ -26,6 +26,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool PersistTextureVariants { get; set; }
         internal bool CrossLevelEnemies { get; set; }
         internal bool ProtectMonks { get; set; }
+        internal bool GlitchedSecrets { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || (RandomizeEnemies && CrossLevelEnemies);
 
@@ -39,6 +40,7 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeSecrets = config.GetBool(nameof(RandomizeSecrets));
             SecretSeed = config.GetInt(nameof(SecretSeed), defaultSeed);
             HardSecrets = config.GetBool(nameof(HardSecrets));
+            GlitchedSecrets = config.GetBool(nameof(GlitchedSecrets));
 
             RandomizeItems = config.GetBool(nameof(RandomizeItems));
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
@@ -61,6 +63,7 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeSecrets)] = RandomizeSecrets;
             config[nameof(SecretSeed)] = SecretSeed;
             config[nameof(HardSecrets)] = HardSecrets;
+            config[nameof(GlitchedSecrets)] = GlitchedSecrets;
 
             config[nameof(RandomizeItems)] = RandomizeItems;
             config[nameof(ItemSeed)] = ItemSeed;
@@ -122,6 +125,7 @@ namespace TR2RandomizerCore.Randomizers
                     new SecretReplacer
                     {
                         AllowHard = HardSecrets,
+                        AllowGlitched = GlitchedSecrets,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,

@@ -15,6 +15,7 @@ namespace TR2RandomizerCore.Randomizers
     public class SecretReplacer : RandomizerBase
     {
         public bool AllowHard { get; set; }
+        public bool AllowGlitched { get; set; }
         public bool IsDevelopmentModeOn { get; set; }
         
         public SecretReplacer() : base()
@@ -45,21 +46,24 @@ namespace TR2RandomizerCore.Randomizers
                 do
                 {
                     GoldSecret = ZonedLocations.GoldZone[_generator.Next(0, ZonedLocations.GoldZone.Count)];
-                } while (GoldSecret.Difficulty == Difficulty.Hard && AllowHard == false);
+                } while ((GoldSecret.Difficulty == Difficulty.Hard && AllowHard == false) ||
+                        (GoldSecret.RequiresGlitch == true && AllowGlitched == false));
                 
 
                 do
                 {
                     JadeSecret = ZonedLocations.JadeZone[_generator.Next(0, ZonedLocations.JadeZone.Count)];
                 } while ((JadeSecret.Room == GoldSecret.Room) || 
-                        (JadeSecret.Difficulty == Difficulty.Hard && AllowHard == false));
+                        (JadeSecret.Difficulty == Difficulty.Hard && AllowHard == false) ||
+                        (JadeSecret.RequiresGlitch == true && AllowGlitched == false));
 
                 do
                 {
                     StoneSecret = ZonedLocations.StoneZone[_generator.Next(0, ZonedLocations.StoneZone.Count)];
                 } while ((StoneSecret.Room == GoldSecret.Room) || 
                         (StoneSecret.Room == JadeSecret.Room) ||
-                        (StoneSecret.Difficulty == Difficulty.Hard && AllowHard == false));
+                        (StoneSecret.Difficulty == Difficulty.Hard && AllowHard == false) ||
+                        (StoneSecret.RequiresGlitch == true && AllowGlitched == false));
 
                 //Due to TRMod only accepting room space coords entities are actually stored in level space. So include some
                 //calls to support a transformation of any locations that are specified in room space to maintain backwards compatbility

@@ -230,6 +230,12 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.HardSecrets = value;
         }
 
+        public bool GlitchedSecrets
+        {
+            get => LevelRandomizer.GlitchedSecrets;
+            set => LevelRandomizer.GlitchedSecrets = value;
+        }
+
         public bool IncludeKeyItems
         {
             get => LevelRandomizer.IncludeKeyItems;

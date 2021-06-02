@@ -15,7 +15,7 @@ namespace TR2RandomizerView.Model
 
         private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl;
 
-        private bool _disableDemos, _protectMonks;
+        private bool _disableDemos, _protectMonks, _allowGlitched;
 
         private int _levelCount;
 
@@ -346,6 +346,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool GlitchedSecrets
+        {
+            get => _allowGlitched;
+            set
+            {
+                _allowGlitched = value;
+                FirePropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void FirePropertyChanged([CallerMemberName] string name = null)
@@ -409,6 +419,7 @@ namespace TR2RandomizerView.Model
             RandomizeSecrets = _controller.RandomizeSecrets;
             SecretSeed = _controller.SecretSeed;
             HardSecrets = _controller.HardSecrets;
+            GlitchedSecrets = _controller.GlitchedSecrets;
 
             RandomizeTextures = _controller.RandomizeTextures;
             TextureSeed = _controller.TextureSeed;
@@ -557,6 +568,7 @@ namespace TR2RandomizerView.Model
             _controller.RandomizeSecrets = RandomizeSecrets;
             _controller.SecretSeed = SecretSeed;
             _controller.HardSecrets = HardSecrets;
+            _controller.GlitchedSecrets = GlitchedSecrets;
 
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
