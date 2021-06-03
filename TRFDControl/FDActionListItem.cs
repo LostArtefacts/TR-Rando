@@ -34,5 +34,7 @@ namespace TRFDControl
                 return !((Value & 0x8000) > 0);
             }
         }
+
+        public FDCameraAction CamAction { get; set; }
     }
 }

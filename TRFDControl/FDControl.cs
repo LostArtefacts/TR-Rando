@@ -9,7 +9,7 @@ namespace TRFDControl
 {
     public class FDControl
     {
-        public Dictionary<int, FDEntry> Entries = new Dictionary<int, FDEntry>(); //Key is Sector.FDIndex
+        public Dictionary<int, List<FDEntry>> Entries = new Dictionary<int, List<FDEntry>>(); //Key is Sector.FDIndex
 
         public void ParseFromLevel(TR2Level lvl)
         {
@@ -25,8 +25,11 @@ namespace TRFDControl
                     {
                         continue;
                     }
-                    
-                    while(true)
+
+                    //List of floordata functions for the sector
+                    List<FDEntry> floordataFunctions = new List<FDEntry>();
+
+                    while (true)
                     {
                         FDSetup data = new FDSetup()
                         {
@@ -43,7 +46,7 @@ namespace TRFDControl
                                     Room = lvl.FloorData[++index]
                                 };
 
-                                Entries.Add(sector.FDIndex, portal);
+                                floordataFunctions.Add(portal);
 
                                 break;
                             case FDFunctions.FloorSlant:
@@ -75,10 +78,6 @@ namespace TRFDControl
                                     //New trigger action
                                     FDActionListItem action = new FDActionListItem() { Value = lvl.FloorData[++index] };
 
-                                    //Add action
-                                    trig.TrigActionList.Add(action);
-
-                                    //Is there more?
                                     continueFDParse = action.Continue;
 
                                     if (action.TrigAction == FDTrigAction.Camera)
@@ -86,12 +85,19 @@ namespace TRFDControl
                                         //Camera trig actions have a special extra uint16...
                                         FDCameraAction camAction = new FDCameraAction() { Value = lvl.FloorData[++index] };
 
+                                        //store associated camera action
+                                        action.CamAction = camAction;
+
                                         //Is there more?
                                         continueFDParse = camAction.Continue;
                                     }
+
+                                    //add action
+                                    trig.TrigActionList.Add(action);
+                                    
                                 } while (index < lvl.NumFloorData && continueFDParse);
 
-                                Entries.Add(sector.FDIndex, trig);
+                                floordataFunctions.Add(trig);
 
                                 break;
                             case FDFunctions.KillLara:
@@ -101,7 +107,7 @@ namespace TRFDControl
                                     Setup = new FDSetup() { Value = lvl.FloorData[index] }
                                 };
 
-                                Entries.Add(sector.FDIndex, kill);
+                                floordataFunctions.Add(kill);
 
                                 break;
                             case FDFunctions.ClimbableWalls:
@@ -111,7 +117,7 @@ namespace TRFDControl
                                     Setup = new FDSetup() { Value = lvl.FloorData[index] }
                                 };
 
-                                Entries.Add(sector.FDIndex, climb);
+                                floordataFunctions.Add(climb);
 
                                 break;
                             case FDFunctions.FloorTriangulationNWSE_Solid:
@@ -175,14 +181,39 @@ namespace TRFDControl
                             //There are further functions for this sector - continue parsing.
                             index++;
                         }
-                    } 
+                    }
+
+                    //Store the sector index and all of its associated functions
+                    Entries.Add(sector.FDIndex, floordataFunctions);
                 }
             }
         }
 
         public void WriteToLevel(TR2Level lvl)
         {
+            foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
+            {
+                //Get the list of functions per sector
+                List<FDEntry> functions = entry.Value;
 
+                //Get the initial sector index into fdata
+                int index = entry.Key;
+
+                foreach (FDEntry function in functions)
+                {
+                    //Convert function to ushort array
+                    ushort[] fdata = function.Flatten();
+
+                    //store how many shorts there are
+                    int fdataCount = fdata.Count();
+
+                    //Copy the array into the level floordata array at sector index
+                    Array.Copy(fdata, 0, lvl.FloorData, index, fdataCount);
+
+                    //Increment index so the next function data is following previous
+                    index += fdataCount;
+                }
+            }
         }
     }
 }
