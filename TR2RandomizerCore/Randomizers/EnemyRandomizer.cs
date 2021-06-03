@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TR2RandomizerCore.Helpers;
 using TR2RandomizerCore.Processors;
@@ -417,18 +419,39 @@ namespace TR2RandomizerCore.Randomizers
             // MercSnowMobDriver relies on RedSnowmobile so it will be available in the model list
             if (!level.Is(LevelNames.TIBET))
             {
-                // For now, if MercSnowmobDriver was added, just add a red skidoo where he is.
-                // TODO: Add potential Skidoo zones for each level.
                 TR2Entity mercDriver = level.Data.Entities.ToList().Find(e => e.TypeID == (short)TR2Entities.MercSnowmobDriver);
                 if (mercDriver != null)
                 {
+                    Dictionary<string, List<Location>> allSkidooLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\skidoo_locations.json"));
+
+                    short room;
+                    int x, y, z;
+                    if (allSkidooLocations.ContainsKey(level.Name))
+                    {
+                        // we will only spawn one skidoo, so only need one random location
+                        List<Location> levelSkidooLocations = allSkidooLocations[level.Name];
+                        Location randomLocation = levelSkidooLocations[_generator.Next(0, levelSkidooLocations.Count)];
+                        room = (short)randomLocation.Room;
+                        x = randomLocation.X;
+                        y = randomLocation.Y;
+                        z = randomLocation.Z;
+                    }
+                    else
+                    {
+                        // if the level does not have skidoo locations for some reason, just spawn it on the MercSnowMobDriver
+                        room = mercDriver.Room;
+                        x = mercDriver.X;
+                        y = mercDriver.Y;
+                        z = mercDriver.Z;
+                    }
+
                     newEntities.Add(new TR2Entity
                     {
                         TypeID = (short)TR2Entities.RedSnowmobile,
-                        Room = mercDriver.Room,
-                        X = mercDriver.X,
-                        Y = mercDriver.Y,
-                        Z = mercDriver.Z,
+                        Room = room,
+                        X = x,
+                        Y = y,
+                        Z = z,
                         Angle = 16384,
                         Flags = 0,
                         Intensity1 = -1,
