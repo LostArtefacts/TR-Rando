@@ -46,6 +46,10 @@
     <Compile Include="FDClimbDirection.cs" />
     <Compile Include="FDControl.cs" />
     <Compile Include="FDEntry.cs" />
+    <Compile Include="FDEntryTypes\FDClimbEntry.cs" />
+    <Compile Include="FDEntryTypes\FDKillLaraEntry.cs" />
+    <Compile Include="FDEntryTypes\FDPortalEntry.cs" />
+    <Compile Include="FDEntryTypes\FDTriggerEntry.cs" />
     <Compile Include="FDFunctions.cs" />
     <Compile Include="FDSetup.cs" />
     <Compile Include="FDTriangulationData.cs" />
@@ -60,5 +64,6 @@
       <Name>TRLevelReader</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
