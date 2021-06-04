@@ -51,10 +51,28 @@ namespace TRFDControl
 
                                 break;
                             case FDFunctions.FloorSlant:
-                                //Ignore for now...
+
+                                FDSlantEntry floorSlant = new FDSlantEntry()
+                                {
+                                    Setup = new FDSetup() { Value = lvl.FloorData[index] },
+                                    SlantValue = lvl.FloorData[++index],
+                                    Type = FDSlantEntryType.FloorSlant
+                                };
+
+                                floordataFunctions.Add(floorSlant);
+
                                 break;
                             case FDFunctions.CeilingSlant:
-                                //Ignore for now...
+
+                                FDSlantEntry ceilingSlant = new FDSlantEntry()
+                                {
+                                    Setup = new FDSetup() { Value = lvl.FloorData[index] },
+                                    SlantValue = lvl.FloorData[++index],
+                                    Type = FDSlantEntryType.CeilingSlant
+                                };
+
+                                floordataFunctions.Add(ceilingSlant);
+
                                 break;
                             case FDFunctions.Trigger:
 

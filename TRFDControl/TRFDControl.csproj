@@ -49,6 +49,8 @@
     <Compile Include="FDEntryTypes\FDClimbEntry.cs" />
     <Compile Include="FDEntryTypes\FDKillLaraEntry.cs" />
     <Compile Include="FDEntryTypes\FDPortalEntry.cs" />
+    <Compile Include="FDEntryTypes\FDSlantEntry.cs" />
+    <Compile Include="FDEntryTypes\FDSlantEntryType.cs" />
     <Compile Include="FDEntryTypes\FDTriggerEntry.cs" />
     <Compile Include="FDFunctions.cs" />
     <Compile Include="FDSetup.cs" />
