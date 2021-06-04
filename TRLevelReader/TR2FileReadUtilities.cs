@@ -321,6 +321,21 @@ namespace TRLevelReader
             };
         }
 
+        public static TRAnimatedTexture ReadAnimatedTexture(BinaryReader reader)
+        {
+            ushort numTextures = reader.ReadUInt16(); // Actually num textures - 1, see https://opentomb.github.io/TRosettaStone3/trosettastone.html#_animated_textures_2
+            ushort[] textures = new ushort[numTextures + 1];
+            for (int i = 0; i < textures.Length; i++)
+            {
+                textures[i] = reader.ReadUInt16();
+            }
+
+            return new TRAnimatedTexture
+            {
+                Textures = textures
+            };
+        }
+
         public static TR2Entity ReadEntity(BinaryReader reader)
         {
             return new TR2Entity()
