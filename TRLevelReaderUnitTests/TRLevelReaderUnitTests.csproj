@@ -56,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TRFDControl\TRFDControl.csproj">
+      <Project>{09abcf27-6777-4866-8740-3ead3f6b86fc}</Project>
+      <Name>TRFDControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj">
       <Project>{226c4a3a-4fbb-4c15-aed4-c9248eb3a144}</Project>
       <Name>TRLevelReader</Name>

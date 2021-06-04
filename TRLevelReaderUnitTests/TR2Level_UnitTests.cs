@@ -5,6 +5,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TRLevelReader;
 using TRLevelReader.Model;
 
+using TRFDControl;
+using TRFDControl.FDEntryTypes;
+
 namespace TRLevelReaderUnitTests
 {
     [TestClass]
@@ -400,6 +403,28 @@ namespace TRLevelReaderUnitTests
         {
             TR2LevelReader reader = new TR2LevelReader();
             Assert.ThrowsException<NotImplementedException>(() => reader.ReadLevel("joby5.trc"));
+        }
+
+        [TestMethod]
+        public void FloorData_ReadWriteTest()
+        {
+            //Read Dragons Lair data
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("xian.tr2");
+
+            //Store the original floordata from the level
+            ushort[] originalFData = lvl.FloorData;
+
+            //Parse the floordata using FDControl and re-write the parsed data back
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+            fdataReader.WriteToLevel(lvl);
+
+            //Store the new floordata written back by FDControl
+            ushort[] newFData = lvl.FloorData;
+
+            //Compare to make sure the original fdata was written back.
+            CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
         }
     }
 }
