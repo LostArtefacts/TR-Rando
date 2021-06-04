@@ -11,5 +11,14 @@ namespace TRFDControl.FDEntryTypes
         public FDSlantEntryType Type { get; set; }
 
         public ushort SlantValue { get; set; }
+
+        public override ushort[] Flatten()
+        {
+            return new ushort[]
+            {
+                Setup.Value,
+                SlantValue
+            };
+        }
     }
 }

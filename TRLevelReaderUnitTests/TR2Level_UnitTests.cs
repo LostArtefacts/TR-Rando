@@ -413,7 +413,8 @@ namespace TRLevelReaderUnitTests
             TR2Level lvl = reader.ReadLevel("xian.tr2");
 
             //Store the original floordata from the level
-            ushort[] originalFData = lvl.FloorData;
+            ushort[] originalFData = new ushort[lvl.NumFloorData];
+            Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
 
             //Parse the floordata using FDControl and re-write the parsed data back
             FDControl fdataReader = new FDControl();
@@ -425,6 +426,26 @@ namespace TRLevelReaderUnitTests
 
             //Compare to make sure the original fdata was written back.
             CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
+            Assert.AreEqual((uint)newFData.Length, lvl.NumFloorData);
+
+            //Now modify an entry, and ensure it is different to the original data.
+            FDPortalEntry portal = fdataReader.Entries[3][0] as FDPortalEntry;
+            portal.Room = 42;
+            fdataReader.WriteToLevel(lvl);
+
+            //Test. FDIndex 3 of Dragon's Lair is a portal to room 3, which is being modified to Room 42.
+            //Data should be:
+            //New - [3] = 0x8001 and [4] = 0x002A
+
+            //Get ref to new data
+            newFData = lvl.FloorData;
+
+            Assert.AreEqual(newFData[3], (ushort)0x8001);
+            Assert.AreEqual(newFData[4], (ushort)0x002A);
+
+            //Compare to make sure the modified fdata was written back.
+            CollectionAssert.AreNotEqual(originalFData, newFData, "Floordata matches, change unsuccessful");
+            Assert.AreEqual((uint)newFData.Length, lvl.NumFloorData);
         }
     }
 }
