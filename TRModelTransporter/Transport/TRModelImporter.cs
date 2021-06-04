@@ -36,18 +36,19 @@ namespace TRModelTransporter.Transport
 
             CleanAliases();
 
-            List<TRModelDefinition> modelDefinitions = new List<TRModelDefinition>();
+            List<TRModelDefinition> standardModelDefinitions = new List<TRModelDefinition>();
+            List<TRModelDefinition> soundModelDefinitions = new List<TRModelDefinition>();
             foreach (TR2Entities entity in EntitiesToImport)
             {
-                BuildDefinitionList(modelDefinitions, existingEntities, entity, false);
+                BuildDefinitionList(standardModelDefinitions, soundModelDefinitions, existingEntities, entity, false);
             }
 
             // Check for alias duplication
             ValidateDefinitionList(existingEntities);
 
-            if (modelDefinitions.Count > 0)
+            if (standardModelDefinitions.Count + soundModelDefinitions.Count > 0)
             {
-                Import(modelDefinitions);
+                Import(standardModelDefinitions, soundModelDefinitions);
             }
         }
 
@@ -116,16 +117,24 @@ namespace TRModelTransporter.Transport
                 }
             }
 
+            // #139 Ensure that aliases are added last so to avoid dependency issues
+            cleanedEntities.Sort(delegate (TR2Entities e1, TR2Entities e2)
+            {
+                return ((short)TR2EntityUtilities.TranslateEntityAlias(e1)).CompareTo((short)TR2EntityUtilities.TranslateEntityAlias(e2));
+            });
+
             // For some reason, if the Barracuda is added before the shark, there is a slight animation
             // corruption on the shark's mouth. I can't find the reason. The patch is to ensure the 
             // Barracuda is added last.
-            int barracudaIndex = cleanedEntities.FindIndex(e => _aliasMap[TR2Entities.Barracuda].Contains(e));
+            // #137 Reason found - animated textures were not being reindexed following deduplication. See 
+            // TRModelExtensions.ReindexTextures and #137.
+            /*int barracudaIndex = cleanedEntities.FindIndex(e => _aliasMap[TR2Entities.Barracuda].Contains(e));
             if (barracudaIndex != -1)
             {
                 TR2Entities barracuda = cleanedEntities[barracudaIndex];
                 cleanedEntities.RemoveAt(barracudaIndex);
                 cleanedEntities.Add(barracuda);
-            }
+            }*/
 
             EntitiesToImport = cleanedEntities;
         }
@@ -160,12 +169,12 @@ namespace TRModelTransporter.Transport
             }
         }
 
-        private void BuildDefinitionList(List<TRModelDefinition> modelDefinitions, List<TR2Entities> modelEntities, TR2Entities nextEntity, bool isDependency)
+        private void BuildDefinitionList(List<TRModelDefinition> standardModelDefinitions, List<TRModelDefinition> soundModelDefinitions, List<TR2Entities> modelEntities, TR2Entities nextEntity, bool isDependency)
         {
             if (modelEntities.Contains(nextEntity))
             {
                 // If the model already in the list is a dependency only, but the new one to add isn't, switch it
-                TRModelDefinition definition = modelDefinitions.Find(m => m.Alias == nextEntity);
+                TRModelDefinition definition = standardModelDefinitions.Find(m => m.Alias == nextEntity);
                 if (definition != null && definition.IsDependencyOnly && !isDependency)
                 {
                     definition.IsDependencyOnly = false;
@@ -181,13 +190,14 @@ namespace TRModelTransporter.Transport
             foreach (TR2Entities dependency in nextDefinition.Dependencies)
             {
                 // If it's a non-graphics dependency, but we are importing another alias
-                // for it, we don't need it.
+                // for it, or the level already contains the dependency, we don't need it.
                 bool nonGraphics = _noGraphicsEntityDependencies.Contains(dependency);
                 TR2Entities aliasFor = TR2EntityUtilities.TranslateEntityAlias(dependency);
                 if (aliasFor != dependency && nonGraphics)
                 {
                     bool required = true;
-                    foreach (TR2Entities entity in EntitiesToImport)
+                    // #139 check entire model list for instances where alias and dependencies cause clashes
+                    foreach (TR2Entities entity in modelEntities)
                     {
                         // If this entity and the dependency are in the same family
                         if (aliasFor == TR2EntityUtilities.TranslateEntityAlias(entity))
@@ -200,34 +210,40 @@ namespace TRModelTransporter.Transport
 
                     if (!required)
                     {
+                        // We don't need the graphics, but do we need hardcoded sound?
+                        if (_soundOnlyDependencies.Contains(dependency) && standardModelDefinitions.Find(m => m.Alias == dependency) == null)
+                        {
+                            soundModelDefinitions.Add(LoadDefinition(dependency));
+                        }
+
                         continue;
                     }
                 }
 
-                BuildDefinitionList(modelDefinitions, modelEntities, dependency, nonGraphics);
+                BuildDefinitionList(standardModelDefinitions, soundModelDefinitions, modelEntities, dependency, nonGraphics);
             }
 
-            modelDefinitions.Add(nextDefinition);
+            standardModelDefinitions.Add(nextDefinition);
         }
 
-        private void Import(IEnumerable<TRModelDefinition> definitions)
+        private void Import(IEnumerable<TRModelDefinition> standardDefinitions, IEnumerable<TRModelDefinition> soundOnlyDefinitions)
         {
             // Textures first, which will remap Mesh rectangles/triangles to the new texture indices.
             // This is called using the entire entity list to import so that RectanglePacker packer has
             // the best chance to organise the tiles.
-            _textureHandler.Definitions = definitions;
+            _textureHandler.Definitions = standardDefinitions;
             _textureHandler.EntitiesToRemove = EntitiesToRemove;
             _textureHandler.ClearUnusedSprites = ClearUnusedSprites;
             _textureHandler.TextureRemap = JsonConvert.DeserializeObject<TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
             _textureHandler.PositionMonitor = TexturePositionMonitor;
             _textureHandler.Import();
 
-            // Hardcoded sounds are also imported en-masse to ensure the correct SoundMap indices are assigned
+            // Hardcoded sounds are also imported en-masse to avoid to ensure the correct SoundMap indices are assigned
             // before any animation sounds are dealt with.
-            _soundHandler.Definitions = definitions;
+            _soundHandler.Definitions = standardDefinitions.Concat(soundOnlyDefinitions);
             _soundHandler.Import();
 
-            foreach (TRModelDefinition definition in definitions)
+            foreach (TRModelDefinition definition in standardDefinitions)
             {
                 Definition = definition;
                 // Colours next, again to remap Mesh rectangles/triangles to any new palette indices

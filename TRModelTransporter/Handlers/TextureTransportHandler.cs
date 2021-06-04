@@ -175,6 +175,11 @@ namespace TRModelTransporter.Handlers
                 throw new Exception();
             }
 
+            if (Definitions.Count() == 0)
+            {
+                return;
+            }
+
             // Pull together all of the texture segments for each of the definitions
             CollateSegments();
 
