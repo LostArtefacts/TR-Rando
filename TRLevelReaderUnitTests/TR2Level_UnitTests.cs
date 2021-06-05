@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 using TRLevelReader;
 using TRLevelReader.Model;
@@ -446,6 +447,32 @@ namespace TRLevelReaderUnitTests
             //Compare to make sure the modified fdata was written back.
             CollectionAssert.AreNotEqual(originalFData, newFData, "Floordata matches, change unsuccessful");
             Assert.AreEqual((uint)newFData.Length, lvl.NumFloorData);
+
+            //Test pattern/type matching example for fdata.
+            bool isPortal = false;
+
+            foreach (KeyValuePair<int, List<FDEntry>> sector in fdataReader.Entries)
+            {
+                foreach (FDEntry entry in sector.Value)
+                {
+                    switch (entry)
+                    {
+                        case FDClimbEntry climbEntry:
+                            break;
+                        case FDKillLaraEntry killEntry:
+                            break;
+                        case FDPortalEntry portalEntry:
+                            isPortal = true;
+                            break;
+                        case FDSlantEntry slantEntry:
+                            break;
+                        case FDTriggerEntry triggerEntry:
+                            break;
+                    }
+                }
+            }
+
+            Assert.IsTrue(isPortal);
         }
     }
 }
