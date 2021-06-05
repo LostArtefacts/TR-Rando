@@ -24,6 +24,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool IncludeKeyItems { get; set; }
         internal bool DevelopmentMode { get; set; }
         internal bool PersistTextureVariants { get; set; }
+        internal bool RetainKeySpriteTextures { get; set; }
         internal bool CrossLevelEnemies { get; set; }
         internal bool ProtectMonks { get; set; }
         internal bool DocileBirdMonsters { get; set; }
@@ -56,6 +57,7 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
             PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
+            RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures));
 
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));            
         }
@@ -80,6 +82,7 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;
             config[nameof(PersistTextureVariants)] = PersistTextureVariants;
+            config[nameof(RetainKeySpriteTextures)] = RetainKeySpriteTextures;
 
             config[nameof(DevelopmentMode)] = DevelopmentMode;            
         }
@@ -196,6 +199,7 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         PersistVariants = PersistTextureVariants,
+                        RetainKeySprites = RetainKeySpriteTextures,
                         TextureMonitor = textureMonitor
                     }.Randomize(TextureSeed);
                 }

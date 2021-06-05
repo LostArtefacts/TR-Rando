@@ -17,6 +17,7 @@ namespace TR2RandomizerCore.Randomizers
         private TextureDatabase _textureDatabase;
 
         internal bool PersistVariants { get; set; }
+        internal bool RetainKeySprites { get; set; }
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         public TextureRandomizer()
@@ -120,7 +121,7 @@ namespace TR2RandomizerCore.Randomizers
         {
             lock (_drawLock)
             {
-                mapping.RedrawTargets(source, variant);
+                mapping.RedrawTargets(source, variant, !RetainKeySprites);
             }
         }
 

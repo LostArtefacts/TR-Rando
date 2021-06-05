@@ -15,7 +15,7 @@ namespace TR2RandomizerView.Model
 
         private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl;
 
-        private bool _disableDemos, _protectMonks, _allowGlitched, _docileBirdMonsters;
+        private bool _disableDemos, _protectMonks, _allowGlitched, _docileBirdMonsters, _retainKeySpriteTextures;
 
         private int _levelCount;
 
@@ -366,6 +366,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool RetainKeySpriteTextures
+        {
+            get => _retainKeySpriteTextures;
+            set
+            {
+                _retainKeySpriteTextures = value;
+                FirePropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void FirePropertyChanged([CallerMemberName] string name = null)
@@ -436,6 +446,7 @@ namespace TR2RandomizerView.Model
             RandomizeTextures = _controller.RandomizeTextures;
             TextureSeed = _controller.TextureSeed;
             PersistTextures = _controller.PersistTextures;
+            RetainKeySpriteTextures = _controller.RetainKeySpriteTextures;
 
             DevelopmentMode = _controller.DevelopmentMode;
             DisableDemos = _controller.DisableDemos;
@@ -586,6 +597,7 @@ namespace TR2RandomizerView.Model
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
             _controller.PersistTextures = PersistTextures;
+            _controller.RetainKeySpriteTextures = RetainKeySpriteTextures;
 
             _controller.DevelopmentMode = DevelopmentMode;
             _controller.DisableDemos = DisableDemos;

@@ -107,7 +107,7 @@
             Grid.Column="1"
             IsActive="{Binding RandomizeEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedBoolBoolControl
             Grid.Row="3"
             Grid.Column="1"
             IsActive="{Binding RandomizeTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -116,8 +116,10 @@
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding TextureSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBool="{Binding PersistTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle="Use persistent textures"/>
+            CustomBool1="{Binding PersistTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle1="Use persistent textures"
+            CustomBool2="{Binding RetainKeySpriteTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle2="Use original key sprite textures"/>
 
         <ctrl:ManagedSeedControl
             Grid.Row="0"
