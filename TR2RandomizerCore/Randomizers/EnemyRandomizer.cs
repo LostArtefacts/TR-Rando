@@ -21,6 +21,7 @@ namespace TR2RandomizerCore.Randomizers
 
         internal bool CrossLevelEnemies { get; set; }
         internal bool ProtectMonks { get; set; }
+        internal bool DocileBirdMonsters { get; set; }
         internal int MaxPackingAttempts { get; set; }
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
@@ -95,7 +96,7 @@ namespace TR2RandomizerCore.Randomizers
             }
 
             // Track enemies whose counts across the game are restricted
-            _gameEnemyTracker = EnemyUtilities.PrepareEnemyGameTracker();
+            _gameEnemyTracker = EnemyUtilities.PrepareEnemyGameTracker(DocileBirdMonsters);
             
             SetMessage("Randomizing enemies - importing models");
             foreach (EnemyProcessor processor in processors)
@@ -131,6 +132,8 @@ namespace TR2RandomizerCore.Randomizers
             // Work out how many we can support
             int enemyCount = oldEntities.Count - reduceEnemyCountBy + EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
             List<TR2Entities> newEntities = new List<TR2Entities>(enemyCount);
+
+            List<TR2Entities> chickenGuisers = EnemyUtilities.GetEnemyGuisers(TR2Entities.BirdMonster);
 
             if (level.Is(LevelNames.HOME))
             {
@@ -215,15 +218,50 @@ namespace TR2RandomizerCore.Randomizers
                     List<TR2Entities> family = TR2EntityUtilities.GetEntityFamily(entity);
                     if (!newEntities.Any(e1 => family.Any(e2 => e1 == e2)))
                     {
+                        // #144 We can include docile chickens provided we aren't including everything
+                        // that can be disguised as a chicken.
+                        if (DocileBirdMonsters)
+                        {
+                            bool guisersAvailable = !chickenGuisers.All(g => newEntities.Contains(g));
+                            // If the selected entity is the chicken, it can be added provided there are
+                            // available guisers.
+                            if (!guisersAvailable && entity == TR2Entities.BirdMonster)
+                            {
+                                continue;
+                            }
+
+                            // If the selected entity is a potential guiser, it can only be added if it's not
+                            // the last available guiser. Otherwise, it will become the guiser.
+                            if (chickenGuisers.Contains(entity) && newEntities.Contains(TR2Entities.BirdMonster))
+                            {
+                                if (newEntities.FindAll(e => chickenGuisers.Contains(e)).Count == chickenGuisers.Count - 1)
+                                {
+                                    continue;
+                                }
+                            }
+                        }
+
                         newEntities.Add(entity);
                     }
+                }
+            }
+
+            // #144 Decide at this point who will be guising
+            TR2Entities guiser = TR2Entities.BirdMonster;
+            if (DocileBirdMonsters && newEntities.Contains(TR2Entities.BirdMonster))
+            {
+                int guiserIndex = chickenGuisers.FindIndex(g => !newEntities.Contains(g));
+                if (guiserIndex != -1)
+                {
+                    guiser = chickenGuisers[guiserIndex];
                 }
             }
 
             return new EnemyTransportCollection
             {
                 EntitiesToImport = newEntities,
-                EntitiesToRemove = oldEntities
+                EntitiesToRemove = oldEntities,
+                BirdMonsterGuiser = guiser
             };
         }
 
@@ -233,12 +271,51 @@ namespace TR2RandomizerCore.Randomizers
             List<TR2Entities> droppableEnemies = TR2EntityUtilities.DroppableEnemyTypes()[level.Name];
             List<TR2Entities> waterEnemies = TR2EntityUtilities.FilterWaterEnemies(availableEnemyTypes);
 
+            if (DocileBirdMonsters && level.Is(LevelNames.CHICKEN))
+            {
+                DisguiseEntity(level, TR2Entities.MaskedGoon1, TR2Entities.BirdMonster);
+            }
+
             RandomizeEnemies(level, new EnemyRandomizationCollection
             {
                 Available = availableEnemyTypes,
                 Droppable = droppableEnemies,
-                Water = waterEnemies
+                Water = waterEnemies,
+                BirdMonsterGuiser = TR2Entities.MaskedGoon1 // If randomizing natively, this will only apply to Ice Palace
             });
+        }
+
+        private void DisguiseEntity(TR2CombinedLevel level, TR2Entities guiser, TR2Entities targetEntity)
+        {
+            List<TRModel> models = level.Data.Models.ToList();
+            int existingIndex = models.FindIndex(m => m.ID == (short)guiser);
+            if (existingIndex != -1)
+            {
+                models.RemoveAt(existingIndex);
+            }
+
+            TRModel disguiseAsModel = models[models.FindIndex(m => m.ID == (short)targetEntity)];
+            if (targetEntity == TR2Entities.BirdMonster && level.Is(LevelNames.CHICKEN))
+            {
+                // We have to keep the original model for the boss, so in
+                // this instance we just clone the model for the guiser
+                models.Add(new TRModel
+                {
+                    Animation = disguiseAsModel.Animation,
+                    FrameOffset = disguiseAsModel.FrameOffset,
+                    ID = (uint)guiser,
+                    MeshTree = disguiseAsModel.MeshTree,
+                    NumMeshes = disguiseAsModel.NumMeshes,
+                    StartingMesh = disguiseAsModel.StartingMesh
+                });
+            }
+            else
+            {
+                disguiseAsModel.ID = (uint)guiser;
+            }
+
+            level.Data.Models = models.ToArray();
+            level.Data.NumModels = (uint)models.Count;
         }
 
         private void RandomizeEnemies(TR2CombinedLevel level, EnemyRandomizationCollection enemies)
@@ -424,7 +501,12 @@ namespace TR2RandomizerCore.Randomizers
                     }
                 }
 
-                // TODO: Maybe restrict the chicken's appearance across the game?
+                // #144 Disguise something as the Chicken. Pre-checks will have been done to ensure
+                // the guiser is suitable for the level.
+                if (DocileBirdMonsters && newEntityType == TR2Entities.BirdMonster)
+                {
+                    newEntityType = enemies.BirdMonsterGuiser;
+                }
 
                 // Make sure to convert BengalTiger, StickWieldingGoonBandana etc back to their actual types
                 currentEntity.TypeID = (short)TR2EntityUtilities.TranslateEntityAlias(newEntityType);
@@ -607,12 +689,20 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         // The import worked, so randomize the entities based on what we now have in place.
                         //System.Diagnostics.Debug.WriteLine(level.Name + ": " + string.Join(", ", importedCollection.EntitiesToImport));
-                        _outer.RandomizeEnemies(level, new EnemyRandomizationCollection
+                        EnemyRandomizationCollection enemies = new EnemyRandomizationCollection
                         {
                             Available = importedCollection.EntitiesToImport,
                             Droppable = TR2EntityUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.ProtectMonks),
                             Water = TR2EntityUtilities.FilterWaterEnemies(importedCollection.EntitiesToImport)
-                        });
+                        };
+
+                        if (_outer.DocileBirdMonsters && importedCollection.BirdMonsterGuiser != TR2Entities.BirdMonster)
+                        {
+                            _outer.DisguiseEntity(level, importedCollection.BirdMonsterGuiser, TR2Entities.BirdMonster);
+                            enemies.BirdMonsterGuiser = importedCollection.BirdMonsterGuiser;
+                        }
+
+                        _outer.RandomizeEnemies(level, enemies);
                     }
 
                     _outer.SaveLevel(level);
@@ -628,6 +718,7 @@ namespace TR2RandomizerCore.Randomizers
         {
             internal List<TR2Entities> EntitiesToImport { get; set; }
             internal List<TR2Entities> EntitiesToRemove { get; set; }
+            internal TR2Entities BirdMonsterGuiser { get; set; }
             internal bool ImportResult { get; set; }
 
             internal EnemyTransportCollection()
@@ -641,6 +732,7 @@ namespace TR2RandomizerCore.Randomizers
             internal List<TR2Entities> Available { get; set; }
             internal List<TR2Entities> Droppable { get; set; }
             internal List<TR2Entities> Water { get; set; }
+            internal TR2Entities BirdMonsterGuiser { get; set; }
         }
     }
 }

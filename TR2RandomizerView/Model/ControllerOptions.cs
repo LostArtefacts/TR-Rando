@@ -15,7 +15,7 @@ namespace TR2RandomizerView.Model
 
         private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl;
 
-        private bool _disableDemos, _protectMonks, _allowGlitched;
+        private bool _disableDemos, _protectMonks, _allowGlitched, _docileBirdMonsters;
 
         private int _levelCount;
 
@@ -356,6 +356,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool DocileBirdMonsters
+        {
+            get => _docileBirdMonsters;
+            set
+            {
+                _docileBirdMonsters = value;
+                FirePropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void FirePropertyChanged([CallerMemberName] string name = null)
@@ -415,6 +425,8 @@ namespace TR2RandomizerView.Model
             RandomizeEnemies = _controller.RandomizeEnemies;
             EnemySeed = _controller.EnemySeed;
             CrossLevelEnemies = _controller.CrossLevelEnemies;
+            ProtectMonks = _controller.ProtectMonks;
+            DocileBirdMonsters = _controller.DocileBirdMonsters;
 
             RandomizeSecrets = _controller.RandomizeSecrets;
             SecretSeed = _controller.SecretSeed;
@@ -427,7 +439,6 @@ namespace TR2RandomizerView.Model
 
             DevelopmentMode = _controller.DevelopmentMode;
             DisableDemos = _controller.DisableDemos;
-            ProtectMonks = _controller.ProtectMonks;
         }
 
         public void RandomizeActiveSeeds()
@@ -564,6 +575,8 @@ namespace TR2RandomizerView.Model
             _controller.RandomizeEnemies = RandomizeEnemies;
             _controller.EnemySeed = EnemySeed;
             _controller.CrossLevelEnemies = CrossLevelEnemies;
+            _controller.ProtectMonks = ProtectMonks;
+            _controller.DocileBirdMonsters = DocileBirdMonsters;
 
             _controller.RandomizeSecrets = RandomizeSecrets;
             _controller.SecretSeed = SecretSeed;
@@ -576,7 +589,6 @@ namespace TR2RandomizerView.Model
 
             _controller.DevelopmentMode = DevelopmentMode;
             _controller.DisableDemos = DisableDemos;
-            _controller.ProtectMonks = ProtectMonks;
         }
 
         public void Unload()

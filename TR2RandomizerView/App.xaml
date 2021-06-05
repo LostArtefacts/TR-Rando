@@ -20,11 +20,11 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="{StaticResource ThemeColour3}"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding IsActive}" Value="True">
+                <DataTrigger Binding="{Binding IsActive, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
                     <Setter Property="Background" Value="{StaticResource ThemeColour1}"/>
                     <Setter Property="BorderBrush" Value="{StaticResource ThemeColour2}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding IsActive}" Value="False">
+                <DataTrigger Binding="{Binding IsActive, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="False">
                     <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="BorderBrush" Value="{StaticResource ThemeColour3}"/>
                 </DataTrigger>

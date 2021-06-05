@@ -136,12 +136,15 @@ namespace TR2RandomizerCore.Utilities
             return -1;
         }
 
-        public static Dictionary<TR2Entities, List<string>> PrepareEnemyGameTracker()
+        public static Dictionary<TR2Entities, List<string>> PrepareEnemyGameTracker(bool docileBirdMonster)
         {
             Dictionary<TR2Entities, List<string>> tracker = new Dictionary<TR2Entities, List<string>>();
             foreach (TR2Entities entity in _restrictedEnemyGameCounts.Keys)
             {
-                tracker.Add(entity, new List<string>(_restrictedEnemyGameCounts[entity]));
+                if (!docileBirdMonster || entity != TR2Entities.BirdMonster)
+                {
+                    tracker.Add(entity, new List<string>(_restrictedEnemyGameCounts[entity]));
+                }
             }
 
             // Pre-populate required enemies
@@ -321,6 +324,24 @@ namespace TR2RandomizerCore.Utilities
             [LevelNames.CHICKEN] = 1,
             [LevelNames.FLOATER] = 1,
             [LevelNames.LAIR] = 1
+        };
+
+        public static List<TR2Entities> GetEnemyGuisers(TR2Entities entity)
+        {
+            List<TR2Entities> entities = new List<TR2Entities>();
+            if (_enemyGuisers.ContainsKey(entity))
+            {
+                entities.AddRange(_enemyGuisers[entity]);
+            }
+            return entities;
+        }
+
+        private static readonly Dictionary<TR2Entities, List<TR2Entities>> _enemyGuisers = new Dictionary<TR2Entities, List<TR2Entities>>
+        {
+            [TR2Entities.BirdMonster] = new List<TR2Entities>
+            {
+                TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick
+            }
         };
     }
 }
