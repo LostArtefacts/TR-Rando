@@ -39,7 +39,7 @@ namespace TR2RandomizerCore.Utilities
             },
             { LevelNames.FATHOMS, new List<List<int>>
                 {
-                    new List<int>() { 33, 63, 64 }
+                    //No drain areas defined for now
                 }
             },
             { LevelNames.DORIA, new List<List<int>>
@@ -54,7 +54,7 @@ namespace TR2RandomizerCore.Utilities
             },
             { LevelNames.DECK, new List<List<int>>
                 {
-                    new List<int>() { 59, 93 }
+                    //No drain areas defined for now
                 }
             },
             { LevelNames.TIBET, new List<List<int>>
@@ -69,12 +69,12 @@ namespace TR2RandomizerCore.Utilities
             },
             { LevelNames.COT, new List<List<int>>
                 {
-                    new List<int>() { 21, 22, 28, 82 }
+                    //No drain areas defined for now
                 }
             },
             { LevelNames.CHICKEN, new List<List<int>>
                 {
-                    new List<int>() { 24, 29, 71 }
+                    //No drain areas defined for now
                 }
             },
             { LevelNames.XIAN, new List<List<int>>
