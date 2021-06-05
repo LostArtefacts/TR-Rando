@@ -467,11 +467,11 @@ namespace TR2RandomizerCore.Randomizers
                 ));
 
                 //Do multiple entities share one location?
+                bool isPickupItem = false;
                 if (sharedItems.Count > 1 && enemies.Droppable.Count != 0)
                 {
                     //Are any entities sharing a location a droppable pickup?
-                    bool isPickupItem = false;
-
+                    
                     foreach (TR2Entity ent in sharedItems)
                     {
                         TR2Entities entType = (TR2Entities)ent.TypeID;
@@ -536,11 +536,15 @@ namespace TR2RandomizerCore.Randomizers
                     }
                 }
 
+                // Ensure that if we have to pick a different enemy at this point that we still
+                // honour any pickups in the same spot.
+                List<TR2Entities> enemyPool = isPickupItem ? enemies.Droppable : enemies.Available;
+
                 if (newEntityType == TR2Entities.ShotgunGoon && shotgunGoonSeen) // HSH only
                 {
                     while (newEntityType == TR2Entities.ShotgunGoon)
                     {
-                        newEntityType = enemies.Available[_generator.Next(0, enemies.Available.Count)];
+                        newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
                     }
                 }
 
@@ -548,7 +552,7 @@ namespace TR2RandomizerCore.Randomizers
                 {
                     while (newEntityType == TR2Entities.MarcoBartoli)
                     {
-                        newEntityType = enemies.Available[_generator.Next(0, enemies.Available.Count)];
+                        newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
                     }
                 }
 
