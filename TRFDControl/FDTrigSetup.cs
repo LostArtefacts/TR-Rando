@@ -24,6 +24,17 @@ namespace TRFDControl
             {
                 return (Value & 0x0100) > 0;
             }
+            set
+            {
+                if (value)
+                {
+                    Value |= 0x0100;
+                }
+                else
+                {
+                    Value &= (ushort)(Value & ~0x0100);
+                }
+            }
         }
 
         public byte Mask
