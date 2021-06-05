@@ -79,18 +79,14 @@ namespace TR2RandomizerCore.Utilities
             return false;
         }
 
-        public static List<TR2Entities> GetUnsupportedEnemies(string lvlName)
+        public static bool IsEnemySupported(string lvlName, TR2Entities entity)
         {
-            List<TR2Entities> entities = new List<TR2Entities>();
-            foreach (TR2Entities entity in _unsupportedEnemies.Keys)
+            if (_unsupportedEnemies.ContainsKey(lvlName))
             {
-                if (_unsupportedEnemies[entity].Contains(lvlName))
-                {
-                    entities.Add(entity);
-                }
+                return !_unsupportedEnemies[lvlName].Contains(TR2EntityUtilities.TranslateEntityAlias(entity));
             }
-            
-            return entities;
+
+            return true;
         }
 
         public static bool IsEnemyRequired(string lvlName, TR2Entities entity)
@@ -207,23 +203,45 @@ namespace TR2RandomizerCore.Utilities
         }
 
         // These enemies will either not fit into the given levels, or there is no suitable
-        // room in the levels to support them.
-        private static readonly Dictionary<TR2Entities, List<string>> _unsupportedEnemies = new Dictionary<TR2Entities, List<string>>
+        // room in the levels to support them, or for HSH they can't be killed or are too
+        // awkward, such as the small spiders.
+        private static readonly Dictionary<string, List<TR2Entities>> _unsupportedEnemies = new Dictionary<string, List<TR2Entities>>
         {
-            [TR2Entities.MarcoBartoli] = 
-                new List<string> 
-                { 
-                    LevelNames.VENICE, LevelNames.BARTOLI, LevelNames.RIG, LevelNames.DA,
-                    LevelNames.FATHOMS, LevelNames.LQ, LevelNames.MONASTERY, LevelNames.CHICKEN,
-                    LevelNames.XIAN, LevelNames.FLOATER, LevelNames.HOME
-                },
-            [TR2Entities.MercSnowmobDriver] = 
-                new List<string>
+            [LevelNames.VENICE] =
+                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            [LevelNames.BARTOLI] =
+                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            [LevelNames.RIG] =
+                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            [LevelNames.DA] =
+                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            [LevelNames.FATHOMS] =
+                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            [LevelNames.LQ] =
+                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            [LevelNames.MONASTERY] =
+                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            [LevelNames.CHICKEN] =
+                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            [LevelNames.XIAN] =
+                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            [LevelNames.FLOATER] =
+                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            [LevelNames.LAIR] =
+                new List<TR2Entities> { TR2Entities.MercSnowmobDriver },
+            [LevelNames.HOME] =
+                // #148 Although we say here that the Doberman, MaskedGoons and StickGoons
+                // aren't supported, this is only for cross-level purposes because we
+                // are making placeholder entities to prevent breaking the kill counter.
+                new List<TR2Entities>
                 {
-                    LevelNames.LAIR, LevelNames.HOME
+                    TR2Entities.BlackMorayEel, TR2Entities.Doberman, TR2Entities.Eagle, TR2Entities.MaskedGoon1, 
+                    TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.MarcoBartoli, TR2Entities.MercSnowmobDriver, 
+                    TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Shark, TR2Entities.StickWieldingGoon1, 
+                    TR2Entities.StickWieldingGoon2, TR2Entities.Spider, TR2Entities.TRex, TR2Entities.YellowMorayEel
                 }
         };
-
+        
         private static readonly Dictionary<string, List<TR2Entities>> _requiredEnemies = new Dictionary<string, List<TR2Entities>>
         {
             [LevelNames.CHICKEN] =
@@ -231,7 +249,7 @@ namespace TR2RandomizerCore.Utilities
             [LevelNames.LAIR] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli }, // #97 - Marco/Dragon to remain in the same place to trigger door opening
             [LevelNames.HOME] =
-                new List<TR2Entities> { TR2Entities.ShotgunGoon },  // #62 - Avoid randomizing shotgun goon in HSH
+                new List<TR2Entities> { TR2Entities.ShotgunGoon }  // #62 - Avoid randomizing shotgun goon in HSH
         };
 
         // We restrict some enemies to specific rooms in levels, for example the dragon does not work well in small

@@ -134,11 +134,15 @@ namespace TR2RandomizerCore.Randomizers
             List<TR2Entities> newEntities = new List<TR2Entities>(enemyCount);
 
             List<TR2Entities> chickenGuisers = EnemyUtilities.GetEnemyGuisers(TR2Entities.BirdMonster);
+            TR2Entities chickenGuiser = TR2Entities.BirdMonster;
 
-            if (level.Is(LevelNames.HOME))
+            // #148 For HSH, we lock the enemies that are required for the kill counter to work outside
+            // the gate, which means the game still has the correct target kill count, while allowing
+            // us to randomize the ones inside the gate (except the final shotgun goon).
+            // If however, we are on the final packing attempt, we will just change the stick goon
+            // alias and add docile bird monsters (if selected) as this is known to be supported.
+            if (level.Is(LevelNames.HOME) && reduceEnemyCountBy > 0)
             {
-                // In HSH, changing the enemies means the level can potentially end after the first
-                // kill. So let's just change the type of StickWieldingGoon1 for now.
                 TR2Entities newGoon = TR2Entities.StickWieldingGoon1BlackJacket;
                 List<TR2Entities> goonies = TR2EntityUtilities.GetEntityFamily(newGoon);
                 do
@@ -150,6 +154,13 @@ namespace TR2RandomizerCore.Randomizers
                 newEntities.AddRange(oldEntities);
                 newEntities.Remove(TR2Entities.StickWieldingGoon1);
                 newEntities.Add(newGoon);
+
+                if (DocileBirdMonsters)
+                {
+                    newEntities.Remove(TR2Entities.MaskedGoon1);
+                    newEntities.Add(TR2Entities.BirdMonster);
+                    chickenGuiser = TR2Entities.MaskedGoon1;
+                }
             }
             else
             {
@@ -163,13 +174,25 @@ namespace TR2RandomizerCore.Randomizers
                 if (waterEnemyRequired)
                 {
                     List<TR2Entities> waterEnemies = TR2EntityUtilities.KillableWaterCreatures();
-                    newEntities.Add(waterEnemies[_generator.Next(0, waterEnemies.Count)]);
+                    TR2Entities entity;
+                    do
+                    {
+                        entity = waterEnemies[_generator.Next(0, waterEnemies.Count)];
+                    }
+                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity));
+                    newEntities.Add(entity);
                 }
 
                 if (droppableEnemyRequired)
                 {
                     List<TR2Entities> droppableEnemies = TR2EntityUtilities.GetCrossLevelDroppableEnemies(!ProtectMonks);
-                    newEntities.Add(droppableEnemies[_generator.Next(0, droppableEnemies.Count)]);
+                    TR2Entities entity;
+                    do
+                    {
+                        entity = droppableEnemies[_generator.Next(0, droppableEnemies.Count)];
+                    }
+                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity));
+                    newEntities.Add(entity);
                 }
 
                 // Are there any other types we need to retain?
@@ -183,14 +206,19 @@ namespace TR2RandomizerCore.Randomizers
 
                 // Get all other candidate enemies and fill the list
                 List<TR2Entities> allEnemies = TR2EntityUtilities.GetCandidateCrossLevelEnemies();
-                List<TR2Entities> unsupportedEnemies = EnemyUtilities.GetUnsupportedEnemies(level.Name);
 
                 while (newEntities.Count < newEntities.Capacity)
                 {
                     TR2Entities entity = allEnemies[_generator.Next(0, allEnemies.Count)];
 
                     // Make sure this isn't known to be unsupported in the level
-                    if (unsupportedEnemies.Contains(entity))
+                    if (!EnemyUtilities.IsEnemySupported(level.Name, entity))
+                    {
+                        continue;
+                    }
+
+                    // If it's the chicken in HSH but we're not using docile, we don't want it ending the level
+                    if (!DocileBirdMonsters && entity == TR2Entities.BirdMonster && level.Is(LevelNames.HOME))
                     {
                         continue;
                     }
@@ -246,14 +274,13 @@ namespace TR2RandomizerCore.Randomizers
                 }
             }
 
-            // #144 Decide at this point who will be guising
-            TR2Entities guiser = TR2Entities.BirdMonster;
-            if (DocileBirdMonsters && newEntities.Contains(TR2Entities.BirdMonster))
+            // #144 Decide at this point who will be guising unless it has already been decided above (e.g. HSH)          
+            if (DocileBirdMonsters && newEntities.Contains(TR2Entities.BirdMonster) && chickenGuiser == TR2Entities.BirdMonster)
             {
                 int guiserIndex = chickenGuisers.FindIndex(g => !newEntities.Contains(g));
                 if (guiserIndex != -1)
                 {
-                    guiser = chickenGuisers[guiserIndex];
+                    chickenGuiser = chickenGuisers[guiserIndex];
                 }
             }
 
@@ -261,7 +288,7 @@ namespace TR2RandomizerCore.Randomizers
             {
                 EntitiesToImport = newEntities,
                 EntitiesToRemove = oldEntities,
-                BirdMonsterGuiser = guiser
+                BirdMonsterGuiser = chickenGuiser
             };
         }
 
@@ -328,6 +355,30 @@ namespace TR2RandomizerCore.Randomizers
 
             // Keep track of any new entities added (e.g. Skidoo)
             List<TR2Entity> newEntities = new List<TR2Entity>();
+
+            // #148 If it's HSH and we have been able to import cross-level, we will add 15
+            // dogs outside the gate to ensure the kill counter works. Dogs, Goon1 and
+            // StickGoons will have been excluded from the cross-level pool for simplicity
+            // Their textures will have been removed but they won't spawn anyway as we aren't
+            // defining triggers - the game only needs them to be present in the entity list.
+            if (level.Is(LevelNames.HOME) && !enemies.Available.Contains(TR2Entities.Doberman))
+            {
+                for (int i = 0; i < 15; i++)
+                {
+                    newEntities.Add(new TR2Entity
+                    {
+                        TypeID = (short)TR2Entities.Doberman,
+                        Room = 85,
+                        X = 61919,
+                        Y = 2560,
+                        Z = 74222,
+                        Angle = 16384,
+                        Flags = 0,
+                        Intensity1 = -1,
+                        Intensity2 = -1
+                    });
+                }
+            }
 
             // First iterate through any enemies that are restricted by room
             Dictionary<TR2Entities, List<int>> enemyRooms = EnemyUtilities.GetRestrictedEnemyRooms(level.Name);
