@@ -11,7 +11,7 @@
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing"
-        Title="{Binding AppTitle}" Height="700" Width="1200">
+        Title="{Binding AppTitle}" Height="740" Width="1240">
 
     <Window.CommandBindings>
         <CommandBinding Command="cmds:WindowCommands.Open"

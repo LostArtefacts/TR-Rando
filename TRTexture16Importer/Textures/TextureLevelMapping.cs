@@ -52,14 +52,21 @@ namespace TRTexture16Importer.Textures
             // Read the dynamic mapping - this holds object and sprite texture indices for the level to which we will apply an HSB operation
             if (rootMapping.ContainsKey("Dynamic"))
             {
-                SortedDictionary<string, Dictionary<int, List<Rectangle>>> mapping = JsonConvert.DeserializeObject<SortedDictionary<string, Dictionary<int, List<Rectangle>>>>(rootMapping["Dynamic"].ToString());
+                SortedDictionary<string, Dictionary<string, Dictionary<int, List<Rectangle>>>> mapping = JsonConvert.DeserializeObject<SortedDictionary<string, Dictionary<string, Dictionary<int, List<Rectangle>>>>>(rootMapping["Dynamic"].ToString());
                 foreach (string sourceName in mapping.Keys)
                 {
                     DynamicTextureSource source = database.GetDynamicSource(sourceName);
-                    dynamicMapping[source] = new DynamicTextureTarget
+                    DynamicTextureTarget target = new DynamicTextureTarget
                     {
-                        TileTargets = mapping[sourceName]
+                        DefaultTileTargets = mapping[sourceName]["Default"]
                     };
+
+                    if (mapping[sourceName].ContainsKey("Optional"))
+                    {
+                        target.OptionalTileTargets = mapping[sourceName]["Optional"];
+                    }
+
+                    dynamicMapping[source] = target;
                 }
             }
 
@@ -149,11 +156,11 @@ namespace TRTexture16Importer.Textures
             };
         }
 
-        public void RedrawTargets(AbstractTextureSource source, string variant)
+        public void RedrawTargets(AbstractTextureSource source, string variant, bool includeOptionalTargets)
         {
             if (source is DynamicTextureSource dynamicSource)
             {
-                RedrawDynamicTargets(dynamicSource, variant);
+                RedrawDynamicTargets(dynamicSource, variant, includeOptionalTargets);
             }
             else if (source is StaticTextureSource staticSource)
             {
@@ -161,17 +168,27 @@ namespace TRTexture16Importer.Textures
             }
         }
 
-        public void RedrawDynamicTargets(DynamicTextureSource source, string variant)
+        public void RedrawDynamicTargets(DynamicTextureSource source, string variant, bool includeOptionalTargets)
         {
             HSBOperation op = source.OperationMap[variant];
             DynamicTextureTarget target = DynamicMapping[source];
 
-            foreach (int tileIndex in target.TileTargets.Keys)
+            RedrawDynamicTargets(target.DefaultTileTargets, op);
+
+            if (includeOptionalTargets)
+            {
+                RedrawDynamicTargets(target.OptionalTileTargets, op);
+            }
+        }
+
+        private void RedrawDynamicTargets(Dictionary<int, List<Rectangle>> targets, HSBOperation operation)
+        {
+            foreach (int tileIndex in targets.Keys)
             {
                 BitmapGraphics bg = GetBitmapGraphics(tileIndex);
-                foreach (Rectangle rect in target.TileTargets[tileIndex])
+                foreach (Rectangle rect in targets[tileIndex])
                 {
-                    bg.AdjustHSB(rect, op);
+                    bg.AdjustHSB(rect, operation);
                 }
             }
         }

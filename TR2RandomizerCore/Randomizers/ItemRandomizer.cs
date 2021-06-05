@@ -45,6 +45,31 @@ namespace TR2RandomizerCore.Randomizers
                 //Apply the modifications
                 RepositionItems(locations[_levelInstance.Name]);
 
+                //Write back the level file
+                SaveLevelInstance();
+
+                if (!TriggerProgress())
+                {
+                    break;
+                }
+            }
+        }
+
+        // Called post enemy randomization if used to allow accurate enemy scoring
+        public void RandomizeAmmo()
+        {
+            foreach (TR23ScriptedLevel lvl in Levels)
+            {
+                //Read the level into a combined data/script level object
+                LoadLevelInstance(lvl);
+
+                if (IsDevelopmentModeOn && _pistolLocations.ContainsKey(_levelInstance.Name))
+                {
+                    PlaceAllItems(_pistolLocations[_levelInstance.Name], entityToAdd: TR2Entities.Pistols_S_P, transformToLevelSpace: false);
+                }
+
+                FindUnarmedPistolsLocation();
+
                 //#44 - Randomize OR pistol type
                 if (lvl.RemovesWeapons) { RandomizeORPistol(); }
 
@@ -62,19 +87,19 @@ namespace TR2RandomizerCore.Randomizers
         }
 
         // roomNumber is specified if ONLY that room is to be populated
-        private void PlaceAllItems(List<Location> locations, int roomNumber = -1)
+        private void PlaceAllItems(List<Location> locations, int roomNumber = -1, TR2Entities entityToAdd = TR2Entities.LargeMed_S_P, bool transformToLevelSpace = true)
         {
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
 
             foreach (Location loc in locations)
             {
-                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info);
+                Location copy = transformToLevelSpace ? SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info) : loc;
 
                 if (roomNumber == -1 || roomNumber == copy.Room)
                 {
                     ents.Add(new TR2Entity
                     {
-                        TypeID = (int)TR2Entities.LargeMed_S_P,
+                        TypeID = (short)entityToAdd,
                         Room = Convert.ToInt16(copy.Room),
                         X = copy.X,
                         Y = copy.Y,
@@ -84,29 +109,6 @@ namespace TR2RandomizerCore.Randomizers
                         Intensity2 = -1,
                         Flags = 0
                     });
-                }
-            }
-
-            // Test unarmed locations
-            if (_pistolLocations.ContainsKey(_levelInstance.Name))
-            {
-                foreach (Location loc in _pistolLocations[_levelInstance.Name])
-                {
-                    if (roomNumber == -1 || roomNumber == loc.Room)
-                    {
-                        ents.Add(new TR2Entity
-                        {
-                            TypeID = (int)TR2Entities.Pistols_S_P,
-                            Room = (short)loc.Room,
-                            X = loc.X,
-                            Y = loc.Y,
-                            Z = loc.Z,
-                            Angle = 0,
-                            Intensity1 = -1,
-                            Intensity2 = -1,
-                            Flags = 0
-                        });
-                    }
                 }
             }
 
@@ -335,7 +337,7 @@ namespace TR2RandomizerCore.Randomizers
             // randomization sessions to avoid item pollution. This is no longer required
             // as randomization is now always performed on the original level files.
 
-            // # Default pistol locations are no longer limited to one per level.
+            // #124 Default pistol locations are no longer limited to one per level.
 
             _unarmedLevelPistolIndex = -1;
 

@@ -312,13 +312,13 @@ namespace TRLevelReader
                 level.Zones[i] = reader.ReadInt16();
             }
 
-            //Animated Textures
+            //Animated Textures - the data stores the total number of ushorts to read (NumAnimatedTextures)
+            //followed by a ushort to describe the number of actual texture group objects.
             level.NumAnimatedTextures = reader.ReadUInt32();
-            level.AnimatedTextures = new ushort[level.NumAnimatedTextures];
-
-            for (int i = 0; i < level.NumAnimatedTextures; i++)
+            level.AnimatedTextures = new TRAnimatedTexture[reader.ReadUInt16()];
+            for (int i = 0; i < level.AnimatedTextures.Length; i++)
             {
-                level.AnimatedTextures[i] = reader.ReadUInt16();
+                level.AnimatedTextures[i] = TR2FileReadUtilities.ReadAnimatedTexture(reader);
             }
 
             //Entities

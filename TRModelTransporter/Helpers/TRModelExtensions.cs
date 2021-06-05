@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TRLevelReader.Model;
 
 namespace TRModelTransporter.Helpers
@@ -91,7 +92,7 @@ namespace TRModelTransporter.Helpers
         }
 
         // Given a precompiled dictionary of old texture index to new, this will ensure that
-        // all Meshes and RoomData point to the new correct index.
+        // all Meshes, RoomData and AnimatedTextures point to the new correct index.
         public static void ReindexTextures(this TR2Level level, Dictionary<int, int> indexMap, bool defaultToOriginal = true)
         {
             if (indexMap.Count == 0)
@@ -121,6 +122,36 @@ namespace TRModelTransporter.Helpers
                 {
                     tri.Texture = ConvertTextureReference(tri.Texture, indexMap, defaultToOriginal);
                 }
+            }
+
+            // #137 Ensure animated textures are reindexed too (these are just groups of texture indices)
+            // They have to remain unique it seems, otherwise the animation speed is too fast, so while we
+            // have removed the duplicated textures, we can re-add duplicate texture objects while there is 
+            // enough space in that array.
+            List<TRObjectTexture> textures = level.ObjectTextures.ToList();
+            foreach (TRAnimatedTexture anim in level.AnimatedTextures)
+            {
+                for (int i = 0; i < anim.Textures.Length; i++)
+                {
+                    anim.Textures[i] = ConvertTextureReference(anim.Textures[i], indexMap, defaultToOriginal);
+                }
+
+                ushort previousIndex = anim.Textures[0];
+                for (int i = 1; i < anim.Textures.Length; i++)
+                {
+                    if (anim.Textures[i] == previousIndex && textures.Count < 2048)
+                    {
+                        textures.Add(textures[anim.Textures[i]]);
+                        anim.Textures[i] = (ushort)(textures.Count - 1);
+                    }
+                    previousIndex = anim.Textures[i];
+                }
+            }
+
+            if (textures.Count > level.NumObjectTextures)
+            {
+                level.ObjectTextures = textures.ToArray();
+                level.NumObjectTextures = (uint)textures.Count;
             }
         }
 

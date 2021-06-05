@@ -24,8 +24,10 @@ namespace TR2RandomizerCore.Randomizers
         internal bool IncludeKeyItems { get; set; }
         internal bool DevelopmentMode { get; set; }
         internal bool PersistTextureVariants { get; set; }
+        internal bool RetainKeySpriteTextures { get; set; }
         internal bool CrossLevelEnemies { get; set; }
         internal bool ProtectMonks { get; set; }
+        internal bool DocileBirdMonsters { get; set; }
         internal bool GlitchedSecrets { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || (RandomizeEnemies && CrossLevelEnemies);
@@ -50,10 +52,12 @@ namespace TR2RandomizerCore.Randomizers
             EnemySeed = config.GetInt(nameof(EnemySeed), defaultSeed);
             CrossLevelEnemies = config.GetBool(nameof(CrossLevelEnemies));
             ProtectMonks = config.GetBool(nameof(ProtectMonks));
+            DocileBirdMonsters = config.GetBool(nameof(DocileBirdMonsters));
 
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
             PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
+            RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures));
 
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));            
         }
@@ -73,10 +77,12 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(EnemySeed)] = EnemySeed;
             config[nameof(CrossLevelEnemies)] = CrossLevelEnemies;
             config[nameof(ProtectMonks)] = ProtectMonks;
+            config[nameof(DocileBirdMonsters)] = DocileBirdMonsters;
 
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;
             config[nameof(PersistTextureVariants)] = PersistTextureVariants;
+            config[nameof(RetainKeySpriteTextures)] = RetainKeySpriteTextures;
 
             config[nameof(DevelopmentMode)] = DevelopmentMode;            
         }
@@ -86,7 +92,7 @@ namespace TR2RandomizerCore.Randomizers
             // TODO: move these target calculations into the relevant classes - they don't belong here
             int target = base.GetSaveTarget(numLevels);
             if (RandomizeSecrets)    target += numLevels;
-            if (RandomizeItems)      target += numLevels;
+            if (RandomizeItems)      target += numLevels * 2; // standard/key rando followed by unarmed logic after enemy rando
             if (DeduplicateTextures) target += numLevels * 2;
             if (RandomizeEnemies)    target += CrossLevelEnemies ? numLevels * 3 : numLevels;
             if (RandomizeTextures)   target += numLevels * 3;
@@ -147,6 +153,21 @@ namespace TR2RandomizerCore.Randomizers
                     }.Deduplicate();
                 }
 
+                ItemRandomizer itemRandomizer = null;
+                if (!monitor.IsCancelled && RandomizeItems)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, string.Format("Randomizing standard{0} items", IncludeKeyItems ? " and key" : string.Empty));
+                    (itemRandomizer = new ItemRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        IncludeKeyItems = IncludeKeyItems,
+                        PerformEnemyWeighting = RandomizeEnemies && CrossLevelEnemies,
+                        IsDevelopmentModeOn = DevelopmentMode
+                    }).Randomize(ItemSeed);
+                }
+
                 if (!monitor.IsCancelled && RandomizeEnemies)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
@@ -157,22 +178,16 @@ namespace TR2RandomizerCore.Randomizers
                         SaveMonitor = monitor,
                         CrossLevelEnemies = CrossLevelEnemies,
                         ProtectMonks = ProtectMonks,
+                        DocileBirdMonsters = DocileBirdMonsters,
                         TextureMonitor = textureMonitor
                     }.Randomize(EnemySeed);
                 }
 
+                // Randomize ammo/weapon in unarmed levels post enemy randomization
                 if (!monitor.IsCancelled && RandomizeItems)
                 {
-                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
-                    new ItemRandomizer
-                    {
-                        Levels = levels,
-                        BasePath = wipDirectory,
-                        SaveMonitor = monitor,
-                        IncludeKeyItems = IncludeKeyItems,
-                        PerformEnemyWeighting = RandomizeEnemies && CrossLevelEnemies,
-                        IsDevelopmentModeOn = DevelopmentMode
-                    }.Randomize(ItemSeed);
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing unarmed level items");
+                    itemRandomizer.RandomizeAmmo();
                 }
 
                 if (!monitor.IsCancelled && RandomizeTextures)
@@ -184,6 +199,7 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         PersistVariants = PersistTextureVariants,
+                        RetainKeySprites = RetainKeySpriteTextures,
                         TextureMonitor = textureMonitor
                     }.Randomize(TextureSeed);
                 }

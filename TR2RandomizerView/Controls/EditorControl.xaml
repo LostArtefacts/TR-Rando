@@ -102,21 +102,12 @@
             CustomBool="{Binding IncludeKeyItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomBoolTitle="Enable key items"/>
 
-        <ctrl:ManagedSeedBoolBoolControl
+        <ctrl:EnemyControl
             Grid.Row="2" 
             Grid.Column="1"
-            IsActive="{Binding RandomizeEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            Title="Randomize Enemies"
-            Text="Randomize the types of enemies you encounter in each level. Select cross-level enemies to allow enemy types to appear in any level."
-            SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding EnemySeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBool1="{Binding CrossLevelEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle1="Enable cross-level enemies"
-            CustomBool2="{Binding ProtectMonks, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle2="Avoid killing monks"/>
+            IsActive="{Binding RandomizeEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedBoolBoolControl
             Grid.Row="3"
             Grid.Column="1"
             IsActive="{Binding RandomizeTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -125,8 +116,10 @@
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding TextureSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBool="{Binding PersistTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle="Use persistent textures"/>
+            CustomBool1="{Binding PersistTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle1="Use persistent textures"
+            CustomBool2="{Binding RetainKeySpriteTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle2="Use original key sprite textures"/>
 
         <ctrl:ManagedSeedControl
             Grid.Row="0"

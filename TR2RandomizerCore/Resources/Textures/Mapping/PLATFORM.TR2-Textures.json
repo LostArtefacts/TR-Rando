@@ -875,6 +875,33 @@
       }
     ],
 
+    "Venice.Sky.Bartoli": [
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 192,
+        "Y": 192
+      },
+      {
+        "Segment": 2,
+        "Tile": 5,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 3,
+        "Tile": 5,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 4,
+        "Tile": 5,
+        "X": 64,
+        "Y": 0
+      }
+    ],
+
     "Water": [
       {
         "Segment": 0,

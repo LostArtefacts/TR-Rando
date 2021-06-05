@@ -56,6 +56,12 @@ namespace TRModelTransporter.Transport
             TR2Entities.StickWieldingGoon1GreenVest, TR2Entities.MaskedGoon1, TR2Entities.Mercenary2
         };
 
+        // If these are imported into levels that already have another alias for them, only their hardcoded sounds will be imported
+        protected static readonly List<TR2Entities> _soundOnlyDependencies = new List<TR2Entities>
+        {
+            TR2Entities.StickWieldingGoon1GreenVest
+        };
+
         protected static readonly Dictionary<TR2Entities, TR2Entities> _entityAliases = new Dictionary<TR2Entities, TR2Entities>
         {
             [TR2Entities.BengalTiger] = TR2Entities.TigerOrSnowLeopard,

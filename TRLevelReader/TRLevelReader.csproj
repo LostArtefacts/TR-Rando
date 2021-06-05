@@ -56,6 +56,7 @@
     <Compile Include="Model\TR2RoomLight.cs" />
     <Compile Include="Model\TR2RoomStaticMesh.cs" />
     <Compile Include="Model\TR2RoomVertex.cs" />
+    <Compile Include="Model\TRAnimatedTexture.cs" />
     <Compile Include="Model\TRAnimation.cs" />
     <Compile Include="Model\TRAnimCommand.cs" />
     <Compile Include="Model\TRAnimDispatch.cs" />
