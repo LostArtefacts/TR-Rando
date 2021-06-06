@@ -379,7 +379,7 @@ namespace TR2RandomizerCore.Randomizers
             {TR2Entities.Shotgun_S_P, 8},
             {TR2Entities.Automags_S_P, 4},
             {TR2Entities.Uzi_S_P, 4},
-            {TR2Entities.Harpoon_S_P, 24},
+            {TR2Entities.Harpoon_S_P, 4}, // #149 Agreed that a low number of harpoons will be given for unarmed levels, but pistols will also be included
             {TR2Entities.M16_S_P, 2},
             {TR2Entities.GrenadeLauncher_S_P, 4},
         };
@@ -451,8 +451,9 @@ namespace TR2RandomizerCore.Randomizers
                 if (Weap != TR2Entities.Pistols_S_P)
                 {
                     // If we haven't decided to add the pistols (i.e. for enemy difficulty)
-                    // add a 1/3 chance of getting them anyway.
-                    if (addPistols || _generator.Next(0, 3) == 0)
+                    // add a 1/3 chance of getting them anyway. #149 If the harpoon is being
+                    // given, the pistols will be included.
+                    if (addPistols || Weap == TR2Entities.Harpoon_S_P || _generator.Next(0, 3) == 0)
                     {
                         CopyEntity(unarmedLevelWeapons, TR2Entities.Pistols_S_P);
                     }
@@ -472,11 +473,14 @@ namespace TR2RandomizerCore.Randomizers
         private void CopyEntity(TR2Entity entity, TR2Entities newType)
         {
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-            TR2Entity copy = entity.Clone();
-            copy.TypeID = (short)newType;
-            ents.Add(copy);
-            _levelInstance.Data.NumEntities++;
-            _levelInstance.Data.Entities = ents.ToArray();
+            if (ents.Count < 256)
+            {
+                TR2Entity copy = entity.Clone();
+                copy.TypeID = (short)newType;
+                ents.Add(copy);
+                _levelInstance.Data.NumEntities++;
+                _levelInstance.Data.Entities = ents.ToArray();
+            }
         }
 
         private TR2Entities GetWeaponAmmo(TR2Entities weapon)
@@ -504,7 +508,7 @@ namespace TR2RandomizerCore.Randomizers
         {
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
 
-            for (uint i = 0; i < count; i++)
+            for (uint i = 0; i < count && ents.Count < 256; i++)
             {
                 TR2Entity ammo = weapon.Clone();
 
@@ -513,7 +517,7 @@ namespace TR2RandomizerCore.Randomizers
                 ents.Add(ammo);
             };
 
-            _levelInstance.Data.NumEntities += count;
+            _levelInstance.Data.NumEntities = (uint)ents.Count;
             _levelInstance.Data.Entities = ents.ToArray();
         }
 
