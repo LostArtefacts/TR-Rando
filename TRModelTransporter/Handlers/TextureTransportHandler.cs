@@ -42,6 +42,7 @@ namespace TRModelTransporter.Handlers
         private static readonly Dictionary<TR2Entities, List<TR2Entities>> _entitySpriteDependencies = new Dictionary<TR2Entities, List<TR2Entities>>
         {
             [TR2Entities.FlamethrowerGoon] = new List<TR2Entities> { TR2Entities.Flame_S_H },
+            [TR2Entities.MarcoBartoli] = new List<TR2Entities> { TR2Entities.Flame_S_H },
             [TR2Entities.RedSnowmobile] = new List<TR2Entities> { TR2Entities.SnowmobileWake_S_H },
             [TR2Entities.XianGuardSword] = new List<TR2Entities> { TR2Entities.XianGuardSparkles_S_H }
         };

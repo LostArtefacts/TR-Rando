@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TR2RandomizerCore.Helpers;
+using TRFDControl;
+using TRFDControl.FDEntryTypes;
+using TRFDControl.Utilities;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
@@ -361,5 +364,30 @@ namespace TR2RandomizerCore.Utilities
                 TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick
             }
         };
+
+        // #146 Ensure Marco is spawned only once
+        private static readonly List<TR2Entities> _oneShotEnemies = new List<TR2Entities>
+        {
+            TR2Entities.MarcoBartoli
+        };
+
+        public static void SetEntityTriggers(TR2Level level, TR2Entity entity)
+        {
+            if (_oneShotEnemies.Contains((TR2Entities)entity.TypeID))
+            {
+                int entityID = level.Entities.ToList().IndexOf(entity);
+
+                FDControl fdControl = new FDControl();
+                fdControl.ParseFromLevel(level);
+
+                List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(fdControl, entityID);
+                foreach (FDTriggerEntry trigger in triggers)
+                {
+                    trigger.TrigSetup.SetOneShot();
+                }
+
+                fdControl.WriteToLevel(level);
+            }
+        }
     }
 }
