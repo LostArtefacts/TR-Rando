@@ -419,6 +419,9 @@ namespace TR2RandomizerCore.Randomizers
 
                         targetEntity.TypeID = (short)TR2EntityUtilities.TranslateEntityAlias(entity);
 
+                        // #146 Ensure OneShot triggers are set for this enemy if needed
+                        EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
+
                         // Remove the target entity so it doesn't get replaced
                         enemyEntities.Remove(targetEntity);
                     }
@@ -565,6 +568,11 @@ namespace TR2RandomizerCore.Randomizers
 
                 // Make sure to convert BengalTiger, StickWieldingGoonBandana etc back to their actual types
                 currentEntity.TypeID = (short)TR2EntityUtilities.TranslateEntityAlias(newEntityType);
+
+                // #146 Ensure OneShot triggers are set for this enemy if needed. This currently only applies
+                // to the dragon, which will be handled above in defined rooms, but the check should be made
+                // here in case this needs to be extended later.
+                EnemyUtilities.SetEntityTriggers(level.Data, currentEntity);
             }
 
             // MercSnowMobDriver relies on RedSnowmobile so it will be available in the model list

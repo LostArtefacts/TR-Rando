@@ -8,6 +8,7 @@ using TRLevelReader.Model;
 
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
+using TRFDControl.Utilities;
 
 namespace TRLevelReaderUnitTests
 {
@@ -473,6 +474,79 @@ namespace TRLevelReaderUnitTests
             }
 
             Assert.IsTrue(isPortal);
+        }
+
+        [TestMethod]
+        public void FloorData_ReadWriteOneShotTest()
+        {
+            //Read GW data
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("wall.tr2");
+
+            //Parse the floordata using FDControl
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Get all triggers for entity ID 18
+            List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(fdataReader, 18);
+
+            //There should be 3
+            Assert.AreEqual(triggers.Count, 3);
+
+            //Verify none of the triggers has OneShot set
+            foreach (FDTriggerEntry trigger in triggers)
+            {
+                Assert.IsFalse(trigger.TrigSetup.OneShot);
+            }
+
+            //Set OneShot on each trigger
+            foreach (FDTriggerEntry trigger in triggers)
+            {
+                trigger.TrigSetup.SetOneShot();
+            }
+
+            fdataReader.WriteToLevel(lvl);
+
+            //Save it and read it back in
+            TR2LevelWriter writer = new TR2LevelWriter();
+            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Get the triggers again afresh
+            triggers = FDUtilities.GetEntityTriggers(fdataReader, 18);
+
+            //Verify that they now have OneShot set
+            foreach (FDTriggerEntry trigger in triggers)
+            {
+                Assert.IsTrue(trigger.TrigSetup.OneShot);
+            }
+
+            //Switch it off again
+            foreach (FDTriggerEntry trigger in triggers)
+            {
+                trigger.TrigSetup.ClearOneShot();
+            }
+
+            fdataReader.WriteToLevel(lvl);
+
+            //Save it and read it back in
+            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Get the triggers again afresh
+            triggers = FDUtilities.GetEntityTriggers(fdataReader, 18);
+
+            //Verify that they now once again do not have OneShot set
+            foreach (FDTriggerEntry trigger in triggers)
+            {
+                Assert.IsFalse(trigger.TrigSetup.OneShot);
+            }
         }
     }
 }
