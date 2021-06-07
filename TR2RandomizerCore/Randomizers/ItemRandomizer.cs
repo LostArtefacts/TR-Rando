@@ -78,7 +78,7 @@ namespace TR2RandomizerCore.Randomizers
 
                 //Write back the level file
                 SaveLevelInstance();
-
+                
                 if (!TriggerProgress())
                 {
                     break;
@@ -473,7 +473,7 @@ namespace TR2RandomizerCore.Randomizers
         private void CopyEntity(TR2Entity entity, TR2Entities newType)
         {
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-            if (ents.Count < 256)
+            if (ents.Count < _levelInstance.GetMaximumEntityLimit())
             {
                 TR2Entity copy = entity.Clone();
                 copy.TypeID = (short)newType;
@@ -508,7 +508,8 @@ namespace TR2RandomizerCore.Randomizers
         {
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
 
-            for (uint i = 0; i < count && ents.Count < 256; i++)
+            int entityLimit = _levelInstance.GetMaximumEntityLimit();
+            for (uint i = 0; i < count && ents.Count < entityLimit; i++)
             {
                 TR2Entity ammo = weapon.Clone();
 

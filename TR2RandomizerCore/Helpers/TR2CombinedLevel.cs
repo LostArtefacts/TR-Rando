@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TR2RandomizerCore.Utilities;
 using TRGE.Core;
 using TRLevelReader.Helpers;
@@ -83,6 +84,25 @@ namespace TR2RandomizerCore.Helpers
                 }
             }
             return levelEntities;
+        }
+
+        public int GetMaximumEntityLimit()
+        {
+            int limit = 256;
+
+            // #153 The game creates a black skidoo for each skidoo driver when the level
+            // is loaded, so there needs to be space in the entity array for these.
+            List<TR2Entity> entities = Data.Entities.ToList();
+            limit -= entities.FindAll(e => e.TypeID == (short)TR2Entities.MercSnowmobDriver).Count;
+
+            // If there is a dragon, we need an extra 7 slots for the front bones, 
+            // back bones etc. This is going by what's seen in Dragon.c
+            if (entities.FindIndex(e => e.TypeID == (short)TR2Entities.MarcoBartoli) != -1)
+            {
+                limit -= 7;
+            }
+
+            return limit;
         }
     }
 }
