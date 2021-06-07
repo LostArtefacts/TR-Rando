@@ -83,12 +83,40 @@ namespace TRLevelReader.Model
             Flags &= ~(0x01);
         }
 
-        public void Illuminate(ushort factor)
+
+        //Ambient Intensity = 0 (bright) - 0x1FFF (dark)
+        //Vertex Light = 0 (bright) - 0x1FFF (dark)
+        //but...
+        //Light intensity = 0 (dark) - 0x1FFF (bright)!!!
+        public void SetLights(ushort val)
         {
             foreach (TR2RoomLight light in Lights)
             {
-                light.Intensity1 = (ushort)Math.Round((double)(light.Intensity1 * (factor / 100)), MidpointRounding.AwayFromZero);
+                light.Intensity1 = val;
+                light.Intensity2 = val;
             }
+        }
+
+        public void SetVertexLight(short val)
+        {
+            foreach (TR2RoomVertex vert in RoomData.Vertices)
+            {
+                vert.Lighting = val;
+                vert.Lighting2 = val;
+            }
+        }
+
+        public void SetAmbient(short val)
+        {
+            AmbientIntensity = val;
+            AmbientIntensity2 = val;
+        }
+
+        public void Darken()
+        {
+            SetAmbient(8000);
+            SetLights(1000);
+            SetVertexLight(8000);
         }
 
         public byte[] Serialize()
