@@ -83,6 +83,14 @@ namespace TRLevelReader.Model
             Flags &= ~(0x01);
         }
 
+        public void Illuminate(ushort factor)
+        {
+            foreach (TR2RoomLight light in Lights)
+            {
+                light.Intensity1 = (ushort)Math.Round((double)(light.Intensity1 * (factor / 100)), MidpointRounding.AwayFromZero);
+            }
+        }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())
