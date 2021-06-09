@@ -13,7 +13,8 @@ namespace TR2RandomizerCore.Utilities
         private static readonly Dictionary<TR2Entities, TR2Entities> _expandedMonitorMap = new Dictionary<TR2Entities, TR2Entities>
         {
             [TR2Entities.MercSnowmobDriver] = TR2Entities.RedSnowmobile,
-            [TR2Entities.FlamethrowerGoon] = TR2Entities.Flame_S_H
+            [TR2Entities.FlamethrowerGoon] = TR2Entities.Flame_S_H,
+            [TR2Entities.MarcoBartoli] = TR2Entities.Flame_S_H
         };
 
         private readonly Dictionary<string, TexturePositionMonitor> _monitors;

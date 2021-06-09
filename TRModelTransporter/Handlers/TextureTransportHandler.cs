@@ -202,6 +202,9 @@ namespace TRModelTransporter.Handlers
             // Rebuild the segment list. We assume the list of IndexedTRObjectTextures has been
             // ordered by area descending to preserve the "master" texture for each segment.
             _importSegments = new Dictionary<TRModelDefinition, List<TexturedTileSegment>>();
+
+            // Track existing sprite sequences to avoid duplication
+            List<TRSpriteSequence> spriteSequences = Level.SpriteSequences.ToList();
             foreach (TRModelDefinition definition in Definitions)
             {
                 if (!definition.HasGraphics || definition.IsDependencyOnly)
@@ -209,7 +212,6 @@ namespace TRModelTransporter.Handlers
                     continue;
                 }
 
-                List<TRSpriteSequence> spriteSequences = Level.SpriteSequences.ToList();
                 _importSegments[definition] = new List<TexturedTileSegment>();
                 using (BitmapGraphics bg = new BitmapGraphics(definition.Bitmap))
                 {
@@ -238,6 +240,12 @@ namespace TRModelTransporter.Handlers
                         {
                             definition.SpriteSequences.Remove(spriteEntity);
                             continue;
+                        }
+                        else
+                        {
+                            // Add it to the tracking list in case we are importing 2 or more models
+                            // that share a sequence e.g. Dragon/Flamethrower and Flame_S_H
+                            spriteSequences.Add(new TRSpriteSequence { SpriteID = (int)spriteEntity });
                         }
 
                         // The sequence will be merged later when we know the sprite texture offsets.
