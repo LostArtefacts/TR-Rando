@@ -545,7 +545,7 @@ namespace TR2RandomizerCore.Randomizers
                     }
                 }
 
-                // #157 Several entity freezing issues have been found with various
+                // #158 Several entity freezing issues have been found with various
                 // enemy combinations in Barkhang, so for now all mercenaries and monks
                 // must remain in place, and no additional ones should be added. In effect,
                 // only the crows will be changed.
