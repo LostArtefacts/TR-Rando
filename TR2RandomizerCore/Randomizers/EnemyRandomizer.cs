@@ -442,20 +442,6 @@ namespace TR2RandomizerCore.Randomizers
                     continue;
                 }
 
-                // #136 If it's the monastery and we still have monks, entity ID 167 has to
-                // remain either type of monk, otherwise saving at the sack/spindle area
-                // and reloading causes entities to freeze. If there are no monks, this
-                // doesn't seem to be an issue.
-                if (level.Is(LevelNames.MONASTERY) && currentEntity.Room == 99)
-                {
-                    int monkIndex = enemies.Available.FindIndex(e => TR2EntityUtilities.IsMonk(e));
-                    if (monkIndex != -1)
-                    {
-                        currentEntity.TypeID = (short)enemies.Available[monkIndex];
-                        continue;
-                    }
-                }
-
                 //#45 - Check to see if any items are at the same location as the enemy.
                 //If there are we need to ensure that the new random enemy type is one that can drop items.
                 List<TR2Entity> sharedItems = new List<TR2Entity>(Array.FindAll
@@ -554,6 +540,18 @@ namespace TR2RandomizerCore.Randomizers
                 if (newEntityType == TR2Entities.MarcoBartoli && dragonSeen) // DL only, other levels use quasi-zoning for the dragon
                 {
                     while (newEntityType == TR2Entities.MarcoBartoli)
+                    {
+                        newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
+                    }
+                }
+
+                // #157 Several entity freezing issues have been found with various
+                // enemy combinations in Barkhang, so for now all mercenaries and monks
+                // must remain in place, and no additional ones should be added. In effect,
+                // only the crows will be changed.
+                if (level.Is(LevelNames.MONASTERY))
+                {
+                    while (EnemyUtilities.IsEnemyRequired(level.Name, newEntityType))
                     {
                         newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
                     }

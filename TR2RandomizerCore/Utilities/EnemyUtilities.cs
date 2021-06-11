@@ -247,6 +247,8 @@ namespace TR2RandomizerCore.Utilities
         
         private static readonly Dictionary<string, List<TR2Entities>> _requiredEnemies = new Dictionary<string, List<TR2Entities>>
         {
+            [LevelNames.MONASTERY] =
+                new List<TR2Entities> { TR2Entities.Mercenary1, TR2Entities.Mercenary2, TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick }, // #157 Barkhang entity freezing issues
             [LevelNames.CHICKEN] =
                 new List<TR2Entities> { TR2Entities.BirdMonster },  // #60 - Ice Palace chicken man must remain to avoid softlock.
             [LevelNames.LAIR] =
