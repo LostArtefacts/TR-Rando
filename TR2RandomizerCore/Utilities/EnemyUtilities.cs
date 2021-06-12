@@ -222,8 +222,14 @@ namespace TR2RandomizerCore.Utilities
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [LevelNames.LQ] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            // #158 Barkhang seems to be most stable when the original MonkWithLongStick and Mercenary1
+            // enemies are in place, so we exclude the other monks and non-killable enemies from here
             [LevelNames.MONASTERY] =
-                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+                new List<TR2Entities> 
+                {
+                    TR2Entities.BlackMorayEel, TR2Entities.MarcoBartoli, TR2Entities.MonkWithKnifeStick , 
+                    TR2Entities.Mercenary2, TR2Entities.YellowMorayEel
+                },
             [LevelNames.CHICKEN] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [LevelNames.XIAN] =
@@ -248,7 +254,7 @@ namespace TR2RandomizerCore.Utilities
         private static readonly Dictionary<string, List<TR2Entities>> _requiredEnemies = new Dictionary<string, List<TR2Entities>>
         {
             [LevelNames.MONASTERY] =
-                new List<TR2Entities> { TR2Entities.Mercenary1, TR2Entities.Mercenary2, TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick }, // #158 Barkhang entity freezing issues
+                new List<TR2Entities> { TR2Entities.Mercenary1, TR2Entities.MonkWithLongStick }, // #158 Barkhang entity freezing issues
             [LevelNames.CHICKEN] =
                 new List<TR2Entities> { TR2Entities.BirdMonster },  // #60 - Ice Palace chicken man must remain to avoid softlock.
             [LevelNames.LAIR] =

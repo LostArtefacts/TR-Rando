@@ -223,6 +223,12 @@ namespace TR2RandomizerCore.Randomizers
                         continue;
                     }
 
+                    // If it's a docile chicken in Barkhang, it won't work because we can't disguise monks in this level.
+                    if (DocileBirdMonsters && entity == TR2Entities.BirdMonster && level.Is(LevelNames.MONASTERY))
+                    {
+                        continue;
+                    }
+
                     // If this is a tracked enemy throughout the game, we only allow it if the number
                     // of unique levels is within the limit. Bear in mind we are collecting more than
                     // one group of enemies per level.
@@ -545,10 +551,9 @@ namespace TR2RandomizerCore.Randomizers
                     }
                 }
 
-                // #158 Several entity freezing issues have been found with various
-                // enemy combinations in Barkhang, so for now all mercenaries and monks
-                // must remain in place, and no additional ones should be added. In effect,
-                // only the crows will be changed.
+                // #158 Several entity freezing issues have been found with various enemy
+                // combinations in Barkhang, so for now all Mercenary1 and MonkWithLongStick
+                // entities must remain in place, and no additional ones should be added.
                 if (level.Is(LevelNames.MONASTERY))
                 {
                     while (EnemyUtilities.IsEnemyRequired(level.Name, newEntityType))
