@@ -63,6 +63,8 @@ namespace TRModelTransporter.Handlers
                     tri.Texture = ReindexTexture(tri.Texture, indexMap);
                 }
             }
+
+            P16Importer.ResetPaletteTracking(Level);
         }
 
         private ushort ReindexTexture(ushort value, Dictionary<int, int> indexMap)

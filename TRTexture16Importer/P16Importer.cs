@@ -25,7 +25,7 @@ namespace TRTexture16Importer
             }
 
             lvl.Palette16[nextAvailableIndex] = c;
-            c.Unused = 1; // Avoid anything else trying to use this index
+            c.Unused = 255; // Avoid anything else trying to use this index
             return nextAvailableIndex;
         }
 
@@ -58,6 +58,17 @@ namespace TRTexture16Importer
             }
 
             return -1;
+        }
+
+        public static void ResetPaletteTracking(TR2Level lvl)
+        {
+            foreach (TRColour4 c in lvl.Palette16)
+            {
+                if (c.Unused == 255)
+                {
+                    c.Unused = 0;
+                }
+            }
         }
     }
 }
