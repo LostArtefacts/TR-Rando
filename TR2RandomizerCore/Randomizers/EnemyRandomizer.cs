@@ -551,6 +551,22 @@ namespace TR2RandomizerCore.Randomizers
                     }
                 }
 
+                // If we are restricting count per level for this enemy and have reached that count, pick
+                // someting else. This applies when we are restricting by in-level count, but not by room 
+                // (e.g. Winston).
+                int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType);
+                if (maxEntityCount != -1)
+                {
+                    if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count == maxEntityCount)
+                    {
+                        TR2Entities tmp = newEntityType;
+                        while (newEntityType == tmp)
+                        {
+                            newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
+                        }
+                    }
+                }
+
                 // #158 Several entity freezing issues have been found with various enemy
                 // combinations in Barkhang, so for now all Mercenary1 and MonkWithLongStick
                 // entities must remain in place, and no additional ones should be added.

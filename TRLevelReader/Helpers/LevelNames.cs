@@ -26,6 +26,7 @@ namespace TRLevelReader.Helpers
         public const string FLOATER     = "FLOATING.TR2";
         public const string LAIR        = "XIAN.TR2";
         public const string HOME        = "HOUSE.TR2";
+        public const string ASSAULT     = "ASSAULT.TR2";
 
         public const string COLDWAR     = "level1.TR2";
         public const string FOOLGOLD    = "level2.TR2";

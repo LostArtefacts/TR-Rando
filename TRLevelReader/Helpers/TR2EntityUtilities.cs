@@ -140,6 +140,7 @@ namespace TRLevelReader.Helpers
                 TR2Entities.StickWieldingGoon2,
                 TR2Entities.TRex,
                 TR2Entities.WhiteTiger,
+                TR2Entities.Winston,
                 TR2Entities.XianGuardSpear,
                 TR2Entities.XianGuardSword,
                 TR2Entities.YellowMorayEel,
@@ -239,6 +240,7 @@ namespace TRLevelReader.Helpers
                 TR2Entities.TigerOrSnowLeopard,
                 TR2Entities.TRex,
                 TR2Entities.WhiteTiger,
+                TR2Entities.Winston,
                 TR2Entities.XianGuardSpear,
                 TR2Entities.XianGuardSword,
                 TR2Entities.YellowMorayEel,
@@ -507,7 +509,7 @@ namespace TRLevelReader.Helpers
 
         public static bool IsHazardCreature(TR2Entities entity)
         {
-            return entity == TR2Entities.YellowMorayEel || entity == TR2Entities.BlackMorayEel;
+            return entity == TR2Entities.YellowMorayEel || entity == TR2Entities.BlackMorayEel || entity == TR2Entities.Winston;
         }
 
         public static List<TR2Entities> FilterWaterEnemies(List<TR2Entities> entities)
