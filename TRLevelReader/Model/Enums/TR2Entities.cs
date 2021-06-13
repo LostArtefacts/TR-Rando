@@ -288,6 +288,12 @@ namespace TRLevelReader.Model.Enums
         LaraMiscAnim_H_Ice = 2000, // Death-by-Yeti, Gong action
         LaraMiscAnim_H_Unwater,    // Death-by-Shark, opening wheel door
         LaraMiscAnim_H_Xian,       // Death-by-Guard, inspecting dagger
-        LaraMiscAnim_H_Wall        // Death-by-Barney
+        LaraMiscAnim_H_Wall,       // Death-by-Barney
+
+        // Split Lara's outfits
+        LaraSun = 3000,
+        LaraSnow,
+        LaraUnwater,
+        LaraHome
     }
 }
