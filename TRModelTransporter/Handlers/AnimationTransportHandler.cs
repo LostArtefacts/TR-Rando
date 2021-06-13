@@ -353,6 +353,32 @@ namespace TRModelTransporter.Handlers
 
             // Save the samples back to the level
             Level.SampleIndices = sampleIndices.ToArray();
+
+            // Repeat for SoundMap -> SoundDetails
+            Dictionary<int, TRSoundDetails> soundMapIndices = new Dictionary<int, TRSoundDetails>();
+            List<short> soundMap = Level.SoundMap.ToList();
+            for (int i = 0; i < soundMap.Count; i++)
+            {
+                if (soundMap[i] != -1)
+                {
+                    soundMapIndices[i] = Level.SoundDetails[soundMap[i]];
+                }
+            }
+
+            List<TRSoundDetails> soundDetailsList = Level.SoundDetails.ToList();
+            soundDetailsList.Sort(delegate (TRSoundDetails d1, TRSoundDetails d2)
+            {
+                return d1.Sample.CompareTo(d2.Sample);
+            });
+
+            foreach (int mapIndex in soundMapIndices.Keys)
+            {
+                TRSoundDetails details = soundMapIndices[mapIndex];
+                soundMap[mapIndex] = (short)soundDetailsList.IndexOf(details);
+            }
+
+            Level.SoundDetails = soundDetailsList.ToArray();
+            Level.SoundMap = soundMap.ToArray();
         }
 
         private void ImportAnimationFrames()

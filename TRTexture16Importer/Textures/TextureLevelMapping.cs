@@ -270,6 +270,9 @@ namespace TRTexture16Importer.Textures
                         }
                     }
                 }
+
+                // Reset the palette tracking 
+                P16Importer.ResetPaletteTracking(_level);
             }
         }
 

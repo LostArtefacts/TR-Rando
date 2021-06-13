@@ -7,6 +7,17 @@ namespace TRLevelReader.Helpers
     {
         public static readonly Dictionary<TR2Entities, Dictionary<TR2Entities, List<string>>> LevelEntityAliases = new Dictionary<TR2Entities, Dictionary<TR2Entities, List<string>>>
         {
+            [TR2Entities.Lara] = new Dictionary<TR2Entities, List<string>>
+            {
+                [TR2Entities.LaraSun] =
+                    new List<string> { LevelNames.GW, LevelNames.VENICE, LevelNames.BARTOLI, LevelNames.OPERA, LevelNames.RIG, LevelNames.DA, LevelNames.XIAN, LevelNames.FLOATER, LevelNames.LAIR },
+                [TR2Entities.LaraUnwater] =
+                    new List<string> { LevelNames.FATHOMS, LevelNames.DORIA, LevelNames.LQ, LevelNames.DECK },
+                [TR2Entities.LaraSnow] =
+                    new List<string> { LevelNames.TIBET, LevelNames.MONASTERY, LevelNames.COT, LevelNames.CHICKEN },
+                [TR2Entities.LaraHome] =
+                    new List<string> { LevelNames.HOME }
+            },
             [TR2Entities.Barracuda] = new Dictionary<TR2Entities, List<string>>
             {
                 [TR2Entities.BarracudaIce] =
@@ -42,6 +53,10 @@ namespace TRLevelReader.Helpers
 
         public static readonly Dictionary<TR2Entities, List<TR2Entities>> EntityFamilies = new Dictionary<TR2Entities, List<TR2Entities>>
         {
+            [TR2Entities.Lara] = new List<TR2Entities>
+            {
+                TR2Entities.LaraSun, TR2Entities.LaraSnow, TR2Entities.LaraUnwater, TR2Entities.LaraHome
+            },
             [TR2Entities.Barracuda] = new List<TR2Entities>
             {
                 TR2Entities.BarracudaIce, TR2Entities.BarracudaUnwater, TR2Entities.BarracudaXian
@@ -98,6 +113,14 @@ namespace TRLevelReader.Helpers
             return new List<TR2Entities> { entity };
         }
 
+        public static List<TR2Entities> GetLaraTypes()
+        {
+            return new List<TR2Entities>
+            {
+                TR2Entities.LaraSun, TR2Entities.LaraUnwater, TR2Entities.LaraSnow, TR2Entities.LaraHome
+            };
+        }
+
         public static List<TR2Entities> GetCandidateCrossLevelEnemies()
         {
             return new List<TR2Entities>
@@ -140,6 +163,7 @@ namespace TRLevelReader.Helpers
                 TR2Entities.StickWieldingGoon2,
                 TR2Entities.TRex,
                 TR2Entities.WhiteTiger,
+                TR2Entities.Winston,
                 TR2Entities.XianGuardSpear,
                 TR2Entities.XianGuardSword,
                 TR2Entities.YellowMorayEel,
@@ -239,6 +263,7 @@ namespace TRLevelReader.Helpers
                 TR2Entities.TigerOrSnowLeopard,
                 TR2Entities.TRex,
                 TR2Entities.WhiteTiger,
+                TR2Entities.Winston,
                 TR2Entities.XianGuardSpear,
                 TR2Entities.XianGuardSword,
                 TR2Entities.YellowMorayEel,
@@ -507,7 +532,7 @@ namespace TRLevelReader.Helpers
 
         public static bool IsHazardCreature(TR2Entities entity)
         {
-            return entity == TR2Entities.YellowMorayEel || entity == TR2Entities.BlackMorayEel;
+            return entity == TR2Entities.YellowMorayEel || entity == TR2Entities.BlackMorayEel || entity == TR2Entities.Winston;
         }
 
         public static List<TR2Entities> FilterWaterEnemies(List<TR2Entities> entities)

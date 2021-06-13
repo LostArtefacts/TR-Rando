@@ -223,6 +223,12 @@ namespace TR2RandomizerCore.Randomizers
                         continue;
                     }
 
+                    // If it's a docile chicken in Barkhang, it won't work because we can't disguise monks in this level.
+                    if (DocileBirdMonsters && entity == TR2Entities.BirdMonster && level.Is(LevelNames.MONASTERY))
+                    {
+                        continue;
+                    }
+
                     // If this is a tracked enemy throughout the game, we only allow it if the number
                     // of unique levels is within the limit. Bear in mind we are collecting more than
                     // one group of enemies per level.
@@ -442,20 +448,6 @@ namespace TR2RandomizerCore.Randomizers
                     continue;
                 }
 
-                // #136 If it's the monastery and we still have monks, entity ID 167 has to
-                // remain either type of monk, otherwise saving at the sack/spindle area
-                // and reloading causes entities to freeze. If there are no monks, this
-                // doesn't seem to be an issue.
-                if (level.Is(LevelNames.MONASTERY) && currentEntity.Room == 99)
-                {
-                    int monkIndex = enemies.Available.FindIndex(e => TR2EntityUtilities.IsMonk(e));
-                    if (monkIndex != -1)
-                    {
-                        currentEntity.TypeID = (short)enemies.Available[monkIndex];
-                        continue;
-                    }
-                }
-
                 //#45 - Check to see if any items are at the same location as the enemy.
                 //If there are we need to ensure that the new random enemy type is one that can drop items.
                 List<TR2Entity> sharedItems = new List<TR2Entity>(Array.FindAll
@@ -554,6 +546,33 @@ namespace TR2RandomizerCore.Randomizers
                 if (newEntityType == TR2Entities.MarcoBartoli && dragonSeen) // DL only, other levels use quasi-zoning for the dragon
                 {
                     while (newEntityType == TR2Entities.MarcoBartoli)
+                    {
+                        newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
+                    }
+                }
+
+                // If we are restricting count per level for this enemy and have reached that count, pick
+                // someting else. This applies when we are restricting by in-level count, but not by room 
+                // (e.g. Winston).
+                int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType);
+                if (maxEntityCount != -1)
+                {
+                    if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count == maxEntityCount)
+                    {
+                        TR2Entities tmp = newEntityType;
+                        while (newEntityType == tmp)
+                        {
+                            newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
+                        }
+                    }
+                }
+
+                // #158 Several entity freezing issues have been found with various enemy
+                // combinations in Barkhang, so for now all Mercenary1 and MonkWithLongStick
+                // entities must remain in place, and no additional ones should be added.
+                if (level.Is(LevelNames.MONASTERY))
+                {
+                    while (EnemyUtilities.IsEnemyRequired(level.Name, newEntityType))
                     {
                         newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
                     }

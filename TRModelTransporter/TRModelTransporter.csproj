@@ -81,7 +81,7 @@
     <Compile Include="Transport\TransportException.cs" />
     <Compile Include="Transport\TRModelExporter.cs" />
     <Compile Include="Transport\TRModelImporter.cs" />
-    <Compile Include="Utilities\MassTREnemyExporter.cs" />
+    <Compile Include="Utilities\MassTRModelExporter.cs" />
     <Compile Include="Utilities\MassTRTextureDeduplicator.cs" />
     <Compile Include="Utilities\TRLevelTextureDeduplicator.cs" />
     <Compile Include="Utilities\TRTextureClassifier.cs" />

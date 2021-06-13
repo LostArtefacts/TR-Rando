@@ -222,8 +222,14 @@ namespace TR2RandomizerCore.Utilities
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [LevelNames.LQ] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            // #158 Barkhang seems to be most stable when the original MonkWithLongStick and Mercenary1
+            // enemies are in place, so we exclude the other monks and non-killable enemies from here
             [LevelNames.MONASTERY] =
-                new List<TR2Entities> { TR2Entities.MarcoBartoli },
+                new List<TR2Entities> 
+                {
+                    TR2Entities.BlackMorayEel, TR2Entities.MarcoBartoli, TR2Entities.MonkWithKnifeStick , 
+                    TR2Entities.Mercenary2, TR2Entities.Winston, TR2Entities.YellowMorayEel
+                },
             [LevelNames.CHICKEN] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [LevelNames.XIAN] =
@@ -241,12 +247,14 @@ namespace TR2RandomizerCore.Utilities
                     TR2Entities.BlackMorayEel, TR2Entities.Doberman, TR2Entities.Eagle, TR2Entities.MaskedGoon1, 
                     TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.MarcoBartoli, TR2Entities.MercSnowmobDriver, 
                     TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Shark, TR2Entities.StickWieldingGoon1, 
-                    TR2Entities.StickWieldingGoon2, TR2Entities.Spider, TR2Entities.TRex, TR2Entities.YellowMorayEel
+                    TR2Entities.StickWieldingGoon2, TR2Entities.Spider, TR2Entities.TRex, TR2Entities.Winston, TR2Entities.YellowMorayEel
                 }
         };
         
         private static readonly Dictionary<string, List<TR2Entities>> _requiredEnemies = new Dictionary<string, List<TR2Entities>>
         {
+            [LevelNames.MONASTERY] =
+                new List<TR2Entities> { TR2Entities.Mercenary1, TR2Entities.MonkWithLongStick }, // #158 Barkhang entity freezing issues
             [LevelNames.CHICKEN] =
                 new List<TR2Entities> { TR2Entities.BirdMonster },  // #60 - Ice Palace chicken man must remain to avoid softlock.
             [LevelNames.LAIR] =
@@ -264,13 +272,15 @@ namespace TR2RandomizerCore.Utilities
         private static readonly Dictionary<TR2Entities, int> _restrictedEnemyLevelCounts = new Dictionary<TR2Entities, int>
         {
             [TR2Entities.MarcoBartoli] = 1,
-            [TR2Entities.MercSnowmobDriver] = 2
+            [TR2Entities.MercSnowmobDriver] = 2,
+            [TR2Entities.Winston] = 2
         };
 
-        // We restrict the chicken to appearing 3 times throughout the game
+        // We restrict the chicken to appearing 3 times throughout the game and Winston twice
         private static readonly Dictionary<TR2Entities, int> _restrictedEnemyGameCounts = new Dictionary<TR2Entities, int>
         {
-            [TR2Entities.BirdMonster] = 3
+            [TR2Entities.BirdMonster] = 3,
+            [TR2Entities.Winston] = 2
         };
 
         static EnemyUtilities()
@@ -286,7 +296,7 @@ namespace TR2RandomizerCore.Utilities
             [EnemyDifficulty.VeryEasy] = new List<TR2Entities>
             {
                 TR2Entities.Barracuda, TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick,
-                TR2Entities.Rat, TR2Entities.Spider
+                TR2Entities.Rat, TR2Entities.Spider, TR2Entities.Winston
             },
             [EnemyDifficulty.Easy] = new List<TR2Entities>
             {

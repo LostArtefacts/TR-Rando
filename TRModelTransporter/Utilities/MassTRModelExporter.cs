@@ -8,13 +8,13 @@ using TRModelTransporter.Transport;
 
 namespace TRModelTransporter.Utilities
 {
-    public class MassTREnemyExporter
+    public class MassTRModelExporter
     {
         private readonly TRModelExporter _exporter;
         private readonly List<TR2Entities> _processedEntities;
         private readonly TR2LevelReader _reader;
 
-        public MassTREnemyExporter(bool exportIndividualSegments)
+        public MassTRModelExporter(bool exportIndividualSegments)
         {
             _exporter = new TRModelExporter
             {
@@ -26,7 +26,9 @@ namespace TRModelTransporter.Utilities
 
         public void Export(string levelFileDirectory)
         {
-            foreach (string lvlName in LevelNames.AsList)
+            List<string> allLevels = LevelNames.AsList;
+            allLevels.Add(LevelNames.ASSAULT);
+            foreach (string lvlName in allLevels)
             {
                 if (ExportEnemyTypes.ContainsKey(lvlName))
                 {
@@ -126,6 +128,10 @@ namespace TRModelTransporter.Utilities
 
             { LevelNames.HOME,
                 new List<TR2Entities>{ TR2Entities.StickWieldingGoon1BlackJacket }
+            },
+
+            { LevelNames.ASSAULT,
+                new List<TR2Entities>{ TR2Entities.Winston }
             }
         };
     }

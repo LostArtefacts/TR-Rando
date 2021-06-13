@@ -111,7 +111,14 @@ namespace TRModelTransporter.Handlers
             {
                 short val = Definition.HardcodedSound.SoundMapIndices[index];
                 TRSoundDetails details = Level.SoundDetails[Level.SoundMap[index]];
-                Definition.HardcodedSound.SampleIndices[(ushort)(ushort.MaxValue - offset)] = new uint[] { Level.SampleIndices[details.Sample] };
+
+                uint[] sampleIndices = new uint[details.NumSounds];
+                for (int i = 0; i < details.NumSounds; i++)
+                {
+                    sampleIndices[i] = Level.SampleIndices[(ushort)(details.Sample + i)];
+                }
+
+                Definition.HardcodedSound.SampleIndices[(ushort)(ushort.MaxValue - offset)] = sampleIndices;
 
                 Definition.HardcodedSound.SoundDetails[val] = new TRSoundDetails
                 {

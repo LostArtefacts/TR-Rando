@@ -34,10 +34,13 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
 * Sunsets - Randomizes what levels have bartoli sunset effect.
 
 # Download
-https://github.com/DanzaG/TR2-Rando/releases/download/V1.2.1/V1.2.1.zip
+https://github.com/DanzaG/TR2-Rando/releases/download/V1.3.1/V1.3.1.zip
 
 # Installation
 https://www.youtube.com/watch?v=MpNBfZgE0Fc
+
+# Tracker
+For keeping track of levels while you play, check out the [TR2RandoTracker](https://github.com/lahm86/TR2RandoTracker/releases/latest).
 
 # Screenies
 ![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando2.PNG)

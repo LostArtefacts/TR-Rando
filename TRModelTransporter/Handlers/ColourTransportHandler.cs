@@ -39,7 +39,7 @@ namespace TRModelTransporter.Handlers
                 TRColour4 newColour = Definition.Colours[paletteIndex];
                 int existingIndex = palette16.FindIndex
                 (
-                    e => e.Red == newColour.Red && e.Green == newColour.Green && e.Blue == newColour.Blue && e.Unused == newColour.Unused
+                    e => e.Red == newColour.Red && e.Green == newColour.Green && e.Blue == newColour.Blue// && e.Unused == newColour.Unused
                 );
 
                 if (existingIndex != -1)
@@ -63,6 +63,8 @@ namespace TRModelTransporter.Handlers
                     tri.Texture = ReindexTexture(tri.Texture, indexMap);
                 }
             }
+
+            P16Importer.ResetPaletteTracking(Level);
         }
 
         private ushort ReindexTexture(ushort value, Dictionary<int, int> indexMap)
