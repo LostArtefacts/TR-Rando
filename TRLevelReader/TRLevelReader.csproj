@@ -93,5 +93,12 @@
     <Compile Include="TR2LevelWriter.cs" />
     <Compile Include="UnsafeConversions.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\Base\" />
+    <Folder Include="Model\TR2\" />
+    <Folder Include="Model\TR3\" />
+    <Folder Include="Model\TR4\" />
+    <Folder Include="Model\TR5\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
