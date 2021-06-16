@@ -105,6 +105,18 @@
     <Compile Include="Model\TR3\TR3RoomSun.cs" />
     <Compile Include="Model\TR3\TR3RoomVertex.cs" />
     <Compile Include="Model\TR3\TR3SoundDetails.cs" />
+    <Compile Include="Model\TR4\TR4AIObject.cs" />
+    <Compile Include="Model\TR4\TR4Animation.cs" />
+    <Compile Include="Model\TR4\TR4Entity.cs" />
+    <Compile Include="Model\TR4\TR4FlyByCamera.cs" />
+    <Compile Include="Model\TR4\TR4Mesh.cs" />
+    <Compile Include="Model\TR4\TR4MeshFace3.cs" />
+    <Compile Include="Model\TR4\TR4MeshFace4.cs" />
+    <Compile Include="Model\TR4\TR4ObjectTexture.cs" />
+    <Compile Include="Model\TR4\TR4Room.cs" />
+    <Compile Include="Model\TR4\TR4RoomLight.cs" />
+    <Compile Include="Model\TR4\TR4Sample.cs" />
+    <Compile Include="Model\TR4\TR4TexImage32.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\ISerializableCompact.cs" />
     <Compile Include="TR2FileReadUtilities.cs" />
@@ -113,7 +125,6 @@
     <Compile Include="UnsafeConversions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\TR4\" />
     <Folder Include="Model\TR5\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

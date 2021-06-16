@@ -57,32 +57,32 @@ Italics (*Example*) is partially implemented.
 * ~~TR2Room~~
 * ~~TR2Entity~~
 * ~~TR2Box~~
-* TR2Zone
+* *TR2Zone*
 
 # TR3
-* TR3RoomLight
-* TR3RoomSun
-* TR3RoomSpotlight
-* TR3RoomVertex
-* TR3RoomData (due to TR3RoomVertex)
-* TR3RoomStaticMesh
-* TR3Room
-* TR3CDAudioEntry
-* TR3SoundDetails
+* *TR3RoomLight*
+* *TR3RoomSun*
+* *TR3RoomSpotlight*
+* *TR3RoomVertex*
+* *TR3RoomData (due to TR3RoomVertex)*
+* *TR3RoomStaticMesh*
+* *TR3Room*
+* *TR3CDAudioEntry*
+* *TR3SoundDetails*
 
 # TR4
-* TR4MeshFace4
-* TR4MeshFace3
-* TR4TexImage32 / TR4Textile32
-* TR4RoomLight
-* TR4Room
-* TR4Mesh
-* TR4Entity
-* TR4Animation
-* TR4AIObject
-* TR4Sample
-* TR4ObjectTexture
-* TR4FlyByCamera
+* *TR4MeshFace4*
+* *TR4MeshFace3*
+* *TR4TexImage32 / TR4Textile32*
+* *TR4RoomLight*
+* *TR4Room*
+* *TR4Mesh*
+* *TR4Entity*
+* *TR4Animation*
+* *TR4AIObject*
+* *TR4Sample*
+* *TR4ObjectTexture*
+* *TR4FlyByCamera*
 
 # TR5
 * TR5Colour
