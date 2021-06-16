@@ -20,17 +20,17 @@ Italics (*Example*) is partially implemented.
 * ~~TRRoomInfo~~
 * ~~TRRoomPortal~~
 * ~~TRRoomSector~~
-* *TRRoomLight*
-* *TRRoomVertex*
+* ~~TRRoomLight~~
+* ~~TRRoomVertex~~
 * ~~TRRoomSprite~~
-* *TRRoomData*
-* *TRRoomStaticMesh*
-* *TRRoom*
+* ~~TRRoomData~~
+* ~~TRRoomStaticMesh~~
+* ~~TRRoom~~
 * ~~TRMesh~~
 * ~~TRStaticMesh~~
 * ~~TRBoundingBox~~
 * ~~TRModel~~
-* *TREntity*
+* ~~TREntity~~
 * ~~TRSpriteTexture~~
 * ~~TRSpriteSequence~~
 * ~~TRMeshTreeNode~~
@@ -38,9 +38,9 @@ Italics (*Example*) is partially implemented.
 * ~~TRStateChange~~
 * ~~TRAnimDispatch~~
 * ~~TRAnimCommand~~
-* *TRAnimFrame*
-* *TRBox*
-* *TRZone*
+* ~~TRAnimFrame~~
+* ~~TRBox~~
+* ~~TRZone~~
 * ~~TRSoundSource~~
 * ~~TRSoundDetails~~
 * ~~TRObjectTextureVert~~
@@ -57,7 +57,7 @@ Italics (*Example*) is partially implemented.
 * ~~TR2Room~~
 * ~~TR2Entity~~
 * ~~TR2Box~~
-* *TR2Zone*
+* ~~TR2Zone~~
 
 # TR3
 * *TR3RoomLight*
