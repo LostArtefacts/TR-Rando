@@ -46,6 +46,15 @@
     <Compile Include="Helpers\TR2EntityUtilities.cs" />
     <Compile Include="Helpers\TR2LevelUtilities.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="Model\Base\TRAnimFrame.cs" />
+    <Compile Include="Model\Base\TRBox.cs" />
+    <Compile Include="Model\Base\TREntity.cs" />
+    <Compile Include="Model\Base\TRRoom.cs" />
+    <Compile Include="Model\Base\TRRoomData.cs" />
+    <Compile Include="Model\Base\TRRoomLight.cs" />
+    <Compile Include="Model\Base\TRRoomStaticMesh.cs" />
+    <Compile Include="Model\Base\TRRoomVertex.cs" />
+    <Compile Include="Model\Base\TRZone.cs" />
     <Compile Include="Model\TR2\Enums\TR2AnimCommand.cs" />
     <Compile Include="Model\TR2\Enums\TR2Entities.cs" />
     <Compile Include="Model\Base\FixedPointTypes.cs" />

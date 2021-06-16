@@ -1,6 +1,7 @@
 Source: https://opentomb.github.io/TRosettaStone3/trosettastone.htm
 
 Striked (~~Example~~) are implemented.
+Italics (*Example*) is partially implemented.
 
 # Versions
 * TR1: 0x00000020
@@ -19,17 +20,17 @@ Striked (~~Example~~) are implemented.
 * ~~TRRoomInfo~~
 * ~~TRRoomPortal~~
 * ~~TRRoomSector~~
-* TRRoomLight
-* TRRoomVertex
+* *TRRoomLight*
+* *TRRoomVertex*
 * ~~TRRoomSprite~~
-* TRRoomData
-* TRRoomStaticMesh
-* TRRoom
+* *TRRoomData*
+* *TRRoomStaticMesh*
+* *TRRoom*
 * ~~TRMesh~~
 * ~~TRStaticMesh~~
 * ~~TRBoundingBox~~
 * ~~TRModel~~
-* TREntity
+* *TREntity*
 * ~~TRSpriteTexture~~
 * ~~TRSpriteSequence~~
 * ~~TRMeshTreeNode~~
@@ -37,9 +38,9 @@ Striked (~~Example~~) are implemented.
 * ~~TRStateChange~~
 * ~~TRAnimDispatch~~
 * ~~TRAnimCommand~~
-* TRAnimFrame
-* TRBox
-* TRZone
+* *TRAnimFrame*
+* *TRBox*
+* *TRZone*
 * ~~TRSoundSource~~
 * ~~TRSoundDetails~~
 * ~~TRObjectTextureVert~~
