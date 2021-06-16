@@ -1,59 +1,61 @@
 Source: https://opentomb.github.io/TRosettaStone3/trosettastone.htm
 
+Striked (~~Example~~) are implemented.
+
 # Versions
 * TR1: 0x00000020
-* TR2: 0x0000002D
+* ~~TR2: 0x0000002D~~
 * TR3: 0xFF080038 or 0xFF180038
 * TR4 & 5: 0x00345254
 
 # Base / TR1
-* TRColour
-* TRColour4
-* TRVertex
-* TRFace4
-* TRFace3
-* TRTexImage8 / TRTextile8
-* TRTexImage16 / TRTextile16
-* TRRoomInfo
-* TRRoomPortal
-* TRRoomSector
+* ~~TRColour~~
+* ~~TRColour4~~
+* ~~TRVertex~~
+* ~~TRFace4~~
+* ~~TRFace3~~
+* ~~TRTexImage8 / TRTextile8~~
+* ~~TRTexImage16 / TRTextile16~~
+* ~~TRRoomInfo~~
+* ~~TRRoomPortal~~
+* ~~TRRoomSector~~
 * TRRoomLight
 * TRRoomVertex
-* TRRoomSprite
+* ~~TRRoomSprite~~
 * TRRoomData
 * TRRoomStaticMesh
 * TRRoom
-* TRMesh
-* TRStaticMesh
-* TRBoundingBox
-* TRModel
+* ~~TRMesh~~
+* ~~TRStaticMesh~~
+* ~~TRBoundingBox~~
+* ~~TRModel~~
 * TREntity
-* TRSpriteTexture
-* TRSpriteSequence
-* TRMeshTreeNode
-* TRAnimation
-* TRStateChange
-* TRAnimDispatch
-* TRAnimCommand
+* ~~TRSpriteTexture~~
+* ~~TRSpriteSequence~~
+* ~~TRMeshTreeNode~~
+* ~~TRAnimation~~
+* ~~TRStateChange~~
+* ~~TRAnimDispatch~~
+* ~~TRAnimCommand~~
 * TRAnimFrame
 * TRBox
 * TRZone
-* TRSoundSource
-* TRSoundDetails
-* TRObjextTextureVert
-* TRObjectTexture
-* TRAnimatedTexture
-* TRCamera
-* TRCinematicFrame
+* ~~TRSoundSource~~
+* ~~TRSoundDetails~~
+* ~~TRObjectTextureVert~~
+* ~~TRObjectTexture~~
+* ~~TRAnimatedTexture~~
+* ~~TRCamera~~
+* ~~TRCinematicFrame~~
 
 # TR2
-* TR2RoomLight
-* TR2RoomVertex
-* TR2RoomData (due to TR2RoomVertex)
-* TR2RoomStaticMesh
-* TR2Room
-* TR2Entity
-* TR2Box
+* ~~TR2RoomLight~~
+* ~~TR2RoomVertex~~
+* ~~TR2RoomData (due to TR2RoomVertex)~~
+* ~~TR2RoomStaticMesh~~
+* ~~TR2Room~~
+* ~~TR2Entity~~
+* ~~TR2Box~~
 * TR2Zone
 
 # TR3
