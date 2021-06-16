@@ -95,6 +95,16 @@
     <Compile Include="Model\Base\TRTexImage16.cs" />
     <Compile Include="Model\Base\TRTexImage8.cs" />
     <Compile Include="Model\Base\TRVertex.cs" />
+    <Compile Include="Model\TR2\TR2Zone.cs" />
+    <Compile Include="Model\TR3\TR3CDAudioEntry.cs" />
+    <Compile Include="Model\TR3\TR3Room.cs" />
+    <Compile Include="Model\TR3\TR3RoomData.cs" />
+    <Compile Include="Model\TR3\TR3RoomLight.cs" />
+    <Compile Include="Model\TR3\TR3RoomSpotlight.cs" />
+    <Compile Include="Model\TR3\TR3RoomStaticMesh.cs" />
+    <Compile Include="Model\TR3\TR3RoomSun.cs" />
+    <Compile Include="Model\TR3\TR3RoomVertex.cs" />
+    <Compile Include="Model\TR3\TR3SoundDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\ISerializableCompact.cs" />
     <Compile Include="TR2FileReadUtilities.cs" />
@@ -103,7 +113,6 @@
     <Compile Include="UnsafeConversions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\TR3\" />
     <Folder Include="Model\TR4\" />
     <Folder Include="Model\TR5\" />
   </ItemGroup>
