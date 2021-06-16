@@ -441,12 +441,12 @@ namespace TRLevelReader
             return colourPalette;
         }
 
-        private TRRoomData ConvertToRoomData(TR2Room room)
+        private TR2RoomData ConvertToRoomData(TR2Room room)
         {
             int RoomDataOffset = 0;
 
             //Grab detailed room data
-            TRRoomData RoomData = new TRRoomData();
+            TR2RoomData RoomData = new TR2RoomData();
 
             //Room vertices
             RoomData.NumVertices = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);

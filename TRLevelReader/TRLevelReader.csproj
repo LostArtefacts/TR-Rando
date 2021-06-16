@@ -72,7 +72,7 @@
     <Compile Include="Model\Base\TRModel.cs" />
     <Compile Include="Model\Base\TRObjectTexture.cs" />
     <Compile Include="Model\Base\TRObjectTextureVert.cs" />
-    <Compile Include="Model\Base\TRRoomData.cs" />
+    <Compile Include="Model\TR2\TR2RoomData.cs" />
     <Compile Include="Model\Base\TRRoomInfo.cs" />
     <Compile Include="Model\Base\TRRoomPortal.cs" />
     <Compile Include="Model\Base\TRRoomSector.cs" />

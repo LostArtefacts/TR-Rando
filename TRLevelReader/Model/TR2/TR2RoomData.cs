@@ -8,7 +8,7 @@ using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TRRoomData : ISerializableCompact
+    public class TR2RoomData : ISerializableCompact
     {
         // 2 bytes
         public short NumVertices { get; set; }

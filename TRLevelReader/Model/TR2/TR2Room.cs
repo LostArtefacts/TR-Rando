@@ -21,7 +21,7 @@ namespace TRLevelReader.Model
         public ushort[] Data { get; set; }
 
         //Variable
-        public TRRoomData RoomData { get; set; }
+        public TR2RoomData RoomData { get; set; }
 
         //2 bytes
         public ushort NumPortals { get; set; }
