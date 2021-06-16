@@ -49,6 +49,7 @@
     <Compile Include="Model\Base\TRAnimFrame.cs" />
     <Compile Include="Model\Base\TRBox.cs" />
     <Compile Include="Model\Base\TREntity.cs" />
+    <Compile Include="Model\Base\TRLevel.cs" />
     <Compile Include="Model\Base\TRRoom.cs" />
     <Compile Include="Model\Base\TRRoomData.cs" />
     <Compile Include="Model\Base\TRRoomLight.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Model\Base\TRVertex.cs" />
     <Compile Include="Model\TR2\TR2Zone.cs" />
     <Compile Include="Model\TR3\TR3CDAudioEntry.cs" />
+    <Compile Include="Model\TR3\TR3Level.cs" />
     <Compile Include="Model\TR3\TR3Room.cs" />
     <Compile Include="Model\TR3\TR3RoomData.cs" />
     <Compile Include="Model\TR3\TR3RoomLight.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Model\TR4\TR4Animation.cs" />
     <Compile Include="Model\TR4\TR4Entity.cs" />
     <Compile Include="Model\TR4\TR4FlyByCamera.cs" />
+    <Compile Include="Model\TR4\TR4Level.cs" />
     <Compile Include="Model\TR4\TR4Mesh.cs" />
     <Compile Include="Model\TR4\TR4MeshFace3.cs" />
     <Compile Include="Model\TR4\TR4MeshFace4.cs" />
@@ -117,6 +120,16 @@
     <Compile Include="Model\TR4\TR4RoomLight.cs" />
     <Compile Include="Model\TR4\TR4Sample.cs" />
     <Compile Include="Model\TR4\TR4TexImage32.cs" />
+    <Compile Include="Model\TR5\TR5Colour.cs" />
+    <Compile Include="Model\TR5\TR5FogBulb.cs" />
+    <Compile Include="Model\TR5\TR5Level.cs" />
+    <Compile Include="Model\TR5\TR5RoomData.cs" />
+    <Compile Include="Model\TR5\TR5RoomDataExt.cs" />
+    <Compile Include="Model\TR5\TR5RoomInfo.cs" />
+    <Compile Include="Model\TR5\TR5RoomLayer.cs" />
+    <Compile Include="Model\TR5\TR5RoomLight.cs" />
+    <Compile Include="Model\TR5\TR5RoomVertex.cs" />
+    <Compile Include="Model\TR5\TR5Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\ISerializableCompact.cs" />
     <Compile Include="TR2FileReadUtilities.cs" />
@@ -124,8 +137,6 @@
     <Compile Include="TR2LevelWriter.cs" />
     <Compile Include="UnsafeConversions.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\TR5\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

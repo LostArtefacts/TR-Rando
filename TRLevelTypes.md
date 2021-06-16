@@ -85,12 +85,19 @@ Italics (*Example*) is partially implemented.
 * *TR4FlyByCamera*
 
 # TR5
-* TR5Colour
-* TR5Vertex
-* TR5RoomInfo
-* TR5RoomLight
-* TR5FogBulb
-* TR5RoomVertex
-* TR5RoomData (due to TR5RoomVertex)
-* TR5RoomLayer
-* TR5RoomDataExtension (see Source 3.4.5)
+* *TR5Colour*
+* *TR5Vertex*
+* *TR5RoomInfo*
+* *TR5RoomLight*
+* *TR5FogBulb*
+* *TR5RoomVertex*
+* *TR5RoomData (due to TR5RoomVertex)*
+* *TR5RoomLayer*
+* *TR5RoomDataExtension (see Source 3.4.5)*
+
+# Levels
+* *TRLevel*
+* ~~TR2Level~~
+* *TR3Level*
+* *TR4Level*
+* *TR5Level*
