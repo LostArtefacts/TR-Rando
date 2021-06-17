@@ -92,6 +92,7 @@
     <Compile Include="Controls\SeedControl.xaml.cs">
       <DependentUpon>SeedControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BooleanAndConverter.cs" />
     <Compile Include="Events\EditorEventArgs.cs" />
     <Compile Include="Model\ManagedSeedNumeric.cs" />
     <Compile Include="Model\ManagedSeedBool.cs" />
