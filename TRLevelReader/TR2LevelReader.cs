@@ -11,7 +11,6 @@ namespace TRLevelReader
 {
     public class TR2LevelReader
     {
-        private readonly uint TR2VersionHeader = 0x0000002D;
         private const uint MAX_PALETTE_SIZE = 256;
 
         private BinaryReader reader;
@@ -33,7 +32,7 @@ namespace TRLevelReader
 
             //Version
             level.Version = reader.ReadUInt32();
-            if (level.Version != TR2VersionHeader)
+            if (level.Version != Versions.TR2)
             {
                 throw new NotImplementedException("File reader only suppors TR2 levels");
             }

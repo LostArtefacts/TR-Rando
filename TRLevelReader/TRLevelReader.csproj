@@ -130,6 +130,7 @@
     <Compile Include="Model\TR5\TR5RoomLight.cs" />
     <Compile Include="Model\TR5\TR5RoomVertex.cs" />
     <Compile Include="Model\TR5\TR5Vertex.cs" />
+    <Compile Include="Model\Versions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\ISerializableCompact.cs" />
     <Compile Include="TR2FileReadUtilities.cs" />

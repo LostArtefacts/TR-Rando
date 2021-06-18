@@ -60,15 +60,15 @@ Italics (*Example*) is partially implemented.
 * ~~TR2Zone~~
 
 # TR3
-* *TR3RoomLight*
-* *TR3RoomSun*
-* *TR3RoomSpotlight*
-* *TR3RoomVertex*
-* *TR3RoomData (due to TR3RoomVertex)*
-* *TR3RoomStaticMesh*
-* *TR3Room*
-* *TR3CDAudioEntry*
-* *TR3SoundDetails*
+* ~~TR3RoomLight~~
+* ~~TR3RoomSun~~
+* ~~TR3RoomSpotlight~~
+* ~~TR3RoomVertex~~
+* ~~TR3RoomData (due to TR3RoomVertex)~~
+* ~~TR3RoomStaticMesh~~
+* ~~TR3Room~~
+* ~~TR3CDAudioEntry~~
+* ~~TR3SoundDetails~~
 
 # TR4
 * *TR4MeshFace4*
