@@ -2351,7 +2351,7 @@
 			"X": 46060,
 			"Z": 32796,
 			"Y": -1280,
-			"Room": 83,
+			"Room": 68,
 			"RequiresGlitch": false,
 			"IsInRoomSpace": false,
 			"Difficulty" : "Hard"
@@ -4062,10 +4062,12 @@
 			"Room": 9
 		},
 		{
-			"X": 2009,
-			"Z": 13169,
-			"Y": 4412,
-			"Room": 27
+			"X": 62456,
+			"Z": 49632,
+			"Y": 6800,
+			"Room": 27,
+			"RequiresGlitch": false,
+			"IsInRoomSpace": false
 		},
 		{
 			"X": 4197,
