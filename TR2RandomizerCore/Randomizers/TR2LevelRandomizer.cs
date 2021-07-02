@@ -63,7 +63,7 @@ namespace TR2RandomizerCore.Randomizers
             PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
             RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures));
 
-            RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits), true);
+            RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits));
             OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
             PersistOutfits = config.GetBool(nameof(PersistOutfits));
 
