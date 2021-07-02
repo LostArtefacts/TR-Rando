@@ -125,7 +125,7 @@ namespace TR2RandomizerCore.Randomizers
         {
             List<TR23ScriptedLevel> levels = new List<TR23ScriptedLevel>
             (
-                scriptEditor.ScriptedLevels.Cast<TR23ScriptedLevel>().ToList()
+                scriptEditor.EnabledScriptedLevels.Cast<TR23ScriptedLevel>().ToList()
             );
 
             if (scriptEditor.GymAvailable)
