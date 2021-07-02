@@ -7,7 +7,8 @@ namespace TRModelTransporter.Utilities
     public class TRTextureRemapEventArgs : EventArgs
     {
         public TexturedTile OldTile { get; set; }
-        public TexturedTileSegment OldSegment { get; set; }
+        public int OldFirstTextureIndex { get; set; }
+        public int OldArea { get; set; }
         public Rectangle OldBounds { get; set; }
 
         public TexturedTile NewTile { get; set; }

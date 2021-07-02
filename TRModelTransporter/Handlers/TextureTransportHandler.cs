@@ -43,6 +43,7 @@ namespace TRModelTransporter.Handlers
         {
             [TR2Entities.FlamethrowerGoon] = new List<TR2Entities> { TR2Entities.Flame_S_H },
             [TR2Entities.MarcoBartoli] = new List<TR2Entities> { TR2Entities.Flame_S_H },
+            [TR2Entities.Boat] = new List<TR2Entities> { TR2Entities.BoatWake_S_H },
             [TR2Entities.RedSnowmobile] = new List<TR2Entities> { TR2Entities.SnowmobileWake_S_H },
             [TR2Entities.XianGuardSword] = new List<TR2Entities> { TR2Entities.XianGuardSparkles_S_H }
         };
@@ -276,7 +277,12 @@ namespace TRModelTransporter.Handlers
         {
             using (TexturePacker packer = new TexturePacker(Level))
             {
-                List<TR2Entities> removals = new List<TR2Entities> { TR2Entities.Map_M_U };
+                List<TR2Entities> removals = new List<TR2Entities>();
+                if (ClearUnusedSprites)
+                {
+                    removals.Add(TR2Entities.Map_M_U);
+                }
+
                 if (EntitiesToRemove != null)
                 {
                     removals.AddRange(EntitiesToRemove);

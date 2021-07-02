@@ -9,6 +9,7 @@ using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRTexture16Importer.Helpers;
+using TRTexture16Importer.Textures.Grouping;
 using TRTexture16Importer.Textures.Source;
 using TRTexture16Importer.Textures.Target;
 
@@ -22,16 +23,19 @@ namespace TRTexture16Importer.Textures
 
         public Dictionary<DynamicTextureSource, DynamicTextureTarget> DynamicMapping { get; set; }
         public Dictionary<StaticTextureSource, List<StaticTextureTarget>> StaticMapping { get; set; }
+        public Dictionary<StaticTextureSource, Dictionary<int, List<LandmarkTextureTarget>>> LandmarkMapping { get; set; }
         public List<TextureGrouping> StaticGrouping { get; set; }
         public Color DefaultSkyBox { get; set; }
 
         private readonly Dictionary<int, BitmapGraphics> _tileMap;
         private readonly TR2Level _level;
+        private bool _committed;
 
         private TextureLevelMapping(TR2Level level)
         {
             _level = level;
             _tileMap = new Dictionary<int, BitmapGraphics>();
+            _committed = false;
         }
 
         public static TextureLevelMapping Get(TR2Level level, string mappingFilePrefix, TextureDatabase database, Dictionary<StaticTextureSource, List<StaticTextureTarget>> predefinedMapping = null, List<TR2Entities> entitiesToIgnore = null)
@@ -44,7 +48,7 @@ namespace TRTexture16Importer.Textures
 
             Dictionary<DynamicTextureSource, DynamicTextureTarget> dynamicMapping = new Dictionary<DynamicTextureSource, DynamicTextureTarget>();
             Dictionary<StaticTextureSource, List<StaticTextureTarget>> staticMapping = new Dictionary<StaticTextureSource, List<StaticTextureTarget>>();
-            List<TextureGrouping> staticGrouping = new List<TextureGrouping>();
+            Dictionary<StaticTextureSource, Dictionary<int, List<LandmarkTextureTarget>>> landmarkMapping = new Dictionary<StaticTextureSource, Dictionary<int, List<LandmarkTextureTarget>>>();
             Color skyBoxColour = _defaultSkyBox;
 
             Dictionary<string, object> rootMapping = JsonConvert.DeserializeObject<Dictionary<string, object>>(File.ReadAllText(mapFile));
@@ -80,48 +84,13 @@ namespace TRTexture16Importer.Textures
                 }
             }
 
-            // We can group specific static sources together to guarantee they get themed
-            if (rootMapping.ContainsKey("Grouping"))
-            {                
-                List<Dictionary<string, object>> groupListData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(rootMapping["Grouping"].ToString());
-                foreach (IDictionary<string, object> groupData in groupListData)
-                {
-                    TextureGrouping grouping = new TextureGrouping
-                    {
-                        Leader = database.GetStaticSource(groupData["Leader"].ToString())
-                    };
-
-                    SortedSet<string> followers = JsonConvert.DeserializeObject<SortedSet<string>>(groupData["Followers"].ToString());
-                    foreach (string sourceName in followers)
-                    {
-                        grouping.Followers.Add(database.GetStaticSource(sourceName));
-                    }
-
-                    if (groupData.ContainsKey("ThemeAlternatives"))
-                    {
-                        Dictionary<string, Dictionary<string, string>> alternatives = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(groupData["ThemeAlternatives"].ToString());
-                        foreach (string theme in alternatives.Keys)
-                        {
-                            Dictionary<StaticTextureSource, string> map = new Dictionary<StaticTextureSource, string>();
-                            foreach (string sourceName in alternatives[theme].Keys)
-                            {
-                                map.Add(database.GetStaticSource(sourceName), alternatives[theme][sourceName]);
-                            }
-                            grouping.ThemeAlternatives.Add(theme, map);
-                        }
-                    }
-
-                    staticGrouping.Add(grouping);
-                }
-            }
-
-            // Allows for dynamic mapping to be targeted at levels e.g. when importing non-native
-            // models that are otherwise undefined in the default level JSON data.
-            if (predefinedMapping != null)
+            // Landmark mapping links static sources to room number -> rectangle/triangle indices
+            if (rootMapping.ContainsKey("Landmarks"))
             {
-                foreach (StaticTextureSource source in predefinedMapping.Keys)
+                Dictionary<string, Dictionary<int, List<LandmarkTextureTarget>>> mapping = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<int, List<LandmarkTextureTarget>>>>(rootMapping["Landmarks"].ToString());
+                foreach (string sourceName in mapping.Keys)
                 {
-                    staticMapping[source] = predefinedMapping[source];
+                    landmarkMapping[database.GetStaticSource(sourceName)] = mapping[sourceName];
                 }
             }
 
@@ -147,11 +116,27 @@ namespace TRTexture16Importer.Textures
                 }
             }
 
+            // Allows for dynamic mapping to be targeted at levels e.g. when importing non-native
+            // models that are otherwise undefined in the default level JSON data.
+            // This should be done after removing ignored entity textures, for the likes of when
+            // Lara is being replaced.
+            if (predefinedMapping != null)
+            {
+                foreach (StaticTextureSource source in predefinedMapping.Keys)
+                {
+                    staticMapping[source] = predefinedMapping[source];
+                }
+            }
+
+            // Apply grouping to what has been selected as source elements
+            List<TextureGrouping> staticGrouping = database.GlobalGrouping.GetGrouping(staticMapping.Keys);
+
             return new TextureLevelMapping(level)
             {
                 DynamicMapping = dynamicMapping,
                 StaticMapping = staticMapping,
                 StaticGrouping = staticGrouping,
+                LandmarkMapping = landmarkMapping,
                 DefaultSkyBox = skyBoxColour
             };
         }
@@ -315,12 +300,21 @@ namespace TRTexture16Importer.Textures
 
         public void Dispose()
         {
-            foreach (int tile in _tileMap.Keys)
+            CommitGraphics();
+        }
+
+        public void CommitGraphics()
+        {
+            if (!_committed)
             {
-                using (BitmapGraphics bmp = _tileMap[tile])
+                foreach (int tile in _tileMap.Keys)
                 {
-                    _level.Images16[tile].Pixels = T16Importer.ImportFromBitmap(bmp.Bitmap);
+                    using (BitmapGraphics bmp = _tileMap[tile])
+                    {
+                        _level.Images16[tile].Pixels = T16Importer.ImportFromBitmap(bmp.Bitmap);
+                    }
                 }
+                _committed = true;
             }
         }
     }

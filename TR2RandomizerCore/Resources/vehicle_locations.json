@@ -1,0 +1,346 @@
+{
+  "WALL.TR2": {
+    "13": [
+      {
+        "X": 48681,
+        "Z": 30162,
+        "Y": -1066,
+        "Room": 25,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 28165,
+        "Z": 59891,
+        "Y": 6912,
+        "Room": 51,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "BOAT.TR2": {
+    "13": [
+      {
+        "X": 58875,
+        "Z": 22012,
+        "Y": -1027,
+        "Room": 0,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "VENICE.TR2": {
+    "13": [
+      {
+        "X": 71810,
+        "Z": 40956,
+        "Y": 4608,
+        "Room": 106,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 58364,
+        "Z": 43532,
+        "Y": 2816,
+        "Room": 32,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 46623,
+        "Z": 35411,
+        "Y": 4608,
+        "Room": 38,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "OPERA.TR2": {
+    "13": [
+      {
+        "X": 69146,
+        "Z": 47636,
+        "Y": 5888,
+        "Room": 122,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 72189,
+        "Z": 49670,
+        "Y": -2560,
+        "Room": 19,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "RIG.TR2": {
+    "13": [
+      {
+        "X": 48184,
+        "Z": 92664,
+        "Y": -1536,
+        "Room": 4,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "PLATFORM.TR2": {
+    "13": [
+      {
+        "X": 21000,
+        "Z": 77278,
+        "Y": -5120,
+        "Room": 54,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "UNWATER.TR2": {
+    "13": [
+      {
+        "X": 77597,
+        "Z": 68405,
+        "Y": -5632,
+        "Room": 67,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "KEEL.TR2": {
+    "13": [
+      {
+        "X": 67080,
+        "Z": 41463,
+        "Y": 4352,
+        "Room": 45,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "LIVING.TR2": {
+    "13": [
+      {
+        "X": 82312,
+        "Z": 78359,
+        "Y": -1770,
+        "Room": 2,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 51624,
+        "Z": 62988,
+        "Y": 68,
+        "Room": 69,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "DECK.TR2": {
+    "13": [
+      {
+        "X": 39936,
+        "Z": 59864,
+        "Y": -10850,
+        "Room": 52,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ],
+    "14": [
+      {
+        "X": 58902,
+        "Z": 36455,
+        "Y": 6147,
+        "Room": 28,
+        "Angle": 0,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 54700,
+        "Z": 51655,
+        "Y": 6147,
+        "Room": 25,
+        "Angle": -32768,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 65994,
+        "Z": 56323,
+        "Y": 6147,
+        "Room": 24,
+        "Angle": -32768,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 67000,
+        "Z": 57876,
+        "Y": 6147,
+        "Room": 24,
+        "Angle": -16384,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "MONASTRY.TR2": {
+    "13": [
+      {
+        "X": 83410,
+        "Z": 22013,
+        "Y": -256,
+        "Room": 23,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "CATACOMB.TR2": {
+    "13": [
+      {
+        "X": 28199,
+        "Z": 55795,
+        "Y": 7541,
+        "Room": 107,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 28138,
+        "Z": 40957,
+        "Y": 10752,
+        "Room": 125,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "ICECAVE.TR2": {
+    "13": [
+      {
+        "X": 27137,
+        "Z": 59938,
+        "Y": 7186,
+        "Room": 22,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 42343,
+        "Z": 54809,
+        "Y": 3584,
+        "Room": 31,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "EMPRTOMB.TR2": {
+    "13": [
+      {
+        "X": 33301,
+        "Z": 48644,
+        "Y": 23930,
+        "Room": 39,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 18972,
+        "Z": 51688,
+        "Y": 12288,
+        "Room": 8,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 13307,
+        "Z": 25600,
+        "Y": 17151,
+        "Room": 150,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 33321,
+        "Z": 41409,
+        "Y": 23925,
+        "Room": 39,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "FLOATING.TR2": {
+    "13": [
+      {
+        "X": 32000,
+        "Z": 82485,
+        "Y": 3584,
+        "Room": 149,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  },
+  "ASSAULT.TR2": {
+    "13": [
+      {
+        "X": 17974,
+        "Z": 95686,
+        "Y": 2560,
+        "Room": 16,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 38376,
+        "Z": 94819,
+        "Y": 2560,
+        "Room": 90,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 41266,
+        "Z": 56719,
+        "Y": 2816,
+        "Room": 2,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 46696,
+        "Z": 71179,
+        "Y": 2560,
+        "Room": 50,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ],
+    "14": [
+      {
+        "X": 26142,
+        "Z": 92410,
+        "Y": 3648,
+        "Room": 14,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
+    ]
+  }
+}

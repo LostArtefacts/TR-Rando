@@ -127,6 +127,11 @@ namespace TRTexture16Importer.Helpers
             Graphics.DrawImage(bitmap, rect);
         }
 
+        public void Overlay(Bitmap bitmap)
+        {
+            Graphics.DrawImage(bitmap, new Rectangle(0, 0, Bitmap.Width, Bitmap.Height));
+        }
+
         public Bitmap Extract(Rectangle rect, PixelFormat format = PixelFormat.Format32bppArgb)
         {
             return Bitmap.Clone(rect, format);

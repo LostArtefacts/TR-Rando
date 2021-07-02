@@ -24,7 +24,7 @@ namespace TR2RandomizerCore
         }
 
         #region ScriptEditor Passthrough
-        private Organisation _extLevelOrganisation, _extUnarmedOrganisation, _extAmmolessOrganisation, _extSecretRewardsOrganisation, _extSunsetOrganisation, _extAudioOrganisation;
+        private Organisation _extLevelOrganisation, _extPlayableOrganisation, _extUnarmedOrganisation, _extAmmolessOrganisation, _extSecretRewardsOrganisation, _extSunsetOrganisation, _extAudioOrganisation;
 
         /// <summary>
         /// We need to store any organsation values that aren't random so if randomization is turned off for the 
@@ -34,6 +34,7 @@ namespace TR2RandomizerCore
         private void StoreExternalOrganisations()
         {
             _extLevelOrganisation = RandomizeLevelSequencing ? Organisation.Default : ScriptEditor.LevelSequencingOrganisation;
+            _extPlayableOrganisation = RandomizePlayableLevels ? Organisation.Default : ScriptEditor.EnabledLevelOrganisation;
             _extUnarmedOrganisation = RandomizeUnarmedLevels ? Organisation.Default : ScriptEditor.UnarmedLevelOrganisation;
             _extAmmolessOrganisation = RandomizeAmmolessLevels ? Organisation.Default : ScriptEditor.AmmolessLevelOrganisation;
             _extSecretRewardsOrganisation = RandomizeSecretRewards ? Organisation.Default : ScriptEditor.SecretBonusOrganisation;
@@ -53,6 +54,24 @@ namespace TR2RandomizerCore
         {
             get => ScriptEditor.LevelSequencingRNG.Value;
             set => ScriptEditor.LevelSequencingRNG = new RandomGenerator(value);
+        }
+
+        public bool RandomizePlayableLevels
+        {
+            get => ScriptEditor.EnabledLevelOrganisation == Organisation.Random;
+            set => ScriptEditor.EnabledLevelOrganisation = value ? Organisation.Random : _extPlayableOrganisation;
+        }
+
+        public int PlayableLevelsSeed
+        {
+            get => ScriptEditor.EnabledLevelRNG.Value;
+            set => ScriptEditor.EnabledLevelRNG = new RandomGenerator(value);
+        }
+
+        public uint PlayableLevelCount
+        {
+            get => ScriptEditor.RandomEnabledLevelCount;
+            set => ScriptEditor.RandomEnabledLevelCount = value;
         }
 
         public bool RandomizeUnarmedLevels
@@ -143,6 +162,12 @@ namespace TR2RandomizerCore
         {
             get => !ScriptEditor.DemosEnabled;
             set => ScriptEditor.DemosEnabled = !value;
+        }
+
+        public bool AutoLaunchGame
+        {
+            get => LevelRandomizer.AutoLaunchGame;
+            set => LevelRandomizer.AutoLaunchGame = value;
         }
         #endregion
 
@@ -262,6 +287,30 @@ namespace TR2RandomizerCore
         {
             get => LevelRandomizer.DocileBirdMonsters;
             set => LevelRandomizer.DocileBirdMonsters = value;
+        }
+
+        public bool RandomizeOutfits
+        {
+            get => LevelRandomizer.RandomizeOutfits;
+            set => LevelRandomizer.RandomizeOutfits = value;
+        }
+
+        public bool PersistOutfits
+        {
+            get => LevelRandomizer.PersistOutfits;
+            set => LevelRandomizer.PersistOutfits = value;
+        }
+
+        public bool RandomlyCutHair
+        {
+            get => LevelRandomizer.RandomlyCutHair;
+            set => LevelRandomizer.RandomlyCutHair = value;
+        }
+
+        public int OutfitSeed
+        {
+            get => LevelRandomizer.OutfitSeed;
+            set => LevelRandomizer.OutfitSeed = value;
         }
         #endregion
 

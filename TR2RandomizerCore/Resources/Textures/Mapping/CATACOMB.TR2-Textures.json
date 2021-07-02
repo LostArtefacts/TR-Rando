@@ -97,59 +97,17 @@
     }
   },
 
-  "Grouping": [
-    {
-      "Leader": "Fire.Explosion",
-      "Followers": [
-        "Fire.Flame"
-      ]
-    },
-    {
-      "Leader": "Lara.Top.Snow",
-      "Followers": [
-        "Lara.Bobble",
-        "Lara.Socks",
-        "Lara.Top.Sun"
-      ],
-      "ThemeAlternatives": {
-        "Black": {
-          "Lara.Bobble": "White",
-          "Lara.Socks": "White",
-          "Lara.Top.Sun": "White"
-        },
-        "Green": {
-          "Lara.Bobble": "Lime",
-          "Lara.Socks": "Lime",
-          "Lara.Top.Sun": "Lime"
-        },
-        "Orange": {
-          "Lara.Bobble": "Black",
-          "Lara.Socks": "Black",
-          "Lara.Top.Sun": "Black"
-        },
-        "Pink": {
-          "Lara.Bobble": "Purple",
-          "Lara.Socks": "Purple",
-          "Lara.Top.Sun": "Purple"
-        },
-        "Purple": {
-          "Lara.Bobble": "Pink",
-          "Lara.Socks": "Pink",
-          "Lara.Top.Sun": "Pink"
-        },
-        "Red": {
-          "Lara.Bobble": "Orange",
-          "Lara.Socks": "Orange",
-          "Lara.Top.Sun": "Orange"
-        },
-        "SkyBlue": {
-          "Lara.Bobble": "Black",
-          "Lara.Socks": "Black",
-          "Lara.Top.Sun": "Black"
+  "Landmarks": {
+    "Landmarks.FullLoss": {
+      "0": [
+        {
+          "RoomNumber": 73,
+          "RectangleIndices": [ 9 ],
+          "BackgroundIndex": 1314
         }
-      }
+      ]
     }
-  ],
+  },
 
   "Static": {
     "Fire.Explosion": [
@@ -351,15 +309,18 @@
     "Lara.Bobble": [
       {
         "Segment": 0,
+        "Tile": 10,
+        "X": 40,
+        "Y": 80
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
         "Tile": 9,
         "X": 240,
         "Y": 195
-      },
-      {
-        "Segment": 1,
-        "Tile": 10,
-        "X": 40,
-        "Y": 81
       }
     ],
 
@@ -394,44 +355,50 @@
       {
         "Segment": 1,
         "Tile": 8,
+        "X": 72,
+        "Y": 16
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
         "X": 224,
         "Y": 0
       },
       {
-        "Segment": 2,
-        "Tile": 9,
-        "X": 176,
-        "Y": 168
+        "Segment": 3,
+        "Tile": 8,
+        "X": 240,
+        "Y": 0
       },
       {
-        "Segment": 3,
+        "Segment": 4,
+        "Tile": 9,
+        "X": 0,
+        "Y": 24
+      },
+      {
+        "Segment": 5,
         "Tile": 8,
         "X": 0,
         "Y": 64
       },
       {
-        "Segment": 4,
+        "Segment": 6,
         "Tile": 9,
         "X": 96,
         "Y": 16
       },
       {
-        "Segment": 5,
+        "Segment": 7,
         "Tile": 9,
         "X": 120,
         "Y": 16
       },
       {
-        "Segment": 6,
+        "Segment": 8,
         "Tile": 8,
         "X": 240,
         "Y": 104
-      },
-      {
-        "Segment": 8,
-        "Tile": 9,
-        "X": 216,
-        "Y": 16
       },
       {
         "Segment": 9,
@@ -441,27 +408,39 @@
       },
       {
         "Segment": 10,
+        "Tile": 9,
+        "X": 216,
+        "Y": 16
+      },
+      {
+        "Segment": 11,
+        "Tile": 9,
+        "X": 192,
+        "Y": 16
+      },
+      {
+        "Segment": 12,
         "Tile": 8,
         "X": 72,
         "Y": 72
       },
       {
-        "Segment": 11,
-        "Tile": 6,
-        "X": 216,
-        "Y": 144
-      },
-      {
-        "Segment": 12,
+        "Segment": 13,
         "Tile": 9,
         "X": 0,
-        "Y": 24
+        "Y": 176
       },
       {
         "Segment": 14,
         "Tile": 9,
-        "X": 0,
-        "Y": 176
+        "X": 176,
+        "Y": 168
+      },
+      {
+        "Segment": 15,
+        "Tile": 9,
+        "X": 192,
+        "Y": 168
       }
     ],
 
@@ -469,34 +448,32 @@
       {
         "Segment": 0,
         "Tile": 7,
-        "X": 195,
+        "X": 192,
         "Y": 0
       },
       {
-        "Segment": 2,
-        "Tile": 6,
-        "X": 232,
-        "Y": 240,
-        "Clip": "0, 0, 24, 16"
-      },
-      {
-        "Segment": 6,
+        "Segment": 7,
         "Tile": 8,
         "X": 96,
         "Y": 184
       },
       {
-        "Segment": 19,
-        "Tile": 9,
-        "X": 144,
-        "Y": 32,
-        "Clip": "8, 0, 24, 8"
+        "Segment": 27,
+        "Tile": 8,
+        "X": 40,
+        "Y": 184
       },
       {
-        "Segment": 25,
-        "Tile": 8,
-        "X": 42,
-        "Y": 184
+        "Segment": 28,
+        "Tile": 6,
+        "X": 232,
+        "Y": 240
+      },
+      {
+        "Segment": 29,
+        "Tile": 9,
+        "X": 144,
+        "Y": 16
       }
     ],
 

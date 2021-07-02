@@ -62,6 +62,16 @@ namespace TRLevelReader.Helpers
             }
         }
 
+        public static List<string> AsListWithAssault
+        {
+            get
+            {
+                List<string> lvls = AsList;
+                lvls.Add(ASSAULT);
+                return lvls;
+            }
+        }
+
         public static List<string> AsListGold
         {
             get

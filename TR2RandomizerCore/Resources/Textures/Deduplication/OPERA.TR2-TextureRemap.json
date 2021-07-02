@@ -2846,6 +2846,46 @@
       ],
       "TileIndex": 13,
       "Bounds": "104, 24, 8, 24"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 7,
+      "Bounds": "40, 200, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 9,
+      "Bounds": "56, 136, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 9,
+      "Bounds": "104, 136, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 9,
+      "Bounds": "192, 128, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 9,
+      "Bounds": "216, 128, 24, 32"
     }
   ]
 }

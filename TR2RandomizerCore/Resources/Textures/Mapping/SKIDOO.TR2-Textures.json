@@ -38,60 +38,6 @@
     }
   },
 
-  "Grouping": [
-    {
-      "Leader": "Fire.Explosion",
-      "Followers": [
-        "Fire.Flame"
-      ]
-    },
-    {
-      "Leader": "Lara.Top.Snow",
-      "Followers": [
-        "Lara.Bobble",
-        "Lara.Socks",
-        "Lara.Top.Sun"
-      ],
-      "ThemeAlternatives": {
-        "Black": {
-          "Lara.Bobble": "White",
-          "Lara.Socks": "White",
-          "Lara.Top.Sun": "White"
-        },
-        "Green": {
-          "Lara.Bobble": "Lime",
-          "Lara.Socks": "Lime",
-          "Lara.Top.Sun": "Lime"
-        },
-        "Orange": {
-          "Lara.Bobble": "Black",
-          "Lara.Socks": "Black",
-          "Lara.Top.Sun": "Black"
-        },
-        "Pink": {
-          "Lara.Bobble": "Purple",
-          "Lara.Socks": "Purple",
-          "Lara.Top.Sun": "Purple"
-        },
-        "Purple": {
-          "Lara.Bobble": "Pink",
-          "Lara.Socks": "Pink",
-          "Lara.Top.Sun": "Pink"
-        },
-        "Red": {
-          "Lara.Bobble": "Orange",
-          "Lara.Socks": "Orange",
-          "Lara.Top.Sun": "Orange"
-        },
-        "SkyBlue": {
-          "Lara.Bobble": "Black",
-          "Lara.Socks": "Black",
-          "Lara.Top.Sun": "Black"
-        }
-      }
-    }
-  ],
-
   "Static": {
     "Fire.Explosion": [
       {
@@ -222,15 +168,18 @@
     "Lara.Bobble": [
       {
         "Segment": 0,
+        "Tile": 9,
+        "X": 88,
+        "Y": 32
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
         "Tile": 8,
         "X": 40,
         "Y": 147
-      },
-      {
-        "Segment": 1,
-        "Tile": 9,
-        "X": 88,
-        "Y": 33
       }
     ],
 
@@ -265,81 +214,91 @@
       {
         "Segment": 1,
         "Tile": 6,
+        "X": 200,
+        "Y": 104
+      },
+      {
+        "Segment": 2,
+        "Tile": 6,
         "X": 224,
         "Y": 64
       },
       {
-        "Segment": 2,
-        "Tile": 8,
-        "X": 56,
-        "Y": 128,
-        "Clip": "0, 0, 16, 24"
-      },
-      {
-        "Segment": 2,
-        "Tile": 8,
-        "X": 96,
-        "Y": 128,
-        "Clip": "16, 0, 16, 24"
-      },
-      {
         "Segment": 3,
+        "Tile": 6,
+        "X": 240,
+        "Y": 64
+      },
+      {
+        "Segment": 4,
+        "Tile": 7,
+        "X": 96,
+        "Y": 168
+      },
+      {
+        "Segment": 5,
         "Tile": 6,
         "X": 96,
         "Y": 152
       },
       {
-        "Segment": 4,
+        "Segment": 6,
         "Tile": 7,
         "X": 184,
         "Y": 152
       },
       {
-        "Segment": 5,
+        "Segment": 7,
         "Tile": 7,
         "X": 208,
         "Y": 152
       },
       {
-        "Segment": 6,
+        "Segment": 8,
         "Tile": 8,
         "X": 112,
         "Y": 120
       },
       {
-        "Segment": 8,
-        "Tile": 7,
-        "X": 72,
-        "Y": 168
-      },
-      {
         "Segment": 9,
-        "Tile": 7,
-        "X": 48,
-        "Y": 168
-      },
-      {
-        "Segment": 10,
-        "Tile": 6,
-        "X": 240,
-        "Y": 184
-      },
-      {
-        "Segment": 11,
         "Tile": 5,
         "X": 240,
         "Y": 152
       },
       {
-        "Segment": 12,
+        "Segment": 10,
         "Tile": 7,
-        "X": 96,
+        "X": 72,
         "Y": 168
+      },
+      {
+        "Segment": 11,
+        "Tile": 7,
+        "X": 48,
+        "Y": 168
+      },
+      {
+        "Segment": 12,
+        "Tile": 6,
+        "X": 240,
+        "Y": 184
+      },
+      {
+        "Segment": 13,
+        "Tile": 8,
+        "X": 160,
+        "Y": 128
       },
       {
         "Segment": 14,
         "Tile": 8,
-        "X": 160,
+        "X": 56,
+        "Y": 128
+      },
+      {
+        "Segment": 15,
+        "Tile": 8,
+        "X": 96,
         "Y": 128
       }
     ],
@@ -348,34 +307,32 @@
       {
         "Segment": 0,
         "Tile": 5,
-        "X": 51,
+        "X": 48,
         "Y": 96
       },
       {
-        "Segment": 2,
-        "Tile": 8,
-        "X": 72,
-        "Y": 128,
-        "Clip": "0, 0, 24, 16"
-      },
-      {
-        "Segment": 6,
+        "Segment": 7,
         "Tile": 8,
         "X": 112,
         "Y": 176
       },
       {
-        "Segment": 19,
-        "Tile": 7,
-        "X": 0,
-        "Y": 184,
-        "Clip": "8, 0, 24, 8"
+        "Segment": 27,
+        "Tile": 6,
+        "X": 16,
+        "Y": 88
       },
       {
-        "Segment": 25,
-        "Tile": 6,
-        "X": 18,
-        "Y": 88
+        "Segment": 28,
+        "Tile": 8,
+        "X": 72,
+        "Y": 128
+      },
+      {
+        "Segment": 29,
+        "Tile": 7,
+        "X": 0,
+        "Y": 168
       }
     ],
 

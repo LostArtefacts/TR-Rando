@@ -26,14 +26,13 @@ namespace TRModelTransporter.Utilities
 
         public void Export(string levelFileDirectory)
         {
-            List<string> allLevels = LevelNames.AsList;
-            allLevels.Add(LevelNames.ASSAULT);
+            List<string> allLevels = LevelNames.AsListWithAssault;
             foreach (string lvlName in allLevels)
             {
-                if (ExportEnemyTypes.ContainsKey(lvlName))
+                if (ExportModelTypes.ContainsKey(lvlName))
                 {
                     string levelPath = Path.Combine(levelFileDirectory, lvlName);
-                    foreach (TR2Entities entity in ExportEnemyTypes[lvlName])
+                    foreach (TR2Entities entity in ExportModelTypes[lvlName])
                     {
                         Export(levelPath, entity);
                     }
@@ -60,14 +59,18 @@ namespace TRModelTransporter.Utilities
             }
         }
 
-        public static readonly Dictionary<string, List<TR2Entities>> ExportEnemyTypes = new Dictionary<string, List<TR2Entities>>
+        public static readonly Dictionary<string, List<TR2Entities>> ExportModelTypes = new Dictionary<string, List<TR2Entities>>
         {
             { LevelNames.GW,
-                new List<TR2Entities>{ TR2Entities.Crow, TR2Entities.Spider, TR2Entities.BengalTiger, TR2Entities.TRex }
+                new List<TR2Entities>
+                {
+                    TR2Entities.Pistols_M_H, TR2Entities.Shotgun_M_H, TR2Entities.Uzi_M_H, TR2Entities.Autos_M_H, TR2Entities.Harpoon_M_H, TR2Entities.M16_M_H, TR2Entities.GrenadeLauncher_M_H,
+                    TR2Entities.LaraSun, TR2Entities.Crow, TR2Entities.Spider, TR2Entities.BengalTiger, TR2Entities.TRex
+                }
             },
 
             { LevelNames.VENICE,
-                new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Rat, TR2Entities.StickWieldingGoon1BodyWarmer }
+                new List<TR2Entities>{ TR2Entities.Boat, TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Rat, TR2Entities.StickWieldingGoon1BodyWarmer }
             },
 
             { LevelNames.BARTOLI,
@@ -87,7 +90,7 @@ namespace TRModelTransporter.Utilities
             },
 
             { LevelNames.FATHOMS,
-                new List<TR2Entities>{ TR2Entities.BarracudaUnwater, TR2Entities.Shark }
+                new List<TR2Entities>{ TR2Entities.LaraUnwater, TR2Entities.BarracudaUnwater, TR2Entities.Shark }
             },
 
             { LevelNames.DORIA,
@@ -99,7 +102,7 @@ namespace TRModelTransporter.Utilities
             },
 
             { LevelNames.TIBET,
-                new List<TR2Entities>{ TR2Entities.Eagle, TR2Entities.Mercenary2, TR2Entities.Mercenary3, TR2Entities.MercSnowmobDriver, TR2Entities.SnowLeopard }
+                new List<TR2Entities>{ TR2Entities.LaraSnow, TR2Entities.Eagle, TR2Entities.Mercenary2, TR2Entities.Mercenary3, TR2Entities.MercSnowmobDriver, TR2Entities.SnowLeopard }
             },
 
             { LevelNames.MONASTERY,
@@ -127,7 +130,7 @@ namespace TRModelTransporter.Utilities
             },
 
             { LevelNames.HOME,
-                new List<TR2Entities>{ TR2Entities.StickWieldingGoon1BlackJacket }
+                new List<TR2Entities>{ TR2Entities.LaraHome, TR2Entities.StickWieldingGoon1BlackJacket }
             },
 
             { LevelNames.ASSAULT,

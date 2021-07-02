@@ -11,6 +11,7 @@ namespace TR2RandomizerCore.Helpers
         public int Y { get; set; }
 
         public int Room { get; set; }
+        public short Angle { get; set; }
 
         public bool RequiresGlitch { get; set; }
 
@@ -28,6 +29,7 @@ namespace TR2RandomizerCore.Helpers
             Y = 0;
             Z = 0;
             Room = 0;
+            Angle = 16384;
             RequiresGlitch = false;
             Difficulty = Difficulty.Easy;
             IsInRoomSpace = true;
@@ -41,6 +43,7 @@ namespace TR2RandomizerCore.Helpers
             Y = loc.Y;
             Z = loc.Z;
             Room = loc.Room;
+            Angle = 16384;
         }
     }
 }

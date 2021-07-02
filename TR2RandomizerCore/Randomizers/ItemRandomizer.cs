@@ -10,6 +10,8 @@ using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRModelTransporter.Packing;
+using TRModelTransporter.Transport;
 
 namespace TR2RandomizerCore.Randomizers
 {
@@ -18,6 +20,7 @@ namespace TR2RandomizerCore.Randomizers
         public bool IncludeKeyItems { get; set; }
         public bool IsDevelopmentModeOn { get; set; }
         public bool PerformEnemyWeighting { get; set; }
+        internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
         // into predefined locations. See FindUnarmedPistolsLocation below.
@@ -44,6 +47,8 @@ namespace TR2RandomizerCore.Randomizers
 
                 //Apply the modifications
                 RepositionItems(locations[_levelInstance.Name]);
+
+                RandomizeVehicles();
 
                 //Write back the level file
                 SaveLevelInstance();
@@ -560,6 +565,84 @@ namespace TR2RandomizerCore.Randomizers
                 {
                     entity.TypeID = (short)replacementAmmo;
                 }
+            }
+        }
+
+        private void RandomizeVehicles()
+        {
+            // For now, we only add the boat if it has a location defined for a level. The skidoo is added
+            // to levels that have MercSnowMobDriver present (see EnemyRandomizer) but we could alter this
+            // to include it potentially in any level.
+            // This perhaps needs better tracking, for example if every level has a vehicle location defined
+            // we might not necessarily want to include it in every level.
+            Dictionary<TR2Entities, Location> vehicles = new Dictionary<TR2Entities, Location>();
+            PopulateVehicleLocation(TR2Entities.Boat, vehicles);
+            if (_levelInstance.IsAssault)
+            {
+                // The assault course doesn't have enemies i.e. MercSnowMobDriver, so just add the skidoo too
+                PopulateVehicleLocation(TR2Entities.RedSnowmobile, vehicles);
+            }
+
+            List<TR2Entity> levelEntities = _levelInstance.Data.Entities.ToList();
+            int entityLimit = _levelInstance.GetMaximumEntityLimit();
+            if (vehicles.Count == 0 || vehicles.Count + levelEntities.Count > entityLimit)
+            {
+                return;
+            }
+
+            TRModelImporter importer = new TRModelImporter
+            {
+                Level = _levelInstance.Data,
+                LevelName = _levelInstance.Name,
+                ClearUnusedSprites = false,
+                EntitiesToImport = vehicles.Keys,
+                TexturePositionMonitor = TextureMonitor.CreateMonitor(_levelInstance.Name, vehicles.Keys.ToList())
+            };
+
+            try
+            {
+                importer.Import();
+
+                foreach (TR2Entities entity in vehicles.Keys)
+                {
+                    if (levelEntities.Count == entityLimit)
+                    {
+                        break;
+                    }
+
+                    Location location = vehicles[entity];
+                    levelEntities.Add(new TR2Entity
+                    {
+                        TypeID = (short)entity,
+                        Room = (short)location.Room,
+                        X = location.X,
+                        Y = location.Y,
+                        Z = location.Z,
+                        Angle = location.Angle,
+                        Flags = 0,
+                        Intensity1 = -1,
+                        Intensity2 = -1
+                    });
+                }
+
+                if (levelEntities.Count > _levelInstance.Data.NumEntities)
+                {
+                    _levelInstance.Data.Entities = levelEntities.ToArray();
+                    _levelInstance.Data.NumEntities = (uint)levelEntities.Count;
+                }
+            }
+            catch (PackingException)
+            {
+                // Silently ignore failed imports for now as these are nice-to-have only
+            }
+        }
+
+        private void PopulateVehicleLocation(TR2Entities entity, Dictionary<TR2Entities, Location> locationMap)
+        {
+            Location location = VehicleUtilities.GetRandomLocation(_levelInstance.Name, entity, _generator);
+            if (location != null)
+            {
+                locationMap[entity] = location;
             }
         }
     }

@@ -1,19 +1,4 @@
 {
-  "Grouping": [
-    {
-      "Leader": "Fire.Explosion",
-      "Followers": [
-        "Fire.Flame"
-      ]
-    },
-    {
-      "Leader": "Lara.Top.Sun",
-      "Followers": [
-        "Lara.Socks"
-      ]
-    }
-  ],
-
   "Static": {
     "Fire.Explosion": [
       {
@@ -183,15 +168,18 @@
     "Lara.Bobble": [
       {
         "Segment": 0,
+        "Tile": 11,
+        "X": 240,
+        "Y": 176
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
         "Tile": 12,
         "X": 160,
         "Y": 35
-      },
-      {
-        "Segment": 1,
-        "Tile": 11,
-        "X": 240,
-        "Y": 177
       }
     ],
 
@@ -220,7 +208,7 @@
       {
         "Segment": 0,
         "Tile": 8,
-        "X": 75,
+        "X": 72,
         "Y": 232
       },
       {
@@ -239,154 +227,150 @@
         "Segment": 3,
         "Tile": 10,
         "X": 128,
-        "Y": 224,
-        "Clip": "0, 0, 40, 16"
-      },
-      {
-        "Segment": 3,
-        "Tile": 10,
-        "X": 72,
-        "Y": 240,
-        "Clip": "0, 16, 40, 16"
+        "Y": 224
       },
       {
         "Segment": 4,
+        "Tile": 10,
+        "X": 72,
+        "Y": 240
+      },
+      {
+        "Segment": 5,
         "Tile": 12,
         "X": 192,
         "Y": 208
       },
       {
-        "Segment": 5,
+        "Segment": 6,
         "Tile": 8,
         "X": 104,
         "Y": 136
       },
       {
-        "Segment": 6,
+        "Segment": 7,
         "Tile": 13,
         "X": 56,
         "Y": 192
       },
       {
-        "Segment": 7,
+        "Segment": 8,
         "Tile": 10,
         "X": 32,
-        "Y": 224,
-        "Clip": "24, 0, 24, 16"
+        "Y": 224
       },
       {
-        "Segment": 7,
+        "Segment": 9,
         "Tile": 8,
         "X": 232,
-        "Y": 240,
-        "Clip": "0, 0, 24, 16"
+        "Y": 240
       },
       {
-        "Segment": 8,
+        "Segment": 10,
         "Tile": 9,
         "X": 0,
         "Y": 224
       },
       {
-        "Segment": 9,
+        "Segment": 11,
         "Tile": 12,
         "X": 112,
         "Y": 232
       },
       {
-        "Segment": 10,
+        "Segment": 12,
         "Tile": 10,
         "X": 200,
         "Y": 232
       },
       {
-        "Segment": 11,
+        "Segment": 13,
         "Tile": 11,
         "X": 88,
         "Y": 48
       },
       {
-        "Segment": 12,
+        "Segment": 14,
         "Tile": 12,
         "X": 96,
         "Y": 48
       },
       {
-        "Segment": 13,
+        "Segment": 15,
         "Tile": 6,
         "X": 144,
         "Y": 248
       },
       {
-        "Segment": 14,
+        "Segment": 16,
         "Tile": 8,
         "X": 128,
         "Y": 232
       },
       {
-        "Segment": 15,
+        "Segment": 17,
         "Tile": 11,
         "X": 48,
         "Y": 72
       },
       {
-        "Segment": 16,
+        "Segment": 18,
         "Tile": 12,
         "X": 208,
         "Y": 64
       },
       {
-        "Segment": 17,
+        "Segment": 19,
         "Tile": 9,
         "X": 16,
         "Y": 80
       },
       {
-        "Segment": 18,
+        "Segment": 20,
         "Tile": 9,
         "X": 96,
         "Y": 184
       },
       {
-        "Segment": 19,
+        "Segment": 21,
         "Tile": 9,
         "X": 96,
         "Y": 240
       },
       {
-        "Segment": 20,
+        "Segment": 22,
         "Tile": 11,
         "X": 176,
         "Y": 56
       },
       {
-        "Segment": 21,
+        "Segment": 23,
         "Tile": 8,
         "X": 152,
         "Y": 176
       },
       {
-        "Segment": 22,
+        "Segment": 24,
         "Tile": 11,
         "X": 224,
         "Y": 232
       },
       {
-        "Segment": 23,
+        "Segment": 25,
         "Tile": 11,
         "X": 16,
         "Y": 232
       },
       {
-        "Segment": 24,
+        "Segment": 26,
         "Tile": 12,
         "X": 96,
         "Y": 232
       },
       {
-        "Segment": 25,
+        "Segment": 27,
         "Tile": 10,
-        "X": 114,
+        "X": 112,
         "Y": 240
       }
     ],

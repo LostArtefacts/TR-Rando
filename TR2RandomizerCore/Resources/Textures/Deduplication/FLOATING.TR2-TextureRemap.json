@@ -1971,6 +1971,86 @@
       ],
       "TileIndex": 9,
       "Bounds": "64, 192, 32, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 10,
+      "Bounds": "48, 120, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 10,
+      "Bounds": "80, 104, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 10,
+      "Bounds": "104, 104, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 10,
+      "Bounds": "152, 104, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 10,
+      "Bounds": "224, 104, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 10,
+      "Bounds": "96, 136, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 10,
+      "Bounds": "120, 136, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 10,
+      "Bounds": "144, 136, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 10,
+      "Bounds": "168, 136, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 10,
+      "Bounds": "192, 136, 24, 32"
     }
   ]
 }

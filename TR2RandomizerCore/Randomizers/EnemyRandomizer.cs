@@ -126,6 +126,12 @@ namespace TR2RandomizerCore.Randomizers
 
         private EnemyTransportCollection SelectCrossLevelEnemies(TR2CombinedLevel level, int reduceEnemyCountBy = 0)
         {
+            // For the assault course, nothing will be imported for the time being
+            if (level.IsAssault)
+            {
+                return null;
+            }
+
             // Get the list of enemy types currently in the level
             List<TR2Entities> oldEntities = TR2EntityUtilities.GetEnemyTypeDictionary()[level.Name];
 
@@ -300,6 +306,12 @@ namespace TR2RandomizerCore.Randomizers
 
         private void RandomizeEnemiesNatively(TR2CombinedLevel level)
         {
+            // For the assault course, nothing will be changed for the time being
+            if (level.IsAssault)
+            {
+                return;
+            }
+
             List<TR2Entities> availableEnemyTypes = TR2EntityUtilities.GetEnemyTypeDictionary()[level.Name];
             List<TR2Entities> droppableEnemies = TR2EntityUtilities.DroppableEnemyTypes()[level.Name];
             List<TR2Entities> waterEnemies = TR2EntityUtilities.FilterWaterEnemies(availableEnemyTypes);
@@ -600,19 +612,18 @@ namespace TR2RandomizerCore.Randomizers
                 TR2Entity mercDriver = level.Data.Entities.ToList().Find(e => e.TypeID == (short)TR2Entities.MercSnowmobDriver);
                 if (mercDriver != null)
                 {
-                    Dictionary<string, List<Location>> allSkidooLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\skidoo_locations.json"));
-
-                    short room;
+                    short room, angle;
                     int x, y, z;
-                    if (allSkidooLocations.ContainsKey(level.Name))
+
+                    // we will only spawn one skidoo, so only need one random location
+                    Location randomLocation = VehicleUtilities.GetRandomLocation(level.Name, TR2Entities.RedSnowmobile, _generator);
+                    if (randomLocation != null)
                     {
-                        // we will only spawn one skidoo, so only need one random location
-                        List<Location> levelSkidooLocations = allSkidooLocations[level.Name];
-                        Location randomLocation = levelSkidooLocations[_generator.Next(0, levelSkidooLocations.Count)];
                         room = (short)randomLocation.Room;
                         x = randomLocation.X;
                         y = randomLocation.Y;
                         z = randomLocation.Z;
+                        angle = randomLocation.Angle;
                     }
                     else
                     {
@@ -621,6 +632,7 @@ namespace TR2RandomizerCore.Randomizers
                         x = mercDriver.X;
                         y = mercDriver.Y;
                         z = mercDriver.Z;
+                        angle = mercDriver.Angle;
                     }
 
                     newEntities.Add(new TR2Entity
@@ -630,7 +642,7 @@ namespace TR2RandomizerCore.Randomizers
                         X = x,
                         Y = y,
                         Z = z,
-                        Angle = 16384,
+                        Angle = angle,
                         Flags = 0,
                         Intensity1 = -1,
                         Intensity2 = -1
@@ -687,19 +699,22 @@ namespace TR2RandomizerCore.Randomizers
             {
                 foreach (TR2CombinedLevel level in _enemyMapping.Keys)
                 {
-                    int count = _enemyMapping[level].Capacity;
-                    for (int i = 0; i < count; i++)
+                    if (!level.IsAssault)
                     {
-                        //if (i > 0)
-                        //{
-                        //    _outer.SetMessage(string.Format("Randomizing enemies [{0} - attempt {1} / {2}]", level.Name, i + 1, _outer.MaxPackingAttempts));
-                        //}
-
-                        EnemyTransportCollection enemies = _enemyMapping[level][i];
-                        if (Import(level, enemies))
+                        int count = _enemyMapping[level].Capacity;
+                        for (int i = 0; i < count; i++)
                         {
-                            enemies.ImportResult = true;
-                            break;
+                            //if (i > 0)
+                            //{
+                            //    _outer.SetMessage(string.Format("Randomizing enemies [{0} - attempt {1} / {2}]", level.Name, i + 1, _outer.MaxPackingAttempts));
+                            //}
+
+                            EnemyTransportCollection enemies = _enemyMapping[level][i];
+                            if (Import(level, enemies))
+                            {
+                                enemies.ImportResult = true;
+                                break;
+                            }
                         }
                     }
 
@@ -736,58 +751,64 @@ namespace TR2RandomizerCore.Randomizers
                     //System.Diagnostics.Debug.WriteLine(level.Name + ": " + e.Message);
                     // We need to reload the level to undo anything that may have changed.
                     _outer.ReloadLevelData(level);
+                    // Tell the monitor to no longer track what we tried to import
+                    _outer.TextureMonitor.ClearMonitor(level.Name, enemies.EntitiesToImport);
                     return false;
                 }
             }
 
             // This is triggered synchronously after the import work to ensure the RNG remains consistent
-            internal void ApplyRandomization() 
+            internal void ApplyRandomization()
             {
                 foreach (TR2CombinedLevel level in _enemyMapping.Keys)
                 {
-                    EnemyTransportCollection importedCollection = null;
-                    foreach (EnemyTransportCollection enemies in _enemyMapping[level])
+                    if (!level.IsAssault)
                     {
-                        if (enemies.ImportResult)
+                        EnemyTransportCollection importedCollection = null;
+                        foreach (EnemyTransportCollection enemies in _enemyMapping[level])
                         {
-                            importedCollection = enemies;
-                            break;
-                        }
-                    }
-
-                    if (importedCollection == null)
-                    {
-                        // Cross-level was not possible with the enemy combinations. This could be due to either
-                        // a lack of space for texture packing, or the max ObjectTexture count (2048) was reached. 
-                        _outer.TextureMonitor.RemoveMonitor(level.Name);
-
-                        // And just randomize normally
-                        // TODO: maybe trigger a warning to display at the end of randomizing to say that cross-
-                        // level was not possible?
-                        _outer.RandomizeEnemiesNatively(level);
-                        //System.Diagnostics.Debug.WriteLine(level.Name + ": Native enemies");
-                    }
-                    else
-                    {
-                        // The import worked, so randomize the entities based on what we now have in place.
-                        //System.Diagnostics.Debug.WriteLine(level.Name + ": " + string.Join(", ", importedCollection.EntitiesToImport));
-                        EnemyRandomizationCollection enemies = new EnemyRandomizationCollection
-                        {
-                            Available = importedCollection.EntitiesToImport,
-                            Droppable = TR2EntityUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.ProtectMonks),
-                            Water = TR2EntityUtilities.FilterWaterEnemies(importedCollection.EntitiesToImport)
-                        };
-
-                        if (_outer.DocileBirdMonsters && importedCollection.BirdMonsterGuiser != TR2Entities.BirdMonster)
-                        {
-                            _outer.DisguiseEntity(level, importedCollection.BirdMonsterGuiser, TR2Entities.BirdMonster);
-                            enemies.BirdMonsterGuiser = importedCollection.BirdMonsterGuiser;
+                            if (enemies.ImportResult)
+                            {
+                                importedCollection = enemies;
+                                break;
+                            }
                         }
 
-                        _outer.RandomizeEnemies(level, enemies);
+                        if (importedCollection == null)
+                        {
+                            // Cross-level was not possible with the enemy combinations. This could be due to either
+                            // a lack of space for texture packing, or the max ObjectTexture count (2048) was reached. 
+                            _outer.TextureMonitor.RemoveMonitor(level.Name);
+
+                            // And just randomize normally
+                            // TODO: maybe trigger a warning to display at the end of randomizing to say that cross-
+                            // level was not possible?
+                            _outer.RandomizeEnemiesNatively(level);
+                            //System.Diagnostics.Debug.WriteLine(level.Name + ": Native enemies");
+                        }
+                        else
+                        {
+                            // The import worked, so randomize the entities based on what we now have in place.
+                            //System.Diagnostics.Debug.WriteLine(level.Name + ": " + string.Join(", ", importedCollection.EntitiesToImport));
+                            EnemyRandomizationCollection enemies = new EnemyRandomizationCollection
+                            {
+                                Available = importedCollection.EntitiesToImport,
+                                Droppable = TR2EntityUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.ProtectMonks),
+                                Water = TR2EntityUtilities.FilterWaterEnemies(importedCollection.EntitiesToImport)
+                            };
+
+                            if (_outer.DocileBirdMonsters && importedCollection.BirdMonsterGuiser != TR2Entities.BirdMonster)
+                            {
+                                _outer.DisguiseEntity(level, importedCollection.BirdMonsterGuiser, TR2Entities.BirdMonster);
+                                enemies.BirdMonsterGuiser = importedCollection.BirdMonsterGuiser;
+                            }
+
+                            _outer.RandomizeEnemies(level, enemies);
+                        }
+
+                        _outer.SaveLevel(level);
                     }
 
-                    _outer.SaveLevel(level);
                     if (!_outer.TriggerProgress())
                     {
                         break;

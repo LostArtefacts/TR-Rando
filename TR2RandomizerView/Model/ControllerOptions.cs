@@ -9,17 +9,17 @@ namespace TR2RandomizerView.Model
     {
         public int MaxSeedValue => 1000000000;
 
-        private readonly ManagedSeed _levelSequencingControl, _secretRewardsControl;
-        private readonly ManagedSeedNumeric _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl;
+        private readonly ManagedSeed _secretRewardsControl;
+        private readonly ManagedSeedNumeric _levelSequencingControl, _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl;
         private readonly ManagedSeedBool _audioTrackControl;
 
-        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl;
+        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl;
 
-        private bool _disableDemos, _protectMonks, _allowGlitched, _docileBirdMonsters, _retainKeySpriteTextures;
+        private bool _disableDemos, _protectMonks, _allowGlitched, _docileBirdMonsters, _retainKeySpriteTextures, _randomlyCutHair, _autoLaunchGame;
 
-        private int _levelCount;
+        private int _levelCount, _maximumLevelCount;
 
-        public int LevelCount
+        public int TotalLevelCount
         {
             get => _levelCount;
             private set
@@ -29,10 +29,28 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public int MaximumLevelCount
+        {
+            get => _maximumLevelCount;
+            private set
+            {
+                _maximumLevelCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private void UpdateMaximumLevelCount()
+        {
+            MaximumLevelCount = RandomizeLevelSequencing ? (int)PlayableLevelCount : TotalLevelCount;
+            UnarmedLevelCount = (uint)Math.Min(UnarmedLevelCount, MaximumLevelCount);
+            AmmolessLevelCount = (uint)Math.Min(AmmolessLevelCount, MaximumLevelCount);
+            SunsetCount = (uint)Math.Min(SunsetCount, MaximumLevelCount);
+        }
+
         public bool RandomizationPossible
         {
             get => RandomizeLevelSequencing || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeSunsets ||
-                   RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures;
+                   RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits;
         }
 
         public bool RandomizeLevelSequencing
@@ -42,6 +60,7 @@ namespace TR2RandomizerView.Model
             {
                 _levelSequencingControl.IsActive = value;
                 FirePropertyChanged();
+                UpdateMaximumLevelCount();
             }
         }
 
@@ -52,6 +71,17 @@ namespace TR2RandomizerView.Model
             {
                 _levelSequencingControl.Seed = value;
                 FirePropertyChanged();
+            }
+        }
+
+        public uint PlayableLevelCount
+        {
+            get => (uint)_levelSequencingControl.CustomInt;
+            set
+            {
+                _levelSequencingControl.CustomInt = (int)value;
+                FirePropertyChanged();
+                UpdateMaximumLevelCount();
             }
         }
 
@@ -315,6 +345,46 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool RandomizeOutfits
+        {
+            get => _randomOutfitsControl.IsActive;
+            set
+            {
+                _randomOutfitsControl.IsActive = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int OutfitSeed
+        {
+            get => _randomOutfitsControl.Seed;
+            set
+            {
+                _randomOutfitsControl.Seed = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool PersistOutfits
+        {
+            get => _randomOutfitsControl.CustomBool;
+            set
+            {
+                _randomOutfitsControl.CustomBool = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool RandomlyCutHair
+        {
+            get => _randomlyCutHair;
+            set
+            {
+                _randomlyCutHair = value;
+                FirePropertyChanged();
+            }
+        }
+
         private bool _developmentMode;
         public bool DevelopmentMode
         {
@@ -376,6 +446,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool AutoLaunchGame
+        {
+            get => _autoLaunchGame;
+            set
+            {
+                _autoLaunchGame = value;
+                FirePropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void FirePropertyChanged([CallerMemberName] string name = null)
@@ -387,7 +467,7 @@ namespace TR2RandomizerView.Model
 
         public ControllerOptions()
         {
-            _levelSequencingControl = new ManagedSeed();
+            _levelSequencingControl = new ManagedSeedNumeric();
             _unarmedLevelsControl = new ManagedSeedNumeric();
             _ammolessLevelsControl = new ManagedSeedNumeric();
             _secretRewardsControl = new ManagedSeed();
@@ -398,16 +478,18 @@ namespace TR2RandomizerView.Model
             _randomEnemiesControl = new ManagedSeedBool();
             _randomSecretsControl = new ManagedSeedBool();
             _randomTexturesControl = new ManagedSeedBool();
+            _randomOutfitsControl = new ManagedSeedBool();
         }
 
         public void Load(TR2RandomizerController controller)
         {
             _controller = controller;
 
-            LevelCount = _controller.LevelCount;
+            TotalLevelCount = _controller.LevelCount;
 
             RandomizeLevelSequencing = _controller.RandomizeLevelSequencing;
             LevelSequencingSeed = _controller.LevelSequencingSeed;
+            PlayableLevelCount = _controller.PlayableLevelCount;
 
             RandomizeUnarmedLevels = _controller.RandomizeUnarmedLevels;
             UnarmedLevelsSeed = _controller.UnarmedLevelsSeed;
@@ -448,8 +530,14 @@ namespace TR2RandomizerView.Model
             PersistTextures = _controller.PersistTextures;
             RetainKeySpriteTextures = _controller.RetainKeySpriteTextures;
 
+            RandomizeOutfits = _controller.RandomizeOutfits;
+            OutfitSeed = _controller.OutfitSeed;
+            PersistOutfits = _controller.PersistOutfits;
+            RandomlyCutHair = _controller.RandomlyCutHair;
+
             DevelopmentMode = _controller.DevelopmentMode;
             DisableDemos = _controller.DisableDemos;
+            AutoLaunchGame = _controller.AutoLaunchGame;
         }
 
         public void RandomizeActiveSeeds()
@@ -495,6 +583,10 @@ namespace TR2RandomizerView.Model
             {
                 TextureSeed = rng.Next(1, MaxSeedValue);
             }
+            if (RandomizeOutfits)
+            {
+                OutfitSeed = rng.Next(1, MaxSeedValue);
+            }
         }
 
         public void SetGlobalSeed(int seed)
@@ -539,26 +631,39 @@ namespace TR2RandomizerView.Model
             {
                 TextureSeed = seed;
             }
+            if (RandomizeOutfits)
+            {
+                OutfitSeed = seed;
+            }
         }
 
         public void SetAllRandomizationsEnabled(bool enabled)
         {
             RandomizeLevelSequencing = RandomizeUnarmedLevels = RandomizeAmmolessLevels =
                 RandomizeSecretRewards = RandomizeSunsets = RandomizeAudioTracks =
-                RandomizeItems = RandomizeSecrets = RandomizeEnemies = RandomizeTextures = enabled;
+                RandomizeItems = RandomizeSecrets = RandomizeEnemies = RandomizeTextures = RandomizeOutfits = enabled;
         }
 
         public bool AllRandomizationsEnabled()
         {
             return RandomizeLevelSequencing && RandomizeUnarmedLevels && RandomizeAmmolessLevels &&
                 RandomizeSecretRewards && RandomizeSunsets && RandomizeAudioTracks &&
-                RandomizeItems && RandomizeSecrets && RandomizeEnemies && RandomizeTextures;
+                RandomizeItems && RandomizeSecrets && RandomizeEnemies && RandomizeTextures && RandomizeOutfits;
         }
 
         public void Save()
         {
             _controller.RandomizeLevelSequencing = RandomizeLevelSequencing;
             _controller.LevelSequencingSeed = LevelSequencingSeed;
+
+            // While this can be separated into its own option, for now it's combined with sequencing
+            _controller.RandomizePlayableLevels = RandomizeLevelSequencing;
+            _controller.PlayableLevelsSeed = LevelSequencingSeed;
+            _controller.PlayableLevelCount = PlayableLevelCount;
+
+            _controller.RandomizePlayableLevels = RandomizeLevelSequencing;
+            _controller.PlayableLevelsSeed = LevelSequencingSeed;
+            _controller.PlayableLevelCount = PlayableLevelCount;
 
             _controller.RandomizeUnarmedLevels = RandomizeUnarmedLevels;
             _controller.UnarmedLevelsSeed = UnarmedLevelsSeed;
@@ -599,8 +704,14 @@ namespace TR2RandomizerView.Model
             _controller.PersistTextures = PersistTextures;
             _controller.RetainKeySpriteTextures = RetainKeySpriteTextures;
 
+            _controller.RandomizeOutfits = RandomizeOutfits;
+            _controller.OutfitSeed = OutfitSeed;
+            _controller.PersistOutfits = PersistOutfits;
+            _controller.RandomlyCutHair = RandomlyCutHair;
+
             _controller.DevelopmentMode = DevelopmentMode;
             _controller.DisableDemos = DisableDemos;
+            _controller.AutoLaunchGame = AutoLaunchGame;
         }
 
         public void Unload()

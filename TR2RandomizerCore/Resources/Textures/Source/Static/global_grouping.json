@@ -1,0 +1,293 @@
+[
+  {
+    "Leader": "Fire.Explosion",
+    "Masters": [
+      "Xian.Islands",
+      "Xian.Stone"
+    ],
+    "Followers": [
+      "Fire.Flame"
+    ]
+  },
+
+  {
+    "Leader": "HSH.Duvet",
+    "Followers": [
+      "HSH.Carpet",
+      "HSH.Marble",
+      "HSH.Tiles"
+    ],
+    "ThemeAlternatives": {
+      "VegasLeopard": {
+        "HSH.Marble": "Black"
+      },
+      "VegasZebra": {
+        "HSH.Carpet": "Black",
+        "HSH.Marble": "Black",
+        "HSH.Tiles": "Black"
+      }
+    }
+  },
+
+  {
+    "Leader": "Lara.Bobble",
+    "Masters": [
+      "Lara.DivingSuit",
+      "Lara.DressingGown",
+      "Lara.Top.Snow"
+    ],
+    "Followers": [
+      "Lara.Braid"
+    ]
+  },
+
+  {
+    "Leader": "Lara.DivingSuit",
+    "Followers": [
+      "Lara.Bobble",
+      "Lara.Braid"
+    ],
+    "ThemeAlternatives": {
+      "Black": {
+        "Lara.Bobble": "White",
+        "Lara.Braid": "White"
+      },
+      "Teal": {
+        "Lara.Bobble": "Mint",
+        "Lara.Braid": "Mint"
+      },
+      "White": {
+        "Lara.Bobble": "Black",
+        "Lara.Braid": "Black"
+      }
+    }
+  },
+
+  {
+    "Leader": "Lara.DressingGown",
+    "Followers": [
+      "Lara.Bobble",
+      "Lara.Braid"
+    ],
+    "ThemeAlternatives": {
+      "Gold": {
+        "Lara.Bobble": "Yellow",
+        "Lara.Braid": "Yellow"
+      },
+      "Green": {
+        "Lara.Bobble": "Lime",
+        "Lara.Braid": "Lime"
+      },
+      "Grey": {
+        "Lara.Bobble": "White",
+        "Lara.Braid": "White"
+      },
+      "HotPink": {
+        "Lara.Bobble": "Pink",
+        "Lara.Braid": "Pink"
+      },
+      "Teal": {
+        "Lara.Bobble": "Cyan",
+        "Lara.Braid": "Cyan"
+      },
+      "White": {
+        "Lara.Bobble": "Black",
+        "Lara.Braid": "Black"
+      }
+    }
+  },
+
+  {
+    "Leader": "Lara.Top.Snow",
+    "Followers": [
+      "Lara.Bobble",
+      "Lara.Braid",
+      "Lara.Socks",
+      "Lara.Top.Sun"
+    ],
+    "ThemeAlternatives": {
+      "Black": {
+        "Lara.Bobble": "White",
+        "Lara.Braid": "White",
+        "Lara.Socks": "White",
+        "Lara.Top.Sun": "White"
+      },
+      "DarkBlue": {
+        "Lara.Bobble": "White",
+        "Lara.Braid": "White",
+        "Lara.Socks": "White",
+        "Lara.Top.Sun": "Blue"
+      },
+      "Green": {
+        "Lara.Bobble": "Lime",
+        "Lara.Braid": "Lime",
+        "Lara.Socks": "Lime",
+        "Lara.Top.Sun": "Lime"
+      },
+      "Orange": {
+        "Lara.Bobble": "Black",
+        "Lara.Braid": "Black",
+        "Lara.Socks": "Black",
+        "Lara.Top.Sun": "Black"
+      },
+      "Pink": {
+        "Lara.Bobble": "Purple",
+        "Lara.Braid": "Purple",
+        "Lara.Socks": "Purple",
+        "Lara.Top.Sun": "Purple"
+      },
+      "Purple": {
+        "Lara.Bobble": "Pink",
+        "Lara.Braid": "Pink",
+        "Lara.Socks": "Pink",
+        "Lara.Top.Sun": "Pink"
+      },
+      "Red": {
+        "Lara.Bobble": "Orange",
+        "Lara.Braid": "Orange",
+        "Lara.Socks": "Orange",
+        "Lara.Top.Sun": "Orange"
+      },
+      "Teal": {
+        "Lara.Bobble": "Blue",
+        "Lara.Braid": "Blue",
+        "Lara.Socks": "Blue",
+        "Lara.Top.Sun": "Blue"
+      },
+      "SkyBlue": {
+        "Lara.Bobble": "Black",
+        "Lara.Braid": "Black",
+        "Lara.Socks": "Black",
+        "Lara.Top.Sun": "Black"
+      }
+    }
+  },
+
+  {
+    "Leader": "Lara.Top.Sun",
+    "Masters": [
+      "Lara.Top.Snow"
+    ],
+    "Followers": [
+      "Lara.Socks"
+    ]
+  },
+
+  {
+    "Leader": "Xian.Islands",
+    "Followers": [
+      "Enemies.Guard.Spear",
+      "Enemies.Guard.Sword",
+      "Fire.Explosion",
+      "Fire.Flame",
+      "Hazards.Boulder",
+      "Water",
+      "Xian.Building",
+      "Xian.Cracker",
+      "Xian.Lamp",
+      "Xian.Lava",
+      "Xian.Metal",
+      "Xian.Misc",
+      "Xian.Rock",
+      "Xian.Sky",
+      "Xian.Stone",
+      "Xian.Tree"
+    ],
+    "ThemeAlternatives": {
+      "Black": {
+        "Xian.Lamp": "White",
+        "Xian.Lava": "Sun",
+        "Xian.Stone": "White",
+        "Xian.Tree": "Orange"
+      },
+      "DarkBlue": {
+        "Enemies.Guard.Spear": "White",
+        "Enemies.Guard.Sword": "White",
+        "Fire.Explosion": "Blue",
+        "Fire.Flame": "Blue",
+        "Xian.Stone": "Orange",
+        "Xian.Tree": "Blue"
+      },
+      "Furnace": {
+        "Fire.Explosion": "Yellow",
+        "Fire.Flame": "Yellow"
+      },
+      "Orange": {
+        "Xian.Lava": "Grey"
+      },
+      "Pink": {
+        "Xian.Lava": "Green"
+      },
+      "Purple": {
+        "Enemies.Guard.Spear": "Yellow",
+        "Enemies.Guard.Sword": "Yellow",
+        "Xian.Lava": "Yellow"
+      },
+      "Red": {
+        "Xian.Lava": "Black"
+      },
+      "Teal": {
+        "Fire.Explosion": "Green",
+        "Fire.Flame": "Green",
+        "Xian.Lava": "Black"
+      },
+      "White": {
+        "Xian.Lamp": "Black",
+        "Xian.Lava": "Grey"
+      },
+      "Yellow": {
+        "Enemies.Guard.Spear": "Purple",
+        "Enemies.Guard.Sword": "Purple",
+        "Xian.Lava": "Purple"
+      }
+    }
+  },
+
+  {
+    "Leader": "Xian.Stone",
+    "Masters": [
+      "Xian.Islands"
+    ],
+    "Followers": [
+      "Enemies.Guard.Spear",
+      "Fire.Explosion",
+      "Fire.Flame",
+      "Water",
+      "Xian.Building",
+      "Xian.Cracker",
+      "Xian.Lava",
+      "Xian.Metal",
+      "Xian.Misc",
+      "Xian.Rock"
+    ],
+    "ThemeAlternatives": {
+      "Furnace": {
+        "Fire.Explosion": "Yellow",
+        "Fire.Flame": "Yellow"
+      },
+      "Orange": {
+        "Xian.Lava": "Grey"
+      },
+      "Pink": {
+        "Xian.Lava": "Green"
+      },
+      "Purple": {
+        "Xian.Lava": "Yellow"
+      },
+      "Red": {
+        "Xian.Lava": "Black"
+      },
+      "Teal": {
+        "Fire.Explosion": "Yellow",
+        "Fire.Flame": "Yellow",
+        "Xian.Lava": "Black"
+      },
+      "White": {
+        "Xian.Lava": "Grey"
+      },
+      "Yellow": {
+        "Xian.Lava": "Purple"
+      }
+    }
+  }
+]

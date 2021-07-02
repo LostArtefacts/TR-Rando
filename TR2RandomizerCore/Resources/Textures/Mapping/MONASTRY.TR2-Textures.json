@@ -127,60 +127,6 @@
     }
   },
 
-  "Grouping": [
-    {
-      "Leader": "Fire.Explosion",
-      "Followers": [
-        "Fire.Flame"
-      ]
-    },
-    {
-      "Leader": "Lara.Top.Snow",
-      "Followers": [
-        "Lara.Bobble",
-        "Lara.Socks",
-        "Lara.Top.Sun"
-      ],
-      "ThemeAlternatives": {
-        "Black": {
-          "Lara.Bobble": "White",
-          "Lara.Socks": "White",
-          "Lara.Top.Sun": "White"
-        },
-        "Green": {
-          "Lara.Bobble": "Lime",
-          "Lara.Socks": "Lime",
-          "Lara.Top.Sun": "Lime"
-        },
-        "Orange": {
-          "Lara.Bobble": "Black",
-          "Lara.Socks": "Black",
-          "Lara.Top.Sun": "Black"
-        },
-        "Pink": {
-          "Lara.Bobble": "Purple",
-          "Lara.Socks": "Purple",
-          "Lara.Top.Sun": "Purple"
-        },
-        "Purple": {
-          "Lara.Bobble": "Pink",
-          "Lara.Socks": "Pink",
-          "Lara.Top.Sun": "Pink"
-        },
-        "Red": {
-          "Lara.Bobble": "Orange",
-          "Lara.Socks": "Orange",
-          "Lara.Top.Sun": "Orange"
-        },
-        "SkyBlue": {
-          "Lara.Bobble": "Black",
-          "Lara.Socks": "Black",
-          "Lara.Top.Sun": "Black"
-        }
-      }
-    }
-  ],
-
   "Static": {
     "Enemies.Monk.KnifeStick": [
       {
@@ -524,15 +470,18 @@
     "Lara.Bobble": [
       {
         "Segment": 0,
+        "Tile": 13,
+        "X": 240,
+        "Y": 80
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
         "Tile": 12,
         "X": 40,
         "Y": 235
-      },
-      {
-        "Segment": 1,
-        "Tile": 13,
-        "X": 240,
-        "Y": 81
       }
     ],
 
@@ -566,90 +515,92 @@
       },
       {
         "Segment": 1,
+        "Tile": 11,
+        "X": 224,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
         "Tile": 9,
         "X": 240,
-        "Y": 200,
-        "Clip": "0, 0, 16, 56"
-      },
-      {
-        "Segment": 1,
-        "Tile": 10,
-        "X": 240,
-        "Y": 160,
-        "Clip": "16, 0, 16, 56"
-      },
-      {
-        "Segment": 2,
-        "Tile": 12,
-        "X": 160,
-        "Y": 208,
-        "Clip": "0, 0, 16, 24"
-      },
-      {
-        "Segment": 2,
-        "Tile": 12,
-        "X": 192,
-        "Y": 208,
-        "Clip": "16, 0, 16, 24"
+        "Y": 200
       },
       {
         "Segment": 3,
-        "Tile": 11,
-        "X": 96,
-        "Y": 64
+        "Tile": 10,
+        "X": 240,
+        "Y": 160
       },
       {
         "Segment": 4,
-        "Tile": 12,
-        "X": 32,
-        "Y": 0
-      },
-      {
-        "Segment": 5,
-        "Tile": 12,
-        "X": 56,
-        "Y": 0
-      },
-      {
-        "Segment": 6,
-        "Tile": 12,
-        "X": 232,
-        "Y": 192
-      },
-      {
-        "Segment": 8,
-        "Tile": 12,
-        "X": 152,
-        "Y": 0
-      },
-      {
-        "Segment": 9,
-        "Tile": 12,
-        "X": 128,
-        "Y": 0
-      },
-      {
-        "Segment": 10,
-        "Tile": 12,
-        "X": 24,
-        "Y": 192
-      },
-      {
-        "Segment": 11,
-        "Tile": 11,
-        "X": 64,
-        "Y": 168
-      },
-      {
-        "Segment": 12,
         "Tile": 12,
         "X": 176,
         "Y": 0
       },
       {
-        "Segment": 14,
+        "Segment": 5,
+        "Tile": 11,
+        "X": 96,
+        "Y": 64
+      },
+      {
+        "Segment": 6,
+        "Tile": 12,
+        "X": 32,
+        "Y": 0
+      },
+      {
+        "Segment": 7,
+        "Tile": 12,
+        "X": 56,
+        "Y": 0
+      },
+      {
+        "Segment": 8,
+        "Tile": 12,
+        "X": 232,
+        "Y": 192
+      },
+      {
+        "Segment": 9,
+        "Tile": 11,
+        "X": 64,
+        "Y": 168
+      },
+      {
+        "Segment": 10,
+        "Tile": 12,
+        "X": 152,
+        "Y": 0
+      },
+      {
+        "Segment": 11,
+        "Tile": 12,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 12,
+        "Tile": 12,
+        "X": 24,
+        "Y": 192
+      },
+      {
+        "Segment": 13,
         "Tile": 12,
         "X": 208,
+        "Y": 208
+      },
+      {
+        "Segment": 14,
+        "Tile": 12,
+        "X": 160,
+        "Y": 208
+      },
+      {
+        "Segment": 15,
+        "Tile": 12,
+        "X": 192,
         "Y": 208
       }
     ],
@@ -658,34 +609,32 @@
       {
         "Segment": 0,
         "Tile": 9,
-        "X": 147,
+        "X": 144,
         "Y": 128
       },
       {
-        "Segment": 2,
-        "Tile": 9,
-        "X": 176,
-        "Y": 152,
-        "Clip": "0, 0, 24, 16"
-      },
-      {
-        "Segment": 6,
+        "Segment": 7,
         "Tile": 12,
         "X": 24,
         "Y": 40
       },
       {
-        "Segment": 19,
-        "Tile": 12,
-        "X": 80,
-        "Y": 16,
-        "Clip": "8, 0, 24, 8"
+        "Segment": 27,
+        "Tile": 10,
+        "X": 120,
+        "Y": 240
       },
       {
-        "Segment": 25,
-        "Tile": 10,
-        "X": 122,
-        "Y": 240
+        "Segment": 28,
+        "Tile": 9,
+        "X": 176,
+        "Y": 152
+      },
+      {
+        "Segment": 29,
+        "Tile": 12,
+        "X": 80,
+        "Y": 0
       }
     ],
 

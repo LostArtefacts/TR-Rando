@@ -1,18 +1,14 @@
 {
-  "Grouping": [
-    {
-      "Leader": "Fire.Explosion",
-      "Followers": [
-        "Fire.Flame"
-      ]
-    },
-    {
-      "Leader": "Lara.Top.Sun",
-      "Followers": [
-        "Lara.Socks"
+  "Landmarks": {
+    "Landmarks.NLNMFirst": {
+      "0": [
+        {
+          "RoomNumber": 70,
+          "RectangleIndices": [ 22 ]
+        }
       ]
     }
-  ],
+  },
 
   "Static": {
     "Enemies.Steve": [
@@ -345,15 +341,18 @@
     "Lara.Bobble": [
       {
         "Segment": 0,
+        "Tile": 11,
+        "X": 32,
+        "Y": 80
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
         "Tile": 10,
         "X": 216,
         "Y": 147
-      },
-      {
-        "Segment": 1,
-        "Tile": 11,
-        "X": 32,
-        "Y": 81
       }
     ],
 
@@ -382,7 +381,7 @@
       {
         "Segment": 0,
         "Tile": 6,
-        "X": 147,
+        "X": 144,
         "Y": 232
       },
       {
@@ -401,154 +400,150 @@
         "Segment": 3,
         "Tile": 9,
         "X": 112,
-        "Y": 56,
-        "Clip": "0, 0, 40, 16"
-      },
-      {
-        "Segment": 3,
-        "Tile": 9,
-        "X": 0,
-        "Y": 72,
-        "Clip": "0, 16, 40, 16"
+        "Y": 56
       },
       {
         "Segment": 4,
+        "Tile": 9,
+        "X": 0,
+        "Y": 72
+      },
+      {
+        "Segment": 5,
         "Tile": 11,
         "X": 224,
         "Y": 32
       },
       {
-        "Segment": 5,
+        "Segment": 6,
         "Tile": 8,
         "X": 248,
         "Y": 72
       },
       {
-        "Segment": 6,
+        "Segment": 7,
         "Tile": 12,
         "X": 56,
         "Y": 56
       },
       {
-        "Segment": 7,
+        "Segment": 8,
         "Tile": 10,
         "X": 128,
-        "Y": 112,
-        "Clip": "24, 0, 24, 16"
+        "Y": 112
       },
       {
-        "Segment": 7,
+        "Segment": 9,
         "Tile": 9,
         "X": 64,
-        "Y": 56,
-        "Clip": "0, 0, 24, 16"
+        "Y": 56
       },
       {
-        "Segment": 8,
+        "Segment": 10,
         "Tile": 6,
         "X": 144,
         "Y": 184
       },
       {
-        "Segment": 9,
+        "Segment": 11,
         "Tile": 11,
         "X": 128,
         "Y": 56
       },
       {
-        "Segment": 10,
+        "Segment": 12,
         "Tile": 9,
         "X": 152,
         "Y": 64
       },
       {
-        "Segment": 11,
+        "Segment": 13,
         "Tile": 10,
         "X": 120,
         "Y": 120
       },
       {
-        "Segment": 12,
+        "Segment": 14,
         "Tile": 10,
         "X": 208,
         "Y": 152
       },
       {
-        "Segment": 13,
+        "Segment": 15,
         "Tile": 11,
         "X": 144,
         "Y": 32
       },
       {
-        "Segment": 14,
+        "Segment": 16,
         "Tile": 8,
         "X": 48,
         "Y": 104
       },
       {
-        "Segment": 15,
+        "Segment": 17,
         "Tile": 11,
         "X": 184,
         "Y": 32
       },
       {
-        "Segment": 16,
+        "Segment": 18,
         "Tile": 10,
         "X": 152,
         "Y": 232
       },
       {
-        "Segment": 17,
+        "Segment": 19,
         "Tile": 8,
         "X": 80,
         "Y": 56
       },
       {
-        "Segment": 18,
+        "Segment": 20,
         "Tile": 8,
         "X": 0,
         "Y": 248
       },
       {
-        "Segment": 19,
+        "Segment": 21,
         "Tile": 9,
         "X": 112,
         "Y": 112
       },
       {
-        "Segment": 20,
+        "Segment": 22,
         "Tile": 8,
         "X": 80,
         "Y": 144
       },
       {
-        "Segment": 21,
+        "Segment": 23,
         "Tile": 7,
         "X": 0,
         "Y": 64
       },
       {
-        "Segment": 22,
+        "Segment": 24,
         "Tile": 10,
         "X": 192,
         "Y": 136
       },
       {
-        "Segment": 23,
+        "Segment": 25,
         "Tile": 10,
         "X": 168,
         "Y": 136
       },
       {
-        "Segment": 24,
+        "Segment": 26,
         "Tile": 11,
         "X": 240,
         "Y": 48
       },
       {
-        "Segment": 25,
+        "Segment": 27,
         "Tile": 9,
-        "X": 42,
+        "X": 40,
         "Y": 72
       }
     ],

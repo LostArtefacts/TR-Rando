@@ -100,6 +100,7 @@ namespace TRLevelReader.Model.Enums
         BouncePad,
         SpikyCeiling,
         TibetanBell,
+        BoatWake_S_H,
         SnowmobileWake_S_H = 90,
         SnowmobileBelt = 91,
         WheelKnob,
@@ -290,10 +291,25 @@ namespace TRLevelReader.Model.Enums
         LaraMiscAnim_H_Xian,       // Death-by-Guard, inspecting dagger
         LaraMiscAnim_H_Wall,       // Death-by-Barney
 
-        // Split Lara's outfits
+        // Split Lara's outfits and weapon animations
         LaraSun = 3000,
-        LaraSnow,
-        LaraUnwater,
-        LaraHome
+        LaraPistolAnim_H_Sun,
+        LaraAutoAnim_H_Sun,
+        LaraUziAnim_H_Sun,
+
+        LaraUnwater = 3100,
+        LaraPistolAnim_H_Unwater,
+        LaraAutoAnim_H_Unwater,
+        LaraUziAnim_H_Unwater,
+
+        LaraSnow = 3200,
+        LaraPistolAnim_H_Snow,
+        LaraAutoAnim_H_Snow,
+        LaraUziAnim_H_Snow,
+
+        LaraHome = 3300,
+        LaraPistolAnim_H_Home,
+        LaraAutoAnim_H_Home,
+        LaraUziAnim_H_Home
     }
 }

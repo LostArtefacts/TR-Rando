@@ -392,6 +392,10 @@ namespace TRLevelReader.Helpers
                     new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.StickWieldingGoon1, TR2Entities.ShotgunGoon }
                 },
 
+                { LevelNames.ASSAULT,
+                    new List<TR2Entities>{ }
+                },
+
                 { "all",
                     new List<TR2Entities>{ TR2Entities.Crow, TR2Entities.TigerOrSnowLeopard, TR2Entities.Spider, TR2Entities.TRex,
                     TR2Entities.Doberman, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.StickWieldingGoon1, TR2Entities.MaskedGoon1, TR2Entities.Rat, TR2Entities.ShotgunGoon,

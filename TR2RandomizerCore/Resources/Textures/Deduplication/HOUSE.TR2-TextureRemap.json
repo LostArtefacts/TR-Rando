@@ -1916,6 +1916,61 @@
       "NewIndex": 1594,
       "NewBounds": "32, 160, 16, 8",
       "AdjustmentPoint": "32, 160"
+    },
+
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 327,
+      "OriginalBounds": "240, 128, 16, 40",
+      "NewTile": 9,
+      "NewIndex": 360,
+      "NewBounds": "224, 208, 16, 40",
+      "AdjustmentPoint": "224, 208"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 334,
+      "OriginalBounds": "48, 208, 16, 40",
+      "NewTile": 9,
+      "NewIndex": 360,
+      "NewBounds": "224, 208, 16, 40",
+      "AdjustmentPoint": "224, 208"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 340,
+      "OriginalBounds": "64, 208, 16, 40",
+      "NewTile": 9,
+      "NewIndex": 360,
+      "NewBounds": "224, 208, 16, 40",
+      "AdjustmentPoint": "224, 208"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 342,
+      "OriginalBounds": "80, 208, 16, 40",
+      "NewTile": 9,
+      "NewIndex": 360,
+      "NewBounds": "224, 208, 16, 40",
+      "AdjustmentPoint": "224, 208"
+    },
+    {
+      "OriginalTile": 9,
+      "OriginalIndex": 344,
+      "OriginalBounds": "112, 208, 16, 40",
+      "NewTile": 9,
+      "NewIndex": 360,
+      "NewBounds": "224, 208, 16, 40",
+      "AdjustmentPoint": "224, 208"
+    },
+    {
+      "OriginalTile": 15,
+      "OriginalIndex": 1721,
+      "OriginalBounds": "72, 184, 8, 8",
+      "NewTile": 9,
+      "NewIndex": 360,
+      "NewBounds": "224, 208, 8, 8",
+      "AdjustmentPoint": "224, 208"
     }
   ],
   "Dependencies": [
@@ -1992,6 +2047,46 @@
       ],
       "TileIndex": 15,
       "Bounds": "64, 176, 8, 8"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 11,
+      "Bounds": "120, 32, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 11,
+      "Bounds": "144, 32, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 11,
+      "Bounds": "24, 64, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 11,
+      "Bounds": "48, 64, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 11,
+      "Bounds": "216, 64, 24, 32"
     }
   ]
 }

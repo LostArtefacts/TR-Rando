@@ -40,6 +40,11 @@ namespace TR2RandomizerCore.Helpers
         /// </summary>
         public string JsonID => IsUKBox ? Name + "-UKBox" : Name;
 
+        /// <summary>
+        /// Checks if the current level is the assault course.
+        /// </summary>
+        public bool IsAssault => Is(LevelNames.ASSAULT);
+
         public bool CanPerformDraining(short room)
         {
             foreach (List<int> area in RoomWaterUtilities.RoomRemovalWaterMap[Name])
