@@ -48,10 +48,7 @@ namespace TR2RandomizerCore.Randomizers
                 //Apply the modifications
                 RepositionItems(locations[_levelInstance.Name]);
 
-                if (_levelInstance.IsAssault)
-                {
-                    RandomizeAssaultItems();
-                }
+                RandomizeVehicles();
 
                 //Write back the level file
                 SaveLevelInstance();
@@ -571,41 +568,61 @@ namespace TR2RandomizerCore.Randomizers
             }
         }
 
-        private void RandomizeAssaultItems()
+        private void RandomizeVehicles()
         {
-            List<TR2Entities> importEntities = new List<TR2Entities> { TR2Entities.RedSnowmobile, TR2Entities.Boat };
+            // For now, we only add the boat if it has a location defined for a level. The skidoo is added
+            // to levels that have MercSnowMobDriver present (see EnemyRandomizer) but we could alter this
+            // to include it potentially in any level.
+            // This perhaps needs better tracking, for example if every level has a vehicle location defined
+            // we might not necessarily want to include it in every level.
+            Dictionary<TR2Entities, Location> vehicles = new Dictionary<TR2Entities, Location>();
+            PopulateVehicleLocation(TR2Entities.Boat, vehicles);
+            if (_levelInstance.IsAssault)
+            {
+                // The assault course doesn't have enemies i.e. MercSnowMobDriver, so just add the skidoo too
+                PopulateVehicleLocation(TR2Entities.RedSnowmobile, vehicles);
+            }
+
+            List<TR2Entity> levelEntities = _levelInstance.Data.Entities.ToList();
+            int entityLimit = _levelInstance.GetMaximumEntityLimit();
+            if (vehicles.Count == 0 || vehicles.Count + levelEntities.Count > entityLimit)
+            {
+                return;
+            }
+
             TRModelImporter importer = new TRModelImporter
             {
                 Level = _levelInstance.Data,
                 LevelName = _levelInstance.Name,
                 ClearUnusedSprites = false,
-                EntitiesToImport = importEntities,
-                TexturePositionMonitor = TextureMonitor.CreateMonitor(_levelInstance.Name, importEntities)
+                EntitiesToImport = vehicles.Keys,
+                TexturePositionMonitor = TextureMonitor.CreateMonitor(_levelInstance.Name, vehicles.Keys.ToList())
             };
 
             try
             {
                 importer.Import();
 
-                List<TR2Entity> levelEntities = _levelInstance.Data.Entities.ToList();
-                foreach (TR2Entities entity in importEntities)
+                foreach (TR2Entities entity in vehicles.Keys)
                 {
-                    Location location = VehicleUtilities.GetRandomLocation(_levelInstance.Name, entity, _generator);
-                    if (location != null)
+                    if (levelEntities.Count == entityLimit)
                     {
-                        levelEntities.Add(new TR2Entity
-                        {
-                            TypeID = (short)entity,
-                            Room = (short)location.Room,
-                            X = location.X,
-                            Y = location.Y,
-                            Z = location.Z,
-                            Angle = 16384,
-                            Flags = 0,
-                            Intensity1 = -1,
-                            Intensity2 = -1
-                        });
+                        break;
                     }
+
+                    Location location = vehicles[entity];
+                    levelEntities.Add(new TR2Entity
+                    {
+                        TypeID = (short)entity,
+                        Room = (short)location.Room,
+                        X = location.X,
+                        Y = location.Y,
+                        Z = location.Z,
+                        Angle = location.Angle,
+                        Flags = 0,
+                        Intensity1 = -1,
+                        Intensity2 = -1
+                    });
                 }
 
                 if (levelEntities.Count > _levelInstance.Data.NumEntities)
@@ -616,7 +633,16 @@ namespace TR2RandomizerCore.Randomizers
             }
             catch (PackingException)
             {
-                // Unlikely as we're not adding much to Assault and it has plenty of space, but for now if it happens, just ignore it
+                // Silently ignore failed imports for now as these are nice-to-have only
+            }
+        }
+
+        private void PopulateVehicleLocation(TR2Entities entity, Dictionary<TR2Entities, Location> locationMap)
+        {
+            Location location = VehicleUtilities.GetRandomLocation(_levelInstance.Name, entity, _generator);
+            if (location != null)
+            {
+                locationMap[entity] = location;
             }
         }
     }

@@ -612,7 +612,7 @@ namespace TR2RandomizerCore.Randomizers
                 TR2Entity mercDriver = level.Data.Entities.ToList().Find(e => e.TypeID == (short)TR2Entities.MercSnowmobDriver);
                 if (mercDriver != null)
                 {
-                    short room;
+                    short room, angle;
                     int x, y, z;
 
                     // we will only spawn one skidoo, so only need one random location
@@ -623,6 +623,7 @@ namespace TR2RandomizerCore.Randomizers
                         x = randomLocation.X;
                         y = randomLocation.Y;
                         z = randomLocation.Z;
+                        angle = randomLocation.Angle;
                     }
                     else
                     {
@@ -631,6 +632,7 @@ namespace TR2RandomizerCore.Randomizers
                         x = mercDriver.X;
                         y = mercDriver.Y;
                         z = mercDriver.Z;
+                        angle = mercDriver.Angle;
                     }
 
                     newEntities.Add(new TR2Entity
@@ -640,7 +642,7 @@ namespace TR2RandomizerCore.Randomizers
                         X = x,
                         Y = y,
                         Z = z,
-                        Angle = 16384,
+                        Angle = angle,
                         Flags = 0,
                         Intensity1 = -1,
                         Intensity2 = -1

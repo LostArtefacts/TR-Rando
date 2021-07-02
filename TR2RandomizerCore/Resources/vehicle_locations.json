@@ -157,6 +157,44 @@
         "RequiresGlitch": false,
         "Difficulty": 0
       }
+    ],
+    "14": [
+      {
+        "X": 58902,
+        "Z": 36455,
+        "Y": 6147,
+        "Room": 28,
+        "Angle": 0,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 54700,
+        "Z": 51655,
+        "Y": 6147,
+        "Room": 25,
+        "Angle": -32768,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 65994,
+        "Z": 56323,
+        "Y": 6147,
+        "Room": 24,
+        "Angle": -32768,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      },
+      {
+        "X": 67000,
+        "Z": 57876,
+        "Y": 6147,
+        "Room": 24,
+        "Angle": -16384,
+        "RequiresGlitch": false,
+        "Difficulty": 0
+      }
     ]
   },
   "MONASTRY.TR2": {
