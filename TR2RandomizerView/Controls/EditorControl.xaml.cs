@@ -166,9 +166,37 @@ namespace TR2RandomizerView.Controls
             {
                 _dirty = false;
                 FireEditorStateChanged();
+
+                if (Controller.AutoLaunchGame)
+                {
+                    LaunchGame();
+                }
+
                 return true;
             }
             return false;
+        }
+
+        private void LaunchGame()
+        {
+            try
+            {
+                string exePath = Path.GetFullPath(Path.Combine(DataFolder, @"..\Tomb2.exe"));
+                if (!File.Exists(exePath))
+                {
+                    throw new IOException(string.Format("The game could not be launched automatically as the following executable was not found.{0}{0}{1}", Environment.NewLine, exePath));
+                }
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = exePath,
+                    WorkingDirectory = Path.GetDirectoryName(exePath)
+                });
+            }
+            catch (Exception e)
+            {
+                MessageWindow.ShowWarning(e.Message);
+            }
         }
 
         public void Unload()

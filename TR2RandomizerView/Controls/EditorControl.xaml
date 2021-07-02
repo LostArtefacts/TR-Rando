@@ -8,8 +8,8 @@
              mc:Ignorable="d" 
              Background="#fff"
              AllowDrop="True" Drop="EditorControl_Drop"
-             d:DesignHeight="700" d:DesignWidth="1200">    
-    
+             d:DesignHeight="700" d:DesignWidth="1200">
+
     <Grid x:Name="_editorGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -22,17 +22,22 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="220"/>
         </Grid.ColumnDefinitions>
 
-        <ctrl:ManagedSeedControl
+        <ctrl:ManagedSeedIntControl
             Grid.Row="0"
             Grid.Column="0"
             IsActive="{Binding RandomizeLevelSequencing, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            Title="Randomize Level Sequencing"
-            Text="Change the order in which levels are played. Required items will always be available (e.g. the Seraph for Barkhang Monastery) regardless of when the level is reached."
+            Title="Randomize Playable Levels and Sequencing"
+            Text="Change the number of levels in the game and the order in which they are played. Required items will always be available (e.g. the Seraph for Barkhang Monastery) regardless of when the level is reached."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding LevelSequencingSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            SeedValue="{Binding LevelSequencingSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomInt="{Binding PlayableLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomIntMinValue="1"
+            CustomIntMaxValue="{Binding TotalLevelCount}"
+            CustomIntTitle="Number of levels"/>
 
         <ctrl:ManagedSeedIntControl 
             Grid.Row="1"
@@ -45,7 +50,7 @@
             SeedValue="{Binding UnarmedLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding UnarmedLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="0"
-            CustomIntMaxValue="{Binding LevelCount}"
+            CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
 
         <ctrl:ManagedSeedIntControl 
@@ -59,7 +64,7 @@
             SeedValue="{Binding AmmolessLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding AmmolessLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="0"
-            CustomIntMaxValue="{Binding LevelCount}"
+            CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
 
         <ctrl:ManagedSeedIntControl
@@ -73,7 +78,7 @@
             SeedValue="{Binding SunsetsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding SunsetCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="0"
-            CustomIntMaxValue="{Binding LevelCount}"
+            CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
 
         <ctrl:ManagedSeedBoolBoolControl
@@ -95,7 +100,7 @@
             Grid.Column="1"
             IsActive="{Binding RandomizeItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Items"
-            Text="Randomizes standard pickups in each level."
+            Text="Randomize standard pickups in each level. Select key items to randomize key, puzzle and quest item locations."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding ItemSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -119,10 +124,9 @@
             CustomBool1="{Binding PersistTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomBoolTitle1="Use persistent textures"
             CustomBool2="{Binding RetainKeySpriteTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle2="Use original key sprite textures"/>
+            CustomBoolTitle2="Use original key item textures"/>
 
         <ctrl:ManagedSeedControl
-            Grid.Row="0"
             Grid.Column="2"
             IsActive="{Binding RandomizeSecretRewards, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Secret Rewards"
@@ -143,88 +147,130 @@
             CustomBool="{Binding RandomAudioTracksIncludeBlank, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomBoolTitle="Include blank tracks"/>
 
-        <Border Grid.Row="2"
-                Grid.RowSpan="2"
-                Grid.Column="2"
-                BorderBrush="#0E7709"
-                BorderThickness="1"
-                Background="#D8FCD6"
-                CornerRadius="5"
-                Margin="5">
-            <Grid Margin="10">
+        <ctrl:ManagedSeedBoolControl
+            Grid.Row="2"
+            Grid.Column="2"
+            IsActive="{Binding RandomizeOutfits, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Lara's Outfits"
+            Text="Allow Lara to wear different outfits in each level. Choosing persistent outfits will randomize the outfit only once, but note that some levels cannot support every outfit."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding OutfitSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBool="{Binding PersistOutfits, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle="Use persistent outfits"/>
+
+        <Border
+            Grid.RowSpan="2"
+            Grid.Column="3"
+            BorderBrush="#0E7709"
+            BorderThickness="1"
+            Background="#D8FCD6"
+            CornerRadius="5"
+            Margin="5">
+            <Grid Margin="10,9,10,10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+                <Label
+                    Content="Global Options"
+                    Padding="0,0,0,5"
+                    FontWeight="Bold"/>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="1"
+                    Margin="0,0,0,5"
+                    Text="Randomize the seed for each selected element."
+                    TextWrapping="Wrap"/>
 
-                    <Label Content="Options"
-                           Padding="0,0,0,5"
-                           FontWeight="Bold"
-                           Grid.ColumnSpan="2"/>
+                <Button
+                    Grid.Row="2"
+                    Margin="0,0,0,20"
+                    Content="Randomize Seeds" 
+                    Style="{StaticResource AltCallToAction}"
+                    Command="cmds:WindowCommands.RandomizeSeeds"/>
 
-                    <TextBlock Grid.Row="1"
-                               Margin="0,0,15,0"
-                               Text="Randomize the seed for each selected element."
-                               TextWrapping="Wrap"/>
+                <TextBlock
+                    Grid.Row="3"
+                    Margin="0,0,0,5"
+                    Text="Set a global seed for each selected element."
+                    TextWrapping="Wrap"/>
 
-                    <Button Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="0,0,0,15"
-                            Width="140"
-                            Content="Randomize Seeds" 
-                            Style="{StaticResource AltCallToAction}"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Command="cmds:WindowCommands.RandomizeSeeds"
-                            />
+                <Button
+                    Grid.Row="4"
+                    Margin="0,0,0,20"
+                    Content="Apply a Global Seed" 
+                    Style="{StaticResource AltCallToAction}"
+                    Command="cmds:WindowCommands.CreateGlobalSeed"/>
+            </Grid>
+        </Border>
 
-                    <TextBlock Grid.Row="2"
-                               Margin="0,0,15,0"
-                               Text="Set a global seed for each selected element."
-                               TextWrapping="Wrap"/>
+        <Border
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Grid.Column="3"
+            BorderBrush="#0E7709"
+            BorderThickness="1"
+            Background="#D8FCD6"
+            CornerRadius="5"
+            Margin="5">
+            <Grid Margin="10,9,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                    <Button Grid.Row="2"
-                            Grid.Column="1"
-                            Margin="0,0,0,15"
-                            Content="Apply Global Seed" 
-                            Width="140"
-                            Style="{StaticResource AltCallToAction}"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Command="cmds:WindowCommands.CreateGlobalSeed"
-                            />
+                <Label
+                    Content="Apply Randomization"
+                    Padding="0,0,0,5"
+                    FontWeight="Bold"/>
 
-                    <TextBlock Grid.Row="3"
-                               Margin="0,0,15,0"
-                               Text="Disable demos from showing in the title screen to prevent spoilers."
-                               TextWrapping="Wrap"/>
-                    
-                    <CheckBox Grid.Row="3"
-                              Grid.Column="1"
-                              Content="Disable Demos"
-                              IsChecked="{Binding DisableDemos, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                </Grid>
+                <TextBlock
+                    Grid.Row="1"
+                    Margin="0,0,0,5"
+                    Text="Disable demos from showing in the title screen to prevent spoilers."
+                    TextWrapping="Wrap"/>
 
-                <Button Grid.Row="2"
-                        Style="{StaticResource CallToAction}"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Bottom"
-                        FontSize="24"                        
-                        Content="Randomize!"
-                        Command="cmds:WindowCommands.Randomize"/>
+                <CheckBox
+                    Grid.Row="2"
+                    Margin="0,0,0,20"
+                    Content="Disable Demos"
+                    IsChecked="{Binding DisableDemos, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                
+                <TextBlock
+                    Grid.Row="3"
+                    Margin="0,0,0,5"
+                    Text="Launch the game automatically following successful randomization."
+                    TextWrapping="Wrap"/>
+
+                <CheckBox
+                    Grid.Row="4"
+                    Content="Auto-launch Game"
+                    IsChecked="{Binding AutoLaunchGame, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+                <TextBlock
+                    Grid.Row="5"
+                    Margin="0,0,0,5"
+                    Text="Hit Randomize to apply your chosen settings and start playing."
+                    TextWrapping="Wrap"/>
+
+                <Button
+                    Grid.Row="6"
+                    Style="{StaticResource CallToAction}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom"
+                    FontSize="24"                        
+                    Content="Randomize!"
+                    Command="cmds:WindowCommands.Randomize"/>
             </Grid>
         </Border>
     </Grid>
