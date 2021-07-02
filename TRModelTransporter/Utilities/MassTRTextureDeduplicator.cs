@@ -131,7 +131,7 @@ namespace TRModelTransporter.Utilities
             _levelRemap[_currentLevel].Remapping.Add(new TextureRemap
             {
                 OriginalTile = e.OldTile.Index,
-                OriginalIndex = e.OldSegment.FirstTextureIndex,
+                OriginalIndex = e.OldFirstTextureIndex,
                 OriginalBounds = e.OldBounds,
                 NewBounds = e.NewBounds,
                 NewTile = e.NewTile.Index,
@@ -139,7 +139,7 @@ namespace TRModelTransporter.Utilities
                 AdjustmentPoint = e.AdjustmentPoint
             });
 
-            _currentSave += e.OldSegment.Area;
+            _currentSave += e.OldArea;
 
             Console.WriteLine(_currentLevel + ": " + _currentSave);
         }

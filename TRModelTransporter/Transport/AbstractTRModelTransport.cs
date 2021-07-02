@@ -14,6 +14,30 @@ namespace TRModelTransporter.Transport
     {
         protected static readonly Dictionary<TR2Entities, TR2Entities[]> _entityDependencies = new Dictionary<TR2Entities, TR2Entities[]>
         {
+            [TR2Entities.LaraSun] =
+                new TR2Entities[] { TR2Entities.LaraPistolAnim_H_Sun, TR2Entities.LaraAutoAnim_H_Sun, TR2Entities.LaraUziAnim_H_Sun },
+            [TR2Entities.LaraUnwater] =
+                new TR2Entities[] { TR2Entities.LaraPistolAnim_H_Unwater, TR2Entities.LaraAutoAnim_H_Unwater, TR2Entities.LaraUziAnim_H_Unwater },
+            [TR2Entities.LaraSnow] =
+                new TR2Entities[] { TR2Entities.LaraPistolAnim_H_Snow, TR2Entities.LaraAutoAnim_H_Snow, TR2Entities.LaraUziAnim_H_Snow },
+            [TR2Entities.LaraHome] =
+                new TR2Entities[] { TR2Entities.LaraPistolAnim_H_Home, TR2Entities.LaraAutoAnim_H_Home, TR2Entities.LaraUziAnim_H_Home },
+
+            [TR2Entities.Pistols_M_H] =
+                new TR2Entities[] { TR2Entities.LaraPistolAnim_H, TR2Entities.Gunflare_H },
+            [TR2Entities.Shotgun_M_H] =
+                new TR2Entities[] { TR2Entities.LaraShotgunAnim_H, TR2Entities.Gunflare_H },
+            [TR2Entities.Autos_M_H] =
+                new TR2Entities[] { TR2Entities.LaraAutoAnim_H, TR2Entities.Gunflare_H },
+            [TR2Entities.Uzi_M_H] =
+                new TR2Entities[] { TR2Entities.LaraUziAnim_H, TR2Entities.Gunflare_H },
+            [TR2Entities.M16_M_H] =
+                new TR2Entities[] { TR2Entities.LaraM16Anim_H, TR2Entities.M16Gunflare_H },
+            [TR2Entities.Harpoon_M_H] =
+                new TR2Entities[] { TR2Entities.LaraHarpoonAnim_H, TR2Entities.HarpoonProjectile_H },
+            [TR2Entities.GrenadeLauncher_M_H] =
+                new TR2Entities[] { TR2Entities.LaraGrenadeAnim_H, TR2Entities.GrenadeProjectile_H },
+
             [TR2Entities.TRex] =
                 new TR2Entities[] { TR2Entities.LaraMiscAnim_H_Wall },
             [TR2Entities.MaskedGoon2] =
@@ -32,6 +56,8 @@ namespace TRModelTransporter.Transport
                 new TR2Entities[] { TR2Entities.RedSnowmobile },
             [TR2Entities.RedSnowmobile] =
                 new TR2Entities[] { TR2Entities.SnowmobileBelt, TR2Entities.LaraSnowmobAnim_H },
+            [TR2Entities.Boat] =
+                new TR2Entities[] { TR2Entities.LaraBoatAnim_H },
             [TR2Entities.Mercenary3] =
                 new TR2Entities[] { TR2Entities.Mercenary2 },
             [TR2Entities.Yeti] =
@@ -64,18 +90,39 @@ namespace TRModelTransporter.Transport
 
         protected static readonly Dictionary<TR2Entities, TR2Entities> _entityAliases = new Dictionary<TR2Entities, TR2Entities>
         {
+            [TR2Entities.LaraSun] = TR2Entities.Lara,
+            [TR2Entities.LaraUnwater] = TR2Entities.Lara,
+            [TR2Entities.LaraSnow] = TR2Entities.Lara,
+            [TR2Entities.LaraHome] = TR2Entities.Lara,
+
+            [TR2Entities.LaraPistolAnim_H_Sun] = TR2Entities.LaraPistolAnim_H,
+            [TR2Entities.LaraAutoAnim_H_Sun] = TR2Entities.LaraAutoAnim_H,
+            [TR2Entities.LaraUziAnim_H_Sun] = TR2Entities.LaraUziAnim_H,
+            [TR2Entities.LaraPistolAnim_H_Unwater] = TR2Entities.LaraPistolAnim_H,
+            [TR2Entities.LaraAutoAnim_H_Unwater] = TR2Entities.LaraAutoAnim_H,
+            [TR2Entities.LaraUziAnim_H_Unwater] = TR2Entities.LaraUziAnim_H,
+            [TR2Entities.LaraPistolAnim_H_Snow] = TR2Entities.LaraPistolAnim_H,
+            [TR2Entities.LaraAutoAnim_H_Snow] = TR2Entities.LaraAutoAnim_H,
+            [TR2Entities.LaraUziAnim_H_Snow] = TR2Entities.LaraUziAnim_H,
+            [TR2Entities.LaraPistolAnim_H_Home] = TR2Entities.LaraPistolAnim_H,
+            [TR2Entities.LaraAutoAnim_H_Home] = TR2Entities.LaraAutoAnim_H,
+            [TR2Entities.LaraUziAnim_H_Home] = TR2Entities.LaraUziAnim_H,
+
             [TR2Entities.BengalTiger] = TR2Entities.TigerOrSnowLeopard,
             [TR2Entities.SnowLeopard] = TR2Entities.TigerOrSnowLeopard,
             [TR2Entities.WhiteTiger] = TR2Entities.TigerOrSnowLeopard,
+
             [TR2Entities.StickWieldingGoon1Bandana] = TR2Entities.StickWieldingGoon1,
             [TR2Entities.StickWieldingGoon1BlackJacket] = TR2Entities.StickWieldingGoon1,
             [TR2Entities.StickWieldingGoon1BodyWarmer] = TR2Entities.StickWieldingGoon1,
             [TR2Entities.StickWieldingGoon1GreenVest] = TR2Entities.StickWieldingGoon1,
             [TR2Entities.StickWieldingGoon1WhiteVest] = TR2Entities.StickWieldingGoon1,
+
             [TR2Entities.LaraMiscAnim_H_Ice] = TR2Entities.LaraMiscAnim_H,
             [TR2Entities.LaraMiscAnim_H_Unwater] = TR2Entities.LaraMiscAnim_H,
             [TR2Entities.LaraMiscAnim_H_Xian] = TR2Entities.LaraMiscAnim_H,
             [TR2Entities.LaraMiscAnim_H_Wall] = TR2Entities.LaraMiscAnim_H,
+
             [TR2Entities.BarracudaIce] = TR2Entities.Barracuda,
             [TR2Entities.BarracudaUnwater] = TR2Entities.Barracuda,
             [TR2Entities.BarracudaXian] = TR2Entities.Barracuda
@@ -83,6 +130,10 @@ namespace TRModelTransporter.Transport
 
         protected static readonly Dictionary<TR2Entities, List<TR2Entities>> _aliasMap = new Dictionary<TR2Entities, List<TR2Entities>>
         {
+            [TR2Entities.Lara] = new List<TR2Entities>
+            {
+                TR2Entities.LaraSun, TR2Entities.LaraSnow, TR2Entities.LaraUnwater, TR2Entities.LaraHome
+            },
             [TR2Entities.TigerOrSnowLeopard] = new List<TR2Entities>
             {
                 TR2Entities.BengalTiger, TR2Entities.SnowLeopard, TR2Entities.WhiteTiger

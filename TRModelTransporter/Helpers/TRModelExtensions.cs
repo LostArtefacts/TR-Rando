@@ -88,7 +88,7 @@ namespace TRModelTransporter.Helpers
 
         public static int GetFreeObjectTextureCount(this TR2Level level)
         {
-            return (2048 - (int)level.NumObjectTextures) + level.GetInvalidObjectTextureIndices().Count;
+            return 2048 - (int)level.NumObjectTextures + level.GetInvalidObjectTextureIndices().Count;
         }
 
         // Given a precompiled dictionary of old texture index to new, this will ensure that

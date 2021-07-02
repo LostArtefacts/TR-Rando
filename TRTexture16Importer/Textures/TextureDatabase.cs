@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using TRLevelReader.Model.Enums;
+using TRTexture16Importer.Textures.Grouping;
 using TRTexture16Importer.Textures.Source;
 
 namespace TRTexture16Importer.Textures
@@ -11,13 +12,16 @@ namespace TRTexture16Importer.Textures
     {
         private readonly Dictionary<string, DynamicTextureSource> _dynamicSources;
         private readonly Dictionary<string, StaticTextureSource> _staticSources;
-        private readonly Dictionary<TR2Entities, string> _entityMap;
+        private readonly Dictionary<TR2Entities, string[]> _entityMap;
+
+        public TextureGroupingSet GlobalGrouping { get; private set; }
 
         public TextureDatabase()
         {
             _dynamicSources = new Dictionary<string, DynamicTextureSource>();
             _staticSources = new Dictionary<string, StaticTextureSource>();
-            _entityMap = JsonConvert.DeserializeObject<Dictionary<TR2Entities, string>>(File.ReadAllText(@"Resources\Textures\Source\Static\entity_lookup.json"));
+            _entityMap = JsonConvert.DeserializeObject<Dictionary<TR2Entities, string[]>>(File.ReadAllText(@"Resources\Textures\Source\Static\entity_lookup.json"));
+            GlobalGrouping = new TextureGroupingSet(this);
         }
 
         public void Dispose()
@@ -50,13 +54,17 @@ namespace TRTexture16Importer.Textures
             return _staticSources[name];
         }
 
-        public StaticTextureSource GetStaticSource(TR2Entities entity)
+        public StaticTextureSource[] GetStaticSource(TR2Entities entity)
         {
+            List<StaticTextureSource> sources = new List<StaticTextureSource>();
             if (_entityMap.ContainsKey(entity))
             {
-                return GetStaticSource(_entityMap[entity]);
+                foreach (string src in _entityMap[entity])
+                {
+                    sources.Add(GetStaticSource(src));
+                }
             }
-            return null;
+            return sources.ToArray();
         }
 
         private DynamicTextureSource LoadDynamicSource(string name)

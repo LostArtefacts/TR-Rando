@@ -2836,5 +2836,46 @@
       "AdjustmentPoint": "64, 136"
     }
   ],
-  "Dependencies": []
+  "Dependencies": [
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 5,
+      "Bounds": "208, 168, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 5,
+      "Bounds": "232, 168, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 5,
+      "Bounds": "224, 200, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 5,
+      "Bounds": "168, 224, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        3
+      ],
+      "TileIndex": 6,
+      "Bounds": "48, 0, 24, 32"
+    }
+  ]
 }

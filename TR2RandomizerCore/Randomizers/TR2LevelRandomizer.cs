@@ -14,11 +14,13 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RandomizeItems { get; set; }
         internal bool RandomizeEnemies { get; set; }
         internal bool RandomizeTextures { get; set; }
+        internal bool RandomizeOutfits { get; set; }
 
         internal int SecretSeed { get; set; }
         internal int ItemSeed { get; set; }
         internal int EnemySeed { get; set; }
         internal int TextureSeed { get; set; }
+        internal int OutfitSeed { get; set; }
 
         internal bool HardSecrets { get; set; }
         internal bool IncludeKeyItems { get; set; }
@@ -29,8 +31,10 @@ namespace TR2RandomizerCore.Randomizers
         internal bool ProtectMonks { get; set; }
         internal bool DocileBirdMonsters { get; set; }
         internal bool GlitchedSecrets { get; set; }
+        internal bool PersistOutfits { get; set; }
+        internal bool AutoLaunchGame { get; set; }
 
-        internal bool DeduplicateTextures => RandomizeTextures || (RandomizeEnemies && CrossLevelEnemies);
+        internal bool DeduplicateTextures => RandomizeTextures || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
 
         internal TR2LevelRandomizer(TRDirectoryIOArgs args)
             : base(args) { }
@@ -59,7 +63,12 @@ namespace TR2RandomizerCore.Randomizers
             PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
             RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures));
 
-            DevelopmentMode = config.GetBool(nameof(DevelopmentMode));            
+            RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits), true);
+            OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
+            PersistOutfits = config.GetBool(nameof(PersistOutfits));
+
+            DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
+            AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
         }
 
         protected override void StoreConfig(Config config)
@@ -84,7 +93,12 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(PersistTextureVariants)] = PersistTextureVariants;
             config[nameof(RetainKeySpriteTextures)] = RetainKeySpriteTextures;
 
-            config[nameof(DevelopmentMode)] = DevelopmentMode;            
+            config[nameof(RandomizeOutfits)] = RandomizeOutfits;
+            config[nameof(OutfitSeed)] = OutfitSeed;
+            config[nameof(PersistOutfits)] = PersistOutfits;
+
+            config[nameof(DevelopmentMode)] = DevelopmentMode;
+            config[nameof(AutoLaunchGame)] = AutoLaunchGame;
         }
 
         protected override int GetSaveTarget(int numLevels)
@@ -96,6 +110,7 @@ namespace TR2RandomizerCore.Randomizers
             if (DeduplicateTextures) target += numLevels * 2;
             if (RandomizeEnemies)    target += CrossLevelEnemies ? numLevels * 3 : numLevels;
             if (RandomizeTextures)   target += numLevels * 3;
+            if (RandomizeOutfits)    target += numLevels * 2;
             return target;
         }
 
@@ -164,6 +179,7 @@ namespace TR2RandomizerCore.Randomizers
                         SaveMonitor = monitor,
                         IncludeKeyItems = IncludeKeyItems,
                         PerformEnemyWeighting = RandomizeEnemies && CrossLevelEnemies,
+                        TextureMonitor = textureMonitor,
                         IsDevelopmentModeOn = DevelopmentMode
                     }).Randomize(ItemSeed);
                 }
@@ -188,6 +204,19 @@ namespace TR2RandomizerCore.Randomizers
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing unarmed level items");
                     itemRandomizer.RandomizeAmmo();
+                }
+
+                if (!monitor.IsCancelled && RandomizeOutfits)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing outfits");
+                    new OutfitRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        PersistOutfits = PersistOutfits,
+                        TextureMonitor = textureMonitor
+                    }.Randomize(OutfitSeed);
                 }
 
                 if (!monitor.IsCancelled && RandomizeTextures)

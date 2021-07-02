@@ -18,6 +18,25 @@ namespace TR2RandomizerCore.Utilities
             _entitySources = sources;
         }
 
+        internal void AppendSources(IEnumerable<StaticTextureSource> sources)
+        {
+            foreach (StaticTextureSource source in sources)
+            {
+                if (!_entitySources.Contains(source))
+                {
+                    _entitySources.Add(source);
+                }
+            }
+        }
+
+        internal void RemoveSources(IEnumerable<StaticTextureSource> sources)
+        {
+            foreach (StaticTextureSource source in sources)
+            {
+                _entitySources.Remove(source);
+            }
+        }
+
         public Dictionary<TR2Entities, List<int>> GetMonitoredTextureIndices()
         {
             // The keys defined in the source ObjectTextureMap are TRObjectTexture index references
@@ -28,7 +47,11 @@ namespace TR2RandomizerCore.Utilities
             {
                 foreach (TR2Entities entity in source.EntityTextureMap.Keys)
                 {
-                    entityIndices[entity] = new List<int>(source.EntityTextureMap[entity].Keys); // The keys hold the texture indices, the values are the segment positions
+                    if (!entityIndices.ContainsKey(entity))
+                    {
+                        entityIndices[entity] = new List<int>();
+                    }
+                    entityIndices[entity].AddRange(source.EntityTextureMap[entity].Keys); // The keys hold the texture indices, the values are the segment positions
                 }
             }
             return entityIndices;
@@ -36,44 +59,52 @@ namespace TR2RandomizerCore.Utilities
 
         public void MonitoredTexturesPositioned(Dictionary<TR2Entities, List<PositionedTexture>> texturePositions)
         {
-            PreparedLevelMapping = new Dictionary<StaticTextureSource, List<StaticTextureTarget>>();
+            if (PreparedLevelMapping == null)
+            {
+                PreparedLevelMapping = new Dictionary<StaticTextureSource, List<StaticTextureTarget>>();
+            }
+
             foreach (TR2Entities entity in texturePositions.Keys)
             {
-                StaticTextureSource source = GetSource(entity);
+                StaticTextureSource[] sources = GetSources(entity);
                 List<StaticTextureTarget> targets = new List<StaticTextureTarget>();
                 foreach (PositionedTexture texture in texturePositions[entity])
                 {
-                    // We'll make a new texture target for the level this monitor is associated with
-                    targets.Add(new StaticTextureTarget
+                    foreach (StaticTextureSource source in sources)
                     {
-                        Segment = source.EntityTextureMap[entity][texture.OriginalIndex], // this points to the associated rectangle in the source's Bitmap
-                        Tile = texture.TileIndex,
-                        X = texture.Position.X,
-                        Y = texture.Position.Y
-                    });
-                }
+                        if (source.EntityTextureMap[entity].ContainsKey(texture.OriginalIndex))
+                        {
+                            // We'll make a new texture target for the level this monitor is associated with
+                            targets.Add(new StaticTextureTarget
+                            {
+                                Segment = source.EntityTextureMap[entity][texture.OriginalIndex], // this points to the associated rectangle in the source's Bitmap
+                                Tile = texture.TileIndex,
+                                X = texture.Position.X,
+                                Y = texture.Position.Y
+                            });
 
-                if (targets.Count > 0)
-                {
-                    if (!PreparedLevelMapping.ContainsKey(source))
-                    {
-                        PreparedLevelMapping[source] = new List<StaticTextureTarget>();
+                            if (!PreparedLevelMapping.ContainsKey(source))
+                            {
+                                PreparedLevelMapping[source] = new List<StaticTextureTarget>();
+                            }
+                            PreparedLevelMapping[source].Add(targets[targets.Count - 1]);
+                        }
                     }
-                    PreparedLevelMapping[source].AddRange(targets);
                 }
             }
         }
 
-        private StaticTextureSource GetSource(TR2Entities entity)
+        private StaticTextureSource[] GetSources(TR2Entities entity)
         {
+            List<StaticTextureSource> sources = new List<StaticTextureSource>();
             foreach (StaticTextureSource source in _entitySources)
             {
                 if (source.EntityTextureMap.ContainsKey(entity))
                 {
-                    return source;
+                    sources.Add(source);
                 }
             }
-            return null;
+            return sources.ToArray();
         }
 
         // Keep a note of removed textures so that anything defined statically in the texture source
@@ -81,7 +112,14 @@ namespace TR2RandomizerCore.Utilities
         // textures to be imported).
         public void EntityTexturesRemoved(List<TR2Entities> entities)
         {
-            RemovedTextures = entities;
+            if (RemovedTextures == null)
+            {
+                RemovedTextures = entities;
+            }
+            else
+            {
+                RemovedTextures.AddRange(entities);
+            }
         }
     }
 }

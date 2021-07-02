@@ -1,22 +1,87 @@
 {
-  "13": "Vehicles.Skidoo.Turbo",
-  "19": "Enemies.Knifethrower",
-  "20": "Enemies.ShotgunGoon",
-  "29": "Enemies.Steve",
-  "33": "Enemies.StickGoon.Sonics",
-  "36": "Enemies.Spider",
-  "37": "Enemies.Spider",
-  "40": "Enemies.Dragon",
-  "41": "Enemies.Guard.Spear",
-  "43": "Enemies.Guard.Sword",
-  "46": "Enemies.Chicken",
-  "53": "Enemies.Monk.LongStick",
-  "54": "Enemies.Monk.KnifeStick",
-  "214": "Enemies.Barney",
-  "252": "Fire.Flame",
-  "260": "Enemies.Winston",
-  "1003": "Enemies.StickGoon.Bandana",
-  "1004": "Enemies.StickGoon.BlackJacket",
-  "1005": "Enemies.StickGoon.BodyWarmer",
-  "1006": "Enemies.StickGoon.GreenVest"
+  "13": [
+    "Vehicles.Skidoo.Turbo"
+  ],
+  "14": [
+    "Vehicles.Boat"
+  ],
+  "19": [
+    "Enemies.Knifethrower"
+  ],
+  "20": [
+    "Enemies.ShotgunGoon"
+  ],
+  "29": [
+    "Enemies.Steve"
+  ],
+  "33": [
+    "Enemies.StickGoon.Sonics"
+  ],
+  "36": [
+    "Enemies.Spider"
+  ],
+  "37": [
+    "Enemies.Spider"
+  ],
+  "40": [
+    "Enemies.Dragon"
+  ],
+  "41": [
+    "Enemies.Guard.Spear"
+  ],
+  "43": [
+    "Enemies.Guard.Sword"
+  ],
+  "46": [
+    "Enemies.Chicken"
+  ],
+  "53": [
+    "Enemies.Monk.LongStick"
+  ],
+  "54": [
+    "Enemies.Monk.KnifeStick"
+  ],
+  "214": [
+    "Enemies.Barney"
+  ],
+  "252": [
+    "Fire.Flame"
+  ],
+  "260": [
+    "Enemies.Winston"
+  ],
+  "1003": [
+    "Enemies.StickGoon.Bandana"
+  ],
+  "1004": [
+    "Enemies.StickGoon.BlackJacket"
+  ],
+  "1005": [
+    "Enemies.StickGoon.BodyWarmer"
+  ],
+  "1006": [
+    "Enemies.StickGoon.GreenVest"
+  ],
+  "3000": [
+    "Lara.Bobble",
+    "Lara.Socks",
+    "Lara.Top.Sun"
+  ],
+  "3003": [
+    "Lara.Top.Sun"
+  ],
+  "3100": [
+    "Lara.Bobble",
+    "Lara.DivingSuit"
+  ],
+  "3200": [
+    "Lara.Bobble",
+    "Lara.Socks",
+    "Lara.Top.Snow",
+    "Lara.Top.Sun"
+  ],
+  "3300": [
+    "Lara.Bobble",
+    "Lara.DressingGown"
+  ]
 }

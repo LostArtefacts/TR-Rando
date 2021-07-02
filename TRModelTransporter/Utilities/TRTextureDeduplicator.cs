@@ -80,13 +80,13 @@ namespace TRModelTransporter.Utilities
             });
         }
 
-        private MappedSegment FindSegmentFromTilePosition(int tileIndex, Rectangle bounds)
+        private MappedSegment FindSegmentFromTilePosition(int tileIndex, Rectangle bounds, bool exactMatch = true)
         {
             MappedSegment segment;
             for (int i = 0; i < _segments.Count; i++)
             {
                 segment = _segments[i];
-                if (segment.Tile.Index == tileIndex && segment.Segment.Bounds == bounds)
+                if (segment.Tile.Index == tileIndex && ((exactMatch && segment.Segment.Bounds == bounds) || segment.Segment.Bounds.Contains(bounds)))
                 {
                     return segment;
                 }
@@ -167,7 +167,7 @@ namespace TRModelTransporter.Utilities
             // Find the original MappedSegment
             MappedSegment originalSegment = FindSegmentFromTilePosition(remap.OriginalTile, remap.OriginalBounds);
             // Find the candiate MappedSegment
-            MappedSegment candidateSegment = FindSegmentFromTilePosition(remap.NewTile, remap.NewBounds);
+            MappedSegment candidateSegment = FindSegmentFromTilePosition(remap.NewTile, remap.NewBounds/*, false*/);
             // Move it!
             if (originalSegment != null && candidateSegment != null)
             {
@@ -184,13 +184,15 @@ namespace TRModelTransporter.Utilities
         {
             Rectangle oldBounds = originalSegment.Segment.Bounds;
             // We pull all of the sub textures from the original segment into the candidate
+            int oldFirstTextureIndex = originalSegment.Segment.FirstTextureIndex;
             candidateSegment.Segment.InheritTextures(originalSegment.Segment, adjustmentPoint, candidateSegment.Tile.Index);
             // Store the removal for later processing in RemoveStaleSegments
             StoreSegmentRemoval(originalSegment);
 
             SegmentRemapped?.Invoke(this, new TRTextureRemapEventArgs
             {
-                OldSegment = originalSegment.Segment,
+                OldFirstTextureIndex = oldFirstTextureIndex,
+                OldArea = originalSegment.Segment.Area,
                 NewSegment = candidateSegment.Segment,
                 OldTile = originalSegment.Tile,
                 NewTile = candidateSegment.Tile,

@@ -55,8 +55,10 @@
     <Compile Include="Textures\Source\AbstractTextureSource.cs" />
     <Compile Include="Textures\Source\DynamicTextureSource.cs" />
     <Compile Include="Textures\Target\DynamicTextureTarget.cs" />
+    <Compile Include="Textures\Target\LandmarkTextureTarget.cs" />
     <Compile Include="Textures\TextureDatabase.cs" />
-    <Compile Include="Textures\TextureGrouping.cs" />
+    <Compile Include="Textures\Grouping\TextureGrouping.cs" />
+    <Compile Include="Textures\Grouping\TextureGroupingSet.cs" />
     <Compile Include="Textures\TextureLevelMapping.cs" />
     <Compile Include="Textures\Source\StaticTextureSource.cs" />
     <Compile Include="Textures\Target\StaticTextureTarget.cs" />

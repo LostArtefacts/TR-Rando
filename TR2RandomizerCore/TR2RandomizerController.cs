@@ -139,10 +139,34 @@ namespace TR2RandomizerCore
             set => ScriptEditor.RandomGameTracksIncludeBlank = value;
         }
 
+        public bool RandomizeOutfits
+        {
+            get => LevelRandomizer.RandomizeOutfits;
+            set => LevelRandomizer.RandomizeOutfits = value;
+        }
+
+        public bool PersistOutfits
+        {
+            get => LevelRandomizer.PersistOutfits;
+            set => LevelRandomizer.PersistOutfits = value;
+        }
+
+        public int OutfitSeed
+        {
+            get => LevelRandomizer.OutfitSeed;
+            set => LevelRandomizer.OutfitSeed = value;
+        }
+
         public bool DisableDemos
         {
             get => !ScriptEditor.DemosEnabled;
             set => ScriptEditor.DemosEnabled = !value;
+        }
+
+        public bool AutoLaunchGame
+        {
+            get => LevelRandomizer.AutoLaunchGame;
+            set => LevelRandomizer.AutoLaunchGame = value;
         }
         #endregion
 

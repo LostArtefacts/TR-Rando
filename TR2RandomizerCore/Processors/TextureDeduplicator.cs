@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using TR2RandomizerCore.Helpers;
 using TRGE.Core;
 using TRModelTransporter.Utilities;
@@ -73,10 +74,15 @@ namespace TR2RandomizerCore.Processors
             {
                 foreach (TR2CombinedLevel level in _levels)
                 {
-                    _deduplicator.Level = level.Data;
-                    _deduplicator.Deduplicate(@"Resources\Textures\Deduplication\" + level.JsonID + "-TextureRemap.json");
+                    string dedupPath = @"Resources\Textures\Deduplication\" + level.JsonID + "-TextureRemap.json";
+                    if (File.Exists(dedupPath))
+                    {
+                        _deduplicator.Level = level.Data;
+                        _deduplicator.Deduplicate(dedupPath);
 
-                    _outer.SaveLevel(level.Data, level.Name);
+                        _outer.SaveLevel(level.Data, level.Name);
+                    }
+
                     if (!_outer.TriggerProgress())
                     {
                         break;

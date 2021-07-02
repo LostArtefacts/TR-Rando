@@ -127,32 +127,6 @@
     }
   },
 
-  "Grouping": [
-    {
-      "Leader": "Fire.Explosion",
-      "Followers": [
-        "Fire.Flame"
-      ]
-    },
-    {
-      "Leader": "Lara.DivingSuit",
-      "Followers": [
-        "Lara.Bobble"
-      ],
-      "ThemeAlternatives": {
-        "Black": {
-          "Lara.Bobble": "White"
-        },
-        "Teal": {
-          "Lara.Bobble": "Mint"
-        },
-        "White": {
-          "Lara.Bobble": "Black"
-        }
-      }
-    }
-  ],
-
   "Static": {
     "Enemies.Steve": [
       {
@@ -481,15 +455,18 @@
     "Lara.Bobble": [
       {
         "Segment": 0,
+        "Tile": 9,
+        "X": 208,
+        "Y": 136
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
         "Tile": 8,
         "X": 240,
         "Y": 187
-      },
-      {
-        "Segment": 1,
-        "Tile": 9,
-        "X": 208,
-        "Y": 137
       }
     ],
 
@@ -529,6 +506,30 @@
         "Tile": 7,
         "X": 232,
         "Y": 112
+      },
+      {
+        "Segment": 6,
+        "Tile": 7,
+        "X": 232,
+        "Y": 126
+      },
+      {
+        "Segment": 6,
+        "Tile": 7,
+        "X": 248,
+        "Y": 158
+      },
+      {
+        "Segment": 7,
+        "Tile": 8,
+        "X": 192,
+        "Y": 152
+      },
+      {
+        "Segment": 8,
+        "Tile": 6,
+        "X": 96,
+        "Y": 96
       }
     ],
 

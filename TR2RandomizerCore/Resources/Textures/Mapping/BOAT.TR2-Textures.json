@@ -1,19 +1,4 @@
 {
-  "Grouping": [
-    {
-      "Leader": "Fire.Explosion",
-      "Followers": [
-        "Fire.Flame"
-      ]
-    },
-    {
-      "Leader": "Lara.Top.Sun",
-      "Followers": [
-        "Lara.Socks"
-      ]
-    }
-  ],
-
   "Static": {
     "Enemies.StickGoon.BodyWarmer": [
       {
@@ -177,15 +162,18 @@
     "Lara.Bobble": [
       {
         "Segment": 0,
+        "Tile": 12,
+        "X": 184,
+        "Y": 144
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
         "Tile": 11,
         "X": 56,
         "Y": 211
-      },
-      {
-        "Segment": 1,
-        "Tile": 12,
-        "X": 184,
-        "Y": 145
       }
     ],
 
@@ -214,7 +202,7 @@
       {
         "Segment": 0,
         "Tile": 8,
-        "X": 3,
+        "X": 0,
         "Y": 120
       },
       {
@@ -237,134 +225,146 @@
       },
       {
         "Segment": 4,
+        "Tile": 10,
+        "X": 168,
+        "Y": 160
+      },
+      {
+        "Segment": 5,
         "Tile": 9,
         "X": 232,
         "Y": 72
       },
       {
-        "Segment": 5,
+        "Segment": 6,
         "Tile": 8,
         "X": 248,
         "Y": 240
       },
       {
-        "Segment": 6,
+        "Segment": 7,
         "Tile": 13,
         "X": 24,
         "Y": 64
       },
       {
-        "Segment": 7,
+        "Segment": 8,
         "Tile": 11,
         "X": 56,
         "Y": 184
       },
       {
-        "Segment": 8,
+        "Segment": 9,
+        "Tile": 11,
+        "X": 80,
+        "Y": 184
+      },
+      {
+        "Segment": 10,
         "Tile": 10,
         "X": 96,
         "Y": 240
       },
       {
-        "Segment": 9,
+        "Segment": 11,
         "Tile": 12,
         "X": 0,
         "Y": 120
       },
       {
-        "Segment": 10,
+        "Segment": 12,
         "Tile": 10,
         "X": 104,
         "Y": 152
       },
       {
-        "Segment": 11,
+        "Segment": 13,
         "Tile": 10,
         "X": 64,
         "Y": 176
       },
       {
-        "Segment": 12,
+        "Segment": 14,
         "Tile": 10,
         "X": 96,
         "Y": 216
       },
       {
-        "Segment": 13,
+        "Segment": 15,
         "Tile": 6,
         "X": 208,
         "Y": 248
       },
       {
-        "Segment": 14,
+        "Segment": 16,
         "Tile": 8,
         "X": 128,
         "Y": 88
       },
       {
-        "Segment": 15,
+        "Segment": 17,
         "Tile": 8,
         "X": 184,
         "Y": 232
       },
       {
-        "Segment": 16,
+        "Segment": 18,
         "Tile": 11,
         "X": 216,
         "Y": 200
       },
       {
-        "Segment": 17,
+        "Segment": 19,
         "Tile": 8,
         "X": 168,
         "Y": 96
       },
       {
-        "Segment": 18,
+        "Segment": 20,
         "Tile": 9,
         "X": 192,
         "Y": 248
       },
       {
-        "Segment": 19,
+        "Segment": 21,
         "Tile": 10,
         "X": 104,
         "Y": 144
       },
       {
-        "Segment": 20,
+        "Segment": 22,
         "Tile": 10,
         "X": 216,
         "Y": 72
       },
       {
-        "Segment": 21,
+        "Segment": 23,
         "Tile": 11,
         "X": 232,
         "Y": 168
       },
       {
-        "Segment": 22,
+        "Segment": 24,
         "Tile": 11,
         "X": 200,
         "Y": 184
       },
       {
-        "Segment": 23,
+        "Segment": 25,
         "Tile": 11,
         "X": 176,
         "Y": 184
       },
       {
-        "Segment": 24,
+        "Segment": 26,
         "Tile": 12,
         "X": 232,
         "Y": 112
       },
       {
-        "Segment": 25,
+        "Segment": 27,
         "Tile": 10,
-        "X": 74,
+        "X": 72,
         "Y": 168
       }
     ],

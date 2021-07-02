@@ -234,7 +234,10 @@ namespace TRModelTransporter.Transport
             _textureHandler.Definitions = standardDefinitions;
             _textureHandler.EntitiesToRemove = EntitiesToRemove;
             _textureHandler.ClearUnusedSprites = ClearUnusedSprites;
-            _textureHandler.TextureRemap = JsonConvert.DeserializeObject<TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
+            if (TextureRemapPath != null)
+            {
+                _textureHandler.TextureRemap = JsonConvert.DeserializeObject<TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
+            }
             _textureHandler.PositionMonitor = TexturePositionMonitor;
             _textureHandler.Import();
 

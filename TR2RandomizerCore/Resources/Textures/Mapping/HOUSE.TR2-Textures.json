@@ -1,57 +1,4 @@
 {
-  "Grouping": [
-    {
-      "Leader": "Fire.Explosion",
-      "Followers": [
-        "Fire.Flame"
-      ]
-    },
-    {
-      "Leader": "HSH.Duvet",
-      "Followers": [
-        "HSH.Carpet",
-        "HSH.Marble",
-        "HSH.Tiles"
-      ],
-      "ThemeAlternatives": {
-        "VegasLeopard": {          
-          "HSH.Marble": "Black"
-        },
-        "VegasZebra": {
-          "HSH.Carpet": "Black",
-          "HSH.Marble": "Black",
-          "HSH.Tiles": "Black"
-        }
-      }
-    },
-    {
-      "Leader": "Lara.DressingGown",
-      "Followers": [
-        "Lara.Bobble"
-      ],
-      "ThemeAlternatives": {
-        "Gold": {
-          "Lara.Bobble": "Yellow"
-        },
-        "Green": {
-          "Lara.Bobble": "Lime"
-        },
-        "Grey": {
-          "Lara.Bobble": "White"
-        },
-        "HotPink": {
-          "Lara.Bobble": "Pink"
-        },
-        "Teal": {
-          "Lara.Bobble": "Cyan"
-        },
-        "White": {
-          "Lara.Bobble": "Black"
-        }
-      }
-    }
-  ],
-
   "Static": {
     "Enemies.ShotgunGoon": [
       {
@@ -518,21 +465,24 @@
     "Lara.Bobble": [
       {
         "Segment": 0,
+        "Tile": 14,
+        "X": 160,
+        "Y": 176
+      },
+      {
+        "Segment": 0,
+        "Tile": 14,
+        "X": 128,
+        "Y": 192
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
         "Tile": 13,
         "X": 208,
         "Y": 35
-      },
-      {
-        "Segment": 1,
-        "Tile": 14,
-        "X": 160,
-        "Y": 177
-      },
-      {
-        "Segment": 1,
-        "Tile": 14,
-        "X": 128,
-        "Y": 193
       }
     ],
 

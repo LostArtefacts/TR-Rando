@@ -51,9 +51,9 @@ namespace TRModelTransporter.Transport
         private void ExportDependencies()
         {
             List<TR2Entities> dependencies = new List<TR2Entities>();
-            if (_entityDependencies.ContainsKey(_definition.Entity))
+            if (_entityDependencies.ContainsKey(_definition.Alias))
             {
-                dependencies.AddRange(_entityDependencies[_definition.Entity]);
+                dependencies.AddRange(_entityDependencies[_definition.Alias]);
             }
             _definition.Dependencies = dependencies.ToArray();
         }
