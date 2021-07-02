@@ -128,6 +128,11 @@ namespace TR2RandomizerCore.Randomizers
                 scriptEditor.ScriptedLevels.Cast<TR23ScriptedLevel>().ToList()
             );
 
+            if (scriptEditor.GymAvailable)
+            {
+                levels.Add(scriptEditor.AssaultLevel as TR23ScriptedLevel);
+            }
+
             // Optionally sort based on randomized sequencing. Perhaps this should be an option for users?
             /*levels.Sort(delegate (TR23ScriptedLevel lvl1, TR23ScriptedLevel lvl2)
             {

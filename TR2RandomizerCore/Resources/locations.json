@@ -6818,7 +6818,7 @@
 			"Z": 59606,
 			"Y": 0,
 			"Room": 52,
-			"Difficulty" : "Hard",
+			"Difficulty": "Hard",
 			"IsInRoomSpace": false
 		},
 		{
@@ -6923,5 +6923,6 @@
 			"RequiresGlitch": true,
 			"IsInRoomSpace": false
 		}
-	]
+	],
+	"ASSAULT.TR2": []
 }

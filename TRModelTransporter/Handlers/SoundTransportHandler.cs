@@ -28,6 +28,17 @@ namespace TRModelTransporter.Handlers
                 306, // Leg lift
                 307  // Leg hit
             },
+            [TR2Entities.Boat] = new int[]
+            {
+                194, // Start
+                195, // Idling
+                196, // Accelerating
+                197, // High RPM
+                198, // Shut off
+                199, // Engine hit
+                200, // Body hit
+                336  // Dry land
+            },
             [TR2Entities.LaraSnowmobAnim_H] = new int[]
             {
                 153, // Snowmobile idling

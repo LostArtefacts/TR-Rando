@@ -1,0 +1,416 @@
+{
+  "Static": {
+    "Enemies.Winston": [
+      {
+        "Segment": 0,
+        "Tile": 10,
+        "X": 88,
+        "Y": 128
+      },
+      {
+        "Segment": 1,
+        "Tile": 11,
+        "X": 232,
+        "Y": 200
+      }
+    ],
+
+    "Fire.Explosion": [
+      {
+        "Segment": 0,
+        "Tile": 12,
+        "X": 92,
+        "Y": 18
+      },
+      {
+        "Segment": 1,
+        "Tile": 12,
+        "X": 4,
+        "Y": 18
+      },
+      {
+        "Segment": 2,
+        "Tile": 12,
+        "X": 176,
+        "Y": 71
+      },
+      {
+        "Segment": 3,
+        "Tile": 12,
+        "X": 162,
+        "Y": 120
+      },
+      {
+        "Segment": 4,
+        "Tile": 12,
+        "X": 1,
+        "Y": 84
+      },
+      {
+        "Segment": 5,
+        "Tile": 6,
+        "X": 1,
+        "Y": 192
+      },
+      {
+        "Segment": 6,
+        "Tile": 6,
+        "X": 90,
+        "Y": 194
+      },
+      {
+        "Segment": 7,
+        "Tile": 6,
+        "X": 168,
+        "Y": 192
+      },
+      {
+        "Segment": 8,
+        "Tile": 12,
+        "X": 80,
+        "Y": 80
+      },
+      {
+        "Segment": 9,
+        "Tile": 12,
+        "X": 88,
+        "Y": 133
+      },
+      {
+        "Segment": 10,
+        "Tile": 1,
+        "X": 2,
+        "Y": 195
+      },
+      {
+        "Segment": 11,
+        "Tile": 12,
+        "X": 4,
+        "Y": 151
+      },
+      {
+        "Segment": 12,
+        "Tile": 12,
+        "X": 0,
+        "Y": 196
+      },
+      {
+        "Segment": 13,
+        "Tile": 6,
+        "X": 66,
+        "Y": 166
+      }
+    ],
+
+    "Fire.Flare": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 64,
+        "Y": 152
+      },
+      {
+        "Segment": 1,
+        "Tile": 10,
+        "X": 80,
+        "Y": 168
+      },
+      {
+        "Segment": 2,
+        "Tile": 11,
+        "X": 88,
+        "Y": 192
+      },
+      {
+        "Segment": 3,
+        "Tile": 11,
+        "X": 72,
+        "Y": 192
+      },
+      {
+        "Segment": 4,
+        "Tile": 4,
+        "X": 11,
+        "Y": 35
+      },
+      {
+        "Segment": 5,
+        "Tile": 11,
+        "X": 0,
+        "Y": 120
+      }
+    ],
+
+    "HSH.Carpet": [
+      {
+        "Segment": 0,
+        "Tile": 2,
+        "X": 128,
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "Tile": 3,
+        "X": 64,
+        "Y": 64
+      }
+    ],
+
+    "HSH.Cushions": [
+      {
+        "Segment": 0,
+        "Tile": 10,
+        "X": 0,
+        "Y": 32
+      }
+    ],
+
+    "HSH.Duvet": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 128,
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 192,
+        "Y": 96
+      },
+      {
+        "Segment": 2,
+        "Tile": 6,
+        "X": 192,
+        "Y": 64
+      }
+    ],
+
+    "HSH.Marble": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 3,
+        "X": 192,
+        "Y": 64
+      },
+      {
+        "Segment": 3,
+        "Tile": 3,
+        "X": 64,
+        "Y": 192
+      },
+      {
+        "Segment": 4,
+        "Tile": 3,
+        "X": 64,
+        "Y": 247
+      },
+      {
+        "Segment": 5,
+        "Tile": 3,
+        "X": 128,
+        "Y": 145
+      },
+      {
+        "Segment": 6,
+        "Tile": 3,
+        "X": 209,
+        "Y": 145
+      },
+      {
+        "Segment": 7,
+        "Tile": 3,
+        "X": 64,
+        "Y": 202
+      },
+      {
+        "Segment": 8,
+        "Tile": 3,
+        "X": 209,
+        "Y": 155
+      },
+      {
+        "Segment": 9,
+        "Tile": 3,
+        "X": 179,
+        "Y": 0
+      },
+      {
+        "Segment": 10,
+        "Tile": 9,
+        "X": 136,
+        "Y": 192
+      }
+    ],
+
+    "HSH.Paintings": [
+      {
+        "Segment": 0,
+        "Tile": 5,
+        "X": 18,
+        "Y": 128
+      },
+      {
+        "Segment": 1,
+        "Tile": 5,
+        "X": 146,
+        "Y": 64
+      },
+      {
+        "Segment": 2,
+        "Tile": 5,
+        "X": 0,
+        "Y": 64
+      },
+      {
+        "Segment": 3,
+        "Tile": 2,
+        "X": 64,
+        "Y": 64
+      },
+      {
+        "Segment": 4,
+        "Tile": 2,
+        "X": 140,
+        "Y": 198
+      },
+      {
+        "Segment": 5,
+        "Tile": 5,
+        "X": 135,
+        "Y": 134
+      },
+      {
+        "Segment": 6,
+        "Tile": 5,
+        "X": 196,
+        "Y": 134
+      },
+      {
+        "Segment": 7,
+        "Tile": 5,
+        "X": 223,
+        "Y": 134
+      },
+      {
+        "Segment": 8,
+        "Tile": 1,
+        "X": 157,
+        "Y": 134
+      },
+      {
+        "Segment": 9,
+        "Tile": 1,
+        "X": 203,
+        "Y": 141
+      },
+      {
+        "Segment": 10,
+        "Tile": 1,
+        "X": 234,
+        "Y": 150
+      }
+    ],
+
+    "HSH.Sky": [
+      {
+        "Segment": 1,
+        "Tile": 7,
+        "X": 64,
+        "Y": 200
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 128,
+        "Y": 64
+      },
+      {
+        "Segment": 3,
+        "Tile": 7,
+        "X": 128,
+        "Y": 200
+      },
+      {
+        "Segment": 4,
+        "Tile": 8,
+        "X": 192,
+        "Y": 64
+      }
+    ],
+
+    "HSH.Tiles": [
+      {
+        "Segment": 0,
+        "Tile": 0,
+        "X": 192,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 0,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 2,
+        "X": 0,
+        "Y": 70
+      }
+    ],
+
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 11,
+        "X": 56,
+        "Y": 176
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
+        "Tile": 11,
+        "X": 176,
+        "Y": 107
+      }
+    ],
+
+    "Water": [
+      {
+        "Segment": 0,
+        "Tile": 1,
+        "X": 192,
+        "Y": 0,
+        "Clip": "0, 0, 64, 64"
+      },
+      {
+        "Segment": 0,
+        "Tile": 1,
+        "X": 0,
+        "Y": 64,
+        "Clip": "64, 0, 64, 64"
+      },
+      {
+        "Segment": 1,
+        "Tile": 1,
+        "X": 64,
+        "Y": 64
+      }
+    ]
+  }
+}

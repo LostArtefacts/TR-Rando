@@ -10,6 +10,8 @@ using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRModelTransporter.Packing;
+using TRModelTransporter.Transport;
 
 namespace TR2RandomizerCore.Randomizers
 {
@@ -18,6 +20,7 @@ namespace TR2RandomizerCore.Randomizers
         public bool IncludeKeyItems { get; set; }
         public bool IsDevelopmentModeOn { get; set; }
         public bool PerformEnemyWeighting { get; set; }
+        internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
         // into predefined locations. See FindUnarmedPistolsLocation below.
@@ -44,6 +47,11 @@ namespace TR2RandomizerCore.Randomizers
 
                 //Apply the modifications
                 RepositionItems(locations[_levelInstance.Name]);
+
+                if (_levelInstance.IsAssault)
+                {
+                    RandomizeAssaultItems();
+                }
 
                 //Write back the level file
                 SaveLevelInstance();
@@ -560,6 +568,55 @@ namespace TR2RandomizerCore.Randomizers
                 {
                     entity.TypeID = (short)replacementAmmo;
                 }
+            }
+        }
+
+        private void RandomizeAssaultItems()
+        {
+            List<TR2Entities> importEntities = new List<TR2Entities> { TR2Entities.RedSnowmobile, TR2Entities.Boat };
+            TRModelImporter importer = new TRModelImporter
+            {
+                Level = _levelInstance.Data,
+                LevelName = _levelInstance.Name,
+                ClearUnusedSprites = false,
+                EntitiesToImport = importEntities,
+                TexturePositionMonitor = TextureMonitor.CreateMonitor(_levelInstance.Name, importEntities)
+            };
+
+            try
+            {
+                importer.Import();
+
+                List<TR2Entity> levelEntities = _levelInstance.Data.Entities.ToList();
+                foreach (TR2Entities entity in importEntities)
+                {
+                    Location location = VehicleUtilities.GetRandomLocation(_levelInstance.Name, entity, _generator);
+                    if (location != null)
+                    {
+                        levelEntities.Add(new TR2Entity
+                        {
+                            TypeID = (short)entity,
+                            Room = (short)location.Room,
+                            X = location.X,
+                            Y = location.Y,
+                            Z = location.Z,
+                            Angle = 16384,
+                            Flags = 0,
+                            Intensity1 = -1,
+                            Intensity2 = -1
+                        });
+                    }
+                }
+
+                if (levelEntities.Count > _levelInstance.Data.NumEntities)
+                {
+                    _levelInstance.Data.Entities = levelEntities.ToArray();
+                    _levelInstance.Data.NumEntities = (uint)levelEntities.Count;
+                }
+            }
+            catch (PackingException)
+            {
+                // Unlikely as we're not adding much to Assault and it has plenty of space, but for now if it happens, just ignore it
             }
         }
     }
