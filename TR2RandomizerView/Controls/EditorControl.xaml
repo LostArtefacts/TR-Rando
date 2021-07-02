@@ -147,17 +147,19 @@
             CustomBool="{Binding RandomAudioTracksIncludeBlank, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomBoolTitle="Include blank tracks"/>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedBoolBoolControl
             Grid.Row="2"
             Grid.Column="2"
             IsActive="{Binding RandomizeOutfits, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Lara's Outfits"
-            Text="Allow Lara to wear different outfits in each level. Choosing persistent outfits will randomize the outfit only once, but note that some levels cannot support every outfit."
+            Text="Change Lara's outfit in each level. Choosing persistent outfits will randomize the outfit only once, but some levels may not support every outfit. You can also choose to give Lara a haircut in a random number of levels."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding OutfitSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBool="{Binding PersistOutfits, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle="Use persistent outfits"/>
+            CustomBool1="{Binding PersistOutfits, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle1="Use persistent outfits"
+            CustomBool2="{Binding RandomlyCutHair, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomBoolTitle2="Give Lara haircuts"/>
 
         <Border
             Grid.RowSpan="2"

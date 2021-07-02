@@ -32,6 +32,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool DocileBirdMonsters { get; set; }
         internal bool GlitchedSecrets { get; set; }
         internal bool PersistOutfits { get; set; }
+        internal bool RandomlyCutHair { get; set; }
         internal bool AutoLaunchGame { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
@@ -66,6 +67,7 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits));
             OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
             PersistOutfits = config.GetBool(nameof(PersistOutfits));
+            RandomlyCutHair = config.GetBool(nameof(RandomlyCutHair));
 
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
@@ -96,6 +98,7 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeOutfits)] = RandomizeOutfits;
             config[nameof(OutfitSeed)] = OutfitSeed;
             config[nameof(PersistOutfits)] = PersistOutfits;
+            config[nameof(RandomlyCutHair)] = RandomlyCutHair;
 
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
@@ -220,6 +223,7 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         PersistOutfits = PersistOutfits,
+                        RandomlyCutHair = RandomlyCutHair,
                         TextureMonitor = textureMonitor
                     }.Randomize(OutfitSeed);
                 }

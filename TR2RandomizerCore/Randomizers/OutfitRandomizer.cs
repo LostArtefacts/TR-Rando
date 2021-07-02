@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using TR2RandomizerCore.Helpers;
 using TR2RandomizerCore.Processors;
 using TR2RandomizerCore.Utilities;
 using TRGE.Core;
 using TRLevelReader.Helpers;
+using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
 
@@ -15,15 +18,19 @@ namespace TR2RandomizerCore.Randomizers
     public class OutfitRandomizer : RandomizerBase
     {
         internal bool PersistOutfits { get; set; }
+        internal bool RandomlyCutHair { get; set; }
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         private TR2Entities _persistentOutfit;
+
+        private List<string> _haircutLevels;
 
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
 
             SetPersistentOutfit();
+            ChooseHaircutLevels();
 
             List<OutfitProcessor> processors = new List<OutfitProcessor> { new OutfitProcessor(this) };
             int levelSplit = (int)(Levels.Count / _maxThreads);
@@ -73,6 +80,36 @@ namespace TR2RandomizerCore.Randomizers
                 List<TR2Entities> allLaras = TR2EntityUtilities.GetLaraTypes();
                 _persistentOutfit = allLaras[_generator.Next(0, allLaras.Count)];
             }
+        }
+
+        private void ChooseHaircutLevels()
+        {
+            _haircutLevels = new List<string>();
+            if (RandomlyCutHair)
+            {
+                // None, some, or all. We don't use Levels.Count+1 here as the Assault Course 
+                // doesn't work for now (missing gunflare texture used for transparency).
+                int numLevels = _generator.Next(0, Levels.Count);
+                while (_haircutLevels.Count < numLevels)
+                {
+                    TR23ScriptedLevel level = Levels[_generator.Next(0, Levels.Count)];
+                    if (level.Is(LevelNames.ASSAULT))
+                    {
+                        continue;
+                    }
+
+                    string id = level.LevelFileBaseName.ToUpper();
+                    if (!_haircutLevels.Contains(id))
+                    {
+                        _haircutLevels.Add(id);
+                    }
+                }
+            }
+        }
+
+        private bool IsHaircutLevel(string lvl)
+        {
+            return _haircutLevels.Contains(lvl);
         }
 
         internal class OutfitProcessor : AbstractProcessorThread<OutfitRandomizer>
@@ -139,6 +176,11 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         if (Import(level, lara))
                         {
+                            if (_outer.IsHaircutLevel(level.Name))
+                            {
+                                CutHair(level);
+                            }
+
                             _outer.SaveLevel(level.Data, level.Name);
                             break;
                         }
@@ -183,6 +225,70 @@ namespace TR2RandomizerCore.Randomizers
                     // Tell the monitor to no longer track what we tried to import
                     _outer.TextureMonitor.ClearMonitor(level.Name, laraImport);
                     return false;
+                }
+            }
+
+            private void CutHair(TR2CombinedLevel level)
+            {
+                // Every level has a 64x64 transparent gunflare texture so rather than
+                // importing something else, we'll just try to find that texture and 
+                // point Lara's braid to it, so making it invisible.
+                TRMesh[] gunflareMeshes = TR2LevelUtilities.GetModelMeshes(level.Data, TR2Entities.Gunflare_H);
+                if (gunflareMeshes == null)
+                {
+                    return;
+                }
+
+                ISet<int> textureIndices = new HashSet<int>();
+                foreach (TRMesh mesh in gunflareMeshes)
+                {
+                    foreach (TRFace4 r in mesh.TexturedRectangles)
+                    {
+                        textureIndices.Add(r.Texture);
+                    }
+                    foreach (TRFace3 t in mesh.TexturedTriangles)
+                    {
+                        textureIndices.Add(t.Texture);
+                    }
+                }
+
+                IndexedTRObjectTexture transparentTexture = null;
+                foreach (int index in textureIndices)
+                {
+                    transparentTexture = new IndexedTRObjectTexture
+                    {
+                        Index = index,
+                        Texture = level.Data.ObjectTextures[index]
+                    };
+
+                    Rectangle rect = transparentTexture.Bounds;
+                    if (rect.Width == 64 && rect.Height == 64)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        transparentTexture = null;
+                    }
+                }
+
+                // Did we find it?
+                if (transparentTexture == null)
+                {
+                    return;
+                }
+
+                // Erase the braid
+                foreach (TRMesh mesh in TR2LevelUtilities.GetModelMeshes(level.Data, TR2Entities.LaraPonytail_H))
+                {
+                    foreach (TRFace4 r in mesh.TexturedRectangles)
+                    {
+                        r.Texture = (ushort)transparentTexture.Index;
+                    }
+                    foreach (TRFace3 t in mesh.TexturedTriangles)
+                    {
+                        t.Texture = (ushort)transparentTexture.Index;
+                    }
                 }
             }
         }

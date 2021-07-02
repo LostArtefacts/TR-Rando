@@ -15,7 +15,7 @@ namespace TR2RandomizerView.Model
 
         private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl;
 
-        private bool _disableDemos, _protectMonks, _allowGlitched, _docileBirdMonsters, _retainKeySpriteTextures, _autoLaunchGame;
+        private bool _disableDemos, _protectMonks, _allowGlitched, _docileBirdMonsters, _retainKeySpriteTextures, _randomlyCutHair, _autoLaunchGame;
 
         private int _levelCount, _maximumLevelCount;
 
@@ -375,6 +375,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool RandomlyCutHair
+        {
+            get => _randomlyCutHair;
+            set
+            {
+                _randomlyCutHair = value;
+                FirePropertyChanged();
+            }
+        }
+
         private bool _developmentMode;
         public bool DevelopmentMode
         {
@@ -523,6 +533,7 @@ namespace TR2RandomizerView.Model
             RandomizeOutfits = _controller.RandomizeOutfits;
             OutfitSeed = _controller.OutfitSeed;
             PersistOutfits = _controller.PersistOutfits;
+            RandomlyCutHair = _controller.RandomlyCutHair;
 
             DevelopmentMode = _controller.DevelopmentMode;
             DisableDemos = _controller.DisableDemos;
@@ -696,6 +707,7 @@ namespace TR2RandomizerView.Model
             _controller.RandomizeOutfits = RandomizeOutfits;
             _controller.OutfitSeed = OutfitSeed;
             _controller.PersistOutfits = PersistOutfits;
+            _controller.RandomlyCutHair = RandomlyCutHair;
 
             _controller.DevelopmentMode = DevelopmentMode;
             _controller.DisableDemos = DisableDemos;
