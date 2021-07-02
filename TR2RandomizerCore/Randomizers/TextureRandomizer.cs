@@ -6,6 +6,7 @@ using TR2RandomizerCore.Processors;
 using TR2RandomizerCore.Utilities;
 using TRGE.Core;
 using TRTexture16Importer.Textures;
+using TRTexture16Importer.Textures.Grouping;
 using TRTexture16Importer.Textures.Source;
 
 namespace TR2RandomizerCore.Randomizers
@@ -128,6 +129,7 @@ namespace TR2RandomizerCore.Randomizers
         internal class TextureProcessor : AbstractProcessorThread<TextureRandomizer>
         {
             private readonly Dictionary<TR2CombinedLevel, TextureHolder> _holders;
+            private readonly LandmarkImporter _landmarkImporter;
 
             internal override int LevelCount => _holders.Count;
 
@@ -135,6 +137,7 @@ namespace TR2RandomizerCore.Randomizers
                 :base(outer)
             {
                 _holders = new Dictionary<TR2CombinedLevel, TextureHolder>();
+                _landmarkImporter = new LandmarkImporter();
             }
 
             internal void AddLevel(TR2CombinedLevel level)
@@ -171,6 +174,12 @@ namespace TR2RandomizerCore.Randomizers
                         foreach (AbstractTextureSource source in holder.Variants.Keys)
                         {
                             _outer.RedrawTargets(holder.Mapping, source, holder.Variants[source]);
+                        }
+
+                        // Add landmarks, but only if there is room available for them
+                        if (holder.Mapping.LandmarkMapping.Count > 0)
+                        {
+                            _landmarkImporter.Import(level, holder.Mapping);
                         }
                     }
 
