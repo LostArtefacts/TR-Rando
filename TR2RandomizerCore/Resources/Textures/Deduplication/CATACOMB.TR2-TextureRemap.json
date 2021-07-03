@@ -1823,6 +1823,14 @@
     {
       "Entities": [
         0,
+        154
+      ],
+      "TileIndex": 10,
+      "Bounds": "160, 80, 16, 16"
+    },
+    {
+      "Entities": [
+        0,
         3
       ],
       "TileIndex": 8,

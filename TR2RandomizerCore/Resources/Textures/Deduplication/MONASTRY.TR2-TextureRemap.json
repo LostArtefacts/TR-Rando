@@ -1706,6 +1706,14 @@
     {
       "Entities": [
         0,
+        154
+      ],
+      "TileIndex": 13,
+      "Bounds": "64, 96, 16, 16"
+    },
+    {
+      "Entities": [
+        0,
         3
       ],
       "TileIndex": 11,
