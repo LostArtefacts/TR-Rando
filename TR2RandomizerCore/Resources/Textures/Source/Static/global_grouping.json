@@ -181,6 +181,7 @@
       "Fire.Explosion",
       "Fire.Flame",
       "Hazards.Boulder",
+      "Inventory.Health",
       "Water",
       "Xian.Building",
       "Xian.Cracker",

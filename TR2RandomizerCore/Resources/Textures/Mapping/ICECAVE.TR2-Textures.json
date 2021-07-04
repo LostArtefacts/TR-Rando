@@ -105,7 +105,7 @@
       }
     }
   },
-    
+
   "Static": {
     "Enemies.Chicken": [
       {
@@ -693,6 +693,40 @@
         "X": 80,
         "Y": 120,
         "Clip": "8, 16, 8, 8"
+      }
+    ],
+
+    "Inventory.Health": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 146,
+        "Y": 85
+      },
+      {
+        "Segment": 1,
+        "Tile": 11,
+        "X": 40,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 11,
+        "X": 64,
+        "Y": 0,
+        "Clip": "0, 3, 8, 7"
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 26,
+        "Y": 17
+      },
+      {
+        "Segment": 3,
+        "Tile": 13,
+        "X": 89,
+        "Y": 11
       }
     ],
 

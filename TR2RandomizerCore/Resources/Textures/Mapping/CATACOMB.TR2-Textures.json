@@ -306,6 +306,40 @@
       }
     ],
 
+    "Inventory.Health": [
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 234,
+        "Y": 157
+      },
+      {
+        "Segment": 1,
+        "Tile": 10,
+        "X": 112,
+        "Y": 56
+      },
+      {
+        "Segment": 1,
+        "Tile": 10,
+        "X": 184,
+        "Y": 56,
+        "Clip": "0, 3, 8, 7"
+      },
+      {
+        "Segment": 2,
+        "Tile": 11,
+        "X": 26,
+        "Y": 199
+      },
+      {
+        "Segment": 3,
+        "Tile": 3,
+        "X": 17,
+        "Y": 219
+      }
+    ],
+
     "Lara.Bobble": [
       {
         "Segment": 0,
