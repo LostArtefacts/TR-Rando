@@ -1,6 +1,8 @@
 ﻿using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
+using TR2RandomizerView.Model;
+using System.Collections.Generic;
 
 namespace TR2RandomizerView.Controls
 {
@@ -12,42 +14,37 @@ namespace TR2RandomizerView.Controls
         #region Dependency Properties
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register
         (
-            "Title", typeof(string), typeof(ManagedSeedBoolControl)
+            nameof(Title), typeof(string), typeof(ManagedSeedBoolControl)
         );
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register
         (
-            "Text", typeof(string), typeof(ManagedSeedBoolControl)
+            nameof(Text), typeof(string), typeof(ManagedSeedBoolControl)
         );
 
         public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register
         (
-            "IsActive", typeof(bool), typeof(ManagedSeedBoolControl)
+            nameof(IsActive), typeof(bool), typeof(ManagedSeedBoolControl)
         );
 
         public static readonly DependencyProperty SeedValueProperty = DependencyProperty.Register
         (
-            "SeedValue", typeof(int), typeof(ManagedSeedBoolControl)
+            nameof(SeedValue), typeof(int), typeof(ManagedSeedBoolControl)
         );
 
         public static readonly DependencyProperty SeedMinValueProperty = DependencyProperty.Register
         (
-            "SeedMinValue", typeof(int), typeof(ManagedSeedBoolControl), new PropertyMetadata(1)
+            nameof(SeedMinValue), typeof(int), typeof(ManagedSeedBoolControl), new PropertyMetadata(1)
         );
 
         public static readonly DependencyProperty SeedMaxValueProperty = DependencyProperty.Register
         (
-            "SeedMaxValue", typeof(int), typeof(ManagedSeedBoolControl), new PropertyMetadata(int.MaxValue)
+            nameof(SeedMaxValue), typeof(int), typeof(ManagedSeedBoolControl), new PropertyMetadata(int.MaxValue)
         );
 
-        public static readonly DependencyProperty CustomBoolProperty = DependencyProperty.Register
+        public static readonly DependencyProperty BoolItemsSourceProperty = DependencyProperty.Register
         (
-            "CustomBool", typeof(bool), typeof(ManagedSeedBoolControl)
-        );
-
-        public static readonly DependencyProperty CustomBoolTitleProperty = DependencyProperty.Register
-        (
-            "CustomBoolTitle", typeof(string), typeof(ManagedSeedBoolControl)
+            nameof(BoolItemsSource), typeof(List<BoolItemControlClass>), typeof(ManagedSeedBoolControl)
         );
 
         public string Title
@@ -86,16 +83,10 @@ namespace TR2RandomizerView.Controls
             set => SetValue(SeedMaxValueProperty, value);
         }
 
-        public bool CustomBool
+        public List<BoolItemControlClass> BoolItemsSource
         {
-            get => (bool)GetValue(CustomBoolProperty);
-            set => SetValue(CustomBoolProperty, value);
-        }
-
-        public string CustomBoolTitle
-        {
-            get => (string)GetValue(CustomBoolTitleProperty);
-            set => SetValue(CustomBoolTitleProperty, value);
+            get => (List<BoolItemControlClass>)GetValue(BoolItemsSourceProperty);
+            set => SetValue(BoolItemsSourceProperty, value);
         }
         #endregion
 

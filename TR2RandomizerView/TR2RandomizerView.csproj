@@ -94,6 +94,7 @@
     </Compile>
     <Compile Include="Converters\BooleanAndConverter.cs" />
     <Compile Include="Events\EditorEventArgs.cs" />
+    <Compile Include="Model\BoolItemControlClass.cs" />
     <Compile Include="Model\ManagedSeedNumeric.cs" />
     <Compile Include="Model\ManagedSeedBool.cs" />
     <Compile Include="Model\ManagedSeed.cs" />

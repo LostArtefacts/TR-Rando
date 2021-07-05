@@ -81,7 +81,7 @@
             CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
 
-        <ctrl:ManagedSeedBoolBoolControl
+        <ctrl:ManagedSeedBoolControl
             Grid.Row="0"
             Grid.Column="1"
             IsActive="{Binding RandomizeSecrets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -90,10 +90,7 @@
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBool1="{Binding HardSecrets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle1="Enable hard secrets"
-            CustomBool2="{Binding GlitchedSecrets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle2="Enable glitched secrets"/>
+            BoolItemsSource="{Binding SecretBoolItemControls}"/>
 
         <ctrl:ManagedSeedBoolControl
             Grid.Row="1" 
@@ -104,15 +101,20 @@
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding ItemSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBool="{Binding IncludeKeyItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle="Enable key items"/>
+            BoolItemsSource="{Binding ItemBoolItemControls}"/>
 
-        <ctrl:EnemyControl
-            Grid.Row="2" 
+        <ctrl:ManagedSeedBoolControl
+            Grid.Row="2"
             Grid.Column="1"
-            IsActive="{Binding RandomizeEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            IsActive="{Binding RandomizeEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Enemies"
+            Text="Randomize the types of enemies you encounter in each level."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding EnemySeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            BoolItemsSource="{Binding EnemyBoolItemControls}"/>
 
-        <ctrl:ManagedSeedBoolBoolControl
+        <ctrl:ManagedSeedBoolControl
             Grid.Row="3"
             Grid.Column="1"
             IsActive="{Binding RandomizeTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -121,10 +123,7 @@
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding TextureSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBool1="{Binding PersistTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle1="Use persistent textures"
-            CustomBool2="{Binding RetainKeySpriteTextures, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle2="Use original key item textures"/>
+            BoolItemsSource="{Binding TextureBoolItemControls}"/>
 
         <ctrl:ManagedSeedControl
             Grid.Column="2"
@@ -144,10 +143,9 @@
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBool="{Binding RandomAudioTracksIncludeBlank, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle="Include blank tracks"/>
+            BoolItemsSource="{Binding AudioBoolItemControls}"/>
 
-        <ctrl:ManagedSeedBoolBoolControl
+        <ctrl:ManagedSeedBoolControl
             Grid.Row="2"
             Grid.Column="2"
             IsActive="{Binding RandomizeOutfits, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -156,10 +154,7 @@
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding OutfitSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBool1="{Binding PersistOutfits, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle1="Use persistent outfits"
-            CustomBool2="{Binding RandomlyCutHair, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomBoolTitle2="Give Lara haircuts"/>
+            BoolItemsSource="{Binding OutfitBoolItemControls}"/>
 
         <Border
             Grid.RowSpan="2"

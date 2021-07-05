@@ -37,12 +37,23 @@
             <StackPanel Grid.Row="2"
                         Orientation="Horizontal"
                         HorizontalAlignment="Left">
-                <CheckBox IsEnabled="{Binding IsActive}"
-                          IsChecked="{Binding CustomBool, Mode=TwoWay}"
-                          VerticalAlignment="Center">
-                    <Label Padding="0"
-                           Content="{Binding CustomBoolTitle}"/>
-                </CheckBox>
+                <ItemsControl ItemsSource="{Binding BoolItemsSource, Mode=TwoWay}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left"
+                                        Margin="0,5,0,0">
+                                <CheckBox IsEnabled="{Binding IsActive}"
+                                          IsChecked="{Binding Value, Mode=TwoWay}"
+                                          VerticalAlignment="Center"
+                                          ToolTip="{Binding Description}">
+                                    <Label Padding="0"
+                                           Content="{Binding Title}" />
+                                </CheckBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
 
             <StackPanel Grid.Row="2"
