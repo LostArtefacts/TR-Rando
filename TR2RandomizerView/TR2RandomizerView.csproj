@@ -89,6 +89,7 @@
     <Compile Include="Controls\SeedControl.xaml.cs">
       <DependentUpon>SeedControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BindingProxy.cs" />
     <Compile Include="Converters\BooleanAndConverter.cs" />
     <Compile Include="Events\EditorEventArgs.cs" />
     <Compile Include="Model\BoolItemControlClass.cs" />

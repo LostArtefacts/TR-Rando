@@ -1,14 +1,18 @@
 ﻿<UserControl x:Class="TR2RandomizerView.Controls.EditorControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:cmds="clr-namespace:TR2RandomizerView.Commands"
              xmlns:ctrl="clr-namespace:TR2RandomizerView.Controls"
-             mc:Ignorable="d" 
+             xmlns:cvt="clr-namespace:TR2RandomizerView.Converters"
+             xmlns:windows="clr-namespace:TR2RandomizerView.Windows"
+             mc:Ignorable="d"
              Background="#fff"
-             AllowDrop="True" Drop="EditorControl_Drop"
-             d:DesignHeight="700" d:DesignWidth="1200">
+             AllowDrop="True"
+             Drop="EditorControl_Drop"
+             d:DesignHeight="700"
+             d:DesignWidth="1200">
 
     <Grid x:Name="_editorGrid">
         <Grid.RowDefinitions>
@@ -103,7 +107,7 @@
             SeedValue="{Binding ItemSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             BoolItemsSource="{Binding ItemBoolItemControls}"/>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedAdvancedControl
             Grid.Row="2"
             Grid.Column="1"
             IsActive="{Binding RandomizeEnemies, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -111,8 +115,17 @@
             Text="Randomize the types of enemies you encounter in each level."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding EnemySeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            BoolItemsSource="{Binding EnemyBoolItemControls}"/>
+            SeedValue="{Binding EnemySeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Enemies (Advanced)"
+                                        MainDescription="Customize the enemy randomization."
+                                        BoolItemsSource="{Binding Data.EnemyBoolItemControls, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
 
         <ctrl:ManagedSeedBoolControl
             Grid.Row="3"
