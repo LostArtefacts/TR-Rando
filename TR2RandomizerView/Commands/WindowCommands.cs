@@ -49,5 +49,8 @@ namespace TR2RandomizerView.Commands
         public static readonly RoutedUICommand Discord = new RoutedUICommand();
         public static readonly RoutedUICommand CheckForUpdate = new RoutedUICommand();
         public static readonly RoutedUICommand About = new RoutedUICommand();
+
+        // Other
+        public static readonly RoutedUICommand OpenAdvancedWindowCommand = new RoutedUICommand();
     }
 }
