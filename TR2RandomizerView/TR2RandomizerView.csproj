@@ -71,11 +71,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\EnemyControl.xaml.cs">
-      <DependentUpon>EnemyControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ManagedSeedBoolBoolControl.xaml.cs">
-      <DependentUpon>ManagedSeedBoolBoolControl.xaml</DependentUpon>
+    <Compile Include="Controls\ManagedSeedAdvancedControl.xaml.cs">
+      <DependentUpon>ManagedSeedAdvancedControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ManagedSeedBoolControl.xaml.cs">
       <DependentUpon>ManagedSeedBoolControl.xaml</DependentUpon>
@@ -92,7 +89,10 @@
     <Compile Include="Controls\SeedControl.xaml.cs">
       <DependentUpon>SeedControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BindingProxy.cs" />
+    <Compile Include="Converters\BooleanAndConverter.cs" />
     <Compile Include="Events\EditorEventArgs.cs" />
+    <Compile Include="Model\BoolItemControlClass.cs" />
     <Compile Include="Model\ManagedSeedNumeric.cs" />
     <Compile Include="Model\ManagedSeedBool.cs" />
     <Compile Include="Model\ManagedSeed.cs" />
@@ -101,6 +101,9 @@
     <Compile Include="Updates\Update.cs" />
     <Compile Include="Updates\UpdateChecker.cs" />
     <Compile Include="Updates\UpdateEventArgs.cs" />
+    <Compile Include="Windows\AdvancedWindow.xaml.cs">
+      <DependentUpon>AdvancedWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\GlobalSeedWindow.xaml.cs">
       <DependentUpon>GlobalSeedWindow.xaml</DependentUpon>
     </Compile>
@@ -123,17 +126,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\EnemyControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\FolderLoadControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ManagedSeedBoolBoolControl.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Controls\ManagedSeedAdvancedControl.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ManagedSeedBoolControl.xaml">
       <SubType>Designer</SubType>
@@ -158,6 +157,10 @@
     <Page Include="Windows\AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AdvancedWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\GlobalSeedWindow.xaml">
       <SubType>Designer</SubType>

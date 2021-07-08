@@ -69,19 +69,19 @@ namespace TR2RandomizerView.Model
             }
 
             BuildRandoString(_tracksID, controller.RandomizeAudioTracks, controller.AudioTracksSeed, seeds, sb);
-            if (controller.RandomizeAudioTracks && controller.RandomAudioTracksIncludeBlank)
+            if (controller.RandomizeAudioTracks && controller.IncludeBlankTracks.Value)
             {
                 sb.Append(_boolID);
             }
 
             BuildRandoString(_itemsID, controller.RandomizeItems, controller.ItemSeed, seeds, sb);
-            if (controller.RandomizeItems && controller.IncludeKeyItems)
+            if (controller.RandomizeItems && controller.IncludeKeyItems.Value)
             {
                 sb.Append(_boolID);
             }
             BuildRandoString(_enemiesID, controller.RandomizeEnemies, controller.EnemySeed, seeds, sb);
             BuildRandoString(_secretsID, controller.RandomizeSecrets, controller.SecretSeed, seeds, sb);
-            if (controller.RandomizeSecrets && controller.HardSecrets)
+            if (controller.RandomizeSecrets && controller.IsHardSecrets.Value)
             {
                 sb.Append(_boolID);
             }
@@ -308,9 +308,9 @@ namespace TR2RandomizerView.Model
             if (ammolessLevelCount > 0) controller.AmmolessLevelCount = (uint)ammolessLevelCount;
             if (sunsetCount > 0) controller.SunsetCount = (uint)sunsetCount;
 
-            controller.RandomAudioTracksIncludeBlank = blankTracks;
-            controller.HardSecrets = hardSecrets;
-            controller.IncludeKeyItems = includeKeyItems;
+            controller.IncludeBlankTracks.Value = blankTracks;
+            controller.IsHardSecrets.Value = hardSecrets;
+            controller.IncludeKeyItems.Value = includeKeyItems;
         }
     }
 }
