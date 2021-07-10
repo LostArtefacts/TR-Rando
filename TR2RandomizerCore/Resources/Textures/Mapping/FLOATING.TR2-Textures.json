@@ -588,6 +588,15 @@
       }
     ],
 
+    "Inventory.Background": [
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 64,
+        "Y": 64
+      }
+    ],
+
     "Inventory.Health": [
       {
         "Segment": 0,
@@ -619,6 +628,15 @@
         "Tile": 14,
         "X": 17,
         "Y": 51
+      }
+    ],
+
+    "Inventory.Passport": [
+      {
+        "Segment": 0,
+        "Tile": 7,
+        "X": 128,
+        "Y": 128
       }
     ],
 
@@ -1291,21 +1309,6 @@
         "Tile": 13,
         "X": 104,
         "Y": 104
-      }
-    ],
-
-    "Xian.Misc": [
-      {
-        "Segment": 0,
-        "Tile": 7,
-        "X": 128,
-        "Y": 128
-      },
-      {
-        "Segment": 1,
-        "Tile": 8,
-        "X": 64,
-        "Y": 64
       }
     ],
 

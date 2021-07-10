@@ -432,6 +432,15 @@
       }
     ],
 
+    "Inventory.Background": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 64,
+        "Y": 160
+      }
+    ],
+
     "Inventory.Health": [
       {
         "Segment": 0,
@@ -463,6 +472,15 @@
         "Tile": 14,
         "X": 207,
         "Y": 107
+      }
+    ],
+
+    "Inventory.Passport": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 0,
+        "Y": 0
       }
     ],
 
