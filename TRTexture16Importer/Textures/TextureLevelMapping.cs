@@ -161,7 +161,7 @@ namespace TRTexture16Importer.Textures
             }
             else if (source is StaticTextureSource staticSource)
             {
-                RedrawStaticTargets(staticSource, variant);
+                RedrawStaticTargets(staticSource, variant, includeOptionalTargets);
             }
         }
 
@@ -190,8 +190,13 @@ namespace TRTexture16Importer.Textures
             }
         }
 
-        public void RedrawStaticTargets(StaticTextureSource source, string variant)
+        public void RedrawStaticTargets(StaticTextureSource source, string variant, bool includeOptionalTargets)
         {
+            if (source.IsOptional && !includeOptionalTargets)
+            {
+                return;
+            }
+
             // For sprite sequence sources, the targets are mapped dynamically.
             if (source.IsSpriteSequence && (!StaticMapping.ContainsKey(source) || StaticMapping[source].Count == 0))
             {

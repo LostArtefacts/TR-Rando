@@ -687,6 +687,72 @@
       }
     ],
 
+    "Offshore.Keycard.Keycard1": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 176,
+        "Y": 168
+      },
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 5,
+        "Y": 221
+      },
+      {
+        "Segment": 2,
+        "Tile": 1,
+        "X": 160,
+        "Y": 208,
+        "Clear": true
+      }
+    ],
+
+    "Offshore.Keycard.Keycard2": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 48,
+        "Y": 192
+      },
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 101,
+        "Y": 221
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 0,
+        "Y": 149,
+        "Clear": true
+      }
+    ],
+
+    "Offshore.Keycard.Keycard3": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 144,
+        "Y": 200
+      },
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 197,
+        "Y": 229
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 207,
+        "Y": 157,
+        "Clear": true
+      }
+    ],
+
     "Offshore.Plane": [
       {
         "Segment": 0,

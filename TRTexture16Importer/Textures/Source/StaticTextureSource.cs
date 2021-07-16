@@ -9,6 +9,7 @@ namespace TRTexture16Importer.Textures.Source
     public class StaticTextureSource : AbstractTextureSource, IDisposable
     {
         public string PNGPath { get; set; }
+        public bool IsOptional { get; set; }
         public TR2Entities SpriteSequence { get; set; }
         public bool IsSpriteSequence => SpriteSequence != TR2Entities.Lara;
         public Dictionary<TR2Entities, Dictionary<Color, int>> EntityColourMap { get; set; }

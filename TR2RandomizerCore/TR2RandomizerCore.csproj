@@ -626,6 +626,18 @@
     <None Include="Resources\Textures\Source\Static\Offshore\Cordon\Data.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Static\Offshore\Keycard\Keycard1\Data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Static\Offshore\Keycard\Keycard2\Data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Static\Offshore\Keycard\Keycard3\Data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Static\Offshore\Keycard\Keycard4\Data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Source\Static\Offshore\Plane\Data.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1152,6 +1164,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Static\Offshore\Cordon\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Static\Offshore\Keycard\Keycard1\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Static\Offshore\Keycard\Keycard2\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Static\Offshore\Keycard\Keycard3\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Static\Offshore\Keycard\Keycard4\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Static\Offshore\Plane\Segments.png">
