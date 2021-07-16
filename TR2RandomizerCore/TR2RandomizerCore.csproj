@@ -65,6 +65,7 @@
     <Compile Include="Processors\LevelProcessor.cs" />
     <Compile Include="Processors\AbstractProcessorThread.cs" />
     <Compile Include="Randomizers\EnemyRandomizer.cs" />
+    <Compile Include="Randomizers\GameStringRandomizer.cs" />
     <Compile Include="Randomizers\OutfitRandomizer.cs" />
     <Compile Include="Randomizers\TR2LevelRandomizer.cs" />
     <Compile Include="TR2RandomizerController.cs" />
@@ -110,6 +111,10 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\enemy_restrictions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Strings\defaults.json" />
+    <None Include="Resources\Strings\gamestrings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\item_locations.json">

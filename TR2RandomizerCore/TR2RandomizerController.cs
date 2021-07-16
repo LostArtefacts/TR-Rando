@@ -312,6 +312,24 @@ namespace TR2RandomizerCore
             get => LevelRandomizer.OutfitSeed;
             set => LevelRandomizer.OutfitSeed = value;
         }
+
+        public bool RandomizeGameStrings
+        {
+            get => LevelRandomizer.RandomizeGameStrings;
+            set => LevelRandomizer.RandomizeGameStrings = value;
+        }
+
+        public bool RetainKeyItemNames
+        {
+            get => LevelRandomizer.RetainKeyItemNames;
+            set => LevelRandomizer.RetainKeyItemNames = value;
+        }
+
+        public int GameStringsSeed
+        {
+            get => LevelRandomizer.GameStringsSeed;
+            set => LevelRandomizer.GameStringsSeed = value;
+        }
         #endregion
 
         #region TREditor Passthrough

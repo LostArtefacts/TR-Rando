@@ -15,12 +15,14 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RandomizeEnemies { get; set; }
         internal bool RandomizeTextures { get; set; }
         internal bool RandomizeOutfits { get; set; }
+        internal bool RandomizeGameStrings { get; set; }
 
         internal int SecretSeed { get; set; }
         internal int ItemSeed { get; set; }
         internal int EnemySeed { get; set; }
         internal int TextureSeed { get; set; }
         internal int OutfitSeed { get; set; }
+        internal int GameStringsSeed { get; set; }
 
         internal bool HardSecrets { get; set; }
         internal bool IncludeKeyItems { get; set; }
@@ -33,6 +35,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool GlitchedSecrets { get; set; }
         internal bool PersistOutfits { get; set; }
         internal bool RandomlyCutHair { get; set; }
+        internal bool RetainKeyItemNames { get; set; }
         internal bool AutoLaunchGame { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
@@ -69,6 +72,10 @@ namespace TR2RandomizerCore.Randomizers
             PersistOutfits = config.GetBool(nameof(PersistOutfits));
             RandomlyCutHair = config.GetBool(nameof(RandomlyCutHair));
 
+            RandomizeGameStrings = config.GetBool(nameof(RandomizeGameStrings));
+            GameStringsSeed = config.GetInt(nameof(GameStringsSeed), defaultSeed);
+            RetainKeyItemNames = config.GetBool(nameof(RetainKeyItemNames));
+
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
         }
@@ -100,8 +107,29 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(PersistOutfits)] = PersistOutfits;
             config[nameof(RandomlyCutHair)] = RandomlyCutHair;
 
+            config[nameof(RandomizeGameStrings)] = RandomizeGameStrings;
+            config[nameof(GameStringsSeed)] = GameStringsSeed;
+            config[nameof(RetainKeyItemNames)] = RetainKeyItemNames;
+
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
+        }
+
+        /// <summary>
+        /// This is called before the script data is saved so gives us an opportunity to 
+        /// customise the script outwith TRGE before the main SaveImpl.
+        /// </summary>
+        protected override void PreSaveImpl(AbstractTRScriptEditor scriptEditor)
+        {
+            if (RandomizeGameStrings)
+            {
+                GameStringRandomizer stringRandomizer = new GameStringRandomizer
+                {
+                    ScriptEditor = scriptEditor as TR23ScriptEditor,
+                    RetainKeyItemNames = RetainKeyItemNames
+                };
+                stringRandomizer.Randomize(GameStringsSeed);
+            }
         }
 
         protected override int GetSaveTarget(int numLevels)
