@@ -169,6 +169,17 @@
             SeedValue="{Binding OutfitSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             BoolItemsSource="{Binding OutfitBoolItemControls}"/>
 
+        <ctrl:ManagedSeedBoolControl
+            Grid.Row="3"
+            Grid.Column="2"
+            IsActive="{Binding RandomizeText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Game Text"
+            Text="Randomize in-game text, such as weapons and level names."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding TextSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            BoolItemsSource="{Binding TextBoolItemControls}"/>
+
         <Border
             Grid.RowSpan="2"
             Grid.Column="3"

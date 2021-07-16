@@ -36,7 +36,8 @@
 
             <StackPanel Grid.Row="2"
                         Orientation="Horizontal"
-                        HorizontalAlignment="Left">
+                        HorizontalAlignment="Left"
+                        Margin="0,0,0,3">
                 <ItemsControl ItemsSource="{Binding BoolItemsSource, Mode=TwoWay}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -59,7 +60,8 @@
             <StackPanel Grid.Row="2"
                         Grid.Column="1"
                         Orientation="Horizontal"
-                        HorizontalAlignment="Right">
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom">
                 <Label IsEnabled="{Binding IsActive}"
                        Content="Seed"
                        VerticalAlignment="Center"
