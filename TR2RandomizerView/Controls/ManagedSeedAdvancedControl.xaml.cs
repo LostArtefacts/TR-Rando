@@ -3,48 +3,51 @@ using System.Windows;
 using System.Windows.Controls;
 using TR2RandomizerView.Model;
 using System.Collections.Generic;
+using System.Windows.Input;
+using TR2RandomizerView.Windows;
+using TR2RandomizerView.Utilities;
 
 namespace TR2RandomizerView.Controls
 {
     /// <summary>
-    /// Interaction logic for ManagedSeedBoolControl.xaml
+    /// Interaction logic for ManagedSeedAdvancedControl.xaml
     /// </summary>
-    public partial class ManagedSeedBoolControl : UserControl
+    public partial class ManagedSeedAdvancedControl : UserControl
     {
         #region Dependency Properties
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register
         (
-            nameof(Title), typeof(string), typeof(ManagedSeedBoolControl)
+            nameof(Title), typeof(string), typeof(ManagedSeedAdvancedControl)
         );
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register
         (
-            nameof(Text), typeof(string), typeof(ManagedSeedBoolControl)
+            nameof(Text), typeof(string), typeof(ManagedSeedAdvancedControl)
         );
 
         public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register
         (
-            nameof(IsActive), typeof(bool), typeof(ManagedSeedBoolControl)
+            nameof(IsActive), typeof(bool), typeof(ManagedSeedAdvancedControl)
         );
 
         public static readonly DependencyProperty SeedValueProperty = DependencyProperty.Register
         (
-            nameof(SeedValue), typeof(int), typeof(ManagedSeedBoolControl)
+            nameof(SeedValue), typeof(int), typeof(ManagedSeedAdvancedControl)
         );
 
         public static readonly DependencyProperty SeedMinValueProperty = DependencyProperty.Register
         (
-            nameof(SeedMinValue), typeof(int), typeof(ManagedSeedBoolControl), new PropertyMetadata(1)
+            nameof(SeedMinValue), typeof(int), typeof(ManagedSeedAdvancedControl), new PropertyMetadata(1)
         );
 
         public static readonly DependencyProperty SeedMaxValueProperty = DependencyProperty.Register
         (
-            nameof(SeedMaxValue), typeof(int), typeof(ManagedSeedBoolControl), new PropertyMetadata(int.MaxValue)
+            nameof(SeedMaxValue), typeof(int), typeof(ManagedSeedAdvancedControl), new PropertyMetadata(int.MaxValue)
         );
 
-        public static readonly DependencyProperty BoolItemsSourceProperty = DependencyProperty.Register
+        public static readonly DependencyProperty AdvancedWindowToOpenProperty = DependencyProperty.Register
         (
-            nameof(BoolItemsSource), typeof(List<BoolItemControlClass>), typeof(ManagedSeedBoolControl)
+            nameof(AdvancedWindowToOpen), typeof(AdvancedWindow), typeof(ManagedSeedAdvancedControl)
         );
 
         public string Title
@@ -83,17 +86,32 @@ namespace TR2RandomizerView.Controls
             set => SetValue(SeedMaxValueProperty, value);
         }
 
-        public List<BoolItemControlClass> BoolItemsSource
+        public AdvancedWindow AdvancedWindowToOpen
         {
-            get => (List<BoolItemControlClass>)GetValue(BoolItemsSourceProperty);
-            set => SetValue(BoolItemsSourceProperty, value);
+            get => (AdvancedWindow)GetValue(AdvancedWindowToOpenProperty);
+            set => SetValue(AdvancedWindowToOpenProperty, value);
         }
         #endregion
 
-        public ManagedSeedBoolControl()
+        public ManagedSeedAdvancedControl()
         {
             InitializeComponent();
             _content.DataContext = this;
+        }
+
+        private void AdvancedWindowCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;// IsEditorActive && _editorControl.CanRandomize();
+        }
+
+        private void AdvancedWindowCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (AdvancedWindowToOpen.Owner == null)
+                AdvancedWindowToOpen.Owner = WindowUtils.GetActiveWindow(AdvancedWindowToOpen);
+            if (AdvancedWindowToOpen.ShowDialog() ?? false)
+            {
+
+            }
         }
     }
 }
