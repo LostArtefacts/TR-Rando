@@ -88,9 +88,9 @@ namespace TR2RandomizerCore.Randomizers
             _haircutLevels = new List<string>();
             if (RandomlyCutHair)
             {
-                // None, some, or all. We don't use Levels.Count+1 here as the Assault Course 
+                // One, some, or all. We don't use Levels.Count+1 here as the Assault Course 
                 // doesn't work for now (missing gunflare texture used for transparency).
-                int numLevels = _generator.Next(0, Levels.Count);
+                int numLevels = _generator.Next(1, Levels.Count);
                 while (_haircutLevels.Count < numLevels)
                 {
                     TR23ScriptedLevel level = Levels[_generator.Next(0, Levels.Count)];
@@ -177,18 +177,18 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         if (Import(level, lara))
                         {
-                            if (_outer.IsHaircutLevel(level.Name))
-                            {
-                                CutHair(level);
-                            }
-
                             // Apply any necessary tweaks to the outfit
-                            AdjustOutfit(level, lara);
-                            
-                            _outer.SaveLevel(level.Data, level.Name);
+                            AdjustOutfit(level, lara);   
                             break;
                         }
                     }
+
+                    if (_outer.IsHaircutLevel(level.Name))
+                    {
+                        CutHair(level);
+                    }
+
+                    _outer.SaveLevel(level.Data, level.Name);
 
                     if (!_outer.TriggerProgress())
                     {

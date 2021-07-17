@@ -54,12 +54,12 @@ namespace TR2RandomizerCore.Randomizers
 
             RandomizeItems = config.GetBool(nameof(RandomizeItems));
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
-            IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems));
+            IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
 
             RandomizeEnemies = config.GetBool(nameof(RandomizeEnemies));
             EnemySeed = config.GetInt(nameof(EnemySeed), defaultSeed);
-            CrossLevelEnemies = config.GetBool(nameof(CrossLevelEnemies));
-            ProtectMonks = config.GetBool(nameof(ProtectMonks));
+            CrossLevelEnemies = config.GetBool(nameof(CrossLevelEnemies), true);
+            ProtectMonks = config.GetBool(nameof(ProtectMonks), true);
             DocileBirdMonsters = config.GetBool(nameof(DocileBirdMonsters));
 
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
@@ -70,7 +70,7 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits));
             OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
             PersistOutfits = config.GetBool(nameof(PersistOutfits));
-            RandomlyCutHair = config.GetBool(nameof(RandomlyCutHair));
+            RandomlyCutHair = config.GetBool(nameof(RandomlyCutHair), true);
 
             RandomizeGameStrings = config.GetBool(nameof(RandomizeGameStrings));
             GameStringsSeed = config.GetInt(nameof(GameStringsSeed), defaultSeed);
