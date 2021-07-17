@@ -22,7 +22,7 @@ namespace TR2RandomizerView.Model
         private BoolItemControlClass _isHardSecrets, _allowGlitched;
         private BoolItemControlClass _includeKeyItems;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileBirdMonsters;
-        private BoolItemControlClass _persistTextures, _retainKeySpriteTextures;
+        private BoolItemControlClass _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _includeBlankTracks;
         private BoolItemControlClass _persistOutfits, _randomlyCutHair;
         private BoolItemControlClass _retainKeyItemNames;
@@ -488,6 +488,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RetainSecretSpriteTextures
+        {
+            get => _retainSecretSpriteTextures;
+            set
+            {
+                _retainSecretSpriteTextures = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool AutoLaunchGame
         {
             get => _autoLaunchGame;
@@ -652,6 +662,12 @@ namespace TR2RandomizerView.Model
                 Description = "Texture mapping will not apply to key items."
             };
             BindingOperations.SetBinding(RetainKeySpriteTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
+            RetainSecretSpriteTextures = new BoolItemControlClass
+            {
+                Title = "Use original secret item textures",
+                Description = "Texture mapping will not apply to secrets."
+            };
+            BindingOperations.SetBinding(RetainSecretSpriteTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
 
             // Audio
             Binding randomizeAudioBinding = new Binding(nameof(RandomizeAudioTracks)) { Source = this };
@@ -701,7 +717,7 @@ namespace TR2RandomizerView.Model
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
-                _persistTextures, _retainKeySpriteTextures,
+                _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
             };
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -765,6 +781,7 @@ namespace TR2RandomizerView.Model
             TextureSeed = _controller.TextureSeed;
             PersistTextures.Value = _controller.PersistTextures;
             RetainKeySpriteTextures.Value = _controller.RetainKeySpriteTextures;
+            RetainSecretSpriteTextures.Value = _controller.RetainSecretSpriteTextures;
 
             RandomizeOutfits = _controller.RandomizeOutfits;
             OutfitSeed = _controller.OutfitSeed;
@@ -951,6 +968,7 @@ namespace TR2RandomizerView.Model
             _controller.TextureSeed = TextureSeed;
             _controller.PersistTextures = PersistTextures.Value;
             _controller.RetainKeySpriteTextures = RetainKeySpriteTextures.Value;
+            _controller.RetainSecretSpriteTextures = RetainSecretSpriteTextures.Value;
 
             _controller.RandomizeOutfits = RandomizeOutfits;
             _controller.OutfitSeed = OutfitSeed;
