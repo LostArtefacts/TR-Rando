@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -56,18 +57,18 @@ namespace TRTexture16Importer.Textures
             // Read the dynamic mapping - this holds object and sprite texture indices for the level to which we will apply an HSB operation
             if (rootMapping.ContainsKey("Dynamic"))
             {
-                SortedDictionary<string, Dictionary<string, Dictionary<int, List<Rectangle>>>> mapping = JsonConvert.DeserializeObject<SortedDictionary<string, Dictionary<string, Dictionary<int, List<Rectangle>>>>>(rootMapping["Dynamic"].ToString());
+                SortedDictionary<string, Dictionary<string, object>> mapping = JsonConvert.DeserializeObject<SortedDictionary<string, Dictionary<string, object>>>(rootMapping["Dynamic"].ToString());
                 foreach (string sourceName in mapping.Keys)
                 {
                     DynamicTextureSource source = database.GetDynamicSource(sourceName);
                     DynamicTextureTarget target = new DynamicTextureTarget
                     {
-                        DefaultTileTargets = mapping[sourceName]["Default"]
+                        DefaultTileTargets = JsonConvert.DeserializeObject<Dictionary<int, List<Rectangle>>>(mapping[sourceName]["Default"].ToString())
                     };
 
                     if (mapping[sourceName].ContainsKey("Optional"))
                     {
-                        target.OptionalTileTargets = mapping[sourceName]["Optional"];
+                        target.OptionalTileTargets = JsonConvert.DeserializeObject<Dictionary<TextureCategory, Dictionary<int, List<Rectangle>>>>(mapping[sourceName]["Optional"].ToString());
                     }
 
                     dynamicMapping[source] = target;
@@ -128,6 +129,17 @@ namespace TRTexture16Importer.Textures
                 }
             }
 
+            // Add global sources, unless they are already defined. These tend to be sprite sequences
+            // so they will be mapped per GenerateSpriteSequenceTargets, but there is also scope to
+            // define global targets if relevant.
+            foreach (StaticTextureSource source in database.GlobalGrouping.Sources.Keys)
+            {
+                if (!staticMapping.ContainsKey(source))
+                {
+                    staticMapping[source] = new List<StaticTextureTarget>(database.GlobalGrouping.Sources[source]);
+                }
+            }
+
             // Apply grouping to what has been selected as source elements
             List<TextureGrouping> staticGrouping = database.GlobalGrouping.GetGrouping(staticMapping.Keys);
 
@@ -141,28 +153,31 @@ namespace TRTexture16Importer.Textures
             };
         }
 
-        public void RedrawTargets(AbstractTextureSource source, string variant, bool includeOptionalTargets)
+        public void RedrawTargets(AbstractTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
         {
             if (source is DynamicTextureSource dynamicSource)
             {
-                RedrawDynamicTargets(dynamicSource, variant, includeOptionalTargets);
+                RedrawDynamicTargets(dynamicSource, variant, options);
             }
             else if (source is StaticTextureSource staticSource)
             {
-                RedrawStaticTargets(staticSource, variant);
+                RedrawStaticTargets(staticSource, variant, options);
             }
         }
 
-        public void RedrawDynamicTargets(DynamicTextureSource source, string variant, bool includeOptionalTargets)
+        public void RedrawDynamicTargets(DynamicTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
         {
             HSBOperation op = source.OperationMap[variant];
             DynamicTextureTarget target = DynamicMapping[source];
 
             RedrawDynamicTargets(target.DefaultTileTargets, op);
 
-            if (includeOptionalTargets)
+            foreach (TextureCategory category in target.OptionalTileTargets.Keys)
             {
-                RedrawDynamicTargets(target.OptionalTileTargets, op);
+                if (options.ContainsKey(category) && options[category])
+                {
+                    RedrawDynamicTargets(target.OptionalTileTargets[category], op);
+                }
             }
         }
 
@@ -178,8 +193,26 @@ namespace TRTexture16Importer.Textures
             }
         }
 
-        public void RedrawStaticTargets(StaticTextureSource source, string variant)
+        public void RedrawStaticTargets(StaticTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
         {
+            if (source.Categories != null)
+            {
+                // Exclude it if any of its categories are in the options and switched off
+                foreach (TextureCategory category in source.Categories)
+                {
+                    if (options.ContainsKey(category) && !options[category])
+                    {
+                        return;
+                    }
+                }
+            }
+
+            // For sprite sequence sources, the targets are mapped dynamically.
+            if (source.IsSpriteSequence && (!StaticMapping.ContainsKey(source) || StaticMapping[source].Count == 0))
+            {
+                GenerateSpriteSequenceTargets(source);
+            }
+
             // This can happen if we have a source grouped for this level,
             // but the source is actually only in place on certain conditions
             // - an example is the flame in Venice, which is only added if
@@ -258,6 +291,39 @@ namespace TRTexture16Importer.Textures
 
                 // Reset the palette tracking 
                 P16Importer.ResetPaletteTracking(_level);
+            }
+        }
+
+        private void GenerateSpriteSequenceTargets(StaticTextureSource source)
+        {
+            if (!source.HasVariants)
+            {
+                throw new ArgumentException(string.Format("SpriteSequence {0} cannot be dynamically mapped without at least one source rectangle.", source.SpriteSequence));
+            }
+
+            int i = _level.SpriteSequences.ToList().FindIndex(s => s.SpriteID == (int)source.SpriteSequence);
+            if (i == -1)
+            {
+                return;
+            }
+
+            TRSpriteSequence sequence = _level.SpriteSequences[i];
+            StaticMapping[source] = new List<StaticTextureTarget>();
+
+            // An assumption is made here that each variant in the source will have the same number
+            // of rectangles. We only want to define targets for the number of source rectangles, rather
+            // than the total number of sprites.
+            int numTargets = source.VariantMap[source.Variants[0]].Count;
+            for (int j = 0; j < numTargets; j++)
+            {
+                TRSpriteTexture sprite = _level.SpriteTextures[sequence.Offset + j];
+                StaticMapping[source].Add(new StaticTextureTarget
+                {
+                    Segment = j,
+                    Tile = sprite.Atlas,
+                    X = sprite.X,
+                    Y = sprite.Y
+                });
             }
         }
 

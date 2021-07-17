@@ -462,6 +462,58 @@
       }
     ],
 
+    "Inventory.Background": [
+      {
+        "Segment": 0,
+        "Tile": 5,
+        "X": 0,
+        "Y": 128
+      }
+    ],
+
+    "Inventory.Health": [
+      {
+        "Segment": 0,
+        "Tile": 12,
+        "X": 90,
+        "Y": 53
+      },
+      {
+        "Segment": 1,
+        "Tile": 13,
+        "X": 152,
+        "Y": 232
+      },
+      {
+        "Segment": 1,
+        "Tile": 13,
+        "X": 152,
+        "Y": 216,
+        "Clip": "0, 3, 8, 7"
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 26,
+        "Y": 105
+      },
+      {
+        "Segment": 3,
+        "Tile": 9,
+        "X": 89,
+        "Y": 99
+      }
+    ],
+
+    "Inventory.Passport": [
+      {
+        "Segment": 0,
+        "Tile": 0,
+        "X": 88,
+        "Y": 0
+      }
+    ],
+
     "Lara.Bobble": [
       {
         "Segment": 0,

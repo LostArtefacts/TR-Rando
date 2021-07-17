@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using TRLevelReader.Model.Enums;
+using TRTexture16Importer.Textures.Grouping;
 
 namespace TRTexture16Importer.Textures.Source
 {
     public class StaticTextureSource : AbstractTextureSource, IDisposable
     {
         public string PNGPath { get; set; }
+        public TextureCategory[] Categories { get; set; }
+        public TR2Entities SpriteSequence { get; set; }
+        public bool IsSpriteSequence => SpriteSequence != TR2Entities.Lara;
         public Dictionary<TR2Entities, Dictionary<Color, int>> EntityColourMap { get; set; }
         public Dictionary<TR2Entities, Dictionary<int, int>> EntityTextureMap { get; set; }
         public IEnumerable<TR2Entities> ColourEntities => EntityColourMap?.Keys;

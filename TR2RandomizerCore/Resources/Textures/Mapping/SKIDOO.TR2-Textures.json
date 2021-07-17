@@ -31,9 +31,11 @@
         ]
       },
       "Optional": {
-        "3": [
-          "224, 143, 30, 16"
-        ]
+        "0": {
+          "3": [
+            "224, 143, 30, 16"
+          ]
+        }
       }
     }
   },
@@ -162,6 +164,58 @@
         "Tile": 9,
         "X": 120,
         "Y": 16
+      }
+    ],
+
+    "Inventory.Background": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 0,
+        "Y": 96
+      }
+    ],
+
+    "Inventory.Health": [
+      {
+        "Segment": 0,
+        "Tile": 7,
+        "X": 234,
+        "Y": 5
+      },
+      {
+        "Segment": 1,
+        "Tile": 9,
+        "X": 104,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 9,
+        "X": 128,
+        "Y": 0,
+        "Clip": "0, 3, 8, 7"
+      },
+      {
+        "Segment": 2,
+        "Tile": 10,
+        "X": 26,
+        "Y": 215
+      },
+      {
+        "Segment": 3,
+        "Tile": 9,
+        "X": 17,
+        "Y": 219
+      }
+    ],
+
+    "Inventory.Passport": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 0,
+        "Y": 0
       }
     ],
 
@@ -333,6 +387,30 @@
         "Tile": 7,
         "X": 0,
         "Y": 168
+      }
+    ],
+
+    "Secrets": [
+      {
+        "Segment": 0,
+        "Tile": 10,
+        "X": 199,
+        "Y": 202,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 10,
+        "X": 188,
+        "Y": 151,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 10,
+        "X": 155,
+        "Y": 202,
+        "Clear": true
       }
     ],
 

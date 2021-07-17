@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using TR2RandomizerCore;
-using TR2RandomizerView.Converters;
 
 namespace TR2RandomizerView.Model
 {
@@ -16,18 +15,19 @@ namespace TR2RandomizerView.Model
         private readonly ManagedSeedNumeric _levelSequencingControl, _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl;
         private readonly ManagedSeedBool _audioTrackControl;
 
-        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl;
+        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl, _randomTextControl;
 
         private bool _disableDemos, _autoLaunchGame;
 
         private BoolItemControlClass _isHardSecrets, _allowGlitched;
         private BoolItemControlClass _includeKeyItems;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileBirdMonsters;
-        private BoolItemControlClass _persistTextures, _retainKeySpriteTextures;
+        private BoolItemControlClass _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _includeBlankTracks;
         private BoolItemControlClass _persistOutfits, _randomlyCutHair;
+        private BoolItemControlClass _retainKeyItemNames;
 
-        private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls;
+        private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls;
 
         private int _levelCount, _maximumLevelCount;
 
@@ -62,7 +62,7 @@ namespace TR2RandomizerView.Model
         public bool RandomizationPossible
         {
             get => RandomizeLevelSequencing || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeSunsets ||
-                   RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits;
+                   RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits || RandomizeText;
         }
 
         public bool RandomizeLevelSequencing
@@ -397,6 +397,36 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool RandomizeText
+        {
+            get => _randomTextControl.IsActive;
+            set
+            {
+                _randomTextControl.IsActive = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int TextSeed
+        {
+            get => _randomTextControl.Seed;
+            set
+            {
+                _randomTextControl.Seed = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RetainKeyItemNames
+        {
+            get => _retainKeyItemNames;
+            set
+            {
+                _retainKeyItemNames = value;
+                FirePropertyChanged();
+            }
+        }
+
         private bool _developmentMode;
         public bool DevelopmentMode
         {
@@ -454,6 +484,16 @@ namespace TR2RandomizerView.Model
             set
             {
                 _retainKeySpriteTextures = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RetainSecretSpriteTextures
+        {
+            get => _retainSecretSpriteTextures;
+            set
+            {
+                _retainSecretSpriteTextures = value;
                 FirePropertyChanged();
             }
         }
@@ -528,6 +568,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public List<BoolItemControlClass> TextBoolItemControls
+        {
+            get => _textBoolItemControls;
+            set
+            {
+                _textBoolItemControls = value;
+                FirePropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void FirePropertyChanged([CallerMemberName] string name = null)
@@ -551,6 +601,7 @@ namespace TR2RandomizerView.Model
             _randomSecretsControl = new ManagedSeedBool();
             _randomTexturesControl = new ManagedSeedBool();
             _randomOutfitsControl = new ManagedSeedBool();
+            _randomTextControl = new ManagedSeedBool();
 
             // Secrets
             Binding randomizeSecretsBinding = new Binding(nameof(RandomizeSecrets)) { Source = this };
@@ -608,9 +659,15 @@ namespace TR2RandomizerView.Model
             RetainKeySpriteTextures = new BoolItemControlClass()
             {
                 Title = "Use original key item textures",
-                Description = "Dynamic texture mapping will not apply HSB operations to key items."
+                Description = "Texture mapping will not apply to key items."
             };
             BindingOperations.SetBinding(RetainKeySpriteTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
+            RetainSecretSpriteTextures = new BoolItemControlClass
+            {
+                Title = "Use original secret item textures",
+                Description = "Texture mapping will not apply to secrets."
+            };
+            BindingOperations.SetBinding(RetainSecretSpriteTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
 
             // Audio
             Binding randomizeAudioBinding = new Binding(nameof(RandomizeAudioTracks)) { Source = this };
@@ -636,6 +693,15 @@ namespace TR2RandomizerView.Model
             };
             BindingOperations.SetBinding(RandomlyCutHair, BoolItemControlClass.IsActiveProperty, randomizeOutfitsBinding);
 
+            // Text
+            Binding randomizeTextBinding = new Binding(nameof(RandomizeText)) { Source = this };
+            RetainKeyItemNames = new BoolItemControlClass
+            {
+                Title = "Use original key item names",
+                Description = "The original text from the game will be used for key, pickup and puzzle items."
+            };
+            BindingOperations.SetBinding(RetainKeyItemNames, BoolItemControlClass.IsActiveProperty, randomizeTextBinding);
+
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -651,7 +717,7 @@ namespace TR2RandomizerView.Model
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
-                _persistTextures, _retainKeySpriteTextures,
+                _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
             };
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -660,6 +726,10 @@ namespace TR2RandomizerView.Model
             OutfitBoolItemControls = new List<BoolItemControlClass>()
             {
                 _persistOutfits, _randomlyCutHair,
+            };
+            TextBoolItemControls = new List<BoolItemControlClass>
+            {
+                _retainKeyItemNames
             };
         }
 
@@ -711,11 +781,16 @@ namespace TR2RandomizerView.Model
             TextureSeed = _controller.TextureSeed;
             PersistTextures.Value = _controller.PersistTextures;
             RetainKeySpriteTextures.Value = _controller.RetainKeySpriteTextures;
+            RetainSecretSpriteTextures.Value = _controller.RetainSecretSpriteTextures;
 
             RandomizeOutfits = _controller.RandomizeOutfits;
             OutfitSeed = _controller.OutfitSeed;
             PersistOutfits.Value = _controller.PersistOutfits;
             RandomlyCutHair.Value = _controller.RandomlyCutHair;
+
+            RandomizeText = _controller.RandomizeGameStrings;
+            TextSeed = _controller.GameStringsSeed;
+            RetainKeyItemNames.Value = _controller.RetainKeyItemNames;
 
             DevelopmentMode = _controller.DevelopmentMode;
             DisableDemos = _controller.DisableDemos;
@@ -769,6 +844,10 @@ namespace TR2RandomizerView.Model
             {
                 OutfitSeed = rng.Next(1, MaxSeedValue);
             }
+            if (RandomizeText)
+            {
+                TextSeed = rng.Next(1, MaxSeedValue);
+            }
         }
 
         public void SetGlobalSeed(int seed)
@@ -817,20 +896,24 @@ namespace TR2RandomizerView.Model
             {
                 OutfitSeed = seed;
             }
+            if (RandomizeText)
+            {
+                TextSeed = seed;
+            }
         }
 
         public void SetAllRandomizationsEnabled(bool enabled)
         {
             RandomizeLevelSequencing = RandomizeUnarmedLevels = RandomizeAmmolessLevels =
                 RandomizeSecretRewards = RandomizeSunsets = RandomizeAudioTracks =
-                RandomizeItems = RandomizeSecrets = RandomizeEnemies = RandomizeTextures = RandomizeOutfits = enabled;
+                RandomizeItems = RandomizeSecrets = RandomizeEnemies = RandomizeTextures = RandomizeOutfits = RandomizeText = enabled;
         }
 
         public bool AllRandomizationsEnabled()
         {
             return RandomizeLevelSequencing && RandomizeUnarmedLevels && RandomizeAmmolessLevels &&
                 RandomizeSecretRewards && RandomizeSunsets && RandomizeAudioTracks &&
-                RandomizeItems && RandomizeSecrets && RandomizeEnemies && RandomizeTextures && RandomizeOutfits;
+                RandomizeItems && RandomizeSecrets && RandomizeEnemies && RandomizeTextures && RandomizeOutfits && RandomizeText;
         }
 
         public void Save()
@@ -885,11 +968,16 @@ namespace TR2RandomizerView.Model
             _controller.TextureSeed = TextureSeed;
             _controller.PersistTextures = PersistTextures.Value;
             _controller.RetainKeySpriteTextures = RetainKeySpriteTextures.Value;
+            _controller.RetainSecretSpriteTextures = RetainSecretSpriteTextures.Value;
 
             _controller.RandomizeOutfits = RandomizeOutfits;
             _controller.OutfitSeed = OutfitSeed;
             _controller.PersistOutfits = PersistOutfits.Value;
             _controller.RandomlyCutHair = RandomlyCutHair.Value;
+
+            _controller.RandomizeGameStrings = RandomizeText;
+            _controller.GameStringsSeed = TextSeed;
+            _controller.RetainKeyItemNames = RetainKeyItemNames.Value;
 
             _controller.DevelopmentMode = DevelopmentMode;
             _controller.DisableDemos = DisableDemos;

@@ -95,17 +95,19 @@
         ]
       },
       "Optional": {
-        "4": [
-          "176, 128, 64, 64"
-        ],
-        "12": [
-          "80, 48, 57, 65",
-          "72, 113, 63, 28"
-        ]
+        "0": {
+          "4": [
+            "176, 128, 64, 64"
+          ],
+          "12": [
+            "80, 48, 57, 65",
+            "72, 113, 63, 28"
+          ]
+        }
       }
     }
   },
-    
+
   "Static": {
     "Enemies.Chicken": [
       {
@@ -696,6 +698,58 @@
       }
     ],
 
+    "Inventory.Background": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 0,
+        "Y": 0
+      }
+    ],
+
+    "Inventory.Health": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 146,
+        "Y": 85
+      },
+      {
+        "Segment": 1,
+        "Tile": 11,
+        "X": 40,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 11,
+        "X": 64,
+        "Y": 0,
+        "Clip": "0, 3, 8, 7"
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 26,
+        "Y": 17
+      },
+      {
+        "Segment": 3,
+        "Tile": 13,
+        "X": 89,
+        "Y": 11
+      }
+    ],
+
+    "Inventory.Passport": [
+      {
+        "Segment": 0,
+        "Tile": 5,
+        "X": 0,
+        "Y": 128
+      }
+    ],
+
     "Lara.Bobble": [
       {
         "Segment": 0,
@@ -864,6 +918,30 @@
         "Tile": 9,
         "X": 176,
         "Y": 176
+      }
+    ],
+
+    "Secrets": [
+      {
+        "Segment": 0,
+        "Tile": 12,
+        "X": 202,
+        "Y": 48,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 192,
+        "Y": 64,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 11,
+        "X": 209,
+        "Y": 200,
+        "Clear": true
       }
     ],
 

@@ -120,6 +120,49 @@ namespace TRLevelReader.Helpers
         }
 
         /// <summary>
+        /// Duplicates the data from one mesh to another and ensures that the contents
+        /// of MeshPointers remains consistent with respect to the mesh lengths.
+        /// </summary>
+        public static void DuplicateMesh(TR2Level level, TRMesh originalMesh, TRMesh replacementMesh)
+        {
+            int oldLength = originalMesh.Serialize().Length;
+
+            originalMesh.Centre = replacementMesh.Centre;
+            originalMesh.CollRadius = replacementMesh.CollRadius;
+            originalMesh.ColouredRectangles = replacementMesh.ColouredRectangles;
+            originalMesh.ColouredTriangles = replacementMesh.ColouredTriangles;
+            originalMesh.Lights = replacementMesh.Lights;
+            originalMesh.Normals = replacementMesh.Normals;
+            originalMesh.NumColouredRectangles = replacementMesh.NumColouredRectangles;
+            originalMesh.NumColouredTriangles = replacementMesh.NumColouredTriangles;
+            originalMesh.NumNormals = replacementMesh.NumNormals;
+            originalMesh.NumTexturedRectangles = replacementMesh.NumTexturedRectangles;
+            originalMesh.NumTexturedTriangles = replacementMesh.NumTexturedTriangles;
+            originalMesh.NumVertices = replacementMesh.NumVertices;
+            originalMesh.TexturedRectangles = replacementMesh.TexturedRectangles;
+            originalMesh.TexturedTriangles = replacementMesh.TexturedTriangles;
+            originalMesh.Vertices = replacementMesh.Vertices;
+
+            // The length will have changed so all pointers above the original one will need adjusting
+            int lengthDiff = originalMesh.Serialize().Length - oldLength;
+            List<uint> pointers = level.MeshPointers.ToList();
+            int pointerIndex = pointers.IndexOf(originalMesh.Pointer);
+            for (int i = pointerIndex + 1; i < pointers.Count; i++)
+            {
+                if (pointers[i] > 0)
+                {
+                    int newPointer = (int)pointers[i] + lengthDiff;
+                    pointers[i] = (uint)newPointer;
+                }
+            }
+
+            level.MeshPointers = pointers.ToArray();
+
+            int numMeshData = (int)level.NumMeshData + lengthDiff / 2;
+            level.NumMeshData = (uint)numMeshData;
+        }
+
+        /// <summary>
         /// Inserts a new mesh tree node and returns its index in MeshTrees. 
         /// </summary>
         public static int InsertMeshTreeNode(TR2Level level, TRMeshTreeNode newNode)
@@ -131,7 +174,5 @@ namespace TRLevelReader.Helpers
 
             return level.MeshTrees.Length - 1;
         }
-
-        
     }
 }

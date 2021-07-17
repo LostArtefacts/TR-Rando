@@ -450,6 +450,58 @@
       }
     ],
 
+    "Inventory.Background": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 184,
+        "Y": 192
+      }
+    ],
+
+    "Inventory.Health": [
+      {
+        "Segment": 0,
+        "Tile": 7,
+        "X": 170,
+        "Y": 37
+      },
+      {
+        "Segment": 1,
+        "Tile": 8,
+        "X": 80,
+        "Y": 168
+      },
+      {
+        "Segment": 1,
+        "Tile": 8,
+        "X": 232,
+        "Y": 168,
+        "Clip": "0, 3, 8, 7"
+      },
+      {
+        "Segment": 2,
+        "Tile": 3,
+        "X": 202,
+        "Y": 232
+      },
+      {
+        "Segment": 3,
+        "Tile": 2,
+        "X": 209,
+        "Y": 139
+      }
+    ],
+
+    "Inventory.Passport": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 0,
+        "Y": 128
+      }
+    ],
+
     "Lara.Bobble": [
       {
         "Segment": 0,
@@ -657,6 +709,30 @@
         "Tile": 7,
         "X": 208,
         "Y": 80
+      }
+    ],
+
+    "Secrets": [
+      {
+        "Segment": 0,
+        "Tile": 10,
+        "X": 172,
+        "Y": 152,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 3,
+        "X": 192,
+        "Y": 0,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 10,
+        "X": 128,
+        "Y": 152,
+        "Clear": true
       }
     ],
 
@@ -873,33 +949,6 @@
         "Tile": 4,
         "X": 64,
         "Y": 248
-      }
-    ],
-
-    "Xian.Misc": [
-      {
-        "Segment": 0,
-        "Tile": 4,
-        "X": 0,
-        "Y": 128
-      },
-      {
-        "Segment": 1,
-        "Tile": 4,
-        "X": 184,
-        "Y": 192
-      },
-      {
-        "Segment": 2,
-        "Tile": 3,
-        "X": 179,
-        "Y": 222
-      },
-      {
-        "Segment": 3,
-        "Tile": 2,
-        "X": 199,
-        "Y": 132
       }
     ],
 

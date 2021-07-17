@@ -372,6 +372,36 @@
       }
     ],
 
+    "Inventory.Background": [
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 64,
+        "Y": 64
+      }
+    ],
+
+    "Inventory.Passport": [
+      {
+        "Segment": 0,
+        "Tile": 7,
+        "X": 72,
+        "Y": 56
+      },
+      {
+        "Segment": 1,
+        "Tile": 11,
+        "X": 160,
+        "Y": 184
+      },
+      {
+        "Segment": 2,
+        "Tile": 11,
+        "X": 152,
+        "Y": 208
+      }
+    ],
+
     "Lara.Bobble": [
       {
         "Segment": 0,

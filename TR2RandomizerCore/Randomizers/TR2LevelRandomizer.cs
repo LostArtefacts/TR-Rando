@@ -15,24 +15,28 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RandomizeEnemies { get; set; }
         internal bool RandomizeTextures { get; set; }
         internal bool RandomizeOutfits { get; set; }
+        internal bool RandomizeGameStrings { get; set; }
 
         internal int SecretSeed { get; set; }
         internal int ItemSeed { get; set; }
         internal int EnemySeed { get; set; }
         internal int TextureSeed { get; set; }
         internal int OutfitSeed { get; set; }
+        internal int GameStringsSeed { get; set; }
 
         internal bool HardSecrets { get; set; }
         internal bool IncludeKeyItems { get; set; }
         internal bool DevelopmentMode { get; set; }
         internal bool PersistTextureVariants { get; set; }
         internal bool RetainKeySpriteTextures { get; set; }
+        internal bool RetainSecretSpriteTextures { get; set; }
         internal bool CrossLevelEnemies { get; set; }
         internal bool ProtectMonks { get; set; }
         internal bool DocileBirdMonsters { get; set; }
         internal bool GlitchedSecrets { get; set; }
         internal bool PersistOutfits { get; set; }
         internal bool RandomlyCutHair { get; set; }
+        internal bool RetainKeyItemNames { get; set; }
         internal bool AutoLaunchGame { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
@@ -51,23 +55,28 @@ namespace TR2RandomizerCore.Randomizers
 
             RandomizeItems = config.GetBool(nameof(RandomizeItems));
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
-            IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems));
+            IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
 
             RandomizeEnemies = config.GetBool(nameof(RandomizeEnemies));
             EnemySeed = config.GetInt(nameof(EnemySeed), defaultSeed);
-            CrossLevelEnemies = config.GetBool(nameof(CrossLevelEnemies));
-            ProtectMonks = config.GetBool(nameof(ProtectMonks));
+            CrossLevelEnemies = config.GetBool(nameof(CrossLevelEnemies), true);
+            ProtectMonks = config.GetBool(nameof(ProtectMonks), true);
             DocileBirdMonsters = config.GetBool(nameof(DocileBirdMonsters));
 
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
             PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
-            RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures));
+            RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures), true);
+            RetainSecretSpriteTextures = config.GetBool(nameof(RetainSecretSpriteTextures), true);
 
             RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits));
             OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
             PersistOutfits = config.GetBool(nameof(PersistOutfits));
-            RandomlyCutHair = config.GetBool(nameof(RandomlyCutHair));
+            RandomlyCutHair = config.GetBool(nameof(RandomlyCutHair), true);
+
+            RandomizeGameStrings = config.GetBool(nameof(RandomizeGameStrings));
+            GameStringsSeed = config.GetInt(nameof(GameStringsSeed), defaultSeed);
+            RetainKeyItemNames = config.GetBool(nameof(RetainKeyItemNames));
 
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
@@ -94,14 +103,36 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(TextureSeed)] = TextureSeed;
             config[nameof(PersistTextureVariants)] = PersistTextureVariants;
             config[nameof(RetainKeySpriteTextures)] = RetainKeySpriteTextures;
+            config[nameof(RetainSecretSpriteTextures)] = RetainSecretSpriteTextures;
 
             config[nameof(RandomizeOutfits)] = RandomizeOutfits;
             config[nameof(OutfitSeed)] = OutfitSeed;
             config[nameof(PersistOutfits)] = PersistOutfits;
             config[nameof(RandomlyCutHair)] = RandomlyCutHair;
 
+            config[nameof(RandomizeGameStrings)] = RandomizeGameStrings;
+            config[nameof(GameStringsSeed)] = GameStringsSeed;
+            config[nameof(RetainKeyItemNames)] = RetainKeyItemNames;
+
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
+        }
+
+        /// <summary>
+        /// This is called before the script data is saved so gives us an opportunity to 
+        /// customise the script outwith TRGE before the main SaveImpl.
+        /// </summary>
+        protected override void PreSaveImpl(AbstractTRScriptEditor scriptEditor)
+        {
+            if (RandomizeGameStrings)
+            {
+                GameStringRandomizer stringRandomizer = new GameStringRandomizer
+                {
+                    ScriptEditor = scriptEditor as TR23ScriptEditor,
+                    RetainKeyItemNames = RetainKeyItemNames
+                };
+                stringRandomizer.Randomize(GameStringsSeed);
+            }
         }
 
         protected override int GetSaveTarget(int numLevels)
@@ -238,6 +269,7 @@ namespace TR2RandomizerCore.Randomizers
                         SaveMonitor = monitor,
                         PersistVariants = PersistTextureVariants,
                         RetainKeySprites = RetainKeySpriteTextures,
+                        RetainSecretSprites = RetainSecretSpriteTextures,
                         TextureMonitor = textureMonitor
                     }.Randomize(TextureSeed);
                 }

@@ -14,14 +14,14 @@ namespace TRTexture16Importer.Textures
         private readonly Dictionary<string, StaticTextureSource> _staticSources;
         private readonly Dictionary<TR2Entities, string[]> _entityMap;
 
-        public TextureGroupingSet GlobalGrouping { get; private set; }
+        public GlobalGrouping GlobalGrouping { get; private set; }
 
         public TextureDatabase()
         {
             _dynamicSources = new Dictionary<string, DynamicTextureSource>();
             _staticSources = new Dictionary<string, StaticTextureSource>();
             _entityMap = JsonConvert.DeserializeObject<Dictionary<TR2Entities, string[]>>(File.ReadAllText(@"Resources\Textures\Source\Static\entity_lookup.json"));
-            GlobalGrouping = new TextureGroupingSet(this);
+            GlobalGrouping = new GlobalGrouping(this);
         }
 
         public void Dispose()

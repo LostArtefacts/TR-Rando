@@ -247,6 +247,12 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.RetainKeySpriteTextures = value;
         }
 
+        public bool RetainSecretSpriteTextures
+        {
+            get => LevelRandomizer.RetainSecretSpriteTextures;
+            set => LevelRandomizer.RetainSecretSpriteTextures = value;
+        }
+
         public bool HardSecrets
         {
             get => LevelRandomizer.HardSecrets;
@@ -311,6 +317,24 @@ namespace TR2RandomizerCore
         {
             get => LevelRandomizer.OutfitSeed;
             set => LevelRandomizer.OutfitSeed = value;
+        }
+
+        public bool RandomizeGameStrings
+        {
+            get => LevelRandomizer.RandomizeGameStrings;
+            set => LevelRandomizer.RandomizeGameStrings = value;
+        }
+
+        public bool RetainKeyItemNames
+        {
+            get => LevelRandomizer.RetainKeyItemNames;
+            set => LevelRandomizer.RetainKeyItemNames = value;
+        }
+
+        public int GameStringsSeed
+        {
+            get => LevelRandomizer.GameStringsSeed;
+            set => LevelRandomizer.GameStringsSeed = value;
         }
         #endregion
 

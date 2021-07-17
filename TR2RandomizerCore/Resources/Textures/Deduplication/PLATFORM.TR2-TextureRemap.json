@@ -3622,6 +3622,14 @@
   "Dependencies": [
     {
       "Entities": [
+        0,
+        154
+      ],
+      "TileIndex": 11,
+      "Bounds": "0, 24, 16, 16"
+    },
+    {
+      "Entities": [
         34,
         0,
         31

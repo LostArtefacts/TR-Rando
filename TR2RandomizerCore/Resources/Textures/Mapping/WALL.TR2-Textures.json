@@ -281,6 +281,58 @@
       }
     ],
 
+    "Inventory.Background": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 0,
+        "Y": 0
+      }
+    ],
+
+    "Inventory.Health": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 66,
+        "Y": 117
+      },
+      {
+        "Segment": 1,
+        "Tile": 7,
+        "X": 160,
+        "Y": 168
+      },
+      {
+        "Segment": 1,
+        "Tile": 7,
+        "X": 184,
+        "Y": 168,
+        "Clip": "0, 3, 8, 7"
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 26,
+        "Y": 190
+      },
+      {
+        "Segment": 3,
+        "Tile": 10,
+        "X": 105,
+        "Y": 11
+      }
+    ],
+
+    "Inventory.Passport": [
+      {
+        "Segment": 0,
+        "Tile": 3,
+        "X": 0,
+        "Y": 0
+      }
+    ],
+
     "Lara.Bobble": [
       {
         "Segment": 0,
@@ -489,6 +541,30 @@
         "Tile": 6,
         "X": 208,
         "Y": 136
+      }
+    ],
+
+    "Secrets": [
+      {
+        "Segment": 0,
+        "Tile": 10,
+        "X": 44,
+        "Y": 0,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 2,
+        "X": 192,
+        "Y": 192,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 10,
+        "X": 0,
+        "Y": 0,
+        "Clear": true
       }
     ],
 

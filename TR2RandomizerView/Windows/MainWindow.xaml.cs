@@ -440,6 +440,12 @@ namespace TR2RandomizerView.Windows
         #endregion
 
         #region Exiting
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Application.Current.Shutdown();
+        }
+
         private void ExitCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (ConfirmEditorSaveState())

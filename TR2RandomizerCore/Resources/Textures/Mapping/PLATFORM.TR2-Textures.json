@@ -432,6 +432,58 @@
       }
     ],
 
+    "Inventory.Background": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 64,
+        "Y": 160
+      }
+    ],
+
+    "Inventory.Health": [
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 162,
+        "Y": 181
+      },
+      {
+        "Segment": 1,
+        "Tile": 10,
+        "X": 176,
+        "Y": 224
+      },
+      {
+        "Segment": 1,
+        "Tile": 10,
+        "X": 200,
+        "Y": 224,
+        "Clip": "0, 3, 8, 7"
+      },
+      {
+        "Segment": 2,
+        "Tile": 14,
+        "X": 98,
+        "Y": 161
+      },
+      {
+        "Segment": 3,
+        "Tile": 14,
+        "X": 207,
+        "Y": 107
+      }
+    ],
+
+    "Inventory.Passport": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 0,
+        "Y": 0
+      }
+    ],
+
     "Lara.Bobble": [
       {
         "Segment": 0,
@@ -804,6 +856,50 @@
       }
     ],
 
+    "Offshore.Keycard.Keycard1": [
+      {
+        "Segment": 0,
+        "Tile": 5,
+        "X": 152,
+        "Y": 192
+      },
+      {
+        "Segment": 1,
+        "Tile": 5,
+        "X": 206,
+        "Y": 229
+      },
+      {
+        "Segment": 2,
+        "Tile": 1,
+        "X": 64,
+        "Y": 93,
+        "Clear": true
+      }
+    ],
+
+    "Offshore.Keycard.Keycard4": [
+      {
+        "Segment": 0,
+        "Tile": 5,
+        "X": 88,
+        "Y": 216
+      },
+      {
+        "Segment": 1,
+        "Tile": 5,
+        "X": 141,
+        "Y": 253
+      },
+      {
+        "Segment": 2,
+        "Tile": 1,
+        "X": 96,
+        "Y": 93,
+        "Clear": true
+      }
+    ],
+
     "Offshore.Sub": [
       {
         "Segment": 0,
@@ -867,6 +963,30 @@
         "Tile": 5,
         "X": 128,
         "Y": 168
+      }
+    ],
+
+    "Secrets": [
+      {
+        "Segment": 0,
+        "Tile": 15,
+        "X": 0,
+        "Y": 0,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 14,
+        "X": 144,
+        "Y": 177,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 14,
+        "X": 189,
+        "Y": 177,
+        "Clear": true
       }
     ],
 

@@ -32,39 +32,40 @@ namespace TR2RandomizerCore.Randomizers
             SetPersistentOutfit();
             ChooseHaircutLevels();
 
-            List<OutfitProcessor> processors = new List<OutfitProcessor> { new OutfitProcessor(this) };
-            int levelSplit = (int)(Levels.Count / _maxThreads);
+            List<OutfitProcessor> processors = new List<OutfitProcessor>();
+            for (int i = 0; i < _maxThreads; i++)
+            {
+                processors.Add(new OutfitProcessor(this));
+            }
 
-            bool beginProcessing = true;
+            List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(Levels.Count);
             foreach (TR23ScriptedLevel lvl in Levels)
             {
-                if (processors[processors.Count - 1].LevelCount == levelSplit)
-                {
-                    // Kick start the last one
-                    processors[processors.Count - 1].Start();
-                    processors.Add(new OutfitProcessor(this));
-                }
-
-                processors[processors.Count - 1].AddLevel(LoadCombinedLevel(lvl));
-
+                levels.Add(LoadCombinedLevel(lvl));
                 if (!TriggerProgress())
                 {
-                    beginProcessing = false;
-                    break;
+                    return;
                 }
             }
 
-            if (beginProcessing)
-            {
-                foreach (OutfitProcessor processor in processors)
-                {
-                    processor.Start();
-                }
+            // Sort the levels so each thread has a fairly equal weight in terms of import cost/time
+            levels.Sort(new TR2LevelTextureWeightComparer());
 
-                foreach (OutfitProcessor processor in processors)
-                {
-                    processor.Join();
-                }
+            int processorIndex = 0;
+            foreach (TR2CombinedLevel level in levels)
+            {
+                processors[processorIndex].AddLevel(level);
+                processorIndex = processorIndex == _maxThreads - 1 ? 0 : processorIndex + 1;
+            }
+
+            foreach (OutfitProcessor processor in processors)
+            {
+                processor.Start();
+            }
+
+            foreach (OutfitProcessor processor in processors)
+            {
+                processor.Join();
             }
 
             if (_processingException != null)
@@ -87,9 +88,9 @@ namespace TR2RandomizerCore.Randomizers
             _haircutLevels = new List<string>();
             if (RandomlyCutHair)
             {
-                // None, some, or all. We don't use Levels.Count+1 here as the Assault Course 
+                // One, some, or all. We don't use Levels.Count+1 here as the Assault Course 
                 // doesn't work for now (missing gunflare texture used for transparency).
-                int numLevels = _generator.Next(0, Levels.Count);
+                int numLevels = _generator.Next(1, Levels.Count);
                 while (_haircutLevels.Count < numLevels)
                 {
                     TR23ScriptedLevel level = Levels[_generator.Next(0, Levels.Count)];
@@ -176,15 +177,18 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         if (Import(level, lara))
                         {
-                            if (_outer.IsHaircutLevel(level.Name))
-                            {
-                                CutHair(level);
-                            }
-
-                            _outer.SaveLevel(level.Data, level.Name);
+                            // Apply any necessary tweaks to the outfit
+                            AdjustOutfit(level, lara);   
                             break;
                         }
                     }
+
+                    if (_outer.IsHaircutLevel(level.Name))
+                    {
+                        CutHair(level);
+                    }
+
+                    _outer.SaveLevel(level.Data, level.Name);
 
                     if (!_outer.TriggerProgress())
                     {
@@ -291,6 +295,19 @@ namespace TR2RandomizerCore.Randomizers
                     }
                 }
             }
+
+            private void AdjustOutfit(TR2CombinedLevel level, TR2Entities lara)
+            {
+                if (level.Is(LevelNames.HOME) && lara != TR2Entities.LaraHome)
+                {
+                    // This ensures that Lara's hips match the new outfit for the starting animation and shower cutscene,
+                    // otherwise the dressing gown hips are rendered, but the mesh is completely different for this, plus
+                    // its textures will have been removed.
+                    TRMesh laraMiscMesh = TR2LevelUtilities.GetModelFirstMesh(level.Data, TR2Entities.LaraMiscAnim_H);
+                    TRMesh laraHipsMesh = TR2LevelUtilities.GetModelFirstMesh(level.Data, TR2Entities.Lara);
+                    TR2LevelUtilities.DuplicateMesh(level.Data, laraMiscMesh, laraHipsMesh);
+                }
+            }            
         }
     }
 }
