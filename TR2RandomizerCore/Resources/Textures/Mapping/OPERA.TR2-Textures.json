@@ -409,6 +409,30 @@
       }
     ],
 
+    "Secrets": [
+      {
+        "Segment": 0,
+        "Tile": 14,
+        "X": 137,
+        "Y": 48,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 13,
+        "X": 209,
+        "Y": 152,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 196,
+        "Y": 203,
+        "Clear": true
+      }
+    ],
+
     "Venice.Curtains": [
       {
         "Segment": 0,

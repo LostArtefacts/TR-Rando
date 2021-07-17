@@ -427,6 +427,30 @@
       }
     ],
 
+    "Secrets": [
+      {
+        "Segment": 0,
+        "Tile": 14,
+        "X": 89,
+        "Y": 167,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 14,
+        "X": 0,
+        "Y": 167,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 14,
+        "X": 45,
+        "Y": 167,
+        "Clear": true
+      }
+    ],
+
     "Vehicles.Boat": [
       {
         "Segment": 0,

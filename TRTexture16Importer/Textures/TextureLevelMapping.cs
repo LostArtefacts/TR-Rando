@@ -57,18 +57,18 @@ namespace TRTexture16Importer.Textures
             // Read the dynamic mapping - this holds object and sprite texture indices for the level to which we will apply an HSB operation
             if (rootMapping.ContainsKey("Dynamic"))
             {
-                SortedDictionary<string, Dictionary<string, Dictionary<int, List<Rectangle>>>> mapping = JsonConvert.DeserializeObject<SortedDictionary<string, Dictionary<string, Dictionary<int, List<Rectangle>>>>>(rootMapping["Dynamic"].ToString());
+                SortedDictionary<string, Dictionary<string, object>> mapping = JsonConvert.DeserializeObject<SortedDictionary<string, Dictionary<string, object>>>(rootMapping["Dynamic"].ToString());
                 foreach (string sourceName in mapping.Keys)
                 {
                     DynamicTextureSource source = database.GetDynamicSource(sourceName);
                     DynamicTextureTarget target = new DynamicTextureTarget
                     {
-                        DefaultTileTargets = mapping[sourceName]["Default"]
+                        DefaultTileTargets = JsonConvert.DeserializeObject<Dictionary<int, List<Rectangle>>>(mapping[sourceName]["Default"].ToString())
                     };
 
                     if (mapping[sourceName].ContainsKey("Optional"))
                     {
-                        target.OptionalTileTargets = mapping[sourceName]["Optional"];
+                        target.OptionalTileTargets = JsonConvert.DeserializeObject<Dictionary<TextureCategory, Dictionary<int, List<Rectangle>>>>(mapping[sourceName]["Optional"].ToString());
                     }
 
                     dynamicMapping[source] = target;
@@ -153,28 +153,31 @@ namespace TRTexture16Importer.Textures
             };
         }
 
-        public void RedrawTargets(AbstractTextureSource source, string variant, bool includeOptionalTargets)
+        public void RedrawTargets(AbstractTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
         {
             if (source is DynamicTextureSource dynamicSource)
             {
-                RedrawDynamicTargets(dynamicSource, variant, includeOptionalTargets);
+                RedrawDynamicTargets(dynamicSource, variant, options);
             }
             else if (source is StaticTextureSource staticSource)
             {
-                RedrawStaticTargets(staticSource, variant, includeOptionalTargets);
+                RedrawStaticTargets(staticSource, variant, options);
             }
         }
 
-        public void RedrawDynamicTargets(DynamicTextureSource source, string variant, bool includeOptionalTargets)
+        public void RedrawDynamicTargets(DynamicTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
         {
             HSBOperation op = source.OperationMap[variant];
             DynamicTextureTarget target = DynamicMapping[source];
 
             RedrawDynamicTargets(target.DefaultTileTargets, op);
 
-            if (includeOptionalTargets)
+            foreach (TextureCategory category in target.OptionalTileTargets.Keys)
             {
-                RedrawDynamicTargets(target.OptionalTileTargets, op);
+                if (options.ContainsKey(category) && options[category])
+                {
+                    RedrawDynamicTargets(target.OptionalTileTargets[category], op);
+                }
             }
         }
 
@@ -190,11 +193,18 @@ namespace TRTexture16Importer.Textures
             }
         }
 
-        public void RedrawStaticTargets(StaticTextureSource source, string variant, bool includeOptionalTargets)
+        public void RedrawStaticTargets(StaticTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
         {
-            if (source.IsOptional && !includeOptionalTargets)
+            if (source.Categories != null)
             {
-                return;
+                // Exclude it if any of its categories are in the options and switched off
+                foreach (TextureCategory category in source.Categories)
+                {
+                    if (options.ContainsKey(category) && !options[category])
+                    {
+                        return;
+                    }
+                }
             }
 
             // For sprite sequence sources, the targets are mapped dynamically.

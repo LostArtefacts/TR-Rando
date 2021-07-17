@@ -16,9 +16,11 @@ namespace TR2RandomizerCore.Randomizers
         private readonly Dictionary<AbstractTextureSource, string> _persistentVariants;
         private readonly object _drawLock;
         private TextureDatabase _textureDatabase;
+        private Dictionary<TextureCategory, bool> _textureOptions;
 
         internal bool PersistVariants { get; set; }
         internal bool RetainKeySprites { get; set; }
+        internal bool RetainSecretSprites { get; set; }
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         public TextureRandomizer()
@@ -30,6 +32,13 @@ namespace TR2RandomizerCore.Randomizers
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
+
+            // These options are used to switch on/off specific textures
+            _textureOptions = new Dictionary<TextureCategory, bool>
+            {
+                [TextureCategory.KeyItem] = !RetainKeySprites,
+                [TextureCategory.Secret] = !RetainSecretSprites
+            };
 
             SetMessage("Randomizing textures - loading levels");
             
@@ -122,7 +131,7 @@ namespace TR2RandomizerCore.Randomizers
         {
             lock (_drawLock)
             {
-                mapping.RedrawTargets(source, variant, !RetainKeySprites);
+                mapping.RedrawTargets(source, variant, _textureOptions);
             }
         }
 

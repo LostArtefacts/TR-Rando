@@ -544,6 +544,30 @@
       }
     ],
 
+    "Secrets": [
+      {
+        "Segment": 0,
+        "Tile": 10,
+        "X": 44,
+        "Y": 0,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 2,
+        "X": 192,
+        "Y": 192,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 10,
+        "X": 0,
+        "Y": 0,
+        "Clear": true
+      }
+    ],
+
     "Water": [
       {
         "Segment": 0,

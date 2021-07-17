@@ -29,6 +29,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool DevelopmentMode { get; set; }
         internal bool PersistTextureVariants { get; set; }
         internal bool RetainKeySpriteTextures { get; set; }
+        internal bool RetainSecretSpriteTextures { get; set; }
         internal bool CrossLevelEnemies { get; set; }
         internal bool ProtectMonks { get; set; }
         internal bool DocileBirdMonsters { get; set; }
@@ -65,7 +66,8 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
             PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
-            RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures));
+            RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures), true);
+            RetainSecretSpriteTextures = config.GetBool(nameof(RetainSecretSpriteTextures), true);
 
             RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits));
             OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
@@ -101,6 +103,7 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(TextureSeed)] = TextureSeed;
             config[nameof(PersistTextureVariants)] = PersistTextureVariants;
             config[nameof(RetainKeySpriteTextures)] = RetainKeySpriteTextures;
+            config[nameof(RetainSecretSpriteTextures)] = RetainSecretSpriteTextures;
 
             config[nameof(RandomizeOutfits)] = RandomizeOutfits;
             config[nameof(OutfitSeed)] = OutfitSeed;
@@ -266,6 +269,7 @@ namespace TR2RandomizerCore.Randomizers
                         SaveMonitor = monitor,
                         PersistVariants = PersistTextureVariants,
                         RetainKeySprites = RetainKeySpriteTextures,
+                        RetainSecretSprites = RetainSecretSpriteTextures,
                         TextureMonitor = textureMonitor
                     }.Randomize(TextureSeed);
                 }

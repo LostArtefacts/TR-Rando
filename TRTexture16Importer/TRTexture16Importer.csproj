@@ -52,6 +52,7 @@
     <Compile Include="Helpers\HSBOperation.cs" />
     <Compile Include="T16Importer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Textures\Grouping\TextureCategory.cs" />
     <Compile Include="Textures\Source\AbstractTextureSource.cs" />
     <Compile Include="Textures\Source\DynamicTextureSource.cs" />
     <Compile Include="Textures\Target\DynamicTextureTarget.cs" />

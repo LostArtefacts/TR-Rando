@@ -825,6 +825,30 @@
       }
     ],
 
+    "Secrets": [
+      {
+        "Segment": 0,
+        "Tile": 13,
+        "X": 72,
+        "Y": 24,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 12,
+        "X": 200,
+        "Y": 202,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 13,
+        "X": 184,
+        "Y": 0,
+        "Clear": true
+      }
+    ],
+
     "Venice.Sky.Bartoli": [
       {
         "Segment": 1,

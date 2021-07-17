@@ -449,6 +449,30 @@
         "X": 40,
         "Y": 240
       }
+    ],
+
+    "Secrets": [
+      {
+        "Segment": 0,
+        "Tile": 14,
+        "X": 211,
+        "Y": 189,
+        "Clear": true
+      },
+      {
+        "Segment": 1,
+        "Tile": 15,
+        "X": 0,
+        "Y": 0,
+        "Clear": true
+      },
+      {
+        "Segment": 2,
+        "Tile": 14,
+        "X": 211,
+        "Y": 137,
+        "Clear": true
+      }
     ]
   }
 }
