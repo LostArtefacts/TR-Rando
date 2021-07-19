@@ -46,5 +46,15 @@ The `_restrictedEnemyGameCounts` dictionary in `EnemyUtilities` defines enemies 
 
 Winston will only appear in at most two levels as he is more of an Easter Egg than anything else.
 
+## Guising
+Currently only the bird monster is targeted for guising. Either type of monk or MaskedGoon1 can be disguised as the bird monster. This is achieved by importing the bird monster model so that the correct textures, meshes, animations etc are in place, but then changing the model ID of the `TRModel` object for the bird monster to be one of the guisers. This tells the game to use that model's behaviour, strength etc, but the in-level definition points to the bird monster appearance. All other enemies were tested as guisers but only these had animations that matched.
+
+## Misc Rules
+`EnemyRandomizer` has a few other checks in place as follows.
+* The enemies at the end of Diving Area must be killable.
+* Checks are done if docile bird monsters are in place in terms of eligible guisers (for example, we can't have both types of monk, MaskedGoon1 and docile bird monsters together).
+* If an enemy spawns on a tile with an item, it must be killable. Outwith `EnemyRandomizer`, we ensure that item randomization takes place first for this reason.
+* Enemies that spawn in water must be water enemies. Room draining is currently disabled.
+
 ## Difficulty
 Enemy difficulty is calculated approximately in order to decide how much extra ammo to give for unarmed levels. The `_enemyDifficulties` dictionary in `EnemyUtilities` holds the categorisation of each enemy type. This is loosely based on enemy strength but also on how awkward the enemy is to deal with, for example the flamethrower.
