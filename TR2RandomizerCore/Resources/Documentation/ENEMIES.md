@@ -22,6 +22,8 @@ There are some enemies that will never fit in some levels. This is primarily the
 
 The other exclusions in HSH are unkillable enemies. We also exclude the defaults (Doberman, MaskedGoon1, StickWieldingGoon1) because they are needed for the kill count to work. The required number of these enemy types are rendered outside the gate so the game has a kill target. We could in theory replace the final ShotgunGoon with a different enemy type but this remains untested. MaskedGoon2 and MaskedGoon3 are excluded as well because they depend heavily on MaskedGoon1, and StickWieldingGoon2 depends on StickWieldingGoon1.
 
+There is currently an inconsistency with the small spider being excluded from HSH. This was initially done as it was thought to be too awkward to chase these around the level. But the Rat could be considered equally as awkward, but this is not currently excluded.
+
 Barkhang Monastery also has exclusions in place, but these are mainly attempts at workarounds for the freezing problem some players have experienced (#136, #158). We think this is caused by the number of active enemies, so unkillable enemies are excluded and testing found the level was most stable with all MonkWithLongStick and Mercenary1 enemies left in place. So the other type of monk and Mercenary2 are also excluded.
 
 All unsupported enemies are defined in `_unsupportedEnemies` in `EnemyUtilities`.
