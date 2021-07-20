@@ -20,6 +20,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -76,11 +77,25 @@
             Grid.Column="0"
             IsActive="{Binding RandomizeSunsets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Sunsets"
-            Text="Randomize the levels that have sunsets. The lighting will gradually fade over 20 minutes, similar to Bartoli's Hideout. Sunset state resets if the game is reloaded.&#x0a;&#x0a;Default: 1"
+            Text="Randomize the levels that have sunsets. The lighting will gradually fade over 20 minutes.&#x0a;&#x0a;Default: 1"
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding SunsetsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding SunsetCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomIntMinValue="0"
+            CustomIntMaxValue="{Binding MaximumLevelCount}"
+            CustomIntTitle="Number of levels"/>
+
+        <ctrl:ManagedSeedIntControl
+            Grid.Row="4"
+            Grid.Column="0"
+            IsActive="{Binding RandomizeNightMode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Night Mode"
+            Text="Randomize the levels Lara visits at night."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding NightModeSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomInt="{Binding NightModeCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="0"
             CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
@@ -90,7 +105,7 @@
             Grid.Column="1"
             IsActive="{Binding RandomizeSecrets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Secrets"
-            Text="Randomize the locations of secrets. These are ordered based on casual play order, so you should expect to find Stone, then Jade, then Gold. Some hard secrets may require glitches."
+            Text="Randomize secret locations. You should expect to find Stone, then Jade, then Gold."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -146,7 +161,7 @@
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
-        
+
         <ctrl:ManagedSeedControl
             Grid.Column="2"
             IsActive="{Binding RandomizeSecretRewards, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -183,7 +198,7 @@
             Grid.Column="2"
             IsActive="{Binding RandomizeText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Game Text"
-            Text="Randomize in-game text, such as weapons and level names."
+            Text="Randomize in-game text, such as weapon and level names."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding TextSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -241,7 +256,7 @@
 
         <Border
             Grid.Row="2"
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             Grid.Column="3"
             BorderBrush="#0E7709"
             BorderThickness="1"

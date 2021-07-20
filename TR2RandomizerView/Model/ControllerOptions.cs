@@ -12,7 +12,7 @@ namespace TR2RandomizerView.Model
         public int MaxSeedValue => 1000000000;
 
         private readonly ManagedSeed _secretRewardsControl;
-        private readonly ManagedSeedNumeric _levelSequencingControl, _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl;
+        private readonly ManagedSeedNumeric _levelSequencingControl, _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl, _nightLevelsControl;
         private readonly ManagedSeedBool _audioTrackControl;
 
         private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl, _randomTextControl;
@@ -57,12 +57,14 @@ namespace TR2RandomizerView.Model
             UnarmedLevelCount = (uint)Math.Min(UnarmedLevelCount, MaximumLevelCount);
             AmmolessLevelCount = (uint)Math.Min(AmmolessLevelCount, MaximumLevelCount);
             SunsetCount = (uint)Math.Min(SunsetCount, MaximumLevelCount);
+            NightModeCount = (uint)Math.Min(NightModeCount, MaximumLevelCount);
         }
 
         public bool RandomizationPossible
         {
             get => RandomizeLevelSequencing || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeSunsets ||
-                   RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits || RandomizeText;
+                   RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits || 
+                   RandomizeText || RandomizeNightMode;
         }
 
         public bool RandomizeLevelSequencing
@@ -203,6 +205,36 @@ namespace TR2RandomizerView.Model
             set
             {
                 _sunsetLevelsControl.CustomInt = (int)value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool RandomizeNightMode
+        {
+            get => _nightLevelsControl.IsActive;
+            set
+            {
+                _nightLevelsControl.IsActive = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int NightModeSeed
+        {
+            get => _nightLevelsControl.Seed;
+            set
+            {
+                _nightLevelsControl.Seed = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint NightModeCount
+        {
+            get => (uint)_nightLevelsControl.CustomInt;
+            set
+            {
+                _nightLevelsControl.CustomInt = (int)value;
                 FirePropertyChanged();
             }
         }
@@ -594,6 +626,7 @@ namespace TR2RandomizerView.Model
             _ammolessLevelsControl = new ManagedSeedNumeric();
             _secretRewardsControl = new ManagedSeed();
             _sunsetLevelsControl = new ManagedSeedNumeric();
+            _nightLevelsControl = new ManagedSeedNumeric();
             _audioTrackControl = new ManagedSeedBool();
 
             _randomItemsControl = new ManagedSeedBool();
@@ -758,6 +791,10 @@ namespace TR2RandomizerView.Model
             SunsetsSeed = _controller.SunsetsSeed;
             SunsetCount = _controller.SunsetCount;
 
+            RandomizeNightMode = _controller.RandomizeNightMode;
+            NightModeSeed = _controller.NightModeSeed;
+            NightModeCount = _controller.NightModeCount;
+
             RandomizeAudioTracks = _controller.RandomizeAudioTracks;
             AudioTracksSeed = _controller.AudioTracksSeed;
             IncludeBlankTracks.Value = _controller.RandomGameTracksIncludeBlank;
@@ -820,6 +857,10 @@ namespace TR2RandomizerView.Model
             {
                 SunsetsSeed = rng.Next(1, MaxSeedValue);
             }
+            if (RandomizeNightMode)
+            {
+                NightModeSeed = rng.Next(1, MaxSeedValue);
+            }
             if (RandomizeAudioTracks)
             {
                 AudioTracksSeed = rng.Next(1, MaxSeedValue);
@@ -871,6 +912,10 @@ namespace TR2RandomizerView.Model
             if (RandomizeSunsets)
             {
                 SunsetsSeed = seed;
+            }
+            if (RandomizeNightMode)
+            {
+                NightModeSeed = seed;
             }
             if (RandomizeAudioTracks)
             {
@@ -944,6 +989,10 @@ namespace TR2RandomizerView.Model
             _controller.RandomizeSunsets = RandomizeSunsets;
             _controller.SunsetsSeed = SunsetsSeed;
             _controller.SunsetCount = SunsetCount;
+
+            _controller.RandomizeNightMode = RandomizeNightMode;
+            _controller.NightModeSeed = NightModeSeed;
+            _controller.NightModeCount = NightModeCount;
 
             _controller.RandomizeAudioTracks = RandomizeAudioTracks;
             _controller.AudioTracksSeed = AudioTracksSeed;
