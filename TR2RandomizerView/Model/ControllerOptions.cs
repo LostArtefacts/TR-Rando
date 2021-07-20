@@ -950,14 +950,14 @@ namespace TR2RandomizerView.Model
         public void SetAllRandomizationsEnabled(bool enabled)
         {
             RandomizeLevelSequencing = RandomizeUnarmedLevels = RandomizeAmmolessLevels =
-                RandomizeSecretRewards = RandomizeSunsets = RandomizeAudioTracks =
+                RandomizeSecretRewards = RandomizeSunsets = RandomizeNightMode = RandomizeAudioTracks =
                 RandomizeItems = RandomizeSecrets = RandomizeEnemies = RandomizeTextures = RandomizeOutfits = RandomizeText = enabled;
         }
 
         public bool AllRandomizationsEnabled()
         {
             return RandomizeLevelSequencing && RandomizeUnarmedLevels && RandomizeAmmolessLevels &&
-                RandomizeSecretRewards && RandomizeSunsets && RandomizeAudioTracks &&
+                RandomizeSecretRewards && RandomizeSunsets && RandomizeNightMode && RandomizeAudioTracks &&
                 RandomizeItems && RandomizeSecrets && RandomizeEnemies && RandomizeTextures && RandomizeOutfits && RandomizeText;
         }
 
