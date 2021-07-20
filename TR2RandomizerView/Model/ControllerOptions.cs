@@ -785,7 +785,7 @@ namespace TR2RandomizerView.Model
             ChangeTriggerTracks = new BoolItemControlClass()
             {
                 Title = "Change trigger tracks",
-                Description = "Change the tracks in the game that play when crossing triggers, such as the violins in Vence, danger sounds etc."
+                Description = "Change the tracks in the game that play when crossing triggers, such as the violins in Venice, danger sounds etc."
             };
             BindingOperations.SetBinding(ChangeTriggerTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
 

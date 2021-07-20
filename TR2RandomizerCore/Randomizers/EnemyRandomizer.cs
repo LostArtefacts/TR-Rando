@@ -564,7 +564,7 @@ namespace TR2RandomizerCore.Randomizers
                 }
 
                 // If we are restricting count per level for this enemy and have reached that count, pick
-                // someting else. This applies when we are restricting by in-level count, but not by room 
+                // something else. This applies when we are restricting by in-level count, but not by room
                 // (e.g. Winston).
                 int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType);
                 if (maxEntityCount != -1)

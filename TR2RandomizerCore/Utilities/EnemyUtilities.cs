@@ -107,16 +107,6 @@ namespace TR2RandomizerCore.Utilities
             return entities;
         }
 
-        public static List<TR2Entities> GetRestrictedEnemies(string lvlName)
-        {
-            List<TR2Entities> enemies = new List<TR2Entities>();
-            if (_restrictedEnemyZones.ContainsKey(lvlName))
-            {
-                enemies.AddRange(_restrictedEnemyZones[lvlName].Keys);
-            }
-            return enemies;
-        }
-
         public static Dictionary<TR2Entities, List<int>> GetRestrictedEnemyRooms(string lvlName)
         {
             if (_restrictedEnemyZones.ContainsKey(lvlName))
@@ -225,9 +215,9 @@ namespace TR2RandomizerCore.Utilities
             // #158 Barkhang seems to be most stable when the original MonkWithLongStick and Mercenary1
             // enemies are in place, so we exclude the other monks and non-killable enemies from here
             [LevelNames.MONASTERY] =
-                new List<TR2Entities> 
+                new List<TR2Entities>
                 {
-                    TR2Entities.BlackMorayEel, TR2Entities.MarcoBartoli, TR2Entities.MonkWithKnifeStick , 
+                    TR2Entities.BlackMorayEel, TR2Entities.MarcoBartoli, TR2Entities.MonkWithKnifeStick,
                     TR2Entities.Mercenary2, TR2Entities.Winston, TR2Entities.YellowMorayEel
                 },
             [LevelNames.CHICKEN] =
@@ -244,13 +234,13 @@ namespace TR2RandomizerCore.Utilities
                 // are making placeholder entities to prevent breaking the kill counter.
                 new List<TR2Entities>
                 {
-                    TR2Entities.BlackMorayEel, TR2Entities.Doberman, TR2Entities.Eagle, TR2Entities.MaskedGoon1, 
-                    TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.MarcoBartoli, TR2Entities.MercSnowmobDriver, 
-                    TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Shark, TR2Entities.StickWieldingGoon1, 
+                    TR2Entities.BlackMorayEel, TR2Entities.Doberman, TR2Entities.Eagle, TR2Entities.MaskedGoon1,
+                    TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.MarcoBartoli, TR2Entities.MercSnowmobDriver,
+                    TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Shark, TR2Entities.StickWieldingGoon1,
                     TR2Entities.StickWieldingGoon2, TR2Entities.Spider, TR2Entities.TRex, TR2Entities.Winston, TR2Entities.YellowMorayEel
                 }
         };
-        
+
         private static readonly Dictionary<string, List<TR2Entities>> _requiredEnemies = new Dictionary<string, List<TR2Entities>>
         {
             [LevelNames.MONASTERY] =
@@ -305,9 +295,9 @@ namespace TR2RandomizerCore.Utilities
             },
             [EnemyDifficulty.Medium] = new List<TR2Entities>
             {
-                TR2Entities.Doberman, TR2Entities.GiantSpider, TR2Entities.Gunman1, 
-                TR2Entities.Gunman2, TR2Entities.Knifethrower, TR2Entities.MaskedGoon1, 
-                TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Shark, 
+                TR2Entities.Doberman, TR2Entities.GiantSpider, TR2Entities.Gunman1,
+                TR2Entities.Gunman2, TR2Entities.Knifethrower, TR2Entities.MaskedGoon1,
+                TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Shark,
                 TR2Entities.StickWieldingGoon1, TR2Entities.StickWieldingGoon2, TR2Entities.TigerOrSnowLeopard
             },
             [EnemyDifficulty.Hard] = new List<TR2Entities>
