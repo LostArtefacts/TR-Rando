@@ -336,6 +336,24 @@ namespace TR2RandomizerCore
             get => LevelRandomizer.GameStringsSeed;
             set => LevelRandomizer.GameStringsSeed = value;
         }
+
+        public bool RandomizeNightMode
+        {
+            get => LevelRandomizer.RandomizeNightMode;
+            set => LevelRandomizer.RandomizeNightMode = value;
+        }
+
+        public int NightModeSeed
+        {
+            get => LevelRandomizer.NightModeSeed;
+            set => LevelRandomizer.NightModeSeed = value;
+        }
+
+        public uint NightModeCount
+        {
+            get => LevelRandomizer.NightModeCount;
+            set => LevelRandomizer.NightModeCount = value;
+        }
         #endregion
 
         #region TREditor Passthrough

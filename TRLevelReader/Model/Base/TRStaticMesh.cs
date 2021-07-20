@@ -20,6 +20,38 @@ namespace TRLevelReader.Model
 
         public ushort Flags { get; set; }
 
+        public bool NonCollidable
+        {
+            get => (Flags & 1) > 0;
+            set
+            {
+                if (value)
+                {
+                    Flags |= 1;
+                }
+                else
+                {
+                    Flags ^= 1;
+                }
+            }
+        }
+
+        public bool Visible
+        {
+            get => (Flags & 2) > 0;
+            set
+            {
+                if (value)
+                {
+                    Flags |= 2;
+                }
+                else
+                {
+                    Flags ^= 2;
+                }
+            }
+        }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())

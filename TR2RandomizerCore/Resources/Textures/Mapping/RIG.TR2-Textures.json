@@ -876,6 +876,33 @@
       }
     ],
 
+    "Venice.NightSky.Bartoli": [
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 6,
+        "X": 64,
+        "Y": 0
+      },
+      {
+        "Segment": 3,
+        "Tile": 6,
+        "X": 192,
+        "Y": 0
+      },
+      {
+        "Segment": 4,
+        "Tile": 6,
+        "X": 128,
+        "Y": 0
+      }
+    ],
+
     "Water": [
       {
         "Segment": 0,

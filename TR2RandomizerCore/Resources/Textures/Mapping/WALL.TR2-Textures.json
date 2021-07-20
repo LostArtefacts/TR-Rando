@@ -230,6 +230,33 @@
       }
     ],
 
+    "GreatWall.NightSky": [
+      {
+        "Segment": 1,
+        "Tile": 3,
+        "X": 72,
+        "Y": 80
+      },
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 128,
+        "Y": 64
+      },
+      {
+        "Segment": 3,
+        "Tile": 3,
+        "X": 136,
+        "Y": 72
+      },
+      {
+        "Segment": 4,
+        "Tile": 4,
+        "X": 64,
+        "Y": 64
+      }
+    ],
+
     "GreatWall.Sky": [
       {
         "Segment": 1,

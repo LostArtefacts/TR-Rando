@@ -11,6 +11,9 @@ namespace TRLevelReader.Model
 {
     public class TR2Room : ISerializableCompact
     {
+        public static readonly short DarknessIntensity1 = 8000;
+        public static readonly ushort DarknessIntensity2 = 1000;
+
         //16 bytes
         public TRRoomInfo Info { get; set; }
 
@@ -86,6 +89,7 @@ namespace TRLevelReader.Model
 
         //Ambient Intensity = 0 (bright) - 0x1FFF (dark)
         //Vertex Light = 0 (bright) - 0x1FFF (dark)
+        //RoomStaticMesh intensity = 0 (bright) - 0x1FFF (dark)
         //but...
         //Light intensity = 0 (dark) - 0x1FFF (bright)!!!
         public void SetLights(ushort val)
@@ -94,6 +98,15 @@ namespace TRLevelReader.Model
             {
                 light.Intensity1 = val;
                 light.Intensity2 = val;
+            }
+        }
+
+        public void SetStaticMeshLights(ushort val)
+        {
+            foreach (TR2RoomStaticMesh mesh in StaticMeshes)
+            {
+                mesh.Intensity1 = val;
+                mesh.Intensity2 = val;
             }
         }
 
@@ -114,9 +127,10 @@ namespace TRLevelReader.Model
 
         public void Darken()
         {
-            SetAmbient(8000);
-            SetLights(1000);
-            SetVertexLight(8000);
+            SetAmbient(DarknessIntensity1);
+            SetLights(DarknessIntensity2);
+            SetStaticMeshLights((ushort)DarknessIntensity1);
+            SetVertexLight(DarknessIntensity1);
         }
 
         public byte[] Serialize()

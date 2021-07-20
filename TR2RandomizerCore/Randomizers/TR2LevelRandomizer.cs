@@ -16,6 +16,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RandomizeTextures { get; set; }
         internal bool RandomizeOutfits { get; set; }
         internal bool RandomizeGameStrings { get; set; }
+        internal bool RandomizeNightMode { get; set; }
 
         internal int SecretSeed { get; set; }
         internal int ItemSeed { get; set; }
@@ -23,6 +24,7 @@ namespace TR2RandomizerCore.Randomizers
         internal int TextureSeed { get; set; }
         internal int OutfitSeed { get; set; }
         internal int GameStringsSeed { get; set; }
+        internal int NightModeSeed { get; set; }
 
         internal bool HardSecrets { get; set; }
         internal bool IncludeKeyItems { get; set; }
@@ -37,9 +39,10 @@ namespace TR2RandomizerCore.Randomizers
         internal bool PersistOutfits { get; set; }
         internal bool RandomlyCutHair { get; set; }
         internal bool RetainKeyItemNames { get; set; }
+        internal uint NightModeCount { get; set; }
         internal bool AutoLaunchGame { get; set; }
 
-        internal bool DeduplicateTextures => RandomizeTextures || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
+        internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
 
         internal TR2LevelRandomizer(TRDirectoryIOArgs args)
             : base(args) { }
@@ -78,6 +81,10 @@ namespace TR2RandomizerCore.Randomizers
             GameStringsSeed = config.GetInt(nameof(GameStringsSeed), defaultSeed);
             RetainKeyItemNames = config.GetBool(nameof(RetainKeyItemNames));
 
+            RandomizeNightMode = config.GetBool(nameof(RandomizeNightMode));
+            NightModeSeed = config.GetInt(nameof(NightModeSeed), defaultSeed);
+            NightModeCount = config.GetUInt(nameof(NightModeCount), 1);
+
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
         }
@@ -114,6 +121,10 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(GameStringsSeed)] = GameStringsSeed;
             config[nameof(RetainKeyItemNames)] = RetainKeyItemNames;
 
+            config[nameof(RandomizeNightMode)] = RandomizeNightMode;
+            config[nameof(NightModeSeed)] = NightModeSeed;
+            config[nameof(NightModeCount)] = NightModeCount;
+
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
         }
@@ -139,6 +150,14 @@ namespace TR2RandomizerCore.Randomizers
         {
             // TODO: move these target calculations into the relevant classes - they don't belong here
             int target = base.GetSaveTarget(numLevels);
+            if (RandomizeNightMode)
+            {
+                target += numLevels;
+                if (!RandomizeTextures)
+                {
+                    target += numLevels;
+                }
+            }
             if (RandomizeSecrets)    target += numLevels;
             if (RandomizeItems)      target += numLevels * 2; // standard/key rando followed by unarmed logic after enemy rando
             if (DeduplicateTextures) target += numLevels * 2;
@@ -207,6 +226,18 @@ namespace TR2RandomizerCore.Randomizers
                     }.Deduplicate();
                 }
 
+                if (!monitor.IsCancelled && RandomizeNightMode)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
+                    new NightModeRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        NumLevels = NightModeCount
+                    }.Randomize(NightModeSeed);
+                }
+
                 ItemRandomizer itemRandomizer = null;
                 if (!monitor.IsCancelled && RandomizeItems)
                 {
@@ -259,19 +290,35 @@ namespace TR2RandomizerCore.Randomizers
                     }.Randomize(OutfitSeed);
                 }
 
-                if (!monitor.IsCancelled && RandomizeTextures)
+                if (!monitor.IsCancelled)
                 {
-                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing textures");
-                    new TextureRandomizer
+                    if (RandomizeTextures)
                     {
-                        Levels = levels,
-                        BasePath = wipDirectory,
-                        SaveMonitor = monitor,
-                        PersistVariants = PersistTextureVariants,
-                        RetainKeySprites = RetainKeySpriteTextures,
-                        RetainSecretSprites = RetainSecretSpriteTextures,
-                        TextureMonitor = textureMonitor
-                    }.Randomize(TextureSeed);
+                        monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing textures");
+                        new TextureRandomizer
+                        {
+                            Levels = levels,
+                            BasePath = wipDirectory,
+                            SaveMonitor = monitor,
+                            PersistVariants = PersistTextureVariants,
+                            RetainKeySprites = RetainKeySpriteTextures,
+                            RetainSecretSprites = RetainSecretSpriteTextures,
+                            NightModeOnly = !RandomizeTextures,
+                            TextureMonitor = textureMonitor
+                        }.Randomize(TextureSeed);
+                    }
+                    else if (RandomizeNightMode)
+                    {
+                        monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode textures");
+                        new TextureRandomizer
+                        {
+                            Levels = levels,
+                            BasePath = wipDirectory,
+                            SaveMonitor = monitor,
+                            NightModeOnly = true,
+                            TextureMonitor = textureMonitor
+                        }.Randomize(NightModeSeed);
+                    }
                 }
             }
         }
