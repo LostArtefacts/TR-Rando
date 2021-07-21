@@ -56,6 +56,11 @@ namespace TR2RandomizerView.Controls
             "CustomInt", typeof(int), typeof(ManagedSeedIntControl)
         );
 
+        public static readonly DependencyProperty CustomIntDefaultProperty = DependencyProperty.Register
+        (
+            "CustomIntDefault", typeof(int), typeof(ManagedSeedIntControl)
+        );
+
         public static readonly DependencyProperty CustomIntTitleProperty = DependencyProperty.Register
         (
             "CustomIntTitle", typeof(string), typeof(ManagedSeedIntControl)
@@ -111,6 +116,12 @@ namespace TR2RandomizerView.Controls
         {
             get => (int)GetValue(CustomIntProperty);
             set => SetValue(CustomIntProperty, value);
+        }
+
+        public int CustomIntDefault
+        {
+            get => (int)GetValue(CustomIntDefaultProperty);
+            set => SetValue(CustomIntDefaultProperty, value);
         }
 
         public string CustomIntTitle

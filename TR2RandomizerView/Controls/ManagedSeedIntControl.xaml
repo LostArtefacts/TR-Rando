@@ -13,6 +13,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -33,7 +34,18 @@
                        Grid.ColumnSpan="2"
                        TextWrapping="Wrap"/>
 
-            <StackPanel Grid.Row="2"
+            <Label Grid.Row="2"
+                   Padding="0"
+                   FontStyle="Italic"
+                   IsEnabled="{Binding IsActive}">
+                <Label.Content>
+                    <TextBlock>
+                        <Run Text="Default: "/><Run Text="{Binding CustomIntDefault}"/>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+
+            <StackPanel Grid.Row="3"
                         Orientation="Horizontal"
                         HorizontalAlignment="Left">
                 <Label IsEnabled="{Binding IsActive}"
@@ -49,7 +61,7 @@
                                     MaxValue="{Binding CustomIntMaxValue}"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="2"
+            <StackPanel Grid.Row="3"
                         Grid.Column="1"
                         Orientation="Horizontal"
                         HorizontalAlignment="Right">
