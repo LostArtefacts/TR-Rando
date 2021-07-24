@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TRFDControl.FDEntryTypes;
 using TRLevelReader.Model;
 
@@ -32,11 +33,24 @@ namespace TRFDControl.Utilities
             return entries;
         }
 
-        public static List<FDActionListItem> GetActionListItems(FDControl control, FDTrigAction trigAction)
+        public static List<FDActionListItem> GetActionListItems(FDControl control, FDTrigAction trigAction, int sectorIndex = -1)
         {
             List<FDActionListItem> items = new List<FDActionListItem>();
 
-            foreach (List<FDEntry> entryList in control.Entries.Values)
+            List<List<FDEntry>> entrySearch;
+            if (sectorIndex == -1)
+            {
+                entrySearch = control.Entries.Values.ToList();
+            }
+            else
+            {
+                entrySearch = new List<List<FDEntry>>
+                {
+                    control.Entries[sectorIndex]
+                };
+            }
+
+            foreach (List<FDEntry> entryList in entrySearch)
             {
                 foreach (FDEntry entry in entryList)
                 {
