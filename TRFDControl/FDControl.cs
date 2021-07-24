@@ -10,10 +10,54 @@ namespace TRFDControl
 {
     public class FDControl
     {
-        public Dictionary<int, List<FDEntry>> Entries = new Dictionary<int, List<FDEntry>>(); //Key is Sector.FDIndex
+        private SortedDictionary<int, List<FDEntry>> _entries; //Key is Sector.FDIndex
+
+        public IReadOnlyDictionary<int, List<FDEntry>> Entries => _entries;
+
+        /// <summary>
+        /// Create a slot in the FD for a room sector that currently points to dummy FD.
+        /// </summary>
+        public void CreateFloorData(TRRoomSector sector)
+        {
+            int index;
+            if (_entries.Count == 0)
+            {
+                // Highly unlikely that we would have cleared all FD, but in any case the
+                // first index should always be 1
+                index = 1;
+            }
+            else
+            {
+                // Get the highest index, which is the last key as we use a SortedDictionary.
+                // Add the total length of the entries at that key to get the next index for
+                // allocating to this sector.
+                index = _entries.Keys.ToList().Last();
+                List<FDEntry> entries = _entries[index];
+                foreach (FDEntry entry in entries)
+                {
+                    index += entry.Flatten().Length;
+                }
+            }
+
+            _entries.Add(index, new List<FDEntry>());
+            sector.FDIndex = (ushort)index;
+        }
+
+        /// <summary>
+        /// Remove a given room sector's FD and reset its FDIndex to 0.
+        /// </summary>
+        public void RemoveFloorData(TRRoomSector sector)
+        {
+            if (_entries.Remove(sector.FDIndex))
+            {
+                sector.FDIndex = 0;
+            }
+        }
 
         public void ParseFromLevel(TR2Level lvl)
         {
+            _entries = new SortedDictionary<int, List<FDEntry>>();
+
             foreach (TR2Room room in lvl.Rooms)
             {
                 foreach (TRRoomSector sector in room.SectorList)
@@ -89,7 +133,7 @@ namespace TRFDControl
                                 }
 
                                 //We don't know if there are any more yet.
-                                bool continueFDParse = false;
+                                bool continueFDParse;
 
                                 //Parse trigactions
                                 do
@@ -203,13 +247,20 @@ namespace TRFDControl
                     }
 
                     //Store the sector index and all of its associated functions
-                    Entries.Add(sector.FDIndex, floordataFunctions);
+                    _entries.Add(sector.FDIndex, floordataFunctions);
                 }
             }
         }
 
         public void WriteToLevel(TR2Level lvl)
         {
+            List<ushort> data = new List<ushort>
+            {
+                lvl.FloorData[0] // Index 0 is always dummy
+            };
+
+            Dictionary<int, int> entryLengths = new Dictionary<int, int>();
+
             foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
             {
                 //Get the list of functions per sector
@@ -217,22 +268,62 @@ namespace TRFDControl
 
                 //Get the initial sector index into fdata
                 int index = entry.Key;
+                //Track the total length of the entry
+                int entryLength = 0;
 
-                foreach (FDEntry function in functions)
+                for (int i = 0; i < functions.Count; i++)
                 {
+                    FDEntry function = functions[i];
+
+                    // Ensure EndData is set on the last function in the list only
+                    function.Setup.EndData = i == functions.Count - 1;
+
                     //Convert function to ushort array
                     ushort[] fdata = function.Flatten();
+                    data.AddRange(fdata);
 
-                    //store how many shorts there are
-                    int fdataCount = fdata.Count();
+                    //Store how many shorts there are
+                    entryLength += fdata.Length;
+                }
 
-                    //Copy the array into the level floordata array at sector index
-                    Array.Copy(fdata, 0, lvl.FloorData, index, fdataCount);
+                // Map the current index to its FD length
+                entryLengths.Add(index, entryLength);
+            }
 
-                    //Increment index so the next function data is following previous
-                    index += fdataCount;
+            // Recalculate the indices based on the length of the floor data for each.
+            // This allows for new entries to be added (or their entries added to) or removed.
+            Dictionary<int, int> newIndices = new Dictionary<int, int>();
+            int newIndex = 1; // Always start at 1 as 0 is dummy data
+            foreach (int index in entryLengths.Keys)
+            {
+                newIndices.Add(index, newIndex);
+                // The next index will be this index plus the number of ushorts against it in the FD
+                newIndex += entryLengths[index];
+            }
+
+            // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
+            SortedDictionary<int, List<FDEntry>> _updatedEntries = new SortedDictionary<int, List<FDEntry>>();
+            foreach (TR2Room room in lvl.Rooms)
+            {
+                foreach (TRRoomSector sector in room.SectorList)
+                {
+                    ushort index = sector.FDIndex;
+                    if (newIndices.ContainsKey(index))
+                    {
+                        sector.FDIndex = (ushort)newIndices[index];
+
+                        // Map the list of entries against the new index
+                        _updatedEntries.Add(sector.FDIndex, _entries[index]);
+                    }
                 }
             }
+
+            // Update the raw floor data in the level
+            lvl.FloorData = data.ToArray();
+            lvl.NumFloorData = (uint)data.Count;
+
+            // Update the stored values in case of further changes
+            _entries = _updatedEntries;
         }
     }
 }

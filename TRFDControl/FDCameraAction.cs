@@ -41,6 +41,17 @@ namespace TRFDControl
                 //Continue bit set to 0 means to continue, not 1...
                 return !((Value & 0x8000) > 0);
             }
+            internal set
+            {
+                if (value)
+                {
+                    Value = (ushort)(Value & ~0x8000);
+                }
+                else
+                {
+                    Value |= 0x8000;
+                }
+            }
         }
     }
 }

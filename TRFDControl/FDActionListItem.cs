@@ -16,13 +16,23 @@ namespace TRFDControl
             {
                 return (ushort)(Value & 0x03FF);
             }
+            set
+            {
+                // Remove the current parameter, and add the new one
+                Value = (ushort)((Value & ~Parameter) | value);
+            }
         }
 
         public FDTrigAction TrigAction
         {
             get
             {
-                return (FDTrigAction)(Value & 0x7C00);
+                return (FDTrigAction)((Value & 0x7C00) >> 10); // See Control.c line 30
+            }
+            set
+            {
+                Value = (ushort)(Value & ~(byte)TrigAction);
+                Value |= (ushort)((byte)value << 10);
             }
         }
 
@@ -32,6 +42,17 @@ namespace TRFDControl
             {
                 //Continue bit set to 0 means to continue, not 1...
                 return !((Value & 0x8000) > 0);
+            }
+            internal set
+            {
+                if (value)
+                {
+                    Value = (ushort)(Value & ~0x8000);
+                }
+                else
+                {
+                    Value |= 0x8000;
+                }
             }
         }
 
