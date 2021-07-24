@@ -17,6 +17,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RandomizeOutfits { get; set; }
         internal bool RandomizeGameStrings { get; set; }
         internal bool RandomizeNightMode { get; set; }
+        internal bool RandomizeAudio { get; set; }
 
         internal int SecretSeed { get; set; }
         internal int ItemSeed { get; set; }
@@ -25,6 +26,7 @@ namespace TR2RandomizerCore.Randomizers
         internal int OutfitSeed { get; set; }
         internal int GameStringsSeed { get; set; }
         internal int NightModeSeed { get; set; }
+        internal int AudioSeed { get; set; }
 
         internal bool HardSecrets { get; set; }
         internal bool IncludeKeyItems { get; set; }
@@ -159,6 +161,7 @@ namespace TR2RandomizerCore.Randomizers
                 }
             }
             if (RandomizeSecrets)    target += numLevels;
+            if (RandomizeAudio)      target += numLevels;
             if (RandomizeItems)      target += numLevels * 2; // standard/key rando followed by unarmed logic after enemy rando
             if (DeduplicateTextures) target += numLevels * 2;
             if (RandomizeEnemies)    target += CrossLevelEnemies ? numLevels * 3 : numLevels;
@@ -210,6 +213,18 @@ namespace TR2RandomizerCore.Randomizers
                         SaveMonitor = monitor,
                         IsDevelopmentModeOn = DevelopmentMode
                     }.Randomize(SecretSeed);
+                }
+
+                if (!monitor.IsCancelled && RandomizeAudio)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
+                    new AudioRandomizer
+                    {
+                        ScriptEditor = scriptEditor as TR23ScriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor
+                    }.Randomize(AudioSeed);
                 }
 
                 if (!monitor.IsCancelled && DeduplicateTextures)

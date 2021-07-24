@@ -64,6 +64,7 @@
     <Compile Include="Helpers\TRRandomizationEventArgs.cs" />
     <Compile Include="Processors\LevelProcessor.cs" />
     <Compile Include="Processors\AbstractProcessorThread.cs" />
+    <Compile Include="Randomizers\AudioRandomizer.cs" />
     <Compile Include="Randomizers\EnemyRandomizer.cs" />
     <Compile Include="Randomizers\NightModeRandomizer.cs" />
     <Compile Include="Randomizers\GameStringRandomizer.cs" />
