@@ -110,7 +110,7 @@ namespace TRFDControl.Utilities
                 // If doorway, go through and retest, else move onto next stage
                 sector = room.SectorList[xFloor + yFloor * room.NumZSectors];
                 data = GetDoor(sector, floorData);
-                if (data != NO_ROOM)
+                if (data != NO_ROOM && data != 0 & data < level.Rooms.Length - 1)
                 {
                     room = level.Rooms[data];
                 }
@@ -151,7 +151,7 @@ namespace TRFDControl.Utilities
             return sector;
         }
 
-        // See Control.c line 1722
+        // See Control.c line 1344
         public static short GetDoor(TRRoomSector sector, FDControl floorData)
         {
             if (sector.FDIndex == 0)
@@ -162,9 +162,9 @@ namespace TRFDControl.Utilities
             List<FDEntry> entries = floorData.Entries[sector.FDIndex];
             foreach (FDEntry entry in entries)
             {
-                if ((FDFunctions)entry.Setup.Function == FDFunctions.PortalSector)
+                if (entry is FDPortalEntry portal)
                 {
-                    return (short)entry.Setup.Value;
+                    return (short)portal.Room;
                 }
             }
 
