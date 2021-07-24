@@ -35,12 +35,13 @@
             Grid.Column="0"
             IsActive="{Binding RandomizeLevelSequencing, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Playable Levels and Sequencing"
-            Text="Change the number of levels in the game and randomize the order in which they are played.&#x0a;&#x0a;Default: 18"
+            Text="Change the number of levels in the game and randomize the order in which they are played."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding LevelSequencingSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding PlayableLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="1"
+            CustomIntDefault="18"
             CustomIntMaxValue="{Binding TotalLevelCount}"
             CustomIntTitle="Number of levels"/>
 
@@ -49,12 +50,13 @@
             Grid.Column="0"
             IsActive="{Binding RandomizeUnarmedLevels, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Unarmed Levels"
-            Text="Randomize the levels in which Lara loses her weapons at the start. A weapon will be added in unarmed levels for Lara to find.&#x0a;&#x0a;Default: 2"
+            Text="Randomize the levels in which Lara loses her weapons at the start. A weapon will be added in unarmed levels for Lara to find."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding UnarmedLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding UnarmedLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="0"
+            CustomIntDefault="2"
             CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
 
@@ -63,12 +65,13 @@
             Grid.Column="0"
             IsActive="{Binding RandomizeAmmolessLevels, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Ammoless Levels"
-            Text="Randomize the levels in which Lara loses her ammo, medi-packs and flares at the start.&#x0a;&#x0a;Default: 1"
+            Text="Randomize the levels in which Lara loses her ammo, medi-packs and flares at the start."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding AmmolessLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding AmmolessLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="0"
+            CustomIntDefault="1"
             CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
 
@@ -83,6 +86,7 @@
             SeedValue="{Binding SunsetsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding SunsetCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="0"
+            CustomIntDefault="1"
             CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
 
@@ -96,7 +100,8 @@
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding NightModeSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding NightModeCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomIntMinValue="0"
+            CustomIntMinValue="1"
+            CustomIntDefault="0"
             CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
 
@@ -176,7 +181,7 @@
             Grid.Column="2"
             IsActive="{Binding RandomizeAudioTracks, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Audio Tracks"
-            Text="Randomize the ambient tracks for each level, including the title screen, plus the sound to play when a secret is found (this is a global setting, not per level)."
+            Text="Randomize the ambient tracks for each level, including the title screen, plus the sound to play when a secret is found."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
