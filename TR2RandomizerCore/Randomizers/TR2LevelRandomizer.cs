@@ -291,6 +291,13 @@ namespace TR2RandomizerCore.Randomizers
                     itemRandomizer.RandomizeAmmo();
                 }
 
+                new StartPositionRandomizer
+                {
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor
+                }.Randomize(1986);
+
                 if (!monitor.IsCancelled && RandomizeOutfits)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing outfits");

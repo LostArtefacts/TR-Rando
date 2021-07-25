@@ -124,7 +124,7 @@ namespace TRFDControl.Utilities
                 // If doorway, go through and retest, else move onto next stage
                 sector = room.SectorList[xFloor + yFloor * room.NumZSectors];
                 data = GetDoor(sector, floorData);
-                if (data != NO_ROOM && data != 0 & data < level.Rooms.Length - 1)
+                if (data != NO_ROOM && data >= 0 && data < level.Rooms.Length - 1)
                 {
                     room = level.Rooms[data];
                 }
