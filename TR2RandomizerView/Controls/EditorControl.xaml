@@ -167,6 +167,17 @@
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
 
+        <ctrl:ManagedSeedBoolControl
+            Grid.Row="4"
+            Grid.Column="1"
+            IsActive="{Binding RandomizeStartPosition, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Starting Position"
+            Text="Randomize the position where Lara starts each level."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding StartPositionSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            BoolItemsSource="{Binding StartBoolItemControls}"/>
+
         <ctrl:ManagedSeedControl
             Grid.Column="2"
             IsActive="{Binding RandomizeSecretRewards, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"

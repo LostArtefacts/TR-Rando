@@ -15,7 +15,7 @@ namespace TR2RandomizerView.Model
         private readonly ManagedSeedNumeric _levelSequencingControl, _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl, _nightLevelsControl;
         private readonly ManagedSeedBool _audioTrackControl;
 
-        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl, _randomTextControl;
+        private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl, _randomTextControl, _randomStartControl;
 
         private bool _disableDemos, _autoLaunchGame;
 
@@ -26,8 +26,9 @@ namespace TR2RandomizerView.Model
         private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks;
         private BoolItemControlClass _persistOutfits, _randomlyCutHair;
         private BoolItemControlClass _retainKeyItemNames;
+        private BoolItemControlClass _rotateStartPosition;
 
-        private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls;
+        private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls;
 
         private int _levelCount, _maximumLevelCount;
 
@@ -64,7 +65,7 @@ namespace TR2RandomizerView.Model
         {
             get => RandomizeLevelSequencing || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeSunsets ||
                    RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits || 
-                   RandomizeText || RandomizeNightMode;
+                   RandomizeText || RandomizeNightMode || RandomizeStartPosition;
         }
 
         public bool RandomizeLevelSequencing
@@ -469,6 +470,36 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool RandomizeStartPosition
+        {
+            get => _randomStartControl.IsActive;
+            set
+            {
+                _randomStartControl.IsActive = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int StartPositionSeed
+        {
+            get => _randomStartControl.Seed;
+            set
+            {
+                _randomStartControl.Seed = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RotateStartPositionOnly
+        {
+            get => _rotateStartPosition;
+            set
+            {
+                _rotateStartPosition = value;
+                FirePropertyChanged();
+            }
+        }
+
         private bool _developmentMode;
         public bool DevelopmentMode
         {
@@ -620,6 +651,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public List<BoolItemControlClass> StartBoolItemControls
+        {
+            get => _startBoolItemControls;
+            set
+            {
+                _startBoolItemControls = value;
+                FirePropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void FirePropertyChanged([CallerMemberName] string name = null)
@@ -645,6 +686,7 @@ namespace TR2RandomizerView.Model
             _randomTexturesControl = new ManagedSeedBool();
             _randomOutfitsControl = new ManagedSeedBool();
             _randomTextControl = new ManagedSeedBool();
+            _randomStartControl = new ManagedSeedBool();
 
             // Secrets
             Binding randomizeSecretsBinding = new Binding(nameof(RandomizeSecrets)) { Source = this };
@@ -717,13 +759,13 @@ namespace TR2RandomizerView.Model
             IncludeBlankTracks = new BoolItemControlClass()
             {
                 Title = "Include blank tracks",
-                Description = "Applies only to the title screen and level ambience tracks."
+                Description = "Applies only to the title screen and level ambience tracks"
             };
             BindingOperations.SetBinding(IncludeBlankTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
             ChangeTriggerTracks = new BoolItemControlClass()
             {
                 Title = "Change trigger tracks",
-                Description = "Change the tracks that play when crossing triggers, such as the violins in Venice, danger sounds, and so on."
+                Description = "Change the tracks in the game that play when crossing triggers, such as the violins in Vence, danger sounds etc."
             };
             BindingOperations.SetBinding(ChangeTriggerTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
 
@@ -750,6 +792,15 @@ namespace TR2RandomizerView.Model
                 Description = "The original text from the game will be used for key, pickup and puzzle items."
             };
             BindingOperations.SetBinding(RetainKeyItemNames, BoolItemControlClass.IsActiveProperty, randomizeTextBinding);
+
+            // Start positions
+            Binding randomizeStartPositionBinding = new Binding(nameof(RandomizeStartPosition)) { Source = this };
+            RotateStartPositionOnly = new BoolItemControlClass
+            {
+                Title = "Rotate Lara only",
+                Description = "Don't change Lara's position, and instead change only the direction she is facing at the start."
+            };
+            BindingOperations.SetBinding(RotateStartPositionOnly, BoolItemControlClass.IsActiveProperty, randomizeStartPositionBinding);
 
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
@@ -779,6 +830,10 @@ namespace TR2RandomizerView.Model
             TextBoolItemControls = new List<BoolItemControlClass>
             {
                 _retainKeyItemNames
+            };
+            StartBoolItemControls = new List<BoolItemControlClass>
+            {
+                _rotateStartPosition
             };
         }
 
@@ -846,6 +901,10 @@ namespace TR2RandomizerView.Model
             TextSeed = _controller.GameStringsSeed;
             RetainKeyItemNames.Value = _controller.RetainKeyItemNames;
 
+            RandomizeStartPosition = _controller.RandomizeStartPosition;
+            StartPositionSeed = _controller.StartPositionSeed;
+            RotateStartPositionOnly.Value = _controller.RotateStartPositionOnly;
+
             DevelopmentMode = _controller.DevelopmentMode;
             DisableDemos = _controller.DisableDemos;
             AutoLaunchGame = _controller.AutoLaunchGame;
@@ -906,6 +965,10 @@ namespace TR2RandomizerView.Model
             {
                 TextSeed = rng.Next(1, MaxSeedValue);
             }
+            if (RandomizeStartPosition)
+            {
+                StartPositionSeed = rng.Next(1, MaxSeedValue);
+            }
         }
 
         public void SetGlobalSeed(int seed)
@@ -962,20 +1025,26 @@ namespace TR2RandomizerView.Model
             {
                 TextSeed = seed;
             }
+            if (RandomizeStartPosition)
+            {
+                StartPositionSeed = seed;
+            }
         }
 
         public void SetAllRandomizationsEnabled(bool enabled)
         {
             RandomizeLevelSequencing = RandomizeUnarmedLevels = RandomizeAmmolessLevels =
                 RandomizeSecretRewards = RandomizeSunsets = RandomizeNightMode = RandomizeAudioTracks =
-                RandomizeItems = RandomizeSecrets = RandomizeEnemies = RandomizeTextures = RandomizeOutfits = RandomizeText = enabled;
+                RandomizeItems = RandomizeSecrets = RandomizeEnemies = RandomizeTextures = RandomizeOutfits = 
+                RandomizeText = RandomizeStartPosition = enabled;
         }
 
         public bool AllRandomizationsEnabled()
         {
             return RandomizeLevelSequencing && RandomizeUnarmedLevels && RandomizeAmmolessLevels &&
                 RandomizeSecretRewards && RandomizeSunsets && RandomizeNightMode && RandomizeAudioTracks &&
-                RandomizeItems && RandomizeSecrets && RandomizeEnemies && RandomizeTextures && RandomizeOutfits && RandomizeText;
+                RandomizeItems && RandomizeSecrets && RandomizeEnemies && RandomizeTextures && RandomizeOutfits && 
+                RandomizeText && RandomizeStartPosition;
         }
 
         public void Save()
@@ -1045,6 +1114,10 @@ namespace TR2RandomizerView.Model
             _controller.RandomizeGameStrings = RandomizeText;
             _controller.GameStringsSeed = TextSeed;
             _controller.RetainKeyItemNames = RetainKeyItemNames.Value;
+
+            _controller.RandomizeStartPosition = RandomizeStartPosition;
+            _controller.StartPositionSeed = StartPositionSeed;
+            _controller.RotateStartPositionOnly = RotateStartPositionOnly.Value;
 
             _controller.DevelopmentMode = DevelopmentMode;
             _controller.DisableDemos = DisableDemos;
