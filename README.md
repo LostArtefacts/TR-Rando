@@ -26,15 +26,19 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
 * Items - Randomizes pickups, including key items!
 * Enemies - Randomizes the types of enemies you encounter. The enemy types encountered in elevels can also be randomized (cross-level enemies).
 * Textures - Randomly applies textures to a level. Persistent textures can also be set to enable consistency of textures between groups of levels.
-* Level sequencing - Randomizes level order.
+* Level count and sequencing - Randomizes the number of levels in the game and their order.
 * Secrets Rewards - Randomizes what you get from the collect all secrets rewards.
 * Unarmed Levels - Randomizes what levels lara's guns get removed.
-* Audio Tracks - Randomizes what audio tracks are played.
-* Ammo Loss - Randomizes what levels lara's ammo and items get removed.
+* Audio Tracks - Randomizes title screen, level ambience, trigger and secret soundtracks.
+* Ammo Loss - Randomizes what levels Lara's ammo and items get removed.
 * Sunsets - Randomizes what levels have bartoli sunset effect.
+* Outfits - Randomizes the outfit Lara wears in each level and randomly cuts Lara's hair.
+* Text - Randomizes in-game text, such as weapon and level names.
+* Night Mode - Darkens a chosen number of levels to give a night-time effect.
+* Starting Position - Choose to have Lara start levels in different positions and facing a different direction.
 
 # Download
-https://github.com/DanzaG/TR2-Rando/releases/download/V1.3.1/V1.3.1.zip
+https://github.com/DanzaG/TR2-Rando/releases/download/V1.3.2/V1.3.2.zip
 
 # Installation
 https://www.youtube.com/watch?v=MpNBfZgE0Fc
