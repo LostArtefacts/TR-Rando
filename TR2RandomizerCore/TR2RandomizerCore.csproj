@@ -69,6 +69,7 @@
     <Compile Include="Randomizers\NightModeRandomizer.cs" />
     <Compile Include="Randomizers\GameStringRandomizer.cs" />
     <Compile Include="Randomizers\OutfitRandomizer.cs" />
+    <Compile Include="Randomizers\StartPositionRandomizer.cs" />
     <Compile Include="Randomizers\TR2LevelRandomizer.cs" />
     <Compile Include="TR2RandomizerController.cs" />
     <Compile Include="Processors\TextureDeduplicator.cs" />

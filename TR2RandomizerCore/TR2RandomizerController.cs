@@ -362,6 +362,12 @@ namespace TR2RandomizerCore
             get => LevelRandomizer.NightModeCount;
             set => LevelRandomizer.NightModeCount = value;
         }
+
+        public bool ChangeTriggerTracks
+        {
+            get => LevelRandomizer.ChangeTriggerTracks;
+            set => LevelRandomizer.ChangeTriggerTracks = value;
+        }
         #endregion
 
         #region TREditor Passthrough

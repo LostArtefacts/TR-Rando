@@ -181,7 +181,7 @@
             Grid.Column="2"
             IsActive="{Binding RandomizeAudioTracks, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Audio Tracks"
-            Text="Randomize the ambient tracks for each level, including the title screen, plus the sound to play when a secret is found."
+            Text="Randomize the tracks for the title screen, level ambience, triggers and secrets."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"

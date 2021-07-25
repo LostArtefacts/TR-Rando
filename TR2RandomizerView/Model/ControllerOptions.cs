@@ -23,7 +23,7 @@ namespace TR2RandomizerView.Model
         private BoolItemControlClass _includeKeyItems;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileBirdMonsters;
         private BoolItemControlClass _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
-        private BoolItemControlClass _includeBlankTracks;
+        private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks;
         private BoolItemControlClass _persistOutfits, _randomlyCutHair;
         private BoolItemControlClass _retainKeyItemNames;
 
@@ -265,6 +265,16 @@ namespace TR2RandomizerView.Model
             set
             {
                 _includeBlankTracks = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass ChangeTriggerTracks
+        {
+            get => _changeTriggerTracks;
+            set
+            {
+                _changeTriggerTracks = value;
                 FirePropertyChanged();
             }
         }
@@ -707,9 +717,15 @@ namespace TR2RandomizerView.Model
             IncludeBlankTracks = new BoolItemControlClass()
             {
                 Title = "Include blank tracks",
-                Description = null
+                Description = "Applies only to the title screen and level ambience tracks."
             };
             BindingOperations.SetBinding(IncludeBlankTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
+            ChangeTriggerTracks = new BoolItemControlClass()
+            {
+                Title = "Change trigger tracks",
+                Description = "Change the tracks that play when crossing triggers, such as the violins in Venice, danger sounds, and so on."
+            };
+            BindingOperations.SetBinding(ChangeTriggerTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
 
             // Outfits
             Binding randomizeOutfitsBinding = new Binding(nameof(RandomizeOutfits)) { Source = this };
@@ -754,7 +770,7 @@ namespace TR2RandomizerView.Model
             };
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
-                _includeBlankTracks,
+                _includeBlankTracks, _changeTriggerTracks
             };
             OutfitBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -798,6 +814,7 @@ namespace TR2RandomizerView.Model
             RandomizeAudioTracks = _controller.RandomizeAudioTracks;
             AudioTracksSeed = _controller.AudioTracksSeed;
             IncludeBlankTracks.Value = _controller.RandomGameTracksIncludeBlank;
+            ChangeTriggerTracks.Value = _controller.ChangeTriggerTracks;
 
             RandomizeItems = _controller.RandomizeItems;
             ItemSeed = _controller.ItemSeed;
@@ -997,6 +1014,7 @@ namespace TR2RandomizerView.Model
             _controller.RandomizeAudioTracks = RandomizeAudioTracks;
             _controller.AudioTracksSeed = AudioTracksSeed;
             _controller.RandomGameTracksIncludeBlank = IncludeBlankTracks.Value;
+            _controller.ChangeTriggerTracks = ChangeTriggerTracks.Value;
 
             _controller.RandomizeItems = RandomizeItems;
             _controller.ItemSeed = ItemSeed;
