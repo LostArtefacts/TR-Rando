@@ -12,6 +12,8 @@ namespace TR2RandomizerCore.Randomizers
 {
     public class AudioRandomizer : RandomizerBase
     {
+        public bool ChangeTriggerTracks { get; set; }
+
         public TR23ScriptEditor ScriptEditor { get; set; }
 
         private IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> _tracks;
@@ -41,7 +43,10 @@ namespace TR2RandomizerCore.Randomizers
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level.Data);
 
-            RandomizeFloorTracks(level.Data, floorData);
+            if (ChangeTriggerTracks)
+            {
+                RandomizeFloorTracks(level.Data, floorData);
+            }
             RandomizeSecretTracks(level.Data, floorData);
             
             floorData.WriteToLevel(level.Data);

@@ -42,6 +42,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RandomlyCutHair { get; set; }
         internal bool RetainKeyItemNames { get; set; }
         internal uint NightModeCount { get; set; }
+        internal bool ChangeTriggerTracks { get; set; }
         internal bool AutoLaunchGame { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
@@ -87,6 +88,9 @@ namespace TR2RandomizerCore.Randomizers
             NightModeSeed = config.GetInt(nameof(NightModeSeed), defaultSeed);
             NightModeCount = config.GetUInt(nameof(NightModeCount), 1);
 
+            // Note that the main audio config options are held in TRGE for now
+            ChangeTriggerTracks = config.GetBool(nameof(ChangeTriggerTracks), true);
+
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
         }
@@ -126,6 +130,8 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeNightMode)] = RandomizeNightMode;
             config[nameof(NightModeSeed)] = NightModeSeed;
             config[nameof(NightModeCount)] = NightModeCount;
+
+            config[nameof(ChangeTriggerTracks)] = ChangeTriggerTracks;
 
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
@@ -223,7 +229,8 @@ namespace TR2RandomizerCore.Randomizers
                         ScriptEditor = scriptEditor as TR23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
-                        SaveMonitor = monitor
+                        SaveMonitor = monitor,
+                        ChangeTriggerTracks = ChangeTriggerTracks
                     }.Randomize(AudioSeed);
                 }
 
@@ -290,13 +297,6 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing unarmed level items");
                     itemRandomizer.RandomizeAmmo();
                 }
-
-                new StartPositionRandomizer
-                {
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    SaveMonitor = monitor
-                }.Randomize(1986);
 
                 if (!monitor.IsCancelled && RandomizeOutfits)
                 {
