@@ -116,6 +116,9 @@
     <None Include="Resources\enemy_restrictions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\start_positions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Strings\defaults.json" />
     <None Include="Resources\Strings\gamestrings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

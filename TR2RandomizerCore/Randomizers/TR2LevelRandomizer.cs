@@ -18,6 +18,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RandomizeGameStrings { get; set; }
         internal bool RandomizeNightMode { get; set; }
         internal bool RandomizeAudio { get; set; }
+        internal bool RandomizeStartPosition { get; set; }
 
         internal int SecretSeed { get; set; }
         internal int ItemSeed { get; set; }
@@ -27,6 +28,7 @@ namespace TR2RandomizerCore.Randomizers
         internal int GameStringsSeed { get; set; }
         internal int NightModeSeed { get; set; }
         internal int AudioSeed { get; set; }
+        internal int StartPositionSeed { get; set; }
 
         internal bool HardSecrets { get; set; }
         internal bool IncludeKeyItems { get; set; }
@@ -43,6 +45,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RetainKeyItemNames { get; set; }
         internal uint NightModeCount { get; set; }
         internal bool ChangeTriggerTracks { get; set; }
+        internal bool RotateStartPositionOnly { get; set; }
         internal bool AutoLaunchGame { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
@@ -91,6 +94,10 @@ namespace TR2RandomizerCore.Randomizers
             // Note that the main audio config options are held in TRGE for now
             ChangeTriggerTracks = config.GetBool(nameof(ChangeTriggerTracks), true);
 
+            RandomizeStartPosition = config.GetBool(nameof(RandomizeStartPosition));
+            StartPositionSeed = config.GetInt(nameof(StartPositionSeed), defaultSeed);
+            RotateStartPositionOnly = config.GetBool(nameof(RotateStartPositionOnly));
+
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
         }
@@ -133,6 +140,10 @@ namespace TR2RandomizerCore.Randomizers
 
             config[nameof(ChangeTriggerTracks)] = ChangeTriggerTracks;
 
+            config[nameof(RandomizeStartPosition)] = RandomizeStartPosition;
+            config[nameof(StartPositionSeed)] = StartPositionSeed;
+            config[nameof(RotateStartPositionOnly)] = RotateStartPositionOnly;
+
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
         }
@@ -169,6 +180,7 @@ namespace TR2RandomizerCore.Randomizers
             if (RandomizeSecrets)    target += numLevels;
             if (RandomizeAudio)      target += numLevels;
             if (RandomizeItems)      target += numLevels * 2; // standard/key rando followed by unarmed logic after enemy rando
+            if (RandomizeStartPosition) target += numLevels;
             if (DeduplicateTextures) target += numLevels * 2;
             if (RandomizeEnemies)    target += CrossLevelEnemies ? numLevels * 3 : numLevels;
             if (RandomizeTextures)   target += numLevels * 3;
@@ -296,6 +308,19 @@ namespace TR2RandomizerCore.Randomizers
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing unarmed level items");
                     itemRandomizer.RandomizeAmmo();
+                }
+
+                if (!monitor.IsCancelled && RandomizeStartPosition)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing start positions");
+                    new StartPositionRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        RotateOnly = RotateStartPositionOnly,
+                        DevelopmentMode = DevelopmentMode
+                    }.Randomize(StartPositionSeed);
                 }
 
                 if (!monitor.IsCancelled && RandomizeOutfits)

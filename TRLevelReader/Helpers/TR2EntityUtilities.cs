@@ -460,6 +460,11 @@ namespace TRLevelReader.Helpers
                     entity == TR2Entities.Flares_S_P);
         }
 
+        public static bool IsSecretType(TR2Entities entity)
+        {
+            return entity == TR2Entities.StoneSecret_S_P || entity == TR2Entities.JadeSecret_S_P || entity == TR2Entities.GoldSecret_S_P;
+        }
+
         public static bool IsAmmoType(TR2Entities entity)
         {
             return (entity == TR2Entities.ShotgunAmmo_S_P ||

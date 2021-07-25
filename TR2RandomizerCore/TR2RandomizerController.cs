@@ -368,6 +368,24 @@ namespace TR2RandomizerCore
             get => LevelRandomizer.ChangeTriggerTracks;
             set => LevelRandomizer.ChangeTriggerTracks = value;
         }
+
+        public bool RandomizeStartPosition
+        {
+            get => LevelRandomizer.RandomizeStartPosition;
+            set => LevelRandomizer.RandomizeStartPosition = value;
+        }
+
+        public bool RotateStartPositionOnly
+        {
+            get => LevelRandomizer.RotateStartPositionOnly;
+            set => LevelRandomizer.RotateStartPositionOnly = value;
+        }
+
+        public int StartPositionSeed
+        {
+            get => LevelRandomizer.StartPositionSeed;
+            set => LevelRandomizer.StartPositionSeed = value;
+        }
         #endregion
 
         #region TREditor Passthrough

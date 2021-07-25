@@ -5,6 +5,7 @@ using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using TRGE.Core;
+using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 
@@ -178,8 +179,7 @@ namespace TR2RandomizerCore.Randomizers
             Dictionary<int, TR2Entity> entities = new Dictionary<int, TR2Entity>();
             for (int i = 0; i < level.NumEntities; i++)
             {
-                TR2Entities entityType = (TR2Entities)level.Entities[i].TypeID;
-                if (entityType == TR2Entities.StoneSecret_S_P || entityType == TR2Entities.JadeSecret_S_P || entityType == TR2Entities.GoldSecret_S_P)
+                if (TR2EntityUtilities.IsSecretType((TR2Entities)level.Entities[i].TypeID))
                 {
                     entities[i] = level.Entities[i];
                 }
