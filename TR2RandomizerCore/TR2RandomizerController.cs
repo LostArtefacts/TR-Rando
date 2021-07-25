@@ -27,7 +27,7 @@ namespace TR2RandomizerCore
         private Organisation _extLevelOrganisation, _extPlayableOrganisation, _extUnarmedOrganisation, _extAmmolessOrganisation, _extSecretRewardsOrganisation, _extSunsetOrganisation, _extAudioOrganisation;
 
         /// <summary>
-        /// We need to store any organsation values that aren't random so if randomization is turned off for the 
+        /// We need to store any organisation values that aren't random so if randomization is turned off for the 
         /// corresponding functions, they will be reverted to what was previously set externally. If any haven't
         /// been set externally, turning them off will result in standard organisation.
         /// </summary>
@@ -143,13 +143,21 @@ namespace TR2RandomizerCore
         public bool RandomizeAudioTracks
         {
             get => ScriptEditor.GameTrackOrganisation == Organisation.Random;
-            set => ScriptEditor.GameTrackOrganisation = value ? Organisation.Random : _extAudioOrganisation;
+            set
+            {
+                ScriptEditor.GameTrackOrganisation = value ? Organisation.Random : _extAudioOrganisation;
+                LevelRandomizer.RandomizeAudio = value;
+            }
         }
 
         public int AudioTracksSeed
         {
             get => ScriptEditor.GameTrackRNG.Value;
-            set => ScriptEditor.GameTrackRNG = new RandomGenerator(value);
+            set
+            {
+                ScriptEditor.GameTrackRNG = new RandomGenerator(value);
+                LevelRandomizer.AudioSeed = value;
+            }
         }
 
         public bool RandomGameTracksIncludeBlank
@@ -335,6 +343,48 @@ namespace TR2RandomizerCore
         {
             get => LevelRandomizer.GameStringsSeed;
             set => LevelRandomizer.GameStringsSeed = value;
+        }
+
+        public bool RandomizeNightMode
+        {
+            get => LevelRandomizer.RandomizeNightMode;
+            set => LevelRandomizer.RandomizeNightMode = value;
+        }
+
+        public int NightModeSeed
+        {
+            get => LevelRandomizer.NightModeSeed;
+            set => LevelRandomizer.NightModeSeed = value;
+        }
+
+        public uint NightModeCount
+        {
+            get => LevelRandomizer.NightModeCount;
+            set => LevelRandomizer.NightModeCount = value;
+        }
+
+        public bool ChangeTriggerTracks
+        {
+            get => LevelRandomizer.ChangeTriggerTracks;
+            set => LevelRandomizer.ChangeTriggerTracks = value;
+        }
+
+        public bool RandomizeStartPosition
+        {
+            get => LevelRandomizer.RandomizeStartPosition;
+            set => LevelRandomizer.RandomizeStartPosition = value;
+        }
+
+        public bool RotateStartPositionOnly
+        {
+            get => LevelRandomizer.RotateStartPositionOnly;
+            set => LevelRandomizer.RotateStartPositionOnly = value;
+        }
+
+        public int StartPositionSeed
+        {
+            get => LevelRandomizer.StartPositionSeed;
+            set => LevelRandomizer.StartPositionSeed = value;
         }
         #endregion
 

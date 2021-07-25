@@ -456,6 +456,33 @@
       }
     ],
 
+    "Tibet.NightSky": [
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 128,
+        "Y": 128
+      },
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 192,
+        "Y": 128
+      },
+      {
+        "Segment": 3,
+        "Tile": 4,
+        "X": 0,
+        "Y": 160
+      },
+      {
+        "Segment": 4,
+        "Tile": 4,
+        "X": 64,
+        "Y": 192
+      }
+    ],
+
     "Vehicles.Skidoo.Turbo": [
       {
         "Segment": 0,

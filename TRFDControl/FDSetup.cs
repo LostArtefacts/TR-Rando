@@ -10,6 +10,13 @@ namespace TRFDControl
     {
         public ushort Value { get; set; }
 
+        public FDSetup() { }
+
+        public FDSetup(FDFunctions function)
+        {
+            Value = (byte)function;
+        }
+
         public byte Function
         {
             get
@@ -38,7 +45,7 @@ namespace TRFDControl
         {
             get
             {
-                return (byte)(Value & 0x7F00);
+                return (byte)((Value & 0x7F00) >> 8);
             }
         }
 
@@ -47,6 +54,17 @@ namespace TRFDControl
             get
             {
                 return (Value & 0x8000) > 0;
+            }
+            internal set
+            {
+                if (value)
+                {
+                    Value |= 0x8000;
+                }
+                else
+                {
+                    Value = (ushort)(Value & ~0x8000);
+                }
             }
         }
 

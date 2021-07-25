@@ -3,6 +3,8 @@
     public enum TextureCategory
     {
         KeyItem,
-        Secret
+        Secret,
+        DayMode,
+        NightMode
     }
 }

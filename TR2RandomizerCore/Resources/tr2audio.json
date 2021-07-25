@@ -18,7 +18,8 @@
       "Length": 2798586,
       "Categories": [
         5
-      ]
+      ],
+      "PrimaryCategory": 5
     },
     {
       "ID": 4,
@@ -27,7 +28,8 @@
       "Length": 3722318,
       "Categories": [
         5
-      ]
+      ],
+      "PrimaryCategory": 5
     },
     {
       "ID": 5,
@@ -36,7 +38,8 @@
       "Length": 4409678,
       "Categories": [
         5
-      ]
+      ],
+      "PrimaryCategory": 5
     },
     {
       "ID": 6,
@@ -44,8 +47,10 @@
       "Offset": 10930582,
       "Length": 313252,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 7,
@@ -53,8 +58,10 @@
       "Offset": 11243834,
       "Length": 286372,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 8,
@@ -62,8 +69,10 @@
       "Offset": 11530206,
       "Length": 224078,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 9,
@@ -71,8 +80,10 @@
       "Offset": 11754284,
       "Length": 224932,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 10,
@@ -80,8 +91,10 @@
       "Offset": 11979216,
       "Length": 255652,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 11,
@@ -89,8 +102,10 @@
       "Offset": 12234868,
       "Length": 426318,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 12,
@@ -98,8 +113,10 @@
       "Offset": 12661186,
       "Length": 569252,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 13,
@@ -107,8 +124,10 @@
       "Offset": 13230438,
       "Length": 335866,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 14,
@@ -116,8 +135,10 @@
       "Offset": 13566304,
       "Length": 355492,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 15,
@@ -125,8 +146,10 @@
       "Offset": 13921796,
       "Length": 224078,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 16,
@@ -134,9 +157,11 @@
       "Offset": 14145874,
       "Length": 224078,
       "Categories": [
-        1, 
-        4
-      ]
+        1,
+        4,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 17,
@@ -144,8 +169,10 @@
       "Offset": 14369952,
       "Length": 224506,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 18,
@@ -153,8 +180,10 @@
       "Offset": 14594458,
       "Length": 352932,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 19,
@@ -163,8 +192,10 @@
       "Length": 224078,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 20,
@@ -173,8 +204,10 @@
       "Length": 224078,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 21,
@@ -182,8 +215,10 @@
       "Offset": 15395546,
       "Length": 224078,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 22,
@@ -192,8 +227,10 @@
       "Length": 224078,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 23,
@@ -201,8 +238,10 @@
       "Offset": 15843702,
       "Length": 224078,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 27,
@@ -211,7 +250,9 @@
       "Length": 596986,
       "Categories": [
         4,
-        5
+        5,
+        7,
+        8
       ]
     },
     {
@@ -221,7 +262,8 @@
       "Length": 352078,
       "Categories": [
         4,
-        5
+        5,
+        7
       ]
     },
     {
@@ -230,8 +272,10 @@
       "Offset": 17016844,
       "Length": 224078,
       "Categories": [
-        1
-      ]
+        1,
+        9
+      ],
+      "PrimaryCategory": 9
     },
     {
       "ID": 30,
@@ -248,9 +292,10 @@
       "Offset": 18964734,
       "Length": 3844772,
       "Categories": [
-        3,
-        2
-      ]
+        2,
+        3
+      ],
+      "PrimaryCategory": 3
     },
     {
       "ID": 32,
@@ -258,9 +303,10 @@
       "Offset": 22809506,
       "Length": 3832826,
       "Categories": [
-        3,
-        2
-      ]
+        2,
+        3
+      ],
+      "PrimaryCategory": 3
     },
     {
       "ID": 33,
@@ -268,9 +314,10 @@
       "Offset": 26642332,
       "Length": 5390158,
       "Categories": [
-        3,
-        2
-      ]
+        2,
+        3
+      ],
+      "PrimaryCategory": 3
     },
     {
       "ID": 34,
@@ -278,9 +325,10 @@
       "Offset": 32032490,
       "Length": 5945252,
       "Categories": [
-        3,
-        2
-      ]
+        2,
+        3
+      ],
+      "PrimaryCategory": 3
     },
     {
       "ID": 35,
@@ -289,8 +337,10 @@
       "Length": 312398,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7
+      ],
+      "PrimaryCategory": 7
     },
     {
       "ID": 36,
@@ -299,8 +349,10 @@
       "Length": 212132,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7
+      ],
+      "PrimaryCategory": 7
     },
     {
       "ID": 37,
@@ -309,8 +361,10 @@
       "Length": 591012,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7
+      ],
+      "PrimaryCategory": 7
     },
     {
       "ID": 38,
@@ -319,8 +373,11 @@
       "Length": 1806158,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        6,
+        8
+      ],
+      "PrimaryCategory": 6
     },
     {
       "ID": 39,
@@ -329,8 +386,11 @@
       "Length": 700238,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7,
+        8
+      ],
+      "PrimaryCategory": 8
     },
     {
       "ID": 40,
@@ -339,8 +399,10 @@
       "Length": 5149518,
       "Categories": [
         1,
-        2
-      ]
+        2,
+        6
+      ],
+      "PrimaryCategory": 6
     },
     {
       "ID": 41,
@@ -359,8 +421,10 @@
       "Length": 429732,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        8
+      ],
+      "PrimaryCategory": 8
     },
     {
       "ID": 43,
@@ -369,8 +433,10 @@
       "Length": 538958,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        8
+      ],
+      "PrimaryCategory": 8
     },
     {
       "ID": 44,
@@ -379,8 +445,10 @@
       "Length": 634532,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7
+      ],
+      "PrimaryCategory": 7
     },
     {
       "ID": 45,
@@ -389,8 +457,10 @@
       "Length": 1954212,
       "Categories": [
         1,
-        2
-      ]
+        2,
+        6
+      ],
+      "PrimaryCategory": 6
     },
     {
       "ID": 46,
@@ -399,8 +469,10 @@
       "Length": 1132452,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        8
+      ],
+      "PrimaryCategory": 8
     },
     {
       "ID": 47,
@@ -408,7 +480,8 @@
       "Offset": 51892710,
       "Length": 204026,
       "Categories": [
-        4
+        4,
+        7
       ]
     },
     {
@@ -418,8 +491,10 @@
       "Length": 511226,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7
+      ],
+      "PrimaryCategory": 7
     },
     {
       "ID": 49,
@@ -428,8 +503,10 @@
       "Length": 382798,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7
+      ],
+      "PrimaryCategory": 7
     },
     {
       "ID": 50,
@@ -438,8 +515,10 @@
       "Length": 459172,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7
+      ],
+      "PrimaryCategory": 7
     },
     {
       "ID": 51,
@@ -448,8 +527,10 @@
       "Length": 333732,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7
+      ],
+      "PrimaryCategory": 7
     },
     {
       "ID": 52,
@@ -458,8 +539,10 @@
       "Length": 5283066,
       "Categories": [
         1,
-        2
-      ]
+        2,
+        6
+      ],
+      "PrimaryCategory": 6
     },
     {
       "ID": 53,
@@ -468,8 +551,10 @@
       "Length": 2346318,
       "Categories": [
         1,
-        2
-      ]
+        2,
+        6
+      ],
+      "PrimaryCategory": 6
     },
     {
       "ID": 54,
@@ -478,8 +563,10 @@
       "Length": 307706,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7
+      ],
+      "PrimaryCategory": 7
     },
     {
       "ID": 55,
@@ -488,8 +575,10 @@
       "Length": 1411066,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        8
+      ],
+      "PrimaryCategory": 8
     },
     {
       "ID": 56,
@@ -498,8 +587,10 @@
       "Length": 377678,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7
+      ],
+      "PrimaryCategory": 7
     },
     {
       "ID": 57,
@@ -508,8 +599,10 @@
       "Length": 1634638,
       "Categories": [
         1,
-        2
-      ]
+        2,
+        6
+      ],
+      "PrimaryCategory": 6
     },
     {
       "ID": 58,
@@ -517,9 +610,10 @@
       "Offset": 65144136,
       "Length": 6770852,
       "Categories": [
-        3,
-        2
-      ]
+        2,
+        3
+      ],
+      "PrimaryCategory": 3
     },
     {
       "ID": 59,
@@ -527,9 +621,10 @@
       "Offset": 71914988,
       "Length": 6775972,
       "Categories": [
-        3,
-        2
-      ]
+        2,
+        3
+      ],
+      "PrimaryCategory": 3
     },
     {
       "ID": 60,
@@ -538,8 +633,10 @@
       "Length": 3446266,
       "Categories": [
         1,
-        2
-      ]
+        2,
+        6
+      ],
+      "PrimaryCategory": 6
     },
     {
       "ID": 61,
@@ -548,8 +645,11 @@
       "Length": 819278,
       "Categories": [
         1,
-        4
-      ]
+        4,
+        7,
+        8
+      ],
+      "PrimaryCategory": 8
     },
     {
       "ID": 62,
@@ -557,8 +657,10 @@
       "Offset": 82956504,
       "Length": 756558,
       "Categories": [
-        5
-      ]
+        5,
+        8
+      ],
+      "PrimaryCategory": 8
     },
     {
       "ID": 63,
@@ -566,8 +668,11 @@
       "Offset": 83713062,
       "Length": 631118,
       "Categories": [
-        5
-      ]
+        4,
+        5,
+        8
+      ],
+      "PrimaryCategory": 8
     },
     {
       "ID": 64,
@@ -575,8 +680,10 @@
       "Offset": 84344180,
       "Length": 5396132,
       "Categories": [
-        2
-      ]
+        2,
+        6
+      ],
+      "PrimaryCategory": 6
     }
   ]
 }

@@ -45,6 +45,11 @@ namespace TR2RandomizerCore.Helpers
         /// </summary>
         public bool IsAssault => Is(LevelNames.ASSAULT);
 
+        /// <summary>
+        /// Checks if the current level has had its lighting values reduced.
+        /// </summary>
+        public bool IsNightMode => Data.Rooms.ToList().All(r => r.AmbientIntensity == TR2Room.DarknessIntensity1);
+
         public bool CanPerformDraining(short room)
         {
             foreach (List<int> area in RoomWaterUtilities.RoomRemovalWaterMap[Name])

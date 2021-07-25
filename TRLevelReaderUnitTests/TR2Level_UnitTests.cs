@@ -9,6 +9,7 @@ using TRLevelReader.Model;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
+using System.Linq;
 
 namespace TRLevelReaderUnitTests
 {
@@ -547,6 +548,344 @@ namespace TRLevelReaderUnitTests
             {
                 Assert.IsFalse(trigger.TrigSetup.OneShot);
             }
+        }
+
+        [TestMethod]
+        public void FloorData_InsertFDTest()
+        {
+            //Read Dragons Lair data
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("xian.tr2");
+
+            //Parse the floordata using FDControl
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Find a sector that currently has no floor data
+            int room, roomSector = -1;
+            for (room = 0; room < lvl.NumRooms; room++)
+            {
+                roomSector = lvl.Rooms[room].SectorList.ToList().FindIndex(s => s.FDIndex == 0);
+                if (roomSector != -1)
+                {
+                    break;
+                }
+            }
+
+            if (roomSector == -1)
+            {
+                Assert.Fail("Could not locate a Room Sector that does not have floor data associated with it.");
+            }
+
+            TRRoomSector sector = lvl.Rooms[room].SectorList[roomSector];
+
+            // Create a slot in the FD for this sector
+            fdataReader.CreateFloorData(sector);
+            Assert.AreNotEqual(sector.FDIndex, 0, "Sector does not have FD allocated.");
+
+            // Add a music trigger
+            fdataReader.Entries[sector.FDIndex].Add(new FDTriggerEntry
+            {
+                Setup = new FDSetup(FDFunctions.Trigger),
+                TrigSetup = new FDTrigSetup(),
+                TrigActionList = new List<FDActionListItem>
+                {
+                    new FDActionListItem
+                    {
+                        TrigAction = FDTrigAction.PlaySoundtrack,
+                        Parameter = 40
+                    }
+                }
+            });
+
+            //Write the data back
+            fdataReader.WriteToLevel(lvl);
+
+            //Save it and read it back in
+            TR2LevelWriter writer = new TR2LevelWriter();
+            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            //Reassign the sector
+            sector = lvl.Rooms[room].SectorList[roomSector];
+
+            fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Ensure the sector still has FD associated with it
+            Assert.AreNotEqual(sector.FDIndex, 0, "Sector no longer has FD after write/read.");
+
+            //Verify there is one entry for this sector
+            Assert.AreEqual(fdataReader.Entries[sector.FDIndex].Count, 1);
+
+            //Verify the trigger we added matches what we expect
+            FDEntry entry = fdataReader.Entries[sector.FDIndex][0];
+            Assert.IsTrue(entry is FDTriggerEntry);
+
+            FDTriggerEntry triggerEntry = entry as FDTriggerEntry;
+            Assert.IsTrue(triggerEntry.Setup.Function == (byte)FDFunctions.Trigger);
+            Assert.IsTrue(triggerEntry.TrigActionList.Count == 1);
+            Assert.IsTrue(triggerEntry.TrigActionList[0].TrigAction == FDTrigAction.PlaySoundtrack);
+            Assert.IsTrue(triggerEntry.TrigActionList[0].Parameter == 40);
+        }
+
+        [TestMethod]
+        public void FloorData_RemoveFDTest()
+        {
+            //Read Dragons Lair data
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("xian.tr2");
+
+            //Parse the floordata using FDControl
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Find a sector that currently has floor data
+            int room, roomSector = -1;
+            for (room = 0; room < lvl.NumRooms; room++)
+            {
+                roomSector = lvl.Rooms[room].SectorList.ToList().FindIndex(s => s.FDIndex > 0);
+                if (roomSector != -1)
+                {
+                    break;
+                }
+            }
+
+            if (roomSector == -1)
+            {
+                Assert.Fail("Could not locate a Room Sector that has floor data associated with it.");
+            }
+
+            TRRoomSector sector = lvl.Rooms[room].SectorList[roomSector];
+
+            // Remove the FD for this sector
+            fdataReader.RemoveFloorData(sector);
+            Assert.AreEqual(sector.FDIndex, 0, "Sector still has FD allocated.");
+
+            //Write the data back
+            fdataReader.WriteToLevel(lvl);
+
+            //Save it and read it back in
+            TR2LevelWriter writer = new TR2LevelWriter();
+            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            //Reassign the sector
+            sector = lvl.Rooms[room].SectorList[roomSector];
+
+            fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Ensure the sector still has FD associated with it
+            Assert.AreEqual(sector.FDIndex, 0, "Sector still has FD after write/read.");
+        }
+
+        [TestMethod]
+        public void FloorData_InsertRemoveFDEntryTest()
+        {
+            //Read Dragons Lair data
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("xian.tr2");
+
+            //Store the original floordata from the level
+            ushort[] originalFData = new ushort[lvl.NumFloorData];
+            Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
+
+            //Parse the floordata using FDControl
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Verify index 9 has one entry and that it's currently 
+            //set as EndData for this index
+            Assert.AreEqual(fdataReader.Entries[9].Count, 1);
+            Assert.IsTrue(fdataReader.Entries[9][0].Setup.EndData);
+
+            //Verify the next index is currently 9 + the entry's length
+            List<int> indices = fdataReader.Entries.Keys.ToList();
+            int nextIndex = 9 + fdataReader.Entries[9][0].Flatten().Length;
+            Assert.AreEqual(nextIndex, indices[indices.IndexOf(9) + 1]);
+
+            //Add a music trigger to index 9
+            fdataReader.Entries[9].Add(new FDTriggerEntry
+            {
+                Setup = new FDSetup(FDFunctions.Trigger),
+                TrigSetup = new FDTrigSetup(),
+                TrigActionList = new List<FDActionListItem>
+                {
+                    new FDActionListItem
+                    {
+                        TrigAction = FDTrigAction.PlaySoundtrack,
+                        Parameter = 40
+                    }
+                }
+            });
+
+            //Write the data back
+            fdataReader.WriteToLevel(lvl);
+
+            //Verify index 9 has two entries, that its first entry 
+            //does not have EndData set, but that its second does
+            Assert.AreEqual(fdataReader.Entries[9].Count, 2);
+            Assert.IsFalse(fdataReader.Entries[9][0].Setup.EndData);
+            Assert.IsTrue(fdataReader.Entries[9][1].Setup.EndData);
+
+            //Verify the next index is now 9 + both the entry's lengths
+            //Bear in mind the underlying dictionary's keys have changed
+            indices = fdataReader.Entries.Keys.ToList();
+            nextIndex = 9 + fdataReader.Entries[9][0].Flatten().Length + fdataReader.Entries[9][1].Flatten().Length;
+            Assert.AreEqual(nextIndex, indices[indices.IndexOf(9) + 1]);
+
+            //Remove the new entry
+            fdataReader.Entries[9].RemoveAt(1);
+
+            //Write the data back
+            fdataReader.WriteToLevel(lvl);
+
+            //Verify index 9 again has one entry and that it's again 
+            //set as EndData for this index
+            Assert.AreEqual(fdataReader.Entries[9].Count, 1);
+            Assert.IsTrue(fdataReader.Entries[9][0].Setup.EndData);
+
+            //Verify the next index is again 9 + the entry's length
+            indices = fdataReader.Entries.Keys.ToList();
+            nextIndex = 9 + fdataReader.Entries[9][0].Flatten().Length;
+            Assert.AreEqual(nextIndex, indices[indices.IndexOf(9) + 1]);
+
+            //Finally compare to make sure the original fdata was written back.
+            CollectionAssert.AreEqual(originalFData, lvl.FloorData, "Floordata does not match");
+            Assert.AreEqual((uint)lvl.FloorData.Length, lvl.NumFloorData);
+        }
+
+        [TestMethod]
+        public void FloorData_InsertFDEntryWriteReadTest()
+        {
+            //Read Dragons Lair data
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("xian.tr2");
+
+            //Parse the floordata using FDControl
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Add a music trigger to index 9
+            fdataReader.Entries[9].Add(new FDTriggerEntry
+            {
+                Setup = new FDSetup(FDFunctions.Trigger),
+                TrigSetup = new FDTrigSetup(),
+                TrigActionList = new List<FDActionListItem>
+                {
+                    new FDActionListItem
+                    {
+                        TrigAction = FDTrigAction.PlaySoundtrack,
+                        Parameter = 40
+                    }
+                }
+            });
+
+            //Write the data back
+            fdataReader.WriteToLevel(lvl);
+
+            //Save it and read it back in
+            TR2LevelWriter writer = new TR2LevelWriter();
+            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Verify index 9 has two entries, that its first entry 
+            //does not have EndData set, but that its second does
+            Assert.AreEqual(fdataReader.Entries[9].Count, 2);
+            Assert.IsFalse(fdataReader.Entries[9][0].Setup.EndData);
+            Assert.IsTrue(fdataReader.Entries[9][1].Setup.EndData);
+
+            //Verify the trigger we added matches what we expect
+            FDEntry entry = fdataReader.Entries[9][1];
+            Assert.IsTrue(entry is FDTriggerEntry);
+
+            FDTriggerEntry triggerEntry = entry as FDTriggerEntry;
+            Assert.IsTrue(triggerEntry.Setup.Function == (byte)FDFunctions.Trigger);
+            Assert.IsTrue(triggerEntry.TrigActionList.Count == 1);
+            Assert.IsTrue(triggerEntry.TrigActionList[0].TrigAction == FDTrigAction.PlaySoundtrack);
+            Assert.IsTrue(triggerEntry.TrigActionList[0].Parameter == 40);
+        }
+
+        [TestMethod]
+        public void FloorData_AppendFDActionListItemTest()
+        {
+            //Read Dragons Lair data
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("xian.tr2");
+
+            //Parse the floordata using FDControl
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Add a music action to the trigger at index 13
+            FDTriggerEntry trigger = fdataReader.Entries[13][0] as FDTriggerEntry;
+            Assert.AreEqual(trigger.TrigActionList.Count, 2);
+            trigger.TrigActionList.Add(new FDActionListItem
+            {
+                TrigAction = FDTrigAction.PlaySoundtrack,
+                Parameter = 40
+            });
+
+            //Write the data back
+            fdataReader.WriteToLevel(lvl);
+
+            //Save it and read it back in
+            TR2LevelWriter writer = new TR2LevelWriter();
+            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            trigger = fdataReader.Entries[13][0] as FDTriggerEntry;
+            // Verifying that the trigger has 3 items implicitly verifies that the Continue
+            // flag was correctly changed on the previous last item and on the new item,
+            // otherwise the parsing would have stopped at the second
+            Assert.AreEqual(trigger.TrigActionList.Count, 3);
+
+            Assert.IsTrue(trigger.TrigActionList[2].TrigAction == FDTrigAction.PlaySoundtrack);
+            Assert.IsTrue(trigger.TrigActionList[2].Parameter == 40);
+        }
+
+        [TestMethod]
+        public void FloorData_AppendFDActionListItemCamTest()
+        {
+            //Read Dragons Lair data
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("xian.tr2");
+
+            //Parse the floordata using FDControl
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Add a music action to the trigger at index 6010
+            //This has a CamAction in its TrigList so this tests
+            //that the Continue flag is correctly set
+            FDTriggerEntry trigger = fdataReader.Entries[6010][1] as FDTriggerEntry;
+            Assert.AreEqual(trigger.TrigActionList.Count, 2);
+            Assert.IsNotNull(trigger.TrigActionList[1].CamAction);
+            Assert.IsFalse(trigger.TrigActionList[1].CamAction.Continue);
+
+            trigger.TrigActionList.Add(new FDActionListItem
+            {
+                TrigAction = FDTrigAction.PlaySoundtrack,
+                Parameter = 40
+            });
+
+            //Write the data back
+            fdataReader.WriteToLevel(lvl);
+
+            //Check the CamAction has been updated
+            Assert.AreEqual(trigger.TrigActionList.Count, 3);
+            Assert.IsNotNull(trigger.TrigActionList[1].CamAction);
+            Assert.IsTrue(trigger.TrigActionList[1].CamAction.Continue);
+
+            //Check the music trigger has Continue set to false
+            Assert.IsFalse(trigger.TrigActionList[2].Continue);
         }
     }
 }

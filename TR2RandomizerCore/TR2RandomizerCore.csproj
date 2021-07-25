@@ -64,9 +64,12 @@
     <Compile Include="Helpers\TRRandomizationEventArgs.cs" />
     <Compile Include="Processors\LevelProcessor.cs" />
     <Compile Include="Processors\AbstractProcessorThread.cs" />
+    <Compile Include="Randomizers\AudioRandomizer.cs" />
     <Compile Include="Randomizers\EnemyRandomizer.cs" />
+    <Compile Include="Randomizers\NightModeRandomizer.cs" />
     <Compile Include="Randomizers\GameStringRandomizer.cs" />
     <Compile Include="Randomizers\OutfitRandomizer.cs" />
+    <Compile Include="Randomizers\StartPositionRandomizer.cs" />
     <Compile Include="Randomizers\TR2LevelRandomizer.cs" />
     <Compile Include="TR2RandomizerController.cs" />
     <Compile Include="Processors\TextureDeduplicator.cs" />
@@ -111,6 +114,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\enemy_restrictions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\start_positions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Strings\defaults.json" />
@@ -546,6 +552,9 @@
     <None Include="Resources\Textures\Source\Static\global_grouping.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Static\GreatWall\NightSky\Data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Source\Static\GreatWall\Sky\Data.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -664,6 +673,9 @@
     <None Include="Resources\Textures\Source\Static\Tibet\Gate\Data.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Static\Tibet\NightSky\Data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Source\Static\Tibet\Sky\Data.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -698,6 +710,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Source\Static\Venice\Floor\Data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Static\Venice\NightSky\Bartoli\Data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Static\Venice\NightSky\Boat\Data.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Source\Static\Venice\Sky\Bartoli\Data.json">
@@ -1084,6 +1102,9 @@
     <Content Include="Resources\Textures\Source\Static\Fire\Flare\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Static\GreatWall\NightSky\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Textures\Source\Static\GreatWall\Sky\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1204,6 +1225,9 @@
     <Content Include="Resources\Textures\Source\Static\Tibet\Gate\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Static\Tibet\NightSky\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Textures\Source\Static\Tibet\Sky\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1229,6 +1253,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Static\Venice\Floor\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Static\Venice\NightSky\Boat\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Static\Venice\NightSky\Bartoli\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Static\Venice\Sky\Bartoli\Segments.png">

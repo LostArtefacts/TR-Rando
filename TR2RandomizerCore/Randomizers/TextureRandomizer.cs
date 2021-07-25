@@ -18,6 +18,7 @@ namespace TR2RandomizerCore.Randomizers
         private TextureDatabase _textureDatabase;
         private Dictionary<TextureCategory, bool> _textureOptions;
 
+        internal bool NightModeOnly { get; set; }
         internal bool PersistVariants { get; set; }
         internal bool RetainKeySprites { get; set; }
         internal bool RetainSecretSprites { get; set; }
@@ -33,6 +34,56 @@ namespace TR2RandomizerCore.Randomizers
         {
             _generator = new Random(seed);
 
+            using (_textureDatabase = new TextureDatabase())
+            {
+                if (NightModeOnly)
+                {
+                    RandomizeNightModeTextures();
+                }
+                else
+                {
+                    RandomizeAllTextures();
+                }
+            }
+        }
+
+        private void RandomizeNightModeTextures()
+        {
+            // This is called if global texture randomization is disabled, but night-mode randomization is selected.
+            // The main idea is to replace the SkyBox in levels that are now set at night, but this is treated as a
+            // texture category so potentially any other textures could also be targeted.
+            _textureOptions = new Dictionary<TextureCategory, bool>();
+
+            foreach (TR23ScriptedLevel lvl in Levels)
+            {
+                LoadLevelInstance(lvl);
+
+                if (_levelInstance.IsNightMode)
+                {
+                    TextureLevelMapping mapping = GetMapping(_levelInstance);
+                    using (TextureHolder holder = new TextureHolder(mapping, this))
+                    {
+                        foreach (AbstractTextureSource source in holder.Variants.Keys)
+                        {
+                            if (source.IsInCategory(TextureCategory.NightMode))
+                            {
+                                RedrawTargets(holder.Mapping, source, holder.Variants[source], _textureOptions);
+                            }
+                        }
+                    }
+
+                    SaveLevelInstance();
+                }
+
+                if (!TriggerProgress())
+                {
+                    break;
+                }
+            }
+        }
+
+        private void RandomizeAllTextures()
+        {
             // These options are used to switch on/off specific textures
             _textureOptions = new Dictionary<TextureCategory, bool>
             {
@@ -41,43 +92,40 @@ namespace TR2RandomizerCore.Randomizers
             };
 
             SetMessage("Randomizing textures - loading levels");
-            
-            using (_textureDatabase = new TextureDatabase())
+
+            List<TextureProcessor> processors = new List<TextureProcessor> { new TextureProcessor(this) };
+            int levelSplit = (int)(Levels.Count / _maxThreads);
+
+            bool beginProcessing = true;
+            foreach (TR23ScriptedLevel lvl in Levels)
             {
-                List<TextureProcessor> processors = new List<TextureProcessor> { new TextureProcessor(this) };
-                int levelSplit = (int)(Levels.Count / _maxThreads);
-                
-                bool beginProcessing = true;
-                foreach (TR23ScriptedLevel lvl in Levels)
+                if (processors[processors.Count - 1].LevelCount == levelSplit)
                 {
-                    if (processors[processors.Count - 1].LevelCount == levelSplit)
-                    {
-                        // Kick start the last one
-                        processors[processors.Count - 1].Start();
-                        processors.Add(new TextureProcessor(this));
-                    }
-
-                    processors[processors.Count - 1].AddLevel(LoadCombinedLevel(lvl));
-
-                    if (!TriggerProgress())
-                    {
-                        beginProcessing = false;
-                        break;
-                    }
+                    // Kick start the last one
+                    processors[processors.Count - 1].Start();
+                    processors.Add(new TextureProcessor(this));
                 }
 
-                if (beginProcessing)
-                {
-                    SetMessage("Randomizing textures - applying texture packs");
-                    foreach (TextureProcessor processor in processors)
-                    {
-                        processor.Start();
-                    }
+                processors[processors.Count - 1].AddLevel(LoadCombinedLevel(lvl));
 
-                    foreach (TextureProcessor processor in processors)
-                    {
-                        processor.Join();
-                    }
+                if (!TriggerProgress())
+                {
+                    beginProcessing = false;
+                    break;
+                }
+            }
+
+            if (beginProcessing)
+            {
+                SetMessage("Randomizing textures - applying texture packs");
+                foreach (TextureProcessor processor in processors)
+                {
+                    processor.Start();
+                }
+
+                foreach (TextureProcessor processor in processors)
+                {
+                    processor.Join();
                 }
             }
 
@@ -127,11 +175,11 @@ namespace TR2RandomizerCore.Randomizers
             }
         }
 
-        private void RedrawTargets(TextureLevelMapping mapping, AbstractTextureSource source, string variant)
+        private void RedrawTargets(TextureLevelMapping mapping, AbstractTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
         {
             lock (_drawLock)
             {
-                mapping.RedrawTargets(source, variant, _textureOptions);
+                mapping.RedrawTargets(source, variant, options);
             }
         }
 
@@ -176,13 +224,18 @@ namespace TR2RandomizerCore.Randomizers
 
             protected override void ProcessImpl()
             {
+                Dictionary<TextureCategory, bool> options = new Dictionary<TextureCategory, bool>(_outer._textureOptions);
+
                 foreach (TR2CombinedLevel level in _holders.Keys)
                 {
+                    options[TextureCategory.NightMode] = level.IsNightMode;
+                    options[TextureCategory.DayMode] = !options[TextureCategory.NightMode];
+
                     using (TextureHolder holder = _holders[level])
                     {
                         foreach (AbstractTextureSource source in holder.Variants.Keys)
                         {
-                            _outer.RedrawTargets(holder.Mapping, source, holder.Variants[source]);
+                            _outer.RedrawTargets(holder.Mapping, source, holder.Variants[source], options);
                         }
 
                         // Add landmarks, but only if there is room available for them
