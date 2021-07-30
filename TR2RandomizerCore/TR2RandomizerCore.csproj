@@ -56,6 +56,7 @@
     <Compile Include="Helpers\EnemyDifficulty.cs" />
     <Compile Include="Helpers\LandmarkImporter.cs" />
     <Compile Include="Helpers\Location.cs" />
+    <Compile Include="Helpers\MeshEditor.cs" />
     <Compile Include="Helpers\ModificationStamp.cs" />
     <Compile Include="Helpers\TR2CombinedLevel.cs" />
     <Compile Include="Helpers\TR2LevelTextureWeightComparer.cs" />
@@ -432,6 +433,18 @@
     <None Include="Resources\Textures\Mapping\ASSAULT.TR2-Textures.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Mapping\CUT4.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Mapping\CUT3.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Mapping\CUT2.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Mapping\CUT1.TR2-Textures.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Mapping\FLOATING.TR2-UKBox-Textures.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -489,10 +502,19 @@
     <None Include="Resources\Textures\Mapping\WALL.TR2-Textures.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Textures\Source\Dynamic\Opera\PlaneTheme.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Dynamic\China\WallTheme.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Textures\Source\Dynamic\Tibet\SnowTheme.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Source\Dynamic\Underwater\MariaTheme.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Static\Enemies\Bartoli\Data.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Source\Static\Enemies\Chicken\Data.json">
@@ -550,6 +572,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Source\Static\global_grouping.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Textures\Source\Static\GreatWall\Laptop\Data.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Source\Static\GreatWall\NightSky\Data.json">
@@ -1045,6 +1070,9 @@
     <Content Include="Resources\Models\Yeti\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Textures\Source\Static\Enemies\Bartoli\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Textures\Source\Static\Enemies\Chicken\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1100,6 +1128,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Static\Fire\Flare\Segments.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Textures\Source\Static\GreatWall\Laptop\Segments.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Textures\Source\Static\GreatWall\NightSky\Segments.png">

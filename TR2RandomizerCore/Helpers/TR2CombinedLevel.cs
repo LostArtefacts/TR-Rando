@@ -26,6 +26,31 @@ namespace TR2RandomizerCore.Helpers
         public string Name => Script.LevelFileBaseName.ToUpper();
 
         /// <summary>
+        /// The level data for the cutscene at the end of this level, if any.
+        /// </summary>
+        public TR2CombinedLevel CutSceneLevel { get; set; }
+
+        /// <summary>
+        /// A reference to the main level if this is a CutScene level.
+        /// </summary>
+        public TR2CombinedLevel ParentLevel { get; set; }
+
+        /// <summary>
+        /// True if this is a CutScene level, and so has a parent level.
+        /// </summary>
+        public bool IsCutScene => ParentLevel != null;
+
+        /// <summary>
+        /// Whether or not this level has a cutscene at the end.
+        /// </summary>
+        public bool HasCutScene => Script.HasCutScene;
+
+        /// <summary>
+        /// Gets the level's sequence in the game. If this is a CutScene level, this returns the parent sequence.
+        /// </summary>
+        public int Sequence => IsCutScene ? ParentLevel.Sequence : Script.Sequence;
+
+        /// <summary>
         /// Compares the given file name or path against the base file name of the level (case-insensitive).
         /// </summary>
         public bool Is(string levelFileName) => Script.Is(levelFileName);

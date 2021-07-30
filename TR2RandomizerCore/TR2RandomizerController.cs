@@ -321,6 +321,18 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.RandomlyCutHair = value;
         }
 
+        public bool RemoveRobeDagger
+        {
+            get => LevelRandomizer.RemoveRobeDagger;
+            set => LevelRandomizer.RemoveRobeDagger = value;
+        }
+
+        public bool EnableInvisibility
+        {
+            get => LevelRandomizer.EnableInvisibility;
+            set => LevelRandomizer.EnableInvisibility = value;
+        }
+
         public int OutfitSeed
         {
             get => LevelRandomizer.OutfitSeed;

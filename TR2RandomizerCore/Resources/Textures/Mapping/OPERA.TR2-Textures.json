@@ -1,4 +1,18 @@
 {
+  "Dynamic": {
+    "Opera.PlaneTheme": {
+      "Default": {
+        "3": [
+          "0, 64, 64, 64"
+        ],
+        "7": [
+          "0, 200, 40, 40",
+          "64, 192, 40, 40"
+        ]
+      }
+    }
+  },
+
   "Static": {
     "Enemies.ShotgunGoon": [
       {

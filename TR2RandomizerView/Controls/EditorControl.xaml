@@ -198,7 +198,7 @@
             SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             BoolItemsSource="{Binding AudioBoolItemControls}"/>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedAdvancedControl
             Grid.Row="2"
             Grid.Column="2"
             IsActive="{Binding RandomizeOutfits, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -206,8 +206,17 @@
             Text="Randomize Lara's outfit in each level."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding OutfitSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            BoolItemsSource="{Binding OutfitBoolItemControls}"/>
+            SeedValue="{Binding OutfitSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Outfits (Advanced)"
+                                        MainDescription="Customize the outfit randomization."
+                                        BoolItemsSource="{Binding Data.OutfitBoolItemControls, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
 
         <ctrl:ManagedSeedBoolControl
             Grid.Row="3"
