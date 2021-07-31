@@ -316,6 +316,26 @@ namespace TRLevelReader.Model
         /// </summary>
         public uint[] SampleIndices { get; set; }
 
+        #region Byte Trackers for Testing/Debugging
+#if DEBUG
+
+        public long ByteCountAfterPalettes;
+        public long ByteCountAfterRooms;
+        public long ByteCountAfterFloorData;
+        public long ByteCountAfterMeshData;
+        public long ByteCountAfterAnimationData;
+        public long ByteCountAfterModelData;
+        public long ByteCountAfterSprites;
+        public long ByteCountAfterCamerasSourcesAndBoxes;
+        public long ByteCountAfterOverlapsAndZones;
+        public long ByteCountAfterTextures;
+        public long ByteCountAfterEntities;
+        public long ByteCountAfterMiscData;
+        public long ByteCountAfterSoundData;
+
+#endif
+        #endregion
+
         public TR3Level()
         {
 
@@ -333,20 +353,35 @@ namespace TRLevelReader.Model
                     writer.Write(NumImages);
                     foreach (TRTexImage8 tex in Images8) { writer.Write(tex.Serialize()); }
                     foreach (TRTexImage16 tex in Images16) { writer.Write(tex.Serialize()); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterPalettes);
+#endif
+
                     writer.Write(Unused);
                     writer.Write(NumRooms);
                     foreach (TR3Room room in Rooms) { writer.Write(room.Serialize()); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterRooms);
+#endif
+
                     writer.Write(NumFloorData);
                     foreach (ushort data in FloorData) { writer.Write(data); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterFloorData);
+#endif
+
                     writer.Write(NumMeshData);
-
-                    //Because mesh construction still hasnt been resolved, we will
-                    //just write the raw mesh data as words for testing
                     foreach (TRMesh mesh in Meshes) { writer.Write(mesh.Serialize()); }
-                    //foreach (ushort word in RawMeshData) { writer.Write(word); }
-
                     writer.Write(NumMeshPointers);
                     foreach (uint ptr in MeshPointers) { writer.Write(ptr); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterMeshData);
+#endif
+
                     writer.Write(NumAnimations);
                     foreach (TRAnimation anim in Animations) { writer.Write(anim.Serialize()); }
                     writer.Write(NumStateChanges);
@@ -355,6 +390,11 @@ namespace TRLevelReader.Model
                     foreach (TRAnimDispatch dispatch in AnimDispatches) { writer.Write(dispatch.Serialize()); }
                     writer.Write(NumAnimCommands);
                     foreach (TRAnimCommand cmd in AnimCommands) { writer.Write(cmd.Serialize()); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterAnimationData);
+#endif
+
                     writer.Write(NumMeshTrees * 4); //To get the correct number /= 4 is done during read, make sure to reverse it here.
                     foreach (TRMeshTreeNode node in MeshTrees) { writer.Write(node.Serialize()); }
                     writer.Write(NumFrames);
@@ -363,36 +403,75 @@ namespace TRLevelReader.Model
                     foreach (TRModel model in Models) { writer.Write(model.Serialize()); }
                     writer.Write(NumStaticMeshes);
                     foreach (TRStaticMesh mesh in StaticMeshes) { writer.Write(mesh.Serialize()); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterModelData);
+#endif
+
                     writer.Write(NumSpriteTextures);
                     foreach (TRSpriteTexture tex in SpriteTextures) { writer.Write(tex.Serialize()); }
                     writer.Write(NumSpriteSequences);
                     foreach (TRSpriteSequence sequence in SpriteSequences) { writer.Write(sequence.Serialize()); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterSprites);
+#endif
+
                     writer.Write(NumCameras);
                     foreach (TRCamera cam in Cameras) { writer.Write(cam.Serialize()); }
                     writer.Write(NumSoundSources);
                     foreach (TRSoundSource src in SoundSources) { writer.Write(src.Serialize()); }
                     writer.Write(NumBoxes);
                     foreach (TR2Box box in Boxes) { writer.Write(box.Serialize()); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterCamerasSourcesAndBoxes);
+#endif
+
                     writer.Write(NumOverlaps);
                     foreach (ushort overlap in Overlaps) { writer.Write(overlap); }
                     foreach (short zone in Zones) { writer.Write(zone); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterOverlapsAndZones);
+#endif
+
                     writer.Write(NumAnimatedTextures);
                     writer.Write((ushort)AnimatedTextures.Length);
                     foreach (TRAnimatedTexture texture in AnimatedTextures) { writer.Write(texture.Serialize()); }
                     writer.Write(NumObjectTextures);
                     foreach (TRObjectTexture tex in ObjectTextures) { writer.Write(tex.Serialize()); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterTextures);
+#endif
+
                     writer.Write(NumEntities);
                     foreach (TR2Entity entity in Entities) { writer.Write(entity.Serialize()); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterEntities);
+#endif
+
                     writer.Write(LightMap);
                     writer.Write(NumCinematicFrames);
                     foreach (TRCinematicFrame cineframe in CinematicFrames) { writer.Write(cineframe.Serialize()); }
                     writer.Write(NumDemoData);
                     writer.Write(DemoData);
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterMiscData);
+#endif
+
                     foreach (short sound in SoundMap) { writer.Write(sound); }
                     writer.Write(NumSoundDetails);
                     foreach (TR3SoundDetails snddetail in SoundDetails) { writer.Write(snddetail.Serialize()); }
                     writer.Write(NumSampleIndices);
                     foreach (uint index in SampleIndices) { writer.Write(index); }
+
+#if DEBUG
+                    Console.WriteLine("curr: " + stream.Position + " " + this.ByteCountAfterSoundData);
+#endif
                 }
 
                 return stream.ToArray();
