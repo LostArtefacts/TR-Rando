@@ -9,13 +9,13 @@ using TRLevelReader.Model;
 
 namespace TRLevelReader
 {
-    public class TR2LevelReader
+    public class TR3LevelReader
     {
         private const uint MAX_PALETTE_SIZE = 256;
 
         private BinaryReader reader;
 
-        public TR2LevelReader()
+        public TR3LevelReader()
         {
 
         }
@@ -566,7 +566,7 @@ namespace TRLevelReader
                     TRMesh mesh = new TRMesh();
                     meshes.Add(mesh);
 
-                    uint meshPointer = meshPointers[i];         
+                    uint meshPointer = meshPointers[i];
                     br.BaseStream.Position = meshPointer;
 
                     //Pointer
