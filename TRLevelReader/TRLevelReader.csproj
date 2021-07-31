@@ -97,6 +97,7 @@
     <Compile Include="Model\Base\TRTexImage8.cs" />
     <Compile Include="Model\Base\TRVertex.cs" />
     <Compile Include="Model\TR2\TR2Zone.cs" />
+    <Compile Include="Model\TR3\Enums\TR3Entities.cs" />
     <Compile Include="Model\TR3\TR3CDAudioEntry.cs" />
     <Compile Include="Model\TR3\TR3Level.cs" />
     <Compile Include="Model\TR3\TR3Room.cs" />

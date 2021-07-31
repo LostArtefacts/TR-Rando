@@ -6,7 +6,7 @@ Italics (*Example*) is partially implemented.
 # Versions
 * TR1: 0x00000020
 * ~~TR2: 0x0000002D~~
-* TR3: 0xFF080038 or 0xFF180038
+* ~~TR3: 0xFF080038 or 0xFF180038~~
 * TR4 & 5: 0x00345254
 
 # Base / TR1
@@ -98,6 +98,6 @@ Italics (*Example*) is partially implemented.
 # Levels
 * *TRLevel*
 * ~~TR2Level~~
-* *TR3Level*
+* ~~TR3Level~~
 * *TR4Level*
 * *TR5Level*
