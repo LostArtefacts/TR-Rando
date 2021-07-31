@@ -24,7 +24,7 @@ namespace TRLevelReader
         {
             if (!Filename.ToUpper().Contains("TR2"))
             {
-                throw new NotImplementedException("File reader only supports TR2/3 levels");
+                throw new NotImplementedException("File reader only supports TR3 levels");
             }
 
             TR3Level level = new TR3Level();
@@ -70,9 +70,7 @@ namespace TRLevelReader
                     level.Images16[i].Pixels[j] = reader.ReadUInt16();
                 }
             }
-#if DEBUG
-            level.ByteCountAfterPalettes = reader.BaseStream.Position;
-#endif
+
             //Rooms
             level.Unused = reader.ReadUInt32();
             level.NumRooms = reader.ReadUInt16();
@@ -147,9 +145,7 @@ namespace TRLevelReader
 
                 level.Rooms[i] = room;
             }
-#if DEBUG
-            level.ByteCountAfterRooms = reader.BaseStream.Position;
-#endif
+
             //Floordata
             level.NumFloorData = reader.ReadUInt32();
             level.FloorData = new ushort[level.NumFloorData];
@@ -158,9 +154,7 @@ namespace TRLevelReader
             {
                 level.FloorData[i] = reader.ReadUInt16();
             }
-#if DEBUG
-            level.ByteCountAfterFloorData = reader.BaseStream.Position;
-#endif
+
             //Mesh Data
             //This tells us how much mesh data (# of words/uint16s) coming up
             //just like the rooms previously.
@@ -184,9 +178,7 @@ namespace TRLevelReader
             //Mesh Construction
             //level.Meshes = ConstructMeshData(level.NumMeshData, level.NumMeshPointers, level.RawMeshData);
             level.Meshes = ConstructMeshData(level.MeshPointers, level.RawMeshData);
-#if DEBUG
-            level.ByteCountAfterMeshData = reader.BaseStream.Position;
-#endif
+
             //Animations
             level.NumAnimations = reader.ReadUInt32();
             level.Animations = new TRAnimation[level.NumAnimations];
@@ -218,9 +210,7 @@ namespace TRLevelReader
             {
                 level.AnimCommands[i] = TR2FileReadUtilities.ReadAnimCommand(reader);
             }
-#if DEBUG
-            level.ByteCountAfterAnimationData = reader.BaseStream.Position;
-#endif
+
             //Mesh Trees
             level.NumMeshTrees = reader.ReadUInt32();
             level.NumMeshTrees /= 4;
@@ -255,9 +245,7 @@ namespace TRLevelReader
             {
                 level.StaticMeshes[i] = TR2FileReadUtilities.ReadStaticMesh(reader);
             }
-#if DEBUG
-            level.ByteCountAfterModelData = reader.BaseStream.Position;
-#endif
+
             //Object Textures - in TR3 this is now after animated textures
 
             //Sprite Textures
@@ -277,9 +265,7 @@ namespace TRLevelReader
             {
                 level.SpriteSequences[i] = TR2FileReadUtilities.ReadSpriteSequence(reader);
             }
-#if DEBUG
-            level.ByteCountAfterSprites = reader.BaseStream.Position;
-#endif
+
             //Cameras
             level.NumCameras = reader.ReadUInt32();
             level.Cameras = new TRCamera[level.NumCameras];
@@ -306,9 +292,7 @@ namespace TRLevelReader
             {
                 level.Boxes[i] = TR2FileReadUtilities.ReadBox(reader);
             }
-#if DEBUG
-            level.ByteCountAfterCamerasSourcesAndBoxes = reader.BaseStream.Position;
-#endif
+
             //Overlaps & Zones
             level.NumOverlaps = reader.ReadUInt32();
             level.Overlaps = new ushort[level.NumOverlaps];
@@ -323,9 +307,7 @@ namespace TRLevelReader
             {
                 level.Zones[i] = reader.ReadInt16();
             }
-#if DEBUG
-            level.ByteCountAfterOverlapsAndZones = reader.BaseStream.Position;
-#endif
+
             //Animated Textures - the data stores the total number of ushorts to read (NumAnimatedTextures)
             //followed by a ushort to describe the number of actual texture group objects.
             level.NumAnimatedTextures = reader.ReadUInt32();
@@ -343,9 +325,7 @@ namespace TRLevelReader
             {
                 level.ObjectTextures[i] = TR2FileReadUtilities.ReadObjectTexture(reader);
             }
-#if DEBUG
-            level.ByteCountAfterTextures = reader.BaseStream.Position;
-#endif
+
             //Entities
             level.NumEntities = reader.ReadUInt32();
             level.Entities = new TR2Entity[level.NumEntities];
@@ -354,9 +334,7 @@ namespace TRLevelReader
             {
                 level.Entities[i] = TR2FileReadUtilities.ReadEntity(reader);
             }
-#if DEBUG
-            level.ByteCountAfterEntities = reader.BaseStream.Position;
-#endif
+
             //Light Map - 32 * 256 = 8192 bytes
             level.LightMap = new byte[32 * 256];
 
@@ -382,9 +360,7 @@ namespace TRLevelReader
             {
                 level.DemoData[i] = reader.ReadByte();
             }
-#if DEBUG
-            level.ByteCountAfterMiscData = reader.BaseStream.Position;
-#endif
+
             //Sound Map (370 shorts = 740 bytes) & Sound Details
             level.SoundMap = new short[370];
 
@@ -409,9 +385,7 @@ namespace TRLevelReader
             {
                 level.SampleIndices[i] = reader.ReadUInt32();
             }
-#if DEBUG
-            level.ByteCountAfterSoundData = reader.BaseStream.Position;
-#endif
+
             Debug.Assert(reader.BaseStream.Position == reader.BaseStream.Length);
 
             reader.Close();
