@@ -61,7 +61,8 @@
                                 <Label Grid.Column="1"
                                        HorizontalAlignment="Left"
                                        Content="{Binding Description}"
-                                       Margin="40,0,0,0">
+                                       FontStyle="Italic"
+                                       Margin="40,0,0,1">
                                     <Label.Resources>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="TextWrapping" Value="Wrap" />

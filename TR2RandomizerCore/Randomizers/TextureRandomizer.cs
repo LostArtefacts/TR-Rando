@@ -99,7 +99,7 @@ namespace TR2RandomizerCore.Randomizers
             bool beginProcessing = true;
             foreach (TR23ScriptedLevel lvl in Levels)
             {
-                if (processors[processors.Count - 1].LevelCount == levelSplit)
+                if (processors[processors.Count - 1].LevelCount >= levelSplit)
                 {
                     // Kick start the last one
                     processors[processors.Count - 1].Start();
@@ -200,20 +200,38 @@ namespace TR2RandomizerCore.Randomizers
             internal void AddLevel(TR2CombinedLevel level)
             {
                 _holders.Add(level, null);
+                if (level.HasCutScene)
+                {
+                    _holders.Add(level.CutSceneLevel, null);
+                }
             }
 
             protected override void StartImpl()
             {
                 // Load the level mapping and variants outwith the processor thread
                 // to ensure the RNG selected for each level/texture remains consistent
-                // between randomization sessions.
+                // between randomization sessions. Levels are sorted to guarantee cutscene
+                // levels are processed after their parent levels, because these will inherit
+                // the variants allocated there. We don't yet do forward lookup, for example
+                // the Floater stone at the end of Xian might be purple, but Floater itself
+                // Red.
                 List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(_holders.Keys);
+                levels.Sort(delegate (TR2CombinedLevel lvl1, TR2CombinedLevel lvl2)
+                {
+                    return lvl1.IsCutScene && lvl1.ParentLevel == lvl2 ? 1 : 0;
+                });
+
                 foreach (TR2CombinedLevel level in levels)
                 {
                     TextureLevelMapping mapping = _outer.GetMapping(level);
                     if (mapping != null)
                     {
-                        _holders[level] = new TextureHolder(mapping, _outer);
+                        TextureHolder parentHolder = null;
+                        if (level.IsCutScene)
+                        {
+                            parentHolder = _holders[level.ParentLevel];
+                        }
+                        _holders[level] = new TextureHolder(mapping, _outer, parentHolder);
                     }
                     else
                     {
@@ -228,32 +246,38 @@ namespace TR2RandomizerCore.Randomizers
 
                 foreach (TR2CombinedLevel level in _holders.Keys)
                 {
-                    options[TextureCategory.NightMode] = level.IsNightMode;
-                    options[TextureCategory.DayMode] = !options[TextureCategory.NightMode];
+                    ProcessLevel(level, options);
 
-                    using (TextureHolder holder = _holders[level])
-                    {
-                        foreach (AbstractTextureSource source in holder.Variants.Keys)
-                        {
-                            _outer.RedrawTargets(holder.Mapping, source, holder.Variants[source], options);
-                        }
-
-                        // Add landmarks, but only if there is room available for them
-                        if (holder.Mapping.LandmarkMapping.Count > 0)
-                        {
-                            _landmarkImporter.Import(level, holder.Mapping);
-                        }
-                    }
-
-                    if (!_outer.TriggerProgress())
+                    int progress = level.IsCutScene ? 0 : 1; // This is a bit of a hack for the time being as the overall progress target isn't aware of cutscene levels
+                    if (!_outer.TriggerProgress(progress))
                     {
                         break;
                     }
 
                     _outer.SaveLevel(level);
-                    if (!_outer.TriggerProgress())
+                    if (!_outer.TriggerProgress(progress))
                     {
                         break;
+                    }
+                }
+            }
+
+            private void ProcessLevel(TR2CombinedLevel level, Dictionary<TextureCategory, bool> options)
+            {
+                options[TextureCategory.NightMode] = level.IsNightMode;
+                options[TextureCategory.DayMode] = !options[TextureCategory.NightMode];
+
+                using (TextureHolder holder = _holders[level])
+                {
+                    foreach (AbstractTextureSource source in holder.Variants.Keys)
+                    {
+                        _outer.RedrawTargets(holder.Mapping, source, holder.Variants[source], options);
+                    }
+
+                    // Add landmarks, but only if there is room available for them
+                    if (holder.Mapping.LandmarkMapping.Count > 0)
+                    {
+                        _landmarkImporter.Import(level, holder.Mapping);
                     }
                 }
             }
@@ -264,52 +288,64 @@ namespace TR2RandomizerCore.Randomizers
             internal TextureLevelMapping Mapping { get; private set; }
             internal Dictionary<AbstractTextureSource, string> Variants { get; private set; }
 
-            internal TextureHolder(TextureLevelMapping mapping, TextureRandomizer outer)
+            internal TextureHolder(TextureLevelMapping mapping, TextureRandomizer outer, TextureHolder parentHolder = null)
             {
                 Mapping = mapping;
                 Variants = new Dictionary<AbstractTextureSource, string>();
-
-                // Check first for any grouped sources
-                List<TextureGrouping> groupingList = mapping.StaticGrouping;
+                
+                // Check first for any grouped sources, but only if the parent holder is null
+                // as regrouping is not currently possible.
                 List<StaticTextureSource> handledSources = new List<StaticTextureSource>();
-                foreach (TextureGrouping staticGrouping in groupingList)
+                if (parentHolder == null)
                 {
-                    // Choose a variant for the leader, then assign this to the followers if they support it
-                    string variant = outer.GetSourceVariant(staticGrouping.Leader);
-                    Variants.Add(staticGrouping.Leader, variant);
-                    handledSources.Add(staticGrouping.Leader);
-
-                    foreach (StaticTextureSource source in staticGrouping.Followers)
+                    List<TextureGrouping> groupingList = mapping.StaticGrouping;
+                    foreach (TextureGrouping staticGrouping in groupingList)
                     {
-                        if (source.HasVariants)
-                        {
-                            // Are we enforcing a specific colour for this theme?
-                            if (staticGrouping.ThemeAlternatives.ContainsKey(variant) && staticGrouping.ThemeAlternatives[variant].ContainsKey(source))
-                            {
-                                Variants.Add(source, staticGrouping.ThemeAlternatives[variant][source]);
-                            }
-                            // Otherwise, does the grouped source have the same variant available?
-                            else if (source.Variants.Contains(variant))
-                            {
-                                Variants.Add(source, variant);
-                                // If persistent textures are being used, have outer store what has been assigned to this source.
-                                outer.StoreVariant(source, variant);
-                            }
-                            // Otherwise, just add another random value for now (we ignore single variant sources such as FL/DL Spooky theme)
-                            else if (source.Variants.Length > 1)
-                            {
-                                Variants.Add(source, outer.GetSourceVariant(source));
-                            }
+                        // Choose a variant for the leader, then assign this to the followers if they support it
+                        string variant = outer.GetSourceVariant(staticGrouping.Leader);
+                        Variants.Add(staticGrouping.Leader, variant);
+                        handledSources.Add(staticGrouping.Leader);
 
-                            handledSources.Add(source);
+                        foreach (StaticTextureSource source in staticGrouping.Followers)
+                        {
+                            if (source.HasVariants)
+                            {
+                                // Are we enforcing a specific colour for this theme?
+                                if (staticGrouping.ThemeAlternatives.ContainsKey(variant) && staticGrouping.ThemeAlternatives[variant].ContainsKey(source))
+                                {
+                                    Variants.Add(source, staticGrouping.ThemeAlternatives[variant][source]);
+                                }
+                                // Otherwise, does the grouped source have the same variant available?
+                                else if (source.Variants.Contains(variant))
+                                {
+                                    Variants.Add(source, variant);
+                                    // If persistent textures are being used, have outer store what has been assigned to this source.
+                                    outer.StoreVariant(source, variant);
+                                }
+                                // Otherwise, just add another random value for now (we ignore single variant sources such as FL/DL Spooky theme)
+                                else if (source.Variants.Length > 1)
+                                {
+                                    Variants.Add(source, outer.GetSourceVariant(source));
+                                }
+
+                                handledSources.Add(source);
+                            }
                         }
+                    }
+                }
+                else
+                {
+                    foreach (AbstractTextureSource source in parentHolder.Variants.Keys)
+                    {
+                        Variants[source] = parentHolder.Variants[source];
                     }
                 }
 
                 foreach (StaticTextureSource source in Mapping.StaticMapping.Keys)
                 {
-                    // Only randomize sources that aren't already grouped and that actually have variants
-                    if (source.HasVariants && !handledSources.Contains(source))
+                    // Only randomize sources that aren't already grouped and that actually have variants, or if we have a master
+                    // parent holder, only add it the source if it's not already defined.
+                    if (source.HasVariants && ((parentHolder == null && !handledSources.Contains(source)) || (parentHolder != null && !Variants.ContainsKey(source))))
                     {
                         Variants.Add(source, outer.GetSourceVariant(source));
                     }
@@ -318,7 +354,10 @@ namespace TR2RandomizerCore.Randomizers
                 // Dynamic changes should be made after static (e.g. for overlays)
                 foreach (DynamicTextureSource source in Mapping.DynamicMapping.Keys)
                 {
-                    Variants.Add(source, outer.GetSourceVariant(source));
+                    if (!Variants.ContainsKey(source))
+                    {
+                        Variants.Add(source, outer.GetSourceVariant(source));
+                    }
                 }
             }
 

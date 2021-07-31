@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
+using System.Linq;
 using TR2RandomizerCore.Helpers;
 using TR2RandomizerCore.Processors;
 using TR2RandomizerCore.Utilities;
@@ -9,7 +9,6 @@ using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
-using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
 
@@ -19,11 +18,14 @@ namespace TR2RandomizerCore.Randomizers
     {
         internal bool PersistOutfits { get; set; }
         internal bool RandomlyCutHair { get; set; }
+        internal bool RemoveRobeDagger { get; set; }
+        internal bool EnableInvisibility { get; set; }
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         private TR2Entities _persistentOutfit;
 
-        private List<string> _haircutLevels;
+        private ISet<string> _haircutLevels;
+        private TR2CombinedLevel _firstDragonLevel;
 
         public override void Randomize(int seed)
         {
@@ -41,7 +43,15 @@ namespace TR2RandomizerCore.Randomizers
             List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(Levels.Count);
             foreach (TR23ScriptedLevel lvl in Levels)
             {
-                levels.Add(LoadCombinedLevel(lvl));
+                TR2CombinedLevel level = LoadCombinedLevel(lvl);
+                levels.Add(level);
+
+                // Keep a reference to the first dragon level if we are removing the dagger from the dressing gown
+                if (RemoveRobeDagger && _firstDragonLevel == null && level.Data.Entities.ToList().FindIndex(e => e.TypeID == (short)TR2Entities.MarcoBartoli) != -1)
+                {
+                    _firstDragonLevel = level;
+                }
+
                 if (!TriggerProgress())
                 {
                     return;
@@ -74,36 +84,45 @@ namespace TR2RandomizerCore.Randomizers
             }
         }
 
+        private List<TR2Entities> GetLaraTypes()
+        {
+            List<TR2Entities> allLaras = TR2EntityUtilities.GetLaraTypes();
+            if (!EnableInvisibility)
+            {
+                allLaras.Remove(TR2Entities.LaraInvisible);
+            }
+            return allLaras;
+        }
+
         private void SetPersistentOutfit()
         {
             if (PersistOutfits)
             {
-                List<TR2Entities> allLaras = TR2EntityUtilities.GetLaraTypes();
+                List<TR2Entities> allLaras = GetLaraTypes();
                 _persistentOutfit = allLaras[_generator.Next(0, allLaras.Count)];
             }
         }
 
         private void ChooseHaircutLevels()
         {
-            _haircutLevels = new List<string>();
+            _haircutLevels = new HashSet<string>();
             if (RandomlyCutHair)
             {
-                // One, some, or all. We don't use Levels.Count+1 here as the Assault Course 
-                // doesn't work for now (missing gunflare texture used for transparency).
+                // One, some, or all. We decide after this loop whether or not to include the
+                // Assault Course as the player may not necessarily visit there.
                 int numLevels = _generator.Next(1, Levels.Count);
                 while (_haircutLevels.Count < numLevels)
                 {
                     TR23ScriptedLevel level = Levels[_generator.Next(0, Levels.Count)];
-                    if (level.Is(LevelNames.ASSAULT))
+                    if (!level.Is(LevelNames.ASSAULT))
                     {
-                        continue;
+                        _haircutLevels.Add(level.LevelFileBaseName.ToUpper());
                     }
+                }
 
-                    string id = level.LevelFileBaseName.ToUpper();
-                    if (!_haircutLevels.Contains(id))
-                    {
-                        _haircutLevels.Add(id);
-                    }
+                if (_generator.Next(0, 2) == 0)
+                {
+                    _haircutLevels.Add(LevelNames.ASSAULT);
                 }
             }
         }
@@ -125,6 +144,21 @@ namespace TR2RandomizerCore.Randomizers
                 TR2Entities.Lara
             };
 
+            // Entities to hide for haircuts
+            private static readonly List<TR2Entities> _invisiblePonytailEntities = new List<TR2Entities>
+            {
+                TR2Entities.LaraPonytail_H
+            };
+
+            // Entities to hide for Lara entirely
+            private static readonly List<TR2Entities> _invisibleLaraEntities = new List<TR2Entities>
+            {
+                TR2Entities.Lara, TR2Entities.LaraPonytail_H, TR2Entities.LaraFlareAnim_H,
+                TR2Entities.LaraPistolAnim_H, TR2Entities.LaraShotgunAnim_H, TR2Entities.LaraAutoAnim_H,
+                TR2Entities.LaraUziAnim_H, TR2Entities.LaraM16Anim_H, TR2Entities.LaraHarpoonAnim_H,
+                TR2Entities.LaraGrenadeAnim_H, TR2Entities.LaraMiscAnim_H
+            };
+
             private readonly Dictionary<TR2CombinedLevel, List<TR2Entities>> _outfitAllocations;
 
             internal override int LevelCount => _outfitAllocations.Count;
@@ -144,9 +178,9 @@ namespace TR2RandomizerCore.Randomizers
             {
                 // Make the outfit selection outwith the processing thread to ensure consistent RNG.
                 // We select all potential Laras including the default for the level as there are
-                // only 4 to choose from (there is also Assault Course Lara, but when holstering pistols
+                // only 5 to choose from (there is also Assault Course Lara, but when holstering pistols
                 // her trousers disappear, so she is excluded for the time being...).
-                List<TR2Entities> allLaras = TR2EntityUtilities.GetLaraTypes();
+                List<TR2Entities> allLaras = _outer.GetLaraTypes();
                 List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(_outfitAllocations.Keys);
 
                 foreach (TR2CombinedLevel level in levels)
@@ -177,18 +211,16 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         if (Import(level, lara))
                         {
-                            // Apply any necessary tweaks to the outfit
-                            AdjustOutfit(level, lara);   
                             break;
                         }
                     }
 
                     if (_outer.IsHaircutLevel(level.Name))
                     {
-                        CutHair(level);
+                        HideEntities(level, _invisiblePonytailEntities);
                     }
 
-                    _outer.SaveLevel(level.Data, level.Name);
+                    _outer.SaveLevel(level);
 
                     if (!_outer.TriggerProgress())
                     {
@@ -199,14 +231,29 @@ namespace TR2RandomizerCore.Randomizers
 
             private bool Import(TR2CombinedLevel level, TR2Entities lara)
             {
-                List<TR2Entities> laraImport = new List<TR2Entities> { lara };
+                if (lara == TR2Entities.LaraInvisible)
+                {
+                    // No import needed, just clear each of Lara's meshes. A haircut is implied
+                    // with this and we don't need to alter the outfit.
+                    HideEntities(level, _invisibleLaraEntities);
+                    return true;
+                }
+
+                List<TR2Entities> laraImport = new List<TR2Entities>();
+                List<TR2Entities> laraRemovals = new List<TR2Entities>();
+                if (lara != TR2EntityUtilities.GetAliasForLevel(level.Name, TR2Entities.Lara))
+                {
+                    laraImport.Add(lara);
+                    laraRemovals.AddRange(_laraRemovals);
+                }
+                
                 TRModelImporter importer = new TRModelImporter
                 {
                     Level = level.Data,
                     LevelName = level.Name,
                     ClearUnusedSprites = false,
                     EntitiesToImport = laraImport,
-                    EntitiesToRemove = _laraRemovals,
+                    EntitiesToRemove = laraRemovals,
                     TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, laraImport)
                 };
 
@@ -220,6 +267,16 @@ namespace TR2RandomizerCore.Randomizers
                 {
                     // Try to import the selected models into the level.
                     importer.Import();
+
+                    // Apply any necessary tweaks to the outfit
+                    AdjustOutfit(level, lara);
+
+                    // Repeat the process if there is a cutscene after this level.
+                    if (level.HasCutScene)
+                    {
+                        Import(level.CutSceneLevel, lara);
+                    }
+
                     return true;
                 }
                 catch (PackingException)
@@ -232,67 +289,27 @@ namespace TR2RandomizerCore.Randomizers
                 }
             }
 
-            private void CutHair(TR2CombinedLevel level)
+            private void HideEntities(TR2CombinedLevel level, IEnumerable<TR2Entities> entities)
             {
-                // Every level has a 64x64 transparent gunflare texture so rather than
-                // importing something else, we'll just try to find that texture and 
-                // point Lara's braid to it, so making it invisible.
-                TRMesh[] gunflareMeshes = TR2LevelUtilities.GetModelMeshes(level.Data, TR2Entities.Gunflare_H);
-                if (gunflareMeshes == null)
+                MeshEditor editor = new MeshEditor();
+                foreach (TR2Entities ent in entities)
                 {
-                    return;
-                }
-
-                ISet<int> textureIndices = new HashSet<int>();
-                foreach (TRMesh mesh in gunflareMeshes)
-                {
-                    foreach (TRFace4 r in mesh.TexturedRectangles)
+                    TRMesh[] meshes = TR2LevelUtilities.GetModelMeshes(level.Data, ent);
+                    if (meshes != null)
                     {
-                        textureIndices.Add(r.Texture);
-                    }
-                    foreach (TRFace3 t in mesh.TexturedTriangles)
-                    {
-                        textureIndices.Add(t.Texture);
+                        foreach (TRMesh mesh in meshes)
+                        {
+                            editor.Mesh = mesh;
+                            editor.ClearAllPolygons();
+                            editor.WriteToLevel(level.Data);
+                        }
                     }
                 }
 
-                IndexedTRObjectTexture transparentTexture = null;
-                foreach (int index in textureIndices)
+                // Repeat the process if there is a cutscene after this level.
+                if (level.HasCutScene)
                 {
-                    transparentTexture = new IndexedTRObjectTexture
-                    {
-                        Index = index,
-                        Texture = level.Data.ObjectTextures[index]
-                    };
-
-                    Rectangle rect = transparentTexture.Bounds;
-                    if (rect.Width == 64 && rect.Height == 64)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        transparentTexture = null;
-                    }
-                }
-
-                // Did we find it?
-                if (transparentTexture == null)
-                {
-                    return;
-                }
-
-                // Erase the braid
-                foreach (TRMesh mesh in TR2LevelUtilities.GetModelMeshes(level.Data, TR2Entities.LaraPonytail_H))
-                {
-                    foreach (TRFace4 r in mesh.TexturedRectangles)
-                    {
-                        r.Texture = (ushort)transparentTexture.Index;
-                    }
-                    foreach (TRFace3 t in mesh.TexturedTriangles)
-                    {
-                        t.Texture = (ushort)transparentTexture.Index;
-                    }
+                    HideEntities(level.CutSceneLevel, entities);
                 }
             }
 
@@ -307,7 +324,70 @@ namespace TR2RandomizerCore.Randomizers
                     TRMesh laraHipsMesh = TR2LevelUtilities.GetModelFirstMesh(level.Data, TR2Entities.Lara);
                     TR2LevelUtilities.DuplicateMesh(level.Data, laraMiscMesh, laraHipsMesh);
                 }
-            }            
+
+                if (_outer.RemoveRobeDagger)
+                {
+                    // We will get rid of the dagger from Lara's dressing gown if this level takes place before any other
+                    // level that contains a dragon, or if this level itself has the dragon. If it's a cutscene that
+                    // immediately follows a level that had a dragon, she will have the dagger on display. Note that a
+                    // cutscene level shares its sequence with its parent level.
+                    TR2CombinedLevel dragonLevel = _outer._firstDragonLevel;
+                    if ((level.IsCutScene && level.Sequence < dragonLevel.Sequence) || (!level.IsCutScene && level.Sequence <= dragonLevel.Sequence))
+                    {
+                        if (lara == TR2Entities.LaraHome)
+                        {
+                            MeshEditor editor = new MeshEditor
+                            {
+                                Mesh = TR2LevelUtilities.GetModelFirstMesh(level.Data, TR2Entities.Lara)
+                            };
+
+                            editor.RemoveTexturedRectangleRange(9, 43);
+                            editor.RemoveTexturedTriangleRange(18, 38);
+                            editor.WriteToLevel(level.Data);
+                        }
+
+                        // If it's HSH, go one step further and remove the model itself, so Lara is imagining what the dagger
+                        // will be like during the cutscene. It will still be present in the inventory but will be invisible.
+                        if (level.Is(LevelNames.HOME))
+                        {
+                            // This removes it from the starting cutscene - mesh 10 is Lara's hand holding the dagger,
+                            // so we basically just retain the hand.
+                            MeshEditor editor = new MeshEditor
+                            {
+                                Mesh = TR2LevelUtilities.GetModelMeshes(level.Data, TR2Entities.LaraMiscAnim_H)[10]
+                            };
+
+                            editor.RemoveTexturedRectangleRange(6, 20);
+                            editor.ClearTexturedTriangles();
+                            editor.WriteToLevel(level.Data);
+
+                            // And hide it from the inventory
+                            foreach (TRMesh mesh in TR2LevelUtilities.GetModelMeshes(level.Data, TR2Entities.Puzzle1_M_H))
+                            {
+                                editor.Mesh = mesh;
+                                editor.ClearTexturedRectangles();
+                                editor.ClearTexturedTriangles();
+                                editor.WriteToLevel(level.Data);
+                            }
+                        }
+                    }
+                }
+
+                if (level.Is(LevelNames.DA_CUT) && lara != TR2Entities.LaraSun)
+                {
+                    // There are actually 2 Lara models in this cutscene. Model ID 0 is Lara after she has changed
+                    // into the diving suit, but model ID 99 is the one before. We always want the cutscene actor to
+                    // match DA, but this unfortunately means she'll leave the cutscene in the same outfit. She just
+                    // didn't like the look of any of the alternatives...
+                    List<TRModel> models = level.Data.Models.ToList();
+                    TRModel actorLara = models.Find(m => m.ID == (short)TR2Entities.CutsceneActor3);
+                    TRModel realLara = models.Find(m => m.ID == (short)TR2Entities.Lara);
+
+                    actorLara.MeshTree = realLara.MeshTree;
+                    actorLara.NumMeshes = realLara.NumMeshes;
+                    actorLara.StartingMesh = realLara.StartingMesh;
+                }
+            }
         }
     }
 }

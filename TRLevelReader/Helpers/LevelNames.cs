@@ -28,6 +28,11 @@ namespace TRLevelReader.Helpers
         public const string HOME        = "HOUSE.TR2";
         public const string ASSAULT     = "ASSAULT.TR2";
 
+        public const string GW_CUT      = "CUT1.TR2";
+        public const string OPERA_CUT   = "CUT2.TR2";
+        public const string DA_CUT      = "CUT3.TR2";
+        public const string XIAN_CUT    = "CUT4.TR2";
+
         public const string COLDWAR     = "level1.TR2";
         public const string FOOLGOLD    = "level2.TR2";
         public const string FURNACE     = "level3.TR2";

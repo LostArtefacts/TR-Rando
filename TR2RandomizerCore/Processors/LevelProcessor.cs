@@ -45,20 +45,36 @@ namespace TR2RandomizerCore.Processors
         protected void ReloadLevelInstanceData()
         {
             _levelInstance.Data = LoadLevelData(_levelInstance.Name);
+            if (_levelInstance.HasCutScene)
+            {
+                _levelInstance.CutSceneLevel.Data = LoadLevelData(_levelInstance.CutSceneLevel.Name);
+            }
         }
 
         protected void ReloadLevelData(TR2CombinedLevel level)
         {
             level.Data = LoadLevelData(level.Name);
+            if (level.HasCutScene)
+            {
+                level.CutSceneLevel.Data = LoadLevelData(level.CutSceneLevel.Name);
+            }
         }
 
         public TR2CombinedLevel LoadCombinedLevel(TR23ScriptedLevel scriptedLevel)
         {
-            return new TR2CombinedLevel
+            TR2CombinedLevel level = new TR2CombinedLevel
             {
                 Data = LoadLevelData(scriptedLevel.LevelFileBaseName),
                 Script = scriptedLevel
             };
+
+            if (scriptedLevel.HasCutScene)
+            {
+                level.CutSceneLevel = LoadCombinedLevel(scriptedLevel.CutSceneLevel as TR23ScriptedLevel);
+                level.CutSceneLevel.ParentLevel = level;
+            }
+
+            return level;
         }
 
         public TR2Level LoadLevelData(string name)
@@ -78,6 +94,10 @@ namespace TR2RandomizerCore.Processors
         protected void SaveLevel(TR2CombinedLevel level)
         {
             SaveLevel(level.Data, level.Name);
+            if (level.HasCutScene)
+            {
+                SaveLevel(level.CutSceneLevel.Data, level.CutSceneLevel.Name);
+            }
         }
 
         public void SaveLevel(TR2Level level, string name)

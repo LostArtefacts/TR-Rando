@@ -1,0 +1,16 @@
+{
+  "OperationMap": {
+    "Blue": {
+      "Hue": 60
+    },
+    "Pink": {
+      "Hue": 156
+    },
+    "Purple": {
+      "Hue": 114
+    },
+    "Red": {
+      "Hue": -110
+    }
+  }
+}

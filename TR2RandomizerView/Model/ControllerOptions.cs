@@ -24,7 +24,7 @@ namespace TR2RandomizerView.Model
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileBirdMonsters;
         private BoolItemControlClass _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks;
-        private BoolItemControlClass _persistOutfits, _randomlyCutHair;
+        private BoolItemControlClass _persistOutfits, _randomlyCutHair, _removeRobeDagger, _enableInvisibility;
         private BoolItemControlClass _retainKeyItemNames;
         private BoolItemControlClass _rotateStartPosition;
 
@@ -440,6 +440,26 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RemoveRobeDagger
+        {
+            get => _removeRobeDagger;
+            set
+            {
+                _removeRobeDagger = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass EnableInvisibility
+        {
+            get => _enableInvisibility;
+            set
+            {
+                _enableInvisibility = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool RandomizeText
         {
             get => _randomTextControl.IsActive;
@@ -783,6 +803,18 @@ namespace TR2RandomizerView.Model
                 Description = "Lara will lose her braid in a random number of levels."
             };
             BindingOperations.SetBinding(RandomlyCutHair, BoolItemControlClass.IsActiveProperty, randomizeOutfitsBinding);
+            RemoveRobeDagger = new BoolItemControlClass()
+            {
+                Title = "Remove robe dagger",
+                Description = "If Lara is wearing her dressing gown before she has killed a dragon, the dagger will not appear."
+            };
+            BindingOperations.SetBinding(RemoveRobeDagger, BoolItemControlClass.IsActiveProperty, randomizeOutfitsBinding);
+            EnableInvisibility = new BoolItemControlClass()
+            {
+                Title = "Enable invisibility",
+                Description = "Lara may wear an invisibility cloak in some levels. Only her shadow will be visible."
+            };
+            BindingOperations.SetBinding(EnableInvisibility, BoolItemControlClass.IsActiveProperty, randomizeOutfitsBinding);
 
             // Text
             Binding randomizeTextBinding = new Binding(nameof(RandomizeText)) { Source = this };
@@ -825,7 +857,7 @@ namespace TR2RandomizerView.Model
             };
             OutfitBoolItemControls = new List<BoolItemControlClass>()
             {
-                _persistOutfits, _randomlyCutHair,
+                _persistOutfits, _randomlyCutHair, _removeRobeDagger, _enableInvisibility
             };
             TextBoolItemControls = new List<BoolItemControlClass>
             {
@@ -896,6 +928,8 @@ namespace TR2RandomizerView.Model
             OutfitSeed = _controller.OutfitSeed;
             PersistOutfits.Value = _controller.PersistOutfits;
             RandomlyCutHair.Value = _controller.RandomlyCutHair;
+            RemoveRobeDagger.Value = _controller.RemoveRobeDagger;
+            EnableInvisibility.Value = _controller.EnableInvisibility;
 
             RandomizeText = _controller.RandomizeGameStrings;
             TextSeed = _controller.GameStringsSeed;
@@ -1110,6 +1144,8 @@ namespace TR2RandomizerView.Model
             _controller.OutfitSeed = OutfitSeed;
             _controller.PersistOutfits = PersistOutfits.Value;
             _controller.RandomlyCutHair = RandomlyCutHair.Value;
+            _controller.RemoveRobeDagger = RemoveRobeDagger.Value;
+            _controller.EnableInvisibility = EnableInvisibility.Value;
 
             _controller.RandomizeGameStrings = RandomizeText;
             _controller.GameStringsSeed = TextSeed;
