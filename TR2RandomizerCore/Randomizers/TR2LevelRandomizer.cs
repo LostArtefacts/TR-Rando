@@ -42,6 +42,8 @@ namespace TR2RandomizerCore.Randomizers
         internal bool GlitchedSecrets { get; set; }
         internal bool PersistOutfits { get; set; }
         internal bool RandomlyCutHair { get; set; }
+        internal bool RemoveRobeDagger { get; set; }
+        internal bool EnableInvisibility { get; set; }
         internal bool RetainKeyItemNames { get; set; }
         internal uint NightModeCount { get; set; }
         internal bool ChangeTriggerTracks { get; set; }
@@ -82,6 +84,8 @@ namespace TR2RandomizerCore.Randomizers
             OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
             PersistOutfits = config.GetBool(nameof(PersistOutfits));
             RandomlyCutHair = config.GetBool(nameof(RandomlyCutHair), true);
+            RemoveRobeDagger = config.GetBool(nameof(RemoveRobeDagger), true);
+            EnableInvisibility = config.GetBool(nameof(EnableInvisibility));
 
             RandomizeGameStrings = config.GetBool(nameof(RandomizeGameStrings));
             GameStringsSeed = config.GetInt(nameof(GameStringsSeed), defaultSeed);
@@ -129,6 +133,8 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(OutfitSeed)] = OutfitSeed;
             config[nameof(PersistOutfits)] = PersistOutfits;
             config[nameof(RandomlyCutHair)] = RandomlyCutHair;
+            config[nameof(RemoveRobeDagger)] = RemoveRobeDagger;
+            config[nameof(EnableInvisibility)] = EnableInvisibility;
 
             config[nameof(RandomizeGameStrings)] = RandomizeGameStrings;
             config[nameof(GameStringsSeed)] = GameStringsSeed;
@@ -333,6 +339,8 @@ namespace TR2RandomizerCore.Randomizers
                         SaveMonitor = monitor,
                         PersistOutfits = PersistOutfits,
                         RandomlyCutHair = RandomlyCutHair,
+                        RemoveRobeDagger = RemoveRobeDagger,
+                        EnableInvisibility = EnableInvisibility,
                         TextureMonitor = textureMonitor
                     }.Randomize(OutfitSeed);
                 }

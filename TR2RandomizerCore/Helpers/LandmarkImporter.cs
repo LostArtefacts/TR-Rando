@@ -67,7 +67,7 @@ namespace TR2RandomizerCore.Helpers
                             }
                             else
                             {
-                                image = source.Bitmap;
+                                image = source.ClonedBitmap;
                             }
 
                             packer.AddRectangle(new TexturedTileSegment(texture, image));

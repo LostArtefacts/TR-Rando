@@ -80,7 +80,7 @@ namespace TR2RandomizerCore.Processors
                         _deduplicator.Level = level.Data;
                         _deduplicator.Deduplicate(dedupPath);
 
-                        _outer.SaveLevel(level.Data, level.Name);
+                        _outer.SaveLevel(level);
                     }
 
                     if (!_outer.TriggerProgress())

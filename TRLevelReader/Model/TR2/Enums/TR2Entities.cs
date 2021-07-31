@@ -310,6 +310,8 @@ namespace TRLevelReader.Model.Enums
         LaraHome = 3300,
         LaraPistolAnim_H_Home,
         LaraAutoAnim_H_Home,
-        LaraUziAnim_H_Home
+        LaraUziAnim_H_Home,
+
+        LaraInvisible = 3400
     }
 }

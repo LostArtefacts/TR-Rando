@@ -13,7 +13,7 @@ namespace TR2RandomizerCore.Randomizers
     {
         public uint NumLevels { get; set; }
 
-        private List<string> _nightLevels;
+        private ISet<string> _nightLevels;
 
         public override void Randomize(int seed)
         {
@@ -40,32 +40,40 @@ namespace TR2RandomizerCore.Randomizers
 
         private void ChooseNightLevels()
         {
-            _nightLevels = new List<string>();
+            _nightLevels = new HashSet<string>();
             while (_nightLevels.Count < NumLevels)
             {
                 TR23ScriptedLevel level = Levels[_generator.Next(0, Levels.Count)];
-                if (level.Is(LevelNames.ASSAULT))
+                if (!level.Is(LevelNames.ASSAULT))
                 {
-                    continue;
-                }
-
-                string id = level.LevelFileBaseName.ToUpper();
-                if (!_nightLevels.Contains(id))
-                {
-                    _nightLevels.Add(id);
+                    _nightLevels.Add(level.LevelFileBaseName.ToUpper());
                 }
             }
         }
 
         private void SetNightMode(TR2CombinedLevel level)
         {
-            foreach (TR2Room room in level.Data.Rooms)
+            DarkenRooms(level.Data);
+            HideDaytimeEntities(level.Data, level.Name);
+
+            if (level.HasCutScene)
+            {
+                SetNightMode(level.CutSceneLevel);
+            }
+        }
+
+        private void DarkenRooms(TR2Level level)
+        {
+            foreach (TR2Room room in level.Rooms)
             {
                 room.Darken();
             }
+        }
 
+        private void HideDaytimeEntities(TR2Level level, string levelName)
+        {
             // Replace any entities that don't "make sense" at night
-            List<TR2Entity> entities = level.Data.Entities.ToList();
+            List<TR2Entity> entities = level.Entities.ToList();
 
             // A list of item locations to choose from
             List<TR2Entity> items = entities.Where
@@ -93,10 +101,10 @@ namespace TR2RandomizerCore.Randomizers
             }
 
             // Hide any static meshes
-            if (_staticMeshesToHide.ContainsKey(level.Name))
+            if (_staticMeshesToHide.ContainsKey(levelName))
             {
-                List<TRStaticMesh> staticMeshes = level.Data.StaticMeshes.ToList();
-                foreach (uint meshID in _staticMeshesToHide[level.Name])
+                List<TRStaticMesh> staticMeshes = level.StaticMeshes.ToList();
+                foreach (uint meshID in _staticMeshesToHide[levelName])
                 {
                     TRStaticMesh mesh = staticMeshes.Find(m => m.ID == meshID);
                     if (mesh != null)

@@ -144,15 +144,25 @@ namespace TRLevelReader.Helpers
             originalMesh.Vertices = replacementMesh.Vertices;
 
             // The length will have changed so all pointers above the original one will need adjusting
-            int lengthDiff = originalMesh.Serialize().Length - oldLength;
+            UpdateMeshPointers(level, originalMesh, oldLength);
+        }
+
+        /// <summary>
+        /// For a given mesh that has been changed and its previous serialized length, ensures that all
+        /// mesh pointers above the modified mesh are updated correctly.
+        /// </summary>
+        public static void UpdateMeshPointers(TR2Level level, TRMesh modifiedMesh, int previousMeshLength)
+        {
+            int lengthDiff = modifiedMesh.Serialize().Length - previousMeshLength;
             List<uint> pointers = level.MeshPointers.ToList();
-            int pointerIndex = pointers.IndexOf(originalMesh.Pointer);
+            int pointerIndex = pointers.IndexOf(modifiedMesh.Pointer);
+            Dictionary<uint, uint> pointerMap = new Dictionary<uint, uint>();
             for (int i = pointerIndex + 1; i < pointers.Count; i++)
             {
                 if (pointers[i] > 0)
                 {
                     int newPointer = (int)pointers[i] + lengthDiff;
-                    pointers[i] = (uint)newPointer;
+                    pointerMap.Add(pointers[i], pointers[i] = (uint)newPointer);
                 }
             }
 
@@ -160,6 +170,17 @@ namespace TRLevelReader.Helpers
 
             int numMeshData = (int)level.NumMeshData + lengthDiff / 2;
             level.NumMeshData = (uint)numMeshData;
+
+            // While the Pointer property on meshes is only for convenience and not
+            // written to the level, we need to update them regardless in case of
+            // additional changes before the level is saved and re-read.
+            foreach (TRMesh mesh in level.Meshes)
+            {
+                if (pointerMap.ContainsKey(mesh.Pointer))
+                {
+                    mesh.Pointer = pointerMap[mesh.Pointer];
+                }
+            }
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace TRLevelReader.Helpers
             [TR2Entities.Lara] = new Dictionary<TR2Entities, List<string>>
             {
                 [TR2Entities.LaraSun] =
-                    new List<string> { LevelNames.GW, LevelNames.VENICE, LevelNames.BARTOLI, LevelNames.OPERA, LevelNames.RIG, LevelNames.DA, LevelNames.XIAN, LevelNames.FLOATER, LevelNames.LAIR },
+                    new List<string> { LevelNames.GW, LevelNames.GW_CUT, LevelNames.VENICE, LevelNames.BARTOLI, LevelNames.OPERA, LevelNames.OPERA_CUT, LevelNames.RIG, LevelNames.DA, LevelNames.DA_CUT, LevelNames.XIAN, LevelNames.XIAN_CUT, LevelNames.FLOATER, LevelNames.LAIR },
                 [TR2Entities.LaraUnwater] =
                     new List<string> { LevelNames.FATHOMS, LevelNames.DORIA, LevelNames.LQ, LevelNames.DECK },
                 [TR2Entities.LaraSnow] =
@@ -117,7 +117,7 @@ namespace TRLevelReader.Helpers
         {
             return new List<TR2Entities>
             {
-                TR2Entities.LaraSun, TR2Entities.LaraUnwater, TR2Entities.LaraSnow, TR2Entities.LaraHome
+                TR2Entities.LaraSun, TR2Entities.LaraUnwater, TR2Entities.LaraSnow, TR2Entities.LaraHome, TR2Entities.LaraInvisible
             };
         }
 

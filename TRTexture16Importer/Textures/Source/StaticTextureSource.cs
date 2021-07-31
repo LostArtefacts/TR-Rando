@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using TRLevelReader.Model.Enums;
 
@@ -31,6 +32,8 @@ namespace TRTexture16Importer.Textures.Source
                 return _bitmap;
             }
         }
+
+        public Bitmap ClonedBitmap => Bitmap.Clone(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), PixelFormat.Format32bppArgb);
 
         public void Dispose()
         {
