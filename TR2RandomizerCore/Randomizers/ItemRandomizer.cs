@@ -173,7 +173,7 @@ namespace TR2RandomizerCore.Randomizers
                                             if (i == burnerChipID)
                                             {
                                                 //Burner Chip
-                                                List<int> AllowedBurnerRooms = new List<int>() { 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 29, 30, 32, 34, 75, 80, 83, 84, 85, 86, 87, 88, 89 };
+                                                List<int> AllowedBurnerRooms = new List<int>() { 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 29, 32, 75, 80, 83, 84, 85, 86, 87, 88, 89 };
 
                                                 while (!AllowedBurnerRooms.Contains(RandomLocation.Room))
                                                 {
