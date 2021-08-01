@@ -2,7 +2,7 @@
 Tomb Raider II Item Randomizer
 
 # Discord
-![Randomizer Discord](https://discord.gg/f4bUqwgcCN)
+[Randomizer Discord](https://discord.gg/f4bUqwgcCN)
 
 ![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando.PNG)
 
