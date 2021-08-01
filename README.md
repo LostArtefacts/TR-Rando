@@ -32,7 +32,7 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
 * Audio Tracks - Randomizes title screen, level ambience, trigger and secret soundtracks.
 * Ammo Loss - Randomizes what levels Lara's ammo and items get removed.
 * Sunsets - Randomizes what levels have bartoli sunset effect.
-* Outfits - Randomizes the outfit Lara wears in each level and randomly cuts Lara's hair.
+* Outfits - Randomizes the outfit Lara wears in each level, including an invisibility option, and randomly cuts Lara's hair.
 * Text - Randomizes in-game text, such as weapon and level names.
 * Night Mode - Darkens a chosen number of levels to give a night-time effect.
 * Starting Position - Choose to have Lara start levels in different positions and facing a different direction.

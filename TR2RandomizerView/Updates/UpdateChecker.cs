@@ -42,7 +42,7 @@ namespace TR2RandomizerView.Updates
             //required for Win7 - https://stackoverflow.com/questions/2859790/the-request-was-aborted-could-not-create-ssl-tls-secure-channel
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            _initialDelay = new TimeSpan(0, 0, 20);
+            _initialDelay = new TimeSpan(0, 0, 5);
             _periodicDelay = new TimeSpan(0, 30, 0);
 
             _cancelSource = new CancellationTokenSource();
