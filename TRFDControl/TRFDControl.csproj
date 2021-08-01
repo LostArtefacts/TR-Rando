@@ -52,6 +52,10 @@
     <Compile Include="FDEntryTypes\FDSlantEntry.cs" />
     <Compile Include="FDEntryTypes\FDSlantEntryType.cs" />
     <Compile Include="FDEntryTypes\FDTriggerEntry.cs" />
+    <Compile Include="FDEntryTypes\TR3MinecartRotateLeftEntry.cs" />
+    <Compile Include="FDEntryTypes\TR3MinecraftRotateRightEntry.cs" />
+    <Compile Include="FDEntryTypes\TR3MonkeySwingEntry.cs" />
+    <Compile Include="FDEntryTypes\TR3TriangulationEntry.cs" />
     <Compile Include="FDFunctions.cs" />
     <Compile Include="FDSetup.cs" />
     <Compile Include="FDTriangulationData.cs" />
