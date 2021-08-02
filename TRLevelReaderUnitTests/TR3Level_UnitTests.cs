@@ -31,9 +31,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "jungle_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("jungle_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -54,9 +54,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "temple_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("temple_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -77,9 +77,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "quadchas_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("quadchas_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -100,9 +100,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "tonyboss_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("tonyboss_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -123,9 +123,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "nevada_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("nevada_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -146,9 +146,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "compound_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("compound_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -169,9 +169,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "area51_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("area51_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -192,9 +192,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "roofs_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("roofs_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -215,9 +215,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "sewer_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("sewer_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -238,9 +238,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "tower_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("tower_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -261,9 +261,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "office_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("office_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -284,9 +284,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "shore_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("shore_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -307,9 +307,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "crash_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("crash_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -330,9 +330,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "rapids_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("rapids_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -353,9 +353,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "triboss_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("triboss_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -376,9 +376,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "antarc_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("antarc_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -399,9 +399,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "mines_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("mines_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -422,9 +422,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "city_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("city_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
@@ -445,9 +445,9 @@ namespace TRLevelReaderUnitTests
 
             TR3LevelWriter writer = new TR3LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            writer.WriteLevelToFile(lvl, "chamber_TEST.tr2");
 
-            byte[] copyAsBytes = File.ReadAllBytes("TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("chamber_TEST.tr2");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");

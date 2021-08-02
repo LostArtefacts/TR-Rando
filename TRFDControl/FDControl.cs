@@ -184,49 +184,56 @@ namespace TRFDControl
 
                                 break;
                             case FDFunctions.FloorTriangulationNWSE_Solid:
-                                //TR3 Only - Ignore for now...
-                                break;
                             case FDFunctions.FloorTriangulationNESW_Solid:
-                                //TR3 Only - Ignore for now...
-                                break;
                             case FDFunctions.CeilingTriangulationNW_Solid:
-                                //TR3 Only - Ignore for now...
-                                break;
                             case FDFunctions.CeilingTriangulationNE_Solid:
-                                //TR3 Only - Ignore for now...
-                                break;
                             case FDFunctions.FloorTriangulationNWSE_SW:
-                                //TR3 Only - Ignore for now...
-                                break;
                             case FDFunctions.FloorTriangulationNWSE_NE:
-                                //TR3 Only - Ignore for now...
-                                break;
                             case FDFunctions.FloorTriangulationNESW_SW:
-                                //TR3 Only - Ignore for now...
-                                break;
                             case FDFunctions.FloorTriangulationNESW_NW:
-                                //TR3 Only - Ignore for now...
-                                break;
                             case FDFunctions.CeilingTriangulationNW_SW:
-                                //TR3 Only - Ignore for now...
-                                break;
                             case FDFunctions.CeilingTriangulationNW_NE:
-                                //TR3 Only - Ignore for now...
-                                break;
                             case FDFunctions.CeilingTriangulationNE_NW:
-                                //TR3 Only - Ignore for now...
-                                break;
                             case FDFunctions.CeilingTriangulationNE_SE:
-                                //TR3 Only - Ignore for now...
+
+                                TR3TriangulationEntry tri = new TR3TriangulationEntry()
+                                {
+                                    Setup = new FDSetup() { Value = lvl.FloorData[index] },
+                                    TriData = new FDTriangulationData() { Value = lvl.FloorData[++index] }
+                                };
+
+                                floordataFunctions.Add(tri);
+
                                 break;
                             case FDFunctions.Monkeyswing:
-                                //TR3 Only - Ignore for now...
+
+                                TR3MonkeySwingEntry swing = new TR3MonkeySwingEntry()
+                                {
+                                    Setup = new FDSetup() { Value = lvl.FloorData[index] },
+                                };
+
+                                floordataFunctions.Add(swing);
+
                                 break;
                             case FDFunctions.DeferredTriggeringOrMinecartRotateLeft:
-                                //TR3 Only - Ignore for now...
+
+                                TR3MinecartRotateLeftEntry mineleft = new TR3MinecartRotateLeftEntry()
+                                {
+                                    Setup = new FDSetup() { Value = lvl.FloorData[index] },
+                                };
+
+                                floordataFunctions.Add(mineleft);
+
                                 break;
                             case FDFunctions.MechBeetleOrMinecartRotateRight:
-                                //TR3 Only - Ignore for now...
+
+                                TR3MinecraftRotateRightEntry mineright = new TR3MinecraftRotateRightEntry()
+                                {
+                                    Setup = new FDSetup() { Value = lvl.FloorData[index] },
+                                };
+
+                                floordataFunctions.Add(mineright);
+
                                 break;
                             default:
                                 break;

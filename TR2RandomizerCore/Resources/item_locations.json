@@ -106543,16 +106543,6 @@
       "IsItem": true
     },
     {
-      "X": 78234,
-      "Z": 31177,
-      "Y": 0,
-      "Room": 10,
-      "RequiresGlitch": false,
-      "Difficulty": 0,
-      "IsInRoomSpace": false,
-      "IsItem": true
-    },
-    {
       "X": 77232,
       "Z": 31111,
       "Y": 0,
@@ -106635,16 +106625,6 @@
     {
       "X": 76115,
       "Z": 29163,
-      "Y": 0,
-      "Room": 10,
-      "RequiresGlitch": false,
-      "Difficulty": 0,
-      "IsInRoomSpace": false,
-      "IsItem": true
-    },
-    {
-      "X": 75178,
-      "Z": 29189,
       "Y": 0,
       "Room": 10,
       "RequiresGlitch": false,
@@ -119593,16 +119573,6 @@
       "IsItem": true
     },
     {
-      "X": 52780,
-      "Z": 45559,
-      "Y": 0,
-      "Room": 60,
-      "RequiresGlitch": false,
-      "Difficulty": 0,
-      "IsInRoomSpace": false,
-      "IsItem": true
-    },
-    {
       "X": 52896,
       "Z": 46543,
       "Y": 0,
@@ -119695,16 +119665,6 @@
     {
       "X": 53809,
       "Z": 48537,
-      "Y": 0,
-      "Room": 60,
-      "RequiresGlitch": false,
-      "Difficulty": 0,
-      "IsInRoomSpace": false,
-      "IsItem": true
-    },
-    {
-      "X": 52720,
-      "Z": 48570,
       "Y": 0,
       "Room": 60,
       "RequiresGlitch": false,
