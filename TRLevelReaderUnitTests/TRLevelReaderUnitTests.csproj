@@ -52,6 +52,7 @@
     <Compile Include="TR2Level_UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TR3Level_UnitTests.cs" />
+    <Compile Include="TRLevel_UnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

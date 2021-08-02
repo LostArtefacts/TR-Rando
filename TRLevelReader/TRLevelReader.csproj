@@ -140,6 +140,9 @@
     <Compile Include="TR3FileReadUtilities.cs" />
     <Compile Include="TR3LevelReader.cs" />
     <Compile Include="TR3LevelWriter.cs" />
+    <Compile Include="TRFileReadUtilities.cs" />
+    <Compile Include="TRLevelReader.cs" />
+    <Compile Include="TRLevelWriter.cs" />
     <Compile Include="UnsafeConversions.cs" />
   </ItemGroup>
   <ItemGroup />
