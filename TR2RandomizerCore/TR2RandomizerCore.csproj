@@ -52,6 +52,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Globalisation\G11N.cs" />
+    <Compile Include="Globalisation\GameStrings.cs" />
+    <Compile Include="Globalisation\GlobalStrings.cs" />
+    <Compile Include="Globalisation\Language.cs" />
+    <Compile Include="Globalisation\LevelStrings.cs" />
     <Compile Include="Helpers\Difficulty.cs" />
     <Compile Include="Helpers\EnemyDifficulty.cs" />
     <Compile Include="Helpers\LandmarkImporter.cs" />
@@ -120,8 +125,14 @@
     <None Include="Resources\start_positions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Strings\defaults.json" />
-    <None Include="Resources\Strings\gamestrings.json">
+    <None Include="Resources\Strings\G11N\defaults.json" />
+    <None Include="Resources\Strings\G11N\gamestrings_IT.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Strings\G11N\gamestrings_DE.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Strings\G11N\gamestrings_EN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\item_locations.json">
@@ -371,6 +382,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Models\Yeti\Data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Strings\languages.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Deduplication\BOAT.TR2-TextureRemap.json">

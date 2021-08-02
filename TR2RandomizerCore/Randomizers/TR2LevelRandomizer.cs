@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TR2RandomizerCore.Globalisation;
 using TR2RandomizerCore.Processors;
 using TR2RandomizerCore.Utilities;
 using TRGE.Coord;
@@ -45,6 +46,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RemoveRobeDagger { get; set; }
         internal bool EnableInvisibility { get; set; }
         internal bool RetainKeyItemNames { get; set; }
+        internal Language GameStringLanguage { get; set; }
         internal uint NightModeCount { get; set; }
         internal bool ChangeTriggerTracks { get; set; }
         internal bool RotateStartPositionOnly { get; set; }
@@ -90,6 +92,7 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeGameStrings = config.GetBool(nameof(RandomizeGameStrings));
             GameStringsSeed = config.GetInt(nameof(GameStringsSeed), defaultSeed);
             RetainKeyItemNames = config.GetBool(nameof(RetainKeyItemNames));
+            GameStringLanguage = G11N.Instance.GetLanguage(config.GetString(nameof(GameStringLanguage), Language.DefaultTag));
 
             RandomizeNightMode = config.GetBool(nameof(RandomizeNightMode));
             NightModeSeed = config.GetInt(nameof(NightModeSeed), defaultSeed);
@@ -139,6 +142,7 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeGameStrings)] = RandomizeGameStrings;
             config[nameof(GameStringsSeed)] = GameStringsSeed;
             config[nameof(RetainKeyItemNames)] = RetainKeyItemNames;
+            config[nameof(GameStringLanguage)] = GameStringLanguage.Tag;
 
             config[nameof(RandomizeNightMode)] = RandomizeNightMode;
             config[nameof(NightModeSeed)] = NightModeSeed;
@@ -165,7 +169,8 @@ namespace TR2RandomizerCore.Randomizers
                 GameStringRandomizer stringRandomizer = new GameStringRandomizer
                 {
                     ScriptEditor = scriptEditor as TR23ScriptEditor,
-                    RetainKeyItemNames = RetainKeyItemNames
+                    RetainKeyItemNames = RetainKeyItemNames,
+                    Language = GameStringLanguage
                 };
                 stringRandomizer.Randomize(GameStringsSeed);
             }

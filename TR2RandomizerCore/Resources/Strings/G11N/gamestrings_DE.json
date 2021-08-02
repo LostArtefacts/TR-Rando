@@ -1,0 +1,1068 @@
+{
+  "GlobalStrings": [
+    {
+      "GroupedStrings": [
+        {
+          "33": [
+            "Wunderkerze",
+            "Feuerzeug",
+            "Blender",
+            "Flackerer",
+            "Kleines Funkeln"
+          ],
+          "43": [
+            "Wunderkerze",
+            "Feuerzeug",
+            "Blender",
+            "Flackerer",
+            "Kleines Funkeln"
+          ]
+        },
+        {
+          "36": [
+            "Erbsenkanone",
+            "Handwaffen",
+            "Alte Treue",
+            "Pew-Pews",
+            "Nimm Zwei"
+          ],
+          "44": [
+            "Erbsenkanone Munition",
+            "Handwaffen Munition",
+            "Alte Treue Clips",
+            "Pew-Pew Clips",
+            "Nimm Zwei Clips"
+          ]
+        },
+        {
+          "37": [
+            "Schrotty",
+            "Muskete",
+            "Alte Treue",
+            "Bist du noch da?",
+            "Gutbuster"
+          ],
+          "45": [
+            "Schrotty Munition",
+            "Muskete Munition",
+            "Alte Treue Munition",
+            "Bist Du Noch Da? Ammo",
+            "Gutbuster Ammo"
+          ]
+        },
+        {
+          "38": [
+            "Autos",
+            "Magnums",
+            "Super Pistolen",
+            "Pierre Hat Das Verloren",
+            "Gibs Pierre Zurück"
+          ],
+          "46": [
+            "Auto Munition",
+            "Magnum Munition",
+            "Super Pistolen Clips",
+            "Pierres Verlorene Clips",
+            "Gibs Pierre Zurück Clips"
+          ]
+        },
+        {
+          "39": [
+            "UwUzi",
+            "Drrrrrrrrrr",
+            "IchBinStärker Waffen",
+            "Munitionsvampir",
+            "1000 Schüsse Später..."
+          ],
+          "47": [
+            "UwUzi Munition",
+            "Drrrrrrrrrr Clips",
+            "IchBinStärker Munition",
+            "Munitionsvampir Munition",
+            "1000 Schüsse Später, Munition"
+          ]
+        },
+        {
+          "40": [
+            "Tick-tick-tick",
+            "Geduld",
+            "Pfeilwerfer",
+            "Nutzlos",
+            "Zwecklos",
+            "Warum?",
+            "Nein!",
+            "Zahnstocher Werfer",
+            "Speerwerfer"
+          ],
+          "48": [
+            "Tick-tick-ticks",
+            "Geduld Pfeile",
+            "Pfeile",
+            "Nutzlos Pfeile",
+            "Zwecklos Pfeile",
+            "Warum Pfeile?",
+            "Nein, Pfeile!",
+            "Zahnstocher",
+            "Speere"
+          ]
+        },
+        {
+          "41": [
+            "MP3 Player",
+            "MPEG",
+            "Nicht die MP5",
+            "Big Drrrrrrrrrr"
+          ],
+          "49": [
+            "MP3 Munition",
+            "MPEG Munition",
+            "Nicht die MP5 Munition",
+            "Big Drrrrrrrrrr Munition"
+          ]
+        },
+        {
+          "42": [
+            "Nade Blaster",
+            "Explosions Überbringer",
+            "Gegner Verbrenner",
+            "Muschel Werfer",
+            "Ananas Versand",
+            "Großes Bang",
+            "Großes Boom",
+            "Jag Es Hoch!"
+          ],
+          "50": [
+            "Nades",
+            "Explosionen",
+            "Feuerbälle",
+            "Muscheln",
+            "Ananas",
+            "Großes Bangs",
+            "Großes Booms",
+            "Jag Es Hoch! Munition"
+          ]
+        },
+        {
+          "51": [
+            "Winziges Medipack",
+            "Klitzekleines Medipack",
+            "Kleines Medipack",
+            "Kompaktes Medipack",
+            "Schmuckes Medipack",
+            "Kleiner BooBoo Helfer"
+          ],
+          "52": [
+            "Gigantisches Medipack",
+            "Riesiges Medipack",
+            "Titanisches Medipack",
+            "Massives Medipack",
+            "Riihiiieesiges Medipack",
+            "Großer BooBoo Helfer"
+          ]
+        }
+      ],
+      "StandaloneStrings": {
+        "2": [
+          "Dinger",
+          "Irgendwas",
+          "Aufgehoben",
+          "Gegenstände",
+          "Müll",
+          "Uhhhh Glänzend!",
+          "Meeeiiiin Schaaaatz"
+        ],
+        "3": [
+          "Lara Starb",
+          "Nochmal?",
+          "Nochmal? Werd Besser!",
+          "Auf Besseres Glück",
+          "WERD GUT!",
+          "RAGE QUIT!",
+          "NLNMAS Wann?"
+        ],
+        "35": [
+          "Stats",
+          "Lebenszeichen",
+          "Nummern Knirschen",
+          "KEINE MEDS ERLAUBT",
+          "Geheimnis Tracker"
+        ],
+        "57": [
+          "Croft Manor",
+          "Core Design Hauptquartier",
+          "TR2Rando Hauptquartier",
+          "Laras Ausgrabungen",
+          "Winstons Kühlschrank",
+          "Tau Winston Auf"
+        ]
+      }
+    },
+    {
+      "StandaloneStrings": {
+        "15": [
+          "- NULL -",
+          "- NICHTS -",
+          "- NICHT DEFINIERT -",
+          "- NUTZE DIESEN SLOT -"
+        ]
+      }
+    }
+  ],
+  
+  "LevelStrings": {
+    "WALL.TR2": {
+      "Names": [
+        "China Teil 1",
+        "Die falsche Mauer",
+        "Die grausige Mauer",
+        "Die Stein Mauer",
+        "Die Mauer der Memes",
+        "Nicht sichtbar ausm All",
+        "Fast Xian",
+        "T-Rex Versteck",
+        "Das verlorene Tal 2.0",
+        "Der Weg nach Xian"
+      ],
+      "Keys": {
+        "0": [
+          "Schlüssel für Raum 4",
+          "Memehaus Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 1",
+          "Schlüssel A",
+          "Dieser Schlüssel",
+          "Vielleicht Schlüssel 1?",
+          "Vielleicht Schlüssel 2?"
+        ],
+        "1": [
+          "Spinnen Schlüssel",
+          "Krustiger Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 2",
+          "Schlüssel B",
+          "Jener Schlüssel",
+          "Vielleicht Schlüssel 1?",
+          "Vielleicht Schlüssel 2?",
+          "Ein weiterer Schlüssel O.o"
+        ]
+      }
+    },
+    
+    "BOAT.TR2": {
+      "Names": [
+        "Italien Teil 1",
+        "Rennboot",
+        "BOOT.TR2",
+        "Violinen und Mienen",
+        "Gondel Stadt",
+        "Schwimmende Stadt",
+        "Der Italien Job",
+        "Tod in Venedig",
+        "Weit weg von zu Hause",
+        "Das ist Liebe"
+      ],
+      "Keys": {
+        "0": [
+          "Booty McSchlüssel Gesicht",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 1",
+          "Schlüssel A",
+          "Schnelligkeitsschlüssel",
+          "Nutzlos im Speedrun",
+          "Lass das Boot raus!",
+          "Segel Zugang",
+          "Boot Garage"
+        ],
+        "1": [
+          "Schlüssel für Raum 82",
+          "Metall Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 2",
+          "Schlüssel B",
+          "Türöffner",
+          "Kein Dietrich",
+          "Dieser Schlüssel"
+        ],
+        "2": [
+          "Eiserner Board Schlüssel",
+          "Eisenfaust Schlüssel",
+          "Eiserne Lady",
+          "Eiserner Vorhang Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 3",
+          "Schlüssel C",
+          "Dieser Schlüssel"
+        ]
+      }
+    },
+    
+    "VENICE.TR2": {
+      "Names": [
+        "Italien Part 2",
+        "Bartolis Schraubenloch",
+        "Bartolis Höhle",
+        "Bartoli's Lair",
+        "Wo ist Bartoli?",
+        "Bartolis Ruinen",
+        "Kronleuchter",
+        "Die Mona Lisa",
+        "Zum Ende ein Knall!"
+      ],
+      "Keys": {
+        "0": [
+          "Bücherraum Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 1",
+          "Schlüssel A",
+          "Leiser Schlüssel",
+          "LEISE! Ich kill dich!",
+          "Bibliothek Karte",
+          "Das ist gemietet!",
+          "Ärger keine Bibliothekare",
+          "Verbotene Abteilung Schlüssel",
+          "Geheimes Versteck Schlüssel",
+          "Alohomora"
+        ],
+        "1": [
+          "TNT Schlüssel",
+          "Vernichtungsschlüssel",
+          "Explosionsschlüssel",
+          "Umdrehkartenschlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 2",
+          "Schlüssel B",
+          "Bumm Bumm Schlüssel",
+          "Großer Bumm Schlüssel",
+          "Jags hoch Schlüssel",
+          "BANG!",
+          "Nicht fallen lassen! Explodiert!"
+        ]
+      }
+    },
+    
+    "OPERA.TR2": {
+      "Names": [
+        "Italien Teil 3",
+        "Nicht in Sydney",
+        "Phantom der Oper",
+        "La Bohème",
+        "La Triviata",
+        "Frau Schmetterling",
+        "Rigoletto",
+        "Die Zauberflöte",
+        "Die Show geht weiter",
+        "Showzeit!",
+        "Bühnenshowvorbereitung"
+      ],
+      "Keys": {
+        "0": [
+          "Schicker Schlüssel",
+          "Vornehmer Schlüssel",
+          "Auffälliger Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 1",
+          "Schlüssel A",
+          "Opernschlüssel",
+          "Der Schlüssel zur Tür",
+          "Wackelboden Schlüssel",
+          "C Sharp"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Puzzle 1",
+          "Aufzugreparierer",
+          "Liftreparierer",
+          "Aufstiegsbox",
+          "Beam mich hoch, Scotty!",
+          "Nicht Roter Alarm",
+          "Ding",
+          "Kein Musik Fix"
+        ],
+        "1": [
+          "Puzzle 2",
+          "Motherboard",
+          "ACME Motherboard",
+          "PC Pro 97",
+          "Bewerte mein Setup",
+          "Triefender Schaltkreis",
+          "Warum funktioniert das?",
+          "Nasser Schaltkreis",
+          "NVIDIA560"
+        ]
+      }
+    },
+    
+    "RIG.TR2": {
+      "Names": [
+        "Der Turm",
+        "Manipuliert",
+        "TURM.TR2",
+        "Adria See",
+        "Großer Öl Turm",
+        "Umweltverschmutzung",
+        "Warum bin ich hier?",
+        "Waffenlos?",
+        "Verkatert",
+        "Kopfweh",
+        "Hochsicherheitsrisiko!"
+      ],
+      "Keys": {
+        "0": [
+          "Treibsand Karte",
+          "Tonnen Pass Karte",
+          "Pass Karte 2",
+          "Falsche ID 2",
+          "Mittlerer Level Zugang",
+          "Mastercard Express",
+          "Nicht zerreißen!"
+        ],
+        "1": [
+          "QWOP Spot Karte",
+          "Mach den Alarm aus!",
+          "Pass Karte 1",
+          "Falsche ID 1",
+          "Niedriger Level Zugang",
+          "Visa Express",
+          "Nicht verdrehen!"
+        ],
+        "2": [
+          "Karte für Raum 37",
+          "Nutzlose Karte",
+          "Pass Karte 3",
+          "Falsche ID 3",
+          "Hoher Level Zugang",
+          "American Express",
+          "Nicht verbiegen!"
+        ]
+      }
+    },
+    
+    "PLATFORM.TR2": {
+      "Names": [
+        "Der Bohrturm Teil 2",
+        "Plattform",
+        "Jagd auf ein Motherboard",
+        "Okay, Marco",
+        "Zu lange Leiter!",
+        "Das lange Klettern",
+        "Das gelbe U-Boot",
+        "Stört die Säge?"
+      ],
+      "Keys": {
+        "0": [
+          "Karte für Raum 12",
+          "Unidentifizierbare Pass Karte",
+          "Pass Karte 2",
+          "Laras Ausweis",
+          "Nicht zerbrechen!"
+        ],
+        "3": [
+          "Karte für Raum 49",
+          "Unidentifizierbare Pass Karte",
+          "Pass Karte 1",
+          "Winstons Ausweis",
+          "Nicht knicken!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Motherboard",
+          "ACME Motherboard",
+          "PC Pro 97",
+          "Bewerte mein Setup",
+          "Funktioniert das Ding?",
+          "Windows 95",
+          "Ist das wasserfest?",
+          "Einzelner Anrufsprozessor",
+          "Intel Celeron"
+        ]
+      }
+    },
+    
+    "UNWATER.TR2": {
+      "Names": [
+        "Unter Wasser Teil 1",
+        "73,152 Meter",
+        "240 Fuß",
+        "Tetanus Alarm!",
+        "Tauch Lara, TAUCH!",
+        "Tauch durchs Boot",
+        "Wasser und mehr Wasser",
+        "Nicht ganz Titanic",
+        "Es waren 84 Jahre...",
+        "Folge dem Müll",
+        "Unter dem Meer"
+      ]
+    },
+    
+    "KEEL.TR2": {
+      "Names": [
+        "Unter Wasser Teil 2",
+        "Das Schiff steht Kopf",
+        "Tetanus roter Alarm",
+        "Kiel",
+        "WRACK.TR2",
+        "KIEL.TR2",
+        "Die drei Unterbrecher",
+        "Gravitationsloses Schiff",
+        "Zerstört"
+      ],
+      "Keys": {
+        "0": [
+          "Toiletten Schlüssel",
+          "Badezimmer Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 1",
+          "Schlüssel A",
+          "Was für ein Badezimmer?"
+        ],
+        "1": [
+          "Krustiger Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 2",
+          "Schlüssel B",
+          "Schlüssel zu einer Tür"
+        ],
+        "2": [
+          "Raum Schlüssel",
+          "Was'n das?",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 3",
+          "Schlüssel C",
+          "Neuer Schlüssel?",
+          "Wo ist das Schlüsselloch?"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Feuer Brecher",
+          "T-Form Puzzle",
+          "Feuer Ausschalter",
+          "Kein Wasser in der Nähe",
+          "Das Mädchen steht in Flammen!",
+          "Nicht verbrennen!"
+        ]
+      }
+    },
+    
+    "LIVING.TR2": {
+      "Names": [
+        "Unter Wasser Teil 3",
+        "LEBENDIG.TR2",
+        "Verschieb die Kolben",
+        "Füllerepisode",
+        "Lebender Dritter",
+        "Lebender Fünfter",
+        "Nutzloser Level",
+        "Niemand daheim!",
+        "Leblose Quartiere"
+      ],
+      "Keys": {
+        "0": [
+          "Dramatischer Schlüssel",
+          "Melodramatischer Schlüssel",
+          "Tragischer Schlüssel",
+          "Shakespear's Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 1",
+          "Schlüssel A",
+          "Opern Schlüssel",
+          "Die Show muss weitergehen!"
+        ],
+        "1": [
+          "Krustiger Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 2",
+          "Schlüssel B",
+          "Ein Schlüssel",
+          "Raumöffner",
+          "Muss mal poliert werden"
+        ]
+      }
+    },
+    
+    "DECK.TR2": {
+      "Names": [
+        "Unter Wasser Teil 4",
+        "Jagd nach dem Schlüssel",
+        "DECK.TR2",
+        "Jagd nach dem Seraph",
+        "Eisberg siegt!",
+        "Großes Luftloch"
+      ],
+      "Keys": {
+        "1": [
+          "Heck Schlüssel",
+          "Strenger Schlüssel",
+          "Böser Schlüssel",
+          "Hartnasiger Schlüssel",
+          "Lagerschlüssel",
+          "Lagerschlüssel?",
+          "Nicht der Lagerschlüssel",
+          "Definitiv nicht der Lagerschlüssel",
+          "Öffnet eine Türe",
+          "Welcher Schlüssel?",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 1",
+          "Schlüssel A"
+        ],
+        "2": [
+          "Lager Schlüssel",
+          "Lager Schlüssel?",
+          "Seltsamer Schlüssel",
+          "Heck Schlüssel",
+          "Kabinen Schlüssel",
+          "Seraphen Schlüssel",
+          "Schlüssel zu Raum 105",
+          "Welcher Schlüssel?",
+          "Öffnet eine Tür",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 2",
+          "Schlüssel B"
+        ],
+        "3": [
+          "Kabinen Schlüssel",
+          "Raum Schlüssel",
+          "Schlüssel zu einer Tür",
+          "Lager Schlüssel",
+          "Lager Schlüssel?",
+          "Nicht der Lager Schlüssel",
+          "Öffnet eine Tür",
+          "Welcher Schlüssel?",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 3",
+          "Schlüssel C"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "Der Engel",
+          "Die Putte",
+          "Puzzel 1",
+          "Statue",
+          "Kein Schlüssel",
+          "Mönchs Relikt",
+          "Mönch Schatz"
+        ]
+      }
+    },
+    
+    "SKIDOO.TR2": {
+      "Names": [
+        "Tibet Teil 1",
+        "Schneemobil",
+        "Hütten Schlüssel her!",
+        "Absturzstelle",
+        "Rutschiger Boden",
+        "Lara kann nicht fliegen",
+        "Flugzeuglandefehler",
+        "Das sind hübsche Kugeln",
+        "Lawine!",
+        "Schneemobil: Die Rache",
+        "Schneemobilmania",
+        "Bau nen Schneemann"
+      ],
+      "Keys": {
+        "0": [
+          "Zugbrücken-Schlüssel",
+          "Nutzloser Schlüssel",
+          "Nicht der Eine",
+          "Nicht der Hütten Schlüssel",
+          "Hütten Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 1",
+          "Schlüssel A",
+          "Du hebst mich hoch!",
+          "Mach 'ne Platform Schlüssel"
+        ],
+        "1": [
+          "Hütten Schlüssel",
+          "Hütten Schlüssel?",
+          "Tibet Skip Schlüssel",
+          "Nicht der Zugbrücken Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 2",
+          "Schlüssel B",
+          "Der SCHLÜSSEL!!!",
+          "Speedrun Schlüssel",
+          "Meist gesucht!",
+          "Innenraum Schlüssel"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "Der Engel",
+          "Die Putte",
+          "Puzzel 1",
+          "Statue",
+          "Kein Schlüssel",
+          "Mönchs Relikt",
+          "Mönch Schatz"
+        ]
+      }
+    },
+    
+    "MONASTRY.TR2": {
+      "Names": [
+        "Tibet Teil 2",
+        "Rette die Mönche!",
+        "Keine Mönche töten!",
+        "Barkhang Wahnsinn",
+        "Stehle die Rollen!",
+        "Bete für die Mönche",
+        "Hoch Alarm Kloster",
+        "Nicht Dupe Glitchen!",
+        "Kugelfeste Mönche",
+        "Kloster der Schlüssel",
+        "Nicht Sister Act"
+      ],
+      "Keys": {
+        "0": [
+          "Schwachraum Schlüssel",
+          "IchBinStärker Schlüssel",
+          "Schlüssel zu einem Schlüssel"
+        ],
+        "1": [
+          "Mist, armer Schlüssel!",
+          "Draußen Schlüssel 1",
+          "Raus hier!",
+          "Schlüssel zu einem Raum O.o",
+          "Hintertür Schlüssel"
+        ],
+        "2": [
+          "Komödien Schlüssel",
+          "Abkürzung nach Oben",
+          "Bewegende Augen Schlüssel",
+          "Draußen Schlüssel 2"
+        ],
+        "3": [
+          "TR2Main Hallen Schlüssel",
+          "Meme Hallen Schlüssel",
+          "Großer Raum Schlüssel",
+          "Kein Kopfsprung! Schlüssel",
+          "Buddah Schlüssel",
+          "Lobby Schlüssel"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Wie eine Gebetsrolle",
+          "Manifestierte Rolle",
+          "Bruder Chen Rolle",
+          "Heilige Rolle",
+          "Madonna Rolle",
+          "Wer hat das Rad erfunden?",
+          "Müder Helfer"
+        ],
+        "1": [
+          "Diamanten",
+          "Barkhangs Schätze",
+          "Edelstein Töne",
+          "Uhhh glänzend!",
+          "18 Karat"
+        ],
+        "3": [
+          "Der Engel",
+          "Die Putte",
+          "Puzzel 1",
+          "Statue",
+          "Kein Schlüssel",
+          "Mönchs Relikt",
+          "Mönch Schatz",
+          "Zeit für Abschied!"
+        ]
+      }
+    },
+    
+    "CATACOMB.TR2": {
+      "Names": [
+        "Tibet Teil 3",
+        "DKdT",
+        "Katakomben der Ostereier",
+        "KATAKOMBEN.TR2",
+        "Yeti Mania",
+        "Ist kalt hier O.o",
+        "Katakomben des Horrors",
+        "Es ist dunkel hier!",
+        "Dunkler Yeti Raum"
+      ],
+      "Pickups": {
+        "0": [
+          "Gong Hammer?",
+          "Moment, was?",
+          "Frohe Ostern",
+          "Em, Herr Gong? Ha!",
+          "Gehört das hier hin?",
+          "...???",
+          "Xylophon Schlägel",
+          "Okay... was auch immer"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Gesichtsmaske",
+          "Eine Maske",
+          "Die Maske",
+          "Subnetz Maske",
+          "255.255.255.0",
+          "Maskerade",
+          "Trag die Maske!",
+          "Hübsche Maske",
+          "Hässliche Maske"
+        ]
+      }
+    },
+    
+    "ICECAVE.TR2": {
+      "Names": [
+        "Tibet Teil 4",
+        "Das Hühnchen",
+        "Eishöhle",
+        "Geflügel Territorium",
+        "Gefrohrenes Hühnchen",
+        "HÜHNCHEN.TR2",
+        "Der Kühlschrank",
+        "Die Kühltruhe",
+        "Arendelle",
+        "Nicht so eisige Höhle",
+        "Zeit zum auftauen!",
+        "Aufgetautes Hühnchen",
+        "Winston war hier!",
+        "Von Winston getestet!",
+        "Winstons Kühlschrank"
+      ],
+      "Keys": {
+        "1": [
+          "Herr Gong Hammer",
+          "Der Hammer",
+          "Guter Gong",
+          "Henry der Hammer",
+          "BOOOOOOONNNNGGGG",
+          "Eis Zerstörer",
+          "Von Kindern fernhalten",
+          "Eis Pickel",
+          "Trommelstock",
+          "Gong Hämmerchen"
+        ]
+      },
+      "Pickups": {
+        "1": [
+          "Talion",
+          "Hühnchen Schatz",
+          "Öffne die Tür, Lara",
+          "LASS DAS HUHN FREI!",
+          "Goldnes Dingsbums",
+          "Xian Tür Schlüssel",
+          "GLÄNZEND!",
+          "Da und wieder weg"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Gesichtsmaske",
+          "Nicht benötigte Maske",
+          "Die Maske",
+          "Subnet Maske",
+          "255.255.255.0",
+          "Kein Balkon Skip!",
+          "Wer benutzt das?",
+          "Laras Schönheitsmaske",
+          "Cassandra"
+        ]
+      }
+    },
+    
+    "EMPRTOMB.TR2": {
+      "Names": [
+        "China Teil 2",
+        "Tempel der Memes",
+        "Mach den Xian Skip!",
+        "Winzig kleine Spinnen",
+        "Spiiiiiinneeeenkäfig",
+        "Todesfallen Hügel",
+        "Du wirst STERBEN!",
+        "Tomaten Suppe",
+        "Rennen zum Dolch",
+        "Geschlossener Kreis"
+      ],
+      "Keys": {
+        "1": [
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 1",
+          "Elektrischer Leiter",
+          "Au",
+          "Schlüssel zu einer Tür"
+        ],
+        "2": [
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 2",
+          "Ag",
+          "Einfach ein Schlüssel",
+          "Du hast die Spinnen überlebt!"
+        ],
+        "3": [
+          "TR2Main Kammer Schlüssel",
+          "Ein Schlüssel",
+          "Der Schlüssel",
+          "Schlüssel 3 ",
+          "Der einzige Schlüssel den du brauchst"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Puzzel 1",
+          "Raum 41 Slot Füller",
+          "Gesichtsmaske",
+          "Terakotta Raum Öffner",
+          "Öffnet mehr Fallen",
+          "Es ist eine Falle O.o"
+        ]
+      }
+    },
+    
+    "FLOATING.TR2": {
+      "Names": [
+        "China Teil 3",
+        "Flieger",
+        "Inseln die fliegen",
+        "Inseln im Himmel",
+        "Die Dinger fliegen OwO",
+        "Wo bin ich?",
+        "Laras Traum",
+        "Was zur Hölle?",
+        "Kopfsprung ins Feuer",
+        "Fliegende Legos"
+      ],
+      "Puzzles": {
+        "0": [
+          "Ein Kräcker",
+          "Kräcker 1",
+          "Kräcker A",
+          "Käse und Kräcker",
+          "Exclusive Briefmarke",
+          "Magischer Keks",
+          "Glückskeks"
+        ],
+        "1": [
+          "Ein Kräcker",
+          "Kräcker 2",
+          "Kräcker B",
+          "Käse und Kräcker",
+          "Graham Kräcker",
+          "Exclusive Briefmarke",
+          "Magischer Keks",
+          "Glückskeks"
+        ]
+      }
+    },
+    
+    "XIAN.TR2": {
+      "Names": [
+        "China Teil 4",
+        "Bartolis Versteck Teil 2",
+        "Jahr des Drachen",
+        "Das Ableben des Drachen",
+        "Großer Flammenwerfer",
+        "Zahnlos' zu Hause",
+        "Drachen Krypta",
+        "Bartolis Ende",
+        "Smaug's Hort",
+        "Ungarischer Hornschwanz?",
+        "Töte nicht Paarthurnax",
+        "Mutter der Drachen",
+        "Ich werd nicht brennen",
+        "Alle verrückt hier"
+      ],
+      "Puzzles": {
+        "0": [
+          "Ein Kräcker",
+          "Der Kräcker",
+          "Käse und Kräcker",
+          "Graham Kräcker",
+          "Exklusive Briefmarke",
+          "Nicht essbarer Kräcker"
+        ],
+        "1": [
+          "Xian Schatz",
+          "Drachen Dolch",
+          "Großes Messer",
+          "Stechi Stechi",
+          "Zieh mich nicht raus!",
+          "Die Klinge",
+          "Suchst du das?",
+          "Hast du was verloren?",
+          "Sorry, brauchtest du das?",
+          "Nicht Excalibur",
+          "Excaliburs kleiner Bruder O.o"
+        ]
+      }
+    },
+    
+    "HOUSE.TR2": {
+      "Names": [
+        "ZH",
+        "Wo ist Winston?",
+        "Haus der Memes",
+        "Spaßhaus",
+        "MEMES.TR2",
+        "Mein bescheidenes Heim",
+        "Leeres Kühlschrank Haus",
+        "Gib mir ne Pause",
+        "Ich hasse alles",
+        "Geben die je auf?",
+        "Nicht allein zu Hause",
+        "Genug gesehen?"
+      ],
+      "Keys": {
+        "0": [
+          "Wandschrank Schlüssel",
+          "Arsenal Schlüssel",
+          "Der Schlüssel",
+          "Ein Schlüssel",
+          "Bitte keine Harpune Schlüssel",
+          "Laras geheimer Vorat",
+          "Waffen Versteck Schlüssel",
+          "Gib mir Boom Boom Schlüssel",
+          "Selbstverteidigungs Schlüssel",
+          "Waffenkammer Schlüssel"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Xian Schatz",
+          "Drachen Dolch",
+          "Großes Messer",
+          "Stechi Stechi",
+          "Zieh mich nicht raus!",
+          "Die Klinge",
+          "Suchst du das?",
+          "Hast du was verloren?",
+          "Sorry, brauchtest du das?",
+          "Nicht Excalibur",
+          "Excaliburs kleiner Bruder O.o"
+        ]
+      }
+    }
+  }
+}
