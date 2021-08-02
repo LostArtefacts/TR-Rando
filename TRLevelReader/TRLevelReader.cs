@@ -9,22 +9,22 @@ using TRLevelReader.Model;
 
 namespace TRLevelReader
 {
-    public class TRLevelReader
+    public class TR1LevelReader
     {
         private const uint MAX_PALETTE_SIZE = 256;
 
         private BinaryReader reader;
 
-        public TRLevelReader()
+        public TR1LevelReader()
         {
 
         }
 
         public TRLevel ReadLevel(string Filename)
         {
-            if (!Filename.ToUpper().Contains("TR2"))
+            if (!Filename.ToUpper().Contains("PHD"))
             {
-                throw new NotImplementedException("File reader only supports TR3 levels");
+                throw new NotImplementedException("File reader only supports TR1 levels");
             }
 
             TRLevel level = new TRLevel();
@@ -34,7 +34,7 @@ namespace TRLevelReader
             level.Version = reader.ReadUInt32();
             if (level.Version != Versions.TR1)
             {
-                throw new NotImplementedException("File reader only suppors TR3 levels");
+                throw new NotImplementedException("File reader only suppors TR1 levels");
             }
 
             level.NumImages = reader.ReadUInt32();

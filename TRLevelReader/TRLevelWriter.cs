@@ -8,9 +8,9 @@ using TRLevelReader.Model;
 
 namespace TRLevelReader
 {
-    public class TRLevelWriter
+    public class TR1LevelWriter
     {
-        public TRLevelWriter()
+        public TR1LevelWriter()
         {
 
         }
