@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\RandoDifficulty.cs" />
     <Compile Include="Helpers\Difficulty.cs" />
     <Compile Include="Helpers\EnemyDifficulty.cs" />
     <Compile Include="Helpers\LandmarkImporter.cs" />
