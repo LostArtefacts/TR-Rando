@@ -279,45 +279,16 @@ namespace TRLevelReader
             level.NumOverlaps = reader.ReadUInt32();
             level.Overlaps = new ushort[level.NumOverlaps];
 
-            for (int i = 0; i < (level.NumBoxes * 2); i++)
+            for (int i = 0; i < level.NumOverlaps; i++)
             {
                 level.Overlaps[i] = reader.ReadUInt16();
             }
 
-            level.GroundZone = new ushort[level.NumBoxes * 2];
-            for (int i = 0; i < (level.NumBoxes * 2); i++)
-            {
-                level.GroundZone[i] = reader.ReadUInt16();
-            }
+            level.Zones = new ushort[6 * level.NumBoxes];
 
-            level.GroundZone2 = new ushort[level.NumBoxes * 2];
-            for (int i = 0; i < (level.NumBoxes * 2); i++)
+            for (int i = 0; i < level.Zones.Count(); i++)
             {
-                level.GroundZone2[i] = reader.ReadUInt16();
-            }
-
-            level.FlyZone = new ushort[level.NumBoxes * 2];
-            for (int i = 0; i < (level.NumBoxes * 2); i++)
-            {
-                level.FlyZone[i] = reader.ReadUInt16();
-            }
-
-            level.GroundZoneAlt = new ushort[level.NumBoxes * 2];
-            for (int i = 0; i < (level.NumBoxes * 2); i++)
-            {
-                level.GroundZoneAlt[i] = reader.ReadUInt16();
-            }
-
-            level.GroundZoneAlt2 = new ushort[level.NumBoxes * 2];
-            for (int i = 0; i < (level.NumBoxes * 2); i++)
-            {
-                level.GroundZoneAlt2[i] = reader.ReadUInt16();
-            }
-
-            level.FlyZoneAlt = new ushort[level.NumBoxes * 2];
-            for (int i = 0; i < (level.NumBoxes * 2); i++)
-            {
-                level.FlyZoneAlt[i] = reader.ReadUInt16();
+                level.Zones[i] = reader.ReadUInt16();
             }
 
             //Animated Textures - the data stores the total number of ushorts to read (NumAnimatedTextures)
@@ -366,8 +337,8 @@ namespace TRLevelReader
                 level.DemoData[i] = reader.ReadByte();
             }
 
-            //Sound Map (370 shorts = 740 bytes) & Sound Details
-            level.SoundMap = new short[370];
+            //Sound Map & Sound Details
+            level.SoundMap = new short[256];
 
             for (int i = 0; i < level.SoundMap.Count(); i++)
             {

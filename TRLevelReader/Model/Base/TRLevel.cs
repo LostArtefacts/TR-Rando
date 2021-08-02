@@ -225,6 +225,8 @@ namespace TRLevelReader.Model
         /// </summary>
         public ushort[] Overlaps { get; set; }
 
+        public ushort[] Zones { get; set; }
+
         public ushort[] GroundZone { get; set; }
 
         public ushort[] GroundZone2 { get; set; }
@@ -374,12 +376,7 @@ namespace TRLevelReader.Model
                     foreach (TRBox box in Boxes) { writer.Write(box.Serialize()); }
                     writer.Write(NumOverlaps);
                     foreach (ushort overlap in Overlaps) { writer.Write(overlap); }
-                    foreach (ushort gzone in GroundZone) { writer.Write(gzone); }
-                    foreach (ushort gzone2 in GroundZone2) { writer.Write(gzone2); }
-                    foreach (ushort flyzone in FlyZone) { writer.Write(flyzone); }
-                    foreach (ushort gzonealt in GroundZoneAlt) { writer.Write(gzonealt); }
-                    foreach (ushort gzonealt2 in GroundZoneAlt2) { writer.Write(gzonealt2); }
-                    foreach (ushort flyzonealt in FlyZoneAlt) { writer.Write(flyzonealt); }
+                    foreach (ushort zone in Zones) { writer.Write(zone); }
                     writer.Write(NumAnimatedTextures);
                     writer.Write((ushort)AnimatedTextures.Length);
                     foreach (TRAnimatedTexture texture in AnimatedTextures) { writer.Write(texture.Serialize()); }
@@ -395,7 +392,7 @@ namespace TRLevelReader.Model
                     writer.Write(NumSoundDetails);
                     foreach (TRSoundDetails snddetail in SoundDetails) { writer.Write(snddetail.Serialize()); }
                     writer.Write(NumSamples);
-                    foreach (uint sample in Samples) { writer.Write(sample); }
+                    foreach (byte sample in Samples) { writer.Write(sample); }
                     writer.Write(NumSampleIndices);
                     foreach (uint index in SampleIndices) { writer.Write(index); }
                 }
