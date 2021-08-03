@@ -10,6 +10,34 @@ namespace TRLevelReader.Model
 {
     public class TR4RoomLight : ISerializableCompact
     {
+        public int X { get; set; }
+
+        public int Y { get; set; }
+
+        public int Z { get; set; }
+
+        public TRColour Colour { get; set; }
+
+        public byte LightType { get; set; }
+
+        public byte Unknown { get; set; }
+
+        public byte Intensity { get; set; }
+
+        public float In { get; set; }
+
+        public float Out { get; set; }
+
+        public float Length { get; set; }
+
+        public float CutOff { get; set; }
+
+        public float dx { get; set; }
+
+        public float dy { get; set; }
+
+        public float dz { get; set; }
+
         public byte[] Serialize()
         {
             throw new NotImplementedException();

@@ -113,6 +113,7 @@
     <Compile Include="Model\TR4\TR4Entity.cs" />
     <Compile Include="Model\TR4\TR4FlyByCamera.cs" />
     <Compile Include="Model\TR4\TR4Level.cs" />
+    <Compile Include="Model\TR4\TR4LevelDataChunk.cs" />
     <Compile Include="Model\TR4\TR4Mesh.cs" />
     <Compile Include="Model\TR4\TR4MeshFace3.cs" />
     <Compile Include="Model\TR4\TR4MeshFace4.cs" />
@@ -120,7 +121,10 @@
     <Compile Include="Model\TR4\TR4Room.cs" />
     <Compile Include="Model\TR4\TR4RoomLight.cs" />
     <Compile Include="Model\TR4\TR4Sample.cs" />
+    <Compile Include="Model\TR4\TR4SkyAndFont32Chunk.cs" />
     <Compile Include="Model\TR4\TR4TexImage32.cs" />
+    <Compile Include="Model\TR4\TR4Texture16Chunk.cs" />
+    <Compile Include="Model\TR4\TR4Texture32Chunk.cs" />
     <Compile Include="Model\TR5\TR5Colour.cs" />
     <Compile Include="Model\TR5\TR5FogBulb.cs" />
     <Compile Include="Model\TR5\TR5Level.cs" />

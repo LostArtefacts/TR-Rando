@@ -9,6 +9,12 @@ namespace TRLevelReader.Model
 {
     public class TR4MeshFace4 : ISerializableCompact
     {
+        public ushort[] Vertices { get; set; }
+
+        public ushort Texture { get; set; }
+
+        public ushort Effects { get; set; }
+
         public byte[] Serialize()
         {
             throw new NotImplementedException();

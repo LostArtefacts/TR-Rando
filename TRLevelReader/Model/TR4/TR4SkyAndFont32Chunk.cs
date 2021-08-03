@@ -8,9 +8,13 @@ using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TR4TexImage32 : ISerializableCompact
+    public class TR4SkyAndFont32Chunk : ISerializableCompact
     {
-        public uint[] Tile { get; set; }
+        public uint UncompressedSize { get; set; }
+
+        public uint CompressedSize { get; set; }
+
+        public TR4TexImage32[] Textiles { get; set; }
 
         public byte[] Serialize()
         {
