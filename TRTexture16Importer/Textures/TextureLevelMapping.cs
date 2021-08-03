@@ -25,6 +25,7 @@ namespace TRTexture16Importer.Textures
         public Dictionary<DynamicTextureSource, DynamicTextureTarget> DynamicMapping { get; set; }
         public Dictionary<StaticTextureSource, List<StaticTextureTarget>> StaticMapping { get; set; }
         public Dictionary<StaticTextureSource, Dictionary<int, List<LandmarkTextureTarget>>> LandmarkMapping { get; set; }
+        public List<FaceConversionTextureTarget> FaceConversions { get; set; }
         public List<TextureGrouping> StaticGrouping { get; set; }
         public Color DefaultSkyBox { get; set; }
 
@@ -50,6 +51,7 @@ namespace TRTexture16Importer.Textures
             Dictionary<DynamicTextureSource, DynamicTextureTarget> dynamicMapping = new Dictionary<DynamicTextureSource, DynamicTextureTarget>();
             Dictionary<StaticTextureSource, List<StaticTextureTarget>> staticMapping = new Dictionary<StaticTextureSource, List<StaticTextureTarget>>();
             Dictionary<StaticTextureSource, Dictionary<int, List<LandmarkTextureTarget>>> landmarkMapping = new Dictionary<StaticTextureSource, Dictionary<int, List<LandmarkTextureTarget>>>();
+            List<FaceConversionTextureTarget> faceConversions = new List<FaceConversionTextureTarget>();
             Color skyBoxColour = _defaultSkyBox;
 
             Dictionary<string, object> rootMapping = JsonConvert.DeserializeObject<Dictionary<string, object>>(File.ReadAllText(mapFile));
@@ -93,6 +95,12 @@ namespace TRTexture16Importer.Textures
                 {
                     landmarkMapping[database.GetStaticSource(sourceName)] = mapping[sourceName];
                 }
+            }
+
+            // Allows vertices to be amended in existing textures to fix original game issues, or even to rotate/flip textures
+            if (rootMapping.ContainsKey("FaceConversions"))
+            {
+                faceConversions = JsonConvert.DeserializeObject<List<FaceConversionTextureTarget>>(rootMapping["FaceConversions"].ToString());
             }
 
             // If a level has had textures removed externally, but the JSON file has static
@@ -149,6 +157,7 @@ namespace TRTexture16Importer.Textures
                 StaticMapping = staticMapping,
                 StaticGrouping = staticGrouping,
                 LandmarkMapping = landmarkMapping,
+                FaceConversions = faceConversions,
                 DefaultSkyBox = skyBoxColour
             };
         }
@@ -337,6 +346,31 @@ namespace TRTexture16Importer.Textures
                 return BitConverter.ToUInt16(arr, 0);
             }
             return texture;
+        }
+
+        public void ProcessFaceConversions()
+        {
+            foreach (FaceConversionTextureTarget conv in FaceConversions)
+            {
+                TR2RoomData roomData = _level.Rooms[conv.RoomNumber].RoomData;
+                foreach (int rectIndex in conv.RectangleIndices)
+                {
+                    TRFace4 face = roomData.Rectangles[rectIndex];
+                    ushort[] remappedVertices = new ushort[face.Vertices.Length];
+                    for (int i = 0; i < face.Vertices.Length; i++)
+                    {
+                        if (conv.Conversion.ContainsKey(i))
+                        {
+                            remappedVertices[i] = face.Vertices[conv.Conversion[i]];
+                        }
+                        else
+                        {
+                            remappedVertices[i] = face.Vertices[i];
+                        }
+                    }
+                    face.Vertices = remappedVertices;
+                }
+            }
         }
 
         private BitmapGraphics GetBitmapGraphics(int tile)

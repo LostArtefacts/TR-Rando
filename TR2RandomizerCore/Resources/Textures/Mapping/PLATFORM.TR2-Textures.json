@@ -1,4 +1,17 @@
 {
+  "FaceConversions": [
+    {
+      "RoomNumber": 23,
+      "RectangleIndices": [ 26, 40, 54 ],
+      "Conversion": {
+        "0": 2,
+        "1": 3,
+        "2": 0,
+        "3": 1
+      }
+    }
+  ],
+
   "Landmarks": {
     "Landmarks.DAStep": {
       "0": [
