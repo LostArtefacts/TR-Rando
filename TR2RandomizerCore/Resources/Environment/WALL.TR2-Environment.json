@@ -1,0 +1,34 @@
+{
+  "0": [
+    {
+      "Enforced": true,
+      "Location": {
+        "X": 53628,
+        "Y": 1536,
+        "Z": 35431,
+        "Room": 33
+      },
+      "LadderTexture": 1236,
+      "TileMap": {
+        "3": [ 137, 138, 139 ],
+        "31": [ 121, 123 ],
+        "33": [ 57 ]
+      }
+    }
+  ],
+
+  "1": [
+    {
+      "Enforced": true,
+      "Location": {
+        "X": 50754,
+        "Y": 0,
+        "Z": 35206,
+        "Room": 3
+      },
+      "Clicks": -2,
+      "FloorTexture": 1223,
+      "SideTexture": 1228
+    }
+  ]
+}

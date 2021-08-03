@@ -52,6 +52,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Environment\BaseEnvironmentModification.cs" />
+    <Compile Include="Environment\EnvironmentModificationFactory.cs" />
+    <Compile Include="Environment\EnvironmentModificationType.cs" />
+    <Compile Include="Environment\Types\EMFloor.cs" />
+    <Compile Include="Environment\Types\EMLadder.cs" />
     <Compile Include="Globalisation\G11N.cs" />
     <Compile Include="Globalisation\GameStrings.cs" />
     <Compile Include="Globalisation\GlobalStrings.cs" />
@@ -72,6 +77,7 @@
     <Compile Include="Processors\AbstractProcessorThread.cs" />
     <Compile Include="Randomizers\AudioRandomizer.cs" />
     <Compile Include="Randomizers\EnemyRandomizer.cs" />
+    <Compile Include="Randomizers\EnvironmentRandomizer.cs" />
     <Compile Include="Randomizers\NightModeRandomizer.cs" />
     <Compile Include="Randomizers\GameStringRandomizer.cs" />
     <Compile Include="Randomizers\OutfitRandomizer.cs" />
@@ -120,6 +126,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\enemy_restrictions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Environment\WALL.TR2-Environment.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\start_positions.json">

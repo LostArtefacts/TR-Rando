@@ -20,6 +20,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RandomizeNightMode { get; set; }
         internal bool RandomizeAudio { get; set; }
         internal bool RandomizeStartPosition { get; set; }
+        internal bool RandomizeEnvironment { get; set; }
 
         internal int SecretSeed { get; set; }
         internal int ItemSeed { get; set; }
@@ -30,6 +31,7 @@ namespace TR2RandomizerCore.Randomizers
         internal int NightModeSeed { get; set; }
         internal int AudioSeed { get; set; }
         internal int StartPositionSeed { get; set; }
+        internal int EnvironmentSeed { get; set; }
 
         internal bool HardSecrets { get; set; }
         internal bool IncludeKeyItems { get; set; }
@@ -105,6 +107,9 @@ namespace TR2RandomizerCore.Randomizers
             StartPositionSeed = config.GetInt(nameof(StartPositionSeed), defaultSeed);
             RotateStartPositionOnly = config.GetBool(nameof(RotateStartPositionOnly));
 
+            RandomizeEnvironment = config.GetBool(nameof(RandomizeEnvironment));
+            EnvironmentSeed = config.GetInt(nameof(EnvironmentSeed), defaultSeed);
+
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
         }
@@ -154,6 +159,9 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(StartPositionSeed)] = StartPositionSeed;
             config[nameof(RotateStartPositionOnly)] = RotateStartPositionOnly;
 
+            config[nameof(RandomizeEnvironment)] = RandomizeEnvironment;
+            config[nameof(EnvironmentSeed)] = EnvironmentSeed;
+
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
         }
@@ -196,6 +204,9 @@ namespace TR2RandomizerCore.Randomizers
             if (RandomizeEnemies)    target += CrossLevelEnemies ? numLevels * 3 : numLevels;
             if (RandomizeTextures)   target += numLevels * 3;
             if (RandomizeOutfits)    target += numLevels * 2;
+
+            target += numLevels; // Environment randomizer always runs
+
             return target;
         }
 
@@ -271,18 +282,6 @@ namespace TR2RandomizerCore.Randomizers
                     }.Deduplicate();
                 }
 
-                if (!monitor.IsCancelled && RandomizeNightMode)
-                {
-                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
-                    new NightModeRandomizer
-                    {
-                        Levels = levels,
-                        BasePath = wipDirectory,
-                        SaveMonitor = monitor,
-                        NumLevels = NightModeCount
-                    }.Randomize(NightModeSeed);
-                }
-
                 ItemRandomizer itemRandomizer = null;
                 if (!monitor.IsCancelled && RandomizeItems)
                 {
@@ -348,6 +347,30 @@ namespace TR2RandomizerCore.Randomizers
                         EnableInvisibility = EnableInvisibility,
                         TextureMonitor = textureMonitor
                     }.Randomize(OutfitSeed);
+                }
+
+                if (!monitor.IsCancelled)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, RandomizeEnvironment ? "Randomizing environment" : "Apply standard geometry packs");
+                    new EnvironmentRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        EnforcedModeOnly = !RandomizeEnvironment
+                    }.Randomize(EnvironmentSeed);
+                }
+
+                if (!monitor.IsCancelled && RandomizeNightMode)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
+                    new NightModeRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        NumLevels = NightModeCount
+                    }.Randomize(NightModeSeed);
                 }
 
                 if (!monitor.IsCancelled)
