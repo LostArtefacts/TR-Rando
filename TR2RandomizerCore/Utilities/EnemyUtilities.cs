@@ -277,7 +277,7 @@ namespace TR2RandomizerCore.Utilities
         {
             _restrictedEnemyZones = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Entities, List<int>>>>
             (
-                File.ReadAllText(@"Resources\enemy_restrictions.json")
+                File.ReadAllText(@"Resources\enemy_restrictions_default.json")
             );
         }
 
