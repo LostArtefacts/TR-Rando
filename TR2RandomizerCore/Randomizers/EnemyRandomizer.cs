@@ -24,6 +24,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool DocileBirdMonsters { get; set; }
         internal int MaxPackingAttempts { get; set; }
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
+        internal RandoDifficulty RandoEnemyDifficulty { get; set; }
 
         public EnemyRandomizer()
         {
@@ -185,7 +186,7 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         entity = waterEnemies[_generator.Next(0, waterEnemies.Count)];
                     }
-                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity));
+                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity, RandoEnemyDifficulty));
                     newEntities.Add(entity);
                 }
 
@@ -197,7 +198,7 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         entity = droppableEnemies[_generator.Next(0, droppableEnemies.Count)];
                     }
-                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity));
+                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity, RandoEnemyDifficulty));
                     newEntities.Add(entity);
                 }
 
@@ -218,7 +219,7 @@ namespace TR2RandomizerCore.Randomizers
                     TR2Entities entity = allEnemies[_generator.Next(0, allEnemies.Count)];
 
                     // Make sure this isn't known to be unsupported in the level
-                    if (!EnemyUtilities.IsEnemySupported(level.Name, entity))
+                    if (!EnemyUtilities.IsEnemySupported(level.Name, entity, RandoEnemyDifficulty))
                     {
                         continue;
                     }

@@ -82,13 +82,29 @@ namespace TR2RandomizerCore.Utilities
             return false;
         }
 
-        public static bool IsEnemySupported(string lvlName, TR2Entities entity)
+        public static bool IsEnemySupported(string lvlName, TR2Entities entity, RandoDifficulty difficulty)
         {
-            if (_unsupportedEnemies.ContainsKey(lvlName))
+            bool isEnemyTechnicallySupported = IsEnemySupported(lvlName, entity, _unsupportedEnemiesTechnical);
+            bool isEnemySupported = isEnemyTechnicallySupported;
+
+            if (difficulty == RandoDifficulty.Default)
             {
-                return !_unsupportedEnemies[lvlName].Contains(TR2EntityUtilities.TranslateEntityAlias(entity));
+                bool isEnemyDefaultSupported = IsEnemySupported(lvlName, entity, _unsupportedEnemiesDefault);
+
+                // a level may exist in both technical and difficulty dicts, so we check both
+                isEnemySupported &= isEnemyDefaultSupported;
             }
 
+            return isEnemySupported;
+        }
+        private static bool IsEnemySupported(string lvlName, TR2Entities entity, Dictionary<string, List<TR2Entities>> dict)
+        {
+            if (dict.ContainsKey(lvlName))
+            {
+                // if the dictionaries contain the enemy, the enemy is NOT supported
+                return !dict[lvlName].Contains(TR2EntityUtilities.TranslateEntityAlias(entity));
+            }
+            // all enemies are supported by default
             return true;
         }
 
@@ -195,10 +211,8 @@ namespace TR2RandomizerCore.Utilities
             return allDifficulties[weight];
         }
 
-        // These enemies will either not fit into the given levels, or there is no suitable
-        // room in the levels to support them, or for HSH they can't be killed or are too
-        // awkward, such as the small spiders.
-        private static readonly Dictionary<string, List<TR2Entities>> _unsupportedEnemies = new Dictionary<string, List<TR2Entities>>
+        // These enemies are unsupported due to technical reasons, NOT difficulty reasons.
+        private static readonly Dictionary<string, List<TR2Entities>> _unsupportedEnemiesTechnical = new Dictionary<string, List<TR2Entities>>
         {
             [LevelNames.VENICE] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
@@ -226,8 +240,6 @@ namespace TR2RandomizerCore.Utilities
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [LevelNames.FLOATER] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
-            [LevelNames.LAIR] =
-                new List<TR2Entities> { TR2Entities.MercSnowmobDriver },
             [LevelNames.HOME] =
                 // #148 Although we say here that the Doberman, MaskedGoons and StickGoons
                 // aren't supported, this is only for cross-level purposes because we
@@ -237,8 +249,16 @@ namespace TR2RandomizerCore.Utilities
                     TR2Entities.BlackMorayEel, TR2Entities.Doberman, TR2Entities.Eagle, TR2Entities.MaskedGoon1,
                     TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.MarcoBartoli, TR2Entities.MercSnowmobDriver,
                     TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Shark, TR2Entities.StickWieldingGoon1,
-                    TR2Entities.StickWieldingGoon2, TR2Entities.Spider, TR2Entities.TRex, TR2Entities.Winston, TR2Entities.YellowMorayEel
+                    TR2Entities.StickWieldingGoon2, TR2Entities.TRex, TR2Entities.Winston, TR2Entities.YellowMorayEel
                 }
+        };
+
+        private static readonly Dictionary<string, List<TR2Entities>> _unsupportedEnemiesDefault = new Dictionary<string, List<TR2Entities>>
+        {
+            [LevelNames.LAIR] =
+                new List<TR2Entities> { TR2Entities.MercSnowmobDriver },
+            [LevelNames.HOME] =
+                new List<TR2Entities> { TR2Entities.Spider, TR2Entities.Rat }
         };
 
         private static readonly Dictionary<string, List<TR2Entities>> _requiredEnemies = new Dictionary<string, List<TR2Entities>>
