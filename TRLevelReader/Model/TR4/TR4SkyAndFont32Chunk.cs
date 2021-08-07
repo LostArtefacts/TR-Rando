@@ -17,6 +17,9 @@ namespace TRLevelReader.Model
 
         public TR4TexImage32[] Textiles { get; set; }
 
+        //Optional - mainly just for testing, this is just to store the raw zlib compressed chunk.
+        public byte[] CompressedChunk { get; set; }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())
