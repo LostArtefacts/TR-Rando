@@ -6,6 +6,10 @@ Tomb Raider II Item Randomizer
 
 ![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando.PNG)
 
+# NuGet Packages
+* https://github.com/icsharpcode/SharpZipLib - Used for Zlib functions.
+* https://github.com/JamesNK/Newtonsoft.Json - Serialization/de-serialization of data.
+
 # Additional Build Dependencies
 In addition to Newtonsoft.JSON, the following dependencies external to NuGet are required to build:
 * https://github.com/lahm86/TRGameflowEditor/releases/latest - TRGameflowEditor by Lahm.
