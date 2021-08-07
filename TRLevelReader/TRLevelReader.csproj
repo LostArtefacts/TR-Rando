@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compression\TRZlib.cs" />
     <Compile Include="Helpers\LevelNames.cs" />
     <Compile Include="Helpers\TextileToBitmapConverter.cs" />
     <Compile Include="Helpers\TR2EntityUtilities.cs" />
