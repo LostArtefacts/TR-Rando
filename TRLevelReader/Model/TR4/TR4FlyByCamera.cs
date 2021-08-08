@@ -45,7 +45,20 @@ namespace TRLevelReader.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-
+                    writer.Write(X);
+                    writer.Write(Y);
+                    writer.Write(Z);
+                    writer.Write(dx);
+                    writer.Write(dy);
+                    writer.Write(dz);
+                    writer.Write(Sequence);
+                    writer.Write(Index);
+                    writer.Write(FOV);
+                    writer.Write(Roll);
+                    writer.Write(Timer);
+                    writer.Write(Speed);
+                    writer.Write(Flags);
+                    writer.Write(RoomID);
                 }
 
                 return stream.ToArray();

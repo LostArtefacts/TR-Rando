@@ -33,7 +33,14 @@ namespace TRLevelReader.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-
+                    writer.Write(Attribute);
+                    writer.Write(TileAndFlag);
+                    writer.Write(NewFlags);
+                    foreach (TRObjectTextureVert vert in Vertices) { writer.Write(vert.Serialize()); }
+                    writer.Write(OriginalU);
+                    writer.Write(OriginalV);
+                    writer.Write(WidthMinusOne);
+                    writer.Write(HeightMinusOne);
                 }
 
                 return stream.ToArray();

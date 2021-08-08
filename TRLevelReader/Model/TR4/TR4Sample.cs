@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TRLevelReader.Compression;
 using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
@@ -26,10 +26,16 @@ namespace TRLevelReader.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-
+                    writer.Write(SoundData);
                 }
 
-                return stream.ToArray();
+                byte[] uncompressed = stream.ToArray();
+                this.UncompSize = (uint)uncompressed.Length;
+
+                byte[] compressed = TRZlib.Compress(uncompressed);
+                this.CompSize = (uint)compressed.Length;
+
+                return compressed;
             }
         }
     }

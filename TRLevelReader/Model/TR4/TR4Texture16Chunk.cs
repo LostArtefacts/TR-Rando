@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TRLevelReader.Compression;
 using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
@@ -26,10 +26,16 @@ namespace TRLevelReader.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-
+                    foreach (TRTexImage16 tex in Textiles) { writer.Write(tex.Serialize()); }
                 }
 
-                return stream.ToArray();
+                byte[] uncompressed = stream.ToArray();
+                this.UncompressedSize = (uint)uncompressed.Length;
+
+                byte[] compressed = TRZlib.Compress(uncompressed);
+                this.CompressedSize = (uint)compressed.Length;
+
+                return compressed;
             }
         }
     }

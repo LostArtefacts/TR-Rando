@@ -19,7 +19,7 @@ namespace TRLevelReader.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-
+                    foreach (uint t in Tile) { writer.Write(t); }
                 }
 
                 return stream.ToArray();

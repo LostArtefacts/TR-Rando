@@ -45,7 +45,20 @@ namespace TRLevelReader.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-
+                    writer.Write(X);
+                    writer.Write(Y);
+                    writer.Write(Z);
+                    writer.Write(Colour.Serialize());
+                    writer.Write(LightType);
+                    writer.Write(Unknown);
+                    writer.Write(Intensity);
+                    writer.Write(In);
+                    writer.Write(Out);
+                    writer.Write(Length);
+                    writer.Write(CutOff);
+                    writer.Write(dx);
+                    writer.Write(dy);
+                    writer.Write(dz);
                 }
 
                 return stream.ToArray();

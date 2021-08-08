@@ -39,7 +39,50 @@ namespace TRLevelReader.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
+                    writer.Write(Centre.Serialize());
+                    writer.Write(CollRadius);
+                    writer.Write(NumVertices);
 
+                    foreach (TRVertex vert in Vertices)
+                    {
+                        writer.Write(vert.Serialize());
+                    }
+
+                    writer.Write(NumNormals);
+
+                    if (NumNormals > 0)
+                    {
+                        foreach (TRVertex normal in Normals)
+                        {
+                            writer.Write(normal.Serialize());
+                        }
+                    }
+                    else
+                    {
+                        foreach (ushort light in Lights)
+                        {
+                            writer.Write(light);
+                        }
+                    }
+
+                    writer.Write(NumTexturedRectangles);
+                    foreach (TR4MeshFace4 face in TexturedRectangles)
+                    {
+                        writer.Write(face.Serialize());
+                    }
+
+                    writer.Write(NumTexturedTriangles);
+                    foreach (TR4MeshFace3 face in TexturedTriangles)
+                    {
+                        writer.Write(face.Serialize());
+                    }
+
+                    // 4-byte alignment for mesh data
+                    long padding = writer.BaseStream.Position % 4;
+                    for (int i = 0; i < padding; i++)
+                    {
+                        writer.Write((byte)0);
+                    }
                 }
 
                 return stream.ToArray();

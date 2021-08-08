@@ -22,7 +22,9 @@ namespace TRLevelReader.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-
+                    foreach (ushort vert in Vertices) { writer.Write(vert); }
+                    writer.Write(Texture);
+                    writer.Write(Effects);
                 }
 
                 return stream.ToArray();
