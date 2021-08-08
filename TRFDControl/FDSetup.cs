@@ -47,6 +47,11 @@ namespace TRFDControl
             {
                 return (byte)((Value & 0x7F00) >> 8);
             }
+            set
+            {
+                Value = (ushort)(Value & ~SubFunction);
+                Value |= (ushort)(value << 8);
+            }
         }
 
         public bool EndData

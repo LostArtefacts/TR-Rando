@@ -21,6 +21,10 @@ namespace TRFDControl.FDEntryTypes
             {
                 return (FDTrigType)Setup.SubFunction;
             }
+            set
+            {
+                Setup.SubFunction = (byte)value;
+            }
         }
 
         public List<FDActionListItem> TrigActionList { get; set; }

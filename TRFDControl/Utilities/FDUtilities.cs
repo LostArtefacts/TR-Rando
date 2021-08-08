@@ -70,6 +70,40 @@ namespace TRFDControl.Utilities
             return items;
         }
 
+        public static void RemoveEntityTriggers(TR2Level level, int entityIndex, FDControl control)
+        {
+            foreach (TR2Room room in level.Rooms)
+            {
+                foreach (TRRoomSector sector in room.SectorList)
+                {
+                    if (sector.FDIndex == 0)
+                    {
+                        continue;
+                    }
+
+                    List<FDEntry> entries = control.Entries[sector.FDIndex];
+                    for (int i = entries.Count - 1; i >= 0; i--)
+                    {
+                        FDEntry entry = entries[i];
+                        if (entry is FDTriggerEntry trig)
+                        {
+                            trig.TrigActionList.RemoveAll(a => a.TrigAction == FDTrigAction.Object && a.Parameter == entityIndex);
+                            if (trig.TrigActionList.Count == 0)
+                            {
+                                entries.RemoveAt(i);
+                            }
+                        }
+                    }
+
+                    if (entries.Count == 0)
+                    {
+                        // If there isn't anything left, reset the sector to point to the dummy FD
+                        control.RemoveFloorData(sector);
+                    }
+                }
+            }
+        }
+
         public static readonly short NO_ROOM = 0xff;
         public static readonly short WALL_SHIFT = 10;
 
