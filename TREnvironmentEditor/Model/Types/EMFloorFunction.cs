@@ -1,18 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TR2RandomizerCore.Helpers;
+using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.Utilities;
 using TRLevelReader.Model;
 
-namespace TR2RandomizerCore.Environment.Types
+namespace TREnvironmentEditor.Model.Types
 {
-    public class EMFloor : BaseEnvironmentModification
+    public class EMFloorFunction : BaseEMFunction
     {
-        public static readonly int ClickSize = 256;
-        public static readonly int SectorSize = 1024;
-
-        public Location Location { get; set; }
+        public EMLocation Location { get; set; }
         public sbyte Clicks { get; set; }
         public ushort FloorTexture { get; set; }
         public ushort SideTexture { get; set; }
@@ -42,13 +39,7 @@ namespace TR2RandomizerCore.Environment.Types
             List<TR2RoomVertex> vertices = room.RoomData.Vertices.ToList();
             List<ushort> oldVertIndices = new List<ushort>();
 
-            List<TRVertex> defVerts = new List<TRVertex>
-            {
-                new TRVertex { X = (short)(x + SectorSize), Y = y, Z = z },
-                new TRVertex { X = x, Y = y, Z = z },
-                new TRVertex { X = x, Y = y, Z = (short)(z + SectorSize) },
-                new TRVertex { X = (short)(x + SectorSize), Y = y, Z = (short)(z + SectorSize) }
-            };
+            List<TRVertex> defVerts = GetTileVertices(x, y, z, false);
 
             for (int i = 0; i < defVerts.Count; i++)
             {
@@ -111,23 +102,6 @@ namespace TR2RandomizerCore.Environment.Types
 
             // Account for the added faces
             room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
-        }
-
-        private int CreateRoomVertex(TR2Room room, TRVertex vert)
-        {
-            TR2RoomVertex v = new TR2RoomVertex
-            {
-                Attributes = 32784, // This stops it shimmering if viewed from underwater, should be configuratble
-                Lighting = 6574, // Needs to be configurable
-                Lighting2 = 6574,// Needs to be configurable
-                Vertex = vert
-            };
-
-            List<TR2RoomVertex> verts = room.RoomData.Vertices.ToList();
-            verts.Add(v);
-            room.RoomData.Vertices = verts.ToArray();
-            room.RoomData.NumVertices++;
-            return verts.Count - 1;
         }
     }
 }

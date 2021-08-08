@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRFDControl", "TRFDControl\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRModelTransporter", "TRModelTransporter\TRModelTransporter.csproj", "{6CE83D8E-30E4-4CE1-9228-8657EF186A17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TREnvironmentEditor", "TREnvironmentEditor\TREnvironmentEditor.csproj", "{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{6CE83D8E-30E4-4CE1-9228-8657EF186A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CE83D8E-30E4-4CE1-9228-8657EF186A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CE83D8E-30E4-4CE1-9228-8657EF186A17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

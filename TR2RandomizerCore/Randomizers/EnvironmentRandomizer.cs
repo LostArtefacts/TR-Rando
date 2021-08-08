@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TR2RandomizerCore.Environment;
 using TR2RandomizerCore.Helpers;
+using TREnvironmentEditor;
+using TREnvironmentEditor.Model;
 using TRGE.Core;
 
 namespace TR2RandomizerCore.Randomizers
@@ -31,10 +32,21 @@ namespace TR2RandomizerCore.Randomizers
 
         private void RandomizeEnvironment(TR2CombinedLevel level)
         {
-            List<BaseEnvironmentModification> mods = EnvironmentModificationFactory.GetModifications(level.Name);
-            foreach (BaseEnvironmentModification mod in mods)
+            EMEditorMapping mapping = EMEditorMapping.Get(level.Name);
+            if (mapping == null)
             {
-                if (!EnforcedModeOnly || mod.Enforced)
+                return;
+            }
+
+            // Process enforced packs first
+            mapping.EnforcedSet.ApplyToLevel(level.Data);
+
+            if (/*!EnforcedModeOnly && */mapping.RandomizedSet.Count > 0)
+            {
+                // Pick a random number of packs to apply, but at least 1
+                int packCount = _generator.Next(1, mapping.RandomizedSet.Count + 1);
+                List<EMEditorSet> randomSet = mapping.RandomizedSet.RandomSelection(_generator, packCount);
+                foreach (EMEditorSet mod in randomSet)
                 {
                     mod.ApplyToLevel(level.Data);
                 }

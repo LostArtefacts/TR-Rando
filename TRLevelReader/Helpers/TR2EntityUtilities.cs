@@ -271,6 +271,11 @@ namespace TRLevelReader.Helpers
             };
         }
 
+        public static bool IsEnemyType(TR2Entities entity)
+        {
+            return GetFullListOfEnemies().Contains(entity);
+        }
+
         /*public static List<TR2Entities> GetListOfEnemyTypes()
         {
             return new List<TR2Entities>

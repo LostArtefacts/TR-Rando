@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
-using TR2RandomizerCore.Helpers;
+using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using TRLevelReader.Model;
 
-namespace TR2RandomizerCore.Environment.Types
+namespace TREnvironmentEditor.Model.Types
 {
-    public class EMLadder : BaseEnvironmentModification
+    public class EMLadderFunction : BaseEMFunction
     {
-        public Location Location { get; set; }
+        public EMLocation Location { get; set; }
         public ushort LadderTexture { get; set; }
         public Dictionary<int, int[]> TileMap { get; set; }
 

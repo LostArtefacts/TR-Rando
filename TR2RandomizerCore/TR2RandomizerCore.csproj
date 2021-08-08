@@ -52,16 +52,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Environment\BaseEnvironmentModification.cs" />
-    <Compile Include="Environment\EnvironmentModificationFactory.cs" />
-    <Compile Include="Environment\EnvironmentModificationType.cs" />
-    <Compile Include="Environment\Types\EMFloor.cs" />
-    <Compile Include="Environment\Types\EMLadder.cs" />
     <Compile Include="Globalisation\G11N.cs" />
     <Compile Include="Globalisation\GameStrings.cs" />
     <Compile Include="Globalisation\GlobalStrings.cs" />
     <Compile Include="Globalisation\Language.cs" />
     <Compile Include="Globalisation\LevelStrings.cs" />
+    <Compile Include="Helpers\CollectionExtensions.cs" />
     <Compile Include="Helpers\Difficulty.cs" />
     <Compile Include="Helpers\EnemyDifficulty.cs" />
     <Compile Include="Helpers\LandmarkImporter.cs" />
@@ -102,6 +98,10 @@
     <Compile Include="Zones\LevelZones.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TREnvironmentEditor\TREnvironmentEditor.csproj">
+      <Project>{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}</Project>
+      <Name>TREnvironmentEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TRFDControl\TRFDControl.csproj">
       <Project>{09ABCF27-6777-4866-8740-3EAD3F6B86FC}</Project>
       <Name>TRFDControl</Name>
