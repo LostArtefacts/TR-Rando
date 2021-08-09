@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using TR2RandomizerCore;
+using TR2RandomizerCore.Helpers;
 
 namespace TR2RandomizerView.Model
 {
@@ -29,6 +30,8 @@ namespace TR2RandomizerView.Model
         private BoolItemControlClass _rotateStartPosition;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls;
+
+        private RandoDifficulty _randoEnemyDifficulty;
 
         private int _levelCount, _maximumLevelCount;
 
@@ -571,6 +574,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public RandoDifficulty RandoEnemyDifficulty
+        {
+            get => _randoEnemyDifficulty;
+            set
+            {
+                _randoEnemyDifficulty = value;
+                FirePropertyChanged();
+            }
+        }
+
         public BoolItemControlClass RetainKeySpriteTextures
         {
             get => _retainKeySpriteTextures;
@@ -912,6 +925,7 @@ namespace TR2RandomizerView.Model
             CrossLevelEnemies.Value = _controller.CrossLevelEnemies;
             ProtectMonks.Value = _controller.ProtectMonks;
             DocileBirdMonsters.Value = _controller.DocileBirdMonsters;
+            RandoEnemyDifficulty = _controller.RandoEnemyDifficulty;
 
             RandomizeSecrets = _controller.RandomizeSecrets;
             SecretSeed = _controller.SecretSeed;
@@ -1128,6 +1142,7 @@ namespace TR2RandomizerView.Model
             _controller.CrossLevelEnemies = CrossLevelEnemies.Value;
             _controller.ProtectMonks = ProtectMonks.Value;
             _controller.DocileBirdMonsters = DocileBirdMonsters.Value;
+            _controller.RandoEnemyDifficulty = RandoEnemyDifficulty;
 
             _controller.RandomizeSecrets = RandomizeSecrets;
             _controller.SecretSeed = SecretSeed;
