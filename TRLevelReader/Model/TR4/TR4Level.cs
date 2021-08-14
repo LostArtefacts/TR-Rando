@@ -64,12 +64,13 @@ namespace TRLevelReader.Model
 
                     writer.Write(NumSamples);
 
+                    //CHEAT ALERT - compressed chunk is a WAV file, so we dont bother with any compression/decompression and just
+                    //write the compressed samples (WAVs) back. We will need to do this properly when modifying or adding to these samples.
                     foreach (TR4Sample sample in Samples)
                     {
-                        chunk = sample.Serialize();
                         writer.Write(sample.UncompSize);
                         writer.Write(sample.CompSize);
-                        writer.Write(chunk);
+                        writer.Write(sample.CompressedChunk);
                     }
                 }
 

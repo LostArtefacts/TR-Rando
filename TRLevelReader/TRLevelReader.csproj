@@ -148,6 +148,9 @@
     <Compile Include="TR3FileReadUtilities.cs" />
     <Compile Include="TR3LevelReader.cs" />
     <Compile Include="TR3LevelWriter.cs" />
+    <Compile Include="TR4FileReadUtilities.cs" />
+    <Compile Include="TR4LevelReader.cs" />
+    <Compile Include="TR4LevelWriter.cs" />
     <Compile Include="TRFileReadUtilities.cs" />
     <Compile Include="TRLevelReader.cs" />
     <Compile Include="TRLevelWriter.cs" />

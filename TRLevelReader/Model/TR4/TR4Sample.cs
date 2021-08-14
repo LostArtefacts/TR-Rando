@@ -22,21 +22,9 @@ namespace TRLevelReader.Model
 
         public byte[] Serialize()
         {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(SoundData);
-                }
-
-                byte[] uncompressed = stream.ToArray();
-                this.UncompSize = (uint)uncompressed.Length;
-
-                byte[] compressed = TRZlib.Compress(uncompressed);
-                this.CompSize = (uint)compressed.Length;
-
-                return compressed;
-            }
+            //we cheat a bit here - sample is not actually zlib compressed, it is simply a WAV file.
+            //So in the TR4Level file we will write the sizes and compressed chunk straight.
+            throw new NotImplementedException();
         }
     }
 }

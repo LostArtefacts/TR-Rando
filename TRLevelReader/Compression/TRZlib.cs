@@ -36,11 +36,33 @@ namespace TRLevelReader.Compression
             }
         }
 
+        public static byte[] DecompressNoHeader(byte[] data)
+        {
+            var outputStream = new MemoryStream();
+            using (var compressedStream = new MemoryStream(data))
+            using (var inputStream = new InflaterInputStream(compressedStream, new ICSharpCode.SharpZipLib.Zip.Compression.Inflater(true)))
+            {
+                inputStream.CopyTo(outputStream);
+                return outputStream.ToArray();
+            }
+        }
+
         public static byte[] Compress(byte[] data)
         {
             var outputStream = new MemoryStream();
             using (var uncompressedStream = new MemoryStream(data))
             using (var inputStream = new DeflaterOutputStream(uncompressedStream))
+            {
+                inputStream.CopyTo(outputStream);
+                return outputStream.ToArray();
+            }
+        }
+
+        public static byte[] CompressNoHeaderOrFooter(byte[] data)
+        {
+            var outputStream = new MemoryStream();
+            using (var uncompressedStream = new MemoryStream(data))
+            using (var inputStream = new DeflaterOutputStream(uncompressedStream, new ICSharpCode.SharpZipLib.Zip.Compression.Deflater(6, true)))
             {
                 inputStream.CopyTo(outputStream);
                 return outputStream.ToArray();
