@@ -123,12 +123,28 @@ namespace TR2RandomizerCore.Utilities
             return entities;
         }
 
-        public static Dictionary<TR2Entities, List<int>> GetRestrictedEnemyRooms(string lvlName)
+        // this returns a set of ALLOWED rooms
+        public static Dictionary<TR2Entities, List<int>> GetRestrictedEnemyRooms(string lvlName, RandoDifficulty difficulty)
         {
-            if (_restrictedEnemyZones.ContainsKey(lvlName))
+            var technicallyAllowedRooms = GetRestrictedEnemyRooms(lvlName, _restrictedEnemyZonesTechnical);
+            var multiDict = new List<Dictionary<TR2Entities, List<int>>>() { technicallyAllowedRooms };
+
+            // we need to merge dictionaries in order to get the complete set of allowed rooms, per level and per enemy
+            if (difficulty == RandoDifficulty.Default)
             {
-                return _restrictedEnemyZones[lvlName];
+                multiDict.Add(GetRestrictedEnemyRooms(lvlName, _restrictedEnemyZonesDefault));
+                return multiDict.Where(dict => dict != null)
+                                .SelectMany(dict => dict)
+                                .ToDictionary(pair => pair.Key, pair => pair.Value);
             }
+            else if (difficulty == RandoDifficulty.NoRestrictions)
+                return technicallyAllowedRooms;
+            return null;
+        }
+        private static Dictionary<TR2Entities, List<int>> GetRestrictedEnemyRooms(string lvlName, Dictionary<string, Dictionary<TR2Entities, List<int>>> restrictions)
+        {
+            if (restrictions.ContainsKey(lvlName))
+                return restrictions[lvlName];
             return null;
         }
 
@@ -275,7 +291,8 @@ namespace TR2RandomizerCore.Utilities
 
         // We restrict some enemies to specific rooms in levels, for example the dragon does not work well in small
         // rooms, and the likes of SnowmobDriver at the beginning of Bartoli's is practically impossible to pass.
-        private static readonly Dictionary<string, Dictionary<TR2Entities, List<int>>> _restrictedEnemyZones;
+        private static readonly Dictionary<string, Dictionary<TR2Entities, List<int>>> _restrictedEnemyZonesDefault;
+        private static readonly Dictionary<string, Dictionary<TR2Entities, List<int>>> _restrictedEnemyZonesTechnical;
 
         // We also limit the count for some - more than 1 dragon tends to cause crashes if they spawn close together. For
         // others, perhaps once a difficulty option is implemented this can be adjusted.
@@ -295,9 +312,13 @@ namespace TR2RandomizerCore.Utilities
 
         static EnemyUtilities()
         {
-            _restrictedEnemyZones = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Entities, List<int>>>>
+            _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Entities, List<int>>>>
             (
                 File.ReadAllText(@"Resources\enemy_restrictions_default.json")
+            );
+            _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Entities, List<int>>>>
+            (
+                File.ReadAllText(@"Resources\enemy_restrictions_technical.json")
             );
         }
 

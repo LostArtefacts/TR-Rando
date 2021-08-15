@@ -400,7 +400,7 @@ namespace TR2RandomizerCore.Randomizers
             }
 
             // First iterate through any enemies that are restricted by room
-            Dictionary<TR2Entities, List<int>> enemyRooms = EnemyUtilities.GetRestrictedEnemyRooms(level.Name);
+            Dictionary<TR2Entities, List<int>> enemyRooms = EnemyUtilities.GetRestrictedEnemyRooms(level.Name, RandoEnemyDifficulty);
             if (enemyRooms != null)
             {
                 foreach (TR2Entities entity in enemyRooms.Keys)
