@@ -389,7 +389,7 @@ namespace TR2RandomizerView.Windows
 
         private void DiscordCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Process.Start("https://discord.gg/RBRhqFKH");
+            Process.Start("https://discord.gg/f4bUqwgcCN");
         }
 
         private void CheckForUpdateCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
