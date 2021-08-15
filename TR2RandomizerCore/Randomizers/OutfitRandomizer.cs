@@ -43,19 +43,22 @@ namespace TR2RandomizerCore.Randomizers
             List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(Levels.Count);
             foreach (TR23ScriptedLevel lvl in Levels)
             {
-                TR2CombinedLevel level = LoadCombinedLevel(lvl);
-                levels.Add(level);
-
-                // Keep a reference to the first dragon level if we are removing the dagger from the dressing gown
-                if (RemoveRobeDagger && _firstDragonLevel == null && level.Data.Entities.ToList().FindIndex(e => e.TypeID == (short)TR2Entities.MarcoBartoli) != -1)
-                {
-                    _firstDragonLevel = level;
-                }
-
+                levels.Add(LoadCombinedLevel(lvl));
                 if (!TriggerProgress())
                 {
                     return;
                 }
+            }
+
+            if (RemoveRobeDagger)
+            {
+                // Keep a reference to the first dragon level if we are removing the dagger from the dressing gown. This needs to be done
+                // based on the level sequencing.
+                levels.Sort(delegate (TR2CombinedLevel lvl1, TR2CombinedLevel lvl2)
+                {
+                    return lvl1.Sequence.CompareTo(lvl2.Sequence);
+                });
+                _firstDragonLevel = levels.Find(l => l.Data.Entities.ToList().FindIndex(e => e.TypeID == (short)TR2Entities.MarcoBartoli) != -1);
             }
 
             // Sort the levels so each thread has a fairly equal weight in terms of import cost/time
