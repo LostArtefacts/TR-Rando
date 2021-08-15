@@ -109,26 +109,92 @@ namespace TRLevelReader
 
         private void DecompressTexture32Chunk(TR4Level lvl)
         {
+            //Decompressed buffer as bytes
             byte[] buffer = TRZlib.Decompress(lvl.Texture32Chunk.CompressedChunk);
+            uint[] tiles = new uint[buffer.Length / 4];
+
+            //Convert via block copy to uints
+            Buffer.BlockCopy(buffer, 0, tiles, 0, buffer.Length);
 
             //Is the decompressed chunk the size we expected?
             Debug.Assert(buffer.Length == lvl.Texture32Chunk.UncompressedSize);
+
+            //Allocate expected number of textiles
+            lvl.Texture32Chunk.Textiles = new TR4TexImage32[lvl.NumRoomTextiles + lvl.NumObjTextiles + lvl.NumBumpTextiles];
+
+            //Copy from tiles to textile objects
+            for (int i = 0; i < lvl.Texture32Chunk.Textiles.Length; i++)
+            {
+                TR4TexImage32 tex = new TR4TexImage32
+                {
+                    Tile = new uint[256 * 256]
+                };
+
+                //262144 = 256 * 256 * 4
+                Buffer.BlockCopy(tiles, (i * 262144), tex.Tile, 0, 262144);
+
+                lvl.Texture32Chunk.Textiles[i] = tex;
+            }
         }
 
         private void DecompressTexture16Chunk(TR4Level lvl)
         {
+            //Decompressed buffer as bytes
             byte[] buffer = TRZlib.Decompress(lvl.Texture16Chunk.CompressedChunk);
+            ushort[] tiles = new ushort[buffer.Length / 2];
+
+            //Convert via block copy to ushorts
+            Buffer.BlockCopy(buffer, 0, tiles, 0, buffer.Length);
 
             //Is the decompressed chunk the size we expected?
             Debug.Assert(buffer.Length == lvl.Texture16Chunk.UncompressedSize);
+
+            //Allocate expected number of textiles
+            lvl.Texture16Chunk.Textiles = new TRTexImage16[lvl.NumRoomTextiles + lvl.NumObjTextiles + lvl.NumBumpTextiles];
+
+            //Copy from tiles to textile objects
+            for (int i = 0; i < lvl.Texture16Chunk.Textiles.Length; i++)
+            {
+                TRTexImage16 tex = new TRTexImage16
+                {
+                    Pixels = new ushort[256 * 256]
+                };
+
+                //131072 = 256 * 256 * 2
+                Buffer.BlockCopy(tiles, (i * 131072), tex.Pixels, 0, 131072);
+
+                lvl.Texture16Chunk.Textiles[i] = tex;
+            }
         }
 
         private void DecompressSkyAndFont32Chunk(TR4Level lvl)
         {
+            //Decompressed buffer as bytes
             byte[] buffer = TRZlib.Decompress(lvl.SkyAndFont32Chunk.CompressedChunk);
+            uint[] tiles = new uint[buffer.Length / 4];
+
+            //Convert via block copy to uints
+            Buffer.BlockCopy(buffer, 0, tiles, 0, buffer.Length);
 
             //Is the decompressed chunk the size we expected?
             Debug.Assert(buffer.Length == lvl.SkyAndFont32Chunk.UncompressedSize);
+
+            //Allocate expected number of textiles
+            lvl.SkyAndFont32Chunk.Textiles = new TR4TexImage32[2];
+
+            //Copy from tiles to textile objects
+            for (int i = 0; i < lvl.SkyAndFont32Chunk.Textiles.Length; i++)
+            {
+                TR4TexImage32 tex = new TR4TexImage32
+                {
+                    Tile = new uint[256 * 256]
+                };
+
+                //262144 = 256 * 256 * 4
+                Buffer.BlockCopy(tiles, (i * 262144), tex.Tile, 0, 262144);
+
+                lvl.SkyAndFont32Chunk.Textiles[i] = tex;
+            }
         }
 
         private void DecompressLevelDataChunk(TR4Level lvl)
