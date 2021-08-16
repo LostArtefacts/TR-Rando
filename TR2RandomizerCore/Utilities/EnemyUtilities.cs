@@ -165,14 +165,25 @@ namespace TR2RandomizerCore.Utilities
             return -1;
         }
 
-        public static Dictionary<TR2Entities, List<string>> PrepareEnemyGameTracker(bool docileBirdMonster)
+        public static Dictionary<TR2Entities, List<string>> PrepareEnemyGameTracker(bool docileBirdMonster, RandoDifficulty difficulty)
         {
             Dictionary<TR2Entities, List<string>> tracker = new Dictionary<TR2Entities, List<string>>();
-            foreach (TR2Entities entity in _restrictedEnemyGameCounts.Keys)
+
+            if (difficulty == RandoDifficulty.Default)
+            {
+                foreach (TR2Entities entity in _restrictedEnemyGameCountsDefault.Keys)
+                {
+                    if (!docileBirdMonster || entity != TR2Entities.BirdMonster)
+                    {
+                        tracker.Add(entity, new List<string>(_restrictedEnemyGameCountsDefault[entity]));
+                    }
+                }
+            }
+            foreach (TR2Entities entity in _restrictedEnemyGameCountsTechnical.Keys)
             {
                 if (!docileBirdMonster || entity != TR2Entities.BirdMonster)
                 {
-                    tracker.Add(entity, new List<string>(_restrictedEnemyGameCounts[entity]));
+                    tracker.Add(entity, new List<string>(_restrictedEnemyGameCountsTechnical[entity]));
                 }
             }
 
@@ -314,11 +325,14 @@ namespace TR2RandomizerCore.Utilities
             [TR2Entities.MercSnowmobDriver] = 2,
         };
 
-        // We restrict the chicken to appearing 3 times throughout the game and Winston twice
-        private static readonly Dictionary<TR2Entities, int> _restrictedEnemyGameCounts = new Dictionary<TR2Entities, int>
+        // These enemies are restricted a set number of times throughout the entire game.
+        private static readonly Dictionary<TR2Entities, int> _restrictedEnemyGameCountsTechnical = new Dictionary<TR2Entities, int>
+        {
+            [TR2Entities.Winston] = 2,
+        };
+        private static readonly Dictionary<TR2Entities, int> _restrictedEnemyGameCountsDefault = new Dictionary<TR2Entities, int>
         {
             [TR2Entities.BirdMonster] = 3,
-            [TR2Entities.Winston] = 2
         };
 
         static EnemyUtilities()

@@ -97,7 +97,7 @@ namespace TR2RandomizerCore.Randomizers
             }
 
             // Track enemies whose counts across the game are restricted
-            _gameEnemyTracker = EnemyUtilities.PrepareEnemyGameTracker(DocileBirdMonsters);
+            _gameEnemyTracker = EnemyUtilities.PrepareEnemyGameTracker(DocileBirdMonsters, RandoEnemyDifficulty);
             
             SetMessage("Randomizing enemies - importing models");
             foreach (EnemyProcessor processor in processors)
