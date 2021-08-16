@@ -411,7 +411,7 @@ namespace TR2RandomizerCore.Randomizers
                     }
 
                     List<int> rooms = enemyRooms[entity];
-                    int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(entity);
+                    int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(entity, RandoEnemyDifficulty);
                     if (maxEntityCount == -1)
                     {
                         // We are allowed any number, but this can't be more than the number of unique rooms,
@@ -567,7 +567,7 @@ namespace TR2RandomizerCore.Randomizers
                 // If we are restricting count per level for this enemy and have reached that count, pick
                 // something else. This applies when we are restricting by in-level count, but not by room
                 // (e.g. Winston).
-                int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType);
+                int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, RandoEnemyDifficulty);
                 if (maxEntityCount != -1)
                 {
                     if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count == maxEntityCount)

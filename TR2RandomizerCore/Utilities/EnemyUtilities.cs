@@ -148,12 +148,20 @@ namespace TR2RandomizerCore.Utilities
             return null;
         }
 
-        public static int GetRestrictedEnemyLevelCount(TR2Entities entity)
+        public static int GetRestrictedEnemyLevelCount(TR2Entities entity, RandoDifficulty difficulty)
         {
-            if (_restrictedEnemyLevelCounts.ContainsKey(entity))
+            // Remember that technical count is MAXIMUM allowed, and there may be overlap.
+            // For example, maybe technically Dragon is allowed once, but an Easy difficulty might have that set to 0.
+            // So we check difficulties first, then check technical last.
+            if (difficulty == RandoDifficulty.Default)
             {
-                return _restrictedEnemyLevelCounts[entity];
+                if (_restrictedEnemyLevelCountsDefault.ContainsKey(entity))
+                    return _restrictedEnemyLevelCountsDefault[entity];
             }
+
+            if (_restrictedEnemyLevelCountsTechnical.ContainsKey(entity))
+                return _restrictedEnemyLevelCountsTechnical[entity];
+
             return -1;
         }
 
@@ -294,13 +302,16 @@ namespace TR2RandomizerCore.Utilities
         private static readonly Dictionary<string, Dictionary<TR2Entities, List<int>>> _restrictedEnemyZonesDefault;
         private static readonly Dictionary<string, Dictionary<TR2Entities, List<int>>> _restrictedEnemyZonesTechnical;
 
-        // We also limit the count for some - more than 1 dragon tends to cause crashes if they spawn close together. For
-        // others, perhaps once a difficulty option is implemented this can be adjusted.
-        private static readonly Dictionary<TR2Entities, int> _restrictedEnemyLevelCounts = new Dictionary<TR2Entities, int>
+        // We also limit the count for some - more than 1 dragon tends to cause crashes if they spawn close together.
+        // Winston is an easter egg so maybe keep it low.
+        private static readonly Dictionary<TR2Entities, int> _restrictedEnemyLevelCountsTechnical = new Dictionary<TR2Entities, int>
         {
             [TR2Entities.MarcoBartoli] = 1,
-            [TR2Entities.MercSnowmobDriver] = 2,
             [TR2Entities.Winston] = 2
+        };
+        private static readonly Dictionary<TR2Entities, int> _restrictedEnemyLevelCountsDefault = new Dictionary<TR2Entities, int>
+        {
+            [TR2Entities.MercSnowmobDriver] = 2,
         };
 
         // We restrict the chicken to appearing 3 times throughout the game and Winston twice
