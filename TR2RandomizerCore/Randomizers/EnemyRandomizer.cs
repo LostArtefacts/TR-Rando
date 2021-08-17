@@ -570,7 +570,7 @@ namespace TR2RandomizerCore.Randomizers
                 int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, RandoEnemyDifficulty);
                 if (maxEntityCount != -1)
                 {
-                    if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count == maxEntityCount)
+                    if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount)
                     {
                         TR2Entities tmp = newEntityType;
                         while (newEntityType == tmp)
