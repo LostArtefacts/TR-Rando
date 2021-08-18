@@ -142,7 +142,9 @@
             <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
                 <windows:AdvancedWindow Title="Randomize Enemies (Advanced)"
                                         MainDescription="Customize the enemy randomization."
-                                        BoolItemsSource="{Binding Data.EnemyBoolItemControls, Source={StaticResource proxy}}">
+                                        BoolItemsSource="{Binding Data.EnemyBoolItemControls, Source={StaticResource proxy}}"
+                                        HasDifficulty="True"
+                                        RandoEnemyDifficulty="{Binding Data.RandoEnemyDifficulty, Source={StaticResource proxy}, Mode=TwoWay}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>

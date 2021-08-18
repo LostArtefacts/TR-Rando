@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cvt="clr-namespace:TR2RandomizerView.Converters"
+        xmlns:helpers="clr-namespace:TR2RandomizerCore.Helpers;assembly=TR2RandomizerCore"
         mc:Ignorable="d"
         Icon="..\Resources\rando.ico"
         ResizeMode="NoResize"
@@ -12,6 +14,9 @@
         Loaded="Window_Loaded"
         Closing="Window_Closing"
         Title="Advanced">
+    <Window.Resources>
+        <cvt:BoolToVisibilityConverter x:Key="BoolToCollapsedConverter" />
+    </Window.Resources>
     
     <Grid x:Name="_content">
         <Grid.RowDefinitions>
@@ -23,6 +28,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -38,8 +44,11 @@
 
             <StackPanel Grid.Row="1"
                         Grid.ColumnSpan="2"
-                        Orientation="Horizontal"
+                        Orientation="Vertical"
                         HorizontalAlignment="Left">
+                <TextBlock Text="General"
+                           FontSize="14"
+                           TextDecorations="Underline" />
                 <ItemsControl ItemsSource="{Binding BoolItemsSource, Mode=TwoWay}"
                               Grid.IsSharedSizeScope="True">
                     <ItemsControl.ItemTemplate>
@@ -74,8 +83,29 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
+
+            <StackPanel Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Margin="0,5,0,0"
+                        Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                    <Style TargetType="{x:Type RadioButton}">
+                        <Setter Property="Margin"
+                                Value="0,10,0,0" />
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Text="Difficulty"
+                           FontSize="14"
+                           TextDecorations="Underline"/>
+                <RadioButton Content="Default"
+                             GroupName="randoEnemyDifficulty"
+                             IsChecked="{Binding RandoEnemyDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:RandoDifficulty.Default}, Mode=TwoWay}"/>
+                <RadioButton Content="No Restrictions"
+                             GroupName="randoEnemyDifficulty"
+                             IsChecked="{Binding RandoEnemyDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:RandoDifficulty.NoRestrictions}, Mode=TwoWay}" />
+            </StackPanel>
         </Grid>
-        
 
         <Border
             BorderThickness="0 1 0 0"
