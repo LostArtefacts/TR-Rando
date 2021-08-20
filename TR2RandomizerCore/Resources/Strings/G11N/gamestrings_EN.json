@@ -176,6 +176,9 @@
           "TRY AGAIN?",
           "TRY AGAIN? JUST GET GOOD",
           "BETTER LUCK NEXT TIME",
+          "RUN BACK TO THE START AND TRY AGAIN",
+          "RIP",
+          "RIP NO LOADS",
           "GIT GUD",
           "RAGE QUIT",
           "NLNMAS Next?"
@@ -602,7 +605,8 @@
         "DECK.TR2",
         "Quest for the Seraph",
         "Iceberg Wins",
-        "Big Air Pocket"
+        "Big Air Pocket",
+        "[ then ]"
       ],
       "Keys": {
         "1": [
@@ -733,7 +737,9 @@
         "Don't Dupe Glitch!",
         "Bulletproof Monks",
         "Keyhang Monastery",
-        "Not Sister Act"
+        "Not Sister Act",
+        "Kill the Monks",
+        "Barkhang Monastry"
       ],
       "Keys": {
         "0": [
@@ -803,7 +809,8 @@
         "It's Icy Out Here",
         "Catacombs of Horrors",
         "It's Dark In Here!",
-        "Dark Yeti Room"
+        "Dark Yeti Room",
+        "Caves"
       ],
       "Pickups": {
         "0": [
@@ -992,7 +999,8 @@
         "Don't kill Paarthurnax",
         "Lara, Mother of Dragons",
         "You Can't Burn Me!",
-        "Statues, Knives and Fire"
+        "Statues, Knives and Fire",
+        "DL"
       ],
       "Puzzles": {
         "0": [
@@ -1032,7 +1040,11 @@
         "Home Invasion",
         "Do They Ever Give Up?",
         "Not Home Alone",
-        "Seen Enough?"
+        "Seen Enough?",
+        "Madhouse",
+        "Home",
+        "Assault Course",
+        "Lara's Home"
       ],
       "Keys": {
         "0": [
