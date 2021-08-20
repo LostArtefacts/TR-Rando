@@ -269,8 +269,6 @@ namespace TR2RandomizerCore.Utilities
                     TR2Entities.BlackMorayEel, TR2Entities.MarcoBartoli, TR2Entities.MonkWithKnifeStick,
                     TR2Entities.Mercenary2, TR2Entities.Winston, TR2Entities.YellowMorayEel
                 },
-            [LevelNames.CHICKEN] =
-                new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [LevelNames.XIAN] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [LevelNames.FLOATER] =
