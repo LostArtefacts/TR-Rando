@@ -52,12 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Globalisation\G11N.cs" />
-    <Compile Include="Globalisation\GameStrings.cs" />
-    <Compile Include="Globalisation\GlobalStrings.cs" />
-    <Compile Include="Globalisation\Language.cs" />
-    <Compile Include="Globalisation\LevelStrings.cs" />
-    <Compile Include="Helpers\CollectionExtensions.cs" />
+    <Compile Include="Helpers\RandoDifficulty.cs" />
     <Compile Include="Helpers\Difficulty.cs" />
     <Compile Include="Helpers\EnemyDifficulty.cs" />
     <Compile Include="Helpers\LandmarkImporter.cs" />
@@ -73,7 +68,6 @@
     <Compile Include="Processors\AbstractProcessorThread.cs" />
     <Compile Include="Randomizers\AudioRandomizer.cs" />
     <Compile Include="Randomizers\EnemyRandomizer.cs" />
-    <Compile Include="Randomizers\EnvironmentRandomizer.cs" />
     <Compile Include="Randomizers\NightModeRandomizer.cs" />
     <Compile Include="Randomizers\GameStringRandomizer.cs" />
     <Compile Include="Randomizers\OutfitRandomizer.cs" />
@@ -98,10 +92,6 @@
     <Compile Include="Zones\LevelZones.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TREnvironmentEditor\TREnvironmentEditor.csproj">
-      <Project>{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}</Project>
-      <Name>TREnvironmentEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TRFDControl\TRFDControl.csproj">
       <Project>{09ABCF27-6777-4866-8740-3EAD3F6B86FC}</Project>
       <Name>TRFDControl</Name>
@@ -125,23 +115,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resources\enemy_restrictions.json">
+    <None Include="Resources\enemy_restrictions_technical.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Environment\WALL.TR2-Environment.json">
+    <None Include="Resources\enemy_restrictions_default.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\start_positions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Strings\G11N\defaults.json" />
-    <None Include="Resources\Strings\G11N\gamestrings_IT.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Strings\G11N\gamestrings_DE.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Strings\G11N\gamestrings_EN.json">
+    <None Include="Resources\Strings\defaults.json" />
+    <None Include="Resources\Strings\gamestrings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\item_locations.json">
@@ -391,9 +375,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Models\Yeti\Data.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Strings\languages.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Textures\Deduplication\BOAT.TR2-TextureRemap.json">
