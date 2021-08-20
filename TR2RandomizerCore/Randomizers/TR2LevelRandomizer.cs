@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TR2RandomizerCore.Helpers;
 using TR2RandomizerCore.Processors;
 using TR2RandomizerCore.Utilities;
 using TRGE.Coord;
@@ -39,6 +40,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool CrossLevelEnemies { get; set; }
         internal bool ProtectMonks { get; set; }
         internal bool DocileBirdMonsters { get; set; }
+        internal RandoDifficulty RandoEnemyDifficulty { get; set; }
         internal bool GlitchedSecrets { get; set; }
         internal bool PersistOutfits { get; set; }
         internal bool RandomlyCutHair { get; set; }
@@ -73,6 +75,7 @@ namespace TR2RandomizerCore.Randomizers
             CrossLevelEnemies = config.GetBool(nameof(CrossLevelEnemies), true);
             ProtectMonks = config.GetBool(nameof(ProtectMonks), true);
             DocileBirdMonsters = config.GetBool(nameof(DocileBirdMonsters));
+            RandoEnemyDifficulty = (RandoDifficulty)config.GetEnum(nameof(RandoEnemyDifficulty), typeof(RandoDifficulty), RandoDifficulty.Default);
 
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
@@ -122,6 +125,7 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(CrossLevelEnemies)] = CrossLevelEnemies;
             config[nameof(ProtectMonks)] = ProtectMonks;
             config[nameof(DocileBirdMonsters)] = DocileBirdMonsters;
+            config[nameof(RandoEnemyDifficulty)] = RandoEnemyDifficulty;
 
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;
@@ -305,7 +309,8 @@ namespace TR2RandomizerCore.Randomizers
                         CrossLevelEnemies = CrossLevelEnemies,
                         ProtectMonks = ProtectMonks,
                         DocileBirdMonsters = DocileBirdMonsters,
-                        TextureMonitor = textureMonitor
+                        TextureMonitor = textureMonitor,
+                        RandoEnemyDifficulty = RandoEnemyDifficulty
                     }.Randomize(EnemySeed);
                 }
 

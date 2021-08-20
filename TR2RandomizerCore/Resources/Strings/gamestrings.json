@@ -41,7 +41,7 @@
       ],
       "StandaloneStrings": {
         "2": [ "THINGS", "STUFF", "PICKUPS", "LOOT" ],
-        "3": [ "LARA DIED", "TRY AGAIN?", "TRY AGAIN? JUST GET GOOD", "BETTER LUCK NEXT TIME" ],
+        "3": [ "LARA DIED", "TRY AGAIN?", "TRY AGAIN? JUST GET GOOD", "BETTER LUCK NEXT TIME", "RUN BACK TO THE START AND TRY AGAIN", "RIP", "RIP NO LOADS" ],
         "35": [ "Stats", "Vital Stats", "Number Crunching" ],
         "57": [ "Croft Manor", "Core Design HQ", "TR2Rando HQ", "Lara's Digs" ]
       }
@@ -126,7 +126,7 @@
       }
     },
     "DECK.TR2": {
-      "Names": [ "Underwater-ish Part 4", "The Quest for Keys", "DECK.TR2" ],
+      "Names": [ "Underwater-ish Part 4", "The Quest for Keys", "DECK.TR2", "[ then ]" ],
       "Keys": {
         "1": [ "Stern Key", "Harsh Key", "Cruel Key", "Hard-nosed Key", "Storage Key", "Not the Storage Key", "A Key", "The Key", "Key 1", "Key A" ],
         "2": [ "Storage Key", "Strange Key", "Stern Key", "Cabin Key", "Seraph Key", "A Key", "The Key", "Key 2", "Key B" ],
@@ -147,7 +147,7 @@
       }
     },
     "MONASTRY.TR2": {
-      "Names": [ "Tibet Part 2", "Save the Monks", "Don't Shoot the Monks", "Barkhang Mad" ],
+      "Names": [ "Tibet Part 2", "Save the Monks", "Don't Shoot the Monks", "Barkhang Mad", "Kill the Monks", "Barkhang Monastry" ],
       "Keys": {
         "0": [ "Weakroom Key", "FeelsStronger Key" ],
         "1": [ "Trapdoor Key" ],
@@ -170,7 +170,7 @@
       }
     },
     "ICECAVE.TR2": {
-      "Names": [ "Tibet Part 4", "The Chicken", "Ice Cave", "Poultry Territory", "Frozen Chicken", "CHICKEN.TR2" ],
+      "Names": [ "Tibet Part 4", "The Chicken", "Ice Cave", "Poultry Territory", "Frozen Chicken", "CHICKEN.TR2", "Caves" ],
       "Keys": {
         "1": [ "Gong Hammer", "The Hammer", "Good Gong", "Henry the Hammer" ]
       },
@@ -200,14 +200,14 @@
       }
     },
     "XIAN.TR2": {
-      "Names": [ "China Part 4", "Bartoli's Hideout Part 2" ],
+      "Names": [ "China Part 4", "Bartoli's Hideout Part 2", "DL" ],
       "Puzzles": {
         "0": [ "A Cracker", "The Cracker", "Cheese 'n' Crackers", "Graham Cracker" ],
         "1": [ "Xian Loot", "Dragon Dagger" ]
       }
     },
     "HOUSE.TR2": {
-      "Names": [ "HSH", "Where's Winston?", "House of Memes", "Funhouse", "MEMES.TR2" ],
+      "Names": [ "HSH", "Where's Winston?", "House of Memes", "Funhouse", "MEMES.TR2", "Madhouse", "Home", "Assault Course", "Lara's Home" ],
       "Keys": {
         "0": [ "Closet Key", "Arsenal Key", "The Key", "A Key" ]
       },

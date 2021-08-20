@@ -303,6 +303,12 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.DocileBirdMonsters = value;
         }
 
+        public RandoDifficulty RandoEnemyDifficulty
+        {
+            get => LevelRandomizer.RandoEnemyDifficulty;
+            set => LevelRandomizer.RandoEnemyDifficulty = value;
+        }
+
         public bool RandomizeOutfits
         {
             get => LevelRandomizer.RandomizeOutfits;

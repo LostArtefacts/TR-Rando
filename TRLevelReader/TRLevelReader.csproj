@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.2.10, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.2\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compression\TRZlib.cs" />
     <Compile Include="Helpers\LevelNames.cs" />
     <Compile Include="Helpers\TextileToBitmapConverter.cs" />
     <Compile Include="Helpers\TR2EntityUtilities.cs" />
@@ -113,6 +117,7 @@
     <Compile Include="Model\TR4\TR4Entity.cs" />
     <Compile Include="Model\TR4\TR4FlyByCamera.cs" />
     <Compile Include="Model\TR4\TR4Level.cs" />
+    <Compile Include="Model\TR4\TR4LevelDataChunk.cs" />
     <Compile Include="Model\TR4\TR4Mesh.cs" />
     <Compile Include="Model\TR4\TR4MeshFace3.cs" />
     <Compile Include="Model\TR4\TR4MeshFace4.cs" />
@@ -120,7 +125,10 @@
     <Compile Include="Model\TR4\TR4Room.cs" />
     <Compile Include="Model\TR4\TR4RoomLight.cs" />
     <Compile Include="Model\TR4\TR4Sample.cs" />
+    <Compile Include="Model\TR4\TR4SkyAndFont32Chunk.cs" />
     <Compile Include="Model\TR4\TR4TexImage32.cs" />
+    <Compile Include="Model\TR4\TR4Texture16Chunk.cs" />
+    <Compile Include="Model\TR4\TR4Texture32Chunk.cs" />
     <Compile Include="Model\TR5\TR5Colour.cs" />
     <Compile Include="Model\TR5\TR5FogBulb.cs" />
     <Compile Include="Model\TR5\TR5Level.cs" />
@@ -140,11 +148,16 @@
     <Compile Include="TR3FileReadUtilities.cs" />
     <Compile Include="TR3LevelReader.cs" />
     <Compile Include="TR3LevelWriter.cs" />
+    <Compile Include="TR4FileReadUtilities.cs" />
+    <Compile Include="TR4LevelReader.cs" />
+    <Compile Include="TR4LevelWriter.cs" />
     <Compile Include="TRFileReadUtilities.cs" />
     <Compile Include="TRLevelReader.cs" />
     <Compile Include="TRLevelWriter.cs" />
     <Compile Include="UnsafeConversions.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

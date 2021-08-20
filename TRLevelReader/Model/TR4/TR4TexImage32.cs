@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,19 @@ namespace TRLevelReader.Model
 {
     public class TR4TexImage32 : ISerializableCompact
     {
+        public uint[] Tile { get; set; }
+
         public byte[] Serialize()
         {
-            throw new NotImplementedException();
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    foreach (uint t in Tile) { writer.Write(t); }
+                }
+
+                return stream.ToArray();
+            }
         }
     }
 }
