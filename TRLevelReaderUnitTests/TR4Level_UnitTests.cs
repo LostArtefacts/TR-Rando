@@ -24,9 +24,9 @@ namespace TRLevelReaderUnitTests
 
             TR4LevelWriter writer = new TR4LevelWriter();
 
-            writer.WriteLevelToFile(lvl, "alexhub_TEST.tr2");
+            writer.WriteLevelToFile(lvl, "alexhub_TEST.tr4");
 
-            byte[] copyAsBytes = File.ReadAllBytes("alexhub_TEST.tr2");
+            byte[] copyAsBytes = File.ReadAllBytes("alexhub_TEST.tr4");
 
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");

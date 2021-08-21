@@ -28,6 +28,8 @@ namespace TRLevelReader.Model
 
         public uint NumMeshData { get; set; }
 
+        public ushort[] RawMeshData { get; set; }
+
         public TR4Mesh[] Meshes { get; set; }
 
         public uint NumMeshPointers { get; set; }
