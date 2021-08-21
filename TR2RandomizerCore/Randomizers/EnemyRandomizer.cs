@@ -24,6 +24,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool DocileBirdMonsters { get; set; }
         internal int MaxPackingAttempts { get; set; }
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
+        internal RandoDifficulty RandoEnemyDifficulty { get; set; }
 
         public EnemyRandomizer()
         {
@@ -96,7 +97,7 @@ namespace TR2RandomizerCore.Randomizers
             }
 
             // Track enemies whose counts across the game are restricted
-            _gameEnemyTracker = EnemyUtilities.PrepareEnemyGameTracker(DocileBirdMonsters);
+            _gameEnemyTracker = EnemyUtilities.PrepareEnemyGameTracker(DocileBirdMonsters, RandoEnemyDifficulty);
             
             SetMessage("Randomizing enemies - importing models");
             foreach (EnemyProcessor processor in processors)
@@ -185,7 +186,7 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         entity = waterEnemies[_generator.Next(0, waterEnemies.Count)];
                     }
-                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity));
+                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity, RandoEnemyDifficulty));
                     newEntities.Add(entity);
                 }
 
@@ -197,7 +198,7 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         entity = droppableEnemies[_generator.Next(0, droppableEnemies.Count)];
                     }
-                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity));
+                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity, RandoEnemyDifficulty));
                     newEntities.Add(entity);
                 }
 
@@ -218,7 +219,7 @@ namespace TR2RandomizerCore.Randomizers
                     TR2Entities entity = allEnemies[_generator.Next(0, allEnemies.Count)];
 
                     // Make sure this isn't known to be unsupported in the level
-                    if (!EnemyUtilities.IsEnemySupported(level.Name, entity))
+                    if (!EnemyUtilities.IsEnemySupported(level.Name, entity, RandoEnemyDifficulty))
                     {
                         continue;
                     }
@@ -399,7 +400,7 @@ namespace TR2RandomizerCore.Randomizers
             }
 
             // First iterate through any enemies that are restricted by room
-            Dictionary<TR2Entities, List<int>> enemyRooms = EnemyUtilities.GetRestrictedEnemyRooms(level.Name);
+            Dictionary<TR2Entities, List<int>> enemyRooms = EnemyUtilities.GetRestrictedEnemyRooms(level.Name, RandoEnemyDifficulty);
             if (enemyRooms != null)
             {
                 foreach (TR2Entities entity in enemyRooms.Keys)
@@ -410,7 +411,7 @@ namespace TR2RandomizerCore.Randomizers
                     }
 
                     List<int> rooms = enemyRooms[entity];
-                    int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(entity);
+                    int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(entity, RandoEnemyDifficulty);
                     if (maxEntityCount == -1)
                     {
                         // We are allowed any number, but this can't be more than the number of unique rooms,
@@ -564,12 +565,12 @@ namespace TR2RandomizerCore.Randomizers
                 }
 
                 // If we are restricting count per level for this enemy and have reached that count, pick
-                // someting else. This applies when we are restricting by in-level count, but not by room 
+                // something else. This applies when we are restricting by in-level count, but not by room
                 // (e.g. Winston).
-                int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType);
+                int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, RandoEnemyDifficulty);
                 if (maxEntityCount != -1)
                 {
-                    if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count == maxEntityCount)
+                    if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount)
                     {
                         TR2Entities tmp = newEntityType;
                         while (newEntityType == tmp)
