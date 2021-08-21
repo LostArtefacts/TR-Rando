@@ -28,6 +28,8 @@ namespace TRLevelReader.Model
 
         public uint NumMeshData { get; set; }
 
+        public ushort[] RawMeshData { get; set; }
+
         public TR4Mesh[] Meshes { get; set; }
 
         public uint NumMeshPointers { get; set; }
@@ -200,7 +202,7 @@ namespace TRLevelReader.Model
                         writer.Write(ac.Serialize());
                     }
 
-                    writer.Write(NumMeshTrees);
+                    writer.Write(NumMeshTrees * 4); //To get the correct number /= 4 is done during read, make sure to reverse it here.
 
                     foreach (TRMeshTreeNode node in MeshTrees)
                     {

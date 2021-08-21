@@ -11,6 +11,10 @@ namespace TRLevelReader.Model
 {
     public class TR4Mesh : ISerializableCompact
     {
+        //Held for convenience here but is not included in serialisation
+        //Value matches that in containing pointer array
+        public uint Pointer { get; set; }
+
         public TRVertex Centre { get; set; }
 
         public int CollRadius { get; set; }
