@@ -9,23 +9,15 @@ using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TR5RoomVertex : ISerializableCompact
+    public class TR5Room : ISerializableCompact
     {
-        public TR5Vertex Vert { get; set; }
-
-        public TR5Vertex Norm { get; set; }
-
-        public uint Colour { get; set; }
-
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-                    writer.Write(Vert.Serialize());
-                    writer.Write(Norm.Serialize());
-                    writer.Write(Colour);
+
                 }
 
                 return stream.ToArray();
