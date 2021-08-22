@@ -54,6 +54,7 @@
     <Compile Include="TR3Level_UnitTests.cs" />
     <Compile Include="TRLevel_UnitTests.cs" />
     <Compile Include="TR4Level_UnitTests.cs" />
+    <Compile Include="TR5Level_UnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
