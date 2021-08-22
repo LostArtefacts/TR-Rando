@@ -22,6 +22,131 @@ namespace TRLevelReader
             {
                 TR5Room room = new TR5Room();
 
+                //It seems there are two bytes before XELA landmark?
+                reader.BaseStream.Position += 2;
+
+                room.XELALandmark = reader.ReadBytes(4);
+
+                Debug.Assert(room.XELALandmark[0] == 'X');
+                Debug.Assert(room.XELALandmark[1] == 'E');
+                Debug.Assert(room.XELALandmark[2] == 'L');
+                Debug.Assert(room.XELALandmark[3] == 'A');
+
+                room.RoomDataSize = reader.ReadUInt32();
+                room.Seperator = reader.ReadUInt32();
+                room.EndSDOffset = reader.ReadUInt32();
+                room.StartSDOffset = reader.ReadUInt32();
+                room.Seperator2 = reader.ReadUInt32();
+                room.EndPortalOffset = reader.ReadUInt32();
+
+                TR5RoomInfo info = new TR5RoomInfo
+                {
+                    X = reader.ReadInt32(),
+                    Y = reader.ReadInt32(),
+                    Z = reader.ReadInt32(),
+                    yBottom = reader.ReadInt32(),
+                    yTop = reader.ReadInt32()
+                };
+
+                room.Info = info;
+
+                room.NumZSectors = reader.ReadUInt16();
+                room.NumXSectors = reader.ReadUInt16();
+                room.RoomColourARGB = reader.ReadUInt32();
+                room.NumLights = reader.ReadUInt16();
+                room.NumStaticMeshes = reader.ReadUInt16();
+
+                room.Reverb = reader.ReadByte();
+                room.AlternateGroup = reader.ReadByte();
+                room.WaterScheme = reader.ReadUInt16();
+
+                room.Filler = new uint[2];
+                room.Filler[0] = reader.ReadUInt32();
+                room.Filler[1] = reader.ReadUInt32();
+
+                room.Seperator3 = new uint[2];
+                room.Seperator3[0] = reader.ReadUInt32();
+                room.Seperator3[1] = reader.ReadUInt32();
+
+                room.Filler2 = reader.ReadUInt32();
+                room.AlternateRoom = reader.ReadUInt16();
+                room.Flags = reader.ReadUInt16();
+
+                room.Unknown1 = reader.ReadUInt32();
+                room.Unknown2 = reader.ReadUInt32();
+                room.Unknown3 = reader.ReadUInt32();
+                room.Seperator4 = reader.ReadUInt32();
+                room.Unknown4 = reader.ReadUInt16();
+                room.Unknown5 = reader.ReadUInt16();
+
+                room.RoomX = reader.ReadSingle();
+                room.RoomY = reader.ReadSingle();
+                room.RoomZ = reader.ReadSingle();
+
+                room.Seperator5 = new uint[4];
+                room.Seperator5[0] = reader.ReadUInt32();
+                room.Seperator5[1] = reader.ReadUInt32();
+                room.Seperator5[2] = reader.ReadUInt32();
+                room.Seperator5[3] = reader.ReadUInt32();
+
+                room.Seperator6 = reader.ReadUInt32();
+                room.Seperator7 = reader.ReadUInt32();
+
+                room.NumRoomTriangles = reader.ReadUInt32();
+                room.NumRoomRectangles = reader.ReadUInt32();
+
+                room.RoomLightsPtr = reader.ReadUInt32();
+                room.RoomFogBulbsPtr = reader.ReadUInt32();
+
+                room.NumLights2 = reader.ReadUInt32();
+                room.NumFogBulbs = reader.ReadUInt32();
+
+                //TRosettaStone talks about some unknown here?
+                reader.BaseStream.Position += 4;
+
+                room.RoomYTop = reader.ReadInt32();
+                room.RoomYBottom = reader.ReadInt32();
+
+                room.LayersPtr = reader.ReadUInt32();
+                room.VerticesPtr = reader.ReadUInt32();
+                room.PolyOffset = reader.ReadUInt32();
+                room.PolyOffset2 = reader.ReadUInt32();
+                room.NumVertices = reader.ReadUInt32();
+
+                room.Seperator8 = new uint[4];
+                room.Seperator8[0] = reader.ReadUInt32();
+                room.Seperator8[1] = reader.ReadUInt32();
+                room.Seperator8[2] = reader.ReadUInt32();
+                room.Seperator8[3] = reader.ReadUInt32();
+
+                TR5RoomData data = new TR5RoomData();
+
+                data.Lights = new TR5RoomLight[room.NumLights];
+                //read lights
+
+                data.FogBulbs = new TR5FogBulb[room.NumFogBulbs];
+                //read bulbs
+
+                data.SectorList = new TRRoomSector[room.NumXSectors * room.NumZSectors];
+                //read sectors
+
+                data.NumPortals = reader.ReadUInt16();
+                data.Portals = new TRRoomPortal[data.NumPortals];
+                //read portals
+
+                data.Seperator = reader.ReadUInt16();
+
+                data.StaticMeshes = new TR3RoomStaticMesh[room.NumStaticMeshes];
+                //read static meshes
+
+                data.Layers = new TR5RoomLayer[room.NumLayers];
+                //read layers
+
+                data.Faces = reader.ReadBytes((int)(room.NumRoomRectangles * 10) + (int)(room.NumRoomTriangles * 8));
+
+                data.Vertices = new TR5RoomVertex[room.NumVertices];
+                //read vertices
+
                 lvl.LevelDataChunk.Rooms[i] = room;
             }
         }
