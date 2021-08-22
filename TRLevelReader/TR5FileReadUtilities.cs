@@ -18,6 +18,8 @@ namespace TRLevelReader
             lvl.LevelDataChunk.NumRooms = reader.ReadUInt32();
             lvl.LevelDataChunk.Rooms = new TR5Room[lvl.LevelDataChunk.NumRooms];
 
+            long lastPosition = 0;
+
             for (int i = 0; i < lvl.LevelDataChunk.NumRooms; i++)
             {
                 TR5Room room = new TR5Room();
@@ -30,6 +32,8 @@ namespace TRLevelReader
                 Debug.Assert(room.XELALandmark[3] == 'A');
 
                 room.RoomDataSize = reader.ReadUInt32();
+                lastPosition = reader.BaseStream.Position;
+
                 room.Seperator = reader.ReadUInt32();
                 room.EndSDOffset = reader.ReadUInt32();
                 room.StartSDOffset = reader.ReadUInt32();
@@ -98,11 +102,10 @@ namespace TRLevelReader
                 room.NumLights2 = reader.ReadUInt32();
                 room.NumFogBulbs = reader.ReadUInt32();
 
-                reader.ReadUInt32();
+                room.RoomYTop = reader.ReadSingle();
+                room.RoomYBottom = reader.ReadSingle();
 
-                room.RoomYTop = reader.ReadInt32();
-                room.RoomYBottom = reader.ReadInt32();
-
+                room.NumLayers = reader.ReadUInt32();
                 room.LayersPtr = reader.ReadUInt32();
                 room.VerticesPtr = reader.ReadUInt32();
                 room.PolyOffset = reader.ReadUInt32();
@@ -114,6 +117,9 @@ namespace TRLevelReader
                 room.Seperator8[1] = reader.ReadUInt32();
                 room.Seperator8[2] = reader.ReadUInt32();
                 room.Seperator8[3] = reader.ReadUInt32();
+
+                //Record the stream pointer after the header
+                long afterhdr = reader.BaseStream.Position;
 
                 TR5RoomData data = new TR5RoomData();
 
@@ -156,14 +162,21 @@ namespace TRLevelReader
                     data.Layers[j] = ReadRoomLayer(reader);
                 }
 
-                data.Faces = reader.ReadBytes((int)(room.NumRoomRectangles * 10) + (int)(room.NumRoomTriangles * 8));
+                data.Faces = reader.ReadBytes((int)(room.NumRoomRectangles * 12) + (int)(room.NumRoomTriangles * 10));
 
-                data.Vertices = new TR5RoomVertex[room.NumVertices];
-                for (int j = 0; j < room.NumVertices; j++)
+                //WARNING: there is overlapping data between vertices & faces. Big thanks to chreden for helping debug this.
+                //No idea how they share the data.....
+
+                //This seeks backwards to where the vertex data is expected to start
+                reader.BaseStream.Position = afterhdr + room.VerticesPtr;
+
+                data.Vertices = new TR5RoomVertex[room.NumVertices / 28];
+                for (int j = 0; j < room.NumVertices / 28; j++)
                 {
                     data.Vertices[j] = ReadRoomVertex(reader);
                 }
 
+                Debug.Assert(reader.BaseStream.Position == (lastPosition + room.RoomDataSize));
                 lvl.LevelDataChunk.Rooms[i] = room;
             }
         }

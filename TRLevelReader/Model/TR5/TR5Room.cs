@@ -89,9 +89,9 @@ namespace TRLevelReader.Model
 
         public uint NumFogBulbs { get; set; }
 
-        public int RoomYTop { get; set; }
+        public float RoomYTop { get; set; }
 
-        public int RoomYBottom { get; set; }
+        public float RoomYBottom { get; set; }
 
         public uint NumLayers { get; set; }
 
