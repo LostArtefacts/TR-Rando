@@ -15,7 +15,9 @@ namespace TRLevelReader.Model
 
         public uint Unused { get; set; }
 
-        public ushort NumRooms { get; set; }
+        //It says ushort in TRosettaStone, but looking at level files in HxD it seems there is always
+        //"00 00" before the first XELA landmark. Based on that NumRooms will be read as a uint.
+        public uint NumRooms { get; set; }
 
         public TR5Room[] Rooms { get; set; }
 

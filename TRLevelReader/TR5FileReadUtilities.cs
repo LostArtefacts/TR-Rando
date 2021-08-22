@@ -15,15 +15,12 @@ namespace TRLevelReader
         public static void PopulateRooms(BinaryReader reader, TR5Level lvl)
         {
             lvl.LevelDataChunk.Unused = reader.ReadUInt32();
-            lvl.LevelDataChunk.NumRooms = reader.ReadUInt16();
+            lvl.LevelDataChunk.NumRooms = reader.ReadUInt32();
             lvl.LevelDataChunk.Rooms = new TR5Room[lvl.LevelDataChunk.NumRooms];
 
             for (int i = 0; i < lvl.LevelDataChunk.NumRooms; i++)
             {
                 TR5Room room = new TR5Room();
-
-                //It seems there are two bytes before XELA landmark?
-                reader.BaseStream.Position += 2;
 
                 room.XELALandmark = reader.ReadBytes(4);
 
@@ -101,8 +98,7 @@ namespace TRLevelReader
                 room.NumLights2 = reader.ReadUInt32();
                 room.NumFogBulbs = reader.ReadUInt32();
 
-                //TRosettaStone talks about some unknown here?
-                reader.BaseStream.Position += 4;
+                reader.ReadUInt32();
 
                 room.RoomYTop = reader.ReadInt32();
                 room.RoomYBottom = reader.ReadInt32();
@@ -122,33 +118,146 @@ namespace TRLevelReader
                 TR5RoomData data = new TR5RoomData();
 
                 data.Lights = new TR5RoomLight[room.NumLights];
-                //read lights
+                for (int j = 0; j < room.NumLights; j++)
+                {
+                    data.Lights[j] = ReadRoomLight(reader);
+                }
 
                 data.FogBulbs = new TR5FogBulb[room.NumFogBulbs];
-                //read bulbs
+                for (int j = 0; j < room.NumFogBulbs; j++)
+                {
+                    data.FogBulbs[j] = ReadRoomBulbs(reader);
+                }
 
                 data.SectorList = new TRRoomSector[room.NumXSectors * room.NumZSectors];
-                //read sectors
+                for (int j = 0; j < room.NumXSectors * room.NumZSectors; j++)
+                {
+                    data.SectorList[j] = TR2FileReadUtilities.ReadRoomSector(reader);
+                }
 
                 data.NumPortals = reader.ReadUInt16();
                 data.Portals = new TRRoomPortal[data.NumPortals];
-                //read portals
+                for (int j = 0; j < data.NumPortals; j++)
+                {
+                    data.Portals[j] = TR2FileReadUtilities.ReadRoomPortal(reader);
+                }
 
                 data.Seperator = reader.ReadUInt16();
 
                 data.StaticMeshes = new TR3RoomStaticMesh[room.NumStaticMeshes];
-                //read static meshes
+                for (int j = 0; j < room.NumStaticMeshes; j++)
+                {
+                    data.StaticMeshes[j] = TR3FileReadUtilities.ReadRoomStaticMesh(reader);
+                }
 
                 data.Layers = new TR5RoomLayer[room.NumLayers];
-                //read layers
+                for (int j = 0; j < room.NumLayers; j++)
+                {
+                    data.Layers[j] = ReadRoomLayer(reader);
+                }
 
                 data.Faces = reader.ReadBytes((int)(room.NumRoomRectangles * 10) + (int)(room.NumRoomTriangles * 8));
 
                 data.Vertices = new TR5RoomVertex[room.NumVertices];
-                //read vertices
+                for (int j = 0; j < room.NumVertices; j++)
+                {
+                    data.Vertices[j] = ReadRoomVertex(reader);
+                }
 
                 lvl.LevelDataChunk.Rooms[i] = room;
             }
+        }
+
+        private static TR5RoomLight ReadRoomLight(BinaryReader r)
+        {
+            return new TR5RoomLight()
+            {
+                X = r.ReadSingle(),
+                Y = r.ReadSingle(),
+                Z = r.ReadSingle(),
+                R = r.ReadSingle(),
+                G = r.ReadSingle(),
+                B = r.ReadSingle(),
+                Seperator = r.ReadUInt32(),
+                In = r.ReadSingle(),
+                Out = r.ReadSingle(),
+                RadIn = r.ReadSingle(),
+                RadOut = r.ReadSingle(),
+                Range = r.ReadSingle(),
+                DX = r.ReadSingle(),
+                DY = r.ReadSingle(),
+                DZ = r.ReadSingle(),
+                X2 = r.ReadInt32(),
+                Y2 = r.ReadInt32(),
+                Z2 = r.ReadInt32(),
+                DX2 = r.ReadInt32(),
+                DY2 = r.ReadInt32(),
+                DZ2 = r.ReadInt32(),
+                LightType = r.ReadByte(),
+                Filler = r.ReadBytes(3)
+            };
+        }
+
+        private static TR5FogBulb ReadRoomBulbs(BinaryReader r)
+        {
+            return new TR5FogBulb()
+            {
+                X = r.ReadSingle(),
+                Y = r.ReadSingle(),
+                Z = r.ReadSingle(),
+                R = r.ReadSingle(),
+                G = r.ReadSingle(),
+                B = r.ReadSingle(),
+                Seperator = r.ReadUInt32(),
+                In = r.ReadSingle(),
+                Out = r.ReadSingle()
+            };
+        }
+
+        private static TR5RoomLayer ReadRoomLayer(BinaryReader r)
+        {
+            return new TR5RoomLayer()
+            {
+                NumLayerVertices = r.ReadUInt32(),
+                UnknownL1 = r.ReadUInt16(),
+                NumLayerRectangles = r.ReadUInt16(),
+                NumLayerTriangles = r.ReadUInt16(),
+                UnknownL2 = r.ReadUInt16(),
+                Filler = r.ReadUInt16(),
+                Filler2 = r.ReadUInt16(),
+                LayerBoundingBoxX1 = r.ReadSingle(),
+                LayerBoundingBoxY1 = r.ReadSingle(),
+                LayerBoundingBoxZ1 = r.ReadSingle(),
+                LayerBoundingBoxX2 = r.ReadSingle(),
+                LayerBoundingBoxY2 = r.ReadSingle(),
+                LayerBoundingBoxZ2 = r.ReadSingle(),
+                Filler3 = r.ReadUInt32(),
+                UnknownL6 = r.ReadUInt32(),
+                UnknownL7 = r.ReadUInt32(),
+                UnknownL8 = r.ReadUInt32()
+            };
+        }
+
+        private static TR5RoomVertex ReadRoomVertex(BinaryReader r)
+        {
+            return new TR5RoomVertex()
+            {
+                Vert = new TR5Vertex()
+                {
+                    X = r.ReadSingle(),
+                    Y = r.ReadSingle(),
+                    Z = r.ReadSingle()
+                },
+
+                Norm = new TR5Vertex()
+                {
+                    X = r.ReadSingle(),
+                    Y = r.ReadSingle(),
+                    Z = r.ReadSingle()
+                },
+
+                Colour = r.ReadUInt32()
+            };
         }
 
         public static void PopulateFloordata(BinaryReader reader, TR5Level lvl)
@@ -266,11 +375,12 @@ namespace TRLevelReader
 
         public static void VerifySPRMarker(BinaryReader reader, TR5Level lvl)
         {
-            lvl.LevelDataChunk.SPRMarker = reader.ReadBytes(3);
+            lvl.LevelDataChunk.SPRMarker = reader.ReadBytes(4);
 
             Debug.Assert(lvl.LevelDataChunk.SPRMarker[0] == 0x53);
             Debug.Assert(lvl.LevelDataChunk.SPRMarker[1] == 0x50);
             Debug.Assert(lvl.LevelDataChunk.SPRMarker[2] == 0x52);
+            Debug.Assert(lvl.LevelDataChunk.SPRMarker[3] == 0x00);
         }
 
         public static void PopulateSprites(BinaryReader reader, TR5Level lvl)
@@ -369,11 +479,12 @@ namespace TRLevelReader
 
         public static void VerifyTEXMarker(BinaryReader reader, TR5Level lvl)
         {
-            lvl.LevelDataChunk.TEXMarker = reader.ReadBytes(3);
+            lvl.LevelDataChunk.TEXMarker = reader.ReadBytes(4);
 
             Debug.Assert(lvl.LevelDataChunk.TEXMarker[0] == 0x54);
             Debug.Assert(lvl.LevelDataChunk.TEXMarker[1] == 0x45);
             Debug.Assert(lvl.LevelDataChunk.TEXMarker[2] == 0x58);
+            Debug.Assert(lvl.LevelDataChunk.TEXMarker[3] == 0x00);
         }
 
         public static void PopulateObjectTextures(BinaryReader reader, TR5Level lvl)
@@ -450,12 +561,12 @@ namespace TRLevelReader
         {
             lvl.LevelDataChunk.Seperator = reader.ReadBytes(6);
 
-            Debug.Assert(lvl.LevelDataChunk.Seperator[0] == 0x00);
-            Debug.Assert(lvl.LevelDataChunk.Seperator[1] == 0x00);
-            Debug.Assert(lvl.LevelDataChunk.Seperator[2] == 0x00);
-            Debug.Assert(lvl.LevelDataChunk.Seperator[3] == 0x00);
-            Debug.Assert(lvl.LevelDataChunk.Seperator[4] == 0x00);
-            Debug.Assert(lvl.LevelDataChunk.Seperator[5] == 0x00);
+            Debug.Assert(lvl.LevelDataChunk.Seperator[0] == 0xCD);
+            Debug.Assert(lvl.LevelDataChunk.Seperator[1] == 0xCD);
+            Debug.Assert(lvl.LevelDataChunk.Seperator[2] == 0xCD);
+            Debug.Assert(lvl.LevelDataChunk.Seperator[3] == 0xCD);
+            Debug.Assert(lvl.LevelDataChunk.Seperator[4] == 0xCD);
+            Debug.Assert(lvl.LevelDataChunk.Seperator[5] == 0xCD);
         }
     }
 }
