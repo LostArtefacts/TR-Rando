@@ -97,7 +97,7 @@ namespace TRLevelReader.Model
 
         public uint LayersPtr { get; set; }
 
-        public uint VerticesPtr { get; set; }
+        public uint VerticesDataSize { get; set; }
 
         public uint PolyOffset { get; set; }
 
@@ -110,6 +110,14 @@ namespace TRLevelReader.Model
         //Not explicitly part of TR5Room in TRosettaStone - but since it immediately follows a room block
         //it may as well belong to a room. Will be easier to understand if it belongs to the room.
         public TR5RoomData RoomData { get; set; }
+
+        public bool IsNullRoom
+        {
+            get
+            {
+                return (Seperator6 == 0xCDCDCDCD);
+            }
+        }
 
         public byte[] Serialize()
         {
@@ -160,12 +168,12 @@ namespace TRLevelReader.Model
                     writer.Write(RoomYBottom);
                     writer.Write(NumLayers);
                     writer.Write(LayersPtr);
-                    writer.Write(VerticesPtr);
+                    writer.Write(VerticesDataSize);
                     writer.Write(PolyOffset);
                     writer.Write(PolyOffset2);
                     writer.Write(NumVertices);
                     foreach (uint data in Seperator8) { writer.Write(data); }
-                    writer.Write(RoomData.Serialize());
+                    writer.Write(RoomData.SerializeRaw());
                 }
 
                 return stream.ToArray();

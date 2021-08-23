@@ -107,7 +107,7 @@ namespace TRLevelReader
 
                 room.NumLayers = reader.ReadUInt32();
                 room.LayersPtr = reader.ReadUInt32();
-                room.VerticesPtr = reader.ReadUInt32();
+                room.VerticesDataSize = reader.ReadUInt32();
                 room.PolyOffset = reader.ReadUInt32();
                 room.PolyOffset2 = reader.ReadUInt32();
                 room.NumVertices = reader.ReadUInt32();
@@ -121,62 +121,12 @@ namespace TRLevelReader
                 //Record the stream pointer after the header
                 long afterhdr = reader.BaseStream.Position;
 
+                //Room data is currently read as bytes.
+                //To modify in future we will need to parse properly.
                 TR5RoomData data = new TR5RoomData();
+                data.AsBytes = reader.ReadBytes((int)(lastPosition + room.RoomDataSize) - (int)afterhdr);
+                room.RoomData = data;
 
-                data.Lights = new TR5RoomLight[room.NumLights];
-                for (int j = 0; j < room.NumLights; j++)
-                {
-                    data.Lights[j] = ReadRoomLight(reader);
-                }
-
-                data.FogBulbs = new TR5FogBulb[room.NumFogBulbs];
-                for (int j = 0; j < room.NumFogBulbs; j++)
-                {
-                    data.FogBulbs[j] = ReadRoomBulbs(reader);
-                }
-
-                data.SectorList = new TRRoomSector[room.NumXSectors * room.NumZSectors];
-                for (int j = 0; j < room.NumXSectors * room.NumZSectors; j++)
-                {
-                    data.SectorList[j] = TR2FileReadUtilities.ReadRoomSector(reader);
-                }
-
-                data.NumPortals = reader.ReadUInt16();
-                data.Portals = new TRRoomPortal[data.NumPortals];
-                for (int j = 0; j < data.NumPortals; j++)
-                {
-                    data.Portals[j] = TR2FileReadUtilities.ReadRoomPortal(reader);
-                }
-
-                data.Seperator = reader.ReadUInt16();
-
-                data.StaticMeshes = new TR3RoomStaticMesh[room.NumStaticMeshes];
-                for (int j = 0; j < room.NumStaticMeshes; j++)
-                {
-                    data.StaticMeshes[j] = TR3FileReadUtilities.ReadRoomStaticMesh(reader);
-                }
-
-                data.Layers = new TR5RoomLayer[room.NumLayers];
-                for (int j = 0; j < room.NumLayers; j++)
-                {
-                    data.Layers[j] = ReadRoomLayer(reader);
-                }
-
-                data.Faces = reader.ReadBytes((int)(room.NumRoomRectangles * 12) + (int)(room.NumRoomTriangles * 10));
-
-                //WARNING: there is overlapping data between vertices & faces. Big thanks to chreden for helping debug this.
-                //No idea how they share the data.....
-
-                //This seeks backwards to where the vertex data is expected to start
-                reader.BaseStream.Position = afterhdr + room.VerticesPtr;
-
-                data.Vertices = new TR5RoomVertex[room.NumVertices / 28];
-                for (int j = 0; j < room.NumVertices / 28; j++)
-                {
-                    data.Vertices[j] = ReadRoomVertex(reader);
-                }
-
-                Debug.Assert(reader.BaseStream.Position == (lastPosition + room.RoomDataSize));
                 lvl.LevelDataChunk.Rooms[i] = room;
             }
         }

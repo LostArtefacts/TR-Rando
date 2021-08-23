@@ -30,6 +30,8 @@ namespace TRLevelReader.Model
 
         public TR5RoomVertex[] Vertices { get; set; }
 
+        public byte[] AsBytes { get; set; }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())
@@ -50,6 +52,11 @@ namespace TRLevelReader.Model
 
                 return stream.ToArray();
             }
+        }
+
+        public byte[] SerializeRaw()
+        {
+            return AsBytes;
         }
     }
 }
