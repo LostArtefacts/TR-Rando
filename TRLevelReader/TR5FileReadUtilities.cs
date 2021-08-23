@@ -317,12 +317,26 @@ namespace TRLevelReader
 
             //Models
             lvl.LevelDataChunk.NumModels = reader.ReadUInt32();
-            lvl.LevelDataChunk.Models = new TRModel[lvl.LevelDataChunk.NumModels];
+            lvl.LevelDataChunk.Models = new TR5Model[lvl.LevelDataChunk.NumModels];
 
             for (int i = 0; i < lvl.LevelDataChunk.NumModels; i++)
             {
-                lvl.LevelDataChunk.Models[i] = TR2FileReadUtilities.ReadModel(reader);
+                lvl.LevelDataChunk.Models[i] = ReadTR5Model(reader);
             }
+        }
+
+        private static TR5Model ReadTR5Model(BinaryReader reader)
+        {
+            return new TR5Model()
+            {
+                ID = reader.ReadUInt32(),
+                NumMeshes = reader.ReadUInt16(),
+                StartingMesh = reader.ReadUInt16(),
+                MeshTree = reader.ReadUInt32(),
+                FrameOffset = reader.ReadUInt32(),
+                Animation = reader.ReadUInt16(),
+                Filler = reader.ReadUInt16()
+            };
         }
 
         public static void PopulateStaticMeshes(BinaryReader reader, TR5Level lvl)

@@ -61,7 +61,7 @@ namespace TRLevelReader.Model
 
         public uint NumModels { get; set; }
 
-        public TRModel[] Models { get; set; }
+        public TR5Model[] Models { get; set; }
 
         public uint NumStaticMeshes { get; set; }
 
@@ -217,7 +217,7 @@ namespace TRLevelReader.Model
 
                     writer.Write(NumModels);
 
-                    foreach (TRModel model in Models)
+                    foreach (TR5Model model in Models)
                     {
                         writer.Write(model.Serialize());
                     }
