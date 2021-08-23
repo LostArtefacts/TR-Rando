@@ -109,7 +109,7 @@ namespace TRLevelReader.Model
 
         public uint NumObjectTextures { get; set; }
 
-        public TR4ObjectTexture[] ObjectTextures { get; set; }
+        public TR5ObjectTexture[] ObjectTextures { get; set; }
 
         public uint NumEntities { get; set; }
 
@@ -294,7 +294,7 @@ namespace TRLevelReader.Model
 
                     writer.Write(NumObjectTextures);
 
-                    foreach (TR4ObjectTexture otex in ObjectTextures)
+                    foreach (TR5ObjectTexture otex in ObjectTextures)
                     {
                         writer.Write(otex.Serialize());
                     }

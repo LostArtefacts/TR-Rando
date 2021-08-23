@@ -468,12 +468,53 @@ namespace TRLevelReader
         {
             //Object Textures
             lvl.LevelDataChunk.NumObjectTextures = reader.ReadUInt32();
-            lvl.LevelDataChunk.ObjectTextures = new TR4ObjectTexture[lvl.LevelDataChunk.NumObjectTextures];
+            lvl.LevelDataChunk.ObjectTextures = new TR5ObjectTexture[lvl.LevelDataChunk.NumObjectTextures];
 
             for (int i = 0; i < lvl.LevelDataChunk.NumObjectTextures; i++)
             {
-                lvl.LevelDataChunk.ObjectTextures[i] = TR4FileReadUtilities.ReadObjectTexture(reader);
+                lvl.LevelDataChunk.ObjectTextures[i] = ReadTR5ObjectTexture(reader);
             }
+        }
+
+        private static TR5ObjectTexture ReadTR5ObjectTexture(BinaryReader reader)
+        {
+            return new TR5ObjectTexture()
+            {
+                Attribute = reader.ReadUInt16(),
+                TileAndFlag = reader.ReadUInt16(),
+                NewFlags = reader.ReadUInt16(),
+                Vertices = new TRObjectTextureVert[]
+                {
+                    new TRObjectTextureVert
+                    {
+                        XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                    },
+
+                    new TRObjectTextureVert
+                    {
+                        XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                    },
+
+                    new TRObjectTextureVert
+                    {
+                        XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                    },
+
+                    new TRObjectTextureVert
+                    {
+                        XCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() },
+                        YCoordinate = new FixedFloat16 { Whole = reader.ReadByte(), Fraction = reader.ReadByte() }
+                    }
+                },
+                OriginalU = reader.ReadUInt32(),
+                OriginalV = reader.ReadUInt32(),
+                WidthMinusOne = reader.ReadUInt32(),
+                HeightMinusOne = reader.ReadUInt32(),
+                Filler = reader.ReadUInt16()
+            };
         }
 
         public static void PopulateEntitiesAndAI(BinaryReader reader, TR5Level lvl)
@@ -509,7 +550,7 @@ namespace TRLevelReader
             }
 
             //Sound Map (370 shorts) & Sound Details
-            lvl.LevelDataChunk.SoundMap = new short[370];
+            lvl.LevelDataChunk.SoundMap = new short[450];
 
             for (int i = 0; i < lvl.LevelDataChunk.SoundMap.Count(); i++)
             {

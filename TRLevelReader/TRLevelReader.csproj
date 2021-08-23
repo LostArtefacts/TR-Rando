@@ -134,6 +134,7 @@
     <Compile Include="Model\TR5\TR5Level.cs" />
     <Compile Include="Model\TR5\TR5LevelDataChunk.cs" />
     <Compile Include="Model\TR5\TR5Model.cs" />
+    <Compile Include="Model\TR5\TR5ObjectTexture.cs" />
     <Compile Include="Model\TR5\TR5RoomData.cs" />
     <Compile Include="Model\TR5\TR5Room.cs" />
     <Compile Include="Model\TR5\TR5RoomInfo.cs" />
