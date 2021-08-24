@@ -13,6 +13,7 @@ namespace TRLevelReaderUnitTests
         //TR4 Unit tests are currently performed differently. The compression implemented here
         //seems to give a different byte for byte output after compression compared to the original level file.
 
+        [TestMethod]
         public void alexhub_ReadTest()
         {
             //Read original level
@@ -52,6 +53,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void alexhub2_ReadTest()
         {
             //Read original level
@@ -91,6 +93,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void ang_race_ReadTest()
         {
             //Read original level
@@ -170,6 +173,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void bikebit_ReadTest()
         {
             //Read original level
@@ -209,6 +213,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void citnew_ReadTest()
         {
             //Read original level
@@ -248,6 +253,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void cortyard_ReadTest()
         {
             //Read original level
@@ -287,6 +293,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void csplit1_ReadTest()
         {
             //Read original level
@@ -326,6 +333,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void csplit2_ReadTest()
         {
             //Read original level
@@ -365,6 +373,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void hall_ReadTest()
         {
             //Read original level
@@ -404,6 +413,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void highstrt_ReadTest()
         {
             //Read original level
@@ -443,6 +453,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void jeepchas_ReadTest()
         {
             //Read original level
@@ -482,6 +493,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void jeepchs2_ReadTest()
         {
             //Read original level
@@ -521,6 +533,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void joby1a_ReadTest()
         {
             //Read original level
@@ -560,6 +573,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void joby1b_ReadTest()
         {
             //Read original level
@@ -599,6 +613,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void joby2_ReadTest()
         {
             //Read original level
@@ -638,6 +653,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void joby3a_ReadTest()
         {
             //Read original level
@@ -677,6 +693,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void joby3b_ReadTest()
         {
             //Read original level
@@ -716,6 +733,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void joby4a_ReadTest()
         {
             //Read original level
@@ -755,6 +773,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void joby4b_ReadTest()
         {
             //Read original level
@@ -794,6 +813,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void joby4c_ReadTest()
         {
             //Read original level
@@ -833,6 +853,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void joby5a_ReadTest()
         {
             //Read original level
@@ -872,6 +893,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void joby5b_ReadTest()
         {
             //Read original level
@@ -911,6 +933,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void joby5c_ReadTest()
         {
             //Read original level
@@ -950,6 +973,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void karnak1_ReadTest()
         {
             //Read original level
@@ -989,6 +1013,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void lake_ReadTest()
         {
             //Read original level
@@ -1028,6 +1053,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void libend_ReadTest()
         {
             //Read original level
@@ -1067,6 +1093,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void library_ReadTest()
         {
             //Read original level
@@ -1106,6 +1133,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void lowstrt_ReadTest()
         {
             //Read original level
@@ -1145,6 +1173,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void nutrench_ReadTest()
         {
             //Read original level
@@ -1184,6 +1213,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void palaces_ReadTest()
         {
             //Read original level
@@ -1223,6 +1253,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void palaces2_ReadTest()
         {
             //Read original level
@@ -1262,6 +1293,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void semer_ReadTest()
         {
             //Read original level
@@ -1301,6 +1333,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void semer2_ReadTest()
         {
             //Read original level
@@ -1340,6 +1373,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void settomb1_ReadTest()
         {
             //Read original level
@@ -1379,6 +1413,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void settomb2_ReadTest()
         {
             //Read original level
@@ -1418,6 +1453,7 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
         }
 
+        [TestMethod]
         public void train_ReadTest()
         {
             //Read original level
