@@ -43,7 +43,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -83,7 +83,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -123,7 +123,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -163,7 +163,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -203,7 +203,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -243,7 +243,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD } );
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -283,7 +283,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -323,7 +323,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -363,7 +363,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -403,7 +403,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -443,7 +443,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -483,7 +483,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -523,7 +523,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
@@ -563,7 +563,7 @@ namespace TRLevelReaderUnitTests
 
             //Verify - is the real data still byte for byte with the original?
             //So if we decompress the original level file chunks, and the level file written by this library, do they produce the same output?
-            CollectionAssert.AreEqual(lvlc.LevelDataChunk.CompressedChunk, lvlb.LevelDataChunk.CompressedChunk);
+            CollectionAssert.AreEqual(lvlb.LevelDataChunk.Seperator, new byte[] { 0xCD, 0xCD, 0xCD, 0xCD, 0xCD, 0xCD });
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
