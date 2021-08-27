@@ -588,6 +588,14 @@ namespace TRLevelReaderUnitTests
             //Store the new floordata written back by FDControl
             ushort[] newFData = lvl.LevelDataChunk.Floordata;
 
+            for (int i = 0; i < originalFData.Length; i++)
+            {
+                if (originalFData[i] != newFData[i])
+                {
+                    break;
+                }
+            }
+
             //Compare to make sure the original fdata was written back.
             CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
             Assert.AreEqual((uint)newFData.Length, lvl.LevelDataChunk.NumFloorData);
