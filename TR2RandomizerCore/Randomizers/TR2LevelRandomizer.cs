@@ -47,6 +47,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RandomlyCutHair { get; set; }
         internal bool RemoveRobeDagger { get; set; }
         internal bool EnableInvisibility { get; set; }
+        internal bool RetainLevelNames { get; set; }
         internal bool RetainKeyItemNames { get; set; }
         internal Language GameStringLanguage { get; set; }
         internal uint NightModeCount { get; set; }
@@ -55,6 +56,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool AutoLaunchGame { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
+        internal bool ReassignPuzzleNames => RandomizeEnemies && CrossLevelEnemies;
 
         internal TR2LevelRandomizer(TRDirectoryIOArgs args)
             : base(args) { }
@@ -95,6 +97,7 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeGameStrings = config.GetBool(nameof(RandomizeGameStrings));
             GameStringsSeed = config.GetInt(nameof(GameStringsSeed), defaultSeed);
             RetainKeyItemNames = config.GetBool(nameof(RetainKeyItemNames));
+            RetainLevelNames = config.GetBool(nameof(RetainLevelNames));
             GameStringLanguage = G11N.Instance.GetLanguage(config.GetString(nameof(GameStringLanguage), Language.DefaultTag));
 
             RandomizeNightMode = config.GetBool(nameof(RandomizeNightMode));
@@ -146,6 +149,7 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeGameStrings)] = RandomizeGameStrings;
             config[nameof(GameStringsSeed)] = GameStringsSeed;
             config[nameof(RetainKeyItemNames)] = RetainKeyItemNames;
+            config[nameof(RetainLevelNames)] = RetainLevelNames;
             config[nameof(GameStringLanguage)] = GameStringLanguage.Tag;
 
             config[nameof(RandomizeNightMode)] = RandomizeNightMode;
@@ -168,13 +172,19 @@ namespace TR2RandomizerCore.Randomizers
         /// </summary>
         protected override void PreSaveImpl(AbstractTRScriptEditor scriptEditor)
         {
-            if (RandomizeGameStrings)
+            // Either fully randomize the gamestrings, or allow for specific strings
+            // to be replaced if models are being moved around as a result of cross-
+            // level enemies (e.g. Dagger of Xian).
+            if (RandomizeGameStrings || ReassignPuzzleNames)
             {
                 GameStringRandomizer stringRandomizer = new GameStringRandomizer
                 {
                     ScriptEditor = scriptEditor as TR23ScriptEditor,
                     RetainKeyItemNames = RetainKeyItemNames,
-                    Language = GameStringLanguage
+                    RetainLevelNames = RetainLevelNames,
+                    Language = GameStringLanguage,
+                    RandomizeAllStrings = RandomizeGameStrings,
+                    ReassignPuzzleNames = ReassignPuzzleNames
                 };
                 stringRandomizer.Randomize(GameStringsSeed);
             }

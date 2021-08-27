@@ -15,16 +15,43 @@ namespace TR2RandomizerCore.Globalisation
         // $e => è
         // (e => ê
         // ~e => ë
+        //
+        // () become []
+        // " becomes '
+        // ^ becomes an upwards arrow
+        // & becomes +
+        // * % are ignored
+        //
+        // Characters with unsupported accents become normalised e.g. å => a.
+        //
+        // Note that accent support on MultiPatch isn't great. The likes of Fidèle becomes Fid` ele.
+        // UKBox, EPC and TR2Main work best.
         public static string Encode(string text)
         {
             StringBuilder sb = new StringBuilder();
             foreach (char c in text)
             {
+                string n = Normalise(c);
                 char d = char.ToUpper(c);
                 switch (d)
                 {
-                    case '+':
+                    case '(':
+                        sb.Append('<');
+                        break;
+                    case ')':
                         sb.Append('>');
+                        break;
+                    case '"':
+                        sb.Append('\'');
+                        break;
+                    case '^':
+                        sb.Append('[');
+                        break;
+                    case '&':
+                        sb.Append('+');
+                        break;
+                    case '*':
+                    case '%':
                         break;
                     case 'ß':
                         sb.Append('=');
@@ -34,7 +61,7 @@ namespace TR2RandomizerCore.Globalisation
                     case 'Ì':
                     case 'Ò':
                     case 'Ù':
-                        sb.Append("$").Append(Normalise(c));
+                        sb.Append("$").Append(n);
                         break;
                     case 'Á':
                     case 'Ć':
@@ -46,14 +73,14 @@ namespace TR2RandomizerCore.Globalisation
                     case 'Ú':
                     case 'Ý':
                     case 'Ź':
-                        sb.Append(")").Append(Normalise(c));
+                        sb.Append(")").Append(n);
                         break;
                     case 'Â':
                     case 'Ê':
                     case 'Î':
                     case 'Ô':
                     case 'Û':
-                        sb.Append("(").Append(Normalise(c));
+                        sb.Append("(").Append(n);
                         break;
                     case 'Ä':
                     case 'Ë':
@@ -61,10 +88,10 @@ namespace TR2RandomizerCore.Globalisation
                     case 'Ö':
                     case 'Ü':
                     case 'Ÿ':
-                        sb.Append("~").Append(Normalise(c));
+                        sb.Append("~").Append(n);
                         break;
                     default:
-                        sb.Append(c);
+                        sb.Append(n);
                         break;
                 }
             }

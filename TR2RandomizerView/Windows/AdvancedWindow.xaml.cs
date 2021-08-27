@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using TR2RandomizerCore.Globalisation;
 using TR2RandomizerCore.Helpers;
 using TR2RandomizerView.Model;
 using TR2RandomizerView.Utilities;
@@ -32,6 +33,21 @@ namespace TR2RandomizerView.Windows
             nameof(HasDifficulty), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty LanguageSourceProperty = DependencyProperty.Register
+        (
+            nameof(LanguageSource), typeof(Language[]), typeof(AdvancedWindow)
+        );
+
+        public static readonly DependencyProperty GameStringLanguageProperty = DependencyProperty.Register
+        (
+            nameof(GameStringLanguage), typeof(Language), typeof(AdvancedWindow)
+        );
+
+        public static readonly DependencyProperty HasLanguageProperty = DependencyProperty.Register
+        (
+            nameof(HasLanguage), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public string MainDescription
         {
             get => (string)GetValue(MainDescriptionProperty);
@@ -51,6 +67,24 @@ namespace TR2RandomizerView.Windows
         }
 
         public bool HasDifficulty
+        {
+            get => (bool)GetValue(HasDifficultyProperty);
+            set => SetValue(HasDifficultyProperty, value);
+        }
+
+        public Language[] LanguageSource
+        {
+            get => (Language[])GetValue(LanguageSourceProperty);
+            set => SetValue(LanguageSourceProperty, value);
+        }
+
+        public Language GameStringLanguage
+        {
+            get => (Language)GetValue(GameStringLanguageProperty);
+            set => SetValue(GameStringLanguageProperty, value);
+        }
+
+        public bool HasLanguage
         {
             get => (bool)GetValue(HasDifficultyProperty);
             set => SetValue(HasDifficultyProperty, value);

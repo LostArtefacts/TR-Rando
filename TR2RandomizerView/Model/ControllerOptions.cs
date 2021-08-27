@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using TR2RandomizerCore;
+using TR2RandomizerCore.Globalisation;
 using TR2RandomizerCore.Helpers;
 
 namespace TR2RandomizerView.Model
@@ -26,12 +27,15 @@ namespace TR2RandomizerView.Model
         private BoolItemControlClass _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks;
         private BoolItemControlClass _persistOutfits, _randomlyCutHair, _removeRobeDagger, _enableInvisibility;
-        private BoolItemControlClass _retainKeyItemNames;
+        private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls;
 
         private RandoDifficulty _randoEnemyDifficulty;
+
+        private Language[] _availableLanguages;
+        private Language _gameStringLanguage;
 
         private int _levelCount, _maximumLevelCount;
 
@@ -483,12 +487,42 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public Language[] AvailableLanguages
+        {
+            get => _availableLanguages;
+            private set
+            {
+                _availableLanguages = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public Language GameStringLanguage
+        {
+            get => _gameStringLanguage;
+            set
+            {
+                _gameStringLanguage = value;
+                FirePropertyChanged();
+            }
+        }
+
         public BoolItemControlClass RetainKeyItemNames
         {
             get => _retainKeyItemNames;
             set
             {
                 _retainKeyItemNames = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RetainLevelNames
+        {
+            get => _retainLevelNames;
+            set
+            {
+                _retainLevelNames = value;
                 FirePropertyChanged();
             }
         }
@@ -837,6 +871,12 @@ namespace TR2RandomizerView.Model
                 Description = "The original text from the game will be used for key, pickup and puzzle items."
             };
             BindingOperations.SetBinding(RetainKeyItemNames, BoolItemControlClass.IsActiveProperty, randomizeTextBinding);
+            RetainLevelNames = new BoolItemControlClass
+            {
+                Title = "Use original level names",
+                Description = "The original text from the game will be used for level names."
+            };
+            BindingOperations.SetBinding(RetainLevelNames, BoolItemControlClass.IsActiveProperty, randomizeTextBinding);
 
             // Start positions
             Binding randomizeStartPositionBinding = new Binding(nameof(RandomizeStartPosition)) { Source = this };
@@ -874,7 +914,7 @@ namespace TR2RandomizerView.Model
             };
             TextBoolItemControls = new List<BoolItemControlClass>
             {
-                _retainKeyItemNames
+                _retainKeyItemNames, _retainLevelNames
             };
             StartBoolItemControls = new List<BoolItemControlClass>
             {
@@ -947,7 +987,10 @@ namespace TR2RandomizerView.Model
 
             RandomizeText = _controller.RandomizeGameStrings;
             TextSeed = _controller.GameStringsSeed;
+            AvailableLanguages = _controller.AvailableGameStringLanguages;
+            GameStringLanguage = _controller.GameStringLanguage;
             RetainKeyItemNames.Value = _controller.RetainKeyItemNames;
+            RetainLevelNames.Value = _controller.RetainLevelNames;
 
             RandomizeStartPosition = _controller.RandomizeStartPosition;
             StartPositionSeed = _controller.StartPositionSeed;
@@ -1164,7 +1207,9 @@ namespace TR2RandomizerView.Model
 
             _controller.RandomizeGameStrings = RandomizeText;
             _controller.GameStringsSeed = TextSeed;
+            _controller.GameStringLanguage = GameStringLanguage;
             _controller.RetainKeyItemNames = RetainKeyItemNames.Value;
+            _controller.RetainLevelNames = RetainLevelNames.Value;
 
             _controller.RandomizeStartPosition = RandomizeStartPosition;
             _controller.StartPositionSeed = StartPositionSeed;

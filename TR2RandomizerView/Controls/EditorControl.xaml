@@ -220,7 +220,7 @@
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedAdvancedControl
             Grid.Row="3"
             Grid.Column="2"
             IsActive="{Binding RandomizeText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -228,8 +228,20 @@
             Text="Randomize in-game text, such as weapon and level names."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding TextSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            BoolItemsSource="{Binding TextBoolItemControls}"/>
+            SeedValue="{Binding TextSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Game Text (Advanced)"
+                                        MainDescription="Customize the game text randomization."
+                                        BoolItemsSource="{Binding Data.TextBoolItemControls, Source={StaticResource proxy}}"
+                                        HasLanguage="True"
+                                        LanguageSource="{Binding Data.AvailableLanguages, Source={StaticResource proxy}}"
+                                        GameStringLanguage="{Binding Data.GameStringLanguage, Source={StaticResource proxy}, Mode=TwoWay}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
 
         <Border
             Grid.RowSpan="2"

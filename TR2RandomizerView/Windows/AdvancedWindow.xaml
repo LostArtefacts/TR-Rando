@@ -17,7 +17,7 @@
     <Window.Resources>
         <cvt:BoolToVisibilityConverter x:Key="BoolToCollapsedConverter" />
     </Window.Resources>
-    
+
     <Grid x:Name="_content">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -28,6 +28,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
@@ -105,6 +106,21 @@
                              GroupName="randoEnemyDifficulty"
                              IsChecked="{Binding RandoEnemyDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:RandoDifficulty.NoRestrictions}, Mode=TwoWay}" />
             </StackPanel>
+
+            <StackPanel Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        Margin="0,5,0,0"
+                        Visibility="{Binding HasLanguage, Converter={StaticResource BoolToCollapsedConverter}}">
+                <TextBlock Text="Language"
+                           FontSize="14"
+                           TextDecorations="Underline"/>
+                <ComboBox ItemsSource="{Binding LanguageSource}"
+                          SelectedItem="{Binding GameStringLanguage, Mode=TwoWay}"
+                          DisplayMemberPath="Name"
+                          HorizontalAlignment="Left"
+                          Width="200"
+                          Margin="0,10,0,0"/>
+            </StackPanel>
         </Grid>
 
         <Border
@@ -113,12 +129,12 @@
             Background="#eee"
             Grid.Row="1"
             Grid.ColumnSpan="2">
-            
+
             <StackPanel
                 Width="80" 
                 Orientation="Horizontal"
                 HorizontalAlignment="Right">
-                
+
                 <Button 
                     Content="_OK"
                     IsDefault="True"

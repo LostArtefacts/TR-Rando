@@ -4,8 +4,24 @@
     "Tag": "HY"
   },
   {
+    "Name": "Croatian",
+    "Tag": "HR"
+  },
+  {
+    "Name": "Czech",
+    "Tag": "CS"
+  },
+  {
+    "Name": "Dutch",
+    "Tag": "NL"
+  },
+  {
     "Name": "English",
     "Tag": "EN"
+  },
+  {
+    "Name": "French",
+    "Tag": "FR"
   },
   {
     "Name": "German",
@@ -18,5 +34,13 @@
   {
     "Name": "Polish",
     "Tag": "PL"
+  },
+  {
+    "Name": "Portuguese",
+    "Tag": "PT"
+  },
+  {
+    "Name": "Swedish",
+    "Tag": "SV"
   }
 ]

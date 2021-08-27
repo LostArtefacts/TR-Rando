@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TR2RandomizerCore.Globalisation;
 using TRGE.Core;
+using TRLevelReader.Helpers;
 
 namespace TR2RandomizerCore.Randomizers
 {
@@ -11,33 +13,50 @@ namespace TR2RandomizerCore.Randomizers
 
         public TR23ScriptEditor ScriptEditor { get; set; }
         public Language Language { get; set; }
+        public bool RandomizeAllStrings { get; set; }
+        public bool ReassignPuzzleNames { get; set; }
         public bool RetainKeyItemNames { get; set; }
+        public bool RetainLevelNames { get; set; }
 
         private GameStrings _gameStrings, _defaultGameStrings;
 
         public override void Randomize(int seed)
         {
-            _generator = new Random(seed);
-
-            if (!Language.IsHybrid)
+            if (RandomizeAllStrings)
             {
-                _gameStrings = G11N.Instance.GetGameStrings(Language);
+                _generator = new Random(seed);
+
+                if (!Language.IsHybrid)
+                {
+                    _gameStrings = G11N.Instance.GetGameStrings(Language);
+                }
+                _defaultGameStrings = G11N.Instance.GetDefaultGameStrings();
+
+                TR23Script script = ScriptEditor.Script as TR23Script;
+                List<string> gamestrings1 = new List<string>(script.GameStrings1);
+                List<string> gamestrings2 = new List<string>(script.GameStrings2);
+
+                ProcessGlobalStrings(0, gamestrings1);
+                ProcessGlobalStrings(1, gamestrings2);
+
+                script.GameStrings1 = gamestrings1.ToArray();
+                script.GameStrings2 = gamestrings2.ToArray();
+
+                foreach (AbstractTRScriptedLevel level in ScriptEditor.ScriptedLevels)
+                {
+                    ProcessLevelStrings(level);
+                }
             }
-            _defaultGameStrings = G11N.Instance.GetDefaultGameStrings();
 
-            TR23Script script = ScriptEditor.Script as TR23Script;
-            List<string> gamestrings1 = new List<string>(script.GameStrings1);
-            List<string> gamestrings2 = new List<string>(script.GameStrings2);
-
-            ProcessGlobalStrings(0, gamestrings1);
-            ProcessGlobalStrings(1, gamestrings2);
-
-            script.GameStrings1 = gamestrings1.ToArray();
-            script.GameStrings2 = gamestrings2.ToArray();
-
-            foreach (AbstractTRScriptedLevel level in ScriptEditor.ScriptedLevels)
+            if (ReassignPuzzleNames)
             {
-                ProcessLevelStrings(level);
+                // This is specific to the Dagger of Xian if it appears in other levels with the dragon. We'll just
+                // use whatever has already been allocated as the dagger name in Lair.
+                string daggerName = ScriptEditor.ScriptedLevels.ToList().Find(l => l.Is(LevelNames.LAIR)).Puzzles[1];
+                foreach (AbstractTRScriptedLevel level in ScriptEditor.ScriptedLevels)
+                {
+                    MoveAndReplacePuzzle(level, 1, 2, daggerName);
+                }
             }
         }
 
@@ -91,11 +110,14 @@ namespace TR2RandomizerCore.Randomizers
                         string[] options = GetGlobalStrings(globalStringsIndex).GroupedStrings[i][stringIndex];
                         if (randomIndex >= options.Length)
                         {
-                            // Fall back to default if the language doesn't have this index defined
-                            options = grouping[stringIndex];
+                            // Ensure to use one from the languages options rather than defaulting
+                            int customRandomIndex = _generator.Next(0, options.Length);
+                            scriptStrings[stringIndex] = GameStrings.Encode(options[customRandomIndex]);
                         }
-                        
-                        scriptStrings[stringIndex] = GameStrings.Encode(options[randomIndex]);
+                        else
+                        {
+                            scriptStrings[stringIndex] = GameStrings.Encode(options[randomIndex]);
+                        }
                     }
                 }
             }
@@ -120,7 +142,7 @@ namespace TR2RandomizerCore.Randomizers
 
             LevelStrings defaultLevelStrings = _defaultGameStrings.LevelStrings[levelID];
 
-            if (defaultLevelStrings.Names != null && defaultLevelStrings.Names.Length > 0)
+            if (!RetainLevelNames && defaultLevelStrings.Names != null && defaultLevelStrings.Names.Length > 0)
             {
                 string[] options = GetLevelStrings(levelID).Names;
                 string levelName;
@@ -163,6 +185,18 @@ namespace TR2RandomizerCore.Randomizers
                     string[] options = GetLevelStrings(levelID).Puzzles[puzzleIndex];
                     level.Puzzles[puzzleIndex] = GameStrings.Encode(options[_generator.Next(0, options.Length)]);
                 }
+            }
+        }
+
+        private void MoveAndReplacePuzzle(AbstractTRScriptedLevel level, int currentIndex, int newIndex, string replacement)
+        {
+            if (level.Puzzles[currentIndex] != replacement)
+            {
+                if (level.Puzzles[currentIndex] != "P" + (currentIndex + 1))
+                {
+                    level.Puzzles[newIndex] = level.Puzzles[currentIndex];
+                }
+                level.Puzzles[currentIndex] = replacement;
             }
         }
     }

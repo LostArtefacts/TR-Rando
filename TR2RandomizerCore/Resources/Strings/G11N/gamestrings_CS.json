@@ -1,0 +1,1067 @@
+{
+  "GlobalStrings": [
+    {
+      "GroupedStrings": [
+        {
+          "33": [
+            "Jiskra v.1",
+            "Zippo",
+            "SSSSSSSSS",
+            "Blikatko",
+            "Mini-Plamenomet"
+          ],
+          "43": [
+            "Jiskra v.1",
+            "Zippo",
+            "SSSSSSSSS",
+            "Blikatko",
+            "Mini-Plamenomet"
+          ]
+        },
+        {
+          "36": [
+            "Kulickovky",
+            "Rucni Pistolky",
+            "Raritky",
+            "Pew-Pews",
+            "Beru Dve"
+          ],
+          "44": [
+            "Kulickovky - Kulicky",
+            "Pistolky - Kulicky",
+            "Raritky - Kulicky",
+            "Pew-Pew - Kulicky",
+            "Beru Dve - Kulicky"
+          ]
+        },
+        {
+          "37": [
+            "Flusbrok",
+            "Musketa",
+            "Stara Znama",
+            "Nestacilo?",
+            "Vykuchavacka"
+          ],
+          "45": [
+            "Flusbrok Gule",
+            "Musketa Gule",
+            "Stara Znama Gule",
+            "Nestacilo? Dalsi",
+            "Vykuchavacka - Dalsi"
+          ]
+        },
+        {
+          "38": [
+            "Automatky",
+            "Magnumky",
+            "SuperPistolky",
+            "Pierre to ztratil",
+            "Vrat Pierrovy"
+          ],
+          "46": [
+            "Automatky - Aha",
+            "Magnumky - Aha",
+            "SuperPistolky - Aha",
+            "Pierre to ztratil - Aha",
+            "Vrat Pierrovi - Aha"
+          ]
+        },
+        {
+          "39": [
+            "RATATA",
+            "Drrrrrrrrrr",
+            "Zrout Munice",
+            "Nabojovy Upir",
+            "o 1000 Ran Pozdeji..."
+          ],
+          "47": [
+            "RATATA Naboje",
+            "Drrrrrrrrrr Naboje",
+            "Zrout Munice - Pridavek",
+            "Nabojovy Upir - Dalsi",
+            "o 1000 Ran Pozdeji - Naboje"
+          ]
+        },
+        {
+          "40": [
+            "Tick-tick-tick",
+            "Trpelivost",
+            "Vrhac Sipek",
+            "Zbytecnost",
+            "Bezvyznamne",
+            "Proc?",
+            "NE!",
+            "Paratkovac",
+            "Vrhac Kopi"
+          ],
+          "48": [
+            "Tick-tick-ticks",
+            "Dalsi Trpelivost",
+            "Sipky?",
+            "Munice pro Zbytecnost",
+            "Vic Bezvyznamne",
+            "Proc? Naboje",
+            "Munice pro NE",
+            "Paratka",
+            "Dalsi Kopi"
+          ]
+        },
+        {
+          "41": [
+            "MP3 Prehravac",
+            "MPEG",
+            "To Neni MP5",
+            "Velke Drrrrrrrrrr"
+          ],
+          "49": [
+            "MP3 Nahravky",
+            "MPEG Zasoba",
+            "To Neni MP5 Munice",
+            "Velke Drrrrrrrrrr Dalsi!"
+          ]
+        },
+        {
+          "42": [
+            "HubaBuba",
+            "Dodavka BUM",
+            "Rozhazovac",
+            "Zmizikovac",
+            "AnanasoVrhac",
+            "BumPrask",
+            "BUM!!!",
+            "Vybouchni!"
+          ],
+          "50": [
+            "Dalsi HubaBuba",
+            "Dalsi BUM",
+            "Ohnive Gule",
+            "Zmizik",
+            "Ananasy",
+            "Vice BumPrask",
+            "Dalsi BUM!!!",
+            "Vybouchny! Olovo"
+          ]
+        },
+        {
+          "51": [
+            "Nepatrna Lekarna",
+            "Takovy Drobecek",
+            "Lekarna - Clun",
+            "Kompaktni Lekarna",
+            "Ruzenec",
+            "Snez mne!"
+          ],
+          "52": [
+            "Giganticka Lekarna",
+            "Uz Nejez!",
+            "Lekarna - Titanik",
+            "Masivni Lekarna",
+            "Jezisuv Kriz",
+            "Snez mne! Vazne!"
+          ]
+        }
+      ],
+      "StandaloneStrings": {
+        "2": [
+          "MOJE VECI",
+          "MUJ BORDEL",
+          "SEBRANO",
+          "POKLAD",
+          "ZBYTECNOSTI",
+          "OHH LESKLE",
+          "MUJ MILASEK"
+        ],
+        "3": [
+          "LARA ZKAPALA",
+          "ZKUSIT ZNOVU?",
+          "ZKUSIT ZNOVU? NEODOLAS",
+          "HODNE STESTI PRISTE",
+          "UPADLO TI TELO!",
+          "TROCHU ROZCUCHAN!",
+          "NLNMAS je v Pr.?"
+        ],
+        "35": [
+          "Jak sem na tom",
+          "Zdravotni Karta",
+          "CISELNIK",
+          "NEDOVOLENE LEKARNY!",
+          "POCITADLO TAJEMSTVY!"
+        ],
+        "57": [
+          "Larino Sidlo",
+          "Core Design HQ",
+          "TR2Rando HQ",
+          "Larina Ruina",
+          "Sluhova Lednice",
+          "Rozmrazit Winstona!"
+        ]
+      }
+    },
+    {
+      "StandaloneStrings": {
+        "15": [
+          "- NIC -",
+          "- JAKOZE NIC -",
+          "- NEURCENO -",
+          "- OHH, TU JE VOLNO ZENO -"
+        ]
+      }
+    }
+  ],
+
+  "LevelStrings": {
+    "WALL.TR2": {
+      "Names": [
+        "Cina Kapitola 1",
+        "Falesna Zed",
+        "Hrozna Zed",
+        "Cihlova Zed",
+        "Zed Plna Gifu",
+        "Neni Videt z Vesmiru",
+        "Skoro Xian",
+        "T-Rexovo Utociste",
+        "Ztracene Udoli 2.0",
+        "Cesta do Xianu"
+      ],
+      "Keys": {
+        "0": [
+          "Klic pro Mistnost 4",
+          "Klic k Gif Panstvi",
+          "Klic?",
+          "Klic? Divne",
+          "Klic 1",
+          "Klic A",
+          "Klic jenz se Ztratil",
+          "Zeby Klic 1?",
+          "Zeby Klic 2?"
+        ],
+        "1": [
+          "Pavouci Klic",
+          "Krupavy Klic",
+          "Klic?",
+          "Proc Dalsi Klic",
+          "Klic 2",
+          "Klic B",
+          "Kapajici Klic",
+          "Zeby Klic 1?",
+          "Zeby Klic 2?",
+          "Dalsi Klic O.o"
+        ]
+      }
+    },
+
+    "BOAT.TR2": {
+      "Names": [
+        "Italie Kapitola 1",
+        "Motorovy Clun",
+        "BOAT.TR2",
+        "Housle a Miny",
+        "Mesto Gondol",
+        "Plavaci Mesto",
+        "Italska Prace",
+        "Smrt v Benatkach",
+        "Daleko od Domove",
+        "To je Milacek"
+      ],
+      "Keys": {
+        "0": [
+          "Lodickovy Klicek",
+          "Klic?",
+          "Zase Klic!!",
+          "Klic 1",
+          "Klic A",
+          "Rychle Klice",
+          "Nanic pri Speedrunu",
+          "VYPUSTNE LOD!",
+          "Pristup k Platbe",
+          "Garaz pro Lode"
+        ],
+        "1": [
+          "Klic pro Mistnost 82",
+          "Zelezny Klic",
+          "Klic?",
+          "Klic! ZASE!!!",
+          "Klic 2",
+          "Klic B",
+          "Otevirac Dvery",
+          "To Neni Pacidlo",
+          "Tento Klic"
+        ],
+        "2": [
+          "Oxid Klice Zeleziteho",
+          "Klic Zelezne Pesty",
+          "Zelezna Lady",
+          "Klic k Zelezne Opone",
+          "Klic?",
+          "Klic? Proc?",
+          "Klic 3",
+          "Klic C",
+          "Neznamy Klic"
+        ]
+      }
+    },
+
+    "VENICE.TR2": {
+      "Names": [
+        "Italie Kapitola 2",
+        "Bartoliho Ruina",
+        "Bartoliho Koupelna",
+        "Kde je Bartoli?",
+        "Bartoliho Hrad",
+        "Jaj, Lustry",
+        "Mona Lisa",
+        "Odejdi s BUM"
+      ],
+      "Keys": {
+        "0": [
+          "Klic do Knihovny",
+          "Klic?",
+          "Ohh, I found a Key",
+          "Klic 1",
+          "Klic A",
+          "Tichy Klic",
+          "TICHO! Nebo te Zabijz",
+          "Karta do Knihovny",
+          "To je Zdarma!",
+          "Ticho v Knihovne",
+          "Od. s Omezenym Pristupem",
+          "Klicek k memu srdci",
+          "Alohomora"
+        ],
+        "1": [
+          "TNT Klic",
+          "Vybuch Klic",
+          "BumBac Klic",
+          "Flipmap Key",
+          "Klic?",
+          "Zase Dalsi Klic?",
+          "Klic 2",
+          "Klic B",
+          "Kaboom Klic",
+          "Klic k Velke Mistnosti",
+          "Explosivni Klic",
+          "BUM!",
+          "NEMLATIT! NEBO BUDE BUM!"
+        ]
+      }
+    },
+
+    "OPERA.TR2": {
+      "Names": [
+        "Italie - Kapitola 3",
+        "Neni Opera v Sydney",
+        "Fantom Opery",
+        "La Bohème",
+        "La Triviata",
+        "Madama Butterfly",
+        "Rigoletto",
+        "Kouzelna Fletna",
+        "The Show Must Go On",
+        "CAS PREDSTAVENI!",
+        "Priprav se na Lezeni"
+      ],
+      "Keys": {
+        "0": [
+          "Honosny Klic",
+          "Zbohatlikuv Klic",
+          "Okazaly Klic",
+          "Klic?",
+          "To vypada jako Klic",
+          "Klic 1",
+          "Klic A",
+          "Klic od Opery",
+          "Klic ke Dverim",
+          "Klic k Nestabylite",
+          "C Sharp"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Puzzle 1",
+          "Opravator Vytahu",
+          "Opravovac Plosiny",
+          "Zvedaci Plosinka",
+          "Zvedni Me Tatinku!",
+          "Vubec neni Nebezpecne!",
+          "CINK",
+          "Neopravuje Hudbu"
+        ],
+        "1": [
+          "Puzzle 2",
+          "Zakladni Deska",
+          "ASUS Zakladni Deska",
+          "PC Pro 97",
+          "Ohodnot muj Setup",
+          "Vlhka Karticka",
+          "Jak to muze Fungovat?",
+          "Mokra Deska",
+          "NVIDIA560"
+        ]
+      }
+    },
+
+    "RIG.TR2": {
+      "Names": [
+        "Plosina",
+        "Nezlomitelna Plosina",
+        "RIG.TR2",
+        "Jadersky Rybnik",
+        "Velka Ropna Vez",
+        "Upousteni",
+        "Kde To Jsem?",
+        "Neozbrojena?",
+        "Po Opici",
+        "Bolest Hlavy",
+        "Pozor tam Nahore"
+      ],
+      "Keys": {
+        "0": [
+          "Ohniva Karta",
+          "Cesta k Barelum",
+          "Cerveny Podtacek 2",
+          "Falesne ID 1",
+          "Pristup do Prizemi",
+          "Visa Express",
+          "NEKROUTIT!!!!"
+        ],
+        "1": [
+          "QWER Podtacek",
+          "Vypni ten Alarm",
+          "Nazloutly Podtacek 1",
+          "Falesne ID 2",
+          "Pristu do Stredu",
+          "Mastercard Express",
+          "NEROZBIJET!"
+        ],
+        "2": [
+          "Karta pro Mistnost 37",
+          "Nepotrebna Karta",
+          "Zeleny Podtacek 3",
+          "Falesne ID 3",
+          "Nejvyssi Karta",
+          "Ceska Posta",
+          "NEOHYBAT!"
+        ]
+      }
+    },
+
+    "PLATFORM.TR2": {
+      "Names": [
+        "Ropna Plosina Cast 2",
+        "Plosina?",
+        "Honba za Zakladni Deskou",
+        "OK, Marco",
+        "Nejdersi Lezeni",
+        "A Ona Lezla Na Veky",
+        "Zluty Ponorka",
+        "Pozor na Pilu"
+      ],
+      "Keys": {
+        "0": [
+          "Karta pro Mistnost 12",
+          "Neznama Karta",
+          "Cerveny Podtacek 2",
+          "Larina ID Karta",
+          "POZOR KREHKE!"
+        ],
+        "3": [
+          "Card for Room 49",
+          "Divna Modra Karta",
+          "Modry Podtacek 1",
+          "Winstonova ID Karta",
+          "POZOR NEOHYBAT!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Zakladni Deska",
+          "ASUS Zakladni Deska",
+          "PC Pro 97",
+          "Ohodnot muj Setup",
+          "Funguje to vubec?",
+          "Windows 95",
+          "Je to Vodeodolne?",
+          "To jsou Ramky?",
+          "Intel Celeron"
+        ]
+      }
+    },
+
+    "UNWATER.TR2": {
+      "Names": [
+        "Bubly Bubly Kapitola 1",
+        "73.152 Metru",
+        "240 Stop",
+        "VAROVANI - Tetanus",
+        "Plav holka, PLAV!",
+        "Potop se skrz Vrak",
+        "Voda,Voda, sama Voda",
+        "Ne tak uplne Titanic",
+        "Je to uz 84 let...",
+        "Stopuj Bordel",
+        "Pod Morem"
+      ]
+    },
+
+    "KEEL.TR2": {
+      "Names": [
+        "Bubly Bubly Kapitola2",
+        "Lodicka hlavou dolu",
+        "POZOR - Tetanus",
+        "Keel",
+        "VRAK.TR2",
+        "KEEL.TR2",
+        "Tri Brzdy",
+        "Anti-Gravitacni Lod",
+        "Sesrotovano"
+      ],
+      "Keys": {
+        "0": [
+          "Zachodovy Klic",
+          "Koupelnovi Klic",
+          "Zase Klic",
+          "Boze, zase Klic",
+          "Klic 1",
+          "Klic A",
+          "Nadherna koupelna?"
+        ],
+        "1": [
+          "Krupavy Klic",
+          "Zase Klic",
+          "Boze, zase Klic",
+          "Klic 2",
+          "Klic B",
+          "Klic ke Dverim"
+        ],
+        "2": [
+          "Klic od Dveri",
+          "Kdo Tu?",
+          "Zase Klic",
+          "Boze, zase Klic",
+          "Klic 3",
+          "Klic C",
+          "Novy Klic?",
+          "Kde je ten Zamek?"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Zhava Brzdicka",
+          "Puzzle ve tvaru T",
+          "Hasici Pristroj",
+          "Neni Voda Nazbyt!",
+          "Ta Divka Je Zhava!",
+          "Nehor!"
+        ]
+      }
+    },
+
+    "LIVING.TR2": {
+      "Names": [
+        "Bubly Bubly KApitola 3",
+        "LIVING.TR2",
+        "Ohnout Pisty",
+        "Fillerova epizoda",
+        "Obytna ctvrt",
+        "Obytny pronajem",
+        "Bezvyznamny level",
+        "Nikdo neni doma",
+        "Neobydlena ctvrt"
+      ],
+      "Keys": {
+        "0": [
+          "Dramaticky Klic",
+          "Melodramaticky Klic",
+          "Tragicky Klic",
+          "Shakespearuv Klic",
+          "Nejaky Klic",
+          "Ten Klic",
+          "Klic 1",
+          "Klic A",
+          "Klic od Opery",
+          "Hvezdari!"
+        ],
+        "1": [
+          "Krupavy klic",
+          "Jakoze Klic?",
+          "TEN Klic",
+          "Klic 2",
+          "Klic B",
+          "Jeden Klic",
+          "Otevirac Mistnosti",
+          "Potrebuje Vylestit!"
+        ]
+      }
+    },
+
+    "DECK.TR2": {
+      "Names": [
+        "Bubly Bubly Kapitola 4",
+        "Cesta za Klicem",
+        "DECK.TR2",
+        "Cesta za Seraphem",
+        "Ledovec Vyhrava",
+        "Velka Vzduchova Kapsa"
+      ],
+      "Keys": {
+        "1": [
+          "Vazny Klic",
+          "Prisny Klic",
+          "Kruty Klic",
+          "Klic s Tvrdym Nosem",
+          "Klic od Skladu",
+          "Klic od Skladu?",
+          "Neni to Klic od Skladu",
+          "Rozhodne NE, Klic od Skladu",
+          "Otevira Dvere",
+          "Ktery Klic?",
+          "Klic",
+          "Ten Klic",
+          "Klic 1",
+          "Klic A"
+        ],
+        "2": [
+          "Klic k Bednam",
+          "Klic k Bordelu?",
+          "Jakoze Divnej Klic",
+          "Klic od Lodniho Zadku",
+          "Klic od Kabiny",
+          "Klic k Seraphu",
+          "Klic do mistnosti 105",
+          "Jaky Klic?",
+          "Otevira Dvere",
+          "Klic?",
+          "TEN Klic",
+          "Klic 2",
+          "Key B"
+        ],
+        "3": [
+          "Klic od Kabiny",
+          "Klic k Mistnosti",
+          "Klic ke Dverim",
+          "Klic od Skladu",
+          "Klic od Skladu?",
+          "Neni Klic od Skladu",
+          "Otevira Dvere",
+          "Jaky Klic?",
+          "A Klic",
+          "TEN Klic",
+          "Klic 3",
+          "Klic C"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "Andel",
+          "Serubin",
+          "Puzzle 1",
+          "Socha",
+          "To Neni Klic",
+          "Mnichuv Klic",
+          "Mnichuv Poklad"
+        ]
+      }
+    },
+
+    "SKIDOO.TR2": {
+      "Names": [
+        "Tibet Kapitola 1",
+        "Skidoo",
+        "KDE JE TA CHATA!",
+        "Misto Nehody",
+        "Kluzky Povrch",
+        "Lara Neumi Letat",
+        "Misto Blbeho Pristani",
+        "Oh, Jak Krasne Kulicky",
+        "LAVINA!!!",
+        "Skidoo: Pomsta",
+        "Skidoo Manie",
+        "Postav Snehulaka"
+      ],
+      "Keys": {
+        "0": [
+          "Klic od Padaciho mostu",
+          "Nepouzitelny Klic",
+          "To neni on",
+          "To neni Klic od Chaty",
+          "Klic od Chaty?",
+          "Nejaky Klic",
+          "TEN Klic",
+          "Klic 1",
+          "Klic A",
+          "Ty jsi mne sebral!",
+          "Klic, Zvedni platformu"
+        ],
+        "1": [
+          "Klic od Chaty",
+          "Klic od Chaty?",
+          "Tibetsky Klic na Preskoceni",
+          "Klic, ne pro padaci dvere",
+          "Nejaky Klic",
+          "TEN Klic",
+          "Klic 2",
+          "Klic B",
+          "TEN KLIIIIC!!!",
+          "Klic na Speedrun",
+          "HLEDA SE!",
+          "Vnitrni Klic"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "Andel",
+          "Cherubin",
+          "Puzzle 1",
+          "Socha",
+          "Zadny Klic?",
+          "Mnichova Relikvie",
+          "Mnichuv Poklad"
+        ]
+      }
+    },
+
+    "MONASTRY.TR2": {
+      "Names": [
+        "Tibet Kapitola 2",
+        "Zchrante Mnichy",
+        "Nestrilej Mnichy",
+        "Barkhang Magor",
+        "Ukociruj tato Kola",
+        "Modlitba pro Mnichy",
+        "Pozor, chram na obzoru",
+        "Neduplikuj Zavadu!",
+        "Neprustrelni Mnichova",
+        "Klicnikuv Chram",
+        "Zakaz Jeptiskam"
+      ],
+      "Keys": {
+        "0": [
+          "Klic od Slabe Mistnosti",
+          "Jsem silnejsi Klic",
+          "Klic ke Klici"
+        ],
+        "1": [
+          "Sakra, Nebohy Klic",
+          "Venkovni Klic 1",
+          "Vypadneme odsud?",
+          "Klic k nikam? O.o",
+          "Klic k zadni Brane"
+        ],
+        "2": [
+          "Klicek na Balkonek",
+          "Zkratka na Vrchol",
+          "Klic Sikmich Oci",
+          "Venkovni Klic 2"
+        ],
+        "3": [
+          "TR2Main Hala Klic",
+          "Klic k Meme Salu",
+          "Klic od Ratejny",
+          "Klic od NESKAKAT",
+          "Klic k Budhovi?",
+          "Klic do Cekarny"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Jakoze Modliteni Valec",
+          "Kutululu Valec",
+          "Chenuv Valec",
+          "Holy Wheel",
+          "Madonin Valec",
+          "Kdo ten Valec Vyrobyl?",
+          "Unaveny Pomocnik"
+        ],
+        "1": [
+          "Diamanty",
+          "Barkhangsky Poklad",
+          "Mantuv Dia?",
+          "Ohh Leskle!",
+          "18 Karatu"
+        ],
+        "3": [
+          "Andel",
+          "Cherubin",
+          "Puzzle 3",
+          "Socha",
+          "Zadny Klic?",
+          "Mnichova Relikvie",
+          "Mnichuv Poklad",
+          "Cas na Rozloucenou!"
+        ]
+      }
+    },
+
+    "CATACOMB.TR2": {
+      "Names": [
+        "Tibet Kapitola 3",
+        "CoT",
+        "Jeskyne Easter Eggu",
+        "CATACOMB.TR2",
+        "Yeti Manie",
+        "Je tu Zima O.o",
+        "Katakomby Hororu",
+        "Celkem Temno Tady!",
+        "Temna Yetiho Komurka"
+      ],
+      "Pickups": {
+        "0": [
+          "Pockat, COOO?",
+          "Vesele Velikonoce",
+          "Aaa, Pan Gong, ano!",
+          "Toto sem nepatri",
+          "...???",
+          "Xylofonova Tycka",
+          "No, Ale co uz!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Pletova Maska",
+          "Maska?",
+          "TA Maska",
+          "Maska Podsite",
+          "255.255.255.0",
+          "Maskarada",
+          "Noste Rousky!",
+          "Krasna maska",
+          "Hnusne Vypadajici Maska"
+        ]
+      }
+    },
+
+    "ICECAVE.TR2": {
+      "Names": [
+        "Tibet Kapitola 4",
+        "Slepice",
+        "Ledova Jeskyne",
+        "Drubezi Uzemi",
+        "Chlazena Slepice",
+        "SLEPICE.TR2",
+        "Lednice",
+        "Mrazak",
+        "Ledova Kralovstvi",
+        "Ne tak Ledova Jeskyne",
+        "Je Cas Rozmrznout!",
+        "Rozmrazujici Slepice",
+        "Winstot Byl Tu!",
+        "Winston Doporucuje!",
+        "Winstonuv Mrazak"
+      ],
+      "Keys": {
+        "1": [
+          "Pan Kladido Gong",
+          "Kladivo?",
+          "Hodny Gong",
+          "Henry kladivoun",
+          "BEEEEEEEEEEEEEENG",
+          "Nicitel Ledu",
+          "Nepatri do rukou Deti",
+          "Cepin",
+          "Bubnovaci Palicka",
+          "Palicka na Gong"
+        ]
+      },
+      "Pickups": {
+        "1": [
+          "Talion",
+          "Slepici Poklad",
+          "Otevri Dvere Laro",
+          "VYPOUSTIT SLEPICI!",
+          "Pozlacena Cetka",
+          "Klice od Xian Dveri",
+          "LESKLE!",
+          "Tady a Pryc Znovu!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Maska na Xicht",
+          "Preskocitelna Maska",
+          "Maska",
+          "Maska Podsite",
+          "255.255.255.0",
+          "Zadny Preskoceni Balkonu!",
+          "Kdo to porad pouziva?",
+          "Larina Pletova Maska",
+          "Cassandra"
+        ]
+      }
+    },
+
+    "EMPRTOMB.TR2": {
+      "Names": [
+        "Cina Kapitola 2",
+        "Chram Meme",
+        "Preskoc Xian",
+        "Inzy Winzy Pavouk",
+        "Pavouuuuuuuci tunylek",
+        "Udoli Smrtelnych Pasti",
+        "Tady ZEMRES!",
+        "Rajcatova Polevka",
+        "Zavod za Dykou",
+        "Kompletni Kruh"
+      ],
+      "Keys": {
+        "1": [
+          "Nejaky Klic",
+          "Ten Klic",
+          "Klic 1",
+          "Elektricky Vodic",
+          "Jauvajs",
+          "Klic ke dverim"
+        ],
+        "2": [
+          "Zase Klic",
+          "Jakoze TEN Klic",
+          "Klic 2",
+          "Au",
+          "Proste Zase Klic",
+          "Prezil jsi Pavuuucky!"
+        ],
+        "3": [
+          "TR2Main Chramovy Klic",
+          "Jen Klic",
+          "Vyznamny Klic",
+          "Klic 3",
+          "Jediny Potrebny Klic"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Puzzle 1",
+          "Mistnost 41 Vyplnovac Slotu",
+          "Maska na Xicht",
+          "Otevirac Terakotovi Mistnosti",
+          "Otevira Dalsi Masti!",
+          "Je To Past O.o"
+        ]
+      }
+    },
+
+    "FLOATING.TR2": {
+      "Names": [
+        "Cina Kapitola 3",
+        "Zachrany Plovak",
+        "Ostrov Ktery Levituje",
+        "Ostrov v Nebi",
+        "Ty Veci Letaji OwO",
+        "Kde To Jsem?",
+        "Larin Sen",
+        "Co to Sakra Je?",
+        "Sipka do Ohne",
+        "Letajici Lego"
+      ],
+      "Puzzles": {
+        "0": [
+          "Susenka",
+          "Susenka 1",
+          "Susenka A",
+          "Syrova Susenka",
+          "Grahamova Susenka",
+          "Nedostupna Susenka",
+          "Magicka Susenka",
+          "Kolacek Stesti"
+        ],
+        "1": [
+          "Susenka",
+          "Susenka 2",
+          "Susenka B",
+          "Syrova Susenka",
+          "Grahamova Susenka",
+          "Nedostupna Susenka",
+          "Magicka Susenka",
+          "Kolacek Stesti"
+        ]
+      }
+    },
+
+    "XIAN.TR2": {
+      "Names": [
+        "China Kapitola 4",
+        "Bartoliho Ukryt Cast 2",
+        "Rok Draka",
+        "Draci Demise",
+        "Velky Plamenomet",
+        "Bezzuby Dum",
+        "Draci Krypta",
+        "Bartoliho Konec",
+        "Smakovo Doupe",
+        "Neni Madarsky Trnoocasy",
+        "Nezabijej Paarthurnaxe",
+        "Lara, Matka Draku",
+        "Mne nelze spalit!",
+        "Sochy, Dyky a Ohen"
+      ],
+      "Puzzles": {
+        "0": [
+          "Jen Susenka",
+          "Ta Susenka",
+          "Syrova Susenka",
+          "Grahamova Susenka",
+          "Nedostupna Susenka",
+          "Nejedla Susenka"
+        ],
+        "1": [
+          "Poklad xian",
+          "Draci Dyka",
+          "Velky Nuz",
+          "Pichy Pichy",
+          "Nevytahuj mne!",
+          "Cepel",
+          "Hledas toto?",
+          "Ztratil jsi toto?",
+          "Promin, potrebujes toto?",
+          "Toto neni Excalibur",
+          "Excalibruv mladsi bratr O.o"
+        ]
+      }
+    },
+
+    "HOUSE.TR2": {
+      "Names": [
+        "HSH",
+        "Kde je Winston?",
+        "Meme panstvi",
+        "Zabavne panstvi",
+        "MEMES.TR2",
+        "Muj Skromny Byt",
+        "Prazdny Lednicovy dum",
+        "Dej mi pokoj!",
+        "Nenavidim vsechno!",
+        "To Se Nikdy Nevzdaji?",
+        "Ne Sam Doma",
+        "Videl jsi Vse?"
+      ],
+      "Keys": {
+        "0": [
+          "Klic od Skrine",
+          "Klic od Zbrojnice",
+          "Ten Klic",
+          "Proste klic",
+          "Prosim, zadny Harpuna Klic",
+          "Tajny Ukryt Lary!",
+          "Klic od Skladu Zbrani",
+          "Dejmi Bum Bum Klic",
+          "Klic Sebeobrany",
+          "Klic od Zbrojnice"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Poklad xian",
+          "Draci Dyka",
+          "Velky Nuz",
+          "Pichy Pichy",
+          "Nevytahuj mne!",
+          "Cepel",
+          "Hledas toto?",
+          "Ztratil jsi toto?",
+          "Promin, potrebujes toto?",
+          "Toto neni Excalibur",
+          "Excalibruv mladsi bratr O.o"
+        ]
+      }
+    }
+  }
+}
