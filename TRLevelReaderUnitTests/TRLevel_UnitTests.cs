@@ -360,5 +360,31 @@ namespace TRLevelReaderUnitTests
             //Does our saved copy match the original?
             CollectionAssert.AreEqual(lvlAsBytes, copyAsBytes, "Write does not match byte for byte");
         }
+
+        [TestMethod]
+        public void Floordata_ReadWrite_DefaultTest()
+        {
+            TR1LevelReader reader = new TR1LevelReader();
+            TRLevel lvl = reader.ReadLevel("level10c.phd");
+
+            //Store the original floordata from the level
+            ushort[] originalFData = new ushort[lvl.NumFloorData];
+            Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
+
+            //Parse the floordata using FDControl and re-write the parsed data back
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+            fdataReader.WriteToLevel(lvl);
+
+            //Store the new floordata written back by FDControl
+            ushort[] newFData = lvl.FloorData;
+
+            //Compare to make sure the original fdata was written back.
+            CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
+            Assert.AreEqual((uint)newFData.Length, lvl.NumFloorData);
+
+            TR1LevelWriter writer = new TR1LevelWriter();
+            writer.WriteLevelToFile(lvl, "level10c_fdata.phd");
+        }
     }
 }
