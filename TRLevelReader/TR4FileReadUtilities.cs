@@ -527,7 +527,7 @@ namespace TRLevelReader
             };
         }
 
-        private static TR4Mesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
+        public static TR4Mesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
         {
             byte[] target = new byte[rawMeshData.Length * 2];
             Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);
@@ -682,7 +682,7 @@ namespace TRLevelReader
             };
         }
 
-        private static TR4FlyByCamera ReadFlybyCamera(BinaryReader reader)
+        public static TR4FlyByCamera ReadFlybyCamera(BinaryReader reader)
         {
             return new TR4FlyByCamera
             {
@@ -703,7 +703,7 @@ namespace TRLevelReader
             };
         }
 
-        private static TR4ObjectTexture ReadObjectTexture(BinaryReader reader)
+        public static TR4ObjectTexture ReadObjectTexture(BinaryReader reader)
         {
             return new TR4ObjectTexture()
             {
@@ -743,7 +743,7 @@ namespace TRLevelReader
             };
         }
 
-        private static TR4Entity ReadEntity(BinaryReader reader)
+        public static TR4Entity ReadEntity(BinaryReader reader)
         {
             return new TR4Entity()
             {
@@ -759,7 +759,7 @@ namespace TRLevelReader
             };
         }
 
-        private static TR4AIObject ReadAIObject(BinaryReader reader)
+        public static TR4AIObject ReadAIObject(BinaryReader reader)
         {
             return new TR4AIObject()
             {

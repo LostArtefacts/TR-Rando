@@ -132,8 +132,11 @@
     <Compile Include="Model\TR5\TR5Colour.cs" />
     <Compile Include="Model\TR5\TR5FogBulb.cs" />
     <Compile Include="Model\TR5\TR5Level.cs" />
+    <Compile Include="Model\TR5\TR5LevelDataChunk.cs" />
+    <Compile Include="Model\TR5\TR5Model.cs" />
+    <Compile Include="Model\TR5\TR5ObjectTexture.cs" />
     <Compile Include="Model\TR5\TR5RoomData.cs" />
-    <Compile Include="Model\TR5\TR5RoomDataExt.cs" />
+    <Compile Include="Model\TR5\TR5Room.cs" />
     <Compile Include="Model\TR5\TR5RoomInfo.cs" />
     <Compile Include="Model\TR5\TR5RoomLayer.cs" />
     <Compile Include="Model\TR5\TR5RoomLight.cs" />
@@ -151,6 +154,9 @@
     <Compile Include="TR4FileReadUtilities.cs" />
     <Compile Include="TR4LevelReader.cs" />
     <Compile Include="TR4LevelWriter.cs" />
+    <Compile Include="TR5FileReadUtilities.cs" />
+    <Compile Include="TR5LevelReader.cs" />
+    <Compile Include="TR5LevelWriter.cs" />
     <Compile Include="TRFileReadUtilities.cs" />
     <Compile Include="TRLevelReader.cs" />
     <Compile Include="TRLevelWriter.cs" />
