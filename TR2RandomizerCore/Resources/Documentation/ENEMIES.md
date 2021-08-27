@@ -24,7 +24,8 @@ The other exclusions in HSH are unkillable enemies. We also exclude the defaults
 
 There is currently an inconsistency with the small spider being excluded from HSH. This was initially done as it was thought to be too awkward to chase these around the level. But the Rat could be considered equally as awkward, but this is not currently excluded.
 
-Barkhang Monastery also has exclusions in place, but these are mainly attempts at workarounds for the freezing problem some players have experienced (#136, #158). We think this is caused by the number of active enemies, so unkillable enemies are excluded and testing found the level was most stable with all MonkWithLongStick and Mercenary1 enemies left in place. So the other type of monk and Mercenary2 are also excluded.
+~~Barkhang Monastery also has exclusions in place, but these are mainly attempts at workarounds for the freezing problem some players have experienced (#136, #158). We think this is caused by the number of active enemies, so unkillable enemies are excluded and testing found the level was most stable with all MonkWithLongStick and Mercenary1 enemies left in place. So the other type of monk and Mercenary2 are also excluded.~~
+The exclusions in Opera House and Barkhang Monastery are related to freezing issues experienced by some players (#136, #158, #192). The cause is believed to be water creatures when they float after death, so each of these enemy types is banished from both levels.
 
 All unsupported enemies are defined in `_unsupportedEnemies` in `EnemyUtilities`.
 

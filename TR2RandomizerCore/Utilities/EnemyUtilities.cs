@@ -253,6 +253,13 @@ namespace TR2RandomizerCore.Utilities
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [LevelNames.BARTOLI] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
+            // #192 The Barkhang/Opera House freeze appears to be caused by dead floating water creatures, so they're all banished
+            [LevelNames.OPERA] =
+                new List<TR2Entities>
+                {
+                    TR2Entities.Barracuda, TR2Entities.BlackMorayEel, TR2Entities.ScubaDiver,
+                    TR2Entities.Shark, TR2Entities.YellowMorayEel
+                },
             [LevelNames.RIG] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [LevelNames.DA] =
@@ -261,13 +268,12 @@ namespace TR2RandomizerCore.Utilities
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [LevelNames.LQ] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
-            // #158 Barkhang seems to be most stable when the original MonkWithLongStick and Mercenary1
-            // enemies are in place, so we exclude the other monks and non-killable enemies from here
+            // #192 The Barkhang/Opera House freeze appears to be caused by dead floating water creatures, so they're all banished
             [LevelNames.MONASTERY] =
                 new List<TR2Entities>
                 {
-                    TR2Entities.BlackMorayEel, TR2Entities.MarcoBartoli, TR2Entities.MonkWithKnifeStick,
-                    TR2Entities.Mercenary2, TR2Entities.Winston, TR2Entities.YellowMorayEel
+                    TR2Entities.Barracuda, TR2Entities.BlackMorayEel, TR2Entities.MarcoBartoli,
+                    TR2Entities.ScubaDiver, TR2Entities.Shark, TR2Entities.YellowMorayEel
                 },
             [LevelNames.XIAN] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
@@ -296,8 +302,6 @@ namespace TR2RandomizerCore.Utilities
 
         private static readonly Dictionary<string, List<TR2Entities>> _requiredEnemies = new Dictionary<string, List<TR2Entities>>
         {
-            [LevelNames.MONASTERY] =
-                new List<TR2Entities> { TR2Entities.Mercenary1, TR2Entities.MonkWithLongStick }, // #158 Barkhang entity freezing issues
             [LevelNames.CHICKEN] =
                 new List<TR2Entities> { TR2Entities.BirdMonster },  // #60 - Ice Palace chicken man must remain to avoid softlock.
             [LevelNames.LAIR] =
