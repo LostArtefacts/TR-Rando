@@ -202,7 +202,7 @@ namespace TRFDControl
 
                             continueFDParse = action.Continue;
 
-                            if (action.TrigAction == FDTrigAction.Camera)
+                            if (action.TrigAction == FDTrigAction.Camera || action.TrigAction == FDTrigAction.Flyby)
                             {
                                 //Camera trig actions have a special extra uint16...
                                 FDCameraAction camAction = new FDCameraAction() { Value = FloorData[++index] };

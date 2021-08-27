@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using TRFDControl;
 using TRLevelReader;
 using TRLevelReader.Compression;
 using TRLevelReader.Model;
@@ -567,6 +568,37 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
+        }
+
+        [TestMethod]
+        public void Floordata_ReadWrite_DefaultTest()
+        {
+            TR5LevelReader reader = new TR5LevelReader();
+            TR5Level lvl = reader.ReadLevel("andrea1.trc");
+
+            //Store the original floordata from the level
+            ushort[] originalFData = new ushort[lvl.LevelDataChunk.NumFloorData];
+            Array.Copy(lvl.LevelDataChunk.Floordata, originalFData, lvl.LevelDataChunk.NumFloorData);
+
+            //Parse the floordata using FDControl and re-write the parsed data back
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+            fdataReader.WriteToLevel(lvl);
+
+            //Store the new floordata written back by FDControl
+            ushort[] newFData = lvl.LevelDataChunk.Floordata;
+
+            //Compare to make sure the original fdata was written back.
+            CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
+            Assert.AreEqual((uint)newFData.Length, lvl.LevelDataChunk.NumFloorData);
+
+            foreach (TR5Room room in lvl.LevelDataChunk.Rooms)
+            {
+                Assert.IsTrue(room.RoomData.FlattenLightsBulbsAndSectors());
+            }
+
+            TR5LevelWriter writer = new TR5LevelWriter();
+            writer.WriteLevelToFile(lvl, "andrea1_fdata.trc");
         }
     }
 }
