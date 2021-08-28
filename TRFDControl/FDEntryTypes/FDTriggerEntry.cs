@@ -27,6 +27,26 @@ namespace TRFDControl.FDEntryTypes
 
         public ushort SwitchOrKeyRef { get; set; }
 
+        public bool SwitchKeyContinue
+        {
+            get
+            {
+                //Continue bit set to 0 means to continue, not 1...
+                return !((SwitchOrKeyRef & 0x8000) > 0);
+            }
+            internal set
+            {
+                if (value)
+                {
+                    SwitchOrKeyRef = (ushort)(SwitchOrKeyRef & ~0x8000);
+                }
+                else
+                {
+                    SwitchOrKeyRef |= 0x8000;
+                }
+            }
+        }
+
         public override ushort[] Flatten()
         {
             //FD Setup followed by TrigSetup
