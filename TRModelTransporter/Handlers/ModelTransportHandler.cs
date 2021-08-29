@@ -7,10 +7,11 @@ namespace TRModelTransporter.Handlers
 {
     public class ModelTransportHandler : AbstractTransportHandler
     {
-        // These will not overwrite existing models if they already exist.
-        private static readonly List<TR2Entities> _ignoreEntities = new List<TR2Entities>
+        // The given aliases will always have priority if the model already exists
+        private static readonly Dictionary<TR2Entities, TR2Entities> _prioritisedAliases = new Dictionary<TR2Entities, TR2Entities>
         {
-            TR2Entities.LaraMiscAnim_H
+            [TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_Xian,
+            [TR2Entities.Puzzle2_M_H] = TR2Entities.Puzzle2_M_H_Dagger
         };
 
         // These are models that use Lara's hips as placeholders - see Import
@@ -19,7 +20,7 @@ namespace TRModelTransporter.Handlers
             TR2Entities.CameraTarget_N, TR2Entities.FlameEmitter_N, TR2Entities.LaraCutscenePlacement_N,
             TR2Entities.DragonExplosionEmitter_N, TR2Entities.BartoliHideoutClock_N, TR2Entities.SingingBirds_N,
             TR2Entities.WaterfallMist_N, TR2Entities.DrippingWater_N, TR2Entities.LavaAirParticleEmitter_N,
-            TR2Entities.AlarmBell_N
+            TR2Entities.AlarmBell_N, TR2Entities.DoorBell_N
         };
 
         public TR2Entities ModelEntity { get; set; }
@@ -40,10 +41,11 @@ namespace TRModelTransporter.Handlers
                 Level.Models = levelModels.ToArray();
                 Level.NumModels++;
             }
-            else if (!_ignoreEntities.Contains(Definition.Entity))
+            else if (!_prioritisedAliases.ContainsKey(Definition.Entity) || _prioritisedAliases[Definition.Entity] == Definition.Alias)
             {
                 // Replacement occurs for the likes of aliases taking the place of another
-                // e.g. WhiteTiger replacing BengalTiger in GW
+                // e.g. WhiteTiger replacing BengalTiger in GW, or if we have a specific
+                // alias that should always have a higher priority than its peers.
                 Level.Models[i] = Definition.Model;
             }
 

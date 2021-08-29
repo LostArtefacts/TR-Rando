@@ -221,7 +221,7 @@ namespace TR2RandomizerCore.Randomizers
             if (RandomizeItems) target += numLevels * 2; // standard/key rando followed by unarmed logic after enemy rando
             if (RandomizeStartPosition) target += numLevels;
             if (DeduplicateTextures) target += numLevels * 2;
-            if (RandomizeEnemies) target += CrossLevelEnemies ? numLevels * 3 : numLevels;
+            if (RandomizeEnemies) target += CrossLevelEnemies ? numLevels * 4 : numLevels; // 4 => 3 for multithreading work, 1 for ModelAdjuster
             if (RandomizeTextures) target += numLevels * 3;
             if (RandomizeOutfits) target += numLevels * 2;
 
@@ -307,6 +307,19 @@ namespace TR2RandomizerCore.Randomizers
 
                 if (!monitor.IsCancelled && RandomizeEnemies)
                 {
+                    if (CrossLevelEnemies)
+                    {
+                        // For now all P2 items become P3 to avoid dragon issues. This must take place after Item
+                        // randomization for P2/3 zoning because P2 entities will become P3.
+                        monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting level models");
+                        new ModelAdjuster
+                        {
+                            Levels = levels,
+                            BasePath = wipDirectory,
+                            SaveMonitor = monitor
+                        }.AdjustModels();
+                    }
+
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
                     new EnemyRandomizer
                     {

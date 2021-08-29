@@ -312,6 +312,31 @@ namespace TRLevelReader.Model.Enums
         LaraAutoAnim_H_Home,
         LaraUziAnim_H_Home,
 
-        LaraInvisible = 3400
+        LaraInvisible = 3400,
+
+        // Puzzle and quest aliases
+        Puzzle1_M_H_RelayBox = 3500,
+        Puzzle2_M_H_CircuitBoard,
+
+        Puzzle1_M_H_CircuitBoard,
+
+        Puzzle1_M_H_CircuitBreaker,
+
+        Puzzle4_M_H_Seraph,
+
+        Puzzle1_M_H_PrayerWheel,
+        Puzzle2_M_H_GemStone,
+
+        Puzzle1_M_H_TibetanMask,
+        Quest1_M_H_GongHammer,
+        Quest2_M_H_GongHammer,
+
+        Puzzle1_M_H_DragonSeal,
+
+        Puzzle1_M_H_MysticPlaque,
+        Puzzle2_M_H_MysticPlaque,
+
+        Puzzle1_M_H_Dagger,
+        Puzzle2_M_H_Dagger
     }
 }

@@ -75,6 +75,7 @@
     <Compile Include="Helpers\TRRandomizationEventArgs.cs" />
     <Compile Include="Processors\LevelProcessor.cs" />
     <Compile Include="Processors\AbstractProcessorThread.cs" />
+    <Compile Include="Processors\ModelAdjuster.cs" />
     <Compile Include="Randomizers\AudioRandomizer.cs" />
     <Compile Include="Randomizers\EnemyRandomizer.cs" />
     <Compile Include="Randomizers\EnvironmentRandomizer.cs" />
@@ -129,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\Documentation\ORDER.md" />
     <None Include="Resources\Documentation\ENEMIES.md" />
     <None Include="Resources\enemy_restrictions_technical.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

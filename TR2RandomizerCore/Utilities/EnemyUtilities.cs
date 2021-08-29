@@ -272,8 +272,8 @@ namespace TR2RandomizerCore.Utilities
             [LevelNames.MONASTERY] =
                 new List<TR2Entities>
                 {
-                    TR2Entities.Barracuda, TR2Entities.BlackMorayEel, TR2Entities.MarcoBartoli,
-                    TR2Entities.ScubaDiver, TR2Entities.Shark, TR2Entities.YellowMorayEel
+                    TR2Entities.Barracuda, TR2Entities.BlackMorayEel, TR2Entities.ScubaDiver,
+                    TR2Entities.Shark, TR2Entities.YellowMorayEel
                 },
             [LevelNames.XIAN] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
