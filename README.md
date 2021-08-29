@@ -19,12 +19,24 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
 * Everyone - For playing and reporting bugs/areas for improvement. Rando wouldn't be where it is today without exceptional support from players.
 * Eycore - Lots of ideas and locations, huge help for zoning key items.
 * Lahm86 - For his massive contributions to improving the randomizer - massive thanks. Please check out his project for randomizing the script files here: https://github.com/lahm86/TRGameflowEditor TRGE is the base for all script randomization features in this program.
-* Aquila_chrysaetos - For their contributions to hellping key item zoning.
+* Aquila_chrysaetos - For their contributions to helping key item zoning.
 * Nenad_ - Lots of ideas and locations
-* chreden - For TRView, which has been invaluable during development and picking locations. Please visit the project at: https://github.com/chreden/trview
+* chreden - For TRView, which has been invaluable during development and picking locations as well as helping me debug and understand the TR5 file format. Please visit the project at: https://github.com/chreden/trview
 * b122251 - For TRMod, which was used initially to modify the levels prior to the native implementation, fantastic command-line tool you can grab here: https://core-design.com/community_trmod.html
 * JW-dev/Bahamete - For initial work on script randomization
 * Anopob - For various contributions and bug fixes!
+* Jimmy Beon - Providing us with an excellent assortment of custom textures for use in rando.
+* Topixtor - For endless testing to fix issues such as the opera house/barkhang entity freeze.
+* Lily Jericho - For endless testing to fix issues such as the opera house/barkhang entity freeze, and providing great continuous feedback. Lily was also a coordinator of the huge translation effort by the community, with a special thanks to the following translators:
+* Lilly Jericho (German)
+* Erackk (Croatian)
+* LeonHeart & Hedteur (French)
+* Diego (Italian)
+* Sabatu (Czech)
+* Woof Smit & Pikkufighter (Swedish)
+* Dokus & BeardedBogle (Dutch)
+* DJ_Full (Polish)
+* Jumica & Fuse (Portuguese)
 
 ![TR2 Rando UI](https://github.com/DanzaG/TR2-Rando/blob/master/UI.png)
 
@@ -40,9 +52,10 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
 * Ammo Loss - Randomizes what levels Lara's ammo and items get removed.
 * Sunsets - Randomizes what levels have bartoli sunset effect.
 * Outfits - Randomizes the outfit Lara wears in each level, including an invisibility option, and randomly cuts Lara's hair.
-* Text - Randomizes in-game text, such as weapon and level names.
+* Text - Randomizes in-game text, such as weapon and level names. Including a variety of languages to choose from.
 * Night Mode - Darkens a chosen number of levels to give a night-time effect.
 * Starting Position - Choose to have Lara start levels in different positions and facing a different direction.
+* Environment - Modifies the level environment, such as mixing up water levels and moving keyholes.
 
 # Download
 https://github.com/DanzaG/TR2-Rando/releases/download/V1.3.2/V1.3.2.zip
