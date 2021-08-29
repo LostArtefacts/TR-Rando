@@ -504,5 +504,56 @@ namespace TRLevelReaderUnitTests
             TR3LevelWriter writer = new TR3LevelWriter();
             writer.WriteLevelToFile(lvl, "roofs_fdata.tr2");
         }
+
+        [TestMethod]
+        public void Compound_CreateMP_Map()
+        {
+            //This unit test is specific to TR3MP.
+            TR3LevelReader reader = new TR3LevelReader();
+            TR3Level lvl = reader.ReadLevel("compound.tr2");
+
+            //Fixed data common to all lara "respawn points"
+            const short TypeID = 0;
+            const short Intensity1 = -1;
+            const short Intensity2 = -1;
+            const ushort Flags = 0;
+            const short Angle = 0;
+
+            //Replace entities with Laras to make respawn points. Remove any spares.
+            lvl.Entities[0] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 1, X = 13579, Y = 0, Z = 24288 };
+            lvl.Entities[4] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 0, X = 10733, Y = 0, Z = 24384 };
+            lvl.Entities[5] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 113, X = 7562, Y = 0, Z = 24501 };
+            lvl.Entities[6] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 3, X = 7582, Y = 0, Z = 37208 };
+            lvl.Entities[7] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 4, X = 10816, Y = 0, Z = 37321 };
+            lvl.Entities[12] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 5, X = 13784, Y = 0, Z = 37582 };
+            lvl.Entities[13] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 6, X = 16989, Y = 0, Z = 37582 };
+            lvl.Entities[15] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 7, X = 5617, Y = 2304, Z = 32118 };
+            lvl.Entities[16] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 10, X = 22993, Y = 2048, Z = 34402 };
+            lvl.Entities[17] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 50, X = 20990, Y = 2048, Z = 25048 };
+            lvl.Entities[19] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 32, X = 19933, Y = 2048, Z = 12926 };
+            lvl.Entities[20] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 12, X = 28165, Y = 2816, Z = 16902 };
+            lvl.Entities[21] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 13, X = 26153, Y = 2304, Z = 21143 };
+            lvl.Entities[22] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 14, X = 28198, Y = 2137, Z = 23193 };
+            lvl.Entities[23] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 14, X = 26039, Y = 2121, Z = 23529 };
+            lvl.Entities[31] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 18, X = 28281, Y = 2048, Z = 27213 };
+            lvl.Entities[72] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 16, X = 31210, Y = 2048, Z = 35241 };
+            lvl.Entities[156] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 16, X = 31091, Y = 2048, Z = 28165 };
+            lvl.Entities[157] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 19, X = 33272, Y = 2048, Z = 31168 };
+            lvl.Entities[158] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 19, X = 41527, Y = 2048, Z = 31144 };
+            lvl.Entities[159] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 19, X = 41438, Y = 1792, Z = 38471 };
+            lvl.Entities[160] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 19, X = 33295, Y = 1792, Z = 38428 };
+            lvl.Entities[161] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 19, X = 35309, Y = 1792, Z = 33382 };
+            lvl.Entities[162] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 19, X = 37424, Y = 1792, Z = 33203 };
+            lvl.Entities[163] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 19, X = 39506, Y = 1792, Z = 33095 };
+            lvl.Entities[164] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 16, X = 30112, Y = 2048, Z = 32231 };
+            lvl.Entities[165] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 11, X = 28131, Y = 2048, Z = 33311 };
+            lvl.Entities[166] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 7, X = 17989, Y = 2048, Z = 26994 };
+            lvl.Entities[167] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 7, X = 6690, Y = 2048, Z = 27149 };
+            lvl.Entities[168] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 117, X = 11697, Y = 0, Z = 30239 };
+            lvl.Entities[169] = new TR2Entity { TypeID = TypeID, Intensity1 = Intensity1, Intensity2 = Intensity2, Flags = Flags, Angle = Angle, Room = 117, X = 11669, Y = 0, Z = 31155 };
+
+            TR3LevelWriter writer = new TR3LevelWriter();
+            writer.WriteLevelToFile(lvl, "hscdm.tr2");
+        }
     }
 }
