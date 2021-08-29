@@ -230,6 +230,78 @@
           "Lara.Braid": "Black",
           "Lara.Socks": "Black",
           "Lara.Top.Sun": "Black"
+        },
+        "BloodSoaked": {
+          "Lara.Bobble": "Red",
+          "Lara.Braid": "Red",
+          "Lara.Socks": "Red",
+          "Lara.Top.Sun": "Red"
+        },
+        "DeepCozyBlue": {
+          "Lara.Bobble": "White",
+          "Lara.Braid": "White",
+          "Lara.Socks": "White",
+          "Lara.Top.Sun": "White"
+        },
+        "DarkBrown": {
+          "Lara.Bobble": "Mint",
+          "Lara.Braid": "Mint",
+          "Lara.Socks": "Green",
+          "Lara.Top.Sun": "Green"
+        },
+        "BlackAndWhite": {
+          "Lara.Bobble": "White",
+          "Lara.Braid": "White",
+          "Lara.Socks": "Black",
+          "Lara.Top.Sun": "Black"
+        },
+        "Poison": {
+          "Lara.Bobble": "Yellow",
+          "Lara.Braid": "Yellow",
+          "Lara.Socks": "Yellow",
+          "Lara.Top.Sun": "Yellow"
+        },
+        "Sandy": {
+          "Lara.Bobble": "Black",
+          "Lara.Braid": "Black",
+          "Lara.Socks": "Black",
+          "Lara.Top.Sun": "Black"
+        },
+        "Whitish": {
+          "Lara.Bobble": "Blue",
+          "Lara.Braid": "Blue",
+          "Lara.Socks": "White",
+          "Lara.Top.Sun": "Blue"
+        },
+        "Santa": {
+          "Lara.Bobble": "Lime",
+          "Lara.Braid": "Lime",
+          "Lara.Socks": "Lime",
+          "Lara.Top.Sun": "Lime"
+        },
+        "Frozen": {
+          "Lara.Bobble": "White",
+          "Lara.Braid": "White",
+          "Lara.Socks": "White",
+          "Lara.Top.Sun": "White"
+        },
+        "WhiteAndGrey": {
+          "Lara.Bobble": "Black",
+          "Lara.Braid": "Black",
+          "Lara.Socks": "Black",
+          "Lara.Top.Sun": "Black"
+        },
+        "Old": {
+          "Lara.Bobble": "White",
+          "Lara.Braid": "White",
+          "Lara.Socks": "White",
+          "Lara.Top.Sun": "White"
+        },
+        "Glitched": {
+          "Lara.Bobble": "Lime",
+          "Lara.Braid": "Lime",
+          "Lara.Socks": "Lime",
+          "Lara.Top.Sun": "Lime"
         }
       }
     },
@@ -272,48 +344,61 @@
         "Black": {
           "Xian.Lamp": "White",
           "Xian.Lava": "Sun",
+          "Xian.Sky": "Spooky",
           "Xian.Stone": "White",
           "Xian.Tree": "Orange"
+        },
+        "Blue": {
+          "Xian.Sky": "Dusty"
         },
         "DarkBlue": {
           "Enemies.Guard.Spear": "White",
           "Enemies.Guard.Sword": "White",
           "Fire.Explosion": "Blue",
           "Fire.Flame": "Blue",
+          "Xian.Sky": "Misty",
           "Xian.Stone": "Orange",
           "Xian.Tree": "Blue"
         },
         "Furnace": {
           "Fire.Explosion": "Yellow",
-          "Fire.Flame": "Yellow"
+          "Fire.Flame": "Yellow",
+          "Xian.Sky": "Misty"
         },
         "Orange": {
-          "Xian.Lava": "Grey"
+          "Xian.Lava": "Grey",
+          "Xian.Sky": "Dusty"
         },
         "Pink": {
-          "Xian.Lava": "Green"
+          "Xian.Lava": "Green",
+          "Xian.Sky": "Toxic"
         },
         "Purple": {
           "Enemies.Guard.Spear": "Yellow",
           "Enemies.Guard.Sword": "Yellow",
-          "Xian.Lava": "Yellow"
+          "Xian.Lava": "Yellow",
+          "Xian.Sky": "Limbo"
         },
         "Red": {
-          "Xian.Lava": "Black"
+          "Xian.Lava": "Black",
+          "Xian.Sky": "Spooky"
         },
         "Teal": {
           "Fire.Explosion": "Green",
           "Fire.Flame": "Green",
-          "Xian.Lava": "Black"
+          "Xian.Lava": "Black",
+          "Xian.Sky": "Misty"
         },
         "White": {
           "Xian.Lamp": "Black",
-          "Xian.Lava": "Grey"
+          "Xian.Lava": "Grey",
+          "Xian.Sky": "Toxic"
         },
         "Yellow": {
           "Enemies.Guard.Spear": "Purple",
           "Enemies.Guard.Sword": "Purple",
-          "Xian.Lava": "Purple"
+          "Xian.Lava": "Purple",
+          "Xian.Sky": "Dusty"
         }
       }
     },
