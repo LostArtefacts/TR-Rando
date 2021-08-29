@@ -28,15 +28,15 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
 * Jimmy Beon - Providing us with an excellent assortment of custom textures for use in rando.
 * Topixtor - For endless testing to fix issues such as the opera house/barkhang entity freeze.
 * Lily Jericho - For endless testing to fix issues such as the opera house/barkhang entity freeze, and providing great continuous feedback. Lily was also a coordinator of the huge translation effort by the community, with a special thanks to the following translators:
-* Lilly Jericho (German)
-* Erackk (Croatian)
-* LeonHeart & Hedteur (French)
-* Diego (Italian)
-* Sabatu (Czech)
-* Woof Smit & Pikkufighter (Swedish)
-* Dokus & BeardedBogle (Dutch)
-* DJ_Full (Polish)
-* Jumica & Fuse (Portuguese)
+    * Lilly Jericho (German)
+    * Erackk (Croatian)
+    * LeonHeart & Hedteur (French)
+    * Diego (Italian)
+    * Sabatu (Czech)
+    * Woof Smit & Pikkufighter (Swedish)
+    * Dokus & BeardedBogle (Dutch)
+    * DJ_Full (Polish)
+    * Jumica & Fuse (Portuguese)
 
 ![TR2 Rando UI](https://github.com/DanzaG/TR2-Rando/blob/master/UI.png)
 
