@@ -1,0 +1,1080 @@
+{
+  "GlobalStrings": [
+    {
+      "GroupedStrings": [
+        {
+          "33": [
+            "Sparkler",
+            "Zippo",
+            "Dazzler",
+            "Flickerer",
+            "Mini-blaze"
+          ],
+          "43": [
+            "Sparkler",
+            "Zippo",
+            "Dazzler",
+            "Flickerer",
+            "Mini-blaze"
+          ]
+        },
+        {
+          "36": [
+            "Peashooters",
+            "Handguns",
+            "Old Faithfuls",
+            "Pew-Pews",
+            "I'll Take Two"
+          ],
+          "44": [
+            "Peashooter Clips",
+            "Handgun Clips",
+            "Old Faithful Clips",
+            "Pew-Pew Clips",
+            "I'll Take Two Clips"
+          ]
+        },
+        {
+          "37": [
+            "Shotty",
+            "Musket",
+            "Old Faithful",
+            "Seen Enough?",
+            "Gutbuster"
+          ],
+          "45": [
+            "Shotty Shells",
+            "Musket Shells",
+            "Old Faithful Shells",
+            "Seen Enough Shells?",
+            "Gutbuster Shells"
+          ]
+        },
+        {
+          "38": [
+            "Autos",
+            "Magnums",
+            "SuperPistols",
+            "Pierre Lost 'em",
+            "Return to Pierre"
+          ],
+          "46": [
+            "Auto Clips",
+            "Magnum Clips",
+            "SuperPistol Clips",
+            "Pierre Lost 'em Clips",
+            "Clips to Return to Pierre"
+          ]
+        },
+        {
+          "39": [
+            "UwUzis",
+            "Drrrrrrrrrr",
+            "FeelStronger Guns",
+            "Ammo Vampire",
+            "1000 Shots Later..."
+          ],
+          "47": [
+            "UwUzi Clips",
+            "Drrrrrrrrrr Clips",
+            "FeelStronger Clips",
+            "Ammo Vampire Clips",
+            "1000 Clips Later"
+          ]
+        },
+        {
+          "40": [
+            "Tick-tick-tick",
+            "Patience",
+            "Arrow Thrower",
+            "Useless",
+            "Pointless",
+            "Why Bother?",
+            "No!",
+            "Toothpick Thrower",
+            "Spear Launcher"
+          ],
+          "48": [
+            "Tick-tick-ticks",
+            "Patience Ammo",
+            "Arrows",
+            "Useless Ammo",
+            "Pointless Ammo",
+            "Why Bother Ammo?",
+            "No Ammo!",
+            "Toothpicks",
+            "Spears"
+          ]
+        },
+        {
+          "41": [
+            "MP3 Player",
+            "MPEG",
+            "Not the MP5",
+            "Big Drrrrrrrrrr"
+          ],
+          "49": [
+            "MP3 Clips",
+            "MPEG Clips",
+            "Not MP5 Clips",
+            "Big Drrrrrrrrrr Clips"
+          ]
+        },
+        {
+          "42": [
+            "Nade Blaster",
+            "Explosive Delivery",
+            "Enemy Roaster",
+            "Shell Launcher",
+            "Pineapple Dispatch",
+            "Big Bang",
+            "Big Boom",
+            "Blow It Up"
+          ],
+          "50": [
+            "Nades",
+            "Explosives",
+            "Fireballs",
+            "Shells",
+            "Pineapples",
+            "Big Bangs",
+            "Big Booms",
+            "Ammo to Blow It Up"
+          ]
+        },
+        {
+          "51": [
+            "Tiny Medi Pack",
+            "Wee Medi Pack",
+            "Little Medi Pack",
+            "Compact Medi Pack",
+            "Bijou Medi Pack",
+            "Baby Booboo Fixer"
+          ],
+          "52": [
+            "Gigantic Medi Pack",
+            "Enormous Medi Pack",
+            "Titanic Medi Pack",
+            "Massive Medi Pack",
+            "Mahoosive Medi Pack",
+            "Big Booboo Fixer"
+          ]
+        }
+      ],
+      "StandaloneStrings": {
+        "2": [
+          "THINGS",
+          "STUFF",
+          "PICKUPS",
+          "LOOT",
+          "JUNK",
+          "UH, SHINY",
+          "MY PRECIOUS"
+        ],
+        "3": [
+          "LARA DIED",
+          "TRY AGAIN?",
+          "TRY AGAIN? JUST GET GOOD",
+          "BETTER LUCK NEXT TIME",
+          "RUN BACK TO THE START AND TRY AGAIN",
+          "RIP",
+          "RIP NO LOADS",
+          "GIT GUD",
+          "RAGE QUIT",
+          "NLNMAS Next?"
+        ],
+        "35": [
+          "Stats",
+          "Vital Stats",
+          "Number Crunching",
+          "No Meds Allowed",
+          "Secret Tracker"
+        ],
+        "57": [
+          "Croft Manor",
+          "Core Design HQ",
+          "TR2Rando HQ",
+          "Lara's Digs",
+          "Winston's Fridge",
+          "Defrost Winston"
+        ]
+      }
+    },
+    {
+      "StandaloneStrings": {
+        "15": [
+          "- NULL -",
+          "- NOTHING HERE -",
+          "- UNDEFINED -",
+          "- OI, THIS SLOT'S FREE -"
+        ]
+      }
+    }
+  ],
+
+  "LevelStrings": {
+    "WALL.TR2": {
+      "Names": [
+        "China Part 1",
+        "The Fake Wall",
+        "The Terrible Wall",
+        "The Brick Wall",
+        "The Wall of Memes",
+        "Not Visible from Space",
+        "Almost Xian",
+        "T-Rex Hideout",
+        "The Lost Valley 2.0",
+        "The Path to Xian"
+      ],
+      "Keys": {
+        "0": [
+          "Key to Room 4",
+          "Memehouse Key",
+          "A Key",
+          "The Key",
+          "Key 1",
+          "Key A",
+          "This Key",
+          "Maybe Key 1?",
+          "Maybe Key 2?"
+        ],
+        "1": [
+          "Spider Key",
+          "Crusty Key",
+          "A Key",
+          "The Key",
+          "Key 2",
+          "Key B",
+          "That Key",
+          "Maybe Key 1?",
+          "Maybe Key 2?",
+          "Another Key"
+        ]
+      }
+    },
+
+    "BOAT.TR2": {
+      "Names": [
+        "Italy Part 1",
+        "Speedboat",
+        "BOAT.TR2",
+        "Violins 'n' Mines",
+        "Gondola City",
+        "Floating City",
+        "The Italian Job",
+        "Death in Venice",
+        "Far From Home",
+        "That's Amore"
+      ],
+      "Keys": {
+        "0": [
+          "Boaty McKey Face",
+          "A Key",
+          "The Key",
+          "Key 1",
+          "Key A",
+          "Speedy Key",
+          "Useless in Speedruns",
+          "Release the Boat",
+          "Sail Access",
+          "Boat Garage"
+        ],
+        "1": [
+          "Key for Room 82",
+          "Metal Key",
+          "A Key",
+          "The Key",
+          "Key 2",
+          "Key B",
+          "Door Opener",
+          "Not a Lockpick",
+          "This Key"
+        ],
+        "2": [
+          "Ironing Board Key",
+          "Iron Lady",
+          "Iron Fist Key",
+          "Iron Curtain Key",
+          "A Key",
+          "The Key",
+          "Key 3",
+          "Key C",
+          "That Key"
+        ]
+      }
+    },
+
+    "VENICE.TR2": {
+      "Names": [
+        "Italy Part 2",
+        "Bartoli's Hideout",
+        "Bartoli's Bolthole",
+        "Bartoli's Lair",
+        "Where's Bartoli?",
+        "Bartoli's Ruins",
+        "Chandeliers",
+        "The Mona Lisa",
+        "Go Out With a Bang"
+      ],
+      "Keys": {
+        "0": [
+          "Bookroom Key",
+          "A Key",
+          "The Key",
+          "Key 1",
+          "Key A",
+          "Silent Key",
+          "SILENCE! I'll Kill You!",
+          "Library Card",
+          "It's a Rental!",
+          "Don't Anger Librarians",
+          "Restricted Section Key",
+          "Secret Stash Key",
+          "Alohomora"
+        ],
+        "1": [
+          "TNT Key",
+          "Blast Key",
+          "Explosion Key",
+          "Flipmap Key",
+          "A Key",
+          "The Key",
+          "Key 2",
+          "Key B",
+          "Boom Boom Key",
+          "Big Boom Key",
+          "Blow-up Key",
+          "BANG!",
+          "Don't Drop, Will Blow!"
+        ]
+      }
+    },
+
+    "OPERA.TR2": {
+      "Names": [
+        "Italy Part 3",
+        "Not Sydney Opera House",
+        "Phantom of the Opera",
+        "La Bohème",
+        "La Triviata",
+        "Madama Butterfly",
+        "Rigoletto",
+        "The Magic Flute",
+        "The Show Must Go On",
+        "Showtime!",
+        "Prepare the Floor Show"
+      ],
+      "Keys": {
+        "0": [
+          "Fancy Key",
+          "Posh Key",
+          "Ostentatious Key",
+          "A Key",
+          "The Key",
+          "Key 1",
+          "Key A",
+          "Opera Key",
+          "The Key to the Door",
+          "Wobbly Floor Key",
+          "C Sharp"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Puzzle 1",
+          "Elevator Fixer",
+          "Lift Fixer",
+          "Raisin Box",
+          "Beam Me Up, Scotty!",
+          "Not Red Alert",
+          "Ding",
+          "No Music Fix"
+        ],
+        "1": [
+          "Puzzle 2",
+          "Motherboard",
+          "ACME Motherboard",
+          "PC Pro 97",
+          "Rate My Setup",
+          "Soggy Circuit",
+          "Why Does This Work?",
+          "Wet Board",
+          "NVIDIA560"
+        ]
+      }
+    },
+
+    "RIG.TR2": {
+      "Names": [
+        "The Rig",
+        "Rigged",
+        "RIG.TR2",
+        "Adriatic Sea",
+        "Big Oil Tower",
+        "Pollution",
+        "Why Am I Offshore?",
+        "Weaponless?",
+        "Hungover",
+        "Offshore Headache",
+        "Health and Safety Risk"
+      ],
+      "Keys": {
+        "0": [
+          "Quicksand Card",
+          "Barrel Pass Card",
+          "Pass Card 2",
+          "Fake ID 2",
+          "Middle Level Access",
+          "Mastercard Express",
+          "Do Not Break"
+        ],
+        "1": [
+          "QWOP Spot Card",
+          "Turn Off That Alarm",
+          "Pass Card 1",
+          "Fake ID 1",
+          "Low Level Access",
+          "Visa Express",
+          "Do Not Twist"
+        ],
+        "2": [
+          "Card for Room 37",
+          "Unnecessary Card",
+          "Pass Card 3",
+          "Fake ID 3",
+          "High Level Access",
+          "American Express",
+          "Do Not Bend"
+        ]
+      }
+    },
+
+    "PLATFORM.TR2": {
+      "Names": [
+        "Offshore Rig Part 2",
+        "Platform",
+        "Quest for a Motherboard",
+        "OK, Marco",
+        "The Long Ladder",
+        "And She Climbed Forever",
+        "The Yellow Submarine",
+        "Mind the Saw"
+      ],
+      "Keys": {
+        "0": [
+          "Card for Room 12",
+          "Unidentified Pass Card",
+          "Pass Card 2",
+          "Laras ID Card",
+          "Do Not Break"
+        ],
+        "3": [
+          "Card for Room 49",
+          "Unidentified Pass Card",
+          "Pass Card 1",
+          "Winstons ID Card",
+          "Do Not Bend"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Motherboard",
+          "ACME Motherboard",
+          "PC Pro 97",
+          "Rate My Setup",
+          "Does This Work?",
+          "Windows 98 Ready",
+          "Waterproof Chip",
+          "Single Cell Processor",
+          "Intel Celeron"
+        ]
+      }
+    },
+
+    "UNWATER.TR2": {
+      "Names": [
+        "Underwater Part 1",
+        "73.152 Metres",
+        "240 Feet",
+        "Tetanus Alert",
+        "Dive Girl, DIVE!",
+        "Dive Through the Boat",
+        "Water n Water n Water",
+        "Not Quite Titanic",
+        "It's Been 84 Years...",
+        "Follow the Trash",
+        "Under the Sea"
+      ]
+    },
+
+    "KEEL.TR2": {
+      "Names": [
+        "Underwater Part 2",
+        "This Boat's Upside Down",
+        "Tetanus Red Alert",
+        "Keel",
+        "WRECK.TR2",
+        "KEEL.TR2",
+        "The Three Breakers",
+        "Anti Gravity Ship",
+        "Wrecked"
+      ],
+      "Keys": {
+        "0": [
+          "Toilet Key",
+          "Bathroom Key",
+          "A Key",
+          "The Key",
+          "Key 1",
+          "Key A",
+          "What, a Restroom?"
+        ],
+        "1": [
+          "Crusty Key",
+          "A Key",
+          "The Key",
+          "Key 2",
+          "Key B",
+          "Key to a Door"
+        ],
+        "2": [
+          "Room Key",
+          "Who Dis?",
+          "A Key",
+          "The Key",
+          "Key 3",
+          "Key C",
+          "New Key?",
+          "Where's This Lock?"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Fire Breaker",
+          "T-Shaped Puzzle",
+          "Fire Extinguisher",
+          "No Water Available",
+          "This Girl Is On Fire!",
+          "Don't Burn!"
+        ]
+      }
+    },
+
+    "LIVING.TR2": {
+      "Names": [
+        "Underwater Part 3",
+        "LIVING.TR2",
+        "Shift Them Pistons",
+        "Filler Episode",
+        "Living Thirds",
+        "Living Fifths",
+        "Pointless Level",
+        "Nobody Home",
+        "Lifeless Quarters"
+      ],
+      "Keys": {
+        "0": [
+          "Dramatic Key",
+          "Melodramatic Key",
+          "Tragic Key",
+          "Shakespeare's Key",
+          "A Key",
+          "The Key",
+          "Key 1",
+          "Key A",
+          "Opera Key",
+          "The Show Must Go On!"
+        ],
+        "1": [
+          "Crusty Key",
+          "A Key",
+          "The Key",
+          "Key 2",
+          "Key B",
+          "One Key",
+          "Room Opener",
+          "Needs a Polish"
+        ]
+      }
+    },
+
+    "DECK.TR2": {
+      "Names": [
+        "Underwater-ish Part 4",
+        "The Quest for Keys",
+        "DECK.TR2",
+        "Quest for the Seraph",
+        "Iceberg Wins",
+        "Big Air Pocket",
+        "[ then ]"
+      ],
+      "Keys": {
+        "1": [
+          "Stern Key",
+          "Harsh Key",
+          "Cruel Key",
+          "Hard-nosed Key",
+          "Storage Key",
+          "Storage Key?",
+          "Not the Storage Key",
+          "Definitely not the Storage Key",
+          "Opens a Door",
+          "Which Key?",
+          "A Key",
+          "The Key",
+          "Key 1",
+          "Key A"
+        ],
+        "2": [
+          "Storage Key",
+          "Storage Key?",
+          "Strange Key",
+          "Stern Key",
+          "Cabin Key",
+          "Seraph Key",
+          "Key to Room 105",
+          "Which Key?",
+          "Opens a Door",
+          "A Key",
+          "The Key",
+          "Key 2",
+          "Key B"
+        ],
+        "3": [
+          "Cabin Key",
+          "Room Key",
+          "Key to the Door",
+          "Storage Key",
+          "Storage Key?",
+          "Not the Storage Key",
+          "Opens a Door",
+          "Which Key?",
+          "A Key",
+          "The Key",
+          "Key 3",
+          "Key C"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "The Angel",
+          "The Cherub",
+          "Puzzle 1",
+          "Statue",
+          "No Key",
+          "Monks' Relic",
+          "Monk Treasure"
+        ]
+      }
+    },
+
+    "SKIDOO.TR2": {
+      "Names": [
+        "Tibet Part 1",
+        "Skidoo",
+        "Gimme a Hut Key",
+        "Crash Site",
+        "Slippery Surface",
+        "Lara Can't Fly",
+        "Plane Landing Fail",
+        "Those Are Nice Boulders",
+        "Avalanche",
+        "Skidoo: The Revenge",
+        "Skidoo Mania",
+        "Build a Snowman"
+      ],
+      "Keys": {
+        "0": [
+          "Drawbridge Key",
+          "Useless Key",
+          "Not The One",
+          "Not the Hut Key",
+          "Hut Key",
+          "A Key",
+          "The Key",
+          "Key 1",
+          "Key A",
+          "You Raise Me Up",
+          "Make A Platform Key"
+        ],
+        "1": [
+          "Hut Key",
+          "Hut Key?",
+          "Tibet Skip Key",
+          "Not the Drawbridge Key",
+          "A Key",
+          "The Key",
+          "Key 2",
+          "Key B",
+          "THE KEY!",
+          "Speedrun Key",
+          "Most Wanted",
+          "Inside Key"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "The Angel",
+          "The Cherub",
+          "Puzzle 1",
+          "Statue",
+          "No Key",
+          "Monks' Relic",
+          "Monk Treasure"
+        ]
+      }
+    },
+
+    "MONASTRY.TR2": {
+      "Names": [
+        "Tibet Part 2",
+        "Save the Monks",
+        "Don't Shoot the Monks",
+        "Barkhang Mad",
+        "Steal Those Wheels",
+        "Pray for the Monks",
+        "High Alert Monastery",
+        "Don't Dupe Glitch!",
+        "Bulletproof Monks",
+        "Keyhang Monastery",
+        "Not Sister Act",
+        "Kill the Monks",
+        "Barkhang Monastry"
+      ],
+      "Keys": {
+        "0": [
+          "Weakroom Key",
+          "FeelStronger Key",
+          "Key to a Key"
+        ],
+        "1": [
+          "Drat, Poor Key",
+          "Outside Key 1",
+          "Let's Go Outside",
+          "Key to No Room",
+          "Backdoor Key"
+        ],
+        "2": [
+          "Spoof Rot Key",
+          "Shortcut to the Top",
+          "Outside Key 2",
+          "Shifty Eyes Key"
+        ],
+        "3": [
+          "TR2Main Hall Key",
+          "Meme Hall Key",
+          "Big Room Key",
+          "Don't Swandive Key",
+          "Buddah Key",
+          "Lobby Key"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Like a Prayer Wheel",
+          "Mani Wheel",
+          "Chen Wheel",
+          "Holy Wheel",
+          "Madonna Wheel",
+          "Who Invented This Wheel?",
+          "Weary Helper"
+        ],
+        "1": [
+          "Diamonds",
+          "Barkhang Loot",
+          "Gem's Tones",
+          "Uhh, Shiny!",
+          "18 Carat"
+        ],
+        "3": [
+          "The Angel",
+          "The Cherub",
+          "Puzzle 1",
+          "Statue",
+          "No Key",
+          "Monks' Relic",
+          "Monk Treasure",
+          "Time to Say Goodbye"
+        ]
+      }
+    },
+
+    "CATACOMB.TR2": {
+      "Names": [
+        "Tibet Part 3",
+        "CoT",
+        "Caves of the Easter Egg",
+        "CATACOMB.TR2",
+        "Yeti Mania",
+        "It's Icy Out Here",
+        "Catacombs of Horrors",
+        "It's Dark In Here!",
+        "Dark Yeti Room",
+        "Caves"
+      ],
+      "Pickups": {
+        "0": [
+          "Gong Hammer?",
+          "Wait, what?",
+          "Happy Easter",
+          "Em, Mr Gong? Ha!",
+          "Doesn't Belong Here",
+          "...???",
+          "Xylophone Stick",
+          "Well, Whatever!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Face Mask",
+          "A Mask",
+          "The Mask",
+          "Subnet Mask",
+          "255.255.255.0",
+          "Masquerade",
+          "Wear a Mask!",
+          "Pretty Mask",
+          "Ugly Mask"
+        ]
+      }
+    },
+
+    "ICECAVE.TR2": {
+      "Names": [
+        "Tibet Part 4",
+        "The Chicken",
+        "Ice Cave",
+        "Poultry Territory",
+        "Frozen Chicken",
+        "CHICKEN.TR2",
+        "The Fridge",
+        "The Freezer",
+        "Arendelle",
+        "Not So Icy Cave",
+        "Time to Defrost!",
+        "Defrosting Chicken",
+        "Winston Froze Here",
+        "Winston Approved Palace",
+        "Winston's Big Fridge"
+      ],
+      "Keys": {
+        "1": [
+          "Mr Gong Hame",
+          "The Hammer",
+          "Good Gong",
+          "Henry the Hammer",
+          "BOOOOOOOOOONGGGGG",
+          "Ice Smasher",
+          "Keep Away From Children",
+          "Ice Pick",
+          "Drumstick",
+          "Gong Mallet"
+        ]
+      },
+      "Pickups": {
+        "1": [
+          "Talion",
+          "Chicken Treasure",
+          "Open That Door, Lara",
+          "RELEASE THE CHICKEN",
+          "Golden Thingy",
+          "Xian Door Key",
+          "SHINY!",
+          "Here and Gone Again"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Face Mask",
+          "Skippable Mask",
+          "The Mask",
+          "Subnet Mask",
+          "255.255.255.0",
+          "No Balcony Skip",
+          "Who Uses This?",
+          "Lara's Beauty Mask",
+          "Cassandra"
+        ]
+      }
+    },
+
+    "EMPRTOMB.TR2": {
+      "Names": [
+        "China Part 2",
+        "Temple of Memes",
+        "Do The Xian Skip",
+        "Incy Wincy Spider",
+        "Spooooodercave",
+        "Deathtrap Valley",
+        "You're Going To DIE!",
+        "Tomato Soup",
+        "Race to the Dagger",
+        "Full Circle"
+      ],
+      "Keys": {
+        "1": [
+          "A Key",
+          "The Key",
+          "Key 1",
+          "Electric Conductor",
+          "Au",
+          "Key to a Door"
+        ],
+        "2": [
+          "A Key",
+          "The Key",
+          "Key 2",
+          "Ag",
+          "Just a Key",
+          "You Survived the Spiders"
+        ],
+        "3": [
+          "TR2Main Chamber Key",
+          "A Key",
+          "The Key",
+          "Key 3",
+          "Only Key You Need"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Puzzle 1",
+          "Room 41 Slot Filler",
+          "Face Mask",
+          "Terracotta Room Opener",
+          "Open More Traps",
+          "It's a Trap"
+        ]
+      }
+    },
+
+    "FLOATING.TR2": {
+      "Names": [
+        "China Part 3",
+        "Floater",
+        "Islands That Float",
+        "Islands in the Sky",
+        "These Things Fly",
+        "Why Am I Floating?",
+        "Lara's Dream",
+        "What the Hell?",
+        "Swandive into Fire",
+        "Floating Lego"
+      ],
+      "Puzzles": {
+        "0": [
+          "A Cracker",
+          "Cracker 1",
+          "Cracker A",
+          "Cheese 'n' Crackers",
+          "Cliquey Stamp",
+          "Magic Cookie",
+          "Fortune Cookie"
+        ],
+        "1": [
+          "A Cracker",
+          "Cracker 2",
+          "Cracker B",
+          "Cheese 'n' Crackers",
+          "Graham Cracker",
+          "Cliquey Stamp",
+          "Magic Cookie",
+          "Fortune Cookie"
+        ]
+      }
+    },
+
+    "XIAN.TR2": {
+      "Names": [
+        "China Part 4",
+        "Bartoli's Hideout Part 2",
+        "Year of the Dragon",
+        "Dragon's Demise",
+        "Big Flamethrower",
+        "Toothless' Home",
+        "Dragon's Crypt",
+        "Bartoli's End",
+        "Smaug's Lair",
+        "Not a Hungarian Horntail",
+        "Don't kill Paarthurnax",
+        "Lara, Mother of Dragons",
+        "You Can't Burn Me!",
+        "Statues, Knives and Fire",
+        "DL"
+      ],
+      "Puzzles": {
+        "0": [
+          "A Cracker",
+          "The Cracker",
+          "Cheese 'n' Crackers",
+          "Graham Cracker",
+          "Cliquey Stamp",
+          "Inedible Cracker"
+        ],
+        "1": [
+          "Xian Loot",
+          "Dragon Dagger",
+          "Big Knife",
+          "Stabby Stabby",
+          "Don't Pull Me Out",
+          "The Blade",
+          "Looking for This?",
+          "Did You Lose This?",
+          "Sorry, Did You Need This?",
+          "Not Excalibur",
+          "Excalibur's Little Brother"
+        ]
+      }
+    },
+
+    "HOUSE.TR2": {
+      "Names": [
+        "HSH",
+        "Where's Winston?",
+        "House of Memes",
+        "Funhouse",
+        "MEMES.TR2",
+        "My Humble Abode",
+        "Empty Fridge House",
+        "Gimme a Break!",
+        "Home Invasion",
+        "Do They Ever Give Up?",
+        "Not Home Alone",
+        "Seen Enough?",
+        "Madhouse",
+        "Home",
+        "Assault Course",
+        "Lara's Home"
+      ],
+      "Keys": {
+        "0": [
+          "Closet Key",
+          "Arsenal Key",
+          "The Key",
+          "A Key",
+          "No Harpoon, Please",
+          "Lara's Secret Stash Key",
+          "Gun Cache Key",
+          "Gimme Boom Boom Key",
+          "Self-defence Training Key",
+          "Armoury Key"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Xian Loot",
+          "Dragon Dagger",
+          "Big Knife",
+          "Stabby Stabby",
+          "Don't Pull Me Out",
+          "The Blade",
+          "Looking for This?",
+          "Did You Lose This?",
+          "Sorry, Did You Need This?",
+          "Not Excalibur",
+          "Excalibur's Little Brother"
+        ]
+      }
+    }
+  }
+}

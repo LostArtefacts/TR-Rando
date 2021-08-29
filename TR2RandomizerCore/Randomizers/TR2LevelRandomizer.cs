@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TR2RandomizerCore.Globalisation;
 using TR2RandomizerCore.Helpers;
 using TR2RandomizerCore.Processors;
 using TR2RandomizerCore.Utilities;
@@ -20,6 +21,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RandomizeNightMode { get; set; }
         internal bool RandomizeAudio { get; set; }
         internal bool RandomizeStartPosition { get; set; }
+        internal bool RandomizeEnvironment { get; set; }
 
         internal int SecretSeed { get; set; }
         internal int ItemSeed { get; set; }
@@ -30,6 +32,7 @@ namespace TR2RandomizerCore.Randomizers
         internal int NightModeSeed { get; set; }
         internal int AudioSeed { get; set; }
         internal int StartPositionSeed { get; set; }
+        internal int EnvironmentSeed { get; set; }
 
         internal bool HardSecrets { get; set; }
         internal bool IncludeKeyItems { get; set; }
@@ -46,13 +49,18 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RandomlyCutHair { get; set; }
         internal bool RemoveRobeDagger { get; set; }
         internal bool EnableInvisibility { get; set; }
+        internal bool RetainLevelNames { get; set; }
         internal bool RetainKeyItemNames { get; set; }
+        internal Language GameStringLanguage { get; set; }
         internal uint NightModeCount { get; set; }
         internal bool ChangeTriggerTracks { get; set; }
         internal bool RotateStartPositionOnly { get; set; }
+        internal bool RandomizeWaterLevels { get; set; }
+        internal bool RandomizeSlotPositions { get; set; }
         internal bool AutoLaunchGame { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
+        internal bool ReassignPuzzleNames => RandomizeEnemies && CrossLevelEnemies;
 
         internal TR2LevelRandomizer(TRDirectoryIOArgs args)
             : base(args) { }
@@ -93,6 +101,8 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeGameStrings = config.GetBool(nameof(RandomizeGameStrings));
             GameStringsSeed = config.GetInt(nameof(GameStringsSeed), defaultSeed);
             RetainKeyItemNames = config.GetBool(nameof(RetainKeyItemNames));
+            RetainLevelNames = config.GetBool(nameof(RetainLevelNames));
+            GameStringLanguage = G11N.Instance.GetLanguage(config.GetString(nameof(GameStringLanguage), Language.DefaultTag));
 
             RandomizeNightMode = config.GetBool(nameof(RandomizeNightMode));
             NightModeSeed = config.GetInt(nameof(NightModeSeed), defaultSeed);
@@ -104,6 +114,11 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeStartPosition = config.GetBool(nameof(RandomizeStartPosition));
             StartPositionSeed = config.GetInt(nameof(StartPositionSeed), defaultSeed);
             RotateStartPositionOnly = config.GetBool(nameof(RotateStartPositionOnly));
+
+            RandomizeEnvironment = config.GetBool(nameof(RandomizeEnvironment));
+            EnvironmentSeed = config.GetInt(nameof(EnvironmentSeed), defaultSeed);
+            RandomizeWaterLevels = config.GetBool(nameof(RandomizeWaterLevels), true);
+            RandomizeSlotPositions = config.GetBool(nameof(RandomizeSlotPositions), true);
 
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
@@ -143,6 +158,8 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeGameStrings)] = RandomizeGameStrings;
             config[nameof(GameStringsSeed)] = GameStringsSeed;
             config[nameof(RetainKeyItemNames)] = RetainKeyItemNames;
+            config[nameof(RetainLevelNames)] = RetainLevelNames;
+            config[nameof(GameStringLanguage)] = GameStringLanguage.Tag;
 
             config[nameof(RandomizeNightMode)] = RandomizeNightMode;
             config[nameof(NightModeSeed)] = NightModeSeed;
@@ -154,6 +171,11 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(StartPositionSeed)] = StartPositionSeed;
             config[nameof(RotateStartPositionOnly)] = RotateStartPositionOnly;
 
+            config[nameof(RandomizeEnvironment)] = RandomizeEnvironment;
+            config[nameof(EnvironmentSeed)] = EnvironmentSeed;
+            config[nameof(RandomizeWaterLevels)] = RandomizeWaterLevels;
+            config[nameof(RandomizeSlotPositions)] = RandomizeSlotPositions;
+
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
         }
@@ -164,12 +186,19 @@ namespace TR2RandomizerCore.Randomizers
         /// </summary>
         protected override void PreSaveImpl(AbstractTRScriptEditor scriptEditor)
         {
-            if (RandomizeGameStrings)
+            // Either fully randomize the gamestrings, or allow for specific strings
+            // to be replaced if models are being moved around as a result of cross-
+            // level enemies (e.g. Dagger of Xian).
+            if (RandomizeGameStrings || ReassignPuzzleNames)
             {
                 GameStringRandomizer stringRandomizer = new GameStringRandomizer
                 {
                     ScriptEditor = scriptEditor as TR23ScriptEditor,
-                    RetainKeyItemNames = RetainKeyItemNames
+                    RetainKeyItemNames = RetainKeyItemNames,
+                    RetainLevelNames = RetainLevelNames,
+                    Language = GameStringLanguage,
+                    RandomizeAllStrings = RandomizeGameStrings,
+                    ReassignPuzzleNames = ReassignPuzzleNames
                 };
                 stringRandomizer.Randomize(GameStringsSeed);
             }
@@ -187,14 +216,17 @@ namespace TR2RandomizerCore.Randomizers
                     target += numLevels;
                 }
             }
-            if (RandomizeSecrets)    target += numLevels;
-            if (RandomizeAudio)      target += numLevels;
-            if (RandomizeItems)      target += numLevels * 2; // standard/key rando followed by unarmed logic after enemy rando
+            if (RandomizeSecrets) target += numLevels;
+            if (RandomizeAudio) target += numLevels;
+            if (RandomizeItems) target += numLevels * 2; // standard/key rando followed by unarmed logic after enemy rando
             if (RandomizeStartPosition) target += numLevels;
             if (DeduplicateTextures) target += numLevels * 2;
-            if (RandomizeEnemies)    target += CrossLevelEnemies ? numLevels * 3 : numLevels;
-            if (RandomizeTextures)   target += numLevels * 3;
-            if (RandomizeOutfits)    target += numLevels * 2;
+            if (RandomizeEnemies) target += CrossLevelEnemies ? numLevels * 4 : numLevels; // 4 => 3 for multithreading work, 1 for ModelAdjuster
+            if (RandomizeTextures) target += numLevels * 3;
+            if (RandomizeOutfits) target += numLevels * 2;
+
+            target += numLevels; // Environment randomizer always runs
+
             return target;
         }
 
@@ -229,33 +261,6 @@ namespace TR2RandomizerCore.Randomizers
             // to track where imported enemies are placed.
             using (TexturePositionMonitorBroker textureMonitor = new TexturePositionMonitorBroker())
             {
-                if (!monitor.IsCancelled && RandomizeSecrets)
-                {
-                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
-                    new SecretReplacer
-                    {
-                        AllowHard = HardSecrets,
-                        AllowGlitched = GlitchedSecrets,
-                        Levels = levels,
-                        BasePath = wipDirectory,
-                        SaveMonitor = monitor,
-                        IsDevelopmentModeOn = DevelopmentMode
-                    }.Randomize(SecretSeed);
-                }
-
-                if (!monitor.IsCancelled && RandomizeAudio)
-                {
-                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
-                    new AudioRandomizer
-                    {
-                        ScriptEditor = scriptEditor as TR23ScriptEditor,
-                        Levels = levels,
-                        BasePath = wipDirectory,
-                        SaveMonitor = monitor,
-                        ChangeTriggerTracks = ChangeTriggerTracks
-                    }.Randomize(AudioSeed);
-                }
-
                 if (!monitor.IsCancelled && DeduplicateTextures)
                 {
                     // This is needed to make as much space as possible available for cross-level enemies.
@@ -270,16 +275,18 @@ namespace TR2RandomizerCore.Randomizers
                     }.Deduplicate();
                 }
 
-                if (!monitor.IsCancelled && RandomizeNightMode)
+                if (!monitor.IsCancelled && RandomizeSecrets)
                 {
-                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
-                    new NightModeRandomizer
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
+                    new SecretReplacer
                     {
+                        AllowHard = HardSecrets,
+                        AllowGlitched = GlitchedSecrets,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
-                        NumLevels = NightModeCount
-                    }.Randomize(NightModeSeed);
+                        IsDevelopmentModeOn = DevelopmentMode
+                    }.Randomize(SecretSeed);
                 }
 
                 ItemRandomizer itemRandomizer = null;
@@ -300,6 +307,19 @@ namespace TR2RandomizerCore.Randomizers
 
                 if (!monitor.IsCancelled && RandomizeEnemies)
                 {
+                    if (CrossLevelEnemies)
+                    {
+                        // For now all P2 items become P3 to avoid dragon issues. This must take place after Item
+                        // randomization for P2/3 zoning because P2 entities will become P3.
+                        monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting level models");
+                        new ModelAdjuster
+                        {
+                            Levels = levels,
+                            BasePath = wipDirectory,
+                            SaveMonitor = monitor
+                        }.AdjustModels();
+                    }
+
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
                     new EnemyRandomizer
                     {
@@ -319,6 +339,33 @@ namespace TR2RandomizerCore.Randomizers
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing unarmed level items");
                     itemRandomizer.RandomizeAmmo();
+                }
+
+                if (!monitor.IsCancelled)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
+                    new EnvironmentRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        EnforcedModeOnly = !RandomizeEnvironment,
+                        RandomizeWater = RandomizeWaterLevels,
+                        RandomizeSlots = RandomizeSlotPositions
+                    }.Randomize(EnvironmentSeed);
+                }
+
+                if (!monitor.IsCancelled && RandomizeAudio)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
+                    new AudioRandomizer
+                    {
+                        ScriptEditor = scriptEditor as TR23ScriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        ChangeTriggerTracks = ChangeTriggerTracks
+                    }.Randomize(AudioSeed);
                 }
 
                 if (!monitor.IsCancelled && RandomizeStartPosition)
@@ -348,6 +395,18 @@ namespace TR2RandomizerCore.Randomizers
                         EnableInvisibility = EnableInvisibility,
                         TextureMonitor = textureMonitor
                     }.Randomize(OutfitSeed);
+                }
+
+                if (!monitor.IsCancelled && RandomizeNightMode)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
+                    new NightModeRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        NumLevels = NightModeCount
+                    }.Randomize(NightModeSeed);
                 }
 
                 if (!monitor.IsCancelled)

@@ -14,7 +14,7 @@ namespace TextureExport
     {
         enum Mode
         {
-            Png, Html, Segments
+            Png, Html, Segments, Faces
         }
 
         static void Main(string[] args)
@@ -39,6 +39,14 @@ namespace TextureExport
                 else if (arg == "segments")
                 {
                     mode = Mode.Segments;
+                }
+                else if (arg == "faces")
+                {
+                    mode = Mode.Faces;
+                    if (args.Length < 3)
+                    {
+                        return;
+                    }
                 }
             }
 
@@ -87,10 +95,27 @@ namespace TextureExport
                 case Mode.Segments:
                     new HtmlTileBuilder(inst).ExportAllTextureSegments(lvl);
                     break;
+                case Mode.Faces:
+                    new FaceMapper(inst).GenerateFaces(lvl.ToLower().Replace(".tr2", "_faced.tr2"), GetFaceRoomArgs());
+                    break;
                 default:
                     ExportAllTexturesToPng(lvl, inst);
                     break;
             }
+        }
+
+        static int[] GetFaceRoomArgs()
+        {
+            string[] args = Environment.GetCommandLineArgs()[3].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            List<int> rooms = new List<int>();
+            foreach (string rm in args)
+            {
+                if (int.TryParse(rm.Trim(), out int r))
+                {
+                    rooms.Add(r);
+                }
+            }
+            return rooms.ToArray();
         }
 
         static void ExportAllTexturesToPng(string lvl, TR2Level inst)
@@ -136,6 +161,7 @@ namespace TextureExport
             Console.WriteLine("\tpng      - Export each texture tile to PNG. Default Option.");
             Console.WriteLine("\thtml     - Export all tiles to a single HTML document.");
             Console.WriteLine("\tsegments - Export each object and sprite texture to individual PNG files.");
+            Console.WriteLine("\tfaces    - Creates a new texture for every face in a room and marks its index (output is LVL_faced.tr2).");
             Console.WriteLine();
             
             Console.WriteLine("Examples");
@@ -143,6 +169,12 @@ namespace TextureExport
             Console.WriteLine("\tTextureExport");
             Console.ResetColor();
             Console.WriteLine("\t\tExport all original level tiles to PNG.");
+            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\tTextureExport orig html");
+            Console.ResetColor();
+            Console.WriteLine("\t\tExport all original level tiles to HTML.");
             Console.WriteLine();
 
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -162,6 +194,13 @@ namespace TextureExport
             Console.ResetColor();
             Console.WriteLine("\t\tExport all object and sprite textures from Floating Islands to individual PNGs.");
             Console.WriteLine("\t\tA sub-directory will be created using the level name to store the files.");
+            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\tTextureExport WALL.TR2 faces 4,32");
+            Console.ResetColor();
+            Console.WriteLine("\t\tCreates a new texture for every face in rooms 4 and 32 and marks its index on the texture.");
+            Console.WriteLine("\t\tThe level will likely be unplayable due to limits but can be viewed in trview.");
             Console.WriteLine();
         }
     }

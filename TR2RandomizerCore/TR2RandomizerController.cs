@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using TR2RandomizerCore.Globalisation;
 using TR2RandomizerCore.Helpers;
 using TR2RandomizerCore.Randomizers;
 using TRGE.Coord;
@@ -351,10 +353,27 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.RandomizeGameStrings = value;
         }
 
+        public Language GameStringLanguage
+        {
+            get => LevelRandomizer.GameStringLanguage;
+            set => LevelRandomizer.GameStringLanguage = value;
+        }
+
+        public Language[] AvailableGameStringLanguages
+        {
+            get => G11N.Instance.Languages;
+        }
+
         public bool RetainKeyItemNames
         {
             get => LevelRandomizer.RetainKeyItemNames;
             set => LevelRandomizer.RetainKeyItemNames = value;
+        }
+
+        public bool RetainLevelNames
+        {
+            get => LevelRandomizer.RetainLevelNames;
+            set => LevelRandomizer.RetainLevelNames = value;
         }
 
         public int GameStringsSeed
@@ -403,6 +422,30 @@ namespace TR2RandomizerCore
         {
             get => LevelRandomizer.StartPositionSeed;
             set => LevelRandomizer.StartPositionSeed = value;
+        }
+
+        public bool RandomizeEnvironment
+        {
+            get => LevelRandomizer.RandomizeEnvironment;
+            set => LevelRandomizer.RandomizeEnvironment = value;
+        }
+
+        public bool RandomizeWaterLevels
+        {
+            get => LevelRandomizer.RandomizeWaterLevels;
+            set => LevelRandomizer.RandomizeWaterLevels = value;
+        }
+
+        public bool RandomizeSlotPositions
+        {
+            get => LevelRandomizer.RandomizeSlotPositions;
+            set => LevelRandomizer.RandomizeSlotPositions = value;
+        }
+
+        public int EnvironmentSeed
+        {
+            get => LevelRandomizer.EnvironmentSeed;
+            set => LevelRandomizer.EnvironmentSeed = value;
         }
         #endregion
 

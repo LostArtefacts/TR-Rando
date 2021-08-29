@@ -1,0 +1,1067 @@
+{
+  "GlobalStrings": [
+    {
+      "GroupedStrings": [
+        {
+          "33": [
+            "Iskiernik",
+            "Zapalniczka",
+            "Oczojeb",
+            "Migotek",
+            "Mini-blaskacz"
+          ],
+          "43": [
+            "Iskiernik",
+            "Zapalniczka",
+            "Oczojeb",
+            "Migotek",
+            "Mini-blaskacz"
+          ]
+        },
+        {
+          "36": [
+            "Pistolce",
+            "Pistolety",
+            "Stare Wiarusy",
+            "Pukawki",
+            "Wezme dwa"
+          ],
+          "44": [
+            "Naboje do pistolców",
+            "Naboje do pistoletów",
+            "Naboje do Starych Wiarusów",
+            "Naboje do pukawek",
+            "Naboje do dwóch"
+          ]
+        },
+        {
+          "37": [
+            "Wybebeszacz",
+            "Muszkiet",
+            "Stary Wiarus",
+            "Strzelba, co widziala zbyt wiele",
+            "Rozflaczacz"
+          ],
+          "45": [
+            "Naboje do wybebeszacza",
+            "Naboje do muszkietu",
+            "Naboje do Starego Wiarusa",
+            "Naboje, co widzialy zbyt wiele",
+            "Naboje do rozflaczacza"
+          ]
+        },
+        {
+          "38": [
+            "Automaty",
+            "Magnumy",
+            "SuperPistolce",
+            "Broń Pierre'a",
+            "Oddać Pierre'owi"
+          ],
+          "46": [
+            "Naboje do automatów",
+            "Naboje do magnumów",
+            "Naboje do SuperPistolców",
+            "Naboje Pierre'a",
+            "Naboje Pierre'a"
+          ]
+        },
+        {
+          "39": [
+            "UwUzi",
+            "Tetetki",
+            "Szybka broń",
+            "Wampir nabojowy",
+            "1000 strzalow później..."
+          ],
+          "47": [
+            "Magazynki do UwUzi",
+            "Naboje do Tetetek",
+            "Szybkie naboje",
+            "Naboje do wampira",
+            "1000 nabojów później"
+          ]
+        },
+        {
+          "40": [
+            "Cyk-cyk-cyk",
+            "Cierpliwości",
+            "Strzalomiot",
+            "Bezużyteczny",
+            "Czyj to byl pomysl",
+            "Kto to wymyślil?",
+            "Byle co",
+            "Wykalaczacz",
+            "Dzidomiot"
+          ],
+          "48": [
+            "Cyk-cyk-cyki",
+            "Cierpliwość",
+            "Strzaly",
+            "Bezużyteczna Amunicja",
+            "Czyje to harpuny",
+            "Kto wymyślil te harpuny",
+            "Amunicja do byle czego",
+            "Wykalaczki",
+            "Dzidy"
+          ]
+        },
+        {
+          "41": [
+            "Odtwarzacz MP3",
+            "Konwerter żywych do martwych",
+            "Jeszcze nie MP5",
+            "Wielki Pepegun"
+          ],
+          "49": [
+            "Pliki MP3",
+            "Pliki MPEG",
+            "Pliki MP4",
+            "Naboje do wielkiego pepeguna"
+          ]
+        },
+        {
+          "42": [
+            "Granatnik",
+            "Wybuchowa dostawa",
+            "Przypiekacz",
+            "Wyrzutnia pocisków",
+            "Miotacz ananasów",
+            "Rozpierdalator",
+            "Rozjebywacz",
+            "Rozkurwiciel"
+          ],
+          "50": [
+            "Granaty",
+            "Wybuchowe paczki",
+            "Kule ognia",
+            "Pocisk do wyrzutni",
+            "Sok z anananasa",
+            "Granat ostatecznego rozpierdolu",
+            "Jebuty",
+            "Rozkurwiacze"
+          ]
+        },
+        {
+          "51": [
+            "Tycia apteczka",
+            "Maciupka apteczka",
+            "Olimpijska apteczka",
+            "Mikroskopijna apteczka",
+            "Mini apteczka",
+            "Na male kuku"
+          ],
+          "52": [
+            "Ogromna apteczka",
+            "Zajebiście duża apteczka",
+            "Tytaniczna apteczka",
+            "Supermasywna apteczka",
+            "Maxi apteczka",
+            "Na duze kuku"
+          ]
+        }
+      ],
+      "StandaloneStrings": {
+        "2": [
+          "RZECZY",
+          "KLAMOTY",
+          "PRZEDMIOTY",
+          "INWENTARZ",
+          "UZYWKI",
+          "PRECJOZA",
+          "MOJE SKARRRBY"
+        ],
+        "3": [
+          "ZDYCHLEŚ",
+          "SPRÓBUJ JESZCZE RAZ",
+          "POWTÓRZ ALE LEPIEJ",
+          "POSTARAJ SIE LEPIEJ",
+          "GIT GUD",
+          "RAGE QUIT!",
+          "To co, teraz NLNMAS?"
+        ],
+        "35": [
+          "Statystyki",
+          "Niepotrzebne liczby",
+          "Licznik polamanych zeber",
+          "Nadal zero apteczek?",
+          "Rejestrator sekretów"
+        ],
+        "57": [
+          "Dwór Croftów",
+          "Siedziba Core Design",
+          "Kwatera TR2Rando",
+          "Lara na wykopkach",
+          "Lodówka Winstona",
+          "Misja: Odmrozić Winstona!"
+        ]
+      }
+    },
+    {
+      "StandaloneStrings": {
+        "15": [
+          "- MIEJSCE NA SAVE -",
+          "- NIEZAPISANY -",
+          "- EJ, TU JEST MIEJSCE -",
+          "- TU NA RAZIE JEST SCIERNISKO -"
+        ]
+      }
+    }
+  ],
+
+  "LevelStrings": {
+    "WALL.TR2": {
+      "Names": [
+        "Chiny cz.1",
+        "Chińska podróba muru",
+        "Paskudny mur",
+        "Ceglany mur",
+        "Ściana memów",
+        "Niewidoczny z kosmosu",
+        "Prawie Xian",
+        "Kryjówka dinozaurów",
+        "Ukryta dolina 2.0",
+        "Droga do Xian"
+      ],
+      "Keys": {
+        "0": [
+          "Klucz do pokoju nr 4",
+          "Klucz do memowni",
+          "Klucz",
+          "Klucz",
+          "Klucz nr 1",
+          "Klucz A",
+          "TEN klucz",
+          "Chyba pierwszy klucz",
+          "Chyba drugi klucz"
+        ],
+        "1": [
+          "Klucz arachnofobiczny",
+          "Szorstki klucz",
+          "Klucz",
+          "Klucz",
+          "Klucz nr 2",
+          "Klucz B",
+          "TEN klucz",
+          "Chyba pierwszy klucz",
+          "Chyba drugi klucz",
+          "Jeszcze jeden klucz O.o"
+        ]
+      }
+    },
+
+    "BOAT.TR2": {
+      "Names": [
+        "Wlochy cz.1",
+        "Motorówka",
+        "BOAT.TR2",
+        "Smyczki i miny",
+        "Gondolin",
+        "Plywajace Miasto",
+        "Wloska robota",
+        "Śmierć w Wenecji",
+        "Daleko od domu",
+        "Amore pomidore"
+      ],
+      "Keys": {
+        "0": [
+          "Powrót do szybkości",
+          "Klucz",
+          "Klucz",
+          "Klucz 1",
+          "Klucz A",
+          "Klucz do motorówki",
+          "Bezuzyteczny w speedrunach",
+          "Uwolnić motorówke",
+          "Karta zeglarska",
+          "Klucz od garazu"
+        ],
+        "1": [
+          "Klucz do pokoju 82",
+          "Metalowy klucz",
+          "Klucz",
+          "Klucz",
+          "Klucz 2",
+          "Klucz B",
+          "Otwieracz do drzwi",
+          "Pierwowzór wytrychu",
+          "TEN klucz"
+        ],
+        "2": [
+          "Klucz od zelaznej kraty",
+          "Klucz zelaznej pieści",
+          "Klucz zelaznej damy",
+          "Klucz od zelaznej kurtyny",
+          "Klucz",
+          "Klucz",
+          "Trzeci klucz",
+          "Klucz C",
+          "Kolejny klucz"
+        ]
+      }
+    },
+
+    "VENICE.TR2": {
+      "Names": [
+        "Wlochy cz.2",
+        "Kryjówka Bartolego",
+        "Nora Bartolego",
+        "Gdzie jest Bartoli",
+        "Ruiny Bartolego",
+        "Zyrandole",
+        "Mona Lisa",
+        "Bombowy final"
+      ],
+      "Keys": {
+        "0": [
+          "Klucz do ksiegarni",
+          "Klucz",
+          "Klucz",
+          "Klucz 1",
+          "Klucz A",
+          "Cichy klucz",
+          "CISZA! Bo was zamorduje!",
+          "Karta biblioteczna",
+          "Wypożyczalnia",
+          "Nie wkurwiaj bibliotekarzy",
+          "Dzial ksiazek zakazanych",
+          "Boj sie prawd ukrytych w starych folialach",
+          "Alohomora"
+        ],
+        "1": [
+          "Klucz od Detonatora",
+          "Odpalator",
+          "Burzyciel marzeń",
+          "Aktywator flipmapy",
+          "Klucz od rozwalki",
+          "Klucz",
+          "Klucz 2",
+          "Klucz B",
+          "Wielkie bum",
+          "Dekonstrukcja",
+          "Top1 nieudanych wyburzeń",
+          "JEBUT!",
+          "Nie upuść. Wybuchnie!"
+        ]
+      }
+    },
+
+    "OPERA.TR2": {
+      "Names": [
+        "Wlochy cz.3",
+        "Opera w Sydney",
+        "Upiór w operze",
+        "Cyganeria",
+        "Traviata",
+        "Halka",
+        "Rigoletto",
+        "Czarodziejski flet",
+        "Show musi trwać",
+        "Akcja!",
+        "Za kulisami"
+      ],
+      "Keys": {
+        "0": [
+          "Odpicowany klucz",
+          "Elegancki klucz",
+          "Ozdobny klucz",
+          "Klucz",
+          "Klucz",
+          "Klucz 1",
+          "Klucz A",
+          "Klucz do opery",
+          "Klucz do drzwi",
+          "Klucz na zepsuty dach",
+          "Klucz basowy"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Wtyk nr 1",
+          "Kabel od windy",
+          "Winda na rozbieg",
+          "Przewód",
+          "Teleportuj mnie, Scotty!",
+          "Wenecki alarm",
+          "Dzyń dzyń",
+          "Patch muzyczny"
+        ],
+        "1": [
+          "Wtyk nr 2",
+          "Uklad scalony",
+          "Plyta glowna z Allegro",
+          "Grafa z Biedronki ",
+          "Nie pytaj mnie o benchmark",
+          "Przemoczony obwód",
+          "Dlaczego to dziala?",
+          "Pozostawić do wyschniecia",
+          "NVIDIA560"
+        ]
+      }
+    },
+
+    "RIG.TR2": {
+      "Names": [
+        "Obywatele Platformy",
+        "Przykrywka",
+        "RIG.TR2",
+        "Morze Adriatyckie",
+        "Siedziba Orlenu",
+        "Nieeokologicznie",
+        "I co ja robie tu...",
+        "Ocean Niespokojny",
+        "Kac Ropa",
+        "Ból glowy, ból dupy",
+        "Trudne warunki pracy"
+      ],
+      "Keys": {
+        "0": [
+          "Qwopcjonalna karta",
+          "Uwaga na beczki",
+          "Karta dostepu 2",
+          "Czerwony jest impostorem",
+          "Karta średniego dostepu",
+          "Visa Express",
+          "Nie skrecać"
+        ],
+        "1": [
+          "Qwoptymalizator",
+          "Wylacz ten alarm",
+          "Karta dostepu 1",
+          "Zólty jest impostorem",
+          "Karta niskiego dostepu",
+          "Mastercard Express",
+          "Nie lamać"
+        ],
+        "2": [
+          "Karta do pokoju 37",
+          "Nie musisz tego podnosić",
+          "Karta dostepu 3",
+          "Zielony jest impostorem",
+          "Karta wysokiego dostepu",
+          "American Express",
+          "Nie wyginać"
+        ]
+      }
+    },
+
+    "PLATFORM.TR2": {
+      "Names": [
+        "Platforma 2.0",
+        "Nowoczesna",
+        "Wyprawa po chipset",
+        "Okej, Marko",
+        "Drabina do nieba",
+        "Wspinaczka Bez końca",
+        "Zolta lódż podwodna",
+        "Uwaga na palce"
+      ],
+      "Keys": {
+        "0": [
+          "Karta do pokoju 12",
+          "Tylko dla personelu",
+          "Karta 2",
+          "Dowód osobisty Lary",
+          "Nie zepsuj tego"
+        ],
+        "3": [
+          "Karta do pokoju 49",
+          "Dostep do grillowni",
+          "Karta 1",
+          "Dowód osobisty Winstona",
+          "Nie zginać!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Plyta gówna",
+          "Grafa z Lidla",
+          "elektroda.pl",
+          "Oceń mój sprzet",
+          "Dziala?",
+          "Windows 95",
+          "Wodoodporny?",
+          "Pentium MMX",
+          "Intel Celeron"
+        ]
+      }
+    },
+
+    "UNWATER.TR2": {
+      "Names": [
+        "Podwodniak cz.1",
+        "73 m 15 cm 2 mm",
+        "240 stóp",
+        "Alarm tezcowy",
+        "Nurkuj, DZIFFKO!",
+        "Nurkuj przez ladownie",
+        "Woda, woda, woda",
+        "Prawie jak Titanic",
+        "Minely 84 lata...",
+        "Szlak z beczek",
+        "Na dnie"
+      ]
+    },
+
+    "KEEL.TR2": {
+      "Names": [
+        "Podwodniak cz.2",
+        "Do góry dnem",
+        "Czerwony alarm tezcowy",
+        "Stepka",
+        "WRECK.TR2",
+        "KEEL.TR2",
+        "Trzy obwody",
+        "Nierówno pod sufitem",
+        "Wrak czlowieka"
+      ],
+      "Keys": {
+        "0": [
+          "Klucz do klopa",
+          "Kl. do miejsca medytacji",
+          "Klucz do skupienia",
+          "Klucz do światyni zen",
+          "Key 1",
+          "Key A",
+          "Klucz do spokoju"
+        ],
+        "1": [
+          "Rdzawy Klucz",
+          "Klucz",
+          "Klucz",
+          "Klucz 2",
+          "Klucz B",
+          "Klucz do ladowni"
+        ],
+        "2": [
+          "Klucz do pokoju",
+          "A to co?",
+          "Klucz",
+          "Klucz",
+          "Klucz 3",
+          "Klucz C",
+          "Nowy Klucz?",
+          "Gdzie ten zamek?"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Deaktywator ognia",
+          "Dwuteownik",
+          "Gaśnica",
+          "Woda nie pomoze",
+          "Plomienne zorze",
+          "Nie spal sie"
+        ]
+      }
+    },
+
+    "LIVING.TR2": {
+      "Names": [
+        "Podwodniak cz.3",
+        "LIVING.TR2",
+        "Natlok tloków",
+        "Zapchajdziura",
+        "Pierwsza tercja za nami",
+        "Dziób na kwinte",
+        "Bezcelowy poziom",
+        "Nikt tu juz nie mieszka",
+        "Martwe kwatery"
+      ],
+      "Keys": {
+        "0": [
+          "Dramayczny Klucz",
+          "Melodramatyczny Klucz",
+          "Klucz do wszelkiej tragedii",
+          "Klucz Mickiewicza",
+          "Klucz",
+          "Klucz",
+          "Klucz. Sztuk: 1",
+          "Klucz A",
+          "Klucz do opery",
+          "Przedstawienie musi trwać..."
+        ],
+        "1": [
+          "Chrupki klucz",
+          "Rdzawy klucz",
+          "Zardzewialy klucz",
+          "Klucz 2",
+          "Klucz B",
+          "Jedyny klucz",
+          "Otwieracz pokoju",
+          "Trzeba wypolerować"
+        ]
+      }
+    },
+
+    "DECK.TR2": {
+      "Names": [
+        "Podwodniak? cz.4",
+        "Wiecej kluczenia",
+        "DECK.TR2",
+        "Wyprawa po Seraph",
+        "Góra lodowa wygrala",
+        "Poduszka powietrzna"
+      ],
+      "Keys": {
+        "1": [
+          "Klucz od rufy",
+          "Nieuczciwy klucz",
+          "Okrutny klucz",
+          "Zadziorny klucz",
+          "Klucz do magazynu",
+          "Klucz do magazynu?",
+          "Nie do magazynu",
+          "Fakt, nie do magazynu",
+          "Otwiera drzwi",
+          "Które to drzwi?",
+          "Klucz",
+          "Klucz",
+          "Klucz 1",
+          "Klucz A"
+        ],
+        "2": [
+          "Klucz do magazynu",
+          "Klucz do magazynu?",
+          "Dziwny klucz",
+          "Klucz od rufy",
+          "Klucz do kabiny",
+          "Klucz do Serafina",
+          "Klucz do pokoju 105",
+          "Które to drzwi?",
+          "Otwiera drzwi",
+          "Klucz",
+          "Klucz",
+          "Klucz 2",
+          "Klucz B"
+        ],
+        "3": [
+          "Klucz do kabiny",
+          "Klucz do pokoju",
+          "Klucz do drzwi",
+          "Klucz do magazynu",
+          "Klucz do magazynu?",
+          "Nie do magazynu",
+          "Otwiera drzwi",
+          "Które to drzwi?",
+          "Klucz",
+          "Klucz",
+          "Klucz 3",
+          "Klucz C"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "Aniolek",
+          "Cherubin",
+          "Puzel nr 1",
+          "Statuetka",
+          "O, to nie jest klucz",
+          "Artefakt Mnichów",
+          "Skarb Mnichów"
+        ]
+      }
+    },
+
+    "SKIDOO.TR2": {
+      "Names": [
+        "Tybet cz.1",
+        "Faster, harder, skuter",
+        "Wjazd na chate",
+        "KataStrefa",
+        "Ślisko, coraz ślizej...",
+        "Nauka latania",
+        "No i w pizdu i wyladowal",
+        "To naprawde ladny glaz",
+        "Tybetanskie Dni Lawinowe",
+        "Zemsta skutera",
+        "Gaaaz, gaaaz, gaaaz",
+        "Ulepimy dziś balwana?"
+      ],
+      "Keys": {
+        "0": [
+          "Klucz od mostu",
+          "Niepotrzebny klucz",
+          "Niewlaściwy klucz",
+          "To nie jest klucz od chaty",
+          "Klucz od chaty",
+          "Klucz",
+          "Klucz",
+          "Klucz 1",
+          "Klucz A",
+          "Podnosisz mnie",
+          "Klucz od platformy"
+        ],
+        "1": [
+          "Klucz od chaty",
+          "Klucz od chaty?",
+          "Klucz pominiecia poziomu",
+          "Nie klucz od platformy",
+          "Klucz",
+          "Klucz",
+          "Klucz 2",
+          "Klucz B",
+          "TEN KLUCZ!!!",
+          "Klucz speedrunnerów",
+          "Najbardziej kluczowy!",
+          "Romku, a co ty masz w środku"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "Aniolek",
+          "Cherubin",
+          "Puzel 1",
+          "Statuetka",
+          "O, to nie jest klucz",
+          "Artefakt Mnichów",
+          "Skarb Mnichów"
+        ]
+      }
+    },
+
+    "MONASTRY.TR2": {
+      "Names": [
+        "Tybet cz.2",
+        "Uratuj mnichów",
+        "Nie strzelaj do mnichów",
+        "Czubek nirvany",
+        "Tu by sie skuter przydal",
+        "Modlitwa (za) mnichów",
+        "Poploch w klasztorze",
+        "Glitche i inne dupy",
+        "Kuloodporni",
+        "Klasztor Gangbang",
+        "Mniszka w przebraniu"
+      ],
+      "Keys": {
+        "0": [
+          "Klucz do slabego gameplayu",
+          "Klucz do lepszego bytu",
+          "Klucz do klucza"
+        ],
+        "1": [
+          "Idzie sie zapaść pod ziemie od tych kluczy",
+          "Wyjście na dwór 1",
+          "Wynośmy sie stad",
+          "Klucz do nikad? O.o",
+          "Klucz od tylnych drzwi"
+        ],
+        "2": [
+          "Klucz na szczyt wszystkiego",
+          "Skrót na dach",
+          "Ściany maja oczy",
+          "Wyjście na dwór 2"
+        ],
+        "3": [
+          "Klucz Swietego Arsunta",
+          "Klucz do fabryki memów",
+          "Klucz do dużego pokoju",
+          "Nie skacz na glówke",
+          "Klucz Buddy",
+          "Klucz do hali"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Jak amen w pacierzu",
+          "Mlynek z mantrami",
+          "Mlynek Chena",
+          "Świety walek",
+          "Mlynek Madonny",
+          "Kto wymyślil te mlynki",
+          "Rzeźbiony poradnik św. Stelli"
+        ],
+        "1": [
+          "Na8(Al6Si6O24)Cl2",
+          "Klejnot mnichów",
+          "Krysztaly lecznicze",
+          "Świeci sie jak psu jajca",
+          "18 karatów"
+        ],
+        "3": [
+          "Aniolek",
+          "Cherubin",
+          "Puzel 3",
+          "Statuetka",
+          "O, to nie jest klucz",
+          "Artefakt Mnichów",
+          "Skarb Mnichów",
+          "Pora sie pozegnać..."
+        ]
+      }
+    },
+
+    "CATACOMB.TR2": {
+      "Names": [
+        "Tybet cz.3",
+        "Katakumby Troglodytów",
+        "Jaskinia easter eggów",
+        "CATACOMB.TR2",
+        "Siedlisko speedrunnerów",
+        "Jeszcze śliściej O.o",
+        "Krypta strachów",
+        "Zaraz bedzie ciemno!",
+        "Ciemno jak w d..omu yeti"
+      ],
+      "Pickups": {
+        "0": [
+          "Palka zapalka jeden kij",
+          "Ale ze niby co?",
+          "Wesolego jaja",
+          "Kij do Gongbangu",
+          "Skad to sie tu wzielo",
+          "Mikrofon do kontaktu z niebiosami",
+          "Palka od ksylofonu",
+          "Niech jeszcze i to..."
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "^ Tymczasem, ludzie na twitchu ^",
+          "To powinno być w Wenecji",
+          "Urzadzenie maskujace",
+          "Maska podsieci",
+          "255.255.255.0",
+          "Maskarada",
+          "Pamietaj o noszeniu maseczki!",
+          "Fajna maska",
+          "Brzydka maska"
+        ]
+      }
+    },
+
+    "ICECAVE.TR2": {
+      "Names": [
+        "Tybet cz.4",
+        "Kurczak",
+        "Jaskinia Mylna",
+        "Hurtownia drobiu",
+        "Kurczak mrozony",
+        "CHICKEN.TR2",
+        "Lodówka",
+        "Zamrazarka",
+        "Kraina lodu",
+        "Niezbyt wiele lodu",
+        "Czas sie odmrozić",
+        "Kurczak z zamrazarki",
+        "Winston Tu Byl",
+        "Winston zatwierdza ten level",
+        "Wielka lodówka Winstona"
+      ],
+      "Keys": {
+        "1": [
+          "Przepychacz do tego kibla na Dorii",
+          "Banhammer",
+          "Dobre, acz kijowe",
+          "A gdybym byl mlotkowym...",
+          "HTRRRRZZZZZ!!!!!",
+          "Lodolamacz",
+          "Trzymać z dala od dzieci",
+          "Szpikulec do lodu",
+          "Kij perkusisty",
+          "Gongopala"
+        ]
+      },
+      "Pickups": {
+        "1": [
+          "Talion",
+          "Skarb kurczaka",
+          "Otwieraj te drzwi, Lara",
+          "UWOLNIĆ KURCZAKA!",
+          "Nie wiem co to jest, ale to wezme",
+          "Klucz do światyni Xian",
+          "SKARBUŚ",
+          "Biore i spadam"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Mój ryj po 3 godzinach w karnak%",
+          "Opcjonalna maska",
+          "Maska",
+          "Maska podsieci",
+          "255.255.255.0",
+          "A zatem wybrales dev-intended",
+          "Ktoś tego jeszcze uzywa?",
+          "Maska upiekszajaca Lary",
+          "Kassandra"
+        ]
+      }
+    },
+
+    "EMPRTOMB.TR2": {
+      "Names": [
+        "Chiny cz.2",
+        "Światynia memów",
+        "Weź omiń ten level...",
+        "Arachnofobia",
+        "Jaskinia pajaków",
+        "Dolina pulapek",
+        "Koniec balu, tu sie GINIE!",
+        "Pomidorówka",
+        "Wyścig po sztylet",
+        "Kompozycja zamknieta"
+      ],
+      "Keys": {
+        "1": [
+          "Klucz",
+          "Ten klucz",
+          "Klucz 1",
+          "Nadprzewodnik",
+          "Au",
+          "Klucz do drzwi"
+        ],
+        "2": [
+          "Klucz",
+          "Klucz",
+          "Klucz 2",
+          "Ag",
+          "Zwyczajny klucz",
+          "Najgorsze chyba za nami"
+        ],
+        "3": [
+          "Klucz św. Dasha",
+          "Klucz",
+          "Klucz",
+          "Klucz 3",
+          "Jedyny przydatny klucz"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Puzel 1",
+          "Wypelniacz slota w pokoju 41",
+          "Maska na ryj",
+          "Do tych drzwi przy armii z kartonu",
+          "Odblokowuje wiecej pulapek",
+          "To pulapka! O.o"
+        ]
+      }
+    },
+
+    "FLOATING.TR2": {
+      "Names": [
+        "Chiny cz.3",
+        "Latajnik",
+        "Wyspy które lataja",
+        "Wyspy w niebiosach",
+        "Oj, nie unoś sie OwO",
+        "Gdzie ja jestem?",
+        "Zly sen",
+        "Co jest, kur...?",
+        "Na glówke w ogień",
+        "Latajace Lego"
+      ],
+      "Puzzles": {
+        "0": [
+          "Wafel",
+          "Wafel 1",
+          "Wafel A",
+          "Ser i krakersy",
+          "Pieczeć Wybrańców",
+          "Magiczne ciacho",
+          "Ciacho z wrózba"
+        ],
+        "1": [
+          "Wafel",
+          "Wafel 2",
+          "Wafel B",
+          "Ser i krakersy",
+          "Herbatnik",
+          "Pieczeć Wybrańców",
+          "Magiczne ciacho",
+          "Ciacho z wrózba"
+        ]
+      }
+    },
+
+    "XIAN.TR2": {
+      "Names": [
+        "Chiny cz.4",
+        "Kryjówka Bartolego cz.2",
+        "Rok smoka",
+        "Kres smoczego zywota",
+        "Miotacz ognia tylko wiekszy",
+        "Dom Szczerbatka",
+        "Smocza Krypta",
+        "Zmierzch Bartolego",
+        "Pustkowie Smauga",
+        "Rogogon Wegierski",
+        "Nie zabijaj Paarthurnaxa",
+        "Matka wszystkich smoków",
+        "A my, tak latwopalni...",
+        "Nóz, widelec, grill"
+      ],
+      "Puzzles": {
+        "0": [
+          "Wafel",
+          "Wafel",
+          "Ser i krakersy",
+          "Herbatnik",
+          "Pieczeć Wybrańców",
+          "Niejadalny krakers"
+        ],
+        "1": [
+          "Sztylet Xian",
+          "Smoczy Sztylet",
+          "Ojciec wszystkich sztućców",
+          "Ciach ciach",
+          "Nie wyciagać!",
+          "A nóz widelec",
+          "Tego szukasz?",
+          "Nie zgubileś czegoś?",
+          "Sorry, moge to zabrać?",
+          "Nie Excalibur",
+          "Braciszek Excalibura O.o"
+        ]
+      }
+    },
+
+    "HOUSE.TR2": {
+      "Names": [
+        "Nie ma jak w domu",
+        "Gdzie jest Winston?",
+        "Dwór Memów",
+        "Bal maskowy u Croftów",
+        "MEMES.TR2",
+        "W moich skromnych progach",
+        "Pusta lodówka",
+        "No chyba nie...",
+        "Dosyć tego dobrego!",
+        "Nigdy sie nie ucza?",
+        "Lara sama w domu",
+        "Widzieliście zbyt wiele"
+      ],
+      "Keys": {
+        "0": [
+          "Klucz do szafy",
+          "Klucz do zbrojowni",
+          "Klucz",
+          "Klucz",
+          "Tylko nie harpuny...",
+          "Sekretny zaskórniak!",
+          "Klucz do schowka z bronia",
+          "NIE MAM. KURWA. BRONI!",
+          "Trening samoobrony",
+          "Broń do obrony miru domowego"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Sztylet Xian",
+          "Smoczy Sztylet",
+          "Ojciec wszystkich sztućców",
+          "BLENDZIOR!! BLENDZIOR!!! TO CIE CZEKA KUR...",
+          "Nie wyciagać!",
+          "A nóz widelec",
+          "Tego szukasz?",
+          "Nie zgubileś czegoś?",
+          "Sorry, moge to zabrać?",
+          "Nie Excalibur",
+          "Braciszek Excalibura O.o"
+        ]
+      }
+    }
+  }
+}

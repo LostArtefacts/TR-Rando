@@ -1,0 +1,1068 @@
+{
+  "GlobalStrings": [
+    {
+      "GroupedStrings": [
+        {
+          "33": [
+            "Sparkler",
+            "Zippo",
+            "Dazzler",
+            "Flickerer",
+            "Mini-blaze"
+          ],
+          "43": [
+            "Sparkler",
+            "Zippo",
+            "Dazzler",
+            "Flickerer",
+            "Mini-blaze"
+          ]
+        },
+        {
+          "36": [
+            "Erwtenschieters",
+            "Handpistool",
+            "Old Faithfuls",
+            "Pew-Pews",
+            "I'll take two"
+          ],
+          "44": [
+            "Erwtenschieter Magazijnen",
+            "Handpistool Magazijnen",
+            "Old Faithful Magezijnen",
+            "Pew-Pew Magezijnen",
+            "I'll take two Clips"
+          ]
+        },
+        {
+          "37": [
+            "Shotty",
+            "Musket",
+            "Old Faithful",
+            "Genoeg gezien?",
+            "Gutbuster"
+          ],
+          "45": [
+            "Shotty Patronen",
+            "Musket Patronen",
+            "Old Faithful Patronen",
+            "Genoeg gezien? Munitie",
+            "Gutbuster Munitie"
+          ]
+        },
+        {
+          "38": [
+            "Auto's",
+            "Magnum's",
+            "SuperPistols",
+            "Pierre verloor deze",
+            "Ga terug naar Pierre"
+          ],
+          "46": [
+            "Auto Magezijnen",
+            "Magnum Magezijnen",
+            "SuperPistol Magezijnen",
+            "Pierre verloor deze Magezijnen",
+            "Ga terug naar Pierre Magazijnen"
+          ]
+        },
+        {
+          "39": [
+            "UwUzis",
+            "Drrrrrrrrrr",
+            "Sterkervoelen Geweren",
+            "Munitie Vampier",
+            "1000 schoten later..."
+          ],
+          "47": [
+            "UwUzi Magazijnen",
+            "Drrrrrrrrrr Magazijnen",
+            "Sterkervoelen Magezijnen",
+            "Munitie Vampier Magezijnen",
+            "1000 Shoten later Magezijnen"
+          ]
+        },
+        {
+          "40": [
+            "Tik-tik-tik",
+            "Geduld",
+            "Pijl Werper",
+            "Nutteloos",
+            "Zinloos",
+            "Waarom?",
+            "Nee!",
+            "Tandenstoker Werper",
+            "Speer Lanceerder"
+          ],
+          "48": [
+            "Tik-tik-tiks",
+            "Geduld Munitie",
+            "Pijlen",
+            "Nuttelose Munitie",
+            "Zinloose Munitie",
+            "Waarom? Munitie",
+            "Nee Munitie",
+            "Tandenstekers",
+            "Speren"
+          ]
+        },
+        {
+          "41": [
+            "MP3 Speler",
+            "MPEG",
+            "Niet de MP5",
+            "Grote Drrrrrrrrrr"
+          ],
+          "49": [
+            "MP3 Magazijnen",
+            "MPEG Magazijnen",
+            "Niet de MP5 Magazijnen",
+            "Grote Drrrrrrrrrr Magazijnen"
+          ]
+        },
+        {
+          "42": [
+            "Nade Blaster",
+            "Explosieve Levering",
+            "Vijand Gebraden",
+            "Patronen Lanceerder",
+            "Ananas Verzonden",
+            "Grote Knal",
+            "Grote Gedonder",
+            "Blaas het op!"
+          ],
+          "50": [
+            "Nades",
+            "Explosieven",
+            "Vuurballen",
+            "Patronen",
+            "Ananassen",
+            "Grote Knallen",
+            "Grote Gedonders",
+            "Blaas het op! Munitie"
+          ]
+        },
+        {
+          "51": [
+            "Minuskuul Medi Pack",
+            "Wee Medi Pack",
+            "Kleine Medi Pack",
+            "Compact Medi Pack",
+            "Bijou Medi Pack",
+            "Baby Booboo Maker"
+          ],
+          "52": [
+            "Gigantische Medi Pack",
+            "Enorme Medi Pack",
+            "Titanic Medi Pack",
+            "Massieve Medi Pack",
+            "Mahoosive Medi Pack",
+            "Grote Booboo Maker"
+          ]
+        }
+      ],
+      "StandaloneStrings": {
+        "2": [
+          "DINGEN",
+          "SPULLEN",
+          "PICKUPS",
+          "BUIT",
+          "ROMMEL",
+          "OW GLIMMEND",
+          "MIJN LIEVELING"
+        ],
+        "3": [
+          "LARA GING DOOD",
+          "PROBEER OPNIEUW?",
+          "PROBEER OPNIEUW? DOE GEWOON GOED",
+          "VOLGENDE KEER BETER",
+          "GIT GUD",
+          "WOEDE STOPPEN",
+          "NLNMAS volgende?"
+        ],
+        "35": [
+          "Stats",
+          "Vitale Stats",
+          "Rekenwerk",
+          "GEEN MEDS TOEGESTAAN!",
+          "Geheim Spoorzoeker!"
+        ],
+        "57": [
+          "Croft's Landhuis",
+          "Core Design HQ",
+          "TR2Rando HQ",
+          "Lara's graaft",
+          "Winston's Koelkast",
+          "Ontdooi Winston!"
+        ]
+      }
+    },
+    {
+      "StandaloneStrings": {
+        "15": [
+          "- NUL -",
+          "- NIKS HIER -",
+          "- UNDEFINED -",
+          "- HEY, DEZE SLOT IS VRIJ -"
+        ]
+      }
+    }
+  ],
+
+  "LevelStrings": {
+    "WALL.TR2": {
+      "Names": [
+        "China Deel 1",
+        "De Neppe Muur",
+        "De Verschikkelijke Muur",
+        "De Bakstenen Muur",
+        "De Muur of Memes",
+        "Niet Zichtbaar vanuit de Ruimte",
+        "Bijna Xian",
+        "T-Rex Schuilplaats",
+        "Verloren Vallei",
+        "De weg naar Xian"
+      ],
+      "Keys": {
+        "0": [
+          "Sleutel voor Kamer 4",
+          "Memehuis Sleutel",
+          "Een Sleutel",
+          "De Key",
+          "Sleutel 1",
+          "Sleutel A",
+          "Deze Sleutel",
+          "Mischien Sleutel 1?",
+          "Mischien Sleutel 2?"
+        ],
+        "1": [
+          "Spinnen Sleutel",
+          "knappige Sleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 2",
+          "Sleutel B",
+          "Die Sleutel",
+          "Mischien Sleutel 1?",
+          "Mischien Sleutel 2?",
+          "Een andere Sleutel O.o"
+        ]
+      }
+    },
+
+    "BOAT.TR2": {
+      "Names": [
+        "Italie Deel 1",
+        "Speedboot",
+        "BOOT.TR2",
+        "Violen 'n' Mijnen",
+        "Gondola Stad",
+        "Vliegende Stad",
+        "De Italiaanse Baan",
+        "Dood in Venetië",
+        "Ver Van Huis",
+        "Dat is Amore"
+      ],
+      "Keys": {
+        "0": [
+          "Bootje Hoofd McSleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 1",
+          "Sleutel A",
+          "Snelle Sleutel",
+          "Nutteloos in Speedruns",
+          "Laat Los de Boot",
+          "Zeil Toegang",
+          "Boot Garage"
+        ],
+        "1": [
+          "Sleutel voor Kamer 82",
+          "Metalen Sleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 2",
+          "Sleutel B",
+          "Deur Opener",
+          "Geen Lockpick",
+          "Deze Sleutel"
+        ],
+        "2": [
+          "Strijkplanksleutel",
+          "Ijzeren Vuist Sleutel",
+          "Ijzeren Vrouw",
+          "IJzeren Gordijn Sleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 3",
+          "Sleutel C",
+          "Die Sleutel"
+        ]
+      }
+    },
+
+    "VENICE.TR2": {
+      "Names": [
+        "Italy Part 2",
+        "Bartoli's Hideout",
+        "Bartoli's Bolthole",
+        "Bartoli's Lair",
+        "Where's Bartoli?",
+        "Bartoli's Ruins",
+        "Chandeliers",
+        "The Mona Lisa",
+        "Go Out With a Bang"
+      ],
+      "Keys": {
+        "0": [
+          "Bookroom Key",
+          "A Key",
+          "The Key",
+          "Key 1",
+          "Key A",
+          "Silent Key",
+          "SILENCE! I'll Kill You!",
+          "Library Card",
+          "It's a Rental!",
+          "Don't Anger Librarians",
+          "Restricted Section Key",
+          "Secret Stash Key",
+          "Alohomora"
+        ],
+        "1": [
+          "TNT Key",
+          "Blast Key",
+          "Explosion Key",
+          "Flipmap Key",
+          "A Key",
+          "The Key",
+          "Key 2",
+          "Key B",
+          "Boom Boom Key",
+          "Big Boom Key",
+          "Blow-up Key",
+          "BANG!",
+          "Don't Drop, Will Blow!"
+        ]
+      }
+    },
+
+    "OPERA.TR2": {
+      "Names": [
+        "Italie Deel 3",
+        "Niet de Sydney Operahuis",
+        "Spook van de Opera",
+        "La Bohème",
+        "La Triviata",
+        "Madama Vlinder",
+        "Rigoletto",
+        "De Magische Fluit",
+        "De Show Moet Door Gaan",
+        "Showtime!",
+        "Bereid de Vloer Show"
+      ],
+      "Keys": {
+        "0": [
+          "Luxe Sleutel",
+          "Chique Sleutel",
+          "Opzichtige Sleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 1",
+          "Sleutel A",
+          "Opera Sleutel",
+          "De Sleutel voor de Deur",
+          "Wiebelige Vloer Sleutel",
+          "C Sharp"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Puzzel 1",
+          "Lift Fixer",
+          "Lift Fixer",
+          "Opvoeddoos",
+          "Straal mij Omhoog Scotty!",
+          "Niet op Rood Alarm",
+          "Ding",
+          "Geen Music Fix"
+        ],
+        "1": [
+          "Puzzel 2",
+          "Moederbord",
+          "ACME Moederbord",
+          "PC Pro 97",
+          "Beoordeel mijn Setup",
+          "Doorweekt Circuit",
+          "Waarom werkt dat?",
+          "Natte Ciruit",
+          "NVIDIA560"
+        ]
+      }
+    },
+
+    "RIG.TR2": {
+      "Names": [
+        "De Tuig",
+        "Opgegetuigd",
+        "RIG.TR2",
+        "Adriatishe Zee",
+        "Grote Olie Toren",
+        "Vervuiling",
+        "Waarom ben ik hier?",
+        "Wapenloos",
+        "Kater",
+        "Hoofdpijn",
+        "Gezondheids en Veiligheidsrisico"
+      ],
+      "Keys": {
+        "0": [
+          "Drijfzand Kaart",
+          "Ton Doorgangskaart",
+          "Doorgangskaart 2",
+          "Neppe ID 1",
+          "Laag Level Toegang",
+          "Visa Express",
+          "Niet Draaien"
+        ],
+        "1": [
+          "QWOP Plek Kaart",
+          "Doe Die Alarm Uit",
+          "Doorgangskaart 1",
+          "Neppe ID 2",
+          "Midden Level Toegang",
+          "Mastercard Express",
+          "Niet Breken"
+        ],
+        "2": [
+          "Kaart voor Kamer 37",
+          "Onnodige Kaart",
+          "Doorgangskaart",
+          "Neppe ID 3",
+          "Hoog Level Toegang",
+          "American Express",
+          "Niet Buigen"
+        ]
+      }
+    },
+
+    "PLATFORM.TR2": {
+      "Names": [
+        "Olieboorplatform Deel 2",
+        "Platform",
+        "Speurtocht voor een Moederbord",
+        "Oke, Marco",
+        "De Lange Ladder",
+        "En Ze Klom Voor Altijd",
+        "De Gele Onderzeeër",
+        "Let op de Zaag"
+      ],
+      "Keys": {
+        "0": [
+          "Kaart voor Kamer 12",
+          "Niet geïdentificeerd Doorgangskaart",
+          "Doorgangskaart 2",
+          "Lara's ID Kaart",
+          "Niet Breken!"
+        ],
+        "3": [
+          "Kaart voor Kamer 49",
+          "niet geïdentificeerd Doorgangskaart",
+          "Doorgangskaart 1",
+          "Winstons ID Kaart",
+          "Niet Buigen!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Moederbord",
+          "ACME Moederbord",
+          "PC Pro 97",
+          "Beoordeel mijn Setup",
+          "Hoe werkt dit?",
+          "Windows 95",
+          "Is het waterproef?",
+          "Enkele Oproepprocessor",
+          "Intel Celeron"
+        ]
+      }
+    },
+
+    "UNWATER.TR2": {
+      "Names": [
+        "Onderwater Deel 1",
+        "73.152 Meter",
+        "240 Voet",
+        "Tetanus Waarschuwing",
+        "Duik Meisje, DUIK!",
+        "Duik Door de Boot",
+        "Water n Water n Water",
+        "Niet Echt De Titanic",
+        "Het is 84 Jaar Geleden",
+        "Volg de Afval",
+        "Onder de Zee"
+      ]
+    },
+
+    "KEEL.TR2": {
+      "Names": [
+        "Onderwater Deel 2",
+        "Deze Boot Ligt Ondersteboven",
+        "Tetanus Rood Alarm",
+        "Kiel",
+        "WRECK.TR2",
+        "KEEL.TR2",
+        "De Drie Brekers",
+        "Anti-Zwaartekrachtschip",
+        "Gesloopt"
+      ],
+      "Keys": {
+        "0": [
+          "Toilet Sleutel",
+          "Badkamer Sleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 1",
+          "Sleutel A",
+          "Wat is een toilet?"
+        ],
+        "1": [
+          "Knappige Sleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 2",
+          "Sleutel B",
+          "Sleutel tot een Deur"
+        ],
+        "2": [
+          "Kamer Sleutel",
+          "Wie Niet",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 3",
+          "Sleutel C",
+          "Nieuwe Sleutel?",
+          "Waar is deze Slot?"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Brandbreker",
+          "T-Vormige Puzzel",
+          "Brandblusser",
+          "Geen water beschikbaar!",
+          "Dit meisje staat in de brand!",
+          "Verbrandt niet!"
+        ]
+      }
+    },
+
+    "LIVING.TR2": {
+      "Names": [
+        "Onderwater Deel 3",
+        "LEVEN.TR2",
+        "Verschuif de Zuigers",
+        "Filler Aflevering",
+        "Levende Derden",
+        "Levende Kwinten",
+        "Doelloos Level",
+        "Niemand Thuis",
+        "Leveloze Kamers"
+      ],
+      "Keys": {
+        "0": [
+          "Dramatische Sleutel",
+          "Melodramatische Sleutel",
+          "Tragische Sleutel",
+          "Shakespeare's Sleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 1",
+          "Sleutel A",
+          "Opera Sleutel",
+          "De Show moet doorgaan!"
+        ],
+        "1": [
+          "Korstige Sleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 2",
+          "Sleutel B",
+          "Een Sleutel",
+          "Kamer Opener",
+          "Moet gepoetst worden!"
+        ]
+      }
+    },
+
+    "DECK.TR2": {
+      "Names": [
+        "Onder water-ig Deel 4",
+        "De Zoektocht naar Sleutels",
+        "DEK.TR2",
+        "Zoektocht naar de Seraph",
+        "Ijsberg Wint",
+        "Grote Luchtzak"
+      ],
+      "Keys": {
+        "1": [
+          "Strenge Sleutel",
+          "Harde Sleutel",
+          "Wreede Sleutel",
+          "Vastbesloten Sleutel",
+          "Opslagsleutel",
+          "Opslagsleutel?",
+          "Niet de Opslagsleutel",
+          "Absoluut niet de Opslagsleutel",
+          "Opent een deur",
+          "Welke sleutel?",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 1",
+          "Sleutel A"
+        ],
+        "2": [
+          "Opslagsleutel",
+          "Opslagsleutel?",
+          "Vreemde Sleutel",
+          "Strenge Sleutel",
+          "Kajuit Sleutel",
+          "Seraph Sleutel",
+          "Sleutel voor Kamer 105",
+          "Welke Sleutel?",
+          "Opent een deur",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 2",
+          "Sleutel B"
+        ],
+        "3": [
+          "Kajuit Sleutel",
+          "Kamer Sleutel",
+          "Sleutel voor de Deur",
+          "Opslagsleutel",
+          "Opslagsleutel?",
+          "Niet de Opslagsleutel",
+          "Opent een deur",
+          "Welke Sleutel?",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 3",
+          "Sleutel C"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "De Engel",
+          "De Cherubijn",
+          "Puzzle 1",
+          "Standbeeld",
+          "Geen Sleutel",
+          "Monniken Relikwie",
+          "Monnikenschat"
+        ]
+      }
+    },
+
+    "SKIDOO.TR2": {
+      "Names": [
+        "Tibet Deel 1",
+        "Skidoo Sneeuwscooter",
+        "Give me een Hutsleutel",
+        "Crash Site",
+        "Glad Oppervlakte",
+        "Lara kan niet vliegen",
+        "Vliegtuig landing gefaal",
+        "Dat zijn mooie stenen",
+        "Lawine",
+        "Sneeuwscooter: De Wraak",
+        "Sneeuwscooter Gekte",
+        "Een sneeuwpop bouwen"
+      ],
+      "Keys": {
+        "0": [
+          "Ophaalbrug Sleutel",
+          "Nutteloze Sleutel",
+          "Niet degene",
+          "Niet de hutsleutel",
+          "Hutsleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 1",
+          "Sleutel A",
+          "Je doet me opleven",
+          "Maak een platformsleutel"
+        ],
+        "1": [
+          "Hutsleutel",
+          "Hutsleutel?",
+          "Tibet Overslaan Sleutel",
+          "Niet de ophaalbrugsleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 2",
+          "Sleutel B",
+          "DE SLEUTEL!!!",
+          "Speedrun Sleutel",
+          "Meeste Gezocht!",
+          "Binnensleutel"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "De Engel",
+          "De Cherubijn",
+          "Puzzle 1",
+          "Standbeeld",
+          "Geen sleutel",
+          "Monniken Relikwie",
+          "Monniken Schat"
+        ]
+      }
+    },
+
+    "MONASTRY.TR2": {
+      "Names": [
+        "Tibet Deel 2",
+        "Red de Monniken",
+        "Schiet niet op de monniken",
+        "Barkhang Boos",
+        "Steel die voertuigen",
+        "Bid voor de Monniken",
+        "Klooster Groot Alarm",
+        "Bedrieg Glitch Niet!",
+        "Kogelvrije Monniken",
+        "Keyhang Klooster",
+        "Geen Zussen act"
+      ],
+      "Keys": {
+        "0": [
+          "Zwakke Kamersleutel",
+          "VoelSterker Sleutel",
+          "Sleutel voor een Sleutel"
+        ],
+        "1": [
+          "Ach, arme sleutel",
+          "Buitensleutel 1",
+          "Laten we hier weggaan?",
+          "Sleutel voor geen kamer?",
+          "Achterdeur sleutel"
+        ],
+        "2": [
+          "Nep Rotsleutel",
+          "Kortere weg naar de top",
+          "Schimmige ogen sleutel",
+          "Buitensleutel 2"
+        ],
+        "3": [
+          "TR2Hoofdhal sleutel",
+          "Memehal sleutel",
+          "Grote Kamersleutel",
+          "Niet Snoekduiken Sleutel",
+          "Boeddha Sleutel",
+          "Lobby Sleutel"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Als een gebedsmolen",
+          "Maniwiel",
+          "Chenwiel",
+          "Heilig wiel",
+          "Madonnawiel",
+          "Wie heeft dit wiel uitgevonden?",
+          "Vermoeide Helper"
+        ],
+        "1": [
+          "Diamanten",
+          "Barkhang Buit",
+          "Edelstenen tonen",
+          "Hmm Glimmend!",
+          "18 Karaat"
+        ],
+        "3": [
+          "De Engel",
+          "De Cherubijn",
+          "Puzzle 3",
+          "Standbeeld",
+          "Geen Sleutel",
+          "Monniken Relikwie",
+          "Monniken Schat",
+          "Tijd om gedag te zeggen!"
+        ]
+      }
+    },
+
+    "CATACOMB.TR2": {
+      "Names": [
+        "Tibet Deel 3",
+        "CvdT",
+        "Grotten van het paasei",
+        "Catacombe.TR2",
+        "Yeti Gekte",
+        "Het is ijzig hier",
+        "Catracomben van Verschrikkingen",
+        "Het is donker hier!",
+        "Donkere Yeti Kamer"
+      ],
+      "Pickups": {
+        "0": [
+          "Gong Hamer?",
+          "Wacht, wat?",
+          "Gelukkig Pasen",
+          "Um, Meneer Gong? Ha!",
+          "Dit hoort hier niet",
+          "...???",
+          "Xylofoon Stok",
+          "Nou, wat dan ook!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Gezichtsmasker",
+          "Een Masker",
+          "Het Masker",
+          "Subnetmasker",
+          "255.255.255.0",
+          "Maskerade",
+          "Draag een masker!",
+          "Mooi Masker",
+          "Lelijk Masker"
+        ]
+      }
+    },
+
+    "ICECAVE.TR2": {
+      "Names": [
+        "Tibet Deel 4",
+        "De Kip",
+        "Ijsgrot",
+        "Territorium van Gevogelte",
+        "Bevroren Kip",
+        "Kip.TR2",
+        "De Koelkast",
+        "De Vriezer",
+        "Arendelle",
+        "Niet zo ijsgrot",
+        "Tijd om te ontdooien!",
+        "Kip Ontdooien",
+        "Winston was hier!",
+        "Winston keurt goed!",
+        "Winston's grote koelkast"
+      ],
+      "Keys": {
+        "1": [
+          "Meneer Gong Hamer",
+          "De Hamer",
+          "Goede Gong",
+          "Henry de hamer",
+          "BOOOOOIIIIINGGGGGG",
+          "Ijsbreker",
+          "Blijf weg van de kinderen",
+          "Ijspriem",
+          "Trommelstok",
+          "Gong Slaghamer"
+        ]
+      },
+      "Pickups": {
+        "1": [
+          "Vergelding",
+          "Kippenschat",
+          "Open die deur, Lara",
+          "Bevrijdt de kip!",
+          "Gouden Dingetje",
+          "Xian Deursleutel",
+          "Glimmend!",
+          "Hier en weer weg!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Gezichtsmasker",
+          "Masker dat kan worden overgeslagen",
+          "Het masker",
+          "Subnetmasker",
+          "255.255.255.0",
+          "Geen Balkonskip",
+          "Wie gebruikt dit nog?",
+          "Lara's Schoonheidsmasker",
+          "Cassandra"
+        ]
+      }
+    },
+
+    "EMPRTOMB.TR2": {
+      "Names": [
+        "China Deel 2",
+        "Tempel van Memes",
+        "Doe de Xian Skip",
+        "Inzy Winzy Spin",
+        "Spiiiiiinnengrot",
+        "Doodsval Vallei",
+        "You gaat sterven!",
+        "Tomatensoep",
+        "Race naar de dolk",
+        "Volle Cirkel"
+      ],
+      "Keys": {
+        "1": [
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 1",
+          "Electrische Geleider",
+          "Au",
+          "Sleutel voor een deur"
+        ],
+        "2": [
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 2",
+          "Ag",
+          "Maar een Sleutel",
+          "Je hebt de spinnen overleefd!"
+        ],
+        "3": [
+          "TR2Hoofdkamersleutel",
+          "Een Sleutel",
+          "De Sleutel",
+          "Sleutel 3",
+          "De enige sleutel die je nodig hebt"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Puzzel 1",
+          "Kamer 41 Slotvuller",
+          "Gezichtsmasker",
+          "Terracottakamer opener",
+          "Opent meer vallen!",
+          "Het is een val!"
+        ]
+      }
+    },
+
+    "FLOATING.TR2": {
+      "Names": [
+        "China deel 3",
+        "Zwever",
+        "Eilanden die zweven",
+        "Eilanden in de lucht",
+        "Deze dingen vliegen OwO",
+        "Waar ben ik?",
+        "Lara's Droom",
+        "Wat de hel?",
+        "Snopekduik in vuur",
+        "Zwevende Lego"
+      ],
+      "Puzzles": {
+        "0": [
+          "Een cracker",
+          "Cracker 1",
+          "Cracker A",
+          "Kaas en Crackers",
+          "Kliekige Stempel",
+          "Magisch koekje",
+          "Gelukskoekje"
+        ],
+        "1": [
+          "Een cracker",
+          "Cracker 2",
+          "Cracker B",
+          "Kaas en crackers",
+          "Graham Cracker",
+          "Kliekige Stempel",
+          "Magisch koekje",
+          "Gelukskoekje"
+        ]
+      }
+    },
+
+    "XIAN.TR2": {
+      "Names": [
+        "China deel 4",
+        "Bartoli's Schuilplaats Deel 2",
+        "Jaar van de draak",
+        "Ondergang van de draak",
+        "Grote Vlammenwerper",
+        "Tandloos huis",
+        "Grafkelder van de draak",
+        "Bartoli's Einde",
+        "Smaug's Hol",
+        "Niet een Hongaarse Hoornstaart",
+        "Dood Paarthurnax niet",
+        "Lara, moeder van draken",
+        "Je kan me niet verbrande!",
+        "Standbeelden, messen en vuur"
+      ],
+      "Puzzles": {
+        "0": [
+          "Een Cracker",
+          "De Cracker",
+          "Kaas en Crackers",
+          "Graham Cracker",
+          "Kliekige Stempel",
+          "Niet eetbare Cracker"
+        ],
+        "1": [
+          "Xian Buit",
+          "Drakendolk",
+          "Groot Mes",
+          "Steekend Steekend",
+          "Trek me er niet uit!",
+          "Het Lemmet",
+          "Op zoek naar dit?",
+          "Was je dit verloren?",
+          "Sorry, had je dit nodig?",
+          "Niet Excalibur",
+          "Excalibur's kleine broertje"
+        ]
+      }
+    },
+
+    "HOUSE.TR2": {
+      "Names": [
+        "HSH",
+        "Waar is Winston?",
+        "Huis van Memes",
+        "Funhouse",
+        "Memes.TR2",
+        "Mijn nederig stulpje",
+        "Leeg Koelkasthuis",
+        "Geef me een pauze!",
+        "Ik haat alles",
+        "Geven ze ooit op?",
+        "Niet alleen thuis",
+        "Genoeg gezien?"
+      ],
+      "Keys": {
+        "0": [
+          "Kastsleutel",
+          "Arsenaalsleutel",
+          "De Sleutel",
+          "Een Sleutel",
+          "Alsjeblieft geen Harpoensleutel",
+          "Lara's geheime opbergplaats",
+          "Wapencachesleutel",
+          "Geef me de boem boem sleutel",
+          "Zelfverdedigingstrainingsleutel",
+          "Wapenkamersleutel"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Xian Buit",
+          "Drakendolk",
+          "Groot mes",
+          "Stekend Stekend",
+          "Trek me er niet uit!",
+          "Het Lemmet",
+          "Op zoek naar dit?",
+          "Was je dit verloren?",
+          "Sorry, had je dit nodig?",
+          "Niet Excalibur",
+          "Excalibur's kleine broertje"
+        ]
+      }
+    }
+  }
+}

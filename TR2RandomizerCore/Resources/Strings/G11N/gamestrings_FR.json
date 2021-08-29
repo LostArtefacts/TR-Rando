@@ -1,0 +1,1065 @@
+{
+  "GlobalStrings": [
+    {
+      "GroupedStrings": [
+        {
+          "33": [
+            "Cierge Magique",
+            "Briquet Zippo",
+            "Lumière !",
+            "Ça brille",
+            "P'tite flamme"
+          ],
+          "43": [
+            "Cierge Magique",
+            "Briquet Zippo",
+            "Lumière !",
+            "Ça brille",
+            "P'tite flamme"
+          ]
+        },
+        {
+          "36": [
+            "Sarbacanes",
+            "Revolvers",
+            "Vieux Flingues",
+            "Pan-Pan",
+            "La paire"
+          ],
+          "44": [
+            "Boulettes pour Sarbacanes",
+            "Munitions pour Revolvers",
+            "Munitions pour Vieux Flingues",
+            "Munitions pour Pan-Pan",
+            "Munitions pour La paire"
+          ]
+        },
+        {
+          "37": [
+            "Fusil",
+            "Mousquet",
+            "Le Vieux Fidèle",
+            "T'as ton Compte ?",
+            "Éclate Tripes"
+          ],
+          "45": [
+            "Cartouche pour Fusil",
+            "Cartouche pour Mousquet",
+            "Cartouches pour Le Vieux Fidèle",
+            "Cartouches pour T'as ton Compte ?",
+            "Cartouches pour Éclate Tripes"
+          ]
+        },
+        {
+          "38": [
+            "Au Tomates",
+            "Magnums",
+            "Supers Pistolets",
+            "Pistolets de Pierre",
+            "Souvenirs de Pierre"
+          ],
+          "46": [
+            "Munitions pour Au Tomates",
+            "Munitions pour Magnum",
+            "Munitions pour Supers Pistolets",
+            "Munitions pour Pistolets de Pierre",
+            "Munitions pour Souvenirs de Pierre"
+          ]
+        },
+        {
+          "39": [
+            "UwUzis",
+            "Drrrrrrrrrr",
+            "Tatatatatata",
+            "Vide balles",
+            "1000 balles plus tard..."
+          ],
+          "47": [
+            "Munitions pour UwUzi",
+            "Munitions pour Drrrrrrrrrr",
+            "Munitions pour Tatatatatata",
+            "Munitions pour Vide balles",
+            "Munitions pour 1000 balles plus tard"
+          ]
+        },
+        {
+          "40": [
+            "Tick-tick-tick",
+            "Patience",
+            "Arbalète",
+            "Je sers à rien",
+            "Inutile",
+            "Pourquoi ?",
+            "Non !",
+            "Lance Cure-dents",
+            "Lance Lances"
+          ],
+          "48": [
+            "Ticks pour Tick-tick-tick",
+            "Munitions pour Patience",
+            "Carreaux pour Arbalète",
+            "Munitions qui servent à rien",
+            "Munitions Inutiles",
+            "Munitions Pourquoi faire ?",
+            "Pas de Munitions",
+            "Cure-dents",
+            "Lances pour Lance Lances"
+          ]
+        },
+        {
+          "41": [
+            "MP3",
+            "MPEG",
+            "C'est pas un MP5",
+            "Drrrrrrrrrr"
+          ],
+          "49": [
+            "Piles AAA pour MP3",
+            "Munitions pour MPEG",
+            "Munitions pour le M16 et c'est tout",
+            "Munitions pour Drrrrrrrrrr"
+          ]
+        },
+        {
+          "42": [
+            "L'exploseur",
+            "Diarrhée Explosive",
+            "Lance Bombes",
+            "Lance Boules",
+            "Jet d'Ananas",
+            "Big Bang",
+            "Big Boom",
+            "Ça explose tout"
+          ],
+          "50": [
+            "Grenades pour L'exploseur",
+            "Laxatif",
+            "Bombes",
+            "Boules",
+            "Ananas",
+            "Big Bangs",
+            "Big Booms",
+            "Grenades pour Ça explose tout"
+          ]
+        },
+        {
+          "51": [
+            "Mini Trousse",
+            "P'tit Soin",
+            "Petite Trousse",
+            "Soin de poche",
+            "Aaaaw",
+            "Pansement"
+          ],
+          "52": [
+            "Mega Trousse",
+            "Gros Soin",
+            "Énorme Trousse",
+            "Soin 2 en 1",
+            "Aaaaaaaaawwww",
+            "Compresse"
+          ]
+        }
+      ],
+      "StandaloneStrings": {
+        "2": [
+          "TRUCS",
+          "MACHINS",
+          "TROUVAILLES",
+          "TRÉSORS",
+          "POUBELLE",
+          "OH ÇA BRILLE",
+          "MON PRÉCIEUX"
+        ],
+        "3": [
+          "LARA EST MORTE",
+          "RÉESSAYER ?",
+          "HAHA !!!",
+          "PLUS DE CHANCE LA PROCHAINE FOIS",
+          "T'ES NUL",
+          "RAGE QUIT !",
+          "ENCORE ?!"
+        ],
+        "35": [
+          "Stats",
+          "Stats Vitals",
+          "Des nombres",
+          "PAS DE SOINS !",
+          "Secrets très secrets!"
+        ],
+        "57": [
+          "Manoir de Crofts",
+          "Tutoriel",
+          "Grande Maison",
+          "Chez Lara",
+          "Winston est dans le frigo",
+          "Prout, Oooh..."
+        ]
+      }
+    },
+    {
+      "StandaloneStrings": {
+        "15": [
+          "- Rien -",
+          "- Y a rien -",
+          "- À remplir -",
+          "- Emplacement libre -"
+        ]
+      }
+    }
+  ],
+
+  "LevelStrings": {
+    "WALL.TR2": {
+      "Names": [
+        "Chine Partie 1",
+        "La Fausse Muraille",
+        "Mur de merde",
+        "Tas de briques",
+        "Le Mur de la Honte",
+        "Coin oublié",
+        "Spoil Vers Xian",
+        "Y a des T-Rex",
+        "Vallée Perdue 2.0",
+        "Niveau 1"
+      ],
+      "Keys": {
+        "0": [
+          "Clé de la chambre 4",
+          "Déclenche Tigre",
+          "Une clé",
+          "La clé",
+          "Clé 1",
+          "Clé A",
+          "C'est une clé",
+          "Clé 1 ?",
+          "Clé 2 ?"
+        ],
+        "1": [
+          "Clé des Araignées",
+          "Clé Brouillée",
+          "Une clé",
+          "La clé",
+          "Clé 2",
+          "Clé B",
+          "C'est aussi une clé",
+          "Clé 2 ?",
+          "Clé 1 ?",
+          "Encore une clé ?"
+        ]
+      }
+    },
+
+    "BOAT.TR2": {
+      "Names": [
+        "Italie Partie 1",
+        "Bateau à moteur",
+        "BATEAU.TR2",
+        "Violons et Mines",
+        "Gondole City",
+        "Ville Innondée",
+        "Canneaux",
+        "Mort à Venise",
+        "Loin de chez Lara",
+        "Routes mouillées"
+      ],
+      "Keys": {
+        "0": [
+          "Clé pour le bateau",
+          "Une clé",
+          "La clé",
+          "Clé 1",
+          "Clé A",
+          "Clé qui ouvre une porte",
+          "Inutile en speedrun",
+          "Lachez le bateau !",
+          "Accès au quai",
+          "Garage à bateau"
+        ],
+        "1": [
+          "Clé de la chambre 82",
+          "Clé en métal",
+          "Une clé",
+          "La clé",
+          "Clé 2",
+          "Clé B",
+          "Ça ouvre une porte",
+          "C'est pas un crochet",
+          "Clé en forme de clé"
+        ],
+        "2": [
+          "Tige de fer",
+          "Clé",
+          "Dame de Fer",
+          "Oui c'est une clé",
+          "Une clé",
+          "La clé",
+          "Clé 3",
+          "Clé C",
+          "Clé des champs"
+        ]
+      }
+    },
+
+    "VENICE.TR2": {
+      "Names": [
+        "Italie Partie 2",
+        "Bartoli",
+        "Cachette de Bartoli",
+        "Où est Bartoli?",
+        "Ruines Bartoli",
+        "Chandeliers",
+        "Mona Lisa",
+        "Maison dans l'eau"
+      ],
+      "Keys": {
+        "0": [
+          "Clé des livre",
+          "Une clé",
+          "La clé",
+          "Clé 1",
+          "Clé A",
+          "Clé du silence",
+          "Chut ou je te bute",
+          "Passe bouquin",
+          "Faut rendre les livres",
+          "Pas de bruit",
+          "Accès VIP",
+          "C'est une clé",
+          "Alohomora"
+        ],
+        "1": [
+          "TNT",
+          "Clé qui fait BOOM",
+          "Clé explosive",
+          "Clé qui change le niveau",
+          "Une clé",
+          "La clé",
+          "Clé 2",
+          "Clé B",
+          "Oubli pas le secret",
+          "Clé facultative",
+          "Clé qui ne sert pas",
+          "Ça va péter !",
+          "Grimpe par le toit"
+        ]
+      }
+    },
+
+    "OPERA.TR2": {
+      "Names": [
+        "Italie Partie 3",
+        "Apéro",
+        "Le Fantôme de l'Opéra",
+        "La Bohème",
+        "La Triviata",
+        "Madame Butterfly",
+        "Rigoletto",
+        "La Flûte Magique",
+        "Le niveau skipable",
+        "Showtime !",
+        "Le spéctacle commence"
+      ],
+      "Keys": {
+        "0": [
+          "Jolie clé",
+          "Clé polie",
+          "Clé de luxe",
+          "Une clé",
+          "La clé",
+          "Clé 1",
+          "Clé A",
+          "Clé de l'Opera",
+          "Clé qui ouvre une porte",
+          "C'est une clé",
+          "Clé"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Puzzle 1",
+          "Acenseur",
+          "Répare Acsenceur",
+          "C'est pas une clé",
+          "Pour réparer un truc",
+          "Qui à laissé ça là ?",
+          "Ding",
+          "À mettre quelque part"
+        ],
+        "1": [
+          "Puzzle 2",
+          "Motherboard",
+          "ACME Motherboard",
+          "PC Pro 97",
+          "Reboot",
+          "Circuits cuits",
+          "Ça marche encore ?",
+          "Qui à foutu ça là ?",
+          "NVIDIA560"
+        ]
+      }
+    },
+
+    "RIG.TR2": {
+      "Names": [
+        "Plate-forme",
+        "Prison",
+        "RIG.TR2",
+        "Mer Adriatique",
+        "Tour à pétrol",
+        "Pollution",
+        "Où-suis-je ?",
+        "Sans armes ?",
+        "Mes flingues !",
+        "La migraine",
+        "Allume une torche"
+      ],
+      "Keys": {
+        "0": [
+          "Carte presque rose",
+          "Carte des barils",
+          "Carte 1",
+          "Fausse ID 1",
+          "Accès de niveau 1",
+          "Visa Express",
+          "Ne pas perdre"
+        ],
+        "1": [
+          "Carte presque orange",
+          "Stop cette alarme !",
+          "Carte 2",
+          "Fausse ID 2",
+          "Accès de niveau 2",
+          "Mastercard Express",
+          "Ne pas casser"
+        ],
+        "2": [
+          "Carte presque... bleu ?",
+          "Carte inutile",
+          "Carte 3",
+          "Fausse ID 3",
+          "Accès de niveau 3",
+          "American Express",
+          "Ne pas manger"
+        ]
+      }
+    },
+
+    "PLATFORM.TR2": {
+      "Names": [
+        "Suite du niveau précédent",
+        "Plate-forme 2",
+        "Bain d'acide",
+        "OK Marco",
+        "La grande échelle",
+        "Échelle de merde",
+        "Sous-marin jaune",
+        "Embrasse la scie"
+      ],
+      "Keys": {
+        "0": [
+          "Carte pas bleue",
+          "Carte inconnue",
+          "Carte 1",
+          "Carte d'identitée",
+          "Ne pas mâcher"
+        ],
+        "3": [
+          "Carte pas rouge",
+          "Carte inconnue",
+          "Carte 2",
+          "Carte Bancaire",
+          "Ne pas avaler"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Motherboard",
+          "ACME Motherboard",
+          "PC Pro 97",
+          "Reboot",
+          "Ça marche encore ?",
+          "Windows 95",
+          "Résistant à l'eau ?",
+          "Truc vert",
+          "Intel Celeron"
+        ]
+      }
+    },
+
+    "UNWATER.TR2": {
+      "Names": [
+        "Sous l'eau partie 1",
+        "73.152 Mètres",
+        "240 Pieds",
+        "Requin !",
+        "Plonge ma fille, PLONGE !",
+        "C'est derrière toi",
+        "Water n Water n Water",
+        "Titanic le retour",
+        "84 plus tard...",
+        "Suit les caisses",
+        "Sous l'océan"
+      ]
+    },
+
+    "KEEL.TR2": {
+      "Names": [
+        "Sous l'eau partie 2",
+        "Bateau à l'envers",
+        "Uaetab",
+        "Anguilles",
+        "WRECK.TR2",
+        "ANGUILLE.TR2",
+        "Tout retourné",
+        "Touché Coulé",
+        "Osef la pression..."
+      ],
+      "Keys": {
+        "0": [
+          "Clé des chiottes",
+          "Clé de bain",
+          "Une clé",
+          "La clé",
+          "Clé 1",
+          "Clé A",
+          "C'est uen clé"
+        ],
+        "1": [
+          "Clé Brouillée",
+          "Une clé",
+          "La clé",
+          "Clé 2",
+          "Clé B",
+          "Clé de la porte"
+        ],
+        "2": [
+          "Clé",
+          "C'est à qui ?",
+          "Un Key",
+          "La Key",
+          "Clé 3",
+          "Clé C",
+          "C'est encore uen clé",
+          "Où est la serrure ?"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Coupe feu",
+          "Puzzle en T",
+          "Extincteur",
+          "Y a plus d'eau",
+          "Pour pas cramer",
+          "Mouillée et elle crame"
+        ]
+      }
+    },
+
+    "LIVING.TR2": {
+      "Names": [
+        "Sous l'eau - 3e partie",
+        "QUARTIERS.TR2",
+        "Déplace des Pistons",
+        "Episode de Secours",
+        "Les 3emes d'équipage",
+        "Les 5emes d'équipage",
+        "Niveau sas-intérêt",
+        "Personne à la maison",
+        "Les Quartiers Morts"
+      ],
+      "Keys": {
+        "0": [
+          "Clé dramatique",
+          "Clé mélodramatique",
+          "Clé tragique",
+          "Clé de Shakespeare",
+          "Une clé",
+          "La clé",
+          "Clé 1",
+          "Clé A",
+          "Clé de l'Opéra",
+          "Le spectacle doit continuer!"
+        ],
+        "1": [
+          "Clé croustillante",
+          "Une clé",
+          "La clé",
+          "Clé 2",
+          "Clé B",
+          "Une autre clé",
+          "Ouvreuse de porte",
+          "Elle est sacrément sale!"
+        ]
+      }
+    },
+
+    "DECK.TR2": {
+      "Names": [
+        "Sous l'Eau, presque.",
+        "La Quête des clés",
+        "PONT.TR2",
+        "La Quête du Séraph",
+        "Victoire des Icebergs",
+        "Grosse poche d'air"
+      ],
+      "Keys": {
+        "1": [
+          "Clé Austère",
+          "Clé Dure",
+          "Clé Cruelle",
+          "Clé au gros nez",
+          "Clé de la réserve",
+          "Clé de la réserve?",
+          "Pas la clé de la réserve",
+          "Absolument pas la clé de la réserve",
+          "Ouvre une porte",
+          "C'est laquelle celle-ci?",
+          "Une clé",
+          "La clé",
+          "Clé 1",
+          "Clé A"
+        ],
+        "2": [
+          "Clé de la réserve",
+          "La clé du réserve?",
+          "Clé étrange",
+          "Clé Austère",
+          "Clé de la cabine",
+          "Clé du Séraph",
+          "Clé de la Chambre 105",
+          "C'est laquelle celle-la?",
+          "Ouvre une porte",
+          "Une Clé",
+          "La Clé",
+          "Clé B"
+        ],
+        "3": [
+          "Clé de la Cabine",
+          "Clé de la Pièce",
+          "Clé de la Porte",
+          "Clé de la réserve",
+          "Clé de la réserve?",
+          "Pas la clé de la réserve",
+          "Ouvre une porte",
+          "Elle sert à quoi dejà ?",
+          "Une clé",
+          "La clé",
+          "Clé 3",
+          "Clé C"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "L'Ange",
+          "Le Chérubin",
+          "Puzzle 1",
+          "Statue",
+          "Pas une clé",
+          "Relique des Moines",
+          "Trésor des Moines"
+        ]
+      }
+    },
+
+    "SKIDOO.TR2": {
+      "Names": [
+        "Tibet Partie 1",
+        "Le skidoo",
+        "Donne la clé de l'abri",
+        "Lieu du Crash",
+        "Surface Glissante",
+        "Lara sait pas voler",
+        "Atterrissage raté",
+        "Quels beaux rochers",
+        "Avalanche",
+        "Skiddo: La Revanche",
+        "La Mania du Skidoo",
+        "Fais un bonhomme de neige"
+      ],
+      "Keys": {
+        "0": [
+          "Clé du Pont-Levis",
+          "Clé inutile",
+          "Pas celle-ci",
+          "Pas la clé de l'Abri",
+          "Clé de l'Abri",
+          "Une clé",
+          "La clé",
+          "Clé 1",
+          "Clé A",
+          "Tu me soulèves!",
+          "Clé pour une plateforme"
+        ],
+        "1": [
+          "Clé de l'Abri",
+          "Clé de l'abri",
+          "La clé pour zapper le Tibet",
+          "Pas la clé du Pont-Levis",
+          "Une clé",
+          "La clé",
+          "Clé 2",
+          "Clé B",
+          "LA CLÉ !!!",
+          "Clé pour speedrun",
+          "La Plus Voulue !",
+          "Clé de l'Intérieur"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "L'Ange",
+          "Le Chérubin",
+          "Puzzle 1",
+          "Statue",
+          "Pas une clé",
+          "Relique des Moines",
+          "Trésor des Moines"
+        ]
+      }
+    },
+
+    "MONASTRY.TR2": {
+      "Names": [
+        "Tibet Partie 2",
+        "Sauve les Moines",
+        "Ne tire pas sur les moines",
+        "Folie Barkhangaise",
+        "Vole ces roues",
+        "Prie pour les moines",
+        "Monastère en Alerte",
+        "Ne Glitch pas !",
+        "Moines Pare-balles",
+        "Monastère de Keyhang",
+        "Pas de pacte de sororité"
+      ],
+      "Keys": {
+        "0": [
+          "Clé de la Chambre Faible",
+          "Clé \"MeSensPlusForte\"",
+          "Clé pour une Clé"
+        ],
+        "1": [
+          "Mince, pauvre clé",
+          "Clé Extérieur 1",
+          "On sort d'ici?",
+          "Clé pour aucune pièce?",
+          "Clé de l'arrière"
+        ],
+        "2": [
+          "Clé Parodique",
+          "Raccourci vers le sommet",
+          "Clé aux Yeux Louches",
+          "Clé Extérieur 2"
+        ],
+        "3": [
+          "TR2HallPrincipal",
+          "Clé du Hall à Memes",
+          "Clé de la Grosse Pièce",
+          "Clé \"Ne plonge pas\"",
+          "Clé de Bouddah",
+          "Clé du Lobby"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Comme un moulin à prières",
+          "Moulin à prières Mani",
+          "Moulin à prières de Chen",
+          "Roue sacrée",
+          "La roue de la Madone",
+          "Qui a inventé cette roue ?",
+          "Aide fatigué"
+        ],
+        "1": [
+          "Des Diamands",
+          "Loot de Barkhang",
+          "Les Tons des Gemmes",
+          "Oooh Ca Brille!",
+          "18 Carat"
+        ],
+        "3": [
+          "L'Ange",
+          "Le Chérubin",
+          "Puzzle 1",
+          "Statue",
+          "Pas une clé",
+          "Relique des Moines",
+          "Trésor des Moines",
+          "C'est temps de dire au revoir"
+        ]
+      }
+    },
+
+    "CATACOMB.TR2": {
+      "Names": [
+        "Tibet Partie 3",
+        "CdT",
+        "Caves du lapin de Pâques",
+        "CATACOMB.TR2",
+        "Colère du Yéri",
+        "Ca gèle ici! O.o",
+        "Catacombes de l'horreur",
+        "Il fait sombre ici!",
+        "Chambre Noire des Yétis"
+      ],
+      "Pickups": {
+        "0": [
+          "Marteau du Gong?",
+          "Euuuuh, quoi?",
+          "Joyeuses Pâques",
+          "Euh, M. Gong? Ah!",
+          "Ca n'a rien à faire ici",
+          "...???",
+          "Bâton de Xylophone",
+          "Bon, peu importe!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Masque pour visage",
+          "Un Masque",
+          "Le Masque",
+          "Masque du subnet",
+          "255.255.255.0",
+          "Masquarade",
+          "Portez votre masque!",
+          "Joli Masque",
+          "Masque Laid"
+        ]
+      }
+    },
+
+    "ICECAVE.TR2": {
+      "Names": [
+        "Tibet Partie 4",
+        "Le Poulet",
+        "Cave de Glace",
+        "Territoire de Volaille",
+        "Poulet Congelé",
+        "POULET.TR2",
+        "Le Frigo",
+        "Le Congélo",
+        "Arendelle",
+        "Cave pas très gelée",
+        "On décongèle ça!",
+        "Poulet Décongelé",
+        "Winston est passé ici!",
+        "Approuvé par Winston!",
+        "Le Gros Frigo de Winston"
+      ],
+      "Keys": {
+        "1": [
+          "La Maison du Gong",
+          "Le Marteau",
+          "Bon Gong",
+          "Henry Le Marteau",
+          "BOOOOOOOOOONGGGGG",
+          "Destructeur de Glace",
+          "Objet interdit aux gosses",
+          "Pic à Glace",
+          "Pilon",
+          "Malet du Gong"
+        ]
+      },
+      "Pickups": {
+        "1": [
+          "Le Talion",
+          "Le trésor des poulets",
+          "Ouvre cette porte, Lara",
+          "LIBEREZ LE POULET",
+          "Truc en Or",
+          "Clé de la Porte de Xian",
+          "CA BRILLE!",
+          "Là, puis partie encore!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Masque pour Visage",
+          "Masque Facultatif",
+          "Le Masque",
+          "Masque du subnet",
+          "255.255.255.0",
+          "On zappe pas le Balcon!",
+          "Qui utilise encore ça?",
+          "Le Masque de Beauté de Lara",
+          "Cassandra"
+        ]
+      }
+    },
+
+    "EMPRTOMB.TR2": {
+      "Names": [
+        "Chine Partie 2",
+        "Temple des Memes",
+        "Zappe tout Xian",
+        "Inzy Winzy Spider",
+        "Cave d'Araignées",
+        "Vallée des Pièges",
+        "Tu vas MOURIR!",
+        "Soupe à la Tomate",
+        "Course pour la Dague",
+        "Un grand cercle"
+      ],
+      "Keys": {
+        "1": [
+          "Une Clé",
+          "La Clé",
+          "Clé 1",
+          "Conducteur électrique",
+          "Au",
+          "Clé pour une porte"
+        ],
+        "2": [
+          "Une Clé",
+          "La Clé",
+          "Clé 2",
+          "Ag",
+          "Juste une clé",
+          "Survivant d'Araignées!"
+        ],
+        "3": [
+          "TR2Main Clé Chambre",
+          "Une Clé",
+          "La Clé",
+          "Clé 3",
+          "Seule Clé nécessaire"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Puzzle 1",
+          "Pièce d'objet numéro 41",
+          "Masque pour visage",
+          "Clé vers la Terre Cuite",
+          "Ouvrir plus de pièges!",
+          "C'EST UN PIEGE O.o"
+        ]
+      }
+    },
+
+    "FLOATING.TR2": {
+      "Names": [
+        "Chine Partie 3",
+        "Corps Flottant",
+        "Îles qui volent",
+        "Îles dans les nuages",
+        "Ces trucs volent! OwO",
+        "Où suis-je?",
+        "Le rêve de Lara",
+        "C'est quoi ce bordel?",
+        "Saut de l'Ange dans le feu",
+        "Lego Volant"
+      ],
+      "Puzzles": {
+        "0": [
+          "Un Cracker",
+          "Cracker 1",
+          "Cracker A",
+          "Fromage & Crackers",
+          "Timbre Sectaire",
+          "Cookie Magique",
+          "Biscuit Chinois"
+        ],
+        "1": [
+          "Un Cracker",
+          "Cracker 2",
+          "Cracker B",
+          "Fromage & Crackers",
+          "Timbre Sectaire",
+          "Cookie Magique",
+          "Biscuit Chinois"
+        ]
+      }
+    },
+
+    "XIAN.TR2": {
+      "Names": [
+        "China Partie 4",
+        "La Cache de Bartoli 2",
+        "L'An du Dragon",
+        "La Fin du Dragon",
+        "Gros Lance-flamme",
+        "Maison du Sans Dents",
+        "Crypte du Dragon",
+        "La Fin de Bartoli",
+        "L'Antre de Smaug",
+        "Pas un Magyar à Pointe",
+        "Ne tue pas Paarthurnax",
+        "Lara, Mère des Dragons",
+        "Tu peux pas me brûler!",
+        "Statues, Couteaux et Feu"
+      ],
+      "Puzzles": {
+        "0": [
+          "Un Cracker",
+          "Le Cracket",
+          "Fromage & Crackers",
+          "Cracket de Graham",
+          "Timbre Sectaire",
+          "Cracker Non-Comestible"
+        ],
+        "1": [
+          "Le Loot de Xian",
+          "Dague du Dragon",
+          "Gros Couteau",
+          "Poignard Poignard",
+          "Ne me retire pas!",
+          "La Lame",
+          "Tu cherches ça?",
+          "Tu as perdu ça?",
+          "Parodn, tu en avais besoin?",
+          "Pas Excalibur",
+          "Le Petit Frère de Escalibur"
+        ]
+      }
+    },
+
+    "HOUSE.TR2": {
+      "Names": [
+        "HSH",
+        "Où est Winston",
+        "Maison des Memes",
+        "Maison Drôle",
+        "MEMES.TR2",
+        "Mon Humble Demeure",
+        "Maison au frigo vide",
+        "Foutez-moi la paix!",
+        "Je déteste tout!",
+        "Ils abandonnent jamais?",
+        "Pas seul chez soi",
+        "Toujours là?"
+      ],
+      "Keys": {
+        "0": [
+          "Clé de l'Armoire",
+          "Clé de l'Arsenal",
+          "La Clé",
+          "Une Clé",
+          "\"Pas de Harpon svp\" Clé",
+          "Réserve Secrète de Lara",
+          "Clé de la cache des flingues",
+          "\"Je fais boom boom\" Clé",
+          "Clé de Légitime Défense",
+          "Clé de L'armurerie"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Le Loot de Xian",
+          "Dague du Dragon",
+          "Gros Couteau",
+          "Poignard Poignard",
+          "Ne me retire pas!",
+          "La Lame",
+          "Tu cherches ça?",
+          "Tu as perdu ça?",
+          "Parodn, tu en avais besoin?",
+          "Pas Excalibur",
+          "Le Petit Frère de Escalibur"
+        ]
+      }
+    }
+  }
+}

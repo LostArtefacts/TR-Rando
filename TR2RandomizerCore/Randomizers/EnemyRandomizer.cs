@@ -580,17 +580,6 @@ namespace TR2RandomizerCore.Randomizers
                     }
                 }
 
-                // #158 Several entity freezing issues have been found with various enemy
-                // combinations in Barkhang, so for now all Mercenary1 and MonkWithLongStick
-                // entities must remain in place, and no additional ones should be added.
-                if (level.Is(LevelNames.MONASTERY))
-                {
-                    while (EnemyUtilities.IsEnemyRequired(level.Name, newEntityType))
-                    {
-                        newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
-                    }
-                }
-
                 // #144 Disguise something as the Chicken. Pre-checks will have been done to ensure
                 // the guiser is suitable for the level.
                 if (DocileBirdMonsters && newEntityType == TR2Entities.BirdMonster)

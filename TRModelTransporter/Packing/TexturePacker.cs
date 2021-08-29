@@ -71,14 +71,21 @@ namespace TRModelTransporter.Packing
 
         public PackingResult<TexturedTile, TexturedTileSegment> Pack(bool commitToLevel)
         {
-            PackingResult<TexturedTile, TexturedTileSegment> result = Pack();
-
-            if (result.OrphanCount == 0 && commitToLevel)
+            try
             {
-                Commit();
-            }
+                PackingResult<TexturedTile, TexturedTileSegment> result = Pack();
 
-            return result;
+                if (result.OrphanCount == 0 && commitToLevel)
+                {
+                    Commit();
+                }
+
+                return result;
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new PackingException(e.Message, e);
+            }
         }
 
         public Dictionary<TexturedTile, List<TexturedTileSegment>> GetModelSegments(TR2Entities modelEntity)

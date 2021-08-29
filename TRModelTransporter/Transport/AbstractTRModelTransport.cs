@@ -72,7 +72,8 @@ namespace TRModelTransporter.Transport
                 new TR2Entities[]
                 {
                     TR2Entities.DragonExplosionEmitter_N, TR2Entities.DragonExplosion1_H, TR2Entities.DragonExplosion2_H, TR2Entities.DragonExplosion3_H,
-                    TR2Entities.DragonFront_H, TR2Entities.DragonBack_H, TR2Entities.DragonBonesFront_H, TR2Entities.DragonBonesBack_H, TR2Entities.LaraMiscAnim_H_Xian
+                    TR2Entities.DragonFront_H, TR2Entities.DragonBack_H, TR2Entities.DragonBonesFront_H, TR2Entities.DragonBonesBack_H, TR2Entities.LaraMiscAnim_H_Xian,
+                    TR2Entities.Puzzle2_M_H_Dagger
                 }
         };
 

@@ -1,0 +1,17 @@
+{
+  "All": [
+    {
+      "Comments": "Raises the ceiling on top of the dome - if the dragon ends up here, he will still be able to breathe fire.",
+      "EMType": 4,
+      "CeilingHeights": {
+        "12": -127
+      }
+    }
+  ],
+
+  "Any": [],
+
+  "AllWithin": [],
+
+  "OneOf": []
+}
