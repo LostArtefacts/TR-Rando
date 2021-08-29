@@ -17,6 +17,8 @@ namespace TR2RandomizerCore.Randomizers
 {
     public class ItemRandomizer : RandomizerBase
     {
+        private static readonly List<int> _devRooms = null;
+
         public bool IncludeKeyItems { get; set; }
         public bool IsDevelopmentModeOn { get; set; }
         public bool PerformEnemyWeighting { get; set; }
@@ -70,7 +72,7 @@ namespace TR2RandomizerCore.Randomizers
 
                 if (IsDevelopmentModeOn && _pistolLocations.ContainsKey(_levelInstance.Name))
                 {
-                    PlaceAllItems(_pistolLocations[_levelInstance.Name], entityToAdd: TR2Entities.Pistols_S_P, transformToLevelSpace: false);
+                    PlaceAllItems(_pistolLocations[_levelInstance.Name], TR2Entities.Pistols_S_P, false);
                 }
 
                 FindUnarmedPistolsLocation();
@@ -92,7 +94,7 @@ namespace TR2RandomizerCore.Randomizers
         }
 
         // roomNumber is specified if ONLY that room is to be populated
-        private void PlaceAllItems(List<Location> locations, int roomNumber = -1, TR2Entities entityToAdd = TR2Entities.LargeMed_S_P, bool transformToLevelSpace = true)
+        private void PlaceAllItems(List<Location> locations, TR2Entities entityToAdd = TR2Entities.LargeMed_S_P, bool transformToLevelSpace = true)
         {
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
 
@@ -100,7 +102,7 @@ namespace TR2RandomizerCore.Randomizers
             {
                 Location copy = transformToLevelSpace ? SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info) : loc;
 
-                if (roomNumber == -1 || roomNumber == copy.Room)
+                if (_devRooms == null || _devRooms.Contains(copy.Room))
                 {
                     ents.Add(new TR2Entity
                     {

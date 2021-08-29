@@ -9,11 +9,14 @@ using TR2RandomizerCore.Utilities;
 using TR2RandomizerCore.Zones;
 using TR2RandomizerCore.Helpers;
 using TRGE.Core;
+using TRLevelReader.Helpers;
 
 namespace TR2RandomizerCore.Randomizers
 {
     public class SecretReplacer : RandomizerBase
     {
+        private static readonly List<int> _devRooms = null;
+
         public bool AllowHard { get; set; }
         public bool AllowGlitched { get; set; }
         public bool IsDevelopmentModeOn { get; set; }
@@ -172,85 +175,53 @@ namespace TR2RandomizerCore.Randomizers
 
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
 
-            bool SecretsRemain = true;
-
-            while (SecretsRemain)
+            // Store existing secret indices for re-use (avoids FD problems when the originals are removed)
+            Queue<int> existingIndices = new Queue<int>();
+            for (int i = 0; i < ents.Count; i++)
             {
-                int i;
-
-                //Remove any existing secrets
-                for (i = 0; i < ents.Count; i++)
+                if (TR2EntityUtilities.IsSecretType((TR2Entities)ents[i].TypeID))
                 {
-                    if (ents[i].TypeID == (int)TR2Entities.StoneSecret_S_P ||
-                        ents[i].TypeID == (int)TR2Entities.JadeSecret_S_P ||
-                        ents[i].TypeID == (int)TR2Entities.GoldSecret_S_P)
-                    {
-                        ents.RemoveAt(i);
-                        i--;
-                        break;
-                    }
-                };
-
-                //We have exhausted the list and found nothing, if we exited early try again
-                if (i == ents.Count)
-                {
-                    SecretsRemain = false;
+                    existingIndices.Enqueue(i);
                 }
             }
 
             //Add new entities
-            foreach (Location loc in ZonedLocations.StoneZone)
+            Dictionary<TR2Entities, List<Location>> secretMap = new Dictionary<TR2Entities, List<Location>>
             {
-                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info);
+                [TR2Entities.StoneSecret_S_P] = ZonedLocations.StoneZone,
+                [TR2Entities.JadeSecret_S_P] = ZonedLocations.JadeZone,
+                [TR2Entities.GoldSecret_S_P] = ZonedLocations.GoldZone
+            };
 
-                ents.Add(new TR2Entity
-                {
-                    TypeID = (int)TR2Entities.StoneSecret_S_P,
-                    Room = Convert.ToInt16(copy.Room),
-                    X = copy.X,
-                    Y = copy.Y,
-                    Z = copy.Z,
-                    Angle = 0,
-                    Intensity1 = -1,
-                    Intensity2 = -1,
-                    Flags = 0
-                });
-            }
-
-            foreach (Location loc in ZonedLocations.JadeZone)
+            foreach (TR2Entities secretType in secretMap.Keys)
             {
-                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info);
-
-                ents.Add(new TR2Entity
+                foreach (Location loc in secretMap[secretType])
                 {
-                    TypeID = (int)TR2Entities.JadeSecret_S_P,
-                    Room = Convert.ToInt16(copy.Room),
-                    X = copy.X,
-                    Y = copy.Y,
-                    Z = copy.Z,
-                    Angle = 0,
-                    Intensity1 = -1,
-                    Intensity2 = -1,
-                    Flags = 0
-                });
-            }
+                    Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info);
 
-            foreach (Location loc in ZonedLocations.GoldZone)
-            {
-                Location copy = SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info);
+                    if (_devRooms == null || _devRooms.Contains(copy.Room))
+                    {
+                        TR2Entity entity;
+                        if (existingIndices.Count > 0)
+                        {
+                            entity = ents[existingIndices.Dequeue()];
+                        }
+                        else
+                        {
+                            ents.Add(entity = new TR2Entity());
+                        }
 
-                ents.Add(new TR2Entity
-                {
-                    TypeID = (int)TR2Entities.GoldSecret_S_P,
-                    Room = Convert.ToInt16(copy.Room),
-                    X = copy.X,
-                    Y = copy.Y,
-                    Z = copy.Z,
-                    Angle = 0,
-                    Intensity1 = -1,
-                    Intensity2 = -1,
-                    Flags = 0
-                });
+                        entity.TypeID = (short)secretType;
+                        entity.Room = (short)copy.Room;
+                        entity.X = copy.X;
+                        entity.Y = copy.Y;
+                        entity.Z = copy.Z;
+                        entity.Angle = 0;
+                        entity.Intensity1 = -1;
+                        entity.Intensity2 = -1;
+                        entity.Flags = 0;
+                    }
+                }
             }
 
             _levelInstance.Data.NumEntities = (uint)ents.Count;
