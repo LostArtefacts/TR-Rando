@@ -1,5 +1,5 @@
 {
-  "EnforcedSet": [
+  "All": [
     {
       "Comments": "Adds a ladder to allow returning to the top of the first guardhouse after dropping down",
       "EMType": 0,
@@ -9,11 +9,19 @@
         "Z": 35431,
         "Room": 33
       },
-      "LadderTexture": 1236,
-      "TileMap": {
-        "3": [ 137, 138, 139 ],
-        "31": [ 121, 123 ],
-        "33": [ 57 ]
+      "IsPositiveX": true,
+      "TextureMap": {
+        "1236": {
+          "3": {
+            "Rectangles": [ 137, 138, 139 ]
+          },
+          "31": {
+            "Rectangles": [ 121, 123 ]
+          },
+          "33": {
+            "Rectangles": [ 57 ]
+          }
+        }
       }
     },
 
@@ -29,16 +37,166 @@
       "Clicks": -2,
       "FloorTexture": 1223,
       "SideTexture": 1228
+    },
+
+    {
+      "Comments": "Fix the yellow triangles in room 30",
+      "EMType": 21,
+      "TextureMap": {
+        "1247": {
+          "30": {
+            "Triangles": [ 2, 3 ]
+          }
+        },
+        "1341": {
+          "30": {
+            "Triangles": [ 4 ]
+          }
+        }
+      }
     }
   ],
 
-  "RandomizedSet": [
+  "Any": [
+    [
+      {
+        "Comments": "Lowers a block in room 36",
+        "EMType": 1,
+        "Location": {
+          "X": 62048,
+          "Y": 3328,
+          "Z": 36387,
+          "Room": 36
+        },
+        "Clicks": 2
+      }
+    ],
+
     [
       {
         "Comments": "Floods the first area up to the guardhouse",
         "EMType": 2,
         "RoomNumbers": [ 35, 36, 38 ],
         "WaterTextures": [ 1229, 1254, 1346, 1347 ]
+      },
+
+      {
+        "Comments": "Extends the helicopter/camera trigger in case Lara swims over the one tile that doesn't have it",
+        "EMType": 63,
+        "BaseLocation": {
+          "X": 62908,
+          "Y": 5197,
+          "Z": 30196,
+          "Room": 36
+        },
+        "Locations": [
+          {
+            "X": 61997,
+            "Y": 4232,
+            "Z": 30202,
+            "Room": 36
+          }
+        ]
+      },
+
+      {
+        "Comments": "Move the first tiger onto land, unless it has become a water creature.",
+        "EMType": 42,
+        "EntityIndex": 18,
+        "IfLandCreature": true,
+        "AttemptWaterCreature": true,
+        "Location": {
+          "X": 65995,
+          "Y": -3134,
+          "Z": 36195,
+          "Room": 67
+        },
+        "TriggerLocations": [
+          {
+            "X": 62014,
+            "Y": 4694,
+            "Z": 26165,
+            "Room": 35
+          },
+          {
+            "X": 63038,
+            "Y": 4995,
+            "Z": 26165,
+            "Room": 35
+          },
+          {
+            "X": 64062,
+            "Y": 5376,
+            "Z": 26165,
+            "Room": 35
+          },
+          {
+            "X": 65086,
+            "Y": 4751,
+            "Z": 26165,
+            "Room": 35
+          }
+        ]
+      },
+
+      {
+        "Comments": "Move the second tiger onto land, unless it has become a water creature.",
+        "EMType": 42,
+        "EntityIndex": 19,
+        "IfLandCreature": true,
+        "AttemptWaterCreature": true,
+        "Location": {
+          "X": 52174,
+          "Y": -3072,
+          "Z": 33281,
+          "Room": 31
+        },
+        "TriggerLocations": [
+          {
+            "X": 62014,
+            "Y": 4694,
+            "Z": 26165,
+            "Room": 35
+          },
+          {
+            "X": 63038,
+            "Y": 4995,
+            "Z": 26165,
+            "Room": 35
+          },
+          {
+            "X": 64062,
+            "Y": 5376,
+            "Z": 26165,
+            "Room": 35
+          },
+          {
+            "X": 65086,
+            "Y": 4751,
+            "Z": 26165,
+            "Room": 35
+          }
+        ]
+      },
+
+      {
+        "Comments": "Relocates any secrets whose sectors match those of the given locations.",
+        "EMType": 43,
+        "Types": [ 190, 191, 192 ],
+        "SectorLocations": [
+          {
+            "X": 61319,
+            "Y": 4614,
+            "Z": 36643,
+            "Room": 36
+          },
+          {
+            "X": 61654,
+            "Y": 4596,
+            "Z": 37016,
+            "Room": 36
+          }
+        ]
       }
     ],
 
@@ -47,6 +205,55 @@
         "Comments": "Floods the 'key' area between the first and second guardhouses",
         "EMType": 2,
         "RoomNumbers": [ 23, 7, 24, 77 ],
+        "WaterTextures": [ 1229, 1254, 1346, 1347 ]
+      },
+
+      {
+        "Comments": "Move the crow to spawn over land in case it's not actually a crow.",
+        "EMType": 42,
+        "EntityIndex": 12,
+        "IfLandCreature": true,
+        "Location": {
+          "X": 28160,
+          "Y": -1280,
+          "Z": 41472,
+          "Room": 21
+        }
+      },
+
+      {
+        "Comments": "Move the tiger to spawn on land unless it's a water creature.",
+        "EMType": 42,
+        "EntityIndex": 11,
+        "IfLandCreature": true,
+        "Location": {
+          "X": 43514,
+          "Y": -2680,
+          "Z": 47599,
+          "Room": 1
+        }
+      },
+
+      {
+        "Comments": "Relocates any secrets whose sectors match those of the given locations.",
+        "EMType": 43,
+        "Types": [ 190, 191, 192 ],
+        "SectorLocations": [
+          {
+            "X": 40763,
+            "Y": 1479,
+            "Z": 35974,
+            "Room": 77
+          }
+        ]
+      }
+    ],
+
+    [
+      {
+        "Comments": "Drains the disc-trap room",
+        "EMType": 3,
+        "RoomNumbers": [ 46 ],
         "WaterTextures": [ 1229, 1254, 1346, 1347 ]
       }
     ],
@@ -57,7 +264,493 @@
         "EMType": 2,
         "RoomNumbers": [ 62, 63, 79, 80, 81, 82, 83 ],
         "WaterTextures": [ 1229, 1254, 1346, 1347 ]
+      },
+
+      {
+        "Comments": "Move the first T-Rex to spawn on land unless it's a water creature.",
+        "EMType": 42,
+        "EntityIndex": 104,
+        "IfLandCreature": true,
+        "AttemptWaterCreature": true,
+        "Location": {
+          "X": 83402,
+          "Y": 20246,
+          "Z": 74383,
+          "Room": 39
+        }
+      },
+
+      {
+        "Comments": "Move the second T-Rex to spawn on land unless it's a water creature.",
+        "EMType": 42,
+        "EntityIndex": 99,
+        "IfLandCreature": true,
+        "AttemptWaterCreature": true,
+        "Location": {
+          "X": 91251,
+          "Y": 20480,
+          "Z": 64295,
+          "Room": 65
+        }
+      },
+
+      {
+        "Comments": "Relocates any secrets whose sectors match those of the given locations.",
+        "EMType": 43,
+        "Types": [ 190, 191, 192 ],
+        "SectorLocations": [
+          {
+            "X": 60587,
+            "Y": 24925,
+            "Z": 73931,
+            "Room": 63
+          },
+          {
+            "X": 65301,
+            "Y": 23777,
+            "Z": 79649,
+            "Room": 63
+          }
+        ]
       }
     ]
+  ],
+
+  "AllWithin": [
+    [
+      [
+        {
+          "Comments": "Potential new lever position in the first guardhouse.",
+          "EMType": 41,
+          "EntityIndex": 4,
+          "Location": {
+            "X": 49664,
+            "Y": -768,
+            "Z": 31232,
+            "Room": 3,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "Comments": "Refacing for above.",
+          "EMType": 21,
+          "TextureMap": {
+            "1178": {
+              "3": {
+                "Rectangles": [ 143 ]
+              }
+            }
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 4,
+          "Location": {
+            "X": 50688,
+            "Y": 0,
+            "Z": 32256,
+            "Room": 3,
+            "Angle": -32768
+          }
+        },
+
+        {
+          "EMType": 21,
+          "TextureMap": {
+            "1178": {
+              "3": {
+                "Rectangles": [ 143 ]
+              }
+            }
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 4,
+          "Location": {
+            "X": 49664,
+            "Y": 0,
+            "Z": 35328,
+            "Room": 3,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "EMType": 21,
+          "TextureMap": {
+            "1178": {
+              "3": {
+                "Rectangles": [ 143 ]
+              }
+            }
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 4,
+          "Location": {
+            "X": 49664,
+            "Y": 0,
+            "Z": 36352,
+            "Room": 3,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "EMType": 21,
+          "TextureMap": {
+            "1178": {
+              "3": {
+                "Rectangles": [ 143 ]
+              }
+            }
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 4,
+          "Location": {
+            "X": 49664,
+            "Y": 0,
+            "Z": 36352,
+            "Room": 3,
+            "Angle": 0
+          }
+        },
+
+        {
+          "EMType": 21,
+          "TextureMap": {
+            "1178": {
+              "3": {
+                "Rectangles": [ 143 ]
+              }
+            }
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 4,
+          "Location": {
+            "X": 53760,
+            "Y": -3072,
+            "Z": 34304,
+            "Room": 31,
+            "Angle": 16384
+          }
+        },
+
+        {
+          "EMType": 21,
+          "TextureMap": {
+            "1178": {
+              "3": {
+                "Rectangles": [ 143 ]
+              }
+            }
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new keyhole position for the second guardhouse.",
+          "EMType": 41,
+          "EntityIndex": 1,
+          "Location": {
+            "X": 31232,
+            "Y": 0,
+            "Z": 32256,
+            "Room": 0,
+            "Angle": -16384
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 1,
+          "Location": {
+            "X": 31232,
+            "Y": 0,
+            "Z": 35328,
+            "Room": 0,
+            "Angle": -16384
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 1,
+          "Location": {
+            "X": 31232,
+            "Y": -1024,
+            "Z": 36352,
+            "Room": 0,
+            "Angle": -16384
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 1,
+          "Location": {
+            "X": 31232,
+            "Y": -1024,
+            "Z": 31232,
+            "Room": 0,
+            "Angle": -16384
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new keyhole position inside the second guardhouse.",
+          "EMType": 41,
+          "EntityIndex": 7,
+          "Location": {
+            "X": 25088,
+            "Y": -256,
+            "Z": 36352,
+            "Room": 4,
+            "Angle": 0
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 7,
+          "Location": {
+            "X": 26112,
+            "Y": -256,
+            "Z": 36352,
+            "Room": 4,
+            "Angle": 0
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 7,
+          "Location": {
+            "X": 26112,
+            "Y": 0,
+            "Z": 35328,
+            "Room": 4,
+            "Angle": -16384
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 7,
+          "Location": {
+            "X": 25088,
+            "Y": -3584,
+            "Z": 35328,
+            "Room": 32,
+            "Angle": -16384
+          }
+        }
+      ],
+
+      [
+        {
+          "EMType": 41,
+          "EntityIndex": 7,
+          "Location": {
+            "X": 28160,
+            "Y": -2560,
+            "Z": 32256,
+            "Room": 32,
+            "Angle": -16384
+          }
+        }
+      ]
+    ]
+  ],
+
+  "OneOf": [
+    {
+      "Leader": [
+        {
+          "Comments": "Removes the ladder in the second guardhouse.",
+          "EMType": 0,
+          "Location": {
+            "X": 27138,
+            "Y": -512,
+            "Z": 34394,
+            "Room": 4
+          },
+          "IsPositiveX": false,
+          "TextureMap": {
+            "1225": {
+              "32": {
+                "Rectangles": [ 50 ]
+              }
+            },
+            "1178": {
+              "4": {
+                "Rectangles": [ 40 ]
+              }
+            },
+            "1179": {
+              "4": {
+                "Rectangles": [ 41 ]
+              }
+            }
+          }
+        }
+      ],
+
+      "Followers": [
+        [
+          {
+            "Comments": "Possible new ladder in the second guardhouse.",
+            "EMType": 0,
+            "Location": {
+              "X": 25830,
+              "Y": 1024,
+              "Z": 33283,
+              "Room": 4
+            },
+            "IsNegativeX": true,
+            "TextureMap": {
+              "1236": {
+                "32": {
+                  "Rectangles": [ 27 ]
+                },
+                "4": {
+                  "Rectangles": [ 12 ]
+                }
+              },
+              "1237": {
+                "4": {
+                  "Rectangles": [ 13 ]
+                }
+              }
+            }
+          }
+        ],
+
+        [
+          {
+            "Comments": "Possible new ladder in the second guardhouse.",
+            "EMType": 0,
+            "Location": {
+              "X": 25830,
+              "Y": 1024,
+              "Z": 33283,
+              "Room": 4
+            },
+            "IsPositiveZ": true,
+            "TextureMap": {
+              "1236": {
+                "32": {
+                  "Rectangles": [ 31 ]
+                },
+                "4": {
+                  "Rectangles": [ 15 ]
+                }
+              },
+              "1237": {
+                "4": {
+                  "Rectangles": [ 16 ]
+                }
+              }
+            }
+          }
+        ],
+
+        [
+          {
+            "Comments": "Possible new ladder in the second guardhouse.",
+            "EMType": 0,
+            "Location": {
+              "X": 25811,
+              "Y": -1536,
+              "Z": 31213,
+              "Room": 4
+            },
+            "IsNegativeX": true,
+            "TextureMap": {
+              "1236": {
+                "32": {
+                  "Rectangles": [ 21 ]
+                }
+              },
+              "1237": {
+                "4": {
+                  "Rectangles": [ 5 ]
+                }
+              }
+            }
+          }
+        ],
+
+        [
+          {
+            "Comments": "Possible new ladder in the second guardhouse.",
+            "EMType": 0,
+            "Location": {
+              "X": 27095,
+              "Y": -512,
+              "Z": 36763,
+              "Room": 4
+            },
+            "IsPositiveZ": true,
+            "TextureMap": {
+              "1236": {
+                "32": {
+                  "Rectangles": [ 56, 57 ]
+                },
+                "4": {
+                  "Rectangles": [ 49 ]
+                }
+              },
+              "1237": {
+                "4": {
+                  "Rectangles": [ 50 ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    }
   ]
 }

@@ -243,6 +243,17 @@
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
 
+        <ctrl:ManagedSeedBoolControl
+            Grid.Row="4"
+            Grid.Column="2"
+            IsActive="{Binding RandomizeEnvironment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Environment"
+            Text="Randomize Lara's surroundings in each level."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding EnvironmentSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            BoolItemsSource="{Binding EnvironmentBoolItemControls}"/>
+        
         <Border
             Grid.RowSpan="2"
             Grid.Column="3"

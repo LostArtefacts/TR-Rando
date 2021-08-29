@@ -161,7 +161,7 @@ namespace TextureExport
             Console.WriteLine("\tpng      - Export each texture tile to PNG. Default Option.");
             Console.WriteLine("\thtml     - Export all tiles to a single HTML document.");
             Console.WriteLine("\tsegments - Export each object and sprite texture to individual PNG files.");
-            Console.WriteLine("\faces     - Creates a new texture for every face in a room and marks its index (output is LVL_faced.tr2).");
+            Console.WriteLine("\tfaces    - Creates a new texture for every face in a room and marks its index (output is LVL_faced.tr2).");
             Console.WriteLine();
             
             Console.WriteLine("Examples");
@@ -169,6 +169,12 @@ namespace TextureExport
             Console.WriteLine("\tTextureExport");
             Console.ResetColor();
             Console.WriteLine("\t\tExport all original level tiles to PNG.");
+            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\tTextureExport orig html");
+            Console.ResetColor();
+            Console.WriteLine("\t\tExport all original level tiles to HTML.");
             Console.WriteLine();
 
             Console.ForegroundColor = ConsoleColor.Yellow;

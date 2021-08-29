@@ -423,6 +423,30 @@ namespace TR2RandomizerCore
             get => LevelRandomizer.StartPositionSeed;
             set => LevelRandomizer.StartPositionSeed = value;
         }
+
+        public bool RandomizeEnvironment
+        {
+            get => LevelRandomizer.RandomizeEnvironment;
+            set => LevelRandomizer.RandomizeEnvironment = value;
+        }
+
+        public bool RandomizeWaterLevels
+        {
+            get => LevelRandomizer.RandomizeWaterLevels;
+            set => LevelRandomizer.RandomizeWaterLevels = value;
+        }
+
+        public bool RandomizeSlotPositions
+        {
+            get => LevelRandomizer.RandomizeSlotPositions;
+            set => LevelRandomizer.RandomizeSlotPositions = value;
+        }
+
+        public int EnvironmentSeed
+        {
+            get => LevelRandomizer.EnvironmentSeed;
+            set => LevelRandomizer.EnvironmentSeed = value;
+        }
         #endregion
 
         #region TREditor Passthrough

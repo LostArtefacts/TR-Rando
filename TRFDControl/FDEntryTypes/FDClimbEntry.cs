@@ -14,6 +14,17 @@ namespace TRFDControl.FDEntryTypes
             {
                 return ((Setup.SubFunction & (byte)FDClimbDirection.PositiveX) > 0);
             }
+            set
+            {
+                if (value)
+                {
+                    Setup.SubFunction |= (byte)FDClimbDirection.PositiveX;
+                }
+                else if (IsPositiveX)
+                {
+                    Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.PositiveX);
+                }
+            }
         }
 
         public bool IsPositiveZ
@@ -21,6 +32,17 @@ namespace TRFDControl.FDEntryTypes
             get
             {
                 return ((Setup.SubFunction & (byte)FDClimbDirection.PositiveZ) > 0);
+            }
+            set
+            {
+                if (value)
+                {
+                    Setup.SubFunction |= (byte)FDClimbDirection.PositiveZ;
+                }
+                else if (IsPositiveZ)
+                {
+                    Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.PositiveZ);
+                }
             }
         }
 
@@ -30,6 +52,17 @@ namespace TRFDControl.FDEntryTypes
             {
                 return ((Setup.SubFunction & (byte)FDClimbDirection.NegativeX) > 0);
             }
+            set
+            {
+                if (value)
+                {
+                    Setup.SubFunction |= (byte)FDClimbDirection.NegativeX;
+                }
+                else if (IsNegativeX)
+                {
+                    Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.NegativeX);
+                }
+            }
         }
 
         public bool IsNegativeZ
@@ -37,6 +70,17 @@ namespace TRFDControl.FDEntryTypes
             get
             {
                 return ((Setup.SubFunction & (byte)FDClimbDirection.NegativeZ) > 0);
+            }
+            set
+            {
+                if (value)
+                {
+                    Setup.SubFunction |= (byte)FDClimbDirection.NegativeZ;
+                }
+                else if (IsNegativeZ)
+                {
+                    Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.NegativeZ);
+                }
             }
         }
     }

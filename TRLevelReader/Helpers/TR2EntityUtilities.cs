@@ -544,6 +544,11 @@ namespace TRLevelReader.Helpers
             };
         }
 
+        public static bool IsStaticCreature(TR2Entities entity)
+        {
+            return entity == TR2Entities.YellowMorayEel || entity == TR2Entities.BlackMorayEel;
+        }
+
         public static bool IsHazardCreature(TR2Entities entity)
         {
             return entity == TR2Entities.YellowMorayEel || entity == TR2Entities.BlackMorayEel || entity == TR2Entities.Winston;

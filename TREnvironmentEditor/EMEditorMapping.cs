@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Parsing;
 
@@ -14,13 +10,16 @@ namespace TREnvironmentEditor
     {
         private static readonly EMConverter _converter = new EMConverter();
 
-        public EMEditorSet EnforcedSet { get; set; }
-        public List<EMEditorSet> RandomizedSet { get; set; }
+        public EMEditorSet All { get; set; }
+        public List<EMEditorSet> Any { get; set; }
+        public List<List<EMEditorSet>> AllWithin { get; set; }
+        public List<EMEditorGroupedSet> OneOf { get; set; }
 
         public EMEditorMapping()
         {
-            EnforcedSet = new EMEditorSet();
-            RandomizedSet = new List<EMEditorSet>();
+            All = new EMEditorSet();
+            Any = new List<EMEditorSet>();
+            OneOf = new List<EMEditorGroupedSet>();
         }
 
         public static EMEditorMapping Get(string lvlName)
