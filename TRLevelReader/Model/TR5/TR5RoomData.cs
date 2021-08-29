@@ -58,5 +58,29 @@ namespace TRLevelReader.Model
         {
             return AsBytes;
         }
+
+        public bool FlattenLightsBulbsAndSectors()
+        {
+            if (AsBytes != null)
+            {
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    using (BinaryWriter writer = new BinaryWriter(stream))
+                    {
+                        foreach (TR5RoomLight light in Lights) { writer.Write(light.Serialize()); }
+                        foreach (TR5FogBulb fbulb in FogBulbs) { writer.Write(fbulb.Serialize()); }
+                        foreach (TRRoomSector sector in SectorList) { writer.Write(sector.Serialize()); }
+                    }
+
+                    byte[] flattenedData = stream.ToArray();
+
+                    Array.Copy(flattenedData, 0, AsBytes, 0, flattenedData.Length);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

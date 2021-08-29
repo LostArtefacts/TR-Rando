@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using TRFDControl;
 using TRLevelReader;
 using TRLevelReader.Compression;
 using TRLevelReader.Model;
@@ -1491,6 +1492,84 @@ namespace TRLevelReaderUnitTests
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture32Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.Texture16Chunk.CompressedChunk), TRZlib.Decompress(lvlb.Texture16Chunk.CompressedChunk));
             CollectionAssert.AreEqual(TRZlib.Decompress(lvlc.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(lvlb.SkyAndFont32Chunk.CompressedChunk));
+        }
+
+        [TestMethod]
+        public void Floordata_ReadWrite_DefaultTest()
+        {
+            TR4LevelReader reader = new TR4LevelReader();
+            TR4Level lvl = reader.ReadLevel("train.tr4");
+
+            //Store the original floordata from the level
+            ushort[] originalFData = new ushort[lvl.LevelDataChunk.NumFloorData];
+            Array.Copy(lvl.LevelDataChunk.Floordata, originalFData, lvl.LevelDataChunk.NumFloorData);
+
+            //Parse the floordata using FDControl and re-write the parsed data back
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+            fdataReader.WriteToLevel(lvl);
+
+            //Store the new floordata written back by FDControl
+            ushort[] newFData = lvl.LevelDataChunk.Floordata;
+
+            //Compare to make sure the original fdata was written back.
+            CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
+            Assert.AreEqual((uint)newFData.Length, lvl.LevelDataChunk.NumFloorData);
+
+            TR4LevelWriter writer = new TR4LevelWriter();
+            writer.WriteLevelToFile(lvl, "train_fdata.tr4");
+        }
+
+        [TestMethod]
+        public void Floordata_ReadWrite_MechBeetleTest()
+        {
+            TR4LevelReader reader = new TR4LevelReader();
+            TR4Level lvl = reader.ReadLevel("palaces2.tr4");
+
+            //Store the original floordata from the level
+            ushort[] originalFData = new ushort[lvl.LevelDataChunk.NumFloorData];
+            Array.Copy(lvl.LevelDataChunk.Floordata, originalFData, lvl.LevelDataChunk.NumFloorData);
+
+            //Parse the floordata using FDControl and re-write the parsed data back
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+            fdataReader.WriteToLevel(lvl);
+
+            //Store the new floordata written back by FDControl
+            ushort[] newFData = lvl.LevelDataChunk.Floordata;
+
+            //Compare to make sure the original fdata was written back.
+            CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
+            Assert.AreEqual((uint)newFData.Length, lvl.LevelDataChunk.NumFloorData);
+
+            TR4LevelWriter writer = new TR4LevelWriter();
+            writer.WriteLevelToFile(lvl, "palaces2_fdata.tr4");
+        }
+
+        [TestMethod]
+        public void Floordata_ReadWrite_TriggerTriggererTest()
+        {
+            TR4LevelReader reader = new TR4LevelReader();
+            TR4Level lvl = reader.ReadLevel("alexhub.tr4");
+
+            //Store the original floordata from the level
+            ushort[] originalFData = new ushort[lvl.LevelDataChunk.NumFloorData];
+            Array.Copy(lvl.LevelDataChunk.Floordata, originalFData, lvl.LevelDataChunk.NumFloorData);
+
+            //Parse the floordata using FDControl and re-write the parsed data back
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+            fdataReader.WriteToLevel(lvl);
+
+            //Store the new floordata written back by FDControl
+            ushort[] newFData = lvl.LevelDataChunk.Floordata;
+
+            //Compare to make sure the original fdata was written back.
+            CollectionAssert.AreEqual(originalFData, newFData, "Floordata does not match");
+            Assert.AreEqual((uint)newFData.Length, lvl.LevelDataChunk.NumFloorData);
+
+            TR4LevelWriter writer = new TR4LevelWriter();
+            writer.WriteLevelToFile(lvl, "alexhub_fdata.tr4");
         }
     }
 

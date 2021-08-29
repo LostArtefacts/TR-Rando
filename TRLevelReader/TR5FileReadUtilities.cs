@@ -125,9 +125,42 @@ namespace TRLevelReader
                 //To modify in future we will need to parse properly.
                 TR5RoomData data = new TR5RoomData();
                 data.AsBytes = reader.ReadBytes((int)(lastPosition + room.RoomDataSize) - (int)afterhdr);
-                room.RoomData = data;
 
+                PopulateLightsBulbsAndSectors(room, data);
+
+                room.RoomData = data;
                 lvl.LevelDataChunk.Rooms[i] = room;
+            }
+        }
+
+        private static void PopulateLightsBulbsAndSectors(TR5Room room, TR5RoomData data)
+        {
+            if (data.AsBytes != null)
+            {
+                using (MemoryStream stream = new MemoryStream(data.AsBytes, false))
+                {
+                    using (BinaryReader rdatareader = new BinaryReader(stream))
+                    {
+                        data.Lights = new TR5RoomLight[room.NumLights];
+                        data.FogBulbs = new TR5FogBulb[room.NumFogBulbs];
+                        data.SectorList = new TRRoomSector[room.NumXSectors * room.NumZSectors];
+
+                        for (int i = 0; i < room.NumLights; i++)
+                        {
+                            data.Lights[i] = TR5FileReadUtilities.ReadRoomLight(rdatareader);
+                        }
+
+                        for (int i = 0; i < room.NumFogBulbs; i++)
+                        {
+                            data.FogBulbs[i] = TR5FileReadUtilities.ReadRoomBulbs(rdatareader);
+                        }
+
+                        for (int i = 0; i < room.NumXSectors * room.NumZSectors; i++)
+                        {
+                            data.SectorList[i] = TR2FileReadUtilities.ReadRoomSector(rdatareader);
+                        }
+                    }
+                }
             }
         }
 

@@ -194,30 +194,34 @@ namespace TRFDControl
                         //We don't know if there are any more yet.
                         bool continueFDParse;
 
-                        //Parse trigactions
-                        do
+                        //Do not enter do...while if key/switch ref uint16 does not set continue
+                        if (trig.SwitchKeyContinue)
                         {
-                            //New trigger action
-                            FDActionListItem action = new FDActionListItem() { Value = FloorData[++index] };
-
-                            continueFDParse = action.Continue;
-
-                            if (action.TrigAction == FDTrigAction.Camera)
+                            //Parse trigactions
+                            do
                             {
-                                //Camera trig actions have a special extra uint16...
-                                FDCameraAction camAction = new FDCameraAction() { Value = FloorData[++index] };
+                                //New trigger action
+                                FDActionListItem action = new FDActionListItem() { Value = FloorData[++index] };
 
-                                //store associated camera action
-                                action.CamAction = camAction;
+                                continueFDParse = action.Continue;
 
-                                //Is there more?
-                                continueFDParse = camAction.Continue;
-                            }
+                                if (action.TrigAction == FDTrigAction.Camera || action.TrigAction == FDTrigAction.Flyby)
+                                {
+                                    //Camera trig actions have a special extra uint16...
+                                    FDCameraAction camAction = new FDCameraAction() { Value = FloorData[++index] };
 
-                            //add action
-                            trig.TrigActionList.Add(action);
-                                    
-                        } while (index < NumFloorData && continueFDParse);
+                                    //store associated camera action
+                                    action.CamAction = camAction;
+
+                                    //Is there more?
+                                    continueFDParse = camAction.Continue;
+                                }
+
+                                //add action
+                                trig.TrigActionList.Add(action);
+
+                            } while (index < NumFloorData && continueFDParse);
+                        }
 
                         floordataFunctions.Add(trig);
 
