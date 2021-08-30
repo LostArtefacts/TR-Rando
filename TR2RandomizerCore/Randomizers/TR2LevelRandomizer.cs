@@ -350,6 +350,7 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         EnforcedModeOnly = !RandomizeEnvironment,
+                        NumMirrorLevels = 19,
                         RandomizeWater = RandomizeWaterLevels,
                         RandomizeSlots = RandomizeSlotPositions
                     }.Randomize(EnvironmentSeed);
