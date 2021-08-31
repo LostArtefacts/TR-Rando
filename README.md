@@ -27,7 +27,7 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
 * Anopob - For various contributions and bug fixes!
 * Jimmy Beon - Providing us with an excellent assortment of custom textures for use in rando.
 * Topixtor - For endless testing to fix issues such as the opera house/barkhang entity freeze.
-* Lily Jericho - For endless testing to fix issues such as the opera house/barkhang entity freeze, and providing great continuous feedback. Lily was also a coordinator of the huge translation effort by the community, with a special thanks to the following translators:
+* Lilly Jericho - For endless testing to fix issues such as the opera house/barkhang entity freeze, and providing great continuous feedback. Lilly was also a coordinator of the huge translation effort by the community, with a special thanks to the following translators:
     * Lilly Jericho (German)
     * Erackk (Croatian)
     * LeonHeart & Hedteur (French)
