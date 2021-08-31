@@ -341,6 +341,19 @@ namespace TR2RandomizerCore.Randomizers
                     itemRandomizer.RandomizeAmmo();
                 }
 
+                if (!monitor.IsCancelled && RandomizeStartPosition)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing start positions");
+                    new StartPositionRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        RotateOnly = RotateStartPositionOnly,
+                        DevelopmentMode = DevelopmentMode
+                    }.Randomize(StartPositionSeed);
+                }
+
                 if (!monitor.IsCancelled)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
@@ -352,7 +365,8 @@ namespace TR2RandomizerCore.Randomizers
                         EnforcedModeOnly = !RandomizeEnvironment,
                         NumMirrorLevels = 19,
                         RandomizeWater = RandomizeWaterLevels,
-                        RandomizeSlots = RandomizeSlotPositions
+                        RandomizeSlots = RandomizeSlotPositions,
+                        TextureMonitor = textureMonitor
                     }.Randomize(EnvironmentSeed);
                 }
 
@@ -367,19 +381,6 @@ namespace TR2RandomizerCore.Randomizers
                         SaveMonitor = monitor,
                         ChangeTriggerTracks = ChangeTriggerTracks
                     }.Randomize(AudioSeed);
-                }
-
-                if (!monitor.IsCancelled && RandomizeStartPosition)
-                {
-                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing start positions");
-                    new StartPositionRandomizer
-                    {
-                        Levels = levels,
-                        BasePath = wipDirectory,
-                        SaveMonitor = monitor,
-                        RotateOnly = RotateStartPositionOnly,
-                        DevelopmentMode = DevelopmentMode
-                    }.Randomize(StartPositionSeed);
                 }
 
                 if (!monitor.IsCancelled && RandomizeOutfits)
@@ -406,7 +407,8 @@ namespace TR2RandomizerCore.Randomizers
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
-                        NumLevels = NightModeCount
+                        NumLevels = NightModeCount,
+                        TextureMonitor = textureMonitor
                     }.Randomize(NightModeSeed);
                 }
 

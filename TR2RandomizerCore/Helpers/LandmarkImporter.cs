@@ -22,7 +22,7 @@ namespace TR2RandomizerCore.Helpers
     {
         private const int _maxTextures = 2048;
 
-        public bool Import(TR2CombinedLevel level, TextureLevelMapping mapping)
+        public bool Import(TR2CombinedLevel level, TextureLevelMapping mapping, bool isLevelMirrored)
         {
             // Ensure any changes already made are committed to the level
             mapping.CommitGraphics();
@@ -47,7 +47,7 @@ namespace TR2RandomizerCore.Helpers
                     {
                         foreach (LandmarkTextureTarget target in mapping.LandmarkMapping[source][segmentIndex])
                         {
-                            IndexedTRObjectTexture texture = CreateTexture(segments[segmentIndex]);
+                            IndexedTRObjectTexture texture = CreateTexture(segments[segmentIndex], isLevelMirrored);
                             target.MappedTextureIndex = textures.Count;
                             textures.Add(texture.Texture);
 
@@ -118,20 +118,28 @@ namespace TR2RandomizerCore.Helpers
             }
         }
 
-        private IndexedTRObjectTexture CreateTexture(Rectangle rectangle)
+        private IndexedTRObjectTexture CreateTexture(Rectangle rectangle, bool mirrored)
         {
+            // Configure the points and reverse them if the level is mirrored
+            List<TRObjectTextureVert> vertices = new List<TRObjectTextureVert>
+            {
+                CreatePoint(0, 0),
+                CreatePoint(rectangle.Width, 0),
+                CreatePoint(rectangle.Width, rectangle.Height),
+                CreatePoint(0, rectangle.Height)
+            };
+
+            if (mirrored)
+            {
+                vertices.Reverse();
+            }
+
             // Make a dummy texture object with the given bounds
             TRObjectTexture texture = new TRObjectTexture
             {
                 AtlasAndFlag = 0,
                 Attribute = 0,
-                Vertices = new TRObjectTextureVert[]
-                {
-                    CreatePoint(0, 0),
-                    CreatePoint(rectangle.Width, 0),
-                    CreatePoint(rectangle.Width, rectangle.Height),
-                    CreatePoint(0, rectangle.Height)
-                }
+                Vertices = vertices.ToArray()
             };
 
             return new IndexedTRObjectTexture

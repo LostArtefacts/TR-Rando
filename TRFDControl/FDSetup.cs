@@ -49,7 +49,7 @@ namespace TRFDControl
             }
             set
             {
-                Value = (ushort)(Value & ~SubFunction);
+                Value = (ushort)(Value & ~(Value & 0x7F00));
                 Value |= (ushort)(value << 8);
             }
         }

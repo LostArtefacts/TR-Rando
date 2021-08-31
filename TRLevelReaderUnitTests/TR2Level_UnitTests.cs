@@ -873,5 +873,127 @@ namespace TRLevelReaderUnitTests
             //Check the music trigger has Continue set to false
             Assert.IsFalse(trigger.TrigActionList[2].Continue);
         }
+
+        [TestMethod]
+        public void FloorData_ModifyClimbableTest()
+        {
+            // Get original ladders in +/-X directions
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("wall.tr2");
+
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+            
+            // Second guardhouse ladder
+            FDClimbEntry negXEntry = fdataReader.Entries[577][0] as FDClimbEntry;
+            // TRex pit ladder
+            FDClimbEntry posXEntry = fdataReader.Entries[7405][0] as FDClimbEntry;
+
+            // Confirm both are/are not end data for the sake of comparing the value
+            Assert.AreEqual(negXEntry.Setup.EndData, posXEntry.Setup.EndData);
+
+            ushort negXValue = negXEntry.Setup.Value;
+            ushort posXValue = posXEntry.Setup.Value;
+
+            // Confirm they are currently what we expect
+            Assert.IsTrue(negXEntry.IsNegativeX);
+            Assert.IsFalse(negXEntry.IsPositiveX);
+            Assert.IsTrue(posXEntry.IsPositiveX);
+            Assert.IsFalse(posXEntry.IsNegativeX);
+
+            // Flip the negative X entry and confirm it's now positive only
+            negXEntry.IsPositiveX = true;
+            negXEntry.IsNegativeX = false;
+            Assert.IsTrue(negXEntry.IsPositiveX);
+            Assert.IsFalse(negXEntry.IsNegativeX);
+            Assert.AreEqual(negXEntry.Setup.Value, posXValue);
+
+            // Flip the positive X entry and confirm it's now negative only
+            posXEntry.IsPositiveX = false;
+            posXEntry.IsNegativeX = true;
+            Assert.IsTrue(posXEntry.IsNegativeX);
+            Assert.IsFalse(posXEntry.IsPositiveX);
+            Assert.AreEqual(posXEntry.Setup.Value, negXValue);
+
+
+            // Get original ladders in +/-Z directions
+            lvl = reader.ReadLevel("venice.tr2");
+            fdataReader.ParseFromLevel(lvl);
+
+            // Room 79
+            FDClimbEntry negZEntry = fdataReader.Entries[2239][0] as FDClimbEntry;
+            FDClimbEntry posZEntry = fdataReader.Entries[2228][0] as FDClimbEntry;
+
+            // Confirm both are/are not end data for the sake of comparing the value
+            Assert.AreEqual(negXEntry.Setup.EndData, posXEntry.Setup.EndData);
+
+            ushort negZValue = negZEntry.Setup.Value;
+            ushort posZValue = posZEntry.Setup.Value;
+
+            // Confirm they are currently what we expect
+            Assert.IsTrue(negZEntry.IsNegativeZ);
+            Assert.IsFalse(negZEntry.IsPositiveZ);
+            Assert.IsTrue(posZEntry.IsPositiveZ);
+            Assert.IsFalse(posZEntry.IsNegativeZ);
+
+            // Flip the negative Z entry and confirm it's now positive only
+            negZEntry.IsPositiveZ = true;
+            negZEntry.IsNegativeZ = false;
+            Assert.IsTrue(negZEntry.IsPositiveZ);
+            Assert.IsFalse(negZEntry.IsNegativeZ);
+            Assert.AreEqual(negZEntry.Setup.Value, posZValue);
+
+            // Flip the positive Z entry and confirm it's now negative only
+            posZEntry.IsPositiveZ = false;
+            posZEntry.IsNegativeZ = true;
+            Assert.IsTrue(posZEntry.IsNegativeZ);
+            Assert.IsFalse(posZEntry.IsPositiveZ);
+            Assert.AreEqual(posZEntry.Setup.Value, negZValue);
+
+
+            // Get original ladders with more than one direction
+            // Room 58
+            FDClimbEntry negZNegXEntry = fdataReader.Entries[1432][0] as FDClimbEntry;
+            FDClimbEntry posZNegXEntry = fdataReader.Entries[1437][0] as FDClimbEntry;
+
+            // Confirm both are/are not end data for the sake of comparing the value
+            Assert.AreEqual(negZNegXEntry.Setup.EndData, posZNegXEntry.Setup.EndData);
+
+            ushort negZNegXValue = negZNegXEntry.Setup.Value;
+            ushort posZNegXValue = posZNegXEntry.Setup.Value;
+
+            // Confirm they are currently what we expect
+            Assert.IsTrue(negZNegXEntry.IsNegativeZ);
+            Assert.IsTrue(negZNegXEntry.IsNegativeX);
+            Assert.IsFalse(negZNegXEntry.IsPositiveZ);
+            Assert.IsFalse(negZNegXEntry.IsPositiveX);
+
+            Assert.IsTrue(posZNegXEntry.IsPositiveZ);
+            Assert.IsTrue(posZNegXEntry.IsNegativeX);
+            Assert.IsFalse(posZNegXEntry.IsNegativeZ);
+            Assert.IsFalse(posZNegXEntry.IsPositiveX);
+
+            // Flip the negative Z and confirm it matches the posZNegXValue entry
+            negZNegXEntry.IsPositiveZ = true;
+            negZNegXEntry.IsNegativeZ = false;
+            negZNegXEntry.IsPositiveX = false;
+            negZNegXEntry.IsNegativeX = true;
+            Assert.IsTrue(negZNegXEntry.IsPositiveZ);
+            Assert.IsTrue(negZNegXEntry.IsNegativeX);
+            Assert.IsFalse(negZNegXEntry.IsNegativeZ);
+            Assert.IsFalse(negZNegXEntry.IsPositiveX);
+            Assert.AreEqual(negZNegXEntry.Setup.Value, posZNegXValue);
+
+            // Flip the positive Z and confirm it matches the posZNegXValue entry
+            posZNegXEntry.IsPositiveZ = false;
+            posZNegXEntry.IsNegativeZ = true;
+            posZNegXEntry.IsPositiveX = false;
+            posZNegXEntry.IsNegativeX = true;
+            Assert.IsTrue(posZNegXEntry.IsNegativeZ);
+            Assert.IsTrue(posZNegXEntry.IsNegativeX);
+            Assert.IsFalse(posZNegXEntry.IsPositiveZ);
+            Assert.IsFalse(posZNegXEntry.IsPositiveX);
+            Assert.AreEqual(posZNegXEntry.Setup.Value, negZNegXValue);
+        }
     }
 }

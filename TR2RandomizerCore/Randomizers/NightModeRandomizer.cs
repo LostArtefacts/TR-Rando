@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TR2RandomizerCore.Helpers;
+using TR2RandomizerCore.Utilities;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -12,6 +13,8 @@ namespace TR2RandomizerCore.Randomizers
     public class NightModeRandomizer : RandomizerBase
     {
         public uint NumLevels { get; set; }
+
+        internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         private ISet<string> _nightLevels;
 
@@ -60,6 +63,10 @@ namespace TR2RandomizerCore.Randomizers
             {
                 SetNightMode(level.CutSceneLevel);
             }
+
+            // Notify the texture monitor that this level is now in night mode
+            TexturePositionMonitor monitor = TextureMonitor.CreateMonitor(level.Name);
+            monitor.UseNightTextures = true;
         }
 
         private void DarkenRooms(TR2Level level)

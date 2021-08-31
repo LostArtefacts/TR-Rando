@@ -12,7 +12,7 @@ namespace TRFDControl.FDEntryTypes
         {
             get
             {
-                return ((Setup.SubFunction & (byte)FDClimbDirection.PositiveX) > 0);
+                return (Setup.SubFunction & (byte)FDClimbDirection.PositiveX) > 0;
             }
             set
             {
@@ -20,7 +20,7 @@ namespace TRFDControl.FDEntryTypes
                 {
                     Setup.SubFunction |= (byte)FDClimbDirection.PositiveX;
                 }
-                else if (IsPositiveX)
+                else
                 {
                     Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.PositiveX);
                 }
@@ -31,7 +31,7 @@ namespace TRFDControl.FDEntryTypes
         {
             get
             {
-                return ((Setup.SubFunction & (byte)FDClimbDirection.PositiveZ) > 0);
+                return (Setup.SubFunction & (byte)FDClimbDirection.PositiveZ) > 0;
             }
             set
             {
@@ -39,7 +39,7 @@ namespace TRFDControl.FDEntryTypes
                 {
                     Setup.SubFunction |= (byte)FDClimbDirection.PositiveZ;
                 }
-                else if (IsPositiveZ)
+                else
                 {
                     Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.PositiveZ);
                 }
@@ -50,7 +50,7 @@ namespace TRFDControl.FDEntryTypes
         {
             get
             {
-                return ((Setup.SubFunction & (byte)FDClimbDirection.NegativeX) > 0);
+                return (Setup.SubFunction & (byte)FDClimbDirection.NegativeX) > 0;
             }
             set
             {
@@ -58,7 +58,7 @@ namespace TRFDControl.FDEntryTypes
                 {
                     Setup.SubFunction |= (byte)FDClimbDirection.NegativeX;
                 }
-                else if (IsNegativeX)
+                else
                 {
                     Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.NegativeX);
                 }
@@ -69,7 +69,7 @@ namespace TRFDControl.FDEntryTypes
         {
             get
             {
-                return ((Setup.SubFunction & (byte)FDClimbDirection.NegativeZ) > 0);
+                return (Setup.SubFunction & (byte)FDClimbDirection.NegativeZ) > 0;
             }
             set
             {
@@ -77,7 +77,7 @@ namespace TRFDControl.FDEntryTypes
                 {
                     Setup.SubFunction |= (byte)FDClimbDirection.NegativeZ;
                 }
-                else if (IsNegativeZ)
+                else
                 {
                     Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.NegativeZ);
                 }

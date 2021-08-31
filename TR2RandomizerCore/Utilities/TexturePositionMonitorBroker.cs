@@ -28,10 +28,14 @@ namespace TR2RandomizerCore.Utilities
             _lock = new object();
         }
 
-        internal TexturePositionMonitor CreateMonitor(string lvlName, List<TR2Entities> entities)
+        internal TexturePositionMonitor CreateMonitor(string lvlName, List<TR2Entities> entities = null)
         {
             lock (_lock)
             {
+                if (entities == null)
+                {
+                    entities = new List<TR2Entities>();
+                }
                 List<StaticTextureSource> sources = GetSourcesToMonitor(entities);
                 TexturePositionMonitor monitor = GetMonitor(lvlName);
                 if (monitor == null)
