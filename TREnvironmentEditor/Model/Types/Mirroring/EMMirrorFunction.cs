@@ -197,16 +197,9 @@ namespace TREnvironmentEditor.Model.Types
                         {
                             if (entry is FDSlantEntry slantEntry)
                             {
-                                //If the X slope is greater than zero, then its value is added to the floor heights of corners 00 and 01.
-                                //If it is less than zero, then its value is subtracted from the floor heights of corners 10 and 11.
-                                if (slantEntry.XSlant != 0)
-                                {
-                                    slantEntry.XSlant *= -1;
-                                }
-                                if (slantEntry.XSlant != 0 && slantEntry.ZSlant != 0)
-                                {
-                                    // TODO
-                                }
+                                // If the X slope is greater than zero, then its value is added to the floor heights of corners 00 and 01.
+                                // If it is less than zero, then its value is subtracted from the floor heights of corners 10 and 11.
+                                slantEntry.XSlant *= -1;
                             }
                             else if (entry is FDClimbEntry climbEntry)
                             {

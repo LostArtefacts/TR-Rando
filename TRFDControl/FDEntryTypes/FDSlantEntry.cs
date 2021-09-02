@@ -20,8 +20,7 @@ namespace TRFDControl.FDEntryTypes
             }
             set
             {
-                SlantValue = (ushort)(SlantValue & ~XSlant);
-                SlantValue = (ushort)(SlantValue | (int)value);
+                SetSlants(value, ZSlant);
             }
         }
 
@@ -33,9 +32,18 @@ namespace TRFDControl.FDEntryTypes
             }
             set
             {
-                SlantValue = (ushort)(SlantValue & ~ZSlant);
-                SlantValue = (ushort)(SlantValue | value << 8);
+                SetSlants(XSlant, value);
             }
+        }
+
+        private void SetSlants(sbyte xSlant, sbyte zSlant)
+        {
+            int value = (xSlant & 0xff) + (zSlant << 8);
+            if (value < 0)
+            {
+                value = ushort.MaxValue + 1 + value;
+            }
+            SlantValue = (ushort)value;
         }
 
         public override ushort[] Flatten()
