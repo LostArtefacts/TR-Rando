@@ -5,6 +5,7 @@ using System.Linq;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
+using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Model.Textures;
@@ -21,7 +22,71 @@ namespace TREnvironmentEditor.Model.Types
         public override void ApplyToLevel(TR2Level level)
         {
             MirrorFloorData(level);
+            MirrorRooms(level);
+            MirrorTextures(level);
+            UpdateBoxes(level);
+        }
 
+        private void MirrorFloorData(TR2Level level)
+        {
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            foreach (TR2Room room in level.Rooms)
+            {
+                // Convert the flattened sector list to 2D
+                List<TRRoomSector> sectors = room.SectorList.ToList();
+                List<List<TRRoomSector>> sectorMap = new List<List<TRRoomSector>>();
+                for (int x = 0; x < room.NumXSectors; x++)
+                {
+                    sectorMap.Add(new List<TRRoomSector>());
+                    for (int z = 0; z < room.NumZSectors; z++)
+                    {
+                        sectorMap[x].Add(sectors[z + x * room.NumZSectors]);
+                    }
+                }
+
+                // We are flipping over the X axis, so we just reverse the sector list
+                sectorMap.Reverse();
+                sectors.Clear();
+                foreach (List<TRRoomSector> sectorList in sectorMap)
+                {
+                    sectors.AddRange(sectorList);
+                }
+                room.SectorList = sectors.ToArray();
+
+                // Change slants and climbable entries
+                foreach (TRRoomSector sector in sectors)
+                {
+                    if (sector.FDIndex != 0)
+                    {
+                        List<FDEntry> entries = control.Entries[sector.FDIndex];
+                        foreach (FDEntry entry in entries)
+                        {
+                            if (entry is FDSlantEntry slantEntry)
+                            {
+                                // If the X slope is greater than zero, then its value is added to the floor heights of corners 00 and 01.
+                                // If it is less than zero, then its value is subtracted from the floor heights of corners 10 and 11.
+                                slantEntry.XSlant *= -1;
+                            }
+                            else if (entry is FDClimbEntry climbEntry)
+                            {
+                                // We only need to flip the direction if it's exclusively set in +/- X direction.
+                                if (climbEntry.IsNegativeX ^ climbEntry.IsPositiveX)
+                                {
+                                    climbEntry.IsNegativeX = !(climbEntry.IsPositiveX ^= true);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            control.WriteToLevel(level);
+        }
+
+        private void MirrorRooms(TR2Level level)
+        {
             // Work out the width of the world
             int globalMaxX = 0;
             foreach (TR2Room room in level.Rooms)
@@ -34,17 +99,21 @@ namespace TREnvironmentEditor.Model.Types
 
             List<TR2Entity> entities = level.Entities.ToList();
             List<TRCamera> cameras = level.Cameras.ToList();
-            // Sinks aren't handled yet, but are included here so we only change actual cameras.
-            // For sinks, the Room is actually the strength of the current, so we need to work
-            // out world coordinate repositioning for these.
+            // Sinks and sound sources have no room membership
             List<TRCamera> sinks = GetSinks(level);
-
-            // Collect unique texture references from each of the rooms
-            ISet<ushort> textureReferences = new HashSet<ushort>();
+            List<TRSoundSource> soundSources = level.SoundSources.ToList();
 
             for (int rm = 0; rm < level.NumRooms; rm++)
             {
                 TR2Room room = level.Rooms[rm];
+
+                // We tie items without rooms to room 0 for the purpose of flipping.
+                // as we just need a reference point to work out their new world coords.
+                if (rm == 0)
+                {
+                    sinks.ForEach(s => s.X -= room.Info.X);
+                    soundSources.ForEach(s => s.X -= room.Info.X);
+                }
 
                 // Convert X pos to room space
                 List<TR2Entity> roomEntities = entities.FindAll(e => e.Room == rm);
@@ -70,6 +139,30 @@ namespace TREnvironmentEditor.Model.Types
                 Debug.Assert(room.Info.X >= 0);
 
                 int roomOffset = room.Info.X + room.NumXSectors * SectorSize;
+
+                if (rm == 0)
+                {
+                    // Move the sinks to their new spots
+                    foreach (TRCamera sink in sinks)
+                    {
+                        // Move it to the other side of the room
+                        sink.X *= -1;
+                        // Move it back to world coords
+                        sink.X += roomOffset;
+
+                        Debug.Assert(sink.X >= 0);
+                    }
+                    
+                    foreach (TRSoundSource soundSource in soundSources)
+                    {
+                        // Move it to the other side of the room
+                        soundSource.X *= -1;
+                        // Move it back to world coords
+                        soundSource.X += roomOffset;
+
+                        Debug.Assert(soundSource.X >= 0);
+                    }
+                }
 
                 // Move the entities to their new spots
                 RelocateEntities(roomEntities, roomOffset);
@@ -126,20 +219,6 @@ namespace TREnvironmentEditor.Model.Types
                     Debug.Assert(vert.Vertex.X >= 0);
                 }
 
-                // Invert the faces, otherwise they are inside out
-                foreach (TRFace4 f in room.RoomData.Rectangles)
-                {
-                    Swap(f.Vertices, 0, 3);
-                    Swap(f.Vertices, 1, 2);
-                    textureReferences.Add(f.Texture);
-                }
-
-                foreach (TRFace3 f in room.RoomData.Triangles)
-                {
-                    Swap(f.Vertices, 0, 2);
-                    textureReferences.Add(f.Texture);
-                }
-
                 // Change visibility portal vertices and flip the normal for X
                 foreach (TRRoomPortal portal in room.Portals)
                 {
@@ -152,74 +231,7 @@ namespace TREnvironmentEditor.Model.Types
                     }
                     portal.Normal.X *= -1;
                 }
-
-                UpdateBoxes(level, room);
             }
-
-            MirrorTextures(level, textureReferences);
-        }
-
-        private void MirrorFloorData(TR2Level level)
-        {
-            FDControl control = new FDControl();
-            control.ParseFromLevel(level);
-
-            foreach (TR2Room room in level.Rooms)
-            {
-                // Convert the flattened sector list to 2D
-                List<TRRoomSector> sectors = room.SectorList.ToList();
-                List<List<TRRoomSector>> sectorMap = new List<List<TRRoomSector>>();
-                for (int x = 0; x < room.NumXSectors; x++)
-                {
-                    sectorMap.Add(new List<TRRoomSector>());
-                    for (int z = 0; z < room.NumZSectors; z++)
-                    {
-                        sectorMap[x].Add(sectors[z + x * room.NumZSectors]);
-                    }
-                }
-
-                // We are flipping over the X axis, so we just reverse the sector list
-                sectorMap.Reverse();
-                sectors.Clear();
-                foreach (List<TRRoomSector> sectorList in sectorMap)
-                {
-                    sectors.AddRange(sectorList);
-                }
-                room.SectorList = sectors.ToArray();
-
-                // Change slants and climbable entries
-                foreach (TRRoomSector sector in sectors)
-                {
-                    if (sector.FDIndex != 0)
-                    {
-                        List<FDEntry> entries = control.Entries[sector.FDIndex];
-                        foreach (FDEntry entry in entries)
-                        {
-                            if (entry is FDSlantEntry slantEntry)
-                            {
-                                // If the X slope is greater than zero, then its value is added to the floor heights of corners 00 and 01.
-                                // If it is less than zero, then its value is subtracted from the floor heights of corners 10 and 11.
-                                slantEntry.XSlant *= -1;
-                            }
-                            else if (entry is FDClimbEntry climbEntry)
-                            {
-                                if (climbEntry.IsNegativeX)
-                                {
-                                    climbEntry.IsNegativeX = false;
-                                    climbEntry.IsPositiveX = true;
-                                }
-                                else if (climbEntry.IsPositiveX)
-                                {
-                                    climbEntry.IsPositiveX = false;
-                                    climbEntry.IsNegativeX = true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            control.WriteToLevel(level);
         }
 
         private List<TRCamera> GetSinks(TR2Level level)
@@ -377,40 +389,66 @@ namespace TREnvironmentEditor.Model.Types
             arr[pos2] = temp;
         }
 
-        private void UpdateBoxes(TR2Level level, TR2Room room)
+        private void UpdateBoxes(TR2Level level)
         {
             // The order still needs investigation as AI pathfinding isn't quite right.
             // The following ensures the boxes line up properly with the sector positioning.
             // TODO: read into overlapping, but initial thoughts are that these will need to 
             // be updated by mapping the "old" sector box indices to new.
 
-            int roomX = room.Info.X / SectorSize;
-            int roomZ = room.Info.Z / SectorSize;
-            for (int i = 0; i < room.SectorList.Length; i++)
+            foreach (TR2Room room in level.Rooms)
             {
-                TRRoomSector sector = room.SectorList[i];
-                if (sector.BoxIndex != ushort.MaxValue)
+                int roomX = room.Info.X / SectorSize;
+                for (int i = 0; i < room.SectorList.Length; i++)
                 {
-                    TR2Box box = level.Boxes[sector.BoxIndex];
-                    int boxXDiff = box.XMax - box.XMin;
-                    int boxZDiff = box.ZMax - box.ZMin;
+                    TRRoomSector sector = room.SectorList[i];
+                    if (sector.BoxIndex != ushort.MaxValue)
+                    {
+                        TR2Box box = level.Boxes[sector.BoxIndex];
 
-                    int sectorX = i / room.NumZSectors;
-                    int sectorZ = i % room.NumZSectors;
-                    sectorX += roomX;
-                    sectorZ += roomZ;
+                        int sectorX = i / room.NumZSectors;
+                        sectorX += roomX;
 
-                    box.XMin = (byte)sectorX;
-                    box.XMax = (byte)(box.XMin + boxXDiff);
-                    box.ZMin = (byte)sectorZ;
-                    box.ZMax = (byte)(box.ZMin + boxZDiff);
+                        int boxXDiff = box.XMax - box.XMin;
+                        box.XMin = (byte)sectorX;
+                        box.XMax = (byte)(box.XMin + boxXDiff);
+                    }
                 }
             }
         }
 
-        private void MirrorTextures(TR2Level level, ISet<ushort> textureReferences)
+        private void MirrorTextures(TR2Level level)
         {
-            // Basically flip the vertices in the same way as done for faces
+            // Collect unique texture references from each of the rooms
+            ISet<ushort> textureReferences = new HashSet<ushort>();
+
+            foreach (TR2Room room in level.Rooms)
+            {
+                // Invert the faces, otherwise they are inside out
+                foreach (TRFace4 f in room.RoomData.Rectangles)
+                {
+                    Swap(f.Vertices, 0, 3);
+                    Swap(f.Vertices, 1, 2);
+                    textureReferences.Add(f.Texture);
+                }
+
+                foreach (TRFace3 f in room.RoomData.Triangles)
+                {
+                    Swap(f.Vertices, 0, 2);
+                    textureReferences.Add(f.Texture);
+                }
+            }
+
+            // Include all animated texture references too
+            foreach (TRAnimatedTexture anim in level.AnimatedTextures)
+            {
+                for (int i = 0; i < anim.Textures.Length; i++)
+                {
+                    textureReferences.Add(anim.Textures[i]);
+                }
+            }
+
+            // Flip the object texture vertices in the same way as done for faces
             foreach (ushort textureRef in textureReferences)
             {
                 IndexedTRObjectTexture texture = new IndexedTRObjectTexture
