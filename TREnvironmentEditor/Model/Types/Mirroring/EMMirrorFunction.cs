@@ -5,7 +5,6 @@ using System.Linq;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
-using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Model.Textures;
@@ -391,10 +390,11 @@ namespace TREnvironmentEditor.Model.Types
 
         private void UpdateBoxes(TR2Level level)
         {
-            // The order still needs investigation as AI pathfinding isn't quite right.
-            // The following ensures the boxes line up properly with the sector positioning.
-            // TODO: read into overlapping, but initial thoughts are that these will need to 
-            // be updated by mapping the "old" sector box indices to new.
+            // Boxes do not necessarily cover only one sector and several sectors can point
+            // to the same box. So we need to work out the smallest new X position for shared
+            // boxes and update each one only once. The XMax value is simply the previous Max/Min 
+            // difference added to the new XMin value.
+            Dictionary<TR2Box, int> boxPositionMap = new Dictionary<TR2Box, int>();
 
             foreach (TR2Room room in level.Rooms)
             {
@@ -406,14 +406,27 @@ namespace TREnvironmentEditor.Model.Types
                     {
                         TR2Box box = level.Boxes[sector.BoxIndex];
 
+                        // Where is this sector in the world?
                         int sectorX = i / room.NumZSectors;
                         sectorX += roomX;
 
-                        int boxXDiff = box.XMax - box.XMin;
-                        box.XMin = (byte)sectorX;
-                        box.XMax = (byte)(box.XMin + boxXDiff);
+                        if (!boxPositionMap.ContainsKey(box))
+                        {
+                            boxPositionMap[box] = sectorX;
+                        }
+                        else
+                        {
+                            boxPositionMap[box] = Math.Min(boxPositionMap[box], sectorX);
+                        }
                     }
                 }
+            }
+
+            foreach (TR2Box box in boxPositionMap.Keys)
+            {
+                int boxXDiff = box.XMax - box.XMin;
+                box.XMin = (byte)boxPositionMap[box];
+                box.XMax = (byte)(box.XMin + boxXDiff);
             }
         }
 
