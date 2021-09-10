@@ -38,6 +38,16 @@ namespace TR2RandomizerView.Windows
             nameof(HasMirroring), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty HasHaircutsProperty = DependencyProperty.Register
+        (
+            nameof(HasHaircuts), typeof(bool), typeof(AdvancedWindow)
+        );
+
+        public static readonly DependencyProperty HasInvisibilityProperty = DependencyProperty.Register
+        (
+            nameof(HasInvisibility), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
         (
             nameof(ControllerProxy), typeof(ControllerOptions), typeof(AdvancedWindow)
@@ -71,6 +81,18 @@ namespace TR2RandomizerView.Windows
         {
             get => (bool)GetValue(HasMirroringProperty);
             set => SetValue(HasMirroringProperty, value);
+        }
+
+        public bool HasHaircuts
+        {
+            get => (bool)GetValue(HasHaircutsProperty);
+            set => SetValue(HasHaircutsProperty, value);
+        }
+
+        public bool HasInvisibility
+        {
+            get => (bool)GetValue(HasInvisibilityProperty);
+            set => SetValue(HasInvisibilityProperty, value);
         }
 
         public ControllerOptions ControllerProxy

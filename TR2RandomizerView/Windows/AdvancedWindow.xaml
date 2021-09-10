@@ -38,9 +38,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -246,7 +248,7 @@
                         <CheckBox IsChecked="{Binding ControllerProxy.MirrorAssaultCourse, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
-                                   Content="Mirror Assault Course" />
+                                   Content="Include Assault Course" />
                         </CheckBox>
                     </Border>
 
@@ -255,6 +257,134 @@
                         <Label HorizontalAlignment="Left"
                                VerticalAlignment="Center"
                                Content="Mirror the assault course level in addition to or separately from above."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        Margin="0,5,0,0"
+                        Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Text="Haircuts"
+                           FontSize="14"
+                           TextDecorations="Underline"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown 
+                                HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"  
+                                        Value="{Binding ControllerProxy.HaircutLevelCount, Mode=TwoWay}"
+                                        MinValue="0"
+                                        MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Lara will lose her braid in the given number of levels."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <CheckBox IsChecked="{Binding ControllerProxy.AssaultCourseHaircut, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Include Assault Course" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Give Lara a haircut in the assault course level in addition to or separately from above."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="6"
+                        Grid.ColumnSpan="2"
+                        Margin="0,15,0,0"
+                        Visibility="{Binding HasInvisibility, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Text="Invisibility"
+                           FontSize="14"
+                           TextDecorations="Underline"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown 
+                                HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"  
+                                        Value="{Binding ControllerProxy.InvisibleLevelCount, Mode=TwoWay}"
+                                        MinValue="0"
+                                        MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Lara will wear an invisibility cloak in the given number of levels. Only her shadow will be visible."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <CheckBox IsChecked="{Binding ControllerProxy.AssaultCourseInvisible, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Include Assault Course" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Make Lara invisible in the assault course level in addition to or separately from above."
                                FontStyle="Italic"
                                Padding="0"
                                Margin="40,0,0,0"/>

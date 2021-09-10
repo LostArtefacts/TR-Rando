@@ -46,9 +46,11 @@ namespace TR2RandomizerCore.Randomizers
         internal RandoDifficulty RandoEnemyDifficulty { get; set; }
         internal bool GlitchedSecrets { get; set; }
         internal bool PersistOutfits { get; set; }
-        internal bool RandomlyCutHair { get; set; }
         internal bool RemoveRobeDagger { get; set; }
-        internal bool EnableInvisibility { get; set; }
+        internal uint HaircutLevelCount { get; set; }
+        internal bool AssaultCourseHaircut { get; set; }
+        internal uint InvisibleLevelCount { get; set; }
+        internal bool AssaultCourseInvisible { get; set; }
         internal bool RetainLevelNames { get; set; }
         internal bool RetainKeyItemNames { get; set; }
         internal Language GameStringLanguage { get; set; }
@@ -97,9 +99,11 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits));
             OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
             PersistOutfits = config.GetBool(nameof(PersistOutfits));
-            RandomlyCutHair = config.GetBool(nameof(RandomlyCutHair), true);
             RemoveRobeDagger = config.GetBool(nameof(RemoveRobeDagger), true);
-            EnableInvisibility = config.GetBool(nameof(EnableInvisibility));
+            HaircutLevelCount = config.GetUInt(nameof(HaircutLevelCount), 9);
+            AssaultCourseHaircut = config.GetBool(nameof(AssaultCourseHaircut), true);
+            InvisibleLevelCount = config.GetUInt(nameof(InvisibleLevelCount), 2);
+            AssaultCourseInvisible = config.GetBool(nameof(AssaultCourseInvisible));
 
             RandomizeGameStrings = config.GetBool(nameof(RandomizeGameStrings));
             GameStringsSeed = config.GetInt(nameof(GameStringsSeed), defaultSeed);
@@ -157,9 +161,11 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeOutfits)] = RandomizeOutfits;
             config[nameof(OutfitSeed)] = OutfitSeed;
             config[nameof(PersistOutfits)] = PersistOutfits;
-            config[nameof(RandomlyCutHair)] = RandomlyCutHair;
             config[nameof(RemoveRobeDagger)] = RemoveRobeDagger;
-            config[nameof(EnableInvisibility)] = EnableInvisibility;
+            config[nameof(HaircutLevelCount)] = HaircutLevelCount;
+            config[nameof(AssaultCourseHaircut)] = AssaultCourseHaircut;
+            config[nameof(InvisibleLevelCount)] = InvisibleLevelCount;
+            config[nameof(AssaultCourseInvisible)] = AssaultCourseInvisible;
 
             config[nameof(RandomizeGameStrings)] = RandomizeGameStrings;
             config[nameof(GameStringsSeed)] = GameStringsSeed;
@@ -403,9 +409,11 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         PersistOutfits = PersistOutfits,
-                        RandomlyCutHair = RandomlyCutHair,
                         RemoveRobeDagger = RemoveRobeDagger,
-                        EnableInvisibility = EnableInvisibility,
+                        NumHaircutLevels = HaircutLevelCount,
+                        AssaultCourseHaircut = AssaultCourseHaircut,
+                        NumInvisibleLevels = InvisibleLevelCount,
+                        AssaultCourseInvisible = AssaultCourseInvisible,
                         TextureMonitor = textureMonitor
                     }.Randomize(OutfitSeed);
                 }

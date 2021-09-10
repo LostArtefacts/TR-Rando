@@ -17,22 +17,27 @@ namespace TR2RandomizerCore.Randomizers
     public class OutfitRandomizer : RandomizerBase
     {
         internal bool PersistOutfits { get; set; }
-        internal bool RandomlyCutHair { get; set; }
         internal bool RemoveRobeDagger { get; set; }
-        internal bool EnableInvisibility { get; set; }
+        internal uint NumHaircutLevels { get; set; }
+        internal bool AssaultCourseHaircut { get; set; }
+        internal uint NumInvisibleLevels { get; set; }
+        internal bool AssaultCourseInvisible { get; set; }
+
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         private TR2Entities _persistentOutfit;
 
-        private ISet<string> _haircutLevels;
         private TR2CombinedLevel _firstDragonLevel;
+
+        private List<TR23ScriptedLevel> _haircutLevels;
+        private List<TR23ScriptedLevel> _invisibleLevels;
 
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
 
             SetPersistentOutfit();
-            ChooseHaircutLevels();
+            ChooseFilteredLevels();
 
             List<OutfitProcessor> processors = new List<OutfitProcessor>();
             for (int i = 0; i < _maxThreads; i++)
@@ -90,10 +95,7 @@ namespace TR2RandomizerCore.Randomizers
         private List<TR2Entities> GetLaraTypes()
         {
             List<TR2Entities> allLaras = TR2EntityUtilities.GetLaraTypes();
-            if (!EnableInvisibility)
-            {
-                allLaras.Remove(TR2Entities.LaraInvisible);
-            }
+            allLaras.Remove(TR2Entities.LaraInvisible);
             return allLaras;
         }
 
@@ -106,33 +108,32 @@ namespace TR2RandomizerCore.Randomizers
             }
         }
 
-        private void ChooseHaircutLevels()
+        private void ChooseFilteredLevels()
         {
-            _haircutLevels = new HashSet<string>();
-            if (RandomlyCutHair)
-            {
-                // One, some, or all. We decide after this loop whether or not to include the
-                // Assault Course as the player may not necessarily visit there.
-                int numLevels = _generator.Next(1, Levels.Count);
-                while (_haircutLevels.Count < numLevels)
-                {
-                    TR23ScriptedLevel level = Levels[_generator.Next(0, Levels.Count)];
-                    if (!level.Is(LevelNames.ASSAULT))
-                    {
-                        _haircutLevels.Add(level.LevelFileBaseName.ToUpper());
-                    }
-                }
+            TR23ScriptedLevel assaultCourse = Levels.Find(l => l.Is(LevelNames.ASSAULT));
+            ISet<TR23ScriptedLevel> exlusions = new HashSet<TR23ScriptedLevel> { assaultCourse };
 
-                if (_generator.Next(0, 2) == 0)
-                {
-                    _haircutLevels.Add(LevelNames.ASSAULT);
-                }
+            _haircutLevels = Levels.RandomSelection(_generator, (int)NumHaircutLevels, exclusions: exlusions);
+            if (AssaultCourseHaircut)
+            {
+                _haircutLevels.Add(assaultCourse);
+            }
+
+            _invisibleLevels = Levels.RandomSelection(_generator, (int)NumInvisibleLevels, exclusions: exlusions);
+            if (AssaultCourseInvisible)
+            {
+                _invisibleLevels.Add(assaultCourse);
             }
         }
 
-        private bool IsHaircutLevel(string lvl)
+        private bool IsHaircutLevel(TR23ScriptedLevel lvl)
         {
             return _haircutLevels.Contains(lvl);
+        }
+
+        private bool IsInvisibleLevel(TR23ScriptedLevel lvl)
+        {
+            return _invisibleLevels.Contains(lvl);
         }
 
         internal class OutfitProcessor : AbstractProcessorThread<OutfitRandomizer>
@@ -188,19 +189,27 @@ namespace TR2RandomizerCore.Randomizers
 
                 foreach (TR2CombinedLevel level in levels)
                 {
-                    // Add the persistent outfit first, but we will populate the candidate
-                    // list regardless in case a level cannot support this choice.
-                    if (_outer.PersistOutfits)
+                    // If invisible is chosen for this level, this overrides persistent outfits
+                    if (_outer.IsInvisibleLevel(level.Script))
                     {
-                        _outfitAllocations[level].Add(_outer._persistentOutfit);
+                        _outfitAllocations[level].Add(TR2Entities.LaraInvisible);
                     }
-
-                    while (_outfitAllocations[level].Count < allLaras.Count)
+                    else
                     {
-                        TR2Entities nextLara = allLaras[_outer._generator.Next(0, allLaras.Count)];
-                        if (!_outfitAllocations[level].Contains(nextLara))
+                        // Add the persistent outfit first, but we will populate the candidate
+                        // list regardless in case a level cannot support this choice.
+                        if (_outer.PersistOutfits)
                         {
-                            _outfitAllocations[level].Add(nextLara);
+                            _outfitAllocations[level].Add(_outer._persistentOutfit);
+                        }
+
+                        while (_outfitAllocations[level].Count < allLaras.Count)
+                        {
+                            TR2Entities nextLara = allLaras[_outer._generator.Next(0, allLaras.Count)];
+                            if (!_outfitAllocations[level].Contains(nextLara))
+                            {
+                                _outfitAllocations[level].Add(nextLara);
+                            }
                         }
                     }
                 }
@@ -218,7 +227,7 @@ namespace TR2RandomizerCore.Randomizers
                         }
                     }
 
-                    if (_outer.IsHaircutLevel(level.Name))
+                    if (_outer.IsHaircutLevel(level.Script))
                     {
                         HideEntities(level, _invisiblePonytailEntities);
                     }

@@ -215,7 +215,10 @@
             <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
                 <windows:AdvancedWindow Title="Randomize Outfits (Advanced)"
                                         MainDescription="Customize the outfit randomization."
-                                        BoolItemsSource="{Binding Data.OutfitBoolItemControls, Source={StaticResource proxy}}">
+                                        BoolItemsSource="{Binding Data.OutfitBoolItemControls, Source={StaticResource proxy}}"
+                                        HasHaircuts="True"
+                                        HasInvisibility="True"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>

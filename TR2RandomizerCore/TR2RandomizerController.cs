@@ -323,22 +323,34 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.PersistOutfits = value;
         }
 
-        public bool RandomlyCutHair
-        {
-            get => LevelRandomizer.RandomlyCutHair;
-            set => LevelRandomizer.RandomlyCutHair = value;
-        }
-
         public bool RemoveRobeDagger
         {
             get => LevelRandomizer.RemoveRobeDagger;
             set => LevelRandomizer.RemoveRobeDagger = value;
         }
 
-        public bool EnableInvisibility
+        public uint HaircutLevelCount
         {
-            get => LevelRandomizer.EnableInvisibility;
-            set => LevelRandomizer.EnableInvisibility = value;
+            get => LevelRandomizer.HaircutLevelCount;
+            set => LevelRandomizer.HaircutLevelCount = value;
+        }
+
+        public bool AssaultCourseHaircut
+        {
+            get => LevelRandomizer.AssaultCourseHaircut;
+            set => LevelRandomizer.AssaultCourseHaircut = value;
+        }
+
+        public uint InvisibleLevelCount
+        {
+            get => LevelRandomizer.InvisibleLevelCount;
+            set => LevelRandomizer.InvisibleLevelCount = value;
+        }
+
+        public bool AssaultCourseInvisible
+        {
+            get => LevelRandomizer.AssaultCourseInvisible;
+            set => LevelRandomizer.AssaultCourseInvisible = value;
         }
 
         public int OutfitSeed
