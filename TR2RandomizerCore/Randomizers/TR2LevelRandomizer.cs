@@ -57,9 +57,12 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RotateStartPositionOnly { get; set; }
         internal bool RandomizeWaterLevels { get; set; }
         internal bool RandomizeSlotPositions { get; set; }
+        internal bool RandomizeLadders { get; set; }
+        internal uint MirroredLevelCount { get; set; }
+        internal bool MirrorAssaultCourse { get; set; }
         internal bool AutoLaunchGame { get; set; }
 
-        internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
+        internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits || RandomizeEnvironment;
         internal bool ReassignPuzzleNames => RandomizeEnemies && CrossLevelEnemies;
 
         internal TR2LevelRandomizer(TRDirectoryIOArgs args)
@@ -119,6 +122,9 @@ namespace TR2RandomizerCore.Randomizers
             EnvironmentSeed = config.GetInt(nameof(EnvironmentSeed), defaultSeed);
             RandomizeWaterLevels = config.GetBool(nameof(RandomizeWaterLevels), true);
             RandomizeSlotPositions = config.GetBool(nameof(RandomizeSlotPositions), true);
+            RandomizeLadders = config.GetBool(nameof(RandomizeLadders), true);
+            MirroredLevelCount = config.GetUInt(nameof(MirroredLevelCount), 9);
+            MirrorAssaultCourse = config.GetBool(nameof(MirrorAssaultCourse), true);
 
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
@@ -175,6 +181,9 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(EnvironmentSeed)] = EnvironmentSeed;
             config[nameof(RandomizeWaterLevels)] = RandomizeWaterLevels;
             config[nameof(RandomizeSlotPositions)] = RandomizeSlotPositions;
+            config[nameof(RandomizeLadders)] = RandomizeLadders;
+            config[nameof(MirroredLevelCount)] = MirroredLevelCount;
+            config[nameof(MirrorAssaultCourse)] = MirrorAssaultCourse;
 
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
@@ -363,9 +372,11 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         EnforcedModeOnly = !RandomizeEnvironment,
-                        NumMirrorLevels = 19,
+                        NumMirrorLevels = MirroredLevelCount,
+                        MirrorAssaultCourse = MirrorAssaultCourse,
                         RandomizeWater = RandomizeWaterLevels,
                         RandomizeSlots = RandomizeSlotPositions,
+                        RandomizeLadders = RandomizeLadders,
                         TextureMonitor = textureMonitor
                     }.Randomize(EnvironmentSeed);
                 }

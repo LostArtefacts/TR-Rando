@@ -13,5 +13,20 @@
 
   "AllWithin": [],
 
-  "OneOf": []
+  "OneOf": [],
+
+  "Mirrored": [
+    {
+      "Comments": "Moves door 33 so that it opens properly, otherwise Lara has to glitch through.",
+      "EMType": 44,
+      "EntityIndex": 33,
+      "TargetLocation": {
+        "X": 18944,
+        "Y": 4352,
+        "Z": 37376,
+        "Room": 163,
+        "Angle": 0
+      }
+    }
+  ]
 }

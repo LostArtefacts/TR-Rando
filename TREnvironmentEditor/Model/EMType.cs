@@ -19,6 +19,7 @@
         MoveEnemy = 42,
         MovePickup = 43,
         MoveEntity = 44,
+        ConvertEntity = 45,
 
         // Trigger types 61-80
         Trigger = 61,
@@ -26,10 +27,16 @@
         DuplicateTrigger = 63,
         DuplicateSwitchTrigger = 64,
         CameraTriggerFunction = 65,
+        ReplaceTriggerActionParameterFunction = 66,
 
-        // Portal types 81+
+        // Portal types 81-100
         VisibilityPortal = 81,
         CollisionalPortal = 82,
+
+        // Sound types 101+
+        AddSoundSource = 101,
+        MoveSoundSource = 102,
+        RemoveSoundSource = 103,
 
         // NOOP/Placeholder
         NOOP = 1000

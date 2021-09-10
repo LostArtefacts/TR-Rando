@@ -442,6 +442,24 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.RandomizeSlotPositions = value;
         }
 
+        public bool RandomizeLadders
+        {
+            get => LevelRandomizer.RandomizeLadders;
+            set => LevelRandomizer.RandomizeLadders = value;
+        }
+
+        public uint MirroredLevelCount
+        {
+            get => LevelRandomizer.MirroredLevelCount;
+            set => LevelRandomizer.MirroredLevelCount = value;
+        }
+
+        public bool MirrorAssaultCourse
+        {
+            get => LevelRandomizer.MirrorAssaultCourse;
+            set => LevelRandomizer.MirrorAssaultCourse = value;
+        }
+
         public int EnvironmentSeed
         {
             get => LevelRandomizer.EnvironmentSeed;

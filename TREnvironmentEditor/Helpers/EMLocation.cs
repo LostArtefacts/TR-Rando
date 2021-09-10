@@ -2,10 +2,10 @@
 {
     public class EMLocation
     {
-        public int X;
-        public int Y;
-        public int Z;
-        public short Room;
-        public short Angle;
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Z { get; set; }
+        public short Room { get; set; }
+        public short Angle { get; set; }
     }
 }

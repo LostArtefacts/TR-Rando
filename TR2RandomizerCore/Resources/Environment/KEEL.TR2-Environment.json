@@ -1,0 +1,79 @@
+{
+  "All": [],
+
+  "Any": [],
+
+  "AllWithin": [],
+
+  "OneOf": [],
+
+  "Mirrored": [
+    {
+      "Comments": "Moves door 133 so that it opens properly, otherwise Lara has to glitch through.",
+      "EMType": 44,
+      "EntityIndex": 133,
+      "TargetLocation": {
+        "X": 30208,
+        "Y": 8960,
+        "Z": 85504,
+        "Room": 77,
+        "Angle": -16384
+      }
+    },
+
+    {
+      "Comments": "Convert the above door from a wheel door to a normal one.",
+      "EMType": 45,
+      "EntityIndex": 133,
+      "NewEntityType": 111
+    },
+
+    {
+      "Comments": "Get rid of the wheel for door 133, because it doesn't work properly when flipped - make it a lever.",
+      "EMType": 45,
+      "EntityIndex": 134,
+      "NewEntityType": 104
+    },
+
+    {
+      "Comments": "Moves what is now switch 134 to the right of the door.",
+      "EMType": 41,
+      "EntityIndex": 134,
+      "Location": {
+        "X": 31232,
+        "Y": 8960,
+        "Z": 86528,
+        "Room": 73,
+        "Angle": -16384
+      }
+    },
+
+    {
+      "Comments": "Wall textures for the new lever.",
+      "EMType": 21,
+      "TextureMap": {
+        "1768": {
+          "73": {
+            "Rectangles": [ 72 ]
+          },
+          "0": {
+            "Rectangles": [ 57 ]
+          }
+        }
+      }
+    },
+
+    {
+      "Comments": "Change the button in room 76 to look at the lever rather than the door.",
+      "EMType": 66,
+      "TrigAction": 6,
+      "NewParameter": 134,
+      "Location": {
+        "X": 38138,
+        "Y": 5632,
+        "Z": 81384,
+        "Room": 76
+      }
+    }
+  ]
+}

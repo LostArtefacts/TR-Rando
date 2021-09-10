@@ -6,6 +6,7 @@ using TREnvironmentEditor;
 using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
+using TRLevelReader.Helpers;
 
 namespace TR2RandomizerCore.Randomizers
 {
@@ -13,8 +14,10 @@ namespace TR2RandomizerCore.Randomizers
     {
         public bool EnforcedModeOnly { get; set; }
         public uint NumMirrorLevels { get; set; }
+        public bool MirrorAssaultCourse { get; set; }
         public bool RandomizeWater { get; set; }
         public bool RandomizeSlots { get; set; }
+        public bool RandomizeLadders { get; set; }
 
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
@@ -35,8 +38,15 @@ namespace TR2RandomizerCore.Randomizers
             {
                 _disallowedTypes.Add(EMType.MoveSlot);
             }
+            if (!RandomizeLadders)
+            {
+                _disallowedTypes.Add(EMType.Ladder);
+            }
 
-            _levelsToMirror = Levels.RandomSelection(_generator, (int)NumMirrorLevels);
+            _levelsToMirror = Levels.RandomSelection(_generator, (int)NumMirrorLevels, exclusions:new HashSet<TR23ScriptedLevel>
+            {
+                Levels.Find(l => l.Is(LevelNames.ASSAULT))
+            });
 
             foreach (TR23ScriptedLevel lvl in Levels)
             {
@@ -61,9 +71,9 @@ namespace TR2RandomizerCore.Randomizers
                 ApplyMappingToLevel(level, mapping);
             }
 
-            if (!EnforcedModeOnly && _levelsToMirror.Contains(level.Script))
+            if (!EnforcedModeOnly && (_levelsToMirror.Contains(level.Script) || (level.IsAssault && MirrorAssaultCourse)))
             {
-                MirrorLevel(level);
+                MirrorLevel(level, mapping);
             }
         }
 
@@ -112,10 +122,16 @@ namespace TR2RandomizerCore.Randomizers
             }
         }
 
-        private void MirrorLevel(TR2CombinedLevel level)
+        private void MirrorLevel(TR2CombinedLevel level, EMEditorMapping mapping)
         {
             EMMirrorFunction mirrorer = new EMMirrorFunction();
             mirrorer.ApplyToLevel(level.Data);
+
+            if (mapping != null)
+            {
+                // Process packs that need to be applied after mirroring.
+                mapping.Mirrored.ApplyToLevel(level.Data, new EMType[] { });
+            }
 
             // Notify the texture monitor that this level has been flipped
             TexturePositionMonitor monitor = TextureMonitor.CreateMonitor(level.Name);

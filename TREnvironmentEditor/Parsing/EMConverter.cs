@@ -58,6 +58,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMMovePickupFunction>(jo.ToString(), _resolver);
                 case EMType.MoveEntity:
                     return JsonConvert.DeserializeObject<EMMoveEntityFunction>(jo.ToString(), _resolver);
+                case EMType.ConvertEntity:
+                    return JsonConvert.DeserializeObject<EMConvertEntityFunction>(jo.ToString(), _resolver);
 
                 // Trigger types
                 case EMType.Trigger:
@@ -70,12 +72,22 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMDuplicateSwitchTriggerFunction>(jo.ToString(), _resolver);
                 case EMType.CameraTriggerFunction:
                     return JsonConvert.DeserializeObject<EMCameraTriggerFunction>(jo.ToString(), _resolver);
+                case EMType.ReplaceTriggerActionParameterFunction:
+                    return JsonConvert.DeserializeObject<EMReplaceTriggerActionParameterFunction>(jo.ToString(), _resolver);
 
                 // Portals
                 case EMType.VisibilityPortal:
                     return JsonConvert.DeserializeObject<EMVisibilityPortalFunction>(jo.ToString(), _resolver);
                 case EMType.CollisionalPortal:
                     return JsonConvert.DeserializeObject<EMCollisionalPortalFunction>(jo.ToString(), _resolver);
+
+                // Sounds
+                case EMType.AddSoundSource:
+                    return JsonConvert.DeserializeObject<EMAddSoundSourceFunction>(jo.ToString(), _resolver);
+                case EMType.MoveSoundSource:
+                    return JsonConvert.DeserializeObject<EMMoveSoundSourceFunction>(jo.ToString(), _resolver);
+                case EMType.RemoveSoundSource:
+                    return JsonConvert.DeserializeObject<EMRemoveSoundSourceFunction>(jo.ToString(), _resolver);
 
                 // NOOP
                 case EMType.NOOP:
