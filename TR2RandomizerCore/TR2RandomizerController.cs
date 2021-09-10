@@ -412,6 +412,20 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.NightModeCount = value;
         }
 
+        public uint NightModeDarkness
+        {
+            get => LevelRandomizer.NightModeDarkness;
+            set => LevelRandomizer.NightModeDarkness = value;
+        }
+
+        public uint NightModeDarknessRange => NightModeRandomizer.DarknessRange;
+
+        public bool NightModeAssaultCourse
+        {
+            get => LevelRandomizer.NightModeAssaultCourse;
+            set => LevelRandomizer.NightModeAssaultCourse = value;
+        }
+
         public bool ChangeTriggerTracks
         {
             get => LevelRandomizer.ChangeTriggerTracks;

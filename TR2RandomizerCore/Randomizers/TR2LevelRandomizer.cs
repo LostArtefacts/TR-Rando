@@ -55,6 +55,8 @@ namespace TR2RandomizerCore.Randomizers
         internal bool RetainKeyItemNames { get; set; }
         internal Language GameStringLanguage { get; set; }
         internal uint NightModeCount { get; set; }
+        internal uint NightModeDarkness { get; set; }
+        internal bool NightModeAssaultCourse { get; set; }
         internal bool ChangeTriggerTracks { get; set; }
         internal bool RotateStartPositionOnly { get; set; }
         internal bool RandomizeWaterLevels { get; set; }
@@ -114,6 +116,8 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeNightMode = config.GetBool(nameof(RandomizeNightMode));
             NightModeSeed = config.GetInt(nameof(NightModeSeed), defaultSeed);
             NightModeCount = config.GetUInt(nameof(NightModeCount), 1);
+            NightModeDarkness = config.GetUInt(nameof(NightModeDarkness), 4);
+            NightModeAssaultCourse = config.GetBool(nameof(NightModeAssaultCourse), true);
 
             // Note that the main audio config options are held in TRGE for now
             ChangeTriggerTracks = config.GetBool(nameof(ChangeTriggerTracks), true);
@@ -176,6 +180,8 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeNightMode)] = RandomizeNightMode;
             config[nameof(NightModeSeed)] = NightModeSeed;
             config[nameof(NightModeCount)] = NightModeCount;
+            config[nameof(NightModeDarkness)] = NightModeDarkness;
+            config[nameof(NightModeAssaultCourse)] = NightModeAssaultCourse;
 
             config[nameof(ChangeTriggerTracks)] = ChangeTriggerTracks;
 
@@ -427,6 +433,8 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         NumLevels = NightModeCount,
+                        DarknessScale = NightModeDarkness,
+                        NightModeAssaultCourse = NightModeAssaultCourse,
                         TextureMonitor = textureMonitor
                     }.Randomize(NightModeSeed);
                 }

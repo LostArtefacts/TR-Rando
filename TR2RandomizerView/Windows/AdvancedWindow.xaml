@@ -43,6 +43,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -60,7 +62,8 @@
                         Grid.ColumnSpan="2"
                         Orientation="Vertical"
                         HorizontalAlignment="Left"
-                        Margin="0,0,0,10">
+                        Margin="0,0,0,10"
+                        Visibility="{Binding HasBoolItems, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock Text="General"
                            FontSize="14"
                            TextDecorations="Underline" />
@@ -388,6 +391,131 @@
                                FontStyle="Italic"
                                Padding="0"
                                Margin="40,0,0,0"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="7"
+                        Grid.ColumnSpan="2"
+                        Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Text="General"
+                           FontSize="14"
+                           TextDecorations="Underline"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown 
+                                HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"  
+                                        Value="{Binding ControllerProxy.NightModeCount, Mode=TwoWay}"
+                                        MinValue="0"
+                                        MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="The given number of levels will be converted to night mode."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <CheckBox IsChecked="{Binding ControllerProxy.NightModeAssaultCourse, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Include Assault Course" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Adjust the assault course level lighting in addition to or separately from above."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="8"
+                        Grid.ColumnSpan="2"
+                        Margin="0,15,0,0"
+                        Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Text="Intensity"
+                           FontSize="14"
+                           TextDecorations="Underline"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Dusk"
+                                   Padding="0, 0, 5, 0"
+                                   VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1"
+                                    Width="120"
+                                    Minimum="0"
+                                    Maximum="{Binding ControllerProxy.NightModeDarknessMaximum}"
+                                    VerticalAlignment="Center"
+                                    ValueChanged="Slider_ValueChanged"
+                                    Value="{Binding ControllerProxy.NightModeDarkness, Mode=TwoWay}"/>
+                            <Label Grid.Column="2"
+                                   Content="Night"
+                                   Padding="5, 0, 0, 0"
+                                   VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Set the darkness intensity, ranging from dusk to full night mode."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <Image Width="186"
+                               x:Name="_darknessPreview"
+                               HorizontalAlignment="Left"
+                               Source="..\Resources\Darkness\0.png"/>
                     </Border>
                 </Grid>
             </StackPanel>

@@ -36,6 +36,9 @@ namespace TR2RandomizerView.Model
         private bool _assaultCourseHaircut;
         private uint _invisibleLevelCount;
         private bool _assaultCourseInvisible;
+        private uint _nightModeDarkness;
+        private uint _nightModeDarknessMaximum;
+        private bool _nightModeAssaultCourse;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
 
@@ -253,6 +256,36 @@ namespace TR2RandomizerView.Model
             set
             {
                 _nightLevelsControl.CustomInt = (int)value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool NightModeAssaultCourse
+        {
+            get => _nightModeAssaultCourse;
+            set
+            {
+                _nightModeAssaultCourse = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint NightModeDarkness
+        {
+            get => _nightModeDarkness;
+            set
+            {
+                _nightModeDarkness = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint NightModeDarknessMaximum
+        {
+            get => _nightModeDarknessMaximum;
+            private set
+            {
+                _nightModeDarknessMaximum = value;
                 FirePropertyChanged();
             }
         }
@@ -1074,6 +1107,9 @@ namespace TR2RandomizerView.Model
             RandomizeNightMode = _controller.RandomizeNightMode;
             NightModeSeed = _controller.NightModeSeed;
             NightModeCount = _controller.NightModeCount;
+            NightModeAssaultCourse = _controller.NightModeAssaultCourse;
+            NightModeDarkness = _controller.NightModeDarkness;
+            NightModeDarknessMaximum = _controller.NightModeDarknessRange;
 
             RandomizeAudioTracks = _controller.RandomizeAudioTracks;
             AudioTracksSeed = _controller.AudioTracksSeed;
@@ -1312,6 +1348,8 @@ namespace TR2RandomizerView.Model
             _controller.RandomizeNightMode = RandomizeNightMode;
             _controller.NightModeSeed = NightModeSeed;
             _controller.NightModeCount = NightModeCount;
+            _controller.NightModeAssaultCourse = NightModeAssaultCourse;
+            _controller.NightModeDarkness = NightModeDarkness;
 
             _controller.RandomizeAudioTracks = RandomizeAudioTracks;
             _controller.AudioTracksSeed = AudioTracksSeed;

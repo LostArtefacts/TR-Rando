@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using TR2RandomizerCore.Helpers;
 using TR2RandomizerView.Model;
@@ -13,6 +15,8 @@ namespace TR2RandomizerView.Windows
     /// </summary>
     public partial class AdvancedWindow : Window
     {
+        private static readonly string _darknessPreviewPath = @"pack://application:,,,/TR2Randomizer;component/Resources/Darkness/{0}.png";
+
         public static readonly DependencyProperty MainDescriptionProperty = DependencyProperty.Register
         (
             nameof(MainDescription), typeof(string), typeof(AdvancedWindow)
@@ -21,6 +25,11 @@ namespace TR2RandomizerView.Windows
         public static readonly DependencyProperty BoolItemsSourceProperty = DependencyProperty.Register
         (
             nameof(BoolItemsSource), typeof(List<BoolItemControlClass>), typeof(AdvancedWindow)
+        );
+
+        public static readonly DependencyProperty HasBoolItemsProperty = DependencyProperty.Register
+        (
+            nameof(HasBoolItems), typeof(bool), typeof(AdvancedWindow)
         );
 
         public static readonly DependencyProperty HasDifficultyProperty = DependencyProperty.Register
@@ -48,6 +57,11 @@ namespace TR2RandomizerView.Windows
             nameof(HasInvisibility), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty HasNightModeProperty = DependencyProperty.Register
+        (
+            nameof(HasNightMode), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
         (
             nameof(ControllerProxy), typeof(ControllerOptions), typeof(AdvancedWindow)
@@ -63,6 +77,12 @@ namespace TR2RandomizerView.Windows
         {
             get => (List<BoolItemControlClass>)GetValue(BoolItemsSourceProperty);
             set => SetValue(BoolItemsSourceProperty, value);
+        }
+
+        public bool HasBoolItems
+        {
+            get => (bool)GetValue(HasBoolItemsProperty);
+            set => SetValue(HasBoolItemsProperty, value);
         }
 
         public bool HasDifficulty
@@ -93,6 +113,12 @@ namespace TR2RandomizerView.Windows
         {
             get => (bool)GetValue(HasInvisibilityProperty);
             set => SetValue(HasInvisibilityProperty, value);
+        }
+
+        public bool HasNightMode
+        {
+            get => (bool)GetValue(HasNightModeProperty);
+            set => SetValue(HasNightModeProperty, value);
         }
 
         public ControllerOptions ControllerProxy
@@ -136,6 +162,11 @@ namespace TR2RandomizerView.Windows
         {
             Process.Start(e.Uri.AbsoluteUri);
             e.Handled = true;
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            _darknessPreview.Source = new BitmapImage(new Uri(string.Format(_darknessPreviewPath, ControllerProxy.NightModeDarkness)));
         }
     }
 }

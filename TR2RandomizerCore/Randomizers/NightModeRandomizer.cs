@@ -12,15 +12,21 @@ namespace TR2RandomizerCore.Randomizers
 {
     public class NightModeRandomizer : RandomizerBase
     {
+        public const uint DarknessRange = 10; // 0 = Dusk, 10 = Night
+
         public uint NumLevels { get; set; }
+        public uint DarknessScale { get; set; }
+        public bool NightModeAssaultCourse { get; set; }
 
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
-        private ISet<string> _nightLevels;
+        private List<TR23ScriptedLevel> _nightLevels;
 
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
+
+            DarknessScale = Math.Min(DarknessScale, DarknessRange);
 
             ChooseNightLevels();
 
@@ -28,7 +34,7 @@ namespace TR2RandomizerCore.Randomizers
             {
                 LoadLevelInstance(lvl);
 
-                if (_nightLevels.Contains(_levelInstance.Name))
+                if (_nightLevels.Contains(lvl))
                 {
                     SetNightMode(_levelInstance);
                     SaveLevelInstance();
@@ -43,14 +49,13 @@ namespace TR2RandomizerCore.Randomizers
 
         private void ChooseNightLevels()
         {
-            _nightLevels = new HashSet<string>();
-            while (_nightLevels.Count < NumLevels)
+            TR23ScriptedLevel assaultCourse = Levels.Find(l => l.Is(LevelNames.ASSAULT));
+            ISet<TR23ScriptedLevel> exlusions = new HashSet<TR23ScriptedLevel> { assaultCourse };
+
+            _nightLevels = Levels.RandomSelection(_generator, (int)NumLevels, exclusions: exlusions);
+            if (NightModeAssaultCourse)
             {
-                TR23ScriptedLevel level = Levels[_generator.Next(0, Levels.Count)];
-                if (!level.Is(LevelNames.ASSAULT))
-                {
-                    _nightLevels.Add(level.LevelFileBaseName.ToUpper());
-                }
+                _nightLevels.Add(assaultCourse);
             }
         }
 
@@ -71,9 +76,17 @@ namespace TR2RandomizerCore.Randomizers
 
         private void DarkenRooms(TR2Level level)
         {
+            double scale = (100 - DarknessRange + DarknessScale) / 100d;
+
+            short intensity1 = (short)(TR2Room.DarknessIntensity1 * scale);
+            ushort intensity2 = (ushort)(TR2Room.DarknessIntensity2 * (2 - scale));
+
             foreach (TR2Room room in level.Rooms)
             {
-                room.Darken();
+                room.SetAmbient(intensity1);
+                room.SetLights(intensity2);
+                room.SetStaticMeshLights((ushort)intensity1);
+                room.SetVertexLight(intensity1);
             }
         }
 
