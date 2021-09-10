@@ -9,7 +9,7 @@ namespace TREnvironmentEditor.Model.Types
         public int[] RoomNumbers { get; set; }
         public ushort[] WaterTextures { get; set; }
         
-        public void AddWaterSurface(TR2Level level, TR2Room room, bool asCeiling)
+        public void AddWaterSurface(TR2Level level, TR2Room room, bool asCeiling, IEnumerable<int> adjacentRooms)
         {
             List<TR2RoomVertex> vertices = room.RoomData.Vertices.ToList();
             List<TRFace4> rectangles = room.RoomData.Rectangles.ToList();
@@ -18,8 +18,8 @@ namespace TREnvironmentEditor.Model.Types
             {
                 TRRoomSector sector = room.SectorList[i];
 
-                bool ceilingMatch = asCeiling && sector.RoomAbove != 255;
-                bool floorMatch = !asCeiling && sector.RoomBelow != 255;
+                bool ceilingMatch = asCeiling && adjacentRooms.Contains(sector.RoomAbove);
+                bool floorMatch = !asCeiling && adjacentRooms.Contains(sector.RoomBelow);
 
                 if (ceilingMatch || floorMatch)
                 {
