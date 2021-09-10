@@ -29,7 +29,9 @@ namespace TR2RandomizerView.Model
         private BoolItemControlClass _persistOutfits, _randomlyCutHair, _removeRobeDagger, _enableInvisibility;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
-        private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions;
+        private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders;
+        private uint _mirroredLevelCount;
+        private bool _mirrorAssaultCourse;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
 
@@ -67,6 +69,7 @@ namespace TR2RandomizerView.Model
             AmmolessLevelCount = (uint)Math.Min(AmmolessLevelCount, MaximumLevelCount);
             SunsetCount = (uint)Math.Min(SunsetCount, MaximumLevelCount);
             NightModeCount = (uint)Math.Min(NightModeCount, MaximumLevelCount);
+            MirroredLevelCount = (uint)Math.Min(MirroredLevelCount, MaximumLevelCount);
         }
 
         public bool RandomizationPossible
@@ -598,6 +601,36 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RandomizeLadders
+        {
+            get => _randomizeLadders;
+            set
+            {
+                _randomizeLadders = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint MirroredLevelCount
+        {
+            get => _mirroredLevelCount;
+            set
+            {
+                _mirroredLevelCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool MirrorAssaultCourse
+        {
+            get => _mirrorAssaultCourse;
+            set
+            {
+                _mirrorAssaultCourse = value;
+                FirePropertyChanged();
+            }
+        }
+
         private bool _developmentMode;
         public bool DevelopmentMode
         {
@@ -953,6 +986,12 @@ namespace TR2RandomizerView.Model
                 Description = "Change where keyholes, switches and puzzle slots are located in each level."
             };
             BindingOperations.SetBinding(RandomizeSlotPositions, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
+            RandomizeLadders = new BoolItemControlClass
+            {
+                Title = "Move ladders",
+                Description = "Change where ladders are positioned in each level."
+            };
+            BindingOperations.SetBinding(RandomizeLadders, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
 
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
@@ -989,7 +1028,7 @@ namespace TR2RandomizerView.Model
             };
             EnvironmentBoolItemControls = new List<BoolItemControlClass>
             {
-                _randomizeWaterLevels, _randomizeSlotPositions
+                _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders
             };
         }
 
@@ -1071,6 +1110,9 @@ namespace TR2RandomizerView.Model
             EnvironmentSeed = _controller.EnvironmentSeed;
             RandomizeWaterLevels.Value = _controller.RandomizeWaterLevels;
             RandomizeSlotPositions.Value = _controller.RandomizeSlotPositions;
+            RandomizeLadders.Value = _controller.RandomizeLadders;
+            MirroredLevelCount = _controller.MirroredLevelCount;
+            MirrorAssaultCourse = _controller.MirrorAssaultCourse;
 
             DevelopmentMode = _controller.DevelopmentMode;
             DisableDemos = _controller.DisableDemos;
@@ -1303,6 +1345,9 @@ namespace TR2RandomizerView.Model
             _controller.EnvironmentSeed = EnvironmentSeed;
             _controller.RandomizeWaterLevels = RandomizeWaterLevels.Value;
             _controller.RandomizeSlotPositions = RandomizeSlotPositions.Value;
+            _controller.RandomizeLadders = RandomizeLadders.Value;
+            _controller.MirroredLevelCount = MirroredLevelCount;
+            _controller.MirrorAssaultCourse = MirrorAssaultCourse;
 
             _controller.DevelopmentMode = DevelopmentMode;
             _controller.DisableDemos = DisableDemos;

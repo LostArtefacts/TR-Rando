@@ -144,7 +144,7 @@
                                         MainDescription="Customize the enemy randomization."
                                         BoolItemsSource="{Binding Data.EnemyBoolItemControls, Source={StaticResource proxy}}"
                                         HasDifficulty="True"
-                                        RandoEnemyDifficulty="{Binding Data.RandoEnemyDifficulty, Source={StaticResource proxy}, Mode=TwoWay}">
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
@@ -237,13 +237,12 @@
                                         MainDescription="Customize the game text randomization."
                                         BoolItemsSource="{Binding Data.TextBoolItemControls, Source={StaticResource proxy}}"
                                         HasLanguage="True"
-                                        LanguageSource="{Binding Data.AvailableLanguages, Source={StaticResource proxy}}"
-                                        GameStringLanguage="{Binding Data.GameStringLanguage, Source={StaticResource proxy}, Mode=TwoWay}">
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedAdvancedControl
             Grid.Row="4"
             Grid.Column="2"
             IsActive="{Binding RandomizeEnvironment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -251,9 +250,20 @@
             Text="Randomize Lara's surroundings in each level."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding EnvironmentSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            BoolItemsSource="{Binding EnvironmentBoolItemControls}"/>
-        
+            SeedValue="{Binding EnvironmentSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Environment (Advanced)"
+                                        MainDescription="Customize the environmental randomization."
+                                        HasMirroring="True"
+                                        BoolItemsSource="{Binding Data.EnvironmentBoolItemControls, Source={StaticResource proxy}}"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
+
         <Border
             Grid.RowSpan="2"
             Grid.Column="3"

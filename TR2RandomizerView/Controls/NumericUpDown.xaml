@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" 
              d:DesignHeight="25" d:DesignWidth="140" MinWidth="60">
-    <Border BorderBrush="#666" BorderThickness="1">
+    <Border BorderBrush="#666" BorderThickness="1" Margin="0">
         <Grid Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
