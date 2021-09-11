@@ -60,6 +60,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMMoveEntityFunction>(jo.ToString(), _resolver);
                 case EMType.ConvertEntity:
                     return JsonConvert.DeserializeObject<EMConvertEntityFunction>(jo.ToString(), _resolver);
+                case EMType.MoveTrap:
+                    return JsonConvert.DeserializeObject<EMMoveTrapFunction>(jo.ToString(), _resolver);
 
                 // Trigger types
                 case EMType.Trigger:

@@ -20,6 +20,7 @@
         MovePickup = 43,
         MoveEntity = 44,
         ConvertEntity = 45,
+        MoveTrap = 46,
 
         // Trigger types 61-80
         Trigger = 61,
