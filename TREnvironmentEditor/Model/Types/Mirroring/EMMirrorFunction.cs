@@ -314,6 +314,11 @@ namespace TREnvironmentEditor.Model.Types
                         entity.Angle = _west;
                         entity.X += SectorSize;
                     }
+                    else if (entity.Angle == _west)
+                    {
+                        entity.Angle = _east;
+                        entity.X -= SectorSize;
+                    }
                     break;
 
                 // Bridge tilts need to be rotated

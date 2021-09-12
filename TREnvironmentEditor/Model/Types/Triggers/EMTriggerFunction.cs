@@ -13,6 +13,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public List<EMLocation> Locations { get; set; }
         public FDTriggerEntry TriggerEntry { get; set; }
+        public bool Replace { get; set; }
 
         public override void ApplyToLevel(TR2Level level)
         {
@@ -29,6 +30,10 @@ namespace TREnvironmentEditor.Model.Types
                 }
 
                 List<FDEntry> entries = control.Entries[sector.FDIndex];
+                if (Replace)
+                {
+                    entries.Clear();
+                }
                 if (entries.FindIndex(e => e is FDTriggerEntry) == -1)
                 {
                     entries.Add(TriggerEntry);
