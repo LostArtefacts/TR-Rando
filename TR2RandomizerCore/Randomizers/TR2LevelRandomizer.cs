@@ -66,7 +66,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool MirrorAssaultCourse { get; set; }
         internal bool AutoLaunchGame { get; set; }
 
-        internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits || RandomizeEnvironment;
+        internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;// || RandomizeEnvironment; // Not needed until trap model import takes place
         internal bool ReassignPuzzleNames => RandomizeEnemies && CrossLevelEnemies;
 
         internal TR2LevelRandomizer(TRDirectoryIOArgs args)
