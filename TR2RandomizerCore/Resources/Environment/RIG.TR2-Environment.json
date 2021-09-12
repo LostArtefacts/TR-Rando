@@ -1,0 +1,1505 @@
+{
+  "All": [],
+
+  "Any": [
+    [
+      {
+        "Comments": "Raise the water in the big pool area.",
+        "EMType": 2,
+        "RoomNumbers": [ 109, 110, 47, 63, 107, 108, 46, 44 ],
+        "WaterTextures": [ 1740, 1670, 1648, 1741 ]
+      },
+
+      {
+        "Comments": "Move the first stick goon onto land, unless he has or can become a water creature.",
+        "EMType": 42,
+        "EntityIndex": 109,
+        "IfLandCreature": true,
+        "AttemptWaterCreature": true,
+        "Location": {
+          "X": 42420,
+          "Y": 2560,
+          "Z": 42498,
+          "Room": 49
+        }
+      },
+
+      {
+        "Comments": "Move the second stick goon onto land, unless he has or can become a water creature.",
+        "EMType": 42,
+        "EntityIndex": 110,
+        "IfLandCreature": true,
+        "AttemptWaterCreature": true,
+        "Location": {
+          "X": 42420,
+          "Y": 2560,
+          "Z": 43522,
+          "Room": 49
+        }
+      }
+    ],
+
+    [
+      {
+        "Comments": "Add a wind sound effect outside.",
+        "EMType": 101,
+        "Source": {
+          "X": 20015,
+          "Y": -11008,
+          "Z": 72161,
+          "Flags": 192,
+          "SoundID": 226
+        }
+      }
+    ],
+
+    [
+      {
+        "Comments": "Add an annoying dorm room sound effect.",
+        "EMType": 101,
+        "Source": {
+          "X": 28118,
+          "Y": -5726,
+          "Z": 68124,
+          "Flags": 192,
+          "SoundID": 228
+        }
+      }
+    ]
+  ],
+
+  "AllWithin": [
+    [
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 52736,
+            "Y": -1536,
+            "Z": 94720,
+            "Room": 5,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 51712,
+            "Y": -1536,
+            "Z": 94720,
+            "Room": 5,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 50688,
+            "Y": -1536,
+            "Z": 94720,
+            "Room": 5,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 50688,
+            "Y": -1536,
+            "Z": 94720,
+            "Room": 5,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 51712,
+            "Y": -1536,
+            "Z": 94720,
+            "Room": 5,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 52736,
+            "Y": -1536,
+            "Z": 94720,
+            "Room": 5,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 49664,
+            "Y": -1536,
+            "Z": 94720,
+            "Room": 4,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 49664,
+            "Y": -1536,
+            "Z": 93696,
+            "Room": 4,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 49664,
+            "Y": -2560,
+            "Z": 93696,
+            "Room": 4,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 49664,
+            "Y": -2560,
+            "Z": 93696,
+            "Room": 4,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 49664,
+            "Y": -1536,
+            "Z": 93696,
+            "Room": 4,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 49664,
+            "Y": -2560,
+            "Z": 94720,
+            "Room": 4,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 49664,
+            "Y": -2560,
+            "Z": 95744,
+            "Room": 4,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 49664,
+            "Y": -2560,
+            "Z": 95744,
+            "Room": 4,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 49664,
+            "Y": -2560,
+            "Z": 95744,
+            "Room": 4,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 47620,
+            "Y": -2560,
+            "Z": 93696,
+            "Room": 4,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 47620,
+            "Y": -1536,
+            "Z": 93696,
+            "Room": 4,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button at the start.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 48644,
+            "Y": -1536,
+            "Z": 92672,
+            "Room": 4,
+            "Angle": 0
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the yellow key card slot.",
+          "EMType": 41,
+          "EntityIndex": 6,
+          "Location": {
+            "X": 36352,
+            "Y": -2816,
+            "Z": 75264,
+            "Room": 3,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the yellow key card slot.",
+          "EMType": 41,
+          "EntityIndex": 6,
+          "Location": {
+            "X": 36352,
+            "Y": -2816,
+            "Z": 74240,
+            "Room": 3,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the yellow key card slot.",
+          "EMType": 41,
+          "EntityIndex": 6,
+          "Location": {
+            "X": 34304,
+            "Y": -3072,
+            "Z": 78336,
+            "Room": 91,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the yellow key card slot.",
+          "EMType": 41,
+          "EntityIndex": 6,
+          "Location": {
+            "X": 44544,
+            "Y": -1536,
+            "Z": 78336,
+            "Room": 11,
+            "Angle": 0
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the red key card slot.",
+          "EMType": 41,
+          "EntityIndex": 53,
+          "Location": {
+            "X": 41472,
+            "Y": -4096,
+            "Z": 61952,
+            "Room": 30,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red key card slot.",
+          "EMType": 41,
+          "EntityIndex": 53,
+          "Location": {
+            "X": 41472,
+            "Y": -4096,
+            "Z": 61952,
+            "Room": 30,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red key card slot.",
+          "EMType": 41,
+          "EntityIndex": 53,
+          "Location": {
+            "X": 41472,
+            "Y": -4096,
+            "Z": 62976,
+            "Room": 30,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red key card slot.",
+          "EMType": 41,
+          "EntityIndex": 53,
+          "Location": {
+            "X": 41472,
+            "Y": -4096,
+            "Z": 64000,
+            "Room": 30,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red key card slot.",
+          "EMType": 41,
+          "EntityIndex": 53,
+          "Location": {
+            "X": 41472,
+            "Y": -4096,
+            "Z": 65024,
+            "Room": 30,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red key card slot.",
+          "EMType": 41,
+          "EntityIndex": 53,
+          "Location": {
+            "X": 42496,
+            "Y": -4096,
+            "Z": 66048,
+            "Room": 30,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red key card slot.",
+          "EMType": 41,
+          "EntityIndex": 53,
+          "Location": {
+            "X": 42496,
+            "Y": -4096,
+            "Z": 67072,
+            "Room": 30,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red key card slot.",
+          "EMType": 41,
+          "EntityIndex": 53,
+          "Location": {
+            "X": 37376,
+            "Y": -4096,
+            "Z": 61952,
+            "Room": 30,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red key card slot.",
+          "EMType": 41,
+          "EntityIndex": 53,
+          "Location": {
+            "X": 37376,
+            "Y": -4096,
+            "Z": 61952,
+            "Room": 30,
+            "Angle": -16384
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the green key card slot.",
+          "EMType": 41,
+          "EntityIndex": 66,
+          "Location": {
+            "X": 50688,
+            "Y": -5888,
+            "Z": 46592,
+            "Room": 37,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the green key card slot.",
+          "EMType": 41,
+          "EntityIndex": 66,
+          "Location": {
+            "X": 50688,
+            "Y": -5888,
+            "Z": 44544,
+            "Room": 37,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the green key card slot.",
+          "EMType": 41,
+          "EntityIndex": 66,
+          "Location": {
+            "X": 53760,
+            "Y": -5888,
+            "Z": 44544,
+            "Room": 37,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the green key card slot.",
+          "EMType": 41,
+          "EntityIndex": 66,
+          "Location": {
+            "X": 53760,
+            "Y": -5888,
+            "Z": 44544,
+            "Room": 37,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the green key card slot.",
+          "EMType": 41,
+          "EntityIndex": 66,
+          "Location": {
+            "X": 53760,
+            "Y": -5888,
+            "Z": 46592,
+            "Room": 37,
+            "Angle": 16384
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 53760,
+            "Y": -5888,
+            "Z": 48640,
+            "Room": 37,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 51712,
+            "Y": -5888,
+            "Z": 47616,
+            "Room": 37,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 51712,
+            "Y": -5888,
+            "Z": 48640,
+            "Room": 37,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 52736,
+            "Y": -5888,
+            "Z": 49664,
+            "Room": 39,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 52736,
+            "Y": -5888,
+            "Z": 49664,
+            "Room": 39,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 52736,
+            "Y": -6912,
+            "Z": 54784,
+            "Room": 39,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 52736,
+            "Y": -6912,
+            "Z": 55808,
+            "Room": 39,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 52736,
+            "Y": -6912,
+            "Z": 55808,
+            "Room": 39,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 52736,
+            "Y": -6912,
+            "Z": 54784,
+            "Room": 39,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 48640,
+            "Y": -5120,
+            "Z": 54784,
+            "Room": 33,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 48640,
+            "Y": -5120,
+            "Z": 57856,
+            "Room": 33,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 37.",
+          "EMType": 41,
+          "EntityIndex": 65,
+          "Location": {
+            "X": 48640,
+            "Y": -6144,
+            "Z": 57856,
+            "Room": 33,
+            "Angle": 16384
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the dorm button",
+          "EMType": 41,
+          "EntityIndex": 40,
+          "Location": {
+            "X": 27136,
+            "Y": -5376,
+            "Z": 67072,
+            "Room": 22,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the dorm button",
+          "EMType": 41,
+          "EntityIndex": 40,
+          "Location": {
+            "X": 27136,
+            "Y": -5376,
+            "Z": 69120,
+            "Room": 22,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the dorm button",
+          "EMType": 41,
+          "EntityIndex": 40,
+          "Location": {
+            "X": 27136,
+            "Y": -5376,
+            "Z": 70144,
+            "Room": 22,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the dorm button",
+          "EMType": 41,
+          "EntityIndex": 40,
+          "Location": {
+            "X": 27136,
+            "Y": -5376,
+            "Z": 72192,
+            "Room": 22,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the dorm button.",
+          "EMType": 41,
+          "EntityIndex": 40,
+          "Location": {
+            "X": 27136,
+            "Y": -5376,
+            "Z": 73216,
+            "Room": 22,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the dorm button.",
+          "EMType": 41,
+          "EntityIndex": 40,
+          "Location": {
+            "X": 29184,
+            "Y": -5376,
+            "Z": 73216,
+            "Room": 22,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the dorm button.",
+          "EMType": 41,
+          "EntityIndex": 40,
+          "Location": {
+            "X": 29184,
+            "Y": -5376,
+            "Z": 72192,
+            "Room": 22,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the dorm button.",
+          "EMType": 41,
+          "EntityIndex": 40,
+          "Location": {
+            "X": 29184,
+            "Y": -5376,
+            "Z": 70144,
+            "Room": 22,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the dorm button.",
+          "EMType": 41,
+          "EntityIndex": 40,
+          "Location": {
+            "X": 29184,
+            "Y": -5376,
+            "Z": 69120,
+            "Room": 22,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the dorm button.",
+          "EMType": 41,
+          "EntityIndex": 40,
+          "Location": {
+            "X": 29184,
+            "Y": -5376,
+            "Z": 67072,
+            "Room": 22,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the dorm button.",
+          "EMType": 41,
+          "EntityIndex": 40,
+          "Location": {
+            "X": 29184,
+            "Y": -5376,
+            "Z": 66048,
+            "Room": 22,
+            "Angle": -32768
+          }
+        }
+      ]
+    ]
+  ],
+
+  "OneOf": [
+    {
+      "Leader": [
+        {
+          "Comments": "Drain the rooms at the start.",
+          "EMType": 3,
+          "RoomNumbers": [ 85, 86, 87, 88, 89, 6, 58, 77, 78, 79, 14 ],
+          "WaterTextures": [ 1740, 1670, 1648, 1741 ]
+        },
+
+        {
+          "Comments": "Remove the water sound source for above.",
+          "EMType": 103,
+          "Source": {
+            "X": 39424,
+            "Y": -4992,
+            "Z": 85504
+          }
+        },
+
+        {
+          "Comments": "Remove the water sound source for above.",
+          "EMType": 103,
+          "Source": {
+            "X": 27136,
+            "Y": -6016,
+            "Z": 85504
+          }
+        },
+
+        {
+          "Comments": "Create some supports for the plane.",
+          "EMType": 1,
+          "Location": {
+            "X": 33266,
+            "Y": 2048,
+            "Z": 82309,
+            "Room": 89
+          },
+          "Clicks": -1,
+          "SideTexture": 1668
+        },
+
+        {
+          "EMType": 1,
+          "Location": {
+            "X": 33266,
+            "Y": 2304,
+            "Z": 82309,
+            "Room": 89
+          },
+          "Clicks": -5,
+          "SideTexture": 1667
+        },
+
+        {
+          "EMType": 1,
+          "Location": {
+            "X": 33266,
+            "Y": 3584,
+            "Z": 82309,
+            "Room": 89
+          },
+          "Clicks": -5,
+          "SideTexture": 1667
+        },
+
+        {
+          "Comments": "Make the support climbable.",
+          "EMType": 0,
+          "IsNegativeZ": true,
+          "Location": {
+            "X": 33292,
+            "Y": 2048,
+            "Z": 83469,
+            "Room": 89
+          },
+          "TextureMap": {
+            "1645": {
+              "89": {
+                "Rectangles": [ 69, 73 ]
+              }
+            },
+            "1700": {
+              "89": {
+                "Rectangles": [ 65 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Rotate the trapdoor so it doesn't open against the ladder.",
+          "EMType": 44,
+          "EntityIndex": 101,
+          "TargetLocation": {
+            "X": 33280,
+            "Y": -1280,
+            "Z": 83456,
+            "Room": 97,
+            "Angle": -32768
+          }
+        },
+
+        {
+          "Comments": "More plane supports.",
+          "EMType": 1,
+          "Location": {
+            "X": 33266,
+            "Y": 2048,
+            "Z": 86405,
+            "Room": 89
+          },
+          "Clicks": -1,
+          "SideTexture": 1668
+        },
+
+        {
+          "EMType": 1,
+          "Location": {
+            "X": 33266,
+            "Y": 2304,
+            "Z": 86405,
+            "Room": 89
+          },
+          "Clicks": -5,
+          "SideTexture": 1667
+        },
+
+        {
+          "EMType": 1,
+          "Location": {
+            "X": 33266,
+            "Y": 3584,
+            "Z": 86405,
+            "Room": 89
+          },
+          "Clicks": -5,
+          "SideTexture": 1667
+        },
+
+        {
+          "Comments": "More plane supports.",
+          "EMType": 1,
+          "Location": {
+            "X": 33266,
+            "Y": 2048,
+            "Z": 90501,
+            "Room": 89
+          },
+          "Clicks": -1,
+          "SideTexture": 1668
+        },
+
+        {
+          "EMType": 1,
+          "Location": {
+            "X": 33266,
+            "Y": 2304,
+            "Z": 90501,
+            "Room": 89
+          },
+          "Clicks": -5,
+          "SideTexture": 1667
+        },
+
+        {
+          "EMType": 1,
+          "Location": {
+            "X": 33266,
+            "Y": 3584,
+            "Z": 90501,
+            "Room": 89
+          },
+          "Clicks": -5,
+          "SideTexture": 1667
+        },
+
+        {
+          "Comments": "Make a ladder to get into the drained plane room.",
+          "EMType": 0,
+          "IsNegativeZ": true,
+          "Location": {
+            "X": 38363,
+            "Y": 2048,
+            "Z": 82241,
+            "Room": 88
+          },
+          "TextureMap": {
+            "1645": {
+              "88": {
+                "Rectangles": [ 84, 85 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Block for above ladder.",
+          "EMType": 1,
+          "Location": {
+            "X": 38363,
+            "Y": 2048,
+            "Z": 82241,
+            "Room": 88
+          },
+          "Clicks": -4,
+          "SideTexture": 1694,
+          "FloorTexture": 1673
+        },
+
+        {
+          "Comments": "Put a block near the starting area to get into the plane pit.",
+          "EMType": 1,
+          "Location": {
+            "X": 42597,
+            "Y": 2048,
+            "Z": 95715,
+            "Room": 6
+          },
+          "Clicks": -7,
+          "SideTexture": 1694,
+          "FloorTexture": 1673
+        },
+
+        {
+          "Comments": "Convert the lever next to the fan into a button.",
+          "EMType": 45,
+          "EntityIndex": 96,
+          "NewEntityType": 103
+        },
+
+        {
+          "Comments": "Shift the button up.",
+          "EMType": 41,
+          "EntityIndex": 96,
+          "Location": {
+            "X": 24064,
+            "Y": 2048,
+            "Z": 91648,
+            "Room": 85,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "Comments": "Put a block where the button used to be for secret reasons.",
+          "EMType": 1,
+          "Location": {
+            "X": 23926,
+            "Y": 2048,
+            "Z": 91659,
+            "Room": 85
+          },
+          "Clicks": -4,
+          "SideTexture": 1694,
+          "FloorTexture": 1673
+        },
+
+        {
+          "Comments": "Convert the underwater fan into a fire.",
+          "EMType": 45,
+          "EntityIndex": 93,
+          "NewEntityType": 253
+        },
+
+        {
+          "Comments": "Convert the lever for the fire room into something useful",
+          "EMType": 45,
+          "EntityIndex": 24,
+          "NewEntityType": 150
+        },
+
+        {
+          "Comments": "Shift the item above.",
+          "EMType": 44,
+          "EntityIndex": 24,
+          "TargetLocation": {
+            "X": 22038,
+            "Y": 3072,
+            "Z": 96766,
+            "Room": 58,
+            "Angle": 0
+          }
+        },
+
+        {
+          "Comments": "Delete its old triggers.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 22020,
+              "Y": 768,
+              "Z": 77311,
+              "Room": 14
+            }
+          ]
+        },
+
+        {
+          "Comments": "Convert the trapdoor that used to lead to the secret to fire as it's now redundant.",
+          "EMType": 45,
+          "EntityIndex": 95,
+          "NewEntityType": 253
+        },
+
+        {
+          "Comments": "Shift the above fire down.",
+          "EMType": 44,
+          "EntityIndex": 95,
+          "TargetLocation": {
+            "X": 22016,
+            "Y": 3072,
+            "Z": 97792,
+            "Room": 58,
+            "Angle": 0
+          }
+        },
+
+        {
+          "Comments": "Make a trigger for it.",
+          "EMType": 61,
+          "Replace": true,
+          "Locations": [
+            {
+              "X": 22016,
+              "Y": 3072,
+              "Z": 97792,
+              "Room": 58
+            }
+          ],
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 0,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 95
+              }
+            ]
+          }
+        },
+
+        {
+          "Comments": "Make all this fire look intentional.",
+          "EMType": 21,
+          "TextureMap": {
+            "1710": {
+              "77": {
+                "Rectangles": [ 20 ]
+              },
+              "58": {
+                "Rectangles": [ 9 ]
+              }
+            },
+            "1667": {
+              "77": {
+                "Rectangles": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25 ]
+              },
+              "58": {
+                "Rectangles": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15 ]
+              }
+            },
+            "1649": {
+              "77": {
+                "Triangles": [ 0, 1, 2 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Make a ladder to get out of room 14.",
+          "EMType": 0,
+          "IsPositiveX": true,
+          "Location": {
+            "X": 23185,
+            "Y": 768,
+            "Z": 76239,
+            "Room": 14
+          },
+          "TextureMap": {
+            "1645": {
+              "14": {
+                "Rectangles": [ 68, 69, 70 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Adjust any secrets in the drained areas.",
+          "EMType": 43,
+          "Types": [ 190, 191, 192 ],
+          "SectorLocations": [
+            {
+              "X": 22139,
+              "Y": 2048,
+              "Z": 93731,
+              "Room": 77
+            }
+          ],
+          "TargetLocation": {
+            "X": 22488,
+            "Y": 2048,
+            "Z": 90084,
+            "Room": 14
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Move the button for door 97.",
+            "EMType": 41,
+            "EntityIndex": 96,
+            "Location": {
+              "X": 25088,
+              "Y": 2048,
+              "Z": 91648,
+              "Room": 85,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "EMType": 41,
+            "EntityIndex": 96,
+            "Location": {
+              "X": 24064,
+              "Y": 2048,
+              "Z": 95744,
+              "Room": 85,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "EMType": 41,
+            "EntityIndex": 96,
+            "Location": {
+              "X": 22016,
+              "Y": 2048,
+              "Z": 93696,
+              "Room": 77,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "EMType": 41,
+            "EntityIndex": 96,
+            "Location": {
+              "X": 24064,
+              "Y": 2048,
+              "Z": 90624,
+              "Room": 85,
+              "Angle": 0
+            }
+          }
+        ],
+        [
+          {
+            "EMType": 41,
+            "EntityIndex": 96,
+            "Location": {
+              "X": 32256,
+              "Y": 2048,
+              "Z": 90624,
+              "Room": 89,
+              "Angle": 16384
+            }
+          }
+        ],
+        [
+          {
+            "EMType": 41,
+            "EntityIndex": 96,
+            "Location": {
+              "X": 32256,
+              "Y": 2048,
+              "Z": 86528,
+              "Room": 89,
+              "Angle": 16384
+            }
+          }
+        ],
+        [
+          {
+            "EMType": 41,
+            "EntityIndex": 96,
+            "Location": {
+              "X": 32256,
+              "Y": 2048,
+              "Z": 82432,
+              "Room": 89,
+              "Angle": 16384
+            }
+          }
+        ]
+      ]
+    },
+
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the textures for the old ladder that leads outside.",
+          "EMType": 21,
+          "TextureMap": {
+            "1667": {
+              "52": {
+                "Rectangles": [ 0, 1, 2 ]
+              },
+              "26": {
+                "Rectangles": [ 16, 17 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Make the new ladder reachable with a step.",
+          "EMType": 1,
+          "Location": {
+            "X": 20015,
+            "Y": -3584,
+            "Z": 72161,
+            "Room": 26
+          },
+          "Clicks": -1,
+          "SideTexture": 1735
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Shift the ladder to the outside area to -Z.",
+            "EMType": 0,
+            "IsNegativeZ": true,
+            "Location": {
+              "X": 20015,
+              "Y": -3584,
+              "Z": 72161,
+              "Room": 26
+            },
+            "TextureMap": {
+              "1645": {
+                "52": {
+                  "Rectangles": [ 3, 4, 5 ]
+                }
+              }
+            }
+          }
+        ],
+
+        [
+          {
+            "Comments": "Shift the ladder to the outside area to +Z.",
+            "EMType": 0,
+            "IsPositiveZ": true,
+            "Location": {
+              "X": 20015,
+              "Y": -3584,
+              "Z": 72161,
+              "Room": 26
+            },
+            "TextureMap": {
+              "1645": {
+                "52": {
+                  "Rectangles": [ 6, 7, 8 ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    }
+  ],
+
+  "Mirrored": []
+}

@@ -5,6 +5,8 @@ namespace TREnvironmentEditor.Model.Types
 {
     public class EMDrainFunction : BaseWaterFunction
     {
+        public int[] DetachedRooms { get; set; }
+
         public override void ApplyToLevel(TR2Level level)
         {
             // Loop initially to drain everything as our texture checks below involve
@@ -26,8 +28,8 @@ namespace TREnvironmentEditor.Model.Types
                     TR2Room roomBelow = level.Rooms[roomBelowNumber];
                     if (roomBelow.ContainsWater)
                     {
-                        AddWaterSurface(level, room, false);
-                        AddWaterSurface(level, roomBelow, true);
+                        AddWaterSurface(level, room, false, RoomNumbers);
+                        AddWaterSurface(level, roomBelow, true, RoomNumbers);
                     }
                 }
 
@@ -40,6 +42,18 @@ namespace TREnvironmentEditor.Model.Types
                         RemoveWaterSurface(room);
                         RemoveWaterSurface(roomAbove);
                     }
+                }
+            }
+
+            // Something odd happens with flip map rooms, e.g. 73/134 in Bartoli's.
+            // The 2 rooms don't seem to reference each other, so the textures remain,
+            // in the flipped room, even though removed from the normal. For now, 
+            // we'll define these rooms manually.
+            if (DetachedRooms != null)
+            {
+                foreach (int roomNumber in DetachedRooms)
+                {
+                    RemoveWaterSurface(level.Rooms[roomNumber]);
                 }
             }
         }

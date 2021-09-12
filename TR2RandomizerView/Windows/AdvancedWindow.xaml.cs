@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
-using TR2RandomizerCore.Globalisation;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using TR2RandomizerCore.Helpers;
 using TR2RandomizerView.Model;
 using TR2RandomizerView.Utilities;
@@ -13,6 +15,8 @@ namespace TR2RandomizerView.Windows
     /// </summary>
     public partial class AdvancedWindow : Window
     {
+        private static readonly string _darknessPreviewPath = @"pack://application:,,,/TR2Randomizer;component/Resources/Darkness/{0}.png";
+
         public static readonly DependencyProperty MainDescriptionProperty = DependencyProperty.Register
         (
             nameof(MainDescription), typeof(string), typeof(AdvancedWindow)
@@ -23,9 +27,9 @@ namespace TR2RandomizerView.Windows
             nameof(BoolItemsSource), typeof(List<BoolItemControlClass>), typeof(AdvancedWindow)
         );
 
-        public static readonly DependencyProperty RandoEnemyDifficultyProperty = DependencyProperty.Register
+        public static readonly DependencyProperty HasBoolItemsProperty = DependencyProperty.Register
         (
-            nameof(RandoEnemyDifficulty), typeof(RandoDifficulty), typeof(AdvancedWindow)
+            nameof(HasBoolItems), typeof(bool), typeof(AdvancedWindow)
         );
 
         public static readonly DependencyProperty HasDifficultyProperty = DependencyProperty.Register
@@ -33,19 +37,34 @@ namespace TR2RandomizerView.Windows
             nameof(HasDifficulty), typeof(bool), typeof(AdvancedWindow)
         );
 
-        public static readonly DependencyProperty LanguageSourceProperty = DependencyProperty.Register
-        (
-            nameof(LanguageSource), typeof(Language[]), typeof(AdvancedWindow)
-        );
-
-        public static readonly DependencyProperty GameStringLanguageProperty = DependencyProperty.Register
-        (
-            nameof(GameStringLanguage), typeof(Language), typeof(AdvancedWindow)
-        );
-
         public static readonly DependencyProperty HasLanguageProperty = DependencyProperty.Register
         (
             nameof(HasLanguage), typeof(bool), typeof(AdvancedWindow)
+        );
+
+        public static readonly DependencyProperty HasMirroringProperty = DependencyProperty.Register
+        (
+            nameof(HasMirroring), typeof(bool), typeof(AdvancedWindow)
+        );
+
+        public static readonly DependencyProperty HasHaircutsProperty = DependencyProperty.Register
+        (
+            nameof(HasHaircuts), typeof(bool), typeof(AdvancedWindow)
+        );
+
+        public static readonly DependencyProperty HasInvisibilityProperty = DependencyProperty.Register
+        (
+            nameof(HasInvisibility), typeof(bool), typeof(AdvancedWindow)
+        );
+
+        public static readonly DependencyProperty HasNightModeProperty = DependencyProperty.Register
+        (
+            nameof(HasNightMode), typeof(bool), typeof(AdvancedWindow)
+        );
+
+        public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
+        (
+            nameof(ControllerProxy), typeof(ControllerOptions), typeof(AdvancedWindow)
         );
 
         public string MainDescription
@@ -60,10 +79,10 @@ namespace TR2RandomizerView.Windows
             set => SetValue(BoolItemsSourceProperty, value);
         }
 
-        public RandoDifficulty RandoEnemyDifficulty
+        public bool HasBoolItems
         {
-            get => (RandoDifficulty)GetValue(RandoEnemyDifficultyProperty);
-            set => SetValue(RandoEnemyDifficultyProperty, value);
+            get => (bool)GetValue(HasBoolItemsProperty);
+            set => SetValue(HasBoolItemsProperty, value);
         }
 
         public bool HasDifficulty
@@ -72,22 +91,40 @@ namespace TR2RandomizerView.Windows
             set => SetValue(HasDifficultyProperty, value);
         }
 
-        public Language[] LanguageSource
-        {
-            get => (Language[])GetValue(LanguageSourceProperty);
-            set => SetValue(LanguageSourceProperty, value);
-        }
-
-        public Language GameStringLanguage
-        {
-            get => (Language)GetValue(GameStringLanguageProperty);
-            set => SetValue(GameStringLanguageProperty, value);
-        }
-
         public bool HasLanguage
         {
             get => (bool)GetValue(HasDifficultyProperty);
             set => SetValue(HasDifficultyProperty, value);
+        }
+
+        public bool HasMirroring
+        {
+            get => (bool)GetValue(HasMirroringProperty);
+            set => SetValue(HasMirroringProperty, value);
+        }
+
+        public bool HasHaircuts
+        {
+            get => (bool)GetValue(HasHaircutsProperty);
+            set => SetValue(HasHaircutsProperty, value);
+        }
+
+        public bool HasInvisibility
+        {
+            get => (bool)GetValue(HasInvisibilityProperty);
+            set => SetValue(HasInvisibilityProperty, value);
+        }
+
+        public bool HasNightMode
+        {
+            get => (bool)GetValue(HasNightModeProperty);
+            set => SetValue(HasNightModeProperty, value);
+        }
+
+        public ControllerOptions ControllerProxy
+        {
+            get => (ControllerOptions)GetValue(ControllerProperty);
+            set => SetValue(ControllerProperty, value);
         }
 
         public AdvancedWindow()
@@ -110,6 +147,26 @@ namespace TR2RandomizerView.Windows
         {
             e.Cancel = true;
             Visibility = Visibility.Hidden;
+        }
+
+        private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            // This should not be here, but in some cases both radio buttons can remain unchecked on load
+            if (HasDifficulty)
+            {
+                _unrestrictedButton.IsChecked = !(_defaultDifficultyButton.IsChecked = ControllerProxy.RandoEnemyDifficulty == RandoDifficulty.Default);
+            }
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(e.Uri.AbsoluteUri);
+            e.Handled = true;
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            _darknessPreview.Source = new BitmapImage(new Uri(string.Format(_darknessPreviewPath, ControllerProxy.NightModeDarkness)));
         }
     }
 }

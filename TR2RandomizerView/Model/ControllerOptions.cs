@@ -26,10 +26,19 @@ namespace TR2RandomizerView.Model
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileBirdMonsters;
         private BoolItemControlClass _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks;
-        private BoolItemControlClass _persistOutfits, _randomlyCutHair, _removeRobeDagger, _enableInvisibility;
+        private BoolItemControlClass _persistOutfits, _removeRobeDagger;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
-        private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions;
+        private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders;
+        private uint _mirroredLevelCount;
+        private bool _mirrorAssaultCourse;
+        private uint _haircutLevelCount;
+        private bool _assaultCourseHaircut;
+        private uint _invisibleLevelCount;
+        private bool _assaultCourseInvisible;
+        private uint _nightModeDarkness;
+        private uint _nightModeDarknessMaximum;
+        private bool _nightModeAssaultCourse;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
 
@@ -67,6 +76,9 @@ namespace TR2RandomizerView.Model
             AmmolessLevelCount = (uint)Math.Min(AmmolessLevelCount, MaximumLevelCount);
             SunsetCount = (uint)Math.Min(SunsetCount, MaximumLevelCount);
             NightModeCount = (uint)Math.Min(NightModeCount, MaximumLevelCount);
+            MirroredLevelCount = (uint)Math.Min(MirroredLevelCount, MaximumLevelCount);
+            HaircutLevelCount = (uint)Math.Min(HaircutLevelCount, MaximumLevelCount);
+            InvisibleLevelCount = (uint)Math.Min(InvisibleLevelCount, MaximumLevelCount);
         }
 
         public bool RandomizationPossible
@@ -244,6 +256,36 @@ namespace TR2RandomizerView.Model
             set
             {
                 _nightLevelsControl.CustomInt = (int)value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool NightModeAssaultCourse
+        {
+            get => _nightModeAssaultCourse;
+            set
+            {
+                _nightModeAssaultCourse = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint NightModeDarkness
+        {
+            get => _nightModeDarkness;
+            set
+            {
+                _nightModeDarkness = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint NightModeDarknessMaximum
+        {
+            get => _nightModeDarknessMaximum;
+            private set
+            {
+                _nightModeDarknessMaximum = value;
                 FirePropertyChanged();
             }
         }
@@ -438,16 +480,6 @@ namespace TR2RandomizerView.Model
             }
         }
 
-        public BoolItemControlClass RandomlyCutHair
-        {
-            get => _randomlyCutHair;
-            set
-            {
-                _randomlyCutHair = value;
-                FirePropertyChanged();
-            }
-        }
-
         public BoolItemControlClass RemoveRobeDagger
         {
             get => _removeRobeDagger;
@@ -458,12 +490,42 @@ namespace TR2RandomizerView.Model
             }
         }
 
-        public BoolItemControlClass EnableInvisibility
+        public uint HaircutLevelCount
         {
-            get => _enableInvisibility;
+            get => _haircutLevelCount;
             set
             {
-                _enableInvisibility = value;
+                _haircutLevelCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool AssaultCourseHaircut
+        {
+            get => _assaultCourseHaircut;
+            set
+            {
+                _assaultCourseHaircut = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint InvisibleLevelCount
+        {
+            get => _invisibleLevelCount;
+            set
+            {
+                _invisibleLevelCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool AssaultCourseInvisible
+        {
+            get => _assaultCourseInvisible;
+            set
+            {
+                _assaultCourseInvisible = value;
                 FirePropertyChanged();
             }
         }
@@ -594,6 +656,36 @@ namespace TR2RandomizerView.Model
             set
             {
                 _randomizeSlotPositions = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RandomizeLadders
+        {
+            get => _randomizeLadders;
+            set
+            {
+                _randomizeLadders = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint MirroredLevelCount
+        {
+            get => _mirroredLevelCount;
+            set
+            {
+                _mirroredLevelCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool MirrorAssaultCourse
+        {
+            get => _mirrorAssaultCourse;
+            set
+            {
+                _mirrorAssaultCourse = value;
                 FirePropertyChanged();
             }
         }
@@ -896,24 +988,12 @@ namespace TR2RandomizerView.Model
                 Description = "Lara's outfit will be the same throughout the entire game, when possible."
             };
             BindingOperations.SetBinding(PersistOutfits, BoolItemControlClass.IsActiveProperty, randomizeOutfitsBinding);
-            RandomlyCutHair = new BoolItemControlClass()
-            {
-                Title = "Give Lara haircuts",
-                Description = "Lara will lose her braid in a random number of levels."
-            };
-            BindingOperations.SetBinding(RandomlyCutHair, BoolItemControlClass.IsActiveProperty, randomizeOutfitsBinding);
             RemoveRobeDagger = new BoolItemControlClass()
             {
                 Title = "Remove robe dagger",
                 Description = "If Lara is wearing her dressing gown before she has killed a dragon, the dagger will not appear."
             };
             BindingOperations.SetBinding(RemoveRobeDagger, BoolItemControlClass.IsActiveProperty, randomizeOutfitsBinding);
-            EnableInvisibility = new BoolItemControlClass()
-            {
-                Title = "Enable invisibility",
-                Description = "Lara may wear an invisibility cloak in some levels. Only her shadow will be visible."
-            };
-            BindingOperations.SetBinding(EnableInvisibility, BoolItemControlClass.IsActiveProperty, randomizeOutfitsBinding);
 
             // Text
             Binding randomizeTextBinding = new Binding(nameof(RandomizeText)) { Source = this };
@@ -953,6 +1033,12 @@ namespace TR2RandomizerView.Model
                 Description = "Change where keyholes, switches and puzzle slots are located in each level."
             };
             BindingOperations.SetBinding(RandomizeSlotPositions, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
+            RandomizeLadders = new BoolItemControlClass
+            {
+                Title = "Move ladders",
+                Description = "Change where ladders are positioned in each level."
+            };
+            BindingOperations.SetBinding(RandomizeLadders, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
 
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
@@ -977,7 +1063,7 @@ namespace TR2RandomizerView.Model
             };
             OutfitBoolItemControls = new List<BoolItemControlClass>()
             {
-                _persistOutfits, _randomlyCutHair, _removeRobeDagger, _enableInvisibility
+                _persistOutfits, _removeRobeDagger
             };
             TextBoolItemControls = new List<BoolItemControlClass>
             {
@@ -989,7 +1075,7 @@ namespace TR2RandomizerView.Model
             };
             EnvironmentBoolItemControls = new List<BoolItemControlClass>
             {
-                _randomizeWaterLevels, _randomizeSlotPositions
+                _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders
             };
         }
 
@@ -1021,6 +1107,9 @@ namespace TR2RandomizerView.Model
             RandomizeNightMode = _controller.RandomizeNightMode;
             NightModeSeed = _controller.NightModeSeed;
             NightModeCount = _controller.NightModeCount;
+            NightModeAssaultCourse = _controller.NightModeAssaultCourse;
+            NightModeDarkness = _controller.NightModeDarkness;
+            NightModeDarknessMaximum = _controller.NightModeDarknessRange;
 
             RandomizeAudioTracks = _controller.RandomizeAudioTracks;
             AudioTracksSeed = _controller.AudioTracksSeed;
@@ -1052,9 +1141,11 @@ namespace TR2RandomizerView.Model
             RandomizeOutfits = _controller.RandomizeOutfits;
             OutfitSeed = _controller.OutfitSeed;
             PersistOutfits.Value = _controller.PersistOutfits;
-            RandomlyCutHair.Value = _controller.RandomlyCutHair;
             RemoveRobeDagger.Value = _controller.RemoveRobeDagger;
-            EnableInvisibility.Value = _controller.EnableInvisibility;
+            HaircutLevelCount = _controller.HaircutLevelCount;
+            AssaultCourseHaircut = _controller.AssaultCourseHaircut;
+            InvisibleLevelCount = _controller.InvisibleLevelCount;
+            AssaultCourseInvisible = _controller.AssaultCourseInvisible;
 
             RandomizeText = _controller.RandomizeGameStrings;
             TextSeed = _controller.GameStringsSeed;
@@ -1071,6 +1162,9 @@ namespace TR2RandomizerView.Model
             EnvironmentSeed = _controller.EnvironmentSeed;
             RandomizeWaterLevels.Value = _controller.RandomizeWaterLevels;
             RandomizeSlotPositions.Value = _controller.RandomizeSlotPositions;
+            RandomizeLadders.Value = _controller.RandomizeLadders;
+            MirroredLevelCount = _controller.MirroredLevelCount;
+            MirrorAssaultCourse = _controller.MirrorAssaultCourse;
 
             DevelopmentMode = _controller.DevelopmentMode;
             DisableDemos = _controller.DisableDemos;
@@ -1254,6 +1348,8 @@ namespace TR2RandomizerView.Model
             _controller.RandomizeNightMode = RandomizeNightMode;
             _controller.NightModeSeed = NightModeSeed;
             _controller.NightModeCount = NightModeCount;
+            _controller.NightModeAssaultCourse = NightModeAssaultCourse;
+            _controller.NightModeDarkness = NightModeDarkness;
 
             _controller.RandomizeAudioTracks = RandomizeAudioTracks;
             _controller.AudioTracksSeed = AudioTracksSeed;
@@ -1285,9 +1381,11 @@ namespace TR2RandomizerView.Model
             _controller.RandomizeOutfits = RandomizeOutfits;
             _controller.OutfitSeed = OutfitSeed;
             _controller.PersistOutfits = PersistOutfits.Value;
-            _controller.RandomlyCutHair = RandomlyCutHair.Value;
             _controller.RemoveRobeDagger = RemoveRobeDagger.Value;
-            _controller.EnableInvisibility = EnableInvisibility.Value;
+            _controller.HaircutLevelCount = HaircutLevelCount;
+            _controller.AssaultCourseHaircut = AssaultCourseHaircut;
+            _controller.InvisibleLevelCount = InvisibleLevelCount;
+            _controller.AssaultCourseInvisible = AssaultCourseInvisible;
 
             _controller.RandomizeGameStrings = RandomizeText;
             _controller.GameStringsSeed = TextSeed;
@@ -1303,6 +1401,9 @@ namespace TR2RandomizerView.Model
             _controller.EnvironmentSeed = EnvironmentSeed;
             _controller.RandomizeWaterLevels = RandomizeWaterLevels.Value;
             _controller.RandomizeSlotPositions = RandomizeSlotPositions.Value;
+            _controller.RandomizeLadders = RandomizeLadders.Value;
+            _controller.MirroredLevelCount = MirroredLevelCount;
+            _controller.MirrorAssaultCourse = MirrorAssaultCourse;
 
             _controller.DevelopmentMode = DevelopmentMode;
             _controller.DisableDemos = DisableDemos;

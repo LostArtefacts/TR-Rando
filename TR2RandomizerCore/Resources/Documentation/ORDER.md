@@ -31,16 +31,16 @@ In addition, this must take place before texture randomization to ensure cross-l
 ## 07 Items (unarmed)
 Following enemy randomization, item randomizer runs again to calculate additional ammo to give in unarmed levels. This is based on enemy difficulty.
 
-## 08 Environment
+## 08 Start Position
+Must take place after secret randomization - if a secret is in Lara's starting room, she will not be repositioned. Must also take place before environment randomization as level mirroring will relocate entities.
+
+## 09 Environment
 Takes place after enemy randomization as enemy types are taken into consideration for flooding/draining.
 Takes place before audio randomization as new triggers may be added that should take precedence over secret music triggers added in AudioRandomizer. Also allows any new music triggers to be later randomized.
 This must also take place before night randomization as new room vertices may have been added so these will need their lighting values set.
 
-## 09 Audio
+## 10 Audio
 Performed after secret and environment randomization to (potentially) allocate music triggers to the correct floor sectors.
-
-## 10 Start Position
-Must take place after secret randomization - if a secret is in Lara's starting room, she will not be repositioned.
 
 ## 11 Outfits
 Takes place after enemy randomization as priority is given to that for texture import (in terms of the tile limits, we aim to get more enemies in place rather than a different outfit for Lara). This must take place before texture randomization so the new outfit can be targeted.

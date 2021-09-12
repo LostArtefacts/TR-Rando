@@ -265,6 +265,23 @@
   <ItemGroup>
     <Resource Include="Resources\loading.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Darkness\0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Darkness\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Darkness\10.png" />
+    <Resource Include="Resources\Darkness\2.png" />
+    <Resource Include="Resources\Darkness\3.png" />
+    <Resource Include="Resources\Darkness\4.png" />
+    <Resource Include="Resources\Darkness\5.png" />
+    <Resource Include="Resources\Darkness\6.png" />
+    <Resource Include="Resources\Darkness\7.png" />
+    <Resource Include="Resources\Darkness\8.png" />
+    <Resource Include="Resources\Darkness\9.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>rmdir /S /Q Lib</PreBuildEvent>

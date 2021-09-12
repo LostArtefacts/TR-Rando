@@ -89,8 +89,8 @@
             CustomIntDefault="1"
             CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
-
-        <ctrl:ManagedSeedIntControl
+        
+        <ctrl:ManagedSeedAdvancedControl
             Grid.Row="4"
             Grid.Column="0"
             IsActive="{Binding RandomizeNightMode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -98,12 +98,19 @@
             Text="Randomize the levels Lara visits at night."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding NightModeSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomInt="{Binding NightModeCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            CustomIntMinValue="1"
-            CustomIntDefault="0"
-            CustomIntMaxValue="{Binding MaximumLevelCount}"
-            CustomIntTitle="Number of levels"/>
+            SeedValue="{Binding NightModeSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Night Mode (Advanced)"
+                                        MainDescription="Customize the night mode randomization."
+                                        HasBoolItems="False"
+                                        HasNightMode="True"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
 
         <ctrl:ManagedSeedBoolControl
             Grid.Row="0"
@@ -143,8 +150,9 @@
                 <windows:AdvancedWindow Title="Randomize Enemies (Advanced)"
                                         MainDescription="Customize the enemy randomization."
                                         BoolItemsSource="{Binding Data.EnemyBoolItemControls, Source={StaticResource proxy}}"
+                                        HasBoolItems="True"
                                         HasDifficulty="True"
-                                        RandoEnemyDifficulty="{Binding Data.RandoEnemyDifficulty, Source={StaticResource proxy}, Mode=TwoWay}">
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
@@ -164,7 +172,8 @@
             <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
                 <windows:AdvancedWindow Title="Randomize Textures (Advanced)"
                                         MainDescription="Customize the texture randomization."
-                                        BoolItemsSource="{Binding Data.TextureBoolItemControls, Source={StaticResource proxy}}">
+                                        BoolItemsSource="{Binding Data.TextureBoolItemControls, Source={StaticResource proxy}}"
+                                        HasBoolItems="True">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
@@ -215,7 +224,11 @@
             <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
                 <windows:AdvancedWindow Title="Randomize Outfits (Advanced)"
                                         MainDescription="Customize the outfit randomization."
-                                        BoolItemsSource="{Binding Data.OutfitBoolItemControls, Source={StaticResource proxy}}">
+                                        BoolItemsSource="{Binding Data.OutfitBoolItemControls, Source={StaticResource proxy}}"
+                                        HasBoolItems="True"
+                                        HasHaircuts="True"
+                                        HasInvisibility="True"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
@@ -236,14 +249,14 @@
                 <windows:AdvancedWindow Title="Randomize Game Text (Advanced)"
                                         MainDescription="Customize the game text randomization."
                                         BoolItemsSource="{Binding Data.TextBoolItemControls, Source={StaticResource proxy}}"
+                                        HasBoolItems="True"
                                         HasLanguage="True"
-                                        LanguageSource="{Binding Data.AvailableLanguages, Source={StaticResource proxy}}"
-                                        GameStringLanguage="{Binding Data.GameStringLanguage, Source={StaticResource proxy}, Mode=TwoWay}">
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedAdvancedControl
             Grid.Row="4"
             Grid.Column="2"
             IsActive="{Binding RandomizeEnvironment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -251,9 +264,21 @@
             Text="Randomize Lara's surroundings in each level."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding EnvironmentSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            BoolItemsSource="{Binding EnvironmentBoolItemControls}"/>
-        
+            SeedValue="{Binding EnvironmentSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Environment (Advanced)"
+                                        MainDescription="Customize the environmental randomization."
+                                        HasBoolItems="True"
+                                        HasMirroring="True"
+                                        BoolItemsSource="{Binding Data.EnvironmentBoolItemControls, Source={StaticResource proxy}}"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
+
         <Border
             Grid.RowSpan="2"
             Grid.Column="3"

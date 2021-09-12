@@ -324,6 +324,33 @@
       }
     ],
 
+    "HSH.NightSky": [
+      {
+        "Segment": 1,
+        "Tile": 7,
+        "X": 64,
+        "Y": 200
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 128,
+        "Y": 64
+      },
+      {
+        "Segment": 3,
+        "Tile": 7,
+        "X": 128,
+        "Y": 200
+      },
+      {
+        "Segment": 4,
+        "Tile": 8,
+        "X": 192,
+        "Y": 64
+      }
+    ],
+
     "HSH.Sky": [
       {
         "Segment": 1,

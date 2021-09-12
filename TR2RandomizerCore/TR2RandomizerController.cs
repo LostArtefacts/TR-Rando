@@ -323,22 +323,34 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.PersistOutfits = value;
         }
 
-        public bool RandomlyCutHair
-        {
-            get => LevelRandomizer.RandomlyCutHair;
-            set => LevelRandomizer.RandomlyCutHair = value;
-        }
-
         public bool RemoveRobeDagger
         {
             get => LevelRandomizer.RemoveRobeDagger;
             set => LevelRandomizer.RemoveRobeDagger = value;
         }
 
-        public bool EnableInvisibility
+        public uint HaircutLevelCount
         {
-            get => LevelRandomizer.EnableInvisibility;
-            set => LevelRandomizer.EnableInvisibility = value;
+            get => LevelRandomizer.HaircutLevelCount;
+            set => LevelRandomizer.HaircutLevelCount = value;
+        }
+
+        public bool AssaultCourseHaircut
+        {
+            get => LevelRandomizer.AssaultCourseHaircut;
+            set => LevelRandomizer.AssaultCourseHaircut = value;
+        }
+
+        public uint InvisibleLevelCount
+        {
+            get => LevelRandomizer.InvisibleLevelCount;
+            set => LevelRandomizer.InvisibleLevelCount = value;
+        }
+
+        public bool AssaultCourseInvisible
+        {
+            get => LevelRandomizer.AssaultCourseInvisible;
+            set => LevelRandomizer.AssaultCourseInvisible = value;
         }
 
         public int OutfitSeed
@@ -400,6 +412,20 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.NightModeCount = value;
         }
 
+        public uint NightModeDarkness
+        {
+            get => LevelRandomizer.NightModeDarkness;
+            set => LevelRandomizer.NightModeDarkness = value;
+        }
+
+        public uint NightModeDarknessRange => NightModeRandomizer.DarknessRange;
+
+        public bool NightModeAssaultCourse
+        {
+            get => LevelRandomizer.NightModeAssaultCourse;
+            set => LevelRandomizer.NightModeAssaultCourse = value;
+        }
+
         public bool ChangeTriggerTracks
         {
             get => LevelRandomizer.ChangeTriggerTracks;
@@ -440,6 +466,24 @@ namespace TR2RandomizerCore
         {
             get => LevelRandomizer.RandomizeSlotPositions;
             set => LevelRandomizer.RandomizeSlotPositions = value;
+        }
+
+        public bool RandomizeLadders
+        {
+            get => LevelRandomizer.RandomizeLadders;
+            set => LevelRandomizer.RandomizeLadders = value;
+        }
+
+        public uint MirroredLevelCount
+        {
+            get => LevelRandomizer.MirroredLevelCount;
+            set => LevelRandomizer.MirroredLevelCount = value;
+        }
+
+        public bool MirrorAssaultCourse
+        {
+            get => LevelRandomizer.MirrorAssaultCourse;
+            set => LevelRandomizer.MirrorAssaultCourse = value;
         }
 
         public int EnvironmentSeed

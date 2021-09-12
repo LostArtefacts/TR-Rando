@@ -606,6 +606,21 @@ namespace TRLevelReader.Helpers
             return droppableEntities;
         }
 
+        public static List<TR2Entities> DoorTypes()
+        {
+            return new List<TR2Entities>
+            {
+                TR2Entities.Door1, TR2Entities.Door2, TR2Entities.Door3,
+                TR2Entities.Door4, TR2Entities.Door5, TR2Entities.LiftingDoor1,
+                TR2Entities.LiftingDoor2, TR2Entities.LiftingDoor3
+            };
+        }
+
+        public static bool IsDoorType(TR2Entities entity)
+        {
+            return DoorTypes().Contains(entity);
+        }
+
         public static Dictionary<string, List<TR2Entities>> DroppableEnemyTypes()
         {
             return new Dictionary<string, List<TR2Entities>>

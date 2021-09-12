@@ -13,6 +13,9 @@ namespace TR2RandomizerCore.Utilities
         internal Dictionary<StaticTextureSource, List<StaticTextureTarget>> PreparedLevelMapping { get; private set; }
         internal List<TR2Entities> RemovedTextures { get; private set; }
 
+        internal bool UseMirroring { get; set; }
+        internal bool UseNightTextures { get; set; }
+
         internal TexturePositionMonitor(List<StaticTextureSource> sources)
         {
             _entitySources = sources;

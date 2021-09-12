@@ -1,19 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using TR2RandomizerCore.Helpers;
+using TR2RandomizerCore.Utilities;
 using TREnvironmentEditor;
 using TREnvironmentEditor.Model;
+using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
+using TRLevelReader.Helpers;
 
 namespace TR2RandomizerCore.Randomizers
 {
     public class EnvironmentRandomizer : RandomizerBase
     {
         public bool EnforcedModeOnly { get; set; }
+        public uint NumMirrorLevels { get; set; }
+        public bool MirrorAssaultCourse { get; set; }
         public bool RandomizeWater { get; set; }
         public bool RandomizeSlots { get; set; }
+        public bool RandomizeLadders { get; set; }
+
+        internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         private List<EMType> _disallowedTypes;
+        private List<TR23ScriptedLevel> _levelsToMirror;
 
         public override void Randomize(int seed)
         {
@@ -29,6 +38,15 @@ namespace TR2RandomizerCore.Randomizers
             {
                 _disallowedTypes.Add(EMType.MoveSlot);
             }
+            if (!RandomizeLadders)
+            {
+                _disallowedTypes.Add(EMType.Ladder);
+            }
+
+            _levelsToMirror = Levels.RandomSelection(_generator, (int)NumMirrorLevels, exclusions:new HashSet<TR23ScriptedLevel>
+            {
+                Levels.Find(l => l.Is(LevelNames.ASSAULT))
+            });
 
             foreach (TR23ScriptedLevel lvl in Levels)
             {
@@ -48,11 +66,19 @@ namespace TR2RandomizerCore.Randomizers
         private void RandomizeEnvironment(TR2CombinedLevel level)
         {
             EMEditorMapping mapping = EMEditorMapping.Get(level.Name);
-            if (mapping == null)
+            if (mapping != null)
             {
-                return;
+                ApplyMappingToLevel(level, mapping);
             }
 
+            if (!EnforcedModeOnly && (_levelsToMirror.Contains(level.Script) || (level.IsAssault && MirrorAssaultCourse)))
+            {
+                MirrorLevel(level, mapping);
+            }
+        }
+
+        private void ApplyMappingToLevel(TR2CombinedLevel level, EMEditorMapping mapping)
+        {
             // Process enforced packs first. We do not pass disallowed types here.
             mapping.All.ApplyToLevel(level.Data, new EMType[] { });
 
@@ -94,6 +120,22 @@ namespace TR2RandomizerCore.Randomizers
                     mod.ApplyToLevel(level.Data, follower, _disallowedTypes);
                 }
             }
+        }
+
+        private void MirrorLevel(TR2CombinedLevel level, EMEditorMapping mapping)
+        {
+            EMMirrorFunction mirrorer = new EMMirrorFunction();
+            mirrorer.ApplyToLevel(level.Data);
+
+            if (mapping != null)
+            {
+                // Process packs that need to be applied after mirroring.
+                mapping.Mirrored.ApplyToLevel(level.Data, new EMType[] { });
+            }
+
+            // Notify the texture monitor that this level has been flipped
+            TexturePositionMonitor monitor = TextureMonitor.CreateMonitor(level.Name);
+            monitor.UseMirroring = true;
         }
     }
 }

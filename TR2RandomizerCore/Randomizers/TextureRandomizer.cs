@@ -58,7 +58,8 @@ namespace TR2RandomizerCore.Randomizers
             {
                 LoadLevelInstance(lvl);
 
-                if (_levelInstance.IsNightMode)
+                TexturePositionMonitor monitor = TextureMonitor.GetMonitor(_levelInstance.Name);
+                if (monitor != null && monitor.UseNightTextures)
                 {
                     TextureLevelMapping mapping = GetMapping(_levelInstance);
                     using (TextureHolder holder = new TextureHolder(mapping, this))
@@ -264,7 +265,9 @@ namespace TR2RandomizerCore.Randomizers
 
             private void ProcessLevel(TR2CombinedLevel level, Dictionary<TextureCategory, bool> options)
             {
-                options[TextureCategory.NightMode] = level.IsNightMode;
+                TexturePositionMonitor monitor = _outer.TextureMonitor.GetMonitor(level.Name);
+
+                options[TextureCategory.NightMode] = monitor != null && monitor.UseNightTextures;
                 options[TextureCategory.DayMode] = !options[TextureCategory.NightMode];
 
                 using (TextureHolder holder = _holders[level])
@@ -277,7 +280,7 @@ namespace TR2RandomizerCore.Randomizers
                     // Add landmarks, but only if there is room available for them
                     if (holder.Mapping.LandmarkMapping.Count > 0)
                     {
-                        _landmarkImporter.Import(level, holder.Mapping);
+                        _landmarkImporter.Import(level, holder.Mapping, monitor != null && monitor.UseMirroring);
                     }
 
                     holder.Mapping.ProcessFaceConversions();

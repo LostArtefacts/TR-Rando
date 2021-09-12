@@ -37,8 +37,8 @@ namespace TREnvironmentEditor.Model.Types
                     TR2Room roomAbove = level.Rooms[roomAboveNumber];
                     if (!roomAbove.ContainsWater)
                     {
-                        AddWaterSurface(level, room, true);
-                        AddWaterSurface(level, roomAbove, false);
+                        AddWaterSurface(level, room, true, new int[] { roomAboveNumber });
+                        AddWaterSurface(level, roomAbove, false, RoomNumbers);
                     }
                 }
             }

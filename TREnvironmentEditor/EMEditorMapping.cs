@@ -14,12 +14,14 @@ namespace TREnvironmentEditor
         public List<EMEditorSet> Any { get; set; }
         public List<List<EMEditorSet>> AllWithin { get; set; }
         public List<EMEditorGroupedSet> OneOf { get; set; }
+        public EMEditorSet Mirrored { get; set; }
 
         public EMEditorMapping()
         {
             All = new EMEditorSet();
             Any = new List<EMEditorSet>();
             OneOf = new List<EMEditorGroupedSet>();
+            Mirrored = new EMEditorSet();
         }
 
         public static EMEditorMapping Get(string lvlName)

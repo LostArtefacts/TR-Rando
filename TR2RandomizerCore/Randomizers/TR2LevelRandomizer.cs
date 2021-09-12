@@ -46,20 +46,27 @@ namespace TR2RandomizerCore.Randomizers
         internal RandoDifficulty RandoEnemyDifficulty { get; set; }
         internal bool GlitchedSecrets { get; set; }
         internal bool PersistOutfits { get; set; }
-        internal bool RandomlyCutHair { get; set; }
         internal bool RemoveRobeDagger { get; set; }
-        internal bool EnableInvisibility { get; set; }
+        internal uint HaircutLevelCount { get; set; }
+        internal bool AssaultCourseHaircut { get; set; }
+        internal uint InvisibleLevelCount { get; set; }
+        internal bool AssaultCourseInvisible { get; set; }
         internal bool RetainLevelNames { get; set; }
         internal bool RetainKeyItemNames { get; set; }
         internal Language GameStringLanguage { get; set; }
         internal uint NightModeCount { get; set; }
+        internal uint NightModeDarkness { get; set; }
+        internal bool NightModeAssaultCourse { get; set; }
         internal bool ChangeTriggerTracks { get; set; }
         internal bool RotateStartPositionOnly { get; set; }
         internal bool RandomizeWaterLevels { get; set; }
         internal bool RandomizeSlotPositions { get; set; }
+        internal bool RandomizeLadders { get; set; }
+        internal uint MirroredLevelCount { get; set; }
+        internal bool MirrorAssaultCourse { get; set; }
         internal bool AutoLaunchGame { get; set; }
 
-        internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;
+        internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;// || RandomizeEnvironment; // Not needed until trap model import takes place
         internal bool ReassignPuzzleNames => RandomizeEnemies && CrossLevelEnemies;
 
         internal TR2LevelRandomizer(TRDirectoryIOArgs args)
@@ -94,9 +101,11 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits));
             OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
             PersistOutfits = config.GetBool(nameof(PersistOutfits));
-            RandomlyCutHair = config.GetBool(nameof(RandomlyCutHair), true);
             RemoveRobeDagger = config.GetBool(nameof(RemoveRobeDagger), true);
-            EnableInvisibility = config.GetBool(nameof(EnableInvisibility));
+            HaircutLevelCount = config.GetUInt(nameof(HaircutLevelCount), 9);
+            AssaultCourseHaircut = config.GetBool(nameof(AssaultCourseHaircut), true);
+            InvisibleLevelCount = config.GetUInt(nameof(InvisibleLevelCount), 2);
+            AssaultCourseInvisible = config.GetBool(nameof(AssaultCourseInvisible));
 
             RandomizeGameStrings = config.GetBool(nameof(RandomizeGameStrings));
             GameStringsSeed = config.GetInt(nameof(GameStringsSeed), defaultSeed);
@@ -107,6 +116,8 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeNightMode = config.GetBool(nameof(RandomizeNightMode));
             NightModeSeed = config.GetInt(nameof(NightModeSeed), defaultSeed);
             NightModeCount = config.GetUInt(nameof(NightModeCount), 1);
+            NightModeDarkness = config.GetUInt(nameof(NightModeDarkness), 4);
+            NightModeAssaultCourse = config.GetBool(nameof(NightModeAssaultCourse), true);
 
             // Note that the main audio config options are held in TRGE for now
             ChangeTriggerTracks = config.GetBool(nameof(ChangeTriggerTracks), true);
@@ -119,6 +130,9 @@ namespace TR2RandomizerCore.Randomizers
             EnvironmentSeed = config.GetInt(nameof(EnvironmentSeed), defaultSeed);
             RandomizeWaterLevels = config.GetBool(nameof(RandomizeWaterLevels), true);
             RandomizeSlotPositions = config.GetBool(nameof(RandomizeSlotPositions), true);
+            RandomizeLadders = config.GetBool(nameof(RandomizeLadders), true);
+            MirroredLevelCount = config.GetUInt(nameof(MirroredLevelCount), 9);
+            MirrorAssaultCourse = config.GetBool(nameof(MirrorAssaultCourse), true);
 
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
@@ -151,9 +165,11 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeOutfits)] = RandomizeOutfits;
             config[nameof(OutfitSeed)] = OutfitSeed;
             config[nameof(PersistOutfits)] = PersistOutfits;
-            config[nameof(RandomlyCutHair)] = RandomlyCutHair;
             config[nameof(RemoveRobeDagger)] = RemoveRobeDagger;
-            config[nameof(EnableInvisibility)] = EnableInvisibility;
+            config[nameof(HaircutLevelCount)] = HaircutLevelCount;
+            config[nameof(AssaultCourseHaircut)] = AssaultCourseHaircut;
+            config[nameof(InvisibleLevelCount)] = InvisibleLevelCount;
+            config[nameof(AssaultCourseInvisible)] = AssaultCourseInvisible;
 
             config[nameof(RandomizeGameStrings)] = RandomizeGameStrings;
             config[nameof(GameStringsSeed)] = GameStringsSeed;
@@ -164,6 +180,8 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeNightMode)] = RandomizeNightMode;
             config[nameof(NightModeSeed)] = NightModeSeed;
             config[nameof(NightModeCount)] = NightModeCount;
+            config[nameof(NightModeDarkness)] = NightModeDarkness;
+            config[nameof(NightModeAssaultCourse)] = NightModeAssaultCourse;
 
             config[nameof(ChangeTriggerTracks)] = ChangeTriggerTracks;
 
@@ -175,6 +193,9 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(EnvironmentSeed)] = EnvironmentSeed;
             config[nameof(RandomizeWaterLevels)] = RandomizeWaterLevels;
             config[nameof(RandomizeSlotPositions)] = RandomizeSlotPositions;
+            config[nameof(RandomizeLadders)] = RandomizeLadders;
+            config[nameof(MirroredLevelCount)] = MirroredLevelCount;
+            config[nameof(MirrorAssaultCourse)] = MirrorAssaultCourse;
 
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
@@ -341,6 +362,19 @@ namespace TR2RandomizerCore.Randomizers
                     itemRandomizer.RandomizeAmmo();
                 }
 
+                if (!monitor.IsCancelled && RandomizeStartPosition)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing start positions");
+                    new StartPositionRandomizer
+                    {
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        RotateOnly = RotateStartPositionOnly,
+                        DevelopmentMode = DevelopmentMode
+                    }.Randomize(StartPositionSeed);
+                }
+
                 if (!monitor.IsCancelled)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
@@ -350,8 +384,12 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         EnforcedModeOnly = !RandomizeEnvironment,
+                        NumMirrorLevels = MirroredLevelCount,
+                        MirrorAssaultCourse = MirrorAssaultCourse,
                         RandomizeWater = RandomizeWaterLevels,
-                        RandomizeSlots = RandomizeSlotPositions
+                        RandomizeSlots = RandomizeSlotPositions,
+                        RandomizeLadders = RandomizeLadders,
+                        TextureMonitor = textureMonitor
                     }.Randomize(EnvironmentSeed);
                 }
 
@@ -368,19 +406,6 @@ namespace TR2RandomizerCore.Randomizers
                     }.Randomize(AudioSeed);
                 }
 
-                if (!monitor.IsCancelled && RandomizeStartPosition)
-                {
-                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing start positions");
-                    new StartPositionRandomizer
-                    {
-                        Levels = levels,
-                        BasePath = wipDirectory,
-                        SaveMonitor = monitor,
-                        RotateOnly = RotateStartPositionOnly,
-                        DevelopmentMode = DevelopmentMode
-                    }.Randomize(StartPositionSeed);
-                }
-
                 if (!monitor.IsCancelled && RandomizeOutfits)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing outfits");
@@ -390,9 +415,11 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         PersistOutfits = PersistOutfits,
-                        RandomlyCutHair = RandomlyCutHair,
                         RemoveRobeDagger = RemoveRobeDagger,
-                        EnableInvisibility = EnableInvisibility,
+                        NumHaircutLevels = HaircutLevelCount,
+                        AssaultCourseHaircut = AssaultCourseHaircut,
+                        NumInvisibleLevels = InvisibleLevelCount,
+                        AssaultCourseInvisible = AssaultCourseInvisible,
                         TextureMonitor = textureMonitor
                     }.Randomize(OutfitSeed);
                 }
@@ -405,7 +432,10 @@ namespace TR2RandomizerCore.Randomizers
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
-                        NumLevels = NightModeCount
+                        NumLevels = NightModeCount,
+                        DarknessScale = NightModeDarkness,
+                        NightModeAssaultCourse = NightModeAssaultCourse,
+                        TextureMonitor = textureMonitor
                     }.Randomize(NightModeSeed);
                 }
 

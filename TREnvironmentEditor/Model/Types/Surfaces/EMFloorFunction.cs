@@ -14,6 +14,7 @@ namespace TREnvironmentEditor.Model.Types
         public sbyte Clicks { get; set; }
         public ushort FloorTexture { get; set; }
         public ushort SideTexture { get; set; }
+        public bool RetainOriginalFloor { get; set; }
 
         public EMFloorFunction()
         {
@@ -130,7 +131,7 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             // Now change the floor face's vertices, and its texture provided we want to.
-            if (floorFace != null)
+            if (floorFace != null && !RetainOriginalFloor)
             {
                 floorFace.Vertices = newVertIndices.ToArray();
                 if (FloorTexture != ushort.MaxValue)

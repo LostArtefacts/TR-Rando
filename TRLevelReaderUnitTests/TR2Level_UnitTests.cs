@@ -873,5 +873,249 @@ namespace TRLevelReaderUnitTests
             //Check the music trigger has Continue set to false
             Assert.IsFalse(trigger.TrigActionList[2].Continue);
         }
+
+        [TestMethod]
+        public void FloorData_ModifyClimbableTest()
+        {
+            // Get original ladders in +/-X directions
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("wall.tr2");
+
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+            
+            // Second guardhouse ladder
+            FDClimbEntry negXEntry = fdataReader.Entries[577][0] as FDClimbEntry;
+            // TRex pit ladder
+            FDClimbEntry posXEntry = fdataReader.Entries[7405][0] as FDClimbEntry;
+
+            // Confirm both are/are not end data for the sake of comparing the value
+            Assert.AreEqual(negXEntry.Setup.EndData, posXEntry.Setup.EndData);
+
+            ushort negXValue = negXEntry.Setup.Value;
+            ushort posXValue = posXEntry.Setup.Value;
+
+            // Confirm they are currently what we expect
+            Assert.IsTrue(negXEntry.IsNegativeX);
+            Assert.IsFalse(negXEntry.IsPositiveX);
+            Assert.IsTrue(posXEntry.IsPositiveX);
+            Assert.IsFalse(posXEntry.IsNegativeX);
+
+            // Flip the negative X entry and confirm it's now positive only
+            negXEntry.IsPositiveX = true;
+            negXEntry.IsNegativeX = false;
+            Assert.IsTrue(negXEntry.IsPositiveX);
+            Assert.IsFalse(negXEntry.IsNegativeX);
+            Assert.AreEqual(negXEntry.Setup.Value, posXValue);
+
+            // Flip the positive X entry and confirm it's now negative only
+            posXEntry.IsPositiveX = false;
+            posXEntry.IsNegativeX = true;
+            Assert.IsTrue(posXEntry.IsNegativeX);
+            Assert.IsFalse(posXEntry.IsPositiveX);
+            Assert.AreEqual(posXEntry.Setup.Value, negXValue);
+
+
+            // Get original ladders in +/-Z directions
+            lvl = reader.ReadLevel("venice.tr2");
+            fdataReader.ParseFromLevel(lvl);
+
+            // Room 79
+            FDClimbEntry negZEntry = fdataReader.Entries[2239][0] as FDClimbEntry;
+            FDClimbEntry posZEntry = fdataReader.Entries[2228][0] as FDClimbEntry;
+
+            // Confirm both are/are not end data for the sake of comparing the value
+            Assert.AreEqual(negXEntry.Setup.EndData, posXEntry.Setup.EndData);
+
+            ushort negZValue = negZEntry.Setup.Value;
+            ushort posZValue = posZEntry.Setup.Value;
+
+            // Confirm they are currently what we expect
+            Assert.IsTrue(negZEntry.IsNegativeZ);
+            Assert.IsFalse(negZEntry.IsPositiveZ);
+            Assert.IsTrue(posZEntry.IsPositiveZ);
+            Assert.IsFalse(posZEntry.IsNegativeZ);
+
+            // Flip the negative Z entry and confirm it's now positive only
+            negZEntry.IsPositiveZ = true;
+            negZEntry.IsNegativeZ = false;
+            Assert.IsTrue(negZEntry.IsPositiveZ);
+            Assert.IsFalse(negZEntry.IsNegativeZ);
+            Assert.AreEqual(negZEntry.Setup.Value, posZValue);
+
+            // Flip the positive Z entry and confirm it's now negative only
+            posZEntry.IsPositiveZ = false;
+            posZEntry.IsNegativeZ = true;
+            Assert.IsTrue(posZEntry.IsNegativeZ);
+            Assert.IsFalse(posZEntry.IsPositiveZ);
+            Assert.AreEqual(posZEntry.Setup.Value, negZValue);
+
+
+            // Get original ladders with more than one direction
+            // Room 58
+            FDClimbEntry negZNegXEntry = fdataReader.Entries[1432][0] as FDClimbEntry;
+            FDClimbEntry posZNegXEntry = fdataReader.Entries[1437][0] as FDClimbEntry;
+
+            // Confirm both are/are not end data for the sake of comparing the value
+            Assert.AreEqual(negZNegXEntry.Setup.EndData, posZNegXEntry.Setup.EndData);
+
+            ushort negZNegXValue = negZNegXEntry.Setup.Value;
+            ushort posZNegXValue = posZNegXEntry.Setup.Value;
+
+            // Confirm they are currently what we expect
+            Assert.IsTrue(negZNegXEntry.IsNegativeZ);
+            Assert.IsTrue(negZNegXEntry.IsNegativeX);
+            Assert.IsFalse(negZNegXEntry.IsPositiveZ);
+            Assert.IsFalse(negZNegXEntry.IsPositiveX);
+
+            Assert.IsTrue(posZNegXEntry.IsPositiveZ);
+            Assert.IsTrue(posZNegXEntry.IsNegativeX);
+            Assert.IsFalse(posZNegXEntry.IsNegativeZ);
+            Assert.IsFalse(posZNegXEntry.IsPositiveX);
+
+            // Flip the negative Z and confirm it matches the posZNegXValue entry
+            negZNegXEntry.IsPositiveZ = true;
+            negZNegXEntry.IsNegativeZ = false;
+            negZNegXEntry.IsPositiveX = false;
+            negZNegXEntry.IsNegativeX = true;
+            Assert.IsTrue(negZNegXEntry.IsPositiveZ);
+            Assert.IsTrue(negZNegXEntry.IsNegativeX);
+            Assert.IsFalse(negZNegXEntry.IsNegativeZ);
+            Assert.IsFalse(negZNegXEntry.IsPositiveX);
+            Assert.AreEqual(negZNegXEntry.Setup.Value, posZNegXValue);
+
+            // Flip the positive Z and confirm it matches the posZNegXValue entry
+            posZNegXEntry.IsPositiveZ = false;
+            posZNegXEntry.IsNegativeZ = true;
+            posZNegXEntry.IsPositiveX = false;
+            posZNegXEntry.IsNegativeX = true;
+            Assert.IsTrue(posZNegXEntry.IsNegativeZ);
+            Assert.IsTrue(posZNegXEntry.IsNegativeX);
+            Assert.IsFalse(posZNegXEntry.IsPositiveZ);
+            Assert.IsFalse(posZNegXEntry.IsPositiveX);
+            Assert.AreEqual(posZNegXEntry.Setup.Value, negZNegXValue);
+        }
+
+        [TestMethod]
+        public void FloorData_ModifySlantsTest()
+        {
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("wall.tr2");
+
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            // Get a sector that is slanted in both X and Z directions
+            TRRoomSector sector = FDUtilities.GetRoomSector(61891, 3129, 24010, 35, lvl, fdataReader);
+            List<FDEntry> entries = fdataReader.Entries[sector.FDIndex];
+
+            // Confirm we have a match of what we expect
+            Assert.AreEqual(entries.Count, 1);
+            Assert.IsTrue(entries[0] is FDSlantEntry);
+            FDSlantEntry slantEntry = entries[0] as FDSlantEntry;
+
+            // Check current values are X=-2, Z=-3
+            Assert.AreEqual(slantEntry.XSlant, -2);
+            Assert.AreEqual(slantEntry.ZSlant, -3);
+
+            // Change X only
+            slantEntry.XSlant--;
+            Assert.AreEqual(slantEntry.XSlant, -3);
+            Assert.AreEqual(slantEntry.ZSlant, -3);
+
+            // Change Z only
+            slantEntry.ZSlant++;
+            Assert.AreEqual(slantEntry.XSlant, -3);
+            Assert.AreEqual(slantEntry.ZSlant, -2);
+
+            // Change X sign
+            slantEntry.XSlant *= -1;
+            Assert.AreEqual(slantEntry.XSlant, 3);
+            Assert.AreEqual(slantEntry.ZSlant, -2);
+
+            // Change Z sign
+            slantEntry.ZSlant *= -1;
+            Assert.AreEqual(slantEntry.XSlant, 3);
+            Assert.AreEqual(slantEntry.ZSlant, 2);
+
+            // Write to level and confirm values remain the same on reload
+            fdataReader.WriteToLevel(lvl);
+
+            // Save it and read it back in
+            TR2LevelWriter writer = new TR2LevelWriter();
+            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            fdataReader.ParseFromLevel(lvl);
+
+            slantEntry = fdataReader.Entries[sector.FDIndex][0] as FDSlantEntry;
+            Assert.AreEqual(slantEntry.XSlant, 3);
+            Assert.AreEqual(slantEntry.ZSlant, 2);
+
+            // Make a new entry
+            sector = FDUtilities.GetRoomSector(64044, 5632, 32440, 36, lvl, fdataReader);
+            Assert.AreEqual(sector.FDIndex, 0);
+            fdataReader.CreateFloorData(sector);
+
+            slantEntry = new FDSlantEntry
+            {
+                Setup = new FDSetup { Value = 2 },
+                Type = FDSlantEntryType.FloorSlant,
+                SlantValue = 0
+            };
+            fdataReader.Entries[sector.FDIndex].Add(slantEntry);
+
+            Assert.AreEqual(slantEntry.XSlant, 0);
+            Assert.AreEqual(slantEntry.ZSlant, 0);
+
+            slantEntry.XSlant = 1;
+            slantEntry.ZSlant = -2;
+            Assert.AreEqual(slantEntry.XSlant, 1);
+            Assert.AreEqual(slantEntry.ZSlant, -2);
+
+            // Write to level and confirm values remain the same on reload
+            fdataReader.WriteToLevel(lvl);
+
+            // Save it and read it back in
+            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            fdataReader.ParseFromLevel(lvl);
+
+            slantEntry = fdataReader.Entries[sector.FDIndex][0] as FDSlantEntry;
+            Assert.AreEqual(slantEntry.XSlant, 1);
+            Assert.AreEqual(slantEntry.ZSlant, -2);
+
+            // Edge cases
+            slantEntry.XSlant = -1;
+            slantEntry.ZSlant = -1;
+            Assert.AreEqual(slantEntry.XSlant, -1);
+            Assert.AreEqual(slantEntry.ZSlant, -1);
+
+            slantEntry.XSlant = -1;
+            slantEntry.ZSlant = 0;
+            Assert.AreEqual(slantEntry.XSlant, -1);
+            Assert.AreEqual(slantEntry.ZSlant, 0);
+
+            slantEntry.XSlant = 0;
+            slantEntry.ZSlant = -1;
+            Assert.AreEqual(slantEntry.XSlant, 0);
+            Assert.AreEqual(slantEntry.ZSlant, -1);
+
+            slantEntry.XSlant = 1;
+            slantEntry.ZSlant = 0;
+            Assert.AreEqual(slantEntry.XSlant, 1);
+            Assert.AreEqual(slantEntry.ZSlant, 0);
+
+            slantEntry.XSlant = 0;
+            slantEntry.ZSlant = 1;
+            Assert.AreEqual(slantEntry.XSlant, 0);
+            Assert.AreEqual(slantEntry.ZSlant, 1);
+
+            slantEntry.XSlant = 1;
+            slantEntry.ZSlant = 1;
+            Assert.AreEqual(slantEntry.XSlant, 1);
+            Assert.AreEqual(slantEntry.ZSlant, 1);
+        }
     }
 }

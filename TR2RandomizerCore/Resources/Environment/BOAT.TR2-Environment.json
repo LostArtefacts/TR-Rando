@@ -103,6 +103,256 @@
           }
         }
       ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new button position for the trapdoor room first floor.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 50688,
+            "Y": -1792,
+            "Z": 40448,
+            "Room": 27,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the trapdoor room first floor.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 50688,
+            "Y": -1792,
+            "Z": 40448,
+            "Room": 27,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the trapdoor room first floor.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 50688,
+            "Y": -1792,
+            "Z": 39424,
+            "Room": 27,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the trapdoor room first floor.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 50688,
+            "Y": -1792,
+            "Z": 38400,
+            "Room": 27,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the trapdoor room first floor.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 50688,
+            "Y": -1792,
+            "Z": 38400,
+            "Room": 27,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the trapdoor room first floor.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 51712,
+            "Y": -1792,
+            "Z": 38400,
+            "Room": 27,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the trapdoor room first floor.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 52736,
+            "Y": -1792,
+            "Z": 38400,
+            "Room": 27,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the trapdoor room first floor.",
+          "EMType": 41,
+          "EntityIndex": 21,
+          "Location": {
+            "X": 52736,
+            "Y": -1792,
+            "Z": 39424,
+            "Room": 27,
+            "Angle": 16384
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new button position for the boathouse keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 44544,
+            "Y": 0,
+            "Z": 40448,
+            "Room": 29,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the boathouse keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 42496,
+            "Y": 0,
+            "Z": 40448,
+            "Room": 29,
+            "Angle": 0
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new button position for the boathouse switch.",
+          "EMType": 41,
+          "EntityIndex": 27,
+          "Location": {
+            "X": 43520,
+            "Y": 0,
+            "Z": 40448,
+            "Room": 29,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the boathouse switch.",
+          "EMType": 41,
+          "EntityIndex": 27,
+          "Location": {
+            "X": 41472,
+            "Y": 0,
+            "Z": 40448,
+            "Room": 29,
+            "Angle": -16384
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new button position for the switch in room 33.",
+          "EMType": 41,
+          "EntityIndex": 29,
+          "Location": {
+            "X": 45568,
+            "Y": -3328,
+            "Z": 44544,
+            "Room": 33,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the switch in room 33.",
+          "EMType": 41,
+          "EntityIndex": 29,
+          "Location": {
+            "X": 45568,
+            "Y": -3328,
+            "Z": 44544,
+            "Room": 33,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the switch in room 33.",
+          "EMType": 41,
+          "EntityIndex": 29,
+          "Location": {
+            "X": 50688,
+            "Y": -3328,
+            "Z": 44544,
+            "Room": 36,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the switch in room 33.",
+          "EMType": 41,
+          "EntityIndex": 29,
+          "Location": {
+            "X": 50688,
+            "Y": -3328,
+            "Z": 44544,
+            "Room": 36,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new button position for the switch in room 33.",
+          "EMType": 41,
+          "EntityIndex": 29,
+          "Location": {
+            "X": 46592,
+            "Y": -3072,
+            "Z": 33280,
+            "Room": 25,
+            "Angle": -32768
+          }
+        }
+      ]
     ]
   ],
 
@@ -536,5 +786,7 @@
         ]
       ]
     }
-  ]
+  ],
+
+  "Mirrored": []
 }

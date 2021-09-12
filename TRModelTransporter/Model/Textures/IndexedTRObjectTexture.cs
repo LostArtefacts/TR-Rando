@@ -102,6 +102,14 @@ namespace TRModelTransporter.Model.Textures
             vertex.YCoordinate.Fraction = (byte)y;
         }
 
+        public bool IsTriangle
+        {
+            get
+            {
+                return _vertexPoints.Count == 3;
+            }
+        }
+
         private static bool IsTriangleVertex(TRObjectTextureVert vertex)
         {
             return vertex.XCoordinate.Fraction == 0 && vertex.XCoordinate.Whole == 0 && vertex.YCoordinate.Fraction == 0 && vertex.YCoordinate.Whole == 0;

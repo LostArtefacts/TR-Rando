@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cvt="clr-namespace:TR2RandomizerView.Converters"
+        xmlns:ctrl="clr-namespace:TR2RandomizerView.Controls"
         xmlns:helpers="clr-namespace:TR2RandomizerCore.Helpers;assembly=TR2RandomizerCore"
         mc:Ignorable="d"
         Icon="..\Resources\rando.ico"
@@ -12,24 +13,38 @@
         ShowInTaskbar="False"
         SizeToContent="WidthAndHeight"
         Loaded="Window_Loaded"
+        IsVisibleChanged="Window_IsVisibleChanged"
         Closing="Window_Closing"
         Title="Advanced">
     <Window.Resources>
         <cvt:BoolToVisibilityConverter x:Key="BoolToCollapsedConverter" />
     </Window.Resources>
 
-    <Grid x:Name="_content">
+    <Grid x:Name="_content"
+          Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
         <Grid Margin="10">
+            <Grid.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Margin"
+                            Value="0,10,0,0" />
+                </Style>
+            </Grid.Resources>
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -46,12 +61,13 @@
             <StackPanel Grid.Row="1"
                         Grid.ColumnSpan="2"
                         Orientation="Vertical"
-                        HorizontalAlignment="Left">
+                        HorizontalAlignment="Left"
+                        Margin="0,0,0,10"
+                        Visibility="{Binding HasBoolItems, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock Text="General"
                            FontSize="14"
                            TextDecorations="Underline" />
-                <ItemsControl ItemsSource="{Binding BoolItemsSource, Mode=TwoWay}"
-                              Grid.IsSharedSizeScope="True">
+                <ItemsControl ItemsSource="{Binding BoolItemsSource, Mode=TwoWay}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="0,5,0,0">
@@ -60,25 +76,29 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox Grid.Column="0"
-                                          IsEnabled="{Binding IsActive}"
-                                          IsChecked="{Binding Value, Mode=TwoWay}"
-                                          VerticalAlignment="Center">
-                                    <Label Padding="0"
-                                           Content="{Binding Title}" />
-                                </CheckBox>
+                                <Border Margin="0,10,0,0">
+                                    <CheckBox IsEnabled="{Binding IsActive}"
+                                              IsChecked="{Binding Value, Mode=TwoWay}"
+                                              VerticalAlignment="Center">
+                                        <Label Padding="0"
+                                               Content="{Binding Title}" />
+                                    </CheckBox>
+                                </Border>
 
-                                <Label Grid.Column="1"
-                                       HorizontalAlignment="Left"
-                                       Content="{Binding Description}"
-                                       FontStyle="Italic"
-                                       Margin="40,0,0,1">
-                                    <Label.Resources>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap" />
-                                        </Style>
-                                    </Label.Resources>
-                                </Label>
+                                <Border Grid.Column="1"
+                                        Margin="0,10,0,0">
+                                    <Label HorizontalAlignment="Left"
+                                           Content="{Binding Description}"
+                                           FontStyle="Italic"
+                                           Padding="0"
+                                           Margin="40,0,0,1">
+                                        <Label.Resources>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap" />
+                                            </Style>
+                                        </Label.Resources>
+                                    </Label>
+                                </Border>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -91,35 +111,413 @@
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
-                    <Style TargetType="{x:Type RadioButton}">
-                        <Setter Property="Margin"
-                                Value="0,10,0,0" />
-                    </Style>
                 </StackPanel.Resources>
+                
                 <TextBlock Text="Difficulty"
                            FontSize="14"
                            TextDecorations="Underline"/>
-                <RadioButton Content="Default"
-                             GroupName="randoEnemyDifficulty"
-                             IsChecked="{Binding RandoEnemyDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:RandoDifficulty.Default}, Mode=TwoWay}"/>
-                <RadioButton Content="No Restrictions"
-                             GroupName="randoEnemyDifficulty"
-                             IsChecked="{Binding RandoEnemyDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:RandoDifficulty.NoRestrictions}, Mode=TwoWay}" />
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <RadioButton Content="Default"
+                                     GroupName="randoEnemyDifficulty"
+                                     x:Name="_defaultDifficultyButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.RandoEnemyDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:RandoDifficulty.Default}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <TextBlock FontStyle="Italic"
+                                   VerticalAlignment="Center"
+                                   Margin="40,0,0,0">
+                            Standard restrictions will apply for cross-level enemies. See
+                            <Hyperlink ToolTip="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md" 
+                                       NavigateUri="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md"
+                                       RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
+                            for details.
+                        </TextBlock>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <RadioButton Content="No Restrictions"
+                                     GroupName="randoEnemyDifficulty"
+                                     x:Name="_unrestrictedButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.RandoEnemyDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:RandoDifficulty.NoRestrictions}, Mode=TwoWay}" />
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Disables virtually all cross-level enemy restrictions except for technical ones."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+                </Grid>
             </StackPanel>
 
             <StackPanel Grid.Row="3"
                         Grid.ColumnSpan="2"
                         Margin="0,5,0,0"
                         Visibility="{Binding HasLanguage, Converter={StaticResource BoolToCollapsedConverter}}">
+                
                 <TextBlock Text="Language"
                            FontSize="14"
                            TextDecorations="Underline"/>
-                <ComboBox ItemsSource="{Binding LanguageSource}"
-                          SelectedItem="{Binding GameStringLanguage, Mode=TwoWay}"
-                          DisplayMemberPath="Name"
-                          HorizontalAlignment="Left"
-                          Width="200"
-                          Margin="0,10,0,0"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <ComboBox ItemsSource="{Binding ControllerProxy.AvailableLanguages}"
+                                  SelectedItem="{Binding ControllerProxy.GameStringLanguage, Mode=TwoWay}"
+                                  DisplayMemberPath="Name"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Center"/>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Select a language to use for gamestrings, or choose to use a random combination."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        Margin="0,5,0,0"
+                        Visibility="{Binding HasMirroring, Converter={StaticResource BoolToCollapsedConverter}}">
+                
+                <TextBlock Text="Mirrored Levels"
+                           FontSize="14"
+                           TextDecorations="Underline"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+                            
+                            <ctrl:NumericUpDown 
+                                HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"  
+                                        Value="{Binding ControllerProxy.MirroredLevelCount, Mode=TwoWay}"
+                                        MinValue="0"
+                                        MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Reverse the geometry and item positioning in the given number of levels, creating a mirror effect."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <CheckBox IsChecked="{Binding ControllerProxy.MirrorAssaultCourse, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Include Assault Course" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Mirror the assault course level in addition to or separately from above."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        Margin="0,5,0,0"
+                        Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Text="Haircuts"
+                           FontSize="14"
+                           TextDecorations="Underline"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown 
+                                HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"  
+                                        Value="{Binding ControllerProxy.HaircutLevelCount, Mode=TwoWay}"
+                                        MinValue="0"
+                                        MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Lara will lose her braid in the given number of levels."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <CheckBox IsChecked="{Binding ControllerProxy.AssaultCourseHaircut, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Include Assault Course" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Give Lara a haircut in the assault course level in addition to or separately from above."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="6"
+                        Grid.ColumnSpan="2"
+                        Margin="0,15,0,0"
+                        Visibility="{Binding HasInvisibility, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Text="Invisibility"
+                           FontSize="14"
+                           TextDecorations="Underline"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown 
+                                HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"  
+                                        Value="{Binding ControllerProxy.InvisibleLevelCount, Mode=TwoWay}"
+                                        MinValue="0"
+                                        MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Lara will wear an invisibility cloak in the given number of levels. Only her shadow will be visible."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <CheckBox IsChecked="{Binding ControllerProxy.AssaultCourseInvisible, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Include Assault Course" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Make Lara invisible in the assault course level in addition to or separately from above."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="7"
+                        Grid.ColumnSpan="2"
+                        Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Text="General"
+                           FontSize="14"
+                           TextDecorations="Underline"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown 
+                                HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"  
+                                        Value="{Binding ControllerProxy.NightModeCount, Mode=TwoWay}"
+                                        MinValue="0"
+                                        MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="The given number of levels will be converted to night mode."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <CheckBox IsChecked="{Binding ControllerProxy.NightModeAssaultCourse, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Include Assault Course" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Adjust the assault course level lighting in addition to or separately from above."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="8"
+                        Grid.ColumnSpan="2"
+                        Margin="0,15,0,0"
+                        Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Text="Intensity"
+                           FontSize="14"
+                           TextDecorations="Underline"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Dusk"
+                                   Padding="0, 0, 5, 0"
+                                   VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1"
+                                    Width="120"
+                                    Minimum="0"
+                                    Maximum="{Binding ControllerProxy.NightModeDarknessMaximum}"
+                                    VerticalAlignment="Center"
+                                    ValueChanged="Slider_ValueChanged"
+                                    Value="{Binding ControllerProxy.NightModeDarkness, Mode=TwoWay}"/>
+                            <Label Grid.Column="2"
+                                   Content="Night"
+                                   Padding="5, 0, 0, 0"
+                                   VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Content="Set the darkness intensity, ranging from dusk to full night mode."
+                               FontStyle="Italic"
+                               Padding="0"
+                               Margin="40,0,0,0"/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <Image Width="186"
+                               x:Name="_darknessPreview"
+                               HorizontalAlignment="Left"
+                               Source="..\Resources\Darkness\0.png"/>
+                    </Border>
+                </Grid>
             </StackPanel>
         </Grid>
 
