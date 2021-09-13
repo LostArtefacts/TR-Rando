@@ -76,6 +76,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMCameraTriggerFunction>(jo.ToString(), _resolver);
                 case EMType.ReplaceTriggerActionParameterFunction:
                     return JsonConvert.DeserializeObject<EMReplaceTriggerActionParameterFunction>(jo.ToString(), _resolver);
+                case EMType.MoveTrigger:
+                    return JsonConvert.DeserializeObject<EMMoveTriggerFunction>(jo.ToString(), _resolver);
 
                 // Portals
                 case EMType.VisibilityPortal:

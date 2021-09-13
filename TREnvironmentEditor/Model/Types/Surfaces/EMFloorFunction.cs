@@ -77,6 +77,7 @@ namespace TREnvironmentEditor.Model.Types
             List<ushort> newVertIndices = new List<ushort>();
             foreach (ushort vert in oldVertIndices)
             {
+                TR2RoomVertex oldRoomVertex = vertices[vert];
                 TRVertex oldVert = vertices[vert].Vertex;
                 TRVertex newVertex = new TRVertex
                 {
@@ -84,7 +85,7 @@ namespace TREnvironmentEditor.Model.Types
                     Y = (short)(oldVert.Y + clickChange),
                     Z = oldVert.Z
                 };
-                newVertIndices.Add((ushort)CreateRoomVertex(room, newVertex));
+                newVertIndices.Add((ushort)CreateRoomVertex(room, newVertex, oldRoomVertex.Lighting, oldRoomVertex.Lighting2));
             }
 
             // Refresh

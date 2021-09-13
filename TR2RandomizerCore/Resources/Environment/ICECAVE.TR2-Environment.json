@@ -7,5 +7,22 @@
 
   "OneOf": [],
 
-  "Mirrored": []
+  "Mirrored": [
+    {
+      "Comments": "Move the heavy trigger underneath the gong.",
+      "EMType": 67,
+      "BaseLocation": {
+        "X": 25088,
+        "Y": 6656,
+        "Z": 29214,
+        "Room": 10
+      },
+      "NewLocation": {
+        "X": 26112,
+        "Y": 6656,
+        "Z": 29184,
+        "Room": 10
+      }
+    }
+  ]
 }

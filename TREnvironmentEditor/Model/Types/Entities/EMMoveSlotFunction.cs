@@ -56,7 +56,7 @@ namespace TREnvironmentEditor.Model.Types
             {
                 MoveTriggers(control, currentSector, newSector);
 
-                if (currentFlipSector != null && newFlipSector != null)
+                if (currentFlipSector != null && newFlipSector != null && currentFlipSector.FDIndex != 0)
                 {
                     MoveTriggers(control, currentFlipSector, newFlipSector);
                 }

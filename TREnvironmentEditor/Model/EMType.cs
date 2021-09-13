@@ -29,6 +29,7 @@
         DuplicateSwitchTrigger = 64,
         CameraTriggerFunction = 65,
         ReplaceTriggerActionParameterFunction = 66,
+        MoveTrigger = 67,
 
         // Portal types 81-100
         VisibilityPortal = 81,

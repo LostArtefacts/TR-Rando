@@ -38,13 +38,13 @@ namespace TREnvironmentEditor.Model
             return vertices;
         }
 
-        public int CreateRoomVertex(TR2Room room, TRVertex vert)
+        public int CreateRoomVertex(TR2Room room, TRVertex vert, short lighting = 6574, short lighting2 = 6574)
         {
             TR2RoomVertex v = new TR2RoomVertex
             {
                 Attributes = 32784, // This stops it shimmering if viewed from underwater, should be configuratble
-                Lighting = 6574, // Needs to be configurable
-                Lighting2 = 6574,// Needs to be configurable
+                Lighting = lighting,
+                Lighting2 = lighting2,
                 Vertex = vert
             };
 
