@@ -13,6 +13,7 @@ namespace TREnvironmentEditor.Model.Types
         public List<TR2Entities> Types { get; set; }
         public List<EMLocation> SectorLocations { get; set; }
         public EMLocation TargetLocation { get; set; }
+        public bool MatchY { get; set; }
 
         public override void ApplyToLevel(TR2Level level)
         {
@@ -37,7 +38,9 @@ namespace TREnvironmentEditor.Model.Types
                 foreach (TR2Entity match in matchingEntities)
                 {
                     TRRoomSector matchSector = FDUtilities.GetRoomSector(match.X, match.Y, match.Z, match.Room, level, control);
-                    if (sectors.ContainsKey(matchSector))
+                    // MatchY means the defined sector location's Y val should be compared with the entity's Y val, for
+                    // instances where an item may be in mid-air (i.e. underwater) and another may be on the floor below it.
+                    if (sectors.ContainsKey(matchSector) && (!MatchY || sectors[matchSector].Y == match.Y))
                     {
                         EMLocation location = TargetLocation ?? sectors[matchSector];
                         match.X = location.X;

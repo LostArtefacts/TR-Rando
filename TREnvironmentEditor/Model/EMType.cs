@@ -13,6 +13,8 @@
         Reface = 21,
         RemoveFace = 22,
         ModifyFace = 23,
+        AddStaticMesh = 24,
+        RemoveStaticMesh = 25,
 
         // Entity types 41-60
         MoveSlot = 41,
