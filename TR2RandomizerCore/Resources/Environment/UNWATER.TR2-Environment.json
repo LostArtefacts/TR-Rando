@@ -37,6 +37,14 @@
       },
 
       {
+        "Comments": "Convert one of the sharks into a land creature.",
+        "EMType": 47,
+        "EntityIndices": [ 3 ],
+        "NewEnemyType": 1,
+        "Exclusions": [ 40, 46, 52 ]
+      },
+
+      {
         "Comments": "Add some extra barrels to prevent slope softlock.",
         "EMType": 24,
         "Locations": [

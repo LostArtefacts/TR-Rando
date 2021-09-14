@@ -221,6 +221,14 @@
       },
 
       {
+        "Comments": "Convert a couple of Steves into land creatures.",
+        "EMType": 47,
+        "EntityIndices": [ 110, 111 ],
+        "NewEnemyType": 1,
+        "Exclusions": [ 40, 46, 52 ]
+      },
+
+      {
         "Comments": "Adjust a secret.",
         "EMType": 43,
         "Types": [ 190 ],

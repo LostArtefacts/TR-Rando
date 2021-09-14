@@ -11,7 +11,7 @@
       },
 
       {
-        "Comments": "Make a box to prevent softlocks.",
+        "Comments": "Make some boxes to prevent softlocks.",
         "EMType": 1,
         "Location": {
           "X": 46651,
@@ -21,6 +21,19 @@
         },
         "Clicks": -5,
         "SideTexture": 1589,
+        "FloorTexture": 1589
+      },
+
+      {
+        "EMType": 1,
+        "Location": {
+          "X": 48644,
+          "Y": 4352,
+          "Z": 66976,
+          "Room": 72
+        },
+        "Clicks": -1,
+        "SideTexture": 1698,
         "FloorTexture": 1589
       },
 
@@ -84,6 +97,14 @@
             "Room": 32
           }
         ]
+      },
+
+      {
+        "Comments": "Convert the fish into land creatures.",
+        "EMType": 47,
+        "EntityIndices": [ 52, 55 ],
+        "NewEnemyType": 1,
+        "Exclusions": [ 40, 46, 52 ]
       }
     ]
   ],
