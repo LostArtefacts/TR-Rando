@@ -1,10 +1,22 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Remove the fake ladder texture above the flame room.",
+      "EMType": 21,
+      "TextureMap": {
+        "1568": {
+          "10": {
+            "Rectangles": [ 23 ]
+          }
+        }
+      }
+    }
+  ],
 
   "Any": [
     [
       {
-        "Comments": "Drain the normally unreachable room beside the rest room.",
+        "Comments": "Drain the jade secret room.",
         "EMType": 3,
         "RoomNumbers": [ 32, 77, 72, 28 ],
         "WaterTextures": [ 1594, 1593, 1610, 1587 ]
@@ -106,10 +118,442 @@
         "NewEnemyType": 1,
         "Exclusions": [ 40, 46, 52 ]
       }
+    ],
+
+    [
+      {
+        "Comments": "Make a random box beside the pushable box.",
+        "EMType": 1,
+        "Location": {
+          "X": 57786,
+          "Y": -2048,
+          "Z": 45561,
+          "Room": 21
+        },
+        "Clicks": -4,
+        "SideTexture": 1674,
+        "FloorTexture": 1674
+      }
+    ],
+
+    [
+      {
+        "Comments": "Remove a couple of pillars from the end room.",
+        "EMType": 25,
+        "Location": {
+          "X": 62976,
+          "Y": -2047,
+          "Z": 35328,
+          "Room": 34
+        }
+      },
+      {
+        "EMType": 25,
+        "Location": {
+          "X": 58880,
+          "Y": -2047,
+          "Z": 39424,
+          "Room": 34
+        }
+      }
+    ],
+
+    [
+      {
+        "Comments": "Remove another couple of pillars from the end room.",
+        "EMType": 25,
+        "Location": {
+          "X": 58880,
+          "Y": -2047,
+          "Z": 35328,
+          "Room": 34
+        }
+      },
+      {
+        "EMType": 25,
+        "Location": {
+          "X": 62976,
+          "Y": -2047,
+          "Z": 39424,
+          "Room": 34
+        }
+      },
+      {
+        "Comments": "Replace one of the pillars with some barrels.",
+        "EMType": 24,
+        "Locations": [
+          {
+            "X": 58879,
+            "Y": -2048,
+            "Z": 35355,
+            "Room": 34,
+            "Angle": 0
+          },
+          {
+            "X": 59903,
+            "Y": -2048,
+            "Z": 35355,
+            "Room": 34,
+            "Angle": 16384
+          }
+        ],
+        "Mesh": {
+          "MeshID": 35,
+          "Intensity1": 6400,
+          "Intensity2": 6400
+        }
+      }
+    ],
+
+    [
+      {
+        "Comments": "Remove another couple of pillars from the end room.",
+        "EMType": 25,
+        "Location": {
+          "X": 60928,
+          "Y": -2047,
+          "Z": 37376,
+          "Room": 34
+        }
+      },
+      {
+        "EMType": 25,
+        "Location": {
+          "X": 56832,
+          "Y": -2047,
+          "Z": 37376,
+          "Room": 34
+        }
+      }
     ]
   ],
 
-  "AllWithin": [],
+  "AllWithin": [
+    [
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 46592,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 39,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 45568,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 39,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 43520,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 39,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 43520,
+            "Y": -2560,
+            "Z": 44544,
+            "Room": 39,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 47616,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 36,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 48640,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 36,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 49664,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 36,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 51712,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 36,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 52736,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 36,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 53760,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 36,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 53760,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 36,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 52736,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 36,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 51712,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 36,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for keyhole 1.",
+          "EMType": 41,
+          "EntityIndex": 63,
+          "Location": {
+            "X": 50688,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 36,
+            "Angle": -32768
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the curtain switch.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 40448,
+            "Y": -3584,
+            "Z": 39424,
+            "Room": 38,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the curtain switch.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 40448,
+            "Y": -3840,
+            "Z": 38400,
+            "Room": 38,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the curtain switch.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 41472,
+            "Y": -3840,
+            "Z": 38400,
+            "Room": 38,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the curtain switch.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 40448,
+            "Y": -3840,
+            "Z": 35328,
+            "Room": 38,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the curtain switch.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 40448,
+            "Y": -3840,
+            "Z": 35328,
+            "Room": 38,
+            "Angle": -32768
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Move some glass around.",
+          "EMType": 44,
+          "EntityIndex": 80,
+          "TargetLocation": {
+            "X": 46592,
+            "Y": -2560,
+            "Z": 43520,
+            "Room": 39,
+            "Angle": 0
+          }
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 48,
+          "TargetLocation": {
+            "X": 53800,
+            "Y": -1024,
+            "Z": 66064,
+            "Room": 27,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Move some glass around.",
+          "EMType": 44,
+          "EntityIndex": 80,
+          "TargetLocation": {
+            "X": 54842,
+            "Y": -2048,
+            "Z": 45620,
+            "Room": 21,
+            "Angle": 0
+          }
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 48,
+          "TargetLocation": {
+            "X": 56737,
+            "Y": -1024,
+            "Z": 66358,
+            "Room": 30,
+            "Angle": 0
+          }
+        }
+      ]
+    ]
+  ],
 
   "OneOf": [
     {
@@ -166,6 +610,418 @@
               "Z": 76288,
               "Room": 3,
               "Angle": -32768
+            }
+          }
+        ]
+      ]
+    },
+
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the lever texture from room 6.",
+          "EMType": 21,
+          "TextureMap": {
+            "1588": {
+              "6": {
+                "Rectangles": [ 84 ]
+              },
+              "48": {
+                "Rectangles": [ 84 ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential new position for the fire lever.",
+            "EMType": 41,
+            "EntityIndex": 16,
+            "Location": {
+              "X": 60928,
+              "Y": 1280,
+              "Z": 76288,
+              "Room": 6,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "6": {
+                  "Rectangles": [ 126 ]
+                },
+                "48": {
+                  "Rectangles": [ 126 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the fire lever.",
+            "EMType": 41,
+            "EntityIndex": 16,
+            "Location": {
+              "X": 60928,
+              "Y": 1280,
+              "Z": 75264,
+              "Room": 6,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "6": {
+                  "Rectangles": [ 123 ]
+                },
+                "48": {
+                  "Rectangles": [ 123 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the fire lever.",
+            "EMType": 41,
+            "EntityIndex": 16,
+            "Location": {
+              "X": 60928,
+              "Y": 1280,
+              "Z": 74240,
+              "Room": 6,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "6": {
+                  "Rectangles": [ 120 ]
+                },
+                "48": {
+                  "Rectangles": [ 120 ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    },
+
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the lever texture from room 8.",
+          "EMType": 21,
+          "TextureMap": {
+            "1585": {
+              "8": {
+                "Rectangles": [ 33 ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential new position for the flipmap lever.",
+            "EMType": 41,
+            "EntityIndex": 26,
+            "Location": {
+              "X": 68096,
+              "Y": -2048,
+              "Z": 79360,
+              "Room": 8,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "8": {
+                  "Rectangles": [ 32 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the flipmap lever.",
+            "EMType": 41,
+            "EntityIndex": 26,
+            "Location": {
+              "X": 68096,
+              "Y": -2048,
+              "Z": 79360,
+              "Room": 8,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "8": {
+                  "Rectangles": [ 24 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the flipmap lever.",
+            "EMType": 41,
+            "EntityIndex": 26,
+            "Location": {
+              "X": 67072,
+              "Y": -2048,
+              "Z": 79360,
+              "Room": 8,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "8": {
+                  "Rectangles": [ 12 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the flipmap lever.",
+            "EMType": 41,
+            "EntityIndex": 26,
+            "Location": {
+              "X": 66048,
+              "Y": -2048,
+              "Z": 79360,
+              "Room": 8,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "8": {
+                  "Rectangles": [ 2 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the flipmap lever.",
+            "EMType": 41,
+            "EntityIndex": 26,
+            "Location": {
+              "X": 65024,
+              "Y": -2048,
+              "Z": 79360,
+              "Room": 58,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "58": {
+                  "Rectangles": [ 10 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the flipmap lever.",
+            "EMType": 41,
+            "EntityIndex": 26,
+            "Location": {
+              "X": 65024,
+              "Y": -2048,
+              "Z": 79360,
+              "Room": 58,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "58": {
+                  "Rectangles": [ 11 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the flipmap lever.",
+            "EMType": 41,
+            "EntityIndex": 26,
+            "Location": {
+              "X": 66048,
+              "Y": -2048,
+              "Z": 80384,
+              "Room": 8,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "8": {
+                  "Rectangles": [ 5 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the flipmap lever.",
+            "EMType": 41,
+            "EntityIndex": 26,
+            "Location": {
+              "X": 66048,
+              "Y": -2048,
+              "Z": 81408,
+              "Room": 8,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "8": {
+                  "Rectangles": [ 8 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the flipmap lever.",
+            "EMType": 41,
+            "EntityIndex": 26,
+            "Location": {
+              "X": 66048,
+              "Y": -2048,
+              "Z": 81408,
+              "Room": 8,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "8": {
+                  "Rectangles": [ 9 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the flipmap lever.",
+            "EMType": 41,
+            "EntityIndex": 26,
+            "Location": {
+              "X": 68096,
+              "Y": -2048,
+              "Z": 81408,
+              "Room": 8,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "8": {
+                  "Rectangles": [ 31 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the flipmap lever.",
+            "EMType": 41,
+            "EntityIndex": 26,
+            "Location": {
+              "X": 68096,
+              "Y": -2048,
+              "Z": 81408,
+              "Room": 8,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1584": {
+                "8": {
+                  "Rectangles": [ 34 ]
+                }
+              }
             }
           }
         ]
