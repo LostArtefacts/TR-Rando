@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TREnvironmentEditor.Helpers;
+using TRFDControl;
+using TRFDControl.Utilities;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
@@ -12,11 +14,35 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
             foreach (EMLocation location in Locations)
             {
                 TR2Room room = level.Rooms[location.Room];
-                List<TR2RoomStaticMesh> meshes = room.StaticMeshes.ToList();
 
+                // Only add this mesh if there is nothing else in the same sector.
+                bool sectorFree = true;
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
+                foreach (TR2Entity entity in level.Entities)
+                {
+                    if (entity.Room == location.Room)
+                    {
+                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                        if (entitySector == sector)
+                        {
+                            sectorFree = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (!sectorFree)
+                {
+                    continue;
+                }
+
+                List<TR2RoomStaticMesh> meshes = room.StaticMeshes.ToList();
                 meshes.Add(new TR2RoomStaticMesh
                 {
                     X = (uint)location.X,
