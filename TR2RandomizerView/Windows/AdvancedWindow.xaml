@@ -33,6 +33,13 @@
                     <Setter Property="Margin"
                             Value="0,10,0,0" />
                 </Style>
+                <Style x:Key="HeaderStyle"
+                       TargetType="{x:Type TextBlock}">
+                    <Setter Property="FontSize"
+                            Value="14" />
+                    <Setter Property="TextDecorations"
+                            Value="Underline" />
+                </Style>
                 <Style x:Key="OptionDescriptionStyle"
                        TargetType="{x:Type Label}">
                     <Setter Property="HorizontalAlignment"
@@ -75,9 +82,8 @@
                         HorizontalAlignment="Left"
                         Margin="0,0,0,10"
                         Visibility="{Binding HasBoolItems, Converter={StaticResource BoolToCollapsedConverter}}">
-                <TextBlock Text="General"
-                           FontSize="14"
-                           TextDecorations="Underline" />
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="General"/>
                 <ItemsControl ItemsSource="{Binding BoolItemsSource, Mode=TwoWay}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -120,10 +126,9 @@
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
                 </StackPanel.Resources>
-                
-                <TextBlock Text="Difficulty"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Difficulty"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -179,10 +184,9 @@
                         Grid.ColumnSpan="2"
                         Margin="0,5,0,0"
                         Visibility="{Binding HasLanguage, Converter={StaticResource BoolToCollapsedConverter}}">
-                
-                <TextBlock Text="Language"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Language"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.ColumnDefinitions>
@@ -209,10 +213,9 @@
                         Grid.ColumnSpan="2"
                         Margin="0,5,0,0"
                         Visibility="{Binding HasMirroring, Converter={StaticResource BoolToCollapsedConverter}}">
-                
-                <TextBlock Text="Mirrored Levels"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Mirrored Levels"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -266,9 +269,8 @@
                         Margin="0,5,0,0"
                         Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
 
-                <TextBlock Text="Haircuts"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Haircuts"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -322,9 +324,8 @@
                         Margin="0,15,0,0"
                         Visibility="{Binding HasInvisibility, Converter={StaticResource BoolToCollapsedConverter}}">
 
-                <TextBlock Text="Invisibility"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Invisibility"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -377,9 +378,8 @@
                         Grid.ColumnSpan="2"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
-                <TextBlock Text="General"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="General"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -433,9 +433,8 @@
                         Margin="0,15,0,0"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
-                <TextBlock Text="Intensity"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Intensity"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
