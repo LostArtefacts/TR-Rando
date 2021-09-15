@@ -33,6 +33,17 @@
                     <Setter Property="Margin"
                             Value="0,10,0,0" />
                 </Style>
+                <Style x:Key="OptionDescriptionStyle"
+                       TargetType="{x:Type Label}">
+                    <Setter Property="HorizontalAlignment"
+                            Value="Left" />
+                    <Setter Property="FontStyle"
+                            Value="Italic" />
+                    <Setter Property="Padding"
+                            Value="0" />
+                    <Setter Property="Margin"
+                            Value="40,0,0,0" />
+                </Style>
             </Grid.Resources>
             
             <Grid.RowDefinitions>
@@ -87,11 +98,8 @@
 
                                 <Border Grid.Column="1"
                                         Margin="0,10,0,0">
-                                    <Label HorizontalAlignment="Left"
-                                           Content="{Binding Description}"
-                                           FontStyle="Italic"
-                                           Padding="0"
-                                           Margin="40,0,0,1">
+                                    <Label Style="{StaticResource OptionDescriptionStyle}"
+                                           Content="{Binding Description}">
                                         <Label.Resources>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -137,15 +145,17 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <TextBlock FontStyle="Italic"
-                                   VerticalAlignment="Center"
-                                   Margin="40,0,0,0">
-                            Standard restrictions will apply for cross-level enemies. See
-                            <Hyperlink ToolTip="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md" 
-                                       NavigateUri="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md"
-                                       RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
-                            for details.
-                        </TextBlock>
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <Label.Content>
+                                <TextBlock>
+                                    Standard restrictions will apply for cross-level enemies. See
+                                    <Hyperlink ToolTip="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md"
+                                               NavigateUri="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md"
+                                               RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
+                                    for details.
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
                     </Border>
 
                     <Border Grid.Row="1">
@@ -159,12 +169,8 @@
 
                     <Border Grid.Row="1"
                             Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Disables virtually all cross-level enemy restrictions except for technical ones."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Disables virtually all cross-level enemy restrictions except for technical ones."/>
                     </Border>
                 </Grid>
             </StackPanel>
@@ -193,12 +199,8 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Select a language to use for gamestrings, or choose to use a random combination."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Select a language to use for gamestrings, or choose to use a random combination."/>
                     </Border>
                 </Grid>
             </StackPanel>
@@ -239,12 +241,8 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Reverse the geometry and item positioning in the given number of levels, creating a mirror effect."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Reverse the geometry and item positioning in the given number of levels, creating a mirror effect."/>
                     </Border>
 
                     <Border Grid.Row="1">
@@ -257,12 +255,8 @@
 
                     <Border Grid.Column="1"
                             Grid.Row="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Mirror the assault course level in addition to or separately from above."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Mirror the assault course level in addition to or separately from above."/>
                     </Border>
                 </Grid>
             </StackPanel>
@@ -303,12 +297,8 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Lara will lose her braid in the given number of levels."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Lara will lose her braid in the given number of levels."/>
                     </Border>
 
                     <Border Grid.Row="1">
@@ -321,12 +311,8 @@
 
                     <Border Grid.Column="1"
                             Grid.Row="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Give Lara a haircut in the assault course level in addition to or separately from above."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Give Lara a haircut in the assault course level in addition to or separately from above."/>
                     </Border>
                 </Grid>
             </StackPanel>
@@ -367,12 +353,8 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Lara will wear an invisibility cloak in the given number of levels. Only her shadow will be visible."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Lara will wear an invisibility cloak in the given number of levels. Only her shadow will be visible."/>
                     </Border>
 
                     <Border Grid.Row="1">
@@ -385,12 +367,8 @@
 
                     <Border Grid.Column="1"
                             Grid.Row="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Make Lara invisible in the assault course level in addition to or separately from above."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Make Lara invisible in the assault course level in addition to or separately from above."/>
                     </Border>
                 </Grid>
             </StackPanel>
@@ -430,12 +408,8 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="The given number of levels will be converted to night mode."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The given number of levels will be converted to night mode."/>
                     </Border>
 
                     <Border Grid.Row="1">
@@ -448,12 +422,8 @@
 
                     <Border Grid.Column="1"
                             Grid.Row="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Adjust the assault course level lighting in addition to or separately from above."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Adjust the assault course level lighting in addition to or separately from above."/>
                     </Border>
                 </Grid>
             </StackPanel>
@@ -503,12 +473,8 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Set the darkness intensity, ranging from dusk to full night mode."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Set the darkness intensity, ranging from dusk to full night mode."/>
                     </Border>
 
                     <Border Grid.Row="1">
