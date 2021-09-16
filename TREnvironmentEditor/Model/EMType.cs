@@ -24,6 +24,7 @@
         ConvertEntity = 45,
         MoveTrap = 46,
         ConvertEnemy = 47,
+        ModifyEntity = 48,
 
         // Trigger types 61-80
         Trigger = 61,
