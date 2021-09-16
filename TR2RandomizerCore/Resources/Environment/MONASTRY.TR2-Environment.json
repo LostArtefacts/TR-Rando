@@ -3,9 +3,1139 @@
 
   "Any": [],
 
-  "AllWithin": [],
+  "AllWithin": [
+    [
+      [
+        {
+          "Comments": "Potential new position for the strongroom keyhole.",
+          "EMType": 41,
+          "EntityIndex": 24,
+          "Location": {
+            "X": 80384,
+            "Y": 0,
+            "Z": 32256,
+            "Room": 10,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the strongroom keyhole.",
+          "EMType": 41,
+          "EntityIndex": 24,
+          "Location": {
+            "X": 81408,
+            "Y": -256,
+            "Z": 32256,
+            "Room": 10,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the strongroom keyhole.",
+          "EMType": 41,
+          "EntityIndex": 24,
+          "Location": {
+            "X": 81408,
+            "Y": -256,
+            "Z": 32256,
+            "Room": 10,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the strongroom keyhole.",
+          "EMType": 41,
+          "EntityIndex": 24,
+          "Location": {
+            "X": 81408,
+            "Y": -256,
+            "Z": 30208,
+            "Room": 10,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the strongroom keyhole.",
+          "EMType": 41,
+          "EntityIndex": 24,
+          "Location": {
+            "X": 74240,
+            "Y": 0,
+            "Z": 29184,
+            "Room": 10,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the strongroom keyhole.",
+          "EMType": 41,
+          "EntityIndex": 24,
+          "Location": {
+            "X": 74240,
+            "Y": 0,
+            "Z": 28160,
+            "Room": 10,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the strongroom keyhole.",
+          "EMType": 41,
+          "EntityIndex": 24,
+          "Location": {
+            "X": 74240,
+            "Y": 0,
+            "Z": 28160,
+            "Room": 10,
+            "Angle": -32768
+          }
+        }
+      ]
+    ],
 
-  "OneOf": [],
+    [
+      [
+        {
+          "Comments": "Potential new position for the trapdoor keyhole.",
+          "EMType": 41,
+          "EntityIndex": 171,
+          "Location": {
+            "X": 53760,
+            "Y": 0,
+            "Z": 15872,
+            "Room": 104,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the trapdoor keyhole.",
+          "EMType": 41,
+          "EntityIndex": 171,
+          "Location": {
+            "X": 52736,
+            "Y": 0,
+            "Z": 15872,
+            "Room": 104,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the trapdoor keyhole.",
+          "EMType": 41,
+          "EntityIndex": 171,
+          "Location": {
+            "X": 52736,
+            "Y": 0,
+            "Z": 15872,
+            "Room": 104,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the trapdoor keyhole.",
+          "EMType": 41,
+          "EntityIndex": 171,
+          "Location": {
+            "X": 52736,
+            "Y": 0,
+            "Z": 16896,
+            "Room": 104,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the trapdoor keyhole.",
+          "EMType": 41,
+          "EntityIndex": 171,
+          "Location": {
+            "X": 56832,
+            "Y": 0,
+            "Z": 15872,
+            "Room": 104,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the trapdoor keyhole.",
+          "EMType": 41,
+          "EntityIndex": 171,
+          "Location": {
+            "X": 57856,
+            "Y": 0,
+            "Z": 15872,
+            "Room": 104,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the trapdoor keyhole.",
+          "EMType": 41,
+          "EntityIndex": 171,
+          "Location": {
+            "X": 58880,
+            "Y": 0,
+            "Z": 15872,
+            "Room": 104,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the trapdoor keyhole.",
+          "EMType": 41,
+          "EntityIndex": 171,
+          "Location": {
+            "X": 61952,
+            "Y": 0,
+            "Z": 15872,
+            "Room": 104,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the trapdoor keyhole.",
+          "EMType": 41,
+          "EntityIndex": 171,
+          "Location": {
+            "X": 62976,
+            "Y": 0,
+            "Z": 15872,
+            "Room": 104,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the trapdoor keyhole.",
+          "EMType": 41,
+          "EntityIndex": 171,
+          "Location": {
+            "X": 64000,
+            "Y": 0,
+            "Z": 15872,
+            "Room": 104,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the trapdoor keyhole.",
+          "EMType": 41,
+          "EntityIndex": 171,
+          "Location": {
+            "X": 64000,
+            "Y": 0,
+            "Z": 15872,
+            "Room": 104,
+            "Angle": 16384
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 68096,
+            "Y": 0,
+            "Z": 32256,
+            "Room": 12,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 68096,
+            "Y": 0,
+            "Z": 31232,
+            "Room": 12,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 68096,
+            "Y": 0,
+            "Z": 28160,
+            "Room": 12,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 68096,
+            "Y": 0,
+            "Z": 28160,
+            "Room": 12,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 69120,
+            "Y": 0,
+            "Z": 28160,
+            "Room": 12,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 70144,
+            "Y": 0,
+            "Z": 28160,
+            "Room": 12,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 72192,
+            "Y": 0,
+            "Z": 28160,
+            "Room": 12,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 73216,
+            "Y": 0,
+            "Z": 28160,
+            "Room": 12,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 73216,
+            "Y": 0,
+            "Z": 28160,
+            "Room": 12,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 73216,
+            "Y": 0,
+            "Z": 31232,
+            "Room": 12,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 73216,
+            "Y": 0,
+            "Z": 31232,
+            "Room": 12,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 72192,
+            "Y": 0,
+            "Z": 32256,
+            "Room": 12,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 72192,
+            "Y": 0,
+            "Z": 32256,
+            "Room": 12,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 71168,
+            "Y": 0,
+            "Z": 32256,
+            "Room": 12,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 71168,
+            "Y": 0,
+            "Z": 32256,
+            "Room": 12,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the rooftops keyhole.",
+          "EMType": 41,
+          "EntityIndex": 28,
+          "Location": {
+            "X": 70144,
+            "Y": 0,
+            "Z": 31232,
+            "Room": 12,
+            "Angle": 0
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 66048,
+            "Y": 0,
+            "Z": 24064,
+            "Room": 46,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 66048,
+            "Y": 0,
+            "Z": 25088,
+            "Room": 46,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 67072,
+            "Y": 0,
+            "Z": 25088,
+            "Room": 46,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 68096,
+            "Y": 0,
+            "Z": 25088,
+            "Room": 47,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 69120,
+            "Y": 0,
+            "Z": 25088,
+            "Room": 47,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 70144,
+            "Y": 0,
+            "Z": 25088,
+            "Room": 47,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 72192,
+            "Y": 0,
+            "Z": 25088,
+            "Room": 47,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 73216,
+            "Y": 0,
+            "Z": 25088,
+            "Room": 47,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 73216,
+            "Y": 0,
+            "Z": 24064,
+            "Room": 47,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 71168,
+            "Y": 0,
+            "Z": 24064,
+            "Room": 47,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 70144,
+            "Y": 0,
+            "Z": 24064,
+            "Room": 47,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 69120,
+            "Y": 0,
+            "Z": 24064,
+            "Room": 47,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the main hall keyhole.",
+          "EMType": 41,
+          "EntityIndex": 87,
+          "Location": {
+            "X": 68096,
+            "Y": 0,
+            "Z": 24064,
+            "Room": 47,
+            "Angle": -32768
+          }
+        }
+      ]
+    ]
+  ],
+
+  "OneOf": [
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the lever texture from the outside ladder/prayer wheel area.",
+          "EMType": 21,
+          "TextureMap": {
+            "1362": {
+              "137": {
+                "Rectangles": [ 111 ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 66048,
+              "Y": -1792,
+              "Z": 69120,
+              "Room": 139,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "139": {
+                  "Rectangles": [ 24 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 61952,
+              "Y": 1536,
+              "Z": 64000,
+              "Room": 137,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 90 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 60928,
+              "Y": 1536,
+              "Z": 64000,
+              "Room": 137,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1390": {
+                "137": {
+                  "Rectangles": [ 72 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 59904,
+              "Y": 1536,
+              "Z": 64000,
+              "Room": 137,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 55 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 65024,
+              "Y": 1536,
+              "Z": 64000,
+              "Room": 137,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 147 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 66048,
+              "Y": 1536,
+              "Z": 64000,
+              "Room": 137,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 165 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 67072,
+              "Y": 1536,
+              "Z": 64000,
+              "Room": 137,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1390": {
+                "137": {
+                  "Rectangles": [ 183 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 67072,
+              "Y": 1536,
+              "Z": 64000,
+              "Room": 137,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 204 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 67072,
+              "Y": 1536,
+              "Z": 65024,
+              "Room": 137,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 207 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 67072,
+              "Y": 1536,
+              "Z": 66048,
+              "Room": 137,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1390": {
+                "137": {
+                  "Rectangles": [ 210 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 67072,
+              "Y": 1536,
+              "Z": 67072,
+              "Room": 137,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 213 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 67072,
+              "Y": 1536,
+              "Z": 67072,
+              "Room": 137,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 191 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 62976,
+              "Y": 1536,
+              "Z": 67072,
+              "Room": 137,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 117 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 61952,
+              "Y": 1536,
+              "Z": 67072,
+              "Room": 137,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 98 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 57856,
+              "Y": 1536,
+              "Z": 67072,
+              "Room": 137,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 19 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 57856,
+              "Y": 1536,
+              "Z": 67072,
+              "Room": 137,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1365": {
+                "137": {
+                  "Rectangles": [ 16 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 137.",
+            "EMType": 41,
+            "EntityIndex": 187,
+            "Location": {
+              "X": 57856,
+              "Y": 1536,
+              "Z": 66048,
+              "Room": 137,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1390": {
+                "137": {
+                  "Rectangles": [ 12 ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    }
+  ],
 
   "Mirrored": []
 }
