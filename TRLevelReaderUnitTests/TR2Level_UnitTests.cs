@@ -1117,5 +1117,89 @@ namespace TRLevelReaderUnitTests
             Assert.AreEqual(slantEntry.XSlant, 1);
             Assert.AreEqual(slantEntry.ZSlant, 1);
         }
+
+        [TestMethod]
+        public void FloorData_ModifyTriggerMask()
+        {
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("monastry.tr2");
+
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            // For the end doors to open in Barkhang, all 5 activation bits must be set.
+            // Check that each trigger exclusively has one of these bits, so 2^0 to 2^4.
+            // The sum should be 31.
+
+            int[] slots = new int[] { 0, 3, 4, 9, 10 };
+            int mask = 0;
+            foreach (int slotIndex in slots)
+            {
+                TR2Entity slot = lvl.Entities[slotIndex];
+                TRRoomSector sector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, lvl, fdataReader);
+
+                // Confirm we have a match of what we expect
+                Assert.AreNotEqual(sector.FDIndex, 0);
+                List<FDEntry> entries = fdataReader.Entries[sector.FDIndex];
+                Assert.AreEqual(entries.Count, 1);
+                Assert.IsTrue(entries[0] is FDTriggerEntry);
+
+                FDTriggerEntry trigger = entries[0] as FDTriggerEntry;
+                // Confirm this mask will change the overall check mask
+                int newMask = mask | trigger.TrigSetup.Mask;
+                Assert.AreNotEqual(mask, newMask);
+                mask = newMask;
+            }
+
+            // Final check the mask matches full activation
+            Assert.AreEqual(mask, 31);
+
+            // Test changing a mask value
+            lvl = reader.ReadLevel("keel.tr2");
+            fdataReader.ParseFromLevel(lvl);
+
+            TR2Entity circuitBreakerSlot = lvl.Entities[15];
+            TRRoomSector cbSector = FDUtilities.GetRoomSector(circuitBreakerSlot.X, circuitBreakerSlot.Y, circuitBreakerSlot.Z, circuitBreakerSlot.Room, lvl, fdataReader);
+
+            // Confirm we have a match of what we expect
+            Assert.AreNotEqual(cbSector.FDIndex, 0);
+            List<FDEntry> cbEntries = fdataReader.Entries[cbSector.FDIndex];
+            Assert.AreEqual(cbEntries.Count, 1);
+            Assert.IsTrue(cbEntries[0] is FDTriggerEntry);
+
+            FDTriggerEntry cbTrigger = cbEntries[0] as FDTriggerEntry;
+
+            // We expect a normal mask for Wreck so all 1's set
+            Assert.AreEqual(cbTrigger.TrigSetup.Mask, 31);
+
+            // Take off 2 bits. This simulates having something activated
+            // only after all 3 breakers are used.
+            // 16 8 4 2 1
+            // ----------
+            //  1 0 0 1 1
+            //  0 1 0 1 1
+            //  0 0 1 1 1
+            cbTrigger.TrigSetup.Mask = 7;
+            Assert.AreEqual(cbTrigger.TrigSetup.Mask, 7);
+
+            // Save the level and re-read it to confirm it still matches.
+            fdataReader.WriteToLevel(lvl);
+            new TR2LevelWriter().WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            fdataReader.ParseFromLevel(lvl);
+
+            cbSector = FDUtilities.GetRoomSector(circuitBreakerSlot.X, circuitBreakerSlot.Y, circuitBreakerSlot.Z, circuitBreakerSlot.Room, lvl, fdataReader);
+
+            // Confirm we have a match of what we expect
+            Assert.AreNotEqual(cbSector.FDIndex, 0);
+            cbEntries = fdataReader.Entries[cbSector.FDIndex];
+            Assert.AreEqual(cbEntries.Count, 1);
+            Assert.IsTrue(cbEntries[0] is FDTriggerEntry);
+
+            cbTrigger = cbEntries[0] as FDTriggerEntry;
+
+            Assert.AreEqual(cbTrigger.TrigSetup.Mask, 7);
+        }
     }
 }
