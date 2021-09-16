@@ -51,14 +51,20 @@ namespace TREnvironmentEditor.Model.Types
             }
             else
             {
-                control.Entries[sector.FDIndex].Insert(0, new FDClimbEntry
+                FDClimbEntry climbEntry = new FDClimbEntry
                 {
                     Setup = new FDSetup(FDFunctions.ClimbableWalls),
                     IsPositiveX = IsPositiveX,
                     IsPositiveZ = IsPositiveZ,
                     IsNegativeX = IsNegativeX,
                     IsNegativeZ = IsNegativeZ
-                });
+                };
+
+                // We have to add climbable entries after portal and slant entries.
+                List<FDEntry> entries = control.Entries[sector.FDIndex];
+                int index = entries.FindLastIndex(e => e is FDPortalEntry || e is FDSlantEntry);
+
+                control.Entries[sector.FDIndex].Insert(index + 1, climbEntry);
             }
 
             control.WriteToLevel(level);

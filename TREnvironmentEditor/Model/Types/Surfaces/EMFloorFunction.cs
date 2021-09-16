@@ -167,7 +167,10 @@ namespace TREnvironmentEditor.Model.Types
 
             // Now shift the actual sector info
             sector.Floor += Clicks;
-            level.Boxes[sector.BoxIndex].TrueFloor = (short)(sector.Floor * ClickSize);
+            // Changing the box floor is not strictly correct as boxes can span multiple tiles.
+            // For now, leave the box as-is, which means enemies can teleport on top if raising
+            // the floor.
+            //level.Boxes[sector.BoxIndex].TrueFloor = (short)(sector.Floor * ClickSize);
 
             // Account for the added faces
             room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
