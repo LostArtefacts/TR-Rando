@@ -86,6 +86,37 @@ namespace TRLevelReader.Model
             Flags &= ~(0x01);
         }
 
+        public bool IsSkyboxVisible
+        {
+            get => (Flags & 0x08) > 0;
+            set
+            {
+                if (value)
+                {
+                    Flags |= 0x08;
+                }
+                else
+                {
+                    Flags &= ~0x08;
+                }
+            }
+        }
+
+        public bool IsWindy
+        {
+            get => (Flags & 0x20) > 0;
+            set
+            {
+                if (value)
+                {
+                    Flags |= 0x20;
+                }
+                else
+                {
+                    Flags &= ~0x20;
+                }
+            }
+        }
 
         //Ambient Intensity = 0 (bright) - 0x1FFF (dark)
         //Vertex Light = 0 (bright) - 0x1FFF (dark)

@@ -70,6 +70,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMConvertEnemyFunction>(jo.ToString(), _resolver);
                 case EMType.ModifyEntity:
                     return JsonConvert.DeserializeObject<EMModifyEntityFunction>(jo.ToString(), _resolver);
+                case EMType.SwapSlot:
+                    return JsonConvert.DeserializeObject<EMSwapSlotFunction>(jo.ToString(), _resolver);
 
                 // Trigger types
                 case EMType.Trigger:
@@ -100,6 +102,10 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMMoveSoundSourceFunction>(jo.ToString(), _resolver);
                 case EMType.RemoveSoundSource:
                     return JsonConvert.DeserializeObject<EMRemoveSoundSourceFunction>(jo.ToString(), _resolver);
+
+                // Rooms
+                case EMType.ModifyRoom:
+                    return JsonConvert.DeserializeObject<EMModifyRoomFunction>(jo.ToString(), _resolver);
 
                 // NOOP
                 case EMType.NOOP:

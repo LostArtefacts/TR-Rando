@@ -65,7 +65,7 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
-        private void MoveTriggers(FDControl control, TRRoomSector currentSector, TRRoomSector newSector)
+        protected void MoveTriggers(FDControl control, TRRoomSector currentSector, TRRoomSector newSector)
         {
             if (newSector.FDIndex == 0)
             {
