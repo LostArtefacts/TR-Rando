@@ -161,19 +161,6 @@
       },
 
       {
-        "Comments": "TEMP",
-        "EMType": 44,
-        "EntityIndex": 87,
-        "TargetLocation": {
-          "X": 10541,
-          "Y": 5276,
-          "Z": 61139,
-          "Room": 82,
-          "Angle": -16384
-        }
-      },
-
-      {
         "Comments": "Adjust any secrets.",
         "EMType": 43,
         "Types": [ 190, 191, 192 ],
