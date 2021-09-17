@@ -11,6 +11,12 @@ namespace TREnvironmentEditor.Model.Types
         
         public void AddWaterSurface(TR2Level level, TR2Room room, bool asCeiling, IEnumerable<int> adjacentRooms)
         {
+            if (WaterTextures == null || WaterTextures.Length == 0)
+            {
+                // We may be flooding below ice, or water surfaces may already exist
+                return;
+            }
+
             List<TR2RoomVertex> vertices = room.RoomData.Vertices.ToList();
             List<TRFace4> rectangles = room.RoomData.Rectangles.ToList();
 
