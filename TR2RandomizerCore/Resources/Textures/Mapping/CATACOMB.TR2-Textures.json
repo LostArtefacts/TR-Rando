@@ -108,6 +108,15 @@
           "BackgroundIndex": 1314
         }
       ]
+    },
+    "Landmarks.BRB": {
+      "0": [
+        {
+          "RoomNumber": 121,
+          "RectangleIndices": [ 7 ],
+          "BackgroundIndex": 1344
+        }
+      ]
     }
   },
 

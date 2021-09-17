@@ -1,7 +1,201 @@
 {
   "All": [],
 
-  "Any": [],
+  "Any": [
+    [
+      {
+        "Comments": "Add a random gong.",
+        "EMType": 24,
+        "Locations": [
+          {
+            "X": 39936,
+            "Y": 4424,
+            "Z": 60672,
+            "Room": 46,
+            "Angle": 0
+          }
+        ],
+        "Mesh": {
+          "MeshID": 38,
+          "Intensity1": 6400,
+          "Intensity2": 6400
+        }
+      }
+    ],
+
+    [
+      {
+        "Comments": "Move some spikes to level exit.",
+        "EMType": 44,
+        "EntityIndex": 166,
+        "TargetLocation": {
+          "X": 50728,
+          "Y": 7936,
+          "Z": 66997,
+          "Room": 73,
+          "Angle": 0
+        }
+      },
+
+      {
+        "Comments": "Add a bowl where the spikes were.",
+        "EMType": 24,
+        "Locations": [
+          {
+            "X": 47616,
+            "Y": 3840,
+            "Z": 69120,
+            "Room": 126,
+            "Angle": 0
+          }
+        ],
+        "Mesh": {
+          "MeshID": 37,
+          "Intensity1": 6400,
+          "Intensity2": 6400
+        }
+      }
+    ],
+
+    [
+      {
+        "Comments": "Get rid of the end ladder.",
+        "EMType": 0,
+        "IsPositiveX": false,
+        "Location": {
+          "X": 51752,
+          "Y": 7936,
+          "Z": 66165,
+          "Room": 52
+        },
+        "TextureMap": {
+          "1289": {
+            "47": {
+              "Rectangles": [ 16, 17, 18 ]
+            },
+            "52": {
+              "Rectangles": [ 16, 17 ]
+            }
+          },
+          "1314": {
+            "52": {
+              "Rectangles": [ 15 ]
+            }
+          }
+        }
+      },
+
+      {
+        "Comments": "Move it below the door instead.",
+        "EMType": 0,
+        "IsNegativeX": true,
+        "Location": {
+          "X": 50706,
+          "Y": 7936,
+          "Z": 66000,
+          "Room": 52
+        },
+        "TextureMap": {
+          "1273": {
+            "47": {
+              "Rectangles": [ 1 ]
+            },
+            "52": {
+              "Rectangles": [ 1, 2, 3 ]
+            }
+          }
+        }
+      }
+    ],
+
+    [
+      {
+        "Comments": "Drain the upper area.",
+        "EMType": 3,
+        "RoomNumbers": [ 82, 21, 22, 28 ],
+        "WaterTextures": [ 1345, 1446, 1387, 1389 ]
+      },
+
+      {
+        "Comments": "Re-flood room 28 to ensure textures are correct.",
+        "EMType": 2,
+        "RoomNumbers": [ 28 ],
+        "WaterTextures": [ 1345, 1446, 1387, 1389 ]
+      },
+
+      {
+        "Comments": "Remove the water sound sources for above.",
+        "EMType": 103,
+        "Source": {
+          "X": 19968,
+          "Y": 3584,
+          "Z": 66048
+        }
+      },
+
+      {
+        "EMType": 103,
+        "Source": {
+          "X": 10752,
+          "Y": 3584,
+          "Z": 66048
+        }
+      },
+
+      {
+        "EMType": 103,
+        "Source": {
+          "X": 6656,
+          "Y": 3584,
+          "Z": 56832
+        }
+      },
+
+      {
+        "EMType": 103,
+        "Source": {
+          "X": 13824,
+          "Y": 3584,
+          "Z": 55808
+        }
+      },
+
+      {
+        "Comments": "TEMP",
+        "EMType": 44,
+        "EntityIndex": 87,
+        "TargetLocation": {
+          "X": 10541,
+          "Y": 5276,
+          "Z": 61139,
+          "Room": 82,
+          "Angle": -16384
+        }
+      },
+
+      {
+        "Comments": "Adjust any secrets.",
+        "EMType": 43,
+        "Types": [ 190, 191, 192 ],
+        "SectorLocations": [
+          {
+            "X": 10312,
+            "Y": 5376,
+            "Z": 61323,
+            "Room": 82
+          }
+        ]
+      },
+
+      {
+        "Comments": "Convert the fish into land creatures.",
+        "EMType": 47,
+        "EntityIndices": [ 61, 62, 135 ],
+        "NewEnemyType": 1,
+        "Exclusions": [ 40 ]
+      }
+    ]
+  ],
 
   "AllWithin": [
     [
