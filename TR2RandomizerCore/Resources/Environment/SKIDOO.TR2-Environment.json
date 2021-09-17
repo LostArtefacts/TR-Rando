@@ -529,12 +529,14 @@
             "Room": 12,
             "Flags": 0
           },
-          "AttachToLocation": {
-            "X": 78336,
-            "Y": 0,
-            "Z": 46592,
-            "Room": 3
-          },
+          "AttachToLocations": [
+            {
+              "X": 78336,
+              "Y": 0,
+              "Z": 46592,
+              "Room": 3
+            }
+          ],
           "CameraAction": {
             "Value": 37123
           },
@@ -565,12 +567,14 @@
             "Room": 12,
             "Flags": 0
           },
-          "AttachToLocation": {
-            "X": 81408,
-            "Y": 1280,
-            "Z": 44544,
-            "Room": 26
-          },
+          "AttachToLocations": [
+            {
+              "X": 81408,
+              "Y": 1280,
+              "Z": 44544,
+              "Room": 26
+            }
+          ],
           "CameraAction": {
             "Value": 37123
           },
@@ -601,12 +605,14 @@
             "Room": 12,
             "Flags": 0
           },
-          "AttachToLocation": {
-            "X": 78336,
-            "Y": 0,
-            "Z": 38400,
-            "Room": 11
-          },
+          "AttachToLocations": [
+            {
+              "X": 78336,
+              "Y": 0,
+              "Z": 38400,
+              "Room": 11
+            }
+          ],
           "CameraAction": {
             "Value": 37123
           },

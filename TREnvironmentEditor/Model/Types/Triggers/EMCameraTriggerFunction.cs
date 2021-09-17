@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TRFDControl;
@@ -13,14 +12,13 @@ namespace TREnvironmentEditor.Model.Types
     {
         public TRCamera Camera { get; set; }
         public ushort LookAtItem { get; set; }
-        public ushort AttachToItem { get; set; }
-        public EMLocation AttachToLocation { get; set; }
+        public ushort[] AttachToItems { get; set; }
+        public EMLocation[] AttachToLocations { get; set; }
         public FDCameraAction CameraAction { get; set; }
 
         public EMCameraTriggerFunction()
         {
             LookAtItem = ushort.MaxValue;
-            AttachToItem = ushort.MaxValue;
         }
 
         public override void ApplyToLevel(TR2Level level)
@@ -28,26 +26,37 @@ namespace TREnvironmentEditor.Model.Types
             List<TRCamera> cameras = level.Cameras.ToList();
             cameras.Add(Camera);
             level.Cameras = cameras.ToArray();
+            
+            ushort cameraIndex = (ushort)level.NumCameras;
             level.NumCameras++;
 
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector sector = null;
-            if (AttachToItem != ushort.MaxValue)
+            if (AttachToItems != null)
             {
-                TR2Entity attachToEntity = level.Entities[AttachToItem];
-                sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, attachToEntity.Room, level, control);
+                foreach (ushort item in AttachToItems)
+                {
+                    TR2Entity attachToEntity = level.Entities[item];
+                    TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, attachToEntity.Room, level, control);
+                    AttachToSector(sector, control, cameraIndex);
+                }
             }
-            else if (AttachToLocation != null)
+
+            if (AttachToLocations != null)
             {
-                sector = FDUtilities.GetRoomSector(AttachToLocation.X, AttachToLocation.Y, AttachToLocation.Z, AttachToLocation.Room, level, control);
+                foreach (EMLocation location in AttachToLocations)
+                {
+                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
+                    AttachToSector(sector, control, cameraIndex);
+                }
             }
-            else
-            {
-                throw new ArgumentException("Cannot attach camera to an undefined trigger location.");
-            }
-            
+
+            control.WriteToLevel(level);
+        }
+
+        private void AttachToSector(TRRoomSector sector, FDControl control, ushort cameraIndex)
+        {
             if (sector.FDIndex != 0)
             {
                 FDTriggerEntry trigger = control.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) as FDTriggerEntry;
@@ -58,7 +67,7 @@ namespace TREnvironmentEditor.Model.Types
                         TrigAction = FDTrigAction.Camera,
                         Value = 1024,
                         CamAction = CameraAction,
-                        Parameter = (ushort)(cameras.Count - 1)
+                        Parameter = cameraIndex
                     });
 
                     if (LookAtItem != ushort.MaxValue)
@@ -70,8 +79,6 @@ namespace TREnvironmentEditor.Model.Types
                             Parameter = LookAtItem
                         });
                     }
-
-                    control.WriteToLevel(level);
                 }
             }
         }

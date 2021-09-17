@@ -695,7 +695,7 @@
             "Flags": 0
           },
           "LookAtItem": 17,
-          "AttachToItem": 20,
+          "AttachToItems": [ 20 ],
           "CameraAction": {
             "Value": 2
           }

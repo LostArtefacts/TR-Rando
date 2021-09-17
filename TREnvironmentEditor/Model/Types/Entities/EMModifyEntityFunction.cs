@@ -9,6 +9,7 @@ namespace TREnvironmentEditor.Model.Types
         public bool? ClearBody { get; set; }
         public short? Intensity1 { get; set; }
         public short? Intensity2 { get; set; }
+        public ushort? Flags { get; set; }
 
         public override void ApplyToLevel(TR2Level level)
         {
@@ -28,6 +29,10 @@ namespace TREnvironmentEditor.Model.Types
             if (Intensity2.HasValue)
             {
                 entity.Intensity2 = Intensity2.Value;
+            }
+            if (Flags.HasValue)
+            {
+                entity.Flags = Flags.Value;
             }
         }
     }

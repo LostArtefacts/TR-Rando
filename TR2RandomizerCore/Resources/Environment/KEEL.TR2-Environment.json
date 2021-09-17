@@ -689,225 +689,6 @@
           }
         }
       ]
-    ],
-
-    [
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 1.",
-          "EMType": 41,
-          "EntityIndex": 17,
-          "Location": {
-            "X": 57856,
-            "Y": -4096,
-            "Z": 35328,
-            "Room": 21,
-            "Angle": 0
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 1.",
-          "EMType": 41,
-          "EntityIndex": 17,
-          "Location": {
-            "X": 58880,
-            "Y": -4096,
-            "Z": 36352,
-            "Room": 3,
-            "Angle": -16384
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 1.",
-          "EMType": 41,
-          "EntityIndex": 17,
-          "Location": {
-            "X": 58880,
-            "Y": -4096,
-            "Z": 37376,
-            "Room": 3,
-            "Angle": -16384
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 1.",
-          "EMType": 41,
-          "EntityIndex": 17,
-          "Location": {
-            "X": 58880,
-            "Y": -4096,
-            "Z": 38400,
-            "Room": 3,
-            "Angle": -16384
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 1.",
-          "EMType": 41,
-          "EntityIndex": 17,
-          "Location": {
-            "X": 58880,
-            "Y": -4096,
-            "Z": 38400,
-            "Room": 3,
-            "Angle": 16384
-          }
-        }
-      ]
-    ],
-
-    [
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 2.",
-          "EMType": 41,
-          "EntityIndex": 16,
-          "Location": {
-            "X": 59904,
-            "Y": -4096,
-            "Z": 35328,
-            "Room": 21,
-            "Angle": 0
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 2.",
-          "EMType": 41,
-          "EntityIndex": 16,
-          "Location": {
-            "X": 59904,
-            "Y": -4096,
-            "Z": 35328,
-            "Room": 21,
-            "Angle": 16384
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 2.",
-          "EMType": 41,
-          "EntityIndex": 16,
-          "Location": {
-            "X": 59904,
-            "Y": -4352,
-            "Z": 34304,
-            "Room": 21,
-            "Angle": 16384
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 2.",
-          "EMType": 41,
-          "EntityIndex": 16,
-          "Location": {
-            "X": 59904,
-            "Y": -4096,
-            "Z": 33280,
-            "Room": 21,
-            "Angle": 16384
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 2.",
-          "EMType": 41,
-          "EntityIndex": 16,
-          "Location": {
-            "X": 59904,
-            "Y": -4096,
-            "Z": 32256,
-            "Room": 21,
-            "Angle": 16384
-          }
-        }
-      ]
-    ],
-
-    [
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 3.",
-          "EMType": 41,
-          "EntityIndex": 15,
-          "Location": {
-            "X": 52736,
-            "Y": -4096,
-            "Z": 32256,
-            "Room": 21,
-            "Angle": -16384
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 3.",
-          "EMType": 41,
-          "EntityIndex": 15,
-          "Location": {
-            "X": 52736,
-            "Y": -4096,
-            "Z": 33280,
-            "Room": 21,
-            "Angle": -16384
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 3.",
-          "EMType": 41,
-          "EntityIndex": 15,
-          "Location": {
-            "X": 52736,
-            "Y": -4352,
-            "Z": 34304,
-            "Room": 21,
-            "Angle": -16384
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 3.",
-          "EMType": 41,
-          "EntityIndex": 15,
-          "Location": {
-            "X": 52736,
-            "Y": -5120,
-            "Z": 35328,
-            "Room": 21,
-            "Angle": -16384
-          }
-        }
-      ],
-      [
-        {
-          "Comments": "Potential new position for circuit breaker slot 3.",
-          "EMType": 41,
-          "EntityIndex": 15,
-          "Location": {
-            "X": 52736,
-            "Y": -5120,
-            "Z": 35328,
-            "Room": 21,
-            "Angle": 0
-          }
-        }
-      ]
     ]
   ],
 
@@ -1254,6 +1035,419 @@
                   "Rectangles": [ 15 ]
                 }
               }
+            }
+          }
+        ]
+      ]
+    },
+
+    {
+      "Leader": [
+        {
+          "Comments": "Convert one of the circuit breaker flames into a door.",
+          "EMType": 45,
+          "EntityIndex": 18,
+          "NewEntityType": 111
+        },
+
+        {
+          "Comments": "Make sure it doesn't activate by default.",
+          "EMType": 48,
+          "EntityIndex": 18,
+          "Flags": 0
+        },
+
+        {
+          "Comments": "Move it to block the doorway to the lever.",
+          "EMType": 44,
+          "EntityIndex": 18,
+          "TargetLocation": {
+            "X": 55808,
+            "Y": -6656,
+            "Z": 35328,
+            "Room": 26,
+            "Angle": -32768
+          }
+        },
+
+        {
+          "Comments": "Move the other flames elsewhere.",
+          "EMType": 44,
+          "EntityIndex": 19,
+          "TargetLocation": {
+            "X": 55808,
+            "Y": -4352,
+            "Z": 34304,
+            "Room": 21,
+            "Angle": -32768
+          }
+        },
+
+        {
+          "EMType": 44,
+          "EntityIndex": 20,
+          "TargetLocation": {
+            "X": 56832,
+            "Y": -4352,
+            "Z": 34304,
+            "Room": 21,
+            "Angle": -32768
+          }
+        },
+
+        {
+          "Comments": "Adjust burner textures.",
+          "EMType": 21,
+          "TextureMap": {
+            "1738": {
+              "21": {
+                "Rectangles": [ 72, 88 ]
+              },
+              "4": {
+                "Rectangles": [ 72, 88 ]
+              }
+            },
+            "1719": {
+              "21": {
+                "Rectangles": [ 40, 59, 75 ]
+              },
+              "4": {
+                "Rectangles": [ 40, 59, 75 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Remove each of the default circuit breaker triggers.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 54784,
+              "Y": -4096,
+              "Z": 35328,
+              "Room": 21
+            },
+            {
+              "X": 55808,
+              "Y": -4096,
+              "Z": 35328,
+              "Room": 21
+            },
+            {
+              "X": 56832,
+              "Y": -4096,
+              "Z": 35328,
+              "Room": 21
+            }
+          ]
+        },
+
+        {
+          "Comments": "Make a new trigger for CB1, assigning mask 00111.",
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872,
+              "Mask": 7
+            },
+            "TrigType": 3,
+            "SwitchOrKeyRef": 15,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 18
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 54784,
+              "Y": -4096,
+              "Z": 35328,
+              "Room": 21
+            }
+          ]
+        },
+
+        {
+          "Comments": "Make a new trigger for CB2, assigning mask 01011.",
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872,
+              "Mask": 11
+            },
+            "TrigType": 3,
+            "SwitchOrKeyRef": 16,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 18
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 55808,
+              "Y": -4096,
+              "Z": 35328,
+              "Room": 21
+            }
+          ]
+        },
+
+        {
+          "Comments": "Make a new trigger for CB3, assigning mask 10011.",
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872,
+              "Mask": 19
+            },
+            "TrigType": 3,
+            "SwitchOrKeyRef": 17,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 18
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 56832,
+              "Y": -4096,
+              "Z": 35328,
+              "Room": 21
+            }
+          ]
+        },
+
+        {
+          "Comments": "Add cameras for above",
+          "EMType": 65,
+          "Camera": {
+            "X": 60470,
+            "Y": -8902,
+            "Z": 32824,
+            "Room": 20,
+            "Flags": 0
+          },
+          "LookAtItem": 18,
+          "AttachToItems": [ 15, 16, 17 ],
+          "CameraAction": {
+            "Value": 2
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential new position for circuit breaker slot 1.",
+            "EMType": 41,
+            "EntityIndex": 17,
+            "Location": {
+              "X": 57856,
+              "Y": -4096,
+              "Z": 35328,
+              "Room": 21,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Potential new position for circuit breaker slot 2.",
+            "EMType": 41,
+            "EntityIndex": 16,
+            "Location": {
+              "X": 59904,
+              "Y": -4096,
+              "Z": 35328,
+              "Room": 21,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Potential new position for circuit breaker slot 3.",
+            "EMType": 41,
+            "EntityIndex": 15,
+            "Location": {
+              "X": 52736,
+              "Y": -4096,
+              "Z": 32256,
+              "Room": 21,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for circuit breaker slot 1.",
+            "EMType": 41,
+            "EntityIndex": 17,
+            "Location": {
+              "X": 58880,
+              "Y": -4096,
+              "Z": 37376,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Potential new position for circuit breaker slot 2.",
+            "EMType": 41,
+            "EntityIndex": 16,
+            "Location": {
+              "X": 59904,
+              "Y": -4352,
+              "Z": 34304,
+              "Room": 21,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Potential new position for circuit breaker slot 3.",
+            "EMType": 41,
+            "EntityIndex": 15,
+            "Location": {
+              "X": 52736,
+              "Y": -4352,
+              "Z": 34304,
+              "Room": 21,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for circuit breaker slot 1.",
+            "EMType": 41,
+            "EntityIndex": 17,
+            "Location": {
+              "X": 58880,
+              "Y": -4096,
+              "Z": 38400,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Potential new position for circuit breaker slot 2.",
+            "EMType": 41,
+            "EntityIndex": 16,
+            "Location": {
+              "X": 59904,
+              "Y": -4096,
+              "Z": 33280,
+              "Room": 21,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Potential new position for circuit breaker slot 3.",
+            "EMType": 41,
+            "EntityIndex": 15,
+            "Location": {
+              "X": 52736,
+              "Y": -5120,
+              "Z": 35328,
+              "Room": 21,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for circuit breaker slot 1.",
+            "EMType": 41,
+            "EntityIndex": 17,
+            "Location": {
+              "X": 58880,
+              "Y": -4096,
+              "Z": 38400,
+              "Room": 3,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Potential new position for circuit breaker slot 2.",
+            "EMType": 41,
+            "EntityIndex": 16,
+            "Location": {
+              "X": 59904,
+              "Y": -4096,
+              "Z": 32256,
+              "Room": 21,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Potential new position for circuit breaker slot 3.",
+            "EMType": 41,
+            "EntityIndex": 15,
+            "Location": {
+              "X": 52736,
+              "Y": -5120,
+              "Z": 35328,
+              "Room": 21,
+              "Angle": 0
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for circuit breaker slot 1.",
+            "EMType": 41,
+            "EntityIndex": 17,
+            "Location": {
+              "X": 58880,
+              "Y": -4096,
+              "Z": 36352,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Potential new position for circuit breaker slot 2.",
+            "EMType": 41,
+            "EntityIndex": 16,
+            "Location": {
+              "X": 59904,
+              "Y": -4096,
+              "Z": 35328,
+              "Room": 21,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Potential new position for circuit breaker slot 3.",
+            "EMType": 41,
+            "EntityIndex": 15,
+            "Location": {
+              "X": 52736,
+              "Y": -4096,
+              "Z": 33280,
+              "Room": 21,
+              "Angle": -16384
             }
           }
         ]
