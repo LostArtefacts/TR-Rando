@@ -13,6 +13,8 @@
         Reface = 21,
         RemoveFace = 22,
         ModifyFace = 23,
+        AddStaticMesh = 24,
+        RemoveStaticMesh = 25,
 
         // Entity types 41-60
         MoveSlot = 41,
@@ -21,6 +23,9 @@
         MoveEntity = 44,
         ConvertEntity = 45,
         MoveTrap = 46,
+        ConvertEnemy = 47,
+        ModifyEntity = 48,
+        SwapSlot = 49,
 
         // Trigger types 61-80
         Trigger = 61,
@@ -29,15 +34,20 @@
         DuplicateSwitchTrigger = 64,
         CameraTriggerFunction = 65,
         ReplaceTriggerActionParameterFunction = 66,
+        MoveTrigger = 67,
+        AppendTriggerActionFunction = 68,
 
         // Portal types 81-100
         VisibilityPortal = 81,
         CollisionalPortal = 82,
 
-        // Sound types 101+
+        // Sound types 101-120
         AddSoundSource = 101,
         MoveSoundSource = 102,
         RemoveSoundSource = 103,
+
+        // Room types 121+
+        ModifyRoom = 121,
 
         // NOOP/Placeholder
         NOOP = 1000

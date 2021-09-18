@@ -1,11 +1,1342 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Red skidoo return path.",
+      "EMType": 1,
+      "Location": {
+        "X": 42425,
+        "Y": 2816,
+        "Z": 55795,
+        "Room": 53
+      },
+      "Clicks": -6,
+      "SideTexture": 1289
+    },
+    {
+      "EMType": 1,
+      "Location": {
+        "X": 42637,
+        "Y": 2816,
+        "Z": 56799,
+        "Room": 53
+      },
+      "Clicks": -5,
+      "SideTexture": 1287
+    },
+    {
+      "EMType": 1,
+      "Location": {
+        "X": 42637,
+        "Y": 2816,
+        "Z": 57823,
+        "Room": 53
+      },
+      "Clicks": -4,
+      "SideTexture": 1287
+    },
+    {
+      "EMType": 1,
+      "Location": {
+        "X": 41613,
+        "Y": 2816,
+        "Z": 57823,
+        "Room": 53
+      },
+      "Clicks": -3,
+      "SideTexture": 1290
+    },
+    {
+      "EMType": 1,
+      "Location": {
+        "X": 41613,
+        "Y": 2816,
+        "Z": 56799,
+        "Room": 53
+      },
+      "Clicks": -2,
+      "SideTexture": 1287
+    },
+    {
+      "EMType": 1,
+      "Location": {
+        "X": 41613,
+        "Y": 2816,
+        "Z": 55775,
+        "Room": 53
+      },
+      "Clicks": -1,
+      "SideTexture": 1442
+    }
+  ],
 
-  "Any": [],
+  "Any": [
+    [
+      {
+        "Comments": "Flood the first pit.",
+        "EMType": 2,
+        "RoomNumbers": [ 82 ],
+        "WaterTextures": [ 1487, 1488, 1307, 1489 ]
+      }
+    ],
 
-  "AllWithin": [],
+    [
+      {
+        "Comments": "Add some more skis.",
+        "EMType": 24,
+        "Locations": [
+          {
+            "X": 98778,
+            "Y": -1600,
+            "Z": 15862,
+            "Room": 76,
+            "Angle": 16384
+          }
+        ],
+        "Mesh": {
+          "MeshID": 21,
+          "Intensity1": 6400,
+          "Intensity2": 6400
+        }
+      }
+    ],
 
-  "OneOf": [],
+    [
+      {
+        "Comments": "Add some more skis.",
+        "EMType": 24,
+        "Locations": [
+          {
+            "X": 78414,
+            "Y": -1500,
+            "Z": 40928,
+            "Room": 11,
+            "Angle": 16384
+          }
+        ],
+        "Mesh": {
+          "MeshID": 21,
+          "Intensity1": 6400,
+          "Intensity2": 6400
+        }
+      }
+    ],
+
+    [
+      {
+        "Comments": "Flood the first skidoo jump pit.",
+        "EMType": 2,
+        "RoomNumbers": [ 50 ],
+        "WaterTextures": [ 1487, 1488, 1307, 1489 ]
+      }
+    ]
+  ],
+
+  "AllWithin": [
+    [
+      [
+        {
+          "Comments": "Raise the water in the first canyon.",
+          "EMType": 2,
+          "RoomNumbers": [ 1, 19, 20, 28 ],
+          "WaterTextures": [ 1487, 1488, 1307, 1489 ]
+        },
+
+        {
+          "Comments": "Move the eagle trigger from what will become a blocked doorway.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 59743,
+            "Y": 6144,
+            "Z": 34157,
+            "Room": 28
+          },
+          "NewLocation": {
+            "X": 82410,
+            "Y": 4096,
+            "Z": 33389,
+            "Room": 24
+          }
+        },
+
+        {
+          "Comments": "Make some blocks as we can't flood rooms 37, 38 etc because of height differences.",
+          "EMType": 1,
+          "Location": {
+            "X": 59743,
+            "Y": 6144,
+            "Z": 34157,
+            "Room": 28
+          },
+          "Clicks": -5,
+          "SideTexture": 1330,
+          "FloorTexture": 1297
+        },
+        {
+          "EMType": 1,
+          "Location": {
+            "X": 59829,
+            "Y": 6144,
+            "Z": 35325,
+            "Room": 37
+          },
+          "Clicks": -4,
+          "SideTexture": 1297
+        },
+
+        {
+          "Comments": "Tidy room 37 a little.",
+          "EMType": 22,
+          "GeometryMap": {
+            "37": {
+              "Triangles": [ 1 ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Move anything that sits in the now blocked doorway.",
+          "EMType": 43,
+          "SectorLocations": [
+            {
+              "X": 59829,
+              "Y": 6144,
+              "Z": 35325,
+              "Room": 37
+            }
+          ],
+          "TargetLocation": {
+            "X": 59955,
+            "Y": 6259,
+            "Z": 36417,
+            "Room": 37
+          }
+        },
+
+        {
+          "Comments": "Make some ladders to get out of room 34.",
+          "EMType": 0,
+          "IsNegativeZ": true,
+          "Location": {
+            "X": 73289,
+            "Y": 6656,
+            "Z": 36320,
+            "Room": 34
+          },
+          "TextureMap": {
+            "1386": {
+              "34": {
+                "Rectangles": [ 3 ]
+              }
+            }
+          }
+        },
+
+        {
+          "EMType": 0,
+          "IsNegativeZ": true,
+          "Location": {
+            "X": 74233,
+            "Y": 6529,
+            "Z": 36434,
+            "Room": 34
+          },
+          "TextureMap": {
+            "1386": {
+              "34": {
+                "Rectangles": [ 9 ]
+              }
+            }
+          }
+        },
+
+        {
+          "EMType": 0,
+          "IsNegativeZ": true,
+          "Location": {
+            "X": 75263,
+            "Y": 6016,
+            "Z": 36351,
+            "Room": 34
+          },
+          "TextureMap": {
+            "1386": {
+              "34": {
+                "Rectangles": [ 14 ]
+              }
+            }
+          }
+        },
+
+        {
+          "EMType": 0,
+          "IsNegativeZ": true,
+          "Location": {
+            "X": 76260,
+            "Y": 5268,
+            "Z": 36366,
+            "Room": 34
+          },
+          "TextureMap": {
+            "1386": {
+              "34": {
+                "Rectangles": [ 20 ]
+              }
+            }
+          }
+        },
+
+        {
+          "EMType": 0,
+          "IsNegativeZ": true,
+          "Location": {
+            "X": 77367,
+            "Y": 4438,
+            "Z": 36323,
+            "Room": 34
+          },
+          "TextureMap": {
+            "1386": {
+              "34": {
+                "Rectangles": [ 25 ]
+              }
+            },
+            "1350": {
+              "34": {
+                "Rectangles": [ 29 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Remove rectangles to make a doorway.",
+          "EMType": 22,
+          "GeometryMap": {
+            "18": {
+              "Rectangles": [ 9 ]
+            },
+            "11": {
+              "Rectangles": [ 42 ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Make collisional portals between rooms 11 & 18.",
+          "EMType": 82,
+          "Portals": {
+            "11": {
+              "18": [
+                {
+                  "X": 79103,
+                  "Y": 64,
+                  "Z": 38427
+                }
+              ]
+            },
+            "18": {
+              "11": [
+                {
+                  "X": 78527,
+                  "Y": 0,
+                  "Z": 38433
+                }
+              ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Duplicate the hut enemy triggers for the new path.",
+          "EMType": 63,
+          "BaseLocation": {
+            "X": 73132,
+            "Y": 360,
+            "Z": 35416,
+            "Room": 0
+          },
+          "Locations": [
+            {
+              "X": 80432,
+              "Y": 399,
+              "Z": 37312,
+              "Room": 18
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "Comments": "Or completely drain the first canyon.",
+          "EMType": 3,
+          "RoomNumbers": [ 13, 21, 29, 38, 39 ],
+          "WaterTextures": [ 1487, 1488, 1307, 1489 ]
+        },
+
+        {
+          "Comments": "Remove the water sound sources for above.",
+          "EMType": 103,
+          "Source": {
+            "X": 65024,
+            "Y": 7936,
+            "Z": 31232
+          }
+        },
+        {
+          "EMType": 103,
+          "Source": {
+            "X": 77312,
+            "Y": 7936,
+            "Z": 31232
+          }
+        },
+
+        {
+          "Comments": "Make a ladder to link to the current one in this area.",
+          "EMType": 0,
+          "IsPositiveX": true,
+          "Location": {
+            "X": 68147,
+            "Y": 10496,
+            "Z": 29168,
+            "Room": 13
+          },
+          "TextureMap": {
+            "1310": {
+              "13": {
+                "Rectangles": [ 51 ]
+              }
+            },
+            "1295": {
+              "13": {
+                "Rectangles": [ 52 ]
+              }
+            },
+            "1449": {
+              "1": {
+                "Rectangles": [ 41 ]
+              }
+            },
+            "1439": {
+              "1": {
+                "Rectangles": [ 41 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Add a warning for the bad slope in this area.",
+          "EMType": 24,
+          "Locations": [
+            {
+              "X": 62986,
+              "Y": 10767,
+              "Z": 29187,
+              "Room": 29,
+              "Angle": -32768
+            }
+          ],
+          "Mesh": {
+            "MeshID": 23,
+            "Intensity1": 6400,
+            "Intensity2": 6400
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the hut keyhole.",
+          "EMType": 41,
+          "EntityIndex": 90,
+          "Location": {
+            "X": 69120,
+            "Y": 1024,
+            "Z": 42496,
+            "Room": 130,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the hut keyhole.",
+          "EMType": 41,
+          "EntityIndex": 90,
+          "Location": {
+            "X": 72192,
+            "Y": 1024,
+            "Z": 42496,
+            "Room": 130,
+            "Angle": 0
+          }
+        },
+        {
+          "Comments": "Refacing for above as we want rid of the windows.",
+          "EMType": 21,
+          "TextureMap": {
+            "1356": {
+              "130": {
+                "Rectangles": [ 10 ]
+              }
+            },
+            "1480": {
+              "131": {
+                "Rectangles": [ 26 ]
+              }
+            }
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the hut keyhole.",
+          "EMType": 41,
+          "EntityIndex": 90,
+          "Location": {
+            "X": 73216,
+            "Y": 1024,
+            "Z": 42496,
+            "Room": 130,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the hut keyhole.",
+          "EMType": 41,
+          "EntityIndex": 90,
+          "Location": {
+            "X": 78336,
+            "Y": 0,
+            "Z": 46592,
+            "Room": 3,
+            "Angle": 16384
+          }
+        },
+
+        {
+          "Comments": "Add a camera for above.",
+          "EMType": 65,
+          "Camera": {
+            "X": 69237,
+            "Y": 1024,
+            "Z": 41364,
+            "Room": 12,
+            "Flags": 0
+          },
+          "AttachToLocations": [
+            {
+              "X": 78336,
+              "Y": 0,
+              "Z": 46592,
+              "Room": 3
+            }
+          ],
+          "CameraAction": {
+            "Value": 37123
+          },
+          "LookAtItem": 91
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the hut keyhole.",
+          "EMType": 41,
+          "EntityIndex": 90,
+          "Location": {
+            "X": 81408,
+            "Y": 1280,
+            "Z": 44544,
+            "Room": 26,
+            "Angle": 16384
+          }
+        },
+
+        {
+          "Comments": "Add a camera for above.",
+          "EMType": 65,
+          "Camera": {
+            "X": 69237,
+            "Y": 1024,
+            "Z": 41364,
+            "Room": 12,
+            "Flags": 0
+          },
+          "AttachToLocations": [
+            {
+              "X": 81408,
+              "Y": 1280,
+              "Z": 44544,
+              "Room": 26
+            }
+          ],
+          "CameraAction": {
+            "Value": 37123
+          },
+          "LookAtItem": 91
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the hut keyhole.",
+          "EMType": 41,
+          "EntityIndex": 90,
+          "Location": {
+            "X": 78336,
+            "Y": 0,
+            "Z": 38400,
+            "Room": 11,
+            "Angle": -32768
+          }
+        },
+
+        {
+          "Comments": "Add a camera for above.",
+          "EMType": 65,
+          "Camera": {
+            "X": 69237,
+            "Y": 1024,
+            "Z": 41364,
+            "Room": 12,
+            "Flags": 0
+          },
+          "AttachToLocations": [
+            {
+              "X": 78336,
+              "Y": 0,
+              "Z": 38400,
+              "Room": 11
+            }
+          ],
+          "CameraAction": {
+            "Value": 37123
+          },
+          "LookAtItem": 91
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the drawbridge keyhole.",
+          "EMType": 41,
+          "EntityIndex": 37,
+          "Location": {
+            "X": 18944,
+            "Y": 0,
+            "Z": 66048,
+            "Room": 63,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the drawbridge keyhole.",
+          "EMType": 41,
+          "EntityIndex": 37,
+          "Location": {
+            "X": 18944,
+            "Y": -512,
+            "Z": 68096,
+            "Room": 73,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the drawbridge keyhole.",
+          "EMType": 41,
+          "EntityIndex": 37,
+          "Location": {
+            "X": 17920,
+            "Y": -512,
+            "Z": 68096,
+            "Room": 73,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the drawbridge keyhole.",
+          "EMType": 41,
+          "EntityIndex": 37,
+          "Location": {
+            "X": 16896,
+            "Y": -512,
+            "Z": 68096,
+            "Room": 73,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the drawbridge keyhole.",
+          "EMType": 41,
+          "EntityIndex": 37,
+          "Location": {
+            "X": 15872,
+            "Y": -512,
+            "Z": 68096,
+            "Room": 73,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the drawbridge keyhole.",
+          "EMType": 41,
+          "EntityIndex": 37,
+          "Location": {
+            "X": 15872,
+            "Y": 0,
+            "Z": 66048,
+            "Room": 63,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the drawbridge keyhole.",
+          "EMType": 41,
+          "EntityIndex": 37,
+          "Location": {
+            "X": 14848,
+            "Y": 0,
+            "Z": 64000,
+            "Room": 63,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the drawbridge keyhole.",
+          "EMType": 41,
+          "EntityIndex": 37,
+          "Location": {
+            "X": 19968,
+            "Y": -2048,
+            "Z": 65024,
+            "Room": 64,
+            "Angle": 0
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the lever in room 133.",
+          "EMType": 41,
+          "EntityIndex": 102,
+          "Location": {
+            "X": 17920,
+            "Y": -1536,
+            "Z": 80384,
+            "Room": 133,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the lever in room 133.",
+          "EMType": 41,
+          "EntityIndex": 102,
+          "Location": {
+            "X": 16896,
+            "Y": -1280,
+            "Z": 78336,
+            "Room": 73,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the lever in room 133.",
+          "EMType": 41,
+          "EntityIndex": 102,
+          "Location": {
+            "X": 16896,
+            "Y": -1536,
+            "Z": 76288,
+            "Room": 73,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the lever in room 133.",
+          "EMType": 41,
+          "EntityIndex": 102,
+          "Location": {
+            "X": 15872,
+            "Y": -1536,
+            "Z": 76288,
+            "Room": 73,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the lever in room 133.",
+          "EMType": 41,
+          "EntityIndex": 102,
+          "Location": {
+            "X": 15872,
+            "Y": -1536,
+            "Z": 75264,
+            "Room": 73,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the lever in room 133.",
+          "EMType": 41,
+          "EntityIndex": 102,
+          "Location": {
+            "X": 18944,
+            "Y": -1536,
+            "Z": 75264,
+            "Room": 73,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Swap the lever and door with the pushable block near the end.",
+          "EMType": 41,
+          "EntityIndex": 102,
+          "Location": {
+            "X": 28160,
+            "Y": 2816,
+            "Z": 15872,
+            "Room": 114,
+            "Angle": 16384
+          }
+        },
+
+        {
+          "EMType": 44,
+          "EntityIndex": 85,
+          "TargetLocation": {
+            "X": 17920,
+            "Y": -1536,
+            "Z": 81408,
+            "Room": 133,
+            "Angle": 16384
+          }
+        },
+
+        {
+          "EMType": 44,
+          "EntityIndex": 101,
+          "TargetLocation": {
+            "X": 27136,
+            "Y": 3072,
+            "Z": 12800,
+            "Room": 112,
+            "Angle": 16384
+          }
+        },
+
+        {
+          "Comments": "Move anything that might be behind the pushable block.",
+          "EMType": 43,
+          "SectorLocations": [
+            {
+              "X": 17964,
+              "Y": -1536,
+              "Z": 84401,
+              "Room": 133
+            }
+          ],
+          "TargetLocation": {
+            "X": 16878,
+            "Y": -1670,
+            "Z": 84506,
+            "Room": 134
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Swap the lever and door with the pushable block near the end.",
+          "EMType": 41,
+          "EntityIndex": 102,
+          "Location": {
+            "X": 14848,
+            "Y": 13824,
+            "Z": 32256,
+            "Room": 124,
+            "Angle": -32768
+          }
+        },
+
+        {
+          "EMType": 44,
+          "EntityIndex": 101,
+          "TargetLocation": {
+            "X": 13824,
+            "Y": 13568,
+            "Z": 32256,
+            "Room": 124,
+            "Angle": 16384
+          }
+        }
+      ]
+    ]
+  ],
+
+  "OneOf": [
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the lever texture from hut.",
+          "EMType": 21,
+          "TextureMap": {
+            "1480": {
+              "131": {
+                "Rectangles": [ 38 ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential new position for the hut lever.",
+            "EMType": 41,
+            "EntityIndex": 92,
+            "Location": {
+              "X": 73216,
+              "Y": 1024,
+              "Z": 45568,
+              "Room": 131,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1483": {
+                "131": {
+                  "Rectangles": [ 40 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the hut lever.",
+            "EMType": 41,
+            "EntityIndex": 92,
+            "Location": {
+              "X": 73216,
+              "Y": 1024,
+              "Z": 44544,
+              "Room": 131,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1483": {
+                "131": {
+                  "Rectangles": [ 39 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the hut lever.",
+            "EMType": 41,
+            "EntityIndex": 92,
+            "Location": {
+              "X": 73216,
+              "Y": 1024,
+              "Z": 44544,
+              "Room": 131,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1483": {
+                "131": {
+                  "Rectangles": [ 35 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the hut lever.",
+            "EMType": 41,
+            "EntityIndex": 92,
+            "Location": {
+              "X": 72192,
+              "Y": 1024,
+              "Z": 43520,
+              "Room": 131,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1483": {
+                "131": {
+                  "Rectangles": [ 32 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the hut lever.",
+            "EMType": 41,
+            "EntityIndex": 92,
+            "Location": {
+              "X": 72192,
+              "Y": 1024,
+              "Z": 43520,
+              "Room": 131,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1483": {
+                "131": {
+                  "Rectangles": [ 25 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the hut lever.",
+            "EMType": 41,
+            "EntityIndex": 92,
+            "Location": {
+              "X": 71168,
+              "Y": 1024,
+              "Z": 44544,
+              "Room": 131,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1483": {
+                "131": {
+                  "Rectangles": [ 19 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the hut lever.",
+            "EMType": 41,
+            "EntityIndex": 92,
+            "Location": {
+              "X": 69120,
+              "Y": 1024,
+              "Z": 44544,
+              "Room": 131,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1483": {
+                "131": {
+                  "Rectangles": [ 3 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the hut lever.",
+            "EMType": 41,
+            "EntityIndex": 92,
+            "Location": {
+              "X": 69120,
+              "Y": 1024,
+              "Z": 44544,
+              "Room": 131,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1483": {
+                "131": {
+                  "Rectangles": [ 2 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the hut lever.",
+            "EMType": 41,
+            "EntityIndex": 92,
+            "Location": {
+              "X": 72192,
+              "Y": 1024,
+              "Z": 45568,
+              "Room": 131,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1483": {
+                "131": {
+                  "Rectangles": [ 31 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Tibet skip is real.",
+            "EMType": 41,
+            "EntityIndex": 92,
+            "Location": {
+              "X": 64000,
+              "Y": 512,
+              "Z": 36352,
+              "Room": 12,
+              "Angle": -16384
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Move the enemy triggers from room 86 to room 52.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 94744,
+            "Y": -5376,
+            "Z": 94604,
+            "Room": 86
+          },
+          "NewLocation": {
+            "X": 91635,
+            "Y": -2428,
+            "Z": 90624,
+            "Room": 52
+          }
+        },
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 95755,
+            "Y": -5376,
+            "Z": 94688,
+            "Room": 86
+          },
+          "NewLocation": {
+            "X": 92655,
+            "Y": -2560,
+            "Z": 90602,
+            "Room": 52
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential new position for the lever in room 86.",
+            "EMType": 41,
+            "EntityIndex": 67,
+            "Location": {
+              "X": 94720,
+              "Y": -5376,
+              "Z": 95744,
+              "Room": 86,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 86.",
+            "EMType": 41,
+            "EntityIndex": 67,
+            "Location": {
+              "X": 95744,
+              "Y": -5376,
+              "Z": 95744,
+              "Room": 86,
+              "Angle": 0
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 86.",
+            "EMType": 41,
+            "EntityIndex": 67,
+            "Location": {
+              "X": 95744,
+              "Y": -5376,
+              "Z": 95744,
+              "Room": 86,
+              "Angle": 16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 86.",
+            "EMType": 41,
+            "EntityIndex": 67,
+            "Location": {
+              "X": 95744,
+              "Y": -5376,
+              "Z": 94720,
+              "Room": 86,
+              "Angle": 16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 86.",
+            "EMType": 41,
+            "EntityIndex": 67,
+            "Location": {
+              "X": 94720,
+              "Y": -5376,
+              "Z": 94720,
+              "Room": 86,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 86.",
+            "EMType": 41,
+            "EntityIndex": 67,
+            "Location": {
+              "X": 93696,
+              "Y": -2560,
+              "Z": 93696,
+              "Room": 52,
+              "Angle": 0
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 86.",
+            "EMType": 41,
+            "EntityIndex": 67,
+            "Location": {
+              "X": 92672,
+              "Y": -2560,
+              "Z": 93696,
+              "Room": 52,
+              "Angle": 0
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 86.",
+            "EMType": 41,
+            "EntityIndex": 67,
+            "Location": {
+              "X": 94720,
+              "Y": -2560,
+              "Z": 92672,
+              "Room": 52,
+              "Angle": 16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 86.",
+            "EMType": 41,
+            "EntityIndex": 67,
+            "Location": {
+              "X": 94720,
+              "Y": -2560,
+              "Z": 91648,
+              "Room": 52,
+              "Angle": 16384
+            }
+          }
+        ]
+      ]
+    }
+  ],
 
   "Mirrored": []
 }

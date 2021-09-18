@@ -37,6 +37,7 @@ namespace TR2RandomizerCore.Randomizers
             if (!RandomizeSlots)
             {
                 _disallowedTypes.Add(EMType.MoveSlot);
+                _disallowedTypes.Add(EMType.SwapSlot);
             }
             if (!RandomizeLadders)
             {

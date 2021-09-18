@@ -695,9 +695,29 @@
             "Flags": 0
           },
           "LookAtItem": 17,
-          "AttachToItem": 20,
+          "AttachToItems": [ 20 ],
           "CameraAction": {
             "Value": 2
+          }
+        },
+
+        {
+          "Comments": "A glitched secret may be in the hidden room 152, so move it as this is no longer reachable.",
+          "EMType": 43,
+          "Types": [ 190 ],
+          "SectorLocations": [
+            {
+              "X": 46181,
+              "Y": 256,
+              "Z": 47205,
+              "Room": 152
+            }
+          ],
+          "TargetLocation": {
+            "X": 63589,
+            "Y": -4403,
+            "Z": 59493,
+            "Room": 111
           }
         }
       ],

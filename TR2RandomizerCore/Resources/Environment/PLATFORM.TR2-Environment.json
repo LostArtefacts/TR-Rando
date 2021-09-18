@@ -1,11 +1,1331 @@
 {
   "All": [],
 
-  "Any": [],
+  "Any": [
+    [
+      {
+        "Comments": "Drain the Offshore Rig rooms.",
+        "EMType": 3,
+        "RoomNumbers": [ 0, 1, 36 ],
+        "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+      },
 
-  "AllWithin": [],
+      {
+        "Comments": "Convert the Offshore Rig lever into something useful.",
+        "EMType": 45,
+        "EntityIndex": 0,
+        "NewEntityType": 143
+      },
 
-  "OneOf": [],
+      {
+        "Comments": "And move it elsewhere.",
+        "EMType": 44,
+        "EntityIndex": 0,
+        "TargetLocation": {
+          "X": 55916,
+          "Y": -1078,
+          "Z": 64005,
+          "Room": 36
+        }
+      },
+
+      {
+        "Comments": "Convert the Offshore Rig door into something useful.",
+        "EMType": 45,
+        "EntityIndex": 1,
+        "NewEntityType": 151
+      }
+    ],
+
+    [
+      {
+        "Comments": "Lower the block under the pulley.",
+        "EMType": 1,
+        "Location": {
+          "X": 36383,
+          "Y": 1024,
+          "Z": 58964,
+          "Room": 42
+        },
+        "Clicks": 2
+      },
+
+      {
+        "Comments": "Lower the block under the other pulley.",
+        "EMType": 1,
+        "Location": {
+          "X": 36301,
+          "Y": 1024,
+          "Z": 54740,
+          "Room": 42
+        },
+        "Clicks": 1
+      }
+    ],
+
+    [
+      {
+        "Comments": "Drain the pulley room.",
+        "EMType": 3,
+        "RoomNumbers": [ 43, 45 ],
+        "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+      },
+
+      {
+        "Comments": "Make a step to get out of room 45.",
+        "EMType": 1,
+        "Location": {
+          "X": 36343,
+          "Y": 4608,
+          "Z": 48664,
+          "Room": 45
+        },
+        "Clicks": -1,
+        "SideTexture": 1946,
+        "FloorTexture": 1409
+      }
+    ],
+
+    [
+      {
+        "Comments": "Ladder for blue key card pit.",
+        "EMType": 0,
+        "IsNegativeX": true,
+        "Location": {
+          "X": 20925,
+          "Y": -141,
+          "Z": 78391,
+          "Room": 52
+        },
+        "TextureMap": {
+          "1925": {
+            "52": {
+              "Rectangles": [ 14, 15 ]
+            },
+            "53": {
+              "Rectangles": [ 13, 14 ]
+            },
+            "54": {
+              "Rectangles": [ 8 ]
+            }
+          }
+        }
+      }
+    ],
+
+    [
+      {
+        "Comments": "Drain the submarine pool and adjoining rooms.",
+        "EMType": 3,
+        "RoomNumbers": [ 20, 66, 67, 68, 69, 70 ],
+        "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+      },
+
+      {
+        "Comments": "Ladder for the submarine pit.",
+        "EMType": 0,
+        "IsPositiveZ": true,
+        "Location": {
+          "X": 45556,
+          "Y": 17920,
+          "Z": 80641,
+          "Room": 70
+        },
+        "TextureMap": {
+          "1925": {
+            "20": {
+              "Rectangles": [ 41 ]
+            },
+            "67": {
+              "Rectangles": [ 42, 43, 44 ]
+            },
+            "70": {
+              "Rectangles": [ 70, 71, 72 ]
+            }
+          }
+        }
+      },
+
+      {
+        "Comments": "Another ladder for the submarine pit.",
+        "EMType": 0,
+        "IsNegativeX": true,
+        "Location": {
+          "X": 42304,
+          "Y": 17920,
+          "Z": 77293,
+          "Room": 70
+        },
+        "TextureMap": {
+          "1925": {
+            "20": {
+              "Rectangles": [ 12, 13, 14 ]
+            },
+            "67": {
+              "Rectangles": [ 12, 13, 14 ]
+            },
+            "70": {
+              "Rectangles": [ 16, 17, 18 ]
+            }
+          }
+        }
+      },
+
+      {
+        "Comments": "Make a music trigger for the big climb up.",
+        "EMType": 61,
+        "TriggerEntry": {
+          "Setup": {
+            "Value": 4
+          },
+          "TrigSetup": {
+            "Value": 16128
+          },
+          "TrigType": 0,
+          "TrigActionList": [
+            {
+              "TrigAction": 8,
+              "Parameter": 57
+            }
+          ]
+        },
+        "Locations": [
+          {
+            "X": 42304,
+            "Y": 17920,
+            "Z": 77293,
+            "Room": 70
+          }
+        ]
+      },
+
+      {
+        "Comments": "Add a camera for above.",
+        "EMType": 65,
+        "Camera": {
+          "X": 45056,
+          "Y": -2048,
+          "Z": 77294,
+          "Room": 20,
+          "Flags": 0
+        },
+        "AttachToLocations": [
+          {
+            "X": 42304,
+            "Y": 17920,
+            "Z": 77293,
+            "Room": 70
+          }
+        ],
+        "CameraAction": {
+          "Value": 37123
+        }
+      },
+
+      {
+        "Comments": "Convert a couple of Steves into land creatures.",
+        "EMType": 47,
+        "EntityIndices": [ 110, 111 ],
+        "NewEnemyType": 1,
+        "Exclusions": [ 40, 46, 52 ]
+      },
+
+      {
+        "Comments": "Adjust a secret.",
+        "EMType": 43,
+        "Types": [ 190 ],
+        "SectorLocations": [
+          {
+            "X": 48851,
+            "Y": 164,
+            "Z": 77688,
+            "Room": 20
+          }
+        ],
+        "TargetLocation": {
+          "X": 49094,
+          "Y": 17920,
+          "Z": 80844,
+          "Room": 70
+        }
+      },
+
+      {
+        "Comments": "Floors another secret.",
+        "EMType": 43,
+        "Types": [ 190 ],
+        "SectorLocations": [
+          {
+            "X": 47929,
+            "Y": 17920,
+            "Z": 76661,
+            "Room": 70
+          }
+        ]
+      },
+
+      {
+        "Comments": "Floors another secret.",
+        "EMType": 43,
+        "Types": [ 190 ],
+        "SectorLocations": [
+          {
+            "X": 43305,
+            "Y": 17920,
+            "Z": 75796,
+            "Room": 70
+          }
+        ]
+      },
+
+      {
+        "Comments": "Floors another secret.",
+        "EMType": 43,
+        "Types": [ 190 ],
+        "SectorLocations": [
+          {
+            "X": 58267,
+            "Y": -2112,
+            "Z": 85193,
+            "Room": 66
+          }
+        ],
+        "TargetLocation": {
+          "X": 60392,
+          "Y": 2560,
+          "Z": 89050,
+          "Room": 66
+        }
+      },
+
+      {
+        "Comments": "Make some blocks to get in/out of room 66.",
+        "EMType": 1,
+        "Location": {
+          "X": 60917,
+          "Y": 2560,
+          "Z": 88583,
+          "Room": 66
+        },
+        "Clicks": -7,
+        "SideTexture": 1940,
+        "FloorTexture": 1409
+      },
+
+      {
+        "EMType": 1,
+        "Location": {
+          "X": 61941,
+          "Y": 2560,
+          "Z": 88583,
+          "Room": 66
+        },
+        "Clicks": -14,
+        "SideTexture": 1940,
+        "FloorTexture": 1409
+      }
+    ],
+
+    [
+      {
+        "Comments": "Flip the switch and button types near the circuit board burners.",
+        "EMType": 45,
+        "EntityIndex": 47,
+        "NewEntityType": 103
+      },
+
+      {
+        "EMType": 45,
+        "EntityIndex": 46,
+        "NewEntityType": 93
+      }
+    ],
+
+    [
+      {
+        "Comments": "Drain one of the shallow pools towards level end.",
+        "EMType": 3,
+        "RoomNumbers": [ 3 ],
+        "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+      }
+    ],
+
+    [
+      {
+        "Comments": "Drain one of the shallow pools towards level end.",
+        "EMType": 3,
+        "RoomNumbers": [ 9 ],
+        "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+      }
+    ]
+  ],
+
+  "AllWithin": [
+    [
+      [
+        {
+          "Comments": "Potential new position for the button to kill the underwater fan.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 41472,
+            "Y": -2304,
+            "Z": 55808,
+            "Room": 39,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button to kill the underwater fan.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 41472,
+            "Y": -2304,
+            "Z": 54784,
+            "Room": 39,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button to kill the underwater fan.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 41472,
+            "Y": -2304,
+            "Z": 54784,
+            "Room": 39,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button to kill the underwater fan.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 42496,
+            "Y": -2304,
+            "Z": 54784,
+            "Room": 39,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button to kill the underwater fan.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 43520,
+            "Y": -2304,
+            "Z": 54784,
+            "Room": 39,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button to kill the underwater fan.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 43520,
+            "Y": -2304,
+            "Z": 54784,
+            "Room": 39,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the button to kill the underwater fan.",
+          "EMType": 41,
+          "EntityIndex": 69,
+          "Location": {
+            "X": 42496,
+            "Y": -2304,
+            "Z": 54784,
+            "Room": 39,
+            "Angle": 0
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Make the giant ladder a bit more interesting...?",
+          "EMType": 21,
+          "TextureMap": {
+            "1409": {
+              "57": {
+                "Rectangles": [ 27, 28, 29 ]
+              },
+              "59": {
+                "Rectangles": [ 10, 11, 12 ]
+              },
+              "58": {
+                "Rectangles": [ 8, 9, 10 ]
+              },
+              "60": {
+                "Rectangles": [ 10, 11, 12 ]
+              },
+              "61": {
+                "Rectangles": [ 13, 14, 15 ]
+              },
+              "50": {
+                "Rectangles": [ 3 ]
+              }
+            }
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make the giant ladder a bit more interesting...?",
+          "EMType": 21,
+          "TextureMap": {
+            "1925": {
+              "57": {
+                "Rectangles": [ 27, 28, 29 ]
+              },
+              "59": {
+                "Rectangles": [ 10, 11, 12 ]
+              },
+              "58": {
+                "Rectangles": [ 8, 9, 10 ]
+              },
+              "60": {
+                "Rectangles": [ 10, 11, 12 ]
+              },
+              "61": {
+                "Rectangles": [ 13, 14, 15 ]
+              },
+              "50": {
+                "Rectangles": [ 3 ]
+              }
+            }
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make the giant ladder a bit more interesting...?",
+          "EMType": 21,
+          "TextureMap": {
+            "2001": {
+              "57": {
+                "Rectangles": [ 27, 28, 29 ]
+              },
+              "59": {
+                "Rectangles": [ 10, 11, 12 ]
+              },
+              "58": {
+                "Rectangles": [ 8, 9, 10 ]
+              },
+              "60": {
+                "Rectangles": [ 10, 11, 12 ]
+              },
+              "61": {
+                "Rectangles": [ 13, 14, 15 ]
+              },
+              "50": {
+                "Rectangles": [ 3 ]
+              }
+            }
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the blue keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 90,
+          "Location": {
+            "X": 33280,
+            "Y": -5120,
+            "Z": 77312,
+            "Room": 49,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the blue keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 90,
+          "Location": {
+            "X": 20992,
+            "Y": -5120,
+            "Z": 77312,
+            "Room": 54,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the blue keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 90,
+          "Location": {
+            "X": 20992,
+            "Y": 0,
+            "Z": 77312,
+            "Room": 52,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the blue keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 90,
+          "Location": {
+            "X": 32256,
+            "Y": 0,
+            "Z": 77312,
+            "Room": 52,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the blue keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 90,
+          "Location": {
+            "X": 29184,
+            "Y": -11776,
+            "Z": 77312,
+            "Room": 55,
+            "Angle": 16384
+          }
+        },
+
+        {
+          "Comments": "Add a camera for above",
+          "EMType": 65,
+          "Camera": {
+            "X": 27136,
+            "Y": -5120,
+            "Z": 77312,
+            "Room": 54,
+            "Flags": 0
+          },
+          "LookAtItem": 89,
+          "AttachToItems": [ 90 ],
+          "CameraAction": {
+            "Value": 2
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the switch above the submarine pool.",
+          "EMType": 41,
+          "EntityIndex": 27,
+          "Location": {
+            "X": 40448,
+            "Y": -2304,
+            "Z": 77312,
+            "Room": 17,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch above the submarine pool.",
+          "EMType": 41,
+          "EntityIndex": 27,
+          "Location": {
+            "X": 40448,
+            "Y": -2304,
+            "Z": 77312,
+            "Room": 17,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch above the submarine pool.",
+          "EMType": 41,
+          "EntityIndex": 27,
+          "Location": {
+            "X": 41472,
+            "Y": -512,
+            "Z": 77312,
+            "Room": 17,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch above the submarine pool.",
+          "EMType": 41,
+          "EntityIndex": 27,
+          "Location": {
+            "X": 41472,
+            "Y": -512,
+            "Z": 77312,
+            "Room": 17,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch above the submarine pool.",
+          "EMType": 41,
+          "EntityIndex": 27,
+          "Location": {
+            "X": 41472,
+            "Y": -512,
+            "Z": 77312,
+            "Room": 17,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch above the submarine pool.",
+          "EMType": 41,
+          "EntityIndex": 27,
+          "Location": {
+            "X": 62976,
+            "Y": -2816,
+            "Z": 90624,
+            "Room": 65,
+            "Angle": 0
+          }
+        },
+
+        {
+          "Comments": "Make it a button so it's more obvious.",
+          "EMType": 45,
+          "EntityIndex": 27,
+          "NewEntityType": 103
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the circuit board slot and pushable block.",
+          "EMType": 41,
+          "EntityIndex": 55,
+          "Location": {
+            "X": 65024,
+            "Y": -3584,
+            "Z": 78336,
+            "Room": 30,
+            "Angle": 0
+          }
+        },
+
+        {
+          "EMType": 44,
+          "EntityIndex": 56,
+          "TargetLocation": {
+            "X": 65024,
+            "Y": -3584,
+            "Z": 78336,
+            "Room": 30,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the circuit board slot and pushable block.",
+          "EMType": 41,
+          "EntityIndex": 55,
+          "Location": {
+            "X": 60928,
+            "Y": -3584,
+            "Z": 78336,
+            "Room": 30,
+            "Angle": 0
+          }
+        },
+
+        {
+          "EMType": 44,
+          "EntityIndex": 56,
+          "TargetLocation": {
+            "X": 60928,
+            "Y": -3584,
+            "Z": 78336,
+            "Room": 30,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the circuit board slot and pushable block.",
+          "EMType": 41,
+          "EntityIndex": 55,
+          "Location": {
+            "X": 59904,
+            "Y": -3584,
+            "Z": 78336,
+            "Room": 30,
+            "Angle": 0
+          }
+        },
+
+        {
+          "EMType": 44,
+          "EntityIndex": 56,
+          "TargetLocation": {
+            "X": 59904,
+            "Y": -3584,
+            "Z": 78336,
+            "Room": 30,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the circuit board slot and pushable block.",
+          "EMType": 41,
+          "EntityIndex": 55,
+          "Location": {
+            "X": 59904,
+            "Y": -3584,
+            "Z": 78336,
+            "Room": 30,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "EMType": 44,
+          "EntityIndex": 56,
+          "TargetLocation": {
+            "X": 59904,
+            "Y": -3584,
+            "Z": 78336,
+            "Room": 30,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the circuit board slot and pushable block.",
+          "EMType": 41,
+          "EntityIndex": 55,
+          "Location": {
+            "X": 59904,
+            "Y": -3840,
+            "Z": 76288,
+            "Room": 30,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "EMType": 44,
+          "EntityIndex": 56,
+          "TargetLocation": {
+            "X": 59904,
+            "Y": -3840,
+            "Z": 76288,
+            "Room": 30,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the circuit board slot and pushable block.",
+          "EMType": 41,
+          "EntityIndex": 55,
+          "Location": {
+            "X": 59904,
+            "Y": -3584,
+            "Z": 75264,
+            "Room": 30,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "EMType": 44,
+          "EntityIndex": 56,
+          "TargetLocation": {
+            "X": 62976,
+            "Y": -3584,
+            "Z": 78336,
+            "Room": 30,
+            "Angle": 0
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the switch in room 31.",
+          "EMType": 41,
+          "EntityIndex": 60,
+          "Location": {
+            "X": 69120,
+            "Y": -4608,
+            "Z": 70144,
+            "Room": 31,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 31.",
+          "EMType": 41,
+          "EntityIndex": 60,
+          "Location": {
+            "X": 67072,
+            "Y": -4608,
+            "Z": 70144,
+            "Room": 31,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 31.",
+          "EMType": 41,
+          "EntityIndex": 60,
+          "Location": {
+            "X": 67072,
+            "Y": -4608,
+            "Z": 70144,
+            "Room": 31,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 31.",
+          "EMType": 41,
+          "EntityIndex": 60,
+          "Location": {
+            "X": 67072,
+            "Y": -4608,
+            "Z": 72192,
+            "Room": 31,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 31.",
+          "EMType": 41,
+          "EntityIndex": 60,
+          "Location": {
+            "X": 67072,
+            "Y": -4608,
+            "Z": 73216,
+            "Room": 31,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 31.",
+          "EMType": 41,
+          "EntityIndex": 60,
+          "Location": {
+            "X": 68096,
+            "Y": -4608,
+            "Z": 75264,
+            "Room": 31,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 31.",
+          "EMType": 41,
+          "EntityIndex": 60,
+          "Location": {
+            "X": 69120,
+            "Y": -4608,
+            "Z": 75264,
+            "Room": 31,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 31.",
+          "EMType": 41,
+          "EntityIndex": 60,
+          "Location": {
+            "X": 69120,
+            "Y": -4608,
+            "Z": 75264,
+            "Room": 31,
+            "Angle": 16384
+          }
+        }
+      ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the red keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 8,
+          "Location": {
+            "X": 47616,
+            "Y": -5120,
+            "Z": 76288,
+            "Room": 12,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 8,
+          "Location": {
+            "X": 46592,
+            "Y": -5120,
+            "Z": 75264,
+            "Room": 12,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 8,
+          "Location": {
+            "X": 43520,
+            "Y": -5120,
+            "Z": 76288,
+            "Room": 12,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 8,
+          "Location": {
+            "X": 46592,
+            "Y": -5120,
+            "Z": 79360,
+            "Room": 12,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 8,
+          "Location": {
+            "X": 46592,
+            "Y": -5120,
+            "Z": 81408,
+            "Room": 12,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 8,
+          "Location": {
+            "X": 49664,
+            "Y": -5120,
+            "Z": 76288,
+            "Room": 12,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 8,
+          "Location": {
+            "X": 46592,
+            "Y": -5120,
+            "Z": 73216,
+            "Room": 12,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 8,
+          "Location": {
+            "X": 44544,
+            "Y": -5120,
+            "Z": 73216,
+            "Room": 12,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 8,
+          "Location": {
+            "X": 41472,
+            "Y": -5120,
+            "Z": 76288,
+            "Room": 12,
+            "Angle": -16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the red keycard slot.",
+          "EMType": 41,
+          "EntityIndex": 8,
+          "Location": {
+            "X": 41472,
+            "Y": -5120,
+            "Z": 78336,
+            "Room": 12,
+            "Angle": -16384
+          }
+        }
+      ]
+    ]
+  ],
+
+  "OneOf": [
+    {
+      "Leader": [
+        {
+          "Comments": "Drain the rooms at the start.",
+          "EMType": 3,
+          "RoomNumbers": [ 41, 51, 90, 91 ],
+          "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+        },
+
+        {
+          "Comments": "Remove the water sound source for above.",
+          "EMType": 103,
+          "Source": {
+            "X": 45568,
+            "Y": 768,
+            "Z": 56832
+          }
+        },
+
+        {
+          "Comments": "Extend the ladder textures.",
+          "EMType": 21,
+          "TextureMap": {
+            "1911": {
+              "41": {
+                "Rectangles": [ 4, 5 ]
+              },
+              "90": {
+                "Rectangles": [ 4, 5 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Make a ladder to get out of room 41.",
+          "EMType": 0,
+          "IsPositiveZ": true,
+          "Location": {
+            "X": 45568,
+            "Y": 4096,
+            "Z": 59919,
+            "Room": 41
+          },
+          "TextureMap": {
+            "1911": {
+              "41": {
+                "Rectangles": [ 30, 31 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Flipmap ladder.",
+          "EMType": 0,
+          "IsPositiveZ": true,
+          "Location": {
+            "X": 45568,
+            "Y": 4096,
+            "Z": 59919,
+            "Room": 90
+          },
+          "TextureMap": {
+            "1911": {
+              "90": {
+                "Rectangles": [ 30, 31 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Convert the underwater fan into a fire.",
+          "EMType": 45,
+          "EntityIndex": 91,
+          "NewEntityType": 253
+        },
+
+        {
+          "Comments": "Put the fire on its own block.",
+          "EMType": 1,
+          "Location": {
+            "X": 45568,
+            "Y": 4096,
+            "Z": 52736,
+            "Room": 51
+          },
+          "Clicks": -4,
+          "SideTexture": 1987,
+          "FloorTexture": 2004
+        },
+
+        {
+          "Comments": "Flipmap block.",
+          "EMType": 1,
+          "Location": {
+            "X": 45568,
+            "Y": 4096,
+            "Z": 52736,
+            "Room": 91
+          },
+          "Clicks": -4,
+          "SideTexture": 1987,
+          "FloorTexture": 2004
+        },
+
+        {
+          "Comments": "Adjust the fire position and any secrets.",
+          "EMType": 43,
+          "Types": [ 190, 191, 192, 253 ],
+          "SectorLocations": [
+            {
+              "X": 45568,
+              "Y": 3072,
+              "Z": 52736,
+              "Room": 51
+            }
+          ]
+        },
+
+        {
+          "Comments": "Convert the underwater lever into a button.",
+          "EMType": 45,
+          "EntityIndex": 70,
+          "NewEntityType": 103
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential new position for the door button.",
+            "EMType": 41,
+            "EntityIndex": 70,
+            "Location": {
+              "X": 45568,
+              "Y": 768,
+              "Z": 60928,
+              "Room": 44,
+              "Angle": 0
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the door button.",
+            "EMType": 41,
+            "EntityIndex": 70,
+            "Location": {
+              "X": 46592,
+              "Y": 768,
+              "Z": 60928,
+              "Room": 44,
+              "Angle": 0
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the door button.",
+            "EMType": 41,
+            "EntityIndex": 70,
+            "Location": {
+              "X": 46592,
+              "Y": 768,
+              "Z": 60928,
+              "Room": 44,
+              "Angle": 16384
+            }
+          }
+        ]
+      ]
+    }
+  ],
 
   "Mirrored": []
 }

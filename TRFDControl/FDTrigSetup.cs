@@ -30,7 +30,12 @@ namespace TRFDControl
         {
             get
             {
-                return (byte)(Value & 0x3E00);
+                return (byte)((Value & 0x3E00) >> 9);
+            }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0x3E00));
+                Value |= (ushort)(value << 9);
             }
         }
 

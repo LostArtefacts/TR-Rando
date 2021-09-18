@@ -13,6 +13,7 @@ namespace TREnvironmentEditor.Model.Types
         public List<TR2Entities> Types { get; set; }
         public List<EMLocation> SectorLocations { get; set; }
         public EMLocation TargetLocation { get; set; }
+        public bool MatchY { get; set; }
 
         public override void ApplyToLevel(TR2Level level)
         {
@@ -31,20 +32,30 @@ namespace TREnvironmentEditor.Model.Types
             // any we are interested in, move the item to the new location. If we haven't defined a
             // manual target location, the one used to locate the sector will be used.
             List<TR2Entity> entities = level.Entities.ToList();
-            foreach (TR2Entities entityType in Types)
+            List<TR2Entity> matchingEntities;
+            if (Types == null || Types.Count == 0)
             {
-                List<TR2Entity> matchingEntities = entities.FindAll(e => e.TypeID == (short)entityType);
-                foreach (TR2Entity match in matchingEntities)
+                // We want to match anything and move it in this instance.
+                matchingEntities = entities;
+            }
+            else
+            {
+                // Only look for the types we are interested in.
+                matchingEntities = entities.FindAll(e => Types.Contains((TR2Entities)e.TypeID));
+            }
+
+            foreach (TR2Entity match in matchingEntities)
+            {
+                TRRoomSector matchSector = FDUtilities.GetRoomSector(match.X, match.Y, match.Z, match.Room, level, control);
+                // MatchY means the defined sector location's Y val should be compared with the entity's Y val, for
+                // instances where an item may be in mid-air (i.e. underwater) and another may be on the floor below it.
+                if (sectors.ContainsKey(matchSector) && (!MatchY || sectors[matchSector].Y == match.Y))
                 {
-                    TRRoomSector matchSector = FDUtilities.GetRoomSector(match.X, match.Y, match.Z, match.Room, level, control);
-                    if (sectors.ContainsKey(matchSector))
-                    {
-                        EMLocation location = TargetLocation ?? sectors[matchSector];
-                        match.X = location.X;
-                        match.Y = location.Y;
-                        match.Z = location.Z;
-                        match.Room = location.Room;
-                    }
+                    EMLocation location = TargetLocation ?? sectors[matchSector];
+                    match.X = location.X;
+                    match.Y = location.Y;
+                    match.Z = location.Z;
+                    match.Room = location.Room;
                 }
             }
         }
