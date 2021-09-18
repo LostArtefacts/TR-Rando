@@ -357,6 +357,19 @@
             "Room": 63
           }
         ]
+      },
+
+      {
+        "Comments": "Move the ZipLine Away",
+        "EMType": 44,
+        "EntityIndex": 93,
+        "TargetLocation": {
+          "X": 59338,
+          "Y": 10240,
+          "Z": 75900,
+          "Room": 59,
+          "Angle": 0
+        }
       }
     ]
   ],
