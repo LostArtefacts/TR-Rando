@@ -17,7 +17,7 @@ namespace TR2RandomizerCore.Randomizers
 {
     public class ItemRandomizer : RandomizerBase
     {
-        private static readonly List<int> _devRooms = new List<int> { 71, 29, 24 };//null;
+        private static readonly List<int> _devRooms = null;
 
         public bool IncludeKeyItems { get; set; }
         public bool IsDevelopmentModeOn { get; set; }
