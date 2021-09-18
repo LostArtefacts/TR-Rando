@@ -35,6 +35,7 @@
         CameraTriggerFunction = 65,
         ReplaceTriggerActionParameterFunction = 66,
         MoveTrigger = 67,
+        AppendTriggerActionFunction = 68,
 
         // Portal types 81-100
         VisibilityPortal = 81,

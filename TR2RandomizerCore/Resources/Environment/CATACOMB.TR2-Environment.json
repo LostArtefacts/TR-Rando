@@ -122,7 +122,6 @@
         "RoomNumbers": [ 28 ],
         "WaterTextures": [ 1345, 1446, 1387, 1389 ]
       },
-
       {
         "Comments": "Remove the water sound sources for above.",
         "EMType": 103,
@@ -180,6 +179,50 @@
         "EntityIndices": [ 61, 62, 135 ],
         "NewEnemyType": 1,
         "Exclusions": [ 40 ]
+      },
+
+      {
+        "Comments": "Make a ladder for getting down from room 89.",
+        "EMType": 0,
+        "IsNegativeZ": true,
+        "Location": {
+          "X": 19968,
+          "Y": 5376,
+          "Z": 65024,
+          "Room": 22
+        },
+        "TextureMap": {
+          "1435": {
+            "89": {
+              "Rectangles": [ 54 ]
+            }
+          },
+          "1273": {
+            "26": {
+              "Rectangles": [ 48 ]
+            }
+          }
+        }
+      },
+
+      {
+        "Comments": "This is the new Deck drop, so provide a medi.",
+        "EMType": 44,
+        "EntityIndex": 47,
+        "TargetLocation": {
+          "X": 20927,
+          "Y": -1024,
+          "Z": 64016,
+          "Room": 89,
+          "Angle": -16384
+        }
+      },
+
+      {
+        "Comments": "Make it large.",
+        "EMType": 45,
+        "EntityIndex": 47,
+        "NewEntityType": 150
       }
     ]
   ],
@@ -567,7 +610,7 @@
             "Room": 113
           },
           "Clicks": -2,
-          "SideTexture": 1425
+          "SideTexture": 1333
         },
 
         {
@@ -680,6 +723,10 @@
             },
             "TrigType": 0,
             "TrigActionList": [
+              {
+                "TrigAction": 8,
+                "Parameter": 46
+              },
               {
                 "TrigAction": 0,
                 "Parameter": 160

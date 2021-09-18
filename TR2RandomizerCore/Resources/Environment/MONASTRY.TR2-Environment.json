@@ -51,6 +51,41 @@
           }
         ]
       }
+    ],
+
+    [
+      {
+        "Comments": "Flip the ladder that leads to the main hall key.",
+        "EMType": 0,
+        "IsNegativeX": false,
+        "IsPositiveX": true,
+        "Location": {
+          "X": 65038,
+          "Y": 5376,
+          "Z": 18940,
+          "Room": 93
+        },
+        "TextureMap": {
+          "1363": {
+            "93": {
+              "Rectangles": [ 1, 2, 3 ]
+            }
+          },
+          "1747": {
+            "90": {
+              "Rectangles": [ 0 ]
+            }
+          },
+          "1351": {
+            "90": {
+              "Rectangles": [ 3 ]
+            },
+            "93": {
+              "Rectangles": [ 10 ]
+            }
+          }
+        }
+      }
     ]
   ],
 

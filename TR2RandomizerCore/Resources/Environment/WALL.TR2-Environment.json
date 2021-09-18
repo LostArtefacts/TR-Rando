@@ -357,6 +357,21 @@
             "Room": 63
           }
         ]
+      },
+
+      {
+        "Comments": "Get rid of the zip line meshes.",
+        "EMType": 25,
+        "ClearFromRooms": {
+          "1": [ 59, 60, 61, 74, 39 ]
+        }
+      },
+
+      {
+        "Comments": "Convert the zip line into a medi.",
+        "EMType": 45,
+        "EntityIndex": 93,
+        "NewEntityType": 149
       }
     ]
   ],
