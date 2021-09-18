@@ -1,7 +1,375 @@
 {
-  "All": [],
+  "All": [
+    
+  ],
 
-  "Any": [],
+  "Any": [
+    [
+      {
+        "Comments": "Xian Jumping Puzzle and Smaller Dragon Arena",
+        "EMType": 1,
+        "Location": {
+          "X": 59984,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 58960,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1511
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 57936,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1512
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 56912,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1513
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 55888,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 54864,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1511
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 53840,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1512
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 52816,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1513
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 51792,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 50768,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1511
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 49744,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1512
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 48720,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 20
+        },
+        "Clicks": -10,
+        "SideTexture": 1513
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 47696,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 20
+        },
+        "Clicks": -10,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 46672,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 20
+        },
+        "Clicks": -10,
+        "SideTexture": 1511
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 45648,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 20
+        },
+        "Clicks": -10,
+        "SideTexture": 1512
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 44624,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 20
+        },
+        "Clicks": -10,
+        "SideTexture": 1513
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 43600,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 20
+        },
+        "Clicks": -10,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 42576,
+          "Y": -7168,
+          "Z": 48712,
+          "Room": 20
+        },
+        "Clicks": -10,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 49684,
+          "Y": -7424,
+          "Z": 57724,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 45281,
+          "Y": -7424,
+          "Z": 57702,
+          "Room": 20
+        },
+        "Clicks": -8,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 43612,
+          "Y": -7168,
+          "Z": 54145,
+          "Room": 20
+        },
+        "Clicks": -8,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 52716,
+          "Y": -7168,
+          "Z": 57869,
+          "Room": 16
+        },
+        "Clicks": -10,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 51755,
+          "Y": -7168,
+          "Z": 58908,
+          "Room": 16
+        },
+        "Clicks": -1,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 52799,
+          "Y": -7168,
+          "Z": 58908,
+          "Room": 16
+        },
+        "Clicks": -1,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 53803,
+          "Y": -7168,
+          "Z": 58908,
+          "Room": 16
+        },
+        "Clicks": -1,
+        "SideTexture": 1448
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 44532,
+          "Y": -7168,
+          "Z": 53742,
+          "Room": 20
+        },
+        "Clicks": -18,
+        "SideTexture": 1426
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 45556,
+          "Y": -7168,
+          "Z": 53742,
+          "Room": 20
+        },
+        "Clicks": -18,
+        "SideTexture": 1426
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 46580,
+          "Y": -7168,
+          "Z": 52691,
+          "Room": 20
+        },
+        "Clicks": -10,
+        "SideTexture": 1448
+      }
+    ]
+  ],
 
   "AllWithin": [],
 
