@@ -321,6 +321,23 @@ namespace TRLevelReader
             };
         }
 
+        public static TR2Zone ReadZone(BinaryReader reader)
+        {
+            return new TR2Zone
+            {
+                GroundZone1Normal = reader.ReadUInt16(),
+                GroundZone2Normal = reader.ReadUInt16(),
+                GroundZone3Normal = reader.ReadUInt16(),
+                GroundZone4Normal = reader.ReadUInt16(),
+                FlyZoneNormal = reader.ReadUInt16(),
+                GroundZone1Alternate = reader.ReadUInt16(),
+                GroundZone2Alternate = reader.ReadUInt16(),
+                GroundZone3Alternate = reader.ReadUInt16(),
+                GroundZone4Alternate = reader.ReadUInt16(),
+                FlyZoneAlternate = reader.ReadUInt16()
+            };
+        }
+
         public static TRAnimatedTexture ReadAnimatedTexture(BinaryReader reader)
         {
             ushort numTextures = reader.ReadUInt16(); // Actually num textures - 1, see https://opentomb.github.io/TRosettaStone3/trosettastone.html#_animated_textures_2

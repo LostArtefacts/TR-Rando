@@ -167,10 +167,34 @@ namespace TREnvironmentEditor.Model.Types
 
             // Now shift the actual sector info
             sector.Floor += Clicks;
-            // Changing the box floor is not strictly correct as boxes can span multiple tiles.
-            // For now, leave the box as-is, which means enemies can teleport on top if raising
-            // the floor.
-            //level.Boxes[sector.BoxIndex].TrueFloor = (short)(sector.Floor * ClickSize);
+
+            // Every box has a corresponding zone containing the normals from what I understand.
+            // For now, duplicate the zone for the new box.
+            List<TR2Zone> zones = level.Zones.ToList();
+            zones.Add(level.Zones[sector.BoxIndex]);
+            level.Zones = zones.ToArray();
+
+            // Make a new box for the sector. Overlapping still needs investigation. Currently, any 
+            // raised or lowered floors will become safe spots as AI can't link to the new boxes.
+            TR2Box currentBox = level.Boxes[sector.BoxIndex];
+            TR2Box box = new TR2Box
+            {
+                XMin = (byte)((room.Info.X / SectorSize) + (sectorIndex / room.NumZSectors)),
+                ZMin = (byte)((room.Info.Z / SectorSize) + (sectorIndex % room.NumZSectors)),
+                TrueFloor = (short)(sector.Floor * ClickSize),
+                OverlapIndex = currentBox.OverlapIndex
+            };
+
+            // Only 1 tile
+            box.XMax = (byte)(box.XMin + 1);
+            box.ZMax = (byte)(box.ZMin + 1);
+
+            // Point the sector to the new box, and save it to the level
+            sector.BoxIndex = (ushort)level.NumBoxes;
+            List<TR2Box> boxes = level.Boxes.ToList();
+            boxes.Add(box);
+            level.Boxes = boxes.ToArray();
+            level.NumBoxes++;
 
             // Account for the added faces
             room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
