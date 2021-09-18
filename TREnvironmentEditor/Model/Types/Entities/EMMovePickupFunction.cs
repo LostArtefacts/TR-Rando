@@ -58,25 +58,6 @@ namespace TREnvironmentEditor.Model.Types
                     match.Room = location.Room;
                 }
             }
-
-            //foreach (TR2Entities entityType in Types)
-            //{
-            //    List<TR2Entity> matchingEntities = entities.FindAll(e => e.TypeID == (short)entityType);
-            //    foreach (TR2Entity match in matchingEntities)
-            //    {
-            //        TRRoomSector matchSector = FDUtilities.GetRoomSector(match.X, match.Y, match.Z, match.Room, level, control);
-            //        // MatchY means the defined sector location's Y val should be compared with the entity's Y val, for
-            //        // instances where an item may be in mid-air (i.e. underwater) and another may be on the floor below it.
-            //        if (sectors.ContainsKey(matchSector) && (!MatchY || sectors[matchSector].Y == match.Y))
-            //        {
-            //            EMLocation location = TargetLocation ?? sectors[matchSector];
-            //            match.X = location.X;
-            //            match.Y = location.Y;
-            //            match.Z = location.Z;
-            //            match.Room = location.Room;
-            //        }
-            //    }
-            //}
         }
     }
 }
