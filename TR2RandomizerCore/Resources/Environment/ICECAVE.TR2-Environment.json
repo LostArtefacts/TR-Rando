@@ -370,14 +370,6 @@
         "EMType": 2,
         "RoomNumbers": [ 76, 23, 88 ],
         "WaterTextures": [ 1366, 1562, 1563, 1564 ]
-      }
-    ],
-    [
-      {
-        "Comments": "Flood the talion room.",
-        "EMType": 2,
-        "RoomNumbers": [ 127 ],
-        "WaterTextures": [ 1366, 1562, 1563, 1564 ]
       },
 
       {
@@ -391,6 +383,14 @@
           "Room": 88,
           "Angle": 16384
         }
+      }
+    ],
+    [
+      {
+        "Comments": "Flood the talion room.",
+        "EMType": 2,
+        "RoomNumbers": [ 127 ],
+        "WaterTextures": [ 1366, 1562, 1563, 1564 ]
       }
     ],
     [
