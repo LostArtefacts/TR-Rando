@@ -69,6 +69,12 @@ namespace TR2RandomizerCore.Randomizers
             EMEditorMapping mapping = EMEditorMapping.Get(level.Name);
             if (mapping != null)
             {
+                if (level.IsUKBox)
+                {
+                    // The mapping is configured for EPC and Multipatch texture indices, but should
+                    // have alternate mapping defined for UKBox, so switch to it in this case.
+                    mapping.AlternateTextures();
+                }
                 ApplyMappingToLevel(level, mapping);
             }
 
@@ -117,7 +123,7 @@ namespace TR2RandomizerCore.Randomizers
             {
                 foreach (EMEditorGroupedSet mod in mapping.OneOf)
                 {
-                    EMEditorSet follower = mod.Followers[_generator.Next(0, mod.Followers.Length)];
+                    EMEditorSet follower = mod.Followers[_generator.Next(0, mod.Followers.Count)];
                     mod.ApplyToLevel(level.Data, follower, _disallowedTypes);
                 }
             }

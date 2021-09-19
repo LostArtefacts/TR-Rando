@@ -15,6 +15,7 @@ namespace TREnvironmentEditor
         public List<List<EMEditorSet>> AllWithin { get; set; }
         public List<EMEditorGroupedSet> OneOf { get; set; }
         public EMEditorSet Mirrored { get; set; }
+        public Dictionary<ushort, ushort> AlternativeTextures { get; set; }
 
         public EMEditorMapping()
         {
@@ -33,6 +34,39 @@ namespace TREnvironmentEditor
             }
 
             return null;
+        }
+
+        public void AlternateTextures()
+        {
+            if (AlternativeTextures == null)
+            {
+                return;
+            }
+
+            if (All != null)
+            {
+                All.RemapTextures(AlternativeTextures);
+            }
+            if (Any != null)
+            {
+                Any.ForEach(s => s.RemapTextures(AlternativeTextures));
+            }
+            if (AllWithin != null)
+            {
+                AllWithin.ForEach(a => a.ForEach(s => s.RemapTextures(AlternativeTextures)));
+            }
+            if (OneOf != null)
+            {
+                foreach (EMEditorGroupedSet group in OneOf)
+                {
+                    group.Leader.RemapTextures(AlternativeTextures);
+                    group.Followers.ForEach(s => s.RemapTextures(AlternativeTextures));
+                }
+            }
+            if (Mirrored != null)
+            {
+                Mirrored.RemapTextures(AlternativeTextures);
+            }
         }
     }
 }
