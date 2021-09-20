@@ -1122,7 +1122,8 @@
           },
           "Clicks": -4,
           "SideTexture": 1694,
-          "FloorTexture": 1673
+          "FloorTexture": 1673,
+          "Flags": 14
         },
 
         {
@@ -1136,7 +1137,8 @@
           },
           "Clicks": -7,
           "SideTexture": 1694,
-          "FloorTexture": 1673
+          "FloorTexture": 1673,
+          "Flags": 3
         },
 
         {
@@ -1170,7 +1172,8 @@
           },
           "Clicks": -4,
           "SideTexture": 1694,
-          "FloorTexture": 1673
+          "FloorTexture": 1673,
+          "Flags": 13
         },
 
         {
@@ -1452,7 +1455,8 @@
             "Room": 26
           },
           "Clicks": -1,
-          "SideTexture": 1735
+          "SideTexture": 1735,
+          "Flags": 1
         }
       ],
       "Followers": [

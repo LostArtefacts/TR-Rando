@@ -147,7 +147,8 @@
         },
         "Clicks": -4,
         "SideTexture": 1414,
-        "FloorTexture": 1414
+        "FloorTexture": 1414,
+        "Flags": 12
       },
 
       {

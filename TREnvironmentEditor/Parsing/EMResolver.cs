@@ -9,7 +9,7 @@ namespace TREnvironmentEditor.Parsing
     {
         protected override JsonConverter ResolveContractConverter(Type objectType)
         {
-            if (typeof(BaseEMFunction).IsAssignableFrom(objectType) && !objectType.IsAbstract)
+            if ((typeof(BaseEMFunction).IsAssignableFrom(objectType) || typeof(BaseEMCondition).IsAssignableFrom(objectType)) && !objectType.IsAbstract)
             {
                 return null;
             }

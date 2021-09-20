@@ -169,7 +169,8 @@
           },
           "Clicks": -5,
           "SideTexture": 1330,
-          "FloorTexture": 1297
+          "FloorTexture": 1297,
+          "Flags": 9
         },
         {
           "EMType": 1,
@@ -180,7 +181,8 @@
             "Room": 37
           },
           "Clicks": -4,
-          "SideTexture": 1297
+          "SideTexture": 1297,
+          "Flags": 4
         },
 
         {

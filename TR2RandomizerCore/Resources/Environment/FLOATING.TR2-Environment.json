@@ -13,7 +13,8 @@
           "Room": 152
         },
         "Clicks": -4,
-        "SideTexture": 1688
+        "SideTexture": 1688,
+        "Flags": 7
       },
       {
         "Comments": "Put another on top.",
@@ -26,7 +27,8 @@
         },
         "Clicks": -2,
         "SideTexture": 1863,
-        "FloorTexture": 1709
+        "FloorTexture": 1709,
+        "Flags": 7
       }
     ]
   ],

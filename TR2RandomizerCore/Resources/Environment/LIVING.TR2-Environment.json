@@ -33,7 +33,8 @@
         },
         "Clicks": -5,
         "SideTexture": 1589,
-        "FloorTexture": 1589
+        "FloorTexture": 1589,
+        "Flags": 11
       },
 
       {
@@ -46,7 +47,8 @@
         },
         "Clicks": -1,
         "SideTexture": 1698,
-        "FloorTexture": 1589
+        "FloorTexture": 1589,
+        "Flags": 2
       },
 
       {

@@ -158,7 +158,8 @@
           },
           "Clicks": -6,
           "SideTexture": 1718,
-          "FloorTexture": 1718
+          "FloorTexture": 1718,
+          "Flags": 6
         }
       ],
       [

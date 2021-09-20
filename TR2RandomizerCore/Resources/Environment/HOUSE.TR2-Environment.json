@@ -1,11 +1,466 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Reposition the unused maze button to the bedroom.",
+      "EMType": 44,
+      "EntityIndex": 107,
+      "TargetLocation": {
+        "X": 39424,
+        "Y": 256,
+        "Z": 60928,
+        "Room": 52,
+        "Angle": 16384
+      }
+    },
 
-  "Any": [],
+    {
+      "Comments": "Use it to turn off the alarms.",
+      "EMType": 61,
+      "TriggerEntry": {
+        "Setup": {
+          "Value": 4
+        },
+        "TrigSetup": {
+          "Value": 15872
+        },
+        "TrigType": 2,
+        "SwitchOrKeyRef": 107,
+        "TrigActionList": [
+          {
+            "TrigAction": 0,
+            "Parameter": 19
+          },
+          {
+            "TrigAction": 0,
+            "Parameter": 33
+          }
+        ]
+      },
+      "Locations": [
+        {
+          "X": 39424,
+          "Y": 256,
+          "Z": 60928,
+          "Room": 52
+        }
+      ]
+    }
+  ],
 
-  "AllWithin": [],
+  "Any": [
+    [
+      {
+        "Comments": "Remove the grandfather clock from the hall.",
+        "EMType": 25,
+        "ClearFromRooms": {
+          "27": [ 60 ]
+        }
+      },
 
-  "OneOf": [],
+      {
+        "Comments": "Move it upstairs instead.",
+        "EMType": 24,
+        "Locations": [
+          {
+            "X": 35328,
+            "Y": 0,
+            "Z": 70144,
+            "Room": 9,
+            "Angle": -16384
+          }
+        ],
+        "Mesh": {
+          "MeshID": 27,
+          "Intensity1": 4096,
+          "Intensity2": 4096
+        }
+      },
 
-  "Mirrored": []
+      {
+        "Comments": "Move the ticking sound source too.",
+        "EMType": 102,
+        "Index": 0,
+        "Relocation": {
+          "X": -3072,
+          "Y": -2560
+        }
+      },
+
+      {
+        "Comments": "Put a chaise longue where the clock used to be.",
+        "EMType": 24,
+        "Locations": [
+          {
+            "X": 38400,
+            "Y": 2560,
+            "Z": 70592,
+            "Room": 60,
+            "Angle": -16384
+          }
+        ],
+        "Mesh": {
+          "MeshID": 9,
+          "Intensity1": 4096,
+          "Intensity2": 4096
+        }
+      }
+    ],
+
+    [
+      {
+        "Comments": "Fill the kitchen sink.",
+        "EMType": 2,
+        "RoomNumbers": [ 51 ],
+        "WaterTextures": [ 93, 96, 97, 125 ]
+      }
+    ],
+
+    [
+      {
+        "Comments": "Empty the bath.",
+        "EMType": 3,
+        "RoomNumbers": [ 11 ],
+        "WaterTextures": [ 93, 96, 97, 125 ]
+      }
+    ],
+
+    [
+      {
+        "Comments": "Drain the pool.",
+        "EMType": 3,
+        "RoomNumbers": [ 13 ],
+        "WaterTextures": [ 93, 96, 97, 125 ]
+      },
+
+      {
+        "Comments": "Make a ladder to get out.",
+        "EMType": 0,
+        "IsPositiveZ": true,
+        "Location": {
+          "X": 27098,
+          "Y": 6144,
+          "Z": 92828,
+          "Room": 13
+        },
+        "TextureMap": {
+          "217": {
+            "13": {
+              "Rectangles": [ 24, 25 ]
+            }
+          }
+        }
+      }
+    ]
+  ],
+
+  "AllWithin": [
+    [
+      [
+        {
+          "Comments": "Potential new position for the gun cupboard keyhole.",
+          "EMType": 41,
+          "EntityIndex": 47,
+          "Location": {
+            "X": 34304,
+            "Y": 256,
+            "Z": 64000,
+            "Room": 52,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the gun cupboard keyhole.",
+          "EMType": 41,
+          "EntityIndex": 47,
+          "Location": {
+            "X": 35328,
+            "Y": 256,
+            "Z": 64000,
+            "Room": 52,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the gun cupboard keyhole.",
+          "EMType": 41,
+          "EntityIndex": 47,
+          "Location": {
+            "X": 35328,
+            "Y": 256,
+            "Z": 64000,
+            "Room": 52,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the gun cupboard keyhole.",
+          "EMType": 41,
+          "EntityIndex": 47,
+          "Location": {
+            "X": 30208,
+            "Y": 0,
+            "Z": 64000,
+            "Room": 52,
+            "Angle": 0
+          }
+        }
+      ]
+    ]
+  ],
+
+  "OneOf": [
+    {
+      "Leader": [
+        {
+          "Comments": "Put a stereo in Lara's bedroom.",
+          "EMType": 24,
+          "Locations": [
+            {
+              "X": 39424,
+              "Y": 256,
+              "Z": 61952,
+              "Room": 52,
+              "Angle": 16384
+            }
+          ],
+          "Mesh": {
+            "MeshID": 6,
+            "Intensity1": 7936,
+            "Intensity2": 4096
+          }
+        },
+
+        {
+          "Comments": "Amend the switch (see All) to play some nice tunes as well as turning off the alarms.",
+          "EMType": 68,
+          "Location": {
+            "X": 39424,
+            "Y": 256,
+            "Z": 60928,
+            "Room": 52
+          },
+          "ActionItems": [
+            {
+              "TrigAction": 8,
+              "Parameter": 45
+            }
+          ]
+        },
+
+        {
+          "Comments": "Default new position for the music switch (needs to move for the plants).",
+          "EMType": 41,
+          "EntityIndex": 107,
+          "Location": {
+            "X": 36352,
+            "Y": 256,
+            "Z": 62976,
+            "Room": 52,
+            "Angle": 0
+          }
+        },
+
+        {
+          "Comments": "Put plants beside the stereo.",
+          "EMType": 24,
+          "Locations": [
+            {
+              "X": 39424,
+              "Y": 256,
+              "Z": 62976,
+              "Room": 52,
+              "Angle": 16384
+            },
+            {
+              "X": 39424,
+              "Y": 256,
+              "Z": 60928,
+              "Room": 52,
+              "Angle": -32768
+            }
+          ],
+          "Mesh": {
+            "MeshID": 0,
+            "Intensity1": 7936,
+            "Intensity2": 4096
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "NOOP - use the default switch position.",
+            "EMType": 1000
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the music switch.",
+            "EMType": 41,
+            "EntityIndex": 107,
+            "Location": {
+              "X": 37376,
+              "Y": 256,
+              "Z": 62976,
+              "Room": 52,
+              "Angle": 0
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the music switch.",
+            "EMType": 41,
+            "EntityIndex": 107,
+            "Location": {
+              "X": 38400,
+              "Y": 0,
+              "Z": 59904,
+              "Room": 52,
+              "Angle": 16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the music switch.",
+            "EMType": 41,
+            "EntityIndex": 107,
+            "Location": {
+              "X": 36352,
+              "Y": 0,
+              "Z": 59904,
+              "Room": 52,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the music switch.",
+            "EMType": 41,
+            "EntityIndex": 107,
+            "Location": {
+              "X": 35328,
+              "Y": 256,
+              "Z": 60928,
+              "Room": 52,
+              "Angle": -32768
+            }
+          }
+        ]
+      ]
+    }
+  ],
+
+  "Mirrored": [
+    {
+      "Comments": "Put a chair beside the bed for the starting cutscene.",
+      "EMType": 24,
+      "Locations": [
+        {
+          "X": 33617,
+          "Y": 72,
+          "Z": 63011,
+          "Room": 52,
+          "Angle": -16384
+        }
+      ],
+      "Mesh": {
+        "MeshID": 10,
+        "Intensity1": 7936,
+        "Intensity2": 4096
+      }
+    },
+
+    {
+      "Comments": "Put a step below the chair so it's not floating.",
+      "EMType": 1,
+      "Location": {
+        "X": 33489,
+        "Y": 256,
+        "Z": 63011,
+        "Room": 52
+      },
+      "Clicks": -1,
+      "SideTexture": 151,
+      "Flags": 9
+    },
+
+    {
+      "Comments": "And some other steps beside it so it looks normal.",
+      "EMType": 1,
+      "Location": {
+        "X": 33401,
+        "Y": 256,
+        "Z": 64123,
+        "Room": 52
+      },
+      "Clicks": -1,
+      "SideTexture": 151,
+      "Flags": 8
+    },
+
+    {
+      "EMType": 1,
+      "Location": {
+        "X": 32320,
+        "Y": 256,
+        "Z": 62982,
+        "Room": 52
+      },
+      "Clicks": -1,
+      "SideTexture": 151,
+      "Flags": 3
+    },
+
+    {
+      "Comments": "Put a plant beside the fire for the camera to look at.",
+      "EMType": 24,
+      "Locations": [
+        {
+          "X": 33830,
+          "Y": 256,
+          "Z": 60672,
+          "Room": 52,
+          "Angle": 0
+        }
+      ],
+      "Mesh": {
+        "MeshID": 1,
+        "Intensity1": 7936,
+        "Intensity2": 4096
+      }
+    },
+
+    {
+      "Comments": "Move the shower shotgun animation to the other side of the bathroom.",
+      "EMType": 44,
+      "EntityIndex": 100,
+      "TargetLocation": {
+        "X": 42240,
+        "Y": 0,
+        "Z": 66048,
+        "Room": 58,
+        "Angle": 16384
+      }
+    },
+    {
+      "Comments": "And repeat for the cutscene placement.",
+      "EMType": 44,
+      "EntityIndex": 101,
+      "TargetLocation": {
+        "X": 42240,
+        "Z": 66048,
+        "Room": 58,
+        "Angle": 16384
+      }
+    }
+  ]
 }
