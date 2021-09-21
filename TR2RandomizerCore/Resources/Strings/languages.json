@@ -20,6 +20,10 @@
     "Tag": "EN"
   },
   {
+    "Name": "Finnish",
+    "Tag": "FI"
+  },
+  {
     "Name": "French",
     "Tag": "FR"
   },
@@ -32,12 +36,20 @@
     "Tag": "IT"
   },
   {
+    "Name": "Japanese",
+    "Tag": "JA"
+  },
+  {
     "Name": "Polish",
     "Tag": "PL"
   },
   {
     "Name": "Portuguese",
     "Tag": "PT"
+  },
+  {
+    "Name": "Russian",
+    "Tag": "RU"
   },
   {
     "Name": "Swedish",
