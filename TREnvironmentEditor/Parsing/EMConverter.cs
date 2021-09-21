@@ -82,6 +82,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMModifyEntityFunction>(jo.ToString(), _resolver);
                 case EMType.SwapSlot:
                     return JsonConvert.DeserializeObject<EMSwapSlotFunction>(jo.ToString(), _resolver);
+                case EMType.AdjustEntityPositions:
+                    return JsonConvert.DeserializeObject<EMAdjustEntityPositionFunction>(jo.ToString(), _resolver);
 
                 // Trigger types
                 case EMType.Trigger:

@@ -1517,12 +1517,14 @@
       "EMType": 66,
       "TrigAction": 6,
       "NewParameter": 134,
-      "Location": {
-        "X": 38138,
-        "Y": 5632,
-        "Z": 81384,
-        "Room": 76
-      }
+      "Locations": [
+        {
+          "X": 38138,
+          "Y": 5632,
+          "Z": 81384,
+          "Room": 76
+        }
+      ]
     }
   ]
 }

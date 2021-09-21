@@ -11,6 +11,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public List<EMLocation> Locations { get; set; }
         public TR2RoomStaticMesh Mesh { get; set; }
+        public bool IgnoreSectorEntities { get; set; }
 
         public override void ApplyToLevel(TR2Level level)
         {
@@ -37,7 +38,7 @@ namespace TREnvironmentEditor.Model.Types
                     }
                 }
 
-                if (!sectorFree)
+                if (!sectorFree && !IgnoreSectorEntities)
                 {
                     continue;
                 }

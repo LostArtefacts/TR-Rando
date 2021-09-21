@@ -183,6 +183,7 @@
       {
         "Comments": "Replace one of the pillars with some barrels.",
         "EMType": 24,
+        "IgnoreSectorEntities": true,
         "Locations": [
           {
             "X": 58879,
