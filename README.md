@@ -26,8 +26,8 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
 * JW-dev/Bahamete - For initial work on script randomization
 * Anopob - For various contributions and bug fixes!
 * Jimmy Beon - Providing us with an excellent assortment of custom textures for use in rando.
-* Topixtor - For endless testing to fix issues such as the opera house/barkhang entity freeze.
-* Lilly Jericho - For endless testing to fix issues such as the opera house/barkhang entity freeze, and providing great continuous feedback. Lilly was also a coordinator of the huge translation effort by the community, with a special thanks to the following translators:
+* Topixtor - For endless testing to fix issues such as the opera house/barkhang entity freeze and mirrored levels.
+* Lilly Jericho - For endless testing to fix issues such as the opera house/barkhang entity freeze, mirrored levels, and providing great continuous feedback. Lilly was also a coordinator of the huge translation effort by the community, with a special thanks to the following translators:
     * Lilly Jericho (German)
     * Erackk (Croatian)
     * LeonHeart & Hedteur (French)
@@ -37,6 +37,9 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
     * Dokus & BeardedBogle (Dutch)
     * DJ_Full (Polish)
     * Jumica & Fuse (Portuguese)
+    * ChiburuTV (Japanese)
+    * Fetch (Russian)
+    * Riku (Finnish)
 
 ![TR2 Rando UI](https://github.com/DanzaG/TR2-Rando/blob/master/UI.png)
 
@@ -55,7 +58,7 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
 * Text - Randomizes in-game text, such as weapon and level names. Including a variety of languages to choose from.
 * Night Mode - Darkens a chosen number of levels to give a night-time effect.
 * Starting Position - Choose to have Lara start levels in different positions and facing a different direction.
-* Environment - Modifies the level environment, such as mixing up water levels and moving keyholes.
+* Environment - Modifies the level environment, such as mixing up water levels, mirroring levels and moving keyholes.
 
 # Download
 https://github.com/DanzaG/TR2-Rando/releases/download/V1.3.2/V1.3.2.zip
