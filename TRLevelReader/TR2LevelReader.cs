@@ -299,16 +299,16 @@ namespace TRLevelReader
             //Overlaps & Zones
             level.NumOverlaps = reader.ReadUInt32();
             level.Overlaps = new ushort[level.NumOverlaps];
-            level.Zones = new short[10 * level.NumBoxes];
+            level.Zones = new TR2Zone[level.NumBoxes];
 
             for (int i = 0; i < level.NumOverlaps; i++)
             {
                 level.Overlaps[i] = reader.ReadUInt16();
             }
 
-            for (int i = 0; i < level.Zones.Count(); i++)
+            for (int i = 0; i < level.NumBoxes; i++)
             {
-                level.Zones[i] = reader.ReadInt16();
+                level.Zones[i] = TR2FileReadUtilities.ReadZone(reader);
             }
 
             //Animated Textures - the data stores the total number of ushorts to read (NumAnimatedTextures)

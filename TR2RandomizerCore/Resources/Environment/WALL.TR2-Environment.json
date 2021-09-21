@@ -372,6 +372,39 @@
         "EMType": 45,
         "EntityIndex": 93,
         "NewEntityType": 149
+      },
+
+      {
+        "Comments": "Change the camera trigger to look at Lara instead of the zip line.",
+        "EMType": 66,
+        "TrigAction": 6,
+        "NewParameter": 20,
+        "Locations": [
+          {
+            "X": 61977,
+            "Y": 25612,
+            "Z": 75341,
+            "Room": 63
+          },
+          {
+            "X": 62953,
+            "Y": 25856,
+            "Z": 75262,
+            "Room": 63
+          },
+          {
+            "X": 63993,
+            "Y": 25856,
+            "Z": 75147,
+            "Room": 63
+          },
+          {
+            "X": 64969,
+            "Y": 25741,
+            "Z": 75159,
+            "Room": 63
+          }
+        ]
       }
     ]
   ],
@@ -814,5 +847,18 @@
     }
   ],
 
-  "Mirrored": []
+  "Mirrored": [
+    {
+      "Comments": "Reposition the wall blades.",
+      "EMType": 50,
+      "EntityType": 81,
+      "RoomMap": {
+        "48": {
+          "0": {
+            "Angle": -32768
+          }
+        }
+      }
+    }
+  ]
 }

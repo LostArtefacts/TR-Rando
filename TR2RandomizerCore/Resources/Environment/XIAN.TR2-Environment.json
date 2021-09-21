@@ -1,7 +1,5 @@
 {
-  "All": [
-    
-  ],
+  "All": [],
 
   "Any": [
     [
@@ -15,7 +13,8 @@
           "Room": 16
         },
         "Clicks": -10,
-        "SideTexture": 1448
+        "SideTexture": 1448,
+        "Flags": 5
       },
 
       {
@@ -28,7 +27,8 @@
           "Room": 16
         },
         "Clicks": -10,
-        "SideTexture": 1511
+        "SideTexture": 1511,
+        "Flags": 5
       },
 
       {
@@ -41,7 +41,8 @@
           "Room": 16
         },
         "Clicks": -10,
-        "SideTexture": 1512
+        "SideTexture": 1512,
+        "Flags": 5
       },
 
       {
@@ -54,7 +55,8 @@
           "Room": 16
         },
         "Clicks": -10,
-        "SideTexture": 1513
+        "SideTexture": 1513,
+        "Flags": 5
       },
 
       {
@@ -67,7 +69,8 @@
           "Room": 16
         },
         "Clicks": -10,
-        "SideTexture": 1448
+        "SideTexture": 1448,
+        "Flags": 5
       },
 
       {
@@ -80,7 +83,8 @@
           "Room": 16
         },
         "Clicks": -10,
-        "SideTexture": 1511
+        "SideTexture": 1511,
+        "Flags": 5
       },
 
       {
@@ -93,7 +97,8 @@
           "Room": 16
         },
         "Clicks": -10,
-        "SideTexture": 1512
+        "SideTexture": 1512,
+        "Flags": 5
       },
 
       {
@@ -106,7 +111,8 @@
           "Room": 16
         },
         "Clicks": -10,
-        "SideTexture": 1513
+        "SideTexture": 1513,
+        "Flags": 5
       },
 
       {
@@ -119,7 +125,8 @@
           "Room": 16
         },
         "Clicks": -10,
-        "SideTexture": 1448
+        "SideTexture": 1448,
+        "Flags": 5
       },
 
       {
@@ -132,7 +139,8 @@
           "Room": 16
         },
         "Clicks": -10,
-        "SideTexture": 1511
+        "SideTexture": 1511,
+        "Flags": 5
       },
 
       {
@@ -145,7 +153,8 @@
           "Room": 16
         },
         "Clicks": -10,
-        "SideTexture": 1512
+        "SideTexture": 1512,
+        "Flags": 5
       },
 
       {
@@ -158,7 +167,8 @@
           "Room": 20
         },
         "Clicks": -10,
-        "SideTexture": 1513
+        "SideTexture": 1513,
+        "Flags": 5
       },
 
       {
@@ -171,7 +181,8 @@
           "Room": 20
         },
         "Clicks": -10,
-        "SideTexture": 1448
+        "SideTexture": 1448,
+        "Flags": 5
       },
 
       {
@@ -184,7 +195,8 @@
           "Room": 20
         },
         "Clicks": -10,
-        "SideTexture": 1511
+        "SideTexture": 1511,
+        "Flags": 5
       },
 
       {
@@ -197,7 +209,8 @@
           "Room": 20
         },
         "Clicks": -10,
-        "SideTexture": 1512
+        "SideTexture": 1512,
+        "Flags": 5
       },
 
       {
@@ -210,7 +223,8 @@
           "Room": 20
         },
         "Clicks": -10,
-        "SideTexture": 1513
+        "SideTexture": 1513,
+        "Flags": 5
       },
 
       {
@@ -223,7 +237,8 @@
           "Room": 20
         },
         "Clicks": -10,
-        "SideTexture": 1448
+        "SideTexture": 1448,
+        "Flags": 5
       },
 
       {
@@ -236,7 +251,8 @@
           "Room": 20
         },
         "Clicks": -10,
-        "SideTexture": 1448
+        "SideTexture": 1448,
+        "Flags": 5
       },
 
       {
@@ -339,8 +355,37 @@
           "Z": 53742,
           "Room": 20
         },
-        "Clicks": -18,
-        "SideTexture": 1426
+        "Clicks": -6,
+        "SideTexture": 1425,
+        "Flags": 5
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 44532,
+          "Y": -7168,
+          "Z": 53742,
+          "Room": 20
+        },
+        "Clicks": -6,
+        "SideTexture": 1427,
+        "Flags": 7
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 44532,
+          "Y": -7168,
+          "Z": 53742,
+          "Room": 20
+        },
+        "Clicks": -6,
+        "SideTexture": 1426,
+        "Flags": 7
       },
 
       {
@@ -352,8 +397,37 @@
           "Z": 53742,
           "Room": 20
         },
-        "Clicks": -18,
-        "SideTexture": 1426
+        "Clicks": -6,
+        "SideTexture": 1425,
+        "Flags": 13
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 45556,
+          "Y": -7168,
+          "Z": 53742,
+          "Room": 20
+        },
+        "Clicks": -6,
+        "SideTexture": 1427,
+        "Flags": 13
+      },
+
+      {
+        "Comments": "",
+        "EMType": 1,
+        "Location": {
+          "X": 45556,
+          "Y": -7168,
+          "Z": 53742,
+          "Room": 20
+        },
+        "Clicks": -6,
+        "SideTexture": 1426,
+        "Flags": 13
       },
 
       {
@@ -367,13 +441,1726 @@
         },
         "Clicks": -10,
         "SideTexture": 1448
+      },
+
+      {
+        "Comments": "Remove the old floor and ceiling for a couple of pillars that hit the ceiling.",
+        "EMType": 22,
+        "GeometryMap": {
+          "20": {
+            "Rectangles": [ 81, 82, 110, 111 ]
+          }
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Make some blocks before the arena.",
+        "EMType": 1,
+        "Location": {
+          "X": 53834,
+          "Y": -9216,
+          "Z": 61058,
+          "Room": 2
+        },
+        "Clicks": -5,
+        "SideTexture": 1417,
+        "Flags": 7
+      },
+
+      {
+        "EMType": 1,
+        "Location": {
+          "X": 53834,
+          "Y": -9216,
+          "Z": 61058,
+          "Room": 2
+        },
+        "Clicks": -5,
+        "SideTexture": 1416,
+        "Flags": 7
+      },
+
+      {
+        "EMType": 1,
+        "Location": {
+          "X": 53834,
+          "Y": -9216,
+          "Z": 61058,
+          "Room": 2
+        },
+        "Clicks": -5,
+        "SideTexture": 1420,
+        "Flags": 7
+      },
+
+      {
+        "EMType": 1,
+        "Location": {
+          "X": 51702,
+          "Y": -9216,
+          "Z": 60953,
+          "Room": 2
+        },
+        "Clicks": -5,
+        "SideTexture": 1417,
+        "Flags": 13
+      },
+
+      {
+        "EMType": 1,
+        "Location": {
+          "X": 51702,
+          "Y": -9216,
+          "Z": 60953,
+          "Room": 2
+        },
+        "Clicks": -5,
+        "SideTexture": 1416,
+        "Flags": 13
+      },
+
+      {
+        "EMType": 1,
+        "Location": {
+          "X": 51702,
+          "Y": -9216,
+          "Z": 60953,
+          "Room": 2
+        },
+        "Clicks": -5,
+        "SideTexture": 1420,
+        "Flags": 13
+      },
+
+      {
+        "Comments": "Remove the old floor and ceiling for above.",
+        "EMType": 22,
+        "GeometryMap": {
+          "2": {
+            "Rectangles": [ 6, 7, 60, 61 ]
+          }
+        }
+      },
+
+      {
+        "Comments": "Reposition the unused Floater door to the arena.",
+        "EMType": 44,
+        "EntityIndex": 41,
+        "TargetLocation": {
+          "X": 52736,
+          "Y": -9216,
+          "Z": 61952,
+          "Room": 2,
+          "Angle": 0
+        }
+      },
+
+      {
+        "Comments": "Convert it into a different door type.",
+        "EMType": 45,
+        "EntityIndex": 41,
+        "NewEntityType": 110
+      },
+
+      {
+        "Comments": "Activate the ornate doors so they are always open.",
+        "EMType": 48,
+        "EntityIndex": 3,
+        "Flags": 15872
+      },
+
+      {
+        "EMType": 48,
+        "EntityIndex": 4,
+        "Flags": 15872
+      },
+
+      {
+        "Comments": "Delete the old mystic plaque trigger.",
+        "EMType": 62,
+        "Locations": [
+          {
+            "X": 54766,
+            "Y": -9216,
+            "Z": 67062,
+            "Room": 1
+          }
+        ]
+      },
+
+      {
+        "Comments": "Make a new trigger to open the arena door.",
+        "EMType": 61,
+        "TriggerEntry": {
+          "Setup": {
+            "Value": 4
+          },
+          "TrigSetup": {
+            "Value": 15872
+          },
+          "TrigType": 3,
+          "SwitchOrKeyRef": 5,
+          "TrigActionList": [
+            {
+              "TrigAction": 0,
+              "Parameter": 41
+            }
+          ]
+        },
+        "Locations": [
+          {
+            "X": 54766,
+            "Y": -9216,
+            "Z": 67062,
+            "Room": 1
+          }
+        ]
+      },
+
+      {
+        "Comments": "A music trigger after getting through the door.",
+        "EMType": 61,
+        "TriggerEntry": {
+          "Setup": {
+            "Value": 4
+          },
+          "TrigSetup": {
+            "Value": 15872
+          },
+          "TrigType": 0,
+          "TrigActionList": [
+            {
+              "TrigAction": 8,
+              "Parameter": 53
+            }
+          ]
+        },
+        "Locations": [
+          {
+            "X": 52737,
+            "Y": -9216,
+            "Z": 60942,
+            "Room": 2
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "Comments": "NOOP - added to give a chance of vanilla DL (no arena and no door shifting).",
+        "EMType": 1000
       }
     ]
   ],
 
   "AllWithin": [],
 
-  "OneOf": [],
+  "ConditionalAllWithin": [
+    {
+      "Condition": {
+        "Comments": "Check if door 41 has been converted (and hence moved to the arena). If so, move the plaque slot into room 2; otherwise, just move the plaque slot around room 1.",
+        "ConditionType": 0,
+        "EntityIndex": 41,
+        "EntityType": 110
+      },
+      "OnTrue": [
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 52736,
+              "Y": -9216,
+              "Z": 66048,
+              "Room": 2,
+              "Angle": 0
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 51712,
+              "Y": -9216,
+              "Z": 66048,
+              "Room": 2,
+              "Angle": 0
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 51712,
+              "Y": -9216,
+              "Z": 66048,
+              "Room": 2,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 51712,
+              "Y": -9216,
+              "Z": 65024,
+              "Room": 2,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 51712,
+              "Y": -9216,
+              "Z": 64000,
+              "Room": 2,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 51712,
+              "Y": -9216,
+              "Z": 62976,
+              "Room": 2,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 51712,
+              "Y": -9216,
+              "Z": 61952,
+              "Room": 2,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 51712,
+              "Y": -9216,
+              "Z": 61952,
+              "Room": 2,
+              "Angle": -32768
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 53760,
+              "Y": -9216,
+              "Z": 61952,
+              "Room": 2,
+              "Angle": -32768
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 53760,
+              "Y": -9216,
+              "Z": 61952,
+              "Room": 2,
+              "Angle": 16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 53760,
+              "Y": -9216,
+              "Z": 62976,
+              "Room": 2,
+              "Angle": 16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 53760,
+              "Y": -9216,
+              "Z": 64000,
+              "Room": 2,
+              "Angle": 16384
+            }
+          }
+        ]
+      ],
+      "OnFalse": [
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 54784,
+              "Y": -8960,
+              "Z": 70144,
+              "Room": 1,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 54784,
+              "Y": -8960,
+              "Z": 71168,
+              "Room": 1,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 54784,
+              "Y": -8960,
+              "Z": 72192,
+              "Room": 1,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 54784,
+              "Y": -8960,
+              "Z": 72192,
+              "Room": 1,
+              "Angle": 0
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 54784,
+              "Y": -8960,
+              "Z": 72192,
+              "Room": 1,
+              "Angle": 16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 54784,
+              "Y": -8960,
+              "Z": 61952,
+              "Room": 1,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 54784,
+              "Y": -8960,
+              "Z": 60928,
+              "Room": 1,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 54784,
+              "Y": -8960,
+              "Z": 59904,
+              "Room": 1,
+              "Angle": -16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 54784,
+              "Y": -8960,
+              "Z": 59904,
+              "Room": 1,
+              "Angle": -32768
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 54784,
+              "Y": -8960,
+              "Z": 59904,
+              "Room": 1,
+              "Angle": 16384
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 55808,
+              "Y": -8960,
+              "Z": 64000,
+              "Room": 1,
+              "Angle": -32768
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for slot 1.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 55808,
+              "Y": -8960,
+              "Z": 68096,
+              "Room": 1,
+              "Angle": 0
+            }
+          }
+        ]
+      ]
+    }
+  ],
+
+  "OneOf": [
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the lever texture from room 3.",
+          "EMType": 21,
+          "TextureMap": {
+            "1428": {
+              "3": {
+                "Rectangles": [ 225 ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 71168,
+              "Y": -9472,
+              "Z": 75264,
+              "Room": 3,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 192 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 69120,
+              "Y": -9472,
+              "Z": 75264,
+              "Room": 3,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 96 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 74240,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 38 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 72192,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 28 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 72192,
+              "Room": 3,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 30 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 67072,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 12 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 2 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 4 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 70144,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 100 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 75264,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 311 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 75264,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 313 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 77312,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 398 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 66048,
+              "Room": 3,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 493 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 68096,
+              "Room": 3,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 497 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 68096,
+              "Room": 3,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 460 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 73216,
+              "Room": 3,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 503 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 75264,
+              "Room": 3,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 507 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 75264,
+              "Room": 3,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 489 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 76288,
+              "Y": -9472,
+              "Z": 75264,
+              "Room": 3,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 394 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 75264,
+              "Y": -9472,
+              "Z": 78360,
+              "Room": 17,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "17": {
+                  "Rectangles": [ 44 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 72192,
+              "Y": -9472,
+              "Z": 79384,
+              "Room": 17,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "17": {
+                  "Rectangles": [ 16 ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the second lever texture from room 3.",
+          "EMType": 21,
+          "TextureMap": {
+            "1415": {
+              "3": {
+                "Rectangles": [ 234 ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 70144,
+              "Y": -9472,
+              "Z": 75264,
+              "Room": 3,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 145 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 75264,
+              "Room": 3,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 44 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 75264,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 42 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 73216,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 34 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 68096,
+              "Room": 3,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 18 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 68096,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 16 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 68096,
+              "Y": -9472,
+              "Z": 66048,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 8 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 69120,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 48 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 71168,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 149 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 71168,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 194 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 76288,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 353 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 443 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 65024,
+              "Room": 3,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 491 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 67072,
+              "Room": 3,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 495 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 72192,
+              "Room": 3,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 477 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 72192,
+              "Room": 3,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 501 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 78336,
+              "Y": -9472,
+              "Z": 74240,
+              "Room": 3,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 505 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 77312,
+              "Y": -9472,
+              "Z": 75264,
+              "Room": 3,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 439 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 75264,
+              "Y": -9472,
+              "Z": 75264,
+              "Room": 3,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 349 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 75264,
+              "Y": -9472,
+              "Z": 75264,
+              "Room": 3,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "3": {
+                  "Rectangles": [ 345 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the second lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 71168,
+              "Y": -9472,
+              "Z": 78360,
+              "Room": 17,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "17": {
+                  "Rectangles": [ 2 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the lever in room 3.",
+            "EMType": 41,
+            "EntityIndex": 22,
+            "Location": {
+              "X": 74240,
+              "Y": -9472,
+              "Z": 79384,
+              "Room": 17,
+              "Angle": 0
+            }
+          },
+
+          {
+            "Comments": "Add a lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1436": {
+                "17": {
+                  "Rectangles": [ 34 ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    }
+  ],
 
   "Mirrored": []
 }

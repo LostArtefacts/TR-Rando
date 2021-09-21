@@ -301,13 +301,6 @@ namespace TREnvironmentEditor.Model.Types
                     }
                     break;
 
-                // These look odd if flipped, so reset to standard
-                case TR2Entities.WallMountedKnifeBlade:
-                    if (entity.Angle == _north)
-                    {
-                        entity.Angle = _south;
-                    }
-                    break;
                 case TR2Entities.StatueWithKnifeBlade:
                     if (entity.Angle == _east)
                     {

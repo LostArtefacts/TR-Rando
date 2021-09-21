@@ -247,7 +247,7 @@ namespace TRLevelReader.Model
         /// <summary>
         /// NumBoxes * 20 bytes (double check this)
         /// </summary>
-        public short[] Zones { get; set; }
+        public TR2Zone[] Zones { get; set; }
 
         /// <summary>
         /// 4 bytes
@@ -380,7 +380,7 @@ namespace TRLevelReader.Model
                     foreach (TR2Box box in Boxes) { writer.Write(box.Serialize()); }
                     writer.Write(NumOverlaps);
                     foreach (ushort overlap in Overlaps) { writer.Write(overlap); }
-                    foreach (short zone in Zones) { writer.Write(zone); }
+                    foreach (TR2Zone zone in Zones) { writer.Write(zone.Serialize()); }
                     writer.Write(NumAnimatedTextures);
                     writer.Write((ushort)AnimatedTextures.Length);
                     foreach (TRAnimatedTexture texture in AnimatedTextures) { writer.Write(texture.Serialize()); }

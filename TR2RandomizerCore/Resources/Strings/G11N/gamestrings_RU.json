@@ -1,0 +1,1072 @@
+{
+  "GlobalStrings": [
+    {
+      "GroupedStrings": [
+        {
+          "33": [
+            "Bengal'skiy ogon'",
+            "Zazhigalka",
+            "Oslepitel'",
+            "Mertsayushchiy ogonok",
+            "Mini-plamya",
+            "Oke if like this?"
+          ],
+          "43": [
+            "Bengal'skiy ogon'",
+            "Zazhigalka",
+            "Oslepitel'",
+            "Mertsayushchiy ogonok",
+            "Mini-plamya",
+            "Oke if like this?"
+          ]
+        },
+        {
+          "36": [
+            "Strelyalki",
+            "Ruchnyye pistolety",
+            "Staryye vernyye",
+            "Piu-piu",
+            "Ya voz'mu dva"
+          ],
+          "44": [
+            "Oboymy dlya strelyalok",
+            "Oboymy dlya ruchnykh pistoletov",
+            "Oboymy dlya starykh vernykh",
+            "Oboymy dlya piu piu",
+            "Oboymy dlya ya voz'mu dva"
+          ]
+        },
+        {
+          "37": [
+            "Drobovichok",
+            "Mushket",
+            "Staryy vernyy",
+            "Nasmotrelsya?",
+            "Potroshitel' kishkov"
+          ],
+          "45": [
+            "Patrony dlya drobovichka",
+            "Patrony dlya mushketa",
+            "Patrony dlya starogo vernogo",
+            "Patrony dlya nasmotrelsya?",
+            "Patrony dlya potroshitelya kishkov"
+          ]
+        },
+        {
+          "38": [
+            "Avtomaty",
+            "Magnumy",
+            "Super-pistolety",
+            "P'yer poteryal eto",
+            "Vozvrashcheniye k P'yeru"
+          ],
+          "46": [
+            "Oboymy dlya avtomatov",
+            "Oboymy dlya magnumov",
+            "Oboymy dlya super-pistoletov",
+            "Oboymy dlya P'yer poteryal eto",
+            "Oboymy dlya vozvrashcheniye k P'yeru"
+          ]
+        },
+        {
+          "39": [
+            "UwUzi",
+            "Drrrrrrrrrr",
+            "ChuvstvuyuSil'neye pushki",
+            "Boyepripasy Vampira",
+            "1000 vystrelov spustya..."
+          ],
+          "47": [
+            "Oboymy dlya UwUzi",
+            "Oboymy dlya drrrrrrrrrr",
+            "Oboymy dlya ChuvstvuyuSil'neye pushek",
+            "Oboymy dlya boyepripasov Vampira",
+            "Oboymy dlya 1000 vystrelov spustya"
+          ]
+        },
+        {
+          "40": [
+            "Tik-tik-tik",
+            "Terpeniye",
+            "Strelomot",
+            "Bespoleznyy",
+            "Bessmyslennyy",
+            "Pochemu?",
+            "Net!",
+            "Zubochistkomot",
+            "Kopeynaya ustanovka"
+          ],
+          "48": [
+            "Tik-tik-tiky",
+            "Boyepripasy dlya terpeniya",
+            "Strely",
+            "Bespoleznyye boyepripasy",
+            "Bessmyslennyye boyepripasy",
+            "Boyepripasy dlya pochemu",
+            "Boyepripasy dlya net",
+            "Zubochistki",
+            "Kop'ya"
+          ]
+        },
+        {
+          "41": [
+            "MP3 Pleyer",
+            "MPEG",
+            "Ne MP5",
+            "Bol'shoye drrrrrrrrrr"
+          ],
+          "49": [
+            "Oboymy dlya MP3 pleyera",
+            "Oboymy dlya MPEG",
+            "Oboymy dlya ne MP5",
+            "Oboymy dlya bol'shogo drrrrrrrrrr"
+          ]
+        },
+        {
+          "42": [
+            "Granatnyy blaster",
+            "Vzryvchataya dostavka",
+            "Vrazheskaya zharovnya",
+            "Snaryadnaya ustanovka",
+            "Ananasomot",
+            "Bol'shoy khlopok",
+            "Bol'shoy bum",
+            "Vzorvi eto!"
+          ],
+          "50": [
+            "Granaty",
+            "Vzryvchatka",
+            "Ognennyye shary",
+            "Snaryady",
+            "Ananasy",
+            "Bol'shiye khlopki",
+            "Bol'shiye bumy",
+            "Boyepripasy dlya vzorvi eto!"
+          ]
+        },
+        {
+          "51": [
+            "Kroshechnaya aptechka",
+            "Kroshechnaya aptechka",
+            "Malen'kaya aptechka",
+            "Kompaktnaya aptechka",
+            "Aptechka-brosh'",
+            "Detskiy bo bo remontnik"
+          ],
+          "52": [
+            "Gigantic Medi Pack",
+            "Gromadnaya aptechka",
+            "Titanicheskaya aptechka",
+            "Massivnaya aptechka",
+            "Ogromennaya aptechka",
+            "Bol'shoy bo bo remontnik"
+          ]
+        }
+      ],
+      "StandaloneStrings": {
+        "2": [
+          "VESHCHI",
+          "SHMOTKI",
+          "PIKAPY",
+          "DOBYCHA",
+          "KHLAM",
+          "BLESTYASHKI",
+          "MOYA PRELEST'"
+        ],
+        "3": [
+          "LARA UMERLA",
+          "POPROBUYTE ZANOVO?",
+          "POPROBUYTE ZANOVO? PROSTO POLUCHI KHOROSHEYE",
+          "LUCHSHE UDACHA V SLEDUYUSHCHIY RAZ",
+          "POPYTAYTES' LUCHSHE",
+          "YAROSTNYY VYKHOD",
+          "NLNMAS sleduyushchiy?"
+        ],
+        "35": [
+          "Staty",
+          "Zhiznenno vazhnyye staty",
+          "Schotchik khrusta",
+          "NET APTECHEK RAZRESHENO!",
+          "Otslezhivatel' sekretov!"
+        ],
+        "57": [
+          "Pomest'ye Kroft",
+          "Shtab-kvartyra Kor Dizayna",
+          "Shtab-kvartyra TR2Rando",
+          "Raskopki Lary",
+          "Kholodil'nik Uinstona",
+          "Razmorozka Uinstona!"
+        ]
+      }
+    },
+    {
+      "StandaloneStrings": {
+        "15": [
+          "- NULEVOY -",
+          "- NICHEGO ZDES' -",
+          "- NEOPREDELENNYY -",
+          "- OI, ETOT SLOT PUSTOY"
+        ]
+      }
+    }
+  ],
+
+  "LevelStrings": {
+    "WALL.TR2": {
+      "Names": [
+        "Kitay chast' 1",
+        "Fal'shivaya stena",
+        "Uzhasnaya stena",
+        "Kirpichnaya stena",
+        "Stena memov",
+        "Ne vidno iz kosmosa",
+        "Pochti Sian'",
+        "Ukrytiye T-Reksa",
+        "Zateryannaya dolina 2.0",
+        "Put' k Sianyu"
+      ],
+      "Keys": {
+        "0": [
+          "Klyuch ot komnaty 4",
+          "Klyuch ot memedoma",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 1",
+          "Klyuch ?",
+          "Etot klyuch",
+          "Mozhet klyuch 1?",
+          "Mozhet klyuch 2?"
+        ],
+        "1": [
+          "Pauchiy klyuch",
+          "Khrustyashchiy klyuch",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 2",
+          "Klyuch B",
+          "Etot klyuch",
+          "Mozhet klyuch 1?",
+          "Mozhet klyuch 2?",
+          "Yeshcho klyuch O.o"
+        ]
+      }
+    },
+
+    "BOAT.TR2": {
+      "Names": [
+        "Italiya chast' 1",
+        "Skorostnaya lodka",
+        "LODKA.TR2",
+        "Skripki i miny",
+        "Gorod gondola",
+        "Paryashchiy gorod",
+        "Ital'yanskaya rabota",
+        "Smert' v Venetsii",
+        "Daleko ot doma",
+        "Eto amore"
+      ],
+      "Keys": {
+        "0": [
+          "Dlya lodochnogo domika",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 1",
+          "Klyuch A",
+          "Bystryy klyuch",
+          "Bespoleznyy v spidranakh",
+          "Osvobozhdeniye lodki",
+          "Dostup k yakhtingu",
+          "Lodochnyy garazh",
+          "Stal'noy klyuch"
+        ],
+        "1": [
+          "Klyuch dlya komnaty 82",
+          "Metallicheskiy klyuch",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 2",
+          "Klyuch B",
+          "Dvereotkryvatel'",
+          "Ne otmychka",
+          "Etot klyuch"
+        ],
+        "2": [
+          "Klyuch ot gladil'noy doski",
+          "Klyuch Zheleznogo Kulaka",
+          "Zheleznaya deva",
+          "Klyuch ot zheleznogo zanavesa",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 3",
+          "Klyuch C",
+          "Etot kluch"
+        ]
+      }
+    },
+
+    "VENICE.TR2": {
+      "Names": [
+        "Italiya chast' 2",
+        "Nora Bartoli'",
+        "Logovo Bartoli",
+        "Gde Bartoli?",
+        "Ruiny Bartoli",
+        "Lyustry",
+        "Mona Liza",
+        "Vyyti s vzryvom"
+      ],
+      "Keys": {
+        "0": [
+          "Klyuch ot knizhnoy komnaty",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 1",
+          "Klyuch A",
+          "Klyuch tishiny",
+          "TISHINA! Ya ub'yu tebya!",
+          "Kartochka biblioteki",
+          "Eto arenda!",
+          "Ne serdite bibliotekarey",
+          "Klyuch ogranichennoy sektsii",
+          "Sekretnyy klyuch ot taynika",
+          "Alokhomora"
+        ],
+        "1": [
+          "TNT klyuch",
+          "Razryvnoy klyuch",
+          "Klyuch vzryva",
+          "Flipmap klyuch",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 2",
+          "Klyuch B",
+          "Bum bum klyuch",
+          "Klyuch ot bol'shogo buma",
+          "Klyuch dlya vzryva",
+          "KHLOPOK!",
+          "Ne ronyayte! Vzorvotsya!"
+        ]
+      }
+    },
+
+    "OPERA.TR2": {
+      "Names": [
+        "Italiya chast' 3",
+        "Ne Sidneyskiy opernyy teatr",
+        "Prizrak opery",
+        "Bogema",
+        "Traviata",
+        "Madam Babochka",
+        "Rigoletto",
+        "Volshebnaya fleyta",
+        "Shou dolzhno prodolzhat'sya",
+        "Vremya dlya shou!",
+        "Podgotov'te shou na polu"
+      ],
+      "Keys": {
+        "0": [
+          "Neobychnyy klyuch",
+          "Shikarnyy klyuch",
+          "Pokaznoy klyuch",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 1",
+          "Klyuch A",
+          "Opernyy klyuch",
+          "Klyuch k dveri",
+          "Klyuch ot shatkogo pola",
+          "C Sharp"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Pazl 1",
+          "Remontnik lifta",
+          "Detal' lifta",
+          "Korobka s izyumom",
+          "Podnimi menya, Skotti!",
+          "Ne ot krasnoy trevogi!",
+          "Dzin´",
+          "Ne chinit muzyku"
+        ],
+        "1": [
+          "Pazl 2",
+          "Materinskaya plata",
+          "Materinskaya plata ACME",
+          "PK pro 97",
+          "Otsenite moy setap",
+          "Mokraya skhema",
+          "Pochemu eto rabotayet?",
+          "Mokraya plata",
+          "NVIDIA 3080TI"
+        ]
+      }
+    },
+
+    "RIG.TR2": {
+      "Names": [
+        "Burovaya ustanovka",
+        "Oborudovannyy",
+        "BUR.TR2",
+        "Adriaticheskoye more",
+        "Bol'shaya neftyanaya bashnya",
+        "Zagryazneniye",
+        "Pochemu ya zdes'?",
+        "Bezoruzhnyy?",
+        "Pokhmel'ye",
+        "Golovnaya bol'",
+        "Risk dlya zdorov'ya i bezopasnosti",
+        "Krasnaya karta dostupa"
+      ],
+      "Keys": {
+        "0": [
+          "Kartochka ot zybuchikh peskov",
+          "Kartochka dlya dostupa k bochkam",
+          "Karta dostupa 2",
+          "Poddel'nyy ID 1",
+          "Nizkourovnevyy dostup",
+          "Visa ekspress",
+          "Ne krutite"
+        ],
+        "1": [
+          "Karta ot KVOP tochki",
+          "Vyklyuchite etu trevogu",
+          "Karta dostupa 1",
+          "Poddel'nyy ID 2",
+          "Sredniy uroven' dostupa",
+          "Mastercard ekspress",
+          "Ne slomayte"
+        ],
+        "2": [
+          "Karta ot komnaty 37",
+          "Nenuzhnaya karta",
+          "Karta dostupa 3",
+          "Poddel'nyy ID 3",
+          "Vysokiy uroven' dostupa",
+          "American ekspress",
+          "Ne sgibayte"
+        ]
+      }
+    },
+
+    "PLATFORM.TR2": {
+      "Names": [
+        "Neftyanaya platforma, chast' 2",
+        "Platforma",
+        "V poiskakh materinskoy platy",
+        "OK, Marko",
+        "Dlinnaya lestnitsa",
+        "I ona podnimayetsya vechnost'",
+        "Zheltaya podvodnaya lodka",
+        "Osteregaytes' pily"
+      ],
+      "Keys": {
+        "0": [
+          "Karta ot komnaty 12",
+          "Neopoznannaya karta dostupa",
+          "Karta dostupa 2",
+          "ID karta Lary",
+          "Ne lomayte"
+        ],
+        "3": [
+          "Karta dlya komnaty 49",
+          "Neopoznannaya karta dostupa",
+          "Karta dostupa 1",
+          "ID karta Uinstona",
+          "Ne sgibayte!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Materinskaya plata",
+          "Materinskaya plata ACME",
+          "PK pro 97",
+          "Otsenite moy setap",
+          "Eto rabotayet?",
+          "Windows 95",
+          "Eto vodostoykoye?",
+          "Protsessor odinochnogo vyzova",
+          "Baikal CPU"
+        ]
+      }
+    },
+
+    "UNWATER.TR2": {
+      "Names": [
+        "Pod vodoy chast' 1",
+        "73.152 metrov",
+        "240 futov",
+        "Opoveshcheniye o stolbnyake",
+        "Plyvi, devochka, PLYVI!",
+        "Plavaniye cherez lodku",
+        "Voda i voda i voda",
+        "Ne sovsem Titanik",
+        "Proshlo 84 goda ...",
+        "Sleduy za musorom",
+        "Pod morem"
+      ]
+    },
+
+    "KEEL.TR2": {
+      "Names": [
+        "Pod vodoy chast' 2",
+        "Eta lodka perevernuta",
+        "Stolbnyak, krasnaya trevoga",
+        "Kil'",
+        "KRUSHENIYE.TR2",
+        "KIL'.TR2",
+        "Tri razrushitelya",
+        "Antigravitatsionnyy korabl'",
+        "Razrushennyy"
+      ],
+      "Keys": {
+        "0": [
+          "Klyuch ot tualeta",
+          "Klyuch ot ubornoy",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 1",
+          "Klyuch A",
+          "Chto za tualet?"
+        ],
+        "1": [
+          "Khrustyashchiy klyuch",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 2",
+          "Klyuch B",
+          "Klyuch k kakoy-to dveri"
+        ],
+        "2": [
+          "Klyuch ot komnaty",
+          "Eto kto?",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 3",
+          "Klyuch C",
+          "Novyy klyuch?",
+          "Gde etot zamok?"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Ognennyy vyklyuchatel'",
+          "T-obraznaya pazl",
+          "Ognetushitel",
+          "Net vode!",
+          "Eta devushka v ogne!",
+          "Ne gori!"
+        ]
+      }
+    },
+
+    "LIVING.TR2": {
+      "Names": [
+        "Pod vodoy chast' 3",
+        "POMESHCHENIYA.TR2",
+        "Dvizheniye porshney",
+        "Napolnitel' epizod",
+        "Zhivyye treti",
+        "Zhivyye pyatyye",
+        "Bessmyslennyy uroven'",
+        "Nicheynyy dom",
+        "Bezzhiznennyye pomeshcheniya"
+      ],
+      "Keys": {
+        "0": [
+          "Dramaticheskiy klyuch",
+          "Melodramaticheskiy klyuch",
+          "Tragicheskiy klyuch",
+          "Klyuch Shekspira",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 1",
+          "Klyuch A",
+          "Opernyy klyuch",
+          "Shou dolzhno prodolzhat'sya!"
+        ],
+        "1": [
+          "Khrustyashchiy klyuch",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 2",
+          "Klyuch B",
+          "Odin klyuch",
+          "Komnatootkryvatel'",
+          "Trebuyetsya polirol'!"
+        ]
+      }
+    },
+
+    "DECK.TR2": {
+      "Names": [
+        "Pod vodoy chast' 4",
+        "V poiskakh klyuchey",
+        "PALUBA.TR2",
+        "V poiskakh Serafa",
+        "Pobeda aysberga",
+        "Bol'shoy vozdushnyy karman"
+      ],
+      "Keys": {
+        "1": [
+          "Kormovoy klyuch",
+          "Surovyy klyuch",
+          "Zhestokiy klyuch",
+          "Klyuch s tverdym nosom",
+          "Klyuch khranilishcha",
+          "Klyuch khranilishcha?",
+          "Ne klyuch khranilishcha",
+          "Opredelonno ne klyuch khranilishcha",
+          "Otkryvayet kakuyu-to dver'",
+          "Kakoy klyuch?",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 1",
+          "Klyuch A"
+        ],
+        "2": [
+          "Klyuch khranilishcha",
+          "Klyuch khranilishcha?",
+          "Strannyy klyuch",
+          "Kormovoy klyuch",
+          "Klyuch ot kayuty",
+          "Klyuch ot Serafa",
+          "Klyuch ot komnaty 105",
+          "Kakoy klyuch?",
+          "Otkryvayet kakuyu-to dver'",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 2",
+          "Klyuch B"
+        ],
+        "3": [
+          "Klyuch ot kayuty",
+          "Komnatnyy klyuch",
+          "Klyuch k dveri",
+          "Klyuch khranilishcha",
+          "Klyuch khranilishcha?",
+          "Ne klyuch khranilishcha",
+          "Otkryvayet kakuyu-to dver'",
+          "Kakoy klyuch?",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 3",
+          "Klyuch C"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "Angel",
+          "Kheruvim",
+          "Pazl 1",
+          "Statuya",
+          "Ne klyuch",
+          "Relikviya monakhov",
+          "Sokrovishche monakhov"
+        ]
+      }
+    },
+
+    "SKIDOO.TR2": {
+      "Names": [
+        "Tibet chast' 1",
+        "Snegokhod",
+        "Dayte mne klyuch ot khizhiny",
+        "Mesto avarii",
+        "Skol'zkaya poverkhnost'",
+        "Lara ne umeyet letat'",
+        "Plokhaya posadka samoleta",
+        "Eto khoroshiye valuny",
+        "Lavina",
+        "Snegokhod: Mest'",
+        "Snegokhodomaniya",
+        "Postroyka snegovika"
+      ],
+      "Keys": {
+        "0": [
+          "Klyuch ot pod\"yemnogo mosta",
+          "Bespoleznyy klyuch",
+          "Ne etot",
+          "Ne klyuch ot khizhiny",
+          "Klyuch ot khizhiny",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 1",
+          "Klyuch A",
+          "Ty podnimayesh' menya!",
+          "Delayushchiy platformu klyuch"
+        ],
+        "1": [
+          "Klyuch ot khizhiny",
+          "Klyuch ot khizhiny?",
+          "Klyuch dlya propuska tibeta",
+          "Ne klyuch ot pod\"yemnogo mosta",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 2",
+          "Klyuch B",
+          "ETOT KLYUCH!!!",
+          "Spidran klyuch",
+          "Samyy razyskivayemyy!",
+          "Vnutrenniy klyuch"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "Angel",
+          "Kheruvim",
+          "Pazl 1",
+          "Statuya",
+          "Ne klyuch",
+          "Relikviya monakhov",
+          "Sokrovishche monakhov"
+        ]
+      }
+    },
+
+    "MONASTRY.TR2": {
+      "Names": [
+        "Tibet chast' 2",
+        "Spasi monakhov",
+        "Ne strelyay v monakhov",
+        "Bezumnyy Barkhang",
+        "Ukradite eti barabany",
+        "Pomolis' za monakhov",
+        "Monastyr' osoboy bditel'nosti",
+        "Ne ispol'zuyte dyup glitch!",
+        "Puleneprobivayemyye monakhi",
+        "Klyuchang monastyr'",
+        "Ne sestrinskiy postupok"
+      ],
+      "Keys": {
+        "0": [
+          "Klyuch ot slaboy komnaty",
+          "ChuvstvuySil'neye klyuch",
+          "Klyuch dlya klyucha",
+          "Klyuch ot lyuka"
+        ],
+        "1": [
+          "Drat, bednyy klyuch",
+          "Klyuch ot ulitsy 1",
+          "Poydem otsyuda?",
+          "Klyuch ne ot komnaty? O.o",
+          "Klyuch ot zadney dveri"
+        ],
+        "2": [
+          "Fal'shivyy gniloy klyuch",
+          "Srez naverkh",
+          "Klyuch ot grobannykh glaz",
+          "Klyuch ot ulitsy 2"
+        ],
+        "3": [
+          "Klyuch ot komnaty bossa statui",
+          "Memnyy klyuch zala",
+          "Klyuch ot bol'shoy komnaty",
+          "Ne prygayte lebedem klyuch",
+          "Klyuch buddy",
+          "Klyuch ot lobbi"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Kak molitvennyy baraban",
+          "Mani baraban",
+          "Baraban Chena",
+          "Svyatoy baraban",
+          "Baraban Madonny",
+          "Kto pridumal etot baraban",
+          "Ustalyy pomoshchnik"
+        ],
+        "1": [
+          "Almazy",
+          "Dobycha iz Barkhanga",
+          "Tona samotsvetov",
+          "Ukhkhkh blestit!",
+          "18 karat"
+        ],
+        "3": [
+          "Angel",
+          "Kheruvim",
+          "Pazl 3",
+          "Statuya",
+          "Ne klyuch",
+          "Relikviya monakhov",
+          "Sokrovishche monakhov",
+          "Nastalo vremya skazat' poka!"
+        ]
+      }
+    },
+
+    "CATACOMB.TR2": {
+      "Names": [
+        "Tibet chast' 3",
+        "KT",
+        "Peshchery paskhalok",
+        "KATAKOMB.TR2",
+        "Yyeti maniya",
+        "Zdes' ledyanoy",
+        "Katakomby uzhasov",
+        "Zdes' temno!",
+        "Tomnaya komnata yyeti"
+      ],
+      "Pickups": {
+        "0": [
+          "Molot dlya gonga?",
+          "Podozhdite, chto?",
+          "Schastlivaya paskhalka",
+          "Em, mister Gong? Kha!",
+          "Eto prinadlezhit ne syuda",
+          "...???",
+          "Ksilofon palka",
+          "Nu, nevazhno!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Maska dlya litsa",
+          "Kakaya-to maska",
+          "Maska",
+          "Maska podseti",
+          "255.255.255.0",
+          "Maskarad",
+          "Nosite masku!",
+          "Krasivaya maska",
+          "Urodlivaya maska"
+        ]
+      }
+    },
+
+    "ICECAVE.TR2": {
+      "Names": [
+        "Tibet chast' 4",
+        "Kuritsa",
+        "Ledyanaya peshchera",
+        "Ptitsevodcheskaya territoriya",
+        "Zamorozhennaya kuritsa",
+        "TSYPA.TR2",
+        "Kholodil'nik",
+        "Morozil'nik",
+        "Erendell",
+        "Ne takaya uzh ledyanaya peshchera",
+        "Vremya razmorozki!",
+        "Razmorazhivaniye kuritsy",
+        "Uinston byl zdes'!",
+        "Uinston odobryayet!",
+        "Bol'shoy kholodil'nik Uinstona"
+      ],
+      "Keys": {
+        "1": [
+          "Mister Gong Molot",
+          "Molot",
+          "Khoroshiy gong",
+          "Genrikh Molot",
+          "BOOOOOOOOOONGGGGG",
+          "Ledyanoy sokrushitel'",
+          "Derzhis' podal'she ot detey",
+          "Ledorub",
+          "Barabannaya palochka",
+          "Gong molotok"
+        ]
+      },
+      "Pickups": {
+        "1": [
+          "Talion",
+          "Sokrovishche kuritsy",
+          "Otkroy etu dver', Lara",
+          "OSVOBOZHDENIYE KURITSY!",
+          "Zolotaya shtuka",
+          "Klyuch ot dveri Sian'",
+          "SVERKAYUSHCHIY!",
+          "Zdes' i propal snova!"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Maska dlya litsa",
+          "Propuskayemaya maska",
+          "Maska",
+          "Maska podseti",
+          "255.255.255.0",
+          "Net skipu balkona!",
+          "Kto yeshche etim pol'zuyetsya?",
+          "Maska krasoty Lary",
+          "Kassandra"
+        ]
+      }
+    },
+
+    "EMPRTOMB.TR2": {
+      "Names": [
+        "Kitay chast' 2",
+        "Khram memov",
+        "Delayte Sian' skip",
+        "Insi Vinsi pauk",
+        "Peshchera pavukooooov",
+        "Dolina smertel'noy lovushki",
+        "Ty sobirayesh'sya umeret'!",
+        "Tomatnyy sup",
+        "Gonka k kinzhalu",
+        "Polnyy krug"
+      ],
+      "Keys": {
+        "1": [
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 1",
+          "Elektricheskiy provodnik",
+          "Zoloto",
+          "Klyuch k kakoy-to dveri"
+        ],
+        "2": [
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 2",
+          "Serebro",
+          "Prosto klyuch",
+          "Vy perezhili paukov!"
+        ],
+        "3": [
+          "Klyuch ot kamery TR2Main",
+          "Kakoy-to klyuch",
+          "Klyuch",
+          "Klyuch 3",
+          "Yedinstvennyy klyuch, kotoryy vam nuzhen"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Pazl 1",
+          "Zapolnitel' slota komnaty 41",
+          "Maska dlya litsa",
+          "Otkryvashka terrakotovoy komnaty",
+          "Otkryvayet bol'she lovushek!",
+          "Eto lovushka O.o"
+        ]
+      }
+    },
+
+    "FLOATING.TR2": {
+      "Names": [
+        "Kitay chast' 3",
+        "Paryashchiye",
+        "Plavuchiye ostrova",
+        "Ostrova v nebe",
+        "Eti shtuki letayut OwO",
+        "Gde ya?",
+        "Son Lary",
+        "Chto za chert?",
+        "Lastochkoy v ogon'",
+        "Paryashchiy lego"
+      ],
+      "Puzzles": {
+        "0": [
+          "Kakoy-to kreker",
+          "Kreker 1",
+          "Kreker A",
+          "Syr i krekery",
+          "Pechat'",
+          "Volshebnoye pechen'ye",
+          "Pechen'ye udachi"
+        ],
+        "1": [
+          "Kakoy-to kreker",
+          "Kreker 2",
+          "Kreker B",
+          "Syr i krekery",
+          "Grem Kreker",
+          "Pechat'",
+          "Volshebnoye pechen'ye",
+          "Pechen'ye udachi"
+        ]
+      }
+    },
+
+    "XIAN.TR2": {
+      "Names": [
+        "Kitay chast' 4",
+        "Ubezhishche Bartoli, chast' 2",
+        "God drakona",
+        "Gibel' drakona",
+        "Bol'shoy ognemet",
+        "Bezzubyy dom",
+        "Sklep drakona",
+        "Konets Bartoli",
+        "Logovo Smauga",
+        "Ne vengerskiy rogovoy khvost",
+        "Ne ubivayte Parturnaksa",
+        "Lara, Mat' drakonov",
+        "Ty ne mozhesh' menya szhech'!",
+        "Statui, nozhi i ogon'"
+      ],
+      "Puzzles": {
+        "0": [
+          "Kakoy-to kreker",
+          "Kreker",
+          "Syr i krekery",
+          "Grem kreker",
+          "Pechat'",
+          "Nes\"yedobnyy kreker"
+        ],
+        "1": [
+          "Dobycha Sianya",
+          "Kinzhal Drakona",
+          "Bol'shoy nozh",
+          "Tyk tyk",
+          "Ne vytaskivay menya!",
+          "Klinok",
+          "Ishchete eto?",
+          "Vy eto poteryali?",
+          "Izvinite, vam eto nuzhno?",
+          "Ne Ekskalibur",
+          "Mladshiy brat Ekskalibura O.o"
+        ]
+      }
+    },
+
+    "HOUSE.TR2": {
+      "Names": [
+        "DMD",
+        "Gde Uinston?",
+        "Dom memov",
+        "Veselyy dom",
+        "MEMY.TR2",
+        "Moya skromnaya obitel'",
+        "Pustoy dom-kholodil'nik",
+        "Day mne otdokhnut'!",
+        "Ya vse nenavizhu!",
+        "Oni kogda nibud' sdayutsya?",
+        "Ne odna doma",
+        "Nasmotrelsya?"
+      ],
+      "Keys": {
+        "0": [
+          "Klyuch ot shkafa",
+          "Klyuch ot arsenala",
+          "Klyuch",
+          "Kakoy-to klyuch",
+          "Pozhaluysta ne klyuch ot garpuna",
+          "Sekretnyy taynik Lary!",
+          "Klyuch ot taynika s oruzhiyem",
+          "Day mne bum bum, klyuch",
+          "Klyuch dlya obucheniya samooborone",
+          "Klyuch ot oruzheynoy"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "Dobycha Sianya",
+          "Kinzhal Drakona",
+          "Bol'shoy nozh",
+          "Tyk tyk",
+          "Ne vytaskivay menya!",
+          "Klinok",
+          "Ishchete eto?",
+          "Vy eto poteryali?",
+          "Izvinite, vam eto nuzhno?",
+          "Ne Ekskalibur",
+          "Mladshiy brat Ekskalibura O.o"
+        ]
+      }
+    }
+  }
+}

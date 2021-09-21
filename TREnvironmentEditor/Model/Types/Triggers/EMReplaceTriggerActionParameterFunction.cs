@@ -8,7 +8,7 @@ namespace TREnvironmentEditor.Model.Types
 {
     public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
     {
-        public EMLocation Location { get; set; }
+        public List<EMLocation> Locations { get; set; }
         public FDTrigAction TrigAction { get; set; }
         public ushort NewParameter { get; set; }
 
@@ -17,16 +17,19 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector baseSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, Location.Room, level, control);
-            if (baseSector.FDIndex == 0)
+            foreach (EMLocation location in Locations)
             {
-                return;
-            }
+                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
+                if (baseSector.FDIndex == 0)
+                {
+                    return;
+                }
 
-            List<FDActionListItem> actions = FDUtilities.GetActionListItems(control, TrigAction, baseSector.FDIndex);
-            foreach (FDActionListItem action in actions)
-            {
-                action.Parameter = NewParameter;
+                List<FDActionListItem> actions = FDUtilities.GetActionListItems(control, TrigAction, baseSector.FDIndex);
+                foreach (FDActionListItem action in actions)
+                {
+                    action.Parameter = NewParameter;
+                }
             }
 
             control.WriteToLevel(level);

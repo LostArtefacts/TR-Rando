@@ -328,5 +328,81 @@
     }
   ],
 
-  "Mirrored": []
+  "Mirrored": [
+    {
+      "Comments": "Reposition the wall blades near the burner room.",
+      "EMType": 50,
+      "EntityType": 81,
+      "RoomMap": {
+        "140": {
+          "-32768": {
+            "Angle": 0
+          }
+        }
+      }
+    },
+
+    {
+      "Comments": "Put some poles in place to support the blades.",
+      "EMType": 24,
+      "IgnoreSectorEntities": true,
+      "Locations": [
+        {
+          "X": 29746,
+          "Y": 1024,
+          "Z": 29465,
+          "Room": 140,
+          "Angle": 0
+        },
+        {
+          "X": 29746,
+          "Y": 0,
+          "Z": 29465,
+          "Room": 140,
+          "Angle": 0
+        },
+        {
+          "X": 29746,
+          "Y": -1024,
+          "Z": 29465,
+          "Room": 140,
+          "Angle": 0
+        },
+        {
+          "X": 29746,
+          "Y": -2048,
+          "Z": 29465,
+          "Room": 140,
+          "Angle": 0
+        },
+
+        {
+          "X": 31794,
+          "Y": 1024,
+          "Z": 29465,
+          "Room": 140,
+          "Angle": 0
+        },
+        {
+          "X": 31794,
+          "Y": 0,
+          "Z": 29465,
+          "Room": 140,
+          "Angle": 0
+        },
+        {
+          "X": 31794,
+          "Y": -1024,
+          "Z": 29465,
+          "Room": 140,
+          "Angle": 0
+        }
+      ],
+      "Mesh": {
+        "MeshID": 21,
+        "Intensity1": 7936,
+        "Intensity2": 4096
+      }
+    }
+  ]
 }

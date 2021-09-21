@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using TREnvironmentEditor.Model;
+using TREnvironmentEditor.Model.Conditions;
 using TREnvironmentEditor.Model.Types;
 
 namespace TREnvironmentEditor.Parsing
@@ -9,23 +10,32 @@ namespace TREnvironmentEditor.Parsing
     public class EMConverter : JsonConverter
     {
         private static readonly JsonSerializerSettings _resolver = new JsonSerializerSettings
-        { 
-            ContractResolver = new EMResolver() 
+        {
+            ContractResolver = new EMResolver()
         };
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(BaseEMFunction);
+            return objectType == typeof(BaseEMFunction) || objectType == typeof(BaseEMCondition);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JObject jo = JObject.Load(reader);
-            if (jo["EMType"] == null)
+            if (jo["EMType"] != null)
             {
-                return null;
+                return ReadEMType(jo);
+            }
+            else if (jo["ConditionType"] != null)
+            {
+                return ReadConditionType(jo);
             }
 
+            return null;
+        }
+
+        private object ReadEMType(JObject jo)
+        {
             EMType type = (EMType)jo["EMType"].Value<int>();
             switch (type)
             {
@@ -72,6 +82,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMModifyEntityFunction>(jo.ToString(), _resolver);
                 case EMType.SwapSlot:
                     return JsonConvert.DeserializeObject<EMSwapSlotFunction>(jo.ToString(), _resolver);
+                case EMType.AdjustEntityPositions:
+                    return JsonConvert.DeserializeObject<EMAdjustEntityPositionFunction>(jo.ToString(), _resolver);
 
                 // Trigger types
                 case EMType.Trigger:
@@ -112,6 +124,19 @@ namespace TREnvironmentEditor.Parsing
                 // NOOP
                 case EMType.NOOP:
                     return JsonConvert.DeserializeObject<EMPlaceholderFunction>(jo.ToString(), _resolver);
+
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
+        private object ReadConditionType(JObject jo)
+        {
+            EMConditionType type = (EMConditionType)jo["ConditionType"].Value<int>();
+            switch (type)
+            {
+                case EMConditionType.EntityProperty:
+                    return JsonConvert.DeserializeObject<EMEntityPropertyCondition>(jo.ToString());
 
                 default:
                     throw new InvalidOperationException();

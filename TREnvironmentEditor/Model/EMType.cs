@@ -26,6 +26,7 @@
         ConvertEnemy = 47,
         ModifyEntity = 48,
         SwapSlot = 49,
+        AdjustEntityPositions = 50,
 
         // Trigger types 61-80
         Trigger = 61,

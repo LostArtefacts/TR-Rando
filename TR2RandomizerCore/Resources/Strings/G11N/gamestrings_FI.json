@@ -1,0 +1,1067 @@
+{
+  "GlobalStrings": [
+    {
+      "GroupedStrings": [
+        {
+          "33": [
+            "tähtisadetikku",
+            "sytkäri",
+            "häikäisin",
+            "taikasauva",
+            "Valotaikaa!"
+          ],
+          "43": [
+            "tähtisadetikku",
+            "sytkäri",
+            "häikäisin",
+            "taikasauva",
+            "Valotaikaa!"
+          ]
+        },
+        {
+          "36": [
+            "hernepyssyt",
+            "nallipyssyt",
+            "vanhassa vara parempi",
+            "piu piu piu",
+            "tupla"
+          ],
+          "44": [
+            "pakasteherneet",
+            "nallit",
+            "aivan hyvät panokset",
+            "piu piu pi-pi-piu",
+            "tuplasti panoksia"
+          ]
+        },
+        {
+          "37": [
+            "tussari",
+            "musketti",
+            "hehtaaripyssy",
+            "kameramiehenkaataja",
+            "karhunkaataja"
+          ],
+          "45": [
+            "tussarin panokset",
+            "musketin panokset",
+            "hehtaaripyssyn panokset",
+            "kameramiehenkaatajan panokset",
+            "karhunkaatajan panokset"
+          ]
+        },
+        {
+          "38": [
+            "automaagiset pistoolit",
+            "Magnum double caramel",
+            "superpistoolit",
+            "ei niin kuraa",
+            "Pierreltä lainatut"
+          ],
+          "46": [
+            "automaagiset panokset",
+            "magnumin panokset",
+            "superpistoolin panokset",
+            "semi-OK:t panokset",
+            "Pierreltä lainatut panokset"
+          ]
+        },
+        {
+          "39": [
+            "uzit",
+            "trrrrrrrrr",
+            "Pepega-pistoolit",
+            "ammussyöpöt",
+            "1000 laukausta myöhemmin"
+          ],
+          "47": [
+            "uzin panokset",
+            "trrr trrrrrrrrrrr",
+            "Pepega-pistoolin panokset",
+            "teräsrehua",
+            "tuhansia panoksia"
+          ]
+        },
+        {
+          "40": [
+            "tiku tiku tiku",
+            "tamponinheitin",
+            "liitulakunheitin",
+            "hyödytön",
+            "turha",
+            "Miksi?",
+            "Ei.",
+            "hammastikunheitin",
+            "kääntäjän suosikki"
+          ],
+          "48": [
+            "taku taku taku",
+            "tamponit",
+            "liitulakut",
+            "hyödyttömät panokset",
+            "turhat panokset",
+            "Siksi.",
+            "ei panoksia",
+            "hammastikut",
+            "parasta mitä tiedän"
+          ]
+        },
+        {
+          "41": [
+            "MP3",
+            "MPEG4",
+            "drrrrrrrrrrrr",
+            "SBRRR SBRRRRRR :----D"
+          ],
+          "49": [
+            "MP3:n panokset",
+            "hauskat kotivideot",
+            "drrrrr drr drrrrrrr",
+            "EBIN SURRURRURS :--DDD"
+          ]
+        },
+        {
+          "42": [
+            "naatinheitin",
+            "pommittus",
+            "SodaStream",
+            "Mentos",
+            "JAHVAT TULLOO!",
+            "alkuräjäytin",
+            "hiukkaskiihdytin",
+            "granaattiomenanheitin"
+          ],
+          "50": [
+            "naatit",
+            "pullotettua taikaa",
+            "Pepsi Max",
+            "Coca-Cola Light",
+            "mehukkaat appelsiinit",
+            "mustat aukot",
+            "partikkelipakkaukset",
+            "granaatit"
+          ]
+        },
+        {
+          "51": [
+            "pientä loiventavaa",
+            "mini",
+            "pikkupikkuensiapupakkaus",
+            "kompakti ensiapupakkaus",
+            "Always",
+            "haa"
+          ],
+          "52": [
+            "laaja korjaussarja",
+            "maxi",
+            "järkälemäinen ensiapupakkaus",
+            "runsas ensiapupakkaus",
+            "Pampers",
+            "HAA"
+          ]
+        }
+      ],
+      "StandaloneStrings": {
+        "2": [
+          "AVAINJUTUT",
+          "KAMAA",
+          "TILPEHÖÖRÄT",
+          "VAINAVAINJUTUT",
+          "ROINAA",
+          "ITEMSSIT",
+          "PERINTÖKALLEUDET"
+        ],
+        "3": [
+          "LARA KUOLI",
+          "TAPOIT LARAN",
+          "HÄVISIT PELIN",
+          "PAREMPI ONNI ENSI KERRALLA",
+          "HEIKKO ESITYS",
+          "NO OLIKO KIVAA?",
+          "ALT + F4"
+        ],
+        "35": [
+          "tilastotietoa",
+          "Tämä on tärkeää!",
+          "Lara lukuina",
+          "saavutukset",
+          "salaisuusträkkeri"
+        ],
+        "57": [
+          "Croftin kartano",
+          "Core Designin päämaja",
+          "TR2Rando-päämaja",
+          "Malmgardin kartano",
+          "Telkeä hovimestari kylmäkomeroon: The videopeli",
+          "Kultaranta"
+        ]
+      }
+    },
+    {
+      "StandaloneStrings": {
+        "15": [
+          "- TYHJMÄ -",
+          "- NIMETÖN -",
+          "- EPÄKUNNOSSA -",
+          "- NO TÄÄHÄN OIS TYHJÄ -"
+        ]
+      }
+    }
+  ],
+
+  "LevelStrings": {
+    "WALL.TR2": {
+      "Names": [
+        "Kiina, osa 1",
+        "Kiinan imuri",
+        "Kiinan Muumi",
+        "luvallinen graffitiseinä",
+        "SEINÄ.TR2",
+        "Ei muuten näy kuusta",
+        "melkein Xi'anissa",
+        "Dinosauria",
+        "kadonnut laakso 2.0",
+        "Footin frisbeegolfrata"
+      ],
+      "Keys": {
+        "0": [
+          "avaava avain",
+          "Onko tämä avain?",
+          "avain vain",
+          "THE avain",
+          "avain 1",
+          "avain A",
+          "tämä avain",
+          "ehkä avain 1?",
+          "ehkä avain 2?"
+        ],
+        "1": [
+          "hämähäkkiavain",
+          "rupinen avain",
+          "avain vain",
+          "THE avain",
+          "avain 2",
+          "avain B",
+          "se toinen avain",
+          "ehkä avain 1?",
+          "ehkä avain 2?",
+          "aivan eri avain"
+        ]
+      }
+    },
+
+    "BOAT.TR2": {
+      "Names": [
+        "Italia, osa 1",
+        "psyko-paatti",
+        "JOLLA.TR2",
+        "Jousikvartetti katolla",
+        "VENE.TR2",
+        "Roomassa Rooman tapaan",
+        "Riehakas ryöstö",
+        "Kuolema Venetsiassa",
+        "Italian alkeet",
+        "Thäät's Amoore!"
+      ],
+      "Keys": {
+        "0": [
+          "psyko-paattivajan avain",
+          "avain vain",
+          "THE avain",
+          "avain 1",
+          "avain A",
+          "vauhdikas avain",
+          "vajavainen vaja-avain",
+          "varavajan vara-avain",
+          "virtaviivainen avain",
+          "Bilteman avain"
+        ],
+        "1": [
+          "avain huoneeseen 82",
+          "mysteerimetalliavain",
+          "avain vain",
+          "THE avain",
+          "avain 2",
+          "avain B",
+          "ovenavaaja-avain",
+          "tiirikka",
+          "tämä avain"
+        ],
+        "2": [
+          "silitysrautainen avain",
+          "rautanyrkkiavain",
+          "rauta-aikainen avain",
+          "rautaesiripun avain",
+          "avain vain",
+          "THE avain",
+          "avain 3",
+          "avain C",
+          "se toinen avain"
+        ]
+      }
+    },
+
+    "VENICE.TR2": {
+      "Names": [
+        "Italia, osa 2",
+        "VENETSIA.TR2",
+        "Playboy-kartano",
+        "Miissä Baartoli?",
+        "Bartolin rauniot",
+        "Pihlajakatu 23",
+        "ilmetty Mona Lisa",
+        "räjähtävä finaali"
+      ],
+      "Keys": {
+        "0": [
+          "lukuhuoneen avain",
+          "avain vain",
+          "THE avain",
+          "avain 1",
+          "avain A",
+          "hiirenhiljainen avain",
+          "hiljaa kirjastossa",
+          "kirjastokortti",
+          "eräpäivä lähestyy",
+          "Gamestopin avain",
+          "kiellettyjen kirjojen osaston avain",
+          "hyvin salainen avain",
+          "Alohomora!"
+        ],
+        "1": [
+          "tee-än-tee-avain",
+          "räjäyttimen avain",
+          "räjähtävä avain",
+          "flipmap-avain",
+          "avain vain",
+          "THE avain",
+          "avain 2",
+          "avain B",
+          "alkuräjähdysavain",
+          "henkilökunnan uloskäynnin avain",
+          "tee-se-itse-avain",
+          "PUM!",
+          "Räjähdysvaara!"
+        ]
+      }
+    },
+
+    "OPERA.TR2": {
+      "Names": [
+        "Italia, osa 3",
+        "Suomen Kansallisooppera",
+        "Aleksanterin teatteri",
+        "Wolfgang Amadeus Tarzan",
+        "Lilli Paasikiven linnake",
+        "Cecilia Bartolin linnake",
+        "OOPPERA.TR2",
+        "aika luihu taikahuilu",
+        "Figaron aviokriisi",
+        "Eine Kleine Nachtmuzak",
+        "avikkakonsertto"
+      ],
+      "Keys": {
+        "0": [
+          "aistikas avain",
+          "pianon avain",
+          "tyylikäs avain",
+          "avain vain",
+          "THE avain",
+          "avain 1",
+          "avain A",
+          "tahtipuikko",
+          "G-avain",
+          "F-avain",
+          "C-avain"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "PUZZLE1",
+          "korjaussarja",
+          "Acme hissinkorjaussarja",
+          "rusinarasia",
+          "Kuin taivaisiin...",
+          "Bartolin rannekello",
+          "oopperan väliaikakello",
+          "marakassi"
+        ],
+        "1": [
+          "PUZZLE2",
+          "muinainen emolevy",
+          "Acme emolevy",
+          "PC Pro '97",
+          "Arvioi mun rauta",
+          "uitettu piirilevy",
+          "näyttämötekniikan ohjainpiirilevy",
+          "märkä levy",
+          "NVIDIA560"
+        ]
+      }
+    },
+
+    "RIG.TR2": {
+      "Names": [
+        "surffilautta",
+        "rigged",
+        "LAUTTA.TR2",
+        "oliiviöljynporauslautta",
+        "rypsiöljynporauslautta",
+        "Room Escape Rovaniemi",
+        "Miten jouduin tänne?",
+        "Ei aseita?",
+        "vuosisadan krapula",
+        "kaamea hedari",
+        "Mikä työturvallisuus?"
+      ],
+      "Keys": {
+        "0": [
+          "juoksuhiekkakortti",
+          "tynnyriavainkortti",
+          "avainkortti 2",
+          "väärennetty passi",
+          "matalan tason kulkukortti",
+          "Teboil-asiakaskortti",
+          "Älä väännä"
+        ],
+        "1": [
+          "QWOP-kortti",
+          "hälytyksenhiljennin",
+          "avainkortti 1",
+          "väärennetty ajokortti",
+          "keskitason kulkukortti",
+          "Plussa-kortti",
+          "Älä hajota"
+        ],
+        "2": [
+          "kortti huoneeseen 37",
+          "turha avainkortti",
+          "avainkortti 3",
+          "väärennetty tukkukortti",
+          "korkean tason kulkukortti",
+          "S-kortti",
+          "Älä taivuta"
+        ]
+      }
+    },
+
+    "PLATFORM.TR2": {
+      "Names": [
+        "öljynporauslautta, osa 2",
+        "ALUSTA.TR2",
+        "emolevyä etsimässä",
+        "Okei, Marko!",
+        "tikapuut taivaaseen",
+        "Baabel",
+        "keltainen sukellusvene",
+        "TASO.TR2"
+      ],
+      "Keys": {
+        "0": [
+          "kortti huoneeseen 12",
+          "tunnistamaton tunnistekortti",
+          "avainkortti 2",
+          "Laran tunnistekortti",
+          "ei saa taittaa"
+        ],
+        "3": [
+          "kortti huoneeseen 49",
+          "tunnistamaton tunnistekortti",
+          "avainkortti 1",
+          "Winstonin tunnistekortti",
+          "ei saa vääntää"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "muinainen emolevy",
+          "Acme emolevy",
+          "PC Pro 97",
+          "Arvioi mun rauta",
+          "Toimiiko tämä?",
+          "Windows 95",
+          "Onko tämä vedenkestävä?",
+          "yksiytiminen prosessori",
+          "Intel Celeron"
+        ]
+      }
+    },
+
+    "UNWATER.TR2": {
+      "Names": [
+        "Aalloissa siis, osa 1",
+        "73,152 metrin syvyydessä",
+        "240 jalan syvyydessä",
+        "tetanusvaroitus",
+        "Lara, pieni merenneito",
+        "selvä kuin vesi",
+        "Titanic",
+        "ei mikään Titanic",
+        "Siitä on 84 vuotta...",
+        "Vesi nousee!",
+        "Aalloissa siis!"
+      ]
+    },
+
+    "KEEL.TR2": {
+      "Names": [
+        "Aalloissa siis, osa 2",
+        "Tämä vene on väärin päin",
+        "kohonnut tetanusriski",
+        "Titanic",
+        "rautavuori",
+        "KÖLI.TR2",
+        "HYLKY.TR2",
+        "Vekkula",
+        "Ave Maria Doria"
+      ],
+      "Keys": {
+        "0": [
+          "käymälän avain",
+          "kylpyhuoneen avain",
+          "avain vain",
+          "THE avain",
+          "avain 1",
+          "avain A",
+          "tilaihmeen avain"
+        ],
+        "1": [
+          "rupinen avain",
+          "avain vain",
+          "THE avain",
+          "avain 2",
+          "avain B",
+          "oven avain"
+        ],
+        "2": [
+          "huoneen avain",
+          "Kuka siellä?",
+          "avain vain",
+          "THE avain",
+          "avain 3",
+          "avain C",
+          "avain uuteen",
+          "Missä lukko?"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "T-palikka",
+          "T-avain",
+          "palosammutin",
+          "ralliradanrikkoja",
+          "N64-ohjain",
+          "Älä polta sormiasi!"
+        ]
+      }
+    },
+
+    "LIVING.TR2": {
+      "Names": [
+        "Aalloissa siis, osa 3",
+        "VAINELÄM.TR2",
+        "jättimäntälaitos",
+        "täytejakso",
+        "vain elämää",
+        "vain kuolemaa",
+        "turha kenttä",
+        "Onko kukaan kotona?",
+        "elottomat tilat"
+      ],
+      "Keys": {
+        "0": [
+          "dramaattinen avain",
+          "melodramaattinen avain",
+          "traaginen avain",
+          "Shakespeare-avain",
+          "avain vain",
+          "THE avain",
+          "avain 1",
+          "avain A",
+          "oopperan avain",
+          "tö shou mast gou oon"
+        ],
+        "1": [
+          "rupinen avain",
+          "avain vain",
+          "THE avain",
+          "avain 2",
+          "avain B",
+          "ainoa avain",
+          "ovenavaaja",
+          "kiillotusta kaipaava avain"
+        ]
+      }
+    },
+
+    "DECK.TR2": {
+      "Names": [
+        "Veden alla, osa 4",
+        "avainjahti",
+        "KANSI.TR2",
+        "serafia etsimässä",
+        "rautavuoren huipulla",
+        "suuri ilmatasku"
+      ],
+      "Keys": {
+        "1": [
+          "peräpään avain",
+          "perspään avain",
+          "hytin avain",
+          "vihoviimeinen avain",
+          "varaston avain",
+          "varaston avain?",
+          "ei varaston avain",
+          "tuskin varaston avain",
+          "ovenavaaja",
+          "Mikä avain?",
+          "avain vain",
+          "THE avain",
+          "avain 1",
+          "avain A"
+        ],
+        "2": [
+          "varaston avain",
+          "varaston avain?",
+          "outo avain",
+          "ahterin avain",
+          "hytin avain",
+          "ei varaston avain",
+          "avain huoneeseen 105",
+          "Mikä avain?",
+          "oven avain",
+          "avain vain",
+          "THE avain",
+          "avain 2",
+          "avain B"
+        ],
+        "3": [
+          "ahterin avain",
+          "huoneen avain",
+          "ovenavaaja",
+          "varaston avain",
+          "varaston avain?",
+          "ei varaston avain",
+          "oven avain",
+          "Mikä avain?",
+          "avain vain",
+          "THE avain",
+          "avain 3",
+          "avain C"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "sefiroth",
+          "balleriina",
+          "PUZZLE1",
+          "paperipaino",
+          "avainjuttu",
+          "salainen esine",
+          "Quake-salaisuus"
+        ]
+      }
+    },
+
+    "SKIDOO.TR2": {
+      "Names": [
+        "Tiibet, osa 1",
+        "Lara rattikelkkamäessä",
+        "tuvan avaimen metsästys",
+        "Lara pulkkamäessä",
+        "Luistaa kuin latu",
+        "Lara, lentäjän poika",
+        "lentoturmatutkinta",
+        "KELKKA.TR2",
+        "lumivyörysimulaattori",
+        "moottorikelkkakostaja",
+        "moottorikelkkamania",
+        "lumiukkosimulaattori"
+      ],
+      "Keys": {
+        "0": [
+          "laskusillan avain",
+          "hyödytön avain",
+          "EI VOITTOA",
+          "ei tuvan avain",
+          "tuvan avain",
+          "avain vain",
+          "THE avain",
+          "avain 1",
+          "avain A",
+          "hyödyllinen avain",
+          "turha avain"
+        ],
+        "1": [
+          "tuvan avain",
+          "tuvan avain?",
+          "tiibetinskippausavain",
+          "ei laskusillan avain",
+          "avain vain",
+          "THE avain",
+          "avain 2",
+          "avain B",
+          "THE AVAIN!!!",
+          "speedrun-avain",
+          "haluttua tavaraa",
+          "asuintilojen avain"
+        ]
+      },
+      "Puzzles": {
+        "3": [
+          "sefiroth",
+          "balleriina",
+          "PUZZLE1",
+          "paperipaino",
+          "avainjuttu",
+          "salainen esine",
+          "Quake-salaisuus"
+        ]
+      }
+    },
+
+    "MONASTRY.TR2": {
+      "Names": [
+        "Tiibet, osa 2",
+        "pelasta munkit",
+        "LUOSTARI.TR2",
+        "Brinkhallin kartano",
+        "Valamon luostari",
+        "Turun tuomiokirkko",
+        "luostari hälytystilassa",
+        "rukousmyllyjahti",
+        "teräsmunkkien luostari",
+        "paistotuoreita munkkeja",
+        "LUOSTARI.TR2"
+      ],
+      "Keys": {
+        "0": [
+          "taikalaatikon avain",
+          "tilaihmeen avain",
+          "avainkomeron avain"
+        ],
+        "1": [
+          "tuhkaluukun avain",
+          "ulko-oviavain 1",
+          "Pääseekö tällä ulos?",
+          "ei minkään huoneen avain",
+          "takaoven avain"
+        ],
+        "2": [
+          "takon avain",
+          "talonmiehen avain",
+          "taivaiden avain",
+          "ulko-oviavain 2"
+        ],
+        "3": [
+          "TR2Main-salin avain",
+          "meemisalin avain",
+          "tosi ison huoneen avain",
+          "suuren salin avain",
+          "Buddha-avain",
+          "odotushuoneen avain"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "suolamylly",
+          "pippurimylly",
+          "maustemylly",
+          "Tää on meidän Mylly",
+          "huhumylly",
+          "Kuka keksi tämän myllyn?",
+          "tuulimylly"
+        ],
+        "1": [
+          "kulkuset",
+          "perintökalleudet",
+          "jalokivekset",
+          "kruununjalokivet",
+          "Hope-timantti"
+        ],
+        "3": [
+          "sefiroth",
+          "balleriina",
+          "PUZZLE3",
+          "paperipaino",
+          "avainjuttu",
+          "salainen esine",
+          "Quake-salaisuus",
+          "Aika sanoa hyvästit!"
+        ]
+      }
+    },
+
+    "CATACOMB.TR2": {
+      "Names": [
+        "Tiibet, osa 3",
+        "Tocalonin Katakombit",
+        "pääsiäismunaluolat",
+        "KATAKOMB.TR2",
+        "jetinmetästyskausi",
+        "Nyt on pirun kylmä!",
+        "kauhujen katakombit",
+        "Tipu Tilavan katakombit",
+        "darkroom ;"
+      ],
+      "Pickups": {
+        "0": [
+          "v***n nuija",
+          "Jaa, häh?",
+          "Hyvää pääsiäistä!",
+          "EI VOITTOA",
+          "Tämä ei kuulu tänne",
+          "...???",
+          "ksylofonin nuija",
+          "roska"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "aistikas naamio",
+          "Hui saatana!",
+          "Jim Carreyn naamio",
+          "epäterävä maski",
+          "255.255.255.0",
+          "naamiaisasuste",
+          "Käytäthän kasvosuojainta",
+          "peili",
+          "ruma kuin rupikonna"
+        ]
+      }
+    },
+
+    "ICECAVE.TR2": {
+      "Names": [
+        "Tiibet, osa 4",
+        "Tipu Tilava",
+        "jääluola",
+        "kanala",
+        "JÄÄLUOLA.TR2",
+        "TIPU.TR2",
+        "jääkaappi",
+        "pakastin",
+        "Arendelle",
+        "tyypillinen jääluolataso",
+        "sorsastuskausi",
+        "kanansulatussimulaattori",
+        "Winston saa kostonsa",
+        "Winstonin hyväksymä",
+        "Winstonin kylmäkomero"
+      ],
+      "Keys": {
+        "1": [
+          "v***n nuija",
+          "THE nuija",
+          "ruokakellon nuija",
+          "Ville Vasara",
+          "GOOOOOOOOOONGGGGG",
+          "jäävasara",
+          ":BOP:",
+          "jääpiikki",
+          "rumpukapula",
+          "gongidongi"
+        ]
+      },
+      "Pickups": {
+        "1": [
+          "talio",
+          "Tipu Tilavan aarre",
+          "avain tasolle 2",
+          "VAPAUTA TIPU",
+          "Monster Energy Golden Dragon",
+          "Xi'anin avain",
+          "tyylikäs paperipaino",
+          "GLOD"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "kasvosuojain",
+          "turha naamio",
+          "Jim Carreyn naamio",
+          "epäterävä maski",
+          "255.255.255.0",
+          "hyvin hyödyllinen naamio",
+          "Kuka tätä käyttää?",
+          "Laran kauneusuninaamio",
+          "Kassandra"
+        ]
+      }
+    },
+
+    "EMPRTOMB.TR2": {
+      "Names": [
+        "Kiina, osa 2",
+        "Tsiianin temppeli",
+        "Ksiaanin temppeli",
+        "Tshiianin temppeli",
+        "Siionin temppeli",
+        "temppeliaukion kirkko",
+        "keisarin hauta",
+        "lohikäärmekeisarin hauta",
+        "KSRNHAUT.TR2",
+        "ympyrä sulkeutuu"
+      ],
+      "Keys": {
+        "1": [
+          "avain vain",
+          "THE avain",
+          "avain 1",
+          "katinkultainen avain",
+          "Au-avain",
+          "ylellinen avain"
+        ],
+        "2": [
+          "avain vain",
+          "THE avain",
+          "avain 2",
+          "Ag-avain",
+          "ihan vain avain",
+          "hämähäkkien kätkemä"
+        ],
+        "3": [
+          "TR2Main-kammion avain",
+          "avain vain",
+          "THE avain",
+          "avain 3",
+          "The One Avain"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "PUZZLE1",
+          "huoneen 41 reiän täyte",
+          "kasvosuojain",
+          "terrakottasinetti",
+          "ja lisää ansoja",
+          "muinainen kiinalainen pierunvaimennin"
+        ]
+      }
+    },
+
+    "FLOATING.TR2": {
+      "Names": [
+        "Kiina, osa 3",
+        "Lara ekstaasissa",
+        "LEIJUTAA.TR2",
+        "pilvilinnat",
+        "tosi paha trippi",
+        "Missä minä olen?",
+        "Laran uni",
+        "Mitä helvettiä?",
+        "siipiirdium lentiusa",
+        "lentävät leegot"
+      ],
+      "Puzzles": {
+        "0": [
+          "suolakeksi",
+          "suolakeksi 1",
+          "suolakeksi A",
+          "suklaakolikko",
+          "kulttileimasin",
+          "taikakeksi",
+          "onnenkeksi"
+        ],
+        "1": [
+          "suolakeksi",
+          "suolakeksi 2",
+          "suolakeksi B",
+          "suklaakolikko",
+          "grahamkeksi",
+          "kulttileimasin",
+          "taikakeksi",
+          "onnenkeksi"
+        ]
+      }
+    },
+
+    "XIAN.TR2": {
+      "Names": [
+        "Kiina, osa 4",
+        "Bartolin piilopaikka 2",
+        "lohikäärmeen vuosi",
+        "lohikäärmeen loppu",
+        "iso liekinheitin",
+        "keisarin hauta",
+        "lohikäärmeen krypta",
+        "Bartolin loppu",
+        "Smaugin luola",
+        "unkarilainen sarvipyrstö",
+        "Paarthurnax",
+        "Lara lohikäärmeiden äiti",
+        "herkästi syttyvää",
+        "XI'AN.TR2"
+      ],
+      "Puzzles": {
+        "0": [
+          "suolakeksi",
+          "THE suolakeksi",
+          "Footin lempifrisbee",
+          "grahamkeksi",
+          "kulttileimasin",
+          "kelvoton keksi"
+        ],
+        "1": [
+          "sotasaalis",
+          "lohikäärmetikari",
+          "iso veitsi",
+          "tök tök",
+          "tonberryn veitsi",
+          "The Blade",
+          "Tätäkö etsit?",
+          "tyylikäs vihannesveitsi",
+          "Excalibur",
+          "ei mikään Excalibur",
+          "Excaliburin pikkuveli"
+        ]
+      }
+    },
+
+    "HOUSE.TR2": {
+      "Names": [
+        "HSH",
+        "Missä on Winston?",
+        "meemikartano",
+        "TALO.TR2",
+        "MÖKKI.TR2",
+        "matala majani",
+        "kotikatu",
+        "Tylypahkan taistelu",
+        "Lara, maailmojen tuhoaja",
+        "Tämä on ryöstö!",
+        "Yksin kotona",
+        "Joko näit tarpeeksi?"
+      ],
+      "Keys": {
+        "0": [
+          "vaatekomeron avain",
+          "arsenaalin avain",
+          "THE avain",
+          "avain vain",
+          "plz ei harppuuna-asetta",
+          "salaisuuksien kammion avain",
+          "frisbeevaraston avain",
+          "plz anna kranutin",
+          "avain Laran rintaliiveissä",
+          "asehuoneen avain"
+        ]
+      },
+      "Puzzles": {
+        "0": [
+          "sotasaalis",
+          "lohikäärmetikari",
+          "iso veitsi",
+          "tök tök",
+          "tonberryn veitsi",
+          "The Blade",
+          "Tätäkö etsit?",
+          "tyylikäs vihannesveitsi",
+          "Excalibur",
+          "ei mikään Excalibur",
+          "Excaliburin pikkuveli"
+        ]
+      }
+    }
+  }
+}

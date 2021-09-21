@@ -82,7 +82,8 @@
         },
         "Clicks": -1,
         "SideTexture": 1946,
-        "FloorTexture": 1409
+        "FloorTexture": 1409,
+        "Flags": 4
       }
     ],
 
@@ -309,7 +310,8 @@
         },
         "Clicks": -7,
         "SideTexture": 1940,
-        "FloorTexture": 1409
+        "FloorTexture": 1409,
+        "Flags": 3
       },
 
       {
@@ -322,7 +324,8 @@
         },
         "Clicks": -14,
         "SideTexture": 1940,
-        "FloorTexture": 1409
+        "FloorTexture": 1409,
+        "Flags": 3
       }
     ],
 

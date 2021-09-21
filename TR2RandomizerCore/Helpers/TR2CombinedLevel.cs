@@ -58,7 +58,10 @@ namespace TR2RandomizerCore.Helpers
         /// <summary>
         /// Determines if the given level is specific to UKBox. This currently applies only to Floating Islands which differs between UKBox and EPC/Multipatch.
         /// </summary>
-        public bool IsUKBox => Is(LevelNames.FLOATER) && Data.NumBoxes < 859; // This is a bit arbitrary, but EPC and Multipatch have 859, UKBox has 857
+        // We previously checked for NumBoxes but with environment rando, this can now change. We instead look for the first
+        // animated texture index (the lava) as this is 1702 in UKBox and 1686 in EPC/Multipatch. This remains consistent
+        // regardless of texture deduplication.
+        public bool IsUKBox => Is(LevelNames.FLOATER) && Data.AnimatedTextures[0].Textures[0] == 1702;
 
         /// <summary>
         /// Returns {Name}-UKBox if this level is for UKBox, otherwise just {Name}.

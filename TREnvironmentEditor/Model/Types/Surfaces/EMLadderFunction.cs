@@ -60,9 +60,9 @@ namespace TREnvironmentEditor.Model.Types
                     IsNegativeZ = IsNegativeZ
                 };
 
-                // We have to add climbable entries after portal and slant entries.
+                // We have to add climbable entries after portal, slant and kill Lara entries.
                 List<FDEntry> entries = control.Entries[sector.FDIndex];
-                int index = entries.FindLastIndex(e => e is FDPortalEntry || e is FDSlantEntry);
+                int index = entries.FindLastIndex(e => e is FDPortalEntry || e is FDSlantEntry || e is FDKillLaraEntry);
 
                 control.Entries[sector.FDIndex].Insert(index + 1, climbEntry);
             }

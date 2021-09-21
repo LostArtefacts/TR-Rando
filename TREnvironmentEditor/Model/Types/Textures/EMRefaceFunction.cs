@@ -1,9 +1,10 @@
-﻿using TREnvironmentEditor.Helpers;
+﻿using System.Collections.Generic;
+using TREnvironmentEditor.Helpers;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {
-    public class EMRefaceFunction : BaseEMFunction
+    public class EMRefaceFunction : BaseEMFunction, ITextureModifier
     {
         public EMTextureMap TextureMap { get; set; }
 
@@ -35,6 +36,11 @@ namespace TREnvironmentEditor.Model.Types
                     }
                 }
             }
+        }
+
+        public void RemapTextures(Dictionary<ushort, ushort> indexMap)
+        {
+            TextureMap.Remap(indexMap);
         }
     }
 }

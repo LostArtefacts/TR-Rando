@@ -4,7 +4,7 @@ using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model
 {
-    public class EMEditorSet : List<BaseEMFunction>
+    public class EMEditorSet : List<BaseEMFunction>, ITextureModifier
     {
         // A set of modifications that must be done together e.g. adding a ladder and a step
 
@@ -31,6 +31,18 @@ namespace TREnvironmentEditor.Model
             }
 
             return true;
+        }
+
+        public void RemapTextures(Dictionary<ushort, ushort> indexMap)
+        {
+            // Find every EMTextureMap (or any other texture type) and remap the old texture indices to new.
+            foreach (BaseEMFunction mod in this)
+            {
+                if (mod is ITextureModifier textureMod)
+                {
+                    textureMod.RemapTextures(indexMap);
+                }
+            }
         }
     }
 }
