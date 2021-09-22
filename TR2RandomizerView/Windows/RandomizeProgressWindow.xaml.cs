@@ -98,7 +98,7 @@ namespace TR2RandomizerView.Windows
                     if (error != null)
                     {
                         Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Error;
-                        MessageWindow.ShowError(error.Message);
+                        MessageWindow.ShowException(error);
                         DialogResult = false;
                     }
                     else

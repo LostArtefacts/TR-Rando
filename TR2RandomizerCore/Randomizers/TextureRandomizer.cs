@@ -132,7 +132,7 @@ namespace TR2RandomizerCore.Randomizers
 
             if (_processingException != null)
             {
-                throw _processingException;
+                _processingException.Throw();
             }
         }
 

@@ -33,8 +33,10 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           Grid.Column="1"
                           Margin="5,0,0,15">
-                <TextBlock TextWrapping="Wrap"
-                           Text="{Binding Message}"/>
+                <TextBox TextWrapping="Wrap"
+                         IsReadOnly="True"
+                         BorderThickness="0"
+                         Text="{Binding Message}"/>
             </ScrollViewer>
         </Grid>
 
@@ -53,6 +55,14 @@
                         Margin="10,0,0,0"
                         Visibility="{Binding OkButtonVisibility}"
                         Click="OkButton_Click"/>
+
+                <Button Content="_Details"
+                        Width="70"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="10,0,0,0"
+                        Visibility="{Binding DetailsButtonVisibility}"
+                        Click="DetailsButton_Click"/>
 
                 <Button Content="_Yes"
                         IsDefault="True"

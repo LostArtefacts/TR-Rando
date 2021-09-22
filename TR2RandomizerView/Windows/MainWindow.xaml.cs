@@ -407,7 +407,7 @@ namespace TR2RandomizerView.Windows
             }
             catch (Exception ex)
             {
-                MessageWindow.ShowError(ex.Message);
+                MessageWindow.ShowException(ex);
             }
         }
 

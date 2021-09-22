@@ -47,7 +47,7 @@ namespace TR2RandomizerCore.Processors
 
             if (_processingException != null)
             {
-                throw _processingException;
+                _processingException.Throw();
             }
         }
 

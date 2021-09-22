@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
@@ -14,33 +15,49 @@ namespace TR2RandomizerView.Windows
         #region Dependency Properties
         public static readonly DependencyProperty MessageProperty = DependencyProperty.Register
         (
-            "Message", typeof(string), typeof(MessageWindow)
+            nameof(Message), typeof(string), typeof(MessageWindow)
+        );
+
+        public static readonly DependencyProperty DetailsProperty = DependencyProperty.Register
+        (
+            nameof(Details), typeof(string), typeof(MessageWindow)
         );
 
         public static readonly DependencyProperty ImageIconProperty = DependencyProperty.Register
         (
-            "ImageIcon", typeof(BitmapSource), typeof(MessageWindow)
+            nameof(ImageIcon), typeof(BitmapSource), typeof(MessageWindow)
         );
 
         public static readonly DependencyProperty OkButtonVisibilityProperty = DependencyProperty.Register
         (
-            "OkButtonVisibility", typeof(Visibility), typeof(MessageWindow)
+            nameof(OkButtonVisibility), typeof(Visibility), typeof(MessageWindow)
+        );
+
+        public static readonly DependencyProperty DetailsButtonVisibilityProperty = DependencyProperty.Register
+        (
+            nameof(DetailsButtonVisibility), typeof(Visibility), typeof(MessageWindow)
         );
 
         public static readonly DependencyProperty YesNoButtonVisibilityProperty = DependencyProperty.Register
         (
-            "YesNoButtonVisibility", typeof(Visibility), typeof(MessageWindow)
+            nameof(YesNoButtonVisibility), typeof(Visibility), typeof(MessageWindow)
         );
 
         public static readonly DependencyProperty CancelButtonVisibilityProperty = DependencyProperty.Register
         (
-            "CancelButtonVisibility", typeof(Visibility), typeof(MessageWindow)
+            nameof(CancelButtonVisibility), typeof(Visibility), typeof(MessageWindow)
         );
 
         public string Message
         {
             get => (string)GetValue(MessageProperty);
             set => SetValue(MessageProperty, value);
+        }
+
+        public string Details
+        {
+            get => (string)GetValue(DetailsProperty);
+            set => SetValue(DetailsProperty, value);
         }
 
         public BitmapSource ImageIcon
@@ -53,6 +70,12 @@ namespace TR2RandomizerView.Windows
         {
             get => (Visibility)GetValue(OkButtonVisibilityProperty);
             set => SetValue(OkButtonVisibilityProperty, value);
+        }
+
+        public Visibility DetailsButtonVisibility
+        {
+            get => (Visibility)GetValue(DetailsButtonVisibilityProperty);
+            set => SetValue(DetailsButtonVisibilityProperty, value);
         }
 
         public Visibility YesNoButtonVisibility
@@ -70,16 +93,18 @@ namespace TR2RandomizerView.Windows
 
         private MessageBoxResult _result;
 
-        private MessageWindow(string message, Icon icon, MessageBoxButton buttons)
+        private MessageWindow(string message, Icon icon, MessageBoxButton buttons, string details = null)
         {
             InitializeComponent();
             Owner = WindowUtils.GetActiveWindow(this);
             DataContext = this;
 
             Message = message;
+            Details = details;
             ImageIcon = Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
 
             OkButtonVisibility = (buttons == MessageBoxButton.OK || buttons == MessageBoxButton.OKCancel) ? Visibility.Visible : Visibility.Collapsed;
+            DetailsButtonVisibility = details == null ? Visibility.Collapsed : Visibility.Visible;
             YesNoButtonVisibility = (buttons == MessageBoxButton.YesNo || buttons == MessageBoxButton.YesNoCancel) ? Visibility.Visible : Visibility.Collapsed;
             CancelButtonVisibility = (buttons == MessageBoxButton.OKCancel || buttons == MessageBoxButton.YesNoCancel) ? Visibility.Visible : Visibility.Collapsed;
 
@@ -123,6 +148,11 @@ namespace TR2RandomizerView.Windows
             Show(message, SystemIcons.Error, MessageBoxButton.OK);
         }
 
+        public static void ShowException(Exception e)
+        {
+            Show(e.Message, SystemIcons.Error, MessageBoxButton.OK, e.ToString());
+        }
+
         public static bool ShowConfirm(string message)
         {
             return Show(message, SystemIcons.Question, MessageBoxButton.YesNo) == MessageBoxResult.Yes;
@@ -133,9 +163,9 @@ namespace TR2RandomizerView.Windows
             return Show(message, SystemIcons.Question, MessageBoxButton.YesNoCancel);
         }
 
-        private static MessageBoxResult Show(string message, Icon icon, MessageBoxButton buttons)
+        private static MessageBoxResult Show(string message, Icon icon, MessageBoxButton buttons, string details = null)
         {
-            MessageWindow mw = new MessageWindow(message, icon, buttons);
+            MessageWindow mw = new MessageWindow(message, icon, buttons, details);
             mw.ShowDialog();
             return mw._result;
         }
@@ -173,6 +203,11 @@ namespace TR2RandomizerView.Windows
         {
             WindowUtils.EnableCloseButton(this, true);
             DialogResult = false;
+        }
+
+        private void DetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowError(Details);
         }
     }
 }

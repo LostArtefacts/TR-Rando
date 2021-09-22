@@ -515,7 +515,7 @@
                         <Image Width="186"
                                x:Name="_darknessPreview"
                                HorizontalAlignment="Left"
-                               Source="..\Resources\Darkness\0.png"/>
+                               Source="..\Resources\Darkness\0.jpg"/>
                     </Border>
                 </Grid>
             </StackPanel>

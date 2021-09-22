@@ -117,7 +117,7 @@ namespace TR2RandomizerView.Controls
             }
             catch (Exception e)
             {
-                MessageWindow.ShowError(e.Message);
+                MessageWindow.ShowException(e);
             }
         }
 
@@ -137,7 +137,7 @@ namespace TR2RandomizerView.Controls
                 }
                 catch (Exception e)
                 {
-                    MessageWindow.ShowError(e.Message);
+                    MessageWindow.ShowException(e);
                 }
             }
         }
