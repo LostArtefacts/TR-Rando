@@ -282,8 +282,6 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         _landmarkImporter.Import(level, holder.Mapping, monitor != null && monitor.UseMirroring);
                     }
-
-                    holder.Mapping.ProcessFaceConversions();
                 }
             }
         }

@@ -8,20 +8,41 @@ namespace TREnvironmentEditor.Model.Types
     public class EMModifyFaceFunction : BaseEMFunction
     {
         public EMFaceModification[] Modifications { get; set; }
+        public EMFaceRotation[] Rotations { get; set; }
 
         public override void ApplyToLevel(TR2Level level)
         {
-            foreach (EMFaceModification mod in Modifications)
+            if (Modifications != null)
             {
-                TR2Room room = level.Rooms[mod.RoomNumber];
-                switch (mod.FaceType)
+                foreach (EMFaceModification mod in Modifications)
                 {
-                    case EMTextureFaceType.Rectangles:
-                        ModifyRectangles(room, mod);
-                        break;
-                    case EMTextureFaceType.Triangles:
-                        ModifyTriangles(room, mod);
-                        break;
+                    TR2Room room = level.Rooms[mod.RoomNumber];
+                    switch (mod.FaceType)
+                    {
+                        case EMTextureFaceType.Rectangles:
+                            ModifyRectangles(room, mod);
+                            break;
+                        case EMTextureFaceType.Triangles:
+                            ModifyTriangles(room, mod);
+                            break;
+                    }
+                }
+            }
+
+            if (Rotations != null)
+            {
+                foreach (EMFaceRotation rot in Rotations)
+                {
+                    TR2Room room = level.Rooms[rot.RoomNumber];
+                    switch (rot.FaceType)
+                    {
+                        case EMTextureFaceType.Rectangles:
+                            RotateRectangles(room, rot);
+                            break;
+                        case EMTextureFaceType.Triangles:
+                            RotateTriangles(room, rot);
+                            break;
+                    }
                 }
             }
         }
@@ -84,6 +105,42 @@ namespace TREnvironmentEditor.Model.Types
                 }
             };
         }
+
+        private void RotateRectangles(TR2Room room, EMFaceRotation rot)
+        {
+            foreach (int rectIndex in rot.FaceIndices)
+            {
+                TRFace4 face = room.RoomData.Rectangles[rectIndex];
+                face.Vertices = RotateVertices(face.Vertices, rot);
+            }
+        }
+
+        private void RotateTriangles(TR2Room room, EMFaceRotation rot)
+        {
+            foreach (int triIndex in rot.FaceIndices)
+            {
+                TRFace3 face = room.RoomData.Triangles[triIndex];
+                face.Vertices = RotateVertices(face.Vertices, rot);
+            }
+        }
+
+        private static ushort[] RotateVertices(ushort[] originalVertices, EMFaceRotation rot)
+        {
+            ushort[] remappedVertices = new ushort[originalVertices.Length];
+            for (int i = 0; i < originalVertices.Length; i++)
+            {
+                if (rot.VertexRemap.ContainsKey(i))
+                {
+                    remappedVertices[i] = originalVertices[rot.VertexRemap[i]];
+                }
+                else
+                {
+                    remappedVertices[i] = originalVertices[i];
+                }
+            }
+
+            return remappedVertices;
+        }
     }
 
     public class EMFaceModification
@@ -92,5 +149,13 @@ namespace TREnvironmentEditor.Model.Types
         public EMTextureFaceType FaceType { get; set; }
         public int FaceIndex { get; set; }
         public Dictionary<int, TRVertex> VertexChanges { get; set; }
+    }
+
+    public class EMFaceRotation
+    {
+        public int RoomNumber { get; set; }
+        public EMTextureFaceType FaceType { get; set; }
+        public int[] FaceIndices { get; set; }
+        public Dictionary<int, int> VertexRemap { get; set; }
     }
 }
