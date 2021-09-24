@@ -346,6 +346,16 @@ namespace TR2RandomizerView.Windows
             _editorControl.OpenBackupFolder();
         }
 
+        private void ShowErrorsCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = IsEditorActive && _editorControl.CanOpenErrorFolder();
+        }
+
+        private void ShowErrorsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editorControl.OpenErrorFolder();
+        }
+
         private void RestoreCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             _editorControl.RestoreDefaults();

@@ -245,6 +245,16 @@ namespace TR2RandomizerView.Controls
             Process.Start("explorer.exe", Controller.BackupDirectory);
         }
 
+        public bool CanOpenErrorFolder()
+        {
+            return Directory.Exists(Controller.ErrorDirectory);
+        }
+
+        public void OpenErrorFolder()
+        {
+            Process.Start("explorer.exe", Controller.ErrorDirectory);
+        }
+
         public void RestoreDefaults()
         {
             if (MessageWindow.ShowConfirm("The files that were backed up when this folder was first opened will be copied back to the original directory.\n\nDo you wish to proceed?"))

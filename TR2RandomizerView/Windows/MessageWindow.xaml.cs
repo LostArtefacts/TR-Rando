@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using TR2RandomizerView.Commands;
 using TR2RandomizerView.Utilities;
 
 namespace TR2RandomizerView.Windows
@@ -36,6 +38,11 @@ namespace TR2RandomizerView.Windows
         public static readonly DependencyProperty DetailsButtonVisibilityProperty = DependencyProperty.Register
         (
             nameof(DetailsButtonVisibility), typeof(Visibility), typeof(MessageWindow)
+        );
+
+        public static readonly DependencyProperty ErrorLinkVisibilityProperty = DependencyProperty.Register
+        (
+            nameof(ErrorLinkVisibility), typeof(Visibility), typeof(MessageWindow)
         );
 
         public static readonly DependencyProperty YesNoButtonVisibilityProperty = DependencyProperty.Register
@@ -78,6 +85,12 @@ namespace TR2RandomizerView.Windows
             set => SetValue(DetailsButtonVisibilityProperty, value);
         }
 
+        public Visibility ErrorLinkVisibility
+        {
+            get => (Visibility)GetValue(ErrorLinkVisibilityProperty);
+            set => SetValue(ErrorLinkVisibilityProperty, value);
+        }
+
         public Visibility YesNoButtonVisibility
         {
             get => (Visibility)GetValue(YesNoButtonVisibilityProperty);
@@ -105,6 +118,7 @@ namespace TR2RandomizerView.Windows
 
             OkButtonVisibility = (buttons == MessageBoxButton.OK || buttons == MessageBoxButton.OKCancel) ? Visibility.Visible : Visibility.Collapsed;
             DetailsButtonVisibility = details == null ? Visibility.Collapsed : Visibility.Visible;
+            ErrorLinkVisibility = details != null && WindowCommands.ShowErrors.CanExecute(null, Application.Current.MainWindow) ? Visibility.Visible : Visibility.Collapsed;
             YesNoButtonVisibility = (buttons == MessageBoxButton.YesNo || buttons == MessageBoxButton.YesNoCancel) ? Visibility.Visible : Visibility.Collapsed;
             CancelButtonVisibility = (buttons == MessageBoxButton.OKCancel || buttons == MessageBoxButton.YesNoCancel) ? Visibility.Visible : Visibility.Collapsed;
 
@@ -208,6 +222,11 @@ namespace TR2RandomizerView.Windows
         private void DetailsButton_Click(object sender, RoutedEventArgs e)
         {
             ShowError(Details);
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            WindowCommands.ShowErrors.Execute(null, Application.Current.MainWindow);
         }
     }
 }

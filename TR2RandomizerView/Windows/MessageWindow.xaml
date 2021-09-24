@@ -44,10 +44,25 @@
                 BorderBrush="#ccc"
                 Background="#eee"
                 Grid.Row="1">
-            <StackPanel Margin="0,0,10,0"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                <Button Content="_OK"
+            <Grid Margin="10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="1" 
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Visibility="{Binding ErrorLinkVisibility}">
+                    <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" 
+                               NavigateUri="">Show Error Folder</Hyperlink>
+                </TextBlock>
+
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Grid.Column="1">
+                    <Button Content="_OK"
                         IsDefault="True"
                         Width="70"
                         VerticalAlignment="Center"
@@ -56,41 +71,42 @@
                         Visibility="{Binding OkButtonVisibility}"
                         Click="OkButton_Click"/>
 
-                <Button Content="_Details"
-                        Width="70"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Right"
-                        Margin="10,0,0,0"
-                        Visibility="{Binding DetailsButtonVisibility}"
-                        Click="DetailsButton_Click"/>
+                    <Button Content="_Details"
+                            Width="70"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="10,0,0,0"
+                            Visibility="{Binding DetailsButtonVisibility}"
+                            Click="DetailsButton_Click"/>
 
-                <Button Content="_Yes"
-                        IsDefault="True"
-                        Width="70"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Right"
-                        Margin="10,0,0,0"
-                        Visibility="{Binding YesNoButtonVisibility}"
-                        Click="YesButton_Click"/>
+                    <Button Content="_Yes"
+                            IsDefault="True"
+                            Width="70"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="10,0,0,0"
+                            Visibility="{Binding YesNoButtonVisibility}"
+                            Click="YesButton_Click"/>
 
-                <Button Content="_No"
-                        Width="70"
-                        IsCancel="True"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Right"
-                        Margin="10,0,0,0"
-                        Visibility="{Binding YesNoButtonVisibility}"
-                        Click="NoButton_Click"/>
+                    <Button Content="_No"
+                            Width="70"
+                            IsCancel="True"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="10,0,0,0"
+                            Visibility="{Binding YesNoButtonVisibility}"
+                            Click="NoButton_Click"/>
 
-                <Button Content="_Cancel"
-                        IsCancel="True"
-                        Width="70"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Visibility="{Binding CancelButtonVisibility}"
-                        HorizontalAlignment="Right"
-                        Click="CancelButton_Click"/>
-            </StackPanel>
+                    <Button Content="_Cancel"
+                            IsCancel="True"
+                            Width="70"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Visibility="{Binding CancelButtonVisibility}"
+                            HorizontalAlignment="Right"
+                            Click="CancelButton_Click"/>
+                </StackPanel>
+            </Grid>
         </Border>
     </Grid>
 </Window>

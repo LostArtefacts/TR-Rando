@@ -52,6 +52,10 @@
                         CanExecute="EditorActiveCommandBinding_CanExecute"
                         Executed="ShowBackupCommandBinding_Executed"/>
 
+        <CommandBinding Command="cmds:WindowCommands.ShowErrors"
+                        CanExecute="ShowErrorsCommandBinding_CanExecute"
+                        Executed="ShowErrorsCommandBinding_Executed"/>
+
         <CommandBinding Command="cmds:WindowCommands.Restore"
                         CanExecute="EditorActiveCommandBinding_CanExecute"
                         Executed="RestoreCommandBinding_Executed"/>
@@ -163,6 +167,9 @@
                       IsEnabled="{Binding IsEditorActive}">
                 <MenuItem Header="Show Backup Folder"
                           Command="cmds:WindowCommands.ShowBackup"/>
+
+                <MenuItem Header="Show Error Folder"
+                          Command="cmds:WindowCommands.ShowErrors"/>
 
                 <MenuItem Header="Restore To Default"
                           Command="cmds:WindowCommands.Restore"/>
