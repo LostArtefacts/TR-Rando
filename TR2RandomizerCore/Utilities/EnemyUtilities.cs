@@ -457,5 +457,40 @@ namespace TR2RandomizerCore.Utilities
                 fdControl.WriteToLevel(level);
             }
         }
+
+        public static Dictionary<TR2Entities, TR2Entities> GetAliasPriority(string lvlName, List<TR2Entities> importEntities)
+        {
+            // If the priorities map doesn't contain an entity we are trying to import as a key, TRModelTransporter
+            // will assume it always has priority (e.g. BengalTiger replacing SnowLeopard).
+            Dictionary<TR2Entities, TR2Entities> priorities = new Dictionary<TR2Entities, TR2Entities>();
+
+            // If the dragon is being imported, we want the matching dagger cutscene to be available via misc anim
+            // and the dagger model for the inventory. Otherwise, we need to ensure the existing misc anim matches
+            // level specifics. This is currently only targeted at offshore wheel door levels and HSH, for others
+            // we sacrifice the specific enemy death animations. So for example, if XianGuardSpear is imported into
+            // Wreck, the existing misc anim will remain for the wheel door animation. But if Marco is imported, the
+            // wheel door animation will also be sacrificed.
+            if (importEntities.Contains(TR2Entities.MarcoBartoli))
+            {
+                priorities[TR2Entities.Puzzle2_M_H] = TR2Entities.Puzzle2_M_H_Dagger;
+                priorities[TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_Xian;
+            }
+            else
+            {
+                switch (lvlName)
+                {
+                    case LevelNames.RIG:
+                    case LevelNames.DA:
+                    case LevelNames.DORIA:
+                        priorities[TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_Unwater;
+                        break;
+                    case LevelNames.HOME:
+                        priorities[TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_HSH;
+                        break;
+                }
+            }
+
+            return priorities;
+        }
     }
 }

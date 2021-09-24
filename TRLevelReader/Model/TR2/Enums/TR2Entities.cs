@@ -290,6 +290,7 @@ namespace TRLevelReader.Model.Enums
         LaraMiscAnim_H_Unwater,    // Death-by-Shark, opening wheel door
         LaraMiscAnim_H_Xian,       // Death-by-Guard, inspecting dagger
         LaraMiscAnim_H_Wall,       // Death-by-Barney
+        LaraMiscAnim_H_HSH,        // Inspecting dagger at home
 
         // Split Lara's outfits and weapon animations
         LaraSun = 3000,

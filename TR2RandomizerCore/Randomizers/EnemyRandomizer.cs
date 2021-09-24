@@ -729,7 +729,8 @@ namespace TR2RandomizerCore.Randomizers
                         Level = level.Data,
                         LevelName = level.Name,
                         TextureRemapPath = @"Resources\Textures\Deduplication\" + level.JsonID + "-TextureRemap.json",
-                        TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
+                        TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport),
+                        AliasPriority = EnemyUtilities.GetAliasPriority(level.Name, enemies.EntitiesToImport)
                     };
 
                     // Try to import the selected models into the level.

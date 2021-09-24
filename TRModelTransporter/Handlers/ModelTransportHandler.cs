@@ -7,13 +7,6 @@ namespace TRModelTransporter.Handlers
 {
     public class ModelTransportHandler : AbstractTransportHandler
     {
-        // The given aliases will always have priority if the model already exists
-        private static readonly Dictionary<TR2Entities, TR2Entities> _prioritisedAliases = new Dictionary<TR2Entities, TR2Entities>
-        {
-            [TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_Xian,
-            [TR2Entities.Puzzle2_M_H] = TR2Entities.Puzzle2_M_H_Dagger
-        };
-
         // These are models that use Lara's hips as placeholders - see Import
         private static readonly List<TR2Entities> _laraDependentModels = new List<TR2Entities>
         {
@@ -24,6 +17,9 @@ namespace TRModelTransporter.Handlers
         };
 
         public TR2Entities ModelEntity { get; set; }
+
+        // The given aliases will always have priority if the model already exists
+        public Dictionary<TR2Entities, TR2Entities> AliasPriority { get; set; }
 
         public override void Export()
         {
@@ -41,7 +37,7 @@ namespace TRModelTransporter.Handlers
                 Level.Models = levelModels.ToArray();
                 Level.NumModels++;
             }
-            else if (!_prioritisedAliases.ContainsKey(Definition.Entity) || _prioritisedAliases[Definition.Entity] == Definition.Alias)
+            else if (!AliasPriority.ContainsKey(Definition.Entity) || AliasPriority[Definition.Entity] == Definition.Alias)
             {
                 // Replacement occurs for the likes of aliases taking the place of another
                 // e.g. WhiteTiger replacing BengalTiger in GW, or if we have a specific

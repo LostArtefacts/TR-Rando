@@ -17,6 +17,8 @@ namespace TRModelTransporter.Transport
         public string TextureRemapPath { get; set; }
         public ITexturePositionMonitor TexturePositionMonitor { get; set; }
 
+        public Dictionary<TR2Entities, TR2Entities> AliasPriority { get; set; }
+
         public TRModelImporter()
         {
             EntitiesToImport = new List<TR2Entities>();
@@ -245,6 +247,9 @@ namespace TRModelTransporter.Transport
             // before any animation sounds are dealt with.
             _soundHandler.Definitions = standardDefinitions.Concat(soundOnlyDefinitions);
             _soundHandler.Import();
+
+            // Allow external alias model priorities to be defined
+            _modelHandler.AliasPriority = AliasPriority == null ? new Dictionary<TR2Entities, TR2Entities>() : AliasPriority;
 
             foreach (TRModelDefinition definition in standardDefinitions)
             {
