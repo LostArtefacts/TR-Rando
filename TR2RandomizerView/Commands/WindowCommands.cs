@@ -39,6 +39,7 @@ namespace TR2RandomizerView.Commands
 
         // Tools
         public static readonly RoutedUICommand ShowBackup = new RoutedUICommand();
+        public static readonly RoutedUICommand ShowErrors = new RoutedUICommand();
         public static readonly RoutedUICommand Restore = new RoutedUICommand();
         public static readonly RoutedUICommand ImportSettings = new RoutedUICommand();
         public static readonly RoutedUICommand ExportSettings = new RoutedUICommand();

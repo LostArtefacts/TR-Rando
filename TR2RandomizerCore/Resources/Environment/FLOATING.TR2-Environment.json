@@ -1979,7 +1979,20 @@
     }
   ],
 
-  "Mirrored": [],
+  "Mirrored": [
+    {
+      "Comments": "Reposition the wall blades.",
+      "EMType": 50,
+      "EntityType": 81,
+      "RoomMap": {
+        "121": {
+          "0": {
+            "Angle": -32768
+          }
+        }
+      }
+    }
+  ],
 
   "AlternativeTextures": {
     "1579": 1595,

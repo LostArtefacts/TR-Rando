@@ -4,7 +4,7 @@ using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {
-    public abstract class BaseWaterFunction : BaseEMFunction
+    public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
     {
         public int[] RoomNumbers { get; set; }
         public ushort[] WaterTextures { get; set; }
@@ -83,6 +83,24 @@ namespace TREnvironmentEditor.Model.Types
             room.RoomData.NumRectangles = (short)rs.Count;
 
             room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+        }
+
+        public void RemapTextures(Dictionary<ushort, ushort> indexMap)
+        {
+            if (WaterTextures != null)
+            {
+                List<ushort> textures = WaterTextures.ToList();
+                foreach (ushort texture in indexMap.Keys)
+                {
+                    int i = textures.IndexOf(texture);
+                    if (i != -1)
+                    {
+                        textures.Insert(i, indexMap[texture]);
+                        textures.Remove(texture);
+                    }
+                }
+                WaterTextures = textures.ToArray();
+            }
         }
     }
 }

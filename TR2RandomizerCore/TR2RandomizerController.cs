@@ -496,6 +496,7 @@ namespace TR2RandomizerCore
         #region TREditor Passthrough
         public string EditionTitle => _editor.Edition.Title;
         public bool IsExportPossible => _editor.IsExportPossible;
+        public string ErrorDirectory => _editor.ErrorDirectory;
         public string BackupDirectory => _editor.BackupDirectory;
         public string TargetDirectory => _editor.TargetDirectory;
 

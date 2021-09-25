@@ -132,7 +132,7 @@ namespace TR2RandomizerCore.Randomizers
 
             if (_processingException != null)
             {
-                throw _processingException;
+                _processingException.Throw();
             }
         }
 
@@ -282,8 +282,6 @@ namespace TR2RandomizerCore.Randomizers
                     {
                         _landmarkImporter.Import(level, holder.Mapping, monitor != null && monitor.UseMirroring);
                     }
-
-                    holder.Mapping.ProcessFaceConversions();
                 }
             }
         }

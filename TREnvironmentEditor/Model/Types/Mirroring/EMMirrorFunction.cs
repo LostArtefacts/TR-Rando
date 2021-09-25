@@ -126,10 +126,29 @@ namespace TREnvironmentEditor.Model.Types
                 room.Info.X -= room.NumXSectors * SectorSize;
                 Debug.Assert(room.Info.X >= 0);
 
+                // Flip room sprites separately as they don't sit on tile edges
+                List<TR2RoomVertex> processedVerts = new List<TR2RoomVertex>();
+                foreach (TRRoomSprite sprite in room.RoomData.Sprites)
+                {
+                    TR2RoomVertex roomVertex = room.RoomData.Vertices[sprite.Vertex];
+                    int xDiff = roomVertex.Vertex.X % SectorSize;
+                    int sectorX = (roomVertex.Vertex.X + xDiff) / SectorSize;
+                    int newSectorX = (room.NumXSectors - sectorX) * SectorSize;
+                    newSectorX += SectorSize - xDiff;
+                    roomVertex.Vertex.X = (short)newSectorX;
+                    Debug.Assert(roomVertex.Vertex.X >= 0);
+                    processedVerts.Add(roomVertex);
+                }
+
                 // Flip the face vertices
                 int mid = room.NumXSectors / 2;
                 foreach (TR2RoomVertex vert in room.RoomData.Vertices)
                 {
+                    if (processedVerts.Contains(vert))
+                    {
+                        continue;
+                    }
+
                     int sectorX = vert.Vertex.X / SectorSize;
                     int newSectorX = room.NumXSectors - sectorX;
                     vert.Vertex.X = (short)(newSectorX * SectorSize);
@@ -176,41 +195,15 @@ namespace TREnvironmentEditor.Model.Types
         {
             // Boxes do not necessarily cover only one sector and several sectors can point
             // to the same box. So we need to work out the smallest new X position for shared
-            // boxes and update each one only once. The XMax value is simply the previous Max/Min 
-            // difference added to the new XMin value.
-            Dictionary<TR2Box, int> boxPositionMap = new Dictionary<TR2Box, int>();
-
-            foreach (TR2Room room in level.Rooms)
+            // boxes and update each one only once. This is done by converting the xmin and xmax
+            // to world coordinates, flipping them over X and then swapping them.
+            foreach (TR2Box box in level.Boxes)
             {
-                int roomX = room.Info.X / SectorSize;
-                for (int i = 0; i < room.SectorList.Length; i++)
-                {
-                    TRRoomSector sector = room.SectorList[i];
-                    if (sector.BoxIndex != ushort.MaxValue)
-                    {
-                        TR2Box box = level.Boxes[sector.BoxIndex];
-
-                        // Where is this sector in the world?
-                        int sectorX = i / room.NumZSectors;
-                        sectorX += roomX;
-
-                        if (!boxPositionMap.ContainsKey(box))
-                        {
-                            boxPositionMap[box] = sectorX;
-                        }
-                        else
-                        {
-                            boxPositionMap[box] = Math.Min(boxPositionMap[box], sectorX);
-                        }
-                    }
-                }
-            }
-
-            foreach (TR2Box box in boxPositionMap.Keys)
-            {
-                int boxXDiff = box.XMax - box.XMin;
-                box.XMin = (byte)boxPositionMap[box];
-                box.XMax = (byte)(box.XMin + boxXDiff);
+                byte newMaxX = (byte)(FlipWorldX(box.XMin * SectorSize) / SectorSize);
+                byte newMinX = (byte)(FlipWorldX(box.XMax * SectorSize) / SectorSize);
+                Debug.Assert(newMaxX >= newMinX);
+                box.XMin = newMinX;
+                box.XMax = newMaxX;
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.ExceptionServices;
 using TR2RandomizerCore.Helpers;
 using TRGE.Core;
 using TRLevelReader;
@@ -16,7 +17,7 @@ namespace TR2RandomizerCore.Processors
         protected TR2LevelWriter _writer;
         protected TR2CombinedLevel _levelInstance;
 
-        protected Exception _processingException;
+        protected ExceptionDispatchInfo _processingException;
 
         protected readonly object _readLock, _writeLock, _monitorLock;
 
@@ -136,7 +137,7 @@ namespace TR2RandomizerCore.Processors
             {
                 if (_processingException == null)
                 {
-                    _processingException = e;
+                    _processingException = ExceptionDispatchInfo.Capture(e);
                 }
             }
         }

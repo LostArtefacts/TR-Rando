@@ -55,14 +55,21 @@
 
     [
       {
-        "Comments": "Add an annoying dorm room sound effect.",
-        "EMType": 101,
-        "Source": {
-          "X": 28118,
-          "Y": -5726,
-          "Z": 68124,
-          "Flags": 192,
-          "SoundID": 228
+        "Comments": "Add some barrels",
+        "EMType": 24,
+        "Locations": [
+          {
+            "X": 35324,
+            "Y": -4096,
+            "Z": 68091,
+            "Room": 42,
+            "Angle": 16384
+          }
+        ],
+        "Mesh": {
+          "MeshID": 22,
+          "Intensity1": 6400,
+          "Intensity2": 6400
         }
       }
     ]
