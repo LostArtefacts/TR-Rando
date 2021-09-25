@@ -1465,6 +1465,19 @@
         "Z": 29184,
         "Room": 10
       }
+    },
+
+    {
+      "Comments": "Rotate the lava bowl.",
+      "EMType": 44,
+      "EntityIndex": 34,
+      "TargetLocation": {
+        "X": 53760,
+        "Y": 5120,
+        "Z": 49664,
+        "Room": 28,
+        "Angle": 0
+      }
     }
   ]
 }
