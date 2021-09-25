@@ -3050,5 +3050,18 @@
     }
   ],
 
-  "Mirrored": []
+  "Mirrored": [
+    {
+      "Comments": "Reposition the wall blades.",
+      "EMType": 50,
+      "EntityType": 81,
+      "RoomMap": {
+        "67": {
+          "16384": {
+            "Angle": -16384
+          }
+        }
+      }
+    }
+  ]
 }
