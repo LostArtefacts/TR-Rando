@@ -227,7 +227,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border>
+                    <Border Margin="0,3,0,0">
                         <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Left">
                             <Label Content="Number of levels"
@@ -281,7 +281,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border>
+                    <Border Margin="0,3,0,0">
                         <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Left">
                             <Label Content="Number of levels"
@@ -335,7 +335,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border>
+                    <Border Margin="0,3,0,0">
                         <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Left">
                             <Label Content="Number of levels"
@@ -389,7 +389,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border>
+                    <Border Margin="0,3,0,0">
                         <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Left">
                             <Label Content="Number of levels"
