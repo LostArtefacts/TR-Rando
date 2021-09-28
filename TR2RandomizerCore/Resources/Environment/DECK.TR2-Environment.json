@@ -193,6 +193,48 @@
       ],
       [
         {
+          "Comments": "Potential new position for the storage keyhole.",
+          "EMType": 41,
+          "EntityIndex": 42,
+          "Location": {
+            "X": 39424,
+            "Y": 3072,
+            "Z": 18944,
+            "Room": 60,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the storage keyhole.",
+          "EMType": 41,
+          "EntityIndex": 42,
+          "Location": {
+            "X": 40448,
+            "Y": 3072,
+            "Z": 18944,
+            "Room": 70,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the storage keyhole.",
+          "EMType": 41,
+          "EntityIndex": 42,
+          "Location": {
+            "X": 39424,
+            "Y": 3072,
+            "Z": 26112,
+            "Room": 60,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
           "Comments": "Potentially convert the keyhole into a switch. Easy Deck.",
           "EMType": 45,
           "EntityIndex": 42,
