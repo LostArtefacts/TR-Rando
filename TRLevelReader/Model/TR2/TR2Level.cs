@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Helpers;
 using TRLevelReader.Serialization;
 
 //https://trwiki.earvillage.net/doku.php?id=trsone
@@ -247,7 +248,9 @@ namespace TRLevelReader.Model
         /// <summary>
         /// NumBoxes * 20 bytes (double check this)
         /// </summary>
-        public TR2Zone[] Zones { get; set; }
+        //public TR2Zone[] Zones { get; set; }
+        public ushort[][][] GroundZone { get; set; }
+        public ushort[][] FlyZone { get; set; }
 
         /// <summary>
         /// 4 bytes
@@ -380,7 +383,9 @@ namespace TRLevelReader.Model
                     foreach (TR2Box box in Boxes) { writer.Write(box.Serialize()); }
                     writer.Write(NumOverlaps);
                     foreach (ushort overlap in Overlaps) { writer.Write(overlap); }
-                    foreach (TR2Zone zone in Zones) { writer.Write(zone.Serialize()); }
+                    //See note in TR2LevelReader re zones
+                    //foreach (TR2Zone zone in Zones) { writer.Write(zone.Serialize()); }
+                    foreach (ushort zone in TR2BoxUtilities.FlattenZones(this)) { writer.Write(zone); }
                     writer.Write(NumAnimatedTextures);
                     writer.Write((ushort)AnimatedTextures.Length);
                     foreach (TRAnimatedTexture texture in AnimatedTextures) { writer.Write(texture.Serialize()); }
