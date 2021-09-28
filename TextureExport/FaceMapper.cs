@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Linq;
+using TRFDControl;
+using TRFDControl.Utilities;
 using TRLevelReader;
 using TRLevelReader.Model;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
-using TRTexture16Importer.Helpers;
 
 namespace TextureExport
 {
@@ -50,7 +52,7 @@ namespace TextureExport
                     {
                         triFaces[roomNumber][i] = GetFaceSegment(_level.Rooms[roomNumber].RoomData.Triangles[i].Texture);
                     }
-                    
+
                     foreach (int rectIndex in rectFaces[roomNumber].Keys)
                     {
                         TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
@@ -161,6 +163,137 @@ namespace TextureExport
                     Fraction = (byte)(y == 0 ? 0 : y - 1)
                 }
             };
+        }
+
+        public void GenerateBoxes(string writePath, int[] roomNumbers)
+        {
+            using (_packer = new TexturePacker(_level))
+            {
+                _packer.MaximumTiles = 10000;
+
+                Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new Dictionary<int, Dictionary<int, TexturedTileSegment>>();
+                Dictionary<int, Dictionary<int, int>> newRectFaces = new Dictionary<int, Dictionary<int, int>>();
+
+                List<TRObjectTexture> objectTextures = _level.ObjectTextures.ToList();
+                FDControl control = new FDControl();
+                control.ParseFromLevel(_level);
+
+                foreach (int roomNumber in roomNumbers)
+                {
+                    rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+                    newRectFaces[roomNumber] = new Dictionary<int, int>();
+
+                    for (int i = 0; i < _level.Rooms[roomNumber].RoomData.NumRectangles; i++)
+                    {
+                        TexturedTileSegment seg = GetBoxFaceSegment(_level.Rooms[roomNumber], i);
+                        if (seg != null)
+                        {
+                            rectFaces[roomNumber][i] = seg;
+                        }
+                    }
+
+                    foreach (int rectIndex in rectFaces[roomNumber].Keys)
+                    {
+                        TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
+                        TexturedTileSegment newSegment = DrawNewFace(segment, GetBoxDescription(control, roomNumber, rectIndex));
+
+                        newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
+                        objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                    }
+                }
+
+                _packer.Pack(true);
+
+                foreach (int roomNumber in roomNumbers)
+                {
+                    foreach (int rectIndex in newRectFaces[roomNumber].Keys)
+                    {
+                        _level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
+                    }
+                }
+
+                _level.ObjectTextures = objectTextures.ToArray();
+                _level.NumObjectTextures = (uint)objectTextures.Count;
+
+                new TR2LevelWriter().WriteLevelToFile(_level, writePath);
+            }
+        }
+
+        private TexturedTileSegment GetBoxFaceSegment(TR2Room room, int rectIndex)
+        {
+            TRFace4 face = room.RoomData.Rectangles[rectIndex];
+
+            List<TRVertex> verts = new List<TRVertex>
+            {
+                room.RoomData.Vertices[face.Vertices[0]].Vertex,
+                room.RoomData.Vertices[face.Vertices[1]].Vertex,
+                room.RoomData.Vertices[face.Vertices[2]].Vertex,
+                room.RoomData.Vertices[face.Vertices[3]].Vertex
+            };
+
+            // Ignore walls
+            if (verts.All(v => v.X == verts[0].X) || verts.All(v => v.Z == verts[0].Z))
+            {
+                return null;
+            }
+
+            List<int> indices = new List<int> { face.Texture};
+            foreach (TexturedTile tile in _packer.Tiles)
+            {
+                List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
+                if (segments.Count > 0)
+                {
+                    return segments[0];
+                }
+            }
+            return null;
+        }
+
+        private string GetBoxDescription(FDControl control, int roomNumber, int rectIndex)
+        {
+            TR2Room room = _level.Rooms[roomNumber];
+            TRFace4 face = room.RoomData.Rectangles[rectIndex];
+            List<TRVertex> verts = new List<TRVertex>
+            {
+                room.RoomData.Vertices[face.Vertices[0]].Vertex,
+                room.RoomData.Vertices[face.Vertices[1]].Vertex,
+                room.RoomData.Vertices[face.Vertices[2]].Vertex,
+                room.RoomData.Vertices[face.Vertices[3]].Vertex
+            };
+
+            int xmin = verts.Min(v => v.X) + room.Info.X;
+            int zmin = verts.Min(v => v.Z) + room.Info.Z;
+
+            TRRoomSector sector = FDUtilities.GetRoomSector(xmin, verts[0].Y, zmin, (short)roomNumber, _level, control);
+            if (sector.BoxIndex == ushort.MaxValue)
+            {
+                return "NOBOX";
+            }
+
+            TR2Box box = _level.Boxes[sector.BoxIndex];
+            int index = box.OverlapIndex & 0x3fff;
+            int boxNumber;
+            bool done = false;
+            List<int> overlaps = new List<int>();
+
+            do
+            {
+                boxNumber = _level.Overlaps[index++];
+                if ((boxNumber & 0x8000) > 0)
+                {
+                    done = true;
+                    boxNumber &= 0x7fff;
+                }
+                overlaps.Add(boxNumber);
+            }
+            while (!done);
+
+            string info = "B" + sector.BoxIndex;
+            foreach (int overlap in overlaps)
+            {
+                info += Environment.NewLine + "  " + overlap;
+            }
+            return info;
         }
     }
 }
