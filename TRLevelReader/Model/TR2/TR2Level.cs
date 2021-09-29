@@ -248,9 +248,7 @@ namespace TRLevelReader.Model
         /// <summary>
         /// NumBoxes * 20 bytes (double check this)
         /// </summary>
-        //public TR2Zone[] Zones { get; set; }
-        public ushort[][][] GroundZone { get; set; }
-        public ushort[][] FlyZone { get; set; }
+        public TR2ZoneGroup[] Zones { get; set; }
 
         /// <summary>
         /// 4 bytes
@@ -384,8 +382,7 @@ namespace TRLevelReader.Model
                     writer.Write(NumOverlaps);
                     foreach (ushort overlap in Overlaps) { writer.Write(overlap); }
                     //See note in TR2LevelReader re zones
-                    //foreach (TR2Zone zone in Zones) { writer.Write(zone.Serialize()); }
-                    foreach (ushort zone in TR2BoxUtilities.FlattenZones(this)) { writer.Write(zone); }
+                    foreach (ushort zone in TR2BoxUtilities.FlattenZones(Zones)) { writer.Write(zone); }
                     writer.Write(NumAnimatedTextures);
                     writer.Write((ushort)AnimatedTextures.Length);
                     foreach (TRAnimatedTexture texture in AnimatedTextures) { writer.Write(texture.Serialize()); }

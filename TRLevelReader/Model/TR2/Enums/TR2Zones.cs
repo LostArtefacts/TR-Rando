@@ -2,21 +2,9 @@
 {
     public enum TR2Zones
     {
-        Ground = 0,
-        Fly = 1
-    }
-
-    public enum FlipStatus
-    {
-        Off = 0,
-        On = 1
-    }
-
-    public enum Normal
-    {
-        Normal1 = 0,
-        Normal2 = 1,
-        Normal3 = 2,
-        Normal4 = 3
+        Zone1 = 0,
+        Zone2 = 1,
+        Zone3 = 2,
+        Zone4 = 3
     }
 }

@@ -11,6 +11,7 @@ using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using System.Linq;
 using TRLevelReader.Helpers;
+using TRLevelReader.Model.Base.Enums;
 
 namespace TRLevelReaderUnitTests
 {
@@ -1211,10 +1212,12 @@ namespace TRLevelReaderUnitTests
 
             // For every box, store the current zone. We use the serialized form
             // for comparison.
-            Dictionary<int, byte[]> boxZones = new Dictionary<int, byte[]>();
+            Dictionary<int, byte[]> flipOffZones = new Dictionary<int, byte[]>();
+            Dictionary<int, byte[]> flipOnZones = new Dictionary<int, byte[]>();
             for (int i = 0; i < lvl.NumBoxes; i++)
             {
-                boxZones[i] = TR2BoxUtilities.GetZone(lvl, i).Serialize();
+                flipOffZones[i] = lvl.Zones[i][FlipStatus.Off].Serialize();
+                flipOnZones[i] = lvl.Zones[i][FlipStatus.On].Serialize();
             }
 
             // Add a new box
@@ -1226,10 +1229,11 @@ namespace TRLevelReaderUnitTests
             // Add a new zone for the box and store its serialized form for comparison
             int newBoxIndex = (int)(lvl.NumBoxes - 1);
             TR2BoxUtilities.DuplicateZone(lvl, 0);
-            boxZones[newBoxIndex] = TR2BoxUtilities.GetZone(lvl, newBoxIndex).Serialize();
+            flipOffZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.Off].Serialize();
+            flipOnZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.On].Serialize();
 
             // Verify the number of zone ushorts matches what's expected for the box count
-            Assert.AreEqual(TR2BoxUtilities.FlattenZones(lvl).Length, (int)(10 * lvl.NumBoxes));
+            Assert.AreEqual(TR2BoxUtilities.FlattenZones(lvl.Zones).Length, (int)(10 * lvl.NumBoxes));
 
             // Write and re-read the level
             new TR2LevelWriter().WriteLevelToFile(lvl, "TEST.tr2");
@@ -1239,9 +1243,13 @@ namespace TRLevelReaderUnitTests
             // affect any of the others and that the addition itself matches after IO.
             for (int i = 0; i < lvl.NumBoxes; i++)
             {
-                byte[] zones = TR2BoxUtilities.GetZone(lvl, i).Serialize();
-                Assert.IsTrue(boxZones.ContainsKey(i));
-                CollectionAssert.AreEqual(boxZones[i], zones);
+                byte[] flipOff = lvl.Zones[i][FlipStatus.Off].Serialize();
+                Assert.IsTrue(flipOffZones.ContainsKey(i));
+                CollectionAssert.AreEqual(flipOffZones[i], flipOff);
+
+                byte[] flipOn = lvl.Zones[i][FlipStatus.On].Serialize();
+                Assert.IsTrue(flipOnZones.ContainsKey(i));
+                CollectionAssert.AreEqual(flipOnZones[i], flipOn);
             }
         }
 

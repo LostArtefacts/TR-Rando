@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using TRLevelReader.Model;
+using TRLevelReader.Model.Base.Enums;
 using TRLevelReader.Model.TR2.Enums;
 
 namespace TRLevelReader.Helpers
@@ -15,99 +15,77 @@ namespace TRLevelReader.Helpers
         public static readonly int Blockable = 0x8000;
         public static readonly int Blocked = 0x4000;
 
-        public static ushort GetZoneValue(TR2Level level, TR2Zones zone, FlipStatus flip, int boxIndex, Normal normal = Normal.Normal1)
-        {
-            return zone == TR2Zones.Ground ? level.GroundZone[(int)flip][(int)normal][boxIndex] : level.FlyZone[(int)flip][boxIndex];
-        }
-
-        public static TR2Zone GetZone(TR2Level level, int boxIndex)
-        {
-            // This is just a representation of the zoning, we use the manual approach instead
-            return new TR2Zone
-            {
-                GroundZone1Normal = level.GroundZone[(int)FlipStatus.Off][(int)Normal.Normal1][boxIndex],
-                GroundZone2Normal = level.GroundZone[(int)FlipStatus.Off][(int)Normal.Normal2][boxIndex],
-                GroundZone3Normal = level.GroundZone[(int)FlipStatus.Off][(int)Normal.Normal3][boxIndex],
-                GroundZone4Normal = level.GroundZone[(int)FlipStatus.Off][(int)Normal.Normal4][boxIndex],
-
-                GroundZone1Alternate = level.GroundZone[(int)FlipStatus.On][(int)Normal.Normal1][boxIndex],
-                GroundZone2Alternate = level.GroundZone[(int)FlipStatus.On][(int)Normal.Normal2][boxIndex],
-                GroundZone3Alternate = level.GroundZone[(int)FlipStatus.On][(int)Normal.Normal3][boxIndex],
-                GroundZone4Alternate = level.GroundZone[(int)FlipStatus.On][(int)Normal.Normal4][boxIndex],
-
-                FlyZoneNormal = level.FlyZone[(int)FlipStatus.Off][boxIndex],
-                FlyZoneAlternate = level.FlyZone[(int)FlipStatus.On][boxIndex]
-            };
-        }
-
         public static void DuplicateZone(TR2Level level, int boxIndex)
         {
-            IEnumerable<int> flipValues = Enum.GetValues(typeof(FlipStatus)).Cast<int>();
-            IEnumerable<int> normValues = Enum.GetValues(typeof(Normal)).Cast<int>();
-
-            foreach (int flip in flipValues)
+            TR2ZoneGroup zoneGroup = level.Zones[boxIndex];
+            List<TR2ZoneGroup> zones = level.Zones.ToList();
+            zones.Add(new TR2ZoneGroup
             {
-                foreach (int norm in normValues)
-                {
-                    List<ushort> groundValues = level.GroundZone[flip][norm].ToList();
-                    groundValues.Add(groundValues[boxIndex]);
-                    level.GroundZone[flip][norm] = groundValues.ToArray();
-                }
-
-                List<ushort> flyValues = level.FlyZone[flip].ToList();
-                flyValues.Add(flyValues[boxIndex]);
-                level.FlyZone[flip] = flyValues.ToArray();
-            }
+                NormalZone = zoneGroup.NormalZone.Clone(),
+                AlternateZone = zoneGroup.AlternateZone.Clone()
+            });
+            level.Zones = zones.ToArray();
         }
 
-        public static void ReadZones(TR2Level level, BinaryReader reader)
+        public static TR2ZoneGroup[] ReadZones(uint numBoxes, ushort[] zoneData)
         {
-            IEnumerable<int> flipValues = Enum.GetValues(typeof(FlipStatus)).Cast<int>();
-            IEnumerable<int> normValues = Enum.GetValues(typeof(Normal)).Cast<int>();
-
-            level.GroundZone = new ushort[flipValues.Count()][][];
-            level.FlyZone = new ushort[flipValues.Count()][];
-
-            foreach (int flip in flipValues)
+            // Initialise the zone groups - one for every box.
+            TR2ZoneGroup[] zones = new TR2ZoneGroup[numBoxes];
+            for (int i = 0; i < zones.Length; i++)
             {
-                level.GroundZone[flip] = new ushort[normValues.Count()][];
-                foreach (int norm in normValues)
+                zones[i] = new TR2ZoneGroup
                 {
-                    level.GroundZone[flip][norm] = new ushort[level.NumBoxes];
-                    for (int box = 0; box < level.NumBoxes; box++)
+                    NormalZone = new TR2Zone(),
+                    AlternateZone = new TR2Zone()
+                };
+            }
+
+            // Build the zones, mapping the multidimensional ushort structures into the corresponding
+            // zone object values.
+            IEnumerable<FlipStatus> flipValues = Enum.GetValues(typeof(FlipStatus)).Cast<FlipStatus>();
+            IEnumerable<TR2Zones> zoneValues = Enum.GetValues(typeof(TR2Zones)).Cast<TR2Zones>();
+
+            int valueIndex = 0;
+            foreach (FlipStatus flip in flipValues)
+            {
+                foreach (TR2Zones zone in zoneValues)
+                {
+                    for (int box = 0; box < zones.Length; box++)
                     {
-                        level.GroundZone[flip][norm][box] = reader.ReadUInt16();
+                        zones[box][flip].GroundZones[zone] = zoneData[valueIndex++];
                     }
                 }
 
-                level.FlyZone[flip] = new ushort[level.NumBoxes];
-                for (int box = 0; box < level.NumBoxes; box++)
+                for (int box = 0; box < zones.Length; box++)
                 {
-                    level.FlyZone[flip][box] = reader.ReadUInt16();
+                    zones[box][flip].FlyZone = zoneData[valueIndex++];
                 }
             }
+
+            return zones;
         }
 
-        public static ushort[] FlattenZones(TR2Level level)
+        public static ushort[] FlattenZones(TR2ZoneGroup[] zoneGroups)
         {
+            // Convert the zone objects back into a flat ushort list.
             IEnumerable<FlipStatus> flipValues = Enum.GetValues(typeof(FlipStatus)).Cast<FlipStatus>();
-            IEnumerable<Normal> normValues = Enum.GetValues(typeof(Normal)).Cast<Normal>();
+            IEnumerable<TR2Zones> zoneValues = Enum.GetValues(typeof(TR2Zones)).Cast<TR2Zones>();
 
             List<ushort> zones = new List<ushort>();
 
             foreach (FlipStatus flip in flipValues)
             {
-                foreach (Normal norm in normValues)
+                foreach (TR2Zones zone in zoneValues)
                 {
-                    for (int box = 0; box < level.NumBoxes; box++)
+                    for (int box = 0; box < zoneGroups.Length; box++)
                     {
-                        zones.Add(GetZoneValue(level, TR2Zones.Ground, flip, box, norm));
+                        zones.Add(zoneGroups[box][flip].GroundZones[zone]);
                     }
                 }
 
-                for (int box = 0; box < level.NumBoxes; box++)
+                for (int box = 0; box < zoneGroups.Length; box++)
                 {
-                    zones.Add(GetZoneValue(level, TR2Zones.Fly, flip, box));
+                    zones.Add(zoneGroups[box][flip].FlyZone);
                 }
             }
 

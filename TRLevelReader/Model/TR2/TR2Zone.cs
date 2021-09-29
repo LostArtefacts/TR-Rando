@@ -2,33 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TRLevelReader.Model.TR2.Enums;
 using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TR2Zone : ISerializableCompact
+    public class TR2Zone : ISerializableCompact, ICloneable
     {
-        public ushort GroundZone1Normal { get; set; }
+        public Dictionary<TR2Zones, ushort> GroundZones { get; set; }
+        public ushort FlyZone { get; set; }
 
-        public ushort GroundZone2Normal { get; set; }
-
-        public ushort GroundZone3Normal { get; set; }
-
-        public ushort GroundZone4Normal { get; set; }
-
-        public ushort FlyZoneNormal { get; set; }
-
-        public ushort GroundZone1Alternate { get; set; }
-
-        public ushort GroundZone2Alternate { get; set; }
-
-        public ushort GroundZone3Alternate { get; set; }
-
-        public ushort GroundZone4Alternate { get; set; }
-
-        public ushort FlyZoneAlternate { get; set; }
+        public TR2Zone()
+        {
+            GroundZones = new Dictionary<TR2Zones, ushort>();
+        }
 
         public byte[] Serialize()
         {
@@ -36,20 +23,29 @@ namespace TRLevelReader.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-                    writer.Write(GroundZone1Normal);
-                    writer.Write(GroundZone2Normal);
-                    writer.Write(GroundZone3Normal);
-                    writer.Write(GroundZone4Normal);
-                    writer.Write(FlyZoneNormal);
-                    writer.Write(GroundZone1Alternate);
-                    writer.Write(GroundZone2Alternate);
-                    writer.Write(GroundZone3Alternate);
-                    writer.Write(GroundZone4Alternate);
-                    writer.Write(FlyZoneAlternate);
+                    foreach (ushort zone in GroundZones.Values)
+                    {
+                        writer.Write(zone);
+                    }
+                    writer.Write(FlyZone);
                 }
 
                 return stream.ToArray();
             }
+        }
+
+        public TR2Zone Clone()
+        {
+            return new TR2Zone
+            {
+                GroundZones = GroundZones.ToDictionary(e => e.Key, e => e.Value),
+                FlyZone = FlyZone
+            };
+        }
+
+        object ICloneable.Clone()
+        {
+            return Clone();
         }
     }
 }

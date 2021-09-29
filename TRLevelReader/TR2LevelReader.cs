@@ -300,7 +300,6 @@ namespace TRLevelReader
             //Overlaps & Zones
             level.NumOverlaps = reader.ReadUInt32();
             level.Overlaps = new ushort[level.NumOverlaps];
-            //level.Zones = new TR2Zone[level.NumBoxes];
 
             for (int i = 0; i < level.NumOverlaps; i++)
             {
@@ -309,13 +308,14 @@ namespace TRLevelReader
 
             // Although TRosettaStone references a struct for zones, the data isn't
             // sequential. Instead it's organised by flipmap status, all the groundzone
-            // normals are then together and the flyzones at the end. TR2BoxUtilities
-            // handles the complexity here.
-            TR2BoxUtilities.ReadZones(level, reader);
-            //for (int i = 0; i < level.NumBoxes; i++)
-            //{
-            //    level.Zones[i] = TR2FileReadUtilities.ReadZone(reader);
-            //}
+            // values are then together and the flyzones at the end. TR2BoxUtilities
+            // handles the complexity here, so we just pass the raw ushort values.
+            ushort[] zoneData = new ushort[level.NumBoxes * 10];
+            for (int i = 0; i < zoneData.Length; i++)
+            {
+                zoneData[i] = reader.ReadUInt16();
+            }
+            level.Zones = TR2BoxUtilities.ReadZones(level.NumBoxes, zoneData);
 
             //Animated Textures - the data stores the total number of ushorts to read (NumAnimatedTextures)
             //followed by a ushort to describe the number of actual texture group objects.
