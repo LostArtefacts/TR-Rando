@@ -491,7 +491,7 @@ namespace TRLevelReaderUnitTests
             //Set OneShot on each trigger
             foreach (FDTriggerEntry trigger in triggers)
             {
-                trigger.TrigSetup.SetOneShot();
+                trigger.TrigSetup.OneShot = true;
             }
 
             fdataReader.WriteToLevel(lvl);
@@ -516,7 +516,7 @@ namespace TRLevelReaderUnitTests
             //Switch it off again
             foreach (FDTriggerEntry trigger in triggers)
             {
-                trigger.TrigSetup.ClearOneShot();
+                trigger.TrigSetup.OneShot = false;
             }
 
             fdataReader.WriteToLevel(lvl);

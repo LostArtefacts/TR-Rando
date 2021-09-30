@@ -24,6 +24,17 @@ namespace TRFDControl
             {
                 return (Value & 0x0100) > 0;
             }
+            set
+            {
+                if (value)
+                {
+                    Value |= 0x0100;
+                }
+                else
+                {
+                    Value ^= 0x0100;
+                }
+            }
         }
 
         public byte Mask
@@ -37,16 +48,6 @@ namespace TRFDControl
                 Value = (ushort)(Value & ~(Value & 0x3E00));
                 Value |= (ushort)(value << 9);
             }
-        }
-
-        public void SetOneShot()
-        {
-            Value |= 0x0100;
-        }
-
-        public void ClearOneShot()
-        {
-            Value ^= 0x0100;
         }
     }
 }

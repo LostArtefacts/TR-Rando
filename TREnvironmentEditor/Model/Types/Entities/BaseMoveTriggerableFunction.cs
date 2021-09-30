@@ -67,7 +67,7 @@ namespace TREnvironmentEditor.Model.Types
                     currentTrigger.TrigActionList.Add(newAction);
                     if (currentTriggers[0].TrigSetup.OneShot)
                     {
-                        currentTrigger.TrigSetup.SetOneShot();
+                        currentTrigger.TrigSetup.OneShot = true;
                     }
                 }
                 else
