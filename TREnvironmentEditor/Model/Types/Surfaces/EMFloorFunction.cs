@@ -209,10 +209,16 @@ namespace TREnvironmentEditor.Model.Types
             }
             else
             {
+                ushort currentBoxIndex = sector.BoxIndex;
+                ushort newBoxIndex = (ushort)level.NumBoxes;
+
                 // Make a new zone to match the addition of a new box.
                 TR2BoxUtilities.DuplicateZone(level, sector.BoxIndex);
 
-                // Make a new box for the sector and link the overlaps.
+                // Add what will be the new box index as an overlap to adjoining boxes.
+                GenerateOverlaps(level, sector.BoxIndex, newBoxIndex);
+
+                // Make a new box for the sector.
                 byte xmin = (byte)((room.Info.X / SectorSize) + (sectorIndex / room.NumZSectors));
                 byte zmin = (byte)((room.Info.Z / SectorSize) + (sectorIndex % room.NumZSectors));
                 TR2Box box = new TR2Box
@@ -221,37 +227,37 @@ namespace TREnvironmentEditor.Model.Types
                     ZMin = zmin,
                     XMax = (byte)(xmin + 1), // Only 1 tile
                     ZMax = (byte)(zmin + 1),
-                    TrueFloor = (short)(sector.Floor * ClickSize),
-                    OverlapIndex = (short)GenerateOverlaps(level, sector.BoxIndex, (ushort)level.NumBoxes)
+                    TrueFloor = (short)(sector.Floor * ClickSize)
                 };
 
                 // Point the sector to the new box, and save it to the level
-                sector.BoxIndex = (ushort)level.NumBoxes;
+                sector.BoxIndex = newBoxIndex;
                 List<TR2Box> boxes = level.Boxes.ToList();
                 boxes.Add(box);
                 level.Boxes = boxes.ToArray();
                 level.NumBoxes++;
+
+                // Finally add the previous box as a neighbour to the new one.
+                TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { currentBoxIndex });
             }
         }
 
-        private int GenerateOverlaps(TR2Level level, ushort currentBoxIndex, ushort newBoxIndex)
+        private void GenerateOverlaps(TR2Level level, ushort currentBoxIndex, ushort newBoxIndex)
         {
-            foreach (TR2Box box in level.Boxes)
+            for (int i = 0; i < level.NumBoxes; i++)
             {
+                TR2Box box = level.Boxes[i];
                 // Anything that has the current box as an overlap will need
-                // to also have the new box.
+                // to also have the new box, or if this is the current box, it
+                // will need the new box linked to it.
                 List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
-                if (overlaps.Contains(currentBoxIndex))
+                if (overlaps.Contains(currentBoxIndex) || i == currentBoxIndex)
                 {
                     // Add the new index and write it back
                     overlaps.Add(newBoxIndex);
                     TR2BoxUtilities.UpdateOverlaps(level, box, overlaps);
                 }
             }
-
-            // For now just add the current box as a neighbour to the new one and return
-            // the overlap index to be set on the new box.
-            return TR2BoxUtilities.InsertOverlaps(level, new List<ushort> { currentBoxIndex });
         }
 
         public void RemapTextures(Dictionary<ushort, ushort> indexMap)

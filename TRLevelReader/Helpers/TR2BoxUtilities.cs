@@ -133,29 +133,38 @@ namespace TRLevelReader.Helpers
             return overlaps;
         }
 
-        public static int InsertOverlaps(TR2Level level, List<ushort> overlaps)
+        public static void UpdateOverlaps(TR2Level level, TR2Box box, List<ushort> overlaps)
         {
-            // This is inefficient currently as we just append rather than shifting
-            // everything else, so previous entries remain.
-            List<ushort> levelOverlaps = level.Overlaps.ToList();
-            for (int i = 0; i < overlaps.Count; i++)
+            List<ushort> newOverlaps = new List<ushort>();
+            foreach (TR2Box lvlBox in level.Boxes)
             {
-                ushort index = overlaps[i];
-                if (i == overlaps.Count - 1)
+                // Either append the current overlaps, or the new ones if this is the box being updated.
+                // Do nothing for boxes that have no overlaps.
+                List<ushort> boxOverlaps = lvlBox == box ? overlaps : GetOverlaps(level, lvlBox);
+                if (boxOverlaps.Count > 0)
                 {
-                    index |= EndBit;
+                    // Mark the overlap offset for this box to the insertion point
+                    UpdateOverlapIndex(lvlBox, newOverlaps.Count);
+
+                    for (int i = 0; i < boxOverlaps.Count; i++)
+                    {
+                        ushort index = boxOverlaps[i];
+                        if (i == boxOverlaps.Count - 1)
+                        {
+                            // Make sure the final overlap has the end bit set.
+                            index |= EndBit;
+                        }
+                        newOverlaps.Add(index);
+                    }
                 }
-                levelOverlaps.Add(index);
             }
 
-            int newIndex = (int)level.NumOverlaps;
-            level.Overlaps = levelOverlaps.ToArray();
-            level.NumOverlaps = (uint)levelOverlaps.Count;
-
-            return newIndex;
+            // Update the level data
+            level.Overlaps = newOverlaps.ToArray();
+            level.NumOverlaps = (uint)newOverlaps.Count;
         }
 
-        public static void UpdateOverlapIndex(TR2Box box, int index)
+        private static void UpdateOverlapIndex(TR2Box box, int index)
         {
             if ((box.OverlapIndex & Blockable) > 0)
             {
@@ -166,12 +175,6 @@ namespace TRLevelReader.Helpers
                 index |= Blocked;
             }
             box.OverlapIndex = (short)index;
-        }
-
-        public static void UpdateOverlaps(TR2Level level, TR2Box box, List<ushort> overlaps)
-        {
-            int index = InsertOverlaps(level, overlaps);
-            UpdateOverlapIndex(box, index);
         }
     }
 }

@@ -1259,11 +1259,37 @@ namespace TRLevelReaderUnitTests
             TR2LevelReader reader = new TR2LevelReader();
             TR2Level lvl = reader.ReadLevel("wall.tr2");
 
-            // For every box, store the current list of overlaps.
+            // Store the current list of overlaps
+            List<ushort> originalOverlaps = lvl.Overlaps.ToList();
+
+            // For every box, store the current list of overlaps and the overlap starting
+            // index itself (which also stores Blockable/Blocked bits).
             Dictionary<int, List<ushort>> boxOverlaps = new Dictionary<int, List<ushort>>();
+            Dictionary<int, short> boxOverlapIndices = new Dictionary<int, short>();
             for (int i = 0; i < lvl.NumBoxes; i++)
             {
                 boxOverlaps[i] = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
+                boxOverlapIndices[i] = lvl.Boxes[i].OverlapIndex;
+            }
+
+            // Confirm the total matches the total number of overlaps in the level.
+            int total = 0;
+            boxOverlaps.Values.ToList().ForEach(v => total += v.Count);
+            Assert.AreEqual(lvl.NumOverlaps, (uint)total);
+
+            // Write everything back with no changes.
+            for (int i = 0; i < lvl.NumBoxes; i++)
+            {
+                TR2BoxUtilities.UpdateOverlaps(lvl, lvl.Boxes[i], boxOverlaps[i]);
+            }
+
+            // Confirm the level overlap list is identical
+            CollectionAssert.AreEqual(originalOverlaps, lvl.Overlaps.ToList());
+
+            // Confirm the box overlap indices are identical
+            for (int i = 0; i < lvl.NumBoxes; i++)
+            {
+                Assert.AreEqual(boxOverlapIndices[i], lvl.Boxes[i].OverlapIndex);
             }
 
             // Add a new overlap to the first box, selecting a box that isn't already there.
