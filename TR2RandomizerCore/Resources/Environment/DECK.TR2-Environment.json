@@ -63,13 +63,13 @@
 
     [
       {
-        "Comments": "A random box beside the stern.",
+        "Comments": "A random box in the first area.",
         "EMType": 1,
         "Location": {
-          "X": 36401,
-          "Y": 1024,
-          "Z": 25023,
-          "Room": 60
+          "X": 43077,
+          "Y": -2048,
+          "Z": 38425,
+          "Room": 20
         },
         "Clicks": -4,
         "SideTexture": 1630,

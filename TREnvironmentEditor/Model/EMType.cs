@@ -49,6 +49,7 @@
 
         // Room types 121+
         ModifyRoom = 121,
+        ModifyOverlaps = 122,
 
         // NOOP/Placeholder
         NOOP = 1000

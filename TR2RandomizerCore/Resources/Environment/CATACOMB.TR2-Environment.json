@@ -1,5 +1,15 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Fix OG issue of incorrect box overlaps between rooms 74 & 35.",
+      "EMType": 122,
+      "RemoveLinks": {
+        "466": [ 704 ],
+        "467": [ 704 ],
+        "704": [ 466, 467 ]
+      }
+    }
+  ],
 
   "Any": [
     [
