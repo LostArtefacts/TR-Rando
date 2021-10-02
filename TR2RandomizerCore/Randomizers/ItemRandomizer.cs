@@ -532,20 +532,18 @@ namespace TR2RandomizerCore.Randomizers
                 replacementWeapons.Add(TR2Entities.Pistols_S_P);
             }
 
-            // Pick a new weapon, but exclude the grenade launcher because it affects the kill
-            // count. Also exclude the harpoon as neither it nor the grenade launcher can break
-            // Lara's bedroom window, and the enemy there may have been randomized to one without
-            // a gun. Probably not a softlock scenario but safer to exclude for now.
+            // Pick a new weapon, but exclude the grenade launcher because it affects the kill count
             TR2Entities replacementWeapon;
             do
             {
                 replacementWeapon = replacementWeapons[_generator.Next(0, replacementWeapons.Count)];
             }
-            while (replacementWeapon == TR2Entities.GrenadeLauncher_S_P || replacementWeapon == TR2Entities.Harpoon_S_P);
+            while (replacementWeapon == TR2Entities.GrenadeLauncher_S_P);
 
             TR2Entities replacementAmmo = GetWeaponAmmo(replacementWeapon);
-            
+
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
+            TR2Entity harpoonWeapon = null;
             foreach (TR2Entity entity in ents)
             {
                 if (entity.Room != 57)
@@ -557,12 +555,21 @@ namespace TR2RandomizerCore.Randomizers
                 if (TR2EntityUtilities.IsGunType(entityType))
                 {
                     entity.TypeID = (short)replacementWeapon;
+
+                    if (replacementWeapon == TR2Entities.Harpoon_S_P)
+                    {
+                        harpoonWeapon = entity;
+                    }
                 }
                 else if (TR2EntityUtilities.IsAmmoType(entityType) && replacementWeapon != TR2Entities.Pistols_S_P)
                 {
                     entity.TypeID = (short)replacementAmmo;
                 }
             }
+
+            // if weapon is harpoon, spawn pistols as well (see #149)
+            if (harpoonWeapon != null)
+                CopyEntity(harpoonWeapon, TR2Entities.Pistols_S_P);
         }
 
         private void RandomizeVehicles()
