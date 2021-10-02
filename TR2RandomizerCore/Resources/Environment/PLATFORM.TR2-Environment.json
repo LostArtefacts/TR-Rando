@@ -90,6 +90,16 @@
       },
 
       {
+        "Comments": "Remove the water sound source for above.",
+        "EMType": 103,
+        "Source": {
+          "X": 36352,
+          "Y": 1792,
+          "Z": 56832
+        }
+      },
+
+      {
         "Comments": "Make a step to get out of room 45.",
         "EMType": 1,
         "Location": {
@@ -138,6 +148,16 @@
         "EMType": 3,
         "RoomNumbers": [ 20, 66, 67, 68, 69, 70 ],
         "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+      },
+
+      {
+        "Comments": "Remove the water sound source for above.",
+        "EMType": 103,
+        "Source": {
+          "X": 58880,
+          "Y": -2816,
+          "Z": 87552
+        }
       },
 
       {

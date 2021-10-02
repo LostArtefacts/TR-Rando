@@ -120,6 +120,8 @@ namespace TREnvironmentEditor.Parsing
                 // Rooms
                 case EMType.ModifyRoom:
                     return JsonConvert.DeserializeObject<EMModifyRoomFunction>(jo.ToString(), _resolver);
+                case EMType.ModifyOverlaps:
+                    return JsonConvert.DeserializeObject<EMModifyOverlapsFunction>(jo.ToString(), _resolver);
 
                 // NOOP
                 case EMType.NOOP:

@@ -451,7 +451,7 @@ namespace TR2RandomizerCore.Utilities
                 List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(fdControl, entityID);
                 foreach (FDTriggerEntry trigger in triggers)
                 {
-                    trigger.TrigSetup.SetOneShot();
+                    trigger.TrigSetup.OneShot = true;
                 }
 
                 fdControl.WriteToLevel(level);

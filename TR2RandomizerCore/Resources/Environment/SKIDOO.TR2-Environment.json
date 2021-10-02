@@ -127,6 +127,124 @@
         "EMType": 2,
         "RoomNumbers": [ 50 ],
         "WaterTextures": [ 1487, 1488, 1307, 1489 ]
+      },
+
+      {
+        "Comments": "Adjust a potential secret.",
+        "EMType": 43,
+        "Types": [ 191 ],
+        "SectorLocations": [
+          {
+            "X": 82431,
+            "Y": 4608,
+            "Z": 56935,
+            "Room": 50
+          }
+        ],
+        "TargetLocation": {
+          "X": 89059,
+          "Y": 5120,
+          "Z": 86049,
+          "Room": 44
+        }
+      }
+    ],
+
+    [
+      {
+        "Comments": "Make a ladder to get out of room 129.",
+        "EMType": 0,
+        "IsNegativeX": true,
+        "Location": {
+          "X": 18870,
+          "Y": 18432,
+          "Z": 30200,
+          "Room": 129
+        },
+        "TextureMap": {
+          "1295": {
+            "129": {
+              "Rectangles": [ 38, 39, 40 ]
+            }
+          }
+        }
+      },
+
+      {
+        "Comments": "And then drain it.",
+        "EMType": 3,
+        "RoomNumbers": [ 129 ],
+        "WaterTextures": [ 1487, 1488, 1307, 1489 ]
+      },
+
+      {
+        "Comments": "Remove the water sound source for above.",
+        "EMType": 103,
+        "Source": {
+          "X": 19968,
+          "Y": 14080,
+          "Z": 28160
+        }
+      },
+
+      {
+        "Comments": "Adjust a potential secret.",
+        "EMType": 43,
+        "Types": [ 190 ],
+        "SectorLocations": [
+          {
+            "X": 24653,
+            "Y": 18393,
+            "Z": 27678,
+            "Room": 129
+          }
+        ]
+      }
+    ],
+
+    [
+      {
+        "Comments": "Flood the end room.",
+        "EMType": 2,
+        "RoomNumbers": [ 146, 147 ],
+        "WaterTextures": [ 1487, 1488, 1307, 1489 ]
+      },
+
+      {
+        "Comments": "Move the end trigger.",
+        "EMType": 67,
+        "BaseLocation": {
+          "X": 11787,
+          "Y": 15616,
+          "Z": 33375,
+          "Room": 146
+        },
+        "NewLocation": {
+          "X": 13770,
+          "Y": 15616,
+          "Z": 37371,
+          "Room": 147
+        }
+      },
+
+      {
+        "Comments": "Adjust a potential secret.",
+        "EMType": 43,
+        "Types": [ 190 ],
+        "SectorLocations": [
+          {
+            "X": 11754,
+            "Y": 15616,
+            "Z": 32232,
+            "Room": 146
+          }
+        ],
+        "TargetLocation": {
+          "X": 12309,
+          "Y": 15616,
+          "Z": 37022,
+          "Room": 147
+        }
       }
     ]
   ],

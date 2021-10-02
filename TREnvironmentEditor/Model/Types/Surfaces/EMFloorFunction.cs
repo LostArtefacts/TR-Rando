@@ -4,6 +4,7 @@ using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.Utilities;
+using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
@@ -171,42 +172,12 @@ namespace TREnvironmentEditor.Model.Types
             room.RoomData.Rectangles = rectangles.ToArray();
             room.RoomData.NumRectangles = (short)rectangles.Count;
 
-            // Now shift the actual sector info
-            sector.Floor += Clicks;
-
-            if (Math.Abs(Clicks) > 1)
-            {
-                // Every box has a corresponding zone containing the normals from what I understand.
-                // For now, duplicate the zone for the new box.
-                List<TR2Zone> zones = level.Zones.ToList();
-                zones.Add(level.Zones[sector.BoxIndex]);
-                level.Zones = zones.ToArray();
-
-                // Make a new box for the sector. Overlapping still needs investigation. Currently, any 
-                // raised or lowered floors will become safe spots as AI can't link to the new boxes.
-                TR2Box currentBox = level.Boxes[sector.BoxIndex];
-                TR2Box box = new TR2Box
-                {
-                    XMin = (byte)((room.Info.X / SectorSize) + (sectorIndex / room.NumZSectors)),
-                    ZMin = (byte)((room.Info.Z / SectorSize) + (sectorIndex % room.NumZSectors)),
-                    TrueFloor = (short)(sector.Floor * ClickSize),
-                    OverlapIndex = currentBox.OverlapIndex
-                };
-
-                // Only 1 tile
-                box.XMax = (byte)(box.XMin + 1);
-                box.ZMax = (byte)(box.ZMin + 1);
-
-                // Point the sector to the new box, and save it to the level
-                sector.BoxIndex = (ushort)level.NumBoxes;
-                List<TR2Box> boxes = level.Boxes.ToList();
-                boxes.Add(box);
-                level.Boxes = boxes.ToArray();
-                level.NumBoxes++;
-            }
-
             // Account for the added faces
             room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+
+            // Now shift the actual sector info and adjust the box if necessary
+            sector.Floor += Clicks;
+            AlterSectorBox(level, room, sectorIndex);
 
             // Move any entities that share the same floor sector up or down the relevant number of clicks
             foreach (TR2Entity entity in level.Entities)
@@ -218,6 +189,73 @@ namespace TREnvironmentEditor.Model.Types
                     {
                         entity.Y += clickChange;
                     }
+                }
+            }
+        }
+
+        private void AlterSectorBox(TR2Level level, TR2Room room, int sectorIndex)
+        {
+            TRRoomSector sector = room.SectorList[sectorIndex];
+            if (sector.BoxIndex == ushort.MaxValue)
+            {
+                return;
+            }
+
+            if (TR2BoxUtilities.GetSectorCount(level, sector.BoxIndex) == 1)
+            {
+                // The box used by this sector is unique to this sector, so we can
+                // simply change the existing floor height to match the sector.
+                level.Boxes[sector.BoxIndex].TrueFloor = (short)(sector.Floor * ClickSize);
+            }
+            else
+            {
+                ushort currentBoxIndex = sector.BoxIndex;
+                ushort newBoxIndex = (ushort)level.NumBoxes;
+
+                // Make a new zone to match the addition of a new box.
+                TR2BoxUtilities.DuplicateZone(level, sector.BoxIndex);
+
+                // Add what will be the new box index as an overlap to adjoining boxes.
+                GenerateOverlaps(level, sector.BoxIndex, newBoxIndex);
+
+                // Make a new box for the sector.
+                byte xmin = (byte)((room.Info.X / SectorSize) + (sectorIndex / room.NumZSectors));
+                byte zmin = (byte)((room.Info.Z / SectorSize) + (sectorIndex % room.NumZSectors));
+                TR2Box box = new TR2Box
+                {
+                    XMin = xmin,
+                    ZMin = zmin,
+                    XMax = (byte)(xmin + 1), // Only 1 tile
+                    ZMax = (byte)(zmin + 1),
+                    TrueFloor = (short)(sector.Floor * ClickSize)
+                };
+
+                // Point the sector to the new box, and save it to the level
+                sector.BoxIndex = newBoxIndex;
+                List<TR2Box> boxes = level.Boxes.ToList();
+                boxes.Add(box);
+                level.Boxes = boxes.ToArray();
+                level.NumBoxes++;
+
+                // Finally add the previous box as a neighbour to the new one.
+                TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { currentBoxIndex });
+            }
+        }
+
+        private void GenerateOverlaps(TR2Level level, ushort currentBoxIndex, ushort newBoxIndex)
+        {
+            for (int i = 0; i < level.NumBoxes; i++)
+            {
+                TR2Box box = level.Boxes[i];
+                // Anything that has the current box as an overlap will need
+                // to also have the new box, or if this is the current box, it
+                // will need the new box linked to it.
+                List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, box);
+                if (overlaps.Contains(currentBoxIndex) || i == currentBoxIndex)
+                {
+                    // Add the new index and write it back
+                    overlaps.Add(newBoxIndex);
+                    TR2BoxUtilities.UpdateOverlaps(level, box, overlaps);
                 }
             }
         }

@@ -14,7 +14,7 @@ namespace TextureExport
     {
         enum Mode
         {
-            Png, Html, Segments, Faces
+            Png, Html, Segments, Faces, Boxes
         }
 
         static void Main(string[] args)
@@ -43,6 +43,14 @@ namespace TextureExport
                 else if (arg == "faces")
                 {
                     mode = Mode.Faces;
+                    if (args.Length < 3)
+                    {
+                        return;
+                    }
+                }
+                else if (arg == "boxes")
+                {
+                    mode = Mode.Boxes;
                     if (args.Length < 3)
                     {
                         return;
@@ -98,6 +106,9 @@ namespace TextureExport
                 case Mode.Faces:
                     new FaceMapper(inst).GenerateFaces(lvl.ToLower().Replace(".tr2", "_faced.tr2"), GetFaceRoomArgs());
                     break;
+                case Mode.Boxes:
+                    new FaceMapper(inst).GenerateBoxes(lvl.ToLower().Replace(".tr2", "_boxed.tr2"), GetFaceRoomArgs());
+                    break;
                 default:
                     ExportAllTexturesToPng(lvl, inst);
                     break;
@@ -148,7 +159,7 @@ namespace TextureExport
         static void Usage()
         {
             Console.WriteLine();
-            Console.WriteLine("Usage: TextureExport [orig | gold | *.tr2] [png | html | segments]");
+            Console.WriteLine("Usage: TextureExport [orig | gold | *.tr2] [png | html | segments | faces | boxes]");
             Console.WriteLine();
 
             Console.WriteLine("Target Levels");
@@ -162,6 +173,7 @@ namespace TextureExport
             Console.WriteLine("\thtml     - Export all tiles to a single HTML document.");
             Console.WriteLine("\tsegments - Export each object and sprite texture to individual PNG files.");
             Console.WriteLine("\tfaces    - Creates a new texture for every face in a room and marks its index (output is LVL_faced.tr2).");
+            Console.WriteLine("\tboxes    - Similar to faces, but marks box extents for a list of rooms (output is LVL_boxed.tr2).");
             Console.WriteLine();
             
             Console.WriteLine("Examples");
@@ -200,6 +212,13 @@ namespace TextureExport
             Console.WriteLine("\tTextureExport WALL.TR2 faces 4,32");
             Console.ResetColor();
             Console.WriteLine("\t\tCreates a new texture for every face in rooms 4 and 32 and marks its index on the texture.");
+            Console.WriteLine("\t\tThe level will likely be unplayable due to limits but can be viewed in trview.");
+            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\tTextureExport WALL.TR2 boxes 4,32");
+            Console.ResetColor();
+            Console.WriteLine("\t\tCreates a new texture for sectors in rooms 4 and 32, showing the box index for the sector.");
             Console.WriteLine("\t\tThe level will likely be unplayable due to limits but can be viewed in trview.");
             Console.WriteLine();
         }

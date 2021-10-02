@@ -72,6 +72,115 @@
           "Intensity2": 6400
         }
       }
+    ],
+
+    [
+      {
+        "Comments": "Clear unused triggers in DA.",
+        "EMType": 62,
+        "Rooms": [ 72, 74, 84 ]
+      },
+
+      {
+        "Comments": "Move the end trigger.",
+        "EMType": 67,
+        "BaseLocation": {
+          "X": 38421,
+          "Y": -512,
+          "Z": 26107,
+          "Room": 70
+        },
+        "NewLocation": {
+          "X": 31216,
+          "Y": -2304,
+          "Z": 24128,
+          "Room": 72
+        }
+      },
+
+      {
+        "Comments": "Drain the DA pool.",
+        "EMType": 3,
+        "RoomNumbers": [ 74 ],
+        "WaterTextures": [ 1740, 1670, 1648, 1741 ]
+      },
+
+      {
+        "Comments": "Convert the DA button into a pickup.",
+        "EMType": 45,
+        "EntityIndex": 88,
+        "NewEntityType": 144
+      },
+
+      {
+        "Comments": "Move it to the top of the ladder.",
+        "EMType": 44,
+        "EntityIndex": 88,
+        "TargetLocation": {
+          "X": 32231,
+          "Y": -2304,
+          "Z": 24034,
+          "Room": 72,
+          "Angle": 16384
+        }
+      },
+
+      {
+        "Comments": "Convert the DA lever into a pickup.",
+        "EMType": 45,
+        "EntityIndex": 89,
+        "NewEntityType": 150
+      },
+
+      {
+        "Comments": "Put it on the floor.",
+        "EMType": 44,
+        "EntityIndex": 89,
+        "TargetLocation": {
+          "X": 34285,
+          "Y": 4096,
+          "Z": 27443,
+          "Room": 74,
+          "Angle": 16384
+        }
+      },
+
+      {
+        "Comments": "Convert the DA camera target into a pickup.",
+        "EMType": 45,
+        "EntityIndex": 90,
+        "NewEntityType": 148
+      },
+
+      {
+        "Comments": "Put it elsewhere.",
+        "EMType": 44,
+        "EntityIndex": 90,
+        "TargetLocation": {
+          "X": 36352,
+          "Y": -1024,
+          "Z": 24064,
+          "Room": 70,
+          "Angle": 16384
+        }
+      },
+
+      {
+        "Comments": "Adjust some textures.",
+        "EMType": 21,
+        "TextureMap": {
+          "1645": {
+            "74": {
+              "Rectangles": [ 5, 6 ]
+            }
+          },
+          "1681": {
+            "74": {
+              "Rectangles": [ 3, 25, 35 ]
+            }
+          }
+        }
+      }
     ]
   ],
 

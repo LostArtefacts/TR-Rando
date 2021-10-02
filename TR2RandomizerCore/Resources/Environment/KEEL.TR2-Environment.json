@@ -45,6 +45,40 @@
           }
         }
       }
+    },
+
+    {
+      "Comments": "Make it possible to return to the piston room from below. The fake ladder here becomes real.",
+      "EMType": 0,
+      "IsNegativeZ": true,
+      "Location": {
+        "X": 56826,
+        "Y": 3840,
+        "Z": 13827,
+        "Room": 30
+      },
+      "TextureMap": {
+        "1720": {
+          "27": {
+            "Rectangles": [ 9 ]
+          }
+        }
+      }
+    },
+
+    {
+      "Comments": "Make a block to be able to climb onto the ladder.",
+      "EMType": 1,
+      "Location": {
+        "X": 56826,
+        "Y": 3840,
+        "Z": 13827,
+        "Room": 30
+      },
+      "Clicks": -6,
+      "SideTexture": 1718,
+      "FloorTexture": 1718,
+      "Flags": 6
     }
   ],
 
@@ -129,44 +163,21 @@
     [
       [
         {
-          "Comments": "Make it possible to return to the piston room from below. The fake ladder here becomes real.",
-          "EMType": 0,
-          "IsNegativeZ": true,
-          "Location": {
-            "X": 56826,
-            "Y": 3840,
-            "Z": 13827,
-            "Room": 30
-          },
-          "TextureMap": {
-            "1720": {
-              "27": {
-                "Rectangles": [ 9 ]
-              }
-            }
-          }
-        },
-
-        {
-          "Comments": "Make a block to be able to climb onto the ladder.",
-          "EMType": 1,
-          "Location": {
-            "X": 56826,
-            "Y": 3840,
-            "Z": 13827,
-            "Room": 30
-          },
-          "Clicks": -6,
-          "SideTexture": 1718,
-          "FloorTexture": 1718,
-          "Flags": 6
+          "Comments": "NOOP - use the All method for returning to the piston room from below.",
+          "EMType": 1000
         }
       ],
       [
         {
-          "Comments": "...or flood the upper rooms instead.",
+          "Comments": "...or flood the upper rooms instead. Drain the bottom first to re-apply textures.",
+          "EMType": 3,
+          "RoomNumbers": [ 30 ],
+          "WaterTextures": [ 1769, 1770, 1730, 1764 ]
+        },
+
+        {
           "EMType": 2,
-          "RoomNumbers": [ 28, 29 ],
+          "RoomNumbers": [ 28, 29, 30 ],
           "WaterTextures": [ 1769, 1770, 1730, 1764 ]
         }
       ],
@@ -176,29 +187,6 @@
           "EMType": 3,
           "RoomNumbers": [ 30 ],
           "WaterTextures": [ 1769, 1770, 1730, 1764 ]
-        },
-
-        {
-          "EMType": 0,
-          "IsNegativeZ": true,
-          "Location": {
-            "X": 56826,
-            "Y": 3840,
-            "Z": 13827,
-            "Room": 30
-          },
-          "TextureMap": {
-            "1720": {
-              "27": {
-                "Rectangles": [ 9 ]
-              }
-            },
-            "1724": {
-              "30": {
-                "Rectangles": [ 26, 27 ]
-              }
-            }
-          }
         },
 
         {

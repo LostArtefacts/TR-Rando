@@ -675,6 +675,93 @@
           ]
         }
       ]
+    ],
+
+    [
+      [
+        {
+          "Comments": "Potential new position for the switch in room 46.",
+          "EMType": 41,
+          "EntityIndex": 57,
+          "Location": {
+            "X": 72192,
+            "Y": 7936,
+            "Z": 51712,
+            "Room": 46,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 46.",
+          "EMType": 41,
+          "EntityIndex": 57,
+          "Location": {
+            "X": 72192,
+            "Y": 7936,
+            "Z": 51712,
+            "Room": 46,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 46.",
+          "EMType": 41,
+          "EntityIndex": 57,
+          "Location": {
+            "X": 71168,
+            "Y": 7936,
+            "Z": 51712,
+            "Room": 46,
+            "Angle": 0
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 46.",
+          "EMType": 41,
+          "EntityIndex": 57,
+          "Location": {
+            "X": 72192,
+            "Y": 7936,
+            "Z": 49664,
+            "Room": 46,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 46.",
+          "EMType": 41,
+          "EntityIndex": 57,
+          "Location": {
+            "X": 72192,
+            "Y": 7936,
+            "Z": 49664,
+            "Room": 46,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential new position for the switch in room 46.",
+          "EMType": 41,
+          "EntityIndex": 57,
+          "Location": {
+            "X": 71168,
+            "Y": 7936,
+            "Z": 49664,
+            "Room": 46,
+            "Angle": -32768
+          }
+        }
+      ]
     ]
   ],
 
@@ -790,6 +877,231 @@
               "Z": 48640,
               "Room": 190,
               "Angle": 0
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default texture behind the switch from room 144.",
+          "EMType": 21,
+          "TextureMap": {
+            "1839": {
+              "144": {
+                "Rectangles": [ 14 ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential new position for the switch in room 144.",
+            "EMType": 41,
+            "EntityIndex": 158,
+            "Location": {
+              "X": 71168,
+              "Y": 6656,
+              "Z": 46592,
+              "Room": 144,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1665": {
+                "144": {
+                  "Rectangles": [ 10 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the switch in room 144.",
+            "EMType": 41,
+            "EntityIndex": 158,
+            "Location": {
+              "X": 71168,
+              "Y": 6656,
+              "Z": 45568,
+              "Room": 144,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1665": {
+                "144": {
+                  "Rectangles": [ 7 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the switch in room 144.",
+            "EMType": 41,
+            "EntityIndex": 158,
+            "Location": {
+              "X": 71168,
+              "Y": 6656,
+              "Z": 44544,
+              "Room": 144,
+              "Angle": -16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1665": {
+                "144": {
+                  "Rectangles": [ 2 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the switch in room 144.",
+            "EMType": 41,
+            "EntityIndex": 158,
+            "Location": {
+              "X": 71168,
+              "Y": 6656,
+              "Z": 44544,
+              "Room": 144,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1665": {
+                "144": {
+                  "Rectangles": [ 4 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the switch in room 144.",
+            "EMType": 41,
+            "EntityIndex": 158,
+            "Location": {
+              "X": 72192,
+              "Y": 6656,
+              "Z": 44544,
+              "Room": 144,
+              "Angle": -32768
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1665": {
+                "144": {
+                  "Rectangles": [ 20 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the switch in room 144.",
+            "EMType": 41,
+            "EntityIndex": 158,
+            "Location": {
+              "X": 72192,
+              "Y": 6656,
+              "Z": 44544,
+              "Room": 144,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1665": {
+                "144": {
+                  "Rectangles": [ 27 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the switch in room 144.",
+            "EMType": 41,
+            "EntityIndex": 158,
+            "Location": {
+              "X": 72192,
+              "Y": 6656,
+              "Z": 45568,
+              "Room": 144,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1665": {
+                "144": {
+                  "Rectangles": [ 29 ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential new position for the switch in room 144.",
+            "EMType": 41,
+            "EntityIndex": 158,
+            "Location": {
+              "X": 72192,
+              "Y": 6656,
+              "Z": 46592,
+              "Room": 144,
+              "Angle": 16384
+            }
+          },
+
+          {
+            "Comments": "Adds a lever texture for the above.",
+            "EMType": 21,
+            "TextureMap": {
+              "1665": {
+                "144": {
+                  "Rectangles": [ 31 ]
+                }
+              }
             }
           }
         ]

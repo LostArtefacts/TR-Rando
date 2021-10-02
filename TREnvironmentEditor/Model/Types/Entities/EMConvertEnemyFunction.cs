@@ -16,16 +16,14 @@ namespace TREnvironmentEditor.Model.Types
         {
             // Find the first instance of an existing enemy of the same type
             // we want to convert to. If none found, no action is taken.
-            List<TR2Entities> waterEnemies = TR2EntityUtilities.WaterCreatures();
-            List<TR2Entities> potentialTypes;
+            List<TR2Entities> potentialTypes = TR2EntityUtilities.GetFullListOfEnemies();
             if (NewEnemyType == EnemyType.Land)
             {
-                potentialTypes = TR2EntityUtilities.GetFullListOfEnemies();
-                potentialTypes.RemoveAll(e => waterEnemies.Contains(e));
+                potentialTypes.RemoveAll(e => TR2EntityUtilities.IsWaterCreature(e));
             }
             else
             {
-                potentialTypes = waterEnemies;
+                potentialTypes.RemoveAll(e => !TR2EntityUtilities.IsWaterCreature(e));
             }
 
             if (Exclusions != null && Exclusions.Count > 0)

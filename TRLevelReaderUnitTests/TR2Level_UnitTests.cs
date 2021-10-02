@@ -10,6 +10,8 @@ using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using System.Linq;
+using TRLevelReader.Helpers;
+using TRLevelReader.Model.Base.Enums;
 
 namespace TRLevelReaderUnitTests
 {
@@ -489,7 +491,7 @@ namespace TRLevelReaderUnitTests
             //Set OneShot on each trigger
             foreach (FDTriggerEntry trigger in triggers)
             {
-                trigger.TrigSetup.SetOneShot();
+                trigger.TrigSetup.OneShot = true;
             }
 
             fdataReader.WriteToLevel(lvl);
@@ -514,7 +516,7 @@ namespace TRLevelReaderUnitTests
             //Switch it off again
             foreach (FDTriggerEntry trigger in triggers)
             {
-                trigger.TrigSetup.ClearOneShot();
+                trigger.TrigSetup.OneShot = false;
             }
 
             fdataReader.WriteToLevel(lvl);
@@ -1200,6 +1202,122 @@ namespace TRLevelReaderUnitTests
             cbTrigger = cbEntries[0] as FDTriggerEntry;
 
             Assert.AreEqual(cbTrigger.TrigSetup.Mask, 7);
+        }
+
+        [TestMethod]
+        public void ModifyZonesTest()
+        {
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("wall.tr2");
+
+            // For every box, store the current zone. We use the serialized form
+            // for comparison.
+            Dictionary<int, byte[]> flipOffZones = new Dictionary<int, byte[]>();
+            Dictionary<int, byte[]> flipOnZones = new Dictionary<int, byte[]>();
+            for (int i = 0; i < lvl.NumBoxes; i++)
+            {
+                flipOffZones[i] = lvl.Zones[i][FlipStatus.Off].Serialize();
+                flipOnZones[i] = lvl.Zones[i][FlipStatus.On].Serialize();
+            }
+
+            // Add a new box
+            List<TR2Box> boxes = lvl.Boxes.ToList();
+            boxes.Add(boxes[0]);
+            lvl.Boxes = boxes.ToArray();
+            lvl.NumBoxes++;
+
+            // Add a new zone for the box and store its serialized form for comparison
+            int newBoxIndex = (int)(lvl.NumBoxes - 1);
+            TR2BoxUtilities.DuplicateZone(lvl, 0);
+            flipOffZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.Off].Serialize();
+            flipOnZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.On].Serialize();
+
+            // Verify the number of zone ushorts matches what's expected for the box count
+            Assert.AreEqual(TR2BoxUtilities.FlattenZones(lvl.Zones).Length, (int)(10 * lvl.NumBoxes));
+
+            // Write and re-read the level
+            new TR2LevelWriter().WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            // Capture all of the zones again. Make sure the addition of the zone above didn't
+            // affect any of the others and that the addition itself matches after IO.
+            for (int i = 0; i < lvl.NumBoxes; i++)
+            {
+                byte[] flipOff = lvl.Zones[i][FlipStatus.Off].Serialize();
+                Assert.IsTrue(flipOffZones.ContainsKey(i));
+                CollectionAssert.AreEqual(flipOffZones[i], flipOff);
+
+                byte[] flipOn = lvl.Zones[i][FlipStatus.On].Serialize();
+                Assert.IsTrue(flipOnZones.ContainsKey(i));
+                CollectionAssert.AreEqual(flipOnZones[i], flipOn);
+            }
+        }
+
+        [TestMethod]
+        public void ModifyOverlapsTest()
+        {
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("wall.tr2");
+
+            // Store the current list of overlaps
+            List<ushort> originalOverlaps = lvl.Overlaps.ToList();
+
+            // For every box, store the current list of overlaps and the overlap starting
+            // index itself (which also stores Blockable/Blocked bits).
+            Dictionary<int, List<ushort>> boxOverlaps = new Dictionary<int, List<ushort>>();
+            Dictionary<int, short> boxOverlapIndices = new Dictionary<int, short>();
+            for (int i = 0; i < lvl.NumBoxes; i++)
+            {
+                boxOverlaps[i] = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
+                boxOverlapIndices[i] = lvl.Boxes[i].OverlapIndex;
+            }
+
+            // Confirm the total matches the total number of overlaps in the level.
+            int total = 0;
+            boxOverlaps.Values.ToList().ForEach(v => total += v.Count);
+            Assert.AreEqual(lvl.NumOverlaps, (uint)total);
+
+            // Write everything back with no changes.
+            for (int i = 0; i < lvl.NumBoxes; i++)
+            {
+                TR2BoxUtilities.UpdateOverlaps(lvl, lvl.Boxes[i], boxOverlaps[i]);
+            }
+
+            // Confirm the level overlap list is identical
+            CollectionAssert.AreEqual(originalOverlaps, lvl.Overlaps.ToList());
+
+            // Confirm the box overlap indices are identical
+            for (int i = 0; i < lvl.NumBoxes; i++)
+            {
+                Assert.AreEqual(boxOverlapIndices[i], lvl.Boxes[i].OverlapIndex);
+            }
+
+            // Add a new overlap to the first box, selecting a box that isn't already there.
+            for (ushort i = 1; i < lvl.NumBoxes; i++)
+            {
+                if (!boxOverlaps[0].Contains(i))
+                {
+                    boxOverlaps[0].Add(i);
+                    break;
+                }
+            }
+
+            // Write the overlap list back to the level for box 0.
+            TR2BoxUtilities.UpdateOverlaps(lvl, lvl.Boxes[0], boxOverlaps[0]);
+
+            // Write and re-read the level
+            new TR2LevelWriter().WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            // Capture all of the overlaps again and confirm the numbers are what we expect i.e.
+            // the new overlap for box 0 exists and none of the other overlaps were affected by
+            // the addition.
+            for (int i = 0; i < lvl.NumBoxes; i++)
+            {
+                List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
+                Assert.IsTrue(boxOverlaps.ContainsKey(i));
+                CollectionAssert.AreEqual(boxOverlaps[i], overlaps);
+            }
         }
     }
 }
