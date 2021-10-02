@@ -61,7 +61,7 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
 * Environment - Modifies the level environment, such as mixing up water levels, mirroring levels and moving keyholes.
 
 # Download
-https://github.com/DanzaG/TR2-Rando/releases/download/V1.4.0/V1.4.0.zip
+https://github.com/DanzaG/TR2-Rando/releases/download/V1.4.1/V1.4.1.zip
 
 # Installation
 https://www.youtube.com/watch?v=MpNBfZgE0Fc
