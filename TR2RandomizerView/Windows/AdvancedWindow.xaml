@@ -51,6 +51,12 @@
                     <Setter Property="Margin"
                             Value="40,0,0,0" />
                 </Style>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Setter Property="Margin"
+                            Value="0, 5, 0, 10" />
+                    <Setter Property="Grid.ColumnSpan"
+                            Value="2" />
+                </Style>
             </Grid.Resources>
             
             <Grid.RowDefinitions>
@@ -76,11 +82,8 @@
                 Grid.ColumnSpan="2"
                 Margin="0,0,0,10"/>
 
+            <!-- General -->
             <StackPanel Grid.Row="1"
-                        Grid.ColumnSpan="2"
-                        Orientation="Vertical"
-                        HorizontalAlignment="Left"
-                        Margin="0,0,0,10"
                         Visibility="{Binding HasBoolItems, Converter={StaticResource BoolToCollapsedConverter}}">
                 <TextBlock Style="{StaticResource HeaderStyle}"
                            Text="General"/>
@@ -119,9 +122,8 @@
                 </ItemsControl>
             </StackPanel>
 
+            <!-- (Enemy) Difficulty -->
             <StackPanel Grid.Row="2"
-                        Grid.ColumnSpan="2"
-                        Margin="0,5,0,0"
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -180,9 +182,8 @@
                 </Grid>
             </StackPanel>
 
+            <!-- Language -->
             <StackPanel Grid.Row="3"
-                        Grid.ColumnSpan="2"
-                        Margin="0,5,0,0"
                         Visibility="{Binding HasLanguage, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -209,9 +210,8 @@
                 </Grid>
             </StackPanel>
 
+            <!-- Mirrored Levels -->
             <StackPanel Grid.Row="4"
-                        Grid.ColumnSpan="2"
-                        Margin="0,5,0,0"
                         Visibility="{Binding HasMirroring, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -264,9 +264,8 @@
                 </Grid>
             </StackPanel>
 
+            <!-- Haircuts -->
             <StackPanel Grid.Row="5"
-                        Grid.ColumnSpan="2"
-                        Margin="0,5,0,0"
                         Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -319,9 +318,8 @@
                 </Grid>
             </StackPanel>
 
+            <!-- Invisibility -->
             <StackPanel Grid.Row="6"
-                        Grid.ColumnSpan="2"
-                        Margin="0,15,0,0"
                         Visibility="{Binding HasInvisibility, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -374,8 +372,8 @@
                 </Grid>
             </StackPanel>
 
+            <!-- Night Mode general -->
             <StackPanel Grid.Row="7"
-                        Grid.ColumnSpan="2"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -428,9 +426,8 @@
                 </Grid>
             </StackPanel>
 
+            <!-- Intensity -->
             <StackPanel Grid.Row="8"
-                        Grid.ColumnSpan="2"
-                        Margin="0,15,0,0"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
