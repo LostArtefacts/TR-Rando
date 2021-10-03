@@ -22,6 +22,7 @@ namespace TR2RandomizerCore.Randomizers
         public bool IncludeKeyItems { get; set; }
         public bool IsDevelopmentModeOn { get; set; }
         public bool PerformEnemyWeighting { get; set; }
+        public ItemDifficulty Difficulty { get; set; }
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
@@ -334,6 +335,36 @@ namespace TR2RandomizerCore.Randomizers
                         }
                     }
                 }
+
+                if (Difficulty == ItemDifficulty.OneLimit)
+                {
+                    List<TR2Entities> oneOfEachType = new List<TR2Entities>();
+                    List<TR2Entity> allEntities = _levelInstance.Data.Entities.ToList();
+                    List<TR2Entity> toRemove = new List<TR2Entity>();
+
+                    // look for extra utility/ammo items and remove them
+                    foreach (TR2Entity ent in allEntities)
+                    {
+                        TR2Entities eType = (TR2Entities)ent.TypeID;
+                        if (TR2EntityUtilities.IsUtilityType(eType) ||
+                            TR2EntityUtilities.IsGunType(eType))
+                        {
+                            if (oneOfEachType.Contains(eType))
+                            {
+                                toRemove.Add(ent);
+                            }
+                            else
+                                oneOfEachType.Add((TR2Entities)ent.TypeID);
+                        }
+                    }
+                    foreach (TR2Entity ent in toRemove)
+                    {
+                        allEntities.Remove(ent);
+                    }
+
+                    _levelInstance.Data.Entities = allEntities.ToArray();
+                    _levelInstance.Data.NumEntities = (uint)allEntities.Count;
+                }
             }
         }
 
@@ -398,6 +429,13 @@ namespace TR2RandomizerCore.Randomizers
                 List<TR2Entities> replacementWeapons = TR2EntityUtilities.GetListOfGunTypes();
                 replacementWeapons.Add(TR2Entities.Pistols_S_P);
                 TR2Entities weaponType = replacementWeapons[_generator.Next(0, replacementWeapons.Count)];
+
+                // force pistols for OneLimit and then we're done
+                if (Difficulty == ItemDifficulty.OneLimit)
+                {
+                    weaponType = replacementWeapons[replacementWeapons.Count - 1];
+                    return;
+                }
 
                 if (_levelInstance.Is(LevelNames.CHICKEN))
                 {
