@@ -43,6 +43,7 @@ namespace TR2RandomizerView.Model
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
 
         private RandoDifficulty _randoEnemyDifficulty;
+        private ItemDifficulty _randoItemDifficulty;
 
         private Language[] _availableLanguages;
         private Language _gameStringLanguage;
@@ -386,6 +387,16 @@ namespace TR2RandomizerView.Model
             set
             {
                 _includeKeyItems = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public ItemDifficulty RandoItemDifficulty
+        {
+            get => _randoItemDifficulty;
+            set
+            {
+                _randoItemDifficulty = value;
                 FirePropertyChanged();
             }
         }
@@ -1119,6 +1130,7 @@ namespace TR2RandomizerView.Model
             RandomizeItems = _controller.RandomizeItems;
             ItemSeed = _controller.ItemSeed;
             IncludeKeyItems.Value = _controller.IncludeKeyItems;
+            RandoItemDifficulty = _controller.RandoItemDifficulty;
 
             RandomizeEnemies = _controller.RandomizeEnemies;
             EnemySeed = _controller.EnemySeed;
@@ -1359,6 +1371,7 @@ namespace TR2RandomizerView.Model
             _controller.RandomizeItems = RandomizeItems;
             _controller.ItemSeed = ItemSeed;
             _controller.IncludeKeyItems = IncludeKeyItems.Value;
+            _controller.RandoItemDifficulty = RandoItemDifficulty;
 
             _controller.RandomizeEnemies = RandomizeEnemies;
             _controller.EnemySeed = EnemySeed;

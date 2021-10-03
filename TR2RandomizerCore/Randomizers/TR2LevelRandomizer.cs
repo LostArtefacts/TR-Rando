@@ -37,6 +37,7 @@ namespace TR2RandomizerCore.Randomizers
         internal bool HardSecrets { get; set; }
         internal bool IncludeKeyItems { get; set; }
         internal bool DevelopmentMode { get; set; }
+        internal ItemDifficulty RandoItemDifficulty { get; set; }
         internal bool PersistTextureVariants { get; set; }
         internal bool RetainKeySpriteTextures { get; set; }
         internal bool RetainSecretSpriteTextures { get; set; }
@@ -84,6 +85,7 @@ namespace TR2RandomizerCore.Randomizers
             RandomizeItems = config.GetBool(nameof(RandomizeItems));
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
             IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
+            RandoItemDifficulty = (ItemDifficulty)config.GetEnum(nameof(RandoItemDifficulty), typeof(ItemDifficulty), ItemDifficulty.Default);
 
             RandomizeEnemies = config.GetBool(nameof(RandomizeEnemies));
             EnemySeed = config.GetInt(nameof(EnemySeed), defaultSeed);
@@ -148,6 +150,7 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(RandomizeItems)] = RandomizeItems;
             config[nameof(ItemSeed)] = ItemSeed;
             config[nameof(IncludeKeyItems)] = IncludeKeyItems;
+            config[nameof(RandoItemDifficulty)] = RandoItemDifficulty;
 
             config[nameof(RandomizeEnemies)] = RandomizeEnemies;
             config[nameof(EnemySeed)] = EnemySeed;
@@ -320,6 +323,7 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         IncludeKeyItems = IncludeKeyItems,
+                        Difficulty = RandoItemDifficulty,
                         PerformEnemyWeighting = RandomizeEnemies && CrossLevelEnemies,
                         TextureMonitor = textureMonitor,
                         IsDevelopmentModeOn = DevelopmentMode

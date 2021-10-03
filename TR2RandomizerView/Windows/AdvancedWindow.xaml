@@ -122,6 +122,59 @@
                 </ItemsControl>
             </StackPanel>
 
+            <!-- (Item) Difficulty -->
+            <StackPanel Grid.Row="2"
+                        Visibility="{Binding HasItemDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Difficulty" />
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <RadioButton Content="Default"
+                                     GroupName="randoItemDifficulty"
+                                     x:Name="_defaultItemDifficultyButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.RandoItemDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:ItemDifficulty.Default}, Mode=TwoWay}" />
+                    </Border>
+
+                    <Border Grid.Row="0"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Standard item randomization." />
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="0">
+                        <RadioButton Content="One Limit"
+                                     GroupName="randoItemDifficulty"
+                                     x:Name="_itemOneLimitButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.RandoItemDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:ItemDifficulty.OneLimit}, Mode=TwoWay}" />
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Each item type will spawn a maximum of once per level." />
+                    </Border>
+                </Grid>
+            </StackPanel>
+
             <!-- (Enemy) Difficulty -->
             <StackPanel Grid.Row="2"
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">

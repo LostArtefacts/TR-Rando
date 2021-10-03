@@ -32,6 +32,11 @@ namespace TR2RandomizerView.Windows
             nameof(HasBoolItems), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty HasItemDifficultyProperty = DependencyProperty.Register
+        (
+            nameof(HasItemDifficulty), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public static readonly DependencyProperty HasDifficultyProperty = DependencyProperty.Register
         (
             nameof(HasDifficulty), typeof(bool), typeof(AdvancedWindow)
@@ -83,6 +88,12 @@ namespace TR2RandomizerView.Windows
         {
             get => (bool)GetValue(HasBoolItemsProperty);
             set => SetValue(HasBoolItemsProperty, value);
+        }
+
+        public bool HasItemDifficulty
+        {
+            get => (bool)GetValue(HasItemDifficultyProperty);
+            set => SetValue(HasItemDifficultyProperty, value);
         }
 
         public bool HasDifficulty
@@ -152,9 +163,14 @@ namespace TR2RandomizerView.Windows
         private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             // This should not be here, but in some cases both radio buttons can remain unchecked on load
+            // TODO: This causes opening an AdvancedWindow to automatically become "unsaved"
             if (HasDifficulty)
             {
                 _unrestrictedButton.IsChecked = !(_defaultDifficultyButton.IsChecked = ControllerProxy.RandoEnemyDifficulty == RandoDifficulty.Default);
+            }
+            if (HasItemDifficulty)
+            {
+                _itemOneLimitButton.IsChecked = !(_defaultItemDifficultyButton.IsChecked = ControllerProxy.RandoItemDifficulty == ItemDifficulty.Default);
             }
         }
 

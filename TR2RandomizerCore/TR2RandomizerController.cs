@@ -287,6 +287,12 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.DevelopmentMode = value;
         }
 
+        public ItemDifficulty RandoItemDifficulty
+        {
+            get => LevelRandomizer.RandoItemDifficulty;
+            set => LevelRandomizer.RandoItemDifficulty = value;
+        }
+
         public bool CrossLevelEnemies
         {
             get => LevelRandomizer.CrossLevelEnemies;

@@ -123,16 +123,28 @@
             SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             BoolItemsSource="{Binding SecretBoolItemControls}"/>
 
-        <ctrl:ManagedSeedBoolControl
-            Grid.Row="1" 
+        <ctrl:ManagedSeedAdvancedControl
+            Grid.Row="1"
             Grid.Column="1"
             IsActive="{Binding RandomizeItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Items"
-            Text="Randomize standard pickups in each level."
+            Text="Randomize the items in each level."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding ItemSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            BoolItemsSource="{Binding ItemBoolItemControls}"/>
+            SeedValue="{Binding ItemSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Items (Advanced)"
+                                        MainDescription="Customize the item randomization."
+                                        BoolItemsSource="{Binding Data.ItemBoolItemControls, Source={StaticResource proxy}}"
+                                        HasBoolItems="True"
+                                        HasItemDifficulty="True"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
 
         <ctrl:ManagedSeedAdvancedControl
             Grid.Row="2"
