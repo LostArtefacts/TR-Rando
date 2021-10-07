@@ -590,7 +590,7 @@ namespace TR2RandomizerCore.Randomizers
                 {
                     entity.TypeID = (short)replacementWeapon;
 
-                    if (replacementWeapon == TR2Entities.Harpoon_S_P)
+                    if (replacementWeapon == TR2Entities.Harpoon_S_P || (Difficulty == ItemDifficulty.OneLimit && replacementWeapon != TR2Entities.Pistols_S_P))
                     {
                         harpoonWeapon = entity;
                     }
@@ -620,7 +620,7 @@ namespace TR2RandomizerCore.Randomizers
                 }
             }
 
-            // if weapon is harpoon, spawn pistols as well (see #149)
+            // if weapon is harpoon OR difficulty is OneLimit, spawn pistols as well (see #149)
             if (harpoonWeapon != null)
                 CopyEntity(harpoonWeapon, TR2Entities.Pistols_S_P);
         }
