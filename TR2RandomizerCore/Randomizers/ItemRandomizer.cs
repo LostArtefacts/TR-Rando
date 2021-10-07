@@ -340,9 +340,8 @@ namespace TR2RandomizerCore.Randomizers
                 {
                     List<TR2Entities> oneOfEachType = new List<TR2Entities>();
                     List<TR2Entity> allEntities = _levelInstance.Data.Entities.ToList();
-                    List<TR2Entity> toRemove = new List<TR2Entity>();
 
-                    // look for extra utility/ammo items and remove them
+                    // look for extra utility/ammo items and hide them
                     foreach (TR2Entity ent in allEntities)
                     {
                         TR2Entities eType = (TR2Entities)ent.TypeID;
@@ -351,19 +350,15 @@ namespace TR2RandomizerCore.Randomizers
                         {
                             if (oneOfEachType.Contains(eType))
                             {
-                                toRemove.Add(ent);
+                                ent.X = 0;
+                                ent.Y = 0;
+                                ent.Z = 0;
+                                ent.Invisible = true;
                             }
                             else
                                 oneOfEachType.Add((TR2Entities)ent.TypeID);
                         }
                     }
-                    foreach (TR2Entity ent in toRemove)
-                    {
-                        allEntities.Remove(ent);
-                    }
-
-                    _levelInstance.Data.Entities = allEntities.ToArray();
-                    _levelInstance.Data.NumEntities = (uint)allEntities.Count;
                 }
             }
         }
