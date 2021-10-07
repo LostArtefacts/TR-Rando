@@ -22,6 +22,7 @@ namespace TR2RandomizerCore.Randomizers
         public bool IncludeKeyItems { get; set; }
         public bool IsDevelopmentModeOn { get; set; }
         public bool PerformEnemyWeighting { get; set; }
+        public ItemDifficulty Difficulty { get; set; }
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
@@ -85,7 +86,7 @@ namespace TR2RandomizerCore.Randomizers
 
                 //Write back the level file
                 SaveLevelInstance();
-                
+
                 if (!TriggerProgress())
                 {
                     break;
@@ -93,7 +94,6 @@ namespace TR2RandomizerCore.Randomizers
             }
         }
 
-        // roomNumber is specified if ONLY that room is to be populated
         private void PlaceAllItems(List<Location> locations, TR2Entities entityToAdd = TR2Entities.LargeMed_S_P, bool transformToLevelSpace = true)
         {
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
@@ -335,6 +335,31 @@ namespace TR2RandomizerCore.Randomizers
                         }
                     }
                 }
+
+                if (Difficulty == ItemDifficulty.OneLimit)
+                {
+                    List<TR2Entities> oneOfEachType = new List<TR2Entities>();
+                    List<TR2Entity> allEntities = _levelInstance.Data.Entities.ToList();
+
+                    // look for extra utility/ammo items and hide them
+                    foreach (TR2Entity ent in allEntities)
+                    {
+                        TR2Entities eType = (TR2Entities)ent.TypeID;
+                        if (TR2EntityUtilities.IsUtilityType(eType) ||
+                            TR2EntityUtilities.IsGunType(eType))
+                        {
+                            if (oneOfEachType.Contains(eType))
+                            {
+                                ent.X = 0;
+                                ent.Y = 0;
+                                ent.Z = 0;
+                                ent.Invisible = true;
+                            }
+                            else
+                                oneOfEachType.Add((TR2Entities)ent.TypeID);
+                        }
+                    }
+                }
             }
         }
 
@@ -396,29 +421,34 @@ namespace TR2RandomizerCore.Randomizers
             //Is there something in the unarmed level pistol location?
             if (_unarmedLevelPistolIndex != -1)
             {
-                List<TR2Entities> ReplacementWeapons = TR2EntityUtilities.GetListOfGunTypes();
-                ReplacementWeapons.Add(TR2Entities.Pistols_S_P);
+                List<TR2Entities> replacementWeapons = TR2EntityUtilities.GetListOfGunTypes();
+                replacementWeapons.Add(TR2Entities.Pistols_S_P);
+                TR2Entities weaponType = replacementWeapons[_generator.Next(0, replacementWeapons.Count)];
 
-                TR2Entities Weap = ReplacementWeapons[_generator.Next(0, ReplacementWeapons.Count)];
+                // force pistols for OneLimit and then we're done
+                if (Difficulty == ItemDifficulty.OneLimit)
+                {
+                    weaponType = replacementWeapons[replacementWeapons.Count - 1];
+                    return;
+                }
+
                 if (_levelInstance.Is(LevelNames.CHICKEN))
                 {
                     // Grenade Launcher and Harpoon cannot trigger the bells in Ice Palace
-                    while (Weap.Equals(TR2Entities.GrenadeLauncher_S_P) || Weap.Equals(TR2Entities.Harpoon_S_P))
+                    while (weaponType.Equals(TR2Entities.GrenadeLauncher_S_P) || weaponType.Equals(TR2Entities.Harpoon_S_P))
                     {
-                        Weap = ReplacementWeapons[_generator.Next(0, ReplacementWeapons.Count)];
+                        weaponType = replacementWeapons[_generator.Next(0, replacementWeapons.Count)];
                     }
                 }
-
-                TR2Entity unarmedLevelWeapons = _levelInstance.Data.Entities[_unarmedLevelPistolIndex];
 
                 uint ammoToGive = 0;
                 bool addPistols = false;
                 uint smallMediToGive = 0;
                 uint largeMediToGive = 0;
 
-                if (_startingAmmoToGive.ContainsKey(Weap))
+                if (_startingAmmoToGive.ContainsKey(weaponType))
                 {
-                    ammoToGive = _startingAmmoToGive[Weap];
+                    ammoToGive = _startingAmmoToGive[weaponType];
                     if (PerformEnemyWeighting)
                     {
                         // Create a score based on each type of enemy in this level and increase the ammo count based on this
@@ -447,20 +477,18 @@ namespace TR2RandomizerCore.Randomizers
                     }
                 }
 
-                //#68 - Provide some additional ammo for a weapon if not pistols
-                if (Weap != TR2Entities.Pistols_S_P)
-                {
-                    AddORAmmo(GetWeaponAmmo(Weap), ammoToGive, unarmedLevelWeapons);
-                }
+                TR2Entity unarmedLevelWeapons = _levelInstance.Data.Entities[_unarmedLevelPistolIndex];
+                unarmedLevelWeapons.TypeID = (short)weaponType;
 
-                unarmedLevelWeapons.TypeID = (short)Weap;
-
-                if (Weap != TR2Entities.Pistols_S_P)
+                if (weaponType != TR2Entities.Pistols_S_P)
                 {
+                    //#68 - Provide some additional ammo for a weapon if not pistols
+                    AddORAmmo(GetWeaponAmmo(weaponType), ammoToGive, unarmedLevelWeapons);
+
                     // If we haven't decided to add the pistols (i.e. for enemy difficulty)
                     // add a 1/3 chance of getting them anyway. #149 If the harpoon is being
                     // given, the pistols will be included.
-                    if (addPistols || Weap == TR2Entities.Harpoon_S_P || _generator.Next(0, 3) == 0)
+                    if (addPistols || weaponType == TR2Entities.Harpoon_S_P || _generator.Next(0, 3) == 0)
                     {
                         CopyEntity(unarmedLevelWeapons, TR2Entities.Pistols_S_P);
                     }
@@ -537,20 +565,19 @@ namespace TR2RandomizerCore.Randomizers
                 replacementWeapons.Add(TR2Entities.Pistols_S_P);
             }
 
-            // Pick a new weapon, but exclude the grenade launcher because it affects the kill
-            // count. Also exclude the harpoon as neither it nor the grenade launcher can break
-            // Lara's bedroom window, and the enemy there may have been randomized to one without
-            // a gun. Probably not a softlock scenario but safer to exclude for now.
+            // Pick a new weapon, but exclude the grenade launcher because it affects the kill count
             TR2Entities replacementWeapon;
             do
             {
                 replacementWeapon = replacementWeapons[_generator.Next(0, replacementWeapons.Count)];
             }
-            while (replacementWeapon == TR2Entities.GrenadeLauncher_S_P || replacementWeapon == TR2Entities.Harpoon_S_P);
+            while (replacementWeapon == TR2Entities.GrenadeLauncher_S_P);
 
             TR2Entities replacementAmmo = GetWeaponAmmo(replacementWeapon);
-            
+
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
+            TR2Entity harpoonWeapon = null;
+            List<TR2Entities> oneOfEachType = new List<TR2Entities>();
             foreach (TR2Entity entity in ents)
             {
                 if (entity.Room != 57)
@@ -562,12 +589,40 @@ namespace TR2RandomizerCore.Randomizers
                 if (TR2EntityUtilities.IsGunType(entityType))
                 {
                     entity.TypeID = (short)replacementWeapon;
+
+                    if (replacementWeapon == TR2Entities.Harpoon_S_P || (Difficulty == ItemDifficulty.OneLimit && replacementWeapon != TR2Entities.Pistols_S_P))
+                    {
+                        harpoonWeapon = entity;
+                    }
                 }
                 else if (TR2EntityUtilities.IsAmmoType(entityType) && replacementWeapon != TR2Entities.Pistols_S_P)
                 {
                     entity.TypeID = (short)replacementAmmo;
                 }
+
+                if (Difficulty == ItemDifficulty.OneLimit)
+                {
+                    // look for extra utility/ammo items and hide them
+                    TR2Entities eType = (TR2Entities)entity.TypeID;
+                    if (TR2EntityUtilities.IsUtilityType(eType) ||
+                        TR2EntityUtilities.IsGunType(eType))
+                    {
+                        if (oneOfEachType.Contains(eType))
+                        {
+                            entity.X = 0;
+                            entity.Y = 0;
+                            entity.Z = 0;
+                            entity.Invisible = true;
+                        }
+                        else
+                            oneOfEachType.Add((TR2Entities)entity.TypeID);
+                    }
+                }
             }
+
+            // if weapon is harpoon OR difficulty is OneLimit, spawn pistols as well (see #149)
+            if (harpoonWeapon != null)
+                CopyEntity(harpoonWeapon, TR2Entities.Pistols_S_P);
         }
 
         private void RandomizeVehicles()

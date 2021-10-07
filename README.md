@@ -1,17 +1,55 @@
 # TR2-Rando
-Tomb Raider II Item Randomizer
-
-# Discord
-[Randomizer Discord](https://discord.gg/f4bUqwgcCN)
+Tomb Raider II Game Randomizer
 
 ![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando.PNG)
 
-# NuGet Packages
+# Features
+![TR2 Rando UI](https://github.com/DanzaG/TR2-Rando/blob/master/UI.png)
+
+* **Secrets** - Randomizes locations of secrets and their rewards.
+* **Items** - Randomizes pickups, including key items!
+* **Enemies** - Randomizes the types of enemies you encounter.
+* **Textures** - Randomly applies textures to levels.
+* **Level Sequencing** - Change the number of levels in the game and randomize their order.
+* **Inventory Loss** - Randomizes what levels Lara loses her guns and/or ammo and items.
+* **Audio** - Randomizes title screen, level ambience, trigger and secret soundtracks.
+* **Sunsets** - Randomizes what levels have the Bartoli's Hideout sunset effect.
+* **Outfits** - Randomizes the outfit Lara wears in each level, including options like invisibility and haircuts.
+* **Text** - Randomizes in-game text, such as weapon and level names. Includes a variety of languages to choose from.
+* **Night Mode** - Darken levels to give a night-time effect.
+* **Starting Position** - Choose to have Lara start levels in different positions facing a different direction.
+* **Environment** - Modifies the level environment, such as mixing up water levels, mirroring levels and moving keyholes.
+* And more!
+
+# Getting Started
+1. Download the latest version at https://github.com/DanzaG/TR2-Rando/releases. Make sure to download the zip and not the source code.
+2. Extract.
+3. Run "TR2Randomizer.exe" and follow the instructions.
+4. Play and enjoy!
+
+# Discord
+We have a friendly community Discord server [here](https://discord.gg/f4bUqwgcCN).
+
+# Tracker
+For keeping track of levels while you play, check out the [TR2RandoTracker](https://github.com/lahm86/TR2RandoTracker).
+
+# Screenies
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando2.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando3.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando4.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando5.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando6.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando7.PNG)
+![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando8.PNG)
+
+# Development
+You will need the following dependencies:
+
+### NuGet Packages
 * https://github.com/icsharpcode/SharpZipLib - Used for Zlib functions.
 * https://github.com/JamesNK/Newtonsoft.Json - Serialization/de-serialization of data.
 
-# Additional Build Dependencies
-In addition to Newtonsoft.JSON, the following dependencies external to NuGet are required to build:
+### Additional Build Dependencies
 * https://github.com/lahm86/TRGameflowEditor/releases/latest - TRGameflowEditor by Lahm.
 * https://github.com/lahm86/RectanglePacker/releases/latest - ReactanglePacker by Lahm.
 
@@ -41,39 +79,3 @@ In addition to Newtonsoft.JSON, the following dependencies external to NuGet are
     * Fetch (Russian)
     * Riku (Finnish)
 
-![TR2 Rando UI](https://github.com/DanzaG/TR2-Rando/blob/master/UI.png)
-
-# Types
-* Secrets - Randomizes locations of secrets, they are ordered based on casual play order, so you should expect to find a stone before jade.
-* Items - Randomizes pickups, including key items!
-* Enemies - Randomizes the types of enemies you encounter. The enemy types encountered in elevels can also be randomized (cross-level enemies).
-* Textures - Randomly applies textures to a level. Persistent textures can also be set to enable consistency of textures between groups of levels.
-* Level count and sequencing - Randomizes the number of levels in the game and their order.
-* Secrets Rewards - Randomizes what you get from the collect all secrets rewards.
-* Unarmed Levels - Randomizes what levels lara's guns get removed.
-* Audio Tracks - Randomizes title screen, level ambience, trigger and secret soundtracks.
-* Ammo Loss - Randomizes what levels Lara's ammo and items get removed.
-* Sunsets - Randomizes what levels have bartoli sunset effect.
-* Outfits - Randomizes the outfit Lara wears in each level, including an invisibility option, and randomly cuts Lara's hair.
-* Text - Randomizes in-game text, such as weapon and level names. Including a variety of languages to choose from.
-* Night Mode - Darkens a chosen number of levels to give a night-time effect.
-* Starting Position - Choose to have Lara start levels in different positions and facing a different direction.
-* Environment - Modifies the level environment, such as mixing up water levels, mirroring levels and moving keyholes.
-
-# Download
-https://github.com/DanzaG/TR2-Rando/releases/download/V1.4.1/V1.4.1.zip
-
-# Installation
-https://www.youtube.com/watch?v=MpNBfZgE0Fc
-
-# Tracker
-For keeping track of levels while you play, check out the [TR2RandoTracker](https://github.com/lahm86/TR2RandoTracker/releases/latest).
-
-# Screenies
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando2.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando3.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando4.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando5.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando6.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando7.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando8.PNG)

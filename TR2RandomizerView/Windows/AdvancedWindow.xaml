@@ -33,6 +33,30 @@
                     <Setter Property="Margin"
                             Value="0,10,0,0" />
                 </Style>
+                <Style x:Key="HeaderStyle"
+                       TargetType="{x:Type TextBlock}">
+                    <Setter Property="FontSize"
+                            Value="14" />
+                    <Setter Property="TextDecorations"
+                            Value="Underline" />
+                </Style>
+                <Style x:Key="OptionDescriptionStyle"
+                       TargetType="{x:Type Label}">
+                    <Setter Property="HorizontalAlignment"
+                            Value="Left" />
+                    <Setter Property="FontStyle"
+                            Value="Italic" />
+                    <Setter Property="Padding"
+                            Value="0" />
+                    <Setter Property="Margin"
+                            Value="40,0,0,0" />
+                </Style>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Setter Property="Margin"
+                            Value="0, 5, 0, 10" />
+                    <Setter Property="Grid.ColumnSpan"
+                            Value="2" />
+                </Style>
             </Grid.Resources>
             
             <Grid.RowDefinitions>
@@ -58,15 +82,11 @@
                 Grid.ColumnSpan="2"
                 Margin="0,0,0,10"/>
 
+            <!-- General -->
             <StackPanel Grid.Row="1"
-                        Grid.ColumnSpan="2"
-                        Orientation="Vertical"
-                        HorizontalAlignment="Left"
-                        Margin="0,0,0,10"
                         Visibility="{Binding HasBoolItems, Converter={StaticResource BoolToCollapsedConverter}}">
-                <TextBlock Text="General"
-                           FontSize="14"
-                           TextDecorations="Underline" />
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="General"/>
                 <ItemsControl ItemsSource="{Binding BoolItemsSource, Mode=TwoWay}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -87,11 +107,8 @@
 
                                 <Border Grid.Column="1"
                                         Margin="0,10,0,0">
-                                    <Label HorizontalAlignment="Left"
-                                           Content="{Binding Description}"
-                                           FontStyle="Italic"
-                                           Padding="0"
-                                           Margin="40,0,0,1">
+                                    <Label Style="{StaticResource OptionDescriptionStyle}"
+                                           Content="{Binding Description}">
                                         <Label.Resources>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -105,17 +122,68 @@
                 </ItemsControl>
             </StackPanel>
 
+            <!-- (Item) Difficulty -->
             <StackPanel Grid.Row="2"
-                        Grid.ColumnSpan="2"
-                        Margin="0,5,0,0"
+                        Visibility="{Binding HasItemDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Difficulty" />
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <RadioButton Content="Default"
+                                     GroupName="randoItemDifficulty"
+                                     x:Name="_defaultItemDifficultyButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.RandoItemDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:ItemDifficulty.Default}, Mode=TwoWay}" />
+                    </Border>
+
+                    <Border Grid.Row="0"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Standard item randomization." />
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="0">
+                        <RadioButton Content="One Limit"
+                                     GroupName="randoItemDifficulty"
+                                     x:Name="_itemOneLimitButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.RandoItemDifficulty, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:ItemDifficulty.OneLimit}, Mode=TwoWay}" />
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Each item type will spawn a maximum of once per level." />
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!-- (Enemy) Difficulty -->
+            <StackPanel Grid.Row="2"
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
                 </StackPanel.Resources>
-                
-                <TextBlock Text="Difficulty"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Difficulty"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -137,15 +205,17 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <TextBlock FontStyle="Italic"
-                                   VerticalAlignment="Center"
-                                   Margin="40,0,0,0">
-                            Standard restrictions will apply for cross-level enemies. See
-                            <Hyperlink ToolTip="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md" 
-                                       NavigateUri="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md"
-                                       RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
-                            for details.
-                        </TextBlock>
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <Label.Content>
+                                <TextBlock>
+                                    Standard restrictions will apply for cross-level enemies. See
+                                    <Hyperlink ToolTip="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md"
+                                               NavigateUri="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md"
+                                               RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
+                                    for details.
+                                </TextBlock>
+                            </Label.Content>
+                        </Label>
                     </Border>
 
                     <Border Grid.Row="1">
@@ -159,24 +229,18 @@
 
                     <Border Grid.Row="1"
                             Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Disables virtually all cross-level enemy restrictions except for technical ones."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Disables virtually all cross-level enemy restrictions except for technical ones."/>
                     </Border>
                 </Grid>
             </StackPanel>
 
+            <!-- Language -->
             <StackPanel Grid.Row="3"
-                        Grid.ColumnSpan="2"
-                        Margin="0,5,0,0"
                         Visibility="{Binding HasLanguage, Converter={StaticResource BoolToCollapsedConverter}}">
-                
-                <TextBlock Text="Language"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Language"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.ColumnDefinitions>
@@ -193,24 +257,18 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Select a language to use for gamestrings, or choose to use a random combination."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Select a language to use for gamestrings, or choose to use a random combination."/>
                     </Border>
                 </Grid>
             </StackPanel>
 
+            <!-- Mirrored Levels -->
             <StackPanel Grid.Row="4"
-                        Grid.ColumnSpan="2"
-                        Margin="0,5,0,0"
                         Visibility="{Binding HasMirroring, Converter={StaticResource BoolToCollapsedConverter}}">
-                
-                <TextBlock Text="Mirrored Levels"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Mirrored Levels"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -222,7 +280,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border>
+                    <Border Margin="0,3,0,0">
                         <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Left">
                             <Label Content="Number of levels"
@@ -239,12 +297,8 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Reverse the geometry and item positioning in the given number of levels, creating a mirror effect."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Reverse the geometry and item positioning in the given number of levels, creating a mirror effect."/>
                     </Border>
 
                     <Border Grid.Row="1">
@@ -257,24 +311,18 @@
 
                     <Border Grid.Column="1"
                             Grid.Row="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Mirror the assault course level in addition to or separately from above."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Mirror the assault course level in addition to or separately from above."/>
                     </Border>
                 </Grid>
             </StackPanel>
 
+            <!-- Haircuts -->
             <StackPanel Grid.Row="5"
-                        Grid.ColumnSpan="2"
-                        Margin="0,5,0,0"
                         Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
 
-                <TextBlock Text="Haircuts"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Haircuts"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -286,7 +334,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border>
+                    <Border Margin="0,3,0,0">
                         <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Left">
                             <Label Content="Number of levels"
@@ -303,12 +351,8 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Lara will lose her braid in the given number of levels."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Lara will lose her braid in the given number of levels."/>
                     </Border>
 
                     <Border Grid.Row="1">
@@ -321,24 +365,18 @@
 
                     <Border Grid.Column="1"
                             Grid.Row="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Give Lara a haircut in the assault course level in addition to or separately from above."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Give Lara a haircut in the assault course level in addition to or separately from above."/>
                     </Border>
                 </Grid>
             </StackPanel>
 
+            <!-- Invisibility -->
             <StackPanel Grid.Row="6"
-                        Grid.ColumnSpan="2"
-                        Margin="0,15,0,0"
                         Visibility="{Binding HasInvisibility, Converter={StaticResource BoolToCollapsedConverter}}">
 
-                <TextBlock Text="Invisibility"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Invisibility"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -350,7 +388,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border>
+                    <Border Margin="0,3,0,0">
                         <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Left">
                             <Label Content="Number of levels"
@@ -367,12 +405,8 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Lara will wear an invisibility cloak in the given number of levels. Only her shadow will be visible."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Lara will wear an invisibility cloak in the given number of levels. Only her shadow will be visible."/>
                     </Border>
 
                     <Border Grid.Row="1">
@@ -385,23 +419,18 @@
 
                     <Border Grid.Column="1"
                             Grid.Row="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Make Lara invisible in the assault course level in addition to or separately from above."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Make Lara invisible in the assault course level in addition to or separately from above."/>
                     </Border>
                 </Grid>
             </StackPanel>
 
+            <!-- Night Mode general -->
             <StackPanel Grid.Row="7"
-                        Grid.ColumnSpan="2"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
-                <TextBlock Text="General"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="General"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -413,7 +442,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border>
+                    <Border Margin="0,3,0,0">
                         <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Left">
                             <Label Content="Number of levels"
@@ -430,12 +459,8 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="The given number of levels will be converted to night mode."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The given number of levels will be converted to night mode."/>
                     </Border>
 
                     <Border Grid.Row="1">
@@ -448,24 +473,18 @@
 
                     <Border Grid.Column="1"
                             Grid.Row="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Adjust the assault course level lighting in addition to or separately from above."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Adjust the assault course level lighting in addition to or separately from above."/>
                     </Border>
                 </Grid>
             </StackPanel>
 
+            <!-- Intensity -->
             <StackPanel Grid.Row="8"
-                        Grid.ColumnSpan="2"
-                        Margin="0,15,0,0"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
-                <TextBlock Text="Intensity"
-                           FontSize="14"
-                           TextDecorations="Underline"/>
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Intensity"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -503,12 +522,8 @@
                     </Border>
 
                     <Border Grid.Column="1">
-                        <Label HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Content="Set the darkness intensity, ranging from dusk to full night mode."
-                               FontStyle="Italic"
-                               Padding="0"
-                               Margin="40,0,0,0"/>
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Set the darkness intensity, ranging from dusk to full night mode."/>
                     </Border>
 
                     <Border Grid.Row="1">
