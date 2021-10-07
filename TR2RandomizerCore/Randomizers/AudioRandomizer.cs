@@ -15,8 +15,6 @@ namespace TR2RandomizerCore.Randomizers
     {
         public bool ChangeTriggerTracks { get; set; }
 
-        public TR23ScriptEditor ScriptEditor { get; set; }
-
         private IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> _tracks;
 
         public override void Randomize(int seed)

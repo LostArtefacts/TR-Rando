@@ -273,12 +273,9 @@ namespace TR2RandomizerCore.Randomizers
                 levels.Add(scriptEditor.AssaultLevel as TR23ScriptedLevel);
             }
 
-            // Optionally sort based on randomized sequencing. Perhaps this should be an option for users?
-            /*levels.Sort(delegate (TR23ScriptedLevel lvl1, TR23ScriptedLevel lvl2)
-            {
-                return lvl1.Sequence.CompareTo(lvl2.Sequence);
-            });*/
-
+            // Each processor will have a reference to the script editor, so can
+            // make on-the-fly changes as required.
+            TR23ScriptEditor tr23ScriptEditor = scriptEditor as TR23ScriptEditor;
             string wipDirectory = _io.WIPOutputDirectory.FullName;
 
             // Texture monitoring is needed between enemy and texture randomization
@@ -293,6 +290,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Deduplicating textures");
                     new TextureDeduplicator
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor
@@ -304,6 +302,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
                     new SecretReplacer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         AllowHard = HardSecrets,
                         AllowGlitched = GlitchedSecrets,
                         Levels = levels,
@@ -319,6 +318,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, string.Format("Randomizing standard{0} items", IncludeKeyItems ? " and key" : string.Empty));
                     (itemRandomizer = new ItemRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -339,6 +339,7 @@ namespace TR2RandomizerCore.Randomizers
                         monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting level models");
                         new ModelAdjuster
                         {
+                            ScriptEditor = tr23ScriptEditor,
                             Levels = levels,
                             BasePath = wipDirectory,
                             SaveMonitor = monitor
@@ -348,6 +349,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
                     new EnemyRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -371,6 +373,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing start positions");
                     new StartPositionRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -384,6 +387,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
                     new EnvironmentRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -402,7 +406,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
                     new AudioRandomizer
                     {
-                        ScriptEditor = scriptEditor as TR23ScriptEditor,
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -415,6 +419,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing outfits");
                     new OutfitRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -433,6 +438,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
                     new NightModeRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -450,6 +456,7 @@ namespace TR2RandomizerCore.Randomizers
                         monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing textures");
                         new TextureRandomizer
                         {
+                            ScriptEditor = tr23ScriptEditor,
                             Levels = levels,
                             BasePath = wipDirectory,
                             SaveMonitor = monitor,
@@ -465,6 +472,7 @@ namespace TR2RandomizerCore.Randomizers
                         monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode textures");
                         new TextureRandomizer
                         {
+                            ScriptEditor = tr23ScriptEditor,
                             Levels = levels,
                             BasePath = wipDirectory,
                             SaveMonitor = monitor,
