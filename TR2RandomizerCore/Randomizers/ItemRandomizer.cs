@@ -86,7 +86,7 @@ namespace TR2RandomizerCore.Randomizers
 
                 //Write back the level file
                 SaveLevelInstance();
-                
+
                 if (!TriggerProgress())
                 {
                     break;
@@ -577,6 +577,7 @@ namespace TR2RandomizerCore.Randomizers
 
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
             TR2Entity harpoonWeapon = null;
+            List<TR2Entities> oneOfEachType = new List<TR2Entities>();
             foreach (TR2Entity entity in ents)
             {
                 if (entity.Room != 57)
@@ -597,6 +598,25 @@ namespace TR2RandomizerCore.Randomizers
                 else if (TR2EntityUtilities.IsAmmoType(entityType) && replacementWeapon != TR2Entities.Pistols_S_P)
                 {
                     entity.TypeID = (short)replacementAmmo;
+                }
+
+                if (Difficulty == ItemDifficulty.OneLimit)
+                {
+                    // look for extra utility/ammo items and hide them
+                    TR2Entities eType = (TR2Entities)entity.TypeID;
+                    if (TR2EntityUtilities.IsUtilityType(eType) ||
+                        TR2EntityUtilities.IsGunType(eType))
+                    {
+                        if (oneOfEachType.Contains(eType))
+                        {
+                            entity.X = 0;
+                            entity.Y = 0;
+                            entity.Z = 0;
+                            entity.Invisible = true;
+                        }
+                        else
+                            oneOfEachType.Add((TR2Entities)entity.TypeID);
+                    }
                 }
             }
 
