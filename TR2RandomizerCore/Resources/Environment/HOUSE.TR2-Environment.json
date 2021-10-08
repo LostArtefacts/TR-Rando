@@ -1,5 +1,7 @@
 {
-  "All": [
+  "All": [],
+
+  "NonPurist": [
     {
       "Comments": "Reposition the unused maze button to the bedroom.",
       "EMType": 44,

@@ -19,7 +19,7 @@ namespace TR2RandomizerView.Model
 
         private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl, _randomTextControl, _randomStartControl, _randomEnvironmentControl;
 
-        private bool _disableDemos, _autoLaunchGame;
+        private bool _disableDemos, _autoLaunchGame, _puristMode;
 
         private BoolItemControlClass _isHardSecrets, _allowGlitched;
         private BoolItemControlClass _includeKeyItems;
@@ -792,6 +792,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool PuristMode
+        {
+            get => _puristMode;
+            set
+            {
+                _puristMode = value;
+                FirePropertyChanged();
+            }
+        }
+
         public List<BoolItemControlClass> SecretBoolItemControls
         {
             get => _secretBoolItemControls;
@@ -1181,6 +1191,7 @@ namespace TR2RandomizerView.Model
             DevelopmentMode = _controller.DevelopmentMode;
             DisableDemos = _controller.DisableDemos;
             AutoLaunchGame = _controller.AutoLaunchGame;
+            PuristMode = _controller.PuristMode;
         }
 
         public void RandomizeActiveSeeds()
@@ -1421,6 +1432,7 @@ namespace TR2RandomizerView.Model
             _controller.DevelopmentMode = DevelopmentMode;
             _controller.DisableDemos = DisableDemos;
             _controller.AutoLaunchGame = AutoLaunchGame;
+            _controller.PuristMode = PuristMode;
         }
 
         public void Unload()

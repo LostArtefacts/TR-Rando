@@ -497,6 +497,12 @@ namespace TR2RandomizerCore
             get => LevelRandomizer.EnvironmentSeed;
             set => LevelRandomizer.EnvironmentSeed = value;
         }
+
+        public bool PuristMode
+        {
+            get => LevelRandomizer.PuristMode;
+            set => LevelRandomizer.PuristMode = value;
+        }
         #endregion
 
         #region TREditor Passthrough

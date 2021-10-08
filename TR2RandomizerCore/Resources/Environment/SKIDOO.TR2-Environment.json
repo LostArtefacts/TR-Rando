@@ -1,5 +1,7 @@
 {
-  "All": [
+  "All": [],
+
+  "NonPurist": [
     {
       "Comments": "Red skidoo return path.",
       "EMType": 1,

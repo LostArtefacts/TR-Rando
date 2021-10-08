@@ -1,6 +1,25 @@
 {
   "All": [
     {
+      "Comments": "Fix the yellow triangles in room 30",
+      "EMType": 21,
+      "TextureMap": {
+        "1247": {
+          "30": {
+            "Triangles": [ 2, 3 ]
+          }
+        },
+        "1341": {
+          "30": {
+            "Triangles": [ 4 ]
+          }
+        }
+      }
+    }
+  ],
+
+  "NonPurist": [
+    {
       "Comments": "Adds a ladder to allow returning to the top of the first guardhouse after dropping down",
       "EMType": 0,
       "Location": {
@@ -37,23 +56,6 @@
       "Clicks": -2,
       "FloorTexture": 1223,
       "SideTexture": 1228
-    },
-
-    {
-      "Comments": "Fix the yellow triangles in room 30",
-      "EMType": 21,
-      "TextureMap": {
-        "1247": {
-          "30": {
-            "Triangles": [ 2, 3 ]
-          }
-        },
-        "1341": {
-          "30": {
-            "Triangles": [ 4 ]
-          }
-        }
-      }
     }
   ],
 

@@ -66,6 +66,7 @@ namespace TR2RandomizerCore.Randomizers
         internal uint MirroredLevelCount { get; set; }
         internal bool MirrorAssaultCourse { get; set; }
         internal bool AutoLaunchGame { get; set; }
+        internal bool PuristMode { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;// || RandomizeEnvironment; // Not needed until trap model import takes place
         internal bool ReassignPuzzleNames => RandomizeEnemies && CrossLevelEnemies;
@@ -138,6 +139,7 @@ namespace TR2RandomizerCore.Randomizers
 
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
+            PuristMode = config.GetBool(nameof(PuristMode));
         }
 
         protected override void StoreConfig(Config config)
@@ -202,6 +204,7 @@ namespace TR2RandomizerCore.Randomizers
 
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
+            config[nameof(PuristMode)] = PuristMode;
         }
 
         /// <summary>
@@ -392,6 +395,7 @@ namespace TR2RandomizerCore.Randomizers
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         EnforcedModeOnly = !RandomizeEnvironment,
+                        PuristMode = PuristMode,
                         NumMirrorLevels = MirroredLevelCount,
                         MirrorAssaultCourse = MirrorAssaultCourse,
                         RandomizeWater = RandomizeWaterLevels,
