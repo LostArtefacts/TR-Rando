@@ -11,6 +11,7 @@ namespace TREnvironmentEditor
         private static readonly EMConverter _converter = new EMConverter();
 
         public EMEditorSet All { get; set; }
+        public EMEditorSet NonPurist { get; set; }
         public List<EMEditorSet> Any { get; set; }
         public List<List<EMEditorSet>> AllWithin { get; set; }
         public List<EMConditionalEditorSet> ConditionalAllWithin { get; set; }
@@ -21,6 +22,7 @@ namespace TREnvironmentEditor
         public EMEditorMapping()
         {
             All = new EMEditorSet();
+            NonPurist = new EMEditorSet();
             Any = new List<EMEditorSet>();
             AllWithin = new List<List<EMEditorSet>>();
             ConditionalAllWithin = new List<EMConditionalEditorSet>();
@@ -49,6 +51,10 @@ namespace TREnvironmentEditor
             if (All != null)
             {
                 All.RemapTextures(AlternativeTextures);
+            }
+            if (NonPurist != null)
+            {
+                NonPurist.RemapTextures(AlternativeTextures);
             }
             if (Any != null)
             {

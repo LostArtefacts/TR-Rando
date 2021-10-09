@@ -2033,6 +2033,27 @@
     },
     {
       "Entities": [
+        12
+      ],
+      "TileIndex": 14,
+      "Bounds": "32, 144, 16, 16"
+    },
+    {
+      "Entities": [
+        12
+      ],
+      "TileIndex": 14,
+      "Bounds": "64, 144, 16, 16"
+    },
+    {
+      "Entities": [
+        12
+      ],
+      "TileIndex": 15,
+      "Bounds": "248, 120, 8, 8"
+    },
+    {
+      "Entities": [
         20,
         159
       ],

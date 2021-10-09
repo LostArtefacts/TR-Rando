@@ -1,5 +1,7 @@
 {
-  "All": [
+  "All": [],
+
+  "NonPurist": [
     {
       "Comments": "Make ladders for the first big drop.",
       "EMType": 0,

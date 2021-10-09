@@ -16,6 +16,149 @@
           }
         }
       ]
+    },
+
+    {
+      "Comments": "Fixes the green triangle in room 52.",
+      "EMType": 21,
+      "TextureMap": {
+        "1899": {
+          "52": {
+            "Triangles": [ 4 ]
+          }
+        }
+      }
+    }
+  ],
+
+  "NonPurist": [
+    {
+      "Comments": "Adds some ladders to allow returning to the initial area before the acid.",
+      "EMType": 0,
+      "Location": {
+        "X": 23775,
+        "Y": 6400,
+        "Z": 71257,
+        "Room": 81
+      },
+      "IsNegativeX": true,
+      "TextureMap": {
+        "1925": {
+          "48": {
+            "Rectangles": [ 45, 41, 37, 33, 27, 21, 17, 13, 10, 7, 2 ]
+          }
+        }
+      }
+    },
+    {
+      "EMType": 0,
+      "Location": {
+        "X": 23775,
+        "Y": 6400,
+        "Z": 70233,
+        "Room": 81
+      },
+      "IsNegativeX": true,
+      "TextureMap": {}
+    },
+    {
+      "EMType": 0,
+      "Location": {
+        "X": 23775,
+        "Y": 6400,
+        "Z": 69209,
+        "Room": 81
+      },
+      "IsNegativeX": true,
+      "TextureMap": {}
+    },
+    {
+      "EMType": 0,
+      "Location": {
+        "X": 23775,
+        "Y": 6400,
+        "Z": 68185,
+        "Room": 81
+      },
+      "IsNegativeX": true,
+      "TextureMap": {}
+    },
+    {
+      "EMType": 0,
+      "Location": {
+        "X": 23775,
+        "Y": 6400,
+        "Z": 67161,
+        "Room": 81
+      },
+      "IsNegativeX": true,
+      "TextureMap": {}
+    },
+    {
+      "EMType": 0,
+      "Location": {
+        "X": 23735,
+        "Y": 3577,
+        "Z": 65868,
+        "Room": 48
+      },
+      "IsNegativeX": true,
+      "TextureMap": {}
+    },
+    {
+      "EMType": 0,
+      "Location": {
+        "X": 23716,
+        "Y": 2853,
+        "Z": 64903,
+        "Room": 48
+      },
+      "IsNegativeX": true,
+      "TextureMap": {}
+    },
+    {
+      "EMType": 0,
+      "Location": {
+        "X": 23745,
+        "Y": 2109,
+        "Z": 63911,
+        "Room": 48
+      },
+      "IsNegativeX": true,
+      "TextureMap": {}
+    },
+    {
+      "EMType": 0,
+      "Location": {
+        "X": 23773,
+        "Y": 1337,
+        "Z": 62881,
+        "Room": 48
+      },
+      "IsNegativeX": true,
+      "TextureMap": {}
+    },
+    {
+      "EMType": 0,
+      "Location": {
+        "X": 23788,
+        "Y": 1024,
+        "Z": 61880,
+        "Room": 48
+      },
+      "IsNegativeX": true,
+      "TextureMap": {}
+    },
+    {
+      "EMType": 0,
+      "Location": {
+        "X": 23715,
+        "Y": 1024,
+        "Z": 60908,
+        "Room": 48
+      },
+      "IsNegativeX": true,
+      "TextureMap": {}
     }
   ],
 

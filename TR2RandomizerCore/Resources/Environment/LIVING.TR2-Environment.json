@@ -1,5 +1,7 @@
 {
-  "All": [
+  "All": [],
+
+  "NonPurist": [
     {
       "Comments": "Remove the fake ladder texture above the flame room.",
       "EMType": 21,

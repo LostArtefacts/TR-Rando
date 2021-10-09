@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using TR2RandomizerCore.Helpers;
+using TR2RandomizerCore.SFX;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
@@ -14,21 +18,30 @@ namespace TR2RandomizerCore.Randomizers
     public class AudioRandomizer : RandomizerBase
     {
         public bool ChangeTriggerTracks { get; set; }
-
-        public TR23ScriptEditor ScriptEditor { get; set; }
+        public bool SeparateSecretTracks { get; set; }
+        public bool ChangeWeaponSFX { get; set; }
+        public bool ChangeCrashSFX { get; set; }
+        public bool ChangeEnemySFX { get; set; }
+        public bool LinkCreatureSFX { get; set; }
 
         private IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> _tracks;
+
+        private List<TRSFXDefinition> _soundEffects;
+        private List<TRSFXGeneralCategory> _sfxCategories;
 
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
-            _tracks = ScriptEditor.AudioProvider.GetCategorisedTracks();
+
+            LoadAudioData();
 
             foreach (TR23ScriptedLevel lvl in Levels)
             {
                 LoadLevelInstance(lvl);
 
                 RandomizeMusicTriggers(_levelInstance);
+
+                RandomizeSoundEffects(_levelInstance);
 
                 SaveLevelInstance();
 
@@ -48,8 +61,12 @@ namespace TR2RandomizerCore.Randomizers
             {
                 RandomizeFloorTracks(level.Data, floorData);
             }
-            RandomizeSecretTracks(level.Data, floorData);
-            
+
+            if (SeparateSecretTracks)
+            {
+                RandomizeSecretTracks(level.Data, floorData);
+            }
+
             floorData.WriteToLevel(level.Data);
         }
 
@@ -186,6 +203,207 @@ namespace TR2RandomizerCore.Randomizers
             }
 
             return entities;
+        }
+
+        private void LoadAudioData()
+        {
+            // Get the track data from tr2audio.json. Loaded from TRGE as it sets the ambient tracks initially.
+            _tracks = ScriptEditor.AudioProvider.GetCategorisedTracks();
+
+            // Decide which sound effect categories we want to randomize.
+            _sfxCategories = new List<TRSFXGeneralCategory>();
+            if (ChangeWeaponSFX)
+            {
+                // Pistols, Autos etc
+                _sfxCategories.Add(TRSFXGeneralCategory.StandardWeaponFiring);
+                // Uzi/M16 - these require very short SFX so are separated
+                _sfxCategories.Add(TRSFXGeneralCategory.FastWeaponFiring);
+            }
+
+            if (ChangeCrashSFX)
+            {
+                // Grenades, 40F crash, dragon explosion
+                _sfxCategories.Add(TRSFXGeneralCategory.Explosion);
+                // Boulders settling, collapsible tiles collapsing
+                _sfxCategories.Add(TRSFXGeneralCategory.Clattering);
+                // Gondolas, glass, ice wall
+                _sfxCategories.Add(TRSFXGeneralCategory.Breaking);
+            }
+
+            if (ChangeEnemySFX)
+            {
+                // General death noises
+                _sfxCategories.Add(TRSFXGeneralCategory.Death);
+                // Standard footsteps, shuffles/scrapes (like Flamethrower & Winston)
+                _sfxCategories.Add(TRSFXGeneralCategory.StandardFootstep);
+                // Chicken, T-Rex, Dragon
+                _sfxCategories.Add(TRSFXGeneralCategory.HeavyFootstep);
+                // E.g. ShotgunGoon laughing, Gunman1/2 breathing, Doberman panting
+                _sfxCategories.Add(TRSFXGeneralCategory.Breathing);
+                // Loosely categorised as "bored" enemies, like the yetis wandering before Lara approaches
+                _sfxCategories.Add(TRSFXGeneralCategory.Grunting);
+                // Enemies in attack mode, like tigers growling at Lara
+                _sfxCategories.Add(TRSFXGeneralCategory.Growling);
+            }
+
+            // Only load the SFX if we are changing at least one category
+            if (_sfxCategories.Count > 0)
+            {
+                _soundEffects = JsonConvert.DeserializeObject<List<TRSFXDefinition>>(File.ReadAllText(@"Resources\tr2sfx.json"));
+            }
+        }
+
+        private void RandomizeSoundEffects(TR2CombinedLevel level)
+        {
+            if (_sfxCategories.Count == 0)
+            {
+                // We haven't selected any SFX categories to change.
+                return;
+            }
+
+            // Run through the SoundMap for this level and get the SFX definition for each one.
+            // Choose a new sound effect provided the definition is in a category we want to change.
+            // Lara's SFX are not changed by default.
+            for (int internalIndex = 0; internalIndex < level.Data.SoundMap.Length; internalIndex++)
+            {
+                TRSFXDefinition definition = _soundEffects.Find(sfx => sfx.InternalIndex == internalIndex);
+                if (level.Data.SoundMap[internalIndex] == -1 || definition == null || definition.Creature == TRSFXCreatureCategory.Lara || !_sfxCategories.Contains(definition.PrimaryCategory))
+                {
+                    continue;
+                }
+
+                // The following allows choosing to keep humans making human noises, and animals animal noises.
+                // Other humans can use Lara's SFX.
+                Predicate<TRSFXDefinition> pred;
+                if (LinkCreatureSFX && definition.Creature > TRSFXCreatureCategory.Lara)
+                {
+                    pred = sfx =>
+                    {
+                        return sfx.Categories.Contains(definition.PrimaryCategory) &&
+                        sfx != definition &&
+                        (
+                            sfx.Creature == definition.Creature ||
+                            (sfx.Creature == TRSFXCreatureCategory.Lara && definition.Creature == TRSFXCreatureCategory.Human)
+                        );
+                    };
+                }
+                else
+                {
+                    pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && sfx != definition;
+                }
+
+                // Try to find definitions that match
+                List<TRSFXDefinition> otherDefinitions = _soundEffects.FindAll(pred);
+                if (otherDefinitions.Count > 0)
+                {
+                    // Pick a new definition and try to import it into the level. This should only fail if
+                    // the JSON is misconfigured e.g. missing sample indices. In that case, we just leave 
+                    // the current sound effect as-is.
+                    TRSFXDefinition nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
+                    short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition);
+                    if (soundDetailsIndex != -1)
+                    {
+                        // Only change it if the import succeeded
+                        level.Data.SoundMap[internalIndex] = soundDetailsIndex;
+                    }
+                }
+            }
+
+            // Sample indices have to be in ascending order. Sort the level data only once.
+            ResortSoundIndices(level.Data);
+        }
+
+        private short ImportSoundEffect(TR2Level level, TRSFXDefinition definition)
+        {
+            if (definition.SampleIndices.Count == 0)
+            {
+                return -1;
+            }
+
+            List<uint> levelSamples = level.SampleIndices.ToList();
+            List<TRSoundDetails> levelSoundDetails = level.SoundDetails.ToList();
+
+            uint minSample = definition.SampleIndices.Min();
+            if (levelSamples.Contains(minSample))
+            {
+                // This index is already defined, so locate the TRSoundDetails that references it
+                // and return its index.
+                return (short)levelSoundDetails.FindIndex(d => levelSamples[d.Sample] == minSample);
+            }
+
+            // Otherwise, we need to import the samples, create a sound details object to 
+            // point to the first sample, and then return the new index. Make sure the 
+            // samples are sorted first.
+            ushort newSampleIndex = (ushort)levelSamples.Count;
+            List<uint> sortedSamples = new List<uint>(definition.SampleIndices);
+            sortedSamples.Sort();
+            levelSamples.AddRange(sortedSamples);
+
+            level.SampleIndices = levelSamples.ToArray();
+            level.NumSampleIndices = (uint)levelSamples.Count;
+
+            levelSoundDetails.Add(new TRSoundDetails
+            {
+                Chance = definition.Details.Chance,
+                Characteristics = definition.Details.Characteristics,
+                Sample = newSampleIndex,
+                Volume = definition.Details.Volume
+            });
+
+            level.SoundDetails = levelSoundDetails.ToArray();
+            level.NumSoundDetails++;
+
+            return (short)(level.NumSoundDetails - 1);
+        }
+
+        private static void ResortSoundIndices(TR2Level level)
+        {
+            // Store the values from SampleIndices against their current positions
+            // in the list.
+            List<uint> sampleIndices = level.SampleIndices.ToList();
+            Dictionary<int, uint> indexMap = new Dictionary<int, uint>();
+            for (int i = 0; i < sampleIndices.Count; i++)
+            {
+                indexMap[i] = sampleIndices[i];
+            }
+
+            // Sort the indices to avoid the game crashing
+            sampleIndices.Sort();
+
+            // Remap each SoundDetail to use the new index of the sample it points to
+            foreach (TRSoundDetails soundDetails in level.SoundDetails)
+            {
+                soundDetails.Sample = (ushort)sampleIndices.IndexOf(indexMap[soundDetails.Sample]);
+            }
+
+            // Save the samples back to the level
+            level.SampleIndices = sampleIndices.ToArray();
+
+            // Repeat for SoundMap->SoundDetails
+            Dictionary<int, TRSoundDetails> soundMapIndices = new Dictionary<int, TRSoundDetails>();
+            List<short> soundMap = level.SoundMap.ToList();
+            for (int i = 0; i < soundMap.Count; i++)
+            {
+                if (soundMap[i] != -1)
+                {
+                    soundMapIndices[i] = level.SoundDetails[soundMap[i]];
+                }
+            }
+
+            List<TRSoundDetails> soundDetailsList = level.SoundDetails.ToList();
+            soundDetailsList.Sort(delegate (TRSoundDetails d1, TRSoundDetails d2)
+            {
+                return d1.Sample.CompareTo(d2.Sample);
+            });
+
+            foreach (int mapIndex in soundMapIndices.Keys)
+            {
+                TRSoundDetails details = soundMapIndices[mapIndex];
+                soundMap[mapIndex] = (short)soundDetailsList.IndexOf(details);
+            }
+
+            level.SoundDetails = soundDetailsList.ToArray();
+            level.SoundMap = soundMap.ToArray();
         }
     }
 }

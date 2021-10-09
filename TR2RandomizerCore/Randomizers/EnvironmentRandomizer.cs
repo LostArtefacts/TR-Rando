@@ -13,6 +13,7 @@ namespace TR2RandomizerCore.Randomizers
     public class EnvironmentRandomizer : RandomizerBase
     {
         public bool EnforcedModeOnly { get; set; }
+        public bool PuristMode { get; set; }
         public uint NumMirrorLevels { get; set; }
         public bool MirrorAssaultCourse { get; set; }
         public bool RandomizeWater { get; set; }
@@ -86,8 +87,21 @@ namespace TR2RandomizerCore.Randomizers
 
         private void ApplyMappingToLevel(TR2CombinedLevel level, EMEditorMapping mapping)
         {
+            EMType[] emptyExclusions = new EMType[] { };
+
             // Process enforced packs first. We do not pass disallowed types here.
-            mapping.All.ApplyToLevel(level.Data, new EMType[] { });
+            // These generally fix OG issues such as problems with box overlaps and
+            // textures.
+            mapping.All.ApplyToLevel(level.Data, emptyExclusions);
+
+            if (!EnforcedModeOnly || !PuristMode)
+            {
+                // Non-purist packs generally make return paths available.
+                // These are applied only if Purist mode is off or if Environment
+                // rando is on as a whole, because some other categories may rely
+                // on these changes having been made.
+                mapping.NonPurist.ApplyToLevel(level.Data, emptyExclusions);
+            }
 
             if (EnforcedModeOnly)
             {

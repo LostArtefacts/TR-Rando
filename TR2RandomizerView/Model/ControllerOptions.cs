@@ -19,13 +19,13 @@ namespace TR2RandomizerView.Model
 
         private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl, _randomTextControl, _randomStartControl, _randomEnvironmentControl;
 
-        private bool _disableDemos, _autoLaunchGame;
+        private bool _disableDemos, _autoLaunchGame, _puristMode;
 
         private BoolItemControlClass _isHardSecrets, _allowGlitched;
         private BoolItemControlClass _includeKeyItems;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileBirdMonsters;
         private BoolItemControlClass _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
-        private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks;
+        private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
@@ -327,6 +327,56 @@ namespace TR2RandomizerView.Model
             set
             {
                 _changeTriggerTracks = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass SeparateSecretTracks
+        {
+            get => _separateSecretTracks;
+            set
+            {
+                _separateSecretTracks = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass ChangeWeaponSFX
+        {
+            get => _changeWeaponSFX;
+            set
+            {
+                _changeWeaponSFX = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass ChangeCrashSFX
+        {
+            get => _changeCrashSFX;
+            set
+            {
+                _changeCrashSFX = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass ChangeEnemySFX
+        {
+            get => _changeEnemySFX;
+            set
+            {
+                _changeEnemySFX = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass LinkCreatureSFX
+        {
+            get => _linkCreatureSFX;
+            set
+            {
+                _linkCreatureSFX = value;
                 FirePropertyChanged();
             }
         }
@@ -792,6 +842,16 @@ namespace TR2RandomizerView.Model
             }
         }
 
+        public bool PuristMode
+        {
+            get => _puristMode;
+            set
+            {
+                _puristMode = value;
+                FirePropertyChanged();
+            }
+        }
+
         public List<BoolItemControlClass> SecretBoolItemControls
         {
             get => _secretBoolItemControls;
@@ -981,7 +1041,7 @@ namespace TR2RandomizerView.Model
             IncludeBlankTracks = new BoolItemControlClass()
             {
                 Title = "Include blank tracks",
-                Description = "Applies only to the title screen and level ambience tracks"
+                Description = "Applies only to the title screen and level ambience tracks."
             };
             BindingOperations.SetBinding(IncludeBlankTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
             ChangeTriggerTracks = new BoolItemControlClass()
@@ -990,6 +1050,36 @@ namespace TR2RandomizerView.Model
                 Description = "Change the tracks in the game that play when crossing triggers, such as the violins in Venice, danger sounds etc."
             };
             BindingOperations.SetBinding(ChangeTriggerTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
+            SeparateSecretTracks = new BoolItemControlClass
+            {
+                Title = "Use separate secret tracks",
+                Description = "Play a different soundtrack for every secret that is picked up, or use the same soundtrack for all secrets."
+            };
+            BindingOperations.SetBinding(SeparateSecretTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
+            ChangeWeaponSFX = new BoolItemControlClass
+            {
+                Title = "Change weapon sound effects",
+                Description = "Randomize the sound made by each weapon (applies to Lara and enemies)."
+            };
+            BindingOperations.SetBinding(ChangeWeaponSFX, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
+            ChangeCrashSFX = new BoolItemControlClass
+            {
+                Title = "Change crash sound effects",
+                Description = "Randomize the sound made by crashes and explosions."
+            };
+            BindingOperations.SetBinding(ChangeCrashSFX, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
+            ChangeEnemySFX = new BoolItemControlClass
+            {
+                Title = "Change enemy sound effects",
+                Description = "Randomize enemy footstep, grunting, growling, breathing and death sound effects."
+            };
+            BindingOperations.SetBinding(ChangeEnemySFX, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
+            LinkCreatureSFX = new BoolItemControlClass
+            {
+                Title = "Link creature sound effects",
+                Description = "Enforce the use of human sounds for human enemies and animal sounds for animal enemies."
+            };
+            BindingOperations.SetBinding(LinkCreatureSFX, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
 
             // Outfits
             Binding randomizeOutfitsBinding = new Binding(nameof(RandomizeOutfits)) { Source = this };
@@ -1070,7 +1160,8 @@ namespace TR2RandomizerView.Model
             };
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
-                _includeBlankTracks, _changeTriggerTracks
+                _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX,
+                _changeCrashSFX, _changeEnemySFX, _linkCreatureSFX
             };
             OutfitBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -1126,6 +1217,11 @@ namespace TR2RandomizerView.Model
             AudioTracksSeed = _controller.AudioTracksSeed;
             IncludeBlankTracks.Value = _controller.RandomGameTracksIncludeBlank;
             ChangeTriggerTracks.Value = _controller.ChangeTriggerTracks;
+            SeparateSecretTracks.Value = _controller.SeparateSecretTracks;
+            ChangeWeaponSFX.Value = _controller.ChangeWeaponSFX;
+            ChangeCrashSFX.Value = _controller.ChangeCrashSFX;
+            ChangeEnemySFX.Value = _controller.ChangeEnemySFX;
+            LinkCreatureSFX.Value = _controller.LinkCreatureSFX;
 
             RandomizeItems = _controller.RandomizeItems;
             ItemSeed = _controller.ItemSeed;
@@ -1181,6 +1277,7 @@ namespace TR2RandomizerView.Model
             DevelopmentMode = _controller.DevelopmentMode;
             DisableDemos = _controller.DisableDemos;
             AutoLaunchGame = _controller.AutoLaunchGame;
+            PuristMode = _controller.PuristMode;
         }
 
         public void RandomizeActiveSeeds()
@@ -1367,6 +1464,11 @@ namespace TR2RandomizerView.Model
             _controller.AudioTracksSeed = AudioTracksSeed;
             _controller.RandomGameTracksIncludeBlank = IncludeBlankTracks.Value;
             _controller.ChangeTriggerTracks = ChangeTriggerTracks.Value;
+            _controller.SeparateSecretTracks = SeparateSecretTracks.Value;
+            _controller.ChangeWeaponSFX = ChangeWeaponSFX.Value;
+            _controller.ChangeCrashSFX = ChangeCrashSFX.Value;
+            _controller.ChangeEnemySFX = ChangeEnemySFX.Value;
+            _controller.LinkCreatureSFX = LinkCreatureSFX.Value;
 
             _controller.RandomizeItems = RandomizeItems;
             _controller.ItemSeed = ItemSeed;
@@ -1421,6 +1523,7 @@ namespace TR2RandomizerView.Model
             _controller.DevelopmentMode = DevelopmentMode;
             _controller.DisableDemos = DisableDemos;
             _controller.AutoLaunchGame = AutoLaunchGame;
+            _controller.PuristMode = PuristMode;
         }
 
         public void Unload()

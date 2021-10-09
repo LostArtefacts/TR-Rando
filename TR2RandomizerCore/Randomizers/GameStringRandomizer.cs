@@ -11,7 +11,6 @@ namespace TR2RandomizerCore.Randomizers
     {
         private const int _maxLevelNameLength = 24;
 
-        public TR23ScriptEditor ScriptEditor { get; set; }
         public Language Language { get; set; }
         public bool RandomizeAllStrings { get; set; }
         public bool ReassignPuzzleNames { get; set; }

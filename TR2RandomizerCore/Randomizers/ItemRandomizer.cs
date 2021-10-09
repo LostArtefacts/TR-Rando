@@ -78,8 +78,8 @@ namespace TR2RandomizerCore.Randomizers
 
                 FindUnarmedPistolsLocation();
 
-                //#44 - Randomize OR pistol type
-                if (lvl.RemovesWeapons) { RandomizeORPistol(); }
+                //#44 - Randomize unarmed level weapon type
+                if (lvl.RemovesWeapons) { RandomizeUnarmedLevelWeapon(); }
 
                 //#47 - Randomize the HSH weapon closet
                 if (lvl.Is(LevelNames.HOME)) { PopulateHSHCloset(); }
@@ -416,7 +416,7 @@ namespace TR2RandomizerCore.Randomizers
             {TR2Entities.GrenadeLauncher_S_P, 4},
         };
 
-        private void RandomizeORPistol()
+        private void RandomizeUnarmedLevelWeapon()
         {
             //Is there something in the unarmed level pistol location?
             if (_unarmedLevelPistolIndex != -1)
@@ -483,7 +483,7 @@ namespace TR2RandomizerCore.Randomizers
                 if (weaponType != TR2Entities.Pistols_S_P)
                 {
                     //#68 - Provide some additional ammo for a weapon if not pistols
-                    AddORAmmo(GetWeaponAmmo(weaponType), ammoToGive, unarmedLevelWeapons);
+                    AddUnarmedLevelAmmo(GetWeaponAmmo(weaponType), ammoToGive);
 
                     // If we haven't decided to add the pistols (i.e. for enemy difficulty)
                     // add a 1/3 chance of getting them anyway. #149 If the harpoon is being
@@ -539,22 +539,11 @@ namespace TR2RandomizerCore.Randomizers
             }
         }
 
-        private void AddORAmmo(TR2Entities ammoType, uint count, TR2Entity weapon)
+        private void AddUnarmedLevelAmmo(TR2Entities ammoType, uint count)
         {
-            List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-
-            int entityLimit = _levelInstance.GetMaximumEntityLimit();
-            for (uint i = 0; i < count && ents.Count < entityLimit; i++)
-            {
-                TR2Entity ammo = weapon.Clone();
-
-                ammo.TypeID = (short)ammoType;
-
-                ents.Add(ammo);
-            };
-
-            _levelInstance.Data.NumEntities = (uint)ents.Count;
-            _levelInstance.Data.Entities = ents.ToArray();
+            // #216 - Avoid bloating the entity list by creating additional pickups
+            // and instead add the extra ammo directly to the inventory.
+            _levelInstance.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(ammoType), count);
         }
 
         private void PopulateHSHCloset()

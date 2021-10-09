@@ -14,6 +14,10 @@
              d:DesignHeight="700"
              d:DesignWidth="1200">
 
+    <UserControl.Resources>
+        <cvt:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    </UserControl.Resources>
+
     <Grid x:Name="_editorGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -210,16 +214,27 @@
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding SecretRewardSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedAdvancedControl
             Grid.Row="1"
             Grid.Column="2"
             IsActive="{Binding RandomizeAudioTracks, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            Title="Randomize Audio Tracks"
-            Text="Randomize the tracks for the title screen, level ambience, triggers and secrets."
+            Title="Randomize Audio"
+            Text="Randomize the tracks for the title screen, level ambience, triggers and secrets, as well as general sound effects."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            BoolItemsSource="{Binding AudioBoolItemControls}"/>
+            SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Audio (Advanced)"
+                                        MainDescription="Customize the audio randomization."
+                                        BoolItemsSource="{Binding Data.AudioBoolItemControls, Source={StaticResource proxy}}"
+                                        HasBoolItems="True"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
 
         <ctrl:ManagedSeedAdvancedControl
             Grid.Row="2"
@@ -356,6 +371,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -369,34 +386,61 @@
                 <TextBlock
                     Grid.Row="1"
                     Margin="0,0,0,5"
+                    IsEnabled="{Binding RandomizeEnvironment, Converter={StaticResource InverseBooleanConverter}}"
+                    Text="Do not apply default environment changes such as return paths."
+                    TextWrapping="Wrap">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <CheckBox
+                    Grid.Row="2"
+                    Margin="0,0,0,20"
+                    IsEnabled="{Binding RandomizeEnvironment, Converter={StaticResource InverseBooleanConverter}}"
+                    IsChecked="{Binding PuristMode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <Label 
+                        Padding="0"
+                        Content="Purist Mode"/>
+                </CheckBox>
+
+                <TextBlock
+                    Grid.Row="3"
+                    Margin="0,0,0,5"
                     Text="Disable demos from showing in the title screen to prevent spoilers."
                     TextWrapping="Wrap"/>
 
                 <CheckBox
-                    Grid.Row="2"
+                    Grid.Row="4"
                     Margin="0,0,0,20"
                     Content="Disable Demos"
                     IsChecked="{Binding DisableDemos, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 
                 <TextBlock
-                    Grid.Row="3"
+                    Grid.Row="5"
                     Margin="0,0,0,5"
                     Text="Launch the game automatically following successful randomization."
                     TextWrapping="Wrap"/>
 
                 <CheckBox
-                    Grid.Row="4"
+                    Grid.Row="6"
                     Content="Auto-launch Game"
                     IsChecked="{Binding AutoLaunchGame, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                 <TextBlock
-                    Grid.Row="5"
+                    Grid.Row="7"
                     Margin="0,0,0,5"
                     Text="Hit Randomize to apply your chosen settings and start playing."
                     TextWrapping="Wrap"/>
 
                 <Button
-                    Grid.Row="6"
+                    Grid.Row="8"
                     Style="{StaticResource CallToAction}"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Bottom"

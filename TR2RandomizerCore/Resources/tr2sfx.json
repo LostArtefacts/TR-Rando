@@ -1,0 +1,6280 @@
+[
+  {
+    "InternalIndex": 0,
+    "Description": "Lara footstep",
+    "Creature": 1,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 21298,
+      "Chance": 0,
+      "Characteristics": 24592,
+      "NumSounds": 4
+    },
+    "SampleIndices": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "InternalIndex": 1,
+    "Description": "Lara grunt",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 26213,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      4
+    ]
+  },
+  {
+    "InternalIndex": 2,
+    "Description": "Lara saying no",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 6,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      5
+    ]
+  },
+  {
+    "InternalIndex": 3,
+    "Description": "Lara sliding",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 5,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      6
+    ]
+  },
+  {
+    "InternalIndex": 4,
+    "Description": "Lara landing",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      7
+    ]
+  },
+  {
+    "InternalIndex": 5,
+    "Description": "Lara stepping up",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      8
+    ]
+  },
+  {
+    "InternalIndex": 6,
+    "Description": "Lara unholstering pistols",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 24575,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      9
+    ]
+  },
+  {
+    "InternalIndex": 7,
+    "Description": "Lara holstering pistols",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 24575,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      10
+    ]
+  },
+  {
+    "InternalIndex": 8,
+    "Description": "Pistols firing",
+    "Creature": 0,
+    "Categories": [
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 6,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      11
+    ]
+  },
+  {
+    "InternalIndex": 9,
+    "Description": "Lara cocking shotgun",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 31128,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      12
+    ]
+  },
+  {
+    "InternalIndex": 10,
+    "Description": "Ricochet",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 3276,
+      "Characteristics": 24584,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      13,
+      14
+    ]
+  },
+  {
+    "InternalIndex": 11,
+    "Description": "Lara lighting flare",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      15
+    ]
+  },
+  {
+    "InternalIndex": 12,
+    "Description": "Flare burning",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 14745,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      16
+    ]
+  },
+  {
+    "InternalIndex": 13,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 14,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 15,
+    "Description": "Harpoon firing",
+    "Creature": 0,
+    "Categories": [
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      17
+    ]
+  },
+  {
+    "InternalIndex": 16,
+    "Description": "Harpoon reload",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      18
+    ]
+  },
+  {
+    "InternalIndex": 17,
+    "Description": "Lara shallow water footstep",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 24592,
+      "NumSounds": 4
+    },
+    "SampleIndices": [
+      19,
+      20,
+      21,
+      22
+    ]
+  },
+  {
+    "InternalIndex": 18,
+    "Description": "Lara wading",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24584,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      23,
+      24
+    ]
+  },
+  {
+    "InternalIndex": 19,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 20,
+    "Description": "Lara surface swimming",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      25
+    ]
+  },
+  {
+    "InternalIndex": 21,
+    "Description": "Autos firing",
+    "Creature": 0,
+    "Categories": [
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      26
+    ]
+  },
+  {
+    "InternalIndex": 22,
+    "Description": "Harpoon reload underwater",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      27
+    ]
+  },
+  {
+    "InternalIndex": 23,
+    "Description": "Harpoon firing underwater",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      28
+    ]
+  },
+  {
+    "InternalIndex": 24,
+    "Description": "40F massive crash",
+    "Creature": 0,
+    "Categories": [
+      51,
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      29
+    ]
+  },
+  {
+    "InternalIndex": 25,
+    "Description": "Lara pressing button",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 24575,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      30
+    ]
+  },
+  {
+    "InternalIndex": 26,
+    "Description": "Lara pulling up",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      31
+    ]
+  },
+  {
+    "InternalIndex": 27,
+    "Description": "Lara hitting a wall",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24584,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      32,
+      33
+    ]
+  },
+  {
+    "InternalIndex": 28,
+    "Description": "Lara shimmying",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 14745,
+      "Chance": 0,
+      "Characteristics": 24584,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      34,
+      35
+    ]
+  },
+  {
+    "InternalIndex": 29,
+    "Description": "Lara jumping",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 16383,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      36
+    ]
+  },
+  {
+    "InternalIndex": 30,
+    "Description": "Lara screaming",
+    "Creature": 1,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      37
+    ]
+  },
+  {
+    "InternalIndex": 31,
+    "Description": "Lara getting hurt",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 16383,
+      "Characteristics": 24585,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      38,
+      39
+    ]
+  },
+  {
+    "InternalIndex": 32,
+    "Description": "Lara rolling",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      40
+    ]
+  },
+  {
+    "InternalIndex": 33,
+    "Description": "Lara splashing into water",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      41
+    ]
+  },
+  {
+    "InternalIndex": 34,
+    "Description": "Lara surfacing",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      42
+    ]
+  },
+  {
+    "InternalIndex": 35,
+    "Description": "Lara swimming underwater",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      43
+    ]
+  },
+  {
+    "InternalIndex": 36,
+    "Description": "Lara catching breath",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      44
+    ]
+  },
+  {
+    "InternalIndex": 37,
+    "Description": "Underwater gurgle",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      45
+    ]
+  },
+  {
+    "InternalIndex": 38,
+    "Description": "Lara pulling lever down",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      46
+    ]
+  },
+  {
+    "InternalIndex": 39,
+    "Description": "Lara inserting key",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      47
+    ]
+  },
+  {
+    "InternalIndex": 40,
+    "Description": "Lara inserting slot item",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      48
+    ]
+  },
+  {
+    "InternalIndex": 41,
+    "Description": "Lara dying 1",
+    "Creature": 1,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      49
+    ]
+  },
+  {
+    "InternalIndex": 42,
+    "Description": "Lara dying 2",
+    "Creature": 1,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      50
+    ]
+  },
+  {
+    "InternalIndex": 43,
+    "Description": "Uzis firing",
+    "Creature": 0,
+    "Categories": [
+      22
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 28834,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      51
+    ]
+  },
+  {
+    "InternalIndex": 44,
+    "Description": "Uzis back-firing?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      52
+    ]
+  },
+  {
+    "InternalIndex": 45,
+    "Description": "Shotgun firing (Lara and Gunman1/2)",
+    "Creature": 0,
+    "Categories": [
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      53
+    ]
+  },
+  {
+    "InternalIndex": 46,
+    "Description": "Lara starting block push",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24582,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      54
+    ]
+  },
+  {
+    "InternalIndex": 47,
+    "Description": "Lara pushing block",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 16383,
+      "Characteristics": 24590,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      55,
+      56,
+      57
+    ]
+  },
+  {
+    "InternalIndex": 48,
+    "Description": "Click?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      58
+    ]
+  },
+  {
+    "InternalIndex": 49,
+    "Description": "Footstep?",
+    "Creature": 0,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 16383,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      59
+    ]
+  },
+  {
+    "InternalIndex": 50,
+    "Description": "Thump?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 16383,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      60
+    ]
+  },
+  {
+    "InternalIndex": 51,
+    "Description": "Lara pulling up",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24582,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      61
+    ]
+  },
+  {
+    "InternalIndex": 52,
+    "Description": "Lara swimming on surface",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      62
+    ]
+  },
+  {
+    "InternalIndex": 53,
+    "Description": "Lara death crunch",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      63
+    ]
+  },
+  {
+    "InternalIndex": 54,
+    "Description": "Lara grabbing ledge (hand noise)",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 21298,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      64
+    ]
+  },
+  {
+    "InternalIndex": 55,
+    "Description": "Lara grabbing ledge (Lara saying 'ooh')",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      65
+    ]
+  },
+  {
+    "InternalIndex": 56,
+    "Description": "Lara shimmying?",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      66
+    ]
+  },
+  {
+    "InternalIndex": 57,
+    "Description": "Lever resetting",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      67
+    ]
+  },
+  {
+    "InternalIndex": 58,
+    "Description": "Glass breaking",
+    "Creature": 0,
+    "Categories": [
+      53
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      68
+    ]
+  },
+  {
+    "InternalIndex": 59,
+    "Description": "Running water",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 4103,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      69
+    ]
+  },
+  {
+    "InternalIndex": 60,
+    "Description": "Underwater ambience",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      70
+    ]
+  },
+  {
+    "InternalIndex": 61,
+    "Description": "Lara pulling underwater lever",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      71
+    ]
+  },
+  {
+    "InternalIndex": 62,
+    "Description": "Aha - Lara found something",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      72
+    ]
+  },
+  {
+    "InternalIndex": 63,
+    "Description": "Movable block scraping",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24582,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      73
+    ]
+  },
+  {
+    "InternalIndex": 64,
+    "Description": "Door opening",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      74
+    ]
+  },
+  {
+    "InternalIndex": 65,
+    "Description": "Something swinging (TR1 pendulum leftover?)",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      75
+    ]
+  },
+  {
+    "InternalIndex": 66,
+    "Description": "Breakable tiles beginning to collapse",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      76
+    ]
+  },
+  {
+    "InternalIndex": 67,
+    "Description": "Breakable tiles collapsing",
+    "Creature": 0,
+    "Categories": [
+      53
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      77
+    ]
+  },
+  {
+    "InternalIndex": 68,
+    "Description": "Breakable tiles hitting the ground",
+    "Creature": 0,
+    "Categories": [
+      51,
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      78
+    ]
+  },
+  {
+    "InternalIndex": 69,
+    "Description": "StickGoon footstep",
+    "Creature": 2,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 21298,
+      "Chance": 0,
+      "Characteristics": 24588,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      79,
+      80,
+      81
+    ]
+  },
+  {
+    "InternalIndex": 70,
+    "Description": "StickGoon grunting, hoo-uh",
+    "Creature": 2,
+    "Categories": [
+      171,
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 13106,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      82
+    ]
+  },
+  {
+    "InternalIndex": 71,
+    "Description": "StickGoon hitting Lara",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      83
+    ]
+  },
+  {
+    "InternalIndex": 72,
+    "Description": "StickGoon hitting Lara",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      84
+    ]
+  },
+  {
+    "InternalIndex": 73,
+    "Description": "StickGoon dying",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      85
+    ]
+  },
+  {
+    "InternalIndex": 74,
+    "Description": "StickGoon jumping up",
+    "Creature": 2,
+    "Categories": [
+      171,
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      86
+    ]
+  },
+  {
+    "InternalIndex": 75,
+    "Description": "StickGoon climbing up",
+    "Creature": 2,
+    "Categories": [
+      171,
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      87
+    ]
+  },
+  {
+    "InternalIndex": 76,
+    "Description": "StickGoon climbing down",
+    "Creature": 2,
+    "Categories": [
+      171,
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      88
+    ]
+  },
+  {
+    "InternalIndex": 77,
+    "Description": "Something skidoo related?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      89
+    ]
+  },
+  {
+    "InternalIndex": 78,
+    "Description": "M16 firing",
+    "Creature": 0,
+    "Categories": [
+      22
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      90
+    ]
+  },
+  {
+    "InternalIndex": 79,
+    "Description": "Waterfall",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      91
+    ]
+  },
+  {
+    "InternalIndex": 80,
+    "Description": "Bartoli sword statue dropping sword",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 24575,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      92
+    ]
+  },
+  {
+    "InternalIndex": 81,
+    "Description": "Bartoli sword statue lifting sword",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      93
+    ]
+  },
+  {
+    "InternalIndex": 82,
+    "Description": "Vertical gate opening",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      94
+    ]
+  },
+  {
+    "InternalIndex": 83,
+    "Description": "Vertical gate closing",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      95
+    ]
+  },
+  {
+    "InternalIndex": 83,
+    "Description": "Vertical gate closing",
+    "Creature": 0,
+    "Categories": [
+      1
+    ]
+  },
+  {
+    "InternalIndex": 84,
+    "Description": "Stick tapping?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      96
+    ]
+  },
+  {
+    "InternalIndex": 85,
+    "Description": "Doberman hitting ground",
+    "Creature": 3,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24588,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      97,
+      98,
+      99
+    ]
+  },
+  {
+    "InternalIndex": 86,
+    "Description": "Doberman barking 1",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      100
+    ]
+  },
+  {
+    "InternalIndex": 87,
+    "Description": "Doberman footstep (pawstep?)",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 24588,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      101,
+      102,
+      103
+    ]
+  },
+  {
+    "InternalIndex": 88,
+    "Description": "Doberman barking 2",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      104
+    ]
+  },
+  {
+    "InternalIndex": 89,
+    "Description": "Doberman dying",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24588,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      105,
+      106,
+      107
+    ]
+  },
+  {
+    "InternalIndex": 90,
+    "Description": "Doberman panting",
+    "Creature": 3,
+    "Categories": [
+      141
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 16383,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      108
+    ]
+  },
+  {
+    "InternalIndex": 91,
+    "Description": "TigerOrSnowLeopard footstep",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 24588,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      109,
+      110,
+      111
+    ]
+  },
+  {
+    "InternalIndex": 92,
+    "Description": "SnowLeopard growl 1",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      112
+    ]
+  },
+  {
+    "InternalIndex": 93,
+    "Description": "SnowLeopard snarl",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      113
+    ]
+  },
+  {
+    "InternalIndex": 94,
+    "Description": "SnowLeopard growl 2",
+    "Creature": 3,
+    "Categories": [
+      141,
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      114
+    ]
+  },
+  {
+    "InternalIndex": 95,
+    "Description": "SnowLeopard dying",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      115
+    ]
+  },
+  {
+    "InternalIndex": 96,
+    "Description": "SnowLeopard growl 3",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      116
+    ]
+  },
+  {
+    "InternalIndex": 97,
+    "Description": "Rat squeaking",
+    "Creature": 3,
+    "Categories": [
+      171,
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 16383,
+      "Characteristics": 24584,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      117,
+      118
+    ]
+  },
+  {
+    "InternalIndex": 98,
+    "Description": "Rat dying",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      119
+    ]
+  },
+  {
+    "InternalIndex": 99,
+    "Description": "Tiger growl 1",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      120
+    ]
+  },
+  {
+    "InternalIndex": 100,
+    "Description": "Tiger growl 2",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      121
+    ]
+  },
+  {
+    "InternalIndex": 101,
+    "Description": "Tiger growl 3",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      122
+    ]
+  },
+  {
+    "InternalIndex": 102,
+    "Description": "Tiger dying",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      123
+    ]
+  },
+  {
+    "InternalIndex": 103,
+    "Description": "Tiger growl 4",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      124
+    ]
+  },
+  {
+    "InternalIndex": 104,
+    "Description": "M16 echo",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      125
+    ]
+  },
+  {
+    "InternalIndex": 105,
+    "Description": "Grenade exploding",
+    "Creature": 0,
+    "Categories": [
+      51
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24584,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      126,
+      127
+    ]
+  },
+  {
+    "InternalIndex": 106,
+    "Description": "Doberman growling",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      128
+    ]
+  },
+  {
+    "InternalIndex": 107,
+    "Description": "Spider jumping",
+    "Creature": 3,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      129
+    ]
+  },
+  {
+    "InternalIndex": 108,
+    "Description": "Menu option (spinning)",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      130
+    ]
+  },
+  {
+    "InternalIndex": 109,
+    "Description": "Menu option (polaroid selected)",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      131
+    ]
+  },
+  {
+    "InternalIndex": 110,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 111,
+    "Description": "Menu option selected",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      132
+    ]
+  },
+  {
+    "InternalIndex": 112,
+    "Description": "Menu option closed",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      133
+    ]
+  },
+  {
+    "InternalIndex": 113,
+    "Description": "Stick tapping",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 16383,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      134
+    ]
+  },
+  {
+    "InternalIndex": 114,
+    "Description": "Pistols?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      135
+    ]
+  },
+  {
+    "InternalIndex": 115,
+    "Description": "Menu page turn",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 24575,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      136
+    ]
+  },
+  {
+    "InternalIndex": 116,
+    "Description": "Lara sighing after using medipack",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      137
+    ]
+  },
+  {
+    "InternalIndex": 117,
+    "Description": "MaskedGoon footstep",
+    "Creature": 2,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 24592,
+      "NumSounds": 4
+    },
+    "SampleIndices": [
+      138,
+      139,
+      140,
+      141
+    ]
+  },
+  {
+    "InternalIndex": 118,
+    "Description": "MaskedGoon firing silencer",
+    "Creature": 0,
+    "Categories": [
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8200,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      142,
+      143
+    ]
+  },
+  {
+    "InternalIndex": 119,
+    "Description": "MaskedGoon dying (argh)",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      144
+    ]
+  },
+  {
+    "InternalIndex": 120,
+    "Description": "MaskedGoon dying (urgh)",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      145
+    ]
+  },
+  {
+    "InternalIndex": 121,
+    "Description": "Thump?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      146
+    ]
+  },
+  {
+    "InternalIndex": 122,
+    "Description": "Spider scuttling",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      147
+    ]
+  },
+  {
+    "InternalIndex": 123,
+    "Description": "Grenade launcher load start",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      148
+    ]
+  },
+  {
+    "InternalIndex": 124,
+    "Description": "Grenade launcher load end",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      149
+    ]
+  },
+  {
+    "InternalIndex": 125,
+    "Description": "Grenade launcher firing",
+    "Creature": 0,
+    "Categories": [
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      150
+    ]
+  },
+  {
+    "InternalIndex": 126,
+    "Description": "Spider biting Lara",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      151
+    ]
+  },
+  {
+    "InternalIndex": 127,
+    "Description": "Clang-clang door opening",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      152
+    ]
+  },
+  {
+    "InternalIndex": 128,
+    "Description": "Clang-clang door closing",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      153
+    ]
+  },
+  {
+    "InternalIndex": 129,
+    "Description": "Eagle squawking",
+    "Creature": 3,
+    "Categories": [
+      171
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      154
+    ]
+  },
+  {
+    "InternalIndex": 130,
+    "Description": "Eagle wing flapping",
+    "Creature": 3,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      155
+    ]
+  },
+  {
+    "InternalIndex": 131,
+    "Description": "Eagle dying",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      156
+    ]
+  },
+  {
+    "InternalIndex": 132,
+    "Description": "Crow squawking",
+    "Creature": 3,
+    "Categories": [
+      171
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      157
+    ]
+  },
+  {
+    "InternalIndex": 133,
+    "Description": "Crow wing flapping",
+    "Creature": 3,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      158
+    ]
+  },
+  {
+    "InternalIndex": 134,
+    "Description": "Crow dying",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      159
+    ]
+  },
+  {
+    "InternalIndex": 135,
+    "Description": "Footstep?",
+    "Creature": 1,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      160
+    ]
+  },
+  {
+    "InternalIndex": 136,
+    "Description": "ShotgunGoon cocking guns",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      161
+    ]
+  },
+  {
+    "InternalIndex": 137,
+    "Description": "ShotgunGoon firing guns",
+    "Creature": 0,
+    "Categories": [
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      162
+    ]
+  },
+  {
+    "InternalIndex": 138,
+    "Description": "ShotgunGoon twirling guns",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      163
+    ]
+  },
+  {
+    "InternalIndex": 139,
+    "Description": "ShotgunGoon holstering guns",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      164
+    ]
+  },
+  {
+    "InternalIndex": 140,
+    "Description": "ShotgunGoon breathing, MonkaS",
+    "Creature": 2,
+    "Categories": [
+      141
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 16383,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      165
+    ]
+  },
+  {
+    "InternalIndex": 141,
+    "Description": "ShotgunGoon laughing after killing Lara",
+    "Creature": 2,
+    "Categories": [
+      141
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 13106,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      166
+    ]
+  },
+  {
+    "InternalIndex": 142,
+    "Description": "ShotgunGoon dying 1",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      167
+    ]
+  },
+  {
+    "InternalIndex": 143,
+    "Description": "ShotgunGoon dying 2",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      168
+    ]
+  },
+  {
+    "InternalIndex": 144,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 145,
+    "Description": "Lara impaled on spikes/shards",
+    "Creature": 1,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      169
+    ]
+  },
+  {
+    "InternalIndex": 146,
+    "Description": "Lara groaning after flame death",
+    "Creature": 1,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      170
+    ]
+  },
+  {
+    "InternalIndex": 147,
+    "Description": "Boulders rolling",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      171
+    ]
+  },
+  {
+    "InternalIndex": 148,
+    "Description": "Sandbag snapping",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      172
+    ]
+  },
+  {
+    "InternalIndex": 149,
+    "Description": "Sandbag hitting ground",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      173
+    ]
+  },
+  {
+    "InternalIndex": 150,
+    "Description": "Flames",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      174
+    ]
+  },
+  {
+    "InternalIndex": 151,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 152,
+    "Description": "Skidoo starting",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      175
+    ]
+  },
+  {
+    "InternalIndex": 153,
+    "Description": "Skidoo idling",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 31128,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      176
+    ]
+  },
+  {
+    "InternalIndex": 154,
+    "Description": "Skidoo accelerating",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 31128,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      177
+    ]
+  },
+  {
+    "InternalIndex": 155,
+    "Description": "Skidoo at high RPM",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      178
+    ]
+  },
+  {
+    "InternalIndex": 156,
+    "Description": "Skidoo switching off",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 28834,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      179
+    ]
+  },
+  {
+    "InternalIndex": 157,
+    "Description": "Gunman2 firing",
+    "Creature": 0,
+    "Categories": [
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      180
+    ]
+  },
+  {
+    "InternalIndex": 158,
+    "Description": "Gunman1/Gunman2 dying",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      181
+    ]
+  },
+  {
+    "InternalIndex": 159,
+    "Description": "Gunman1/Gunman2 heavy breathing",
+    "Creature": 2,
+    "Categories": [
+      141
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 16383,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      182
+    ]
+  },
+  {
+    "InternalIndex": 160,
+    "Description": "Stick tapping",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      183
+    ]
+  },
+  {
+    "InternalIndex": 161,
+    "Description": "Trapdoor opening",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      184
+    ]
+  },
+  {
+    "InternalIndex": 162,
+    "Description": "Trapdoor closing",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      185
+    ]
+  },
+  {
+    "InternalIndex": 163,
+    "Description": "Yeti growling",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24584,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      186,
+      187
+    ]
+  },
+  {
+    "InternalIndex": 164,
+    "Description": "Yeti beating chest (sounds more like a footstep)",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      188
+    ]
+  },
+  {
+    "InternalIndex": 165,
+    "Description": "Yeti hitting Lara",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      189
+    ]
+  },
+  {
+    "InternalIndex": 166,
+    "Description": "Yeti grunting and beating chest",
+    "Creature": 3,
+    "Categories": [
+      171
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      190
+    ]
+  },
+  {
+    "InternalIndex": 167,
+    "Description": "Yeti screaming",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      191
+    ]
+  },
+  {
+    "InternalIndex": 168,
+    "Description": "Yeti dying",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      192
+    ]
+  },
+  {
+    "InternalIndex": 169,
+    "Description": "Yeti breathing 1",
+    "Creature": 3,
+    "Categories": [
+      141
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      193
+    ]
+  },
+  {
+    "InternalIndex": 170,
+    "Description": "Yeti breathing 2",
+    "Creature": 3,
+    "Categories": [
+      141
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      194
+    ]
+  },
+  {
+    "InternalIndex": 171,
+    "Description": "Yeti grunting 3",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      195
+    ]
+  },
+  {
+    "InternalIndex": 172,
+    "Description": "Yeti grunting 4",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      196
+    ]
+  },
+  {
+    "InternalIndex": 173,
+    "Description": "Yeti footstep",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 24584,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      197,
+      198
+    ]
+  },
+  {
+    "InternalIndex": 174,
+    "Description": "Flamethrower heavy breathing",
+    "Creature": 2,
+    "Categories": [
+      141
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      199
+    ]
+  },
+  {
+    "InternalIndex": 175,
+    "Description": "Flamethrower flame firing",
+    "Creature": 2,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      200
+    ]
+  },
+  {
+    "InternalIndex": 176,
+    "Description": "Flamethrower footstep scrape",
+    "Creature": 2,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      201
+    ]
+  },
+  {
+    "InternalIndex": 177,
+    "Description": "Flamethrower preparing to fire",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      202
+    ]
+  },
+  {
+    "InternalIndex": 178,
+    "Description": "Flamethrower dying (such drama)",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      203
+    ]
+  },
+  {
+    "InternalIndex": 179,
+    "Description": "Flamethrower pack hitting ground",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      204
+    ]
+  },
+  {
+    "InternalIndex": 180,
+    "Description": "StickGoon belt jingle",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      205
+    ]
+  },
+  {
+    "InternalIndex": 181,
+    "Description": "StickGoon tapping stick",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      206
+    ]
+  },
+  {
+    "InternalIndex": 182,
+    "Description": "Thump?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      207
+    ]
+  },
+  {
+    "InternalIndex": 183,
+    "Description": "Thump?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      208
+    ]
+  },
+  {
+    "InternalIndex": 184,
+    "Description": "Gunman1 cocking shotgun",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      209
+    ]
+  },
+  {
+    "InternalIndex": 185,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 186,
+    "Description": "ScubaDiver bubbles",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      210
+    ]
+  },
+  {
+    "InternalIndex": 187,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 188,
+    "Description": "ScubaDiver breathing",
+    "Creature": 2,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      211
+    ]
+  },
+  {
+    "InternalIndex": 189,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 190,
+    "Description": "LQ piston movement",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      212
+    ]
+  },
+  {
+    "InternalIndex": 191,
+    "Description": "LQ theatre curtain opening",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 24575,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      213
+    ]
+  },
+  {
+    "InternalIndex": 192,
+    "Description": "ScubaDiver dying",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      214
+    ]
+  },
+  {
+    "InternalIndex": 193,
+    "Description": "ScubaDiver gurgle",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      215
+    ]
+  },
+  {
+    "InternalIndex": 194,
+    "Description": "Venice boat starting",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      216
+    ]
+  },
+  {
+    "InternalIndex": 195,
+    "Description": "Venice boat idling",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      217
+    ]
+  },
+  {
+    "InternalIndex": 196,
+    "Description": "Venice boat accelerating",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 30473,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      218
+    ]
+  },
+  {
+    "InternalIndex": 197,
+    "Description": "Venice boat high RPM",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27196,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      219
+    ]
+  },
+  {
+    "InternalIndex": 198,
+    "Description": "Venice boat switching off",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      220
+    ]
+  },
+  {
+    "InternalIndex": 199,
+    "Description": "Venice boat hitting something",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 28834,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      221
+    ]
+  },
+  {
+    "InternalIndex": 200,
+    "Description": "Venice boat hitting a wall",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      222
+    ]
+  },
+  {
+    "InternalIndex": 201,
+    "Description": "Clatter 1",
+    "Creature": 0,
+    "Categories": [
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      223
+    ]
+  },
+  {
+    "InternalIndex": 202,
+    "Description": "Clatter 2",
+    "Creature": 0,
+    "Categories": [
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      224
+    ]
+  },
+  {
+    "InternalIndex": 203,
+    "Description": "Clatter 3",
+    "Creature": 0,
+    "Categories": [
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      225
+    ]
+  },
+  {
+    "InternalIndex": 204,
+    "Description": "Stone door opening",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      226
+    ]
+  },
+  {
+    "InternalIndex": 205,
+    "Description": "Lara struck by harpoon",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24584,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      227,
+      228
+    ]
+  },
+  {
+    "InternalIndex": 206,
+    "Description": "DA saw at high RPM",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      229
+    ]
+  },
+  {
+    "InternalIndex": 207,
+    "Description": "DA saw switching off",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      230
+    ]
+  },
+  {
+    "InternalIndex": 208,
+    "Description": "Venice/Ice Palace bell chime",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 16388,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      231
+    ]
+  },
+  {
+    "InternalIndex": 209,
+    "Description": "Something breaking?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      232
+    ]
+  },
+  {
+    "InternalIndex": 210,
+    "Description": "Something swinging",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24583,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      233
+    ]
+  },
+  {
+    "InternalIndex": 211,
+    "Description": "Something breaking",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      234
+    ]
+  },
+  {
+    "InternalIndex": 212,
+    "Description": "DA pulley movement",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      235
+    ]
+  },
+  {
+    "InternalIndex": 213,
+    "Description": "Airplane idling",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      236
+    ]
+  },
+  {
+    "InternalIndex": 214,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 215,
+    "Description": "Underwater fan",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      237
+    ]
+  },
+  {
+    "InternalIndex": 216,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 217,
+    "Description": "Vent fan",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      238
+    ]
+  },
+  {
+    "InternalIndex": 218,
+    "Description": "Swinging sandbag",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      239
+    ]
+  },
+  {
+    "InternalIndex": 219,
+    "Description": "BouncePad up",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      240
+    ]
+  },
+  {
+    "InternalIndex": 220,
+    "Description": "BouncePad down",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      241
+    ]
+  },
+  {
+    "InternalIndex": 221,
+    "Description": "Something clattering",
+    "Creature": 0,
+    "Categories": [
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      242
+    ]
+  },
+  {
+    "InternalIndex": 222,
+    "Description": "Snowballs/boulders rolling",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      243
+    ]
+  },
+  {
+    "InternalIndex": 223,
+    "Description": "Snowballs/boulders crashing",
+    "Creature": 0,
+    "Categories": [
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      244
+    ]
+  },
+  {
+    "InternalIndex": 224,
+    "Description": "Barrels rolling",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      245
+    ]
+  },
+  {
+    "InternalIndex": 225,
+    "Description": "Barrels crashing",
+    "Creature": 0,
+    "Categories": [
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      246
+    ]
+  },
+  {
+    "InternalIndex": 226,
+    "Description": "Barrels crashing",
+    "Creature": 0,
+    "Categories": [
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      247
+    ]
+  },
+  {
+    "InternalIndex": 227,
+    "Description": "Barrels rolling",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      248
+    ]
+  },
+  {
+    "InternalIndex": 228,
+    "Description": "Barrels crashing",
+    "Creature": 0,
+    "Categories": [
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      249
+    ]
+  },
+  {
+    "InternalIndex": 229,
+    "Description": "WallBlade mechanism fully opened",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      250
+    ]
+  },
+  {
+    "InternalIndex": 230,
+    "Description": "WallBlade mechanism opening",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      251
+    ]
+  },
+  {
+    "InternalIndex": 231,
+    "Description": "Rolling spindle",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 24575,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      252
+    ]
+  },
+  {
+    "InternalIndex": 232,
+    "Description": "Icicle detaching",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      253
+    ]
+  },
+  {
+    "InternalIndex": 233,
+    "Description": "Icicle hitting ground",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      254
+    ]
+  },
+  {
+    "InternalIndex": 234,
+    "Description": "WheelDoor loosening",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      255
+    ]
+  },
+  {
+    "InternalIndex": 235,
+    "Description": "WheelDoor turning",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      256
+    ]
+  },
+  {
+    "InternalIndex": 236,
+    "Description": "WheelDoor unlatching",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      257
+    ]
+  },
+  {
+    "InternalIndex": 237,
+    "Description": "WheelDoor creaking open",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      258
+    ]
+  },
+  {
+    "InternalIndex": 238,
+    "Description": "Monk footstep",
+    "Creature": 2,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 24592,
+      "NumSounds": 4
+    },
+    "SampleIndices": [
+      259,
+      260,
+      261,
+      262
+    ]
+  },
+  {
+    "InternalIndex": 239,
+    "Description": "Monk swiping stick",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      263
+    ]
+  },
+  {
+    "InternalIndex": 240,
+    "Description": "Monk swinging sticks",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      264
+    ]
+  },
+  {
+    "InternalIndex": 241,
+    "Description": "Monk shouting 1",
+    "Creature": 2,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8204,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      265,
+      266,
+      267
+    ]
+  },
+  {
+    "InternalIndex": 242,
+    "Description": "Monk shouting 2",
+    "Creature": 2,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8204,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      268,
+      269,
+      270
+    ]
+  },
+  {
+    "InternalIndex": 243,
+    "Description": "Monk shouting 3",
+    "Creature": 2,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8204,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      271,
+      272,
+      273
+    ]
+  },
+  {
+    "InternalIndex": 244,
+    "Description": "Monk shouting 4",
+    "Creature": 2,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8204,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      274,
+      275,
+      276
+    ]
+  },
+  {
+    "InternalIndex": 245,
+    "Description": "Monk striking with stick",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24584,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      277,
+      278
+    ]
+  },
+  {
+    "InternalIndex": 246,
+    "Description": "Mercenary heavy breathing",
+    "Creature": 2,
+    "Categories": [
+      141,
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      279
+    ]
+  },
+  {
+    "InternalIndex": 247,
+    "Description": "Venice boat splashing",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 27851,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      280
+    ]
+  },
+  {
+    "InternalIndex": 248,
+    "Description": "Water - draining 40F?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 21298,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      281
+    ]
+  },
+  {
+    "InternalIndex": 249,
+    "Description": "Mercenary footstep in snow",
+    "Creature": 2,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 24588,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      282,
+      283,
+      284
+    ]
+  },
+  {
+    "InternalIndex": 250,
+    "Description": "Mercenary1 gunshot",
+    "Creature": 0,
+    "Categories": [
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      285
+    ]
+  },
+  {
+    "InternalIndex": 251,
+    "Description": "Mercenary2/3 gunshot",
+    "Creature": 0,
+    "Categories": [
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      286
+    ]
+  },
+  {
+    "InternalIndex": 252,
+    "Description": "Mercenary dying 1",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      287
+    ]
+  },
+  {
+    "InternalIndex": 253,
+    "Description": "Mercenary dying 2",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      288
+    ]
+  },
+  {
+    "InternalIndex": 254,
+    "Description": "Disc trap firing",
+    "Creature": 0,
+    "Categories": [
+      1,
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      289
+    ]
+  },
+  {
+    "InternalIndex": 255,
+    "Description": "Knifethrower footstep",
+    "Creature": 2,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 24592,
+      "NumSounds": 4
+    },
+    "SampleIndices": [
+      290,
+      291,
+      292,
+      293
+    ]
+  },
+  {
+    "InternalIndex": 256,
+    "Description": "Knifethrower grunt",
+    "Creature": 2,
+    "Categories": [
+      171,
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      294
+    ]
+  },
+  {
+    "InternalIndex": 257,
+    "Description": "Knifethrower dying",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      295
+    ]
+  },
+  {
+    "InternalIndex": 258,
+    "Description": "Disc trap hitting",
+    "Creature": 0,
+    "Categories": [
+      1,
+      21
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      296
+    ]
+  },
+  {
+    "InternalIndex": 259,
+    "Description": "XianGuardSpear footstep",
+    "Creature": 2,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      297
+    ]
+  },
+  {
+    "InternalIndex": 260,
+    "Description": "XianGuardSpear swipe 1",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8204,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      298,
+      299,
+      300
+    ]
+  },
+  {
+    "InternalIndex": 261,
+    "Description": "XianGuardSpear swipe 2",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      301
+    ]
+  },
+  {
+    "InternalIndex": 262,
+    "Description": "XianGuard growl 1",
+    "Creature": 2,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8200,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      302,
+      303
+    ]
+  },
+  {
+    "InternalIndex": 263,
+    "Description": "Knifethrower throwing a knife",
+    "Creature": 2,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      304
+    ]
+  },
+  {
+    "InternalIndex": 264,
+    "Description": "XianGuard growl 2",
+    "Creature": 2,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8204,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      305,
+      306,
+      307
+    ]
+  },
+  {
+    "InternalIndex": 265,
+    "Description": "XianGuard growl 3",
+    "Creature": 2,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      308
+    ]
+  },
+  {
+    "InternalIndex": 266,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 267,
+    "Description": "XianGuard waking up",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      309
+    ]
+  },
+  {
+    "InternalIndex": 268,
+    "Description": "XianGuard growl 4",
+    "Creature": 2,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      310
+    ]
+  },
+  {
+    "InternalIndex": 269,
+    "Description": "Lara using wall switch",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      311
+    ]
+  },
+  {
+    "InternalIndex": 270,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 271,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 272,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 273,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 274,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 275,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 276,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 277,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 278,
+    "Description": "Chain pulley",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      312
+    ]
+  },
+  {
+    "InternalIndex": 279,
+    "Description": "Lara grabbing onto zipline",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      313
+    ]
+  },
+  {
+    "InternalIndex": 280,
+    "Description": "Zipline in motion",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 24575,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      314
+    ]
+  },
+  {
+    "InternalIndex": 281,
+    "Description": "End of zipline",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      315
+    ]
+  },
+  {
+    "InternalIndex": 282,
+    "Description": "Something clattering",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      316
+    ]
+  },
+  {
+    "InternalIndex": 283,
+    "Description": "Ice Palace lava bowl tipping over",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      317
+    ]
+  },
+  {
+    "InternalIndex": 284,
+    "Description": "Lava pouring from Ice Palace bowl",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      318
+    ]
+  },
+  {
+    "InternalIndex": 285,
+    "Description": "Lava melting ice",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      319
+    ]
+  },
+  {
+    "InternalIndex": 286,
+    "Description": "Elevator door opening",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      320
+    ]
+  },
+  {
+    "InternalIndex": 287,
+    "Description": "Elevator door closing",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      321
+    ]
+  },
+  {
+    "InternalIndex": 288,
+    "Description": "40F minisub crashing 1",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      322
+    ]
+  },
+  {
+    "InternalIndex": 289,
+    "Description": "40F minisub crashing 2",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      323
+    ]
+  },
+  {
+    "InternalIndex": 290,
+    "Description": "40F minisub crashing 3",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      324
+    ]
+  },
+  {
+    "InternalIndex": 291,
+    "Description": "Angry BirdMonster screaming",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      325
+    ]
+  },
+  {
+    "InternalIndex": 292,
+    "Description": "BirdMonster growling",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8204,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      326,
+      327,
+      328
+    ]
+  },
+  {
+    "InternalIndex": 293,
+    "Description": "BirdMonster breathing",
+    "Creature": 3,
+    "Categories": [
+      141
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      329
+    ]
+  },
+  {
+    "InternalIndex": 294,
+    "Description": "BirdMonster footstep",
+    "Creature": 3,
+    "Categories": [
+      82
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      330
+    ]
+  },
+  {
+    "InternalIndex": 295,
+    "Description": "BirdMonster dying scream",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      331
+    ]
+  },
+  {
+    "InternalIndex": 296,
+    "Description": "GiantSpider starting attack",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      332
+    ]
+  },
+  {
+    "InternalIndex": 297,
+    "Description": "Helicopter",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      333
+    ]
+  },
+  {
+    "InternalIndex": 298,
+    "Description": "Dragon footstep",
+    "Creature": 3,
+    "Categories": [
+      82,
+      51
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      334
+    ]
+  },
+  {
+    "InternalIndex": 299,
+    "Description": "Dragon growl 1",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      335
+    ]
+  },
+  {
+    "InternalIndex": 300,
+    "Description": "Dragon growl 2 (before falling over)",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      336
+    ]
+  },
+  {
+    "InternalIndex": 301,
+    "Description": "Dragon hitting the ground",
+    "Creature": 0,
+    "Categories": [
+      51,
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      337
+    ]
+  },
+  {
+    "InternalIndex": 302,
+    "Description": "Dragon dying breath",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      338
+    ]
+  },
+  {
+    "InternalIndex": 303,
+    "Description": "Dragon growl 3 (missed the dagger)",
+    "Creature": 3,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      339
+    ]
+  },
+  {
+    "InternalIndex": 304,
+    "Description": "Dragon growl 4 (before breathing fire)",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      340
+    ]
+  },
+  {
+    "InternalIndex": 305,
+    "Description": "Dragon breathing fire",
+    "Creature": 3,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      341
+    ]
+  },
+  {
+    "InternalIndex": 306,
+    "Description": "Dragon lifting leg",
+    "Creature": 3,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      342
+    ]
+  },
+  {
+    "InternalIndex": 307,
+    "Description": "Dragon leg hitting the ground",
+    "Creature": 0,
+    "Categories": [
+      51
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      343
+    ]
+  },
+  {
+    "InternalIndex": 308,
+    "Description": "XianGuardSword swiping 1",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      344,
+      345
+    ]
+  },
+  {
+    "InternalIndex": 309,
+    "Description": "XianGuardSword swiping 2",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      346
+    ]
+  },
+  {
+    "InternalIndex": 310,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 311,
+    "Description": "XianGuardSword lifting off",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      347
+    ]
+  },
+  {
+    "InternalIndex": 312,
+    "Description": "XianGuardSword flying",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      348
+    ]
+  },
+  {
+    "InternalIndex": 313,
+    "Description": "XianGuardSword landing",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      349
+    ]
+  },
+  {
+    "InternalIndex": 314,
+    "Description": "XianGuardSword clank",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      350
+    ]
+  },
+  {
+    "InternalIndex": 315,
+    "Description": "XianGuardSword hitting Lara",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      351,
+      352
+    ]
+  },
+  {
+    "InternalIndex": 316,
+    "Description": "Venice birdsong",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 16383,
+      "Chance": 0,
+      "Characteristics": 24584,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      353,
+      354
+    ]
+  },
+  {
+    "InternalIndex": 317,
+    "Description": "Spider biting?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      355
+    ]
+  },
+  {
+    "InternalIndex": 318,
+    "Description": "Being hit by a monk",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 12,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      356,
+      357,
+      358
+    ]
+  },
+  {
+    "InternalIndex": 319,
+    "Description": "Barkhang main hall doors opening",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      359
+    ]
+  },
+  {
+    "InternalIndex": 320,
+    "Description": "Something crashing",
+    "Creature": 0,
+    "Categories": [
+      52
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      360
+    ]
+  },
+  {
+    "InternalIndex": 321,
+    "Description": "GiantSpider attacking",
+    "Creature": 3,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      361
+    ]
+  },
+  {
+    "InternalIndex": 322,
+    "Description": "GiantSpider footstep",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 24592,
+      "NumSounds": 4
+    },
+    "SampleIndices": [
+      362,
+      363,
+      364,
+      365
+    ]
+  },
+  {
+    "InternalIndex": 323,
+    "Description": "GiantSpider dying",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      366
+    ]
+  },
+  {
+    "InternalIndex": 324,
+    "Description": "Dragon/T-Rex growl 1",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      367
+    ]
+  },
+  {
+    "InternalIndex": 325,
+    "Description": "Dragon/T-Rex footstep",
+    "Creature": 3,
+    "Categories": [
+      82
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      368
+    ]
+  },
+  {
+    "InternalIndex": 326,
+    "Description": "T-Rex growl 2",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      369
+    ]
+  },
+  {
+    "InternalIndex": 327,
+    "Description": "T-Rex dying",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      370
+    ]
+  },
+  {
+    "InternalIndex": 328,
+    "Description": "Unused",
+    "Creature": 0,
+    "Categories": [
+      0
+    ]
+  },
+  {
+    "InternalIndex": 329,
+    "Description": "Water dripping",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 21298,
+      "Chance": 0,
+      "Characteristics": 24588,
+      "NumSounds": 3
+    },
+    "SampleIndices": [
+      371,
+      372,
+      373
+    ]
+  },
+  {
+    "InternalIndex": 330,
+    "Description": "Opera House stage backdrop movement",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 21298,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      374
+    ]
+  },
+  {
+    "InternalIndex": 331,
+    "Description": "Barkhang star door moving",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      375
+    ]
+  },
+  {
+    "InternalIndex": 332,
+    "Description": "Rig/DA alarm",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      376
+    ]
+  },
+  {
+    "InternalIndex": 333,
+    "Description": "Grandfather clock",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 21298,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      377
+    ]
+  },
+  {
+    "InternalIndex": 334,
+    "Description": "Lara's front door chime",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      378
+    ]
+  },
+  {
+    "InternalIndex": 335,
+    "Description": "Lara's house alarm",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      379
+    ]
+  },
+  {
+    "InternalIndex": 336,
+    "Description": "Venice boat going on dry land",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 27851,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      380
+    ]
+  },
+  {
+    "InternalIndex": 337,
+    "Description": "Gondolas breaking",
+    "Creature": 0,
+    "Categories": [
+      53
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      381
+    ]
+  },
+  {
+    "InternalIndex": 338,
+    "Description": "Wreck piston room movement",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      382
+    ]
+  },
+  {
+    "InternalIndex": 339,
+    "Description": "Some kind of engine?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      383
+    ]
+  },
+  {
+    "InternalIndex": 340,
+    "Description": "Some kind of engine?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      384
+    ]
+  },
+  {
+    "InternalIndex": 341,
+    "Description": "Dragon explosion",
+    "Creature": 0,
+    "Categories": [
+      51
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      385
+    ]
+  },
+  {
+    "InternalIndex": 342,
+    "Description": "Winston shuffle",
+    "Creature": 2,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 4915,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      386
+    ]
+  },
+  {
+    "InternalIndex": 343,
+    "Description": "Winston footstep",
+    "Creature": 2,
+    "Categories": [
+      81
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 6553,
+      "Chance": 0,
+      "Characteristics": 24580,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      387
+    ]
+  },
+  {
+    "InternalIndex": 344,
+    "Description": "Winston getting a fright",
+    "Creature": 2,
+    "Categories": [
+      171,
+      111,
+      141,
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 19660,
+      "Characteristics": 24596,
+      "NumSounds": 5
+    },
+    "SampleIndices": [
+      388,
+      389,
+      390,
+      391,
+      392
+    ]
+  },
+  {
+    "InternalIndex": 345,
+    "Description": "Winston groaning 1",
+    "Creature": 2,
+    "Categories": [
+      171,
+      111,
+      141,
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 16383,
+      "Characteristics": 8208,
+      "NumSounds": 4
+    },
+    "SampleIndices": [
+      393,
+      394,
+      395,
+      396
+    ]
+  },
+  {
+    "InternalIndex": 346,
+    "Description": "Winston groaning 2",
+    "Creature": 2,
+    "Categories": [
+      171,
+      111,
+      141,
+      201
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 8200,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      397,
+      398
+    ]
+  },
+  {
+    "InternalIndex": 347,
+    "Description": "Winston shaking cups",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 19660,
+      "Chance": 0,
+      "Characteristics": 16392,
+      "NumSounds": 2
+    },
+    "SampleIndices": [
+      399,
+      400
+    ]
+  },
+  {
+    "InternalIndex": 348,
+    "Description": "Tibet ice wall breaking",
+    "Creature": 0,
+    "Categories": [
+      51,
+      52,
+      53
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      401
+    ]
+  },
+  {
+    "InternalIndex": 349,
+    "Description": "Spider exploding",
+    "Creature": 3,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 22936,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      402
+    ]
+  },
+  {
+    "InternalIndex": 350,
+    "Description": "Shark/BlackMorayEel biting",
+    "Creature": 3,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      403
+    ]
+  },
+  {
+    "InternalIndex": 351,
+    "Description": "Lava bubbling",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 7,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      404
+    ]
+  },
+  {
+    "InternalIndex": 352,
+    "Description": "Dragon explosion (after death?)",
+    "Creature": 0,
+    "Categories": [
+      51
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 29490,
+      "Chance": 0,
+      "Characteristics": 8196,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      405
+    ]
+  },
+  {
+    "InternalIndex": 353,
+    "Description": "HSH - Fiamma Nera arriving",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 32767,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      406
+    ]
+  },
+  {
+    "InternalIndex": 354,
+    "Description": "Something sliding?",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "Details": {
+      "Sample": 0,
+      "Volume": 26213,
+      "Chance": 0,
+      "Characteristics": 4,
+      "NumSounds": 1
+    },
+    "SampleIndices": [
+      407
+    ]
+  }
+]

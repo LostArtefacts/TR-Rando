@@ -59,6 +59,11 @@ namespace TR2RandomizerCore.Randomizers
         internal uint NightModeDarkness { get; set; }
         internal bool NightModeAssaultCourse { get; set; }
         internal bool ChangeTriggerTracks { get; set; }
+        internal bool SeparateSecretTracks { get; set; }
+        internal bool ChangeWeaponSFX { get; set; }
+        internal bool ChangeCrashSFX { get; set; }
+        internal bool ChangeEnemySFX { get; set; }
+        internal bool LinkCreatureSFX { get; set; }
         internal bool RotateStartPositionOnly { get; set; }
         internal bool RandomizeWaterLevels { get; set; }
         internal bool RandomizeSlotPositions { get; set; }
@@ -66,6 +71,7 @@ namespace TR2RandomizerCore.Randomizers
         internal uint MirroredLevelCount { get; set; }
         internal bool MirrorAssaultCourse { get; set; }
         internal bool AutoLaunchGame { get; set; }
+        internal bool PuristMode { get; set; }
 
         internal bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;// || RandomizeEnvironment; // Not needed until trap model import takes place
         internal bool ReassignPuzzleNames => RandomizeEnemies && CrossLevelEnemies;
@@ -121,8 +127,13 @@ namespace TR2RandomizerCore.Randomizers
             NightModeDarkness = config.GetUInt(nameof(NightModeDarkness), 4);
             NightModeAssaultCourse = config.GetBool(nameof(NightModeAssaultCourse), true);
 
-            // Note that the main audio config options are held in TRGE for now
+            // Note that the main audio config options (on/off and seed) are held in TRGE for now
             ChangeTriggerTracks = config.GetBool(nameof(ChangeTriggerTracks), true);
+            SeparateSecretTracks = config.GetBool(nameof(SeparateSecretTracks), true);
+            ChangeWeaponSFX = config.GetBool(nameof(ChangeWeaponSFX), true);
+            ChangeCrashSFX = config.GetBool(nameof(ChangeCrashSFX), true);
+            ChangeEnemySFX = config.GetBool(nameof(ChangeEnemySFX), true);
+            LinkCreatureSFX = config.GetBool(nameof(LinkCreatureSFX));
 
             RandomizeStartPosition = config.GetBool(nameof(RandomizeStartPosition));
             StartPositionSeed = config.GetInt(nameof(StartPositionSeed), defaultSeed);
@@ -138,6 +149,7 @@ namespace TR2RandomizerCore.Randomizers
 
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
+            PuristMode = config.GetBool(nameof(PuristMode));
         }
 
         protected override void StoreConfig(Config config)
@@ -187,6 +199,11 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(NightModeAssaultCourse)] = NightModeAssaultCourse;
 
             config[nameof(ChangeTriggerTracks)] = ChangeTriggerTracks;
+            config[nameof(SeparateSecretTracks)] = SeparateSecretTracks;
+            config[nameof(ChangeWeaponSFX)] = ChangeWeaponSFX;
+            config[nameof(ChangeCrashSFX)] = ChangeCrashSFX;
+            config[nameof(ChangeEnemySFX)] = ChangeEnemySFX;
+            config[nameof(LinkCreatureSFX)] = LinkCreatureSFX;
 
             config[nameof(RandomizeStartPosition)] = RandomizeStartPosition;
             config[nameof(StartPositionSeed)] = StartPositionSeed;
@@ -202,6 +219,7 @@ namespace TR2RandomizerCore.Randomizers
 
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
+            config[nameof(PuristMode)] = PuristMode;
         }
 
         /// <summary>
@@ -273,12 +291,9 @@ namespace TR2RandomizerCore.Randomizers
                 levels.Add(scriptEditor.AssaultLevel as TR23ScriptedLevel);
             }
 
-            // Optionally sort based on randomized sequencing. Perhaps this should be an option for users?
-            /*levels.Sort(delegate (TR23ScriptedLevel lvl1, TR23ScriptedLevel lvl2)
-            {
-                return lvl1.Sequence.CompareTo(lvl2.Sequence);
-            });*/
-
+            // Each processor will have a reference to the script editor, so can
+            // make on-the-fly changes as required.
+            TR23ScriptEditor tr23ScriptEditor = scriptEditor as TR23ScriptEditor;
             string wipDirectory = _io.WIPOutputDirectory.FullName;
 
             // Texture monitoring is needed between enemy and texture randomization
@@ -293,6 +308,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Deduplicating textures");
                     new TextureDeduplicator
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor
@@ -304,6 +320,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
                     new SecretReplacer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         AllowHard = HardSecrets,
                         AllowGlitched = GlitchedSecrets,
                         Levels = levels,
@@ -319,6 +336,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, string.Format("Randomizing standard{0} items", IncludeKeyItems ? " and key" : string.Empty));
                     (itemRandomizer = new ItemRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -339,6 +357,7 @@ namespace TR2RandomizerCore.Randomizers
                         monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting level models");
                         new ModelAdjuster
                         {
+                            ScriptEditor = tr23ScriptEditor,
                             Levels = levels,
                             BasePath = wipDirectory,
                             SaveMonitor = monitor
@@ -348,6 +367,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
                     new EnemyRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -371,6 +391,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing start positions");
                     new StartPositionRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -384,10 +405,12 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
                     new EnvironmentRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         EnforcedModeOnly = !RandomizeEnvironment,
+                        PuristMode = PuristMode,
                         NumMirrorLevels = MirroredLevelCount,
                         MirrorAssaultCourse = MirrorAssaultCourse,
                         RandomizeWater = RandomizeWaterLevels,
@@ -402,11 +425,16 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
                     new AudioRandomizer
                     {
-                        ScriptEditor = scriptEditor as TR23ScriptEditor,
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
-                        ChangeTriggerTracks = ChangeTriggerTracks
+                        ChangeTriggerTracks = ChangeTriggerTracks,
+                        SeparateSecretTracks = SeparateSecretTracks,
+                        ChangeWeaponSFX = ChangeWeaponSFX,
+                        ChangeCrashSFX = ChangeCrashSFX,
+                        ChangeEnemySFX = ChangeEnemySFX,
+                        LinkCreatureSFX = LinkCreatureSFX
                     }.Randomize(AudioSeed);
                 }
 
@@ -415,6 +443,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing outfits");
                     new OutfitRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -433,6 +462,7 @@ namespace TR2RandomizerCore.Randomizers
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
                     new NightModeRandomizer
                     {
+                        ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
@@ -450,6 +480,7 @@ namespace TR2RandomizerCore.Randomizers
                         monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing textures");
                         new TextureRandomizer
                         {
+                            ScriptEditor = tr23ScriptEditor,
                             Levels = levels,
                             BasePath = wipDirectory,
                             SaveMonitor = monitor,
@@ -465,6 +496,7 @@ namespace TR2RandomizerCore.Randomizers
                         monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode textures");
                         new TextureRandomizer
                         {
+                            ScriptEditor = tr23ScriptEditor,
                             Levels = levels,
                             BasePath = wipDirectory,
                             SaveMonitor = monitor,

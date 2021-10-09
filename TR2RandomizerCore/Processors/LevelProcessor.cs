@@ -21,6 +21,7 @@ namespace TR2RandomizerCore.Processors
 
         protected readonly object _readLock, _writeLock, _monitorLock;
 
+        internal TR23ScriptEditor ScriptEditor { get; set; }
         internal List<TR23ScriptedLevel> Levels { get; set; }
         internal TRSaveMonitor SaveMonitor;
 
@@ -98,6 +99,12 @@ namespace TR2RandomizerCore.Processors
             if (level.HasCutScene)
             {
                 SaveLevel(level.CutSceneLevel.Data, level.CutSceneLevel.Name);
+            }
+
+            lock (_writeLock)
+            {
+                // Save any script changes.
+                ScriptEditor.SaveScript();
             }
         }
 

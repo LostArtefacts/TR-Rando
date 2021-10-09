@@ -438,6 +438,36 @@ namespace TR2RandomizerCore
             set => LevelRandomizer.ChangeTriggerTracks = value;
         }
 
+        public bool SeparateSecretTracks
+        {
+            get => LevelRandomizer.SeparateSecretTracks;
+            set => LevelRandomizer.SeparateSecretTracks = value;
+        }
+
+        public bool ChangeWeaponSFX
+        {
+            get => LevelRandomizer.ChangeWeaponSFX;
+            set => LevelRandomizer.ChangeWeaponSFX = value;
+        }
+
+        public bool ChangeCrashSFX
+        {
+            get => LevelRandomizer.ChangeCrashSFX;
+            set => LevelRandomizer.ChangeCrashSFX = value;
+        }
+
+        public bool ChangeEnemySFX
+        {
+            get => LevelRandomizer.ChangeEnemySFX;
+            set => LevelRandomizer.ChangeEnemySFX = value;
+        }
+
+        public bool LinkCreatureSFX
+        {
+            get => LevelRandomizer.LinkCreatureSFX;
+            set => LevelRandomizer.LinkCreatureSFX = value;
+        }
+
         public bool RandomizeStartPosition
         {
             get => LevelRandomizer.RandomizeStartPosition;
@@ -496,6 +526,12 @@ namespace TR2RandomizerCore
         {
             get => LevelRandomizer.EnvironmentSeed;
             set => LevelRandomizer.EnvironmentSeed = value;
+        }
+
+        public bool PuristMode
+        {
+            get => LevelRandomizer.PuristMode;
+            set => LevelRandomizer.PuristMode = value;
         }
         #endregion
 

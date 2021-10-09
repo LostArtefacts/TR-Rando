@@ -343,8 +343,9 @@ namespace TR2RandomizerCore.Randomizers
                     // level that contains a dragon, or if this level itself has the dragon. If it's a cutscene that
                     // immediately follows a level that had a dragon, she will have the dagger on display. Note that a
                     // cutscene level shares its sequence with its parent level.
+                    // Note that dragonLevel can be null if the number of levels has been changed (i.e. Lair is not guaranteed).
                     TR2CombinedLevel dragonLevel = _outer._firstDragonLevel;
-                    if ((level.IsCutScene && level.Sequence < dragonLevel.Sequence) || (!level.IsCutScene && level.Sequence <= dragonLevel.Sequence))
+                    if (dragonLevel == null || (level.IsCutScene && level.Sequence < dragonLevel.Sequence) || (!level.IsCutScene && level.Sequence <= dragonLevel.Sequence))
                     {
                         if (lara == TR2Entities.LaraHome)
                         {
