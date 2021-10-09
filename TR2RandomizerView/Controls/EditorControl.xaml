@@ -214,16 +214,27 @@
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding SecretRewardSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedAdvancedControl
             Grid.Row="1"
             Grid.Column="2"
             IsActive="{Binding RandomizeAudioTracks, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            Title="Randomize Audio Tracks"
-            Text="Randomize the tracks for the title screen, level ambience, triggers and secrets."
+            Title="Randomize Audio"
+            Text="Randomize the tracks for the title screen, level ambience, triggers and secrets, as well as general sound effects."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            BoolItemsSource="{Binding AudioBoolItemControls}"/>
+            SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Audio (Advanced)"
+                                        MainDescription="Customize the audio randomization."
+                                        BoolItemsSource="{Binding Data.AudioBoolItemControls, Source={StaticResource proxy}}"
+                                        HasBoolItems="True"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
 
         <ctrl:ManagedSeedAdvancedControl
             Grid.Row="2"

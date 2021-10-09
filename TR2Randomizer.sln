@@ -9,23 +9,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelReader", "TRLevelRea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelReaderUnitTests", "TRLevelReaderUnitTests\TRLevelReaderUnitTests.csproj", "{4364B084-8063-4D82-A12C-008D6482E3E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRViewInterop", "TRViewInterop\TRViewInterop.csproj", "{31290B2E-015E-41D6-86B8-5F9085D29C86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRViewInterop", "TRViewInterop\TRViewInterop.csproj", "{31290B2E-015E-41D6-86B8-5F9085D29C86}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{5F1A11E5-F541-4E3B-B331-93574EE4C629}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureExport", "TextureExport\TextureExport.csproj", "{108D4840-3E84-466F-B5DE-AF00EECA8103}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextureExport", "TextureExport\TextureExport.csproj", "{108D4840-3E84-466F-B5DE-AF00EECA8103}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRTexture16Importer", "TRTexture16Importer\TRTexture16Importer.csproj", "{29F10C62-F4D8-4ACA-91ED-6920AE3F1AC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRTexture16Importer", "TRTexture16Importer\TRTexture16Importer.csproj", "{29F10C62-F4D8-4ACA-91ED-6920AE3F1AC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TR2RandomizerView", "TR2RandomizerView\TR2RandomizerView.csproj", "{6CE82358-524D-4B12-A514-0903521ED13C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TR2RandomizerCore", "TR2RandomizerCore\TR2RandomizerCore.csproj", "{B657D758-A095-44B5-AEF1-C77C30667DAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TR2RandomizerCore", "TR2RandomizerCore\TR2RandomizerCore.csproj", "{B657D758-A095-44B5-AEF1-C77C30667DAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRFDControl", "TRFDControl\TRFDControl.csproj", "{09ABCF27-6777-4866-8740-3EAD3F6B86FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRFDControl", "TRFDControl\TRFDControl.csproj", "{09ABCF27-6777-4866-8740-3EAD3F6B86FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRModelTransporter", "TRModelTransporter\TRModelTransporter.csproj", "{6CE83D8E-30E4-4CE1-9228-8657EF186A17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRModelTransporter", "TRModelTransporter\TRModelTransporter.csproj", "{6CE83D8E-30E4-4CE1-9228-8657EF186A17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TREnvironmentEditor", "TREnvironmentEditor\TREnvironmentEditor.csproj", "{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TREnvironmentEditor", "TREnvironmentEditor\TREnvironmentEditor.csproj", "{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFXExport", "SFXExport\SFXExport.csproj", "{D3662F36-C8D8-471C-8F43-192CE748B04E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,12 +79,17 @@ Global
 		{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1667C53D-0CCA-48A9-90B7-4950BD92BDFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3662F36-C8D8-471C-8F43-192CE748B04E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3662F36-C8D8-471C-8F43-192CE748B04E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3662F36-C8D8-471C-8F43-192CE748B04E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3662F36-C8D8-471C-8F43-192CE748B04E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{108D4840-3E84-466F-B5DE-AF00EECA8103} = {5F1A11E5-F541-4E3B-B331-93574EE4C629}
+		{D3662F36-C8D8-471C-8F43-192CE748B04E} = {5F1A11E5-F541-4E3B-B331-93574EE4C629}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B68A2054-7393-4B0D-9004-0E92FB8324FC}

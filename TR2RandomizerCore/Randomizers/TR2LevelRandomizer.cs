@@ -59,6 +59,11 @@ namespace TR2RandomizerCore.Randomizers
         internal uint NightModeDarkness { get; set; }
         internal bool NightModeAssaultCourse { get; set; }
         internal bool ChangeTriggerTracks { get; set; }
+        internal bool SeparateSecretTracks { get; set; }
+        internal bool ChangeWeaponSFX { get; set; }
+        internal bool ChangeCrashSFX { get; set; }
+        internal bool ChangeEnemySFX { get; set; }
+        internal bool LinkCreatureSFX { get; set; }
         internal bool RotateStartPositionOnly { get; set; }
         internal bool RandomizeWaterLevels { get; set; }
         internal bool RandomizeSlotPositions { get; set; }
@@ -122,8 +127,13 @@ namespace TR2RandomizerCore.Randomizers
             NightModeDarkness = config.GetUInt(nameof(NightModeDarkness), 4);
             NightModeAssaultCourse = config.GetBool(nameof(NightModeAssaultCourse), true);
 
-            // Note that the main audio config options are held in TRGE for now
+            // Note that the main audio config options (on/off and seed) are held in TRGE for now
             ChangeTriggerTracks = config.GetBool(nameof(ChangeTriggerTracks), true);
+            SeparateSecretTracks = config.GetBool(nameof(SeparateSecretTracks), true);
+            ChangeWeaponSFX = config.GetBool(nameof(ChangeWeaponSFX), true);
+            ChangeCrashSFX = config.GetBool(nameof(ChangeCrashSFX), true);
+            ChangeEnemySFX = config.GetBool(nameof(ChangeEnemySFX), true);
+            LinkCreatureSFX = config.GetBool(nameof(LinkCreatureSFX));
 
             RandomizeStartPosition = config.GetBool(nameof(RandomizeStartPosition));
             StartPositionSeed = config.GetInt(nameof(StartPositionSeed), defaultSeed);
@@ -189,6 +199,11 @@ namespace TR2RandomizerCore.Randomizers
             config[nameof(NightModeAssaultCourse)] = NightModeAssaultCourse;
 
             config[nameof(ChangeTriggerTracks)] = ChangeTriggerTracks;
+            config[nameof(SeparateSecretTracks)] = SeparateSecretTracks;
+            config[nameof(ChangeWeaponSFX)] = ChangeWeaponSFX;
+            config[nameof(ChangeCrashSFX)] = ChangeCrashSFX;
+            config[nameof(ChangeEnemySFX)] = ChangeEnemySFX;
+            config[nameof(LinkCreatureSFX)] = LinkCreatureSFX;
 
             config[nameof(RandomizeStartPosition)] = RandomizeStartPosition;
             config[nameof(StartPositionSeed)] = StartPositionSeed;
@@ -414,7 +429,12 @@ namespace TR2RandomizerCore.Randomizers
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
-                        ChangeTriggerTracks = ChangeTriggerTracks
+                        ChangeTriggerTracks = ChangeTriggerTracks,
+                        SeparateSecretTracks = SeparateSecretTracks,
+                        ChangeWeaponSFX = ChangeWeaponSFX,
+                        ChangeCrashSFX = ChangeCrashSFX,
+                        ChangeEnemySFX = ChangeEnemySFX,
+                        LinkCreatureSFX = LinkCreatureSFX
                     }.Randomize(AudioSeed);
                 }
 
