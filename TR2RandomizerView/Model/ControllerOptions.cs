@@ -331,7 +331,7 @@ namespace TR2RandomizerView.Model
             }
         }
 
-        public BoolItemControlClass SeparateTriggerTracks
+        public BoolItemControlClass SeparateSecretTracks
         {
             get => _separateSecretTracks;
             set
@@ -1050,12 +1050,12 @@ namespace TR2RandomizerView.Model
                 Description = "Change the tracks in the game that play when crossing triggers, such as the violins in Venice, danger sounds etc."
             };
             BindingOperations.SetBinding(ChangeTriggerTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
-            SeparateTriggerTracks = new BoolItemControlClass
+            SeparateSecretTracks = new BoolItemControlClass
             {
                 Title = "Use separate secret tracks",
                 Description = "Play a different soundtrack for every secret that is picked up, or use the same soundtrack for all secrets."
             };
-            BindingOperations.SetBinding(SeparateTriggerTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
+            BindingOperations.SetBinding(SeparateSecretTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
             ChangeWeaponSFX = new BoolItemControlClass
             {
                 Title = "Change weapon sound effects",
@@ -1217,7 +1217,7 @@ namespace TR2RandomizerView.Model
             AudioTracksSeed = _controller.AudioTracksSeed;
             IncludeBlankTracks.Value = _controller.RandomGameTracksIncludeBlank;
             ChangeTriggerTracks.Value = _controller.ChangeTriggerTracks;
-            SeparateTriggerTracks.Value = _controller.SeparateSecretTracks;
+            SeparateSecretTracks.Value = _controller.SeparateSecretTracks;
             ChangeWeaponSFX.Value = _controller.ChangeWeaponSFX;
             ChangeCrashSFX.Value = _controller.ChangeCrashSFX;
             ChangeEnemySFX.Value = _controller.ChangeEnemySFX;
@@ -1464,7 +1464,7 @@ namespace TR2RandomizerView.Model
             _controller.AudioTracksSeed = AudioTracksSeed;
             _controller.RandomGameTracksIncludeBlank = IncludeBlankTracks.Value;
             _controller.ChangeTriggerTracks = ChangeTriggerTracks.Value;
-            _controller.SeparateSecretTracks = SeparateTriggerTracks.Value;
+            _controller.SeparateSecretTracks = SeparateSecretTracks.Value;
             _controller.ChangeWeaponSFX = ChangeWeaponSFX.Value;
             _controller.ChangeCrashSFX = ChangeCrashSFX.Value;
             _controller.ChangeEnemySFX = ChangeEnemySFX.Value;
