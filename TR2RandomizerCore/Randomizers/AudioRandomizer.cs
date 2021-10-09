@@ -255,7 +255,7 @@ namespace TR2RandomizerCore.Randomizers
 
         private void RandomizeSoundEffects(TR2CombinedLevel level)
         {
-            if (_sfxCategories == null)
+            if (_sfxCategories.Count == 0)
             {
                 // We haven't selected any SFX categories to change.
                 return;
