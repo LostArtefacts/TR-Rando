@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="TRRandomizerView.Controls.SeedControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ctrl="clr-namespace:TRRandomizerView.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="25" d:DesignWidth="140" MinWidth="120">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <ctrl:NumericUpDown x:Name="_seedSpinner"
+                            Value="{Binding Value, Mode=TwoWay}"
+                            MinValue="{Binding MinValue}"
+                            MaxValue="{Binding MaxValue}"/>
+
+        <Border Grid.Column="1"
+                BorderBrush="#666"
+                BorderThickness="0,1,1,1">
+            <Button Grid.Column="1"
+                    Content="..\Resources\arrows.png"
+                    Style="{StaticResource SmallControlButton}"
+                    ToolTip="Randomize Seed"
+                    Click="RandomizeButton_Click"/>
+        </Border>
+    </Grid>
+</UserControl>

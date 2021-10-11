@@ -45,14 +45,14 @@ namespace TR2Randomizer.Randomizers
 
             for (int i = 0; i < _levelInstance.Entities.Count(); i++)
             {
-                if (lvl == LevelNames.CHICKEN && 
+                if (lvl == TR2LevelNames.CHICKEN && 
                     _levelInstance.Entities[i].Room == 143 &&
                     _levelInstance.Entities[i].TypeID == (int)TR2Entities.BirdMonster)
                 {
                     //#60 - Ice Palace - Room 143 chicken man must remain to avoid softlock.
                     continue;
                 }
-                else if (lvl == LevelNames.HOME && _levelInstance.Entities[i].TypeID == (int)TR2Entities.ShotgunGoon)
+                else if (lvl == TR2LevelNames.HOME && _levelInstance.Entities[i].TypeID == (int)TR2Entities.ShotgunGoon)
                 {
                     //#62 - Avoid randomizing shotgun goon in HSH
                     continue;

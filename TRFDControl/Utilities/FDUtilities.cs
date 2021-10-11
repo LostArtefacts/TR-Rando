@@ -74,32 +74,45 @@ namespace TRFDControl.Utilities
         {
             foreach (TR2Room room in level.Rooms)
             {
-                foreach (TRRoomSector sector in room.SectorList)
-                {
-                    if (sector.FDIndex == 0)
-                    {
-                        continue;
-                    }
+                RemoveEntityTriggers(room.SectorList, entityIndex, control);
+            }
+        }
 
-                    List<FDEntry> entries = control.Entries[sector.FDIndex];
-                    for (int i = entries.Count - 1; i >= 0; i--)
+        public static void RemoveEntityTriggers(TR3Level level, int entityIndex, FDControl control)
+        {
+            foreach (TR3Room room in level.Rooms)
+            {
+                RemoveEntityTriggers(room.Sectors, entityIndex, control);
+            }
+        }
+
+        public static void RemoveEntityTriggers(IEnumerable<TRRoomSector> sectorList, int entityIndex, FDControl control)
+        {
+            foreach (TRRoomSector sector in sectorList)
+            {
+                if (sector.FDIndex == 0)
+                {
+                    continue;
+                }
+
+                List<FDEntry> entries = control.Entries[sector.FDIndex];
+                for (int i = entries.Count - 1; i >= 0; i--)
+                {
+                    FDEntry entry = entries[i];
+                    if (entry is FDTriggerEntry trig)
                     {
-                        FDEntry entry = entries[i];
-                        if (entry is FDTriggerEntry trig)
+                        trig.TrigActionList.RemoveAll(a => a.TrigAction == FDTrigAction.Object && a.Parameter == entityIndex);
+                        if (trig.TrigActionList.Count == 0)
                         {
-                            trig.TrigActionList.RemoveAll(a => a.TrigAction == FDTrigAction.Object && a.Parameter == entityIndex);
-                            if (trig.TrigActionList.Count == 0)
-                            {
-                                entries.RemoveAt(i);
-                            }
+                            entries.RemoveAt(i);
                         }
                     }
+                }
 
-                    if (entries.Count == 0)
-                    {
-                        // If there isn't anything left, reset the sector to point to the dummy FD
-                        control.RemoveFloorData(sector);
-                    }
+                if (entries.Count == 0)
+                {
+                    // If there isn't anything left, reset the sector to point to the dummy FD
+                    control.RemoveFloorData(sector);
                 }
             }
         }

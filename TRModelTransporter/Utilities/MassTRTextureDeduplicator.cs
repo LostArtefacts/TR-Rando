@@ -43,7 +43,7 @@ namespace TRModelTransporter.Utilities
 
             try
             {
-                foreach (string lvlName in LevelNames.AsList)
+                foreach (string lvlName in TR2LevelNames.AsList)
                 {
                     _currentLevel = lvlName;
                     _currentSave = 0;
@@ -67,7 +67,7 @@ namespace TRModelTransporter.Utilities
 
         public void Import()
         {
-            foreach (string lvlName in LevelNames.AsList)
+            foreach (string lvlName in TR2LevelNames.AsList)
             {
                 string lvlPath = Path.Combine(_levelFileDirectory, lvlName);
                 string mapPath = Path.Combine(_outputDirectory, lvlName + "-TextureRemap.json");

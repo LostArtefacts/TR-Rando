@@ -196,7 +196,7 @@ namespace TR2Randomizer
                 List<TRViewLocation> routeLocations = RouteToLocationsConverter.Convert(filename);
 
                 //What level are we importing for?
-                string level = LevelNames.AsList[ImportLevel.SelectedIndex];
+                string level = TR2LevelNames.AsList[ImportLevel.SelectedIndex];
 
                 //What locations do we want to import for? secrets or items
                 Dictionary<string, List<Location>> Locations;
@@ -263,7 +263,7 @@ namespace TR2Randomizer
 
             string CurrentDir = Directory.GetCurrentDirectory();
 
-            string LvlName = LevelNames.AsList[ImportLevel.SelectedIndex];
+            string LvlName = TR2LevelNames.AsList[ImportLevel.SelectedIndex];
 
             instance = reader.ReadLevel(LvlName);
 

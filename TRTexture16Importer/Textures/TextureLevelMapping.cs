@@ -41,7 +41,7 @@ namespace TRTexture16Importer.Textures
 
         public static TextureLevelMapping Get(TR2Level level, string mappingFilePrefix, TextureDatabase database, Dictionary<StaticTextureSource, List<StaticTextureTarget>> predefinedMapping = null, List<TR2Entities> entitiesToIgnore = null)
         {
-            string mapFile = Path.Combine(@"Resources\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
+            string mapFile = Path.Combine(@"Resources\TR2\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
             if (!File.Exists(mapFile))
             {
                 return null;
