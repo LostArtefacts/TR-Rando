@@ -26,7 +26,7 @@ namespace TRModelTransporter.Utilities
 
         public void Export(string levelFileDirectory)
         {
-            List<string> allLevels = LevelNames.AsListWithAssault;
+            List<string> allLevels = TR2LevelNames.AsListWithAssault;
             foreach (string lvlName in allLevels)
             {
                 if (ExportModelTypes.ContainsKey(lvlName))
@@ -61,7 +61,7 @@ namespace TRModelTransporter.Utilities
 
         public static readonly Dictionary<string, List<TR2Entities>> ExportModelTypes = new Dictionary<string, List<TR2Entities>>
         {
-            { LevelNames.GW,
+            { TR2LevelNames.GW,
                 new List<TR2Entities>
                 {
                     TR2Entities.Pistols_M_H, TR2Entities.Shotgun_M_H, TR2Entities.Uzi_M_H, TR2Entities.Autos_M_H, TR2Entities.Harpoon_M_H, TR2Entities.M16_M_H, TR2Entities.GrenadeLauncher_M_H,
@@ -69,71 +69,71 @@ namespace TRModelTransporter.Utilities
                 }
             },
 
-            { LevelNames.VENICE,
+            { TR2LevelNames.VENICE,
                 new List<TR2Entities>{ TR2Entities.Boat, TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Rat, TR2Entities.StickWieldingGoon1BodyWarmer }
             },
 
-            { LevelNames.BARTOLI,
+            { TR2LevelNames.BARTOLI,
                 new List<TR2Entities>{ TR2Entities.StickWieldingGoon1WhiteVest }
             },
 
-            { LevelNames.OPERA,
+            { TR2LevelNames.OPERA,
                 new List<TR2Entities>{ TR2Entities.ShotgunGoon }
             },
 
-            { LevelNames.RIG,
+            { TR2LevelNames.RIG,
                 new List<TR2Entities>{ TR2Entities.Gunman1, TR2Entities.Gunman2, TR2Entities.ScubaDiver, TR2Entities.StickWieldingGoon1Bandana }
             },
 
-            { LevelNames.DA,
+            { TR2LevelNames.DA,
                 new List<TR2Entities>{ TR2Entities.FlamethrowerGoon }
             },
 
-            { LevelNames.FATHOMS,
+            { TR2LevelNames.FATHOMS,
                 new List<TR2Entities>{ TR2Entities.LaraUnwater, TR2Entities.BarracudaUnwater, TR2Entities.Shark }
             },
 
-            { LevelNames.DORIA,
+            { TR2LevelNames.DORIA,
                 new List<TR2Entities>{ TR2Entities.StickWieldingGoon1GreenVest, TR2Entities.YellowMorayEel }
             },
 
-            { LevelNames.LQ,
+            { TR2LevelNames.LQ,
                 new List<TR2Entities>{ TR2Entities.BlackMorayEel, TR2Entities.StickWieldingGoon2 }
             },
 
-            { LevelNames.TIBET,
+            { TR2LevelNames.TIBET,
                 new List<TR2Entities>{ TR2Entities.LaraSnow, TR2Entities.Eagle, TR2Entities.Mercenary2, TR2Entities.Mercenary3, TR2Entities.MercSnowmobDriver, TR2Entities.SnowLeopard }
             },
 
-            { LevelNames.MONASTERY,
+            { TR2LevelNames.MONASTERY,
                 new List<TR2Entities>{ TR2Entities.Mercenary1, TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick }
             },
 
-            { LevelNames.COT,
+            { TR2LevelNames.COT,
                 new List<TR2Entities>{ TR2Entities.BarracudaIce, TR2Entities.Yeti }
             },
 
-            { LevelNames.CHICKEN,
+            { TR2LevelNames.CHICKEN,
                 new List<TR2Entities>{ TR2Entities.BirdMonster, TR2Entities.WhiteTiger }
             },
 
-            { LevelNames.XIAN,
+            { TR2LevelNames.XIAN,
                 new List<TR2Entities>{ TR2Entities.BarracudaXian, TR2Entities.GiantSpider }
             },
 
-            { LevelNames.FLOATER,
+            { TR2LevelNames.FLOATER,
                 new List<TR2Entities>{ TR2Entities.Knifethrower, TR2Entities.XianGuardSword, TR2Entities.XianGuardSpear }
             },
 
-            { LevelNames.LAIR,
+            { TR2LevelNames.LAIR,
                 new List<TR2Entities>{ TR2Entities.MarcoBartoli }
             },
 
-            { LevelNames.HOME,
+            { TR2LevelNames.HOME,
                 new List<TR2Entities>{ TR2Entities.LaraHome, TR2Entities.StickWieldingGoon1BlackJacket }
             },
 
-            { LevelNames.ASSAULT,
+            { TR2LevelNames.ASSAULT,
                 new List<TR2Entities>{ TR2Entities.Winston }
             }
         };

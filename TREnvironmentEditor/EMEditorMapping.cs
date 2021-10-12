@@ -30,9 +30,8 @@ namespace TREnvironmentEditor
             Mirrored = new EMEditorSet();
         }
 
-        public static EMEditorMapping Get(string lvlName)
+        public static EMEditorMapping Get(string packPath)
         {
-            string packPath = string.Format(@"Resources\Environment\{0}-Environment.json", lvlName);
             if (File.Exists(packPath))
             {
                 return JsonConvert.DeserializeObject<EMEditorMapping>(File.ReadAllText(packPath), _converter);

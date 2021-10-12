@@ -76,7 +76,7 @@ namespace TextureExport
                 }
 
                 StringBuilder levelSel = new StringBuilder();
-                foreach (string lvl in LevelNames.AsList)
+                foreach (string lvl in TR2LevelNames.AsList)
                 {
                     levelSel.Append("<option");
                     if (lvl.ToUpper() == filePath.ToUpper())

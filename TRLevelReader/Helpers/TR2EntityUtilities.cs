@@ -10,44 +10,44 @@ namespace TRLevelReader.Helpers
             [TR2Entities.Lara] = new Dictionary<TR2Entities, List<string>>
             {
                 [TR2Entities.LaraSun] =
-                    new List<string> { LevelNames.GW, LevelNames.GW_CUT, LevelNames.VENICE, LevelNames.BARTOLI, LevelNames.OPERA, LevelNames.OPERA_CUT, LevelNames.RIG, LevelNames.DA, LevelNames.DA_CUT, LevelNames.XIAN, LevelNames.XIAN_CUT, LevelNames.FLOATER, LevelNames.LAIR },
+                    new List<string> { TR2LevelNames.GW, TR2LevelNames.GW_CUT, TR2LevelNames.VENICE, TR2LevelNames.BARTOLI, TR2LevelNames.OPERA, TR2LevelNames.OPERA_CUT, TR2LevelNames.RIG, TR2LevelNames.DA, TR2LevelNames.DA_CUT, TR2LevelNames.XIAN, TR2LevelNames.XIAN_CUT, TR2LevelNames.FLOATER, TR2LevelNames.LAIR },
                 [TR2Entities.LaraUnwater] =
-                    new List<string> { LevelNames.FATHOMS, LevelNames.DORIA, LevelNames.LQ, LevelNames.DECK },
+                    new List<string> { TR2LevelNames.FATHOMS, TR2LevelNames.DORIA, TR2LevelNames.LQ, TR2LevelNames.DECK },
                 [TR2Entities.LaraSnow] =
-                    new List<string> { LevelNames.TIBET, LevelNames.MONASTERY, LevelNames.COT, LevelNames.CHICKEN },
+                    new List<string> { TR2LevelNames.TIBET, TR2LevelNames.MONASTERY, TR2LevelNames.COT, TR2LevelNames.CHICKEN },
                 [TR2Entities.LaraHome] =
-                    new List<string> { LevelNames.HOME }
+                    new List<string> { TR2LevelNames.HOME }
             },
             [TR2Entities.Barracuda] = new Dictionary<TR2Entities, List<string>>
             {
                 [TR2Entities.BarracudaIce] =
-                    new List<string> { LevelNames.COT, LevelNames.CHICKEN },
+                    new List<string> { TR2LevelNames.COT, TR2LevelNames.CHICKEN },
                 [TR2Entities.BarracudaUnwater] =
-                    new List<string> { LevelNames.FATHOMS, LevelNames.DORIA, LevelNames.LQ, LevelNames.DECK },
+                    new List<string> { TR2LevelNames.FATHOMS, TR2LevelNames.DORIA, TR2LevelNames.LQ, TR2LevelNames.DECK },
                 [TR2Entities.BarracudaXian] =
-                    new List<string> { LevelNames.XIAN }
+                    new List<string> { TR2LevelNames.XIAN }
             },
             [TR2Entities.StickWieldingGoon1] = new Dictionary<TR2Entities, List<string>>
             {
                 [TR2Entities.StickWieldingGoon1Bandana] =
-                    new List<string> { LevelNames.RIG, LevelNames.DA },
+                    new List<string> { TR2LevelNames.RIG, TR2LevelNames.DA },
                 [TR2Entities.StickWieldingGoon1BlackJacket] =
-                    new List<string> { LevelNames.HOME },
+                    new List<string> { TR2LevelNames.HOME },
                 [TR2Entities.StickWieldingGoon1BodyWarmer] =
-                    new List<string> { LevelNames.VENICE },
+                    new List<string> { TR2LevelNames.VENICE },
                 [TR2Entities.StickWieldingGoon1GreenVest] =
-                    new List<string> { LevelNames.FATHOMS, LevelNames.DORIA, LevelNames.LQ, LevelNames.DECK },
+                    new List<string> { TR2LevelNames.FATHOMS, TR2LevelNames.DORIA, TR2LevelNames.LQ, TR2LevelNames.DECK },
                 [TR2Entities.StickWieldingGoon1WhiteVest] =
-                    new List<string> { LevelNames.BARTOLI, LevelNames.OPERA }
+                    new List<string> { TR2LevelNames.BARTOLI, TR2LevelNames.OPERA }
             },
             [TR2Entities.TigerOrSnowLeopard] = new Dictionary<TR2Entities, List<string>>
             {
                 [TR2Entities.BengalTiger] =
-                    new List<string> { LevelNames.GW, LevelNames.XIAN },
+                    new List<string> { TR2LevelNames.GW, TR2LevelNames.XIAN },
                 [TR2Entities.SnowLeopard] =
-                    new List<string> { LevelNames.TIBET, LevelNames.COT },
+                    new List<string> { TR2LevelNames.TIBET, TR2LevelNames.COT },
                 [TR2Entities.WhiteTiger] =
-                    new List<string> { LevelNames.CHICKEN }
+                    new List<string> { TR2LevelNames.CHICKEN }
             }
         };
 
@@ -325,79 +325,79 @@ namespace TRLevelReader.Helpers
         {
             return new Dictionary<string, List<TR2Entities>>
             {
-                { LevelNames.GW,
+                { TR2LevelNames.GW,
                     new List<TR2Entities>{ TR2Entities.Crow, TR2Entities.TigerOrSnowLeopard, TR2Entities.Spider, TR2Entities.TRex }
                 },
 
-                { LevelNames.VENICE,
+                { TR2LevelNames.VENICE,
                     new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.StickWieldingGoon1, TR2Entities.Rat, TR2Entities.MaskedGoon1 }
                 },
 
-                { LevelNames.BARTOLI,
+                { TR2LevelNames.BARTOLI,
                     new List<TR2Entities>{ TR2Entities.StickWieldingGoon1, TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Rat }
                 },
 
-                { LevelNames.OPERA,
+                { TR2LevelNames.OPERA,
                     new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Rat, TR2Entities.StickWieldingGoon1, TR2Entities.ShotgunGoon }
                 },
 
-                { LevelNames.RIG,
+                { TR2LevelNames.RIG,
                     new List<TR2Entities>{ TR2Entities.Gunman2, TR2Entities.StickWieldingGoon1, TR2Entities.Doberman, TR2Entities.Gunman1, TR2Entities.ScubaDiver }
                 },
 
-                { LevelNames.DA,
+                { TR2LevelNames.DA,
                     new List<TR2Entities>{ TR2Entities.FlamethrowerGoon, TR2Entities.StickWieldingGoon1, TR2Entities.Doberman, TR2Entities.Gunman1, TR2Entities.Gunman2, TR2Entities.ScubaDiver }
                 },
 
-                { LevelNames.FATHOMS,
+                { TR2LevelNames.FATHOMS,
                     new List<TR2Entities>{ TR2Entities.Shark, TR2Entities.ScubaDiver, TR2Entities.Gunman1, TR2Entities.Barracuda, TR2Entities.StickWieldingGoon1 }
                 },
 
-                { LevelNames.DORIA,
+                { TR2LevelNames.DORIA,
                     new List<TR2Entities>{ TR2Entities.Shark, TR2Entities.ScubaDiver, TR2Entities.Gunman1, TR2Entities.Barracuda, TR2Entities.StickWieldingGoon1, TR2Entities.YellowMorayEel, TR2Entities.Gunman2 }
                 },
 
-                { LevelNames.LQ,
+                { TR2LevelNames.LQ,
                     new List<TR2Entities>{ TR2Entities.StickWieldingGoon2, TR2Entities.StickWieldingGoon1, TR2Entities.Gunman1, TR2Entities.ScubaDiver, TR2Entities.BlackMorayEel, TR2Entities.Barracuda }
                 },
 
-                { LevelNames.DECK,
+                { TR2LevelNames.DECK,
                     new List<TR2Entities>{ TR2Entities.StickWieldingGoon1, TR2Entities.FlamethrowerGoon, TR2Entities.Barracuda, TR2Entities.ScubaDiver, TR2Entities.Shark, TR2Entities.Gunman1 }
                 },
 
-                { LevelNames.TIBET,
+                { TR2LevelNames.TIBET,
                     new List<TR2Entities>{ TR2Entities.Eagle, TR2Entities.Mercenary2, TR2Entities.Mercenary3, TR2Entities.TigerOrSnowLeopard, TR2Entities.MercSnowmobDriver }
                 },
 
-                { LevelNames.MONASTERY,
+                { TR2LevelNames.MONASTERY,
                     new List<TR2Entities>{ TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Mercenary1, TR2Entities.Crow, TR2Entities.Mercenary2 }
                 },
 
-                { LevelNames.COT,
+                { TR2LevelNames.COT,
                     new List<TR2Entities>{ TR2Entities.TigerOrSnowLeopard, TR2Entities.Mercenary1, TR2Entities.Mercenary2, TR2Entities.Yeti, TR2Entities.Barracuda }
                 },
 
-                { LevelNames.CHICKEN,
+                { TR2LevelNames.CHICKEN,
                     new List<TR2Entities>{ TR2Entities.TigerOrSnowLeopard, TR2Entities.Barracuda, TR2Entities.Yeti, TR2Entities.BirdMonster }
                 },
 
-                { LevelNames.XIAN,
+                { TR2LevelNames.XIAN,
                     new List<TR2Entities>{ TR2Entities.Barracuda, TR2Entities.TigerOrSnowLeopard, TR2Entities.Eagle, TR2Entities.Spider, TR2Entities.GiantSpider }
                 },
 
-                { LevelNames.FLOATER,
+                { TR2LevelNames.FLOATER,
                     new List<TR2Entities>{ TR2Entities.XianGuardSword, TR2Entities.XianGuardSpear, TR2Entities.Knifethrower }
                 },
 
-                { LevelNames.LAIR,
+                { TR2LevelNames.LAIR,
                     new List<TR2Entities>{ TR2Entities.Knifethrower, TR2Entities.XianGuardSpear, TR2Entities.MarcoBartoli }
                 },
 
-                { LevelNames.HOME,
+                { TR2LevelNames.HOME,
                     new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.StickWieldingGoon1, TR2Entities.ShotgunGoon }
                 },
 
-                { LevelNames.ASSAULT,
+                { TR2LevelNames.ASSAULT,
                     new List<TR2Entities>{ }
                 },
 
@@ -625,75 +625,75 @@ namespace TRLevelReader.Helpers
         {
             return new Dictionary<string, List<TR2Entities>>
             {
-                { LevelNames.GW,
+                { TR2LevelNames.GW,
                     new List<TR2Entities>{ }
                 },
 
-                { LevelNames.VENICE,
+                { TR2LevelNames.VENICE,
                     new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.StickWieldingGoon1, TR2Entities.MaskedGoon1 }
                 },
 
-                { LevelNames.BARTOLI,
+                { TR2LevelNames.BARTOLI,
                     new List<TR2Entities>{ TR2Entities.StickWieldingGoon1, TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.StickWieldingGoon1 }
                 },
 
-                { LevelNames.OPERA,
+                { TR2LevelNames.OPERA,
                     new List<TR2Entities>{ TR2Entities.StickWieldingGoon1, TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Rat, TR2Entities.StickWieldingGoon1, TR2Entities.ShotgunGoon }
                 },
 
-                { LevelNames.RIG,
+                { TR2LevelNames.RIG,
                     new List<TR2Entities>{ TR2Entities.Gunman2, TR2Entities.StickWieldingGoon1, TR2Entities.Doberman, TR2Entities.Gunman1 }
                 },
 
-                { LevelNames.DA,
+                { TR2LevelNames.DA,
                     new List<TR2Entities>{ TR2Entities.FlamethrowerGoon, TR2Entities.StickWieldingGoon1, TR2Entities.Doberman, TR2Entities.Gunman1, TR2Entities.Gunman2 }
                 },
 
-                { LevelNames.FATHOMS,
+                { TR2LevelNames.FATHOMS,
                     new List<TR2Entities>{ TR2Entities.Gunman1, TR2Entities.StickWieldingGoon1 }
                 },
 
-                { LevelNames.DORIA,
+                { TR2LevelNames.DORIA,
                     new List<TR2Entities>{ TR2Entities.Gunman1, TR2Entities.StickWieldingGoon1, TR2Entities.Gunman2 }
                 },
 
-                { LevelNames.LQ,
+                { TR2LevelNames.LQ,
                     new List<TR2Entities>{ TR2Entities.StickWieldingGoon2, TR2Entities.StickWieldingGoon1, TR2Entities.Gunman1 }
                 },
 
-                { LevelNames.DECK,
+                { TR2LevelNames.DECK,
                     new List<TR2Entities>{ TR2Entities.StickWieldingGoon1, TR2Entities.FlamethrowerGoon, TR2Entities.Gunman1 }
                 },
 
-                { LevelNames.TIBET,
+                { TR2LevelNames.TIBET,
                     new List<TR2Entities>{ TR2Entities.Mercenary2, TR2Entities.Mercenary3 }
                 },
 
-                { LevelNames.MONASTERY,
+                { TR2LevelNames.MONASTERY,
                     new List<TR2Entities>{ TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Mercenary1, TR2Entities.Mercenary2 }
                 },
 
-                { LevelNames.COT,
+                { TR2LevelNames.COT,
                     new List<TR2Entities>{ TR2Entities.Mercenary1, TR2Entities.Mercenary2 }
                 },
 
-                { LevelNames.CHICKEN,
+                { TR2LevelNames.CHICKEN,
                     new List<TR2Entities>{ }
                 },
 
-                { LevelNames.XIAN,
+                { TR2LevelNames.XIAN,
                     new List<TR2Entities>{ }
                 },
 
-                { LevelNames.FLOATER,
+                { TR2LevelNames.FLOATER,
                     new List<TR2Entities>{ TR2Entities.Knifethrower }
                 },
 
-                { LevelNames.LAIR,
+                { TR2LevelNames.LAIR,
                     new List<TR2Entities>{ TR2Entities.Knifethrower }
                 },
 
-                { LevelNames.HOME,
+                { TR2LevelNames.HOME,
                     new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.ShotgunGoon, TR2Entities.StickWieldingGoon1 }
                 },
 

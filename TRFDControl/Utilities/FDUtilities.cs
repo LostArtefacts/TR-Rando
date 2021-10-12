@@ -9,6 +9,16 @@ namespace TRFDControl.Utilities
     {
         public static List<FDTriggerEntry> GetEntityTriggers(FDControl control, int entityIndex)
         {
+            return GetTriggers(control, FDTrigAction.Object, entityIndex);
+        }
+
+        public static List<FDTriggerEntry> GetSecretTriggers(FDControl control, int secretIndex)
+        {
+            return GetTriggers(control, FDTrigAction.SecretFound, secretIndex);
+        }
+
+        public static List<FDTriggerEntry> GetTriggers(FDControl control, FDTrigAction action, int parameter = -1)
+        {
             List<FDTriggerEntry> entries = new List<FDTriggerEntry>();
 
             foreach (List<FDEntry> entryList in control.Entries.Values)
@@ -20,7 +30,7 @@ namespace TRFDControl.Utilities
                         int itemIndex = triggerEntry.TrigActionList.FindIndex
                         (
                             i =>
-                                i.TrigAction == FDTrigAction.Object && i.Parameter == entityIndex
+                                i.TrigAction == action && (parameter == -1 || i.Parameter == parameter)
                         );
                         if (itemIndex != -1)
                         {
@@ -74,32 +84,45 @@ namespace TRFDControl.Utilities
         {
             foreach (TR2Room room in level.Rooms)
             {
-                foreach (TRRoomSector sector in room.SectorList)
-                {
-                    if (sector.FDIndex == 0)
-                    {
-                        continue;
-                    }
+                RemoveEntityTriggers(room.SectorList, entityIndex, control);
+            }
+        }
 
-                    List<FDEntry> entries = control.Entries[sector.FDIndex];
-                    for (int i = entries.Count - 1; i >= 0; i--)
+        public static void RemoveEntityTriggers(TR3Level level, int entityIndex, FDControl control)
+        {
+            foreach (TR3Room room in level.Rooms)
+            {
+                RemoveEntityTriggers(room.Sectors, entityIndex, control);
+            }
+        }
+
+        public static void RemoveEntityTriggers(IEnumerable<TRRoomSector> sectorList, int entityIndex, FDControl control)
+        {
+            foreach (TRRoomSector sector in sectorList)
+            {
+                if (sector.FDIndex == 0)
+                {
+                    continue;
+                }
+
+                List<FDEntry> entries = control.Entries[sector.FDIndex];
+                for (int i = entries.Count - 1; i >= 0; i--)
+                {
+                    FDEntry entry = entries[i];
+                    if (entry is FDTriggerEntry trig)
                     {
-                        FDEntry entry = entries[i];
-                        if (entry is FDTriggerEntry trig)
+                        trig.TrigActionList.RemoveAll(a => a.TrigAction == FDTrigAction.Object && a.Parameter == entityIndex);
+                        if (trig.TrigActionList.Count == 0)
                         {
-                            trig.TrigActionList.RemoveAll(a => a.TrigAction == FDTrigAction.Object && a.Parameter == entityIndex);
-                            if (trig.TrigActionList.Count == 0)
-                            {
-                                entries.RemoveAt(i);
-                            }
+                            entries.RemoveAt(i);
                         }
                     }
+                }
 
-                    if (entries.Count == 0)
-                    {
-                        // If there isn't anything left, reset the sector to point to the dummy FD
-                        control.RemoveFloorData(sector);
-                    }
+                if (entries.Count == 0)
+                {
+                    // If there isn't anything left, reset the sector to point to the dummy FD
+                    control.RemoveFloorData(sector);
                 }
             }
         }

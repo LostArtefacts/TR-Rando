@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="TRRandomizerView.Controls.ManagedSeedIntControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ctrl="clr-namespace:TRRandomizerView.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border x:Name="_content"
+            Style="{StaticResource RandoElementBorder}">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <CheckBox IsChecked="{Binding IsActive, Mode=TwoWay}"
+                      FontWeight="Bold"
+                      Grid.ColumnSpan="2"
+                      Margin="0,0,0,5">
+                <Label Padding="0"
+                       Content="{Binding Title}"/>
+            </CheckBox>
+
+            <TextBlock Text="{Binding Text}"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       TextWrapping="Wrap"
+                       Style="{StaticResource StatusAwareTextBlock}"/>
+
+            <Label Grid.Row="2"
+                   Padding="0"
+                   FontStyle="Italic"
+                   IsEnabled="{Binding IsActive}">
+                <Label.Content>
+                    <TextBlock>
+                        <Run Text="Default: "/><Run Text="{Binding CustomIntDefault}"/>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+
+            <StackPanel Grid.Row="3"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+                <Label IsEnabled="{Binding IsActive}"
+                       Content="{Binding CustomIntTitle}"
+                       VerticalAlignment="Center"
+                       Padding="0,0,5,0"/>
+                
+                <ctrl:NumericUpDown IsEnabled="{Binding IsActive}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"                            
+                                    Value="{Binding CustomInt, Mode=TwoWay}"
+                                    MinValue="{Binding CustomIntMinValue}"
+                                    MaxValue="{Binding CustomIntMaxValue}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Label IsEnabled="{Binding IsActive}"
+                       Content="Seed"
+                       VerticalAlignment="Center"
+                       Padding="0,0,5,0"/>
+                
+                <ctrl:SeedControl IsEnabled="{Binding IsActive}"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Center"
+                                  Value="{Binding SeedValue, Mode=TwoWay}"
+                                  MinValue="{Binding SeedMinValue}"
+                                  MaxValue="{Binding SeedMaxValue}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

@@ -20,7 +20,7 @@ namespace TRTexture16Importer.Textures
         {
             _dynamicSources = new Dictionary<string, DynamicTextureSource>();
             _staticSources = new Dictionary<string, StaticTextureSource>();
-            _entityMap = JsonConvert.DeserializeObject<Dictionary<TR2Entities, string[]>>(File.ReadAllText(@"Resources\Textures\Source\Static\entity_lookup.json"));
+            _entityMap = JsonConvert.DeserializeObject<Dictionary<TR2Entities, string[]>>(File.ReadAllText(@"Resources\TR2\Textures\Source\Static\entity_lookup.json"));
             GlobalGrouping = new GlobalGrouping(this);
         }
 
@@ -69,7 +69,7 @@ namespace TRTexture16Importer.Textures
 
         private DynamicTextureSource LoadDynamicSource(string name)
         {
-            string source = @"Resources\Textures\Source\Dynamic\" + name.Replace(".", @"\") + ".json";
+            string source = @"Resources\TR2\Textures\Source\Dynamic\" + name.Replace(".", @"\") + ".json";
             if (!File.Exists(source))
             {
                 throw new IOException(string.Format("Missing texture pack source JSON ({0})", source));
@@ -80,7 +80,7 @@ namespace TRTexture16Importer.Textures
 
         private StaticTextureSource LoadStaticSource(string name)
         {
-            string dir = Path.Combine(@"Resources\Textures\Source\Static", name.Replace(".", @"\"));
+            string dir = Path.Combine(@"Resources\TR2\Textures\Source\Static", name.Replace(".", @"\"));
             if (!Directory.Exists(dir))
             {
                 throw new IOException(string.Format("Missing texture pack source folder ({0})", name));

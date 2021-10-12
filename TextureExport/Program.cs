@@ -69,7 +69,7 @@ namespace TextureExport
             }
             else if (args[0] == "gold")
             {
-                foreach (string lvl in LevelNames.AsListGold)
+                foreach (string lvl in TR2LevelNames.AsListGold)
                 {
                     if (File.Exists(lvl))
                     {
@@ -81,7 +81,7 @@ namespace TextureExport
             }
             else
             {
-                foreach (string lvl in LevelNames.AsList)
+                foreach (string lvl in TR2LevelNames.AsList)
                 {
                     if (File.Exists(lvl))
                     {

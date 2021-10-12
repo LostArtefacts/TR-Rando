@@ -17,7 +17,7 @@ namespace TRTexture16Importer.Textures.Grouping
             Sources = new Dictionary<StaticTextureSource, List<StaticTextureTarget>>();
             Grouping = new List<TextureGrouping>();
 
-            Dictionary<string, object> globalData = JsonConvert.DeserializeObject<Dictionary<string, object>>(File.ReadAllText(@"Resources\Textures\Source\Static\global_grouping.json"));
+            Dictionary<string, object> globalData = JsonConvert.DeserializeObject<Dictionary<string, object>>(File.ReadAllText(@"Resources\TR2\Textures\Source\Static\global_grouping.json"));
 
             // These sources will be added to all levels automatically without having to explicitly map them. The targets
             // can be empty for such things as dynamic sprite sequence mapping, or filled with shared values in all levels

@@ -24,7 +24,7 @@ namespace TR2Randomizer.Randomizers
 
         public RandomizerBase()
         {
-            _levels = LevelNames.AsList;
+            _levels = TR2LevelNames.AsList;
 
             _reader = new TR2LevelReader();
             _writer = new TR2LevelWriter();
