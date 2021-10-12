@@ -27,7 +27,7 @@ namespace TRRandomizerCore.Randomizers
 
             LoadAudioData();
 
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 LoadLevelInstance(lvl);
 
@@ -66,7 +66,7 @@ namespace TRRandomizerCore.Randomizers
         {
             // Try to keep triggers that are beside each other and setup for the same
             // thing using the same track, otherwise the result is just a bit too random.
-            // This relies on tr2audio.json having PrimaryCategory properly defined for
+            // This relies on audio_tracks.json having PrimaryCategory properly defined for
             // each track.
             foreach (TR2Room room in level.Rooms)
             {
@@ -199,7 +199,7 @@ namespace TRRandomizerCore.Randomizers
 
         private void LoadAudioData()
         {
-            // Get the track data from tr2audio.json. Loaded from TRGE as it sets the ambient tracks initially.
+            // Get the track data from audio_tracks.json. Loaded from TRGE as it sets the ambient tracks initially.
             _tracks = ScriptEditor.AudioProvider.GetCategorisedTracks();
 
             // Decide which sound effect categories we want to randomize.

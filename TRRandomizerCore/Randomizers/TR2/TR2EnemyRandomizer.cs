@@ -41,7 +41,7 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeExistingEnemies()
         {
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 //Read the level into a combined data/script level object
                 LoadLevelInstance(lvl);
@@ -72,7 +72,7 @@ namespace TRRandomizerCore.Randomizers
             }
 
             List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(Levels.Count);
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 levels.Add(LoadCombinedLevel(lvl));
                 if (!TriggerProgress())

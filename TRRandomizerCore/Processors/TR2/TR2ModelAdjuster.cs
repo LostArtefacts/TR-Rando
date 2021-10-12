@@ -23,7 +23,7 @@ namespace TRRandomizerCore.Processors
 
         public void AdjustModels()
         {
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 LoadLevelInstance(lvl);
 

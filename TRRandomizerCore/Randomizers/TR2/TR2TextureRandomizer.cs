@@ -52,7 +52,7 @@ namespace TRRandomizerCore.Randomizers
             // texture category so potentially any other textures could also be targeted.
             _textureOptions = new Dictionary<TextureCategory, bool>();
 
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 LoadLevelInstance(lvl);
 
@@ -96,7 +96,7 @@ namespace TRRandomizerCore.Randomizers
             int levelSplit = (int)(Levels.Count / _maxThreads);
 
             bool beginProcessing = true;
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 if (processors[processors.Count - 1].LevelCount >= levelSplit)
                 {

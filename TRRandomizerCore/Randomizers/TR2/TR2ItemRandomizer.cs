@@ -36,7 +36,7 @@ namespace TRRandomizerCore.Randomizers
 
             Dictionary<string, List<Location>> locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\item_locations.json"));
 
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 //Read the level into a combined data/script level object
                 LoadLevelInstance(lvl);
@@ -61,7 +61,7 @@ namespace TRRandomizerCore.Randomizers
         // Called post enemy randomization if used to allow accurate enemy scoring
         public void RandomizeAmmo()
         {
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 //Read the level into a combined data/script level object
                 LoadLevelInstance(lvl);

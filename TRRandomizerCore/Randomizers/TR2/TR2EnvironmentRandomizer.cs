@@ -17,7 +17,7 @@ namespace TRRandomizerCore.Randomizers
         internal TexturePositionMonitorBroker TextureMonitor { get; set; }
 
         private List<EMType> _disallowedTypes;
-        private List<TR23ScriptedLevel> _levelsToMirror;
+        private List<TR2ScriptedLevel> _levelsToMirror;
 
         public override void Randomize(int seed)
         {
@@ -39,12 +39,12 @@ namespace TRRandomizerCore.Randomizers
                 _disallowedTypes.Add(EMType.Ladder);
             }
 
-            _levelsToMirror = Levels.RandomSelection(_generator, (int)Settings.MirroredLevelCount, exclusions:new HashSet<TR23ScriptedLevel>
+            _levelsToMirror = Levels.RandomSelection(_generator, (int)Settings.MirroredLevelCount, exclusions:new HashSet<TR2ScriptedLevel>
             {
                 Levels.Find(l => l.Is(TR2LevelNames.ASSAULT))
             });
 
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 LoadLevelInstance(lvl);
 

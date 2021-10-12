@@ -225,7 +225,7 @@ namespace TRRandomizerCore.Randomizers
 
             Dictionary<string, List<Location>> Locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\locations.json"));
 
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 //Read the level into a level object
                 LoadLevelInstance(lvl);

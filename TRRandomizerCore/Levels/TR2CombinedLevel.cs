@@ -18,7 +18,7 @@ namespace TRRandomizerCore.Levels
         /// <summary>
         /// The scripting information for the level stored in TOMBPC.dat.
         /// </summary>
-        public TR23ScriptedLevel Script { get; set; }
+        public TR2ScriptedLevel Script { get; set; }
 
         /// <summary>
         /// The uppercase base file name of the level e.g. KEEL.TR2

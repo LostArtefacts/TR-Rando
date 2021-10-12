@@ -23,8 +23,8 @@ namespace TRRandomizerCore.Randomizers
 
         private TR2CombinedLevel _firstDragonLevel;
 
-        private List<TR23ScriptedLevel> _haircutLevels;
-        private List<TR23ScriptedLevel> _invisibleLevels;
+        private List<TR2ScriptedLevel> _haircutLevels;
+        private List<TR2ScriptedLevel> _invisibleLevels;
 
         public override void Randomize(int seed)
         {
@@ -40,7 +40,7 @@ namespace TRRandomizerCore.Randomizers
             }
 
             List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(Levels.Count);
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 levels.Add(LoadCombinedLevel(lvl));
                 if (!TriggerProgress())
@@ -104,8 +104,8 @@ namespace TRRandomizerCore.Randomizers
 
         private void ChooseFilteredLevels()
         {
-            TR23ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR2LevelNames.ASSAULT));
-            ISet<TR23ScriptedLevel> exlusions = new HashSet<TR23ScriptedLevel> { assaultCourse };
+            TR2ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR2LevelNames.ASSAULT));
+            ISet<TR2ScriptedLevel> exlusions = new HashSet<TR2ScriptedLevel> { assaultCourse };
 
             _haircutLevels = Levels.RandomSelection(_generator, (int)Settings.HaircutLevelCount, exclusions: exlusions);
             if (Settings.AssaultCourseHaircut)
@@ -120,12 +120,12 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
-        private bool IsHaircutLevel(TR23ScriptedLevel lvl)
+        private bool IsHaircutLevel(TR2ScriptedLevel lvl)
         {
             return _haircutLevels.Contains(lvl);
         }
 
-        private bool IsInvisibleLevel(TR23ScriptedLevel lvl)
+        private bool IsInvisibleLevel(TR2ScriptedLevel lvl)
         {
             return _invisibleLevels.Contains(lvl);
         }

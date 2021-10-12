@@ -14,7 +14,7 @@ namespace TRRandomizerCore.Processors
             int levelSplit = (int)(Levels.Count / _maxThreads);
 
             bool beginProcessing = true;
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 if (processors[processors.Count - 1].LevelCount == levelSplit)
                 {

@@ -6,7 +6,7 @@ using TRLevelReader.Model;
 
 namespace TRRandomizerCore.Processors
 {
-    public class TR3LevelProcessor : AbstractLevelProcessor<TR23ScriptedLevel, TR3CombinedLevel>
+    public class TR3LevelProcessor : AbstractLevelProcessor<TR3ScriptedLevel, TR3CombinedLevel>
     {
         protected TR3LevelReader _reader;
         protected TR3LevelWriter _writer;
@@ -17,7 +17,7 @@ namespace TRRandomizerCore.Processors
             _writer = new TR3LevelWriter();
         }
 
-        protected override TR3CombinedLevel LoadCombinedLevel(TR23ScriptedLevel scriptedLevel)
+        protected override TR3CombinedLevel LoadCombinedLevel(TR3ScriptedLevel scriptedLevel)
         {
             TR3CombinedLevel level = new TR3CombinedLevel
             {
@@ -27,7 +27,7 @@ namespace TRRandomizerCore.Processors
 
             if (scriptedLevel.HasCutScene)
             {
-                level.CutSceneLevel = LoadCombinedLevel(scriptedLevel.CutSceneLevel as TR23ScriptedLevel);
+                level.CutSceneLevel = LoadCombinedLevel(scriptedLevel.CutSceneLevel as TR3ScriptedLevel);
                 level.CutSceneLevel.ParentLevel = level;
             }
 

@@ -30,14 +30,14 @@ namespace TRRandomizerCore.Editors
 
         protected override void SaveImpl(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
         {
-            List<TR23ScriptedLevel> levels = new List<TR23ScriptedLevel>
+            List<TR3ScriptedLevel> levels = new List<TR3ScriptedLevel>
             (
-                scriptEditor.EnabledScriptedLevels.Cast<TR23ScriptedLevel>().ToList()
+                scriptEditor.EnabledScriptedLevels.Cast<TR3ScriptedLevel>().ToList()
             );
 
             if (scriptEditor.GymAvailable)
             {
-                levels.Add(scriptEditor.AssaultLevel as TR23ScriptedLevel);
+                levels.Add(scriptEditor.AssaultLevel as TR3ScriptedLevel);
             }
 
             // Each processor will have a reference to the script editor, so can

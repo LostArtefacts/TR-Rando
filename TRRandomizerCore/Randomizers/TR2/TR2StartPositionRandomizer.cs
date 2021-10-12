@@ -20,7 +20,7 @@ namespace TRRandomizerCore.Randomizers
             _generator = new Random(seed);
             _startLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\start_positions.json"));
 
-            foreach (TR23ScriptedLevel lvl in Levels)
+            foreach (TR2ScriptedLevel lvl in Levels)
             {
                 LoadLevelInstance(lvl);
 
