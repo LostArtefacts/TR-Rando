@@ -2,6 +2,7 @@
 using System.Linq;
 using TRGE.Coord;
 using TRGE.Core;
+using TRRandomizerCore.Randomizers;
 
 namespace TRRandomizerCore.Editors
 {
@@ -25,7 +26,16 @@ namespace TRRandomizerCore.Editors
 
         protected override int GetSaveTarget(int numLevels)
         {
-            return base.GetSaveTarget(numLevels);// + Settings.GetSaveTarget(numLevels);
+            // Add to the target as appropriate when each randomizer is implemented. Once all
+            // randomizers are implemented, just call Settings.GetSaveTarget(numLevels) per TR2.
+            int target = base.GetSaveTarget(numLevels);
+
+            if (Settings.RandomizeAudio)
+            {
+                target += numLevels;
+            }
+
+            return target;
         }
 
         protected override void SaveImpl(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
@@ -43,7 +53,7 @@ namespace TRRandomizerCore.Editors
             // Each processor will have a reference to the script editor, so can
             // make on-the-fly changes as required.
             TR23ScriptEditor tr23ScriptEditor = scriptEditor as TR23ScriptEditor;
-            // string wipDirectory = _io.WIPOutputDirectory.FullName;
+            string wipDirectory = _io.WIPOutputDirectory.FullName;
 
             if (Settings.DevelopmentMode)
             {
@@ -51,7 +61,18 @@ namespace TRRandomizerCore.Editors
                 scriptEditor.SaveScript();
             }
 
-            // TODO: Randomize...
+            if (!monitor.IsCancelled && Settings.RandomizeAudio)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
+                new TR3AudioRandomizer
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.AudioSeed);
+            }
         }
     }
 }

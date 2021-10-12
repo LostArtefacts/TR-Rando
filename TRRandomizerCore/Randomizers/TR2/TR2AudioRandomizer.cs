@@ -16,7 +16,7 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR2AudioRandomizer : BaseTR2Randomizer
     {
-        private IReadOnlyDictionary<TRAudioCategory, List<TRAudioTrack>> _tracks;
+        private AudioRandomizer _audioRandomizer;
 
         private List<TRSFXDefinition> _soundEffects;
         private List<TRSFXGeneralCategory> _sfxCategories;
@@ -64,59 +64,16 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeFloorTracks(TR2Level level, FDControl floorData)
         {
-            // Try to keep triggers that are beside each other and setup for the same
-            // thing using the same track, otherwise the result is just a bit too random.
-            // This relies on audio_tracks.json having PrimaryCategory properly defined for
-            // each track.
             foreach (TR2Room room in level.Rooms)
             {
-                Dictionary<TRAudioCategory, TRAudioTrack> roomTracks = new Dictionary<TRAudioCategory, TRAudioTrack>();
-
-                List<FDActionListItem> triggerItems = new List<FDActionListItem>();
-                foreach (TRRoomSector sector in room.SectorList)
-                {
-                    if (sector.FDIndex > 0)
-                    {
-                        triggerItems.AddRange(FDUtilities.GetActionListItems(floorData, FDTrigAction.PlaySoundtrack, sector.FDIndex));
-                    }
-                }
-
-                // Generate a random track for the first in each category for this room, then others
-                // in the same category will follow suit.
-                foreach (FDActionListItem item in triggerItems)
-                {
-                    TRAudioCategory category = FindTrackCategory(item.Parameter);
-                    if (!roomTracks.ContainsKey(category))
-                    {
-                        List<TRAudioTrack> tracks = _tracks[category];
-                        roomTracks[category] = tracks[_generator.Next(0, tracks.Count)];
-                    }
-
-                    item.Parameter = roomTracks[category].ID;
-                }
+                _audioRandomizer.RandomizeFloorTracks(room.SectorList, floorData, _generator);
             }
-        }
-
-        private TRAudioCategory FindTrackCategory(ushort trackID)
-        {
-            foreach (TRAudioCategory category in _tracks.Keys)
-            {
-                foreach (TRAudioTrack track in _tracks[category])
-                {
-                    if (track.ID == trackID)
-                    {
-                        return track.PrimaryCategory;
-                    }
-                }
-            }
-
-            return TRAudioCategory.General;
         }
 
         private void RandomizeSecretTracks(TR2Level level, FDControl floorData)
         {
             // Generate new triggers for secrets to allow different sounds for each one
-            List<TRAudioTrack> secretTracks = _tracks[TRAudioCategory.Secret];
+            List<TRAudioTrack> secretTracks = _audioRandomizer.GetTracks(TRAudioCategory.Secret);
             Dictionary<int, TR2Entity> secrets = GetSecretItems(level);
             foreach (int entityIndex in secrets.Keys)
             {
@@ -200,7 +157,7 @@ namespace TRRandomizerCore.Randomizers
         private void LoadAudioData()
         {
             // Get the track data from audio_tracks.json. Loaded from TRGE as it sets the ambient tracks initially.
-            _tracks = ScriptEditor.AudioProvider.GetCategorisedTracks();
+            _audioRandomizer = new AudioRandomizer(ScriptEditor.AudioProvider.GetCategorisedTracks());
 
             // Decide which sound effect categories we want to randomize.
             _sfxCategories = new List<TRSFXGeneralCategory>();

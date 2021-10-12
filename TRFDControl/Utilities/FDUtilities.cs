@@ -9,6 +9,16 @@ namespace TRFDControl.Utilities
     {
         public static List<FDTriggerEntry> GetEntityTriggers(FDControl control, int entityIndex)
         {
+            return GetTriggers(control, FDTrigAction.Object, entityIndex);
+        }
+
+        public static List<FDTriggerEntry> GetSecretTriggers(FDControl control, int secretIndex)
+        {
+            return GetTriggers(control, FDTrigAction.SecretFound, secretIndex);
+        }
+
+        public static List<FDTriggerEntry> GetTriggers(FDControl control, FDTrigAction action, int parameter = -1)
+        {
             List<FDTriggerEntry> entries = new List<FDTriggerEntry>();
 
             foreach (List<FDEntry> entryList in control.Entries.Values)
@@ -20,7 +30,7 @@ namespace TRFDControl.Utilities
                         int itemIndex = triggerEntry.TrigActionList.FindIndex
                         (
                             i =>
-                                i.TrigAction == FDTrigAction.Object && i.Parameter == entityIndex
+                                i.TrigAction == action && (parameter == -1 || i.Parameter == parameter)
                         );
                         if (itemIndex != -1)
                         {
