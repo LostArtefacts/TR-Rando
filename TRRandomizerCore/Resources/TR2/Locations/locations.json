@@ -5195,290 +5195,273 @@
 	],
 	"ICECAVE.TR2": [
 		{
-			"X": 7067,
-			"Z": 1945,
-			"Y": 0,
+			"X": 55195,
+			"Z": 27545,
+			"Y": 9472,
 			"Room": 103
 		},
 		{
-			"X": 12389,
-			"Z": 9317,
-			"Y": 2048,
+			"X": 60517,
+			"Z": 45157,
+			"Y": 11520,
 			"Room": 138
 		},
 		{
-			"X": 1553,
-			"Z": 1125,
-			"Y": 0,
+			"X": 49681,
+			"Z": 36965,
+			"Y": 18688,
 			"Room": 141
 		},
 		{
-			"X": 1656,
-			"Z": 12389,
-			"Y": 0,
+			"X": 49784,
+			"Z": 48229,
+			"Y": 18688,
 			"Room": 141
 		},
 		{
-			"X": 14230,
-			"Z": 1557,
-			"Y": 0,
+			"X": 63382,
+			"Z": 48661,
+			"Y": 18688,
 			"Room": 142
 		},
 		{
-			"X": 5628,
-			"Z": 1392,
-			"Y": 0,
+			"X": 59900,
+			"Z": 24944,
+			"Y": 14848,
 			"Room": 102
 		},
 		{
-			"X": 2887,
-			"Z": 2149,
-			"Y": 768,
+			"X": 59207,
+			"Z": 27749,
+			"Y": 1280,
 			"Room": 80
 		},
 		{
-			"X": 1444,
-			"Z": 1369,
-			"Y": 0,
+			"X": 55716,
+			"Z": 24921,
+			"Y": 14848,
 			"Room": 102
 		},
 		{
-			"X": 19328,
-			"Z": 6014,
-			"Y": 449,
+			"X": 50048,
+			"Z": 21374,
+			"Y": 6463,
 			"Room": 73
 		},
 		{
-			"X": 1125,
-			"Z": 6429,
-			"Y": 4864,
+			"X": 31845,
+			"Z": 21789,
+			"Y": 2048,
 			"Room": 73
 		},
 		{
-			"X": 1125,
-			"Z": 1172,
-			"Y": 4864,
+			"X": 31845,
+			"Z": 16532,
+			"Y": 2048,
 			"Room": 73
 		},
 		{
-			"X": 2230,
-			"Z": 5019,
-			"Y": 0,
+			"X": 37046,
+			"Z": 26523,
+			"Y": 4096,
 			"Room": 74
 		},
 		{
-			"X": 2971,
-			"Z": 1125,
-			"Y": 923,
+			"X": 33691,
+			"Z": 27749,
+			"Y": 6757,
 			"Room": 8
 		},
 		{
-			"X": 5019,
-			"Z": 4999,
-			"Y": 2073,
+			"X": 39835,
+			"Z": 30599,
+			"Y": 5863,
 			"Room": 61
 		},
 		{
-			"X": 6245,
-			"Z": 5019,
-			"Y": 998,
+			"X": 41061,
+			"Z": 30619,
+			"Y": 6938,
 			"Room": 61
 		},
 		{
-			"X": 6043,
-			"Z": 5019,
-			"Y": 0,
+			"X": 38811,
+			"Z": 58267,
+			"Y": 8192,
 			"Room": 132
 		},
 		{
-			"X": 7067,
-			"Z": 3100,
-			"Y": 477,
+			"X": 33691,
+			"Z": 45084,
+			"Y": 7715,
 			"Room": 60
 		},
 		{
-			"X": 7454,
-			"Z": 1125,
-			"Y": 256,
+			"X": 54558,
+			"Z": 63589,
+			"Y": 5632,
 			"Room": 36
 		},
 		{
-			"X": 3557,
-			"Z": 1096,
-			"Y": 1024,
+			"X": 56805,
+			"Z": 49224,
+			"Y": 5632,
 			"Room": 34
 		},
 		{
-			"X": 4629,
-			"Z": 2120,
-			"Y": 0,
+			"X": 56853,
+			"Z": 50248,
+			"Y": 3328,
 			"Room": 90
 		},
 		{
-			"X": 2971,
-			"Z": 1125,
-			"Y": 50,
+			"X": 60315,
+			"Z": 51301,
+			"Y": 1486,
 			"Room": 100
 		},
 		{
-			"X": 8091,
-			"Z": 4743,
-			"Y": 1024,
+			"X": 80795,
+			"Z": 66183,
+			"Y": -1024,
 			"Room": 5
 		},
 		{
-			"X": 7067,
-			"Z": 10139,
-			"Y": 1024,
+			"X": 79771,
+			"Z": 71579,
+			"Y": -1024,
 			"Room": 5
 		},
 		{
-			"X": 4197,
-			"Z": 5019,
-			"Y": 0,
+			"X": 79973,
+			"Z": 71579,
+			"Y": 3328,
 			"Room": 95
 		},
 		{
-			"X": 1125,
-			"Z": 1125,
-			"Y": 0,
+			"X": 65637,
+			"Z": 80997,
+			"Y": 10496,
 			"Room": 107
 		},
 		{
-			"X": 6043,
-			"Z": 1125,
-			"Y": 0,
+			"X": 70555,
+			"Z": 80997,
+			"Y": 10496,
 			"Room": 107
 		},
 		{
-			"X": 1486,
-			"Z": 1509,
-			"Y": 0,
+			"X": 60878,
+			"Z": 64997,
+			"Y": 3840,
 			"Room": 147
 		},
 		{
 			"X": 45022,
 			"Z": 29201,
 			"Y": 12544,
-			"Room": 7,
-			"IsInRoomSpace": false
+			"Room": 7
 		},
 		{
 			"X": 42974,
 			"Z": 49194,
 			"Y": 8192,
-			"Room": 15,
-			"IsInRoomSpace": false
+			"Room": 15
 		},
 		{
 			"X": 31694,
 			"Z": 30682,
 			"Y": 7196,
-			"Room": 56,
-			"IsInRoomSpace": false
+			"Room": 56
 		},
 		{
 			"X": 51244,
 			"Z": 49191,
 			"Y": 2835,
-			"Room": 31,
-			"IsInRoomSpace": false
+			"Room": 31
 		},
 		{
 			"X": 52184,
 			"Z": 59355,
 			"Y": 3347,
-			"Room": 66,
-			"IsInRoomSpace": false
+			"Room": 66
 		},
 		{
 			"X": 33829,
 			"Z": 55329,
 			"Y": 8192,
-			"Room": 132,
-			"IsInRoomSpace": false
+			"Room": 132
 		},
 		{
 			"X": 51228,
 			"Z": 20502,
 			"Y": 5905,
-			"Room": 85,
-			"IsInRoomSpace": false
+			"Room": 85
 		},
 		{
 			"X": 75731,
 			"Z": 67547,
 			"Y": 3328,
-			"Room": 150,
-			"IsInRoomSpace": false
+			"Room": 150
 		},
 		{
 			"X": 77847,
 			"Z": 70933,
 			"Y": 5493,
-			"Room": 94,
-			"IsInRoomSpace": false
+			"Room": 94
 		},
 		{
 			"X": 62436,
 			"Z": 66582,
 			"Y": -242,
-			"Room": 99,
-			"IsInRoomSpace": false
+			"Room": 99
 		},
 		{
 			"X": 59363,
 			"Z": 67559,
 			"Y": 1536,
-			"Room": 135,
-			"IsInRoomSpace": false
+			"Room": 135
 		},
 		{
 			"X": 42989,
 			"Z": 59414,
 			"Y": 7950,
-			"Room": 64,
-			"IsInRoomSpace": false
+			"Room": 64
 		},
 		{
 			"X": 40937,
 			"Z": 49182,
 			"Y": 3860,
-			"Room": 63,
-			"IsInRoomSpace": false
+			"Room": 63
 		},
 		{
 			"X": 29620,
 			"Z": 49991,
 			"Y": 10950,
-			"Room": 29,
-			"IsInRoomSpace": false
+			"Room": 29
 		},
 		{
 			"X": 32661,
 			"Z": 43989,
 			"Y": 10240,
-			"Room": 29,
-			"IsInRoomSpace": false
+			"Room": 29
 		},
 		{
 			"X": 32821,
 			"Z": 40851,
 			"Y": 10000,
-			"Room": 24,
-			"IsInRoomSpace": false
+			"Room": 24
 		},
 		{
 			"X": 36208,
 			"Z": 18032,
 			"Y": 3962,
-			"Room": 73,
-			"IsInRoomSpace": false
+			"Room": 73
 		},
 		{
-			"X": 6043,
-			"Z": 2149,
-			"Y": 2048,
+			"X": 70555,
+			"Z": 79973,
+			"Y": 4608,
 			"Room": 106,
 			"RequiresGlitch": true
 		},
@@ -5487,72 +5470,63 @@
 			"Z": 63516,
 			"Y": 1294,
 			"Room": 68,
-			"RequiresGlitch": true,
-			"IsInRoomSpace": false
+			"RequiresGlitch": true
 		},
 		{
 			"X": 55325,
 			"Z": 68636,
 			"Y": 1792,
 			"Room": 39,
-			"RequiresGlitch": true,
-			"IsInRoomSpace": false
+			"RequiresGlitch": true
 		},
 		{
 			"X": 55264,
 			"Z": 68639,
 			"Y": 4864,
 			"Room": 33,
-			"RequiresGlitch": true,
-			"IsInRoomSpace": false
+			"RequiresGlitch": true
 		},
 		{
 			"X": 22494,
 			"Z": 48652,
 			"Y": 3328,
 			"Room": 17,
-			"RequiresGlitch": true,
-			"IsInRoomSpace": false
+			"RequiresGlitch": true
 		},
 		{
 			"X": 27177,
 			"Z": 55805,
 			"Y": -236,
 			"Room": 116,
-			"RequiresGlitch": true,
-			"IsInRoomSpace": false
+			"RequiresGlitch": true
 		},
 		{
 			"X": 29655,
 			"Z": 64549,
 			"Y": -1024,
 			"Room": 118,
-			"RequiresGlitch": true,
-			"IsInRoomSpace": false
+			"RequiresGlitch": true
 		},
 		{
 			"X": 29273,
 			"Z": 71039,
 			"Y": 3584,
 			"Room": 119,
-			"RequiresGlitch": true,
-			"IsInRoomSpace": false
+			"RequiresGlitch": true
 		},
 		{
 			"X": 57268,
 			"Z": 22528,
 			"Y": 23284,
 			"Room": 88,
-			"RequiresGlitch": true,
-			"IsInRoomSpace": false
+			"RequiresGlitch": true
 		},
 		{
 			"X": 50141,
 			"Z": 31218,
 			"Y": 9438,
 			"Room": 103,
-			"RequiresGlitch": true,
-			"IsInRoomSpace": false
+			"RequiresGlitch": true
 		}
 	],
 	"EMPRTOMB.TR2": [
