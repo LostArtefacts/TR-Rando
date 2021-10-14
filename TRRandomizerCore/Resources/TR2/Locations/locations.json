@@ -4604,250 +4604,239 @@
 	],
 	"MONASTRY.TR2": [
 		{
-			"X": 2971,
-			"Z": 6713,
-			"Y": 1255,
+			"X": 72603,
+			"Z": 53817,
+			"Y": -5863,
 			"Room": 77
 		},
 		{
-			"X": 10139,
-			"Z": 5013,
-			"Y": 462,
+			"X": 69531,
+			"Z": 57237,
+			"Y": -5070,
 			"Room": 76
 		},
 		{
-			"X": 9732,
-			"Z": 4213,
-			"Y": 256,
+			"X": 79364,
+			"Z": 63605,
+			"Y": -4608,
 			"Room": 55
 		},
 		{
-			"X": 4197,
-			"Z": 8091,
-			"Y": 1050,
+			"X": 48229,
+			"Z": 24475,
+			"Y": -26,
 			"Room": 99
 		},
 		{
-			"X": 12187,
-			"Z": 3995,
-			"Y": 0,
+			"X": 47003,
+			"Z": 39835,
+			"Y": 3072,
 			"Room": 56
 		},
 		{
-			"X": 8776,
-			"Z": 3821,
+			"X": 36424,
+			"Z": 52973,
 			"Y": 0,
 			"Room": 39
 		},
 		{
-			"X": 2735,
-			"Z": 3995,
+			"X": 35503,
+			"Z": 50075,
 			"Y": 0,
 			"Room": 160
 		},
 		{
-			"X": 2409,
-			"Z": 8091,
+			"X": 51561,
+			"Z": 42907,
 			"Y": 0,
 			"Room": 61
 		},
 		{
-			"X": 1124,
-			"Z": 1596,
-			"Y": 0,
+			"X": 52324,
+			"Z": 52796,
+			"Y": 3840,
 			"Room": 83
 		},
 		{
-			"X": 6245,
-			"Z": 14789,
-			"Y": 0,
+			"X": 50277,
+			"Z": 31173,
+			"Y": 2048,
 			"Room": 155
 		},
 		{
-			"X": 8091,
-			"Z": 11159,
-			"Y": 1075,
+			"X": 34715,
+			"Z": 16279,
+			"Y": -4659,
 			"Room": 110
 		},
 		{
-			"X": 2941,
-			"Z": 2148,
-			"Y": 224,
+			"X": 25469,
+			"Z": 21604,
+			"Y": 32,
 			"Room": 82
 		},
 		{
-			"X": 5019,
-			"Z": 4197,
-			"Y": 0,
+			"X": 15259,
+			"Z": 11365,
+			"Y": -9984,
 			"Room": 148
 		},
 		{
-			"X": 5580,
-			"Z": 5980,
-			"Y": 0,
-			"Room": 43
-		},
-		{
-			"X": 3995,
-			"Z": 1127,
-			"Y": 0,
-			"Room": 43
-		},
-		{
-			"X": 7067,
-			"Z": 1628,
+			"X": 33228,
+			"Z": 22364,
 			"Y": 768,
+			"Room": 43
+		},
+		{
+			"X": 31643,
+			"Z": 17511,
+			"Y": 768,
+			"Room": 43
+		},
+		{
+			"X": 98203,
+			"Z": 16988,
+			"Y": 3328,
 			"Room": 128
 		},
 		{
-			"X": 1947,
-			"Z": 3957,
-			"Y": 759,
+			"X": 83867,
+			"Z": 14197,
+			"Y": 4361,
 			"Room": 25
 		},
 		{
-			"X": 9115,
-			"Z": 3937,
-			"Y": 1103,
+			"X": 91035,
+			"Z": 14177,
+			"Y": 4017,
 			"Room": 25
 		},
 		{
-			"X": 1125,
-			"Z": 10341,
-			"Y": 256,
+			"X": 83045,
+			"Z": 20581,
+			"Y": -256,
 			"Room": 23
 		},
 		{
-			"X": 5154,
-			"Z": 6043,
+			"X": 78882,
+			"Z": 18331,
 			"Y": 0,
 			"Room": 15
 		},
 		{
-			"X": 2014,
-			"Z": 1125,
+			"X": 75742,
+			"Z": 13413,
 			"Y": 0,
 			"Room": 15
 		},
 		{
-			"X": 1125,
-			"Z": 4070,
+			"X": 60517,
+			"Z": 39910,
 			"Y": 0,
 			"Room": 65
 		},
 		{
-			"X": 3995,
-			"Z": 5843,
+			"X": 64411,
+			"Z": 48851,
 			"Y": 0,
 			"Room": 66
 		},
 		{
-			"X": 1125,
-			"Z": 1947,
+			"X": 60517,
+			"Z": 55195,
 			"Y": 0,
 			"Room": 69
 		},
 		{
-			"X": 8234,
-			"Z": 1125,
+			"X": 80938,
+			"Z": 27749,
 			"Y": 0,
 			"Room": 10
 		},
 		{
-			"X": 1125,
-			"Z": 5839,
+			"X": 73829,
+			"Z": 32463,
 			"Y": 0,
 			"Room": 10
 		},
 		{
-			"X": 2149,
-			"Z": 3598,
-			"Y": 512,
+			"X": 73829,
+			"Z": 41486,
+			"Y": -5120,
 			"Room": 21
 		},
 		{
-			"X": 2971,
-			"Z": 6713,
-			"Y": 1255,
+			"X": 72603,
+			"Z": 53817,
+			"Y": -5863,
 			"Room": 77
 		},
 		{
 			"X": 79837,
 			"Z": 8595,
 			"Y": 2924,
-			"Room": 27,
-			"IsInRoomSpace": false
+			"Room": 27
 		},
 		{
 			"X": 32701,
 			"Z": 42052,
 			"Y": 0,
-			"Room": 53,
-			"IsInRoomSpace": false
+			"Room": 53
 		},
 		{
 			"X": 60500,
 			"Z": 40954,
 			"Y": 0,
-			"Room": 65,
-			"IsInRoomSpace": false
+			"Room": 65
 		},
 		{
 			"X": 61399,
 			"Z": 61403,
 			"Y": 0,
-			"Room": 70,
-			"IsInRoomSpace": false
+			"Room": 70
 		},
 		{
 			"X": 92184,
 			"Z": 19470,
 			"Y": 4130,
-			"Room": 24,
-			"IsInRoomSpace": false
+			"Room": 24
 		},
 		{
 			"X": 81905,
 			"Z": 15116,
 			"Y": 0,
-			"Room": 15,
-			"IsInRoomSpace": false
+			"Room": 15
 		},
 		{
 			"X": 52741,
 			"Z": 50176,
 			"Y": -1030,
-			"Room": 60,
-			"IsInRoomSpace": false
+			"Room": 60
 		},
 		{
 			"X": 37835,
 			"Z": 54265,
 			"Y": -763,
 			"Room": 39,
-			"IsInRoomSpace": false,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 48098,
 			"Z": 31721,
 			"Y": 2048,
-			"Room": 155,
-			"IsInRoomSpace": false
+			"Room": 155
 		},
 		{
 			"X": 68632,
 			"Z": 53281,
 			"Y": -4620,
-			"Room": 76,
-			"IsInRoomSpace": false
+			"Room": 76
 		},
 		{
 			"X": 73217,
 			"Z": 67612,
 			"Y": -4608,
-			"Room": 55,
-			"IsInRoomSpace": false
+			"Room": 55
 		},
 		{
 			"X": 97765,
@@ -4855,7 +4844,6 @@
 			"Y": 1024,
 			"Room": 81,
 			"RequiresGlitch": true,
-			"IsInRoomSpace": false,
 			"Difficulty": "Hard"
 		},
 		{
@@ -4864,7 +4852,6 @@
 			"Y": -256,
 			"Room": 17,
 			"RequiresGlitch": true,
-			"IsInRoomSpace": false,
 			"Difficulty": "Hard"
 		},
 		{
@@ -4873,7 +4860,6 @@
 			"Y": -977,
 			"Room": 17,
 			"RequiresGlitch": true,
-			"IsInRoomSpace": false,
 			"Difficulty": "Hard"
 		},
 		{
@@ -4882,7 +4868,6 @@
 			"Y": -1498,
 			"Room": 17,
 			"RequiresGlitch": true,
-			"IsInRoomSpace": false,
 			"Difficulty": "Hard"
 		},
 		{
@@ -4891,7 +4876,6 @@
 			"Y": 512,
 			"Room": 25,
 			"RequiresGlitch": true,
-			"IsInRoomSpace": false,
 			"Difficulty": "Hard"
 		},
 		{
@@ -4899,16 +4883,14 @@
 			"Z": 22496,
 			"Y": -8694,
 			"Room": 97,
-			"RequiresGlitch": true,
-			"IsInRoomSpace": false
+			"RequiresGlitch": true
 		},
 		{
 			"X": 34816,
 			"Z": 36836,
 			"Y": -1024,
 			"Room": 53,
-			"RequiresGlitch": true,
-			"IsInRoomSpace": false
+			"RequiresGlitch": true
 		},
 		{
 			"X": 68102,
@@ -4916,7 +4898,6 @@
 			"Y": 0,
 			"Room": 69,
 			"RequiresGlitch": true,
-			"IsInRoomSpace": false,
 			"Difficulty": "Hard"
 		},
 		{
@@ -4925,7 +4906,6 @@
 			"Y": -5131,
 			"Room": 76,
 			"RequiresGlitch": true,
-			"IsInRoomSpace": false,
 			"Difficulty": "Hard"
 		},
 		{
@@ -4934,7 +4914,6 @@
 			"Y": 768,
 			"Room": 113,
 			"RequiresGlitch": true,
-			"IsInRoomSpace": false,
 			"Difficulty": "Hard"
 		},
 		{
@@ -4943,7 +4922,6 @@
 			"Y": -4608,
 			"Room": 84,
 			"RequiresGlitch": true,
-			"IsInRoomSpace": false,
 			"Difficulty": "Hard"
 		}
 	],
