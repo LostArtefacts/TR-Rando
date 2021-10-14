@@ -468,603 +468,603 @@
 	"BOAT.TR2": [
 		{
 			"X": 49875,
-			"Y": 794,
 			"Z": 37355,
+			"Y": 794,
 			"Room": 11
 		},
 		{
 			"X": 54373,
-			"Y": -3840,
 			"Z": 37989,
+			"Y": -3840,
 			"Room": 28
 		},
 		{
 			"X": 54373,
-			"Y": -3840,
 			"Z": 41110,
+			"Y": -3840,
 			"Room": 36
 		},
 		{
 			"X": 49975,
-			"Y": 1074,
 			"Z": 17308,
+			"Y": 1074,
 			"Room": 42
 		},
 		{
 			"X": 41883,
-			"Y": 2948,
 			"Z": 34089,
+			"Y": 2948,
 			"Room": 55
 		},
 		{
 			"X": 24077,
-			"Y": -2297,
 			"Z": 46466,
+			"Y": -2297,
 			"Room": 84
 		},
 		{
 			"X": 33381,
-			"Y": -768,
 			"Z": 58799,
+			"Y": -768,
 			"Room": 110
 		},
 		{
 			"X": 20627,
-			"Y": -1792,
 			"Z": 52324,
+			"Y": -1792,
 			"Room": 96
 		},
 		{
 			"X": 54171,
-			"Y": 1255,
 			"Z": 59291,
+			"Y": 1255,
 			"Room": 137
 		},
 		{
 			"X": 56421,
-			"Y": 1049,
 			"Z": 63287,
+			"Y": 1049,
 			"Room": 101
 		},
 		{
 			"X": 62565,
-			"Y": 818,
 			"Z": 63387,
+			"Y": 818,
 			"Room": 72
 		},
 		{
 			"X": 60315,
-			"Y": 512,
 			"Z": 64613,
+			"Y": 512,
 			"Room": 147
 		},
 		{
 			"X": 72603,
-			"Y": 1792,
 			"Z": 60517,
+			"Y": 1792,
 			"Room": 100
 		},
 		{
 			"X": 73829,
-			"Y": 845,
 			"Z": 51401,
+			"Y": 845,
 			"Room": 136
 		},
 		{
 			"X": 63977,
-			"Y": 768,
 			"Z": 50075,
+			"Y": 768,
 			"Room": 148
 		},
 		{
 			"X": 34715,
-			"Y": 998,
 			"Z": 59493,
+			"Y": 998,
 			"Room": 102
 		},
 		{
 			"X": 31643,
-			"Y": 1049,
 			"Z": 59593,
+			"Y": 1049,
 			"Room": 102
 		},
 		{
 			"X": 20998,
-			"Y": -2048,
 			"Z": 59916,
+			"Y": -2048,
 			"Room": 151
 		},
 		{
 			"X": 26523,
-			"Y": 0,
 			"Z": 50277,
+			"Y": 0,
 			"Room": 74
 		},
 		{
 			"X": 25601,
-			"Y": 818,
 			"Z": 77925,
+			"Y": 818,
 			"Room": 154
 		},
 		{
 			"X": 33764,
-			"Y": 787,
 			"Z": 37989,
+			"Y": 787,
 			"Room": 65
 		},
 		{
 			"X": 31643,
-			"Y": 1562,
 			"Z": 43209,
+			"Y": 1562,
 			"Room": 97
 		},
 		{
 			"X": 35640,
-			"Y": -1792,
 			"Z": 51662,
+			"Y": -1792,
 			"Room": 77
 		},
 		{
 			"X": 30259,
-			"Y": -1792,
 			"Z": 50396,
+			"Y": -1792,
 			"Room": 77
 		},
 		{
 			"X": 41703,
-			"Y": 2917,
 			"Z": 24677,
+			"Y": 2917,
 			"Room": 54
 		},
 		{
 			"X": 29797,
-			"Y": -4957,
 			"Z": 50083,
+			"Y": -4957,
 			"Room": 121
 		},
 		{
 			"X": 38920,
-			"Y": 4096,
 			"Z": 30821,
+			"Y": 4096,
 			"Room": 55
 		},
 		{
 			"X": 48027,
-			"Y": 1074,
 			"Z": 47927,
+			"Y": 1074,
 			"Room": 15
 		},
 		{
 			"X": 50075,
-			"Y": 1279,
 			"Z": 40137,
+			"Y": 1279,
 			"Room": 14
 		},
 		{
 			"X": 40137,
-			"Y": 1587,
 			"Z": 50277,
+			"Y": 1587,
 			"Room": 105
 		},
 		{
 			"X": 71781,
-			"Y": 1792,
 			"Z": 60617,
+			"Y": 1792,
 			"Room": 100
 		},
 		{
 			"X": 66453,
-			"Y": -1802,
 			"Z": 52125,
+			"Y": -1802,
 			"Room": 88
 		},
 		{
 			"X": 26112,
-			"Y": 638,
 			"Z": 69120,
+			"Y": 638,
 			"Room": 109
 		},
 		{
 			"X": 58867,
-			"Y": -1310,
 			"Z": 21504,
+			"Y": -1310,
 			"Room": 0,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 60447,
-			"Y": -2985,
 			"Z": 38912,
+			"Y": -2985,
 			"Room": 7,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 59350,
-			"Y": -1970,
 			"Z": 51324,
+			"Y": -1970,
 			"Room": 88,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 58353,
-			"Y": -6158,
 			"Z": 21532,
+			"Y": -6158,
 			"Room": 4,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 53281,
-			"Y": -6160,
 			"Z": 33818,
+			"Y": -6160,
 			"Room": 37,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 53275,
-			"Y": -6157,
 			"Z": 42981,
+			"Y": -6157,
 			"Room": 35,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 56296,
-			"Y": -6167,
 			"Z": 38912,
+			"Y": -6167,
 			"Room": 8,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 61415,
-			"Y": -6163,
 			"Z": 39955,
+			"Y": -6163,
 			"Room": 8,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 50196,
-			"Y": -6164,
 			"Z": 44005,
+			"Y": -6164,
 			"Room": 31,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 52726,
-			"Y": -3200,
 			"Z": 40426,
+			"Y": -3200,
 			"Room": 24,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 50149,
-			"Y": -3567,
 			"Z": 48095,
+			"Y": -3567,
 			"Room": 32,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 50149,
-			"Y": -6162,
 			"Z": 45085,
+			"Y": -6162,
 			"Room": 31,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 45157,
-			"Y": -6405,
 			"Z": 37907,
+			"Y": -6405,
 			"Room": 13,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 46050,
-			"Y": -6656,
 			"Z": 37861,
+			"Y": -6656,
 			"Room": 12,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 46050,
-			"Y": -6154,
 			"Z": 37903,
+			"Y": -6154,
 			"Room": 13,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 48114,
-			"Y": -6144,
 			"Z": 44957,
+			"Y": -6144,
 			"Room": 31,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 45979,
-			"Y": -6144,
 			"Z": 48228,
+			"Y": -6144,
 			"Room": 31,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 47121,
-			"Y": -6405,
 			"Z": 48129,
+			"Y": -6405,
 			"Room": 31,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 46121,
-			"Y": -6171,
 			"Z": 32740,
+			"Y": -6171,
 			"Room": 12,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 46030,
-			"Y": -6654,
 			"Z": 44032,
+			"Y": -6654,
 			"Room": 31,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 45979,
-			"Y": -6401,
 			"Z": 34816,
+			"Y": -6401,
 			"Room": 12,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 45156,
-			"Y": -6144,
 			"Z": 33691,
+			"Y": -6144,
 			"Room": 12,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 26880,
-			"Y": -4992,
 			"Z": 47573,
+			"Y": -4992,
 			"Room": 120,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 23451,
-			"Y": -4864,
 			"Z": 42833,
+			"Y": -4864,
 			"Room": 120,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 29202,
-			"Y": -5110,
 			"Z": 56282,
+			"Y": -5110,
 			"Room": 121,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 29194,
-			"Y": -5114,
 			"Z": 50212,
+			"Y": -5114,
 			"Room": 121,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 27141,
-			"Y": -5123,
 			"Z": 58732,
+			"Y": -5123,
 			"Room": 122,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 21605,
-			"Y": -3840,
 			"Z": 59493,
+			"Y": -3840,
 			"Room": 122,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 23534,
-			"Y": -3852,
 			"Z": 54300,
+			"Y": -3852,
 			"Room": 120,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 21605,
-			"Y": -4838,
 			"Z": 58469,
+			"Y": -4838,
 			"Room": 122,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 23653,
-			"Y": -4864,
 			"Z": 76699,
+			"Y": -4864,
 			"Room": 124,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 28218,
-			"Y": -2048,
 			"Z": 62467,
+			"Y": -2048,
 			"Room": 94,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 31195,
-			"Y": -4864,
 			"Z": 58469,
+			"Y": -4864,
 			"Room": 125,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 42493,
-			"Y": -2048,
 			"Z": 58373,
+			"Y": -2048,
 			"Room": 92,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 45062,
-			"Y": -1792,
 			"Z": 60462,
+			"Y": -1792,
 			"Room": 139,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 42493,
-			"Y": -2048,
 			"Z": 53250,
+			"Y": -2048,
 			"Room": 92,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 39558,
-			"Y": -5052,
 			"Z": 48564,
+			"Y": -5052,
 			"Room": 118,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 53147,
-			"Y": -4864,
 			"Z": 64411,
+			"Y": -4864,
 			"Room": 131,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 53349,
-			"Y": -3840,
 			"Z": 64411,
+			"Y": -3840,
 			"Room": 131,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 48231,
-			"Y": -4352,
 			"Z": 52123,
+			"Y": -4352,
 			"Room": 114,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 57243,
-			"Y": -5120,
 			"Z": 55195,
+			"Y": -5120,
 			"Room": 116,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 66578,
-			"Y": -3853,
 			"Z": 51226,
+			"Y": -3853,
 			"Room": 140,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 66459,
-			"Y": -4864,
 			"Z": 51004,
+			"Y": -4864,
 			"Room": 140,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 56219,
-			"Y": -3890,
 			"Z": 47898,
+			"Y": -3890,
 			"Room": 116,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 33784,
-			"Y": -5049,
 			"Z": 42663,
+			"Y": -5049,
 			"Room": 119,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 33793,
-			"Y": -2802,
 			"Z": 43035,
+			"Y": -2802,
 			"Room": 85,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 52123,
-			"Y": -4352,
 			"Z": 60250,
+			"Y": -4352,
 			"Room": 131,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 33295,
-			"Y": -4864,
 			"Z": 46181,
+			"Y": -4864,
 			"Room": 119,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
 		},
 		{
 			"X": 62485,
-			"Y": -3840,
 			"Z": 61896,
+			"Y": -3840,
 			"Room": 112,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 62565,
-			"Y": -3840,
 			"Z": 64411,
+			"Y": -3840,
 			"Room": 112,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 78324,
-			"Y": -1792,
 			"Z": 63030,
+			"Y": -1792,
 			"Room": 89,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 76699,
-			"Y": -3840,
 			"Z": 54171,
+			"Y": -3840,
 			"Room": 115,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 75877,
-			"Y": -5120,
 			"Z": 59201,
+			"Y": -5120,
 			"Room": 115,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 70757,
-			"Y": -4813,
 			"Z": 59493,
+			"Y": -4813,
 			"Room": 111,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 63589,
-			"Y": -4403,
 			"Z": 59493,
+			"Y": -4403,
 			"Room": 111,
 			"RequiresGlitch": true
 		},
 		{
 			"X": 46181,
-			"Y": 256,
 			"Z": 47205,
+			"Y": 256,
 			"Room": 152,
 			"RequiresGlitch": true,
 			"Difficulty": "Hard"
