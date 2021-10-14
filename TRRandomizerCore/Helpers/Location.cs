@@ -32,7 +32,7 @@ namespace TRRandomizerCore.Helpers
             Angle = 16384;
             RequiresGlitch = false;
             Difficulty = Difficulty.Easy;
-            IsInRoomSpace = true;
+            IsInRoomSpace = false;
             IsItem = false;
             VehicleRequired = false;
         }
