@@ -35,7 +35,7 @@ namespace TR2Randomizer
             Room = 0;
             RequiresGlitch = false;
             Difficulty = Difficulty.Easy;
-            IsInRoomSpace = true;
+            IsInRoomSpace = false;
             IsItem = false;
             VehicleRequired = false;
         }
