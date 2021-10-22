@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TRGE.Core.Item.Enums;
+using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 
 namespace TRRandomizerCore.Utilities
@@ -23,6 +24,14 @@ namespace TRRandomizerCore.Utilities
                 return _scriptItemToEntitymap[item];
             }
             return defaultEntity;
+        }
+
+        public static void HideEntity(TR2Entity entity)
+        {
+            // Move the item down, under the floor or into the ceiling of whatever is below
+            entity.Y += 128;
+            // Marking it invisible means it cannot be picked up, even if the new location can be reached.
+            entity.Invisible = true;
         }
 
         private static readonly Dictionary<TR2Entities, TRItems> _entityToScriptItemMap = new Dictionary<TR2Entities, TRItems>

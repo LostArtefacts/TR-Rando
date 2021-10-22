@@ -345,10 +345,7 @@ namespace TRRandomizerCore.Randomizers
                         {
                             if (oneOfEachType.Contains(eType))
                             {
-                                ent.X = 0;
-                                ent.Y = 0;
-                                ent.Z = 0;
-                                ent.Invisible = true;
+                                ItemUtilities.HideEntity(ent);
                             }
                             else
                                 oneOfEachType.Add((TR2Entities)ent.TypeID);
@@ -593,10 +590,7 @@ namespace TRRandomizerCore.Randomizers
                     {
                         if (oneOfEachType.Contains(eType))
                         {
-                            entity.X = 0;
-                            entity.Y = 0;
-                            entity.Z = 0;
-                            entity.Invisible = true;
+                            ItemUtilities.HideEntity(entity);
                         }
                         else
                             oneOfEachType.Add((TR2Entities)entity.TypeID);
