@@ -51,9 +51,18 @@ namespace TRModelTransporter.Transport
             // Check for alias duplication
             ValidateDefinitionList(existingEntities);
 
-            if (standardModelDefinitions.Count + soundModelDefinitions.Count > 0)
+            try
             {
-                Import(standardModelDefinitions, soundModelDefinitions);
+                if (standardModelDefinitions.Count + soundModelDefinitions.Count > 0)
+                {
+                    Import(standardModelDefinitions, soundModelDefinitions);
+                }
+            }
+            finally
+            {
+                // Bitmap cleanup
+                standardModelDefinitions.ForEach(d => d.Dispose());
+                soundModelDefinitions.ForEach(d => d.Dispose());
             }
         }
 
