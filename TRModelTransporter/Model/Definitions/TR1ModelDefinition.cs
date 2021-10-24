@@ -17,5 +17,15 @@ namespace TRModelTransporter.Model.Definitions
         public TRMesh[] Meshes { get; set; }
         public TRMeshTreeNode[] MeshTrees { get; set; }
         public TRModel Model { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is TR1ModelDefinition definition && Entity == definition.Entity;
+        }
+
+        public override int GetHashCode()
+        {
+            return 1674515507 + Entity.GetHashCode();
+        }
     }
 }
