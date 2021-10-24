@@ -22,6 +22,17 @@ namespace TRRandomizerView.Model
             }
         }
 
+        private bool _isAailable;
+        public bool IsAvailable
+        {
+            get => _isAailable;
+            set
+            {
+                _isAailable = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool IsActive
         {
             get => (bool)GetValue(IsActiveProperty);
@@ -32,6 +43,11 @@ namespace TRRandomizerView.Model
         public string Description { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public BoolItemControlClass()
+        {
+            IsAvailable = true;
+        }
 
         protected void FirePropertyChanged([CallerMemberName] string name = null)
         {

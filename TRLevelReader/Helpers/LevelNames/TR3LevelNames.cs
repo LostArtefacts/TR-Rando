@@ -17,12 +17,12 @@ namespace TRLevelReader.Helpers
         public const string LUDS        = "TOWER.TR2";
         public const string CITY        = "OFFICE.TR2";
         public const string NEVADA      = "NEVADA.TR2";
-        public const string HSC         = "COMPUND.TR2";
+        public const string HSC         = "COMPOUND.TR2";
         public const string AREA51      = "AREA51.TR2";
         public const string ANTARC      = "ANTARC.TR2";
         public const string RXTECH      = "MINES.TR2";
         public const string TINNOS      = "CITY.TR2";
-        public const string WILLY       = "CHAMBER.TR2";
+        public const string WILLIE      = "CHAMBER.TR2";
         public const string HALLOWS     = "STPAUL.TR2";
         public const string ASSAULT     = "HOUSE.TR2";
 
@@ -69,7 +69,7 @@ namespace TRLevelReader.Helpers
                     ANTARC,
                     RXTECH,
                     TINNOS,
-                    WILLY,
+                    WILLIE,
                     HALLOWS
                 };
             }

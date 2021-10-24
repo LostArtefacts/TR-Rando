@@ -26,14 +26,15 @@ namespace TRLevelReader.Model.Enums
         LaraGrenadeAnimation_H = 8,
         LaraHarpoonAnimation_H = 9,
         LaraFlareAnimation_H = 10,
-        LaraUPVAnimation_H = 11,
-        UPV = 12,
+        LaraVehicleAnimation_H = 11,
+        VehicleExtra_H = 12, // Not in use anywhere
+        LaraExtraAnimation_H = 13, // Deaths, wheel switch etc
         Kayak = 14,
         Boat = 15,
         Quad = 16,
         MineCart = 17,
         BigGun = 18,
-        HydroPropeller = 19,
+        UPV = 19,
         TribesmanAxe = 20,
         TribesmanDart = 21,
         Dog = 22,
@@ -56,7 +57,7 @@ namespace TRLevelReader.Model.Enums
         RXGunLad = 40,
         DogAntarc = 41,
         Crawler = 42,
-        TinnosWaps = 44,
+        TinnosWasp = 44,
         TinnosMonster = 45,
         BruteMutant = 46,
         TinnosWaspRespawnPoint_N = 47,
@@ -236,6 +237,7 @@ namespace TRLevelReader.Model.Enums
         Element115_M_H = 245,
         EyeOfIsis_M_H = 246,
         OraDagger_M_H = 247,
+        // 248-281 are supposed to be pickup item display entities, but these don't work
         KeysSprite1 = 272,
         KeysSprite2 = 273,
         Infada2_P = 276,
@@ -243,7 +245,8 @@ namespace TRLevelReader.Model.Enums
         EyeOfIsis2_P = 278,
         OraDagger2_P = 279,
         FireBreathingDragonStatue = 282,
-        UnknownVisible285 = 285,
+        AlarmSound_N = 285,
+        DrippingWater_N = 286,
         Tyrannosaur = 287,
         Raptor = 288,
         LaserSweeper = 291,
@@ -266,7 +269,7 @@ namespace TRLevelReader.Model.Enums
         MovableBoom = 314,
         LaraSkin_H = 315,
         Glow2_S_H = 316,
-        UnknownVisible317 = 317,
+        LavaEmitter_N = 317,
         AlarmLight = 318,
         Light_N = 319,
         Light2_N = 321,
@@ -296,7 +299,7 @@ namespace TRLevelReader.Model.Enums
         Skybox_H = 355,
         FontGraphics_S_H = 356,
         Doorbell_N = 357,
-        Unknown358_N = 358,
+        AlarmBell_N = 358,
         Winston = 360,
         WinstonInCamoSuit = 361,
         TimerFontGraphics_S_H = 362,
@@ -304,6 +307,54 @@ namespace TRLevelReader.Model.Enums
         YellowShellCasing_H = 366,
         RedShellCasing_H = 367,
         TinnosLightShaft = 370,
-        ElectricalSwitchBox = 373
+        ElectricalSwitchBox = 373,
+
+        // Enemy Aliases
+        CobraIndia = 1000,
+        CobraNevada,
+
+        DogLondon = 2000,
+        DogNevada,
+        // NB DogAntarc is a separate entity
+
+        // Lara skins and gun anims
+        LaraIndia = 3000,
+        LaraSkin_H_India,
+        LaraPistolAnimation_H_India,
+        LaraDeagleAnimation_H_India,
+        LaraUziAnimation_H_India,
+
+        LaraCoastal = 4000,
+        LaraSkin_H_Coastal,
+        LaraPistolAnimation_H_Coastal,
+        LaraDeagleAnimation_H_Coastal,
+        LaraUziAnimation_H_Coastal,
+
+        LaraLondon = 5000,
+        LaraSkin_H_London,
+        LaraPistolAnimation_H_London,
+        LaraDeagleAnimation_H_London,
+        LaraUziAnimation_H_London,
+
+        LaraNevada = 6000,
+        LaraSkin_H_Nevada,
+        LaraPistolAnimation_H_Nevada,
+        LaraDeagleAnimation_H_Nevada,
+        LaraUziAnimation_H_Nevada,
+
+        LaraAntarc = 7000,
+        LaraSkin_H_Antarc,
+        LaraPistolAnimation_H_Antarc,
+        LaraDeagleAnimation_H_Antarc,
+        LaraUziAnimation_H_Antarc,
+
+        LaraInvisible = 7500,
+
+        // Lara + Vehicle anims
+        LaraVehicleAnimation_H_Quad = 8000,
+        LaraVehicleAnimation_H_BigGun,
+        LaraVehicleAnimation_H_Kayak,
+        LaraVehicleAnimation_H_UPV,
+        LaraVehicleAnimation_H_Boat
     }
 }

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Runtime.InteropServices;
+using TextureExport.Types;
 using TRLevelReader;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -17,6 +15,10 @@ namespace TextureExport
             Png, Html, Segments, Faces, Boxes
         }
 
+        static readonly TR1LevelReader _reader1 = new TR1LevelReader();
+        static readonly TR2LevelReader _reader2 = new TR2LevelReader();
+        static readonly TR3LevelReader _reader3 = new TR3LevelReader();
+
         static void Main(string[] args)
         {
             if (args.Length == 0 || args[0].Contains("?"))
@@ -24,9 +26,6 @@ namespace TextureExport
                 Usage();
                 return;
             }
-
-            TR2Level instance;
-            TR2LevelReader reader = new TR2LevelReader();
 
             Mode mode = Mode.Png;
             if (args.Length > 1)
@@ -58,38 +57,105 @@ namespace TextureExport
                 }
             }
 
-            if (args[0].ToLower().EndsWith(".tr2"))
+            if (args[0].ToLower().EndsWith(".phd"))
             {
-                if (File.Exists(args[0]))
+                ExportAllTextures(args[0], _reader1.ReadLevel(args[0]), mode);
+            }
+            else if (args[0].ToLower().EndsWith(".tr2"))
+            {
+                uint version = DetectVersion(args[0]);
+                if (version == Versions.TR2)
                 {
-                    instance = reader.ReadLevel(args[0]);
-
-                    ExportAllTextures(args[0], instance, mode);
+                    ExportAllTextures(args[0], _reader2.ReadLevel(args[0]), mode);
+                }
+                else if (version == Versions.TR3a || version == Versions.TR3b)
+                {
+                    ExportAllTextures(args[0], _reader3.ReadLevel(args[0]), mode);
                 }
             }
-            else if (args[0] == "gold")
+            else if (args[0] == "tr1")
+            {
+                foreach (string lvl in TRLevelNames.AsListWithAssault)
+                {
+                    if (File.Exists(lvl))
+                    {
+                        ExportAllTextures(lvl, _reader1.ReadLevel(lvl), mode);
+                    }
+                }
+            }
+            else if (args[0] == "tr1g")
+            {
+                foreach (string lvl in TRLevelNames.AsListGold)
+                {
+                    if (File.Exists(lvl))
+                    {
+                        ExportAllTextures(lvl, _reader1.ReadLevel(lvl), mode);
+                    }
+                }
+            }
+            else if (args[0] == "tr2g")
             {
                 foreach (string lvl in TR2LevelNames.AsListGold)
                 {
                     if (File.Exists(lvl))
                     {
-                        instance = reader.ReadLevel(lvl);
-
-                        ExportAllTextures(lvl, instance, mode);
+                        ExportAllTextures(lvl, _reader2.ReadLevel(lvl), mode);
+                    }
+                }
+            }
+            else if (args[0] == "tr3")
+            {
+                foreach (string lvl in TR3LevelNames.AsListWithAssault)
+                {
+                    if (File.Exists(lvl))
+                    {
+                        ExportAllTextures(lvl, _reader3.ReadLevel(lvl), mode);
+                    }
+                }
+            }
+            else if (args[0] == "tr3g")
+            {
+                foreach (string lvl in TR3LevelNames.AsListGold)
+                {
+                    if (File.Exists(lvl))
+                    {
+                        ExportAllTextures(lvl, _reader3.ReadLevel(lvl), mode);
                     }
                 }
             }
             else
             {
-                foreach (string lvl in TR2LevelNames.AsList)
+                foreach (string lvl in TR2LevelNames.AsListWithAssault)
                 {
                     if (File.Exists(lvl))
                     {
-                        instance = reader.ReadLevel(lvl);
-
-                        ExportAllTextures(lvl, instance, mode);
+                        ExportAllTextures(lvl, _reader2.ReadLevel(lvl), mode);
                     }
                 }
+            }
+        }
+
+        static uint DetectVersion(string path)
+        {
+            using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open)))
+            {
+                return reader.ReadUInt32();
+            }
+        }
+
+        static void ExportAllTextures(string lvl, TRLevel inst, Mode mode)
+        {
+            switch (mode)
+            {
+                case Mode.Png:
+                    PngExporter.Export(inst, lvl);
+                    break;
+                case Mode.Html:
+                    HtmlExporter.Export(inst, lvl);
+                    break;
+                default:
+                    Console.WriteLine("{0} mode is not supported for TR1.", mode);
+                    break;
             }
         }
 
@@ -97,25 +163,47 @@ namespace TextureExport
         {
             switch (mode)
             {
+                case Mode.Png:
+                    PngExporter.Export(inst, lvl);
+                    break;
                 case Mode.Html:
-                    new HtmlTileBuilder(inst).ExportAllTexturesToHtml(lvl);
+                    HtmlExporter.Export(inst, lvl);
                     break;
                 case Mode.Segments:
-                    new HtmlTileBuilder(inst).ExportAllTextureSegments(lvl);
+                    SegmentExporter.Export(inst, lvl);
                     break;
                 case Mode.Faces:
-                    new FaceMapper(inst).GenerateFaces(lvl.ToLower().Replace(".tr2", "_faced.tr2"), GetFaceRoomArgs());
+                    FaceMapper.DrawFaces(inst, lvl, GetRoomArgs());
                     break;
                 case Mode.Boxes:
-                    new FaceMapper(inst).GenerateBoxes(lvl.ToLower().Replace(".tr2", "_boxed.tr2"), GetFaceRoomArgs());
+                    FaceMapper.DrawBoxes(inst, lvl, GetRoomArgs());
                     break;
                 default:
-                    ExportAllTexturesToPng(lvl, inst);
+                    Console.WriteLine("{0} mode is not supported for TR2.", mode);
                     break;
             }
         }
 
-        static int[] GetFaceRoomArgs()
+        static void ExportAllTextures(string lvl, TR3Level inst, Mode mode)
+        {
+            switch (mode)
+            {
+                case Mode.Png:
+                    PngExporter.Export(inst, lvl);
+                    break;
+                case Mode.Html:
+                    HtmlExporter.Export(inst, lvl);
+                    break;
+                case Mode.Segments:
+                    SegmentExporter.Export(inst, lvl);
+                    break;
+                default:
+                    Console.WriteLine("{0} mode is not supported for TR3.", mode);
+                    break;
+            }
+        }
+
+        static int[] GetRoomArgs()
         {
             string[] args = Environment.GetCommandLineArgs()[3].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
             List<int> rooms = new List<int>();
@@ -129,68 +217,46 @@ namespace TextureExport
             return rooms.ToArray();
         }
 
-        static void ExportAllTexturesToPng(string lvl, TR2Level inst)
-        {
-            const int width = 256;
-            const int height = 256;
-
-            int index = 0;
-
-            foreach (TRTexImage16 tex in inst.Images16)
-            {
-                Bitmap bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-                var bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, bmp.PixelFormat);
-
-                List<byte> pixelCollection = new List<byte>();
-                
-                foreach (Textile16Pixel px in tex.To32BPPFormat())
-                {
-                    pixelCollection.AddRange(px.RGB32);
-                }
-
-                Marshal.Copy(pixelCollection.ToArray(), 0, bitmapData.Scan0, pixelCollection.Count);
-                bmp.UnlockBits(bitmapData);
-                bmp.Save(lvl + index + ".png");
-
-                index++;
-            }
-        }
-
         static void Usage()
         {
             Console.WriteLine();
-            Console.WriteLine("Usage: TextureExport [orig | gold | *.tr2] [png | html | segments | faces | boxes]");
+            Console.WriteLine("Usage: TextureExport [tr1 | tr1g | tr2 | tr2g | tr3 | tr3g | *.phd | *.tr2] [png | html | segments | faces | boxes]");
             Console.WriteLine();
 
             Console.WriteLine("Target Levels");
-            Console.WriteLine("\torig     - The original TR2 levels. Default option.");
-            Console.WriteLine("\tgold     - The TR2 Golden Mask levels.");
-            Console.WriteLine("\t*.tr2    - Use a specific level file.");
+            Console.WriteLine("\ttr1      - The original TR1 levels.");
+            Console.WriteLine("\ttr1g     - The TR1 Unfinished Business levels.");
+            Console.WriteLine("\ttr2      - The original TR2 levels. Default option.");
+            Console.WriteLine("\ttr2g     - The TR2 Golden Mask levels.");
+            Console.WriteLine("\ttr3      - The original TR3 levels.");
+            Console.WriteLine("\ttr3g     - The TR3 Lost Artefact levels.");
+            Console.WriteLine("\t*.phd    - Use a specific TR1 level file.");
+            Console.WriteLine("\t*.tr2    - Use a specific TR2/TR3 level file.");
             Console.WriteLine();
 
             Console.WriteLine("Export Mode");
             Console.WriteLine("\tpng      - Export each texture tile to PNG. Default Option.");
             Console.WriteLine("\thtml     - Export all tiles to a single HTML document.");
             Console.WriteLine("\tsegments - Export each object and sprite texture to individual PNG files.");
-            Console.WriteLine("\tfaces    - Creates a new texture for every face in a room and marks its index (output is LVL_faced.tr2).");
-            Console.WriteLine("\tboxes    - Similar to faces, but marks box extents for a list of rooms (output is LVL_boxed.tr2).");
+            Console.WriteLine("\tfaces    - Create a new texture for every face in a room and mark its index.");
+            Console.WriteLine("\tboxes    - Similar to faces, but mark box extents for a list of rooms.");
             Console.WriteLine();
             
             Console.WriteLine("Examples");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\tTextureExport");
             Console.ResetColor();
-            Console.WriteLine("\t\tExport all original level tiles to PNG.");
+            Console.WriteLine("\t\tExport all TR2 level tiles to PNG.");
             Console.WriteLine();
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\tTextureExport orig html");
+            Console.WriteLine("\tTextureExport tr2 html");
             Console.ResetColor();
-            Console.WriteLine("\t\tExport all original level tiles to HTML.");
+            Console.WriteLine("\t\tExport all TR2 level tiles to HTML.");
             Console.WriteLine();
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\tTextureExport gold html");
+            Console.WriteLine("\tTextureExport tr2g html");
             Console.ResetColor();
             Console.WriteLine("\t\tExport all Golden Mask level tiles to HTML.");
             Console.WriteLine();

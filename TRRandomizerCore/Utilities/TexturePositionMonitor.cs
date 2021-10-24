@@ -6,7 +6,7 @@ using TRTexture16Importer.Textures.Target;
 
 namespace TRRandomizerCore.Utilities
 {
-    public class TexturePositionMonitor : ITexturePositionMonitor
+    public class TexturePositionMonitor : ITexturePositionMonitor<TR2Entities>
     {
         private readonly List<StaticTextureSource> _entitySources;
 

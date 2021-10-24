@@ -1,64 +1,118 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRModelTransporter.Model.Definitions;
 
 namespace TRModelTransporter.Handlers
 {
-    public class ModelTransportHandler : AbstractTransportHandler
+    public class ModelTransportHandler
     {
-        // These are models that use Lara's hips as placeholders - see Import
-        private static readonly List<TR2Entities> _laraDependentModels = new List<TR2Entities>
+        public void Export(TRLevel level, TR1ModelDefinition definition, TREntities entity)
         {
-            TR2Entities.CameraTarget_N, TR2Entities.FlameEmitter_N, TR2Entities.LaraCutscenePlacement_N,
-            TR2Entities.DragonExplosionEmitter_N, TR2Entities.BartoliHideoutClock_N, TR2Entities.SingingBirds_N,
-            TR2Entities.WaterfallMist_N, TR2Entities.DrippingWater_N, TR2Entities.LavaAirParticleEmitter_N,
-            TR2Entities.AlarmBell_N, TR2Entities.DoorBell_N
-        };
-
-        public TR2Entities ModelEntity { get; set; }
-
-        // The given aliases will always have priority if the model already exists
-        public Dictionary<TR2Entities, TR2Entities> AliasPriority { get; set; }
-
-        public override void Export()
-        {
-            short entityID = (short)ModelEntity;
-            Definition.Model = Level.Models[Level.Models.ToList().FindIndex(m => m.ID == entityID)];
+            definition.Model = GetTRModel(level.Models, (short)entity);
         }
 
-        public override void Import()
+        public void Export(TR2Level level, TR2ModelDefinition definition, TR2Entities entity)
         {
-            List<TRModel> levelModels = Level.Models.ToList();
-            int i = levelModels.FindIndex(m => m.ID == (short)Definition.Entity);
+            definition.Model = GetTRModel(level.Models, (short)entity);
+        }
+
+        public void Export(TR3Level level, TR3ModelDefinition definition, TR3Entities entity)
+        {
+            definition.Model = GetTRModel(level.Models, (short)entity);
+        }
+
+        private TRModel GetTRModel(IEnumerable<TRModel> models, short entityID)
+        {
+            TRModel model = models.ToList().Find(m => m.ID == entityID);
+            if (model == null)
+            {
+                throw new ArgumentException(string.Format("The model for {0} could not be found.", entityID));
+            }
+            return model;
+        }
+
+        public void Import(TRLevel level, TR1ModelDefinition definition, Dictionary<TREntities, TREntities> aliasPriority, IEnumerable<TREntities> laraDependants)
+        {
+            List<TRModel> levelModels = level.Models.ToList();
+            int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
             if (i == -1)
             {
-                levelModels.Add(Definition.Model);
-                Level.Models = levelModels.ToArray();
-                Level.NumModels++;
+                levelModels.Add(definition.Model);
+                level.Models = levelModels.ToArray();
+                level.NumModels++;
             }
-            else if (!AliasPriority.ContainsKey(Definition.Entity) || AliasPriority[Definition.Entity] == Definition.Alias)
+            else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
+            {
+                level.Models[i] = definition.Model;
+            }
+
+            if (definition.Entity == TREntities.Lara && laraDependants != null)
+            {
+                ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
+            }
+        }
+
+        public void Import(TR2Level level, TR2ModelDefinition definition, Dictionary<TR2Entities, TR2Entities> aliasPriority, IEnumerable<TR2Entities> laraDependants)
+        {
+            List<TRModel> levelModels = level.Models.ToList();
+            int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
+            if (i == -1)
+            {
+                levelModels.Add(definition.Model);
+                level.Models = levelModels.ToArray();
+                level.NumModels++;
+            }
+            else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
             {
                 // Replacement occurs for the likes of aliases taking the place of another
                 // e.g. WhiteTiger replacing BengalTiger in GW, or if we have a specific
                 // alias that should always have a higher priority than its peers.
-                Level.Models[i] = Definition.Model;
+                level.Models[i] = definition.Model;
             }
 
             // If we have replaced Lara, we need to update models such as CameraTarget, FlameEmitter etc
             // as these use Lara's hips as placeholders. This means we can avoid texture corruption in
             // TRView but it's also needed for the shower cutscene in HSH. If these entities are found,
             // their starting mesh and mesh tree indices are just remapped to Lara's.
-            if (Definition.Entity == TR2Entities.Lara)
+            if (definition.Entity == TR2Entities.Lara && laraDependants != null)
             {
-                foreach (TR2Entities dependent in _laraDependentModels)
+                ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
+            }
+        }
+
+        public void Import(TR3Level level, TR3ModelDefinition definition, Dictionary<TR3Entities, TR3Entities> aliasPriority, IEnumerable<TR3Entities> laraDependants)
+        {
+            List<TRModel> levelModels = level.Models.ToList();
+            int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
+            if (i == -1)
+            {
+                levelModels.Add(definition.Model);
+                level.Models = levelModels.ToArray();
+                level.NumModels++;
+            }
+            else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
+            {
+                level.Models[i] = definition.Model;
+            }
+
+            if (definition.Entity == TR3Entities.Lara && laraDependants != null)
+            {
+                ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
+            }
+        }
+
+        private void ReplaceLaraDependants(List<TRModel> models, TRModel lara, IEnumerable<short> entityIDs)
+        {
+            foreach (short dependant in entityIDs)
+            {
+                TRModel dependentModel = models.Find(m => m.ID == dependant);
+                if (dependentModel != null)
                 {
-                    TRModel dependentModel = levelModels.Find(m => m.ID == (short)dependent);
-                    if (dependentModel != null)
-                    {
-                        dependentModel.MeshTree = Definition.Model.MeshTree;
-                        dependentModel.StartingMesh = Definition.Model.StartingMesh;
-                    }
+                    dependentModel.MeshTree = lara.MeshTree;
+                    dependentModel.StartingMesh = lara.StartingMesh;
                 }
             }
         }

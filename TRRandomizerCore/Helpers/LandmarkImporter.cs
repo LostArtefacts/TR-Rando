@@ -25,7 +25,7 @@ namespace TRRandomizerCore.Helpers
             // Ensure any changes already made are committed to the level
             mapping.CommitGraphics();
 
-            using (TexturePacker packer = new TexturePacker(level.Data))
+            using (TR2TexturePacker packer = new TR2TexturePacker(level.Data))
             {
                 List<TRObjectTexture> textures = level.Data.ObjectTextures.ToList();
                 foreach (StaticTextureSource source in mapping.LandmarkMapping.Keys)

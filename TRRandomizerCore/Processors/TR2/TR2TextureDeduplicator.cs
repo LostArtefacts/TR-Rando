@@ -3,6 +3,7 @@ using System.IO;
 using TRRandomizerCore.Levels;
 using TRGE.Core;
 using TRModelTransporter.Utilities;
+using TRLevelReader.Model.Enums;
 
 namespace TRRandomizerCore.Processors
 {
@@ -54,7 +55,7 @@ namespace TRRandomizerCore.Processors
         internal class DeduplicationProcessor : AbstractProcessorThread<TR2TextureDeduplicator>
         {
             private readonly List<TR2CombinedLevel> _levels;
-            private readonly TRLevelTextureDeduplicator _deduplicator;
+            private readonly TR2LevelTextureDeduplicator _deduplicator;
 
             internal override int LevelCount => _levels.Count;
 
@@ -62,7 +63,7 @@ namespace TRRandomizerCore.Processors
                 :base(outer)
             {
                 _levels = new List<TR2CombinedLevel>();
-                _deduplicator = new TRLevelTextureDeduplicator();
+                _deduplicator = new TR2LevelTextureDeduplicator();
             }
 
             internal void AddLevel(TR2CombinedLevel level)

@@ -2,26 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using TRLevelReader.Model.Enums;
+using System.Linq;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Utilities
 {
-    public class TRTextureDeduplicator
+    public class TRTextureDeduplicator<E> where E : Enum
     {
-        // This prevents Lara's hips being duplicated - this seems to be part of some animation model exports, so just ignore them
-        // in the bitmap export and they won't be imported into the new level. The only issue with this is when viewing a level
-        // in trview in that the textures will be mapped to tile 0 - e.g. the hips that show in place of DragonExplosionEmitter_N.
-        // The alternative is trying to remap to Lara's hips in the target level - TODO - but this is minor.
-        public static readonly IReadOnlyDictionary<TR2Entities, List<int>> IgnoreEntityTextures = new Dictionary<TR2Entities, List<int>>
-        {
-            [TR2Entities.LaraMiscAnim_H] = new List<int>(), // empty list indicates to ignore everything
-            [TR2Entities.LaraSnowmobAnim_H] = new List<int> { 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 20, 21, 23 },
-            [TR2Entities.SnowmobileBelt] = new List<int> { 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 20, 21, 23 },
-            [TR2Entities.DragonExplosionEmitter_N] = new List<int> { 0, 1, 2, 3, 4, 5, 6, 8, 13, 14, 16, 17, 19 }
-        };
-
         public Dictionary<TexturedTile, List<TexturedTileSegment>> SegmentMap { get; set; }
         public List<TextureRemap> PrecompiledRemapping { get; set; }
         public bool UpdateGraphics { get; set; }
@@ -36,7 +24,7 @@ namespace TRModelTransporter.Utilities
             UpdateGraphics = false;
         }
 
-        // This allows us to "fix" some of Core Design's lazy approach in duplicating graphics. For example, In DragonFront_H, there
+        // This allows us to "fix" some of Core Design's approach in duplicating graphics. For example, In DragonFront_H, there
         // is a lot of clips taken from the largest piece of the dragon's spikes, and these are stored as separate textures. This 
         // attempts to merge these into one segment by comparing each bitmap with every other larger or equal in size to itself.
         public void Deduplicate()
@@ -45,16 +33,6 @@ namespace TRModelTransporter.Utilities
             DeduplicateSegments();
             RemoveStaleSegments();
         }
-
-        //private int GetUsedArea()
-        //{
-        //    int area = 0;
-        //    foreach (MappedSegment seg in _segments)
-        //    {
-        //        area += seg.Segment.Area;
-        //    }
-        //    return area;
-        //}
 
         private void InitialiseSegments()
         {
@@ -263,16 +241,16 @@ namespace TRModelTransporter.Utilities
             }
         }
 
-        public bool ShouldIgnoreSegment(TR2Entities entity, TexturedTileSegment segment)
+        public bool ShouldIgnoreSegment(IEnumerable<int> ignoredIndices, TexturedTileSegment segment)
         {
-            if (IgnoreEntityTextures.ContainsKey(entity))
+            if (ignoredIndices != null)
             {
-                if (IgnoreEntityTextures[entity].Count == 0)
+                if (ignoredIndices.Count() == 0)
                 {
                     return true;
                 }
 
-                foreach (int textureIndex in IgnoreEntityTextures[entity])
+                foreach (int textureIndex in ignoredIndices)
                 {
                     if (segment.IsObjectTextureFor(textureIndex))
                     {

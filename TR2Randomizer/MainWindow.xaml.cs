@@ -273,7 +273,7 @@ namespace TR2Randomizer
 
             for (int i = 0; i < instance.NumImages; i++)
             {
-                instance.Images16[i].Pixels = T16Importer.ImportFrom32PNG(LvlName + i + ".png");
+                instance.Images16[i].Pixels = TextureUtilities.ImportFrom32PNG(LvlName + i + ".png");
             }
 
             writer.WriteLevelToFile(instance, LvlName);

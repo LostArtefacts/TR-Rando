@@ -253,7 +253,7 @@ namespace TRRandomizerCore.Randomizers
                     laraRemovals.AddRange(_laraRemovals);
                 }
                 
-                TRModelImporter importer = new TRModelImporter
+                TR2ModelImporter importer = new TR2ModelImporter
                 {
                     Level = level.Data,
                     LevelName = level.Name,
@@ -301,7 +301,7 @@ namespace TRRandomizerCore.Randomizers
                 MeshEditor editor = new MeshEditor();
                 foreach (TR2Entities ent in entities)
                 {
-                    TRMesh[] meshes = TR2LevelUtilities.GetModelMeshes(level.Data, ent);
+                    TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
                     if (meshes != null)
                     {
                         foreach (TRMesh mesh in meshes)
@@ -327,9 +327,9 @@ namespace TRRandomizerCore.Randomizers
                     // This ensures that Lara's hips match the new outfit for the starting animation and shower cutscene,
                     // otherwise the dressing gown hips are rendered, but the mesh is completely different for this, plus
                     // its textures will have been removed.
-                    TRMesh laraMiscMesh = TR2LevelUtilities.GetModelFirstMesh(level.Data, TR2Entities.LaraMiscAnim_H);
-                    TRMesh laraHipsMesh = TR2LevelUtilities.GetModelFirstMesh(level.Data, TR2Entities.Lara);
-                    TR2LevelUtilities.DuplicateMesh(level.Data, laraMiscMesh, laraHipsMesh);
+                    TRMesh laraMiscMesh = TRMeshUtilities.GetModelFirstMesh(level.Data, TR2Entities.LaraMiscAnim_H);
+                    TRMesh laraHipsMesh = TRMeshUtilities.GetModelFirstMesh(level.Data, TR2Entities.Lara);
+                    TRMeshUtilities.DuplicateMesh(level.Data, laraMiscMesh, laraHipsMesh);
                 }
 
                 if (_outer.Settings.RemoveRobeDagger)
@@ -346,7 +346,7 @@ namespace TRRandomizerCore.Randomizers
                         {
                             MeshEditor editor = new MeshEditor
                             {
-                                Mesh = TR2LevelUtilities.GetModelFirstMesh(level.Data, TR2Entities.Lara)
+                                Mesh = TRMeshUtilities.GetModelFirstMesh(level.Data, TR2Entities.Lara)
                             };
 
                             editor.RemoveTexturedRectangleRange(9, 43);
@@ -362,7 +362,7 @@ namespace TRRandomizerCore.Randomizers
                             // so we basically just retain the hand.
                             MeshEditor editor = new MeshEditor
                             {
-                                Mesh = TR2LevelUtilities.GetModelMeshes(level.Data, TR2Entities.LaraMiscAnim_H)[10]
+                                Mesh = TRMeshUtilities.GetModelMeshes(level.Data, TR2Entities.LaraMiscAnim_H)[10]
                             };
 
                             editor.RemoveTexturedRectangleRange(6, 20);
@@ -370,7 +370,7 @@ namespace TRRandomizerCore.Randomizers
                             editor.WriteToLevel(level.Data);
 
                             // And hide it from the inventory
-                            foreach (TRMesh mesh in TR2LevelUtilities.GetModelMeshes(level.Data, TR2Entities.Puzzle1_M_H))
+                            foreach (TRMesh mesh in TRMeshUtilities.GetModelMeshes(level.Data, TR2Entities.Puzzle1_M_H))
                             {
                                 editor.Mesh = mesh;
                                 editor.ClearTexturedRectangles();

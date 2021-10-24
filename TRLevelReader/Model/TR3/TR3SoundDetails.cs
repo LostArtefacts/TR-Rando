@@ -23,6 +23,8 @@ namespace TRLevelReader.Model
 
         public short Characteristics { get; set; }
 
+        public int NumSounds => (Characteristics & 0x00FC) >> 2; // get bits 2-7
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())

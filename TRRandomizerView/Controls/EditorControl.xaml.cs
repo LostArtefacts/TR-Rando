@@ -1,5 +1,6 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -181,10 +182,20 @@ namespace TRRandomizerView.Controls
         {
             try
             {
-                string exePath = Path.GetFullPath(Path.Combine(DataFolder, @"..\Tomb2.exe"));
-                if (!File.Exists(exePath))
+                string exePath = null;
+                foreach (string exe in Controller.GetExecutables())
                 {
-                    throw new IOException(string.Format("The game could not be launched automatically as the following executable was not found.{0}{0}{1}", Environment.NewLine, exePath));
+                    string path = Path.GetFullPath(Path.Combine(DataFolder, @"..\" + exe));
+                    if (File.Exists(path))
+                    {
+                        exePath = path;
+                        break;
+                    }
+                }
+                
+                if (exePath == null)
+                {
+                    throw new IOException("The game could not be launched automatically as no suitable executable was found.");
                 }
 
                 Process.Start(new ProcessStartInfo

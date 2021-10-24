@@ -1212,6 +1212,13 @@ namespace TRRandomizerView.Model
             };
         }
 
+        private void AdjustAvailableOptions()
+        {
+            // Called after the version type has been identified, so allows for customising
+            // individual settings based on what's available.
+            _removeRobeDagger.IsAvailable = IsOutfitDaggerSupported;
+        }
+
         public void Load(TRRandomizerController controller)
         {
             _controller = controller;
@@ -1567,8 +1574,11 @@ namespace TRRandomizerView.Model
         public bool IsStartPositionTypeSupported => IsRandomizationSupported(TRRandomizerType.StartPosition);
         public bool IsAudioTypeSupported => IsRandomizationSupported(TRRandomizerType.Audio);
         public bool IsOutfitTypeSupported => IsRandomizationSupported(TRRandomizerType.Outfit);
+        public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);
         public bool IsEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.Environment);
+
+        public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
 
         private bool IsRandomizationSupported(TRRandomizerType randomizerType)
         {
@@ -1582,6 +1592,8 @@ namespace TRRandomizerView.Model
             {
                 FirePropertyChanged(string.Format(_supportPropertyFormat, type.ToString()));
             }
+
+            AdjustAvailableOptions();
         }
 
         public void SetAllRandomizationsEnabled(bool enabled)
