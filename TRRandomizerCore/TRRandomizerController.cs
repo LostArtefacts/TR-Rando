@@ -24,8 +24,14 @@ namespace TRRandomizerCore
             },
             [TRVersion.TR3] = new List<TRRandomizerType>
             {
-                TRRandomizerType.LevelSequence, TRRandomizerType.Unarmed, TRRandomizerType.Ammoless, TRRandomizerType.Audio
+                TRRandomizerType.LevelSequence, TRRandomizerType.Unarmed, TRRandomizerType.Ammoless, TRRandomizerType.Audio, TRRandomizerType.Outfit
             }
+        };
+
+        private static readonly Dictionary<TRVersion, List<string>> _versionExes = new Dictionary<TRVersion, List<string>>
+        {
+            [TRVersion.TR2]  = new List<string> { "Tomb2.exe" },
+            [TRVersion.TR3]  = new List<string> { "Tomb3.exe" }
         };
 
         private readonly TREditor _editor;
@@ -62,6 +68,16 @@ namespace TRRandomizerCore
         {
             return _supportedTypes.ContainsKey(version) &&
                 (_supportedTypes[version].Contains(TRRandomizerType.All) || _supportedTypes[version].Contains(randomizerType));
+        }
+
+        public List<string> GetExecutables()
+        {
+            List<string> exes = new List<string>();
+            if (_versionExes.ContainsKey(ScriptEditor.Edition.Version))
+            {
+                exes.AddRange(_versionExes[ScriptEditor.Edition.Version]);
+            }
+            return exes;
         }
         #endregion
 

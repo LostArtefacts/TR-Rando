@@ -35,6 +35,12 @@ namespace TRRandomizerCore.Editors
                 target += numLevels;
             }
 
+            if (Settings.RandomizeOutfits)
+            {
+                // *2 because of multithreaded approach
+                target += numLevels * 2;
+            }
+
             return target;
         }
 
@@ -72,6 +78,19 @@ namespace TRRandomizerCore.Editors
                     SaveMonitor = monitor,
                     Settings = Settings
                 }.Randomize(Settings.AudioSeed);
+            }
+
+            if (!monitor.IsCancelled && Settings.RandomizeOutfits)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing outfits");
+                new TR3OutfitRandomizer
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.OutfitSeed);
             }
         }
     }

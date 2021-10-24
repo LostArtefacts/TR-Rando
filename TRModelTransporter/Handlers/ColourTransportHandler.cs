@@ -2,57 +2,123 @@
 using System.Collections.Generic;
 using System.Linq;
 using TRLevelReader.Model;
+using TRModelTransporter.Model.Definitions;
 using TRTexture16Importer;
 
 namespace TRModelTransporter.Handlers
 {
-    public class ColourTransportHandler : AbstractTransportHandler
+    public class ColourTransportHandler
     {
-        public override void Export()
+        public void Export(TRLevel level, TR1ModelDefinition definition)
+        {
+            definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette);
+        }
+
+        public void Export(TR2Level level, TR2ModelDefinition definition)
+        {
+            definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16);
+        }
+
+        public void Export(TR3Level level, TR3ModelDefinition definition)
+        {
+            definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16);
+        }
+
+        private Dictionary<int, TRColour> GetUsedMeshColours(TRMesh[] meshes, TRColour[] colours)
+        {
+            ISet<int> colourIndices = GetAllColourIndices(meshes);
+
+            Dictionary<int, TRColour> usedColours = new Dictionary<int, TRColour>();
+            foreach (int i in colourIndices)
+            {
+                usedColours[i] = colours[i];
+            }
+
+            return usedColours;
+        }
+
+        private Dictionary<int, TRColour4> GetUsedMeshColours(TRMesh[] meshes, TRColour4[] colours)
+        {
+            ISet<int> colourIndices = GetAllColourIndices(meshes);
+
+            Dictionary<int, TRColour4> usedColours = new Dictionary<int, TRColour4>();
+            foreach (int i in colourIndices)
+            {
+                usedColours[i] = colours[i];
+            }
+
+            return usedColours;
+        }
+
+        private ISet<int> GetAllColourIndices(TRMesh[] meshes)
         {
             ISet<int> colourIndices = new SortedSet<int>();
-            foreach (TRMesh mesh in Definition.Meshes)
+            foreach (TRMesh mesh in meshes)
             {
                 foreach (TRFace4 rect in mesh.ColouredRectangles)
                 {
-                    colourIndices.Add(BitConverter.GetBytes(rect.Texture)[1]);
+                    colourIndices.Add(rect.Texture >> 8);
                 }
                 foreach (TRFace3 tri in mesh.ColouredTriangles)
                 {
-                    colourIndices.Add(BitConverter.GetBytes(tri.Texture)[1]);
+                    colourIndices.Add(tri.Texture >> 8);
                 }
             }
 
-            Definition.Colours = new Dictionary<int, TRColour4>(colourIndices.Count);
-            foreach (int i in colourIndices)
-            {
-                Definition.Colours[i] = Level.Palette16[i];
-            }
+            return colourIndices;
         }
 
-        public override void Import()
+        public void Import(TRLevel level, TR1ModelDefinition definition)
         {
-            List<TRColour4> palette16 = Level.Palette16.ToList();
-            Dictionary<int, int> indexMap = new Dictionary<int, int>();
-            foreach (int paletteIndex in Definition.Colours.Keys)
-            {
-                TRColour4 newColour = Definition.Colours[paletteIndex];
-                int existingIndex = palette16.FindIndex
-                (
-                    e => e.Red == newColour.Red && e.Green == newColour.Green && e.Blue == newColour.Blue// && e.Unused == newColour.Unused
-                );
+            // Limited to 256 colours so need to work out how to best handle this
+            throw new NotImplementedException();
+        }
 
-                if (existingIndex != -1)
-                {
-                    indexMap[paletteIndex] = existingIndex;
-                }
-                else
-                {
-                    indexMap[paletteIndex] = P16Importer.Import(Level, newColour);
-                }
+        public void Import(TR2Level level, TR2ModelDefinition definition)
+        {
+            List<TRColour4> palette16 = level.Palette16.ToList();
+            Dictionary<int, int> indexMap = new Dictionary<int, int>();
+            
+            foreach (int paletteIndex in definition.Colours.Keys)
+            {
+                TRColour4 newColour = definition.Colours[paletteIndex];
+                int existingIndex = FindPaletteIndex(palette16, newColour);
+                indexMap[paletteIndex] = existingIndex == -1 ? PaletteUtilities.Import(level, newColour) : existingIndex;
             }
 
-            foreach (TRMesh mesh in Definition.Meshes)
+            ReindexMeshTextures(definition.Meshes, indexMap);
+
+            PaletteUtilities.ResetPaletteTracking(level.Palette16);
+        }
+
+        public void Import(TR3Level level, TR3ModelDefinition definition)
+        {
+            List<TRColour4> palette16 = level.Palette16.ToList();
+            Dictionary<int, int> indexMap = new Dictionary<int, int>();
+
+            foreach (int paletteIndex in definition.Colours.Keys)
+            {
+                TRColour4 newColour = definition.Colours[paletteIndex];
+                int existingIndex = FindPaletteIndex(palette16, newColour);
+                indexMap[paletteIndex] = existingIndex == -1 ? PaletteUtilities.Import(level, newColour) : existingIndex;
+            }
+
+            ReindexMeshTextures(definition.Meshes, indexMap);
+
+            PaletteUtilities.ResetPaletteTracking(level.Palette16);
+        }
+
+        private int FindPaletteIndex(List<TRColour4> colours, TRColour4 colour)
+        {
+            return colours.FindIndex
+            (
+                e => e.Red == colour.Red && e.Green == colour.Green && e.Blue == colour.Blue
+            );
+        }
+
+        private void ReindexMeshTextures(TRMesh[] meshes, Dictionary<int, int> indexMap)
+        {
+            foreach (TRMesh mesh in meshes)
             {
                 foreach (TRFace4 rect in mesh.ColouredRectangles)
                 {
@@ -63,18 +129,14 @@ namespace TRModelTransporter.Handlers
                     tri.Texture = ReindexTexture(tri.Texture, indexMap);
                 }
             }
-
-            P16Importer.ResetPaletteTracking(Level);
         }
 
         private ushort ReindexTexture(ushort value, Dictionary<int, int> indexMap)
         {
-            byte[] arr = BitConverter.GetBytes(value);
-            int highByte = Convert.ToInt32(arr[1]);
-            if (indexMap.ContainsKey(highByte))
+            int p16 = value >> 8;
+            if (indexMap.ContainsKey(p16))
             {
-                arr[1] = (byte)indexMap[highByte];
-                return BitConverter.ToUInt16(arr, 0);
+                return (ushort)(indexMap[p16] << 8 | (value & 0xFF));
             }
             return value;
         }

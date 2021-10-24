@@ -3,6 +3,8 @@
     public enum TRRandomizerType
     {
         All,
+
+        // Top-level options
         LevelSequence,
         Unarmed,
         Ammoless,
@@ -17,6 +19,10 @@
         Audio,
         Outfit,
         Text,
-        Environment
+        Environment,
+
+        // Individual settings
+        DisableDemos = 100,
+        OutfitDagger
     }
 }

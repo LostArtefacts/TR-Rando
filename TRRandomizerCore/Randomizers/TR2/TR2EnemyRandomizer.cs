@@ -716,7 +716,7 @@ namespace TRRandomizerCore.Randomizers
                 {
                     // The importer will handle any duplication between the entities to import and 
                     // remove so just pass the unfiltered lists to it.
-                    TRModelImporter importer = new TRModelImporter
+                    TR2ModelImporter importer = new TR2ModelImporter
                     {
                         ClearUnusedSprites = true,
                         EntitiesToImport = enemies.EntitiesToImport,
@@ -725,9 +725,10 @@ namespace TRRandomizerCore.Randomizers
                         LevelName = level.Name,
                         DataFolder = _outer.GetResourcePath(@"TR2\Models"),
                         TextureRemapPath = _outer.GetResourcePath(@"TR2\Textures\Deduplication\" + level.JsonID + "-TextureRemap.json"),
-                        TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport),
-                        AliasPriority = EnemyUtilities.GetAliasPriority(level.Name, enemies.EntitiesToImport)
+                        TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
                     };
+
+                    importer.Data.AliasPriority = EnemyUtilities.GetAliasPriority(level.Name, enemies.EntitiesToImport);
 
                     // Try to import the selected models into the level.
                     importer.Import();

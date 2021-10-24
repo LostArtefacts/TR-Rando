@@ -422,6 +422,7 @@
                 <TextBlock
                     Grid.Row="3"
                     Margin="0,0,0,5"
+                    Visibility="{Binding IsDisableDemosTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
                     Text="Disable demos from showing in the title screen to prevent spoilers."
                     TextWrapping="Wrap"/>
 
@@ -429,6 +430,7 @@
                     Grid.Row="4"
                     Margin="0,0,0,20"
                     Content="Disable Demos"
+                    Visibility="{Binding IsDisableDemosTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
                     IsChecked="{Binding DisableDemos, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                 <TextBlock

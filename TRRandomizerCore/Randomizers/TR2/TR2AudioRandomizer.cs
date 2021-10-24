@@ -11,6 +11,7 @@ using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRModelTransporter.Handlers;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -259,7 +260,7 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // Sample indices have to be in ascending order. Sort the level data only once.
-            ResortSoundIndices(level.Data);
+            SoundUtilities.ResortSoundIndices(level.Data);
         }
 
         private short ImportSoundEffect(TR2Level level, TRSFXDefinition definition)
@@ -303,56 +304,6 @@ namespace TRRandomizerCore.Randomizers
             level.NumSoundDetails++;
 
             return (short)(level.NumSoundDetails - 1);
-        }
-
-        private static void ResortSoundIndices(TR2Level level)
-        {
-            // Store the values from SampleIndices against their current positions
-            // in the list.
-            List<uint> sampleIndices = level.SampleIndices.ToList();
-            Dictionary<int, uint> indexMap = new Dictionary<int, uint>();
-            for (int i = 0; i < sampleIndices.Count; i++)
-            {
-                indexMap[i] = sampleIndices[i];
-            }
-
-            // Sort the indices to avoid the game crashing
-            sampleIndices.Sort();
-
-            // Remap each SoundDetail to use the new index of the sample it points to
-            foreach (TRSoundDetails soundDetails in level.SoundDetails)
-            {
-                soundDetails.Sample = (ushort)sampleIndices.IndexOf(indexMap[soundDetails.Sample]);
-            }
-
-            // Save the samples back to the level
-            level.SampleIndices = sampleIndices.ToArray();
-
-            // Repeat for SoundMap->SoundDetails
-            Dictionary<int, TRSoundDetails> soundMapIndices = new Dictionary<int, TRSoundDetails>();
-            List<short> soundMap = level.SoundMap.ToList();
-            for (int i = 0; i < soundMap.Count; i++)
-            {
-                if (soundMap[i] != -1)
-                {
-                    soundMapIndices[i] = level.SoundDetails[soundMap[i]];
-                }
-            }
-
-            List<TRSoundDetails> soundDetailsList = level.SoundDetails.ToList();
-            soundDetailsList.Sort(delegate (TRSoundDetails d1, TRSoundDetails d2)
-            {
-                return d1.Sample.CompareTo(d2.Sample);
-            });
-
-            foreach (int mapIndex in soundMapIndices.Keys)
-            {
-                TRSoundDetails details = soundMapIndices[mapIndex];
-                soundMap[mapIndex] = (short)soundDetailsList.IndexOf(details);
-            }
-
-            level.SoundDetails = soundDetailsList.ToArray();
-            level.SoundMap = soundMap.ToArray();
         }
     }
 }

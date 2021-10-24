@@ -54,7 +54,7 @@ namespace TR2Randomizer.Randomizers
 
                     if (File.Exists(textureFileName))
                     {
-                        _levelInstance.Images16[i].Pixels = T16Importer.ImportFrom32PNG(textureFileName);
+                        _levelInstance.Images16[i].Pixels = TextureUtilities.ImportFrom32PNG(textureFileName);
                     }
                 }
 

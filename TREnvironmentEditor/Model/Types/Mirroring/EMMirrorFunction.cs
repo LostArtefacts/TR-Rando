@@ -212,7 +212,7 @@ namespace TREnvironmentEditor.Model.Types
             foreach (TRStaticMesh staticMesh in level.StaticMeshes)
             {
                 // Get the actual mesh
-                TRMesh mesh = TR2LevelUtilities.GetMesh(level, staticMesh.Mesh);
+                TRMesh mesh = TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
 
                 // Move each vertex to the other side of the mesh. Negative values
                 // are supported so we needn't worry about shifting.
@@ -465,7 +465,7 @@ namespace TREnvironmentEditor.Model.Types
                         continue;
                     }
 
-                    TRMesh mesh = TR2LevelUtilities.GetMesh(level, staticMesh.Mesh);
+                    TRMesh mesh = TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
 
                     // Flip the faces and store texture references
                     foreach (TRFace4 f in mesh.TexturedRectangles)

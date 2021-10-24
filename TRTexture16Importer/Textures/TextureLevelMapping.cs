@@ -237,7 +237,7 @@ namespace TRTexture16Importer.Textures
             {
                 foreach (TR2Entities entity in source.EntityColourMap.Keys)
                 {
-                    TRMesh[] meshes = TR2LevelUtilities.GetModelMeshes(_level, entity);
+                    TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(_level, entity);
                     ISet<int> colourIndices = new HashSet<int>();
                     foreach (TRMesh mesh in meshes)
                     {
@@ -271,7 +271,7 @@ namespace TRTexture16Importer.Textures
 
                         // Extract the colour from the top-left of the rectangle specified in the source, and import that into the level
                         int sourceRectangle = source.EntityColourMap[entity][targetColour];
-                        int newColourIndex = P16Importer.Import(_level, source.Bitmap.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
+                        int newColourIndex = PaletteUtilities.Import(_level, source.Bitmap.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
                         remapIndices.Add(matchedIndex, newColourIndex);
                     }
 
@@ -290,7 +290,7 @@ namespace TRTexture16Importer.Textures
                 }
 
                 // Reset the palette tracking 
-                P16Importer.ResetPaletteTracking(_level);
+                PaletteUtilities.ResetPaletteTracking(_level.Palette16);
             }
         }
 
@@ -377,7 +377,7 @@ namespace TRTexture16Importer.Textures
                 {
                     using (BitmapGraphics bmp = _tileMap[tile])
                     {
-                        _level.Images16[tile].Pixels = T16Importer.ImportFromBitmap(bmp.Bitmap);
+                        _level.Images16[tile].Pixels = TextureUtilities.ImportFromBitmap(bmp.Bitmap);
                     }
                 }
                 _committed = true;

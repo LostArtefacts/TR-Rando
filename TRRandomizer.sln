@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TREnvironmentEditor", "TREn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFXExport", "SFXExport\SFXExport.csproj", "{D3662F36-C8D8-471C-8F43-192CE748B04E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelExport", "ModelExport\ModelExport.csproj", "{62336986-BC9F-447E-A046-E24E8153C5AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{D3662F36-C8D8-471C-8F43-192CE748B04E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3662F36-C8D8-471C-8F43-192CE748B04E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3662F36-C8D8-471C-8F43-192CE748B04E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62336986-BC9F-447E-A046-E24E8153C5AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62336986-BC9F-447E-A046-E24E8153C5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62336986-BC9F-447E-A046-E24E8153C5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62336986-BC9F-447E-A046-E24E8153C5AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +96,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{108D4840-3E84-466F-B5DE-AF00EECA8103} = {5F1A11E5-F541-4E3B-B331-93574EE4C629}
 		{D3662F36-C8D8-471C-8F43-192CE748B04E} = {5F1A11E5-F541-4E3B-B331-93574EE4C629}
+		{62336986-BC9F-447E-A046-E24E8153C5AF} = {5F1A11E5-F541-4E3B-B331-93574EE4C629}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B68A2054-7393-4B0D-9004-0E92FB8324FC}

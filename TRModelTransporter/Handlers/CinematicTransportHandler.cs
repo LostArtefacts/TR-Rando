@@ -1,37 +1,72 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRModelTransporter.Model.Definitions;
 
 namespace TRModelTransporter.Handlers
 {
-    public class CinematicTransportHandler : AbstractTransportHandler
+    public class CinematicTransportHandler
     {
-        private static readonly List<TR2Entities> _entityTypes = new List<TR2Entities> { TR2Entities.DragonExplosionEmitter_N };
-
-        public override void Export()
+        public void Export(TRLevel level, TR1ModelDefinition definition, IEnumerable<TREntities> entityTypes)
         {
             List<TRCinematicFrame> frames = new List<TRCinematicFrame>();
-            if (_entityTypes.Contains(Definition.Entity))
+            if (entityTypes != null && entityTypes.Contains(definition.Entity))
             {
-                frames.AddRange(Level.CinematicFrames);
+                frames.AddRange(level.CinematicFrames);
             }
 
-            Definition.CinematicFrames = frames.ToArray();
+            definition.CinematicFrames = frames.ToArray();
         }
 
-        public override void Import()
+        public void Export(TR2Level level, TR2ModelDefinition definition, IEnumerable<TR2Entities> entityTypes)
         {
-            // We only import frames if the level doesn't have any already. This creates a bit of a strange effect
-            // with the dragon death as it inherits the frames already in the level (e.g. Rig, HSH start animations).
-            // The alternative is replacing those with the one for the dragon death, but that itself will cause those
-            // animations to behave strangely - plus it would also provide a spoiler that here be dragons...
-            if (Level.NumCinematicFrames > 0)
+            List<TRCinematicFrame> frames = new List<TRCinematicFrame>();
+            if (entityTypes != null && entityTypes.Contains(definition.Entity))
             {
-                return;
+                frames.AddRange(level.CinematicFrames);
             }
 
-            Level.CinematicFrames = Definition.CinematicFrames;
-            Level.NumCinematicFrames = (ushort)Definition.CinematicFrames.Length;
+            definition.CinematicFrames = frames.ToArray();
+        }
+
+        public void Export(TR3Level level, TR3ModelDefinition definition, IEnumerable<TR3Entities> entityTypes)
+        {
+            List<TRCinematicFrame> frames = new List<TRCinematicFrame>();
+            if (entityTypes != null && entityTypes.Contains(definition.Entity))
+            {
+                frames.AddRange(level.CinematicFrames);
+            }
+
+            definition.CinematicFrames = frames.ToArray();
+        }
+
+        public void Import(TRLevel level, TR1ModelDefinition definition)
+        {
+            // We only import frames if the level doesn't have any already.
+            if (level.NumCinematicFrames == 0)
+            {
+                level.CinematicFrames = definition.CinematicFrames;
+                level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
+            }
+        }
+
+        public void Import(TR2Level level, TR2ModelDefinition definition)
+        {
+            if (level.NumCinematicFrames == 0)
+            {
+                level.CinematicFrames = definition.CinematicFrames;
+                level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
+            }
+        }
+
+        public void Import(TR3Level level, TR3ModelDefinition definition)
+        {
+            if (level.NumCinematicFrames == 0)
+            {
+                level.CinematicFrames = definition.CinematicFrames;
+                level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
+            }
         }
     }
 }

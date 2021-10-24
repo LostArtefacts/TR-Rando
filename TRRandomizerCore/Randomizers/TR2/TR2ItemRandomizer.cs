@@ -625,7 +625,7 @@ namespace TRRandomizerCore.Randomizers
                 return;
             }
 
-            TRModelImporter importer = new TRModelImporter
+            TR2ModelImporter importer = new TR2ModelImporter
             {
                 Level = _levelInstance.Data,
                 LevelName = _levelInstance.Name,
