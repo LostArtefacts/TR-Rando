@@ -290,7 +290,7 @@ namespace TRFDControl
                         break;
                     case FDFunctions.MechBeetleOrMinecartRotateRight:
 
-                        TR3MinecraftRotateRightEntry mineright = new TR3MinecraftRotateRightEntry()
+                        TR3MinecartRotateRightEntry mineright = new TR3MinecartRotateRightEntry()
                         {
                             Setup = new FDSetup() { Value = FloorData[index] },
                         };

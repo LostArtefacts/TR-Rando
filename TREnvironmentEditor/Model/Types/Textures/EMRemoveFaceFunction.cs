@@ -43,6 +43,40 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
+        public override void ApplyToLevel(TR3Level level)
+        {
+            foreach (int roomNumber in GeometryMap.Keys)
+            {
+                TR3Room room = level.Rooms[roomNumber];
+                List<int> rectangleRemovals = new List<int>();
+                List<int> triangleRemovals = new List<int>();
+
+                foreach (EMTextureFaceType faceType in GeometryMap[roomNumber].Keys)
+                {
+                    foreach (int faceIndex in GeometryMap[roomNumber][faceType])
+                    {
+                        switch (faceType)
+                        {
+                            case EMTextureFaceType.Rectangles:
+                                rectangleRemovals.Add(faceIndex);
+                                break;
+                            case EMTextureFaceType.Triangles:
+                                triangleRemovals.Add(faceIndex);
+                                break;
+                        }
+                    }
+                }
+
+                room.RoomData.Rectangles = RemoveEntries(room.RoomData.Rectangles, rectangleRemovals);
+                room.RoomData.Triangles = RemoveEntries(room.RoomData.Triangles, triangleRemovals);
+
+                room.RoomData.NumRectangles = (short)room.RoomData.Rectangles.Length;
+                room.RoomData.NumTriangles = (short)room.RoomData.Triangles.Length;
+
+                room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+            }
+        }
+
         private static T[] RemoveEntries<T>(T[] items, List<int> indices)
         {
             List<T> itemList = items.ToList();

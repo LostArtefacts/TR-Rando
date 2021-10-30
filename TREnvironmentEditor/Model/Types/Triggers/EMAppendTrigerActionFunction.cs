@@ -29,5 +29,24 @@ namespace TREnvironmentEditor.Model.Types
                 control.WriteToLevel(level);
             }
         }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, Location.Room, level, control);
+            if (sector.FDIndex == 0)
+            {
+                return;
+            }
+
+            FDTriggerEntry trigger = control.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) as FDTriggerEntry;
+            if (trigger != null)
+            {
+                trigger.TrigActionList.AddRange(ActionItems);
+                control.WriteToLevel(level);
+            }
+        }
     }
 }

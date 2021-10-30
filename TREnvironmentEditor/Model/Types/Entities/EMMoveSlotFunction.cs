@@ -65,6 +65,11 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
+        public override void ApplyToLevel(TR3Level level)
+        {
+            throw new System.NotImplementedException();
+        }
+
         protected void MoveTriggers(FDControl control, TRRoomSector currentSector, TRRoomSector newSector)
         {
             if (newSector.FDIndex == 0)

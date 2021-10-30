@@ -59,5 +59,10 @@ namespace TREnvironmentEditor.Model.Types
                 room.NumStaticMeshes = (ushort)meshes.Count;
             }
         }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

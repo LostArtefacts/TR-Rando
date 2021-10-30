@@ -16,5 +16,14 @@ namespace TREnvironmentEditor.Model
                 follower.ApplyToLevel(level, excludedTypes);
             }
         }
+
+        public void ApplyToLevel(TR3Level level, EMEditorSet follower, IEnumerable<EMType> excludedTypes)
+        {
+            if (Leader.IsApplicable(excludedTypes) && follower.IsApplicable(excludedTypes))
+            {
+                Leader.ApplyToLevel(level, excludedTypes);
+                follower.ApplyToLevel(level, excludedTypes);
+            }
+        }
     }
 }

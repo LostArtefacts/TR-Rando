@@ -57,5 +57,10 @@ namespace TREnvironmentEditor.Model.Types
 
             control.WriteToLevel(level);
         }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

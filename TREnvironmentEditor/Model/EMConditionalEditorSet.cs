@@ -13,5 +13,10 @@ namespace TREnvironmentEditor.Model
         {
             return Condition.GetResult(level) ? OnTrue : OnFalse;
         }
+
+        public List<EMEditorSet> GetApplicableSets(TR3Level level)
+        {
+            return Condition.GetResult(level) ? OnTrue : OnFalse;
+        }
     }
 }

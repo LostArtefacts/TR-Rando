@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TRFDControl.FDEntryTypes
 {
-    public class TR3MinecraftRotateRightEntry : FDEntry
+    public class TR3MinecartRotateRightEntry : FDEntry
     {
     }
 }

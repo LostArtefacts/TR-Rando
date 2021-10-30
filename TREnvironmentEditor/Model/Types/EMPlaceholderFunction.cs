@@ -8,5 +8,7 @@ namespace TREnvironmentEditor.Model.Types
         {
             // NOOP
         }
+
+        public override void ApplyToLevel(TR3Level level) { }
     }
 }

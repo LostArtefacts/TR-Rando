@@ -12,13 +12,31 @@ namespace TREnvironmentEditor.Model.Types
         {
             // Can't remove by index in case several are called in succession
             List<TRSoundSource> sources = level.SoundSources.ToList();
-            TRSoundSource source = sources.Find(s => s.X == Source.X && s.Y == Source.Y && s.Z == Source.Z);
-            if (source != null)
+            if (RemoveSource(sources))
             {
-                sources.Remove(source);
                 level.SoundSources = sources.ToArray();
                 level.NumSoundSources--;
             }
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            List<TRSoundSource> sources = level.SoundSources.ToList();
+            if (RemoveSource(sources))
+            {
+                level.SoundSources = sources.ToArray();
+                level.NumSoundSources--;
+            }
+        }
+
+        private bool RemoveSource(List<TRSoundSource> sources)
+        {
+            TRSoundSource source = sources.Find(s => s.X == Source.X && s.Y == Source.Y && s.Z == Source.Z);
+            if (source != null)
+            {
+                return sources.Remove(source);
+            }
+            return false;
         }
     }
 }

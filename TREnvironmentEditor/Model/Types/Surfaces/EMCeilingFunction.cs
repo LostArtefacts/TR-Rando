@@ -22,5 +22,10 @@ namespace TREnvironmentEditor.Model.Types
                 room.Info.YTop = min * ClickSize;
             }
         }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

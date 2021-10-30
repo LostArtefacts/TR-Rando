@@ -1,12 +1,11 @@
 ﻿using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
 
 namespace TREnvironmentEditor.Model.Conditions
 {
     public class EMEntityPropertyCondition : BaseEMCondition
     {
         public int EntityIndex { get; set; }
-        public TR2Entities? EntityType { get; set; }
+        public short? EntityType { get; set; }
         public bool? Invisible { get; set; }
         public bool? ClearBody { get; set; }
         public short? Intensity1 { get; set; }
@@ -15,11 +14,20 @@ namespace TREnvironmentEditor.Model.Conditions
 
         public override bool GetResult(TR2Level level)
         {
-            TR2Entity entity = level.Entities[EntityIndex];
+            return GetResult(level.Entities[EntityIndex]);
+        }
+
+        public override bool GetResult(TR3Level level)
+        {
+            return GetResult(level.Entities[EntityIndex]);
+        }
+
+        private bool GetResult(TR2Entity entity)
+        {
             bool result = true;
             if (EntityType.HasValue)
             {
-                result &= (TR2Entities)entity.TypeID == EntityType.Value;
+                result &= entity.TypeID == EntityType.Value;
             }
             if (Invisible.HasValue)
             {

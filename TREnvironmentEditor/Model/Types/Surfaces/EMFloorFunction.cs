@@ -271,5 +271,10 @@ namespace TREnvironmentEditor.Model.Types
                 SideTexture = indexMap[SideTexture];
             }
         }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

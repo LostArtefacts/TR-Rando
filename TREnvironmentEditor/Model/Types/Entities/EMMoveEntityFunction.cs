@@ -10,7 +10,17 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
-            TR2Entity entity = level.Entities[EntityIndex];
+            MoveEntity(level.Entities[EntityIndex]);
+            
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            MoveEntity(level.Entities[EntityIndex]);
+        }
+
+        private void MoveEntity(TR2Entity entity)
+        {
             entity.X = TargetLocation.X;
             entity.Y = TargetLocation.Y;
             entity.Z = TargetLocation.Z;

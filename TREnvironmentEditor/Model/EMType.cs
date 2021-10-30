@@ -50,6 +50,8 @@
         // Room types 121+
         ModifyRoom = 121,
         ModifyOverlaps = 122,
+        CopyRoom = 123,
+        CopyVertexAttributes = 124,
 
         // NOOP/Placeholder
         NOOP = 1000
