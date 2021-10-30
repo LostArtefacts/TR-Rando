@@ -27,6 +27,18 @@ namespace TRLevelReader.Helpers
             level.Zones = zones.ToArray();
         }
 
+        public static void DuplicateZone(TR3Level level, int boxIndex)
+        {
+            TR2ZoneGroup zoneGroup = level.Zones[boxIndex];
+            List<TR2ZoneGroup> zones = level.Zones.ToList();
+            zones.Add(new TR2ZoneGroup
+            {
+                NormalZone = zoneGroup.NormalZone.Clone(),
+                AlternateZone = zoneGroup.AlternateZone.Clone()
+            });
+            level.Zones = zones.ToArray();
+        }
+
         public static TR2ZoneGroup[] ReadZones(uint numBoxes, ushort[] zoneData)
         {
             // Initialise the zone groups - one for every box.
@@ -110,6 +122,16 @@ namespace TRLevelReader.Helpers
 
         public static List<ushort> GetOverlaps(TR2Level level, TR2Box box)
         {
+            return GetOverlaps(level.Overlaps, box);
+        }
+
+        public static List<ushort> GetOverlaps(TR3Level level, TR2Box box)
+        {
+            return GetOverlaps(level.Overlaps, box);
+        }
+
+        private static List<ushort> GetOverlaps(ushort[] allOverlaps, TR2Box box)
+        {
             List<ushort> overlaps = new List<ushort>();
 
             if (box.OverlapIndex != -1)
@@ -119,7 +141,7 @@ namespace TRLevelReader.Helpers
                 bool done = false;
                 do
                 {
-                    boxNumber = level.Overlaps[index++];
+                    boxNumber = allOverlaps[index++];
                     if ((boxNumber & EndBit) > 0)
                     {
                         done = true;
@@ -141,27 +163,48 @@ namespace TRLevelReader.Helpers
                 // Either append the current overlaps, or the new ones if this is the box being updated.
                 // Do nothing for boxes that have no overlaps.
                 List<ushort> boxOverlaps = lvlBox == box ? overlaps : GetOverlaps(level, lvlBox);
-                if (boxOverlaps.Count > 0)
-                {
-                    // Mark the overlap offset for this box to the insertion point
-                    UpdateOverlapIndex(lvlBox, newOverlaps.Count);
-
-                    for (int i = 0; i < boxOverlaps.Count; i++)
-                    {
-                        ushort index = boxOverlaps[i];
-                        if (i == boxOverlaps.Count - 1)
-                        {
-                            // Make sure the final overlap has the end bit set.
-                            index |= EndBit;
-                        }
-                        newOverlaps.Add(index);
-                    }
-                }
+                UpdateOverlaps(lvlBox, boxOverlaps, newOverlaps);
             }
 
             // Update the level data
             level.Overlaps = newOverlaps.ToArray();
             level.NumOverlaps = (uint)newOverlaps.Count;
+        }
+
+        public static void UpdateOverlaps(TR3Level level, TR2Box box, List<ushort> overlaps)
+        {
+            List<ushort> newOverlaps = new List<ushort>();
+            foreach (TR2Box lvlBox in level.Boxes)
+            {
+                List<ushort> boxOverlaps = lvlBox == box ? overlaps : GetOverlaps(level, lvlBox);
+                UpdateOverlaps(lvlBox, boxOverlaps, newOverlaps);
+            }
+
+            // Update the level data
+            level.Overlaps = newOverlaps.ToArray();
+            level.NumOverlaps = (uint)newOverlaps.Count;
+        }
+
+        private static void UpdateOverlaps(TR2Box lvlBox, List<ushort> boxOverlaps, List<ushort> newOverlaps)
+        {
+            // Either append the current overlaps, or the new ones if this is the box being updated.
+            // Do nothing for boxes that have no overlaps.
+            if (boxOverlaps.Count > 0)
+            {
+                // Mark the overlap offset for this box to the insertion point
+                UpdateOverlapIndex(lvlBox, newOverlaps.Count);
+
+                for (int i = 0; i < boxOverlaps.Count; i++)
+                {
+                    ushort index = boxOverlaps[i];
+                    if (i == boxOverlaps.Count - 1)
+                    {
+                        // Make sure the final overlap has the end bit set.
+                        index |= EndBit;
+                    }
+                    newOverlaps.Add(index);
+                }
+            }
         }
 
         private static void UpdateOverlapIndex(TR2Box box, int index)
