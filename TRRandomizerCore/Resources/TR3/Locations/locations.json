@@ -245,7 +245,8 @@
       "Y": -2560,
       "Z": 65960,
       "Room": 50,
-      "RequiresGlitch": true
+      "RequiresGlitch": true,
+      "Validated":  false
     },
     {
       "X": 15904,
@@ -637,7 +638,8 @@
       "Y": 3328,
       "Z": 36943,
       "Room": 64,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "Validated": false
     },
     {
       "X": 37420,
@@ -939,7 +941,8 @@
       "X": 59908,
       "Y": 2048,
       "Z": 66028,
-      "Room": 26
+      "Room": 26,
+      "Validated": false
     },
     {
       "X": 52899,
@@ -1067,7 +1070,8 @@
       "X": 60321,
       "Y": 256,
       "Z": 20413,
-      "Room": 72
+      "Room": 72,
+      "Validated": false
     }
   ],
   "JUNGLE.TR2": [
@@ -1562,7 +1566,8 @@
       "X": 58908,
       "Y": 8318,
       "Z": 46585,
-      "Room": 69
+      "Room": 69,
+      "Validated": false
     },
     {
       "X": 63615,
@@ -3192,7 +3197,8 @@
       "X": 53277,
       "Y": 2816,
       "Z": 53746,
-      "Room": 42
+      "Room": 42,
+      "Validated": false
     },
     {
       "X": 42427,
@@ -3236,7 +3242,8 @@
       "X": 57875,
       "Y": 7168,
       "Z": 61960,
-      "Room": 85
+      "Room": 85,
+      "Validated": false
     },
     {
       "X": 62977,
@@ -3302,7 +3309,8 @@
       "X": 54797,
       "Y": 7936,
       "Z": 58367,
-      "Room": 193
+      "Room": 193,
+      "Validated": false
     },
     {
       "X": 51662,
