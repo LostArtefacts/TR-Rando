@@ -24,7 +24,7 @@ namespace TREnvironmentEditor.Model.Types
             Dictionary<TRRoomSector, EMLocation> sectors = new Dictionary<TRRoomSector, EMLocation>();
             foreach (EMLocation location in SectorLocations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
                 sectors[sector] = location;
             }
 
@@ -55,7 +55,7 @@ namespace TREnvironmentEditor.Model.Types
                     match.X = location.X;
                     match.Y = location.Y;
                     match.Z = location.Z;
-                    match.Room = location.Room;
+                    match.Room = (short)ConvertItemNumber(location.Room, level.NumRooms);
                 }
             }
         }

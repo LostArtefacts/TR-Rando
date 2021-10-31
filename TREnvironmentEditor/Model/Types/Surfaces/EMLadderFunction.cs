@@ -20,7 +20,7 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, Location.Room, level, control);
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, (short)ConvertItemNumber(Location.Room, level.NumRooms), level, control);
             ModifyLadder(sector, control);
 
             control.WriteToLevel(level);
@@ -37,7 +37,7 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, Location.Room, level, control);
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, (short)ConvertItemNumber(Location.Room, level.NumRooms), level, control);
             ModifyLadder(sector, control);
 
             control.WriteToLevel(level);

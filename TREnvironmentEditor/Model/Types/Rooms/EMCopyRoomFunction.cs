@@ -159,7 +159,7 @@ namespace TREnvironmentEditor.Model.Types
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, LinkedLocation.Room, level, floorData);
+            TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, (short)ConvertItemNumber(LinkedLocation.Room, level.NumRooms), level, floorData);
             ushort newBoxIndex = (ushort)level.NumBoxes;
             int linkedBoxIndex = (linkedSector.BoxIndex & 0x7FF0) >> 4;
             int linkedMaterial = linkedSector.BoxIndex & 0x000F; // TR3-5 store material in bits 0-3 - wood, mud etc

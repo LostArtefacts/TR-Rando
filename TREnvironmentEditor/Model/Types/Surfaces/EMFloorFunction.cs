@@ -46,8 +46,9 @@ namespace TREnvironmentEditor.Model.Types
             FDControl fdc = new FDControl();
             fdc.ParseFromLevel(level);
 
-            TR2Room room = level.Rooms[Location.Room];
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, Location.Room, level, fdc);
+            short roomNumber = (short)ConvertItemNumber(Location.Room, level.NumRooms);
+            TR2Room room = level.Rooms[roomNumber];
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, fdc);
             int sectorIndex = room.SectorList.ToList().IndexOf(sector);
 
             // Find the current vertices for this tile
@@ -182,7 +183,7 @@ namespace TREnvironmentEditor.Model.Types
             // Move any entities that share the same floor sector up or down the relevant number of clicks
             foreach (TR2Entity entity in level.Entities)
             {
-                if (entity.Room == Location.Room)
+                if (entity.Room == roomNumber)
                 {
                     TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, fdc);
                     if (entitySector == sector)

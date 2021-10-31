@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
@@ -22,7 +18,7 @@ namespace TREnvironmentEditor.Model.Types
             entity.X = Location.X;
             entity.Y = Location.Y;
             entity.Z = Location.Z;
-            entity.Room = Location.Room;
+            entity.Room = (short)ConvertItemNumber(Location.Room, level.NumRooms);
 
             if (TriggerLocations == null || TriggerLocations.Count == 0)
             {
@@ -42,7 +38,7 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (EMLocation location in TriggerLocations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
                 // If there is no floor data create the FD to begin with.
                 if (sector.FDIndex == 0)
                 {

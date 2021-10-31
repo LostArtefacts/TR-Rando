@@ -6,7 +6,7 @@ using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {
-    public class EMAppendTrigerActionFunction : BaseEMFunction
+    public class EMAppendTriggerActionFunction : BaseEMFunction
     {
         public EMLocation Location { get; set; }
         public FDActionListItem[] ActionItems { get; set; }
@@ -16,7 +16,7 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, Location.Room, level, control);
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, (short)ConvertItemNumber(Location.Room, level.NumRooms), level, control);
             if (sector.FDIndex == 0)
             {
                 return;
@@ -35,7 +35,7 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, Location.Room, level, control);
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, (short)ConvertItemNumber(Location.Room, level.NumRooms), level, control);
             if (sector.FDIndex == 0)
             {
                 return;

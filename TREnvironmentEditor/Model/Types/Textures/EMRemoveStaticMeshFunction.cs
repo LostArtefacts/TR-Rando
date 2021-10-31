@@ -14,7 +14,7 @@ namespace TREnvironmentEditor.Model.Types
         {
             if (Location != null)
             {
-                TR2Room room = level.Rooms[Location.Room];
+                TR2Room room = level.Rooms[(short)ConvertItemNumber(Location.Room, level.NumRooms)];
                 List<TR2RoomStaticMesh> meshes = room.StaticMeshes.ToList();
 
                 uint x = (uint)Location.X;

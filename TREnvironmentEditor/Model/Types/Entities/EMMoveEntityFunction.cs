@@ -10,21 +10,21 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
-            MoveEntity(level.Entities[EntityIndex]);
+            MoveEntity(level.Entities[EntityIndex], level.NumRooms);
             
         }
 
         public override void ApplyToLevel(TR3Level level)
         {
-            MoveEntity(level.Entities[EntityIndex]);
+            MoveEntity(level.Entities[EntityIndex], level.NumRooms);
         }
 
-        private void MoveEntity(TR2Entity entity)
+        private void MoveEntity(TR2Entity entity, ushort numRooms)
         {
             entity.X = TargetLocation.X;
             entity.Y = TargetLocation.Y;
             entity.Z = TargetLocation.Z;
-            entity.Room = TargetLocation.Room;
+            entity.Room = (short)ConvertItemNumber(TargetLocation.Room, numRooms);
             entity.Angle = TargetLocation.Angle;
         }
     }

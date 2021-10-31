@@ -23,7 +23,7 @@ namespace TREnvironmentEditor.Model.Types
                     X = switchEntity.X,
                     Y = switchEntity.Y,
                     Z = switchEntity.Z,
-                    Room = switchEntity.Room
+                    Room = (short)ConvertItemNumber(switchEntity.Room, level.NumRooms)
                 }
             };
 
@@ -34,7 +34,7 @@ namespace TREnvironmentEditor.Model.Types
                 X = switchEntity.X,
                 Y = switchEntity.Y,
                 Z = switchEntity.Z,
-                Room = switchEntity.Room
+                Room = (short)ConvertItemNumber(switchEntity.Room, level.NumRooms)
             };
 
             // Duplicate the triggers to the switch's location
@@ -46,7 +46,7 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
+                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
 
                 List<FDEntry> keyTriggers = control.Entries[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
                 foreach (FDEntry entry in keyTriggers)

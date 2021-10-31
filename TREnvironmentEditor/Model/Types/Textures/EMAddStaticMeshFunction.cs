@@ -20,14 +20,15 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (EMLocation location in Locations)
             {
-                TR2Room room = level.Rooms[location.Room];
+                short roomNumber = (short)ConvertItemNumber(location.Room, level.NumRooms);
+                TR2Room room = level.Rooms[roomNumber];
 
                 // Only add this mesh if there is nothing else in the same sector.
                 bool sectorFree = true;
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level, control);
                 foreach (TR2Entity entity in level.Entities)
                 {
-                    if (entity.Room == location.Room)
+                    if (entity.Room == roomNumber)
                     {
                         TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
                         if (entitySector == sector)
