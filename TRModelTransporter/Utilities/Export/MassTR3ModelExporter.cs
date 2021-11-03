@@ -35,7 +35,7 @@ namespace TRModelTransporter.Utilities
         {
             [TR3LevelNames.JUNGLE] = new List<TR3Entities>
             {
-                TR3Entities.LaraIndia, TR3Entities.Monkey, TR3Entities.Tiger
+                TR3Entities.LaraIndia, TR3Entities.Monkey, TR3Entities.Tiger, TR3Entities.Door1
             },
             [TR3LevelNames.RUINS] = new List<TR3Entities>
             {
