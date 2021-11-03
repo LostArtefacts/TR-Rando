@@ -23,6 +23,8 @@ namespace TRRandomizerCore.Helpers
 
         public bool VehicleRequired { get; set; }
 
+        public bool Validated { get; set; }
+
         public Location()
         {
             X = 0;
@@ -35,6 +37,7 @@ namespace TRRandomizerCore.Helpers
             IsInRoomSpace = false;
             IsItem = false;
             VehicleRequired = false;
+            Validated = true;
         }
 
         public Location(TRViewLocation loc)
