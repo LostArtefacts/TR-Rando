@@ -13,7 +13,7 @@ namespace TREnvironmentEditor.Model.Types
         {
             foreach (int roomNumber in GeometryMap.Keys)
             {
-                TR2Room room = level.Rooms[roomNumber];
+                TR2Room room = level.Rooms[ConvertItemNumber(roomNumber, level.NumRooms)];
                 List<int> rectangleRemovals = new List<int>();
                 List<int> triangleRemovals = new List<int>();
 
@@ -47,7 +47,7 @@ namespace TREnvironmentEditor.Model.Types
         {
             foreach (int roomNumber in GeometryMap.Keys)
             {
-                TR3Room room = level.Rooms[roomNumber];
+                TR3Room room = level.Rooms[ConvertItemNumber(roomNumber, level.NumRooms)];
                 List<int> rectangleRemovals = new List<int>();
                 List<int> triangleRemovals = new List<int>();
 

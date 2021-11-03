@@ -62,6 +62,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMAddStaticMeshFunction>(jo.ToString(), _resolver);
                 case EMType.RemoveStaticMesh:
                     return JsonConvert.DeserializeObject<EMRemoveStaticMeshFunction>(jo.ToString(), _resolver);
+                case EMType.AddFace:
+                    return JsonConvert.DeserializeObject<EMAddFaceFunction>(jo.ToString(), _resolver);
 
                 // Entity types
                 case EMType.MoveSlot:
@@ -126,6 +128,9 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMCopyRoomFunction>(jo.ToString(), _resolver);
                 case EMType.CopyVertexAttributes:
                     return JsonConvert.DeserializeObject<EMCopyVertexAttributesFunction>(jo.ToString(), _resolver);
+
+                case EMType.ImportModel:
+                    return JsonConvert.DeserializeObject<EMImportModelFunction>(jo.ToString(), _resolver);
 
                 // NOOP
                 case EMType.NOOP:

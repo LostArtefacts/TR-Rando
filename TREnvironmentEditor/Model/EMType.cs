@@ -15,6 +15,7 @@
         ModifyFace = 23,
         AddStaticMesh = 24,
         RemoveStaticMesh = 25,
+        AddFace = 26,
 
         // Entity types 41-60
         MoveSlot = 41,
@@ -47,11 +48,14 @@
         MoveSoundSource = 102,
         RemoveSoundSource = 103,
 
-        // Room types 121+
+        // Room types 121-140
         ModifyRoom = 121,
         ModifyOverlaps = 122,
         CopyRoom = 123,
         CopyVertexAttributes = 124,
+
+        // Models
+        ImportModel = 141,
 
         // NOOP/Placeholder
         NOOP = 1000
