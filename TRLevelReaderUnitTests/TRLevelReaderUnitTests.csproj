@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TRFDControl\TRFDControl.csproj" />
     <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj" />
+    <ProjectReference Include="..\TRRandomizerCore\TRRandomizerCore.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

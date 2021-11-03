@@ -12,6 +12,8 @@ using TRFDControl.Utilities;
 using System.Linq;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model.Base.Enums;
+using TRRandomizerCore.Secrets;
+using TRLevelReader.Model.Enums;
 
 namespace TRLevelReaderUnitTests
 {
@@ -673,6 +675,46 @@ namespace TRLevelReaderUnitTests
                 List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
                 Assert.IsTrue(boxOverlaps.ContainsKey(i));
                 CollectionAssert.AreEqual(boxOverlaps[i], overlaps);
+            }
+        }
+
+        [TestMethod]
+        public void TestSecretTriggerMasks()
+        {
+            // TR3 has a max of 6 secrets in any level but we'll test a silly number to ensure the algorithm works.
+            for (int totalSecrets = 1; totalSecrets <= 21; totalSecrets++)
+            {
+                // The number of doors determines the trigger masks
+                int requiredDoors = (int)Math.Ceiling((double)totalSecrets / TRSecretPlacement<TR3Entities>.MaskBits);
+                List<int> doors = new List<int>(requiredDoors);
+                for (int i = 0; i < requiredDoors; i++)
+                {
+                    doors.Add(i);
+                }
+
+                List<TRSecretPlacement<TR3Entities>> secrets = new List<TRSecretPlacement<TR3Entities>>();
+
+                // Create a secret up to the limit for this "level" and set its mask and door
+                for (ushort secretIndex = 0; secretIndex < totalSecrets; secretIndex++)
+                {
+                    TRSecretPlacement<TR3Entities> secret = new TRSecretPlacement<TR3Entities>
+                    {
+                        SecretIndex = secretIndex
+                    };
+                    secret.SetMaskAndDoor(totalSecrets, doors);
+                    secrets.Add(secret);
+                }
+
+                // Now test that for each door, the sum of the trigger masks for the secrets
+                // allocated to it equals full activation i.e. 31.
+                for (int i = 0; i < requiredDoors; i++)
+                {
+                    List<TRSecretPlacement<TR3Entities>> doorTriggers = secrets.FindAll(s => s.DoorIndex == i);
+                    int mask = 0;
+                    doorTriggers.ForEach(s => mask += s.TriggerMask);
+
+                    Assert.AreEqual(TRSecretPlacement<TR3Entities>.FullActivation, mask);
+                }
             }
         }
     }

@@ -92,6 +92,11 @@ namespace TRRandomizerCore.Processors
             }
         }
 
+        protected bool ResourceExists(string filePath)
+        {
+            return File.Exists(GetResourcePath(filePath));
+        }
+
         protected string GetResourcePath(string filePath)
         {
             return Path.Combine("Resources", filePath);
