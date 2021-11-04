@@ -51,6 +51,25 @@ namespace TRLevelReader.Model
 
         public byte Filler { get; set; }
 
+        public bool ContainsWater
+        {
+            get
+            {
+                return (Flags & 0x01) > 0;
+            }
+            set
+            {
+                if (value)
+                {
+                    Flags |= 0x01;
+                }
+                else
+                {
+                    Flags &= ~0x01;
+                }
+            }
+        }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())

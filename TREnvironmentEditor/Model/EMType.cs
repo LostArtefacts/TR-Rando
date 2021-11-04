@@ -41,7 +41,8 @@
 
         // Portal types 81-100
         VisibilityPortal = 81,
-        CollisionalPortal = 82,
+        HorizontalCollisionalPortal = 82,
+        VerticalCollisionalPortal = 83,
 
         // Sound types 101-120
         AddSoundSource = 101,

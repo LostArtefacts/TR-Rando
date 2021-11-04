@@ -7,7 +7,7 @@ using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {
-    public class EMCollisionalPortalFunction : BaseEMFunction
+    public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
     {
         public Dictionary<short, Dictionary<short, EMLocation[]>> Portals { get; set; }
 
