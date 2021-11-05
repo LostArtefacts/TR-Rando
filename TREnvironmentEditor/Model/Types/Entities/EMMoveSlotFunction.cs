@@ -22,20 +22,21 @@ namespace TREnvironmentEditor.Model.Types
 
             TR2Entity slot = level.Entities[EntityIndex];
             TRRoomSector currentSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level, control);
-            TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, Location.Room, level, control);
+            short roomNumber = (short)ConvertItemNumber(Location.Room, level.NumRooms);
+            TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, control);
 
             // Check if there is also a trigger in the flip map if we are moving the slot within the same room
             TRRoomSector currentFlipSector = null;
             TRRoomSector newFlipSector = null;
             short altRoom = level.Rooms[slot.Room].AlternateRoom;
-            if (slot.Room == Location.Room && altRoom != -1)
+            if (slot.Room == roomNumber && altRoom != -1)
             {
                 currentFlipSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom, level, control);
                 newFlipSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom, level, control);
             }
 
             // Make sure there isn't a static enemy on the same sector e.g. MorayEel
-            List<TR2Entity> staticEnemies = level.Entities.ToList().FindAll(e => e.Room == Location.Room && TR2EntityUtilities.IsStaticCreature((TR2Entities)e.TypeID));
+            List<TR2Entity> staticEnemies = level.Entities.ToList().FindAll(e => e.Room == roomNumber && TR2EntityUtilities.IsStaticCreature((TR2Entities)e.TypeID));
             foreach (TR2Entity staticEnemy in staticEnemies)
             {
                 TRRoomSector enemySector = FDUtilities.GetRoomSector(staticEnemy.X, staticEnemy.Y, staticEnemy.Z, staticEnemy.Room, level, control);
@@ -49,7 +50,7 @@ namespace TREnvironmentEditor.Model.Types
             slot.X = Location.X;
             slot.Y = Location.Y;
             slot.Z = Location.Z;
-            slot.Room = Location.Room;
+            slot.Room = roomNumber;
             slot.Angle = Location.Angle;
 
             if (newSector != currentSector && currentSector.FDIndex != 0)
@@ -63,6 +64,11 @@ namespace TREnvironmentEditor.Model.Types
 
                 control.WriteToLevel(level);
             }
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            throw new System.NotImplementedException();
         }
 
         protected void MoveTriggers(FDControl control, TRRoomSector currentSector, TRRoomSector newSector)

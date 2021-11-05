@@ -9,5 +9,10 @@ namespace TREnvironmentEditor.Model.Types
             TR2Entity trap = level.Entities[EntityIndex];
             RepositionTriggerable(trap, level);
         }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

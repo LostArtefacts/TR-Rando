@@ -644,7 +644,8 @@
         "Tile": 10,
         "X": 44,
         "Y": 0,
-        "Clear": true
+        "Clear": true,
+        "Clip": "0, 0, 44, 51"
       },
       {
         "Segment": 1,
@@ -658,7 +659,8 @@
         "Tile": 10,
         "X": 0,
         "Y": 0,
-        "Clear": true
+        "Clear": true,
+        "Clip": "0, 0, 44, 52"
       }
     ],
 

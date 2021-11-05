@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TRLevelReader.Helpers;
 using TRLevelReader.Model.Enums;
 
 namespace TRModelTransporter.Data
@@ -65,7 +66,7 @@ namespace TRModelTransporter.Data
 
         public TR3Entities GetLevelAlias(string level, TR3Entities entity)
         {
-            return entity;// TR2EntityUtilities.GetAliasForLevel(level, entity);
+            return TR3EntityUtilities.GetAliasForLevel(level, entity);
         }
 
         public bool IsAliasDuplicatePermitted(TR3Entities entity)
@@ -142,7 +143,12 @@ namespace TRModelTransporter.Data
             [TR3Entities.EyeOfIsis_P]
                  = new TR3Entities[] { TR3Entities.EyeOfIsis_M_H },
             [TR3Entities.Element115_P]
-                 = new TR3Entities[] { TR3Entities.Element115_M_H }
+                 = new TR3Entities[] { TR3Entities.Element115_M_H },
+
+            [TR3Entities.Quest1_P]
+                = new TR3Entities[] { TR3Entities.Quest1_M_H },
+            [TR3Entities.Quest2_P]
+                = new TR3Entities[] { TR3Entities.Quest2_M_H }
         };
 
         private static readonly Dictionary<TR3Entities, List<TR3Entities>> _spriteDependencies = new Dictionary<TR3Entities, List<TR3Entities>>

@@ -13,26 +13,49 @@ namespace TREnvironmentEditor.Model.Types
             ApplyTextures(level);
         }
 
+        public override void ApplyToLevel(TR3Level level)
+        {
+            ApplyTextures(level);
+        }
+
         public void ApplyTextures(TR2Level level)
         {
             foreach (ushort texture in TextureMap.Keys)
             {
                 foreach (int roomIndex in TextureMap[texture].Keys)
                 {
-                    foreach (EMTextureFaceType faceType in TextureMap[texture][roomIndex].Keys)
+                    TR2Room room = level.Rooms[ConvertItemNumber(roomIndex, level.NumRooms)];
+                    ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
+                }
+            }
+        }
+
+        public void ApplyTextures(TR3Level level)
+        {
+            foreach (ushort texture in TextureMap.Keys)
+            {
+                foreach (int roomIndex in TextureMap[texture].Keys)
+                {
+                    TR3Room room = level.Rooms[ConvertItemNumber(roomIndex, level.NumRooms)];
+                    ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
+                }
+            }
+        }
+
+        private void ApplyTextures(ushort texture, Dictionary<EMTextureFaceType, int[]> faceMap, TRFace4[] rectangles, TRFace3[] triangles)
+        {
+            foreach (EMTextureFaceType faceType in faceMap.Keys)
+            {
+                foreach (int faceIndex in faceMap[faceType])
+                {
+                    switch (faceType)
                     {
-                        foreach (int faceIndex in TextureMap[texture][roomIndex][faceType])
-                        {
-                            switch (faceType)
-                            {
-                                case EMTextureFaceType.Rectangles:
-                                    level.Rooms[roomIndex].RoomData.Rectangles[faceIndex].Texture = texture;
-                                    break;
-                                case EMTextureFaceType.Triangles:
-                                    level.Rooms[roomIndex].RoomData.Triangles[faceIndex].Texture = texture;
-                                    break;
-                            }
-                        }
+                        case EMTextureFaceType.Rectangles:
+                            rectangles[faceIndex].Texture = texture;
+                            break;
+                        case EMTextureFaceType.Triangles:
+                            triangles[faceIndex].Texture = texture;
+                            break;
                     }
                 }
             }

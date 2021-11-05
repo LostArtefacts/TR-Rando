@@ -30,6 +30,12 @@ namespace TRRandomizerCore.Editors
             // randomizers are implemented, just call Settings.GetSaveTarget(numLevels) per TR2.
             int target = base.GetSaveTarget(numLevels);
 
+            if (Settings.RandomizeSecrets)
+            {
+                // *3 for multithreaded work
+                target += numLevels * 3;
+            }
+
             if (Settings.RandomizeAudio)
             {
                 target += numLevels;
@@ -65,6 +71,19 @@ namespace TRRandomizerCore.Editors
             {
                 (tr23ScriptEditor.Script as TR23Script).LevelSelectEnabled = true;
                 scriptEditor.SaveScript();
+            }
+
+            if (!monitor.IsCancelled && Settings.RandomizeSecrets)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
+                new TR3SecretRandomizer
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.SecretSeed);
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeAudio)

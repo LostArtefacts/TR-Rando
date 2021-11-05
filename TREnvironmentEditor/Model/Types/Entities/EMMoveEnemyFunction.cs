@@ -37,5 +37,10 @@ namespace TREnvironmentEditor.Model.Types
             // Otherwise, reposition the enemy and its triggers.
             RepositionTriggerable(enemy, level);
         }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

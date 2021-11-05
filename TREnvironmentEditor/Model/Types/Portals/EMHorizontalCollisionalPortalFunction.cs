@@ -7,7 +7,7 @@ using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {
-    public class EMCollisionalPortalFunction : BaseEMFunction
+    public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
     {
         public Dictionary<short, Dictionary<short, EMLocation[]>> Portals { get; set; }
 
@@ -26,22 +26,62 @@ namespace TREnvironmentEditor.Model.Types
             // interested in first before making any changes.
             foreach (short fromRoomNumber in Portals.Keys)
             {
+                int convertedFromRoomNumber = ConvertItemNumber(fromRoomNumber, level.NumRooms);
                 foreach (short toRoomNumber in Portals[fromRoomNumber].Keys)
                 {
+                    int convertedToRoomNumber = ConvertItemNumber(toRoomNumber, level.NumRooms);
                     foreach (EMLocation sectorLocation in Portals[fromRoomNumber][toRoomNumber])
                     {
-                        TRRoomSector sector = FDUtilities.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, fromRoomNumber, level, control);
-                        
+                        TRRoomSector sector = FDUtilities.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, (short)convertedFromRoomNumber, level, control);
+
                         if (!sectorMap.ContainsKey(sector))
                         {
                             sectorMap[sector] = new List<ushort>();
                         }
-                        sectorMap[sector].Add((ushort)toRoomNumber);
+                        sectorMap[sector].Add((ushort)convertedToRoomNumber);
                     }
                 }
             }
 
             // Now create the new entries for all the portals.
+            CreatePortals(sectorMap, control);
+
+            control.WriteToLevel(level);
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            Dictionary<TRRoomSector, List<ushort>> sectorMap = new Dictionary<TRRoomSector, List<ushort>>();
+
+            foreach (short fromRoomNumber in Portals.Keys)
+            {
+                int convertedFromRoomNumber = ConvertItemNumber(fromRoomNumber, level.NumRooms);
+                foreach (short toRoomNumber in Portals[fromRoomNumber].Keys)
+                {
+                    int convertedToRoomNumber = ConvertItemNumber(toRoomNumber, level.NumRooms);
+                    foreach (EMLocation sectorLocation in Portals[fromRoomNumber][toRoomNumber])
+                    {
+                        TRRoomSector sector = FDUtilities.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, (short)convertedFromRoomNumber, level, control);
+
+                        if (!sectorMap.ContainsKey(sector))
+                        {
+                            sectorMap[sector] = new List<ushort>();
+                        }
+                        sectorMap[sector].Add((ushort)convertedToRoomNumber);
+                    }
+                }
+            }
+
+            CreatePortals(sectorMap, control);
+
+            control.WriteToLevel(level);
+        }
+
+        private void CreatePortals(Dictionary<TRRoomSector, List<ushort>> sectorMap, FDControl control)
+        {
             foreach (TRRoomSector sector in sectorMap.Keys)
             {
                 if (sector.FDIndex == 0)
@@ -58,8 +98,6 @@ namespace TREnvironmentEditor.Model.Types
                     });
                 }
             }
-
-            control.WriteToLevel(level);
         }
     }
 }

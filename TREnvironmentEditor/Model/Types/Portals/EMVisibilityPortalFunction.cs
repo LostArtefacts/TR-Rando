@@ -12,9 +12,29 @@ namespace TREnvironmentEditor.Model.Types
         {
             foreach (int roomNumber in Portals.Keys)
             {
-                TR2Room room = level.Rooms[roomNumber];
+                TRRoomPortal portal = Portals[roomNumber];
+                portal.AdjoiningRoom = (ushort)ConvertItemNumber(portal.AdjoiningRoom, level.NumRooms);
+
+                int convertedRoomNumbew = ConvertItemNumber(roomNumber, level.NumRooms);
+                TR2Room room = level.Rooms[convertedRoomNumbew];
                 List<TRRoomPortal> portals = room.Portals.ToList();
-                portals.Add(Portals[roomNumber]);
+                portals.Add(portal);
+                room.Portals = portals.ToArray();
+                room.NumPortals++;
+            }
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            foreach (int roomNumber in Portals.Keys)
+            {
+                TRRoomPortal portal = Portals[roomNumber];
+                portal.AdjoiningRoom = (ushort)ConvertItemNumber(portal.AdjoiningRoom, level.NumRooms);
+
+                int convertedRoomNumbew = ConvertItemNumber(roomNumber, level.NumRooms);
+                TR3Room room = level.Rooms[convertedRoomNumbew];
+                List<TRRoomPortal> portals = room.Portals.ToList();
+                portals.Add(portal);
                 room.Portals = portals.ToArray();
                 room.NumPortals++;
             }

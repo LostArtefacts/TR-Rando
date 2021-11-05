@@ -6,11 +6,16 @@ namespace TREnvironmentEditor.Model.Types
     public class EMConvertEntityFunction : BaseEMFunction
     {
         public int EntityIndex { get; set; }
-        public TR2Entities NewEntityType { get; set; }
+        public short NewEntityType { get; set; }
 
         public override void ApplyToLevel(TR2Level level)
         {
-            level.Entities[EntityIndex].TypeID = (short)NewEntityType;
+            level.Entities[EntityIndex].TypeID = NewEntityType;
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            level.Entities[EntityIndex].TypeID = NewEntityType;
         }
     }
 }

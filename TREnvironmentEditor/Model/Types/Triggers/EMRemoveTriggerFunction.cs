@@ -21,7 +21,7 @@ namespace TREnvironmentEditor.Model.Types
             {
                 foreach (EMLocation location in Locations)
                 {
-                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
+                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
                     RemoveSectorTriggers(sector, control);
                 }
             }
@@ -30,14 +30,44 @@ namespace TREnvironmentEditor.Model.Types
             {
                 foreach (int roomNumber in Rooms)
                 {
-                    foreach (TRRoomSector sector in level.Rooms[roomNumber].SectorList)
-                    {
-                        RemoveSectorTriggers(sector, control);
-                    }
+                    RemoveSectorListTriggers(level.Rooms[roomNumber].SectorList, control);
                 }
             }
 
             control.WriteToLevel(level);
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            if (Locations != null)
+            {
+                foreach (EMLocation location in Locations)
+                {
+                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                    RemoveSectorTriggers(sector, control);
+                }
+            }
+
+            if (Rooms != null)
+            {
+                foreach (int roomNumber in Rooms)
+                {
+                    RemoveSectorListTriggers(level.Rooms[roomNumber].Sectors, control);
+                }
+            }
+
+            control.WriteToLevel(level);
+        }
+
+        private void RemoveSectorListTriggers(IEnumerable<TRRoomSector> sectors, FDControl control)
+        {
+            foreach (TRRoomSector sector in sectors)
+            {
+                RemoveSectorTriggers(sector, control);
+            }
         }
 
         private void RemoveSectorTriggers(TRRoomSector sector, FDControl control)

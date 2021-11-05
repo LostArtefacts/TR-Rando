@@ -7,5 +7,6 @@ namespace TREnvironmentEditor.Model
         public EMConditionType ConditionType { get; set; }
 
         public abstract bool GetResult(TR2Level level);
+        public abstract bool GetResult(TR3Level level);
     }
 }

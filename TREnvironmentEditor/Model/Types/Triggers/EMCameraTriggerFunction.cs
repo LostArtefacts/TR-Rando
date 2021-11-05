@@ -38,7 +38,7 @@ namespace TREnvironmentEditor.Model.Types
                 foreach (ushort item in AttachToItems)
                 {
                     TR2Entity attachToEntity = level.Entities[item];
-                    TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, attachToEntity.Room, level, control);
+                    TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, (short)ConvertItemNumber(attachToEntity.Room, level.NumRooms), level, control);
                     AttachToSector(sector, control, cameraIndex);
                 }
             }
@@ -47,7 +47,41 @@ namespace TREnvironmentEditor.Model.Types
             {
                 foreach (EMLocation location in AttachToLocations)
                 {
-                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
+                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                    AttachToSector(sector, control, cameraIndex);
+                }
+            }
+
+            control.WriteToLevel(level);
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            List<TRCamera> cameras = level.Cameras.ToList();
+            cameras.Add(Camera);
+            level.Cameras = cameras.ToArray();
+
+            ushort cameraIndex = (ushort)level.NumCameras;
+            level.NumCameras++;
+
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            if (AttachToItems != null)
+            {
+                foreach (ushort item in AttachToItems)
+                {
+                    TR2Entity attachToEntity = level.Entities[item];
+                    TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, (short)ConvertItemNumber(attachToEntity.Room, level.NumRooms), level, control);
+                    AttachToSector(sector, control, cameraIndex);
+                }
+            }
+
+            if (AttachToLocations != null)
+            {
+                foreach (EMLocation location in AttachToLocations)
+                {
+                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
                     AttachToSector(sector, control, cameraIndex);
                 }
             }

@@ -2,13 +2,12 @@
 using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
 
 namespace TREnvironmentEditor.Model.Types
 {
     public class EMAdjustEntityPositionFunction : BaseEMFunction
     {
-        public TR2Entities EntityType { get; set; }
+        public short EntityType { get; set; }
         public Dictionary<int, Dictionary<short, EMLocation>> RoomMap { get; set; }
 
         public override void ApplyToLevel(TR2Level level)
@@ -16,7 +15,18 @@ namespace TREnvironmentEditor.Model.Types
             // Example use case is rotating wall blades, which need various different angles across the levels after mirroring.
             // X, Y, Z in the target relocation will be relative to the current location; the angle will be the new angle.
 
-            List<TR2Entity> entities = level.Entities.ToList().FindAll(e => (TR2Entities)e.TypeID == EntityType);
+            List<TR2Entity> entities = level.Entities.ToList().FindAll(e => e.TypeID == EntityType);
+            AdjustEntities(entities);
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            List<TR2Entity> entities = level.Entities.ToList().FindAll(e => e.TypeID == EntityType);
+            AdjustEntities(entities);
+        }
+
+        private void AdjustEntities(List<TR2Entity> entities)
+        {
             foreach (int roomNumber in RoomMap.Keys)
             {
                 foreach (short currentAngle in RoomMap[roomNumber].Keys)

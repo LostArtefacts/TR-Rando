@@ -19,20 +19,39 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
-                if (baseSector.FDIndex == 0)
-                {
-                    return;
-                }
-
-                List<FDActionListItem> actions = FDUtilities.GetActionListItems(control, TrigAction, baseSector.FDIndex);
-                foreach (FDActionListItem action in actions)
-                {
-                    action.Parameter = NewParameter;
-                }
+                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                ReplaceActionParameter(baseSector, control);
             }
 
             control.WriteToLevel(level);
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            foreach (EMLocation location in Locations)
+            {
+                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                ReplaceActionParameter(baseSector, control);
+            }
+
+            control.WriteToLevel(level);
+        }
+
+        private void ReplaceActionParameter(TRRoomSector baseSector, FDControl control)
+        {
+            if (baseSector.FDIndex == 0)
+            {
+                return;
+            }
+
+            List<FDActionListItem> actions = FDUtilities.GetActionListItems(control, TrigAction, baseSector.FDIndex);
+            foreach (FDActionListItem action in actions)
+            {
+                action.Parameter = NewParameter;
+            }
         }
     }
 }

@@ -13,7 +13,16 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
-            TR2Entity entity = level.Entities[EntityIndex];
+            ModifyEntity(level.Entities[EntityIndex]);            
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            ModifyEntity(level.Entities[EntityIndex]);
+        }
+
+        private void ModifyEntity(TR2Entity entity)
+        {
             if (Invisible.HasValue)
             {
                 entity.Invisible = Invisible.Value;

@@ -8,7 +8,7 @@ namespace TREnvironmentEditor
 {
     public class EMEditorMapping
     {
-        private static readonly EMConverter _converter = new EMConverter();
+        public static readonly EMConverter Converter = new EMConverter();
 
         public EMEditorSet All { get; set; }
         public EMEditorSet NonPurist { get; set; }
@@ -34,7 +34,7 @@ namespace TREnvironmentEditor
         {
             if (File.Exists(packPath))
             {
-                return JsonConvert.DeserializeObject<EMEditorMapping>(File.ReadAllText(packPath), _converter);
+                return JsonConvert.DeserializeObject<EMEditorMapping>(File.ReadAllText(packPath), Converter);
             }
 
             return null;

@@ -10,7 +10,16 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
-            TRSoundSource source = level.SoundSources[Index];
+            MoveSoundSource(level.SoundSources[Index]);
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            MoveSoundSource(level.SoundSources[Index]);
+        }
+
+        private void MoveSoundSource(TRSoundSource source)
+        {
             source.X += Relocation.X;
             source.Y += Relocation.Y;
             source.Z += Relocation.Z;

@@ -22,22 +22,8 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
-                // If there is no floor data create the FD to begin with.
-                if (sector.FDIndex == 0)
-                {
-                    control.CreateFloorData(sector);
-                }
-
-                List<FDEntry> entries = control.Entries[sector.FDIndex];
-                if (Replace)
-                {
-                    entries.Clear();
-                }
-                if (entries.FindIndex(e => e is FDTriggerEntry) == -1)
-                {
-                    entries.Add(TriggerEntry);
-                }
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                CreateTrigger(sector, control);
             }
 
             // Handle any specifics that the trigger may rely on
@@ -46,7 +32,7 @@ namespace TREnvironmentEditor.Model.Types
                 switch (action.TrigAction)
                 {
                     case FDTrigAction.ClearBodies:
-                        SetEnemyClearBodies(level);
+                        SetEnemyClearBodies(level.Entities);
                         break;
                 }
             }
@@ -54,9 +40,53 @@ namespace TREnvironmentEditor.Model.Types
             control.WriteToLevel(level);
         }
 
-        private void SetEnemyClearBodies(TR2Level level)
+        public override void ApplyToLevel(TR3Level level)
         {
-            foreach (TR2Entity entity in level.Entities)
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            foreach (EMLocation location in Locations)
+            {
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                CreateTrigger(sector, control);
+            }
+
+            // Handle any specifics that the trigger may rely on
+            foreach (FDActionListItem action in TriggerEntry.TrigActionList)
+            {
+                switch (action.TrigAction)
+                {
+                    case FDTrigAction.ClearBodies:
+                        SetEnemyClearBodies(level.Entities);
+                        break;
+                }
+            }
+
+            control.WriteToLevel(level);
+        }
+
+        private void CreateTrigger(TRRoomSector sector, FDControl control)
+        {
+            // If there is no floor data create the FD to begin with.
+            if (sector.FDIndex == 0)
+            {
+                control.CreateFloorData(sector);
+            }
+
+            List<FDEntry> entries = control.Entries[sector.FDIndex];
+            if (Replace)
+            {
+                entries.Clear();
+            }
+            if (entries.FindIndex(e => e is FDTriggerEntry) == -1)
+            {
+                entries.Add(TriggerEntry);
+            }
+        }
+
+        private void SetEnemyClearBodies(IEnumerable<TR2Entity> levelEntities)
+        {
+            foreach (TR2Entity entity in levelEntities)
             {
                 if (TR2EntityUtilities.IsEnemyType((TR2Entities)entity.TypeID))
                 {

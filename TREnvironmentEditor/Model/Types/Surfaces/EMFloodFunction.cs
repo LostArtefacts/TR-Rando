@@ -43,5 +43,15 @@ namespace TREnvironmentEditor.Model.Types
                 }
             }
         }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            foreach (int roomNumber in RoomNumbers)
+            {
+                level.Rooms[ConvertItemNumber(roomNumber, level.NumRooms)].ContainsWater = true;
+            }
+
+            // Texturing not yet handled
+        }
     }
 }

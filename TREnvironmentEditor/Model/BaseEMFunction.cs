@@ -14,6 +14,7 @@ namespace TREnvironmentEditor.Model
         public EMType EMType { get; set; }
 
         public abstract void ApplyToLevel(TR2Level level);
+        public abstract void ApplyToLevel(TR3Level level);
 
         /// <summary>
         /// Gets the expected vertices for a flat tile.
@@ -70,6 +71,17 @@ namespace TREnvironmentEditor.Model
                 }
             }
             return rooms;
+        }
+
+        // This allows us to access the last item in a specific list, so if for example one mod has created
+        // a new room, subsequent mods can retrieve its number using short.MaxValue.
+        protected int ConvertItemNumber(int itemNumber, ushort numItems)
+        {
+            if (itemNumber == short.MaxValue)
+            {
+                itemNumber = numItems - 1;
+            }
+            return itemNumber;
         }
     }
 }

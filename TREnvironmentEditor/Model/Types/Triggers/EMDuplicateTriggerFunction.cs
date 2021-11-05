@@ -17,7 +17,7 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, BaseLocation.Room, level, control);
+            TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, (short)ConvertItemNumber(BaseLocation.Room, level.NumRooms), level, control);
             if (baseSector.FDIndex == 0)
             {
                 return;
@@ -31,20 +31,51 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, control);
-                if (sector.FDIndex == 0)
-                {
-                    control.CreateFloorData(sector);
-                }
-
-                List<FDEntry> entries = control.Entries[sector.FDIndex];
-                if (entries.FindIndex(e => e is FDTriggerEntry) == -1)
-                {
-                    entries.AddRange(triggerEntries);
-                }
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                AppendTriggers(sector, triggerEntries, control);
             }
 
             control.WriteToLevel(level);
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, (short)ConvertItemNumber(BaseLocation.Room, level.NumRooms), level, control);
+            if (baseSector.FDIndex == 0)
+            {
+                return;
+            }
+
+            List<FDEntry> triggerEntries = control.Entries[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
+            if (triggerEntries.Count == 0)
+            {
+                return;
+            }
+
+            foreach (EMLocation location in Locations)
+            {
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                AppendTriggers(sector, triggerEntries, control);
+            }
+
+            control.WriteToLevel(level);
+        }
+
+        private void AppendTriggers(TRRoomSector sector, List<FDEntry> triggerEntries, FDControl control)
+        {
+            if (sector.FDIndex == 0)
+            {
+                control.CreateFloorData(sector);
+            }
+
+            List<FDEntry> entries = control.Entries[sector.FDIndex];
+            if (entries.FindIndex(e => e is FDTriggerEntry) == -1)
+            {
+                entries.AddRange(triggerEntries);
+            }
         }
     }
 }

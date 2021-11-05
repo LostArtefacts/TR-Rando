@@ -20,6 +20,33 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, (short)ConvertItemNumber(Location.Room, level.NumRooms), level, control);
+            ModifyLadder(sector, control);
+
+            control.WriteToLevel(level);
+
+            // Unfortunately the ladder texture may not match the walls we are targeting, but
+            // we can maybe look at generating a ladder texture with a transparent background for
+            // each level, and then merging it with the wall in a particular room (similar to the way
+            // landmarks are done), provided there is enough texture space.
+            ApplyTextures(level);
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, (short)ConvertItemNumber(Location.Room, level.NumRooms), level, control);
+            ModifyLadder(sector, control);
+
+            control.WriteToLevel(level);
+
+            ApplyTextures(level);
+        }
+
+        private void ModifyLadder(TRRoomSector sector, FDControl control)
+        {
             // Rosetta: Collisional floordata functions should always come first in sequence, with floor
             // collision function strictly being first and ceiling collision function strictly being second.
             // The reason is hardcoded floordata collision parser which always expects these two functions
@@ -29,7 +56,6 @@ namespace TREnvironmentEditor.Model.Types
 
             bool removeAll = !IsPositiveX && !IsPositiveZ && !IsNegativeX && !IsNegativeZ;
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, Location.Room, level, control);
             if (!removeAll && sector.FDIndex == 0)
             {
                 control.CreateFloorData(sector);
@@ -66,14 +92,6 @@ namespace TREnvironmentEditor.Model.Types
 
                 control.Entries[sector.FDIndex].Insert(index + 1, climbEntry);
             }
-
-            control.WriteToLevel(level);
-
-            // Unfortunately the ladder texture may not match the walls we are targeting, but
-            // we can maybe look at generating a ladder texture with a transparent background for
-            // each level, and then merging it with the wall in a particular room (similar to the way
-            // landmarks are done), provided there is enough texture space.
-            ApplyTextures(level);
         }
     }
 }

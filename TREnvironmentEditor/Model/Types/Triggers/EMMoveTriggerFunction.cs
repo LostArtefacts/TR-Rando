@@ -17,9 +17,31 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, BaseLocation.Room, level, control);
-            TRRoomSector newSector = FDUtilities.GetRoomSector(NewLocation.X, NewLocation.Y, NewLocation.Z, NewLocation.Room, level, control);
+            TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, (short)ConvertItemNumber(BaseLocation.Room, level.NumRooms), level, control);
+            TRRoomSector newSector = FDUtilities.GetRoomSector(NewLocation.X, NewLocation.Y, NewLocation.Z, (short)ConvertItemNumber(NewLocation.Room, level.NumRooms), level, control);
 
+            if (MoveTriggers(baseSector, newSector, control))
+            {
+                control.WriteToLevel(level);
+            }
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, (short)ConvertItemNumber(BaseLocation.Room, level.NumRooms), level, control);
+            TRRoomSector newSector = FDUtilities.GetRoomSector(NewLocation.X, NewLocation.Y, NewLocation.Z, (short)ConvertItemNumber(NewLocation.Room, level.NumRooms), level, control);
+
+            if (MoveTriggers(baseSector, newSector, control))
+            {
+                control.WriteToLevel(level);
+            }
+        }
+
+        private bool MoveTriggers(TRRoomSector baseSector, TRRoomSector newSector, FDControl control)
+        {
             if (baseSector.FDIndex != 0)
             {
                 if (newSector.FDIndex == 0)
@@ -36,8 +58,10 @@ namespace TREnvironmentEditor.Model.Types
                     control.RemoveFloorData(baseSector);
                 }
 
-                control.WriteToLevel(level);
+                return true;
             }
+
+            return false;
         }
     }
 }

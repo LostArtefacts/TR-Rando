@@ -62,6 +62,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMAddStaticMeshFunction>(jo.ToString(), _resolver);
                 case EMType.RemoveStaticMesh:
                     return JsonConvert.DeserializeObject<EMRemoveStaticMeshFunction>(jo.ToString(), _resolver);
+                case EMType.AddFace:
+                    return JsonConvert.DeserializeObject<EMAddFaceFunction>(jo.ToString(), _resolver);
 
                 // Entity types
                 case EMType.MoveSlot:
@@ -101,13 +103,15 @@ namespace TREnvironmentEditor.Parsing
                 case EMType.MoveTrigger:
                     return JsonConvert.DeserializeObject<EMMoveTriggerFunction>(jo.ToString(), _resolver);
                 case EMType.AppendTriggerActionFunction:
-                    return JsonConvert.DeserializeObject<EMAppendTrigerActionFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMAppendTriggerActionFunction>(jo.ToString(), _resolver);
 
                 // Portals
                 case EMType.VisibilityPortal:
                     return JsonConvert.DeserializeObject<EMVisibilityPortalFunction>(jo.ToString(), _resolver);
-                case EMType.CollisionalPortal:
-                    return JsonConvert.DeserializeObject<EMCollisionalPortalFunction>(jo.ToString(), _resolver);
+                case EMType.HorizontalCollisionalPortal:
+                    return JsonConvert.DeserializeObject<EMHorizontalCollisionalPortalFunction>(jo.ToString(), _resolver);
+                case EMType.VerticalCollisionalPortal:
+                    return JsonConvert.DeserializeObject<EMVerticalCollisionalPortalFunction>(jo.ToString(), _resolver);
 
                 // Sounds
                 case EMType.AddSoundSource:
@@ -122,6 +126,13 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMModifyRoomFunction>(jo.ToString(), _resolver);
                 case EMType.ModifyOverlaps:
                     return JsonConvert.DeserializeObject<EMModifyOverlapsFunction>(jo.ToString(), _resolver);
+                case EMType.CopyRoom:
+                    return JsonConvert.DeserializeObject<EMCopyRoomFunction>(jo.ToString(), _resolver);
+                case EMType.CopyVertexAttributes:
+                    return JsonConvert.DeserializeObject<EMCopyVertexAttributesFunction>(jo.ToString(), _resolver);
+
+                case EMType.ImportModel:
+                    return JsonConvert.DeserializeObject<EMImportModelFunction>(jo.ToString(), _resolver);
 
                 // NOOP
                 case EMType.NOOP:

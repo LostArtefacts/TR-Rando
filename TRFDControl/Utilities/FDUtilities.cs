@@ -130,7 +130,6 @@ namespace TRFDControl.Utilities
         public static readonly short NO_ROOM = 0xff;
         public static readonly short WALL_SHIFT = 10;
 
-        // See Control.c line 516
         public static TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TR2Level level, FDControl floorData)
         {
             int xFloor, yFloor;
@@ -140,11 +139,10 @@ namespace TRFDControl.Utilities
 
             do
             {
-                // Clip position to edge of room (that way doorways are detected)
+                // Clip position to edge of tile
                 xFloor = (z - room.Info.Z) >> WALL_SHIFT;
                 yFloor = (x - room.Info.X) >> WALL_SHIFT;
 
-                // Ensure we don't test the corner of a room's floor data, as this can cause problems when 4 rooms join at a point
                 if (xFloor <= 0)
                 {
                     xFloor = 0;
@@ -178,7 +176,6 @@ namespace TRFDControl.Utilities
                     yFloor = room.NumXSectors - 1;
                 }
 
-                // If doorway, go through and retest, else move onto next stage
                 sector = room.SectorList[xFloor + yFloor * room.NumZSectors];
                 data = GetDoor(sector, floorData);
                 if (data != NO_ROOM && data >= 0 && data < level.Rooms.Length - 1)
@@ -188,7 +185,6 @@ namespace TRFDControl.Utilities
             }
             while (data != NO_ROOM);
 
-            // If below floor and pit, go down
             if (y >= (sector.Floor << 8))
             {
                 do
@@ -205,7 +201,6 @@ namespace TRFDControl.Utilities
             }
             else if (y < (sector.Ceiling << 8))
             {
-                // If above ceiling and skylight, go up
                 do
                 {
                     if (sector.RoomAbove == NO_ROOM)
@@ -222,7 +217,113 @@ namespace TRFDControl.Utilities
             return sector;
         }
 
-        // See Control.c line 1344
+        public static TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TR3Level level, FDControl floorData)
+        {
+            int xFloor, yFloor;
+            TR3Room room = level.Rooms[roomNumber];
+            TRRoomSector sector;
+            short data;
+
+            do
+            {
+                // Clip position to edge of tile
+                xFloor = (z - room.Info.Z) >> WALL_SHIFT;
+                yFloor = (x - room.Info.X) >> WALL_SHIFT;
+
+                if (xFloor <= 0)
+                {
+                    xFloor = 0;
+                    if (yFloor < 1)
+                    {
+                        yFloor = 1;
+                    }
+                    else if (yFloor > room.NumXSectors - 2)
+                    {
+                        yFloor = room.NumXSectors - 2;
+                    }
+                }
+                else if (xFloor >= room.NumZSectors - 1)
+                {
+                    xFloor = room.NumZSectors - 1;
+                    if (yFloor < 1)
+                    {
+                        yFloor = 1;
+                    }
+                    else if (yFloor > room.NumXSectors - 2)
+                    {
+                        yFloor = room.NumXSectors - 2;
+                    }
+                }
+                else if (yFloor < 0)
+                {
+                    yFloor = 0;
+                }
+                else if (yFloor >= room.NumXSectors)
+                {
+                    yFloor = room.NumXSectors - 1;
+                }
+
+                sector = room.Sectors[xFloor + yFloor * room.NumZSectors];
+                data = GetDoor(sector, floorData);
+                if (data != NO_ROOM && data >= 0 && data < level.Rooms.Length - 1)
+                {
+                    room = level.Rooms[data];
+                }
+            }
+            while (data != NO_ROOM);
+
+            if (y >= (sector.Floor << 8))
+            {
+                do
+                {
+                    if (sector.RoomBelow == NO_ROOM)
+                    {
+                        return sector;
+                    }
+
+                    int triCheck = CheckFloorTriangle(floorData, sector, x, z);
+                    if (triCheck == 1)
+                    {
+                        break;
+                    }
+                    else if (triCheck == -1 && y < room.Info.YBottom)
+                    {
+                        break;
+                    }
+
+                    room = level.Rooms[sector.RoomBelow];
+                    sector = room.Sectors[((z - room.Info.Z) >> WALL_SHIFT) + ((x - room.Info.X) >> WALL_SHIFT) * room.NumZSectors];
+                }
+                while (y >= (sector.Floor << 8));
+            }
+            else if (y < (sector.Ceiling << 8))
+            {
+                do
+                {
+                    if (sector.RoomAbove == NO_ROOM)
+                    {
+                        return sector;
+                    }
+
+                    int triCheck = CheckCeilingTriangle(floorData, sector, x, z);
+                    if (triCheck == 1)
+                    {
+                        break;
+                    }
+                    else if (triCheck == -1 && y >= room.Info.YTop)
+                    {
+                        break;
+                    }
+
+                    room = level.Rooms[sector.RoomAbove];
+                    sector = room.Sectors[((z - room.Info.Z) >> WALL_SHIFT) + ((x - room.Info.X) >> WALL_SHIFT) * room.NumZSectors];
+                }
+                while (y < (sector.RoomAbove << 8));
+            }
+
+            return sector;
+        }
+
         public static short GetDoor(TRRoomSector sector, FDControl floorData)
         {
             if (sector.FDIndex == 0)
@@ -240,6 +341,78 @@ namespace TRFDControl.Utilities
             }
 
             return NO_ROOM;
+        }
+
+        private static int CheckFloorTriangle(FDControl floorData, TRRoomSector sector, int x, int z)
+        {
+            if (sector.FDIndex == 0)
+            {
+                return 0; 
+            }
+
+            if (floorData.Entries[sector.FDIndex].Find(e => e is TR3TriangulationEntry) is TR3TriangulationEntry triangulation)
+            {
+                FDFunctions func = (FDFunctions)triangulation.Setup.Value;
+                int dx = x & 1023;
+                int dz = z & 1023;
+
+                if (func == FDFunctions.FloorTriangulationNWSE_SW && dx <= (1024 - dz))
+                {
+                    return -1;
+                }
+                else if (func == FDFunctions.FloorTriangulationNWSE_NE && dx > (1024 - dz))
+                {
+                    return -1;
+                }
+                else if (func == FDFunctions.FloorTriangulationNESW_SW && dx <= dz)
+                {
+                    return -1;
+                }
+                else if (func == FDFunctions.FloorTriangulationNESW_NW && dx > dz)
+                {
+                    return -1;
+                }
+
+                return 1; // Bad floor data
+            }
+
+            return 0;
+        }
+
+        private static int CheckCeilingTriangle(FDControl floorData, TRRoomSector sector, int x, int z)
+        {
+            if (sector.FDIndex == 0)
+            {
+                return 0;
+            }
+
+            if (floorData.Entries[sector.FDIndex].Find(e => e is TR3TriangulationEntry) is TR3TriangulationEntry triangulation)
+            {
+                FDFunctions func = (FDFunctions)triangulation.Setup.Value;
+                int dx = x & 1023;
+                int dz = z & 1023;
+
+                if (func == FDFunctions.CeilingTriangulationNW_SW && dx <= (1024 - dz))
+                {
+                    return -1;
+                }
+                else if (func == FDFunctions.CeilingTriangulationNW_NE && dx > (1024 - dz))
+                {
+                    return -1;
+                }
+                else if (func == FDFunctions.CeilingTriangulationNE_NW && dx <= dz)
+                {
+                    return -1;
+                }
+                else if (func == FDFunctions.CeilingTriangulationNE_SE && dx > dz)
+                {
+                    return -1;
+                }
+
+                return 1; // Bad floor data
+            }
+
+            return 0;
         }
     }
 }

@@ -11,7 +11,10 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR3AudioRandomizer : BaseTR3Randomizer
     {
+        private const int _defaultSecretTrack = 122;
+
         private AudioRandomizer _audioRandomizer;
+        private TRAudioTrack _fixedSecretTrack;
 
         public override void Randomize(int seed)
         {
@@ -47,13 +50,9 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // The secret sound is hardcoded in TR3 to track 122. The workaround for this is to 
-            // always set the secret sound on the corresponding triggers. We only do this if
-            // secret randomization is off because TR3SecretRandomizer will (eventually) generate
-            // tracks for pickups and so RandomizeFloorTracks will have covered changing these.
-            if (!Settings.ChangeTriggerTracks || !Settings.RandomizeSecrets)
-            {
-                RandomizeSecretTracks(level, floorData);
-            }
+            // always set the secret sound on the corresponding triggers regardless of whether
+            // or not secret rando is enabled.
+            RandomizeSecretTracks(level, floorData);
 
             floorData.WriteToLevel(level.Data);
         }
@@ -76,21 +75,21 @@ namespace TRRandomizerCore.Randomizers
             List<TRAudioTrack> secretTracks = _audioRandomizer.GetTracks(TRAudioCategory.Secret);
 
             // If we want the same secret sound throughout the game, select it now.
-            TRAudioTrack fixedSecretTrack = null;
-            if (!Settings.SeparateSecretTracks)
+            if (!Settings.SeparateSecretTracks && _fixedSecretTrack == null)
             {
-                fixedSecretTrack = secretTracks[_generator.Next(0, secretTracks.Count)];
-                if (fixedSecretTrack.ID == 122)
-                {
-                    // The game hardcodes this track, so there is no point in amending the triggers.
-                    return;
-                }
+                _fixedSecretTrack = secretTracks[_generator.Next(0, secretTracks.Count)];
             }
 
             for (int i = 0; i < level.Script.NumSecrets; i++)
             {
                 // Pick a track for this secret and prepare an action item
-                TRAudioTrack secretTrack = fixedSecretTrack ?? secretTracks[_generator.Next(0, secretTracks.Count)];
+                TRAudioTrack secretTrack = _fixedSecretTrack ?? secretTracks[_generator.Next(0, secretTracks.Count)];
+                if (secretTrack.ID == _defaultSecretTrack)
+                {
+                    // The game hardcodes this track, so there is no point in amending the triggers.
+                    continue;
+                }
+
                 FDActionListItem musicAction = new FDActionListItem
                 {
                     TrigAction = FDTrigAction.PlaySoundtrack,

@@ -60,5 +60,10 @@ namespace TRRandomizerCore.Levels
         /// The exposure meter is hard-coded to the Antarctica and RX-Tech Mines level sequences.
         /// </summary>
         public bool HasExposureMeter => Sequence == 16 || Sequence == 17;
+
+        /// <summary>
+        /// Whether or not the game will account for secrets collected in this level.
+        /// </summary>
+        public bool HasSecrets => Script.NumSecrets > 0;
     }
 }
