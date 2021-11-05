@@ -8,7 +8,7 @@ namespace TRRandomizerCore.Utilities
 {
     public static class ItemUtilities
     {
-        public static TRItems ConvertToScriptItem(TR2Entities entity, TRItems defaultItem = TRItems.Pistols)
+        public static TR2Items ConvertToScriptItem(TR2Entities entity, TR2Items defaultItem = TR2Items.Pistols)
         {
             if (_entityToScriptItemMap.ContainsKey(entity))
             {
@@ -17,7 +17,7 @@ namespace TRRandomizerCore.Utilities
             return defaultItem;
         }
 
-        public static TR2Entities ConvertToEntity(TRItems item, TR2Entities defaultEntity = TR2Entities.Pistols_S_P)
+        public static TR2Entities ConvertToEntity(TR2Items item, TR2Entities defaultEntity = TR2Entities.Pistols_S_P)
         {
             if (_scriptItemToEntitymap.ContainsKey(item))
             {
@@ -34,77 +34,77 @@ namespace TRRandomizerCore.Utilities
             entity.Invisible = true;
         }
 
-        private static readonly Dictionary<TR2Entities, TRItems> _entityToScriptItemMap = new Dictionary<TR2Entities, TRItems>
+        private static readonly Dictionary<TR2Entities, TR2Items> _entityToScriptItemMap = new Dictionary<TR2Entities, TR2Items>
         {
             [TR2Entities.Pistols_S_P]
-                = TRItems.Pistols,
+                = TR2Items.Pistols,
             [TR2Entities.PistolAmmo_S_P]
-                = TRItems.PistolClips,
+                = TR2Items.PistolClips,
 
             [TR2Entities.Shotgun_S_P]
-                = TRItems.Shotgun,
+                = TR2Items.Shotgun,
             [TR2Entities.ShotgunAmmo_S_P]
-                = TRItems.ShotgunShells,
+                = TR2Items.ShotgunShells,
 
             [TR2Entities.Automags_S_P]
-                = TRItems.AutoPistols,
+                = TR2Items.AutoPistols,
             [TR2Entities.AutoAmmo_S_P]
-                = TRItems.AutoClips,
+                = TR2Items.AutoClips,
 
             [TR2Entities.Uzi_S_P]
-                = TRItems.Uzis,
+                = TR2Items.Uzis,
             [TR2Entities.UziAmmo_S_P]
-                = TRItems.UziClips,
+                = TR2Items.UziClips,
 
             [TR2Entities.Harpoon_S_P]
-                = TRItems.HarpoonGun,
+                = TR2Items.HarpoonGun,
             [TR2Entities.HarpoonAmmo_S_P]
-                = TRItems.Harpoons,
+                = TR2Items.Harpoons,
 
             [TR2Entities.M16_S_P]
-                = TRItems.M16,
+                = TR2Items.M16,
             [TR2Entities.M16Ammo_S_P]
-                = TRItems.M16Clips,
+                = TR2Items.M16Clips,
 
             [TR2Entities.GrenadeLauncher_S_P]
-                = TRItems.GrenadeLauncher,
+                = TR2Items.GrenadeLauncher,
             [TR2Entities.Grenades_S_P]
-                = TRItems.Grenades,
+                = TR2Items.Grenades,
 
             [TR2Entities.SmallMed_S_P]
-                = TRItems.SmallMedi,
+                = TR2Items.SmallMedi,
             [TR2Entities.LargeMed_S_P]
-                = TRItems.LargeMedi,
+                = TR2Items.LargeMedi,
 
             [TR2Entities.Flares_S_P]
-                = TRItems.Flare, // Single flare, not a pack
+                = TR2Items.Flare, // Single flare, not a pack
 
             [TR2Entities.Quest1_S_P]
-                = TRItems.Pickup1,
+                = TR2Items.Pickup1,
             [TR2Entities.Quest2_S_P]
-                 = TRItems.Pickup2,
+                 = TR2Items.Pickup2,
 
             [TR2Entities.Puzzle1_S_P]
-                = TRItems.Puzzle1,
+                = TR2Items.Puzzle1,
             [TR2Entities.Puzzle2_S_P]
-                = TRItems.Puzzle2,
+                = TR2Items.Puzzle2,
             [TR2Entities.Puzzle3_S_P]
-                = TRItems.Puzzle3,
+                = TR2Items.Puzzle3,
             [TR2Entities.Puzzle4_S_P]
-                = TRItems.Puzzle4,
+                = TR2Items.Puzzle4,
 
             [TR2Entities.Key1_S_P]
-                = TRItems.Key1,
+                = TR2Items.Key1,
             [TR2Entities.Key2_S_P]
-                = TRItems.Key2,
+                = TR2Items.Key2,
             [TR2Entities.Key3_S_P]
-                = TRItems.Key3,
+                = TR2Items.Key3,
             [TR2Entities.Key4_S_P]
-                = TRItems.Key4,
+                = TR2Items.Key4,
         };
 
         // The reverse of above for the sake of ConvertToEntity, but initialised dynamically.
-        private static readonly Dictionary<TRItems, TR2Entities> _scriptItemToEntitymap;
+        private static readonly Dictionary<TR2Items, TR2Entities> _scriptItemToEntitymap;
 
         static ItemUtilities()
         {

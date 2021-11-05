@@ -122,8 +122,10 @@ namespace TRLevelReader.Helpers
             {
                 [TR3Entities.Infada_P] = TR3Entities.Infada_M_H,
                 [TR3Entities.OraDagger_P] = TR3Entities.OraDagger_M_H,
+                [TR3Entities.EyeOfIsis_P] = TR3Entities.EyeOfIsis_M_H,
                 [TR3Entities.Element115_P] = TR3Entities.Element115_M_H,
-                [TR3Entities.EyeOfIsis_P] = TR3Entities.EyeOfIsis_M_H
+                [TR3Entities.Quest1_P] = TR3Entities.Quest1_M_H, // Serpent Stone
+                [TR3Entities.Quest2_P] = TR3Entities.Quest2_M_H  // Hand of Rathmore
             };
         }
 
@@ -141,6 +143,19 @@ namespace TRLevelReader.Helpers
                 [TR3Entities.Key4_P] = TR3Entities.Key4_M_H,
                 [TR3Entities.Quest1_P] = TR3Entities.Quest1_M_H,
                 [TR3Entities.Quest2_P] = TR3Entities.Quest2_M_H
+            };
+        }
+
+        public static bool IsTrapdoor(TR3Entities entity)
+        {
+            return GetTrapdoorTypes().Contains(entity);
+        }
+
+        public static List<TR3Entities> GetTrapdoorTypes()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.Trapdoor1, TR3Entities.Trapdoor2, TR3Entities.Trapdoor3
             };
         }
     }

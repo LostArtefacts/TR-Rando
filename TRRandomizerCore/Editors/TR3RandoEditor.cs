@@ -32,7 +32,8 @@ namespace TRRandomizerCore.Editors
 
             if (Settings.RandomizeSecrets)
             {
-                target += numLevels;
+                // *3 for multithreaded work
+                target += numLevels * 3;
             }
 
             if (Settings.RandomizeAudio)
