@@ -345,7 +345,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 SafeToPlace = !newLoc.IsColliding(new Sphere(new System.Numerics.Vector3(used.X, used.Y, used.Z), proximity));
 
-                if (!SafeToPlace)
+                if (SafeToPlace == false)
                     break;
             }
 
