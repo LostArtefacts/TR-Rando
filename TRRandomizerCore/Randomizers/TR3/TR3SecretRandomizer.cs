@@ -322,15 +322,15 @@ namespace TRRandomizerCore.Randomizers
             _proxEvaluationCount++;
 
             //Be more generous with proximity if we are failing to place.
-            if (_proxEvaluationCount >= 0 && _proxEvaluationCount <= 3)
+            if (_proxEvaluationCount >= 0 && _proxEvaluationCount <= 10)
             {
                 proximity = 5000.0f;
             }
-            else if (_proxEvaluationCount > 3 && _proxEvaluationCount <= 5)
+            else if (_proxEvaluationCount > 10 && _proxEvaluationCount <= 25)
             {
                 proximity = 2500.0f;
             }
-            else if (_proxEvaluationCount > 5 && _proxEvaluationCount <= 7)
+            else if (_proxEvaluationCount > 25 && _proxEvaluationCount <= 50)
             {
                 proximity = 750.0f;
             }
