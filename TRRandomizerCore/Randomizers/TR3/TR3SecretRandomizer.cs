@@ -32,6 +32,15 @@ namespace TRRandomizerCore.Randomizers
 
         private int _proxEvaluationCount;
 
+        private static readonly float _LARGE_RADIUS = 5000.0f;
+        private static readonly float _MED_RADIUS = 2500.0f;
+        private static readonly float _SMALL_RADIUS = 750.0f;
+        private static readonly float _TINY_RADIUS = 10.0f;
+
+        private static readonly int _LARGE_RETRY_TOLERANCE = 10;
+        private static readonly int _MED_RETRY_TOLERANCE = 25;
+        private static readonly int _SMALL_RETRY_TOLERANCE = 50;
+
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
@@ -322,21 +331,21 @@ namespace TRRandomizerCore.Randomizers
             _proxEvaluationCount++;
 
             //Be more generous with proximity if we are failing to place.
-            if (_proxEvaluationCount >= 0 && _proxEvaluationCount <= 10)
+            if ( _proxEvaluationCount <= _LARGE_RETRY_TOLERANCE)
             {
-                proximity = 5000.0f;
+                proximity = _LARGE_RADIUS;
             }
-            else if (_proxEvaluationCount > 10 && _proxEvaluationCount <= 25)
+            else if (_proxEvaluationCount > _LARGE_RETRY_TOLERANCE && _proxEvaluationCount <= _MED_RETRY_TOLERANCE)
             {
-                proximity = 2500.0f;
+                proximity = _MED_RADIUS;
             }
-            else if (_proxEvaluationCount > 25 && _proxEvaluationCount <= 50)
+            else if (_proxEvaluationCount > _MED_RETRY_TOLERANCE && _proxEvaluationCount <= _SMALL_RETRY_TOLERANCE)
             {
-                proximity = 750.0f;
+                proximity = _SMALL_RADIUS;
             }
             else
             {
-                proximity = 10.0f;
+                proximity = _TINY_RADIUS;
             }
 
             Sphere newLoc = new Sphere(new System.Numerics.Vector3(loc.X, loc.Y, loc.Z), proximity);
