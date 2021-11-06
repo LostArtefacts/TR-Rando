@@ -1,5 +1,5 @@
-# TR2-Rando
-Tomb Raider II Game Randomizer
+# TR-Rando
+Tomb Raider Game Randomizer
 
 ![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando.PNG)
 
