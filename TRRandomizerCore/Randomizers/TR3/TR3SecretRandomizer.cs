@@ -30,6 +30,8 @@ namespace TRRandomizerCore.Randomizers
 
         private Dictionary<string, List<Location>> _locations;
 
+        private int _proxEvaluationCount;
+
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
@@ -276,10 +278,10 @@ namespace TRRandomizerCore.Randomizers
                 }
                 while
                 (
-                    usedLocations.Find(l => l.X == location.X && l.Y == location.Y && l.Z == location.Z && l.Room == location.Room) != null ||
-                    (location.Difficulty == Difficulty.Hard && !Settings.HardSecrets) ||
-                    (location.RequiresGlitch && !Settings.GlitchedSecrets)
+                    !EvaluateProximity(location, usedLocations)     
                 );
+
+                _proxEvaluationCount = 0;
 
                 usedLocations.Add(location);
                 secret.Location = location;
@@ -301,6 +303,53 @@ namespace TRRandomizerCore.Randomizers
             level.Data.NumEntities = (uint)entities.Count;
 
             floorData.WriteToLevel(level.Data);
+        }
+
+        private bool EvaluateProximity(Location loc, List<Location> usedLocs)
+        {
+            bool SafeToPlace = true;
+            float proximity = 10000.0f;
+
+            if (loc.Difficulty == Difficulty.Hard && !Settings.HardSecrets)
+                return false;
+
+            if (loc.RequiresGlitch && !Settings.GlitchedSecrets)
+                return false;
+
+            if (usedLocs.Count == 0 || usedLocs == null)
+                return true;
+
+            _proxEvaluationCount++;
+
+            //Be more generous with proximity if we are failing to place.
+            if (_proxEvaluationCount >= 0 && _proxEvaluationCount <= 3)
+            {
+                proximity = 5000.0f;
+            }
+            else if (_proxEvaluationCount > 3 && _proxEvaluationCount <= 5)
+            {
+                proximity = 2500.0f;
+            }
+            else if (_proxEvaluationCount > 5 && _proxEvaluationCount <= 7)
+            {
+                proximity = 750.0f;
+            }
+            else
+            {
+                proximity = 10.0f;
+            }
+
+            Sphere newLoc = new Sphere(new System.Numerics.Vector3(loc.X, loc.Y, loc.Z), proximity);
+
+            foreach (Location used in usedLocs)
+            {
+                SafeToPlace = !newLoc.IsColliding(new Sphere(new System.Numerics.Vector3(used.X, used.Y, used.Z), proximity));
+
+                if (!SafeToPlace)
+                    break;
+            }
+
+            return SafeToPlace;
         }
 
         private TR2Entity PlaceSecret(TR3CombinedLevel level, TRSecretPlacement<TR3Entities> secret, FDControl floorData)
