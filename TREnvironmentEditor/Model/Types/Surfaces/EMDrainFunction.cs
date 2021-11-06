@@ -60,7 +60,19 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
-            throw new System.NotImplementedException();
+            foreach (int roomNumber in RoomNumbers)
+            {
+                TR3Room room = level.Rooms[ConvertItemNumber(roomNumber, level.NumRooms)];
+                room.ContainsWater = false;
+
+                // Remove all wave movements and caustics by default
+                foreach (TR3RoomVertex vertex in room.RoomData.Vertices)
+                {
+                    vertex.UseWaveMovement = vertex.UseCaustics = false;
+                }
+            }
+
+            // Texturing not yet handled
         }
     }
 }
