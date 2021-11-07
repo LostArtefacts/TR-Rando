@@ -104,7 +104,7 @@ namespace TRModelTransporter.Utilities
             },
             [TR3LevelNames.TINNOS] = new List<TR3Entities>
             {
-                TR3Entities.TinnosMonster, TR3Entities.TinnosWasp
+                TR3Entities.TinnosMonster, TR3Entities.TinnosWasp, TR3Entities.Door4
             },
             [TR3LevelNames.WILLIE] = new List<TR3Entities>
             {
