@@ -23,6 +23,7 @@
 
         // Individual settings
         DisableDemos = 100,
-        OutfitDagger
+        OutfitDagger,
+        SFX
     }
 }
