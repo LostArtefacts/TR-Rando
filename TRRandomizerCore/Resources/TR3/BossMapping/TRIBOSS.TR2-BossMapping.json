@@ -1,0 +1,45 @@
+[
+  {
+    "Comments": "Get rid of the music trigger under Puna.",
+    "EMType": 62,
+    "Locations": [
+      {
+        "X": 65024,
+        "Y": -6144,
+        "Z": 57856,
+        "Room": 29
+      }
+    ]
+  },
+
+  {
+    "Comments": "Add a trigger under Puna so that picking up the stone will end the level.",
+    "EMType": 61,
+    "TriggerEntry": {
+      "Setup": {
+        "Value": 4
+      },
+      "TrigSetup": {
+        "Value": 15872
+      },
+      "TrigType": 4,
+      "TrigActionList": [
+        {
+          "TrigAction": 0,
+          "Parameter": 62
+        },
+        {
+          "TrigAction": 7
+        }
+      ]
+    },
+    "Locations": [
+      {
+        "X": 65024,
+        "Y": -6144,
+        "Z": 57856,
+        "Room": 29
+      }
+    ]
+  }
+]
