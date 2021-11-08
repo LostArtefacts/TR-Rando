@@ -1217,6 +1217,8 @@ namespace TRRandomizerView.Model
             // Called after the version type has been identified, so allows for customising
             // individual settings based on what's available.
             _removeRobeDagger.IsAvailable = IsOutfitDaggerSupported;
+
+            _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = IsSFXSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -1573,6 +1575,7 @@ namespace TRRandomizerView.Model
         public bool IsTextureTypeSupported => IsRandomizationSupported(TRRandomizerType.Texture);
         public bool IsStartPositionTypeSupported => IsRandomizationSupported(TRRandomizerType.StartPosition);
         public bool IsAudioTypeSupported => IsRandomizationSupported(TRRandomizerType.Audio);
+        public bool IsSFXSupported => IsRandomizationSupported(TRRandomizerType.SFX);
         public bool IsOutfitTypeSupported => IsRandomizationSupported(TRRandomizerType.Outfit);
         public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);

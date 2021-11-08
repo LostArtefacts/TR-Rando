@@ -113853,10 +113853,10 @@
       "IsItem": true
     },
     {
-      "X": 69127,
-      "Z": 56817,
+      "X": 64000,
+      "Z": 55808,
       "Y": 0,
-      "Room": 70,
+      "Room": 69,
       "RequiresGlitch": false,
       "Difficulty": 0,
       "IsInRoomSpace": false,
@@ -113873,10 +113873,10 @@
       "IsItem": true
     },
     {
-      "X": 69102,
-      "Z": 58886,
+      "X": 60928,
+      "Z": 54784,
       "Y": 0,
-      "Room": 70,
+      "Room": 69,
       "RequiresGlitch": false,
       "Difficulty": 0,
       "IsInRoomSpace": false,
@@ -113893,10 +113893,10 @@
       "IsItem": true
     },
     {
-      "X": 69093,
-      "Z": 60909,
+      "X": 69120,
+      "Z": 54784,
       "Y": 0,
-      "Room": 70,
+      "Room": 69,
       "RequiresGlitch": false,
       "Difficulty": 0,
       "IsInRoomSpace": false,

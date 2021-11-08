@@ -2,6 +2,7 @@
 using System.Linq;
 using TRGE.Coord;
 using TRGE.Core;
+using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;
 
 namespace TRRandomizerCore.Editors
@@ -29,6 +30,8 @@ namespace TRRandomizerCore.Editors
             // Add to the target as appropriate when each randomizer is implemented. Once all
             // randomizers are implemented, just call Settings.GetSaveTarget(numLevels) per TR2.
             int target = base.GetSaveTarget(numLevels);
+
+            target += numLevels; // sequence-based processing
 
             if (Settings.RandomizeSecrets)
             {
@@ -71,6 +74,18 @@ namespace TRRandomizerCore.Editors
             {
                 (tr23ScriptEditor.Script as TR23Script).LevelSelectEnabled = true;
                 scriptEditor.SaveScript();
+            }
+
+            if (!monitor.IsCancelled)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Running level sequence checks");
+                new TR3SequenceProcessor
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor
+                }.Run();
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeSecrets)
