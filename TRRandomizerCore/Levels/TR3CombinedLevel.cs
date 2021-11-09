@@ -62,6 +62,11 @@ namespace TRRandomizerCore.Levels
         public bool HasExposureMeter => Sequence == 16 || Sequence == 17;
 
         /// <summary>
+        /// Whether or not this level is in the sequence of original Sophia.
+        /// </summary>
+        public bool IsSophiaSequence => Sequence == 12;
+
+        /// <summary>
         /// Whether or not this level is in the sequence of original Willard.
         /// </summary>
         public bool IsWillardSequence => Sequence == 19;

@@ -71,10 +71,12 @@ namespace TRRandomizerCore.Processors
                     AmendWillardBoss(level);
                 }
             }
-            else if (level.IsWillardSequence)
+            else if (level.IsWillardSequence || (level.Is(TR3LevelNames.CITY) && !level.IsSophiaSequence))
             {
                 // Because the stones don't end the level on sequence 19, make any required mods
                 // to make end level triggers.
+                // #231 the electric fields in City can't be triggered when it's off-sequence, so
+                // the mods are applied in this instance too.
                 AmendBossFight(level);
             }
         }
