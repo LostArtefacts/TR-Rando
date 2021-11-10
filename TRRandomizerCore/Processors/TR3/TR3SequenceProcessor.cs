@@ -16,6 +16,7 @@ namespace TRRandomizerCore.Processors
     public class TR3SequenceProcessor : TR3LevelProcessor
     {
         private static readonly int _entityLimit = 256;
+        private static readonly int _spikeHeightChange = -768;
 
         private static readonly Dictionary<TR3Entities, TR3Entities> _artefactAssignment = new Dictionary<TR3Entities, TR3Entities>
         {
@@ -78,6 +79,12 @@ namespace TRRandomizerCore.Processors
                 // #231 the electric fields in City can't be triggered when it's off-sequence, so
                 // the mods are applied in this instance too.
                 AmendBossFight(level);
+            }
+            else if ((level.Is(TR3LevelNames.COASTAL) && !level.IsCoastalSequence) || (level.Is(TR3LevelNames.MADUBU) && !level.IsMadubuSequence))
+            {
+                // Coastal Village and Madubu spikes are raised on initialisation in the game, based
+                // on the level sequencing. So if out of sequence, perform the raising here.
+                AmendSouthPacificSpikes(level);
             }
         }
 
@@ -167,6 +174,16 @@ namespace TRRandomizerCore.Processors
             {
                 EMEditorSet mods = JsonConvert.DeserializeObject<EMEditorSet>(ReadResource(mappingPath), EMEditorMapping.Converter);
                 mods.ApplyToLevel(level.Data);
+            }
+        }
+
+        private void AmendSouthPacificSpikes(TR3CombinedLevel level)
+        {
+            short spikes = (short)TR3Entities.TeethSpikesOrBarbedWire;
+            List<TR2Entity> entities = level.Data.Entities.ToList().FindAll(e => e.TypeID == spikes);
+            foreach (TR2Entity entity in entities)
+            {
+                entity.Y += _spikeHeightChange;
             }
         }
     }
