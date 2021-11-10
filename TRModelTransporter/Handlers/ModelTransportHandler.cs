@@ -95,7 +95,20 @@ namespace TRModelTransporter.Handlers
             }
             else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
             {
-                level.Models[i] = definition.Model;
+                if (definition.Entity == TR3Entities.LaraVehicleAnimation_H)
+                {
+                    level.Models[i] = definition.Model;
+                }
+                else
+                {
+                    // #234 Replacing Lara entirely can cause locking issues after pressing buttons or crouching
+                    // where she refuses to come out of her stance. TR3 seems bound to having Lara's animations start
+                    // at 0, so because these don't change per skin, we just replace the meshes and frames here.
+                    level.Models[i].NumMeshes = definition.Model.NumMeshes;
+                    level.Models[i].StartingMesh = definition.Model.StartingMesh;
+                    level.Models[i].MeshTree = definition.Model.MeshTree;
+                    level.Models[i].FrameOffset = definition.Model.FrameOffset;
+                }
             }
 
             if (definition.Entity == TR3Entities.Lara && laraDependants != null)

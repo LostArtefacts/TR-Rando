@@ -208,7 +208,7 @@ namespace TRModelTransporter.Data
 
         private static readonly List<TR3Entities> _permittedAliasDuplicates = new List<TR3Entities>
         {
-            
+            TR3Entities.LaraVehicleAnimation_H
         };
 
         private static readonly List<TR3Entities> _nonGraphicsDependencies = new List<TR3Entities>

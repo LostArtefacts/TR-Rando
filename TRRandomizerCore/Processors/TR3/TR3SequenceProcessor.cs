@@ -16,6 +16,7 @@ namespace TRRandomizerCore.Processors
     public class TR3SequenceProcessor : TR3LevelProcessor
     {
         private static readonly int _entityLimit = 256;
+        private static readonly int _spikeHeightChange = -768;
 
         private static readonly Dictionary<TR3Entities, TR3Entities> _artefactAssignment = new Dictionary<TR3Entities, TR3Entities>
         {
@@ -71,11 +72,19 @@ namespace TRRandomizerCore.Processors
                     AmendWillardBoss(level);
                 }
             }
-            else if (level.IsWillardSequence)
+            else if (level.IsWillardSequence || (level.Is(TR3LevelNames.CITY) && !level.IsSophiaSequence))
             {
                 // Because the stones don't end the level on sequence 19, make any required mods
                 // to make end level triggers.
+                // #231 the electric fields in City can't be triggered when it's off-sequence, so
+                // the mods are applied in this instance too.
                 AmendBossFight(level);
+            }
+            else if ((level.Is(TR3LevelNames.COASTAL) && !level.IsCoastalSequence) || (level.Is(TR3LevelNames.MADUBU) && !level.IsMadubuSequence))
+            {
+                // Coastal Village and Madubu spikes are raised on initialisation in the game, based
+                // on the level sequencing. So if out of sequence, perform the raising here.
+                AmendSouthPacificSpikes(level);
             }
         }
 
@@ -120,6 +129,14 @@ namespace TRRandomizerCore.Processors
 
             level.Data.Entities = entities.ToArray();
             level.Data.NumEntities = (uint)entities.Count;
+
+            // We can only have one vehicle type per level because LaraVehicleAnimation_H is tied to
+            // each, so for the likes of Nevada, replace the quad with another UPV to fly into HSC.
+            List<TR2Entity> quads = entities.FindAll(e => e.TypeID == (short)TR3Entities.Quad);
+            foreach (TR2Entity quad in quads)
+            {
+                quad.TypeID = (short)TR3Entities.UPV;
+            }
         }
 
         private void AmendWillardBoss(TR3CombinedLevel level)
@@ -165,6 +182,16 @@ namespace TRRandomizerCore.Processors
             {
                 EMEditorSet mods = JsonConvert.DeserializeObject<EMEditorSet>(ReadResource(mappingPath), EMEditorMapping.Converter);
                 mods.ApplyToLevel(level.Data);
+            }
+        }
+
+        private void AmendSouthPacificSpikes(TR3CombinedLevel level)
+        {
+            short spikes = (short)TR3Entities.TeethSpikesOrBarbedWire;
+            List<TR2Entity> entities = level.Data.Entities.ToList().FindAll(e => e.TypeID == spikes);
+            foreach (TR2Entity entity in entities)
+            {
+                entity.Y += _spikeHeightChange;
             }
         }
     }

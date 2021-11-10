@@ -35,7 +35,7 @@ namespace TRRandomizerCore.Randomizers
         private static readonly float _LARGE_RADIUS = 5000.0f;
         private static readonly float _MED_RADIUS = 2500.0f;
         private static readonly float _SMALL_RADIUS = 750.0f;
-        private static readonly float _TINY_RADIUS = 10.0f;
+        private static readonly float _TINY_RADIUS = 5.0f;
 
         private static readonly int _LARGE_RETRY_TOLERANCE = 10;
         private static readonly int _MED_RETRY_TOLERANCE = 25;
@@ -115,10 +115,14 @@ namespace TRRandomizerCore.Randomizers
                     List<FDEntry> entries = floorData.Entries[sector.FDIndex];
                     for (int i = entries.Count - 1; i >= 0; i--)
                     {
-                        FDEntry entry = entries[i];
-                        if (entry is FDTriggerEntry trig && trig.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null)
+                        if (entries[i] is FDTriggerEntry trig)
                         {
-                            entries.RemoveAt(i);
+                            // #230 Remove the secret action but retain anything else that may be triggered here
+                            trig.TrigActionList.RemoveAll(a => a.TrigAction == FDTrigAction.SecretFound);
+                            if (trig.TrigActionList.Count == 0)
+                            {
+                                entries.RemoveAt(i);
+                            }
                         }
                     }
 
@@ -279,7 +283,6 @@ namespace TRRandomizerCore.Randomizers
             int pickupIndex = 0;
             while (secret.SecretIndex < level.Script.NumSecrets)
             {
-                // Placeholder until proximity zoning implemented
                 Location location;
                 do
                 {

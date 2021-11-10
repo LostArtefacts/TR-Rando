@@ -59,6 +59,9 @@
         },
         "14": {
           "Rectangles": [ 51, 52 ]
+        },
+        "0": {
+          "Rectangles": [ 51, 52 ]
         }
       }
     }
@@ -89,7 +92,67 @@
           "2": 3,
           "3": 0
         }
+      },
+      {
+        "RoomNumber": 0,
+        "FaceType": 0,
+        "FaceIndices": [ 51, 52 ],
+        "VertexRemap": {
+          "0": 1,
+          "1": 2,
+          "2": 3,
+          "3": 0
+        }
       }
     ]
+  },
+
+  {
+    "Comments": "Add some extra crystals because we can't kill Sophia.",
+    "EMType": 51,
+    "TypeID": 180,
+    "Flags": 15872,
+    "Location": {
+      "X": 39424,
+      "Y": -2048,
+      "Z": 58880,
+      "Room": 8
+    }
+  },
+
+  {
+    "EMType": 51,
+    "TypeID": 180,
+    "Flags": 15872,
+    "Location": {
+      "X": 39424,
+      "Y": -8192,
+      "Z": 59904,
+      "Room": 12
+    }
+  },
+
+  {
+    "EMType": 51,
+    "TypeID": 180,
+    "Flags": 15872,
+    "Location": {
+      "X": 39424,
+      "Y": -12032,
+      "Z": 52736,
+      "Room": 14
+    }
+  },
+
+  {
+    "EMType": 51,
+    "TypeID": 180,
+    "Flags": 15872,
+    "Location": {
+      "X": 34304,
+      "Y": -9984,
+      "Z": 58880,
+      "Room": 13
+    }
   }
 ]
