@@ -129,6 +129,14 @@ namespace TRRandomizerCore.Processors
 
             level.Data.Entities = entities.ToArray();
             level.Data.NumEntities = (uint)entities.Count;
+
+            // We can only have one vehicle type per level because LaraVehicleAnimation_H is tied to
+            // each, so for the likes of Nevada, replace the quad with another UPV to fly into HSC.
+            List<TR2Entity> quads = entities.FindAll(e => e.TypeID == (short)TR3Entities.Quad);
+            foreach (TR2Entity quad in quads)
+            {
+                quad.TypeID = (short)TR3Entities.UPV;
+            }
         }
 
         private void AmendWillardBoss(TR3CombinedLevel level)
