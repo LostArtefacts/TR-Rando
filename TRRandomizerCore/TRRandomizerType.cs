@@ -25,6 +25,7 @@
         DisableDemos = 100,
         OutfitDagger,
         SFX,
-        GlobeDisplay
+        GlobeDisplay,
+        RewardRooms
     }
 }

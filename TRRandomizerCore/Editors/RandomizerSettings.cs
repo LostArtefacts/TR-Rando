@@ -42,6 +42,7 @@ namespace TRRandomizerCore.Editors
         public bool DocileBirdMonsters { get; set; }
         public RandoDifficulty RandoEnemyDifficulty { get; set; }
         public bool GlitchedSecrets { get; set; }
+        public bool UseRewardRoomCameras { get; set; }
         public bool PersistOutfits { get; set; }
         public bool RemoveRobeDagger { get; set; }
         public uint HaircutLevelCount { get; set; }
@@ -82,6 +83,7 @@ namespace TRRandomizerCore.Editors
             SecretSeed = config.GetInt(nameof(SecretSeed), defaultSeed);
             HardSecrets = config.GetBool(nameof(HardSecrets));
             GlitchedSecrets = config.GetBool(nameof(GlitchedSecrets));
+            UseRewardRoomCameras = config.GetBool(nameof(UseRewardRoomCameras));
 
             RandomizeItems = config.GetBool(nameof(RandomizeItems));
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
@@ -155,6 +157,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(SecretSeed)] = SecretSeed;
             config[nameof(HardSecrets)] = HardSecrets;
             config[nameof(GlitchedSecrets)] = GlitchedSecrets;
+            config[nameof(UseRewardRoomCameras)] = UseRewardRoomCameras;
 
             config[nameof(RandomizeItems)] = RandomizeItems;
             config[nameof(ItemSeed)] = ItemSeed;

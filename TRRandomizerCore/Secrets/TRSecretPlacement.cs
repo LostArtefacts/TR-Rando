@@ -14,14 +14,18 @@ namespace TRRandomizerCore.Secrets
         public ushort EntityIndex { get; set; }
         public ushort SecretIndex { get; set; }
         public ushort DoorIndex { get; set; }
+        public ushort CameraIndex { get; set; }
+        public ushort CameraTarget { get; set; }
         public byte TriggerMask { get; set; }
         public bool TriggersDoor => DoorIndex != ushort.MaxValue;
+        public bool TriggersCamera => CameraIndex != ushort.MaxValue;
 
         public TRSecretPlacement()
         {
             // Default to standard mask and no door
             TriggerMask = (byte)FullActivation;
             DoorIndex = ushort.MaxValue;
+            CameraIndex = ushort.MaxValue;
         }
 
         public void SetMaskAndDoor(int secretCount, List<int> doorItems)

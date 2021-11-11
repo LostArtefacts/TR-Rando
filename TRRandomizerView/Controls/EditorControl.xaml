@@ -70,7 +70,6 @@
             <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
                 <windows:AdvancedWindow Title="Randomize Playable Levels and Sequencing (Advanced)"
                                         MainDescription="Customize level order randomization."
-                                        BoolItemsSource="{Binding Data.ItemBoolItemControls, Source={StaticResource proxy}}"
                                         HasBoolItems="False"
                                         HasGlobeOptions="True"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
@@ -150,6 +149,7 @@
         </ctrl:ManagedSeedAdvancedControl>
 
         <ctrl:ManagedSeedBoolControl
+            Visibility="{Binding IsRewardRoomsTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
             Grid.Row="0"
             Grid.Column="1"
             IsEnabled="{Binding IsSecretTypeSupported, UpdateSourceTrigger=PropertyChanged}"
@@ -160,6 +160,30 @@
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             BoolItemsSource="{Binding SecretBoolItemControls}"/>
+
+        <ctrl:ManagedSeedAdvancedControl
+            Visibility="{Binding IsRewardRoomsTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+            Grid.Row="0"
+            Grid.Column="1"
+            IsEnabled="{Binding IsSecretTypeSupported, UpdateSourceTrigger=PropertyChanged}"
+            IsActive="{Binding RandomizeSecrets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Secrets"
+            Text="Randomize secret locations. Artefacts will be added as pickups and reward rooms created for collecting all secrets."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Secrets (Advanced)"
+                                        MainDescription="Customize the secret randomization."
+                                        BoolItemsSource="{Binding Data.SecretBoolItemControls, Source={StaticResource proxy}}"
+                                        HasBoolItems="True"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
 
         <ctrl:ManagedSeedAdvancedControl
             Grid.Row="1"

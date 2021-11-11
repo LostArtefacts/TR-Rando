@@ -23,7 +23,7 @@ namespace TRRandomizerCore
             [TRVersion.TR3] = new List<TRRandomizerType>
             {
                 TRRandomizerType.LevelSequence, TRRandomizerType.Unarmed, TRRandomizerType.Ammoless, TRRandomizerType.Audio, TRRandomizerType.Outfit,
-                TRRandomizerType.Secret, TRRandomizerType.GlobeDisplay
+                TRRandomizerType.Secret, TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms
             }
         };
 
@@ -32,7 +32,7 @@ namespace TRRandomizerCore
         {
             [TRVersion.TR2] = new List<TRRandomizerType>
             {
-                TRRandomizerType.GlobeDisplay
+                TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms
             }
         };
 
@@ -353,6 +353,12 @@ namespace TRRandomizerCore
         {
             get => LevelRandomizer.GlitchedSecrets;
             set => LevelRandomizer.GlitchedSecrets = value;
+        }
+
+        public bool UseRewardRoomCameras
+        {
+            get => LevelRandomizer.UseRewardRoomCameras;
+            set => LevelRandomizer.UseRewardRoomCameras = value;
         }
 
         public bool IncludeKeyItems
