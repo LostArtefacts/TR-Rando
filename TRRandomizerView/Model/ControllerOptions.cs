@@ -45,6 +45,7 @@ namespace TRRandomizerView.Model
 
         private RandoDifficulty _randoEnemyDifficulty;
         private ItemDifficulty _randoItemDifficulty;
+        private GlobeDisplayOption _globeDisplayOption;
 
         private Language[] _availableLanguages;
         private Language _gameStringLanguage;
@@ -128,6 +129,16 @@ namespace TRRandomizerView.Model
                 _levelSequencingControl.IsActive = value;
                 FirePropertyChanged();
                 UpdateMaximumLevelCount();
+            }
+        }
+
+        public GlobeDisplayOption GlobeDisplay
+        {
+            get => _globeDisplayOption;
+            set
+            {
+                _globeDisplayOption = value;
+                FirePropertyChanged();
             }
         }
 
@@ -1233,6 +1244,7 @@ namespace TRRandomizerView.Model
             RandomizeLevelSequencing = _controller.RandomizeLevelSequencing;
             LevelSequencingSeed = _controller.LevelSequencingSeed;
             PlayableLevelCount = _controller.PlayableLevelCount;
+            GlobeDisplay = _controller.GlobeDisplay;
 
             RandomizeUnarmedLevels = _controller.RandomizeUnarmedLevels;
             UnarmedLevelsSeed = _controller.UnarmedLevelsSeed;
@@ -1463,6 +1475,7 @@ namespace TRRandomizerView.Model
             _controller.RandomizePlayableLevels = RandomizeLevelSequencing;
             _controller.PlayableLevelsSeed = LevelSequencingSeed;
             _controller.PlayableLevelCount = PlayableLevelCount;
+            _controller.GlobeDisplay = GlobeDisplay;
 
             _controller.RandomizePlayableLevels = RandomizeLevelSequencing;
             _controller.PlayableLevelsSeed = LevelSequencingSeed;
@@ -1564,6 +1577,7 @@ namespace TRRandomizerView.Model
         private static readonly string _supportPropertyFormat = "Is{0}TypeSupported";
 
         public bool IsLevelSequenceTypeSupported => IsRandomizationSupported(TRRandomizerType.LevelSequence);
+        public bool IsGlobeDisplayTypeSupported => IsRandomizationSupported(TRRandomizerType.GlobeDisplay);
         public bool IsUnarmedTypeSupported => IsRandomizationSupported(TRRandomizerType.Unarmed);
         public bool IsAmmolessTypeSupported => IsRandomizationSupported(TRRandomizerType.Ammoless);
         public bool IsSunsetTypeSupported => IsRandomizationSupported(TRRandomizerType.Sunset);

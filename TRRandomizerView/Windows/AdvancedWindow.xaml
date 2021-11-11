@@ -69,6 +69,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -532,6 +534,120 @@
                                x:Name="_darknessPreview"
                                HorizontalAlignment="Left"
                                Source="..\Resources\Darkness\0.jpg"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!-- TR3 Globe Options -->
+            <StackPanel Grid.Row="9"
+                        Visibility="{Binding HasGlobeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Globe Display"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <RadioButton Content="Default"
+                                     GroupName="globeTextDisplay"
+                                     x:Name="_globeDefaultButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.GlobeDisplay, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:GlobeDisplayOption.Default}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Leave the default in place - displayed locations may or may not match the next level."/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <RadioButton Content="Show next area"
+                                     GroupName="globeTextDisplay"
+                                     x:Name="_globeAreaButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.GlobeDisplay, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:GlobeDisplayOption.Area}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Show the next area name when selecting a globe location."/>
+                    </Border>
+
+                    <Border Grid.Row="2">
+                        <RadioButton Content="Show next level"
+                                     GroupName="globeTextDisplay"
+                                     x:Name="_globeLevelButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.GlobeDisplay, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:GlobeDisplayOption.Level}, Mode=TwoWay}" />
+                    </Border>
+
+                    <Border Grid.Row="2"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Show the next level name when selecting a globe location."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+            
+            <!-- Level Count -->
+            <StackPanel Grid.Row="10"
+                        Visibility="{Binding HasGlobeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Level Count"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Margin="0,3,0,0">
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown 
+                                HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"  
+                                        Value="{Binding ControllerProxy.PlayableLevelCount, Mode=TwoWay}"
+                                        MinValue="1"
+                                        MaxValue="{Binding ControllerProxy.TotalLevelCount}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <TextBlock>
+                                <Run
+                                    Text="The total number of levels in the game available to play. Default: "
+                                 /><Run
+                                    Text="{Binding ControllerProxy.TotalLevelCount, Mode=OneWay}"
+                                 /><Run Text="."/>
+                            </TextBlock>
+                        </Label>
                     </Border>
                 </Grid>
             </StackPanel>

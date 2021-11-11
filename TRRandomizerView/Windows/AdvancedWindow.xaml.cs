@@ -67,6 +67,11 @@ namespace TRRandomizerView.Windows
             nameof(HasNightMode), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty HasGlobeOptionsProperty = DependencyProperty.Register
+        (
+            nameof(HasGlobeOptions), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
         (
             nameof(ControllerProxy), typeof(ControllerOptions), typeof(AdvancedWindow)
@@ -132,6 +137,12 @@ namespace TRRandomizerView.Windows
             set => SetValue(HasNightModeProperty, value);
         }
 
+        public bool HasGlobeOptions
+        {
+            get => (bool)GetValue(HasGlobeOptionsProperty);
+            set => SetValue(HasGlobeOptionsProperty, value);
+        }
+
         public ControllerOptions ControllerProxy
         {
             get => (ControllerOptions)GetValue(ControllerProperty);
@@ -171,6 +182,21 @@ namespace TRRandomizerView.Windows
             if (HasItemDifficulty)
             {
                 _itemOneLimitButton.IsChecked = !(_defaultItemDifficultyButton.IsChecked = ControllerProxy.RandoItemDifficulty == ItemDifficulty.Default);
+            }
+            if (HasGlobeOptions)
+            {
+                switch (ControllerProxy.GlobeDisplay)
+                {
+                    case GlobeDisplayOption.Default:
+                        _globeDefaultButton.IsChecked = true;
+                        break;
+                    case GlobeDisplayOption.Area:
+                        _globeAreaButton.IsChecked = true;
+                        break;
+                    case GlobeDisplayOption.Level:
+                        _globeLevelButton.IsChecked = true;
+                        break;
+                }
             }
         }
 

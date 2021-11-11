@@ -94,6 +94,7 @@
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\ComparisonConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Converters\InverseBoolToVisibilityConverter.cs" />
     <Compile Include="Events\EditorEventArgs.cs" />
     <Compile Include="Model\BoolItemControlClass.cs" />
     <Compile Include="Model\ManagedSeedNumeric.cs" />

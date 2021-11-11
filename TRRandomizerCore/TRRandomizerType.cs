@@ -24,6 +24,7 @@
         // Individual settings
         DisableDemos = 100,
         OutfitDagger,
-        SFX
+        SFX,
+        GlobeDisplay
     }
 }

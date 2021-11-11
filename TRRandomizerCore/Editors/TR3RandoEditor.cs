@@ -84,7 +84,8 @@ namespace TRRandomizerCore.Editors
                     ScriptEditor = tr23ScriptEditor,
                     Levels = levels,
                     BasePath = wipDirectory,
-                    SaveMonitor = monitor
+                    SaveMonitor = monitor,
+                    GlobeDisplay = Settings.GlobeDisplay
                 }.Run();
             }
 

@@ -30,11 +30,35 @@ namespace TRRandomizerCore.Processors
             [TR3Entities.Element115_M_H] = TR3Entities.Key4_M_H,
         };
 
+        private static readonly Dictionary<TR3Adventure, int> _adventureStringSequences = new Dictionary<TR3Adventure, int>
+        {
+            [TR3Adventure.SouthPacific] = 87,
+            [TR3Adventure.London] = 85,
+            [TR3Adventure.Nevada] = 86,
+            [TR3Adventure.Antarctica] = 88
+        };
+
         private Dictionary<string, List<Location>> _upvLocations;
+
+        private Dictionary<TR3Adventure, string> _adventureNames;
+        private List<string> _gameStrings;
+
+        public GlobeDisplayOption GlobeDisplay { get; set; }
 
         public void Run()
         {
             _upvLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\upv_locations.json"));
+
+            _gameStrings = new List<string>(ScriptEditor.Script.GameStrings1);
+            _adventureNames = new Dictionary<TR3Adventure, string>
+            {
+                [TR3Adventure.India] = "India" // Not stored in script
+            };
+
+            foreach (TR3Adventure sequence in _adventureStringSequences.Keys)
+            {
+                _adventureNames[sequence] = ScriptEditor.Script.GameStrings1[_adventureStringSequences[sequence]];
+            }
 
             foreach (TR3ScriptedLevel lvl in Levels)
             {
@@ -49,6 +73,9 @@ namespace TRRandomizerCore.Processors
                     break;
                 }
             }
+
+            ScriptEditor.Script.GameStrings1 = _gameStrings.ToArray();
+            SaveScript();
         }
 
         private void AdjustLevel(TR3CombinedLevel level)
@@ -85,6 +112,20 @@ namespace TRRandomizerCore.Processors
                 // Coastal Village and Madubu spikes are raised on initialisation in the game, based
                 // on the level sequencing. So if out of sequence, perform the raising here.
                 AmendSouthPacificSpikes(level);
+            }
+
+            // If this level is the first in an adventure, update the globe string to match
+            if (_adventureStringSequences.ContainsKey((TR3Adventure)level.Sequence))
+            {
+                switch (GlobeDisplay)
+                {
+                    case GlobeDisplayOption.Area:
+                        _gameStrings[_adventureStringSequences[(TR3Adventure)level.Sequence]] = _adventureNames[level.Adventure];
+                        break;
+                    case GlobeDisplayOption.Level:
+                        _gameStrings[_adventureStringSequences[(TR3Adventure)level.Sequence]] = level.Script.Name;
+                        break;
+                }
             }
         }
 

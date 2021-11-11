@@ -29,6 +29,7 @@ namespace TRRandomizerCore.Editors
         public int StartPositionSeed { get; set; }
         public int EnvironmentSeed { get; set; }
 
+        public GlobeDisplayOption GlobeDisplay { get; set; }
         public bool HardSecrets { get; set; }
         public bool IncludeKeyItems { get; set; }
         public bool DevelopmentMode { get; set; }
@@ -74,6 +75,8 @@ namespace TRRandomizerCore.Editors
         public void ApplyConfig(Config config)
         {
             int defaultSeed = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+
+            GlobeDisplay = (GlobeDisplayOption)config.GetEnum(nameof(GlobeDisplay), typeof(GlobeDisplayOption), GlobeDisplayOption.Area);
 
             RandomizeSecrets = config.GetBool(nameof(RandomizeSecrets));
             SecretSeed = config.GetInt(nameof(SecretSeed), defaultSeed);
@@ -146,6 +149,8 @@ namespace TRRandomizerCore.Editors
 
         public void StoreConfig(Config config)
         {
+            config[nameof(GlobeDisplay)] = GlobeDisplay;
+
             config[nameof(RandomizeSecrets)] = RandomizeSecrets;
             config[nameof(SecretSeed)] = SecretSeed;
             config[nameof(HardSecrets)] = HardSecrets;

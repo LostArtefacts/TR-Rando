@@ -14,8 +14,6 @@ namespace TRRandomizerCore
     {
         // Only the versions defined in this dictionary can be opened for randomization. The supported type list is an indicator
         // to callers as to what can be applied during randomization i.e. for UI options to be enabled/disabled appropriately.
-        // Once all randomizers for a particular version have been implemented, simply add TRRandomizerType.All against the version
-        // as per TR2.
         private static readonly Dictionary<TRVersion, List<TRRandomizerType>> _supportedTypes = new Dictionary<TRVersion, List<TRRandomizerType>>
         {
             [TRVersion.TR2] = new List<TRRandomizerType>
@@ -25,7 +23,16 @@ namespace TRRandomizerCore
             [TRVersion.TR3] = new List<TRRandomizerType>
             {
                 TRRandomizerType.LevelSequence, TRRandomizerType.Unarmed, TRRandomizerType.Ammoless, TRRandomizerType.Audio, TRRandomizerType.Outfit,
-                TRRandomizerType.Secret
+                TRRandomizerType.Secret, TRRandomizerType.GlobeDisplay
+            }
+        };
+
+        // As above, but used to eliminate certain options per version.
+        private static readonly Dictionary<TRVersion, List<TRRandomizerType>> _unsupportedTypes = new Dictionary<TRVersion, List<TRRandomizerType>>
+        {
+            [TRVersion.TR2] = new List<TRRandomizerType>
+            {
+                TRRandomizerType.GlobeDisplay
             }
         };
 
@@ -67,8 +74,15 @@ namespace TRRandomizerCore
 
         public bool IsRandomizationSupported(TRVersion version, TRRandomizerType randomizerType)
         {
-            return _supportedTypes.ContainsKey(version) &&
+            bool supported = _supportedTypes.ContainsKey(version) &&
                 (_supportedTypes[version].Contains(TRRandomizerType.All) || _supportedTypes[version].Contains(randomizerType));
+            
+            // Is it explicitly unsupported?
+            if (supported && _unsupportedTypes.ContainsKey(version) && _unsupportedTypes[version].Contains(randomizerType))
+            {
+                supported = false;
+            }
+            return supported;
         }
 
         public List<string> GetExecutables()
@@ -242,6 +256,12 @@ namespace TRRandomizerCore
         #endregion
 
         #region LevelRandomizer Passthrough
+        public GlobeDisplayOption GlobeDisplay
+        {
+            get => LevelRandomizer.GlobeDisplay;
+            set => LevelRandomizer.GlobeDisplay = value;
+        }
+        
         public bool RandomizeSecrets
         {
             get => LevelRandomizer.RandomizeSecrets;
