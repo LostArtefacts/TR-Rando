@@ -45,7 +45,7 @@
                         HorizontalAlignment="Left">
                 <Button IsEnabled="{Binding IsActive, Mode=TwoWay}"
                         Grid.Row="4"
-                        Content="Advanced"
+                        Content="Options"
                         Style="{StaticResource AltCallToAction}"
                         Command="cmds:WindowCommands.OpenAdvancedWindowCommand" />
             </StackPanel>

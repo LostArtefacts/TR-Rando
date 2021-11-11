@@ -22,7 +22,7 @@ namespace TRRandomizerView.Model
 
         private bool _disableDemos, _autoLaunchGame, _puristMode;
 
-        private BoolItemControlClass _isHardSecrets, _allowGlitched;
+        private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras;
         private BoolItemControlClass _includeKeyItems;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileBirdMonsters;
         private BoolItemControlClass _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
@@ -45,6 +45,7 @@ namespace TRRandomizerView.Model
 
         private RandoDifficulty _randoEnemyDifficulty;
         private ItemDifficulty _randoItemDifficulty;
+        private GlobeDisplayOption _globeDisplayOption;
 
         private Language[] _availableLanguages;
         private Language _gameStringLanguage;
@@ -128,6 +129,16 @@ namespace TRRandomizerView.Model
                 _levelSequencingControl.IsActive = value;
                 FirePropertyChanged();
                 UpdateMaximumLevelCount();
+            }
+        }
+
+        public GlobeDisplayOption GlobeDisplay
+        {
+            get => _globeDisplayOption;
+            set
+            {
+                _globeDisplayOption = value;
+                FirePropertyChanged();
             }
         }
 
@@ -823,6 +834,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass UseRewardRoomCameras
+        {
+            get => _useRewardRoomCameras;
+            set
+            {
+                _useRewardRoomCameras = value;
+                FirePropertyChanged();
+            }
+        }
+
         public BoolItemControlClass DocileBirdMonsters
         {
             get => _docileBirdMonsters;
@@ -1006,15 +1027,21 @@ namespace TRRandomizerView.Model
             IsHardSecrets = new BoolItemControlClass()
             {
                 Title = "Enable hard secrets",
-                Description = "Some hard secrets may require glitches."
+                Description = "Locations classed as hard will be included in the randomization pool."
             };
             BindingOperations.SetBinding(IsHardSecrets, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
             IsGlitchedSecrets = new BoolItemControlClass()
             {
                 Title = "Enable glitched secrets",
-                Description = null
+                Description = "Locations that require glitches to reach will be included in the randomization pool."
             };
             BindingOperations.SetBinding(IsGlitchedSecrets, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
+            UseRewardRoomCameras = new BoolItemControlClass()
+            {
+                Title = "Enable reward room cameras",
+                Description = "When picking up secrets, show a hint where the reward room for the level is located."
+            };
+            BindingOperations.SetBinding(UseRewardRoomCameras, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
 
             // Items
             Binding randomizeItemsBinding = new Binding(nameof(RandomizeItems)) { Source = this };
@@ -1175,7 +1202,7 @@ namespace TRRandomizerView.Model
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
             {
-                _isHardSecrets, _allowGlitched,
+                _isHardSecrets, _allowGlitched, _useRewardRoomCameras
             };
             ItemBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -1219,6 +1246,8 @@ namespace TRRandomizerView.Model
             _removeRobeDagger.IsAvailable = IsOutfitDaggerSupported;
 
             _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = IsSFXSupported;
+
+            _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -1233,6 +1262,7 @@ namespace TRRandomizerView.Model
             RandomizeLevelSequencing = _controller.RandomizeLevelSequencing;
             LevelSequencingSeed = _controller.LevelSequencingSeed;
             PlayableLevelCount = _controller.PlayableLevelCount;
+            GlobeDisplay = _controller.GlobeDisplay;
 
             RandomizeUnarmedLevels = _controller.RandomizeUnarmedLevels;
             UnarmedLevelsSeed = _controller.UnarmedLevelsSeed;
@@ -1282,6 +1312,7 @@ namespace TRRandomizerView.Model
             SecretSeed = _controller.SecretSeed;
             IsHardSecrets.Value = _controller.HardSecrets;
             IsGlitchedSecrets.Value = _controller.GlitchedSecrets;
+            UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
 
             RandomizeTextures = _controller.RandomizeTextures;
             TextureSeed = _controller.TextureSeed;
@@ -1463,6 +1494,7 @@ namespace TRRandomizerView.Model
             _controller.RandomizePlayableLevels = RandomizeLevelSequencing;
             _controller.PlayableLevelsSeed = LevelSequencingSeed;
             _controller.PlayableLevelCount = PlayableLevelCount;
+            _controller.GlobeDisplay = GlobeDisplay;
 
             _controller.RandomizePlayableLevels = RandomizeLevelSequencing;
             _controller.PlayableLevelsSeed = LevelSequencingSeed;
@@ -1515,6 +1547,7 @@ namespace TRRandomizerView.Model
             _controller.SecretSeed = SecretSeed;
             _controller.HardSecrets = IsHardSecrets.Value;
             _controller.GlitchedSecrets = IsGlitchedSecrets.Value;
+            _controller.UseRewardRoomCameras = UseRewardRoomCameras.Value;
 
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
@@ -1564,11 +1597,13 @@ namespace TRRandomizerView.Model
         private static readonly string _supportPropertyFormat = "Is{0}TypeSupported";
 
         public bool IsLevelSequenceTypeSupported => IsRandomizationSupported(TRRandomizerType.LevelSequence);
+        public bool IsGlobeDisplayTypeSupported => IsRandomizationSupported(TRRandomizerType.GlobeDisplay);
         public bool IsUnarmedTypeSupported => IsRandomizationSupported(TRRandomizerType.Unarmed);
         public bool IsAmmolessTypeSupported => IsRandomizationSupported(TRRandomizerType.Ammoless);
         public bool IsSunsetTypeSupported => IsRandomizationSupported(TRRandomizerType.Sunset);
         public bool IsNightModeTypeSupported => IsRandomizationSupported(TRRandomizerType.NightMode);
         public bool IsSecretTypeSupported => IsRandomizationSupported(TRRandomizerType.Secret);
+        public bool IsRewardRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.RewardRooms);
         public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
         public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);
         public bool IsEnemyTypeSupported => IsRandomizationSupported(TRRandomizerType.Enemy);

@@ -85,5 +85,33 @@ namespace TRRandomizerCore.Levels
         /// Whether or not the game will account for secrets collected in this level.
         /// </summary>
         public bool HasSecrets => Script.NumSecrets > 0;
+
+        /// <summary>
+        /// Get the adventure based on this level's name.
+        /// </summary>
+        public TR3Adventure Adventure
+        {
+            get
+            {
+                if (TR3LevelNames.SouthPacificLevels.Contains(Name))
+                {
+                    return TR3Adventure.SouthPacific;
+                }
+                else if (TR3LevelNames.LondonLevels.Contains(Name))
+                {
+                    return TR3Adventure.London;
+                }
+                else if (TR3LevelNames.NevadaLevels.Contains(Name))
+                {
+                    return TR3Adventure.Nevada;
+                }
+                else if (TR3LevelNames.AntarcticaLevels.Contains(Name))
+                {
+                    return TR3Adventure.Antarctica;
+                }
+
+                return TR3Adventure.India;
+            }
+        }
     }
 }

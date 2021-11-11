@@ -100,5 +100,75 @@ namespace TRLevelReader.Helpers
                 };
             }
         }
+
+        public static List<string> IndiaLevels
+        {
+            get
+            {
+                return new List<string>
+                {
+                    JUNGLE,
+                    RUINS,
+                    GANGES,
+                    CAVES
+                };
+            }
+        }
+
+        public static List<string> SouthPacificLevels
+        {
+            get
+            {
+                return new List<string>
+                {
+                    COASTAL,
+                    CRASH,
+                    MADUBU,
+                    PUNA
+                };
+            }
+        }
+
+        public static List<string> LondonLevels
+        {
+            get
+            {
+                return new List<string>
+                {
+                    THAMES,
+                    ALDWYCH,
+                    LUDS,
+                    CITY,
+                    HALLOWS
+                };
+            }
+        }
+
+        public static List<string> NevadaLevels
+        {
+            get
+            {
+                return new List<string>
+                {
+                    NEVADA,
+                    HSC,
+                    AREA51
+                };
+            }
+        }
+
+        public static List<string> AntarcticaLevels
+        {
+            get
+            {
+                return new List<string>
+                {
+                    ANTARC,
+                    RXTECH,
+                    TINNOS,
+                    WILLIE
+                };
+            }
+        }
     }
 }
