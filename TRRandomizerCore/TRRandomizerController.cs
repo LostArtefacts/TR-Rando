@@ -123,7 +123,11 @@ namespace TRRandomizerCore
         public bool RandomizeLevelSequencing
         {
             get => ScriptEditor.LevelSequencingOrganisation == Organisation.Random;
-            set => ScriptEditor.LevelSequencingOrganisation = value ? Organisation.Random : _extLevelOrganisation;
+            set
+            {
+                ScriptEditor.LevelSequencingOrganisation = value ? Organisation.Random : _extLevelOrganisation;
+                LevelRandomizer.RandomizeSequencing = value;
+            }
         }
 
         public int LevelSequencingSeed

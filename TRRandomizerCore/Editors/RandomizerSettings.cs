@@ -29,6 +29,9 @@ namespace TRRandomizerCore.Editors
         public int StartPositionSeed { get; set; }
         public int EnvironmentSeed { get; set; }
 
+        // Although stored in the script config, this is needed in case sequencing
+        // mods are needed per level.
+        public bool RandomizeSequencing { get; set; }
         public GlobeDisplayOption GlobeDisplay { get; set; }
         public bool HardSecrets { get; set; }
         public bool IncludeKeyItems { get; set; }
