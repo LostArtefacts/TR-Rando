@@ -19,7 +19,7 @@ namespace TRRandomizerCore.Randomizers
     {
         private AudioRandomizer _audioRandomizer;
 
-        private List<TRSFXDefinition> _soundEffects;
+        private List<TRSFXDefinition<TRSoundDetails>> _soundEffects;
         private List<TRSFXGeneralCategory> _sfxCategories;
 
         public override void Randomize(int seed)
@@ -161,45 +161,12 @@ namespace TRRandomizerCore.Randomizers
             _audioRandomizer = new AudioRandomizer(ScriptEditor.AudioProvider.GetCategorisedTracks());
 
             // Decide which sound effect categories we want to randomize.
-            _sfxCategories = new List<TRSFXGeneralCategory>();
-            if (Settings.ChangeWeaponSFX)
-            {
-                // Pistols, Autos etc
-                _sfxCategories.Add(TRSFXGeneralCategory.StandardWeaponFiring);
-                // Uzi/M16 - these require very short SFX so are separated
-                _sfxCategories.Add(TRSFXGeneralCategory.FastWeaponFiring);
-            }
-
-            if (Settings.ChangeCrashSFX)
-            {
-                // Grenades, 40F crash, dragon explosion
-                _sfxCategories.Add(TRSFXGeneralCategory.Explosion);
-                // Boulders settling, collapsible tiles collapsing
-                _sfxCategories.Add(TRSFXGeneralCategory.Clattering);
-                // Gondolas, glass, ice wall
-                _sfxCategories.Add(TRSFXGeneralCategory.Breaking);
-            }
-
-            if (Settings.ChangeEnemySFX)
-            {
-                // General death noises
-                _sfxCategories.Add(TRSFXGeneralCategory.Death);
-                // Standard footsteps, shuffles/scrapes (like Flamethrower & Winston)
-                _sfxCategories.Add(TRSFXGeneralCategory.StandardFootstep);
-                // Chicken, T-Rex, Dragon
-                _sfxCategories.Add(TRSFXGeneralCategory.HeavyFootstep);
-                // E.g. ShotgunGoon laughing, Gunman1/2 breathing, Doberman panting
-                _sfxCategories.Add(TRSFXGeneralCategory.Breathing);
-                // Loosely categorised as "bored" enemies, like the yetis wandering before Lara approaches
-                _sfxCategories.Add(TRSFXGeneralCategory.Grunting);
-                // Enemies in attack mode, like tigers growling at Lara
-                _sfxCategories.Add(TRSFXGeneralCategory.Growling);
-            }
+            _sfxCategories = _audioRandomizer.GetSFXCategories(Settings);
 
             // Only load the SFX if we are changing at least one category
             if (_sfxCategories.Count > 0)
             {
-                _soundEffects = JsonConvert.DeserializeObject<List<TRSFXDefinition>>(ReadResource(@"TR2\Audio\sfx.json"));
+                _soundEffects = JsonConvert.DeserializeObject<List<TRSFXDefinition<TRSoundDetails>>>(ReadResource(@"TR2\Audio\sfx.json"));
             }
         }
 
@@ -216,7 +183,7 @@ namespace TRRandomizerCore.Randomizers
             // Lara's SFX are not changed by default.
             for (int internalIndex = 0; internalIndex < level.Data.SoundMap.Length; internalIndex++)
             {
-                TRSFXDefinition definition = _soundEffects.Find(sfx => sfx.InternalIndex == internalIndex);
+                TRSFXDefinition<TRSoundDetails> definition = _soundEffects.Find(sfx => sfx.InternalIndex == internalIndex);
                 if (level.Data.SoundMap[internalIndex] == -1 || definition == null || definition.Creature == TRSFXCreatureCategory.Lara || !_sfxCategories.Contains(definition.PrimaryCategory))
                 {
                     continue;
@@ -224,7 +191,7 @@ namespace TRRandomizerCore.Randomizers
 
                 // The following allows choosing to keep humans making human noises, and animals animal noises.
                 // Other humans can use Lara's SFX.
-                Predicate<TRSFXDefinition> pred;
+                Predicate<TRSFXDefinition<TRSoundDetails>> pred;
                 if (Settings.LinkCreatureSFX && definition.Creature > TRSFXCreatureCategory.Lara)
                 {
                     pred = sfx =>
@@ -243,13 +210,13 @@ namespace TRRandomizerCore.Randomizers
                 }
 
                 // Try to find definitions that match
-                List<TRSFXDefinition> otherDefinitions = _soundEffects.FindAll(pred);
+                List<TRSFXDefinition<TRSoundDetails>> otherDefinitions = _soundEffects.FindAll(pred);
                 if (otherDefinitions.Count > 0)
                 {
                     // Pick a new definition and try to import it into the level. This should only fail if
                     // the JSON is misconfigured e.g. missing sample indices. In that case, we just leave 
                     // the current sound effect as-is.
-                    TRSFXDefinition nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
+                    TRSFXDefinition<TRSoundDetails> nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
                     short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition);
                     if (soundDetailsIndex != -1)
                     {
@@ -263,7 +230,7 @@ namespace TRRandomizerCore.Randomizers
             SoundUtilities.ResortSoundIndices(level.Data);
         }
 
-        private short ImportSoundEffect(TR2Level level, TRSFXDefinition definition)
+        private short ImportSoundEffect(TR2Level level, TRSFXDefinition<TRSoundDetails> definition)
         {
             if (definition.SampleIndices.Count == 0)
             {
