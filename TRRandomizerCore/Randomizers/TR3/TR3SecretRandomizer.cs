@@ -25,6 +25,8 @@ namespace TRRandomizerCore.Randomizers
         private static readonly string _invalidDoorsMsg = "{0} secret doors required for {1}, but only {2} found.";
         private static readonly string _invalidLocationMsg = "Cannot place a nonvalidated secret where a trigger already exists - {0} [X={1}, Y={2}, Z={3}, R={4}]";
         private static readonly string _triggerWarningMsg = "Existing trigger object action with parameter {0} will be lost - {1} [X={2}, Y={3}, Z={4}, R={5}]";
+        private static readonly string _flipMapWarningMsg = "Secret is being placed in a room that has a flipmap - {0} [X={1}, Y={2}, Z={3}, R={4}]";
+        private static readonly string _flipMapErrorMsg = "Secret cannot be placed in a flipped room - {0} [X={1}, Y={2}, Z={3}, R={4}]";
         private static readonly List<int> _devRooms = null;
         private static readonly ushort _devModeSecretCount = 6;
 
@@ -397,6 +399,24 @@ namespace TRRandomizerCore.Randomizers
 
         private TR2Entity PlaceSecret(TR3CombinedLevel level, TRSecretPlacement<TR3Entities> secret, FDControl floorData)
         {
+            // Check if this secret is being added to a flipped room, as that won't work
+            for (int i = 0; i < level.Data.NumRooms; i++)
+            {
+                if (level.Data.Rooms[i].AlternateRoom == secret.Location.Room)
+                {
+                    if (Settings.DevelopmentMode)
+                    {
+                        // Place it anyway in dev mode to allow relocating
+                        Debug.WriteLine(string.Format(_flipMapErrorMsg, level.Name, secret.Location.X, secret.Location.Y, secret.Location.Z, secret.Location.Room));
+                        break;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+
             TR2Entity entity = new TR2Entity
             {
                 TypeID = (short)secret.PickupType,
@@ -409,8 +429,34 @@ namespace TRRandomizerCore.Randomizers
                 Intensity2 = -1
             };
 
-            // Get the sector and create the FD if required
+            // Get the sector and create the trigger. If this was unsuccessful, bail out.
             TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level.Data, floorData);
+            if (!CreateSecretTrigger(level, secret, entity.Room, floorData, sector))
+            {
+                return null;
+            }
+
+            // #248 If the room has a flipmap, make sure to add the trigger there too.
+            short altRoom = level.Data.Rooms[secret.Location.Room].AlternateRoom;
+            if (altRoom != -1)
+            {
+                sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, altRoom, level.Data, floorData);
+                if (!CreateSecretTrigger(level, secret, altRoom, floorData, sector))
+                {
+                    return null;
+                }
+
+                if (Settings.DevelopmentMode)
+                {
+                    Debug.WriteLine(string.Format(_flipMapWarningMsg, level.Name, secret.Location.X, secret.Location.Y, secret.Location.Z, altRoom));
+                }
+            }
+
+            return entity;
+        }
+
+        private bool CreateSecretTrigger(TR3CombinedLevel level, TRSecretPlacement<TR3Entities> secret, short room, FDControl floorData, TRRoomSector sector)
+        {
             if (sector.FDIndex == 0)
             {
                 floorData.CreateFloorData(sector);
@@ -423,9 +469,9 @@ namespace TRRandomizerCore.Randomizers
                 // safe to move the action items to the new pickup trigger.
                 if (Settings.DevelopmentMode)
                 {
-                    Debug.WriteLine(string.Format(_invalidLocationMsg, level.Name, secret.Location.X, secret.Location.Y, secret.Location.Z, secret.Location.Room));
+                    Debug.WriteLine(string.Format(_invalidLocationMsg, level.Name, secret.Location.X, secret.Location.Y, secret.Location.Z, room));
                 }
-                return null;
+                return false;
             }
 
             // Make a new pickup trigger
@@ -474,7 +520,7 @@ namespace TRRandomizerCore.Randomizers
                         if (Settings.DevelopmentMode)
                         {
                             existingActions.Add(actionItem); // Add it anyway for testing
-                            Debug.WriteLine(string.Format(_triggerWarningMsg, actionItem.Parameter, level.Name, secret.Location.X, secret.Location.Y, secret.Location.Z, secret.Location.Room));
+                            Debug.WriteLine(string.Format(_triggerWarningMsg, actionItem.Parameter, level.Name, secret.Location.X, secret.Location.Y, secret.Location.Z, room));
                         }
                         else if (secret.TriggerMask == TRSecretPlacement<TR3Entities>.FullActivation)
                         {
@@ -509,7 +555,7 @@ namespace TRRandomizerCore.Randomizers
 
             floorData.Entries[sector.FDIndex].Add(trigger);
 
-            return entity;
+            return true;
         }
 
         internal class SecretProcessor : AbstractProcessorThread<TR3SecretRandomizer>
