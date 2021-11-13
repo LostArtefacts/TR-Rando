@@ -182,7 +182,6 @@ namespace TRLevelReader.Helpers
                 TR3Entities.SmallMed_P,
                 TR3Entities.LargeMed_P,
                 TR3Entities.Flares_P,
-                TR3Entities.SaveCrystal_P
             };
         }
 
