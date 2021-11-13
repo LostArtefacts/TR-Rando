@@ -130,6 +130,19 @@ namespace TRRandomizerCore.Editors
                     Settings = Settings
                 }.Randomize(Settings.OutfitSeed);
             }
+
+            if (!monitor.IsCancelled && Settings.RandomizeItems)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
+                new TR3ItemRandomizer
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.ItemSeed);
+            }
         }
     }
 }
