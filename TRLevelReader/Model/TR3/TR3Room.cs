@@ -100,7 +100,7 @@ namespace TRLevelReader.Model
                         Fade = ((light.LightProperties[2] << 16) | ((light.LightProperties[3]) & 0xffff))
                     };
 
-                    spotLight.Intensity = 0;
+                    spotLight.Intensity = val;
 
                     light.LightProperties[0] = (short)(spotLight.Intensity >> 16);
                     light.LightProperties[1] = (short)(spotLight.Intensity & 0xFFFF);
