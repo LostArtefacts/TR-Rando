@@ -23,7 +23,7 @@ namespace TRRandomizerCore
             [TRVersion.TR3] = new List<TRRandomizerType>
             {
                 TRRandomizerType.LevelSequence, TRRandomizerType.Unarmed, TRRandomizerType.Ammoless, TRRandomizerType.Audio, TRRandomizerType.Outfit,
-                TRRandomizerType.Secret, TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.SFX
+                TRRandomizerType.Secret, TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.SFX, TRRandomizerType.Item
             }
         };
 

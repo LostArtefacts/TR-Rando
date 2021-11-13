@@ -158,5 +158,72 @@ namespace TRLevelReader.Helpers
                 TR3Entities.Trapdoor1, TR3Entities.Trapdoor2, TR3Entities.Trapdoor3
             };
         }
+
+        public static List<TR3Entities> GetStandardPickupTypes()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.Pistols_P,
+                TR3Entities.Shotgun_P,
+                TR3Entities.Deagle_P,
+                TR3Entities.Uzis_P,
+                TR3Entities.Harpoon_P,
+                TR3Entities.MP5_P,
+                TR3Entities.RocketLauncher_P,
+                TR3Entities.GrenadeLauncher_P,
+                TR3Entities.PistolAmmo_P,
+                TR3Entities.ShotgunAmmo_P,
+                TR3Entities.DeagleAmmo_P,
+                TR3Entities.UziAmmo_P,
+                TR3Entities.Harpoons_P,
+                TR3Entities.MP5Ammo_P,
+                TR3Entities.Rockets_P,
+                TR3Entities.Grenades_P,
+                TR3Entities.SmallMed_P,
+                TR3Entities.LargeMed_P,
+                TR3Entities.Flares_P,
+            };
+        }
+
+        public static bool IsStandardPickupType(TR3Entities entity)
+        {
+            return GetStandardPickupTypes().Contains(entity);
+        }
+
+        public static bool IsWeaponPickup(TR3Entities entity)
+        {
+            return (entity == TR3Entities.Pistols_P)
+                || (entity == TR3Entities.Shotgun_P)
+                || (entity == TR3Entities.Deagle_P)
+                || (entity == TR3Entities.Uzis_P)
+                || (entity == TR3Entities.Harpoon_P)
+                || (entity == TR3Entities.MP5_P)
+                || (entity == TR3Entities.RocketLauncher_P)
+                || (entity == TR3Entities.GrenadeLauncher_P);
+        }
+
+        public static bool IsAmmoPickup(TR3Entities entity)
+        {
+            return (entity == TR3Entities.PistolAmmo_P)
+                || (entity == TR3Entities.ShotgunAmmo_P)
+                || (entity == TR3Entities.DeagleAmmo_P)
+                || (entity == TR3Entities.UziAmmo_P)
+                || (entity == TR3Entities.Harpoons_P)
+                || (entity == TR3Entities.MP5Ammo_P)
+                || (entity == TR3Entities.Rockets_P)
+                || (entity == TR3Entities.Grenades_P);
+        }
+
+        public static bool IsCrystalPickup(TR3Entities entity)
+        {
+            return (entity == TR3Entities.SaveCrystal_P);
+        }
+
+        public static bool IsUtilityPickup(TR3Entities entity)
+        {
+            return (entity == TR3Entities.SmallMed_P)
+                || (entity == TR3Entities.LargeMed_P)
+                || (entity == TR3Entities.Flares_P);
+        }
     }
 }

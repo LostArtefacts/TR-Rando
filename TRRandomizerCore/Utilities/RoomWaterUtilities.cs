@@ -98,5 +98,30 @@ namespace TRRandomizerCore.Utilities
                 }
             }
         };
+
+        public static Dictionary<string, int> DefaultRoomCountDictionary = new Dictionary<string, int>
+        {
+            { TR3LevelNames.JUNGLE, 165 },
+            { TR3LevelNames.RUINS, 224 },
+            { TR3LevelNames.GANGES, 177 },
+            { TR3LevelNames.CAVES, 25 },
+            { TR3LevelNames.COASTAL, 198 },
+            { TR3LevelNames.CRASH, 98 },
+            { TR3LevelNames.MADUBU, 146 },
+            { TR3LevelNames.PUNA, 30 },
+            { TR3LevelNames.THAMES, 190 },
+            { TR3LevelNames.ALDWYCH, 163 },
+            { TR3LevelNames.LUDS, 210 },
+            { TR3LevelNames.CITY, 20 },
+            { TR3LevelNames.NEVADA, 181 },
+            { TR3LevelNames.HSC, 186 },
+            { TR3LevelNames.AREA51, 156 },
+            { TR3LevelNames.ANTARC, 204 },
+            { TR3LevelNames.RXTECH, 199 },
+            { TR3LevelNames.TINNOS, 233 },
+            { TR3LevelNames.WILLIE, 44 },
+            { TR3LevelNames.HALLOWS, 68 },
+            { TR3LevelNames.ASSAULT, 133 }
+        };
     }
 }
