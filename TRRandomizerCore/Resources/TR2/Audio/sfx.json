@@ -2349,7 +2349,7 @@
     "Description": "Eagle wing flapping",
     "Creature": 3,
     "Categories": [
-      1
+      261
     ],
     "Details": {
       "Sample": 0,
@@ -2403,7 +2403,7 @@
     "Description": "Crow wing flapping",
     "Creature": 3,
     "Categories": [
-      1
+      261
     ],
     "Details": {
       "Sample": 0,

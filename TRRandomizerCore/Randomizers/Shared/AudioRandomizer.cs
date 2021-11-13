@@ -4,6 +4,8 @@ using TRFDControl;
 using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelReader.Model;
+using TRRandomizerCore.Editors;
+using TRRandomizerCore.SFX;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -66,6 +68,50 @@ namespace TRRandomizerCore.Randomizers
         public List<TRAudioTrack> GetTracks(TRAudioCategory category)
         {
             return _tracks[category];
+        }
+
+        public List<TRSFXGeneralCategory> GetSFXCategories(RandomizerSettings settings)
+        {
+            List<TRSFXGeneralCategory> sfxCategories = new List<TRSFXGeneralCategory>();
+            if (settings.ChangeWeaponSFX)
+            {
+                // Pistols, Autos etc
+                sfxCategories.Add(TRSFXGeneralCategory.StandardWeaponFiring);
+                // Uzi/M16 - these require very short SFX so are separated
+                sfxCategories.Add(TRSFXGeneralCategory.FastWeaponFiring);
+            }
+
+            if (settings.ChangeCrashSFX)
+            {
+                // Grenades, 40F crash, dragon explosion
+                sfxCategories.Add(TRSFXGeneralCategory.Explosion);
+                // Boulders settling, collapsible tiles collapsing
+                sfxCategories.Add(TRSFXGeneralCategory.Clattering);
+                // Gondolas, glass, ice wall
+                sfxCategories.Add(TRSFXGeneralCategory.Breaking);
+            }
+
+            if (settings.ChangeEnemySFX)
+            {
+                // General death noises
+                sfxCategories.Add(TRSFXGeneralCategory.Death);
+                // Standard footsteps, shuffles/scrapes (like Flamethrower & Winston)
+                sfxCategories.Add(TRSFXGeneralCategory.StandardFootstep);
+                // Chicken, T-Rex, Dragon
+                sfxCategories.Add(TRSFXGeneralCategory.HeavyFootstep);
+                // E.g. ShotgunGoon laughing, Gunman1/2 breathing, Doberman panting
+                sfxCategories.Add(TRSFXGeneralCategory.Breathing);
+                // Loosely categorised as "bored" enemies, like the yetis wandering before Lara approaches
+                sfxCategories.Add(TRSFXGeneralCategory.Grunting);
+                // Enemies in attack mode, like tigers growling at Lara
+                sfxCategories.Add(TRSFXGeneralCategory.Growling);
+                // Enemies alerted by Lara
+                sfxCategories.Add(TRSFXGeneralCategory.Alerting);
+                // Wing flaps, Tinnos wasps
+                sfxCategories.Add(TRSFXGeneralCategory.Flying);
+            }
+
+            return sfxCategories;
         }
     }
 }

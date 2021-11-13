@@ -1,17 +1,16 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Text;
-using TRLevelReader.Model;
 
 namespace TRRandomizerCore.SFX
 {
-    public class TRSFXDefinition
+    public class TRSFXDefinition<D> where D : class
     {
         public short InternalIndex { get; set; }
         public string Description { get; set; }
         public TRSFXCreatureCategory Creature { get; set; }
         public List<TRSFXGeneralCategory> Categories { get; set; }
-        public TRSoundDetails Details { get; set; }
+        public D Details { get; set; }
         public List<uint> SampleIndices { get; set; }
 
         [JsonIgnore]

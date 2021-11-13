@@ -31,7 +31,10 @@ namespace TRRandomizerCore.Editors
             // randomizers are implemented, just call Settings.GetSaveTarget(numLevels) per TR2.
             int target = base.GetSaveTarget(numLevels);
 
-            target += numLevels; // sequence-based processing
+            if (Settings.RandomizeSequencing)
+            {
+                target += numLevels;
+            }
 
             if (Settings.RandomizeSecrets)
             {
@@ -76,7 +79,7 @@ namespace TRRandomizerCore.Editors
                 scriptEditor.SaveScript();
             }
 
-            if (!monitor.IsCancelled)
+            if (!monitor.IsCancelled && Settings.RandomizeSequencing)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Running level sequence checks");
                 new TR3SequenceProcessor

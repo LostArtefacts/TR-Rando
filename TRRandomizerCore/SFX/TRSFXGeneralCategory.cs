@@ -28,7 +28,13 @@
         // Grunting 171-200
         Grunting = 171,
 
-        // Growling 201+
-        Growling = 201
+        // Growling 201-230
+        Growling = 201,
+
+        // Alerting 231-260
+        Alerting = 231,
+
+        // Flying, wing flapping
+        Flying = 261
     }
 }
