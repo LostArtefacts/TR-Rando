@@ -143,6 +143,19 @@ namespace TRRandomizerCore.Editors
                     Settings = Settings
                 }.Randomize(Settings.ItemSeed);
             }
+
+            if (!monitor.IsCancelled && Settings.RandomizeNightMode)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
+                new TR3NightModeRandomizer
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.NightModeSeed);
+            }
         }
     }
 }
