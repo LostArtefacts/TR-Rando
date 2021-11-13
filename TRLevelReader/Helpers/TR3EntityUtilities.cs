@@ -151,24 +151,11 @@ namespace TRLevelReader.Helpers
             return GetTrapdoorTypes().Contains(entity);
         }
 
-        public static bool IsBridge(TR3Entities entity)
-        {
-            return GetBridgeTypes().Contains(entity);
-        }
-
         public static List<TR3Entities> GetTrapdoorTypes()
         {
             return new List<TR3Entities>
             {
                 TR3Entities.Trapdoor1, TR3Entities.Trapdoor2, TR3Entities.Trapdoor3
-            };
-        }
-
-        public static List<TR3Entities> GetBridgeTypes()
-        {
-            return new List<TR3Entities>
-            {
-                TR3Entities.BridgeFlat, TR3Entities.BridgeTilt1, TR3Entities.BridgeTilt2
             };
         }
     }
