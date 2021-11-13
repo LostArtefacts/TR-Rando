@@ -24,6 +24,7 @@ namespace TRRandomizerCore.Randomizers
     {
         private static readonly string _invalidDoorsMsg = "{0} secret doors required for {1}, but only {2} found.";
         private static readonly string _invalidLocationMsg = "Cannot place a nonvalidated secret where a trigger already exists - {0} [X={1}, Y={2}, Z={3}, R={4}]";
+        private static readonly string _trapdoorLocationMsg = "Cannot place a secret on the same sector as a bridge/trapdoor - {0} [X={1}, Y={2}, Z={3}, R={4}]";
         private static readonly string _triggerWarningMsg = "Existing trigger object action with parameter {0} will be lost - {1} [X={2}, Y={3}, Z={4}, R={5}]";
         private static readonly string _flipMapWarningMsg = "Secret is being placed in a room that has a flipmap - {0} [X={1}, Y={2}, Z={3}, R={4}]";
         private static readonly string _flipMapErrorMsg = "Secret cannot be placed in a flipped room - {0} [X={1}, Y={2}, Z={3}, R={4}]";
@@ -429,8 +430,26 @@ namespace TRRandomizerCore.Randomizers
                 Intensity2 = -1
             };
 
-            // Get the sector and create the trigger. If this was unsuccessful, bail out.
+            // Get the sector and check if it is shared with a trapdoor or bridge, as these won't work either.
             TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level.Data, floorData);
+            foreach (TR2Entity otherEntity in level.Data.Entities)
+            {
+                TR3Entities type = (TR3Entities)otherEntity.TypeID;
+                if (entity.Room == otherEntity.Room && (TR3EntityUtilities.IsTrapdoor(type) || TR3EntityUtilities.IsBridge(type)))
+                {
+                    TRRoomSector otherSector = FDUtilities.GetRoomSector(otherEntity.X, otherEntity.Y, otherEntity.Z, otherEntity.Room, level.Data, floorData);
+                    if (otherSector == sector)
+                    {
+                        if (Settings.DevelopmentMode)
+                        {
+                            Debug.WriteLine(string.Format(_trapdoorLocationMsg, level.Name, secret.Location.X, secret.Location.Y, secret.Location.Z, secret.Location.Room));
+                        }
+                        return null;
+                    }
+                }
+            }
+
+            // Create the trigger. If this was unsuccessful, bail out.
             if (!CreateSecretTrigger(level, secret, entity.Room, floorData, sector))
             {
                 return null;
