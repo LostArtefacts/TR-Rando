@@ -70,6 +70,9 @@ namespace TRRandomizerCore.Editors
         public bool AutoLaunchGame { get; set; }
         public bool PuristMode { get; set; }
 
+        public bool RandomizeItemTypes { get; set; }
+        public bool RandomizeItemPositions { get; set; }
+
         public bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;// || RandomizeEnvironment; // Not needed until trap model import takes place
         public bool ReassignPuzzleNames => RandomizeEnemies && CrossLevelEnemies;
 
@@ -89,6 +92,8 @@ namespace TRRandomizerCore.Editors
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
             IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
             RandoItemDifficulty = (ItemDifficulty)config.GetEnum(nameof(RandoItemDifficulty), typeof(ItemDifficulty), ItemDifficulty.Default);
+            RandomizeItemTypes = config.GetBool(nameof(RandomizeItemTypes));
+            RandomizeItemPositions = config.GetBool(nameof(RandomizeItemPositions));
 
             RandomizeEnemies = config.GetBool(nameof(RandomizeEnemies));
             EnemySeed = config.GetInt(nameof(EnemySeed), defaultSeed);
@@ -163,6 +168,8 @@ namespace TRRandomizerCore.Editors
             config[nameof(ItemSeed)] = ItemSeed;
             config[nameof(IncludeKeyItems)] = IncludeKeyItems;
             config[nameof(RandoItemDifficulty)] = RandoItemDifficulty;
+            config[nameof(RandomizeItemTypes)] = RandomizeItemTypes;
+            config[nameof(RandomizeItemPositions)] = RandomizeItemPositions;
 
             config[nameof(RandomizeEnemies)] = RandomizeEnemies;
             config[nameof(EnemySeed)] = EnemySeed;
