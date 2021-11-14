@@ -53,6 +53,16 @@ namespace TRRandomizerCore.Editors
                 target += numLevels * 2;
             }
 
+            if (Settings.RandomizeItems)
+            {
+                target += numLevels;
+            }
+
+            if (Settings.RandomizeNightMode)
+            {
+                target += numLevels;
+            }
+
             return target;
         }
 

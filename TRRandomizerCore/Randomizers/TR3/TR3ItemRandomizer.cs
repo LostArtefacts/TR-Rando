@@ -54,7 +54,8 @@ namespace TRRandomizerCore.Randomizers
 
             foreach (TR2Entity ent in level.Data.Entities)
             {
-                if (TR3EntityUtilities.IsStandardPickupType((TR3Entities)ent.TypeID) && ent.Room < RoomWaterUtilities.DefaultRoomCountDictionary[level.Name])
+                if (TR3EntityUtilities.IsStandardPickupType((TR3Entities)ent.TypeID) && 
+                    (ent.Room < RoomWaterUtilities.DefaultRoomCountDictionary[level.Name] || Settings.RandomizeSecretRewardsPhysical))
                 {
                     ent.TypeID = (short)stdItemTypes[_generator.Next(0, (stdItemTypes.Count - 1))];
                 }
