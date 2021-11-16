@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using TRLevelReader.Helpers;
 using TRLevelReader.Model;
+using TRTexture16Importer.Helpers;
 
 namespace TRTexture16Importer
 {
@@ -33,31 +32,11 @@ namespace TRTexture16Importer
             {
                 for (int x = 0; x < _tileSize; x++)
                 {
-                    convertedPixels[y * _tileSize + x] = ColorToRGB555(texture.GetPixel(x, y));
+                    convertedPixels[y * _tileSize + x] = texture.GetPixel(x, y).ToRGB555();
                 }
             }
 
             return convertedPixels;
-        }
-
-        private static ushort ColorToRGB555(Color pixel)
-        {
-            ushort newPixel;
-
-            //Get the 32bpp values (byte each)
-            byte Red = TextileToBitmapConverter.From32BPP(pixel.R);
-            byte Green = TextileToBitmapConverter.From32BPP(pixel.G);
-            byte Blue = TextileToBitmapConverter.From32BPP(pixel.B);
-            byte Alpha = Math.Min(pixel.A, (byte)1);
-
-            //Perform bit shifting
-            ushort sRed = (ushort)(Red << 10);
-            ushort sGreen = (ushort)(Green << 5);
-            ushort sAlpha = (ushort)(Alpha << 15);
-
-            newPixel = (ushort)(sRed | sGreen | Blue | sAlpha);
-
-            return newPixel;
         }
 
         public static Bitmap ToBitmap(this TRTexImage8 tex, TRColour[] palette)
