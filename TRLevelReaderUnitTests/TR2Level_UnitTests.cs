@@ -12,6 +12,8 @@ using TRFDControl.Utilities;
 using System.Linq;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model.Base.Enums;
+using System.Drawing;
+using TRTexture16Importer;
 
 namespace TRLevelReaderUnitTests
 {
@@ -1318,6 +1320,28 @@ namespace TRLevelReaderUnitTests
                 Assert.IsTrue(boxOverlaps.ContainsKey(i));
                 CollectionAssert.AreEqual(boxOverlaps[i], overlaps);
             }
+        }
+
+        [TestMethod]
+        public void ModifyTexturesTest()
+        {
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("monastry.tr2");
+
+            // Store the untouched raw data
+            byte[] lvlAsBytes = lvl.Serialize();
+
+            // Convert each tile to a bitmap, and then convert it back
+            foreach (TRTexImage16 tile in lvl.Images16)
+            {
+                using (Bitmap bmp = tile.ToBitmap())
+                {
+                    tile.Pixels = TextureUtilities.ImportFromBitmap(bmp);
+                }
+            }
+
+            // Confirm the raw data still matches
+            CollectionAssert.AreEqual(lvlAsBytes, lvl.Serialize(), "Read does not match byte for byte");
         }
     }
 }
