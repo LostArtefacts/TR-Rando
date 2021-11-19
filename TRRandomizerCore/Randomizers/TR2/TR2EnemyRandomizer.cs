@@ -92,7 +92,7 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // Track enemies whose counts across the game are restricted
-            _gameEnemyTracker = EnemyUtilities.PrepareEnemyGameTracker(Settings.DocileBirdMonsters, Settings.RandoEnemyDifficulty);
+            _gameEnemyTracker = TR2EnemyUtilities.PrepareEnemyGameTracker(Settings.DocileBirdMonsters, Settings.RandoEnemyDifficulty);
             
             SetMessage("Randomizing enemies - importing models");
             foreach (EnemyProcessor processor in processors)
@@ -132,10 +132,10 @@ namespace TRRandomizerCore.Randomizers
             List<TR2Entities> oldEntities = TR2EntityUtilities.GetEnemyTypeDictionary()[level.Name];
 
             // Work out how many we can support
-            int enemyCount = oldEntities.Count - reduceEnemyCountBy + EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
+            int enemyCount = oldEntities.Count - reduceEnemyCountBy + TR2EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
             List<TR2Entities> newEntities = new List<TR2Entities>(enemyCount);
 
-            List<TR2Entities> chickenGuisers = EnemyUtilities.GetEnemyGuisers(TR2Entities.BirdMonster);
+            List<TR2Entities> chickenGuisers = TR2EnemyUtilities.GetEnemyGuisers(TR2Entities.BirdMonster);
             TR2Entities chickenGuiser = TR2Entities.BirdMonster;
 
             // #148 For HSH, we lock the enemies that are required for the kill counter to work outside
@@ -167,9 +167,9 @@ namespace TRRandomizerCore.Randomizers
             else
             {
                 // Do we need at least one water creature?
-                bool waterEnemyRequired = EnemyUtilities.IsWaterEnemyRequired(level);
+                bool waterEnemyRequired = TR2EnemyUtilities.IsWaterEnemyRequired(level);
                 // Do we need at least one enemy that can drop?
-                bool droppableEnemyRequired = EnemyUtilities.IsDroppableEnemyRequired(level);
+                bool droppableEnemyRequired = TR2EnemyUtilities.IsDroppableEnemyRequired(level);
 
                 // Let's try to populate the list. Start by adding one water enemy
                 // and one droppable enemy if they are needed.
@@ -181,7 +181,7 @@ namespace TRRandomizerCore.Randomizers
                     {
                         entity = waterEnemies[_generator.Next(0, waterEnemies.Count)];
                     }
-                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity, Settings.RandoEnemyDifficulty));
+                    while (!TR2EnemyUtilities.IsEnemySupported(level.Name, entity, Settings.RandoEnemyDifficulty));
                     newEntities.Add(entity);
                 }
 
@@ -193,12 +193,12 @@ namespace TRRandomizerCore.Randomizers
                     {
                         entity = droppableEnemies[_generator.Next(0, droppableEnemies.Count)];
                     }
-                    while (!EnemyUtilities.IsEnemySupported(level.Name, entity, Settings.RandoEnemyDifficulty));
+                    while (!TR2EnemyUtilities.IsEnemySupported(level.Name, entity, Settings.RandoEnemyDifficulty));
                     newEntities.Add(entity);
                 }
 
                 // Are there any other types we need to retain?
-                foreach (TR2Entities entity in EnemyUtilities.GetRequiredEnemies(level.Name))
+                foreach (TR2Entities entity in TR2EnemyUtilities.GetRequiredEnemies(level.Name))
                 {
                     if (!newEntities.Contains(entity))
                     {
@@ -214,7 +214,7 @@ namespace TRRandomizerCore.Randomizers
                     TR2Entities entity = allEnemies[_generator.Next(0, allEnemies.Count)];
 
                     // Make sure this isn't known to be unsupported in the level
-                    if (!EnemyUtilities.IsEnemySupported(level.Name, entity, Settings.RandoEnemyDifficulty))
+                    if (!TR2EnemyUtilities.IsEnemySupported(level.Name, entity, Settings.RandoEnemyDifficulty))
                     {
                         continue;
                     }
@@ -395,7 +395,7 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // First iterate through any enemies that are restricted by room
-            Dictionary<TR2Entities, List<int>> enemyRooms = EnemyUtilities.GetRestrictedEnemyRooms(level.Name, Settings.RandoEnemyDifficulty);
+            Dictionary<TR2Entities, List<int>> enemyRooms = TR2EnemyUtilities.GetRestrictedEnemyRooms(level.Name, Settings.RandoEnemyDifficulty);
             if (enemyRooms != null)
             {
                 foreach (TR2Entities entity in enemyRooms.Keys)
@@ -406,7 +406,7 @@ namespace TRRandomizerCore.Randomizers
                     }
 
                     List<int> rooms = enemyRooms[entity];
-                    int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(entity, Settings.RandoEnemyDifficulty);
+                    int maxEntityCount = TR2EnemyUtilities.GetRestrictedEnemyLevelCount(entity, Settings.RandoEnemyDifficulty);
                     if (maxEntityCount == -1)
                     {
                         // We are allowed any number, but this can't be more than the number of unique rooms,
@@ -434,7 +434,7 @@ namespace TRRandomizerCore.Randomizers
                         targetEntity.TypeID = (short)TR2EntityUtilities.TranslateEntityAlias(entity);
 
                         // #146 Ensure OneShot triggers are set for this enemy if needed
-                        EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
+                        TR2EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
 
                         // Remove the target entity so it doesn't get replaced
                         enemyEntities.Remove(targetEntity);
@@ -451,7 +451,7 @@ namespace TRRandomizerCore.Randomizers
                 TR2Entities newEntityType = currentEntityType;
 
                 // If it's an existing enemy that has to remain in the same spot, skip it
-                if (EnemyUtilities.IsEnemyRequired(level.Name, currentEntityType))
+                if (TR2EnemyUtilities.IsEnemyRequired(level.Name, currentEntityType))
                 {
                     continue;
                 }
@@ -562,7 +562,7 @@ namespace TRRandomizerCore.Randomizers
                 // If we are restricting count per level for this enemy and have reached that count, pick
                 // something else. This applies when we are restricting by in-level count, but not by room
                 // (e.g. Winston).
-                int maxEntityCount = EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, Settings.RandoEnemyDifficulty);
+                int maxEntityCount = TR2EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, Settings.RandoEnemyDifficulty);
                 if (maxEntityCount != -1)
                 {
                     if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount)
@@ -588,7 +588,7 @@ namespace TRRandomizerCore.Randomizers
                 // #146 Ensure OneShot triggers are set for this enemy if needed. This currently only applies
                 // to the dragon, which will be handled above in defined rooms, but the check should be made
                 // here in case this needs to be extended later.
-                EnemyUtilities.SetEntityTriggers(level.Data, currentEntity);
+                TR2EnemyUtilities.SetEntityTriggers(level.Data, currentEntity);
             }
 
             // MercSnowMobDriver relies on RedSnowmobile so it will be available in the model list
@@ -728,7 +728,7 @@ namespace TRRandomizerCore.Randomizers
                         TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
                     };
 
-                    importer.Data.AliasPriority = EnemyUtilities.GetAliasPriority(level.Name, enemies.EntitiesToImport);
+                    importer.Data.AliasPriority = TR2EnemyUtilities.GetAliasPriority(level.Name, enemies.EntitiesToImport);
 
                     // Try to import the selected models into the level.
                     importer.Import();

@@ -212,8 +212,8 @@
                             <Label.Content>
                                 <TextBlock>
                                     Standard restrictions will apply for cross-level enemies. See
-                                    <Hyperlink ToolTip="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md"
-                                               NavigateUri="https://github.com/DanzaG/TR2-Rando/blob/master/TR2RandomizerCore/Resources/Documentation/ENEMIES.md"
+                                    <Hyperlink ToolTip="https://github.com/DanzaG/TR2-Rando/blob/master/TRRandomizerCore/Resources/Documentation/ENEMIES.md"
+                                               NavigateUri="https://github.com/DanzaG/TR2-Rando/blob/master/TRRandomizerCore/Resources/Documentation/ENEMIES.md"
                                                RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
                                     for details.
                                 </TextBlock>

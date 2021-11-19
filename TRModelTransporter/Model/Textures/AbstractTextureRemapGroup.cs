@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Model.Textures
 {
@@ -18,7 +19,48 @@ namespace TRModelTransporter.Model.Textures
             Dependencies = new List<TextureDependency<E>>();
         }
 
-        public abstract void CalculateDependencies(L level, E entity);
+        public void CalculateDependencies(L level, E entity)
+        {
+            using (AbstractTexturePacker<E, L> packer = CreatePacker(level))
+            {
+                Dictionary<TexturedTile, List<TexturedTileSegment>> entitySegments = packer.GetModelSegments(entity);
+                foreach (E otherEntity in GetModelTypes(level))
+                {
+                    if (EqualityComparer<E>.Default.Equals(entity, otherEntity))
+                    {
+                        continue;
+                    }
+
+                    Dictionary<TexturedTile, List<TexturedTileSegment>> modelSegments = packer.GetModelSegments(otherEntity);
+
+                    foreach (TexturedTile tile in entitySegments.Keys)
+                    {
+                        if (modelSegments.ContainsKey(tile))
+                        {
+                            List<TexturedTileSegment> matches = entitySegments[tile].FindAll(s1 => modelSegments[tile].Any(s2 => s1 == s2));
+                            foreach (TexturedTileSegment matchedSegment in matches)
+                            {
+                                TextureDependency<E> dependency = GetDependency(tile.Index, matchedSegment.Bounds);
+                                if (dependency == null)
+                                {
+                                    dependency = new TextureDependency<E>
+                                    {
+                                        TileIndex = tile.Index,
+                                        Bounds = matchedSegment.Bounds
+                                    };
+                                    Dependencies.Add(dependency);
+                                }
+                                dependency.AddEntity(entity);
+                                dependency.AddEntity(otherEntity);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
+        protected abstract IEnumerable<E> GetModelTypes(L level);
 
         public TextureDependency<E> GetDependency(int tileIndex, Rectangle rectangle)
         {

@@ -12,7 +12,7 @@ namespace TextureExport
     {
         enum Mode
         {
-            Png, Html, Segments, Faces, Boxes
+            Png, Html, Segments, Faces, Boxes, Dependencies
         }
 
         static readonly TR1LevelReader _reader1 = new TR1LevelReader();
@@ -55,13 +55,19 @@ namespace TextureExport
                         return;
                     }
                 }
+                else if (arg == "depend")
+                {
+                    mode = Mode.Dependencies;
+                }
             }
 
-            if (args[0].ToLower().EndsWith(".phd"))
+            string levelType = args[0].ToLower();
+
+            if (levelType.EndsWith(".phd"))
             {
                 ExportAllTextures(args[0], _reader1.ReadLevel(args[0]), mode);
             }
-            else if (args[0].ToLower().EndsWith(".tr2"))
+            else if (levelType.EndsWith(".tr2"))
             {
                 uint version = DetectVersion(args[0]);
                 if (version == Versions.TR2)
@@ -73,7 +79,7 @@ namespace TextureExport
                     ExportAllTextures(args[0], _reader3.ReadLevel(args[0]), mode);
                 }
             }
-            else if (args[0] == "tr1")
+            else if (levelType == "tr1")
             {
                 foreach (string lvl in TRLevelNames.AsListWithAssault)
                 {
@@ -83,7 +89,7 @@ namespace TextureExport
                     }
                 }
             }
-            else if (args[0] == "tr1g")
+            else if (levelType == "tr1g")
             {
                 foreach (string lvl in TRLevelNames.AsListGold)
                 {
@@ -93,7 +99,7 @@ namespace TextureExport
                     }
                 }
             }
-            else if (args[0] == "tr2g")
+            else if (levelType == "tr2g")
             {
                 foreach (string lvl in TR2LevelNames.AsListGold)
                 {
@@ -103,7 +109,7 @@ namespace TextureExport
                     }
                 }
             }
-            else if (args[0] == "tr3")
+            else if (levelType == "tr3")
             {
                 foreach (string lvl in TR3LevelNames.AsListWithAssault)
                 {
@@ -113,7 +119,7 @@ namespace TextureExport
                     }
                 }
             }
-            else if (args[0] == "tr3g")
+            else if (levelType == "tr3g")
             {
                 foreach (string lvl in TR3LevelNames.AsListGold)
                 {
@@ -178,6 +184,9 @@ namespace TextureExport
                 case Mode.Boxes:
                     FaceMapper.DrawBoxes(inst, lvl, GetRoomArgs());
                     break;
+                case Mode.Dependencies:
+                    DependencyExporter.Export(inst, lvl);
+                    break;
                 default:
                     Console.WriteLine("{0} mode is not supported for TR2.", mode);
                     break;
@@ -199,6 +208,9 @@ namespace TextureExport
                     break;
                 case Mode.Faces:
                     FaceMapper.DrawFaces(inst, lvl, GetRoomArgs());
+                    break;
+                case Mode.Dependencies:
+                    DependencyExporter.Export(inst, lvl);
                     break;
                 default:
                     Console.WriteLine("{0} mode is not supported for TR3.", mode);
@@ -223,7 +235,7 @@ namespace TextureExport
         static void Usage()
         {
             Console.WriteLine();
-            Console.WriteLine("Usage: TextureExport [tr1 | tr1g | tr2 | tr2g | tr3 | tr3g | *.phd | *.tr2] [png | html | segments | faces | boxes]");
+            Console.WriteLine("Usage: TextureExport [tr1 | tr1g | tr2 | tr2g | tr3 | tr3g | *.phd | *.tr2] [png | html | segments | faces | boxes | depend]");
             Console.WriteLine();
 
             Console.WriteLine("Target Levels");
@@ -243,6 +255,7 @@ namespace TextureExport
             Console.WriteLine("\tsegments - Export each object and sprite texture to individual PNG files.");
             Console.WriteLine("\tfaces    - Create a new texture for every face in a room and mark its index.");
             Console.WriteLine("\tboxes    - Similar to faces, but mark box extents for a list of rooms.");
+            Console.WriteLine("\tdepend   - Calculate which textures are shared between models and generate the JSON used in the main randomizer.");
             Console.WriteLine();
             
             Console.WriteLine("Examples");
@@ -289,6 +302,14 @@ namespace TextureExport
             Console.ResetColor();
             Console.WriteLine("\t\tCreates a new texture for sectors in rooms 4 and 32, showing the box index for the sector.");
             Console.WriteLine("\t\tThe level will likely be unplayable due to limits but can be viewed in trview.");
+            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\tTextureExport TR3 depend");
+            Console.ResetColor();
+            Console.WriteLine("\t\tCycle through each TR3 level and work out which textures are shared between models.");
+            Console.WriteLine("\t\tJSON files are generated for referencing in the main randomizer. This process will");
+            Console.WriteLine("\t\tbe lengthy.");
             Console.WriteLine();
         }
     }

@@ -239,6 +239,12 @@ namespace TRRandomizerCore.Randomizers
                     DataFolder = _outer.GetResourcePath(@"TR3\Models")
                 };
 
+                string remapPath = @"TR3\Textures\Deduplication\" + level.Name + "-TextureRemap.json";
+                if (_outer.ResourceExists(remapPath))
+                {
+                    importer.TextureRemapPath = _outer.GetResourcePath(remapPath);
+                }
+
                 try
                 {
                     // Try to import the selected models into the level.
