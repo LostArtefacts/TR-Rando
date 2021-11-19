@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Data;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model.Definitions;
+using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Transport
 {
@@ -29,7 +32,12 @@ namespace TRModelTransporter.Transport
 
         protected override void Import(IEnumerable<TR3ModelDefinition> standardDefinitions, IEnumerable<TR3ModelDefinition> soundOnlyDefinitions)
         {
-            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, null, ClearUnusedSprites, TexturePositionMonitor);
+            TR3TextureRemapGroup remap = null;
+            if (TextureRemapPath != null)
+            {
+                remap = JsonConvert.DeserializeObject<TR3TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
+            }
+            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
 
             _soundHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
 

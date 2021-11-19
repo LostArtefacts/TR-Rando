@@ -1,0 +1,1698 @@
+{
+  "Remapping": [],
+  "Dependencies": [
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 4,
+      "Bounds": "0, 240, 64, 16"
+    },
+    {
+      "Entities": [
+        145,
+        158
+      ],
+      "TileIndex": 4,
+      "Bounds": "64, 0, 72, 96"
+    },
+    {
+      "Entities": [
+        131,
+        132,
+        133,
+        139
+      ],
+      "TileIndex": 4,
+      "Bounds": "136, 0, 64, 64"
+    },
+    {
+      "Entities": [
+        142,
+        143,
+        144
+      ],
+      "TileIndex": 4,
+      "Bounds": "136, 64, 64, 64"
+    },
+    {
+      "Entities": [
+        3,
+        161,
+        186
+      ],
+      "TileIndex": 4,
+      "Bounds": "208, 232, 48, 24"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 4,
+      "Bounds": "240, 40, 16, 40"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 4,
+      "Bounds": "240, 80, 16, 24"
+    },
+    {
+      "Entities": [
+        142,
+        143,
+        144
+      ],
+      "TileIndex": 5,
+      "Bounds": "32, 142, 64, 16"
+    },
+    {
+      "Entities": [
+        3,
+        161,
+        186
+      ],
+      "TileIndex": 5,
+      "Bounds": "40, 182, 32, 16"
+    },
+    {
+      "Entities": [
+        1,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "TileIndex": 5,
+      "Bounds": "96, 142, 8, 8"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 5,
+      "Bounds": "96, 150, 32, 32"
+    },
+    {
+      "Entities": [
+        1,
+        185
+      ],
+      "TileIndex": 5,
+      "Bounds": "96, 246, 80, 8"
+    },
+    {
+      "Entities": [
+        162,
+        187
+      ],
+      "TileIndex": 5,
+      "Bounds": "112, 214, 56, 16"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123,
+        185
+      ],
+      "TileIndex": 5,
+      "Bounds": "116, 32, 16, 16"
+    },
+    {
+      "Entities": [
+        174,
+        199
+      ],
+      "TileIndex": 5,
+      "Bounds": "160, 96, 6, 6"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123,
+        185
+      ],
+      "TileIndex": 5,
+      "Bounds": "168, 118, 16, 16"
+    },
+    {
+      "Entities": [
+        142,
+        143,
+        144
+      ],
+      "TileIndex": 5,
+      "Bounds": "168, 134, 64, 16"
+    },
+    {
+      "Entities": [
+        163,
+        188
+      ],
+      "TileIndex": 5,
+      "Bounds": "168, 214, 56, 16"
+    },
+    {
+      "Entities": [
+        174,
+        199
+      ],
+      "TileIndex": 5,
+      "Bounds": "172, 48, 6, 6"
+    },
+    {
+      "Entities": [
+        1,
+        185
+      ],
+      "TileIndex": 5,
+      "Bounds": "172, 54, 80, 16"
+    },
+    {
+      "Entities": [
+        1,
+        185
+      ],
+      "TileIndex": 5,
+      "Bounds": "176, 246, 80, 8"
+    },
+    {
+      "Entities": [
+        3,
+        161,
+        186
+      ],
+      "TileIndex": 5,
+      "Bounds": "188, 102, 24, 8"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 5,
+      "Bounds": "208, 198, 16, 16"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 5,
+      "Bounds": "220, 46, 32, 8"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 5,
+      "Bounds": "224, 198, 8, 8"
+    },
+    {
+      "Entities": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "TileIndex": 5,
+      "Bounds": "224, 206, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123,
+        185
+      ],
+      "TileIndex": 5,
+      "Bounds": "232, 174, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 6,
+      "Bounds": "0, 80, 16, 40"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 6,
+      "Bounds": "0, 224, 64, 8"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 6,
+      "Bounds": "16, 80, 16, 40"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 6,
+      "Bounds": "32, 80, 16, 40"
+    },
+    {
+      "Entities": [
+        180,
+        204
+      ],
+      "TileIndex": 6,
+      "Bounds": "32, 232, 32, 16"
+    },
+    {
+      "Entities": [
+        4,
+        5
+      ],
+      "TileIndex": 6,
+      "Bounds": "48, 96, 16, 40"
+    },
+    {
+      "Entities": [
+        1,
+        3,
+        6,
+        7,
+        8,
+        9
+      ],
+      "TileIndex": 6,
+      "Bounds": "56, 0, 24, 32"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 6,
+      "Bounds": "56, 248, 8, 8"
+    },
+    {
+      "Entities": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "TileIndex": 6,
+      "Bounds": "80, 0, 24, 32"
+    },
+    {
+      "Entities": [
+        4,
+        5
+      ],
+      "TileIndex": 6,
+      "Bounds": "80, 168, 16, 24"
+    },
+    {
+      "Entities": [
+        177,
+        202
+      ],
+      "TileIndex": 6,
+      "Bounds": "96, 48, 32, 24"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 6,
+      "Bounds": "96, 104, 24, 16"
+    },
+    {
+      "Entities": [
+        1,
+        3,
+        6,
+        7,
+        8,
+        9
+      ],
+      "TileIndex": 6,
+      "Bounds": "104, 0, 24, 32"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 6,
+      "Bounds": "119, 216, 64, 8"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 6,
+      "Bounds": "120, 72, 8, 8"
+    },
+    {
+      "Entities": [
+        4,
+        5
+      ],
+      "TileIndex": 6,
+      "Bounds": "120, 80, 16, 40"
+    },
+    {
+      "Entities": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "TileIndex": 6,
+      "Bounds": "128, 0, 24, 32"
+    },
+    {
+      "Entities": [
+        3,
+        161,
+        186
+      ],
+      "TileIndex": 6,
+      "Bounds": "128, 48, 16, 8"
+    },
+    {
+      "Entities": [
+        4,
+        5
+      ],
+      "TileIndex": 6,
+      "Bounds": "136, 80, 16, 40"
+    },
+    {
+      "Entities": [
+        3,
+        161,
+        186
+      ],
+      "TileIndex": 6,
+      "Bounds": "152, 248, 24, 8"
+    },
+    {
+      "Entities": [
+        4,
+        5
+      ],
+      "TileIndex": 6,
+      "Bounds": "176, 0, 24, 32"
+    },
+    {
+      "Entities": [
+        163,
+        171,
+        188
+      ],
+      "TileIndex": 6,
+      "Bounds": "176, 112, 16, 40"
+    },
+    {
+      "Entities": [
+        3,
+        161,
+        186
+      ],
+      "TileIndex": 6,
+      "Bounds": "176, 152, 24, 24"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 6,
+      "Bounds": "182, 72, 16, 40"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 6,
+      "Bounds": "183, 216, 64, 8"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 6,
+      "Bounds": "198, 72, 8, 24"
+    },
+    {
+      "Entities": [
+        4,
+        5
+      ],
+      "TileIndex": 6,
+      "Bounds": "200, 0, 24, 32"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 6,
+      "Bounds": "231, 224, 16, 32"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 7,
+      "Bounds": "0, 0, 16, 32"
+    },
+    {
+      "Entities": [
+        175,
+        200
+      ],
+      "TileIndex": 7,
+      "Bounds": "0, 64, 16, 24"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 7,
+      "Bounds": "0, 150, 16, 16"
+    },
+    {
+      "Entities": [
+        164,
+        189
+      ],
+      "TileIndex": 7,
+      "Bounds": "0, 182, 16, 16"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 7,
+      "Bounds": "0, 236, 24, 8"
+    },
+    {
+      "Entities": [
+        176,
+        201
+      ],
+      "TileIndex": 7,
+      "Bounds": "16, 64, 24, 16"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 7,
+      "Bounds": "24, 238, 24, 8"
+    },
+    {
+      "Entities": [
+        164,
+        189
+      ],
+      "TileIndex": 7,
+      "Bounds": "48, 62, 16, 24"
+    },
+    {
+      "Entities": [
+        176,
+        201
+      ],
+      "TileIndex": 7,
+      "Bounds": "48, 190, 16, 16"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 7,
+      "Bounds": "48, 238, 16, 8"
+    },
+    {
+      "Entities": [
+        3,
+        161,
+        186
+      ],
+      "TileIndex": 7,
+      "Bounds": "64, 22, 48, 8"
+    },
+    {
+      "Entities": [
+        168,
+        170,
+        195
+      ],
+      "TileIndex": 7,
+      "Bounds": "64, 62, 16, 24"
+    },
+    {
+      "Entities": [
+        174,
+        199
+      ],
+      "TileIndex": 7,
+      "Bounds": "64, 182, 16, 16"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 7,
+      "Bounds": "64, 198, 16, 16"
+    },
+    {
+      "Entities": [
+        5,
+        160,
+        185
+      ],
+      "TileIndex": 7,
+      "Bounds": "70, 158, 8, 8"
+    },
+    {
+      "Entities": [
+        164,
+        189
+      ],
+      "TileIndex": 7,
+      "Bounds": "72, 246, 24, 8"
+    },
+    {
+      "Entities": [
+        173,
+        198
+      ],
+      "TileIndex": 7,
+      "Bounds": "80, 62, 16, 24"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 7,
+      "Bounds": "80, 118, 8, 16"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 7,
+      "Bounds": "80, 150, 16, 16"
+    },
+    {
+      "Entities": [
+        180,
+        204
+      ],
+      "TileIndex": 7,
+      "Bounds": "80, 190, 16, 16"
+    },
+    {
+      "Entities": [
+        176,
+        201
+      ],
+      "TileIndex": 7,
+      "Bounds": "96, 64, 24, 16"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 7,
+      "Bounds": "96, 150, 32, 8"
+    },
+    {
+      "Entities": [
+        177,
+        202
+      ],
+      "TileIndex": 7,
+      "Bounds": "96, 246, 24, 8"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 7,
+      "Bounds": "112, 24, 48, 8"
+    },
+    {
+      "Entities": [
+        177,
+        202
+      ],
+      "TileIndex": 7,
+      "Bounds": "120, 64, 24, 16"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 7,
+      "Bounds": "128, 150, 32, 8"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 7,
+      "Bounds": "128, 230, 24, 8"
+    },
+    {
+      "Entities": [
+        162,
+        187
+      ],
+      "TileIndex": 7,
+      "Bounds": "130, 0, 56, 8"
+    },
+    {
+      "Entities": [
+        163,
+        188
+      ],
+      "TileIndex": 7,
+      "Bounds": "130, 8, 56, 8"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 7,
+      "Bounds": "136, 120, 16, 8"
+    },
+    {
+      "Entities": [
+        177,
+        202
+      ],
+      "TileIndex": 7,
+      "Bounds": "144, 72, 16, 24"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 7,
+      "Bounds": "144, 197, 8, 32"
+    },
+    {
+      "Entities": [
+        163,
+        188
+      ],
+      "TileIndex": 7,
+      "Bounds": "150, 181, 16, 16"
+    },
+    {
+      "Entities": [
+        174,
+        199
+      ],
+      "TileIndex": 7,
+      "Bounds": "152, 197, 14, 6"
+    },
+    {
+      "Entities": [
+        177,
+        202
+      ],
+      "TileIndex": 7,
+      "Bounds": "160, 64, 24, 16"
+    },
+    {
+      "Entities": [
+        174,
+        199
+      ],
+      "TileIndex": 7,
+      "Bounds": "160, 150, 6, 14"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 7,
+      "Bounds": "166, 181, 8, 8"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 7,
+      "Bounds": "184, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        177,
+        202
+      ],
+      "TileIndex": 7,
+      "Bounds": "184, 64, 24, 16"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 7,
+      "Bounds": "184, 152, 32, 8"
+    },
+    {
+      "Entities": [
+        162,
+        187
+      ],
+      "TileIndex": 7,
+      "Bounds": "186, 0, 56, 8"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 7,
+      "Bounds": "192, 96, 16, 8"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 7,
+      "Bounds": "200, 232, 24, 8"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123,
+        185
+      ],
+      "TileIndex": 7,
+      "Bounds": "206, 136, 16, 16"
+    },
+    {
+      "Entities": [
+        177,
+        202
+      ],
+      "TileIndex": 7,
+      "Bounds": "208, 64, 16, 24"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 7,
+      "Bounds": "214, 192, 24, 8"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 7,
+      "Bounds": "216, 48, 16, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 7,
+      "Bounds": "216, 152, 16, 16"
+    },
+    {
+      "Entities": [
+        4,
+        5
+      ],
+      "TileIndex": 7,
+      "Bounds": "222, 136, 16, 16"
+    },
+    {
+      "Entities": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        123
+      ],
+      "TileIndex": 7,
+      "Bounds": "224, 64, 8, 8"
+    },
+    {
+      "Entities": [
+        178,
+        203
+      ],
+      "TileIndex": 7,
+      "Bounds": "224, 72, 24, 16"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 7,
+      "Bounds": "224, 232, 8, 8"
+    },
+    {
+      "Entities": [
+        162,
+        187
+      ],
+      "TileIndex": 7,
+      "Bounds": "232, 56, 24, 16"
+    },
+    {
+      "Entities": [
+        3,
+        161,
+        186
+      ],
+      "TileIndex": 7,
+      "Bounds": "232, 120, 24, 8"
+    },
+    {
+      "Entities": [
+        175,
+        200,
+        311
+      ],
+      "TileIndex": 7,
+      "Bounds": "240, 184, 16, 16"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 7,
+      "Bounds": "240, 248, 16, 8"
+    },
+    {
+      "Entities": [
+        174,
+        199
+      ],
+      "TileIndex": 7,
+      "Bounds": "242, 14, 14, 6"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 7,
+      "Bounds": "248, 72, 8, 16"
+    },
+    {
+      "Entities": [
+        163,
+        171,
+        188
+      ],
+      "TileIndex": 8,
+      "Bounds": "8, 0, 8, 24"
+    },
+    {
+      "Entities": [
+        168,
+        170,
+        195
+      ],
+      "TileIndex": 8,
+      "Bounds": "16, 0, 8, 24"
+    },
+    {
+      "Entities": [
+        173,
+        198
+      ],
+      "TileIndex": 8,
+      "Bounds": "24, 0, 8, 24"
+    },
+    {
+      "Entities": [
+        162,
+        187
+      ],
+      "TileIndex": 8,
+      "Bounds": "24, 24, 8, 16"
+    },
+    {
+      "Entities": [
+        162,
+        187
+      ],
+      "TileIndex": 8,
+      "Bounds": "24, 64, 8, 8"
+    },
+    {
+      "Entities": [
+        162,
+        187
+      ],
+      "TileIndex": 8,
+      "Bounds": "32, 24, 8, 16"
+    },
+    {
+      "Entities": [
+        163,
+        188
+      ],
+      "TileIndex": 8,
+      "Bounds": "32, 64, 8, 8"
+    },
+    {
+      "Entities": [
+        162,
+        187
+      ],
+      "TileIndex": 8,
+      "Bounds": "40, 24, 8, 16"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 8,
+      "Bounds": "40, 40, 8, 16"
+    },
+    {
+      "Entities": [
+        163,
+        188
+      ],
+      "TileIndex": 8,
+      "Bounds": "40, 64, 8, 8"
+    },
+    {
+      "Entities": [
+        163,
+        188
+      ],
+      "TileIndex": 8,
+      "Bounds": "48, 24, 8, 16"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 8,
+      "Bounds": "48, 40, 8, 16"
+    },
+    {
+      "Entities": [
+        164,
+        189
+      ],
+      "TileIndex": 8,
+      "Bounds": "48, 64, 8, 8"
+    },
+    {
+      "Entities": [
+        163,
+        188
+      ],
+      "TileIndex": 8,
+      "Bounds": "56, 24, 8, 16"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 8,
+      "Bounds": "56, 40, 16, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "56, 53, 8, 8"
+    },
+    {
+      "Entities": [
+        164,
+        189
+      ],
+      "TileIndex": 8,
+      "Bounds": "64, 24, 8, 16"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 8,
+      "Bounds": "64, 69, 8, 8"
+    },
+    {
+      "Entities": [
+        164,
+        189
+      ],
+      "TileIndex": 8,
+      "Bounds": "72, 24, 16, 8"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 8,
+      "Bounds": "72, 40, 16, 8"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 8,
+      "Bounds": "72, 70, 8, 8"
+    },
+    {
+      "Entities": [
+        174,
+        199
+      ],
+      "TileIndex": 8,
+      "Bounds": "78, 48, 6, 14"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 8,
+      "Bounds": "80, 0, 8, 16"
+    },
+    {
+      "Entities": [
+        164,
+        189
+      ],
+      "TileIndex": 8,
+      "Bounds": "80, 64, 8, 8"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 8,
+      "Bounds": "88, 0, 8, 16"
+    },
+    {
+      "Entities": [
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "88, 24, 8, 16"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 8,
+      "Bounds": "88, 40, 8, 16"
+    },
+    {
+      "Entities": [
+        164,
+        189
+      ],
+      "TileIndex": 8,
+      "Bounds": "88, 64, 8, 8"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 8,
+      "Bounds": "96, 0, 16, 8"
+    },
+    {
+      "Entities": [
+        224,
+        228
+      ],
+      "TileIndex": 8,
+      "Bounds": "96, 40, 16, 8"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 8,
+      "Bounds": "96, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 8,
+      "Bounds": "104, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 8,
+      "Bounds": "112, 0, 16, 8"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 8,
+      "Bounds": "112, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        29,
+        91,
+        185,
+        188,
+        349
+      ],
+      "TileIndex": 8,
+      "Bounds": "116, 56, 8, 8"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 8,
+      "Bounds": "120, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 8,
+      "Bounds": "128, 0, 8, 16"
+    },
+    {
+      "Entities": [
+        71,
+        123
+      ],
+      "TileIndex": 8,
+      "Bounds": "128, 16, 16, 8"
+    },
+    {
+      "Entities": [
+        172,
+        197,
+        310
+      ],
+      "TileIndex": 8,
+      "Bounds": "128, 32, 8, 16"
+    },
+    {
+      "Entities": [
+        6,
+        165,
+        190
+      ],
+      "TileIndex": 8,
+      "Bounds": "128, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 8,
+      "Bounds": "136, 0, 8, 16"
+    },
+    {
+      "Entities": [
+        174,
+        199,
+        309
+      ],
+      "TileIndex": 8,
+      "Bounds": "136, 32, 8, 16"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 8,
+      "Bounds": "136, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "144, 0, 8, 16"
+    },
+    {
+      "Entities": [
+        175,
+        200,
+        311
+      ],
+      "TileIndex": 8,
+      "Bounds": "144, 32, 8, 16"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 8,
+      "Bounds": "144, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        178,
+        203
+      ],
+      "TileIndex": 8,
+      "Bounds": "144, 64, 8, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "152, 0, 8, 16"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 8,
+      "Bounds": "152, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        181,
+        182
+      ],
+      "TileIndex": 8,
+      "Bounds": "160, 64, 8, 8"
+    },
+    {
+      "Entities": [
+        71,
+        123
+      ],
+      "TileIndex": 8,
+      "Bounds": "164, 56, 8, 8"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 8,
+      "Bounds": "168, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        164,
+        189
+      ],
+      "TileIndex": 8,
+      "Bounds": "176, 24, 16, 8"
+    },
+    {
+      "Entities": [
+        7,
+        166,
+        191
+      ],
+      "TileIndex": 8,
+      "Bounds": "176, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "184, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "192, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "200, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "208, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "224, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        168,
+        170,
+        173,
+        195,
+        198
+      ],
+      "TileIndex": 8,
+      "Bounds": "232, 24, 16, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "232, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "240, 48, 8, 8"
+    },
+    {
+      "Entities": [
+        145,
+        158
+      ],
+      "TileIndex": 8,
+      "Bounds": "244, 56, 8, 8"
+    },
+    {
+      "Entities": [
+        8,
+        167,
+        192
+      ],
+      "TileIndex": 8,
+      "Bounds": "248, 48, 8, 8"
+    }
+  ]
+}
