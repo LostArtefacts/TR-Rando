@@ -31,6 +31,11 @@ namespace TRRandomizerCore.Editors
             // randomizers are implemented, just call Settings.GetSaveTarget(numLevels) per TR2.
             int target = base.GetSaveTarget(numLevels);
 
+            if (Settings.RandomizeGameStrings || Settings.ReassignPuzzleNames)
+            {
+                target++;
+            }
+
             if (Settings.RandomizeSequencing)
             {
                 target += numLevels;
@@ -87,6 +92,19 @@ namespace TRRandomizerCore.Editors
             {
                 (tr23ScriptEditor.Script as TR23Script).LevelSelectEnabled = true;
                 scriptEditor.SaveScript();
+            }
+
+            if (!monitor.IsCancelled && (Settings.RandomizeGameStrings || Settings.ReassignPuzzleNames))
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting game strings");
+                new TR3GameStringRandomizer
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.GameStringsSeed);
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeSequencing)
