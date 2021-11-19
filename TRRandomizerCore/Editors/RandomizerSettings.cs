@@ -17,6 +17,7 @@ namespace TRRandomizerCore.Editors
         public bool RandomizeAudio { get; set; }
         public bool RandomizeStartPosition { get; set; }
         public bool RandomizeEnvironment { get; set; }
+        public bool RandomizeSecretRewardsPhysical { get; set; }
 
         public int SecretSeed { get; set; }
         public int ItemSeed { get; set; }
@@ -28,6 +29,7 @@ namespace TRRandomizerCore.Editors
         public int AudioSeed { get; set; }
         public int StartPositionSeed { get; set; }
         public int EnvironmentSeed { get; set; }
+        public int SecretRewardsPhysicalSeed { get; set; }
 
         // Although stored in the script config, this is needed in case sequencing
         // mods are needed per level.
@@ -155,6 +157,9 @@ namespace TRRandomizerCore.Editors
             DevelopmentMode = config.GetBool(nameof(DevelopmentMode));
             AutoLaunchGame = config.GetBool(nameof(AutoLaunchGame));
             PuristMode = config.GetBool(nameof(PuristMode));
+
+            RandomizeSecretRewardsPhysical = config.GetBool(nameof(RandomizeSecretRewardsPhysical));
+            SecretRewardsPhysicalSeed = config.GetInt(nameof(SecretRewardsPhysicalSeed));
         }
 
         public void StoreConfig(Config config)
@@ -230,6 +235,9 @@ namespace TRRandomizerCore.Editors
             config[nameof(DevelopmentMode)] = DevelopmentMode;
             config[nameof(AutoLaunchGame)] = AutoLaunchGame;
             config[nameof(PuristMode)] = PuristMode;
+
+            config[nameof(RandomizeSecretRewardsPhysical)] = RandomizeSecretRewardsPhysical;
+            config[nameof(SecretRewardsPhysicalSeed)] = SecretRewardsPhysicalSeed;
         }
 
         public int GetSaveTarget(int numLevels)

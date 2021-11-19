@@ -1,0 +1,522 @@
+{
+  "Global": {
+    "GameStrings1": {
+      "0": "INVENTORY",
+      "1": "OPTION",
+      "2": "ITEMS",
+      "3": "GAME OVER",
+      "4": "Load Game",
+      "5": "Save Game",
+      "6": "New Game",
+      "7": "Restart Level",
+      "8": "Exit to Title",
+      "9": "Exit Demo",
+      "10": "Exit Game",
+      "11": "Select Level",
+      "12": "Save Position",
+      "13": "Select Detail",
+      "14": "High",
+      "15": "Medium",
+      "16": "Low",
+      "17": "Walk",
+      "18": "Roll",
+      "19": "Run",
+      "20": "Left",
+      "21": "Right",
+      "22": "Back",
+      "23": "Duck",
+      "24": "?",
+      "25": "Dash",
+      "26": "?",
+      "27": "Look",
+      "28": "Jump",
+      "29": "Action",
+      "30": "Draw Weapon",
+      "31": "?",
+      "32": "Inventory",
+      "33": "Flare",
+      "34": "Duck, Dash",
+      "35": "Statistics",
+      "36": "Pistols",
+      "37": "Shotgun",
+      "38": "Desert Eagle",
+      "39": "Uzis",
+      "40": "Harpoon Gun",
+      "41": "MP5",
+      "42": "Rocket Launcher",
+      "43": "Grenade Launcher",
+      "44": "Flare",
+      "45": "Pistol Clips",
+      "46": "Shotgun Shells",
+      "47": "Desert Eagle Clips",
+      "48": "Uzi Clips",
+      "49": "Harpoons",
+      "50": "MP5 Clips",
+      "51": "Rockets",
+      "52": "Grenades",
+      "53": "Small Medi Pack",
+      "54": "Large Medi Pack",
+      "55": "Pickup",
+      "56": "Puzzle",
+      "57": "Key",
+      "58": "Game",
+      "59": "Lara's Home",
+      "60": "LOADING",
+      "61": "Time Taken",
+      "62": "Secrets Found",
+      "63": "Location",
+      "64": "Kills",
+      "65": "Ammo Used",
+      "66": "Hits",
+      "67": "Saves Performed",
+      "68": "Distance Travelled",
+      "69": "Health Packs Used",
+      "70": "Release Version 1.0",
+      "71": "None",
+      "72": "Finish",
+      "73": "BEST TIMES",
+      "74": "No Times Set",
+      "75": "N/A",
+      "76": "Current Position",
+      "77": "Final Statistics",
+      "78": "of",
+      "79": "Story so far...",
+      "80": "Infada Stone",
+      "81": "Ora Dagger",
+      "82": "The Eye Of Isis",
+      "83": "Element 115",
+      "84": "Savegame Crystal",
+      "85": "London",
+      "86": "Nevada",
+      "87": "South Pacific Islands",
+      "88": "Antarctica",
+      "89": "Peru",
+      "90": "Next Adventure",
+      "91": "s"
+    },
+    "GameStrings2": {
+      "0": "Detail Levels",
+      "1": "Demo Mode",
+      "2": "Sound",
+      "3": "Controls",
+      "4": "Gamma",
+      "5": "Set Volumes",
+      "6": "User Keys",
+      "7": "The file could not be saved!",
+      "8": "Try Again?",
+      "9": "YES",
+      "10": "NO",
+      "11": "Save Complete!",
+      "12": "No save games!",
+      "13": "None valid",
+      "14": "Save Game?",
+      "15": "- EMPTY SLOT -",
+      "16": "OFF",
+      "17": "ON",
+      "18": "Setup Sound Card",
+      "19": "Default Keys",
+      "20": "DOZY",
+      "21": "Graphics",
+      "22": "Resolution",
+      "23": "ZBuffer",
+      "24": "Filter",
+      "25": "Dither",
+      "26": "Alpha",
+      "27": "Gamma",
+      "28": "NA",
+      "29": "spare",
+      "30": "spare",
+      "31": "spare",
+      "32": "spare",
+      "33": "spare",
+      "34": "spare",
+      "35": "spare",
+      "36": "spare",
+      "37": "spare",
+      "38": "spare",
+      "39": "spare",
+      "40": "spare"
+    }
+  },
+
+  "Levels": {
+    "ANTARC.TR2": {
+      "Keys": {
+        "0": "Hut Key",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "Crowbar",
+        "1": "Gate Control Key",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "AREA51.TR2": {
+      "Keys": {
+        "0": "Launch Code Card",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "Tower Access Pass",
+        "1": "Code CD",
+        "2": "Code CD",
+        "3": "Hangar Access Pass"
+      }
+    },
+    "CHAMBER.TR2": {
+      "Keys": {
+        "0": "K1",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "CITY.TR2": {
+      "Keys": {
+        "0": "Uli Key",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "Oceanic Mask",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "COMPOUND.TR2": {
+      "Keys": {
+        "0": "Keycard Type A",
+        "1": "Keycard Type B",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "Blue Security Pass",
+        "1": "Yellow Security Pass",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "CRASH.TR2": {
+      "Keys": {
+        "0": "Commander Bishop's Key",
+        "1": "Lt. Tuckerman's Key",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "Swamp Map",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "HOUSE.TR2": {
+      "Keys": {
+        "0": "Racetrack Key",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "JUNGLE.TR2": {
+      "Keys": {
+        "0": "K1",
+        "1": "K2",
+        "2": "K3",
+        "3": "Indra Key"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "MINES.TR2": {
+      "Keys": {
+        "0": "K1",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "Crowbar",
+        "1": "Lead Acid Battery",
+        "2": "Winch Starter",
+        "3": "P4"
+      }
+    },
+    "NEVADA.TR2": {
+      "Keys": {
+        "0": "Generator Access Card",
+        "1": "Detonator Switch",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "OFFICE.TR2": {
+      "Keys": {
+        "0": "K1",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "QUADCHAS.TR2": {
+      "Keys": {
+        "0": "Gate Key",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "RAPIDS.TR2": {
+      "Keys": {
+        "0": "K1",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "ROOFS.TR2": {
+      "Keys": {
+        "0": "Flue Room Key",
+        "1": "Cathedral Key",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "SEWER.TR2": {
+      "Keys": {
+        "0": "Maintenance Key",
+        "1": "Solomon's Key",
+        "2": "Solomon's Key",
+        "3": "Solomon's Key"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "Old Coin",
+        "1": "Ticket",
+        "2": "Hammer",
+        "3": "Ornate Star"
+      }
+    },
+    "SHORE.TR2": {
+      "Keys": {
+        "0": "Smuggler's Key",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "Serpent Stone",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "STPAUL.TR2": {
+      "Keys": {
+        "0": "Vault Key",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "TEMPLE.TR2": {
+      "Keys": {
+        "0": "Key of Ganesha",
+        "1": "Key of Ganesha",
+        "2": "Key of Ganesha",
+        "3": "Key of Ganesha"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "Scimitar",
+        "1": "Scimitar",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "TONYBOSS.TR2": {
+      "Keys": {
+        "0": "K1",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "TOWER.TR2": {
+      "Keys": {
+        "0": "Boiler Room Key",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "Embalming Fluid",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    },
+    "TRIBOSS.TR2": {
+      "Keys": {
+        "0": "K1",
+        "1": "K2",
+        "2": "K3",
+        "3": "K4"
+      },
+      "Pickups": {
+        "0": "P1",
+        "1": "P2"
+      },
+      "Puzzles": {
+        "0": "P1",
+        "1": "P2",
+        "2": "P3",
+        "3": "P4"
+      }
+    }
+  }
+}

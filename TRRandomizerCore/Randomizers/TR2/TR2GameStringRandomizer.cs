@@ -21,9 +21,9 @@ namespace TRRandomizerCore.Randomizers
 
                 if (!Settings.GameStringLanguage.IsHybrid)
                 {
-                    _gameStrings = G11N.Instance.GetGameStrings(Settings.GameStringLanguage);
+                    _gameStrings = G11N.Instance.GetGameStrings(Settings.GameStringLanguage, G11NGame.TR2);
                 }
-                _defaultGameStrings = G11N.Instance.GetDefaultGameStrings();
+                _defaultGameStrings = G11N.Instance.GetDefaultGameStrings(G11NGame.TR2);
 
                 TR23Script script = ScriptEditor.Script as TR23Script;
                 List<string> gamestrings1 = new List<string>(script.GameStrings1);
@@ -63,7 +63,7 @@ namespace TRRandomizerCore.Randomizers
             if (Settings.GameStringLanguage.IsHybrid)
             {
                 Language[] availableLangs = G11N.Instance.RealLanguages;
-                return G11N.Instance.GetGameStrings(availableLangs[_generator.Next(0, availableLangs.Length)]);
+                return G11N.Instance.GetGameStrings(availableLangs[_generator.Next(0, availableLangs.Length)], G11NGame.TR2);
             }
 
             return _gameStrings;

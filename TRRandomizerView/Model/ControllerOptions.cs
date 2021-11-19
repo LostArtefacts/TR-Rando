@@ -1353,6 +1353,7 @@ namespace TRRandomizerView.Model
             AutoLaunchGame = _controller.AutoLaunchGame;
             PuristMode = _controller.PuristMode;
 
+
             FireSupportPropertiesChanged();
         }
 

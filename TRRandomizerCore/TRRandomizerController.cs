@@ -23,7 +23,8 @@ namespace TRRandomizerCore
             [TRVersion.TR3] = new List<TRRandomizerType>
             {
                 TRRandomizerType.LevelSequence, TRRandomizerType.Unarmed, TRRandomizerType.Ammoless, TRRandomizerType.Audio, TRRandomizerType.Outfit,
-                TRRandomizerType.Secret, TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.SFX, TRRandomizerType.Item
+                TRRandomizerType.Secret, TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.SFX, TRRandomizerType.Item, 
+                TRRandomizerType.NightMode, TRRandomizerType.SecretReward, TRRandomizerType.Text
             }
         };
 
@@ -193,13 +194,21 @@ namespace TRRandomizerCore
         public bool RandomizeSecretRewards
         {
             get => ScriptEditor.SecretBonusOrganisation == Organisation.Random;
-            set => ScriptEditor.SecretBonusOrganisation = value ? Organisation.Random : _extSecretRewardsOrganisation;
+            set
+            {
+                ScriptEditor.SecretBonusOrganisation = value ? Organisation.Random : _extSecretRewardsOrganisation;
+                LevelRandomizer.RandomizeSecretRewardsPhysical = value;
+            }
         }
 
         public int SecretRewardSeed
         {
             get => ScriptEditor.SecretBonusRNG.Value;
-            set => ScriptEditor.SecretBonusRNG = new RandomGenerator(value);
+            set
+            {
+                ScriptEditor.SecretBonusRNG = new RandomGenerator(value);
+                LevelRandomizer.SecretRewardsPhysicalSeed = value;
+            }
         }
 
         public bool RandomizeSunsets

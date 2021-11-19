@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,9 @@ namespace TRLevelReader.Model
 {
     public class TR3Room : ISerializableCompact
     {
+        private readonly byte SPOT_LIGHT_TYPE = 0;
+        private readonly byte SUN_LIGHT_TYPE = 1;
+
         public TRRoomInfo Info { get; set; }
 
         public uint NumDataWords { get; set; }
@@ -67,6 +71,68 @@ namespace TRLevelReader.Model
                 {
                     Flags &= ~0x01;
                 }
+            }
+        }
+
+        public void SetAmbient(short val)
+        {
+            AmbientIntensity = val;
+        }
+
+        public void SetLights(ushort val)
+        {
+            foreach (TR3RoomLight light in Lights)
+            {
+                Debug.Assert(light.LightProperties.Length == 4);
+
+                if (light.LightType == SUN_LIGHT_TYPE)
+                {
+                    light.LightProperties[0] = 0;
+                    light.LightProperties[1] = 0;
+                    light.LightProperties[2] = 0;
+                    light.LightProperties[3] = 0;
+                } 
+                else if (light.LightType == SPOT_LIGHT_TYPE)
+                {
+                    TR3RoomSpotlight spotLight = new TR3RoomSpotlight
+                    {
+                        Intensity = ((light.LightProperties[0] << 16) | ((light.LightProperties[1]) & 0xffff)),
+                        Fade = ((light.LightProperties[2] << 16) | ((light.LightProperties[3]) & 0xffff))
+                    };
+
+                    spotLight.Intensity = val;
+
+                    light.LightProperties[0] = (short)(spotLight.Intensity >> 16);
+                    light.LightProperties[1] = (short)(spotLight.Intensity & 0xFFFF);
+                    light.LightProperties[2] = (short)(spotLight.Fade >> 16);
+                    light.LightProperties[3] = (short)(spotLight.Fade & 0xFFFF);
+                }
+            }
+        }
+
+        public void SetStaticMeshLights(ushort val)
+        {
+            foreach (TR3RoomStaticMesh mesh in StaticMeshes)
+            {
+                //No light properties?
+            }
+        }
+
+        public void SetVertexLight(short val)
+        {
+            foreach (TR3RoomVertex vert in RoomData.Vertices)
+            {
+                vert.Lighting = val;
+
+                byte red = (byte)((vert.Colour & 0x7C00) >> 10);
+                byte green = (byte)((vert.Colour & 0x03E0) >> 5);
+                byte blue = (byte)(vert.Colour & 0x001F);
+
+                red -= (byte)(red * val / 100);
+                green -= (byte)(green * val / 100);
+                blue -= (byte)(blue * val / 100);
+
+                vert.Colour = (ushort)((red << 10) | (green << 5) | (blue));
             }
         }
 

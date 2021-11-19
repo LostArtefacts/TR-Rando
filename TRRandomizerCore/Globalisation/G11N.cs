@@ -32,8 +32,12 @@ namespace TRRandomizerCore.Globalisation
         private G11N()
         {
             _languageMap = new SortedDictionary<Language, GameStrings>();
-            Language[] languages = JsonConvert.DeserializeObject<Language[]>(File.ReadAllText(@"Resources\TR2\Strings\languages.json"));
+
+            Language[] languages = JsonConvert.DeserializeObject<Language[]>(File.ReadAllText(
+                @"Resources\Shared\G11N\languages.json"));
+
             _realLanguages = new SortedSet<Language>();
+
             foreach (Language language in languages)
             {
                 // Use lazy-loading of the actual data
@@ -51,12 +55,12 @@ namespace TRRandomizerCore.Globalisation
             return _languageMap.Keys.ToList().Find(l => l.Tag.ToUpper().Equals(tag));
         }
 
-        public GameStrings GetGameStrings(string tag)
+        public GameStrings GetGameStrings(string tag, G11NGame game)
         {
-            return GetGameStrings(GetLanguage(tag));
+            return GetGameStrings(GetLanguage(tag), game);
         }
 
-        public GameStrings GetGameStrings(Language language)
+        public GameStrings GetGameStrings(Language language, G11NGame game)
         {
             if (!_languageMap.ContainsKey(language))
             {
@@ -65,16 +69,29 @@ namespace TRRandomizerCore.Globalisation
 
             if (_languageMap[language] == null && !language.IsHybrid)
             {
-                string path = string.Format(@"Resources\TR2\Strings\G11N\gamestrings_{0}.json", language.Tag);
-                _languageMap[language] = JsonConvert.DeserializeObject<GameStrings>(File.ReadAllText(path, Encoding.UTF8));
+                try
+                {
+                    string path = string.Format(@"Resources\{0}\Strings\G11N\gamestrings_{1}.json", game.ToString(), language.Tag);
+                    _languageMap[language] = JsonConvert.DeserializeObject<GameStrings>(File.ReadAllText(path, Encoding.UTF8));
+                }
+                catch (FileNotFoundException)
+                {
+                    //A language for a game isn't supported
+                }
             }
 
             return _languageMap[language];
         }
 
-        public GameStrings GetDefaultGameStrings()
+        public GameStrings GetDefaultGameStrings(G11NGame game)
         {
-            return GetGameStrings(GetLanguage(Language.DefaultTag));
+            return GetGameStrings(GetLanguage(Language.DefaultTag), game);
         }
+    }
+
+    public enum G11NGame
+    {
+        TR2,
+        TR3
     }
 }
