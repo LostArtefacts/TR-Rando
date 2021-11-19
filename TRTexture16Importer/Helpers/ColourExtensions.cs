@@ -136,5 +136,16 @@ namespace TRTexture16Importer.Helpers
                 (int)Math.Round(blue * 255, MidpointRounding.AwayFromZero)
             );
         }
+
+        public static ushort ToRGB555(this Color c)
+        {
+            int argb = c.ToArgb();
+            int a = (argb >> 16) & 0x8000;
+            int r = (argb >> 9) & 0x7C00;
+            int g = (argb >> 6) & 0x03E0;
+            int b = (argb >> 3) & 0x1F;
+
+            return (ushort)(a | r | g | b);
+        }
     }
 }
