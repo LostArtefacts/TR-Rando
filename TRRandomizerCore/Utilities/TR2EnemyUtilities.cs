@@ -14,7 +14,7 @@ using TRLevelReader.Model.Enums;
 
 namespace TRRandomizerCore.Utilities
 {
-    public static class EnemyUtilities
+    public static class TR2EnemyUtilities
     {
         // This allows us to alter the default number of enemy types per level
         // given that some can support many more but others have difficulty 
@@ -338,7 +338,7 @@ namespace TRRandomizerCore.Utilities
             [TR2Entities.BirdMonster] = 3,
         };
 
-        static EnemyUtilities()
+        static TR2EnemyUtilities()
         {
             _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Entities, List<int>>>>
             (

@@ -115,6 +115,9 @@ namespace TRModelTransporter.Data
             [TR3Entities.LaraAntarc]
                 = new TR3Entities[] { TR3Entities.LaraSkin_H_Antarc, TR3Entities.LaraPistolAnimation_H_Antarc, TR3Entities.LaraDeagleAnimation_H_Antarc, TR3Entities.LaraUziAnimation_H_Antarc },
 
+            [TR3Entities.Monkey]
+                = new TR3Entities[] { TR3Entities.MonkeyMedMeshswap, TR3Entities.MonkeyKeyMeshswap },
+
             [TR3Entities.Shiva]
                 = new TR3Entities[] { TR3Entities.ShivaStatue, TR3Entities.LaraExtraAnimation_H },
 
@@ -134,7 +137,7 @@ namespace TRModelTransporter.Data
                  = new TR3Entities[] { TR3Entities.LaraExtraAnimation_H },
 
             [TR3Entities.Willie]
-                 = new TR3Entities[] { TR3Entities.LaraExtraAnimation_H },
+                 = new TR3Entities[] { TR3Entities.LaraExtraAnimation_H, TR3Entities.AIPath_N },
 
             [TR3Entities.Infada_P]
                  = new TR3Entities[] { TR3Entities.Infada_M_H },

@@ -1068,8 +1068,8 @@ namespace TRRandomizerView.Model
             BindingOperations.SetBinding(DocileBirdMonsters, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
             ProtectMonks = new BoolItemControlClass()
             {
-                Title = "Avoid having to kill monks",
-                Description = "Monks will not be given pickups and will not appear at the end of Diving Area."
+                Title = "Avoid having to kill allies",
+                Description = "Allies will not be given pickups or be assigned to end-level triggers."
             };
             BindingOperations.SetBinding(ProtectMonks, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
 
@@ -1248,6 +1248,12 @@ namespace TRRandomizerView.Model
             _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = IsSFXSupported;
 
             _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
+
+            if (IsRewardRoomsTypeSupported) // i.e. IsTR3 - should make a TR version checker for the UI
+            {
+                DocileBirdMonsters.Title = "Enable docile Willard";
+                DocileBirdMonsters.Description = "Willard can appear in levels other than Meteorite Cavern but will not attack Lara unless she gets too close.";
+            }
         }
 
         public void Load(TRRandomizerController controller)

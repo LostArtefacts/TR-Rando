@@ -444,7 +444,7 @@ namespace TRRandomizerCore.Randomizers
                     if (Settings.RandomizeEnemies && Settings.CrossLevelEnemies)
                     {
                         // Create a score based on each type of enemy in this level and increase the ammo count based on this
-                        EnemyDifficulty difficulty = EnemyUtilities.GetEnemyDifficulty(_levelInstance.GetEnemyEntities());
+                        EnemyDifficulty difficulty = TR2EnemyUtilities.GetEnemyDifficulty(_levelInstance.GetEnemyEntities());
                         ammoToGive *= (uint)difficulty;
 
                         // Depending on how difficult the enemy combination is, allocate some extra helpers.
