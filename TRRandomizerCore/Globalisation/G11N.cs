@@ -76,7 +76,7 @@ namespace TRRandomizerCore.Globalisation
                 }
                 catch (FileNotFoundException)
                 {
-                    //A language for a game isn't supported - ???
+                    //A language for a game isn't supported
                 }
             }
 
