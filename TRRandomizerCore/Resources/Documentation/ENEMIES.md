@@ -102,6 +102,10 @@ There are further nuances with other enemy types in TR3.
 
 For now, spawn points will not be added to other levels. Raptors and Wasps can appear individually in other levels.
 
+## Shoals
+
+Note that the game crashes if a level contains piranhas or friendly shoals if _any_ level is out of normal sequence. The reason is currently unknown, so if level sequencing is randomized, all fish are disabled by default.
+
 ## Enemy Type Count
 
 Because of the increased limits in TR3, most levels have had their number of enemy types increased as follows. This is a maximum rather than a guaranteed number of types (e.g. for Jungle, 6 models will always be imported, but no checks are performed to ensure at least one of each is assigned to entities). Levels in _italics_ remain unchanged.
