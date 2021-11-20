@@ -152,6 +152,8 @@ namespace TREnvironmentEditor.Parsing
             {
                 case EMConditionType.EntityProperty:
                     return JsonConvert.DeserializeObject<EMEntityPropertyCondition>(jo.ToString());
+                case EMConditionType.SecretInRoom:
+                    return JsonConvert.DeserializeObject<EMSecretRoomCondition>(jo.ToString());
 
                 default:
                     throw new InvalidOperationException();

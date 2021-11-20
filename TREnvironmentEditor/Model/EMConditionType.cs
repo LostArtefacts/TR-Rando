@@ -2,6 +2,8 @@
 {
     public enum EMConditionType
     {
-        EntityProperty = 0
+        // Entities 0 - 20
+        EntityProperty = 0,
+        SecretInRoom = 1
     }
 }
