@@ -355,6 +355,107 @@ namespace TRLevelReader.Model.Enums
         LaraVehicleAnimation_H_BigGun,
         LaraVehicleAnimation_H_Kayak,
         LaraVehicleAnimation_H_UPV,
-        LaraVehicleAnimation_H_Boat
+        LaraVehicleAnimation_H_Boat,
+
+        // Aliases for key, puzzle and quest types. For example, Temple has 5 keys of ganesha
+        // using the standard IDs you cannot uniquely identify them. So instead, these will be defined
+        // with their own unique IDs. These can be retrieved using the following formula:
+        // Alias = LevelKeyItemBase + KeyTypeID + Room
+        JungleKeyItemBase = 10000,
+        MonkeyKey = 10359,
+
+        TempleKeyItemBase = 11000,
+        GaneshaSpikeCorridorAfterMud = 11371,
+        Scimitar2 = 11410,
+        Scimitar1 = 11411,
+        GaneshaFlipmapPool = 11416,
+        GaneshaBeneathRandyRory = 11435,
+        GaneshaCurrentPool = 11444,
+        GaneshaSpikeCeiling = 11446,
+
+        GangesKeyItemBase = 12000,
+        SnakePitKey = 12239,
+        MonkeyPitKey = 12323,
+
+        KaliyaKeyItemBase = 13000,
+
+        NevadaKeyItemBase = 14000,
+        DetonatorKey = 14294, //There are two on the level - we can ignore the one thats intended to be accessible
+        RooftopKeycard = 14378,
+
+        HSCKeyItemBase = 15000,
+        InitialKeycard = 15234,
+        FinalYellowKey = 15239,
+        BlueKey = 15279,
+        SecretCorridorKeycard = 15350,
+        SecretCorridorYellow = 15335,
+        OutsideTurretsKeycard = 15355,
+        OutsideYellowKey = 15366,
+
+        Area51KeyItemBase = 16000,
+        Disc2 = 16233,
+        Disc1 = 16257,
+        YellowKey = 16286,
+        UFOKeycard = 16322,
+
+        CoastalKeyItemBase = 17000,
+        SerpentStoneCubby = 17222,
+        SmugglersKey = 17231,
+        SerpentStoneTopWaterfall = 17326,
+        SerpentStoneTreetops = 17329,  
+
+        CrashKeyItemBase = 18000,
+        TuckermansKey = 18255,
+        BishopsKey = 18270,
+
+        MadubuKeyItemBase = 19000,
+
+        PunaKeyItemBase = 20000,
+
+        ThamesKeyItemBase = 21000,
+        CathedralKey = 21225,
+        FlueRoomKey = 21396,
+
+        AldwychKeyItemBase = 22000,
+        SolomonKeyDrillShaft = 22235,
+        Ticket = 22243,
+        Penny = 22247,
+        MaintenanceKey = 22262,
+        SolomonKey3DoorPuzzle = 22301,
+        Star = 22325,
+        Mallet = 22334, 
+
+        LudsKeyItemBase = 23000,
+        EmbalmingFluid = 23283,
+        BoilerRoomKey = 23293,
+
+        CityKeyItemBase = 24000,
+
+        AntarcticaKeyItemBase = 25000,
+        HutKey = 25375,
+        CrowbarAfterOpeningGenerator = 25292,
+        CrowbarAfterOpeningTower = 25298,
+        GeneratorKey = 25321,
+        CrowbarStandardPickup = 25339,
+
+        RXKeyItemBase = 26000,
+        Battery = 26312,
+        Winch = 26333,
+        Crowbar = 26365,
+
+        TinnosKeyItemBase = 27000,
+        UliKeyStart = 27251,
+        WaterMask = 27299,
+        WindMask = 27302,
+        EarthMask = 27325,
+        FireMask = 27324,
+        UliKeyMutants = 27435,
+
+        CavernKeyItemBase = 28000,
+
+        HallowsKeyItemBase = 29000,
+        VaultKey = 29242,
+
+        NullKeyItem = 32700
     }
 }
