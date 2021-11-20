@@ -28,6 +28,7 @@ namespace TRRandomizerCore.Randomizers
         private static readonly string _triggerWarningMsg = "Existing trigger object action with parameter {0} will be lost - {1} [X={2}, Y={3}, Z={4}, R={5}]";
         private static readonly string _flipMapWarningMsg = "Secret is being placed in a room that has a flipmap - {0} [X={1}, Y={2}, Z={3}, R={4}]";
         private static readonly string _flipMapErrorMsg = "Secret cannot be placed in a flipped room - {0} [X={1}, Y={2}, Z={3}, R={4}]";
+        private static readonly string _edgeInfoMsg = "Adding extra tile edge trigger for {0} [X={1}, Y={2}, Z={3}, R={4}]";
         private static readonly List<int> _devRooms = null;
         private static readonly ushort _devModeSecretCount = 6;
 
@@ -43,6 +44,8 @@ namespace TRRandomizerCore.Randomizers
         private static readonly int _LARGE_RETRY_TOLERANCE = 10;
         private static readonly int _MED_RETRY_TOLERANCE = 25;
         private static readonly int _SMALL_RETRY_TOLERANCE = 50;
+
+        private static readonly int _triggerEdgeLimit = 103; // Within ~10% of a tile edge, triggers will be copied into neighbours
 
         public override void Randomize(int seed)
         {
@@ -450,7 +453,7 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // Create the trigger. If this was unsuccessful, bail out.
-            if (!CreateSecretTrigger(level, secret, entity.Room, floorData, sector))
+            if (!CreateSecretTriggers(level, secret, entity.Room, floorData, sector))
             {
                 return null;
             }
@@ -460,7 +463,7 @@ namespace TRRandomizerCore.Randomizers
             if (altRoom != -1)
             {
                 sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, altRoom, level.Data, floorData);
-                if (!CreateSecretTrigger(level, secret, altRoom, floorData, sector))
+                if (!CreateSecretTriggers(level, secret, altRoom, floorData, sector))
                 {
                     return null;
                 }
@@ -472,6 +475,54 @@ namespace TRRandomizerCore.Randomizers
             }
 
             return entity;
+        }
+
+        private bool CreateSecretTriggers(TR3CombinedLevel level, TRSecretPlacement<TR3Entities> secret, short room, FDControl floorData, TRRoomSector baseSector)
+        {
+            // Try to make the primary trigger
+            if (!CreateSecretTrigger(level, secret, room, floorData, baseSector))
+            {
+                return false;
+            }
+
+            // Check neighbouring sectors if we are very close to tile edges. We scan 8 locations around
+            // the secret's position based on the edge tolerance and see if the sector has changed.
+            ISet<TRRoomSector> processedSectors = new HashSet<TRRoomSector> { baseSector };
+            for (int xNorm = -1; xNorm < 2; xNorm++)
+            {
+                for (int zNorm = -1; zNorm < 2; zNorm++)
+                {
+                    if (xNorm == 0 && zNorm == 0) continue; // Primary trigger's sector
+
+                    int x = secret.Location.X + xNorm * _triggerEdgeLimit;
+                    int z = secret.Location.Z + zNorm * _triggerEdgeLimit;
+                    TRRoomSector neighbour = FDUtilities.GetRoomSector(x, secret.Location.Y, z, room, level.Data, floorData);
+
+                    // Process each unique sector only once and if it's a valid neighbour, add the extra trigger
+                    if (processedSectors.Add(neighbour) && !IsInvalidNeighbour(baseSector, neighbour))
+                    {
+                        CreateSecretTrigger(level, secret, room, floorData, neighbour);
+                        if (Settings.DevelopmentMode)
+                        {
+                            Debug.WriteLine(string.Format(_edgeInfoMsg, level.Name, secret.Location.X, secret.Location.Y, secret.Location.Z, room));
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private bool IsInvalidNeighbour(TRRoomSector baseSector, TRRoomSector neighbour)
+        {
+            return (neighbour.Floor == -127 && neighbour.Ceiling == -127) // Inside a wall
+                || (neighbour.Floor != baseSector.Floor)                  // Change in height
+                || (neighbour.RoomBelow != baseSector.RoomBelow)          // Mid-air
+                ||
+                (
+                    (neighbour.BoxIndex & 0x7FF0) >> 4 == 2047            // Neighbour is a slope
+                    && (baseSector.BoxIndex & 0x7FF0) >> 4 != 2047        // But the base sector isn't
+                );
         }
 
         private bool CreateSecretTrigger(TR3CombinedLevel level, TRSecretPlacement<TR3Entities> secret, short room, FDControl floorData, TRRoomSector sector)
