@@ -17,6 +17,7 @@ using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Secrets;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -31,7 +32,7 @@ namespace TRRandomizerCore.Randomizers
         private static readonly List<int> _devRooms = null;
         private static readonly ushort _devModeSecretCount = 6;
 
-        private Dictionary<string, List<Location>> _locations;
+        private Dictionary<string, List<Location>> _locations, _unarmedLocations;
 
         private int _proxEvaluationCount;
 
@@ -50,6 +51,7 @@ namespace TRRandomizerCore.Randomizers
         {
             _generator = new Random(seed);
             _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\locations.json"));
+            _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
 
             SetMessage("Randomizing secrets - loading levels");
 
@@ -318,6 +320,8 @@ namespace TRRandomizerCore.Randomizers
             int pickupIndex = 0;
             ushort secretIndex = 0;
             ushort countedSecrets = _devModeSecretCount; // For dev mode test the max number of secrets in TR3
+            bool damagingLocationUsed = false;
+            bool glitchedDamagingLocationUsed = false;
             foreach (Location location in locations)
             {
                 if (_devRooms == null || _devRooms.Contains(location.Room))
@@ -342,6 +346,15 @@ namespace TRRandomizerCore.Randomizers
                         entities.Add(secretEntity);
                         secretIndex++;
                         pickupIndex++;
+
+                        if (location.RequiresDamage)
+                        {
+                            damagingLocationUsed = true;
+                            if (location.RequiresGlitch)
+                            {
+                                glitchedDamagingLocationUsed = true;
+                            }
+                        }
                     }
                 }
             }
@@ -350,6 +363,8 @@ namespace TRRandomizerCore.Randomizers
             level.Data.NumEntities = (uint)entities.Count;
 
             floorData.WriteToLevel(level.Data);
+
+            AddDamageControl(level, pickupTypes, damagingLocationUsed, glitchedDamagingLocationUsed);
         }
 
         private void RandomizeSecrets(TR3CombinedLevel level, List<TR3Entities> pickupTypes, TRSecretRoom<TR2Entity> rewardRoom)
@@ -363,6 +378,8 @@ namespace TRRandomizerCore.Randomizers
 
             TRSecretPlacement<TR3Entities> secret = new TRSecretPlacement<TR3Entities>();
             int pickupIndex = 0;
+            bool damagingLocationUsed = false;
+            bool glitchedDamagingLocationUsed = false;
             while (secret.SecretIndex < level.Script.NumSecrets)
             {
                 Location location;
@@ -397,6 +414,15 @@ namespace TRRandomizerCore.Randomizers
                     entities.Add(secretEntity);
                     secret.SecretIndex++;
                     pickupIndex++;
+
+                    if (location.RequiresDamage)
+                    {
+                        damagingLocationUsed = true;
+                        if (location.RequiresGlitch)
+                        {
+                            glitchedDamagingLocationUsed = true;
+                        }
+                    }
                 }
             }
 
@@ -404,6 +430,8 @@ namespace TRRandomizerCore.Randomizers
             level.Data.NumEntities = (uint)entities.Count;
 
             floorData.WriteToLevel(level.Data);
+
+            AddDamageControl(level, pickupTypes, damagingLocationUsed, glitchedDamagingLocationUsed);
         }
 
         private bool EvaluateProximity(Location loc, List<Location> usedLocs)
@@ -451,6 +479,105 @@ namespace TRRandomizerCore.Randomizers
             }
 
             return SafeToPlace;
+        }
+
+        private void AddDamageControl(TR3CombinedLevel level, List<TR3Entities> pickupTypes, bool damagingLocationUsed, bool glitchedDamagingLocationUsed)
+        {
+            // If we have used a secret that requires damage, add a large medi to an unarmed level
+            // weapon location.
+            if (damagingLocationUsed && _unarmedLocations.ContainsKey(level.Name))
+            {
+                if (level.Data.NumEntities < 256 || Settings.DevelopmentMode)
+                {
+                    List<Location> pool = _unarmedLocations[level.Name];
+                    Location location = pool[_generator.Next(0, pool.Count)];
+                    List<TR2Entity> entities = level.Data.Entities.ToList();
+                    entities.Add(new TR2Entity
+                    {
+                        TypeID = (short)TR3Entities.LargeMed_P,
+                        X = location.X,
+                        Y = location.Y,
+                        Z = location.Z,
+                        Room = (short)location.Room,
+                        Intensity1 = -1,
+                        Intensity2 = -1
+                    });
+                    level.Data.Entities = entities.ToArray();
+                    level.Data.NumEntities++;
+                }
+                else
+                {
+                    level.Script.AddStartInventoryItem(TR3Items.LargeMedi);
+                }
+            }
+
+            // If we have also used a secret that requires damage and is glitched, add something to the
+            // top ring to allow medi dupes.
+            if (glitchedDamagingLocationUsed)
+            {
+                // If we have a spare model slot, duplicate one of the artefacts into this so that
+                // we can add a hint with the item name. Otherwise, just re-use a puzzle item.
+                List<TRModel> models = level.Data.Models.ToList();
+                Dictionary<TR3Entities, TR3Entities> artefacts = TR3EntityUtilities.GetArtefactReplacements();
+
+                TR3Entities availablePickupType = default;
+                TR3Entities availableMenuType = default;
+                foreach (TR3Entities pickupType in artefacts.Keys)
+                {
+                    TR3Entities menuType = artefacts[pickupType];
+                    if (models.Find(m => m.ID == (uint)menuType) == null)
+                    {
+                        availablePickupType = pickupType;
+                        availableMenuType = menuType;
+                        break;
+                    }
+                }
+
+                if (availableMenuType != default)
+                {
+                    // We have a free slot, so duplicate a model
+                    TR3Entities baseArtefact = pickupTypes[_generator.Next(0, pickupTypes.Count)];
+                    TRModel artefactMenuModel = models.Find(m => m.ID == (uint)artefacts[baseArtefact]);
+                    models.Add(new TRModel
+                    {
+                        Animation = artefactMenuModel.Animation,
+                        FrameOffset = artefactMenuModel.FrameOffset,
+                        ID = (uint)availableMenuType,
+                        MeshTree = artefactMenuModel.MeshTree,
+                        NumMeshes = artefactMenuModel.NumMeshes,
+                        StartingMesh = artefactMenuModel.StartingMesh
+                    });
+
+                    level.Data.Models = models.ToArray();
+                    level.Data.NumModels++;
+
+                    // Add a script name - pull from GamestringRando once translations completed
+                    SetPuzzleTypeName(level, availablePickupType, "Infinite Medi Packs");
+                }
+                else
+                {
+                    // Otherwise, just use something already available (no change in name)
+                    availablePickupType = pickupTypes[_generator.Next(0, pickupTypes.Count)];
+                }
+
+                level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(availablePickupType));
+            }
+        }
+
+        private void SetPuzzleTypeName(TR3CombinedLevel level, TR3Entities itemType, string name)
+        {
+            if (TR3EntityUtilities.IsKeyType(itemType))
+            {
+                level.Script.Keys[itemType - TR3Entities.Key1_P] = name;
+            }
+            else if (TR3EntityUtilities.IsPuzzleType(itemType))
+            {
+                level.Script.Puzzles[itemType - TR3Entities.Puzzle1_P] = name;
+            }
+            else if (TR3EntityUtilities.IsQuestType(itemType))
+            {
+                level.Script.Pickups[itemType - TR3Entities.Quest1_P] = name;
+            }
         }
 
         private TR2Entity PlaceSecret(TR3CombinedLevel level, TRSecretPlacement<TR3Entities> secret, FDControl floorData)
@@ -794,19 +921,7 @@ namespace TRRandomizerCore.Randomizers
                             allocation.AssignedPickupModels.Add(puzzlePickupType);
 
                             // Assign a name for the script
-                            string name = _pickupNames[artefactPickupType];
-                            if (TR3EntityUtilities.IsKeyType(puzzlePickupType))
-                            {
-                                level.Script.Keys[puzzlePickupType - TR3Entities.Key1_P] = name;
-                            }
-                            else if (TR3EntityUtilities.IsPuzzleType(puzzlePickupType))
-                            {
-                                level.Script.Puzzles[puzzlePickupType - TR3Entities.Puzzle1_P] = name;
-                            }
-                            else if (TR3EntityUtilities.IsQuestType(puzzlePickupType))
-                            {
-                                level.Script.Pickups[puzzlePickupType - TR3Entities.Quest1_P] = name;
-                            }
+                            _outer.SetPuzzleTypeName(level, puzzlePickupType, _pickupNames[artefactPickupType]);
                         }
                     }
 
