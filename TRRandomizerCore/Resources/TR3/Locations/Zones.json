@@ -1,7 +1,10 @@
 {
   "JUNGLE.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       10359
+    ],
+    "BaseExpectedKeyItems": [
+      227
     ],
     "AllowedRooms": {
       "MonkeyKey": [
@@ -10,7 +13,7 @@
     }
   },
   "TEMPLE.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       11371,
       11410,
       11411,
@@ -18,6 +21,11 @@
       11435,
       11444,
       11446
+    ],
+    "BaseExpectedKeyItems": [
+      205,
+      206,
+      224
     ],
     "AllowedRooms": {
       "GaneshaSpikeCorridorAfterMud": [
@@ -44,9 +52,12 @@
     }
   },
   "QUADCHAS.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       12239,
       12323
+    ],
+    "BaseExpectedKeyItems": [
+      224
     ],
     "AllowedRooms": {
       "SnakePitKey": [
@@ -58,7 +69,10 @@
     }
   },
   "TONYBOSS.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
+      32700
+    ],
+    "BaseExpectedKeyItems": [
       32700
     ],
     "AllowedRooms": {
@@ -68,9 +82,13 @@
     }
   },
   "NEVADA.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       14294,
       14378
+    ],
+    "BaseExpectedKeyItems": [
+      224,
+      225
     ],
     "AllowedRooms": {
       "DetonatorKey": [
@@ -82,7 +100,7 @@
     }
   },
   "COMPOUND.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       15234,
       15239,
       15279,
@@ -90,6 +108,12 @@
       15335,
       15355,
       15366
+    ],
+    "BaseExpectedKeyItems": [
+      205,
+      206,
+      224,
+      225
     ],
     "AllowedRooms": {
       "InitialKeycard": [
@@ -116,11 +140,17 @@
     }
   },
   "AREA51.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       16233,
       16257,
       16286,
       16322
+    ],
+    "BaseExpectedKeyItems": [
+      206,
+      207,
+      208,
+      224
     ],
     "AllowedRooms": {
       "Disc2": [
@@ -138,11 +168,15 @@
     }
   },
   "SHORE.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       17222,
       17231,
       17326,
       17329
+    ],
+    "BaseExpectedKeyItems": [
+      205,
+      224
     ],
     "AllowedRooms": {
       "SerpentStoneCubby": [
@@ -160,9 +194,13 @@
     }
   },
   "CRASH.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       18255,
       18270
+    ],
+    "BaseExpectedKeyItems": [
+      224,
+      225
     ],
     "AllowedRooms": {
       "TuckermansKey": [
@@ -174,7 +212,10 @@
     }
   },
   "RAPIDS.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
+      32700
+    ],
+    "BaseExpectedKeyItems": [
       32700
     ],
     "AllowedRooms": {
@@ -184,7 +225,10 @@
     }
   },
   "TRIBOSS.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
+      32700
+    ],
+    "BaseExpectedKeyItems": [
       32700
     ],
     "AllowedRooms": {
@@ -194,9 +238,13 @@
     }
   },
   "ROOFS.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       21225,
       21396
+    ],
+    "BaseExpectedKeyItems": [
+      224,
+      225
     ],
     "AllowedRooms": {
       "CathedralKey": [
@@ -208,7 +256,7 @@
     }
   },
   "SEWER.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       22235,
       22243,
       22247,
@@ -216,6 +264,15 @@
       22301,
       22325,
       22334
+    ],
+    "BaseExpectedKeyItems": [
+      205,
+      206,
+      207,
+      208,
+      224,
+      225,
+      226
     ],
     "AllowedRooms": {
       "SolomonKeyDrillShaft": [
@@ -242,9 +299,13 @@
     }
   },
   "TOWER.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       23283,
       23293
+    ],
+    "BaseExpectedKeyItems": [
+      205,
+      224
     ],
     "AllowedRooms": {
       "EmbalmingFluid": [
@@ -256,7 +317,10 @@
     }
   },
   "OFFICE.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
+      32700
+    ],
+    "BaseExpectedKeyItems": [
       32700
     ],
     "AllowedRooms": {
@@ -266,12 +330,17 @@
     }
   },
   "ANTARC.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       25375,
       25292,
       25298,
       25321,
       25339
+    ],
+    "BaseExpectedKeyItems": [
+      205,
+      206,
+      224
     ],
     "AllowedRooms": {
       "HutKey": [
@@ -292,10 +361,15 @@
     }
   },
   "MINES.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       26312,
       26333,
       26365
+    ],
+    "BaseExpectedKeyItems": [
+      205,
+      206,
+      207
     ],
     "AllowedRooms": {
       "Battery": [
@@ -310,13 +384,17 @@
     }
   },
   "CITY.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       27251,
       27299,
       27302,
       27325,
       27324,
       27435
+    ],
+    "BaseExpectedKeyItems": [
+      205,
+      224
     ],
     "AllowedRooms": {
       "UliKeyStart": [
@@ -340,7 +418,10 @@
     }
   },
   "CHAMBER.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
+      32700
+    ],
+    "BaseExpectedKeyItems": [
       32700
     ],
     "AllowedRooms": {
@@ -350,8 +431,11 @@
     }
   },
   "STPAUL.TR2": {
-    "ExpectedKeyItems": [
+    "AliasedExpectedKeyItems": [
       29242
+    ],
+    "BaseExpectedKeyItems": [
+      224
     ],
     "AllowedRooms": {
       "VaultKey": [
