@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +17,14 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR3ItemRandomizer : BaseTR3Randomizer
     {
+        private Dictionary<string, LevelPickupZoneDescriptor> _keyItemZones;
+        private Dictionary<string, List<Location>> _locations;
+
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
+            _keyItemZones = JsonConvert.DeserializeObject<Dictionary<string, LevelPickupZoneDescriptor>>(ReadResource(@"TR3\Locations\Zones.json"));
+            _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\item_locations.json"));
 
             foreach (TR3ScriptedLevel lvl in Levels)
             {
@@ -89,17 +96,30 @@ namespace TRRandomizerCore.Randomizers
 
         public void RandomizeItemLocations(TR3CombinedLevel level)
         {
-            //ToDo
+            //Future - still thinking of an automated approach for this rather than defining locations.
         }
 
         public void RandomizeKeyItems(TR3CombinedLevel level)
         {
-            //ToDo
-        }
+            List<Location> levelLocations = _locations[level.Name];
 
-        private bool IsKeyItemUsedForSecret(TR2Entity ent)
-        {
-            return false;
+            foreach (TR2Entity ent in level.Data.Entities)
+            {
+                //Is entity one we are allowed to move?
+                if (_keyItemZones[level.Name].ExpectedKeyItems.Contains((TR3Entities)ent.TypeID))
+                {
+                    do
+                    {
+                        Location loc = levelLocations[_generator.Next(0, levelLocations.Count - 1)];
+
+                        ent.X = loc.X;
+                        ent.Y = loc.Y;
+                        ent.Z = loc.Z;
+                        ent.Room = (short)loc.Room;
+
+                    } while (!_keyItemZones[level.Name].AllowedRooms[(TR3Entities)ent.TypeID].Contains(ent.Room));
+                }
+            }
         }
     }
 }
