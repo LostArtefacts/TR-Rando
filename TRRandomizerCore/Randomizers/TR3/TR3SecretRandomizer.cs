@@ -22,7 +22,6 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR3SecretRandomizer : BaseTR3Randomizer
     {
-        private static readonly string _invalidDoorsMsg = "{0} secret doors required for {1}, but only {2} found.";
         private static readonly string _invalidLocationMsg = "Cannot place a nonvalidated secret where a trigger already exists - {0} [X={1}, Y={2}, Z={3}, R={4}]";
         private static readonly string _trapdoorLocationMsg = "Cannot place a secret on the same sector as a bridge/trapdoor - {0} [X={1}, Y={2}, Z={3}, R={4}]";
         private static readonly string _triggerWarningMsg = "Existing trigger object action with parameter {0} will be lost - {1} [X={2}, Y={3}, Z={4}, R={5}]";
@@ -143,51 +142,75 @@ namespace TRRandomizerCore.Randomizers
             floorData.WriteToLevel(level.Data);
         }
 
-        private TRSecretRoom<TR2Entity> MakeRewardRoom(TR3CombinedLevel level)
+        private TRSecretRoom<TR2Entity> MakePlaceholderRewardRoom(TR3CombinedLevel level)
         {
             TRSecretRoom<TR2Entity> rewardRoom = null;
+            string mappingPath = @"TR3\SecretMapping\" + level.Name + "-SecretMapping.json";
+            if (ResourceExists(mappingPath))
+            {
+                // Trigger activation masks have 5 bits so we need a specific number of doors to match.
+                // For development mode, test the maximum.
+                double countedSecrets = Settings.DevelopmentMode ? _devModeSecretCount : level.Script.NumSecrets;
+                int requiredDoors = (int)Math.Ceiling(countedSecrets / TRSecretPlacement<TR3Entities>.MaskBits);
 
+                // Make the doors and store the entity indices for the secret triggers
+                rewardRoom = new TRSecretRoom<TR2Entity>
+                {
+                    DoorIndices = new List<int>()
+                };
+                List<TR2Entity> entities = level.Data.Entities.ToList();
+                for (int i = 0; i < requiredDoors; i++)
+                {
+                    entities.Add(new TR2Entity());
+                    rewardRoom.DoorIndices.Add((int)level.Data.NumEntities);
+                    level.Data.NumEntities++;
+                }
+
+                level.Data.Entities = entities.ToArray();
+            }
+
+            return rewardRoom;
+        }
+
+        private void ActualiseRewardRoom(TR3CombinedLevel level, TRSecretRoom<TR2Entity> placeholder)
+        {
             string mappingPath = @"TR3\SecretMapping\" + level.Name + "-SecretMapping.json";
             if (ResourceExists(mappingPath))
             {
                 TRSecretMapping<TR2Entity> secretMapping = JsonConvert.DeserializeObject<TRSecretMapping<TR2Entity>>(ReadResource(mappingPath), EMEditorMapping.Converter);
 
-                // Select a reward room and create it.
-                rewardRoom = secretMapping.Rooms[_generator.Next(0, secretMapping.Rooms.Count)];
-                rewardRoom.Room.ApplyToLevel(level.Data);
-
-                // Trigger activation masks have 5 bits so we need a specific number of doors to match.
-                // For development mode, test the maximum.
-                double countedSecrets = Settings.DevelopmentMode ? _devModeSecretCount : level.Script.NumSecrets;
-                int requiredDoors = (int)Math.Ceiling(countedSecrets / TRSecretPlacement<TR3Entities>.MaskBits);
-                if (rewardRoom.Doors.Count < requiredDoors)
+                // Are any rooms enforced based on level specifics?
+                TRSecretRoom<TR2Entity> rewardRoom = secretMapping.Rooms.Find(r => r.HasUsageCondition);
+                if (rewardRoom == null || !rewardRoom.UsageCondition.GetResult(level.Data))
                 {
-                    throw new Exception(string.Format(_invalidDoorsMsg, requiredDoors, level.Name, rewardRoom.Doors.Count));
+                    do
+                    {
+                        rewardRoom = secretMapping.Rooms[_generator.Next(0, secretMapping.Rooms.Count)];
+                    }
+                    while (rewardRoom == null || rewardRoom.HasUsageCondition);
                 }
 
-                // Make the doors and store the entity indices for the secret triggers
-                rewardRoom.DoorIndices = new List<int>();
-                List<TR2Entity> entities = level.Data.Entities.ToList();
-                for (int i = 0; i < requiredDoors; i++)
+                rewardRoom.Room.ApplyToLevel(level.Data);
+                short roomIndex = (short)(level.Data.NumRooms - 1);
+
+                // Convert the temporary doors
+                rewardRoom.DoorIndices = placeholder.DoorIndices;
+                for (int i = 0; i < rewardRoom.DoorIndices.Count; i++)
                 {
+                    int doorIndex = rewardRoom.DoorIndices[i];
                     TR2Entity door = rewardRoom.Doors[i];
                     if (door.Room == short.MaxValue)
                     {
-                        door.Room = (short)(level.Data.NumRooms - 1);
+                        door.Room = roomIndex;
                     }
-                    entities.Add(door);
-                    rewardRoom.DoorIndices.Add((int)level.Data.NumEntities);
+                    level.Data.Entities[doorIndex] = door;
 
                     // If it's a trapdoor, we need to make a dummy trigger for it
                     if (TR3EntityUtilities.IsTrapdoor((TR3Entities)door.TypeID))
                     {
-                        CreateTrapdoorTrigger(door, (ushort)level.Data.NumEntities, level.Data);
+                        CreateTrapdoorTrigger(door, (ushort)doorIndex, level.Data);
                     }
-
-                    level.Data.NumEntities++;
                 }
-
-                level.Data.Entities = entities.ToArray();
 
                 // Spread the rewards out fairly evenly across each defined position in the new room.
                 int rewardPositionCount = rewardRoom.RewardPositions.Count;
@@ -199,13 +222,14 @@ namespace TRRandomizerCore.Randomizers
                     item.X = position.X;
                     item.Y = position.Y;
                     item.Z = position.Z;
-                    item.Room = (short)(level.Data.NumRooms - 1);
+                    item.Room = roomIndex;
                 }
 
                 // #238 Make the required number of cameras. Because of the masks, we need
                 // a camera per counted secret otherwise it only shows once.
                 if (Settings.UseRewardRoomCameras && rewardRoom.Cameras != null)
                 {
+                    double countedSecrets = Settings.DevelopmentMode ? _devModeSecretCount : level.Script.NumSecrets;
                     rewardRoom.CameraIndices = new List<int>();
                     List<TRCamera> cameras = level.Data.Cameras.ToList();
                     for (int i = 0; i < countedSecrets; i++)
@@ -216,10 +240,38 @@ namespace TRRandomizerCore.Randomizers
 
                     level.Data.Cameras = cameras.ToArray();
                     level.Data.NumCameras = (uint)cameras.Count;
+
+                    FDControl floorData = new FDControl();
+                    floorData.ParseFromLevel(level.Data);
+
+                    // Get each trigger created for each secret index and add the camera, provided
+                    // there isn't any existing camera actions.
+                    for (int i = 0; i < countedSecrets; i++)
+                    {
+                        List<FDTriggerEntry> secretTriggers = FDUtilities.GetSecretTriggers(floorData, i);
+                        foreach (FDTriggerEntry trigger in secretTriggers)
+                        {
+                            if (trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Camera) == null)
+                            {
+                                trigger.TrigActionList.Add(new FDActionListItem
+                                {
+                                    TrigAction = FDTrigAction.Camera,
+                                    CamAction = new FDCameraAction { Value = 4 },
+                                    Parameter = (ushort)rewardRoom.CameraIndices[i]
+                                });
+                                trigger.TrigActionList.Add(new FDActionListItem
+                                {
+                                    TrigAction = FDTrigAction.LookAtItem,
+                                    Parameter = (ushort)rewardRoom.DoorIndices[0]
+                                });
+                            }
+                        }
+                    }
+
+                    // Write back the camera triggers
+                    floorData.WriteToLevel(level.Data);
                 }
             }
-
-            return rewardRoom;
         }
 
         private static void CreateTrapdoorTrigger(TR2Entity door, ushort doorIndex, TR3Level level)
@@ -607,22 +659,6 @@ namespace TRRandomizerCore.Randomizers
                 floorData.Entries[sector.FDIndex].Remove(existingTrigger);
             }
 
-            // #238 Add a camera action provided there isn't one already
-            if (secret.TriggersCamera && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Camera) == null)
-            {
-                trigger.TrigActionList.Add(new FDActionListItem
-                {
-                    TrigAction = FDTrigAction.Camera,
-                    CamAction = new FDCameraAction { Value = 4 },
-                    Parameter = secret.CameraIndex
-                });
-                trigger.TrigActionList.Add(new FDActionListItem
-                {
-                    TrigAction = FDTrigAction.LookAtItem,
-                    Parameter = secret.CameraTarget
-                });
-            }
-
             floorData.Entries[sector.FDIndex].Add(trigger);
 
             return true;
@@ -793,11 +829,11 @@ namespace TRRandomizerCore.Randomizers
                     {
                         TRSecretModelAllocation<TR3Entities> allocation = _importAllocations[level];
 
-                        // Create the reward room. The returned object will contain the door and
-                        // any camera indices.
-                        TRSecretRoom<TR2Entity> rewardRoom = _outer.MakeRewardRoom(level);
+                        // Reward rooms can be conditionally chosen based on level state after placing secrets,
+                        // but we need to make a placholder for door indices and masks to create those secrets.
+                        TRSecretRoom<TR2Entity> rewardRoom = _outer.MakePlaceholderRewardRoom(level);
 
-                        // Pass the list of artefacts we can use as pickups along with the reward
+                        // Pass the list of artefacts we can use as pickups along with the temporary reward
                         // room to the secret placers.
                         if (_outer.Settings.DevelopmentMode)
                         {
@@ -807,6 +843,9 @@ namespace TRRandomizerCore.Randomizers
                         {
                             _outer.RandomizeSecrets(level, allocation.AssignedPickupModels, rewardRoom);
                         }
+
+                        // Convert the placeholder reward room into an actual room now that secrets are positioned.
+                        _outer.ActualiseRewardRoom(level, rewardRoom);
                     }
 
                     _outer.SaveLevel(level);
