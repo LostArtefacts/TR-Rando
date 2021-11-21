@@ -104,7 +104,8 @@ namespace TRRandomizerCore.Randomizers
         {
             if (level.Name != TR3LevelNames.ASSAULT)
             {
-                List<Location> levelLocations = _locations[level.Name];
+                //Get all locations that have a KeyItemGroupID - e.g. intended for key items
+                List<Location> levelLocations = _locations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
 
                 foreach (TR2Entity ent in level.Data.Entities)
                 {
@@ -120,7 +121,9 @@ namespace TRRandomizerCore.Randomizers
                     {
                         do
                         {
-                            Location loc = levelLocations[_generator.Next(0, levelLocations.Count - 1)];
+                            //Only get locations that are to position the intended key item.
+                            //We can probably get rid of the do while loop as any location in this list should be valid
+                            Location loc = levelLocations.Where(i => i.KeyItemGroupID == (int)AliasedKeyItemID).ToList()[_generator.Next(0, levelLocations.Count - 1)];
 
                             ent.X = loc.X;
                             ent.Y = loc.Y;

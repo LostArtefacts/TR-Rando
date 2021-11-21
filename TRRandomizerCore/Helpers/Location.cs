@@ -25,6 +25,8 @@ namespace TRRandomizerCore.Helpers
 
         public bool Validated { get; set; }
 
+        public int KeyItemGroupID { get; set; }
+
         public Location()
         {
             X = 0;
@@ -38,6 +40,7 @@ namespace TRRandomizerCore.Helpers
             IsItem = false;
             VehicleRequired = false;
             Validated = true;
+            KeyItemGroupID = 0;
         }
 
         public Location(TRViewLocation loc)
