@@ -214,11 +214,19 @@ namespace TRRandomizerCore.Randomizers
                     }
                 }
 
+                // Get the reward entities - Thames in JP version has different indices, so
+                // these are defined separately.
+                List<int> rewardEntities = secretMapping.RewardEntities;
+                if (IsJPVersion && secretMapping.JPRewardEntities != null)
+                {
+                    rewardEntities = secretMapping.JPRewardEntities;
+                }
+
                 // Spread the rewards out fairly evenly across each defined position in the new room.
                 int rewardPositionCount = rewardRoom.RewardPositions.Count;
-                for (int i = 0; i < secretMapping.RewardEntities.Count; i++)
+                for (int i = 0; i < rewardEntities.Count; i++)
                 {
-                    TR2Entity item = level.Data.Entities[secretMapping.RewardEntities[i]];
+                    TR2Entity item = level.Data.Entities[rewardEntities[i]];
                     Location position = rewardRoom.RewardPositions[i % rewardPositionCount];
 
                     item.X = position.X;
