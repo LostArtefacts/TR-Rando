@@ -387,8 +387,8 @@ namespace TRLevelReader.Model.Enums
         InitialKeycard = 15234,
         FinalYellowKey = 15239,
         BlueKey = 15279,
-        SecretCorridorKeycard = 15350,
         SecretCorridorYellow = 15335,
+        SecretCorridorKeycard = 15350,
         OutsideTurretsKeycard = 15355,
         OutsideYellowKey = 15366,
 
@@ -432,11 +432,11 @@ namespace TRLevelReader.Model.Enums
         CityKeyItemBase = 24000,
 
         AntarcticaKeyItemBase = 25000,
-        HutKey = 25375,
         CrowbarAfterOpeningGenerator = 25292,
         CrowbarAfterOpeningTower = 25298,
         GeneratorKey = 25321,
         CrowbarStandardPickup = 25339,
+        HutKey = 25375,
 
         RXKeyItemBase = 26000,
         Battery = 26312,
