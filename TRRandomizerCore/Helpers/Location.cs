@@ -27,6 +27,8 @@ namespace TRRandomizerCore.Helpers
 
         public bool RequiresDamage { get; set; }
 
+        public int KeyItemGroupID { get; set; }
+
         public Location()
         {
             X = 0;
@@ -41,6 +43,7 @@ namespace TRRandomizerCore.Helpers
             VehicleRequired = false;
             Validated = true;
             RequiresDamage = false;
+            KeyItemGroupID = 0;
         }
 
         public Location(TRViewLocation loc)

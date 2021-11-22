@@ -139,6 +139,21 @@ namespace TRRandomizerCore.Editors
                 }.Randomize(Settings.SecretSeed);
             }
 
+            //Ensure item rando executes before enemy rando - as enemies may be assigned key items
+            //so we need to make sure the enemy rando can know this in advance.
+            if (!monitor.IsCancelled && Settings.RandomizeItems)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
+                new TR3ItemRandomizer
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.ItemSeed);
+            }
+
             if (!monitor.IsCancelled && Settings.RandomizeEnemies)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
@@ -177,19 +192,6 @@ namespace TRRandomizerCore.Editors
                     SaveMonitor = monitor,
                     Settings = Settings
                 }.Randomize(Settings.OutfitSeed);
-            }
-
-            if (!monitor.IsCancelled && Settings.RandomizeItems)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
-                new TR3ItemRandomizer
-                {
-                    ScriptEditor = tr23ScriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings
-                }.Randomize(Settings.ItemSeed);
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeNightMode)

@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRFDControl;
+using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -104,12 +106,34 @@ namespace TRRandomizerCore.Randomizers
         {
             if (level.Name != TR3LevelNames.ASSAULT)
             {
-                List<Location> levelLocations = _locations[level.Name];
+                FDControl floorData = new FDControl();
+                floorData.ParseFromLevel(level.Data);
+
+                //Get all locations that have a KeyItemGroupID - e.g. intended for key items
+                List<Location> levelLocations = _locations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
 
                 foreach (TR2Entity ent in level.Data.Entities)
                 {
+                    //For moving floordata
+                    TRRoomSector CurrentFDSector = new TRRoomSector();
+                    TRRoomSector NewFDSector = new TRRoomSector();
+
                     //Calculate its alias
                     TR3Entities AliasedKeyItemID = (TR3Entities)(ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name));
+
+                    //For key items which need FData moving 0 get its current sector and its existing FDentries
+                    switch (AliasedKeyItemID)
+                    {
+                        case TR3Entities.GaneshaSpikeCorridorAfterMud:
+                        case TR3Entities.GaneshaSpikeCeiling:
+                        case TR3Entities.BishopsKey:
+                        case TR3Entities.TuckermansKey:
+                        case TR3Entities.GeneratorKey:
+                            CurrentFDSector = FDUtilities.GetRoomSector(ent.X, ent.Y, ent.Z, ent.Room, level.Data, floorData);
+                            break;
+                        default:
+                            break;
+                    }
 
                     if (AliasedKeyItemID < TR3Entities.JungleKeyItemBase)
                         throw new NotSupportedException("Level does not have key item alias group defined");
@@ -120,7 +144,11 @@ namespace TRRandomizerCore.Randomizers
                     {
                         do
                         {
-                            Location loc = levelLocations[_generator.Next(0, levelLocations.Count - 1)];
+                            //Only get locations that are to position the intended key item.
+                            //We can probably get rid of the do while loop as any location in this list should be valid
+                            List<Location> KeyItemLocations = levelLocations.Where(i => i.KeyItemGroupID == (int)AliasedKeyItemID).ToList();
+                                
+                            Location loc = KeyItemLocations[_generator.Next(0, KeyItemLocations.Count - 1)];
 
                             ent.X = loc.X;
                             ent.Y = loc.Y;
@@ -131,7 +159,25 @@ namespace TRRandomizerCore.Randomizers
                                 (!_keyItemZones[level.Name].AllowedRooms[AliasedKeyItemID].Contains(_ANY_ROOM_ALLOWED)));
                         //Try generating locations until it is in the zone - if list contains 2048 then any room is allowed.
                     }
+
+                    //Does key item require special handling? (E.G. move floordata)
+                    switch (AliasedKeyItemID)
+                    {
+                        case TR3Entities.GaneshaSpikeCorridorAfterMud:
+                        case TR3Entities.GaneshaSpikeCeiling:
+                        case TR3Entities.BishopsKey:
+                        case TR3Entities.TuckermansKey:
+                        case TR3Entities.GeneratorKey:
+                            NewFDSector = FDUtilities.GetRoomSector(ent.X, ent.Y, ent.Z, ent.Room, level.Data, floorData);
+                            NewFDSector.FDIndex = CurrentFDSector.FDIndex;
+                            CurrentFDSector.FDIndex = 0;
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
+                floorData.WriteToLevel(level.Data);
             }
         }
 
