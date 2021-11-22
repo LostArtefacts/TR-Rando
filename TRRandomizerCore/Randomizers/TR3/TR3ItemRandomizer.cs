@@ -123,7 +123,9 @@ namespace TRRandomizerCore.Randomizers
                         {
                             //Only get locations that are to position the intended key item.
                             //We can probably get rid of the do while loop as any location in this list should be valid
-                            Location loc = levelLocations.Where(i => i.KeyItemGroupID == (int)AliasedKeyItemID).ToList()[_generator.Next(0, levelLocations.Count - 1)];
+                            List<Location> KeyItemLocations = levelLocations.Where(i => i.KeyItemGroupID == (int)AliasedKeyItemID).ToList();
+                                
+                            Location loc = KeyItemLocations[_generator.Next(0, KeyItemLocations.Count - 1)];
 
                             ent.X = loc.X;
                             ent.Y = loc.Y;
