@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using TREnvironmentEditor;
+using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model;
+using TREnvironmentEditor.Model.Types;
+using TRFDControl;
+using TRFDControl.FDEntryTypes;
+using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -88,6 +93,12 @@ namespace TRRandomizerCore.Processors
                     // those levels that have long underwater sections.
                     ImportUPV(level);
                 }
+            }
+            else if (level.Is(TR3LevelNames.ANTARC))
+            {
+                // Add a KillLara FD entry to room 185, where she would normally freeze
+                // to death anyway.
+                AmendAntarctica(level);
             }
 
             if (level.Is(TR3LevelNames.WILLIE))
@@ -178,6 +189,24 @@ namespace TRRandomizerCore.Processors
             {
                 quad.TypeID = (short)TR3Entities.UPV;
             }
+        }
+
+        private void AmendAntarctica(TR3CombinedLevel level)
+        {
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level.Data);
+            TRRoomSector sector = FDUtilities.GetRoomSector(53760, -3328, 28160, 185, level.Data, floorData);
+            if (sector.FDIndex == 0)
+            {
+                floorData.CreateFloorData(sector);
+            }
+
+            floorData.Entries[sector.FDIndex].Add(new FDKillLaraEntry
+            {
+                Setup = new FDSetup(FDFunctions.KillLara)
+            });
+
+            floorData.WriteToLevel(level.Data);
         }
 
         private void AmendWillardBoss(TR3CombinedLevel level)
