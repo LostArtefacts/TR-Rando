@@ -74,6 +74,22 @@ namespace TRLevelReader.Model
             }
         }
 
+        public bool IsSwamp
+        {
+            get => (Flags & 0x80) > 0;
+            set
+            {
+                if (value)
+                {
+                    Flags |= 0x80;
+                }
+                else
+                {
+                    Flags &= ~0x80;
+                }
+            }
+        }
+
         public void SetAmbient(short val)
         {
             AmbientIntensity = val;

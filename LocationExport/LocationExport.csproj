@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <WarningLevel>4</WarningLevel>
+    <OutputType>Exe</OutputType>
+    <Copyright>Copyright © Tombrunners 2021</Copyright>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TRFDControl\TRFDControl.csproj" />
+    <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj" />
+    <ProjectReference Include="..\TRRandomizerCore\TRRandomizerCore.csproj" />
+  </ItemGroup>
+</Project>

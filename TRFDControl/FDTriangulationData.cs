@@ -22,7 +22,7 @@ namespace TRFDControl
         {
             get
             {
-                return (byte)(Value & 0x00F0);
+                return (byte)((Value & 0x00F0) >> 4);
             }
         }
 
@@ -30,7 +30,7 @@ namespace TRFDControl
         {
             get
             {
-                return (byte)(Value & 0x0F00);
+                return (byte)((Value & 0x0F00) >> 8);
             }
         }
 
@@ -38,7 +38,7 @@ namespace TRFDControl
         {
             get
             {
-                return (byte)(Value & 0xF000);
+                return (byte)((Value & 0xF000) >> 12);
             }
         }
     }

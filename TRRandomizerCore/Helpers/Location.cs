@@ -29,6 +29,8 @@ namespace TRRandomizerCore.Helpers
 
         public int KeyItemGroupID { get; set; }
 
+        public bool InvalidatesRoom { get; set; }
+
         public Location()
         {
             X = 0;
@@ -44,6 +46,7 @@ namespace TRRandomizerCore.Helpers
             Validated = true;
             RequiresDamage = false;
             KeyItemGroupID = 0;
+            InvalidatesRoom = false;
         }
 
         public Location(TRViewLocation loc)

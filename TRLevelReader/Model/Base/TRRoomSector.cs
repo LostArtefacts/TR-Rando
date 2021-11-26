@@ -10,6 +10,8 @@ namespace TRLevelReader.Model
 {
     public class TRRoomSector : ISerializableCompact
     {
+        private static readonly sbyte _impenetrable = -127;
+
         public ushort FDIndex { get; set; }
 
         public ushort BoxIndex { get; set; }
@@ -21,6 +23,9 @@ namespace TRLevelReader.Model
         public byte RoomAbove { get; set; }
 
         public sbyte Ceiling { get; set; }
+
+        public bool IsImpenetrable => Floor == _impenetrable && Ceiling == _impenetrable;
+        public bool IsSlipperySlope => (BoxIndex & 0x7FF0) >> 4 == 2047;
 
         public override string ToString()
         {
