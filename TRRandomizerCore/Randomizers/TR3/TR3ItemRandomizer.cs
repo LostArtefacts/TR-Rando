@@ -21,13 +21,22 @@ namespace TRRandomizerCore.Randomizers
     {
         private Dictionary<string, LevelPickupZoneDescriptor> _keyItemZones;
         private Dictionary<string, List<Location>> _locations;
-        private readonly int _ANY_ROOM_ALLOWED = 2048;  //Max rooms is 1024 - so this should never be possible.
+        private Dictionary<string, List<Location>> _excludedLocations;
+        private Dictionary<string, List<Location>> _pistolLocations;
+
+        private static readonly int _ROTATION = -8192;
+        private static readonly int _ANY_ROOM_ALLOWED = 2048;  //Max rooms is 1024 - so this should never be possible.
+
+        // Track the pistols so they remain a weapon type and aren't moved
+        private TR2Entity _unarmedLevelPistols;
 
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
             _keyItemZones = JsonConvert.DeserializeObject<Dictionary<string, LevelPickupZoneDescriptor>>(ReadResource(@"TR3\Locations\Zones.json"));
             _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\item_locations.json"));
+            _excludedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\invalid_item_locations.json"));
+            _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
 
             foreach (TR3ScriptedLevel lvl in Levels)
             {
@@ -37,17 +46,21 @@ namespace TRRandomizerCore.Randomizers
 
                 LoadLevelInstance(lvl);
 
+                FindUnarmedLevelPistols(_levelInstance);
+
                 if (Settings.RandomizeItemTypes)
                     RandomizeItemTypes(_levelInstance);
+
+                // Do key items before standard items because we exclude
+                // key item tiles from the valid pickup location pool
+                if (Settings.IncludeKeyItems)
+                    RandomizeKeyItems(_levelInstance);
 
                 if (Settings.RandomizeItemPositions)
                     RandomizeItemLocations(_levelInstance);
 
                 if (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
                     EnforceOneLimit(_levelInstance);
-
-                if (Settings.IncludeKeyItems)
-                    RandomizeKeyItems(_levelInstance);
 
                 SaveLevelInstance();
 
@@ -58,16 +71,53 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
+        private void FindUnarmedLevelPistols(TR3CombinedLevel level)
+        {
+            if (level.Script.RemovesWeapons)
+            {
+                List<TR2Entity> pistolEntities = level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)TR3Entities.Pistols_P);
+                foreach (TR2Entity pistols in pistolEntities)
+                {
+                    int match = _pistolLocations[level.Name].FindIndex
+                    (
+                        location =>
+                            location.X == pistols.X &&
+                            location.Y == pistols.Y &&
+                            location.Z == pistols.Z &&
+                            location.Room == pistols.Room
+                    );
+                    if (match != -1)
+                    {
+                        _unarmedLevelPistols = pistols;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                _unarmedLevelPistols = null;
+            }
+        }
+
         public void RandomizeItemTypes(TR3CombinedLevel level)
         {
             List<TR3Entities> stdItemTypes = TR3EntityUtilities.GetStandardPickupTypes();
 
             foreach (TR2Entity ent in level.Data.Entities)
             {
-                if (TR3EntityUtilities.IsStandardPickupType((TR3Entities)ent.TypeID) && 
+                // If this is an unarmed level's pistols, make sure they're replaced with another weapon
+                if (ent == _unarmedLevelPistols)
+                {
+                    do
+                    {
+                        ent.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                    }
+                    while (!TR3EntityUtilities.IsWeaponPickup((TR3Entities)ent.TypeID));
+                }
+                else if (TR3EntityUtilities.IsStandardPickupType((TR3Entities)ent.TypeID) && 
                     (ent.Room < RoomWaterUtilities.DefaultRoomCountDictionary[level.Name] || Settings.RandomizeSecretRewardsPhysical))
                 {
-                    ent.TypeID = (short)stdItemTypes[_generator.Next(0, (stdItemTypes.Count - 1))];
+                    ent.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
                 }
             }
         }
@@ -99,7 +149,88 @@ namespace TRRandomizerCore.Randomizers
 
         public void RandomizeItemLocations(TR3CombinedLevel level)
         {
-            //Future - still thinking of an automated approach for this rather than defining locations.
+            if (level.IsAssault)
+            {
+                return;
+            }
+
+            List<Location> locations = GetItemLocationPool(level);
+
+            foreach (TR2Entity ent in level.Data.Entities)
+            {
+                // Move standard items only, excluding any unarmed level pistols, and reward items
+                if (TR3EntityUtilities.IsStandardPickupType((TR3Entities)ent.TypeID)
+                    && ent != _unarmedLevelPistols
+                    && ent.Room < RoomWaterUtilities.DefaultRoomCountDictionary[level.Name])
+                {
+                    Location location = locations[_generator.Next(0, locations.Count)];
+                    ent.X = location.X;
+                    ent.Y = location.Y;
+                    ent.Z = location.Z;
+                    ent.Room = (short)location.Room;
+                    ent.Angle = location.Angle;
+
+                    // Anything other than -1 means a sloped sector and so the location generator
+                    // will have picked a suitable angle for it. For flat sectors, spin the entities
+                    // around randomly for variety.
+                    if (ent.Angle == -1)
+                    {
+                        ent.Angle = (short)(_generator.Next(0, 8) / _ROTATION);
+                    }
+                }
+            }
+        }
+
+        private List<Location> GetItemLocationPool(TR3CombinedLevel level)
+        {
+            List<Location> exclusions = new List<Location>();
+            if (_excludedLocations.ContainsKey(level.Name))
+            {
+                exclusions.AddRange(_excludedLocations[level.Name]);
+            }
+
+            foreach (TR2Entity entity in level.Data.Entities)
+            {
+                if (!TR3EntityUtilities.CanSharePickupSpace((TR3Entities)entity.TypeID))
+                {
+                    exclusions.Add(new Location
+                    {
+                        X = entity.X,
+                        Y = entity.Y,
+                        Z = entity.Z,
+                        Room = entity.Room
+                    });
+                }
+            }
+
+            if (Settings.RandomizeSecrets && level.HasSecrets)
+            {
+                // Make sure to exclude the reward room
+                exclusions.Add(new Location
+                {
+                    Room = RoomWaterUtilities.DefaultRoomCountDictionary[level.Name],
+                    InvalidatesRoom = true
+                });
+            }
+
+            if (level.HasExposureMeter)
+            {
+                // Don't put items underwater if it's too cold
+                for (int i = 0; i < level.Data.NumRooms; i++)
+                {
+                    if (level.Data.Rooms[i].ContainsWater)
+                    {
+                        exclusions.Add(new Location
+                        {
+                            Room = i,
+                            InvalidatesRoom = true
+                        });
+                    }
+                }
+            }
+
+            LocationGenerator generator = new LocationGenerator();
+            return generator.Generate(level.Data, exclusions);
         }
 
         public void RandomizeKeyItems(TR3CombinedLevel level)
@@ -148,7 +279,7 @@ namespace TRRandomizerCore.Randomizers
                             //We can probably get rid of the do while loop as any location in this list should be valid
                             List<Location> KeyItemLocations = levelLocations.Where(i => i.KeyItemGroupID == (int)AliasedKeyItemID).ToList();
                                 
-                            Location loc = KeyItemLocations[_generator.Next(0, KeyItemLocations.Count - 1)];
+                            Location loc = KeyItemLocations[_generator.Next(0, KeyItemLocations.Count)];
 
                             ent.X = loc.X;
                             ent.Y = loc.Y;

@@ -444,5 +444,118 @@ namespace TRLevelReader.Helpers
 
             return enemies;
         }
+
+        public static List<TR3Entities> GetUnrenderedEntities()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.AIAmbush_N,
+                TR3Entities.AICheck_N,
+                TR3Entities.AIFollow_N,
+                TR3Entities.AIGuard_N,
+                TR3Entities.AIModify_N,
+                TR3Entities.AIPath_N,
+                TR3Entities.AIPatrol1_N,
+                TR3Entities.AIPatrol2_N,
+                TR3Entities.LookAtItem_H,
+                TR3Entities.KillAllTriggers_N,
+                TR3Entities.RaptorRespawnPoint_N,
+                TR3Entities.TinnosWaspRespawnPoint_N,
+                TR3Entities.EarthQuake_N,
+                TR3Entities.BatSwarm_N
+            };
+        }
+
+        public static bool IsUnrenderedEntity(TR3Entities entity)
+        {
+            return GetUnrenderedEntities().Contains(entity);
+        }
+
+        public static List<TR3Entities> GetSwitchTypes()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.SmallWallSwitch,
+                TR3Entities.PushButtonSwitch,
+                TR3Entities.WallSwitch,
+                TR3Entities.UnderwaterSwitch
+            };
+        }
+
+        public static bool IsSwitchType(TR3Entities entity)
+        {
+            return GetSwitchTypes().Contains(entity);
+        }
+
+        public static List<TR3Entities> GetKeyholeTypes()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.Keyhole1,
+                TR3Entities.Keyhole2,
+                TR3Entities.Keyhole3,
+                TR3Entities.Keyhole4
+            };
+        }
+
+        public static bool IsKeyholeType(TR3Entities entity)
+        {
+            return GetKeyholeTypes().Contains(entity);
+        }
+
+        public static List<TR3Entities> GetSlotTypes()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.Slot1Empty,
+                TR3Entities.Slot2Empty,
+                TR3Entities.Slot3Empty,
+                TR3Entities.Slot4Empty,
+                TR3Entities.Slot1Full,
+                TR3Entities.Slot2Full,
+                TR3Entities.Slot3Full,
+                TR3Entities.Slot4Full
+            };
+        }
+
+        public static bool IsSlotType(TR3Entities entity)
+        {
+            return GetSlotTypes().Contains(entity);
+        }
+
+        public static List<TR3Entities> GetLightTypes()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.Light_N,
+                TR3Entities.Light2_N,
+                TR3Entities.Light3_N,
+                TR3Entities.Light4_N,
+                TR3Entities.AlarmLight,
+                TR3Entities.BlueLight_N,
+                TR3Entities.GreenLight_N,
+                TR3Entities.RedLight_N,
+                TR3Entities.PulsatingLight_N
+            };
+        }
+
+        public static bool IsLightType(TR3Entities entity)
+        {
+            return GetLightTypes().Contains(entity);
+        }
+
+        public static bool CanSharePickupSpace(TR3Entities entity)
+        {
+            // Can we place a standard pickup on the same tile as this entity?
+            return IsStandardPickupType(entity)
+                || IsCrystalPickup(entity)
+                || IsUnrenderedEntity(entity)
+                || CanDropPickups(entity, true)
+                || IsSwitchType(entity)
+                || IsKeyholeType(entity)
+                || IsSlotType(entity)
+                || IsLightType(entity)
+                || entity == TR3Entities.Lara;
+        }
     }
 }

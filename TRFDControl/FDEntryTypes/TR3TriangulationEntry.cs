@@ -10,6 +10,32 @@ namespace TRFDControl.FDEntryTypes
     {
         public FDTriangulationData TriData { get; set; }
 
+        public bool IsFloorTriangulation
+        {
+            get
+            {
+                FDFunctions function = (FDFunctions)Setup.Function;
+                return function == FDFunctions.FloorTriangulationNESW_NW
+                    || function == FDFunctions.FloorTriangulationNESW_Solid
+                    || function == FDFunctions.FloorTriangulationNESW_SW
+                    || function == FDFunctions.FloorTriangulationNWSE_NE
+                    || function == FDFunctions.FloorTriangulationNWSE_Solid
+                    || function == FDFunctions.FloorTriangulationNWSE_SW;
+            }
+        }
+
+        public bool IsFloorPortal
+        {
+            get
+            {
+                FDFunctions function = (FDFunctions)Setup.Function;
+                return function == FDFunctions.FloorTriangulationNESW_NW
+                    || function == FDFunctions.FloorTriangulationNESW_SW
+                    || function == FDFunctions.FloorTriangulationNWSE_NE
+                    || function == FDFunctions.FloorTriangulationNWSE_SW;
+            }
+        }
+
         public override ushort[] Flatten()
         {
             return new ushort[]
