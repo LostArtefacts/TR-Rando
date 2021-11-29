@@ -4,6 +4,13 @@
 
   "GlobalGrouping": [
     {
+      "Leader": "Enemies.Shiva",
+      "Followers": [
+        "Pickups.Scimitar"
+      ]
+    },
+
+    {
       "Leader": "Lara.Bobble",
       "Followers": [
         "Lara.Braid"

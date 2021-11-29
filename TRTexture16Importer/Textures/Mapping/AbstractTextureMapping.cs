@@ -264,7 +264,7 @@ namespace TRTexture16Importer.Textures
 
                         // Extract the colour from the top-left of the rectangle specified in the source, and import that into the level
                         int sourceRectangle = source.EntityColourMap[entity][targetColour];
-                        int newColourIndex = ImportColour(/*PaletteUtilities.Import(_level,*/ source.Bitmap.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
+                        int newColourIndex = ImportColour(source.Bitmap.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
                         remapIndices.Add(matchedIndex, newColourIndex);
                     }
 
