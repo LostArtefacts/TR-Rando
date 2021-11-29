@@ -1,0 +1,20 @@
+{
+  "GlobalSources": {
+  },
+
+  "GlobalGrouping": [
+    {
+      "Leader": "Lara.Bobble",
+      "Followers": [
+        "Lara.Braid"
+      ]
+    },
+
+    {
+      "Leader": "Lara.India",
+      "Followers": [
+        "Lara.Socks"
+      ]
+    }
+  ]
+}

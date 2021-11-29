@@ -1,0 +1,219 @@
+{
+  "Static": {
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 8,
+        "Y": 0
+      },
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 64,
+        "Y": 56
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
+        "Tile": 7,
+        "X": 224,
+        "Y": 128
+      }
+    ],
+
+    "Lara.India": [
+      {
+        "Segment": 0,
+        "Tile": 5,
+        "X": 200,
+        "Y": 168
+      },
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 200,
+        "Y": 240
+      },
+      {
+        "Segment": 2,
+        "Tile": 7,
+        "X": 112,
+        "Y": 8
+      },
+      {
+        "Segment": 3,
+        "Tile": 7,
+        "X": 32,
+        "Y": 8
+      },
+      {
+        "Segment": 4,
+        "Tile": 7,
+        "X": 152,
+        "Y": 8
+      },
+      {
+        "Segment": 5,
+        "Tile": 8,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 6,
+        "Tile": 8,
+        "X": 48,
+        "Y": 136
+      },
+      {
+        "Segment": 7,
+        "Tile": 8,
+        "X": 152,
+        "Y": 160
+      },
+      {
+        "Segment": 8,
+        "Tile": 7,
+        "X": 0,
+        "Y": 216
+      },
+      {
+        "Segment": 9,
+        "Tile": 7,
+        "X": 80,
+        "Y": 216
+      },
+      {
+        "Segment": 10,
+        "Tile": 7,
+        "X": 96,
+        "Y": 96
+      },
+      {
+        "Segment": 11,
+        "Tile": 8,
+        "X": 80,
+        "Y": 64
+      },
+      {
+        "Segment": 12,
+        "Tile": 7,
+        "X": 72,
+        "Y": 8
+      },
+      {
+        "Segment": 13,
+        "Tile": 8,
+        "X": 128,
+        "Y": 160
+      },
+      {
+        "Segment": 14,
+        "Tile": 8,
+        "X": 136,
+        "Y": 160
+      },
+      {
+        "Segment": 15,
+        "Tile": 7,
+        "X": 80,
+        "Y": 240
+      },
+      {
+        "Segment": 16,
+        "Tile": 8,
+        "X": 56,
+        "Y": 160
+      },
+      {
+        "Segment": 17,
+        "Tile": 7,
+        "X": 120,
+        "Y": 240
+      },
+      {
+        "Segment": 18,
+        "Tile": 8,
+        "X": 160,
+        "Y": 160
+      },
+      {
+        "Segment": 19,
+        "Tile": 8,
+        "X": 208,
+        "Y": 48
+      },
+      {
+        "Segment": 20,
+        "Tile": 8,
+        "X": 176,
+        "Y": 48
+      },
+      {
+        "Segment": 21,
+        "Tile": 8,
+        "X": 112,
+        "Y": 64
+      },
+      {
+        "Segment": 22,
+        "Tile": 7,
+        "X": 176,
+        "Y": 224
+      },
+      {
+        "Segment": 23,
+        "Tile": 7,
+        "X": 232,
+        "Y": 208
+      },
+      {
+        "Segment": 24,
+        "Tile": 7,
+        "X": 152,
+        "Y": 224
+      },
+      {
+        "Segment": 25,
+        "Tile": 7,
+        "X": 128,
+        "Y": 216
+      },
+      {
+        "Segment": 26,
+        "Tile": 8,
+        "X": 0,
+        "Y": 64
+      },
+      {
+        "Segment": 27,
+        "Tile": 7,
+        "X": 32,
+        "Y": 24
+      }
+    ],
+
+    "Lara.Socks": [
+      {
+        "Segment": 0,
+        "Tile": 7,
+        "X": 232,
+        "Y": 72
+      },
+      {
+        "Segment": 1,
+        "Tile": 7,
+        "X": 128,
+        "Y": 96
+      },
+      {
+        "Segment": 2,
+        "Tile": 7,
+        "X": 0,
+        "Y": 104
+      }
+    ]
+  }
+}

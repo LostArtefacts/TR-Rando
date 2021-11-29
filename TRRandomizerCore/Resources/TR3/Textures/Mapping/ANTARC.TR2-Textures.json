@@ -1,0 +1,98 @@
+{
+  "Static": {
+    "Enemies.RXRedBoi": [
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 168,
+        "Y": 76
+      },
+      {
+        "Segment": 1,
+        "Tile": 8,
+        "X": 144,
+        "Y": 64
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 216,
+        "Y": 92
+      },
+      {
+        "Segment": 3,
+        "Tile": 8,
+        "X": 192,
+        "Y": 80
+      },
+      {
+        "Segment": 4,
+        "Tile": 8,
+        "X": 0,
+        "Y": 168
+      },
+      {
+        "Segment": 4,
+        "Tile": 9,
+        "X": 168,
+        "Y": 72,
+        "Clip": "0, 8, 24, 16"
+      },
+      {
+        "Segment": 5,
+        "Tile": 10,
+        "X": 204,
+        "Y": 32
+      },
+      {
+        "Segment": 6,
+        "Tile": 8,
+        "X": 24,
+        "Y": 168
+      },
+      {
+        "Segment": 7,
+        "Tile": 10,
+        "X": 24,
+        "Y": 36
+      },
+      {
+        "Segment": 8,
+        "Tile": 8,
+        "X": 48,
+        "Y": 184
+      },
+      {
+        "Segment": 9,
+        "Tile": 8,
+        "X": 192,
+        "Y": 180
+      },
+      {
+        "Segment": 10,
+        "Tile": 9,
+        "X": 64,
+        "Y": 176
+      }
+    ],
+
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 104,
+        "Y": 235,
+        "Clip": "2, 1, 12, 12"
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 168,
+        "Y": 43
+      }
+    ]
+  }
+}

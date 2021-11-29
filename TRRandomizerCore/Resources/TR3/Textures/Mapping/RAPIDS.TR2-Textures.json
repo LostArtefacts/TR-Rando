@@ -1,0 +1,21 @@
+{
+  "Static": {
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 7,
+        "X": 184,
+        "Y": 216
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
+        "Tile": 7,
+        "X": 176,
+        "Y": 131
+      }
+    ]
+  }
+}
