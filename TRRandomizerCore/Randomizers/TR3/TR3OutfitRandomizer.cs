@@ -9,6 +9,7 @@ using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -18,6 +19,8 @@ namespace TRRandomizerCore.Randomizers
 
         private List<TR3ScriptedLevel> _haircutLevels;
         private List<TR3ScriptedLevel> _invisibleLevels;
+
+        internal TR3TextureMonitorBroker TextureMonitor { get; set; }
 
         public override void Randomize(int seed)
         {
@@ -236,6 +239,7 @@ namespace TRRandomizerCore.Randomizers
                     ClearUnusedSprites = false,
                     EntitiesToImport = laraImport,
                     EntitiesToRemove = laraRemovals,
+                    TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, laraImport),
                     DataFolder = _outer.GetResourcePath(@"TR3\Models")
                 };
 
@@ -262,6 +266,8 @@ namespace TRRandomizerCore.Randomizers
                 {
                     // We need to reload the level to undo anything that may have changed.
                     _outer.ReloadLevelData(level);
+                    // Tell the monitor to no longer track what we tried to import
+                    _outer.TextureMonitor.ClearMonitor(level.Name, laraImport);
                     return false;
                 }
             }

@@ -2,7 +2,7 @@
 using System.Linq;
 using TRTexture16Importer.Helpers;
 
-namespace TRTexture16Importer.Textures.Source
+namespace TRTexture16Importer.Textures
 {
     public class DynamicTextureSource : AbstractTextureSource
     {

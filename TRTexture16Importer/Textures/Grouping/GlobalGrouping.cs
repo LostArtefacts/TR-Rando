@@ -1,23 +1,25 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TRTexture16Importer.Textures.Source;
-using TRTexture16Importer.Textures.Target;
 
-namespace TRTexture16Importer.Textures.Grouping
+namespace TRTexture16Importer.Textures
 {
-    public class GlobalGrouping
+    public class GlobalGrouping<E>
+        where E : Enum
     {
-        public Dictionary<StaticTextureSource, List<StaticTextureTarget>> Sources { get; private set; }
-        public List<TextureGrouping> Grouping { get; private set; }
+        private static readonly string _groupingDataPath = @"Static\global_grouping.json";
 
-        public GlobalGrouping(TextureDatabase database)
+        public Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> Sources { get; private set; }
+        public List<TextureGrouping<E>> Grouping { get; private set; }
+
+        public GlobalGrouping(TextureDatabase<E> database)
         {
-            Sources = new Dictionary<StaticTextureSource, List<StaticTextureTarget>>();
-            Grouping = new List<TextureGrouping>();
+            Sources = new Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>>();
+            Grouping = new List<TextureGrouping<E>>();
 
-            Dictionary<string, object> globalData = JsonConvert.DeserializeObject<Dictionary<string, object>>(File.ReadAllText(@"Resources\TR2\Textures\Source\Static\global_grouping.json"));
+            Dictionary<string, object> globalData = JsonConvert.DeserializeObject<Dictionary<string, object>>(File.ReadAllText(Path.Combine(database.DataPath, _groupingDataPath)));
 
             // These sources will be added to all levels automatically without having to explicitly map them. The targets
             // can be empty for such things as dynamic sprite sequence mapping, or filled with shared values in all levels
@@ -36,7 +38,7 @@ namespace TRTexture16Importer.Textures.Grouping
                 List<Dictionary<string, object>> groupListData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(globalData["GlobalGrouping"].ToString());
                 foreach (IDictionary<string, object> groupData in groupListData)
                 {
-                    TextureGrouping grouping = new TextureGrouping
+                    TextureGrouping<E> grouping = new TextureGrouping<E>
                     {
                         Leader = database.GetStaticSource(groupData["Leader"].ToString())
                     };
@@ -62,7 +64,7 @@ namespace TRTexture16Importer.Textures.Grouping
                         Dictionary<string, Dictionary<string, string>> alternatives = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(groupData["ThemeAlternatives"].ToString());
                         foreach (string theme in alternatives.Keys)
                         {
-                            Dictionary<StaticTextureSource, string> map = new Dictionary<StaticTextureSource, string>();
+                            Dictionary<StaticTextureSource<E>, string> map = new Dictionary<StaticTextureSource<E>, string>();
                             foreach (string sourceName in alternatives[theme].Keys)
                             {
                                 map.Add(database.GetStaticSource(sourceName), alternatives[theme][sourceName]);
@@ -76,13 +78,13 @@ namespace TRTexture16Importer.Textures.Grouping
             }
         }
 
-        public List<TextureGrouping> GetGrouping(IEnumerable<StaticTextureSource> sources)
+        public List<TextureGrouping<E>> GetGrouping(IEnumerable<StaticTextureSource<E>> sources)
         {
-            List<TextureGrouping> groupSet = new List<TextureGrouping>();
+            List<TextureGrouping<E>> groupSet = new List<TextureGrouping<E>>();
 
-            foreach (StaticTextureSource source in sources)
+            foreach (StaticTextureSource<E> source in sources)
             {
-                TextureGrouping grouping = GetGrouping(source);
+                TextureGrouping<E> grouping = GetGrouping(source);
 
                 if (grouping != null && !sources.Any(s => grouping.Masters.Contains(s)))
                 {
@@ -93,9 +95,9 @@ namespace TRTexture16Importer.Textures.Grouping
             return groupSet;
         }
 
-        public TextureGrouping GetGrouping(StaticTextureSource source)
+        public TextureGrouping<E> GetGrouping(StaticTextureSource<E> source)
         {
-            foreach (TextureGrouping grouping in Grouping)
+            foreach (TextureGrouping<E> grouping in Grouping)
             {
                 if (grouping.Leader.Equals(source))
                 {

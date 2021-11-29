@@ -3,8 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using TRTexture16Importer.Textures.Source;
-using TRTexture16Importer.Textures.Target;
+using TRTexture16Importer.Textures;
 
 namespace TRTexture16Importer.Helpers
 {
@@ -83,7 +82,7 @@ namespace TRTexture16Importer.Helpers
             return hsb.ToColour();
         }
 
-        public void ImportSegment(StaticTextureSource source, StaticTextureTarget target, Rectangle sourceSegment)
+        public void ImportSegment(Bitmap source, StaticTextureTarget target, Rectangle sourceSegment)
         {
             Rectangle sourceRectangle = sourceSegment;
             if (target.ClipRequired)
@@ -104,7 +103,7 @@ namespace TRTexture16Importer.Helpers
                 Delete(targetRectangle);
             }
 
-            Graphics.DrawImage(source.Bitmap, targetRectangle, sourceRectangle, GraphicsUnit.Pixel);
+            Graphics.DrawImage(source, targetRectangle, sourceRectangle, GraphicsUnit.Pixel);
         }
 
         public void Delete(Rectangle rect)

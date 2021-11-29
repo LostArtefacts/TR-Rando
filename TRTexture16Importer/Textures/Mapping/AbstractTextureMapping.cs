@@ -2,54 +2,49 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using TRLevelReader.Helpers;
 using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
 using TRTexture16Importer.Helpers;
-using TRTexture16Importer.Textures.Grouping;
-using TRTexture16Importer.Textures.Source;
-using TRTexture16Importer.Textures.Target;
 
 namespace TRTexture16Importer.Textures
 {
-    public class TextureLevelMapping : IDisposable
+    public abstract class AbstractTextureMapping<E, L> : IDisposable
+        where E : Enum
+        where L : class
     {
         private static readonly Color _defaultSkyBox = Color.FromArgb(88, 152, 184);
-        private static readonly int _tileWidth = 256;
-        private static readonly int _tileHeight = 256;
 
         public Dictionary<DynamicTextureSource, DynamicTextureTarget> DynamicMapping { get; set; }
-        public Dictionary<StaticTextureSource, List<StaticTextureTarget>> StaticMapping { get; set; }
-        public Dictionary<StaticTextureSource, Dictionary<int, List<LandmarkTextureTarget>>> LandmarkMapping { get; set; }
-        public List<TextureGrouping> StaticGrouping { get; set; }
+        public Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> StaticMapping { get; set; }
+        public Dictionary<StaticTextureSource<E>, Dictionary<int, List<LandmarkTextureTarget>>> LandmarkMapping { get; set; }
+        public List<TextureGrouping<E>> StaticGrouping { get; set; }
         public Color DefaultSkyBox { get; set; }
 
-        private readonly Dictionary<int, BitmapGraphics> _tileMap;
-        private readonly TR2Level _level;
+        protected readonly Dictionary<int, BitmapGraphics> _tileMap;
+        protected readonly L _level;
         private bool _committed;
 
-        private TextureLevelMapping(TR2Level level)
+        protected AbstractTextureMapping(L level)
         {
             _level = level;
             _tileMap = new Dictionary<int, BitmapGraphics>();
             _committed = false;
         }
 
-        public static TextureLevelMapping Get(TR2Level level, string mappingFilePrefix, TextureDatabase database, Dictionary<StaticTextureSource, List<StaticTextureTarget>> predefinedMapping = null, List<TR2Entities> entitiesToIgnore = null)
-        {
-            string mapFile = Path.Combine(@"Resources\TR2\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
-            if (!File.Exists(mapFile))
-            {
-                return null;
-            }
+        protected abstract TRMesh[] GetModelMeshes(E entity);
+        protected abstract TRColour4[] GetPalette16();
+        protected abstract int ImportColour(Color colour);
+        protected abstract TRSpriteSequence[] GetSpriteSequences();
+        protected abstract TRSpriteTexture[] GetSpriteTextures();
+        protected abstract Bitmap GetTile(int tileIndex);
+        protected abstract void SetTile(int tileIndex, Bitmap bitmap);
 
+        protected static void LoadMapping(AbstractTextureMapping<E, L> levelMapping, string mapFile, TextureDatabase<E> database, Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> predefinedMapping = null, List<E> entitiesToIgnore = null)
+        {
             Dictionary<DynamicTextureSource, DynamicTextureTarget> dynamicMapping = new Dictionary<DynamicTextureSource, DynamicTextureTarget>();
-            Dictionary<StaticTextureSource, List<StaticTextureTarget>> staticMapping = new Dictionary<StaticTextureSource, List<StaticTextureTarget>>();
-            Dictionary<StaticTextureSource, Dictionary<int, List<LandmarkTextureTarget>>> landmarkMapping = new Dictionary<StaticTextureSource, Dictionary<int, List<LandmarkTextureTarget>>>();
+            Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> staticMapping = new Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>>();
+            Dictionary<StaticTextureSource<E>, Dictionary<int, List<LandmarkTextureTarget>>> landmarkMapping = new Dictionary<StaticTextureSource<E>, Dictionary<int, List<LandmarkTextureTarget>>>();
             Color skyBoxColour = _defaultSkyBox;
 
             Dictionary<string, object> rootMapping = JsonConvert.DeserializeObject<Dictionary<string, object>>(File.ReadAllText(mapFile));
@@ -99,13 +94,13 @@ namespace TRTexture16Importer.Textures
             // imports ready for it, we need to make sure they are ignored.
             if (entitiesToIgnore != null)
             {
-                List<StaticTextureSource> sources = new List<StaticTextureSource>(staticMapping.Keys);
+                List<StaticTextureSource<E>> sources = new List<StaticTextureSource<E>>(staticMapping.Keys);
                 for (int i = 0; i < sources.Count; i++)
                 {
-                    StaticTextureSource source = sources[i];
+                    StaticTextureSource<E> source = sources[i];
                     if (source.TextureEntities != null)
                     {
-                        foreach (TR2Entities entity in source.TextureEntities)
+                        foreach (E entity in source.TextureEntities)
                         {
                             if (entitiesToIgnore.Contains(entity))
                             {
@@ -123,7 +118,7 @@ namespace TRTexture16Importer.Textures
             // Lara is being replaced.
             if (predefinedMapping != null)
             {
-                foreach (StaticTextureSource source in predefinedMapping.Keys)
+                foreach (StaticTextureSource<E> source in predefinedMapping.Keys)
                 {
                     staticMapping[source] = predefinedMapping[source];
                 }
@@ -132,7 +127,7 @@ namespace TRTexture16Importer.Textures
             // Add global sources, unless they are already defined. These tend to be sprite sequences
             // so they will be mapped per GenerateSpriteSequenceTargets, but there is also scope to
             // define global targets if relevant.
-            foreach (StaticTextureSource source in database.GlobalGrouping.Sources.Keys)
+            foreach (StaticTextureSource<E> source in database.GlobalGrouping.Sources.Keys)
             {
                 if (!staticMapping.ContainsKey(source))
                 {
@@ -141,16 +136,13 @@ namespace TRTexture16Importer.Textures
             }
 
             // Apply grouping to what has been selected as source elements
-            List<TextureGrouping> staticGrouping = database.GlobalGrouping.GetGrouping(staticMapping.Keys);
+            List<TextureGrouping<E>> staticGrouping = database.GlobalGrouping.GetGrouping(staticMapping.Keys);
 
-            return new TextureLevelMapping(level)
-            {
-                DynamicMapping = dynamicMapping,
-                StaticMapping = staticMapping,
-                StaticGrouping = staticGrouping,
-                LandmarkMapping = landmarkMapping,
-                DefaultSkyBox = skyBoxColour
-            };
+            levelMapping.DynamicMapping = dynamicMapping;
+            levelMapping.StaticMapping = staticMapping;
+            levelMapping.StaticGrouping = staticGrouping;
+            levelMapping.LandmarkMapping = landmarkMapping;
+            levelMapping.DefaultSkyBox = skyBoxColour;
         }
 
         public void RedrawTargets(AbstractTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
@@ -159,7 +151,7 @@ namespace TRTexture16Importer.Textures
             {
                 RedrawDynamicTargets(dynamicSource, variant, options);
             }
-            else if (source is StaticTextureSource staticSource)
+            else if (source is StaticTextureSource<E> staticSource)
             {
                 RedrawStaticTargets(staticSource, variant, options);
             }
@@ -193,7 +185,7 @@ namespace TRTexture16Importer.Textures
             }
         }
 
-        public void RedrawStaticTargets(StaticTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
+        public void RedrawStaticTargets(StaticTextureSource<E> source, string variant, Dictionary<TextureCategory, bool> options)
         {
             if (source.Categories != null)
             {
@@ -213,9 +205,8 @@ namespace TRTexture16Importer.Textures
                 GenerateSpriteSequenceTargets(source);
             }
 
-            // This can happen if we have a source grouped for this level,
-            // but the source is actually only in place on certain conditions
-            // - an example is the flame in Venice, which is only added if
+            // This can happen if we have a source grouped for this level, but the source is actually only
+            // in place on certain conditions - an example is the flame in Venice, which is only added if
             // the Flamethrower has been imported.
             if (!StaticMapping.ContainsKey(source))
             {
@@ -230,14 +221,16 @@ namespace TRTexture16Importer.Textures
                     throw new IndexOutOfRangeException(string.Format("Segment {0} is invalid for texture source {1}.", target.Segment, source.PNGPath));
                 }
 
-                GetBitmapGraphics(target.Tile).ImportSegment(source, target, segments[target.Segment]);
+                GetBitmapGraphics(target.Tile).ImportSegment(source.Bitmap, target, segments[target.Segment]);
             }
 
             if (source.EntityColourMap != null)
             {
-                foreach (TR2Entities entity in source.EntityColourMap.Keys)
+                TRColour4[] palette = GetPalette16();
+
+                foreach (E entity in source.EntityColourMap.Keys)
                 {
-                    TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(_level, entity);
+                    TRMesh[] meshes = GetModelMeshes(entity);
                     ISet<int> colourIndices = new HashSet<int>();
                     foreach (TRMesh mesh in meshes)
                     {
@@ -257,7 +250,7 @@ namespace TRTexture16Importer.Textures
                         int matchedIndex = -1;
                         foreach (int currentIndex in colourIndices)
                         {
-                            TRColour4 currentColour = _level.Palette16[currentIndex];
+                            TRColour4 currentColour = palette[currentIndex];
                             if (currentColour.Red == targetColour.R && currentColour.Green == targetColour.G && currentColour.Blue == targetColour.B)
                             {
                                 matchedIndex = currentIndex;
@@ -271,7 +264,7 @@ namespace TRTexture16Importer.Textures
 
                         // Extract the colour from the top-left of the rectangle specified in the source, and import that into the level
                         int sourceRectangle = source.EntityColourMap[entity][targetColour];
-                        int newColourIndex = PaletteUtilities.Import(_level, source.Bitmap.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
+                        int newColourIndex = ImportColour(/*PaletteUtilities.Import(_level,*/ source.Bitmap.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
                         remapIndices.Add(matchedIndex, newColourIndex);
                     }
 
@@ -290,24 +283,27 @@ namespace TRTexture16Importer.Textures
                 }
 
                 // Reset the palette tracking 
-                PaletteUtilities.ResetPaletteTracking(_level.Palette16);
+                PaletteUtilities.ResetPaletteTracking(palette);
             }
         }
 
-        private void GenerateSpriteSequenceTargets(StaticTextureSource source)
+        private void GenerateSpriteSequenceTargets(StaticTextureSource<E> source)
         {
             if (!source.HasVariants)
             {
                 throw new ArgumentException(string.Format("SpriteSequence {0} cannot be dynamically mapped without at least one source rectangle.", source.SpriteSequence));
             }
 
-            int i = _level.SpriteSequences.ToList().FindIndex(s => s.SpriteID == (int)source.SpriteSequence);
-            if (i == -1)
+            List<TRSpriteSequence> spriteSequences = GetSpriteSequences().ToList();
+            TRSpriteTexture[] spriteTextures = GetSpriteTextures();
+
+            int spriteID = Convert.ToInt32(source.SpriteSequence);
+            TRSpriteSequence sequence = spriteSequences.Find(s => s.SpriteID == spriteID);
+            if (sequence == null)
             {
                 return;
             }
 
-            TRSpriteSequence sequence = _level.SpriteSequences[i];
             StaticMapping[source] = new List<StaticTextureTarget>();
 
             // An assumption is made here that each variant in the source will have the same number
@@ -316,7 +312,7 @@ namespace TRTexture16Importer.Textures
             int numTargets = source.VariantMap[source.Variants[0]].Count;
             for (int j = 0; j < numTargets; j++)
             {
-                TRSpriteTexture sprite = _level.SpriteTextures[sequence.Offset + j];
+                TRSpriteTexture sprite = spriteTextures[sequence.Offset + j];
                 StaticMapping[source].Add(new StaticTextureTarget
                 {
                     Segment = j,
@@ -329,12 +325,10 @@ namespace TRTexture16Importer.Textures
 
         private ushort ConvertMeshTexture(ushort texture, Dictionary<int, int> remapIndices)
         {
-            byte[] arr = BitConverter.GetBytes(texture);
-            int highByte = Convert.ToInt32(arr[1]);
-            if (remapIndices.ContainsKey(highByte))
+            int p16 = texture >> 8;
+            if (remapIndices.ContainsKey(p16))
             {
-                arr[1] = (byte)remapIndices[highByte];
-                return BitConverter.ToUInt16(arr, 0);
+                return (ushort)(remapIndices[p16] << 8 | (texture & 0xFF));
             }
             return texture;
         }
@@ -343,22 +337,7 @@ namespace TRTexture16Importer.Textures
         {
             if (!_tileMap.ContainsKey(tile))
             {
-                TRTexImage16 tex = _level.Images16[tile];
-
-                Bitmap bmp = new Bitmap(_tileWidth, _tileHeight, PixelFormat.Format32bppArgb);
-                BitmapData bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-
-                List<byte> pixelCollection = new List<byte>();
-
-                foreach (Textile16Pixel px in tex.To32BPPFormat())
-                {
-                    pixelCollection.AddRange(px.RGB32);
-                }
-
-                Marshal.Copy(pixelCollection.ToArray(), 0, bitmapData.Scan0, pixelCollection.Count);
-                bmp.UnlockBits(bitmapData);
-
-                _tileMap.Add(tile, new BitmapGraphics(bmp));
+                _tileMap.Add(tile, new BitmapGraphics(GetTile(tile)));
             }
 
             return _tileMap[tile];
@@ -377,7 +356,7 @@ namespace TRTexture16Importer.Textures
                 {
                     using (BitmapGraphics bmp = _tileMap[tile])
                     {
-                        _level.Images16[tile].Pixels = TextureUtilities.ImportFromBitmap(bmp.Bitmap);
+                        SetTile(tile, bmp.Bitmap);
                     }
                 }
                 _committed = true;

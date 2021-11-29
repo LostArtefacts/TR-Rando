@@ -1,29 +1,29 @@
-﻿using System.Collections.Generic;
-using TRLevelReader.Model.Enums;
+﻿using System;
+using System.Collections.Generic;
 using TRModelTransporter.Model.Textures;
-using TRTexture16Importer.Textures.Source;
-using TRTexture16Importer.Textures.Target;
+using TRTexture16Importer.Textures;
 
-namespace TRRandomizerCore.Utilities
+namespace TRRandomizerCore.Textures
 {
-    public class TexturePositionMonitor : ITexturePositionMonitor<TR2Entities>
+    public class TextureMonitor<E> : ITexturePositionMonitor<E>
+        where E : Enum
     {
-        private readonly List<StaticTextureSource> _entitySources;
+        private readonly List<StaticTextureSource<E>> _entitySources;
 
-        internal Dictionary<StaticTextureSource, List<StaticTextureTarget>> PreparedLevelMapping { get; private set; }
-        internal List<TR2Entities> RemovedTextures { get; private set; }
+        public Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> PreparedLevelMapping { get; private set; }
+        public List<E> RemovedTextures { get; private set; }
 
-        internal bool UseMirroring { get; set; }
-        internal bool UseNightTextures { get; set; }
+        public bool UseMirroring { get; set; }
+        public bool UseNightTextures { get; set; }
 
-        internal TexturePositionMonitor(List<StaticTextureSource> sources)
+        public TextureMonitor(List<StaticTextureSource<E>> sources)
         {
             _entitySources = sources;
         }
 
-        internal void AppendSources(IEnumerable<StaticTextureSource> sources)
+        public void AppendSources(IEnumerable<StaticTextureSource<E>> sources)
         {
-            foreach (StaticTextureSource source in sources)
+            foreach (StaticTextureSource<E> source in sources)
             {
                 if (!_entitySources.Contains(source))
                 {
@@ -32,23 +32,23 @@ namespace TRRandomizerCore.Utilities
             }
         }
 
-        internal void RemoveSources(IEnumerable<StaticTextureSource> sources)
+        public void RemoveSources(IEnumerable<StaticTextureSource<E>> sources)
         {
-            foreach (StaticTextureSource source in sources)
+            foreach (StaticTextureSource<E> source in sources)
             {
                 _entitySources.Remove(source);
             }
         }
 
-        public Dictionary<TR2Entities, List<int>> GetMonitoredTextureIndices()
+        public Dictionary<E, List<int>> GetMonitoredTextureIndices()
         {
             // The keys defined in the source ObjectTextureMap are TRObjectTexture index references
             // from the original level they were extracted from. We want to track what happens to
             // these textures.
-            Dictionary<TR2Entities, List<int>> entityIndices = new Dictionary<TR2Entities, List<int>>();
-            foreach (StaticTextureSource source in _entitySources)
+            Dictionary<E, List<int>> entityIndices = new Dictionary<E, List<int>>();
+            foreach (StaticTextureSource<E> source in _entitySources)
             {
-                foreach (TR2Entities entity in source.EntityTextureMap.Keys)
+                foreach (E entity in source.EntityTextureMap.Keys)
                 {
                     if (!entityIndices.ContainsKey(entity))
                     {
@@ -60,20 +60,20 @@ namespace TRRandomizerCore.Utilities
             return entityIndices;
         }
 
-        public void MonitoredTexturesPositioned(Dictionary<TR2Entities, List<PositionedTexture>> texturePositions)
+        public void MonitoredTexturesPositioned(Dictionary<E, List<PositionedTexture>> texturePositions)
         {
             if (PreparedLevelMapping == null)
             {
-                PreparedLevelMapping = new Dictionary<StaticTextureSource, List<StaticTextureTarget>>();
+                PreparedLevelMapping = new Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>>();
             }
 
-            foreach (TR2Entities entity in texturePositions.Keys)
+            foreach (E entity in texturePositions.Keys)
             {
-                StaticTextureSource[] sources = GetSources(entity);
+                StaticTextureSource<E>[] sources = GetSources(entity);
                 List<StaticTextureTarget> targets = new List<StaticTextureTarget>();
                 foreach (PositionedTexture texture in texturePositions[entity])
                 {
-                    foreach (StaticTextureSource source in sources)
+                    foreach (StaticTextureSource<E> source in sources)
                     {
                         if (source.EntityTextureMap[entity].ContainsKey(texture.OriginalIndex))
                         {
@@ -97,10 +97,10 @@ namespace TRRandomizerCore.Utilities
             }
         }
 
-        private StaticTextureSource[] GetSources(TR2Entities entity)
+        private StaticTextureSource<E>[] GetSources(E entity)
         {
-            List<StaticTextureSource> sources = new List<StaticTextureSource>();
-            foreach (StaticTextureSource source in _entitySources)
+            List<StaticTextureSource<E>> sources = new List<StaticTextureSource<E>>();
+            foreach (StaticTextureSource<E> source in _entitySources)
             {
                 if (source.EntityTextureMap.ContainsKey(entity))
                 {
@@ -113,7 +113,7 @@ namespace TRRandomizerCore.Utilities
         // Keep a note of removed textures so that anything defined statically in the texture source
         // files does not get imported (e.g. if Barney is removed from GW, we don't want the randomized
         // textures to be imported).
-        public void EntityTexturesRemoved(List<TR2Entities> entities)
+        public void EntityTexturesRemoved(List<E> entities)
         {
             if (RemovedTextures == null)
             {

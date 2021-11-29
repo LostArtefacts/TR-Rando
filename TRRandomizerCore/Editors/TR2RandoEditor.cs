@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TRRandomizerCore.Processors;
-using TRRandomizerCore.Randomizers;
-using TRRandomizerCore.Utilities;
 using TRGE.Coord;
 using TRGE.Core;
+using TRRandomizerCore.Processors;
+using TRRandomizerCore.Randomizers;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Editors
 {
@@ -50,7 +50,7 @@ namespace TRRandomizerCore.Editors
 
             // Texture monitoring is needed between enemy and texture randomization
             // to track where imported enemies are placed.
-            using (TexturePositionMonitorBroker textureMonitor = new TexturePositionMonitorBroker())
+            using (TR2TextureMonitorBroker textureMonitor = new TR2TextureMonitorBroker())
             {
                 if (!monitor.IsCancelled && (Settings.RandomizeGameStrings || Settings.ReassignPuzzleNames))
                 {

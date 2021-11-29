@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using TRTexture16Importer.Textures.Grouping;
 
-namespace TRTexture16Importer.Textures.Source
+namespace TRTexture16Importer.Textures
 {
     public abstract class AbstractTextureSource
     {

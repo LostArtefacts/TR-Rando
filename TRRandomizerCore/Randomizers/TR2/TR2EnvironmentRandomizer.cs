@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Levels;
-using TRRandomizerCore.Utilities;
 using TREnvironmentEditor;
 using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
 using TRLevelReader.Helpers;
+using TRLevelReader.Model.Enums;
+using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Levels;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Randomizers
 {
     public class TR2EnvironmentRandomizer : BaseTR2Randomizer
     {
         internal bool EnforcedModeOnly => !Settings.RandomizeEnvironment;
-        internal TexturePositionMonitorBroker TextureMonitor { get; set; }
+        internal TR2TextureMonitorBroker TextureMonitor { get; set; }
 
         private List<EMType> _disallowedTypes;
         private List<TR2ScriptedLevel> _levelsToMirror;
@@ -152,7 +153,7 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // Notify the texture monitor that this level has been flipped
-            TexturePositionMonitor monitor = TextureMonitor.CreateMonitor(level.Name);
+            TextureMonitor<TR2Entities> monitor = TextureMonitor.CreateMonitor(level.Name);
             monitor.UseMirroring = true;
         }
     }

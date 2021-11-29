@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using TRTexture16Importer.Textures.Grouping;
 
-namespace TRTexture16Importer.Textures.Target
+namespace TRTexture16Importer.Textures
 {
     public class DynamicTextureTarget
     {

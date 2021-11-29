@@ -1,4 +1,4 @@
-﻿namespace TRTexture16Importer.Textures.Grouping
+﻿namespace TRTexture16Importer.Textures
 {
     public enum TextureCategory
     {

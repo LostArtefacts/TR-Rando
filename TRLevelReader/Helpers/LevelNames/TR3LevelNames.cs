@@ -115,6 +115,22 @@ namespace TRLevelReader.Helpers
             }
         }
 
+        public static List<string> IndiaLevelsWithCutscenes
+        {
+            get
+            {
+                return new List<string>
+                {
+                    JUNGLE,
+                    JUNGLE_CUT,
+                    RUINS,
+                    RUINS_CUT,
+                    GANGES,
+                    CAVES
+                };
+            }
+        }
+
         public static List<string> SouthPacificLevels
         {
             get
@@ -123,6 +139,22 @@ namespace TRLevelReader.Helpers
                 {
                     COASTAL,
                     CRASH,
+                    MADUBU,
+                    PUNA
+                };
+            }
+        }
+
+        public static List<string> SouthPacificLevelsWithCutscenes
+        {
+            get
+            {
+                return new List<string>
+                {
+                    COASTAL,
+                    COASTAL_CUT,
+                    CRASH,
+                    CRASH_CUT,
                     MADUBU,
                     PUNA
                 };
@@ -144,6 +176,24 @@ namespace TRLevelReader.Helpers
             }
         }
 
+        public static List<string> LondonLevelsWithCutscenes
+        {
+            get
+            {
+                return new List<string>
+                {
+                    THAMES,
+                    THAMES_CUT,
+                    ALDWYCH,
+                    ALDWYCH_CUT,
+                    LUDS,
+                    LUDS_CUT,
+                    CITY,
+                    HALLOWS
+                };
+            }
+        }
+
         public static List<string> NevadaLevels
         {
             get
@@ -152,6 +202,21 @@ namespace TRLevelReader.Helpers
                 {
                     NEVADA,
                     HSC,
+                    AREA51
+                };
+            }
+        }
+
+        public static List<string> NevadaLevelsWithCutscenes
+        {
+            get
+            {
+                return new List<string>
+                {
+                    NEVADA,
+                    NEVADA_CUT,
+                    HSC,
+                    HSC_CUT,
                     AREA51
                 };
             }
@@ -166,6 +231,22 @@ namespace TRLevelReader.Helpers
                     ANTARC,
                     RXTECH,
                     TINNOS,
+                    WILLIE
+                };
+            }
+        }
+
+        public static List<string> AntarcticaLevelsWithCutscenes
+        {
+            get
+            {
+                return new List<string>
+                {
+                    ANTARC,
+                    ANTARC_CUT,
+                    RXTECH,
+                    TINNOS,
+                    TINNOS_CUT,
                     WILLIE
                 };
             }

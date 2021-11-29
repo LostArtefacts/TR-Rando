@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Levels;
-using TRRandomizerCore.Processors;
-using TRRandomizerCore.Utilities;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
+using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Levels;
+using TRRandomizerCore.Processors;
+using TRRandomizerCore.Textures;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -19,7 +20,7 @@ namespace TRRandomizerCore.Randomizers
         private Dictionary<TR2Entities, List<string>> _gameEnemyTracker;
 
         internal int MaxPackingAttempts { get; set; }
-        internal TexturePositionMonitorBroker TextureMonitor { get; set; }
+        internal TR2TextureMonitorBroker TextureMonitor { get; set; }
 
         public TR2EnemyRandomizer()
         {

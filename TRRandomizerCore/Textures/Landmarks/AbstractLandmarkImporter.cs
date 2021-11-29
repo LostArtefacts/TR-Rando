@@ -1,36 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Runtime.InteropServices;
-using TRRandomizerCore.Levels;
 using TRLevelReader.Model;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 using TRTexture16Importer.Helpers;
 using TRTexture16Importer.Textures;
-using TRTexture16Importer.Textures.Source;
-using TRTexture16Importer.Textures.Target;
 
-namespace TRRandomizerCore.Helpers
+namespace TRRandomizerCore.Textures
 {
-    // This class is in RandoCore rathern than TRTexture16Importer as otherwise
-    // there is a cyclic dependency between it and ModelTransporter
-    public class LandmarkImporter
+    public abstract class AbstractLandmarkImporter<E, L>
+        where E : Enum
+        where L : class
     {
-        private const int _maxTextures = 2048;
+        protected abstract int MaxTextures { get; }
 
-        public bool Import(TR2CombinedLevel level, TextureLevelMapping mapping, bool isLevelMirrored)
+        protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
+        protected abstract TRObjectTexture[] GetObjectTextures(L level);
+        protected abstract void SetObjectTextures(L level, IEnumerable<TRObjectTexture> textures);
+        protected abstract void SetRoomTexture(L level, int roomIndex, int rectangleIndex, ushort textureIndex);
+
+        public bool Import(L level, AbstractTextureMapping<E, L> mapping, bool isLevelMirrored)
         {
             // Ensure any changes already made are committed to the level
             mapping.CommitGraphics();
 
-            using (TR2TexturePacker packer = new TR2TexturePacker(level.Data))
+            using (AbstractTexturePacker<E, L> packer = CreatePacker(level))
             {
-                List<TRObjectTexture> textures = level.Data.ObjectTextures.ToList();
-                foreach (StaticTextureSource source in mapping.LandmarkMapping.Keys)
+                List<TRObjectTexture> textures = GetObjectTextures(level).ToList();
+                foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
                 {
-                    if (textures.Count == _maxTextures)
+                    if (textures.Count == MaxTextures)
                     {
                         break;
                     }
@@ -55,10 +56,9 @@ namespace TRRandomizerCore.Helpers
                                 IndexedTRObjectTexture indexedTexture = new IndexedTRObjectTexture
                                 {
                                     Index = target.BackgroundIndex,
-                                    Texture = level.Data.ObjectTextures[target.BackgroundIndex]
+                                    Texture = textures[target.BackgroundIndex]
                                 };
-                                BitmapGraphics tile = GetTile(level.Data, indexedTexture.Atlas);
-
+                                BitmapGraphics tile = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
                                 BitmapGraphics clip = new BitmapGraphics(tile.Extract(indexedTexture.Bounds));
                                 clip.Overlay(source.Bitmap);
                                 image = clip.Bitmap;
@@ -78,7 +78,7 @@ namespace TRRandomizerCore.Helpers
                     packer.Pack(true);
 
                     // Perform the room data remapping
-                    foreach (StaticTextureSource source in mapping.LandmarkMapping.Keys)
+                    foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
                     {
                         if (!source.HasVariants)
                         {
@@ -95,17 +95,15 @@ namespace TRRandomizerCore.Helpers
                                     continue;
                                 }
 
-                                TR2Room room = level.Data.Rooms[target.RoomNumber];
                                 foreach (int rectIndex in target.RectangleIndices)
                                 {
-                                    room.RoomData.Rectangles[rectIndex].Texture = (ushort)target.MappedTextureIndex;
+                                    SetRoomTexture(level, target.RoomNumber, rectIndex, (ushort)target.MappedTextureIndex);
                                 }
                             }
                         }
                     }
 
-                    level.Data.ObjectTextures = textures.ToArray();
-                    level.Data.NumObjectTextures = (uint)textures.Count;
+                    SetObjectTextures(level, textures);
 
                     return true;
                 }
@@ -162,26 +160,6 @@ namespace TRRandomizerCore.Helpers
                     Fraction = (byte)(y == 0 ? 0 : y - 1)
                 }
             };
-        }
-
-        private BitmapGraphics GetTile(TR2Level level, int index)
-        {
-            TRTexImage16 tex = level.Images16[index];
-
-            Bitmap bmp = new Bitmap(256, 256, PixelFormat.Format32bppArgb);
-            BitmapData bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-
-            List<byte> pixelCollection = new List<byte>();
-
-            foreach (Textile16Pixel px in tex.To32BPPFormat())
-            {
-                pixelCollection.AddRange(px.RGB32);
-            }
-
-            Marshal.Copy(pixelCollection.ToArray(), 0, bitmapData.Scan0, pixelCollection.Count);
-            bmp.UnlockBits(bitmapData);
-
-            return new BitmapGraphics(bmp);
         }
     }
 }
