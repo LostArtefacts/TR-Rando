@@ -67,6 +67,8 @@ namespace TRRandomizerCore.Randomizers
                                 RedrawTargets(holder.Mapping, source, holder.Variants[source], _textureOptions);
                             }
                         }
+
+                        DrawReplacements(holder.Mapping);
                     }
 
                     SaveLevelInstance();
@@ -180,6 +182,14 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
+        private void DrawReplacements(AbstractTextureMapping<TR3Entities, TR3Level> mapping)
+        {
+            lock (_drawLock)
+            {
+                mapping.DrawReplacements();
+            }
+        }
+
         internal class TextureProcessor : AbstractProcessorThread<TR3TextureRandomizer>
         {
             private readonly Dictionary<TR3CombinedLevel, TextureHolder<TR3Entities, TR3Level>> _holders;
@@ -272,6 +282,8 @@ namespace TRRandomizerCore.Randomizers
                     {
                         _landmarkImporter.Import(level.Data, holder.Mapping, monitor != null && monitor.UseMirroring);
                     }
+
+                    _outer.DrawReplacements(holder.Mapping);
                 }
             }
         }

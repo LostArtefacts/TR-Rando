@@ -17,6 +17,7 @@ namespace TRTexture16Importer.Textures
 
         public Dictionary<DynamicTextureSource, DynamicTextureTarget> DynamicMapping { get; set; }
         public Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> StaticMapping { get; set; }
+        public List<ReplacementTextureTarget> ReplacementMapping { get; set; }
         public Dictionary<StaticTextureSource<E>, Dictionary<int, List<LandmarkTextureTarget>>> LandmarkMapping { get; set; }
         public List<TextureGrouping<E>> StaticGrouping { get; set; }
         public Color DefaultSkyBox { get; set; }
@@ -44,6 +45,7 @@ namespace TRTexture16Importer.Textures
         {
             Dictionary<DynamicTextureSource, DynamicTextureTarget> dynamicMapping = new Dictionary<DynamicTextureSource, DynamicTextureTarget>();
             Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> staticMapping = new Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>>();
+            List<ReplacementTextureTarget> replacementMapping = new List<ReplacementTextureTarget>();
             Dictionary<StaticTextureSource<E>, Dictionary<int, List<LandmarkTextureTarget>>> landmarkMapping = new Dictionary<StaticTextureSource<E>, Dictionary<int, List<LandmarkTextureTarget>>>();
             Color skyBoxColour = _defaultSkyBox;
 
@@ -78,6 +80,14 @@ namespace TRTexture16Importer.Textures
                 {
                     staticMapping[database.GetStaticSource(sourceName)] = JsonConvert.DeserializeObject<List<StaticTextureTarget>>(mapping[sourceName].ToString());
                 }
+            }
+
+            // This allows replacing colours in specific areas of tiles with another and will be
+            // performed post static and dynamic redrawing. Best example is fixing TR3 fake sky
+            // textures in the likes of Jungle after replacing the main skybox.
+            if (rootMapping.ContainsKey("ColourReplacements"))
+            {
+                replacementMapping = JsonConvert.DeserializeObject<List<ReplacementTextureTarget>>(rootMapping["ColourReplacements"].ToString());
             }
 
             // Landmark mapping links static sources to room number -> rectangle/triangle indices
@@ -140,6 +150,7 @@ namespace TRTexture16Importer.Textures
 
             levelMapping.DynamicMapping = dynamicMapping;
             levelMapping.StaticMapping = staticMapping;
+            levelMapping.ReplacementMapping = replacementMapping;
             levelMapping.StaticGrouping = staticGrouping;
             levelMapping.LandmarkMapping = landmarkMapping;
             levelMapping.DefaultSkyBox = skyBoxColour;
@@ -284,6 +295,24 @@ namespace TRTexture16Importer.Textures
 
                 // Reset the palette tracking 
                 PaletteUtilities.ResetPaletteTracking(palette);
+            }
+        }
+
+        public void DrawReplacements()
+        {
+            foreach (ReplacementTextureTarget replacement in ReplacementMapping)
+            {
+                Color search = GetBitmapGraphics(replacement.Search.Tile).Bitmap.GetPixel(replacement.Search.X, replacement.Search.Y);
+                Color replace = GetBitmapGraphics(replacement.Replace.Tile).Bitmap.GetPixel(replacement.Replace.X, replacement.Replace.Y);
+                // Scan each tile and replace colour Search with above
+                foreach (int tile in replacement.ReplacementMap.Keys)
+                {
+                    BitmapGraphics graphics = GetBitmapGraphics(tile);
+                    foreach (Rectangle rect in replacement.ReplacementMap[tile])
+                    {
+                        graphics.Replace(search, replace, rect);
+                    }
+                }
             }
         }
 

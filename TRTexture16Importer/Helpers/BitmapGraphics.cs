@@ -34,6 +34,32 @@ namespace TRTexture16Importer.Helpers
 
         public void AdjustHSB(Rectangle rect, HSBOperation operation)
         {
+            Scan(rect, delegate (Color c)
+            {
+                return ApplyHSBOperation(c, operation);
+            });
+        }
+
+        private Color ApplyHSBOperation(Color c, HSBOperation operation)
+        {
+            HSB hsb = c.ToHSB();
+            hsb.H = operation.ModifyHue(hsb.H);
+            hsb.S = operation.ModifySaturation(hsb.S);
+            hsb.B = operation.ModifyBrightness(hsb.B);
+
+            return hsb.ToColour();
+        }
+
+        public void Replace(Color search, Color replace, Rectangle rect)
+        {
+            Scan(rect, delegate (Color c)
+            {
+                return c == search ? replace : c;
+            });
+        }
+
+        public void Scan(Rectangle rect, Func<Color, Color> action)
+        {
             // This is about 25% faster than using GetPixel/SetPixel
 
             BitmapData bd = Bitmap.LockBits(new Rectangle(0, 0, _width, _height), ImageLockMode.ReadWrite, Bitmap.PixelFormat);
@@ -59,7 +85,7 @@ namespace TRTexture16Importer.Helpers
                     int a = pixels[currentLine + x + 3];
 
                     Color c = Color.FromArgb(a, r, g, b);
-                    c = ApplyHSBOperation(c, operation);
+                    c = action.Invoke(c);
 
                     pixels[currentLine + x] = c.B;
                     pixels[currentLine + x + 1] = c.G;
@@ -70,16 +96,6 @@ namespace TRTexture16Importer.Helpers
 
             Marshal.Copy(pixels, 0, ptrFirstPixel, byteCount);
             Bitmap.UnlockBits(bd);
-        }
-
-        private Color ApplyHSBOperation(Color c, HSBOperation operation)
-        {
-            HSB hsb = c.ToHSB();
-            hsb.H = operation.ModifyHue(hsb.H);
-            hsb.S = operation.ModifySaturation(hsb.S);
-            hsb.B = operation.ModifyBrightness(hsb.B);
-
-            return hsb.ToColour();
         }
 
         public void ImportSegment(Bitmap source, StaticTextureTarget target, Rectangle sourceSegment)
