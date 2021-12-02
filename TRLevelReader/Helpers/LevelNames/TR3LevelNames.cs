@@ -251,5 +251,21 @@ namespace TRLevelReader.Helpers
                 };
             }
         }
+
+        public static List<string> AsOrderedList
+        {
+            get
+            {
+                List<string> lvls = new List<string>();
+                lvls.AddRange(IndiaLevelsWithCutscenes);
+                lvls.AddRange(SouthPacificLevelsWithCutscenes);
+                lvls.AddRange(LondonLevelsWithCutscenes);
+                lvls.AddRange(NevadaLevelsWithCutscenes);
+                lvls.AddRange(AntarcticaLevelsWithCutscenes);
+                lvls.Add(ASSAULT);
+                lvls.AddRange(AsListGold);
+                return lvls;
+            }
+        }
     }
 }

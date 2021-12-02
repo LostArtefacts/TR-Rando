@@ -87,5 +87,40 @@ namespace TRLevelReader.Helpers
                 };
             }
         }
+
+        public static List<string> AsOrderedList
+        {
+            get
+            {
+                List<string> lvls = new List<string>
+                {
+                    GW,
+                    GW_CUT,
+                    VENICE,
+                    BARTOLI,
+                    OPERA,
+                    OPERA_CUT,
+                    RIG,
+                    DA,
+                    DA_CUT,
+                    FATHOMS,
+                    DORIA,
+                    LQ,
+                    DECK,
+                    TIBET,
+                    MONASTERY,
+                    COT,
+                    CHICKEN,
+                    XIAN,
+                    XIAN_CUT,
+                    FLOATER,
+                    LAIR,
+                    HOME
+                };
+                lvls.Add(ASSAULT);
+                lvls.AddRange(AsListGold);
+                return lvls;
+            }
+        }
     }
 }

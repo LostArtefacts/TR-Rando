@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Text;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -23,7 +22,7 @@ namespace TextureExport.Types
                 BuildTiles(tiles, packer.Tiles);
 
                 StringBuilder levelSel = new StringBuilder();
-                BuildLevelSelect(levelSel, lvlName, TRLevelNames.AsListWithAssault.Concat(TRLevelNames.AsListGold));
+                BuildLevelSelect(levelSel, lvlName, TRLevelNames.AsOrderedList);
 
                 StringBuilder skyboxInfo = new StringBuilder();
                 Dictionary<int, TRColour4> skyColours = new Dictionary<int, TRColour4>();
@@ -41,7 +40,7 @@ namespace TextureExport.Types
                 BuildTiles(tiles, packer.Tiles);
 
                 StringBuilder levelSel = new StringBuilder();
-                BuildLevelSelect(levelSel, lvlName, TR2LevelNames.AsListWithAssault.Concat(TR2LevelNames.AsListGold));
+                BuildLevelSelect(levelSel, lvlName, TR2LevelNames.AsOrderedList);
 
                 StringBuilder skyboxInfo = new StringBuilder();
                 Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR2Entities.Skybox_H), level.Palette16);
@@ -59,7 +58,7 @@ namespace TextureExport.Types
                 BuildTiles(tiles, packer.Tiles);
 
                 StringBuilder levelSel = new StringBuilder();
-                BuildLevelSelect(levelSel, lvlName, TR3LevelNames.AsListWithAssault.Concat(TR3LevelNames.AsListGold));
+                BuildLevelSelect(levelSel, lvlName, TR3LevelNames.AsOrderedList);
 
                 StringBuilder skyboxInfo = new StringBuilder();
                 Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR3Entities.Skybox_H), level.Palette16);
