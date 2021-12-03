@@ -12,7 +12,7 @@ namespace TRTexture16Importer.Textures
         protected TR3TextureMapping(TR3Level level)
             : base(level) { }
 
-        public static TR3TextureMapping Get(TR3Level level, string mappingFilePrefix, TR3TextureDatabase database, Dictionary<StaticTextureSource<TR3Entities>, List<StaticTextureTarget>> predefinedMapping = null, List<TR3Entities> entitiesToIgnore = null)
+        public static TR3TextureMapping Get(TR3Level level, string mappingFilePrefix, TR3TextureDatabase database, Dictionary<StaticTextureSource<TR3Entities>, List<StaticTextureTarget>> predefinedMapping = null, List<TR3Entities> entitiesToIgnore = null, Dictionary<TR3Entities, TR3Entities> entityMap = null)
         {
             string mapFile = Path.Combine(@"Resources\TR3\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
             if (!File.Exists(mapFile))
@@ -22,6 +22,7 @@ namespace TRTexture16Importer.Textures
 
             TR3TextureMapping mapping = new TR3TextureMapping(level);
             LoadMapping(mapping, mapFile, database, predefinedMapping, entitiesToIgnore);
+            mapping.EntityMap = entityMap;
             return mapping;
         }
 

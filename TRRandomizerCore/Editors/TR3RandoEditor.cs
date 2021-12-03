@@ -145,7 +145,8 @@ namespace TRRandomizerCore.Editors
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
-                        Settings = Settings
+                        Settings = Settings,
+                        TextureMonitor = textureMonitor
                     }.Randomize(Settings.SecretSeed);
                 }
 

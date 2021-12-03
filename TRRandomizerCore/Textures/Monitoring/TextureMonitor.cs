@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TRLevelReader.Model.Enums;
 using TRModelTransporter.Model.Textures;
 using TRTexture16Importer.Textures;
 
@@ -16,9 +17,13 @@ namespace TRRandomizerCore.Textures
         public bool UseMirroring { get; set; }
         public bool UseNightTextures { get; set; }
 
+        // Allow entities such as Artefacts to be defined in texture sources, but mapped to different types here
+        public Dictionary<E, E> EntityMap { get; set; }
+
         public TextureMonitor(List<StaticTextureSource<E>> sources)
         {
             _entitySources = sources;
+            EntityMap = new Dictionary<E, E>();
         }
 
         public void AppendSources(IEnumerable<StaticTextureSource<E>> sources)

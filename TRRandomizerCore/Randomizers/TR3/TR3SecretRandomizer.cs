@@ -17,6 +17,7 @@ using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Secrets;
+using TRRandomizerCore.Textures;
 using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers
@@ -46,6 +47,8 @@ namespace TRRandomizerCore.Randomizers
         private static readonly int _SMALL_RETRY_TOLERANCE = 50;
 
         private static readonly int _triggerEdgeLimit = 103; // Within ~10% of a tile edge, triggers will be copied into neighbours
+
+        internal TR3TextureMonitorBroker TextureMonitor { get; set; }
 
         public override void Randomize(int seed)
         {
@@ -899,12 +902,14 @@ namespace TRRandomizerCore.Randomizers
                         TRSecretModelAllocation<TR3Entities> allocation = _importAllocations[level];
 
                         // Get the artefacts into the level and refresh the model list
+                        TextureMonitor<TR3Entities> monitor = _outer.TextureMonitor.CreateMonitor(level.Name, allocation.ImportModels);
                         TR3ModelImporter importer = new TR3ModelImporter
                         {
                             Level = level.Data,
                             LevelName = level.Name,
                             EntitiesToImport = allocation.ImportModels,
-                            DataFolder = _outer.GetResourcePath(@"TR3\Models")
+                            DataFolder = _outer.GetResourcePath(@"TR3\Models"),
+                            TexturePositionMonitor = monitor
                         };
 
                         importer.Import();
@@ -930,6 +935,10 @@ namespace TRRandomizerCore.Randomizers
 
                             // Assign a name for the script
                             _outer.SetPuzzleTypeName(level, puzzlePickupType, _pickupNames[artefactPickupType]);
+
+                            // Tell the texture monitor that these artefacts are puzzle items
+                            monitor.EntityMap[artefactPickupType] = puzzlePickupType;
+                            monitor.EntityMap[artefactMenuType] = puzzleMenuType;
                         }
                     }
 

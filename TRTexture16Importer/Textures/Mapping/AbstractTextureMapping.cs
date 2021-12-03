@@ -21,6 +21,7 @@ namespace TRTexture16Importer.Textures
         public Dictionary<StaticTextureSource<E>, Dictionary<int, List<LandmarkTextureTarget>>> LandmarkMapping { get; set; }
         public List<TextureGrouping<E>> StaticGrouping { get; set; }
         public Color DefaultSkyBox { get; set; }
+        public Dictionary<E, E> EntityMap { get; set; }
 
         protected readonly Dictionary<int, BitmapGraphics> _tileMap;
         protected readonly L _level;
@@ -241,7 +242,12 @@ namespace TRTexture16Importer.Textures
 
                 foreach (E entity in source.EntityColourMap.Keys)
                 {
-                    TRMesh[] meshes = GetModelMeshes(entity);
+                    E translatedEntity = entity;
+                    if (EntityMap != null && EntityMap.ContainsKey(entity))
+                    {
+                        translatedEntity = EntityMap[entity];
+                    }
+                    TRMesh[] meshes = GetModelMeshes(translatedEntity);
                     ISet<int> colourIndices = new HashSet<int>();
                     foreach (TRMesh mesh in meshes)
                     {

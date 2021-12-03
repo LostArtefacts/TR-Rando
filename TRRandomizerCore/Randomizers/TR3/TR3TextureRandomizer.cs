@@ -169,7 +169,8 @@ namespace TRRandomizerCore.Randomizers
                     level.Name,
                     _textureDatabase,
                     TextureMonitor.GetLevelMapping(level.Name),
-                    TextureMonitor.GetIgnoredEntities(level.Name)
+                    TextureMonitor.GetIgnoredEntities(level.Name),
+                    TextureMonitor.GetEntityMap(level.Name)
                 );
             }
         }

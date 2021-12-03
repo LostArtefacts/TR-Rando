@@ -129,6 +129,12 @@ namespace TRRandomizerCore.Textures
             return null;
         }
 
+        public Dictionary<E, E> GetEntityMap(string lvlName)
+        {
+            TextureMonitor<E> monitor = GetMonitor(lvlName);
+            return monitor?.EntityMap;
+        }
+
         public void Dispose()
         {
             _textureDatabase.Dispose();
