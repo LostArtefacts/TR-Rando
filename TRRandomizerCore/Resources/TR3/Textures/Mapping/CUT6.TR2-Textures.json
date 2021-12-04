@@ -1,0 +1,267 @@
+{
+  "Static": {
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 228,
+        "Y": 16
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
+        "Tile": 5,
+        "X": 76,
+        "Y": 222
+      }
+    ],
+
+    "Lara.India": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 136,
+        "Y": 208
+      },
+      {
+        "Segment": 1,
+        "Tile": 5,
+        "X": 90,
+        "Y": 126
+      },
+      {
+        "Segment": 2,
+        "Tile": 5,
+        "X": 0,
+        "Y": 128
+      },
+      {
+        "Segment": 3,
+        "Tile": 5,
+        "X": 130,
+        "Y": 126
+      },
+      {
+        "Segment": 4,
+        "Tile": 5,
+        "X": 90,
+        "Y": 142
+      },
+      {
+        "Segment": 5,
+        "Tile": 4,
+        "X": 248,
+        "Y": 176
+      },
+      {
+        "Segment": 6,
+        "Tile": 5,
+        "X": 208,
+        "Y": 80
+      },
+      {
+        "Segment": 7,
+        "Tile": 6,
+        "X": 196,
+        "Y": 48
+      },
+      {
+        "Segment": 8,
+        "Tile": 5,
+        "X": 156,
+        "Y": 230
+      },
+      {
+        "Segment": 9,
+        "Tile": 5,
+        "X": 180,
+        "Y": 237
+      },
+      {
+        "Segment": 10,
+        "Tile": 5,
+        "X": 32,
+        "Y": 166
+      },
+      {
+        "Segment": 11,
+        "Tile": 6,
+        "X": 72,
+        "Y": 24
+      },
+      {
+        "Segment": 12,
+        "Tile": 5,
+        "X": 170,
+        "Y": 126
+      },
+      {
+        "Segment": 13,
+        "Tile": 6,
+        "X": 74,
+        "Y": 48
+      },
+      {
+        "Segment": 14,
+        "Tile": 6,
+        "X": 82,
+        "Y": 48
+      },
+      {
+        "Segment": 15,
+        "Tile": 5,
+        "X": 160,
+        "Y": 24
+      },
+      {
+        "Segment": 16,
+        "Tile": 6,
+        "X": 32,
+        "Y": 24
+      },
+      {
+        "Segment": 17,
+        "Tile": 5,
+        "X": 24,
+        "Y": 244
+      },
+      {
+        "Segment": 18,
+        "Tile": 6,
+        "X": 204,
+        "Y": 48
+      },
+      {
+        "Segment": 19,
+        "Tile": 6,
+        "X": 164,
+        "Y": 14
+      },
+      {
+        "Segment": 20,
+        "Tile": 5,
+        "X": 92,
+        "Y": 246
+      },
+      {
+        "Segment": 21,
+        "Tile": 6,
+        "X": 196,
+        "Y": 32
+      },
+      {
+        "Segment": 22,
+        "Tile": 6,
+        "X": 64,
+        "Y": 0
+      },
+      {
+        "Segment": 23,
+        "Tile": 5,
+        "X": 116,
+        "Y": 230
+      },
+      {
+        "Segment": 24,
+        "Tile": 6,
+        "X": 40,
+        "Y": 0
+      },
+      {
+        "Segment": 25,
+        "Tile": 6,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 26,
+        "Tile": 6,
+        "X": 56,
+        "Y": 24
+      },
+      {
+        "Segment": 27,
+        "Tile": 5,
+        "X": 130,
+        "Y": 142
+      }
+    ],
+
+    "Lara.Socks": [
+      {
+        "Segment": 0,
+        "Tile": 5,
+        "X": 202,
+        "Y": 166
+      },
+      {
+        "Segment": 1,
+        "Tile": 5,
+        "X": 218,
+        "Y": 176
+      },
+      {
+        "Segment": 2,
+        "Tile": 5,
+        "X": 234,
+        "Y": 176
+      }
+    ],
+
+    "Sky.Day.India": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 192,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 64,
+        "Y": 64
+      },
+      {
+        "Segment": 3,
+        "Tile": 4,
+        "X": 0,
+        "Y": 64
+      }
+    ],
+
+    "Sky.Night.India": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 192,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 64,
+        "Y": 64
+      },
+      {
+        "Segment": 3,
+        "Tile": 4,
+        "X": 0,
+        "Y": 64
+      }
+    ]
+  }
+}

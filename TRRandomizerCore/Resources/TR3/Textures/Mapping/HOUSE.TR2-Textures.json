@@ -1,0 +1,105 @@
+{
+  "Static": {
+    "Sky.Day.Assault": [
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 0,
+        "Y": 160
+      },
+      {
+        "Segment": 2,
+        "Tile": 6,
+        "X": 128,
+        "Y": 192
+      },
+      {
+        "Segment": 3,
+        "Tile": 6,
+        "X": 192,
+        "Y": 192
+      },
+      {
+        "Segment": 4,
+        "Tile": 7,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 5,
+        "Tile": 6,
+        "X": 64,
+        "Y": 192
+      },
+      {
+        "Segment": 6,
+        "Tile": 7,
+        "X": 192,
+        "Y": 0
+      },
+      {
+        "Segment": 7,
+        "Tile": 7,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 8,
+        "Tile": 7,
+        "X": 64,
+        "Y": 0
+      }
+    ],
+
+    "Sky.Night.Assault": [
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 0,
+        "Y": 160
+      },
+      {
+        "Segment": 2,
+        "Tile": 6,
+        "X": 128,
+        "Y": 192
+      },
+      {
+        "Segment": 3,
+        "Tile": 6,
+        "X": 192,
+        "Y": 192
+      },
+      {
+        "Segment": 4,
+        "Tile": 7,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 5,
+        "Tile": 6,
+        "X": 64,
+        "Y": 192
+      },
+      {
+        "Segment": 6,
+        "Tile": 7,
+        "X": 192,
+        "Y": 0
+      },
+      {
+        "Segment": 7,
+        "Tile": 7,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 8,
+        "Tile": 7,
+        "X": 64,
+        "Y": 0
+      }
+    ]
+  }
+}

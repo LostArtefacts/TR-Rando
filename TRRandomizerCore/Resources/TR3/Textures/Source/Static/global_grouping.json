@@ -1,0 +1,65 @@
+{
+  "GlobalSources": {
+  },
+
+  "GlobalGrouping": [
+    {
+      "Leader": "Enemies.Raptor",
+      "Followers": [
+        "Enemies.DeadRaptor"
+      ]
+    },
+
+    {
+      "Leader": "Enemies.Shiva",
+      "Followers": [
+        "Pickups.Scimitar"
+      ]
+    },
+
+    {
+      "Leader": "Lara.Bobble",
+      "Masters": [
+        "Lara.Coastal"
+      ],
+      "Followers": [
+        "Lara.Braid"
+      ]
+    },
+
+    {
+      "Leader": "Lara.India",
+      "Followers": [
+        "Lara.Socks"
+      ]
+    },
+
+    {
+      "Leader": "Lara.Nevada",
+      "Followers": [
+        "Lara.NevadaCutscene"
+      ]
+    },
+
+    {
+      "Leader": "Lara.Socks",
+      "Masters": [
+        "Lara.India"
+      ],
+      "Followers": [
+        "Lara.Bobble",
+        "Lara.Braid"
+      ],
+      "ThemeAlternatives": {
+        "Crimson": {
+          "Lara.Bobble": "Pink",
+          "Lara.Braid": "Pink"
+        },
+        "Khaki": {
+          "Lara.Bobble": "Mint",
+          "Lara.Braid": "Mint"
+        }
+      }
+    }
+  ]
+}

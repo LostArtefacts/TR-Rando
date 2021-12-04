@@ -21,7 +21,7 @@ namespace TRLevelReader.Helpers
         public const string PYRAMID      = "LEVEL10C.PHD";
         public const string ASSAULT      = "GYM.PHD";
 
-        public const string VALLEY_CUT   = "CUT1.PHD";
+        public const string QUALOPEC_CUT   = "CUT1.PHD";
         public const string TIHOCAN_CUT  = "CUT2.PHD";
         public const string MINES_CUT    = "CUT3.PHD";
         public const string ATLANTIS_CUT = "CUT4.PHD";
@@ -77,6 +77,38 @@ namespace TRLevelReader.Helpers
                     STRONGHOLD,
                     HIVE
                 };
+            }
+        }
+
+        public static List<string> AsOrderedList
+        {
+            get
+            {
+                List<string> lvls = new List<string>
+                {
+                    CAVES,
+                    VILCABAMBA,
+                    VALLEY,
+                    QUALOPEC,
+                    QUALOPEC_CUT,
+                    FOLLY,
+                    COLOSSEUM,
+                    MIDAS,
+                    CISTERN,
+                    TIHOCAN,
+                    TIHOCAN_CUT,
+                    KHAMOON,
+                    OBELISK,
+                    SANCTUARY,
+                    MINES,
+                    MINES_CUT,
+                    ATLANTIS,
+                    ATLANTIS_CUT,
+                    PYRAMID
+                };
+                lvls.Add(ASSAULT);
+                lvls.AddRange(AsListGold);
+                return lvls;
             }
         }
     }

@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Utilities;
-using TRRandomizerCore.Zones;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
+using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Textures;
+using TRRandomizerCore.Utilities;
+using TRRandomizerCore.Zones;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -18,7 +19,7 @@ namespace TRRandomizerCore.Randomizers
     {
         private static readonly List<int> _devRooms = null;
 
-        internal TexturePositionMonitorBroker TextureMonitor { get; set; }
+        internal TR2TextureMonitorBroker TextureMonitor { get; set; }
 
         // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
         // into predefined locations. See FindUnarmedPistolsLocation below.

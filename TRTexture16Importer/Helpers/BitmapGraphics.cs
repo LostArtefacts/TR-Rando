@@ -3,8 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using TRTexture16Importer.Textures.Source;
-using TRTexture16Importer.Textures.Target;
+using TRTexture16Importer.Textures;
 
 namespace TRTexture16Importer.Helpers
 {
@@ -35,6 +34,32 @@ namespace TRTexture16Importer.Helpers
 
         public void AdjustHSB(Rectangle rect, HSBOperation operation)
         {
+            Scan(rect, delegate (Color c)
+            {
+                return ApplyHSBOperation(c, operation);
+            });
+        }
+
+        private Color ApplyHSBOperation(Color c, HSBOperation operation)
+        {
+            HSB hsb = c.ToHSB();
+            hsb.H = operation.ModifyHue(hsb.H);
+            hsb.S = operation.ModifySaturation(hsb.S);
+            hsb.B = operation.ModifyBrightness(hsb.B);
+
+            return hsb.ToColour();
+        }
+
+        public void Replace(Color search, Color replace, Rectangle rect)
+        {
+            Scan(rect, delegate (Color c)
+            {
+                return c == search ? replace : c;
+            });
+        }
+
+        public void Scan(Rectangle rect, Func<Color, Color> action)
+        {
             // This is about 25% faster than using GetPixel/SetPixel
 
             BitmapData bd = Bitmap.LockBits(new Rectangle(0, 0, _width, _height), ImageLockMode.ReadWrite, Bitmap.PixelFormat);
@@ -60,7 +85,7 @@ namespace TRTexture16Importer.Helpers
                     int a = pixels[currentLine + x + 3];
 
                     Color c = Color.FromArgb(a, r, g, b);
-                    c = ApplyHSBOperation(c, operation);
+                    c = action.Invoke(c);
 
                     pixels[currentLine + x] = c.B;
                     pixels[currentLine + x + 1] = c.G;
@@ -73,17 +98,7 @@ namespace TRTexture16Importer.Helpers
             Bitmap.UnlockBits(bd);
         }
 
-        private Color ApplyHSBOperation(Color c, HSBOperation operation)
-        {
-            HSB hsb = c.ToHSB();
-            hsb.H = operation.ModifyHue(hsb.H);
-            hsb.S = operation.ModifySaturation(hsb.S);
-            hsb.B = operation.ModifyBrightness(hsb.B);
-
-            return hsb.ToColour();
-        }
-
-        public void ImportSegment(StaticTextureSource source, StaticTextureTarget target, Rectangle sourceSegment)
+        public void ImportSegment(Bitmap source, StaticTextureTarget target, Rectangle sourceSegment)
         {
             Rectangle sourceRectangle = sourceSegment;
             if (target.ClipRequired)
@@ -104,7 +119,7 @@ namespace TRTexture16Importer.Helpers
                 Delete(targetRectangle);
             }
 
-            Graphics.DrawImage(source.Bitmap, targetRectangle, sourceRectangle, GraphicsUnit.Pixel);
+            Graphics.DrawImage(source, targetRectangle, sourceRectangle, GraphicsUnit.Pixel);
         }
 
         public void Delete(Rectangle rect)

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Levels;
-using TRRandomizerCore.Utilities;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Levels;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -15,7 +15,7 @@ namespace TRRandomizerCore.Randomizers
     {
         public const uint DarknessRange = 10; // 0 = Dusk, 10 = Night
 
-        internal TexturePositionMonitorBroker TextureMonitor { get; set; }
+        internal TR2TextureMonitorBroker TextureMonitor { get; set; }
 
         private List<TR2ScriptedLevel> _nightLevels;
 
@@ -67,7 +67,7 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // Notify the texture monitor that this level is now in night mode
-            TexturePositionMonitor monitor = TextureMonitor.CreateMonitor(level.Name);
+            TextureMonitor<TR2Entities> monitor = TextureMonitor.CreateMonitor(level.Name);
             monitor.UseNightTextures = true;
         }
 

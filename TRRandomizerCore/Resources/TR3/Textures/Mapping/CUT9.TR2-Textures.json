@@ -1,0 +1,363 @@
+{
+  "Static": {
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 64,
+        "Y": 40
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
+        "Tile": 3,
+        "X": 232,
+        "Y": 227
+      }
+    ],
+
+    "Lara.India": [
+      {
+        "Segment": 0,
+        "Tile": 2,
+        "X": 48,
+        "Y": 216
+      },
+      {
+        "Segment": 1,
+        "Tile": 3,
+        "X": 168,
+        "Y": 136
+      },
+      {
+        "Segment": 2,
+        "Tile": 3,
+        "X": 112,
+        "Y": 144
+      },
+      {
+        "Segment": 3,
+        "Tile": 3,
+        "X": 32,
+        "Y": 144
+      },
+      {
+        "Segment": 4,
+        "Tile": 3,
+        "X": 168,
+        "Y": 152
+      },
+      {
+        "Segment": 5,
+        "Tile": 3,
+        "X": 248,
+        "Y": 56
+      },
+      {
+        "Segment": 6,
+        "Tile": 4,
+        "X": 176,
+        "Y": 48
+      },
+      {
+        "Segment": 7,
+        "Tile": 4,
+        "X": 120,
+        "Y": 56
+      },
+      {
+        "Segment": 8,
+        "Tile": 4,
+        "X": 48,
+        "Y": 0
+      },
+      {
+        "Segment": 9,
+        "Tile": 4,
+        "X": 88,
+        "Y": 0
+      },
+      {
+        "Segment": 10,
+        "Tile": 3,
+        "X": 0,
+        "Y": 216
+      },
+      {
+        "Segment": 11,
+        "Tile": 4,
+        "X": 184,
+        "Y": 40
+      },
+      {
+        "Segment": 12,
+        "Tile": 3,
+        "X": 72,
+        "Y": 144
+      },
+      {
+        "Segment": 13,
+        "Tile": 4,
+        "X": 96,
+        "Y": 56
+      },
+      {
+        "Segment": 14,
+        "Tile": 4,
+        "X": 104,
+        "Y": 56
+      },
+      {
+        "Segment": 15,
+        "Tile": 2,
+        "X": 0,
+        "Y": 248
+      },
+      {
+        "Segment": 16,
+        "Tile": 4,
+        "X": 184,
+        "Y": 32
+      },
+      {
+        "Segment": 17,
+        "Tile": 3,
+        "X": 176,
+        "Y": 200
+      },
+      {
+        "Segment": 18,
+        "Tile": 4,
+        "X": 128,
+        "Y": 56
+      },
+      {
+        "Segment": 19,
+        "Tile": 4,
+        "X": 112,
+        "Y": 32
+      },
+      {
+        "Segment": 20,
+        "Tile": 4,
+        "X": 80,
+        "Y": 32
+      },
+      {
+        "Segment": 21,
+        "Tile": 4,
+        "X": 216,
+        "Y": 40
+      },
+      {
+        "Segment": 22,
+        "Tile": 4,
+        "X": 200,
+        "Y": 0
+      },
+      {
+        "Segment": 23,
+        "Tile": 3,
+        "X": 224,
+        "Y": 240
+      },
+      {
+        "Segment": 24,
+        "Tile": 4,
+        "X": 176,
+        "Y": 0
+      },
+      {
+        "Segment": 25,
+        "Tile": 4,
+        "X": 136,
+        "Y": 0
+      },
+      {
+        "Segment": 26,
+        "Tile": 4,
+        "X": 144,
+        "Y": 40
+      },
+      {
+        "Segment": 27,
+        "Tile": 3,
+        "X": 0,
+        "Y": 160
+      }
+    ],
+
+    "Lara.Socks": [
+      {
+        "Segment": 0,
+        "Tile": 3,
+        "X": 128,
+        "Y": 208
+      },
+      {
+        "Segment": 1,
+        "Tile": 3,
+        "X": 32,
+        "Y": 216
+      },
+      {
+        "Segment": 2,
+        "Tile": 3,
+        "X": 80,
+        "Y": 216
+      }
+    ],
+
+    "Sky.Day.India": [
+      {
+        "Segment": 0,
+        "Tile": 2,
+        "X": 0,
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "Tile": 2,
+        "X": 64,
+        "Y": 64
+      },
+      {
+        "Segment": 2,
+        "Tile": 2,
+        "X": 128,
+        "Y": 112
+      },
+      {
+        "Segment": 3,
+        "Tile": 2,
+        "X": 192,
+        "Y": 64
+      }
+    ],
+
+    "Sky.Night.India": [
+      {
+        "Segment": 0,
+        "Tile": 2,
+        "X": 0,
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "Tile": 2,
+        "X": 64,
+        "Y": 64
+      },
+      {
+        "Segment": 2,
+        "Tile": 2,
+        "X": 128,
+        "Y": 112
+      },
+      {
+        "Segment": 3,
+        "Tile": 2,
+        "X": 192,
+        "Y": 64
+      }
+    ],
+
+    "Vehicles.Quad": [
+      {
+        "Segment": 0,
+        "Tile": 2,
+        "X": 96,
+        "Y": 200
+      },
+      {
+        "Segment": 1,
+        "Tile": 2,
+        "X": 0,
+        "Y": 200
+      },
+      {
+        "Segment": 2,
+        "Tile": 3,
+        "X": 216,
+        "Y": 80
+      },
+      {
+        "Segment": 3,
+        "Tile": 3,
+        "X": 112,
+        "Y": 0
+      },
+      {
+        "Segment": 4,
+        "Tile": 2,
+        "X": 192,
+        "Y": 112
+      },
+      {
+        "Segment": 4,
+        "Tile": 2,
+        "X": 136,
+        "Y": 160,
+        "Clip": "0, 0, 40, 40"
+      },
+      {
+        "Segment": 4,
+        "Tile": 2,
+        "X": 216,
+        "Y": 216,
+        "Clip": "0, 0, 32, 40"
+      },
+      {
+        "Segment": 4,
+        "Tile": 3,
+        "X": 152,
+        "Y": 136,
+        "Clip": "0, 0, 16, 40"
+      },
+      {
+        "Segment": 5,
+        "Tile": 3,
+        "X": 168,
+        "Y": 80
+      },
+      {
+        "Segment": 6,
+        "Tile": 4,
+        "X": 224,
+        "Y": 24
+      },
+      {
+        "Segment": 7,
+        "Tile": 4,
+        "X": 16,
+        "Y": 0
+      },
+      {
+        "Segment": 8,
+        "Tile": 3,
+        "X": 192,
+        "Y": 176
+      },
+      {
+        "Segment": 9,
+        "Tile": 3,
+        "X": 0,
+        "Y": 96
+      },
+      {
+        "Segment": 10,
+        "Tile": 2,
+        "X": 104,
+        "Y": 248
+      },
+      {
+        "Segment": 11,
+        "Tile": 2,
+        "X": 128,
+        "Y": 64
+      }
+    ]
+  }
+}

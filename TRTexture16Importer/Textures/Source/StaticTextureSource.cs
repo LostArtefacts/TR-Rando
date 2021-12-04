@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using TRLevelReader.Model.Enums;
 
-namespace TRTexture16Importer.Textures.Source
+namespace TRTexture16Importer.Textures
 {
-    public class StaticTextureSource : AbstractTextureSource, IDisposable
+    public class StaticTextureSource<E> : AbstractTextureSource, IDisposable
+        where E : Enum
     {
         public string PNGPath { get; set; }
-        public TR2Entities SpriteSequence { get; set; }
-        public bool IsSpriteSequence => SpriteSequence != TR2Entities.Lara;
-        public Dictionary<TR2Entities, Dictionary<Color, int>> EntityColourMap { get; set; }
-        public Dictionary<TR2Entities, Dictionary<int, int>> EntityTextureMap { get; set; }
-        public IEnumerable<TR2Entities> ColourEntities => EntityColourMap?.Keys;
-        public IEnumerable<TR2Entities> TextureEntities => EntityTextureMap?.Keys;
+        public E SpriteSequence { get; set; }
+        public bool IsSpriteSequence => !EqualityComparer<E>.Default.Equals(SpriteSequence, default);
+        public Dictionary<E, Dictionary<Color, int>> EntityColourMap { get; set; }
+        public Dictionary<E, Dictionary<int, int>> EntityTextureMap { get; set; }
+        public IEnumerable<E> ColourEntities => EntityColourMap?.Keys;
+        public IEnumerable<E> TextureEntities => EntityTextureMap?.Keys;
         public Dictionary<string, List<Rectangle>> VariantMap { get; set; }
         public override string[] Variants => VariantMap.Keys.ToArray();
         public bool HasVariants => VariantMap.Count > 0;
@@ -45,7 +45,7 @@ namespace TRTexture16Importer.Textures.Source
 
         public override bool Equals(object obj)
         {
-            return obj is StaticTextureSource source && PNGPath == source.PNGPath;
+            return obj is StaticTextureSource<E> source && PNGPath == source.PNGPath;
         }
 
         public override int GetHashCode()

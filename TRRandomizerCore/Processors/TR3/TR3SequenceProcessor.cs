@@ -15,6 +15,7 @@ using TRLevelReader.Model.Enums;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Processors
 {
@@ -49,6 +50,7 @@ namespace TRRandomizerCore.Processors
         private List<string> _gameStrings;
 
         public GlobeDisplayOption GlobeDisplay { get; set; }
+        public TR3TextureMonitorBroker TextureMonitor { get; set; }
 
         public void Run()
         {
@@ -147,12 +149,14 @@ namespace TRRandomizerCore.Processors
                 return;
             }
 
+            List<TR3Entities> upvImport = new List<TR3Entities> { TR3Entities.UPV };
             TR3ModelImporter importer = new TR3ModelImporter
             {
                 Level = level.Data,
                 LevelName = level.Name,
-                EntitiesToImport = new List<TR3Entities> { TR3Entities.UPV },
-                DataFolder = GetResourcePath(@"TR3\Models")
+                EntitiesToImport = upvImport,
+                DataFolder = GetResourcePath(@"TR3\Models"),
+                TexturePositionMonitor = TextureMonitor.CreateMonitor(level.Name, upvImport)
             };
 
             importer.Import();

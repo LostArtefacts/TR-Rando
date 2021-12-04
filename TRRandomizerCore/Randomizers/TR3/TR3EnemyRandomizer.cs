@@ -11,19 +11,23 @@ using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Transport;
 using System.Diagnostics;
+using TRRandomizerCore.Textures;
+using Newtonsoft.Json;
 
 namespace TRRandomizerCore.Randomizers
 {
     public class TR3EnemyRandomizer : BaseTR3Randomizer
     {
         private Dictionary<TR3Entities, List<string>> _gameEnemyTracker;
+        private Dictionary<string, List<Location>> _pistolLocations;
 
-        // Not required until texture rando implemented
-        //internal TexturePositionMonitorBroker TextureMonitor { get; set; } 
+        internal TR3TextureMonitorBroker TextureMonitor { get; set; }
 
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
+            _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
+
             if (Settings.CrossLevelEnemies)
             {
                 RandomizeEnemiesCrossLevel();
@@ -418,11 +422,18 @@ namespace TRRandomizerCore.Randomizers
                         }
                     }
                 }
-                else
+                else if (level.Is(TR3LevelNames.RXTECH) && level.IsWillardSequence && Settings.RandoEnemyDifficulty == RandoDifficulty.Default && (currentEntity.Room == 14 || currentEntity.Room == 45))
                 {
-                    // Make sure to convert back to the actual type
-                    targetEntity.TypeID = (short)TR3EntityUtilities.TranslateEntityAlias(newEntityType);
+                    // #269 We don't want flamethrowers here because they're hostile, so getting off the minecart
+                    // safely is too difficult.
+                    while (newEntityType == TR3Entities.RXTechFlameLad)
+                    {
+                        newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
+                    }
                 }
+                
+                // Make sure to convert back to the actual type
+                targetEntity.TypeID = (short)TR3EntityUtilities.TranslateEntityAlias(newEntityType);
 
                 // #146 Ensure OneShot triggers are set for this enemy if needed
                 TR3EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
@@ -434,6 +445,100 @@ namespace TRRandomizerCore.Randomizers
                 levelEntities.AddRange(newEntities);
                 level.Data.Entities = levelEntities.ToArray();
                 level.Data.NumEntities = (uint)levelEntities.Count;
+            }
+
+            // Add extra ammo based on this level's difficulty
+            if (Settings.CrossLevelEnemies && level.Script.RemovesWeapons)
+            {
+                AddUnarmedLevelAmmo(level);
+            }
+        }
+
+        private void AddUnarmedLevelAmmo(TR3CombinedLevel level)
+        {
+            // Find out which gun we have for this level
+            List<TR2Entity> levelEntities = level.Data.Entities.ToList();
+            List<TR3Entities> weaponTypes = TR3EntityUtilities.GetWeaponPickups();
+            List<TR2Entity> levelWeapons = levelEntities.FindAll(e => weaponTypes.Contains((TR3Entities)e.TypeID));
+            TR2Entity weaponEntity = null;
+            foreach (TR2Entity weapon in levelWeapons)
+            {
+                int match = _pistolLocations[level.Name].FindIndex
+                (
+                    location =>
+                        location.X == weapon.X &&
+                        location.Y == weapon.Y &&
+                        location.Z == weapon.Z &&
+                        location.Room == weapon.Room
+                );
+                if (match != -1)
+                {
+                    weaponEntity = weapon;
+                    break;
+                }
+            }
+
+            if (weaponEntity == null)
+            {
+                return;
+            }
+
+            List<TR3Entities> allEnemies = TR3EntityUtilities.GetFullListOfEnemies();
+            List<TR2Entity> levelEnemies = levelEntities.FindAll(e => allEnemies.Contains((TR3Entities)e.TypeID));
+            EnemyDifficulty difficulty = TR3EnemyUtilities.GetEnemyDifficulty(levelEnemies);
+
+            if (difficulty > EnemyDifficulty.Easy)
+            {
+                while (weaponEntity.TypeID == (short)TR3Entities.Pistols_P)
+                {
+                    weaponEntity.TypeID = (short)weaponTypes[_generator.Next(0, weaponTypes.Count)];
+                }
+            }
+
+            TR3Entities weaponType = (TR3Entities)weaponEntity.TypeID;
+            uint ammoToGive = TR3EnemyUtilities.GetStartingAmmo(weaponType);
+            if (ammoToGive > 0)
+            {
+                ammoToGive *= (uint)difficulty;
+                TR3Entities ammoType = TR3EntityUtilities.GetWeaponAmmo(weaponType);
+                level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(ammoType), ammoToGive);
+
+                uint smallMediToGive = 0;
+                uint largeMediToGive = 0;
+
+                if (difficulty == EnemyDifficulty.Medium || difficulty == EnemyDifficulty.Hard)
+                {
+                    smallMediToGive++;
+                }
+                if (difficulty > EnemyDifficulty.Medium)
+                {
+                    largeMediToGive++;
+                }
+                if (difficulty == EnemyDifficulty.VeryHard)
+                {
+                    largeMediToGive++;
+                }
+
+                level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3Entities.SmallMed_P), smallMediToGive);
+                level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3Entities.LargeMed_P), largeMediToGive);
+            }
+
+            // Add the pistols as a pickup if the level is hard and there aren't any other pistols around
+            if (difficulty > EnemyDifficulty.Medium && levelWeapons.Find(e => e.TypeID == (short)TR3Entities.Pistols_P) == null && level.Data.NumEntities < 256)
+            {
+                levelEntities.Add(new TR2Entity
+                {
+                    TypeID = (short)TR3Entities.Pistols_P,
+                    X = weaponEntity.X,
+                    Y = weaponEntity.Y,
+                    Z = weaponEntity.Z,
+                    Room = weaponEntity.Room,
+                    Intensity1 = -1,
+                    Intensity2 = -1
+                });
+
+                level.Data.Entities = levelEntities.ToArray();
+                level.Data.NumEntities++;
             }
         }
 
@@ -480,7 +585,7 @@ namespace TRRandomizerCore.Randomizers
                             Level = level.Data,
                             LevelName = level.Name,
                             DataFolder = _outer.GetResourcePath(@"TR3\Models"),
-                            //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
+                            TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
                         };
 
                         string remapPath = @"TR3\Textures\Deduplication\" + level.Name + "-TextureRemap.json";

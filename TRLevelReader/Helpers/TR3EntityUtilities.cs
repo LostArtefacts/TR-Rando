@@ -11,15 +11,28 @@ namespace TRLevelReader.Helpers
             [TR3Entities.Lara] = new Dictionary<TR3Entities, List<string>>
             {
                 [TR3Entities.LaraIndia]
-                    = new List<string> { TR3LevelNames.JUNGLE, TR3LevelNames.RUINS, TR3LevelNames.GANGES, TR3LevelNames.CAVES },
+                    = TR3LevelNames.IndiaLevelsWithCutscenes,
                 [TR3Entities.LaraCoastal]
-                    = new List<string> { TR3LevelNames.COASTAL, TR3LevelNames.CRASH, TR3LevelNames.MADUBU, TR3LevelNames.PUNA },
+                    = TR3LevelNames.SouthPacificLevelsWithCutscenes,
                 [TR3Entities.LaraLondon]
-                    = new List<string> { TR3LevelNames.THAMES, TR3LevelNames.ALDWYCH, TR3LevelNames.LUDS, TR3LevelNames.CITY, TR3LevelNames.HALLOWS },
+                    = TR3LevelNames.LondonLevelsWithCutscenes,
                 [TR3Entities.LaraNevada]
-                    = new List<string> { TR3LevelNames.NEVADA, TR3LevelNames.HSC, TR3LevelNames.AREA51 },
+                    = TR3LevelNames.NevadaLevelsWithCutscenes,
                 [TR3Entities.LaraAntarc]
-                    = new List<string> { TR3LevelNames.ANTARC, TR3LevelNames.RXTECH, TR3LevelNames.TINNOS, TR3LevelNames.WILLIE }
+                    = TR3LevelNames.AntarcticaLevelsWithCutscenes
+            },
+            [TR3Entities.LaraSkin_H] = new Dictionary<TR3Entities, List<string>>
+            {
+                [TR3Entities.LaraSkin_H_India]
+                    = TR3LevelNames.IndiaLevelsWithCutscenes,
+                [TR3Entities.LaraSkin_H_Coastal]
+                    = TR3LevelNames.SouthPacificLevelsWithCutscenes,
+                [TR3Entities.LaraSkin_H_London]
+                    = TR3LevelNames.LondonLevelsWithCutscenes,
+                [TR3Entities.LaraSkin_H_Nevada]
+                    = TR3LevelNames.NevadaLevelsWithCutscenes,
+                [TR3Entities.LaraSkin_H_Antarc]
+                    = TR3LevelNames.AntarcticaLevelsWithCutscenes
             },
             [TR3Entities.Cobra] = new Dictionary<TR3Entities, List<string>>
             {
@@ -241,6 +254,21 @@ namespace TRLevelReader.Helpers
                 || (entity == TR3Entities.GrenadeLauncher_P);
         }
 
+        public static List<TR3Entities> GetWeaponPickups()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.Pistols_P,
+                TR3Entities.Shotgun_P,
+                TR3Entities.Deagle_P,
+                TR3Entities.Uzis_P,
+                TR3Entities.Harpoon_P,
+                TR3Entities.MP5_P,
+                TR3Entities.RocketLauncher_P,
+                TR3Entities.GrenadeLauncher_P
+            };
+        }
+
         public static bool IsAmmoPickup(TR3Entities entity)
         {
             return (entity == TR3Entities.PistolAmmo_P)
@@ -251,6 +279,29 @@ namespace TRLevelReader.Helpers
                 || (entity == TR3Entities.MP5Ammo_P)
                 || (entity == TR3Entities.Rockets_P)
                 || (entity == TR3Entities.Grenades_P);
+        }
+
+        public static TR3Entities GetWeaponAmmo(TR3Entities weapon)
+        {
+            switch (weapon)
+            {
+                case TR3Entities.Shotgun_P:
+                    return TR3Entities.ShotgunAmmo_P;
+                case TR3Entities.Deagle_P:
+                    return TR3Entities.DeagleAmmo_P;
+                case TR3Entities.Uzis_P:
+                    return TR3Entities.UziAmmo_P;
+                case TR3Entities.Harpoon_P:
+                    return TR3Entities.Harpoons_P;
+                case TR3Entities.MP5_P:
+                    return TR3Entities.MP5Ammo_P;
+                case TR3Entities.GrenadeLauncher_P:
+                    return TR3Entities.Grenades_P;
+                case TR3Entities.RocketLauncher_P:
+                    return TR3Entities.Rockets_P;
+                default:
+                    return TR3Entities.PistolAmmo_P;
+            }
         }
 
         public static bool IsCrystalPickup(TR3Entities entity)

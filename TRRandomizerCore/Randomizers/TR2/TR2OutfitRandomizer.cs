@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Levels;
-using TRRandomizerCore.Processors;
-using TRRandomizerCore.Utilities;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
+using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Levels;
+using TRRandomizerCore.Processors;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Randomizers
 {
     public class TR2OutfitRandomizer : BaseTR2Randomizer
     {
-        internal TexturePositionMonitorBroker TextureMonitor { get; set; }
+        internal TR2TextureMonitorBroker TextureMonitor { get; set; }
 
         private TR2Entities _persistentOutfit;
 

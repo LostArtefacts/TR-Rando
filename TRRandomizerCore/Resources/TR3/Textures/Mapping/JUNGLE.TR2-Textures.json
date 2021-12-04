@@ -1,0 +1,294 @@
+{
+  "Static": {
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 36,
+        "Y": 96
+      },
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 128,
+        "Y": 174
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 232,
+        "Y": 187
+      }
+    ],
+
+    "Lara.India": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 88,
+        "Y": 168
+      },
+      {
+        "Segment": 1,
+        "Tile": 8,
+        "X": 120,
+        "Y": 48
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 80,
+        "Y": 62
+      },
+      {
+        "Segment": 3,
+        "Tile": 8,
+        "X": 160,
+        "Y": 48
+      },
+      {
+        "Segment": 4,
+        "Tile": 8,
+        "X": 120,
+        "Y": 64
+      },
+      {
+        "Segment": 5,
+        "Tile": 7,
+        "X": 246,
+        "Y": 104
+      },
+      {
+        "Segment": 6,
+        "Tile": 10,
+        "X": 240,
+        "Y": 0
+      },
+      {
+        "Segment": 7,
+        "Tile": 10,
+        "X": 128,
+        "Y": 37
+      },
+      {
+        "Segment": 8,
+        "Tile": 9,
+        "X": 224,
+        "Y": 48
+      },
+      {
+        "Segment": 9,
+        "Tile": 9,
+        "X": 16,
+        "Y": 56
+      },
+      {
+        "Segment": 10,
+        "Tile": 8,
+        "X": 112,
+        "Y": 160
+      },
+      {
+        "Segment": 11,
+        "Tile": 9,
+        "X": 160,
+        "Y": 182
+      },
+      {
+        "Segment": 12,
+        "Tile": 8,
+        "X": 200,
+        "Y": 56
+      },
+      {
+        "Segment": 13,
+        "Tile": 10,
+        "X": 96,
+        "Y": 37
+      },
+      {
+        "Segment": 14,
+        "Tile": 10,
+        "X": 104,
+        "Y": 37
+      },
+      {
+        "Segment": 15,
+        "Tile": 9,
+        "X": 56,
+        "Y": 72
+      },
+      {
+        "Segment": 16,
+        "Tile": 10,
+        "X": 220,
+        "Y": 32
+      },
+      {
+        "Segment": 17,
+        "Tile": 9,
+        "X": 56,
+        "Y": 80
+      },
+      {
+        "Segment": 18,
+        "Tile": 10,
+        "X": 136,
+        "Y": 38
+      },
+      {
+        "Segment": 19,
+        "Tile": 9,
+        "X": 0,
+        "Y": 174
+      },
+      {
+        "Segment": 20,
+        "Tile": 9,
+        "X": 64,
+        "Y": 172
+      },
+      {
+        "Segment": 21,
+        "Tile": 9,
+        "X": 192,
+        "Y": 182
+      },
+      {
+        "Segment": 22,
+        "Tile": 9,
+        "X": 168,
+        "Y": 64
+      },
+      {
+        "Segment": 23,
+        "Tile": 9,
+        "X": 200,
+        "Y": 48
+      },
+      {
+        "Segment": 24,
+        "Tile": 9,
+        "X": 112,
+        "Y": 64
+      },
+      {
+        "Segment": 25,
+        "Tile": 9,
+        "X": 88,
+        "Y": 56
+      },
+      {
+        "Segment": 26,
+        "Tile": 9,
+        "X": 16,
+        "Y": 182
+      },
+      {
+        "Segment": 27,
+        "Tile": 8,
+        "X": 160,
+        "Y": 64
+      }
+    ],
+
+    "Lara.Socks": [
+      {
+        "Segment": 0,
+        "Tile": 8,
+        "X": 216,
+        "Y": 152
+      },
+      {
+        "Segment": 1,
+        "Tile": 8,
+        "X": 144,
+        "Y": 160
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 160,
+        "Y": 160
+      }
+    ],
+
+    "Sky.Day.India": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 136,
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 64,
+        "Y": 96
+      },
+      {
+        "Segment": 2,
+        "Tile": 6,
+        "X": 192,
+        "Y": 120
+      },
+      {
+        "Segment": 3,
+        "Tile": 6,
+        "X": 128,
+        "Y": 120
+      }
+    ],
+
+    "Sky.Night.India": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 136,
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 64,
+        "Y": 96
+      },
+      {
+        "Segment": 2,
+        "Tile": 6,
+        "X": 192,
+        "Y": 120
+      },
+      {
+        "Segment": 3,
+        "Tile": 6,
+        "X": 128,
+        "Y": 120
+      }
+    ]
+  },
+
+  "ColourReplacements": [
+    {
+      "Search": {
+        "Tile": 4,
+        "X": 128,
+        "Y": 128
+      },
+      "Replace": {
+        "Tile": 6,
+        "X": 136,
+        "Y": 64
+      },
+      "ReplacementMap": {
+        "4": [
+          "128, 128, 64, 64",
+          "0, 192, 128, 64"
+        ]
+      }
+    }
+  ]
+}

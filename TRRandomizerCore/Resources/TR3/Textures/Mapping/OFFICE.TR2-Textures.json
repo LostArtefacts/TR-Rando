@@ -1,0 +1,72 @@
+{
+  "Static": {
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 216,
+        "Y": 192
+      }
+    ],
+
+    "Lara.Braid": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 224,
+        "Y": 59
+      }
+    ],
+
+    "Sky.Night.City": [
+      {
+        "Segment": 0,
+        "Tile": 3,
+        "X": 192,
+        "Y": 128
+      },
+      {
+        "Segment": 1,
+        "Tile": 3,
+        "X": 72,
+        "Y": 64
+      },
+      {
+        "Segment": 2,
+        "Tile": 3,
+        "X": 64,
+        "Y": 128
+      },
+      {
+        "Segment": 3,
+        "Tile": 3,
+        "X": 136,
+        "Y": 0
+      },
+      {
+        "Segment": 4,
+        "Tile": 3,
+        "X": 72,
+        "Y": 0
+      },
+      {
+        "Segment": 5,
+        "Tile": 3,
+        "X": 128,
+        "Y": 128
+      },
+      {
+        "Segment": 6,
+        "Tile": 3,
+        "X": 136,
+        "Y": 64
+      },
+      {
+        "Segment": 7,
+        "Tile": 3,
+        "X": 0,
+        "Y": 96
+      }
+    ]
+  }
+}
