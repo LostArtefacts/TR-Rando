@@ -418,11 +418,18 @@ namespace TRRandomizerCore.Randomizers
                         }
                     }
                 }
-                else
+                else if (level.Is(TR3LevelNames.RXTECH) && level.IsWillardSequence && Settings.RandoEnemyDifficulty == RandoDifficulty.Default && (currentEntity.Room == 14 || currentEntity.Room == 45))
                 {
-                    // Make sure to convert back to the actual type
-                    targetEntity.TypeID = (short)TR3EntityUtilities.TranslateEntityAlias(newEntityType);
+                    // #269 We don't want flamethrowers here because they're hostile, so getting off the minecart
+                    // safely is too difficult.
+                    while (newEntityType == TR3Entities.RXTechFlameLad)
+                    {
+                        newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
+                    }
                 }
+                
+                // Make sure to convert back to the actual type
+                targetEntity.TypeID = (short)TR3EntityUtilities.TranslateEntityAlias(newEntityType);
 
                 // #146 Ensure OneShot triggers are set for this enemy if needed
                 TR3EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
