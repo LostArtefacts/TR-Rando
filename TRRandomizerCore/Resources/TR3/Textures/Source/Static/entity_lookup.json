@@ -5,11 +5,41 @@
   "19": [
     "Vehicles.UPV"
   ],
+  "34": [
+    "Enemies.Compsognathus"
+  ],
   "39": [
     "Enemies.RXRedBoi"
   ],
+  "42": [
+    "Enemies.Crawler"
+  ],
   "70": [
     "Enemies.Shiva"
+  ],
+  "236": [
+    "Pickups.Artefacts.SerpentStone"
+  ],
+  "237": [
+    "Pickups.Artefacts.HandOfRathmore"
+  ],
+  "240": [
+    "Pickups.Artefacts.InfadaStone"
+  ],
+  "241": [
+    "Pickups.Artefacts.Element115"
+  ],
+  "242": [
+    "Pickups.Artefacts.EyeOfIsis"
+  ],
+  "243": [
+    "Pickups.Artefacts.OraDagger"
+  ],
+  "287": [
+    "Enemies.TRex"
+  ],
+  "288": [
+    "Enemies.Raptor"
   ],
   "3000": [
     "Lara.Bobble",
@@ -17,15 +47,19 @@
     "Lara.Socks"
   ],
   "4000": [
-    "Lara.Bobble"
+    "Lara.Bobble",
+    "Lara.Coastal",
+    "Lara.Socks"
   ],
   "5000": [
     "Lara.Bobble"
   ],
   "6000": [
-    "Lara.Bobble"
+    "Lara.Bobble",
+    "Lara.Nevada"
   ],
   "7000": [
+    "Lara.Antarctica",
     "Lara.Bobble"
   ]
 }

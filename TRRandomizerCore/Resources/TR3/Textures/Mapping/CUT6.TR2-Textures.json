@@ -208,6 +208,60 @@
         "X": 234,
         "Y": 176
       }
+    ],
+
+    "Sky.Day.India": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 192,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 64,
+        "Y": 64
+      },
+      {
+        "Segment": 3,
+        "Tile": 4,
+        "X": 0,
+        "Y": 64
+      }
+    ],
+
+    "Sky.Night.India": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 192,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 64,
+        "Y": 64
+      },
+      {
+        "Segment": 3,
+        "Tile": 4,
+        "X": 0,
+        "Y": 64
+      }
     ]
   }
 }

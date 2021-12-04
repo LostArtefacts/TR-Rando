@@ -369,6 +369,81 @@
       }
     ],
 
-    "Pickups.Scimitar": []
-  }
+    "Pickups.Scimitar": [],
+
+    "Sky.Day.India": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 128,
+        "Y": 128
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 192,
+        "Y": 128
+      },
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 128,
+        "Y": 184
+      },
+      {
+        "Segment": 3,
+        "Tile": 4,
+        "X": 64,
+        "Y": 160
+      }
+    ],
+
+    "Sky.Night.India": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 128,
+        "Y": 128
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 192,
+        "Y": 128
+      },
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 128,
+        "Y": 184
+      },
+      {
+        "Segment": 3,
+        "Tile": 4,
+        "X": 64,
+        "Y": 160
+      }
+    ]
+  },
+
+  "ColourReplacements": [
+    {
+      "Search": {
+        "Tile": 3,
+        "X": 128,
+        "Y": 128
+      },
+      "Replace": {
+        "Tile": 4,
+        "X": 128,
+        "Y": 128
+      },
+      "ReplacementMap": {
+        "3": [
+          "192, 64, 64, 64",
+          "0, 128, 192, 64"
+        ]
+      }
+    }
+  ]
 }

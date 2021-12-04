@@ -210,6 +210,60 @@
       }
     ],
 
+    "Sky.Day.India": [
+      {
+        "Segment": 0,
+        "Tile": 2,
+        "X": 0,
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "Tile": 2,
+        "X": 64,
+        "Y": 64
+      },
+      {
+        "Segment": 2,
+        "Tile": 2,
+        "X": 128,
+        "Y": 112
+      },
+      {
+        "Segment": 3,
+        "Tile": 2,
+        "X": 192,
+        "Y": 64
+      }
+    ],
+
+    "Sky.Night.India": [
+      {
+        "Segment": 0,
+        "Tile": 2,
+        "X": 0,
+        "Y": 64
+      },
+      {
+        "Segment": 1,
+        "Tile": 2,
+        "X": 64,
+        "Y": 64
+      },
+      {
+        "Segment": 2,
+        "Tile": 2,
+        "X": 128,
+        "Y": 112
+      },
+      {
+        "Segment": 3,
+        "Tile": 2,
+        "X": 192,
+        "Y": 64
+      }
+    ],
+
     "Vehicles.Quad": [
       {
         "Segment": 0,

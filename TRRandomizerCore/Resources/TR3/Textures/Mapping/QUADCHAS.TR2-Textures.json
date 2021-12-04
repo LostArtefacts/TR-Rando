@@ -216,6 +216,60 @@
       }
     ],
 
+    "Sky.Day.India": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 192,
+        "Y": 128
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 64,
+        "Y": 160
+      },
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 128,
+        "Y": 192
+      },
+      {
+        "Segment": 3,
+        "Tile": 4,
+        "X": 0,
+        "Y": 192
+      }
+    ],
+
+    "Sky.Night.India": [
+      {
+        "Segment": 0,
+        "Tile": 4,
+        "X": 192,
+        "Y": 128
+      },
+      {
+        "Segment": 1,
+        "Tile": 4,
+        "X": 64,
+        "Y": 160
+      },
+      {
+        "Segment": 2,
+        "Tile": 4,
+        "X": 128,
+        "Y": 192
+      },
+      {
+        "Segment": 3,
+        "Tile": 4,
+        "X": 0,
+        "Y": 192
+      }
+    ],
+
     "Vehicles.Quad": [
       {
         "Segment": 0,
@@ -311,5 +365,26 @@
         "Y": 184
       }
     ]
-  }
+  },
+
+  "ColourReplacements": [
+    {
+      "Search": {
+        "Tile": 3,
+        "X": 128,
+        "Y": 192
+      },
+      "Replace": {
+        "Tile": 4,
+        "X": 192,
+        "Y": 128
+      },
+      "ReplacementMap": {
+        "3": [
+          "192, 128, 64, 64",
+          "0, 192, 160, 64"
+        ]
+      }
+    }
+  ]
 }
