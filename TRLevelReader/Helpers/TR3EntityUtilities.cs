@@ -254,6 +254,21 @@ namespace TRLevelReader.Helpers
                 || (entity == TR3Entities.GrenadeLauncher_P);
         }
 
+        public static List<TR3Entities> GetWeaponPickups()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.Pistols_P,
+                TR3Entities.Shotgun_P,
+                TR3Entities.Deagle_P,
+                TR3Entities.Uzis_P,
+                TR3Entities.Harpoon_P,
+                TR3Entities.MP5_P,
+                TR3Entities.RocketLauncher_P,
+                TR3Entities.GrenadeLauncher_P
+            };
+        }
+
         public static bool IsAmmoPickup(TR3Entities entity)
         {
             return (entity == TR3Entities.PistolAmmo_P)
@@ -264,6 +279,29 @@ namespace TRLevelReader.Helpers
                 || (entity == TR3Entities.MP5Ammo_P)
                 || (entity == TR3Entities.Rockets_P)
                 || (entity == TR3Entities.Grenades_P);
+        }
+
+        public static TR3Entities GetWeaponAmmo(TR3Entities weapon)
+        {
+            switch (weapon)
+            {
+                case TR3Entities.Shotgun_P:
+                    return TR3Entities.ShotgunAmmo_P;
+                case TR3Entities.Deagle_P:
+                    return TR3Entities.DeagleAmmo_P;
+                case TR3Entities.Uzis_P:
+                    return TR3Entities.UziAmmo_P;
+                case TR3Entities.Harpoon_P:
+                    return TR3Entities.Harpoons_P;
+                case TR3Entities.MP5_P:
+                    return TR3Entities.MP5Ammo_P;
+                case TR3Entities.GrenadeLauncher_P:
+                    return TR3Entities.Grenades_P;
+                case TR3Entities.RocketLauncher_P:
+                    return TR3Entities.Rockets_P;
+                default:
+                    return TR3Entities.PistolAmmo_P;
+            }
         }
 
         public static bool IsCrystalPickup(TR3Entities entity)

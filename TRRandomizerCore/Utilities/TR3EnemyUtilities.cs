@@ -217,6 +217,56 @@ namespace TRRandomizerCore.Utilities
             }
         }
 
+        public static EnemyDifficulty GetEnemyDifficulty(List<TR2Entity> enemyEntities)
+        {
+            if (enemyEntities.Count == 0)
+            {
+                return EnemyDifficulty.VeryEasy;
+            }
+
+            int weight = 0;
+            foreach (TR2Entity enemyEntity in enemyEntities)
+            {
+                EnemyDifficulty enemyDifficulty = EnemyDifficulty.Medium;
+                foreach (EnemyDifficulty difficulty in _enemyDifficulties.Keys)
+                {
+                    if (_enemyDifficulties[difficulty].Contains((TR3Entities)enemyEntity.TypeID))
+                    {
+                        enemyDifficulty = difficulty;
+                        break;
+                    }
+                }
+                weight += (int)enemyDifficulty;
+            }
+
+            // What's the average?
+            double average = (double)weight / enemyEntities.Count;
+            weight = Convert.ToInt32(Math.Round(average, 0, MidpointRounding.AwayFromZero));
+
+            List<EnemyDifficulty> allDifficulties = new List<EnemyDifficulty>(Enum.GetValues(typeof(EnemyDifficulty)).Cast<EnemyDifficulty>());
+
+            if (weight > 0)
+            {
+                weight--;
+            }
+
+            if (weight >= allDifficulties.Count)
+            {
+                weight = allDifficulties.Count - 1;
+            }
+
+            return allDifficulties[weight];
+        }
+
+        public static uint GetStartingAmmo(TR3Entities weaponType)
+        {
+            if (_startingAmmoToGive.ContainsKey(weaponType))
+            {
+                return _startingAmmoToGive[weaponType];
+            }
+            return 0;
+        }
+
         // We (can) restrict some enemies to specific rooms in levels. Some may also need pathing like Willie.
         private static readonly Dictionary<string, Dictionary<TR3Entities, List<int>>> _restrictedEnemyZonesDefault;
         private static readonly Dictionary<string, Dictionary<TR3Entities, List<int>>> _restrictedEnemyZonesTechnical;
@@ -365,6 +415,48 @@ namespace TRRandomizerCore.Utilities
             TR3Entities.KillerWhale,
             TR3Entities.Raptor,
             TR3Entities.Rat
+        };
+
+        private static readonly Dictionary<EnemyDifficulty, List<TR3Entities>> _enemyDifficulties = new Dictionary<EnemyDifficulty, List<TR3Entities>>
+        {
+            [EnemyDifficulty.VeryEasy] = new List<TR3Entities>
+            {
+                TR3Entities.KillerWhale, TR3Entities.Winston, TR3Entities.WinstonInCamoSuit,
+                TR3Entities.Rat, TR3Entities.Compsognathus
+            },
+            [EnemyDifficulty.Easy] = new List<TR3Entities>
+            {
+                TR3Entities.Cobra, TR3Entities.Crow, TR3Entities.Vulture, TR3Entities.TinnosWasp,
+                TR3Entities.RXTechFlameLad, TR3Entities.Prisoner, TR3Entities.Monkey, TR3Entities.Mercenary
+            },
+            [EnemyDifficulty.Medium] = new List<TR3Entities>
+            {
+                TR3Entities.Crawler, TR3Entities.CrawlerMutantInCloset, TR3Entities.Croc, TR3Entities.DamGuard,
+                TR3Entities.DogAntarc, TR3Entities.Dog, TR3Entities.TribesmanAxe, TR3Entities.TribesmanDart,
+                TR3Entities.Tiger, TR3Entities.ScubaSteve, TR3Entities.RXRedBoi, TR3Entities.RXGunLad,
+                TR3Entities.Punk, TR3Entities.MPWithStick, TR3Entities.MPWithGun, TR3Entities.LondonMerc,
+                TR3Entities.LondonGuard, TR3Entities.LizardMan
+            },
+            [EnemyDifficulty.Hard] = new List<TR3Entities>
+            {
+                TR3Entities.BruteMutant, TR3Entities.TonyFirehands, TR3Entities.TinnosMonster, TR3Entities.Shiva,
+                TR3Entities.Raptor, TR3Entities.Puna, TR3Entities.SophiaLee
+            },
+            [EnemyDifficulty.VeryHard] = new List<TR3Entities>
+            {
+                TR3Entities.Tyrannosaur, TR3Entities.Willie
+            }
+        };
+
+        private static readonly Dictionary<TR3Entities, uint> _startingAmmoToGive = new Dictionary<TR3Entities, uint>()
+        {
+            [TR3Entities.Shotgun_P] = 8,
+            [TR3Entities.Deagle_P] = 4,
+            [TR3Entities.Uzis_P] = 6,
+            [TR3Entities.Harpoon_P] = 10,
+            [TR3Entities.MP5_P] = 4,
+            [TR3Entities.GrenadeLauncher_P] = 6,
+            [TR3Entities.RocketLauncher_P] = 6
         };
 
         static TR3EnemyUtilities()
