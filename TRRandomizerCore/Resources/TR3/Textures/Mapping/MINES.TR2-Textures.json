@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.RXForesight": {
+      "0": [
+        {
+          "RoomNumber": 45,
+          "RectangleIndices": [ 0 ],
+          "BackgroundIndex": 1672
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Enemies.Crawler": [
       {
