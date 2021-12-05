@@ -1,0 +1,95 @@
+﻿{
+  "All": [
+    {
+      "Comments": "This is a temporary stopgap until full environment randomization is performed. See #271.",
+      "EMType": 1000
+    },
+
+    {
+      "Comments": "Move the second enemy spawn trigger beside the ladder.",
+      "EMType": 67,
+      "BaseLocation": {
+        "X": 39424,
+        "Y": -1024,
+        "Z": 50688,
+        "Room": 93
+      },
+      "NewLocation": {
+        "X": 41472,
+        "Y": -768,
+        "Z": 50688,
+        "Room": 93
+      }
+    },
+
+    {
+      "Comments": "Convert one of the now unused AI entities into a button.",
+      "EMType": 45,
+      "EntityIndex": 131,
+      "NewEntityType": 128
+    },
+
+    {
+      "Comments": "Move the button so Lara can reach it.",
+      "EMType": 44,
+      "EntityIndex": 131,
+      "TargetLocation": {
+        "X": 39424,
+        "Y": -1024,
+        "Z": 50688,
+        "Room": 93,
+        "Angle": 0
+      }
+    },
+
+    {
+      "Comments": "Make a trigger for the button.",
+      "EMType": 61,
+      "TriggerEntry": {
+        "Setup": {
+          "Value": 4
+        },
+        "TrigSetup": {
+          "Value": 15872
+        },
+        "TrigType": 2,
+        "SwitchOrKeyRef": 131,
+        "TrigActionList": [
+          {
+            "TrigAction": 0,
+            "Parameter": 130
+          }
+        ]
+      },
+      "Locations": [
+        {
+          "X": 39424,
+          "Y": -1024,
+          "Z": 50688,
+          "Room": 93
+        }
+      ]
+    },
+
+    {
+      "Comments": "Remove the old heavy trigger.",
+      "EMType": 62,
+      "Locations": [
+        {
+          "X": 38400,
+          "Y": -2304,
+          "Z": 50688,
+          "Room": 87
+        }
+      ]
+    },
+
+    {
+      "Comments": "Remove the hand scanner static mesh.",
+      "EMType": 25,
+      "ClearFromRooms": {
+        "39": [ 87 ]
+      }
+    }
+  ]
+}
