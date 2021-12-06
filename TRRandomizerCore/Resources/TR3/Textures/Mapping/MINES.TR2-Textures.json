@@ -6,6 +6,11 @@
           "RoomNumber": 45,
           "RectangleIndices": [ 0 ],
           "BackgroundIndex": 1672
+        },
+        {
+          "RoomNumber": 57,
+          "RectangleIndices": [ 0 ],
+          "BackgroundIndex": 1672
         }
       ]
     }

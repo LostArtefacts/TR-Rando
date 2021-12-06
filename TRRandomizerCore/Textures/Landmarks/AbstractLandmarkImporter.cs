@@ -44,8 +44,18 @@ namespace TRRandomizerCore.Textures
                     List<Rectangle> segments = source.VariantMap[source.Variants[0]];
                     foreach (int segmentIndex in mapping.LandmarkMapping[source].Keys)
                     {
+                        Dictionary<int, LandmarkTextureTarget> backgroundCache = new Dictionary<int, LandmarkTextureTarget>();
+
                         foreach (LandmarkTextureTarget target in mapping.LandmarkMapping[source][segmentIndex])
                         {
+                            if (target.BackgroundIndex != -1 && backgroundCache.ContainsKey(target.BackgroundIndex))
+                            {
+                                // The same graphic has already been added, so just copy the mapping.
+                                // This is most likely for flipped rooms.
+                                target.MappedTextureIndex = backgroundCache[target.BackgroundIndex].MappedTextureIndex;
+                                continue;
+                            }
+
                             IndexedTRObjectTexture texture = CreateTexture(segments[segmentIndex], isLevelMirrored);
                             target.MappedTextureIndex = textures.Count;
                             textures.Add(texture.Texture);
@@ -62,6 +72,8 @@ namespace TRRandomizerCore.Textures
                                 BitmapGraphics clip = new BitmapGraphics(tile.Extract(indexedTexture.Bounds));
                                 clip.Overlay(source.Bitmap);
                                 image = clip.Bitmap;
+
+                                backgroundCache[target.BackgroundIndex] = target;
                             }
                             else
                             {
