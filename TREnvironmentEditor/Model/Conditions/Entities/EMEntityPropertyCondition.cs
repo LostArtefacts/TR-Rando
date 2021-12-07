@@ -1,4 +1,5 @@
-﻿using TRLevelReader.Model;
+﻿using System.Collections.Generic;
+using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Conditions
 {
@@ -6,6 +7,7 @@ namespace TREnvironmentEditor.Model.Conditions
     {
         public int EntityIndex { get; set; }
         public short? EntityType { get; set; }
+        public List<short> EntityTypes { get; set; } // i.e. is the entity one of these types?
         public bool? Invisible { get; set; }
         public bool? ClearBody { get; set; }
         public short? Intensity1 { get; set; }
@@ -28,6 +30,10 @@ namespace TREnvironmentEditor.Model.Conditions
             if (EntityType.HasValue)
             {
                 result &= entity.TypeID == EntityType.Value;
+            }
+            if (EntityTypes != null)
+            {
+                result &= EntityTypes.Contains(entity.TypeID);
             }
             if (Invisible.HasValue)
             {

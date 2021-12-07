@@ -3,7 +3,7 @@ using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model
 {
-    public class EMEditorGroupedSet
+    public class EMEditorGroupedSet : ITextureModifier
     {
         public EMEditorSet Leader { get; set; }
         public List<EMEditorSet> Followers { get; set; }
@@ -24,6 +24,12 @@ namespace TREnvironmentEditor.Model
                 Leader.ApplyToLevel(level, excludedTypes);
                 follower.ApplyToLevel(level, excludedTypes);
             }
+        }
+
+        public void RemapTextures(Dictionary<ushort, ushort> indexMap)
+        {
+            Leader.RemapTextures(indexMap);
+            Followers.ForEach(s => s.RemapTextures(indexMap));
         }
     }
 }

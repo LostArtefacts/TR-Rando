@@ -11,6 +11,7 @@ namespace TREnvironmentEditor
         public static readonly EMConverter Converter = new EMConverter();
 
         public EMEditorSet All { get; set; }
+        public List<EMConditionalSingleEditorSet> ConditionalAll { get; set; }
         public EMEditorSet NonPurist { get; set; }
         public List<EMEditorSet> Any { get; set; }
         public List<List<EMEditorSet>> AllWithin { get; set; }
@@ -22,6 +23,7 @@ namespace TREnvironmentEditor
         public EMEditorMapping()
         {
             All = new EMEditorSet();
+            ConditionalAll = new List<EMConditionalSingleEditorSet>();
             NonPurist = new EMEditorSet();
             Any = new List<EMEditorSet>();
             AllWithin = new List<List<EMEditorSet>>();
@@ -51,6 +53,10 @@ namespace TREnvironmentEditor
             {
                 All.RemapTextures(AlternativeTextures);
             }
+            if (ConditionalAll != null)
+            {
+                ConditionalAll.ForEach(s => s.RemapTextures(AlternativeTextures));
+            }
             if (NonPurist != null)
             {
                 NonPurist.RemapTextures(AlternativeTextures);
@@ -65,19 +71,11 @@ namespace TREnvironmentEditor
             }
             if (ConditionalAllWithin != null)
             {
-                foreach (EMConditionalEditorSet condSet in ConditionalAllWithin)
-                {
-                    condSet.OnTrue.ForEach(s => s.RemapTextures(AlternativeTextures));
-                    condSet.OnFalse.ForEach(s => s.RemapTextures(AlternativeTextures));
-                }
+                ConditionalAllWithin.ForEach(s => s.RemapTextures(AlternativeTextures));
             }
             if (OneOf != null)
             {
-                foreach (EMEditorGroupedSet group in OneOf)
-                {
-                    group.Leader.RemapTextures(AlternativeTextures);
-                    group.Followers.ForEach(s => s.RemapTextures(AlternativeTextures));
-                }
+                OneOf.ForEach(s => s.RemapTextures(AlternativeTextures));
             }
             if (Mirrored != null)
             {
