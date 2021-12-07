@@ -101,7 +101,12 @@ namespace TRModelTransporter.Handlers
                     }
                     else
                     {
-                        _level.SpriteSequences[blastSequence].Offset = sequences[grenadeSequence].Offset;
+                        // #275 Rather than just pointing the blast sequence offset to the grenade sequence offset,
+                        // retain the original sprite texture objects but just remap where they point in the tiles.
+                        for (int i = 0; i < sequences[grenadeSequence].NegativeLength * -1; i++)
+                        {
+                            _level.SpriteTextures[_level.SpriteSequences[blastSequence].Offset + i] = _level.SpriteTextures[_level.SpriteSequences[grenadeSequence].Offset + i];
+                        }
                     }
                 }
             }
