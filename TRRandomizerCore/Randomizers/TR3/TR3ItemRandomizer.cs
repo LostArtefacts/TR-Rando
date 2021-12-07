@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TREnvironmentEditor.Helpers;
+using TREnvironmentEditor.Model.Types;
 using TRFDControl;
 using TRFDControl.Utilities;
 using TRGE.Core;
@@ -237,17 +239,13 @@ namespace TRRandomizerCore.Randomizers
         {
             if (level.Name != TR3LevelNames.ASSAULT)
             {
-                FDControl floorData = new FDControl();
-                floorData.ParseFromLevel(level.Data);
-
                 //Get all locations that have a KeyItemGroupID - e.g. intended for key items
                 List<Location> levelLocations = _locations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
 
                 foreach (TR2Entity ent in level.Data.Entities)
                 {
                     //For moving floordata
-                    TRRoomSector CurrentFDSector = new TRRoomSector();
-                    TRRoomSector NewFDSector = new TRRoomSector();
+                    EMLocation currentFDLocation = null;
 
                     //Calculate its alias
                     TR3Entities AliasedKeyItemID = (TR3Entities)(ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name));
@@ -260,7 +258,13 @@ namespace TRRandomizerCore.Randomizers
                         case TR3Entities.BishopsKey:
                         case TR3Entities.TuckermansKey:
                         case TR3Entities.GeneratorKey:
-                            CurrentFDSector = FDUtilities.GetRoomSector(ent.X, ent.Y, ent.Z, ent.Room, level.Data, floorData);
+                            currentFDLocation = new EMLocation
+                            {
+                                X = ent.X,
+                                Y = ent.Y,
+                                Z = ent.Z,
+                                Room = ent.Room
+                            };
                             break;
                         default:
                             break;
@@ -299,16 +303,23 @@ namespace TRRandomizerCore.Randomizers
                         case TR3Entities.BishopsKey:
                         case TR3Entities.TuckermansKey:
                         case TR3Entities.GeneratorKey:
-                            NewFDSector = FDUtilities.GetRoomSector(ent.X, ent.Y, ent.Z, ent.Room, level.Data, floorData);
-                            NewFDSector.FDIndex = CurrentFDSector.FDIndex;
-                            CurrentFDSector.FDIndex = 0;
+                            // Move the triggers only, so to retain other FD such as floor/ceiling slants
+                            new EMMoveTriggerFunction
+                            {
+                                BaseLocation = currentFDLocation,
+                                NewLocation = new EMLocation
+                                {
+                                    X = ent.X,
+                                    Y = ent.Y,
+                                    Z = ent.Z,
+                                    Room = ent.Room
+                                }
+                            }.ApplyToLevel(level.Data);
                             break;
                         default:
                             break;
                     }
                 }
-
-                floorData.WriteToLevel(level.Data);
             }
         }
 
