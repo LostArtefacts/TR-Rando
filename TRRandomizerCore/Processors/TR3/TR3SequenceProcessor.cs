@@ -127,6 +127,9 @@ namespace TRRandomizerCore.Processors
                 AmendSouthPacificSpikes(level);
             }
 
+            // #277 Make sure levels have artefact menu models because these vary based on original sequencing.
+            ImportArtefactMenuModels(level);
+
             // If this level is the first in an adventure, update the globe string to match
             if (_adventureStringSequences.ContainsKey((TR3Adventure)level.Sequence))
             {
@@ -201,6 +204,32 @@ namespace TRRandomizerCore.Processors
             });
 
             floorData.WriteToLevel(level.Data);
+        }
+
+        private void ImportArtefactMenuModels(TR3CombinedLevel level)
+        {
+            List<TRModel> models = level.Data.Models.ToList();
+            List<TR3Entities> imports = new List<TR3Entities>();
+            foreach (TR3Entities artefactMenuModel in TR3EntityUtilities.GetArtefactMenuModels())
+            {
+                if (models.Find(m => m.ID == (uint)artefactMenuModel) == null)
+                {
+                    imports.Add(artefactMenuModel);
+                }
+            }
+
+            if (imports.Count > 0)
+            {
+                TR3ModelImporter importer = new TR3ModelImporter
+                {
+                    Level = level.Data,
+                    LevelName = level.Name,
+                    EntitiesToImport = imports,
+                    DataFolder = GetResourcePath(@"TR3\Models")
+                };
+
+                importer.Import();
+            }
         }
 
         private void AmendWillardBoss(TR3CombinedLevel level)

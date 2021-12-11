@@ -913,7 +913,20 @@ namespace TRRandomizerCore.Randomizers
                             TR3Entities puzzleMenuType = _artefactReplacements[puzzlePickupType];
 
                             models.Find(m => m.ID == (uint)artefactPickupType).ID = (uint)puzzlePickupType;
-                            models.Find(m => m.ID == (uint)artefactMenuType).ID = (uint)puzzleMenuType;
+
+                            // #277 Most levels (beyond India) have the artefacts as menu models so we need
+                            // to duplicate the models instead of replacing them, otherwise the carried-over
+                            // artefacts from previous levels are invisible.
+                            TRModel menuModel = models.Find(m => m.ID == (uint)artefactMenuType);
+                            models.Add(new TRModel
+                            {
+                                Animation = menuModel.Animation,
+                                FrameOffset = menuModel.FrameOffset,
+                                ID = (uint)puzzleMenuType,
+                                MeshTree = menuModel.MeshTree,
+                                NumMeshes = menuModel.NumMeshes,
+                                StartingMesh = menuModel.StartingMesh
+                            });
 
                             // Remove this puzzle type from the available pool
                             allocation.AvailablePickupModels.RemoveAt(0);
@@ -928,6 +941,9 @@ namespace TRRandomizerCore.Randomizers
                             monitor.EntityMap[artefactPickupType] = puzzlePickupType;
                             monitor.EntityMap[artefactMenuType] = puzzleMenuType;
                         }
+
+                        level.Data.Models = models.ToArray();
+                        level.Data.NumModels = (uint)models.Count;
                     }
 
                     if (!_outer.TriggerProgress())
