@@ -73,6 +73,16 @@ namespace TRModelTransporter.Data
             return _permittedAliasDuplicates.Contains(entity);
         }
 
+        public bool IsOverridePermitted(TREntities entity)
+        {
+            return false;
+        }
+
+        public IEnumerable<TREntities> GetUnsafeModelReplacements()
+        {
+            return _unsafeModelReplacements;
+        }
+
         public bool IsNonGraphicsDependency(TREntities entity)
         {
             return _nonGraphicsDependencies.Contains(entity);
@@ -121,6 +131,10 @@ namespace TRModelTransporter.Data
         };
 
         private static readonly List<TREntities> _permittedAliasDuplicates = new List<TREntities>
+        {
+        };
+
+        private static readonly List<TREntities> _unsafeModelReplacements = new List<TREntities>
         {
         };
 

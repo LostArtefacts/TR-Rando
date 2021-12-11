@@ -74,6 +74,16 @@ namespace TRModelTransporter.Data
             return _permittedAliasDuplicates.Contains(entity);
         }
 
+        public bool IsOverridePermitted(TR3Entities entity)
+        {
+            return _permittedOverrides.Contains(entity);
+        }
+
+        public IEnumerable<TR3Entities> GetUnsafeModelReplacements()
+        {
+            return _unsafeModelReplacements;
+        }
+
         public bool IsNonGraphicsDependency(TR3Entities entity)
         {
             return _nonGraphicsDependencies.Contains(entity);
@@ -212,6 +222,16 @@ namespace TRModelTransporter.Data
         private static readonly List<TR3Entities> _permittedAliasDuplicates = new List<TR3Entities>
         {
             TR3Entities.LaraVehicleAnimation_H
+        };
+
+        private static readonly List<TR3Entities> _permittedOverrides = new List<TR3Entities>
+        {
+            TR3Entities.Infada_M_H, TR3Entities.EyeOfIsis_M_H, TR3Entities.OraDagger_M_H, TR3Entities.Element115_M_H
+        };
+
+        private static readonly List<TR3Entities> _unsafeModelReplacements = new List<TR3Entities>
+        {
+             TR3Entities.Lara, TR3Entities.LaraSkin_H, TR3Entities.LaraPistolAnimation_H, TR3Entities.LaraUziAnimation_H, TR3Entities.LaraDeagleAnimation_H
         };
 
         private static readonly List<TR3Entities> _nonGraphicsDependencies = new List<TR3Entities>

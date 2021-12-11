@@ -174,13 +174,17 @@ namespace TRModelTransporter.Transport
         {
             if (modelEntities.Contains(nextEntity))
             {
-                // If the model already in the list is a dependency only, but the new one to add isn't, switch it
-                D definition = standardModelDefinitions.Find(m => Equals(m.Alias, nextEntity));
-                if (definition != null && definition.IsDependencyOnly && !isDependency)
+                // Are we allowed to replace it?
+                if (!Data.IsOverridePermitted(nextEntity))
                 {
-                    definition.IsDependencyOnly = false;
+                    // If the model already in the list is a dependency only, but the new one to add isn't, switch it
+                    D definition = standardModelDefinitions.Find(m => Equals(m.Alias, nextEntity));
+                    if (definition != null && definition.IsDependencyOnly && !isDependency)
+                    {
+                        definition.IsDependencyOnly = false;
+                    }
+                    return;
                 }
-                return;
             }
 
             D nextDefinition = LoadDefinition(nextEntity);
