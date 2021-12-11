@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
@@ -40,6 +41,9 @@ namespace TRRandomizerView.Model
         private uint _nightModeDarkness;
         private uint _nightModeDarknessMaximum;
         private bool _nightModeAssaultCourse;
+        private Color _vfxFilterColor;
+        private bool _vfxRandomize;
+        private Color[] _vfxAvailColors;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
 
@@ -329,6 +333,36 @@ namespace TRRandomizerView.Model
             private set
             {
                 _nightModeDarknessMaximum = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public Color VfxFilterColor
+        {
+            get => _vfxFilterColor;
+            set
+            {
+                _vfxFilterColor = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool VfxRandomize
+        {
+            get => _vfxRandomize;
+            set
+            {
+                _vfxRandomize = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public Color[] VfxAvailColors
+        {
+            get => _vfxAvailColors;
+            set
+            {
+                _vfxAvailColors = value;
                 FirePropertyChanged();
             }
         }
@@ -1291,6 +1325,9 @@ namespace TRRandomizerView.Model
             NightModeAssaultCourse = _controller.NightModeAssaultCourse;
             NightModeDarkness = _controller.NightModeDarkness;
             NightModeDarknessMaximum = _controller.NightModeDarknessRange;
+            VfxFilterColor = _controller.VfxFilterColor;
+            VfxRandomize = _controller.RandomizeVfx;
+            VfxAvailColors = _controller.VfxAvailableColorChoices;
 
             RandomizeAudioTracks = _controller.RandomizeAudioTracks;
             AudioTracksSeed = _controller.AudioTracksSeed;
@@ -1527,6 +1564,8 @@ namespace TRRandomizerView.Model
             _controller.NightModeCount = NightModeCount;
             _controller.NightModeAssaultCourse = NightModeAssaultCourse;
             _controller.NightModeDarkness = NightModeDarkness;
+            _controller.VfxFilterColor = VfxFilterColor;
+            _controller.RandomizeVfx = VfxRandomize;
 
             _controller.RandomizeAudioTracks = RandomizeAudioTracks;
             _controller.AudioTracksSeed = AudioTracksSeed;

@@ -2,6 +2,7 @@
 using TRRandomizerCore.Globalisation;
 using TRRandomizerCore.Helpers;
 using TRGE.Core;
+using System.Drawing;
 
 namespace TRRandomizerCore.Editors
 {
@@ -80,6 +81,10 @@ namespace TRRandomizerCore.Editors
 
         public bool DeduplicateTextures => RandomizeTextures || RandomizeNightMode || (RandomizeEnemies && CrossLevelEnemies) || RandomizeOutfits;// || RandomizeEnvironment; // Not needed until trap model import takes place
         public bool ReassignPuzzleNames => RandomizeEnemies && CrossLevelEnemies;
+
+        public bool RandomizeVfx { get; set; }
+
+        public Color VfxFilterColor { get; set; }
 
         public void ApplyConfig(Config config)
         {
@@ -160,6 +165,9 @@ namespace TRRandomizerCore.Editors
 
             RandomizeSecretRewardsPhysical = config.GetBool(nameof(RandomizeSecretRewardsPhysical));
             SecretRewardsPhysicalSeed = config.GetInt(nameof(SecretRewardsPhysicalSeed));
+            
+            RandomizeVfx = config.GetBool(nameof(RandomizeVfx));
+            VfxFilterColor = Color.FromArgb(config.GetInt(nameof(VfxFilterColor)));
         }
 
         public void StoreConfig(Config config)
@@ -238,6 +246,9 @@ namespace TRRandomizerCore.Editors
 
             config[nameof(RandomizeSecretRewardsPhysical)] = RandomizeSecretRewardsPhysical;
             config[nameof(SecretRewardsPhysicalSeed)] = SecretRewardsPhysicalSeed;
+
+            config[nameof(RandomizeVfx)] = RandomizeVfx;
+            config[nameof(VfxFilterColor)] = VfxFilterColor.ToArgb();
         }
 
         public int GetSaveTarget(int numLevels)

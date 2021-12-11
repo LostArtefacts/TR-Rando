@@ -439,9 +439,13 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
@@ -474,10 +478,39 @@
                         </CheckBox>
                     </Border>
 
+                    <Border Grid.Row="2">
+                        <CheckBox IsChecked="{Binding ControllerProxy.VfxRandomize, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Apply Custom Color Override" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="0"
+                            Grid.Row="3">
+                        <ComboBox ItemsSource="{Binding ControllerProxy.VfxAvailColors}"
+                                  SelectedItem="{Binding ControllerProxy.VfxFilterColor, Mode=TwoWay}"
+                                  DisplayMemberPath="Name"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Center"/>
+                    </Border>
+
                     <Border Grid.Column="1"
                             Grid.Row="1">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="Adjust the assault course level lighting in addition to or separately from above."/>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="2">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="[TR3 Only] Instead of Night Mode randomizer, Vertex colors are blended by your chosen color."/>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="3">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="[TR3 Only] If color override is enabled, the selected color will be blended."/>
                     </Border>
                 </Grid>
             </StackPanel>

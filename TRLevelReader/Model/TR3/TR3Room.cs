@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -151,6 +152,34 @@ namespace TRLevelReader.Model
                 vert.Colour = (ushort)((red << 10) | (green << 5) | (blue));
             }
         }
+
+        #region Vertex Effects & Filters
+        public void SetColourFilter(Color col)
+        {
+            foreach (TR3RoomVertex vert in RoomData.Vertices)
+            {
+                byte curRed = (byte)((vert.Colour & 0x7C00) >> 10);
+                byte curGreen = (byte)((vert.Colour & 0x03E0) >> 5);
+                byte curBlue = (byte)(vert.Colour & 0x001F);
+
+                byte newRed = ConvertColorChannelToRGB555(col.R);
+                byte newGreen = ConvertColorChannelToRGB555(col.G);
+                byte newBlue = ConvertColorChannelToRGB555(col.B);
+
+                vert.Colour = (ushort)((Blend(curRed, newRed) << 10) | (Blend(curGreen, newGreen) << 5) | (Blend(curBlue, newBlue)));
+            }
+        }
+
+        private byte ConvertColorChannelToRGB555(byte col)
+        {
+            return (byte)(((col - byte.MinValue) * (31 - 0)) / (byte.MaxValue - byte.MinValue) + 0);
+        }
+
+        private byte Blend(byte curChannel, byte newChannel)
+        {
+            return Math.Min((byte)((newChannel * 0.3) + curChannel * (1 - 0.3)), (byte)31);
+        }
+        #endregion
 
         public byte[] Serialize()
         {
