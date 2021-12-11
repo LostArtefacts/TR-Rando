@@ -191,7 +191,7 @@ namespace TRRandomizerCore.Randomizers
                     // around randomly for variety.
                     if (ent.Angle == -1)
                     {
-                        ent.Angle = (short)(_generator.Next(0, 8) / _ROTATION);
+                        ent.Angle = (short)(_generator.Next(0, 8) * _ROTATION);
                     }
                 }
             }
