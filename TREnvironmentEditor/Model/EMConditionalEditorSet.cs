@@ -18,5 +18,17 @@ namespace TREnvironmentEditor.Model
         {
             return Condition.GetResult(level) ? OnTrue : OnFalse;
         }
+
+        public void RemapTextures(Dictionary<ushort, ushort> indexMap)
+        {
+            if (OnTrue != null)
+            {
+                OnTrue.ForEach( s => s.RemapTextures(indexMap));
+            }
+            if (OnFalse != null)
+            {
+                OnFalse.ForEach(s => s.RemapTextures(indexMap));
+            }
+        }
     }
 }

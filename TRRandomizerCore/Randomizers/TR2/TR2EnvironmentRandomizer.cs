@@ -88,6 +88,13 @@ namespace TRRandomizerCore.Randomizers
             // These generally fix OG issues such as problems with box overlaps and
             // textures.
             mapping.All.ApplyToLevel(level.Data, emptyExclusions);
+            
+            // Similar to All, but these mods will have conditions configured so may
+            // or may not apply.
+            foreach (EMConditionalSingleEditorSet mod in mapping.ConditionalAll)
+            {
+                mod.ApplyToLevel(level.Data, emptyExclusions);
+            }
 
             if (!EnforcedModeOnly || !Settings.PuristMode)
             {

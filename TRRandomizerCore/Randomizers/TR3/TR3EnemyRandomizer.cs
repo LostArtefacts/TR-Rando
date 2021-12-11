@@ -13,6 +13,7 @@ using TRModelTransporter.Transport;
 using System.Diagnostics;
 using TRRandomizerCore.Textures;
 using Newtonsoft.Json;
+using TREnvironmentEditor;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -429,6 +430,16 @@ namespace TRRandomizerCore.Randomizers
                     while (newEntityType == TR3Entities.RXTechFlameLad)
                     {
                         newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
+                    }
+                }
+                else if (level.Is(TR3LevelNames.HSC) && currentEntity.Room == 87 && newEntityType != TR3Entities.Prisoner)
+                {
+                    // #271 The prisoner is needed here to activate the heavy trigger for the trapdoor. If we still have
+                    // prisoners in the pool, ensure one is chosen. If this isn't the case, environment rando will provide
+                    // a workaround.
+                    if (enemies.Available.Contains(TR3Entities.Prisoner))
+                    {
+                        newEntityType = TR3Entities.Prisoner;
                     }
                 }
                 

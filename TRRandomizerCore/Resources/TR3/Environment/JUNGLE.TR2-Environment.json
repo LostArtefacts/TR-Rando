@@ -1,0 +1,24 @@
+{
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If enemy #8 is not a monkey, crow, vulture, wasp, rat or compsognathus, move it out of the crawlspace.",
+        "ConditionType": 0,
+        "EntityIndex": 8,
+        "EntityTypes": [ 71, 27, 29, 44, 23, 34 ]
+      },
+      "OnFalse": [
+        {
+          "EMType": 44,
+          "EntityIndex": 8,
+          "TargetLocation": {
+            "X": 93696,
+            "Y": 20224,
+            "Z": 60928,
+            "Room": 75
+          }
+        }
+      ]
+    }
+  ]
+}
