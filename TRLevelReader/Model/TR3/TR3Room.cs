@@ -177,7 +177,7 @@ namespace TRLevelReader.Model
 
         private byte Blend(byte curChannel, byte newChannel)
         {
-            return Math.Min((byte)((newChannel * 0.3) + curChannel * (1 - 0.3)), (byte)31);
+            return Math.Min((byte)((newChannel * 0.1) + curChannel * (1 - 0.1)), (byte)31);
         }
         #endregion
 
