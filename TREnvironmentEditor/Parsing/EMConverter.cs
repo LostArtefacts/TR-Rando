@@ -50,6 +50,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMDrainFunction>(jo.ToString(), _resolver);
                 case EMType.Ceiling:
                     return JsonConvert.DeserializeObject<EMCeilingFunction>(jo.ToString(), _resolver);
+                case EMType.Click:
+                    return JsonConvert.DeserializeObject<EMClickFunction>(jo.ToString(), _resolver);
 
                 // Texture types
                 case EMType.Reface:
