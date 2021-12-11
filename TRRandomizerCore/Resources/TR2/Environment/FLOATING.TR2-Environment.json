@@ -1,6 +1,50 @@
 {
   "All": [],
 
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If flamethrowers are in room 29 after pulling the lever, move them so Lara has a chance to fight them.",
+        "ConditionType": 0,
+        "EntityIndex": 34,
+        "EntityType": 34
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 34,
+          "TargetLocation": {
+            "X": 42496,
+            "Y": -2688,
+            "Z": 56832,
+            "Room": 101,
+            "Angle": 16384
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "ConditionType": 0,
+        "EntityIndex": 35,
+        "EntityType": 34
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 35,
+          "TargetLocation": {
+            "X": 37376,
+            "Y": -2688,
+            "Z": 57856,
+            "Room": 101,
+            "Angle": 16384
+          }
+        }
+      ]
+    }
+  ],
+
   "Any": [
     [
       {
