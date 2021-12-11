@@ -23,6 +23,7 @@ namespace TRRandomizerCore.Randomizers
         private Dictionary<string, List<Location>> _pistolLocations;
 
         internal TR3TextureMonitorBroker TextureMonitor { get; set; }
+        public ItemFactory ItemFactory { get; set; }
 
         public override void Randomize(int seed)
         {
@@ -311,7 +312,7 @@ namespace TRRandomizerCore.Randomizers
 
                         // Some enemies need pathing like Willard but we have to honour the entity limit
                         List<Location> paths = TR3EnemyUtilities.GetAIPathing(level.Name, entity, targetEntity.Room);
-                        if (paths.Count + levelEntities.Count <= 256)
+                        if (ItemFactory.CanCreateItems(level.Name, levelEntities, paths.Count))
                         {
                             targetEntity.TypeID = (short)TR3EntityUtilities.TranslateEntityAlias(entity);
 
@@ -324,15 +325,8 @@ namespace TRRandomizerCore.Randomizers
                             // Add the pathing if necessary
                             foreach (Location path in paths)
                             {
-                                newEntities.Add(new TR2Entity
-                                {
-                                    TypeID = (short)TR3Entities.AIPath_N,
-                                    X = path.X,
-                                    Y = path.Y,
-                                    Z = path.Z,
-                                    Room = (short)path.Room,
-                                    Angle = path.Angle
-                                });
+                                TR2Entity pathItem = ItemFactory.CreateItem(level.Name, levelEntities, path);
+                                pathItem.TypeID = (short)TR3Entities.AIPath_N;
                             }
                         }
                         else
@@ -344,6 +338,10 @@ namespace TRRandomizerCore.Randomizers
                     // Remove this entity type from the available rando pool
                     enemies.Available.Remove(entity);
                 }
+
+                // Ensure any added path entities are written back
+                level.Data.Entities = levelEntities.ToArray();
+                level.Data.NumEntities = (uint)levelEntities.Count;
             }
 
             foreach (TR2Entity currentEntity in enemyEntities)
@@ -448,14 +446,6 @@ namespace TRRandomizerCore.Randomizers
 
                 // #146 Ensure OneShot triggers are set for this enemy if needed
                 TR3EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
-            }
-
-            // Did we add any new entities?
-            if (newEntities.Count > 0)
-            {
-                levelEntities.AddRange(newEntities);
-                level.Data.Entities = levelEntities.ToArray();
-                level.Data.NumEntities = (uint)levelEntities.Count;
             }
 
             // Add extra ammo based on this level's difficulty

@@ -2,6 +2,7 @@
 using System.Linq;
 using TRGE.Coord;
 using TRGE.Core;
+using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;
 using TRRandomizerCore.Textures;
@@ -110,7 +111,11 @@ namespace TRRandomizerCore.Editors
                 scriptEditor.SaveScript();
             }
 
-            using (TR3TextureMonitorBroker textureMonitor = new TR3TextureMonitorBroker())
+            // Shared tracker objects between randomizers
+            ItemFactory itemFactory = new ItemFactory(@"Resources\TR3\Items\repurposable_items.json");
+            TR3TextureMonitorBroker textureMonitor = new TR3TextureMonitorBroker();
+
+            using (textureMonitor)
             {
                 if (!monitor.IsCancelled && (Settings.RandomizeGameStrings || Settings.ReassignPuzzleNames))
                 {
@@ -135,7 +140,8 @@ namespace TRRandomizerCore.Editors
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         GlobeDisplay = Settings.GlobeDisplay,
-                        TextureMonitor = textureMonitor
+                        TextureMonitor = textureMonitor,
+                        ItemFactory = itemFactory
                     }.Run();
                 }
 
@@ -149,7 +155,8 @@ namespace TRRandomizerCore.Editors
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
-                        TextureMonitor = textureMonitor
+                        TextureMonitor = textureMonitor,
+                        ItemFactory = itemFactory
                     }.Randomize(Settings.SecretSeed);
                 }
 
@@ -164,7 +171,8 @@ namespace TRRandomizerCore.Editors
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
-                        Settings = Settings
+                        Settings = Settings,
+                        ItemFactory = itemFactory
                     }.Randomize(Settings.ItemSeed);
                 }
 
@@ -178,7 +186,8 @@ namespace TRRandomizerCore.Editors
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
-                        TextureMonitor = textureMonitor
+                        TextureMonitor = textureMonitor,
+                        ItemFactory = itemFactory
                     }.Randomize(Settings.EnemySeed);
                 }
 

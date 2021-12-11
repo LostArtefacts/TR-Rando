@@ -1,0 +1,81 @@
+{
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If masonic Animating4 items have been transformed, make the space they used to occupy reachable.",
+        "ConditionType": 0,
+        "EntityIndex": 2,
+        "EntityType": 352
+      },
+      "OnFalse": [
+        {
+          "EMType": 5,
+          "FloorClicks": 2,
+          "Location": {
+            "X": 47616,
+            "Y": 0,
+            "Z": 19968,
+            "Room": 1
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "ConditionType": 0,
+        "EntityIndex": 14,
+        "EntityType": 352
+      },
+      "OnFalse": [
+        {
+          "EMType": 5,
+          "FloorClicks": 2,
+          "Location": {
+            "X": 47616,
+            "Y": 0,
+            "Z": 25088,
+            "Room": 1
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "ConditionType": 0,
+        "EntityIndex": 15,
+        "EntityType": 352
+      },
+      "OnFalse": [
+        {
+          "EMType": 5,
+          "FloorClicks": 2,
+          "Location": {
+            "X": 49664,
+            "Y": 0,
+            "Z": 19968,
+            "Room": 1
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "ConditionType": 0,
+        "EntityIndex": 16,
+        "EntityType": 352
+      },
+      "OnFalse": [
+        {
+          "EMType": 5,
+          "FloorClicks": 2,
+          "Location": {
+            "X": 51712,
+            "Y": 0,
+            "Z": 19968,
+            "Room": 1
+          }
+        }
+      ]
+    }
+  ]
+}

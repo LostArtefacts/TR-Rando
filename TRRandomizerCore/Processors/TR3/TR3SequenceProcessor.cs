@@ -21,7 +21,6 @@ namespace TRRandomizerCore.Processors
 {
     public class TR3SequenceProcessor : TR3LevelProcessor
     {
-        private static readonly int _entityLimit = 256;
         private static readonly int _spikeHeightChange = -768;
 
         private static readonly Dictionary<TR3Entities, TR3Entities> _artefactAssignment = new Dictionary<TR3Entities, TR3Entities>
@@ -51,6 +50,7 @@ namespace TRRandomizerCore.Processors
 
         public GlobeDisplayOption GlobeDisplay { get; set; }
         public TR3TextureMonitorBroker TextureMonitor { get; set; }
+        public ItemFactory ItemFactory { get; set; }
 
         public void Run()
         {
@@ -164,23 +164,13 @@ namespace TRRandomizerCore.Processors
             List<TR2Entity> entities = level.Data.Entities.ToList();
             foreach (Location location in _upvLocations[level.Name])
             {
-                if (entities.Count == _entityLimit)
+                TR2Entity entity = ItemFactory.CreateItem(level.Name, entities, location);
+                if (entity == null)
                 {
                     break;
                 }
 
-                entities.Add(new TR2Entity
-                {
-                    TypeID = (short)TR3Entities.UPV,
-                    Room = (short)location.Room,
-                    X = location.X,
-                    Y = location.Y,
-                    Z = location.Z,
-                    Angle = location.Angle,
-                    Flags = 0,
-                    Intensity1 = -1,
-                    Intensity2 = -1
-                });
+                entity.TypeID = (short)TR3Entities.UPV;
             }
 
             level.Data.Entities = entities.ToArray();
