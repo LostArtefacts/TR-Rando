@@ -61,6 +61,16 @@ namespace TRModelTransporter.Data
         bool IsAliasDuplicatePermitted(E entity);
 
         /// <summary>
+        /// Similar to alias duplicates, but where we want to replace a non-aliased model with another.
+        /// </summary>
+        bool IsOverridePermitted(E entity);
+
+        /// <summary>
+        /// Models that cannot be replaced in the Model array and instead should be remapped to imported models.
+        /// </summary>
+        IEnumerable<E> GetUnsafeModelReplacements();
+
+        /// <summary>
         /// Determine if the given type's graphics should be ignored on import.
         /// </summary>
         bool IsNonGraphicsDependency(E entity);

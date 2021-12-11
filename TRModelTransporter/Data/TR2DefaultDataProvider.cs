@@ -74,6 +74,16 @@ namespace TRModelTransporter.Data
             return _permittedAliasDuplicates.Contains(entity);
         }
 
+        public bool IsOverridePermitted(TR2Entities entity)
+        {
+            return false;
+        }
+
+        public IEnumerable<TR2Entities> GetUnsafeModelReplacements()
+        {
+            return _unsafeModelReplacements;
+        }
+
         public bool IsNonGraphicsDependency(TR2Entities entity)
         {
             return _nonGraphicsDependencies.Contains(entity);
@@ -249,6 +259,10 @@ namespace TRModelTransporter.Data
         private static readonly List<TR2Entities> _permittedAliasDuplicates = new List<TR2Entities>
         {
             TR2Entities.LaraMiscAnim_H
+        };
+
+        private static readonly List<TR2Entities> _unsafeModelReplacements = new List<TR2Entities>
+        {
         };
 
         private static readonly List<TR2Entities> _nonGraphicsDependencies = new List<TR2Entities>

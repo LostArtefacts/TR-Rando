@@ -21,7 +21,6 @@ namespace TRRandomizerCore.Processors
 {
     public class TR3SequenceProcessor : TR3LevelProcessor
     {
-        private static readonly int _entityLimit = 256;
         private static readonly int _spikeHeightChange = -768;
 
         private static readonly Dictionary<TR3Entities, TR3Entities> _artefactAssignment = new Dictionary<TR3Entities, TR3Entities>
@@ -51,6 +50,7 @@ namespace TRRandomizerCore.Processors
 
         public GlobeDisplayOption GlobeDisplay { get; set; }
         public TR3TextureMonitorBroker TextureMonitor { get; set; }
+        public ItemFactory ItemFactory { get; set; }
 
         public void Run()
         {
@@ -127,6 +127,9 @@ namespace TRRandomizerCore.Processors
                 AmendSouthPacificSpikes(level);
             }
 
+            // #277 Make sure levels have artefact menu models because these vary based on original sequencing.
+            ImportArtefactMenuModels(level);
+
             // If this level is the first in an adventure, update the globe string to match
             if (_adventureStringSequences.ContainsKey((TR3Adventure)level.Sequence))
             {
@@ -164,23 +167,13 @@ namespace TRRandomizerCore.Processors
             List<TR2Entity> entities = level.Data.Entities.ToList();
             foreach (Location location in _upvLocations[level.Name])
             {
-                if (entities.Count == _entityLimit)
+                TR2Entity entity = ItemFactory.CreateItem(level.Name, entities, location);
+                if (entity == null)
                 {
                     break;
                 }
 
-                entities.Add(new TR2Entity
-                {
-                    TypeID = (short)TR3Entities.UPV,
-                    Room = (short)location.Room,
-                    X = location.X,
-                    Y = location.Y,
-                    Z = location.Z,
-                    Angle = location.Angle,
-                    Flags = 0,
-                    Intensity1 = -1,
-                    Intensity2 = -1
-                });
+                entity.TypeID = (short)TR3Entities.UPV;
             }
 
             level.Data.Entities = entities.ToArray();
@@ -211,6 +204,32 @@ namespace TRRandomizerCore.Processors
             });
 
             floorData.WriteToLevel(level.Data);
+        }
+
+        private void ImportArtefactMenuModels(TR3CombinedLevel level)
+        {
+            List<TRModel> models = level.Data.Models.ToList();
+            List<TR3Entities> imports = new List<TR3Entities>();
+            foreach (TR3Entities artefactMenuModel in TR3EntityUtilities.GetArtefactMenuModels())
+            {
+                if (models.Find(m => m.ID == (uint)artefactMenuModel) == null)
+                {
+                    imports.Add(artefactMenuModel);
+                }
+            }
+
+            if (imports.Count > 0)
+            {
+                TR3ModelImporter importer = new TR3ModelImporter
+                {
+                    Level = level.Data,
+                    LevelName = level.Name,
+                    EntitiesToImport = imports,
+                    DataFolder = GetResourcePath(@"TR3\Models")
+                };
+
+                importer.Import();
+            }
         }
 
         private void AmendWillardBoss(TR3CombinedLevel level)

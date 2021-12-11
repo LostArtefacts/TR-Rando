@@ -367,6 +367,7 @@ namespace TRRandomizerCore.Randomizers
 
             // Get a list of current enemy entities
             List<TR2Entity> enemyEntities = level.GetEnemyEntities();
+            List<TR2Entity> allEntities = level.Data.Entities.ToList();
 
             // Keep track of any new entities added (e.g. Skidoo)
             List<TR2Entity> newEntities = new List<TR2Entity>();
@@ -450,6 +451,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 TR2Entities currentEntityType = (TR2Entities)currentEntity.TypeID;
                 TR2Entities newEntityType = currentEntityType;
+                int enemyIndex = allEntities.IndexOf(currentEntity);
 
                 // If it's an existing enemy that has to remain in the same spot, skip it
                 if (TR2EnemyUtilities.IsEnemyRequired(level.Name, currentEntityType))
@@ -555,6 +557,16 @@ namespace TRRandomizerCore.Randomizers
                 if (newEntityType == TR2Entities.MarcoBartoli && dragonSeen) // DL only, other levels use quasi-zoning for the dragon
                 {
                     while (newEntityType == TR2Entities.MarcoBartoli)
+                    {
+                        newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
+                    }
+                }
+
+                // #278 Flamethrowers in room 29 after pulling the lever are too difficult, but if difficulty is set to unrestricted
+                // and they do end up here, environment mods will change their positions.
+                if (level.Is(TR2LevelNames.FLOATER) && Settings.RandoEnemyDifficulty == RandoDifficulty.Default && (enemyIndex == 34 || enemyIndex == 35))
+                {
+                    while (newEntityType == TR2Entities.FlamethrowerGoon)
                     {
                         newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
                     }

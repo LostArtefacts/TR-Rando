@@ -32,6 +32,8 @@ namespace TRRandomizerCore.Randomizers
         // Track the pistols so they remain a weapon type and aren't moved
         private TR2Entity _unarmedLevelPistols;
 
+        public ItemFactory ItemFactory { get; set; }
+
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
@@ -129,9 +131,14 @@ namespace TRRandomizerCore.Randomizers
             List<TR3Entities> oneOfEachType = new List<TR3Entities>();
             List<TR2Entity> allEntities = _levelInstance.Data.Entities.ToList();
 
+            // FD for removing crystal triggers if applicable.
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level.Data);
+
             // look for extra utility/ammo items and hide them
-            foreach (TR2Entity ent in allEntities)
+            for (int i = 0; i < allEntities.Count; i++)
             {
+                TR2Entity ent = allEntities[i];
                 TR3Entities eType = (TR3Entities)ent.TypeID;
 
                 if (TR3EntityUtilities.IsStandardPickupType(eType) ||
@@ -140,6 +147,11 @@ namespace TRRandomizerCore.Randomizers
                     if (oneOfEachType.Contains(eType))
                     {
                         ItemUtilities.HideEntity(ent);
+                        ItemFactory.FreeItem(level.Name, i);
+                        if (TR3EntityUtilities.IsCrystalPickup(eType))
+                        {
+                            FDUtilities.RemoveEntityTriggers(level.Data, i, floorData);
+                        }
                     }
                     else
                     {
@@ -147,6 +159,8 @@ namespace TRRandomizerCore.Randomizers
                     }     
                 }
             }
+
+            floorData.WriteToLevel(level.Data);
         }
 
         public void RandomizeItemLocations(TR3CombinedLevel level)
@@ -177,7 +191,7 @@ namespace TRRandomizerCore.Randomizers
                     // around randomly for variety.
                     if (ent.Angle == -1)
                     {
-                        ent.Angle = (short)(_generator.Next(0, 8) / _ROTATION);
+                        ent.Angle = (short)(_generator.Next(0, 8) * _ROTATION);
                     }
                 }
             }

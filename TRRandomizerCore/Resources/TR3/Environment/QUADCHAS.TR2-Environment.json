@@ -1,0 +1,30 @@
+{
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If there is a secret in room 167, make sure we can get back out for the rewards.",
+        "ConditionType": 1,
+        "RoomIndex": 167
+      },
+      "OnTrue": [
+        {
+          "EMType": 0,
+          "Location": {
+            "X": 43520,
+            "Y": 8192,
+            "Z": 66048,
+            "Room": 167
+          },
+          "IsPositiveZ": true,
+          "TextureMap": {
+            "1487": {
+              "167": {
+                "Rectangles": [ 21 ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

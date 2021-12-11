@@ -49,6 +49,7 @@ namespace TRRandomizerCore.Randomizers
         private static readonly int _triggerEdgeLimit = 103; // Within ~10% of a tile edge, triggers will be copied into neighbours
 
         internal TR3TextureMonitorBroker TextureMonitor { get; set; }
+        public ItemFactory ItemFactory { get; set; }
 
         public override void Randomize(int seed)
         {
@@ -166,8 +167,8 @@ namespace TRRandomizerCore.Randomizers
                 List<TR2Entity> entities = level.Data.Entities.ToList();
                 for (int i = 0; i < requiredDoors; i++)
                 {
-                    entities.Add(new TR2Entity());
-                    rewardRoom.DoorIndices.Add((int)level.Data.NumEntities);
+                    TR2Entity door = ItemFactory.CreateItem(level.Name, entities);
+                    rewardRoom.DoorIndices.Add(entities.IndexOf(door));
                     level.Data.NumEntities++;
                 }
 
@@ -338,7 +339,7 @@ namespace TRRandomizerCore.Randomizers
                 if (_devRooms == null || _devRooms.Contains(location.Room))
                 {
                     secret.Location = location;
-                    secret.EntityIndex = (ushort)entities.Count;
+                    secret.EntityIndex = (ushort)ItemFactory.GetNextIndex(level.Name, entities, true);
                     secret.SecretIndex = (ushort)(secretIndex % countedSecrets); // Cycle through each secret number
                     secret.PickupType = pickupTypes[pickupIndex % pickupTypes.Count]; // Cycle through the types
 
@@ -351,10 +352,12 @@ namespace TRRandomizerCore.Randomizers
 
                     secret.SetMaskAndDoor(countedSecrets, rewardRoom.DoorIndices);
 
-                    TR2Entity secretEntity = PlaceSecret(level, secret, floorData);
-                    if (secretEntity != null)
+                    if (PlaceSecret(level, secret, floorData))
                     {
-                        entities.Add(secretEntity);
+                        // This will either make a new entity or repurpose an old one
+                        TR2Entity entity = ItemFactory.CreateItem(level.Name, entities, secret.Location, true);
+                        entity.TypeID = (short)secret.PickupType;
+
                         secretIndex++;
                         pickupIndex++;
 
@@ -407,7 +410,7 @@ namespace TRRandomizerCore.Randomizers
 
                 usedLocations.Add(location);
                 secret.Location = location;
-                secret.EntityIndex = (ushort)entities.Count;
+                secret.EntityIndex = (ushort)ItemFactory.GetNextIndex(level.Name, entities);
                 secret.PickupType = pickupTypes[pickupIndex % pickupTypes.Count]; // Cycle through the types
 
                 // #238 Point this secret to a specific camera and look-at target if applicable.
@@ -419,10 +422,12 @@ namespace TRRandomizerCore.Randomizers
 
                 secret.SetMaskAndDoor(level.Script.NumSecrets, rewardRoom.DoorIndices);
 
-                TR2Entity secretEntity = PlaceSecret(level, secret, floorData);
-                if (secretEntity != null)
+                if (PlaceSecret(level, secret, floorData))
                 {
-                    entities.Add(secretEntity);
+                    // This will either make a new entity or repurpose an old one
+                    TR2Entity entity = ItemFactory.CreateItem(level.Name, entities, secret.Location);
+                    entity.TypeID = (short)secret.PickupType;
+
                     secret.SecretIndex++;
                     pickupIndex++;
 
@@ -498,21 +503,15 @@ namespace TRRandomizerCore.Randomizers
             // weapon location.
             if (damagingLocationUsed && _unarmedLocations.ContainsKey(level.Name))
             {
-                if (level.Data.NumEntities < 256 || Settings.DevelopmentMode)
+                List<TR2Entity> entities = level.Data.Entities.ToList();
+                if (ItemFactory.CanCreateItem(level.Name, entities, Settings.DevelopmentMode))
                 {
                     List<Location> pool = _unarmedLocations[level.Name];
                     Location location = pool[_generator.Next(0, pool.Count)];
-                    List<TR2Entity> entities = level.Data.Entities.ToList();
-                    entities.Add(new TR2Entity
-                    {
-                        TypeID = (short)TR3Entities.LargeMed_P,
-                        X = location.X,
-                        Y = location.Y,
-                        Z = location.Z,
-                        Room = (short)location.Room,
-                        Intensity1 = -1,
-                        Intensity2 = -1
-                    });
+
+                    TR2Entity medi = ItemFactory.CreateItem(level.Name, entities, location, Settings.DevelopmentMode);
+                    medi.TypeID = (short)TR3Entities.LargeMed_P;
+
                     level.Data.Entities = entities.ToArray();
                     level.Data.NumEntities++;
                 }
@@ -591,7 +590,7 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
-        private TR2Entity PlaceSecret(TR3CombinedLevel level, TRSecretPlacement<TR3Entities> secret, FDControl floorData)
+        private bool PlaceSecret(TR3CombinedLevel level, TRSecretPlacement<TR3Entities> secret, FDControl floorData)
         {
             // Check if this secret is being added to a flipped room, as that won't work
             for (int i = 0; i < level.Data.NumRooms; i++)
@@ -606,29 +605,17 @@ namespace TRRandomizerCore.Randomizers
                     }
                     else
                     {
-                        return null;
+                        return false;
                     }
                 }
             }
 
-            TR2Entity entity = new TR2Entity
-            {
-                TypeID = (short)secret.PickupType,
-                X = secret.Location.X,
-                Y = secret.Location.Y,
-                Z = secret.Location.Z,
-                Room = (short)secret.Location.Room,
-                Angle = 0,
-                Intensity1 = -1,
-                Intensity2 = -1
-            };
-
             // Get the sector and check if it is shared with a trapdoor or bridge, as these won't work either.
-            TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level.Data, floorData);
+            TRRoomSector sector = FDUtilities.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, (short)secret.Location.Room, level.Data, floorData);
             foreach (TR2Entity otherEntity in level.Data.Entities)
             {
                 TR3Entities type = (TR3Entities)otherEntity.TypeID;
-                if (entity.Room == otherEntity.Room && (TR3EntityUtilities.IsTrapdoor(type) || TR3EntityUtilities.IsBridge(type)))
+                if (secret.Location.Room == otherEntity.Room && (TR3EntityUtilities.IsTrapdoor(type) || TR3EntityUtilities.IsBridge(type)))
                 {
                     TRRoomSector otherSector = FDUtilities.GetRoomSector(otherEntity.X, otherEntity.Y, otherEntity.Z, otherEntity.Room, level.Data, floorData);
                     if (otherSector == sector)
@@ -637,25 +624,25 @@ namespace TRRandomizerCore.Randomizers
                         {
                             Debug.WriteLine(string.Format(_trapdoorLocationMsg, level.Name, secret.Location.X, secret.Location.Y, secret.Location.Z, secret.Location.Room));
                         }
-                        return null;
+                        return false;
                     }
                 }
             }
 
             // Create the trigger. If this was unsuccessful, bail out.
-            if (!CreateSecretTriggers(level, secret, entity.Room, floorData, sector))
+            if (!CreateSecretTriggers(level, secret, (short)secret.Location.Room, floorData, sector))
             {
-                return null;
+                return false;
             }
 
             // #248 If the room has a flipmap, make sure to add the trigger there too.
             short altRoom = level.Data.Rooms[secret.Location.Room].AlternateRoom;
             if (altRoom != -1)
             {
-                sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, altRoom, level.Data, floorData);
+                sector = FDUtilities.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, altRoom, level.Data, floorData);
                 if (!CreateSecretTriggers(level, secret, altRoom, floorData, sector))
                 {
-                    return null;
+                    return false;
                 }
 
                 if (Settings.DevelopmentMode)
@@ -664,7 +651,8 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
 
-            return entity;
+            // Checks have passed, so we can actually create the entity.
+            return true;
         }
 
         private bool CreateSecretTriggers(TR3CombinedLevel level, TRSecretPlacement<TR3Entities> secret, short room, FDControl floorData, TRRoomSector baseSector)
@@ -925,7 +913,20 @@ namespace TRRandomizerCore.Randomizers
                             TR3Entities puzzleMenuType = _artefactReplacements[puzzlePickupType];
 
                             models.Find(m => m.ID == (uint)artefactPickupType).ID = (uint)puzzlePickupType;
-                            models.Find(m => m.ID == (uint)artefactMenuType).ID = (uint)puzzleMenuType;
+
+                            // #277 Most levels (beyond India) have the artefacts as menu models so we need
+                            // to duplicate the models instead of replacing them, otherwise the carried-over
+                            // artefacts from previous levels are invisible.
+                            TRModel menuModel = models.Find(m => m.ID == (uint)artefactMenuType);
+                            models.Add(new TRModel
+                            {
+                                Animation = menuModel.Animation,
+                                FrameOffset = menuModel.FrameOffset,
+                                ID = (uint)puzzleMenuType,
+                                MeshTree = menuModel.MeshTree,
+                                NumMeshes = menuModel.NumMeshes,
+                                StartingMesh = menuModel.StartingMesh
+                            });
 
                             // Remove this puzzle type from the available pool
                             allocation.AvailablePickupModels.RemoveAt(0);
@@ -940,6 +941,9 @@ namespace TRRandomizerCore.Randomizers
                             monitor.EntityMap[artefactPickupType] = puzzlePickupType;
                             monitor.EntityMap[artefactMenuType] = puzzleMenuType;
                         }
+
+                        level.Data.Models = models.ToArray();
+                        level.Data.NumModels = (uint)models.Count;
                     }
 
                     if (!_outer.TriggerProgress())

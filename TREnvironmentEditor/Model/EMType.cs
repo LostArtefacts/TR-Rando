@@ -8,6 +8,7 @@
         Flood = 2,
         Drain = 3,
         Ceiling = 4,
+        Click = 5,
 
         // Texture types 21-40
         Reface = 21,

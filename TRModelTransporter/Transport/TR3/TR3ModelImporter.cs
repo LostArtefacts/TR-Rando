@@ -49,7 +49,7 @@ namespace TRModelTransporter.Transport
                 _meshHandler.Import(Level, definition);
                 _animationHandler.Import(Level, definition);
                 _cinematicHandler.Import(Level, definition);
-                _modelHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants());
+                _modelHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants(), Data.GetUnsafeModelReplacements());
             }
 
             _textureHandler.ResetUnusedTextures();

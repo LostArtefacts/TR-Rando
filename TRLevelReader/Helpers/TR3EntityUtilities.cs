@@ -168,6 +168,14 @@ namespace TRLevelReader.Helpers
             };
         }
 
+        public static List<TR3Entities> GetArtefactMenuModels()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.Infada_M_H, TR3Entities.OraDagger_M_H, TR3Entities.EyeOfIsis_M_H, TR3Entities.Element115_M_H
+            };
+        }
+
         public static Dictionary<TR3Entities, TR3Entities> GetArtefactReplacements()
         {
             return new Dictionary<TR3Entities, TR3Entities>
