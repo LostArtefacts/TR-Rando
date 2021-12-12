@@ -8,6 +8,7 @@ using TRLevelReader.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -15,9 +16,13 @@ namespace TRRandomizerCore.Randomizers
     {
         private List<TR3ScriptedLevel> _filterLevels;
 
+        private Color[] _colors;
+
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
+
+            _colors = ColorUtilities.GetAvailableColors();
 
             ChooseFilterLevels();
 
@@ -52,7 +57,21 @@ namespace TRRandomizerCore.Randomizers
 
         private void SetVertexFilterMode(TR3CombinedLevel level)
         {
-            FilterVertices(level.Data);
+            if (Settings.VfxRoom)
+            {
+                //Change every room
+                FilterVerticesRandomRoom(level.Data);
+            }
+            else if (Settings.VfxLevel)
+            {
+                //Change every level
+                FilterVerticesRandomLevel(level.Data, _colors[_generator.Next(0, _colors.Length - 1)]);
+            }
+            else
+            {
+                //Normal filter
+                FilterVertices(level.Data);
+            } 
 
             if (level.HasCutScene)
             {
@@ -64,7 +83,25 @@ namespace TRRandomizerCore.Randomizers
         {
             foreach (TR3Room room in level.Rooms)
             {
-                room.SetColourFilter(Settings.VfxFilterColor);
+                room.SetColourFilter(Settings.VfxFilterColor, Settings.VfxVivid);
+            }
+        }
+
+        private void FilterVerticesRandomLevel(TR3Level level, Color col)
+        {
+            foreach (TR3Room room in level.Rooms)
+            {
+                room.SetColourFilter(col, Settings.VfxVivid);
+            }
+        }
+
+        private void FilterVerticesRandomRoom(TR3Level level)
+        {
+            foreach (TR3Room room in level.Rooms)
+            {
+                Color col = _colors[_generator.Next(0, _colors.Length - 1)];
+
+                room.SetColourFilter(col, Settings.VfxVivid);
             }
         }
     }

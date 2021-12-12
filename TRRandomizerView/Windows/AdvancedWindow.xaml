@@ -441,11 +441,12 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
@@ -495,6 +496,30 @@
                                   VerticalAlignment="Center"/>
                     </Border>
 
+                    <Border Grid.Row="4">
+                        <CheckBox IsChecked="{Binding ControllerProxy.VfxVivid, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Vivid/Strong Colour Blend" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Row="5">
+                        <CheckBox IsChecked="{Binding ControllerProxy.VfxLevel, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Randomize Vfx Per Level" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Row="6">
+                        <CheckBox IsChecked="{Binding ControllerProxy.VfxRoom, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Randomize Vfx Per Room" />
+                        </CheckBox>
+                    </Border>
+
                     <Border Grid.Column="1"
                             Grid.Row="1">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
@@ -511,6 +536,24 @@
                             Grid.Row="3">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="[TR3 Only] If color override is enabled, the selected color will be blended."/>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="4">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="[TR3 Only] When this option is enabled - A stronger blend is applied where colour channels are replaced."/>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="5">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="[TR3 Only] Colours are random for each level (overrides your chosen colour)."/>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="6">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="[TR3 Only] Colours are random for each room (will take precedence over level option)."/>
                     </Border>
                 </Grid>
             </StackPanel>

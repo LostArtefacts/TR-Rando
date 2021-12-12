@@ -83,8 +83,10 @@ namespace TRRandomizerCore.Editors
         public bool ReassignPuzzleNames => RandomizeEnemies && CrossLevelEnemies;
 
         public bool RandomizeVfx { get; set; }
-
         public Color VfxFilterColor { get; set; }
+        public bool VfxVivid { get; set; }
+        public bool VfxLevel { get; set; }
+        public bool VfxRoom { get; set; }
 
         public void ApplyConfig(Config config)
         {
@@ -168,6 +170,9 @@ namespace TRRandomizerCore.Editors
             
             RandomizeVfx = config.GetBool(nameof(RandomizeVfx));
             VfxFilterColor = Color.FromArgb(config.GetInt(nameof(VfxFilterColor)));
+            VfxVivid = config.GetBool(nameof(VfxVivid));
+            VfxLevel = config.GetBool(nameof(VfxLevel));
+            VfxRoom = config.GetBool(nameof(VfxRoom));
         }
 
         public void StoreConfig(Config config)
@@ -249,6 +254,9 @@ namespace TRRandomizerCore.Editors
 
             config[nameof(RandomizeVfx)] = RandomizeVfx;
             config[nameof(VfxFilterColor)] = VfxFilterColor.ToArgb();
+            config[nameof(VfxVivid)] = VfxVivid;
+            config[nameof(VfxLevel)] = VfxLevel;
+            config[nameof(VfxRoom)] = VfxRoom;
         }
 
         public int GetSaveTarget(int numLevels)

@@ -44,6 +44,9 @@ namespace TRRandomizerView.Model
         private Color _vfxFilterColor;
         private bool _vfxRandomize;
         private Color[] _vfxAvailColors;
+        private bool _vfxVivid;
+        private bool _vfxLevel;
+        private bool _vfxRoom;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
 
@@ -363,6 +366,36 @@ namespace TRRandomizerView.Model
             set
             {
                 _vfxAvailColors = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool VfxVivid
+        {
+            get => _vfxVivid;
+            set
+            {
+                _vfxVivid = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool VfxRoom
+        {
+            get => _vfxRoom;
+            set
+            {
+                _vfxRoom = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool VfxLevel
+        {
+            get => _vfxLevel;
+            set
+            {
+                _vfxLevel = value;
                 FirePropertyChanged();
             }
         }
@@ -1328,6 +1361,9 @@ namespace TRRandomizerView.Model
             VfxFilterColor = _controller.VfxFilterColor;
             VfxRandomize = _controller.RandomizeVfx;
             VfxAvailColors = _controller.VfxAvailableColorChoices;
+            VfxVivid = _controller.VfxVivid;
+            VfxLevel = _controller.VfxLevel;
+            VfxRoom = _controller.VfxRoom;
 
             RandomizeAudioTracks = _controller.RandomizeAudioTracks;
             AudioTracksSeed = _controller.AudioTracksSeed;
@@ -1566,6 +1602,9 @@ namespace TRRandomizerView.Model
             _controller.NightModeDarkness = NightModeDarkness;
             _controller.VfxFilterColor = VfxFilterColor;
             _controller.RandomizeVfx = VfxRandomize;
+            _controller.VfxVivid = VfxVivid;
+            _controller.VfxLevel = VfxLevel;
+            _controller.VfxRoom = VfxRoom;
 
             _controller.RandomizeAudioTracks = RandomizeAudioTracks;
             _controller.AudioTracksSeed = AudioTracksSeed;

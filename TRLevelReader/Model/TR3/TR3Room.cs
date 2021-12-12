@@ -154,7 +154,7 @@ namespace TRLevelReader.Model
         }
 
         #region Vertex Effects & Filters
-        public void SetColourFilter(Color col)
+        public void SetColourFilter(Color col, bool replace)
         {
             foreach (TR3RoomVertex vert in RoomData.Vertices)
             {
@@ -166,7 +166,27 @@ namespace TRLevelReader.Model
                 byte newGreen = ConvertColorChannelToRGB555(col.G);
                 byte newBlue = ConvertColorChannelToRGB555(col.B);
 
-                vert.Colour = (ushort)((Blend(curRed, newRed) << 10) | (Blend(curGreen, newGreen) << 5) | (Blend(curBlue, newBlue)));
+                if (replace)
+                {
+                    byte applyR = curRed;
+                    byte applyG = curGreen;
+                    byte applyB = curBlue;
+
+                    if (newRed > 0)
+                        applyR = newRed;
+
+                    if (newGreen > 0)
+                        applyG = newGreen;
+
+                    if (newBlue > 0)
+                        applyB = newBlue;
+
+                    vert.Colour = (ushort)((applyR << 10) | (applyG << 5) | (applyB));
+                }
+                else
+                {
+                    vert.Colour = (ushort)((Blend(curRed, newRed) << 10) | (Blend(curGreen, newGreen) << 5) | (Blend(curBlue, newBlue)));
+                }
             }
         }
 
