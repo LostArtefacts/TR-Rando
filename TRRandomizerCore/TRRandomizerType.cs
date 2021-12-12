@@ -26,6 +26,7 @@
         OutfitDagger,
         SFX,
         GlobeDisplay,
-        RewardRooms
+        RewardRooms,
+        VFX
     }
 }

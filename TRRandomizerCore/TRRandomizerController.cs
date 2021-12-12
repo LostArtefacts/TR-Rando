@@ -26,7 +26,8 @@ namespace TRRandomizerCore
             {
                 TRRandomizerType.LevelSequence, TRRandomizerType.Unarmed, TRRandomizerType.Ammoless, TRRandomizerType.Audio, TRRandomizerType.Outfit,
                 TRRandomizerType.Secret, TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.SFX, TRRandomizerType.Item, 
-                TRRandomizerType.NightMode, TRRandomizerType.SecretReward, TRRandomizerType.Text, TRRandomizerType.Enemy, TRRandomizerType.Texture
+                TRRandomizerType.NightMode, TRRandomizerType.SecretReward, TRRandomizerType.Text, TRRandomizerType.Enemy, TRRandomizerType.Texture,
+                TRRandomizerType.StartPosition, TRRandomizerType.VFX
             }
         };
 
@@ -35,7 +36,7 @@ namespace TRRandomizerCore
         {
             [TRVersion.TR2] = new List<TRRandomizerType>
             {
-                TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms
+                TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.VFX
             }
         };
 
@@ -531,6 +532,12 @@ namespace TRRandomizerCore
         {
             get => LevelRandomizer.NightModeAssaultCourse;
             set => LevelRandomizer.NightModeAssaultCourse = value;
+        }
+
+        public bool OverrideSunsets
+        {
+            get => LevelRandomizer.OverrideSunsets;
+            set => LevelRandomizer.OverrideSunsets = value;
         }
 
         public bool ChangeTriggerTracks

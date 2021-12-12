@@ -84,6 +84,11 @@ namespace TRRandomizerCore.Editors
                 target += numLevels * 3;
             }
 
+            if (Settings.RandomizeStartPosition)
+            {
+                target += numLevels;
+            }
+
             // Environment randomizer always runs
             target += numLevels;
 
@@ -193,6 +198,19 @@ namespace TRRandomizerCore.Editors
                     }.Randomize(Settings.EnemySeed);
                 }
 
+                if (!monitor.IsCancelled && Settings.RandomizeStartPosition)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing start positions");
+                    new TR3StartPositionRandomizer
+                    {
+                        ScriptEditor = tr23ScriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings
+                    }.Randomize(Settings.StartPositionSeed);
+                }
+
                 if (!monitor.IsCancelled)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, /*Settings.RandomizeEnvironment ? "Randomizing environment" : */"Applying default environment packs");
@@ -276,7 +294,7 @@ namespace TRRandomizerCore.Editors
                             TextureMonitor = textureMonitor
                         }.Randomize(Settings.TextureSeed);
                     }
-                    else if (Settings.RandomizeNightMode)
+                    else if (Settings.RandomizeNightMode && !Settings.RandomizeVfx)
                     {
                         monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode textures");
                         new TR3TextureRandomizer

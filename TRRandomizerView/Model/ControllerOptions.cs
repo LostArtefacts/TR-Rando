@@ -41,6 +41,7 @@ namespace TRRandomizerView.Model
         private uint _nightModeDarkness;
         private uint _nightModeDarknessMaximum;
         private bool _nightModeAssaultCourse;
+        private bool _overrideSunsets;
         private Color _vfxFilterColor;
         private bool _vfxRandomize;
         private Color[] _vfxAvailColors;
@@ -316,6 +317,16 @@ namespace TRRandomizerView.Model
             set
             {
                 _nightModeAssaultCourse = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool OverrideSunsets
+        {
+            get => _overrideSunsets;
+            set
+            {
+                _overrideSunsets = value;
                 FirePropertyChanged();
             }
         }
@@ -1356,6 +1367,7 @@ namespace TRRandomizerView.Model
             NightModeSeed = _controller.NightModeSeed;
             NightModeCount = _controller.NightModeCount;
             NightModeAssaultCourse = _controller.NightModeAssaultCourse;
+            OverrideSunsets = _controller.OverrideSunsets;
             NightModeDarkness = _controller.NightModeDarkness;
             NightModeDarknessMaximum = _controller.NightModeDarknessRange;
             VfxFilterColor = _controller.VfxFilterColor;
@@ -1599,6 +1611,7 @@ namespace TRRandomizerView.Model
             _controller.NightModeSeed = NightModeSeed;
             _controller.NightModeCount = NightModeCount;
             _controller.NightModeAssaultCourse = NightModeAssaultCourse;
+            _controller.OverrideSunsets = OverrideSunsets;
             _controller.NightModeDarkness = NightModeDarkness;
             _controller.VfxFilterColor = VfxFilterColor;
             _controller.RandomizeVfx = VfxRandomize;
@@ -1696,6 +1709,7 @@ namespace TRRandomizerView.Model
         public bool IsStartPositionTypeSupported => IsRandomizationSupported(TRRandomizerType.StartPosition);
         public bool IsAudioTypeSupported => IsRandomizationSupported(TRRandomizerType.Audio);
         public bool IsSFXSupported => IsRandomizationSupported(TRRandomizerType.SFX);
+        public bool IsVFXTypeSupported => IsRandomizationSupported(TRRandomizerType.VFX);
         public bool IsOutfitTypeSupported => IsRandomizationSupported(TRRandomizerType.Outfit);
         public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);

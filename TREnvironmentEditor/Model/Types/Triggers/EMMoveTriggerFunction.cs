@@ -42,23 +42,26 @@ namespace TREnvironmentEditor.Model.Types
 
         private bool MoveTriggers(TRRoomSector baseSector, TRRoomSector newSector, FDControl control)
         {
-            if (baseSector.FDIndex != 0)
+            if (baseSector != newSector && baseSector.FDIndex != 0)
             {
-                if (newSector.FDIndex == 0)
-                {
-                    control.CreateFloorData(newSector);
-                }
-
                 List<FDEntry> triggers = control.Entries[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
-                control.Entries[newSector.FDIndex].AddRange(triggers);
-
-                control.Entries[baseSector.FDIndex].RemoveAll(e => triggers.Contains(e));
-                if (control.Entries[baseSector.FDIndex].Count == 0)
+                if (triggers.Count > 0)
                 {
-                    control.RemoveFloorData(baseSector);
-                }
+                    if (newSector.FDIndex == 0)
+                    {
+                        control.CreateFloorData(newSector);
+                    }
 
-                return true;
+                    control.Entries[newSector.FDIndex].AddRange(triggers);
+
+                    control.Entries[baseSector.FDIndex].RemoveAll(e => triggers.Contains(e));
+                    if (control.Entries[baseSector.FDIndex].Count == 0)
+                    {
+                        control.RemoveFloorData(baseSector);
+                    }
+
+                    return true;
+                }
             }
 
             return false;

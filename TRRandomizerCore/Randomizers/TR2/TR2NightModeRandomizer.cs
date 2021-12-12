@@ -61,6 +61,11 @@ namespace TRRandomizerCore.Randomizers
             DarkenRooms(level.Data);
             HideDaytimeEntities(level.Data, level.Name);
 
+            if (Settings.OverrideSunsets)
+            {
+                level.Script.HasSunset = false;
+            }
+
             if (level.HasCutScene)
             {
                 SetNightMode(level.CutSceneLevel);
