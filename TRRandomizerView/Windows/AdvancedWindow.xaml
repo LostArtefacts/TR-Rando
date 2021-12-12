@@ -444,6 +444,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -479,7 +480,8 @@
                         </CheckBox>
                     </Border>
 
-                    <Border Grid.Row="2">
+                    <Border Grid.Row="2"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <CheckBox IsChecked="{Binding ControllerProxy.VfxRandomize, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
@@ -488,7 +490,8 @@
                     </Border>
 
                     <Border Grid.Column="0"
-                            Grid.Row="3">
+                            Grid.Row="3"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <ComboBox ItemsSource="{Binding ControllerProxy.VfxAvailColors}"
                                   SelectedItem="{Binding ControllerProxy.VfxFilterColor, Mode=TwoWay}"
                                   DisplayMemberPath="Name"
@@ -496,7 +499,8 @@
                                   VerticalAlignment="Center"/>
                     </Border>
 
-                    <Border Grid.Row="4">
+                    <Border Grid.Row="4"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <CheckBox IsChecked="{Binding ControllerProxy.VfxVivid, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
@@ -504,7 +508,8 @@
                         </CheckBox>
                     </Border>
 
-                    <Border Grid.Row="5">
+                    <Border Grid.Row="5"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <CheckBox IsChecked="{Binding ControllerProxy.VfxLevel, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
@@ -512,11 +517,21 @@
                         </CheckBox>
                     </Border>
 
-                    <Border Grid.Row="6">
+                    <Border Grid.Row="6"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <CheckBox IsChecked="{Binding ControllerProxy.VfxRoom, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
                                    Content="Randomize Vfx Per Room" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Row="7"
+                            Visibility="{Binding ControllerProxy.IsSunsetTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
+                        <CheckBox IsChecked="{Binding ControllerProxy.OverrideSunsets, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Override Sunsets" />
                         </CheckBox>
                     </Border>
 
@@ -527,33 +542,45 @@
                     </Border>
 
                     <Border Grid.Column="1"
-                            Grid.Row="2">
+                            Grid.Row="2"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="[TR3 Only] Instead of Night Mode randomizer, Vertex colors are blended by your chosen color."/>
+                               Content="Instead of Night Mode randomizer, Vertex colors are blended by your chosen color."/>
                     </Border>
 
                     <Border Grid.Column="1"
-                            Grid.Row="3">
+                            Grid.Row="3"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="[TR3 Only] If color override is enabled, the selected color will be blended."/>
+                               Content="If color override is enabled, the selected color will be blended."/>
                     </Border>
 
                     <Border Grid.Column="1"
-                            Grid.Row="4">
+                            Grid.Row="4"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="[TR3 Only] When this option is enabled - A stronger blend is applied where colour channels are replaced."/>
+                               Content="When this option is enabled - A stronger blend is applied where colour channels are replaced."/>
                     </Border>
 
                     <Border Grid.Column="1"
-                            Grid.Row="5">
+                            Grid.Row="5"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="[TR3 Only] Colours are random for each level (overrides your chosen colour)."/>
+                               Content="Colours are random for each level (overrides your chosen colour)."/>
                     </Border>
 
                     <Border Grid.Column="1"
-                            Grid.Row="6">
+                            Grid.Row="6"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="[TR3 Only] Colours are random for each room (will take precedence over level option)."/>
+                               Content="Colours are random for each room (will take precedence over level option)."/>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="7"
+                            Visibility="{Binding ControllerProxy.IsSunsetTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="If a level has sunset enabled, it will be cancelled and night-mode will take priority instead."/>
                     </Border>
                 </Grid>
             </StackPanel>
