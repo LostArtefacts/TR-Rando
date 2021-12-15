@@ -252,7 +252,7 @@ namespace TRRandomizerCore.Editors
                     }.Randomize(Settings.OutfitSeed);
                 }
 
-                if (!monitor.IsCancelled && (Settings.RandomizeNightMode && !Settings.RandomizeVfx))
+                if (!monitor.IsCancelled && Settings.RandomizeNightMode && !Settings.RandomizeVfx)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
                     new TR3NightModeRandomizer
@@ -266,7 +266,7 @@ namespace TRRandomizerCore.Editors
                     }.Randomize(Settings.NightModeSeed);
                 }
 
-                if (!monitor.IsCancelled && Settings.RandomizeVfx)
+                if (!monitor.IsCancelled && Settings.RandomizeNightMode && Settings.RandomizeVfx)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Applying Filter to Random Levels");
                     new TR3VfxRandomizer
