@@ -186,6 +186,11 @@ namespace TRModelTransporter.Packing
 
         public void RemoveModelSegmentsChecked(IEnumerable<E> modelEntitiesToRemove)
         {
+            if (modelEntitiesToRemove.Count() == 0)
+            {
+                return;
+            }
+
             // Perform an exhaustive check against every other model in the level to find shared textures.
 
             Dictionary<E, Dictionary<TexturedTile, List<TexturedTileSegment>>> candidateSegments = new Dictionary<E, Dictionary<TexturedTile, List<TexturedTileSegment>>>();
