@@ -48,6 +48,8 @@ namespace TRRandomizerView.Model
         private bool _vfxVivid;
         private bool _vfxLevel;
         private bool _vfxRoom;
+        private bool _vfxCaustics;
+        private bool _vfxWave;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
 
@@ -407,6 +409,26 @@ namespace TRRandomizerView.Model
             set
             {
                 _vfxLevel = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool VfxCaustics
+        {
+            get => _vfxCaustics;
+            set
+            {
+                _vfxCaustics = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool VfxWave
+        {
+            get => _vfxWave;
+            set
+            {
+                _vfxWave = value;
                 FirePropertyChanged();
             }
         }
@@ -1376,6 +1398,8 @@ namespace TRRandomizerView.Model
             VfxVivid = _controller.VfxVivid;
             VfxLevel = _controller.VfxLevel;
             VfxRoom = _controller.VfxRoom;
+            VfxCaustics = _controller.VfxCaustics;
+            VfxWave = _controller.VfxWave;
 
             RandomizeAudioTracks = _controller.RandomizeAudioTracks;
             AudioTracksSeed = _controller.AudioTracksSeed;
@@ -1618,6 +1642,8 @@ namespace TRRandomizerView.Model
             _controller.VfxVivid = VfxVivid;
             _controller.VfxLevel = VfxLevel;
             _controller.VfxRoom = VfxRoom;
+            _controller.VfxCaustics = VfxCaustics;
+            _controller.VfxWave = VfxWave;
 
             _controller.RandomizeAudioTracks = RandomizeAudioTracks;
             _controller.AudioTracksSeed = AudioTracksSeed;

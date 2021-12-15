@@ -83,7 +83,7 @@ namespace TRRandomizerCore.Randomizers
         {
             foreach (TR3Room room in level.Rooms)
             {
-                room.SetColourFilter(Settings.VfxFilterColor, Settings.VfxVivid);
+                room.SetColourFilter(Settings.VfxFilterColor, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
             }
         }
 
@@ -91,7 +91,7 @@ namespace TRRandomizerCore.Randomizers
         {
             foreach (TR3Room room in level.Rooms)
             {
-                room.SetColourFilter(col, Settings.VfxVivid);
+                room.SetColourFilter(col, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
             }
         }
 
@@ -101,7 +101,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 Color col = _colors[_generator.Next(0, _colors.Length - 1)];
 
-                room.SetColourFilter(col, Settings.VfxVivid);
+                room.SetColourFilter(col, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
             }
         }
     }

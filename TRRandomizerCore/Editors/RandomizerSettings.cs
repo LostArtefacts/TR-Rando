@@ -88,6 +88,8 @@ namespace TRRandomizerCore.Editors
         public bool VfxVivid { get; set; }
         public bool VfxLevel { get; set; }
         public bool VfxRoom { get; set; }
+        public bool VfxCaustics { get; set; }
+        public bool VfxWave { get; set; }
 
         public void ApplyConfig(Config config)
         {
@@ -175,6 +177,8 @@ namespace TRRandomizerCore.Editors
             VfxVivid = config.GetBool(nameof(VfxVivid));
             VfxLevel = config.GetBool(nameof(VfxLevel));
             VfxRoom = config.GetBool(nameof(VfxRoom));
+            VfxCaustics = config.GetBool(nameof(VfxCaustics));
+            VfxWave = config.GetBool(nameof(VfxWave));
         }
 
         public void StoreConfig(Config config)
@@ -260,6 +264,8 @@ namespace TRRandomizerCore.Editors
             config[nameof(VfxVivid)] = VfxVivid;
             config[nameof(VfxLevel)] = VfxLevel;
             config[nameof(VfxRoom)] = VfxRoom;
+            config[nameof(VfxCaustics)] = VfxCaustics;
+            config[nameof(VfxWave)] = VfxWave;
         }
 
         public int GetSaveTarget(int numLevels)

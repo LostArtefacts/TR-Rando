@@ -280,6 +280,9 @@ namespace TRRandomizerCore.Randomizers
                                 Room = ent.Room
                             };
                             break;
+                        case TR3Entities.DetonatorKey:
+                            ent.Invisible = false;
+                            break;
                         default:
                             break;
                     }

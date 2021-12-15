@@ -679,6 +679,18 @@ namespace TRRandomizerCore
             get => LevelRandomizer.VfxRoom;
             set => LevelRandomizer.VfxRoom = value;
         }
+
+        public bool VfxCaustics
+        {
+            get => LevelRandomizer.VfxCaustics;
+            set => LevelRandomizer.VfxCaustics = value;
+        }
+
+        public bool VfxWave
+        {
+            get => LevelRandomizer.VfxWave;
+            set => LevelRandomizer.VfxWave = value;
+        }
         #endregion
 
         #region TREditor Passthrough
