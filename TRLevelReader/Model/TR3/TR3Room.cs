@@ -154,7 +154,7 @@ namespace TRLevelReader.Model
         }
 
         #region Vertex Effects & Filters
-        public void SetColourFilter(Color col, bool replace)
+        public void SetColourFilter(Color col, bool replace, bool enableCaustics, bool enableWave)
         {
             foreach (TR3RoomVertex vert in RoomData.Vertices)
             {
@@ -187,6 +187,9 @@ namespace TRLevelReader.Model
                 {
                     vert.Colour = (ushort)((Blend(curRed, newRed) << 10) | (Blend(curGreen, newGreen) << 5) | (Blend(curBlue, newBlue)));
                 }
+
+                vert.UseCaustics = enableCaustics;
+                vert.UseWaveMovement = enableWave;
             }
         }
 

@@ -445,6 +445,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -527,6 +529,24 @@
                     </Border>
 
                     <Border Grid.Row="7"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
+                        <CheckBox IsChecked="{Binding ControllerProxy.VfxCaustics, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Enable Global Caustics Effect" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Row="8"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
+                        <CheckBox IsChecked="{Binding ControllerProxy.VfxWave, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Enable Global Wave Effect" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Row="9"
                             Visibility="{Binding ControllerProxy.IsSunsetTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <CheckBox IsChecked="{Binding ControllerProxy.OverrideSunsets, Mode=TwoWay}"
                                   VerticalAlignment="Center">
@@ -578,6 +598,20 @@
 
                     <Border Grid.Column="1"
                             Grid.Row="7"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The underwater shifting shadows effect is applied for every room."/>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="8"
+                            Visibility="{Binding ControllerProxy.IsVFXTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The moving water/swamp effect is applied to every vertex."/>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="9"
                             Visibility="{Binding ControllerProxy.IsSunsetTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="If a level has sunset enabled, it will be cancelled and night-mode will take priority instead."/>
