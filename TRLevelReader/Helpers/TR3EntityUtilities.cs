@@ -364,6 +364,7 @@ namespace TRLevelReader.Helpers
                 TR3Entities.Mercenary,
                 TR3Entities.Monkey,
                 TR3Entities.MPWithGun,
+                TR3Entities.MPWithMP5,
                 TR3Entities.MPWithStick,
                 TR3Entities.Prisoner,
                 //TR3Entities.Puna, // Activates Lizard at hardcoded coordinates, which are OOB in all other levels
@@ -476,6 +477,7 @@ namespace TRLevelReader.Helpers
                 TR3Entities.LondonMerc,
                 TR3Entities.Monkey,
                 TR3Entities.MPWithGun,
+                TR3Entities.MPWithMP5,
                 TR3Entities.MPWithStick,
                 TR3Entities.Punk,
                 TR3Entities.Raptor,
