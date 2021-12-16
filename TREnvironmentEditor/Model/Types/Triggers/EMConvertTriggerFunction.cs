@@ -46,6 +46,12 @@ namespace TREnvironmentEditor.Model.Types
                 {
                     if (TrigType.HasValue)
                     {
+                        if (trigger.TrigType == FDTrigType.Pickup && TrigType.Value != FDTrigType.Pickup && trigger.TrigActionList.Count > 0)
+                        {
+                            // The first action entry for pickup triggers is the pickup reference itself, so
+                            // this is no longer needed.
+                            trigger.TrigActionList.RemoveAt(0);
+                        }
                         trigger.TrigType = TrigType.Value;
                     }
                     if (OneShot.HasValue)
