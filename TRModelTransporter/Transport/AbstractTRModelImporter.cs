@@ -17,6 +17,7 @@ namespace TRModelTransporter.Transport
         public bool ClearUnusedSprites { get; set; }
         public string TextureRemapPath { get; set; }
         public ITexturePositionMonitor<E> TexturePositionMonitor { get; set; }
+        public bool SortModels { get; set; }
 
         protected AbstractTextureImportHandler<E, L, D> _textureHandler;
 
@@ -50,6 +51,18 @@ namespace TRModelTransporter.Transport
 
             // Check for alias duplication
             ValidateDefinitionList(existingEntities);
+
+            if (SortModels)
+            {
+                standardModelDefinitions.Sort(delegate (D d1, D d2)
+                {
+                    return d1.Entity.CompareTo(d2.Entity);
+                });
+                soundModelDefinitions.Sort(delegate (D d1, D d2)
+                {
+                    return d1.Entity.CompareTo(d2.Entity);
+                });
+            }
 
             try
             {

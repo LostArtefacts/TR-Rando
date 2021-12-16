@@ -16,6 +16,7 @@ namespace TRModelTransporter.Transport
         public TR3ModelImporter()
         {
             Data = new TR3DefaultDataProvider();
+            SortModels = true;
         }
 
         protected override AbstractTextureImportHandler<TR3Entities, TR3Level, TR3ModelDefinition> CreateTextureHandler()

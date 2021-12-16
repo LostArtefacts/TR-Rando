@@ -129,7 +129,7 @@ namespace TRModelTransporter.Data
                 = new TR3Entities[] { TR3Entities.MonkeyMedMeshswap, TR3Entities.MonkeyKeyMeshswap },
 
             [TR3Entities.Shiva]
-                = new TR3Entities[] { TR3Entities.ShivaStatue, TR3Entities.LaraExtraAnimation_H },
+                = new TR3Entities[] { TR3Entities.ShivaStatue, TR3Entities.LaraExtraAnimation_H, TR3Entities.Monkey },
 
             [TR3Entities.Quad]
                 = new TR3Entities[] { TR3Entities.LaraVehicleAnimation_H_Quad },
@@ -236,7 +236,7 @@ namespace TRModelTransporter.Data
 
         private static readonly List<TR3Entities> _nonGraphicsDependencies = new List<TR3Entities>
         {
-            
+            TR3Entities.Monkey
         };
 
         // If these are imported into levels that already have another alias for them, only their hardcoded sounds will be imported
