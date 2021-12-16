@@ -13,6 +13,7 @@ namespace TREnvironmentEditor.Model.Types
         public EMLocation Location { get; set; }
         public FDTrigType? TrigType { get; set; }
         public bool? OneShot { get; set; }
+        public ushort? SwitchOrKeyRef { get; set; }
 
         public override void ApplyToLevel(TR2Level level)
         {
@@ -50,6 +51,10 @@ namespace TREnvironmentEditor.Model.Types
                     if (OneShot.HasValue)
                     {
                         trigger.TrigSetup.OneShot = OneShot.Value;
+                    }
+                    if (SwitchOrKeyRef.HasValue)
+                    {
+                        trigger.SwitchOrKeyRef = SwitchOrKeyRef.Value;
                     }
                 }
             }
