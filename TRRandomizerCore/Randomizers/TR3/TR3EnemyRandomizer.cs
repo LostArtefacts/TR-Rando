@@ -578,18 +578,14 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // Add the pistols as a pickup if the level is hard and there aren't any other pistols around
-            if (difficulty > EnemyDifficulty.Medium && levelWeapons.Find(e => e.TypeID == (short)TR3Entities.Pistols_P) == null && level.Data.NumEntities < 256)
+            if (difficulty > EnemyDifficulty.Medium && levelWeapons.Find(e => e.TypeID == (short)TR3Entities.Pistols_P) == null && ItemFactory.CanCreateItem(level.Name, levelEntities))
             {
-                levelEntities.Add(new TR2Entity
-                {
-                    TypeID = (short)TR3Entities.Pistols_P,
-                    X = weaponEntity.X,
-                    Y = weaponEntity.Y,
-                    Z = weaponEntity.Z,
-                    Room = weaponEntity.Room,
-                    Intensity1 = -1,
-                    Intensity2 = -1
-                });
+                TR2Entity pistols = ItemFactory.CreateItem(level.Name, levelEntities);
+                pistols.TypeID = (short)TR3Entities.Pistols_P;
+                pistols.X = weaponEntity.X;
+                pistols.Y = weaponEntity.Y;
+                pistols.Z = weaponEntity.Z;
+                pistols.Room = weaponEntity.Room;
 
                 level.Data.Entities = levelEntities.ToArray();
                 level.Data.NumEntities++;
