@@ -16,6 +16,7 @@ using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Processors
 {
@@ -266,6 +267,23 @@ namespace TRRandomizerCore.Processors
 
             // Apply any changes needed for the boss fight
             AmendBossFight(level);
+
+            // Hide the old Willie AI pathing
+            for (int i = 0; i < level.Data.NumEntities; i++)
+            {
+                TR2Entity entity = level.Data.Entities[i];
+                TR3Entities type = (TR3Entities)entity.TypeID;
+                if (type == TR3Entities.AIPath_N || type == TR3Entities.AICheck_N)
+                {
+                    entity.TypeID = (short)TR3Entities.PistolAmmo_M_H;
+                    entity.X = 66048;
+                    entity.Y = 768;
+                    entity.Z = 67072;
+                    entity.Room = 5;
+                    ItemUtilities.HideEntity(entity);
+                    ItemFactory.FreeItem(level.Name, i);
+                }
+            }
         }
 
         private void AmendBossFight(TR3CombinedLevel level)
