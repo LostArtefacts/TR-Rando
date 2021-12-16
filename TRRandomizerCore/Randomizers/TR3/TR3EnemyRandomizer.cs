@@ -491,6 +491,14 @@ namespace TRRandomizerCore.Randomizers
 
                 // #146 Ensure OneShot triggers are set for this enemy if needed
                 TR3EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
+
+                // #291 Cobras don't seem to come back into reality when the
+                // engine disables them when too many enemies are active, unless
+                // invisible is false.
+                if (targetEntity.TypeID == (short)TR3Entities.Cobra)
+                {
+                    targetEntity.Invisible = false;
+                }
             }
 
             // Add extra ammo based on this level's difficulty
