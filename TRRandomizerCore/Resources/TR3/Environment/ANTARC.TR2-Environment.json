@@ -1,0 +1,69 @@
+{
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if enemy #8 is a hostile human and if not, get rid of the AI entities (monkeys can void for some reason).",
+        "ConditionType": 0,
+        "EntityIndex": 8,
+        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+      },
+      "OnFalse": [
+        {
+          "EMType": 45,
+          "EntityIndex": 10,
+          "NewEntityType": 176
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 11,
+          "NewEntityType": 174
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 12,
+          "NewEntityType": 174
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if enemy #20 is a monkey and if so convert the AI entities here into pickups.",
+        "ConditionType": 0,
+        "EntityIndex": 20,
+        "EntityType": 71
+      },
+      "OnTrue": [
+        {
+          "EMType": 45,
+          "EntityIndex": 23,
+          "NewEntityType": 178
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 24,
+          "NewEntityType": 174
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if enemy #113 is a monkey and if so convert the AI entities here into pickups.",
+        "ConditionType": 0,
+        "EntityIndex": 113,
+        "EntityType": 71
+      },
+      "OnTrue": [
+        {
+          "EMType": 45,
+          "EntityIndex": 114,
+          "NewEntityType": 169
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 76,
+          "NewEntityType": 173
+        }
+      ]
+    }
+  ]
+}

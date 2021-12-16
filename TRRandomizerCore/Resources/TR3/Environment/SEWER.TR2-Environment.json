@@ -76,6 +76,169 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if enemy #58 is a hostile human and if not, avoid other enemies heading for the heavy trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 58,
+        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 59,
+          "NewEntityType": 176
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 60,
+          "NewEntityType": 174
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 67,
+          "NewEntityType": 178
+        },
+        {
+          "Comments": "Remove the heavy trigger - the button beside it flips the map off anyway so it's the same as having killed the enemy before it could reach it.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 70144,
+              "Y": 1280,
+              "Z": 29184,
+              "Room": 31
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if enemy #155 is a Punk or MP Baton guy and if not, get rid of the heavy trigger as no other enemies will go to it.",
+        "ConditionType": 0,
+        "EntityIndex": 155,
+        "EntityTypes": [ 53, 60 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 157,
+          "NewEntityType": 171
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 158,
+          "NewEntityType": 169
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 159,
+          "NewEntityType": 170
+        },
+        {
+          "Comments": "Remove the heavy trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 48640,
+              "Y": 3584,
+              "Z": 69120,
+              "Room": 70
+            }
+          ]
+        },
+        {
+          "Comments": "Copy the heavy trigger's action to the one that triggers the initial enemy.",
+          "EMType": 68,
+          "Location": {
+            "X": 51746,
+            "Y": 5632,
+            "Z": 64032,
+            "Room": 54
+          },
+          "ActionItems": [
+            {
+              "TrigAction": 0,
+              "Parameter": 156
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if enemy #190 is a hostile human and if not, avoid other enemies heading for the heavy trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 190,
+        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the first AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 191,
+          "NewEntityType": 172
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 197,
+          "NewEntityType": 177
+        },
+        {
+          "Comments": "Convert the target into a switch.",
+          "EMType": 45,
+          "EntityIndex": 192,
+          "NewEntityType": 128
+        },
+        {
+          "Comments": "Remove the heavy trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 54784,
+              "Y": 2560,
+              "Z": 34304,
+              "Room": 104
+            }
+          ]
+        },
+        {
+          "Comments": "Make a trigger for the button.",
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 2,
+            "SwitchOrKeyRef": 192,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 193
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 199
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 54784,
+              "Y": 2560,
+              "Z": 34304,
+              "Room": 104
+            }
+          ]
+        }
+      ]
     }
   ]
 }

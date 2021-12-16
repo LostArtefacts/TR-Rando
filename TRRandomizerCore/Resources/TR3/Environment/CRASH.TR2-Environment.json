@@ -1,0 +1,24 @@
+{
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if enemy #121 is a raptor and if not, convert the AI entities here into pickups.",
+        "ConditionType": 0,
+        "EntityIndex": 121,
+        "EntityType": 288
+      },
+      "OnFalse": [
+        {
+          "EMType": 45,
+          "EntityIndex": 122,
+          "NewEntityType": 169
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 123,
+          "NewEntityType": 177
+        }
+      ]
+    }
+  ]
+}

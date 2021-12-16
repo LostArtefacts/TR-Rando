@@ -14,6 +14,9 @@ using System.Diagnostics;
 using TRRandomizerCore.Textures;
 using Newtonsoft.Json;
 using TREnvironmentEditor;
+using TRFDControl.Utilities;
+using TRFDControl;
+using TRFDControl.FDEntryTypes;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -222,6 +225,27 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
 
+            if (newEntities.Capacity > 1 && newEntities.Any(e => TR3EnemyUtilities.IsEnemyRestricted(level.Name, e)))
+            {
+                // Make sure we have an unrestricted enemy available for the individual level conditions. This will
+                // guarantee a "safe" enemy for the level; we avoid aliases here to avoid further complication.
+                TR3Entities unrestrictedEnemy;
+                do
+                {
+                    unrestrictedEnemy = allEnemies[_generator.Next(0, allEnemies.Count)];
+                }
+                while
+                (
+                    (droppableEnemyRequired && !TR3EntityUtilities.CanDropPickups(unrestrictedEnemy, Settings.ProtectMonks))
+                    || newEntities.Contains(unrestrictedEnemy)
+                    || TR3EntityUtilities.IsWaterCreature(unrestrictedEnemy)
+                    || TR3EnemyUtilities.IsEnemyRestricted(level.Name, unrestrictedEnemy)
+                    || TR3EntityUtilities.TranslateEntityAlias(unrestrictedEnemy) != unrestrictedEnemy
+                );
+
+                newEntities.Add(unrestrictedEnemy);
+            }
+
             if (Settings.DevelopmentMode)
             {
                 Debug.WriteLine(level.Name + ": " + string.Join(", ", newEntities));
@@ -407,7 +431,7 @@ namespace TRRandomizerCore.Randomizers
 
                 if (level.Is(TR3LevelNames.CRASH) && currentEntity.Room == 15)
                 {
-                    // Crash site raptor spawns needs special treatment. The 3 entities in this (unreachable) room
+                    // Crash site raptor spawns need special treatment. The 3 entities in this (unreachable) room
                     // are normally raptors, and the game positions them to the spawn points. If we no longer have
                     // raptors, then replace the spawn points with the actual enemies. Otherwise, ensure they remain
                     // as raptors.
@@ -425,19 +449,40 @@ namespace TRRandomizerCore.Randomizers
                 {
                     // #269 We don't want flamethrowers here because they're hostile, so getting off the minecart
                     // safely is too difficult.
-                    while (newEntityType == TR3Entities.RXTechFlameLad)
+                    while (newEntityType == TR3Entities.RXTechFlameLad || TR3EnemyUtilities.IsEnemyRestricted(level.Name, newEntityType))
                     {
                         newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
                     }
                 }
-                else if (level.Is(TR3LevelNames.HSC) && currentEntity.Room == 87 && newEntityType != TR3Entities.Prisoner)
+                else if (level.Is(TR3LevelNames.HSC))
                 {
-                    // #271 The prisoner is needed here to activate the heavy trigger for the trapdoor. If we still have
-                    // prisoners in the pool, ensure one is chosen. If this isn't the case, environment rando will provide
-                    // a workaround.
-                    if (enemies.Available.Contains(TR3Entities.Prisoner))
+                    if (currentEntity.Room == 87 && newEntityType != TR3Entities.Prisoner)
                     {
-                        newEntityType = TR3Entities.Prisoner;
+                        // #271 The prisoner is needed here to activate the heavy trigger for the trapdoor. If we still have
+                        // prisoners in the pool, ensure one is chosen. If this isn't the case, environment rando will provide
+                        // a workaround.
+                        if (enemies.Available.Contains(TR3Entities.Prisoner))
+                        {
+                            newEntityType = TR3Entities.Prisoner;
+                        }
+                    }
+                    else if (currentEntity.Room == 78)
+                    {
+                        // #286 Monkeys cannot share AI Ambush spots largely, but these are needed here to ensure the enemies
+                        // come through the gate before the timer closes them again. Just ensure no monkeys are here.
+                        while (newEntityType == TR3Entities.Monkey || TR3EnemyUtilities.IsEnemyRestricted(level.Name, newEntityType))
+                        {
+                            newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
+                        }
+                    }
+                }
+                else if (level.Is(TR3LevelNames.THAMES) && (currentEntity.Room == 61 || currentEntity.Room == 62))
+                {
+                    // #286 Ban monkeys from these two rooms for now because of JP entity index differences (environment mods
+                    // can't yet tell the difference).
+                    while (newEntityType == TR3Entities.Monkey || TR3EnemyUtilities.IsEnemyRestricted(level.Name, newEntityType))
+                    {
+                        newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
                     }
                 }
                 

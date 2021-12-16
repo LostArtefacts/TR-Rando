@@ -1,0 +1,58 @@
+{
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if enemy #60 is a hostile human and if not, convert and move the heavy trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 60,
+        "EntityTypes": [ 46, 56, 60, 61, 63 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 61,
+          "NewEntityType": 179
+        },
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 62,
+          "NewEntityType": 174
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 65,
+          "NewEntityType": 175
+        },
+        {
+          "Comments": "Convert the heavy trigger into a standard trigger.",
+          "EMType": 69,
+          "TrigType": 0,
+          "Location": {
+            "X": 55808,
+            "Y": -4864,
+            "Z": 30208,
+            "Room": 69
+          }
+        },
+        {
+          "Comments": "Move the heavy trigger underwater.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 55808,
+            "Y": -4864,
+            "Z": 30208,
+            "Room": 69
+          },
+          "NewLocation": {
+            "X": 54784,
+            "Y": -2432,
+            "Z": 32256,
+            "Room": 198
+          }
+        }
+      ]
+    }
+  ]
+}
