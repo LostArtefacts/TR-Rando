@@ -40,6 +40,7 @@
         ReplaceTriggerActionParameterFunction = 66,
         MoveTrigger = 67,
         AppendTriggerActionFunction = 68,
+        ConvertTrigger = 69,
 
         // Portal types 81-100
         VisibilityPortal = 81,
