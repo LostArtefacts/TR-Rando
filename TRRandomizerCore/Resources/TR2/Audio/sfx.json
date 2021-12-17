@@ -3576,10 +3576,10 @@
   },
   {
     "InternalIndex": 201,
-    "Description": "Clatter 1",
+    "Description": "Skidoo Clatter 1",
     "Creature": 0,
     "Categories": [
-      52
+      1, 52
     ],
     "Details": {
       "Sample": 0,
@@ -3594,10 +3594,10 @@
   },
   {
     "InternalIndex": 202,
-    "Description": "Clatter 2",
+    "Description": "Skidoo Clatter 2",
     "Creature": 0,
     "Categories": [
-      52
+      1, 52
     ],
     "Details": {
       "Sample": 0,
@@ -3612,10 +3612,10 @@
   },
   {
     "InternalIndex": 203,
-    "Description": "Clatter 3",
+    "Description": "Skidoo Clatter 3",
     "Creature": 0,
     "Categories": [
-      52
+      1, 52
     ],
     "Details": {
       "Sample": 0,
