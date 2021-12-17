@@ -154,10 +154,19 @@ namespace TREnvironmentEditor.Parsing
             EMConditionType type = (EMConditionType)jo["ConditionType"].Value<int>();
             switch (type)
             {
+                // Entities
                 case EMConditionType.EntityProperty:
-                    return JsonConvert.DeserializeObject<EMEntityPropertyCondition>(jo.ToString());
+                    return JsonConvert.DeserializeObject<EMEntityPropertyCondition>(jo.ToString(), this);
                 case EMConditionType.SecretInRoom:
-                    return JsonConvert.DeserializeObject<EMSecretRoomCondition>(jo.ToString());
+                    return JsonConvert.DeserializeObject<EMSecretRoomCondition>(jo.ToString(), this);
+
+                // Rooms
+                case EMConditionType.RoomContainsWater:
+                    return JsonConvert.DeserializeObject<EMRoomContainsWaterCondition>(jo.ToString(), this);
+
+                // Models
+                case EMConditionType.ModelExists:
+                    return JsonConvert.DeserializeObject<EMModelExistsCondition>(jo.ToString(), this);
 
                 default:
                     throw new InvalidOperationException();

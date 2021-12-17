@@ -15,13 +15,13 @@ namespace TREnvironmentEditor.Model.Conditions
         // Does a room contain a secret?
         public short RoomIndex { get; set; }
 
-        public override bool GetResult(TR2Level level)
+        protected override bool Evaluate(TR2Level level)
         {
             List<TR2Entity> entities = level.Entities.ToList();
             return entities.Any(e => e.Room == RoomIndex && TR2EntityUtilities.IsSecretType((TR2Entities)e.TypeID));
         }
 
-        public override bool GetResult(TR3Level level)
+        protected override bool Evaluate(TR3Level level)
         {
             List<TR2Entity> levelEntities = level.Entities.ToList();
             List<TR2Entity> roomEntities = levelEntities.FindAll(e => e.Room == RoomIndex);

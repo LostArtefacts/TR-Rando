@@ -334,6 +334,13 @@ namespace TRRandomizerCore.Randomizers
                         }
                         while (targetEntity == null);
 
+                        // If the room has water but this enemy isn't a water enemy, we will assume that environment
+                        // modifications will handle assignment of the enemy to entities.
+                        if (!TR3EntityUtilities.IsWaterCreature(entity) && level.Data.Rooms[targetEntity.Room].ContainsWater)
+                        {
+                            continue;
+                        }
+
                         // Some enemies need pathing like Willard but we have to honour the entity limit
                         List<Location> paths = TR3EnemyUtilities.GetAIPathing(level.Name, entity, targetEntity.Room);
                         if (ItemFactory.CanCreateItems(level.Name, levelEntities, paths.Count))

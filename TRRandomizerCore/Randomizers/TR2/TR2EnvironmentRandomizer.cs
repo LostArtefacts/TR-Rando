@@ -134,8 +134,11 @@ namespace TRRandomizerCore.Randomizers
             foreach (EMConditionalEditorSet conditionalSet in mapping.ConditionalAllWithin)
             {
                 List<EMEditorSet> modList = conditionalSet.GetApplicableSets(level.Data);
-                EMEditorSet mod = modList[_generator.Next(0, modList.Count)];
-                mod.ApplyToLevel(level.Data, _disallowedTypes);
+                if (modList != null && modList.Count > 0)
+                {
+                    EMEditorSet mod = modList[_generator.Next(0, modList.Count)];
+                    mod.ApplyToLevel(level.Data, _disallowedTypes);
+                }
             }
 
             // OneOf is used for a leader-follower situation, but where only one follower from

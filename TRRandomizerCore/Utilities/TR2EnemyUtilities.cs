@@ -265,8 +265,6 @@ namespace TRRandomizerCore.Utilities
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [TR2LevelNames.DA] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
-            [TR2LevelNames.FATHOMS] =
-                new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [TR2LevelNames.LQ] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             // #192 The Barkhang/Opera House freeze appears to be caused by dead floating water creatures, so they're all banished

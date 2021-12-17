@@ -18,12 +18,12 @@ namespace TREnvironmentEditor.Model.Conditions
         public int? Z { get; set; }
         public short? Room { get; set; }
 
-        public override bool GetResult(TR2Level level)
+        protected override bool Evaluate(TR2Level level)
         {
             return GetResult(level.Entities[EntityIndex]);
         }
 
-        public override bool GetResult(TR3Level level)
+        protected override bool Evaluate(TR3Level level)
         {
             return GetResult(level.Entities[EntityIndex]);
         }
