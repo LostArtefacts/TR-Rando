@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TREnvironmentEditor.Helpers;
-using TREnvironmentEditor.Model.Types;
 using TRFDControl;
 using TRFDControl.Utilities;
 using TRGE.Core;
@@ -258,28 +253,12 @@ namespace TRRandomizerCore.Randomizers
 
                 foreach (TR2Entity ent in level.Data.Entities)
                 {
-                    //For moving floordata
-                    EMLocation currentFDLocation = null;
-
                     //Calculate its alias
                     TR3Entities AliasedKeyItemID = (TR3Entities)(ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name));
 
-                    //For key items which need FData moving 0 get its current sector and its existing FDentries
+                    //Any special handling for key item entities
                     switch (AliasedKeyItemID)
                     {
-                        case TR3Entities.GaneshaSpikeCorridorAfterMud:
-                        case TR3Entities.GaneshaSpikeCeiling:
-                        case TR3Entities.BishopsKey:
-                        case TR3Entities.TuckermansKey:
-                        case TR3Entities.GeneratorKey:
-                            currentFDLocation = new EMLocation
-                            {
-                                X = ent.X,
-                                Y = ent.Y,
-                                Z = ent.Z,
-                                Room = ent.Room
-                            };
-                            break;
                         case TR3Entities.DetonatorKey:
                             ent.Invisible = false;
                             break;
@@ -310,31 +289,6 @@ namespace TRRandomizerCore.Randomizers
                         } while (!_keyItemZones[level.Name].AllowedRooms[AliasedKeyItemID].Contains(ent.Room) &&
                                 (!_keyItemZones[level.Name].AllowedRooms[AliasedKeyItemID].Contains(_ANY_ROOM_ALLOWED)));
                         //Try generating locations until it is in the zone - if list contains 2048 then any room is allowed.
-                    }
-
-                    //Does key item require special handling? (E.G. move floordata)
-                    switch (AliasedKeyItemID)
-                    {
-                        case TR3Entities.GaneshaSpikeCorridorAfterMud:
-                        case TR3Entities.GaneshaSpikeCeiling:
-                        case TR3Entities.BishopsKey:
-                        case TR3Entities.TuckermansKey:
-                        case TR3Entities.GeneratorKey:
-                            // Move the triggers only, so to retain other FD such as floor/ceiling slants
-                            new EMMoveTriggerFunction
-                            {
-                                BaseLocation = currentFDLocation,
-                                NewLocation = new EMLocation
-                                {
-                                    X = ent.X,
-                                    Y = ent.Y,
-                                    Z = ent.Z,
-                                    Room = ent.Room
-                                }
-                            }.ApplyToLevel(level.Data);
-                            break;
-                        default:
-                            break;
                     }
                 }
             }

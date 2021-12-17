@@ -19,6 +19,56 @@
           "NewEntityType": 177
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #83 is in its default position. If not, change the trigger to a pad.",
+        "ConditionType": 0,
+        "EntityIndex": 83,
+        "X": 35328,
+        "Y": 1536,
+        "Z": 64000,
+        "Room": 46
+      },
+      "OnFalse": [
+        {
+          "Comments": "Make the pickup trigger a pad.",
+          "EMType": 69,
+          "TrigType": 1,
+          "OneShot": true,
+          "Location": {
+            "X": 35328,
+            "Y": 1536,
+            "Z": 64000,
+            "Room": 46
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #59 is in its default position. If not, change the trigger to a pad.",
+        "ConditionType": 0,
+        "EntityIndex": 59,
+        "X": 59904,
+        "Y": -2048,
+        "Z": 16896,
+        "Room": 30
+      },
+      "OnFalse": [
+        {
+          "Comments": "Make the pickup trigger a pad.",
+          "EMType": 69,
+          "TrigType": 1,
+          "OneShot": true,
+          "Location": {
+            "X": 59904,
+            "Y": -2048,
+            "Z": 16896,
+            "Room": 30
+          }
+        }
+      ]
     }
   ]
 }
