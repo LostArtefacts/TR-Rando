@@ -13,13 +13,17 @@ namespace TREnvironmentEditor.Model.Conditions
         public short? Intensity1 { get; set; }
         public short? Intensity2 { get; set; }
         public ushort? Flags { get; set; }
+        public int? X { get; set; }
+        public int? Y { get; set; }
+        public int? Z { get; set; }
+        public short? Room { get; set; }
 
-        public override bool GetResult(TR2Level level)
+        protected override bool Evaluate(TR2Level level)
         {
             return GetResult(level.Entities[EntityIndex]);
         }
 
-        public override bool GetResult(TR3Level level)
+        protected override bool Evaluate(TR3Level level)
         {
             return GetResult(level.Entities[EntityIndex]);
         }
@@ -54,6 +58,22 @@ namespace TREnvironmentEditor.Model.Conditions
             if (Flags.HasValue)
             {
                 result &= entity.Flags == Flags.Value;
+            }
+            if (X.HasValue)
+            {
+                result &= entity.X == X.Value;
+            }
+            if (Y.HasValue)
+            {
+                result &= entity.Y == Y.Value;
+            }
+            if (Z.HasValue)
+            {
+                result &= entity.Z == Z.Value;
+            }
+            if (Room.HasValue)
+            {
+                result &= entity.Room == Room.Value;
             }
             return result;
         }

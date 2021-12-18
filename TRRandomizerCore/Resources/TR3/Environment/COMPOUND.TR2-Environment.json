@@ -2,6 +2,93 @@
   "ConditionalAll": [
     {
       "Condition": {
+        "Comments": "Check if enemy #63 is a hostile human and if not, make some changes to allow Lara to open room 169 herself.",
+        "ConditionType": 0,
+        "EntityIndex": 63,
+        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert one of the now unused AI entities into a button.",
+          "EMType": 45,
+          "EntityIndex": 107,
+          "NewEntityType": 128
+        },
+        {
+          "Comments": "Convert the AI entities under the enemy into pickups.",
+          "EMType": 45,
+          "EntityIndex": 62,
+          "NewEntityType": 176
+        },
+        {
+          "Comments": "Convert the AI entities under the enemy into pickups.",
+          "EMType": 45,
+          "EntityIndex": 64,
+          "NewEntityType": 176
+        },
+        {
+          "Comments": "Remove the old heavy trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 91648,
+              "Y": -4864,
+              "Z": 82432,
+              "Room": 74
+            }
+          ]
+        },
+        {
+          "Comments": "Make a trigger for the button.",
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872,
+              "OneShot": true
+            },
+            "TrigType": 2,
+            "SwitchOrKeyRef": 107,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 226
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 227
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 228
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 91648,
+              "Y": -4864,
+              "Z": 82432,
+              "Room": 74
+            }
+          ]
+        },
+
+        {
+          "Comments": "Remove the hand scanner static mesh.",
+          "EMType": 25,
+          "ClearFromRooms": {
+            "39": [
+              74
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
         "Comments": "Check if enemy #132 is a prisoner and if not, make some changes to allow Lara to open the trapdoor in this area herself.",
         "ConditionType": 0,
         "EntityIndex": 132,
@@ -29,6 +116,17 @@
           "EMType": 45,
           "EntityIndex": 131,
           "NewEntityType": 128
+        },
+        {
+          "Comments": "Convert the others into pickup.",
+          "EMType": 45,
+          "EntityIndex": 133,
+          "NewEntityType": 176
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 134,
+          "NewEntityType": 170
         },
         {
           "Comments": "Move the button so Lara can reach it.",

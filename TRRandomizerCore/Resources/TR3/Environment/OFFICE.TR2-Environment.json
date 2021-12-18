@@ -1,0 +1,19 @@
+{
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if enemy #9 is a monkey and if so convert the AI entity here into a pickup.",
+        "ConditionType": 0,
+        "EntityIndex": 9,
+        "EntityType": 71
+      },
+      "OnTrue": [
+        {
+          "EMType": 45,
+          "EntityIndex": 10,
+          "NewEntityType": 176
+        }
+      ]
+    }
+  ]
+}

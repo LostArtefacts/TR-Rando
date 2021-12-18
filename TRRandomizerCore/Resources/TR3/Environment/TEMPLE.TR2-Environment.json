@@ -1,0 +1,115 @@
+{
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if key item #113 is in its default position. If not, change the trigger so Lara can escape this room.",
+        "ConditionType": 0,
+        "EntityIndex": 113,
+        "X": 35328,
+        "Y": 4864,
+        "Z": 87552,
+        "Room": 147
+      },
+      "OnFalse": [
+        {
+          "Comments": "Make the pickup trigger a pad.",
+          "EMType": 69,
+          "TrigType": 1,
+          "OneShot": true,
+          "Location": {
+            "X": 35328,
+            "Y": 4864,
+            "Z": 87552,
+            "Room": 147
+          }
+        },
+        {
+          "Comments": "Change the floor textures.",
+          "EMType": 21,
+          "TextureMap": {
+            "764": {
+              "147": {
+                "Rectangles": [ 17 ]
+              }
+            },
+            "1708": {
+              "147": {
+                "Rectangles": [ 0 ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Rotate the texture under the trigger.",
+          "EMType": 23,
+          "Rotations": [
+            {
+              "RoomNumber": 147,
+              "FaceType": 0,
+              "FaceIndices": [ 17 ],
+              "VertexRemap": {
+                "0": 2,
+                "1": 3,
+                "2": 0,
+                "3": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #228 is in its default position. If not, change the trigger so Lara can escape this room.",
+        "ConditionType": 0,
+        "EntityIndex": 228,
+        "X": 14848,
+        "Y": 5632,
+        "Z": 50688,
+        "Room": 222
+      },
+      "OnFalse": [
+        {
+          "Comments": "Make the pickup trigger a pad.",
+          "EMType": 69,
+          "TrigType": 1,
+          "OneShot": true,
+          "Location": {
+            "X": 14848,
+            "Y": 5632,
+            "Z": 50688,
+            "Room": 222
+          }
+        },
+        {
+          "Comments": "Change the floor texture.",
+          "EMType": 21,
+          "TextureMap": {
+            "764": {
+              "222": {
+                "Rectangles": [ 3 ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Rotate the texture under the trigger.",
+          "EMType": 23,
+          "Rotations": [
+            {
+              "RoomNumber": 222,
+              "FaceType": 0,
+              "FaceIndices": [ 3 ],
+              "VertexRemap": {
+                "0": 2,
+                "1": 3,
+                "2": 0,
+                "3": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,328 @@
+{
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if enemy #0 is a hostile human and if not, avoid other enemies heading for the heavy trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 0,
+        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 7,
+          "NewEntityType": 176
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 4,
+          "NewEntityType": 174
+        },
+        {
+          "Comments": "Remove the heavy trigger at the handscanner.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 43520,
+              "Y": -256,
+              "Z": 60928,
+              "Room": 0
+            }
+          ]
+        },
+        {
+          "Comments": "Remove the hand scanner static mesh.",
+          "EMType": 25,
+          "ClearFromRooms": {
+            "43": [
+              0
+            ]
+          }
+        },
+        {
+          "Comments": "Make a pickup trigger for the other enemies.",
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 4,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 4
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 6
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 5
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 43520,
+              "Y": -256,
+              "Z": 60928,
+              "Room": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if enemy #9 is a hostile human and if not, avoid other enemies heading for the heavy trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 9,
+        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 8,
+          "NewEntityType": 176
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 11,
+          "NewEntityType": 174
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 12,
+          "NewEntityType": 178
+        },
+        {
+          "Comments": "Remove the heavy trigger at the handscanner.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 42496,
+              "Y": -3328,
+              "Z": 72192,
+              "Room": 1
+            }
+          ]
+        },
+        {
+          "Comments": "Remove the hand scanner static mesh.",
+          "EMType": 25,
+          "ClearFromRooms": {
+            "43": [
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if enemy #59 is a hostile human and if not, avoid other enemies heading for the heavy trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 59,
+        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 60,
+          "NewEntityType": 169
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 24,
+          "NewEntityType": 178
+        },
+        {
+          "Comments": "Remove the heavy trigger at the handscanner.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 49664,
+              "Y": -1024,
+              "Z": 66048,
+              "Room": 9
+            }
+          ]
+        },
+        {
+          "Comments": "Remove the hand scanner static mesh.",
+          "EMType": 25,
+          "ClearFromRooms": {
+            "43": [
+              9
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if enemy #35 is an MP Baton guy and if not, just remove the heavy trigger because no other enemy goes to it.",
+        "ConditionType": 0,
+        "EntityIndex": 35,
+        "EntityType": 60
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 36,
+          "NewEntityType": 176
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 37,
+          "NewEntityType": 174
+        },
+        {
+          "Comments": "Remove the heavy trigger at the handscanner.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 54784,
+              "Y": 3072,
+              "Z": 62976,
+              "Room": 12
+            }
+          ]
+        },
+        {
+          "Comments": "Remove the hand scanner static mesh.",
+          "EMType": 25,
+          "ClearFromRooms": {
+            "43": [
+              12
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If enemy #147 is neither a punk nor MP, get rid of the heavy trigger as no other enemy will go to it.",
+        "ConditionType": 0,
+        "EntityIndex": 147,
+        "EntityTypes": [ 53, 60 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 146,
+          "NewEntityType": 176
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 148,
+          "NewEntityType": 170
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 192,
+          "NewEntityType": 174
+        },
+        {
+          "Comments": "Remove the heavy trigger at the destination.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 37376,
+              "Y": -1280,
+              "Z": 29184,
+              "Room": 108
+            }
+          ]
+        },
+        {
+          "Comments": "Make a pickup trigger instead.",
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 4,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 192
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 186
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 37376,
+              "Y": -1280,
+              "Z": 29184,
+              "Room": 108
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if enemy #161 is a hostile human and if not, avoid other enemies heading for the heavy trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 161,
+        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 162,
+          "NewEntityType": 176
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 168,
+          "NewEntityType": 174
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 207,
+          "NewEntityType": 178
+        },
+        {
+          "Comments": "Remove the heavy trigger at the handscanner.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 51712,
+              "Y": -2304,
+              "Z": 47616,
+              "Room": 120
+            }
+          ]
+        },
+        {
+          "Comments": "Remove the hand scanner static mesh.",
+          "EMType": 25,
+          "ClearFromRooms": {
+            "43": [
+              120
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

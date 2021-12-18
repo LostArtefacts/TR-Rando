@@ -433,6 +433,13 @@ namespace TRRandomizerCore.Randomizers
                         }
                         while (targetEntity == null);
 
+                        // If the room has water but this enemy isn't a water enemy, we will assume that environment
+                        // modifications will handle assignment of the enemy to entities.
+                        if (!TR2EntityUtilities.IsWaterCreature(entity) && level.Data.Rooms[targetEntity.Room].ContainsWater)
+                        {
+                            continue;
+                        }
+
                         targetEntity.TypeID = (short)TR2EntityUtilities.TranslateEntityAlias(entity);
 
                         // #146 Ensure OneShot triggers are set for this enemy if needed

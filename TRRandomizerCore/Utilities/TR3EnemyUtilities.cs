@@ -342,7 +342,8 @@ namespace TRRandomizerCore.Utilities
 
         private static readonly Dictionary<string, List<TR3Entities>> _unsupportedEnemiesDefault = new Dictionary<string, List<TR3Entities>>
         {
-            
+            [TR3LevelNames.HALLOWS] =
+                new List<TR3Entities> { TR3Entities.Willie }
         };
 
         // Any enemies that must remain untouched in a given level

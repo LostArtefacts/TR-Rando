@@ -1,0 +1,67 @@
+{
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if enemy #88 is a monkey and if so convert the AI entities here into pickups, otherwise the game crashes.",
+        "ConditionType": 0,
+        "EntityIndex": 88,
+        "EntityType": 71
+      },
+      "OnTrue": [
+        {
+          "EMType": 45,
+          "EntityIndex": 90,
+          "NewEntityType": 176
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 89,
+          "NewEntityType": 174
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 94,
+          "NewEntityType": 174
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if enemy #123 is a hostile human and if not, get rid of the AI entities and heavy trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 123,
+        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 124,
+          "NewEntityType": 176
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 125,
+          "NewEntityType": 174
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 128,
+          "NewEntityType": 174
+        },
+        {
+          "Comments": "Remove the heavy trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 16896,
+              "Y": 7424,
+              "Z": 68096,
+              "Room": 125
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

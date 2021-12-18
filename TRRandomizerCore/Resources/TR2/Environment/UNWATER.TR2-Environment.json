@@ -549,6 +549,81 @@
     ]
   ],
 
+  "ConditionalAllWithin": [
+    {
+      "Condition": {
+        "Comments": "Has 40F been drained (check room 1 does not contain water) and do we have the dragon model available? If so, make Marco, position him and add guns in case we're unarmed.",
+        "ConditionType": 21,
+        "RoomIndex": 1,
+        "Negate": true,
+        "And": [
+          {
+            "ConditionType": 41,
+            "ModelID": 40
+          }
+        ]
+      },
+      "OnTrue": [
+        [
+          {
+            "EMType": 45,
+            "EntityIndex": 2,
+            "NewEntityType": 40
+          },
+          {
+            "EMType": 44,
+            "EntityIndex": 2,
+            "TargetLocation": {
+              "X": 45568,
+              "Y": 0,
+              "Z": 42496,
+              "Room": 1,
+              "Angle": -16384
+            }
+          },
+          {
+            "EMType": 51,
+            "TypeID": 135,
+            "Location": {
+              "X": 32256,
+              "Y": -896,
+              "Z": 46592,
+              "Room": 0
+            }
+          }
+        ],
+        [
+          {
+            "EMType": 45,
+            "EntityIndex": 2,
+            "NewEntityType": 40
+          },
+          {
+            "EMType": 44,
+            "EntityIndex": 2,
+            "TargetLocation": {
+              "X": 36842,
+              "Y": -512,
+              "Z": 48100,
+              "Room": 0,
+              "Angle": -16384
+            }
+          },
+          {
+            "EMType": 51,
+            "TypeID": 135,
+            "Location": {
+              "X": 32256,
+              "Y": -896,
+              "Z": 46592,
+              "Room": 0
+            }
+          }
+        ]
+      ]
+    }
+  ],
+
   "OneOf": [
     {
       "Leader": [

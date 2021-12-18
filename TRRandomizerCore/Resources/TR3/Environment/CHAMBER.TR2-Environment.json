@@ -1,0 +1,78 @@
+{
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if enemy #34 is a hostile human and if not, get rid of the AI entities and heavy trigger.",
+        "ConditionType": 0,
+        "EntityIndex": 34,
+        "EntityTypes": [ 40, 46, 51, 53, 56, 60, 61, 63 ]
+      },
+      "OnFalse": [
+        {
+          "Comments": "Convert the AI entities into pickups.",
+          "EMType": 45,
+          "EntityIndex": 35,
+          "NewEntityType": 176
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 36,
+          "NewEntityType": 174
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 39,
+          "NewEntityType": 174
+        },
+        {
+          "Comments": "Remove the heavy trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 36352,
+              "Y": 0,
+              "Z": 38400,
+              "Room": 27
+            }
+          ]
+        },
+        {
+          "Comments": "Make a trigger for the button instead.",
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 2,
+            "SwitchOrKeyRef": 38,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 49
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 50
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 48
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 36352,
+              "Y": 0,
+              "Z": 38400,
+              "Room": 27
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
