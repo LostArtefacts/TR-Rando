@@ -23,6 +23,11 @@ namespace TRFDControl
             {
                 return (byte)(Value & 0x001F);
             }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0x001F));
+                Value |= value;
+            }
         }
 
         public byte ExtendedFunction
@@ -78,7 +83,12 @@ namespace TRFDControl
         {
             get
             {
-                return (sbyte)(Value & 0x03E0);
+                return (sbyte)((Value & 0x03E0) >> 5);
+            }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0x03E0));
+                Value |= (ushort)(value << 5);
             }
         }
 
@@ -86,7 +96,12 @@ namespace TRFDControl
         {
             get
             {
-                return (sbyte)(Value & 0x7C00);
+                return (sbyte)((Value & 0x7C00) >> 10);
+            }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0x7C00));
+                Value |= (ushort)(value << 10);
             }
         }
         #endregion

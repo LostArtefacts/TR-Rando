@@ -494,7 +494,7 @@ namespace TRRandomizerCore.Utilities
                     break;
 
                 case FDFunctions.FloorTriangulationNESW_Solid:
-                case FDFunctions.FloorTriangulationNESW_SW:
+                case FDFunctions.FloorTriangulationNESW_SE:
                 case FDFunctions.FloorTriangulationNESW_NW:
                     triangle1 = new List<Vector3>
                     {
@@ -571,7 +571,7 @@ namespace TRRandomizerCore.Utilities
                         zOffset = zoff1;
                         bestMatch = new Vector4(triSum1.X, triSum1.Y, triSum1.Z, angle);
                     }
-                    else if (func != FDFunctions.FloorTriangulationNESW_SW)
+                    else if (func != FDFunctions.FloorTriangulationNESW_SE)
                     {
                         xOffset = xoff2;
                         zOffset = zoff2;
