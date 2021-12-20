@@ -14,7 +14,7 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR3EnvironmentRandomizer : BaseTR3Randomizer
     {
-        internal bool EnforcedModeOnly => true;//!Settings.RandomizeEnvironment;
+        internal bool EnforcedModeOnly => !Settings.RandomizeEnvironment;
         internal TR3TextureMonitorBroker TextureMonitor { get; set; }
 
         private List<EMType> _disallowedTypes;
@@ -62,7 +62,17 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeEnvironment(TR3CombinedLevel level)
         {
-            EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath(@"TR3\Environment\" + level.Name + "-Environment.json"));
+            string json = @"TR3\Environment\" + level.Name + "-Environment.json";
+            if (IsJPVersion)
+            {
+                string jpJson = @"TR3\Environment\" + level.Name + "-JP-Environment.json";
+                if (ResourceExists(jpJson))
+                {
+                    json = jpJson;
+                }
+            }
+
+            EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath(json));
             if (mapping != null)
             {
                 ApplyMappingToLevel(level, mapping);

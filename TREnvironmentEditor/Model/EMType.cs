@@ -60,6 +60,7 @@
 
         // Models
         ImportModel = 141,
+        MirrorModel = 142,
 
         // NOOP/Placeholder
         NOOP = 1000

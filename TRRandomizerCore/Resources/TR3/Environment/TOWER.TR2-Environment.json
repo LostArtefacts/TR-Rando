@@ -54,5 +54,20 @@
         }
       ]
     }
+  ],
+
+  "Mirrored": [
+    {
+      "Comments": "Move door #143 so Lara can pass.",
+      "EMType": 44,
+      "EntityIndex": 143,
+      "TargetLocation": {
+        "X": 39424,
+        "Y": -30976,
+        "Z": 37376,
+        "Room": 132,
+        "Angle": 16384
+      }
+    }
   ]
 }

@@ -63,5 +63,20 @@
         }
       ]
     }
+  ],
+
+  "Mirrored": [
+    {
+      "Comments": "Move door #40 so the maze can be beaten",
+      "EMType": 44,
+      "EntityIndex": 40,
+      "TargetLocation": {
+        "X": 40448,
+        "Y": -512,
+        "Z": 27136,
+        "Room": 51,
+        "Angle": -32768
+      }
+    }
   ]
 }

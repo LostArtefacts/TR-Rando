@@ -324,5 +324,14 @@
         }
       ]
     }
+  ],
+
+  "Mirrored": [
+    {
+      "Comments": "Make door #182 a split one so Lara can pass.",
+      "EMType": 45,
+      "EntityIndex": 182,
+      "NewEntityType": 137
+    }
   ]
 }

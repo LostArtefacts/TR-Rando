@@ -213,7 +213,7 @@ namespace TRRandomizerCore.Editors
 
                 if (!monitor.IsCancelled)
                 {
-                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, /*Settings.RandomizeEnvironment ? "Randomizing environment" : */"Applying default environment packs");
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, Settings.RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
                     new TR3EnvironmentRandomizer
                     {
                         ScriptEditor = tr23ScriptEditor,
