@@ -152,6 +152,16 @@ namespace TRRandomizerCore.Editors
                     }.Run();
                 }
 
+                TR3EnvironmentRandomizer environmentRandomizer = new TR3EnvironmentRandomizer
+                {
+                    ScriptEditor = tr23ScriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings,
+                    TextureMonitor = textureMonitor
+                };
+
                 if (!monitor.IsCancelled && Settings.RandomizeSecrets)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
@@ -163,7 +173,8 @@ namespace TRRandomizerCore.Editors
                         SaveMonitor = monitor,
                         Settings = Settings,
                         TextureMonitor = textureMonitor,
-                        ItemFactory = itemFactory
+                        ItemFactory = itemFactory,
+                        MirrorLevels = environmentRandomizer.AllocateMirroredLevels(Settings.EnvironmentSeed)
                     }.Randomize(Settings.SecretSeed);
                 }
 
@@ -214,15 +225,7 @@ namespace TRRandomizerCore.Editors
                 if (!monitor.IsCancelled)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, Settings.RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
-                    new TR3EnvironmentRandomizer
-                    {
-                        ScriptEditor = tr23ScriptEditor,
-                        Levels = levels,
-                        BasePath = wipDirectory,
-                        SaveMonitor = monitor,
-                        Settings = Settings,
-                        TextureMonitor = textureMonitor
-                    }.Randomize(Settings.EnvironmentSeed);
+                    environmentRandomizer.Randomize(Settings.EnvironmentSeed);
                 }
 
                 if (!monitor.IsCancelled && Settings.RandomizeAudio)
