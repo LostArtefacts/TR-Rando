@@ -240,5 +240,44 @@
         }
       ]
     }
+  ],
+
+  "Mirrored": [
+    {
+      "Comments": "Move slot #69 otherwise it's hidden.",
+      "EMType": 44,
+      "EntityIndex": 69,
+      "TargetLocation": {
+        "X": 34304,
+        "Y": -5888,
+        "Z": 85760,
+        "Room": 37,
+        "Angle": -16384
+      }
+    },
+    {
+      "Comments": "Move the Solomon room moon.",
+      "EMType": 44,
+      "EntityIndex": 10,
+      "TargetLocation": {
+        "X": 48640,
+        "Y": 896,
+        "Z": 22016,
+        "Room": 1,
+        "Angle": -32768
+      }
+    },
+    {
+      "Comments": "Move door #193 so it's less awkward.",
+      "EMType": 44,
+      "EntityIndex": 193,
+      "TargetLocation": {
+        "X": 45568,
+        "Y": 2560,
+        "Z": 36352,
+        "Room": 104,
+        "Angle": 0
+      }
+    }
   ]
 }

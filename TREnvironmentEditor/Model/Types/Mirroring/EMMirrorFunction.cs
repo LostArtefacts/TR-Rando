@@ -18,9 +18,24 @@ namespace TREnvironmentEditor.Model.Types
         private const int _west = _east * -1;
         private const int _south = short.MinValue;
 
-        private int _worldWidth;
+        private int _worldWidth, _xAdjustment;
 
         public override void ApplyToLevel(TR2Level level)
+        {
+            CalculateWorldWidth(level);
+
+            MirrorFloorData(level);
+            MirrorRooms(level);
+            MirrorBoxes(level);
+
+            MirrorStaticMeshes(level);
+            MirrorEntities(level);
+            MirrorNullMeshes(level);
+
+            MirrorTextures(level);
+        }
+
+        public override void ApplyToLevel(TR3Level level)
         {
             CalculateWorldWidth(level);
 
@@ -38,17 +53,38 @@ namespace TREnvironmentEditor.Model.Types
         private void CalculateWorldWidth(TR2Level level)
         {
             _worldWidth = 0;
+            _xAdjustment = 0;
             foreach (TR2Room room in level.Rooms)
             {
                 _worldWidth = Math.Max(_worldWidth, room.Info.X + SectorSize * room.NumXSectors);
             }
         }
 
+        private void CalculateWorldWidth(TR3Level level)
+        {
+            _worldWidth = 0;
+            _xAdjustment = 0;
+            foreach (TR3Room room in level.Rooms)
+            {
+                _worldWidth = Math.Max(_worldWidth, room.Info.X + SectorSize * room.NumXSectors);
+            }
+
+            TR2Entity puna = Array.Find(level.Entities, e => e.TypeID == (short)TR3Entities.Puna);
+            if (puna != null)
+            {
+                // Rebuild the world around Puna's Lizard
+                TR2Entity lizardMan = Array.Find(level.Entities, e => e.Room == puna.Room && e.TypeID == (short)TR3Entities.LizardMan);
+                _xAdjustment = lizardMan.X - FlipWorldX(lizardMan.X);
+            }
+        }
+
         private int FlipWorldX(int x)
         {
-            // Shift the point 100% to the left, then flip it back to +
+            // Shift the point 100% to the left, then flip it back to +. If we have a level such as Puna
+            // that's been built around particular coords, adjust X.
             x -= _worldWidth;
             x *= -1;
+            x += _xAdjustment;
             Debug.Assert(x >= 0);
             return x;
         }
@@ -62,60 +98,167 @@ namespace TREnvironmentEditor.Model.Types
 
         private void MirrorFloorData(TR2Level level)
         {
-            FDControl control = new FDControl();
-            control.ParseFromLevel(level);
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
 
             foreach (TR2Room room in level.Rooms)
             {
-                // Convert the flattened sector list to 2D
                 List<TRRoomSector> sectors = room.SectorList.ToList();
-                List<List<TRRoomSector>> sectorMap = new List<List<TRRoomSector>>();
-                for (int x = 0; x < room.NumXSectors; x++)
-                {
-                    sectorMap.Add(new List<TRRoomSector>());
-                    for (int z = 0; z < room.NumZSectors; z++)
-                    {
-                        sectorMap[x].Add(sectors[z + x * room.NumZSectors]);
-                    }
-                }
-
-                // We are flipping X, so we just reverse the list of sector lists
-                sectorMap.Reverse();
-                sectors.Clear();
-                foreach (List<TRRoomSector> sectorList in sectorMap)
-                {
-                    sectors.AddRange(sectorList);
-                }
+                MirrorSectors(sectors, room.NumXSectors, room.NumZSectors, floorData);
                 room.SectorList = sectors.ToArray();
+            }
 
-                // Change slants and climbable entries
-                foreach (TRRoomSector sector in sectors)
+            floorData.WriteToLevel(level);
+        }
+
+        private void MirrorFloorData(TR3Level level)
+        {
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
+
+            foreach (TR3Room room in level.Rooms)
+            {
+                List<TRRoomSector> sectors = room.Sectors.ToList();
+                MirrorSectors(sectors, room.NumXSectors, room.NumZSectors, floorData);
+                room.Sectors = sectors.ToArray();
+            }
+
+            floorData.WriteToLevel(level);
+        }
+
+        private void MirrorSectors(List<TRRoomSector> sectors, ushort numXSectors, ushort numZSectors, FDControl floorData)
+        {
+            // Convert the flattened sector list to 2D            
+            List<List<TRRoomSector>> sectorMap = new List<List<TRRoomSector>>();
+            for (int x = 0; x < numXSectors; x++)
+            {
+                sectorMap.Add(new List<TRRoomSector>());
+                for (int z = 0; z < numZSectors; z++)
                 {
-                    if (sector.FDIndex != 0)
+                    sectorMap[x].Add(sectors[z + x * numZSectors]);
+                }
+            }
+
+            // We are flipping X, so we just reverse the list of sector lists
+            sectorMap.Reverse();
+            sectors.Clear();
+            foreach (List<TRRoomSector> sectorList in sectorMap)
+            {
+                sectors.AddRange(sectorList);
+            }
+
+            // Change slants and climbable entries
+            foreach (TRRoomSector sector in sectors)
+            {
+                if (sector.FDIndex != 0)
+                {
+                    List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+                    for (int i = 0; i < entries.Count; i++)
                     {
-                        List<FDEntry> entries = control.Entries[sector.FDIndex];
-                        foreach (FDEntry entry in entries)
+                        FDEntry entry = entries[i];
+                        if (entry is FDSlantEntry slantEntry)
                         {
-                            if (entry is FDSlantEntry slantEntry)
+                            // If the X slope is greater than zero, then its value is added to the floor heights of corners 00 and 01.
+                            // If it is less than zero, then its value is subtracted from the floor heights of corners 10 and 11.
+                            slantEntry.XSlant *= -1;
+                        }
+                        else if (entry is FDClimbEntry climbEntry)
+                        {
+                            // We only need to flip the direction if it's exclusively set in +/- X direction.
+                            if (climbEntry.IsNegativeX ^ climbEntry.IsPositiveX)
                             {
-                                // If the X slope is greater than zero, then its value is added to the floor heights of corners 00 and 01.
-                                // If it is less than zero, then its value is subtracted from the floor heights of corners 10 and 11.
-                                slantEntry.XSlant *= -1;
+                                climbEntry.IsNegativeX = !(climbEntry.IsPositiveX ^= true);
                             }
-                            else if (entry is FDClimbEntry climbEntry)
+                        }
+                        else if (entry is TR3TriangulationEntry triangulation)
+                        {
+                            // Flip the corners
+                            byte c00 = triangulation.TriData.C00;
+                            byte c10 = triangulation.TriData.C10;
+                            byte c01 = triangulation.TriData.C01;
+                            byte c11 = triangulation.TriData.C11;
+                            triangulation.TriData.C00 = c10;
+                            triangulation.TriData.C10 = c00;
+                            triangulation.TriData.C01 = c11;
+                            triangulation.TriData.C11 = c01;
+
+                            // And the heights
+                            sbyte h1 = triangulation.Setup.H1;
+                            sbyte h2 = triangulation.Setup.H2;
+                            triangulation.Setup.H1 = h2;
+                            triangulation.Setup.H2 = h1;
+
+                            // And the triangulation
+                            switch ((FDFunctions)triangulation.Setup.Function)
                             {
-                                // We only need to flip the direction if it's exclusively set in +/- X direction.
-                                if (climbEntry.IsNegativeX ^ climbEntry.IsPositiveX)
+                                // Non-portals
+                                case FDFunctions.FloorTriangulationNWSE_Solid:
+                                    triangulation.Setup.Function = (byte)FDFunctions.FloorTriangulationNESW_Solid;
+                                    break;
+                                case FDFunctions.FloorTriangulationNESW_Solid:
+                                    triangulation.Setup.Function = (byte)FDFunctions.FloorTriangulationNWSE_Solid;
+                                    break;
+
+                                case FDFunctions.CeilingTriangulationNW_Solid:
+                                    triangulation.Setup.Function = (byte)FDFunctions.CeilingTriangulationNE_Solid;
+                                    break;
+                                case FDFunctions.CeilingTriangulationNE_Solid:
+                                    triangulation.Setup.Function = (byte)FDFunctions.CeilingTriangulationNW_Solid;
+                                    break;
+
+                                // Portals: _SW, _NE etc indicate triangles whose right-angles point towards the portal
+                                case FDFunctions.FloorTriangulationNWSE_SW:
+                                    triangulation.Setup.Function = (byte)FDFunctions.FloorTriangulationNESW_NW;
+                                    break;
+                                case FDFunctions.FloorTriangulationNWSE_NE:
+                                    triangulation.Setup.Function = (byte)FDFunctions.FloorTriangulationNESW_SE;
+                                    break;
+                                case FDFunctions.FloorTriangulationNESW_SE:
+                                    triangulation.Setup.Function = (byte)FDFunctions.FloorTriangulationNWSE_NE;
+                                    break;
+                                case FDFunctions.FloorTriangulationNESW_NW:
+                                    triangulation.Setup.Function = (byte)FDFunctions.FloorTriangulationNWSE_SW;
+                                    break;
+
+                                case FDFunctions.CeilingTriangulationNW_SW:
+                                    triangulation.Setup.Function = (byte)FDFunctions.CeilingTriangulationNE_SE;
+                                    break;
+                                case FDFunctions.CeilingTriangulationNW_NE:
+                                    triangulation.Setup.Function = (byte)FDFunctions.CeilingTriangulationNE_NW;
+                                    break;
+                                case FDFunctions.CeilingTriangulationNE_NW:
+                                    triangulation.Setup.Function = (byte)FDFunctions.CeilingTriangulationNW_NE;
+                                    break;
+                                case FDFunctions.CeilingTriangulationNE_SE:
+                                    triangulation.Setup.Function = (byte)FDFunctions.CeilingTriangulationNW_SW;
+                                    break;
+                            }
+                        }
+                        else if (entry is TR3MinecartRotateLeftEntry)
+                        {
+                            // If left is followed by right, it means stop the minecart and they appear to
+                            // need to remain in this order. Only switch the entry if there is no other.
+                            if (!(i < entries.Count - 1 && entries[i + 1] is TR3MinecartRotateRightEntry))
+                            {
+                                entries[i] = new TR3MinecartRotateRightEntry
                                 {
-                                    climbEntry.IsNegativeX = !(climbEntry.IsPositiveX ^= true);
-                                }
+                                    Setup = new FDSetup(FDFunctions.MechBeetleOrMinecartRotateRight)
+                                };
+                            }
+                        }
+                        else if (entry is TR3MinecartRotateRightEntry)
+                        {
+                            if (!(i > 0 && entries[i - 1] is TR3MinecartRotateLeftEntry))
+                            {
+                                entries[i] = new TR3MinecartRotateLeftEntry
+                                {
+                                    Setup = new FDSetup(FDFunctions.DeferredTriggeringOrMinecartRotateLeft)
+                                };
                             }
                         }
                     }
                 }
             }
-
-            control.WriteToLevel(level);
         }
 
         private void MirrorRooms(TR2Level level)
@@ -141,7 +284,6 @@ namespace TREnvironmentEditor.Model.Types
                 }
 
                 // Flip the face vertices
-                int mid = room.NumXSectors / 2;
                 foreach (TR2RoomVertex vert in room.RoomData.Vertices)
                 {
                     if (processedVerts.Contains(vert))
@@ -191,13 +333,92 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
+        private void MirrorRooms(TR3Level level)
+        {
+            foreach (TR3Room room in level.Rooms)
+            {
+                room.Info.X = FlipWorldX(room.Info.X);
+                room.Info.X -= room.NumXSectors * SectorSize;
+                Debug.Assert(room.Info.X >= 0);
+
+                // Flip room sprites separately as they don't sit on tile edges
+                List<TR3RoomVertex> processedVerts = new List<TR3RoomVertex>();
+                foreach (TRRoomSprite sprite in room.RoomData.Sprites)
+                {
+                    TR3RoomVertex roomVertex = room.RoomData.Vertices[sprite.Vertex];
+                    int xDiff = roomVertex.Vertex.X % SectorSize;
+                    int sectorX = (roomVertex.Vertex.X + xDiff) / SectorSize;
+                    int newSectorX = (room.NumXSectors - sectorX) * SectorSize;
+                    newSectorX += SectorSize - xDiff;
+                    roomVertex.Vertex.X = (short)newSectorX;
+                    Debug.Assert(roomVertex.Vertex.X >= 0);
+                    processedVerts.Add(roomVertex);
+                }
+
+                // Flip the face vertices
+                foreach (TR3RoomVertex vert in room.RoomData.Vertices)
+                {
+                    if (processedVerts.Contains(vert))
+                    {
+                        continue;
+                    }
+
+                    int sectorX = vert.Vertex.X / SectorSize;
+                    int newSectorX = room.NumXSectors - sectorX;
+                    vert.Vertex.X = (short)(newSectorX * SectorSize);
+                    Debug.Assert(vert.Vertex.X >= 0);
+                }
+
+                // Change visibility portal vertices and flip the normal for X
+                foreach (TRRoomPortal portal in room.Portals)
+                {
+                    foreach (TRVertex vert in portal.Vertices)
+                    {
+                        int sectorX = (int)Math.Round((double)vert.X / SectorSize);
+                        int newSectorX = room.NumXSectors - sectorX;
+                        vert.X = (short)(newSectorX * SectorSize);
+                        Debug.Assert(vert.X >= 0);
+                    }
+                    portal.Normal.X *= -1;
+                }
+
+                // Move the lights to their new spots
+                foreach (TR3RoomLight light in room.Lights)
+                {
+                    light.X = FlipWorldX(light.X);
+                }
+
+                // Move the static meshes
+                foreach (TR3RoomStaticMesh mesh in room.StaticMeshes)
+                {
+                    mesh.X = (uint)FlipWorldX((int)mesh.X);
+
+                    // Convert the angle to short units for consistency and then flip it
+                    short angle = (short)(mesh.Rotation + _south);
+                    angle *= -1;
+                    angle -= _south;
+                    mesh.Rotation = (ushort)angle;
+                }
+            }
+        }
+
         private void MirrorBoxes(TR2Level level)
+        {
+            MirrorBoxes(level.Boxes);
+        }
+
+        private void MirrorBoxes(TR3Level level)
+        {
+            MirrorBoxes(level.Boxes);
+        }
+
+        private void MirrorBoxes(TR2Box[] boxes)
         {
             // Boxes do not necessarily cover only one sector and several sectors can point
             // to the same box. So we need to work out the smallest new X position for shared
             // boxes and update each one only once. This is done by converting the xmin and xmax
             // to world coordinates, flipping them over X and then swapping them.
-            foreach (TR2Box box in level.Boxes)
+            foreach (TR2Box box in boxes)
             {
                 byte newMaxX = (byte)(FlipWorldX(box.XMin * SectorSize) / SectorSize);
                 byte newMinX = (byte)(FlipWorldX(box.XMax * SectorSize) / SectorSize);
@@ -209,19 +430,31 @@ namespace TREnvironmentEditor.Model.Types
 
         private void MirrorStaticMeshes(TR2Level level)
         {
-            foreach (TRStaticMesh staticMesh in level.StaticMeshes)
+            MirrorStaticMeshes(level.StaticMeshes, delegate (TRStaticMesh staticMesh)
             {
-                // Get the actual mesh
-                TRMesh mesh = TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
+                return TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
+            });
+        }
 
-                // Move each vertex to the other side of the mesh. Negative values
-                // are supported so we needn't worry about shifting.
+        private void MirrorStaticMeshes(TR3Level level)
+        {
+            MirrorStaticMeshes(level.StaticMeshes, delegate (TRStaticMesh staticMesh)
+            {
+                return TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
+            });
+        }
+
+        private void MirrorStaticMeshes(TRStaticMesh[] staticMeshes, Func<TRStaticMesh, TRMesh> meshFunc)
+        {
+            foreach (TRStaticMesh staticMesh in staticMeshes)
+            {
+                TRMesh mesh = meshFunc(staticMesh);
+
                 foreach (TRVertex vert in mesh.Vertices)
                 {
                     vert.X *= -1;
                 }
 
-                // Flip the MinX and MaxX bounding box values
                 FlipBoundingBox(staticMesh.CollisionBox);
                 FlipBoundingBox(staticMesh.VisibilityBox);
             }
@@ -240,13 +473,24 @@ namespace TREnvironmentEditor.Model.Types
             foreach (TR2Entity entity in level.Entities)
             {
                 entity.X = FlipWorldX(entity.X);
-                AdjustEntityPosition(entity);
+                AdjustTR2EntityPosition(entity);
             }
 
-            AdjustDoors(level);
+            AdjustDoors(level.Entities.ToList().FindAll(e => TR2EntityUtilities.IsDoorType((TR2Entities)e.TypeID)));
         }
 
-        private void AdjustEntityPosition(TR2Entity entity)
+        private void MirrorEntities(TR3Level level)
+        {
+            foreach (TR2Entity entity in level.Entities)
+            {
+                entity.X = FlipWorldX(entity.X);
+                AdjustTR3EntityPosition(entity);
+            }
+
+            AdjustDoors(level.Entities.ToList().FindAll(e => TR3EntityUtilities.IsDoorType((TR3Entities)e.TypeID)));
+        }
+
+        private void AdjustTR2EntityPosition(TR2Entity entity)
         {
             // If it's facing +/-X direction, flip it
             if (entity.Angle == _east || entity.Angle == _west)
@@ -367,11 +611,94 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
-        private void AdjustDoors(TR2Level level)
+        private void AdjustTR3EntityPosition(TR2Entity entity)
         {
-            // Double doors need to be swapped otherwise they open in the wrong direction
-            List<TR2Entity> doors = level.Entities.ToList().FindAll(e => TR2EntityUtilities.IsDoorType((TR2Entities)e.TypeID));
+            // Flip the angle - north and south remain, everything else moves appropriately
+            entity.Angle *= -1;
 
+            switch ((TR3Entities)entity.TypeID)
+            {
+                // These take up several tiles so need some fiddling
+                case TR3Entities.SpikyVertWallOrTunnelBorer:
+                case TR3Entities.SpikyWall:
+                case TR3Entities.SubwayTrain:
+                    switch (entity.Angle)
+                    {
+                        case _north:
+                            entity.X -= SectorSize;
+                            break;
+                        case _east:
+                            entity.Z += SectorSize;
+                            break;
+                        case _south:
+                            entity.X += SectorSize;
+                            break;
+                        case _west:
+                            entity.Z -= SectorSize;
+                            break;
+                    }
+                    break;
+
+                case TR3Entities.Area51Swinger:
+                    switch (entity.Angle)
+                    {
+                        case _north:
+                            entity.X += SectorSize;
+                            break;
+                        case _west:
+                            entity.Z += SectorSize;
+                            break;
+                    }
+                    break;
+                case TR3Entities.BigMissile:
+                case TR3Entities.MovableBoom:
+                    switch (entity.Angle)
+                    {
+                        case _east:
+                            entity.Z -= SectorSize;
+                            break;
+                    }
+                    break;
+
+                // Bridge tilts need to be rotated
+                case TR3Entities.BridgeTilt1:
+                case TR3Entities.BridgeTilt2:
+                case TR3Entities.FireBreathingDragonStatue:
+                    switch (entity.Angle)
+                    {
+                        case _north:
+                            entity.Angle = _south;
+                            break;
+                        case _east:
+                            entity.Angle = _west;
+                            break;
+                        case _south:
+                            entity.Angle = _north;
+                            break;
+                        case _west:
+                            entity.Angle = _east;
+                            break;
+                    }
+                    break;
+
+                // The Crash Site walls
+                case TR3Entities.DestroyableBoardedUpWall:
+                    switch (entity.Angle)
+                    {
+                        case _east:
+                            entity.Z -= 3 * SectorSize;
+                            break;
+                        case _south:
+                            entity.X -= 3 * SectorSize;
+                            break;
+                    }
+                    break;
+            }
+        }
+
+        private void AdjustDoors(List<TR2Entity> doors)
+        {
+            // Double doors need to be swapped otherwise they open in the wrong direction.
             // Iterate backwards and try to find doors that are next to each other.
             // If found, swap their types.
             for (int i = doors.Count - 1; i >= 0; i--)
@@ -429,6 +756,20 @@ namespace TREnvironmentEditor.Model.Types
             // Currently, frames are left untouched so the Rig starting animation
             // and dragon dagger cutscene behave normally. Lara is a bit out of
             // place in the HSH cinematics for now.
+        }
+
+        private void MirrorNullMeshes(TR3Level level)
+        {
+            // The deals with actual cameras as well as sinks
+            foreach (TRCamera camera in level.Cameras)
+            {
+                camera.X = FlipWorldX(camera.X);
+            }
+
+            foreach (TRSoundSource sound in level.SoundSources)
+            {
+                sound.X = FlipWorldX(sound.X);
+            }
         }
 
         private void MirrorTextures(TR2Level level)
@@ -493,7 +834,7 @@ namespace TREnvironmentEditor.Model.Types
                     }
                 }
             }
-                        
+
             // Include all animated texture references too
             foreach (TRAnimatedTexture anim in level.AnimatedTextures)
             {
@@ -503,12 +844,88 @@ namespace TREnvironmentEditor.Model.Types
                 }
             }
 
+            MirrorObjectTextures(textureReferences, level.ObjectTextures);
+        }
+
+        private void MirrorTextures(TR3Level level)
+        {
+            ISet<ushort> textureReferences = new HashSet<ushort>();
+
+            List<TRStaticMesh> staticMeshes = level.StaticMeshes.ToList();
+            ISet<TRStaticMesh> processedMeshes = new HashSet<TRStaticMesh>();
+
+            foreach (TR3Room room in level.Rooms)
+            {
+                // Invert the faces, otherwise they are inside out
+                foreach (TRFace4 f in room.RoomData.Rectangles)
+                {
+                    Swap(f.Vertices, 0, 3);
+                    Swap(f.Vertices, 1, 2);
+                    textureReferences.Add((ushort)(f.Texture & 0x0fff));
+                }
+
+                foreach (TRFace3 f in room.RoomData.Triangles)
+                {
+                    Swap(f.Vertices, 0, 2);
+                    textureReferences.Add((ushort)(f.Texture & 0x0fff));
+                }
+
+                foreach (TR3RoomStaticMesh roomStaticMesh in room.StaticMeshes)
+                {
+                    TRStaticMesh staticMesh = staticMeshes.Find(m => m.ID == roomStaticMesh.MeshID);
+                    if (!processedMeshes.Add(staticMesh))
+                    {
+                        continue;
+                    }
+
+                    TRMesh mesh = TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
+
+                    // Flip the faces and store texture references
+                    foreach (TRFace4 f in mesh.TexturedRectangles)
+                    {
+                        Swap(f.Vertices, 0, 3);
+                        Swap(f.Vertices, 1, 2);
+                        textureReferences.Add((ushort)(f.Texture & 0x0fff));
+                    }
+
+                    foreach (TRFace4 f in mesh.ColouredRectangles)
+                    {
+                        Swap(f.Vertices, 0, 3);
+                        Swap(f.Vertices, 1, 2);
+                    }
+
+                    foreach (TRFace3 f in mesh.TexturedTriangles)
+                    {
+                        Swap(f.Vertices, 0, 2);
+                        textureReferences.Add((ushort)(f.Texture & 0x0fff));
+                    }
+
+                    foreach (TRFace3 f in mesh.ColouredTriangles)
+                    {
+                        Swap(f.Vertices, 0, 2);
+                    }
+                }
+            }
+
+            foreach (TRAnimatedTexture anim in level.AnimatedTextures)
+            {
+                for (int i = 0; i < anim.Textures.Length; i++)
+                {
+                    textureReferences.Add(anim.Textures[i]);
+                }
+            }
+
+            MirrorObjectTextures(textureReferences, level.ObjectTextures);
+        }
+
+        private void MirrorObjectTextures(ISet<ushort> textureReferences, TRObjectTexture[] objectTextures)
+        {
             // Flip the object texture vertices in the same way as done for faces
             foreach (ushort textureRef in textureReferences)
             {
                 IndexedTRObjectTexture texture = new IndexedTRObjectTexture
                 {
-                    Texture = level.ObjectTextures[textureRef]
+                    Texture = objectTextures[textureRef]
                 };
 
                 if (texture.IsTriangle)
@@ -521,11 +938,6 @@ namespace TREnvironmentEditor.Model.Types
                     Swap(texture.Texture.Vertices, 1, 2);
                 }
             }
-        }
-
-        public override void ApplyToLevel(TR3Level level)
-        {
-            throw new NotImplementedException();
         }
     }
 }

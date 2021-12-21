@@ -106,5 +106,48 @@
         }
       ]
     }
+  ],
+
+  "Mirrored": [
+    {
+      "Comments": "The generators in this room are awkward so need rotating and shifting slightly.",
+      "EMType": 44,
+      "EntityIndex": 118,
+      "TargetLocation": {
+        "X": 33024,
+        "Y": -4864,
+        "Z": 76288,
+        "Room": 172,
+        "Angle": 16384
+      }
+    },
+    {
+      "EMType": 44,
+      "EntityIndex": 119,
+      "TargetLocation": {
+        "X": 32256,
+        "Y": -4864,
+        "Z": 74496,
+        "Room": 172,
+        "Angle": -32768
+      }
+    },
+    {
+      "Comments": "Mirror the Slot2Empty and Slot2Full models.",
+      "EMType": 142,
+      "ModelIDs": [ 214, 218 ]
+    },
+    {
+      "Comments": "Move door #36 so it's less awkward.",
+      "EMType": 44,
+      "EntityIndex": 36,
+      "TargetLocation": {
+        "X": 55808,
+        "Y": -4864,
+        "Z": 23040,
+        "Room": 131,
+        "Angle": 16384
+      }
+    }
   ]
 }

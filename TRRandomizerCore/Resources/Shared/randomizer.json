@@ -1,0 +1,46 @@
+{
+  "fields": {
+    "Difficulty": {
+      "default": "Easy",
+      "display": "Difficulty",
+      "options": [ "Easy", "Medium", "Hard" ],
+      "type": "string"
+    },
+    "RequiresGlitch": {
+      "default": false,
+      "display": "Requires Glitch",
+      "type": "boolean"
+    },
+    "VehicleRequired": {
+      "default": false,
+      "display": "Vehicle Required",
+      "type": "boolean"
+    },
+    "Validated": {
+      "default": true,
+      "display": "Validated",
+      "type": "boolean"
+    },
+    "InvalidatesRoom": {
+      "default": false,
+      "display": "Invalidates Room",
+      "type": "boolean"
+    },
+    "RequiresDamage": {
+      "default": false,
+      "display": "Requires Damage",
+      "type": "boolean"
+    },
+    "KeyItemGroupID": {
+      "default": 0,
+      "display": "Key Item Group ID",
+      "type": "number"
+    },
+    "LevelState": {
+      "default": "Any",
+      "display": "Level State",
+      "options": [ "Any", "Mirrored", "NotMirrored" ],
+      "type": "string"
+    }
+  }
+}

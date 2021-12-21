@@ -188,8 +188,11 @@ namespace TRLevelReader.Model
                     vert.Colour = (ushort)((Blend(curRed, newRed) << 10) | (Blend(curGreen, newGreen) << 5) | (Blend(curBlue, newBlue)));
                 }
 
-                vert.UseCaustics = enableCaustics;
-                vert.UseWaveMovement = enableWave;
+                // #296 Retain original caustics and waves for water/swamp rooms
+                if (!vert.UseCaustics)
+                    vert.UseCaustics = enableCaustics;
+                if (!vert.UseWaveMovement)
+                    vert.UseWaveMovement = enableWave;
             }
         }
 

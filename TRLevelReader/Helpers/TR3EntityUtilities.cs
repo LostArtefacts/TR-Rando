@@ -618,5 +618,20 @@ namespace TRLevelReader.Helpers
                 || IsLightType(entity)
                 || entity == TR3Entities.Lara;
         }
+
+        public static List<TR3Entities> DoorTypes()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.Door1, TR3Entities.Door2, TR3Entities.Door3,
+                TR3Entities.Door4, TR3Entities.Door5, TR3Entities.Door6,
+                TR3Entities.Door7, TR3Entities.Door8
+            };
+        }
+
+        public static bool IsDoorType(TR3Entities entity)
+        {
+            return DoorTypes().Contains(entity);
+        }
     }
 }

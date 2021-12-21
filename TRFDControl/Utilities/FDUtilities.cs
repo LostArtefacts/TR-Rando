@@ -364,7 +364,7 @@ namespace TRFDControl.Utilities
                 {
                     return -1;
                 }
-                else if (func == FDFunctions.FloorTriangulationNESW_SW && dx <= dz)
+                else if (func == FDFunctions.FloorTriangulationNESW_SE && dx <= dz)
                 {
                     return -1;
                 }

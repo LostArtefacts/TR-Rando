@@ -1,0 +1,15 @@
+{
+  "Mirrored": [
+    {
+      "Comments": "Convert two of the planes to the other kind.",
+      "EMType": 45,
+      "EntityIndex": 8,
+      "NewEntityType": 351
+    },
+    {
+      "EMType": 45,
+      "EntityIndex": 113,
+      "NewEntityType": 351
+    }
+  ]
+}

@@ -47,6 +47,40 @@ namespace TREnvironmentEditor.Model.Types
                 }
             }
 
+            if (MoveSlot(control, slot, roomNumber, currentSector, newSector, currentFlipSector, newFlipSector))
+            {
+                control.WriteToLevel(level);
+            }
+        }
+
+        public override void ApplyToLevel(TR3Level level)
+        {
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            TR2Entity slot = level.Entities[EntityIndex];
+            TRRoomSector currentSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level, control);
+            short roomNumber = (short)ConvertItemNumber(Location.Room, level.NumRooms);
+            TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, control);
+
+            // Check if there is also a trigger in the flip map if we are moving the slot within the same room
+            TRRoomSector currentFlipSector = null;
+            TRRoomSector newFlipSector = null;
+            short altRoom = level.Rooms[slot.Room].AlternateRoom;
+            if (slot.Room == roomNumber && altRoom != -1)
+            {
+                currentFlipSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom, level, control);
+                newFlipSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom, level, control);
+            }
+
+            if (MoveSlot(control, slot, roomNumber, currentSector, newSector, currentFlipSector, newFlipSector))
+            {
+                control.WriteToLevel(level);
+            }
+        }
+
+        protected bool MoveSlot(FDControl control, TR2Entity slot, short roomNumber, TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
+        {
             slot.X = Location.X;
             slot.Y = Location.Y;
             slot.Z = Location.Z;
@@ -62,13 +96,10 @@ namespace TREnvironmentEditor.Model.Types
                     MoveTriggers(control, currentFlipSector, newFlipSector);
                 }
 
-                control.WriteToLevel(level);
+                return true;
             }
-        }
 
-        public override void ApplyToLevel(TR3Level level)
-        {
-            throw new System.NotImplementedException();
+            return false;
         }
 
         protected void MoveTriggers(FDControl control, TRRoomSector currentSector, TRRoomSector newSector)

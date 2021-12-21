@@ -249,7 +249,7 @@ namespace TextureExport.Types
 
         private static TexturedTileSegment GetFaceSegment(int textureIndex, IReadOnlyList<TexturedTile> tiles)
         {
-            List<int> indices = new List<int> { textureIndex };
+            List<int> indices = new List<int> { textureIndex & 0x0fff };
             foreach (TexturedTile tile in tiles)
             {
                 List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);

@@ -14,15 +14,48 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR3EnvironmentRandomizer : BaseTR3Randomizer
     {
-        internal bool EnforcedModeOnly => true;//!Settings.RandomizeEnvironment;
+        internal bool EnforcedModeOnly => !Settings.RandomizeEnvironment;
         internal TR3TextureMonitorBroker TextureMonitor { get; set; }
 
         private List<EMType> _disallowedTypes;
         private List<TR3ScriptedLevel> _levelsToMirror;
 
+        public List<TR3ScriptedLevel> AllocateMirroredLevels(int seed)
+        {
+            if (!Settings.RandomizeEnvironment)
+            {
+                return new List<TR3ScriptedLevel>();
+            }
+
+            // This will only allocate once
+            if (_generator == null)
+            {
+                _generator = new Random(seed);
+            }
+
+            if (_levelsToMirror == null)
+            {
+                TR3ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR3LevelNames.ASSAULT));
+                _levelsToMirror = Levels.RandomSelection(_generator, (int)Settings.MirroredLevelCount, exclusions: new HashSet<TR3ScriptedLevel>
+                {
+                    assaultCourse
+                });
+
+                if (Settings.MirrorAssaultCourse)
+                {
+                    _levelsToMirror.Add(assaultCourse);
+                }
+            }
+
+            return new List<TR3ScriptedLevel>(_levelsToMirror);
+        }
+
         public override void Randomize(int seed)
         {
-            _generator = new Random(seed);
+            if (_generator == null)
+            {
+                _generator = new Random(seed);
+            }
 
             _disallowedTypes = new List<EMType>();
             if (!Settings.RandomizeWaterLevels)
@@ -40,10 +73,7 @@ namespace TRRandomizerCore.Randomizers
                 _disallowedTypes.Add(EMType.Ladder);
             }
 
-            _levelsToMirror = Levels.RandomSelection(_generator, (int)Settings.MirroredLevelCount, exclusions: new HashSet<TR3ScriptedLevel>
-            {
-                Levels.Find(l => l.Is(TR3LevelNames.ASSAULT))
-            });
+            AllocateMirroredLevels(seed);
 
             foreach (TR3ScriptedLevel lvl in Levels)
             {
@@ -62,13 +92,23 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeEnvironment(TR3CombinedLevel level)
         {
-            EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath(@"TR3\Environment\" + level.Name + "-Environment.json"));
+            string json = @"TR3\Environment\" + level.Name + "-Environment.json";
+            if (IsJPVersion)
+            {
+                string jpJson = @"TR3\Environment\" + level.Name + "-JP-Environment.json";
+                if (ResourceExists(jpJson))
+                {
+                    json = jpJson;
+                }
+            }
+
+            EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath(json));
             if (mapping != null)
             {
                 ApplyMappingToLevel(level, mapping);
             }
 
-            if (!EnforcedModeOnly && (_levelsToMirror.Contains(level.Script) || (level.IsAssault && Settings.MirrorAssaultCourse)))
+            if (!EnforcedModeOnly && _levelsToMirror.Contains(level.Script))
             {
                 MirrorLevel(level, mapping);
             }

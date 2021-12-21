@@ -1,0 +1,28 @@
+﻿{
+  "Mirrored": [
+    {
+      "Comments": "Move door #36 otherwise Lara can't pass.",
+      "EMType": 44,
+      "EntityIndex": 36,
+      "TargetLocation": {
+        "X": 73216,
+        "Y": -14592,
+        "Z": 51712,
+        "Room": 21,
+        "Angle": 0
+      }
+    },
+    {
+      "Comments": "Move door #42 otherwise it's awkward to pass.",
+      "EMType": 44,
+      "EntityIndex": 42,
+      "TargetLocation": {
+        "X": 76288,
+        "Y": -10240,
+        "Z": 48640,
+        "Room": 22,
+        "Angle": 16384
+      }
+    }
+  ]
+}

@@ -16,6 +16,11 @@ namespace TRFDControl
             {
                 return (byte)(Value & 0x000F);
             }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0x000F));
+                Value |= value;
+            }
         }
 
         public byte C00
@@ -23,6 +28,11 @@ namespace TRFDControl
             get
             {
                 return (byte)((Value & 0x00F0) >> 4);
+            }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0x00F0));
+                Value |= (ushort)(value << 4);
             }
         }
 
@@ -32,6 +42,11 @@ namespace TRFDControl
             {
                 return (byte)((Value & 0x0F00) >> 8);
             }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0x0F00));
+                Value |= (ushort)(value << 8);
+            }
         }
 
         public byte C11
@@ -39,6 +54,11 @@ namespace TRFDControl
             get
             {
                 return (byte)((Value & 0xF000) >> 12);
+            }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0xF000));
+                Value |= (ushort)(value << 12);
             }
         }
     }
