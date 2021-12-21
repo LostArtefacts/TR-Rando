@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29926.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TR2Randomizer", "TR2Randomizer\TR2Randomizer.csproj", "{AF10D844-BBF2-4421-A76B-2C7A478D762C}"
 EndProject
@@ -32,6 +32,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelExport", "ModelExport\ModelExport.csproj", "{62336986-BC9F-447E-A046-E24E8153C5AF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationExport", "LocationExport\LocationExport.csproj", "{D69A8033-C014-421E-9DFA-29D5B8A547B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMEditor", "EMEditor\EMEditor.csproj", "{37641C2F-0E49-4DC4-9496-971982443047}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{D69A8033-C014-421E-9DFA-29D5B8A547B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D69A8033-C014-421E-9DFA-29D5B8A547B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D69A8033-C014-421E-9DFA-29D5B8A547B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37641C2F-0E49-4DC4-9496-971982443047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37641C2F-0E49-4DC4-9496-971982443047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37641C2F-0E49-4DC4-9496-971982443047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37641C2F-0E49-4DC4-9496-971982443047}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{D3662F36-C8D8-471C-8F43-192CE748B04E} = {5F1A11E5-F541-4E3B-B331-93574EE4C629}
 		{62336986-BC9F-447E-A046-E24E8153C5AF} = {5F1A11E5-F541-4E3B-B331-93574EE4C629}
 		{D69A8033-C014-421E-9DFA-29D5B8A547B2} = {5F1A11E5-F541-4E3B-B331-93574EE4C629}
+		{37641C2F-0E49-4DC4-9496-971982443047} = {5F1A11E5-F541-4E3B-B331-93574EE4C629}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B68A2054-7393-4B0D-9004-0E92FB8324FC}
