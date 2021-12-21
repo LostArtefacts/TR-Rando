@@ -221,6 +221,7 @@ namespace TRRandomizerCore.Randomizers
                     {
                         newEntities.Clear();
                         newEntities.AddRange(restrictedCombinations[_generator.Next(0, restrictedCombinations.Count)]);
+                        chickenGuiser = TR2Entities.BirdMonster; // Undo any guising
                         break;
                     }
 
