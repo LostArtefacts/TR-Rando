@@ -40,5 +40,8 @@
     <None Update="Resources\Documentation\ORDER.md">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\Shared\randomizer.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

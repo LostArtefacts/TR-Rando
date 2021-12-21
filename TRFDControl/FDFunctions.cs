@@ -20,7 +20,7 @@ namespace TRFDControl
         CeilingTriangulationNE_Solid = 0x0A,
         FloorTriangulationNWSE_SW = 0x0B,
         FloorTriangulationNWSE_NE = 0x0C,
-        FloorTriangulationNESW_SW = 0x0D,
+        FloorTriangulationNESW_SE = 0x0D, // TRosetta names this _SW but should be SE
         FloorTriangulationNESW_NW = 0x0E,
         CeilingTriangulationNW_SW = 0x0F,
         CeilingTriangulationNW_NE = 0x10,

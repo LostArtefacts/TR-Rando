@@ -31,6 +31,8 @@ namespace TRRandomizerCore.Helpers
 
         public bool InvalidatesRoom { get; set; }
 
+        public LevelState LevelState {get; set;}
+
         public Location()
         {
             X = 0;
@@ -47,6 +49,7 @@ namespace TRRandomizerCore.Helpers
             RequiresDamage = false;
             KeyItemGroupID = 0;
             InvalidatesRoom = false;
+            LevelState = LevelState.Any;
         }
 
         public Location(TRViewLocation loc)

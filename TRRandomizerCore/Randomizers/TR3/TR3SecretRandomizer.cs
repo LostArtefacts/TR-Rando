@@ -50,6 +50,7 @@ namespace TRRandomizerCore.Randomizers
 
         internal TR3TextureMonitorBroker TextureMonitor { get; set; }
         public ItemFactory ItemFactory { get; set; }
+        public List<TR3ScriptedLevel> MirrorLevels { get; set; }
 
         public override void Randomize(int seed)
         {
@@ -338,6 +339,12 @@ namespace TRRandomizerCore.Randomizers
             {
                 if (_devRooms == null || _devRooms.Contains(location.Room))
                 {
+                    if (MirrorLevels.Contains(level.Script) && location.LevelState == LevelState.NotMirrored)
+                        continue;
+
+                    if (!MirrorLevels.Contains(level.Script) && location.LevelState == LevelState.Mirrored)
+                        continue;
+
                     secret.Location = location;
                     secret.EntityIndex = (ushort)ItemFactory.GetNextIndex(level.Name, entities, true);
                     secret.SecretIndex = (ushort)(secretIndex % countedSecrets); // Cycle through each secret number
@@ -403,7 +410,7 @@ namespace TRRandomizerCore.Randomizers
                 }
                 while
                 (
-                    !EvaluateProximity(location, usedLocations)     
+                    !EvaluateProximity(location, usedLocations, level)
                 );
 
                 _proxEvaluationCount = 0;
@@ -450,7 +457,7 @@ namespace TRRandomizerCore.Randomizers
             AddDamageControl(level, pickupTypes, damagingLocationUsed, glitchedDamagingLocationUsed);
         }
 
-        private bool EvaluateProximity(Location loc, List<Location> usedLocs)
+        private bool EvaluateProximity(Location loc, List<Location> usedLocs, TR3CombinedLevel level)
         {
             bool SafeToPlace = true;
             float proximity = 10000.0f;
@@ -459,6 +466,12 @@ namespace TRRandomizerCore.Randomizers
                 return false;
 
             if (loc.RequiresGlitch && !Settings.GlitchedSecrets)
+                return false;
+
+            if (MirrorLevels.Contains(level.Script) && loc.LevelState == LevelState.NotMirrored)
+                return false;
+
+            if (!MirrorLevels.Contains(level.Script) && loc.LevelState == LevelState.Mirrored)
                 return false;
 
             if (usedLocs.Count == 0 || usedLocs == null)

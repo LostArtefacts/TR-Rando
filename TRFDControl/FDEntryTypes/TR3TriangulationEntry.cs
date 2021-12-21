@@ -17,7 +17,7 @@ namespace TRFDControl.FDEntryTypes
                 FDFunctions function = (FDFunctions)Setup.Function;
                 return function == FDFunctions.FloorTriangulationNESW_NW
                     || function == FDFunctions.FloorTriangulationNESW_Solid
-                    || function == FDFunctions.FloorTriangulationNESW_SW
+                    || function == FDFunctions.FloorTriangulationNESW_SE
                     || function == FDFunctions.FloorTriangulationNWSE_NE
                     || function == FDFunctions.FloorTriangulationNWSE_Solid
                     || function == FDFunctions.FloorTriangulationNWSE_SW;
@@ -30,7 +30,7 @@ namespace TRFDControl.FDEntryTypes
             {
                 FDFunctions function = (FDFunctions)Setup.Function;
                 return function == FDFunctions.FloorTriangulationNESW_NW
-                    || function == FDFunctions.FloorTriangulationNESW_SW
+                    || function == FDFunctions.FloorTriangulationNESW_SE
                     || function == FDFunctions.FloorTriangulationNWSE_NE
                     || function == FDFunctions.FloorTriangulationNWSE_SW;
             }

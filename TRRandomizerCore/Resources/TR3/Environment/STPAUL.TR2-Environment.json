@@ -1,0 +1,16 @@
+{
+  "Mirrored": [
+    {
+      "Comments": "Move door #36 so it's less awkward.",
+      "EMType": 44,
+      "EntityIndex": 11,
+      "TargetLocation": {
+        "X": 12800,
+        "Y": 1280,
+        "Z": 66048,
+        "Room": 17,
+        "Angle": 0
+      }
+    }
+  ]
+}

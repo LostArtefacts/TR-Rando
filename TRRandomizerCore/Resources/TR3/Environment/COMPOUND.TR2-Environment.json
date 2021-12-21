@@ -191,5 +191,14 @@
         }
       ]
     }
+  ],
+
+  "Mirrored": [
+    {
+      "Comments": "Make door #125 a vertical one as this corridor is awkward.",
+      "EMType": 45,
+      "EntityIndex": 125,
+      "NewEntityType": 136
+    }
   ]
 }

@@ -137,8 +137,11 @@ namespace TREnvironmentEditor.Parsing
                 case EMType.CopyVertexAttributes:
                     return JsonConvert.DeserializeObject<EMCopyVertexAttributesFunction>(jo.ToString(), _resolver);
 
+                // Models
                 case EMType.ImportModel:
                     return JsonConvert.DeserializeObject<EMImportModelFunction>(jo.ToString(), _resolver);
+                case EMType.MirrorModel:
+                    return JsonConvert.DeserializeObject<EMMirrorModelFunction>(jo.ToString(), _resolver);
 
                 // NOOP
                 case EMType.NOOP:

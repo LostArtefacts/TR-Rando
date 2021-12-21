@@ -252,7 +252,7 @@ namespace TRFDControl
                     case FDFunctions.CeilingTriangulationNE_Solid:
                     case FDFunctions.FloorTriangulationNWSE_SW:
                     case FDFunctions.FloorTriangulationNWSE_NE:
-                    case FDFunctions.FloorTriangulationNESW_SW:
+                    case FDFunctions.FloorTriangulationNESW_SE:
                     case FDFunctions.FloorTriangulationNESW_NW:
                     case FDFunctions.CeilingTriangulationNW_SW:
                     case FDFunctions.CeilingTriangulationNW_NE:
