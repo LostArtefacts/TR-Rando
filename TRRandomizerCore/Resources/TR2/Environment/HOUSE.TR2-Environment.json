@@ -1,6 +1,30 @@
 {
   "All": [],
 
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if enemy #28 is Marco and if so hide him under a van.",
+        "ConditionType": 0,
+        "EntityIndex": 28,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 28,
+          "TargetLocation": {
+            "X": 58368,
+            "Y": 2560,
+            "Z": 70144,
+            "Room": 48,
+            "Angle": -16384
+          }
+        }
+      ]
+    }
+  ],
+
   "NonPurist": [
     {
       "Comments": "Reposition the unused maze button to the bedroom.",

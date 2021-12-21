@@ -166,6 +166,15 @@ namespace TRRandomizerCore.Utilities
             return -1;
         }
 
+        public static List<List<TR2Entities>> GetPermittedCombinations(string lvl, TR2Entities entity, RandoDifficulty difficulty)
+        {
+            if (_specialEnemyCombinations.ContainsKey(lvl) && _specialEnemyCombinations[lvl].ContainsKey(entity) && _specialEnemyCombinations[lvl][entity].ContainsKey(difficulty))
+            {
+                return _specialEnemyCombinations[lvl][entity][difficulty];
+            }
+            return null;
+        }
+
         public static Dictionary<TR2Entities, List<string>> PrepareEnemyGameTracker(bool docileBirdMonster, RandoDifficulty difficulty)
         {
             Dictionary<TR2Entities, List<string>> tracker = new Dictionary<TR2Entities, List<string>>();
@@ -284,10 +293,10 @@ namespace TRRandomizerCore.Utilities
                 // are making placeholder entities to prevent breaking the kill counter.
                 new List<TR2Entities>
                 {
-                    TR2Entities.BlackMorayEel, TR2Entities.Doberman, TR2Entities.Eagle, TR2Entities.MaskedGoon1,
-                    TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.MarcoBartoli, TR2Entities.MercSnowmobDriver,
-                    TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Shark, TR2Entities.StickWieldingGoon1,
-                    TR2Entities.StickWieldingGoon2, TR2Entities.TRex, TR2Entities.Winston, TR2Entities.YellowMorayEel
+                    TR2Entities.BlackMorayEel, TR2Entities.Doberman, TR2Entities.MaskedGoon1,
+                    TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.MercSnowmobDriver,
+                    TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.StickWieldingGoon1,
+                    TR2Entities.StickWieldingGoon2, TR2Entities.Winston, TR2Entities.YellowMorayEel
                 }
         };
 
@@ -313,6 +322,10 @@ namespace TRRandomizerCore.Utilities
         // rooms, and the likes of SnowmobDriver at the beginning of Bartoli's is practically impossible to pass.
         private static readonly Dictionary<string, Dictionary<TR2Entities, List<int>>> _restrictedEnemyZonesDefault;
         private static readonly Dictionary<string, Dictionary<TR2Entities, List<int>>> _restrictedEnemyZonesTechnical;
+
+        // This allows us to define specific combinations of enemies if the leader is chosen for the rando pool. For
+        // example, the dragon in HSH will only work with 20 possible combinations.
+        private static readonly Dictionary<string, Dictionary<TR2Entities, Dictionary<RandoDifficulty, List<List<TR2Entities>>>>> _specialEnemyCombinations;
 
         // We also limit the count for some - more than 1 dragon tends to cause crashes if they spawn close together.
         // Winston is an easter egg so maybe keep it low.
@@ -345,6 +358,10 @@ namespace TRRandomizerCore.Utilities
             _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Entities, List<int>>>>
             (
                 File.ReadAllText(@"Resources\TR2\Restrictions\enemy_restrictions_technical.json")
+            );
+            _specialEnemyCombinations = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Entities, Dictionary<RandoDifficulty, List<List<TR2Entities>>>>>>
+            (
+                File.ReadAllText(@"Resources\TR2\Restrictions\enemy_restrictions_special.json")
             );
         }
 
@@ -469,7 +486,7 @@ namespace TRRandomizerCore.Utilities
             // HSH starting cutscene. For others we sacrifice the specific enemy death animations. So for example,
             // if XianGuardSpear is imported into Wreck, the existing misc anim will remain for the wheel door animation.
             // But if Marco is imported, the wheel door animation will also be sacrificed.
-            if (importEntities.Contains(TR2Entities.MarcoBartoli))
+            if (importEntities.Contains(TR2Entities.MarcoBartoli) && lvlName != TR2LevelNames.HOME)
             {
                 priorities[TR2Entities.Puzzle2_M_H] = TR2Entities.Puzzle2_M_H_Dagger;
                 priorities[TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_Xian;

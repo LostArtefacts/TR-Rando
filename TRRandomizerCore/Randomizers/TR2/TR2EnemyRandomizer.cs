@@ -214,6 +214,16 @@ namespace TRRandomizerCore.Randomizers
                 {
                     TR2Entities entity = allEnemies[_generator.Next(0, allEnemies.Count)];
 
+                    // Check if the use of this enemy triggers an overwrite of the pool, for example
+                    // the dragon in HSH. Null means nothing special has been defined.
+                    List<List<TR2Entities>> restrictedCombinations = TR2EnemyUtilities.GetPermittedCombinations(level.Name, entity, Settings.RandoEnemyDifficulty);
+                    if (restrictedCombinations != null)
+                    {
+                        newEntities.Clear();
+                        newEntities.AddRange(restrictedCombinations[_generator.Next(0, restrictedCombinations.Count)]);
+                        break;
+                    }
+
                     // Make sure this isn't known to be unsupported in the level
                     if (!TR2EnemyUtilities.IsEnemySupported(level.Name, entity, Settings.RandoEnemyDifficulty))
                     {
