@@ -70,6 +70,9 @@
     <Compile Include="ConfigureTypeWindow.xaml.cs">
       <DependentUpon>ConfigureTypeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DelegateCommand.cs" />
+    <Compile Include="EMEditorOverviewViewModel.cs" />
+    <Compile Include="EMEditorVMBase.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -108,6 +111,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\TREnvironmentEditor\TREnvironmentEditor.csproj">
+      <Project>{1667c53d-0cca-48a9-90b7-4950bd92bdff}</Project>
+      <Name>TREnvironmentEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj">
+      <Project>{226c4a3a-4fbb-4c15-aed4-c9248eb3a144}</Project>
+      <Name>TRLevelReader</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

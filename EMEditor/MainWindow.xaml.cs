@@ -22,6 +22,8 @@ namespace EMEditor
     {
         public MainWindow()
         {
+            DataContext = new EMEditorOverviewViewModel();
+
             InitializeComponent();
         }
     }
