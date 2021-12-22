@@ -184,6 +184,30 @@ namespace TRModelTransporter.Packing
             }
         }
 
+        public void RemoveObjectTextureSegments(IEnumerable<int> indices)
+        {
+            foreach (TexturedTile tile in _tiles)
+            {
+                List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
+                for (int i = 0; i < segments.Count; i++)
+                {
+                    tile.Remove(segments[i]);
+                }
+            }
+        }
+
+        public void RemoveSpriteTextureSegments(IEnumerable<int> indices)
+        {
+            foreach (TexturedTile tile in _tiles)
+            {
+                List<TexturedTileSegment> segments = tile.GetSpriteTextureIndexSegments(indices);
+                for (int i = 0; i < segments.Count; i++)
+                {
+                    tile.Remove(segments[i]);
+                }
+            }
+        }
+
         public void RemoveModelSegmentsChecked(IEnumerable<E> modelEntitiesToRemove)
         {
             if (modelEntitiesToRemove.Count() == 0)
