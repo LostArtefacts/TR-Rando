@@ -1,11 +1,13 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TREnvironmentEditor;
+using TREnvironmentEditor.Model;
 
 namespace EMEditor
 {
@@ -29,6 +31,11 @@ namespace EMEditor
             if (openFileDialog.ShowDialog() == true)
                 _mapping = EMEditorMapping.Get(openFileDialog.FileName);
 
+
+            All = new ObservableCollection<BaseEMFunction>(_mapping.All.AsEnumerable());
+            Mirrored = new ObservableCollection<BaseEMFunction>(_mapping.Mirrored.AsEnumerable());
+            NonPurist = new ObservableCollection<BaseEMFunction>(_mapping.NonPurist.AsEnumerable());
+
             _importJSONCommand.InvokeCanExecuteChanged();
         }
 
@@ -47,7 +54,7 @@ namespace EMEditor
 
         private bool CanExportJSON(object commandParameter)
         {
-            return true;
+            return false;
         }
 
         private readonly DelegateCommand _applyToLevelCommand;
@@ -60,7 +67,7 @@ namespace EMEditor
 
         private bool CanApplyToLevel(object commandParameter)
         {
-            return true;
+            return false;
         }
 
         private readonly DelegateCommand _addModCommand;
@@ -73,7 +80,7 @@ namespace EMEditor
 
         private bool CanAddMod(object commandParameter)
         {
-            return true;
+            return false;
         }
 
         private readonly DelegateCommand _editModCommand;
@@ -86,7 +93,7 @@ namespace EMEditor
 
         private bool CanEditMod(object commandParameter)
         {
-            return true;
+            return false;
         }
 
         private readonly DelegateCommand _deleteModCommand;
@@ -99,7 +106,28 @@ namespace EMEditor
 
         private bool CanDeleteMod(object commandParameter)
         {
-            return true;
+            return false;
+        }
+
+        private ObservableCollection<BaseEMFunction> _all;
+        public ObservableCollection<BaseEMFunction> All
+        {
+            get { return _all; }
+            set { SetProperty(ref _all, value); }
+        }
+
+        private ObservableCollection<BaseEMFunction> _mirrored;
+        public ObservableCollection<BaseEMFunction> Mirrored
+        {
+            get { return _mirrored; }
+            set { SetProperty(ref _mirrored, value); }
+        }
+
+        private ObservableCollection<BaseEMFunction> _nonPurist;
+        public ObservableCollection<BaseEMFunction> NonPurist
+        {
+            get { return _nonPurist; }
+            set { SetProperty(ref _nonPurist, value); }
         }
 
         public EMEditorOverviewViewModel()

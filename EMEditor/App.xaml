@@ -2,8 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:EMEditor"
+             xmlns:em="clr-namespace:TREnvironmentEditor.Model;assembly=TREnvironmentEditor"
+             xmlns:emt="clr-namespace:TREnvironmentEditor.Model.Types;assembly=TREnvironmentEditor"
+             xmlns:emc="clr-namespace:TREnvironmentEditor.Model.Conditions;assembly=TREnvironmentEditor"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+         <!-- Data Templates Go Here -->
+        <DataTemplate DataType="{x:Type emt:EMPlaceholderFunction}">
+            
+        </DataTemplate>
     </Application.Resources>
 </Application>
