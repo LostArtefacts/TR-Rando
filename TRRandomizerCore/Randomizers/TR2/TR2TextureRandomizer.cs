@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using TRGE.Core;
+using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Textures;
@@ -12,10 +16,28 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
     {
+        private static readonly Color[] _wireframeColours = new Color[]
+        {
+            Color.White,
+            Color.FromArgb(24, 156, 72),   // Green
+            Color.FromArgb(255, 172, 197), // Pink
+            Color.FromArgb(205, 164, 24),  // Orange
+            Color.FromArgb(41, 57, 172),   // Blue
+            Color.FromArgb(204, 92, 206),  // Purple
+            Color.FromArgb(68, 254, 25),   // Lime
+            Color.FromArgb(254, 219, 8),   // Yellow
+            Color.FromArgb(13, 202, 255),  // Cyan
+            Color.FromArgb(238, 189, 74),  // Gold
+        };
+
         private readonly Dictionary<AbstractTextureSource, string> _persistentVariants;
+        private readonly Dictionary<string, WireframeData<TR2Entities>> _wireframeData;
         private readonly object _drawLock;
         private TR2TextureDatabase _textureDatabase;
         private Dictionary<TextureCategory, bool> _textureOptions;
+        private List<TR2ScriptedLevel> _wireframeLevels;
+        private List<TR2ScriptedLevel> _solidLaraLevels;
+        private Color _persistentWireColour;
 
         internal bool NightModeOnly => !Settings.RandomizeTextures;
         internal TR2TextureMonitorBroker TextureMonitor { get; set; }
@@ -23,6 +45,7 @@ namespace TRRandomizerCore.Randomizers
         public TR2TextureRandomizer()
         {
             _persistentVariants = new Dictionary<AbstractTextureSource, string>();
+            _wireframeData = JsonConvert.DeserializeObject<Dictionary<string, WireframeData<TR2Entities>>>(ReadResource(@"TR2\Textures\wireframing.json"));
             _drawLock = new object();
         }
 
@@ -92,6 +115,8 @@ namespace TRRandomizerCore.Randomizers
 
             SetMessage("Randomizing textures - loading levels");
 
+            ChooseWireframeLevels();
+
             List<TextureProcessor> processors = new List<TextureProcessor> { new TextureProcessor(this) };
             int levelSplit = (int)(Levels.Count / _maxThreads);
 
@@ -131,6 +156,24 @@ namespace TRRandomizerCore.Randomizers
             if (_processingException != null)
             {
                 _processingException.Throw();
+            }
+        }
+
+        private void ChooseWireframeLevels()
+        {
+            TR2ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR2LevelNames.ASSAULT));
+            ISet<TR2ScriptedLevel> exlusions = new HashSet<TR2ScriptedLevel> { assaultCourse };
+
+            _wireframeLevels = Levels.RandomSelection(_generator, (int)Settings.WireframeLevelCount, exclusions: exlusions);
+            _solidLaraLevels = _wireframeLevels.RandomSelection(_generator, _generator.Next(0, _wireframeLevels.Count));
+            if (Settings.AssaultCourseWireframe)
+            {
+                _wireframeLevels.Add(assaultCourse);
+            }
+
+            if (Settings.PersistTextureVariants)
+            {
+                _persistentWireColour = _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
             }
         }
 
@@ -190,10 +233,36 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
+        private bool IsWireframeLevel(TR2CombinedLevel lvl)
+        {
+            return !NightModeOnly &&
+                _wireframeData.ContainsKey(lvl.JsonID) &&
+                (_wireframeLevels.Contains(lvl.Script) || (lvl.IsCutScene && _wireframeLevels.Contains(lvl.ParentLevel.Script)));
+        }
+
+        private bool IsSolidLaraLevel(TR2CombinedLevel lvl)
+        {
+            return IsWireframeLevel(lvl) &&
+                (_solidLaraLevels.Contains(lvl.Script) || (lvl.IsCutScene && _solidLaraLevels.Contains(lvl.ParentLevel.Script)));
+        }
+
+        private WireframeData<TR2Entities> GetWireframeData(TR2CombinedLevel lvl)
+        {
+            return IsWireframeLevel(lvl) ? _wireframeData[lvl.JsonID] : null;
+        }
+
+        private Color GetWireframeVariant()
+        {
+            return Settings.PersistTextureVariants ?
+                _persistentWireColour :
+                _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
+        }
+
         internal class TextureProcessor : AbstractProcessorThread<TR2TextureRandomizer>
         {
             private readonly Dictionary<TR2CombinedLevel, TextureHolder<TR2Entities, TR2Level>> _holders;
             private readonly TR2LandmarkImporter _landmarkImporter;
+            private readonly TR2Wireframer _wireframer;
 
             internal override int LevelCount => _holders.Count;
 
@@ -202,6 +271,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 _holders = new Dictionary<TR2CombinedLevel, TextureHolder<TR2Entities, TR2Level>>();
                 _landmarkImporter = new TR2LandmarkImporter();
+                _wireframer = new TR2Wireframer();
             }
 
             internal void AddLevel(TR2CombinedLevel level)
@@ -239,6 +309,13 @@ namespace TRRandomizerCore.Randomizers
                             parentHolder = _holders[level.ParentLevel];
                         }
                         _holders[level] = new TextureHolder<TR2Entities, TR2Level>(mapping, _outer, parentHolder);
+
+                        if (_outer.IsWireframeLevel(level))
+                        {
+                            WireframeData<TR2Entities> data = _outer.GetWireframeData(level);
+                            data.HighlightColour = _outer.GetWireframeVariant();
+                            data.SolidLara = _outer.IsSolidLaraLevel(level);
+                        }
                     }
                     else
                     {
@@ -290,6 +367,11 @@ namespace TRRandomizerCore.Randomizers
                     }
 
                     _outer.DrawReplacements(holder.Mapping);
+                }
+
+                if (_outer.IsWireframeLevel(level))
+                {
+                    _wireframer.Apply(level.Data, _outer.GetWireframeData(level));
                 }
             }
         }
