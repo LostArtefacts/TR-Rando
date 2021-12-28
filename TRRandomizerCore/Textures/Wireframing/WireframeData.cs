@@ -13,6 +13,11 @@ namespace TRRandomizerCore.Textures
         public List<E> OpaqueModels { get; set; }
 
         /// <summary>
+        /// Similar to above, but for static meshes (such as Aldwych stairs)
+        /// </summary>
+        public List<uint> OpaqueStaticMeshes { get; set; }
+
+        /// <summary>
         /// Texture references that will have transparent backgrounds e.g. grates
         /// </summary>
         public List<ushort> TransparentTextures { get; set; }
@@ -39,6 +44,10 @@ namespace TRRandomizerCore.Textures
 
         public WireframeData()
         {
+            OpaqueModels = new List<E>();
+            OpaqueStaticMeshes = new List<uint>();
+            TransparentTextures = new List<ushort>();
+            ExcludedTextures = new List<ushort>();
             BackgroundColour = Color.Black;
             HighlightColour = Color.White;
             SolidLara = false;

@@ -304,8 +304,17 @@ namespace TRRandomizerCore.Randomizers
                         if (_outer.IsWireframeLevel(level))
                         {
                             WireframeData<TR3Entities> data = _outer.GetWireframeData(level);
-                            data.HighlightColour = _outer.GetWireframeVariant();
-                            data.SolidLara = _outer.IsSolidLaraLevel(level);
+                            if (level.IsCutScene)
+                            {
+                                WireframeData<TR3Entities> parentData = _outer.GetWireframeData(level.ParentLevel);
+                                data.HighlightColour = parentData.HighlightColour;
+                                data.SolidLara = parentData.SolidLara;
+                            }
+                            else
+                            {
+                                data.HighlightColour = _outer.GetWireframeVariant();
+                                data.SolidLara = _outer.IsSolidLaraLevel(level);
+                            }
                         }
                     }
                     else

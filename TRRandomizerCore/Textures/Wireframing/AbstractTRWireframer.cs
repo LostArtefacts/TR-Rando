@@ -38,6 +38,11 @@ namespace TRRandomizerCore.Textures
             return !_data.OpaqueModels.Contains(modelType);
         }
 
+        protected virtual bool IsStaticMeshTransparent(uint meshID)
+        {
+            return !_data.OpaqueStaticMeshes.Contains(meshID);
+        }
+
         protected virtual bool IsTextureTransparent(ushort texture)
         {
             return _data.TransparentTextures.Contains(texture);
@@ -194,11 +199,12 @@ namespace TRRandomizerCore.Textures
             ISet<TRMesh> processedMeshes = new HashSet<TRMesh>();
             foreach (E modelID in modelMeshes.Keys)
             {
+                bool isTransparent = IsModelTransparent(modelID);
                 foreach (TRMesh mesh in modelMeshes[modelID])
                 {
                     if (processedMeshes.Add(mesh))
                     {
-                        ScanMesh(level, mesh, IsModelTransparent(modelID));
+                        ScanMesh(level, mesh, isTransparent);
                     }
                 }
             }
@@ -208,7 +214,7 @@ namespace TRRandomizerCore.Textures
                 TRMesh mesh = GetStaticMesh(level, staticMesh);
                 if (processedMeshes.Add(mesh))
                 {
-                    ScanMesh(level, mesh, true);
+                    ScanMesh(level, mesh, IsStaticMeshTransparent(staticMesh.ID));
                 }
             }
         }

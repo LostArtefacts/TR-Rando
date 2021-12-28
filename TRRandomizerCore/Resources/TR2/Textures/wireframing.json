@@ -1,13 +1,12 @@
 {
   "WALL.TR2": {
     "OpaqueModels": [ 254 ],
+    "OpaqueStaticMeshes": [ 0 ],
     "TransparentTextures": [ 1271 ],
     "ExcludedTextures": [ 1229, 1254, 1346, 1347 ]
   },
   "CUT1.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [],
-    "ExcludedTextures": []
+    "OpaqueModels": [ 254 ]
   },
   "BOAT.TR2": {
     "OpaqueModels": [ 254, 106, 107, 108, 109, 110, 111, 112, 114 ],
@@ -25,9 +24,7 @@
     "ExcludedTextures": [ 1704, 1889, 1890, 1891 ]
   },
   "CUT2.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [],
-    "ExcludedTextures": []
+    "OpaqueModels": [ 254 ]
   },
   "RIG.TR2": {
     "OpaqueModels": [ 254, 114, 115 ],
@@ -86,13 +83,10 @@
   },
   "EMPRTOMB.TR2": {
     "OpaqueModels": [ 254, 86 ],
-    "TransparentTextures": [],
     "ExcludedTextures": [ 1413, 1417, 1409, 1412, 1458, 1459, 1671, 1570, 1569, 1567, 1568, 1691, 1692, 1559, 1564, 1561, 1558, 1563, 1560, 1557, 1638 ]
   },
   "CUT4.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [],
-    "ExcludedTextures": []
+    "OpaqueModels": [ 254 ]
   },
   "FLOATING.TR2": {
     "OpaqueModels": [ 254 ],
