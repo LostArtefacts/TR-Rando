@@ -80,12 +80,12 @@
     "ExcludedTextures": [ 1345, 1446, 1387, 1389 ]
   },
   "ICECAVE.TR2": {
-    "OpaqueModels": [ 254 ],
+    "OpaqueModels": [ 254, 86 ],
     "TransparentTextures": [ 1372, 1470, 1441, 994, 1001, 1441 ],
     "ExcludedTextures": [ 1366, 1562, 1563, 1564 ]
   },
   "EMPRTOMB.TR2": {
-    "OpaqueModels": [ 254 ],
+    "OpaqueModels": [ 254, 86 ],
     "TransparentTextures": [],
     "ExcludedTextures": [ 1413, 1417, 1409, 1412, 1458, 1459, 1671, 1570, 1569, 1567, 1568, 1691, 1692, 1559, 1564, 1561, 1558, 1563, 1560, 1557, 1638 ]
   },
