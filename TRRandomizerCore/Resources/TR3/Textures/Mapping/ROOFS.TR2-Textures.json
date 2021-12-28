@@ -1,5 +1,61 @@
 {
   "Static": {
+    "Enemies.LondonGuard": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 11,
+        "X": 104,
+        "Y": 24
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 232,
+        "Y": 224
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 144,
+        "Y": 120,
+        "Clip": "0, 0, 16, 24"
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 216,
+        "Y": 128,
+        "Clip": "0, 8, 16, 24"
+      },
+      {
+        "Segment": 2,
+        "Tile": 10,
+        "X": 208,
+        "Y": 0,
+        "Clip": "0, 0, 16, 16"
+      },
+      {
+        "Segment": 2,
+        "Tile": 10,
+        "X": 112,
+        "Y": 240,
+        "Clip": "0, 24, 16, 8"
+      },
+      {
+        "Segment": 2,
+        "Tile": 11,
+        "X": 188,
+        "Y": 72,
+        "Clip": "0, 0, 8, 8"
+      }
+    ],
+
     "Lara.Bobble": [
       {
         "Segment": 0,
