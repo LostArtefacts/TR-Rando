@@ -10,25 +10,14 @@ using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Textures;
+using TRRandomizerCore.Utilities;
 using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Randomizers
 {
     public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
     {
-        private static readonly Color[] _wireframeColours = new Color[]
-        {
-            Color.White,
-            Color.FromArgb(24, 156, 72),   // Green
-            Color.FromArgb(255, 172, 197), // Pink
-            Color.FromArgb(205, 164, 24),  // Orange
-            Color.FromArgb(41, 57, 172),   // Blue
-            Color.FromArgb(204, 92, 206),  // Purple
-            Color.FromArgb(68, 254, 25),   // Lime
-            Color.FromArgb(254, 219, 8),   // Yellow
-            Color.FromArgb(13, 202, 255),  // Cyan
-            Color.FromArgb(238, 189, 74),  // Gold
-        };
+        private static readonly Color[] _wireframeColours = ColorUtilities.GetWireframeColours();
 
         private readonly Dictionary<AbstractTextureSource, string> _persistentVariants;
         private readonly Dictionary<string, WireframeData<TR2Entities>> _wireframeData;

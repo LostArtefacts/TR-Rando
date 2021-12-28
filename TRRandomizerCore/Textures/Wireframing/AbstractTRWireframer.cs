@@ -152,10 +152,11 @@ namespace TRRandomizerCore.Textures
         {
             foreach (TRFace4 face in faces)
             {
-                if (!IsTextureExcluded(face.Texture))
+                ushort texture = (ushort)(face.Texture & 0x0fff);
+                if (!IsTextureExcluded(texture))
                 {
-                    TRSize size = GetTextureSize(level, face.Texture);
-                    if (IsTextureTransparent(face.Texture))
+                    TRSize size = GetTextureSize(level, texture);
+                    if (IsTextureTransparent(texture))
                     {
                         _clearRoomFace4s[face] = size;
                     }
@@ -171,10 +172,11 @@ namespace TRRandomizerCore.Textures
         {
             foreach (TRFace3 face in faces)
             {
-                if (!IsTextureExcluded(face.Texture))
+                ushort texture = (ushort)(face.Texture & 0x0fff);
+                if (!IsTextureExcluded(texture))
                 {
-                    TRSize size = GetTextureSize(level, face.Texture);
-                    if (IsTextureTransparent(face.Texture))
+                    TRSize size = GetTextureSize(level, texture);
+                    if (IsTextureTransparent(texture))
                     {
                         _clearRoomFace3s[face] = size;
                     }
@@ -215,7 +217,7 @@ namespace TRRandomizerCore.Textures
         {
             foreach (TRFace4 face in mesh.TexturedRectangles)
             {
-                TRSize size = GetTextureSize(level, face.Texture);
+                TRSize size = GetTextureSize(level, (ushort)(face.Texture & 0x0fff));
                 if (isClear)
                 {
                     _clearMeshFace4s[face] = size;
@@ -228,7 +230,7 @@ namespace TRRandomizerCore.Textures
 
             foreach (TRFace3 face in mesh.TexturedTriangles)
             {
-                TRSize size = GetTextureSize(level, face.Texture);
+                TRSize size = GetTextureSize(level, (ushort)(face.Texture & 0x0fff));
                 if (isClear)
                 {
                     _clearMeshFace3s[face] = size;
@@ -352,10 +354,10 @@ namespace TRRandomizerCore.Textures
 
         private void ResetRoomTextures(ushort clearIndex, ushort solidIndex)
         {
-            _clearRoomFace3s.Keys.ToList().ForEach(f => f.Texture = clearIndex);
-            _clearRoomFace4s.Keys.ToList().ForEach(f => f.Texture = clearIndex);
-            _solidRoomFace3s.Keys.ToList().ForEach(f => f.Texture = solidIndex);
-            _solidRoomFace4s.Keys.ToList().ForEach(f => f.Texture = solidIndex);
+            _clearRoomFace3s.Keys.ToList().ForEach(f => f.Texture = RemapTexture(f.Texture, clearIndex));
+            _clearRoomFace4s.Keys.ToList().ForEach(f => f.Texture = RemapTexture(f.Texture, clearIndex));
+            _solidRoomFace3s.Keys.ToList().ForEach(f => f.Texture = RemapTexture(f.Texture, solidIndex));
+            _solidRoomFace4s.Keys.ToList().ForEach(f => f.Texture = RemapTexture(f.Texture, solidIndex));
         }
 
         private void ResetMeshTextures(Dictionary<TRSize, IndexedTRObjectTexture> clearRemap, Dictionary<TRSize, IndexedTRObjectTexture> solidRemap)
@@ -374,7 +376,7 @@ namespace TRRandomizerCore.Textures
                     {
                         size = Find(size, clearRemap);
                     }
-                    face.Texture = (ushort)clearRemap[size].Index;
+                    face.Texture = RemapTexture(face.Texture, (ushort)clearRemap[size].Index);
                 }
             }
             foreach (TRFace4 face in _clearMeshFace4s.Keys)
@@ -386,7 +388,7 @@ namespace TRRandomizerCore.Textures
                     {
                         size = Find(size, clearRemap);
                     }
-                    face.Texture = (ushort)clearRemap[size].Index;
+                    face.Texture = RemapTexture(face.Texture, (ushort)clearRemap[size].Index);
                 }
             }
 
@@ -399,7 +401,7 @@ namespace TRRandomizerCore.Textures
                     {
                         size = Find(size, clearRemap);
                     }
-                    face.Texture = (ushort)solidRemap[size].Index;
+                    face.Texture = RemapTexture(face.Texture, (ushort)solidRemap[size].Index);
                 }
             }
             foreach (TRFace4 face in _solidMeshFace4s.Keys)
@@ -411,7 +413,7 @@ namespace TRRandomizerCore.Textures
                     {
                         size = Find(size, clearRemap);
                     }
-                    face.Texture = (ushort)solidRemap[size].Index;
+                    face.Texture = RemapTexture(face.Texture, (ushort)solidRemap[size].Index);
                 }
             }
         }
@@ -426,6 +428,16 @@ namespace TRRandomizerCore.Textures
                 }
             }
             return s;
+        }
+
+        private ushort RemapTexture(ushort currentTexture, ushort newTexture)
+        {
+            // Make sure double-sided textures are retained
+            if ((currentTexture & 0x8000) > 0)
+            {
+                newTexture |= 0x8000;
+            }
+            return newTexture;
         }
 
         private void TidyModels(L level)

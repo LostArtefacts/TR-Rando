@@ -155,5 +155,26 @@ namespace TRRandomizerCore.Utilities
                 Color.YellowGreen,
             };
         }
+
+        public static Color[] GetWireframeColours()
+        {
+            return new Color[]
+            {
+                Color.Teal,
+                Color.Thistle,
+                Color.Tomato,
+                Color.YellowGreen,
+                Color.White,
+                Color.FromArgb(24, 156, 72),   // Green
+                Color.FromArgb(255, 172, 197), // Pink
+                Color.FromArgb(205, 164, 24),  // Orange
+                Color.FromArgb(41, 57, 172),   // Blue
+                Color.FromArgb(204, 92, 206),  // Purple
+                Color.FromArgb(68, 254, 25),   // Lime
+                Color.FromArgb(254, 219, 8),   // Yellow
+                Color.FromArgb(13, 202, 255),  // Cyan
+                Color.FromArgb(238, 189, 74),  // Gold
+            };
+        }
     }
 }
