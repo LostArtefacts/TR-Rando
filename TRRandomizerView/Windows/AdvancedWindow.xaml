@@ -801,6 +801,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -840,6 +841,20 @@
                             Grid.Row="1">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="Wireframe the assault course level in addition to or separately from above."/>
+                    </Border>
+
+                    <Border Grid.Row="2">
+                        <CheckBox IsChecked="{Binding ControllerProxy.UseSolidLaraWireframing, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Keep Lara's Meshes Solid" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="2">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="If selected, Lara will always be a solid colour and opaque, otherwise she may also have wireframing applied."/>
                     </Border>
                 </Grid>
             </StackPanel>

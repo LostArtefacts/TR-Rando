@@ -45,6 +45,7 @@ namespace TRRandomizerCore.Editors
         public bool RetainSecretSpriteTextures { get; set; }
         public uint WireframeLevelCount { get; set; }
         public bool AssaultCourseWireframe { get; set; }
+        public bool UseSolidLaraWireframing { get; set; }
         public bool CrossLevelEnemies { get; set; }
         public bool ProtectMonks { get; set; }
         public bool DocileBirdMonsters { get; set; }
@@ -126,6 +127,7 @@ namespace TRRandomizerCore.Editors
             RetainSecretSpriteTextures = config.GetBool(nameof(RetainSecretSpriteTextures), true);
             WireframeLevelCount = config.GetUInt(nameof(WireframeLevelCount));
             AssaultCourseWireframe = config.GetBool(nameof(AssaultCourseWireframe));
+            UseSolidLaraWireframing = config.GetBool(nameof(UseSolidLaraWireframing));
 
             RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits));
             OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
@@ -216,6 +218,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(RetainSecretSpriteTextures)] = RetainSecretSpriteTextures;
             config[nameof(WireframeLevelCount)] = WireframeLevelCount;
             config[nameof(AssaultCourseWireframe)] = AssaultCourseWireframe;
+            config[nameof(UseSolidLaraWireframing)] = UseSolidLaraWireframing;
 
             config[nameof(RandomizeOutfits)] = RandomizeOutfits;
             config[nameof(OutfitSeed)] = OutfitSeed;

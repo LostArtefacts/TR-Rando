@@ -154,10 +154,18 @@ namespace TRRandomizerCore.Randomizers
             ISet<TR2ScriptedLevel> exlusions = new HashSet<TR2ScriptedLevel> { assaultCourse };
 
             _wireframeLevels = Levels.RandomSelection(_generator, (int)Settings.WireframeLevelCount, exclusions: exlusions);
-            _solidLaraLevels = _wireframeLevels.RandomSelection(_generator, _generator.Next(Math.Min(1, _wireframeLevels.Count), _wireframeLevels.Count));
             if (Settings.AssaultCourseWireframe)
             {
                 _wireframeLevels.Add(assaultCourse);
+            }
+
+            if (Settings.UseSolidLaraWireframing)
+            {
+                _solidLaraLevels = new List<TR2ScriptedLevel>(_wireframeLevels);
+            }
+            else
+            {
+                _solidLaraLevels = _wireframeLevels.RandomSelection(_generator, _generator.Next(Math.Min(1, _wireframeLevels.Count), _wireframeLevels.Count));
             }
 
             if (Settings.PersistTextureVariants)

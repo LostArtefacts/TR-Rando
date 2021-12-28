@@ -42,6 +42,7 @@ namespace TRRandomizerView.Model
         private uint _nightModeDarknessMaximum;
         private uint _wireframeLevelCount;
         private bool _assaultCourseWireframe;
+        private bool _useSolidLaraWireframing;
         private bool _nightModeAssaultCourse;
         private bool _overrideSunsets;
         private Color _vfxFilterColor;
@@ -1007,6 +1008,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public bool UseSolidLaraWireframing
+        {
+            get => _useSolidLaraWireframing;
+            set
+            {
+                _useSolidLaraWireframing = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool AutoLaunchGame
         {
             get => _autoLaunchGame;
@@ -1459,6 +1470,7 @@ namespace TRRandomizerView.Model
             RetainSecretSpriteTextures.Value = _controller.RetainSecretSpriteTextures;
             WireframeLevelCount = _controller.WireframeLevelCount;
             AssaultCourseWireframe = _controller.AssaultCourseWireframe;
+            UseSolidLaraWireframing = _controller.UseSolidLaraWireframing;
 
             RandomizeOutfits = _controller.RandomizeOutfits;
             OutfitSeed = _controller.OutfitSeed;
@@ -1705,6 +1717,7 @@ namespace TRRandomizerView.Model
             _controller.RetainSecretSpriteTextures = RetainSecretSpriteTextures.Value;
             _controller.WireframeLevelCount = WireframeLevelCount;
             _controller.AssaultCourseWireframe = AssaultCourseWireframe;
+            _controller.UseSolidLaraWireframing = UseSolidLaraWireframing;
 
             _controller.RandomizeOutfits = RandomizeOutfits;
             _controller.OutfitSeed = OutfitSeed;
