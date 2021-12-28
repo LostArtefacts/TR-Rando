@@ -165,7 +165,7 @@ namespace TRRandomizerCore.Randomizers
             ISet<TR2ScriptedLevel> exlusions = new HashSet<TR2ScriptedLevel> { assaultCourse };
 
             _wireframeLevels = Levels.RandomSelection(_generator, (int)Settings.WireframeLevelCount, exclusions: exlusions);
-            _solidLaraLevels = _wireframeLevels.RandomSelection(_generator, _generator.Next(0, _wireframeLevels.Count));
+            _solidLaraLevels = _wireframeLevels.RandomSelection(_generator, _generator.Next(Math.Min(1, _wireframeLevels.Count), _wireframeLevels.Count));
             if (Settings.AssaultCourseWireframe)
             {
                 _wireframeLevels.Add(assaultCourse);
@@ -349,6 +349,7 @@ namespace TRRandomizerCore.Randomizers
             private void ProcessLevel(TR2CombinedLevel level, Dictionary<TextureCategory, bool> options)
             {
                 TextureMonitor<TR2Entities> monitor = _outer.TextureMonitor.GetMonitor(level.Name);
+                bool isWireframe = _outer.IsWireframeLevel(level);
 
                 options[TextureCategory.NightMode] = monitor != null && monitor.UseNightTextures;
                 options[TextureCategory.DayMode] = !options[TextureCategory.NightMode];
@@ -360,16 +361,19 @@ namespace TRRandomizerCore.Randomizers
                         _outer.RedrawTargets(holder.Mapping, source, holder.Variants[source], options);
                     }
 
-                    // Add landmarks, but only if there is room available for them
-                    if (holder.Mapping.LandmarkMapping.Count > 0)
+                    if (!isWireframe)
                     {
-                        _landmarkImporter.Import(level.Data, holder.Mapping, monitor != null && monitor.UseMirroring);
-                    }
+                        // Add landmarks, but only if there is room available for them
+                        if (holder.Mapping.LandmarkMapping.Count > 0)
+                        {
+                            _landmarkImporter.Import(level.Data, holder.Mapping, monitor != null && monitor.UseMirroring);
+                        }
 
-                    _outer.DrawReplacements(holder.Mapping);
+                        _outer.DrawReplacements(holder.Mapping);
+                    }
                 }
 
-                if (_outer.IsWireframeLevel(level))
+                if (isWireframe)
                 {
                     _wireframer.Apply(level.Data, _outer.GetWireframeData(level));
                 }

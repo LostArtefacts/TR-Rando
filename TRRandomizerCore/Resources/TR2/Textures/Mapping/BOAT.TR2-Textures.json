@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.VeniceTroll": {
+      "0": [
+        {
+          "RoomNumber": 0,
+          "RectangleIndices": [ 57 ],
+          "BackgroundIndex": 1520
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Enemies.StickGoon.BodyWarmer": [
       {

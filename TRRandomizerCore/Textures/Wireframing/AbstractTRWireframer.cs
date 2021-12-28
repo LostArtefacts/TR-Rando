@@ -189,17 +189,25 @@ namespace TRRandomizerCore.Textures
         private void ScanMeshes(L level)
         {
             Dictionary<E, TRMesh[]> modelMeshes = GetModelMeshes(level);
+            ISet<TRMesh> processedMeshes = new HashSet<TRMesh>();
             foreach (E modelID in modelMeshes.Keys)
             {
                 foreach (TRMesh mesh in modelMeshes[modelID])
                 {
-                    ScanMesh(level, mesh, IsModelTransparent(modelID));
+                    if (processedMeshes.Add(mesh))
+                    {
+                        ScanMesh(level, mesh, IsModelTransparent(modelID));
+                    }
                 }
             }
 
             foreach (TRStaticMesh staticMesh in GetStaticMeshes(level))
             {
-                ScanMesh(level, GetStaticMesh(level, staticMesh), true);
+                TRMesh mesh = GetStaticMesh(level, staticMesh);
+                if (processedMeshes.Add(mesh))
+                {
+                    ScanMesh(level, mesh, true);
+                }
             }
         }
 
