@@ -17,7 +17,8 @@ namespace TRRandomizerCore.Textures
             TR3Entities.Lara, TR3Entities.LaraPonytail_H, TR3Entities.LaraFlareAnimation_H,
             TR3Entities.LaraPistolAnimation_H, TR3Entities.LaraShotgunAnimation_H, TR3Entities.LaraUziAnimation_H,
             TR3Entities.LaraDeagleAnimation_H, TR3Entities.LaraMP5Animation_H, TR3Entities.LaraGrenadeAnimation_H,
-            TR3Entities.LaraRocketAnimation_H, TR3Entities.LaraExtraAnimation_H, TR3Entities.LaraSkin_H
+            TR3Entities.LaraRocketAnimation_H, TR3Entities.LaraExtraAnimation_H, TR3Entities.LaraSkin_H,
+            TR3Entities.LaraHarpoonAnimation_H, TR3Entities.LaraVehicleAnimation_H
         };
 
         protected override AbstractTexturePacker<TR3Entities, TR3Level> CreatePacker(TR3Level level)
@@ -107,6 +108,12 @@ namespace TRRandomizerCore.Textures
         protected override bool IsSkybox(TRModel model)
         {
             return (TR3Entities)model.ID == TR3Entities.Skybox_H;
+        }
+
+        protected override bool ShouldSolidifyModel(TRModel model)
+        {
+            TR3Entities type = (TR3Entities)model.ID;
+            return TR3EntityUtilities.IsAnyPickupType(type) || TR3EntityUtilities.IsCrystalPickup(type);
         }
 
         protected override void ResetPaletteTracking(TR3Level level)

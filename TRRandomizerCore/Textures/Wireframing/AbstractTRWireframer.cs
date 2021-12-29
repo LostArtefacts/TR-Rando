@@ -66,6 +66,7 @@ namespace TRRandomizerCore.Textures
             _allTextures = new SortedSet<ushort>();
             _data = data;
 
+            ScanTransparentTextures(level);
             ScanRooms(level);
             ScanMeshes(level);
 
@@ -141,6 +142,20 @@ namespace TRRandomizerCore.Textures
             }
         }
 
+        private void ScanTransparentTextures(L level)
+        {
+            // Ensure if any excluded textures are transparent, that
+            // they're added to the data list to avoid replacement.
+            TRObjectTexture[] texts = GetObjectTextures(level);
+            foreach (ushort excTexture in _data.ExcludedTextures)
+            {
+                if (texts[excTexture].Attribute > 0)
+                {
+                    _data.TransparentTextures.Add(excTexture);
+                }
+            }
+        }
+
         private void ScanRooms(L level)
         {
             foreach (IEnumerable<TRFace4> roomRects in GetRoomFace4s(level))
@@ -158,17 +173,17 @@ namespace TRRandomizerCore.Textures
             foreach (TRFace4 face in faces)
             {
                 ushort texture = (ushort)(face.Texture & 0x0fff);
-                if (!IsTextureExcluded(texture))
+                TRSize size = GetTextureSize(level, texture);
+                if (IsTextureTransparent(texture))
                 {
-                    TRSize size = GetTextureSize(level, texture);
-                    if (IsTextureTransparent(texture))
+                    if (!IsTextureExcluded(texture))
                     {
                         _clearRoomFace4s[face] = size;
                     }
-                    else
-                    {
-                        _solidRoomFace4s[face] = size;
-                    }
+                }
+                else
+                {
+                    _solidRoomFace4s[face] = size;
                 }
             }
         }
@@ -178,17 +193,17 @@ namespace TRRandomizerCore.Textures
             foreach (TRFace3 face in faces)
             {
                 ushort texture = (ushort)(face.Texture & 0x0fff);
-                if (!IsTextureExcluded(texture))
+                TRSize size = GetTextureSize(level, texture);
+                if (IsTextureTransparent(texture))
                 {
-                    TRSize size = GetTextureSize(level, texture);
-                    if (IsTextureTransparent(texture))
+                    if (!IsTextureExcluded(texture))
                     {
                         _clearRoomFace3s[face] = size;
                     }
-                    else
-                    {
-                        _solidRoomFace3s[face] = size;
-                    }
+                }
+                else
+                {
+                    _solidRoomFace3s[face] = size;
                 }
             }
         }
@@ -269,7 +284,10 @@ namespace TRRandomizerCore.Textures
             List<int> textures = new List<int>();
             foreach (ushort t in _allTextures)
             {
-                textures.Add(t);
+                if (!IsTextureExcluded(t))
+                {
+                    textures.Add(t);
+                }
             }
 
             packer.RemoveObjectTextureSegments(textures);
@@ -462,15 +480,20 @@ namespace TRRandomizerCore.Textures
                 SetFace3Colours(mesh.ColouredTriangles, blackIndex);
             }
 
+            ISet<TRMesh> processedMeshes = new HashSet<TRMesh>();
             foreach (TRModel model in GetModels(level))
             {
+                bool solidLara = _data.SolidLara && IsLaraModel(model);
                 TRMesh[] meshes = GetModelMeshes(level, model);
                 if (meshes != null)
                 {
                     foreach (TRMesh mesh in meshes)
                     {
-                        SetFace4Colours(mesh.ColouredRectangles, blackIndex);
-                        SetFace3Colours(mesh.ColouredTriangles, blackIndex);
+                        if (processedMeshes.Add(mesh))
+                        {
+                            SetFace4Colours(mesh.ColouredRectangles, solidLara ? solidLaraIndex : blackIndex);
+                            SetFace3Colours(mesh.ColouredTriangles, solidLara ? solidLaraIndex : blackIndex);
+                        }
                     }
 
                     if (IsSkybox(model))
@@ -490,12 +513,11 @@ namespace TRRandomizerCore.Textures
                             mesh.NumColouredRectangles = (short)rects.Count;
                         }
                     }
-                    else if (_data.SolidLara && IsLaraModel(model))
+                    else if (solidLara || ShouldSolidifyModel(model))
                     {
-                        foreach (TRMesh mesh in meshes)
+                        if (solidLaraIndex == -1)
                         {
-                            SetFace4Colours(mesh.ColouredRectangles, solidLaraIndex);
-                            SetFace3Colours(mesh.ColouredTriangles, solidLaraIndex);
+                            solidLaraIndex = ImportColour(level, _data.HighlightColour);
                         }
 
                         foreach (TRMesh mesh in meshes)
@@ -526,7 +548,7 @@ namespace TRRandomizerCore.Textures
                 }
             }
 
-            if (_data.SolidLara)
+            if (solidLaraIndex != -1)
             {
                 ResetPaletteTracking(level);
             }
@@ -565,5 +587,6 @@ namespace TRRandomizerCore.Textures
         protected abstract TRMesh GetStaticMesh(L level, TRStaticMesh staticMesh);
         protected abstract bool IsSkybox(TRModel model);
         protected abstract bool IsLaraModel(TRModel model);
+        protected virtual bool ShouldSolidifyModel(TRModel model) => false;
     }
 }
