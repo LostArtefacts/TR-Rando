@@ -246,7 +246,15 @@ namespace TRRandomizerCore.Randomizers
 
         private WireframeData<TR3Entities> GetWireframeData(TR3CombinedLevel lvl)
         {
-            return IsWireframeLevel(lvl) ? _wireframeData[lvl.Name] : null;
+            if (IsWireframeLevel(lvl))
+            {
+                // Allow for JP version overrides in the data
+                string japaneseName = lvl.Name + "-JP";
+                return IsJPVersion && _wireframeData.ContainsKey(japaneseName) ?
+                    _wireframeData[japaneseName] :
+                    _wireframeData[lvl.Name];
+            }
+            return null;
         }
 
         private Color GetWireframeVariant()
