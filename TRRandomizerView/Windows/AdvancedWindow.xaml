@@ -71,6 +71,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -785,6 +786,75 @@
                                  /><Run Text="."/>
                             </TextBlock>
                         </Label>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!-- Wireframing -->
+            <StackPanel Grid.Row="12"
+                        Visibility="{Binding HasTextureOptions, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Wireframing"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Margin="0,3,0,0">
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown 
+                                HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"  
+                                        Value="{Binding ControllerProxy.WireframeLevelCount, Mode=TwoWay}"
+                                        MinValue="0"
+                                        MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Strip back level geometry and model textures for a wireframe effect."/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <CheckBox IsChecked="{Binding ControllerProxy.AssaultCourseWireframe, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Include Assault Course" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Wireframe the assault course level in addition to or separately from above."/>
+                    </Border>
+
+                    <Border Grid.Row="2">
+                        <CheckBox IsChecked="{Binding ControllerProxy.UseSolidLaraWireframing, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Keep Lara's Meshes Solid" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="2">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="If selected, Lara will always be a solid colour and opaque, otherwise she may also have wireframing applied."/>
                     </Border>
                 </Grid>
             </StackPanel>

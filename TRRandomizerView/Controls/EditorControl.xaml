@@ -250,7 +250,9 @@
                 <windows:AdvancedWindow Title="Randomize Textures (Advanced)"
                                         MainDescription="Customize the texture randomization."
                                         BoolItemsSource="{Binding Data.TextureBoolItemControls, Source={StaticResource proxy}}"
-                                        HasBoolItems="True">
+                                        HasBoolItems="True"
+                                        HasTextureOptions="True"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>

@@ -72,6 +72,11 @@ namespace TRRandomizerView.Windows
             nameof(HasGlobeOptions), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty HasTextureOptionsProperty = DependencyProperty.Register
+        (
+            nameof(HasTextureOptions), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
         (
             nameof(ControllerProxy), typeof(ControllerOptions), typeof(AdvancedWindow)
@@ -141,6 +146,12 @@ namespace TRRandomizerView.Windows
         {
             get => (bool)GetValue(HasGlobeOptionsProperty);
             set => SetValue(HasGlobeOptionsProperty, value);
+        }
+
+        public bool HasTextureOptions
+        {
+            get => (bool)GetValue(HasTextureOptionsProperty);
+            set => SetValue(HasTextureOptionsProperty, value);
         }
 
         public ControllerOptions ControllerProxy

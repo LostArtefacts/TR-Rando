@@ -40,6 +40,9 @@ namespace TRRandomizerView.Model
         private bool _assaultCourseInvisible;
         private uint _nightModeDarkness;
         private uint _nightModeDarknessMaximum;
+        private uint _wireframeLevelCount;
+        private bool _assaultCourseWireframe;
+        private bool _useSolidLaraWireframing;
         private bool _nightModeAssaultCourse;
         private bool _overrideSunsets;
         private Color _vfxFilterColor;
@@ -122,6 +125,7 @@ namespace TRRandomizerView.Model
             MirroredLevelCount = (uint)Math.Min(MirroredLevelCount, MaximumLevelCount);
             HaircutLevelCount = (uint)Math.Min(HaircutLevelCount, MaximumLevelCount);
             InvisibleLevelCount = (uint)Math.Min(InvisibleLevelCount, MaximumLevelCount);
+            WireframeLevelCount = (uint)Math.Min(WireframeLevelCount, MaximumLevelCount);
         }
 
         public bool RandomizationPossible
@@ -984,6 +988,36 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public uint WireframeLevelCount
+        {
+            get => _wireframeLevelCount;
+            set
+            {
+                _wireframeLevelCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool AssaultCourseWireframe
+        {
+            get => _assaultCourseWireframe;
+            set
+            {
+                _assaultCourseWireframe = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool UseSolidLaraWireframing
+        {
+            get => _useSolidLaraWireframing;
+            set
+            {
+                _useSolidLaraWireframing = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool AutoLaunchGame
         {
             get => _autoLaunchGame;
@@ -1434,6 +1468,9 @@ namespace TRRandomizerView.Model
             PersistTextures.Value = _controller.PersistTextures;
             RetainKeySpriteTextures.Value = _controller.RetainKeySpriteTextures;
             RetainSecretSpriteTextures.Value = _controller.RetainSecretSpriteTextures;
+            WireframeLevelCount = _controller.WireframeLevelCount;
+            AssaultCourseWireframe = _controller.AssaultCourseWireframe;
+            UseSolidLaraWireframing = _controller.UseSolidLaraWireframing;
 
             RandomizeOutfits = _controller.RandomizeOutfits;
             OutfitSeed = _controller.OutfitSeed;
@@ -1678,6 +1715,9 @@ namespace TRRandomizerView.Model
             _controller.PersistTextures = PersistTextures.Value;
             _controller.RetainKeySpriteTextures = RetainKeySpriteTextures.Value;
             _controller.RetainSecretSpriteTextures = RetainSecretSpriteTextures.Value;
+            _controller.WireframeLevelCount = WireframeLevelCount;
+            _controller.AssaultCourseWireframe = AssaultCourseWireframe;
+            _controller.UseSolidLaraWireframing = UseSolidLaraWireframing;
 
             _controller.RandomizeOutfits = RandomizeOutfits;
             _controller.OutfitSeed = OutfitSeed;

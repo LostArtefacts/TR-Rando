@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.MonkeyBusiness": {
+      "0": [
+        {
+          "RoomNumber": 87,
+          "RectangleIndices": [ 11 ],
+          "BackgroundIndex": 1983
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Lara.Bobble": [
       {
