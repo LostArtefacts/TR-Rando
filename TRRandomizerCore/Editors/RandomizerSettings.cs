@@ -127,7 +127,7 @@ namespace TRRandomizerCore.Editors
             RetainSecretSpriteTextures = config.GetBool(nameof(RetainSecretSpriteTextures), true);
             WireframeLevelCount = config.GetUInt(nameof(WireframeLevelCount));
             AssaultCourseWireframe = config.GetBool(nameof(AssaultCourseWireframe));
-            UseSolidLaraWireframing = config.GetBool(nameof(UseSolidLaraWireframing));
+            UseSolidLaraWireframing = config.GetBool(nameof(UseSolidLaraWireframing), true);
 
             RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits));
             OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
