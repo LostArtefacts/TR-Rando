@@ -91,12 +91,12 @@
   "FLOATING.TR2": {
     "OpaqueModels": [ 254 ],
     "TransparentTextures": [ 1173, 1579, 1580, 1584 ],
-    "ExcludedTextures": [ 1823, 1824, 1845, 1846 ]
+    "ExcludedTextures": [ 1767, 1823, 1824, 1845, 1846 ]
   },
   "FLOATING.TR2-UKBox": {
     "OpaqueModels": [ 254 ],
     "TransparentTextures": [ 1600, 1595, 1173, 1596 ],
-    "ExcludedTextures": [ 1840, 1861, 1839, 1862 ]
+    "ExcludedTextures": [ 1783, 1840, 1861, 1839, 1862 ]
   },
   "XIAN.TR2": {
     "OpaqueModels": [ 254 ],
