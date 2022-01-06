@@ -3,6 +3,11 @@ Tomb Raider Game Randomizer
 
 ![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando.PNG)
 
+# Installation
+Please follow the steps provided in this video:
+
+https://user-images.githubusercontent.com/9203254/148436641-6dd771ad-7b41-422e-a938-1fb70a3d279c.mp4
+
 # Features
 ![TR2 Rando UI](https://github.com/DanzaG/TR2-Rando/blob/master/UI.png)
 
