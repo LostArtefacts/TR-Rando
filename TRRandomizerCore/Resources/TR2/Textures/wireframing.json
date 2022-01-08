@@ -47,7 +47,7 @@
     "ExcludedTextures": [ 1436, 1442, 1432, 1444 ]
   },
   "KEEL.TR2": {
-    "OpaqueModels": [ 254 ],
+    "OpaqueModels": [ 106, 254 ],
     "TransparentTextures": [ 1787, 1788, 1758, 1862, 1875, 1811, 1363 ],
     "ExcludedTextures": [ 1769, 1770, 1730, 1764 ]
   },
@@ -68,7 +68,7 @@
   },
   "MONASTRY.TR2": {
     "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 1611, 1344 ],
+    "TransparentTextures": [ 1570, 1611, 1615, 1616, 1344 ],
     "ExcludedTextures": [ 1596, 1776, 1777, 1778, 1622, 1779, 1780, 1623 ]
   },
   "CATACOMB.TR2": {
