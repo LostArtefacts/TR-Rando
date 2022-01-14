@@ -23,5 +23,11 @@ namespace EMEditor
         {
             InitializeComponent();
         }
+
+        public NewEditModWindow(object SelectedMod)
+        {
+            this.DataContext = SelectedMod;
+            InitializeComponent();
+        }
     }
 }

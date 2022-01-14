@@ -33,8 +33,13 @@ namespace EMEditor
 
 
             All = new ObservableCollection<BaseEMFunction>(_mapping.All.AsEnumerable());
+            AllConditional = new ObservableCollection<EMConditionalSingleEditorSet>(_mapping.ConditionalAll.AsEnumerable());
             Mirrored = new ObservableCollection<BaseEMFunction>(_mapping.Mirrored.AsEnumerable());
             NonPurist = new ObservableCollection<BaseEMFunction>(_mapping.NonPurist.AsEnumerable());
+            Any = new ObservableCollection<EMEditorSet>(_mapping.Any.AsEnumerable());
+            AllWithin = new ObservableCollection<List<EMEditorSet>>(_mapping.AllWithin.AsEnumerable());
+            OneOf = new ObservableCollection<EMEditorGroupedSet>(_mapping.OneOf.AsEnumerable());
+            ConditionalAllWithin = new ObservableCollection<EMConditionalEditorSet>(_mapping.ConditionalAllWithin.AsEnumerable());
 
             _importJSONCommand.InvokeCanExecuteChanged();
         }
@@ -116,6 +121,13 @@ namespace EMEditor
             set { SetProperty(ref _all, value); }
         }
 
+        private ObservableCollection<EMConditionalSingleEditorSet> _allConditional;
+        public ObservableCollection<EMConditionalSingleEditorSet> AllConditional
+        {
+            get { return _allConditional; }
+            set { SetProperty(ref _allConditional, value); }
+        }
+
         private ObservableCollection<BaseEMFunction> _mirrored;
         public ObservableCollection<BaseEMFunction> Mirrored
         {
@@ -128,6 +140,41 @@ namespace EMEditor
         {
             get { return _nonPurist; }
             set { SetProperty(ref _nonPurist, value); }
+        }
+
+        private ObservableCollection<EMEditorSet> _any;
+        public ObservableCollection<EMEditorSet> Any
+        {
+            get { return _any; }
+            set { SetProperty(ref _any, value); }
+        }
+
+        private ObservableCollection<List<EMEditorSet>> _allWithin;
+        public ObservableCollection<List<EMEditorSet>> AllWithin
+        {
+            get { return _allWithin; }
+            set { SetProperty(ref _allWithin, value); }
+        }
+
+        private ObservableCollection<EMEditorGroupedSet> _oneOf;
+        public ObservableCollection<EMEditorGroupedSet> OneOf
+        {
+            get { return _oneOf; }
+            set { SetProperty(ref _oneOf, value); }
+        }
+
+        private ObservableCollection<EMConditionalEditorSet> _conditionalAllWithin;
+        public ObservableCollection<EMConditionalEditorSet> ConditionalAllWithin
+        {
+            get { return _conditionalAllWithin; }
+            set { SetProperty(ref _conditionalAllWithin, value); }
+        }
+
+        private object _selectedMod;
+        public object SelectedMod
+        {
+            get { return _selectedMod; }
+            set { SetProperty(ref _selectedMod, value); }
         }
 
         public EMEditorOverviewViewModel()
