@@ -1,4 +1,15 @@
 {
+  "Landmarks": {
+    "Landmarks.Topixtor": {
+      "0": [
+        {
+          "RoomNumber": 104,
+          "RectangleIndices": [ 208, 263 ]
+        }
+      ]
+    }
+  },
+
   "Dynamic": {
     "Tibet.SnowTheme": {
       "Default": {
