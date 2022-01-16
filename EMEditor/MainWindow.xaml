@@ -3,9 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:em="clr-namespace:TREnvironmentEditor.Model;assembly=TREnvironmentEditor"
+        xmlns:emt="clr-namespace:TREnvironmentEditor.Model.Types;assembly=TREnvironmentEditor"
+        xmlns:emc="clr-namespace:TREnvironmentEditor.Model.Conditions;assembly=TREnvironmentEditor"
         xmlns:local="clr-namespace:EMEditor" d:DataContext="{d:DesignInstance Type=local:EMEditorOverviewViewModel}"
         mc:Ignorable="d"
         Title="EMEditor" Height="600" Width="800">
+    <Window.Resources>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
@@ -63,42 +68,42 @@
         <TabControl Grid.Column="1" Grid.RowSpan="3">
             <TabItem Header="All">
                 <ScrollViewer>
-                    <ListBox ItemsSource="{Binding Path=All}"/>
+                    <ListBox ItemsSource="{Binding Path=All}" SelectedItem="{Binding SelectedMod}"/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="ConditionalAll">
                 <ScrollViewer>
-                    
+                    <ListBox ItemsSource="{Binding Path=AllConditional}" SelectedItem="{Binding SelectedMod}"/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Non Purist">
                 <ScrollViewer>
-                    <ListBox ItemsSource="{Binding Path=NonPurist}"/>
+                    <ListBox ItemsSource="{Binding Path=NonPurist}" SelectedItem="{Binding SelectedMod}"/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Any">
                 <ScrollViewer>
-                    
+                    <ListBox ItemsSource="{Binding Path=Any}" SelectedItem="{Binding SelectedMod}"/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="AllWithin">
                 <ScrollViewer>
-                    
+                    <ListBox ItemsSource="{Binding Path=AllWithin}" SelectedItem="{Binding SelectedMod}"/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="ConditionalAllWithin">
                 <ScrollViewer>
-                    
+                    <ListBox ItemsSource="{Binding Path=ConditionalAllWithin}" SelectedItem="{Binding SelectedMod}"/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="OneOf">
                 <ScrollViewer>
-                    
+                    <ListBox ItemsSource="{Binding Path=OneOf}" SelectedItem="{Binding SelectedMod}"/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Mirrored">
                 <ScrollViewer>
-                    <ListBox ItemsSource="{Binding Path=Mirrored}"/>
+                    <ListBox ItemsSource="{Binding Path=Mirrored}" SelectedItem="{Binding SelectedMod}"/>
                 </ScrollViewer>
             </TabItem>
         </TabControl>

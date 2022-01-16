@@ -71,6 +71,7 @@
       <DependentUpon>ConfigureTypeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="EMEditorNewEditModeViewModel.cs" />
     <Compile Include="EMEditorOverviewViewModel.cs" />
     <Compile Include="EMEditorVMBase.cs" />
     <Compile Include="MainWindow.xaml.cs">
