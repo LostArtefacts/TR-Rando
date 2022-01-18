@@ -1,5 +1,50 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Move a face in room 143 to plug an OG gap.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 143,
+          "FaceType": 0,
+          "FaceIndex": 403,
+          "VertexChanges": {
+            "0": {
+              "Y": 512,
+              "Z": -1024
+            },
+            "1": {
+              "Y": 768
+            },
+            "2": {
+              "Y": 512
+            },
+            "3": {
+              "Y": 512,
+              "Z": -1024
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Make a new face to plug the gap we've created.",
+      "EMType": 26,
+      "Quads": {
+        "143": [
+          {
+            "Vertices": [
+              460,
+              459,
+              489,
+              490
+            ],
+            "Texture": 1293
+          }
+        ]
+      }
+    }
+  ],
 
   "NonPurist": [
     {

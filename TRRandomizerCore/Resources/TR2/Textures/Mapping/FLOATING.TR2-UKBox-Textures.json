@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.LillyJericho": {
+      "0": [
+        {
+          "RoomNumber": 40,
+          "RectangleIndices": [ 29 ],
+          "BackgroundIndex": 1683
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Enemies.Guard.Spear": [
       {
