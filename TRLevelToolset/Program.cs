@@ -2,48 +2,56 @@
 using Veldrid;
 using Veldrid.StartupUtilities;
 
-VeldridStartup.CreateWindowAndGraphicsDevice(
-        new WindowCreateInfo(50, 50, 960, 540, WindowState.Normal, "ImGui Test"),
-        out var window,
-        out var gd);
-
-var cl = gd.ResourceFactory.CreateCommandList();
-
-var imguiRenderer = new ImGuiRenderer(
-    gd,
-    gd.MainSwapchain.Framebuffer.OutputDescription,
-    window.Width,
-    window.Height);
-
-window.Resized += () =>
+public static class Program
 {
-    imguiRenderer.WindowResized(window.Width, window.Height);
-    gd.MainSwapchain.Resize((uint)window.Width, (uint)window.Height);
-};
-
-while (window.Exists)
-{
-    var snapshot = window.PumpEvents();
-    imguiRenderer.Update(1f / 60f, snapshot);
-
-    // Draw whatever you want here.
-    if (ImGui.Begin("Test Window"))
+    static void Main(string[] args)
     {
-        ImGui.Text("Hello");
-        if (ImGui.Button("Quit"))
+        VeldridStartup.CreateWindowAndGraphicsDevice(
+            new WindowCreateInfo(50, 50, 960, 540, WindowState.Normal, "ImGui Test"),
+            out var window,
+            out var gd);
+
+        var cl = gd.ResourceFactory.CreateCommandList();
+
+        var imguiRenderer = new ImGuiRenderer(
+            gd,
+            gd.MainSwapchain.Framebuffer.OutputDescription,
+            window.Width,
+            window.Height);
+
+        window.Resized += () =>
         {
-            window.Close();
+            imguiRenderer.WindowResized(window.Width, window.Height);
+            gd.MainSwapchain.Resize((uint)window.Width, (uint)window.Height);
+        };
+
+        while (window.Exists)
+        {
+            var snapshot = window.PumpEvents();
+            imguiRenderer.Update(1f / 60f, snapshot);
+
+            // Draw whatever you want here.
+            if (ImGui.Begin("Test Window"))
+            {
+                ImGui.Text("Hello");
+                if (ImGui.Button("Quit"))
+                {
+                    window.Close();
+                }
+            }
+
+            cl.Begin();
+            cl.SetFramebuffer(gd.MainSwapchain.Framebuffer);
+            cl.ClearColorTarget(0, new RgbaFloat(0, 0, 0.2f, 1f));
+
+            //ImGUI Stuff here
+
+            imguiRenderer.Render(gd, cl);
+            cl.End();
+            gd.SubmitCommands(cl);
+            gd.SwapBuffers(gd.MainSwapchain);
         }
     }
-
-    cl.Begin();
-    cl.SetFramebuffer(gd.MainSwapchain.Framebuffer);
-    cl.ClearColorTarget(0, new RgbaFloat(0, 0, 0.2f, 1f));
-
-    //ImGUI Stuff here
-
-    imguiRenderer.Render(gd, cl);
-    cl.End();
-    gd.SubmitCommands(cl);
-    gd.SwapBuffers(gd.MainSwapchain);
 }
+
+
