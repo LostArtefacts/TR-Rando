@@ -7,7 +7,7 @@ public static class Program
     static void Main(string[] args)
     {
         VeldridStartup.CreateWindowAndGraphicsDevice(
-            new WindowCreateInfo(50, 50, 960, 540, WindowState.Normal, "ImGui Test"),
+            new WindowCreateInfo(50, 50, 960, 540, WindowState.Normal, "TR Level Toolset"),
             out var window,
             out var gd);
 
@@ -31,9 +31,9 @@ public static class Program
             imguiRenderer.Update(1f / 60f, snapshot);
 
             // Draw whatever you want here.
-            if (ImGui.Begin("Test Window"))
+            if (ImGui.Begin("Hello Rando"))
             {
-                ImGui.Text("Hello");
+                ImGui.Text("Hello Rando");
                 if (ImGui.Button("Quit"))
                 {
                     window.Close();
