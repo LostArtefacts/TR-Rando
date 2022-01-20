@@ -16,16 +16,6 @@ namespace TRRandomizerCore.Textures
         where L : class
     {
         protected static readonly TRSize _nullSize = new TRSize(0, 0);
-        protected static readonly Pen _roomPen = new Pen(Color.Black, 1)
-        {
-            Alignment = PenAlignment.Inset,
-            DashCap = DashCap.Round
-        };
-
-        protected static readonly Pen _modelPen = new Pen(Color.Black, 1)
-        {
-            Alignment = PenAlignment.Inset
-        };
 
         private Dictionary<TRFace3, TRSize> _solidRoomFace3s, _clearRoomFace3s, _solidMeshFace3s, _clearMeshFace3s;
         private Dictionary<TRFace4, TRSize> _solidRoomFace4s, _clearRoomFace4s, _solidMeshFace4s, _clearMeshFace4s;
@@ -75,8 +65,15 @@ namespace TRRandomizerCore.Textures
             ISet<TRSize> clearMeshSizes = new SortedSet<TRSize>(_clearMeshFace3s.Values.Concat(_clearMeshFace4s.Values));
             ISet<TRSize> solidMeshSizes = new SortedSet<TRSize>(_solidMeshFace3s.Values.Concat(_solidMeshFace4s.Values));
 
-            _roomPen.Color = _data.HighlightColour;
-            _modelPen.Color = _data.HighlightColour;
+            Pen roomPen = new Pen(_data.HighlightColour, 1)
+            {
+                Alignment = PenAlignment.Inset,
+                DashCap = DashCap.Round
+            };            
+            Pen modelPen = new Pen(_data.HighlightColour, 1)
+            {
+                Alignment = PenAlignment.Inset
+            };
 
             using (AbstractTexturePacker<E, L> packer = CreatePacker(level))
             {
@@ -86,19 +83,19 @@ namespace TRRandomizerCore.Textures
                 TRSize clearRoomSize = GetLargestSize(clearRoomSizes);
                 TRSize solidRoomSize = GetLargestSize(solidRoomSizes);
 
-                IndexedTRObjectTexture transpRoomTexture = CreateWireframe(packer, clearRoomSize, Color.Transparent, _roomPen, SmoothingMode.AntiAlias);
-                IndexedTRObjectTexture opaqueRoomTexture = CreateWireframe(packer, solidRoomSize, _data.BackgroundColour, _roomPen, SmoothingMode.AntiAlias);
+                IndexedTRObjectTexture transpRoomTexture = CreateWireframe(packer, clearRoomSize, Color.Transparent, roomPen, SmoothingMode.AntiAlias);
+                IndexedTRObjectTexture opaqueRoomTexture = CreateWireframe(packer, solidRoomSize, _data.BackgroundColour, roomPen, SmoothingMode.AntiAlias);
 
                 Dictionary<TRSize, IndexedTRObjectTexture> clearModelRemap = new Dictionary<TRSize, IndexedTRObjectTexture>();
                 Dictionary<TRSize, IndexedTRObjectTexture> solidModelRemap = new Dictionary<TRSize, IndexedTRObjectTexture>();
 
                 foreach (TRSize size in clearMeshSizes)
                 {
-                    clearModelRemap[size] = CreateWireframe(packer, size, Color.Transparent, _modelPen, SmoothingMode.None);
+                    clearModelRemap[size] = CreateWireframe(packer, size, Color.Transparent, modelPen, SmoothingMode.None);
                 }
                 foreach (TRSize size in solidMeshSizes)
                 {
-                    solidModelRemap[size] = CreateWireframe(packer, size, _data.BackgroundColour, _modelPen, SmoothingMode.None);
+                    solidModelRemap[size] = CreateWireframe(packer, size, _data.BackgroundColour, modelPen, SmoothingMode.None);
                 }
 
                 packer.Options.StartMethod = PackingStartMethod.FirstTile;
