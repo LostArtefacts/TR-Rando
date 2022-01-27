@@ -9,6 +9,50 @@
     }
   ],
 
+  "NonPurist": [
+    {
+      "Comments": "Goodbye, Opera skip.",
+      "EMType": 44,
+      "EntityIndex": 181,
+      "TargetLocation": {
+        "X": 74240,
+        "Y": 3584,
+        "Z": 50688,
+        "Room": 53,
+        "Angle": 0
+      }
+    },
+    {
+      "EMType": 44,
+      "EntityIndex": 182,
+      "TargetLocation": {
+        "X": 73216,
+        "Y": 3584,
+        "Z": 50688,
+        "Room": 53,
+        "Angle": 0
+      }
+    },
+    {
+      "Comments": "Kill Lara where the shards used to be.",
+      "EMType": 70,
+      "Locations": [
+        {
+          "X": 71168,
+          "Y": -768,
+          "Z": 61952,
+          "Room": 168
+        },
+        {
+          "X": 71168,
+          "Y": -768,
+          "Z": 60928,
+          "Room": 168
+        }
+      ]
+    }
+  ],
+
   "Any": [
     [
       {

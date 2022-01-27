@@ -41,6 +41,7 @@
         MoveTrigger = 67,
         AppendTriggerActionFunction = 68,
         ConvertTrigger = 69,
+        KillLara = 70,
 
         // Portal types 81-100
         VisibilityPortal = 81,
