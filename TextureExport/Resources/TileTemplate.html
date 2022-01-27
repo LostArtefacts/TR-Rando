@@ -137,6 +137,24 @@
             display:table-cell;
             padding-right:3px;
         }
+
+        #palette {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            font-size: 13px;
+            width: calc(100% - 20px);
+        }
+
+        #palette:empty {
+            display: none;
+        }
+
+        #palette:before {
+            display: block;
+            content: 'Palette';
+            font-weight: bold;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script>
@@ -263,9 +281,11 @@
                             itext = i.attr("data-sprites").split(";");
                         }
 
-                        const k = parseInt(itext[0].split(":")[0]);
-                        if (indexArr.indexOf(k) == -1) {
-                            indexArr.push(k);
+                        for (let i = 0; i < itext.length; i++) {
+                            const k = parseInt(itext[i].split(":")[0]);
+                            if (indexArr.indexOf(k) == -1) {
+                                indexArr.push(k);
+                            }
                         }
                     });
 
@@ -288,6 +308,7 @@
     </div>
     <div id="details">&nbsp;</div>
     <div id="skybox">{SkyBox}</div>
+    <div id="palette">{Palette}</div>
 </div>
 <div id="tiles" class="singlesel">{Tiles}</div>
 </body>

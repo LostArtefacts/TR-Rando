@@ -28,7 +28,15 @@ namespace TextureExport.Types
                 Dictionary<int, TRColour4> skyColours = new Dictionary<int, TRColour4>();
                 BuildSkyBox(skyboxInfo, skyColours);
 
-                Write("TR1", lvlName, tiles, levelSel, skyboxInfo);
+                StringBuilder palette = new StringBuilder();
+                ISet<Color> colors = new HashSet<Color>();
+                foreach (TRColour c in level.Palette)
+                {
+                    colors.Add(Color.FromArgb(c.Red, c.Green, c.Blue));
+                }
+                palette.Append(colors.Count).Append(" unique colours");
+
+                Write("TR1", lvlName, tiles, levelSel, skyboxInfo, palette);
             }
         }
 
@@ -208,13 +216,14 @@ namespace TextureExport.Types
             }
         }
 
-        private static void Write(string dir, string lvlName, StringBuilder tiles, StringBuilder levelSelect, StringBuilder skyBox)
+        private static void Write(string dir, string lvlName, StringBuilder tiles, StringBuilder levelSelect, StringBuilder skyBox, StringBuilder palette = null)
         {
             string tpl = File.ReadAllText(@"Resources\TileTemplate.html");
             tpl = tpl.Replace("{Title}", lvlName);
             tpl = tpl.Replace("{Levels}", levelSelect.ToString());
             tpl = tpl.Replace("{Tiles}", tiles.ToString());
             tpl = tpl.Replace("{SkyBox}", skyBox.ToString());
+            tpl = tpl.Replace("{Palette}", palette == null ? string.Empty : palette.ToString());
 
             dir += @"\HTML";
             Directory.CreateDirectory(dir);
