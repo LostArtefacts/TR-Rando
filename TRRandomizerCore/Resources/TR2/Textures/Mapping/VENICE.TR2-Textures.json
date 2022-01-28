@@ -1,4 +1,15 @@
 {
+  "Landmarks": {
+    "Landmarks.TheTowandAA": {
+      "0": [
+        {
+          "RoomNumber": 135,
+          "RectangleIndices": [ 60 ]
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Fire.Explosion": [
       {
