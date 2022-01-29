@@ -33,6 +33,9 @@ public static class Program
 
         DataEditComponent dataEditComponent = new DataEditComponent();
         EnvironmentEditComponent environmentEditComponent = new EnvironmentEditComponent();
+        LocationEditComponent locationEditComponent = new LocationEditComponent();
+        StringEditComponent stringEditComponent = new StringEditComponent();
+        SFXEditComponent SFXEditComponent = new SFXEditComponent();
 
         while (window.Exists)
         {
@@ -50,6 +53,9 @@ public static class Program
             versionComponent.Draw();
             dataEditComponent.Draw();
             environmentEditComponent.Draw();
+            locationEditComponent.Draw();
+            stringEditComponent.Draw();
+            SFXEditComponent.Draw();
 
             ImGui.End();
 
