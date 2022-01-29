@@ -41,8 +41,8 @@ namespace TRTexture16Importer
 
         public static Bitmap ToBitmap(this TRTexImage8 tex, TRColour[] palette)
         {
-            Bitmap bmp = new Bitmap(_tileSize, _tileSize, PixelFormat.Format32bppRgb);
-            BitmapData bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppRgb);
+            Bitmap bmp = new Bitmap(_tileSize, _tileSize, PixelFormat.Format32bppArgb);
+            BitmapData bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
             List<byte> pixelCollection = new List<byte>();
             foreach (byte colourIndex in tex.Pixels)

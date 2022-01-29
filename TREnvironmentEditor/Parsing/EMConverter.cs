@@ -110,6 +110,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMAppendTriggerActionFunction>(jo.ToString(), _resolver);
                 case EMType.ConvertTrigger:
                     return JsonConvert.DeserializeObject<EMConvertTriggerFunction>(jo.ToString(), _resolver);
+                case EMType.KillLara:
+                    return JsonConvert.DeserializeObject<EMKillLaraFunction>(jo.ToString(), _resolver);
 
                 // Portals
                 case EMType.VisibilityPortal:

@@ -1,5 +1,13 @@
 {
   "Landmarks": {
+    "Landmarks.Ludwig": {
+      "0": [
+        {
+          "RoomNumber": 104,
+          "RectangleIndices": [ 163, 240 ]
+        }
+      ]
+    },
     "Landmarks.Topixtor": {
       "0": [
         {

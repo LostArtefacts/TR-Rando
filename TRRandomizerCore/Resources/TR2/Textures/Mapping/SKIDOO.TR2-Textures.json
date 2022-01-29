@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.Zenuriko": {
+      "0": [
+        {
+          "RoomNumber": 131,
+          "RectangleIndices": [ 15 ],
+          "BackgroundIndex": 1480
+        }
+      ]
+    }
+  },
+
   "Dynamic": {
     "Tibet.SnowTheme": {
       "Default": {
