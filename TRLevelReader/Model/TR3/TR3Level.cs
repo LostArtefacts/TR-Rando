@@ -9,13 +9,8 @@ using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TR3Level : ISerializableCompact
+    public class TR3Level : BaseTRLevel, ISerializableCompact
     {
-        /// <summary>
-        /// 4 Bytes
-        /// </summary>
-        public uint Version { get; set; }
-
         /// <summary>
         /// 256 entries * 3 components = 768 Bytes
         /// </summary>

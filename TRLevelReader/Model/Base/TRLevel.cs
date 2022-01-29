@@ -8,13 +8,8 @@ using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TRLevel : ISerializableCompact
+    public class TRLevel : BaseTRLevel, ISerializableCompact
     {
-        /// <summary>
-        /// 4 Bytes
-        /// </summary>
-        public uint Version { get; set; }
-
         /// <summary>
         /// 4 Bytes
         /// </summary>

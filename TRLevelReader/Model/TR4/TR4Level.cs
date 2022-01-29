@@ -9,10 +9,8 @@ using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TR4Level : ISerializableCompact
+    public class TR4Level : BaseTRLevel, ISerializableCompact
     {
-        public uint Version { get; set; }
-
         public ushort NumRoomTextiles { get; set; }
 
         public ushort NumObjTextiles { get; set; }
