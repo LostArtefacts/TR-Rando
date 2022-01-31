@@ -77,7 +77,7 @@
     "ExcludedTextures": [ 1345, 1446, 1387, 1389 ]
   },
   "ICECAVE.TR2": {
-    "OpaqueModels": [ 254, 86 ],
+    "OpaqueModels": [ 254, 86, 106, 107, 108 ],
     "TransparentTextures": [ 1372, 1470, 1441, 994, 1001, 1441 ],
     "ExcludedTextures": [ 1366, 1562, 1563, 1564 ]
   },
