@@ -31,130 +31,75 @@ namespace TRRandomizerCore.Randomizers
 
                 ZonedLocations.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), LevelLocations, ZonePopulationMethod.SecretsOnly);
 
-                Location GoldSecret;
-                Location JadeSecret;
-                Location StoneSecret;
+                Location goldLocation;
+                Location jadeLocation;
+                Location stoneLocation;
 
                 //Find suitable locations, ensuring they are zoned, do not share a room and difficulty.
                 //Location = ZoneLocations[ZoneGroup][LocationInZoneGroup]
                 do
                 {
-                    GoldSecret = ZonedLocations.GoldZone[_generator.Next(0, ZonedLocations.GoldZone.Count)];
-                } while ((GoldSecret.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
-                        (GoldSecret.RequiresGlitch == true && Settings.GlitchedSecrets == false));
+                    goldLocation = ZonedLocations.GoldZone[_generator.Next(0, ZonedLocations.GoldZone.Count)];
+                } while ((goldLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
+                        (goldLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
                 
 
                 do
                 {
-                    JadeSecret = ZonedLocations.JadeZone[_generator.Next(0, ZonedLocations.JadeZone.Count)];
-                } while ((JadeSecret.Room == GoldSecret.Room) || 
-                        (JadeSecret.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
-                        (JadeSecret.RequiresGlitch == true && Settings.GlitchedSecrets == false));
+                    jadeLocation = ZonedLocations.JadeZone[_generator.Next(0, ZonedLocations.JadeZone.Count)];
+                } while ((jadeLocation.Room == goldLocation.Room) || 
+                        (jadeLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
+                        (jadeLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
 
                 do
                 {
-                    StoneSecret = ZonedLocations.StoneZone[_generator.Next(0, ZonedLocations.StoneZone.Count)];
-                } while ((StoneSecret.Room == GoldSecret.Room) || 
-                        (StoneSecret.Room == JadeSecret.Room) ||
-                        (StoneSecret.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
-                        (StoneSecret.RequiresGlitch == true && Settings.GlitchedSecrets == false));
+                    stoneLocation = ZonedLocations.StoneZone[_generator.Next(0, ZonedLocations.StoneZone.Count)];
+                } while ((stoneLocation.Room == goldLocation.Room) || 
+                        (stoneLocation.Room == jadeLocation.Room) ||
+                        (stoneLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
+                        (stoneLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
 
                 //Due to TRMod only accepting room space coords entities are actually stored in level space. So include some
                 //calls to support a transformation of any locations that are specified in room space to maintain backwards compatbility
                 //with older locations and support locations that are specified in both level or room space.
-                GoldSecret = SpatialConverters.TransformToLevelSpace(GoldSecret, _levelInstance.Data.Rooms[GoldSecret.Room].Info);
-                JadeSecret = SpatialConverters.TransformToLevelSpace(JadeSecret, _levelInstance.Data.Rooms[JadeSecret.Room].Info);
-                StoneSecret = SpatialConverters.TransformToLevelSpace(StoneSecret, _levelInstance.Data.Rooms[StoneSecret.Room].Info);
+                goldLocation = SpatialConverters.TransformToLevelSpace(goldLocation, _levelInstance.Data.Rooms[goldLocation.Room].Info);
+                jadeLocation = SpatialConverters.TransformToLevelSpace(jadeLocation, _levelInstance.Data.Rooms[jadeLocation.Room].Info);
+                stoneLocation = SpatialConverters.TransformToLevelSpace(stoneLocation, _levelInstance.Data.Rooms[stoneLocation.Room].Info);
 
-                //Does the level contain the entities?
-                int GoldIndex = Array.FindIndex(_levelInstance.Data.Entities, ent => (ent.TypeID == (short)TR2Entities.GoldSecret_S_P));
-                int JadeIndex = Array.FindIndex(_levelInstance.Data.Entities, ent => (ent.TypeID == (short)TR2Entities.JadeSecret_S_P));
-                int StoneIndex = Array.FindIndex(_levelInstance.Data.Entities, ent => (ent.TypeID == (short)TR2Entities.StoneSecret_S_P));
+                Dictionary<TR2Entities, Location> secretMap = new Dictionary<TR2Entities, Location>
+                {
+                    [TR2Entities.StoneSecret_S_P] = stoneLocation,
+                    [TR2Entities.JadeSecret_S_P] = jadeLocation,
+                    [TR2Entities.GoldSecret_S_P] = goldLocation
+                };
 
-                //Check if we could find instances of the secret entities, if not, we need to add not edit.
-                if (GoldIndex != -1)
+                List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
+                foreach (TR2Entities secretType in secretMap.Keys)
                 {
-                    _levelInstance.Data.Entities[GoldIndex].Room = Convert.ToInt16(GoldSecret.Room);
-                    _levelInstance.Data.Entities[GoldIndex].X = GoldSecret.X;
-                    _levelInstance.Data.Entities[GoldIndex].Y = GoldSecret.Y;
-                    _levelInstance.Data.Entities[GoldIndex].Z = GoldSecret.Z;
-                }
-                else
-                {
-                    TR2Entity GoldEntity = new TR2Entity
+                    //Does the level contain an entity for this type?
+                    TR2Entity secretEntity = Array.Find(_levelInstance.Data.Entities, ent => ent.TypeID == (short)secretType);
+                    
+                    //If not, create a placeholder entity for now
+                    if (secretEntity == null)
                     {
-                        TypeID = (int)TR2Entities.GoldSecret_S_P,
-                        Room = Convert.ToInt16(GoldSecret.Room),
-                        X = GoldSecret.X,
-                        Y = GoldSecret.Y,
-                        Z = GoldSecret.Z,
-                        Angle = 0,
-                        Intensity1 = -1,
-                        Intensity2 = -1,
-                        Flags = 0
-                    };
+                        ents.Add(secretEntity = new TR2Entity());
+                    }
 
-                    List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-                    ents.Add(GoldEntity);
-                    _levelInstance.Data.Entities = ents.ToArray();
-                    _levelInstance.Data.NumEntities++;
+                    // Move it to the new location and ensure it has the correct type set
+                    Location location = secretMap[secretType];
+                    secretEntity.TypeID = (short)secretType;
+                    secretEntity.Room = (short)location.Room;
+                    secretEntity.X = location.X;
+                    secretEntity.Y = location.Y;
+                    secretEntity.Z = location.Z;
+                    secretEntity.Intensity1 = -1;
+                    secretEntity.Intensity2 = -1;
+                    secretEntity.Angle = 0;
+                    secretEntity.Flags = 0;
                 }
 
-                if (JadeIndex != -1)
-                {
-                    _levelInstance.Data.Entities[JadeIndex].Room = Convert.ToInt16(JadeSecret.Room);
-                    _levelInstance.Data.Entities[JadeIndex].X = JadeSecret.X;
-                    _levelInstance.Data.Entities[JadeIndex].Y = JadeSecret.Y;
-                    _levelInstance.Data.Entities[JadeIndex].Z = JadeSecret.Z;
-                }
-                else
-                {
-                    TR2Entity JadeEntity = new TR2Entity
-                    {
-                        TypeID = (int)TR2Entities.JadeSecret_S_P,
-                        Room = Convert.ToInt16(JadeSecret.Room),
-                        X = JadeSecret.X,
-                        Y = JadeSecret.Y,
-                        Z = JadeSecret.Z,
-                        Angle = 0,
-                        Intensity1 = -1,
-                        Intensity2 = -1,
-                        Flags = 0
-                    };
-
-                    List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-                    ents.Add(JadeEntity);
-                    _levelInstance.Data.Entities = ents.ToArray();
-                    _levelInstance.Data.NumEntities++;
-                }
-
-                if (StoneIndex != -1)
-                {
-                    _levelInstance.Data.Entities[StoneIndex].Room = Convert.ToInt16(StoneSecret.Room);
-                    _levelInstance.Data.Entities[StoneIndex].X = StoneSecret.X;
-                    _levelInstance.Data.Entities[StoneIndex].Y = StoneSecret.Y;
-                    _levelInstance.Data.Entities[StoneIndex].Z = StoneSecret.Z;
-                }
-                else
-                {
-                    TR2Entity StoneEntity = new TR2Entity
-                    {
-                        TypeID = (int)TR2Entities.StoneSecret_S_P,
-                        Room = Convert.ToInt16(StoneSecret.Room),
-                        X = StoneSecret.X,
-                        Y = StoneSecret.Y,
-                        Z = StoneSecret.Z,
-                        Angle = 0,
-                        Intensity1 = -1,
-                        Intensity2 = -1,
-                        Flags = 0
-                    };
-
-                    List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-                    ents.Add(StoneEntity);
-                    _levelInstance.Data.Entities = ents.ToArray();
-                    _levelInstance.Data.NumEntities++;
-                }
+                _levelInstance.Data.Entities = ents.ToArray();
+                _levelInstance.Data.NumEntities = (uint)ents.Count;
             }
         }
 
