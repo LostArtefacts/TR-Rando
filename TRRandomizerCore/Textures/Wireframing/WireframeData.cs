@@ -4,33 +4,12 @@ using System.Drawing;
 
 namespace TRRandomizerCore.Textures
 {
-    public class WireframeData<E>
-        where E : Enum
+    public class WireframeData
     {
-        /// <summary>
-        /// Models that can't use transparent wireframe textures. If included here, solid backgrounds will be used e.g. Door1 in Venice because of room 96
-        /// </summary>
-        public List<E> OpaqueModels { get; set; }
-
-        /// <summary>
-        /// Similar to above, but for static meshes (such as Aldwych stairs)
-        /// </summary>
-        public List<uint> OpaqueStaticMeshes { get; set; }
-
-        /// <summary>
-        /// Texture references that will have transparent backgrounds e.g. grates
-        /// </summary>
-        public List<ushort> TransparentTextures { get; set; }
-
         /// <summary>
         /// Textures that will be retained, such as water surfaces
         /// </summary>
         public List<ushort> ExcludedTextures { get; set; }
-
-        /// <summary>
-        /// The solid background colour to use for opaque frames
-        /// </summary>
-        public Color BackgroundColour { get; set; }
 
         /// <summary>
         /// The colour of the wire itself
@@ -42,15 +21,41 @@ namespace TRRandomizerCore.Textures
         /// </summary>
         public bool SolidLara { get; set; }
 
+        /// <summary>
+        /// Enemies will become a solid version of the HighlightColour, otherwise they will be framed
+        /// </summary>
+        public bool SolidEnemies { get; set; }
+
+        /// <summary>
+        /// Models that should also use solid textures if SolidEnemies is enabled (e.g. CutsceneActors)
+        /// </summary>
+        public List<uint> SolidModels { get; set; }
+
+        /// <summary>
+        /// Allows different solid colours to be allocated per model.
+        /// </summary>
+        public Dictionary<uint, Color> ModelColours { get; set; }
+
+        /// <summary>
+        /// Where textures are shared within segments, and we want to exclude only parts, we "clip" out the rest.
+        /// </summary>
+        public List<WireframeClip> ManualClips { get; set; }
+
+        /// <summary>
+        /// Whether or not to generate special textures for ladders.
+        /// </summary>
+        public bool HighlightLadders { get; set; }
+
         public WireframeData()
         {
-            OpaqueModels = new List<E>();
-            OpaqueStaticMeshes = new List<uint>();
-            TransparentTextures = new List<ushort>();
             ExcludedTextures = new List<ushort>();
-            BackgroundColour = Color.Black;
             HighlightColour = Color.White;
             SolidLara = false;
+            SolidEnemies = false;
+            SolidModels = new List<uint>();
+            ModelColours = new Dictionary<uint, Color>();
+            ManualClips = new List<WireframeClip>();
+            HighlightLadders = false;
         }
     }
 }

@@ -75,6 +75,22 @@ namespace TRLevelReader.Model
             }
         }
 
+        public bool IsSkyboxVisible
+        {
+            get => (Flags & 0x08) > 0;
+            set
+            {
+                if (value)
+                {
+                    Flags |= 0x08;
+                }
+                else
+                {
+                    Flags &= ~0x08;
+                }
+            }
+        }
+
         public bool IsSwamp
         {
             get => (Flags & 0x80) > 0;

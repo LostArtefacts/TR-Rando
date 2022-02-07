@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -20,7 +21,7 @@ namespace TRRandomizerCore.Randomizers
         private static readonly Color[] _wireframeColours = ColorUtilities.GetWireframeColours();
 
         private readonly Dictionary<AbstractTextureSource, string> _persistentVariants;
-        private readonly Dictionary<string, WireframeData<TR2Entities>> _wireframeData;
+        private readonly Dictionary<string, WireframeData> _wireframeData;
         private readonly object _drawLock;
         private TR2TextureDatabase _textureDatabase;
         private Dictionary<TextureCategory, bool> _textureOptions;
@@ -34,7 +35,7 @@ namespace TRRandomizerCore.Randomizers
         public TR2TextureRandomizer()
         {
             _persistentVariants = new Dictionary<AbstractTextureSource, string>();
-            _wireframeData = JsonConvert.DeserializeObject<Dictionary<string, WireframeData<TR2Entities>>>(ReadResource(@"TR2\Textures\wireframing.json"));
+            _wireframeData = JsonConvert.DeserializeObject<Dictionary<string, WireframeData>>(ReadResource(@"TR2\Textures\wireframing.json"));
             _drawLock = new object();
         }
 
@@ -172,6 +173,8 @@ namespace TRRandomizerCore.Randomizers
             {
                 _persistentWireColour = _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
             }
+
+            _wireframeData.Values.ToList().ForEach(d => d.HighlightLadders = Settings.UseWireframeLadders);
         }
 
         public string GetSourceVariant(AbstractTextureSource source)
@@ -243,7 +246,7 @@ namespace TRRandomizerCore.Randomizers
                 (_solidLaraLevels.Contains(lvl.Script) || (lvl.IsCutScene && _solidLaraLevels.Contains(lvl.ParentLevel.Script)));
         }
 
-        private WireframeData<TR2Entities> GetWireframeData(TR2CombinedLevel lvl)
+        private WireframeData GetWireframeData(TR2CombinedLevel lvl)
         {
             return IsWireframeLevel(lvl) ? _wireframeData[lvl.JsonID] : null;
         }
@@ -309,10 +312,11 @@ namespace TRRandomizerCore.Randomizers
 
                         if (_outer.IsWireframeLevel(level))
                         {
-                            WireframeData<TR2Entities> data = _outer.GetWireframeData(level);
+                            WireframeData data = _outer.GetWireframeData(level);
+                            data.SolidEnemies = _outer.Settings.UseSolidEnemyWireframing;
                             if (level.IsCutScene)
                             {
-                                WireframeData<TR2Entities> parentData = _outer.GetWireframeData(level.ParentLevel);
+                                WireframeData parentData = _outer.GetWireframeData(level.ParentLevel);
                                 data.HighlightColour = parentData.HighlightColour;
                                 data.SolidLara = parentData.SolidLara;
                             }
@@ -320,6 +324,20 @@ namespace TRRandomizerCore.Randomizers
                             {
                                 data.HighlightColour = _outer.GetWireframeVariant();
                                 data.SolidLara = _outer.IsSolidLaraLevel(level);
+                            }
+
+                            if (_outer.Settings.UseDifferentWireframeColours)
+                            {
+                                foreach (TRModel model in level.Data.Models)
+                                {
+                                    data.ModelColours[model.ID] = _outer.GetWireframeVariant();
+                                }
+
+                                // Make sure the front and back of the dragon match
+                                if (data.ModelColours.ContainsKey((uint)TR2Entities.DragonFront_H))
+                                {
+                                    data.ModelColours[(uint)TR2Entities.DragonBack_H] = data.ModelColours[(uint)TR2Entities.DragonFront_H];
+                                }
                             }
                         }
                     }

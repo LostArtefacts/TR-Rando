@@ -6,6 +6,7 @@ using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Packing;
+using TRRandomizerCore.Utilities;
 using TRTexture16Importer;
 
 namespace TRRandomizerCore.Textures
@@ -21,6 +22,11 @@ namespace TRRandomizerCore.Textures
             TR3Entities.LaraHarpoonAnimation_H, TR3Entities.LaraVehicleAnimation_H
         };
 
+        private static readonly List<TR3Entities> _additionalEnemyEntities = new List<TR3Entities>
+        {
+            TR3Entities.ShivaStatue, TR3Entities.MonkeyKeyMeshswap, TR3Entities.MonkeyMedMeshswap
+        };
+
         protected override AbstractTexturePacker<TR3Entities, TR3Level> CreatePacker(TR3Level level)
         {
             return new TR3TexturePacker(level);
@@ -34,6 +40,11 @@ namespace TRRandomizerCore.Textures
         protected override IEnumerable<int> GetInvalidObjectTextureIndices(TR3Level level)
         {
             return level.GetInvalidObjectTextureIndices();
+        }
+
+        protected override TRMesh[] GetLevelMeshes(TR3Level level)
+        {
+            return level.Meshes;
         }
 
         protected override Dictionary<TR3Entities, TRMesh[]> GetModelMeshes(TR3Level level)
@@ -97,12 +108,19 @@ namespace TRRandomizerCore.Textures
 
         protected override int ImportColour(TR3Level level, Color c)
         {
-            return PaletteUtilities.Import(level, c);
+            int index = level.Palette16.ToList().FindIndex(col => col.Red == c.R && col.Green == c.G && col.Blue == c.B);
+            return index == -1 ? PaletteUtilities.Import(level, c) : index;
         }
 
         protected override bool IsLaraModel(TRModel model)
         {
             return _laraEntities.Contains((TR3Entities)model.ID);
+        }
+
+        protected override bool IsEnemyModel(TRModel model)
+        {
+            TR3Entities id = (TR3Entities)model.ID;
+            return TR3EntityUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
         }
 
         protected override bool IsSkybox(TRModel model)
@@ -130,6 +148,19 @@ namespace TRRandomizerCore.Textures
         {
             level.ObjectTextures = textures.ToArray();
             level.NumObjectTextures = (uint)level.ObjectTextures.Length;
+        }
+
+        protected override void SetSkyboxVisible(TR3Level level)
+        {
+            foreach (TR3Room room in level.Rooms)
+            {
+                room.IsSkyboxVisible = true;
+            }
+        }
+
+        protected override List<TRFace4> CollectLadders(TR3Level level)
+        {
+            return LadderUtilities.GetClimbableFaces(level);
         }
     }
 }

@@ -802,6 +802,9 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -847,7 +850,7 @@
                         <CheckBox IsChecked="{Binding ControllerProxy.UseSolidLaraWireframing, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
-                                   Content="Keep Lara's Meshes Solid" />
+                                   Content="Keep Lara's meshes solid" />
                         </CheckBox>
                     </Border>
 
@@ -855,6 +858,48 @@
                             Grid.Row="2">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="If selected, Lara will always be a solid colour and opaque, otherwise she may also have wireframing applied."/>
+                    </Border>
+
+                    <Border Grid.Row="3">
+                        <CheckBox IsChecked="{Binding ControllerProxy.UseSolidEnemyWireframing, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Keep enemy meshes solid" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="3">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="If selected, enemies will always be a solid colour and opaque, otherwise they will have wireframing applied."/>
+                    </Border>
+
+                    <Border Grid.Row="4">
+                        <CheckBox IsChecked="{Binding ControllerProxy.UseDifferentWireframeColours, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Use different colours per model" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="4">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="If selected, different models will use different colours when solid, otherwise they will use the same colour as Lara."/>
+                    </Border>
+
+                    <Border Grid.Row="5">
+                        <CheckBox IsChecked="{Binding ControllerProxy.UseWireframeLadders, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Keep ladders visible" />
+                        </CheckBox>
+                    </Border>
+                    
+                    <Border Grid.Column="1"
+                            Grid.Row="5">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="If selected, special textures will be generated for ladders, otherwise they will look the same as walls."/>
                     </Border>
                 </Grid>
             </StackPanel>

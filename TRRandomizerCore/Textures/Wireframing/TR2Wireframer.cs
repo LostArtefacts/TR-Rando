@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Packing;
+using TRRandomizerCore.Utilities;
 using TRTexture16Importer;
 
 namespace TRRandomizerCore.Textures
@@ -24,6 +22,11 @@ namespace TRRandomizerCore.Textures
             TR2Entities.FlameEmitter_N, TR2Entities.LaraCutscenePlacement_N, TR2Entities.DragonExplosionEmitter_N,
             TR2Entities.BartoliHideoutClock_N, TR2Entities.SingingBirds_N, TR2Entities.WaterfallMist_N,
             TR2Entities.DrippingWater_N, TR2Entities.LavaAirParticleEmitter_N, TR2Entities.AlarmBell_N, TR2Entities.DoorBell_N
+        };
+
+        private static readonly List<TR2Entities> _additionalEnemyEntities = new List<TR2Entities>
+        {
+            TR2Entities.DragonFront_H, TR2Entities.DragonBack_H, TR2Entities.XianGuardSpearStatue, TR2Entities.XianGuardSwordStatue
         };
 
         protected override AbstractTexturePacker<TR2Entities, TR2Level> CreatePacker(TR2Level level)
@@ -44,6 +47,11 @@ namespace TRRandomizerCore.Textures
         protected override IEnumerable<int> GetInvalidObjectTextureIndices(TR2Level level)
         {
             return level.GetInvalidObjectTextureIndices();
+        }
+
+        protected override TRMesh[] GetLevelMeshes(TR2Level level)
+        {
+            return level.Meshes;
         }
 
         protected override Dictionary<TR2Entities, TRMesh[]> GetModelMeshes(TR2Level level)
@@ -107,12 +115,19 @@ namespace TRRandomizerCore.Textures
 
         protected override int ImportColour(TR2Level level, Color c)
         {
-            return PaletteUtilities.Import(level, c);
+            int index = level.Palette16.ToList().FindIndex(col => col.Red == c.R && col.Green == c.G && col.Blue == c.B);
+            return index == -1 ? PaletteUtilities.Import(level, c) : index;
         }
 
         protected override bool IsLaraModel(TRModel model)
         {
             return _laraEntities.Contains((TR2Entities)model.ID);
+        }
+
+        protected override bool IsEnemyModel(TRModel model)
+        {
+            TR2Entities id = (TR2Entities)model.ID;
+            return TR2EntityUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
         }
 
         protected override void ResetPaletteTracking(TR2Level level)
@@ -129,6 +144,19 @@ namespace TRRandomizerCore.Textures
         {
             level.ObjectTextures = textures.ToArray();
             level.NumObjectTextures = (uint)level.ObjectTextures.Length;
+        }
+
+        protected override void SetSkyboxVisible(TR2Level level)
+        {
+            foreach (TR2Room room in level.Rooms)
+            {
+                room.IsSkyboxVisible = true;
+            }
+        }
+
+        protected override List<TRFace4> CollectLadders(TR2Level level)
+        {
+            return LadderUtilities.GetClimbableFaces(level);
         }
     }
 }
