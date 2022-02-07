@@ -212,7 +212,7 @@ namespace TRRandomizerCore.Utilities
                     Z = (short)(z + _fullSectorSize)
                 });
             }
-            else if (climbEntry.IsPositiveX)
+            if (climbEntry.IsPositiveX)
             {
                 vertMatches.Add(new TRVertex
                 {
@@ -225,7 +225,7 @@ namespace TRRandomizerCore.Utilities
                     Z = (short)(z + _fullSectorSize)
                 });
             }
-            else if (climbEntry.IsNegativeZ)
+            if (climbEntry.IsNegativeZ)
             {
                 vertMatches.Add(new TRVertex
                 {
@@ -238,7 +238,7 @@ namespace TRRandomizerCore.Utilities
                     Z = z
                 });
             }
-            else if (climbEntry.IsPositiveZ)
+            if (climbEntry.IsPositiveZ)
             {
                 vertMatches.Add(new TRVertex
                 {
@@ -286,13 +286,13 @@ namespace TRRandomizerCore.Utilities
 
         public static bool IsWallMatch(List<TRVertex> sectorVertices, List<TRVertex> faceVertices)
         {
-            // Is this a wall and is every vertex in the sector check part of this face?
+            // Is this a wall and does every vertex's x and z value match the sector?
             return
             (
                 faceVertices.All(v => v.X == faceVertices[0].X) ||
                 faceVertices.All(v => v.Z == faceVertices[0].Z)
             )
-            && sectorVertices.All(v1 => faceVertices.Any(v2 => v1.X == v2.X && v1.Z == v2.Z));
+            && faceVertices.All(v1 => sectorVertices.Any(v2 => v1.X == v2.X && v1.Z == v2.Z));
         }
 
         public static bool IsCeilingMatch(List<TRVertex> sectorVertices, List<TRVertex> faceVertices, short floorY)
