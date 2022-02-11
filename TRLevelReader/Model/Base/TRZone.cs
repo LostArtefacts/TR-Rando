@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TRLevelReader.Model.Base.Enums;
+using System.Text;
+using System.Threading.Tasks;
+
 using TRLevelReader.Serialization;
 
 namespace TRLevelReader.Model
 {
-    public class TRZone : ISerializableCompact, ICloneable
+    public class TRZone : ISerializableCompact
     {
-        public Dictionary<TRZones, ushort> GroundZones { get; set; }
-        public ushort FlyZone { get; set; }
+        public ushort GroundZone1Normal { get; set; }
 
-        public TRZone()
-        {
-            GroundZones = new Dictionary<TRZones, ushort>();
-        }
+        public ushort GroundZone2Normal { get; set; }
+
+        public ushort FlyZoneNormal { get; set; }
+
+        public ushort GroundZone1Alternate { get; set; }
+
+        public ushort GroundZone2Alternate { get; set; }
+
+        public ushort FlyZoneAlternate { get; set; }
 
         public byte[] Serialize()
         {
@@ -23,29 +29,16 @@ namespace TRLevelReader.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-                    foreach (ushort zone in GroundZones.Values)
-                    {
-                        writer.Write(zone);
-                    }
-                    writer.Write(FlyZone);
+                    writer.Write(GroundZone1Normal);
+                    writer.Write(GroundZone2Normal);
+                    writer.Write(FlyZoneNormal);
+                    writer.Write(GroundZone1Alternate);
+                    writer.Write(GroundZone2Alternate);
+                    writer.Write(FlyZoneAlternate);
                 }
 
                 return stream.ToArray();
             }
-        }
-
-        public TRZone Clone()
-        {
-            return new TRZone
-            {
-                GroundZones = GroundZones.ToDictionary(e => e.Key, e => e.Value),
-                FlyZone = FlyZone
-            };
-        }
-
-        object ICloneable.Clone()
-        {
-            return Clone();
         }
     }
 }

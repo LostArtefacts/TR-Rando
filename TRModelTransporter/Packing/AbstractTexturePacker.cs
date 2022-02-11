@@ -110,20 +110,6 @@ namespace TRModelTransporter.Packing
             return segmentMap;
         }
 
-        public Dictionary<TexturedTile, List<TexturedTileSegment>> GetObjectTextureSegments(IEnumerable<int> indices)
-        {
-            Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new Dictionary<TexturedTile, List<TexturedTileSegment>>();
-            foreach (TexturedTile tile in _tiles)
-            {
-                List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
-                if (segments.Count > 0)
-                {
-                    segmentMap[tile] = segments;
-                }
-            }
-            return segmentMap;
-        }
-
         protected abstract TRMesh[] GetModelMeshes(E modelEntity);
 
         public Dictionary<TexturedTile, List<TexturedTileSegment>> GetSpriteSegments(E entity)
@@ -148,20 +134,6 @@ namespace TRModelTransporter.Packing
                 }
             }
 
-            return segmentMap;
-        }
-
-        public Dictionary<TexturedTile, List<TexturedTileSegment>> GetSpriteTextureSegments(IEnumerable<int> indices)
-        {
-            Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new Dictionary<TexturedTile, List<TexturedTileSegment>>();
-            foreach (TexturedTile tile in _tiles)
-            {
-                List<TexturedTileSegment> segments = tile.GetSpriteTextureIndexSegments(indices);
-                if (segments.Count > 0)
-                {
-                    segmentMap[tile] = segments;
-                }
-            }
             return segmentMap;
         }
 

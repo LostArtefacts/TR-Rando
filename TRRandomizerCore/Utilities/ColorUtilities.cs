@@ -189,6 +189,7 @@ namespace TRRandomizerCore.Utilities
                 Color.Honeydew,
                 Color.HotPink,
                 Color.IndianRed,
+                Color.Indigo,
                 Color.Ivory,
                 Color.Khaki,
                 Color.Lavender,
@@ -222,10 +223,12 @@ namespace TRRandomizerCore.Utilities
                 Color.MediumSpringGreen,
                 Color.MediumTurquoise,
                 Color.MediumVioletRed,
+                Color.MidnightBlue,
                 Color.MintCream,
                 Color.MistyRose,
                 Color.Moccasin,
                 Color.NavajoWhite,
+                Color.Navy,
                 Color.OldLace,
                 Color.Olive,
                 Color.OliveDrab,
@@ -269,7 +272,7 @@ namespace TRRandomizerCore.Utilities
                 Color.White,
                 Color.WhiteSmoke,
                 Color.Yellow,
-                Color.YellowGreen
+                Color.YellowGreen,
             };
         }
     }
