@@ -1,6 +1,37 @@
 {
   "All": [],
 
+  "NonPurist": [
+    {
+      "Comments": "Fix the trapdoor (on UKBox) in room 72.",
+      "EMType": 61,
+      "Replace": true,
+      "TriggerEntry": {
+        "Setup": {
+          "Value": 4
+        },
+        "TrigSetup": {
+          "Value": 15872
+        },
+        "TrigType": 8,
+        "TrigActionList": [
+          {
+            "TrigAction": 0,
+            "Parameter": 46
+          }
+        ]
+      },
+      "Locations": [
+        {
+          "X": 72192,
+          "Y": -3840,
+          "Z": 67072,
+          "Room": 72
+        }
+      ]
+    }
+  ],
+
   "ConditionalAll": [
     {
       "Condition": {

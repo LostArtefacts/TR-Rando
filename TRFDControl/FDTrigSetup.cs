@@ -16,6 +16,11 @@ namespace TRFDControl
             {
                 return (byte)(Value & 0x00FF);
             }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0x00FF));
+                Value |= value;
+            }
         }
 
         public bool OneShot
