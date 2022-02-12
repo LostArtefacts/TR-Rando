@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelToolset.Interfaces;
 
 namespace TRLevelToolset.Components
 {
-    internal class SFXEditComponent
+    public class SFXEditComponent : IDrawable
     {
-        internal void Draw()
+        public void Draw()
         {
             if (ImGui.TreeNodeEx("SFX Resource Editor", ImGuiTreeNodeFlags.Framed))
             {

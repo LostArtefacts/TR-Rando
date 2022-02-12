@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ImGuiNET;
+using TRLevelToolset.Interfaces;
 using TRLevelToolset.IOLogic;
 
 namespace TRLevelToolset.Components
 {
-    internal class VersionComponent
+    public class VersionComponent : IDrawable
     {
-        internal void Draw()
+        public void Draw()
         {
             ImGui.BeginChildFrame(0, new System.Numerics.Vector2(1280, 45));
             ImGui.Text("Level: " + IOManager.FileName);

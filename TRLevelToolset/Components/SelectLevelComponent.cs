@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TRLevelReader.Helpers;
 using TRLevelToolset.Controls;
+using TRLevelToolset.Interfaces;
 
 namespace TRLevelToolset.Components
 {
-    internal class SelectLevelComponent
+    public class SelectLevelComponent : IDrawable
     {
         LevelSelectListBox TR1Selector = new LevelSelectListBox { Items = TRLevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR1 };
         LevelSelectListBox TR1GSelector = new LevelSelectListBox { Items = TRLevelNames.AsListGold.ToArray(), Game = IOLogic.TRGame.TR1 };
@@ -18,7 +19,7 @@ namespace TRLevelToolset.Components
         LevelSelectListBox TR3Selector = new LevelSelectListBox { Items = TR3LevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR3 };
         LevelSelectListBox TR3GSelector = new LevelSelectListBox { Items = TR3LevelNames.AsListGold.ToArray(), Game = IOLogic.TRGame.TR3 };
 
-        internal void Draw()
+        public void Draw()
         {
             if (ImGui.TreeNodeEx("Level Select Tree", ImGuiTreeNodeFlags.DefaultOpen | ImGuiTreeNodeFlags.Framed))
             {

@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelToolset.Interfaces;
 
 namespace TRLevelToolset.Components
 {
-    internal class EnvironmentEditComponent
+    public class EnvironmentEditComponent : IDrawable
     {
-        internal void Draw()
+        public void Draw()
         {
             if (ImGui.TreeNodeEx("Environment Tools", ImGuiTreeNodeFlags.Framed))
             {

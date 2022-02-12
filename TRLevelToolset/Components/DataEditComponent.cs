@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelToolset.Interfaces;
 
 namespace TRLevelToolset.Components
 {
-    internal class DataEditComponent
+    public class DataEditComponent : IDrawable
     {
-        internal void Draw()
+        public void Draw()
         {
             if (ImGui.TreeNodeEx("Level Data Editor", ImGuiTreeNodeFlags.Framed))
             {

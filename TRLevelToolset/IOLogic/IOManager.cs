@@ -9,15 +9,15 @@ using TRLevelReader.Model;
 
 namespace TRLevelToolset.IOLogic
 {
-    internal static class IOManager
+    public static class IOManager
     {
-        internal static BaseTRLevel? CurrentLevel { get; set; }
+        public static BaseTRLevel? CurrentLevel { get; set; }
 
-        internal static string? FileName { get; set; }
+        public static string? FileName { get; set; }
 
-        internal static TRGame LoadedGame { get; set; }
+        public static TRGame LoadedGame { get; set; }
 
-        internal static void Load(string fname, TRGame game)
+        public static void Load(string fname, TRGame game)
         {
             FileName = fname;
             LoadedGame = game;
@@ -50,7 +50,7 @@ namespace TRLevelToolset.IOLogic
         }
     }
 
-    internal enum TRGame
+    public enum TRGame
     {
         TR1,
         TR2,

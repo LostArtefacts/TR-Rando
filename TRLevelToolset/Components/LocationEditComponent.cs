@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelToolset.Interfaces;
 
 namespace TRLevelToolset.Components
 {
-    internal class LocationEditComponent
+    public class LocationEditComponent : IDrawable
     {
-        internal void Draw()
+        public void Draw()
         {
             if (ImGui.TreeNodeEx("Locations Editor", ImGuiTreeNodeFlags.Framed))
             {

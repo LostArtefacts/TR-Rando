@@ -5,25 +5,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TRLevelToolset.Interfaces;
 using TRLevelToolset.IOLogic;
 
 namespace TRLevelToolset.Controls
 {
-    internal class LevelSelectListBox
+    public class LevelSelectListBox  : IDrawable
     {
-        internal string[] Items { get; set; }
-        internal int SelectedIndex { get; set; }
-        internal TRGame Game { get; set; }
+        public string[] Items { get; set; }
+        public int SelectedIndex { get; set; }
+        public TRGame Game { get; set; }
 
-        internal LevelSelectListBox()
+        public LevelSelectListBox()
         {
             Items = new string[] { "Placeholder" };
             SelectedIndex = 0;
             Game = TRGame.TR1;
         }
 
-        internal void Draw()
+        public void Draw()
         {
             if (ImGui.BeginListBox(""))
             {
