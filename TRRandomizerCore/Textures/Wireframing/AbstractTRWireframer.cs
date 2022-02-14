@@ -31,6 +31,11 @@ namespace TRRandomizerCore.Textures
             return _data.ExcludedTextures.Contains(texture);
         }
 
+        protected virtual bool IsTextureOverriden(ushort texture)
+        {
+            return _data.ForcedOverrides.Contains(texture);
+        }
+
         public void Apply(L level, WireframeData data)
         {
             _roomFace3s = new Dictionary<TRFace3, TRSize>();
@@ -186,7 +191,7 @@ namespace TRRandomizerCore.Textures
             List<int> textures = new List<int>();
             foreach (ushort t in _allTextures)
             {
-                if (!IsTextureExcluded(t))
+                if (!IsTextureExcluded(t) && !IsTextureOverriden(t))
                 {
                     textures.Add(t);
                 }

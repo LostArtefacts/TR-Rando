@@ -12,6 +12,12 @@ namespace TRRandomizerCore.Textures
         public List<ushort> ExcludedTextures { get; set; }
 
         /// <summary>
+        /// Textures that may share space with others that are being retained, but we want to still remove.
+        /// e.g. Mist in Crash Site is shared with plane floor.
+        /// </summary>
+        public List<ushort> ForcedOverrides { get; set; }
+
+        /// <summary>
         /// The colour of the wire itself
         /// </summary>
         public Color HighlightColour { get; set; }
@@ -49,6 +55,7 @@ namespace TRRandomizerCore.Textures
         public WireframeData()
         {
             ExcludedTextures = new List<ushort>();
+            ForcedOverrides = new List<ushort>();
             HighlightColour = Color.White;
             SolidLara = false;
             SolidEnemies = false;

@@ -1,4 +1,25 @@
 {
+  "All": [
+    {
+      "Comments": "Fix a missig flipmap trigger for keyhole 85/door 56.",
+      "EMType": 63,
+      "BaseLocation": {
+        "X": 46592,
+        "Y": 768,
+        "Z": 57856,
+        "Room": 42
+      },
+      "Locations": [
+        {
+          "X": 46592,
+          "Y": 768,
+          "Z": 57856,
+          "Room": 73
+        }
+      ]
+    }
+  ],
+
   "ConditionalAll": [
     {
       "Condition": {
