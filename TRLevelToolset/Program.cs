@@ -4,6 +4,7 @@ using Veldrid;
 using Veldrid.StartupUtilities;
 
 using TRLevelToolset.Components;
+using System.Diagnostics;
 
 public static class Program
 {
@@ -30,12 +31,9 @@ public static class Program
 
         SelectLevelComponent selectLevelScreen = new SelectLevelComponent();
         VersionComponent versionComponent = new VersionComponent();
-
         DataEditComponent dataEditComponent = new DataEditComponent();
-        EnvironmentEditComponent environmentEditComponent = new EnvironmentEditComponent();
-        LocationEditComponent locationEditComponent = new LocationEditComponent();
-        StringEditComponent stringEditComponent = new StringEditComponent();
-        SFXEditComponent SFXEditComponent = new SFXEditComponent();
+
+        Stopwatch sw = new Stopwatch();
 
         while (window.Exists)
         {
@@ -47,15 +45,21 @@ public static class Program
             ImGui.SetNextWindowPos(new Vector2(0, 0));
             ImGui.SetNextWindowSize(new Vector2(1280, 720));
 
+#if DEBUG
+            sw.Start();
+#endif
             ImGui.Begin("Tomb Raider Level Toolset", ref isMainWindowOpen);
 
+#if DEBUG
+            sw.Stop();
+#endif
             selectLevelScreen.Draw();
             versionComponent.Draw();
             dataEditComponent.Draw();
-            environmentEditComponent.Draw();
-            locationEditComponent.Draw();
-            stringEditComponent.Draw();
-            SFXEditComponent.Draw();
+#if DEBUG
+            sw.Restart();
+            ImGui.Text("Draw Time: " + sw.Elapsed.TotalMilliseconds + " ms");
+#endif
 
             ImGui.End();
 
