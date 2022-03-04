@@ -44,7 +44,7 @@
     "ExcludedTextures": [ 1487, 1488, 1307, 1489 ]
   },
   "MONASTRY.TR2": {
-    "ExcludedTextures": [ 1596, 1776, 1777, 1778, 1622, 1779, 1780, 1623 ]
+    "ExcludedTextures": [ 1596, 1776, 1777, 1778 ]
   },
   "CATACOMB.TR2": {
     "ExcludedTextures": [ 1345, 1446, 1387, 1389 ]
