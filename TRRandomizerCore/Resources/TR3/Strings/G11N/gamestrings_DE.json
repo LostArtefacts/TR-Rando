@@ -291,7 +291,12 @@
           "Rip Ride Rakete",
           "SpaceX Schluessel",
           "Raketenwaschbaer",
-          "Elon Musk Schluessel"
+          "Elon Musk Schluessel",
+          "Das kannst du auch ignorieren!",
+          "Geheime Nummern",
+          "Kredikarten-PIN",
+          "Richtiger Raketenwerfer",
+          "Aliens in der Naehe?!?"
         ]
       },
       "Puzzles": {
@@ -317,11 +322,7 @@
           "Du kannst mich ignorieren!"
         ],
         "3": [
-          "Das kannst du auch ignorieren!",
-          "Geheime Nummern",
-          "Kredikarten-PIN",
-          "Richtiger Raketenwerfer",
-          "Aliens in der Naehe?!?"
+          
         ]
       }
     },
