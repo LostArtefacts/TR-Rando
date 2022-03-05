@@ -1,4 +1,4 @@
-﻿using RectanglePacker.Organisation;
+using RectanglePacker.Organisation;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,6 +8,7 @@ using TRLevelReader.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
+using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Textures
 {
@@ -16,54 +17,40 @@ namespace TRRandomizerCore.Textures
         where L : class
     {
         protected static readonly TRSize _nullSize = new TRSize(0, 0);
+        protected static readonly int _ladderRungs = 4;
 
-        private Dictionary<TRFace3, TRSize> _solidRoomFace3s, _clearRoomFace3s, _solidMeshFace3s, _clearMeshFace3s;
-        private Dictionary<TRFace4, TRSize> _solidRoomFace4s, _clearRoomFace4s, _solidMeshFace4s, _clearMeshFace4s;
+        private Dictionary<TRFace3, TRSize> _roomFace3s, _meshFace3s;
+        private Dictionary<TRFace4, TRSize> _roomFace4s, _meshFace4s;
+        private List<TRFace4> _ladderFace4s;
 
         private ISet<ushort> _allTextures;
-        private WireframeData<E> _data;
-
-        protected virtual bool IsModelTransparent(E modelType)
-        {
-            return !_data.OpaqueModels.Contains(modelType);
-        }
-
-        protected virtual bool IsStaticMeshTransparent(uint meshID)
-        {
-            return !_data.OpaqueStaticMeshes.Contains(meshID);
-        }
-
-        protected virtual bool IsTextureTransparent(ushort texture)
-        {
-            return _data.TransparentTextures.Contains(texture);
-        }
+        private WireframeData _data;
 
         protected virtual bool IsTextureExcluded(ushort texture)
         {
             return _data.ExcludedTextures.Contains(texture);
         }
 
-        public void Apply(L level, WireframeData<E> data)
+        protected virtual bool IsTextureOverriden(ushort texture)
         {
-            _solidRoomFace3s = new Dictionary<TRFace3, TRSize>();
-            _clearRoomFace3s = new Dictionary<TRFace3, TRSize>();
-            _solidRoomFace4s = new Dictionary<TRFace4, TRSize>();
-            _clearRoomFace4s = new Dictionary<TRFace4, TRSize>();
-            _solidMeshFace3s = new Dictionary<TRFace3, TRSize>();
-            _clearMeshFace3s = new Dictionary<TRFace3, TRSize>();
-            _solidMeshFace4s = new Dictionary<TRFace4, TRSize>();
-            _clearMeshFace4s = new Dictionary<TRFace4, TRSize>();
+            return _data.ForcedOverrides.Contains(texture);
+        }
+
+        public void Apply(L level, WireframeData data)
+        {
+            _roomFace3s = new Dictionary<TRFace3, TRSize>();
+            _roomFace4s = new Dictionary<TRFace4, TRSize>();
+            _meshFace3s = new Dictionary<TRFace3, TRSize>();
+            _meshFace4s = new Dictionary<TRFace4, TRSize>();
+            _ladderFace4s = data.HighlightLadders ? CollectLadders(level) : new List<TRFace4>();
             _allTextures = new SortedSet<ushort>();
             _data = data;
 
-            ScanTransparentTextures(level);
             ScanRooms(level);
             ScanMeshes(level);
 
-            ISet<TRSize> clearRoomSizes = new SortedSet<TRSize>(_clearRoomFace3s.Values.Concat(_clearRoomFace4s.Values));
-            ISet<TRSize> solidRoomSizes = new SortedSet<TRSize>(_solidRoomFace3s.Values.Concat(_solidRoomFace4s.Values));
-            ISet<TRSize> clearMeshSizes = new SortedSet<TRSize>(_clearMeshFace3s.Values.Concat(_clearMeshFace4s.Values));
-            ISet<TRSize> solidMeshSizes = new SortedSet<TRSize>(_solidMeshFace3s.Values.Concat(_solidMeshFace4s.Values));
+            ISet<TRSize> roomSizes = new SortedSet<TRSize>(_roomFace3s.Values.Concat(_roomFace4s.Values));
+            ISet<TRSize> meshSizes = new SortedSet<TRSize>(_meshFace3s.Values.Concat(_meshFace4s.Values));
 
             Pen roomPen = new Pen(_data.HighlightColour, 1)
             {
@@ -80,22 +67,16 @@ namespace TRRandomizerCore.Textures
                 DeleteTextures(packer);
                 ResetUnusedTextures(level);
 
-                TRSize clearRoomSize = GetLargestSize(clearRoomSizes);
-                TRSize solidRoomSize = GetLargestSize(solidRoomSizes);
+                TRSize roomSize = GetLargestSize(roomSizes);
 
-                IndexedTRObjectTexture transpRoomTexture = CreateWireframe(packer, clearRoomSize, Color.Transparent, roomPen, SmoothingMode.AntiAlias);
-                IndexedTRObjectTexture opaqueRoomTexture = CreateWireframe(packer, solidRoomSize, _data.BackgroundColour, roomPen, SmoothingMode.AntiAlias);
+                IndexedTRObjectTexture roomTexture = CreateWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
+                IndexedTRObjectTexture ladderTexture = CreateLadderWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
+                ProcessClips(packer, level, roomPen, SmoothingMode.AntiAlias);
 
-                Dictionary<TRSize, IndexedTRObjectTexture> clearModelRemap = new Dictionary<TRSize, IndexedTRObjectTexture>();
-                Dictionary<TRSize, IndexedTRObjectTexture> solidModelRemap = new Dictionary<TRSize, IndexedTRObjectTexture>();
-
-                foreach (TRSize size in clearMeshSizes)
+                Dictionary<TRSize, IndexedTRObjectTexture> modelRemap = new Dictionary<TRSize, IndexedTRObjectTexture>();
+                foreach (TRSize size in meshSizes)
                 {
-                    clearModelRemap[size] = CreateWireframe(packer, size, Color.Transparent, modelPen, SmoothingMode.None);
-                }
-                foreach (TRSize size in solidMeshSizes)
-                {
-                    solidModelRemap[size] = CreateWireframe(packer, size, _data.BackgroundColour, modelPen, SmoothingMode.None);
+                    modelRemap[size] = CreateWireframe(packer, size, modelPen, SmoothingMode.None);
                 }
 
                 packer.Options.StartMethod = PackingStartMethod.FirstTile;
@@ -104,52 +85,28 @@ namespace TRRandomizerCore.Textures
                 Queue<int> reusableTextures = new Queue<int>(GetInvalidObjectTextureIndices(level));
                 List<TRObjectTexture> levelObjectTextures = GetObjectTextures(level).ToList();
 
-                ushort clearTextureIndex = (ushort)reusableTextures.Dequeue();
-                ushort solidTextureIndex = (ushort)reusableTextures.Dequeue();
-                if (transpRoomTexture != null)
-                {
-                    levelObjectTextures[clearTextureIndex] = transpRoomTexture.Texture;
-                }
-                levelObjectTextures[solidTextureIndex] = opaqueRoomTexture.Texture;
+                ushort roomTextureIndex = (ushort)reusableTextures.Dequeue();
+                levelObjectTextures[roomTextureIndex] = roomTexture.Texture;
 
-                foreach (TRSize size in clearModelRemap.Keys)
+                ushort ladderTextureIndex = (ushort)reusableTextures.Dequeue();
+                levelObjectTextures[ladderTextureIndex] = ladderTexture.Texture;
+
+                foreach (TRSize size in modelRemap.Keys)
                 {
                     if (!size.Equals(_nullSize))
                     {
                         ushort texture = (ushort)reusableTextures.Dequeue();
-                        levelObjectTextures[texture] = clearModelRemap[size].Texture;
-                        clearModelRemap[size].Index = texture;
-                    }
-                }
-                foreach (TRSize size in solidModelRemap.Keys)
-                {
-                    if (!size.Equals(_nullSize))
-                    {
-                        ushort texture = (ushort)reusableTextures.Dequeue();
-                        levelObjectTextures[texture] = solidModelRemap[size].Texture;
-                        solidModelRemap[size].Index = texture;
+                        levelObjectTextures[texture] = modelRemap[size].Texture;
+                        modelRemap[size].Index = texture;
                     }
                 }
 
                 SetObjectTextures(level, levelObjectTextures);
 
-                ResetRoomTextures(clearTextureIndex, solidTextureIndex);
-                ResetMeshTextures(clearModelRemap, solidModelRemap);
+                ResetRoomTextures(roomTextureIndex, ladderTextureIndex);
+                ResetMeshTextures(modelRemap);
                 TidyModels(level);
-            }
-        }
-
-        private void ScanTransparentTextures(L level)
-        {
-            // Ensure if any excluded textures are transparent, that
-            // they're added to the data list to avoid replacement.
-            TRObjectTexture[] texts = GetObjectTextures(level);
-            foreach (ushort excTexture in _data.ExcludedTextures)
-            {
-                if (texts[excTexture].Attribute > 0)
-                {
-                    _data.TransparentTextures.Add(excTexture);
-                }
+                SetSkyboxVisible(level);
             }
         }
 
@@ -169,18 +126,13 @@ namespace TRRandomizerCore.Textures
         {
             foreach (TRFace4 face in faces)
             {
+                if (_ladderFace4s.Contains(face))
+                    continue;
+
                 ushort texture = (ushort)(face.Texture & 0x0fff);
-                TRSize size = GetTextureSize(level, texture);
-                if (IsTextureTransparent(texture))
+                if (!IsTextureExcluded(texture))
                 {
-                    if (!IsTextureExcluded(texture))
-                    {
-                        _clearRoomFace4s[face] = size;
-                    }
-                }
-                else
-                {
-                    _solidRoomFace4s[face] = size;
+                    _roomFace4s[face] = GetTextureSize(level, texture);
                 }
             }
         }
@@ -190,73 +142,31 @@ namespace TRRandomizerCore.Textures
             foreach (TRFace3 face in faces)
             {
                 ushort texture = (ushort)(face.Texture & 0x0fff);
-                TRSize size = GetTextureSize(level, texture);
-                if (IsTextureTransparent(texture))
+                if (!IsTextureExcluded(texture))
                 {
-                    if (!IsTextureExcluded(texture))
-                    {
-                        _clearRoomFace3s[face] = size;
-                    }
-                }
-                else
-                {
-                    _solidRoomFace3s[face] = size;
+                    _roomFace3s[face] = GetTextureSize(level, texture);
                 }
             }
         }
 
         private void ScanMeshes(L level)
         {
-            Dictionary<E, TRMesh[]> modelMeshes = GetModelMeshes(level);
-            ISet<TRMesh> processedMeshes = new HashSet<TRMesh>();
-            foreach (E modelID in modelMeshes.Keys)
+            foreach (TRMesh mesh in GetLevelMeshes(level))
             {
-                bool isTransparent = IsModelTransparent(modelID);
-                foreach (TRMesh mesh in modelMeshes[modelID])
-                {
-                    if (processedMeshes.Add(mesh))
-                    {
-                        ScanMesh(level, mesh, isTransparent);
-                    }
-                }
-            }
-
-            foreach (TRStaticMesh staticMesh in GetStaticMeshes(level))
-            {
-                TRMesh mesh = GetStaticMesh(level, staticMesh);
-                if (processedMeshes.Add(mesh))
-                {
-                    ScanMesh(level, mesh, IsStaticMeshTransparent(staticMesh.ID));
-                }
+                ScanMesh(level, mesh);
             }
         }
 
-        private void ScanMesh(L level, TRMesh mesh, bool isClear)
+        private void ScanMesh(L level, TRMesh mesh)
         {
             foreach (TRFace4 face in mesh.TexturedRectangles)
             {
-                TRSize size = GetTextureSize(level, (ushort)(face.Texture & 0x0fff));
-                if (isClear)
-                {
-                    _clearMeshFace4s[face] = size;
-                }
-                else
-                {
-                    _solidMeshFace4s[face] = size;
-                }
+                _meshFace4s[face] = GetTextureSize(level, (ushort)(face.Texture & 0x0fff));
             }
 
             foreach (TRFace3 face in mesh.TexturedTriangles)
             {
-                TRSize size = GetTextureSize(level, (ushort)(face.Texture & 0x0fff));
-                if (isClear)
-                {
-                    _clearMeshFace3s[face] = size;
-                }
-                else
-                {
-                    _solidMeshFace3s[face] = size;
-                }
+                _meshFace3s[face] = GetTextureSize(level, (ushort)(face.Texture & 0x0fff));
             }
         }
 
@@ -281,7 +191,7 @@ namespace TRRandomizerCore.Textures
             List<int> textures = new List<int>();
             foreach (ushort t in _allTextures)
             {
-                if (!IsTextureExcluded(t))
+                if (!IsTextureExcluded(t) && !IsTextureOverriden(t))
                 {
                     textures.Add(t);
                 }
@@ -303,31 +213,101 @@ namespace TRRandomizerCore.Textures
             return _nullSize;
         }
 
-        private IndexedTRObjectTexture CreateWireframe(AbstractTexturePacker<E, L> packer, TRSize size, Color background, Pen pen, SmoothingMode mode)
+        private IndexedTRObjectTexture CreateWireframe(AbstractTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
         {
             if (size.Equals(_nullSize))
             {
                 return null;
             }
 
-            Rectangle r = new Rectangle(0, 0, size.W, size.H);
-            IndexedTRObjectTexture texture = CreateTexture(r);
-            if (background == Color.Transparent)
-            {
-                texture.Texture.Attribute = 1;
-            }
+            IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
+            BitmapGraphics frame = CreateFrame(size.W, size.H, pen, mode, true);
 
-            Bitmap image = new Bitmap(size.W, size.H);
-            Graphics g = Graphics.FromImage(image);
-            g.SmoothingMode = mode;
-
-            g.FillRectangle(new SolidBrush(background), r);
-            g.DrawRectangle(pen, 0, 0, r.Width - 1, r.Height - 1);
-            g.DrawLine(pen, 0, 0, size.W, size.H);
-
-            packer.AddRectangle(new TexturedTileSegment(texture, image));
+            packer.AddRectangle(new TexturedTileSegment(texture, frame.Bitmap));
 
             return texture;
+        }
+
+        private IndexedTRObjectTexture CreateLadderWireframe(AbstractTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+        {
+            if (size.Equals(_nullSize))
+            {
+                return null;
+            }
+
+            IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
+            BitmapGraphics frame = CreateFrame(size.W, size.H, pen, mode, false);
+
+            int rungSplit = size.H / _ladderRungs;
+            for (int i = 0; i < _ladderRungs; i++)
+            {
+                int y = i * rungSplit;
+                // Horizontal bar for the rung
+                frame.Graphics.DrawLine(pen, 0, y, size.W, y);
+                // Diagonal bar to the next rung
+                frame.Graphics.DrawLine(pen, 0, y, size.W, y + rungSplit);
+            }
+
+            packer.AddRectangle(new TexturedTileSegment(texture, frame.Bitmap));
+
+            return texture;
+        }
+
+        private void ProcessClips(AbstractTexturePacker<E, L> packer, L level, Pen pen, SmoothingMode mode)
+        {
+            // Some animated textures are shared in segments e.g. 4 32x32 segments within a 64x64 container,
+            // so in instances where we only want to wireframe a section of these, we use manual clipping.
+            TRObjectTexture[] textures = GetObjectTextures(level);
+            foreach (WireframeClip clip in _data.ManualClips)
+            {
+                BitmapGraphics frame = CreateFrame(clip.Clip.Width, clip.Clip.Height, pen, mode, true);
+
+                foreach (ushort texture in clip.Textures)
+                {
+                    IndexedTRObjectTexture indexedTexture = new IndexedTRObjectTexture
+                    {
+                        Index = texture,
+                        Texture = textures[texture]
+                    };
+                    BitmapGraphics bmp = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
+
+                    List<TexturedTileSegment> segments = packer.Tiles[indexedTexture.Atlas].GetObjectTextureIndexSegments(new int[] { texture });
+                    foreach (TexturedTileSegment segment in segments)
+                    {
+                        bmp.Import(frame.Bitmap, new Rectangle
+                        (
+                            segment.Bounds.X + clip.Clip.X, 
+                            segment.Bounds.Y + clip.Clip.Y, 
+                            clip.Clip.Width, 
+                            clip.Clip.Height
+                        ));
+                    }
+                }
+            }
+
+            // Ensure these clipped textures support transparency
+            foreach (TRObjectTexture texture in textures)
+            {
+                if (texture.Attribute == 0)
+                {
+                    texture.Attribute = 1;
+                }
+            }
+        }
+
+        private BitmapGraphics CreateFrame(int width, int height, Pen pen, SmoothingMode mode, bool addDiagonal)
+        {
+            BitmapGraphics image = new BitmapGraphics(new Bitmap(width, height));
+            image.Graphics.SmoothingMode = mode;
+
+            image.Graphics.FillRectangle(new SolidBrush(Color.Transparent), new Rectangle(0, 0, width, height));
+            image.Graphics.DrawRectangle(pen, 0, 0, width - 1, height - 1);
+            if (addDiagonal)
+            {
+                image.Graphics.DrawLine(pen, 0, 0, width, height);
+            }
+
+            return image;
         }
 
         private IndexedTRObjectTexture CreateTexture(Rectangle rectangle)
@@ -345,7 +325,7 @@ namespace TRRandomizerCore.Textures
             TRObjectTexture texture = new TRObjectTexture
             {
                 AtlasAndFlag = 0,
-                Attribute = 0,
+                Attribute = 1,
                 Vertices = vertices.ToArray()
             };
 
@@ -373,68 +353,52 @@ namespace TRRandomizerCore.Textures
             };
         }
 
-        private void ResetRoomTextures(ushort clearIndex, ushort solidIndex)
+        private void ResetRoomTextures(ushort wireframeIndex, ushort ladderIndex)
         {
-            _clearRoomFace3s.Keys.ToList().ForEach(f => f.Texture = RemapTexture(f.Texture, clearIndex));
-            _clearRoomFace4s.Keys.ToList().ForEach(f => f.Texture = RemapTexture(f.Texture, clearIndex));
-            _solidRoomFace3s.Keys.ToList().ForEach(f => f.Texture = RemapTexture(f.Texture, solidIndex));
-            _solidRoomFace4s.Keys.ToList().ForEach(f => f.Texture = RemapTexture(f.Texture, solidIndex));
+            foreach (TRFace3 face in _roomFace3s.Keys)
+            {
+                face.Texture = RemapTexture(face.Texture, wireframeIndex);
+            }
+
+            foreach (TRFace4 face in _roomFace4s.Keys)
+            {
+                if (!_ladderFace4s.Contains(face))
+                {
+                    face.Texture = RemapTexture(face.Texture, wireframeIndex);
+                }
+            }
+
+            foreach (TRFace4 face in _ladderFace4s)
+            {
+                face.Texture = RemapTexture(face.Texture, ladderIndex);
+            }
         }
 
-        private void ResetMeshTextures(Dictionary<TRSize, IndexedTRObjectTexture> clearRemap, Dictionary<TRSize, IndexedTRObjectTexture> solidRemap)
+        private void ResetMeshTextures(Dictionary<TRSize, IndexedTRObjectTexture> sizeRemap)
         {
-            List<TRSize> clearSizes = clearRemap.Keys.ToList();
-            List<TRSize> solidSizes = solidRemap.Keys.ToList();
-            clearSizes.Sort(); clearSizes.Reverse();
-            solidSizes.Sort(); solidSizes.Reverse();
-
-            foreach (TRFace3 face in _clearMeshFace3s.Keys)
+            foreach (TRFace3 face in _meshFace3s.Keys)
             {
-                TRSize size = _clearMeshFace3s[face];
+                TRSize size = _meshFace3s[face];
                 if (!size.Equals(_nullSize))
                 {
-                    if (!clearRemap.ContainsKey(size))
+                    if (!sizeRemap.ContainsKey(size))
                     {
-                        size = Find(size, clearRemap);
+                        size = Find(size, sizeRemap);
                     }
-                    face.Texture = RemapTexture(face.Texture, (ushort)clearRemap[size].Index);
-                }
-            }
-            foreach (TRFace4 face in _clearMeshFace4s.Keys)
-            {
-                TRSize size = _clearMeshFace4s[face];
-                if (!size.Equals(_nullSize))
-                {
-                    if (!clearRemap.ContainsKey(size))
-                    {
-                        size = Find(size, clearRemap);
-                    }
-                    face.Texture = RemapTexture(face.Texture, (ushort)clearRemap[size].Index);
+                    face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
                 }
             }
 
-            foreach (TRFace3 face in _solidMeshFace3s.Keys)
+            foreach (TRFace4 face in _meshFace4s.Keys)
             {
-                TRSize size = _solidMeshFace3s[face];
+                TRSize size = _meshFace4s[face];
                 if (!size.Equals(_nullSize))
                 {
-                    if (!solidRemap.ContainsKey(size))
+                    if (!sizeRemap.ContainsKey(size))
                     {
-                        size = Find(size, clearRemap);
+                        size = Find(size, sizeRemap);
                     }
-                    face.Texture = RemapTexture(face.Texture, (ushort)solidRemap[size].Index);
-                }
-            }
-            foreach (TRFace4 face in _solidMeshFace4s.Keys)
-            {
-                TRSize size = _solidMeshFace4s[face];
-                if (!size.Equals(_nullSize))
-                {
-                    if (!solidRemap.ContainsKey(size))
-                    {
-                        size = Find(size, clearRemap);
-                    }
-                    face.Texture = RemapTexture(face.Texture, (ushort)solidRemap[size].Index);
+                    face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
                 }
             }
         }
@@ -464,78 +428,70 @@ namespace TRRandomizerCore.Textures
         private void TidyModels(L level)
         {
             int blackIndex = GetBlackPaletteIndex(level);
-            int solidLaraIndex = -1;
-            if (_data.SolidLara)
-            {
-                solidLaraIndex = ImportColour(level, _data.HighlightColour);
-            }
 
-            foreach (TRStaticMesh smesh in GetStaticMeshes(level))
+            // For most meshes, replace any colours with the default background
+            foreach (TRMesh mesh in GetLevelMeshes(level))
             {
-                TRMesh mesh = GetStaticMesh(level, smesh);
                 SetFace4Colours(mesh.ColouredRectangles, blackIndex);
                 SetFace3Colours(mesh.ColouredTriangles, blackIndex);
             }
 
-            ISet<TRMesh> processedMeshes = new HashSet<TRMesh>();
+            ISet<TRMesh> processedModelMeshes = new HashSet<TRMesh>();
             foreach (TRModel model in GetModels(level))
             {
-                bool solidLara = _data.SolidLara && IsLaraModel(model);
-                TRMesh[] meshes = GetModelMeshes(level, model);
-                if (meshes != null)
+                if (IsSkybox(model))
                 {
-                    foreach (TRMesh mesh in meshes)
+                    // Solidify the skybox as it will become the backdrop for every room
+                    foreach (TRMesh mesh in GetModelMeshes(level, model))
                     {
-                        if (processedMeshes.Add(mesh))
+                        List<TRFace4> rects = mesh.ColouredRectangles.ToList();
+                        foreach (TRFace4 rect in mesh.TexturedRectangles)
                         {
-                            SetFace4Colours(mesh.ColouredRectangles, solidLara ? solidLaraIndex : blackIndex);
-                            SetFace3Colours(mesh.ColouredTriangles, solidLara ? solidLaraIndex : blackIndex);
+                            rect.Texture = mesh.ColouredTriangles[0].Texture;
+                            rects.Add(rect);
                         }
+                        mesh.TexturedRectangles = new TRFace4[] { };
+                        mesh.NumTexturedRectangles = 0;
+                        mesh.ColouredRectangles = rects.ToArray();
+                        mesh.NumColouredRectangles = (short)rects.Count;
+                    }
+                }
+                else if
+                (
+                    (_data.SolidLara && IsLaraModel(model)) ||
+                    (_data.SolidEnemies && (IsEnemyModel(model) || _data.SolidModels.Contains(model.ID))) ||
+                    ShouldSolidifyModel(model)
+                )
+                {
+                    int paletteIndex = ImportColour(level, !IsLaraModel(model) && _data.ModelColours.ContainsKey(model.ID) ?
+                        _data.ModelColours[model.ID] :
+                        _data.HighlightColour);
+
+                    if (paletteIndex == -1)
+                    {
+                        paletteIndex = blackIndex;
                     }
 
-                    if (IsSkybox(model))
+                    foreach (TRMesh mesh in GetModelMeshes(level, model))
                     {
-                        // Completely clear the skybox otherwise the frame bleeds through
-                        foreach (TRMesh mesh in meshes)
+                        if (processedModelMeshes.Add(mesh))
                         {
+                            // Convert all textured polygons to coloured ones, and reset the
+                            // palette index they point to.
                             List<TRFace4> rects = mesh.ColouredRectangles.ToList();
-                            foreach (TRFace4 rect in mesh.TexturedRectangles)
-                            {
-                                rect.Texture = mesh.ColouredTriangles[0].Texture;
-                                rects.Add(rect);
-                            }
-                            mesh.TexturedRectangles = new TRFace4[] { };
-                            mesh.NumTexturedRectangles = 0;
-                            mesh.ColouredRectangles = rects.ToArray();
-                            mesh.NumColouredRectangles = (short)rects.Count;
-                        }
-                    }
-                    else if (solidLara || ShouldSolidifyModel(model))
-                    {
-                        if (solidLaraIndex == -1)
-                        {
-                            solidLaraIndex = ImportColour(level, _data.HighlightColour);
-                        }
-
-                        foreach (TRMesh mesh in meshes)
-                        {
-                            List<TRFace4> rects = mesh.ColouredRectangles.ToList();
-                            foreach (TRFace4 rect in mesh.TexturedRectangles)
-                            {
-                                rect.Texture = (ushort)(solidLaraIndex << 8);
-                                rects.Add(rect);
-                            }
-                            mesh.TexturedRectangles = new TRFace4[] { };
-                            mesh.NumTexturedRectangles = 0;
-                            mesh.ColouredRectangles = rects.ToArray();
-                            mesh.NumColouredRectangles = (short)rects.Count;
+                            rects.AddRange(mesh.TexturedRectangles);
 
                             List<TRFace3> tris = mesh.ColouredTriangles.ToList();
-                            foreach (TRFace3 tri in mesh.TexturedTriangles)
-                            {
-                                tri.Texture = (ushort)(solidLaraIndex << 8);
-                                tris.Add(tri);
-                            }
+                            tris.AddRange(mesh.TexturedTriangles);
+
+                            SetFace4Colours(rects, paletteIndex);
+                            SetFace3Colours(tris, paletteIndex);
+
+                            mesh.TexturedRectangles = new TRFace4[] { };
+                            mesh.NumTexturedRectangles = 0;
+                            mesh.ColouredRectangles = rects.ToArray();
+                            mesh.NumColouredRectangles = (short)rects.Count;
+
                             mesh.TexturedTriangles = new TRFace3[] { };
                             mesh.NumTexturedTriangles = 0;
                             mesh.ColouredTriangles = tris.ToArray();
@@ -545,10 +501,8 @@ namespace TRRandomizerCore.Textures
                 }
             }
 
-            if (solidLaraIndex != -1)
-            {
-                ResetPaletteTracking(level);
-            }
+            // In case we have imported any colours
+            ResetPaletteTracking(level);
         }
 
         private void SetFace4Colours(IEnumerable<TRFace4> faces, int colourIndex)
@@ -567,6 +521,7 @@ namespace TRRandomizerCore.Textures
             }
         }
 
+        protected abstract List<TRFace4> CollectLadders(L level);
         protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
         protected abstract IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(L level);
         protected abstract IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(L level);
@@ -580,10 +535,13 @@ namespace TRRandomizerCore.Textures
         protected abstract void ResetPaletteTracking(L level);
         protected abstract TRModel[] GetModels(L level);
         protected abstract TRMesh[] GetModelMeshes(L level, TRModel model);
+        protected abstract TRMesh[] GetLevelMeshes(L level);
         protected abstract TRStaticMesh[] GetStaticMeshes(L level);
         protected abstract TRMesh GetStaticMesh(L level, TRStaticMesh staticMesh);
         protected abstract bool IsSkybox(TRModel model);
         protected abstract bool IsLaraModel(TRModel model);
+        protected abstract bool IsEnemyModel(TRModel model);
         protected virtual bool ShouldSolidifyModel(TRModel model) => false;
+        protected abstract void SetSkyboxVisible(L level);
     }
 }

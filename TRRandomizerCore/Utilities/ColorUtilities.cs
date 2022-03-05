@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace TRRandomizerCore.Utilities
 {
@@ -160,20 +155,121 @@ namespace TRRandomizerCore.Utilities
         {
             return new Color[]
             {
+                Color.Chocolate,
+                Color.CornflowerBlue,
+                Color.Cornsilk,
+                Color.Crimson,
+                Color.DarkCyan,
+                Color.DarkGoldenrod,
+                Color.DarkKhaki,
+                Color.DarkMagenta,
+                Color.DarkOliveGreen,
+                Color.DarkOrange,
+                Color.DarkOrchid,
+                Color.DarkRed,
+                Color.DarkSalmon,
+                Color.DarkSeaGreen,
+                Color.DarkSlateBlue,
+                Color.DarkSlateGray,
+                Color.DarkTurquoise,
+                Color.DarkViolet,
+                Color.DeepPink,
+                Color.DeepSkyBlue,
+                Color.DodgerBlue,
+                Color.Firebrick,
+                Color.ForestGreen,
+                Color.Fuchsia,
+                Color.Gainsboro,
+                Color.GhostWhite,
+                Color.Gold,
+                Color.Goldenrod,
+                Color.Gray,
+                Color.Green,
+                Color.GreenYellow,
+                Color.Honeydew,
+                Color.HotPink,
+                Color.IndianRed,
+                Color.Ivory,
+                Color.Khaki,
+                Color.Lavender,
+                Color.LavenderBlush,
+                Color.LawnGreen,
+                Color.LemonChiffon,
+                Color.LightBlue,
+                Color.LightCoral,
+                Color.LightCyan,
+                Color.LightGoldenrodYellow,
+                Color.LightGreen,
+                Color.LightGray,
+                Color.LightPink,
+                Color.LightSalmon,
+                Color.LightSeaGreen,
+                Color.LightSkyBlue,
+                Color.LightSlateGray,
+                Color.LightSteelBlue,
+                Color.LightYellow,
+                Color.Lime,
+                Color.LimeGreen,
+                Color.Linen,
+                Color.Magenta,
+                Color.Maroon,
+                Color.MediumAquamarine,
+                Color.MediumBlue,
+                Color.MediumOrchid,
+                Color.MediumPurple,
+                Color.MediumSeaGreen,
+                Color.MediumSlateBlue,
+                Color.MediumSpringGreen,
+                Color.MediumTurquoise,
+                Color.MediumVioletRed,
+                Color.MintCream,
+                Color.MistyRose,
+                Color.Moccasin,
+                Color.NavajoWhite,
+                Color.OldLace,
+                Color.Olive,
+                Color.OliveDrab,
+                Color.Orange,
+                Color.OrangeRed,
+                Color.Orchid,
+                Color.PaleGoldenrod,
+                Color.PaleGreen,
+                Color.PaleTurquoise,
+                Color.PaleVioletRed,
+                Color.PapayaWhip,
+                Color.PeachPuff,
+                Color.Peru,
+                Color.Pink,
+                Color.Plum,
+                Color.PowderBlue,
+                Color.Purple,
+                Color.Red,
+                Color.RosyBrown,
+                Color.RoyalBlue,
+                Color.SaddleBrown,
+                Color.Salmon,
+                Color.SandyBrown,
+                Color.SeaGreen,
+                Color.SeaShell,
+                Color.Sienna,
+                Color.Silver,
+                Color.SkyBlue,
+                Color.SlateBlue,
+                Color.SlateGray,
+                Color.Snow,
+                Color.SpringGreen,
+                Color.SteelBlue,
+                Color.Tan,
                 Color.Teal,
                 Color.Thistle,
                 Color.Tomato,
-                Color.YellowGreen,
+                Color.Turquoise,
+                Color.Violet,
+                Color.Wheat,
                 Color.White,
-                Color.FromArgb(24, 156, 72),   // Green
-                Color.FromArgb(255, 172, 197), // Pink
-                Color.FromArgb(205, 164, 24),  // Orange
-                Color.FromArgb(41, 57, 172),   // Blue
-                Color.FromArgb(204, 92, 206),  // Purple
-                Color.FromArgb(68, 254, 25),   // Lime
-                Color.FromArgb(254, 219, 8),   // Yellow
-                Color.FromArgb(13, 202, 255),  // Cyan
-                Color.FromArgb(238, 189, 74),  // Gold
+                Color.WhiteSmoke,
+                Color.Yellow,
+                Color.YellowGreen
             };
         }
     }

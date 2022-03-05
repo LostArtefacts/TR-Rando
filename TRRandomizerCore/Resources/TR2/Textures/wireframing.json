@@ -1,116 +1,76 @@
 {
   "WALL.TR2": {
-    "OpaqueModels": [ 254 ],
-    "OpaqueStaticMeshes": [ 0 ],
-    "TransparentTextures": [ 1271 ],
     "ExcludedTextures": [ 1229, 1254, 1346, 1347 ]
   },
   "CUT1.TR2": {
-    "OpaqueModels": [ 254 ]
+    "SolidModels": [ 98, 123, 126 ]
   },
   "BOAT.TR2": {
-    "OpaqueModels": [ 254, 106, 107, 108, 109, 110, 111, 112, 114 ],
-    "TransparentTextures": [ 1558, 1585, 1502 ],
     "ExcludedTextures": [ 1547, 1567, 1549, 1550, 1726, 1611, 1609, 1610, 1600, 1601, 1599, 1608 ]
   },
   "VENICE.TR2": {
-    "OpaqueModels": [ 254, 106, 107, 108, 109, 110, 111, 112, 114, 115 ],
-    "TransparentTextures": [ 1593, 1679 ],
     "ExcludedTextures": [ 1574, 1646, 1645, 1647 ]
   },
   "OPERA.TR2": {
-    "OpaqueModels": [ 254, 106, 107, 108, 111, 112, 113, 114, 63 ],
-    "TransparentTextures": [ 1807, 1808, 1661, 1833, 1834, 1835, 1836, 1781 ],
     "ExcludedTextures": [ 1704, 1889, 1890, 1891 ]
   },
   "CUT2.TR2": {
-    "OpaqueModels": [ 254 ]
+    "SolidModels": [ 127, 128, 130 ]
   },
   "RIG.TR2": {
-    "OpaqueModels": [ 254, 114, 115 ],
-    "TransparentTextures": [ 1725, 1632, 1643 ],
     "ExcludedTextures": [ 1740, 1670, 1648, 1741 ]
   },
   "PLATFORM.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 1997, 1937 ],
-    "ExcludedTextures": [ 2010, 1972, 1900, 2011, 1981, 2012, 2006, 2013, 2005 ]
+    "ExcludedTextures": [ 2010, 1972, 1900, 2011, 1981, 2012, 2006, 2013, 2005 ],
+    "SolidModels": [ 256 ]
   },
   "CUT3.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 1101 ],
-    "ExcludedTextures": [ 1116, 1117, 1087, 1118 ]
+    "ExcludedTextures": [ 1116, 1117, 1087, 1118 ],
+    "SolidModels": [ 97, 98, 99, 123, 127, 128 ]
   },
   "UNWATER.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 1465 ],
     "ExcludedTextures": [ 1436, 1442, 1432, 1444 ]
   },
   "KEEL.TR2": {
-    "OpaqueModels": [ 106, 254 ],
-    "TransparentTextures": [ 1787, 1788, 1758, 1862, 1875, 1811, 1363 ],
     "ExcludedTextures": [ 1769, 1770, 1730, 1764 ]
   },
   "LIVING.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 1653, 1233, 1235 ],
     "ExcludedTextures": [ 1594, 1593, 1610, 1587 ]
   },
   "DECK.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 1280, 1282 ],
     "ExcludedTextures": [ 1620, 1623, 1621, 1622 ]
   },
   "SKIDOO.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 1482, 1479 ],
     "ExcludedTextures": [ 1487, 1488, 1307, 1489 ]
   },
   "MONASTRY.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 1570, 1611, 1615, 1616, 1344 ],
-    "ExcludedTextures": [ 1596, 1776, 1777, 1778, 1622, 1779, 1780, 1623 ]
+    "ExcludedTextures": [ 1596, 1776, 1777, 1778 ]
   },
   "CATACOMB.TR2": {
-    "OpaqueModels": [ 115, 254 ],
-    "TransparentTextures": [ 1280, 1310, 1311, 1312, 1364, 1443, 920, 924 ],
     "ExcludedTextures": [ 1345, 1446, 1387, 1389 ]
   },
   "ICECAVE.TR2": {
-    "OpaqueModels": [ 254, 86 ],
-    "TransparentTextures": [ 1372, 1470, 1441, 994, 1001, 1441 ],
     "ExcludedTextures": [ 1366, 1562, 1563, 1564 ]
   },
   "EMPRTOMB.TR2": {
-    "OpaqueModels": [ 254, 86 ],
     "ExcludedTextures": [ 1413, 1417, 1409, 1412, 1458, 1459, 1671, 1570, 1569, 1567, 1568, 1691, 1692, 1559, 1564, 1561, 1558, 1563, 1560, 1557, 1638 ]
   },
   "CUT4.TR2": {
-    "OpaqueModels": [ 254 ]
+    "SolidModels": [ 97, 124, 125, 127, 128, 129 ]
   },
   "FLOATING.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 1173, 1579, 1580, 1584 ],
     "ExcludedTextures": [ 1767, 1823, 1824, 1845, 1846 ]
   },
   "FLOATING.TR2-UKBox": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 1600, 1595, 1173, 1596 ],
     "ExcludedTextures": [ 1783, 1840, 1861, 1839, 1862 ]
   },
   "XIAN.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 1070 ],
     "ExcludedTextures": [ 1437, 1505, 1506, 1507 ]
   },
   "HOUSE.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 55, 56, 57, 58, 98, 99, 100, 193, 244 ],
     "ExcludedTextures": [ 93, 96, 97, 125 ]
   },
   "ASSAULT.TR2": {
-    "OpaqueModels": [ 254 ],
-    "TransparentTextures": [ 826, 859, 857, 963, 957, 258, 233, 234 ],
     "ExcludedTextures": [ 799, 800, 801, 802 ]
   }
 }

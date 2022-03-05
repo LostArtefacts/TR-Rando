@@ -377,6 +377,24 @@ namespace TRRandomizerCore
             set => LevelRandomizer.UseSolidLaraWireframing = value;
         }
 
+        public bool UseSolidEnemyWireframing
+        {
+            get => LevelRandomizer.UseSolidEnemyWireframing;
+            set => LevelRandomizer.UseSolidEnemyWireframing = value;
+        }
+
+        public bool UseDifferentWireframeColours
+        {
+            get => LevelRandomizer.UseDifferentWireframeColours;
+            set => LevelRandomizer.UseDifferentWireframeColours = value;
+        }
+
+        public bool UseWireframeLadders
+        {
+            get => LevelRandomizer.UseWireframeLadders;
+            set => LevelRandomizer.UseWireframeLadders = value;
+        }
+
         public bool HardSecrets
         {
             get => LevelRandomizer.HardSecrets;

@@ -43,6 +43,9 @@ namespace TRRandomizerView.Model
         private uint _wireframeLevelCount;
         private bool _assaultCourseWireframe;
         private bool _useSolidLaraWireframing;
+        private bool _useSolidEnemyWireframing;
+        private bool _useDifferentWireframeColours;
+        private bool _useWireframeLadders;
         private bool _nightModeAssaultCourse;
         private bool _overrideSunsets;
         private Color _vfxFilterColor;
@@ -1018,6 +1021,36 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public bool UseSolidEnemyWireframing
+        {
+            get => _useSolidEnemyWireframing;
+            set
+            {
+                _useSolidEnemyWireframing = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool UseDifferentWireframeColours
+        {
+            get => _useDifferentWireframeColours;
+            set
+            {
+                _useDifferentWireframeColours = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool UseWireframeLadders
+        {
+            get => _useWireframeLadders;
+            set
+            {
+                _useWireframeLadders = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool AutoLaunchGame
         {
             get => _autoLaunchGame;
@@ -1471,6 +1504,9 @@ namespace TRRandomizerView.Model
             WireframeLevelCount = _controller.WireframeLevelCount;
             AssaultCourseWireframe = _controller.AssaultCourseWireframe;
             UseSolidLaraWireframing = _controller.UseSolidLaraWireframing;
+            UseSolidEnemyWireframing = _controller.UseSolidEnemyWireframing;
+            UseDifferentWireframeColours = _controller.UseDifferentWireframeColours;
+            UseWireframeLadders = _controller.UseWireframeLadders;
 
             RandomizeOutfits = _controller.RandomizeOutfits;
             OutfitSeed = _controller.OutfitSeed;
@@ -1718,6 +1754,9 @@ namespace TRRandomizerView.Model
             _controller.WireframeLevelCount = WireframeLevelCount;
             _controller.AssaultCourseWireframe = AssaultCourseWireframe;
             _controller.UseSolidLaraWireframing = UseSolidLaraWireframing;
+            _controller.UseSolidEnemyWireframing = UseSolidEnemyWireframing;
+            _controller.UseDifferentWireframeColours = UseDifferentWireframeColours;
+            _controller.UseWireframeLadders = UseWireframeLadders;
 
             _controller.RandomizeOutfits = RandomizeOutfits;
             _controller.OutfitSeed = OutfitSeed;
