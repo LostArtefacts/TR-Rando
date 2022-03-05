@@ -11,7 +11,7 @@ using System.Windows;
 [assembly: AssemblyDescription("Tomb Raider Randomizer")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Tombrunners")]
-[assembly: AssemblyProduct("TRRando V1.5.4")]
+[assembly: AssemblyProduct("TRRando V1.5.5")]
 [assembly: AssemblyCopyright("Copyright © Tombrunners 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
