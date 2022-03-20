@@ -307,6 +307,20 @@
         },
 
         {
+          "Comments": "Adjust a potential secret.",
+          "EMType": 43,
+          "Types": [ 192 ],
+          "SectorLocations": [
+            {
+              "X": 73885,
+              "Y": 6290,
+              "Z": 28808,
+              "Room": 1
+            }
+          ]
+        },
+
+        {
           "Comments": "Move the eagle trigger from what will become a blocked doorway.",
           "EMType": 67,
           "BaseLocation": {
