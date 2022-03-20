@@ -674,7 +674,7 @@
         "EMType": 47,
         "EntityIndices": [ 50, 148 ],
         "NewEnemyType": 1,
-        "Restrictions": [ 40 ]
+        "Exclusions": [ 40 ]
       },
 
       {

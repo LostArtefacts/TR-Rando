@@ -184,6 +184,54 @@
     ]
   ],
 
+  "ConditionalAllWithin": [
+    {
+      "Condition": {
+        "Comments": "Has Marco been added? If so, move him to the plane area (he'll either be entity 8 or 9)'.",
+        "ConditionType": 0,
+        "EntityIndex": 8,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        [
+          {
+            "EMType": 44,
+            "EntityIndex": 8,
+            "TargetLocation": {
+              "X": 37854,
+              "Y": 2048,
+              "Z": 81803,
+              "Room": 88,
+              "Angle": 0
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Condition": {
+        "ConditionType": 0,
+        "EntityIndex": 9,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        [
+          {
+            "EMType": 44,
+            "EntityIndex": 9,
+            "TargetLocation": {
+              "X": 37854,
+              "Y": 2048,
+              "Z": 81803,
+              "Room": 88,
+              "Angle": 0
+            }
+          }
+        ]
+      ]
+    }
+  ],
+
   "AllWithin": [
     [
       [
