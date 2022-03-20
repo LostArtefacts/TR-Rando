@@ -270,8 +270,6 @@ namespace TRRandomizerCore.Utilities
                     TR2Entities.Barracuda, TR2Entities.BlackMorayEel, TR2Entities.ScubaDiver,
                     TR2Entities.Shark, TR2Entities.YellowMorayEel
                 },
-            [TR2LevelNames.RIG] =
-                new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [TR2LevelNames.DA] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [TR2LevelNames.LQ] =
