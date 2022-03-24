@@ -109,7 +109,9 @@ namespace TRRandomizerCore.Randomizers
                     TR3Entities.GrenadeLauncher_M_H, TR3Entities.GrenadeLauncher_P,
                     TR3Entities.Grenades_M_H, TR3Entities.Grenades_P,
                     TR3Entities.Harpoon_M_H, TR3Entities.Harpoon_P,
-                    TR3Entities.Harpoons_M_H, TR3Entities.Harpoons_P
+                    TR3Entities.Harpoons_M_H, TR3Entities.Harpoons_P,
+                    TR3Entities.SmallMed_P, TR3Entities.SmallMed_M_H,
+                    TR3Entities.LargeMed_P, TR3Entities.LargeMed_M_H
                 },
                 DataFolder = GetResourcePath(@"TR3\Models")
             };

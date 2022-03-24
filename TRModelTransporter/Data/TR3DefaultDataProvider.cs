@@ -171,7 +171,9 @@ namespace TRModelTransporter.Data
             [TR3Entities.RocketLauncher_P]
                 = new TR3Entities[] { TR3Entities.RocketSingle },
             [TR3Entities.GrenadeLauncher_P]
-                = new TR3Entities[] { TR3Entities.GrenadeSingle }
+                = new TR3Entities[] { TR3Entities.GrenadeSingle },
+            [TR3Entities.Harpoon_P]
+                = new TR3Entities[] { TR3Entities.HarpoonSingle2 }
         };
 
         private static readonly Dictionary<TR3Entities, List<TR3Entities>> _spriteDependencies = new Dictionary<TR3Entities, List<TR3Entities>>
