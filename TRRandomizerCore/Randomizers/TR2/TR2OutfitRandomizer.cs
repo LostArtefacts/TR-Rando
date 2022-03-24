@@ -272,8 +272,25 @@ namespace TRRandomizerCore.Randomizers
 
                 try
                 {
+                    List<TRModel> models = level.Data.Models.ToList();
+                    TRModel laraModel = models.Find(m => m.ID == (uint)TR2Entities.Lara);
+                    List<TRModel> laraClones = models.FindAll(m => m.MeshTree == laraModel.MeshTree);
+
                     // Try to import the selected models into the level.
                     importer.Import();
+
+                    // #314 Any clones of Lara should copy her new style
+                    if (laraClones.Count > 0)
+                    {
+                        models = level.Data.Models.ToList();
+                        laraModel = models.Find(m => m.ID == (uint)TR2Entities.Lara);
+                        foreach (TRModel model in laraClones)
+                        {
+                            model.MeshTree = laraModel.MeshTree;
+                            model.StartingMesh = laraModel.StartingMesh;
+                            model.NumMeshes = laraModel.NumMeshes;
+                        }
+                    }
 
                     // Apply any necessary tweaks to the outfit
                     AdjustOutfit(level, lara);
