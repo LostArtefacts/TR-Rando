@@ -184,50 +184,103 @@
     ]
   ],
 
-  "ConditionalAllWithin": [
+  "ConditionalAll": [
     {
       "Condition": {
-        "Comments": "Has Marco been added? If so, move him to the plane area (he'll either be entity 8 or 9)'.",
+        "Comments": "If Marco has been added and the plane area has been drained, move him there (he'll either be entity 8 or 9).",
         "ConditionType": 0,
         "EntityIndex": 8,
-        "EntityType": 40
-      },
-      "OnTrue": [
-        [
+        "EntityType": 40,
+        "And": [
           {
-            "EMType": 44,
-            "EntityIndex": 8,
-            "TargetLocation": {
-              "X": 37854,
-              "Y": 2048,
-              "Z": 81803,
-              "Room": 88,
-              "Angle": 0
-            }
+            "ConditionType": 21,
+            "RoomIndex": 88,
+            "Negate": true
           }
         ]
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 8,
+          "TargetLocation": {
+            "X": 37854,
+            "Y": 2048,
+            "Z": 81803,
+            "Room": 88,
+            "Angle": 0
+          }
+        }
       ]
     },
     {
       "Condition": {
         "ConditionType": 0,
         "EntityIndex": 9,
-        "EntityType": 40
-      },
-      "OnTrue": [
-        [
+        "EntityType": 40,
+        "And": [
           {
-            "EMType": 44,
-            "EntityIndex": 9,
-            "TargetLocation": {
-              "X": 37854,
-              "Y": 2048,
-              "Z": 81803,
-              "Room": 88,
-              "Angle": 0
-            }
+            "ConditionType": 21,
+            "RoomIndex": 88,
+            "Negate": true
           }
         ]
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 9,
+          "TargetLocation": {
+            "X": 37854,
+            "Y": 2048,
+            "Z": 81803,
+            "Room": 88,
+            "Angle": 0
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If Marco has been added but the plane area has not been drained change him to something else.",
+        "ConditionType": 0,
+        "EntityIndex": 8,
+        "EntityType": 40,
+        "And": [
+          {
+            "ConditionType": 21,
+            "RoomIndex": 88
+          }
+        ]
+      },
+      "OnTrue": [
+        {
+          "EMType": 47,
+          "EntityIndices": [ 8 ],
+          "NewEnemyType": 1,
+          "Exclusions": [ 40 ]
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "ConditionType": 0,
+        "EntityIndex": 9,
+        "EntityType": 40,
+        "And": [
+          {
+            "ConditionType": 21,
+            "RoomIndex": 88
+          }
+        ]
+      },
+      "OnTrue": [
+        {
+          "EMType": 47,
+          "EntityIndices": [ 9 ],
+          "NewEnemyType": 1,
+          "Exclusions": [ 40 ]
+        }
       ]
     }
   ],
