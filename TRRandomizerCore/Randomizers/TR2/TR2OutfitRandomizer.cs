@@ -237,8 +237,14 @@ namespace TRRandomizerCore.Randomizers
 
             private bool Import(TR2CombinedLevel level, TR2Entities lara)
             {
+                List<TRModel> models = level.Data.Models.ToList();
+                TRModel laraModel = models.Find(m => m.ID == (uint)TR2Entities.Lara);
+                List<TRModel> laraClones = models.FindAll(m => m.MeshTree == laraModel.MeshTree && m != laraModel);
+
                 if (lara == TR2Entities.LaraInvisible)
                 {
+                    // #314 Ensure cloned Laras remain visible
+                    CloneLaraMeshes(level, laraClones, laraModel);
                     // No import needed, just clear each of Lara's meshes. A haircut is implied
                     // with this and we don't need to alter the outfit.
                     HideEntities(level, _invisibleLaraEntities);
@@ -272,10 +278,6 @@ namespace TRRandomizerCore.Randomizers
 
                 try
                 {
-                    List<TRModel> models = level.Data.Models.ToList();
-                    TRModel laraModel = models.Find(m => m.ID == (uint)TR2Entities.Lara);
-                    List<TRModel> laraClones = models.FindAll(m => m.MeshTree == laraModel.MeshTree);
-
                     // Try to import the selected models into the level.
                     importer.Import();
 
@@ -310,6 +312,29 @@ namespace TRRandomizerCore.Randomizers
                     // Tell the monitor to no longer track what we tried to import
                     _outer.TextureMonitor.ClearMonitor(level.Name, laraImport);
                     return false;
+                }
+            }
+
+            private void CloneLaraMeshes(TR2CombinedLevel level, List<TRModel> clones, TRModel laraModel)
+            {
+                if (clones.Count > 0)
+                {
+                    MeshEditor editor = new MeshEditor();
+                    TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, laraModel);
+                    int firstMeshIndex = -1;
+                    for (int i = 0; i < meshes.Length; i++)
+                    {
+                        int insertedIndex = TRMeshUtilities.InsertMesh(level.Data, editor.CloneMesh(meshes[i]));
+                        if (firstMeshIndex == -1)
+                        {
+                            firstMeshIndex = insertedIndex;
+                        }
+                    }
+
+                    foreach (TRModel model in clones)
+                    {
+                        model.StartingMesh = (ushort)firstMeshIndex;
+                    }
                 }
             }
 
