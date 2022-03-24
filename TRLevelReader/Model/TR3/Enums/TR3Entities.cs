@@ -350,6 +350,12 @@ namespace TRLevelReader.Model.Enums
 
         LaraInvisible = 7500,
 
+        LaraHome = 7600,
+        LaraSkin_H_Home,
+        LaraPistolAnimation_H_Home,
+        LaraDeagleAnimation_H_Home,
+        LaraUziAnimation_H_Home,
+
         // Lara + Vehicle anims
         LaraVehicleAnimation_H_Quad = 8000,
         LaraVehicleAnimation_H_BigGun,

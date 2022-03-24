@@ -19,7 +19,9 @@ namespace TRLevelReader.Helpers
                 [TR3Entities.LaraNevada]
                     = TR3LevelNames.NevadaLevelsWithCutscenes,
                 [TR3Entities.LaraAntarc]
-                    = TR3LevelNames.AntarcticaLevelsWithCutscenes
+                    = TR3LevelNames.AntarcticaLevelsWithCutscenes,
+                [TR3Entities.LaraHome]
+                    = new List<string> { TR3LevelNames.ASSAULT }
             },
             [TR3Entities.LaraSkin_H] = new Dictionary<TR3Entities, List<string>>
             {
@@ -32,7 +34,9 @@ namespace TRLevelReader.Helpers
                 [TR3Entities.LaraSkin_H_Nevada]
                     = TR3LevelNames.NevadaLevelsWithCutscenes,
                 [TR3Entities.LaraSkin_H_Antarc]
-                    = TR3LevelNames.AntarcticaLevelsWithCutscenes
+                    = TR3LevelNames.AntarcticaLevelsWithCutscenes,
+                [TR3Entities.LaraSkin_H_Home]
+                    = new List<string> { TR3LevelNames.ASSAULT }
             },
             [TR3Entities.Cobra] = new Dictionary<TR3Entities, List<string>>
             {
