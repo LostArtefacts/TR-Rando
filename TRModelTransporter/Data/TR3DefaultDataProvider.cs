@@ -125,6 +125,9 @@ namespace TRModelTransporter.Data
             [TR3Entities.LaraAntarc]
                 = new TR3Entities[] { TR3Entities.LaraSkin_H_Antarc, TR3Entities.LaraPistolAnimation_H_Antarc, TR3Entities.LaraDeagleAnimation_H_Antarc, TR3Entities.LaraUziAnimation_H_Antarc },
 
+            [TR3Entities.LaraHome]
+                = new TR3Entities[] { TR3Entities.LaraSkin_H_Home, TR3Entities.LaraPistolAnimation_H_Home/*, TR3Entities.LaraDeagleAnimation_H_Home, TR3Entities.LaraUziAnimation_H_Home*/ },
+
             [TR3Entities.Monkey]
                 = new TR3Entities[] { TR3Entities.MonkeyMedMeshswap, TR3Entities.MonkeyKeyMeshswap },
 
@@ -161,7 +164,16 @@ namespace TRModelTransporter.Data
             [TR3Entities.Quest1_P]
                 = new TR3Entities[] { TR3Entities.Quest1_M_H },
             [TR3Entities.Quest2_P]
-                = new TR3Entities[] { TR3Entities.Quest2_M_H }
+                = new TR3Entities[] { TR3Entities.Quest2_M_H },
+
+            [TR3Entities.MP5_P]
+                = new TR3Entities[] { TR3Entities.GunflareMP5_H },
+            [TR3Entities.RocketLauncher_P]
+                = new TR3Entities[] { TR3Entities.RocketSingle },
+            [TR3Entities.GrenadeLauncher_P]
+                = new TR3Entities[] { TR3Entities.GrenadeSingle },
+            [TR3Entities.Harpoon_P]
+                = new TR3Entities[] { TR3Entities.HarpoonSingle2 }
         };
 
         private static readonly Dictionary<TR3Entities, List<TR3Entities>> _spriteDependencies = new Dictionary<TR3Entities, List<TR3Entities>>
@@ -183,24 +195,24 @@ namespace TRModelTransporter.Data
         {
             [TR3Entities.Lara] = new List<TR3Entities>
             {
-                TR3Entities.LaraIndia, TR3Entities.LaraCoastal, TR3Entities.LaraLondon, TR3Entities.LaraNevada, TR3Entities.LaraAntarc
+                TR3Entities.LaraIndia, TR3Entities.LaraCoastal, TR3Entities.LaraLondon, TR3Entities.LaraNevada, TR3Entities.LaraAntarc, TR3Entities.LaraHome
             },
             [TR3Entities.LaraSkin_H] = new List<TR3Entities>
             {
-                TR3Entities.LaraSkin_H_India, TR3Entities.LaraSkin_H_Coastal, TR3Entities.LaraSkin_H_London, TR3Entities.LaraSkin_H_Nevada, TR3Entities.LaraSkin_H_Antarc
+                TR3Entities.LaraSkin_H_India, TR3Entities.LaraSkin_H_Coastal, TR3Entities.LaraSkin_H_London, TR3Entities.LaraSkin_H_Nevada, TR3Entities.LaraSkin_H_Antarc, TR3Entities.LaraSkin_H_Home
             },
 
             [TR3Entities.LaraPistolAnimation_H] = new List<TR3Entities>
             {
-                TR3Entities.LaraPistolAnimation_H_India, TR3Entities.LaraPistolAnimation_H_Coastal, TR3Entities.LaraPistolAnimation_H_London, TR3Entities.LaraPistolAnimation_H_Nevada, TR3Entities.LaraPistolAnimation_H_Antarc
+                TR3Entities.LaraPistolAnimation_H_India, TR3Entities.LaraPistolAnimation_H_Coastal, TR3Entities.LaraPistolAnimation_H_London, TR3Entities.LaraPistolAnimation_H_Nevada, TR3Entities.LaraPistolAnimation_H_Antarc, TR3Entities.LaraPistolAnimation_H_Home
             },
             [TR3Entities.LaraDeagleAnimation_H] = new List<TR3Entities>
             {
-                TR3Entities.LaraDeagleAnimation_H_India, TR3Entities.LaraDeagleAnimation_H_Coastal, TR3Entities.LaraDeagleAnimation_H_London, TR3Entities.LaraDeagleAnimation_H_Nevada, TR3Entities.LaraDeagleAnimation_H_Antarc
+                TR3Entities.LaraDeagleAnimation_H_India, TR3Entities.LaraDeagleAnimation_H_Coastal, TR3Entities.LaraDeagleAnimation_H_London, TR3Entities.LaraDeagleAnimation_H_Nevada, TR3Entities.LaraDeagleAnimation_H_Antarc, TR3Entities.LaraDeagleAnimation_H_Home
             },
             [TR3Entities.LaraUziAnimation_H] = new List<TR3Entities>
             {
-                TR3Entities.LaraUziAnimation_H_India, TR3Entities.LaraUziAnimation_H_Coastal, TR3Entities.LaraUziAnimation_H_London, TR3Entities.LaraUziAnimation_H_Nevada, TR3Entities.LaraUziAnimation_H_Antarc
+                TR3Entities.LaraUziAnimation_H_India, TR3Entities.LaraUziAnimation_H_Coastal, TR3Entities.LaraUziAnimation_H_London, TR3Entities.LaraUziAnimation_H_Nevada, TR3Entities.LaraUziAnimation_H_Antarc, TR3Entities.LaraUziAnimation_H_Home
             },
 
             [TR3Entities.LaraVehicleAnimation_H] = new List<TR3Entities>

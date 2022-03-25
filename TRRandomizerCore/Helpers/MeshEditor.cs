@@ -116,6 +116,67 @@ namespace TRRandomizerCore.Helpers
             Mesh.NumColouredTriangles = (short)triangles.Count;
         }
 
+        public TRMesh CloneMesh(TRMesh mesh)
+        {
+            TRMesh clone = new TRMesh
+            {
+                Centre = mesh.Centre,
+                CollRadius = mesh.CollRadius,
+                ColouredRectangles = new TRFace4[mesh.NumColouredRectangles],
+                ColouredTriangles = new TRFace3[mesh.NumColouredTriangles],
+                Lights = mesh.Lights,
+                Normals = mesh.Normals,
+                NumColouredRectangles = mesh.NumColouredRectangles,
+                NumColouredTriangles = mesh.NumColouredTriangles,
+                NumNormals = mesh.NumNormals,
+                NumTexturedRectangles = mesh.NumTexturedRectangles,
+                NumTexturedTriangles = mesh.NumTexturedTriangles,
+                NumVertices = mesh.NumVertices,
+                Pointer = mesh.Pointer,
+                TexturedRectangles = new TRFace4[mesh.NumTexturedRectangles],
+                TexturedTriangles = new TRFace3[mesh.NumTexturedTriangles],
+                Vertices = mesh.Vertices
+            };
+
+            for (int i = 0; i < mesh.NumColouredRectangles; i++)
+            {
+                clone.ColouredRectangles[i] = new TRFace4
+                {
+                    Texture = mesh.ColouredRectangles[i].Texture,
+                    Vertices = mesh.ColouredRectangles[i].Vertices
+                };
+            }
+
+            for (int i = 0; i < mesh.NumColouredTriangles; i++)
+            {
+                clone.ColouredTriangles[i] = new TRFace3
+                {
+                    Texture = mesh.ColouredTriangles[i].Texture,
+                    Vertices = mesh.ColouredTriangles[i].Vertices
+                };
+            }
+
+            for (int i = 0; i < mesh.NumTexturedRectangles; i++)
+            {
+                clone.TexturedRectangles[i] = new TRFace4
+                {
+                    Texture = mesh.TexturedRectangles[i].Texture,
+                    Vertices = mesh.TexturedRectangles[i].Vertices
+                };
+            }
+
+            for (int i = 0; i < mesh.NumTexturedTriangles; i++)
+            {
+                clone.TexturedTriangles[i] = new TRFace3
+                {
+                    Texture = mesh.TexturedTriangles[i].Texture,
+                    Vertices = mesh.TexturedTriangles[i].Vertices
+                };
+            }
+
+            return clone;
+        }
+
         public void WriteToLevel(TR2Level level)
         {
             TRMeshUtilities.UpdateMeshPointers(level, Mesh, _oldLength);

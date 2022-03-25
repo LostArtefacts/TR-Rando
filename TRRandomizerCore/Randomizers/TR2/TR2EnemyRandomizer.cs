@@ -674,6 +674,27 @@ namespace TRRandomizerCore.Randomizers
                 level.Data.Entities = levelEntities.ToArray();
                 level.Data.NumEntities = (uint)levelEntities.Count;
             }
+
+            RandomizeEnemyMeshes(level, enemies);
+        }
+
+        private void RandomizeEnemyMeshes(TR2CombinedLevel level, EnemyRandomizationCollection enemies)
+        {
+            // #314 A very primitive start to mixing-up enemy meshes - if we have both monk types, and we're
+            // not using docile chickens, make one set of monks become Lara.
+            if (Settings.CrossLevelEnemies
+                && !Settings.DocileBirdMonsters
+                && enemies.Available.Contains(TR2Entities.MonkWithKnifeStick)
+                && enemies.Available.Contains(TR2Entities.MonkWithLongStick))
+            {
+                TR2Entities monkType = _generator.Next(0, 2) == 0 ? TR2Entities.MonkWithKnifeStick : TR2Entities.MonkWithLongStick;
+                List<TRModel> models = level.Data.Models.ToList();
+                TRModel laraModel = models.Find(m => m.ID == (uint)TR2Entities.Lara);
+                TRModel monkModel = models.Find(m => m.ID == (uint)monkType);
+                monkModel.MeshTree = laraModel.MeshTree;
+                monkModel.StartingMesh = laraModel.StartingMesh;
+                monkModel.NumMeshes = laraModel.NumMeshes;
+            }
         }
 
         internal class EnemyProcessor : AbstractProcessorThread<TR2EnemyRandomizer>

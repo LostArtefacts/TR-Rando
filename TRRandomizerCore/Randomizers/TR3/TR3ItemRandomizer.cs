@@ -8,6 +8,8 @@ using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRModelTransporter.Packing;
+using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Utilities;
@@ -47,6 +49,10 @@ namespace TRRandomizerCore.Randomizers
 
                 FindUnarmedLevelPistols(_levelInstance);
 
+                // #312 If this is the assault course, import required models. On failure, don't perform any item rando.
+                if (_levelInstance.IsAssault && !ImportAssaultModels(_levelInstance))
+                    continue;
+
                 if (Settings.RandomizeItemTypes)
                     RandomizeItemTypes(_levelInstance);
 
@@ -67,6 +73,64 @@ namespace TRRandomizerCore.Randomizers
                 {
                     break;
                 }
+            }
+        }
+
+        private bool ImportAssaultModels(TR3CombinedLevel level)
+        {
+            // #312 We need all item models plus Lara's associated weapon animations for the
+            // assault course. The DEagle and Uzi anims will match Lara's default home outfit
+            // - outfit rando will take care of replacing these if it's enabled.
+            TR3ModelImporter importer = new TR3ModelImporter
+            {
+                Level = level.Data,
+                LevelName = level.Name,
+                ClearUnusedSprites = false,
+                EntitiesToImport = new List<TR3Entities>
+                {
+                    TR3Entities.LaraShotgunAnimation_H,
+                    TR3Entities.LaraDeagleAnimation_H_Home,
+                    TR3Entities.LaraUziAnimation_H_Home,
+                    TR3Entities.LaraMP5Animation_H,
+                    TR3Entities.LaraRocketAnimation_H,
+                    TR3Entities.LaraGrenadeAnimation_H,
+                    TR3Entities.LaraHarpoonAnimation_H,
+                    TR3Entities.PistolAmmo_P,
+                    TR3Entities.Shotgun_P, TR3Entities.Shotgun_M_H,
+                    TR3Entities.ShotgunAmmo_P, TR3Entities.ShotgunAmmo_M_H,
+                    TR3Entities.Deagle_P, TR3Entities.Deagle_M_H,
+                    TR3Entities.DeagleAmmo_P, TR3Entities.DeagleAmmo_M_H,
+                    TR3Entities.Uzis_P, TR3Entities.Uzis_M_H,
+                    TR3Entities.UziAmmo_P, TR3Entities.UziAmmo_M_H,
+                    TR3Entities.MP5_P, TR3Entities.MP5_M_H,
+                    TR3Entities.MP5Ammo_P, TR3Entities.MP5Ammo_M_H,
+                    TR3Entities.RocketLauncher_M_H, TR3Entities.RocketLauncher_P,
+                    TR3Entities.Rockets_M_H, TR3Entities.Rockets_P,
+                    TR3Entities.GrenadeLauncher_M_H, TR3Entities.GrenadeLauncher_P,
+                    TR3Entities.Grenades_M_H, TR3Entities.Grenades_P,
+                    TR3Entities.Harpoon_M_H, TR3Entities.Harpoon_P,
+                    TR3Entities.Harpoons_M_H, TR3Entities.Harpoons_P,
+                    TR3Entities.SmallMed_P, TR3Entities.SmallMed_M_H,
+                    TR3Entities.LargeMed_P, TR3Entities.LargeMed_M_H
+                },
+                DataFolder = GetResourcePath(@"TR3\Models")
+            };
+
+            string remapPath = @"TR3\Textures\Deduplication\" + level.Name + "-TextureRemap.json";
+            if (ResourceExists(remapPath))
+            {
+                importer.TextureRemapPath = GetResourcePath(remapPath);
+            }
+
+            try
+            {
+                // Try to import the selected models into the level.
+                importer.Import();
+                return true;
+            }
+            catch (PackingException)
+            {
+                return false;
             }
         }
 
@@ -104,16 +168,24 @@ namespace TRRandomizerCore.Randomizers
 
             foreach (TR2Entity ent in level.Data.Entities)
             {
-                // If this is an unarmed level's pistols, make sure they're replaced with another weapon
-                if (ent == _unarmedLevelPistols)
+                TR3Entities currentType = (TR3Entities)ent.TypeID;
+                // If this is an unarmed level's pistols, make sure they're replaced with another weapon.
+                // Similar case for the assault course, so that Lara can still shoot Winnie.
+                if (ent == _unarmedLevelPistols || (level.IsAssault && TR3EntityUtilities.IsWeaponPickup(currentType)))
                 {
                     do
                     {
                         ent.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
                     }
-                    while (!TR3EntityUtilities.IsWeaponPickup((TR3Entities)ent.TypeID));
+                    while (!TR3EntityUtilities.IsWeaponPickup(currentType));
+
+                    if (level.IsAssault)
+                    {
+                        // Add some extra ammo too
+                        level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3EntityUtilities.GetWeaponAmmo((TR3Entities)ent.TypeID)), 20);
+                    }
                 }
-                else if (TR3EntityUtilities.IsStandardPickupType((TR3Entities)ent.TypeID) && 
+                else if (TR3EntityUtilities.IsStandardPickupType(currentType) && 
                     (ent.Room < RoomWaterUtilities.DefaultRoomCountDictionary[level.Name] || Settings.RandomizeSecretRewardsPhysical))
                 {
                     ent.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];

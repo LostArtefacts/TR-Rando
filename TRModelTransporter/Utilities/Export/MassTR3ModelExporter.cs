@@ -116,7 +116,7 @@ namespace TRModelTransporter.Utilities
             },
             [TR3LevelNames.ASSAULT] = new List<TR3Entities>
             {
-                TR3Entities.Winston, TR3Entities.WinstonInCamoSuit
+                TR3Entities.LaraHome, TR3Entities.Winston, TR3Entities.WinstonInCamoSuit
             }
         };
     }
