@@ -680,20 +680,42 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeEnemyMeshes(TR2CombinedLevel level, EnemyRandomizationCollection enemies)
         {
-            // #314 A very primitive start to mixing-up enemy meshes - if we have both monk types, and we're
-            // not using docile chickens, make one set of monks become Lara.
-            if (Settings.CrossLevelEnemies
-                && !Settings.DocileBirdMonsters
-                && enemies.Available.Contains(TR2Entities.MonkWithKnifeStick)
-                && enemies.Available.Contains(TR2Entities.MonkWithLongStick))
+            // #314 A very primitive start to mixing-up enemy meshes - monks and yetis can take on Lara's meshes
+            // without manipulation, so add a random chance of this happening if any of these models are in place.
+            if (!Settings.CrossLevelEnemies)
             {
-                TR2Entities monkType = _generator.Next(0, 2) == 0 ? TR2Entities.MonkWithKnifeStick : TR2Entities.MonkWithLongStick;
-                List<TRModel> models = level.Data.Models.ToList();
-                TRModel laraModel = models.Find(m => m.ID == (uint)TR2Entities.Lara);
-                TRModel monkModel = models.Find(m => m.ID == (uint)monkType);
-                monkModel.MeshTree = laraModel.MeshTree;
-                monkModel.StartingMesh = laraModel.StartingMesh;
-                monkModel.NumMeshes = laraModel.NumMeshes;
+                return;
+            }
+            
+            List<TR2Entities> laraClones = new List<TR2Entities>();
+            const int chance = 2;
+            if (!Settings.DocileBirdMonsters)
+            {
+                AddRandomLaraClone(enemies, TR2Entities.MonkWithKnifeStick, laraClones, chance);
+                AddRandomLaraClone(enemies, TR2Entities.MonkWithLongStick, laraClones, chance);
+            }
+
+            AddRandomLaraClone(enemies, TR2Entities.Yeti, laraClones, chance);
+
+            if (laraClones.Count > 0)
+            {
+                List<TRModel> levelModels = level.Data.Models.ToList();
+                TRModel laraModel = levelModels.Find(m => m.ID == (uint)TR2Entities.Lara);
+                foreach (TR2Entities enemyType in laraClones)
+                {
+                    TRModel enemyModel = levelModels.Find(m => m.ID == (uint)enemyType);
+                    enemyModel.MeshTree = laraModel.MeshTree;
+                    enemyModel.StartingMesh = laraModel.StartingMesh;
+                    enemyModel.NumMeshes = laraModel.NumMeshes;
+                }
+            }
+        }
+
+        private void AddRandomLaraClone(EnemyRandomizationCollection enemies, TR2Entities enemyType, List<TR2Entities> cloneCollection, int chance)
+        {
+            if (enemies.Available.Contains(enemyType) && _generator.Next(0, chance) == 0)
+            {
+                cloneCollection.Add(enemyType);
             }
         }
 

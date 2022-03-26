@@ -223,7 +223,7 @@ namespace TRModelTransporter.Data
 
             [TR2Entities.LaraMiscAnim_H] = new List<TR2Entities>
             {
-                TR2Entities.LaraMiscAnim_H_Wall, TR2Entities.LaraMiscAnim_H_Unwater, TR2Entities.LaraMiscAnim_H_Ice, TR2Entities.LaraMiscAnim_H_Xian, TR2Entities.LaraMiscAnim_H_HSH
+                TR2Entities.LaraMiscAnim_H_Wall, TR2Entities.LaraMiscAnim_H_Unwater, TR2Entities.LaraMiscAnim_H_Ice, TR2Entities.LaraMiscAnim_H_Xian, TR2Entities.LaraMiscAnim_H_HSH, TR2Entities.LaraMiscAnim_H_Venice
             },
 
             [TR2Entities.TigerOrSnowLeopard] = new List<TR2Entities>

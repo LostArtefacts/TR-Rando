@@ -332,6 +332,81 @@
       "EMType": 45,
       "EntityIndex": 182,
       "NewEntityType": 137
+    },
+
+    {
+      "Comments": "There are hard-coded shenanigans for the missile blast, meaning it won't work in mirrored. So make it a dramatic medi pack instead, and make the beams other pickups.",
+      "EMType": 45,
+      "EntityIndex": 70,
+      "NewEntityType": 177
+    },
+    {
+      "EMType": 45,
+      "EntityIndex": 72,
+      "NewEntityType": 178
+    },
+    {
+      "EMType": 45,
+      "EntityIndex": 77,
+      "NewEntityType": 169
+    },
+    {
+      "Comments": "Move the items to the floor.",
+      "EMType": 44,
+      "EntityIndex": 70,
+      "TargetLocation": {
+        "X": 44038,
+        "Y": 6400,
+        "Z": 64500,
+        "Room": 52,
+        "Angle": -32768
+      }
+    },
+    {
+      "EMType": 44,
+      "EntityIndex": 72,
+      "TargetLocation": {
+        "X": 55808,
+        "Y": 5632,
+        "Z": 65024,
+        "Room": 57,
+        "Angle": -16384
+      }
+    },
+    {
+      "EMType": 44,
+      "EntityIndex": 77,
+      "TargetLocation": {
+        "X": 55808,
+        "Y": 5632,
+        "Z": 62976,
+        "Room": 57,
+        "Angle": -16384
+      }
+    },
+    {
+      "Comments": "Get rid of the missile static meshes.",
+      "EMType": 25,
+      "ClearFromRooms": {
+        "17": [ 49, 51, 53 ],
+        "18": [ 147, 148 ],
+        "19": [ 49, 51, 53 ],
+        "20": [ 49, 51, 53 ]
+      }
+    },
+    {
+      "Comments": "Make the camera look at the medi pack.",
+      "EMType": 66,
+      "TrigAction": 6,
+      "NewParameter": 70,
+      "Locations": [
+        {
+          "X": 47616,
+          "Y": 5888,
+          "Z": 62976,
+          "Room": 109
+        }
+      ]
     }
   ]
 }
