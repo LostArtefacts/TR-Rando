@@ -493,6 +493,9 @@ namespace TRRandomizerCore.Utilities
             {
                 switch (lvlName)
                 {
+                    case TR2LevelNames.BARTOLI:
+                        priorities[TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_Venice;
+                        break;
                     case TR2LevelNames.RIG:
                     case TR2LevelNames.DA:
                     case TR2LevelNames.DORIA:
