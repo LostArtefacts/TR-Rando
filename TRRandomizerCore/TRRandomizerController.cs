@@ -455,6 +455,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.RandoEnemyDifficulty = value;
         }
 
+        public bool MaximiseDragonAppearance
+        {
+            get => LevelRandomizer.MaximiseDragonAppearance;
+            set => LevelRandomizer.MaximiseDragonAppearance = value;
+        }
+
         public bool RandomizeOutfits
         {
             get => LevelRandomizer.RandomizeOutfits;

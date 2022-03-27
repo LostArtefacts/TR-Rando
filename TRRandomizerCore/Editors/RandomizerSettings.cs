@@ -53,6 +53,7 @@ namespace TRRandomizerCore.Editors
         public bool ProtectMonks { get; set; }
         public bool DocileBirdMonsters { get; set; }
         public RandoDifficulty RandoEnemyDifficulty { get; set; }
+        public bool MaximiseDragonAppearance { get; set; }
         public bool GlitchedSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
         public bool PersistOutfits { get; set; }
@@ -122,6 +123,7 @@ namespace TRRandomizerCore.Editors
             ProtectMonks = config.GetBool(nameof(ProtectMonks), true);
             DocileBirdMonsters = config.GetBool(nameof(DocileBirdMonsters));
             RandoEnemyDifficulty = (RandoDifficulty)config.GetEnum(nameof(RandoEnemyDifficulty), typeof(RandoDifficulty), RandoDifficulty.Default);
+            MaximiseDragonAppearance = config.GetBool(nameof(MaximiseDragonAppearance));
 
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
@@ -216,6 +218,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(ProtectMonks)] = ProtectMonks;
             config[nameof(DocileBirdMonsters)] = DocileBirdMonsters;
             config[nameof(RandoEnemyDifficulty)] = RandoEnemyDifficulty;
+            config[nameof(MaximiseDragonAppearance)] = MaximiseDragonAppearance;
 
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;

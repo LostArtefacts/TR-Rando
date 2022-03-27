@@ -168,9 +168,16 @@ namespace TRRandomizerCore.Utilities
 
         public static List<List<TR2Entities>> GetPermittedCombinations(string lvl, TR2Entities entity, RandoDifficulty difficulty)
         {
-            if (_specialEnemyCombinations.ContainsKey(lvl) && _specialEnemyCombinations[lvl].ContainsKey(entity) && _specialEnemyCombinations[lvl][entity].ContainsKey(difficulty))
+            if (_specialEnemyCombinations.ContainsKey(lvl) && _specialEnemyCombinations[lvl].ContainsKey(entity))
             {
-                return _specialEnemyCombinations[lvl][entity][difficulty];
+                if (_specialEnemyCombinations[lvl][entity].ContainsKey(difficulty))
+                {
+                    return _specialEnemyCombinations[lvl][entity][difficulty];
+                }
+                else if (_specialEnemyCombinations[lvl][entity].ContainsKey(RandoDifficulty.DefaultOrNoRestrictions))
+                {
+                    return _specialEnemyCombinations[lvl][entity][RandoDifficulty.DefaultOrNoRestrictions];
+                }
             }
             return null;
         }
@@ -281,8 +288,6 @@ namespace TRRandomizerCore.Utilities
                     TR2Entities.Barracuda, TR2Entities.BlackMorayEel, TR2Entities.ScubaDiver,
                     TR2Entities.Shark, TR2Entities.YellowMorayEel
                 },
-            [TR2LevelNames.XIAN] =
-                new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [TR2LevelNames.FLOATER] =
                 new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [TR2LevelNames.HOME] =

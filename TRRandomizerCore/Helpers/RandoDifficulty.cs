@@ -2,6 +2,6 @@
 {
     public enum RandoDifficulty
     {
-        Default, NoRestrictions
+        Default, NoRestrictions, DefaultOrNoRestrictions
     }
 }
