@@ -27,6 +27,7 @@
         SFX,
         GlobeDisplay,
         RewardRooms,
-        VFX
+        VFX,
+        MaximumDragons
     }
 }

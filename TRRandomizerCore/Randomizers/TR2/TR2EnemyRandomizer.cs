@@ -212,7 +212,17 @@ namespace TRRandomizerCore.Randomizers
 
                 while (newEntities.Count < newEntities.Capacity)
                 {
-                    TR2Entities entity = allEnemies[_generator.Next(0, allEnemies.Count)];
+                    TR2Entities entity;
+                    if (Settings.MaximiseDragonAppearance
+                        && !newEntities.Contains(TR2Entities.MarcoBartoli)
+                        && TR2EnemyUtilities.IsEnemySupported(level.Name, TR2Entities.MarcoBartoli, Settings.RandoEnemyDifficulty))
+                    {
+                        entity = TR2Entities.MarcoBartoli;
+                    }
+                    else
+                    {
+                        entity = allEnemies[_generator.Next(0, allEnemies.Count)];
+                    }
 
                     // Check if the use of this enemy triggers an overwrite of the pool, for example
                     // the dragon in HSH. Null means nothing special has been defined.
