@@ -47,6 +47,7 @@
       {
         "Comments": "Add some extra barrels to prevent slope softlock.",
         "EMType": 24,
+        "IgnoreSectorEntities": true,
         "Locations": [
           {
             "X": 51252,
@@ -313,6 +314,25 @@
           "Y": -3584,
           "Z": 23040,
           "Room": 5
+        }
+      },
+
+      {
+        "EMType": 43,
+        "Types": [ 192 ],
+        "SectorLocations": [
+          {
+            "X": 65008,
+            "Y": -6144,
+            "Z": 63926,
+            "Room": 17
+          }
+        ],
+        "TargetLocation": {
+          "X": 67620,
+          "Y": -1792,
+          "Z": 68636,
+          "Room": 18
         }
       }
     ],
