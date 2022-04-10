@@ -3050,6 +3050,30 @@
     }
   ],
 
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If Marco has been added, move him in front of Buddha so he doesn't spawn partially in the wall.",
+        "ConditionType": 0,
+        "EntityIndex": 16,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 16,
+          "TargetLocation": {
+            "X": 53529,
+            "Y": 0,
+            "Z": 23785,
+            "Room": 104,
+            "Angle": 16384
+          }
+        }
+      ]
+    }
+  ],
+
   "Mirrored": [
     {
       "Comments": "Reposition the wall blades.",

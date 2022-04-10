@@ -1,6 +1,423 @@
 {
   "All": [],
 
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If Marco has been added, make a new room for him and move him to it.",
+        "ConditionType": 0,
+        "EntityIndex": 124,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "Comments": "Make a room suitable for Marco.",
+          "EMType": 125,
+          "LevelID": "XIAN.TR2",
+          "RoomNumber": 18,
+          "RectangleTexture": 1569,
+          "NewLocation": {
+            "X": 21504,
+            "Y": 2816,
+            "Z": 41984
+          },
+          "LinkedLocation": {
+            "X": 40448,
+            "Y": 2432,
+            "Z": 42496,
+            "Room": 138
+          }
+        },
+
+        {
+          "Comments": "Undo any flooding of the end room.",
+          "EMType": 3,
+          "RoomNumbers": [ 138 ],
+          "WaterTextures": [ 1574, 1645, 1646, 1647 ]
+        },
+
+        {
+          "Comments": "Make a copy of the original end room.",
+          "EMType": 123,
+          "RoomIndex": 138,
+          "NewLocation": {
+            "X": 21504,
+            "Y": 8448,
+            "Z": 59392
+          },
+          "LinkedLocation": {
+            "X": 23040,
+            "Y": 2816,
+            "Z": 60928,
+            "Room": 166
+          }
+        },
+
+        {
+          "Comments": "Make collisional portals between the new room and room 2.",
+          "EMType": 82,
+          "Portals": {
+            "138": {
+              "166": [
+                {
+                  "X": 40448,
+                  "Y": 2816,
+                  "Z": 43520
+                }
+              ]
+            },
+            "166": {
+              "138": [
+                {
+                  "X": 40448,
+                  "Y": 2816,
+                  "Z": 42496
+                }
+              ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Make a collisional portal between the arena and the new end room.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 23040,
+            "Y": 2816,
+            "Z": 60928,
+            "Room": 166
+          },
+          "Floor": {
+            "X": 23040,
+            "Y": 4608,
+            "Z": 60928,
+            "Room": 167
+          }
+        },
+
+        {
+          "Comments": "Make visibility portals.",
+          "EMType": 81,
+          "Portals": {
+            "166": {
+              "AdjoiningRoom": 138,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 19456,
+                  "Y": 1280,
+                  "Z": 1024
+                },
+                {
+                  "X": 18432,
+                  "Y": 1280,
+                  "Z": 1024
+                },
+                {
+                  "X": 18432,
+                  "Y": 2816,
+                  "Z": 1024
+                },
+                {
+                  "X": 19456,
+                  "Y": 2816,
+                  "Z": 1024
+                }
+              ]
+            },
+            "138": {
+              "AdjoiningRoom": 166,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 1280,
+                  "Z": 9216
+                },
+                {
+                  "X": 2048,
+                  "Y": 1280,
+                  "Z": 9216
+                },
+                {
+                  "X": 2048,
+                  "Y": 2816,
+                  "Z": 9216
+                },
+                {
+                  "X": 1024,
+                  "Y": 2816,
+                  "Z": 9216
+                }
+              ]
+            }
+          }
+        },
+
+        {
+          "Comments": "More viz portals.",
+          "EMType": 81,
+          "Portals": {
+            "167": {
+              "AdjoiningRoom": 166,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": 2816,
+                  "Z": 2048
+                },
+                {
+                  "X": 2048,
+                  "Y": 2816,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 2816,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 2816,
+                  "Z": 2048
+                }
+              ]
+            },
+            "166": {
+              "AdjoiningRoom": 167,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 2816,
+                  "Z": 18432
+                },
+                {
+                  "X": 1024,
+                  "Y": 2816,
+                  "Z": 19456
+                },
+                {
+                  "X": 2048,
+                  "Y": 2816,
+                  "Z": 19456
+                },
+                {
+                  "X": 2048,
+                  "Y": 2816,
+                  "Z": 18432
+                }
+              ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Remove faces for the portals.",
+          "EMType": 22,
+          "GeometryMap": {
+            "138": {
+              "Rectangles": [ 25 ]
+            },
+            "166": {
+              "Rectangles": [ 861, 88 ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Move Marco.",
+          "EMType": 44,
+          "EntityIndex": 124,
+          "TargetLocation": {
+            "X": 31744,
+            "Y": 2560,
+            "Z": 52224,
+            "Room": 166,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "Comments": "Steal a door and make it a trapdoor to exit the level.",
+          "EMType": "45",
+          "EntityIndex": 69,
+          "NewEntityType": 115
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 69,
+          "TargetLocation": {
+            "X": 23040,
+            "Y": 2816,
+            "Z": 60928,
+            "Room": 167,
+            "Angle": 16384
+          }
+        },
+        {
+          "Comments": "Delete its old trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 40448,
+              "Y": 4608,
+              "Z": 22016,
+              "Room": 70
+            }
+          ]
+        },
+        {
+          "Comments": "Dummy trigger for the trapdoor.",
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 8,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 69
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 23040,
+              "Y": 4608,
+              "Z": 60928,
+              "Room": 167
+            }
+          ]
+        },
+
+        {
+          "Comments": "Add heavy triggers so the dragon will open the trapdoor.",
+          "EMType": 61,
+          "Rooms": [ 166 ],
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 5,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 69
+              }
+            ]
+          }
+        },
+
+        {
+          "Comments": "Remove the end level trigger.",
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 40448,
+              "Y": 2432,
+              "Z": 42496,
+              "Room": 138
+            }
+          ],
+          "Action": {
+            "TrigAction": 7,
+            "Parameter": 0
+          }
+        },
+
+        {
+          "Comments": "Make a new end level trigger.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 23040,
+              "Y": 8064,
+              "Z": 68096,
+              "Room": 167
+            }
+          ],
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 0,
+            "TrigActionList": [
+              {
+                "TrigAction": 7
+              }
+            ]
+          }
+        },
+
+        {
+          "Comments": "Remove the Bartoli trigger from the detonator.",
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 37376,
+              "Y": 3840,
+              "Z": 18944,
+              "Room": 73
+            }
+          ],
+          "Action": {
+            "TrigAction": 0,
+            "Parameter": 124
+          }
+        },
+
+        {
+          "Comments": "Make a standalone trigger for Marco instead.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 40448,
+              "Y": -1024,
+              "Z": 37376,
+              "Room": 138
+            }
+          ],
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872,
+              "OneShot": true
+            },
+            "TrigType": 0,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 124
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+
   "Any": [
     [
       {

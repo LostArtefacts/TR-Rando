@@ -42,6 +42,245 @@
           }
         }
       ]
+    },
+
+    {
+      "Condition": {
+        "Comments": "If Marco has been added, make a new room for him and move him to it.",
+        "ConditionType": 0,
+        "EntityIndex": 75,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "Comments": "Make a room suitable for Marco.",
+          "EMType": 125,
+          "LevelID": "XIAN.TR2",
+          "RoomNumber": 18,
+          "RectangleTexture": 1678,
+          "NewLocation": {
+            "X": 11264,
+            "Y": -7424,
+            "Z": 40960
+          },
+          "LinkedLocation": {
+            "X": 22016,
+            "Y": -7424,
+            "Z": 60928,
+            "Room": 161
+          }
+        },
+
+        {
+          "Comments": "Make collisional portals.",
+          "EMType": 82,
+          "Portals": {
+            "161": {
+              "172": [
+                {
+                  "X": 22016,
+                  "Y": -7424,
+                  "Z": 59904
+                }
+              ]
+            },
+            "172": {
+              "161": [
+                {
+                  "X": 22016,
+                  "Y": -7424,
+                  "Z": 60928
+                }
+              ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Make visibility portals.",
+          "EMType": 81,
+          "Portals": {
+            "172": {
+              "AdjoiningRoom": 161,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 10240,
+                  "Y": -9472,
+                  "Z": 19456
+                },
+                {
+                  "X": 11264,
+                  "Y": -9472,
+                  "Z": 19456
+                },
+                {
+                  "X": 11264,
+                  "Y": -7424,
+                  "Z": 19456
+                },
+                {
+                  "X": 10240,
+                  "Y": -7424,
+                  "Z": 19456
+                }
+              ]
+            },
+            "161": {
+              "AdjoiningRoom": 172,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": -9472,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": -9472,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": -7424,
+                  "Z": 1024
+                },
+                {
+                  "X": 3072,
+                  "Y": -7424,
+                  "Z": 1024
+                }
+              ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Adjust faces for the portals.",
+          "EMType": 23,
+          "Modifications": [
+            {
+              "FaceType": 0,
+              "RoomNumber": 172,
+              "FaceIndex": 981,
+              "VertexChanges": {
+                "2": {
+                  "Y": -512
+                },
+                "3": {
+                  "Y": -512
+                }
+              }
+            }
+          ]
+        },
+
+        {
+          "Comments": "Remove a face for the portals.",
+          "EMType": 22,
+          "GeometryMap": {
+            "172": {
+              "Rectangles": [ 963 ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Move Marco.",
+          "EMType": 44,
+          "EntityIndex": 75,
+          "TargetLocation": {
+            "X": 21504,
+            "Y": -7680,
+            "Z": 51200,
+            "Room": 172,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "Comments": "Add heavy triggers so the dragon will end the level.",
+          "EMType": 61,
+          "Rooms": [ 172 ],
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 5,
+            "TrigActionList": [
+              {
+                "TrigAction": 7
+              }
+            ]
+          }
+        },
+
+        {
+          "Comments": "Remove the normal end level trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 22016,
+              "Z": 64000,
+              "Room": 40
+            },
+            {
+              "X": 22167,
+              "Y": -7424,
+              "Z": 61012,
+              "Room": 161
+            }
+          ]
+        },
+
+        {
+          "Comments": "Trigger for the final door.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 23040,
+              "Y": -7424,
+              "Z": 61952,
+              "Room": 161
+            },
+            {
+              "X": 22016,
+              "Y": -7424,
+              "Z": 61952,
+              "Room": 161
+            },
+            {
+              "X": 20922,
+              "Y": -7424,
+              "Z": 61952,
+              "Room": 161
+            }
+          ],
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872,
+              "OneShot": true
+            },
+            "TrigType": 0,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 140
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
 
@@ -2048,6 +2287,7 @@
     "1745": 1761,
     "1688": 1704,
     "1863": 1879,
-    "1709": 1725
+    "1709": 1725,
+    "1678": 1694
   }
 }

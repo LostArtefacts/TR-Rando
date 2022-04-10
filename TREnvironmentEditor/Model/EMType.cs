@@ -42,6 +42,7 @@
         AppendTriggerActionFunction = 68,
         ConvertTrigger = 69,
         KillLara = 70,
+        RemoveTriggerAction = 71,
 
         // Portal types 81-100
         VisibilityPortal = 81,
@@ -58,6 +59,7 @@
         ModifyOverlaps = 122,
         CopyRoom = 123,
         CopyVertexAttributes = 124,
+        ImportRoom = 125,
 
         // Models
         ImportModel = 141,

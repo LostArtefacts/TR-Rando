@@ -213,9 +213,11 @@ namespace TRRandomizerCore.Randomizers
                 while (newEntities.Count < newEntities.Capacity)
                 {
                     TR2Entities entity;
+                    // Try to enforce Marco's appearance, but only if this isn't the final packing attempt
                     if (Settings.MaximiseDragonAppearance
                         && !newEntities.Contains(TR2Entities.MarcoBartoli)
-                        && TR2EnemyUtilities.IsEnemySupported(level.Name, TR2Entities.MarcoBartoli, Settings.RandoEnemyDifficulty))
+                        && TR2EnemyUtilities.IsEnemySupported(level.Name, TR2Entities.MarcoBartoli, Settings.RandoEnemyDifficulty)
+                        && reduceEnemyCountBy == 0)
                     {
                         entity = TR2Entities.MarcoBartoli;
                     }
@@ -224,14 +226,28 @@ namespace TRRandomizerCore.Randomizers
                         entity = allEnemies[_generator.Next(0, allEnemies.Count)];
                     }
 
+                    int adjustmentCount = TR2EnemyUtilities.GetTargetEnemyAdjustmentCount(level.Name, entity);
+                    if (adjustmentCount != 0)
+                    {
+                        while (newEntities.Count >= newEntities.Capacity + adjustmentCount)
+                        {
+                            newEntities.RemoveAt(newEntities.Count - 1);
+                        }
+                        newEntities.Capacity += adjustmentCount;
+                    }
+
                     // Check if the use of this enemy triggers an overwrite of the pool, for example
                     // the dragon in HSH. Null means nothing special has been defined.
                     List<List<TR2Entities>> restrictedCombinations = TR2EnemyUtilities.GetPermittedCombinations(level.Name, entity, Settings.RandoEnemyDifficulty);
                     if (restrictedCombinations != null)
                     {
-                        newEntities.Clear();
-                        newEntities.AddRange(restrictedCombinations[_generator.Next(0, restrictedCombinations.Count)]);
-                        chickenGuiser = TR2Entities.BirdMonster; // Undo any guising
+                        do
+                        {
+                            // Pick a combination, ensuring we honour docile bird monsters if present
+                            newEntities.Clear();
+                            newEntities.AddRange(restrictedCombinations[_generator.Next(0, restrictedCombinations.Count)]);
+                        }
+                        while (Settings.DocileBirdMonsters && newEntities.Contains(TR2Entities.BirdMonster) && chickenGuisers.All(g => newEntities.Contains(g)));
                         break;
                     }
 
@@ -344,6 +360,7 @@ namespace TRRandomizerCore.Randomizers
                 Available = availableEnemyTypes,
                 Droppable = droppableEnemies,
                 Water = waterEnemies,
+                All = new List<TR2Entities>(availableEnemyTypes),
                 BirdMonsterGuiser = TR2Entities.MaskedGoon1 // If randomizing natively, this will only apply to Ice Palace
             });
         }
@@ -707,9 +724,9 @@ namespace TRRandomizerCore.Randomizers
 
             AddRandomLaraClone(enemies, TR2Entities.Yeti, laraClones, chance);
 
+            List<TRModel> levelModels = level.Data.Models.ToList();
             if (laraClones.Count > 0)
             {
-                List<TRModel> levelModels = level.Data.Models.ToList();
                 TRModel laraModel = levelModels.Find(m => m.ID == (uint)TR2Entities.Lara);
                 foreach (TR2Entities enemyType in laraClones)
                 {
@@ -719,11 +736,25 @@ namespace TRRandomizerCore.Randomizers
                     enemyModel.NumMeshes = laraModel.NumMeshes;
                 }
             }
+
+            if (enemies.All.Contains(TR2Entities.MarcoBartoli)
+                && enemies.All.Contains(TR2Entities.Winston)
+                && _generator.Next(0, chance) == 0)
+            {
+                // Make Marco look and behave like Winston, until Lara gets too close
+                TRModel marcoModel = levelModels.Find(m => m.ID == (uint)TR2Entities.MarcoBartoli);
+                TRModel winnieModel = levelModels.Find(m => m.ID == (uint)TR2Entities.Winston);
+                marcoModel.Animation = winnieModel.Animation;
+                marcoModel.FrameOffset = winnieModel.FrameOffset;
+                marcoModel.MeshTree = winnieModel.MeshTree;
+                marcoModel.StartingMesh = winnieModel.StartingMesh;
+                marcoModel.NumMeshes = winnieModel.NumMeshes;
+            }
         }
 
         private void AddRandomLaraClone(EnemyRandomizationCollection enemies, TR2Entities enemyType, List<TR2Entities> cloneCollection, int chance)
         {
-            if (enemies.Available.Contains(enemyType) && _generator.Next(0, chance) == 0)
+            if (enemies.All.Contains(enemyType) && _generator.Next(0, chance) == 0)
             {
                 cloneCollection.Add(enemyType);
             }
@@ -861,12 +892,14 @@ namespace TRRandomizerCore.Randomizers
                         else
                         {
                             // The import worked, so randomize the entities based on what we now have in place.
-                            //System.Diagnostics.Debug.WriteLine(level.Name + ": " + string.Join(", ", importedCollection.EntitiesToImport));
+                            // All refers to the unmodified list so that checks such as those in RandomizeEnemyMeshes
+                            // can refer to the original list, as actual entity randomization may remove models.
                             EnemyRandomizationCollection enemies = new EnemyRandomizationCollection
                             {
                                 Available = importedCollection.EntitiesToImport,
                                 Droppable = TR2EntityUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.Settings.ProtectMonks),
-                                Water = TR2EntityUtilities.FilterWaterEnemies(importedCollection.EntitiesToImport)
+                                Water = TR2EntityUtilities.FilterWaterEnemies(importedCollection.EntitiesToImport),
+                                All = new List<TR2Entities>(importedCollection.EntitiesToImport)
                             };
 
                             if (_outer.Settings.DocileBirdMonsters && importedCollection.BirdMonsterGuiser != TR2Entities.BirdMonster)
@@ -907,6 +940,7 @@ namespace TRRandomizerCore.Randomizers
             internal List<TR2Entities> Available { get; set; }
             internal List<TR2Entities> Droppable { get; set; }
             internal List<TR2Entities> Water { get; set; }
+            internal List<TR2Entities> All { get; set; }
             internal TR2Entities BirdMonsterGuiser { get; set; }
         }
     }

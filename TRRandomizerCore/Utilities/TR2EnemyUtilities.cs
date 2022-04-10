@@ -29,6 +29,17 @@ namespace TRRandomizerCore.Utilities
             return 0;
         }
 
+        // Similar to above, but allows for a collection to be resized if a specific
+        // enemy model is chosen.
+        public static int GetTargetEnemyAdjustmentCount(string lvlName, TR2Entities enemy)
+        {
+            if (_targetEnemyAdjustmentCount.ContainsKey(enemy) && _targetEnemyAdjustmentCount[enemy].ContainsKey(lvlName))
+            {
+                return _targetEnemyAdjustmentCount[enemy][lvlName];
+            }
+            return 0;
+        }
+
         public static bool IsWaterEnemyRequired(TR2CombinedLevel level)
         {
             foreach (TR2Entity entityInstance in level.Data.Entities)
@@ -266,10 +277,6 @@ namespace TRRandomizerCore.Utilities
         // These enemies are unsupported due to technical reasons, NOT difficulty reasons.
         private static readonly Dictionary<string, List<TR2Entities>> _unsupportedEnemiesTechnical = new Dictionary<string, List<TR2Entities>>
         {
-            [TR2LevelNames.VENICE] =
-                new List<TR2Entities> { TR2Entities.MarcoBartoli },
-            [TR2LevelNames.BARTOLI] =
-                new List<TR2Entities> { TR2Entities.MarcoBartoli },
             // #192 The Barkhang/Opera House freeze appears to be caused by dead floating water creatures, so they're all banished
             [TR2LevelNames.OPERA] =
                 new List<TR2Entities>
@@ -277,10 +284,6 @@ namespace TRRandomizerCore.Utilities
                     TR2Entities.Barracuda, TR2Entities.BlackMorayEel, TR2Entities.ScubaDiver,
                     TR2Entities.Shark, TR2Entities.YellowMorayEel
                 },
-            [TR2LevelNames.DA] =
-                new List<TR2Entities> { TR2Entities.MarcoBartoli },
-            [TR2LevelNames.LQ] =
-                new List<TR2Entities> { TR2Entities.MarcoBartoli },
             // #192 The Barkhang/Opera House freeze appears to be caused by dead floating water creatures, so they're all banished
             [TR2LevelNames.MONASTERY] =
                 new List<TR2Entities>
@@ -288,8 +291,6 @@ namespace TRRandomizerCore.Utilities
                     TR2Entities.Barracuda, TR2Entities.BlackMorayEel, TR2Entities.ScubaDiver,
                     TR2Entities.Shark, TR2Entities.YellowMorayEel
                 },
-            [TR2LevelNames.FLOATER] =
-                new List<TR2Entities> { TR2Entities.MarcoBartoli },
             [TR2LevelNames.HOME] =
                 // #148 Although we say here that the Doberman, MaskedGoons and StickGoons
                 // aren't supported, this is only for cross-level purposes because we
@@ -432,6 +433,19 @@ namespace TRRandomizerCore.Utilities
             [TR2LevelNames.CHICKEN] = 1,
             [TR2LevelNames.FLOATER] = 1,
             [TR2LevelNames.LAIR] = 1
+        };
+
+        // Trigger a redim of the imported enemy count if one of these entities is selected
+        private static readonly Dictionary<TR2Entities, Dictionary<string, int>> _targetEnemyAdjustmentCount = new Dictionary<TR2Entities, Dictionary<string, int>>
+        {
+            [TR2Entities.MarcoBartoli] = new Dictionary<string, int>
+            {
+                [TR2LevelNames.VENICE] = -2,
+                [TR2LevelNames.BARTOLI] = -2,
+                [TR2LevelNames.OPERA] = -2,
+                [TR2LevelNames.DA] = -1,
+                [TR2LevelNames.TIBET] = -1
+            }
         };
 
         public static List<TR2Entities> GetEnemyGuisers(TR2Entities entity)

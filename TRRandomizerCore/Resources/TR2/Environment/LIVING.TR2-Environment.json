@@ -15,6 +15,412 @@
     }
   ],
 
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If Marco has been added, make a new room for him and move him to it.",
+        "ConditionType": 0,
+        "EntityIndex": 3,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "Comments": "Make a room suitable for Marco.",
+          "EMType": 125,
+          "LevelID": "XIAN.TR2",
+          "RoomNumber": 18,
+          "RectangleTexture": 1567,
+          "NewLocation": {
+            "X": 77824,
+            "Y": 1024,
+            "Z": 90112
+          },
+          "LinkedLocation": {
+            "X": 79360,
+            "Y": -512,
+            "Z": 90624,
+            "Room": 2
+          }
+        },
+
+        {
+          "Comments": "Make collisional portals between the new room and room 2.",
+          "EMType": 82,
+          "Portals": {
+            "2": {
+              "82": [
+                {
+                  "X": 79360,
+                  "Y": 0,
+                  "Z": 91648
+                },
+                {
+                  "X": 80384,
+                  "Y": 0,
+                  "Z": 91648
+                },
+                {
+                  "X": 81408,
+                  "Y": 0,
+                  "Z": 91648
+                },
+                {
+                  "X": 82432,
+                  "Y": 0,
+                  "Z": 91648
+                }
+              ]
+            },
+            "82": {
+              "2": [
+                {
+                  "X": 79360,
+                  "Y": 1024,
+                  "Z": 90624
+                },
+                {
+                  "X": 80384,
+                  "Y": 1024,
+                  "Z": 90624
+                },
+                {
+                  "X": 81408,
+                  "Y": 1024,
+                  "Z": 90624
+                },
+                {
+                  "X": 82432,
+                  "Y": 1024,
+                  "Z": 90624
+                }
+              ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Make visibility portals.",
+          "EMType": 81,
+          "Portals": {
+            "82": {
+              "AdjoiningRoom": 2,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 5120,
+                  "Y": -3840,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -3840,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -512,
+                  "Z": 1024
+                },
+                {
+                  "X": 5120,
+                  "Y": -512,
+                  "Z": 1024
+                }
+              ]
+            },
+            "2": {
+              "AdjoiningRoom": 82,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": -3584,
+                  "Z": 14336
+                },
+                {
+                  "X": 6144,
+                  "Y": -3584,
+                  "Z": 14336
+                },
+                {
+                  "X": 6144,
+                  "Y": -512,
+                  "Z": 14336
+                },
+                {
+                  "X": 2048,
+                  "Y": -512,
+                  "Z": 14336
+                }
+              ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Adjust faces for the portals.",
+          "EMType": 23,
+          "Modifications": [
+            {
+              "FaceType": 0,
+              "RoomNumber": 82,
+              "FaceIndex": 178,
+              "VertexChanges": {
+                "2": {
+                  "Y": -1280
+                },
+                "3": {
+                  "Y": -1280
+                }
+              }
+            },
+            {
+              "FaceType": 0,
+              "RoomNumber": 82,
+              "FaceIndex": 138,
+              "VertexChanges": {
+                "2": {
+                  "Y": -1280
+                },
+                "3": {
+                  "Y": -1280
+                }
+              }
+            },
+            {
+              "FaceType": 0,
+              "RoomNumber": 82,
+              "FaceIndex": 97,
+              "VertexChanges": {
+                "2": {
+                  "Y": -1280
+                },
+                "3": {
+                  "Y": -1280
+                }
+              }
+            },
+            {
+              "FaceType": 0,
+              "RoomNumber": 82,
+              "FaceIndex": 6,
+              "VertexChanges": {
+                "2": {
+                  "Y": -1280
+                },
+                "3": {
+                  "Y": -1280
+                }
+              }
+            },
+            {
+              "FaceType": 0,
+              "RoomNumber": 82,
+              "FaceIndex": 179,
+              "VertexChanges": {
+                "0": {
+                  "Y": -256
+                },
+                "1": {
+                  "Y": 1024
+                }
+              }
+            },
+            {
+              "FaceType": 0,
+              "RoomNumber": 82,
+              "FaceIndex": 139,
+              "VertexChanges": {
+                "0": {
+                  "Y": 1024
+                },
+                "1": {
+                  "Y": 1536
+                }
+              }
+            },
+            {
+              "FaceType": 0,
+              "RoomNumber": 82,
+              "FaceIndex": 98,
+              "VertexChanges": {
+                "0": {
+                  "Y": 1536
+                },
+                "1": {
+                  "Y": 1792
+                }
+              }
+            }
+          ]
+        },
+
+        {
+          "Comments": "Remove some faces for the portals.",
+          "EMType": 22,
+          "GeometryMap": {
+            "82": {
+              "Rectangles": [ 7 ]
+            },
+            "2": {
+              "Rectangles": [ 81, 129, 175, 219, 80, 128, 174 ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Add a static meshe.",
+          "EMType": 24,
+          "IgnoreSectorEntities": true,
+          "Locations": [
+            {
+              "X": 88060,
+              "Y": 768,
+              "Z": 100355,
+              "Room": 82,
+              "Angle": 0
+            }
+          ],
+          "Mesh": {
+            "MeshID": 29,
+            "Intensity1": 6400,
+            "Intensity2": 6400
+          }
+        },
+
+        {
+          "Comments": "Move Marco.",
+          "EMType": 44,
+          "EntityIndex": 3,
+          "TargetLocation": {
+            "X": 88576,
+            "Y": 1024,
+            "Z": 100864,
+            "Room": 82,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "Comments": "Add some bait.",
+          "EMType": 51,
+          "TypeID": 150,
+          "Location": {
+            "X": 88060,
+            "Y": 512,
+            "Z": 100355,
+            "Room": 82
+          }
+        },
+
+        {
+          "Comments": "Steal a door and make it a trapdoor just after the flipmap room.",
+          "EMType": "45",
+          "EntityIndex": 36,
+          "NewEntityType": 114
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 36,
+          "TargetLocation": {
+            "X": 61952,
+            "Y": 768,
+            "Z": 61952,
+            "Room": 15,
+            "Angle": 16384
+          }
+        },
+        {
+          "Comments": "Delete its old trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 68096,
+              "Y": -256,
+              "Z": 52736,
+              "Room": 16
+            }
+          ]
+        },
+        {
+          "Comments": "Get rid of the old switch for it too.",
+          "EMType": "45",
+          "EntityIndex": 35,
+          "NewEntityType": 150
+        },
+        {
+          "Comments": "Dummy trigger for the trapdoor.",
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 8,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 36
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 61952,
+              "Y": 4608,
+              "Z": 61952,
+              "Room": 15
+            }
+          ]
+        },
+
+        {
+          "Comments": "Add heavy triggers so the dragon will open the trapdoor.",
+          "EMType": 61,
+          "Rooms": [ 82 ],
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 5,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 36
+              }
+            ]
+          }
+        },
+
+        {
+          "Comments": "Add a camera for above",
+          "EMType": 65,
+          "Camera": {
+            "X": 63827,
+            "Y": 5157,
+            "Z": 56005,
+            "Room": 15,
+            "Flags": 0
+          },
+          "LookAtItem": 36,
+          "AttachToRooms": [ 82 ],
+          "CameraAction": {
+            "Value": 2
+          }
+        }
+      ]
+    }
+  ],
+
   "Any": [
     [
       {

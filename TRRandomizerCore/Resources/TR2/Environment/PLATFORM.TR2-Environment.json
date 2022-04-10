@@ -31,6 +31,326 @@
     }
   ],
 
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Do we have the dragon model available?",
+        "ConditionType": 41,
+        "ModelID": 40
+      },
+      "OnTrue": [
+        {
+          "Comments": "Make a room suitable for Marco.",
+          "EMType": 125,
+          "LevelID": "XIAN.TR2",
+          "RoomNumber": 18,
+          "RectangleTexture": 1925,
+          "NewLocation": {
+            "X": 64512,
+            "Y": 8192,
+            "Z": 37888
+          },
+          "LinkedLocation": {
+            "X": 66048,
+            "Y": 4864,
+            "Z": 57856,
+            "Room": 95
+          }
+        },
+
+        {
+          "Comments": "Make collisional portals.",
+          "EMType": 82,
+          "Portals": {
+            "95": {
+              "96": [
+                {
+                  "X": 66048,
+                  "Y": 4864,
+                  "Z": 56832
+                }
+              ]
+            },
+            "96": {
+              "95": [
+                {
+                  "X": 66048,
+                  "Y": 8192,
+                  "Z": 57856
+                }
+              ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Make visibility portals.",
+          "EMType": 81,
+          "Portals": {
+            "95": {
+              "AdjoiningRoom": 96,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": 3840,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 3840,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 4864,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": 4864,
+                  "Z": 1024
+                }
+              ]
+            },
+            "96": {
+              "AdjoiningRoom": 95,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 3840,
+                  "Z": 19456
+                },
+                {
+                  "X": 2048,
+                  "Y": 3840,
+                  "Z": 19456
+                },
+                {
+                  "X": 2048,
+                  "Y": 4864,
+                  "Z": 19456
+                },
+                {
+                  "X": 1024,
+                  "Y": 4864,
+                  "Z": 19456
+                }
+              ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Make a ladder to get in and out.",
+          "EMType": 0,
+          "Location": {
+            "X": 66048,
+            "Y": 8192,
+            "Z": 56832,
+            "Room": 96
+          },
+          "IsPositiveZ": true,
+          "TextureMap": {
+            "1911": {
+              "96": {
+                "Rectangles": [ 954, 972 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Remove faces for the portals.",
+          "EMType": 22,
+          "GeometryMap": {
+            "95": {
+              "Rectangles": [ 3 ]
+            },
+            "96": {
+              "Rectangles": [ 990 ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Turn a door into Marco.",
+          "EMType": 45,
+          "EntityIndex": 116,
+          "NewEntityType": 40
+        },
+
+        {
+          "Comments": "Move Marco.",
+          "EMType": 44,
+          "EntityIndex": 116,
+          "TargetLocation": {
+            "X": 75264,
+            "Y": 8192,
+            "Z": 48128,
+            "Room": 96,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "Comments": "Add some static meshes.",
+          "EMType": 24,
+          "IgnoreSectorEntities": true,
+          "Locations": [
+            {
+              "X": 74749,
+              "Y": 11776,
+              "Z": 48130,
+              "Room": 96,
+              "Angle": 0
+            }
+          ],
+          "Mesh": {
+            "MeshID": 10,
+            "Intensity1": 6400,
+            "Intensity2": 6400
+          }
+        },
+        {
+          "EMType": 24,
+          "Locations": [
+            {
+              "X": 70144,
+              "Y": 8192,
+              "Z": 51712,
+              "Room": 96,
+              "Angle": 16384
+            },
+            {
+              "X": 70144,
+              "Y": 8192,
+              "Z": 44544,
+              "Room": 96,
+              "Angle": 16384
+            },
+            {
+              "X": 79360,
+              "Y": 8192,
+              "Z": 44544,
+              "Room": 96,
+              "Angle": -16384
+            },
+            {
+              "X": 79360,
+              "Y": 8192,
+              "Z": 51712,
+              "Room": 96,
+              "Angle": -16384
+            }
+          ],
+          "Mesh": {
+            "MeshID": 37,
+            "Intensity1": 6400,
+            "Intensity2": 6400
+          }
+        },
+
+        {
+          "Comments": "Add heavy triggers so the dragon will trigger the end-level enemies and monk.",
+          "EMType": 61,
+          "Rooms": [ 96 ],
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 5,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 114
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 115
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 117
+              }
+            ]
+          }
+        },
+
+        {
+          "Comments": "Add a camera for above.",
+          "EMType": 65,
+          "Camera": {
+            "X": 59626,
+            "Y": 2251,
+            "Z": 52893,
+            "Room": 77,
+            "Flags": 0
+          },
+          "LookAtItem": 117,
+          "AttachToRooms": [ 96 ],
+          "CameraAction": {
+            "Value": 2
+          }
+        },
+
+        {
+          "Comments": "Remove the old enemy trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 54784,
+              "Y": 3072,
+              "Z": 61952,
+              "Room": 5
+            }
+          ]
+        },
+
+        {
+          "Comments": "Trigger Marco.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 61952,
+              "Y": 5632,
+              "Z": 61952,
+              "Room": 94
+            }
+          ],
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872,
+              "OneShot": true
+            },
+            "TrigType": 0,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 116
+              },
+              {
+                "TrigAction": 8,
+                "Parameter": 55
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+
   "NonPurist": [
     {
       "Comments": "Adds some ladders to allow returning to the initial area before the acid.",
