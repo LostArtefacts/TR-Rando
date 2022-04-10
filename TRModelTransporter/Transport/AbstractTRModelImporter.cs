@@ -50,7 +50,7 @@ namespace TRModelTransporter.Transport
             }
 
             // Check for alias duplication
-            ValidateDefinitionList(existingEntities);
+            ValidateDefinitionList(existingEntities, standardModelDefinitions);
 
             if (SortModels)
             {
@@ -153,7 +153,7 @@ namespace TRModelTransporter.Transport
             EntitiesToImport = cleanedEntities;
         }
 
-        private void ValidateDefinitionList(List<E> modelEntities)
+        private void ValidateDefinitionList(List<E> modelEntities, List<D> importDefinitions)
         {
             Dictionary<E, List<E>> detectedAliases = new Dictionary<E, List<E>>();
             foreach (E entity in modelEntities)
@@ -171,14 +171,25 @@ namespace TRModelTransporter.Transport
 
             foreach (E masterEntity in detectedAliases.Keys)
             {
-                if (detectedAliases[masterEntity].Count > 1 && !Data.IsAliasDuplicatePermitted(masterEntity))
+                if (detectedAliases[masterEntity].Count > 1)
                 {
-                    throw new TransportException(string.Format
-                    (
-                        "Only one alias per entity can exist in the same level. [{0}] were found as aliases for {1}.",
-                        string.Join(", ", detectedAliases[masterEntity]),
-                        masterEntity.ToString()
-                    ));
+                    if (!Data.IsAliasDuplicatePermitted(masterEntity))
+                    {
+                        throw new TransportException(string.Format
+                        (
+                            "Only one alias per entity can exist in the same level. [{0}] were found as aliases for {1}.",
+                            string.Join(", ", detectedAliases[masterEntity]),
+                            masterEntity.ToString()
+                        ));
+                    }
+                    else if (Data.AliasPriority.ContainsKey(masterEntity))
+                    {
+                        // If we are importing two aliases such as LaraMiscAnim_Unwater and LaraMiscAnim_Xian,
+                        // allow the priority list to define exactly what imports. Otherwise while the prioritised
+                        // model will be imported, other aspects such as texture import will try to import both.
+                        E prioritisedType = Data.AliasPriority[masterEntity];
+                        importDefinitions.RemoveAll(d => detectedAliases[masterEntity].Contains(d.Alias) && !Equals(d.Alias, prioritisedType));
+                    }
                 }
             }
         }

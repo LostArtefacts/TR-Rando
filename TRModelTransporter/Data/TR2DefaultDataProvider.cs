@@ -76,7 +76,7 @@ namespace TRModelTransporter.Data
 
         public bool IsOverridePermitted(TR2Entities entity)
         {
-            return false;
+            return _permittedOverrides.Contains(entity);
         }
 
         public IEnumerable<TR2Entities> GetUnsafeModelReplacements()
@@ -259,6 +259,11 @@ namespace TRModelTransporter.Data
         private static readonly List<TR2Entities> _permittedAliasDuplicates = new List<TR2Entities>
         {
             TR2Entities.LaraMiscAnim_H
+        };
+
+        private static readonly List<TR2Entities> _permittedOverrides = new List<TR2Entities>
+        {
+            TR2Entities.MarcoBartoli
         };
 
         private static readonly List<TR2Entities> _unsafeModelReplacements = new List<TR2Entities>
