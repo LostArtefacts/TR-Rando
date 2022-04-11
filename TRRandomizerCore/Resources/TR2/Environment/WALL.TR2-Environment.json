@@ -18,6 +18,92 @@
     }
   ],
 
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If enemy 2 is Marco, move him to a better position.",
+        "ConditionType": 0,
+        "EntityIndex": 2,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 2,
+          "TargetLocation": {
+            "X": 31744,
+            "Y": 0,
+            "Z": 34816,
+            "Room": 0,
+            "Angle": 16384
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Same check for enemy 13.",
+        "ConditionType": 0,
+        "EntityIndex": 13,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 13,
+          "TargetLocation": {
+            "X": 31744,
+            "Y": 0,
+            "Z": 34816,
+            "Room": 0,
+            "Angle": 16384
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "And the same for 12, but only if the area is flooded.",
+        "ConditionType": 0,
+        "EntityIndex": 12,
+        "EntityType": 40,
+        "And": [
+          {
+            "ConditionType": 21,
+            "RoomIndex": 1,
+            "Negate": true
+          }
+        ],
+        "OnTrue": [
+          {
+            "EMType": 44,
+            "EntityIndex": 12,
+            "TargetLocation": {
+              "X": 31744,
+              "Y": 0,
+              "Z": 34816,
+              "Room": 0,
+              "Angle": 16384
+            }
+          }
+        ]
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 13,
+          "TargetLocation": {
+            "X": 32256,
+            "Y": 0,
+            "Z": 33280,
+            "Room": 0,
+            "Angle": -16384
+          }
+        }
+      ]
+    }
+  ],
+
   "NonPurist": [
     {
       "Comments": "Adds a ladder to allow returning to the top of the first guardhouse after dropping down",

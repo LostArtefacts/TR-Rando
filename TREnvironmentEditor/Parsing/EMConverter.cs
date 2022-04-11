@@ -112,6 +112,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMConvertTriggerFunction>(jo.ToString(), _resolver);
                 case EMType.KillLara:
                     return JsonConvert.DeserializeObject<EMKillLaraFunction>(jo.ToString(), _resolver);
+                case EMType.RemoveTriggerAction:
+                    return JsonConvert.DeserializeObject<EMRemoveTriggerActionFunction>(jo.ToString(), _resolver);
 
                 // Portals
                 case EMType.VisibilityPortal:
@@ -138,6 +140,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMCopyRoomFunction>(jo.ToString(), _resolver);
                 case EMType.CopyVertexAttributes:
                     return JsonConvert.DeserializeObject<EMCopyVertexAttributesFunction>(jo.ToString(), _resolver);
+                case EMType.ImportRoom:
+                    return JsonConvert.DeserializeObject<EMImportRoomFunction>(jo.ToString(), _resolver);
 
                 // Models
                 case EMType.ImportModel:

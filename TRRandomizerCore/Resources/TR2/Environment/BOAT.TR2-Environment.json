@@ -1,6 +1,310 @@
 {
   "All": [],
 
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If Marco has been added, make a new room for him and move him to it. This changes the way the level must be finished.",
+        "ConditionType": 0,
+        "EntityIndex": 115,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "Comments": "Make a room suitable for Marco.",
+          "EMType": 125,
+          "LevelID": "XIAN.TR2",
+          "RoomNumber": 18,
+          "NewLocation": {
+            "X": 58368,
+            "Y": 5376,
+            "Z": 65536
+          },
+          "LinkedLocation": {
+            "X": 59910,
+            "Y": 512,
+            "Z": 67092,
+            "Room": 147
+          }
+        },
+
+        {
+          "Comments": "Make a collisional portal for the new room.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 59904,
+            "Y": 512,
+            "Z": 67072,
+            "Room": 147
+          },
+          "Floor": {
+            "X": 59904,
+            "Y": 5376,
+            "Z": 67072,
+            "Room": 155
+          }
+        },
+
+        {
+          "Comments": "Make visibility portals.",
+          "EMType": 81,
+          "Portals": {
+            "155": {
+              "AdjoiningRoom": 147,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": 512,
+                  "Z": 2048
+                },
+                {
+                  "X": 1024,
+                  "Y": 512,
+                  "Z": 2048
+                },
+                {
+                  "X": 1024,
+                  "Y": 512,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": 512,
+                  "Z": 1024
+                }
+              ]
+            },
+            "147": {
+              "AdjoiningRoom": 155,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 4096,
+                  "Y": 512,
+                  "Z": 4096
+                },
+                {
+                  "X": 3072,
+                  "Y": 512,
+                  "Z": 4096
+                },
+                {
+                  "X": 3072,
+                  "Y": 512,
+                  "Z": 5120
+                },
+                {
+                  "X": 4096,
+                  "Y": 512,
+                  "Z": 5120
+                }
+              ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Make a ladder to get in and out.",
+          "EMType": 0,
+          "Location": {
+            "X": 59904,
+            "Y": 5376,
+            "Z": 67072,
+            "Room": 155
+          },
+          "IsNegativeZ": true,
+          "TextureMap": {
+            "1565": {
+              "155": {
+                "Rectangles": [ 5, 6, 7 ]
+              }
+            }
+          }
+        },
+
+        {
+          "Comments": "Remove a couple of faces for the portal.",
+          "EMType": 22,
+          "GeometryMap": {
+            "155": {
+              "Rectangles": [ 1 ]
+            },
+            "147": {
+              "Rectangles": [ 43 ]
+            }
+          }
+        },
+
+        {
+          "Comments": "Convert a door into a trapdoor, move it to the new room and add a trapdoor trigger.",
+          "EMType": "45",
+          "EntityIndex": 64,
+          "NewEntityType": 114
+        },
+        {
+          "EMType": 48,
+          "EntityIndex": 64,
+          "Flags": 0
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 64,
+          "TargetLocation": {
+            "X": 59904,
+            "Y": 512,
+            "Z": 67072,
+            "Room": 155,
+            "Angle": 16384
+          }
+        },
+        {
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 8,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 64
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 59904,
+              "Y": 5376,
+              "Z": 67072,
+              "Room": 155
+            }
+          ]
+        },
+
+        {
+          "Comments": "Move Marco.",
+          "EMType": 44,
+          "EntityIndex": 115,
+          "TargetLocation": {
+            "X": 69120,
+            "Y": 5120,
+            "Z": 76288,
+            "Room": 155,
+            "Angle": -16384
+          }
+        },
+        {
+          "Comments": "Add heavy triggers to open the final doors.",
+          "EMType": 61,
+          "Rooms": [ 155 ],
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872
+            },
+            "TrigType": 5,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 73
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 74
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 76
+              }
+            ]
+          }
+        },
+
+        {
+          "Comments": "Add a camera for above (re-use the original).",
+          "EMType": 65,
+          "CameraIndex": 7,
+          "LookAtItem": 75,
+          "AttachToRooms": [ 155 ],
+          "CameraAction": {
+            "Value": 2
+          }
+        },
+
+        {
+          "Comments": "Remove all the old triggers for the enemy and doors.",
+          "EMType": 62,
+          "Rooms": [ 103, 129, 130 ]
+        },
+
+        {
+          "Comments": "Make a new trigger for the trapdoor and Marco.",
+          "EMType": 61,
+          "TriggerEntry": {
+            "Setup": {
+              "Value": 4
+            },
+            "TrigSetup": {
+              "Value": 15872,
+              "OneShot": true
+            },
+            "TrigType": 2,
+            "SwitchOrKeyRef": 116,
+            "TrigActionList": [
+              {
+                "TrigAction": 0,
+                "Parameter": 64
+              },
+              {
+                "TrigAction": 0,
+                "Parameter": 115
+              },
+              {
+                "TrigAction": 8,
+                "Parameter": 40
+              }
+            ]
+          },
+          "Locations": [
+            {
+              "X": 86528,
+              "Y": 0,
+              "Z": 60928,
+              "Room": 129
+            }
+          ]
+        },
+
+        {
+          "Comments": "Add a camera for above",
+          "EMType": 65,
+          "Camera": {
+            "X": 62176,
+            "Y": 3047,
+            "Z": 72000,
+            "Room": 155,
+            "Flags": 0
+          },
+          "LookAtItem": 64,
+          "AttachToItems": [ 116 ],
+          "CameraAction": {
+            "Value": 2
+          }
+        }
+      ]
+    }
+  ],
+
   "Any": [],
 
   "AllWithin": [

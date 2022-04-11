@@ -12,6 +12,7 @@ namespace TREnvironmentEditor.Model.Types
     public class EMTriggerFunction : BaseEMFunction
     {
         public List<EMLocation> Locations { get; set; }
+        public List<short> Rooms { get; set; }
         public FDTriggerEntry TriggerEntry { get; set; }
         public bool Replace { get; set; }
 
@@ -20,10 +21,27 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            foreach (EMLocation location in Locations)
+            if (Locations != null)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
-                CreateTrigger(sector, control);
+                foreach (EMLocation location in Locations)
+                {
+                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                    CreateTrigger(sector, control);
+                }
+            }
+
+            if (Rooms != null)
+            {
+                foreach (short room in Rooms)
+                {
+                    foreach (TRRoomSector sector in level.Rooms[(short)ConvertItemNumber(room, level.NumRooms)].SectorList)
+                    {
+                        if (!sector.IsImpenetrable && sector.RoomBelow == 255)
+                        {
+                            CreateTrigger(sector, control);
+                        }
+                    }
+                }
             }
 
             // Handle any specifics that the trigger may rely on
@@ -45,10 +63,27 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            foreach (EMLocation location in Locations)
+            if (Locations != null)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
-                CreateTrigger(sector, control);
+                foreach (EMLocation location in Locations)
+                {
+                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                    CreateTrigger(sector, control);
+                }
+            }
+
+            if (Rooms != null)
+            {
+                foreach (short room in Rooms)
+                {
+                    foreach (TRRoomSector sector in level.Rooms[(short)ConvertItemNumber(room, level.NumRooms)].Sectors)
+                    {
+                        if (!sector.IsImpenetrable && sector.RoomBelow == 255)
+                        {
+                            CreateTrigger(sector, control);
+                        }
+                    }
+                }
             }
 
             // Handle any specifics that the trigger may rely on

@@ -4,7 +4,7 @@
       "0": [
         {
           "RoomNumber": 40,
-          "RectangleIndices": [ 29 ],
+          "RectangleIndices": [ 29, 58 ],
           "BackgroundIndex": 1683
         }
       ]

@@ -49,6 +49,13 @@ namespace TRModelTransporter.Handlers
                 removals.Add(TR2Entities.Map_M_U);
             }
 
+            // Marco is in Floaters by default but he isn't used. Get rid of him to free up space.
+            List<TRModel> models = _level.Models.ToList();
+            if (models.Find(m => m.ID == (uint)TR2Entities.MarcoBartoli) != null && models.Find(m => m.ID == (uint)TR2Entities.DragonBack_H) == null)
+            {
+                removals.Add(TR2Entities.MarcoBartoli);
+            }
+
             if (_entitiesToRemove != null)
             {
                 removals.AddRange(_entitiesToRemove);

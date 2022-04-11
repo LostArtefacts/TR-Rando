@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TRFDControl;
@@ -10,59 +12,77 @@ using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {
-    public class EMCopyRoomFunction : BaseEMFunction
+    public class EMImportRoomFunction : BaseEMFunction, ITextureModifier
     {
-        // Floor and ceiling of -127 on sectors means impenetrable walls around it
         private static readonly sbyte _solidSector = -127;
         private static readonly byte _noRoom = 255;
 
-        public short RoomIndex { get; set; }
+        private static readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.All
+        };
+
+        public string LevelID { get; set; }
+        public byte RoomNumber { get; set; }
         public EMLocation NewLocation { get; set; }
         public EMLocation LinkedLocation { get; set; }
+        public ushort RectangleTexture { get; set; }
+        public ushort TriangleTexture { get; set; }
+
+        public EMImportRoomFunction()
+        {
+            RectangleTexture = TriangleTexture = ushort.MaxValue;
+        }
 
         public override void ApplyToLevel(TR2Level level)
         {
-            TR2Room baseRoom = level.Rooms[RoomIndex];
+            Dictionary<byte, EMRoomDefinition<TR2Room>> roomResource = JsonConvert.DeserializeObject<Dictionary<byte, EMRoomDefinition<TR2Room>>>(ReadRoomResource("TR2"), _jsonSettings);
+            if (!roomResource.ContainsKey(RoomNumber))
+            {
+                throw new Exception(string.Format("Missing room {0} in room definition data for {1}.", RoomNumber, LevelID));
+            }
 
-            int xdiff = NewLocation.X - baseRoom.Info.X;
-            int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
-            int zdiff = NewLocation.Z - baseRoom.Info.Z;
+            EMRoomDefinition<TR2Room> roomDef = roomResource[RoomNumber];
+
+            int xdiff = NewLocation.X - roomDef.Room.Info.X;
+            int ydiff = NewLocation.Y - roomDef.Room.Info.YBottom;
+            int zdiff = NewLocation.Z - roomDef.Room.Info.Z;
 
             TR2Room newRoom = new TR2Room
             {
                 AlternateRoom = -1,
-                AmbientIntensity = baseRoom.AmbientIntensity,
-                AmbientIntensity2 = baseRoom.AmbientIntensity2,
-                Flags = baseRoom.Flags,
+                AmbientIntensity = roomDef.Room.AmbientIntensity,
+                AmbientIntensity2 = roomDef.Room.AmbientIntensity2,
+                Flags = roomDef.Room.Flags,
                 Info = new TRRoomInfo
                 {
                     X = NewLocation.X,
                     YBottom = NewLocation.Y,
-                    YTop = NewLocation.Y + (baseRoom.Info.YTop - baseRoom.Info.YBottom),
+                    YTop = NewLocation.Y + (roomDef.Room.Info.YTop - roomDef.Room.Info.YBottom),
                     Z = NewLocation.Z
                 },
-                Lights = new TR2RoomLight[baseRoom.NumLights],
-                LightMode = baseRoom.LightMode,
-                NumDataWords = baseRoom.NumDataWords,
-                NumLights = baseRoom.NumLights,
+                Lights = new TR2RoomLight[roomDef.Room.NumLights],
+                LightMode = roomDef.Room.LightMode,
+                NumDataWords = roomDef.Room.NumDataWords,
+                NumLights = roomDef.Room.NumLights,
                 NumPortals = 0,
-                NumStaticMeshes = baseRoom.NumStaticMeshes,
-                NumXSectors = baseRoom.NumXSectors,
-                NumZSectors = baseRoom.NumZSectors,
+                NumStaticMeshes = roomDef.Room.NumStaticMeshes,
+                NumXSectors = roomDef.Room.NumXSectors,
+                NumZSectors = roomDef.Room.NumZSectors,
                 Portals = new TRRoomPortal[] { },
                 RoomData = new TR2RoomData
                 {
-                    NumRectangles = baseRoom.RoomData.NumRectangles,
-                    NumSprites = baseRoom.RoomData.NumSprites,
-                    NumTriangles = baseRoom.RoomData.NumTriangles,
-                    NumVertices = baseRoom.RoomData.NumVertices,
-                    Rectangles = new TRFace4[baseRoom.RoomData.NumRectangles],
-                    Sprites = new TRRoomSprite[baseRoom.RoomData.NumSprites],
-                    Triangles = new TRFace3[baseRoom.RoomData.NumTriangles],
-                    Vertices = new TR2RoomVertex[baseRoom.RoomData.NumVertices]
+                    NumRectangles = roomDef.Room.RoomData.NumRectangles,
+                    NumSprites = roomDef.Room.RoomData.NumSprites,
+                    NumTriangles = roomDef.Room.RoomData.NumTriangles,
+                    NumVertices = roomDef.Room.RoomData.NumVertices,
+                    Rectangles = new TRFace4[roomDef.Room.RoomData.NumRectangles],
+                    Sprites = new TRRoomSprite[roomDef.Room.RoomData.NumSprites],
+                    Triangles = new TRFace3[roomDef.Room.RoomData.NumTriangles],
+                    Vertices = new TR2RoomVertex[roomDef.Room.RoomData.NumVertices]
                 },
-                SectorList = new TRRoomSector[baseRoom.SectorList.Length],
-                StaticMeshes = new TR2RoomStaticMesh[baseRoom.NumStaticMeshes]
+                SectorList = new TRRoomSector[roomDef.Room.SectorList.Length],
+                StaticMeshes = new TR2RoomStaticMesh[roomDef.Room.NumStaticMeshes]
             };
 
             // Lights
@@ -70,13 +90,13 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.Lights[i] = new TR2RoomLight
                 {
-                    Fade1 = baseRoom.Lights[i].Fade1,
-                    Fade2 = baseRoom.Lights[i].Fade2,
-                    Intensity1 = baseRoom.Lights[i].Intensity1,
-                    Intensity2 = baseRoom.Lights[i].Intensity2,
-                    X = baseRoom.Lights[i].X + xdiff,
-                    Y = baseRoom.Lights[i].Y + ydiff,
-                    Z = baseRoom.Lights[i].Z + zdiff
+                    Fade1 = roomDef.Room.Lights[i].Fade1,
+                    Fade2 = roomDef.Room.Lights[i].Fade2,
+                    Intensity1 = roomDef.Room.Lights[i].Intensity1,
+                    Intensity2 = roomDef.Room.Lights[i].Intensity2,
+                    X = roomDef.Room.Lights[i].X + xdiff,
+                    Y = roomDef.Room.Lights[i].Y + ydiff,
+                    Z = roomDef.Room.Lights[i].Z + zdiff
                 };
             }
 
@@ -85,12 +105,12 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.RoomData.Rectangles[i] = new TRFace4
                 {
-                    Texture = baseRoom.RoomData.Rectangles[i].Texture,
-                    Vertices = new ushort[baseRoom.RoomData.Rectangles[i].Vertices.Length]
+                    Texture = RectangleTexture == ushort.MaxValue ? roomDef.Room.RoomData.Rectangles[i].Texture : RectangleTexture,
+                    Vertices = new ushort[roomDef.Room.RoomData.Rectangles[i].Vertices.Length]
                 };
                 for (int j = 0; j < newRoom.RoomData.Rectangles[i].Vertices.Length; j++)
                 {
-                    newRoom.RoomData.Rectangles[i].Vertices[j] = baseRoom.RoomData.Rectangles[i].Vertices[j];
+                    newRoom.RoomData.Rectangles[i].Vertices[j] = roomDef.Room.RoomData.Rectangles[i].Vertices[j];
                 }
             }
 
@@ -98,12 +118,12 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.RoomData.Triangles[i] = new TRFace3
                 {
-                    Texture = baseRoom.RoomData.Triangles[i].Texture,
-                    Vertices = new ushort[baseRoom.RoomData.Triangles[i].Vertices.Length]
+                    Texture = TriangleTexture == ushort.MaxValue ? roomDef.Room.RoomData.Triangles[i].Texture : TriangleTexture,
+                    Vertices = new ushort[roomDef.Room.RoomData.Triangles[i].Vertices.Length]
                 };
                 for (int j = 0; j < newRoom.RoomData.Triangles[i].Vertices.Length; j++)
                 {
-                    newRoom.RoomData.Triangles[i].Vertices[j] = baseRoom.RoomData.Triangles[i].Vertices[j];
+                    newRoom.RoomData.Triangles[i].Vertices[j] = roomDef.Room.RoomData.Triangles[i].Vertices[j];
                 }
             }
 
@@ -112,14 +132,14 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.RoomData.Vertices[i] = new TR2RoomVertex
                 {
-                    Attributes = baseRoom.RoomData.Vertices[i].Attributes,
-                    Lighting = baseRoom.RoomData.Vertices[i].Lighting,
-                    Lighting2 = baseRoom.RoomData.Vertices[i].Lighting2,
+                    Attributes = roomDef.Room.RoomData.Vertices[i].Attributes,
+                    Lighting = roomDef.Room.RoomData.Vertices[i].Lighting,
+                    Lighting2 = roomDef.Room.RoomData.Vertices[i].Lighting2,
                     Vertex = new TRVertex
                     {
-                        X = baseRoom.RoomData.Vertices[i].Vertex.X, // Room coords for X and Z
-                        Y = (short)(baseRoom.RoomData.Vertices[i].Vertex.Y + ydiff),
-                        Z = baseRoom.RoomData.Vertices[i].Vertex.Z
+                        X = roomDef.Room.RoomData.Vertices[i].Vertex.X, // Room coords for X and Z
+                        Y = (short)(roomDef.Room.RoomData.Vertices[i].Vertex.Y + ydiff),
+                        Z = roomDef.Room.RoomData.Vertices[i].Vertex.Z
                     }
                 };
             }
@@ -129,8 +149,8 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.RoomData.Sprites[i] = new TRRoomSprite
                 {
-                    Texture = baseRoom.RoomData.Sprites[i].Texture,
-                    Vertex = baseRoom.RoomData.Sprites[i].Vertex
+                    Texture = roomDef.Room.RoomData.Sprites[i].Texture,
+                    Vertex = roomDef.Room.RoomData.Sprites[i].Vertex
                 };
             }
 
@@ -139,13 +159,13 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.StaticMeshes[i] = new TR2RoomStaticMesh
                 {
-                    Intensity1 = baseRoom.StaticMeshes[i].Intensity1,
-                    Intensity2 = baseRoom.StaticMeshes[i].Intensity2,
-                    MeshID = baseRoom.StaticMeshes[i].MeshID,
-                    Rotation = baseRoom.StaticMeshes[i].Rotation,
-                    X = (uint)(baseRoom.StaticMeshes[i].X + xdiff),
-                    Y = (uint)(baseRoom.StaticMeshes[i].Y + ydiff),
-                    Z = (uint)(baseRoom.StaticMeshes[i].Z + zdiff)
+                    Intensity1 = roomDef.Room.StaticMeshes[i].Intensity1,
+                    Intensity2 = roomDef.Room.StaticMeshes[i].Intensity2,
+                    MeshID = roomDef.Room.StaticMeshes[i].MeshID,
+                    Rotation = roomDef.Room.StaticMeshes[i].Rotation,
+                    X = (uint)(roomDef.Room.StaticMeshes[i].X + xdiff),
+                    Y = (uint)(roomDef.Room.StaticMeshes[i].Y + ydiff),
+                    Z = (uint)(roomDef.Room.StaticMeshes[i].Z + zdiff)
                 };
             }
 
@@ -188,9 +208,9 @@ namespace TREnvironmentEditor.Model.Types
             for (int i = 0; i < newRoom.SectorList.Length; i++)
             {
                 int sectorYDiff = 0;
-                ushort sectorBoxIndex = baseRoom.SectorList[i].BoxIndex;
+                ushort sectorBoxIndex = roomDef.Room.SectorList[i].BoxIndex;
                 // Only change the sector if it's not impenetrable
-                if (baseRoom.SectorList[i].Ceiling != _solidSector || baseRoom.SectorList[i].Floor != _solidSector)
+                if (roomDef.Room.SectorList[i].Ceiling != _solidSector || roomDef.Room.SectorList[i].Floor != _solidSector)
                 {
                     sectorYDiff = ydiff / ClickSize;
                     sectorBoxIndex = newBoxIndex;
@@ -199,18 +219,19 @@ namespace TREnvironmentEditor.Model.Types
                 newRoom.SectorList[i] = new TRRoomSector
                 {
                     BoxIndex = sectorBoxIndex,
-                    Ceiling = (sbyte)(baseRoom.SectorList[i].Ceiling + sectorYDiff),
+                    Ceiling = (sbyte)(roomDef.Room.SectorList[i].Ceiling + sectorYDiff),
                     FDIndex = 0, // Initialise to no FD
-                    Floor = (sbyte)(baseRoom.SectorList[i].Floor + sectorYDiff),
+                    Floor = (sbyte)(roomDef.Room.SectorList[i].Floor + sectorYDiff),
                     RoomAbove = _noRoom,
                     RoomBelow = _noRoom
                 };
 
                 // Duplicate the FD too for everything except triggers. Track any portals
                 // so they can be blocked off.
-                if (baseRoom.SectorList[i].FDIndex != 0)
+                ushort fdIndex = roomDef.Room.SectorList[i].FDIndex;
+                if (roomDef.FloorData.ContainsKey(fdIndex))
                 {
-                    List<FDEntry> entries = floorData.Entries[baseRoom.SectorList[i].FDIndex];
+                    List<FDEntry> entries = roomDef.FloorData[fdIndex];
                     List<FDEntry> newEntries = new List<FDEntry>();
                     foreach (FDEntry entry in entries)
                     {
@@ -272,49 +293,55 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
-            TR3Room baseRoom = level.Rooms[RoomIndex];
+            Dictionary<byte, EMRoomDefinition<TR3Room>> roomResource = JsonConvert.DeserializeObject<Dictionary<byte, EMRoomDefinition<TR3Room>>>(ReadRoomResource("TR3"), _jsonSettings);
+            if (!roomResource.ContainsKey(RoomNumber))
+            {
+                throw new Exception(string.Format("Missing room {0} in room definition data for {1}.", RoomNumber, LevelID));
+            }
 
-            int xdiff = NewLocation.X - baseRoom.Info.X;
-            int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
-            int zdiff = NewLocation.Z - baseRoom.Info.Z;
+            EMRoomDefinition<TR3Room> roomDef = roomResource[RoomNumber];
+
+            int xdiff = NewLocation.X - roomDef.Room.Info.X;
+            int ydiff = NewLocation.Y - roomDef.Room.Info.YBottom;
+            int zdiff = NewLocation.Z - roomDef.Room.Info.Z;
 
             TR3Room newRoom = new TR3Room
             {
                 AlternateRoom = -1,
-                AmbientIntensity = baseRoom.AmbientIntensity,
-                Filler = baseRoom.Filler,
-                Flags = baseRoom.Flags,
+                AmbientIntensity = roomDef.Room.AmbientIntensity,
+                Filler = roomDef.Room.Filler,
+                Flags = roomDef.Room.Flags,
                 Info = new TRRoomInfo
                 {
                     X = NewLocation.X,
                     YBottom = NewLocation.Y,
-                    YTop = NewLocation.Y + (baseRoom.Info.YTop - baseRoom.Info.YBottom),
+                    YTop = NewLocation.Y + (roomDef.Room.Info.YTop - roomDef.Room.Info.YBottom),
                     Z = NewLocation.Z
                 },
-                Lights = new TR3RoomLight[baseRoom.NumLights],
-                LightMode = baseRoom.LightMode,
-                NumDataWords = baseRoom.NumDataWords,
-                NumLights = baseRoom.NumLights,
+                Lights = new TR3RoomLight[roomDef.Room.NumLights],
+                LightMode = roomDef.Room.LightMode,
+                NumDataWords = roomDef.Room.NumDataWords,
+                NumLights = roomDef.Room.NumLights,
                 NumPortals = 0,
-                NumStaticMeshes = baseRoom.NumStaticMeshes,
-                NumXSectors = baseRoom.NumXSectors,
-                NumZSectors = baseRoom.NumZSectors,
+                NumStaticMeshes = roomDef.Room.NumStaticMeshes,
+                NumXSectors = roomDef.Room.NumXSectors,
+                NumZSectors = roomDef.Room.NumZSectors,
                 Portals = new TRRoomPortal[] { },
-                ReverbInfo = baseRoom.ReverbInfo,
+                ReverbInfo = roomDef.Room.ReverbInfo,
                 RoomData = new TR3RoomData
                 {
-                    NumRectangles = baseRoom.RoomData.NumRectangles,
-                    NumSprites = baseRoom.RoomData.NumSprites,
-                    NumTriangles = baseRoom.RoomData.NumTriangles,
-                    NumVertices = baseRoom.RoomData.NumVertices,
-                    Rectangles = new TRFace4[baseRoom.RoomData.NumRectangles],
-                    Sprites = new TRRoomSprite[baseRoom.RoomData.NumSprites],
-                    Triangles = new TRFace3[baseRoom.RoomData.NumTriangles],
-                    Vertices = new TR3RoomVertex[baseRoom.RoomData.NumVertices]
+                    NumRectangles = roomDef.Room.RoomData.NumRectangles,
+                    NumSprites = roomDef.Room.RoomData.NumSprites,
+                    NumTriangles = roomDef.Room.RoomData.NumTriangles,
+                    NumVertices = roomDef.Room.RoomData.NumVertices,
+                    Rectangles = new TRFace4[roomDef.Room.RoomData.NumRectangles],
+                    Sprites = new TRRoomSprite[roomDef.Room.RoomData.NumSprites],
+                    Triangles = new TRFace3[roomDef.Room.RoomData.NumTriangles],
+                    Vertices = new TR3RoomVertex[roomDef.Room.RoomData.NumVertices]
                 },
-                Sectors = new TRRoomSector[baseRoom.Sectors.Length],
-                StaticMeshes = new TR3RoomStaticMesh[baseRoom.NumStaticMeshes],
-                WaterScheme = baseRoom.WaterScheme
+                Sectors = new TRRoomSector[roomDef.Room.Sectors.Length],
+                StaticMeshes = new TR3RoomStaticMesh[roomDef.Room.NumStaticMeshes],
+                WaterScheme = roomDef.Room.WaterScheme
             };
 
             // Lights
@@ -322,12 +349,12 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.Lights[i] = new TR3RoomLight
                 {
-                    Colour = baseRoom.Lights[i].Colour,
-                    LightProperties = baseRoom.Lights[i].LightProperties,
-                    LightType = baseRoom.Lights[i].LightType,
-                    X = baseRoom.Lights[i].X + xdiff,
-                    Y = baseRoom.Lights[i].Y + ydiff,
-                    Z = baseRoom.Lights[i].Z + zdiff
+                    Colour = roomDef.Room.Lights[i].Colour,
+                    LightProperties = roomDef.Room.Lights[i].LightProperties,
+                    LightType = roomDef.Room.Lights[i].LightType,
+                    X = roomDef.Room.Lights[i].X + xdiff,
+                    Y = roomDef.Room.Lights[i].Y + ydiff,
+                    Z = roomDef.Room.Lights[i].Z + zdiff
                 };
             }
 
@@ -336,12 +363,12 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.RoomData.Rectangles[i] = new TRFace4
                 {
-                    Texture = baseRoom.RoomData.Rectangles[i].Texture,
-                    Vertices = new ushort[baseRoom.RoomData.Rectangles[i].Vertices.Length]
+                    Texture = RectangleTexture == ushort.MaxValue ? roomDef.Room.RoomData.Rectangles[i].Texture : RectangleTexture,
+                    Vertices = new ushort[roomDef.Room.RoomData.Rectangles[i].Vertices.Length]
                 };
                 for (int j = 0; j < newRoom.RoomData.Rectangles[i].Vertices.Length; j++)
                 {
-                    newRoom.RoomData.Rectangles[i].Vertices[j] = baseRoom.RoomData.Rectangles[i].Vertices[j];
+                    newRoom.RoomData.Rectangles[i].Vertices[j] = roomDef.Room.RoomData.Rectangles[i].Vertices[j];
                 }
             }
 
@@ -349,12 +376,12 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.RoomData.Triangles[i] = new TRFace3
                 {
-                    Texture = baseRoom.RoomData.Triangles[i].Texture,
-                    Vertices = new ushort[baseRoom.RoomData.Triangles[i].Vertices.Length]
+                    Texture = TriangleTexture == ushort.MaxValue ? roomDef.Room.RoomData.Triangles[i].Texture : TriangleTexture,
+                    Vertices = new ushort[roomDef.Room.RoomData.Triangles[i].Vertices.Length]
                 };
                 for (int j = 0; j < newRoom.RoomData.Triangles[i].Vertices.Length; j++)
                 {
-                    newRoom.RoomData.Triangles[i].Vertices[j] = baseRoom.RoomData.Triangles[i].Vertices[j];
+                    newRoom.RoomData.Triangles[i].Vertices[j] = roomDef.Room.RoomData.Triangles[i].Vertices[j];
                 }
             }
 
@@ -363,14 +390,14 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.RoomData.Vertices[i] = new TR3RoomVertex
                 {
-                    Attributes = baseRoom.RoomData.Vertices[i].Attributes,
-                    Colour = baseRoom.RoomData.Vertices[i].Colour,
-                    Lighting = baseRoom.RoomData.Vertices[i].Lighting,
+                    Attributes = roomDef.Room.RoomData.Vertices[i].Attributes,
+                    Colour = roomDef.Room.RoomData.Vertices[i].Colour,
+                    Lighting = roomDef.Room.RoomData.Vertices[i].Lighting,
                     Vertex = new TRVertex
                     {
-                        X = baseRoom.RoomData.Vertices[i].Vertex.X, // Room coords for X and Z
-                        Y = (short)(baseRoom.RoomData.Vertices[i].Vertex.Y + ydiff),
-                        Z = baseRoom.RoomData.Vertices[i].Vertex.Z
+                        X = roomDef.Room.RoomData.Vertices[i].Vertex.X, // Room coords for X and Z
+                        Y = (short)(roomDef.Room.RoomData.Vertices[i].Vertex.Y + ydiff),
+                        Z = roomDef.Room.RoomData.Vertices[i].Vertex.Z
                     }
                 };
             }
@@ -380,8 +407,8 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.RoomData.Sprites[i] = new TRRoomSprite
                 {
-                    Texture = baseRoom.RoomData.Sprites[i].Texture,
-                    Vertex = baseRoom.RoomData.Sprites[i].Vertex
+                    Texture = roomDef.Room.RoomData.Sprites[i].Texture,
+                    Vertex = roomDef.Room.RoomData.Sprites[i].Vertex
                 };
             }
 
@@ -390,13 +417,13 @@ namespace TREnvironmentEditor.Model.Types
             {
                 newRoom.StaticMeshes[i] = new TR3RoomStaticMesh
                 {
-                    Colour = baseRoom.StaticMeshes[i].Colour,
-                    MeshID = baseRoom.StaticMeshes[i].MeshID,
-                    Rotation = baseRoom.StaticMeshes[i].Rotation,
-                    Unused = baseRoom.StaticMeshes[i].Unused,
-                    X = (uint)(baseRoom.StaticMeshes[i].X + xdiff),
-                    Y = (uint)(baseRoom.StaticMeshes[i].Y + ydiff),
-                    Z = (uint)(baseRoom.StaticMeshes[i].Z + zdiff)
+                    Colour = roomDef.Room.StaticMeshes[i].Colour,
+                    MeshID = roomDef.Room.StaticMeshes[i].MeshID,
+                    Rotation = roomDef.Room.StaticMeshes[i].Rotation,
+                    Unused = roomDef.Room.StaticMeshes[i].Unused,
+                    X = (uint)(roomDef.Room.StaticMeshes[i].X + xdiff),
+                    Y = (uint)(roomDef.Room.StaticMeshes[i].Y + ydiff),
+                    Z = (uint)(roomDef.Room.StaticMeshes[i].Z + zdiff)
                 };
             }
 
@@ -445,9 +472,9 @@ namespace TREnvironmentEditor.Model.Types
             for (int i = 0; i < newRoom.Sectors.Length; i++)
             {
                 int sectorYDiff = 0;
-                ushort sectorBoxIndex = baseRoom.Sectors[i].BoxIndex;
+                ushort sectorBoxIndex = roomDef.Room.Sectors[i].BoxIndex;
                 // Only change the sector if it's not impenetrable
-                if (baseRoom.Sectors[i].Ceiling != _solidSector || baseRoom.Sectors[i].Floor != _solidSector)
+                if (roomDef.Room.Sectors[i].Ceiling != _solidSector || roomDef.Room.Sectors[i].Floor != _solidSector)
                 {
                     sectorYDiff = ydiff / ClickSize;
                     sectorBoxIndex = newBoxIndex;
@@ -456,18 +483,19 @@ namespace TREnvironmentEditor.Model.Types
                 newRoom.Sectors[i] = new TRRoomSector
                 {
                     BoxIndex = sectorBoxIndex,
-                    Ceiling = (sbyte)(baseRoom.Sectors[i].Ceiling + sectorYDiff),
+                    Ceiling = (sbyte)(roomDef.Room.Sectors[i].Ceiling + sectorYDiff),
                     FDIndex = 0, // Initialise to no FD
-                    Floor = (sbyte)(baseRoom.Sectors[i].Floor + sectorYDiff),
+                    Floor = (sbyte)(roomDef.Room.Sectors[i].Floor + sectorYDiff),
                     RoomAbove = _noRoom,
                     RoomBelow = _noRoom
                 };
 
                 // Duplicate the FD too for everything except triggers. Track any portals
                 // so they can be blocked off.
-                if (baseRoom.Sectors[i].FDIndex != 0)
+                ushort fdIndex = roomDef.Room.Sectors[i].FDIndex;
+                if (roomDef.FloorData.ContainsKey(fdIndex))
                 {
-                    List<FDEntry> entries = floorData.Entries[baseRoom.Sectors[i].FDIndex];
+                    List<FDEntry> entries = roomDef.FloorData[fdIndex];
                     List<FDEntry> newEntries = new List<FDEntry>();
                     foreach (FDEntry entry in entries)
                     {
@@ -562,6 +590,29 @@ namespace TREnvironmentEditor.Model.Types
             rooms.Add(newRoom);
             level.Rooms = rooms.ToArray();
             level.NumRooms++;
+        }
+
+        private string ReadRoomResource(string versionID)
+        {
+            string path = string.Format(@"Resources\{0}\Rooms\{1}-Rooms.json", versionID, LevelID);
+            if (!File.Exists(path))
+            {
+                throw new IOException("Missing room definition data: " + path);
+            }
+
+            return File.ReadAllText(path);
+        }
+
+        public void RemapTextures(Dictionary<ushort, ushort> indexMap)
+        {
+            if (indexMap.ContainsKey(RectangleTexture))
+            {
+                RectangleTexture = indexMap[RectangleTexture];
+            }
+            if (indexMap.ContainsKey(TriangleTexture))
+            {
+                TriangleTexture = indexMap[TriangleTexture];
+            }
         }
     }
 }
