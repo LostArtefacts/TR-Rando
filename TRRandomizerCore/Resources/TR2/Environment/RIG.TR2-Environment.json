@@ -180,6 +180,35 @@
             }
           }
         }
+      },
+
+      {
+        "Comments": "Ensure the flip map is off otherwise it's possible to softlock here (if the second pool before the end was skipped, the flipmap will be on).",
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 38400,
+            "Y": -512,
+            "Z": 26112,
+            "Room": 70
+          }
+        ],
+        "TriggerEntry": {
+          "Setup": {
+            "Value": 4
+          },
+          "TrigSetup": {
+            "Value": 15872
+          },
+          "TrigType": 0,
+          "TrigActionList": [
+            {
+              "TrigAction": 5,
+              "Parameter": 0
+            }
+          ]
+        }
+
       }
     ]
   ],
