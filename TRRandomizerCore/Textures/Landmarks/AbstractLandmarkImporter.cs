@@ -26,9 +26,15 @@ namespace TRRandomizerCore.Textures
             // Ensure any changes already made are committed to the level
             mapping.CommitGraphics();
 
+            // If we are already at the maximum number of textures, bail out.
+            List<TRObjectTexture> textures = GetObjectTextures(level).ToList();
+            if (textures.Count == MaxTextures)
+            {
+                return false;
+            }
+
             using (AbstractTexturePacker<E, L> packer = CreatePacker(level))
             {
-                List<TRObjectTexture> textures = GetObjectTextures(level).ToList();
                 foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
                 {
                     if (textures.Count == MaxTextures)
