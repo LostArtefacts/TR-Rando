@@ -10,14 +10,14 @@ using TRLevelToolset.IOLogic;
 
 namespace TRLevelToolset.Controls.DataControls.TR
 {
-    internal class TRRoomControl : IDrawable
+    internal class TRPaletteControl : IDrawable
     {
         public void Draw()
-        {      
-            if (ImGui.TreeNodeEx("Room Data", ImGuiTreeNodeFlags.OpenOnArrow))
+        {
+            if (ImGui.TreeNodeEx("Palette Data", ImGuiTreeNodeFlags.OpenOnArrow))
             {
-                ImGui.Text("Number of Rooms: " + IOManager.CurrentLevelAsTR1?.NumRooms);
-
+                ImGui.Text("Light map Count: " + IOManager.CurrentLevelAsTR1?.LightMap.Count());
+                ImGui.Text("Palette Count: " + IOManager.CurrentLevelAsTR1?.Palette.Count());
                 ImGui.TreePop();
             }
         }

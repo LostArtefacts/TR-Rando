@@ -10,13 +10,13 @@ using TRLevelToolset.IOLogic;
 
 namespace TRLevelToolset.Controls.DataControls.TR
 {
-    internal class TRRoomControl : IDrawable
+    internal class TREntityControl : IDrawable
     {
         public void Draw()
-        {      
-            if (ImGui.TreeNodeEx("Room Data", ImGuiTreeNodeFlags.OpenOnArrow))
+        {
+            if (ImGui.TreeNodeEx("Entity Data", ImGuiTreeNodeFlags.OpenOnArrow))
             {
-                ImGui.Text("Number of Rooms: " + IOManager.CurrentLevelAsTR1?.NumRooms);
+                ImGui.Text("Entity count: " + IOManager.CurrentLevelAsTR1?.NumEntities);
 
                 ImGui.TreePop();
             }

@@ -14,7 +14,12 @@ namespace TRLevelToolset.Controls.DataControls.TR
     {
         public void Draw()
         {
-            ImGui.Text("Animated Texture Count: " + IOManager.CurrentLevelAsTR1?.NumAnimatedTextures);
+            if (ImGui.TreeNodeEx("Animated Textures", ImGuiTreeNodeFlags.OpenOnArrow))
+            {
+                ImGui.Text("Animated Texture Count: " + IOManager.CurrentLevelAsTR1?.NumAnimatedTextures);
+
+                ImGui.TreePop();
+            }
         }
     }
 }

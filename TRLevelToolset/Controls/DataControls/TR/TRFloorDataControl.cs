@@ -14,7 +14,12 @@ namespace TRLevelToolset.Controls.DataControls.TR
     {
         public void Draw()
         {
-            ImGui.Text("Floor Data Size: " + IOManager.CurrentLevelAsTR1?.NumFloorData + " uint16s.");
+            if (ImGui.TreeNodeEx("Floor Data", ImGuiTreeNodeFlags.OpenOnArrow))
+            {
+                ImGui.Text("Floor Data Size: " + IOManager.CurrentLevelAsTR1?.NumFloorData + " uint16s.");
+
+                ImGui.TreePop();
+            }
         }
     }
 }

@@ -10,14 +10,15 @@ using TRLevelToolset.IOLogic;
 
 namespace TRLevelToolset.Controls.DataControls.TR
 {
-    internal class TRTexImage8Control : IDrawable
+    internal class TRZoneControl : IDrawable
     {
         public void Draw()
         {
-            if (ImGui.TreeNodeEx("Texture Image 8 Data", ImGuiTreeNodeFlags.OpenOnArrow))
+            if (ImGui.TreeNodeEx("Zone Data", ImGuiTreeNodeFlags.OpenOnArrow))
             {
-                ImGui.Text("Texture Count: " + IOManager.CurrentLevelAsTR1?.NumImages);
-
+                ImGui.Text("Box count: " + IOManager.CurrentLevelAsTR1?.NumBoxes);
+                ImGui.Text("Overlap count: " + IOManager.CurrentLevelAsTR1?.NumOverlaps);
+                ImGui.Text("Zone count: " + IOManager.CurrentLevelAsTR1?.Zones.Count());
                 ImGui.TreePop();
             }
         }

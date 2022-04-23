@@ -10,13 +10,13 @@ using TRLevelToolset.IOLogic;
 
 namespace TRLevelToolset.Controls.DataControls.TR
 {
-    internal class TRRoomControl : IDrawable
+    internal class TRStaticMeshControls : IDrawable
     {
         public void Draw()
-        {      
-            if (ImGui.TreeNodeEx("Room Data", ImGuiTreeNodeFlags.OpenOnArrow))
+        {
+            if (ImGui.TreeNodeEx("Static Mesh Data", ImGuiTreeNodeFlags.OpenOnArrow))
             {
-                ImGui.Text("Number of Rooms: " + IOManager.CurrentLevelAsTR1?.NumRooms);
+                ImGui.Text("Static mesh count: " + IOManager.CurrentLevelAsTR1?.NumStaticMeshes);
 
                 ImGui.TreePop();
             }

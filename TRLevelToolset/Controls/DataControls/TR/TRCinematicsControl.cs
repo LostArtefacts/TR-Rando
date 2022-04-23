@@ -10,14 +10,13 @@ using TRLevelToolset.IOLogic;
 
 namespace TRLevelToolset.Controls.DataControls.TR
 {
-    internal class TRRoomControl : IDrawable
+    internal class TRCinematicsControl : IDrawable
     {
         public void Draw()
-        {      
-            if (ImGui.TreeNodeEx("Room Data", ImGuiTreeNodeFlags.OpenOnArrow))
+        {
+            if (ImGui.TreeNodeEx("Cinematic Data", ImGuiTreeNodeFlags.OpenOnArrow))
             {
-                ImGui.Text("Number of Rooms: " + IOManager.CurrentLevelAsTR1?.NumRooms);
-
+                ImGui.Text("Cinematic frame Count: " + IOManager.CurrentLevelAsTR1?.NumCinematicFrames);
                 ImGui.TreePop();
             }
         }

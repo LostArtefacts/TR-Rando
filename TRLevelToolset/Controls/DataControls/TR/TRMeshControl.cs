@@ -10,13 +10,14 @@ using TRLevelToolset.IOLogic;
 
 namespace TRLevelToolset.Controls.DataControls.TR
 {
-    internal class TRRoomControl : IDrawable
+    internal class TRMeshControl : IDrawable
     {
         public void Draw()
-        {      
-            if (ImGui.TreeNodeEx("Room Data", ImGuiTreeNodeFlags.OpenOnArrow))
+        {
+            if (ImGui.TreeNodeEx("Mesh Data", ImGuiTreeNodeFlags.OpenOnArrow))
             {
-                ImGui.Text("Number of Rooms: " + IOManager.CurrentLevelAsTR1?.NumRooms);
+                ImGui.Text("Mesh data count: " + IOManager.CurrentLevelAsTR1?.NumMeshData);
+                ImGui.Text("Mesh pointer count: " + IOManager.CurrentLevelAsTR1?.NumMeshPointers);
 
                 ImGui.TreePop();
             }
