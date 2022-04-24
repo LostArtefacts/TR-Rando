@@ -8,6 +8,6 @@ namespace TRLevelToolset.Interfaces
 {
     internal interface IDrawable
     {
-        internal void Draw();
+        public void Draw();
     }
 }

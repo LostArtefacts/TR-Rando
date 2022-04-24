@@ -44,23 +44,22 @@ public static class Program
 
             ImGui.SetNextWindowPos(new Vector2(0, 0));
             ImGui.SetNextWindowSize(new Vector2(1280, 720));
-
-#if DEBUG
+            
             sw.Start();
-#endif
-            ImGui.Begin("Tomb Raider Level Toolset", ref isMainWindowOpen);
 
-#if DEBUG
+            ImGui.Begin("Tomb Raider Level Toolset", ref isMainWindowOpen);
+            
             sw.Stop();
-#endif
+
             selectLevelScreen.Draw();
             versionComponent.Draw();
             dataEditComponent.Draw();
-#if DEBUG
+
             sw.Restart();
+            Thread.Sleep((int)(16 - sw.Elapsed.TotalMilliseconds));
+#if DEBUG
             ImGui.Text("Draw Time: " + sw.Elapsed.TotalMilliseconds + " ms");
 #endif
-
             ImGui.End();
 
             cl.Begin();
