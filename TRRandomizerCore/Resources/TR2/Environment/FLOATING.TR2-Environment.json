@@ -281,6 +281,28 @@
           }
         }
       ]
+    },
+
+    {
+      "Condition": {
+        "Comments": "#325 If enemy 52 can't fly, move him to a platform to avoid dropping to the level floor.",
+        "ConditionType": 0,
+        "EntityIndex": 52,
+        "EntityTypes": [ 25, 28, 29, 38, 43, 47 ]
+      },
+      "OnFalse": [
+        {
+          "EMType": 44,
+          "EntityIndex": 52,
+          "TargetLocation": {
+            "X": 39424,
+            "Y": -4096,
+            "Z": 49664,
+            "Room": 63,
+            "Angle": -32768
+          }
+        }
+      ]
     }
   ],
 
