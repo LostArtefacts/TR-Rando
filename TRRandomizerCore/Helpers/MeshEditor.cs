@@ -116,6 +116,22 @@ namespace TRRandomizerCore.Helpers
             Mesh.NumColouredTriangles = (short)triangles.Count;
         }
 
+        public void AddTexturedRectangle(TRFace4 face)
+        {
+            List<TRFace4> rectangles = Mesh.TexturedRectangles.ToList();
+            rectangles.Add(face);
+            Mesh.TexturedRectangles = rectangles.ToArray();
+            Mesh.NumTexturedRectangles = (short)rectangles.Count;
+        }
+
+        public void AddTexturedTriangle(TRFace3 face)
+        {
+            List<TRFace3> triangles = Mesh.TexturedTriangles.ToList();
+            triangles.Add(face);
+            Mesh.TexturedTriangles = triangles.ToArray();
+            Mesh.NumTexturedTriangles = (short)triangles.Count;
+        }
+
         public TRMesh CloneMesh(TRMesh mesh)
         {
             TRMesh clone = new TRMesh

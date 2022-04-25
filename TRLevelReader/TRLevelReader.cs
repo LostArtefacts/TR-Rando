@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 
 namespace TRLevelReader
@@ -284,12 +285,12 @@ namespace TRLevelReader
                 level.Overlaps[i] = reader.ReadUInt16();
             }
 
-            level.Zones = new ushort[6 * level.NumBoxes];
-
-            for (int i = 0; i < level.Zones.Count(); i++)
+            ushort[] zoneData = new ushort[level.NumBoxes * 6];
+            for (int i = 0; i < zoneData.Length; i++)
             {
-                level.Zones[i] = reader.ReadUInt16();
+                zoneData[i] = reader.ReadUInt16();
             }
+            level.Zones = TR1BoxUtilities.ReadZones(level.NumBoxes, zoneData);
 
             //Animated Textures - the data stores the total number of ushorts to read (NumAnimatedTextures)
             //followed by a ushort to describe the number of actual texture group objects.

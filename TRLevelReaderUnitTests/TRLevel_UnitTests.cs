@@ -10,6 +10,8 @@ using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using System.Linq;
+using TRLevelReader.Model.Base.Enums;
+using TRLevelReader.Helpers;
 
 namespace TRLevelReaderUnitTests
 {
@@ -385,6 +387,55 @@ namespace TRLevelReaderUnitTests
 
             TR1LevelWriter writer = new TR1LevelWriter();
             writer.WriteLevelToFile(lvl, "level10c_fdata.phd");
+        }
+
+        [TestMethod]
+        public void ModifyZonesTest()
+        {
+            TR1LevelReader reader = new TR1LevelReader();
+            TRLevel lvl = reader.ReadLevel("level1.phd");
+
+            // For every box, store the current zone. We use the serialized form
+            // for comparison.
+            Dictionary<int, byte[]> flipOffZones = new Dictionary<int, byte[]>();
+            Dictionary<int, byte[]> flipOnZones = new Dictionary<int, byte[]>();
+            for (int i = 0; i < lvl.NumBoxes; i++)
+            {
+                flipOffZones[i] = lvl.Zones[i][FlipStatus.Off].Serialize();
+                flipOnZones[i] = lvl.Zones[i][FlipStatus.On].Serialize();
+            }
+
+            // Add a new box
+            List<TRBox> boxes = lvl.Boxes.ToList();
+            boxes.Add(boxes[0]);
+            lvl.Boxes = boxes.ToArray();
+            lvl.NumBoxes++;
+
+            // Add a new zone for the box and store its serialized form for comparison
+            int newBoxIndex = (int)(lvl.NumBoxes - 1);
+            TR1BoxUtilities.DuplicateZone(lvl, 0);
+            flipOffZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.Off].Serialize();
+            flipOnZones[newBoxIndex] = lvl.Zones[newBoxIndex][FlipStatus.On].Serialize();
+
+            // Verify the number of zone ushorts matches what's expected for the box count
+            Assert.AreEqual(TR1BoxUtilities.FlattenZones(lvl.Zones).Length, (int)(6 * lvl.NumBoxes));
+
+            // Write and re-read the level
+            new TR1LevelWriter().WriteLevelToFile(lvl, "TEST.phd");
+            lvl = reader.ReadLevel("TEST.phd");
+
+            // Capture all of the zones again. Make sure the addition of the zone above didn't
+            // affect any of the others and that the addition itself matches after IO.
+            for (int i = 0; i < lvl.NumBoxes; i++)
+            {
+                byte[] flipOff = lvl.Zones[i][FlipStatus.Off].Serialize();
+                Assert.IsTrue(flipOffZones.ContainsKey(i));
+                CollectionAssert.AreEqual(flipOffZones[i], flipOff);
+
+                byte[] flipOn = lvl.Zones[i][FlipStatus.On].Serialize();
+                Assert.IsTrue(flipOnZones.ContainsKey(i));
+                CollectionAssert.AreEqual(flipOnZones[i], flipOn);
+            }
         }
     }
 }
