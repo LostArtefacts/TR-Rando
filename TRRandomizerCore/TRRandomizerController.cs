@@ -499,6 +499,12 @@ namespace TRRandomizerCore
             get => LevelRandomizer.IncludedEnemies;
         }
 
+        public bool SwapEnemyAppearance
+        {
+            get => LevelRandomizer.SwapEnemyAppearance;
+            set => LevelRandomizer.SwapEnemyAppearance = value;
+        }
+
         public bool RandomizeOutfits
         {
             get => LevelRandomizer.RandomizeOutfits;

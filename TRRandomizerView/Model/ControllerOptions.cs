@@ -25,7 +25,7 @@ namespace TRRandomizerView.Model
 
         private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras;
         private BoolItemControlClass _includeKeyItems;
-        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance;
+        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance;
         private BoolItemControlClass _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger;
@@ -1007,6 +1007,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass SwapEnemyAppearance
+        {
+            get => _swapEnemyAppearance;
+            set
+            {
+                _swapEnemyAppearance = value;
+                FirePropertyChanged();
+            }
+        }
+
         public RandoDifficulty RandoEnemyDifficulty
         {
             get => _randoEnemyDifficulty;
@@ -1321,6 +1331,12 @@ namespace TRRandomizerView.Model
                 Description = "Make a best effort attempt to have as many dragons as possible in the game."
             };
             BindingOperations.SetBinding(MaximiseDragonAppearance, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+            SwapEnemyAppearance = new BoolItemControlClass
+            {
+                Title = "Swap enemy appearances",
+                Description = "Allow some enemies to take on the appearance of others."
+            };
+            BindingOperations.SetBinding(SwapEnemyAppearance, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
 
             // Textures
             Binding randomizeTexturesBinding = new Binding(nameof(RandomizeTextures)) { Source = this };
@@ -1459,7 +1475,7 @@ namespace TRRandomizerView.Model
             };
             EnemyBoolItemControls = new List<BoolItemControlClass>()
             {
-                _crossLevelEnemies, _docileWillard, _protectMonks, _maximiseDragonAppearance
+                _crossLevelEnemies, _docileWillard, _protectMonks, _maximiseDragonAppearance, _swapEnemyAppearance
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -1498,7 +1514,7 @@ namespace TRRandomizerView.Model
 
             _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
 
-            _maximiseDragonAppearance.IsAvailable = IsOutfitDaggerSupported;
+            _maximiseDragonAppearance.IsAvailable = _swapEnemyAppearance.IsAvailable = IsOutfitDaggerSupported;
 
             _docileWillard.IsAvailable = !IsBirdMonsterBehaviourTypeSupported;
         }
@@ -1572,6 +1588,7 @@ namespace TRRandomizerView.Model
             DocileWillard.Value = _controller.DocileWillard;
             BirdMonsterBehaviour = _controller.BirdMonsterBehaviour;
             MaximiseDragonAppearance.Value = _controller.MaximiseDragonAppearance;
+            SwapEnemyAppearance.Value = _controller.SwapEnemyAppearance;
             RandoEnemyDifficulty = _controller.RandoEnemyDifficulty;
             UseEnemyExclusions = _controller.UseEnemyExclusions;
             ShowExclusionWarnings = _controller.ShowExclusionWarnings;
@@ -1849,6 +1866,7 @@ namespace TRRandomizerView.Model
             _controller.DocileWillard = DocileWillard.Value;
             _controller.BirdMonsterBehaviour = BirdMonsterBehaviour;
             _controller.MaximiseDragonAppearance = MaximiseDragonAppearance.Value;
+            _controller.SwapEnemyAppearance = SwapEnemyAppearance.Value;
             _controller.RandoEnemyDifficulty = RandoEnemyDifficulty;
             _controller.UseEnemyExclusions = UseEnemyExclusions;
             _controller.ShowExclusionWarnings = ShowExclusionWarnings;

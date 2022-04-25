@@ -814,7 +814,10 @@ namespace TRRandomizerCore.Randomizers
                 LimitSkidooEntities(level);
             }
 
-            RandomizeEnemyMeshes(level, enemies);
+            if (Settings.SwapEnemyAppearance)
+            {
+                RandomizeEnemyMeshes(level, enemies);
+            }
 
             if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional && !level.Is(TR2LevelNames.CHICKEN))
             {
