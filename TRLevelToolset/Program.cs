@@ -32,6 +32,7 @@ public static class Program
         SelectLevelComponent selectLevelScreen = new SelectLevelComponent();
         VersionComponent versionComponent = new VersionComponent();
         DataEditComponent dataEditComponent = new DataEditComponent();
+        EnvironmentEditComponent envComponent = new EnvironmentEditComponent();
 
         Stopwatch sw = new Stopwatch();
 
@@ -54,6 +55,7 @@ public static class Program
             selectLevelScreen.Draw();
             versionComponent.Draw();
             dataEditComponent.Draw();
+            envComponent.Draw();
 
             sw.Restart();
             Thread.Sleep((int)(16 - sw.Elapsed.TotalMilliseconds));
