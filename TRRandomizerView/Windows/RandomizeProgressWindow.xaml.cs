@@ -120,6 +120,18 @@ namespace TRRandomizerView.Windows
                     _cancelPending = false;
                     _cancelled = true;
                 }
+                else if (e.Category == TRRandomizationCategory.Warning)
+                {
+                    Dispatcher.Invoke(delegate
+                    {
+                        Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Paused;
+                        if (!MessageWindow.ShowConfirm(FormatWarningMessage(e.CustomDescription)))
+                        {
+                            Cancel();
+                        }
+                        Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
+                    });
+                }
                 else
                 {
                     ProgressTarget = e.ProgressTarget;
@@ -152,6 +164,11 @@ namespace TRRandomizerView.Windows
                     }
                 }
             });
+        }
+
+        private string FormatWarningMessage(string message)
+        {
+            return string.Format("{0}{1}{1}Do you wish to continue?", message, Environment.NewLine);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

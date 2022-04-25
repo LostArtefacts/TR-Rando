@@ -7,6 +7,7 @@
         PreRandomize,
         Randomize,
         Commit,
-        Cancel
+        Cancel,
+        Warning
     }
 }

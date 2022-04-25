@@ -72,6 +72,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -180,7 +182,7 @@
             </StackPanel>
 
             <!-- (Enemy) Difficulty -->
-            <StackPanel Grid.Row="2"
+            <StackPanel Grid.Row="3"
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -239,8 +241,51 @@
                 </Grid>
             </StackPanel>
 
+            <!-- Enemy Exclusions -->
+            <StackPanel Grid.Row="4"
+                        Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Excluded Enemies"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <StackPanel Orientation="Vertical">
+                        <CheckBox IsChecked="{Binding ControllerProxy.UseEnemyExclusions, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Exclude Certain Enemies" />
+                        </CheckBox>
+                        <Button x:Name="_exclusionsButton"
+                                Margin="0,10,0,0"
+                                Style="{StaticResource AltCallToAction}"
+                                Content="Select Enemies"
+                                IsEnabled="{Binding ControllerProxy.UseEnemyExclusions}"
+                                Click="ExclusionsButton_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Select which enemies you wish to exclude from the game (best effort attempt)."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+            
             <!-- Language -->
-            <StackPanel Grid.Row="3"
+            <StackPanel Grid.Row="5"
                         Visibility="{Binding HasLanguage, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -268,7 +313,7 @@
             </StackPanel>
 
             <!-- Mirrored Levels -->
-            <StackPanel Grid.Row="4"
+            <StackPanel Grid.Row="6"
                         Visibility="{Binding HasMirroring, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -322,7 +367,7 @@
             </StackPanel>
 
             <!-- Haircuts -->
-            <StackPanel Grid.Row="5"
+            <StackPanel Grid.Row="7"
                         Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -376,7 +421,7 @@
             </StackPanel>
 
             <!-- Invisibility -->
-            <StackPanel Grid.Row="6"
+            <StackPanel Grid.Row="8"
                         Visibility="{Binding HasInvisibility, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -430,7 +475,7 @@
             </StackPanel>
 
             <!-- Night Mode general -->
-            <StackPanel Grid.Row="7"
+            <StackPanel Grid.Row="9"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -621,7 +666,7 @@
             </StackPanel>
 
             <!-- Intensity -->
-            <StackPanel Grid.Row="8"
+            <StackPanel Grid.Row="10"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -677,7 +722,7 @@
             </StackPanel>
 
             <!-- TR3 Globe Options -->
-            <StackPanel Grid.Row="9"
+            <StackPanel Grid.Row="11"
                         Visibility="{Binding HasGlobeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -744,7 +789,7 @@
             </StackPanel>
             
             <!-- Level Count -->
-            <StackPanel Grid.Row="10"
+            <StackPanel Grid.Row="12"
                         Visibility="{Binding HasGlobeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -791,7 +836,7 @@
             </StackPanel>
 
             <!-- Wireframing -->
-            <StackPanel Grid.Row="12"
+            <StackPanel Grid.Row="13"
                         Visibility="{Binding HasTextureOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"

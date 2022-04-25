@@ -137,5 +137,26 @@ namespace TRRandomizerCore.Levels
 
             return limit;
         }
+
+        public int GetActualEntityCount()
+        {
+            int count = 0;
+            foreach (TR2Entity entity in Data.Entities)
+            {
+                switch ((TR2Entities)entity.TypeID)
+                {
+                    case TR2Entities.MercSnowmobDriver:
+                        count += 2;
+                        break;
+                    case TR2Entities.MarcoBartoli:
+                        count += 7;
+                        break;
+                    default:
+                        count++;
+                        break;
+                }
+            }
+            return count;
+        }
     }
 }

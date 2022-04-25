@@ -221,5 +221,15 @@ namespace TRRandomizerView.Windows
         {
             _darknessPreview.Source = new BitmapImage(new Uri(string.Format(_darknessPreviewPath, ControllerProxy.NightModeDarkness)));
         }
+
+        private void ExclusionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            EnemyWindow ew = new EnemyWindow(ControllerProxy);
+            if (ew.ShowDialog() ?? false)
+            {
+                ControllerProxy.SelectableEnemyControls = ew.Controls;
+                ControllerProxy.ShowExclusionWarnings = ew.ShowExclusionWarnings;
+            }
+        }
     }
 }

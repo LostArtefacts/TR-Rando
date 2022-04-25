@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TRGE.Coord;
 using TRGE.Core;
+using TRLevelReader.Helpers;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;
 using TRRandomizerCore.Textures;
@@ -17,7 +20,10 @@ namespace TRRandomizerCore.Editors
 
         protected override void ApplyConfig(Config config)
         {
-            Settings = new RandomizerSettings();
+            Settings = new RandomizerSettings
+            {
+                ExcludableEnemies = JsonConvert.DeserializeObject<Dictionary<short, string>>(File.ReadAllText(@"Resources\TR2\Restrictions\excludable_enemies.json"))
+            };
             Settings.ApplyConfig(config);
         }
 
@@ -47,6 +53,12 @@ namespace TRRandomizerCore.Editors
             // make on-the-fly changes as required.
             TR23ScriptEditor tr23ScriptEditor = scriptEditor as TR23ScriptEditor;
             string wipDirectory = _io.WIPOutputDirectory.FullName;
+
+            if (Settings.DevelopmentMode)
+            {
+                (tr23ScriptEditor.Script as TR23Script).LevelSelectEnabled = true;
+                scriptEditor.SaveScript();
+            }
 
             // Texture monitoring is needed between enemy and texture randomization
             // to track where imported enemies are placed.

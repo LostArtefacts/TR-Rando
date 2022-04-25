@@ -296,7 +296,7 @@ namespace TRRandomizerCore.Utilities
                 );
         }
 
-        private Vector4? GetBestSlantMidpoint(FDSlantEntry slant)
+        public Vector4? GetBestSlantMidpoint(FDSlantEntry slant)
         {
             List<sbyte> corners = new List<sbyte> { 0, 0, 0, 0 };
             if (slant.XSlant > 0)

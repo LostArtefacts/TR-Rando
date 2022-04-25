@@ -58,6 +58,8 @@ namespace TRRandomizerView.Model
         private bool _vfxWave;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
+        private List<BoolItemIDControlClass> _selectableEnemies;
+        private bool _useEnemyExclusions, _showExclusionWarnings;
 
         private RandoDifficulty _randoEnemyDifficulty;
         private ItemDifficulty _randoItemDifficulty;
@@ -1111,6 +1113,36 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public List<BoolItemIDControlClass> SelectableEnemyControls
+        {
+            get => _selectableEnemies;
+            set
+            {
+                _selectableEnemies = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool UseEnemyExclusions
+        {
+            get => _useEnemyExclusions;
+            set
+            {
+                _useEnemyExclusions = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool ShowExclusionWarnings
+        {
+            get => _showExclusionWarnings;
+            set
+            {
+                _showExclusionWarnings = value;
+                FirePropertyChanged();
+            }
+        }
+
         public List<BoolItemControlClass> TextureBoolItemControls
         {
             get => _textureBoolItemControls;
@@ -1508,6 +1540,9 @@ namespace TRRandomizerView.Model
             DocileBirdMonsters.Value = _controller.DocileBirdMonsters;
             MaximiseDragonAppearance.Value = _controller.MaximiseDragonAppearance;
             RandoEnemyDifficulty = _controller.RandoEnemyDifficulty;
+            UseEnemyExclusions = _controller.UseEnemyExclusions;
+            ShowExclusionWarnings = _controller.ShowExclusionWarnings;
+            LoadEnemyExclusions();
 
             RandomizeSecrets = _controller.RandomizeSecrets;
             SecretSeed = _controller.SecretSeed;
@@ -1562,6 +1597,26 @@ namespace TRRandomizerView.Model
 
 
             FireSupportPropertiesChanged();
+        }
+
+        public void LoadEnemyExclusions()
+        {
+            SelectableEnemyControls = new List<BoolItemIDControlClass>();
+
+            // Add exclusions based on priority (i.e. order) followed by the remaining included controls
+            _controller.ExcludedEnemies.ForEach(e => SelectableEnemyControls.Add(new BoolItemIDControlClass
+            {
+                ID = e,
+                Title = _controller.ExcludableEnemies[e],
+                Value = true
+            }));
+
+            _controller.IncludedEnemies.ForEach(e => SelectableEnemyControls.Add(new BoolItemIDControlClass
+            {
+                ID = e,
+                Title = _controller.ExcludableEnemies[e],
+                Value = false
+            }));
         }
 
         public void RandomizeActiveSeeds()
@@ -1759,6 +1814,12 @@ namespace TRRandomizerView.Model
             _controller.DocileBirdMonsters = DocileBirdMonsters.Value;
             _controller.MaximiseDragonAppearance = MaximiseDragonAppearance.Value;
             _controller.RandoEnemyDifficulty = RandoEnemyDifficulty;
+            _controller.UseEnemyExclusions = UseEnemyExclusions;
+            _controller.ShowExclusionWarnings = ShowExclusionWarnings;
+
+            List<short> excludedEnemies = new List<short>();
+            SelectableEnemyControls.FindAll(c => c.Value).ForEach(c => excludedEnemies.Add((short)c.ID));
+            _controller.ExcludedEnemies = excludedEnemies;
 
             _controller.RandomizeSecrets = RandomizeSecrets;
             _controller.SecretSeed = SecretSeed;

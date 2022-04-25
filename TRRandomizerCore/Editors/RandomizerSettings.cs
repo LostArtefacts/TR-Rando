@@ -3,6 +3,8 @@ using TRRandomizerCore.Globalisation;
 using TRRandomizerCore.Helpers;
 using TRGE.Core;
 using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TRRandomizerCore.Editors
 {
@@ -54,6 +56,12 @@ namespace TRRandomizerCore.Editors
         public bool DocileBirdMonsters { get; set; }
         public RandoDifficulty RandoEnemyDifficulty { get; set; }
         public bool MaximiseDragonAppearance { get; set; }
+        public bool UseEnemyExclusions { get; set; }
+        public List<short> ExcludedEnemies { get; set; }
+        public Dictionary<short, string> ExcludableEnemies { get; set; }
+        public bool ShowExclusionWarnings { get; set; }
+        public List<short> IncludedEnemies => ExcludableEnemies.Keys.Except(ExcludedEnemies).ToList();
+        public bool OneEnemyMode => IncludedEnemies.Count == 1;
         public bool GlitchedSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
         public bool PersistOutfits { get; set; }
@@ -124,6 +132,13 @@ namespace TRRandomizerCore.Editors
             DocileBirdMonsters = config.GetBool(nameof(DocileBirdMonsters));
             RandoEnemyDifficulty = (RandoDifficulty)config.GetEnum(nameof(RandoEnemyDifficulty), typeof(RandoDifficulty), RandoDifficulty.Default);
             MaximiseDragonAppearance = config.GetBool(nameof(MaximiseDragonAppearance));
+            UseEnemyExclusions = config.GetBool(nameof(UseEnemyExclusions));
+            ShowExclusionWarnings = config.GetBool(nameof(ShowExclusionWarnings));
+            ExcludedEnemies = config.GetString(nameof(ExcludedEnemies))
+                .Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => short.Parse(s))
+                .Where(s => ExcludableEnemies.ContainsKey(s))
+                .ToList();
 
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
@@ -219,6 +234,9 @@ namespace TRRandomizerCore.Editors
             config[nameof(DocileBirdMonsters)] = DocileBirdMonsters;
             config[nameof(RandoEnemyDifficulty)] = RandoEnemyDifficulty;
             config[nameof(MaximiseDragonAppearance)] = MaximiseDragonAppearance;
+            config[nameof(ExcludedEnemies)] = string.Join(",", ExcludedEnemies);
+            config[nameof(UseEnemyExclusions)] = UseEnemyExclusions;
+            config[nameof(ShowExclusionWarnings)] = ShowExclusionWarnings;
 
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;

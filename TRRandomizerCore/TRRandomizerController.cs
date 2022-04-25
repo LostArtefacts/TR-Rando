@@ -461,6 +461,34 @@ namespace TRRandomizerCore
             set => LevelRandomizer.MaximiseDragonAppearance = value;
         }
 
+        public bool UseEnemyExclusions
+        {
+            get => LevelRandomizer.UseEnemyExclusions;
+            set => LevelRandomizer.UseEnemyExclusions = value;
+        }
+
+        public bool ShowExclusionWarnings
+        {
+            get => LevelRandomizer.ShowExclusionWarnings;
+            set => LevelRandomizer.ShowExclusionWarnings = value;
+        }
+
+        public List<short> ExcludedEnemies
+        {
+            get => LevelRandomizer.ExcludedEnemies;
+            set => LevelRandomizer.ExcludedEnemies = value;
+        }
+
+        public Dictionary<short, string> ExcludableEnemies
+        {
+            get => LevelRandomizer.ExcludableEnemies;
+        }
+
+        public List<short> IncludedEnemies
+        {
+            get => LevelRandomizer.IncludedEnemies;
+        }
+
         public bool RandomizeOutfits
         {
             get => LevelRandomizer.RandomizeOutfits;

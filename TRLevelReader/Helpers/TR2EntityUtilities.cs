@@ -113,6 +113,20 @@ namespace TRLevelReader.Helpers
             return new List<TR2Entities> { entity };
         }
 
+        public static List<TR2Entities> RemoveAliases(IEnumerable<TR2Entities> entities)
+        {
+            List<TR2Entities> ents = new List<TR2Entities>();
+            foreach (TR2Entities ent in entities)
+            {
+                TR2Entities normalisedEnt = TranslateEntityAlias(ent);
+                if (!ents.Contains(normalisedEnt))
+                {
+                    ents.Add(normalisedEnt);
+                }
+            }
+            return ents;
+        }
+
         public static List<TR2Entities> GetLaraTypes()
         {
             return new List<TR2Entities>
