@@ -82,6 +82,11 @@ namespace TRRandomizerView.Windows
             nameof(HasAudioOptions), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty HasBirdMonsterBehaviourProperty = DependencyProperty.Register
+        (
+            nameof(HasBirdMonsterBehaviour), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
         (
             nameof(ControllerProxy), typeof(ControllerOptions), typeof(AdvancedWindow)
@@ -165,6 +170,12 @@ namespace TRRandomizerView.Windows
             set => SetValue(HasAudioOptionsProperty, value);
         }
 
+        public bool HasBirdMonsterBehaviour
+        {
+            get => (bool)GetValue(HasBirdMonsterBehaviourProperty);
+            set => SetValue(HasBirdMonsterBehaviourProperty, value);
+        }
+
         public ControllerOptions ControllerProxy
         {
             get => (ControllerOptions)GetValue(ControllerProperty);
@@ -217,6 +228,21 @@ namespace TRRandomizerView.Windows
                         break;
                     case GlobeDisplayOption.Level:
                         _globeLevelButton.IsChecked = true;
+                        break;
+                }
+            }
+            if (HasBirdMonsterBehaviour)
+            {
+                switch (ControllerProxy.BirdMonsterBehaviour)
+                {
+                    case BirdMonsterBehaviour.Default:
+                        _defaultBirdBehaviourButton.IsChecked = true;
+                        break;
+                    case BirdMonsterBehaviour.Unconditional:
+                        _unconditionalBirdBehaviourButton.IsChecked = true;
+                        break;
+                    case BirdMonsterBehaviour.Docile:
+                        _docileBirdBehaviourButton.IsChecked = true;
                         break;
                 }
             }

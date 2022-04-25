@@ -100,7 +100,7 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // Track enemies whose counts across the game are restricted
-            _gameEnemyTracker = TR2EnemyUtilities.PrepareEnemyGameTracker(Settings.DocileBirdMonsters, Settings.RandoEnemyDifficulty);
+            _gameEnemyTracker = TR2EnemyUtilities.PrepareEnemyGameTracker(Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile, Settings.RandoEnemyDifficulty);
             
             // #272 Selective enemy pool - convert the shorts in the settings to actual entity types
             _excludedEnemies = Settings.UseEnemyExclusions ? 
@@ -195,7 +195,7 @@ namespace TRRandomizerCore.Randomizers
                 newEntities.Remove(TR2Entities.StickWieldingGoon1);
                 newEntities.Add(newGoon);
 
-                if (Settings.DocileBirdMonsters)
+                if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile)
                 {
                     newEntities.Remove(TR2Entities.MaskedGoon1);
                     newEntities.Add(TR2Entities.BirdMonster);
@@ -293,13 +293,13 @@ namespace TRRandomizerCore.Randomizers
                             newEntities.Clear();
                             newEntities.AddRange(restrictedCombinations[_generator.Next(0, restrictedCombinations.Count)]);
                         }
-                        while (Settings.DocileBirdMonsters && newEntities.Contains(TR2Entities.BirdMonster) && chickenGuisers.All(g => newEntities.Contains(g))
+                        while (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && newEntities.Contains(TR2Entities.BirdMonster) && chickenGuisers.All(g => newEntities.Contains(g))
                            || (newEntities.Any(_excludedEnemies.Contains) && restrictedCombinations.Any(c => !c.Any(_excludedEnemies.Contains))));
                         break;
                     }
 
-                    // If it's the chicken in HSH but we're not using docile, we don't want it ending the level
-                    if (!Settings.DocileBirdMonsters && entity == TR2Entities.BirdMonster && level.Is(TR2LevelNames.HOME) && allEnemies.Except(newEntities).Count() > 1)
+                    // If it's the chicken in HSH with default behaviour, we don't want it ending the level
+                    if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Default && entity == TR2Entities.BirdMonster && level.Is(TR2LevelNames.HOME) && allEnemies.Except(newEntities).Count() > 1)
                     {
                         continue;
                     }
@@ -334,7 +334,7 @@ namespace TRRandomizerCore.Randomizers
                     {
                         // #144 We can include docile chickens provided we aren't including everything
                         // that can be disguised as a chicken.
-                        if (Settings.DocileBirdMonsters)
+                        if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile)
                         {
                             bool guisersAvailable = !chickenGuisers.All(g => newEntities.Contains(g));
                             // If the selected entity is the chicken, it can be added provided there are
@@ -381,7 +381,7 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // #144 Decide at this point who will be guising unless it has already been decided above (e.g. HSH)          
-            if (Settings.DocileBirdMonsters && newEntities.Contains(TR2Entities.BirdMonster) && chickenGuiser == TR2Entities.BirdMonster)
+            if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && newEntities.Contains(TR2Entities.BirdMonster) && chickenGuiser == TR2Entities.BirdMonster)
             {
                 int guiserIndex = chickenGuisers.FindIndex(g => !newEntities.Contains(g));
                 if (guiserIndex != -1)
@@ -450,7 +450,7 @@ namespace TRRandomizerCore.Randomizers
             List<TR2Entities> droppableEnemies = TR2EntityUtilities.DroppableEnemyTypes()[level.Name];
             List<TR2Entities> waterEnemies = TR2EntityUtilities.FilterWaterEnemies(availableEnemyTypes);
 
-            if (Settings.DocileBirdMonsters && level.Is(TR2LevelNames.CHICKEN))
+            if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && level.Is(TR2LevelNames.CHICKEN))
             {
                 DisguiseEntity(level, TR2Entities.MaskedGoon1, TR2Entities.BirdMonster);
             }
@@ -738,7 +738,7 @@ namespace TRRandomizerCore.Randomizers
 
                 // #144 Disguise something as the Chicken. Pre-checks will have been done to ensure
                 // the guiser is suitable for the level.
-                if (Settings.DocileBirdMonsters && newEntityType == TR2Entities.BirdMonster)
+                if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && newEntityType == TR2Entities.BirdMonster)
                 {
                     newEntityType = enemies.BirdMonsterGuiser;
                 }
@@ -815,6 +815,17 @@ namespace TRRandomizerCore.Randomizers
             }
 
             RandomizeEnemyMeshes(level, enemies);
+
+            if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional && !level.Is(TR2LevelNames.CHICKEN))
+            {
+                TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)TR2Entities.BirdMonster);
+                if (model != null)
+                {
+                    // #327 Trick the game into never reaching the final frame of the death animation.
+                    // This results in a very abrupt death but avoids the level ending.
+                    level.Data.Animations[model.Animation + 20].FrameEnd = level.Data.Animations[model.Animation + 19].FrameEnd;
+                }
+            }
         }
 
         private void LimitSkidooEntities(TR2CombinedLevel level)
@@ -877,7 +888,7 @@ namespace TRRandomizerCore.Randomizers
             
             List<TR2Entities> laraClones = new List<TR2Entities>();
             const int chance = 2;
-            if (!Settings.DocileBirdMonsters)
+            if (Settings.BirdMonsterBehaviour != BirdMonsterBehaviour.Docile)
             {
                 AddRandomLaraClone(enemies, TR2Entities.MonkWithKnifeStick, laraClones, chance);
                 AddRandomLaraClone(enemies, TR2Entities.MonkWithLongStick, laraClones, chance);
@@ -1063,7 +1074,7 @@ namespace TRRandomizerCore.Randomizers
                                 All = new List<TR2Entities>(importedCollection.EntitiesToImport)
                             };
 
-                            if (_outer.Settings.DocileBirdMonsters && importedCollection.BirdMonsterGuiser != TR2Entities.BirdMonster)
+                            if (_outer.Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && importedCollection.BirdMonsterGuiser != TR2Entities.BirdMonster)
                             {
                                 _outer.DisguiseEntity(level, importedCollection.BirdMonsterGuiser, TR2Entities.BirdMonster);
                                 enemies.BirdMonsterGuiser = importedCollection.BirdMonsterGuiser;

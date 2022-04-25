@@ -75,6 +75,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -182,8 +183,87 @@
                 </Grid>
             </StackPanel>
 
-            <!-- (Enemy) Difficulty -->
+            <!-- Chicken Behaviour -->
             <StackPanel Grid.Row="3"
+                        Visibility="{Binding HasBirdMonsterBehaviour, Converter={StaticResource BoolToCollapsedConverter}}">
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Bird Monster Behaviour"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <RadioButton Content="Default"
+                                     GroupName="birdMonsterBehaviour"
+                                     x:Name="_defaultBirdBehaviourButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.BirdMonsterBehaviour, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:BirdMonsterBehaviour.Default}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Bird monsters will be aggressive and will end the level when killed."/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <RadioButton Content="Unconditional"
+                                     GroupName="birdMonsterBehaviour"
+                                     x:Name="_unconditionalBirdBehaviourButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.BirdMonsterBehaviour, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:BirdMonsterBehaviour.Unconditional}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <TextBlock>
+                                <Run>Bird monsters will be aggressive but will </Run>
+                                <Run TextDecorations="Underline">not </Run>
+                                <Run>end the level when killed.</Run>
+                            </TextBlock>
+                        </Label>
+                    </Border>
+                    
+                    <Border Grid.Row="2">
+                        <RadioButton Content="Docile"
+                                     GroupName="birdMonsterBehaviour"
+                                     x:Name="_docileBirdBehaviourButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.BirdMonsterBehaviour, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:BirdMonsterBehaviour.Docile}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Row="2"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <TextBlock>
+                                <Run>Bird monsters will </Run>
+                                <Run TextDecorations="Underline">not </Run>
+                                <Run>be aggressive and will </Run>
+                                <Run TextDecorations="Underline">not </Run>
+                                <Run>end the level when killed.</Run>
+                            </TextBlock>
+                        </Label>
+                    </Border>
+                </Grid>
+            </StackPanel>
+            
+            <!-- (Enemy) Difficulty -->
+            <StackPanel Grid.Row="4"
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -243,7 +323,7 @@
             </StackPanel>
 
             <!-- Enemy Exclusions -->
-            <StackPanel Grid.Row="4"
+            <StackPanel Grid.Row="5"
                         Visibility="{Binding HasDifficulty, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -286,7 +366,7 @@
             </StackPanel>
             
             <!-- Language -->
-            <StackPanel Grid.Row="5"
+            <StackPanel Grid.Row="6"
                         Visibility="{Binding HasLanguage, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -314,7 +394,7 @@
             </StackPanel>
 
             <!-- Mirrored Levels -->
-            <StackPanel Grid.Row="6"
+            <StackPanel Grid.Row="7"
                         Visibility="{Binding HasMirroring, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -368,7 +448,7 @@
             </StackPanel>
 
             <!-- Haircuts -->
-            <StackPanel Grid.Row="7"
+            <StackPanel Grid.Row="8"
                         Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -422,7 +502,7 @@
             </StackPanel>
 
             <!-- Invisibility -->
-            <StackPanel Grid.Row="8"
+            <StackPanel Grid.Row="9"
                         Visibility="{Binding HasInvisibility, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -476,7 +556,7 @@
             </StackPanel>
 
             <!-- Night Mode general -->
-            <StackPanel Grid.Row="9"
+            <StackPanel Grid.Row="10"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -667,7 +747,7 @@
             </StackPanel>
 
             <!-- Intensity -->
-            <StackPanel Grid.Row="10"
+            <StackPanel Grid.Row="11"
                         Visibility="{Binding HasNightMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -723,7 +803,7 @@
             </StackPanel>
 
             <!-- TR3 Globe Options -->
-            <StackPanel Grid.Row="11"
+            <StackPanel Grid.Row="12"
                         Visibility="{Binding HasGlobeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
@@ -790,7 +870,7 @@
             </StackPanel>
             
             <!-- Level Count -->
-            <StackPanel Grid.Row="12"
+            <StackPanel Grid.Row="13"
                         Visibility="{Binding HasGlobeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -837,7 +917,7 @@
             </StackPanel>
 
             <!-- Wireframing -->
-            <StackPanel Grid.Row="13"
+            <StackPanel Grid.Row="14"
                         Visibility="{Binding HasTextureOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
@@ -951,7 +1031,7 @@
             </StackPanel>
 
             <!-- SFX -->
-            <StackPanel Grid.Row="14"
+            <StackPanel Grid.Row="15"
                         Visibility="{Binding HasAudioOptions, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"

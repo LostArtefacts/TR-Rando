@@ -191,7 +191,7 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
 
-            if (!Settings.DocileBirdMonsters || Settings.OneEnemyMode || Settings.IncludedEnemies.Count < newEntities.Capacity)
+            if (!Settings.DocileWillard || Settings.OneEnemyMode || Settings.IncludedEnemies.Count < newEntities.Capacity)
             {
                 // Willie isn't excludable in his own right because supporting a Willie-only game is impossible
                 allEnemies.Remove(TR3Entities.Willie);

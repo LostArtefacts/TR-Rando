@@ -53,7 +53,8 @@ namespace TRRandomizerCore.Editors
         public bool UseWireframeLadders { get; set; }
         public bool CrossLevelEnemies { get; set; }
         public bool ProtectMonks { get; set; }
-        public bool DocileBirdMonsters { get; set; }
+        public bool DocileWillard { get; set; }
+        public BirdMonsterBehaviour BirdMonsterBehaviour { get; set; }
         public RandoDifficulty RandoEnemyDifficulty { get; set; }
         public bool MaximiseDragonAppearance { get; set; }
         public bool UseEnemyExclusions { get; set; }
@@ -131,7 +132,8 @@ namespace TRRandomizerCore.Editors
             EnemySeed = config.GetInt(nameof(EnemySeed), defaultSeed);
             CrossLevelEnemies = config.GetBool(nameof(CrossLevelEnemies), true);
             ProtectMonks = config.GetBool(nameof(ProtectMonks), true);
-            DocileBirdMonsters = config.GetBool(nameof(DocileBirdMonsters));
+            DocileWillard = config.GetBool(nameof(DocileWillard));
+            BirdMonsterBehaviour = (BirdMonsterBehaviour)config.GetEnum(nameof(BirdMonsterBehaviour), typeof(BirdMonsterBehaviour), BirdMonsterBehaviour.Default);
             RandoEnemyDifficulty = (RandoDifficulty)config.GetEnum(nameof(RandoEnemyDifficulty), typeof(RandoDifficulty), RandoDifficulty.Default);
             MaximiseDragonAppearance = config.GetBool(nameof(MaximiseDragonAppearance));
             UseEnemyExclusions = config.GetBool(nameof(UseEnemyExclusions));
@@ -235,7 +237,8 @@ namespace TRRandomizerCore.Editors
             config[nameof(EnemySeed)] = EnemySeed;
             config[nameof(CrossLevelEnemies)] = CrossLevelEnemies;
             config[nameof(ProtectMonks)] = ProtectMonks;
-            config[nameof(DocileBirdMonsters)] = DocileBirdMonsters;
+            config[nameof(DocileWillard)] = DocileWillard;
+            config[nameof(BirdMonsterBehaviour)] = BirdMonsterBehaviour;
             config[nameof(RandoEnemyDifficulty)] = RandoEnemyDifficulty;
             config[nameof(MaximiseDragonAppearance)] = MaximiseDragonAppearance;
             config[nameof(ExcludedEnemies)] = string.Join(",", ExcludedEnemies);

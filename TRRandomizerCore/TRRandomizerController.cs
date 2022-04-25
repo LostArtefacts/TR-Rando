@@ -37,6 +37,10 @@ namespace TRRandomizerCore
             [TRVersion.TR2] = new List<TRRandomizerType>
             {
                 TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.VFX
+            },
+            [TRVersion.TR3] = new List<TRRandomizerType>
+            {
+                TRRandomizerType.BirdMonsterBehaviour
             }
         };
 
@@ -443,10 +447,16 @@ namespace TRRandomizerCore
             set => LevelRandomizer.ProtectMonks = value;
         }
 
-        public bool DocileBirdMonsters
+        public bool DocileWillard
         {
-            get => LevelRandomizer.DocileBirdMonsters;
-            set => LevelRandomizer.DocileBirdMonsters = value;
+            get => LevelRandomizer.DocileWillard;
+            set => LevelRandomizer.DocileWillard = value;
+        }
+
+        public BirdMonsterBehaviour BirdMonsterBehaviour
+        {
+            get => LevelRandomizer.BirdMonsterBehaviour;
+            set => LevelRandomizer.BirdMonsterBehaviour = value;
         }
 
         public RandoDifficulty RandoEnemyDifficulty
