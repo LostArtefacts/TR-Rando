@@ -77,6 +77,11 @@ namespace TRRandomizerView.Windows
             nameof(HasTextureOptions), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty HasAudioOptionsProperty = DependencyProperty.Register
+        (
+            nameof(HasAudioOptions), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
         (
             nameof(ControllerProxy), typeof(ControllerOptions), typeof(AdvancedWindow)
@@ -152,6 +157,12 @@ namespace TRRandomizerView.Windows
         {
             get => (bool)GetValue(HasTextureOptionsProperty);
             set => SetValue(HasTextureOptionsProperty, value);
+        }
+
+        public bool HasAudioOptions
+        {
+            get => (bool)GetValue(HasAudioOptionsProperty);
+            set => SetValue(HasAudioOptionsProperty, value);
         }
 
         public ControllerOptions ControllerProxy

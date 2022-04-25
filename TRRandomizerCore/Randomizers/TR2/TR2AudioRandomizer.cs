@@ -12,21 +12,26 @@ using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Handlers;
+using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Randomizers
 {
     public class TR2AudioRandomizer : BaseTR2Randomizer
     {
+        private const int _maxSample = 407;
+
         private AudioRandomizer _audioRandomizer;
 
         private List<TRSFXDefinition<TRSoundDetails>> _soundEffects;
         private List<TRSFXGeneralCategory> _sfxCategories;
+        private List<TR2ScriptedLevel> _uncontrolledLevels;
 
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
 
             LoadAudioData();
+            ChooseUncontrolledLevels();
 
             foreach (TR2ScriptedLevel lvl in Levels)
             {
@@ -43,6 +48,23 @@ namespace TRRandomizerCore.Randomizers
                     break;
                 }
             }
+        }
+
+        private void ChooseUncontrolledLevels()
+        {
+            TR2ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR2LevelNames.ASSAULT));
+            ISet<TR2ScriptedLevel> exlusions = new HashSet<TR2ScriptedLevel> { assaultCourse };
+
+            _uncontrolledLevels = Levels.RandomSelection(_generator, (int)Settings.UncontrolledSFXCount, exclusions: exlusions);
+            if (Settings.AssaultCourseWireframe)
+            {
+                _uncontrolledLevels.Add(assaultCourse);
+            }
+        }
+
+        public bool IsUncontrolledLevel(TR2ScriptedLevel level)
+        {
+            return _uncontrolledLevels.Contains(level);
         }
 
         private void RandomizeMusicTriggers(TR2CombinedLevel level)
@@ -178,50 +200,63 @@ namespace TRRandomizerCore.Randomizers
                 return;
             }
 
-            // Run through the SoundMap for this level and get the SFX definition for each one.
-            // Choose a new sound effect provided the definition is in a category we want to change.
-            // Lara's SFX are not changed by default.
-            for (int internalIndex = 0; internalIndex < level.Data.SoundMap.Length; internalIndex++)
+            if (IsUncontrolledLevel(level.Script))
             {
-                TRSFXDefinition<TRSoundDetails> definition = _soundEffects.Find(sfx => sfx.InternalIndex == internalIndex);
-                if (level.Data.SoundMap[internalIndex] == -1 || definition == null || definition.Creature == TRSFXCreatureCategory.Lara || !_sfxCategories.Contains(definition.PrimaryCategory))
+                // Choose a random sample for each current entry and replace the entire index list.
+                ISet<uint> indices = new HashSet<uint>();
+                while (indices.Count < level.Data.NumSampleIndices)
                 {
-                    continue;
+                    indices.Add((uint)_generator.Next(0, _maxSample + 1));
                 }
-
-                // The following allows choosing to keep humans making human noises, and animals animal noises.
-                // Other humans can use Lara's SFX.
-                Predicate<TRSFXDefinition<TRSoundDetails>> pred;
-                if (Settings.LinkCreatureSFX && definition.Creature > TRSFXCreatureCategory.Lara)
+                level.Data.SampleIndices = indices.ToArray();
+            }
+            else
+            {
+                // Run through the SoundMap for this level and get the SFX definition for each one.
+                // Choose a new sound effect provided the definition is in a category we want to change.
+                // Lara's SFX are not changed by default.
+                for (int internalIndex = 0; internalIndex < level.Data.SoundMap.Length; internalIndex++)
                 {
-                    pred = sfx =>
+                    TRSFXDefinition<TRSoundDetails> definition = _soundEffects.Find(sfx => sfx.InternalIndex == internalIndex);
+                    if (level.Data.SoundMap[internalIndex] == -1 || definition == null || definition.Creature == TRSFXCreatureCategory.Lara || !_sfxCategories.Contains(definition.PrimaryCategory))
                     {
-                        return sfx.Categories.Contains(definition.PrimaryCategory) &&
-                        sfx != definition &&
-                        (
-                            sfx.Creature == definition.Creature ||
-                            (sfx.Creature == TRSFXCreatureCategory.Lara && definition.Creature == TRSFXCreatureCategory.Human)
-                        );
-                    };
-                }
-                else
-                {
-                    pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && sfx != definition;
-                }
+                        continue;
+                    }
 
-                // Try to find definitions that match
-                List<TRSFXDefinition<TRSoundDetails>> otherDefinitions = _soundEffects.FindAll(pred);
-                if (otherDefinitions.Count > 0)
-                {
-                    // Pick a new definition and try to import it into the level. This should only fail if
-                    // the JSON is misconfigured e.g. missing sample indices. In that case, we just leave 
-                    // the current sound effect as-is.
-                    TRSFXDefinition<TRSoundDetails> nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
-                    short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition);
-                    if (soundDetailsIndex != -1)
+                    // The following allows choosing to keep humans making human noises, and animals animal noises.
+                    // Other humans can use Lara's SFX.
+                    Predicate<TRSFXDefinition<TRSoundDetails>> pred;
+                    if (Settings.LinkCreatureSFX && definition.Creature > TRSFXCreatureCategory.Lara)
                     {
-                        // Only change it if the import succeeded
-                        level.Data.SoundMap[internalIndex] = soundDetailsIndex;
+                        pred = sfx =>
+                        {
+                            return sfx.Categories.Contains(definition.PrimaryCategory) &&
+                            sfx != definition &&
+                            (
+                                sfx.Creature == definition.Creature ||
+                                (sfx.Creature == TRSFXCreatureCategory.Lara && definition.Creature == TRSFXCreatureCategory.Human)
+                            );
+                        };
+                    }
+                    else
+                    {
+                        pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && sfx != definition;
+                    }
+
+                    // Try to find definitions that match
+                    List<TRSFXDefinition<TRSoundDetails>> otherDefinitions = _soundEffects.FindAll(pred);
+                    if (otherDefinitions.Count > 0)
+                    {
+                        // Pick a new definition and try to import it into the level. This should only fail if
+                        // the JSON is misconfigured e.g. missing sample indices. In that case, we just leave 
+                        // the current sound effect as-is.
+                        TRSFXDefinition<TRSoundDetails> nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
+                        short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition);
+                        if (soundDetailsIndex != -1)
+                        {
+                            // Only change it if the import succeeded
+                            level.Data.SoundMap[internalIndex] = soundDetailsIndex;
+                        }
                     }
                 }
             }

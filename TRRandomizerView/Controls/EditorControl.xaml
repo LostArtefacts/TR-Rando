@@ -297,6 +297,7 @@
                                         MainDescription="Customize the audio randomization."
                                         BoolItemsSource="{Binding Data.AudioBoolItemControls, Source={StaticResource proxy}}"
                                         HasBoolItems="True"
+                                        HasAudioOptions="True"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>

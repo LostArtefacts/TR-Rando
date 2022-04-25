@@ -646,6 +646,18 @@ namespace TRRandomizerCore
             set => LevelRandomizer.LinkCreatureSFX = value;
         }
 
+        public uint UncontrolledSFXCount
+        {
+            get => LevelRandomizer.UncontrolledSFXCount;
+            set => LevelRandomizer.UncontrolledSFXCount = value;
+        }
+
+        public bool UncontrolledSFXAssaultCourse
+        {
+            get => LevelRandomizer.UncontrolledSFXAssaultCourse;
+            set => LevelRandomizer.UncontrolledSFXAssaultCourse = value;
+        }
+
         public bool RandomizeStartPosition
         {
             get => LevelRandomizer.RandomizeStartPosition;

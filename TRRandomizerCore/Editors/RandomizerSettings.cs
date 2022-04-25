@@ -83,6 +83,8 @@ namespace TRRandomizerCore.Editors
         public bool ChangeCrashSFX { get; set; }
         public bool ChangeEnemySFX { get; set; }
         public bool LinkCreatureSFX { get; set; }
+        public uint UncontrolledSFXCount { get; set; }
+        public bool UncontrolledSFXAssaultCourse { get; set; }
         public bool RotateStartPositionOnly { get; set; }
         public bool RandomizeWaterLevels { get; set; }
         public bool RandomizeSlotPositions { get; set; }
@@ -181,6 +183,8 @@ namespace TRRandomizerCore.Editors
             ChangeCrashSFX = config.GetBool(nameof(ChangeCrashSFX), true);
             ChangeEnemySFX = config.GetBool(nameof(ChangeEnemySFX), true);
             LinkCreatureSFX = config.GetBool(nameof(LinkCreatureSFX));
+            UncontrolledSFXCount = config.GetUInt(nameof(UncontrolledSFXCount), 0);
+            UncontrolledSFXAssaultCourse = config.GetBool(nameof(UncontrolledSFXAssaultCourse));
 
             RandomizeStartPosition = config.GetBool(nameof(RandomizeStartPosition));
             StartPositionSeed = config.GetInt(nameof(StartPositionSeed), defaultSeed);
@@ -278,6 +282,8 @@ namespace TRRandomizerCore.Editors
             config[nameof(ChangeCrashSFX)] = ChangeCrashSFX;
             config[nameof(ChangeEnemySFX)] = ChangeEnemySFX;
             config[nameof(LinkCreatureSFX)] = LinkCreatureSFX;
+            config[nameof(UncontrolledSFXCount)] = UncontrolledSFXCount;
+            config[nameof(UncontrolledSFXAssaultCourse)] = UncontrolledSFXAssaultCourse;
 
             config[nameof(RandomizeStartPosition)] = RandomizeStartPosition;
             config[nameof(StartPositionSeed)] = StartPositionSeed;

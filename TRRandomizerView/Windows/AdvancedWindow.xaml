@@ -74,6 +74,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -945,6 +946,60 @@
                             Grid.Row="5">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="If selected, special textures will be generated for ladders, otherwise they will look the same as walls."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!-- SFX -->
+            <StackPanel Grid.Row="14"
+                        Visibility="{Binding HasAudioOptions, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Uncontrolled SFX"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Margin="0,3,0,0">
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Left">
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown 
+                                HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"  
+                                        Value="{Binding ControllerProxy.UncontrolledSFXCount, Mode=TwoWay}"
+                                        MinValue="0"
+                                        MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Apply completely uncontrolled/uncategorized SFX randomization to the given number of levels."/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <CheckBox IsChecked="{Binding ControllerProxy.UncontrolledSFXAssaultCourse, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Include Assault Course" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Apply uncontrolled SFX randomization to the assault course in addition to or separately from above."/>
                     </Border>
                 </Grid>
             </StackPanel>

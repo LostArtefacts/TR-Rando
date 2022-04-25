@@ -56,6 +56,8 @@ namespace TRRandomizerView.Model
         private bool _vfxRoom;
         private bool _vfxCaustics;
         private bool _vfxWave;
+        private uint _uncontrolledSFXCount;
+        private bool _uncontrolledSFXAssaultCourse;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
         private List<BoolItemIDControlClass> _selectableEnemies;
@@ -131,6 +133,7 @@ namespace TRRandomizerView.Model
             HaircutLevelCount = (uint)Math.Min(HaircutLevelCount, MaximumLevelCount);
             InvisibleLevelCount = (uint)Math.Min(InvisibleLevelCount, MaximumLevelCount);
             WireframeLevelCount = (uint)Math.Min(WireframeLevelCount, MaximumLevelCount);
+            UncontrolledSFXCount = (uint)Math.Min(UncontrolledSFXCount, MaximumLevelCount);
         }
 
         public bool RandomizationPossible
@@ -528,6 +531,26 @@ namespace TRRandomizerView.Model
             set
             {
                 _linkCreatureSFX = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint UncontrolledSFXCount
+        {
+            get => _uncontrolledSFXCount;
+            set
+            {
+                _uncontrolledSFXCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool UncontrolledSFXAssaultCourse
+        {
+            get => _uncontrolledSFXAssaultCourse;
+            set
+            {
+                _uncontrolledSFXAssaultCourse = value;
                 FirePropertyChanged();
             }
         }
@@ -1527,6 +1550,8 @@ namespace TRRandomizerView.Model
             ChangeCrashSFX.Value = _controller.ChangeCrashSFX;
             ChangeEnemySFX.Value = _controller.ChangeEnemySFX;
             LinkCreatureSFX.Value = _controller.LinkCreatureSFX;
+            UncontrolledSFXCount = _controller.UncontrolledSFXCount;
+            UncontrolledSFXAssaultCourse = _controller.UncontrolledSFXAssaultCourse;
 
             RandomizeItems = _controller.RandomizeItems;
             ItemSeed = _controller.ItemSeed;
@@ -1801,6 +1826,8 @@ namespace TRRandomizerView.Model
             _controller.ChangeCrashSFX = ChangeCrashSFX.Value;
             _controller.ChangeEnemySFX = ChangeEnemySFX.Value;
             _controller.LinkCreatureSFX = LinkCreatureSFX.Value;
+            _controller.UncontrolledSFXCount = UncontrolledSFXCount;
+            _controller.UncontrolledSFXAssaultCourse = UncontrolledSFXAssaultCourse;
 
             _controller.RandomizeItems = RandomizeItems;
             _controller.ItemSeed = ItemSeed;
