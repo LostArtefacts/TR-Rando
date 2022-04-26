@@ -49,6 +49,9 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeExistingEnemies()
         {
+            _excludedEnemies = new List<TR2Entities>();
+            _resultantEnemies = new HashSet<TR2Entities>();
+
             foreach (TR2ScriptedLevel lvl in Levels)
             {
                 //Read the level into a combined data/script level object
