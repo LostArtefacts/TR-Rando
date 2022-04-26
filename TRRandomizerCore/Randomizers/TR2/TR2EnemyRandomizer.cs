@@ -907,6 +907,9 @@ namespace TRRandomizerCore.Randomizers
                     enemyModel.StartingMesh = laraModel.StartingMesh;
                     enemyModel.NumMeshes = laraModel.NumMeshes;
                 }
+
+                // Remove texture randomization for this enemy as it's no longer required
+                TextureMonitor.ClearMonitor(level.Name, laraClones);
             }
 
             if (enemies.All.Contains(TR2Entities.MarcoBartoli)

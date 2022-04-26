@@ -453,7 +453,8 @@ namespace TRRandomizerCore.Utilities
                 [TR2LevelNames.BARTOLI] = -2,
                 [TR2LevelNames.OPERA] = -2,
                 [TR2LevelNames.DA] = -1,
-                [TR2LevelNames.TIBET] = -1
+                [TR2LevelNames.TIBET] = -1,
+                [TR2LevelNames.FLOATER] = -1,
             }
         };
 
