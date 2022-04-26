@@ -81,6 +81,14 @@ namespace TRRandomizerCore.Processors
             }
         }
 
+        internal void SetWarning(string text)
+        {
+            lock (_monitorLock)
+            {
+                SaveMonitor.FireSaveStateChanged(category: TRSaveCategory.Warning, customDescription: text);
+            }
+        }
+
         public void HandleException(Exception e)
         {
             lock (_monitorLock)

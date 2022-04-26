@@ -3,6 +3,8 @@ using TRRandomizerCore.Globalisation;
 using TRRandomizerCore.Helpers;
 using TRGE.Core;
 using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TRRandomizerCore.Editors
 {
@@ -51,9 +53,17 @@ namespace TRRandomizerCore.Editors
         public bool UseWireframeLadders { get; set; }
         public bool CrossLevelEnemies { get; set; }
         public bool ProtectMonks { get; set; }
-        public bool DocileBirdMonsters { get; set; }
+        public bool DocileWillard { get; set; }
+        public BirdMonsterBehaviour BirdMonsterBehaviour { get; set; }
         public RandoDifficulty RandoEnemyDifficulty { get; set; }
         public bool MaximiseDragonAppearance { get; set; }
+        public bool UseEnemyExclusions { get; set; }
+        public List<short> ExcludedEnemies { get; set; }
+        public Dictionary<short, string> ExcludableEnemies { get; set; }
+        public bool ShowExclusionWarnings { get; set; }
+        public List<short> IncludedEnemies => ExcludableEnemies.Keys.Except(ExcludedEnemies).ToList();
+        public bool OneEnemyMode => IncludedEnemies.Count == 1;
+        public bool SwapEnemyAppearance { get; set; }
         public bool GlitchedSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
         public bool PersistOutfits { get; set; }
@@ -75,6 +85,8 @@ namespace TRRandomizerCore.Editors
         public bool ChangeCrashSFX { get; set; }
         public bool ChangeEnemySFX { get; set; }
         public bool LinkCreatureSFX { get; set; }
+        public uint UncontrolledSFXCount { get; set; }
+        public bool UncontrolledSFXAssaultCourse { get; set; }
         public bool RotateStartPositionOnly { get; set; }
         public bool RandomizeWaterLevels { get; set; }
         public bool RandomizeSlotPositions { get; set; }
@@ -121,9 +133,18 @@ namespace TRRandomizerCore.Editors
             EnemySeed = config.GetInt(nameof(EnemySeed), defaultSeed);
             CrossLevelEnemies = config.GetBool(nameof(CrossLevelEnemies), true);
             ProtectMonks = config.GetBool(nameof(ProtectMonks), true);
-            DocileBirdMonsters = config.GetBool(nameof(DocileBirdMonsters));
+            DocileWillard = config.GetBool(nameof(DocileWillard));
+            BirdMonsterBehaviour = (BirdMonsterBehaviour)config.GetEnum(nameof(BirdMonsterBehaviour), typeof(BirdMonsterBehaviour), BirdMonsterBehaviour.Default);
             RandoEnemyDifficulty = (RandoDifficulty)config.GetEnum(nameof(RandoEnemyDifficulty), typeof(RandoDifficulty), RandoDifficulty.Default);
             MaximiseDragonAppearance = config.GetBool(nameof(MaximiseDragonAppearance));
+            SwapEnemyAppearance = config.GetBool(nameof(SwapEnemyAppearance), true);
+            UseEnemyExclusions = config.GetBool(nameof(UseEnemyExclusions));
+            ShowExclusionWarnings = config.GetBool(nameof(ShowExclusionWarnings));
+            ExcludedEnemies = config.GetString(nameof(ExcludedEnemies))
+                .Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => short.Parse(s))
+                .Where(s => ExcludableEnemies.ContainsKey(s))
+                .ToList();
 
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
@@ -166,6 +187,8 @@ namespace TRRandomizerCore.Editors
             ChangeCrashSFX = config.GetBool(nameof(ChangeCrashSFX), true);
             ChangeEnemySFX = config.GetBool(nameof(ChangeEnemySFX), true);
             LinkCreatureSFX = config.GetBool(nameof(LinkCreatureSFX));
+            UncontrolledSFXCount = config.GetUInt(nameof(UncontrolledSFXCount), 0);
+            UncontrolledSFXAssaultCourse = config.GetBool(nameof(UncontrolledSFXAssaultCourse));
 
             RandomizeStartPosition = config.GetBool(nameof(RandomizeStartPosition));
             StartPositionSeed = config.GetInt(nameof(StartPositionSeed), defaultSeed);
@@ -216,9 +239,14 @@ namespace TRRandomizerCore.Editors
             config[nameof(EnemySeed)] = EnemySeed;
             config[nameof(CrossLevelEnemies)] = CrossLevelEnemies;
             config[nameof(ProtectMonks)] = ProtectMonks;
-            config[nameof(DocileBirdMonsters)] = DocileBirdMonsters;
+            config[nameof(DocileWillard)] = DocileWillard;
+            config[nameof(BirdMonsterBehaviour)] = BirdMonsterBehaviour;
             config[nameof(RandoEnemyDifficulty)] = RandoEnemyDifficulty;
             config[nameof(MaximiseDragonAppearance)] = MaximiseDragonAppearance;
+            config[nameof(ExcludedEnemies)] = string.Join(",", ExcludedEnemies);
+            config[nameof(UseEnemyExclusions)] = UseEnemyExclusions;
+            config[nameof(ShowExclusionWarnings)] = ShowExclusionWarnings;
+            config[nameof(SwapEnemyAppearance)] = SwapEnemyAppearance;
 
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;
@@ -260,6 +288,8 @@ namespace TRRandomizerCore.Editors
             config[nameof(ChangeCrashSFX)] = ChangeCrashSFX;
             config[nameof(ChangeEnemySFX)] = ChangeEnemySFX;
             config[nameof(LinkCreatureSFX)] = LinkCreatureSFX;
+            config[nameof(UncontrolledSFXCount)] = UncontrolledSFXCount;
+            config[nameof(UncontrolledSFXAssaultCourse)] = UncontrolledSFXAssaultCourse;
 
             config[nameof(RandomizeStartPosition)] = RandomizeStartPosition;
             config[nameof(StartPositionSeed)] = StartPositionSeed;

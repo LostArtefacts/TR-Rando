@@ -37,6 +37,10 @@ namespace TRRandomizerCore
             [TRVersion.TR2] = new List<TRRandomizerType>
             {
                 TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.VFX
+            },
+            [TRVersion.TR3] = new List<TRRandomizerType>
+            {
+                TRRandomizerType.BirdMonsterBehaviour
             }
         };
 
@@ -443,10 +447,16 @@ namespace TRRandomizerCore
             set => LevelRandomizer.ProtectMonks = value;
         }
 
-        public bool DocileBirdMonsters
+        public bool DocileWillard
         {
-            get => LevelRandomizer.DocileBirdMonsters;
-            set => LevelRandomizer.DocileBirdMonsters = value;
+            get => LevelRandomizer.DocileWillard;
+            set => LevelRandomizer.DocileWillard = value;
+        }
+
+        public BirdMonsterBehaviour BirdMonsterBehaviour
+        {
+            get => LevelRandomizer.BirdMonsterBehaviour;
+            set => LevelRandomizer.BirdMonsterBehaviour = value;
         }
 
         public RandoDifficulty RandoEnemyDifficulty
@@ -459,6 +469,40 @@ namespace TRRandomizerCore
         {
             get => LevelRandomizer.MaximiseDragonAppearance;
             set => LevelRandomizer.MaximiseDragonAppearance = value;
+        }
+
+        public bool UseEnemyExclusions
+        {
+            get => LevelRandomizer.UseEnemyExclusions;
+            set => LevelRandomizer.UseEnemyExclusions = value;
+        }
+
+        public bool ShowExclusionWarnings
+        {
+            get => LevelRandomizer.ShowExclusionWarnings;
+            set => LevelRandomizer.ShowExclusionWarnings = value;
+        }
+
+        public List<short> ExcludedEnemies
+        {
+            get => LevelRandomizer.ExcludedEnemies;
+            set => LevelRandomizer.ExcludedEnemies = value;
+        }
+
+        public Dictionary<short, string> ExcludableEnemies
+        {
+            get => LevelRandomizer.ExcludableEnemies;
+        }
+
+        public List<short> IncludedEnemies
+        {
+            get => LevelRandomizer.IncludedEnemies;
+        }
+
+        public bool SwapEnemyAppearance
+        {
+            get => LevelRandomizer.SwapEnemyAppearance;
+            set => LevelRandomizer.SwapEnemyAppearance = value;
         }
 
         public bool RandomizeOutfits
@@ -616,6 +660,18 @@ namespace TRRandomizerCore
         {
             get => LevelRandomizer.LinkCreatureSFX;
             set => LevelRandomizer.LinkCreatureSFX = value;
+        }
+
+        public uint UncontrolledSFXCount
+        {
+            get => LevelRandomizer.UncontrolledSFXCount;
+            set => LevelRandomizer.UncontrolledSFXCount = value;
+        }
+
+        public bool UncontrolledSFXAssaultCourse
+        {
+            get => LevelRandomizer.UncontrolledSFXAssaultCourse;
+            set => LevelRandomizer.UncontrolledSFXAssaultCourse = value;
         }
 
         public bool RandomizeStartPosition

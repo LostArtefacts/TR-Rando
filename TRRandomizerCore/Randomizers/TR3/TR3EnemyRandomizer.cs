@@ -1,22 +1,18 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Levels;
-using TRRandomizerCore.Processors;
-using TRRandomizerCore.Utilities;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Transport;
-using System.Diagnostics;
+using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Levels;
+using TRRandomizerCore.Processors;
 using TRRandomizerCore.Textures;
-using Newtonsoft.Json;
-using TREnvironmentEditor;
-using TRFDControl.Utilities;
-using TRFDControl;
-using TRFDControl.FDEntryTypes;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -24,6 +20,8 @@ namespace TRRandomizerCore.Randomizers
     {
         private Dictionary<TR3Entities, List<string>> _gameEnemyTracker;
         private Dictionary<string, List<Location>> _pistolLocations;
+        private List<TR3Entities> _excludedEnemies;
+        private ISet<TR3Entities> _resultantEnemies;
 
         internal TR3TextureMonitorBroker TextureMonitor { get; set; }
         public ItemFactory ItemFactory { get; set; }
@@ -45,6 +43,9 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeExistingEnemies()
         {
+            _excludedEnemies = new List<TR3Entities>();
+            _resultantEnemies = new HashSet<TR3Entities>();
+
             foreach (TR3ScriptedLevel lvl in Levels)
             {
                 //Read the level into a combined data/script level object
@@ -93,6 +94,12 @@ namespace TRRandomizerCore.Randomizers
             // Track enemies whose counts across the game are restricted
             _gameEnemyTracker = TR3EnemyUtilities.PrepareEnemyGameTracker(Settings.RandoEnemyDifficulty);
 
+            // #272 Selective enemy pool - convert the shorts in the settings to actual entity types
+            _excludedEnemies = Settings.UseEnemyExclusions ?
+                Settings.ExcludedEnemies.Select(s => (TR3Entities)s).ToList() :
+                new List<TR3Entities>();
+            _resultantEnemies = new HashSet<TR3Entities>();
+
             SetMessage("Randomizing enemies - importing models");
             foreach (EnemyProcessor processor in processors)
             {
@@ -117,6 +124,28 @@ namespace TRRandomizerCore.Randomizers
             {
                 _processingException.Throw();
             }
+
+            // If any exclusions failed to be avoided, send a message
+            if (Settings.ShowExclusionWarnings)
+            {
+                VerifyExclusionStatus();
+            }
+        }
+
+        private void VerifyExclusionStatus()
+        {
+            List<TR3Entities> failedExclusions = _resultantEnemies.ToList().FindAll(_excludedEnemies.Contains);
+            if (failedExclusions.Count > 0)
+            {
+                // A little formatting
+                List<string> failureNames = new List<string>();
+                foreach (TR3Entities entity in failedExclusions)
+                {
+                    failureNames.Add(Settings.ExcludableEnemies[(short)entity]);
+                }
+                failureNames.Sort();
+                SetWarning(string.Format("The following enemies could not be excluded entirely from the randomization pool.{0}{0}{1}", Environment.NewLine, string.Join(Environment.NewLine, failureNames)));
+            }
         }
 
         private EnemyTransportCollection SelectCrossLevelEnemies(TR3CombinedLevel level)
@@ -131,12 +160,8 @@ namespace TRRandomizerCore.Randomizers
             List<TR3Entities> oldEntities = GetCurrentEnemyEntities(level);
 
             // Get the list of canidadates
-            List<TR3Entities> allEnemies = TR3EntityUtilities.GetCandidateCrossLevelEnemies();
-            if (!Settings.DocileBirdMonsters)
-            {
-                allEnemies.Remove(TR3Entities.Willie);
-            }
-
+            List<TR3Entities> allEnemies = TR3EntityUtilities.GetCandidateCrossLevelEnemies().FindAll(e => TR3EnemyUtilities.IsEnemySupported(level.Name, e, Settings.RandoEnemyDifficulty));
+            
             // Work out how many we can support
             int enemyCount = oldEntities.Count + TR3EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
             List<TR3Entities> newEntities = new List<TR3Entities>(enemyCount);
@@ -151,25 +176,13 @@ namespace TRRandomizerCore.Randomizers
             if (waterEnemyRequired)
             {
                 List<TR3Entities> waterEnemies = TR3EntityUtilities.GetKillableWaterEnemies();
-                TR3Entities entity;
-                do
-                {
-                    entity = waterEnemies[_generator.Next(0, waterEnemies.Count)];
-                }
-                while (!TR3EnemyUtilities.IsEnemySupported(level.Name, entity, Settings.RandoEnemyDifficulty));
-                newEntities.Add(entity);
+                newEntities.Add(SelectRequiredEnemy(waterEnemies, level, Settings.RandoEnemyDifficulty));
             }
 
             if (droppableEnemyRequired)
             {
                 List<TR3Entities> droppableEnemies = TR3EntityUtilities.FilterDroppableEnemies(allEnemies, Settings.ProtectMonks);
-                TR3Entities entity;
-                do
-                {
-                    entity = droppableEnemies[_generator.Next(0, droppableEnemies.Count)];
-                }
-                while (!TR3EnemyUtilities.IsEnemySupported(level.Name, entity, Settings.RandoEnemyDifficulty));
-                newEntities.Add(entity);
+                newEntities.Add(SelectRequiredEnemy(droppableEnemies, level, Settings.RandoEnemyDifficulty));
             }
 
             // Are there any other types we need to retain?
@@ -181,10 +194,29 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
 
-            // Fill the list from the remaining candidates
-            while (newEntities.Count < newEntities.Capacity)
+            if (!Settings.DocileWillard || Settings.OneEnemyMode || Settings.IncludedEnemies.Count < newEntities.Capacity)
+            {
+                // Willie isn't excludable in his own right because supporting a Willie-only game is impossible
+                allEnemies.Remove(TR3Entities.Willie);
+            }
+
+            // Remove all exclusions from the pool, and adjust the target capacity
+            allEnemies.RemoveAll(e => _excludedEnemies.Contains(e));
+
+            IEnumerable<TR3Entities> ex = allEnemies.Where(e => !newEntities.Any(TR3EntityUtilities.GetEntityFamily(e).Contains));
+            List<TR3Entities> unalisedEntities = TR3EntityUtilities.RemoveAliases(ex);
+            while (unalisedEntities.Count < newEntities.Capacity - newEntities.Count)
+            {
+                --newEntities.Capacity;
+            }
+
+            // Fill the list from the remaining candidates. Keep track of ones tested to avoid
+            // looping infinitely if it's not possible to fill to capacity
+            ISet<TR3Entities> testedEntities = new HashSet<TR3Entities>();
+            while (newEntities.Count < newEntities.Capacity && testedEntities.Count < allEnemies.Count)
             {
                 TR3Entities entity = allEnemies[_generator.Next(0, allEnemies.Count)];
+                testedEntities.Add(entity);
 
                 // Make sure this isn't known to be unsupported in the level
                 if (!TR3EnemyUtilities.IsEnemySupported(level.Name, entity, Settings.RandoEnemyDifficulty))
@@ -210,8 +242,13 @@ namespace TRRandomizerCore.Randomizers
                     }
                     else
                     {
-                        // Otherwise, pick something else
-                        continue;
+                        // Otherwise, pick something else. If we tried to previously exclude this
+                        // enemy and couldn't, it will slip through the net and so the appearances
+                        // will increase.
+                        if (allEnemies.Except(newEntities).Count() > 1)
+                        {
+                            continue;
+                        }
                     }
                 }
 
@@ -225,25 +262,26 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
 
-            if (newEntities.Capacity > 1 && newEntities.Any(e => TR3EnemyUtilities.IsEnemyRestricted(level.Name, e)))
+            if (newEntities.Capacity > 1 && newEntities.All(e => TR3EnemyUtilities.IsEnemyRestricted(level.Name, e)))
             {
                 // Make sure we have an unrestricted enemy available for the individual level conditions. This will
                 // guarantee a "safe" enemy for the level; we avoid aliases here to avoid further complication.
-                TR3Entities unrestrictedEnemy;
-                do
-                {
-                    unrestrictedEnemy = allEnemies[_generator.Next(0, allEnemies.Count)];
-                }
-                while
-                (
-                    (droppableEnemyRequired && !TR3EntityUtilities.CanDropPickups(unrestrictedEnemy, Settings.ProtectMonks))
-                    || newEntities.Contains(unrestrictedEnemy)
-                    || TR3EntityUtilities.IsWaterCreature(unrestrictedEnemy)
-                    || TR3EnemyUtilities.IsEnemyRestricted(level.Name, unrestrictedEnemy)
-                    || TR3EntityUtilities.TranslateEntityAlias(unrestrictedEnemy) != unrestrictedEnemy
-                );
+                bool RestrictionCheck(TR3Entities e) =>
+                    (droppableEnemyRequired && !TR3EntityUtilities.CanDropPickups(e, Settings.ProtectMonks))
+                    || !TR3EnemyUtilities.IsEnemySupported(level.Name, e, Settings.RandoEnemyDifficulty)
+                    || newEntities.Contains(e)
+                    || TR3EntityUtilities.IsWaterCreature(e)
+                    || TR3EnemyUtilities.IsEnemyRestricted(level.Name, e)
+                    || TR3EntityUtilities.TranslateEntityAlias(e) != e;
 
-                newEntities.Add(unrestrictedEnemy);
+                List<TR3Entities> unrestrictedPool = allEnemies.FindAll(e => !RestrictionCheck(e));
+                if (unrestrictedPool.Count == 0)
+                {
+                    // We are going to have to pull in the full list of candiates again, so ignoring any exclusions
+                    unrestrictedPool = TR3EntityUtilities.GetCandidateCrossLevelEnemies().FindAll(e => !RestrictionCheck(e));
+                }
+
+                newEntities.Add(unrestrictedPool[_generator.Next(0, unrestrictedPool.Count)]);
             }
 
             if (Settings.DevelopmentMode)
@@ -265,6 +303,28 @@ namespace TRRandomizerCore.Randomizers
             level.Data.Entities.ToList().ForEach(e => allLevelEnts.Add((TR3Entities)e.TypeID));
             List<TR3Entities> oldEntities = allLevelEnts.ToList().FindAll(e => allGameEnemies.Contains(e));
             return oldEntities;
+        }
+
+        private TR3Entities SelectRequiredEnemy(List<TR3Entities> pool, TR3CombinedLevel level, RandoDifficulty difficulty)
+        {
+            pool.RemoveAll(e => !TR3EnemyUtilities.IsEnemySupported(level.Name, e, difficulty));
+
+            TR3Entities entity;
+            if (pool.All(_excludedEnemies.Contains))
+            {
+                // Select the last excluded enemy (lowest priority)
+                entity = _excludedEnemies.Last(e => pool.Contains(e));
+            }
+            else
+            {
+                do
+                {
+                    entity = pool[_generator.Next(0, pool.Count)];
+                }
+                while (_excludedEnemies.Contains(entity));
+            }
+
+            return entity;
         }
 
         private void RandomizeEnemiesNatively(TR3CombinedLevel level)
@@ -424,7 +484,7 @@ namespace TRRandomizerCore.Randomizers
                 int maxEntityCount = TR3EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, Settings.RandoEnemyDifficulty);
                 if (maxEntityCount != -1)
                 {
-                    if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount)
+                    if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount && enemyPool.Count > maxEntityCount)
                     {
                         TR3Entities tmp = newEntityType;
                         while (newEntityType == tmp || TR3EnemyUtilities.IsEnemyRestricted(level.Name, newEntityType))
@@ -452,13 +512,18 @@ namespace TRRandomizerCore.Randomizers
                         }
                     }
                 }
-                else if (level.Is(TR3LevelNames.RXTECH) && level.IsWillardSequence && Settings.RandoEnemyDifficulty == RandoDifficulty.Default && (currentEntity.Room == 14 || currentEntity.Room == 45))
+                else if (level.Is(TR3LevelNames.RXTECH)
+                    && level.IsWillardSequence
+                    && Settings.RandoEnemyDifficulty == RandoDifficulty.Default
+                    && newEntityType == TR3Entities.RXTechFlameLad
+                    && (currentEntity.Room == 14 || currentEntity.Room == 45))
                 {
                     // #269 We don't want flamethrowers here because they're hostile, so getting off the minecart
-                    // safely is too difficult.
-                    while (newEntityType == TR3Entities.RXTechFlameLad || TR3EnemyUtilities.IsEnemyRestricted(level.Name, newEntityType))
+                    // safely is too difficult. We can only change them if there is something else unrestricted available.
+                    List<TR3Entities> safePool = enemyPool.FindAll(e => e != TR3Entities.RXTechFlameLad && !TR3EnemyUtilities.IsEnemyRestricted(level.Name, e));
+                    if (safePool.Count > 0)
                     {
-                        newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
+                        newEntityType = safePool[_generator.Next(0, safePool.Count)];
                     }
                 }
                 else if (level.Is(TR3LevelNames.HSC))
@@ -473,24 +538,26 @@ namespace TRRandomizerCore.Randomizers
                             newEntityType = TR3Entities.Prisoner;
                         }
                     }
-                    else if (currentEntity.Room == 78)
+                    else if (currentEntity.Room == 78 && newEntityType == TR3Entities.Monkey)
                     {
                         // #286 Monkeys cannot share AI Ambush spots largely, but these are needed here to ensure the enemies
                         // come through the gate before the timer closes them again. Just ensure no monkeys are here.
-                        while (newEntityType == TR3Entities.Monkey || TR3EnemyUtilities.IsEnemyRestricted(level.Name, newEntityType))
+                        List<TR3Entities> safePool = enemyPool.FindAll(e => e != TR3Entities.Monkey && !TR3EnemyUtilities.IsEnemyRestricted(level.Name, e));
+                        if (safePool.Count > 0)
                         {
-                            newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
+                            newEntityType = safePool[_generator.Next(0, safePool.Count)];
+                        }
+                        else
+                        {
+                            // Full monkey mode means we have to move them inside the gate
+                            currentEntity.Z -= 4096;
                         }
                     }
                 }
-                else if (level.Is(TR3LevelNames.THAMES) && (currentEntity.Room == 61 || currentEntity.Room == 62))
+                else if (level.Is(TR3LevelNames.THAMES) && (currentEntity.Room == 61 || currentEntity.Room == 62) && newEntityType == TR3Entities.Monkey)
                 {
-                    // #286 Ban monkeys from these two rooms for now because of JP entity index differences (environment mods
-                    // can't yet tell the difference).
-                    while (newEntityType == TR3Entities.Monkey || TR3EnemyUtilities.IsEnemyRestricted(level.Name, newEntityType))
-                    {
-                        newEntityType = enemyPool[_generator.Next(0, enemyPool.Count)];
-                    }
+                    // #286 Move the monkeys away from the AI entities
+                    currentEntity.Z -= 1024;
                 }
                 
                 // Make sure to convert back to the actual type
@@ -506,6 +573,9 @@ namespace TRRandomizerCore.Randomizers
                 {
                     targetEntity.Invisible = false;
                 }
+
+                // Track every enemy type across the game
+                _resultantEnemies.Add(newEntityType);
             }
 
             // Add extra ammo based on this level's difficulty

@@ -43,6 +43,8 @@ namespace TRRandomizerCore.Helpers
                     return TRRandomizationCategory.Cancel;       // The operation has been cancelled externally
                 case TRSaveCategory.Commit:
                     return TRRandomizationCategory.Commit;       // TRGE is commiting the changes to the original data directory
+                case TRSaveCategory.Warning:
+                    return TRRandomizationCategory.Warning;      // A processor wants to send a warning message
                 default:
                     return TRRandomizationCategory.None;
             }

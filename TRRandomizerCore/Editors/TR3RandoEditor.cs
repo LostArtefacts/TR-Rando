@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TRGE.Coord;
@@ -20,7 +20,10 @@ namespace TRRandomizerCore.Editors
 
         protected override void ApplyConfig(Config config)
         {
-            Settings = new RandomizerSettings();
+            Settings = new RandomizerSettings
+            {
+                ExcludableEnemies = JsonConvert.DeserializeObject<Dictionary<short, string>>(File.ReadAllText(@"Resources\TR3\Restrictions\excludable_enemies.json"))
+            };
             Settings.ApplyConfig(config);
         }
 

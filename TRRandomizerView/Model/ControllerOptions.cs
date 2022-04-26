@@ -25,7 +25,7 @@ namespace TRRandomizerView.Model
 
         private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras;
         private BoolItemControlClass _includeKeyItems;
-        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileBirdMonsters, _maximiseDragonAppearance;
+        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance;
         private BoolItemControlClass _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger;
@@ -56,12 +56,17 @@ namespace TRRandomizerView.Model
         private bool _vfxRoom;
         private bool _vfxCaustics;
         private bool _vfxWave;
+        private uint _uncontrolledSFXCount;
+        private bool _uncontrolledSFXAssaultCourse;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
+        private List<BoolItemIDControlClass> _selectableEnemies;
+        private bool _useEnemyExclusions, _showExclusionWarnings;
 
         private RandoDifficulty _randoEnemyDifficulty;
         private ItemDifficulty _randoItemDifficulty;
         private GlobeDisplayOption _globeDisplayOption;
+        private BirdMonsterBehaviour _birdMonsterBehaviour;
 
         private Language[] _availableLanguages;
         private Language _gameStringLanguage;
@@ -129,6 +134,7 @@ namespace TRRandomizerView.Model
             HaircutLevelCount = (uint)Math.Min(HaircutLevelCount, MaximumLevelCount);
             InvisibleLevelCount = (uint)Math.Min(InvisibleLevelCount, MaximumLevelCount);
             WireframeLevelCount = (uint)Math.Min(WireframeLevelCount, MaximumLevelCount);
+            UncontrolledSFXCount = (uint)Math.Min(UncontrolledSFXCount, MaximumLevelCount);
         }
 
         public bool RandomizationPossible
@@ -526,6 +532,26 @@ namespace TRRandomizerView.Model
             set
             {
                 _linkCreatureSFX = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint UncontrolledSFXCount
+        {
+            get => _uncontrolledSFXCount;
+            set
+            {
+                _uncontrolledSFXCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool UncontrolledSFXAssaultCourse
+        {
+            get => _uncontrolledSFXAssaultCourse;
+            set
+            {
+                _uncontrolledSFXAssaultCourse = value;
                 FirePropertyChanged();
             }
         }
@@ -951,12 +977,22 @@ namespace TRRandomizerView.Model
             }
         }
 
-        public BoolItemControlClass DocileBirdMonsters
+        public BoolItemControlClass DocileWillard
         {
-            get => _docileBirdMonsters;
+            get => _docileWillard;
             set
             {
-                _docileBirdMonsters = value;
+                _docileWillard = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BirdMonsterBehaviour BirdMonsterBehaviour
+        {
+            get => _birdMonsterBehaviour;
+            set
+            {
+                _birdMonsterBehaviour = value;
                 FirePropertyChanged();
             }
         }
@@ -967,6 +1003,16 @@ namespace TRRandomizerView.Model
             set
             {
                 _maximiseDragonAppearance = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass SwapEnemyAppearance
+        {
+            get => _swapEnemyAppearance;
+            set
+            {
+                _swapEnemyAppearance = value;
                 FirePropertyChanged();
             }
         }
@@ -1111,6 +1157,36 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public List<BoolItemIDControlClass> SelectableEnemyControls
+        {
+            get => _selectableEnemies;
+            set
+            {
+                _selectableEnemies = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool UseEnemyExclusions
+        {
+            get => _useEnemyExclusions;
+            set
+            {
+                _useEnemyExclusions = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool ShowExclusionWarnings
+        {
+            get => _showExclusionWarnings;
+            set
+            {
+                _showExclusionWarnings = value;
+                FirePropertyChanged();
+            }
+        }
+
         public List<BoolItemControlClass> TextureBoolItemControls
         {
             get => _textureBoolItemControls;
@@ -1237,12 +1313,12 @@ namespace TRRandomizerView.Model
                 Description = "Allow enemy types to appear in any level."
             };
             BindingOperations.SetBinding(CrossLevelEnemies, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
-            DocileBirdMonsters = new BoolItemControlClass()
+            DocileWillard = new BoolItemControlClass()
             {
-                Title = "Enable docile bird monsters",
-                Description = "Randomized bird monsters will not initiate on Lara and will not end the level upon death."
+                Title = "Enable docile Willard",
+                Description = "Willard can appear in levels other than Meteorite Cavern but will not attack Lara unless she gets too close."
             };
-            BindingOperations.SetBinding(DocileBirdMonsters, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+            BindingOperations.SetBinding(DocileWillard, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
             ProtectMonks = new BoolItemControlClass()
             {
                 Title = "Avoid having to kill allies",
@@ -1251,10 +1327,16 @@ namespace TRRandomizerView.Model
             BindingOperations.SetBinding(ProtectMonks, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
             MaximiseDragonAppearance = new BoolItemControlClass
             {
-                Title = "Maximise dragon spawns",
+                Title = "Maximize dragon spawns",
                 Description = "Make a best effort attempt to have as many dragons as possible in the game."
             };
             BindingOperations.SetBinding(MaximiseDragonAppearance, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+            SwapEnemyAppearance = new BoolItemControlClass
+            {
+                Title = "Swap enemy appearances",
+                Description = "Allow some enemies to take on the appearance of others."
+            };
+            BindingOperations.SetBinding(SwapEnemyAppearance, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
 
             // Textures
             Binding randomizeTexturesBinding = new Binding(nameof(RandomizeTextures)) { Source = this };
@@ -1393,7 +1475,7 @@ namespace TRRandomizerView.Model
             };
             EnemyBoolItemControls = new List<BoolItemControlClass>()
             {
-                _crossLevelEnemies, _docileBirdMonsters, _protectMonks, _maximiseDragonAppearance
+                _crossLevelEnemies, _docileWillard, _protectMonks, _maximiseDragonAppearance, _swapEnemyAppearance
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -1432,13 +1514,9 @@ namespace TRRandomizerView.Model
 
             _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
 
-            if (IsRewardRoomsTypeSupported) // i.e. IsTR3 - should make a TR version checker for the UI
-            {
-                DocileBirdMonsters.Title = "Enable docile Willard";
-                DocileBirdMonsters.Description = "Willard can appear in levels other than Meteorite Cavern but will not attack Lara unless she gets too close.";
-            }
+            _maximiseDragonAppearance.IsAvailable = _swapEnemyAppearance.IsAvailable = IsOutfitDaggerSupported;
 
-            _maximiseDragonAppearance.IsAvailable = IsOutfitDaggerSupported;
+            _docileWillard.IsAvailable = !IsBirdMonsterBehaviourTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -1495,6 +1573,8 @@ namespace TRRandomizerView.Model
             ChangeCrashSFX.Value = _controller.ChangeCrashSFX;
             ChangeEnemySFX.Value = _controller.ChangeEnemySFX;
             LinkCreatureSFX.Value = _controller.LinkCreatureSFX;
+            UncontrolledSFXCount = _controller.UncontrolledSFXCount;
+            UncontrolledSFXAssaultCourse = _controller.UncontrolledSFXAssaultCourse;
 
             RandomizeItems = _controller.RandomizeItems;
             ItemSeed = _controller.ItemSeed;
@@ -1505,9 +1585,14 @@ namespace TRRandomizerView.Model
             EnemySeed = _controller.EnemySeed;
             CrossLevelEnemies.Value = _controller.CrossLevelEnemies;
             ProtectMonks.Value = _controller.ProtectMonks;
-            DocileBirdMonsters.Value = _controller.DocileBirdMonsters;
+            DocileWillard.Value = _controller.DocileWillard;
+            BirdMonsterBehaviour = _controller.BirdMonsterBehaviour;
             MaximiseDragonAppearance.Value = _controller.MaximiseDragonAppearance;
+            SwapEnemyAppearance.Value = _controller.SwapEnemyAppearance;
             RandoEnemyDifficulty = _controller.RandoEnemyDifficulty;
+            UseEnemyExclusions = _controller.UseEnemyExclusions;
+            ShowExclusionWarnings = _controller.ShowExclusionWarnings;
+            LoadEnemyExclusions();
 
             RandomizeSecrets = _controller.RandomizeSecrets;
             SecretSeed = _controller.SecretSeed;
@@ -1562,6 +1647,26 @@ namespace TRRandomizerView.Model
 
 
             FireSupportPropertiesChanged();
+        }
+
+        public void LoadEnemyExclusions()
+        {
+            SelectableEnemyControls = new List<BoolItemIDControlClass>();
+
+            // Add exclusions based on priority (i.e. order) followed by the remaining included controls
+            _controller.ExcludedEnemies.ForEach(e => SelectableEnemyControls.Add(new BoolItemIDControlClass
+            {
+                ID = e,
+                Title = _controller.ExcludableEnemies[e],
+                Value = true
+            }));
+
+            _controller.IncludedEnemies.ForEach(e => SelectableEnemyControls.Add(new BoolItemIDControlClass
+            {
+                ID = e,
+                Title = _controller.ExcludableEnemies[e],
+                Value = false
+            }));
         }
 
         public void RandomizeActiveSeeds()
@@ -1746,6 +1851,8 @@ namespace TRRandomizerView.Model
             _controller.ChangeCrashSFX = ChangeCrashSFX.Value;
             _controller.ChangeEnemySFX = ChangeEnemySFX.Value;
             _controller.LinkCreatureSFX = LinkCreatureSFX.Value;
+            _controller.UncontrolledSFXCount = UncontrolledSFXCount;
+            _controller.UncontrolledSFXAssaultCourse = UncontrolledSFXAssaultCourse;
 
             _controller.RandomizeItems = RandomizeItems;
             _controller.ItemSeed = ItemSeed;
@@ -1756,9 +1863,17 @@ namespace TRRandomizerView.Model
             _controller.EnemySeed = EnemySeed;
             _controller.CrossLevelEnemies = CrossLevelEnemies.Value;
             _controller.ProtectMonks = ProtectMonks.Value;
-            _controller.DocileBirdMonsters = DocileBirdMonsters.Value;
+            _controller.DocileWillard = DocileWillard.Value;
+            _controller.BirdMonsterBehaviour = BirdMonsterBehaviour;
             _controller.MaximiseDragonAppearance = MaximiseDragonAppearance.Value;
+            _controller.SwapEnemyAppearance = SwapEnemyAppearance.Value;
             _controller.RandoEnemyDifficulty = RandoEnemyDifficulty;
+            _controller.UseEnemyExclusions = UseEnemyExclusions;
+            _controller.ShowExclusionWarnings = ShowExclusionWarnings;
+
+            List<short> excludedEnemies = new List<short>();
+            SelectableEnemyControls.FindAll(c => c.Value).ForEach(c => excludedEnemies.Add((short)c.ID));
+            _controller.ExcludedEnemies = excludedEnemies;
 
             _controller.RandomizeSecrets = RandomizeSecrets;
             _controller.SecretSeed = SecretSeed;
@@ -1839,6 +1954,7 @@ namespace TRRandomizerView.Model
         public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);
         public bool IsEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.Environment);
+        public bool IsBirdMonsterBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.BirdMonsterBehaviour);
 
         public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
 

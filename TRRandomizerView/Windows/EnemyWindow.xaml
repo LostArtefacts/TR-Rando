@@ -1,0 +1,173 @@
+﻿<Window x:Class="TRRandomizerView.Windows.EnemyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Icon="..\Resources\rando.ico"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Loaded="Window_Loaded"
+        Title="Excluded Enemies" Width="600" Height="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.ColumnSpan="4"
+                   TextWrapping="Wrap"
+                   Margin="10">
+            <Run>Select which enemies you wish to exclude from the game. The randomizer will make a </Run>
+            <Run FontStyle="Italic">best effort </Run>
+            <Run>attempt to avoid these where possible. Items near the top of the list will be prioritised for exclusion.</Run>
+        </TextBlock>
+
+        <TextBlock Grid.Row="1"
+                   FontWeight="Bold"
+                   Margin="10,0,0,3">
+            <Run>Available Enemies (</Run><Run x:Name="_availableCount" /><Run>)</Run>
+        </TextBlock>
+
+        <ListBox Grid.Row="2"
+                 Margin="10,0,0,10"
+                 x:Name="_availableControlList"
+                 SelectionMode="Extended"
+                 SelectionChanged="ControlList_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Grid.Row="2"
+              Grid.Column="1"
+              Margin="10,0,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Vertical">
+                <Button Content="&#xE111;"
+                        FontFamily="Segoe UI Symbol"
+                        ToolTip="Exclude selected enemies"
+                        Margin="0,0,0,5"
+                        IsEnabled="{Binding CanExclude}"
+                        Click="ExcludeButton_Click"/>
+                <Button Content="&#xE112;"
+                        FontFamily="Segoe UI Symbol"
+                        ToolTip="Remove selected exclusions"
+                        IsEnabled="{Binding CanInclude}"
+                        Click="IncludeButton_Click"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical"
+                        Grid.Row="2">
+                <Button Content="&#xE150;"
+                        FontFamily="Segoe UI Symbol"
+                        ToolTip="Exclude all enemies"
+                        Margin="0,0,0,5"
+                        RenderTransformOrigin="0.5,0.5"
+                        IsEnabled="{Binding CanExcludeAll}"
+                        Click="ExcludeAllButton_Click">
+                    <Button.RenderTransform>
+                        <ScaleTransform ScaleX="-1" />
+                    </Button.RenderTransform>
+                </Button>
+                <Button Content="&#xE150;"
+                        FontFamily="Segoe UI Symbol"
+                        ToolTip="Remove all excluded enemies"
+                        IsEnabled="{Binding CanIncludeAll}"
+                        Click="IncludeAllButton_Click"/>
+            </StackPanel>
+        </Grid>
+        
+        <TextBlock Grid.Row="1"
+                   Grid.Column="2"
+                   FontWeight="Bold"
+                   Margin="0,0,0,3">
+            <Run>Excluded Enemies (</Run><Run x:Name="_excludedCount" /><Run>)</Run>
+        </TextBlock>
+        
+        <ListBox Grid.Row="2"
+                 Grid.Column="2"
+                 Margin="0,0,10,10"
+                 x:Name="_excludedControlList"
+                 SelectionMode="Extended"
+                 SelectionChanged="ExcludedControlList_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="2"
+                    Grid.Column="3"
+                    Margin="0,0,10,10">
+            <Button Content="&#xE110;"
+                        FontFamily="Segoe UI Symbol"
+                        Margin="0,0,0,5"
+                        ToolTip="Increase exclusion priority"
+                        IsEnabled="{Binding CanMoveUp}"
+                        Click="MoveUpButton_Click"/>
+
+            <Button Content="&#xE1FD;"
+                    FontFamily="Segoe UI Symbol"
+                    ToolTip="Decrease exclusion priority"
+                    IsEnabled="{Binding CanMoveDown}"
+                    Click="MoveDownButton_Click"/>
+        </StackPanel>
+
+        <Border BorderThickness="0 1 0 0"
+                BorderBrush="#ccc"
+                Background="#eee"
+                Grid.Row="3"
+                Grid.ColumnSpan="4">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox IsChecked="{Binding ShowExclusionWarnings, Mode=TwoWay}"
+                          VerticalAlignment="Center">
+                    <Label Padding="0"
+                           Content="Show a warning if exclusions fail during randomization" />
+                </CheckBox>
+
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1">
+                    <Button Content="_OK"
+                            IsDefault="True"
+                            IsEnabled="{Binding CanExcludeAll}"
+                            Width="70"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,10,0"
+                            Click="OkButton_Click"/>
+
+                    <Button Content="_Cancel"
+                            IsCancel="True"
+                            Width="70"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

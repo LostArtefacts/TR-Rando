@@ -42,6 +42,10 @@ namespace TRRandomizerCore.Textures
             foreach (StaticTextureSource<E> source in sources)
             {
                 _entitySources.Remove(source);
+                if (PreparedLevelMapping != null && PreparedLevelMapping.ContainsKey(source))
+                {
+                    PreparedLevelMapping.Remove(source);
+                }
             }
         }
 

@@ -184,7 +184,11 @@ namespace TRModelTransporter.Data
             [TR2Entities.RedSnowmobile] 
                 = new List<TR2Entities> { TR2Entities.SnowmobileWake_S_H },
             [TR2Entities.XianGuardSword] 
-                = new List<TR2Entities> { TR2Entities.XianGuardSparkles_S_H }
+                = new List<TR2Entities> { TR2Entities.XianGuardSparkles_S_H },
+            [TR2Entities.WaterfallMist_N]
+                = new List<TR2Entities> { TR2Entities.WaterRipples_S_H },
+            [TR2Entities.Key2_M_H]
+                = new List<TR2Entities> { TR2Entities.Key2_S_P }
         };
 
         private static readonly List<TR2Entities> _cinematicEntities = new List<TR2Entities>
@@ -373,6 +377,8 @@ namespace TRModelTransporter.Data
         {
             [TR2Entities.LaraMiscAnim_H] 
                 = new List<int>(), // empty list indicates to ignore everything
+            [TR2Entities.WaterfallMist_N]
+                = new List<int> { 0, 1, 2, 3, 4, 5, 6, 11, 15, 20, 22 },
             [TR2Entities.LaraSnowmobAnim_H] 
                 = new List<int> { 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 20, 21, 23 },
             [TR2Entities.SnowmobileBelt] 

@@ -177,6 +177,16 @@ namespace TRRandomizerCore.Utilities
             return -1;
         }
 
+        public static int GetRestrictedEnemyTotalTypeCount(RandoDifficulty difficulty)
+        {
+            if (difficulty == RandoDifficulty.Default)
+            {
+                return _restrictedEnemyLevelCountsDefault.Count;
+            }
+
+            return _restrictedEnemyLevelCountsTechnical.Count;
+        }
+
         public static List<List<TR2Entities>> GetPermittedCombinations(string lvl, TR2Entities entity, RandoDifficulty difficulty)
         {
             if (_specialEnemyCombinations.ContainsKey(lvl) && _specialEnemyCombinations[lvl].ContainsKey(entity))
@@ -284,7 +294,6 @@ namespace TRRandomizerCore.Utilities
                     TR2Entities.Barracuda, TR2Entities.BlackMorayEel, TR2Entities.ScubaDiver,
                     TR2Entities.Shark, TR2Entities.YellowMorayEel
                 },
-            // #192 The Barkhang/Opera House freeze appears to be caused by dead floating water creatures, so they're all banished
             [TR2LevelNames.MONASTERY] =
                 new List<TR2Entities>
                 {
@@ -300,7 +309,7 @@ namespace TRRandomizerCore.Utilities
                     TR2Entities.BlackMorayEel, TR2Entities.Doberman, TR2Entities.MaskedGoon1,
                     TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.MercSnowmobDriver,
                     TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.StickWieldingGoon1,
-                    TR2Entities.StickWieldingGoon2, TR2Entities.Winston, TR2Entities.YellowMorayEel
+                    TR2Entities.StickWieldingGoon2, TR2Entities.Winston, TR2Entities.YellowMorayEel, TR2Entities.ShotgunGoon
                 }
         };
 
@@ -444,7 +453,8 @@ namespace TRRandomizerCore.Utilities
                 [TR2LevelNames.BARTOLI] = -2,
                 [TR2LevelNames.OPERA] = -2,
                 [TR2LevelNames.DA] = -1,
-                [TR2LevelNames.TIBET] = -1
+                [TR2LevelNames.TIBET] = -1,
+                [TR2LevelNames.FLOATER] = -1,
             }
         };
 

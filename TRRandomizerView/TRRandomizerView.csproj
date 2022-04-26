@@ -97,6 +97,7 @@
     <Compile Include="Converters\InverseBoolToVisibilityConverter.cs" />
     <Compile Include="Events\EditorEventArgs.cs" />
     <Compile Include="Model\BoolItemControlClass.cs" />
+    <Compile Include="Model\BoolItemIDControlClass.cs" />
     <Compile Include="Model\ManagedSeedNumeric.cs" />
     <Compile Include="Model\ManagedSeedBool.cs" />
     <Compile Include="Model\ManagedSeed.cs" />
@@ -106,6 +107,9 @@
     <Compile Include="Updates\UpdateEventArgs.cs" />
     <Compile Include="Windows\AdvancedWindow.xaml.cs">
       <DependentUpon>AdvancedWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EnemyWindow.xaml.cs">
+      <DependentUpon>EnemyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\GlobalSeedWindow.xaml.cs">
       <DependentUpon>GlobalSeedWindow.xaml</DependentUpon>
@@ -164,6 +168,10 @@
     <Page Include="Windows\AdvancedWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\EnemyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\GlobalSeedWindow.xaml">
       <SubType>Designer</SubType>

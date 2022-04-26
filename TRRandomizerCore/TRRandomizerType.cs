@@ -28,6 +28,7 @@
         GlobeDisplay,
         RewardRooms,
         VFX,
-        MaximumDragons
+        MaximumDragons,
+        BirdMonsterBehaviour
     }
 }

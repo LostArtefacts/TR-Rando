@@ -77,6 +77,16 @@ namespace TRRandomizerView.Windows
             nameof(HasTextureOptions), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty HasAudioOptionsProperty = DependencyProperty.Register
+        (
+            nameof(HasAudioOptions), typeof(bool), typeof(AdvancedWindow)
+        );
+
+        public static readonly DependencyProperty HasBirdMonsterBehaviourProperty = DependencyProperty.Register
+        (
+            nameof(HasBirdMonsterBehaviour), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
         (
             nameof(ControllerProxy), typeof(ControllerOptions), typeof(AdvancedWindow)
@@ -154,6 +164,18 @@ namespace TRRandomizerView.Windows
             set => SetValue(HasTextureOptionsProperty, value);
         }
 
+        public bool HasAudioOptions
+        {
+            get => (bool)GetValue(HasAudioOptionsProperty);
+            set => SetValue(HasAudioOptionsProperty, value);
+        }
+
+        public bool HasBirdMonsterBehaviour
+        {
+            get => (bool)GetValue(HasBirdMonsterBehaviourProperty);
+            set => SetValue(HasBirdMonsterBehaviourProperty, value);
+        }
+
         public ControllerOptions ControllerProxy
         {
             get => (ControllerOptions)GetValue(ControllerProperty);
@@ -209,6 +231,21 @@ namespace TRRandomizerView.Windows
                         break;
                 }
             }
+            if (HasBirdMonsterBehaviour)
+            {
+                switch (ControllerProxy.BirdMonsterBehaviour)
+                {
+                    case BirdMonsterBehaviour.Default:
+                        _defaultBirdBehaviourButton.IsChecked = true;
+                        break;
+                    case BirdMonsterBehaviour.Unconditional:
+                        _unconditionalBirdBehaviourButton.IsChecked = true;
+                        break;
+                    case BirdMonsterBehaviour.Docile:
+                        _docileBirdBehaviourButton.IsChecked = true;
+                        break;
+                }
+            }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -220,6 +257,16 @@ namespace TRRandomizerView.Windows
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             _darknessPreview.Source = new BitmapImage(new Uri(string.Format(_darknessPreviewPath, ControllerProxy.NightModeDarkness)));
+        }
+
+        private void ExclusionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            EnemyWindow ew = new EnemyWindow(ControllerProxy);
+            if (ew.ShowDialog() ?? false)
+            {
+                ControllerProxy.SelectableEnemyControls = ew.Controls;
+                ControllerProxy.ShowExclusionWarnings = ew.ShowExclusionWarnings;
+            }
         }
     }
 }

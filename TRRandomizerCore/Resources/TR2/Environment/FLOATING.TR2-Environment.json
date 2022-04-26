@@ -46,6 +46,28 @@
 
     {
       "Condition": {
+        "Comments": "Similary in the cage room, rotate enemy 108 so there is a bit of time to escape after triggering him.",
+        "ConditionType": 0,
+        "EntityIndex": 108,
+        "EntityType": 34
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 108,
+          "TargetLocation": {
+            "X": 38400,
+            "Y": 4608,
+            "Z": 81408,
+            "Room": 145,
+            "Angle": 16384
+          }
+        }
+      ]
+    },
+
+    {
+      "Condition": {
         "Comments": "If Marco has been added, make a new room for him and move him to it.",
         "ConditionType": 0,
         "EntityIndex": 75,
@@ -278,6 +300,28 @@
                 "Parameter": 140
               }
             ]
+          }
+        }
+      ]
+    },
+
+    {
+      "Condition": {
+        "Comments": "#325 If enemy 52 can't fly, move him to a platform to avoid dropping to the level floor.",
+        "ConditionType": 0,
+        "EntityIndex": 52,
+        "EntityTypes": [ 25, 28, 29, 38, 43, 47 ]
+      },
+      "OnFalse": [
+        {
+          "EMType": 44,
+          "EntityIndex": 52,
+          "TargetLocation": {
+            "X": 39424,
+            "Y": -4096,
+            "Z": 49664,
+            "Room": 63,
+            "Angle": -32768
           }
         }
       ]
