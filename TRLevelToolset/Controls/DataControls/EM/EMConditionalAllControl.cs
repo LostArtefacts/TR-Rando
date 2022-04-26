@@ -13,7 +13,12 @@ namespace TRLevelToolset.Controls.DataControls.EM
 {
     internal class EMConditionalAllControl : IDrawable
     {
-        public List<EMConditionalSingleEditorSet> Data { get; set; }
+        private List<EMConditionalSingleEditorSet> _data { get; set; }
+
+        public EMConditionalAllControl(List<EMConditionalSingleEditorSet> data)
+        {
+            _data = data;
+        }
         
         public void Draw()
         {

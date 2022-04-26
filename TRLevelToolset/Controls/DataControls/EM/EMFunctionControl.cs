@@ -11,18 +11,18 @@ using TRLevelToolset.IOLogic;
 
 namespace TRLevelToolset.Controls.DataControls.EM
 {
-    internal class EMConditionalAllWithinControl : IDrawable
+    internal class EMFunctionControl : IDrawable
     {
-        private List<EMConditionalEditorSet> _data { get; set; }
+        private BaseEMFunction _data { get; set; }
 
-        public EMConditionalAllWithinControl(List<EMConditionalEditorSet> data)
+        public EMFunctionControl(BaseEMFunction data)
         {
             _data = data;
         }
         
         public void Draw()
         {
-            ImGui.Text("Conditional All Within Control");
+            ImGui.Text(_data.GetType().ToString());
         }
     }
 }

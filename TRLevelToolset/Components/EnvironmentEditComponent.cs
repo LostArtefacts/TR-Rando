@@ -58,64 +58,64 @@ namespace TRLevelToolset.Components
                 {
                     if (_mapping.All.Any())
                     {
-                        ImGui.SetNextWindowSize(new Vector2(400, 800));
-                        ImGui.Begin("All Properties");
+                        ImGui.SetNextWindowSize(new Vector2(400, 600));
+                        ImGui.Begin("All Properties", ImGuiWindowFlags.HorizontalScrollbar);
                         _allControl.Draw();
                         ImGui.End();
                     }
                     
                     if (_mapping.ConditionalAll.Any())
                     {
-                        ImGui.SetNextWindowSize(new Vector2(400, 800));
-                        ImGui.Begin("Conditional All Properties");
+                        ImGui.SetNextWindowSize(new Vector2(400, 600));
+                        ImGui.Begin("Conditional All Properties", ImGuiWindowFlags.HorizontalScrollbar);
                         _conditionalAllControl.Draw();
                         ImGui.End();
                     }
                     
                     if (_mapping.NonPurist.Any())
                     {
-                        ImGui.SetNextWindowSize(new Vector2(400, 800));
-                        ImGui.Begin("Non Purist Properties");
+                        ImGui.SetNextWindowSize(new Vector2(400, 600));
+                        ImGui.Begin("Non Purist Properties", ImGuiWindowFlags.HorizontalScrollbar);
                         _nonPuristControl.Draw();
                         ImGui.End();
                     }
                     
                     if (_mapping.Any.Any())
                     {
-                        ImGui.SetNextWindowSize(new Vector2(400, 800));
-                        ImGui.Begin("Any Properties");
+                        ImGui.SetNextWindowSize(new Vector2(400, 600));
+                        ImGui.Begin("Any Properties", ImGuiWindowFlags.HorizontalScrollbar);
                         _anyControl.Draw();
                         ImGui.End();
                     }
                     
                     if (_mapping.AllWithin.Any())
                     {
-                        ImGui.SetNextWindowSize(new Vector2(400, 800));
-                        ImGui.Begin("All Within Properties");
+                        ImGui.SetNextWindowSize(new Vector2(400, 600));
+                        ImGui.Begin("All Within Properties", ImGuiWindowFlags.HorizontalScrollbar);
                         _allWithinControl.Draw();
                         ImGui.End();
                     }
                     
                     if (_mapping.ConditionalAllWithin.Any())
                     {
-                        ImGui.SetNextWindowSize(new Vector2(400, 800));
-                        ImGui.Begin("Conditional All Within Properties");
+                        ImGui.SetNextWindowSize(new Vector2(400, 600));
+                        ImGui.Begin("Conditional All Within Properties", ImGuiWindowFlags.HorizontalScrollbar);
                         _conditionalAllWithinControl.Draw();
                         ImGui.End();
                     }
                     
                     if (_mapping.OneOf.Any())
                     {
-                        ImGui.SetNextWindowSize(new Vector2(400, 800));
-                        ImGui.Begin("One Of Properties");
+                        ImGui.SetNextWindowSize(new Vector2(400, 600));
+                        ImGui.Begin("One Of Properties", ImGuiWindowFlags.HorizontalScrollbar);
                         _oneOfControl.Draw();
                         ImGui.End();
                     }
                     
                     if (_mapping.Mirrored.Any())
                     {
-                        ImGui.SetNextWindowSize(new Vector2(400, 800));
-                        ImGui.Begin("Mirrored Properties");
+                        ImGui.SetNextWindowSize(new Vector2(400, 600));
+                        ImGui.Begin("Mirrored Properties", ImGuiWindowFlags.HorizontalScrollbar);
                         _mirroredControl.Draw();
                         ImGui.End();
                     }
@@ -129,14 +129,14 @@ namespace TRLevelToolset.Components
         {
             _name = _items[_selectedIndex];
             _mapping = EMEditorMapping.Get(_name);
-            _allControl = new EMAllControl() { Data = _mapping.All };
-            _conditionalAllControl = new EMConditionalAllControl() { Data = _mapping.ConditionalAll };
-            _nonPuristControl = new EMNonPuristControl() { Data = _mapping.NonPurist };
-            _anyControl = new EMAnyControl() { Data = _mapping.Any };
-            _allWithinControl = new EMAllWithinControl() { Data = _mapping.AllWithin };
-            _conditionalAllWithinControl = new EMConditionalAllWithinControl() { Data = _mapping.ConditionalAllWithin };
-            _oneOfControl = new EMOneOfControl() { Data = _mapping.OneOf };
-            _mirroredControl = new EMMirroredControl() { Data = _mapping.Mirrored };
+            _allControl = new EMAllControl(_mapping.All);
+            _conditionalAllControl = new EMConditionalAllControl(_mapping.ConditionalAll);
+            _nonPuristControl = new EMNonPuristControl(_mapping.NonPurist);
+            _anyControl = new EMAnyControl(_mapping.Any);
+            _allWithinControl = new EMAllWithinControl(_mapping.AllWithin);
+            _conditionalAllWithinControl = new EMConditionalAllWithinControl(_mapping.ConditionalAllWithin);
+            _oneOfControl = new EMOneOfControl(_mapping.OneOf);
+            _mirroredControl = new EMMirroredControl(_mapping.Mirrored);
         }
     }
 }

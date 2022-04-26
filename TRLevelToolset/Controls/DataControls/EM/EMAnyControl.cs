@@ -13,7 +13,12 @@ namespace TRLevelToolset.Controls.DataControls.EM
 {
     internal class EMAnyControl : IDrawable
     {
-        public List<EMEditorSet> Data { get; set; }
+        private List<EMEditorSet> _data { get; set; }
+
+        public EMAnyControl(List<EMEditorSet> data)
+        {
+            _data = data;
+        }
         
         public void Draw()
         {

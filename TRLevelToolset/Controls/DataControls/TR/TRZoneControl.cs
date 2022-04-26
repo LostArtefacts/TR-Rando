@@ -18,7 +18,7 @@ namespace TRLevelToolset.Controls.DataControls.TR
             {
                 ImGui.Text("Box count: " + IOManager.CurrentLevelAsTR1?.NumBoxes);
                 ImGui.Text("Overlap count: " + IOManager.CurrentLevelAsTR1?.NumOverlaps);
-                ImGui.Text("Zone count: " + IOManager.CurrentLevelAsTR1?.Zones.Count());
+                ImGui.Text("Zone Group count: " + IOManager.CurrentLevelAsTR1?.Zones.Count());
                 ImGui.TreePop();
             }
         }

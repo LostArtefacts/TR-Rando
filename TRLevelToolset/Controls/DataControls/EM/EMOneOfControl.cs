@@ -13,8 +13,13 @@ namespace TRLevelToolset.Controls.DataControls.EM
 {
     internal class EMOneOfControl : IDrawable
     {
-        public List<EMEditorGroupedSet> Data { get; set; }
-        
+        private List<EMEditorGroupedSet> _data { get; set; }
+
+        public EMOneOfControl(List<EMEditorGroupedSet> data)
+        {
+            _data = data;
+        }
+
         public void Draw()
         {
             ImGui.Text("One Of Control");
