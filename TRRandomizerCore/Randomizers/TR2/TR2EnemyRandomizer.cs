@@ -819,15 +819,9 @@ namespace TRRandomizerCore.Randomizers
                 RandomizeEnemyMeshes(level, enemies);
             }
 
-            if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional && !level.Is(TR2LevelNames.CHICKEN))
+            if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional)
             {
-                TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)TR2Entities.BirdMonster);
-                if (model != null)
-                {
-                    // #327 Trick the game into never reaching the final frame of the death animation.
-                    // This results in a very abrupt death but avoids the level ending.
-                    level.Data.Animations[model.Animation + 20].FrameEnd = level.Data.Animations[model.Animation + 19].FrameEnd;
-                }
+                MakeChickensUnconditional(level);
             }
         }
 
@@ -932,6 +926,21 @@ namespace TRRandomizerCore.Randomizers
             if (enemies.All.Contains(enemyType) && _generator.Next(0, chance) == 0)
             {
                 cloneCollection.Add(enemyType);
+            }
+        }
+
+        private void MakeChickensUnconditional(TR2CombinedLevel level)
+        {
+            // #327 Trick the game into never reaching the final frame of the death animation.
+            // This results in a very abrupt death but avoids the level ending. For Ice Palace,
+            // the default behaviour will remain.
+            if (!level.Is(TR2LevelNames.CHICKEN))
+            {
+                TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)TR2Entities.BirdMonster);
+                if (model != null)
+                {
+                    level.Data.Animations[model.Animation + 20].FrameEnd = level.Data.Animations[model.Animation + 19].FrameEnd;
+                }
             }
         }
 
