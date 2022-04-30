@@ -30,6 +30,7 @@
         SwapSlot = 49,
         AdjustEntityPositions = 50,
         AddEntity = 51,
+        ConvertWheelDoor = 52,
 
         // Trigger types 61-80
         Trigger = 61,
