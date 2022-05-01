@@ -1,6 +1,76 @@
 {
   "All": [],
 
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If Marco is present, move him a little and convert wheel doors into regular ones.",
+        "ConditionType": 0,
+        "EntityIndex": 92,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 92,
+          "TargetLocation": {
+            "X": 73984,
+            "Y": 5120,
+            "Z": 68352,
+            "Room": 55,
+            "Angle": -16384
+          }
+        },
+
+        {
+          "EMType": 52,
+          "WheelIndex": 39,
+          "DoorIndex": 38,
+          "NewSwitchType": 93,
+          "NewDoorType": 111,
+          "NewLocation": {
+            "X": 41472,
+            "Y": 3072,
+            "Z": 35328,
+            "Room": 35,
+            "Angle": 0
+          }
+        },
+
+        {
+          "EMType": 52,
+          "WheelIndex": 134,
+          "DoorIndex": 133,
+          "NewSwitchType": 93,
+          "NewDoorType": 111,
+          "NewLocation": {
+            "X": 55808,
+            "Y": 8960,
+            "Z": 85504,
+            "Room": 73,
+            "Angle": -32768
+          }
+        },
+
+        {
+          "Comments": "Convert those in room 58 to pad triggers because we can't tell where the keyhole here may be, so we don't want to clash with that.",
+          "EMType": 52,
+          "WheelIndex": 106,
+          "DoorIndex": 103,
+          "NewSwitchType": 145,
+          "NewDoorType": 111
+        },
+        {
+          "EMType": 52,
+          "WheelIndex": 107,
+          "DoorIndex": 100,
+          "NewSwitchType": 149,
+          "NewDoorType": 111
+        }
+      ]
+    }
+  ],
+
   "NonPurist": [
     {
       "Comments": "Make ladders for the first big drop.",

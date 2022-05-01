@@ -90,6 +90,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMAdjustEntityPositionFunction>(jo.ToString(), _resolver);
                 case EMType.AddEntity:
                     return JsonConvert.DeserializeObject<EMAddEntityFunction>(jo.ToString(), _resolver);
+                case EMType.ConvertWheelDoor:
+                    return JsonConvert.DeserializeObject<EMConvertWheelDoorFunction>(jo.ToString(), _resolver);
 
                 // Trigger types
                 case EMType.Trigger:
