@@ -216,6 +216,44 @@
   "ConditionalAll": [
     {
       "Condition": {
+        "Comments": "If the Marco model is present, we have to convert wheel doors because LaraMiscAnim will have been overwritten.",
+        "ConditionType": 41,
+        "ModelID": 40
+      },
+      "OnTrue": [
+        {
+          "EMType": 52,
+          "WheelIndex": 28,
+          "DoorIndex": 26,
+          "NewSwitchType": 103,
+          "NewDoorType": 106,
+          "NewLocation": {
+            "X": 31232,
+            "Y": -4096,
+            "Z": 66048,
+            "Room": 17,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 52,
+          "WheelIndex": 73,
+          "DoorIndex": 74,
+          "NewSwitchType": 103,
+          "NewDoorType": 106,
+          "NewLocation": {
+            "X": 33280,
+            "Y": -4096,
+            "Z": 59904,
+            "Room": 43,
+            "Angle": -16384
+          }
+        }
+      ]
+    },
+
+    {
+      "Condition": {
         "Comments": "If Marco has been added and the plane area has been drained, move him there (he'll either be entity 8 or 9).",
         "ConditionType": 0,
         "EntityIndex": 8,
@@ -239,96 +277,6 @@
             "Z": 81803,
             "Room": 88,
             "Angle": 0
-          }
-        },
-        {
-          "Comments": "Convert wheel doors into regular ones as Lara's animation will have been overwritten.",
-          "EMType": 45,
-          "EntityIndex": 28,
-          "NewEntityType": 103
-        },
-        {
-          "EMType": 45,
-          "EntityIndex": 26,
-          "NewEntityType": 106
-        },
-        {
-          "EMType": 48,
-          "EntityIndex": 26,
-          "Intensity1": 5120,
-          "Intensity2": 4096
-        },
-        {
-          "EMType": 44,
-          "EntityIndex": 28,
-          "TargetLocation": {
-            "X": 31232,
-            "Y": -4096,
-            "Z": 66048,
-            "Room": 17,
-            "Angle": -32768
-          }
-        },
-        {
-          "EMType": 69,
-          "SwitchOrKeyRef": 28,
-          "Location": {
-            "X": 31232,
-            "Y": -4096,
-            "Z": 66048,
-            "Room": 17
-          }
-        },
-        {
-          "EMType": 45,
-          "EntityIndex": 73,
-          "NewEntityType": 103
-        },
-        {
-          "EMType": 45,
-          "EntityIndex": 74,
-          "NewEntityType": 106
-        },
-        {
-          "EMType": 48,
-          "EntityIndex": 74,
-          "Intensity1": 5120,
-          "Intensity2": 4096
-        },
-        {
-          "EMType": 44,
-          "EntityIndex": 73,
-          "TargetLocation": {
-            "X": 33280,
-            "Y": -4096,
-            "Z": 59904,
-            "Room": 43,
-            "Angle": -16384
-          }
-        },
-        {
-          "EMType": 69,
-          "SwitchOrKeyRef": 73,
-          "Location": {
-            "X": 33280,
-            "Y": -4096,
-            "Z": 60928,
-            "Room": 43
-          }
-        },
-        {
-          "EMType": 67,
-          "BaseLocation": {
-            "X": 33280,
-            "Y": -4096,
-            "Z": 60928,
-            "Room": 43
-          },
-          "NewLocation": {
-            "X": 33280,
-            "Y": -4096,
-            "Z": 59904,
-            "Room": 43
           }
         }
       ]
@@ -356,96 +304,6 @@
             "Z": 81803,
             "Room": 88,
             "Angle": 0
-          }
-        },
-        {
-          "Comments": "Convert wheel doors into regular ones as Lara's animation will have been overwritten.",
-          "EMType": 45,
-          "EntityIndex": 28,
-          "NewEntityType": 103
-        },
-        {
-          "EMType": 45,
-          "EntityIndex": 26,
-          "NewEntityType": 106
-        },
-        {
-          "EMType": 48,
-          "EntityIndex": 26,
-          "Intensity1": 5120,
-          "Intensity2": 4096
-        },
-        {
-          "EMType": 44,
-          "EntityIndex": 28,
-          "TargetLocation": {
-            "X": 31232,
-            "Y": -4096,
-            "Z": 66048,
-            "Room": 17,
-            "Angle": -32768
-          }
-        },
-        {
-          "EMType": 69,
-          "SwitchOrKeyRef": 28,
-          "Location": {
-            "X": 31232,
-            "Y": -4096,
-            "Z": 66048,
-            "Room": 17
-          }
-        },
-        {
-          "EMType": 45,
-          "EntityIndex": 73,
-          "NewEntityType": 103
-        },
-        {
-          "EMType": 45,
-          "EntityIndex": 74,
-          "NewEntityType": 106
-        },
-        {
-          "EMType": 48,
-          "EntityIndex": 74,
-          "Intensity1": 5120,
-          "Intensity2": 4096
-        },
-        {
-          "EMType": 44,
-          "EntityIndex": 73,
-          "TargetLocation": {
-            "X": 33280,
-            "Y": -4096,
-            "Z": 59904,
-            "Room": 43,
-            "Angle": -16384
-          }
-        },
-        {
-          "EMType": 69,
-          "SwitchOrKeyRef": 73,
-          "Location": {
-            "X": 33280,
-            "Y": -4096,
-            "Z": 60928,
-            "Room": 43
-          }
-        },
-        {
-          "EMType": 67,
-          "BaseLocation": {
-            "X": 33280,
-            "Y": -4096,
-            "Z": 60928,
-            "Room": 43
-          },
-          "NewLocation": {
-            "X": 33280,
-            "Y": -4096,
-            "Z": 59904,
-            "Room": 43
           }
         }
       ]

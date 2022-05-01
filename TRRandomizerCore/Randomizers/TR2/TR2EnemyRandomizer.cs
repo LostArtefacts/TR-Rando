@@ -432,7 +432,7 @@ namespace TRRandomizerCore.Randomizers
                 foreach (TR2ScriptedLevel level in Levels)
                 {
                     IEnumerable<TR2Entities> restrictedRoomEnemies = TR2EnemyUtilities.GetRestrictedEnemyRooms(level.LevelFileBaseName.ToUpper(), RandoDifficulty.Default).Keys;
-                    if (includedEnemies.All(e => restrictedRoomEnemies.Contains(e)))
+                    if (includedEnemies.All(e => restrictedRoomEnemies.Contains(e) || _gameEnemyTracker.ContainsKey(e)))
                     {
                         return RandoDifficulty.NoRestrictions;
                     }

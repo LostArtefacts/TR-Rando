@@ -346,6 +346,36 @@
               }
             ]
           }
+        },
+
+        {
+          "Comments": "Convert wheel doors into regular ones as Lara's animation will have been overwritten.",
+          "EMType": 52,
+          "WheelIndex": 16,
+          "DoorIndex": 12,
+          "NewSwitchType": 93,
+          "NewDoorType": 106,
+          "NewLocation": {
+            "X": 46592,
+            "Y": -5120,
+            "Z": 70144,
+            "Room": 13,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 52,
+          "WheelIndex": 26,
+          "DoorIndex": 24,
+          "NewSwitchType": 93,
+          "NewDoorType": 106,
+          "NewLocation": {
+            "X": 52736,
+            "Y": -5120,
+            "Z": 78336,
+            "Room": 16,
+            "Angle": 16384
+          }
         }
       ]
     }
