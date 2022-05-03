@@ -59,7 +59,8 @@ namespace TRRandomizerCore.Utilities
 
         public static bool IsDroppableEnemyRequired(TR2CombinedLevel level)
         {
-            foreach (TR2Entity entityInstance in level.Data.Entities)
+            TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR2EntityUtilities.IsEnemyType((TR2Entities)e.TypeID));
+            foreach (TR2Entity entityInstance in enemies)
             {
                 List<TR2Entity> sharedItems = new List<TR2Entity>(Array.FindAll
                 (
