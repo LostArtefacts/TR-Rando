@@ -43,6 +43,7 @@ namespace TRRandomizerCore.Editors
         public bool DevelopmentMode { get; set; }
         public ItemDifficulty RandoItemDifficulty { get; set; }
         public bool PersistTextureVariants { get; set; }
+        public bool RetainMainLevelTextures { get; set; }
         public bool RetainKeySpriteTextures { get; set; }
         public bool RetainSecretSpriteTextures { get; set; }
         public uint WireframeLevelCount { get; set; }
@@ -149,6 +150,7 @@ namespace TRRandomizerCore.Editors
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
             PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
+            RetainMainLevelTextures = config.GetBool(nameof(RetainMainLevelTextures));
             RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures), true);
             RetainSecretSpriteTextures = config.GetBool(nameof(RetainSecretSpriteTextures), true);
             WireframeLevelCount = config.GetUInt(nameof(WireframeLevelCount));
@@ -251,6 +253,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;
             config[nameof(PersistTextureVariants)] = PersistTextureVariants;
+            config[nameof(RetainMainLevelTextures)] = RetainMainLevelTextures;
             config[nameof(RetainKeySpriteTextures)] = RetainKeySpriteTextures;
             config[nameof(RetainSecretSpriteTextures)] = RetainSecretSpriteTextures;
             config[nameof(WireframeLevelCount)] = WireframeLevelCount;
