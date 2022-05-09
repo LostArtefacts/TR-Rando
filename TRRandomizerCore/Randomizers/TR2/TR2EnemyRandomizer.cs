@@ -881,9 +881,10 @@ namespace TRRandomizerCore.Randomizers
                     if (TR2EntityUtilities.IsAnyPickupType(newType))
                     {
                         // Make sure the pickup is pickupable
-                        skidMan.Invisible = false;
                         TRRoomSector sector = FDUtilities.GetRoomSector(skidMan.X, skidMan.Y, skidMan.Z, skidMan.Room, level.Data, floorData);
                         skidMan.Y = sector.Floor * 256;
+                        skidMan.Invisible = false;
+
                         if (sector.FDIndex != 0)
                         {
                             FDEntry entry = floorData.Entries[sector.FDIndex].Find(e => e is FDSlantEntry s && s.Type == FDSlantEntryType.FloorSlant);
@@ -904,7 +905,6 @@ namespace TRRandomizerCore.Randomizers
 
                 floorData.WriteToLevel(level.Data);
             }
-            Debug.WriteLine(level.Name + ": " + Array.FindAll(level.Data.Entities, e => e.TypeID == (short)TR2Entities.MercSnowmobDriver).Length);
         }
 
         private void RandomizeEnemyMeshes(TR2CombinedLevel level, EnemyRandomizationCollection enemies)
