@@ -812,7 +812,7 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // Check in case there are too many skidoo drivers
-            if (difficulty == RandoDifficulty.NoRestrictions && Array.Find(level.Data.Entities, e => e.TypeID == (short)TR2Entities.MercSnowmobDriver) != null)
+            if (Array.Find(level.Data.Entities, e => e.TypeID == (short)TR2Entities.MercSnowmobDriver) != null)
             {
                 LimitSkidooEntities(level);
             }
@@ -830,17 +830,42 @@ namespace TRRandomizerCore.Randomizers
 
         private void LimitSkidooEntities(TR2CombinedLevel level)
         {
-            // Although 256 is the entity limit, any more than 250 and the level can't be saved
-            const int skidooLimit = 250;
-            if (level.GetActualEntityCount() >= skidooLimit)
+            // Ensure that the total implied enemy count does not exceed that of the original
+            // level. The limit actually varies depending on the number of traps and other objects
+            // so for those levels with high entity counts, we further restrict the limit.
+            int skidooLimit = TR2EnemyUtilities.GetSkidooDriverLimit(level.Name);
+
+            List<TR2Entity> enemies = level.GetEnemyEntities();
+            int normalEnemyCount = enemies.FindAll(e => e.TypeID != (short)TR2Entities.MercSnowmobDriver).Count;
+            int skidooMenCount = enemies.Count - normalEnemyCount;
+            int skidooRemovalCount = skidooMenCount - skidooMenCount / 2;
+            if (skidooLimit > 0)
+            {
+                while (skidooMenCount - skidooRemovalCount > skidooLimit)
+                {
+                    ++skidooRemovalCount;
+                }
+            }
+
+            if (skidooRemovalCount > 0)
             {
                 FDControl floorData = new FDControl();
                 floorData.ParseFromLevel(level.Data);
                 LocationGenerator locationGenerator = new LocationGenerator();
-                List<TR2Entities> replacementPool = TR2EntityUtilities.GetListOfAmmoTypes();
+                List<TR2Entities> replacementPool;
+                if (!Settings.RandomizeItems || Settings.RandoItemDifficulty == ItemDifficulty.Default)
+                {
+                    // The user is not specifically attempting one-item rando, so we can add anything as replacements
+                    replacementPool = TR2EntityUtilities.GetListOfAmmoTypes();
+                }
+                else
+                {
+                    // Camera targets don't take up any savegame space, so in one-item mode use these as replacements
+                    replacementPool = new List<TR2Entities> { TR2Entities.CameraTarget_N };
+                }
 
                 TR2Entity[] skidMen;
-                do
+                for (int i = 0; i < skidooRemovalCount; i++)
                 {
                     skidMen = Array.FindAll(level.Data.Entities, e => e.TypeID == (short)TR2Entities.MercSnowmobDriver);
                     if (skidMen.Length == 0)
@@ -848,33 +873,38 @@ namespace TRRandomizerCore.Randomizers
                         break;
                     }
 
-                    // Select a random Skidoo driver and convert him into a pickup
+                    // Select a random Skidoo driver and convert him into something else
                     TR2Entity skidMan = skidMen[_generator.Next(0, skidMen.Length)];
-                    skidMan.TypeID = (short)replacementPool[_generator.Next(0, replacementPool.Count)];
+                    TR2Entities newType = replacementPool[_generator.Next(0, replacementPool.Count)];
+                    skidMan.TypeID = (short)newType;
 
-                    // Make sure the pickup is pickupable
-                    TRRoomSector sector = FDUtilities.GetRoomSector(skidMan.X, skidMan.Y, skidMan.Z, skidMan.Room, level.Data, floorData);
-                    skidMan.Y = sector.Floor * 256;
-                    if (sector.FDIndex != 0)
+                    if (TR2EntityUtilities.IsAnyPickupType(newType))
                     {
-                        FDEntry entry = floorData.Entries[sector.FDIndex].Find(e => e is FDSlantEntry s && s.Type == FDSlantEntryType.FloorSlant);
-                        if (entry is FDSlantEntry slant)
+                        // Make sure the pickup is pickupable
+                        skidMan.Invisible = false;
+                        TRRoomSector sector = FDUtilities.GetRoomSector(skidMan.X, skidMan.Y, skidMan.Z, skidMan.Room, level.Data, floorData);
+                        skidMan.Y = sector.Floor * 256;
+                        if (sector.FDIndex != 0)
                         {
-                            Vector4? bestMidpoint = locationGenerator.GetBestSlantMidpoint(slant);
-                            if (bestMidpoint.HasValue)
+                            FDEntry entry = floorData.Entries[sector.FDIndex].Find(e => e is FDSlantEntry s && s.Type == FDSlantEntryType.FloorSlant);
+                            if (entry is FDSlantEntry slant)
                             {
-                                skidMan.Y += (int)bestMidpoint.Value.Y;
+                                Vector4? bestMidpoint = locationGenerator.GetBestSlantMidpoint(slant);
+                                if (bestMidpoint.HasValue)
+                                {
+                                    skidMan.Y += (int)bestMidpoint.Value.Y;
+                                }
                             }
                         }
                     }
 
-                    // Get rid of the enemy's triggers
+                    // Get rid of the old enemy's triggers
                     FDUtilities.RemoveEntityTriggers(level.Data, Array.IndexOf(level.Data.Entities, skidMan), floorData);
                 }
-                while (level.GetActualEntityCount() >= skidooLimit);
 
                 floorData.WriteToLevel(level.Data);
             }
+            Debug.WriteLine(level.Name + ": " + Array.FindAll(level.Data.Entities, e => e.TypeID == (short)TR2Entities.MercSnowmobDriver).Length);
         }
 
         private void RandomizeEnemyMeshes(TR2CombinedLevel level, EnemyRandomizationCollection enemies)

@@ -525,6 +525,17 @@ namespace TRLevelReader.Helpers
                     entity == TR2Entities.Quest2_S_P);
         }
 
+        public static bool IsAnyPickupType(TR2Entities entity)
+        {
+            return entity == TR2Entities.Pistols_S_P ||
+                entity == TR2Entities.PistolAmmo_S_P ||
+                IsAmmoType(entity) ||
+                IsGunType(entity) ||
+                IsKeyItemType(entity) ||
+                IsUtilityType(entity) ||
+                IsSecretType(entity);
+        }
+
         public static bool IsWaterCreature(TR2Entities entity)
         {
             return (entity == TR2Entities.Shark || entity == TR2Entities.YellowMorayEel || entity == TR2Entities.BlackMorayEel ||

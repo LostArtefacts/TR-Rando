@@ -363,6 +363,19 @@ namespace TRRandomizerCore.Utilities
             [TR2Entities.BirdMonster] = 3,
         };
 
+        // Predefined absolute limits for skidoo drivers
+        private static readonly Dictionary<string, int> _skidooLimits = new Dictionary<string, int>
+        {
+            [TR2LevelNames.OPERA] = 18,
+            [TR2LevelNames.MONASTERY] = 22,
+            [TR2LevelNames.XIAN] = 10
+        };
+
+        public static int GetSkidooDriverLimit(string lvl)
+        {
+            return _skidooLimits.ContainsKey(lvl) ? _skidooLimits[lvl] : -1;
+        }
+
         static TR2EnemyUtilities()
         {
             _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Entities, List<int>>>>
