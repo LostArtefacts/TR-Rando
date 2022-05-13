@@ -11,26 +11,32 @@ using TRLevelToolset.IOLogic;
 
 namespace TRLevelToolset.Controls.DataControls.EM
 {
-    internal class EMOneOfControl : IDrawable
+    internal class EMAllWithinGroupControl : IDrawable
     {
-        private List<EMEditorGroupedSet> _data { get; set; }
+        private List<EMEditorSet> _data { get; set; }
+        
+        private int _groupNum { get; set; }
 
-        public EMOneOfControl(List<EMEditorGroupedSet> data)
+        public EMAllWithinGroupControl(List<EMEditorSet> data, int groupNum)
         {
             _data = data;
+            _groupNum = groupNum;
         }
-
+        
         public void Draw()
         {
             int i = 0;
             
-            foreach (EMEditorGroupedSet set in _data)
+            foreach (EMEditorSet set in _data)
             {
-                ImGui.Text("Grouped Set " + i);
+                ImGui.Text("Group  " + _groupNum + " Set " + i);
+                
+                EMAllControl ctrl = new EMAllControl(set);
+                
                 ImGui.Indent();
-                EMEditorGroupedSetControl ctrl = new EMEditorGroupedSetControl(set);
                 ctrl.Draw();
                 ImGui.Unindent();
+                
                 i++;
             }
         }

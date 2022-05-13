@@ -22,7 +22,17 @@ namespace TRLevelToolset.Controls.DataControls.EM
         
         public void Draw()
         {
-            ImGui.Text("Conditional All Within Control");
+            int i = 0;
+            
+            foreach (EMConditionalEditorSet set in _data)
+            {
+                ImGui.Text("Set " + i);
+                ImGui.Indent();
+                EMConditionalEditorSetControl ctrl = new EMConditionalEditorSetControl(set);
+                ctrl.Draw();
+                ImGui.Unindent();
+                i++;
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace TRLevelToolset.Controls.DataControls.EM
         
         public void Draw()
         {
-            ImGui.Text(_data.GetType().ToString());
+            ImGui.Button(_data.GetType().Name);
         }
     }
 }
