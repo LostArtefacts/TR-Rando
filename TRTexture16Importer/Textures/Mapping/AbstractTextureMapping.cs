@@ -174,7 +174,10 @@ namespace TRTexture16Importer.Textures
             HSBOperation op = source.OperationMap[variant];
             DynamicTextureTarget target = DynamicMapping[source];
 
-            RedrawDynamicTargets(target.DefaultTileTargets, op);
+            if (options.ContainsKey(TextureCategory.LevelColours) && options[TextureCategory.LevelColours])
+            {
+                RedrawDynamicTargets(target.DefaultTileTargets, op);
+            }
 
             foreach (TextureCategory category in target.OptionalTileTargets.Keys)
             {

@@ -59,7 +59,8 @@ namespace TRRandomizerCore.Utilities
 
         public static bool IsDroppableEnemyRequired(TR2CombinedLevel level)
         {
-            foreach (TR2Entity entityInstance in level.Data.Entities)
+            TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR2EntityUtilities.IsEnemyType((TR2Entities)e.TypeID));
+            foreach (TR2Entity entityInstance in enemies)
             {
                 List<TR2Entity> sharedItems = new List<TR2Entity>(Array.FindAll
                 (
@@ -361,6 +362,19 @@ namespace TRRandomizerCore.Utilities
         {
             [TR2Entities.BirdMonster] = 3,
         };
+
+        // Predefined absolute limits for skidoo drivers
+        private static readonly Dictionary<string, int> _skidooLimits = new Dictionary<string, int>
+        {
+            [TR2LevelNames.OPERA] = 18,
+            [TR2LevelNames.MONASTERY] = 22,
+            [TR2LevelNames.XIAN] = 10
+        };
+
+        public static int GetSkidooDriverLimit(string lvl)
+        {
+            return _skidooLimits.ContainsKey(lvl) ? _skidooLimits[lvl] : -1;
+        }
 
         static TR2EnemyUtilities()
         {

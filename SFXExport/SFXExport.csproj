@@ -6,4 +6,7 @@
     <Copyright>Copyright © Tombrunners 2021</Copyright>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj" />
+  </ItemGroup>
 </Project>

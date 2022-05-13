@@ -5,6 +5,7 @@
         KeyItem,
         Secret,
         DayMode,
-        NightMode
+        NightMode,
+        LevelColours
     }
 }

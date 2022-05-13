@@ -70,6 +70,7 @@ namespace TRLevelReader.Model.Enums
         MonkWithLongStick,
         MonkWithKnifeStick,
         FallingBlock,
+        FallingBlock2,
         LooseBoards = 57,
         SandbagOrBallsack,
         TeethSpikesOrGlassShards,

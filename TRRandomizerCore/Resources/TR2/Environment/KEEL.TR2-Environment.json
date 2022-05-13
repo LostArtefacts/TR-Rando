@@ -228,6 +228,69 @@
         "EntityIndex": 102,
         "NewEntityType": 145
       }
+    ],
+
+    [
+      {
+        "Comments": "Make room 98 accessible for the max percent players.",
+        "EMType": 83,
+        "Ceiling": {
+          "X": 46592,
+          "Y": 8192,
+          "Z": 82432,
+          "Room": 76
+        },
+        "Floor": {
+          "X": 46592,
+          "Y": 10112,
+          "Z": 82432,
+          "Room": 98
+        }
+      },
+
+      {
+        "Comments": "Convert the shards into a reward.",
+        "EMType": 45,
+        "EntityIndex": 142,
+        "NewEntityType": 150
+      },
+
+      {
+        "Comments": "And move it into the room below.",
+        "EMType": 44,
+        "EntityIndex": 142,
+        "TargetLocation": {
+          "X": 42496,
+          "Y": 11008,
+          "Z": 82432,
+          "Room": 98
+        }
+      },
+
+      {
+        "Comments": "Some refacing.",
+        "EMType": 21,
+        "TextureMap": {
+          "1728": {
+            "98": {
+              "0": [ 82, 72, 62, 52, 42, 32, 22, 11, 8, 5, 1, 15, 25, 35, 45, 55, 65, 75, 78, 80 ]
+            }
+          }
+        }
+      },
+
+      {
+        "Comments": "Clear the portal faces.",
+        "EMType": 22,
+        "GeometryMap": {
+          "98": {
+            "0": [ 70 ]
+          },
+          "76": {
+            "0": [ 192 ]
+          }
+        }
+      }
     ]
   ],
 

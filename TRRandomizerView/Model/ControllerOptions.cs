@@ -26,7 +26,7 @@ namespace TRRandomizerView.Model
         private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras;
         private BoolItemControlClass _includeKeyItems;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance;
-        private BoolItemControlClass _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
+        private BoolItemControlClass _persistTextures, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
@@ -1027,6 +1027,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RetainMainLevelTextures
+        {
+            get => _retainLevelTextures;
+            set
+            {
+                _retainLevelTextures = value;
+                FirePropertyChanged();
+            }
+        }
+
         public BoolItemControlClass RetainKeySpriteTextures
         {
             get => _retainKeySpriteTextures;
@@ -1346,6 +1356,12 @@ namespace TRRandomizerView.Model
                 Description = "Each unique texture will only be randomized once, rather than once per level."
             };
             BindingOperations.SetBinding(PersistTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
+            RetainMainLevelTextures = new BoolItemControlClass
+            {
+                Title = "Use original main level textures",
+                Description = "Texture mapping will not apply to levels as a whole e.g. walls, rock, snow etc."
+            };
+            BindingOperations.SetBinding(RetainMainLevelTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
             RetainKeySpriteTextures = new BoolItemControlClass()
             {
                 Title = "Use original key item textures",
@@ -1479,7 +1495,7 @@ namespace TRRandomizerView.Model
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
-                _persistTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
+                _persistTextures, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
             };
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -1508,7 +1524,7 @@ namespace TRRandomizerView.Model
         {
             // Called after the version type has been identified, so allows for customising
             // individual settings based on what's available.
-            _removeRobeDagger.IsAvailable = IsOutfitDaggerSupported;
+            _removeRobeDagger.IsAvailable = _retainLevelTextures.IsAvailable = IsOutfitDaggerSupported;
 
             _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = IsSFXSupported;
 
@@ -1603,6 +1619,7 @@ namespace TRRandomizerView.Model
             RandomizeTextures = _controller.RandomizeTextures;
             TextureSeed = _controller.TextureSeed;
             PersistTextures.Value = _controller.PersistTextures;
+            RetainMainLevelTextures.Value = _controller.RetainMainLevelTextures;
             RetainKeySpriteTextures.Value = _controller.RetainKeySpriteTextures;
             RetainSecretSpriteTextures.Value = _controller.RetainSecretSpriteTextures;
             WireframeLevelCount = _controller.WireframeLevelCount;
@@ -1884,6 +1901,7 @@ namespace TRRandomizerView.Model
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
             _controller.PersistTextures = PersistTextures.Value;
+            _controller.RetainMainLevelTextures = RetainMainLevelTextures.Value;
             _controller.RetainKeySpriteTextures = RetainKeySpriteTextures.Value;
             _controller.RetainSecretSpriteTextures = RetainSecretSpriteTextures.Value;
             _controller.WireframeLevelCount = WireframeLevelCount;
