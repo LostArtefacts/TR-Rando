@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Linq;
 using TRLevelReader.Model;
 
@@ -11,6 +12,9 @@ namespace TREnvironmentEditor.Model
         // Sector X/Z length
         public static readonly int SectorSize = 1024;
 
+        [JsonProperty(Order = -2)]
+        public string Comments { get; set; }
+        [JsonProperty(Order = -2)]
         public EMType EMType { get; set; }
 
         public abstract void ApplyToLevel(TR2Level level);

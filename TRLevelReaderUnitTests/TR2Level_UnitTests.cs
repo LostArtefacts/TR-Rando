@@ -490,9 +490,10 @@ namespace TRLevelReaderUnitTests
                 Assert.IsFalse(trigger.TrigSetup.OneShot);
             }
 
-            //Set OneShot on each trigger
+            //Set OneShot on each trigger and test successive calls
             foreach (FDTriggerEntry trigger in triggers)
             {
+                trigger.TrigSetup.OneShot = true;
                 trigger.TrigSetup.OneShot = true;
             }
 
@@ -515,9 +516,10 @@ namespace TRLevelReaderUnitTests
                 Assert.IsTrue(trigger.TrigSetup.OneShot);
             }
 
-            //Switch it off again
+            //Switch it off again and test successive calls
             foreach (FDTriggerEntry trigger in triggers)
             {
+                trigger.TrigSetup.OneShot = false;
                 trigger.TrigSetup.OneShot = false;
             }
 
@@ -537,6 +539,55 @@ namespace TRLevelReaderUnitTests
             foreach (FDTriggerEntry trigger in triggers)
             {
                 Assert.IsFalse(trigger.TrigSetup.OneShot);
+            }
+        }
+
+        [TestMethod]
+        public void FloorData_ReadWriteTrigTimerTest()
+        {
+            //Read GW data
+            TR2LevelReader reader = new TR2LevelReader();
+            TR2Level lvl = reader.ReadLevel("wall.tr2");
+
+            //Parse the floordata using FDControl
+            FDControl fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Get all triggers for entity ID 18
+            List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(fdataReader, 18);
+
+            //There should be 3
+            Assert.AreEqual(triggers.Count, 3);
+
+            //Verify none of the triggers has a timer
+            foreach (FDTriggerEntry trigger in triggers)
+            {
+                Assert.AreEqual(trigger.TrigSetup.Timer, 0);
+            }
+
+            //Set the timer on each trigger
+            for (int i = 0; i < triggers.Count; i++)
+            {
+                triggers[i].TrigSetup.Timer = (byte)(i * 10);
+            }
+
+            fdataReader.WriteToLevel(lvl);
+
+            //Save it and read it back in
+            TR2LevelWriter writer = new TR2LevelWriter();
+            writer.WriteLevelToFile(lvl, "TEST.tr2");
+            lvl = reader.ReadLevel("TEST.tr2");
+
+            fdataReader = new FDControl();
+            fdataReader.ParseFromLevel(lvl);
+
+            //Get the triggers again afresh
+            triggers = FDUtilities.GetEntityTriggers(fdataReader, 18);
+
+            //Verify that they now have the timers set
+            for (int i = 0; i < triggers.Count; i++)
+            {
+                Assert.AreEqual(triggers[i].TrigSetup.Timer, i * 10);
             }
         }
 

@@ -31,7 +31,7 @@ namespace TRFDControl
             }
             set
             {
-                Value = (ushort)(Value & ~(byte)TrigAction);
+                Value = (ushort)(Value & ~(Value & 0x7C00));
                 Value |= (ushort)((byte)value << 10);
             }
         }

@@ -9,6 +9,12 @@ namespace TREnvironmentEditor
     public class EMEditorMapping
     {
         public static readonly EMConverter Converter = new EMConverter();
+        public static readonly JsonSerializerSettings Serializer = new JsonSerializerSettings
+        {
+            ContractResolver = new EMSerializationResolver(),
+            NullValueHandling = NullValueHandling.Ignore,
+            Formatting = Formatting.Indented
+        };
 
         public EMEditorSet All { get; set; }
         public List<EMConditionalSingleEditorSet> ConditionalAll { get; set; }
@@ -40,6 +46,16 @@ namespace TREnvironmentEditor
             }
 
             return null;
+        }
+
+        public void SerializeTo(string packPath)
+        {
+            File.WriteAllText(packPath, Serialize());
+        }
+
+        public string Serialize()
+        {
+            return JsonConvert.SerializeObject(this, Serializer);
         }
 
         public void AlternateTextures()
