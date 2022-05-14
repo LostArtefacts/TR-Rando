@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model
 {
     public abstract class BaseEMCondition
     {
+        [JsonProperty(Order = -2)]
+        public string Comments { get; set; }
+        [JsonProperty(Order = -2)]
         public EMConditionType ConditionType { get; set; }
         public bool Negate { get; set; }
         public List<BaseEMCondition> And { get; set; }

@@ -5,7 +5,7 @@ using TREnvironmentEditor.Model;
 
 namespace TREnvironmentEditor.Parsing
 {
-    public class EMResolver : DefaultContractResolver
+    public class EMDeserializationResolver : DefaultContractResolver
     {
         protected override JsonConverter ResolveContractConverter(Type objectType)
         {

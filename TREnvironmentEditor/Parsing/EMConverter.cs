@@ -11,8 +11,11 @@ namespace TREnvironmentEditor.Parsing
     {
         private static readonly JsonSerializerSettings _resolver = new JsonSerializerSettings
         {
-            ContractResolver = new EMResolver()
+            ContractResolver = new EMDeserializationResolver()
         };
+
+        private static readonly string _emTypeName = "EMType";
+        private static readonly string _conditionTypeName = "ConditionType";
 
         public override bool CanConvert(Type objectType)
         {
@@ -22,11 +25,11 @@ namespace TREnvironmentEditor.Parsing
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JObject jo = JObject.Load(reader);
-            if (jo["EMType"] != null)
+            if (jo[_emTypeName] != null)
             {
                 return ReadEMType(jo);
             }
-            else if (jo["ConditionType"] != null)
+            else if (jo[_conditionTypeName] != null)
             {
                 return ReadConditionType(jo);
             }
@@ -36,7 +39,7 @@ namespace TREnvironmentEditor.Parsing
 
         private object ReadEMType(JObject jo)
         {
-            EMType type = (EMType)jo["EMType"].Value<int>();
+            EMType type = (EMType)jo[_emTypeName].Value<int>();
             switch (type)
             {
                 // Surface types
@@ -162,7 +165,7 @@ namespace TREnvironmentEditor.Parsing
 
         private object ReadConditionType(JObject jo)
         {
-            EMConditionType type = (EMConditionType)jo["ConditionType"].Value<int>();
+            EMConditionType type = (EMConditionType)jo[_conditionTypeName].Value<int>();
             switch (type)
             {
                 // Entities

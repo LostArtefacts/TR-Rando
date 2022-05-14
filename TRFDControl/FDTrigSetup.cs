@@ -16,6 +16,11 @@ namespace TRFDControl
             {
                 return (byte)(Value & 0x00FF);
             }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0x00FF));
+                Value |= value;
+            }
         }
 
         public bool OneShot
@@ -32,7 +37,8 @@ namespace TRFDControl
                 }
                 else
                 {
-                    Value ^= 0x0100;
+                    // Rather than Xor'ing, this allows successive calls with the same bool val
+                    Value = (ushort)(Value & ~0x0100);
                 }
             }
         }
