@@ -1,30 +1,5 @@
 {
   "All": [],
-
-  "ConditionalAll": [
-    {
-      "Condition": {
-        "Comments": "Check if enemy #28 is Marco and if so hide him under a van.",
-        "ConditionType": 0,
-        "EntityIndex": 28,
-        "EntityType": 40
-      },
-      "OnTrue": [
-        {
-          "EMType": 44,
-          "EntityIndex": 28,
-          "TargetLocation": {
-            "X": 58368,
-            "Y": 2560,
-            "Z": 70144,
-            "Room": 48,
-            "Angle": -16384
-          }
-        }
-      ]
-    }
-  ],
-
   "NonPurist": [
     {
       "Comments": "Reposition the unused maze button to the bedroom.",
@@ -38,30 +13,9 @@
         "Angle": 16384
       }
     },
-
     {
       "Comments": "Use it to turn off the alarms.",
       "EMType": 61,
-      "TriggerEntry": {
-        "Setup": {
-          "Value": 4
-        },
-        "TrigSetup": {
-          "Value": 15872
-        },
-        "TrigType": 2,
-        "SwitchOrKeyRef": 107,
-        "TrigActionList": [
-          {
-            "TrigAction": 0,
-            "Parameter": 19
-          },
-          {
-            "TrigAction": 0,
-            "Parameter": 33
-          }
-        ]
-      },
       "Locations": [
         {
           "X": 39424,
@@ -69,49 +23,58 @@
           "Z": 60928,
           "Room": 52
         }
-      ]
+      ],
+      "Trigger": {
+        "TrigType": 2,
+        "Mask": 31,
+        "SwitchOrKeyRef": 107,
+        "Actions": [
+          {
+            "Parameter": 19
+          },
+          {
+            "Parameter": 33
+          }
+        ]
+      }
     }
   ],
-
   "Any": [
     [
       {
         "Comments": "Remove the grandfather clock from the hall.",
         "EMType": 25,
         "ClearFromRooms": {
-          "27": [ 60 ]
+          "27": [
+            60
+          ]
         }
       },
-
       {
         "Comments": "Move it upstairs instead.",
         "EMType": 24,
         "Locations": [
           {
             "X": 35328,
-            "Y": 0,
             "Z": 70144,
             "Room": 9,
             "Angle": -16384
           }
         ],
         "Mesh": {
-          "MeshID": 27,
           "Intensity1": 4096,
-          "Intensity2": 4096
+          "Intensity2": 4096,
+          "MeshID": 27
         }
       },
-
       {
         "Comments": "Move the ticking sound source too.",
         "EMType": 102,
-        "Index": 0,
         "Relocation": {
           "X": -3072,
           "Y": -2560
         }
       },
-
       {
         "Comments": "Put a chaise longue where the clock used to be.",
         "EMType": 24,
@@ -125,60 +88,79 @@
           }
         ],
         "Mesh": {
-          "MeshID": 9,
           "Intensity1": 4096,
-          "Intensity2": 4096
+          "Intensity2": 4096,
+          "MeshID": 9
         }
       }
     ],
-
     [
       {
         "Comments": "Fill the kitchen sink.",
         "EMType": 2,
-        "RoomNumbers": [ 51 ],
-        "WaterTextures": [ 93, 96, 97, 125 ]
+        "RoomNumbers": [
+          51
+        ],
+        "WaterTextures": [
+          93,
+          96,
+          97,
+          125
+        ]
       }
     ],
-
     [
       {
         "Comments": "Empty the bath.",
         "EMType": 3,
-        "RoomNumbers": [ 11 ],
-        "WaterTextures": [ 93, 96, 97, 125 ]
+        "RoomNumbers": [
+          11
+        ],
+        "WaterTextures": [
+          93,
+          96,
+          97,
+          125
+        ]
       }
     ],
-
     [
       {
         "Comments": "Drain the pool.",
         "EMType": 3,
-        "RoomNumbers": [ 13 ],
-        "WaterTextures": [ 93, 96, 97, 125 ]
+        "RoomNumbers": [
+          13
+        ],
+        "WaterTextures": [
+          93,
+          96,
+          97,
+          125
+        ]
       },
-
       {
         "Comments": "Make a ladder to get out.",
         "EMType": 0,
-        "IsPositiveZ": true,
+        "TextureMap": {
+          "217": {
+            "13": {
+              "Rectangles": [
+                24,
+                25
+              ]
+            }
+          }
+        },
         "Location": {
           "X": 27098,
           "Y": 6144,
           "Z": 92828,
           "Room": 13
         },
-        "TextureMap": {
-          "217": {
-            "13": {
-              "Rectangles": [ 24, 25 ]
-            }
-          }
-        }
+        "IsPositiveZ": true
       }
     ]
   ],
-
   "AllWithin": [
     [
       [
@@ -190,8 +172,7 @@
             "X": 34304,
             "Y": 256,
             "Z": 64000,
-            "Room": 52,
-            "Angle": 0
+            "Room": 52
           }
         }
       ],
@@ -204,8 +185,7 @@
             "X": 35328,
             "Y": 256,
             "Z": 64000,
-            "Room": 52,
-            "Angle": 0
+            "Room": 52
           }
         }
       ],
@@ -230,16 +210,13 @@
           "EntityIndex": 47,
           "Location": {
             "X": 30208,
-            "Y": 0,
             "Z": 64000,
-            "Room": 52,
-            "Angle": 0
+            "Room": 52
           }
         }
       ]
     ]
   ],
-
   "OneOf": [
     {
       "Leader": [
@@ -256,12 +233,11 @@
             }
           ],
           "Mesh": {
-            "MeshID": 6,
             "Intensity1": 7936,
-            "Intensity2": 4096
+            "Intensity2": 4096,
+            "MeshID": 6
           }
         },
-
         {
           "Comments": "Amend the switch (see All) to play some nice tunes as well as turning off the alarms.",
           "EMType": 68,
@@ -271,14 +247,13 @@
             "Z": 60928,
             "Room": 52
           },
-          "ActionItems": [
+          "Actions": [
             {
-              "TrigAction": 8,
+              "Action": 8,
               "Parameter": 45
             }
           ]
         },
-
         {
           "Comments": "Default new position for the music switch (needs to move for the plants).",
           "EMType": 41,
@@ -287,11 +262,9 @@
             "X": 36352,
             "Y": 256,
             "Z": 62976,
-            "Room": 52,
-            "Angle": 0
+            "Room": 52
           }
         },
-
         {
           "Comments": "Put plants beside the stereo.",
           "EMType": 24,
@@ -312,7 +285,6 @@
             }
           ],
           "Mesh": {
-            "MeshID": 0,
             "Intensity1": 7936,
             "Intensity2": 4096
           }
@@ -334,8 +306,7 @@
               "X": 37376,
               "Y": 256,
               "Z": 62976,
-              "Room": 52,
-              "Angle": 0
+              "Room": 52
             }
           }
         ],
@@ -346,7 +317,6 @@
             "EntityIndex": 107,
             "Location": {
               "X": 38400,
-              "Y": 0,
               "Z": 59904,
               "Room": 52,
               "Angle": 16384
@@ -360,7 +330,6 @@
             "EntityIndex": 107,
             "Location": {
               "X": 36352,
-              "Y": 0,
               "Z": 59904,
               "Room": 52,
               "Angle": -16384
@@ -384,7 +353,30 @@
       ]
     }
   ],
-
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if enemy #28 is Marco and if so hide him under a van.",
+        "ConditionType": 0,
+        "EntityIndex": 28,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 28,
+          "TargetLocation": {
+            "X": 58368,
+            "Y": 2560,
+            "Z": 70144,
+            "Room": 48,
+            "Angle": -16384
+          }
+        }
+      ]
+    }
+  ],
   "Mirrored": [
     {
       "Comments": "Put a chair beside the bed for the starting cutscene.",
@@ -399,12 +391,11 @@
         }
       ],
       "Mesh": {
-        "MeshID": 10,
         "Intensity1": 7936,
-        "Intensity2": 4096
+        "Intensity2": 4096,
+        "MeshID": 10
       }
     },
-
     {
       "Comments": "Put a step below the chair so it's not floating.",
       "EMType": 1,
@@ -415,10 +406,10 @@
         "Room": 52
       },
       "Clicks": -1,
+      "FloorTexture": 65535,
       "SideTexture": 151,
       "Flags": 9
     },
-
     {
       "Comments": "And some other steps beside it so it looks normal.",
       "EMType": 1,
@@ -429,10 +420,10 @@
         "Room": 52
       },
       "Clicks": -1,
+      "FloorTexture": 65535,
       "SideTexture": 151,
       "Flags": 8
     },
-
     {
       "EMType": 1,
       "Location": {
@@ -442,10 +433,10 @@
         "Room": 52
       },
       "Clicks": -1,
+      "FloorTexture": 65535,
       "SideTexture": 151,
       "Flags": 3
     },
-
     {
       "Comments": "Put a plant beside the fire for the camera to look at.",
       "EMType": 24,
@@ -454,24 +445,21 @@
           "X": 33830,
           "Y": 256,
           "Z": 60672,
-          "Room": 52,
-          "Angle": 0
+          "Room": 52
         }
       ],
       "Mesh": {
-        "MeshID": 1,
         "Intensity1": 7936,
-        "Intensity2": 4096
+        "Intensity2": 4096,
+        "MeshID": 1
       }
     },
-
     {
       "Comments": "Move the shower shotgun animation to the other side of the bathroom.",
       "EMType": 44,
       "EntityIndex": 100,
       "TargetLocation": {
         "X": 42240,
-        "Y": 0,
         "Z": 66048,
         "Room": 58,
         "Angle": 16384

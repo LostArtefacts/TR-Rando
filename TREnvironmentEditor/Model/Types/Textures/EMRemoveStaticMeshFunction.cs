@@ -12,9 +12,11 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             if (Location != null)
             {
-                TR2Room room = level.Rooms[(short)ConvertItemNumber(Location.Room, level.NumRooms)];
+                TR2Room room = level.Rooms[data.ConvertRoom(Location.Room)];
                 List<TR2RoomStaticMesh> meshes = room.StaticMeshes.ToList();
 
                 uint x = (uint)Location.X;
@@ -36,7 +38,7 @@ namespace TREnvironmentEditor.Model.Types
                 {
                     foreach (int roomNumber in ClearFromRooms[meshID])
                     {
-                        TR2Room room = level.Rooms[(short)ConvertItemNumber(roomNumber, level.NumRooms)];
+                        TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
                         List<TR2RoomStaticMesh> meshes = room.StaticMeshes.ToList();
                         if (meshes.RemoveAll(m => m.MeshID == meshID) > 0)
                         {
@@ -50,9 +52,11 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
+
             if (Location != null)
             {
-                TR3Room room = level.Rooms[(short)ConvertItemNumber(Location.Room, level.NumRooms)];
+                TR3Room room = level.Rooms[data.ConvertRoom(Location.Room)];
                 List<TR3RoomStaticMesh> meshes = room.StaticMeshes.ToList();
 
                 uint x = (uint)Location.X;
@@ -74,7 +78,7 @@ namespace TREnvironmentEditor.Model.Types
                 {
                     foreach (int roomNumber in ClearFromRooms[meshID])
                     {
-                        TR3Room room = level.Rooms[(short)ConvertItemNumber(roomNumber, level.NumRooms)];
+                        TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
                         List<TR3RoomStaticMesh> meshes = room.StaticMeshes.ToList();
                         if (meshes.RemoveAll(m => m.MeshID == meshID) > 0)
                         {

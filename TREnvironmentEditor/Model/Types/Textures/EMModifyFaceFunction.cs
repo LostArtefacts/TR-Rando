@@ -12,11 +12,13 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             if (Modifications != null)
             {
                 foreach (EMFaceModification mod in Modifications)
                 {
-                    TR2Room room = level.Rooms[ConvertItemNumber(mod.RoomNumber, level.NumRooms)];
+                    TR2Room room = level.Rooms[data.ConvertRoom(mod.RoomNumber)];
                     switch (mod.FaceType)
                     {
                         case EMTextureFaceType.Rectangles:
@@ -33,7 +35,7 @@ namespace TREnvironmentEditor.Model.Types
             {
                 foreach (EMFaceRotation rot in Rotations)
                 {
-                    TR2Room room = level.Rooms[ConvertItemNumber(rot.RoomNumber, level.NumRooms)];
+                    TR2Room room = level.Rooms[data.ConvertRoom(rot.RoomNumber)];
                     switch (rot.FaceType)
                     {
                         case EMTextureFaceType.Rectangles:
@@ -49,11 +51,13 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
+
             if (Modifications != null)
             {
                 foreach (EMFaceModification mod in Modifications)
                 {
-                    TR3Room room = level.Rooms[ConvertItemNumber(mod.RoomNumber, level.NumRooms)];
+                    TR3Room room = level.Rooms[data.ConvertRoom(mod.RoomNumber)];
                     switch (mod.FaceType)
                     {
                         case EMTextureFaceType.Rectangles:
@@ -70,7 +74,7 @@ namespace TREnvironmentEditor.Model.Types
             {
                 foreach (EMFaceRotation rot in Rotations)
                 {
-                    TR3Room room = level.Rooms[ConvertItemNumber(rot.RoomNumber, level.NumRooms)];
+                    TR3Room room = level.Rooms[data.ConvertRoom(rot.RoomNumber)];
                     switch (rot.FaceType)
                     {
                         case EMTextureFaceType.Rectangles:

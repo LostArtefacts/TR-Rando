@@ -43,10 +43,12 @@ namespace TREnvironmentEditor.Model.Types
 
             int clickChange = Clicks * ClickSize;
 
+            EMLevelData data = GetData(level);
+
             FDControl fdc = new FDControl();
             fdc.ParseFromLevel(level);
 
-            short roomNumber = (short)ConvertItemNumber(Location.Room, level.NumRooms);
+            short roomNumber = data.ConvertRoom(Location.Room);
             TR2Room room = level.Rooms[roomNumber];
             TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, fdc);
             int sectorIndex = room.SectorList.ToList().IndexOf(sector);

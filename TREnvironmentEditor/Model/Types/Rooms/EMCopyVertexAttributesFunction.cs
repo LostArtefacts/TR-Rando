@@ -17,12 +17,14 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
+
             // Allow changes per face
             if (FaceMap != null)
             {
                 foreach (short roomNumber in FaceMap.Keys)
                 {
-                    TR3Room room = level.Rooms[ConvertItemNumber(roomNumber, level.NumRooms)];
+                    TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
                     foreach (EMTextureFaceType faceType in FaceMap[roomNumber].Keys)
                     {
                         foreach (int baseFaceIndex in FaceMap[roomNumber][faceType].Keys)
@@ -58,7 +60,7 @@ namespace TREnvironmentEditor.Model.Types
             {
                 foreach (short roomNumber in RoomMap.Keys)
                 {
-                    TR3Room room = level.Rooms[ConvertItemNumber(roomNumber, level.NumRooms)];
+                    TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
                     foreach (TR3RoomVertex copyVertex in room.RoomData.Vertices)
                     {
                         CopyAttributes(RoomMap[roomNumber], copyVertex);

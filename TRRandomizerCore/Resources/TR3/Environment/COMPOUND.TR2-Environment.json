@@ -1,11 +1,25 @@
-﻿{
+{
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
   "ConditionalAll": [
     {
       "Condition": {
         "Comments": "Check if enemy #63 is a hostile human and if not, make some changes to allow Lara to open room 169 herself.",
         "ConditionType": 0,
         "EntityIndex": 63,
-        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+        "EntityTypes": [
+          46,
+          51,
+          53,
+          56,
+          60,
+          61,
+          63
+        ]
       },
       "OnFalse": [
         {
@@ -41,31 +55,6 @@
         {
           "Comments": "Make a trigger for the button.",
           "EMType": 61,
-          "TriggerEntry": {
-            "Setup": {
-              "Value": 4
-            },
-            "TrigSetup": {
-              "Value": 15872,
-              "OneShot": true
-            },
-            "TrigType": 2,
-            "SwitchOrKeyRef": 107,
-            "TrigActionList": [
-              {
-                "TrigAction": 0,
-                "Parameter": 226
-              },
-              {
-                "TrigAction": 0,
-                "Parameter": 227
-              },
-              {
-                "TrigAction": 0,
-                "Parameter": 228
-              }
-            ]
-          },
           "Locations": [
             {
               "X": 91648,
@@ -73,9 +62,25 @@
               "Z": 82432,
               "Room": 74
             }
-          ]
+          ],
+          "Trigger": {
+            "TrigType": 2,
+            "OneShot": true,
+            "Mask": 31,
+            "SwitchOrKeyRef": 107,
+            "Actions": [
+              {
+                "Parameter": 226
+              },
+              {
+                "Parameter": 227
+              },
+              {
+                "Parameter": 228
+              }
+            ]
+          }
         },
-
         {
           "Comments": "Remove the hand scanner static mesh.",
           "EMType": 25,
@@ -136,29 +141,12 @@
             "X": 39424,
             "Y": -1024,
             "Z": 50688,
-            "Room": 93,
-            "Angle": 0
+            "Room": 93
           }
         },
         {
           "Comments": "Make a trigger for the button.",
           "EMType": 61,
-          "TriggerEntry": {
-            "Setup": {
-              "Value": 4
-            },
-            "TrigSetup": {
-              "Value": 15872
-            },
-            "TrigType": 2,
-            "SwitchOrKeyRef": 131,
-            "TrigActionList": [
-              {
-                "TrigAction": 0,
-                "Parameter": 130
-              }
-            ]
-          },
           "Locations": [
             {
               "X": 39424,
@@ -166,7 +154,17 @@
               "Z": 50688,
               "Room": 93
             }
-          ]
+          ],
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": 131,
+            "Actions": [
+              {
+                "Parameter": 130
+              }
+            ]
+          }
         },
         {
           "Comments": "Remove the old heavy trigger.",
@@ -192,7 +190,6 @@
       ]
     }
   ],
-
   "Mirrored": [
     {
       "Comments": "Make door #125 a vertical one as this corridor is awkward.",

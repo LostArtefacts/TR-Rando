@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TREnvironmentEditor.Helpers;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
@@ -10,9 +11,10 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
             foreach (int roomNumber in CeilingHeights.Keys)
             {
-                TR2Room room = level.Rooms[roomNumber];
+                TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
                 int min = room.Info.YTop / ClickSize;
                 foreach (TRRoomSector sector in room.SectorList)
                 {

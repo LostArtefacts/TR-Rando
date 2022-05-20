@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using TREnvironmentEditor.Helpers;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model
@@ -14,7 +15,7 @@ namespace TREnvironmentEditor.Model
 
         [JsonProperty(Order = -2)]
         public string Comments { get; set; }
-        [JsonProperty(Order = -2)]
+        [JsonProperty(Order = -2, DefaultValueHandling = DefaultValueHandling.Include)]
         public EMType EMType { get; set; }
 
         public abstract void ApplyToLevel(TR2Level level);
@@ -77,15 +78,24 @@ namespace TREnvironmentEditor.Model
             return rooms;
         }
 
-        // This allows us to access the last item in a specific list, so if for example one mod has created
-        // a new room, subsequent mods can retrieve its number using short.MaxValue.
-        protected int ConvertItemNumber(int itemNumber, ushort numItems)
+        protected EMLevelData GetData(TR2Level level)
         {
-            if (itemNumber == short.MaxValue)
+            return new EMLevelData
             {
-                itemNumber = numItems - 1;
-            }
-            return itemNumber;
+                NumCameras = level.NumCameras,
+                NumEntities = level.NumEntities,
+                NumRooms = level.NumRooms
+            };
+        }
+
+        protected EMLevelData GetData(TR3Level level)
+        {
+            return new EMLevelData
+            {
+                NumCameras = level.NumCameras,
+                NumEntities = level.NumEntities,
+                NumRooms = level.NumRooms
+            };
         }
     }
 }

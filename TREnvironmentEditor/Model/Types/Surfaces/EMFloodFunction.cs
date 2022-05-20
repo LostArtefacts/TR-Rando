@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TREnvironmentEditor.Helpers;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
@@ -7,18 +8,20 @@ namespace TREnvironmentEditor.Model.Types
     {
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             // Loop initially to flood everything as our texture checks below involve
             // determining which rooms have water.
             foreach (int roomNumber in RoomNumbers)
             {
-                level.Rooms[roomNumber].Fill();
+                level.Rooms[data.ConvertRoom(roomNumber)].Fill();
             }
 
             // Work out rooms above and below and what needs water textures as ceilings
             // and what needs them as floors.
             foreach (int roomNumber in RoomNumbers)
             {
-                TR2Room room = level.Rooms[roomNumber];
+                TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
 
                 ISet<byte> roomsBelow = GetAdjacentRooms(room, false);
                 foreach (byte roomBelowNumber in roomsBelow)
@@ -46,9 +49,10 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
             foreach (int roomNumber in RoomNumbers)
             {
-                level.Rooms[ConvertItemNumber(roomNumber, level.NumRooms)].ContainsWater = true;
+                level.Rooms[data.ConvertRoom(roomNumber)].ContainsWater = true;
             }
 
             // Texturing not yet handled

@@ -1,4 +1,10 @@
 {
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
   "ConditionalAll": [
     {
       "Condition": {
@@ -14,14 +20,14 @@
         {
           "Comments": "Make the pickup trigger a pad.",
           "EMType": 69,
-          "TrigType": 1,
-          "OneShot": true,
           "Location": {
             "X": 35328,
             "Y": 4864,
             "Z": 87552,
             "Room": 147
-          }
+          },
+          "TrigType": 1,
+          "OneShot": true
         },
         {
           "Comments": "Change the floor textures.",
@@ -29,12 +35,16 @@
           "TextureMap": {
             "764": {
               "147": {
-                "Rectangles": [ 17 ]
+                "Rectangles": [
+                  17
+                ]
               }
             },
             "1708": {
               "147": {
-                "Rectangles": [ 0 ]
+                "Rectangles": [
+                  0
+                ]
               }
             }
           }
@@ -45,8 +55,9 @@
           "Rotations": [
             {
               "RoomNumber": 147,
-              "FaceType": 0,
-              "FaceIndices": [ 17 ],
+              "FaceIndices": [
+                17
+              ],
               "VertexRemap": {
                 "0": 2,
                 "1": 3,
@@ -72,14 +83,14 @@
         {
           "Comments": "Make the pickup trigger a pad.",
           "EMType": 69,
-          "TrigType": 1,
-          "OneShot": true,
           "Location": {
             "X": 14848,
             "Y": 5632,
             "Z": 50688,
             "Room": 222
-          }
+          },
+          "TrigType": 1,
+          "OneShot": true
         },
         {
           "Comments": "Change the floor texture.",
@@ -87,7 +98,9 @@
           "TextureMap": {
             "764": {
               "222": {
-                "Rectangles": [ 3 ]
+                "Rectangles": [
+                  3
+                ]
               }
             }
           }
@@ -98,8 +111,9 @@
           "Rotations": [
             {
               "RoomNumber": 222,
-              "FaceType": 0,
-              "FaceIndices": [ 3 ],
+              "FaceIndices": [
+                3
+              ],
               "VertexRemap": {
                 "0": 2,
                 "1": 3,
@@ -111,5 +125,6 @@
         }
       ]
     }
-  ]
+  ],
+  "Mirrored": []
 }

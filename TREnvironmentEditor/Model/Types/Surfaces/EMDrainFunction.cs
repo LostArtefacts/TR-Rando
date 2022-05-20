@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TREnvironmentEditor.Helpers;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
@@ -9,18 +10,20 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             // Loop initially to drain everything as our texture checks below involve
             // determining which rooms have water.
             foreach (int roomNumber in RoomNumbers)
             {
-                level.Rooms[roomNumber].Drain();
+                level.Rooms[data.ConvertRoom(roomNumber)].Drain();
             }
 
             // Work out rooms above and below and what needs water textures as ceilings
             // and what needs them as floors.
             foreach (int roomNumber in RoomNumbers)
             {
-                TR2Room room = level.Rooms[roomNumber];
+                TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
 
                 ISet<byte> roomsBelow = GetAdjacentRooms(room, false);
                 foreach (byte roomBelowNumber in roomsBelow)
@@ -53,16 +56,17 @@ namespace TREnvironmentEditor.Model.Types
             {
                 foreach (int roomNumber in DetachedRooms)
                 {
-                    RemoveWaterSurface(level.Rooms[roomNumber]);
+                    RemoveWaterSurface(level.Rooms[data.ConvertRoom(roomNumber)]);
                 }
             }
         }
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
             foreach (int roomNumber in RoomNumbers)
             {
-                TR3Room room = level.Rooms[ConvertItemNumber(roomNumber, level.NumRooms)];
+                TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
                 room.ContainsWater = false;
 
                 // Remove all wave movements and caustics by default

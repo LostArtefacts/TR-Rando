@@ -1,4 +1,10 @@
 {
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
   "ConditionalAll": [
     {
       "Condition": {
@@ -34,14 +40,14 @@
         {
           "Comments": "Make the pickup trigger a pad.",
           "EMType": 69,
-          "TrigType": 1,
-          "OneShot": true,
           "Location": {
             "X": 35328,
             "Y": 1536,
             "Z": 64000,
             "Room": 46
-          }
+          },
+          "TrigType": 1,
+          "OneShot": true
         }
       ]
     },
@@ -59,16 +65,17 @@
         {
           "Comments": "Make the pickup trigger a pad.",
           "EMType": 69,
-          "TrigType": 1,
-          "OneShot": true,
           "Location": {
             "X": 59904,
             "Y": -2048,
             "Z": 16896,
             "Room": 30
-          }
+          },
+          "TrigType": 1,
+          "OneShot": true
         }
       ]
     }
-  ]
+  ],
+  "Mirrored": []
 }

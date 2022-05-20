@@ -14,10 +14,12 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, (short)ConvertItemNumber(BaseLocation.Room, level.NumRooms), level, control);
+            TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);
             if (baseSector.FDIndex == 0)
             {
                 return;
@@ -31,7 +33,7 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
                 AppendTriggers(sector, triggerEntries, control);
             }
 
@@ -40,10 +42,12 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
+
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, (short)ConvertItemNumber(BaseLocation.Room, level.NumRooms), level, control);
+            TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);
             if (baseSector.FDIndex == 0)
             {
                 return;
@@ -57,7 +61,7 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
                 AppendTriggers(sector, triggerEntries, control);
             }
 

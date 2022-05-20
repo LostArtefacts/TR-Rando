@@ -15,12 +15,14 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
             foreach (EMLocation location in Locations)
             {
-                short roomNumber = (short)ConvertItemNumber(location.Room, level.NumRooms);
+                short roomNumber = data.ConvertRoom(location.Room);
                 TR2Room room = level.Rooms[roomNumber];
 
                 // Only add this mesh if there is nothing else in the same sector.

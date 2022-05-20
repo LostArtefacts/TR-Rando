@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using TREnvironmentEditor;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
@@ -181,111 +180,111 @@ namespace TRRandomizerCore.Randomizers
 
         private void ActualiseRewardRoom(TR3CombinedLevel level, TRSecretRoom<TR2Entity> placeholder)
         {
-            string mappingPath = @"TR3\SecretMapping\" + level.Name + "-SecretMapping.json";
-            if (ResourceExists(mappingPath))
+            TRSecretMapping<TR2Entity> secretMapping = TRSecretMapping<TR2Entity>.Get(GetResourcePath(@"TR3\SecretMapping\" + level.Name + "-SecretMapping.json"));
+            if (secretMapping == null)
             {
-                TRSecretMapping<TR2Entity> secretMapping = JsonConvert.DeserializeObject<TRSecretMapping<TR2Entity>>(ReadResource(mappingPath), EMEditorMapping.Converter);
-
-                // Are any rooms enforced based on level specifics?
-                TRSecretRoom<TR2Entity> rewardRoom = secretMapping.Rooms.Find(r => r.HasUsageCondition);
-                if (rewardRoom == null || !rewardRoom.UsageCondition.GetResult(level.Data))
+                return;
+            }
+            
+            // Are any rooms enforced based on level specifics?
+            TRSecretRoom<TR2Entity> rewardRoom = secretMapping.Rooms.Find(r => r.HasUsageCondition);
+            if (rewardRoom == null || !rewardRoom.UsageCondition.GetResult(level.Data))
+            {
+                do
                 {
-                    do
-                    {
-                        rewardRoom = secretMapping.Rooms[_generator.Next(0, secretMapping.Rooms.Count)];
-                    }
-                    while (rewardRoom == null || rewardRoom.HasUsageCondition);
+                    rewardRoom = secretMapping.Rooms[_generator.Next(0, secretMapping.Rooms.Count)];
+                }
+                while (rewardRoom == null || rewardRoom.HasUsageCondition);
+            }
+
+            rewardRoom.Room.ApplyToLevel(level.Data);
+            short roomIndex = (short)(level.Data.NumRooms - 1);
+
+            // Convert the temporary doors
+            rewardRoom.DoorIndices = placeholder.DoorIndices;
+            for (int i = 0; i < rewardRoom.DoorIndices.Count; i++)
+            {
+                int doorIndex = rewardRoom.DoorIndices[i];
+                TR2Entity door = rewardRoom.Doors[i];
+                if (door.Room < 0)
+                {
+                    door.Room = roomIndex;
+                }
+                level.Data.Entities[doorIndex] = door;
+
+                // If it's a trapdoor, we need to make a dummy trigger for it
+                if (TR3EntityUtilities.IsTrapdoor((TR3Entities)door.TypeID))
+                {
+                    CreateTrapdoorTrigger(door, (ushort)doorIndex, level.Data);
+                }
+            }
+
+            // Get the reward entities - Thames in JP version has different indices, so
+            // these are defined separately.
+            List<int> rewardEntities = secretMapping.RewardEntities;
+            if (IsJPVersion && secretMapping.JPRewardEntities != null)
+            {
+                rewardEntities = secretMapping.JPRewardEntities;
+            }
+
+            // Spread the rewards out fairly evenly across each defined position in the new room.
+            int rewardPositionCount = rewardRoom.RewardPositions.Count;
+            for (int i = 0; i < rewardEntities.Count; i++)
+            {
+                TR2Entity item = level.Data.Entities[rewardEntities[i]];
+                Location position = rewardRoom.RewardPositions[i % rewardPositionCount];
+
+                item.X = position.X;
+                item.Y = position.Y;
+                item.Z = position.Z;
+                item.Room = roomIndex;
+            }
+
+            // #238 Make the required number of cameras. Because of the masks, we need
+            // a camera per counted secret otherwise it only shows once.
+            if (Settings.UseRewardRoomCameras && rewardRoom.Cameras != null)
+            {
+                double countedSecrets = Settings.DevelopmentMode ? _devModeSecretCount : level.Script.NumSecrets;
+                rewardRoom.CameraIndices = new List<int>();
+                List<TRCamera> cameras = level.Data.Cameras.ToList();
+                for (int i = 0; i < countedSecrets; i++)
+                {
+                    rewardRoom.CameraIndices.Add(cameras.Count);
+                    cameras.Add(rewardRoom.Cameras[i % rewardRoom.Cameras.Count]);
                 }
 
-                rewardRoom.Room.ApplyToLevel(level.Data);
-                short roomIndex = (short)(level.Data.NumRooms - 1);
+                level.Data.Cameras = cameras.ToArray();
+                level.Data.NumCameras = (uint)cameras.Count;
 
-                // Convert the temporary doors
-                rewardRoom.DoorIndices = placeholder.DoorIndices;
-                for (int i = 0; i < rewardRoom.DoorIndices.Count; i++)
+                FDControl floorData = new FDControl();
+                floorData.ParseFromLevel(level.Data);
+
+                // Get each trigger created for each secret index and add the camera, provided
+                // there isn't any existing camera actions.
+                for (int i = 0; i < countedSecrets; i++)
                 {
-                    int doorIndex = rewardRoom.DoorIndices[i];
-                    TR2Entity door = rewardRoom.Doors[i];
-                    if (door.Room == short.MaxValue)
+                    List<FDTriggerEntry> secretTriggers = FDUtilities.GetSecretTriggers(floorData, i);
+                    foreach (FDTriggerEntry trigger in secretTriggers)
                     {
-                        door.Room = roomIndex;
-                    }
-                    level.Data.Entities[doorIndex] = door;
-
-                    // If it's a trapdoor, we need to make a dummy trigger for it
-                    if (TR3EntityUtilities.IsTrapdoor((TR3Entities)door.TypeID))
-                    {
-                        CreateTrapdoorTrigger(door, (ushort)doorIndex, level.Data);
-                    }
-                }
-
-                // Get the reward entities - Thames in JP version has different indices, so
-                // these are defined separately.
-                List<int> rewardEntities = secretMapping.RewardEntities;
-                if (IsJPVersion && secretMapping.JPRewardEntities != null)
-                {
-                    rewardEntities = secretMapping.JPRewardEntities;
-                }
-
-                // Spread the rewards out fairly evenly across each defined position in the new room.
-                int rewardPositionCount = rewardRoom.RewardPositions.Count;
-                for (int i = 0; i < rewardEntities.Count; i++)
-                {
-                    TR2Entity item = level.Data.Entities[rewardEntities[i]];
-                    Location position = rewardRoom.RewardPositions[i % rewardPositionCount];
-
-                    item.X = position.X;
-                    item.Y = position.Y;
-                    item.Z = position.Z;
-                    item.Room = roomIndex;
-                }
-
-                // #238 Make the required number of cameras. Because of the masks, we need
-                // a camera per counted secret otherwise it only shows once.
-                if (Settings.UseRewardRoomCameras && rewardRoom.Cameras != null)
-                {
-                    double countedSecrets = Settings.DevelopmentMode ? _devModeSecretCount : level.Script.NumSecrets;
-                    rewardRoom.CameraIndices = new List<int>();
-                    List<TRCamera> cameras = level.Data.Cameras.ToList();
-                    for (int i = 0; i < countedSecrets; i++)
-                    {
-                        rewardRoom.CameraIndices.Add(cameras.Count);
-                        cameras.Add(rewardRoom.Cameras[i % rewardRoom.Cameras.Count]);
-                    }
-
-                    level.Data.Cameras = cameras.ToArray();
-                    level.Data.NumCameras = (uint)cameras.Count;
-
-                    FDControl floorData = new FDControl();
-                    floorData.ParseFromLevel(level.Data);
-
-                    // Get each trigger created for each secret index and add the camera, provided
-                    // there isn't any existing camera actions.
-                    for (int i = 0; i < countedSecrets; i++)
-                    {
-                        List<FDTriggerEntry> secretTriggers = FDUtilities.GetSecretTriggers(floorData, i);
-                        foreach (FDTriggerEntry trigger in secretTriggers)
+                        if (trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Camera) == null)
                         {
-                            if (trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Camera) == null)
+                            trigger.TrigActionList.Add(new FDActionListItem
                             {
-                                trigger.TrigActionList.Add(new FDActionListItem
-                                {
-                                    TrigAction = FDTrigAction.Camera,
-                                    CamAction = new FDCameraAction { Value = 4 },
-                                    Parameter = (ushort)rewardRoom.CameraIndices[i]
-                                });
-                                trigger.TrigActionList.Add(new FDActionListItem
-                                {
-                                    TrigAction = FDTrigAction.LookAtItem,
-                                    Parameter = (ushort)rewardRoom.DoorIndices[0]
-                                });
-                            }
+                                TrigAction = FDTrigAction.Camera,
+                                CamAction = new FDCameraAction { Value = 4 },
+                                Parameter = (ushort)rewardRoom.CameraIndices[i]
+                            });
+                            trigger.TrigActionList.Add(new FDActionListItem
+                            {
+                                TrigAction = FDTrigAction.LookAtItem,
+                                Parameter = (ushort)rewardRoom.DoorIndices[0]
+                            });
                         }
                     }
-
-                    // Write back the camera triggers
-                    floorData.WriteToLevel(level.Data);
                 }
+
+                // Write back the camera triggers
+                floorData.WriteToLevel(level.Data);
             }
         }
 

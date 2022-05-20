@@ -15,19 +15,23 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, Location.Room, level, floorData);
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, floorData);
             MoveSector(sector);
         }
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
+
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, Location.Room, level, floorData);
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, floorData);
             MoveSector(sector);
         }
 

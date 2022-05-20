@@ -2,31 +2,24 @@
   {
     "Comments": "Add a trigger under Tony so that picking up the stone will end the level.",
     "EMType": 61,
-    "TriggerEntry": {
-      "Setup": {
-        "Value": 4
-      },
-      "TrigSetup": {
-        "Value": 15872
-      },
-      "TrigType": 4,
-      "TrigActionList": [
-        {
-          "TrigAction": 0,
-          "Parameter": 27
-        },
-        {
-          "TrigAction": 7
-        }
-      ]
-    },
     "Locations": [
       {
         "X": 51437,
         "Y": -256,
-        "Z": 52626,
-        "Room": 0
+        "Z": 52626
       }
-    ]
+    ],
+    "Trigger": {
+      "TrigType": 4,
+      "Mask": 31,
+      "Actions": [
+        {
+          "Parameter": 27
+        },
+        {
+          "Action": 7
+        }
+      ]
+    }
   }
 ]

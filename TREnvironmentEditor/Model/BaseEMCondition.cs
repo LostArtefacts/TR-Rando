@@ -8,7 +8,7 @@ namespace TREnvironmentEditor.Model
     {
         [JsonProperty(Order = -2)]
         public string Comments { get; set; }
-        [JsonProperty(Order = -2)]
+        [JsonProperty(Order = -2, DefaultValueHandling = DefaultValueHandling.Include)]
         public EMConditionType ConditionType { get; set; }
         public bool Negate { get; set; }
         public List<BaseEMCondition> And { get; set; }

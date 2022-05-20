@@ -1,4 +1,11 @@
 {
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [],
   "Mirrored": [
     {
       "Comments": "Convert two of the planes to the other kind.",

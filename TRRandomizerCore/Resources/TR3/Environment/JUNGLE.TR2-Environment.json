@@ -1,11 +1,24 @@
 {
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
   "ConditionalAll": [
     {
       "Condition": {
         "Comments": "If enemy #8 is not a monkey, crow, vulture, wasp, rat or compsognathus, move it out of the crawlspace.",
         "ConditionType": 0,
         "EntityIndex": 8,
-        "EntityTypes": [ 71, 27, 29, 44, 23, 34 ]
+        "EntityTypes": [
+          71,
+          27,
+          29,
+          44,
+          23,
+          34
+        ]
       },
       "OnFalse": [
         {
@@ -20,5 +33,6 @@
         }
       ]
     }
-  ]
+  ],
+  "Mirrored": []
 }

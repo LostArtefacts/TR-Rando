@@ -3,12 +3,6 @@
     {
       "Comments": "Fix a missig flipmap trigger for keyhole 85/door 56.",
       "EMType": 63,
-      "BaseLocation": {
-        "X": 46592,
-        "Y": 768,
-        "Z": 57856,
-        "Room": 42
-      },
       "Locations": [
         {
           "X": 46592,
@@ -16,10 +10,20 @@
           "Z": 57856,
           "Room": 73
         }
-      ]
+      ],
+      "BaseLocation": {
+        "X": 46592,
+        "Y": 768,
+        "Z": 57856,
+        "Room": 42
+      }
     }
   ],
-
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
   "ConditionalAll": [
     {
       "Condition": {
@@ -31,13 +35,12 @@
       "OnFalse": [
         {
           "EMType": 5,
-          "FloorClicks": 2,
           "Location": {
             "X": 47616,
-            "Y": 0,
             "Z": 19968,
             "Room": 1
-          }
+          },
+          "FloorClicks": 2
         }
       ]
     },
@@ -50,13 +53,12 @@
       "OnFalse": [
         {
           "EMType": 5,
-          "FloorClicks": 2,
           "Location": {
             "X": 47616,
-            "Y": 0,
             "Z": 25088,
             "Room": 1
-          }
+          },
+          "FloorClicks": 2
         }
       ]
     },
@@ -69,13 +71,12 @@
       "OnFalse": [
         {
           "EMType": 5,
-          "FloorClicks": 2,
           "Location": {
             "X": 49664,
-            "Y": 0,
             "Z": 19968,
             "Room": 1
-          }
+          },
+          "FloorClicks": 2
         }
       ]
     },
@@ -88,13 +89,12 @@
       "OnFalse": [
         {
           "EMType": 5,
-          "FloorClicks": 2,
           "Location": {
             "X": 51712,
-            "Y": 0,
             "Z": 19968,
             "Room": 1
-          }
+          },
+          "FloorClicks": 2
         }
       ]
     },
@@ -103,7 +103,15 @@
         "Comments": "Check if enemy #58 is a hostile human and if not, avoid other enemies heading for the heavy trigger.",
         "ConditionType": 0,
         "EntityIndex": 58,
-        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+        "EntityTypes": [
+          46,
+          51,
+          53,
+          56,
+          60,
+          61,
+          63
+        ]
       },
       "OnFalse": [
         {
@@ -141,7 +149,10 @@
         "Comments": "Check if enemy #155 is a Punk or MP Baton guy and if not, get rid of the heavy trigger as no other enemies will go to it.",
         "ConditionType": 0,
         "EntityIndex": 155,
-        "EntityTypes": [ 53, 60 ]
+        "EntityTypes": [
+          53,
+          60
+        ]
       },
       "OnFalse": [
         {
@@ -181,9 +192,8 @@
             "Z": 64032,
             "Room": 54
           },
-          "ActionItems": [
+          "Actions": [
             {
-              "TrigAction": 0,
               "Parameter": 156
             }
           ]
@@ -195,7 +205,15 @@
         "Comments": "Check if enemy #190 is a hostile human and if not, avoid other enemies heading for the heavy trigger.",
         "ConditionType": 0,
         "EntityIndex": 190,
-        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+        "EntityTypes": [
+          46,
+          51,
+          53,
+          56,
+          60,
+          61,
+          63
+        ]
       },
       "OnFalse": [
         {
@@ -230,26 +248,6 @@
         {
           "Comments": "Make a trigger for the button.",
           "EMType": 61,
-          "TriggerEntry": {
-            "Setup": {
-              "Value": 4
-            },
-            "TrigSetup": {
-              "Value": 15872
-            },
-            "TrigType": 2,
-            "SwitchOrKeyRef": 192,
-            "TrigActionList": [
-              {
-                "TrigAction": 0,
-                "Parameter": 193
-              },
-              {
-                "TrigAction": 0,
-                "Parameter": 199
-              }
-            ]
-          },
           "Locations": [
             {
               "X": 54784,
@@ -257,12 +255,24 @@
               "Z": 34304,
               "Room": 104
             }
-          ]
+          ],
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": 192,
+            "Actions": [
+              {
+                "Parameter": 193
+              },
+              {
+                "Parameter": 199
+              }
+            ]
+          }
         }
       ]
     }
   ],
-
   "Mirrored": [
     {
       "Comments": "Move slot #69 otherwise it's hidden.",
@@ -296,8 +306,7 @@
         "X": 45568,
         "Y": 2560,
         "Z": 36352,
-        "Room": 104,
-        "Angle": 0
+        "Room": 104
       }
     }
   ]

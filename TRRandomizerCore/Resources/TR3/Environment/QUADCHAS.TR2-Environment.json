@@ -1,4 +1,10 @@
 {
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
   "ConditionalAll": [
     {
       "Condition": {
@@ -9,22 +15,25 @@
       "OnTrue": [
         {
           "EMType": 0,
+          "TextureMap": {
+            "1487": {
+              "167": {
+                "Rectangles": [
+                  21
+                ]
+              }
+            }
+          },
           "Location": {
             "X": 43520,
             "Y": 8192,
             "Z": 66048,
             "Room": 167
           },
-          "IsPositiveZ": true,
-          "TextureMap": {
-            "1487": {
-              "167": {
-                "Rectangles": [ 21 ]
-              }
-            }
-          }
+          "IsPositiveZ": true
         }
       ]
     }
-  ]
+  ],
+  "Mirrored": []
 }

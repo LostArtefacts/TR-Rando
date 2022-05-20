@@ -14,6 +14,8 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             // Get a location for the switch we're interested in
             TR2Entity switchEntity = level.Entities[NewSwitchIndex];
             Locations = new List<EMLocation>
@@ -23,7 +25,7 @@ namespace TREnvironmentEditor.Model.Types
                     X = switchEntity.X,
                     Y = switchEntity.Y,
                     Z = switchEntity.Z,
-                    Room = (short)ConvertItemNumber(switchEntity.Room, level.NumRooms)
+                    Room = data.ConvertRoom(switchEntity.Room)
                 }
             };
 
@@ -34,7 +36,7 @@ namespace TREnvironmentEditor.Model.Types
                 X = switchEntity.X,
                 Y = switchEntity.Y,
                 Z = switchEntity.Z,
-                Room = (short)ConvertItemNumber(switchEntity.Room, level.NumRooms)
+                Room = data.ConvertRoom(switchEntity.Room)
             };
 
             // Duplicate the triggers to the switch's location
@@ -46,7 +48,7 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
 
                 List<FDEntry> keyTriggers = control.Entries[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
                 foreach (FDEntry entry in keyTriggers)

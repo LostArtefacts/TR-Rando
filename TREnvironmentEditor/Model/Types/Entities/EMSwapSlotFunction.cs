@@ -45,7 +45,7 @@ namespace TREnvironmentEditor.Model.Types
                     MoveTriggers(control, slot2Sector, slot1Sector);
                 }
 
-                SwapSlots(slot1, slot2, level.NumRooms);
+                SwapSlots(slot1, slot2, GetData(level));
                 control.WriteToLevel(level);
             }
         }
@@ -60,7 +60,7 @@ namespace TREnvironmentEditor.Model.Types
             return false;
         }
 
-        private void SwapSlots(TR2Entity slot1, TR2Entity slot2, ushort numRooms)
+        private void SwapSlots(TR2Entity slot1, TR2Entity slot2, EMLevelData data)
         {
             EMLocation temp = new EMLocation
             {
@@ -74,13 +74,13 @@ namespace TREnvironmentEditor.Model.Types
             slot1.X = slot2.X;
             slot1.Y = slot2.Y;
             slot1.Z = slot2.Z;
-            slot1.Room = (short)ConvertItemNumber(slot2.Room, numRooms);
+            slot1.Room = data.ConvertRoom(slot2.Room);
             slot1.Angle = slot2.Angle;
 
             slot2.X = temp.X;
             slot2.Y = temp.Y;
             slot2.Z = temp.Z;
-            slot2.Room = (short)ConvertItemNumber(temp.Room, numRooms);
+            slot2.Room = data.ConvertRoom(temp.Room);
             slot2.Angle = temp.Angle;
         }
     }

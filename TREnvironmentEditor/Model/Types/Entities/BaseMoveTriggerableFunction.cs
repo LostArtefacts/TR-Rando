@@ -15,10 +15,12 @@ namespace TREnvironmentEditor.Model.Types
 
         protected void RepositionTriggerable(TR2Entity entity, TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             entity.X = Location.X;
             entity.Y = Location.Y;
             entity.Z = Location.Z;
-            entity.Room = (short)ConvertItemNumber(Location.Room, level.NumRooms);
+            entity.Room = data.ConvertRoom(Location.Room);
 
             if (TriggerLocations == null || TriggerLocations.Count == 0)
             {
@@ -38,7 +40,7 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (EMLocation location in TriggerLocations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
                 // If there is no floor data create the FD to begin with.
                 if (sector.FDIndex == 0)
                 {

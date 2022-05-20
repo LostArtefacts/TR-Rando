@@ -17,12 +17,14 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
             TR2Entity slot = level.Entities[EntityIndex];
             TRRoomSector currentSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level, control);
-            short roomNumber = (short)ConvertItemNumber(Location.Room, level.NumRooms);
+            short roomNumber = data.ConvertRoom(Location.Room);
             TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, control);
 
             // Check if there is also a trigger in the flip map if we are moving the slot within the same room
@@ -55,12 +57,14 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
+
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
             TR2Entity slot = level.Entities[EntityIndex];
             TRRoomSector currentSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level, control);
-            short roomNumber = (short)ConvertItemNumber(Location.Room, level.NumRooms);
+            short roomNumber = data.ConvertRoom(Location.Room);
             TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, control);
 
             // Check if there is also a trigger in the flip map if we are moving the slot within the same room

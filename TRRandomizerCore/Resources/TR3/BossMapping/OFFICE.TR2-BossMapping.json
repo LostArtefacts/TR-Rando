@@ -10,28 +10,9 @@
       "Room": 15
     }
   },
-
   {
     "Comments": "Add a trigger under the artefact so that picking it up will end the level.",
     "EMType": 61,
-    "TriggerEntry": {
-      "Setup": {
-        "Value": 4
-      },
-      "TrigSetup": {
-        "Value": 15872
-      },
-      "TrigType": 4,
-      "TrigActionList": [
-        {
-          "TrigAction": 0,
-          "Parameter": 12
-        },
-        {
-          "TrigAction": 7
-        }
-      ]
-    },
     "Locations": [
       {
         "X": 29184,
@@ -39,42 +20,63 @@
         "Z": 58880,
         "Room": 15
       }
-    ]
+    ],
+    "Trigger": {
+      "TrigType": 4,
+      "Mask": 31,
+      "Actions": [
+        {
+          "Parameter": 12
+        },
+        {
+          "Action": 7
+        }
+      ]
+    }
   },
-
   {
     "Comments": "Make a ladder to reach the artefact.",
     "EMType": 0,
+    "TextureMap": {
+      "1490": {
+        "13": {
+          "Rectangles": [
+            8,
+            9
+          ]
+        },
+        "14": {
+          "Rectangles": [
+            51,
+            52
+          ]
+        },
+        "0": {
+          "Rectangles": [
+            51,
+            52
+          ]
+        }
+      }
+    },
     "Location": {
       "X": 34232,
       "Y": -9984,
       "Z": 58911,
       "Room": 13
     },
-    "IsNegativeX": true,
-    "TextureMap": {
-      "1490": {
-        "13": {
-          "Rectangles": [ 8, 9 ]
-        },
-        "14": {
-          "Rectangles": [ 51, 52 ]
-        },
-        "0": {
-          "Rectangles": [ 51, 52 ]
-        }
-      }
-    }
+    "IsNegativeX": true
   },
-
   {
     "Comments": "Rotate the ladder faces so they look consistent.",
     "EMType": 23,
     "Rotations": [
       {
         "RoomNumber": 13,
-        "FaceType": 0,
-        "FaceIndices": [ 8, 9 ],
+        "FaceIndices": [
+          8,
+          9
+        ],
         "VertexRemap": {
           "0": 1,
           "1": 2,
@@ -84,8 +86,10 @@
       },
       {
         "RoomNumber": 14,
-        "FaceType": 0,
-        "FaceIndices": [ 51, 52 ],
+        "FaceIndices": [
+          51,
+          52
+        ],
         "VertexRemap": {
           "0": 1,
           "1": 2,
@@ -94,9 +98,10 @@
         }
       },
       {
-        "RoomNumber": 0,
-        "FaceType": 0,
-        "FaceIndices": [ 51, 52 ],
+        "FaceIndices": [
+          51,
+          52
+        ],
         "VertexRemap": {
           "0": 1,
           "1": 2,
@@ -106,7 +111,6 @@
       }
     ]
   },
-
   {
     "Comments": "Add some extra crystals because we can't kill Sophia.",
     "EMType": 51,
@@ -119,7 +123,6 @@
       "Room": 8
     }
   },
-
   {
     "EMType": 51,
     "TypeID": 180,
@@ -131,7 +134,6 @@
       "Room": 12
     }
   },
-
   {
     "EMType": 51,
     "TypeID": 180,
@@ -143,7 +145,6 @@
       "Room": 14
     }
   },
-
   {
     "EMType": 51,
     "TypeID": 180,
