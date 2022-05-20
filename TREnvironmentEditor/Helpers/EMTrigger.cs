@@ -26,7 +26,7 @@ namespace TREnvironmentEditor.Helpers
             {
                 Setup = new FDSetup(FDFunctions.Trigger),
                 TrigType = TrigType,
-                SwitchOrKeyRef = (ushort)(SwitchOrKeyRef < 0 ? levelData.NumEntities + SwitchOrKeyRef : SwitchOrKeyRef),
+                SwitchOrKeyRef = (ushort)levelData.ConvertEntity(SwitchOrKeyRef),
                 TrigSetup = new FDTrigSetup
                 {
                     OneShot = OneShot,
