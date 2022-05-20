@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TREnvironmentEditor.Helpers;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
@@ -10,7 +11,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public List<int> EntityIndices { get; set; }
         public EnemyType NewEnemyType { get; set; }
-        public List<TR2Entities> Exclusions { get; set; }
+        public List<short> Exclusions { get; set; }
 
         public override void ApplyToLevel(TR2Level level)
         {
@@ -28,22 +29,46 @@ namespace TREnvironmentEditor.Model.Types
 
             if (Exclusions != null && Exclusions.Count > 0)
             {
-                potentialTypes.RemoveAll(e => Exclusions.Contains(e));
+                potentialTypes.RemoveAll(e => Exclusions.Contains((short)e));
             }
 
             TR2Entity enemyMatch = level.Entities.ToList().Find(e => potentialTypes.Contains((TR2Entities)e.TypeID));
             if (enemyMatch != null)
             {
+                EMLevelData data = GetData(level);
                 foreach (int index in EntityIndices)
                 {
-                    level.Entities[index].TypeID = enemyMatch.TypeID;
+                    level.Entities[data.ConvertEntity(index)].TypeID = enemyMatch.TypeID;
                 }
             }
         }
 
         public override void ApplyToLevel(TR3Level level)
         {
-            throw new System.NotImplementedException();
+            List<TR3Entities> potentialTypes = TR3EntityUtilities.GetFullListOfEnemies();
+            if (NewEnemyType == EnemyType.Land)
+            {
+                potentialTypes.RemoveAll(e => TR3EntityUtilities.IsWaterCreature(e));
+            }
+            else
+            {
+                potentialTypes.RemoveAll(e => !TR3EntityUtilities.IsWaterCreature(e));
+            }
+
+            if (Exclusions != null && Exclusions.Count > 0)
+            {
+                potentialTypes.RemoveAll(e => Exclusions.Contains((short)e));
+            }
+
+            TR2Entity enemyMatch = level.Entities.ToList().Find(e => potentialTypes.Contains((TR3Entities)e.TypeID));
+            if (enemyMatch != null)
+            {
+                EMLevelData data = GetData(level);
+                foreach (int index in EntityIndices)
+                {
+                    level.Entities[data.ConvertEntity(index)].TypeID = enemyMatch.TypeID;
+                }
+            }
         }
     }
 

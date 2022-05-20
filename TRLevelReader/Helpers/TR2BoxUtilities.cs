@@ -123,6 +123,22 @@ namespace TRLevelReader.Helpers
             return count;
         }
 
+        public static int GetSectorCount(TR3Level level, int boxIndex)
+        {
+            int count = 0;
+            foreach (TR3Room room in level.Rooms)
+            {
+                foreach (TRRoomSector sector in room.Sectors)
+                {
+                    if ((sector.BoxIndex & 0x7FF0) >> 4 == boxIndex)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+
         public static List<ushort> GetOverlaps(TR2Level level, TR2Box box)
         {
             return GetOverlaps(level.Overlaps, box, TR2NoOverlap);

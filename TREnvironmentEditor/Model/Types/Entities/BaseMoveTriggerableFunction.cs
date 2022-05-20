@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
@@ -38,9 +39,47 @@ namespace TREnvironmentEditor.Model.Types
             List<FDTriggerEntry> currentTriggers = FDUtilities.GetEntityTriggers(control, EntityIndex);
             FDUtilities.RemoveEntityTriggers(level, EntityIndex, control);
 
+            AmendTriggers(currentTriggers, control, delegate (EMLocation location)
+            {
+                return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+            });
+
+            control.WriteToLevel(level);
+        }
+
+        protected void RepositionTriggerable(TR2Entity entity, TR3Level level)
+        {
+            EMLevelData data = GetData(level);
+
+            entity.X = Location.X;
+            entity.Y = Location.Y;
+            entity.Z = Location.Z;
+            entity.Room = data.ConvertRoom(Location.Room);
+
+            if (TriggerLocations == null || TriggerLocations.Count == 0)
+            {
+                return;
+            }
+
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            List<FDTriggerEntry> currentTriggers = FDUtilities.GetEntityTriggers(control, EntityIndex);
+            FDUtilities.RemoveEntityTriggers(level, EntityIndex, control);
+
+            AmendTriggers(currentTriggers, control, delegate (EMLocation location)
+            {
+                return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+            });
+
+            control.WriteToLevel(level);
+        }
+
+        private void AmendTriggers(List<FDTriggerEntry> currentTriggers, FDControl control, Func<EMLocation, TRRoomSector> sectorGetter)
+        {
             foreach (EMLocation location in TriggerLocations)
             {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                TRRoomSector sector = sectorGetter.Invoke(location);
                 // If there is no floor data create the FD to begin with.
                 if (sector.FDIndex == 0)
                 {
@@ -78,8 +117,6 @@ namespace TREnvironmentEditor.Model.Types
                     });
                 }
             }
-
-            control.WriteToLevel(level);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TREnvironmentEditor.Helpers;
+using TRFDControl;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
@@ -25,18 +26,18 @@ namespace TREnvironmentEditor.Model.Types
             {
                 TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
 
-                ISet<byte> roomsBelow = GetAdjacentRooms(room, false);
+                ISet<byte> roomsBelow = GetAdjacentRooms(room.SectorList, false);
                 foreach (byte roomBelowNumber in roomsBelow)
                 {
                     TR2Room roomBelow = level.Rooms[roomBelowNumber];
                     if (roomBelow.ContainsWater)
                     {
-                        AddWaterSurface(level, room, false, RoomNumbers);
-                        AddWaterSurface(level, roomBelow, true, RoomNumbers);
+                        AddWaterSurface(room, false, RoomNumbers);
+                        AddWaterSurface(roomBelow, true, RoomNumbers);
                     }
                 }
 
-                ISet<byte> roomsAbove = GetAdjacentRooms(room, true);
+                ISet<byte> roomsAbove = GetAdjacentRooms(room.SectorList, true);
                 foreach (byte roomAboveNumber in roomsAbove)
                 {
                     TR2Room roomAbove = level.Rooms[roomAboveNumber];
@@ -76,7 +77,39 @@ namespace TREnvironmentEditor.Model.Types
                 }
             }
 
-            // Texturing not yet handled
+            if (WaterTextures == null)
+            {
+                return;
+            }
+
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
+
+            foreach (int roomNumber in RoomNumbers)
+            {
+                TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
+
+                ISet<byte> roomsBelow = GetAdjacentRooms(room.Sectors, false);
+                foreach (byte roomBelowNumber in roomsBelow)
+                {
+                    TR3Room roomBelow = level.Rooms[roomBelowNumber];
+                    if (roomBelow.ContainsWater)
+                    {
+                        AddWaterSurface(room, false, RoomNumbers, floorData);
+                    }
+                }
+
+                ISet<byte> roomsAbove = GetAdjacentRooms(room.Sectors, true);
+                foreach (byte roomAboveNumber in roomsAbove)
+                {
+                    TR3Room roomAbove = level.Rooms[roomAboveNumber];
+                    if (!roomAbove.ContainsWater)
+                    {
+                        RemoveWaterSurface(room);
+                        RemoveWaterSurface(roomAbove);
+                    }
+                }
+            }
         }
     }
 }
