@@ -22,7 +22,20 @@ namespace TRLevelToolset.Controls.DataControls.EM
         
         public void Draw()
         {
-            ImGui.Text("Any Control");
+            int i = 0;
+            
+            foreach (EMEditorSet set in _data)
+            {
+                ImGui.Text("Set " + i);
+                
+                EMAllControl ctrl = new EMAllControl(set);
+                
+                ImGui.Indent();
+                ctrl.Draw();
+                ImGui.Unindent();
+                
+                i++;
+            }
         }
     }
 }

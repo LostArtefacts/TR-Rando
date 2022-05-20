@@ -22,7 +22,20 @@ namespace TRLevelToolset.Controls.DataControls.EM
         
         public void Draw()
         {
-            ImGui.Text("Conditional All Control");
+            int i = 0;
+
+            foreach (List<EMEditorSet> set in _data)
+            {
+                EMAllWithinGroupControl ctrl = new EMAllWithinGroupControl(set, i);
+
+                ImGui.Text("Group " + i);
+
+                ImGui.Indent();
+                ctrl.Draw();
+                ImGui.Unindent();
+
+                i++;
+            }
         }
     }
 }
