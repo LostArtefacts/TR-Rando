@@ -90,7 +90,7 @@ namespace TR2Randomizer.Randomizers
                         _levelInstance.Entities[i].TypeID = (short)EnemyTypes[_generator.Next(0, EnemyTypes.Count)];
 
                         //Do we need to ensure the enemy can drop the item on the same tile?
-                        if (!TR2EntityUtilities.CanDropPickups((TR2Entities)_levelInstance.Entities[i].TypeID, false) && IsPickupItem)
+                        if (!TR2EntityUtilities.CanDropPickups((TR2Entities)_levelInstance.Entities[i].TypeID, false, false) && IsPickupItem)
                         {
                             //Ensure the new random entity can drop pickups
                             _levelInstance.Entities[i].TypeID = (short)DroppableEnemies[_generator.Next(0, DroppableEnemies.Count)];
