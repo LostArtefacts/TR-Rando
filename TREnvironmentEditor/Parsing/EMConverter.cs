@@ -181,6 +181,8 @@ namespace TREnvironmentEditor.Parsing
                 // Models
                 case EMConditionType.ModelExists:
                     return JsonConvert.DeserializeObject<EMModelExistsCondition>(jo.ToString(), this);
+                case EMConditionType.UnconditionalBirds:
+                    return JsonConvert.DeserializeObject<EMUnconditionalBirdCheck>(jo.ToString(), this); 
 
                 default:
                     throw new InvalidOperationException();

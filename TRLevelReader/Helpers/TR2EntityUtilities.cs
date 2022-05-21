@@ -185,7 +185,7 @@ namespace TRLevelReader.Helpers
             };
         }
 
-        public static List<TR2Entities> GetCrossLevelDroppableEnemies(bool monksAreKillable)
+        public static List<TR2Entities> GetCrossLevelDroppableEnemies(bool monksAreKillable, bool unconditionalChickens)
         {
             List<TR2Entities> entities = new List<TR2Entities>
             {
@@ -224,6 +224,11 @@ namespace TRLevelReader.Helpers
             {
                 entities.Add(TR2Entities.MonkWithKnifeStick);
                 entities.Add(TR2Entities.MonkWithLongStick);
+            }
+
+            if (unconditionalChickens)
+            {
+                entities.Add(TR2Entities.BirdMonster);
             }
 
             return entities;
@@ -592,9 +597,9 @@ namespace TRLevelReader.Helpers
             return waterEntities;
         }
 
-        public static bool CanDropPickups(TR2Entities entity, bool monksAreKillable)
+        public static bool CanDropPickups(TR2Entities entity, bool monksAreKillable, bool unconditionalChickens)
         {
-            return GetCrossLevelDroppableEnemies(monksAreKillable).Contains(entity);
+            return GetCrossLevelDroppableEnemies(monksAreKillable, unconditionalChickens).Contains(entity);
             /*return (entity == TR2Entities.Doberman ||
                     entity == TR2Entities.MaskedGoon1 ||
                     entity == TR2Entities.MaskedGoon2 ||
@@ -618,12 +623,12 @@ namespace TRLevelReader.Helpers
             return entity == TR2Entities.MonkWithKnifeStick || entity == TR2Entities.MonkWithLongStick;
         }
 
-        public static List<TR2Entities> FilterDroppableEnemies(List<TR2Entities> entities, bool monksAreKillable)
+        public static List<TR2Entities> FilterDroppableEnemies(List<TR2Entities> entities, bool monksAreKillable, bool unconditionalChickens)
         {
             List<TR2Entities> droppableEntities = new List<TR2Entities>();
             foreach (TR2Entities entity in entities)
             {
-                if (CanDropPickups(entity, monksAreKillable))
+                if (CanDropPickups(entity, monksAreKillable, unconditionalChickens))
                 {
                     droppableEntities.Add(entity);
                 }

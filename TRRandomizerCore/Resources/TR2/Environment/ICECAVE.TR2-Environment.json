@@ -718,7 +718,8 @@
         ],
         "NewEnemyType": 1,
         "Exclusions": [
-          40
+          40,
+          46
         ]
       },
       {
@@ -1507,7 +1508,366 @@
     }
   ],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If chickens are unconditional and there is still one at the end of the level, make an alternate ending.",
+        "ConditionType": 42,
+        "And": [
+          {
+            "ConditionType": 0,
+            "EntityIndex": 148,
+            "EntityType": 46
+          }
+        ]
+      },
+      "OnTrue": [
+        {
+          "Comments": "Make a copy of room 147.",
+          "EMType": 123,
+          "RoomIndex": 147,
+          "NewLocation": {
+            "X": 62464,
+            "Y": 7424,
+            "Z": 41984
+          },
+          "LinkedLocation": {
+            "X": 62976,
+            "Y": 11520,
+            "Z": 43520,
+            "Room": 138
+          }
+        },
+        {
+          "Comments": "Retexture the new room.",
+          "EMType": 21,
+          "TextureMap": {
+            "1369": {
+              "-1": {
+                "Rectangles": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Move a face to the opposite wall in the new room.",
+          "EMType": 23,
+          "Modifications": [
+            {
+              "RoomNumber": -1,
+              "FaceIndex": 2,
+              "VertexChanges": {
+                "0": {
+                  "X": 1024,
+                  "Z": 1024
+                },
+                "1": {
+                  "X": 1024,
+                  "Z": -1024
+                },
+                "2": {
+                  "X": 1024,
+                  "Z": -1024
+                },
+                "3": {
+                  "X": 1024,
+                  "Z": 1024
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Comments": "A ladder to get to the new room.",
+          "EMType": 0,
+          "Location": {
+            "X": 62976,
+            "Y": 11520,
+            "Z": 43520,
+            "Room": 138
+          },
+          "IsPositiveX": true,
+          "TextureMap": {
+            "1387": {
+              "138": {
+                "Rectangles": [
+                  285,
+                  284
+                ]
+              },
+              "139": {
+                "Rectangles": [
+                  100,
+                  99
+                ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Make collisional portals between the rooms.",
+          "EMType": 82,
+          "Portals": {
+            "140": {
+              "-1": [
+                {
+                  "X": 64000,
+                  "Y": 7424,
+                  "Z": 43520
+                }
+              ]
+            },
+            "-1": {
+              "140": [
+                {
+                  "X": 62976,
+                  "Y": 7424,
+                  "Z": 43520
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Make visibility portals between the rooms.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": 140,
+              "AdjoiningRoom": -1,
+              "Normal": {
+                "X": -1
+              },
+              "Vertices": [
+                {
+                  "X": 14336,
+                  "Y": 6400,
+                  "Z": 8192
+                },
+                {
+                  "X": 14336,
+                  "Y": 6400,
+                  "Z": 7168
+                },
+                {
+                  "X": 14336,
+                  "Y": 7424,
+                  "Z": 7168
+                },
+                {
+                  "X": 14336,
+                  "Y": 7424,
+                  "Z": 8192
+                }
+              ]
+            },
+            {
+              "BaseRoom": -1,
+              "AdjoiningRoom": 140,
+              "Normal": {
+                "X": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 6400,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 6400,
+                  "Z": 2048
+                },
+                {
+                  "X": 1024,
+                  "Y": 7424,
+                  "Z": 2048
+                },
+                {
+                  "X": 1024,
+                  "Y": 7424,
+                  "Z": 1024
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Comments": "Remove a face for the portal into the new room.",
+          "EMType": 22,
+          "GeometryMap": {
+            "140": {
+              "Rectangles": [
+                194
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Convert the CoT slot into an empty one.",
+          "EMType": 45,
+          "EntityIndex": 10,
+          "NewEntityType": 182
+        },
+        {
+          "Comments": "Reposition it to the ladder.",
+          "EMType": 44,
+          "EntityIndex": 10,
+          "TargetLocation": {
+            "X": 62976,
+            "Y": 11520,
+            "Z": 44544,
+            "Room": 138,
+            "Angle": 16384
+          }
+        },
+        {
+          "Comments": "Convert one of the CoT doors into a smaller door.",
+          "EMType": 45,
+          "EntityIndex": 16,
+          "NewEntityType": 108
+        },
+        {
+          "Comments": "Reposition it to the exit.",
+          "EMType": 44,
+          "EntityIndex": 16,
+          "TargetLocation": {
+            "X": 62976,
+            "Y": 7424,
+            "Z": 43520,
+            "Room": -1,
+            "Angle": -16384
+          }
+        },
+        {
+          "Comments": "Convert one of the CoT doors into a mask.",
+          "EMType": 45,
+          "EntityIndex": 15,
+          "NewEntityType": 174
+        },
+        {
+          "Comments": "The chicken stole it.",
+          "EMType": 44,
+          "EntityIndex": 15,
+          "TargetLocation": {
+            "X": 66048,
+            "Y": 11520,
+            "Z": 41472,
+            "Room": 143
+          }
+        },
+        {
+          "Comments": "Make a new trigger to open the final door.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 62976,
+              "Y": 11520,
+              "Z": 44544,
+              "Room": 138
+            }
+          ],
+          "Trigger": {
+            "TrigType": 3,
+            "Mask": 31,
+            "SwitchOrKeyRef": 10,
+            "Actions": [
+              {
+                "Parameter": 16
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Move the Talion to the new room.",
+          "EMType": 44,
+          "EntityIndex": 145,
+          "TargetLocation": {
+            "X": 64000,
+            "Y": 7424,
+            "Z": 43520,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Picking it up will end the level.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 64000,
+              "Y": 7424,
+              "Z": 43520,
+              "Room": -1
+            }
+          ],
+          "Trigger": {
+            "TrigType": 4,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 145
+              },
+              {
+                "Action": 7
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Delete the old pickup trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 57856,
+              "Y": 9984,
+              "Z": 30208,
+              "Room": 127
+            }
+          ]
+        },
+        {
+          "Comments": "Place new triggers for the boss.",
+          "EMType": 61,
+          "ExpandedLocations": {
+            "Location": {
+              "X": 62976,
+              "Y": 11520,
+              "Z": 40448,
+              "Room": 138
+            },
+            "ExpandX": 1,
+            "ExpandZ": 4
+          },
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 153
+              },
+              {
+                "Parameter": 155
+              },
+              {
+                "Parameter": 154
+              },
+              {
+                "Parameter": 152
+              },
+              {
+                "Parameter": 148
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
   "Mirrored": [
     {
       "Comments": "Move the heavy trigger underneath the gong.",
