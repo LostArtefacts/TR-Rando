@@ -222,7 +222,7 @@ namespace TRRandomizerCore.Randomizers
 
                 if (droppableEnemyRequired)
                 {
-                    List<TR2Entities> droppableEnemies = TR2EntityUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks);
+                    List<TR2Entities> droppableEnemies = TR2EntityUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional);
                     newEntities.Add(SelectRequiredEnemy(droppableEnemies, level, difficulty));
                 }
 
@@ -367,7 +367,7 @@ namespace TRRandomizerCore.Randomizers
             Dictionary<TR2Entities, List<int>> restrictedRoomEnemies = TR2EnemyUtilities.GetRestrictedEnemyRooms(level.Name, difficulty);
             if (restrictedRoomEnemies != null && newEntities.All(e => restrictedRoomEnemies.ContainsKey(e)))
             {
-                List<TR2Entities> pool = TR2EntityUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks);
+                List<TR2Entities> pool = TR2EntityUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional);
                 do
                 {
                     TR2Entities fallbackEnemy;
@@ -644,7 +644,7 @@ namespace TRRandomizerCore.Randomizers
                     newEntityType = enemies.Available[_generator.Next(0, enemies.Available.Count)];
 
                     //Do we need to ensure the enemy can drop the item on the same tile?
-                    if (!TR2EntityUtilities.CanDropPickups(newEntityType, !Settings.ProtectMonks) && isPickupItem)
+                    if (!TR2EntityUtilities.CanDropPickups(newEntityType, !Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional) && isPickupItem)
                     {
                         //Ensure the new random entity can drop pickups
                         newEntityType = enemies.Droppable[_generator.Next(0, enemies.Droppable.Count)];
@@ -969,14 +969,11 @@ namespace TRRandomizerCore.Randomizers
         {
             // #327 Trick the game into never reaching the final frame of the death animation.
             // This results in a very abrupt death but avoids the level ending. For Ice Palace,
-            // the default behaviour will remain.
-            if (!level.Is(TR2LevelNames.CHICKEN))
+            // environment modifications will be made to enforce an alternative ending.
+            TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)TR2Entities.BirdMonster);
+            if (model != null)
             {
-                TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)TR2Entities.BirdMonster);
-                if (model != null)
-                {
-                    level.Data.Animations[model.Animation + 20].FrameEnd = level.Data.Animations[model.Animation + 19].FrameEnd;
-                }
+                level.Data.Animations[model.Animation + 20].FrameEnd = level.Data.Animations[model.Animation + 19].FrameEnd;
             }
         }
 
@@ -1117,7 +1114,7 @@ namespace TRRandomizerCore.Randomizers
                             EnemyRandomizationCollection enemies = new EnemyRandomizationCollection
                             {
                                 Available = importedCollection.EntitiesToImport,
-                                Droppable = TR2EntityUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.Settings.ProtectMonks),
+                                Droppable = TR2EntityUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.Settings.ProtectMonks, _outer.Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional),
                                 Water = TR2EntityUtilities.FilterWaterEnemies(importedCollection.EntitiesToImport),
                                 All = new List<TR2Entities>(importedCollection.EntitiesToImport)
                             };

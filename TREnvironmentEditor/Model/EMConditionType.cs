@@ -10,6 +10,7 @@
         RoomContainsWater = 21,
 
         // Models 41-60
-        ModelExists = 41
+        ModelExists = 41,
+        UnconditionalBirds = 42
     }
 }
