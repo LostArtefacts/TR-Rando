@@ -6,8 +6,11 @@
       "Rotations": [
         {
           "RoomNumber": 23,
-          "FaceType": 0,
-          "FaceIndices": [ 26, 40, 54 ],
+          "FaceIndices": [
+            26,
+            40,
+            54
+          ],
           "VertexRemap": {
             "0": 2,
             "1": 3,
@@ -17,521 +20,187 @@
         }
       ]
     },
-
     {
       "Comments": "Fixes the green triangle in room 52.",
       "EMType": 21,
       "TextureMap": {
         "1899": {
           "52": {
-            "Triangles": [ 4 ]
+            "Triangles": [
+              4
+            ]
           }
         }
       }
     }
   ],
-
-  "ConditionalAll": [
-    {
-      "Condition": {
-        "Comments": "Do we have the dragon model available?",
-        "ConditionType": 41,
-        "ModelID": 40
-      },
-      "OnTrue": [
-        {
-          "Comments": "Make a room suitable for Marco.",
-          "EMType": 125,
-          "LevelID": "XIAN.TR2",
-          "RoomNumber": 18,
-          "RectangleTexture": 1925,
-          "NewLocation": {
-            "X": 64512,
-            "Y": 8192,
-            "Z": 37888
-          },
-          "LinkedLocation": {
-            "X": 66048,
-            "Y": 4864,
-            "Z": 57856,
-            "Room": 95
-          }
-        },
-
-        {
-          "Comments": "Make collisional portals.",
-          "EMType": 82,
-          "Portals": {
-            "95": {
-              "96": [
-                {
-                  "X": 66048,
-                  "Y": 4864,
-                  "Z": 56832
-                }
-              ]
-            },
-            "96": {
-              "95": [
-                {
-                  "X": 66048,
-                  "Y": 8192,
-                  "Z": 57856
-                }
-              ]
-            }
-          }
-        },
-
-        {
-          "Comments": "Make visibility portals.",
-          "EMType": 81,
-          "Portals": {
-            "95": {
-              "AdjoiningRoom": 96,
-              "Normal": {
-                "Z": 1
-              },
-              "Vertices": [
-                {
-                  "X": 2048,
-                  "Y": 3840,
-                  "Z": 1024
-                },
-                {
-                  "X": 1024,
-                  "Y": 3840,
-                  "Z": 1024
-                },
-                {
-                  "X": 1024,
-                  "Y": 4864,
-                  "Z": 1024
-                },
-                {
-                  "X": 2048,
-                  "Y": 4864,
-                  "Z": 1024
-                }
-              ]
-            },
-            "96": {
-              "AdjoiningRoom": 95,
-              "Normal": {
-                "Z": -1
-              },
-              "Vertices": [
-                {
-                  "X": 1024,
-                  "Y": 3840,
-                  "Z": 19456
-                },
-                {
-                  "X": 2048,
-                  "Y": 3840,
-                  "Z": 19456
-                },
-                {
-                  "X": 2048,
-                  "Y": 4864,
-                  "Z": 19456
-                },
-                {
-                  "X": 1024,
-                  "Y": 4864,
-                  "Z": 19456
-                }
-              ]
-            }
-          }
-        },
-
-        {
-          "Comments": "Make a ladder to get in and out.",
-          "EMType": 0,
-          "Location": {
-            "X": 66048,
-            "Y": 8192,
-            "Z": 56832,
-            "Room": 96
-          },
-          "IsPositiveZ": true,
-          "TextureMap": {
-            "1911": {
-              "96": {
-                "Rectangles": [ 954, 972 ]
-              }
-            }
-          }
-        },
-
-        {
-          "Comments": "Remove faces for the portals.",
-          "EMType": 22,
-          "GeometryMap": {
-            "95": {
-              "Rectangles": [ 3 ]
-            },
-            "96": {
-              "Rectangles": [ 990 ]
-            }
-          }
-        },
-
-        {
-          "Comments": "Turn a door into Marco.",
-          "EMType": 45,
-          "EntityIndex": 116,
-          "NewEntityType": 40
-        },
-
-        {
-          "Comments": "Move Marco.",
-          "EMType": 44,
-          "EntityIndex": 116,
-          "TargetLocation": {
-            "X": 75264,
-            "Y": 8192,
-            "Z": 48128,
-            "Room": 96,
-            "Angle": -16384
-          }
-        },
-
-        {
-          "Comments": "Add some static meshes.",
-          "EMType": 24,
-          "IgnoreSectorEntities": true,
-          "Locations": [
-            {
-              "X": 74749,
-              "Y": 11776,
-              "Z": 48130,
-              "Room": 96,
-              "Angle": 0
-            }
-          ],
-          "Mesh": {
-            "MeshID": 10,
-            "Intensity1": 6400,
-            "Intensity2": 6400
-          }
-        },
-        {
-          "EMType": 24,
-          "Locations": [
-            {
-              "X": 70144,
-              "Y": 8192,
-              "Z": 51712,
-              "Room": 96,
-              "Angle": 16384
-            },
-            {
-              "X": 70144,
-              "Y": 8192,
-              "Z": 44544,
-              "Room": 96,
-              "Angle": 16384
-            },
-            {
-              "X": 79360,
-              "Y": 8192,
-              "Z": 44544,
-              "Room": 96,
-              "Angle": -16384
-            },
-            {
-              "X": 79360,
-              "Y": 8192,
-              "Z": 51712,
-              "Room": 96,
-              "Angle": -16384
-            }
-          ],
-          "Mesh": {
-            "MeshID": 37,
-            "Intensity1": 6400,
-            "Intensity2": 6400
-          }
-        },
-
-        {
-          "Comments": "Add heavy triggers so the dragon will trigger the end-level enemies and monk.",
-          "EMType": 61,
-          "Rooms": [ 96 ],
-          "TriggerEntry": {
-            "Setup": {
-              "Value": 4
-            },
-            "TrigSetup": {
-              "Value": 15872
-            },
-            "TrigType": 5,
-            "TrigActionList": [
-              {
-                "TrigAction": 0,
-                "Parameter": 114
-              },
-              {
-                "TrigAction": 0,
-                "Parameter": 115
-              },
-              {
-                "TrigAction": 0,
-                "Parameter": 117
-              }
-            ]
-          }
-        },
-
-        {
-          "Comments": "Add a camera for above.",
-          "EMType": 65,
-          "Camera": {
-            "X": 59626,
-            "Y": 2251,
-            "Z": 52893,
-            "Room": 77,
-            "Flags": 0
-          },
-          "LookAtItem": 117,
-          "AttachToRooms": [ 96 ],
-          "CameraAction": {
-            "Value": 2
-          }
-        },
-
-        {
-          "Comments": "Remove the old enemy trigger.",
-          "EMType": 62,
-          "Locations": [
-            {
-              "X": 54784,
-              "Y": 3072,
-              "Z": 61952,
-              "Room": 5
-            }
-          ]
-        },
-
-        {
-          "Comments": "Trigger Marco.",
-          "EMType": 61,
-          "Locations": [
-            {
-              "X": 61952,
-              "Y": 5632,
-              "Z": 61952,
-              "Room": 94
-            }
-          ],
-          "TriggerEntry": {
-            "Setup": {
-              "Value": 4
-            },
-            "TrigSetup": {
-              "Value": 15872,
-              "OneShot": true
-            },
-            "TrigType": 0,
-            "TrigActionList": [
-              {
-                "TrigAction": 0,
-                "Parameter": 116
-              },
-              {
-                "TrigAction": 8,
-                "Parameter": 55
-              }
-            ]
-          }
-        },
-
-        {
-          "Comments": "Convert wheel doors into regular ones as Lara's animation will have been overwritten.",
-          "EMType": 52,
-          "WheelIndex": 16,
-          "DoorIndex": 12,
-          "NewSwitchType": 93,
-          "NewDoorType": 106,
-          "NewLocation": {
-            "X": 46592,
-            "Y": -5120,
-            "Z": 70144,
-            "Room": 13,
-            "Angle": -32768
-          }
-        },
-        {
-          "EMType": 52,
-          "WheelIndex": 26,
-          "DoorIndex": 24,
-          "NewSwitchType": 93,
-          "NewDoorType": 106,
-          "NewLocation": {
-            "X": 52736,
-            "Y": -5120,
-            "Z": 78336,
-            "Room": 16,
-            "Angle": 16384
-          }
-        }
-      ]
-    }
-  ],
-
   "NonPurist": [
     {
       "Comments": "Adds some ladders to allow returning to the initial area before the acid.",
       "EMType": 0,
+      "TextureMap": {
+        "1925": {
+          "48": {
+            "Rectangles": [
+              45,
+              41,
+              37,
+              33,
+              27,
+              21,
+              17,
+              13,
+              10,
+              7,
+              2
+            ]
+          }
+        }
+      },
       "Location": {
         "X": 23775,
         "Y": 6400,
         "Z": 71257,
         "Room": 81
       },
-      "IsNegativeX": true,
-      "TextureMap": {
-        "1925": {
-          "48": {
-            "Rectangles": [ 45, 41, 37, 33, 27, 21, 17, 13, 10, 7, 2 ]
-          }
-        }
-      }
+      "IsNegativeX": true
     },
     {
       "EMType": 0,
+      "TextureMap": {},
       "Location": {
         "X": 23775,
         "Y": 6400,
         "Z": 70233,
         "Room": 81
       },
-      "IsNegativeX": true,
-      "TextureMap": {}
+      "IsNegativeX": true
     },
     {
       "EMType": 0,
+      "TextureMap": {},
       "Location": {
         "X": 23775,
         "Y": 6400,
         "Z": 69209,
         "Room": 81
       },
-      "IsNegativeX": true,
-      "TextureMap": {}
+      "IsNegativeX": true
     },
     {
       "EMType": 0,
+      "TextureMap": {},
       "Location": {
         "X": 23775,
         "Y": 6400,
         "Z": 68185,
         "Room": 81
       },
-      "IsNegativeX": true,
-      "TextureMap": {}
+      "IsNegativeX": true
     },
     {
       "EMType": 0,
+      "TextureMap": {},
       "Location": {
         "X": 23775,
         "Y": 6400,
         "Z": 67161,
         "Room": 81
       },
-      "IsNegativeX": true,
-      "TextureMap": {}
+      "IsNegativeX": true
     },
     {
       "EMType": 0,
+      "TextureMap": {},
       "Location": {
         "X": 23735,
         "Y": 3577,
         "Z": 65868,
         "Room": 48
       },
-      "IsNegativeX": true,
-      "TextureMap": {}
+      "IsNegativeX": true
     },
     {
       "EMType": 0,
+      "TextureMap": {},
       "Location": {
         "X": 23716,
         "Y": 2853,
         "Z": 64903,
         "Room": 48
       },
-      "IsNegativeX": true,
-      "TextureMap": {}
+      "IsNegativeX": true
     },
     {
       "EMType": 0,
+      "TextureMap": {},
       "Location": {
         "X": 23745,
         "Y": 2109,
         "Z": 63911,
         "Room": 48
       },
-      "IsNegativeX": true,
-      "TextureMap": {}
+      "IsNegativeX": true
     },
     {
       "EMType": 0,
+      "TextureMap": {},
       "Location": {
         "X": 23773,
         "Y": 1337,
         "Z": 62881,
         "Room": 48
       },
-      "IsNegativeX": true,
-      "TextureMap": {}
+      "IsNegativeX": true
     },
     {
       "EMType": 0,
+      "TextureMap": {},
       "Location": {
         "X": 23788,
         "Y": 1024,
         "Z": 61880,
         "Room": 48
       },
-      "IsNegativeX": true,
-      "TextureMap": {}
+      "IsNegativeX": true
     },
     {
       "EMType": 0,
+      "TextureMap": {},
       "Location": {
         "X": 23715,
         "Y": 1024,
         "Z": 60908,
         "Room": 48
       },
-      "IsNegativeX": true,
-      "TextureMap": {}
+      "IsNegativeX": true
     }
   ],
-
   "Any": [
     [
       {
         "Comments": "Drain the Offshore Rig rooms.",
         "EMType": 3,
-        "RoomNumbers": [ 0, 1, 36 ],
-        "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+        "RoomNumbers": [
+          0,
+          1,
+          36
+        ],
+        "WaterTextures": [
+          2010,
+          1972,
+          1900,
+          2011
+        ]
       },
-
       {
         "Comments": "Convert the Offshore Rig lever into something useful.",
         "EMType": 45,
-        "EntityIndex": 0,
         "NewEntityType": 143
       },
-
       {
         "Comments": "And move it elsewhere.",
         "EMType": 44,
-        "EntityIndex": 0,
         "TargetLocation": {
           "X": 55916,
           "Y": -1078,
@@ -539,7 +208,6 @@
           "Room": 36
         }
       },
-
       {
         "Comments": "Convert the Offshore Rig door into something useful.",
         "EMType": 45,
@@ -547,7 +215,6 @@
         "NewEntityType": 151
       }
     ],
-
     [
       {
         "Comments": "Lower the block under the pulley.",
@@ -558,9 +225,11 @@
           "Z": 58964,
           "Room": 42
         },
-        "Clicks": 2
+        "Clicks": 2,
+        "FloorTexture": 65535,
+        "SideTexture": 65535,
+        "Flags": 15
       },
-
       {
         "Comments": "Lower the block under the other pulley.",
         "EMType": 1,
@@ -570,18 +239,27 @@
           "Z": 54740,
           "Room": 42
         },
-        "Clicks": 1
+        "Clicks": 1,
+        "FloorTexture": 65535,
+        "SideTexture": 65535,
+        "Flags": 15
       }
     ],
-
     [
       {
         "Comments": "Drain the pulley room.",
         "EMType": 3,
-        "RoomNumbers": [ 43, 45 ],
-        "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+        "RoomNumbers": [
+          43,
+          45
+        ],
+        "WaterTextures": [
+          2010,
+          1972,
+          1900,
+          2011
+        ]
       },
-
       {
         "Comments": "Remove the water sound source for above.",
         "EMType": 103,
@@ -591,7 +269,6 @@
           "Z": 56832
         }
       },
-
       {
         "Comments": "Make a step to get out of room 45.",
         "EMType": 1,
@@ -602,47 +279,64 @@
           "Room": 45
         },
         "Clicks": -1,
-        "SideTexture": 1946,
         "FloorTexture": 1409,
+        "SideTexture": 1946,
         "Flags": 4
       }
     ],
-
     [
       {
         "Comments": "Ladder for blue key card pit.",
         "EMType": 0,
-        "IsNegativeX": true,
+        "TextureMap": {
+          "1925": {
+            "52": {
+              "Rectangles": [
+                14,
+                15
+              ]
+            },
+            "53": {
+              "Rectangles": [
+                13,
+                14
+              ]
+            },
+            "54": {
+              "Rectangles": [
+                8
+              ]
+            }
+          }
+        },
         "Location": {
           "X": 20925,
           "Y": -141,
           "Z": 78391,
           "Room": 52
         },
-        "TextureMap": {
-          "1925": {
-            "52": {
-              "Rectangles": [ 14, 15 ]
-            },
-            "53": {
-              "Rectangles": [ 13, 14 ]
-            },
-            "54": {
-              "Rectangles": [ 8 ]
-            }
-          }
-        }
+        "IsNegativeX": true
       }
     ],
-
     [
       {
         "Comments": "Drain the submarine pool and adjoining rooms.",
         "EMType": 3,
-        "RoomNumbers": [ 20, 66, 67, 68, 69, 70 ],
-        "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+        "RoomNumbers": [
+          20,
+          66,
+          67,
+          68,
+          69,
+          70
+        ],
+        "WaterTextures": [
+          2010,
+          1972,
+          1900,
+          2011
+        ]
       },
-
       {
         "Comments": "Remove the water sound source for above.",
         "EMType": 103,
@@ -652,75 +346,79 @@
           "Z": 87552
         }
       },
-
       {
         "Comments": "Ladder for the submarine pit.",
         "EMType": 0,
-        "IsPositiveZ": true,
+        "TextureMap": {
+          "1925": {
+            "20": {
+              "Rectangles": [
+                41
+              ]
+            },
+            "67": {
+              "Rectangles": [
+                42,
+                43,
+                44
+              ]
+            },
+            "70": {
+              "Rectangles": [
+                70,
+                71,
+                72
+              ]
+            }
+          }
+        },
         "Location": {
           "X": 45556,
           "Y": 17920,
           "Z": 80641,
           "Room": 70
         },
-        "TextureMap": {
-          "1925": {
-            "20": {
-              "Rectangles": [ 41 ]
-            },
-            "67": {
-              "Rectangles": [ 42, 43, 44 ]
-            },
-            "70": {
-              "Rectangles": [ 70, 71, 72 ]
-            }
-          }
-        }
+        "IsPositiveZ": true
       },
-
       {
         "Comments": "Another ladder for the submarine pit.",
         "EMType": 0,
-        "IsNegativeX": true,
+        "TextureMap": {
+          "1925": {
+            "20": {
+              "Rectangles": [
+                12,
+                13,
+                14
+              ]
+            },
+            "67": {
+              "Rectangles": [
+                12,
+                13,
+                14
+              ]
+            },
+            "70": {
+              "Rectangles": [
+                16,
+                17,
+                18
+              ]
+            }
+          }
+        },
         "Location": {
           "X": 42304,
           "Y": 17920,
           "Z": 77293,
           "Room": 70
         },
-        "TextureMap": {
-          "1925": {
-            "20": {
-              "Rectangles": [ 12, 13, 14 ]
-            },
-            "67": {
-              "Rectangles": [ 12, 13, 14 ]
-            },
-            "70": {
-              "Rectangles": [ 16, 17, 18 ]
-            }
-          }
-        }
+        "IsNegativeX": true
       },
-
       {
         "Comments": "Make a music trigger for the big climb up.",
         "EMType": 61,
-        "TriggerEntry": {
-          "Setup": {
-            "Value": 4
-          },
-          "TrigSetup": {
-            "Value": 16128
-          },
-          "TrigType": 0,
-          "TrigActionList": [
-            {
-              "TrigAction": 8,
-              "Parameter": 57
-            }
-          ]
-        },
         "Locations": [
           {
             "X": 42304,
@@ -728,9 +426,18 @@
             "Z": 77293,
             "Room": 70
           }
-        ]
+        ],
+        "Trigger": {
+          "OneShot": true,
+          "Mask": 31,
+          "Actions": [
+            {
+              "Action": 8,
+              "Parameter": 57
+            }
+          ]
+        }
       },
-
       {
         "Comments": "Add a camera for above.",
         "EMType": 65,
@@ -738,9 +445,9 @@
           "X": 45056,
           "Y": -2048,
           "Z": 77294,
-          "Room": 20,
-          "Flags": 0
+          "Room": 20
         },
+        "LookAtItem": 65535,
         "AttachToLocations": [
           {
             "X": 42304,
@@ -750,22 +457,31 @@
           }
         ],
         "CameraAction": {
-          "Value": 37123
+          "Value": 37123,
+          "Timer": 3,
+          "Once": true
         }
       },
-
       {
         "Comments": "Convert a couple of Steves into land creatures.",
         "EMType": 47,
-        "EntityIndices": [ 110, 111 ],
+        "EntityIndices": [
+          110,
+          111
+        ],
         "NewEnemyType": 1,
-        "Exclusions": [ 40, 46, 52 ]
+        "Exclusions": [
+          40,
+          46,
+          52
+        ]
       },
-
       {
         "Comments": "Adjust a secret.",
         "EMType": 43,
-        "Types": [ 190 ],
+        "Types": [
+          190
+        ],
         "SectorLocations": [
           {
             "X": 48851,
@@ -781,11 +497,12 @@
           "Room": 70
         }
       },
-
       {
         "Comments": "Floors another secret.",
         "EMType": 43,
-        "Types": [ 190 ],
+        "Types": [
+          190
+        ],
         "SectorLocations": [
           {
             "X": 47929,
@@ -795,11 +512,12 @@
           }
         ]
       },
-
       {
         "Comments": "Floors another secret.",
         "EMType": 43,
-        "Types": [ 190 ],
+        "Types": [
+          190
+        ],
         "SectorLocations": [
           {
             "X": 43305,
@@ -809,11 +527,12 @@
           }
         ]
       },
-
       {
         "Comments": "Floors another secret.",
         "EMType": 43,
-        "Types": [ 190 ],
+        "Types": [
+          190
+        ],
         "SectorLocations": [
           {
             "X": 58267,
@@ -829,7 +548,6 @@
           "Room": 66
         }
       },
-
       {
         "Comments": "Make some blocks to get in/out of room 66.",
         "EMType": 1,
@@ -840,11 +558,10 @@
           "Room": 66
         },
         "Clicks": -7,
-        "SideTexture": 1940,
         "FloorTexture": 1409,
+        "SideTexture": 1940,
         "Flags": 3
       },
-
       {
         "EMType": 1,
         "Location": {
@@ -854,12 +571,11 @@
           "Room": 66
         },
         "Clicks": -14,
-        "SideTexture": 1940,
         "FloorTexture": 1409,
+        "SideTexture": 1940,
         "Flags": 3
       }
     ],
-
     [
       {
         "Comments": "Flip the switch and button types near the circuit board burners.",
@@ -867,33 +583,43 @@
         "EntityIndex": 47,
         "NewEntityType": 103
       },
-
       {
         "EMType": 45,
         "EntityIndex": 46,
         "NewEntityType": 93
       }
     ],
-
     [
       {
         "Comments": "Drain one of the shallow pools towards level end.",
         "EMType": 3,
-        "RoomNumbers": [ 3 ],
-        "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+        "RoomNumbers": [
+          3
+        ],
+        "WaterTextures": [
+          2010,
+          1972,
+          1900,
+          2011
+        ]
       }
     ],
-
     [
       {
         "Comments": "Drain one of the shallow pools towards level end.",
         "EMType": 3,
-        "RoomNumbers": [ 9 ],
-        "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+        "RoomNumbers": [
+          9
+        ],
+        "WaterTextures": [
+          2010,
+          1972,
+          1900,
+          2011
+        ]
       }
     ]
   ],
-
   "AllWithin": [
     [
       [
@@ -975,8 +701,7 @@
             "X": 43520,
             "Y": -2304,
             "Z": 54784,
-            "Room": 39,
-            "Angle": 0
+            "Room": 39
           }
         }
       ],
@@ -989,13 +714,11 @@
             "X": 42496,
             "Y": -2304,
             "Z": 54784,
-            "Room": 39,
-            "Angle": 0
+            "Room": 39
           }
         }
       ]
     ],
-
     [
       [
         {
@@ -1004,22 +727,44 @@
           "TextureMap": {
             "1409": {
               "57": {
-                "Rectangles": [ 27, 28, 29 ]
+                "Rectangles": [
+                  27,
+                  28,
+                  29
+                ]
               },
               "59": {
-                "Rectangles": [ 10, 11, 12 ]
+                "Rectangles": [
+                  10,
+                  11,
+                  12
+                ]
               },
               "58": {
-                "Rectangles": [ 8, 9, 10 ]
+                "Rectangles": [
+                  8,
+                  9,
+                  10
+                ]
               },
               "60": {
-                "Rectangles": [ 10, 11, 12 ]
+                "Rectangles": [
+                  10,
+                  11,
+                  12
+                ]
               },
               "61": {
-                "Rectangles": [ 13, 14, 15 ]
+                "Rectangles": [
+                  13,
+                  14,
+                  15
+                ]
               },
               "50": {
-                "Rectangles": [ 3 ]
+                "Rectangles": [
+                  3
+                ]
               }
             }
           }
@@ -1032,22 +777,44 @@
           "TextureMap": {
             "1925": {
               "57": {
-                "Rectangles": [ 27, 28, 29 ]
+                "Rectangles": [
+                  27,
+                  28,
+                  29
+                ]
               },
               "59": {
-                "Rectangles": [ 10, 11, 12 ]
+                "Rectangles": [
+                  10,
+                  11,
+                  12
+                ]
               },
               "58": {
-                "Rectangles": [ 8, 9, 10 ]
+                "Rectangles": [
+                  8,
+                  9,
+                  10
+                ]
               },
               "60": {
-                "Rectangles": [ 10, 11, 12 ]
+                "Rectangles": [
+                  10,
+                  11,
+                  12
+                ]
               },
               "61": {
-                "Rectangles": [ 13, 14, 15 ]
+                "Rectangles": [
+                  13,
+                  14,
+                  15
+                ]
               },
               "50": {
-                "Rectangles": [ 3 ]
+                "Rectangles": [
+                  3
+                ]
               }
             }
           }
@@ -1060,29 +827,50 @@
           "TextureMap": {
             "2001": {
               "57": {
-                "Rectangles": [ 27, 28, 29 ]
+                "Rectangles": [
+                  27,
+                  28,
+                  29
+                ]
               },
               "59": {
-                "Rectangles": [ 10, 11, 12 ]
+                "Rectangles": [
+                  10,
+                  11,
+                  12
+                ]
               },
               "58": {
-                "Rectangles": [ 8, 9, 10 ]
+                "Rectangles": [
+                  8,
+                  9,
+                  10
+                ]
               },
               "60": {
-                "Rectangles": [ 10, 11, 12 ]
+                "Rectangles": [
+                  10,
+                  11,
+                  12
+                ]
               },
               "61": {
-                "Rectangles": [ 13, 14, 15 ]
+                "Rectangles": [
+                  13,
+                  14,
+                  15
+                ]
               },
               "50": {
-                "Rectangles": [ 3 ]
+                "Rectangles": [
+                  3
+                ]
               }
             }
           }
         }
       ]
     ],
-
     [
       [
         {
@@ -1093,8 +881,7 @@
             "X": 33280,
             "Y": -5120,
             "Z": 77312,
-            "Room": 49,
-            "Angle": 0
+            "Room": 49
           }
         }
       ],
@@ -1119,7 +906,6 @@
           "EntityIndex": 90,
           "Location": {
             "X": 20992,
-            "Y": 0,
             "Z": 77312,
             "Room": 52,
             "Angle": -16384
@@ -1133,7 +919,6 @@
           "EntityIndex": 90,
           "Location": {
             "X": 32256,
-            "Y": 0,
             "Z": 77312,
             "Room": 52,
             "Angle": 16384
@@ -1153,7 +938,6 @@
             "Angle": 16384
           }
         },
-
         {
           "Comments": "Add a camera for above",
           "EMType": 65,
@@ -1161,18 +945,20 @@
             "X": 27136,
             "Y": -5120,
             "Z": 77312,
-            "Room": 54,
-            "Flags": 0
+            "Room": 54
           },
           "LookAtItem": 89,
-          "AttachToItems": [ 90 ],
+          "AttachToItems": [
+            90
+          ],
           "CameraAction": {
-            "Value": 2
+            "Value": 2,
+            "Timer": 2,
+            "Continue": true
           }
         }
       ]
     ],
-
     [
       [
         {
@@ -1183,8 +969,7 @@
             "X": 40448,
             "Y": -2304,
             "Z": 77312,
-            "Room": 17,
-            "Angle": 0
+            "Room": 17
           }
         }
       ],
@@ -1225,8 +1010,7 @@
             "X": 41472,
             "Y": -512,
             "Z": 77312,
-            "Room": 17,
-            "Angle": 0
+            "Room": 17
           }
         }
       ],
@@ -1253,11 +1037,9 @@
             "X": 62976,
             "Y": -2816,
             "Z": 90624,
-            "Room": 65,
-            "Angle": 0
+            "Room": 65
           }
         },
-
         {
           "Comments": "Make it a button so it's more obvious.",
           "EMType": 45,
@@ -1266,7 +1048,6 @@
         }
       ]
     ],
-
     [
       [
         {
@@ -1277,11 +1058,9 @@
             "X": 65024,
             "Y": -3584,
             "Z": 78336,
-            "Room": 30,
-            "Angle": 0
+            "Room": 30
           }
         },
-
         {
           "EMType": 44,
           "EntityIndex": 56,
@@ -1289,8 +1068,7 @@
             "X": 65024,
             "Y": -3584,
             "Z": 78336,
-            "Room": 30,
-            "Angle": 0
+            "Room": 30
           }
         }
       ],
@@ -1303,11 +1081,9 @@
             "X": 60928,
             "Y": -3584,
             "Z": 78336,
-            "Room": 30,
-            "Angle": 0
+            "Room": 30
           }
         },
-
         {
           "EMType": 44,
           "EntityIndex": 56,
@@ -1315,8 +1091,7 @@
             "X": 60928,
             "Y": -3584,
             "Z": 78336,
-            "Room": 30,
-            "Angle": 0
+            "Room": 30
           }
         }
       ],
@@ -1329,11 +1104,9 @@
             "X": 59904,
             "Y": -3584,
             "Z": 78336,
-            "Room": 30,
-            "Angle": 0
+            "Room": 30
           }
         },
-
         {
           "EMType": 44,
           "EntityIndex": 56,
@@ -1341,8 +1114,7 @@
             "X": 59904,
             "Y": -3584,
             "Z": 78336,
-            "Room": 30,
-            "Angle": 0
+            "Room": 30
           }
         }
       ],
@@ -1359,7 +1131,6 @@
             "Angle": -16384
           }
         },
-
         {
           "EMType": 44,
           "EntityIndex": 56,
@@ -1385,7 +1156,6 @@
             "Angle": -16384
           }
         },
-
         {
           "EMType": 44,
           "EntityIndex": 56,
@@ -1411,7 +1181,6 @@
             "Angle": -16384
           }
         },
-
         {
           "EMType": 44,
           "EntityIndex": 56,
@@ -1419,13 +1188,11 @@
             "X": 62976,
             "Y": -3584,
             "Z": 78336,
-            "Room": 30,
-            "Angle": 0
+            "Room": 30
           }
         }
       ]
     ],
-
     [
       [
         {
@@ -1450,8 +1217,7 @@
             "X": 67072,
             "Y": -4608,
             "Z": 70144,
-            "Room": 31,
-            "Angle": 0
+            "Room": 31
           }
         }
       ],
@@ -1492,8 +1258,7 @@
             "X": 67072,
             "Y": -4608,
             "Z": 73216,
-            "Room": 31,
-            "Angle": 0
+            "Room": 31
           }
         }
       ],
@@ -1506,8 +1271,7 @@
             "X": 68096,
             "Y": -4608,
             "Z": 75264,
-            "Room": 31,
-            "Angle": 0
+            "Room": 31
           }
         }
       ],
@@ -1520,8 +1284,7 @@
             "X": 69120,
             "Y": -4608,
             "Z": 75264,
-            "Room": 31,
-            "Angle": 0
+            "Room": 31
           }
         }
       ],
@@ -1540,7 +1303,6 @@
         }
       ]
     ],
-
     [
       [
         {
@@ -1565,8 +1327,7 @@
             "X": 46592,
             "Y": -5120,
             "Z": 75264,
-            "Room": 12,
-            "Angle": 0
+            "Room": 12
           }
         }
       ],
@@ -1607,8 +1368,7 @@
             "X": 46592,
             "Y": -5120,
             "Z": 81408,
-            "Room": 12,
-            "Angle": 0
+            "Room": 12
           }
         }
       ],
@@ -1684,17 +1444,25 @@
       ]
     ]
   ],
-
   "OneOf": [
     {
       "Leader": [
         {
           "Comments": "Drain the rooms at the start.",
           "EMType": 3,
-          "RoomNumbers": [ 41, 51, 90, 91 ],
-          "WaterTextures": [ 2010, 1972, 1900, 2011 ]
+          "RoomNumbers": [
+            41,
+            51,
+            90,
+            91
+          ],
+          "WaterTextures": [
+            2010,
+            1972,
+            1900,
+            2011
+          ]
         },
-
         {
           "Comments": "Remove the water sound source for above.",
           "EMType": 103,
@@ -1704,67 +1472,74 @@
             "Z": 56832
           }
         },
-
         {
           "Comments": "Extend the ladder textures.",
           "EMType": 21,
           "TextureMap": {
             "1911": {
               "41": {
-                "Rectangles": [ 4, 5 ]
+                "Rectangles": [
+                  4,
+                  5
+                ]
               },
               "90": {
-                "Rectangles": [ 4, 5 ]
+                "Rectangles": [
+                  4,
+                  5
+                ]
               }
             }
           }
         },
-
         {
           "Comments": "Make a ladder to get out of room 41.",
           "EMType": 0,
-          "IsPositiveZ": true,
+          "TextureMap": {
+            "1911": {
+              "41": {
+                "Rectangles": [
+                  30,
+                  31
+                ]
+              }
+            }
+          },
           "Location": {
             "X": 45568,
             "Y": 4096,
             "Z": 59919,
             "Room": 41
           },
-          "TextureMap": {
-            "1911": {
-              "41": {
-                "Rectangles": [ 30, 31 ]
-              }
-            }
-          }
+          "IsPositiveZ": true
         },
-
         {
           "Comments": "Flipmap ladder.",
           "EMType": 0,
-          "IsPositiveZ": true,
+          "TextureMap": {
+            "1911": {
+              "90": {
+                "Rectangles": [
+                  30,
+                  31
+                ]
+              }
+            }
+          },
           "Location": {
             "X": 45568,
             "Y": 4096,
             "Z": 59919,
             "Room": 90
           },
-          "TextureMap": {
-            "1911": {
-              "90": {
-                "Rectangles": [ 30, 31 ]
-              }
-            }
-          }
+          "IsPositiveZ": true
         },
-
         {
           "Comments": "Convert the underwater fan into a fire.",
           "EMType": 45,
           "EntityIndex": 91,
           "NewEntityType": 253
         },
-
         {
           "Comments": "Put the fire on its own block.",
           "EMType": 1,
@@ -1775,10 +1550,10 @@
             "Room": 51
           },
           "Clicks": -4,
+          "FloorTexture": 2004,
           "SideTexture": 1987,
-          "FloorTexture": 2004
+          "Flags": 15
         },
-
         {
           "Comments": "Flipmap block.",
           "EMType": 1,
@@ -1789,14 +1564,19 @@
             "Room": 91
           },
           "Clicks": -4,
+          "FloorTexture": 2004,
           "SideTexture": 1987,
-          "FloorTexture": 2004
+          "Flags": 15
         },
-
         {
           "Comments": "Adjust the fire position and any secrets.",
           "EMType": 43,
-          "Types": [ 190, 191, 192, 253 ],
+          "Types": [
+            190,
+            191,
+            192,
+            253
+          ],
           "SectorLocations": [
             {
               "X": 45568,
@@ -1806,7 +1586,6 @@
             }
           ]
         },
-
         {
           "Comments": "Convert the underwater lever into a button.",
           "EMType": 45,
@@ -1824,8 +1603,7 @@
               "X": 45568,
               "Y": 768,
               "Z": 60928,
-              "Room": 44,
-              "Angle": 0
+              "Room": 44
             }
           }
         ],
@@ -1838,8 +1616,7 @@
               "X": 46592,
               "Y": 768,
               "Z": 60928,
-              "Room": 44,
-              "Angle": 0
+              "Room": 44
             }
           }
         ],
@@ -1860,6 +1637,342 @@
       ]
     }
   ],
-
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Do we have the dragon model available?",
+        "ConditionType": 41,
+        "ModelID": 40
+      },
+      "OnTrue": [
+        {
+          "Comments": "Make a room suitable for Marco.",
+          "EMType": 125,
+          "LevelID": "XIAN.TR2",
+          "RoomNumber": 18,
+          "NewLocation": {
+            "X": 64512,
+            "Y": 8192,
+            "Z": 37888
+          },
+          "LinkedLocation": {
+            "X": 66048,
+            "Y": 4864,
+            "Z": 57856,
+            "Room": 95
+          },
+          "RectangleTexture": 1925,
+          "TriangleTexture": 65535
+        },
+        {
+          "Comments": "Make collisional portals.",
+          "EMType": 82,
+          "Portals": {
+            "95": {
+              "96": [
+                {
+                  "X": 66048,
+                  "Y": 4864,
+                  "Z": 56832
+                }
+              ]
+            },
+            "96": {
+              "95": [
+                {
+                  "X": 66048,
+                  "Y": 8192,
+                  "Z": 57856
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Make visibility portals.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": 95,
+              "AdjoiningRoom": 96,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": 3840,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 3840,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 4864,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": 4864,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": 96,
+              "AdjoiningRoom": 95,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 3840,
+                  "Z": 19456
+                },
+                {
+                  "X": 2048,
+                  "Y": 3840,
+                  "Z": 19456
+                },
+                {
+                  "X": 2048,
+                  "Y": 4864,
+                  "Z": 19456
+                },
+                {
+                  "X": 1024,
+                  "Y": 4864,
+                  "Z": 19456
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Comments": "Make a ladder to get in and out.",
+          "EMType": 0,
+          "TextureMap": {
+            "1911": {
+              "96": {
+                "Rectangles": [
+                  954,
+                  972
+                ]
+              }
+            }
+          },
+          "Location": {
+            "X": 66048,
+            "Y": 8192,
+            "Z": 56832,
+            "Room": 96
+          },
+          "IsPositiveZ": true
+        },
+        {
+          "Comments": "Remove faces for the portals.",
+          "EMType": 22,
+          "GeometryMap": {
+            "95": {
+              "Rectangles": [
+                3
+              ]
+            },
+            "96": {
+              "Rectangles": [
+                990
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Turn a door into Marco.",
+          "EMType": 45,
+          "EntityIndex": 116,
+          "NewEntityType": 40
+        },
+        {
+          "Comments": "Move Marco.",
+          "EMType": 44,
+          "EntityIndex": 116,
+          "TargetLocation": {
+            "X": 75264,
+            "Y": 8192,
+            "Z": 48128,
+            "Room": 96,
+            "Angle": -16384
+          }
+        },
+        {
+          "Comments": "Add some static meshes.",
+          "EMType": 24,
+          "Locations": [
+            {
+              "X": 74749,
+              "Y": 11776,
+              "Z": 48130,
+              "Room": 96
+            }
+          ],
+          "Mesh": {
+            "Intensity1": 6400,
+            "Intensity2": 6400,
+            "MeshID": 10
+          },
+          "IgnoreSectorEntities": true
+        },
+        {
+          "EMType": 24,
+          "Locations": [
+            {
+              "X": 70144,
+              "Y": 8192,
+              "Z": 51712,
+              "Room": 96,
+              "Angle": 16384
+            },
+            {
+              "X": 70144,
+              "Y": 8192,
+              "Z": 44544,
+              "Room": 96,
+              "Angle": 16384
+            },
+            {
+              "X": 79360,
+              "Y": 8192,
+              "Z": 44544,
+              "Room": 96,
+              "Angle": -16384
+            },
+            {
+              "X": 79360,
+              "Y": 8192,
+              "Z": 51712,
+              "Room": 96,
+              "Angle": -16384
+            }
+          ],
+          "Mesh": {
+            "Intensity1": 6400,
+            "Intensity2": 6400,
+            "MeshID": 37
+          }
+        },
+        {
+          "Comments": "Add heavy triggers so the dragon will trigger the end-level enemies and monk.",
+          "EMType": 61,
+          "Rooms": [
+            96
+          ],
+          "Trigger": {
+            "TrigType": 5,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 114
+              },
+              {
+                "Parameter": 115
+              },
+              {
+                "Parameter": 117
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Add a camera for above.",
+          "EMType": 65,
+          "Camera": {
+            "X": 59626,
+            "Y": 2251,
+            "Z": 52893,
+            "Room": 77
+          },
+          "LookAtItem": 117,
+          "AttachToRooms": [
+            96
+          ],
+          "CameraAction": {
+            "Value": 2,
+            "Timer": 2,
+            "Continue": true
+          }
+        },
+        {
+          "Comments": "Remove the old enemy trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 54784,
+              "Y": 3072,
+              "Z": 61952,
+              "Room": 5
+            }
+          ]
+        },
+        {
+          "Comments": "Trigger Marco.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 61952,
+              "Y": 5632,
+              "Z": 61952,
+              "Room": 94
+            }
+          ],
+          "Trigger": {
+            "OneShot": true,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 116
+              },
+              {
+                "Action": 8,
+                "Parameter": 55
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Convert wheel doors into regular ones as Lara's animation will have been overwritten.",
+          "EMType": 52,
+          "WheelIndex": 16,
+          "DoorIndex": 12,
+          "NewSwitchType": 93,
+          "NewDoorType": 106,
+          "NewLocation": {
+            "X": 46592,
+            "Y": -5120,
+            "Z": 70144,
+            "Room": 13,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 52,
+          "WheelIndex": 26,
+          "DoorIndex": 24,
+          "NewSwitchType": 93,
+          "NewDoorType": 106,
+          "NewLocation": {
+            "X": 52736,
+            "Y": -5120,
+            "Z": 78336,
+            "Room": 16,
+            "Angle": 16384
+          }
+        }
+      ]
+    }
+  ],
   "Mirrored": []
 }

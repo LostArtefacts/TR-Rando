@@ -8,7 +8,7 @@
       }
     }
   ],
-
+  "NonPurist": [],
   "Any": [
     [
       {
@@ -19,8 +19,7 @@
           "X": 74240,
           "Y": 3584,
           "Z": 50688,
-          "Room": 53,
-          "Angle": 0
+          "Room": 53
         }
       },
       {
@@ -30,8 +29,7 @@
           "X": 73216,
           "Y": 3584,
           "Z": 50688,
-          "Room": 53,
-          "Angle": 0
+          "Room": 53
         }
       },
       {
@@ -57,10 +55,16 @@
       {
         "Comments": "Drains the room at the start.",
         "EMType": 3,
-        "RoomNumbers": [ 23 ],
-        "WaterTextures": [ 1704, 1889, 1890, 1891 ]
+        "RoomNumbers": [
+          23
+        ],
+        "WaterTextures": [
+          1704,
+          1889,
+          1890,
+          1891
+        ]
       },
-
       {
         "Comments": "Remove the water sound source for above.",
         "EMType": 103,
@@ -71,38 +75,42 @@
         }
       }
     ],
-
     [
       {
         "Comments": "Double-up the ladder before the breakaway tiles",
         "EMType": 0,
+        "TextureMap": {
+          "1682": {
+            "6": {
+              "Rectangles": [
+                10
+              ]
+            }
+          },
+          "1765": {
+            "6": {
+              "Rectangles": [
+                9
+              ]
+            }
+          },
+          "1702": {
+            "142": {
+              "Rectangles": [
+                7
+              ]
+            }
+          }
+        },
         "Location": {
           "X": 85097,
           "Y": 1280,
           "Z": 40383,
           "Room": 6
         },
-        "IsNegativeX": true,
-        "TextureMap": {
-          "1682": {
-            "6": {
-              "Rectangles": [ 10 ]
-            }
-          },
-          "1765": {
-            "6": {
-              "Rectangles": [ 9 ]
-            }
-          },
-          "1702": {
-            "142": {
-              "Rectangles": [ 7 ]
-            }
-          }
-        }
+        "IsNegativeX": true
       }
     ],
-
     [
       {
         "Comments": "Move the swinging box in the dome room.",
@@ -117,7 +125,6 @@
         }
       }
     ],
-
     [
       {
         "Comments": "Move dome room glass around.",
@@ -127,8 +134,7 @@
           "X": 85504,
           "Y": -768,
           "Z": 45568,
-          "Room": 13,
-          "Angle": 0
+          "Room": 13
         }
       },
       {
@@ -139,12 +145,10 @@
           "X": 84480,
           "Y": -768,
           "Z": 45568,
-          "Room": 13,
-          "Angle": 0
+          "Room": 13
         }
       }
     ],
-
     [
       {
         "Comments": "Move dome room glass around.",
@@ -154,8 +158,7 @@
           "X": 86528,
           "Y": -768,
           "Z": 53760,
-          "Room": 15,
-          "Angle": 0
+          "Room": 15
         }
       },
       {
@@ -166,8 +169,7 @@
           "X": 86528,
           "Y": -768,
           "Z": 54784,
-          "Room": 15,
-          "Angle": 0
+          "Room": 15
         }
       },
       {
@@ -178,12 +180,10 @@
           "X": 86528,
           "Y": -768,
           "Z": 55808,
-          "Room": 15,
-          "Angle": 0
+          "Room": 15
         }
       }
     ],
-
     [
       {
         "Comments": "Convert swinging sandbag to swinging box.",
@@ -192,19 +192,38 @@
         "NewEntityType": 96
       }
     ],
-
     [
       {
         "Comments": "Flood the final area. The plane will work just fine.",
         "EMType": 2,
-        "RoomNumbers": [ 22, 104, 121, 122, 125, 126, 129, 130, 131, 133, 136 ],
-        "WaterTextures": [ 1704, 1889, 1890, 1891 ]
+        "RoomNumbers": [
+          22,
+          104,
+          121,
+          122,
+          125,
+          126,
+          129,
+          130,
+          131,
+          133,
+          136
+        ],
+        "WaterTextures": [
+          1704,
+          1889,
+          1890,
+          1891
+        ]
       },
-
       {
         "Comments": "Adjust any secrets in the flooded final section.",
         "EMType": 43,
-        "Types": [ 190, 191, 192 ],
+        "Types": [
+          190,
+          191,
+          192
+        ],
         "SectorLocations": [
           {
             "X": 48086,
@@ -238,74 +257,68 @@
           }
         ]
       },
-
       {
         "Comments": "Move the shotgun goon.",
         "EMType": 42,
         "EntityIndex": 142,
-        "IfLandCreature": true,
         "Location": {
           "X": 63064,
           "Y": 2816,
           "Z": 47548,
           "Room": 123
-        }
+        },
+        "IfLandCreature": true
       },
-
       {
         "Comments": "Move the masked goon.",
         "EMType": 42,
         "EntityIndex": 136,
-        "IfLandCreature": true,
         "Location": {
           "X": 69120,
           "Y": 2816,
           "Z": 45548,
           "Room": 123
-        }
+        },
+        "IfLandCreature": true
       },
-
       {
         "Comments": "Move the pooch.",
         "EMType": 42,
         "EntityIndex": 137,
-        "IfLandCreature": true,
         "Location": {
           "X": 56816,
           "Y": 2816,
           "Z": 48677,
           "Room": 123
-        }
+        },
+        "IfLandCreature": true
       },
-
       {
         "Comments": "Move the other pooch.",
         "EMType": 42,
         "EntityIndex": 138,
-        "IfLandCreature": true,
         "Location": {
           "X": 56816,
           "Y": 2816,
           "Z": 44496,
           "Room": 123
-        }
+        },
+        "IfLandCreature": true
       },
-
       {
         "Comments": "Move the other masked goon.",
         "EMType": 42,
         "EntityIndex": 135,
-        "IfLandCreature": true,
         "Location": {
           "X": 56832,
           "Y": 2816,
           "Z": 46592,
           "Room": 123
-        }
+        },
+        "IfLandCreature": true
       }
     ]
   ],
-
   "AllWithin": [
     [
       [
@@ -317,8 +330,7 @@
             "X": 72192,
             "Y": 4352,
             "Z": 35328,
-            "Room": 31,
-            "Angle": 0
+            "Room": 31
           }
         }
       ],
@@ -373,8 +385,7 @@
             "X": 71168,
             "Y": 2816,
             "Z": 36352,
-            "Room": 33,
-            "Angle": 0
+            "Room": 33
           }
         }
       ],
@@ -401,8 +412,7 @@
             "X": 72192,
             "Y": 2816,
             "Z": 35328,
-            "Room": 33,
-            "Angle": 0
+            "Room": 33
           }
         }
       ],
@@ -415,8 +425,7 @@
             "X": 74240,
             "Y": 2816,
             "Z": 36352,
-            "Room": 33,
-            "Angle": 0
+            "Room": 33
           }
         }
       ],
@@ -449,7 +458,6 @@
         }
       ]
     ],
-
     [
       [
         {
@@ -564,36 +572,43 @@
         }
       ]
     ],
-
     [
       [
         {
           "Comments": "Ladder for the large room below the breakaway tiles.",
           "EMType": 0,
+          "TextureMap": {
+            "1702": {
+              "186": {
+                "Rectangles": [
+                  58,
+                  59
+                ]
+              },
+              "184": {
+                "Rectangles": [
+                  87,
+                  88,
+                  89
+                ]
+              }
+            },
+            "1682": {
+              "11": {
+                "Rectangles": [
+                  126
+                ]
+              }
+            }
+          },
           "Location": {
             "X": 83543,
             "Y": 7936,
             "Z": 39400,
             "Room": 44
           },
-          "IsPositiveX": true,
-          "TextureMap": {
-            "1702": {
-              "186": {
-                "Rectangles": [ 58, 59 ]
-              },
-              "184": {
-                "Rectangles": [ 87, 88, 89 ]
-              }
-            },
-            "1682": {
-              "11": {
-                "Rectangles": [ 126 ]
-              }
-            }
-          }
+          "IsPositiveX": true
         },
-
         {
           "Comments": "Adds a block at the bottom of the ladder above.",
           "EMType": 1,
@@ -613,30 +628,38 @@
         {
           "Comments": "Ladder for the large room below the breakaway tiles.",
           "EMType": 0,
+          "TextureMap": {
+            "1702": {
+              "186": {
+                "Rectangles": [
+                  0,
+                  1
+                ]
+              },
+              "184": {
+                "Rectangles": [
+                  0,
+                  1,
+                  2
+                ]
+              }
+            },
+            "1682": {
+              "11": {
+                "Rectangles": [
+                  18
+                ]
+              }
+            }
+          },
           "Location": {
             "X": 72124,
             "Y": 7936,
             "Z": 38399,
             "Room": 44
           },
-          "IsNegativeX": true,
-          "TextureMap": {
-            "1702": {
-              "186": {
-                "Rectangles": [ 0, 1 ]
-              },
-              "184": {
-                "Rectangles": [ 0, 1, 2 ]
-              }
-            },
-            "1682": {
-              "11": {
-                "Rectangles": [ 18 ]
-              }
-            }
-          }
+          "IsNegativeX": true
         },
-
         {
           "Comments": "Adds a block at the bottom of the ladder above.",
           "EMType": 1,
@@ -653,7 +676,6 @@
         }
       ]
     ],
-
     [
       [
         {
@@ -719,7 +741,6 @@
         }
       ]
     ],
-
     [
       [
         {
@@ -744,8 +765,7 @@
             "X": 72192,
             "Y": 7936,
             "Z": 51712,
-            "Room": 46,
-            "Angle": 0
+            "Room": 46
           }
         }
       ],
@@ -758,8 +778,7 @@
             "X": 71168,
             "Y": 7936,
             "Z": 51712,
-            "Room": 46,
-            "Angle": 0
+            "Room": 46
           }
         }
       ],
@@ -807,21 +826,30 @@
       ]
     ]
   ],
-
   "OneOf": [
     {
       "Leader": [
         {
           "Comments": "Flood room 169.",
           "EMType": 2,
-          "RoomNumbers": [ 169 ],
-          "WaterTextures": [ 1704, 1889, 1890, 1891 ]
+          "RoomNumbers": [
+            169
+          ],
+          "WaterTextures": [
+            1704,
+            1889,
+            1890,
+            1891
+          ]
         },
-
         {
           "Comments": "Adjust any secrets in the now flooded room.",
           "EMType": 43,
-          "Types": [ 190, 191, 192 ],
+          "Types": [
+            190,
+            191,
+            192
+          ],
           "SectorLocations": [
             {
               "X": 88259,
@@ -840,7 +868,6 @@
             "EntityIndex": 183,
             "NewEntityType": 105
           },
-
           {
             "Comments": "Shift the lever up.",
             "EMType": 44,
@@ -849,8 +876,7 @@
               "X": 87552,
               "Y": -1536,
               "Z": 61952,
-              "Room": 169,
-              "Angle": 0
+              "Room": 169
             }
           }
         ],
@@ -863,11 +889,9 @@
               "X": 88576,
               "Y": 256,
               "Z": 57856,
-              "Room": 165,
-              "Angle": 0
+              "Room": 165
             }
           },
-
           {
             "Comments": "Move the glass so the button can be reached.",
             "EMType": 44,
@@ -876,8 +900,7 @@
               "X": 87552,
               "Y": -768,
               "Z": 57856,
-              "Room": 15,
-              "Angle": 0
+              "Room": 15
             }
           }
         ],
@@ -890,8 +913,7 @@
               "X": 86528,
               "Y": -2816,
               "Z": 60928,
-              "Room": 2,
-              "Angle": 0
+              "Room": 2
             }
           }
         ],
@@ -918,8 +940,7 @@
               "X": 73216,
               "Y": -2560,
               "Z": 48640,
-              "Room": 190,
-              "Angle": 0
+              "Room": 190
             }
           }
         ]
@@ -933,7 +954,9 @@
           "TextureMap": {
             "1839": {
               "144": {
-                "Rectangles": [ 14 ]
+                "Rectangles": [
+                  14
+                ]
               }
             }
           }
@@ -953,14 +976,15 @@
               "Angle": -16384
             }
           },
-
           {
             "Comments": "Adds a lever texture for the above.",
             "EMType": 21,
             "TextureMap": {
               "1665": {
                 "144": {
-                  "Rectangles": [ 10 ]
+                  "Rectangles": [
+                    10
+                  ]
                 }
               }
             }
@@ -979,14 +1003,15 @@
               "Angle": -16384
             }
           },
-
           {
             "Comments": "Adds a lever texture for the above.",
             "EMType": 21,
             "TextureMap": {
               "1665": {
                 "144": {
-                  "Rectangles": [ 7 ]
+                  "Rectangles": [
+                    7
+                  ]
                 }
               }
             }
@@ -1005,14 +1030,15 @@
               "Angle": -16384
             }
           },
-
           {
             "Comments": "Adds a lever texture for the above.",
             "EMType": 21,
             "TextureMap": {
               "1665": {
                 "144": {
-                  "Rectangles": [ 2 ]
+                  "Rectangles": [
+                    2
+                  ]
                 }
               }
             }
@@ -1031,14 +1057,15 @@
               "Angle": -32768
             }
           },
-
           {
             "Comments": "Adds a lever texture for the above.",
             "EMType": 21,
             "TextureMap": {
               "1665": {
                 "144": {
-                  "Rectangles": [ 4 ]
+                  "Rectangles": [
+                    4
+                  ]
                 }
               }
             }
@@ -1057,14 +1084,15 @@
               "Angle": -32768
             }
           },
-
           {
             "Comments": "Adds a lever texture for the above.",
             "EMType": 21,
             "TextureMap": {
               "1665": {
                 "144": {
-                  "Rectangles": [ 20 ]
+                  "Rectangles": [
+                    20
+                  ]
                 }
               }
             }
@@ -1083,14 +1111,15 @@
               "Angle": 16384
             }
           },
-
           {
             "Comments": "Adds a lever texture for the above.",
             "EMType": 21,
             "TextureMap": {
               "1665": {
                 "144": {
-                  "Rectangles": [ 27 ]
+                  "Rectangles": [
+                    27
+                  ]
                 }
               }
             }
@@ -1109,14 +1138,15 @@
               "Angle": 16384
             }
           },
-
           {
             "Comments": "Adds a lever texture for the above.",
             "EMType": 21,
             "TextureMap": {
               "1665": {
                 "144": {
-                  "Rectangles": [ 29 ]
+                  "Rectangles": [
+                    29
+                  ]
                 }
               }
             }
@@ -1135,14 +1165,15 @@
               "Angle": 16384
             }
           },
-
           {
             "Comments": "Adds a lever texture for the above.",
             "EMType": 21,
             "TextureMap": {
               "1665": {
                 "144": {
-                  "Rectangles": [ 31 ]
+                  "Rectangles": [
+                    31
+                  ]
                 }
               }
             }
@@ -1151,7 +1182,8 @@
       ]
     }
   ],
-
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [],
   "Mirrored": [
     {
       "Comments": "Moves door 33 so that it opens properly, otherwise Lara has to glitch through.",
@@ -1161,8 +1193,7 @@
         "X": 18944,
         "Y": 4352,
         "Z": 37376,
-        "Room": 163,
-        "Angle": 0
+        "Room": 163
       }
     }
   ]

@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TREnvironmentEditor.Helpers;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {
     public class EMVisibilityPortalFunction : BaseEMFunction
     {
-        public Dictionary<int, TRRoomPortal> Portals { get; set; }
+        public List<EMVisibilityPortal> Portals {get; set;}
 
         public override void ApplyToLevel(TR2Level level)
         {
-            foreach (int roomNumber in Portals.Keys)
-            {
-                TRRoomPortal portal = Portals[roomNumber];
-                portal.AdjoiningRoom = (ushort)ConvertItemNumber(portal.AdjoiningRoom, level.NumRooms);
+            EMLevelData data = new EMLevelData { NumRooms = level.NumRooms };
 
-                int convertedRoomNumbew = ConvertItemNumber(roomNumber, level.NumRooms);
-                TR2Room room = level.Rooms[convertedRoomNumbew];
+            foreach (EMVisibilityPortal emPortal in Portals)
+            {
+                TRRoomPortal portal = emPortal.ToPortal(data);
+                TR2Room room = level.Rooms[emPortal.BaseRoom];
                 List<TRRoomPortal> portals = room.Portals.ToList();
                 portals.Add(portal);
                 room.Portals = portals.ToArray();
@@ -26,13 +26,12 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
-            foreach (int roomNumber in Portals.Keys)
-            {
-                TRRoomPortal portal = Portals[roomNumber];
-                portal.AdjoiningRoom = (ushort)ConvertItemNumber(portal.AdjoiningRoom, level.NumRooms);
+            EMLevelData data = new EMLevelData { NumRooms = level.NumRooms };
 
-                int convertedRoomNumbew = ConvertItemNumber(roomNumber, level.NumRooms);
-                TR3Room room = level.Rooms[convertedRoomNumbew];
+            foreach (EMVisibilityPortal emPortal in Portals)
+            {
+                TRRoomPortal portal = emPortal.ToPortal(data);
+                TR3Room room = level.Rooms[emPortal.BaseRoom];
                 List<TRRoomPortal> portals = room.Portals.ToList();
                 portals.Add(portal);
                 room.Portals = portals.ToArray();

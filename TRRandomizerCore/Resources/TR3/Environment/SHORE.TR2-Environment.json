@@ -1,4 +1,11 @@
-﻿{
+{
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [],
   "Mirrored": [
     {
       "Comments": "Move the slots and doors leading to the village as it's an awkward corridor.",

@@ -1,11 +1,25 @@
 {
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
   "ConditionalAll": [
     {
       "Condition": {
         "Comments": "Check if enemy #8 is a hostile human and if not, get rid of the AI entities (monkeys can void for some reason).",
         "ConditionType": 0,
         "EntityIndex": 8,
-        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+        "EntityTypes": [
+          46,
+          51,
+          53,
+          56,
+          60,
+          61,
+          63
+        ]
       },
       "OnFalse": [
         {
@@ -97,9 +111,8 @@
             "Z": 77312,
             "Room": 115
           },
-          "ActionItems": [
+          "Actions": [
             {
-              "TrigAction": 0,
               "Parameter": 44
             }
           ]
@@ -107,7 +120,6 @@
       ]
     }
   ],
-
   "Mirrored": [
     {
       "Comments": "The generators in this room are awkward so need rotating and shifting slightly.",
@@ -135,7 +147,10 @@
     {
       "Comments": "Mirror the Slot2Empty and Slot2Full models.",
       "EMType": 142,
-      "ModelIDs": [ 214, 218 ]
+      "ModelIDs": [
+        214,
+        218
+      ]
     },
     {
       "Comments": "Move door #36 so it's less awkward.",

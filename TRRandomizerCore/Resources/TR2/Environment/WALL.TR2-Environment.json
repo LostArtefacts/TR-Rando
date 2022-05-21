@@ -6,145 +6,70 @@
       "TextureMap": {
         "1247": {
           "30": {
-            "Triangles": [ 2, 3 ]
+            "Triangles": [
+              2,
+              3
+            ]
           }
         },
         "1341": {
           "30": {
-            "Triangles": [ 4 ]
+            "Triangles": [
+              4
+            ]
           }
         }
       }
     }
   ],
-
-  "ConditionalAll": [
-    {
-      "Condition": {
-        "Comments": "If enemy 2 is Marco, move him to a better position.",
-        "ConditionType": 0,
-        "EntityIndex": 2,
-        "EntityType": 40
-      },
-      "OnTrue": [
-        {
-          "EMType": 44,
-          "EntityIndex": 2,
-          "TargetLocation": {
-            "X": 31744,
-            "Y": 0,
-            "Z": 34816,
-            "Room": 0,
-            "Angle": 16384
-          }
-        }
-      ]
-    },
-    {
-      "Condition": {
-        "Comments": "Same check for enemy 13.",
-        "ConditionType": 0,
-        "EntityIndex": 13,
-        "EntityType": 40
-      },
-      "OnTrue": [
-        {
-          "EMType": 44,
-          "EntityIndex": 13,
-          "TargetLocation": {
-            "X": 31744,
-            "Y": 0,
-            "Z": 34816,
-            "Room": 0,
-            "Angle": 16384
-          }
-        }
-      ]
-    },
-    {
-      "Condition": {
-        "Comments": "And the same for 12, but only if the area is flooded.",
-        "ConditionType": 0,
-        "EntityIndex": 12,
-        "EntityType": 40,
-        "And": [
-          {
-            "ConditionType": 21,
-            "RoomIndex": 1,
-            "Negate": true
-          }
-        ],
-        "OnTrue": [
-          {
-            "EMType": 44,
-            "EntityIndex": 12,
-            "TargetLocation": {
-              "X": 31744,
-              "Y": 0,
-              "Z": 34816,
-              "Room": 0,
-              "Angle": 16384
-            }
-          }
-        ]
-      },
-      "OnTrue": [
-        {
-          "EMType": 44,
-          "EntityIndex": 13,
-          "TargetLocation": {
-            "X": 32256,
-            "Y": 0,
-            "Z": 33280,
-            "Room": 0,
-            "Angle": -16384
-          }
-        }
-      ]
-    }
-  ],
-
   "NonPurist": [
     {
       "Comments": "Adds a ladder to allow returning to the top of the first guardhouse after dropping down",
       "EMType": 0,
+      "TextureMap": {
+        "1236": {
+          "3": {
+            "Rectangles": [
+              137,
+              138,
+              139
+            ]
+          },
+          "31": {
+            "Rectangles": [
+              121,
+              123
+            ]
+          },
+          "33": {
+            "Rectangles": [
+              57
+            ]
+          }
+        }
+      },
       "Location": {
         "X": 53628,
         "Y": 1536,
         "Z": 35431,
         "Room": 33
       },
-      "IsPositiveX": true,
-      "TextureMap": {
-        "1236": {
-          "3": {
-            "Rectangles": [ 137, 138, 139 ]
-          },
-          "31": {
-            "Rectangles": [ 121, 123 ]
-          },
-          "33": {
-            "Rectangles": [ 57 ]
-          }
-        }
-      }
+      "IsPositiveX": true
     },
-
     {
       "Comments": "Adds a step at the bottom of the first guardhouse to allow reaching the ladder above",
       "EMType": 1,
       "Location": {
         "X": 50754,
-        "Y": 0,
         "Z": 35206,
         "Room": 3
       },
       "Clicks": -2,
       "FloorTexture": 1223,
-      "SideTexture": 1228
+      "SideTexture": 1228,
+      "Flags": 15
     }
   ],
-
   "Any": [
     [
       {
@@ -156,30 +81,38 @@
           "Z": 36387,
           "Room": 36
         },
-        "Clicks": 2
+        "Clicks": 2,
+        "FloorTexture": 65535,
+        "SideTexture": 65535,
+        "Flags": 15
       }
     ],
-
     [
       {
         "Comments": "Floods the first area up to the guardhouse",
         "EMType": 2,
-        "RoomNumbers": [ 35, 36, 38 ],
-        "WaterTextures": [ 1229, 1254, 1346, 1347 ]
+        "RoomNumbers": [
+          35,
+          36,
+          38
+        ],
+        "WaterTextures": [
+          1229,
+          1254,
+          1346,
+          1347
+        ]
       },
-
       {
         "Comments": "Create a water sound source",
         "EMType": 101,
         "Source": {
           "X": 62976,
-          "Y": 0,
           "Z": 23040,
-          "Flags": 192,
-          "SoundID": 59
+          "SoundID": 59,
+          "Flags": 192
         }
       },
-
       {
         "Comments": "Create a water sound source",
         "EMType": 101,
@@ -187,20 +120,13 @@
           "X": 59898,
           "Y": -1666,
           "Z": 34293,
-          "Flags": 192,
-          "SoundID": 59
+          "SoundID": 59,
+          "Flags": 192
         }
       },
-
       {
         "Comments": "Extends the helicopter/camera trigger in case Lara swims over the one tile that doesn't have it",
         "EMType": 63,
-        "BaseLocation": {
-          "X": 62908,
-          "Y": 5197,
-          "Z": 30196,
-          "Room": 36
-        },
         "Locations": [
           {
             "X": 61997,
@@ -208,15 +134,18 @@
             "Z": 30202,
             "Room": 36
           }
-        ]
+        ],
+        "BaseLocation": {
+          "X": 62908,
+          "Y": 5197,
+          "Z": 30196,
+          "Room": 36
+        }
       },
-
       {
         "Comments": "Move the first tiger onto land, unless it has become a water creature.",
         "EMType": 42,
         "EntityIndex": 18,
-        "IfLandCreature": true,
-        "AttemptWaterCreature": true,
         "Location": {
           "X": 65995,
           "Y": -3134,
@@ -248,15 +177,14 @@
             "Z": 26165,
             "Room": 35
           }
-        ]
+        ],
+        "IfLandCreature": true,
+        "AttemptWaterCreature": true
       },
-
       {
         "Comments": "Move the second tiger onto land, unless it has become a water creature.",
         "EMType": 42,
         "EntityIndex": 19,
-        "IfLandCreature": true,
-        "AttemptWaterCreature": true,
         "Location": {
           "X": 52174,
           "Y": -3072,
@@ -288,13 +216,18 @@
             "Z": 26165,
             "Room": 35
           }
-        ]
+        ],
+        "IfLandCreature": true,
+        "AttemptWaterCreature": true
       },
-
       {
         "Comments": "Relocates any secrets whose sectors match those of the given locations.",
         "EMType": 43,
-        "Types": [ 190, 191, 192 ],
+        "Types": [
+          190,
+          191,
+          192
+        ],
         "SectorLocations": [
           {
             "X": 61319,
@@ -311,54 +244,62 @@
         ]
       }
     ],
-
     [
       {
         "Comments": "Floods the 'key' area between the first and second guardhouses",
         "EMType": 2,
-        "RoomNumbers": [ 23, 7, 24, 77 ],
-        "WaterTextures": [ 1229, 1254, 1346, 1347 ]
+        "RoomNumbers": [
+          23,
+          7,
+          24,
+          77
+        ],
+        "WaterTextures": [
+          1229,
+          1254,
+          1346,
+          1347
+        ]
       },
-
       {
         "Comments": "Move the water sound source to the top of the pool",
         "EMType": 102,
-        "Index": 0,
         "Relocation": {
           "Y": -4608
         }
       },
-
       {
         "Comments": "Move the crow to spawn over land in case it's not actually a crow.",
         "EMType": 42,
         "EntityIndex": 12,
-        "IfLandCreature": true,
         "Location": {
           "X": 28160,
           "Y": -1280,
           "Z": 41472,
           "Room": 21
-        }
+        },
+        "IfLandCreature": true
       },
-
       {
         "Comments": "Move the tiger to spawn on land unless it's a water creature.",
         "EMType": 42,
         "EntityIndex": 11,
-        "IfLandCreature": true,
         "Location": {
           "X": 43514,
           "Y": -2680,
           "Z": 47599,
           "Room": 1
-        }
+        },
+        "IfLandCreature": true
       },
-
       {
         "Comments": "Relocates any secrets whose sectors match those of the given locations.",
         "EMType": 43,
-        "Types": [ 190, 191, 192 ],
+        "Types": [
+          190,
+          191,
+          192
+        ],
         "SectorLocations": [
           {
             "X": 40763,
@@ -369,24 +310,41 @@
         ]
       }
     ],
-
     [
       {
         "Comments": "Drains the disc-trap room",
         "EMType": 3,
-        "RoomNumbers": [ 46 ],
-        "WaterTextures": [ 1229, 1254, 1346, 1347 ]
+        "RoomNumbers": [
+          46
+        ],
+        "WaterTextures": [
+          1229,
+          1254,
+          1346,
+          1347
+        ]
       }
     ],
-
     [
       {
         "Comments": "Floods the T-Rex pit",
         "EMType": 2,
-        "RoomNumbers": [ 62, 63, 79, 80, 81, 82, 83 ],
-        "WaterTextures": [ 1229, 1254, 1346, 1347 ]
+        "RoomNumbers": [
+          62,
+          63,
+          79,
+          80,
+          81,
+          82,
+          83
+        ],
+        "WaterTextures": [
+          1229,
+          1254,
+          1346,
+          1347
+        ]
       },
-
       {
         "Comments": "Create a water sound source",
         "EMType": 101,
@@ -394,43 +352,44 @@
           "X": 69640,
           "Y": 18690,
           "Z": 74746,
-          "Flags": 192,
-          "SoundID": 59
+          "SoundID": 59,
+          "Flags": 192
         }
       },
-
       {
         "Comments": "Move the first T-Rex to spawn on land unless it's a water creature.",
         "EMType": 42,
         "EntityIndex": 104,
-        "IfLandCreature": true,
-        "AttemptWaterCreature": true,
         "Location": {
           "X": 83402,
           "Y": 20246,
           "Z": 74383,
           "Room": 39
-        }
+        },
+        "IfLandCreature": true,
+        "AttemptWaterCreature": true
       },
-
       {
         "Comments": "Move the second T-Rex to spawn on land unless it's a water creature.",
         "EMType": 42,
         "EntityIndex": 99,
-        "IfLandCreature": true,
-        "AttemptWaterCreature": true,
         "Location": {
           "X": 91251,
           "Y": 20480,
           "Z": 64295,
           "Room": 65
-        }
+        },
+        "IfLandCreature": true,
+        "AttemptWaterCreature": true
       },
-
       {
         "Comments": "Relocates any secrets whose sectors match those of the given locations.",
         "EMType": 43,
-        "Types": [ 190, 191, 192 ],
+        "Types": [
+          190,
+          191,
+          192
+        ],
         "SectorLocations": [
           {
             "X": 60587,
@@ -446,27 +405,28 @@
           }
         ]
       },
-
       {
         "Comments": "Get rid of the zip line meshes.",
         "EMType": 25,
         "ClearFromRooms": {
-          "1": [ 59, 60, 61, 74, 39 ]
+          "1": [
+            59,
+            60,
+            61,
+            74,
+            39
+          ]
         }
       },
-
       {
         "Comments": "Convert the zip line into a medi.",
         "EMType": 45,
         "EntityIndex": 93,
         "NewEntityType": 149
       },
-
       {
         "Comments": "Change the camera trigger to look at Lara instead of the zip line.",
         "EMType": 66,
-        "TrigAction": 6,
-        "NewParameter": 20,
         "Locations": [
           {
             "X": 61977,
@@ -492,11 +452,14 @@
             "Z": 75159,
             "Room": 63
           }
-        ]
+        ],
+        "Action": {
+          "Action": 6,
+          "Parameter": 20
+        }
       }
     ]
   ],
-
   "AllWithin": [
     [
       [
@@ -512,120 +475,115 @@
             "Angle": -16384
           }
         },
-
         {
           "Comments": "Refacing for above.",
           "EMType": 21,
           "TextureMap": {
             "1178": {
               "3": {
-                "Rectangles": [ 143 ]
+                "Rectangles": [
+                  143
+                ]
               }
             }
           }
         }
       ],
-
       [
         {
           "EMType": 41,
           "EntityIndex": 4,
           "Location": {
             "X": 50688,
-            "Y": 0,
             "Z": 32256,
             "Room": 3,
             "Angle": -32768
           }
         },
-
         {
           "EMType": 21,
           "TextureMap": {
             "1178": {
               "3": {
-                "Rectangles": [ 143 ]
+                "Rectangles": [
+                  143
+                ]
               }
             }
           }
         }
       ],
-
       [
         {
           "EMType": 41,
           "EntityIndex": 4,
           "Location": {
             "X": 49664,
-            "Y": 0,
             "Z": 35328,
             "Room": 3,
             "Angle": -16384
           }
         },
-
         {
           "EMType": 21,
           "TextureMap": {
             "1178": {
               "3": {
-                "Rectangles": [ 143 ]
+                "Rectangles": [
+                  143
+                ]
               }
             }
           }
         }
       ],
-
       [
         {
           "EMType": 41,
           "EntityIndex": 4,
           "Location": {
             "X": 49664,
-            "Y": 0,
             "Z": 36352,
             "Room": 3,
             "Angle": -16384
           }
         },
-
         {
           "EMType": 21,
           "TextureMap": {
             "1178": {
               "3": {
-                "Rectangles": [ 143 ]
+                "Rectangles": [
+                  143
+                ]
               }
             }
           }
         }
       ],
-
       [
         {
           "EMType": 41,
           "EntityIndex": 4,
           "Location": {
             "X": 49664,
-            "Y": 0,
             "Z": 36352,
-            "Room": 3,
-            "Angle": 0
+            "Room": 3
           }
         },
-
         {
           "EMType": 21,
           "TextureMap": {
             "1178": {
               "3": {
-                "Rectangles": [ 143 ]
+                "Rectangles": [
+                  143
+                ]
               }
             }
           }
         }
       ],
-
       [
         {
           "EMType": 41,
@@ -638,20 +596,20 @@
             "Angle": 16384
           }
         },
-
         {
           "EMType": 21,
           "TextureMap": {
             "1178": {
               "3": {
-                "Rectangles": [ 143 ]
+                "Rectangles": [
+                  143
+                ]
               }
             }
           }
         }
       ]
     ],
-
     [
       [
         {
@@ -660,28 +618,22 @@
           "EntityIndex": 1,
           "Location": {
             "X": 31232,
-            "Y": 0,
             "Z": 32256,
-            "Room": 0,
             "Angle": -16384
           }
         }
       ],
-
       [
         {
           "EMType": 41,
           "EntityIndex": 1,
           "Location": {
             "X": 31232,
-            "Y": 0,
             "Z": 35328,
-            "Room": 0,
             "Angle": -16384
           }
         }
       ],
-
       [
         {
           "EMType": 41,
@@ -690,12 +642,10 @@
             "X": 31232,
             "Y": -1024,
             "Z": 36352,
-            "Room": 0,
             "Angle": -16384
           }
         }
       ],
-
       [
         {
           "EMType": 41,
@@ -704,13 +654,11 @@
             "X": 31232,
             "Y": -1024,
             "Z": 31232,
-            "Room": 0,
             "Angle": -16384
           }
         }
       ]
     ],
-
     [
       [
         {
@@ -721,12 +669,10 @@
             "X": 25088,
             "Y": -256,
             "Z": 36352,
-            "Room": 4,
-            "Angle": 0
+            "Room": 4
           }
         }
       ],
-
       [
         {
           "EMType": 41,
@@ -735,26 +681,22 @@
             "X": 26112,
             "Y": -256,
             "Z": 36352,
-            "Room": 4,
-            "Angle": 0
+            "Room": 4
           }
         }
       ],
-
       [
         {
           "EMType": 41,
           "EntityIndex": 7,
           "Location": {
             "X": 26112,
-            "Y": 0,
             "Z": 35328,
             "Room": 4,
             "Angle": -16384
           }
         }
       ],
-
       [
         {
           "EMType": 41,
@@ -768,7 +710,6 @@
           }
         }
       ],
-
       [
         {
           "EMType": 41,
@@ -784,157 +725,246 @@
       ]
     ]
   ],
-
   "OneOf": [
     {
       "Leader": [
         {
           "Comments": "Removes the ladder in the second guardhouse.",
           "EMType": 0,
+          "TextureMap": {
+            "1225": {
+              "32": {
+                "Rectangles": [
+                  50
+                ]
+              }
+            },
+            "1178": {
+              "4": {
+                "Rectangles": [
+                  40
+                ]
+              }
+            },
+            "1179": {
+              "4": {
+                "Rectangles": [
+                  41
+                ]
+              }
+            }
+          },
           "Location": {
             "X": 27138,
             "Y": -512,
             "Z": 34394,
             "Room": 4
-          },
-          "IsPositiveX": false,
-          "TextureMap": {
-            "1225": {
-              "32": {
-                "Rectangles": [ 50 ]
-              }
-            },
-            "1178": {
-              "4": {
-                "Rectangles": [ 40 ]
-              }
-            },
-            "1179": {
-              "4": {
-                "Rectangles": [ 41 ]
-              }
-            }
           }
         }
       ],
-
       "Followers": [
         [
           {
             "Comments": "Possible new ladder in the second guardhouse.",
             "EMType": 0,
+            "TextureMap": {
+              "1236": {
+                "32": {
+                  "Rectangles": [
+                    27
+                  ]
+                },
+                "4": {
+                  "Rectangles": [
+                    12
+                  ]
+                }
+              },
+              "1237": {
+                "4": {
+                  "Rectangles": [
+                    13
+                  ]
+                }
+              }
+            },
             "Location": {
               "X": 25830,
               "Y": 1024,
               "Z": 33283,
               "Room": 4
             },
-            "IsNegativeX": true,
-            "TextureMap": {
-              "1236": {
-                "32": {
-                  "Rectangles": [ 27 ]
-                },
-                "4": {
-                  "Rectangles": [ 12 ]
-                }
-              },
-              "1237": {
-                "4": {
-                  "Rectangles": [ 13 ]
-                }
-              }
-            }
+            "IsNegativeX": true
           }
         ],
-
         [
           {
             "Comments": "Possible new ladder in the second guardhouse.",
             "EMType": 0,
+            "TextureMap": {
+              "1236": {
+                "32": {
+                  "Rectangles": [
+                    31
+                  ]
+                },
+                "4": {
+                  "Rectangles": [
+                    15
+                  ]
+                }
+              },
+              "1237": {
+                "4": {
+                  "Rectangles": [
+                    16
+                  ]
+                }
+              }
+            },
             "Location": {
               "X": 25830,
               "Y": 1024,
               "Z": 33283,
               "Room": 4
             },
-            "IsPositiveZ": true,
-            "TextureMap": {
-              "1236": {
-                "32": {
-                  "Rectangles": [ 31 ]
-                },
-                "4": {
-                  "Rectangles": [ 15 ]
-                }
-              },
-              "1237": {
-                "4": {
-                  "Rectangles": [ 16 ]
-                }
-              }
-            }
+            "IsPositiveZ": true
           }
         ],
-
         [
           {
             "Comments": "Possible new ladder in the second guardhouse.",
             "EMType": 0,
+            "TextureMap": {
+              "1236": {
+                "32": {
+                  "Rectangles": [
+                    21
+                  ]
+                }
+              },
+              "1237": {
+                "4": {
+                  "Rectangles": [
+                    5
+                  ]
+                }
+              }
+            },
             "Location": {
               "X": 25811,
               "Y": -1536,
               "Z": 31213,
               "Room": 4
             },
-            "IsNegativeX": true,
-            "TextureMap": {
-              "1236": {
-                "32": {
-                  "Rectangles": [ 21 ]
-                }
-              },
-              "1237": {
-                "4": {
-                  "Rectangles": [ 5 ]
-                }
-              }
-            }
+            "IsNegativeX": true
           }
         ],
-
         [
           {
             "Comments": "Possible new ladder in the second guardhouse.",
             "EMType": 0,
+            "TextureMap": {
+              "1236": {
+                "32": {
+                  "Rectangles": [
+                    56,
+                    57
+                  ]
+                },
+                "4": {
+                  "Rectangles": [
+                    49
+                  ]
+                }
+              },
+              "1237": {
+                "4": {
+                  "Rectangles": [
+                    50
+                  ]
+                }
+              }
+            },
             "Location": {
               "X": 27095,
               "Y": -512,
               "Z": 36763,
               "Room": 4
             },
-            "IsPositiveZ": true,
-            "TextureMap": {
-              "1236": {
-                "32": {
-                  "Rectangles": [ 56, 57 ]
-                },
-                "4": {
-                  "Rectangles": [ 49 ]
-                }
-              },
-              "1237": {
-                "4": {
-                  "Rectangles": [ 50 ]
-                }
-              }
-            }
+            "IsPositiveZ": true
           }
         ]
       ]
     }
   ],
-
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If enemy 2 is Marco, move him to a better position.",
+        "ConditionType": 0,
+        "EntityIndex": 2,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 2,
+          "TargetLocation": {
+            "X": 31744,
+            "Z": 34816,
+            "Angle": 16384
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Same check for enemy 13.",
+        "ConditionType": 0,
+        "EntityIndex": 13,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 13,
+          "TargetLocation": {
+            "X": 31744,
+            "Z": 34816,
+            "Angle": 16384
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "And the same for 12, but only if the area is flooded.",
+        "ConditionType": 0,
+        "And": [
+          {
+            "ConditionType": 21,
+            "Negate": true,
+            "RoomIndex": 1
+          }
+        ],
+        "EntityIndex": 12,
+        "EntityType": 40
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 13,
+          "TargetLocation": {
+            "X": 32256,
+            "Z": 33280,
+            "Angle": -16384
+          }
+        }
+      ]
+    }
+  ],
   "Mirrored": [
     {
       "Comments": "Reposition the wall blades.",

@@ -1,24 +1,35 @@
 {
   "All": [],
-
+  "NonPurist": [],
   "Any": [
     [
       {
         "Comments": "Drain the swimming pool.",
         "EMType": 3,
-        "RoomNumbers": [ 59, 93 ],
-        "WaterTextures": [ 1620, 1623, 1621, 1622 ]
+        "RoomNumbers": [
+          59,
+          93
+        ],
+        "WaterTextures": [
+          1620,
+          1623,
+          1621,
+          1622
+        ]
       },
-
       {
         "Comments": "Convert the water enemies into land creatures.",
         "EMType": 47,
-        "EntityIndices": [ 39, 89 ],
+        "EntityIndices": [
+          39,
+          89
+        ],
         "NewEnemyType": 1,
-        "Exclusions": [ 40 ]
+        "Exclusions": [
+          40
+        ]
       }
     ],
-
     [
       {
         "Comments": "Make a new bench near the exit.",
@@ -33,13 +44,12 @@
           }
         ],
         "Mesh": {
-          "MeshID": 29,
           "Intensity1": 6400,
-          "Intensity2": 6400
+          "Intensity2": 6400,
+          "MeshID": 29
         }
       }
     ],
-
     [
       {
         "Comments": "Make a new bench beside the shark pool.",
@@ -54,13 +64,12 @@
           }
         ],
         "Mesh": {
-          "MeshID": 29,
           "Intensity1": 6400,
-          "Intensity2": 6400
+          "Intensity2": 6400,
+          "MeshID": 29
         }
       }
     ],
-
     [
       {
         "Comments": "A random box in the first area.",
@@ -72,36 +81,41 @@
           "Room": 20
         },
         "Clicks": -4,
+        "FloorTexture": 1630,
         "SideTexture": 1630,
-        "FloorTexture": 1630
+        "Flags": 15
       }
     ],
-
     [
       {
         "Comments": "Make a ladder to get back to the starting area.",
         "EMType": 0,
-        "IsNegativeX": true,
+        "TextureMap": {
+          "1727": {
+            "78": {
+              "Rectangles": [
+                18
+              ]
+            },
+            "79": {
+              "Rectangles": [
+                24,
+                25,
+                26
+              ]
+            }
+          }
+        },
         "Location": {
           "X": 51533,
           "Y": 10104,
           "Z": 59932,
           "Room": 80
         },
-        "TextureMap": {
-          "1727": {
-            "78": {
-              "Rectangles": [ 18 ]
-            },
-            "79": {
-              "Rectangles": [ 24, 25, 26 ]
-            }
-          }
-        }
+        "IsNegativeX": true
       }
     ]
   ],
-
   "AllWithin": [
     [
       [
@@ -113,8 +127,7 @@
             "X": 33280,
             "Y": 1792,
             "Z": 31232,
-            "Room": 85,
-            "Angle": 0
+            "Room": 85
           }
         }
       ],
@@ -161,7 +174,6 @@
         }
       ]
     ],
-
     [
       [
         {
@@ -228,8 +240,7 @@
             "X": 39424,
             "Y": 3072,
             "Z": 26112,
-            "Room": 60,
-            "Angle": 0
+            "Room": 60
           }
         }
       ],
@@ -240,7 +251,6 @@
           "EntityIndex": 42,
           "NewEntityType": 93
         },
-
         {
           "Comments": "Get rid of the old key trigger.",
           "EMType": 62,
@@ -253,26 +263,9 @@
             }
           ]
         },
-
         {
           "Comments": "Replace it with a switch trigger.",
           "EMType": 61,
-          "TriggerEntry": {
-            "Setup": {
-              "Value": 4
-            },
-            "TrigSetup": {
-              "Value": 15872
-            },
-            "TrigType": 2,
-            "SwitchOrKeyRef": 42,
-            "TrigActionList": [
-              {
-                "TrigAction": 0,
-                "Parameter": 41
-              }
-            ]
-          },
           "Locations": [
             {
               "X": 34148,
@@ -280,11 +273,20 @@
               "Z": 18869,
               "Room": 60
             }
-          ]
+          ],
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": 42,
+            "Actions": [
+              {
+                "Parameter": 41
+              }
+            ]
+          }
         }
       ]
     ],
-
     [
       [
         {
@@ -407,8 +409,7 @@
             "X": 42496,
             "Y": -10240,
             "Z": 66048,
-            "Room": 110,
-            "Angle": 0
+            "Room": 110
           }
         }
       ],
@@ -421,8 +422,7 @@
             "X": 41472,
             "Y": -10240,
             "Z": 66048,
-            "Room": 110,
-            "Angle": 0
+            "Room": 110
           }
         }
       ],
@@ -435,13 +435,11 @@
             "X": 40448,
             "Y": -10240,
             "Z": 66048,
-            "Room": 110,
-            "Angle": 0
+            "Room": 110
           }
         }
       ]
     ],
-
     [
       [
         {
@@ -466,8 +464,7 @@
             "X": 38400,
             "Y": -10240,
             "Z": 66048,
-            "Room": 67,
-            "Angle": 0
+            "Room": 67
           }
         }
       ],
@@ -480,8 +477,7 @@
             "X": 37376,
             "Y": -10240,
             "Z": 66048,
-            "Room": 67,
-            "Angle": 0
+            "Room": 67
           }
         }
       ],
@@ -500,7 +496,6 @@
         }
       ]
     ],
-
     [
       [
         {
@@ -511,8 +506,7 @@
             "X": 38400,
             "Y": -10240,
             "Z": 75264,
-            "Room": 109,
-            "Angle": 0
+            "Room": 109
           }
         }
       ],
@@ -543,7 +537,6 @@
             "Angle": 16384
           }
         },
-
         {
           "EMType": 41,
           "EntityIndex": 98,
@@ -569,7 +562,6 @@
             "Angle": -16384
           }
         },
-
         {
           "EMType": 41,
           "EntityIndex": 98,
@@ -595,7 +587,6 @@
             "Angle": -16384
           }
         },
-
         {
           "EMType": 41,
           "EntityIndex": 98,
@@ -621,7 +612,6 @@
             "Angle": -32768
           }
         },
-
         {
           "EMType": 41,
           "EntityIndex": 98,
@@ -647,7 +637,6 @@
             "Angle": -32768
           }
         },
-
         {
           "EMType": 41,
           "EntityIndex": 98,
@@ -662,7 +651,6 @@
       ]
     ]
   ],
-
   "OneOf": [
     {
       "Leader": [
@@ -672,7 +660,9 @@
           "TextureMap": {
             "1690": {
               "108": {
-                "Rectangles": [ 46 ]
+                "Rectangles": [
+                  46
+                ]
               }
             }
           }
@@ -692,14 +682,15 @@
               "Angle": 16384
             }
           },
-
           {
             "Comments": "Adds a lever texture for the above.",
             "EMType": 21,
             "TextureMap": {
               "1613": {
                 "108": {
-                  "Rectangles": [ 53 ]
+                  "Rectangles": [
+                    53
+                  ]
                 }
               }
             }
@@ -718,14 +709,15 @@
               "Angle": -16384
             }
           },
-
           {
             "Comments": "Adds a lever texture for the above.",
             "EMType": 21,
             "TextureMap": {
               "1613": {
                 "108": {
-                  "Rectangles": [ 15 ]
+                  "Rectangles": [
+                    15
+                  ]
                 }
               }
             }
@@ -740,18 +732,18 @@
               "X": 37376,
               "Y": 2560,
               "Z": 46592,
-              "Room": 108,
-              "Angle": 0
+              "Room": 108
             }
           },
-
           {
             "Comments": "Adds a lever texture for the above.",
             "EMType": 21,
             "TextureMap": {
               "1613": {
                 "108": {
-                  "Rectangles": [ 18 ]
+                  "Rectangles": [
+                    18
+                  ]
                 }
               }
             }
@@ -759,7 +751,6 @@
         ]
       ]
     },
-
     {
       "Leader": [
         {
@@ -772,8 +763,9 @@
             "Room": 15
           },
           "Clicks": -4,
+          "FloorTexture": 1630,
           "SideTexture": 1630,
-          "FloorTexture": 1630
+          "Flags": 15
         }
       ],
       "Followers": [
@@ -781,80 +773,93 @@
           {
             "Comments": "Make a +Z ladder to get down to the lifeboat safely.",
             "EMType": 0,
-            "IsPositiveZ": true,
+            "TextureMap": {
+              "1713": {
+                "15": {
+                  "Rectangles": [
+                    36
+                  ]
+                }
+              },
+              "1725": {
+                "56": {
+                  "Rectangles": [
+                    29
+                  ]
+                }
+              }
+            },
             "Location": {
               "X": 61977,
               "Y": 4864,
               "Z": 48632,
               "Room": 15
             },
-            "TextureMap": {
-              "1713": {
-                "15": {
-                  "Rectangles": [ 36 ]
-                }
-              },
-              "1725": {
-                "56": {
-                  "Rectangles": [ 29 ]
-                }
-              }
-            }
+            "IsPositiveZ": true
           }
         ],
         [
           {
             "Comments": "Make a +X ladder to get down to the lifeboat safely.",
             "EMType": 0,
-            "IsPositiveX": true,
+            "TextureMap": {
+              "1713": {
+                "15": {
+                  "Rectangles": [
+                    71
+                  ]
+                }
+              },
+              "1725": {
+                "56": {
+                  "Rectangles": [
+                    40
+                  ]
+                }
+              }
+            },
             "Location": {
               "X": 61977,
               "Y": 4864,
               "Z": 48632,
               "Room": 15
             },
-            "TextureMap": {
-              "1713": {
-                "15": {
-                  "Rectangles": [ 71 ]
-                }
-              },
-              "1725": {
-                "56": {
-                  "Rectangles": [ 40 ]
-                }
-              }
-            }
+            "IsPositiveX": true
           }
         ],
         [
           {
             "Comments": "Make a -X ladder to get down to the lifeboat safely.",
             "EMType": 0,
-            "IsNegativeX": true,
+            "TextureMap": {
+              "1713": {
+                "15": {
+                  "Rectangles": [
+                    30
+                  ]
+                }
+              },
+              "1725": {
+                "56": {
+                  "Rectangles": [
+                    25
+                  ]
+                }
+              }
+            },
             "Location": {
               "X": 61977,
               "Y": 4864,
               "Z": 48632,
               "Room": 15
             },
-            "TextureMap": {
-              "1713": {
-                "15": {
-                  "Rectangles": [ 30 ]
-                }
-              },
-              "1725": {
-                "56": {
-                  "Rectangles": [ 25 ]
-                }
-              }
-            }
+            "IsNegativeX": true
           }
         ]
       ]
     }
   ],
-
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [],
   "Mirrored": []
 }

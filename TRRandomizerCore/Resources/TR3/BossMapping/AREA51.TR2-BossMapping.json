@@ -11,28 +11,9 @@
       }
     ]
   },
-
   {
     "Comments": "Add a trigger under the artefact so that picking it up will end the level.",
     "EMType": 61,
-    "TriggerEntry": {
-      "Setup": {
-        "Value": 4
-      },
-      "TrigSetup": {
-        "Value": 15872
-      },
-      "TrigType": 4,
-      "TrigActionList": [
-        {
-          "TrigAction": 0,
-          "Parameter": 44
-        },
-        {
-          "TrigAction": 7
-        }
-      ]
-    },
     "Locations": [
       {
         "X": 44544,
@@ -40,6 +21,18 @@
         "Z": 35328,
         "Room": 18
       }
-    ]
+    ],
+    "Trigger": {
+      "TrigType": 4,
+      "Mask": 31,
+      "Actions": [
+        {
+          "Parameter": 44
+        },
+        {
+          "Action": 7
+        }
+      ]
+    }
   }
 ]

@@ -11,9 +11,11 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             foreach (int roomNumber in GeometryMap.Keys)
             {
-                TR2Room room = level.Rooms[ConvertItemNumber(roomNumber, level.NumRooms)];
+                TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
                 List<int> rectangleRemovals = new List<int>();
                 List<int> triangleRemovals = new List<int>();
 
@@ -45,9 +47,11 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
+
             foreach (int roomNumber in GeometryMap.Keys)
             {
-                TR3Room room = level.Rooms[ConvertItemNumber(roomNumber, level.NumRooms)];
+                TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
                 List<int> rectangleRemovals = new List<int>();
                 List<int> triangleRemovals = new List<int>();
 

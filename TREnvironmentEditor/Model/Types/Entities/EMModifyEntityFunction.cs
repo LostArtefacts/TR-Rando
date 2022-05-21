@@ -1,4 +1,5 @@
-﻿using TRLevelReader.Model;
+﻿using TREnvironmentEditor.Helpers;
+using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {
@@ -13,12 +14,14 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
-            ModifyEntity(level.Entities[EntityIndex]);            
+            EMLevelData data = GetData(level);
+            ModifyEntity(level.Entities[data.ConvertEntity(EntityIndex)]);            
         }
 
         public override void ApplyToLevel(TR3Level level)
         {
-            ModifyEntity(level.Entities[EntityIndex]);
+            EMLevelData data = GetData(level);
+            ModifyEntity(level.Entities[data.ConvertEntity(EntityIndex)]);
         }
 
         private void ModifyEntity(TR2Entity entity)

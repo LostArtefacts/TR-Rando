@@ -11,28 +11,9 @@
       }
     ]
   },
-
   {
     "Comments": "Add a trigger under Puna so that picking up the stone will end the level.",
     "EMType": 61,
-    "TriggerEntry": {
-      "Setup": {
-        "Value": 4
-      },
-      "TrigSetup": {
-        "Value": 15872
-      },
-      "TrigType": 4,
-      "TrigActionList": [
-        {
-          "TrigAction": 0,
-          "Parameter": 62
-        },
-        {
-          "TrigAction": 7
-        }
-      ]
-    },
     "Locations": [
       {
         "X": 65024,
@@ -40,6 +21,18 @@
         "Z": 57856,
         "Room": 29
       }
-    ]
+    ],
+    "Trigger": {
+      "TrigType": 4,
+      "Mask": 31,
+      "Actions": [
+        {
+          "Parameter": 62
+        },
+        {
+          "Action": 7
+        }
+      ]
+    }
   }
 ]

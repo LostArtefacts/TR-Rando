@@ -12,17 +12,17 @@ namespace TREnvironmentEditor
         public static readonly JsonSerializerSettings Serializer = new JsonSerializerSettings
         {
             ContractResolver = new EMSerializationResolver(),
-            NullValueHandling = NullValueHandling.Ignore,
+            DefaultValueHandling = DefaultValueHandling.Ignore,
             Formatting = Formatting.Indented
         };
 
         public EMEditorSet All { get; set; }
-        public List<EMConditionalSingleEditorSet> ConditionalAll { get; set; }
         public EMEditorSet NonPurist { get; set; }
         public List<EMEditorSet> Any { get; set; }
         public List<List<EMEditorSet>> AllWithin { get; set; }
-        public List<EMConditionalEditorSet> ConditionalAllWithin { get; set; }
         public List<EMEditorGroupedSet> OneOf { get; set; }
+        public List<EMConditionalEditorSet> ConditionalAllWithin { get; set; }
+        public List<EMConditionalSingleEditorSet> ConditionalAll { get; set; }        
         public EMEditorSet Mirrored { get; set; }
         public Dictionary<ushort, ushort> AlternativeTextures { get; set; }
 

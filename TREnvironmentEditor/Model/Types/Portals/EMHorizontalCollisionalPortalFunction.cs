@@ -17,6 +17,8 @@ namespace TREnvironmentEditor.Model.Types
             // using the given locations to find the correct sector.
             // See 4.4.1 in https://opentomb.github.io/TRosettaStone3/trosettastone.html#_floordata_functions
 
+            EMLevelData data = GetData(level);
+
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
@@ -26,13 +28,13 @@ namespace TREnvironmentEditor.Model.Types
             // interested in first before making any changes.
             foreach (short fromRoomNumber in Portals.Keys)
             {
-                int convertedFromRoomNumber = ConvertItemNumber(fromRoomNumber, level.NumRooms);
+                short convertedFromRoomNumber = data.ConvertRoom(fromRoomNumber);
                 foreach (short toRoomNumber in Portals[fromRoomNumber].Keys)
                 {
-                    int convertedToRoomNumber = ConvertItemNumber(toRoomNumber, level.NumRooms);
+                    short convertedToRoomNumber = data.ConvertRoom(toRoomNumber);
                     foreach (EMLocation sectorLocation in Portals[fromRoomNumber][toRoomNumber])
                     {
-                        TRRoomSector sector = FDUtilities.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, (short)convertedFromRoomNumber, level, control);
+                        TRRoomSector sector = FDUtilities.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber, level, control);
 
                         if (!sectorMap.ContainsKey(sector))
                         {
@@ -51,6 +53,8 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
+
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
@@ -58,13 +62,13 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (short fromRoomNumber in Portals.Keys)
             {
-                int convertedFromRoomNumber = ConvertItemNumber(fromRoomNumber, level.NumRooms);
+                short convertedFromRoomNumber = data.ConvertRoom(fromRoomNumber);
                 foreach (short toRoomNumber in Portals[fromRoomNumber].Keys)
                 {
-                    int convertedToRoomNumber = ConvertItemNumber(toRoomNumber, level.NumRooms);
+                    short convertedToRoomNumber = data.ConvertRoom(toRoomNumber);
                     foreach (EMLocation sectorLocation in Portals[fromRoomNumber][toRoomNumber])
                     {
-                        TRRoomSector sector = FDUtilities.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, (short)convertedFromRoomNumber, level, control);
+                        TRRoomSector sector = FDUtilities.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber, level, control);
 
                         if (!sectorMap.ContainsKey(sector))
                         {

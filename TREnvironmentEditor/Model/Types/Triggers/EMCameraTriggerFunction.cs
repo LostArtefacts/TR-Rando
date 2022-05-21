@@ -40,6 +40,8 @@ namespace TREnvironmentEditor.Model.Types
                 cameraIndex = CameraIndex;
             }
 
+            EMLevelData data = GetData(level);
+
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
@@ -48,7 +50,7 @@ namespace TREnvironmentEditor.Model.Types
                 foreach (ushort item in AttachToItems)
                 {
                     TR2Entity attachToEntity = level.Entities[item];
-                    TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, (short)ConvertItemNumber(attachToEntity.Room, level.NumRooms), level, control);
+                    TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level, control);
                     AttachToSector(sector, control, cameraIndex);
                 }
             }
@@ -57,7 +59,7 @@ namespace TREnvironmentEditor.Model.Types
             {
                 foreach (EMLocation location in AttachToLocations)
                 {
-                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
                     AttachToSector(sector, control, cameraIndex);
                 }
             }
@@ -66,7 +68,7 @@ namespace TREnvironmentEditor.Model.Types
             {
                 foreach (short room in AttachToRooms)
                 {
-                    foreach (TRRoomSector sector in level.Rooms[(short)ConvertItemNumber(room, level.NumRooms)].SectorList)
+                    foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].SectorList)
                     {
                         AttachToSector(sector, control, cameraIndex);
                     }
@@ -93,6 +95,8 @@ namespace TREnvironmentEditor.Model.Types
                 cameraIndex = CameraIndex;
             }
 
+            EMLevelData data = GetData(level);
+
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
@@ -101,7 +105,7 @@ namespace TREnvironmentEditor.Model.Types
                 foreach (ushort item in AttachToItems)
                 {
                     TR2Entity attachToEntity = level.Entities[item];
-                    TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, (short)ConvertItemNumber(attachToEntity.Room, level.NumRooms), level, control);
+                    TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level, control);
                     AttachToSector(sector, control, cameraIndex);
                 }
             }
@@ -110,7 +114,7 @@ namespace TREnvironmentEditor.Model.Types
             {
                 foreach (EMLocation location in AttachToLocations)
                 {
-                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
+                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
                     AttachToSector(sector, control, cameraIndex);
                 }
             }
@@ -119,7 +123,7 @@ namespace TREnvironmentEditor.Model.Types
             {
                 foreach (short room in AttachToRooms)
                 {
-                    foreach (TRRoomSector sector in level.Rooms[(short)ConvertItemNumber(room, level.NumRooms)].Sectors)
+                    foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
                     {
                         AttachToSector(sector, control, cameraIndex);
                     }

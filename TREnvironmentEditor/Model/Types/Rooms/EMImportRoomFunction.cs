@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TRFDControl;
@@ -12,22 +11,18 @@ using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {
-    public class EMImportRoomFunction : BaseEMFunction, ITextureModifier
+    public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
     {
         private static readonly sbyte _solidSector = -127;
         private static readonly byte _noRoom = 255;
 
-        private static readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.All
-        };
-
-        public string LevelID { get; set; }
         public byte RoomNumber { get; set; }
         public EMLocation NewLocation { get; set; }
         public EMLocation LinkedLocation { get; set; }
         public ushort RectangleTexture { get; set; }
         public ushort TriangleTexture { get; set; }
+        public bool PreservePortals { get; set; }
+        public bool PreserveBoxes { get; set; }
 
         public EMImportRoomFunction()
         {
@@ -65,11 +60,11 @@ namespace TREnvironmentEditor.Model.Types
                 LightMode = roomDef.Room.LightMode,
                 NumDataWords = roomDef.Room.NumDataWords,
                 NumLights = roomDef.Room.NumLights,
-                NumPortals = 0,
+                NumPortals = PreservePortals ? roomDef.Room.NumPortals : (ushort)0,
                 NumStaticMeshes = roomDef.Room.NumStaticMeshes,
                 NumXSectors = roomDef.Room.NumXSectors,
                 NumZSectors = roomDef.Room.NumZSectors,
-                Portals = new TRRoomPortal[] { },
+                Portals = new TRRoomPortal[PreservePortals ? roomDef.Room.NumPortals : 0],
                 RoomData = new TR2RoomData
                 {
                     NumRectangles = roomDef.Room.RoomData.NumRectangles,
@@ -84,6 +79,19 @@ namespace TREnvironmentEditor.Model.Types
                 SectorList = new TRRoomSector[roomDef.Room.SectorList.Length],
                 StaticMeshes = new TR2RoomStaticMesh[roomDef.Room.NumStaticMeshes]
             };
+
+            if (PreservePortals)
+            {
+                for (int i = 0; i < newRoom.Portals.Length; i++)
+                {
+                    newRoom.Portals[i] = new TRRoomPortal
+                    {
+                        AdjoiningRoom = roomDef.Room.Portals[i].AdjoiningRoom,
+                        Normal = roomDef.Room.Portals[i].Normal,
+                        Vertices = roomDef.Room.Portals[i].Vertices
+                    };
+                }
+            }
 
             // Lights
             for (int i = 0; i < newRoom.Lights.Length; i++)
@@ -170,50 +178,58 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             // Boxes, zones and sectors
+            EMLevelData data = GetData(level);
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, LinkedLocation.Room, level, floorData);
-            ushort newBoxIndex = (ushort)level.NumBoxes;
-            int linkedBoxIndex = linkedSector.BoxIndex;
-
+            ushort newBoxIndex = ushort.MaxValue;
             // Duplicate the zone for the new box and link the current box to the new room
-            TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
-            TR2Box linkedBox = level.Boxes[linkedBoxIndex];
-            List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
-            overlaps.Add(newBoxIndex);
-            TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
-
-            // Make a new box for the new room
-            byte xmin = (byte)(newRoom.Info.X / SectorSize);
-            byte zmin = (byte)(newRoom.Info.Z / SectorSize);
-            byte xmax = (byte)(xmin + newRoom.NumXSectors);
-            byte zmax = (byte)(zmin + newRoom.NumZSectors);
-            TR2Box box = new TR2Box
+            if (!PreserveBoxes)
             {
-                XMin = xmin,
-                ZMin = zmin,
-                XMax = xmax,
-                ZMax = zmax,
-                TrueFloor = (short)newRoom.Info.YBottom
-            };
-            List<TR2Box> boxes = level.Boxes.ToList();
-            boxes.Add(box);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
+                TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
+                newBoxIndex = (ushort)level.NumBoxes;
+                int linkedBoxIndex = linkedSector.BoxIndex;
 
-            // Link the box to the room we're joining to
-            TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
+                TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
+                TR2Box linkedBox = level.Boxes[linkedBoxIndex];
+                List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
+                overlaps.Add(newBoxIndex);
+                TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
+
+                // Make a new box for the new room
+                byte xmin = (byte)(newRoom.Info.X / SectorSize);
+                byte zmin = (byte)(newRoom.Info.Z / SectorSize);
+                byte xmax = (byte)(xmin + newRoom.NumXSectors);
+                byte zmax = (byte)(zmin + newRoom.NumZSectors);
+                TR2Box box = new TR2Box
+                {
+                    XMin = xmin,
+                    ZMin = zmin,
+                    XMax = xmax,
+                    ZMax = zmax,
+                    TrueFloor = (short)newRoom.Info.YBottom
+                };
+                List<TR2Box> boxes = level.Boxes.ToList();
+                boxes.Add(box);
+                level.Boxes = boxes.ToArray();
+                level.NumBoxes++;
+
+                // Link the box to the room we're joining to
+                TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
+            }
 
             for (int i = 0; i < newRoom.SectorList.Length; i++)
             {
                 int sectorYDiff = 0;
                 ushort sectorBoxIndex = roomDef.Room.SectorList[i].BoxIndex;
-                // Only change the sector if it's not impenetrable
+                // Only change the sector if it's not impenetrable and we don't want to preserve the existing zoning
                 if (roomDef.Room.SectorList[i].Ceiling != _solidSector || roomDef.Room.SectorList[i].Floor != _solidSector)
                 {
                     sectorYDiff = ydiff / ClickSize;
-                    sectorBoxIndex = newBoxIndex;
+                    if (!PreserveBoxes)
+                    {
+                        sectorBoxIndex = newBoxIndex;
+                    }
                 }
 
                 newRoom.SectorList[i] = new TRRoomSector
@@ -222,8 +238,8 @@ namespace TREnvironmentEditor.Model.Types
                     Ceiling = (sbyte)(roomDef.Room.SectorList[i].Ceiling + sectorYDiff),
                     FDIndex = 0, // Initialise to no FD
                     Floor = (sbyte)(roomDef.Room.SectorList[i].Floor + sectorYDiff),
-                    RoomAbove = _noRoom,
-                    RoomBelow = _noRoom
+                    RoomAbove = PreservePortals ? roomDef.Room.SectorList[i].RoomAbove : _noRoom,
+                    RoomBelow = PreservePortals ? roomDef.Room.SectorList[i].RoomBelow : _noRoom
                 };
 
                 // Duplicate the FD too for everything except triggers. Track any portals
@@ -428,41 +444,47 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             // Boxes, zones and sectors
+            EMLevelData data = GetData(level);
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, (short)ConvertItemNumber(LinkedLocation.Room, level.NumRooms), level, floorData);
-            ushort newBoxIndex = (ushort)level.NumBoxes;
+            TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
+            ushort newBoxIndex = ushort.MaxValue;
             int linkedBoxIndex = (linkedSector.BoxIndex & 0x7FF0) >> 4;
             int linkedMaterial = linkedSector.BoxIndex & 0x000F; // TR3-5 store material in bits 0-3 - wood, mud etc
 
-            // Duplicate the zone for the new box and link the current box to the new room
-            TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
-            TR2Box linkedBox = level.Boxes[linkedBoxIndex];
-            List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
-            overlaps.Add(newBoxIndex);
-            TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
-
-            // Make a new box for the new room
-            byte xmin = (byte)(newRoom.Info.X / SectorSize);
-            byte zmin = (byte)(newRoom.Info.Z / SectorSize);
-            byte xmax = (byte)(xmin + newRoom.NumXSectors);
-            byte zmax = (byte)(zmin + newRoom.NumZSectors);
-            TR2Box box = new TR2Box
+            if (!PreserveBoxes)
             {
-                XMin = xmin,
-                ZMin = zmin,
-                XMax = xmax,
-                ZMax = zmax,
-                TrueFloor = (short)newRoom.Info.YBottom
-            };
-            List<TR2Box> boxes = level.Boxes.ToList();
-            boxes.Add(box);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
+                newBoxIndex = (ushort)level.NumBoxes;
 
-            // Link the box to the room we're joining to
-            TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
+                // Duplicate the zone for the new box and link the current box to the new room
+                TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
+                TR2Box linkedBox = level.Boxes[linkedBoxIndex];
+                List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
+                overlaps.Add(newBoxIndex);
+                TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
+
+                // Make a new box for the new room
+                byte xmin = (byte)(newRoom.Info.X / SectorSize);
+                byte zmin = (byte)(newRoom.Info.Z / SectorSize);
+                byte xmax = (byte)(xmin + newRoom.NumXSectors);
+                byte zmax = (byte)(zmin + newRoom.NumZSectors);
+                TR2Box box = new TR2Box
+                {
+                    XMin = xmin,
+                    ZMin = zmin,
+                    XMax = xmax,
+                    ZMax = zmax,
+                    TrueFloor = (short)newRoom.Info.YBottom
+                };
+                List<TR2Box> boxes = level.Boxes.ToList();
+                boxes.Add(box);
+                level.Boxes = boxes.ToArray();
+                level.NumBoxes++;
+
+                // Link the box to the room we're joining to
+                TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
+            }
 
             // Now update each of the sectors in the new room. The box index in each sector
             // needs to reference the material so pack this into the box index.
@@ -477,7 +499,10 @@ namespace TREnvironmentEditor.Model.Types
                 if (roomDef.Room.Sectors[i].Ceiling != _solidSector || roomDef.Room.Sectors[i].Floor != _solidSector)
                 {
                     sectorYDiff = ydiff / ClickSize;
-                    sectorBoxIndex = newBoxIndex;
+                    if (!PreserveBoxes)
+                    {
+                        sectorBoxIndex = newBoxIndex;
+                    }
                 }
 
                 newRoom.Sectors[i] = new TRRoomSector
@@ -486,8 +511,8 @@ namespace TREnvironmentEditor.Model.Types
                     Ceiling = (sbyte)(roomDef.Room.Sectors[i].Ceiling + sectorYDiff),
                     FDIndex = 0, // Initialise to no FD
                     Floor = (sbyte)(roomDef.Room.Sectors[i].Floor + sectorYDiff),
-                    RoomAbove = _noRoom,
-                    RoomBelow = _noRoom
+                    RoomAbove = PreservePortals ? roomDef.Room.Sectors[i].RoomAbove : _noRoom,
+                    RoomBelow = PreservePortals ? roomDef.Room.Sectors[i].RoomBelow : _noRoom
                 };
 
                 // Duplicate the FD too for everything except triggers. Track any portals
@@ -590,17 +615,6 @@ namespace TREnvironmentEditor.Model.Types
             rooms.Add(newRoom);
             level.Rooms = rooms.ToArray();
             level.NumRooms++;
-        }
-
-        private string ReadRoomResource(string versionID)
-        {
-            string path = string.Format(@"Resources\{0}\Rooms\{1}-Rooms.json", versionID, LevelID);
-            if (!File.Exists(path))
-            {
-                throw new IOException("Missing room definition data: " + path);
-            }
-
-            return File.ReadAllText(path);
         }
 
         public void RemapTextures(Dictionary<ushort, ushort> indexMap)

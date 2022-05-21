@@ -91,6 +91,22 @@ namespace TRLevelReader.Model
             }
         }
 
+        public bool IsWindy
+        {
+            get => (Flags & 0x20) > 0;
+            set
+            {
+                if (value)
+                {
+                    Flags |= 0x20;
+                }
+                else
+                {
+                    Flags &= ~0x20;
+                }
+            }
+        }
+
         public bool IsSwamp
         {
             get => (Flags & 0x80) > 0;

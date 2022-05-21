@@ -1,11 +1,23 @@
 {
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
   "ConditionalAll": [
     {
       "Condition": {
         "Comments": "Check if enemy #60 is a hostile human and if not, convert and move the heavy trigger.",
         "ConditionType": 0,
         "EntityIndex": 60,
-        "EntityTypes": [ 46, 56, 60, 61, 63 ]
+        "EntityTypes": [
+          46,
+          56,
+          60,
+          61,
+          63
+        ]
       },
       "OnFalse": [
         {
@@ -28,13 +40,13 @@
         {
           "Comments": "Convert the heavy trigger into a standard trigger.",
           "EMType": 69,
-          "TrigType": 0,
           "Location": {
             "X": 55808,
             "Y": -4864,
             "Z": 30208,
             "Room": 69
-          }
+          },
+          "TrigType": 0
         },
         {
           "Comments": "Move the heavy trigger underwater.",
@@ -55,7 +67,6 @@
       ]
     }
   ],
-
   "Mirrored": [
     {
       "Comments": "Move door #143 so Lara can pass.",

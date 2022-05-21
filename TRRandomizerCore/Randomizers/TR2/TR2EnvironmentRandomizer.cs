@@ -119,7 +119,16 @@ namespace TRRandomizerCore.Randomizers
                     mod.ApplyToLevel(level.Data, _disallowedTypes);
                 }
 
-                // ConditionalAllWithin is similar to above, but different sets of mods can be returned based
+                // OneOf is used for a leader-follower situation, but where only one follower from
+                // a group is wanted. An example is removing a ladder (the leader) and putting it in 
+                // a different position, so the followers are the different positions from which we pick one.
+                foreach (EMEditorGroupedSet mod in mapping.OneOf)
+                {
+                    EMEditorSet follower = mod.Followers[_generator.Next(0, mod.Followers.Count)];
+                    mod.ApplyToLevel(level.Data, follower, _disallowedTypes);
+                }
+
+                // ConditionalAllWithin is similar to AllWithin, but different sets of mods can be returned based
                 // on a given condition. For example, move a slot to a room, but only if a specific entity exists.
                 foreach (EMConditionalEditorSet conditionalSet in mapping.ConditionalAllWithin)
                 {
@@ -129,15 +138,6 @@ namespace TRRandomizerCore.Randomizers
                         EMEditorSet mod = modList[_generator.Next(0, modList.Count)];
                         mod.ApplyToLevel(level.Data, _disallowedTypes);
                     }
-                }
-
-                // OneOf is used for a leader-follower situation, but where only one follower from
-                // a group is wanted. An example is removing a ladder (the leader) and putting it in 
-                // a different position, so the followers are the different positions from which we pick one.
-                foreach (EMEditorGroupedSet mod in mapping.OneOf)
-                {
-                    EMEditorSet follower = mod.Followers[_generator.Next(0, mod.Followers.Count)];
-                    mod.ApplyToLevel(level.Data, follower, _disallowedTypes);
                 }
             }
 

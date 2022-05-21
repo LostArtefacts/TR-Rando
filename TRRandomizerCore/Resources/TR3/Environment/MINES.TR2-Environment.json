@@ -1,4 +1,10 @@
 {
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
   "ConditionalAll": [
     {
       "Condition": {
@@ -30,7 +36,15 @@
         "Comments": "Check if enemy #123 is a hostile human and if not, get rid of the AI entities and heavy trigger.",
         "ConditionType": 0,
         "EntityIndex": 123,
-        "EntityTypes": [ 46, 51, 53, 56, 60, 61, 63 ]
+        "EntityTypes": [
+          46,
+          51,
+          53,
+          56,
+          60,
+          61,
+          63
+        ]
       },
       "OnFalse": [
         {
@@ -64,7 +78,6 @@
       ]
     }
   ],
-
   "Mirrored": [
     {
       "Comments": "Move door #40 so the maze can be beaten",

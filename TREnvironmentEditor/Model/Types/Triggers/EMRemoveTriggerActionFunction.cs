@@ -10,17 +10,20 @@ namespace TREnvironmentEditor.Model.Types
     public class EMRemoveTriggerActionFunction : BaseEMFunction
     {
         public List<EMLocation> Locations { get; set; }
-        public FDActionListItem Action { get; set; }
+        public EMTriggerAction ActionItem { get; set; }
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+            FDActionListItem action = InitialiseActionItem(data);
+
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
-                RemoveAction(baseSector, control);
+                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                RemoveAction(baseSector, control, action);
             }
 
             control.WriteToLevel(level);
@@ -28,19 +31,27 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
+            FDActionListItem action = InitialiseActionItem(data);
+
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
             foreach (EMLocation location in Locations)
             {
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)ConvertItemNumber(location.Room, level.NumRooms), level, control);
-                RemoveAction(baseSector, control);
+                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                RemoveAction(baseSector, control, action);
             }
 
             control.WriteToLevel(level);
         }
 
-        private void RemoveAction(TRRoomSector sector, FDControl control)
+        private FDActionListItem InitialiseActionItem(EMLevelData data)
+        {
+            return ActionItem.ToFDAction(data);
+        }
+
+        private void RemoveAction(TRRoomSector sector, FDControl control, FDActionListItem action)
         {
             if (sector.FDIndex == 0)
             {
@@ -50,7 +61,7 @@ namespace TREnvironmentEditor.Model.Types
             List<FDEntry> entries = control.Entries[sector.FDIndex].FindAll(e => e is FDTriggerEntry);
             foreach (FDEntry entry in entries)
             {
-                (entry as FDTriggerEntry).TrigActionList.RemoveAll(a => a.TrigAction == Action.TrigAction && a.Parameter == Action.Parameter);
+                (entry as FDTriggerEntry).TrigActionList.RemoveAll(a => a.TrigAction == action.TrigAction && a.Parameter == action.Parameter);
             }
         }
     }

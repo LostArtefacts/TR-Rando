@@ -20,11 +20,13 @@ namespace TREnvironmentEditor.Model.Types
 
         public void ApplyTextures(TR2Level level)
         {
+            EMLevelData data = GetData(level);
+
             foreach (ushort texture in TextureMap.Keys)
             {
                 foreach (int roomIndex in TextureMap[texture].Keys)
                 {
-                    TR2Room room = level.Rooms[ConvertItemNumber(roomIndex, level.NumRooms)];
+                    TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
                     ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
                 }
             }
@@ -32,11 +34,13 @@ namespace TREnvironmentEditor.Model.Types
 
         public void ApplyTextures(TR3Level level)
         {
+            EMLevelData data = GetData(level);
+
             foreach (ushort texture in TextureMap.Keys)
             {
                 foreach (int roomIndex in TextureMap[texture].Keys)
                 {
-                    TR3Room room = level.Rooms[ConvertItemNumber(roomIndex, level.NumRooms)];
+                    TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
                     ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
                 }
             }

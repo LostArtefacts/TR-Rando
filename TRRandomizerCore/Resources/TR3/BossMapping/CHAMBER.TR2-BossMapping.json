@@ -5,20 +5,17 @@
     "EntityIndex": 22,
     "NewEntityType": 40
   },
-
   {
     "Comments": "Create another couple of enemies.",
     "EMType": 45,
     "EntityIndex": 16,
     "NewEntityType": 40
   },
-
   {
     "EMType": 45,
     "EntityIndex": 18,
     "NewEntityType": 40
   },
-
   {
     "Comments": "Amend the trigger under Lara to activate the new enemies.",
     "EMType": 68,
@@ -28,13 +25,11 @@
       "Z": 62976,
       "Room": 5
     },
-    "ActionItems": [
+    "Actions": [
       {
-        "TrigAction": 0,
         "Parameter": 16
       },
       {
-        "TrigAction": 0,
         "Parameter": 18
       }
     ]
