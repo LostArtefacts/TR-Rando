@@ -158,7 +158,7 @@ namespace TRRandomizerCore.Textures
             }
         }
 
-        protected override List<TRFace4> CollectLadders(TR3Level level)
+        protected override Dictionary<TRFace4, List<TRVertex>> CollectLadders(TR3Level level)
         {
             return LadderUtilities.GetClimbableFaces(level);
         }

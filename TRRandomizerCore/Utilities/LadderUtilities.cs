@@ -13,12 +13,12 @@ namespace TRRandomizerCore.Utilities
         private static readonly int _fullSectorSize = 1024;
         private static readonly int _qrtSectorSize = 256;
 
-        public static List<TRFace4> GetClimbableFaces(TR2Level level)
+        public static Dictionary<TRFace4, List<TRVertex>> GetClimbableFaces(TR2Level level)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            List<TRFace4> faces = new List<TRFace4>();
+            Dictionary<TRFace4, List<TRVertex>> faces = new Dictionary<TRFace4, List<TRVertex>>();
             foreach (TR2Room room in level.Rooms)
             {
                 foreach (TRRoomSector sector in room.SectorList)
@@ -30,12 +30,12 @@ namespace TRRandomizerCore.Utilities
             return faces;
         }
 
-        public static List<TRFace4> GetClimbableFaces(TR3Level level)
+        public static Dictionary<TRFace4, List<TRVertex>> GetClimbableFaces(TR3Level level)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            List<TRFace4> faces = new List<TRFace4>();
+            Dictionary<TRFace4, List<TRVertex>> faces = new Dictionary<TRFace4, List<TRVertex>>();
             foreach (TR3Room room in level.Rooms)
             {
                 foreach (TRRoomSector sector in room.Sectors)
@@ -48,7 +48,7 @@ namespace TRRandomizerCore.Utilities
             return faces;
         }
 
-        private static void ScanTR2SectorLadderFaces(List<TRFace4> faces, TR2Level level, FDControl floorData, TR2Room room, TRRoomSector sector, FDEntry entry = null)
+        private static void ScanTR2SectorLadderFaces(Dictionary<TRFace4, List<TRVertex>> faces, TR2Level level, FDControl floorData, TR2Room room, TRRoomSector sector, FDEntry entry = null)
         {
             if (entry == null && sector.FDIndex == 0)
             {
@@ -70,6 +70,11 @@ namespace TRRandomizerCore.Utilities
 
                 foreach (TRFace4 face in room.RoomData.Rectangles)
                 {
+                    if (faces.ContainsKey(face))
+                    {
+                        continue;
+                    }
+
                     List<TRVertex> faceVertices = new List<TRVertex>();
                     foreach (ushort v in face.Vertices)
                     {
@@ -78,7 +83,7 @@ namespace TRRandomizerCore.Utilities
 
                     if (IsWallMatch(vertMatches, faceVertices))
                     {
-                        faces.Add(face);
+                        faces.Add(face, faceVertices);
                     }
                 }
 
@@ -97,7 +102,7 @@ namespace TRRandomizerCore.Utilities
             }
         }
 
-        private static void ScanTR3SectorLadderFaces(List<TRFace4> faces, TR3Level level, FDControl floorData, TR3Room room, TRRoomSector sector, FDEntry entry = null)
+        private static void ScanTR3SectorLadderFaces(Dictionary<TRFace4, List<TRVertex>> faces, TR3Level level, FDControl floorData, TR3Room room, TRRoomSector sector, FDEntry entry = null)
         {
             if (entry == null && sector.FDIndex == 0)
             {
@@ -119,6 +124,11 @@ namespace TRRandomizerCore.Utilities
 
                 foreach (TRFace4 face in room.RoomData.Rectangles)
                 {
+                    if (faces.ContainsKey(face))
+                    {
+                        continue;
+                    }
+
                     List<TRVertex> faceVertices = new List<TRVertex>();
                     foreach (ushort v in face.Vertices)
                     {
@@ -127,7 +137,7 @@ namespace TRRandomizerCore.Utilities
 
                     if (IsWallMatch(vertMatches, faceVertices))
                     {
-                        faces.Add(face);
+                        faces.Add(face, faceVertices);
                     }
                 }
 
@@ -146,7 +156,7 @@ namespace TRRandomizerCore.Utilities
             }
         }
 
-        private static void ScanTR3SectorMonkeyFaces(List<TRFace4> faces, TR3Level level, FDControl floorData, TR3Room room, TRRoomSector sector, FDEntry entry = null)
+        private static void ScanTR3SectorMonkeyFaces(Dictionary<TRFace4, List<TRVertex>> faces, TR3Level level, FDControl floorData, TR3Room room, TRRoomSector sector, FDEntry entry = null)
         {
             if (entry == null && sector.FDIndex == 0)
             {
@@ -169,6 +179,11 @@ namespace TRRandomizerCore.Utilities
 
                 foreach (TRFace4 face in room.RoomData.Rectangles)
                 {
+                    if (faces.ContainsKey(face))
+                    {
+                        continue;
+                    }
+
                     List<TRVertex> faceVertices = new List<TRVertex>();
                     foreach (ushort v in face.Vertices)
                     {
@@ -177,7 +192,7 @@ namespace TRRandomizerCore.Utilities
 
                     if (IsCeilingMatch(vertMatches, faceVertices, y))
                     {
-                        faces.Add(face);
+                        faces.Add(face, faceVertices);
                     }
                 }
 

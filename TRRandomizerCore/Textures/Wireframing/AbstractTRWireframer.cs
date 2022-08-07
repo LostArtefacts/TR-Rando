@@ -21,7 +21,7 @@ namespace TRRandomizerCore.Textures
 
         private Dictionary<TRFace3, TRSize> _roomFace3s, _meshFace3s;
         private Dictionary<TRFace4, TRSize> _roomFace4s, _meshFace4s;
-        private List<TRFace4> _ladderFace4s;
+        private Dictionary<TRFace4, List<TRVertex>> _ladderFace4s;
 
         private ISet<ushort> _allTextures;
         private WireframeData _data;
@@ -42,7 +42,7 @@ namespace TRRandomizerCore.Textures
             _roomFace4s = new Dictionary<TRFace4, TRSize>();
             _meshFace3s = new Dictionary<TRFace3, TRSize>();
             _meshFace4s = new Dictionary<TRFace4, TRSize>();
-            _ladderFace4s = data.HighlightLadders ? CollectLadders(level) : new List<TRFace4>();
+            _ladderFace4s = data.HighlightLadders ? CollectLadders(level) : new Dictionary<TRFace4, List<TRVertex>>();
             _allTextures = new SortedSet<ushort>();
             _data = data;
 
@@ -126,7 +126,7 @@ namespace TRRandomizerCore.Textures
         {
             foreach (TRFace4 face in faces)
             {
-                if (_ladderFace4s.Contains(face))
+                if (_ladderFace4s.ContainsKey(face))
                     continue;
 
                 ushort texture = (ushort)(face.Texture & 0x0fff);
@@ -362,15 +362,27 @@ namespace TRRandomizerCore.Textures
 
             foreach (TRFace4 face in _roomFace4s.Keys)
             {
-                if (!_ladderFace4s.Contains(face))
+                if (!_ladderFace4s.ContainsKey(face))
                 {
                     face.Texture = RemapTexture(face.Texture, wireframeIndex);
                 }
             }
 
-            foreach (TRFace4 face in _ladderFace4s)
+            foreach (TRFace4 face in _ladderFace4s.Keys)
             {
                 face.Texture = RemapTexture(face.Texture, ladderIndex);
+
+                // Ensure the ladder isn't sideways - if the first two vertices don't have
+                // the same Y val and it's a wall, rotate the face once.
+                List<TRVertex> vertices = _ladderFace4s[face];
+                if (vertices.Count > 1 &&
+                    vertices[0].Y != vertices[1].Y &&
+                    (vertices.All(v => v.X == vertices[0].X) || vertices.All(v => v.Z == vertices[0].Z)))
+                {
+                    Queue<ushort> vertIndices = new Queue<ushort>(face.Vertices);
+                    vertIndices.Enqueue(vertIndices.Dequeue());
+                    face.Vertices = vertIndices.ToArray();
+                }
             }
         }
 
@@ -521,7 +533,7 @@ namespace TRRandomizerCore.Textures
             }
         }
 
-        protected abstract List<TRFace4> CollectLadders(L level);
+        protected abstract Dictionary<TRFace4, List<TRVertex>> CollectLadders(L level);
         protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
         protected abstract IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(L level);
         protected abstract IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(L level);
