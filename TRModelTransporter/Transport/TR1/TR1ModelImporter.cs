@@ -6,14 +6,18 @@ using TRModelTransporter.Data;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Handlers.Textures;
 using TRModelTransporter.Model.Definitions;
+using TRModelTransporter.Utilities;
 
 namespace TRModelTransporter.Transport
 {
     public class TR1ModelImporter : AbstractTRModelImporter<TREntities, TRLevel, TR1ModelDefinition>
     {
+        public TR1PaletteManager PaletteManager { get; set; }
+
         public TR1ModelImporter()
         {
             Data = new TR1DefaultDataProvider();
+            PaletteManager = new TR1PaletteManager();
         }
 
         protected override AbstractTextureImportHandler<TREntities, TRLevel, TR1ModelDefinition> CreateTextureHandler()
@@ -30,6 +34,10 @@ namespace TRModelTransporter.Transport
 
         protected override void Import(IEnumerable<TR1ModelDefinition> standardDefinitions, IEnumerable<TR1ModelDefinition> soundOnlyDefinitions)
         {
+            PaletteManager.Level = Level;
+            PaletteManager.ObsoleteModels = EntitiesToRemove.Select(e => Data.TranslateAlias(e)).ToList();
+
+            (_textureHandler as TR1TextureImportHandler).PaletteManager = PaletteManager;
             _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, null, ClearUnusedSprites, TexturePositionMonitor);
 
             _soundHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
@@ -38,7 +46,7 @@ namespace TRModelTransporter.Transport
 
             foreach (TR1ModelDefinition definition in standardDefinitions)
             {
-                _colourHandler.Import(Level, definition);
+                _colourHandler.Import(Level, definition, PaletteManager);
                 _meshHandler.Import(Level, definition);
                 _animationHandler.Import(Level, definition);
                 _cinematicHandler.Import(Level, definition);
@@ -46,6 +54,8 @@ namespace TRModelTransporter.Transport
             }
 
             _textureHandler.ResetUnusedTextures();
+
+            PaletteManager.Dispose();
         }
     }
 }

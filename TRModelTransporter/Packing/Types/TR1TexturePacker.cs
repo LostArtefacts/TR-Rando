@@ -6,6 +6,7 @@ using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
+using TRModelTransporter.Utilities;
 using TRTexture16Importer;
 
 namespace TRModelTransporter.Packing
@@ -13,6 +14,8 @@ namespace TRModelTransporter.Packing
     public class TR1TexturePacker : AbstractTexturePacker<TREntities, TRLevel>
     {
         private const int _maximumTiles = 16;
+
+        public TR1PaletteManager PaletteManager { get; set; }
 
         public override uint NumLevelImages => Level.NumImages;
 
@@ -97,15 +100,21 @@ namespace TRModelTransporter.Packing
 
         public override void SetTile(int tileIndex, Bitmap bitmap)
         {
-            TRTexImage8 tile = Level.Images8[tileIndex];
-            for (int y = 0; y < 256; y++)
+            if (PaletteManager == null)
             {
-                for (int x = 0; x < 256; x++)
+                PaletteManager = new TR1PaletteManager
                 {
-                    // Need to create the new colour in Palette8 then get the index
-                    // For now all imported textures will appear the same.
-                    tile.Pixels[y * 256 + x] = 0;
-                }
+                    Level = Level
+                };
+            }
+            PaletteManager.ChangedTiles[tileIndex] = bitmap;
+        }
+
+        protected override void PostCommit()
+        {
+            if (PaletteManager != null)
+            {
+                PaletteManager.MergeTiles();
             }
         }
     }

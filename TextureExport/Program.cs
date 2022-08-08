@@ -159,6 +159,9 @@ namespace TextureExport
                 case Mode.Html:
                     HtmlExporter.Export(inst, lvl);
                     break;
+                case Mode.Faces:
+                    FaceMapper.DrawFaces(inst, lvl, GetRoomArgs());
+                    break;
                 default:
                     Console.WriteLine("{0} mode is not supported for TR1.", mode);
                     break;

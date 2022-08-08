@@ -5,6 +5,7 @@ using TRLevelReader.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Packing;
+using TRModelTransporter.Utilities;
 
 namespace TRModelTransporter.Handlers.Textures
 {
@@ -13,6 +14,8 @@ namespace TRModelTransporter.Handlers.Textures
         private static readonly int _maxTextures = 2048; // Check this
 
         public override int MaximumTextures => _maxTextures;
+
+        public TR1PaletteManager PaletteManager { get; set; }
 
         protected override IEnumerable<TRSpriteSequence> GetExistingSpriteSequences()
         {
@@ -38,7 +41,10 @@ namespace TRModelTransporter.Handlers.Textures
 
         protected override AbstractTexturePacker<TREntities, TRLevel> CreatePacker()
         {
-            return new TR1TexturePacker(_level);
+            return new TR1TexturePacker(_level)
+            {
+                PaletteManager = PaletteManager
+            };
         }
 
         protected override void ProcessRemovals(AbstractTexturePacker<TREntities, TRLevel> packer)
@@ -106,7 +112,6 @@ namespace TRModelTransporter.Handlers.Textures
         {
             foreach (TR1ModelDefinition definition in indexMap.Keys)
             {
-                RemapMeshTextures(definition.Meshes, indexMap[definition]);
                 foreach (TRMesh mesh in definition.Meshes)
                 {
                     foreach (TRFace4 rect in mesh.TexturedRectangles)

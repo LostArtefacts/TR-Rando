@@ -77,6 +77,7 @@ namespace TRModelTransporter.Packing
                 if (result.OrphanCount == 0 && commitToLevel)
                 {
                     Commit();
+                    PostCommit();
                 }
 
                 return result;
@@ -352,6 +353,8 @@ namespace TRModelTransporter.Packing
                 SetTile(i, tile.BitmapGraphics.Bitmap);
             }
         }
+
+        protected virtual void PostCommit() { }
 
         public void Dispose()
         {
