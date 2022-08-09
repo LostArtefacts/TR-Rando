@@ -4,10 +4,11 @@ namespace TREnvironmentEditor.Model.Types
 {
     public class EMPlaceholderFunction : BaseEMFunction
     {
-        public override void ApplyToLevel(TR2Level level)
-        {
-            // NOOP
-        }
+        // NOOP
+
+        public override void ApplyToLevel(TRLevel level) { }
+
+        public override void ApplyToLevel(TR2Level level) { }
 
         public override void ApplyToLevel(TR3Level level) { }
     }

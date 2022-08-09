@@ -15,6 +15,27 @@ namespace TREnvironmentEditor.Model.Conditions
         // Does a room contain a secret?
         public short RoomIndex { get; set; }
 
+        protected override bool Evaluate(TRLevel level)
+        {
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
+
+            foreach (TRRoomSector sector in level.Rooms[RoomIndex].Sectors)
+            {
+                if (sector.FDIndex == 0)
+                {
+                    continue;
+                }
+
+                if (floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         protected override bool Evaluate(TR2Level level)
         {
             List<TR2Entity> entities = level.Entities.ToList();

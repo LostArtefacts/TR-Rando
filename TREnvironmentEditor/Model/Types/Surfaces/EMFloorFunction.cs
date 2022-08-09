@@ -25,6 +25,16 @@ namespace TREnvironmentEditor.Model.Types
             Flags = 0xF;
         }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            if (Clicks == 0)
+            {
+                return;
+            }
+
+            MoveFloor(level);
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             if (Clicks == 0)
@@ -33,6 +43,239 @@ namespace TREnvironmentEditor.Model.Types
             }
             
             MoveFloor(level);
+        }
+
+        private void MoveFloor(TRLevel level)
+        {
+            int clickChange = Clicks * ClickSize;
+
+            EMLevelData data = GetData(level);
+
+            FDControl fdc = new FDControl();
+            fdc.ParseFromLevel(level);
+
+            short roomNumber = data.ConvertRoom(Location.Room);
+            TRRoom room = level.Rooms[roomNumber];
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, fdc);
+            int sectorIndex = room.Sectors.ToList().IndexOf(sector);
+
+            // Find the current vertices for this tile
+            short x = (short)(sectorIndex / room.NumZSectors * SectorSize);
+            short z = (short)(sectorIndex % room.NumZSectors * SectorSize);
+            short y = (short)(sector.Floor * ClickSize);
+
+            List<TRRoomVertex> vertices = room.RoomData.Vertices.ToList();
+            List<ushort> oldVertIndices = new List<ushort>();
+
+            List<TRVertex> defVerts = GetTileVertices(x, y, z, false);
+            // Check the Y vals are unanimous because we currently only support raising/lowering flat surfaces
+            if (!defVerts.All(v => v.Y == defVerts[0].Y))
+            {
+                throw new NotImplementedException("Floor manipulation is limited to flat surfaces only.");
+            }
+
+            for (int i = 0; i < defVerts.Count; i++)
+            {
+                TRVertex vert = defVerts[i];
+                int vi = vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
+                if (vi != -1)
+                {
+                    oldVertIndices.Add((ushort)vi);
+                }
+                else
+                {
+                    oldVertIndices.Add((ushort)CreateRoomVertex(room, vert));
+                    vertices = room.RoomData.Vertices.ToList();
+                }
+            }
+
+            // Create new vertices - we can't just change the original vertex Y vals as adjoining tiles also use 
+            // those and we need the originals for the new sides to this platform.
+            List<ushort> newVertIndices = new List<ushort>();
+            foreach (ushort vert in oldVertIndices)
+            {
+                TRRoomVertex oldRoomVertex = vertices[vert];
+                TRVertex oldVert = vertices[vert].Vertex;
+                TRVertex newVertex = new TRVertex
+                {
+                    X = oldVert.X,
+                    Y = (short)(oldVert.Y + clickChange),
+                    Z = oldVert.Z
+                };
+                newVertIndices.Add((ushort)CreateRoomVertex(room, newVertex, oldRoomVertex.Lighting));
+            }
+
+            // Refresh
+            vertices = room.RoomData.Vertices.ToList();
+
+            // Get the tile face that matches the vertex list
+            List<TRFace4> rectangles = room.RoomData.Rectangles.ToList();
+            TRFace4 floorFace = rectangles.Find(r => r.Vertices.ToList().All(oldVertIndices.Contains));
+
+            // If the floor has been lowered (remember +Clicks = move down, -Clicks = move up)
+            // then the sides will also need lowering.
+            if (Clicks > 0)
+            {
+                // Find faces that share 2 of the old vertices
+                int floorY = room.RoomData.Vertices[floorFace.Vertices[0]].Vertex.Y;
+                foreach (TRFace4 face in rectangles)
+                {
+                    if (face == floorFace)
+                    {
+                        continue;
+                    }
+
+                    List<ushort> faceVerts = face.Vertices.ToList();
+                    List<ushort> sharedVerts = faceVerts.Where(oldVertIndices.Contains).ToList();
+                    List<ushort> uniqueVerts = faceVerts.Except(sharedVerts).ToList();
+                    if (sharedVerts.Count == 2 && uniqueVerts.Count == 2)
+                    {
+                        foreach (ushort sharedVert in sharedVerts)
+                        {
+                            int i = faceVerts.IndexOf(sharedVert);
+                            TRVertex oldVert = vertices[sharedVert].Vertex;
+                            foreach (ushort newVert in newVertIndices)
+                            {
+                                TRVertex newVertex = vertices[newVert].Vertex;
+                                if (newVertex.X == oldVert.X && newVertex.Z == oldVert.Z)
+                                {
+                                    faceVerts[i] = newVert;
+                                }
+                            }
+                        }
+                        face.Vertices = faceVerts.ToArray();
+                    }
+                }
+            }
+
+            // Now change the floor face's vertices, and its texture provided we want to.
+            if (floorFace != null && !RetainOriginalFloor)
+            {
+                floorFace.Vertices = newVertIndices.ToArray();
+                if (FloorTexture != ushort.MaxValue)
+                {
+                    floorFace.Texture = FloorTexture;
+                }
+            }
+
+            // Make faces for the new platform's sides if we have clicked up, again provided we want to.
+            if (Clicks < 0 && SideTexture != ushort.MaxValue)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    // Only texture this side if it's set in the flags
+                    if (((1 << i) & Flags) > 0)
+                    {
+                        int j = i == 3 ? 0 : (i + 1);
+                        rectangles.Add(new TRFace4
+                        {
+                            Texture = SideTexture,
+                            Vertices = new ushort[]
+                            {
+                                newVertIndices[j],
+                                newVertIndices[i],
+                                oldVertIndices[i],
+                                oldVertIndices[j]
+                            }
+                        });
+                    }
+                }
+            }
+
+            // Save the new faces
+            room.RoomData.Rectangles = rectangles.ToArray();
+            room.RoomData.NumRectangles = (short)rectangles.Count;
+
+            // Account for the added faces
+            room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
+
+            // Now shift the actual sector info and adjust the box if necessary.
+            // Make the floor solid too.
+            sector.Floor += Clicks;
+            sector.RoomBelow = 255;
+            AlterSectorBox(level, room, sectorIndex);
+
+            // Move any entities that share the same floor sector up or down the relevant number of clicks
+            foreach (TREntity entity in level.Entities)
+            {
+                if (entity.Room == roomNumber)
+                {
+                    TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, fdc);
+                    if (entitySector == sector)
+                    {
+                        entity.Y += clickChange;
+                    }
+                }
+            }
+        }
+
+        private void AlterSectorBox(TRLevel level, TRRoom room, int sectorIndex)
+        {
+            TRRoomSector sector = room.Sectors[sectorIndex];
+            if (sector.BoxIndex == ushort.MaxValue)
+            {
+                return;
+            }
+
+            if (TR1BoxUtilities.GetSectorCount(level, sector.BoxIndex) == 1)
+            {
+                // The box used by this sector is unique to this sector, so we can
+                // simply change the existing floor height to match the sector.
+                level.Boxes[sector.BoxIndex].TrueFloor = (short)(sector.Floor * ClickSize);
+            }
+            else
+            {
+                ushort currentBoxIndex = sector.BoxIndex;
+                ushort newBoxIndex = (ushort)level.NumBoxes;
+
+                // Make a new zone to match the addition of a new box.
+                TR1BoxUtilities.DuplicateZone(level, sector.BoxIndex);
+
+                // Add what will be the new box index as an overlap to adjoining boxes.
+                GenerateOverlaps(level, sector.BoxIndex, newBoxIndex);
+
+                // Make a new box for the sector.
+                uint xmin = (uint)(room.Info.X + (sectorIndex / room.NumZSectors) * SectorSize);
+                uint zmin = (uint)(room.Info.Z + (sectorIndex % room.NumZSectors) * SectorSize);
+                uint xmax = (uint)(xmin + SectorSize);
+                uint zmax = (uint)(zmin + SectorSize);
+                TRBox box = new TRBox
+                {
+                    XMin = xmin,
+                    ZMin = zmin,
+                    XMax = xmax,
+                    ZMax = zmax,
+                    TrueFloor = (short)(sector.Floor * ClickSize)
+                };
+
+                // Point the sector to the new box, and save it to the level
+                sector.BoxIndex = newBoxIndex;
+                List<TRBox> boxes = level.Boxes.ToList();
+                boxes.Add(box);
+                level.Boxes = boxes.ToArray();
+                level.NumBoxes++;
+
+                // Finally add the previous box as a neighbour to the new one.
+                TR1BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { currentBoxIndex });
+            }
+        }
+
+        private void GenerateOverlaps(TRLevel level, ushort currentBoxIndex, ushort newBoxIndex)
+        {
+            for (int i = 0; i < level.NumBoxes; i++)
+            {
+                TRBox box = level.Boxes[i];
+                // Anything that has the current box as an overlap will need
+                // to also have the new box, or if this is the current box, it
+                // will need the new box linked to it.
+                List<ushort> overlaps = TR1BoxUtilities.GetOverlaps(level, box);
+                if (overlaps.Contains(currentBoxIndex) || i == currentBoxIndex)
+                {
+                    // Add the new index and write it back
+                    overlaps.Add(newBoxIndex);
+                    TR1BoxUtilities.UpdateOverlaps(level, box, overlaps);
+                }
+            }
         }
 
         private void MoveFloor(TR2Level level)
@@ -75,6 +318,11 @@ namespace TREnvironmentEditor.Model.Types
                 if (vi != -1)
                 {
                     oldVertIndices.Add((ushort)vi);
+                }
+                else
+                {
+                    oldVertIndices.Add((ushort)CreateRoomVertex(room, vert));
+                    vertices = room.RoomData.Vertices.ToList();
                 }
             }
 
@@ -178,8 +426,10 @@ namespace TREnvironmentEditor.Model.Types
             // Account for the added faces
             room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
 
-            // Now shift the actual sector info and adjust the box if necessary
+            // Now shift the actual sector info and adjust the box if necessary.
+            // Make the floor solid too.
             sector.Floor += Clicks;
+            sector.RoomBelow = 255;
             AlterSectorBox(level, room, sectorIndex);
 
             // Move any entities that share the same floor sector up or down the relevant number of clicks

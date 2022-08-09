@@ -15,6 +15,19 @@ namespace TREnvironmentEditor.Model.Types
         public bool? OneShot { get; set; }
         public ushort? SwitchOrKeyRef { get; set; }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            EMLevelData data = GetData(level);
+
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, control);
+            ConvertTrigger(sector, control);
+
+            control.WriteToLevel(level);
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             EMLevelData data = GetData(level);

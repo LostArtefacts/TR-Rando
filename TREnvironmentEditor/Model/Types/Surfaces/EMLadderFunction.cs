@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
@@ -14,6 +15,11 @@ namespace TREnvironmentEditor.Model.Types
         public bool IsPositiveZ { get; set; }
         public bool IsNegativeX { get; set; }
         public bool IsNegativeZ { get; set; }
+
+        public override void ApplyToLevel(TRLevel level)
+        {
+            throw new NotSupportedException();
+        }
 
         public override void ApplyToLevel(TR2Level level)
         {

@@ -13,6 +13,27 @@ namespace TREnvironmentEditor.Model.Types
         public ushort NewSwitchIndex { get; set; }
         public ushort OldSwitchIndex { get; set; }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            EMLevelData data = GetData(level);
+
+            SetupLocations(data, level.Entities);
+
+            // Duplicate the triggers to the switch's location
+            base.ApplyToLevel(level);
+
+            // Go one step further and replace the duplicated trigger with the new switch ref
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            UpdateTriggers(data, control, delegate (EMLocation location)
+            {
+                return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+            });
+
+            control.WriteToLevel(level);
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             EMLevelData data = GetData(level);
@@ -51,6 +72,32 @@ namespace TREnvironmentEditor.Model.Types
             });
 
             control.WriteToLevel(level);
+        }
+
+        private void SetupLocations(EMLevelData data, TREntity[] entities)
+        {
+            // Get a location for the switch we're interested in
+            TREntity switchEntity = entities[data.ConvertEntity(NewSwitchIndex)];
+            Locations = new List<EMLocation>
+            {
+                new EMLocation
+                {
+                    X = switchEntity.X,
+                    Y = switchEntity.Y,
+                    Z = switchEntity.Z,
+                    Room = data.ConvertRoom(switchEntity.Room)
+                }
+            };
+
+            // Get the location of the old switch
+            switchEntity = entities[data.ConvertEntity(OldSwitchIndex)];
+            BaseLocation = new EMLocation
+            {
+                X = switchEntity.X,
+                Y = switchEntity.Y,
+                Z = switchEntity.Z,
+                Room = data.ConvertRoom(switchEntity.Room)
+            };
         }
 
         private void SetupLocations(EMLevelData data, TR2Entity[] entities)

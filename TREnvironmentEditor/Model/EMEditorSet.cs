@@ -8,6 +8,17 @@ namespace TREnvironmentEditor.Model
     {
         // A set of modifications that must be done together e.g. adding a ladder and a step
 
+        public void ApplyToLevel(TRLevel level, IEnumerable<EMType> excludedTypes = null)
+        {
+            if (IsApplicable(excludedTypes))
+            {
+                foreach (BaseEMFunction mod in this)
+                {
+                    mod.ApplyToLevel(level);
+                }
+            }
+        }
+
         public void ApplyToLevel(TR2Level level, IEnumerable<EMType> excludedTypes = null)
         {
             if (IsApplicable(excludedTypes))

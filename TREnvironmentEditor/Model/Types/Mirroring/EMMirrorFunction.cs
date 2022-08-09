@@ -20,6 +20,21 @@ namespace TREnvironmentEditor.Model.Types
 
         private int _worldWidth, _xAdjustment;
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            CalculateWorldWidth(level);
+
+            MirrorFloorData(level);
+            MirrorRooms(level);
+            MirrorBoxes(level);
+
+            MirrorStaticMeshes(level);
+            MirrorEntities(level);
+            MirrorNullMeshes(level);
+
+            MirrorTextures(level);
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             CalculateWorldWidth(level);
@@ -48,6 +63,16 @@ namespace TREnvironmentEditor.Model.Types
             MirrorNullMeshes(level);
 
             MirrorTextures(level);
+        }
+
+        private void CalculateWorldWidth(TRLevel level)
+        {
+            _worldWidth = 0;
+            _xAdjustment = 0;
+            foreach (TRRoom room in level.Rooms)
+            {
+                _worldWidth = Math.Max(_worldWidth, room.Info.X + SectorSize * room.NumXSectors);
+            }
         }
 
         private void CalculateWorldWidth(TR2Level level)
@@ -94,6 +119,21 @@ namespace TREnvironmentEditor.Model.Types
             T temp = arr[pos1];
             arr[pos1] = arr[pos2];
             arr[pos2] = temp;
+        }
+
+        private void MirrorFloorData(TRLevel level)
+        {
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
+
+            foreach (TRRoom room in level.Rooms)
+            {
+                List<TRRoomSector> sectors = room.Sectors.ToList();
+                MirrorSectors(sectors, room.NumXSectors, room.NumZSectors, floorData);
+                room.Sectors = sectors.ToArray();
+            }
+
+            floorData.WriteToLevel(level);
         }
 
         private void MirrorFloorData(TR2Level level)
@@ -261,24 +301,100 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
+        private void MirrorRooms(TRLevel level)
+        {
+            foreach (TRRoom room in level.Rooms)
+            {
+                int oldRoomX = room.Info.X;
+                room.Info.X = FlipWorldX(oldRoomX);
+                room.Info.X -= room.NumXSectors * SectorSize;
+                Debug.Assert(room.Info.X >= 0);
+                // Flip room sprites separately as they don't sit on tile edges
+                List<TRRoomVertex> processedVerts = new List<TRRoomVertex>();
+                foreach (TRRoomSprite sprite in room.RoomData.Sprites)
+                {
+                    TRRoomVertex roomVertex = room.RoomData.Vertices[sprite.Vertex];
+
+                    // Flip the old world coordinate, then subtract the new room position
+                    int x = oldRoomX + roomVertex.Vertex.X;
+                    x = FlipWorldX(x);
+                    x -= room.Info.X;
+                    roomVertex.Vertex.X = (short)x;
+
+                    Debug.Assert(roomVertex.Vertex.X >= 0);
+                    processedVerts.Add(roomVertex);
+                }
+                
+                // Flip the face vertices
+                foreach (TRRoomVertex vert in room.RoomData.Vertices)
+                {
+                    if (processedVerts.Contains(vert))
+                    {
+                        continue;
+                    }
+
+                    int sectorX = vert.Vertex.X / SectorSize;
+                    int newSectorX = room.NumXSectors - sectorX;
+                    vert.Vertex.X = (short)(newSectorX * SectorSize);
+                    Debug.Assert(vert.Vertex.X >= 0);
+                }
+
+                // Change visibility portal vertices and flip the normal for X
+                foreach (TRRoomPortal portal in room.Portals)
+                {
+                    foreach (TRVertex vert in portal.Vertices)
+                    {
+                        int sectorX = (int)Math.Round((double)vert.X / SectorSize);
+                        int newSectorX = room.NumXSectors - sectorX;
+                        vert.X = (short)(newSectorX * SectorSize);
+                        Debug.Assert(vert.X >= 0);
+                    }
+                    portal.Normal.X *= -1;
+                }
+
+                // Move the lights to their new spots
+                foreach (TRRoomLight light in room.Lights)
+                {
+                    light.X = FlipWorldX(light.X);
+                }
+
+                // Move the static meshes
+                foreach (TRRoomStaticMesh mesh in room.StaticMeshes)
+                {
+                    mesh.X = (uint)FlipWorldX((int)mesh.X);
+
+                    // Convert the angle to short units for consistency and then flip it if +/-X
+                    int angle = mesh.Rotation + _south;
+                    if (angle == _east || angle == _west)
+                    {
+                        angle *= -1;
+                        angle -= _south;
+                        mesh.Rotation = (ushort)angle;
+                    }
+                }
+            }
+        }
+
         private void MirrorRooms(TR2Level level)
         {
             foreach (TR2Room room in level.Rooms)
             {
-                room.Info.X = FlipWorldX(room.Info.X);
+                int oldRoomX = room.Info.X;
+                room.Info.X = FlipWorldX(oldRoomX);
                 room.Info.X -= room.NumXSectors * SectorSize;
                 Debug.Assert(room.Info.X >= 0);
-
                 // Flip room sprites separately as they don't sit on tile edges
                 List<TR2RoomVertex> processedVerts = new List<TR2RoomVertex>();
                 foreach (TRRoomSprite sprite in room.RoomData.Sprites)
                 {
                     TR2RoomVertex roomVertex = room.RoomData.Vertices[sprite.Vertex];
-                    int xDiff = roomVertex.Vertex.X % SectorSize;
-                    int sectorX = (roomVertex.Vertex.X + xDiff) / SectorSize;
-                    int newSectorX = (room.NumXSectors - sectorX) * SectorSize;
-                    newSectorX += SectorSize - xDiff;
-                    roomVertex.Vertex.X = (short)newSectorX;
+
+                    // Flip the old world coordinate, then subtract the new room position
+                    int x = oldRoomX + roomVertex.Vertex.X;
+                    x = FlipWorldX(x);
+                    x -= room.Info.X;
+                    roomVertex.Vertex.X = (short)x;
+
                     Debug.Assert(roomVertex.Vertex.X >= 0);
                     processedVerts.Add(roomVertex);
                 }
@@ -337,20 +453,22 @@ namespace TREnvironmentEditor.Model.Types
         {
             foreach (TR3Room room in level.Rooms)
             {
-                room.Info.X = FlipWorldX(room.Info.X);
+                int oldRoomX = room.Info.X;
+                room.Info.X = FlipWorldX(oldRoomX);
                 room.Info.X -= room.NumXSectors * SectorSize;
                 Debug.Assert(room.Info.X >= 0);
-
                 // Flip room sprites separately as they don't sit on tile edges
                 List<TR3RoomVertex> processedVerts = new List<TR3RoomVertex>();
                 foreach (TRRoomSprite sprite in room.RoomData.Sprites)
                 {
                     TR3RoomVertex roomVertex = room.RoomData.Vertices[sprite.Vertex];
-                    int xDiff = roomVertex.Vertex.X % SectorSize;
-                    int sectorX = (roomVertex.Vertex.X + xDiff) / SectorSize;
-                    int newSectorX = (room.NumXSectors - sectorX) * SectorSize;
-                    newSectorX += SectorSize - xDiff;
-                    roomVertex.Vertex.X = (short)newSectorX;
+
+                    // Flip the old world coordinate, then subtract the new room position
+                    int x = oldRoomX + roomVertex.Vertex.X;
+                    x = FlipWorldX(x);
+                    x -= room.Info.X;
+                    roomVertex.Vertex.X = (short)x;
+
                     Debug.Assert(roomVertex.Vertex.X >= 0);
                     processedVerts.Add(roomVertex);
                 }
@@ -402,6 +520,11 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
+        private void MirrorBoxes(TRLevel level)
+        {
+            MirrorBoxes(level.Boxes);
+        }
+
         private void MirrorBoxes(TR2Level level)
         {
             MirrorBoxes(level.Boxes);
@@ -410,6 +533,19 @@ namespace TREnvironmentEditor.Model.Types
         private void MirrorBoxes(TR3Level level)
         {
             MirrorBoxes(level.Boxes);
+        }
+
+        private void MirrorBoxes(TRBox[] boxes)
+        {
+            // TR1 boxes are in world coordinate values
+            foreach (TRBox box in boxes)
+            {
+                uint newMaxX = (uint)FlipWorldX((int)box.XMin);
+                uint newMinX = (uint)FlipWorldX((int)box.XMax);
+                Debug.Assert(newMaxX >= newMinX);
+                box.XMin = newMinX;
+                box.XMax = newMaxX;
+            }
         }
 
         private void MirrorBoxes(TR2Box[] boxes)
@@ -426,6 +562,14 @@ namespace TREnvironmentEditor.Model.Types
                 box.XMin = newMinX;
                 box.XMax = newMaxX;
             }
+        }
+
+        private void MirrorStaticMeshes(TRLevel level)
+        {
+            MirrorStaticMeshes(level.StaticMeshes, delegate (TRStaticMesh staticMesh)
+            {
+                return TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
+            });
         }
 
         private void MirrorStaticMeshes(TR2Level level)
@@ -468,6 +612,17 @@ namespace TREnvironmentEditor.Model.Types
             box.MaxX = (short)(min * -1);
         }
 
+        private void MirrorEntities(TRLevel level)
+        {
+            foreach (TREntity entity in level.Entities)
+            {
+                entity.X = FlipWorldX(entity.X);
+                AdjustTR1EntityPosition(entity);
+            }
+
+            AdjustDoors(level.Entities.ToList().FindAll(e => TR1EntityUtilities.IsDoorType((TREntities)e.TypeID)));
+        }
+
         private void MirrorEntities(TR2Level level)
         {
             foreach (TR2Entity entity in level.Entities)
@@ -488,6 +643,58 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             AdjustDoors(level.Entities.ToList().FindAll(e => TR3EntityUtilities.IsDoorType((TR3Entities)e.TypeID)));
+        }
+
+        private void AdjustTR1EntityPosition(TREntity entity)
+        {
+            entity.Angle *= -1;
+
+            switch ((TREntities)entity.TypeID)
+            {
+                case TREntities.Animating1:
+                case TREntities.Animating2:
+                case TREntities.Animating3:
+                case TREntities.AtlanteanEgg:
+                    switch (entity.Angle)
+                    {
+                        case _east:
+                            entity.Z -= SectorSize;
+                            break;
+                        case _west:
+                            entity.Z += SectorSize;
+                            break;
+                    }
+                    break;
+                case TREntities.AdamEgg:
+                    switch (entity.Angle)
+                    {
+                        case _east:
+                            entity.Z -= SectorSize * 2;
+                            break;
+                        case _west:
+                            entity.Z += SectorSize * 2;
+                            break;
+                    }
+                    break;
+                case TREntities.BridgeTilt1:
+                case TREntities.BridgeTilt2:
+                    switch (entity.Angle)
+                    {
+                        case _south:
+                            entity.Angle = _north;
+                            break;
+                        case _west:
+                            entity.Angle = _east;
+                            break;
+                        case _north:
+                            entity.Angle = _south;
+                            break;
+                        case _east:
+                            entity.Angle = _west;
+                            break;
+                    }
+                    break;
+            }
         }
 
         private void AdjustTR2EntityPosition(TR2Entity entity)
@@ -696,6 +903,37 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
+        private void AdjustDoors(List<TREntity> doors)
+        {
+            // Double doors need to be swapped otherwise they open in the wrong direction.
+            // Iterate backwards and try to find doors that are next to each other.
+            // If found, swap their types.
+            for (int i = doors.Count - 1; i >= 0; i--)
+            {
+                TREntity door1 = doors[i];
+                for (int j = doors.Count - 1; j >= 0; j--)
+                {
+                    if (j == i)
+                    {
+                        continue;
+                    }
+
+                    TREntity door2 = doors[j];
+
+                    if (AreDoubleDoors(door1, door2))
+                    {
+                        short tmp = door1.TypeID;
+                        door1.TypeID = door2.TypeID;
+                        door2.TypeID = tmp;
+
+                        // Don't process these doors again, so just remove the first
+                        doors.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+        }
+
         private void AdjustDoors(List<TR2Entity> doors)
         {
             // Double doors need to be swapped otherwise they open in the wrong direction.
@@ -727,6 +965,17 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
+        private bool AreDoubleDoors(TREntity door1, TREntity door2)
+        {
+            // If the difference between X or Z position is one sector size, they share the same Y val,
+            // and they are facing the same diretion, then they're double doors.
+            return door1.Room == door2.Room &&
+                door1.TypeID != door2.TypeID &&
+                door1.Y == door2.Y &&
+                door1.Angle == door2.Angle &&
+                (Math.Abs(door1.X - door2.X) == SectorSize || Math.Abs(door1.Z - door2.Z) == SectorSize);
+        }
+
         private bool AreDoubleDoors(TR2Entity door1, TR2Entity door2)
         {
             // If the difference between X or Z position is one sector size, they share the same Y val,
@@ -736,6 +985,26 @@ namespace TREnvironmentEditor.Model.Types
                 door1.Y == door2.Y &&
                 door1.Angle == door2.Angle &&
                 (Math.Abs(door1.X - door2.X) == SectorSize || Math.Abs(door1.Z - door2.Z) == SectorSize);
+        }
+
+        private void MirrorNullMeshes(TRLevel level)
+        {
+            // The deals with actual cameras as well as sinks
+            foreach (TRCamera camera in level.Cameras)
+            {
+                camera.X = FlipWorldX(camera.X);
+            }
+
+            foreach (TRSoundSource sound in level.SoundSources)
+            {
+                sound.X = FlipWorldX(sound.X);
+            }
+
+            // TODO: Handle TRCinematicFrames by working out how to mirror animation
+            // frames e.g. the LaraMiscAnim that corresponds with the cinematics.
+            // Currently, frames are left untouched so the Rig starting animation
+            // and dragon dagger cutscene behave normally. Lara is a bit out of
+            // place in the HSH cinematics for now.
         }
 
         private void MirrorNullMeshes(TR2Level level)
@@ -770,6 +1039,81 @@ namespace TREnvironmentEditor.Model.Types
             {
                 sound.X = FlipWorldX(sound.X);
             }
+        }
+
+        private void MirrorTextures(TRLevel level)
+        {
+            // Collect unique texture references from each of the rooms
+            ISet<ushort> textureReferences = new HashSet<ushort>();
+
+            // Keep track of static meshes so they are only processed once,
+            // and so we only target those actually in use in rooms.
+            List<TRStaticMesh> staticMeshes = level.StaticMeshes.ToList();
+            ISet<TRStaticMesh> processedMeshes = new HashSet<TRStaticMesh>();
+
+            foreach (TRRoom room in level.Rooms)
+            {
+                // Invert the faces, otherwise they are inside out
+                foreach (TRFace4 f in room.RoomData.Rectangles)
+                {
+                    Swap(f.Vertices, 0, 3);
+                    Swap(f.Vertices, 1, 2);
+                    textureReferences.Add(f.Texture);
+                }
+
+                foreach (TRFace3 f in room.RoomData.Triangles)
+                {
+                    Swap(f.Vertices, 0, 2);
+                    textureReferences.Add(f.Texture);
+                }
+
+                foreach (TRRoomStaticMesh roomStaticMesh in room.StaticMeshes)
+                {
+                    TRStaticMesh staticMesh = staticMeshes.Find(m => m.ID == roomStaticMesh.MeshID);
+                    if (!processedMeshes.Add(staticMesh))
+                    {
+                        continue;
+                    }
+
+                    TRMesh mesh = TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
+
+                    // Flip the faces and store texture references
+                    foreach (TRFace4 f in mesh.TexturedRectangles)
+                    {
+                        Swap(f.Vertices, 0, 3);
+                        Swap(f.Vertices, 1, 2);
+                        textureReferences.Add(f.Texture);
+                    }
+
+                    foreach (TRFace4 f in mesh.ColouredRectangles)
+                    {
+                        Swap(f.Vertices, 0, 3);
+                        Swap(f.Vertices, 1, 2);
+                    }
+
+                    foreach (TRFace3 f in mesh.TexturedTriangles)
+                    {
+                        Swap(f.Vertices, 0, 2);
+                        textureReferences.Add(f.Texture);
+                    }
+
+                    foreach (TRFace3 f in mesh.ColouredTriangles)
+                    {
+                        Swap(f.Vertices, 0, 2);
+                    }
+                }
+            }
+
+            // Include all animated texture references too
+            foreach (TRAnimatedTexture anim in level.AnimatedTextures)
+            {
+                for (int i = 0; i < anim.Textures.Length; i++)
+                {
+                    textureReferences.Add(anim.Textures[i]);
+                }
+            }
+
+            MirrorObjectTextures(textureReferences, level.ObjectTextures);
         }
 
         private void MirrorTextures(TR2Level level)

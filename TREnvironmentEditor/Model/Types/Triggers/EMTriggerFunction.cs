@@ -17,6 +17,40 @@ namespace TREnvironmentEditor.Model.Types
         public EMTrigger Trigger { get; set; }
         public bool Replace { get; set; }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            EMLevelData data = GetData(level);
+            FDTriggerEntry triggerEntry = InitialiseTriggerEntry(data);
+
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            if (Locations != null)
+            {
+                foreach (EMLocation location in Locations)
+                {
+                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                    CreateTrigger(sector, control, triggerEntry);
+                }
+            }
+
+            if (Rooms != null)
+            {
+                foreach (short room in Rooms)
+                {
+                    foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
+                    {
+                        if (!sector.IsImpenetrable && sector.RoomBelow == 255)
+                        {
+                            CreateTrigger(sector, control, triggerEntry);
+                        }
+                    }
+                }
+            }
+
+            control.WriteToLevel(level);
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             EMLevelData data = GetData(level);

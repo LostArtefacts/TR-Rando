@@ -9,6 +9,43 @@ namespace TREnvironmentEditor.Model.Types
     {
         public int[] DetachedRooms { get; set; }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            EMLevelData data = GetData(level);
+            
+            foreach (int roomNumber in RoomNumbers)
+            {
+                level.Rooms[data.ConvertRoom(roomNumber)].Drain();
+            }
+
+            foreach (int roomNumber in RoomNumbers)
+            {
+                TRRoom room = level.Rooms[data.ConvertRoom(roomNumber)];
+
+                ISet<byte> roomsBelow = GetAdjacentRooms(room.Sectors, false);
+                foreach (byte roomBelowNumber in roomsBelow)
+                {
+                    TRRoom roomBelow = level.Rooms[roomBelowNumber];
+                    if (roomBelow.ContainsWater)
+                    {
+                        AddWaterSurface(room, false, RoomNumbers);
+                        AddWaterSurface(roomBelow, true, RoomNumbers);
+                    }
+                }
+
+                ISet<byte> roomsAbove = GetAdjacentRooms(room.Sectors, true);
+                foreach (byte roomAboveNumber in roomsAbove)
+                {
+                    TRRoom roomAbove = level.Rooms[roomAboveNumber];
+                    if (!roomAbove.ContainsWater)
+                    {
+                        RemoveWaterSurface(room);
+                        RemoveWaterSurface(roomAbove);
+                    }
+                }
+            }
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             EMLevelData data = GetData(level);

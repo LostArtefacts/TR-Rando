@@ -27,6 +27,38 @@ namespace TRLevelReader.Model
 
         public ushort Flags { get; set; }
 
+        public bool ClearBody
+        {
+            get => (Flags & 0x8000) > 0;
+            set
+            {
+                if (value)
+                {
+                    Flags |= 0x8000;
+                }
+                else
+                {
+                    Flags = (ushort)(Flags & ~0x8000);
+                }
+            }
+        }
+
+        public bool Invisible
+        {
+            get => (Flags & 0x100) > 0;
+            set
+            {
+                if (value)
+                {
+                    Flags |= 0x100;
+                }
+                else
+                {
+                    Flags = (ushort)(Flags & ~0x100);
+                }
+            }
+        }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())

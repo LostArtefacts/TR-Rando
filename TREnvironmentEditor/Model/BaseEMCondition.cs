@@ -15,6 +15,30 @@ namespace TREnvironmentEditor.Model
         public List<BaseEMCondition> Or { get; set; }
         public BaseEMCondition Xor { get; set; }
 
+        public bool GetResult(TRLevel level)
+        {
+            bool result = Evaluate(level);
+            if (Negate)
+            {
+                result = !result;
+            }
+
+            if (And != null)
+            {
+                And.ForEach(a => result &= a.GetResult(level));
+            }
+            if (Or != null)
+            {
+                Or.ForEach(o => result |= o.GetResult(level));
+            }
+            if (Xor != null)
+            {
+                result ^= Xor.GetResult(level);
+            }
+
+            return result;
+        }
+
         public bool GetResult(TR2Level level)
         {
             bool result = Evaluate(level);
@@ -63,6 +87,7 @@ namespace TREnvironmentEditor.Model
             return result;
         }
 
+        protected abstract bool Evaluate(TRLevel level);
         protected abstract bool Evaluate(TR2Level level);
         protected abstract bool Evaluate(TR3Level level);
     }

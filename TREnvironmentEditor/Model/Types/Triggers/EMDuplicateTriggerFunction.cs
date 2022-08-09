@@ -12,6 +12,34 @@ namespace TREnvironmentEditor.Model.Types
         public List<EMLocation> Locations { get; set; }
         public EMLocation BaseLocation { get; set; }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            EMLevelData data = GetData(level);
+
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);
+            if (baseSector.FDIndex == 0)
+            {
+                return;
+            }
+
+            List<FDEntry> triggerEntries = control.Entries[baseSector.FDIndex].FindAll(e => e is FDTriggerEntry);
+            if (triggerEntries.Count == 0)
+            {
+                return;
+            }
+
+            foreach (EMLocation location in Locations)
+            {
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                AppendTriggers(sector, triggerEntries, control);
+            }
+
+            control.WriteToLevel(level);
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             EMLevelData data = GetData(level);
