@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TRLevelReader.Helpers;
 using TRLevelReader.Model.Enums;
 
 namespace TRModelTransporter.Data
@@ -65,7 +66,7 @@ namespace TRModelTransporter.Data
 
         public TREntities GetLevelAlias(string level, TREntities entity)
         {
-            return entity; // No aliases in TR1
+            return TR1EntityUtilities.GetAliasForLevel(level, entity);
         }
 
         public bool IsAliasDuplicatePermitted(TREntities entity)
@@ -109,12 +110,56 @@ namespace TRModelTransporter.Data
 
         private static readonly Dictionary<TREntities, TREntities[]> _entityDependencies = new Dictionary<TREntities, TREntities[]>
         {
+            [TREntities.Adam]
+                = new TREntities[] { TREntities.LaraMiscAnim_H_Pyramid },
+            [TREntities.BandagedAtlantean]
+                = new TREntities[] { TREntities.BandagedFlyer },
+            [TREntities.Centaur]
+                = new TREntities[] { TREntities.Missile3_H },
+            [TREntities.CentaurStatue]
+                = new TREntities[] { TREntities.Centaur },
+            [TREntities.CrocodileLand]
+                = new TREntities[] { TREntities.CrocodileWater },
+            [TREntities.CrocodileWater]
+                = new TREntities[] { TREntities.CrocodileLand },
+            [TREntities.CentaurStatue]
+                = new TREntities[] { TREntities.Centaur },
+            [TREntities.MeatyAtlantean]
+                = new TREntities[] { TREntities.MeatyFlyer },
+            [TREntities.MeatyFlyer]
+                = new TREntities[] { TREntities.Missile2_H, TREntities.Missile3_H },
+            [TREntities.Natla]
+                = new TREntities[] { TREntities.Missile2_H, TREntities.Missile3_H },
+            [TREntities.Pierre]
+                = new TREntities[] { TREntities.Key1_M_H, TREntities.ScionPiece_M_H },
+            [TREntities.RatLand]
+                = new TREntities[] { TREntities.RatWater },
+            [TREntities.RatWater]
+                = new TREntities[] { TREntities.RatLand },
+            [TREntities.ShootingAtlantean_N]
+                = new TREntities[] { TREntities.MeatyFlyer },
+            [TREntities.SkateboardKid]
+                = new TREntities[] { TREntities.Skateboard },
+            [TREntities.TRex]
+                = new TREntities[] { TREntities.LaraMiscAnim_H_Valley }
         };
 
         private static readonly Dictionary<TREntities, List<TREntities>> _spriteDependencies = new Dictionary<TREntities, List<TREntities>>
         {
-            [TREntities.ScionPiece_M_H]
-                = new List<TREntities> { TREntities.ScionPiece_P }
+            [TREntities.Adam]
+                = new List<TREntities> { TREntities.Explosion1_S_H },
+            [TREntities.Centaur]
+                = new List<TREntities> { TREntities.Explosion1_S_H },
+            [TREntities.FlyingAtlantean]
+                = new List<TREntities> { TREntities.Explosion1_S_H },
+            [TREntities.Key1_M_H]
+                = new List<TREntities> { TREntities.Key1_S_P },
+            [TREntities.Natla]
+                = new List<TREntities> { TREntities.Explosion1_S_H },
+            [TREntities.Pierre]
+                = new List<TREntities> { TREntities.ScionPiece2_S_P },
+            [TREntities.ShootingAtlantean_N]
+                = new List<TREntities> { TREntities.Explosion1_S_H },
         };
 
         private static readonly List<TREntities> _cinematicEntities = new List<TREntities>
@@ -128,10 +173,24 @@ namespace TRModelTransporter.Data
 
         private static readonly Dictionary<TREntities, List<TREntities>> _entityAliases = new Dictionary<TREntities, List<TREntities>>
         {
+            [TREntities.FlyingAtlantean] = new List<TREntities>
+            {
+                TREntities.BandagedFlyer, TREntities.MeatyFlyer
+            },
+            [TREntities.LaraMiscAnim_H] = new List<TREntities>
+            {
+                TREntities.LaraMiscAnim_H_General, TREntities.LaraMiscAnim_H_Valley, TREntities.LaraMiscAnim_H_Qualopec, TREntities.LaraMiscAnim_H_Midas,
+                TREntities.LaraMiscAnim_H_Sanctuary, TREntities.LaraMiscAnim_H_Atlantis, TREntities.LaraMiscAnim_H_Pyramid
+            },
+            [TREntities.NonShootingAtlantean_N] = new List<TREntities>
+            {
+                TREntities.BandagedAtlantean, TREntities.MeatyAtlantean
+            }
         };
 
         private static readonly List<TREntities> _permittedAliasDuplicates = new List<TREntities>
         {
+            TREntities.LaraMiscAnim_H
         };
 
         private static readonly List<TREntities> _unsafeModelReplacements = new List<TREntities>
@@ -149,10 +208,31 @@ namespace TRModelTransporter.Data
 
         private static readonly Dictionary<TREntities, short[]> _hardcodedSoundIndices = new Dictionary<TREntities, short[]>
         {
+            [TREntities.Adam] = new short[] { 104, 137, 138, 140, 141, 142 },
+            [TREntities.Bear] = new short[] { 12, 16 },
+            [TREntities.Centaur] = new short[] { 104 },
+            [TREntities.Gorilla] = new short[] { 90, 91, 101 },
+            [TREntities.Larson] = new short[] { 78 },
+            [TREntities.Lion] = new short[] { 85, 86, 87 },
+            [TREntities.Lioness] = new short[] { 85, 86, 87 },
+            [TREntities.MeatyAtlantean] = new short[] { 104 },
+            [TREntities.MeatyFlyer] = new short[] { 104, 120, 121, 122, 123, 124, 125, 126 },
+            [TREntities.Natla] = new short[] { 104, 123, 124 },
+            [TREntities.ShootingAtlantean_N] = new short[] { 104 },
+            [TREntities.SkateboardKid] = new short[] { 132 },
+            [TREntities.Wolf] = new short[] { 20 }
         };
 
         private static readonly Dictionary<TREntities, List<int>> _ignoreEntityTextures = new Dictionary<TREntities, List<int>>
         {
+            [TREntities.LaraMiscAnim_H]
+                = new List<int>(), // empty list indicates to ignore everything
+            [TREntities.NonShootingAtlantean_N]
+                = new List<int>(),
+            [TREntities.ShootingAtlantean_N]
+                = new List<int>(),
+            [TREntities.Mummy]
+                = new List<int> { 130, 131, 132, 133, 134, 135, 136, 137, 140, 141 }
         };
 
         #endregion
