@@ -1,0 +1,39 @@
+{
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [],
+  "Mirrored": [
+    {
+      "Comments": "Moves door 92 so that it can open properly, otherwise Lara has to glitch through.",
+      "EMType": 44,
+      "EntityIndex": 92,
+      "TargetLocation": {
+        "X": 68096,
+        "Y": -4352,
+        "Z": 31232,
+        "Room": 39,
+        "Angle": 0
+      }
+    },
+    {
+      "Comments": "Move the trigger that's behind the door above to the next tile.",
+      "EMType": 67,
+      "BaseLocation": {
+        "X": 68096,
+        "Y": -4352,
+        "Z": 31232,
+        "Room": 39
+      },
+      "NewLocation": {
+        "X": 68096,
+        "Y": -4352,
+        "Z": 30208,
+        "Room": 39
+      }
+    }
+  ]
+}
