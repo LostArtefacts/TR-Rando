@@ -70,6 +70,7 @@ namespace TRModelTransporter.Transport
 
             D definition = CreateModelDefinition(level, entity);
             ExportDependencies(definition);
+            ModelExportReady(definition);
             StoreDefinition(definition);
 
             if (ExportIndividualSegments)
@@ -84,6 +85,7 @@ namespace TRModelTransporter.Transport
         }
 
         protected abstract D CreateModelDefinition(L level, E modelEntity);
+        protected virtual void ModelExportReady(D definition) { }
 
         private void ExportDependencies(D definition)
         {

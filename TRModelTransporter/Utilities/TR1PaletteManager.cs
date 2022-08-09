@@ -51,50 +51,8 @@ namespace TRModelTransporter.Utilities
             }
 
             // Scan over replacement and original images, the idea being they will have been
-            // updated as necessary with removals and additions. Transparent pixels ignored.
-            for (int i = 0; i < Level.Images8.Length; i++)
-            {
-                Bitmap bmp = ChangedTiles.ContainsKey(i) ? ChangedTiles[i] : GetOriginalTile(i);
-                BitmapGraphics bg = new BitmapGraphics(bmp);
-                bg.Scan(_defaultBounds, (c, x, y) =>
-                {
-                    if (c.A != 0)
-                    {
-                        GetOrAddPaletteIndex(c);
-                    }
-                    return c;
-                });
-            }
-
-            // Grab meshes we aren't interested in
-            List<TRMesh> ignoredMeshes = new List<TRMesh>();
-            foreach (TREntities entity in ObsoleteModels)
-            {
-                TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(Level, entity);
-                if (meshes != null)
-                {
-                    ignoredMeshes.AddRange(meshes);
-                }
-            }
-
-            // Grab all colours used in all meshes
-            foreach (TRMesh mesh in Level.Meshes)
-            {
-                if (ignoredMeshes.Contains(mesh))
-                {
-                    continue;
-                }
-
-                foreach (TRFace4 face in mesh.ColouredRectangles)
-                {
-                    face.Texture = (ushort)GetOrAddPaletteIndex(Level.Palette[face.Texture]);
-                }
-                foreach (TRFace3 face in mesh.ColouredTriangles)
-                {
-                    face.Texture = (ushort)GetOrAddPaletteIndex(Level.Palette[face.Texture]);
-                }
-            }
-
+            // updated as necessary with removals and additions. Store each unique colour in the
+            // palette or replace with a suitable match.
             for (int i = 0; i < Level.Images8.Length; i++)
             {
                 Bitmap bmp = ChangedTiles.ContainsKey(i) ? ChangedTiles[i] : GetOriginalTile(i);
@@ -112,11 +70,40 @@ namespace TRModelTransporter.Utilities
                         c = _palette[colIndex];
                     }
 
-                    // Store the pointer in the level palette
+                    // Store the pointer in the level tiles
                     Level.Images8[i].Pixels[y * 256 + x] = (byte)colIndex;
 
                     return c;
                 });
+            }
+
+            // Grab meshes we aren't interested in
+            List<TRMesh> ignoredMeshes = new List<TRMesh>();
+            foreach (TREntities entity in ObsoleteModels)
+            {
+                TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(Level, entity);
+                if (meshes != null)
+                {
+                    ignoredMeshes.AddRange(meshes);
+                }
+            }
+
+            // Update all colours used in all meshes
+            foreach (TRMesh mesh in Level.Meshes)
+            {
+                if (ignoredMeshes.Contains(mesh))
+                {
+                    continue;
+                }
+
+                foreach (TRFace4 face in mesh.ColouredRectangles)
+                {
+                    face.Texture = (ushort)GetOrAddPaletteIndex(Level.Palette[face.Texture]);
+                }
+                foreach (TRFace3 face in mesh.ColouredTriangles)
+                {
+                    face.Texture = (ushort)GetOrAddPaletteIndex(Level.Palette[face.Texture]);
+                }
             }
 
             WritePalletteToLevel();
