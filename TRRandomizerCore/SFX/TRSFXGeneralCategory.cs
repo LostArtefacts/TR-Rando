@@ -9,6 +9,7 @@
         // Weapons 21-50
         StandardWeaponFiring = 21,
         FastWeaponFiring,
+        Ricochet,
 
         // Explosions/Crashes 51-80
         Explosion = 51,
@@ -19,8 +20,9 @@
         StandardFootstep = 81,
         HeavyFootstep,
 
-        // Death 111-140
+        // Death, damage 111-140
         Death = 111,
+        TakingDamage,
 
         // Breathing 141-170
         Breathing = 141,
@@ -34,7 +36,15 @@
         // Alerting 231-260
         Alerting = 231,
 
-        // Flying, wing flapping
-        Flying = 261
+        // Flying, wing flapping 261-280
+        Flying = 261,
+
+        // Doors, gates, switches etc
+        GeneralDoor = 281,
+        DoorOpening,
+        DoorClosing,
+        GeneralSwitch,
+        SwitchUp,
+        SwitchDown
     }
 }

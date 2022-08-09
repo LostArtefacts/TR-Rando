@@ -433,7 +433,9 @@
     "Description": "Lara pressing button",
     "Creature": 0,
     "Categories": [
-      1
+      284,
+      285,
+      286
     ],
     "Details": {
       "Sample": 0,
@@ -670,7 +672,8 @@
     "Description": "Lara pulling lever down",
     "Creature": 0,
     "Categories": [
-      1
+      286,
+      284
     ],
     "Details": {
       "Sample": 0,
@@ -1014,7 +1017,8 @@
     "Description": "Lever resetting",
     "Creature": 0,
     "Categories": [
-      1
+      285,
+      284
     ],
     "Details": {
       "Sample": 0,
@@ -1086,7 +1090,9 @@
     "Description": "Lara pulling underwater lever",
     "Creature": 0,
     "Categories": [
-      1
+      284,
+      285,
+      286
     ],
     "Details": {
       "Sample": 0,
@@ -1140,7 +1146,8 @@
     "Description": "Door opening",
     "Creature": 0,
     "Categories": [
-      1
+      282,
+      281
     ],
     "Details": {
       "Sample": 0,
@@ -2887,7 +2894,8 @@
     "Description": "Trapdoor opening",
     "Creature": 0,
     "Categories": [
-      1
+      282,
+      281
     ],
     "Details": {
       "Sample": 0,
@@ -2905,7 +2913,8 @@
     "Description": "Trapdoor closing",
     "Creature": 0,
     "Categories": [
-      1
+      283,
+      281
     ],
     "Details": {
       "Sample": 0,
@@ -4208,7 +4217,8 @@
     "Description": "WheelDoor creaking open",
     "Creature": 0,
     "Categories": [
-      1
+      282,
+      281
     ],
     "Details": {
       "Sample": 0,
@@ -4800,7 +4810,9 @@
     "Description": "Lara using wall switch",
     "Creature": 0,
     "Categories": [
-      1
+      284,
+      285,
+      286
     ],
     "Details": {
       "Sample": 0,
@@ -5026,7 +5038,8 @@
     "Description": "Elevator door opening",
     "Creature": 0,
     "Categories": [
-      1
+      282,
+      281
     ],
     "Details": {
       "Sample": 0,
@@ -5044,7 +5057,8 @@
     "Description": "Elevator door closing",
     "Creature": 0,
     "Categories": [
-      1
+      283,
+      281
     ],
     "Details": {
       "Sample": 0,
@@ -5619,7 +5633,8 @@
     "Description": "Barkhang main hall doors opening",
     "Creature": 0,
     "Categories": [
-      1
+      282,
+      281
     ],
     "Details": {
       "Sample": 0,
@@ -5830,7 +5845,7 @@
     "Description": "Barkhang star door moving",
     "Creature": 0,
     "Categories": [
-      1
+      281
     ],
     "Details": {
       "Sample": 0,

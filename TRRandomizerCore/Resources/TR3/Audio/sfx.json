@@ -444,7 +444,9 @@
     "Description": "Lara pressing button",
     "Creature": 1,
     "Categories": [
-      1
+      284,
+      285,
+      286
     ],
     "Details": {
       "Volume": 140,
@@ -625,7 +627,9 @@
     "Description": "Lara pulling lever",
     "Creature": 1,
     "Categories": [
-      1
+      284,
+      285,
+      286
     ],
     "Details": {
       "Volume": 178,
@@ -969,7 +973,9 @@
     "Description": "Lara pulling underwater lever",
     "Creature": 1,
     "Categories": [
-      1
+      284,
+      285,
+      286
     ],
     "Details": {
       "Volume": 153,
@@ -987,7 +993,8 @@
     "Description": "Heavy door opening",
     "Creature": 1,
     "Categories": [
-      1
+      282,
+      281
     ],
     "Details": {
       "Volume": 117,
@@ -2594,7 +2601,8 @@
     "Description": "Metallic trapdoor opening",
     "Creature": 0,
     "Categories": [
-      1
+      282,
+      281
     ],
     "Details": {
       "Volume": 204,
@@ -2612,7 +2620,8 @@
     "Description": "Metallic trapdoor closing",
     "Creature": 0,
     "Categories": [
-      1
+      283,
+      281
     ],
     "Details": {
       "Volume": 204,
@@ -3504,7 +3513,9 @@
     "Description": "Minecart switch throw",
     "Creature": 0,
     "Categories": [
-      1
+      284,
+      285,
+      286
     ],
     "Details": {
       "Volume": 178,
@@ -3630,7 +3641,8 @@
     "Description": "Metallic grate door lifting",
     "Creature": 0,
     "Categories": [
-      1
+      282,
+      281
     ],
     "Details": {
       "Volume": 178,
@@ -4400,7 +4412,8 @@
     "Description": "Lara pulling lever",
     "Creature": 1,
     "Categories": [
-      1
+      286,
+      284
     ],
     "Details": {
       "Volume": 140,
@@ -4549,7 +4562,8 @@
     "Description": "Door opening",
     "Creature": 0,
     "Categories": [
-      1
+      282,
+      281
     ],
     "Details": {
       "Volume": 127,
@@ -5469,7 +5483,9 @@
     "Description": "Squeaky door",
     "Creature": 0,
     "Categories": [
-      1
+      281,
+      282,
+      283
     ],
     "Details": {
       "Volume": 204,
@@ -5487,7 +5503,9 @@
     "Description": "Squeaky door",
     "Creature": 0,
     "Categories": [
-      1
+      281,
+      282,
+      283
     ],
     "Details": {
       "Volume": 153,
@@ -6098,7 +6116,9 @@
     "Description": "Stone-door sliding",
     "Creature": 0,
     "Categories": [
-      1
+      281,
+      282,
+      283
     ],
     "Details": {
       "Volume": 178,
