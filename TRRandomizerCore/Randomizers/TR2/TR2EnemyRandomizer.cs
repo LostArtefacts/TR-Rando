@@ -382,6 +382,17 @@ namespace TRRandomizerCore.Randomizers
                 }
                 while (newEntities.All(e => restrictedRoomEnemies.ContainsKey(e)));
             }
+            else
+            {
+                // #345 Barkhang/Opera with only Winstons causes freezing issues
+                List<TR2Entities> friends = TR2EnemyUtilities.GetFriendlyEnemies();
+                if ((level.Is(TR2LevelNames.OPERA) || level.Is(TR2LevelNames.MONASTERY)) && newEntities.All(friends.Contains))
+                {
+                    // Add an additional "safe" enemy - so pick from the droppable range, monks and chickens excluded
+                    List<TR2Entities> droppableEnemies = TR2EntityUtilities.GetCrossLevelDroppableEnemies(false, false);
+                    newEntities.Add(SelectRequiredEnemy(droppableEnemies, level, difficulty));
+                }
+            }
 
             // #144 Decide at this point who will be guising unless it has already been decided above (e.g. HSH)          
             if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && newEntities.Contains(TR2Entities.BirdMonster) && chickenGuiser == TR2Entities.BirdMonster)
@@ -817,6 +828,13 @@ namespace TRRandomizerCore.Randomizers
                 LimitSkidooEntities(level);
             }
 
+            // Or too many friends - #345
+            List<TR2Entities> friends = TR2EnemyUtilities.GetFriendlyEnemies();
+            if ((level.Is(TR2LevelNames.OPERA) || level.Is(TR2LevelNames.MONASTERY)) && enemies.Available.Any(friends.Contains))
+            {
+                LimitFriendlyEnemies(level, enemies.Available.Except(friends).ToList(), friends);
+            }
+
             if (Settings.SwapEnemyAppearance)
             {
                 RandomizeEnemyMeshes(level, enemies);
@@ -904,6 +922,19 @@ namespace TRRandomizerCore.Randomizers
                 }
 
                 floorData.WriteToLevel(level.Data);
+            }
+        }
+
+        private void LimitFriendlyEnemies(TR2CombinedLevel level, List<TR2Entities> pool, List<TR2Entities> friends)
+        {
+            // Hard limit of 20 friendly enemies in trap-heavy levels to avoid freezing issues
+            const int limit = 20;
+            List<TR2Entity> levelFriends = level.Data.Entities.ToList().FindAll(e => friends.Contains((TR2Entities)e.TypeID));
+            while (levelFriends.Count > limit)
+            {
+                TR2Entity entity = levelFriends[_generator.Next(0, levelFriends.Count)];
+                entity.TypeID = (short)TR2EntityUtilities.TranslateEntityAlias(pool[_generator.Next(0, pool.Count)]);
+                levelFriends.Remove(entity);
             }
         }
 
