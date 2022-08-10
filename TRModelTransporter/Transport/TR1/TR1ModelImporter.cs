@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
@@ -6,6 +8,7 @@ using TRModelTransporter.Data;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Handlers.Textures;
 using TRModelTransporter.Model.Definitions;
+using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Utilities;
 
 namespace TRModelTransporter.Transport
@@ -34,11 +37,17 @@ namespace TRModelTransporter.Transport
 
         protected override void Import(IEnumerable<TR1ModelDefinition> standardDefinitions, IEnumerable<TR1ModelDefinition> soundOnlyDefinitions)
         {
+            TR1TextureRemapGroup remap = null;
+            if (TextureRemapPath != null)
+            {
+                remap = JsonConvert.DeserializeObject<TR1TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
+            }
+
             PaletteManager.Level = Level;
             PaletteManager.ObsoleteModels = EntitiesToRemove.Select(e => Data.TranslateAlias(e)).ToList();
 
             (_textureHandler as TR1TextureImportHandler).PaletteManager = PaletteManager;
-            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, null, ClearUnusedSprites, TexturePositionMonitor);
+            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
 
             _soundHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
 
