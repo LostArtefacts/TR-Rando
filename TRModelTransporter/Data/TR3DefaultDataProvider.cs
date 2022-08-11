@@ -13,6 +13,11 @@ namespace TRModelTransporter.Data
             return _entityDependencies.ContainsKey(entity) ? _entityDependencies[entity] : _emptyEntities;
         }
 
+        public IEnumerable<TR3Entities> GetRemovalExclusions(TR3Entities entity)
+        {
+            return _emptyEntities;
+        }
+
         public IEnumerable<TR3Entities> GetSpriteDependencies(TR3Entities entity)
         {
             return _spriteDependencies.ContainsKey(entity) ? _spriteDependencies[entity] : _emptyEntities;

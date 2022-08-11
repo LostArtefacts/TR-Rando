@@ -10,6 +10,8 @@ namespace TRModelTransporter.Data
         /// </summary>
         IEnumerable<E> GetModelDependencies(E entity);
 
+        IEnumerable<E> GetRemovalExclusions(E entity);
+
         /// <summary>
         /// Return any sprite types on which the given type depends.
         /// </summary>

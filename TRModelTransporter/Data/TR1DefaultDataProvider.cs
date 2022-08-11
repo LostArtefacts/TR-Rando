@@ -13,6 +13,11 @@ namespace TRModelTransporter.Data
             return _entityDependencies.ContainsKey(entity) ? _entityDependencies[entity] : _emptyEntities;
         }
 
+        public IEnumerable<TREntities> GetRemovalExclusions(TREntities entity)
+        {
+            return _removalExclusions.ContainsKey(entity) ? _removalExclusions[entity] : _emptyEntities;
+        }
+
         public IEnumerable<TREntities> GetSpriteDependencies(TREntities entity)
         {
             return _spriteDependencies.ContainsKey(entity) ? _spriteDependencies[entity] : _emptyEntities;
@@ -144,6 +149,12 @@ namespace TRModelTransporter.Data
                 = new TREntities[] { TREntities.LaraMiscAnim_H_Valley }
         };
 
+        private static readonly Dictionary<TREntities, List<TREntities>> _removalExclusions = new Dictionary<TREntities, List<TREntities>>
+        {
+            [TREntities.FlyingAtlantean]
+                = new List<TREntities> { TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N }
+        };
+
         private static readonly Dictionary<TREntities, List<TREntities>> _spriteDependencies = new Dictionary<TREntities, List<TREntities>>
         {
             [TREntities.Adam]
@@ -169,6 +180,7 @@ namespace TRModelTransporter.Data
         // These are models that use Lara's hips as placeholders
         private static readonly List<TREntities> _laraDependentModels = new List<TREntities>
         {
+            TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N
         };
 
         private static readonly Dictionary<TREntities, List<TREntities>> _entityAliases = new Dictionary<TREntities, List<TREntities>>

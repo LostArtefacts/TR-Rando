@@ -16,6 +16,17 @@ namespace TextureExport.Types
                 remapGroup.CalculateDependencies(level, (TREntities)model.ID);
             }
 
+            foreach (TextureDependency<TREntities> dependency in remapGroup.Dependencies)
+            {
+                // We need to ensure Atlantean spawns are accounted for because these are null meshes
+                if (dependency.Entities.Contains(TREntities.FlyingAtlantean))
+                {
+                    dependency.AddEntity(TREntities.ShootingAtlantean_N);
+                    dependency.AddEntity(TREntities.NonShootingAtlantean_N);
+                    dependency.Entities.Sort();
+                }
+            }
+
             remapGroup.Dependencies.Sort(delegate (TextureDependency<TREntities> d1, TextureDependency<TREntities> d2)
             {
                 if (d1.TileIndex == d2.TileIndex)

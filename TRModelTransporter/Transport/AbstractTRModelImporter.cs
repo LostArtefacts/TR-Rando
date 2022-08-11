@@ -86,6 +86,7 @@ namespace TRModelTransporter.Transport
             List<E> cleanedEntities = new List<E>();
             foreach (E entity in EntitiesToRemove)
             {
+                bool entityClean = false;
                 if (Data.HasAliases(entity))
                 {
                     // Check if we have another alias in the import list different from any
@@ -103,10 +104,26 @@ namespace TRModelTransporter.Transport
 
                     if (!Equals(alias, importAlias))
                     {
-                        cleanedEntities.Add(entity);
+                        entityClean = true;
                     }
                 }
                 else if (!EntitiesToImport.Contains(entity))
+                {
+                    entityClean = true;
+                }
+
+                if (entityClean)
+                {
+                    // There may be null meshes dependent on this removal, so we can only remove it if they're
+                    // being removed as well.
+                    IEnumerable<E> exclusions = Data.GetRemovalExclusions(entity);
+                    if (exclusions.Count() > 0 && exclusions.All(EntitiesToRemove.Contains))
+                    {
+                        entityClean = false;
+                    }
+                }
+
+                if (entityClean)
                 {
                     cleanedEntities.Add(entity);
                 }
