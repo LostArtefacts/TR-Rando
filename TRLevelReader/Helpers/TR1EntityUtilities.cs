@@ -258,6 +258,7 @@ namespace TRLevelReader.Helpers
             return new List<TREntities>
             {
                 TREntities.Adam,
+                TREntities.AtlanteanEgg,
                 TREntities.BandagedAtlantean,
                 TREntities.BandagedFlyer,
                 TREntities.Bat,
@@ -295,7 +296,7 @@ namespace TRLevelReader.Helpers
         {
             List<TREntities> enemies = new List<TREntities>
             {
-                
+                TREntities.FlyingAtlantean, TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N
             };
 
             enemies.AddRange(GetCandidateCrossLevelEnemies());
@@ -309,6 +310,21 @@ namespace TRLevelReader.Helpers
                 TREntities.CrocodileWater,
                 TREntities.RatWater
             };
+        }
+
+        public static Dictionary<TREntities, TREntities> GetWaterEnemyLandCreatures()
+        {
+            return new Dictionary<TREntities, TREntities>
+            {
+                [TREntities.CrocodileWater] = TREntities.CrocodileLand,
+                [TREntities.RatWater] = TREntities.RatLand
+            };
+        }
+
+        public static TREntities GetWaterEnemyLandCreature(TREntities entity)
+        {
+            Dictionary<TREntities, TREntities> entities = GetWaterEnemyLandCreatures();
+            return entities.ContainsKey(entity) ? entities[entity] : entity;
         }
 
         public static bool IsWaterCreature(TREntities entity)
@@ -327,6 +343,19 @@ namespace TRLevelReader.Helpers
                 }
             }
             return waterEntities;
+        }
+
+        public static List<TREntities> GetAtlanteanEggEnemies()
+        {
+            return new List<TREntities>
+            {
+                TREntities.BandagedAtlantean,
+                TREntities.BandagedFlyer,
+                TREntities.Centaur,
+                TREntities.MeatyAtlantean,
+                TREntities.MeatyFlyer,
+                TREntities.ShootingAtlantean_N
+            };
         }
 
         public static List<TREntities> GetSwitchTypes()

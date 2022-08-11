@@ -41,6 +41,16 @@
       "display": "Level State",
       "options": [ "Any", "Mirrored", "NotMirrored" ],
       "type": "string"
+    },
+    "EntityIndex": {
+      "default": -1,
+      "display": "Entity Index",
+      "type": "number"
+    },
+    "Angle": {
+      "default": 16384,
+      "display": "Angle",
+      "type": "number"
     }
   }
 }

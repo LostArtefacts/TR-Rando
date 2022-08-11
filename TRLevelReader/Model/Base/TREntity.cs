@@ -59,6 +59,16 @@ namespace TRLevelReader.Model
             }
         }
 
+        public ushort CodeBits
+        {
+            get => (ushort)((Flags & 0x3E00) >> 9);
+            set
+            {
+                Flags = (ushort)(Flags & ~(Flags & 0x3E00));
+                Flags |= (ushort)(value << 9);
+            }
+        }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())

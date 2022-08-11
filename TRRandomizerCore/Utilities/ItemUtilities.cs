@@ -8,6 +8,16 @@ namespace TRRandomizerCore.Utilities
 {
     public static class ItemUtilities
     {
+        public static TR1Items ConvertToScriptItem(TREntities entity, TR1Items defaultItem = TR1Items.Pistols)
+        {
+            return (TR1Items)entity;
+        }
+
+        public static TREntities ConvertToEntity(TR1Items item, TREntities defaultEntity = TREntities.Pistols_S_P)
+        {
+            return (TREntities)item;
+        }
+
         public static TR2Items ConvertToScriptItem(TR2Entities entity, TR2Items defaultItem = TR2Items.Pistols)
         {
             return Convert(entity, defaultItem, _tr2EntityToScriptItemMap);

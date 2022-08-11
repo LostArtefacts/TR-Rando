@@ -33,6 +33,8 @@ namespace TRRandomizerCore.Helpers
 
         public LevelState LevelState {get; set;}
 
+        public int EntityIndex { get; set; }
+
         public Location()
         {
             X = 0;
@@ -50,6 +52,7 @@ namespace TRRandomizerCore.Helpers
             KeyItemGroupID = 0;
             InvalidatesRoom = false;
             LevelState = LevelState.Any;
+            EntityIndex = -1;
         }
 
         public Location(TRViewLocation loc)
