@@ -33,7 +33,7 @@ namespace TRModelTransporter.Transport
             _modelHandler.Export(level, definition, modelEntity);
             _meshHandler.Export(level, definition);
             _colourHandler.Export(level, definition);
-            _textureHandler.Export(level, definition, TextureClassifier, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity));
+            _textureHandler.Export(level, definition, TextureClassifier, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity, LevelName));
             _animationHandler.Export(level, definition);
             _cinematicHandler.Export(level, definition, Data.GetCinematicEntities());
             _soundHandler.Export(level, definition, Data.GetHardcodedSounds(definition.Alias));

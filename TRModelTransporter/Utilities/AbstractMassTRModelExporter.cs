@@ -27,6 +27,7 @@ namespace TRModelTransporter.Utilities
 
             foreach (string lvlName in LevelNames)
             {
+                _exporter.LevelName = lvlName;
                 if (ExportTypes.ContainsKey(lvlName))
                 {
                     string levelPath = Path.Combine(levelFileDirectory, lvlName);

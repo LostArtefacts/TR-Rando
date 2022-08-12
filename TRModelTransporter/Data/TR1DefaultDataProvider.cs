@@ -104,8 +104,13 @@ namespace TRModelTransporter.Data
             return _hardcodedSoundIndices.ContainsKey(entity) ? _hardcodedSoundIndices[entity] : null;
         }
 
-        public IEnumerable<int> GetIgnorableTextureIndices(TREntities entity)
+        public IEnumerable<int> GetIgnorableTextureIndices(TREntities entity, string level)
         {
+            if (entity == TREntities.LaraMiscAnim_H && level == TRLevelNames.VALLEY)
+            {
+                // Mesh swap when Lara is killed by T-Rex
+                return null;
+            }
             return _ignoreEntityTextures.ContainsKey(entity) ? _ignoreEntityTextures[entity] : null;
         }
 

@@ -104,7 +104,7 @@ namespace TRModelTransporter.Data
             return _hardcodedSoundIndices.ContainsKey(entity) ? _hardcodedSoundIndices[entity] : null;
         }
 
-        public IEnumerable<int> GetIgnorableTextureIndices(TR2Entities entity)
+        public IEnumerable<int> GetIgnorableTextureIndices(TR2Entities entity, string level)
         {
             return _ignoreEntityTextures.ContainsKey(entity) ? _ignoreEntityTextures[entity] : null;
         }

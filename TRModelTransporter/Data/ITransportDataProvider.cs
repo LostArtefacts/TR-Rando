@@ -92,6 +92,6 @@ namespace TRModelTransporter.Data
         /// An emtpy list is translated as meaning all indices should be ignored. Null
         /// indicates that no indices should be ignored.
         /// </summary>
-        IEnumerable<int> GetIgnorableTextureIndices(E entity);
+        IEnumerable<int> GetIgnorableTextureIndices(E entity, string level);
     }
 }
