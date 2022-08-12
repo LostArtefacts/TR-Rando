@@ -224,6 +224,10 @@ namespace TRModelTransporter.Transport
                     {
                         definition.IsDependencyOnly = false;
                     }
+                    else if (EntitiesToRemove.Contains(nextEntity))
+                    {
+                        EntitiesToRemove = new List<E>(EntitiesToRemove).Except(new List<E> { nextEntity });
+                    }
                     return;
                 }
             }

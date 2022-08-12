@@ -19,7 +19,14 @@ namespace TRModelTransporter.Handlers.Textures
 
         protected override IEnumerable<TRSpriteSequence> GetExistingSpriteSequences()
         {
-            return _level.SpriteSequences;
+            // Allow replacing the Explosion sequence in Vilcabamba (it's there but empty)
+            List<TRSpriteSequence> sequences = _level.SpriteSequences.ToList();
+            TRSpriteSequence explosion = sequences.Find(s => s.SpriteID == (int)TREntities.Explosion1_S_H);
+            if (explosion != null && explosion.NegativeLength == -1)
+            {
+                sequences.Remove(explosion);
+            }
+            return sequences;
         }
 
         protected override void WriteSpriteSequences(IEnumerable<TRSpriteSequence> spriteSequences)
