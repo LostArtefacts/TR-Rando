@@ -18,6 +18,11 @@ namespace TRModelTransporter.Data
             return _removalExclusions.ContainsKey(entity) ? _removalExclusions[entity] : _emptyEntities;
         }
 
+        public IEnumerable<TREntities> GetCyclicDependencies(TREntities entity)
+        {
+            return _cyclicDependencies.ContainsKey(entity) ? _cyclicDependencies[entity] : _emptyEntities;
+        }
+
         public IEnumerable<TREntities> GetSpriteDependencies(TREntities entity)
         {
             return _spriteDependencies.ContainsKey(entity) ? _spriteDependencies[entity] : _emptyEntities;
@@ -152,6 +157,18 @@ namespace TRModelTransporter.Data
                 = new TREntities[] { TREntities.Skateboard },
             [TREntities.TRex]
                 = new TREntities[] { TREntities.LaraMiscAnim_H_Valley }
+        };
+
+        private static readonly Dictionary<TREntities, TREntities[]> _cyclicDependencies = new Dictionary<TREntities, TREntities[]>
+        {
+            [TREntities.CrocodileLand]
+                = new TREntities[] { TREntities.CrocodileWater },
+            [TREntities.CrocodileWater]
+                = new TREntities[] { TREntities.CrocodileLand },
+            [TREntities.RatLand]
+                = new TREntities[] { TREntities.RatWater },
+            [TREntities.RatWater]
+                = new TREntities[] { TREntities.RatLand }
         };
 
         private static readonly Dictionary<TREntities, List<TREntities>> _removalExclusions = new Dictionary<TREntities, List<TREntities>>

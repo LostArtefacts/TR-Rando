@@ -228,6 +228,19 @@ namespace TRModelTransporter.Transport
                     {
                         EntitiesToRemove = new List<E>(EntitiesToRemove).Except(new List<E> { nextEntity });
                     }
+
+                    // Avoid issues with cyclic dependencies by adding separately. The caveat here is
+                    // cyclic dependencies can't have further sub-dependencies.
+                    IEnumerable<E> cyclicDependencies = Data.GetCyclicDependencies(nextEntity);
+                    foreach (E cyclicDependency in cyclicDependencies)
+                    {
+                        if (!modelEntities.Contains(cyclicDependency))
+                        {
+                            modelEntities.Add(cyclicDependency);
+                            standardModelDefinitions.Add(LoadDefinition(cyclicDependency));
+                        }
+                    }
+
                     return;
                 }
             }

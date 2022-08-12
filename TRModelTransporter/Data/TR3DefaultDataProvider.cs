@@ -18,6 +18,11 @@ namespace TRModelTransporter.Data
             return _emptyEntities;
         }
 
+        public IEnumerable<TR3Entities> GetCyclicDependencies(TR3Entities entity)
+        {
+            return _emptyEntities;
+        }
+
         public IEnumerable<TR3Entities> GetSpriteDependencies(TR3Entities entity)
         {
             return _spriteDependencies.ContainsKey(entity) ? _spriteDependencies[entity] : _emptyEntities;

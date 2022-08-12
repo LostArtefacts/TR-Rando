@@ -10,7 +10,15 @@ namespace TRModelTransporter.Data
         /// </summary>
         IEnumerable<E> GetModelDependencies(E entity);
 
+        /// <summary>
+        /// Null meshes that determine if the main entity can be removed from a level.
+        /// </summary>
         IEnumerable<E> GetRemovalExclusions(E entity);
+
+        /// <summary>
+        /// Return model types that have a cyclic depencency on the given type.
+        /// </summary>
+        IEnumerable<E> GetCyclicDependencies(E entity);
 
         /// <summary>
         /// Return any sprite types on which the given type depends.
