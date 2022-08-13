@@ -61,6 +61,7 @@ namespace TRRandomizerCore
             TRInterop.RandomisationSupported = true;
             TRInterop.SecretRewardsSupported = true;
 
+            TRLevelEditorFactory.RegisterEditor(TRVersion.TR1, typeof(TR1RandoEditor));
             TRLevelEditorFactory.RegisterEditor(TRVersion.TR2, typeof(TR2RandoEditor));
             TRLevelEditorFactory.RegisterEditor(TRVersion.TR3, typeof(TR3RandoEditor));
 
