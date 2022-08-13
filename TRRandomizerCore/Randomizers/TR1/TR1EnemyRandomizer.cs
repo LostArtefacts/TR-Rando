@@ -443,6 +443,14 @@ namespace TRRandomizerCore.Randomizers
                         {
                             continue;
                         }
+
+                        targetEntity.TypeID = (short)TR1EntityUtilities.TranslateEntityAlias(entity);
+
+                        // #146 Ensure OneShot triggers are set for this enemy if needed
+                        TR1EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
+
+                        // Remove the target entity so it doesn't get replaced
+                        enemyEntities.Remove(targetEntity);
                     }
 
                     // Remove this entity type from the available rando pool
@@ -598,6 +606,23 @@ namespace TRRandomizerCore.Randomizers
 
                 // Track every enemy type across the game
                 _resultantEnemies.Add(newEntityType);
+            }
+
+            if (level.Is(TRLevelNames.TIHOCAN) && level.Data.Entities[82].TypeID != (short)TREntities.Pierre)
+            {
+                // Add a guaranteed key at the end of the level. Item rando can reposition it.
+                List<TREntity> entities = level.Data.Entities.ToList();
+                entities.Add(new TREntity
+                {
+                    TypeID = (short)TREntities.Key1_S_P,
+                    X = 30208,
+                    Y = 2560,
+                    Z = 91648,
+                    Room = 110,
+                    Intensity = 6144
+                });
+                level.Data.Entities = entities.ToArray();
+                level.Data.NumEntities++;
             }
 
             // Add extra ammo based on this level's difficulty

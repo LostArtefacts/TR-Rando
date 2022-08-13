@@ -421,6 +421,10 @@ namespace TRRandomizerCore.Utilities
 
         private static readonly Dictionary<string, List<TREntities>> _unsupportedEnemiesDefault = new Dictionary<string, List<TREntities>>
         {
+            [TRLevelNames.QUALOPEC] = new List<TREntities>
+            {
+                TREntities.Adam
+            }
         };
 
         // Any enemies that must remain untouched in a given level
