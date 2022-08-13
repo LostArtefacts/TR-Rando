@@ -109,9 +109,35 @@
             CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
 
+        <ctrl:ManagedSeedAdvancedControl
+            Grid.Row="3"
+            Grid.Column="0"
+            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+            IsEnabled="{Binding IsHealthTypeSupported, UpdateSourceTrigger=PropertyChanged}"
+            IsActive="{Binding RandomizeHealth, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Lara's Health"
+            Text="Randomize Lara's starting health and medi-packs."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding HealthSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Lara's Health (Advanced)"
+                                        MainDescription="Customize the randomization of Lara's health."
+                                        HasBoolItems="True"
+                                        HasHealthMode="True"
+                                        BoolItemsSource="{Binding Data.HealthBoolItemControls, Source={StaticResource proxy}}"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
+        
         <ctrl:ManagedSeedIntControl
             Grid.Row="3"
             Grid.Column="0"
+            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
             IsEnabled="{Binding IsSunsetTypeSupported, UpdateSourceTrigger=PropertyChanged}"
             IsActive="{Binding RandomizeSunsets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Sunsets"

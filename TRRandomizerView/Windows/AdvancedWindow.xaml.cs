@@ -87,6 +87,11 @@ namespace TRRandomizerView.Windows
             nameof(HasBirdMonsterBehaviour), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty HasHealthModeProperty = DependencyProperty.Register
+        (
+            nameof(HasHealthMode), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
         (
             nameof(ControllerProxy), typeof(ControllerOptions), typeof(AdvancedWindow)
@@ -174,6 +179,12 @@ namespace TRRandomizerView.Windows
         {
             get => (bool)GetValue(HasBirdMonsterBehaviourProperty);
             set => SetValue(HasBirdMonsterBehaviourProperty, value);
+        }
+
+        public bool HasHealthMode
+        {
+            get => (bool)GetValue(HasHealthModeProperty);
+            set => SetValue(HasHealthModeProperty, value);
         }
 
         public ControllerOptions ControllerProxy

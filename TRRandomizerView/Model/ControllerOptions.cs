@@ -17,7 +17,7 @@ namespace TRRandomizerView.Model
 
         private readonly ManagedSeed _secretRewardsControl;
         private readonly ManagedSeedNumeric _levelSequencingControl, _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl, _nightLevelsControl;
-        private readonly ManagedSeedBool _audioTrackControl;
+        private readonly ManagedSeedBool _audioTrackControl, _healthLevelsControl;
 
         private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl, _randomTextControl, _randomStartControl, _randomEnvironmentControl;
 
@@ -32,6 +32,7 @@ namespace TRRandomizerView.Model
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
         private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders;
+        private BoolItemControlClass _disableHealingBetweenLevels, _disableMedpacks;
         private uint _mirroredLevelCount;
         private bool _mirrorAssaultCourse;
         private uint _haircutLevelCount;
@@ -59,7 +60,7 @@ namespace TRRandomizerView.Model
         private uint _uncontrolledSFXCount;
         private bool _uncontrolledSFXAssaultCourse;
 
-        private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
+        private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls, _healthBoolItemControls;
         private List<BoolItemIDControlClass> _selectableEnemies;
         private bool _useEnemyExclusions, _showExclusionWarnings;
 
@@ -72,6 +73,8 @@ namespace TRRandomizerView.Model
         private Language _gameStringLanguage;
 
         private int _levelCount, _maximumLevelCount, _defaultUnarmedLevelCount, _defaultAmmolessLevelCount, _defaultSunsetCount;
+
+        private uint _minStartingHealth, _maxStartingHealth, _medilessLevelCount;
 
         public int TotalLevelCount
         {
@@ -135,11 +138,12 @@ namespace TRRandomizerView.Model
             InvisibleLevelCount = (uint)Math.Min(InvisibleLevelCount, MaximumLevelCount);
             WireframeLevelCount = (uint)Math.Min(WireframeLevelCount, MaximumLevelCount);
             UncontrolledSFXCount = (uint)Math.Min(UncontrolledSFXCount, MaximumLevelCount);
+            MedilessLevelCount = (uint)Math.Min(MedilessLevelCount, MaximumLevelCount);
         }
 
         public bool RandomizationPossible
         {
-            get => RandomizeLevelSequencing || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeSunsets ||
+            get => RandomizeLevelSequencing || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeHealth || RandomizeSunsets ||
                    RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits || 
                    RandomizeText || RandomizeNightMode || RandomizeStartPosition || RandomizeEnvironment;
         }
@@ -262,6 +266,78 @@ namespace TRRandomizerView.Model
             set
             {
                 _secretRewardsControl.Seed = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool RandomizeHealth
+        {
+            get => _healthLevelsControl.IsActive;
+            set
+            {
+                _healthLevelsControl.IsActive = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int HealthSeed
+        {
+            get => _healthLevelsControl.Seed;
+            set
+            {
+                _healthLevelsControl.Seed = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint MedilessLevelCount
+        {
+            get => _medilessLevelCount;
+            set
+            {
+                _medilessLevelCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint MinStartingHealth
+        {
+            get => _minStartingHealth;
+            set
+            {
+                _minStartingHealth = value;
+                FirePropertyChanged();
+                FirePropertyChanged(nameof(MaxStartingHealth));
+            }
+        }
+
+        public uint MaxStartingHealth
+        {
+            get => _maxStartingHealth;
+            set
+            {
+                _maxStartingHealth = value;
+                FirePropertyChanged();
+                FirePropertyChanged(nameof(MinStartingHealth));
+            }
+        }
+
+        public BoolItemControlClass DisableHealingBetweenLevels
+        {
+            get => _disableHealingBetweenLevels;
+            set
+            {
+                _disableHealingBetweenLevels = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass DisableMedpacks
+        {
+            get => _disableMedpacks;
+            set
+            {
+                _disableMedpacks = value;
                 FirePropertyChanged();
             }
         }
@@ -1157,6 +1233,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public List<BoolItemControlClass> HealthBoolItemControls
+        {
+            get => _healthBoolItemControls;
+            set
+            {
+                _healthBoolItemControls = value;
+                FirePropertyChanged();
+            }
+        }
+
         public List<BoolItemControlClass> ItemBoolItemControls
         {
             get => _itemBoolItemControls;
@@ -1282,6 +1368,7 @@ namespace TRRandomizerView.Model
             _unarmedLevelsControl = new ManagedSeedNumeric();
             _ammolessLevelsControl = new ManagedSeedNumeric();
             _secretRewardsControl = new ManagedSeed();
+            _healthLevelsControl = new ManagedSeedBool();
             _sunsetLevelsControl = new ManagedSeedNumeric();
             _nightLevelsControl = new ManagedSeedNumeric();
             _audioTrackControl = new ManagedSeedBool();
@@ -1496,6 +1583,20 @@ namespace TRRandomizerView.Model
             };
             BindingOperations.SetBinding(RandomizeLadders, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
 
+            Binding randomizeHealthBinding = new Binding(nameof(RandomizeHealth)) { Source = this };
+            DisableHealingBetweenLevels = new BoolItemControlClass
+            {
+                Title = "Disable healing between levels",
+                Description = "Lara's health will be carried over from level to level and will not be restored."
+            };
+            BindingOperations.SetBinding(DisableHealingBetweenLevels, BoolItemControlClass.IsActiveProperty, randomizeHealthBinding);
+            DisableMedpacks = new BoolItemControlClass
+            {
+                Title = "Disable medi-packs",
+                Description = "Disable all med-packs throughout the game."
+            };
+            BindingOperations.SetBinding(DisableMedpacks, BoolItemControlClass.IsActiveProperty, randomizeHealthBinding);
+
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -1533,6 +1634,10 @@ namespace TRRandomizerView.Model
             EnvironmentBoolItemControls = new List<BoolItemControlClass>
             {
                 _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders
+            };
+            HealthBoolItemControls = new List<BoolItemControlClass>
+            {
+                _disableHealingBetweenLevels, _disableMedpacks
             };
         }
 
@@ -1578,6 +1683,14 @@ namespace TRRandomizerView.Model
 
             RandomizeSecretRewards = _controller.RandomizeSecretRewards;
             SecretRewardSeed = _controller.SecretRewardSeed;
+
+            RandomizeHealth = _controller.RandomizeHealth;
+            HealthSeed = _controller.HealthSeed;
+            MedilessLevelCount = _controller.MedilessLevelCount;
+            MinStartingHealth = _controller.MinStartingHealth;
+            MaxStartingHealth = _controller.MaxStartingHealth;
+            DisableHealingBetweenLevels.Value = _controller.DisableHealingBetweenLevels;
+            DisableMedpacks.Value = _controller.DisableMedpacks;
 
             RandomizeSunsets = _controller.RandomizeSunsets;
             SunsetsSeed = _controller.SunsetsSeed;
@@ -1721,6 +1834,10 @@ namespace TRRandomizerView.Model
             {
                 AmmolessLevelsSeed = rng.Next(1, MaxSeedValue);
             }
+            if (RandomizeHealth)
+            {
+                HealthSeed = rng.Next(1, MaxSeedValue);
+            }
             if (RandomizeSecretRewards)
             {
                 SecretRewardSeed = rng.Next(1, MaxSeedValue);
@@ -1784,6 +1901,10 @@ namespace TRRandomizerView.Model
             if (RandomizeAmmolessLevels)
             {
                 AmmolessLevelsSeed = seed;
+            }
+            if (RandomizeHealth)
+            {
+                HealthSeed = seed;
             }
             if (RandomizeSecretRewards)
             {
@@ -1860,6 +1981,14 @@ namespace TRRandomizerView.Model
 
             _controller.RandomizeSecretRewards = RandomizeSecretRewards;
             _controller.SecretRewardSeed = SecretRewardSeed;
+
+            _controller.RandomizeHealth = RandomizeHealth;
+            _controller.HealthSeed = HealthSeed;
+            _controller.MedilessLevelCount = MedilessLevelCount;
+            _controller.MinStartingHealth = MinStartingHealth;
+            _controller.MaxStartingHealth = MaxStartingHealth;
+            _controller.DisableHealingBetweenLevels = DisableHealingBetweenLevels.Value;
+            _controller.DisableMedpacks = DisableMedpacks.Value;
 
             _controller.RandomizeSunsets = RandomizeSunsets;
             _controller.SunsetsSeed = SunsetsSeed;
@@ -2038,6 +2167,10 @@ namespace TRRandomizerView.Model
             {
                 RandomizeAmmolessLevels = enabled;
             }
+            if (IsHealthTypeSupported)
+            {
+                RandomizeHealth = enabled;
+            }
             if (IsSunsetTypeSupported)
             {
                 RandomizeSunsets = enabled;
@@ -2103,6 +2236,10 @@ namespace TRRandomizerView.Model
             if (IsAmmolessTypeSupported)
             {
                 result &= RandomizeAmmolessLevels;
+            }
+            if (IsHealthTypeSupported)
+            {
+                result &= RandomizeHealth;
             }
             if (IsSunsetTypeSupported)
             {

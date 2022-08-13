@@ -31,7 +31,14 @@ namespace TRRandomizerCore.Editors
 
         protected override int GetSaveTarget(int numLevels)
         {
-            return base.GetSaveTarget(numLevels);
+            int target = base.GetSaveTarget(numLevels);
+
+            if (Settings.RandomizeStartingHealth)
+            {
+                target += numLevels;
+            }
+
+            return target;
         }
 
         protected override void SaveImpl(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
@@ -54,6 +61,20 @@ namespace TRRandomizerCore.Editors
             {
                 (scriptEditor as TR1ScriptEditor).EnableCheats = true;
                 scriptEditor.SaveScript();
+            }
+
+            if (!monitor.IsCancelled && Settings.RandomizeStartingHealth)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing health");
+                new TR1HealthRandomizer
+                {
+                    ScriptEditor = scriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    BackupPath = backupDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.HealthSeed);
             }
         }
     }

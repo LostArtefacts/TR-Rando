@@ -39,6 +39,11 @@
                             Value="14" />
                     <Setter Property="TextDecorations"
                             Value="Underline" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
                 <Style x:Key="OptionDescriptionStyle"
                        TargetType="{x:Type Label}">
@@ -60,6 +65,8 @@
             </Grid.Resources>
             
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -1080,6 +1087,132 @@
                             Grid.Row="1">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="Apply uncontrolled SFX randomization to the assault course in addition to or separately from above."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!-- Mediless -->
+            <StackPanel Grid.Row="16"
+                        Visibility="{Binding HasHealthMode, Converter={StaticResource BoolToCollapsedConverter}}"
+                        IsEnabled="{Binding ControllerProxy.IsMedilessTypeSupported}">
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Mediless Levels"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Margin="0,3,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"  
+                                                Value="{Binding ControllerProxy.MedilessLevelCount, Mode=TwoWay}"
+                                                MinValue="0"
+                                                MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The number of levels in which Lara will lose all her medipacks at the start."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!-- Starting Health -->
+            <StackPanel Grid.Row="17"
+                        Visibility="{Binding HasHealthMode, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Starting Health (Global Setting)"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Margin="0,3,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Minimum value"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"  
+                                                Value="{Binding ControllerProxy.MinStartingHealth, Mode=TwoWay}"
+                                                MinValue="1"
+                                                MaxValue="{Binding ControllerProxy.MaxStartingHealth}"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Margin="0,5,0,0">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The lowest value for Lara's health at the start of each level."/>
+                    </Border>
+
+                    <Border Margin="0,3,0,0"
+                            Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Maximum value"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"  
+                                                Value="{Binding ControllerProxy.MaxStartingHealth, Mode=TwoWay}"
+                                                MinValue="{Binding ControllerProxy.MinStartingHealth}"
+                                                MaxValue="1000"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="0,5,0,0">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The highest value for Lara's health at the start of each level."/>
                     </Border>
                 </Grid>
             </StackPanel>

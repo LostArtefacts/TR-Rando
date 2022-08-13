@@ -112,6 +112,11 @@ namespace TRRandomizerCore.Editors
         public bool VfxCaustics { get; set; }
         public bool VfxWave { get; set; }
 
+        public bool RandomizeStartingHealth { get; set; }
+        public int HealthSeed { get; set; }
+        public uint MinStartingHealth { get; set; }
+        public uint MaxStartingHealth { get; set; }
+
         public void ApplyConfig(Config config)
         {
             int defaultSeed = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
@@ -220,6 +225,11 @@ namespace TRRandomizerCore.Editors
             VfxRoom = config.GetBool(nameof(VfxRoom));
             VfxCaustics = config.GetBool(nameof(VfxCaustics));
             VfxWave = config.GetBool(nameof(VfxWave));
+
+            RandomizeStartingHealth = config.GetBool(nameof(RandomizeStartingHealth));
+            HealthSeed = config.GetInt(nameof(HealthSeed), defaultSeed);
+            MinStartingHealth = config.GetUInt(nameof(MinStartingHealth), 1000);
+            MaxStartingHealth = config.GetUInt(nameof(MaxStartingHealth), 1000);
         }
 
         public void StoreConfig(Config config)
@@ -323,6 +333,11 @@ namespace TRRandomizerCore.Editors
             config[nameof(VfxRoom)] = VfxRoom;
             config[nameof(VfxCaustics)] = VfxCaustics;
             config[nameof(VfxWave)] = VfxWave;
+
+            config[nameof(RandomizeStartingHealth)] = RandomizeStartingHealth;
+            config[nameof(HealthSeed)] = HealthSeed;
+            config[nameof(MinStartingHealth)] = MinStartingHealth;
+            config[nameof(MaxStartingHealth)] = MaxStartingHealth;
         }
 
         public int GetSaveTarget(int numLevels)

@@ -17,7 +17,7 @@ namespace TRRandomizerCore
         private readonly TREditor _editor;
         private readonly TRVersionSupport _support;
 
-        internal TR23ScriptEditor ScriptEditor => _editor.ScriptEditor as TR23ScriptEditor;
+        internal AbstractTRScriptEditor ScriptEditor => _editor.ScriptEditor;
         internal RandomizerSettings LevelRandomizer => (_editor.LevelEditor as ISettingsProvider).Settings;
 
         internal TRRandomizerController(string directoryPath)
@@ -57,7 +57,7 @@ namespace TRRandomizerCore
         #endregion
 
         #region ScriptEditor Passthrough
-        private Organisation _extLevelOrganisation, _extPlayableOrganisation, _extUnarmedOrganisation, _extAmmolessOrganisation, _extSecretRewardsOrganisation, _extSunsetOrganisation, _extAudioOrganisation;
+        private Organisation _extLevelOrganisation, _extPlayableOrganisation, _extUnarmedOrganisation, _extAmmolessOrganisation, _extMedilessOrganisation, _extSecretRewardsOrganisation, _extSunsetOrganisation, _extAudioOrganisation;
 
         /// <summary>
         /// We need to store any organisation values that aren't random so if randomization is turned off for the 
@@ -68,11 +68,25 @@ namespace TRRandomizerCore
         {
             _extLevelOrganisation = RandomizeLevelSequencing ? Organisation.Default : ScriptEditor.LevelSequencingOrganisation;
             _extPlayableOrganisation = RandomizePlayableLevels ? Organisation.Default : ScriptEditor.EnabledLevelOrganisation;
-            _extUnarmedOrganisation = RandomizeUnarmedLevels ? Organisation.Default : ScriptEditor.UnarmedLevelOrganisation;
-            _extAmmolessOrganisation = RandomizeAmmolessLevels ? Organisation.Default : ScriptEditor.AmmolessLevelOrganisation;
-            _extSecretRewardsOrganisation = RandomizeSecretRewards ? Organisation.Default : ScriptEditor.SecretBonusOrganisation;
             _extSunsetOrganisation = RandomizeSunsets ? Organisation.Default : ScriptEditor.LevelSunsetOrganisation;
             _extAudioOrganisation = RandomizeAudioTracks ? Organisation.Default : ScriptEditor.GameTrackOrganisation;
+
+            if (ScriptEditor is IUnarmedEditor unarmedEditor)
+            {
+                _extUnarmedOrganisation = RandomizeUnarmedLevels ? Organisation.Default : unarmedEditor.UnarmedLevelOrganisation;
+            }
+            if (ScriptEditor is IAmmolessEditor ammolessEditor)
+            {
+                _extAmmolessOrganisation = RandomizeAmmolessLevels ? Organisation.Default : ammolessEditor.AmmolessLevelOrganisation;
+            }
+            if (ScriptEditor is IHealthEditor healthEditor)
+            {
+                _extMedilessOrganisation = RandomizeHealth ? Organisation.Default : healthEditor.MedilessLevelOrganisation;
+            }
+            if (ScriptEditor is ISecretRewardEditor rewardEditor)
+            {
+                _extSecretRewardsOrganisation = RandomizeSecretRewards ? Organisation.Default : rewardEditor.SecretBonusOrganisation;
+            }
         }
 
         public int LevelCount => ScriptEditor.ScriptedLevels.Count;
@@ -116,57 +130,187 @@ namespace TRRandomizerCore
 
         public bool RandomizeUnarmedLevels
         {
-            get => ScriptEditor.UnarmedLevelOrganisation == Organisation.Random;
-            set => ScriptEditor.UnarmedLevelOrganisation = value ? Organisation.Random : _extUnarmedOrganisation;
+            get => ScriptEditor is IUnarmedEditor unarmedEditor && unarmedEditor.UnarmedLevelOrganisation == Organisation.Random;
+            set
+            {
+                if (ScriptEditor is IUnarmedEditor unarmedEditor)
+                {
+                    unarmedEditor.UnarmedLevelOrganisation = value ? Organisation.Random : _extUnarmedOrganisation;
+                }
+            }
         }
 
         public int UnarmedLevelsSeed
         {
-            get => ScriptEditor.UnarmedLevelRNG.Value;
-            set => ScriptEditor.UnarmedLevelRNG = new RandomGenerator(value);
+            get => ScriptEditor is IUnarmedEditor unarmedEditor ? unarmedEditor.UnarmedLevelRNG.Value : -1;
+            set
+            {
+                if (ScriptEditor is IUnarmedEditor unarmedEditor)
+                {
+                    unarmedEditor.UnarmedLevelRNG = new RandomGenerator(value);
+                }
+            }
         }
 
         public uint UnarmedLevelCount
         {
-            get => ScriptEditor.RandomUnarmedLevelCount;
-            set => ScriptEditor.RandomUnarmedLevelCount = value;
+            get => ScriptEditor is IUnarmedEditor unarmedEditor ? unarmedEditor.RandomUnarmedLevelCount : (uint)_editor.Edition.UnarmedLevelCount;
+            set
+            {
+                if (ScriptEditor is IUnarmedEditor unarmedEditor)
+                {
+                    unarmedEditor.RandomUnarmedLevelCount = value;
+                }
+            }
         }
 
         public bool RandomizeAmmolessLevels
         {
-            get => ScriptEditor.AmmolessLevelOrganisation == Organisation.Random;
-            set => ScriptEditor.AmmolessLevelOrganisation = value ? Organisation.Random : _extAmmolessOrganisation;
+            get => ScriptEditor is IAmmolessEditor ammolessEditor && ammolessEditor.AmmolessLevelOrganisation == Organisation.Random;
+            set
+            {
+                if (ScriptEditor is IAmmolessEditor ammolessEditor)
+                {
+                    ammolessEditor.AmmolessLevelOrganisation = value ? Organisation.Random : _extAmmolessOrganisation;
+                }
+            }
         }
 
         public int AmmolessLevelsSeed
         {
-            get => ScriptEditor.AmmolessLevelRNG.Value;
-            set => ScriptEditor.AmmolessLevelRNG = new RandomGenerator(value);
+            get => ScriptEditor is IAmmolessEditor ammolessEditor ? ammolessEditor.AmmolessLevelRNG.Value : -1;
+            set
+            {
+                if (ScriptEditor is IAmmolessEditor ammolessEditor)
+                {
+                    ammolessEditor.AmmolessLevelRNG = new RandomGenerator(value);
+                }
+            }
         }
 
         public uint AmmolessLevelCount
         {
-            get => ScriptEditor.RandomAmmolessLevelCount;
-            set => ScriptEditor.RandomAmmolessLevelCount = value;
+            get => ScriptEditor is IAmmolessEditor ammolessEditor ? ammolessEditor.RandomAmmolessLevelCount : (uint)_editor.Edition.AmmolessLevelCount;
+            set
+            {
+                if (ScriptEditor is IAmmolessEditor ammolessEditor)
+                {
+                    ammolessEditor.RandomAmmolessLevelCount = value;
+                }
+            }
         }
 
         public bool RandomizeSecretRewards
         {
-            get => ScriptEditor.SecretBonusOrganisation == Organisation.Random;
+            get
+            {
+                if (ScriptEditor is ISecretRewardEditor rewardEditor)
+                {
+                    return rewardEditor.SecretBonusOrganisation == Organisation.Random;
+                }
+                return LevelRandomizer.RandomizeSecretRewardsPhysical;
+            }
             set
             {
-                ScriptEditor.SecretBonusOrganisation = value ? Organisation.Random : _extSecretRewardsOrganisation;
+                if (ScriptEditor is ISecretRewardEditor rewardEditor)
+                {
+                    rewardEditor.SecretBonusOrganisation = value ? Organisation.Random : _extSecretRewardsOrganisation;
+                }
                 LevelRandomizer.RandomizeSecretRewardsPhysical = value;
             }
         }
 
         public int SecretRewardSeed
         {
-            get => ScriptEditor.SecretBonusRNG.Value;
+            get
+            {
+                if (ScriptEditor is ISecretRewardEditor rewardEditor)
+                {
+                    return rewardEditor.SecretBonusRNG.Value;
+                }
+                return LevelRandomizer.SecretRewardsPhysicalSeed;
+            }
             set
             {
-                ScriptEditor.SecretBonusRNG = new RandomGenerator(value);
+                if (ScriptEditor is ISecretRewardEditor rewardEditor)
+                {
+                    rewardEditor.SecretBonusRNG = new RandomGenerator(value);
+                }
                 LevelRandomizer.SecretRewardsPhysicalSeed = value;
+            }
+        }
+
+        public bool RandomizeHealth
+        {
+            get => ScriptEditor is IHealthEditor healthEditor && healthEditor.MedilessLevelOrganisation == Organisation.Random;
+            set
+            {
+                if (ScriptEditor is IHealthEditor healthEditor)
+                {
+                    healthEditor.MedilessLevelOrganisation = value ? Organisation.Random : _extMedilessOrganisation;
+                }
+                LevelRandomizer.RandomizeStartingHealth = value;
+            }
+        }
+
+        public int HealthSeed
+        {
+            get => ScriptEditor is IHealthEditor healthEditor ? healthEditor.MedilessLevelRNG.Value : -1;
+            set
+            {
+                if (ScriptEditor is IHealthEditor healthEditor)
+                {
+                    healthEditor.MedilessLevelRNG = new RandomGenerator(value);
+                }
+                LevelRandomizer.HealthSeed = value;
+            }
+        }
+
+        public uint MedilessLevelCount
+        {
+            get => ScriptEditor is IHealthEditor healthEditor ? healthEditor.RandomMedilessLevelCount : (uint)_editor.Edition.MedilessLevelCount;
+            set
+            {
+                if (ScriptEditor is IHealthEditor healthEditor)
+                {
+                    healthEditor.RandomMedilessLevelCount = value;
+                }
+            }
+        }
+
+        public uint MinStartingHealth
+        {
+            get => LevelRandomizer.MinStartingHealth;
+            set => LevelRandomizer.MinStartingHealth = value;
+        }
+
+        public uint MaxStartingHealth
+        {
+            get => LevelRandomizer.MaxStartingHealth;
+            set => LevelRandomizer.MaxStartingHealth = value;
+        }
+
+        public bool DisableHealingBetweenLevels
+        {
+            get => ScriptEditor is IHealthEditor healthEditor && healthEditor.DisableHealingBetweenLevels;
+            set
+            {
+                if (ScriptEditor is IHealthEditor healthEditor)
+                {
+                    healthEditor.DisableHealingBetweenLevels = value && RandomizeHealth;
+                }
+            }
+        }
+
+        public bool DisableMedpacks
+        {
+            get => ScriptEditor is IHealthEditor healthEditor && healthEditor.DisableMedpacks;
+            set
+            {
+                if (ScriptEditor is IHealthEditor healthEditor)
+                {
+                    healthEditor.DisableMedpacks = value && RandomizeHealth;
+                }
             }
         }
 
@@ -216,8 +360,14 @@ namespace TRRandomizerCore
 
         public bool DisableDemos
         {
-            get => !ScriptEditor.DemosEnabled;
-            set => ScriptEditor.DemosEnabled = !value;
+            get => ScriptEditor is IDemoEditor demoEditor && !demoEditor.DemosEnabled;
+            set
+            {
+                if (ScriptEditor is IDemoEditor demoEditor)
+                {
+                    demoEditor.DemosEnabled = !value;
+                }
+            }
         }
 
         public bool AutoLaunchGame
