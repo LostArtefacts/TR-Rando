@@ -27,7 +27,7 @@ namespace TRRandomizerView.Model
         private BoolItemControlClass _includeKeyItems;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance;
         private BoolItemControlClass _persistTextures, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
-        private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _linkCreatureSFX;
+        private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
@@ -522,6 +522,16 @@ namespace TRRandomizerView.Model
             set
             {
                 _changeEnemySFX = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass ChangeDoorSFX
+        {
+            get => _changeDoorSFX;
+            set
+            {
+                _changeDoorSFX = value;
                 FirePropertyChanged();
             }
         }
@@ -1407,6 +1417,12 @@ namespace TRRandomizerView.Model
                 Description = "Randomize the sound made by crashes and explosions."
             };
             BindingOperations.SetBinding(ChangeCrashSFX, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
+            ChangeDoorSFX = new BoolItemControlClass
+            {
+                Title = "Change door sound effects",
+                Description = "Randomize door, gate and switch sound effects."
+            };
+            BindingOperations.SetBinding(ChangeDoorSFX, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
             ChangeEnemySFX = new BoolItemControlClass
             {
                 Title = "Change enemy sound effects",
@@ -1500,7 +1516,7 @@ namespace TRRandomizerView.Model
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
                 _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX,
-                _changeCrashSFX, _changeEnemySFX, _linkCreatureSFX
+                _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX
             };
             OutfitBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -1526,13 +1542,16 @@ namespace TRRandomizerView.Model
             // individual settings based on what's available.
             _removeRobeDagger.IsAvailable = _retainLevelTextures.IsAvailable = IsOutfitDaggerSupported;
 
+            _separateSecretTracks.IsAvailable = IsSecretAudioSupported;
+
             _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = IsSFXSupported;
 
             _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
 
             _maximiseDragonAppearance.IsAvailable = _swapEnemyAppearance.IsAvailable = IsOutfitDaggerSupported;
 
-            _docileWillard.IsAvailable = !IsBirdMonsterBehaviourTypeSupported;
+            _protectMonks.IsAvailable = !IsTR1;
+            _docileWillard.IsAvailable = IsTR3;
         }
 
         public void Load(TRRandomizerController controller)
@@ -1588,6 +1607,7 @@ namespace TRRandomizerView.Model
             ChangeWeaponSFX.Value = _controller.ChangeWeaponSFX;
             ChangeCrashSFX.Value = _controller.ChangeCrashSFX;
             ChangeEnemySFX.Value = _controller.ChangeEnemySFX;
+            ChangeDoorSFX.Value = _controller.ChangeDoorSFX;
             LinkCreatureSFX.Value = _controller.LinkCreatureSFX;
             UncontrolledSFXCount = _controller.UncontrolledSFXCount;
             UncontrolledSFXAssaultCourse = _controller.UncontrolledSFXAssaultCourse;
@@ -1867,6 +1887,7 @@ namespace TRRandomizerView.Model
             _controller.ChangeWeaponSFX = ChangeWeaponSFX.Value;
             _controller.ChangeCrashSFX = ChangeCrashSFX.Value;
             _controller.ChangeEnemySFX = ChangeEnemySFX.Value;
+            _controller.ChangeDoorSFX = ChangeDoorSFX.Value;
             _controller.LinkCreatureSFX = LinkCreatureSFX.Value;
             _controller.UncontrolledSFXCount = UncontrolledSFXCount;
             _controller.UncontrolledSFXAssaultCourse = UncontrolledSFXAssaultCourse;
@@ -1952,11 +1973,16 @@ namespace TRRandomizerView.Model
         #region Randomizer Type Support
         private static readonly string _supportPropertyFormat = "Is{0}TypeSupported";
 
+        public bool IsTR1 => _controller != null && _controller.IsTR1;
+        public bool IsTR2 => _controller != null && _controller.IsTR2;
+        public bool IsTR3 => _controller != null && _controller.IsTR3;
         public bool IsLevelSequenceTypeSupported => IsRandomizationSupported(TRRandomizerType.LevelSequence);
         public bool IsGlobeDisplayTypeSupported => IsRandomizationSupported(TRRandomizerType.GlobeDisplay);
         public bool IsUnarmedTypeSupported => IsRandomizationSupported(TRRandomizerType.Unarmed);
         public bool IsAmmolessTypeSupported => IsRandomizationSupported(TRRandomizerType.Ammoless);
+        public bool IsMedilessTypeSupported => IsRandomizationSupported(TRRandomizerType.Mediless);
         public bool IsSunsetTypeSupported => IsRandomizationSupported(TRRandomizerType.Sunset);
+        public bool IsHealthTypeSupported => IsRandomizationSupported(TRRandomizerType.Health);
         public bool IsNightModeTypeSupported => IsRandomizationSupported(TRRandomizerType.NightMode);
         public bool IsSecretTypeSupported => IsRandomizationSupported(TRRandomizerType.Secret);
         public bool IsRewardRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.RewardRooms);
@@ -1966,12 +1992,14 @@ namespace TRRandomizerView.Model
         public bool IsTextureTypeSupported => IsRandomizationSupported(TRRandomizerType.Texture);
         public bool IsStartPositionTypeSupported => IsRandomizationSupported(TRRandomizerType.StartPosition);
         public bool IsAudioTypeSupported => IsRandomizationSupported(TRRandomizerType.Audio);
+        public bool IsSecretAudioSupported => IsRandomizationSupported(TRRandomizerType.SecretAudio);
         public bool IsSFXSupported => IsRandomizationSupported(TRRandomizerType.SFX);
         public bool IsVFXTypeSupported => IsRandomizationSupported(TRRandomizerType.VFX);
         public bool IsOutfitTypeSupported => IsRandomizationSupported(TRRandomizerType.Outfit);
         public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);
         public bool IsEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.Environment);
+        public bool IsWeatherTypeSupported => IsRandomizationSupported(TRRandomizerType.Weather);
         public bool IsBirdMonsterBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.BirdMonsterBehaviour);
 
         public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
@@ -1988,6 +2016,10 @@ namespace TRRandomizerView.Model
             {
                 FirePropertyChanged(string.Format(_supportPropertyFormat, type.ToString()));
             }
+
+            FirePropertyChanged(nameof(IsTR1));
+            FirePropertyChanged(nameof(IsTR2));
+            FirePropertyChanged(nameof(IsTR3));
 
             AdjustAvailableOptions();
         }

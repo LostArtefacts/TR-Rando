@@ -614,6 +614,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.ChangeEnemySFX = value;
         }
 
+        public bool ChangeDoorSFX
+        {
+            get => LevelRandomizer.ChangeDoorSFX;
+            set => LevelRandomizer.ChangeDoorSFX = value;
+        }
+
         public bool LinkCreatureSFX
         {
             get => LevelRandomizer.LinkCreatureSFX;

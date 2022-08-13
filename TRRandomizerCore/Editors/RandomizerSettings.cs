@@ -85,6 +85,7 @@ namespace TRRandomizerCore.Editors
         public bool ChangeWeaponSFX { get; set; }
         public bool ChangeCrashSFX { get; set; }
         public bool ChangeEnemySFX { get; set; }
+        public bool ChangeDoorSFX { get; set; }
         public bool LinkCreatureSFX { get; set; }
         public uint UncontrolledSFXCount { get; set; }
         public bool UncontrolledSFXAssaultCourse { get; set; }
@@ -188,6 +189,7 @@ namespace TRRandomizerCore.Editors
             ChangeWeaponSFX = config.GetBool(nameof(ChangeWeaponSFX), true);
             ChangeCrashSFX = config.GetBool(nameof(ChangeCrashSFX), true);
             ChangeEnemySFX = config.GetBool(nameof(ChangeEnemySFX), true);
+            ChangeDoorSFX = config.GetBool(nameof(ChangeDoorSFX), true);
             LinkCreatureSFX = config.GetBool(nameof(LinkCreatureSFX));
             UncontrolledSFXCount = config.GetUInt(nameof(UncontrolledSFXCount), 0);
             UncontrolledSFXAssaultCourse = config.GetBool(nameof(UncontrolledSFXAssaultCourse));
@@ -290,6 +292,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(ChangeWeaponSFX)] = ChangeWeaponSFX;
             config[nameof(ChangeCrashSFX)] = ChangeCrashSFX;
             config[nameof(ChangeEnemySFX)] = ChangeEnemySFX;
+            config[nameof(ChangeDoorSFX)] = ChangeDoorSFX;
             config[nameof(LinkCreatureSFX)] = LinkCreatureSFX;
             config[nameof(UncontrolledSFXCount)] = UncontrolledSFXCount;
             config[nameof(UncontrolledSFXAssaultCourse)] = UncontrolledSFXAssaultCourse;

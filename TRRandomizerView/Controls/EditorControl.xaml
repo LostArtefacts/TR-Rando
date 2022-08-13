@@ -283,6 +283,32 @@
         <ctrl:ManagedSeedAdvancedControl
             Grid.Row="1"
             Grid.Column="2"
+            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+            IsEnabled="{Binding IsAudioTypeSupported, UpdateSourceTrigger=PropertyChanged}"
+            IsActive="{Binding RandomizeAudioTracks, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Audio"
+            Text="Randomize the tracks for the title screen, level ambience and triggers, as well as general sound effects."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Audio (Advanced)"
+                                        MainDescription="Customize the audio randomization."
+                                        BoolItemsSource="{Binding Data.AudioBoolItemControls, Source={StaticResource proxy}}"
+                                        HasBoolItems="True"
+                                        HasAudioOptions="True"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
+
+        <ctrl:ManagedSeedAdvancedControl
+            Grid.Row="1"
+            Grid.Column="2"
+            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
             IsEnabled="{Binding IsAudioTypeSupported, UpdateSourceTrigger=PropertyChanged}"
             IsActive="{Binding RandomizeAudioTracks, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Audio"
