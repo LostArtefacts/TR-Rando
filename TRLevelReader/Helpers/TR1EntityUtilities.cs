@@ -332,6 +332,16 @@ namespace TRLevelReader.Helpers
             return GetWaterEnemies().Contains(entity);
         }
 
+        public static bool IsWaterLandCreatureEquivalent(TREntities entity)
+        {
+            return GetWaterEnemyLandCreatures().ContainsValue(entity);
+        }
+
+        public static List<TREntities> GetWaterLandCreatures()
+        {
+            return GetWaterEnemyLandCreatures().Values.ToList();
+        }
+
         public static List<TREntities> FilterWaterEnemies(List<TREntities> entities)
         {
             List<TREntities> waterEntities = new List<TREntities>();
