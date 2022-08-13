@@ -43,6 +43,9 @@ namespace TRRandomizerCore.Editors
                 target += numLevels;
             }
 
+            // Environment randomizer always runs
+            target += numLevels;
+
             return target;
         }
 
@@ -80,6 +83,20 @@ namespace TRRandomizerCore.Editors
                     SaveMonitor = monitor,
                     Settings = Settings
                 }.Randomize(Settings.HealthSeed);
+            }
+
+            if (!monitor.IsCancelled)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, Settings.RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
+                new TR1EnvironmentRandomizer
+                {
+                    ScriptEditor = scriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    BackupPath = backupDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.EnvironmentSeed);
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeAudio)
