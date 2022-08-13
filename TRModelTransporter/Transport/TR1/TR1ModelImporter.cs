@@ -17,10 +17,16 @@ namespace TRModelTransporter.Transport
     {
         public TR1PaletteManager PaletteManager { get; set; }
 
-        public TR1ModelImporter()
+        public TR1ModelImporter(bool isCommunityPatch = false)
         {
             Data = new TR1DefaultDataProvider();
             PaletteManager = new TR1PaletteManager();
+
+            if (isCommunityPatch)
+            {
+                Data.TextureTileLimit = 128;
+                Data.TextureObjectLimit = 8192;
+            }
         }
 
         protected override AbstractTextureImportHandler<TREntities, TRLevel, TR1ModelDefinition> CreateTextureHandler()

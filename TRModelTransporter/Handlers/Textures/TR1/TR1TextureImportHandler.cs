@@ -11,10 +11,6 @@ namespace TRModelTransporter.Handlers.Textures
 {
     public class TR1TextureImportHandler : AbstractTextureImportHandler<TREntities, TRLevel, TR1ModelDefinition>
     {
-        private static readonly int _maxTextures = 2048; // Check this
-
-        public override int MaximumTextures => _maxTextures;
-
         public TR1PaletteManager PaletteManager { get; set; }
 
         protected override IEnumerable<TRSpriteSequence> GetExistingSpriteSequences()

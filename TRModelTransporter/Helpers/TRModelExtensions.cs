@@ -122,21 +122,6 @@ namespace TRModelTransporter.Helpers
             return reusableIndices;
         }
 
-        public static int GetFreeObjectTextureCount(this TRLevel level)
-        {
-            return 2048 - (int)level.NumObjectTextures + level.GetInvalidObjectTextureIndices().Count;
-        }
-
-        public static int GetFreeObjectTextureCount(this TR2Level level)
-        {
-            return 2048 - (int)level.NumObjectTextures + level.GetInvalidObjectTextureIndices().Count;
-        }
-
-        public static int GetFreeObjectTextureCount(this TR3Level level)
-        {
-            return 4096 - (int)level.NumObjectTextures + level.GetInvalidObjectTextureIndices().Count;
-        }
-
         // Given a precompiled dictionary of old texture index to new, this will ensure that
         // all Meshes, RoomData and AnimatedTextures point to the new correct index.
         public static void ReindexTextures(this TR2Level level, Dictionary<int, int> indexMap, bool defaultToOriginal = true)

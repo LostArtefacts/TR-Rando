@@ -5,6 +5,9 @@ namespace TRModelTransporter.Data
 {
     public interface ITransportDataProvider<E> where E : Enum
     {
+        int TextureTileLimit { get; set; }
+        int TextureObjectLimit { get; set; }
+
         /// <summary>
         /// Return all other model types on which the given type depends.
         /// </summary>

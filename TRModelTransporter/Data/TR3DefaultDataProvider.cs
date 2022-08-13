@@ -6,6 +6,9 @@ namespace TRModelTransporter.Data
 {
     public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
     {
+        public int TextureTileLimit { get; set; } = 32;
+        public int TextureObjectLimit { get; set; } = 4096;
+
         public Dictionary<TR3Entities, TR3Entities> AliasPriority { get; set; }
 
         public IEnumerable<TR3Entities> GetModelDependencies(TR3Entities entity)

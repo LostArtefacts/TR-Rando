@@ -6,6 +6,9 @@ namespace TRModelTransporter.Data
 {
     public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
     {
+        public int TextureTileLimit { get; set; } = 16;
+        public int TextureObjectLimit { get; set; } = 2048;
+
         public Dictionary<TREntities, TREntities> AliasPriority { get; set; }
 
         public IEnumerable<TREntities> GetModelDependencies(TREntities entity)

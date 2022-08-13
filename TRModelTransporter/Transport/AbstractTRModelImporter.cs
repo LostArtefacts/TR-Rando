@@ -26,13 +26,18 @@ namespace TRModelTransporter.Transport
             EntitiesToImport = new List<E>();
             EntitiesToRemove = new List<E>();
             ClearUnusedSprites = false;
-            _textureHandler = CreateTextureHandler();
         }
 
         protected abstract AbstractTextureImportHandler<E, L, D> CreateTextureHandler();
 
         public void Import()
         {
+            if (_textureHandler == null)
+            {
+                _textureHandler = CreateTextureHandler();
+                _textureHandler.Data = Data;
+            }
+
             List<E> existingEntities = GetExistingModelTypes();
 
             if (EntitiesToRemove != null)
