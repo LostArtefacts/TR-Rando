@@ -38,6 +38,12 @@ namespace TRRandomizerCore.Editors
                 target += numLevels;
             }
 
+            if (Settings.RandomizeEnemies)
+            {
+                // *3 for multithreaded work
+                target += Settings.CrossLevelEnemies ? numLevels * 3 : numLevels;
+            }
+
             if (Settings.RandomizeAudio)
             {
                 target += numLevels;
@@ -83,6 +89,20 @@ namespace TRRandomizerCore.Editors
                     SaveMonitor = monitor,
                     Settings = Settings
                 }.Randomize(Settings.HealthSeed);
+            }
+
+            if (!monitor.IsCancelled && Settings.RandomizeEnemies)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
+                new TR1EnemyRandomizer
+                {
+                    ScriptEditor = scriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    BackupPath = backupDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.EnemySeed);
             }
 
             if (!monitor.IsCancelled)
