@@ -96,6 +96,24 @@
         <ctrl:ManagedSeedIntControl 
             Grid.Row="2"
             Grid.Column="0"
+            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+            IsEnabled="{Binding IsAmmolessTypeSupported, UpdateSourceTrigger=PropertyChanged}"
+            IsActive="{Binding RandomizeAmmolessLevels, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Ammoless Levels"
+            Text="Randomize the levels in which Lara loses her ammo."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding AmmolessLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomInt="{Binding AmmolessLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            CustomIntMinValue="0"
+            CustomIntDefault="{Binding DefaultAmmolessLevelCount}"
+            CustomIntMaxValue="{Binding MaximumLevelCount}"
+            CustomIntTitle="Number of levels"/>
+
+        <ctrl:ManagedSeedIntControl 
+            Grid.Row="2"
+            Grid.Column="0"
+            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
             IsEnabled="{Binding IsAmmolessTypeSupported, UpdateSourceTrigger=PropertyChanged}"
             IsActive="{Binding RandomizeAmmolessLevels, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Ammoless Levels"
