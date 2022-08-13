@@ -680,7 +680,7 @@ namespace TRRandomizerCore.Randomizers
         private void AdjustCentaurStatue(TREntity entity, TRLevel level, FDControl floorData)
         {
             // If they're floating, they tend not to trigger as Lara's not within range
-            LocationGenerator locationGenerator = new LocationGenerator();
+            TR1LocationGenerator locationGenerator = new TR1LocationGenerator();
 
             int y = entity.Y;
             short room = entity.Room;

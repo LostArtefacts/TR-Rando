@@ -426,6 +426,7 @@ namespace TRLevelReader.Helpers
                 || IsSwitchType(entity)
                 || IsKeyholeType(entity)
                 || IsSlotType(entity)
+                || IsEnemyType(entity)
                 || entity == TREntities.Lara;
         }
 

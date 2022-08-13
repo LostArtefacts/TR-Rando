@@ -14,8 +14,10 @@ namespace LocationExport
 {
     class Program
     {
+        private static TR1LevelReader _reader1;
         private static TR3LevelReader _reader3;
-        private static Dictionary<string, List<Location>> _allExclusions;
+        private static Dictionary<string, List<Location>> _allTR1Exclusions;
+        private static Dictionary<string, List<Location>> _allTR3Exclusions;
 
         static void Main(string[] args)
         {
@@ -25,18 +27,34 @@ namespace LocationExport
                 return;
             }
 
+            _reader1 = new TR1LevelReader();
             _reader3 = new TR3LevelReader();
-            _allExclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR3\Locations\invalid_item_locations.json"));
+            _allTR1Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\invalid_item_locations.json"));
+            _allTR3Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR3\Locations\invalid_item_locations.json"));
             Dictionary<string, List<Location>> allLocations = new Dictionary<string, List<Location>>();
 
             string levelType = args[0].ToUpper();
 
-            if (levelType.EndsWith(".TR2"))
+            if (levelType.EndsWith(".PHD"))
+            {
+                allLocations[levelType] = ExportTR1Locations(levelType);
+            }
+            else if (levelType == "TR1")
+            {
+                foreach (string lvl in TRLevelNames.AsList)
+                {
+                    if (File.Exists(lvl))
+                    {
+                        allLocations[lvl] = ExportTR1Locations(lvl);
+                    }
+                }
+            }
+            else if (levelType.EndsWith(".TR2"))
             {
                 uint version = DetectVersion(args[0]);
                 if (version == Versions.TR3a || version == Versions.TR3b)
                 {
-                    allLocations[levelType] = ExportLocations(levelType);
+                    allLocations[levelType] = ExportTR3Locations(levelType);
                 }
             }
             else if (levelType == "TR3")
@@ -45,7 +63,7 @@ namespace LocationExport
                 {
                     if (File.Exists(lvl))
                     {
-                        allLocations[lvl] = ExportLocations(lvl);
+                        allLocations[lvl] = ExportTR3Locations(lvl);
                     }
                 }
             }
@@ -55,7 +73,7 @@ namespace LocationExport
                 {
                     if (File.Exists(lvl))
                     {
-                        allLocations[lvl] = ExportLocations(lvl);
+                        allLocations[lvl] = ExportTR3Locations(lvl);
                     }
                 }
             }
@@ -129,13 +147,40 @@ namespace LocationExport
             }
         }
 
-        private static List<Location> ExportLocations(string lvl)
+        private static List<Location> ExportTR1Locations(string lvl)
+        {
+            TRLevel level = _reader1.ReadLevel(lvl);
+            List<Location> exclusions = new List<Location>();
+            if (_allTR1Exclusions.ContainsKey(lvl))
+            {
+                exclusions.AddRange(_allTR1Exclusions[lvl]);
+            }
+
+            foreach (TREntity entity in level.Entities)
+            {
+                if (!TR1EntityUtilities.CanSharePickupSpace((TREntities)entity.TypeID))
+                {
+                    exclusions.Add(new Location
+                    {
+                        X = entity.X,
+                        Y = entity.Y,
+                        Z = entity.Z,
+                        Room = entity.Room
+                    });
+                }
+            }
+
+            TR1LocationGenerator generator = new TR1LocationGenerator();
+            return generator.Generate(level, exclusions);
+        }
+
+        private static List<Location> ExportTR3Locations(string lvl)
         {
             TR3Level level = _reader3.ReadLevel(lvl);
             List<Location> exclusions = new List<Location>();
-            if (_allExclusions.ContainsKey(lvl))
+            if (_allTR3Exclusions.ContainsKey(lvl))
             {
-                exclusions.AddRange(_allExclusions[lvl]);
+                exclusions.AddRange(_allTR3Exclusions[lvl]);
             }
 
             foreach (TR2Entity entity in level.Entities)
@@ -152,7 +197,7 @@ namespace LocationExport
                 }
             }
 
-            LocationGenerator generator = new LocationGenerator();
+            TR3LocationGenerator generator = new TR3LocationGenerator();
             return generator.Generate(level, exclusions);
         }
 

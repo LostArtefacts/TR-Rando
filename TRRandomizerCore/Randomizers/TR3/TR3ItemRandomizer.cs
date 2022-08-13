@@ -312,7 +312,7 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
 
-            LocationGenerator generator = new LocationGenerator();
+            TR3LocationGenerator generator = new TR3LocationGenerator();
             return generator.Generate(level.Data, exclusions);
         }
 

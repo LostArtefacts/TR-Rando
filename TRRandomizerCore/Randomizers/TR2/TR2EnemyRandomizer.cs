@@ -869,7 +869,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 FDControl floorData = new FDControl();
                 floorData.ParseFromLevel(level.Data);
-                LocationGenerator locationGenerator = new LocationGenerator();
+                TR2LocationGenerator locationGenerator = new TR2LocationGenerator();
                 List<TR2Entities> replacementPool;
                 if (!Settings.RandomizeItems || Settings.RandoItemDifficulty == ItemDifficulty.Default)
                 {
