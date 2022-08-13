@@ -14,43 +14,8 @@ namespace TRRandomizerCore
 {
     public class TRRandomizerController
     {
-        // Only the versions defined in this dictionary can be opened for randomization. The supported type list is an indicator
-        // to callers as to what can be applied during randomization i.e. for UI options to be enabled/disabled appropriately.
-        private static readonly Dictionary<TRVersion, List<TRRandomizerType>> _supportedTypes = new Dictionary<TRVersion, List<TRRandomizerType>>
-        {
-            [TRVersion.TR2] = new List<TRRandomizerType>
-            {
-                TRRandomizerType.All
-            },
-            [TRVersion.TR3] = new List<TRRandomizerType>
-            {
-                TRRandomizerType.LevelSequence, TRRandomizerType.Unarmed, TRRandomizerType.Ammoless, TRRandomizerType.Audio, TRRandomizerType.Outfit,
-                TRRandomizerType.Secret, TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.SFX, TRRandomizerType.Item, 
-                TRRandomizerType.NightMode, TRRandomizerType.SecretReward, TRRandomizerType.Text, TRRandomizerType.Enemy, TRRandomizerType.Texture,
-                TRRandomizerType.StartPosition, TRRandomizerType.VFX, TRRandomizerType.Environment
-            }
-        };
-
-        // As above, but used to eliminate certain options per version.
-        private static readonly Dictionary<TRVersion, List<TRRandomizerType>> _unsupportedTypes = new Dictionary<TRVersion, List<TRRandomizerType>>
-        {
-            [TRVersion.TR2] = new List<TRRandomizerType>
-            {
-                TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.VFX
-            },
-            [TRVersion.TR3] = new List<TRRandomizerType>
-            {
-                TRRandomizerType.BirdMonsterBehaviour
-            }
-        };
-
-        private static readonly Dictionary<TRVersion, List<string>> _versionExes = new Dictionary<TRVersion, List<string>>
-        {
-            [TRVersion.TR2]  = new List<string> { "Tomb2.exe" },
-            [TRVersion.TR3]  = new List<string> { "Tomb3.exe" }
-        };
-
         private readonly TREditor _editor;
+        private readonly TRVersionSupport _support;
 
         internal TR23ScriptEditor ScriptEditor => _editor.ScriptEditor as TR23ScriptEditor;
         internal RandomizerSettings LevelRandomizer => (_editor.LevelEditor as ISettingsProvider).Settings;
@@ -63,6 +28,7 @@ namespace TRRandomizerCore
             _editor.RestoreProgressChanged += Editor_RestoreProgressChanged;
             StoreExternalOrganisations();
 
+            _support = new TRVersionSupport();
             if (!IsRandomizationSupported())
             {
                 throw new NotSupportedException(string.Format("Randomization of {0} is not currently supported.", EditionTitle));
@@ -72,36 +38,22 @@ namespace TRRandomizerCore
         #region Version Support
         public bool IsRandomizationSupported()
         {
-            return _supportedTypes.ContainsKey(ScriptEditor.Edition.Version);
+            return _support.IsRandomizationSupported(_editor.Edition);
         }
 
         public bool IsRandomizationSupported(TRRandomizerType randomizerType)
         {
-            return IsRandomizationSupported(ScriptEditor.Edition.Version, randomizerType);
-        }
-
-        public bool IsRandomizationSupported(TRVersion version, TRRandomizerType randomizerType)
-        {
-            bool supported = _supportedTypes.ContainsKey(version) &&
-                (_supportedTypes[version].Contains(TRRandomizerType.All) || _supportedTypes[version].Contains(randomizerType));
-            
-            // Is it explicitly unsupported?
-            if (supported && _unsupportedTypes.ContainsKey(version) && _unsupportedTypes[version].Contains(randomizerType))
-            {
-                supported = false;
-            }
-            return supported;
+            return _support.IsRandomizationSupported(_editor.Edition, randomizerType);
         }
 
         public List<string> GetExecutables()
         {
-            List<string> exes = new List<string>();
-            if (_versionExes.ContainsKey(ScriptEditor.Edition.Version))
-            {
-                exes.AddRange(_versionExes[ScriptEditor.Edition.Version]);
-            }
-            return exes;
+            return _support.GetExecutables(_editor.Edition);
         }
+
+        public bool IsTR1 => _editor.Edition.Version == TRVersion.TR1;
+        public bool IsTR2 => _editor.Edition.Version == TRVersion.TR2;
+        public bool IsTR3 => _editor.Edition.Version == TRVersion.TR3;
         #endregion
 
         #region ScriptEditor Passthrough
