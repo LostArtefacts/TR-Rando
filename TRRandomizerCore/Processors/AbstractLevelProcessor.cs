@@ -19,7 +19,10 @@ namespace TRRandomizerCore.Processors
         internal List<S> Levels { get; set; }
         internal TRSaveMonitor SaveMonitor;
 
+        // The WIP folder where levels are saved before being copied to the target at the end of the process
         public string BasePath { get; set; }
+        // The backup folder that contains the untouched levels from when the user first opened the folder
+        public string BackupPath { get; set; }
 
         public AbstractLevelProcessor()
         {
