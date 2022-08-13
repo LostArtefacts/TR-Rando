@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
@@ -88,9 +89,18 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeFloorTracks(TR3Level level, FDControl floorData)
         {
+            _audioRandomizer.ResetFloorMap();
             foreach (TR3Room room in level.Rooms)
             {
-                _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator);
+                _audioRandomizer.RandomizeFloorTracks(room.Sectors, floorData, _generator, sectorIndex =>
+                {
+                    // Get the midpoint of the tile in world coordinates
+                    return new Vector2
+                    (
+                        AudioRandomizer.HalfSectorSize + room.Info.X + sectorIndex / room.NumZSectors * AudioRandomizer.FullSectorSize,
+                        AudioRandomizer.HalfSectorSize + room.Info.Z + sectorIndex % room.NumZSectors * AudioRandomizer.FullSectorSize
+                    );
+                });
             }
         }
 

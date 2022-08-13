@@ -38,6 +38,11 @@ namespace TRRandomizerCore.Editors
                 target += numLevels;
             }
 
+            if (Settings.RandomizeAudio)
+            {
+                target += numLevels;
+            }
+
             return target;
         }
 
@@ -75,6 +80,20 @@ namespace TRRandomizerCore.Editors
                     SaveMonitor = monitor,
                     Settings = Settings
                 }.Randomize(Settings.HealthSeed);
+            }
+
+            if (!monitor.IsCancelled && Settings.RandomizeAudio)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
+                new TR1AudioRandomizer
+                {
+                    ScriptEditor = scriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    BackupPath = backupDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.AudioSeed);
             }
         }
     }
