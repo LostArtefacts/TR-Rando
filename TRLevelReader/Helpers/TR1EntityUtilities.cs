@@ -427,6 +427,8 @@ namespace TRLevelReader.Helpers
                 || IsKeyholeType(entity)
                 || IsSlotType(entity)
                 || IsEnemyType(entity)
+                || entity == TREntities.CameraTarget_N
+                || entity == TREntities.Earthquake_N
                 || entity == TREntities.Lara;
         }
 

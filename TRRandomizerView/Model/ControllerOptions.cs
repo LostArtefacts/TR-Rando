@@ -24,7 +24,7 @@ namespace TRRandomizerView.Model
         private bool _disableDemos, _autoLaunchGame, _puristMode;
 
         private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras;
-        private BoolItemControlClass _includeKeyItems;
+        private BoolItemControlClass _includeKeyItems, _randomizeItemTypes, _randomizeItemLocations;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance;
         private BoolItemControlClass _persistTextures, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
@@ -698,6 +698,26 @@ namespace TRRandomizerView.Model
             set
             {
                 _includeKeyItems = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RandomizeItemTypes
+        {
+            get => _randomizeItemTypes;
+            set
+            {
+                _randomizeItemTypes = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RandomizeItemPositions
+        {
+            get => _randomizeItemLocations;
+            set
+            {
+                _randomizeItemLocations = value;
                 FirePropertyChanged();
             }
         }
@@ -1405,10 +1425,22 @@ namespace TRRandomizerView.Model
 
             // Items
             Binding randomizeItemsBinding = new Binding(nameof(RandomizeItems)) { Source = this };
+            RandomizeItemTypes = new BoolItemControlClass
+            {
+                Title = "Randomize types",
+                Description = "The types of standard pickups will be randomized e.g. a small medi may become a shotgun."
+            };
+            BindingOperations.SetBinding(RandomizeItemTypes, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
+            RandomizeItemPositions = new BoolItemControlClass
+            {
+                Title = "Randomize positions",
+                Description = "The positions of standard pickups will be randomized."
+            };
+            BindingOperations.SetBinding(RandomizeItemPositions, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
             IncludeKeyItems = new BoolItemControlClass()
             {
-                Title = "Enable key items",
-                Description = "Most key items will be randomized. Keys will spawn before their respective locks."
+                Title = "Include key items",
+                Description = "Most key item positions will be randomized. Keys will spawn before their respective locks."
             };
             BindingOperations.SetBinding(IncludeKeyItems, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
 
@@ -1604,7 +1636,7 @@ namespace TRRandomizerView.Model
             };
             ItemBoolItemControls = new List<BoolItemControlClass>()
             {
-                _includeKeyItems,
+                _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems
             };
             EnemyBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -1657,6 +1689,8 @@ namespace TRRandomizerView.Model
 
             _protectMonks.IsAvailable = !IsTR1;
             _docileWillard.IsAvailable = IsTR3;
+
+            _includeKeyItems.IsAvailable = IsKeyItemTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -1728,6 +1762,8 @@ namespace TRRandomizerView.Model
             RandomizeItems = _controller.RandomizeItems;
             ItemSeed = _controller.ItemSeed;
             IncludeKeyItems.Value = _controller.IncludeKeyItems;
+            RandomizeItemTypes.Value = _controller.RandomizeItemTypes;
+            RandomizeItemPositions.Value = _controller.RandomizeItemPositions;
             RandoItemDifficulty = _controller.RandoItemDifficulty;
 
             RandomizeEnemies = _controller.RandomizeEnemies;
@@ -2024,6 +2060,8 @@ namespace TRRandomizerView.Model
             _controller.RandomizeItems = RandomizeItems;
             _controller.ItemSeed = ItemSeed;
             _controller.IncludeKeyItems = IncludeKeyItems.Value;
+            _controller.RandomizeItemTypes = RandomizeItemTypes.Value;
+            _controller.RandomizeItemPositions = RandomizeItemPositions.Value;
             _controller.RandoItemDifficulty = RandoItemDifficulty;
 
             _controller.RandomizeEnemies = RandomizeEnemies;
@@ -2117,6 +2155,7 @@ namespace TRRandomizerView.Model
         public bool IsRewardRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.RewardRooms);
         public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
         public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);
+        public bool IsKeyItemTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItems);
         public bool IsEnemyTypeSupported => IsRandomizationSupported(TRRandomizerType.Enemy);
         public bool IsTextureTypeSupported => IsRandomizationSupported(TRRandomizerType.Texture);
         public bool IsStartPositionTypeSupported => IsRandomizationSupported(TRRandomizerType.StartPosition);

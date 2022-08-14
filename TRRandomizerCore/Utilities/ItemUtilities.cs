@@ -47,6 +47,14 @@ namespace TRRandomizerCore.Utilities
             return defaultItem;
         }
 
+        public static void HideEntity(TREntity entity)
+        {
+            // Move the item down, under the floor or into the ceiling of whatever is below
+            entity.Y += 128;
+            // Marking it invisible means it cannot be picked up, even if the new location can be reached.
+            entity.Invisible = true;
+        }
+
         public static void HideEntity(TR2Entity entity)
         {
             // Move the item down, under the floor or into the ceiling of whatever is below

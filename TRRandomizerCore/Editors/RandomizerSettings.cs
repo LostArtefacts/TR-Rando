@@ -133,8 +133,8 @@ namespace TRRandomizerCore.Editors
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
             IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
             RandoItemDifficulty = (ItemDifficulty)config.GetEnum(nameof(RandoItemDifficulty), typeof(ItemDifficulty), ItemDifficulty.Default);
-            RandomizeItemTypes = config.GetBool(nameof(RandomizeItemTypes));
-            RandomizeItemPositions = config.GetBool(nameof(RandomizeItemPositions));
+            RandomizeItemTypes = config.GetBool(nameof(RandomizeItemTypes), true);
+            RandomizeItemPositions = config.GetBool(nameof(RandomizeItemPositions), true);
 
             RandomizeEnemies = config.GetBool(nameof(RandomizeEnemies));
             EnemySeed = config.GetInt(nameof(EnemySeed), defaultSeed);

@@ -531,6 +531,18 @@ namespace TRRandomizerCore
             set => LevelRandomizer.IncludeKeyItems = value;
         }
 
+        public bool RandomizeItemTypes
+        {
+            get => LevelRandomizer.RandomizeItemTypes;
+            set => LevelRandomizer.RandomizeItemTypes = value;
+        }
+
+        public bool RandomizeItemPositions
+        {
+            get => LevelRandomizer.RandomizeItemPositions;
+            set => LevelRandomizer.RandomizeItemPositions = value;
+        }
+
         public bool DevelopmentMode
         {
             get => LevelRandomizer.DevelopmentMode;

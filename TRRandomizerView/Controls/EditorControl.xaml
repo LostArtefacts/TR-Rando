@@ -316,6 +316,18 @@
 
         <ctrl:ManagedSeedControl
             Grid.Column="2"
+            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+            IsEnabled="{Binding IsSecretRewardTypeSupported, UpdateSourceTrigger=PropertyChanged}"
+            IsActive="{Binding RandomizeSecretRewards, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Secret Rewards"
+            Text="Randomize the rewards given for finding secrets in each level."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding SecretRewardSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+        
+        <ctrl:ManagedSeedControl
+            Grid.Column="2"
+            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
             IsEnabled="{Binding IsSecretRewardTypeSupported, UpdateSourceTrigger=PropertyChanged}"
             IsActive="{Binding RandomizeSecretRewards, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Secret Rewards"

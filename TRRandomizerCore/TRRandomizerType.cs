@@ -33,6 +33,7 @@
         MaximumDragons,
         BirdMonsterBehaviour,
         SecretAudio,
-        Mediless
+        Mediless,
+        KeyItems
     }
 }

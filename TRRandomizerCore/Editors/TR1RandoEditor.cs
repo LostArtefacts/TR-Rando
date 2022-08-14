@@ -44,6 +44,16 @@ namespace TRRandomizerCore.Editors
                 target += Settings.CrossLevelEnemies ? numLevels * 3 : numLevels;
             }
 
+            if (Settings.RandomizeItems)
+            {
+                target += numLevels;
+            }
+
+            if (Settings.RandomizeSecretRewardsPhysical)
+            {
+                target += numLevels;
+            }
+
             if (Settings.RandomizeAudio)
             {
                 target += numLevels;
@@ -103,6 +113,34 @@ namespace TRRandomizerCore.Editors
                     SaveMonitor = monitor,
                     Settings = Settings
                 }.Randomize(Settings.EnemySeed);
+            }
+
+            // Tomp1 doesn't have droppable enmies so item rando takes places after enemy rando
+            // - this allows for accounting for newly added items.
+            if (!monitor.IsCancelled && Settings.RandomizeItems)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
+                new TR1ItemRandomizer
+                {
+                    ScriptEditor = scriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.ItemSeed);
+            }
+
+            if (!monitor.IsCancelled && Settings.RandomizeSecretRewardsPhysical)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secret rewards");
+                new TR1SecretRewardRandomizer
+                {
+                    ScriptEditor = scriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings
+                }.Randomize(Settings.SecretRewardsPhysicalSeed);
             }
 
             if (!monitor.IsCancelled)

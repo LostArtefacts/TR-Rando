@@ -10,6 +10,8 @@ namespace TRRandomizerCore
             TRRandomizerType.Audio,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
+            TRRandomizerType.Item,
+            TRRandomizerType.SecretReward,
             TRRandomizerType.SFX
         };
 
@@ -32,6 +34,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
             TRRandomizerType.Item,
+            TRRandomizerType.KeyItems,
             TRRandomizerType.LevelSequence,
             TRRandomizerType.MaximumDragons,
             TRRandomizerType.NightMode,
@@ -56,6 +59,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Environment,
             TRRandomizerType.GlobeDisplay,
             TRRandomizerType.Item,
+            TRRandomizerType.KeyItems,
             TRRandomizerType.LevelSequence,
             TRRandomizerType.MaximumDragons,
             TRRandomizerType.NightMode,
