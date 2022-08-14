@@ -122,9 +122,17 @@ namespace TRLevelReader.Helpers
             };
         }
 
+        public static List<TREntities> GetListOfLeadTypes()
+        {
+            return new List<TREntities>
+            {
+                TREntities.LeadBar_S_P
+            };
+        }
+
         public static List<TREntities> GetListOfKeyItemTypes()
         {
-            return GetListOfKeyTypes().Concat(GetListOfPuzzleTypes()).Concat(GetListOfQuestTypes()).ToList();
+            return GetListOfKeyTypes().Concat(GetListOfPuzzleTypes()).Concat(GetListOfQuestTypes()).Concat(GetListOfLeadTypes()).ToList();
         }
 
         public static bool IsKeyType(TREntities entity)

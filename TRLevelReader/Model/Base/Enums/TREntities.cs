@@ -214,6 +214,74 @@
         LaraMiscAnim_H_Midas,     // Turning to gold
         LaraMiscAnim_H_Sanctuary, // Scion pickup (includes level end)
         LaraMiscAnim_H_Atlantis,  // Scion grab (includes level end)
-        LaraMiscAnim_H_Pyramid    // Adam death
+        LaraMiscAnim_H_Pyramid,   // Adam death
+
+        // Key Item Alias = 10000 + ((level.OriginalSequence - 1) * 1000) + KeyTypeID + Room
+        CavesKeyItemBase = 10000,
+
+        VilcabambaKeyItemBase = 11000,
+        VilcabambaGoldIdol = 11124,
+        VilcabambaSilverKey = 11143,
+        
+        ValleyKeyItemBase = 12000,
+        ValleyCogAbovePool = 12150,
+        ValleyCogInWater = 12158,
+        ValleyCogAtBridge = 12168,
+        
+        QualopecKeyItemBase = 13000,
+
+        FollyKeyItemBase = 14000,
+        FollyNeptuneKey = 14162,
+        FollyDamoclesKey = 14169,
+        FollyThorKey = 14176,
+        FollyAtlasKey = 14177,
+        
+        ColosseumKeyItemBase = 15000,
+        ColosseumSuperBrightKey = 15183,
+        
+        MidasKeyItemBase = 16000,
+        MidasLeadBarTempleRoom = 16133,
+        MidasLeadBarFireRoom = 16149,
+        MidasLeadBarSpikeRoom = 16154,
+        
+        CisternKeyItemBase = 17000,
+        CisternRustyKeyNearPierre = 17151,
+        CisternSilverKeyBehindDoor = 17170,
+        CisternSilverKeyBetweenDoors = 17179,
+        CisternGoldKey = 17185,
+        CisternRustyKeyMainRoomLedge = 17222,
+        
+        TihocanKeyItemBase = 18000,
+        TihocanGoldKeyBeforeBlockRoom = 18144,
+        TihocanRustyKeyDoubleBoulders = 18209,
+        TihocanRustyKeyClangClang = 18210,
+        TihocanGoldKeyPierre = 18239,
+
+        KhamoonKeyItemBase = 19000,
+        KhamoonSapphireKeySphinx = 19143,
+        KhamoonSapphireKeyEnd = 19162,
+        
+        ObeliskKeyItemBase = 20000,
+        ObeliskEyeOfHorus = 20126,
+        ObeliskScarab = 20127,
+        ObeliskSealOfAnubis = 20128,
+        ObeliskAnkh = 20129,
+        ObeliskSapphireKey = 20199,
+        
+        SanctuaryKeyItemBase = 21000,
+        SanctuaryAnkhBehindSphinx = 21126,
+        SanctuarySapphireKey = 21148,
+        SanctuaryAnkhAfterKey = 21150,
+        SanctuaryScarab = 21155,
+        
+        MinesKeyItemBase = 22000,
+        MinesFuseNearCowboy = 22127,
+        MinesFuseNearShack = 22147,
+        MinesFuseNearConveyor = 22155,
+        MinesPyramidKey = 22179,
+
+        AtlantisKeyItemBase = 23000,
+
+        PyramidKeyItemBase = 24000
     }
 }

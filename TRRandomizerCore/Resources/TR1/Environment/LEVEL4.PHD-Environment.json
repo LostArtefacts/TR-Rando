@@ -5,6 +5,44 @@
   "AllWithin": [],
   "OneOf": [],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if key item #71 is in its default position. If not, alter the trigger to a regular one instead of pickup.",
+        "ConditionType": 0,
+        "EntityIndex": 71,
+        "X": 17920,
+        "Y": 18944,
+        "Z": 45568,
+        "Room": 38
+      },
+      "OnFalse": [
+        {
+          "EMType": 69,
+          "Location": {
+            "X": 17920,
+            "Y": 18944,
+            "Z": 45568,
+            "Room": 38
+          },
+          "TrigType": 0
+        },
+        {
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 17920,
+              "Y": 18944,
+              "Z": 45568,
+              "Room": 38
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 71
+          }
+        }
+      ]
+    }
+  ],
   "Mirrored": []
 }

@@ -15,6 +15,7 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR1ItemRandomizer : BaseTR1Randomizer
     {
+        private Dictionary<string, List<Location>> _keyItemLocations;
         private Dictionary<string, List<Location>> _excludedLocations;
         private Dictionary<string, List<Location>> _pistolLocations;
 
@@ -29,6 +30,7 @@ namespace TRRandomizerCore.Randomizers
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
+            _keyItemLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\item_locations.json"));
             _excludedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\invalid_item_locations.json"));
             _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\unarmed_locations.json"));
 
@@ -45,8 +47,8 @@ namespace TRRandomizerCore.Randomizers
 
                 // Do key items before standard items because we exclude
                 // key item tiles from the valid pickup location pool
-                //if (Settings.IncludeKeyItems)
-                //    RandomizeKeyItems(_levelInstance);
+                if (Settings.IncludeKeyItems)
+                    RandomizeKeyItems(_levelInstance);
 
                 if (Settings.RandomizeItemPositions)
                     RandomizeItemLocations(_levelInstance);
@@ -244,6 +246,37 @@ namespace TRRandomizerCore.Randomizers
 
             TR1LocationGenerator generator = new TR1LocationGenerator();
             return generator.Generate(level.Data, exclusions);
+        }
+
+        private void RandomizeKeyItems(TR1CombinedLevel level)
+        {
+            List<Location> locations;
+            if (!_keyItemLocations.ContainsKey(level.Name) || (locations = _keyItemLocations[level.Name]).Count == 0)
+            {
+                return;
+            }
+
+            foreach (TREntity entity in level.Data.Entities)
+            {
+                TREntities type = (TREntities)entity.TypeID;
+                if (!TR1EntityUtilities.IsKeyItemType(type))
+                {
+                    continue;
+                }
+
+                // Only move a key item if there is at least one location defined for it. Any triggers below the
+                // item will be handled by default environment mods.
+                int itemID = 10000 + ((level.Script.OriginalSequence - 1) * 1000) + entity.TypeID + entity.Room;
+                List<Location> pool = locations.FindAll(l => l.KeyItemGroupID == itemID);
+                if (pool.Count > 0)
+                {
+                    Location location = pool[_generator.Next(0, pool.Count)];
+                    entity.X = location.X;
+                    entity.Y = location.Y;
+                    entity.Z = location.Z;
+                    entity.Room = (short)location.Room;
+                }
+            }
         }
     }
 }

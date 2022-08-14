@@ -5,6 +5,76 @@
   "AllWithin": [],
   "OneOf": [],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if key item #33 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 33,
+        "X": 27136,
+        "Y": -3584,
+        "Z": 1536,
+        "Room": 40
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 27136,
+            "Y": -3584,
+            "Z": 1536,
+            "Room": 40
+          },
+          "EntityLocation": 33
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #40 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 40,
+        "X": 81408,
+        "Y": 7936,
+        "Z": 9728,
+        "Room": 48
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 81408,
+            "Y": 7936,
+            "Z": 9728,
+            "Room": 48
+          },
+          "EntityLocation": 40
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #53 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 53,
+        "X": 34304,
+        "Y": -512,
+        "Z": 19968,
+        "Room": 58
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 34304,
+            "Y": -512,
+            "Z": 19968,
+            "Room": 58
+          },
+          "EntityLocation": 53
+        }
+      ]
+    }
+  ],
   "Mirrored": []
 }

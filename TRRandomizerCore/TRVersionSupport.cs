@@ -11,6 +11,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
             TRRandomizerType.Item,
+            TRRandomizerType.KeyItems,
             TRRandomizerType.SecretReward,
             TRRandomizerType.SFX
         };
