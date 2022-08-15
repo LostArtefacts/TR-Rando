@@ -266,6 +266,7 @@ namespace TRRandomizerCore.Randomizers
 
                 // Only move a key item if there is at least one location defined for it. Any triggers below the
                 // item will be handled by default environment mods.
+                // The only one we don't currently move is MinesFuseNearConveyor - potential FlipMap complications.
                 int itemID = 10000 + ((level.Script.OriginalSequence - 1) * 1000) + entity.TypeID + entity.Room;
                 List<Location> pool = locations.FindAll(l => l.KeyItemGroupID == itemID);
                 if (pool.Count > 0)

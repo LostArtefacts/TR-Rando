@@ -5,6 +5,30 @@
   "AllWithin": [],
   "OneOf": [],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if key item #54 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 54,
+        "X": 19968,
+        "Y": 512,
+        "Z": 44544,
+        "Room": 44
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 19968,
+            "Y": 512,
+            "Z": 44544,
+            "Room": 44
+          },
+          "EntityLocation": 54
+        }
+      ]
+    }
+  ],
   "Mirrored": []
 }
