@@ -182,6 +182,8 @@ namespace TRModelTransporter.Data
 
         private static readonly Dictionary<TREntities, List<TREntities>> _spriteDependencies = new Dictionary<TREntities, List<TREntities>>
         {
+            [TREntities.SecretScion_M_H]
+                = new List<TREntities> { TREntities.ScionPiece4_S_P },
             [TREntities.Adam]
                 = new List<TREntities> { TREntities.Explosion1_S_H },
             [TREntities.Centaur]

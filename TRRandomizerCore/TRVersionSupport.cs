@@ -12,6 +12,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Environment,
             TRRandomizerType.Item,
             TRRandomizerType.KeyItems,
+            TRRandomizerType.Secret,
             TRRandomizerType.SecretReward,
             TRRandomizerType.SFX
         };
@@ -34,6 +35,8 @@ namespace TRRandomizerCore
             TRRandomizerType.DisableDemos,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
+            TRRandomizerType.GlitchedSecrets,
+            TRRandomizerType.HardSecrets,
             TRRandomizerType.Item,
             TRRandomizerType.KeyItems,
             TRRandomizerType.LevelSequence,
@@ -58,7 +61,9 @@ namespace TRRandomizerCore
             TRRandomizerType.Audio,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
+            TRRandomizerType.GlitchedSecrets,            
             TRRandomizerType.GlobeDisplay,
+            TRRandomizerType.HardSecrets,
             TRRandomizerType.Item,
             TRRandomizerType.KeyItems,
             TRRandomizerType.LevelSequence,

@@ -193,7 +193,7 @@
         AdamEgg,
         Motorboat,
         Earthquake_N,
-        Unused1_U,
+        SecretScion_M_H, // Unused model, so repurposed as duplicate scion for importing for secret pickups
         Unused2_U,
         Unused3_U,
         Unused4_U,

@@ -34,6 +34,8 @@
         BirdMonsterBehaviour,
         SecretAudio,
         Mediless,
-        KeyItems
+        KeyItems,
+        GlitchedSecrets,
+        HardSecrets
     }
 }

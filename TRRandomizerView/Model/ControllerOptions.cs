@@ -1691,6 +1691,9 @@ namespace TRRandomizerView.Model
             _docileWillard.IsAvailable = IsTR3;
 
             _includeKeyItems.IsAvailable = IsKeyItemTypeSupported;
+
+            _allowGlitched.IsAvailable = IsGlitchedSecretsSupported;
+            _isHardSecrets.IsAvailable = IsHardSecretsSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -2152,6 +2155,8 @@ namespace TRRandomizerView.Model
         public bool IsHealthTypeSupported => IsRandomizationSupported(TRRandomizerType.Health);
         public bool IsNightModeTypeSupported => IsRandomizationSupported(TRRandomizerType.NightMode);
         public bool IsSecretTypeSupported => IsRandomizationSupported(TRRandomizerType.Secret);
+        public bool IsGlitchedSecretsSupported => IsRandomizationSupported(TRRandomizerType.GlitchedSecrets);
+        public bool IsHardSecretsSupported => IsRandomizationSupported(TRRandomizerType.HardSecrets);
         public bool IsRewardRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.RewardRooms);
         public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
         public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);

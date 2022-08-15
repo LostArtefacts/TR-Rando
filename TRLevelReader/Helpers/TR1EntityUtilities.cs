@@ -454,5 +454,30 @@ namespace TRLevelReader.Helpers
         {
             return DoorTypes().Contains(entity);
         }
+
+        public static Dictionary<TREntities, TREntities> GetSecretModels()
+        {
+            return new Dictionary<TREntities, TREntities>
+            {
+                [TREntities.SecretScion_M_H] = TREntities.ScionPiece4_S_P
+            };
+        }
+
+        public static Dictionary<TREntities, TREntities> GetSecretReplacements()
+        {
+            // Note Key1 is omitted because of Pierre
+            return new Dictionary<TREntities, TREntities>
+            {
+                [TREntities.Puzzle1_M_H] = TREntities.Puzzle1_S_P,
+                [TREntities.Puzzle2_M_H] = TREntities.Puzzle2_S_P,
+                [TREntities.Puzzle3_M_H] = TREntities.Puzzle3_S_P,
+                [TREntities.Puzzle4_M_H] = TREntities.Puzzle4_S_P,
+                [TREntities.Key2_M_H] = TREntities.Key2_S_P,
+                [TREntities.Key3_M_H] = TREntities.Key3_S_P,
+                [TREntities.Key4_M_H] = TREntities.Key4_S_P,
+                [TREntities.Quest1_M_H] = TREntities.Quest1_S_P,
+                [TREntities.Quest2_M_H] = TREntities.Quest2_S_P
+            };
+        }
     }
 }
