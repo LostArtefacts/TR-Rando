@@ -69,6 +69,7 @@ namespace TREnvironmentEditor.Model.Types
                 newRoom.Lights[i] = new TRRoomLight
                 {
                     Fade = baseRoom.Lights[i].Fade,
+                    Intensity = baseRoom.Lights[i].Intensity,
                     X = baseRoom.Lights[i].X + xdiff,
                     Y = baseRoom.Lights[i].Y + ydiff,
                     Z = baseRoom.Lights[i].Z + zdiff
@@ -157,11 +158,12 @@ namespace TREnvironmentEditor.Model.Types
             overlaps.Add(newBoxIndex);
             TR1BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
 
-            // Make a new box for the new room
-            uint xmin = (uint)newRoom.Info.X;
-            uint zmin = (uint)newRoom.Info.Z;
-            uint xmax = (uint)(xmin + newRoom.NumXSectors * SectorSize);
-            uint zmax = (uint)(zmin + newRoom.NumZSectors * SectorSize);
+            // Make a new box for the new room. Tomp1 boxes are in world coordinates and they
+            // do not span into walls.
+            uint xmin = (uint)(newRoom.Info.X + SectorSize);
+            uint zmin = (uint)(newRoom.Info.Z + SectorSize);
+            uint xmax = (uint)(xmin + (newRoom.NumXSectors - 2) * SectorSize);
+            uint zmax = (uint)(zmin + (newRoom.NumZSectors - 2) * SectorSize);
             TRBox box = new TRBox
             {
                 XMin = xmin,
