@@ -65,7 +65,7 @@
             VerticalAlignment="Stretch" 
             Orientation="Horizontal">
             <TextBlock 
-                Text="Open a Tomb Raider Data folder to get started. The folder must contain the TOMBPC.dat file and *.tr2 (TRII or TRIII supported) level files." 
+                Text="Open a Tomb Raider Data folder to get started. The folder must contain *.PHD (TRI) or *.TR2 (TRII/TRIII) level files." 
                 VerticalAlignment="Center"/>
             <Button 
                 Padding="15,4" 
