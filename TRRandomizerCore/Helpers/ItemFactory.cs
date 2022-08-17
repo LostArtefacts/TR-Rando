@@ -35,7 +35,17 @@ namespace TRRandomizerCore.Helpers
             return _availableItems[lvl];
         }
 
+        public int GetNextIndex(string lvl, List<TREntity> allItems, bool allowLimitBreak = false)
+        {
+            return GetNextIndex(lvl, allItems.Count, allowLimitBreak);
+        }
+
         public int GetNextIndex(string lvl, List<TR2Entity> allItems, bool allowLimitBreak = false)
+        {
+            return GetNextIndex(lvl, allItems.Count, allowLimitBreak);
+        }
+
+        public int GetNextIndex(string lvl, int totalItemCount, bool allowLimitBreak)
         {
             Queue<int> pool = GetItemPool(lvl);
             if (pool.Count > 0)
@@ -43,7 +53,12 @@ namespace TRRandomizerCore.Helpers
                 return pool.Peek();
             }
 
-            return (allItems.Count < _entityLimit || allowLimitBreak) ? allItems.Count : -1;
+            return (totalItemCount < _entityLimit || allowLimitBreak) ? totalItemCount : -1;
+        }
+
+        public bool CanCreateItem(string lvl, List<TREntity> allItems, bool allowLimitBreak = false)
+        {
+            return GetNextIndex(lvl, allItems, allowLimitBreak) != -1;
         }
 
         public bool CanCreateItem(string lvl, List<TR2Entity> allItems, bool allowLimitBreak = false)
@@ -56,6 +71,41 @@ namespace TRRandomizerCore.Helpers
             int reusableCount = GetItemPool(lvl).Count;
             count -= Math.Min(count, reusableCount);
             return allItems.Count + count <= _entityLimit || allowLimitBreak;
+        }
+
+        public TREntity CreateItem(string lvl, List<TREntity> allItems, Location location = null, bool allowLimitBreak = false)
+        {
+            TREntity item;
+            Queue<int> pool = GetItemPool(lvl);
+            if (pool.Count > 0)
+            {
+                item = allItems[pool.Dequeue()];
+            }
+            else
+            {
+                if (allItems.Count < _entityLimit || allowLimitBreak)
+                {
+                    allItems.Add(item = new TREntity());
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            if (location != null)
+            {
+                item.X = location.X;
+                item.Y = location.Y;
+                item.Z = location.Z;
+                item.Room = (short)location.Room;
+                item.Angle = location.Angle;
+            }
+
+            // Set some defaults
+            item.Intensity = 6400;
+            item.Flags = 0;
+            return item;
         }
 
         public TR2Entity CreateItem(string lvl, List<TR2Entity> allItems, Location location = null, bool allowLimitBreak = false)
