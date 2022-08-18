@@ -127,7 +127,7 @@ namespace TRRandomizerCore.Editors
             SecretSeed = config.GetInt(nameof(SecretSeed), defaultSeed);
             HardSecrets = config.GetBool(nameof(HardSecrets));
             GlitchedSecrets = config.GetBool(nameof(GlitchedSecrets));
-            UseRewardRoomCameras = config.GetBool(nameof(UseRewardRoomCameras));
+            UseRewardRoomCameras = config.GetBool(nameof(UseRewardRoomCameras), true);
 
             RandomizeItems = config.GetBool(nameof(RandomizeItems));
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
