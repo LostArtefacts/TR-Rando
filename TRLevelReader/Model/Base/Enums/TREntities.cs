@@ -193,11 +193,14 @@
         AdamEgg,
         Motorboat,
         Earthquake_N,
-        SecretScion_M_H, // Unused model, so repurposed as duplicate scion for importing for secret pickups
-        Unused2_U,
-        Unused3_U,
-        Unused4_U,
-        Unused5_U,
+
+        // Unused models, so repurposed as duplicate puzlle items for importing as secret pickups
+        SecretScion_M_H,
+        SecretGoldIdol_M_H,
+        SecretLeadBar_M_H,
+        SecretGoldBar_M_H,
+        SecretAnkh_M_H,
+
         LaraPonytail_H_U,
         FontGraphics_S_H,
 

@@ -184,6 +184,15 @@ namespace TRModelTransporter.Data
         {
             [TREntities.SecretScion_M_H]
                 = new List<TREntities> { TREntities.ScionPiece4_S_P },
+            [TREntities.SecretGoldIdol_M_H]
+                = new List<TREntities> { TREntities.ScionPiece4_S_P },
+            [TREntities.SecretLeadBar_M_H]
+                = new List<TREntities> { TREntities.ScionPiece4_S_P },
+            [TREntities.SecretGoldBar_M_H]
+                = new List<TREntities> { TREntities.ScionPiece4_S_P },
+            [TREntities.SecretAnkh_M_H]
+                = new List<TREntities> { TREntities.ScionPiece4_S_P },
+
             [TREntities.Adam]
                 = new List<TREntities> { TREntities.Explosion1_S_H },
             [TREntities.Centaur]

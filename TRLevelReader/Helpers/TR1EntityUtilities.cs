@@ -459,6 +459,10 @@ namespace TRLevelReader.Helpers
         {
             return new Dictionary<TREntities, TREntities>
             {
+                [TREntities.SecretAnkh_M_H] = TREntities.ScionPiece4_S_P,
+                [TREntities.SecretGoldBar_M_H] = TREntities.ScionPiece4_S_P,
+                [TREntities.SecretGoldIdol_M_H] = TREntities.ScionPiece4_S_P,
+                [TREntities.SecretLeadBar_M_H] = TREntities.ScionPiece4_S_P,
                 [TREntities.SecretScion_M_H] = TREntities.ScionPiece4_S_P
             };
         }
@@ -479,5 +483,44 @@ namespace TRLevelReader.Helpers
                 [TREntities.Quest2_M_H] = TREntities.Quest2_S_P
             };
         }
+
+        public static TREntities GetBestLevelSecretModel(string lvl)
+        {
+            return _levelSecretModels.ContainsKey(lvl) ? _levelSecretModels[lvl] : GetSecretModels().Keys.FirstOrDefault();
+        }
+
+        private static readonly Dictionary<string, TREntities> _levelSecretModels = new Dictionary<string, TREntities>
+        {
+            [TRLevelNames.CAVES]
+                = TREntities.SecretScion_M_H,
+            [TRLevelNames.VILCABAMBA]
+                = TREntities.SecretGoldBar_M_H,
+            [TRLevelNames.VALLEY]
+                = TREntities.SecretGoldIdol_M_H,
+            [TRLevelNames.QUALOPEC]
+                = TREntities.SecretGoldIdol_M_H,
+            [TRLevelNames.FOLLY]
+                = TREntities.SecretLeadBar_M_H,
+            [TRLevelNames.COLOSSEUM]
+                = TREntities.SecretLeadBar_M_H,
+            [TRLevelNames.MIDAS]
+                = TREntities.SecretAnkh_M_H,
+            [TRLevelNames.CISTERN]
+                = TREntities.SecretScion_M_H,
+            [TRLevelNames.TIHOCAN]
+                = TREntities.SecretGoldIdol_M_H,
+            [TRLevelNames.KHAMOON]
+                = TREntities.SecretLeadBar_M_H,
+            [TRLevelNames.OBELISK]
+                = TREntities.SecretLeadBar_M_H,
+            [TRLevelNames.SANCTUARY]
+                = TREntities.SecretAnkh_M_H,
+            [TRLevelNames.MINES]
+                = TREntities.SecretGoldBar_M_H,
+            [TRLevelNames.ATLANTIS]
+                = TREntities.SecretGoldIdol_M_H,
+            [TRLevelNames.PYRAMID]
+                = TREntities.SecretGoldIdol_M_H
+        };
     }
 }
