@@ -27,6 +27,8 @@ namespace TRRandomizerCore.Randomizers
         private List<TREntities> _excludedEnemies;
         private ISet<TREntities> _resultantEnemies;
 
+        public ItemFactory ItemFactory { get; set; }
+
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
@@ -781,19 +783,15 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // Add the pistols as a pickup if the level is hard and there aren't any other pistols around
-            if (difficulty > EnemyDifficulty.Medium && levelWeapons.Find(e => e.TypeID == (short)TREntities.Pistols_S_P) == null)
+            if (difficulty > EnemyDifficulty.Medium && levelWeapons.Find(e => e.TypeID == (short)TREntities.Pistols_S_P) == null && ItemFactory.CanCreateItem(level.Name, levelEntities))
             {
-                TREntity pistols = new TREntity
-                {
-                    TypeID = (short)TREntities.Pistols_S_P,
-                    X = weaponEntity.X,
-                    Y = weaponEntity.Y,
-                    Z = weaponEntity.Z,
-                    Room = weaponEntity.Room,
-                    Intensity = weaponEntity.Intensity
-                };
+                TREntity pistols = ItemFactory.CreateItem(level.Name, levelEntities);
+                pistols.TypeID = (short)TREntities.Pistols_S_P;
+                pistols.X = weaponEntity.X;
+                pistols.Y = weaponEntity.Y;
+                pistols.Z = weaponEntity.Z;
+                pistols.Room = weaponEntity.Room;
 
-                levelEntities.Add(pistols);
                 level.Data.Entities = levelEntities.ToArray();
                 level.Data.NumEntities++;
             }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using TRGE.Coord;
 using TRGE.Core;
+using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Randomizers;
 
 namespace TRRandomizerCore.Editors
@@ -87,6 +88,8 @@ namespace TRRandomizerCore.Editors
                 scriptEditor.SaveScript();
             }
 
+            ItemFactory itemFactory = new ItemFactory(@"Resources\TR1\Items\repurposable_items.json");
+
             if (!monitor.IsCancelled && Settings.RandomizeStartingHealth)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing health");
@@ -111,7 +114,8 @@ namespace TRRandomizerCore.Editors
                     BasePath = wipDirectory,
                     BackupPath = backupDirectory,
                     SaveMonitor = monitor,
-                    Settings = Settings
+                    Settings = Settings,
+                    ItemFactory = itemFactory
                 }.Randomize(Settings.EnemySeed);
             }
 
@@ -126,7 +130,8 @@ namespace TRRandomizerCore.Editors
                     Levels = levels,
                     BasePath = wipDirectory,
                     SaveMonitor = monitor,
-                    Settings = Settings
+                    Settings = Settings,
+                    ItemFactory = itemFactory
                 }.Randomize(Settings.ItemSeed);
             }
 

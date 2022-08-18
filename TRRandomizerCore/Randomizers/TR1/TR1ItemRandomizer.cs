@@ -27,6 +27,8 @@ namespace TRRandomizerCore.Randomizers
         // Secret reward items handled in separate class, so track the reward entities
         private TRSecretMapping<TREntity> _secretMapping;
 
+        public ItemFactory ItemFactory { get; set; }
+
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
@@ -157,6 +159,7 @@ namespace TRRandomizerCore.Randomizers
                     if (oneOfEachType.Contains(eType))
                     {
                         ItemUtilities.HideEntity(ent);
+                        ItemFactory.FreeItem(level.Name, i);
                     }
                     else
                     {
