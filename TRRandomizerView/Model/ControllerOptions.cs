@@ -8,6 +8,7 @@ using System.Windows.Data;
 using TRRandomizerCore;
 using TRRandomizerCore.Globalisation;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Secrets;
 
 namespace TRRandomizerView.Model
 {
@@ -24,6 +25,8 @@ namespace TRRandomizerView.Model
         private bool _disableDemos, _autoLaunchGame, _puristMode;
 
         private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras;
+        private TRSecretCountMode _secretCountMode;
+        private uint _minSecretCount, _maxSecretCount;
         private BoolItemControlClass _includeKeyItems, _randomizeItemTypes, _randomizeItemLocations;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance;
         private BoolItemControlClass _persistTextures, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
@@ -1083,6 +1086,39 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public TRSecretCountMode SecretCountMode
+        {
+            get => _secretCountMode;
+            set
+            {
+                _secretCountMode = value;
+                FirePropertyChanged();
+                FirePropertyChanged(nameof(IsCustomizedSecretModeCount));
+            }
+        }
+
+        public bool IsCustomizedSecretModeCount => SecretCountMode == TRSecretCountMode.Customized;
+
+        public uint MinSecretCount
+        {
+            get => _minSecretCount;
+            set
+            {
+                _minSecretCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint MaxSecretCount
+        {
+            get => _maxSecretCount;
+            set
+            {
+                _maxSecretCount = value;
+                FirePropertyChanged();
+            }
+        }
+
         public BoolItemControlClass DocileWillard
         {
             get => _docileWillard;
@@ -1787,6 +1823,9 @@ namespace TRRandomizerView.Model
             IsHardSecrets.Value = _controller.HardSecrets;
             IsGlitchedSecrets.Value = _controller.GlitchedSecrets;
             UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
+            SecretCountMode = _controller.SecretCountMode;
+            MinSecretCount = _controller.MinSecretCount;
+            MaxSecretCount = _controller.MaxSecretCount;
 
             RandomizeTextures = _controller.RandomizeTextures;
             TextureSeed = _controller.TextureSeed;
@@ -2088,6 +2127,9 @@ namespace TRRandomizerView.Model
             _controller.HardSecrets = IsHardSecrets.Value;
             _controller.GlitchedSecrets = IsGlitchedSecrets.Value;
             _controller.UseRewardRoomCameras = UseRewardRoomCameras.Value;
+            _controller.SecretCountMode = SecretCountMode;
+            _controller.MinSecretCount = MinSecretCount;
+            _controller.MaxSecretCount = MaxSecretCount;
 
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
@@ -2158,6 +2200,7 @@ namespace TRRandomizerView.Model
         public bool IsGlitchedSecretsSupported => IsRandomizationSupported(TRRandomizerType.GlitchedSecrets);
         public bool IsHardSecretsSupported => IsRandomizationSupported(TRRandomizerType.HardSecrets);
         public bool IsRewardRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.RewardRooms);
+        public bool IsSecretCountTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretCount);
         public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
         public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);
         public bool IsKeyItemTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItems);

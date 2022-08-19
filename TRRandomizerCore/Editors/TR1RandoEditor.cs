@@ -39,6 +39,12 @@ namespace TRRandomizerCore.Editors
                 target += numLevels;
             }
 
+            if (Settings.RandomizeSecrets)
+            {
+                // *3 for multithreaded work
+                target += numLevels * 3;
+            }
+
             if (Settings.RandomizeEnemies)
             {
                 // *3 for multithreaded work
@@ -90,6 +96,16 @@ namespace TRRandomizerCore.Editors
 
             ItemFactory itemFactory = new ItemFactory(@"Resources\TR1\Items\repurposable_items.json");
 
+            TR1EnvironmentRandomizer environmentRandomizer = new TR1EnvironmentRandomizer
+            {
+                ScriptEditor = scriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings
+            };
+
             if (!monitor.IsCancelled && Settings.RandomizeStartingHealth)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing health");
@@ -102,6 +118,22 @@ namespace TRRandomizerCore.Editors
                     SaveMonitor = monitor,
                     Settings = Settings
                 }.Randomize(Settings.HealthSeed);
+            }
+
+            if (!monitor.IsCancelled && Settings.RandomizeSecrets)
+            {
+                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
+                new TR1SecretRandomizer
+                {
+                    ScriptEditor = scriptEditor,
+                    Levels = levels,
+                    BasePath = wipDirectory,
+                    BackupPath = backupDirectory,
+                    SaveMonitor = monitor,
+                    Settings = Settings,
+                    ItemFactory = itemFactory,
+                    MirrorLevels = environmentRandomizer.AllocateMirroredLevels(Settings.EnvironmentSeed)
+                }.Randomize(Settings.EnemySeed);
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeEnemies)
@@ -151,15 +183,7 @@ namespace TRRandomizerCore.Editors
             if (!monitor.IsCancelled)
             {
                 monitor.FireSaveStateBeginning(TRSaveCategory.Custom, Settings.RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
-                new TR1EnvironmentRandomizer
-                {
-                    ScriptEditor = scriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    BackupPath = backupDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings
-                }.Randomize(Settings.EnvironmentSeed);
+                environmentRandomizer.Randomize(Settings.EnvironmentSeed);
             }
 
             if (!monitor.IsCancelled && Settings.RandomizeAudio)

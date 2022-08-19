@@ -9,6 +9,7 @@ using TRGE.Core;
 using System.Collections.Generic;
 using System.Drawing;
 using TRRandomizerCore.Utilities;
+using TRRandomizerCore.Secrets;
 
 namespace TRRandomizerCore
 {
@@ -523,6 +524,24 @@ namespace TRRandomizerCore
         {
             get => LevelRandomizer.UseRewardRoomCameras;
             set => LevelRandomizer.UseRewardRoomCameras = value;
+        }
+
+        public TRSecretCountMode SecretCountMode
+        {
+            get => LevelRandomizer.SecretCountMode;
+            set => LevelRandomizer.SecretCountMode = value;
+        }
+
+        public uint MinSecretCount
+        {
+            get => LevelRandomizer.MinSecretCount;
+            set => LevelRandomizer.MinSecretCount = value;
+        }
+
+        public uint MaxSecretCount
+        {
+            get => LevelRandomizer.MaxSecretCount;
+            set => LevelRandomizer.MaxSecretCount = value;
         }
 
         public bool IncludeKeyItems

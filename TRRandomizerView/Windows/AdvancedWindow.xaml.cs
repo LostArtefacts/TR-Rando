@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Secrets;
 using TRRandomizerView.Model;
 using TRRandomizerView.Utilities;
 
@@ -91,6 +92,10 @@ namespace TRRandomizerView.Windows
         (
             nameof(HasHealthMode), typeof(bool), typeof(AdvancedWindow)
         );
+        public static readonly DependencyProperty HasSecretCountModeProperty = DependencyProperty.Register
+        (
+            nameof(HasSecretCountMode), typeof(bool), typeof(AdvancedWindow)
+        ); 
 
         public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
         (
@@ -187,6 +192,12 @@ namespace TRRandomizerView.Windows
             set => SetValue(HasHealthModeProperty, value);
         }
 
+        public bool HasSecretCountMode
+        {
+            get => (bool)GetValue(HasSecretCountModeProperty);
+            set => SetValue(HasSecretCountModeProperty, value);
+        }
+
         public ControllerOptions ControllerProxy
         {
             get => (ControllerOptions)GetValue(ControllerProperty);
@@ -254,6 +265,21 @@ namespace TRRandomizerView.Windows
                         break;
                     case BirdMonsterBehaviour.Docile:
                         _docileBirdBehaviourButton.IsChecked = true;
+                        break;
+                }
+            }
+            if (HasSecretCountMode)
+            {
+                switch (ControllerProxy.SecretCountMode)
+                {
+                    case TRSecretCountMode.Default:
+                        _defaultSecretCountButton.IsChecked = true;
+                        break;
+                    case TRSecretCountMode.Shuffled:
+                        _shuffledSecretCountButton.IsChecked = true;
+                        break;
+                    case TRSecretCountMode.Customized:
+                        _customizedSecretCountButton.IsChecked = true;
                         break;
                 }
             }

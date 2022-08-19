@@ -17,9 +17,42 @@ namespace TRRandomizerCore.Randomizers
         private List<EMType> _disallowedTypes;
         private List<TR1ScriptedLevel> _levelsToMirror;
 
+        public List<TR1ScriptedLevel> AllocateMirroredLevels(int seed)
+        {
+            if (!Settings.RandomizeEnvironment)
+            {
+                return new List<TR1ScriptedLevel>();
+            }
+
+            // This will only allocate once
+            if (_generator == null)
+            {
+                _generator = new Random(seed);
+            }
+
+            if (_levelsToMirror == null)
+            {
+                TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TRLevelNames.ASSAULT));
+                _levelsToMirror = Levels.RandomSelection(_generator, (int)Settings.MirroredLevelCount, exclusions: new HashSet<TR1ScriptedLevel>
+                {
+                    assaultCourse
+                });
+
+                if (Settings.MirrorAssaultCourse)
+                {
+                    _levelsToMirror.Add(assaultCourse);
+                }
+            }
+
+            return new List<TR1ScriptedLevel>(_levelsToMirror);
+        }
+
         public override void Randomize(int seed)
         {
-            _generator = new Random(seed);
+            if (_generator == null)
+            {
+                _generator = new Random(seed);
+            }
 
             _disallowedTypes = new List<EMType>
             {
@@ -36,10 +69,7 @@ namespace TRRandomizerCore.Randomizers
                 _disallowedTypes.Add(EMType.SwapSlot);
             }
 
-            _levelsToMirror = Levels.RandomSelection(_generator, (int)Settings.MirroredLevelCount, exclusions: new HashSet<TR1ScriptedLevel>
-            {
-                Levels.Find(l => l.Is(TRLevelNames.ASSAULT))
-            });
+            AllocateMirroredLevels(seed);
 
             foreach (TR1ScriptedLevel lvl in Levels)
             {

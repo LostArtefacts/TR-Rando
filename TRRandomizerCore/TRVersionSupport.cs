@@ -12,6 +12,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Environment,
             TRRandomizerType.Item,
             TRRandomizerType.KeyItems,
+            TRRandomizerType.RewardRooms,
             TRRandomizerType.Secret,
             TRRandomizerType.SecretReward,
             TRRandomizerType.SFX
@@ -24,6 +25,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Health,
             TRRandomizerType.LevelSequence,
             //TRRandomizerType.Mediless,
+            TRRandomizerType.SecretCount,
             TRRandomizerType.Unarmed
         };
 

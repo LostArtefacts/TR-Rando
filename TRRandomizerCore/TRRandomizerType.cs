@@ -36,6 +36,7 @@
         Mediless,
         KeyItems,
         GlitchedSecrets,
-        HardSecrets
+        HardSecrets,
+        SecretCount
     }
 }

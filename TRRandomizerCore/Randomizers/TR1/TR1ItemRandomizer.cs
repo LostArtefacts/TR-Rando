@@ -71,7 +71,7 @@ namespace TRRandomizerCore.Randomizers
         {
             if (level.Script.RemovesWeapons)
             {
-                List<TREntity> pistolEntities = level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)TREntities.Pistols_S_P);
+                List<TREntity> pistolEntities = level.Data.Entities.ToList().FindAll(e => TR1EntityUtilities.IsWeaponPickup((TREntities)e.TypeID));
                 foreach (TREntity pistols in pistolEntities)
                 {
                     int match = _pistolLocations[level.Name].FindIndex
@@ -114,17 +114,23 @@ namespace TRRandomizerCore.Randomizers
                 }
 
                 TREntity entity = level.Data.Entities[i];
-                TREntities currentType = (TREntities)entity.TypeID;
+                TREntities entityType = (TREntities)entity.TypeID;
                 
                 if (entity == _unarmedLevelPistols)
                 {
-                    do
+                    // Enemy rando may have changed this already to something else and allocated
+                    // ammo to the inventory, so only change pistols.
+                    if (entityType == TREntities.Pistols_S_P)
                     {
-                        entity.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                        do
+                        {
+                            entityType = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                        }
+                        while (!TR1EntityUtilities.IsWeaponPickup(entityType));
+                        entity.TypeID = (short)entityType;
                     }
-                    while (!TR1EntityUtilities.IsWeaponPickup(currentType));
                 }
-                else if (TR1EntityUtilities.IsStandardPickupType(currentType))
+                else if (TR1EntityUtilities.IsStandardPickupType(entityType))
                 {
                     entity.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
                 }
@@ -239,12 +245,12 @@ namespace TRRandomizerCore.Randomizers
 
             if (Settings.RandomizeSecrets)
             {
-                // Make sure to exclude the reward room
-                //exclusions.Add(new Location
-                //{
-                //    Room = RoomWaterUtilities.DefaultRoomCountDictionary[level.Name],
-                //    InvalidatesRoom = true
-                //});
+                //Make sure to exclude the reward room
+                exclusions.Add(new Location
+                {
+                    Room = RoomWaterUtilities.DefaultRoomCountDictionary[level.Name],
+                    InvalidatesRoom = true
+                });
             }
 
             TR1LocationGenerator generator = new TR1LocationGenerator();

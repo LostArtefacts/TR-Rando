@@ -5,6 +5,7 @@ using TRGE.Core;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
+using TRRandomizerCore.Secrets;
 
 namespace TRRandomizerCore.Editors
 {
@@ -67,6 +68,9 @@ namespace TRRandomizerCore.Editors
         public bool SwapEnemyAppearance { get; set; }
         public bool GlitchedSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
+        public TRSecretCountMode SecretCountMode { get; set; }
+        public uint MinSecretCount { get; set; }
+        public uint MaxSecretCount { get; set; }
         public bool PersistOutfits { get; set; }
         public bool RemoveRobeDagger { get; set; }
         public uint HaircutLevelCount { get; set; }
@@ -128,6 +132,9 @@ namespace TRRandomizerCore.Editors
             HardSecrets = config.GetBool(nameof(HardSecrets));
             GlitchedSecrets = config.GetBool(nameof(GlitchedSecrets));
             UseRewardRoomCameras = config.GetBool(nameof(UseRewardRoomCameras), true);
+            SecretCountMode = (TRSecretCountMode)config.GetEnum(nameof(SecretCountMode), typeof(TRSecretCountMode), TRSecretCountMode.Default);
+            MinSecretCount = config.GetUInt(nameof(MinSecretCount), 1);
+            MaxSecretCount = config.GetUInt(nameof(MaxSecretCount), 5);
 
             RandomizeItems = config.GetBool(nameof(RandomizeItems));
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
@@ -241,6 +248,9 @@ namespace TRRandomizerCore.Editors
             config[nameof(HardSecrets)] = HardSecrets;
             config[nameof(GlitchedSecrets)] = GlitchedSecrets;
             config[nameof(UseRewardRoomCameras)] = UseRewardRoomCameras;
+            config[nameof(SecretCountMode)] = SecretCountMode;
+            config[nameof(MinSecretCount)] = MinSecretCount;
+            config[nameof(MaxSecretCount)] = MaxSecretCount;
 
             config[nameof(RandomizeItems)] = RandomizeItems;
             config[nameof(ItemSeed)] = ItemSeed;

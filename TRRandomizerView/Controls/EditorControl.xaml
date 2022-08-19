@@ -224,6 +224,7 @@
                                         MainDescription="Customize the secret randomization."
                                         BoolItemsSource="{Binding Data.SecretBoolItemControls, Source={StaticResource proxy}}"
                                         HasBoolItems="True"
+                                        HasSecretCountMode="{Binding Data.IsSecretCountTypeSupported, Source={StaticResource proxy}}"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
