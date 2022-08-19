@@ -103,7 +103,7 @@ namespace TRRandomizerCore.Helpers
             }
 
             // Set some defaults
-            item.Intensity = 6400;
+            item.Intensity = 0;
             item.Flags = 0;
             return item;
         }
