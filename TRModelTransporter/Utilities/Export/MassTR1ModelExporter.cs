@@ -72,11 +72,11 @@ namespace TRModelTransporter.Utilities
             },
             [TRLevelNames.KHAMOON] = new List<TREntities>
             {
-                TREntities.BandagedAtlantean, TREntities.Panther
+                TREntities.Panther
             },
             [TRLevelNames.OBELISK] = new List<TREntities>
             {
-                
+                TREntities.BandagedAtlantean
             },
             [TRLevelNames.SANCTUARY] = new List<TREntities>
             {

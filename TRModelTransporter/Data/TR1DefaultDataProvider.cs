@@ -132,6 +132,8 @@ namespace TRModelTransporter.Data
                 = new TREntities[] { TREntities.LaraMiscAnim_H_Pyramid },
             [TREntities.BandagedAtlantean]
                 = new TREntities[] { TREntities.BandagedFlyer },
+            [TREntities.BandagedFlyer]
+                = new TREntities[] { TREntities.Missile2_H, TREntities.Missile3_H },
             [TREntities.Centaur]
                 = new TREntities[] { TREntities.Missile3_H },
             [TREntities.CentaurStatue]
@@ -257,6 +259,7 @@ namespace TRModelTransporter.Data
         private static readonly Dictionary<TREntities, short[]> _hardcodedSoundIndices = new Dictionary<TREntities, short[]>
         {
             [TREntities.Adam] = new short[] { 104, 137, 138, 140, 141, 142 },
+            [TREntities.BandagedFlyer] = new short[] { 104 },
             [TREntities.Bear] = new short[] { 12, 16 },
             [TREntities.Centaur] = new short[] { 104 },
             [TREntities.Gorilla] = new short[] { 90, 91, 101 },
