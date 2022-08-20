@@ -6,8 +6,8 @@ using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
-using TRModelTransporter.Utilities;
 using TRTexture16Importer;
+using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Packing
 {

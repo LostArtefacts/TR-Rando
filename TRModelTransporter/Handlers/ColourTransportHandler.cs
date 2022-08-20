@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TRLevelReader.Model;
 using TRModelTransporter.Model.Definitions;
-using TRModelTransporter.Utilities;
 using TRTexture16Importer;
+using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Handlers
 {

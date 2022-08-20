@@ -9,7 +9,7 @@ using TRModelTransporter.Handlers;
 using TRModelTransporter.Handlers.Textures;
 using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Model.Textures;
-using TRModelTransporter.Utilities;
+using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Transport
 {

@@ -4,10 +4,8 @@ using System.Drawing;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
-using TRTexture16Importer;
-using TRTexture16Importer.Helpers;
 
-namespace TRModelTransporter.Utilities
+namespace TRTexture16Importer.Helpers
 {
     public class TR1PaletteManager : IDisposable
     {
