@@ -1730,6 +1730,9 @@ namespace TRRandomizerView.Model
 
             _allowGlitched.IsAvailable = IsGlitchedSecretsSupported;
             _isHardSecrets.IsAvailable = IsHardSecretsSupported;
+
+            _retainSecretSpriteTextures.IsAvailable = IsSecretTexturesTypeSupported;
+            _retainKeySpriteTextures.IsAvailable = IsKeyItemTexturesTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -2215,9 +2218,11 @@ namespace TRRandomizerView.Model
         public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);
         public bool IsEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.Environment);
+        public bool IsLaddersTypeSupported => IsRandomizationSupported(TRRandomizerType.Ladders);
         public bool IsWeatherTypeSupported => IsRandomizationSupported(TRRandomizerType.Weather);
         public bool IsBirdMonsterBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.BirdMonsterBehaviour);
-
+        public bool IsSecretTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretTextures);
+        public bool IsKeyItemTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItemTextures);
         public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
 
         private bool IsRandomizationSupported(TRRandomizerType randomizerType)

@@ -1,0 +1,11 @@
+{
+  "GlobalSources": {},
+  "GlobalGrouping": [
+    {
+      "Leader": "Lara.Top",
+      "Followers": [
+        "Lara.Mauled"
+      ]
+    }
+  ]
+}

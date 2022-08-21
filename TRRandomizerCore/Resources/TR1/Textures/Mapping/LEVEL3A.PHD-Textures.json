@@ -1,0 +1,142 @@
+{
+  "Static": {
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 64,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 9,
+        "X": 128,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 144,
+        "Y": 0
+      },
+      {
+        "Segment": 3,
+        "Tile": 9,
+        "X": 112,
+        "Y": 0
+      },
+      {
+        "Segment": 4,
+        "Tile": 9,
+        "X": 80,
+        "Y": 0
+      },
+      {
+        "Segment": 5,
+        "Tile": 9,
+        "X": 96,
+        "Y": 0
+      }
+    ],
+    "Lara.Mauled": [
+      {
+        "Segment": 0,
+        "Tile": 7,
+        "X": 168,
+        "Y": 0
+      },
+      {
+        "Segment": 1,
+        "Tile": 7,
+        "X": 136,
+        "Y": 160
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 168,
+        "Y": 88
+      },
+      {
+        "Segment": 9,
+        "Tile": 8,
+        "X": 128,
+        "Y": 144
+      }
+    ],
+    "Lara.Top": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 104,
+        "Y": 88
+      },
+      {
+        "Segment": 1,
+        "Tile": 7,
+        "X": 24,
+        "Y": 120
+      },
+      {
+        "Segment": 1,
+        "Tile": 7,
+        "X": 136,
+        "Y": 128
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 0,
+        "Y": 80
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 168,
+        "Y": 64
+      },
+      {
+        "Segment": 3,
+        "Tile": 6,
+        "X": 96,
+        "Y": 232
+      },
+      {
+        "Segment": 4,
+        "Tile": 8,
+        "X": 216,
+        "Y": 176
+      },
+      {
+        "Segment": 5,
+        "Tile": 5,
+        "X": 200,
+        "Y": 152
+      },
+      {
+        "Segment": 7,
+        "Tile": 8,
+        "X": 208,
+        "Y": 64
+      },
+      {
+        "Segment": 8,
+        "Tile": 4,
+        "X": 200,
+        "Y": 248
+      },
+      {
+        "Segment": 9,
+        "Tile": 9,
+        "X": 48,
+        "Y": 0
+      },
+      {
+        "Segment": 10,
+        "Tile": 8,
+        "X": 208,
+        "Y": 104
+      }
+    ]
+  }
+}

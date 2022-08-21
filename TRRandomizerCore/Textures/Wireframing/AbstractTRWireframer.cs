@@ -471,7 +471,7 @@ namespace TRRandomizerCore.Textures
                 else if
                 (
                     (_data.SolidLara && IsLaraModel(model)) ||
-                    (_data.SolidEnemies && (IsEnemyModel(model) || _data.SolidModels.Contains(model.ID))) ||
+                    (_data.SolidEnemies && (IsEnemyModel(model) || _data.SolidModels.Contains(model.ID)) && !IsEnemyPlaceholderModel(model)) ||
                     ShouldSolidifyModel(model)
                 )
                 {
@@ -521,7 +521,7 @@ namespace TRRandomizerCore.Textures
         {
             foreach (TRFace4 face in faces)
             {
-                face.Texture = (ushort)((colourIndex << 8) | (face.Texture & 0xFF));
+                face.Texture = (ushort)(Is8BitPalette ? colourIndex : (colourIndex << 8 | (face.Texture & 0xFF)));
             }
         }
 
@@ -529,7 +529,7 @@ namespace TRRandomizerCore.Textures
         {
             foreach (TRFace3 face in faces)
             {
-                face.Texture = (ushort)((colourIndex << 8) | (face.Texture & 0xFF));
+                face.Texture = (ushort)(Is8BitPalette ? colourIndex : (colourIndex << 8 | (face.Texture & 0xFF)));
             }
         }
 
@@ -553,7 +553,10 @@ namespace TRRandomizerCore.Textures
         protected abstract bool IsSkybox(TRModel model);
         protected abstract bool IsLaraModel(TRModel model);
         protected abstract bool IsEnemyModel(TRModel model);
+        protected virtual bool IsEnemyPlaceholderModel(TRModel model) => false;
         protected virtual bool ShouldSolidifyModel(TRModel model) => false;
         protected abstract void SetSkyboxVisible(L level);
+
+        public virtual bool Is8BitPalette { get; }
     }
 }

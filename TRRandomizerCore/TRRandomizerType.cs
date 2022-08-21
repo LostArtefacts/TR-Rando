@@ -37,6 +37,9 @@
         KeyItems,
         GlitchedSecrets,
         HardSecrets,
-        SecretCount
+        SecretCount,
+        Ladders,
+        KeyItemTextures,
+        SecretTextures
     }
 }

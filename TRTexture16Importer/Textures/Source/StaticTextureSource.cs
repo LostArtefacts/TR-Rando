@@ -13,6 +13,7 @@ namespace TRTexture16Importer.Textures
         public E SpriteSequence { get; set; }
         public bool IsSpriteSequence => !EqualityComparer<E>.Default.Equals(SpriteSequence, default);
         public Dictionary<E, Dictionary<Color, int>> EntityColourMap { get; set; }
+        public Dictionary<E, Dictionary<Color, int>> EntityColourMap8 { get; set; }
         public Dictionary<E, Dictionary<int, int>> EntityTextureMap { get; set; }
         public IEnumerable<E> ColourEntities => EntityColourMap?.Keys;
         public IEnumerable<E> TextureEntities => EntityTextureMap?.Keys;

@@ -25,6 +25,11 @@ namespace TRTexture16Importer.Textures
             return mapping;
         }
 
+        protected override TRColour[] GetPalette8()
+        {
+            return _level.Palette;
+        }
+
         protected override TRColour4[] GetPalette16()
         {
             return _level.Palette16;

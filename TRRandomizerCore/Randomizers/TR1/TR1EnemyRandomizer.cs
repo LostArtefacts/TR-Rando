@@ -15,6 +15,7 @@ using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
+using TRRandomizerCore.Textures;
 using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers
@@ -27,6 +28,7 @@ namespace TRRandomizerCore.Randomizers
         private List<TREntities> _excludedEnemies;
         private ISet<TREntities> _resultantEnemies;
 
+        internal TR1TextureMonitorBroker TextureMonitor { get; set; }
         public ItemFactory ItemFactory { get; set; }
 
         public override void Randomize(int seed)
@@ -840,7 +842,7 @@ namespace TRRandomizerCore.Randomizers
                             Level = level.Data,
                             LevelName = level.Name,
                             DataFolder = _outer.GetResourcePath(@"TR1\Models"),
-                            //TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
+                            TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.Name, enemies.EntitiesToImport)
                         };
 
                         string remapPath = @"TR1\Textures\Deduplication\" + level.Name + "-TextureRemap.json";

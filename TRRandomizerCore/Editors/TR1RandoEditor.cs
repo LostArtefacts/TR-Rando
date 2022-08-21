@@ -6,6 +6,7 @@ using TRGE.Coord;
 using TRGE.Core;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Randomizers;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Editors
 {
@@ -66,6 +67,12 @@ namespace TRRandomizerCore.Editors
                 target += numLevels;
             }
 
+            if (Settings.RandomizeTextures)
+            {
+                // *3 for multithreaded work
+                target += numLevels * 3;
+            }
+
             // Environment randomizer always runs
             target += numLevels;
 
@@ -95,6 +102,7 @@ namespace TRRandomizerCore.Editors
             }
 
             ItemFactory itemFactory = new ItemFactory(@"Resources\TR1\Items\repurposable_items.json");
+            TR1TextureMonitorBroker textureMonitor = new TR1TextureMonitorBroker();
 
             TR1EnvironmentRandomizer environmentRandomizer = new TR1EnvironmentRandomizer
             {
@@ -106,98 +114,117 @@ namespace TRRandomizerCore.Editors
                 Settings = Settings
             };
 
-            if (!monitor.IsCancelled && Settings.RandomizeStartingHealth)
+            using (textureMonitor)
             {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing health");
-                new TR1HealthRandomizer
+                if (!monitor.IsCancelled && Settings.RandomizeStartingHealth)
                 {
-                    ScriptEditor = scriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    BackupPath = backupDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings
-                }.Randomize(Settings.HealthSeed);
-            }
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing health");
+                    new TR1HealthRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings
+                    }.Randomize(Settings.HealthSeed);
+                }
 
-            if (!monitor.IsCancelled && Settings.RandomizeSecrets)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
-                new TR1SecretRandomizer
+                if (!monitor.IsCancelled && Settings.RandomizeSecrets)
                 {
-                    ScriptEditor = scriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    BackupPath = backupDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings,
-                    ItemFactory = itemFactory,
-                    MirrorLevels = environmentRandomizer.AllocateMirroredLevels(Settings.EnvironmentSeed)
-                }.Randomize(Settings.EnemySeed);
-            }
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secrets");
+                    new TR1SecretRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings,
+                        ItemFactory = itemFactory,
+                        MirrorLevels = environmentRandomizer.AllocateMirroredLevels(Settings.EnvironmentSeed)
+                    }.Randomize(Settings.EnemySeed);
+                }
 
-            if (!monitor.IsCancelled && Settings.RandomizeEnemies)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
-                new TR1EnemyRandomizer
+                if (!monitor.IsCancelled && Settings.RandomizeEnemies)
                 {
-                    ScriptEditor = scriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    BackupPath = backupDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings,
-                    ItemFactory = itemFactory
-                }.Randomize(Settings.EnemySeed);
-            }
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing enemies");
+                    new TR1EnemyRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings,
+                        ItemFactory = itemFactory,
+                        TextureMonitor = textureMonitor
+                    }.Randomize(Settings.EnemySeed);
+                }
 
-            // Tomp1 doesn't have droppable enmies so item rando takes places after enemy rando
-            // - this allows for accounting for newly added items.
-            if (!monitor.IsCancelled && Settings.RandomizeItems)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
-                new TR1ItemRandomizer
+                // Tomp1 doesn't have droppable enmies so item rando takes places after enemy rando
+                // - this allows for accounting for newly added items.
+                if (!monitor.IsCancelled && Settings.RandomizeItems)
                 {
-                    ScriptEditor = scriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings,
-                    ItemFactory = itemFactory
-                }.Randomize(Settings.ItemSeed);
-            }
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing items");
+                    new TR1ItemRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings,
+                        ItemFactory = itemFactory
+                    }.Randomize(Settings.ItemSeed);
+                }
 
-            if (!monitor.IsCancelled && Settings.RandomizeSecretRewardsPhysical)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secret rewards");
-                new TR1SecretRewardRandomizer
+                if (!monitor.IsCancelled && Settings.RandomizeSecretRewardsPhysical)
                 {
-                    ScriptEditor = scriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings
-                }.Randomize(Settings.SecretRewardsPhysicalSeed);
-            }
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secret rewards");
+                    new TR1SecretRewardRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings
+                    }.Randomize(Settings.SecretRewardsPhysicalSeed);
+                }
 
-            if (!monitor.IsCancelled)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, Settings.RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
-                environmentRandomizer.Randomize(Settings.EnvironmentSeed);
-            }
-
-            if (!monitor.IsCancelled && Settings.RandomizeAudio)
-            {
-                monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
-                new TR1AudioRandomizer
+                if (!monitor.IsCancelled)
                 {
-                    ScriptEditor = scriptEditor,
-                    Levels = levels,
-                    BasePath = wipDirectory,
-                    BackupPath = backupDirectory,
-                    SaveMonitor = monitor,
-                    Settings = Settings
-                }.Randomize(Settings.AudioSeed);
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, Settings.RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
+                    environmentRandomizer.Randomize(Settings.EnvironmentSeed);
+                }
+
+                if (!monitor.IsCancelled && Settings.RandomizeAudio)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
+                    new TR1AudioRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings
+                    }.Randomize(Settings.AudioSeed);
+                }
+
+                if (!monitor.IsCancelled && Settings.RandomizeTextures)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing textures");
+                    new TR1TextureRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings,
+                        TextureMonitor = textureMonitor
+                    }.Randomize(Settings.TextureSeed);
+                }
             }
         }
     }

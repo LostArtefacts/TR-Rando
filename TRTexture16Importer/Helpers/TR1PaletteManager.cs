@@ -21,7 +21,7 @@ namespace TRTexture16Importer.Helpers
         public Dictionary<int, Bitmap> ChangedTiles { get; set; }
         public List<TREntities> ObsoleteModels { get; set; }
 
-        private List<Color> _palette;
+        private List<Color> _palette, _predefinedPalette;
 
         public TR1PaletteManager()
         {
@@ -96,15 +96,34 @@ namespace TRTexture16Importer.Helpers
 
                 foreach (TRFace4 face in mesh.ColouredRectangles)
                 {
-                    face.Texture = (ushort)GetOrAddPaletteIndex(Level.Palette[face.Texture]);
+                    face.Texture = GetMeshFaceColour(face.Texture);
                 }
                 foreach (TRFace3 face in mesh.ColouredTriangles)
                 {
-                    face.Texture = (ushort)GetOrAddPaletteIndex(Level.Palette[face.Texture]);
+                    face.Texture = GetMeshFaceColour(face.Texture);
                 }
             }
 
             WritePalletteToLevel();
+        }
+
+        private ushort GetMeshFaceColour(ushort colourRef)
+        {
+            if (colourRef > _paletteLimit)
+            {
+                if (_predefinedPalette != null)
+                {
+                    // This is a predefined colour we're tracking during import, so it's in our palette and not the level's
+                    colourRef -= (_paletteLimit + 1);
+                    return (ushort)GetOrAddPaletteIndex(_predefinedPalette[colourRef]);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+
+            return (ushort)GetOrAddPaletteIndex(Level.Palette[colourRef]);
         }
 
         public void WritePalletteToLevel()
@@ -126,6 +145,57 @@ namespace TRTexture16Importer.Helpers
                     Blue = (byte)(c.B / 4)
                 };
             }
+        }
+
+        public int AddPredefinedColour(Color c)
+        {
+            if (_predefinedPalette == null)
+            {
+                _predefinedPalette = new List<Color>();
+            }
+
+            int colIndex = _predefinedPalette.IndexOf(c);
+            if (colIndex == -1)
+            {
+                colIndex = _predefinedPalette.Count;
+                _predefinedPalette.Add(c);
+            }
+
+            return colIndex + _paletteLimit + 1;
+        }
+
+        public void MergePredefinedColours()
+        {
+            if (_predefinedPalette == null || _predefinedPalette.Count == 0)
+            {
+                return;
+            }
+
+            for (int i = _palette.Count - 1; i > _reservedIndices; i--)
+            {
+                if (_palette[i] == Color.Black)
+                {
+                    _palette.RemoveAt(i);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            foreach (TRMesh mesh in Level.Meshes)
+            {
+                foreach (TRFace4 face in mesh.ColouredRectangles)
+                {
+                    face.Texture = GetMeshFaceColour(face.Texture);
+                }
+                foreach (TRFace3 face in mesh.ColouredTriangles)
+                {
+                    face.Texture = GetMeshFaceColour(face.Texture);
+                }
+            }
+
+            WritePalletteToLevel();
         }
 
         public int GetOrAddPaletteIndex(TRColour c)

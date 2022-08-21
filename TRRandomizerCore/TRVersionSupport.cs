@@ -15,7 +15,8 @@ namespace TRRandomizerCore
             TRRandomizerType.RewardRooms,
             TRRandomizerType.Secret,
             TRRandomizerType.SecretReward,
-            TRRandomizerType.SFX
+            TRRandomizerType.SFX,
+            TRRandomizerType.Texture
         };
 
         private static readonly List<TRRandomizerType> _tr1MainTypes = new List<TRRandomizerType>
@@ -41,6 +42,8 @@ namespace TRRandomizerCore
             TRRandomizerType.HardSecrets,
             TRRandomizerType.Item,
             TRRandomizerType.KeyItems,
+            TRRandomizerType.KeyItemTextures,
+            TRRandomizerType.Ladders,
             TRRandomizerType.LevelSequence,
             TRRandomizerType.MaximumDragons,
             TRRandomizerType.NightMode,
@@ -49,6 +52,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Secret,
             TRRandomizerType.SecretAudio,
             TRRandomizerType.SecretReward,
+            TRRandomizerType.SecretTextures,
             TRRandomizerType.SFX,
             TRRandomizerType.StartPosition,
             TRRandomizerType.Sunset,
@@ -68,6 +72,7 @@ namespace TRRandomizerCore
             TRRandomizerType.HardSecrets,
             TRRandomizerType.Item,
             TRRandomizerType.KeyItems,
+            TRRandomizerType.Ladders,
             TRRandomizerType.LevelSequence,
             TRRandomizerType.MaximumDragons,
             TRRandomizerType.NightMode,
@@ -76,6 +81,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Secret,
             TRRandomizerType.SecretAudio,
             TRRandomizerType.SecretReward,
+            TRRandomizerType.SecretTextures,
             TRRandomizerType.SFX,
             TRRandomizerType.StartPosition,
             TRRandomizerType.Text,

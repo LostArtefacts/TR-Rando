@@ -1,0 +1,116 @@
+{
+  "Static": {
+    "Lara.Bobble": [
+      {
+        "Segment": 0,
+        "Tile": 9,
+        "X": 0,
+        "Y": 216
+      },
+      {
+        "Segment": 1,
+        "Tile": 9,
+        "X": 152,
+        "Y": 216
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 168,
+        "Y": 216
+      },
+      {
+        "Segment": 3,
+        "Tile": 9,
+        "X": 136,
+        "Y": 216
+      },
+      {
+        "Segment": 4,
+        "Tile": 9,
+        "X": 16,
+        "Y": 216
+      },
+      {
+        "Segment": 5,
+        "Tile": 9,
+        "X": 120,
+        "Y": 216
+      }
+    ],
+    "Lara.Top": [
+      {
+        "Segment": 0,
+        "Tile": 7,
+        "X": 64,
+        "Y": 184
+      },
+      {
+        "Segment": 1,
+        "Tile": 8,
+        "X": 176,
+        "Y": 48
+      },
+      {
+        "Segment": 1,
+        "Tile": 8,
+        "X": 40,
+        "Y": 56
+      },
+      {
+        "Segment": 2,
+        "Tile": 8,
+        "X": 104,
+        "Y": 224
+      },
+      {
+        "Segment": 2,
+        "Tile": 9,
+        "X": 24,
+        "Y": 0
+      },
+      {
+        "Segment": 3,
+        "Tile": 8,
+        "X": 40,
+        "Y": 32
+      },
+      {
+        "Segment": 4,
+        "Tile": 8,
+        "X": 0,
+        "Y": 104
+      },
+      {
+        "Segment": 5,
+        "Tile": 7,
+        "X": 216,
+        "Y": 176
+      },
+      {
+        "Segment": 7,
+        "Tile": 9,
+        "X": 0,
+        "Y": 0
+      },
+      {
+        "Segment": 8,
+        "Tile": 5,
+        "X": 168,
+        "Y": 192
+      },
+      {
+        "Segment": 9,
+        "Tile": 9,
+        "X": 232,
+        "Y": 208
+      },
+      {
+        "Segment": 10,
+        "Tile": 9,
+        "X": 112,
+        "Y": 40
+      }
+    ]
+  }
+}

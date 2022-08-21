@@ -1023,7 +1023,8 @@
                                Content="If selected, different models will use different colours when solid, otherwise they will use the same colour as Lara."/>
                     </Border>
 
-                    <Border Grid.Row="5">
+                    <Border Grid.Row="5"
+                            Visibility="{Binding ControllerProxy.IsLaddersTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <CheckBox IsChecked="{Binding ControllerProxy.UseWireframeLadders, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
@@ -1032,7 +1033,8 @@
                     </Border>
                     
                     <Border Grid.Column="1"
-                            Grid.Row="5">
+                            Grid.Row="5"
+                            Visibility="{Binding ControllerProxy.IsLaddersTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="If selected, special textures will be generated for ladders, otherwise they will look the same as walls."/>
                     </Border>
