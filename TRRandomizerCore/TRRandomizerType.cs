@@ -40,6 +40,7 @@
         SecretCount,
         Ladders,
         KeyItemTextures,
-        SecretTextures
+        SecretTextures,
+        Braid
     }
 }

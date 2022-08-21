@@ -12,6 +12,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Environment,
             TRRandomizerType.Item,
             TRRandomizerType.KeyItems,
+            TRRandomizerType.Outfit,
             TRRandomizerType.RewardRooms,
             TRRandomizerType.Secret,
             TRRandomizerType.SecretReward,
@@ -22,6 +23,7 @@ namespace TRRandomizerCore
         private static readonly List<TRRandomizerType> _tr1MainTypes = new List<TRRandomizerType>
         {
             //TRRandomizerType.Ammoless,
+            TRRandomizerType.Braid,
             TRRandomizerType.DisableDemos,
             TRRandomizerType.Health,
             TRRandomizerType.LevelSequence,
@@ -35,6 +37,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Ammoless,
             TRRandomizerType.Audio,
             TRRandomizerType.BirdMonsterBehaviour,
+            TRRandomizerType.Braid,
             TRRandomizerType.DisableDemos,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
@@ -65,6 +68,7 @@ namespace TRRandomizerCore
         {
             TRRandomizerType.Ammoless,
             TRRandomizerType.Audio,
+            TRRandomizerType.Braid,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
             TRRandomizerType.GlitchedSecrets,            

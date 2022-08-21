@@ -89,7 +89,7 @@ namespace TRModelTransporter.Data
 
         public bool IsOverridePermitted(TREntities entity)
         {
-            return false;
+            return entity == TREntities.LaraPonytail_H_U;
         }
 
         public IEnumerable<TREntities> GetUnsafeModelReplacements()

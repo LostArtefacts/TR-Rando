@@ -392,8 +392,8 @@
             Grid.Column="2"
             IsEnabled="{Binding IsOutfitTypeSupported, UpdateSourceTrigger=PropertyChanged}"
             IsActive="{Binding RandomizeOutfits, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            Title="Randomize Lara's Outfits"
-            Text="Randomize Lara's outfit in each level."
+            Title="Randomize Lara's Appearance"
+            Text="Randomize Lara's look in each level."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding OutfitSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
@@ -401,10 +401,10 @@
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
             </ctrl:ManagedSeedAdvancedControl.Resources>
             <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
-                <windows:AdvancedWindow Title="Randomize Outfits (Advanced)"
-                                        MainDescription="Customize the outfit randomization."
+                <windows:AdvancedWindow Title="Randomize Lara's Appearance (Advanced)"
+                                        MainDescription="Customize the randomization of Lara's look."
                                         BoolItemsSource="{Binding Data.OutfitBoolItemControls, Source={StaticResource proxy}}"
-                                        HasBoolItems="True"
+                                        HasBoolItems="{Binding Data.IsTR1, Source={StaticResource proxy}, Converter={StaticResource InverseBooleanConverter}}"
                                         HasHaircuts="True"
                                         HasInvisibility="True"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">

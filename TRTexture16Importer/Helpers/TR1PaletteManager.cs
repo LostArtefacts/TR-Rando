@@ -11,9 +11,9 @@ namespace TRTexture16Importer.Helpers
     {
         private const int _paletteLimit = byte.MaxValue;
         private const int _reservedIndices = 48;
-        private const double _weightR = 0.3;
-        private const double _weightG = 0.59;
-        private const double _weightB = 0.11;
+        private const double _weightR = 1;
+        private const double _weightG = 1;
+        private const double _weightB = 1;
 
         private readonly Rectangle _defaultBounds = new Rectangle(0, 0, 256, 256);
 

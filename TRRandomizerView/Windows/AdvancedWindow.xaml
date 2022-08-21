@@ -19,6 +19,7 @@
         Title="Advanced">
     <Window.Resources>
         <cvt:BoolToVisibilityConverter x:Key="BoolToCollapsedConverter" />
+        <cvt:InverseBoolToVisibilityConverter x:Key="InverseBoolToCollapsedConverter" />
     </Window.Resources>
 
     <Grid x:Name="_content"
@@ -461,6 +462,10 @@
                         Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
+                           Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource BoolToCollapsedConverter}}"
+                           Text="Lara's Braid"/>
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource InverseBoolToCollapsedConverter}}"
                            Text="Haircuts"/>
 
                 <Grid Margin="0,5,0,0">
@@ -489,7 +494,14 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Column="1">
+                    <Border Grid.Column="1"
+                            Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource BoolToCollapsedConverter}}">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Lara's braid will be present in the given number of levels."/>
+                    </Border>
+                    
+                    <Border Grid.Column="1"
+                            Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource InverseBoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="Lara will lose her braid in the given number of levels."/>
                     </Border>
@@ -503,7 +515,15 @@
                     </Border>
 
                     <Border Grid.Column="1"
-                            Grid.Row="1">
+                            Grid.Row="1"
+                            Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource BoolToCollapsedConverter}}">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Add Lara's braid to the assault course level in addition to or separately from above."/>
+                    </Border>
+                    
+                    <Border Grid.Column="1"
+                            Grid.Row="1"
+                            Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource InverseBoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="Give Lara a haircut in the assault course level in addition to or separately from above."/>
                     </Border>

@@ -67,6 +67,12 @@ namespace TRRandomizerCore.Editors
                 target += numLevels;
             }
 
+            if (Settings.RandomizeOutfits)
+            {
+                // *2 because of multithreaded approach
+                target += numLevels * 2;
+            }
+
             if (Settings.RandomizeTextures)
             {
                 // *3 for multithreaded work
@@ -209,6 +215,20 @@ namespace TRRandomizerCore.Editors
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.AudioSeed);
+                }
+
+                if (!monitor.IsCancelled && Settings.RandomizeOutfits)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing Lara's appearance");
+                    new TR1OutfitRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings,
+                        TextureMonitor = textureMonitor
+                    }.Randomize(Settings.OutfitSeed);
                 }
 
                 if (!monitor.IsCancelled && Settings.RandomizeTextures)
