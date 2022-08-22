@@ -10,7 +10,6 @@ namespace TRTexture16Importer.Helpers
     public class TR1PaletteManager : IDisposable
     {
         private const int _paletteLimit = byte.MaxValue;
-        private const int _reservedIndices = 48;
         private const double _weightR = 1;
         private const double _weightG = 1;
         private const double _weightB = 1;
@@ -40,13 +39,6 @@ namespace TRTexture16Importer.Helpers
             {
                 Color.FromArgb(0, 0, 0, 0) // Placeholder for transparency
             };
-
-            // Reserved colours for health bars, inventory things, Lara etc
-            for (int i = 1; i <= _reservedIndices; i++)
-            {
-                TRColour c = Level.Palette[i];
-                _palette.Add(Color.FromArgb(c.Red * 4, c.Green * 4, c.Blue * 4));
-            }
 
             // Scan over replacement and original images, the idea being they will have been
             // updated as necessary with removals and additions. Store each unique colour in the
@@ -171,7 +163,7 @@ namespace TRTexture16Importer.Helpers
                 return;
             }
 
-            for (int i = _palette.Count - 1; i > _reservedIndices; i--)
+            for (int i = _palette.Count - 1; i > 0; i--)
             {
                 if (_palette[i] == Color.Black)
                 {
