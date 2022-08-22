@@ -218,36 +218,49 @@ namespace TRRandomizerCore.Randomizers
             }
 
             TRSoundDetails defDetails = definition.SoundData.SoundDetails.Values.First();
+            TRSoundDetails newDetails;
+
             if (level.SoundMap[definition.InternalIndex] != -1)
             {
-                // This index is already defined
-                return level.SoundMap[definition.InternalIndex];
+                // In Tomp1, duplicated indices in SoundMap can cause crashes, so we make a new TRSoundDetails, but just point
+                // it to the existing sample(s) so we're not importing more WAV data than we have to.
+                TRSoundDetails existingDetails = level.SoundDetails[level.SoundMap[definition.InternalIndex]];
+                newDetails = new TRSoundDetails
+                {
+                    Chance = defDetails.Chance,
+                    Characteristics = defDetails.Characteristics,
+                    Sample = existingDetails.Sample,
+                    Volume = defDetails.Volume
+                };
+            }
+            else
+            {
+                List<byte> levelSamples = level.Samples.ToList();
+                List<uint> levelSampleIndices = level.SampleIndices.ToList();
+
+                foreach (byte[] sample in definition.SoundData.Samples.Values)
+                {
+                    levelSampleIndices.Add((uint)levelSamples.Count);
+                    levelSamples.AddRange(sample);
+                }
+
+                newDetails = new TRSoundDetails
+                {
+                    Chance = defDetails.Chance,
+                    Characteristics = defDetails.Characteristics,
+                    Sample = (ushort)level.SampleIndices.Length,
+                    Volume = defDetails.Volume
+                };
+
+                level.Samples = levelSamples.ToArray();
+                level.NumSamples = (uint)levelSamples.Count;
+
+                level.SampleIndices = levelSampleIndices.ToArray();
+                level.NumSampleIndices = (uint)levelSampleIndices.Count;
             }
 
-            List<byte> levelSamples = level.Samples.ToList();
             List<TRSoundDetails> levelSoundDetails = level.SoundDetails.ToList();
-            List<uint> levelSampleIndices = level.SampleIndices.ToList();
-
-            foreach (byte[] sample in definition.SoundData.Samples.Values)
-            {
-                levelSampleIndices.Add((uint)levelSamples.Count);
-                levelSamples.AddRange(sample);
-            }
-
-            levelSoundDetails.Add(new TRSoundDetails
-            {
-                Chance = defDetails.Chance,
-                Characteristics = defDetails.Characteristics,
-                Sample = (ushort)level.SampleIndices.Length,
-                Volume = defDetails.Volume
-            });
-
-            level.Samples = levelSamples.ToArray();
-            level.NumSamples = (uint)levelSamples.Count;
-
-            level.SampleIndices = levelSampleIndices.ToArray();
-            level.NumSampleIndices = (uint)levelSampleIndices.Count;
-
+            levelSoundDetails.Add(newDetails);
             level.SoundDetails = levelSoundDetails.ToArray();
             level.NumSoundDetails++;
 
