@@ -22,12 +22,12 @@ namespace TRRandomizerCore
 
         private static readonly List<TRRandomizerType> _tr1MainTypes = new List<TRRandomizerType>
         {
-            //TRRandomizerType.Ammoless,
+            TRRandomizerType.Ammoless,
             TRRandomizerType.Braid,
             TRRandomizerType.DisableDemos,
             TRRandomizerType.Health,
             TRRandomizerType.LevelSequence,
-            //TRRandomizerType.Mediless,
+            TRRandomizerType.Mediless,
             TRRandomizerType.SecretCount,
             TRRandomizerType.Unarmed
         };
