@@ -16,7 +16,7 @@ namespace TRRandomizerView.Windows
     /// </summary>
     public partial class AdvancedWindow : Window
     {
-        private static readonly string _darknessPreviewPath = @"pack://application:,,,/TRRandomizer;component/Resources/Darkness/{0}.jpg";
+        private static readonly string _darknessPreviewPath = @"pack://application:,,,/TRRandomizer;component/Resources/Darkness/{0}/{1}.jpg";
 
         public static readonly DependencyProperty MainDescriptionProperty = DependencyProperty.Register
         (
@@ -293,7 +293,7 @@ namespace TRRandomizerView.Windows
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            _darknessPreview.Source = new BitmapImage(new Uri(string.Format(_darknessPreviewPath, ControllerProxy.NightModeDarkness)));
+            _darknessPreview.Source = new BitmapImage(new Uri(string.Format(_darknessPreviewPath, ControllerProxy.IsTR1 ? "TR1" : "TR2", ControllerProxy.NightModeDarkness)));
         }
 
         private void ExclusionsButton_Click(object sender, RoutedEventArgs e)

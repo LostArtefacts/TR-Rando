@@ -12,6 +12,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Environment,
             TRRandomizerType.Item,
             TRRandomizerType.KeyItems,
+            TRRandomizerType.NightMode,
             TRRandomizerType.Outfit,
             TRRandomizerType.RewardRooms,
             TRRandomizerType.Secret,

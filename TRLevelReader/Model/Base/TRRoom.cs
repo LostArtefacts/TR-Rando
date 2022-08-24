@@ -61,6 +61,40 @@ namespace TRLevelReader.Model
             Flags &= ~0x01;
         }
 
+        //Ambient Intensity = 0 (bright) - 0x1FFF (dark)
+        //Vertex Light = 0 (bright) - 0x1FFF (dark)
+        //RoomStaticMesh intensity = 0 (bright) - 0x1FFF (dark)
+        //but...
+        //Light intensity = 0 (dark) - 0x1FFF (bright)!!!
+        public void SetLights(ushort val)
+        {
+            foreach (TRRoomLight light in Lights)
+            {
+                light.Intensity = val;
+            }
+        }
+
+        public void SetStaticMeshLights(ushort val)
+        {
+            foreach (TRRoomStaticMesh mesh in StaticMeshes)
+            {
+                mesh.Intensity = val;
+            }
+        }
+
+        public void SetVertexLight(short val)
+        {
+            foreach (TRRoomVertex vert in RoomData.Vertices)
+            {
+                vert.Lighting = val;
+            }
+        }
+
+        public void SetAmbient(short val)
+        {
+            AmbientIntensity = val;
+        }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())

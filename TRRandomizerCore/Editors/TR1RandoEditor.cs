@@ -84,6 +84,11 @@ namespace TRRandomizerCore.Editors
                 target += numLevels;
             }
 
+            if (Settings.RandomizeNightMode)
+            {
+                target += numLevels;
+            }
+
             // Environment randomizer always runs
             target += numLevels;
 
@@ -247,6 +252,20 @@ namespace TRRandomizerCore.Editors
                         Settings = Settings,
                         TextureMonitor = textureMonitor
                     }.Randomize(Settings.OutfitSeed);
+                }
+
+                if (!monitor.IsCancelled && Settings.RandomizeNightMode)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing night mode");
+                    new TR1NightModeRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings,
+                        TextureMonitor = textureMonitor
+                    }.Randomize(Settings.NightModeSeed);
                 }
 
                 if (!monitor.IsCancelled && Settings.RandomizeTextures)
