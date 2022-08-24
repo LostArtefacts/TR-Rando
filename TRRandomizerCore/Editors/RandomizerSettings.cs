@@ -223,7 +223,7 @@ namespace TRRandomizerCore.Editors
             PuristMode = config.GetBool(nameof(PuristMode));
 
             RandomizeSecretRewardsPhysical = config.GetBool(nameof(RandomizeSecretRewardsPhysical));
-            SecretRewardsPhysicalSeed = config.GetInt(nameof(SecretRewardsPhysicalSeed));
+            SecretRewardsPhysicalSeed = config.GetInt(nameof(SecretRewardsPhysicalSeed), defaultSeed);
             
             RandomizeVfx = config.GetBool(nameof(RandomizeVfx));
             VfxFilterColor = Color.FromArgb(config.GetInt(nameof(VfxFilterColor)));
