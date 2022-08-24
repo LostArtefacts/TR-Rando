@@ -1,11 +1,49 @@
 {
   "All": [],
-  "NonPurist": [],
+  "NonPurist": [
+    {
+      "Comments": "Fix the incorrect texture in the starting flip map room.",
+      "EMType": 21,
+      "TextureMap": {
+        "84": {
+          "85": {
+            "Rectangles": [
+              19
+            ]
+          }
+        }
+      }
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If Lara's not in the default starting position, move the flipmap trigger to her new location.",
+        "ConditionType": 0,
+        "EntityIndex": 38,
+        "X": 57856,
+        "Y": 10240,
+        "Z": 10752,
+        "Room": 12
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 57856,
+            "Y": 10240,
+            "Z": 10752,
+            "Room": 12
+          },
+          "EntityLocation": 38
+        }
+      ]
+    }
+  ],
   "Mirrored": [
     {
       "Comments": "Moves switch 16 otherwise the door here opens against it.",

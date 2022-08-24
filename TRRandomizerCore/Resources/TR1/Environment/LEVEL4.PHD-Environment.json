@@ -42,6 +42,33 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If Lara is in room 51, extend the trigger for the door to the other side of the room.",
+        "ConditionType": 0,
+        "EntityIndex": 104,
+        "Room": 51
+      },
+      "OnTrue": [
+        {
+          "EMType": 63,
+          "BaseLocation": {
+            "X": 15872,
+            "Y": 0,
+            "Z": 40448,
+            "Room": 51
+          },
+          "Locations": [
+            {
+              "X": 15872,
+              "Y": 0,
+              "Z": 39424,
+              "Room": 51
+            }
+          ]
+        }
+      ]
     }
   ],
   "Mirrored": []

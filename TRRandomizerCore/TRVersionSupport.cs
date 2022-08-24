@@ -17,6 +17,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Secret,
             TRRandomizerType.SecretReward,
             TRRandomizerType.SFX,
+            TRRandomizerType.StartPosition,
             TRRandomizerType.Texture
         };
 

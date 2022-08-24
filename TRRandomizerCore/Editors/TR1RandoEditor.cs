@@ -79,6 +79,11 @@ namespace TRRandomizerCore.Editors
                 target += numLevels * 3;
             }
 
+            if (Settings.RandomizeStartPosition)
+            {
+                target += numLevels;
+            }
+
             // Environment randomizer always runs
             target += numLevels;
 
@@ -195,6 +200,19 @@ namespace TRRandomizerCore.Editors
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.SecretRewardsPhysicalSeed);
+                }
+
+                if (!monitor.IsCancelled && Settings.RandomizeStartPosition)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing start positions");
+                    new TR1StartPositionRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings
+                    }.Randomize(Settings.StartPositionSeed);
                 }
 
                 if (!monitor.IsCancelled)

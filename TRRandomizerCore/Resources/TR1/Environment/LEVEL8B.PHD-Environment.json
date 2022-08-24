@@ -245,6 +245,29 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If Lara's not in the default starting position, move the flipmap trigger to her new location.",
+        "ConditionType": 0,
+        "EntityIndex": 24,
+        "X": 45568,
+        "Y": 0,
+        "Z": 37376,
+        "Room": 24
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 45568,
+            "Y": 0,
+            "Z": 37376,
+            "Room": 24
+          },
+          "EntityLocation": 24
+        }
+      ]
     }
   ],
   "Mirrored": []
