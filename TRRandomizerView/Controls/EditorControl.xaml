@@ -475,6 +475,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Label
@@ -490,7 +492,7 @@
 
                 <Button
                     Grid.Row="2"
-                    Margin="0,0,0,20"
+                    Margin="0,0,0,18"
                     Content="Randomize Seeds" 
                     Style="{StaticResource AltCallToAction}"
                     Command="cmds:WindowCommands.RandomizeSeeds"/>
@@ -503,10 +505,25 @@
 
                 <Button
                     Grid.Row="4"
-                    Margin="0,0,0,20"
+                    Margin="0,0,0,18"
                     Content="Apply a Global Seed" 
                     Style="{StaticResource AltCallToAction}"
                     Command="cmds:WindowCommands.CreateGlobalSeed"/>
+
+                <TextBlock
+                    Visibility="{Binding IsTR1Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                    Grid.Row="5"
+                    Margin="0,0,0,5"
+                    Text="Configure additional T1M settings."
+                    TextWrapping="Wrap"/>
+
+                <Button
+                    Visibility="{Binding IsTR1Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                    Grid.Row="6"
+                    Margin="0,0,0,18"
+                    Content="Tomb1Main Settings" 
+                    Style="{StaticResource AltCallToAction}"
+                    Command="cmds:WindowCommands.EditCommunitySettings"/>
             </Grid>
         </Border>
 

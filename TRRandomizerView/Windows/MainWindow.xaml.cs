@@ -338,6 +338,16 @@ namespace TRRandomizerView.Windows
         {
             e.CanExecute = IsEditorActive;
         }
+
+        private void EditCommunitySettingsCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = IsEditorActive && _editorControl.CanEditCommunitySettings();
+        }
+
+        private void EditCommunitySettingsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editorControl.EditCommunitySettings();
+        }
         #endregion
 
         #region Tools

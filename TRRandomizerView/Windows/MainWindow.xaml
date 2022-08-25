@@ -48,6 +48,10 @@
                         CanExecute="GlobalSeedCommandBinding_CanExecute"
                         Executed="GlobalSeedCommandBinding_Executed"/>
 
+        <CommandBinding Command="cmds:WindowCommands.EditCommunitySettings"
+                        CanExecute="EditCommunitySettingsCommandBinding_CanExecute"
+                        Executed="EditCommunitySettingsCommandBinding_Executed"/>
+
         <CommandBinding Command="cmds:WindowCommands.ShowBackup"
                         CanExecute="EditorActiveCommandBinding_CanExecute"
                         Executed="ShowBackupCommandBinding_Executed"/>

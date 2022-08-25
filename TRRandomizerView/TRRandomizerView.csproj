@@ -53,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,6 +62,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TRGE.Core">
+      <HintPath>..\Deps\TRGE.Core.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -71,6 +75,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\DecimalUpDown.xaml.cs">
+      <DependentUpon>DecimalUpDown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ManagedSeedAdvancedControl.xaml.cs">
       <DependentUpon>ManagedSeedAdvancedControl.xaml</DependentUpon>
     </Compile>
@@ -126,9 +133,16 @@
     <Compile Include="Windows\RestoreProgressWindow.xaml.cs">
       <DependentUpon>RestoreProgressWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Tomb1MainWindow.xaml.cs">
+      <DependentUpon>Tomb1MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\UpdateAvailableWindow.xaml.cs">
       <DependentUpon>UpdateAvailableWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\DecimalUpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\EditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -218,6 +232,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\RestoreProgressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Tomb1MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

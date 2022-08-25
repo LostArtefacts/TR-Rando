@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="TRRandomizerView.Controls.DecimalUpDown"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignHeight="25" d:DesignWidth="140" MinWidth="60">
+    <Border BorderBrush="#666" BorderThickness="1" Margin="0">
+        <Grid Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="15"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="_textBox" 
+                     PreviewKeyDown="TextBox_PreviewKeyDown"
+                     PreviewTextInput="TextBox_TextInput" 
+                     TextChanged="TextBox_TextChanged" 
+                     DataObject.Pasting="TextBox_Pasting" 
+                     Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                     HorizontalContentAlignment="Right" 
+                     VerticalAlignment="Center"
+                     BorderThickness="0" 
+                     Margin="3,0" 
+                     Grid.RowSpan="3" />
+
+            <RepeatButton Click="RepeatUpButton_Click" 
+                          Grid.Column="1"
+                          Content="..\Resources\up.png"
+                          ToolTip="Increase value"
+                          Style="{StaticResource FlatRepeatButton}"/>
+
+            <Border Background="#666" 
+                    Grid.Row="1" 
+                    Grid.Column="1"/>
+
+            <RepeatButton Click="RepeatDownButton_Click" 
+                          Grid.Column="1" 
+                          Grid.Row="2"
+                          Content="..\Resources\down.png"
+                          ToolTip="Decrease value"
+                          Style="{StaticResource FlatRepeatButton}"/>
+        </Grid>
+    </Border>
+</UserControl>

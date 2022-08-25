@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
+using TRGE.Core;
 using TRRandomizerCore;
 using TRRandomizerCore.Globalisation;
 using TRRandomizerCore.Helpers;
@@ -78,6 +80,653 @@ namespace TRRandomizerView.Model
         private int _levelCount, _maximumLevelCount, _defaultUnarmedLevelCount, _defaultAmmolessLevelCount, _defaultSunsetCount;
 
         private uint _minStartingHealth, _maxStartingHealth, _medilessLevelCount;
+
+        #region T1M Sepcifics
+        
+        private bool _enableGameModes;
+        public bool EnableGameModes
+        {
+            get => _enableGameModes;
+            set
+            {
+                _enableGameModes = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableSaveCrystals;
+        public bool EnableSaveCrystals
+        {
+            get => _enableSaveCrystals;
+            set
+            {
+                _enableSaveCrystals = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private double _demoDelay;
+        public double DemoDelay
+        {
+            get => _demoDelay;
+            set
+            {
+                _demoDelay = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private double _drawDistanceFade;
+        public double DrawDistanceFade
+        {
+            get => _drawDistanceFade;
+            set
+            {
+                _drawDistanceFade = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private double _drawDistanceMax;
+        public double DrawDistanceMax
+        {
+            get => _drawDistanceMax;
+            set
+            {
+                _drawDistanceMax = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private Vector3 _waterColor;
+        public Vector3 WaterColor
+        {
+            get => _waterColor;
+            set
+            {
+                _waterColor = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public double WaterColorR
+        {
+            get => _waterColor.X;
+            set
+            {
+                _waterColor.X = (float)value;
+                FirePropertyChanged(nameof(WaterColor));
+            }
+        }
+
+        public double WaterColorG
+        {
+            get => _waterColor.Y;
+            set
+            {
+                _waterColor.Y = (float)value;
+                FirePropertyChanged(nameof(WaterColor));
+            }
+        }
+
+        public double WaterColorB
+        {
+            get => _waterColor.Z;
+            set
+            {
+                _waterColor.Z = (float)value;
+                FirePropertyChanged(nameof(WaterColor));
+            }
+        }
+
+        private bool _disableMagnums;
+        public bool DisableMagnums
+        {
+            get => _disableMagnums;
+            set
+            {
+                _disableMagnums = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _disableUzis;
+        public bool DisableUzis
+        {
+            get => _disableUzis;
+            set
+            {
+                _disableUzis = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _disableShotgun;
+        public bool DisableShotgun
+        {
+            get => _disableShotgun;
+            set
+            {
+                _disableShotgun = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableDeathsCounter;
+        public bool EnableDeathsCounter
+        {
+            get => _enableDeathsCounter;
+            set
+            {
+                _enableDeathsCounter = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableEnemyHealthbar;
+        public bool EnableEnemyHealthbar
+        {
+            get => _enableEnemyHealthbar;
+            set
+            {
+                _enableEnemyHealthbar = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableEnhancedLook;
+        public bool EnableEnhancedLook
+        {
+            get => _enableEnhancedLook;
+            set
+            {
+                _enableEnhancedLook = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableShotgunFlash;
+        public bool EnableShotgunFlash
+        {
+            get => _enableShotgunFlash;
+            set
+            {
+                _enableShotgunFlash = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixShotgunTargeting;
+        public bool FixShotgunTargeting
+        {
+            get => _fixShotgunTargeting;
+            set
+            {
+                _fixShotgunTargeting = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableNumericKeys;
+        public bool EnableNumericKeys
+        {
+            get => _enableNumericKeys;
+            set
+            {
+                _enableNumericKeys = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableTr3Sidesteps;
+        public bool EnableTr3Sidesteps
+        {
+            get => _enableTr3Sidesteps;
+            set
+            {
+                _enableTr3Sidesteps = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableCheats;
+        public bool EnableCheats
+        {
+            get => _enableCheats;
+            set
+            {
+                _enableCheats = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableDetailsStats;
+        public bool EnableDetailedStats
+        {
+            get => _enableDetailsStats;
+            set
+            {
+                _enableDetailsStats = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableCompassStats;
+        public bool EnableCompassStats
+        {
+            get => _enableCompassStats;
+            set
+            {
+                _enableCompassStats = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableTotalStats;
+        public bool EnableTotalStats
+        {
+            get => _enableTotalStats;
+            set
+            {
+                _enableTotalStats = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableTimerInInventory;
+        public bool EnableTimerInInventory
+        {
+            get => _enableTimerInInventory;
+            set
+            {
+                _enableTimerInInventory = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableSmoothBars;
+        public bool EnableSmoothBars
+        {
+            get => _enableSmoothBars;
+            set
+            {
+                _enableSmoothBars = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableFadeEffects;
+        public bool EnableFadeEffects
+        {
+            get => _enableFadeEffects;
+            set
+            {
+                _enableFadeEffects = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRMenuStyle _menuStyle;
+        public TRMenuStyle MenuStyle
+        {
+            get => _menuStyle;
+            set
+            {
+                _menuStyle = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRHealthbarMode _healthbarShowingMode;
+        public TRHealthbarMode HealthbarShowingMode
+        {
+            get => _healthbarShowingMode;
+            set
+            {
+                _healthbarShowingMode = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRUILocation _healthbarLocation;
+        public TRUILocation HealthbarLocation
+        {
+            get => _healthbarLocation;
+            set
+            {
+                _healthbarLocation = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRUIColour _healthbarColor;
+        public TRUIColour HealthbarColor
+        {
+            get => _healthbarColor;
+            set
+            {
+                _healthbarColor = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRAirbarMode _airbarShowingMode;
+        public TRAirbarMode AirbarShowingMode
+        {
+            get => _airbarShowingMode;
+            set
+            {
+                _airbarShowingMode = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRUILocation _airbarLocation;
+        public TRUILocation AirbarLocation
+        {
+            get => _airbarLocation;
+            set
+            {
+                _airbarLocation = value;
+            }
+        }
+
+        private TRUIColour _airbarColor;
+        public TRUIColour AirbarColor
+        {
+            get => _airbarColor;
+            set
+            {
+                _airbarColor = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRUILocation _enemyHealthbarLocation;
+        public TRUILocation EnemyHealthbarLocation
+        {
+            get => _enemyHealthbarLocation;
+            set
+            {
+                _enemyHealthbarLocation = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRUIColour _enemyHealthbarColor;
+        public TRUIColour EnemyHealthbarColor
+        {
+            get => _enemyHealthbarColor;
+            set
+            {
+                _enemyHealthbarColor = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixTihocanSecretSound;
+        public bool FixTihocanSecretSound
+        {
+            get => _fixTihocanSecretSound;
+            set
+            {
+                _fixTihocanSecretSound = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixPyramidSecretTrigger;
+        public bool FixPyramidSecretTrigger
+        {
+            get => _fixPyramidSecretTrigger;
+            set
+            {
+                _fixPyramidSecretTrigger = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixSecretsKillingMusic;
+        public bool FixSecretsKillingMusic
+        {
+            get => _fixSecretsKillingMusic;
+            set
+            {
+                _fixSecretsKillingMusic = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixDescendingGlitch;
+        public bool FixDescendingGlitch
+        {
+            get => _fixDescendingGlitch;
+            set
+            {
+                _fixDescendingGlitch = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixWallJumpGlitch;
+        public bool FixWallJumpGlitch
+        {
+            get => _fixWallJumpGlitch;
+            set
+            {
+                _fixWallJumpGlitch = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixBridgeCollision;
+        public bool FixBridgeCollision
+        {
+            get => _fixBridgeCollision;
+            set
+            {
+                _fixBridgeCollision = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixQwopGlitch;
+        public bool FixQwopGlitch
+        {
+            get => _fixQwopGlitch;
+            set
+            {
+                _fixQwopGlitch = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixAlligatorAi;
+        public bool FixAlligatorAi
+        {
+            get => _fixAlligatorAi;
+            set
+            {
+                _fixAlligatorAi = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _changePierreSpawn;
+        public bool ChangePierreSpawn
+        {
+            get => _changePierreSpawn;
+            set
+            {
+                _changePierreSpawn = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private int _fovValue;
+        public int FovValue
+        {
+            get => _fovValue;
+            set
+            {
+                _fovValue = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fovVertical;
+        public bool FovVertical
+        {
+            get => _fovVertical;
+            set
+            {
+                _fovVertical = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _disableFmv;
+        public bool DisableFmv
+        {
+            get => _disableFmv;
+            set
+            {
+                _disableFmv = value;
+            }
+        }
+
+        private bool _disableCine;
+        public bool DisableCine
+        {
+            get => _disableCine;
+            set
+            {
+                _disableCine = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _disableMusicInMenu;
+        public bool DisableMusicInMenu
+        {
+            get => _disableMusicInMenu;
+            set
+            {
+                _disableMusicInMenu = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _disableMusicInInventory;
+        public bool DisableMusicInInventory
+        {
+            get => _disableMusicInInventory;
+            set
+            {
+                _disableMusicInInventory = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private int _resolutionWidth;
+        public int ResolutionWidth
+        {
+            get => _resolutionWidth;
+            set
+            {
+                _resolutionWidth = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private int _resolutionHeight;
+        public int ResolutionHeight
+        {
+            get => _resolutionHeight;
+            set
+            {
+                _resolutionHeight = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableRoundShadow;
+        public bool EnableRoundShadow
+        {
+            get => _enableRoundShadow;
+            set
+            {
+                _enableRoundShadow = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enable3dPickups;
+        public bool Enable3dPickups
+        {
+            get => _enable3dPickups;
+            set
+            {
+                _enable3dPickups = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRScreenshotFormat _screenshotFormat;
+        public TRScreenshotFormat ScreenshotFormat
+        {
+            get => _screenshotFormat;
+            set
+            {
+                _screenshotFormat = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _walkToItems;
+        public bool WalkToItems
+        {
+            get => _walkToItems;
+            set
+            {
+                _walkToItems = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private int _maximumSaveSlots;
+        public int MaximumSaveSlots
+        {
+            get => _maximumSaveSlots;
+            set
+            {
+                _maximumSaveSlots = value;
+            }
+        }
+
+        private bool _revertToPistols;
+        public bool RevertToPistols
+        {
+            get => _revertToPistols;
+            set
+            {
+                _revertToPistols = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableEnhancedSaves;
+        public bool EnableEnhancedSaves
+        {
+            get => _enableEnhancedSaves;
+            set
+            {
+                _enableEnhancedSaves = value;
+                FirePropertyChanged();
+            }
+        }
+
+        #endregion
 
         public int TotalLevelCount
         {
@@ -1876,6 +2525,65 @@ namespace TRRandomizerView.Model
             AutoLaunchGame = _controller.AutoLaunchGame;
             PuristMode = _controller.PuristMode;
 
+            if (IsTR1Main)
+            {
+                EnableGameModes = _controller.EnableGameModes;
+                EnableSaveCrystals = _controller.EnableSaveCrystals;
+                DemoDelay = _controller.DemoDelay;
+                DrawDistanceFade = _controller.DrawDistanceFade;
+                DrawDistanceMax = _controller.DrawDistanceMax;
+                WaterColor = _controller.WaterColor;
+                DisableMagnums = _controller.DisableMagnums;
+                DisableUzis = _controller.DisableUzis;
+                DisableShotgun = _controller.DisableShotgun;
+                EnableDeathsCounter = _controller.EnableDeathsCounter;
+                EnableEnemyHealthbar = _controller.EnableEnemyHealthbar;
+                EnableEnhancedLook = _controller.EnableEnhancedLook;
+                EnableShotgunFlash = _controller.EnableShotgunFlash;
+                FixShotgunTargeting = _controller.FixShotgunTargeting;
+                EnableNumericKeys = _controller.EnableNumericKeys;
+                EnableTr3Sidesteps = _controller.EnableTr3Sidesteps;
+                EnableCheats = _controller.EnableCheats;
+                EnableDetailedStats = _controller.EnableDetailedStats;
+                EnableCompassStats = _controller.EnableCompassStats;
+                EnableTotalStats = _controller.EnableTotalStats;
+                EnableTimerInInventory = _controller.EnableTimerInInventory;
+                EnableSmoothBars = _controller.EnableSmoothBars;
+                EnableFadeEffects = _controller.EnableFadeEffects;
+                MenuStyle = _controller.MenuStyle;
+                HealthbarShowingMode = _controller.HealthbarShowingMode;
+                HealthbarLocation = _controller.HealthbarLocation;
+                HealthbarColor = _controller.HealthbarColor;
+                AirbarShowingMode = _controller.AirbarShowingMode;
+                AirbarLocation = _controller.AirbarLocation;
+                AirbarColor = _controller.AirbarColor;
+                EnemyHealthbarLocation = _controller.EnemyHealthbarLocation;
+                EnemyHealthbarColor = _controller.EnemyHealthbarColor;
+                FixTihocanSecretSound = _controller.FixTihocanSecretSound;
+                FixPyramidSecretTrigger = _controller.FixPyramidSecretTrigger;
+                FixSecretsKillingMusic = _controller.FixSecretsKillingMusic;
+                FixDescendingGlitch = _controller.FixDescendingGlitch;
+                FixWallJumpGlitch = _controller.FixWallJumpGlitch;
+                FixBridgeCollision = _controller.FixBridgeCollision;
+                FixQwopGlitch = _controller.FixQwopGlitch;
+                FixAlligatorAi = _controller.FixAlligatorAi;
+                ChangePierreSpawn = _controller.ChangePierreSpawn;
+                FovValue = _controller.FovValue;
+                FovVertical = _controller.FovVertical;
+                DisableFmv = _controller.DisableFmv;
+                DisableCine = _controller.DisableCine;
+                DisableMusicInMenu = _controller.DisableMusicInMenu;
+                DisableMusicInInventory = _controller.DisableMusicInInventory;
+                ResolutionWidth = _controller.ResolutionWidth;
+                ResolutionHeight = _controller.ResolutionHeight;
+                EnableRoundShadow = _controller.EnableRoundShadow;
+                Enable3dPickups = _controller.Enable3dPickups;
+                ScreenshotFormat = _controller.ScreenshotFormat;
+                WalkToItems = _controller.WalkToItems;
+                MaximumSaveSlots = _controller.MaximumSaveSlots;
+                RevertToPistols = _controller.RevertToPistols;
+                EnableEnhancedSaves = _controller.EnableEnhancedSaves;
+            }
 
             FireSupportPropertiesChanged();
         }
@@ -2178,6 +2886,66 @@ namespace TRRandomizerView.Model
             _controller.DisableDemos = DisableDemos;
             _controller.AutoLaunchGame = AutoLaunchGame;
             _controller.PuristMode = PuristMode;
+
+            if (IsTR1Main)
+            {
+                _controller.EnableGameModes = EnableGameModes;
+                _controller.EnableSaveCrystals = EnableSaveCrystals;
+                _controller.DemoDelay = DemoDelay;
+                _controller.DrawDistanceFade = DrawDistanceFade;
+                _controller.DrawDistanceMax = DrawDistanceMax;
+                _controller.WaterColor = WaterColor;
+                _controller.DisableMagnums = DisableMagnums;
+                _controller.DisableUzis = DisableUzis;
+                _controller.DisableShotgun = DisableShotgun;
+                _controller.EnableDeathsCounter = EnableDeathsCounter;
+                _controller.EnableEnemyHealthbar = EnableEnemyHealthbar;
+                _controller.EnableEnhancedLook = EnableEnhancedLook;
+                _controller.EnableShotgunFlash = EnableShotgunFlash;
+                _controller.FixShotgunTargeting = FixShotgunTargeting;
+                _controller.EnableNumericKeys = EnableNumericKeys;
+                _controller.EnableTr3Sidesteps = EnableTr3Sidesteps;
+                _controller.EnableCheats = EnableCheats;
+                _controller.EnableDetailedStats = EnableDetailedStats;
+                _controller.EnableCompassStats = EnableCompassStats;
+                _controller.EnableTotalStats = EnableTotalStats;
+                _controller.EnableTimerInInventory = EnableTimerInInventory;
+                _controller.EnableSmoothBars = EnableSmoothBars;
+                _controller.EnableFadeEffects = EnableFadeEffects;
+                _controller.MenuStyle = MenuStyle;
+                _controller.HealthbarShowingMode = HealthbarShowingMode;
+                _controller.HealthbarLocation = HealthbarLocation;
+                _controller.HealthbarColor = HealthbarColor;
+                _controller.AirbarShowingMode = AirbarShowingMode;
+                _controller.AirbarLocation = AirbarLocation;
+                _controller.AirbarColor = AirbarColor;
+                _controller.EnemyHealthbarLocation = EnemyHealthbarLocation;
+                _controller.EnemyHealthbarColor = EnemyHealthbarColor;
+                _controller.FixTihocanSecretSound = FixTihocanSecretSound;
+                _controller.FixPyramidSecretTrigger = FixPyramidSecretTrigger;
+                _controller.FixSecretsKillingMusic = FixSecretsKillingMusic;
+                _controller.FixDescendingGlitch = FixDescendingGlitch;
+                _controller.FixWallJumpGlitch = FixWallJumpGlitch;
+                _controller.FixBridgeCollision = FixBridgeCollision;
+                _controller.FixQwopGlitch = FixQwopGlitch;
+                _controller.FixAlligatorAi = FixAlligatorAi;
+                _controller.ChangePierreSpawn = ChangePierreSpawn;
+                _controller.FovValue = FovValue;
+                _controller.FovVertical = FovVertical;
+                _controller.DisableFmv = DisableFmv;
+                _controller.DisableCine = DisableCine;
+                _controller.DisableMusicInMenu = DisableMusicInMenu;
+                _controller.DisableMusicInInventory = DisableMusicInInventory;
+                _controller.ResolutionWidth = ResolutionWidth;
+                _controller.ResolutionHeight = ResolutionHeight;
+                _controller.EnableRoundShadow = EnableRoundShadow;
+                _controller.Enable3dPickups = Enable3dPickups;
+                _controller.ScreenshotFormat = ScreenshotFormat;
+                _controller.WalkToItems = WalkToItems;
+                _controller.MaximumSaveSlots = MaximumSaveSlots;
+                _controller.RevertToPistols = RevertToPistols;
+                _controller.EnableEnhancedSaves = EnableEnhancedSaves;
+            }
         }
 
         public void Unload()
@@ -2189,6 +2957,7 @@ namespace TRRandomizerView.Model
         private static readonly string _supportPropertyFormat = "Is{0}TypeSupported";
 
         public bool IsTR1 => _controller != null && _controller.IsTR1;
+        public bool IsTR1Main => IsTR1 && _controller.IsCommunityPatch;
         public bool IsTR2 => _controller != null && _controller.IsTR2;
         public bool IsTR3 => _controller != null && _controller.IsTR3;
         public bool IsLevelSequenceTypeSupported => IsRandomizationSupported(TRRandomizerType.LevelSequence);
@@ -2241,6 +3010,8 @@ namespace TRRandomizerView.Model
             FirePropertyChanged(nameof(IsTR1));
             FirePropertyChanged(nameof(IsTR2));
             FirePropertyChanged(nameof(IsTR3));
+
+            FirePropertyChanged(nameof(IsTR1Main));
 
             AdjustAvailableOptions();
         }
