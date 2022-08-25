@@ -1,5 +1,38 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Add extra triggers for the mines in case the main route is not taken.",
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 29184,
+          "Y": 896,
+          "Z": 59904,
+          "Room": 102
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 106
+          },
+          {
+            "Parameter": 107
+          },
+          {
+            "Parameter": 108
+          },
+          {
+            "Parameter": 109
+          },
+          {
+            "Parameter": 110
+          }
+        ]
+      }
+    }
+  ],
   "NonPurist": [],
   "Any": [],
   "AllWithin": [
