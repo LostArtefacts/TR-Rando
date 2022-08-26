@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
@@ -67,14 +68,21 @@ namespace TRTexture16Importer.Helpers
                 });
             }
 
-            // Grab meshes we aren't interested in
+            // Grab meshes we aren't interested in - but don't remove Lara's hips e.g. Atlantean spawns
             List<TRMesh> ignoredMeshes = new List<TRMesh>();
+            List<TRMesh> laraMeshes = TRMeshUtilities.GetModelMeshes(Level, TREntities.Lara).ToList();
             foreach (TREntities entity in ObsoleteModels)
             {
                 TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(Level, entity);
                 if (meshes != null)
                 {
-                    ignoredMeshes.AddRange(meshes);
+                    foreach (TRMesh mesh in meshes)
+                    {
+                        if (!laraMeshes.Contains(mesh))
+                        {
+                            ignoredMeshes.AddRange(meshes);
+                        }
+                    }
                 }
             }
 
