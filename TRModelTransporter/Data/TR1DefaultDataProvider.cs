@@ -89,7 +89,7 @@ namespace TRModelTransporter.Data
 
         public bool IsOverridePermitted(TREntities entity)
         {
-            return entity == TREntities.LaraPonytail_H_U;
+            return _permittedOverrides.Contains(entity);
         }
 
         public IEnumerable<TREntities> GetUnsafeModelReplacements()
@@ -173,7 +173,9 @@ namespace TRModelTransporter.Data
             [TREntities.RatLand]
                 = new TREntities[] { TREntities.RatWater },
             [TREntities.RatWater]
-                = new TREntities[] { TREntities.RatLand }
+                = new TREntities[] { TREntities.RatLand },
+            [TREntities.Pierre]
+                = new TREntities[] { TREntities.ScionPiece_M_H },
         };
 
         private static readonly Dictionary<TREntities, List<TREntities>> _removalExclusions = new Dictionary<TREntities, List<TREntities>>
@@ -205,7 +207,7 @@ namespace TRModelTransporter.Data
                 = new List<TREntities> { TREntities.Key1_S_P },
             [TREntities.Natla]
                 = new List<TREntities> { TREntities.Explosion1_S_H },
-            [TREntities.Pierre]
+            [TREntities.ScionPiece_M_H]
                 = new List<TREntities> { TREntities.ScionPiece2_S_P },
             [TREntities.ShootingAtlantean_N]
                 = new List<TREntities> { TREntities.Explosion1_S_H },
@@ -241,6 +243,11 @@ namespace TRModelTransporter.Data
         private static readonly List<TREntities> _permittedAliasDuplicates = new List<TREntities>
         {
             TREntities.LaraMiscAnim_H
+        };
+
+        private static readonly List<TREntities> _permittedOverrides = new List<TREntities>
+        {
+            TREntities.LaraPonytail_H_U, TREntities.ScionPiece_M_H
         };
 
         private static readonly List<TREntities> _unsafeModelReplacements = new List<TREntities>

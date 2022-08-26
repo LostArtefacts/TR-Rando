@@ -239,7 +239,7 @@ namespace TRModelTransporter.Transport
                     IEnumerable<E> cyclicDependencies = Data.GetCyclicDependencies(nextEntity);
                     foreach (E cyclicDependency in cyclicDependencies)
                     {
-                        if (!modelEntities.Contains(cyclicDependency))
+                        if (!modelEntities.Contains(cyclicDependency) || Data.IsOverridePermitted(cyclicDependency))
                         {
                             modelEntities.Add(cyclicDependency);
                             standardModelDefinitions.Add(LoadDefinition(cyclicDependency));
