@@ -634,6 +634,8 @@ namespace TRRandomizerCore.Randomizers
             {
                 AddUnarmedLevelAmmo(level);
             }
+
+            RandomizeMeshes(level);
         }
 
         private bool IsEnemyInOrAboveWater(TREntity entity, TRLevel level, FDControl floorData)
@@ -796,6 +798,50 @@ namespace TRRandomizerCore.Randomizers
 
                 level.Data.Entities = levelEntities.ToArray();
                 level.Data.NumEntities++;
+            }
+        }
+
+        private void RandomizeMeshes(TR1CombinedLevel level)
+        {
+            // Currently just targeted at the Atlantis cutscene
+            if (level.Is(TRLevelNames.ATLANTIS))
+            {
+                TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TREntities.CutsceneActor1);
+                TRMesh[] natla = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TREntities.CutsceneActor3);
+                TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TREntities.Pierre);
+
+                switch (_generator.Next(0, 6))
+                {
+                    case 0:
+                        // Natla becomes Lara
+                        TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, natla[8], lara[14]);
+                        break;
+                    case 1:
+                        // Lara becomes Natla
+                        TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], natla[8]);
+                        break;
+                    case 2:
+                        // Switch Lara and Natla
+                        MeshEditor editor = new MeshEditor();
+                        TRMesh laraHead = editor.CloneMesh(lara[14]);
+                        TRMesh natlaHead = editor.CloneMesh(natla[8]);
+                        TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], natlaHead);
+                        TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, natla[8], laraHead);
+                        break;
+                    case 3:
+                        // Natla becomes Pierre
+                        TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, natla[8], pierre[8]);
+                        break;
+                    case 4:
+                        // Lara becomes Pierre
+                        TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], pierre[8]);
+                        break;
+                    case 5:
+                        // Two Pierres
+                        TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, natla[8], pierre[8]);
+                        TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], pierre[8]);
+                        break;
+                }
             }
         }
 
