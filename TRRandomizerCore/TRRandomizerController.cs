@@ -954,6 +954,18 @@ namespace TRRandomizerCore
             }
         }
 
+        public double AnisotropyFilter
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.AnisotropyFilter : -1;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.AnisotropyFilter = value;
+                }
+            }
+        }
+
         public int ResolutionWidth
         {
             get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.ResolutionWidth : -1;

@@ -628,6 +628,17 @@ namespace TRRandomizerView.Model
             }
         }
 
+        private double _anisotropyFilter;
+        public double AnisotropyFilter
+        {
+            get => _anisotropyFilter;
+            set
+            {
+                _anisotropyFilter = value;
+                FirePropertyChanged();
+            }
+        }
+
         private int _resolutionWidth;
         public int ResolutionWidth
         {
@@ -2574,6 +2585,7 @@ namespace TRRandomizerView.Model
                 DisableCine = _controller.DisableCine;
                 DisableMusicInMenu = _controller.DisableMusicInMenu;
                 DisableMusicInInventory = _controller.DisableMusicInInventory;
+                AnisotropyFilter = _controller.AnisotropyFilter;
                 ResolutionWidth = _controller.ResolutionWidth;
                 ResolutionHeight = _controller.ResolutionHeight;
                 EnableRoundShadow = _controller.EnableRoundShadow;
@@ -2936,6 +2948,7 @@ namespace TRRandomizerView.Model
                 _controller.DisableCine = DisableCine;
                 _controller.DisableMusicInMenu = DisableMusicInMenu;
                 _controller.DisableMusicInInventory = DisableMusicInInventory;
+                _controller.AnisotropyFilter = AnisotropyFilter;
                 _controller.ResolutionWidth = ResolutionWidth;
                 _controller.ResolutionHeight = ResolutionHeight;
                 _controller.EnableRoundShadow = EnableRoundShadow;

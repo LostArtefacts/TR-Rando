@@ -38,7 +38,7 @@
                            NavigateUri="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg"
                            RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink><Run Text=")."/>
                 <LineBreak/>
-                <Run Text="Note that some settings may be overriden directly during randomization to meet certain criteria."/>
+                <Run Text="Note that some settings may be overridden directly during randomization to meet certain criteria."/>
             </TextBlock>
 
             <ListBox x:Name="_optionGroupListBox"
@@ -640,6 +640,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -647,20 +648,39 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Margin="0">
+                            <StackPanel>
+                                <Label Content="Anisotropy filter"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.AnisotropyFilter, Mode=TwoWay}"
+                                                    DecimalPlaces="1"
+                                                    MinValue="0"
+                                                    MaxValue="100"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Margin="0">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enhances texture filtering at distances."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.DisableCine, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
                                        Content="Disable cinematics" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Column="1"
-                                Margin="0">
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
                                 <Run Text="Disables ingame cinematics."/>
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="1"
+                        <Border Grid.Row="2"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.DisableFmv, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -668,7 +688,7 @@
                                        Content="Disable FMVs" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="1"
+                        <Border Grid.Row="2"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -676,7 +696,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="2"
+                        <Border Grid.Row="3"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableCheats, Mode=TwoWay}"
                                       VerticalAlignment="top">
@@ -684,7 +704,7 @@
                                        Content="Enable cheats" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="2"
+                        <Border Grid.Row="3"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -704,7 +724,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="3"
+                        <Border Grid.Row="4"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableGameModes, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -712,7 +732,7 @@
                                        Content="Enable game modes" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="3"
+                        <Border Grid.Row="4"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -720,7 +740,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="4"
+                        <Border Grid.Row="5"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableSaveCrystals, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -728,7 +748,7 @@
                                        Content="Enable save crystals" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="4"
+                        <Border Grid.Row="5"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -736,7 +756,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="5"
+                        <Border Grid.Row="6"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableTimerInInventory, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -744,7 +764,7 @@
                                        Content="Enable timer in inventory" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="5"
+                        <Border Grid.Row="6"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -752,7 +772,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="6"
+                        <Border Grid.Row="7"
                                 Style="{StaticResource SeparatorBorder}">
                             <StackPanel>
                                 <Label Content="FoV Value"
@@ -762,7 +782,7 @@
                                                     MaxValue="255"/>
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="6"
+                        <Border Grid.Row="7"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -770,7 +790,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="7"
+                        <Border Grid.Row="8"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableTimerInInventory, Mode=TwoWay}"
                                       VerticalAlignment="Top">
@@ -778,7 +798,7 @@
                                        Content="FoV Vertical" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="7"
+                        <Border Grid.Row="8"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
