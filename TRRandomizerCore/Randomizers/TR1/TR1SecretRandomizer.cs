@@ -118,7 +118,15 @@ namespace TRRandomizerCore.Randomizers
 
             if (ScriptEditor.Edition.IsCommunityPatch)
             {
-                (ScriptEditor.Script as TR1Script).FixPyramidSecretTrigger = false;
+                TR1Script script = ScriptEditor.Script as TR1Script;
+                script.FixPyramidSecretTrigger = false;
+
+                if (Settings.GlitchedSecrets)
+                {
+                    script.FixDescendingGlitch = false;
+                    script.FixQwopGlitch = false;
+                    script.FixWallJumpGlitch = false;
+                }
             }
         }
 
