@@ -1,9 +1,80 @@
 # Cross-Level Enemies
 
 Jump to:
+* [TR1](#tr1)
 * [TR2](#tr2)
 * [TR3](#tr3)
 
+# TR1
+The following enemy restrictions are in place when using "Default" restriction mode during randomization.
+* Torso can appear only once per level.
+* Natla can appear only once per level.
+* There can be at most 3 Torso appearances across the game.
+* There can be at most 2 Natla appearances across the game.
+* Cowboy can appear at most 3 times in one level.
+* SkateboardKid can appear at most 3 times in one level.
+* Kold can appear at most 3 times in one level.
+* Pierre can appear at most 3 times in one level.
+
+### Torso
+Torso is restricted to appear only in certain rooms where there is a little more space to fight. He will always appear in Great Pyramid in the usual place to activate the door.
+
+### Pierre
+Pierre will always be killable, as allocating runaway Pierres using current enemy positioning is awkward, given that when they spawn they deactivate the previous one (or with TombATI the newly triggered one doesn't replace the existing). Pierre will also always drop the scion, magnums and a key. If Pierre is not present at the end of Tihocan, a key will be added to pickup (this location will be randomized if key item randomization is enabled).
+
+### Larson
+Larson will always appear at the end of Tomb of Qualopec. He can appear elsewhere without restrictions and will have the same death animation as Sanctuary of the Scion (i.e. non level-ending).
+
+### Atlanteans
+Collectively, there are some limits on Atlanteans per level to avoid extremely difficult areas. There will be a maximum grouping count for the following levels of any of the following enemies.
+* Centaur/Centaur Statue
+* Flying Atlantean
+* Grounded Atlantean (shooting and non-shooting)
+* Mummies
+* Natla
+* Torso
+
+
+| Level  | Max. Atlanteans |
+| ------ | --------------- |
+| Caves | 5 |
+| Vilcabamba | 10 |
+| Lost Valley | 5 |
+| Folly | 10 |
+| Colosseum | 11 |
+| Midas | 15 |
+| Cistern | 13 |
+| Tihocan | 9 |
+| Khamoon | 6 |
+| Obelisk | 6 |
+
+Note that mummies can appear as flying mutants in other levels. This model is present in City of Khamoon but is unused in the original game.
+
+## No Restrictions Mode
+This mode will switch off _**all**_ of the above restrictions other than Pierre always being killable, Larson appearing at the end of Qualopec and Torso appearing in Great Pyramid. This mode will also allow land enemies to appear underwater as the engine does not kill them (as in TR2 onwards).
+
+## Enemy Types
+Some levels have their total enemy types count increased for more variety. This is a maximum rather than a guaranteed number of types (e.g. for Caves, 5 models will always be imported, but no checks are performed to ensure at least one of each is assigned to entities). Levels in _italics_ remain unchanged.
+
+| Level  | Num Enemy Entities | Old Num Types | New Num Types |
+| ------------- | ------------- | ------------- | ------------- |
+| Caves | 14 | 3 | 5 |
+| Vilcabamba | 29 | 3 | 4 |
+| Lost Valley | 13 | 3 | 5 |
+| _Qualopec_ | 7 | 3 | 3 |
+| _Folly_ | 25 | 6 | 6 |
+| _Colosseum_ | 29 | 7 | 7 |
+| _Midas_ | 43 | 6 | 6 |
+| _Cistern_ | 37 | 8 | 8 |
+| _Tihocan_ | 18 | 7 | 7 |
+| Khamoon | 14 | 4 | 5 |
+| Obelisk | 16 | 3 | 4 |
+| _Sanctuary_ | 15 | 5 | 5 |
+| _Mines_ | 3 | 3 | 3 |
+| Atlantis | 32 | 5 | 6 |
+| _Pyramid_ | 4 | 2 | 2 |
+
+----
 # TR2
 
 The main issue with cross-level enemies is working within the limits of the original game. The first problem is tile space, with each level only able to contain at most 16 256x256 texture tiles. All enemy models are exported and available in the Models folder for importing, and included there are the texture segments needed to make up the enemy's meshes. If there is not enough tile space in a level for an enemy, it can't be imported.
@@ -68,6 +139,7 @@ Currently only the bird monster is targeted for guising. Either type of monk or 
 ## Difficulty
 Enemy difficulty is calculated approximately in order to decide how much extra ammo to give for unarmed levels. The `_enemyDifficulties` dictionary in `EnemyUtilities` holds the categorisation of each enemy type. This is loosely based on enemy strength but also on how awkward the enemy is to deal with, for example the flamethrower.
 
+----
 # TR3
 
 TR3 has bigger limits in terms of tile space (32 tiles) and `TRObjectTexture` entries (4096), which means we are less restricted when it comes to cross-level enemies compared with TR2. There are other restrictions however, mainly caused by some hard-coded features in the game.
