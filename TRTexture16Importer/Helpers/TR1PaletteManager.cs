@@ -70,7 +70,7 @@ namespace TRTexture16Importer.Helpers
 
             // Grab meshes we aren't interested in - but don't remove Lara's hips e.g. Atlantean spawns
             List<TRMesh> ignoredMeshes = new List<TRMesh>();
-            List<TRMesh> laraMeshes = TRMeshUtilities.GetModelMeshes(Level, TREntities.Lara).ToList();
+            TRMesh[] laraMeshes = TRMeshUtilities.GetModelMeshes(Level, TREntities.Lara);
             foreach (TREntities entity in ObsoleteModels)
             {
                 TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(Level, entity);
@@ -78,7 +78,7 @@ namespace TRTexture16Importer.Helpers
                 {
                     foreach (TRMesh mesh in meshes)
                     {
-                        if (!laraMeshes.Contains(mesh))
+                        if (laraMeshes == null || !laraMeshes.Contains(mesh))
                         {
                             ignoredMeshes.AddRange(meshes);
                         }
