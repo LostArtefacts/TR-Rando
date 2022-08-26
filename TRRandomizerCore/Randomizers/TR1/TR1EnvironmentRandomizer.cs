@@ -180,6 +180,12 @@ namespace TRRandomizerCore.Randomizers
                 // Process packs that need to be applied after mirroring.
                 mapping.Mirrored.ApplyToLevel(level.Data, new EMType[] { });
             }
+
+            if (ScriptEditor.Edition.IsCommunityPatch)
+            {
+                // Remove the demo if it's set as it can crash the game
+                level.Script.Demo = null;
+            }
         }
     }
 }
