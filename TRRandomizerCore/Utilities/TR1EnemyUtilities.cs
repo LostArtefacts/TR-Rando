@@ -512,8 +512,8 @@ namespace TRRandomizerCore.Utilities
 
         private static readonly Dictionary<TREntities, uint> _startingAmmoToGive = new Dictionary<TREntities, uint>()
         {
-            [TREntities.Shotgun_S_P] = 8,
-            [TREntities.Magnums_S_P] = 4,
+            [TREntities.Shotgun_S_P] = 10,
+            [TREntities.Magnums_S_P] = 6,
             [TREntities.Uzis_S_P] = 6
         };
 

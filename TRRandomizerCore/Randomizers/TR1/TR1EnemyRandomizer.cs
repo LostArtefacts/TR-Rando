@@ -772,6 +772,7 @@ namespace TRRandomizerCore.Randomizers
                 if (difficulty == EnemyDifficulty.Medium || difficulty == EnemyDifficulty.Hard)
                 {
                     smallMediToGive++;
+                    largeMediToGive++;
                 }
                 if (difficulty > EnemyDifficulty.Medium)
                 {
