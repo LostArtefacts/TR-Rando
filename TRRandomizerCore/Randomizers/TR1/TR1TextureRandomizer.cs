@@ -260,6 +260,27 @@ namespace TRRandomizerCore.Randomizers
                 _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
         }
 
+        private void RandomizeWater(TR1CombinedLevel level)
+        {
+            if (!Settings.RandomizeWaterColour || !ScriptEditor.Edition.IsCommunityPatch)
+            {
+                return;
+            }
+
+            if (level.IsCutScene)
+            {
+                level.Script.WaterColor = level.ParentLevel.Script.WaterColor;
+            }
+            else
+            {
+                level.Script.WaterColor = new double[3];
+                for (int i = 0; i < 3; i++)
+                {
+                    level.Script.WaterColor[i] = Math.Round(_generator.Next(0, 101) * Math.Pow(10, -2), 2);
+                }
+            }
+        }
+
         internal class TextureProcessor : AbstractProcessorThread<TR1TextureRandomizer>
         {
             private readonly Dictionary<TR1CombinedLevel, TextureHolder<TREntities, TRLevel>> _holders;
@@ -398,6 +419,8 @@ namespace TRRandomizerCore.Randomizers
                 {
                     _wireframer.Apply(level.Data, _outer.GetWireframeData(level));
                 }
+
+                _outer.RandomizeWater(level);
             }
         }
     }

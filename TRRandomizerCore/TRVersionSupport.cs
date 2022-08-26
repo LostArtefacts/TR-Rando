@@ -31,7 +31,8 @@ namespace TRRandomizerCore
             TRRandomizerType.LevelSequence,
             TRRandomizerType.Mediless,
             TRRandomizerType.SecretCount,
-            TRRandomizerType.Unarmed
+            TRRandomizerType.Unarmed,
+            TRRandomizerType.WaterColour
         };
 
         private static readonly List<TRRandomizerType> _tr2Types = new List<TRRandomizerType>

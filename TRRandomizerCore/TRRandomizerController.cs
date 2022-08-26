@@ -1152,6 +1152,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.PersistTextureVariants = value;
         }
 
+        public bool RandomizeWaterColour
+        {
+            get => LevelRandomizer.RandomizeWaterColour;
+            set => LevelRandomizer.RandomizeWaterColour = value;
+        }
+
         public bool RetainMainLevelTextures
         {
             get => LevelRandomizer.RetainMainLevelTextures;

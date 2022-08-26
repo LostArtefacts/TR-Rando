@@ -31,7 +31,7 @@ namespace TRRandomizerView.Model
         private uint _minSecretCount, _maxSecretCount;
         private BoolItemControlClass _includeKeyItems, _randomizeItemTypes, _randomizeItemLocations;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance;
-        private BoolItemControlClass _persistTextures, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
+        private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
@@ -1455,6 +1455,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RandomizeWaterColour
+        {
+            get => _randomizeWaterColour;
+            set
+            {
+                _randomizeWaterColour = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool RandomizeOutfits
         {
             get => _randomOutfitsControl.IsActive;
@@ -2181,6 +2191,12 @@ namespace TRRandomizerView.Model
                 Description = "Each unique texture will only be randomized once, rather than once per level."
             };
             BindingOperations.SetBinding(PersistTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
+            RandomizeWaterColour = new BoolItemControlClass()
+            {
+                Title = "Randomize water colour",
+                Description = "Change the colour of water in each level."
+            };
+            BindingOperations.SetBinding(RandomizeWaterColour, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
             RetainMainLevelTextures = new BoolItemControlClass
             {
                 Title = "Use original main level textures",
@@ -2340,7 +2356,7 @@ namespace TRRandomizerView.Model
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
-                _persistTextures, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
+                _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
             };
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2393,6 +2409,7 @@ namespace TRRandomizerView.Model
 
             _retainSecretSpriteTextures.IsAvailable = IsSecretTexturesTypeSupported;
             _retainKeySpriteTextures.IsAvailable = IsKeyItemTexturesTypeSupported;
+            _randomizeWaterColour.IsAvailable = IsWaterColourTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -2493,6 +2510,7 @@ namespace TRRandomizerView.Model
             RandomizeTextures = _controller.RandomizeTextures;
             TextureSeed = _controller.TextureSeed;
             PersistTextures.Value = _controller.PersistTextures;
+            RandomizeWaterColour.Value = _controller.RandomizeWaterColour;
             RetainMainLevelTextures.Value = _controller.RetainMainLevelTextures;
             RetainKeySpriteTextures.Value = _controller.RetainKeySpriteTextures;
             RetainSecretSpriteTextures.Value = _controller.RetainSecretSpriteTextures;
@@ -2857,6 +2875,7 @@ namespace TRRandomizerView.Model
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
             _controller.PersistTextures = PersistTextures.Value;
+            _controller.RandomizeWaterColour = RandomizeWaterColour.Value;
             _controller.RetainMainLevelTextures = RetainMainLevelTextures.Value;
             _controller.RetainKeySpriteTextures = RetainKeySpriteTextures.Value;
             _controller.RetainSecretSpriteTextures = RetainSecretSpriteTextures.Value;
@@ -3005,6 +3024,7 @@ namespace TRRandomizerView.Model
         public bool IsBirdMonsterBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.BirdMonsterBehaviour);
         public bool IsSecretTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretTextures);
         public bool IsKeyItemTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItemTextures);
+        public bool IsWaterColourTypeSupported => IsRandomizationSupported(TRRandomizerType.WaterColour);
         public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
 
         private bool IsRandomizationSupported(TRRandomizerType randomizerType)

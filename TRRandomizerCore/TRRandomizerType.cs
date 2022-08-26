@@ -41,6 +41,7 @@
         Ladders,
         KeyItemTextures,
         SecretTextures,
-        Braid
+        Braid,
+        WaterColour
     }
 }
