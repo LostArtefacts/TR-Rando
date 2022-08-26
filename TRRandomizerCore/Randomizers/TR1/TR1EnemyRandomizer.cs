@@ -288,8 +288,8 @@ namespace TRRandomizerCore.Randomizers
 
             if
             (
-                newEntities.All(e => TR1EntityUtilities.IsWaterCreature(e) || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e)) || 
-                (newEntities.Capacity > 1 && newEntities.All(e => TR1EnemyUtilities.IsEnemyRestricted(level.Name, e)))
+                newEntities.All(e => TR1EntityUtilities.IsWaterCreature(e) || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)) || 
+                (newEntities.Capacity > 1 && newEntities.All(e => TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)))
             )
             {
                 // Make sure we have an unrestricted enemy available for the individual level conditions. This will
@@ -298,7 +298,7 @@ namespace TRRandomizerCore.Randomizers
                     !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty)
                     || newEntities.Contains(e)
                     || TR1EntityUtilities.IsWaterCreature(e)
-                    || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e)
+                    || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)
                     || TR1EntityUtilities.TranslateEntityAlias(e) != e;
 
                 List<TREntities> unrestrictedPool = allEnemies.FindAll(e => !RestrictionCheck(e));
@@ -308,7 +308,20 @@ namespace TRRandomizerCore.Randomizers
                     unrestrictedPool = TR1EntityUtilities.GetCandidateCrossLevelEnemies().FindAll(e => !RestrictionCheck(e));
                 }
 
-                newEntities.Add(unrestrictedPool[_generator.Next(0, unrestrictedPool.Count)]);
+                TREntities entity = unrestrictedPool[_generator.Next(0, unrestrictedPool.Count)];
+                newEntities.Add(entity);
+
+                if (entity == TREntities.AtlanteanEgg && !newEntities.Any(eggEntities.Contains))
+                {
+                    // Try to pick a type in the inclusion list if possible
+                    List<TREntities> preferredEggTypes = eggEntities.FindAll(allEnemies.Contains);
+                    if (preferredEggTypes.Count == 0)
+                    {
+                        preferredEggTypes = eggEntities;
+                    }
+                    TREntities eggType = preferredEggTypes[_generator.Next(0, preferredEggTypes.Count)];
+                    newEntities.Add(eggType);
+                }
             }
 
             if (Settings.DevelopmentMode)

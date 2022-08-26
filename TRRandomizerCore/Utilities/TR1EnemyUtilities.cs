@@ -25,13 +25,18 @@ namespace TRRandomizerCore.Utilities
         }
 
         // Check if an enemy is restricted in any way
-        public static bool IsEnemyRestricted(string lvlName, TREntities entity)
+        public static bool IsEnemyRestricted(string lvlName, TREntities entity, RandoDifficulty difficulty = RandoDifficulty.DefaultOrNoRestrictions)
         {
-            return (_restrictedEnemyZonesTechnical.ContainsKey(lvlName) && _restrictedEnemyZonesTechnical[lvlName].ContainsKey(entity)) ||
-                (_restrictedEnemyZonesDefault.ContainsKey(lvlName) && _restrictedEnemyZonesDefault[lvlName].ContainsKey(entity)) ||
-                _restrictedEnemyGameCountsTechnical.ContainsKey(entity) ||
-                _restrictedEnemyLevelCountsDefault.ContainsKey(entity) ||
-                (GetRestrictedEnemyGroup(lvlName, entity, RandoDifficulty.DefaultOrNoRestrictions) != null);
+            if (difficulty == RandoDifficulty.Default || difficulty == RandoDifficulty.DefaultOrNoRestrictions)
+            {
+                return (_restrictedEnemyZonesTechnical.ContainsKey(lvlName) && _restrictedEnemyZonesTechnical[lvlName].ContainsKey(entity)) ||
+                    (_restrictedEnemyZonesDefault.ContainsKey(lvlName) && _restrictedEnemyZonesDefault[lvlName].ContainsKey(entity)) ||
+                    _restrictedEnemyGameCountsTechnical.ContainsKey(entity) ||
+                    _restrictedEnemyLevelCountsDefault.ContainsKey(entity) ||
+                    (GetRestrictedEnemyGroup(lvlName, entity, RandoDifficulty.DefaultOrNoRestrictions) != null);
+            }
+
+            return _restrictedEnemyZonesTechnical.ContainsKey(lvlName) && _restrictedEnemyZonesTechnical[lvlName].ContainsKey(entity);
         }
 
         // This returns a set of ALLOWED rooms
