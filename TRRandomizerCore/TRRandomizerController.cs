@@ -455,9 +455,9 @@ namespace TRRandomizerCore
             {
                 if (ScriptEditor is TR1ScriptEditor tr1Editor)
                 {
-                    tr1Editor.WaterColor[0] = value.X;
-                    tr1Editor.WaterColor[1] = value.Y;
-                    tr1Editor.WaterColor[2] = value.Z;
+                    tr1Editor.WaterColor[0] = Math.Round(value.X, 2);
+                    tr1Editor.WaterColor[1] = Math.Round(value.Y, 2);
+                    tr1Editor.WaterColor[2] = Math.Round(value.Z, 2);
                 }
             }
         }

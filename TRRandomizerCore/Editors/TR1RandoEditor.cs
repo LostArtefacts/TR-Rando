@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using TRGE.Coord;
@@ -7,6 +8,7 @@ using TRGE.Core;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Randomizers;
 using TRRandomizerCore.Textures;
+using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Editors
 {
@@ -283,6 +285,60 @@ namespace TRRandomizerCore.Editors
                     }.Randomize(Settings.TextureSeed);
                 }
             }
+
+            if (isTomb1Main)
+            {
+                AmendTitleAndCredits(scriptEditor, monitor);
+            }
+        }
+
+        private void AmendTitleAndCredits(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
+        {
+            TR1Script script = scriptEditor.Script as TR1Script;
+
+            string mainMenuPic = Path.GetFileName(script.MainMenuPicture);
+            string backupTitle = Path.Combine(GetReadBasePath(), mainMenuPic);
+            if (File.Exists(backupTitle))
+            {
+                string editedTitle = Path.Combine(GetWriteBasePath(), mainMenuPic);
+                using (BitmapGraphics bg = new BitmapGraphics(new Bitmap(backupTitle)))
+                using (Bitmap badge = new Bitmap(@"Resources\Shared\Graphics\goldbadge-small.png"))
+                {
+                    bg.Graphics.DrawImage(badge, new Rectangle(706, 537, badge.Width, badge.Height));
+                    bg.Bitmap.Save(editedTitle);
+                }
+            }
+
+            {
+                string creditFile = Path.Combine(_io.OutputDirectory.FullName, "trrando.png");
+                string creditPath = @"data\trrando.png";
+
+                using (BitmapGraphics bg = new BitmapGraphics(new Bitmap(1920, 1080)))
+                using (Bitmap badge = new Bitmap(@"Resources\Shared\Graphics\goldbadge-large.png"))
+                {
+                    bg.Graphics.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, 1920, 1080));
+                    bg.Graphics.DrawImage(badge, new Rectangle(768, 347, badge.Width, badge.Height));
+                    bg.Bitmap.Save(creditFile);
+                }
+
+                TR1ScriptedLevel finalLevel = scriptEditor.Levels.ToList().Find(l => l.IsFinalLevel) as TR1ScriptedLevel;
+                if (finalLevel.HasCutScene)
+                {
+                    finalLevel = finalLevel.CutSceneLevel as TR1ScriptedLevel;
+                }
+
+                finalLevel.AddSequenceBefore(LevelSequenceType.Total_Stats, new DisplayPictureLevelSequence
+                {
+                    Type = LevelSequenceType.Display_Picture,
+                    DisplayTime = 5,
+                    PicturePath = creditPath
+                });
+
+                script.AddAdditionalBackupFile(creditPath);
+                scriptEditor.SaveScript();
+            }
+
+            monitor.FireSaveStateChanged(1);
         }
     }
 }
