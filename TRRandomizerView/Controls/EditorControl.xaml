@@ -405,7 +405,7 @@
                                         MainDescription="Customize the randomization of Lara's look."
                                         BoolItemsSource="{Binding Data.OutfitBoolItemControls, Source={StaticResource proxy}}"
                                         HasBoolItems="{Binding Data.IsTR1, Source={StaticResource proxy}, Converter={StaticResource InverseBooleanConverter}}"
-                                        HasHaircuts="True"
+                                        HasHaircuts="{Binding Data.IsBraidTypeSupported, Source={StaticResource proxy}}"
                                         HasInvisibility="True"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>

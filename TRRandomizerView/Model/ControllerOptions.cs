@@ -3016,6 +3016,7 @@ namespace TRRandomizerView.Model
         public bool IsSFXSupported => IsRandomizationSupported(TRRandomizerType.SFX);
         public bool IsVFXTypeSupported => IsRandomizationSupported(TRRandomizerType.VFX);
         public bool IsOutfitTypeSupported => IsRandomizationSupported(TRRandomizerType.Outfit);
+        public bool IsBraidTypeSupported => IsRandomizationSupported(TRRandomizerType.Braid);
         public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);
         public bool IsEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.Environment);
