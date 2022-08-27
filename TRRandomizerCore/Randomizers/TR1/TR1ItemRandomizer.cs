@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TRFDControl;
+using TRFDControl.FDEntryTypes;
+using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -265,10 +268,14 @@ namespace TRRandomizerCore.Randomizers
                 return;
             }
 
-            foreach (TREntity entity in level.Data.Entities)
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level.Data);
+
+            for (int i = 0; i < level.Data.NumEntities; i++)
             {
+                TREntity entity = level.Data.Entities[i];
                 TREntities type = (TREntities)entity.TypeID;
-                if (!TR1EntityUtilities.IsKeyItemType(type))
+                if (!TR1EntityUtilities.IsKeyItemType(type) || IsSecretItem(entity, i, level.Data, floorData))
                 {
                     continue;
                 }
@@ -287,6 +294,20 @@ namespace TRRandomizerCore.Randomizers
                     entity.Room = (short)location.Room;
                 }
             }
+        }
+
+        private bool IsSecretItem(TREntity entity, int entityIndex, TRLevel level, FDControl floorData)
+        {
+            TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+            if (sector.FDIndex != 0)
+            {
+                return floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
+                    && trigger.TrigType == FDTrigType.Pickup
+                    && trigger.TrigActionList[0].Parameter == entityIndex
+                    && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null;
+            }
+
+            return false;
         }
     }
 }
