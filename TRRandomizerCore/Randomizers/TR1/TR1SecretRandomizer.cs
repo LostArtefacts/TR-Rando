@@ -912,7 +912,7 @@ namespace TRRandomizerCore.Randomizers
                 [TREntities.SecretAnkh_M_H] = "Secret Ankh",
                 [TREntities.SecretGoldBar_M_H] = "Secret Gold Bar",
                 [TREntities.SecretGoldIdol_M_H] = "Secret Gold Idol",
-                [TREntities.SecretLeadBar_M_H] = "Secret Ankh",
+                [TREntities.SecretLeadBar_M_H] = "Secret Lead Bar",
                 [TREntities.SecretScion_M_H] = "Secret Scion"
             };
 

@@ -4,6 +4,7 @@ Jump to:
 * [TR1](#tr1)
 * [TR2](#tr2)
 * [TR3](#tr3)
+* [Generating Locations](#generating-locations)
 
 # TR1
 Original secret triggers are removed during randomization and artefacts are instead added to the level for Lara to collect. Once she collects all of the secrets in a level, a door will open to a new room where the rewards she would otherwise have collected can be found. When picking up a secret, a camera hint will show you the location of this room.
@@ -68,3 +69,12 @@ Several artefacts are imported per level. This will depend on the secret count a
 
 ### Secret Count
 Currently, the number of secrets per level is hard-coded to the level's original sequence.
+
+----
+# Generating Locations
+Use trview to generate secret locations by making use of the available [randomizer settings](https://github.com/chreden/trview#randomizer-integration) feature. The file below should be copied locally to `%LOCALAPPDATA%/trview`.
+
+https://github.com/DanzaG/TR2-Rando/blob/master/TRRandomizerCore/Resources/Shared/randomizer.json
+
+### Underwater Corner Secrets
+When placing secrets in corners underwater, there is a minimum distance from each wall the secret will need to be positioned - this is 130 units. Any closer to the wall and Lara won't pick the secret up.
