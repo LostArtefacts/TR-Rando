@@ -1268,6 +1268,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.IncludeKeyItems = value;
         }
 
+        public bool IncludeExtraPickups
+        {
+            get => LevelRandomizer.IncludeExtraPickups;
+            set => LevelRandomizer.IncludeExtraPickups = value;
+        }
+
         public bool RandomizeItemTypes
         {
             get => LevelRandomizer.RandomizeItemTypes;

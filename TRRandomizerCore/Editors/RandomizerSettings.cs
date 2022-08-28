@@ -41,6 +41,7 @@ namespace TRRandomizerCore.Editors
         public GlobeDisplayOption GlobeDisplay { get; set; }
         public bool HardSecrets { get; set; }
         public bool IncludeKeyItems { get; set; }
+        public bool IncludeExtraPickups { get; set; }
         public bool DevelopmentMode { get; set; }
         public ItemDifficulty RandoItemDifficulty { get; set; }
         public bool PersistTextureVariants { get; set; }
@@ -142,6 +143,7 @@ namespace TRRandomizerCore.Editors
             RandomizeItems = config.GetBool(nameof(RandomizeItems));
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
             IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
+            IncludeExtraPickups = config.GetBool(nameof(IncludeExtraPickups), true);
             RandoItemDifficulty = (ItemDifficulty)config.GetEnum(nameof(RandoItemDifficulty), typeof(ItemDifficulty), ItemDifficulty.Default);
             RandomizeItemTypes = config.GetBool(nameof(RandomizeItemTypes), true);
             RandomizeItemPositions = config.GetBool(nameof(RandomizeItemPositions), true);
@@ -261,6 +263,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(RandomizeItems)] = RandomizeItems;
             config[nameof(ItemSeed)] = ItemSeed;
             config[nameof(IncludeKeyItems)] = IncludeKeyItems;
+            config[nameof(IncludeExtraPickups)] = IncludeExtraPickups;
             config[nameof(RandoItemDifficulty)] = RandoItemDifficulty;
             config[nameof(RandomizeItemTypes)] = RandomizeItemTypes;
             config[nameof(RandomizeItemPositions)] = RandomizeItemPositions;

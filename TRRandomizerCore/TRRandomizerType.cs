@@ -42,6 +42,7 @@
         KeyItemTextures,
         SecretTextures,
         Braid,
-        WaterColour
+        WaterColour,
+        ExtraPickups
     }
 }

@@ -18,6 +18,41 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR1ItemRandomizer : BaseTR1Randomizer
     {
+        // The number of extra pickups to add per level
+        private static readonly Dictionary<string, int> _extraItemCounts = new Dictionary<string, int>
+        {
+            [TRLevelNames.CAVES]
+                = 10, // Default = 4
+            [TRLevelNames.VILCABAMBA]
+                = 9,  // Default = 7
+            [TRLevelNames.VALLEY]
+                = 15, // Default = 2
+            [TRLevelNames.QUALOPEC]
+                = 6,  // Default = 5
+            [TRLevelNames.FOLLY]
+                = 8,  // Default = 8
+            [TRLevelNames.COLOSSEUM]
+                = 11, // Default = 7
+            [TRLevelNames.MIDAS]
+                = 4,  // Default = 12
+            [TRLevelNames.CISTERN]
+                = 0,  // Default = 16
+            [TRLevelNames.TIHOCAN]
+                = 0,  // Default = 16
+            [TRLevelNames.KHAMOON]
+                = 0,  // Default = 18
+            [TRLevelNames.OBELISK]
+                = 0,  // Default = 26
+            [TRLevelNames.SANCTUARY]
+                = 0,  // Default = 22
+            [TRLevelNames.MINES]
+                = 0,  // Default = 16
+            [TRLevelNames.ATLANTIS]
+                = 0,  // Default = 44
+            [TRLevelNames.PYRAMID]
+                = 0,  // Default = 21
+        };
+
         private Dictionary<string, List<Location>> _keyItemLocations;
         private Dictionary<string, List<Location>> _excludedLocations;
         private Dictionary<string, List<Location>> _pistolLocations;
@@ -29,6 +64,8 @@ namespace TRRandomizerCore.Randomizers
 
         // Secret reward items handled in separate class, so track the reward entities
         private TRSecretMapping<TREntity> _secretMapping;
+
+        private List<Location> _locations;
 
         public ItemFactory ItemFactory { get; set; }
 
@@ -45,7 +82,11 @@ namespace TRRandomizerCore.Randomizers
 
                 FindUnarmedLevelPistols(_levelInstance);
 
+                _locations = GetItemLocationPool(_levelInstance);
                 _secretMapping = TRSecretMapping<TREntity>.Get(GetResourcePath(@"TR1\SecretMapping\" + _levelInstance.Name + "-SecretMapping.json"));
+
+                if (Settings.IncludeExtraPickups)
+                    AddExtraPickups(_levelInstance);
 
                 if (Settings.RandomizeItemTypes)
                     RandomizeItemTypes(_levelInstance);
@@ -102,6 +143,34 @@ namespace TRRandomizerCore.Randomizers
             {
                 _unarmedLevelPistols = null;
             }
+        }
+
+        private void AddExtraPickups(TR1CombinedLevel level)
+        {
+            if (!_extraItemCounts.ContainsKey(level.Name))
+            {
+                return;
+            }
+
+            List<TREntities> stdItemTypes = TR1EntityUtilities.GetStandardPickupTypes();
+            stdItemTypes.Remove(TREntities.Pistols_S_P);
+            stdItemTypes.Remove(TREntities.PistolAmmo_S_P);
+
+            // Add what we can to the level. The locations and types may be further randomized depending on the selected options.
+            List<TREntity> entities = level.Data.Entities.ToList();
+            for (int i = 0; i < _extraItemCounts[level.Name]; i++)
+            {
+                if (!ItemFactory.CanCreateItem(level.Name, entities))
+                {
+                    break;
+                }
+
+                TREntity newItem = ItemFactory.CreateItem(level.Name, entities, _locations[_generator.Next(0, _locations.Count)]);
+                newItem.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+            }
+
+            level.Data.Entities = entities.ToArray();
+            level.Data.NumEntities = (uint)entities.Count;
         }
 
         public void RandomizeItemTypes(TR1CombinedLevel level)
@@ -204,8 +273,6 @@ namespace TRRandomizerCore.Randomizers
                 return;
             }
 
-            List<Location> locations = GetItemLocationPool(level);
-
             for (int i = 0; i < level.Data.NumEntities; i++)
             {
                 if (_secretMapping.RewardEntities.Contains(i))
@@ -218,12 +285,13 @@ namespace TRRandomizerCore.Randomizers
                 // Move standard items only, excluding any unarmed level pistols, and reward items
                 if (TR1EntityUtilities.IsStandardPickupType((TREntities)entity.TypeID) && entity != _unarmedLevelPistols)
                 {
-                    Location location = locations[_generator.Next(0, locations.Count)];
+                    Location location = _locations[_generator.Next(0, _locations.Count)];
                     entity.X = location.X;
                     entity.Y = location.Y;
                     entity.Z = location.Z;
                     entity.Room = (short)location.Room;
                     entity.Angle = location.Angle;
+                    entity.Intensity = 0;
 
                     // Anything other than -1 means a sloped sector and so the location generator
                     // will have picked a suitable angle for it. For flat sectors, spin the entities
