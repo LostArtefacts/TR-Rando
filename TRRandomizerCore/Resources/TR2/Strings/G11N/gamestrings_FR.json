@@ -314,7 +314,7 @@
       ],
       "Keys": {
         "0": [
-          "Clé des livre",
+          "Clé des livres",
           "Une clé",
           "La clé",
           "Clé 1",
@@ -341,7 +341,8 @@
           "Clé facultative",
           "Clé qui ne sert pas",
           "Ça va péter !",
-          "Grimpe par le toit"
+          "Grimpe par le toit",
+          "Pastille Vichy"
         ]
       }
     },
