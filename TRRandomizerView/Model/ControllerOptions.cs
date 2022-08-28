@@ -138,8 +138,8 @@ namespace TRRandomizerView.Model
             }
         }
 
-        private Vector3 _waterColor;
-        public Vector3 WaterColor
+        private double[] _waterColor;
+        public double[] WaterColor
         {
             get => _waterColor;
             set
@@ -151,30 +151,30 @@ namespace TRRandomizerView.Model
 
         public double WaterColorR
         {
-            get => _waterColor.X;
+            get => _waterColor[0];
             set
             {
-                _waterColor.X = (float)value;
+                _waterColor[0] = value;
                 FirePropertyChanged(nameof(WaterColor));
             }
         }
 
         public double WaterColorG
         {
-            get => _waterColor.Y;
+            get => _waterColor[1];
             set
             {
-                _waterColor.Y = (float)value;
+                _waterColor[1] = value;
                 FirePropertyChanged(nameof(WaterColor));
             }
         }
 
         public double WaterColorB
         {
-            get => _waterColor.Z;
+            get => _waterColor[2];
             set
             {
-                _waterColor.Z = (float)value;
+                _waterColor[2] = value;
                 FirePropertyChanged(nameof(WaterColor));
             }
         }

@@ -14,7 +14,7 @@ namespace TRRandomizerView.Controls
         #region Dependency Properties
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register
         (
-            "Value", typeof(double), typeof(DecimalUpDown), new PropertyMetadata((double)1)
+            "Value", typeof(decimal), typeof(DecimalUpDown), new PropertyMetadata((decimal)1)
         );
 
         public static readonly DependencyProperty DecimalPlacesProperty = DependencyProperty.Register
@@ -24,19 +24,19 @@ namespace TRRandomizerView.Controls
 
         public static readonly DependencyProperty MinValueProperty = DependencyProperty.Register
         (
-            "MinValue", typeof(double), typeof(DecimalUpDown), new PropertyMetadata((double)0)
+            "MinValue", typeof(decimal), typeof(DecimalUpDown), new PropertyMetadata((decimal)0)
         );
 
         public static readonly DependencyProperty MaxValueProperty = DependencyProperty.Register
         (
-            "MaxValue", typeof(double), typeof(DecimalUpDown), new PropertyMetadata(double.MaxValue)
+            "MaxValue", typeof(decimal), typeof(DecimalUpDown), new PropertyMetadata(decimal.MaxValue)
         );
 
         public event EventHandler ValueChanged;
 
-        public double Value
+        public decimal Value
         {
-            get => (double)GetValue(ValueProperty);
+            get => (decimal)GetValue(ValueProperty);
             set
             {
                 SetValue(ValueProperty, AdjustValue(value));
@@ -50,9 +50,9 @@ namespace TRRandomizerView.Controls
             set => SetValue(DecimalPlacesProperty, Math.Max(1, value));
         }
 
-        public double MinValue
+        public decimal MinValue
         {
-            get => (double)GetValue(MinValueProperty);
+            get => (decimal)GetValue(MinValueProperty);
             set
             {
                 SetValue(MinValueProperty, value);
@@ -60,15 +60,16 @@ namespace TRRandomizerView.Controls
             }
         }
 
-        public double MaxValue
+        public decimal MaxValue
         {
-            get => (double)GetValue(MaxValueProperty);
+            get => (decimal)GetValue(MaxValueProperty);
             set
             {
                 SetValue(MaxValueProperty, value);
                 Value = Value;
             }
         }
+
         #endregion
 
         public DecimalUpDown()
@@ -79,12 +80,14 @@ namespace TRRandomizerView.Controls
 
         private void RepeatUpButton_Click(object sender, RoutedEventArgs e)
         {
-            Value += Math.Pow(10, DecimalPlaces * -1);
+            Value += (decimal)Math.Pow(10, DecimalPlaces * -1);
+            SetDisplayText();
         }
 
         private void RepeatDownButton_Click(object sender, RoutedEventArgs e)
         {
-            Value -= Math.Pow(10, DecimalPlaces * -1);
+            Value -= (decimal)Math.Pow(10, DecimalPlaces * -1);
+            SetDisplayText();
         }
 
         private void TextBox_Pasting(object sender, DataObjectPastingEventArgs e)
@@ -103,7 +106,7 @@ namespace TRRandomizerView.Controls
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            double mod = Math.Pow(10, DecimalPlaces * -1);
+            decimal mod = (decimal)Math.Pow(10, DecimalPlaces * -1);
             if (Keyboard.IsKeyDown(Key.RightCtrl) || Keyboard.IsKeyDown(Key.LeftCtrl))
             {
                 mod *= 5;
@@ -121,25 +124,31 @@ namespace TRRandomizerView.Controls
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            double v = Value;
-            if (ValidateInput(_textBox.Text))
-            {
-                v = double.Parse(_textBox.Text);
-            }
-            else
-            {
-                e.Handled = true;
-            }
-            Value = v;
-            _textBox.Text = string.Format(CultureInfo.InvariantCulture, "{0:0." + new string('0', DecimalPlaces) + "}", v);
+            //decimal v = Value;
+            //if (ValidateInput(_textBox.Text))
+            //{
+            //    v = decimal.Parse(_textBox.Text);
+            //}
+            //else
+            //{
+            //    e.Handled = true;
+            //}
+            //Value = v;
+
+            //SetDisplayText();
+        }
+
+        private void SetDisplayText()
+        {
+            _textBox.Text = Value.ToString(CultureInfo.InvariantCulture);
         }
 
         private bool ValidateInput(string text)
         {
-            return double.TryParse(text, out double _);
+            return decimal.TryParse(text, out decimal _);
         }
 
-        private double AdjustValue(double value)
+        private decimal AdjustValue(decimal value)
         {
             return Math.Min(MaxValue, Math.Max(MinValue, value));
         }
