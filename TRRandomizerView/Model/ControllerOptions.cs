@@ -80,6 +80,7 @@ namespace TRRandomizerView.Model
         private int _levelCount, _maximumLevelCount, _defaultUnarmedLevelCount, _defaultAmmolessLevelCount, _defaultSunsetCount;
 
         private uint _minStartingHealth, _maxStartingHealth, _medilessLevelCount;
+        private bool _useRecommendedCommunitySettings;
 
         #region T1M Sepcifics
         
@@ -628,6 +629,17 @@ namespace TRRandomizerView.Model
             }
         }
 
+        private bool _disableTRexCollision;
+        public bool DisableTRexCollision
+        {
+            get => _disableTRexCollision;
+            set
+            {
+                _disableTRexCollision = value;
+                FirePropertyChanged();
+            }
+        }
+
         private double _anisotropyFilter;
         public double AnisotropyFilter
         {
@@ -1001,6 +1013,16 @@ namespace TRRandomizerView.Model
             set
             {
                 _disableMedpacks = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool UseRecommendedCommunitySettings
+        {
+            get => _useRecommendedCommunitySettings;
+            set
+            {
+                _useRecommendedCommunitySettings = value;
                 FirePropertyChanged();
             }
         }
@@ -2553,6 +2575,7 @@ namespace TRRandomizerView.Model
             DisableDemos = _controller.DisableDemos;
             AutoLaunchGame = _controller.AutoLaunchGame;
             PuristMode = _controller.PuristMode;
+            UseRecommendedCommunitySettings = _controller.UseRecommendedCommunitySettings;
 
             if (IsTR1Main)
             {
@@ -2603,6 +2626,7 @@ namespace TRRandomizerView.Model
                 DisableCine = _controller.DisableCine;
                 DisableMusicInMenu = _controller.DisableMusicInMenu;
                 DisableMusicInInventory = _controller.DisableMusicInInventory;
+                DisableTRexCollision = _controller.DisableTRexCollision;
                 AnisotropyFilter = _controller.AnisotropyFilter;
                 ResolutionWidth = _controller.ResolutionWidth;
                 ResolutionHeight = _controller.ResolutionHeight;
@@ -2917,6 +2941,7 @@ namespace TRRandomizerView.Model
             _controller.DisableDemos = DisableDemos;
             _controller.AutoLaunchGame = AutoLaunchGame;
             _controller.PuristMode = PuristMode;
+            _controller.UseRecommendedCommunitySettings = UseRecommendedCommunitySettings;
 
             if (IsTR1Main)
             {
@@ -2967,6 +2992,7 @@ namespace TRRandomizerView.Model
                 _controller.DisableCine = DisableCine;
                 _controller.DisableMusicInMenu = DisableMusicInMenu;
                 _controller.DisableMusicInInventory = DisableMusicInInventory;
+                _controller.DisableTRexCollision = DisableTRexCollision;
                 _controller.AnisotropyFilter = AnisotropyFilter;
                 _controller.ResolutionWidth = ResolutionWidth;
                 _controller.ResolutionHeight = ResolutionHeight;

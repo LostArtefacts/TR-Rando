@@ -317,6 +317,12 @@ namespace TRRandomizerCore
             }
         }
 
+        public bool UseRecommendedCommunitySettings
+        {
+            get => LevelRandomizer.UseRecommendedCommunitySettings;
+            set => LevelRandomizer.UseRecommendedCommunitySettings = value;
+        }
+
         public bool RandomizeSunsets
         {
             get => ScriptEditor.LevelSunsetOrganisation == Organisation.Random;
@@ -946,6 +952,18 @@ namespace TRRandomizerCore
                 if (ScriptEditor is TR1ScriptEditor tr1Editor)
                 {
                     tr1Editor.DisableMusicInInventory = value;
+                }
+            }
+        }
+
+        public bool DisableTRexCollision
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableTrexCollision;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DisableTrexCollision = value;
                 }
             }
         }

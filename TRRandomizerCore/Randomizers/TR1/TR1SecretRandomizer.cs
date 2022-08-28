@@ -127,6 +127,13 @@ namespace TRRandomizerCore.Randomizers
                     script.FixQwopGlitch = false;
                     script.FixWallJumpGlitch = false;
                 }
+
+                if (Settings.UseRecommendedCommunitySettings)
+                {
+                    script.Enable3dPickups = false;
+                }
+
+                ScriptEditor.SaveScript();
             }
         }
 

@@ -122,6 +122,8 @@ namespace TRRandomizerCore.Editors
         public uint MinStartingHealth { get; set; }
         public uint MaxStartingHealth { get; set; }
 
+        public bool UseRecommendedCommunitySettings { get; set; }
+
         public void ApplyConfig(Config config)
         {
             int defaultSeed = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
@@ -239,6 +241,8 @@ namespace TRRandomizerCore.Editors
             HealthSeed = config.GetInt(nameof(HealthSeed), defaultSeed);
             MinStartingHealth = config.GetUInt(nameof(MinStartingHealth), 1000);
             MaxStartingHealth = config.GetUInt(nameof(MaxStartingHealth), 1000);
+
+            UseRecommendedCommunitySettings = config.GetBool(nameof(UseRecommendedCommunitySettings), true);
         }
 
         public void StoreConfig(Config config)
@@ -351,6 +355,8 @@ namespace TRRandomizerCore.Editors
             config[nameof(HealthSeed)] = HealthSeed;
             config[nameof(MinStartingHealth)] = MinStartingHealth;
             config[nameof(MaxStartingHealth)] = MaxStartingHealth;
+
+            config[nameof(UseRecommendedCommunitySettings)] = UseRecommendedCommunitySettings;
         }
 
         public int GetSaveTarget(int numLevels)

@@ -68,6 +68,12 @@ namespace TRRandomizerCore.Randomizers
                     break;
                 }
             }
+
+            if (ScriptEditor.Edition.IsCommunityPatch && Settings.UseRecommendedCommunitySettings)
+            {
+                (ScriptEditor.Script as TR1Script).Enable3dPickups = false;
+                ScriptEditor.SaveScript();
+            }
         }
 
         private void FindUnarmedLevelPistols(TR1CombinedLevel level)
