@@ -108,6 +108,8 @@ namespace TRRandomizerCore.Randomizers
             List<TREntities> stdItemTypes = TR1EntityUtilities.GetStandardPickupTypes();
             stdItemTypes.Remove(TREntities.PistolAmmo_S_P); // Sprite/model not available
 
+            bool hasPistols = Array.Find(level.Data.Entities, e => e.TypeID == (short)TREntities.Pistols_S_P) != null;
+
             for (int i = 0; i < level.Data.NumEntities; i++)
             {
                 if (_secretMapping.RewardEntities.Contains(i))
@@ -131,11 +133,22 @@ namespace TRRandomizerCore.Randomizers
                         }
                         while (!TR1EntityUtilities.IsWeaponPickup(entityType));
                         entity.TypeID = (short)entityType;
+                        hasPistols = entityType == TREntities.Pistols_S_P;
                     }
                 }
                 else if (TR1EntityUtilities.IsStandardPickupType(entityType))
                 {
-                    entity.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                    TREntities newType = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                    if (newType == TREntities.Pistols_S_P && (hasPistols || !level.Script.RemovesWeapons))
+                    {
+                        // Only one pistol pickup per level, and only if it's unarmed
+                        do
+                        {
+                            newType = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                        }
+                        while (!TR1EntityUtilities.IsWeaponPickup(newType) || newType == TREntities.Pistols_S_P);
+                    }
+                    entity.TypeID = (short)newType;
                 }
             }
         }
