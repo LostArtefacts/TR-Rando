@@ -10,6 +10,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Audio,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
+            TRRandomizerType.HardSecrets,
             TRRandomizerType.Item,
             TRRandomizerType.KeyItems,
             TRRandomizerType.NightMode,
