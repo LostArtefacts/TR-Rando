@@ -5,18 +5,24 @@ using TRLevelReader.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Packing;
+using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Handlers.Textures
 {
     public class TR1TextureImportHandler : AbstractTextureImportHandler<TREntities, TRLevel, TR1ModelDefinition>
     {
-        private static readonly int _maxTextures = 2048; // Check this
-
-        public override int MaximumTextures => _maxTextures;
+        public TR1PaletteManager PaletteManager { get; set; }
 
         protected override IEnumerable<TRSpriteSequence> GetExistingSpriteSequences()
         {
-            return _level.SpriteSequences;
+            // Allow replacing the Explosion sequence in Vilcabamba (it's there but empty)
+            List<TRSpriteSequence> sequences = _level.SpriteSequences.ToList();
+            TRSpriteSequence explosion = sequences.Find(s => s.SpriteID == (int)TREntities.Explosion1_S_H);
+            if (explosion != null && explosion.NegativeLength == -1)
+            {
+                sequences.Remove(explosion);
+            }
+            return sequences;
         }
 
         protected override void WriteSpriteSequences(IEnumerable<TRSpriteSequence> spriteSequences)
@@ -38,7 +44,10 @@ namespace TRModelTransporter.Handlers.Textures
 
         protected override AbstractTexturePacker<TREntities, TRLevel> CreatePacker()
         {
-            return new TR1TexturePacker(_level);
+            return new TR1TexturePacker(_level)
+            {
+                PaletteManager = PaletteManager
+            };
         }
 
         protected override void ProcessRemovals(AbstractTexturePacker<TREntities, TRLevel> packer)
@@ -106,7 +115,6 @@ namespace TRModelTransporter.Handlers.Textures
         {
             foreach (TR1ModelDefinition definition in indexMap.Keys)
             {
-                RemapMeshTextures(definition.Meshes, indexMap[definition]);
                 foreach (TRMesh mesh in definition.Meshes)
                 {
                     foreach (TRFace4 rect in mesh.TexturedRectangles)

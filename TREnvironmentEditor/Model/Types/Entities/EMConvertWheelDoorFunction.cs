@@ -13,6 +13,11 @@ namespace TREnvironmentEditor.Model.Types
         public short NewDoorType { get; set; }
         public EMLocation NewLocation { get; set; }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            throw new NotSupportedException();
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             TR2Entity wheel = level.Entities[WheelIndex];

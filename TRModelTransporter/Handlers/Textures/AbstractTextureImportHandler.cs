@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using TRLevelReader.Model;
+using TRModelTransporter.Data;
 using TRModelTransporter.Model;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
@@ -16,7 +17,7 @@ namespace TRModelTransporter.Handlers
         where L : class
         where D : AbstractTRModelDefinition<E>
     {
-        public abstract int MaximumTextures { get; }
+        public ITransportDataProvider<E> Data { get; set; }
 
         protected Dictionary<D, List<TexturedTileSegment>> _importSegments;
 
@@ -145,6 +146,8 @@ namespace TRModelTransporter.Handlers
         {
             using (AbstractTexturePacker<E, L> packer = CreatePacker())
             {
+                packer.MaximumTiles = Data.TextureTileLimit;
+
                 ProcessRemovals(packer);
 
                 List<TexturedTileSegment> allSegments = new List<TexturedTileSegment>();
@@ -214,14 +217,14 @@ namespace TRModelTransporter.Handlers
                             newIndex = reusableIndices.Dequeue();
                             levelObjectTextures[newIndex] = objTexture.Texture;
                         }
-                        else if (levelObjectTextures.Count < MaximumTextures)
+                        else if (levelObjectTextures.Count < Data.TextureObjectLimit)
                         {
                             levelObjectTextures.Add(objTexture.Texture);
                             newIndex = levelObjectTextures.Count - 1;
                         }
                         else
                         {
-                            throw new PackingException(string.Format("Limit of {0} textures reached.", MaximumTextures));
+                            throw new PackingException(string.Format("Limit of {0} textures reached.", Data.TextureObjectLimit));
                         }
 
                         indexMap[definition][texture.Index] = newIndex;

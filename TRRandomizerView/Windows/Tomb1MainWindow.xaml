@@ -1,0 +1,1309 @@
+﻿<Window x:Class="TRRandomizerView.Windows.Tomb1MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctrl="clr-namespace:TRRandomizerView.Controls"
+        xmlns:cvt="clr-namespace:TRRandomizerView.Converters"
+        mc:Ignorable="d"
+        Icon="..\Resources\rando.ico"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Loaded="Window_Loaded"
+        Title="Tomb1Main Settings"
+        SizeToContent="WidthAndHeight"
+        MinWidth="1050"
+        MinHeight="750">
+    <Grid x:Name="_content">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="10" Grid.IsSharedSizeScope="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.ColumnSpan="2"
+                       Margin="0,0,0,10">
+                <Run Text="Edit the settings available in Tomb1Main as standard (see"/>
+                <Hyperlink ToolTip="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg" 
+                           NavigateUri="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg"
+                           RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink><Run Text=")."/>
+                <LineBreak/>
+                <Run Text="Note that some settings may be overridden directly during randomization to meet certain criteria."/>
+            </TextBlock>
+
+            <ListBox x:Name="_optionGroupListBox"
+                     SelectionChanged="OptionGroupListBox_SelectionChanged"
+                     Margin="0,0,10,0"
+                     Width="140"
+                     Grid.Row="1">
+                <ListBoxItem>General</ListBoxItem>
+                <ListBoxItem>Bars</ListBoxItem>
+                <ListBoxItem>Fixes</ListBoxItem>
+                <ListBoxItem>Gameplay</ListBoxItem>
+                <ListBoxItem>Guns/Items</ListBoxItem>
+                <ListBoxItem>Lara</ListBoxItem>
+                <ListBoxItem>Music</ListBoxItem>
+                <ListBoxItem>Statistics</ListBoxItem>
+                <ListBoxItem>UI</ListBoxItem>
+            </ListBox>
+
+            <Border Grid.Row="1"
+                    Grid.Column="1"
+                    BorderThickness="1"
+                    BorderBrush="#ABADB3"
+                    SnapsToDevicePixels="True"
+                    Padding="5"
+                    HorizontalAlignment="Stretch">
+                <StackPanel x:Name="_optionContainer"
+                            HorizontalAlignment="Stretch">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Margin"
+                                    Value="0,0,0,5" />
+                        </Style>
+                        <Style x:Key="SeparatorBorder"
+                               TargetType="{x:Type Border}">
+                            <Setter Property="BorderBrush"
+                                    Value="#DEDEDE" />
+                            <Setter Property="BorderThickness"
+                                    Value="0,1,0,0" />
+                            <Setter Property="Margin"
+                                    Value="0,5,0,0" />
+                            <Setter Property="Padding"
+                                    Value="0,5,0,0" />
+                            <Setter Property="SnapsToDevicePixels"
+                                    Value="True" />
+                        </Style>
+                        <Style x:Key="OptionDescriptionStyle"
+                               TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment"
+                                    Value="Left" />
+                            <Setter Property="FontStyle"
+                                    Value="Italic" />
+                            <Setter Property="Padding"
+                                    Value="0" />
+                            <Setter Property="Margin"
+                                    Value="20,0,0,2" />
+                        </Style>
+                        <Style x:Key="OptionPromptStyle"
+                               TargetType="{x:Type Label}">
+                            <Setter Property="Padding"
+                                    Value="0,0,0,5" />
+                            <Setter Property="Margin"
+                                    Value="0" />
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <!-- Use one grid per item in the ListBox - these will be collapsed automatically. -->
+                    
+                    <!-- 0. General -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Margin="0">
+                            <StackPanel>
+                                <Label Content="Demo delay"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.DemoDelay, Mode=TwoWay}"
+                                                    DecimalPlaces="1"
+                                                    MinValue="1"
+                                                    MaxValue="1000"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Margin="0">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Seconds to pass in the main menu before playing the demo."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel VerticalAlignment="Top">
+                                <Label Content="Draw distance fade"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.DrawDistanceFade, Mode=TwoWay}"
+                                                    DecimalPlaces="1"
+                                                    MinValue="1"
+                                                    MaxValue="1000"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="The distance (in tiles) at which objects and the world start to fade into blackness."/>
+                                <LineBreak/>
+                                <Run Text="The default hardcoded value in TR1 is 12."/>
+                                <LineBreak/>
+                                <Run Text="The default (disabled) value in TombATI is 72."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel VerticalAlignment="Top">
+                                <Label Content="Draw distance max"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.DrawDistanceMax, Mode=TwoWay}"
+                                                    DecimalPlaces="1"
+                                                    MinValue="1"
+                                                    MaxValue="1000"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="2"
+                                Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="The distance (in tiles) at which objects and the world are clipped away."/>
+                                <LineBreak/>
+                                <Run Text="The default hardcoded value in TR1 is 20."/>
+                                <LineBreak/>
+                                <Run Text="The default (disabled) value in TombATI is 80."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableEnhancedSaves, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable enhanced saves" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Column="3"
+                                Grid.Row="3"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enhances savegames so graphic effects, waterfall mist, flame emitters, and more are saved instead of disappearing on load."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="4"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Maximum save slots"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:NumericUpDown Value="{Binding ControllerProxy.MaximumSaveSlots, Mode=TwoWay}"
+                                                    MinValue="1"
+                                                    MaxValue="100"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="4"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="How many save slots are available."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="5"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Screenshot format"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ComboBox x:Name="_screenshotCombo"
+                                          SelectedItem="{Binding ControllerProxy.ScreenshotFormat, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="5"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Screenshot file format."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="6"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Water color (red)"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorR, Mode=TwoWay}"
+                                                    ValueChanged="WaterColor_ValueChanged"
+                                                    DecimalPlaces="2"
+                                                    MinValue="0"
+                                                    MaxValue="1"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="6"
+                                Grid.Column="1"
+                                Grid.RowSpan="3"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Water color (R, G, B). 1.0 means pass-through, 0.0 means no value at all."/>
+                                <LineBreak/>
+                                <Run Text="[0.6, 0.7, 1.0] is original DOS version filter" />
+                                <LineBreak/>
+                                <Run Text="[0.45, 1.0, 1.0] is default TombATI filter" />
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="7">
+                            <StackPanel>
+                                <Label Content="Water color (green)"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorG, Mode=TwoWay}"
+                                                    ValueChanged="WaterColor_ValueChanged"
+                                                    DecimalPlaces="2"
+                                                    MinValue="0"
+                                                    MaxValue="1"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="8">
+                            <StackPanel>
+                                <Label Content="Water color (blue)"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorB, Mode=TwoWay}"
+                                                    ValueChanged="WaterColor_ValueChanged"
+                                                    DecimalPlaces="2"
+                                                    MinValue="0"
+                                                    MaxValue="1"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="9">
+                            <StackPanel x:Name="_waterPreview" Height="20"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- 1. Bars -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Margin="0">
+                            <StackPanel>
+                                <Label Content="Airbar color"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ComboBox x:Name="_airbarColorCombo"
+                                          SelectedItem="{Binding ControllerProxy.AirbarColor, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Margin="0">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Color of the airbar."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Airbar location"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ComboBox x:Name="_airbarLocationCombo"
+                                          SelectedItem="{Binding ControllerProxy.AirbarLocation, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Location where the airbar is displayed."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Airbar showing mode"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ComboBox x:Name="_airbarShowingModeCombo"
+                                          SelectedItem="{Binding ControllerProxy.AirbarShowingMode, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Changes how the airbar is displayed."/>
+                                <LineBreak/>
+                                <Run Text=" - Default: show the airbar only in the water and flash the airbar when Lara's oxygen is 20% or below (TombATI)"/>
+                                <LineBreak/>
+                                <Run Text=" - FlashingOnly: show the airbar *only* when Lara's oxygen is 20% or below (for challenge runs)"/>
+                                <LineBreak/>
+                                <Run Text=" - Never: never display the airbar (for challenge runs)"/>
+                                <LineBreak/>
+                                <Run Text=" - PS1: show the airbar under default circumstances with no flashing"/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableEnemyHealthbar, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable enemy healthbar" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="3"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables showing healthbar for the active enemy."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="4"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Enemy healthbar color"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ComboBox x:Name="_enemyHealthbarColorCombo"
+                                          SelectedItem="{Binding ControllerProxy.EnemyHealthbarColor, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="4"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Color of the enemy healthbar."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="5"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Enemy healthbar location"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ComboBox x:Name="_enemyHealthbarLocationCombo"
+                                          SelectedItem="{Binding ControllerProxy.EnemyHealthbarLocation, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="5"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Location where the enemy healthbar is displayed."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="6"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Healthbar color"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ComboBox x:Name="_healthbarColorCombo"
+                                          SelectedItem="{Binding ControllerProxy.HealthbarColor, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="6"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Color of the healthbar."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="7"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Healthbar location"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ComboBox x:Name="_healthbarLocationCombo"
+                                          SelectedItem="{Binding ControllerProxy.HealthbarLocation, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="7"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Location where the healthbar is displayed."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="8"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Healthbar showing mode"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ComboBox x:Name="_healthbarShowingModeCombo"
+                                          SelectedItem="{Binding ControllerProxy.HealthbarShowingMode, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="8"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Changes how the healthbar is displayed."/>
+                                <LineBreak/>
+                                <Run Text=" - Default: show the healthbar at the start of a level, after getting hit, or while having weapons equipped; flash the healthbar"/>
+                                <LineBreak/>
+                                <Run Text="   if it's already on screen when Lara's health is 20% or below (TombATI)"/>
+                                <LineBreak/>
+                                <Run Text=" - FlashingOrDefault: constantly flash the healthbar when Lara's health is 20% or below, or show under default circumstances"/>
+                                <LineBreak/>
+                                <Run Text=" - FlashingOnly: show the healthbar *only* when Lara's health is 20% or below (for challenge runs)"/>
+                                <LineBreak/>
+                                <Run Text=" - Always: always show the healthbar"/>
+                                <LineBreak/>
+                                <Run Text=" - Never: never display the healthbar (for challenge runs)"/>
+                                <LineBreak/>
+                                <Run Text=" - PS1: show the healthbar under default circumstances with no flashing"/>
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                
+                    <!-- 2. Fixes -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Margin="0">
+                            <CheckBox IsChecked="{Binding ControllerProxy.ChangePierreSpawn, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Change Pierre spawn" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Margin="0">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Make freshly triggered (runaway) Pierre replace an already existing (runaway) Pierre."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.FixAlligatorAi, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Fix alligator AI" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Fixes alligators dealing no damage if Lara remains still in the water."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.FixBridgeCollision, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Fix bridge collision" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Fixes Lara not being able to grab parts of some bridges and invisible walls at the edge."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.FixDescendingGlitch, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Fix descending glitch" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="3"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Fixes sidestepping and walking backwards on breakable tiles causing Lara to immediately descend down to the tile underneath."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="4"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.FixPyramidSecretTrigger, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Fix Pyramid secret trigger" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="4"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Fixes the secret trigger in the final level not working."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="5"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.FixQwopGlitch, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Fix QWOP glitch" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="5"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Fixes Lara jumping on small steps sometimes resulting in a weird running animation, known as a QWOP state."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="6"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.FixTihocanSecretSound, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Fix Tihocan secret sound" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="6"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Disables the secret sound incorrectly playing during using the golden key in Tomb of Tihocan."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="7"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.FixWallJumpGlitch, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Fix wall jump glitch" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="7"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Fixes Lara jumping through objects and Lara moving up certain slopes."/>
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                    
+                    <!-- 3. Gameplay -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Margin="0">
+                            <StackPanel>
+                                <Label Content="Anisotropy filter"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.AnisotropyFilter, Mode=TwoWay}"
+                                                    DecimalPlaces="1"
+                                                    MinValue="0"
+                                                    MaxValue="100"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Margin="0">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enhances texture filtering at distances."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.DisableCine, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Disable cinematics" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Disables ingame cinematics."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.DisableFmv, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Disable FMVs" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Disables FMVs."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableCheats, Mode=TwoWay}"
+                                      VerticalAlignment="top">
+                                <Label Padding="0"
+                                       Content="Enable cheats" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="3"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables various cheats:"/>
+                                <LineBreak/>
+                                <Run Text=" - F11: heal Lara. Hold WALK key to hurt instead."/>
+                                <LineBreak/>
+                                <Run Text=" - L: immediately end the level."/>
+                                <LineBreak/>
+                                <Run Text=" - I: gives Lara all the guns, ammo, medpacks and plot items for the current level."/>
+                                <LineBreak/>
+                                <Run Text=" - O: enable DOZY cheat (swimming midair)."/>
+                                <LineBreak/>
+                                <Run Text="      - WALK key: exit DOZY"/>
+                                <LineBreak/>
+                                <Run Text="      - GUN key: open the closest door (doesn't work in certain places)"/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="4"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableGameModes, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable game modes" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="4"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Whether to allow user to select NG/NG+/etc. modes in the new game dialog."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="5"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableSaveCrystals, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable save crystals" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="5"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Disables saving except in the locations near the crystals."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="6"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableTimerInInventory, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable timer in inventory" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="6"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Makes the ingame timer work even while the game is showing the inventory."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="7"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="FoV Value"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:NumericUpDown Value="{Binding ControllerProxy.FovValue, Mode=TwoWay}"
+                                                    MinValue="30"
+                                                    MaxValue="255"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="7"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="The desired field of view in degrees, which overrides the hardcoded default. The default values are 80 (horizontal) and 65 (vertical)."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="8"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableTimerInInventory, Mode=TwoWay}"
+                                      VerticalAlignment="Top">
+                                <Label Padding="0"
+                                       Content="FoV Vertical" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="8"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Interprets FoV value as vertical instead of horizontal field of view. May be advantageous for widescreen resolutions, especially for"/>
+                                <LineBreak/>
+                                <Run Text="multi-screen setups, since it distorts the left and right side instead of cropping away the top and bottom part of the screen."/>
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                
+                    <!-- 4. Guns/Items -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Margin="0">
+                            <CheckBox IsChecked="{Binding ControllerProxy.DisableMagnums, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Disable magnums" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Margin="0">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Removes all magnum guns and ammo pickups."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.DisableShotgun, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Disable shotgun" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Removes all shotgun and shotgun shells pickups."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.DisableUzis, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Disable uzis" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Removes all uzi guns and ammo pickups."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.Enable3dPickups, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable 3D pickups" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="3"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables 3D models to be rendered in place of the sprites for pickup items."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="4"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableNumericKeys, Mode=TwoWay}"
+                                      VerticalAlignment="Top">
+                                <Label Padding="0"
+                                       Content="Enable numeric keys" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="4"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables quick weapon draws and medpack usage."/>
+                                <LineBreak/>
+                                <Run Text=" - 1: draw pistols"/>
+                                <LineBreak/>
+                                <Run Text=" - 2: draw shotgun"/>
+                                <LineBreak/>
+                                <Run Text=" - 3: draw magnums"/>
+                                <LineBreak/>
+                                <Run Text=" - 4: draw uzis"/>
+                                <LineBreak/>
+                                <Run Text=" - 8: use small medpack"/>
+                                <LineBreak/>
+                                <Run Text=" - 9: use large medpack"/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="5"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableShotgunFlash, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable shotgun flash" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="5"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Draws flame when firing a shotgun, like for other guns."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="6"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.FixShotgunTargeting, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Fix shotgun targeting" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="6"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Shotgun no longer fires when a locked target moves out of Lara's sight like other guns."/>
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                    
+                    <!-- 5. Lara -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Margin="0">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableEnhancedLook, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable enhanced look" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Margin="0">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Allows the player to look while running, jumping etc. (similar to TR2 style)."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableRoundShadow, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable round shadow" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables round shadow instead of the default octagon one."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableTr3Sidesteps, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable TR3 sidesteps" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables TR3+ style sidesteps, e.g. shift+directional arrows (you can still use dedicated sidestep buttons)."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.RevertToPistols, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Revert to pistols" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="3"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Make Lara revert to pistols on new level start (in line with TombATI behaviour)."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="4"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.WalkToItems, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Walk to items" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="4"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Lara walks to pickups and switches when nearby instead of teleporting."/>
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                
+                    <!-- 6. Music -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Margin="0">
+                            <CheckBox IsChecked="{Binding ControllerProxy.DisableMusicInInventory, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Disable music in inventory" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Margin="0">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Pauses sound in the inventory screen."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.DisableMusicInMenu, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Disable music in menu" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Disables music in the main menu."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.FixSecretsKillingMusic, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Fix secrets killing music" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Fixes the sound of collecting a secret resetting the active music track."/>
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                
+                    <!-- 7. Statistics -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Margin="0">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableCompassStats, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable compass statistics" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Margin="0">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables showing level stats when selecting compass."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableDeathsCounter, Mode=TwoWay}"
+                                      VerticalAlignment="Top">
+                                <Label Padding="0"
+                                       Content="Enable deaths counter" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables showing deaths counter in the compass and in the level stats."/>
+                                <LineBreak/>
+                                <Run Text="Death count is updated in the currently loaded save as soon as Lara dies."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableDetailedStats, Mode=TwoWay}"
+                                      VerticalAlignment="Top">
+                                <Label Padding="0"
+                                       Content="Enable detailed statistics" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables showing maximum pickup count and kill count on each level."/>
+                                <LineBreak/>
+                                <Run Text="This includes unobtainable items."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableTotalStats, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable total statistics" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="3"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables a total game statistics screen that plays after the credits."/>
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                
+                    <!-- 8. UI -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Margin="0">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableFadeEffects, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable fade effects" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Margin="0">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Makes inventory and pause screen use fade transitions for the semitransparent backdrop, similar to PS1."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableSmoothBars, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable smooth bars" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Makes the healthbar and airbar use smooth color transitions."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Menu style"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ComboBox x:Name="_menuStyleCombo"
+                                          SelectedItem="{Binding ControllerProxy.MenuStyle, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Changes how menus are displayed."/>
+                                <LineBreak/>
+                                <Run Text=" - PC: UI style matches the PC version."/>
+                                <LineBreak/>
+                                <Run Text=" - PS1: UI style matches the PS1 version."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Resolution width"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:NumericUpDown Value="{Binding ControllerProxy.ResolutionWidth, Mode=TwoWay}"
+                                                    MinValue="-1"
+                                                    MaxValue="7680"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="3"
+                                Grid.Column="1"
+                                Grid.RowSpan="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Overrides game resolution. Leave at 0 or negative values to automatically guess from the screen size."/>
+                                <LineBreak/>
+                                <Run Text="Note: these values only override the last position in the game resolutions menu that normally defaults" />
+                                <LineBreak/>
+                                <Run Text="to the screen resolution, so in order for this to work, make sure you have selected the last resolution." />
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="4"
+                                >
+                            <StackPanel>
+                                <Label Content="Resolution height"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:NumericUpDown Value="{Binding ControllerProxy.ResolutionHeight, Mode=TwoWay}"
+                                                    MinValue="-1"
+                                                    MaxValue="4320"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Border
+            BorderThickness="0 1 0 0"
+            BorderBrush="#ccc"
+            Background="#eee"
+            Grid.Row="1"
+            Grid.ColumnSpan="2">
+
+            <StackPanel
+                Width="80" 
+                Orientation="Horizontal"
+                HorizontalAlignment="Right">
+
+                <Button 
+                    Content="_OK"
+                    IsDefault="True"
+                    Width="70"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,10,0"
+                    Click="OkButton_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

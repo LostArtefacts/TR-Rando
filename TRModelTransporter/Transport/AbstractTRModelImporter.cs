@@ -26,13 +26,18 @@ namespace TRModelTransporter.Transport
             EntitiesToImport = new List<E>();
             EntitiesToRemove = new List<E>();
             ClearUnusedSprites = false;
-            _textureHandler = CreateTextureHandler();
         }
 
         protected abstract AbstractTextureImportHandler<E, L, D> CreateTextureHandler();
 
         public void Import()
         {
+            if (_textureHandler == null)
+            {
+                _textureHandler = CreateTextureHandler();
+                _textureHandler.Data = Data;
+            }
+
             List<E> existingEntities = GetExistingModelTypes();
 
             if (EntitiesToRemove != null)
@@ -86,6 +91,7 @@ namespace TRModelTransporter.Transport
             List<E> cleanedEntities = new List<E>();
             foreach (E entity in EntitiesToRemove)
             {
+                bool entityClean = false;
                 if (Data.HasAliases(entity))
                 {
                     // Check if we have another alias in the import list different from any
@@ -103,10 +109,26 @@ namespace TRModelTransporter.Transport
 
                     if (!Equals(alias, importAlias))
                     {
-                        cleanedEntities.Add(entity);
+                        entityClean = true;
                     }
                 }
                 else if (!EntitiesToImport.Contains(entity))
+                {
+                    entityClean = true;
+                }
+
+                if (entityClean)
+                {
+                    // There may be null meshes dependent on this removal, so we can only remove it if they're
+                    // being removed as well.
+                    IEnumerable<E> exclusions = Data.GetRemovalExclusions(entity);
+                    if (exclusions.Count() > 0 && exclusions.All(EntitiesToRemove.Contains))
+                    {
+                        entityClean = false;
+                    }
+                }
+
+                if (entityClean)
                 {
                     cleanedEntities.Add(entity);
                 }
@@ -207,6 +229,23 @@ namespace TRModelTransporter.Transport
                     {
                         definition.IsDependencyOnly = false;
                     }
+                    else if (EntitiesToRemove.Contains(nextEntity))
+                    {
+                        EntitiesToRemove = new List<E>(EntitiesToRemove).Except(new List<E> { nextEntity });
+                    }
+
+                    // Avoid issues with cyclic dependencies by adding separately. The caveat here is
+                    // cyclic dependencies can't have further sub-dependencies.
+                    IEnumerable<E> cyclicDependencies = Data.GetCyclicDependencies(nextEntity);
+                    foreach (E cyclicDependency in cyclicDependencies)
+                    {
+                        if (!modelEntities.Contains(cyclicDependency) || Data.IsOverridePermitted(cyclicDependency))
+                        {
+                            modelEntities.Add(cyclicDependency);
+                            standardModelDefinitions.Add(LoadDefinition(cyclicDependency));
+                        }
+                    }
+
                     return;
                 }
             }

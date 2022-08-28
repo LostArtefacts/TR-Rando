@@ -1,0 +1,1765 @@
+[
+  {
+    "InternalIndex": 0,
+    "Description": "SFX_LARA_FEET",
+    "Creature": 1,
+    "Categories": [
+      81
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 1,
+    "Description": "SFX_LARA_CLIMB2",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 2,
+    "Description": "SFX_LARA_NO",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 3,
+    "Description": "SFX_LARA_SLIPPING",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 4,
+    "Description": "SFX_LARA_LAND",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 5,
+    "Description": "SFX_LARA_CLIMB1",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 6,
+    "Description": "SFX_LARA_DRAW",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 7,
+    "Description": "SFX_LARA_HOLSTER",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 8,
+    "Description": "SFX_LARA_FIRE",
+    "Creature": 0,
+    "Categories": [
+      21,
+      22
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 9,
+    "Description": "SFX_LARA_RELOAD",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 10,
+    "Description": "SFX_LARA_RICOCHET",
+    "Creature": 0,
+    "Categories": [
+      23
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 11,
+    "Description": "SFX_BEAR_GROWL",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 12,
+    "Description": "SFX_BEAR_FEET",
+    "Creature": 3,
+    "Categories": [
+      82
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 13,
+    "Description": "SFX_BEAR_ATTACK",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 14,
+    "Description": "SFX_BEAR_SNARL",
+    "Creature": 3,
+    "Categories": [
+      171,
+      201
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 16,
+    "Description": "SFX_BEAR_HURT",
+    "Creature": 3,
+    "Categories": [
+      112
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 18,
+    "Description": "SFX_BEAR_DEATH",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 19,
+    "Description": "SFX_WOLF_JUMP",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 20,
+    "Description": "SFX_WOLF_HURT",
+    "Creature": 3,
+    "Categories": [
+      112
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 22,
+    "Description": "SFX_WOLF_DEATH",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 24,
+    "Description": "SFX_WOLF_HOWL",
+    "Creature": 3,
+    "Categories": [
+      141
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 25,
+    "Description": "SFX_WOLF_ATTACK",
+    "Creature": 3,
+    "Categories": [
+      171
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 26,
+    "Description": "SFX_LARA_CLIMB3",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 27,
+    "Description": "SFX_LARA_BODYSL",
+    "Creature": 1,
+    "Categories": [
+      112
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 28,
+    "Description": "SFX_LARA_SHIMMY2",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 29,
+    "Description": "SFX_LARA_JUMP",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 30,
+    "Description": "SFX_LARA_FALL",
+    "Creature": 1,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 31,
+    "Description": "SFX_LARA_INJURY",
+    "Creature": 1,
+    "Categories": [
+      112
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 32,
+    "Description": "SFX_LARA_ROLL",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 33,
+    "Description": "SFX_LARA_SPLASH",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 34,
+    "Description": "SFX_LARA_GETOUT",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 35,
+    "Description": "SFX_LARA_SWIM",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 36,
+    "Description": "SFX_LARA_BREATH",
+    "Creature": 1,
+    "Categories": [
+      141
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 37,
+    "Description": "SFX_LARA_BUBBLES",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 38,
+    "Description": "SFX_LARA_SWITCH",
+    "Creature": 0,
+    "Categories": [
+      284,
+      285,
+      286
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 39,
+    "Description": "SFX_LARA_KEY",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 40,
+    "Description": "SFX_LARA_OBJECT",
+    "Creature": 0,
+    "Categories": [],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 41,
+    "Description": "SFX_LARA_GENERAL_DEATH",
+    "Creature": 1,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 42,
+    "Description": "SFX_LARA_KNEES_DEATH",
+    "Creature": 1,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 43,
+    "Description": "SFX_LARA_UZI_FIRE",
+    "Creature": 0,
+    "Categories": [
+      22,
+      21
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 44,
+    "Description": "SFX_LARA_MAGNUMS",
+    "Creature": 0,
+    "Categories": [
+      21,
+      22
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 45,
+    "Description": "SFX_LARA_SHOTGUN",
+    "Creature": 0,
+    "Categories": [
+      21,
+      22
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 46,
+    "Description": "SFX_LARA_BLOCK_PUSH1",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 47,
+    "Description": "SFX_LARA_BLOCK_PUSH2",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 48,
+    "Description": "SFX_LARA_EMPTY",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 50,
+    "Description": "SFX_LARA_BULLETHIT",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 51,
+    "Description": "SFX_LARA_BLKPULL",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 52,
+    "Description": "SFX_LARA_FLOATING",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 53,
+    "Description": "SFX_LARA_FALLDETH",
+    "Creature": 1,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 54,
+    "Description": "SFX_LARA_GRABHAND",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 55,
+    "Description": "SFX_LARA_GRABBODY",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 56,
+    "Description": "SFX_LARA_GRABFEET",
+    "Creature": 1,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 57,
+    "Description": "SFX_LARA_SWITCHUP",
+    "Creature": 1,
+    "Categories": [
+      285,
+      284
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 58,
+    "Description": "SFX_BAT_SQK",
+    "Creature": 3,
+    "Categories": [
+      141
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 59,
+    "Description": "SFX_BAT_FLAP",
+    "Creature": 3,
+    "Categories": [
+      261,
+      22
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 60,
+    "Description": "SFX_UNDERWATER",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL2.PHD"
+  },
+  {
+    "InternalIndex": 61,
+    "Description": "SFX_UNDERWATER_SWITCH",
+    "Creature": 0,
+    "Categories": [
+      284,
+      285,
+      286
+    ],
+    "SourceLevel": "LEVEL2.PHD"
+  },
+  {
+    "InternalIndex": 63,
+    "Description": "SFX_BLOCK_SOUND",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL2.PHD"
+  },
+  {
+    "InternalIndex": 64,
+    "Description": "SFX_DOOR",
+    "Creature": 0,
+    "Categories": [
+      281
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 65,
+    "Description": "SFX_PENDULUM_BLADES",
+    "Creature": 0,
+    "Categories": [
+      1,
+      284,
+      285,
+      286
+    ],
+    "SourceLevel": "LEVEL2.PHD"
+  },
+  {
+    "InternalIndex": 66,
+    "Description": "SFX_ROCK_FALL_CRUMBLE",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 67,
+    "Description": "SFX_ROCK_FALL_FALL",
+    "Creature": 0,
+    "Categories": [
+      53
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 68,
+    "Description": "SFX_ROCK_FALL_LAND",
+    "Creature": 0,
+    "Categories": [
+      51,
+      52
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 69,
+    "Description": "SFX_T_REX_DEATH",
+    "Creature": 3,
+    "Categories": [
+      201
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 70,
+    "Description": "SFX_T_REX_FOOTSTOMP",
+    "Creature": 3,
+    "Categories": [
+      82
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 71,
+    "Description": "SFX_T_REX_ROAR",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 72,
+    "Description": "SFX_T_REX_ATTACK",
+    "Creature": 3,
+    "Categories": [
+      201,
+      171
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 73,
+    "Description": "SFX_RAPTOR_ROAR",
+    "Creature": 3,
+    "Categories": [
+      201,
+      171
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 74,
+    "Description": "SFX_RAPTOR_ATTACK",
+    "Creature": 3,
+    "Categories": [
+      201,
+      171
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 75,
+    "Description": "SFX_RAPTOR_FEET",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 76,
+    "Description": "SFX_MUMMY_GROWL",
+    "Creature": 3,
+    "Categories": [
+      141,
+      171,
+      201
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 77,
+    "Description": "SFX_LARSON_FIRE",
+    "Creature": 0,
+    "Categories": [
+      21,
+      22
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 78,
+    "Description": "SFX_LARSON_RICOCHET",
+    "Creature": 0,
+    "Categories": [
+      23
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 79,
+    "Description": "SFX_WATERFALL_LOOP",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 80,
+    "Description": "SFX_WATER_LOOP",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 81,
+    "Description": "SFX_WATERFALL_BIG",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 82,
+    "Description": "SFX_CHAINDOOR_UP",
+    "Creature": 0,
+    "Categories": [
+      282,
+      281
+    ],
+    "SourceLevel": "LEVEL3B.PHD"
+  },
+  {
+    "InternalIndex": 83,
+    "Description": "SFX_CHAINDOOR_DOWN",
+    "Creature": 0,
+    "Categories": [
+      283,
+      281
+    ],
+    "SourceLevel": "LEVEL3B.PHD"
+  },
+  {
+    "InternalIndex": 84,
+    "Description": "SFX_COGS",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL3A.PHD"
+  },
+  {
+    "InternalIndex": 85,
+    "Description": "SFX_LION_HURT",
+    "Creature": 3,
+    "Categories": [
+      112
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 86,
+    "Description": "SFX_LION_ATTACK",
+    "Creature": 3,
+    "Categories": [
+      201,
+      171
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 87,
+    "Description": "SFX_LION_ROAR",
+    "Creature": 3,
+    "Categories": [
+      201,
+      171
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 88,
+    "Description": "SFX_LION_DEATH",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 89,
+    "Description": "SFX_GORILLA_FEET",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 90,
+    "Description": "SFX_GORILLA_PANT",
+    "Creature": 3,
+    "Categories": [
+      141,
+      171
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 91,
+    "Description": "SFX_GORILLA_DEATH",
+    "Creature": 3,
+    "Categories": [
+      111,
+      171
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 92,
+    "Description": "SFX_CROC_FEET",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 93,
+    "Description": "SFX_CROC_ATTACK",
+    "Creature": 3,
+    "Categories": [
+      201,
+      171
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 94,
+    "Description": "SFX_RAT_FEET",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "SourceLevel": "LEVEL7A.PHD"
+  },
+  {
+    "InternalIndex": 95,
+    "Description": "SFX_RAT_CHIRP",
+    "Creature": 3,
+    "Categories": [
+      141
+    ],
+    "SourceLevel": "LEVEL7A.PHD"
+  },
+  {
+    "InternalIndex": 96,
+    "Description": "SFX_RAT_ATTACK",
+    "Creature": 3,
+    "Categories": [
+      171,
+      201
+    ],
+    "SourceLevel": "LEVEL7A.PHD"
+  },
+  {
+    "InternalIndex": 97,
+    "Description": "SFX_RAT_DEATH",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL7A.PHD"
+  },
+  {
+    "InternalIndex": 98,
+    "Description": "SFX_THUNDER",
+    "Creature": 0,
+    "Categories": [
+      51
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 99,
+    "Description": "SFX_EXPLOSION",
+    "Creature": 0,
+    "Categories": [
+      51
+    ],
+    "SourceLevel": "LEVEL3B.PHD"
+  },
+  {
+    "InternalIndex": 100,
+    "Description": "SFX_GORILLA_GRUNT",
+    "Creature": 3,
+    "Categories": [
+      171,
+      201
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 101,
+    "Description": "SFX_GORILLA_GRUNTS",
+    "Creature": 3,
+    "Categories": [
+      171,
+      201
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 102,
+    "Description": "SFX_CROC_DEATH",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 103,
+    "Description": "SFX_DAMOCLES_SWORD",
+    "Creature": 0,
+    "Categories": [
+      284
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 104,
+    "Description": "SFX_ATLANTEAN_EXPLODE",
+    "Creature": 0,
+    "Categories": [
+      51
+    ],
+    "SourceLevel": "LEVEL7B.PHD"
+  },
+  {
+    "InternalIndex": 108,
+    "Description": "SFX_MENU_ROTATE",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 109,
+    "Description": "SFX_MENU_CHOOSE",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 110,
+    "Description": "SFX_MENU_GAMEBOY",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 111,
+    "Description": "SFX_MENU_SPININ",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 112,
+    "Description": "SFX_MENU_SPINOUT",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 113,
+    "Description": "SFX_MENU_COMPASS",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 114,
+    "Description": "SFX_MENU_GUNS",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 115,
+    "Description": "SFX_MENU_PASSPORT",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 116,
+    "Description": "SFX_MENU_MEDI",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 117,
+    "Description": "SFX_RAISINGBLOCK_FX",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL6.PHD"
+  },
+  {
+    "InternalIndex": 118,
+    "Description": "SFX_SAND_FX",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL8A.PHD"
+  },
+  {
+    "InternalIndex": 119,
+    "Description": "SFX_STAIRS2SLOPE_FX",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL8A.PHD"
+  },
+  {
+    "InternalIndex": 120,
+    "Description": "SFX_ATLANTEAN_WALK",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "SourceLevel": "LEVEL8A.PHD"
+  },
+  {
+    "InternalIndex": 121,
+    "Description": "SFX_ATLANTEAN_ATTACK",
+    "Creature": 3,
+    "Categories": [
+      201,
+      171
+    ],
+    "SourceLevel": "LEVEL8A.PHD"
+  },
+  {
+    "InternalIndex": 122,
+    "Description": "SFX_ATLANTEAN_JUMP_ATTACK",
+    "Creature": 3,
+    "Categories": [
+      201,
+      171
+    ],
+    "SourceLevel": "LEVEL8A.PHD"
+  },
+  {
+    "InternalIndex": 123,
+    "Description": "SFX_ATLANTEAN_NEEDLE",
+    "Creature": 0,
+    "Categories": [
+      21,
+      22
+    ],
+    "SourceLevel": "LEVEL8A.PHD"
+  },
+  {
+    "InternalIndex": 124,
+    "Description": "SFX_ATLANTEAN_BALL",
+    "Creature": 0,
+    "Categories": [
+      21,
+      22
+    ],
+    "SourceLevel": "LEVEL7B.PHD"
+  },
+  {
+    "InternalIndex": 125,
+    "Description": "SFX_ATLANTEAN_WINGS",
+    "Creature": 3,
+    "Categories": [
+      261
+    ],
+    "SourceLevel": "LEVEL8A.PHD"
+  },
+  {
+    "InternalIndex": 126,
+    "Description": "SFX_ATLANTEAN_RUN",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "SourceLevel": "LEVEL8A.PHD"
+  },
+  {
+    "InternalIndex": 127,
+    "Description": "SFX_SLAMDOOR_CLOSE",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL6.PHD"
+  },
+  {
+    "InternalIndex": 128,
+    "Description": "SFX_SLAMDOOR_OPEN",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 129,
+    "Description": "SFX_SKATEBOARD_MOVE",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 130,
+    "Description": "SFX_SKATEBOARD_STOP",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 131,
+    "Description": "SFX_SKATEBOARD_SHOOT",
+    "Creature": 0,
+    "Categories": [
+      22
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 132,
+    "Description": "SFX_SKATEBOARD_HIT",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 133,
+    "Description": "SFX_SKATEBOARD_START",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 134,
+    "Description": "SFX_SKATEBOARD_DEATH",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 135,
+    "Description": "SFX_SKATEBOARD_HIT_GROUND",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 136,
+    "Description": "SFX_TORSO_HIT_GROUND",
+    "Creature": 3,
+    "Categories": [
+      53,
+      51
+    ],
+    "SourceLevel": "LEVEL10C.PHD"
+  },
+  {
+    "InternalIndex": 137,
+    "Description": "SFX_TORSO_ATTACK1",
+    "Creature": 3,
+    "Categories": [
+      201,
+      171
+    ],
+    "SourceLevel": "LEVEL10C.PHD"
+  },
+  {
+    "InternalIndex": 138,
+    "Description": "SFX_TORSO_ATTACK2",
+    "Creature": 3,
+    "Categories": [
+      201,
+      171
+    ],
+    "SourceLevel": "LEVEL10C.PHD"
+  },
+  {
+    "InternalIndex": 139,
+    "Description": "SFX_TORSO_DEATH",
+    "Creature": 3,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL10C.PHD"
+  },
+  {
+    "InternalIndex": 140,
+    "Description": "SFX_TORSO_ARM_SWING",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10C.PHD"
+  },
+  {
+    "InternalIndex": 141,
+    "Description": "SFX_TORSO_MOVE",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10C.PHD"
+  },
+  {
+    "InternalIndex": 142,
+    "Description": "SFX_TORSO_HIT",
+    "Creature": 3,
+    "Categories": [
+      112
+    ],
+    "SourceLevel": "LEVEL10C.PHD"
+  },
+  {
+    "InternalIndex": 143,
+    "Description": "SFX_CENTAUR_FEET",
+    "Creature": 3,
+    "Categories": [
+      81
+    ],
+    "SourceLevel": "LEVEL7B.PHD"
+  },
+  {
+    "InternalIndex": 144,
+    "Description": "SFX_CENTAUR_ROAR",
+    "Creature": 3,
+    "Categories": [
+      141,
+      171,
+      201
+    ],
+    "SourceLevel": "LEVEL7B.PHD"
+  },
+  {
+    "InternalIndex": 145,
+    "Description": "SFX_LARA_SPIKE_DEATH",
+    "Creature": 1,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL3B.PHD"
+  },
+  {
+    "InternalIndex": 146,
+    "Description": "SFX_LARA_DEATH3",
+    "Creature": 1,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 147,
+    "Description": "SFX_ROLLING_BALL",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL3B.PHD"
+  },
+  {
+    "InternalIndex": 148,
+    "Description": "SFX_LAVA_LOOP",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 149,
+    "Description": "SFX_LAVA_FOUNTAIN",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 150,
+    "Description": "SFX_FIRE",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL6.PHD"
+  },
+  {
+    "InternalIndex": 151,
+    "Description": "SFX_DARTS",
+    "Creature": 0,
+    "Categories": [
+      21
+    ],
+    "SourceLevel": "LEVEL1.PHD"
+  },
+  {
+    "InternalIndex": 152,
+    "Description": "SFX_METAL_DOOR_CLOSE",
+    "Creature": 0,
+    "Categories": [
+      283,
+      281
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 153,
+    "Description": "SFX_METAL_DOOR_OPEN",
+    "Creature": 0,
+    "Categories": [
+      282,
+      281
+    ],
+    "SourceLevel": "LEVEL4.PHD"
+  },
+  {
+    "InternalIndex": 154,
+    "Description": "SFX_ALTAR_LOOP",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10B.PHD"
+  },
+  {
+    "InternalIndex": 155,
+    "Description": "SFX_POWERUP_FX",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10B.PHD"
+  },
+  {
+    "InternalIndex": 156,
+    "Description": "SFX_COWBOY_DEATH",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 157,
+    "Description": "SFX_BLACK_GOON_DEATH",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 158,
+    "Description": "SFX_LARSON_DEATH",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL8C.PHD"
+  },
+  {
+    "InternalIndex": 159,
+    "Description": "SFX_PIERRE_DEATH",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL7B.PHD"
+  },
+  {
+    "InternalIndex": 160,
+    "Description": "SFX_NATLA_DEATH",
+    "Creature": 2,
+    "Categories": [
+      111
+    ],
+    "SourceLevel": "LEVEL10C.PHD"
+  },
+  {
+    "InternalIndex": 161,
+    "Description": "SFX_TRAPDOOR_OPEN",
+    "Creature": 0,
+    "Categories": [
+      282,
+      281
+    ],
+    "SourceLevel": "LEVEL2.PHD"
+  },
+  {
+    "InternalIndex": 162,
+    "Description": "SFX_TRAPDOOR_CLOSE",
+    "Creature": 0,
+    "Categories": [
+      283,
+      281
+    ],
+    "SourceLevel": "LEVEL2.PHD"
+  },
+  {
+    "InternalIndex": 163,
+    "Description": "SFX_ATLANTEAN_EGG_LOOP",
+    "Creature": 0,
+    "Categories": [
+
+    ],
+    "SourceLevel": "LEVEL10B.PHD"
+  },
+  {
+    "InternalIndex": 164,
+    "Description": "SFX_ATLANTEAN_EGG_HATCH",
+    "Creature": 0,
+    "Categories": [
+      51,
+      52,
+      53
+    ],
+    "SourceLevel": "LEVEL10B.PHD"
+  },
+  {
+    "InternalIndex": 165,
+    "Description": "SFX_DRILL_ENGINE_START",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 166,
+    "Description": "SFX_DRILL_ENGINE_LOOP",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 167,
+    "Description": "SFX_CONVEYOR_BELT",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 168,
+    "Description": "SFX_HUT_LOWERED",
+    "Creature": 0,
+    "Categories": [
+      52
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 169,
+    "Description": "SFX_HUT_HIT_GROUND",
+    "Creature": 0,
+    "Categories": [
+      51
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 170,
+    "Description": "SFX_EXPLOSION_FX",
+    "Creature": 0,
+    "Categories": [
+      51
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 171,
+    "Description": "SFX_ATLANTEAN_DEATH",
+    "Creature": 3,
+    "Categories": [
+      111,
+      141,
+      171
+    ],
+    "SourceLevel": "LEVEL8A.PHD"
+  },
+  {
+    "InternalIndex": 172,
+    "Description": "SFX_CHAINBLOCK_FX",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL7B.PHD"
+  },
+  {
+    "InternalIndex": 174,
+    "Description": "SFX_GYM_HINT_01",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 175,
+    "Description": "SFX_GYM_HINT_02",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 176,
+    "Description": "SFX_GYM_HINT_03",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 177,
+    "Description": "SFX_GYM_HINT_04",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 178,
+    "Description": "SFX_GYM_HINT_05",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 179,
+    "Description": "SFX_GYM_HINT_06",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 180,
+    "Description": "SFX_GYM_HINT_07",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 181,
+    "Description": "SFX_GYM_HINT_08",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 182,
+    "Description": "SFX_GYM_HINT_09",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 183,
+    "Description": "SFX_GYM_HINT_10",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 184,
+    "Description": "SFX_GYM_HINT_11",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 185,
+    "Description": "SFX_GYM_HINT_12",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 186,
+    "Description": "SFX_GYM_HINT_13",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 187,
+    "Description": "SFX_GYM_HINT_14",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 188,
+    "Description": "SFX_GYM_HINT_15",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 189,
+    "Description": "SFX_GYM_HINT_16",
+    "Creature": 0,
+    "Categories": [
+      1,
+      111,
+      112
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 190,
+    "Description": "SFX_GYM_HINT_17",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 191,
+    "Description": "SFX_GYM_HINT_18",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 192,
+    "Description": "SFX_GYM_HINT_19",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 193,
+    "Description": "SFX_GYM_HINT_20",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 194,
+    "Description": "SFX_GYM_HINT_21",
+    "Creature": 0,
+    "Categories": [
+      1,
+      111,
+      112
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 195,
+    "Description": "SFX_GYM_HINT_22",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 196,
+    "Description": "SFX_GYM_HINT_23",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 197,
+    "Description": "SFX_GYM_HINT_24",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "GYM.PHD"
+  },
+  {
+    "InternalIndex": 199,
+    "Description": "SFX_BALDY_SPEECH",
+    "Creature": 0,
+    "Categories": [
+      1,
+      141,
+      111
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 200,
+    "Description": "SFX_COWBOY_SPEECH",
+    "Creature": 0,
+    "Categories": [
+      1,
+      111
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
+  }
+]

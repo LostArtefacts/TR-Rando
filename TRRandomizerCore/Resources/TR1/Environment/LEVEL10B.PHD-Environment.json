@@ -1,0 +1,157 @@
+{
+  "All": [],
+  "NonPurist": [
+    {
+      "Comments": "Fix the incorrect texture in the starting flip map room.",
+      "EMType": 21,
+      "TextureMap": {
+        "84": {
+          "85": {
+            "Rectangles": [
+              19
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If Lara's not in the default starting position, move the flipmap trigger to her new location.",
+        "ConditionType": 0,
+        "EntityIndex": 38,
+        "X": 57856,
+        "Y": 10240,
+        "Z": 10752,
+        "Room": 12
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 57856,
+            "Y": 10240,
+            "Z": 10752,
+            "Room": 12
+          },
+          "EntityLocation": 38
+        }
+      ]
+    }
+  ],
+  "Mirrored": [
+    {
+      "Comments": "Moves switch 16 otherwise the door here opens against it.",
+      "EMType": 44,
+      "EntityIndex": 16,
+      "TargetLocation": {
+        "X": 10752,
+        "Y": 7680,
+        "Z": 18944,
+        "Room": 7,
+        "Angle": 0
+      }
+    },
+    {
+      "Comments": "Switch the faces for above.",
+      "EMType": 21,
+      "TextureMap": {
+        "32": {
+          "7": {
+            "Rectangles": [ 407 ]
+          }
+        },
+        "4": {
+          "7": {
+            "Rectangles": [ 405 ]
+          }
+        }
+      }
+    },
+    {
+      "Comments": "Bacon Lara doesn't work when mirrored, so make an alternative scenario in this room.",
+      "EMType": 47,
+      "EntityIndices": [ 126 ],
+      "NewEnemyType": 1,
+      "Exclusions": [ 6 ]
+    },
+    {
+      "Comments": "Remove all triggers from the room.",
+      "EMType": 62,
+      "Rooms": [ 10 ]
+    },
+    {
+      "Comments": "Turn the trapdoor into a pickup.",
+      "EMType": 45,
+      "EntityIndex": 32,
+      "NewEntityType": 91
+    },
+    {
+      "Comments": "And move it.",
+      "EMType": 44,
+      "EntityIndex": 32,
+      "TargetLocation": {
+        "X": 33280,
+        "Y": -15104,
+        "Z": 57856,
+        "Room": 10
+      }
+    },
+    {
+      "Comments": "Moves the switch to the other side of the room.",
+      "EMType": 44,
+      "EntityIndex": 30,
+      "TargetLocation": {
+        "X": 42496,
+        "Y": -15104,
+        "Z": 65024,
+        "Room": 10,
+        "Angle": 16384
+      }
+    },
+    {
+      "Comments": "Amend faces for above.",
+      "EMType": 21,
+      "TextureMap": {
+        "32": {
+          "10": {
+            "Rectangles": [ 26 ]
+          }
+        },
+        "57": {
+          "10": {
+            "Rectangles": [ 306 ]
+          }
+        }
+      }
+    },
+    {
+      "Comments": "Add a trigger to open the door, now on a timer.",
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 42496,
+          "Y": -15104,
+          "Z": 65024,
+          "Room": 10
+        }
+      ],
+      "Trigger": {
+        "TrigType": 2,
+        "Mask": 31,
+        "SwitchOrKeyRef": 30,
+        "Timer": 15,
+        "Actions": [
+          {
+            "Parameter": 31
+          }
+        ]
+      }
+    }
+  ]
+}

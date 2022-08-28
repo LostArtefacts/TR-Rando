@@ -1,0 +1,652 @@
+{
+  "WAD": "tr1audio.wad",
+  "Tracks": [
+    {
+      "ID": 0,
+      "Name": "Blank",
+      "Offset": 0,
+      "Length": 0,
+      "Categories": [
+        0,
+        3
+      ],
+      "PrimaryCategory": 0
+    },
+    {
+      "ID": 2,
+      "Name": "Main Theme",
+      "Offset": 0,
+      "Length": 34322826,
+      "Categories": [
+        2,
+        6
+      ],
+      "PrimaryCategory": 2
+    },
+    {
+      "ID": 3,
+      "Name": "Where the Depths Unfold (shorter)",
+      "Offset": 34322826,
+      "Length": 10932186,
+      "Categories": [
+        8,
+        6
+      ],
+      "PrimaryCategory": 8
+    },
+    {
+      "ID": 4,
+      "Name": "Main Theme (shorter)",
+      "Offset": 45255012,
+      "Length": 21436218,
+      "Categories": [
+        8,
+        6
+      ],
+      "PrimaryCategory": 8
+    },
+    {
+      "ID": 5,
+      "Name": "Caves (shorter)",
+      "Offset": 66691230,
+      "Length": 20841162,
+      "Categories": [
+        1
+      ],
+      "PrimaryCategory": 1
+    },
+    {
+      "ID": 6,
+      "Name": "Time to Run",
+      "Offset": 87532392,
+      "Length": 13227738,
+      "Categories": [
+        7,
+        6,
+        2
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 7,
+      "Name": "A Friend Since Gone",
+      "Offset": 100760130,
+      "Length": 9504522,
+      "Categories": [
+        8,
+        6,
+        2
+      ],
+      "PrimaryCategory": 8
+    },
+    {
+      "ID": 8,
+      "Name": "The T-Rex (longer)",
+      "Offset": 110264652,
+      "Length": 11687178,
+      "Categories": [
+        7,
+        6,
+        2
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 9,
+      "Name": "A Long Way Down",
+      "Offset": 121951830,
+      "Length": 6717402,
+      "Categories": [
+        8,
+        6
+      ],
+      "PrimaryCategory": 8
+    },
+    {
+      "ID": 10,
+      "Name": "Longing for Home",
+      "Offset": 128669232,
+      "Length": 13632282,
+      "Categories": [
+        8,
+        6,
+        2
+      ],
+      "PrimaryCategory": 8
+    },
+    {
+      "ID": 11,
+      "Name": "Warning 1",
+      "Offset": 142301514,
+      "Length": 1145514,
+      "Categories": [
+        7,
+        4
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 12,
+      "Name": "Warning 2",
+      "Offset": 143447028,
+      "Length": 2290938,
+      "Categories": [
+        7,
+        4
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 13,
+      "Name": "Secret",
+      "Offset": 145737966,
+      "Length": 889146,
+      "Categories": [
+        4
+      ],
+      "PrimaryCategory": 4
+    },
+    {
+      "ID": 14,
+      "Name": "Fancy Secret",
+      "Offset": 146627112,
+      "Length": 1775850,
+      "Categories": [
+        7,
+        4
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 15,
+      "Name": "Awe",
+      "Offset": 148402962,
+      "Length": 1594746,
+      "Categories": [
+        8,
+        4
+      ],
+      "PrimaryCategory": 8
+    },
+    {
+      "ID": 16,
+      "Name": "The T-Rex (shorter)",
+      "Offset": 149997708,
+      "Length": 6498666,
+      "Categories": [
+        7,
+        8,
+        6
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 17,
+      "Name": "Where the Depths Unfold (longer)",
+      "Offset": 156496374,
+      "Length": 7206618,
+      "Categories": [
+        8,
+        6,
+        2
+      ],
+      "PrimaryCategory": 8
+    },
+    {
+      "ID": 18,
+      "Name": "Where the Depths Unfold (shorter)",
+      "Offset": 163702992,
+      "Length": 4113738,
+      "Categories": [
+        8,
+        4,
+        7
+      ],
+      "PrimaryCategory": 8
+    },
+    {
+      "ID": 19,
+      "Name": "Main Theme (shorter)",
+      "Offset": 167816730,
+      "Length": 15276330,
+      "Categories": [
+        8,
+        6,
+        2
+      ],
+      "PrimaryCategory": 8
+    },
+    {
+      "ID": 20,
+      "Name": "Time to Run (shorter)",
+      "Offset": 183093060,
+      "Length": 9212874,
+      "Categories": [
+        7,
+        4
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 21,
+      "Name": "Longing for Home (shorter)",
+      "Offset": 192305934,
+      "Length": 6919674,
+      "Categories": [
+        8,
+        4,
+        7
+      ],
+      "PrimaryCategory": 8
+    },
+    {
+      "ID": 22,
+      "Name": "Atlantis - A Grand Re-opening",
+      "Offset": 199225608,
+      "Length": 10849866,
+      "Categories": [
+        5
+      ],
+      "PrimaryCategory": 5
+    },
+    {
+      "ID": 23,
+      "Name": "ToQ - Well...",
+      "Offset": 210075474,
+      "Length": 9805578,
+      "Categories": [
+        5
+      ],
+      "PrimaryCategory": 5
+    },
+    {
+      "ID": 24,
+      "Name": "Mines Cutscene",
+      "Offset": 219881052,
+      "Length": 2359146,
+      "Categories": [
+        5,
+        7
+      ],
+      "PrimaryCategory": 5
+    },
+    {
+      "ID": 25,
+      "Name": "Here Lies Tihocan",
+      "Offset": 222240198,
+      "Length": 6145866,
+      "Categories": [
+        5
+      ],
+      "PrimaryCategory": 5
+    },
+    {
+      "ID": 26,
+      "Name": "Welcome to my home",
+      "Offset": 228386064,
+      "Length": 884442,
+      "Categories": [
+        9,
+        4
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 27,
+      "Name": "Use the D-Pad",
+      "Offset": 229270506,
+      "Length": 884442,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 28,
+      "Name": "Let's do some tumbling",
+      "Offset": 230154948,
+      "Length": 882090,
+      "Categories": [
+        9,
+        4
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 29,
+      "Name": "Training",
+      "Offset": 231037038,
+      "Length": 884442,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 30,
+      "Name": "The main hall",
+      "Offset": 231921480,
+      "Length": 1053786,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 31,
+      "Name": "Training",
+      "Offset": 232975266,
+      "Length": 884442,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 32,
+      "Name": "This used to be the ballroom",
+      "Offset": 233859708,
+      "Length": 1324266,
+      "Categories": [
+        9,
+        4
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 33,
+      "Name": "I don't actually run everywhere",
+      "Offset": 235183974,
+      "Length": 1333674,
+      "Categories": [
+        9,
+        4
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 34,
+      "Name": "Training",
+      "Offset": 236517648,
+      "Length": 992634,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 35,
+      "Name": "If you want to look around",
+      "Offset": 237510282,
+      "Length": 915018,
+      "Categories": [
+        9,
+        4
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 36,
+      "Name": "Training",
+      "Offset": 238425300,
+      "Length": 2636682,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 37,
+      "Name": "Training",
+      "Offset": 241061982,
+      "Length": 884442,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 38,
+      "Name": "Training",
+      "Offset": 241946424,
+      "Length": 884442,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 39,
+      "Name": "Training",
+      "Offset": 242830866,
+      "Length": 2483802,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 40,
+      "Name": "Training",
+      "Offset": 245314668,
+      "Length": 1505370,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 41,
+      "Name": "Nice",
+      "Offset": 246820038,
+      "Length": 884442,
+      "Categories": [
+        9,
+        4
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 42,
+      "Name": "Training",
+      "Offset": 247704480,
+      "Length": 882090,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 43,
+      "Name": "Training",
+      "Offset": 248586570,
+      "Length": 1265466,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 44,
+      "Name": "Training",
+      "Offset": 249852036,
+      "Length": 1114938,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 45,
+      "Name": "Training",
+      "Offset": 250966974,
+      "Length": 1390122,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 46,
+      "Name": "Training",
+      "Offset": 252357096,
+      "Length": 884442,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 47,
+      "Name": "Let's go for a swim",
+      "Offset": 253241538,
+      "Length": 884442,
+      "Categories": [
+        9,
+        4
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 48,
+      "Name": "Training",
+      "Offset": 254125980,
+      "Length": 884442,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 49,
+      "Name": "Air!",
+      "Offset": 255010422,
+      "Length": 2460282,
+      "Categories": [
+        9
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 50,
+      "Name": "Training",
+      "Offset": 257470704,
+      "Length": 882090,
+      "Categories": [
+        9,
+        4
+      ],
+      "PrimaryCategory": 9
+    },
+    {
+      "ID": 51,
+      "Name": "Say Cheese",
+      "Offset": 258352794,
+      "Length": 882090,
+      "Categories": [
+        7,
+        4
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 52,
+      "Name": "Ain't Nothin' Personal",
+      "Offset": 259234884,
+      "Length": 884442,
+      "Categories": [
+        7,
+        4
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 53,
+      "Name": "Shoot you to hell",
+      "Offset": 260119326,
+      "Length": 1281930,
+      "Categories": [
+        7,
+        4
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 54,
+      "Name": "Me and my brood",
+      "Offset": 261401256,
+      "Length": 884442,
+      "Categories": [
+        7,
+        4
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 55,
+      "Name": "A little late...",
+      "Offset": 262285698,
+      "Length": 1361898,
+      "Categories": [
+        7,
+        4
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 56,
+      "Name": "Firing at me?",
+      "Offset": 263647596,
+      "Length": 884442,
+      "Categories": [
+        7,
+        4
+      ],
+      "PrimaryCategory": 7
+    },
+    {
+      "ID": 57,
+      "Name": "Caves Ambience",
+      "Offset": 264532038,
+      "Length": 21556158,
+      "Categories": [
+        3,
+        2
+      ],
+      "PrimaryCategory": 3
+    },
+    {
+      "ID": 58,
+      "Name": "Cistern Ambience",
+      "Offset": 286088196,
+      "Length": 32659950,
+      "Categories": [
+        3,
+        2
+      ],
+      "PrimaryCategory": 3
+    },
+    {
+      "ID": 59,
+      "Name": "Wind Ambience",
+      "Offset": 318748146,
+      "Length": 33657198,
+      "Categories": [
+        3,
+        2
+      ],
+      "PrimaryCategory": 3
+    },
+    {
+      "ID": 60,
+      "Name": "Atlantis Ambience",
+      "Offset": 352405344,
+      "Length": 32401514,
+      "Categories": [
+        3,
+        2
+      ],
+      "PrimaryCategory": 3
+    }
+  ]
+}

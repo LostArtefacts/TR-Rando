@@ -1,4 +1,5 @@
-﻿using TREnvironmentEditor.Helpers;
+﻿using System;
+using TREnvironmentEditor.Helpers;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
@@ -9,6 +10,11 @@ namespace TREnvironmentEditor.Model.Types
         public bool? IsSkyboxVisible { get; set; }
         public bool? IsWindy { get; set; }
         public bool? IsSwamp { get; set; }
+
+        public override void ApplyToLevel(TRLevel level)
+        {
+            throw new NotSupportedException();
+        }
 
         public override void ApplyToLevel(TR2Level level)
         {

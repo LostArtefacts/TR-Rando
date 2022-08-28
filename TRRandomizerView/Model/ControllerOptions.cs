@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
+using TRGE.Core;
 using TRRandomizerCore;
 using TRRandomizerCore.Globalisation;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Secrets;
 
 namespace TRRandomizerView.Model
 {
@@ -17,21 +20,24 @@ namespace TRRandomizerView.Model
 
         private readonly ManagedSeed _secretRewardsControl;
         private readonly ManagedSeedNumeric _levelSequencingControl, _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl, _nightLevelsControl;
-        private readonly ManagedSeedBool _audioTrackControl;
+        private readonly ManagedSeedBool _audioTrackControl, _healthLevelsControl;
 
         private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl, _randomTextControl, _randomStartControl, _randomEnvironmentControl;
 
         private bool _disableDemos, _autoLaunchGame, _puristMode;
 
         private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras;
-        private BoolItemControlClass _includeKeyItems;
+        private TRSecretCountMode _secretCountMode;
+        private uint _minSecretCount, _maxSecretCount;
+        private BoolItemControlClass _includeKeyItems, _randomizeItemTypes, _randomizeItemLocations;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance;
-        private BoolItemControlClass _persistTextures, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
-        private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _linkCreatureSFX;
+        private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
+        private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
         private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders;
+        private BoolItemControlClass _disableHealingBetweenLevels, _disableMedpacks;
         private uint _mirroredLevelCount;
         private bool _mirrorAssaultCourse;
         private uint _haircutLevelCount;
@@ -59,7 +65,7 @@ namespace TRRandomizerView.Model
         private uint _uncontrolledSFXCount;
         private bool _uncontrolledSFXAssaultCourse;
 
-        private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls;
+        private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls, _healthBoolItemControls;
         private List<BoolItemIDControlClass> _selectableEnemies;
         private bool _useEnemyExclusions, _showExclusionWarnings;
 
@@ -72,6 +78,666 @@ namespace TRRandomizerView.Model
         private Language _gameStringLanguage;
 
         private int _levelCount, _maximumLevelCount, _defaultUnarmedLevelCount, _defaultAmmolessLevelCount, _defaultSunsetCount;
+
+        private uint _minStartingHealth, _maxStartingHealth, _medilessLevelCount;
+
+        #region T1M Sepcifics
+        
+        private bool _enableGameModes;
+        public bool EnableGameModes
+        {
+            get => _enableGameModes;
+            set
+            {
+                _enableGameModes = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableSaveCrystals;
+        public bool EnableSaveCrystals
+        {
+            get => _enableSaveCrystals;
+            set
+            {
+                _enableSaveCrystals = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private double _demoDelay;
+        public double DemoDelay
+        {
+            get => _demoDelay;
+            set
+            {
+                _demoDelay = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private double _drawDistanceFade;
+        public double DrawDistanceFade
+        {
+            get => _drawDistanceFade;
+            set
+            {
+                _drawDistanceFade = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private double _drawDistanceMax;
+        public double DrawDistanceMax
+        {
+            get => _drawDistanceMax;
+            set
+            {
+                _drawDistanceMax = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private Vector3 _waterColor;
+        public Vector3 WaterColor
+        {
+            get => _waterColor;
+            set
+            {
+                _waterColor = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public double WaterColorR
+        {
+            get => _waterColor.X;
+            set
+            {
+                _waterColor.X = (float)value;
+                FirePropertyChanged(nameof(WaterColor));
+            }
+        }
+
+        public double WaterColorG
+        {
+            get => _waterColor.Y;
+            set
+            {
+                _waterColor.Y = (float)value;
+                FirePropertyChanged(nameof(WaterColor));
+            }
+        }
+
+        public double WaterColorB
+        {
+            get => _waterColor.Z;
+            set
+            {
+                _waterColor.Z = (float)value;
+                FirePropertyChanged(nameof(WaterColor));
+            }
+        }
+
+        private bool _disableMagnums;
+        public bool DisableMagnums
+        {
+            get => _disableMagnums;
+            set
+            {
+                _disableMagnums = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _disableUzis;
+        public bool DisableUzis
+        {
+            get => _disableUzis;
+            set
+            {
+                _disableUzis = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _disableShotgun;
+        public bool DisableShotgun
+        {
+            get => _disableShotgun;
+            set
+            {
+                _disableShotgun = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableDeathsCounter;
+        public bool EnableDeathsCounter
+        {
+            get => _enableDeathsCounter;
+            set
+            {
+                _enableDeathsCounter = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableEnemyHealthbar;
+        public bool EnableEnemyHealthbar
+        {
+            get => _enableEnemyHealthbar;
+            set
+            {
+                _enableEnemyHealthbar = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableEnhancedLook;
+        public bool EnableEnhancedLook
+        {
+            get => _enableEnhancedLook;
+            set
+            {
+                _enableEnhancedLook = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableShotgunFlash;
+        public bool EnableShotgunFlash
+        {
+            get => _enableShotgunFlash;
+            set
+            {
+                _enableShotgunFlash = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixShotgunTargeting;
+        public bool FixShotgunTargeting
+        {
+            get => _fixShotgunTargeting;
+            set
+            {
+                _fixShotgunTargeting = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableNumericKeys;
+        public bool EnableNumericKeys
+        {
+            get => _enableNumericKeys;
+            set
+            {
+                _enableNumericKeys = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableTr3Sidesteps;
+        public bool EnableTr3Sidesteps
+        {
+            get => _enableTr3Sidesteps;
+            set
+            {
+                _enableTr3Sidesteps = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableCheats;
+        public bool EnableCheats
+        {
+            get => _enableCheats;
+            set
+            {
+                _enableCheats = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableDetailsStats;
+        public bool EnableDetailedStats
+        {
+            get => _enableDetailsStats;
+            set
+            {
+                _enableDetailsStats = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableCompassStats;
+        public bool EnableCompassStats
+        {
+            get => _enableCompassStats;
+            set
+            {
+                _enableCompassStats = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableTotalStats;
+        public bool EnableTotalStats
+        {
+            get => _enableTotalStats;
+            set
+            {
+                _enableTotalStats = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableTimerInInventory;
+        public bool EnableTimerInInventory
+        {
+            get => _enableTimerInInventory;
+            set
+            {
+                _enableTimerInInventory = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableSmoothBars;
+        public bool EnableSmoothBars
+        {
+            get => _enableSmoothBars;
+            set
+            {
+                _enableSmoothBars = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableFadeEffects;
+        public bool EnableFadeEffects
+        {
+            get => _enableFadeEffects;
+            set
+            {
+                _enableFadeEffects = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRMenuStyle _menuStyle;
+        public TRMenuStyle MenuStyle
+        {
+            get => _menuStyle;
+            set
+            {
+                _menuStyle = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRHealthbarMode _healthbarShowingMode;
+        public TRHealthbarMode HealthbarShowingMode
+        {
+            get => _healthbarShowingMode;
+            set
+            {
+                _healthbarShowingMode = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRUILocation _healthbarLocation;
+        public TRUILocation HealthbarLocation
+        {
+            get => _healthbarLocation;
+            set
+            {
+                _healthbarLocation = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRUIColour _healthbarColor;
+        public TRUIColour HealthbarColor
+        {
+            get => _healthbarColor;
+            set
+            {
+                _healthbarColor = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRAirbarMode _airbarShowingMode;
+        public TRAirbarMode AirbarShowingMode
+        {
+            get => _airbarShowingMode;
+            set
+            {
+                _airbarShowingMode = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRUILocation _airbarLocation;
+        public TRUILocation AirbarLocation
+        {
+            get => _airbarLocation;
+            set
+            {
+                _airbarLocation = value;
+            }
+        }
+
+        private TRUIColour _airbarColor;
+        public TRUIColour AirbarColor
+        {
+            get => _airbarColor;
+            set
+            {
+                _airbarColor = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRUILocation _enemyHealthbarLocation;
+        public TRUILocation EnemyHealthbarLocation
+        {
+            get => _enemyHealthbarLocation;
+            set
+            {
+                _enemyHealthbarLocation = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRUIColour _enemyHealthbarColor;
+        public TRUIColour EnemyHealthbarColor
+        {
+            get => _enemyHealthbarColor;
+            set
+            {
+                _enemyHealthbarColor = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixTihocanSecretSound;
+        public bool FixTihocanSecretSound
+        {
+            get => _fixTihocanSecretSound;
+            set
+            {
+                _fixTihocanSecretSound = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixPyramidSecretTrigger;
+        public bool FixPyramidSecretTrigger
+        {
+            get => _fixPyramidSecretTrigger;
+            set
+            {
+                _fixPyramidSecretTrigger = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixSecretsKillingMusic;
+        public bool FixSecretsKillingMusic
+        {
+            get => _fixSecretsKillingMusic;
+            set
+            {
+                _fixSecretsKillingMusic = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixDescendingGlitch;
+        public bool FixDescendingGlitch
+        {
+            get => _fixDescendingGlitch;
+            set
+            {
+                _fixDescendingGlitch = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixWallJumpGlitch;
+        public bool FixWallJumpGlitch
+        {
+            get => _fixWallJumpGlitch;
+            set
+            {
+                _fixWallJumpGlitch = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixBridgeCollision;
+        public bool FixBridgeCollision
+        {
+            get => _fixBridgeCollision;
+            set
+            {
+                _fixBridgeCollision = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixQwopGlitch;
+        public bool FixQwopGlitch
+        {
+            get => _fixQwopGlitch;
+            set
+            {
+                _fixQwopGlitch = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fixAlligatorAi;
+        public bool FixAlligatorAi
+        {
+            get => _fixAlligatorAi;
+            set
+            {
+                _fixAlligatorAi = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _changePierreSpawn;
+        public bool ChangePierreSpawn
+        {
+            get => _changePierreSpawn;
+            set
+            {
+                _changePierreSpawn = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private int _fovValue;
+        public int FovValue
+        {
+            get => _fovValue;
+            set
+            {
+                _fovValue = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _fovVertical;
+        public bool FovVertical
+        {
+            get => _fovVertical;
+            set
+            {
+                _fovVertical = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _disableFmv;
+        public bool DisableFmv
+        {
+            get => _disableFmv;
+            set
+            {
+                _disableFmv = value;
+            }
+        }
+
+        private bool _disableCine;
+        public bool DisableCine
+        {
+            get => _disableCine;
+            set
+            {
+                _disableCine = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _disableMusicInMenu;
+        public bool DisableMusicInMenu
+        {
+            get => _disableMusicInMenu;
+            set
+            {
+                _disableMusicInMenu = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _disableMusicInInventory;
+        public bool DisableMusicInInventory
+        {
+            get => _disableMusicInInventory;
+            set
+            {
+                _disableMusicInInventory = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private double _anisotropyFilter;
+        public double AnisotropyFilter
+        {
+            get => _anisotropyFilter;
+            set
+            {
+                _anisotropyFilter = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private int _resolutionWidth;
+        public int ResolutionWidth
+        {
+            get => _resolutionWidth;
+            set
+            {
+                _resolutionWidth = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private int _resolutionHeight;
+        public int ResolutionHeight
+        {
+            get => _resolutionHeight;
+            set
+            {
+                _resolutionHeight = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableRoundShadow;
+        public bool EnableRoundShadow
+        {
+            get => _enableRoundShadow;
+            set
+            {
+                _enableRoundShadow = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enable3dPickups;
+        public bool Enable3dPickups
+        {
+            get => _enable3dPickups;
+            set
+            {
+                _enable3dPickups = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private TRScreenshotFormat _screenshotFormat;
+        public TRScreenshotFormat ScreenshotFormat
+        {
+            get => _screenshotFormat;
+            set
+            {
+                _screenshotFormat = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _walkToItems;
+        public bool WalkToItems
+        {
+            get => _walkToItems;
+            set
+            {
+                _walkToItems = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private int _maximumSaveSlots;
+        public int MaximumSaveSlots
+        {
+            get => _maximumSaveSlots;
+            set
+            {
+                _maximumSaveSlots = value;
+            }
+        }
+
+        private bool _revertToPistols;
+        public bool RevertToPistols
+        {
+            get => _revertToPistols;
+            set
+            {
+                _revertToPistols = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableEnhancedSaves;
+        public bool EnableEnhancedSaves
+        {
+            get => _enableEnhancedSaves;
+            set
+            {
+                _enableEnhancedSaves = value;
+                FirePropertyChanged();
+            }
+        }
+
+        #endregion
 
         public int TotalLevelCount
         {
@@ -135,11 +801,12 @@ namespace TRRandomizerView.Model
             InvisibleLevelCount = (uint)Math.Min(InvisibleLevelCount, MaximumLevelCount);
             WireframeLevelCount = (uint)Math.Min(WireframeLevelCount, MaximumLevelCount);
             UncontrolledSFXCount = (uint)Math.Min(UncontrolledSFXCount, MaximumLevelCount);
+            MedilessLevelCount = (uint)Math.Min(MedilessLevelCount, MaximumLevelCount);
         }
 
         public bool RandomizationPossible
         {
-            get => RandomizeLevelSequencing || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeSunsets ||
+            get => RandomizeLevelSequencing || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeHealth || RandomizeSunsets ||
                    RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits || 
                    RandomizeText || RandomizeNightMode || RandomizeStartPosition || RandomizeEnvironment;
         }
@@ -262,6 +929,78 @@ namespace TRRandomizerView.Model
             set
             {
                 _secretRewardsControl.Seed = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool RandomizeHealth
+        {
+            get => _healthLevelsControl.IsActive;
+            set
+            {
+                _healthLevelsControl.IsActive = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int HealthSeed
+        {
+            get => _healthLevelsControl.Seed;
+            set
+            {
+                _healthLevelsControl.Seed = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint MedilessLevelCount
+        {
+            get => _medilessLevelCount;
+            set
+            {
+                _medilessLevelCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint MinStartingHealth
+        {
+            get => _minStartingHealth;
+            set
+            {
+                _minStartingHealth = value;
+                FirePropertyChanged();
+                FirePropertyChanged(nameof(MaxStartingHealth));
+            }
+        }
+
+        public uint MaxStartingHealth
+        {
+            get => _maxStartingHealth;
+            set
+            {
+                _maxStartingHealth = value;
+                FirePropertyChanged();
+                FirePropertyChanged(nameof(MinStartingHealth));
+            }
+        }
+
+        public BoolItemControlClass DisableHealingBetweenLevels
+        {
+            get => _disableHealingBetweenLevels;
+            set
+            {
+                _disableHealingBetweenLevels = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass DisableMedpacks
+        {
+            get => _disableMedpacks;
+            set
+            {
+                _disableMedpacks = value;
                 FirePropertyChanged();
             }
         }
@@ -526,6 +1265,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass ChangeDoorSFX
+        {
+            get => _changeDoorSFX;
+            set
+            {
+                _changeDoorSFX = value;
+                FirePropertyChanged();
+            }
+        }
+
         public BoolItemControlClass LinkCreatureSFX
         {
             get => _linkCreatureSFX;
@@ -616,6 +1365,26 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RandomizeItemTypes
+        {
+            get => _randomizeItemTypes;
+            set
+            {
+                _randomizeItemTypes = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RandomizeItemPositions
+        {
+            get => _randomizeItemLocations;
+            set
+            {
+                _randomizeItemLocations = value;
+                FirePropertyChanged();
+            }
+        }
+
         public ItemDifficulty RandoItemDifficulty
         {
             get => _randoItemDifficulty;
@@ -682,6 +1451,16 @@ namespace TRRandomizerView.Model
             set
             {
                 _persistTextures = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RandomizeWaterColour
+        {
+            get => _randomizeWaterColour;
+            set
+            {
+                _randomizeWaterColour = value;
                 FirePropertyChanged();
             }
         }
@@ -977,6 +1756,39 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public TRSecretCountMode SecretCountMode
+        {
+            get => _secretCountMode;
+            set
+            {
+                _secretCountMode = value;
+                FirePropertyChanged();
+                FirePropertyChanged(nameof(IsCustomizedSecretModeCount));
+            }
+        }
+
+        public bool IsCustomizedSecretModeCount => SecretCountMode == TRSecretCountMode.Customized;
+
+        public uint MinSecretCount
+        {
+            get => _minSecretCount;
+            set
+            {
+                _minSecretCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint MaxSecretCount
+        {
+            get => _maxSecretCount;
+            set
+            {
+                _maxSecretCount = value;
+                FirePropertyChanged();
+            }
+        }
+
         public BoolItemControlClass DocileWillard
         {
             get => _docileWillard;
@@ -1147,6 +1959,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public List<BoolItemControlClass> HealthBoolItemControls
+        {
+            get => _healthBoolItemControls;
+            set
+            {
+                _healthBoolItemControls = value;
+                FirePropertyChanged();
+            }
+        }
+
         public List<BoolItemControlClass> ItemBoolItemControls
         {
             get => _itemBoolItemControls;
@@ -1272,6 +2094,7 @@ namespace TRRandomizerView.Model
             _unarmedLevelsControl = new ManagedSeedNumeric();
             _ammolessLevelsControl = new ManagedSeedNumeric();
             _secretRewardsControl = new ManagedSeed();
+            _healthLevelsControl = new ManagedSeedBool();
             _sunsetLevelsControl = new ManagedSeedNumeric();
             _nightLevelsControl = new ManagedSeedNumeric();
             _audioTrackControl = new ManagedSeedBool();
@@ -1308,10 +2131,22 @@ namespace TRRandomizerView.Model
 
             // Items
             Binding randomizeItemsBinding = new Binding(nameof(RandomizeItems)) { Source = this };
+            RandomizeItemTypes = new BoolItemControlClass
+            {
+                Title = "Randomize types",
+                Description = "The types of standard pickups will be randomized e.g. a small medi may become a shotgun."
+            };
+            BindingOperations.SetBinding(RandomizeItemTypes, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
+            RandomizeItemPositions = new BoolItemControlClass
+            {
+                Title = "Randomize positions",
+                Description = "The positions of standard pickups will be randomized."
+            };
+            BindingOperations.SetBinding(RandomizeItemPositions, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
             IncludeKeyItems = new BoolItemControlClass()
             {
-                Title = "Enable key items",
-                Description = "Most key items will be randomized. Keys will spawn before their respective locks."
+                Title = "Include key items",
+                Description = "Most key item positions will be randomized. Keys will spawn before their respective locks."
             };
             BindingOperations.SetBinding(IncludeKeyItems, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
 
@@ -1356,6 +2191,12 @@ namespace TRRandomizerView.Model
                 Description = "Each unique texture will only be randomized once, rather than once per level."
             };
             BindingOperations.SetBinding(PersistTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
+            RandomizeWaterColour = new BoolItemControlClass()
+            {
+                Title = "Randomize water colour",
+                Description = "Change the colour of water in each level."
+            };
+            BindingOperations.SetBinding(RandomizeWaterColour, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
             RetainMainLevelTextures = new BoolItemControlClass
             {
                 Title = "Use original main level textures",
@@ -1407,6 +2248,12 @@ namespace TRRandomizerView.Model
                 Description = "Randomize the sound made by crashes and explosions."
             };
             BindingOperations.SetBinding(ChangeCrashSFX, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
+            ChangeDoorSFX = new BoolItemControlClass
+            {
+                Title = "Change door sound effects",
+                Description = "Randomize door, gate and switch sound effects."
+            };
+            BindingOperations.SetBinding(ChangeDoorSFX, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
             ChangeEnemySFX = new BoolItemControlClass
             {
                 Title = "Change enemy sound effects",
@@ -1480,6 +2327,20 @@ namespace TRRandomizerView.Model
             };
             BindingOperations.SetBinding(RandomizeLadders, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
 
+            Binding randomizeHealthBinding = new Binding(nameof(RandomizeHealth)) { Source = this };
+            DisableHealingBetweenLevels = new BoolItemControlClass
+            {
+                Title = "Disable healing between levels",
+                Description = "Lara's health will be carried over from level to level and will not be restored."
+            };
+            BindingOperations.SetBinding(DisableHealingBetweenLevels, BoolItemControlClass.IsActiveProperty, randomizeHealthBinding);
+            DisableMedpacks = new BoolItemControlClass
+            {
+                Title = "Disable medi-packs",
+                Description = "Disable all med-packs throughout the game."
+            };
+            BindingOperations.SetBinding(DisableMedpacks, BoolItemControlClass.IsActiveProperty, randomizeHealthBinding);
+
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -1487,7 +2348,7 @@ namespace TRRandomizerView.Model
             };
             ItemBoolItemControls = new List<BoolItemControlClass>()
             {
-                _includeKeyItems,
+                _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems
             };
             EnemyBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -1495,12 +2356,12 @@ namespace TRRandomizerView.Model
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
-                _persistTextures, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
+                _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
             };
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
                 _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX,
-                _changeCrashSFX, _changeEnemySFX, _linkCreatureSFX
+                _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX
             };
             OutfitBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -1518,6 +2379,10 @@ namespace TRRandomizerView.Model
             {
                 _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders
             };
+            HealthBoolItemControls = new List<BoolItemControlClass>
+            {
+                _disableHealingBetweenLevels, _disableMedpacks
+            };
         }
 
         private void AdjustAvailableOptions()
@@ -1526,13 +2391,25 @@ namespace TRRandomizerView.Model
             // individual settings based on what's available.
             _removeRobeDagger.IsAvailable = _retainLevelTextures.IsAvailable = IsOutfitDaggerSupported;
 
+            _separateSecretTracks.IsAvailable = IsSecretAudioSupported;
+
             _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = IsSFXSupported;
 
             _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
 
             _maximiseDragonAppearance.IsAvailable = _swapEnemyAppearance.IsAvailable = IsOutfitDaggerSupported;
 
-            _docileWillard.IsAvailable = !IsBirdMonsterBehaviourTypeSupported;
+            _protectMonks.IsAvailable = !IsTR1;
+            _docileWillard.IsAvailable = IsTR3;
+
+            _includeKeyItems.IsAvailable = IsKeyItemTypeSupported;
+
+            _allowGlitched.IsAvailable = IsGlitchedSecretsSupported;
+            _isHardSecrets.IsAvailable = IsHardSecretsSupported;
+
+            _retainSecretSpriteTextures.IsAvailable = IsSecretTexturesTypeSupported;
+            _retainKeySpriteTextures.IsAvailable = IsKeyItemTexturesTypeSupported;
+            _randomizeWaterColour.IsAvailable = IsWaterColourTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -1559,6 +2436,14 @@ namespace TRRandomizerView.Model
 
             RandomizeSecretRewards = _controller.RandomizeSecretRewards;
             SecretRewardSeed = _controller.SecretRewardSeed;
+
+            RandomizeHealth = _controller.RandomizeHealth;
+            HealthSeed = _controller.HealthSeed;
+            MedilessLevelCount = _controller.MedilessLevelCount;
+            MinStartingHealth = _controller.MinStartingHealth;
+            MaxStartingHealth = _controller.MaxStartingHealth;
+            DisableHealingBetweenLevels.Value = _controller.DisableHealingBetweenLevels;
+            DisableMedpacks.Value = _controller.DisableMedpacks;
 
             RandomizeSunsets = _controller.RandomizeSunsets;
             SunsetsSeed = _controller.SunsetsSeed;
@@ -1588,6 +2473,7 @@ namespace TRRandomizerView.Model
             ChangeWeaponSFX.Value = _controller.ChangeWeaponSFX;
             ChangeCrashSFX.Value = _controller.ChangeCrashSFX;
             ChangeEnemySFX.Value = _controller.ChangeEnemySFX;
+            ChangeDoorSFX.Value = _controller.ChangeDoorSFX;
             LinkCreatureSFX.Value = _controller.LinkCreatureSFX;
             UncontrolledSFXCount = _controller.UncontrolledSFXCount;
             UncontrolledSFXAssaultCourse = _controller.UncontrolledSFXAssaultCourse;
@@ -1595,6 +2481,8 @@ namespace TRRandomizerView.Model
             RandomizeItems = _controller.RandomizeItems;
             ItemSeed = _controller.ItemSeed;
             IncludeKeyItems.Value = _controller.IncludeKeyItems;
+            RandomizeItemTypes.Value = _controller.RandomizeItemTypes;
+            RandomizeItemPositions.Value = _controller.RandomizeItemPositions;
             RandoItemDifficulty = _controller.RandoItemDifficulty;
 
             RandomizeEnemies = _controller.RandomizeEnemies;
@@ -1615,10 +2503,14 @@ namespace TRRandomizerView.Model
             IsHardSecrets.Value = _controller.HardSecrets;
             IsGlitchedSecrets.Value = _controller.GlitchedSecrets;
             UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
+            SecretCountMode = _controller.SecretCountMode;
+            MinSecretCount = _controller.MinSecretCount;
+            MaxSecretCount = _controller.MaxSecretCount;
 
             RandomizeTextures = _controller.RandomizeTextures;
             TextureSeed = _controller.TextureSeed;
             PersistTextures.Value = _controller.PersistTextures;
+            RandomizeWaterColour.Value = _controller.RandomizeWaterColour;
             RetainMainLevelTextures.Value = _controller.RetainMainLevelTextures;
             RetainKeySpriteTextures.Value = _controller.RetainKeySpriteTextures;
             RetainSecretSpriteTextures.Value = _controller.RetainSecretSpriteTextures;
@@ -1662,6 +2554,66 @@ namespace TRRandomizerView.Model
             AutoLaunchGame = _controller.AutoLaunchGame;
             PuristMode = _controller.PuristMode;
 
+            if (IsTR1Main)
+            {
+                EnableGameModes = _controller.EnableGameModes;
+                EnableSaveCrystals = _controller.EnableSaveCrystals;
+                DemoDelay = _controller.DemoDelay;
+                DrawDistanceFade = _controller.DrawDistanceFade;
+                DrawDistanceMax = _controller.DrawDistanceMax;
+                WaterColor = _controller.WaterColor;
+                DisableMagnums = _controller.DisableMagnums;
+                DisableUzis = _controller.DisableUzis;
+                DisableShotgun = _controller.DisableShotgun;
+                EnableDeathsCounter = _controller.EnableDeathsCounter;
+                EnableEnemyHealthbar = _controller.EnableEnemyHealthbar;
+                EnableEnhancedLook = _controller.EnableEnhancedLook;
+                EnableShotgunFlash = _controller.EnableShotgunFlash;
+                FixShotgunTargeting = _controller.FixShotgunTargeting;
+                EnableNumericKeys = _controller.EnableNumericKeys;
+                EnableTr3Sidesteps = _controller.EnableTr3Sidesteps;
+                EnableCheats = _controller.EnableCheats;
+                EnableDetailedStats = _controller.EnableDetailedStats;
+                EnableCompassStats = _controller.EnableCompassStats;
+                EnableTotalStats = _controller.EnableTotalStats;
+                EnableTimerInInventory = _controller.EnableTimerInInventory;
+                EnableSmoothBars = _controller.EnableSmoothBars;
+                EnableFadeEffects = _controller.EnableFadeEffects;
+                MenuStyle = _controller.MenuStyle;
+                HealthbarShowingMode = _controller.HealthbarShowingMode;
+                HealthbarLocation = _controller.HealthbarLocation;
+                HealthbarColor = _controller.HealthbarColor;
+                AirbarShowingMode = _controller.AirbarShowingMode;
+                AirbarLocation = _controller.AirbarLocation;
+                AirbarColor = _controller.AirbarColor;
+                EnemyHealthbarLocation = _controller.EnemyHealthbarLocation;
+                EnemyHealthbarColor = _controller.EnemyHealthbarColor;
+                FixTihocanSecretSound = _controller.FixTihocanSecretSound;
+                FixPyramidSecretTrigger = _controller.FixPyramidSecretTrigger;
+                FixSecretsKillingMusic = _controller.FixSecretsKillingMusic;
+                FixDescendingGlitch = _controller.FixDescendingGlitch;
+                FixWallJumpGlitch = _controller.FixWallJumpGlitch;
+                FixBridgeCollision = _controller.FixBridgeCollision;
+                FixQwopGlitch = _controller.FixQwopGlitch;
+                FixAlligatorAi = _controller.FixAlligatorAi;
+                ChangePierreSpawn = _controller.ChangePierreSpawn;
+                FovValue = _controller.FovValue;
+                FovVertical = _controller.FovVertical;
+                DisableFmv = _controller.DisableFmv;
+                DisableCine = _controller.DisableCine;
+                DisableMusicInMenu = _controller.DisableMusicInMenu;
+                DisableMusicInInventory = _controller.DisableMusicInInventory;
+                AnisotropyFilter = _controller.AnisotropyFilter;
+                ResolutionWidth = _controller.ResolutionWidth;
+                ResolutionHeight = _controller.ResolutionHeight;
+                EnableRoundShadow = _controller.EnableRoundShadow;
+                Enable3dPickups = _controller.Enable3dPickups;
+                ScreenshotFormat = _controller.ScreenshotFormat;
+                WalkToItems = _controller.WalkToItems;
+                MaximumSaveSlots = _controller.MaximumSaveSlots;
+                RevertToPistols = _controller.RevertToPistols;
+                EnableEnhancedSaves = _controller.EnableEnhancedSaves;
+            }
 
             FireSupportPropertiesChanged();
         }
@@ -1700,6 +2652,10 @@ namespace TRRandomizerView.Model
             if (RandomizeAmmolessLevels)
             {
                 AmmolessLevelsSeed = rng.Next(1, MaxSeedValue);
+            }
+            if (RandomizeHealth)
+            {
+                HealthSeed = rng.Next(1, MaxSeedValue);
             }
             if (RandomizeSecretRewards)
             {
@@ -1764,6 +2720,10 @@ namespace TRRandomizerView.Model
             if (RandomizeAmmolessLevels)
             {
                 AmmolessLevelsSeed = seed;
+            }
+            if (RandomizeHealth)
+            {
+                HealthSeed = seed;
             }
             if (RandomizeSecretRewards)
             {
@@ -1841,6 +2801,14 @@ namespace TRRandomizerView.Model
             _controller.RandomizeSecretRewards = RandomizeSecretRewards;
             _controller.SecretRewardSeed = SecretRewardSeed;
 
+            _controller.RandomizeHealth = RandomizeHealth;
+            _controller.HealthSeed = HealthSeed;
+            _controller.MedilessLevelCount = MedilessLevelCount;
+            _controller.MinStartingHealth = MinStartingHealth;
+            _controller.MaxStartingHealth = MaxStartingHealth;
+            _controller.DisableHealingBetweenLevels = DisableHealingBetweenLevels.Value;
+            _controller.DisableMedpacks = DisableMedpacks.Value;
+
             _controller.RandomizeSunsets = RandomizeSunsets;
             _controller.SunsetsSeed = SunsetsSeed;
             _controller.SunsetCount = SunsetCount;
@@ -1867,6 +2835,7 @@ namespace TRRandomizerView.Model
             _controller.ChangeWeaponSFX = ChangeWeaponSFX.Value;
             _controller.ChangeCrashSFX = ChangeCrashSFX.Value;
             _controller.ChangeEnemySFX = ChangeEnemySFX.Value;
+            _controller.ChangeDoorSFX = ChangeDoorSFX.Value;
             _controller.LinkCreatureSFX = LinkCreatureSFX.Value;
             _controller.UncontrolledSFXCount = UncontrolledSFXCount;
             _controller.UncontrolledSFXAssaultCourse = UncontrolledSFXAssaultCourse;
@@ -1874,6 +2843,8 @@ namespace TRRandomizerView.Model
             _controller.RandomizeItems = RandomizeItems;
             _controller.ItemSeed = ItemSeed;
             _controller.IncludeKeyItems = IncludeKeyItems.Value;
+            _controller.RandomizeItemTypes = RandomizeItemTypes.Value;
+            _controller.RandomizeItemPositions = RandomizeItemPositions.Value;
             _controller.RandoItemDifficulty = RandoItemDifficulty;
 
             _controller.RandomizeEnemies = RandomizeEnemies;
@@ -1897,10 +2868,14 @@ namespace TRRandomizerView.Model
             _controller.HardSecrets = IsHardSecrets.Value;
             _controller.GlitchedSecrets = IsGlitchedSecrets.Value;
             _controller.UseRewardRoomCameras = UseRewardRoomCameras.Value;
+            _controller.SecretCountMode = SecretCountMode;
+            _controller.MinSecretCount = MinSecretCount;
+            _controller.MaxSecretCount = MaxSecretCount;
 
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
             _controller.PersistTextures = PersistTextures.Value;
+            _controller.RandomizeWaterColour = RandomizeWaterColour.Value;
             _controller.RetainMainLevelTextures = RetainMainLevelTextures.Value;
             _controller.RetainKeySpriteTextures = RetainKeySpriteTextures.Value;
             _controller.RetainSecretSpriteTextures = RetainSecretSpriteTextures.Value;
@@ -1942,6 +2917,67 @@ namespace TRRandomizerView.Model
             _controller.DisableDemos = DisableDemos;
             _controller.AutoLaunchGame = AutoLaunchGame;
             _controller.PuristMode = PuristMode;
+
+            if (IsTR1Main)
+            {
+                _controller.EnableGameModes = EnableGameModes;
+                _controller.EnableSaveCrystals = EnableSaveCrystals;
+                _controller.DemoDelay = DemoDelay;
+                _controller.DrawDistanceFade = DrawDistanceFade;
+                _controller.DrawDistanceMax = DrawDistanceMax;
+                _controller.WaterColor = WaterColor;
+                _controller.DisableMagnums = DisableMagnums;
+                _controller.DisableUzis = DisableUzis;
+                _controller.DisableShotgun = DisableShotgun;
+                _controller.EnableDeathsCounter = EnableDeathsCounter;
+                _controller.EnableEnemyHealthbar = EnableEnemyHealthbar;
+                _controller.EnableEnhancedLook = EnableEnhancedLook;
+                _controller.EnableShotgunFlash = EnableShotgunFlash;
+                _controller.FixShotgunTargeting = FixShotgunTargeting;
+                _controller.EnableNumericKeys = EnableNumericKeys;
+                _controller.EnableTr3Sidesteps = EnableTr3Sidesteps;
+                _controller.EnableCheats = EnableCheats;
+                _controller.EnableDetailedStats = EnableDetailedStats;
+                _controller.EnableCompassStats = EnableCompassStats;
+                _controller.EnableTotalStats = EnableTotalStats;
+                _controller.EnableTimerInInventory = EnableTimerInInventory;
+                _controller.EnableSmoothBars = EnableSmoothBars;
+                _controller.EnableFadeEffects = EnableFadeEffects;
+                _controller.MenuStyle = MenuStyle;
+                _controller.HealthbarShowingMode = HealthbarShowingMode;
+                _controller.HealthbarLocation = HealthbarLocation;
+                _controller.HealthbarColor = HealthbarColor;
+                _controller.AirbarShowingMode = AirbarShowingMode;
+                _controller.AirbarLocation = AirbarLocation;
+                _controller.AirbarColor = AirbarColor;
+                _controller.EnemyHealthbarLocation = EnemyHealthbarLocation;
+                _controller.EnemyHealthbarColor = EnemyHealthbarColor;
+                _controller.FixTihocanSecretSound = FixTihocanSecretSound;
+                _controller.FixPyramidSecretTrigger = FixPyramidSecretTrigger;
+                _controller.FixSecretsKillingMusic = FixSecretsKillingMusic;
+                _controller.FixDescendingGlitch = FixDescendingGlitch;
+                _controller.FixWallJumpGlitch = FixWallJumpGlitch;
+                _controller.FixBridgeCollision = FixBridgeCollision;
+                _controller.FixQwopGlitch = FixQwopGlitch;
+                _controller.FixAlligatorAi = FixAlligatorAi;
+                _controller.ChangePierreSpawn = ChangePierreSpawn;
+                _controller.FovValue = FovValue;
+                _controller.FovVertical = FovVertical;
+                _controller.DisableFmv = DisableFmv;
+                _controller.DisableCine = DisableCine;
+                _controller.DisableMusicInMenu = DisableMusicInMenu;
+                _controller.DisableMusicInInventory = DisableMusicInInventory;
+                _controller.AnisotropyFilter = AnisotropyFilter;
+                _controller.ResolutionWidth = ResolutionWidth;
+                _controller.ResolutionHeight = ResolutionHeight;
+                _controller.EnableRoundShadow = EnableRoundShadow;
+                _controller.Enable3dPickups = Enable3dPickups;
+                _controller.ScreenshotFormat = ScreenshotFormat;
+                _controller.WalkToItems = WalkToItems;
+                _controller.MaximumSaveSlots = MaximumSaveSlots;
+                _controller.RevertToPistols = RevertToPistols;
+                _controller.EnableEnhancedSaves = EnableEnhancedSaves;
+            }
         }
 
         public void Unload()
@@ -1952,28 +2988,44 @@ namespace TRRandomizerView.Model
         #region Randomizer Type Support
         private static readonly string _supportPropertyFormat = "Is{0}TypeSupported";
 
+        public bool IsTR1 => _controller != null && _controller.IsTR1;
+        public bool IsTR1Main => IsTR1 && _controller.IsCommunityPatch;
+        public bool IsTR2 => _controller != null && _controller.IsTR2;
+        public bool IsTR3 => _controller != null && _controller.IsTR3;
         public bool IsLevelSequenceTypeSupported => IsRandomizationSupported(TRRandomizerType.LevelSequence);
         public bool IsGlobeDisplayTypeSupported => IsRandomizationSupported(TRRandomizerType.GlobeDisplay);
         public bool IsUnarmedTypeSupported => IsRandomizationSupported(TRRandomizerType.Unarmed);
         public bool IsAmmolessTypeSupported => IsRandomizationSupported(TRRandomizerType.Ammoless);
+        public bool IsMedilessTypeSupported => IsRandomizationSupported(TRRandomizerType.Mediless);
         public bool IsSunsetTypeSupported => IsRandomizationSupported(TRRandomizerType.Sunset);
+        public bool IsHealthTypeSupported => IsRandomizationSupported(TRRandomizerType.Health);
         public bool IsNightModeTypeSupported => IsRandomizationSupported(TRRandomizerType.NightMode);
         public bool IsSecretTypeSupported => IsRandomizationSupported(TRRandomizerType.Secret);
+        public bool IsGlitchedSecretsSupported => IsRandomizationSupported(TRRandomizerType.GlitchedSecrets);
+        public bool IsHardSecretsSupported => IsRandomizationSupported(TRRandomizerType.HardSecrets);
         public bool IsRewardRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.RewardRooms);
+        public bool IsSecretCountTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretCount);
         public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
         public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);
+        public bool IsKeyItemTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItems);
         public bool IsEnemyTypeSupported => IsRandomizationSupported(TRRandomizerType.Enemy);
         public bool IsTextureTypeSupported => IsRandomizationSupported(TRRandomizerType.Texture);
         public bool IsStartPositionTypeSupported => IsRandomizationSupported(TRRandomizerType.StartPosition);
         public bool IsAudioTypeSupported => IsRandomizationSupported(TRRandomizerType.Audio);
+        public bool IsSecretAudioSupported => IsRandomizationSupported(TRRandomizerType.SecretAudio);
         public bool IsSFXSupported => IsRandomizationSupported(TRRandomizerType.SFX);
         public bool IsVFXTypeSupported => IsRandomizationSupported(TRRandomizerType.VFX);
         public bool IsOutfitTypeSupported => IsRandomizationSupported(TRRandomizerType.Outfit);
+        public bool IsBraidTypeSupported => IsRandomizationSupported(TRRandomizerType.Braid);
         public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);
         public bool IsEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.Environment);
+        public bool IsLaddersTypeSupported => IsRandomizationSupported(TRRandomizerType.Ladders);
+        public bool IsWeatherTypeSupported => IsRandomizationSupported(TRRandomizerType.Weather);
         public bool IsBirdMonsterBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.BirdMonsterBehaviour);
-
+        public bool IsSecretTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretTextures);
+        public bool IsKeyItemTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItemTextures);
+        public bool IsWaterColourTypeSupported => IsRandomizationSupported(TRRandomizerType.WaterColour);
         public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
 
         private bool IsRandomizationSupported(TRRandomizerType randomizerType)
@@ -1988,6 +3040,12 @@ namespace TRRandomizerView.Model
             {
                 FirePropertyChanged(string.Format(_supportPropertyFormat, type.ToString()));
             }
+
+            FirePropertyChanged(nameof(IsTR1));
+            FirePropertyChanged(nameof(IsTR2));
+            FirePropertyChanged(nameof(IsTR3));
+
+            FirePropertyChanged(nameof(IsTR1Main));
 
             AdjustAvailableOptions();
         }
@@ -2005,6 +3063,10 @@ namespace TRRandomizerView.Model
             if (IsAmmolessTypeSupported)
             {
                 RandomizeAmmolessLevels = enabled;
+            }
+            if (IsHealthTypeSupported)
+            {
+                RandomizeHealth = enabled;
             }
             if (IsSunsetTypeSupported)
             {
@@ -2071,6 +3133,10 @@ namespace TRRandomizerView.Model
             if (IsAmmolessTypeSupported)
             {
                 result &= RandomizeAmmolessLevels;
+            }
+            if (IsHealthTypeSupported)
+            {
+                result &= RandomizeHealth;
             }
             if (IsSunsetTypeSupported)
             {

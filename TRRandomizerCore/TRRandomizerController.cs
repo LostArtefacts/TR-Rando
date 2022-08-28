@@ -9,50 +9,17 @@ using TRGE.Core;
 using System.Collections.Generic;
 using System.Drawing;
 using TRRandomizerCore.Utilities;
+using TRRandomizerCore.Secrets;
+using System.Numerics;
 
 namespace TRRandomizerCore
 {
     public class TRRandomizerController
     {
-        // Only the versions defined in this dictionary can be opened for randomization. The supported type list is an indicator
-        // to callers as to what can be applied during randomization i.e. for UI options to be enabled/disabled appropriately.
-        private static readonly Dictionary<TRVersion, List<TRRandomizerType>> _supportedTypes = new Dictionary<TRVersion, List<TRRandomizerType>>
-        {
-            [TRVersion.TR2] = new List<TRRandomizerType>
-            {
-                TRRandomizerType.All
-            },
-            [TRVersion.TR3] = new List<TRRandomizerType>
-            {
-                TRRandomizerType.LevelSequence, TRRandomizerType.Unarmed, TRRandomizerType.Ammoless, TRRandomizerType.Audio, TRRandomizerType.Outfit,
-                TRRandomizerType.Secret, TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.SFX, TRRandomizerType.Item, 
-                TRRandomizerType.NightMode, TRRandomizerType.SecretReward, TRRandomizerType.Text, TRRandomizerType.Enemy, TRRandomizerType.Texture,
-                TRRandomizerType.StartPosition, TRRandomizerType.VFX, TRRandomizerType.Environment
-            }
-        };
-
-        // As above, but used to eliminate certain options per version.
-        private static readonly Dictionary<TRVersion, List<TRRandomizerType>> _unsupportedTypes = new Dictionary<TRVersion, List<TRRandomizerType>>
-        {
-            [TRVersion.TR2] = new List<TRRandomizerType>
-            {
-                TRRandomizerType.GlobeDisplay, TRRandomizerType.RewardRooms, TRRandomizerType.VFX
-            },
-            [TRVersion.TR3] = new List<TRRandomizerType>
-            {
-                TRRandomizerType.BirdMonsterBehaviour
-            }
-        };
-
-        private static readonly Dictionary<TRVersion, List<string>> _versionExes = new Dictionary<TRVersion, List<string>>
-        {
-            [TRVersion.TR2]  = new List<string> { "Tomb2.exe" },
-            [TRVersion.TR3]  = new List<string> { "Tomb3.exe" }
-        };
-
         private readonly TREditor _editor;
+        private readonly TRVersionSupport _support;
 
-        internal TR23ScriptEditor ScriptEditor => _editor.ScriptEditor as TR23ScriptEditor;
+        internal AbstractTRScriptEditor ScriptEditor => _editor.ScriptEditor;
         internal RandomizerSettings LevelRandomizer => (_editor.LevelEditor as ISettingsProvider).Settings;
 
         internal TRRandomizerController(string directoryPath)
@@ -63,6 +30,7 @@ namespace TRRandomizerCore
             _editor.RestoreProgressChanged += Editor_RestoreProgressChanged;
             StoreExternalOrganisations();
 
+            _support = new TRVersionSupport();
             if (!IsRandomizationSupported())
             {
                 throw new NotSupportedException(string.Format("Randomization of {0} is not currently supported.", EditionTitle));
@@ -72,40 +40,27 @@ namespace TRRandomizerCore
         #region Version Support
         public bool IsRandomizationSupported()
         {
-            return _supportedTypes.ContainsKey(ScriptEditor.Edition.Version);
+            return _support.IsRandomizationSupported(_editor.Edition);
         }
 
         public bool IsRandomizationSupported(TRRandomizerType randomizerType)
         {
-            return IsRandomizationSupported(ScriptEditor.Edition.Version, randomizerType);
-        }
-
-        public bool IsRandomizationSupported(TRVersion version, TRRandomizerType randomizerType)
-        {
-            bool supported = _supportedTypes.ContainsKey(version) &&
-                (_supportedTypes[version].Contains(TRRandomizerType.All) || _supportedTypes[version].Contains(randomizerType));
-            
-            // Is it explicitly unsupported?
-            if (supported && _unsupportedTypes.ContainsKey(version) && _unsupportedTypes[version].Contains(randomizerType))
-            {
-                supported = false;
-            }
-            return supported;
+            return _support.IsRandomizationSupported(_editor.Edition, randomizerType);
         }
 
         public List<string> GetExecutables()
         {
-            List<string> exes = new List<string>();
-            if (_versionExes.ContainsKey(ScriptEditor.Edition.Version))
-            {
-                exes.AddRange(_versionExes[ScriptEditor.Edition.Version]);
-            }
-            return exes;
+            return _support.GetExecutables(_editor.Edition);
         }
+
+        public bool IsTR1 => _editor.Edition.Version == TRVersion.TR1;
+        public bool IsTR2 => _editor.Edition.Version == TRVersion.TR2;
+        public bool IsTR3 => _editor.Edition.Version == TRVersion.TR3;
+        public bool IsCommunityPatch => _editor.Edition.IsCommunityPatch;
         #endregion
 
         #region ScriptEditor Passthrough
-        private Organisation _extLevelOrganisation, _extPlayableOrganisation, _extUnarmedOrganisation, _extAmmolessOrganisation, _extSecretRewardsOrganisation, _extSunsetOrganisation, _extAudioOrganisation;
+        private Organisation _extLevelOrganisation, _extPlayableOrganisation, _extUnarmedOrganisation, _extAmmolessOrganisation, _extMedilessOrganisation, _extSecretRewardsOrganisation, _extSunsetOrganisation, _extAudioOrganisation;
 
         /// <summary>
         /// We need to store any organisation values that aren't random so if randomization is turned off for the 
@@ -116,11 +71,25 @@ namespace TRRandomizerCore
         {
             _extLevelOrganisation = RandomizeLevelSequencing ? Organisation.Default : ScriptEditor.LevelSequencingOrganisation;
             _extPlayableOrganisation = RandomizePlayableLevels ? Organisation.Default : ScriptEditor.EnabledLevelOrganisation;
-            _extUnarmedOrganisation = RandomizeUnarmedLevels ? Organisation.Default : ScriptEditor.UnarmedLevelOrganisation;
-            _extAmmolessOrganisation = RandomizeAmmolessLevels ? Organisation.Default : ScriptEditor.AmmolessLevelOrganisation;
-            _extSecretRewardsOrganisation = RandomizeSecretRewards ? Organisation.Default : ScriptEditor.SecretBonusOrganisation;
             _extSunsetOrganisation = RandomizeSunsets ? Organisation.Default : ScriptEditor.LevelSunsetOrganisation;
             _extAudioOrganisation = RandomizeAudioTracks ? Organisation.Default : ScriptEditor.GameTrackOrganisation;
+
+            if (ScriptEditor is IUnarmedEditor unarmedEditor)
+            {
+                _extUnarmedOrganisation = RandomizeUnarmedLevels ? Organisation.Default : unarmedEditor.UnarmedLevelOrganisation;
+            }
+            if (ScriptEditor is IAmmolessEditor ammolessEditor)
+            {
+                _extAmmolessOrganisation = RandomizeAmmolessLevels ? Organisation.Default : ammolessEditor.AmmolessLevelOrganisation;
+            }
+            if (ScriptEditor is IHealthEditor healthEditor)
+            {
+                _extMedilessOrganisation = RandomizeHealth ? Organisation.Default : healthEditor.MedilessLevelOrganisation;
+            }
+            if (ScriptEditor is ISecretRewardEditor rewardEditor)
+            {
+                _extSecretRewardsOrganisation = RandomizeSecretRewards ? Organisation.Default : rewardEditor.SecretBonusOrganisation;
+            }
         }
 
         public int LevelCount => ScriptEditor.ScriptedLevels.Count;
@@ -164,57 +133,187 @@ namespace TRRandomizerCore
 
         public bool RandomizeUnarmedLevels
         {
-            get => ScriptEditor.UnarmedLevelOrganisation == Organisation.Random;
-            set => ScriptEditor.UnarmedLevelOrganisation = value ? Organisation.Random : _extUnarmedOrganisation;
+            get => ScriptEditor is IUnarmedEditor unarmedEditor && unarmedEditor.UnarmedLevelOrganisation == Organisation.Random;
+            set
+            {
+                if (ScriptEditor is IUnarmedEditor unarmedEditor)
+                {
+                    unarmedEditor.UnarmedLevelOrganisation = value ? Organisation.Random : _extUnarmedOrganisation;
+                }
+            }
         }
 
         public int UnarmedLevelsSeed
         {
-            get => ScriptEditor.UnarmedLevelRNG.Value;
-            set => ScriptEditor.UnarmedLevelRNG = new RandomGenerator(value);
+            get => ScriptEditor is IUnarmedEditor unarmedEditor ? unarmedEditor.UnarmedLevelRNG.Value : -1;
+            set
+            {
+                if (ScriptEditor is IUnarmedEditor unarmedEditor)
+                {
+                    unarmedEditor.UnarmedLevelRNG = new RandomGenerator(value);
+                }
+            }
         }
 
         public uint UnarmedLevelCount
         {
-            get => ScriptEditor.RandomUnarmedLevelCount;
-            set => ScriptEditor.RandomUnarmedLevelCount = value;
+            get => ScriptEditor is IUnarmedEditor unarmedEditor ? unarmedEditor.RandomUnarmedLevelCount : (uint)_editor.Edition.UnarmedLevelCount;
+            set
+            {
+                if (ScriptEditor is IUnarmedEditor unarmedEditor)
+                {
+                    unarmedEditor.RandomUnarmedLevelCount = value;
+                }
+            }
         }
 
         public bool RandomizeAmmolessLevels
         {
-            get => ScriptEditor.AmmolessLevelOrganisation == Organisation.Random;
-            set => ScriptEditor.AmmolessLevelOrganisation = value ? Organisation.Random : _extAmmolessOrganisation;
+            get => ScriptEditor is IAmmolessEditor ammolessEditor && ammolessEditor.AmmolessLevelOrganisation == Organisation.Random;
+            set
+            {
+                if (ScriptEditor is IAmmolessEditor ammolessEditor)
+                {
+                    ammolessEditor.AmmolessLevelOrganisation = value ? Organisation.Random : _extAmmolessOrganisation;
+                }
+            }
         }
 
         public int AmmolessLevelsSeed
         {
-            get => ScriptEditor.AmmolessLevelRNG.Value;
-            set => ScriptEditor.AmmolessLevelRNG = new RandomGenerator(value);
+            get => ScriptEditor is IAmmolessEditor ammolessEditor ? ammolessEditor.AmmolessLevelRNG.Value : -1;
+            set
+            {
+                if (ScriptEditor is IAmmolessEditor ammolessEditor)
+                {
+                    ammolessEditor.AmmolessLevelRNG = new RandomGenerator(value);
+                }
+            }
         }
 
         public uint AmmolessLevelCount
         {
-            get => ScriptEditor.RandomAmmolessLevelCount;
-            set => ScriptEditor.RandomAmmolessLevelCount = value;
+            get => ScriptEditor is IAmmolessEditor ammolessEditor ? ammolessEditor.RandomAmmolessLevelCount : (uint)_editor.Edition.AmmolessLevelCount;
+            set
+            {
+                if (ScriptEditor is IAmmolessEditor ammolessEditor)
+                {
+                    ammolessEditor.RandomAmmolessLevelCount = value;
+                }
+            }
         }
 
         public bool RandomizeSecretRewards
         {
-            get => ScriptEditor.SecretBonusOrganisation == Organisation.Random;
+            get
+            {
+                if (ScriptEditor is ISecretRewardEditor rewardEditor)
+                {
+                    return rewardEditor.SecretBonusOrganisation == Organisation.Random;
+                }
+                return LevelRandomizer.RandomizeSecretRewardsPhysical;
+            }
             set
             {
-                ScriptEditor.SecretBonusOrganisation = value ? Organisation.Random : _extSecretRewardsOrganisation;
+                if (ScriptEditor is ISecretRewardEditor rewardEditor)
+                {
+                    rewardEditor.SecretBonusOrganisation = value ? Organisation.Random : _extSecretRewardsOrganisation;
+                }
                 LevelRandomizer.RandomizeSecretRewardsPhysical = value;
             }
         }
 
         public int SecretRewardSeed
         {
-            get => ScriptEditor.SecretBonusRNG.Value;
+            get
+            {
+                if (ScriptEditor is ISecretRewardEditor rewardEditor)
+                {
+                    return rewardEditor.SecretBonusRNG.Value;
+                }
+                return LevelRandomizer.SecretRewardsPhysicalSeed;
+            }
             set
             {
-                ScriptEditor.SecretBonusRNG = new RandomGenerator(value);
+                if (ScriptEditor is ISecretRewardEditor rewardEditor)
+                {
+                    rewardEditor.SecretBonusRNG = new RandomGenerator(value);
+                }
                 LevelRandomizer.SecretRewardsPhysicalSeed = value;
+            }
+        }
+
+        public bool RandomizeHealth
+        {
+            get => ScriptEditor is IHealthEditor healthEditor && healthEditor.MedilessLevelOrganisation == Organisation.Random;
+            set
+            {
+                if (ScriptEditor is IHealthEditor healthEditor)
+                {
+                    healthEditor.MedilessLevelOrganisation = value ? Organisation.Random : _extMedilessOrganisation;
+                }
+                LevelRandomizer.RandomizeStartingHealth = value;
+            }
+        }
+
+        public int HealthSeed
+        {
+            get => ScriptEditor is IHealthEditor healthEditor ? healthEditor.MedilessLevelRNG.Value : -1;
+            set
+            {
+                if (ScriptEditor is IHealthEditor healthEditor)
+                {
+                    healthEditor.MedilessLevelRNG = new RandomGenerator(value);
+                }
+                LevelRandomizer.HealthSeed = value;
+            }
+        }
+
+        public uint MedilessLevelCount
+        {
+            get => ScriptEditor is IHealthEditor healthEditor ? healthEditor.RandomMedilessLevelCount : (uint)_editor.Edition.MedilessLevelCount;
+            set
+            {
+                if (ScriptEditor is IHealthEditor healthEditor)
+                {
+                    healthEditor.RandomMedilessLevelCount = value;
+                }
+            }
+        }
+
+        public uint MinStartingHealth
+        {
+            get => LevelRandomizer.MinStartingHealth;
+            set => LevelRandomizer.MinStartingHealth = value;
+        }
+
+        public uint MaxStartingHealth
+        {
+            get => LevelRandomizer.MaxStartingHealth;
+            set => LevelRandomizer.MaxStartingHealth = value;
+        }
+
+        public bool DisableHealingBetweenLevels
+        {
+            get => ScriptEditor is IHealthEditor healthEditor && healthEditor.DisableHealingBetweenLevels;
+            set
+            {
+                if (ScriptEditor is IHealthEditor healthEditor)
+                {
+                    healthEditor.DisableHealingBetweenLevels = value && RandomizeHealth;
+                }
+            }
+        }
+
+        public bool DisableMedpacks
+        {
+            get => ScriptEditor is IHealthEditor healthEditor && healthEditor.DisableMedpacks;
+            set
+            {
+                if (ScriptEditor is IHealthEditor healthEditor)
+                {
+                    healthEditor.DisableMedpacks = value && RandomizeHealth;
+                }
             }
         }
 
@@ -264,8 +363,14 @@ namespace TRRandomizerCore
 
         public bool DisableDemos
         {
-            get => !ScriptEditor.DemosEnabled;
-            set => ScriptEditor.DemosEnabled = !value;
+            get => ScriptEditor is IDemoEditor demoEditor && !demoEditor.DemosEnabled;
+            set
+            {
+                if (ScriptEditor is IDemoEditor demoEditor)
+                {
+                    demoEditor.DemosEnabled = !value;
+                }
+            }
         }
 
         public bool AutoLaunchGame
@@ -273,6 +378,702 @@ namespace TRRandomizerCore
             get => LevelRandomizer.AutoLaunchGame;
             set => LevelRandomizer.AutoLaunchGame = value;
         }
+        #endregion
+
+        #region T1M Sepcifics
+        public bool EnableGameModes
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableGameModes;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableGameModes = value;
+                }
+            }
+        }
+
+        public bool EnableSaveCrystals
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableSaveCrystals;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableSaveCrystals = value;
+                }
+            }
+        }
+
+        public double DemoDelay
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.DemoTime : -1;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DemoTime = value;
+                }
+            }
+        }
+
+        public double DrawDistanceFade
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.DrawDistanceFade : -1;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DrawDistanceFade = value;
+                }
+            }
+        }
+
+        public double DrawDistanceMax
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.DrawDistanceMax : -1;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DrawDistanceMax = value;
+                }
+            }
+        }
+
+        public Vector3 WaterColor
+        {
+            get
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    return new Vector3((float)tr1Editor.WaterColor[0], (float)(tr1Editor.WaterColor[1]), (float)(tr1Editor.WaterColor[2]));
+                }
+                return new Vector3(-1, -1, -1);
+            }
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.WaterColor[0] = Math.Round(value.X, 2);
+                    tr1Editor.WaterColor[1] = Math.Round(value.Y, 2);
+                    tr1Editor.WaterColor[2] = Math.Round(value.Z, 2);
+                }
+            }
+        }
+
+        public bool DisableMagnums
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableMagnums;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DisableMagnums = value;
+                }
+            }
+        }
+
+        public bool DisableUzis
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableUzis;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DisableUzis = value;
+                }
+            }
+        }
+
+        public bool DisableShotgun
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableShotgun;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DisableShotgun = value;
+                }
+            }
+        }
+
+        public bool EnableDeathsCounter
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableDeathsCounter;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableDeathsCounter = value;
+                }
+            }
+        }
+
+        public bool EnableEnemyHealthbar
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableEnemyHealthbar;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableEnemyHealthbar = value;
+                }
+            }
+        }
+
+        public bool EnableEnhancedLook
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableEnhancedLook;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableEnhancedLook = value;
+                }
+            }
+        }
+
+        public bool EnableShotgunFlash
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableShotgunFlash;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableShotgunFlash = value;
+                }
+            }
+        }
+
+        public bool FixShotgunTargeting
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixShotgunTargeting;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FixShotgunTargeting = value;
+                }
+            }
+        }
+
+        public bool EnableNumericKeys
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableNumericKeys;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableNumericKeys = value;
+                }
+            }
+        }
+
+        public bool EnableTr3Sidesteps
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableTr3Sidesteps;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableTr3Sidesteps = value;
+                }
+            }
+        }
+
+        public bool EnableCheats
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableCheats;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableCheats = value;
+                }
+            }
+        }
+
+        public bool EnableDetailedStats
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableDetailedStats;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableDetailedStats = value;
+                }
+            }
+        }
+
+        public bool EnableCompassStats
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableCompassStats;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableCompassStats = value;
+                }
+            }
+        }
+
+        public bool EnableTotalStats
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableTotalStats;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableTotalStats = value;
+                }
+            }
+        }
+
+        public bool EnableTimerInInventory
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableTimerInInventory;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableTimerInInventory = value;
+                }
+            }
+        }
+
+        public bool EnableSmoothBars
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableSmoothBars;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableSmoothBars = value;
+                }
+            }
+        }
+
+        public bool EnableFadeEffects
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableFadeEffects;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableFadeEffects = value;
+                }
+            }
+        }
+
+        public TRMenuStyle MenuStyle
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.MenuStyle : TRMenuStyle.PC;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.MenuStyle = value;
+                }
+            }
+        }
+
+        public TRHealthbarMode HealthbarShowingMode
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.HealthbarShowingMode : TRHealthbarMode.FlashingOrDefault;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.HealthbarShowingMode = value;
+                }
+            }
+        }
+
+        public TRUILocation HealthbarLocation
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.HealthbarLocation : TRUILocation.TopLeft;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.HealthbarLocation = value;
+                }
+            }
+        }
+
+        public TRUIColour HealthbarColor
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.HealthbarColor : TRUIColour.Red;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.HealthbarColor = value;
+                }
+            }
+        }
+
+        public TRAirbarMode AirbarShowingMode
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.AirbarShowingMode : TRAirbarMode.Default;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.AirbarShowingMode = value;
+                }
+            }
+        }
+
+        public TRUILocation AirbarLocation
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.AirbarLocation : TRUILocation.TopRight;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.AirbarLocation = value;
+                }
+            }
+        }
+
+        public TRUIColour AirbarColor
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.AirbarColor : TRUIColour.Blue;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.AirbarColor = value;
+                }
+            }
+        }
+
+        public TRUILocation EnemyHealthbarLocation
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.EnemyHealthbarLocation : TRUILocation.BottomLeft;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnemyHealthbarLocation = value;
+                }
+            }
+        }
+
+        public TRUIColour EnemyHealthbarColor
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.EnemyHealthbarColor : TRUIColour.Grey;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnemyHealthbarColor = value;
+                }
+            }
+        }
+
+        public bool FixTihocanSecretSound
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixTihocanSecretSound;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FixTihocanSecretSound = value;
+                }
+            }
+        }
+
+        public bool FixPyramidSecretTrigger
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixPyramidSecretTrigger;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FixPyramidSecretTrigger = value;
+                }
+            }
+        }
+
+        public bool FixSecretsKillingMusic
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixSecretsKillingMusic;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FixSecretsKillingMusic = value;
+                }
+            }
+        }
+
+        public bool FixDescendingGlitch
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixDescendingGlitch;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FixDescendingGlitch = value;
+                }
+            }
+        }
+
+        public bool FixWallJumpGlitch
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixWallJumpGlitch;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FixWallJumpGlitch = value;
+                }
+            }
+        }
+
+        public bool FixBridgeCollision
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixBridgeCollision;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FixBridgeCollision = value;
+                }
+            }
+        }
+
+        public bool FixQwopGlitch
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixQwopGlitch;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FixQwopGlitch = value;
+                }
+            }
+        }
+
+        public bool FixAlligatorAi
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixAlligatorAi;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FixAlligatorAi = value;
+                }
+            }
+        }
+
+        public bool ChangePierreSpawn
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.ChangePierreSpawn;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.ChangePierreSpawn = value;
+                }
+            }
+        }
+
+        public int FovValue
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.FovValue : -1;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FovValue = value;
+                }
+            }
+        }
+
+        public bool FovVertical
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FovVertical;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FovVertical = value;
+                }
+            }
+        }
+
+        public bool DisableFmv
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableFmv;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DisableFmv = value;
+                }
+            }
+        }
+
+        public bool DisableCine
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableCine;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DisableCine = value;
+                }
+            }
+        }
+
+        public bool DisableMusicInMenu
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableMusicInMenu;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DisableMusicInMenu = value;
+                }
+            }
+        }
+
+        public bool DisableMusicInInventory
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableMusicInInventory;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DisableMusicInInventory = value;
+                }
+            }
+        }
+
+        public double AnisotropyFilter
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.AnisotropyFilter : -1;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.AnisotropyFilter = value;
+                }
+            }
+        }
+
+        public int ResolutionWidth
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.ResolutionWidth : -1;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.ResolutionWidth = value;
+                }
+            }
+        }
+
+        public int ResolutionHeight
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.ResolutionHeight : -1;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.ResolutionHeight = value;
+                }
+            }
+        }
+
+        public bool EnableRoundShadow
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableRoundShadow;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableRoundShadow = value;
+                }
+            }
+        }
+
+        public bool Enable3dPickups
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.Enable3dPickups;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.Enable3dPickups = value;
+                }
+            }
+        }
+
+        public TRScreenshotFormat ScreenshotFormat
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.ScreenshotFormat : TRScreenshotFormat.JPG;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.ScreenshotFormat = value;
+                }
+            }
+        }
+
+        public bool WalkToItems
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.WalkToItems;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.WalkToItems = value;
+                }
+            }
+        }
+
+        public int MaximumSaveSlots
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.MaximumSaveSlots : 25;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.MaximumSaveSlots = value;
+                }
+            }
+        }
+
+        public bool RevertToPistols
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.RevertToPistols;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.RevertToPistols = value;
+                }
+            }
+        }
+
+        public bool EnableEnhancedSaves
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableEnhancedSaves;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableEnhancedSaves = value;
+                }
+            }
+        }
+
         #endregion
 
         #region LevelRandomizer Passthrough
@@ -351,6 +1152,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.PersistTextureVariants = value;
         }
 
+        public bool RandomizeWaterColour
+        {
+            get => LevelRandomizer.RandomizeWaterColour;
+            set => LevelRandomizer.RandomizeWaterColour = value;
+        }
+
         public bool RetainMainLevelTextures
         {
             get => LevelRandomizer.RetainMainLevelTextures;
@@ -423,10 +1230,40 @@ namespace TRRandomizerCore
             set => LevelRandomizer.UseRewardRoomCameras = value;
         }
 
+        public TRSecretCountMode SecretCountMode
+        {
+            get => LevelRandomizer.SecretCountMode;
+            set => LevelRandomizer.SecretCountMode = value;
+        }
+
+        public uint MinSecretCount
+        {
+            get => LevelRandomizer.MinSecretCount;
+            set => LevelRandomizer.MinSecretCount = value;
+        }
+
+        public uint MaxSecretCount
+        {
+            get => LevelRandomizer.MaxSecretCount;
+            set => LevelRandomizer.MaxSecretCount = value;
+        }
+
         public bool IncludeKeyItems
         {
             get => LevelRandomizer.IncludeKeyItems;
             set => LevelRandomizer.IncludeKeyItems = value;
+        }
+
+        public bool RandomizeItemTypes
+        {
+            get => LevelRandomizer.RandomizeItemTypes;
+            set => LevelRandomizer.RandomizeItemTypes = value;
+        }
+
+        public bool RandomizeItemPositions
+        {
+            get => LevelRandomizer.RandomizeItemPositions;
+            set => LevelRandomizer.RandomizeItemPositions = value;
         }
 
         public bool DevelopmentMode
@@ -660,6 +1497,12 @@ namespace TRRandomizerCore
         {
             get => LevelRandomizer.ChangeEnemySFX;
             set => LevelRandomizer.ChangeEnemySFX = value;
+        }
+
+        public bool ChangeDoorSFX
+        {
+            get => LevelRandomizer.ChangeDoorSFX;
+            set => LevelRandomizer.ChangeDoorSFX = value;
         }
 
         public bool LinkCreatureSFX

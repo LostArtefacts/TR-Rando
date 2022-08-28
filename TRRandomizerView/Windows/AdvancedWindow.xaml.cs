@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Secrets;
 using TRRandomizerView.Model;
 using TRRandomizerView.Utilities;
 
@@ -15,7 +16,7 @@ namespace TRRandomizerView.Windows
     /// </summary>
     public partial class AdvancedWindow : Window
     {
-        private static readonly string _darknessPreviewPath = @"pack://application:,,,/TRRandomizer;component/Resources/Darkness/{0}.jpg";
+        private static readonly string _darknessPreviewPath = @"pack://application:,,,/TRRandomizer;component/Resources/Darkness/{0}/{1}.jpg";
 
         public static readonly DependencyProperty MainDescriptionProperty = DependencyProperty.Register
         (
@@ -86,6 +87,15 @@ namespace TRRandomizerView.Windows
         (
             nameof(HasBirdMonsterBehaviour), typeof(bool), typeof(AdvancedWindow)
         );
+
+        public static readonly DependencyProperty HasHealthModeProperty = DependencyProperty.Register
+        (
+            nameof(HasHealthMode), typeof(bool), typeof(AdvancedWindow)
+        );
+        public static readonly DependencyProperty HasSecretCountModeProperty = DependencyProperty.Register
+        (
+            nameof(HasSecretCountMode), typeof(bool), typeof(AdvancedWindow)
+        ); 
 
         public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
         (
@@ -176,6 +186,18 @@ namespace TRRandomizerView.Windows
             set => SetValue(HasBirdMonsterBehaviourProperty, value);
         }
 
+        public bool HasHealthMode
+        {
+            get => (bool)GetValue(HasHealthModeProperty);
+            set => SetValue(HasHealthModeProperty, value);
+        }
+
+        public bool HasSecretCountMode
+        {
+            get => (bool)GetValue(HasSecretCountModeProperty);
+            set => SetValue(HasSecretCountModeProperty, value);
+        }
+
         public ControllerOptions ControllerProxy
         {
             get => (ControllerOptions)GetValue(ControllerProperty);
@@ -246,6 +268,21 @@ namespace TRRandomizerView.Windows
                         break;
                 }
             }
+            if (HasSecretCountMode)
+            {
+                switch (ControllerProxy.SecretCountMode)
+                {
+                    case TRSecretCountMode.Default:
+                        _defaultSecretCountButton.IsChecked = true;
+                        break;
+                    case TRSecretCountMode.Shuffled:
+                        _shuffledSecretCountButton.IsChecked = true;
+                        break;
+                    case TRSecretCountMode.Customized:
+                        _customizedSecretCountButton.IsChecked = true;
+                        break;
+                }
+            }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -256,7 +293,7 @@ namespace TRRandomizerView.Windows
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            _darknessPreview.Source = new BitmapImage(new Uri(string.Format(_darknessPreviewPath, ControllerProxy.NightModeDarkness)));
+            _darknessPreview.Source = new BitmapImage(new Uri(string.Format(_darknessPreviewPath, ControllerProxy.IsTR1 ? "TR1" : "TR2", ControllerProxy.NightModeDarkness)));
         }
 
         private void ExclusionsButton_Click(object sender, RoutedEventArgs e)

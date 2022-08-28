@@ -6,11 +6,24 @@ namespace TRModelTransporter.Data
 {
     public class TR2DefaultDataProvider : ITransportDataProvider<TR2Entities>
     {
+        public int TextureTileLimit { get; set; } = 16;
+        public int TextureObjectLimit { get; set; } = 2048;
+
         public Dictionary<TR2Entities, TR2Entities> AliasPriority { get; set; }
 
         public IEnumerable<TR2Entities> GetModelDependencies(TR2Entities entity)
         {
             return _entityDependencies.ContainsKey(entity) ? _entityDependencies[entity] : _emptyEntities;
+        }
+
+        public IEnumerable<TR2Entities> GetRemovalExclusions(TR2Entities entity)
+        {
+            return _emptyEntities;
+        }
+
+        public IEnumerable<TR2Entities> GetCyclicDependencies(TR2Entities entity)
+        {
+            return _emptyEntities;
         }
 
         public IEnumerable<TR2Entities> GetSpriteDependencies(TR2Entities entity)
@@ -99,7 +112,7 @@ namespace TRModelTransporter.Data
             return _hardcodedSoundIndices.ContainsKey(entity) ? _hardcodedSoundIndices[entity] : null;
         }
 
-        public IEnumerable<int> GetIgnorableTextureIndices(TR2Entities entity)
+        public IEnumerable<int> GetIgnorableTextureIndices(TR2Entities entity, string level)
         {
             return _ignoreEntityTextures.ContainsKey(entity) ? _ignoreEntityTextures[entity] : null;
         }

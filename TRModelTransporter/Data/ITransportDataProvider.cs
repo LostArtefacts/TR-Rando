@@ -5,10 +5,23 @@ namespace TRModelTransporter.Data
 {
     public interface ITransportDataProvider<E> where E : Enum
     {
+        int TextureTileLimit { get; set; }
+        int TextureObjectLimit { get; set; }
+
         /// <summary>
         /// Return all other model types on which the given type depends.
         /// </summary>
         IEnumerable<E> GetModelDependencies(E entity);
+
+        /// <summary>
+        /// Null meshes that determine if the main entity can be removed from a level.
+        /// </summary>
+        IEnumerable<E> GetRemovalExclusions(E entity);
+
+        /// <summary>
+        /// Return model types that have a cyclic depencency on the given type.
+        /// </summary>
+        IEnumerable<E> GetCyclicDependencies(E entity);
 
         /// <summary>
         /// Return any sprite types on which the given type depends.
@@ -90,6 +103,6 @@ namespace TRModelTransporter.Data
         /// An emtpy list is translated as meaning all indices should be ignored. Null
         /// indicates that no indices should be ignored.
         /// </summary>
-        IEnumerable<int> GetIgnorableTextureIndices(E entity);
+        IEnumerable<int> GetIgnorableTextureIndices(E entity, string level);
     }
 }

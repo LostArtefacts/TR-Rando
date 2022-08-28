@@ -18,7 +18,7 @@ namespace TRModelTransporter.Handlers
         where D : AbstractTRModelDefinition<E>
     {
         protected const int _exportBitmapWidth = 320;
-        protected const int _exportBitmapHeight = 320;
+        protected const int _exportBitmapHeight = 640;
 
         protected L _level;
         protected D _definition;

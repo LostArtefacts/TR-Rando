@@ -1,0 +1,62 @@
+{
+  "LEVEL1.PHD": {
+    "ExcludedTextures": []
+  },
+  "LEVEL2.PHD": {
+    "ExcludedTextures": [ 90, 91, 92, 93 ]
+  },
+  "LEVEL3A.PHD": {
+    "ExcludedTextures": [ 10, 12, 14, 17, 89, 87, 95, 90, 96, 98 ]
+  },
+  "LEVEL3B.PHD": {
+    "ExcludedTextures": [ 45, 66, 68, 69, 77, 78, 119, 120 ]
+  },
+  "CUT1.PHD": {
+    "ExcludedTextures": [ 10, 12, 14, 18 ]
+  },
+  "LEVEL4.PHD": {
+    "ExcludedTextures": [ 62, 64, 65, 66 ]
+  },
+  "LEVEL5.PHD": {
+    "ExcludedTextures": [ 18, 19, 20, 21 ]
+  },
+  "LEVEL6.PHD": {
+    "ExcludedTextures": [ 71, 72, 73, 79 ]
+  },
+  "LEVEL7A.PHD": {
+    "ExcludedTextures": [ 1, 6, 8, 9 ]
+  },
+  "LEVEL7B.PHD": {
+    "ExcludedTextures": [ 4, 30, 32, 87 ]
+  },
+  "CUT2.PHD": {
+    "ExcludedTextures": []
+  },
+  "LEVEL8A.PHD": {
+    "ExcludedTextures": [ 49, 249, 250, 251 ]
+  },
+  "LEVEL8B.PHD": {
+    "ExcludedTextures": [ 6, 196, 197, 198 ]
+  },
+  "LEVEL8C.PHD": {
+    "ExcludedTextures": [ 107, 108, 110, 156 ]
+  },
+  "LEVEL10A.PHD": {
+    "ExcludedTextures": [ 5, 6, 8, 28, 33, 47, 63, 65, 84, 85, 168, 169 ]
+  },
+  "CUT3.PHD": {
+    "ExcludedTextures": [ 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 50, 62, 63, 64 ]
+  },
+  "LEVEL10B.PHD": {
+    "ExcludedTextures": [ 17, 18, 19, 20, 21, 22, 23, 24, 25, 28, 29, 90, 92, 94, 102, 103, 104, 106, 131, 132, 158, 172 ]
+  },
+  "CUT4.PHD": {
+    "ExcludedTextures": [ 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 56, 57, 58 ]
+  },
+  "LEVEL10C.PHD": {
+    "ExcludedTextures": [ 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 33, 83, 84, 86, 90, 92, 93, 94, 96 ]
+  },
+  "GYM.PHD": {
+    "ExcludedTextures": [ 251, 253, 254, 255 ]
+  }
+}

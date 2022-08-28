@@ -11,6 +11,7 @@ namespace TRRandomizerCore.Secrets
         public List<Location> RewardPositions { get; set; }
         public List<E> Doors { get; set; }
         public List<TRCamera> Cameras { get; set; }
+        public Location CameraTarget { get; set; }
         public EMEditorSet Room { get; set; }
         public BaseEMCondition UsageCondition { get; set; }
 

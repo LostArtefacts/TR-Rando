@@ -20,6 +20,8 @@
         Outfit,
         Text,
         Environment,
+        Health, // Distinct from ammoless in Tomb1Main
+        Weather,
 
         // Individual settings
         DisableDemos = 100,
@@ -29,6 +31,17 @@
         RewardRooms,
         VFX,
         MaximumDragons,
-        BirdMonsterBehaviour
+        BirdMonsterBehaviour,
+        SecretAudio,
+        Mediless,
+        KeyItems,
+        GlitchedSecrets,
+        HardSecrets,
+        SecretCount,
+        Ladders,
+        KeyItemTextures,
+        SecretTextures,
+        Braid,
+        WaterColour
     }
 }

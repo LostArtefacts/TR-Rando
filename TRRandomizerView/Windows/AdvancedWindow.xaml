@@ -6,6 +6,7 @@
         xmlns:cvt="clr-namespace:TRRandomizerView.Converters"
         xmlns:ctrl="clr-namespace:TRRandomizerView.Controls"
         xmlns:helpers="clr-namespace:TRRandomizerCore.Helpers;assembly=TRRandomizerCore"
+        xmlns:secrets="clr-namespace:TRRandomizerCore.Secrets;assembly=TRRandomizerCore"
         mc:Ignorable="d"
         Icon="..\Resources\rando.ico"
         ResizeMode="NoResize"
@@ -18,6 +19,7 @@
         Title="Advanced">
     <Window.Resources>
         <cvt:BoolToVisibilityConverter x:Key="BoolToCollapsedConverter" />
+        <cvt:InverseBoolToVisibilityConverter x:Key="InverseBoolToCollapsedConverter" />
     </Window.Resources>
 
     <Grid x:Name="_content"
@@ -39,6 +41,11 @@
                             Value="14" />
                     <Setter Property="TextDecorations"
                             Value="Underline" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
                 <Style x:Key="OptionDescriptionStyle"
                        TargetType="{x:Type Label}">
@@ -60,6 +67,9 @@
             </Grid.Resources>
             
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -452,6 +462,10 @@
                         Visibility="{Binding HasHaircuts, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
+                           Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource BoolToCollapsedConverter}}"
+                           Text="Lara's Braid"/>
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource InverseBoolToCollapsedConverter}}"
                            Text="Haircuts"/>
 
                 <Grid Margin="0,5,0,0">
@@ -480,7 +494,14 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Column="1">
+                    <Border Grid.Column="1"
+                            Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource BoolToCollapsedConverter}}">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Lara's braid will be present in the given number of levels."/>
+                    </Border>
+                    
+                    <Border Grid.Column="1"
+                            Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource InverseBoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="Lara will lose her braid in the given number of levels."/>
                     </Border>
@@ -494,7 +515,15 @@
                     </Border>
 
                     <Border Grid.Column="1"
-                            Grid.Row="1">
+                            Grid.Row="1"
+                            Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource BoolToCollapsedConverter}}">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Add Lara's braid to the assault course level in addition to or separately from above."/>
+                    </Border>
+                    
+                    <Border Grid.Column="1"
+                            Grid.Row="1"
+                            Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource InverseBoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="Give Lara a haircut in the assault course level in addition to or separately from above."/>
                     </Border>
@@ -1014,7 +1043,8 @@
                                Content="If selected, different models will use different colours when solid, otherwise they will use the same colour as Lara."/>
                     </Border>
 
-                    <Border Grid.Row="5">
+                    <Border Grid.Row="5"
+                            Visibility="{Binding ControllerProxy.IsLaddersTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <CheckBox IsChecked="{Binding ControllerProxy.UseWireframeLadders, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
@@ -1023,7 +1053,8 @@
                     </Border>
                     
                     <Border Grid.Column="1"
-                            Grid.Row="5">
+                            Grid.Row="5"
+                            Visibility="{Binding ControllerProxy.IsLaddersTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="If selected, special textures will be generated for ladders, otherwise they will look the same as walls."/>
                     </Border>
@@ -1080,6 +1111,249 @@
                             Grid.Row="1">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="Apply uncontrolled SFX randomization to the assault course in addition to or separately from above."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!-- Mediless -->
+            <StackPanel Grid.Row="16"
+                        Visibility="{Binding HasHealthMode, Converter={StaticResource BoolToCollapsedConverter}}"
+                        IsEnabled="{Binding ControllerProxy.IsMedilessTypeSupported}">
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Mediless Levels"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Margin="0,3,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Number of levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"  
+                                                Value="{Binding ControllerProxy.MedilessLevelCount, Mode=TwoWay}"
+                                                MinValue="0"
+                                                MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The number of levels in which Lara will lose all her medipacks at the start."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!-- Starting Health -->
+            <StackPanel Grid.Row="17"
+                        Visibility="{Binding HasHealthMode, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Starting Health (Global Setting)"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Margin="0,3,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Minimum value"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"  
+                                                Value="{Binding ControllerProxy.MinStartingHealth, Mode=TwoWay}"
+                                                MinValue="1"
+                                                MaxValue="{Binding ControllerProxy.MaxStartingHealth}"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Margin="0,5,0,0">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The lowest value for Lara's health at the start of each level."/>
+                    </Border>
+
+                    <Border Margin="0,3,0,0"
+                            Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Maximum value"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"  
+                                                Value="{Binding ControllerProxy.MaxStartingHealth, Mode=TwoWay}"
+                                                MinValue="{Binding ControllerProxy.MinStartingHealth}"
+                                                MaxValue="1000"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="0,5,0,0">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The highest value for Lara's health at the start of each level."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!-- Secret Count -->
+            <StackPanel Grid.Row="18"
+                        Visibility="{Binding HasSecretCountMode, Converter={StaticResource BoolToCollapsedConverter}}">
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Secret Count Mode"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <RadioButton Content="Default"
+                                     GroupName="secretCount"
+                                     x:Name="_defaultSecretCountButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.SecretCountMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static secrets:TRSecretCountMode.Default}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The number of secrets per level will match the original game."/>
+                    </Border>
+
+                    <Border Grid.Row="1">
+                        <RadioButton Content="Shuffled"
+                                     GroupName="secretCount"
+                                     x:Name="_shuffledSecretCountButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.SecretCountMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static secrets:TRSecretCountMode.Shuffled}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                            Content="Each level will take on the secret count of another - the total number of secrets in the game will remain the same."/>
+                    </Border>
+
+                    <Border Grid.Row="2">
+                        <RadioButton Content="Customized"
+                                     GroupName="secretCount"
+                                     x:Name="_customizedSecretCountButton"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.SecretCountMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static secrets:TRSecretCountMode.Customized}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Row="2"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                            Content="Each level will be assigned a random number of secrets in the given range."/>
+                    </Border>
+
+                    <Border Grid.Row="3" Margin="20,3,0,0"
+                            IsEnabled="{Binding ControllerProxy.IsCustomizedSecretModeCount}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG3"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Minimum value"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"  
+                                                Value="{Binding ControllerProxy.MinSecretCount, Mode=TwoWay}"
+                                                MinValue="1"
+                                                MaxValue="{Binding ControllerProxy.MaxSecretCount}"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="4" Margin="20,3,0,0"
+                            IsEnabled="{Binding ControllerProxy.IsCustomizedSecretModeCount}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG3"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Maximum value"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"  
+                                                Value="{Binding ControllerProxy.MaxSecretCount, Mode=TwoWay}"
+                                                MinValue="{Binding ControllerProxy.MinSecretCount}"
+                                                MaxValue="5"/>
+                        </Grid>
                     </Border>
                 </Grid>
             </StackPanel>

@@ -5,6 +5,7 @@ using TRGE.Core;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
+using TRRandomizerCore.Secrets;
 
 namespace TRRandomizerCore.Editors
 {
@@ -43,6 +44,7 @@ namespace TRRandomizerCore.Editors
         public bool DevelopmentMode { get; set; }
         public ItemDifficulty RandoItemDifficulty { get; set; }
         public bool PersistTextureVariants { get; set; }
+        public bool RandomizeWaterColour { get; set; }
         public bool RetainMainLevelTextures { get; set; }
         public bool RetainKeySpriteTextures { get; set; }
         public bool RetainSecretSpriteTextures { get; set; }
@@ -67,6 +69,9 @@ namespace TRRandomizerCore.Editors
         public bool SwapEnemyAppearance { get; set; }
         public bool GlitchedSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
+        public TRSecretCountMode SecretCountMode { get; set; }
+        public uint MinSecretCount { get; set; }
+        public uint MaxSecretCount { get; set; }
         public bool PersistOutfits { get; set; }
         public bool RemoveRobeDagger { get; set; }
         public uint HaircutLevelCount { get; set; }
@@ -85,6 +90,7 @@ namespace TRRandomizerCore.Editors
         public bool ChangeWeaponSFX { get; set; }
         public bool ChangeCrashSFX { get; set; }
         public bool ChangeEnemySFX { get; set; }
+        public bool ChangeDoorSFX { get; set; }
         public bool LinkCreatureSFX { get; set; }
         public uint UncontrolledSFXCount { get; set; }
         public bool UncontrolledSFXAssaultCourse { get; set; }
@@ -111,6 +117,11 @@ namespace TRRandomizerCore.Editors
         public bool VfxCaustics { get; set; }
         public bool VfxWave { get; set; }
 
+        public bool RandomizeStartingHealth { get; set; }
+        public int HealthSeed { get; set; }
+        public uint MinStartingHealth { get; set; }
+        public uint MaxStartingHealth { get; set; }
+
         public void ApplyConfig(Config config)
         {
             int defaultSeed = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
@@ -121,14 +132,17 @@ namespace TRRandomizerCore.Editors
             SecretSeed = config.GetInt(nameof(SecretSeed), defaultSeed);
             HardSecrets = config.GetBool(nameof(HardSecrets));
             GlitchedSecrets = config.GetBool(nameof(GlitchedSecrets));
-            UseRewardRoomCameras = config.GetBool(nameof(UseRewardRoomCameras));
+            UseRewardRoomCameras = config.GetBool(nameof(UseRewardRoomCameras), true);
+            SecretCountMode = (TRSecretCountMode)config.GetEnum(nameof(SecretCountMode), typeof(TRSecretCountMode), TRSecretCountMode.Default);
+            MinSecretCount = config.GetUInt(nameof(MinSecretCount), 1);
+            MaxSecretCount = config.GetUInt(nameof(MaxSecretCount), 5);
 
             RandomizeItems = config.GetBool(nameof(RandomizeItems));
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
             IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
             RandoItemDifficulty = (ItemDifficulty)config.GetEnum(nameof(RandoItemDifficulty), typeof(ItemDifficulty), ItemDifficulty.Default);
-            RandomizeItemTypes = config.GetBool(nameof(RandomizeItemTypes));
-            RandomizeItemPositions = config.GetBool(nameof(RandomizeItemPositions));
+            RandomizeItemTypes = config.GetBool(nameof(RandomizeItemTypes), true);
+            RandomizeItemPositions = config.GetBool(nameof(RandomizeItemPositions), true);
 
             RandomizeEnemies = config.GetBool(nameof(RandomizeEnemies));
             EnemySeed = config.GetInt(nameof(EnemySeed), defaultSeed);
@@ -150,6 +164,7 @@ namespace TRRandomizerCore.Editors
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
             PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
+            RandomizeWaterColour = config.GetBool(nameof(RandomizeWaterColour));
             RetainMainLevelTextures = config.GetBool(nameof(RetainMainLevelTextures));
             RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures), true);
             RetainSecretSpriteTextures = config.GetBool(nameof(RetainSecretSpriteTextures), true);
@@ -188,6 +203,7 @@ namespace TRRandomizerCore.Editors
             ChangeWeaponSFX = config.GetBool(nameof(ChangeWeaponSFX), true);
             ChangeCrashSFX = config.GetBool(nameof(ChangeCrashSFX), true);
             ChangeEnemySFX = config.GetBool(nameof(ChangeEnemySFX), true);
+            ChangeDoorSFX = config.GetBool(nameof(ChangeDoorSFX), true);
             LinkCreatureSFX = config.GetBool(nameof(LinkCreatureSFX));
             UncontrolledSFXCount = config.GetUInt(nameof(UncontrolledSFXCount), 0);
             UncontrolledSFXAssaultCourse = config.GetBool(nameof(UncontrolledSFXAssaultCourse));
@@ -209,7 +225,7 @@ namespace TRRandomizerCore.Editors
             PuristMode = config.GetBool(nameof(PuristMode));
 
             RandomizeSecretRewardsPhysical = config.GetBool(nameof(RandomizeSecretRewardsPhysical));
-            SecretRewardsPhysicalSeed = config.GetInt(nameof(SecretRewardsPhysicalSeed));
+            SecretRewardsPhysicalSeed = config.GetInt(nameof(SecretRewardsPhysicalSeed), defaultSeed);
             
             RandomizeVfx = config.GetBool(nameof(RandomizeVfx));
             VfxFilterColor = Color.FromArgb(config.GetInt(nameof(VfxFilterColor)));
@@ -218,6 +234,11 @@ namespace TRRandomizerCore.Editors
             VfxRoom = config.GetBool(nameof(VfxRoom));
             VfxCaustics = config.GetBool(nameof(VfxCaustics));
             VfxWave = config.GetBool(nameof(VfxWave));
+
+            RandomizeStartingHealth = config.GetBool(nameof(RandomizeStartingHealth));
+            HealthSeed = config.GetInt(nameof(HealthSeed), defaultSeed);
+            MinStartingHealth = config.GetUInt(nameof(MinStartingHealth), 1000);
+            MaxStartingHealth = config.GetUInt(nameof(MaxStartingHealth), 1000);
         }
 
         public void StoreConfig(Config config)
@@ -229,6 +250,9 @@ namespace TRRandomizerCore.Editors
             config[nameof(HardSecrets)] = HardSecrets;
             config[nameof(GlitchedSecrets)] = GlitchedSecrets;
             config[nameof(UseRewardRoomCameras)] = UseRewardRoomCameras;
+            config[nameof(SecretCountMode)] = SecretCountMode;
+            config[nameof(MinSecretCount)] = MinSecretCount;
+            config[nameof(MaxSecretCount)] = MaxSecretCount;
 
             config[nameof(RandomizeItems)] = RandomizeItems;
             config[nameof(ItemSeed)] = ItemSeed;
@@ -253,6 +277,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;
             config[nameof(PersistTextureVariants)] = PersistTextureVariants;
+            config[nameof(RandomizeWaterColour)] = RandomizeWaterColour;
             config[nameof(RetainMainLevelTextures)] = RetainMainLevelTextures;
             config[nameof(RetainKeySpriteTextures)] = RetainKeySpriteTextures;
             config[nameof(RetainSecretSpriteTextures)] = RetainSecretSpriteTextures;
@@ -290,6 +315,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(ChangeWeaponSFX)] = ChangeWeaponSFX;
             config[nameof(ChangeCrashSFX)] = ChangeCrashSFX;
             config[nameof(ChangeEnemySFX)] = ChangeEnemySFX;
+            config[nameof(ChangeDoorSFX)] = ChangeDoorSFX;
             config[nameof(LinkCreatureSFX)] = LinkCreatureSFX;
             config[nameof(UncontrolledSFXCount)] = UncontrolledSFXCount;
             config[nameof(UncontrolledSFXAssaultCourse)] = UncontrolledSFXAssaultCourse;
@@ -320,6 +346,11 @@ namespace TRRandomizerCore.Editors
             config[nameof(VfxRoom)] = VfxRoom;
             config[nameof(VfxCaustics)] = VfxCaustics;
             config[nameof(VfxWave)] = VfxWave;
+
+            config[nameof(RandomizeStartingHealth)] = RandomizeStartingHealth;
+            config[nameof(HealthSeed)] = HealthSeed;
+            config[nameof(MinStartingHealth)] = MinStartingHealth;
+            config[nameof(MaxStartingHealth)] = MaxStartingHealth;
         }
 
         public int GetSaveTarget(int numLevels)

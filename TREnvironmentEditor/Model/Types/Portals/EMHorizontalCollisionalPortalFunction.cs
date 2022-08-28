@@ -11,6 +11,39 @@ namespace TREnvironmentEditor.Model.Types
     {
         public Dictionary<short, Dictionary<short, EMLocation[]>> Portals { get; set; }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            EMLevelData data = GetData(level);
+
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            Dictionary<TRRoomSector, List<ushort>> sectorMap = new Dictionary<TRRoomSector, List<ushort>>();
+
+            foreach (short fromRoomNumber in Portals.Keys)
+            {
+                short convertedFromRoomNumber = data.ConvertRoom(fromRoomNumber);
+                foreach (short toRoomNumber in Portals[fromRoomNumber].Keys)
+                {
+                    short convertedToRoomNumber = data.ConvertRoom(toRoomNumber);
+                    foreach (EMLocation sectorLocation in Portals[fromRoomNumber][toRoomNumber])
+                    {
+                        TRRoomSector sector = FDUtilities.GetRoomSector(sectorLocation.X, sectorLocation.Y, sectorLocation.Z, convertedFromRoomNumber, level, control);
+
+                        if (!sectorMap.ContainsKey(sector))
+                        {
+                            sectorMap[sector] = new List<ushort>();
+                        }
+                        sectorMap[sector].Add((ushort)convertedToRoomNumber);
+                    }
+                }
+            }
+
+            CreatePortals(sectorMap, control);
+
+            control.WriteToLevel(level);
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             // Given a room number, we want to create collisional portals into the other room

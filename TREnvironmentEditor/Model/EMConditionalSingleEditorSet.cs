@@ -9,6 +9,15 @@ namespace TREnvironmentEditor.Model
         public EMEditorSet OnTrue { get; set; }
         public EMEditorSet OnFalse { get; set; }
 
+        public void ApplyToLevel(TRLevel level, IEnumerable<EMType> excludedTypes = null)
+        {
+            EMEditorSet edits = Condition.GetResult(level) ? OnTrue : OnFalse;
+            if (edits != null)
+            {
+                edits.ApplyToLevel(level, excludedTypes);
+            }
+        }
+
         public void ApplyToLevel(TR2Level level, IEnumerable<EMType> excludedTypes = null)
         {
             EMEditorSet edits = Condition.GetResult(level) ? OnTrue : OnFalse;

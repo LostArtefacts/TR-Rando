@@ -36,6 +36,7 @@ namespace TRRandomizerView.Commands
         public static readonly RoutedUICommand DeSelectAll = new RoutedUICommand();
         public static readonly RoutedUICommand RandomizeSeeds = new RoutedUICommand();
         public static readonly RoutedUICommand CreateGlobalSeed = new RoutedUICommand();
+        public static readonly RoutedUICommand EditCommunitySettings = new RoutedUICommand();
 
         // Tools
         public static readonly RoutedUICommand ShowBackup = new RoutedUICommand();

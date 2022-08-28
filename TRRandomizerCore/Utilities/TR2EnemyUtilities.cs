@@ -490,6 +490,16 @@ namespace TRRandomizerCore.Utilities
             }
         };
 
+        public static List<TR2Entities> GetFriendlyEnemies()
+        {
+            return new List<TR2Entities>(_friendlyEnemies);
+        }
+
+        private static readonly List<TR2Entities> _friendlyEnemies = new List<TR2Entities>
+        {
+            TR2Entities.Winston, TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick
+        };
+
         // #146 Ensure Marco is spawned only once
         private static readonly List<TR2Entities> _oneShotEnemies = new List<TR2Entities>
         {

@@ -19,7 +19,7 @@ namespace TextureExport.Types
             using (TR1TexturePacker packer = new TR1TexturePacker(level))
             {
                 StringBuilder tiles = new StringBuilder();
-                BuildTiles(tiles, packer.Tiles);
+                BuildTiles(tiles, packer.Tiles, level.Palette);
 
                 StringBuilder levelSel = new StringBuilder();
                 BuildLevelSelect(levelSel, lvlName, TRLevelNames.AsOrderedList);
@@ -76,7 +76,7 @@ namespace TextureExport.Types
             }
         }
 
-        private static void BuildTiles(StringBuilder html, IReadOnlyList<TexturedTile> tiles)
+        private static void BuildTiles(StringBuilder html, IReadOnlyList<TexturedTile> tiles, TRColour[] palette = null)
         {
             foreach (TexturedTile tile in tiles)
             {
@@ -95,6 +95,35 @@ namespace TextureExport.Types
                         html.Append(string.Format("style=\"top:{0}px;left:{1}px;width:{2}px;height:{3}px\" ", segment.Bounds.Y, segment.Bounds.X, segment.Bounds.Width, segment.Bounds.Height));
                         html.Append(string.Format("data-tile=\"{0}\" ", tile.Index));
                         html.Append(string.Format("data-rect=\"{0}\" ", RectangleToString(segment.Bounds)));
+
+                        if (palette != null)
+                        {
+                            // Assume 8-bit so we want to see the palette indices for this segment
+                            ISet<int> paletteIndices = new SortedSet<int>();
+                            for (int y = 0; y < segment.Bitmap.Height; y++)
+                            {
+                                for (int x = 0; x < segment.Bitmap.Width; x++)
+                                {
+                                    Color c = segment.Bitmap.GetPixel(x, y);
+                                    if (c.A != 0)
+                                    {
+                                        TRColour col = new TRColour
+                                        {
+                                            Red = (byte)(c.R / 4),
+                                            Green = (byte)(c.G / 4),
+                                            Blue = (byte)(c.B / 4)
+                                        };
+                                        int index = Array.FindIndex(palette, p => p.Red == col.Red && p.Green == col.Green && p.Blue == col.Blue);
+                                        if (index != -1)
+                                        {
+                                            paletteIndices.Add(index);
+                                        }
+                                    }
+                                }
+                            }
+
+                            html.Append(string.Format("data-palette=\"{0}\" ", string.Join(",", paletteIndices)));
+                        }
 
                         List<string> objectData = new List<string>();
                         List<string> spriteData = new List<string>();

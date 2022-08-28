@@ -101,6 +101,23 @@ namespace TRRandomizerCore.Utilities
 
         public static Dictionary<string, int> DefaultRoomCountDictionary = new Dictionary<string, int>
         {
+            { TRLevelNames.CAVES, 38 },
+            { TRLevelNames.VILCABAMBA, 94 },
+            { TRLevelNames.VALLEY, 91 },
+            { TRLevelNames.QUALOPEC, 54 },
+            { TRLevelNames.FOLLY, 63 },
+            { TRLevelNames.COLOSSEUM, 89 },
+            { TRLevelNames.MIDAS, 79 },
+            { TRLevelNames.CISTERN, 139 },
+            { TRLevelNames.TIHOCAN, 114 },
+            { TRLevelNames.KHAMOON, 71 },
+            { TRLevelNames.OBELISK, 84 },
+            { TRLevelNames.SANCTUARY, 64 },
+            { TRLevelNames.MINES, 108 },
+            { TRLevelNames.ATLANTIS, 101 },
+            { TRLevelNames.PYRAMID, 67 },
+            { TRLevelNames.ASSAULT, 18 },
+
             { TR3LevelNames.JUNGLE, 165 },
             { TR3LevelNames.RUINS, 224 },
             { TR3LevelNames.GANGES, 177 },

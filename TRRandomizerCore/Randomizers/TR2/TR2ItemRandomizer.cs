@@ -47,6 +47,12 @@ namespace TRRandomizerCore.Randomizers
                 //Apply the modifications
                 RepositionItems(locations[_levelInstance.Name]);
 
+                if (Settings.RandomizeItemTypes)
+                    RandomizeItemTypes();
+
+                if (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
+                    EnforceOneLimit();
+
                 RandomizeVehicles();
 
                 //Write back the level file
@@ -130,13 +136,22 @@ namespace TRRandomizerCore.Randomizers
             if (ItemLocs.Count > 0)
             {
                 //We are currently looking guns + ammo
-                List<TR2Entities> targetents = TR2EntityUtilities.GetListOfGunTypes();
-                targetents.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
+                List<TR2Entities> targetents = new List<TR2Entities>();
+                if (Settings.RandomizeItemPositions)
+                {
+                    targetents.AddRange(TR2EntityUtilities.GetListOfGunTypes());
+                    targetents.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
+                }
 
                 //And also key items...
                 if (Settings.IncludeKeyItems)
                 {
                     targetents.AddRange(TR2EntityUtilities.GetListOfKeyItemTypes());
+                }
+
+                if (targetents.Count == 0)
+                {
+                    return;
                 }
 
                 //It's important to now start zoning key items as softlocks must be avoided.
@@ -331,27 +346,54 @@ namespace TRRandomizerCore.Randomizers
                         }
                     }
                 }
+            }
+        }
 
-                if (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
+        private void RandomizeItemTypes()
+        {
+            if (_levelInstance.IsAssault || _levelInstance.Is(TR2LevelNames.HOME))
+            {
+                return;
+            }
+
+            List<TR2Entities> stdItemTypes = TR2EntityUtilities.GetListOfGunTypes();
+            stdItemTypes.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
+
+            for (int i = 0; i < _levelInstance.Data.NumEntities; i++)
+            {
+                TR2Entity entity = _levelInstance.Data.Entities[i];
+                TR2Entities currentType = (TR2Entities)entity.TypeID;
+                
+                if (i == _unarmedLevelPistolIndex)
                 {
-                    List<TR2Entities> oneOfEachType = new List<TR2Entities>();
-                    List<TR2Entity> allEntities = _levelInstance.Data.Entities.ToList();
+                    // Handled separately in RandomizeAmmo
+                    continue;
+                }
+                else if (stdItemTypes.Contains(currentType))
+                {
+                    entity.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                }
+            }
+        }
 
-                    // look for extra utility/ammo items and hide them
-                    foreach (TR2Entity ent in allEntities)
+        private void EnforceOneLimit()
+        {
+            List<TR2Entities> oneOfEachType = new List<TR2Entities>();
+            List<TR2Entity> allEntities = _levelInstance.Data.Entities.ToList();
+
+            // look for extra utility/ammo items and hide them
+            foreach (TR2Entity ent in allEntities)
+            {
+                TR2Entities eType = (TR2Entities)ent.TypeID;
+                if (TR2EntityUtilities.IsUtilityType(eType) ||
+                    TR2EntityUtilities.IsGunType(eType))
+                {
+                    if (oneOfEachType.Contains(eType))
                     {
-                        TR2Entities eType = (TR2Entities)ent.TypeID;
-                        if (TR2EntityUtilities.IsUtilityType(eType) ||
-                            TR2EntityUtilities.IsGunType(eType))
-                        {
-                            if (oneOfEachType.Contains(eType))
-                            {
-                                ItemUtilities.HideEntity(ent);
-                            }
-                            else
-                                oneOfEachType.Add((TR2Entities)ent.TypeID);
-                        }
+                        ItemUtilities.HideEntity(ent);
                     }
+                    else
+                        oneOfEachType.Add((TR2Entities)ent.TypeID);
                 }
             }
         }

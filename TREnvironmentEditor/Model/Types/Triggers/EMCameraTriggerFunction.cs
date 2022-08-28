@@ -23,6 +23,61 @@ namespace TREnvironmentEditor.Model.Types
             LookAtItem = ushort.MaxValue;
         }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            ushort cameraIndex;
+            if (Camera != null)
+            {
+                List<TRCamera> cameras = level.Cameras.ToList();
+                cameras.Add(Camera);
+                level.Cameras = cameras.ToArray();
+
+                cameraIndex = (ushort)level.NumCameras;
+                level.NumCameras++;
+            }
+            else
+            {
+                cameraIndex = CameraIndex;
+            }
+
+            EMLevelData data = GetData(level);
+
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            if (AttachToItems != null)
+            {
+                foreach (ushort item in AttachToItems)
+                {
+                    TREntity attachToEntity = level.Entities[item];
+                    TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level, control);
+                    AttachToSector(sector, control, cameraIndex);
+                }
+            }
+
+            if (AttachToLocations != null)
+            {
+                foreach (EMLocation location in AttachToLocations)
+                {
+                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                    AttachToSector(sector, control, cameraIndex);
+                }
+            }
+
+            if (AttachToRooms != null)
+            {
+                foreach (short room in AttachToRooms)
+                {
+                    foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
+                    {
+                        AttachToSector(sector, control, cameraIndex);
+                    }
+                }
+            }
+
+            control.WriteToLevel(level);
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             ushort cameraIndex;
@@ -140,7 +195,7 @@ namespace TREnvironmentEditor.Model.Types
                 FDTriggerEntry trigger = control.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) as FDTriggerEntry;
                 if (trigger != null && trigger.TrigType != FDTrigType.Dummy)
                 {
-                    trigger.TrigActionList.Insert(0, new FDActionListItem
+                    trigger.TrigActionList.Add(/*0, */new FDActionListItem
                     {
                         TrigAction = FDTrigAction.Camera,
                         Value = 1024,
@@ -150,7 +205,7 @@ namespace TREnvironmentEditor.Model.Types
 
                     if (LookAtItem != ushort.MaxValue)
                     {
-                        trigger.TrigActionList.Insert(1, new FDActionListItem
+                        trigger.TrigActionList.Add(/*1, */new FDActionListItem
                         {
                             TrigAction = FDTrigAction.LookAtItem,
                             Value = 6158,

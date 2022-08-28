@@ -25,7 +25,7 @@ namespace TRTexture16Importer.Textures
 
         protected readonly Dictionary<int, BitmapGraphics> _tileMap;
         protected readonly L _level;
-        private bool _committed;
+        protected bool _committed;
 
         protected AbstractTextureMapping(L level)
         {
@@ -35,6 +35,7 @@ namespace TRTexture16Importer.Textures
         }
 
         protected abstract TRMesh[] GetModelMeshes(E entity);
+        protected abstract TRColour[] GetPalette8();
         protected abstract TRColour4[] GetPalette16();
         protected abstract int ImportColour(Color colour);
         protected abstract TRSpriteSequence[] GetSpriteSequences();
@@ -305,6 +306,63 @@ namespace TRTexture16Importer.Textures
                 // Reset the palette tracking 
                 PaletteUtilities.ResetPaletteTracking(palette);
             }
+
+            if (source.EntityColourMap8 != null)
+            {
+                foreach (E entity in source.EntityColourMap8.Keys)
+                {
+                    E translatedEntity = entity;
+                    if (EntityMap != null && EntityMap.ContainsKey(entity))
+                    {
+                        translatedEntity = EntityMap[entity];
+                    }
+                    TRMesh[] meshes = GetModelMeshes(translatedEntity);
+                    if (meshes == null || meshes.Length == 0)
+                    {
+                        continue;
+                    }
+
+                    Dictionary<int, int> remapIndices = new Dictionary<int, int>();
+
+                    TRColour[] palette = GetPalette8();
+                    foreach (Color targetColour in source.EntityColourMap8[entity].Keys)
+                    {
+                        TRColour col = new TRColour
+                        {
+                            Red = (byte)(targetColour.R / 4),
+                            Green = (byte)(targetColour.G / 4),
+                            Blue = (byte)(targetColour.B / 4)
+                        };
+                        int matchedIndex = Array.FindIndex(palette, c => c.Red == col.Red && c.Green == col.Green && c.Blue == col.Blue);
+                        if (matchedIndex == -1)
+                        {
+                            continue;
+                        }
+
+                        int sourceRectangle = source.EntityColourMap8[entity][targetColour];
+                        int newColourIndex = ImportColour(source.Bitmap.GetPixel(segments[sourceRectangle].X, segments[sourceRectangle].Y));
+                        remapIndices.Add(matchedIndex, newColourIndex);
+                    }
+
+                    foreach (TRMesh mesh in meshes)
+                    {
+                        foreach (TRFace4 f in mesh.ColouredRectangles)
+                        {
+                            if (remapIndices.ContainsKey(f.Texture))
+                            {
+                                f.Texture = (ushort)remapIndices[f.Texture];
+                            }
+                        }
+                        foreach (TRFace3 f in mesh.ColouredTriangles)
+                        {
+                            if (remapIndices.ContainsKey(f.Texture))
+                            {
+                                f.Texture = (ushort)remapIndices[f.Texture];
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public void DrawReplacements()
@@ -386,7 +444,7 @@ namespace TRTexture16Importer.Textures
             CommitGraphics();
         }
 
-        public void CommitGraphics()
+        public virtual void CommitGraphics()
         {
             if (!_committed)
             {

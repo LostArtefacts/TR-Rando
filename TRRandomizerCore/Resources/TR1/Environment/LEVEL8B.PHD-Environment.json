@@ -1,0 +1,274 @@
+{
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if key item #15 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 15,
+        "X": 50304,
+        "Y": -3072,
+        "Z": 56832,
+        "Room": 16
+      },
+      "OnFalse": [
+        {
+          "Comments": "Remove the trapdoor entry from the pickup.",
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 50688,
+              "Y": 256,
+              "Z": 56832,
+              "Room": 36
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 22
+          }
+        },
+        {
+          "Comments": "Move the trigger.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 50688,
+            "Y": 256,
+            "Z": 56832,
+            "Room": 36
+          },
+          "EntityLocation": 15
+        },
+        {
+          "Comments": "Replace the dummy trigger below the door.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 50688,
+              "Y": 256,
+              "Z": 56832,
+              "Room": 36
+            }
+          ],
+          "Trigger": {
+            "TrigType": 8,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 22
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #16 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 16,
+        "X": 49664,
+        "Y": -3072,
+        "Z": 56192,
+        "Room": 16
+      },
+      "OnFalse": [
+        {
+          "Comments": "Remove the trapdoor entry from the pickup.",
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 49664,
+              "Y": 256,
+              "Z": 56192,
+              "Room": 36
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 19
+          }
+        },
+        {
+          "Comments": "Move the trigger",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 49664,
+            "Y": 256,
+            "Z": 56192,
+            "Room": 36
+          },
+          "EntityLocation": 16
+        },
+        {
+          "Comments": "Replace the dummy trigger below the door.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 49664,
+              "Y": 256,
+              "Z": 56192,
+              "Room": 36
+            }
+          ],
+          "Trigger": {
+            "TrigType": 8,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 19
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #17 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 17,
+        "X": 49024,
+        "Y": -3072,
+        "Z": 56832,
+        "Room": 16
+      },
+      "OnFalse": [
+        {
+          "Comments": "Remove the trapdoor entry from the pickup.",
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 49024,
+              "Y": 256,
+              "Z": 56832,
+              "Room": 36
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 20
+          }
+        },
+        {
+          "Comments": "Move the trigger",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 49024,
+            "Y": 256,
+            "Z": 56832,
+            "Room": 36
+          },
+          "EntityLocation": 17
+        },
+        {
+          "Comments": "Replace the dummy trigger below the door.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 49024,
+              "Y": 256,
+              "Z": 56832,
+              "Room": 36
+            }
+          ],
+          "Trigger": {
+            "TrigType": 8,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 20
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #18 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 18,
+        "X": 49664,
+        "Y": -3072,
+        "Z": 57472,
+        "Room": 16
+      },
+      "OnFalse": [
+        {
+          "Comments": "Remove the trapdoor entry from the pickup.",
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 49664,
+              "Y": 256,
+              "Z": 57472,
+              "Room": 36
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 21
+          }
+        },
+        {
+          "Comments": "Move the trigger",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 49664,
+            "Y": 256,
+            "Z": 57472,
+            "Room": 36
+          },
+          "EntityLocation": 18
+        },
+        {
+          "Comments": "Replace the dummy trigger below the door.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 49664,
+              "Y": 256,
+              "Z": 57472,
+              "Room": 36
+            }
+          ],
+          "Trigger": {
+            "TrigType": 8,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 21
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If Lara's not in the default starting position, move the flipmap trigger to her new location.",
+        "ConditionType": 0,
+        "EntityIndex": 24,
+        "X": 45568,
+        "Y": 0,
+        "Z": 37376,
+        "Room": 24
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 45568,
+            "Y": 0,
+            "Z": 37376,
+            "Room": 24
+          },
+          "EntityLocation": 24
+        }
+      ]
+    }
+  ],
+  "Mirrored": []
+}

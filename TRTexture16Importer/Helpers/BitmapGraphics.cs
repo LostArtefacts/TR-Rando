@@ -34,7 +34,7 @@ namespace TRTexture16Importer.Helpers
 
         public void AdjustHSB(Rectangle rect, HSBOperation operation)
         {
-            Scan(rect, delegate (Color c)
+            Scan(rect, delegate (Color c, int x, int y)
             {
                 return ApplyHSBOperation(c, operation);
             });
@@ -52,13 +52,13 @@ namespace TRTexture16Importer.Helpers
 
         public void Replace(Color search, Color replace, Rectangle rect)
         {
-            Scan(rect, delegate (Color c)
+            Scan(rect, delegate (Color c, int x, int y)
             {
                 return c == search ? replace : c;
             });
         }
 
-        public void Scan(Rectangle rect, Func<Color, Color> action)
+        public void Scan(Rectangle rect, Func<Color, int, int, Color> action)
         {
             // This is about 25% faster than using GetPixel/SetPixel
 
@@ -85,7 +85,7 @@ namespace TRTexture16Importer.Helpers
                     int a = pixels[currentLine + x + 3];
 
                     Color c = Color.FromArgb(a, r, g, b);
-                    c = action.Invoke(c);
+                    c = action.Invoke(c, x / bytesPerPixel, y);
 
                     pixels[currentLine + x] = c.B;
                     pixels[currentLine + x + 1] = c.G;

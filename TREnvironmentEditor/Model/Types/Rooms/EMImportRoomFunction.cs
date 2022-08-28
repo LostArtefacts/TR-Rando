@@ -29,6 +29,12 @@ namespace TREnvironmentEditor.Model.Types
             RectangleTexture = TriangleTexture = ushort.MaxValue;
         }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            // Not yet implemented, plan is to rework this class to read level files instead of JSON
+            throw new NotImplementedException();
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             Dictionary<byte, EMRoomDefinition<TR2Room>> roomResource = JsonConvert.DeserializeObject<Dictionary<byte, EMRoomDefinition<TR2Room>>>(ReadRoomResource("TR2"), _jsonSettings);

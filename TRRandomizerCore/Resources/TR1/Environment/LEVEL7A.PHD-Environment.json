@@ -1,0 +1,80 @@
+{
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if key item #46 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 46,
+        "X": 48640,
+        "Y": -1024,
+        "Z": 40448,
+        "Room": 40
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 48640,
+            "Y": -1024,
+            "Z": 40448,
+            "Room": 40
+          },
+          "EntityLocation": 46
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #61 is in its default position. If not, move the trigger to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 61,
+        "X": 43520,
+        "Y": 0,
+        "Z": 47616,
+        "Room": 49
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 43520,
+            "Y": 0,
+            "Z": 47616,
+            "Room": 49
+          },
+          "EntityLocation": 61
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #67 is in its default position. If not, move the trigger (from flipmap) to its new location.",
+        "ConditionType": 0,
+        "EntityIndex": 67,
+        "X": 53760,
+        "Y": 0,
+        "Z": 52736,
+        "Room": 56
+      },
+      "OnFalse": [
+        {
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 53760,
+            "Y": 0,
+            "Z": 52736,
+            "Room": 72
+          },
+          "EntityLocation": 67
+        }
+      ]
+    }
+  ],
+  "Mirrored": []
+}

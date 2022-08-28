@@ -1,0 +1,52 @@
+{
+  "All": [],
+  "NonPurist": [],
+  "Any": [],
+  "AllWithin": [],
+  "OneOf": [],
+  "ConditionalAllWithin": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if key item #71 is in its default position. If not, add a trigger for doors 64 & 70 to avoid softlock for any non-purists if they need to go back.",
+        "ConditionType": 0,
+        "EntityIndex": 71,
+        "X": 49664,
+        "Y": -9984,
+        "Z": 90624,
+        "Room": 68
+      },
+      "OnFalse": [
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 49664,
+              "Y": -9984,
+              "Z": 93696,
+              "Room": 68
+            },
+            {
+              "X": 49664,
+              "Y": -9984,
+              "Z": 92672,
+              "Room": 68
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 64
+              },
+              {
+                "Parameter": 70
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "Mirrored": []
+}

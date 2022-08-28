@@ -18,6 +18,7 @@ namespace TREnvironmentEditor.Model
         [JsonProperty(Order = -2, DefaultValueHandling = DefaultValueHandling.Include)]
         public EMType EMType { get; set; }
 
+        public abstract void ApplyToLevel(TRLevel level);
         public abstract void ApplyToLevel(TR2Level level);
         public abstract void ApplyToLevel(TR3Level level);
 
@@ -42,6 +43,20 @@ namespace TREnvironmentEditor.Model
             }
 
             return vertices;
+        }
+
+        public int CreateRoomVertex(TRRoom room, TRVertex vert, short lighting = 6574)
+        {
+            TRRoomVertex v = new TRRoomVertex
+            {
+                Lighting = lighting
+            };
+
+            List<TRRoomVertex> verts = room.RoomData.Vertices.ToList();
+            verts.Add(v);
+            room.RoomData.Vertices = verts.ToArray();
+            room.RoomData.NumVertices++;
+            return verts.Count - 1;
         }
 
         public int CreateRoomVertex(TR2Room room, TRVertex vert, short lighting = 6574, short lighting2 = 6574)
@@ -95,6 +110,16 @@ namespace TREnvironmentEditor.Model
                 }
             }
             return rooms;
+        }
+
+        protected EMLevelData GetData(TRLevel level)
+        {
+            return new EMLevelData
+            {
+                NumCameras = level.NumCameras,
+                NumEntities = level.NumEntities,
+                NumRooms = level.NumRooms
+            };
         }
 
         protected EMLevelData GetData(TR2Level level)

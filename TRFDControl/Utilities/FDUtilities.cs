@@ -80,6 +80,14 @@ namespace TRFDControl.Utilities
             return items;
         }
 
+        public static void RemoveEntityTriggers(TRLevel level, int entityIndex, FDControl control)
+        {
+            foreach (TRRoom room in level.Rooms)
+            {
+                RemoveEntityTriggers(room.Sectors, entityIndex, control);
+            }
+        }
+
         public static void RemoveEntityTriggers(TR2Level level, int entityIndex, FDControl control)
         {
             foreach (TR2Room room in level.Rooms)
@@ -129,6 +137,93 @@ namespace TRFDControl.Utilities
 
         public static readonly short NO_ROOM = 0xff;
         public static readonly short WALL_SHIFT = 10;
+
+        public static TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TRLevel level, FDControl floorData)
+        {
+            int xFloor, yFloor;
+            TRRoom room = level.Rooms[roomNumber];
+            TRRoomSector sector;
+            short data;
+
+            do
+            {
+                // Clip position to edge of tile
+                xFloor = (z - room.Info.Z) >> WALL_SHIFT;
+                yFloor = (x - room.Info.X) >> WALL_SHIFT;
+
+                if (xFloor <= 0)
+                {
+                    xFloor = 0;
+                    if (yFloor < 1)
+                    {
+                        yFloor = 1;
+                    }
+                    else if (yFloor > room.NumXSectors - 2)
+                    {
+                        yFloor = room.NumXSectors - 2;
+                    }
+                }
+                else if (xFloor >= room.NumZSectors - 1)
+                {
+                    xFloor = room.NumZSectors - 1;
+                    if (yFloor < 1)
+                    {
+                        yFloor = 1;
+                    }
+                    else if (yFloor > room.NumXSectors - 2)
+                    {
+                        yFloor = room.NumXSectors - 2;
+                    }
+                }
+                else if (yFloor < 0)
+                {
+                    yFloor = 0;
+                }
+                else if (yFloor >= room.NumXSectors)
+                {
+                    yFloor = room.NumXSectors - 1;
+                }
+
+                sector = room.Sectors[xFloor + yFloor * room.NumZSectors];
+                data = GetDoor(sector, floorData);
+                if (data != NO_ROOM && data >= 0 && data < level.Rooms.Length - 1)
+                {
+                    room = level.Rooms[data];
+                }
+            }
+            while (data != NO_ROOM);
+
+            if (y >= (sector.Floor << 8))
+            {
+                do
+                {
+                    if (sector.RoomBelow == NO_ROOM)
+                    {
+                        return sector;
+                    }
+
+                    room = level.Rooms[sector.RoomBelow];
+                    sector = room.Sectors[((z - room.Info.Z) >> WALL_SHIFT) + ((x - room.Info.X) >> WALL_SHIFT) * room.NumZSectors];
+                }
+                while (y >= (sector.Floor << 8));
+            }
+            else if (y < (sector.Ceiling << 8))
+            {
+                do
+                {
+                    if (sector.RoomAbove == NO_ROOM)
+                    {
+                        return sector;
+                    }
+
+                    room = level.Rooms[sector.RoomAbove];
+                    sector = room.Sectors[((z - room.Info.Z) >> WALL_SHIFT) + ((x - room.Info.X) >> WALL_SHIFT) * room.NumZSectors];
+                }
+                while (y < (sector.RoomAbove << 8));
+            }
+
+            return sector;
+        }
 
         public static TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TR2Level level, FDControl floorData)
         {

@@ -11,6 +11,23 @@ namespace TREnvironmentEditor.Model.Types
     {
         public uint[] ModelIDs { get; set; }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            List<TRMesh> meshes = new List<TRMesh>();
+            foreach (uint modelID in ModelIDs)
+            {
+                TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TREntities)modelID);
+                if (modelMeshes == null || modelMeshes.Length > 1)
+                {
+                    throw new NotSupportedException("Only models with single meshes can be mirrored.");
+                }
+
+                meshes.Add(modelMeshes[0]);
+            }
+
+            MirrorObjectTextures(MirrorMeshes(meshes), level.ObjectTextures);
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             List<TRMesh> meshes = new List<TRMesh>();

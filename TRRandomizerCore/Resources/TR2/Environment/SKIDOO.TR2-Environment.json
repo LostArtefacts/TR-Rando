@@ -42,6 +42,60 @@
           }
         ]
       }
+    },
+    {
+      "Comments": "Add missing trapdoor triggers in the flipmap room.",
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 15872,
+          "Y": 0,
+          "Z": 65024,
+          "Room": 96
+        },
+        {
+          "X": 16896,
+          "Y": 0,
+          "Z": 65024,
+          "Room": 96
+        }
+      ],
+      "Trigger": {
+        "TrigType": 8,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 38
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Add missing trapdoor triggers in the flipmap room.",
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 17920,
+          "Y": 0,
+          "Z": 65024,
+          "Room": 96
+        },
+        {
+          "X": 18944,
+          "Y": 0,
+          "Z": 65024,
+          "Room": 96
+        }
+      ],
+      "Trigger": {
+        "TrigType": 8,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 39
+          }
+        ]
+      }
     }
   ],
   "NonPurist": [

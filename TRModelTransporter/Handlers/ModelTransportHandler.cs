@@ -49,9 +49,16 @@ namespace TRModelTransporter.Handlers
                 level.Models[i] = definition.Model;
             }
 
-            if (definition.Entity == TREntities.Lara && laraDependants != null)
+            if (laraDependants != null)
             {
-                ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
+                if (definition.Entity == TREntities.Lara)
+                {
+                    ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
+                }
+                else if (laraDependants.Contains((TREntities)definition.Model.ID))
+                {
+                    ReplaceLaraDependants(levelModels, levelModels.Find(m => m.ID == (uint)TREntities.Lara), new short[] { (short)definition.Model.ID });
+                }
             }
         }
 

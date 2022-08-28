@@ -18,6 +18,11 @@ namespace TREnvironmentEditor.Model.Conditions
         public int? Z { get; set; }
         public short? Room { get; set; }
 
+        protected override bool Evaluate(TRLevel level)
+        {
+            return GetResult(level.Entities[EntityIndex]);
+        }
+
         protected override bool Evaluate(TR2Level level)
         {
             return GetResult(level.Entities[EntityIndex]);
@@ -26,6 +31,56 @@ namespace TREnvironmentEditor.Model.Conditions
         protected override bool Evaluate(TR3Level level)
         {
             return GetResult(level.Entities[EntityIndex]);
+        }
+
+        private bool GetResult(TREntity entity)
+        {
+            bool result = true;
+            if (EntityType.HasValue)
+            {
+                result &= entity.TypeID == EntityType.Value;
+            }
+            if (EntityTypes != null)
+            {
+                result &= EntityTypes.Contains(entity.TypeID);
+            }
+            if (Invisible.HasValue)
+            {
+                result &= entity.Invisible == Invisible.Value;
+            }
+            if (ClearBody.HasValue)
+            {
+                result &= entity.ClearBody == ClearBody.Value;
+            }
+            if (Intensity1.HasValue)
+            {
+                result &= entity.Intensity == Intensity1.Value;
+            }
+            if (Intensity2.HasValue)
+            {
+                result &= entity.Intensity == Intensity2.Value;
+            }
+            if (Flags.HasValue)
+            {
+                result &= entity.Flags == Flags.Value;
+            }
+            if (X.HasValue)
+            {
+                result &= entity.X == X.Value;
+            }
+            if (Y.HasValue)
+            {
+                result &= entity.Y == Y.Value;
+            }
+            if (Z.HasValue)
+            {
+                result &= entity.Z == Z.Value;
+            }
+            if (Room.HasValue)
+            {
+                result &= entity.Room == Room.Value;
+            }
+            return result;
         }
 
         private bool GetResult(TR2Entity entity)

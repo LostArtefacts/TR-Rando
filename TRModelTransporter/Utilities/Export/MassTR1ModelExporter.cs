@@ -44,43 +44,43 @@ namespace TRModelTransporter.Utilities
             },
             [TRLevelNames.VALLEY] = new List<TREntities>
             {
-                TREntities.TRex, TREntities.Raptor
+                TREntities.TRex, TREntities.Raptor, TREntities.LaraPonytail_H_U
             },
             [TRLevelNames.QUALOPEC] = new List<TREntities>
             {
-                TREntities.Larson, TREntities.ScionPiece_M_H
+                TREntities.Mummy
             },
             [TRLevelNames.FOLLY] = new List<TREntities>
             {
-                TREntities.CrocodileWater, TREntities.Gorilla, TREntities.LionFemale, TREntities.LionMale, TREntities.Pierre
+                TREntities.CrocodileLand, TREntities.CrocodileWater, TREntities.Gorilla, TREntities.Lion, TREntities.Lioness
             },
             [TRLevelNames.COLOSSEUM] = new List<TREntities>
             {
-                TREntities.CrocodileLand
+                
             },
             [TRLevelNames.MIDAS] = new List<TREntities>
             {
-                TREntities.RatWater
+                
             },
             [TRLevelNames.CISTERN] = new List<TREntities>
             {
-                TREntities.RatLand
+                TREntities.RatLand, TREntities.RatWater
             },
             [TRLevelNames.TIHOCAN] = new List<TREntities>
             {
-                TREntities.CentaurStatue
+                TREntities.CentaurStatue, TREntities.Centaur, TREntities.Pierre, TREntities.ScionPiece_M_H
             },
             [TRLevelNames.KHAMOON] = new List<TREntities>
             {
-                TREntities.NonShootingAtlantean_N, TREntities.Panther
+                TREntities.Panther
             },
             [TRLevelNames.OBELISK] = new List<TREntities>
             {
-                
+                TREntities.BandagedAtlantean
             },
             [TRLevelNames.SANCTUARY] = new List<TREntities>
             {
-                TREntities.FlyingAtlantean, TREntities.ShootingAtlantean_N
+                TREntities.MeatyFlyer, TREntities.MeatyAtlantean, TREntities.ShootingAtlantean_N, TREntities.Larson
             },
             [TRLevelNames.MINES] = new List<TREntities>
             {
@@ -88,11 +88,11 @@ namespace TRModelTransporter.Utilities
             },
             [TRLevelNames.ATLANTIS] = new List<TREntities>
             {
-                TREntities.Doppelganger, TREntities.AdamEgg, TREntities.AtlanteanEgg
+                TREntities.Doppelganger, TREntities.AtlanteanEgg
             },
             [TRLevelNames.PYRAMID] = new List<TREntities>
             {
-                TREntities.Natla
+                TREntities.Adam, TREntities.AdamEgg, TREntities.Natla
             }
         };
     }

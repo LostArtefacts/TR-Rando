@@ -4,29 +4,28 @@ using System.Linq;
 using System.Numerics;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
 using TRLevelReader.Model;
 using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Utilities
 {
-    public class LocationGenerator
+    public abstract class AbstractLocationGenerator<L> where L : class
     {
-        private static readonly byte _noRoom = 255;
-        private static readonly int _fullSectorSize = 1024;
-        private static readonly int _halfSectorSize = 512;
-        private static readonly int _qrtSectorSize = 256;
-        private static readonly int _slantLimit = 3;
-        private static readonly int _fenceMinLimit = 256;
-        private static readonly int _fenceMaxLimit = 1000;
+        protected static readonly byte _noRoom = 255;
+        protected static readonly int _fullSectorSize = 1024;
+        protected static readonly int _halfSectorSize = 512;
+        protected static readonly int _qrtSectorSize = 256;
+        protected static readonly int _slantLimit = 3;
+        protected static readonly int _fenceMinLimit = 256;
+        protected static readonly int _fenceMaxLimit = 1000;
 
-        private FDControl _floorData;
-        private ISet<TRRoomSector> _excludedSectors, _antiExcludedSectors; // Anti-excluded => not necessarily included
+        protected FDControl _floorData;
+        protected ISet<TRRoomSector> _excludedSectors, _antiExcludedSectors; // Anti-excluded => not necessarily included
 
-        public List<Location> Generate(TR3Level level, List<Location> exclusions)
+        public List<Location> Generate(L level, List<Location> exclusions)
         {
             _floorData = new FDControl();
-            _floorData.ParseFromLevel(level);
+            ReadFloorData(level);
 
             // Manual exclusions or known rooms such as swamps we wish to eliminate first
             DetermineBaseExcludedSectors(level, exclusions);
@@ -35,7 +34,7 @@ namespace TRRandomizerCore.Utilities
             return GetValidLocations(level);
         }
 
-        private void DetermineBaseExcludedSectors(TR3Level level, List<Location> exclusions)
+        protected void DetermineBaseExcludedSectors(L level, List<Location> exclusions)
         {
             _excludedSectors = new HashSet<TRRoomSector>();
             _antiExcludedSectors = new HashSet<TRRoomSector>();
@@ -46,7 +45,7 @@ namespace TRRandomizerCore.Utilities
             List<Location> antiExclusions = exclusions.FindAll(l => !l.Validated);
             foreach (Location location in antiExclusions)
             {
-                _antiExcludedSectors.Add(FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, _floorData));
+                _antiExcludedSectors.Add(GetSector(location, level));
             }
 
             // Check all other room or individual location exclusions
@@ -59,52 +58,55 @@ namespace TRRandomizerCore.Utilities
                 }
                 else
                 {
-                    _excludedSectors.Add(FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, _floorData));
+                    _excludedSectors.Add(GetSector(location, level));
                 }
             }
 
             List<TRStaticMesh> collidableMeshes = GetCollidableStaticMeshes(level);
 
-            for (short r = 0; r < level.NumRooms; r++)
+            for (short r = 0; r < GetRoomCount(level); r++)
             {
-                TR3Room room = level.Rooms[r];
-
                 // Exclude flipped rooms
-                if (room.AlternateRoom != -1)
+                short flipRoom = GetFlipMapRoom(level, r);
+                if (flipRoom != -1)
                 {
-                    ExcludeRoom(level, room.AlternateRoom);
+                    ExcludeRoom(level, flipRoom);
                 }
 
-                // Exclude swamps
-                if (room.IsSwamp)
+                // Exclude the room if it has no collisional portals
+                if (!RoomHasCollisionalPortal(level, r))
                 {
                     ExcludeRoom(level, r);
                     continue;
                 }
 
-                // Exclude the room if it has no collisional portals
-                if (!RoomHasCollisionalPortal(room))
+                // Allow subclasses to determine specifics e.g. swamps
+                if (!IsRoomValid(level, r))
                 {
                     ExcludeRoom(level, r);
                     continue;
                 }
 
                 // If there are any collidable static meshes in this room, exclude the sectors they're on
-                foreach (TR3RoomStaticMesh staticMesh in room.StaticMeshes)
+                Dictionary<ushort, List<Location>> meshLocations = GetRoomStaticMeshLocations(level, r);
+                foreach (ushort meshID in meshLocations.Keys)
                 {
-                    if (collidableMeshes.Find(m => m.ID == staticMesh.MeshID) != null)
+                    if (collidableMeshes.Find(m => m.ID == meshID) != null)
                     {
-                        _excludedSectors.Add(FDUtilities.GetRoomSector((int)staticMesh.X, (int)staticMesh.Y, (int)staticMesh.Z, r, level, _floorData));
+                        foreach (Location location in meshLocations[meshID])
+                        {
+                            _excludedSectors.Add(GetSector(location, level));
+                        }
                     }
                 }
             }
         }
 
-        private List<TRStaticMesh> GetCollidableStaticMeshes(TR3Level level)
+        protected List<TRStaticMesh> GetCollidableStaticMeshes(L level)
         {
             List<TRStaticMesh> meshes = new List<TRStaticMesh>();
 
-            foreach (TRStaticMesh mesh in level.StaticMeshes)
+            foreach (TRStaticMesh mesh in GetStaticMeshes(level))
             {
                 if (!mesh.NonCollidable)
                 {
@@ -122,22 +124,9 @@ namespace TRRandomizerCore.Utilities
             return meshes;
         }
 
-        private void ExcludeRoom(TR3Level level, int room)
+        private bool RoomHasCollisionalPortal(L level, short room)
         {
-            // Exclude every sector in this room, unless its location has been
-            // marked as an anti-exclusion.
-            foreach (TRRoomSector sector in level.Rooms[room].Sectors)
-            {
-                if (!_antiExcludedSectors.Contains(sector))
-                {
-                    _excludedSectors.Add(sector);
-                }
-            }
-        }
-
-        private bool RoomHasCollisionalPortal(TR3Room room)
-        {
-            foreach (TRRoomSector sector in room.Sectors)
+            foreach (TRRoomSector sector in GetRoomSectors(level, room))
             {
                 if (sector.IsImpenetrable)
                 {
@@ -163,14 +152,29 @@ namespace TRRandomizerCore.Utilities
             return false;
         }
 
-        private List<Location> GetValidLocations(TR3Level level)
+        protected void ExcludeRoom(L level, int room)
+        {
+            // Exclude every sector in this room, unless its location has been
+            // marked as an anti-exclusion.
+            foreach (TRRoomSector sector in GetRoomSectors(level, room))
+            {
+                if (!_antiExcludedSectors.Contains(sector))
+                {
+                    _excludedSectors.Add(sector);
+                }
+            }
+        }
+
+        private List<Location> GetValidLocations(L level)
         {
             List<Location> locations = new List<Location>();
-            for (short r = 0; r < level.NumRooms; r++)
+            for (short r = 0; r < GetRoomCount(level); r++)
             {
-                TR3Room room = level.Rooms[r];
-                foreach (TRRoomSector sector in room.Sectors)
+                List<TRRoomSector> sectors = GetRoomSectors(level, r);
+                for (int sectorIndex = 0; sectorIndex < sectors.Count; sectorIndex++)
                 {
+                    TRRoomSector sector = sectors[sectorIndex];
+
                     // Basic exclusion checks
                     if (IsSectorInvalid(sector))
                     {
@@ -227,7 +231,7 @@ namespace TRRandomizerCore.Utilities
                             }
                             else if (entry is TR3TriangulationEntry triangulation && triangulation.IsFloorTriangulation)
                             {
-                                Vector4? bestMidpoint = GetBestTriangleMidpoint(room, sector, triangulation);
+                                Vector4? bestMidpoint = GetBestTriangleMidpoint(sector, triangulation, sectorIndex, GetRoomDepth(level, r), GetRoomYTop(level, r));
                                 if (bestMidpoint.HasValue)
                                 {
                                     dx = (int)(bestMidpoint.Value.X * _qrtSectorSize);
@@ -263,7 +267,7 @@ namespace TRRandomizerCore.Utilities
                     }
 
                     // Make the location and adjust the positioning on this tile
-                    Location location = CreateLocation(r, room, sector);
+                    Location location = CreateLocation(r, sector, sectorIndex, GetRoomDepth(level, r), GetRoomPosition(level, r));
                     location.X += dx;
                     location.Y += dy;
                     location.Z += dz;
@@ -281,7 +285,7 @@ namespace TRRandomizerCore.Utilities
             return _excludedSectors.Contains(sector)
                 || sector.IsImpenetrable
                 || sector.IsSlipperySlope
-                || ((sector.Floor - sector.Ceiling) < 2 && sector.RoomAbove == _noRoom);
+                || ((sector.Floor - sector.Ceiling) < (CrawlspacesAllowed ? 2 : 4) && sector.RoomAbove == _noRoom);
         }
 
         private bool IsTriggerInvalid(FDTriggerEntry trigger)
@@ -298,6 +302,12 @@ namespace TRRandomizerCore.Utilities
 
         public Vector4? GetBestSlantMidpoint(FDSlantEntry slant)
         {
+            if (Math.Abs(slant.XSlant) > 2 || Math.Abs(slant.ZSlant) > 2)
+            {
+                // This is a slippery slope
+                return null;
+            }
+
             List<sbyte> corners = new List<sbyte> { 0, 0, 0, 0 };
             if (slant.XSlant > 0)
             {
@@ -358,7 +368,7 @@ namespace TRRandomizerCore.Utilities
         }
 
         // Returned vector contains x, y, z and angle adjustments for midpoint
-        private Vector4? GetBestTriangleMidpoint(TR3Room room, TRRoomSector sector, TR3TriangulationEntry triangulation)
+        private Vector4? GetBestTriangleMidpoint(TRRoomSector sector, TR3TriangulationEntry triangulation, int sectorIndex, int roomDepth, int roomYTop)
         {
             int t0 = triangulation.TriData.C10;
             int t1 = triangulation.TriData.C00;
@@ -391,9 +401,8 @@ namespace TRRandomizerCore.Utilities
             Vector3 triSum1, triSum2;
             Vector4? bestMatch = null;
 
-            int sectorIndex = room.Sectors.ToList().IndexOf(sector);
-            int sectorXPos = sectorIndex / room.NumZSectors * _fullSectorSize;
-            int sectorZPos = sectorIndex % room.NumZSectors * _fullSectorSize;
+            int sectorXPos = sectorIndex / roomDepth * _fullSectorSize;
+            int sectorZPos = sectorIndex % roomDepth * _fullSectorSize;
 
             FDFunctions func = (FDFunctions)triangulation.Setup.Function;
             switch (func)
@@ -454,7 +463,7 @@ namespace TRRandomizerCore.Utilities
 
                     // Eliminate hidden flat triangles on shore lines, otherwise the location will be OOB.
                     // See geometry in room 44 in Coastal Village for example.
-                    if (sector.Floor * _qrtSectorSize == room.Info.YTop)
+                    if (sector.Floor * _qrtSectorSize == roomYTop)
                     {
                         if (xoff1 == 0 && zoff1 == 0)
                         {
@@ -544,7 +553,7 @@ namespace TRRandomizerCore.Utilities
                         zoff2 = t0 - t1;
                     }
 
-                    if (sector.Floor * _qrtSectorSize == room.Info.YTop)
+                    if (sector.Floor * _qrtSectorSize == roomYTop)
                     {
                         if (xoff1 == 0 && zoff1 == 0)
                         {
@@ -590,17 +599,16 @@ namespace TRRandomizerCore.Utilities
             return null;
         }
 
-        private Location CreateLocation(short roomIndex, TR3Room room, TRRoomSector sector)
+        private Location CreateLocation(short roomIndex, TRRoomSector sector, int sectorIndex, ushort roomDepth, Vector2 roomPosition)
         {
             // Get the sector's position in its room
-            int sectorIndex = room.Sectors.ToList().IndexOf(sector);
-            int x = sectorIndex / room.NumZSectors * _fullSectorSize;
-            int z = sectorIndex % room.NumZSectors * _fullSectorSize;
+            int x = sectorIndex / roomDepth * _fullSectorSize;
+            int z = sectorIndex % roomDepth * _fullSectorSize;
             int y = sector.Floor * _qrtSectorSize;
 
             // Move into world space
-            x += room.Info.X;
-            z += room.Info.Z;
+            x += (int)roomPosition.X;
+            z += (int)roomPosition.Y;
 
             return new Location
             {
@@ -610,5 +618,18 @@ namespace TRRandomizerCore.Utilities
                 Room = roomIndex
             };
         }
+
+        protected abstract void ReadFloorData(L level);
+        protected abstract TRRoomSector GetSector(Location location, L level);
+        protected abstract List<TRRoomSector> GetRoomSectors(L level, int room);
+        protected abstract List<TRStaticMesh> GetStaticMeshes(L level);
+        protected abstract int GetRoomCount(L level);
+        protected abstract short GetFlipMapRoom(L level, short room);
+        protected abstract bool IsRoomValid(L level, short room);
+        protected abstract Dictionary<ushort, List<Location>> GetRoomStaticMeshLocations(L level, short room);
+        protected abstract ushort GetRoomDepth(L level, short room);
+        protected abstract int GetRoomYTop(L level, short room);
+        protected abstract Vector2 GetRoomPosition(L level, short room);
+        public abstract bool CrawlspacesAllowed { get; }
     }
 }

@@ -15,6 +15,34 @@ namespace TREnvironmentEditor.Model.Types
         public int EntityIndex { get; set; }
         public EMLocation Location { get; set; }
 
+        public override void ApplyToLevel(TRLevel level)
+        {
+            EMLevelData data = GetData(level);
+
+            FDControl control = new FDControl();
+            control.ParseFromLevel(level);
+
+            TREntity slot = level.Entities[EntityIndex];
+            TRRoomSector currentSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level, control);
+            short roomNumber = data.ConvertRoom(Location.Room);
+            TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, control);
+
+            // Check if there is also a trigger in the flip map if we are moving the slot within the same room
+            TRRoomSector currentFlipSector = null;
+            TRRoomSector newFlipSector = null;
+            short altRoom = level.Rooms[slot.Room].AlternateRoom;
+            if (slot.Room == roomNumber && altRoom != -1)
+            {
+                currentFlipSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, altRoom, level, control);
+                newFlipSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, altRoom, level, control);
+            }
+
+            if (MoveSlot(control, slot, roomNumber, currentSector, newSector, currentFlipSector, newFlipSector))
+            {
+                control.WriteToLevel(level);
+            }
+        }
+
         public override void ApplyToLevel(TR2Level level)
         {
             EMLevelData data = GetData(level);
@@ -81,6 +109,29 @@ namespace TREnvironmentEditor.Model.Types
             {
                 control.WriteToLevel(level);
             }
+        }
+
+        protected bool MoveSlot(FDControl control, TREntity slot, short roomNumber, TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
+        {
+            slot.X = Location.X;
+            slot.Y = Location.Y;
+            slot.Z = Location.Z;
+            slot.Room = roomNumber;
+            slot.Angle = Location.Angle;
+
+            if (newSector != currentSector && currentSector.FDIndex != 0)
+            {
+                MoveTriggers(control, currentSector, newSector);
+
+                if (currentFlipSector != null && newFlipSector != null && currentFlipSector.FDIndex != 0)
+                {
+                    MoveTriggers(control, currentFlipSector, newFlipSector);
+                }
+
+                return true;
+            }
+
+            return false;
         }
 
         protected bool MoveSlot(FDControl control, TR2Entity slot, short roomNumber, TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)

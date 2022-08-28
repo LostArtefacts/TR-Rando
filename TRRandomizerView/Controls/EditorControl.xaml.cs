@@ -251,6 +251,11 @@ namespace TRRandomizerView.Controls
             return _options.RandomizationPossible;
         }
 
+        public bool CanEditCommunitySettings()
+        {
+            return _options.IsTR1Main;
+        }
+
         public void OpenBackupFolder()
         {
             Process.Start("explorer.exe", Controller.BackupDirectory);
@@ -371,6 +376,12 @@ namespace TRRandomizerView.Controls
                 _options.SetGlobalSeed(gsw.Seed);
                 _lastGlobalSeed = gsw.Seed;
             }
+        }
+
+        public void EditCommunitySettings()
+        {
+            Tomb1MainWindow window = new Tomb1MainWindow(_options);
+            window.ShowDialog();
         }
 
         private void ShowInvalidSelectionMessage()

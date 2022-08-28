@@ -10,10 +10,6 @@ namespace TRModelTransporter.Handlers
 {
     public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Entities, TR3Level, TR3ModelDefinition>
     {
-        private static readonly int _maxTextures = 4096;
-
-        public override int MaximumTextures => _maxTextures;
-
         protected override IEnumerable<TRSpriteSequence> GetExistingSpriteSequences()
         {
             return _level.SpriteSequences;
