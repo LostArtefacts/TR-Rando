@@ -39,7 +39,7 @@
                                RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
                     <Run Text=")."/>
                     <LineBreak/>
-                    <Run Text="Settings marked as * may be overridden directly during randomization to meet certain criteria."/>
+                    <Run Text="Settings marked with * may be overridden directly during randomization to meet certain criteria."/>
                 </TextBlock>
                 <CheckBox IsChecked="{Binding ControllerProxy.UseRecommendedCommunitySettings, Mode=TwoWay}"
                           VerticalAlignment="Center"
