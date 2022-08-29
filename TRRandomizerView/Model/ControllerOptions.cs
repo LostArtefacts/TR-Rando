@@ -29,7 +29,7 @@ namespace TRRandomizerView.Model
         private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras;
         private TRSecretCountMode _secretCountMode;
         private uint _minSecretCount, _maxSecretCount;
-        private BoolItemControlClass _includeKeyItems, _randomizeItemTypes, _randomizeItemLocations;
+        private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance;
         private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
@@ -80,6 +80,7 @@ namespace TRRandomizerView.Model
         private int _levelCount, _maximumLevelCount, _defaultUnarmedLevelCount, _defaultAmmolessLevelCount, _defaultSunsetCount;
 
         private uint _minStartingHealth, _maxStartingHealth, _medilessLevelCount;
+        private bool _useRecommendedCommunitySettings;
 
         #region T1M Sepcifics
         
@@ -138,8 +139,8 @@ namespace TRRandomizerView.Model
             }
         }
 
-        private Vector3 _waterColor;
-        public Vector3 WaterColor
+        private double[] _waterColor;
+        public double[] WaterColor
         {
             get => _waterColor;
             set
@@ -151,30 +152,30 @@ namespace TRRandomizerView.Model
 
         public double WaterColorR
         {
-            get => _waterColor.X;
+            get => _waterColor[0];
             set
             {
-                _waterColor.X = (float)value;
+                _waterColor[0] = value;
                 FirePropertyChanged(nameof(WaterColor));
             }
         }
 
         public double WaterColorG
         {
-            get => _waterColor.Y;
+            get => _waterColor[1];
             set
             {
-                _waterColor.Y = (float)value;
+                _waterColor[1] = value;
                 FirePropertyChanged(nameof(WaterColor));
             }
         }
 
         public double WaterColorB
         {
-            get => _waterColor.Z;
+            get => _waterColor[2];
             set
             {
-                _waterColor.Z = (float)value;
+                _waterColor[2] = value;
                 FirePropertyChanged(nameof(WaterColor));
             }
         }
@@ -628,6 +629,17 @@ namespace TRRandomizerView.Model
             }
         }
 
+        private bool _disableTRexCollision;
+        public bool DisableTRexCollision
+        {
+            get => _disableTRexCollision;
+            set
+            {
+                _disableTRexCollision = value;
+                FirePropertyChanged();
+            }
+        }
+
         private double _anisotropyFilter;
         public double AnisotropyFilter
         {
@@ -1005,6 +1017,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public bool UseRecommendedCommunitySettings
+        {
+            get => _useRecommendedCommunitySettings;
+            set
+            {
+                _useRecommendedCommunitySettings = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool RandomizeSunsets
         {
             get => _sunsetLevelsControl.IsActive;
@@ -1361,6 +1383,16 @@ namespace TRRandomizerView.Model
             set
             {
                 _includeKeyItems = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass IncludeExtraPickups
+        {
+            get => _includeExtraPickups;
+            set
+            {
+                _includeExtraPickups = value;
                 FirePropertyChanged();
             }
         }
@@ -2149,6 +2181,12 @@ namespace TRRandomizerView.Model
                 Description = "Most key item positions will be randomized. Keys will spawn before their respective locks."
             };
             BindingOperations.SetBinding(IncludeKeyItems, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
+            IncludeExtraPickups = new BoolItemControlClass
+            {
+                Title = "Add extra pickups",
+                Description = "Add more weapon, ammo and medi items to some levels for Lara to find."
+            };
+            BindingOperations.SetBinding(IncludeExtraPickups, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
 
             // Enemies
             Binding randomizeEnemiesBinding = new Binding(nameof(RandomizeEnemies)) { Source = this };
@@ -2348,7 +2386,7 @@ namespace TRRandomizerView.Model
             };
             ItemBoolItemControls = new List<BoolItemControlClass>()
             {
-                _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems
+                _randomizeItemTypes, _randomizeItemLocations, _includeKeyItems, _includeExtraPickups
             };
             EnemyBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2403,6 +2441,7 @@ namespace TRRandomizerView.Model
             _docileWillard.IsAvailable = IsTR3;
 
             _includeKeyItems.IsAvailable = IsKeyItemTypeSupported;
+            _includeExtraPickups.IsAvailable = IsExtraPickupsTypeSupported;
 
             _allowGlitched.IsAvailable = IsGlitchedSecretsSupported;
             _isHardSecrets.IsAvailable = IsHardSecretsSupported;
@@ -2481,6 +2520,7 @@ namespace TRRandomizerView.Model
             RandomizeItems = _controller.RandomizeItems;
             ItemSeed = _controller.ItemSeed;
             IncludeKeyItems.Value = _controller.IncludeKeyItems;
+            IncludeExtraPickups.Value = _controller.IncludeExtraPickups;
             RandomizeItemTypes.Value = _controller.RandomizeItemTypes;
             RandomizeItemPositions.Value = _controller.RandomizeItemPositions;
             RandoItemDifficulty = _controller.RandoItemDifficulty;
@@ -2553,6 +2593,7 @@ namespace TRRandomizerView.Model
             DisableDemos = _controller.DisableDemos;
             AutoLaunchGame = _controller.AutoLaunchGame;
             PuristMode = _controller.PuristMode;
+            UseRecommendedCommunitySettings = _controller.UseRecommendedCommunitySettings;
 
             if (IsTR1Main)
             {
@@ -2603,6 +2644,7 @@ namespace TRRandomizerView.Model
                 DisableCine = _controller.DisableCine;
                 DisableMusicInMenu = _controller.DisableMusicInMenu;
                 DisableMusicInInventory = _controller.DisableMusicInInventory;
+                DisableTRexCollision = _controller.DisableTRexCollision;
                 AnisotropyFilter = _controller.AnisotropyFilter;
                 ResolutionWidth = _controller.ResolutionWidth;
                 ResolutionHeight = _controller.ResolutionHeight;
@@ -2843,6 +2885,7 @@ namespace TRRandomizerView.Model
             _controller.RandomizeItems = RandomizeItems;
             _controller.ItemSeed = ItemSeed;
             _controller.IncludeKeyItems = IncludeKeyItems.Value;
+            _controller.IncludeExtraPickups = IncludeExtraPickups.Value;
             _controller.RandomizeItemTypes = RandomizeItemTypes.Value;
             _controller.RandomizeItemPositions = RandomizeItemPositions.Value;
             _controller.RandoItemDifficulty = RandoItemDifficulty;
@@ -2917,6 +2960,7 @@ namespace TRRandomizerView.Model
             _controller.DisableDemos = DisableDemos;
             _controller.AutoLaunchGame = AutoLaunchGame;
             _controller.PuristMode = PuristMode;
+            _controller.UseRecommendedCommunitySettings = UseRecommendedCommunitySettings;
 
             if (IsTR1Main)
             {
@@ -2967,6 +3011,7 @@ namespace TRRandomizerView.Model
                 _controller.DisableCine = DisableCine;
                 _controller.DisableMusicInMenu = DisableMusicInMenu;
                 _controller.DisableMusicInInventory = DisableMusicInInventory;
+                _controller.DisableTRexCollision = DisableTRexCollision;
                 _controller.AnisotropyFilter = AnisotropyFilter;
                 _controller.ResolutionWidth = ResolutionWidth;
                 _controller.ResolutionHeight = ResolutionHeight;
@@ -3008,6 +3053,7 @@ namespace TRRandomizerView.Model
         public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
         public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);
         public bool IsKeyItemTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItems);
+        public bool IsExtraPickupsTypeSupported => IsRandomizationSupported(TRRandomizerType.ExtraPickups);
         public bool IsEnemyTypeSupported => IsRandomizationSupported(TRRandomizerType.Enemy);
         public bool IsTextureTypeSupported => IsRandomizationSupported(TRRandomizerType.Texture);
         public bool IsStartPositionTypeSupported => IsRandomizationSupported(TRRandomizerType.StartPosition);

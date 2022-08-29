@@ -39,6 +39,8 @@ namespace TRRandomizerView.Windows
             ControllerProxy = proxy;
             _content.DataContext = this;
 
+            WaterColor_ValueChanged(null, EventArgs.Empty);
+
             Owner = WindowUtils.GetActiveWindow(this);
         }
 

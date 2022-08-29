@@ -317,6 +317,12 @@ namespace TRRandomizerCore
             }
         }
 
+        public bool UseRecommendedCommunitySettings
+        {
+            get => LevelRandomizer.UseRecommendedCommunitySettings;
+            set => LevelRandomizer.UseRecommendedCommunitySettings = value;
+        }
+
         public bool RandomizeSunsets
         {
             get => ScriptEditor.LevelSunsetOrganisation == Organisation.Random;
@@ -441,23 +447,19 @@ namespace TRRandomizerCore
             }
         }
 
-        public Vector3 WaterColor
+        public double[] WaterColor
         {
-            get
-            {
-                if (ScriptEditor is TR1ScriptEditor tr1Editor)
-                {
-                    return new Vector3((float)tr1Editor.WaterColor[0], (float)(tr1Editor.WaterColor[1]), (float)(tr1Editor.WaterColor[2]));
-                }
-                return new Vector3(-1, -1, -1);
-            }
+            get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.WaterColor : null;
             set
             {
-                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                if (ScriptEditor is TR1ScriptEditor tr1Editor && value.Length == 3)
                 {
-                    tr1Editor.WaterColor[0] = Math.Round(value.X, 2);
-                    tr1Editor.WaterColor[1] = Math.Round(value.Y, 2);
-                    tr1Editor.WaterColor[2] = Math.Round(value.Z, 2);
+                    tr1Editor.WaterColor = new double[]
+                    {
+                        Math.Round(value[0], 2),
+                        Math.Round(value[1], 2),
+                        Math.Round(value[2], 2),
+                    };
                 }
             }
         }
@@ -954,6 +956,18 @@ namespace TRRandomizerCore
             }
         }
 
+        public bool DisableTRexCollision
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableTrexCollision;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.DisableTrexCollision = value;
+                }
+            }
+        }
+
         public double AnisotropyFilter
         {
             get => ScriptEditor is TR1ScriptEditor tr1Editor ? tr1Editor.AnisotropyFilter : -1;
@@ -1252,6 +1266,12 @@ namespace TRRandomizerCore
         {
             get => LevelRandomizer.IncludeKeyItems;
             set => LevelRandomizer.IncludeKeyItems = value;
+        }
+
+        public bool IncludeExtraPickups
+        {
+            get => LevelRandomizer.IncludeExtraPickups;
+            set => LevelRandomizer.IncludeExtraPickups = value;
         }
 
         public bool RandomizeItemTypes

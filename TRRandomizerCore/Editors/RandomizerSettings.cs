@@ -41,6 +41,7 @@ namespace TRRandomizerCore.Editors
         public GlobeDisplayOption GlobeDisplay { get; set; }
         public bool HardSecrets { get; set; }
         public bool IncludeKeyItems { get; set; }
+        public bool IncludeExtraPickups { get; set; }
         public bool DevelopmentMode { get; set; }
         public ItemDifficulty RandoItemDifficulty { get; set; }
         public bool PersistTextureVariants { get; set; }
@@ -122,6 +123,8 @@ namespace TRRandomizerCore.Editors
         public uint MinStartingHealth { get; set; }
         public uint MaxStartingHealth { get; set; }
 
+        public bool UseRecommendedCommunitySettings { get; set; }
+
         public void ApplyConfig(Config config)
         {
             int defaultSeed = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
@@ -140,6 +143,7 @@ namespace TRRandomizerCore.Editors
             RandomizeItems = config.GetBool(nameof(RandomizeItems));
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
             IncludeKeyItems = config.GetBool(nameof(IncludeKeyItems), true);
+            IncludeExtraPickups = config.GetBool(nameof(IncludeExtraPickups), true);
             RandoItemDifficulty = (ItemDifficulty)config.GetEnum(nameof(RandoItemDifficulty), typeof(ItemDifficulty), ItemDifficulty.Default);
             RandomizeItemTypes = config.GetBool(nameof(RandomizeItemTypes), true);
             RandomizeItemPositions = config.GetBool(nameof(RandomizeItemPositions), true);
@@ -239,6 +243,8 @@ namespace TRRandomizerCore.Editors
             HealthSeed = config.GetInt(nameof(HealthSeed), defaultSeed);
             MinStartingHealth = config.GetUInt(nameof(MinStartingHealth), 1000);
             MaxStartingHealth = config.GetUInt(nameof(MaxStartingHealth), 1000);
+
+            UseRecommendedCommunitySettings = config.GetBool(nameof(UseRecommendedCommunitySettings), true);
         }
 
         public void StoreConfig(Config config)
@@ -257,6 +263,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(RandomizeItems)] = RandomizeItems;
             config[nameof(ItemSeed)] = ItemSeed;
             config[nameof(IncludeKeyItems)] = IncludeKeyItems;
+            config[nameof(IncludeExtraPickups)] = IncludeExtraPickups;
             config[nameof(RandoItemDifficulty)] = RandoItemDifficulty;
             config[nameof(RandomizeItemTypes)] = RandomizeItemTypes;
             config[nameof(RandomizeItemPositions)] = RandomizeItemPositions;
@@ -351,6 +358,8 @@ namespace TRRandomizerCore.Editors
             config[nameof(HealthSeed)] = HealthSeed;
             config[nameof(MinStartingHealth)] = MinStartingHealth;
             config[nameof(MaxStartingHealth)] = MaxStartingHealth;
+
+            config[nameof(UseRecommendedCommunitySettings)] = UseRecommendedCommunitySettings;
         }
 
         public int GetSaveTarget(int numLevels)

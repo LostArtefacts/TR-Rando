@@ -31,15 +31,23 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.ColumnSpan="2"
-                       Margin="0,0,0,10">
-                <Run Text="Edit the settings available in Tomb1Main as standard (see"/>
-                <Hyperlink ToolTip="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg" 
-                           NavigateUri="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg"
-                           RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink><Run Text=")."/>
-                <LineBreak/>
-                <Run Text="Note that some settings may be overridden directly during randomization to meet certain criteria."/>
-            </TextBlock>
+            <StackPanel Grid.ColumnSpan="2">
+                <TextBlock Margin="0,0,0,5">
+                    <Run Text="Edit the settings available in Tomb1Main as standard (see"/>
+                    <Hyperlink ToolTip="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg" 
+                               NavigateUri="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg"
+                               RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
+                    <Run Text=")."/>
+                    <LineBreak/>
+                    <Run Text="Settings marked with * may be overridden directly during randomization to meet certain criteria."/>
+                </TextBlock>
+                <CheckBox IsChecked="{Binding ControllerProxy.UseRecommendedCommunitySettings, Mode=TwoWay}"
+                          VerticalAlignment="Center"
+                          Margin="0,0,0,10">
+                    <Label Padding="0"
+                           Content="Allow the randomizer to manage other recommended settings (marked **)" />
+                </CheckBox>
+            </StackPanel>
 
             <ListBox x:Name="_optionGroupListBox"
                      SelectionChanged="OptionGroupListBox_SelectionChanged"
@@ -243,7 +251,7 @@
                         <Border Grid.Row="6"
                                 Style="{StaticResource SeparatorBorder}">
                             <StackPanel>
-                                <Label Content="Water color (red)"
+                                <Label Content="Water color (red) *"
                                        Style="{StaticResource OptionPromptStyle}"/>
                                 <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorR, Mode=TwoWay}"
                                                     ValueChanged="WaterColor_ValueChanged"
@@ -267,7 +275,7 @@
 
                         <Border Grid.Row="7">
                             <StackPanel>
-                                <Label Content="Water color (green)"
+                                <Label Content="Water color (green) *"
                                        Style="{StaticResource OptionPromptStyle}"/>
                                 <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorG, Mode=TwoWay}"
                                                     ValueChanged="WaterColor_ValueChanged"
@@ -279,7 +287,7 @@
 
                         <Border Grid.Row="8">
                             <StackPanel>
-                                <Label Content="Water color (blue)"
+                                <Label Content="Water color (blue) *"
                                        Style="{StaticResource OptionPromptStyle}"/>
                                 <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorB, Mode=TwoWay}"
                                                     ValueChanged="WaterColor_ValueChanged"
@@ -553,7 +561,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.FixDescendingGlitch, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Fix descending glitch" />
+                                       Content="Fix descending glitch *" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="3"
@@ -569,7 +577,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.FixPyramidSecretTrigger, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Fix Pyramid secret trigger" />
+                                       Content="Fix Pyramid secret trigger *" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="4"
@@ -585,7 +593,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.FixQwopGlitch, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Fix QWOP glitch" />
+                                       Content="Fix QWOP glitch *" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="5"
@@ -617,7 +625,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.FixWallJumpGlitch, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Fix wall jump glitch" />
+                                       Content="Fix wall jump glitch *" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="7"
@@ -632,6 +640,7 @@
                     <!-- 3. Gameplay -->
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -774,6 +783,24 @@
 
                         <Border Grid.Row="7"
                                 Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.DisableTRexCollision, Mode=TwoWay}"
+                                      VerticalAlignment="Top">
+                                <Label Padding="0"
+                                       Content="Disable T-Rex collision *" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="7"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Remove all collision with T-Rex upon death."/>
+                                <LineBreak/>
+                                <Run Text="This helps when the T-Rex's body blocks the passage out."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="8"
+                                Style="{StaticResource SeparatorBorder}">
                             <StackPanel>
                                 <Label Content="FoV Value"
                                        Style="{StaticResource OptionPromptStyle}"/>
@@ -782,7 +809,7 @@
                                                     MaxValue="255"/>
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="7"
+                        <Border Grid.Row="8"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -790,7 +817,7 @@
                             </TextBlock>
                         </Border>
 
-                        <Border Grid.Row="8"
+                        <Border Grid.Row="9"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableTimerInInventory, Mode=TwoWay}"
                                       VerticalAlignment="Top">
@@ -798,7 +825,7 @@
                                        Content="FoV Vertical" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="8"
+                        <Border Grid.Row="9"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
@@ -876,7 +903,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.Enable3dPickups, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Enable 3D pickups" />
+                                       Content="Enable 3D pickups **" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="3"

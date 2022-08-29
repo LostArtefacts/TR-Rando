@@ -48,5 +48,18 @@
       ]
     }
   ],
-  "Mirrored": []
+  "Mirrored": [
+    {
+      "Comments": "Moves door 62 so that it can open properly, otherwise Lara has to glitch through.",
+      "EMType": 44,
+      "EntityIndex": 62,
+      "TargetLocation": {
+        "X": 46592,
+        "Y": -11264,
+        "Z": 96768,
+        "Room": 65,
+        "Angle": -32768
+      }
+    }
+  ]
 }

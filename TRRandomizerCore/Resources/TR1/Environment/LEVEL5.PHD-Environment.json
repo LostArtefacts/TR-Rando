@@ -1,6 +1,40 @@
 {
   "All": [],
-  "NonPurist": [],
+  "NonPurist": [
+    {
+      "Comments": "Fix the bat triggers for room 71 - param 74 is duplicated so the third bat doesn't spawn.",
+      "EMType": 61,
+      "Replace": true,
+      "Locations": [
+        {
+          "X": 55808,
+          "Y": -4608,
+          "Z": 61952,
+          "Room": 70
+        },
+        {
+          "X": 53760,
+          "Y": -4608,
+          "Z": 64000,
+          "Room": 70
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 73
+          },
+          {
+            "Parameter": 74
+          },
+          {
+            "Parameter": 75
+          }
+        ]
+      }
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],
