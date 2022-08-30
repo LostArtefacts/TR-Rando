@@ -595,7 +595,9 @@ namespace TRRandomizerCore.Randomizers
                 }
                 else if (currentEntityType == TREntities.AtlanteanEgg)
                 {
+                    // Hide what used to be eggs and reset the CodeBits otherwise this can interfere with trigger masks.
                     currentEntity.Invisible = true;
+                    currentEntity.CodeBits = 0;
                 }
 
                 if (newEntityType == TREntities.CentaurStatue)
