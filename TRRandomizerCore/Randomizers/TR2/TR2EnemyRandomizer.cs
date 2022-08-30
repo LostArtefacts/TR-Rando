@@ -812,6 +812,38 @@ namespace TRRandomizerCore.Randomizers
                     });
                 }
             }
+            else //For Tibet level 
+            {
+                TR2Entity Skidoo = level.Data.Entities.ToList().Find(e => e.TypeID == (short)TR2Entities.RedSnowmobile);
+
+                if (Skidoo != null)
+                {
+                    short room, angle;
+                    int x, y, z;
+
+                    // we will only spawn one skidoo, so only need one random location
+                    Location randomLocation = VehicleUtilities.GetRandomLocation(level.Name, TR2Entities.RedSnowmobile, _generator);
+                    if (randomLocation != null)
+                    {
+                        room = (short)randomLocation.Room;
+                        x = randomLocation.X;
+                        y = randomLocation.Y;
+                        z = randomLocation.Z;
+                        angle = randomLocation.Angle;
+
+                        //Update Skidoo info
+                        Skidoo.Room = room;
+                        Skidoo.X = x;
+                        Skidoo.Y = y;
+                        Skidoo.Z = z;
+                        Skidoo.Angle = angle;
+                        Skidoo.Flags = 0;
+                        Skidoo.Intensity1 = -1;
+                        Skidoo.Intensity2 = -1;
+                    }                    
+                }
+
+            }
 
             // Did we add any new entities?
             if (newEntities.Count > 0)
