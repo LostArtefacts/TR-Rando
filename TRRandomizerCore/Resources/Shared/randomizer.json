@@ -51,6 +51,11 @@
       "default": 16384,
       "display": "Angle",
       "type": "number"
+    },
+    "TargetType": {
+      "default": -1,
+      "display": "Target Type",
+      "type": "number"
     }
   }
 }
