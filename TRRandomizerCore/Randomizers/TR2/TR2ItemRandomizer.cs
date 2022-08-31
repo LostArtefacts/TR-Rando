@@ -718,7 +718,7 @@ namespace TRRandomizerCore.Randomizers
 
         private void PopulateVehicleLocation(TR2Entities entity, Dictionary<TR2Entities, Location> locationMap)
         {
-            Location location = VehicleUtilities.GetRandomLocation(_levelInstance.Name, entity, _generator);
+            Location location = VehicleUtilities.GetRandomLocation(_levelInstance, entity, _generator);
             if (location != null)
             {
                 locationMap[entity] = location;

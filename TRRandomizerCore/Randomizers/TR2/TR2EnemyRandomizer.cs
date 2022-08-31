@@ -779,7 +779,7 @@ namespace TRRandomizerCore.Randomizers
                     int x, y, z;
 
                     // we will only spawn one skidoo, so only need one random location
-                    Location randomLocation = VehicleUtilities.GetRandomLocation(level.Name, TR2Entities.RedSnowmobile, _generator);
+                    Location randomLocation = VehicleUtilities.GetRandomLocation(level, TR2Entities.RedSnowmobile, _generator);
                     if (randomLocation != null)
                     {
                         room = (short)randomLocation.Room;
@@ -822,7 +822,7 @@ namespace TRRandomizerCore.Randomizers
                     int x, y, z;
 
                     // we will only spawn one skidoo, so only need one random location
-                    Location randomLocation = VehicleUtilities.GetRandomLocation(level.Name, TR2Entities.RedSnowmobile, _generator);
+                    Location randomLocation = VehicleUtilities.GetRandomLocation(level, TR2Entities.RedSnowmobile, _generator);
                     if (randomLocation != null)
                     {
                         room = (short)randomLocation.Room;
