@@ -279,6 +279,7 @@
       "Y": -4770,
       "Z": 20194,
       "Room": 76,
+      "Angle": 0,
       "TargetType": 13,
       "Validated": false
     },
@@ -341,6 +342,7 @@
       "Y": 0,
       "Z": 46399,
       "Room": 3,
+      "Angle": 0,
       "TargetType": 13
     },
     {
@@ -432,11 +434,10 @@
       "TargetType": 13
     },
     {
-      "X": 89220,
-      "Y": -1024,
-      "Z": 72496,
+      "X": 91981,
+      "Y": -1235,
+      "Z": 72162,
       "Room": 41,
-      "Angle": 0,
       "TargetType": 13
     },
     {
@@ -502,6 +503,14 @@
       "TargetType": 13
     },
     {
+      "X": 4608,
+      "Y": -2048,
+      "Z": 88576,
+      "Room": 72,
+      "Angle": 0,
+      "TargetType": 13
+    },
+    {
       "X": 18012,
       "Y": -1536,
       "Z": 83916,
@@ -513,14 +522,6 @@
       "Y": -2552,
       "Z": 93847,
       "Room": 14,
-      "Angle": 0,
-      "TargetType": 13
-    },
-    {
-      "X": 4608,
-      "Y": -2048,
-      "Z": 88576,
-      "Room": 72,
       "Angle": 0,
       "TargetType": 13
     },
@@ -568,13 +569,6 @@
       "TargetType": 13
     },
     {
-      "X": 13175,
-      "Y": 1024,
-      "Z": 58800,
-      "Room": 97,
-      "TargetType": 13
-    },
-    {
       "X": 19893,
       "Y": -3730,
       "Z": 48799,
@@ -603,7 +597,8 @@
       "Y": -3900,
       "Z": 23715,
       "Room": 110,
-      "TargetType": 13
+      "TargetType": 13,
+      "Validated": false
     },
     {
       "X": 17892,
@@ -620,7 +615,8 @@
       "Z": 17895,
       "Room": 112,
       "Angle": 0,
-      "TargetType": 13
+      "TargetType": 13,
+      "Validated": false
     },
     {
       "X": 65102,
@@ -635,6 +631,14 @@
       "Z": 35509,
       "Room": 4,
       "TargetType": 13
+    },
+    {
+      "X": 13175,
+      "Y": 1024,
+      "Z": 58800,
+      "Room": 63,
+      "TargetType": 13,
+      "VehicleRequired": true
     },
     {
       "X": 40429,
