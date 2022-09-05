@@ -291,12 +291,12 @@ namespace TRRandomizerCore.Utilities
         // We (can) also limit the count per level for some, such as bosses.
         private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsTechnical = new Dictionary<TREntities, int>
         {
+            [TREntities.Natla] = 1
         };
 
         private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsDefault = new Dictionary<TREntities, int>
         {
             [TREntities.Adam] = 1,
-            [TREntities.Natla] = 1,
             [TREntities.Cowboy] = 3,
             [TREntities.SkateboardKid] = 3,
             [TREntities.Kold] = 3,

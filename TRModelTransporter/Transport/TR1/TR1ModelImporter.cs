@@ -20,6 +20,7 @@ namespace TRModelTransporter.Transport
         public TR1ModelImporter(bool isCommunityPatch = false)
         {
             Data = new TR1DefaultDataProvider();
+            SortModels = true;
             PaletteManager = new TR1PaletteManager();
 
             if (isCommunityPatch)
