@@ -43,6 +43,7 @@
         SecretTextures,
         Braid,
         WaterColour,
-        ExtraPickups
+        ExtraPickups,
+        AmbientTracks
     }
 }

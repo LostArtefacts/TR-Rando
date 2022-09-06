@@ -86,6 +86,7 @@ namespace TRRandomizerCore.Editors
         public uint NightModeDarkness { get; set; }
         public bool NightModeAssaultCourse { get; set; }
         public bool OverrideSunsets { get; set; }
+        public bool ChangeAmbientTracks { get; set; }
         public bool ChangeTriggerTracks { get; set; }
         public bool SeparateSecretTracks { get; set; }
         public bool ChangeWeaponSFX { get; set; }
@@ -201,7 +202,8 @@ namespace TRRandomizerCore.Editors
             NightModeAssaultCourse = config.GetBool(nameof(NightModeAssaultCourse), true);
             OverrideSunsets = config.GetBool(nameof(OverrideSunsets));
 
-            // Note that the main audio config options (on/off and seed) are held in TRGE for now
+            RandomizeAudio = config.GetBool(nameof(RandomizeAudio));
+            ChangeAmbientTracks = config.GetBool(nameof(ChangeAmbientTracks), true);
             ChangeTriggerTracks = config.GetBool(nameof(ChangeTriggerTracks), true);
             SeparateSecretTracks = config.GetBool(nameof(SeparateSecretTracks), true);
             ChangeWeaponSFX = config.GetBool(nameof(ChangeWeaponSFX), true);
@@ -317,6 +319,8 @@ namespace TRRandomizerCore.Editors
             config[nameof(NightModeAssaultCourse)] = NightModeAssaultCourse;
             config[nameof(OverrideSunsets)] = OverrideSunsets;
 
+            config[nameof(RandomizeAudio)] = RandomizeAudio;
+            config[nameof(ChangeAmbientTracks)] = ChangeAmbientTracks;
             config[nameof(ChangeTriggerTracks)] = ChangeTriggerTracks;
             config[nameof(SeparateSecretTracks)] = SeparateSecretTracks;
             config[nameof(ChangeWeaponSFX)] = ChangeWeaponSFX;

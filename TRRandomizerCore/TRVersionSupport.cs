@@ -26,6 +26,7 @@ namespace TRRandomizerCore
 
         private static readonly List<TRRandomizerType> _tr1MainTypes = new List<TRRandomizerType>
         {
+            TRRandomizerType.AmbientTracks,
             TRRandomizerType.Ammoless,
             TRRandomizerType.Braid,
             TRRandomizerType.DisableDemos,
@@ -39,6 +40,7 @@ namespace TRRandomizerCore
 
         private static readonly List<TRRandomizerType> _tr2Types = new List<TRRandomizerType>
         {
+            TRRandomizerType.AmbientTracks,
             TRRandomizerType.Ammoless,
             TRRandomizerType.Audio,
             TRRandomizerType.BirdMonsterBehaviour,
@@ -71,6 +73,7 @@ namespace TRRandomizerCore
 
         private static readonly List<TRRandomizerType> _tr3Types = new List<TRRandomizerType>
         {
+            TRRandomizerType.AmbientTracks,
             TRRandomizerType.Ammoless,
             TRRandomizerType.Audio,
             TRRandomizerType.Braid,
