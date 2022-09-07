@@ -484,6 +484,11 @@ namespace TRLevelReader.Helpers
                     entity == TR2Entities.Flares_S_P);
         }
 
+        /// <summary>
+        /// returns true if the parameter provided is of one of the 3 secrets type 
+        /// </summary>
+        /// <param name="entity"><see cref="TR2Entities"/></param>
+        /// <returns>entity == TR2Entities.StoneSecret_S_P || entity == TR2Entities.JadeSecret_S_P || entity == TR2Entities.GoldSecret_S_P;</returns>
         public static bool IsSecretType(TR2Entities entity)
         {
             return entity == TR2Entities.StoneSecret_S_P || entity == TR2Entities.JadeSecret_S_P || entity == TR2Entities.GoldSecret_S_P;
