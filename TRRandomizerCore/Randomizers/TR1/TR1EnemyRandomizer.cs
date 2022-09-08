@@ -897,9 +897,17 @@ namespace TRRandomizerCore.Randomizers
                     if (!level.IsAssault)
                     {
                         EnemyTransportCollection enemies = _enemyMapping[level];
+                        List<TREntities> importModels = new List<TREntities>(enemies.EntitiesToImport);
+                        if (level.Is(TRLevelNames.KHAMOON) && (importModels.Contains(TREntities.BandagedAtlantean) || importModels.Contains(TREntities.BandagedFlyer)))
+                        {
+                            // Mummies may become shooters in Khamoon, but the missiles won't be available by default, so ensure they do get imported.
+                            importModels.Add(TREntities.Missile2_H);
+                            importModels.Add(TREntities.Missile3_H);
+                        }
+
                         TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
                         {
-                            EntitiesToImport = enemies.EntitiesToImport,
+                            EntitiesToImport = importModels,
                             EntitiesToRemove = enemies.EntitiesToRemove,
                             Level = level.Data,
                             LevelName = level.Name,
