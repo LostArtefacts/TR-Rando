@@ -113,9 +113,17 @@ namespace TRRandomizerCore.Editors
             string wipDirectory = _io.WIPOutputDirectory.FullName;
 
             bool isTomb1Main = scriptEditor.Edition.IsCommunityPatch;
-            if (Settings.DevelopmentMode && isTomb1Main)
+            if (isTomb1Main)
             {
-                (scriptEditor as TR1ScriptEditor).EnableCheats = true;
+                TR1ScriptEditor scriptEd = scriptEditor as TR1ScriptEditor;
+                if (Settings.DevelopmentMode)
+                {
+                    scriptEd.EnableCheats = true;
+                }
+                if (Settings.UseRecommendedCommunitySettings)
+                {
+                    scriptEd.EnableEnhancedSaves = false;
+                }
                 scriptEditor.SaveScript();
             }
 
