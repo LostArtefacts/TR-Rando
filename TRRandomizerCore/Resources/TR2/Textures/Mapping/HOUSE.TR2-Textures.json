@@ -831,14 +831,14 @@
 
     "Secrets": [
       {
-        "Segment": 0,
+        "Segment": 1,
         "Clear": true,
         "Tile": 8,
         "X": 44,
         "Y": 56
       },
       {
-        "Segment": 1,
+        "Segment": 0,
         "Clear": true,
         "Tile": 8,
         "X": 89,

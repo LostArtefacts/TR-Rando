@@ -100,6 +100,8 @@ namespace TRRandomizerCore.Randomizers
 
                 _levelInstance.Data.Entities = ents.ToArray();
                 _levelInstance.Data.NumEntities = (uint)ents.Count;
+
+                FixSecretTextures();
             }
         }
 
@@ -162,6 +164,23 @@ namespace TRRandomizerCore.Randomizers
 
             _levelInstance.Data.NumEntities = (uint)ents.Count;
             _levelInstance.Data.Entities = ents.ToArray();
+
+            FixSecretTextures();
+        }
+
+        private void FixSecretTextures()
+        {
+            if (_levelInstance.Is(TR2LevelNames.FLOATER) || _levelInstance.Is(TR2LevelNames.LAIR) || _levelInstance.Is(TR2LevelNames.HOME))
+            {
+                // Swap Stone and Jade textures - OG has them the wrong way around.
+                // SpriteSequence offsets have to remain in order, so swap the texture targets instead.
+                TRSpriteSequence stoneSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == (int)TR2Entities.StoneSecret_S_P);
+                TRSpriteSequence jadeSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == (int)TR2Entities.JadeSecret_S_P);
+
+                TRSpriteTexture stoneTexture = _levelInstance.Data.SpriteTextures[stoneSequence.Offset];
+                _levelInstance.Data.SpriteTextures[stoneSequence.Offset] = _levelInstance.Data.SpriteTextures[jadeSequence.Offset];
+                _levelInstance.Data.SpriteTextures[jadeSequence.Offset] = stoneTexture;
+            }
         }
 
         public override void Randomize(int seed)
