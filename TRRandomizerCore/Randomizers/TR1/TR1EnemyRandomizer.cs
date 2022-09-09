@@ -846,9 +846,33 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeMeshes(TR1CombinedLevel level)
         {
-            // Currently just targeted at the Atlantis cutscene
+            // Currently just targeted at Atlantis and its cutscene
             if (level.Is(TRLevelNames.ATLANTIS))
             {
+                // Atlantis scion swap - Model => Mesh index
+                Dictionary<TREntities, int> scionSwaps = new Dictionary<TREntities, int>
+                {
+                    [TREntities.Lara] = 3,
+                    [TREntities.Pistols_M_H] = 1,
+                    [TREntities.Shotgun_M_H] = 0,
+                    [TREntities.ShotgunAmmo_M_H] = 0,
+                    [TREntities.Magnums_M_H] = 1,
+                    [TREntities.Uzis_M_H] = 1,
+                    [TREntities.Dart_H] = 0,
+                    [TREntities.Sunglasses_M_H] = 0,
+                    [TREntities.CassettePlayer_M_H] = 1
+                };
+
+                TRMesh[] scion = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.ScionPiece4_S_P);
+                List<TREntities> replacementKeys = scionSwaps.Keys.ToList();
+                TREntities replacement = replacementKeys[_generator.Next(0, replacementKeys.Count)];
+
+                TRMesh[] replacementMeshes = TRMeshUtilities.GetModelMeshes(level.Data, replacement);
+                int colRadius = scion[0].CollRadius;
+                TRMeshUtilities.DuplicateMesh(level.Data, scion[0], replacementMeshes[scionSwaps[replacement]]);
+                scion[0].CollRadius = colRadius; // Retain original as Lara may need to shoot it
+
+                // Cutscene head swaps
                 TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TREntities.CutsceneActor1);
                 TRMesh[] natla = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TREntities.CutsceneActor3);
                 TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TREntities.Pierre);
