@@ -42,6 +42,48 @@
           "EntityLocation": 38
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If Adam or Barney is present, we have to change the scion type as the MiscAnim that normally ends the level will have been overwritten.",
+        "ConditionType": 41,
+        "ModelID": 34,
+        "Or": [
+          {
+            "ConditionType": 41,
+            "ModelID": 18
+          }
+        ]
+      },
+      "OnTrue": [
+        {
+          "Comments": "Convert the scion type to the one from Great Pyramid, so Lara has to shoot it to end the level.",
+          "EMType": 144,
+          "OldModelID": 146,
+          "NewModelID": 145
+        },
+        {
+          "Comments": "Add a level-end heavy trigger.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 52736,
+              "Y": -19200,
+              "Z": 45568,
+              "Room": 50
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "TrigType": 5,
+            "Actions": [
+              {
+                "Action": 7
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "Mirrored": [

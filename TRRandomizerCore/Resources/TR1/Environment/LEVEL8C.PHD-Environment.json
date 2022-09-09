@@ -28,6 +28,71 @@
           "EntityLocation": 54
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If Adam or Barney is present, we have to change the scion pickup as the MiscAnim that normally ends the level will have been overwritten.",
+        "ConditionType": 41,
+        "ModelID": 34,
+        "Or": [
+          {
+            "ConditionType": 41,
+            "ModelID": 18
+          }
+        ]
+      },
+      "OnTrue": [
+        {
+          "Comments": "Convert the scion type to the one Pierre drops.",
+          "EMType": 143,
+          "OldSpriteID": 143,
+          "NewSpriteID": 144
+        },
+        {
+          "Comments": "Get rid of the pedestal.",
+          "EMType": 25,
+          "ClearFromRooms": {
+            "13": [
+              62
+            ]
+          }
+        },
+        {
+          "Comments": "Move the scion to the ground and further up the corridor.",
+          "EMType": 44,
+          "EntityIndex": 73,
+          "TargetLocation": {
+            "X": 39424,
+            "Y": 3072,
+            "Z": 59904,
+            "Room": 63
+          }
+        },
+        {
+          "Comments": "Add a level-end pickup trigger.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 39424,
+              "Y": 3072,
+              "Z": 59904,
+              "Room": 63
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "TrigType": 4,
+            "Actions": [
+              {
+                "Parameter": 73
+              },
+              {
+                "Action": 7
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "Mirrored": []
