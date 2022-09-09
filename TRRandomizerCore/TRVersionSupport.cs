@@ -7,6 +7,7 @@ namespace TRRandomizerCore
     {
         private static readonly List<TRRandomizerType> _tr1Types = new List<TRRandomizerType>
         {
+            TRRandomizerType.AtlanteanEggBehaviour,
             TRRandomizerType.Audio,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,

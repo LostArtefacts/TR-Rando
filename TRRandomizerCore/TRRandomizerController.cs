@@ -1368,6 +1368,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.SwapEnemyAppearance = value;
         }
 
+        public bool AllowEmptyEggs
+        {
+            get => LevelRandomizer.AllowEmptyEggs;
+            set => LevelRandomizer.AllowEmptyEggs = value;
+        }
+
         public bool RandomizeOutfits
         {
             get => LevelRandomizer.RandomizeOutfits;

@@ -44,6 +44,7 @@
         Braid,
         WaterColour,
         ExtraPickups,
-        AmbientTracks
+        AmbientTracks,
+        AtlanteanEggBehaviour
     }
 }

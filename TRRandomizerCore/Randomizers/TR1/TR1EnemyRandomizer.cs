@@ -551,7 +551,8 @@ namespace TRRandomizerCore.Randomizers
 
                 if (newEntityType == TREntities.AtlanteanEgg)
                 {
-                    List<TREntities> spawnTypes = enemies.Available.FindAll(TR1EntityUtilities.GetAtlanteanEggEnemies().Contains);
+                    List<TREntities> allEggTypes = TR1EntityUtilities.GetAtlanteanEggEnemies();
+                    List<TREntities> spawnTypes = enemies.Available.FindAll(allEggTypes.Contains);
                     TREntities spawnType = TR1EntityUtilities.TranslateEntityAlias(spawnTypes[_generator.Next(0, spawnTypes.Count)]);
 
                     int entityIndex = levelEntities.IndexOf(currentEntity);
@@ -559,6 +560,32 @@ namespace TRRandomizerCore.Randomizers
 
                     if (eggLocation != null || currentEntityType == newEntityType)
                     {
+                        if (Settings.AllowEmptyEggs)
+                        {
+                            // Add 1/4 chance of an empty egg, provided at least one spawn model is not available
+                            List<TREntities> allModels = new List<TREntities>();
+                            foreach (TRModel model in level.Data.Models)
+                            {
+                                allModels.Add((TREntities)model.ID);
+                            }
+
+                            // We can add Adam to make it possible for a dud spawn - he's not normally available for eggs because
+                            // of his own restrictions.
+                            if (!allModels.Contains(TREntities.Adam))
+                            {
+                                allEggTypes.Add(TREntities.Adam);
+                            }
+
+                            if (!allEggTypes.All(e => allModels.Contains(TR1EntityUtilities.TranslateEntityAlias(e))) && _generator.NextDouble() < 0.25)
+                            {
+                                do
+                                {
+                                    spawnType = TR1EntityUtilities.TranslateEntityAlias(allEggTypes[_generator.Next(0, allEggTypes.Count)]);
+                                }
+                                while (allModels.Contains(spawnType));
+                            }
+                        }
+
                         switch (spawnType)
                         {
                             case TREntities.ShootingAtlantean_N:
@@ -574,7 +601,7 @@ namespace TRRandomizerCore.Randomizers
                                 currentEntity.CodeBits = 8;
                                 break;
                             default:
-                                currentEntity.CodeBits = 16;
+                                currentEntity.CodeBits = 0;
                                 break;
                         }
 
