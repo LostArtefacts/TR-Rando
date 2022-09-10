@@ -30,9 +30,9 @@ namespace TRRandomizerView.Model
         private TRSecretCountMode _secretCountMode;
         private uint _minSecretCount, _maxSecretCount;
         private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
-        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance;
+        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance, _allowEmptyEggs;
         private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
-        private BoolItemControlClass _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
+        private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
@@ -1227,6 +1227,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass ChangeAmbientTracks
+        {
+            get => _changeAmbientTracks;
+            set
+            {
+                _changeAmbientTracks = value;
+                FirePropertyChanged();
+            }
+        }
+
         public BoolItemControlClass IncludeBlankTracks
         {
             get => _includeBlankTracks;
@@ -1861,6 +1871,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass AllowEmptyEggs
+        {
+            get => _allowEmptyEggs;
+            set
+            {
+                _allowEmptyEggs = value;
+                FirePropertyChanged();
+            }
+        }
+
         public RandoDifficulty RandoEnemyDifficulty
         {
             get => _randoEnemyDifficulty;
@@ -2220,6 +2240,12 @@ namespace TRRandomizerView.Model
                 Description = "Allow some enemies to take on the appearance of others."
             };
             BindingOperations.SetBinding(SwapEnemyAppearance, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+            AllowEmptyEggs = new BoolItemControlClass
+            {
+                Title = "Allow empty Atlantean eggs",
+                Description = "Allow some Atlantean eggs to hatch nothing when Lara gets close to them."
+            };
+            BindingOperations.SetBinding(AllowEmptyEggs, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
 
             // Textures
             Binding randomizeTexturesBinding = new Binding(nameof(RandomizeTextures)) { Source = this };
@@ -2256,6 +2282,12 @@ namespace TRRandomizerView.Model
 
             // Audio
             Binding randomizeAudioBinding = new Binding(nameof(RandomizeAudioTracks)) { Source = this };
+            ChangeAmbientTracks = new BoolItemControlClass
+            {
+                Title = "Change ambient tracks",
+                Description = "Change the title screen track and ambient track that plays in each level."
+            };
+            BindingOperations.SetBinding(ChangeAmbientTracks, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
             IncludeBlankTracks = new BoolItemControlClass()
             {
                 Title = "Include blank tracks",
@@ -2390,7 +2422,7 @@ namespace TRRandomizerView.Model
             };
             EnemyBoolItemControls = new List<BoolItemControlClass>()
             {
-                _crossLevelEnemies, _docileWillard, _protectMonks, _maximiseDragonAppearance, _swapEnemyAppearance
+                _crossLevelEnemies, _docileWillard, _protectMonks, _maximiseDragonAppearance, _swapEnemyAppearance, _allowEmptyEggs
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2398,7 +2430,7 @@ namespace TRRandomizerView.Model
             };
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
-                _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX,
+                _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX,
                 _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX
             };
             OutfitBoolItemControls = new List<BoolItemControlClass>()
@@ -2429,6 +2461,8 @@ namespace TRRandomizerView.Model
             // individual settings based on what's available.
             _removeRobeDagger.IsAvailable = _retainLevelTextures.IsAvailable = IsOutfitDaggerSupported;
 
+            _changeAmbientTracks.IsAvailable = IsAmbientTracksTypeSupported;
+            _includeBlankTracks.IsAvailable = IsAmbientTracksTypeSupported;
             _separateSecretTracks.IsAvailable = IsSecretAudioSupported;
 
             _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = IsSFXSupported;
@@ -2449,6 +2483,7 @@ namespace TRRandomizerView.Model
             _retainSecretSpriteTextures.IsAvailable = IsSecretTexturesTypeSupported;
             _retainKeySpriteTextures.IsAvailable = IsKeyItemTexturesTypeSupported;
             _randomizeWaterColour.IsAvailable = IsWaterColourTypeSupported;
+            _allowEmptyEggs.IsAvailable = IsAtlanteanEggBehaviourTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -2504,8 +2539,9 @@ namespace TRRandomizerView.Model
             VfxCaustics = _controller.VfxCaustics;
             VfxWave = _controller.VfxWave;
 
-            RandomizeAudioTracks = _controller.RandomizeAudioTracks;
+            RandomizeAudioTracks = _controller.RandomizeAudio;
             AudioTracksSeed = _controller.AudioTracksSeed;
+            ChangeAmbientTracks.Value = _controller.ChangeAmbientTracks;
             IncludeBlankTracks.Value = _controller.RandomGameTracksIncludeBlank;
             ChangeTriggerTracks.Value = _controller.ChangeTriggerTracks;
             SeparateSecretTracks.Value = _controller.SeparateSecretTracks;
@@ -2533,6 +2569,7 @@ namespace TRRandomizerView.Model
             BirdMonsterBehaviour = _controller.BirdMonsterBehaviour;
             MaximiseDragonAppearance.Value = _controller.MaximiseDragonAppearance;
             SwapEnemyAppearance.Value = _controller.SwapEnemyAppearance;
+            AllowEmptyEggs.Value = _controller.AllowEmptyEggs;
             RandoEnemyDifficulty = _controller.RandoEnemyDifficulty;
             UseEnemyExclusions = _controller.UseEnemyExclusions;
             ShowExclusionWarnings = _controller.ShowExclusionWarnings;
@@ -2869,7 +2906,8 @@ namespace TRRandomizerView.Model
             _controller.VfxCaustics = VfxCaustics;
             _controller.VfxWave = VfxWave;
 
-            _controller.RandomizeAudioTracks = RandomizeAudioTracks;
+            _controller.RandomizeAudio = RandomizeAudioTracks;
+            _controller.ChangeAmbientTracks = ChangeAmbientTracks.Value;
             _controller.AudioTracksSeed = AudioTracksSeed;
             _controller.RandomGameTracksIncludeBlank = IncludeBlankTracks.Value;
             _controller.ChangeTriggerTracks = ChangeTriggerTracks.Value;
@@ -2898,6 +2936,7 @@ namespace TRRandomizerView.Model
             _controller.BirdMonsterBehaviour = BirdMonsterBehaviour;
             _controller.MaximiseDragonAppearance = MaximiseDragonAppearance.Value;
             _controller.SwapEnemyAppearance = SwapEnemyAppearance.Value;
+            _controller.AllowEmptyEggs = AllowEmptyEggs.Value;
             _controller.RandoEnemyDifficulty = RandoEnemyDifficulty;
             _controller.UseEnemyExclusions = UseEnemyExclusions;
             _controller.ShowExclusionWarnings = ShowExclusionWarnings;
@@ -3058,6 +3097,7 @@ namespace TRRandomizerView.Model
         public bool IsTextureTypeSupported => IsRandomizationSupported(TRRandomizerType.Texture);
         public bool IsStartPositionTypeSupported => IsRandomizationSupported(TRRandomizerType.StartPosition);
         public bool IsAudioTypeSupported => IsRandomizationSupported(TRRandomizerType.Audio);
+        public bool IsAmbientTracksTypeSupported => IsRandomizationSupported(TRRandomizerType.AmbientTracks);
         public bool IsSecretAudioSupported => IsRandomizationSupported(TRRandomizerType.SecretAudio);
         public bool IsSFXSupported => IsRandomizationSupported(TRRandomizerType.SFX);
         public bool IsVFXTypeSupported => IsRandomizationSupported(TRRandomizerType.VFX);
@@ -3072,6 +3112,7 @@ namespace TRRandomizerView.Model
         public bool IsSecretTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretTextures);
         public bool IsKeyItemTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItemTextures);
         public bool IsWaterColourTypeSupported => IsRandomizationSupported(TRRandomizerType.WaterColour);
+        public bool IsAtlanteanEggBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.AtlanteanEggBehaviour);
         public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
 
         private bool IsRandomizationSupported(TRRandomizerType randomizerType)

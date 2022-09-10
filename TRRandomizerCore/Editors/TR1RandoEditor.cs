@@ -113,9 +113,17 @@ namespace TRRandomizerCore.Editors
             string wipDirectory = _io.WIPOutputDirectory.FullName;
 
             bool isTomb1Main = scriptEditor.Edition.IsCommunityPatch;
-            if (Settings.DevelopmentMode && isTomb1Main)
+            if (isTomb1Main)
             {
-                (scriptEditor as TR1ScriptEditor).EnableCheats = true;
+                TR1ScriptEditor scriptEd = scriptEditor as TR1ScriptEditor;
+                if (Settings.DevelopmentMode)
+                {
+                    scriptEd.EnableCheats = true;
+                }
+                if (Settings.UseRecommendedCommunitySettings)
+                {
+                    scriptEd.EnableEnhancedSaves = false;
+                }
                 scriptEditor.SaveScript();
             }
 
@@ -317,7 +325,7 @@ namespace TRRandomizerCore.Editors
                 using (Bitmap badge = new Bitmap(@"Resources\Shared\Graphics\goldbadge-large.png"))
                 {
                     bg.Graphics.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, 1920, 1080));
-                    bg.Graphics.DrawImage(badge, new Rectangle(768, 347, badge.Width, badge.Height));
+                    bg.Graphics.DrawImage(badge, new Rectangle(960 - badge.Width / 2, 540 - badge.Height / 2, badge.Width, badge.Height));
                     bg.Bitmap.Save(creditFile);
                 }
 

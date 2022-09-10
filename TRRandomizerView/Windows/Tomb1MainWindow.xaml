@@ -36,8 +36,7 @@
                     <Run Text="Edit the settings available in Tomb1Main as standard (see"/>
                     <Hyperlink ToolTip="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg" 
                                NavigateUri="https://github.com/rr-/Tomb1Main/tree/develop/bin/cfg"
-                               RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
-                    <Run Text=")."/>
+                               RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink><Run Text=")."/>
                     <LineBreak/>
                     <Run Text="Settings marked with * may be overridden directly during randomization to meet certain criteria."/>
                 </TextBlock>
@@ -202,7 +201,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableEnhancedSaves, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Enable enhanced saves" />
+                                       Content="Enable enhanced saves **" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Column="3"

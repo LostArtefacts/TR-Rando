@@ -229,41 +229,54 @@ namespace TRRandomizerCore.Utilities
         {
             Dictionary<TREntities, TREntities> priorities = new Dictionary<TREntities, TREntities>();
 
-            switch (lvlName)
-            {
-                // Essential MiscAnims - e.g. they contain level end triggers
-                case TRLevelNames.QUALOPEC:
-                    priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Qualopec;
-                    break;
-                case TRLevelNames.MIDAS:
-                    priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Midas;
-                    break;
-                case TRLevelNames.SANCTUARY:
-                    priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Sanctuary;
-                    break;
-                case TRLevelNames.ATLANTIS:
-                    priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Atlantis;
-                    break;
+            bool trexPresent = importEntities.Contains(TREntities.TRex);
+            bool adamPresent = importEntities.Contains(TREntities.Adam);
 
-                // Lara's specific deaths:
-                //    - Adam + LaraMiscAnim_H_Valley = a fairly wonky death
-                //    - TRex + LaraMiscAnim_H_Pyramid = a very wonky death
-                // So if both Adam and TRex are present, the TRex anim is chosen,
-                // otherwise it's their corresponding anim.
-                default:
-                    if (importEntities.Contains(TREntities.TRex))
-                    {
-                        priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Valley;
-                    }
-                    else if (importEntities.Contains(TREntities.Adam))
-                    {
-                        priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Valley;
-                    }
-                    else
-                    {
-                        priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_General;
-                    }
-                    break;
+            if ((trexPresent || adamPresent) && (lvlName == TRLevelNames.SANCTUARY || lvlName == TRLevelNames.ATLANTIS))
+            {
+                // We have to override the scion pickup animation otherwise death-by-adam will cause the level to end.
+                // Environment mods will deal with workarounds for the pickups.
+                priorities[TREntities.LaraMiscAnim_H] = trexPresent ? TREntities.LaraMiscAnim_H_Valley : TREntities.LaraMiscAnim_H_Pyramid;
+            }
+            else
+            {
+                switch (lvlName)
+                {
+                    // Essential MiscAnims - e.g. they contain level end triggers or cinematics.
+                    // ToQ pickup cinematic works with T-Rex, but not Torso
+                    case TRLevelNames.QUALOPEC:
+                        priorities[TREntities.LaraMiscAnim_H] = trexPresent ? TREntities.LaraMiscAnim_H_Valley : TREntities.LaraMiscAnim_H_Qualopec;
+                        break;
+                    case TRLevelNames.MIDAS:
+                        priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Midas;
+                        break;
+                    case TRLevelNames.SANCTUARY:
+                        priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Sanctuary;
+                        break;
+                    case TRLevelNames.ATLANTIS:
+                        priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Atlantis;
+                        break;
+
+                    // Lara's specific deaths:
+                    //    - Adam + LaraMiscAnim_H_Valley = a fairly wonky death
+                    //    - TRex + LaraMiscAnim_H_Pyramid = a very wonky death
+                    // So if both Adam and TRex are present, the TRex anim is chosen,
+                    // otherwise it's their corresponding anim.
+                    default:
+                        if (trexPresent)
+                        {
+                            priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Valley;
+                        }
+                        else if (adamPresent)
+                        {
+                            priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Pyramid;
+                        }
+                        else
+                        {
+                            priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_General;
+                        }
+                        break;
+                }
             }
 
             return priorities;
@@ -291,12 +304,12 @@ namespace TRRandomizerCore.Utilities
         // We (can) also limit the count per level for some, such as bosses.
         private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsTechnical = new Dictionary<TREntities, int>
         {
+            [TREntities.Natla] = 1
         };
 
         private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsDefault = new Dictionary<TREntities, int>
         {
             [TREntities.Adam] = 1,
-            [TREntities.Natla] = 1,
             [TREntities.Cowboy] = 3,
             [TREntities.SkateboardKid] = 3,
             [TREntities.Kold] = 3,

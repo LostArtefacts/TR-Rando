@@ -65,6 +65,8 @@
         // Models
         ImportModel = 141,
         MirrorModel = 142,
+        ConvertSpriteSequence = 143,
+        ConvertModel = 144,
 
         // NOOP/Placeholder
         NOOP = 1000

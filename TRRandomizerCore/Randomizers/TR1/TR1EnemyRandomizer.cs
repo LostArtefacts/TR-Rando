@@ -551,7 +551,8 @@ namespace TRRandomizerCore.Randomizers
 
                 if (newEntityType == TREntities.AtlanteanEgg)
                 {
-                    List<TREntities> spawnTypes = enemies.Available.FindAll(TR1EntityUtilities.GetAtlanteanEggEnemies().Contains);
+                    List<TREntities> allEggTypes = TR1EntityUtilities.GetAtlanteanEggEnemies();
+                    List<TREntities> spawnTypes = enemies.Available.FindAll(allEggTypes.Contains);
                     TREntities spawnType = TR1EntityUtilities.TranslateEntityAlias(spawnTypes[_generator.Next(0, spawnTypes.Count)]);
 
                     int entityIndex = levelEntities.IndexOf(currentEntity);
@@ -559,6 +560,32 @@ namespace TRRandomizerCore.Randomizers
 
                     if (eggLocation != null || currentEntityType == newEntityType)
                     {
+                        if (Settings.AllowEmptyEggs)
+                        {
+                            // Add 1/4 chance of an empty egg, provided at least one spawn model is not available
+                            List<TREntities> allModels = new List<TREntities>();
+                            foreach (TRModel model in level.Data.Models)
+                            {
+                                allModels.Add((TREntities)model.ID);
+                            }
+
+                            // We can add Adam to make it possible for a dud spawn - he's not normally available for eggs because
+                            // of his own restrictions.
+                            if (!allModels.Contains(TREntities.Adam))
+                            {
+                                allEggTypes.Add(TREntities.Adam);
+                            }
+
+                            if (!allEggTypes.All(e => allModels.Contains(TR1EntityUtilities.TranslateEntityAlias(e))) && _generator.NextDouble() < 0.25)
+                            {
+                                do
+                                {
+                                    spawnType = TR1EntityUtilities.TranslateEntityAlias(allEggTypes[_generator.Next(0, allEggTypes.Count)]);
+                                }
+                                while (allModels.Contains(spawnType));
+                            }
+                        }
+
                         switch (spawnType)
                         {
                             case TREntities.ShootingAtlantean_N:
@@ -574,7 +601,7 @@ namespace TRRandomizerCore.Randomizers
                                 currentEntity.CodeBits = 8;
                                 break;
                             default:
-                                currentEntity.CodeBits = 16;
+                                currentEntity.CodeBits = 0;
                                 break;
                         }
 
@@ -819,9 +846,33 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeMeshes(TR1CombinedLevel level)
         {
-            // Currently just targeted at the Atlantis cutscene
+            // Currently just targeted at Atlantis and its cutscene
             if (level.Is(TRLevelNames.ATLANTIS))
             {
+                // Atlantis scion swap - Model => Mesh index
+                Dictionary<TREntities, int> scionSwaps = new Dictionary<TREntities, int>
+                {
+                    [TREntities.Lara] = 3,
+                    [TREntities.Pistols_M_H] = 1,
+                    [TREntities.Shotgun_M_H] = 0,
+                    [TREntities.ShotgunAmmo_M_H] = 0,
+                    [TREntities.Magnums_M_H] = 1,
+                    [TREntities.Uzis_M_H] = 1,
+                    [TREntities.Dart_H] = 0,
+                    [TREntities.Sunglasses_M_H] = 0,
+                    [TREntities.CassettePlayer_M_H] = 1
+                };
+
+                TRMesh[] scion = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.ScionPiece4_S_P);
+                List<TREntities> replacementKeys = scionSwaps.Keys.ToList();
+                TREntities replacement = replacementKeys[_generator.Next(0, replacementKeys.Count)];
+
+                TRMesh[] replacementMeshes = TRMeshUtilities.GetModelMeshes(level.Data, replacement);
+                int colRadius = scion[0].CollRadius;
+                TRMeshUtilities.DuplicateMesh(level.Data, scion[0], replacementMeshes[scionSwaps[replacement]]);
+                scion[0].CollRadius = colRadius; // Retain original as Lara may need to shoot it
+
+                // Cutscene head swaps
                 TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TREntities.CutsceneActor1);
                 TRMesh[] natla = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TREntities.CutsceneActor3);
                 TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.CutSceneLevel.Data, TREntities.Pierre);
@@ -897,9 +948,17 @@ namespace TRRandomizerCore.Randomizers
                     if (!level.IsAssault)
                     {
                         EnemyTransportCollection enemies = _enemyMapping[level];
+                        List<TREntities> importModels = new List<TREntities>(enemies.EntitiesToImport);
+                        if (level.Is(TRLevelNames.KHAMOON) && (importModels.Contains(TREntities.BandagedAtlantean) || importModels.Contains(TREntities.BandagedFlyer)))
+                        {
+                            // Mummies may become shooters in Khamoon, but the missiles won't be available by default, so ensure they do get imported.
+                            importModels.Add(TREntities.Missile2_H);
+                            importModels.Add(TREntities.Missile3_H);
+                        }
+
                         TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
                         {
-                            EntitiesToImport = enemies.EntitiesToImport,
+                            EntitiesToImport = importModels,
                             EntitiesToRemove = enemies.EntitiesToRemove,
                             Level = level.Data,
                             LevelName = level.Name,

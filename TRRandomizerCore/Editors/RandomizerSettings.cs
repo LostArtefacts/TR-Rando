@@ -68,6 +68,7 @@ namespace TRRandomizerCore.Editors
         public List<short> IncludedEnemies => ExcludableEnemies.Keys.Except(ExcludedEnemies).ToList();
         public bool OneEnemyMode => IncludedEnemies.Count == 1;
         public bool SwapEnemyAppearance { get; set; }
+        public bool AllowEmptyEggs { get; set; }
         public bool GlitchedSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
         public TRSecretCountMode SecretCountMode { get; set; }
@@ -86,6 +87,7 @@ namespace TRRandomizerCore.Editors
         public uint NightModeDarkness { get; set; }
         public bool NightModeAssaultCourse { get; set; }
         public bool OverrideSunsets { get; set; }
+        public bool ChangeAmbientTracks { get; set; }
         public bool ChangeTriggerTracks { get; set; }
         public bool SeparateSecretTracks { get; set; }
         public bool ChangeWeaponSFX { get; set; }
@@ -157,6 +159,7 @@ namespace TRRandomizerCore.Editors
             RandoEnemyDifficulty = (RandoDifficulty)config.GetEnum(nameof(RandoEnemyDifficulty), typeof(RandoDifficulty), RandoDifficulty.Default);
             MaximiseDragonAppearance = config.GetBool(nameof(MaximiseDragonAppearance));
             SwapEnemyAppearance = config.GetBool(nameof(SwapEnemyAppearance), true);
+            AllowEmptyEggs = config.GetBool(nameof(AllowEmptyEggs));
             UseEnemyExclusions = config.GetBool(nameof(UseEnemyExclusions));
             ShowExclusionWarnings = config.GetBool(nameof(ShowExclusionWarnings));
             ExcludedEnemies = config.GetString(nameof(ExcludedEnemies))
@@ -201,7 +204,8 @@ namespace TRRandomizerCore.Editors
             NightModeAssaultCourse = config.GetBool(nameof(NightModeAssaultCourse), true);
             OverrideSunsets = config.GetBool(nameof(OverrideSunsets));
 
-            // Note that the main audio config options (on/off and seed) are held in TRGE for now
+            RandomizeAudio = config.GetBool(nameof(RandomizeAudio));
+            ChangeAmbientTracks = config.GetBool(nameof(ChangeAmbientTracks), true);
             ChangeTriggerTracks = config.GetBool(nameof(ChangeTriggerTracks), true);
             SeparateSecretTracks = config.GetBool(nameof(SeparateSecretTracks), true);
             ChangeWeaponSFX = config.GetBool(nameof(ChangeWeaponSFX), true);
@@ -280,6 +284,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(UseEnemyExclusions)] = UseEnemyExclusions;
             config[nameof(ShowExclusionWarnings)] = ShowExclusionWarnings;
             config[nameof(SwapEnemyAppearance)] = SwapEnemyAppearance;
+            config[nameof(AllowEmptyEggs)] = AllowEmptyEggs;
 
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;
@@ -317,6 +322,8 @@ namespace TRRandomizerCore.Editors
             config[nameof(NightModeAssaultCourse)] = NightModeAssaultCourse;
             config[nameof(OverrideSunsets)] = OverrideSunsets;
 
+            config[nameof(RandomizeAudio)] = RandomizeAudio;
+            config[nameof(ChangeAmbientTracks)] = ChangeAmbientTracks;
             config[nameof(ChangeTriggerTracks)] = ChangeTriggerTracks;
             config[nameof(SeparateSecretTracks)] = SeparateSecretTracks;
             config[nameof(ChangeWeaponSFX)] = ChangeWeaponSFX;

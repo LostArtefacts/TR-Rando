@@ -72,7 +72,7 @@ namespace TRRandomizerCore
             _extLevelOrganisation = RandomizeLevelSequencing ? Organisation.Default : ScriptEditor.LevelSequencingOrganisation;
             _extPlayableOrganisation = RandomizePlayableLevels ? Organisation.Default : ScriptEditor.EnabledLevelOrganisation;
             _extSunsetOrganisation = RandomizeSunsets ? Organisation.Default : ScriptEditor.LevelSunsetOrganisation;
-            _extAudioOrganisation = RandomizeAudioTracks ? Organisation.Default : ScriptEditor.GameTrackOrganisation;
+            _extAudioOrganisation = ChangeAmbientTracks ? Organisation.Default : ScriptEditor.GameTrackOrganisation;
 
             if (ScriptEditor is IUnarmedEditor unarmedEditor)
             {
@@ -341,13 +341,13 @@ namespace TRRandomizerCore
             set => ScriptEditor.RandomSunsetLevelCount = value;
         }
 
-        public bool RandomizeAudioTracks
+        public bool ChangeAmbientTracks
         {
-            get => ScriptEditor.GameTrackOrganisation == Organisation.Random;
+            get => LevelRandomizer.ChangeAmbientTracks;
             set
             {
-                ScriptEditor.GameTrackOrganisation = value ? Organisation.Random : _extAudioOrganisation;
-                LevelRandomizer.RandomizeAudio = value;
+                ScriptEditor.GameTrackOrganisation = RandomizeAudio && value ? Organisation.Random : _extAudioOrganisation;
+                LevelRandomizer.ChangeAmbientTracks = value;
             }
         }
 
@@ -1368,6 +1368,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.SwapEnemyAppearance = value;
         }
 
+        public bool AllowEmptyEggs
+        {
+            get => LevelRandomizer.AllowEmptyEggs;
+            set => LevelRandomizer.AllowEmptyEggs = value;
+        }
+
         public bool RandomizeOutfits
         {
             get => LevelRandomizer.RandomizeOutfits;
@@ -1487,6 +1493,12 @@ namespace TRRandomizerCore
         {
             get => LevelRandomizer.OverrideSunsets;
             set => LevelRandomizer.OverrideSunsets = value;
+        }
+
+        public bool RandomizeAudio
+        {
+            get => LevelRandomizer.RandomizeAudio;
+            set => LevelRandomizer.RandomizeAudio = value;
         }
 
         public bool ChangeTriggerTracks

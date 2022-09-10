@@ -211,6 +211,8 @@ namespace TRModelTransporter.Data
                 = new List<TREntities> { TREntities.ScionPiece2_S_P },
             [TREntities.ShootingAtlantean_N]
                 = new List<TREntities> { TREntities.Explosion1_S_H },
+            [TREntities.Missile3_H]
+                = new List<TREntities> { TREntities.Explosion1_S_H },
         };
 
         private static readonly List<TREntities> _cinematicEntities = new List<TREntities>
@@ -275,6 +277,7 @@ namespace TRModelTransporter.Data
             [TREntities.Lioness] = new short[] { 85, 86, 87 },
             [TREntities.MeatyAtlantean] = new short[] { 104 },
             [TREntities.MeatyFlyer] = new short[] { 104, 120, 121, 122, 123, 124, 125, 126 },
+            [TREntities.Missile3_H] = new short[] { 104 },
             [TREntities.Natla] = new short[] { 104, 123, 124 },
             [TREntities.ShootingAtlantean_N] = new short[] { 104 },
             [TREntities.SkateboardKid] = new short[] { 132 },

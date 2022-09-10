@@ -55,8 +55,6 @@ namespace TRRandomizerCore.Randomizers
 
         public override void Randomize(int seed)
         {
-            Settings.UseRewardRoomCameras = true;
-
             _generator = new Random(seed);
             _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\locations.json"));
             _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\unarmed_locations.json"));
@@ -164,11 +162,6 @@ namespace TRRandomizerCore.Randomizers
 
                 default:
                     break;
-            }
-
-            foreach (TR1ScriptedLevel level in levels)
-            {
-                Debug.WriteLine(level.Name + ": " + level.NumSecrets);
             }
         }
 

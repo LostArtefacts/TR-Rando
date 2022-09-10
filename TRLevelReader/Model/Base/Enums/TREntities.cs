@@ -152,10 +152,10 @@
         Keyhole4,
         Quest1_S_P,
         Quest2_S_P,
-        ScionPiece1_S_P, // ToQ and Sanctuary
-        ScionPiece2_S_P, // From Pierre
-        ScionPiece3_S_P, // Atlantis and Great Pyramid
-        ScionPiece4_S_P, // ?
+        ScionPiece1_S_P, // ToQ and Sanctuary - triggers LaraMiscAnim
+        ScionPiece2_S_P, // From Pierre - normal pickup
+        ScionPiece3_S_P, // Great Pyramid - targetable
+        ScionPiece4_S_P, // Atlantis - triggers LaraMiscAnim
         ScionHolder,
         Quest1_M_H,
         Quest2_M_H,

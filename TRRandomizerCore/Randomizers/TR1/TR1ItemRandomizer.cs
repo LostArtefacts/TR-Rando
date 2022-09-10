@@ -368,13 +368,19 @@ namespace TRRandomizerCore.Randomizers
                 }
 
                 // Only move a key item if there is at least one location defined for it. Any triggers below the
-                // item will be handled by default environment mods.
+                // item will be handled by default environment mods, so don't place an item in the same sector as a secret.
                 // The only one we don't currently move is MinesFuseNearConveyor - potential FlipMap complications.
                 int itemID = 10000 + ((level.Script.OriginalSequence - 1) * 1000) + entity.TypeID + entity.Room;
                 List<Location> pool = locations.FindAll(l => l.KeyItemGroupID == itemID);
                 if (pool.Count > 0)
                 {
-                    Location location = pool[_generator.Next(0, pool.Count)];
+                    Location location;
+                    do
+                    {
+                        location = pool[_generator.Next(0, pool.Count)];
+                    }
+                    while (LocationContainsSecret(location, level.Data, floorData));
+
                     entity.X = location.X;
                     entity.Y = location.Y;
                     entity.Z = location.Z;
@@ -391,6 +397,19 @@ namespace TRRandomizerCore.Randomizers
                 return floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
                     && trigger.TrigType == FDTrigType.Pickup
                     && trigger.TrigActionList[0].Parameter == entityIndex
+                    && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null;
+            }
+
+            return false;
+        }
+
+        private bool LocationContainsSecret(Location location, TRLevel level, FDControl floorData)
+        {
+            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, floorData);
+            if (sector.FDIndex != 0)
+            {
+                return floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
+                    && trigger.TrigType == FDTrigType.Pickup
                     && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null;
             }
 
