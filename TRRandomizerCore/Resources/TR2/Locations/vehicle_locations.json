@@ -699,6 +699,13 @@
       "Z": 54809,
       "Room": 31,
       "TargetType": 13
+    },
+    {
+      "X": 53431,
+      "Y": 5632,
+      "Z": 57040,
+      "Room": 131,
+      "TargetType": 13
     }
   ],
   "EMPRTOMB.TR2": [
