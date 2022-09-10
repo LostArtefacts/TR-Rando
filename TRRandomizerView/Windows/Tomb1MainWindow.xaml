@@ -201,7 +201,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableEnhancedSaves, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Enable enhanced saves" />
+                                       Content="Enable enhanced saves **" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Column="3"
