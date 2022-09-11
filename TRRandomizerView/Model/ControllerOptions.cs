@@ -33,7 +33,7 @@ namespace TRRandomizerView.Model
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance, _allowEmptyEggs;
         private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
-        private BoolItemControlClass _persistOutfits, _removeRobeDagger;
+        private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
         private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders;
@@ -1547,6 +1547,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass AllowGymOutfit
+        {
+            get => _allowGymOutfit;
+            set
+            {
+                _allowGymOutfit = value;
+                FirePropertyChanged();
+            }
+        }
+
         public uint HaircutLevelCount
         {
             get => _haircutLevelCount;
@@ -2351,6 +2361,12 @@ namespace TRRandomizerView.Model
                 Description = "If Lara is wearing her dressing gown before she has killed a dragon, the dagger will not appear."
             };
             BindingOperations.SetBinding(RemoveRobeDagger, BoolItemControlClass.IsActiveProperty, randomizeOutfitsBinding);
+            AllowGymOutfit = new BoolItemControlClass()
+            {
+                Title = "Allow gym outfit swap",
+                Description = "Allow Lara to wear her gym outfit on her adventures (applies only to specific levels)."
+            };
+            BindingOperations.SetBinding(AllowGymOutfit, BoolItemControlClass.IsActiveProperty, randomizeOutfitsBinding);
 
             // Text
             Binding randomizeTextBinding = new Binding(nameof(RandomizeText)) { Source = this };
@@ -2435,7 +2451,7 @@ namespace TRRandomizerView.Model
             };
             OutfitBoolItemControls = new List<BoolItemControlClass>()
             {
-                _persistOutfits, _removeRobeDagger
+                _persistOutfits, _removeRobeDagger, _allowGymOutfit
             };
             TextBoolItemControls = new List<BoolItemControlClass>
             {
@@ -2460,6 +2476,8 @@ namespace TRRandomizerView.Model
             // Called after the version type has been identified, so allows for customising
             // individual settings based on what's available.
             _removeRobeDagger.IsAvailable = _retainLevelTextures.IsAvailable = IsOutfitDaggerSupported;
+            _persistOutfits.IsAvailable = !IsTR1;
+            _allowGymOutfit.IsAvailable = IsGymOutfitTypeSupported;
 
             _changeAmbientTracks.IsAvailable = IsAmbientTracksTypeSupported;
             _includeBlankTracks.IsAvailable = IsAmbientTracksTypeSupported;
@@ -2602,6 +2620,7 @@ namespace TRRandomizerView.Model
             OutfitSeed = _controller.OutfitSeed;
             PersistOutfits.Value = _controller.PersistOutfits;
             RemoveRobeDagger.Value = _controller.RemoveRobeDagger;
+            AllowGymOutfit.Value = _controller.AllowGymOutfit;
             HaircutLevelCount = _controller.HaircutLevelCount;
             AssaultCourseHaircut = _controller.AssaultCourseHaircut;
             InvisibleLevelCount = _controller.InvisibleLevelCount;
@@ -2972,6 +2991,7 @@ namespace TRRandomizerView.Model
             _controller.OutfitSeed = OutfitSeed;
             _controller.PersistOutfits = PersistOutfits.Value;
             _controller.RemoveRobeDagger = RemoveRobeDagger.Value;
+            _controller.AllowGymOutfit = AllowGymOutfit.Value;
             _controller.HaircutLevelCount = HaircutLevelCount;
             _controller.AssaultCourseHaircut = AssaultCourseHaircut;
             _controller.InvisibleLevelCount = InvisibleLevelCount;
@@ -3102,6 +3122,7 @@ namespace TRRandomizerView.Model
         public bool IsSFXSupported => IsRandomizationSupported(TRRandomizerType.SFX);
         public bool IsVFXTypeSupported => IsRandomizationSupported(TRRandomizerType.VFX);
         public bool IsOutfitTypeSupported => IsRandomizationSupported(TRRandomizerType.Outfit);
+        public bool IsGymOutfitTypeSupported => IsRandomizationSupported(TRRandomizerType.GymOutfit);
         public bool IsBraidTypeSupported => IsRandomizationSupported(TRRandomizerType.Braid);
         public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);

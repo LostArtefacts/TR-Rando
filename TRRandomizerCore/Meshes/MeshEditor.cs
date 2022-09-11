@@ -151,7 +151,7 @@ namespace TRRandomizerCore.Helpers
                 Pointer = mesh.Pointer,
                 TexturedRectangles = new TRFace4[mesh.NumTexturedRectangles],
                 TexturedTriangles = new TRFace3[mesh.NumTexturedTriangles],
-                Vertices = mesh.Vertices
+                Vertices = new TRVertex[mesh.NumVertices]
             };
 
             for (int i = 0; i < mesh.NumColouredRectangles; i++)
@@ -187,6 +187,16 @@ namespace TRRandomizerCore.Helpers
                 {
                     Texture = mesh.TexturedTriangles[i].Texture,
                     Vertices = mesh.TexturedTriangles[i].Vertices
+                };
+            }
+
+            for (int i = 0; i < mesh.NumVertices; i++)
+            {
+                clone.Vertices[i] = new TRVertex
+                {
+                    X = mesh.Vertices[i].X,
+                    Y = mesh.Vertices[i].Y,
+                    Z = mesh.Vertices[i].Z
                 };
             }
 

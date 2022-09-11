@@ -12,6 +12,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
             TRRandomizerType.ExtraPickups,
+            TRRandomizerType.GymOutfit,
             TRRandomizerType.HardSecrets,
             TRRandomizerType.Item,
             TRRandomizerType.KeyItems,

@@ -45,6 +45,7 @@
         WaterColour,
         ExtraPickups,
         AmbientTracks,
-        AtlanteanEggBehaviour
+        AtlanteanEggBehaviour,
+        GymOutfit
     }
 }

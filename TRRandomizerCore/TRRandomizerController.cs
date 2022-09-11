@@ -1410,6 +1410,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.InvisibleLevelCount = value;
         }
 
+        public bool AllowGymOutfit
+        {
+            get => LevelRandomizer.AllowGymOutfit;
+            set => LevelRandomizer.AllowGymOutfit = value;
+        }
+
         public bool AssaultCourseInvisible
         {
             get => LevelRandomizer.AssaultCourseInvisible;

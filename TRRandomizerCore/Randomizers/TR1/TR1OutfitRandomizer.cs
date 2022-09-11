@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TRGE.Core;
 using TRLevelReader.Helpers;
@@ -9,6 +10,7 @@ using TRLevelReader.Model.Enums;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
+using TRRandomizerCore.Meshes;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Textures;
 
@@ -20,6 +22,7 @@ namespace TRRandomizerCore.Randomizers
 
         private List<TR1ScriptedLevel> _braidLevels;
         private List<TR1ScriptedLevel> _invisibleLevels;
+        private List<TR1ScriptedLevel> _gymLevels;
 
         public override void Randomize(int seed)
         {
@@ -84,6 +87,18 @@ namespace TRRandomizerCore.Randomizers
                 _invisibleLevels.Add(assaultCourse);
             }
 
+            if (Settings.AllowGymOutfit)
+            {
+                // Gym outfits are only available in the following levels and we can only use it
+                // if the T-Rex isn't present because that overwrites the MiscAnim's textures.
+                List<string> allowedGymLevels = new List<string>
+                {
+                    TRLevelNames.CAVES, TRLevelNames.VILCABAMBA, TRLevelNames.FOLLY,
+                    TRLevelNames.COLOSSEUM, TRLevelNames.CISTERN, TRLevelNames.TIHOCAN
+                };
+                _gymLevels = Levels.FindAll(l => allowedGymLevels.Contains(l.LevelFileBaseName.ToUpper())).RandomSelection(_generator, _generator.Next(1, allowedGymLevels.Count + 1));
+            }
+
             if (ScriptEditor.Edition.IsCommunityPatch && _braidLevels.Count > 0)
             {
                 (ScriptEditor.Script as TR1Script).EnableBraid = true;
@@ -98,6 +113,11 @@ namespace TRRandomizerCore.Randomizers
         private bool IsInvisibleLevel(TR1ScriptedLevel lvl)
         {
             return _invisibleLevels.Contains(lvl);
+        }
+
+        private bool IsGymLevel(TR1ScriptedLevel lvl)
+        {
+            return _gymLevels != null && _gymLevels.Contains(lvl);
         }
 
         internal class OutfitProcessor : AbstractProcessorThread<TR1OutfitRandomizer>
@@ -147,15 +167,10 @@ namespace TRRandomizerCore.Randomizers
             {
                 foreach (TR1CombinedLevel level in _levels)
                 {
-                    if (_outer.IsInvisibleLevel(level.Script))
-                    {
-                        HideEntities(level, _invisibleLaraEntities);
-                    }
-
                     if (_outer.IsBraidLevel(level.Script))
                     {
                         // Only import the braid if Lara is visible. Note that it will automatically replace the model in Lost Valley.
-                        // Cutscenes don't currently support the braid in.
+                        // Cutscenes don't currently support the braid in T1M.
                         if (!_outer.IsInvisibleLevel(level.Script))
                         {
                             ImportBraid(level);
@@ -166,6 +181,15 @@ namespace TRRandomizerCore.Randomizers
                         // The global setting may be on so we need to hide the OG braid
                         HideEntities(level, _ponytailEntities);
                     }
+
+                    if (_outer.IsInvisibleLevel(level.Script))
+                    {
+                        HideEntities(level, _invisibleLaraEntities);
+                    }
+                    else if (_outer.IsGymLevel(level.Script))
+                    {
+                        ConvertToGymOutfit(level);
+                    }                   
 
                     _outer.SaveLevel(level);
 
@@ -252,6 +276,159 @@ namespace TRRandomizerCore.Randomizers
                 {
                     HideEntities(level.CutSceneLevel, entities);
                 }
+            }
+
+            private void ConvertToGymOutfit(TR1CombinedLevel level)
+            {
+                if (Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.TRex) != null)
+                {
+                    return;
+                }
+
+                TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara);
+                TRMesh[] laraPistol = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraPistolAnim_H);
+                TRMesh[] laraShotgun = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraShotgunAnim_H);
+                TRMesh[] laraMagnums = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraMagnumAnim_H);
+                TRMesh[] laraUzis = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraUziAnimation_H);
+                TRMesh[] laraMisc = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraMiscAnim_H);
+
+                // Basic meshes to take from LaraMiscAnim. We don't replace Lara's gloves
+                // or thighs (at this stage - handled below with gun swaps).
+                int[] basicLaraIndices = new int[] { 0, 2, 3, 5, 6, 7, 8, 9, 11, 12 };
+                foreach (int index in basicLaraIndices)
+                {
+                    TRMeshUtilities.DuplicateMesh(level.Data, lara[index], laraMisc[index]);
+                }
+
+                // Copy the guns and holsters from the original models and paste them
+                // onto each of Lara's thighs. The ranges are the specific faces we want
+                // to copy from each.
+                int[] thighs = new int[] { 1, 4 };
+                foreach (int thigh in thighs)
+                {
+                    // Empty holsters
+                    CopyMeshParts(level.Data, new MeshCopyData
+                    {
+                        BaseMesh = lara[thigh],
+                        NewMesh = laraMisc[thigh],
+                        ColourFaceCopies = Enumerable.Range(8, 6)
+                    });
+
+                    // Holstered pistols
+                    CopyMeshParts(level.Data, new MeshCopyData
+                    {
+                        BaseMesh = laraPistol[thigh],
+                        NewMesh = laraMisc[thigh],
+                        ColourFaceCopies = Enumerable.Range(4, 6),
+                        TextureFaceCopies = Enumerable.Range(5, 5)
+                    });
+
+                    // Holstered magnums
+                    CopyMeshParts(level.Data, new MeshCopyData
+                    {
+                        BaseMesh = laraMagnums[thigh],
+                        NewMesh = laraMisc[thigh],
+                        ColourFaceCopies = Enumerable.Range(4, 6),
+                        TextureFaceCopies = Enumerable.Range(3, 5)
+                    });
+
+                    // Holstered uzis
+                    CopyMeshParts(level.Data, new MeshCopyData
+                    {
+                        BaseMesh = laraUzis[thigh],
+                        NewMesh = laraMisc[thigh],
+                        ColourFaceCopies = Enumerable.Range(4, 7),
+                        TextureFaceCopies = Enumerable.Range(3, 19)
+                    });
+                }
+
+                // Don't forget the shotgun on her back
+                CopyMeshParts(level.Data, new MeshCopyData
+                {
+                    BaseMesh = laraShotgun[7],
+                    NewMesh = laraMisc[7],
+                    TextureFaceCopies = Enumerable.Range(8, 12)
+                });
+            }
+
+            private void CopyMeshParts(TRLevel level, MeshCopyData data)
+            {
+                MeshEditor editor = new MeshEditor();
+                TRMeshUtilities.InsertMesh(level, editor.Mesh = editor.CloneMesh(data.NewMesh));
+
+                List<TRFace4> texturedQuads = editor.Mesh.TexturedRectangles.ToList();
+                List<TRFace4> colouredQuads = editor.Mesh.ColouredRectangles.ToList();
+
+                List<TRVertex> vertices = editor.Mesh.Vertices.ToList();
+
+                if (data.TextureFaceCopies != null)
+                {
+                    foreach (int faceIndex in data.TextureFaceCopies)
+                    {
+                        TRFace4 face = data.BaseMesh.TexturedRectangles[faceIndex];
+                        ushort[] vertexPointers = new ushort[4];
+                        for (int j = 0; j < verticePointers.Length; j++)
+                        {
+                            TRVertex origVertex = data.BaseMesh.Vertices[face.Vertices[j]];
+                            int newVertIndex = vertices.FindIndex(v => v.X == origVertex.X && v.Y == origVertex.Y && v.Z == origVertex.Z);
+                            if (newVertIndex == -1)
+                            {
+                                newVertIndex = vertices.Count;
+                                vertices.Add(origVertex);
+                            }
+                            verticePointers[j] = (ushort)newVertIndex;
+                        }
+
+                        texturedQuads.Add(new TRFace4
+                        {
+                            Texture = face.Texture,
+                            Vertices = verticePointers
+                        });
+                    }
+                }
+
+                if (data.ColourFaceCopies != null)
+                {
+                    foreach (int faceIndex in data.ColourFaceCopies)
+                    {
+                        TRFace4 face = data.BaseMesh.ColouredRectangles[faceIndex];
+                        ushort[] vertexPointers = new ushort[4];
+                        for (int j = 0; j < verticePointers.Length; j++)
+                        {
+                            TRVertex origVertex = data.BaseMesh.Vertices[face.Vertices[j]];
+                            int newVertIndex = vertices.FindIndex(v => v.X == origVertex.X && v.Y == origVertex.Y && v.Z == origVertex.Z);
+                            if (newVertIndex == -1)
+                            {
+                                newVertIndex = vertices.Count;
+                                vertices.Add(origVertex);
+                            }
+                            verticePointers[j] = (ushort)newVertIndex;
+                        }
+
+                        colouredQuads.Add(new TRFace4
+                        {
+                            Texture = face.Texture,
+                            Vertices = verticePointers
+                        });
+                    }
+                }
+
+                editor.Mesh.TexturedRectangles = texturedQuads.ToArray();
+                editor.Mesh.NumTexturedRectangles = (short)texturedQuads.Count;
+
+                editor.Mesh.ColouredRectangles = colouredQuads.ToArray();
+                editor.Mesh.NumColouredRectangles = (short)colouredQuads.Count;
+
+                editor.Mesh.Vertices = vertices.ToArray();
+                editor.Mesh.NumVertices = (short)vertices.Count;
+
+                editor.Mesh.Normals = data.BaseMesh.Normals;
+                editor.Mesh.NumNormals = data.BaseMesh.NumNormals;
+
+                editor.Mesh.CollRadius = data.BaseMesh.CollRadius;
+                editor.WriteToLevel(level);
+
+                TRMeshUtilities.DuplicateMesh(level, data.BaseMesh, editor.Mesh);
             }
         }
     }

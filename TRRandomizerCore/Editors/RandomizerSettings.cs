@@ -79,6 +79,7 @@ namespace TRRandomizerCore.Editors
         public uint HaircutLevelCount { get; set; }
         public bool AssaultCourseHaircut { get; set; }
         public uint InvisibleLevelCount { get; set; }
+        public bool AllowGymOutfit { get; set; }
         public bool AssaultCourseInvisible { get; set; }
         public bool RetainLevelNames { get; set; }
         public bool RetainKeyItemNames { get; set; }
@@ -189,6 +190,7 @@ namespace TRRandomizerCore.Editors
             HaircutLevelCount = config.GetUInt(nameof(HaircutLevelCount), 9);
             AssaultCourseHaircut = config.GetBool(nameof(AssaultCourseHaircut), true);
             InvisibleLevelCount = config.GetUInt(nameof(InvisibleLevelCount), 2);
+            AllowGymOutfit = config.GetBool(nameof(AllowGymOutfit), true);
             AssaultCourseInvisible = config.GetBool(nameof(AssaultCourseInvisible));
 
             RandomizeGameStrings = config.GetBool(nameof(RandomizeGameStrings));
@@ -307,6 +309,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(HaircutLevelCount)] = HaircutLevelCount;
             config[nameof(AssaultCourseHaircut)] = AssaultCourseHaircut;
             config[nameof(InvisibleLevelCount)] = InvisibleLevelCount;
+            config[nameof(AllowGymOutfit)] = AllowGymOutfit;
             config[nameof(AssaultCourseInvisible)] = AssaultCourseInvisible;
 
             config[nameof(RandomizeGameStrings)] = RandomizeGameStrings;
