@@ -367,7 +367,7 @@ namespace TRRandomizerCore.Randomizers
                     {
                         TRFace4 face = data.BaseMesh.TexturedRectangles[faceIndex];
                         ushort[] vertexPointers = new ushort[4];
-                        for (int j = 0; j < verticePointers.Length; j++)
+                        for (int j = 0; j < vertexPointers.Length; j++)
                         {
                             TRVertex origVertex = data.BaseMesh.Vertices[face.Vertices[j]];
                             int newVertIndex = vertices.FindIndex(v => v.X == origVertex.X && v.Y == origVertex.Y && v.Z == origVertex.Z);
@@ -376,13 +376,13 @@ namespace TRRandomizerCore.Randomizers
                                 newVertIndex = vertices.Count;
                                 vertices.Add(origVertex);
                             }
-                            verticePointers[j] = (ushort)newVertIndex;
+                            vertexPointers[j] = (ushort)newVertIndex;
                         }
 
                         texturedQuads.Add(new TRFace4
                         {
                             Texture = face.Texture,
-                            Vertices = verticePointers
+                            Vertices = vertexPointers
                         });
                     }
                 }
@@ -393,7 +393,7 @@ namespace TRRandomizerCore.Randomizers
                     {
                         TRFace4 face = data.BaseMesh.ColouredRectangles[faceIndex];
                         ushort[] vertexPointers = new ushort[4];
-                        for (int j = 0; j < verticePointers.Length; j++)
+                        for (int j = 0; j < vertexPointers.Length; j++)
                         {
                             TRVertex origVertex = data.BaseMesh.Vertices[face.Vertices[j]];
                             int newVertIndex = vertices.FindIndex(v => v.X == origVertex.X && v.Y == origVertex.Y && v.Z == origVertex.Z);
@@ -402,13 +402,13 @@ namespace TRRandomizerCore.Randomizers
                                 newVertIndex = vertices.Count;
                                 vertices.Add(origVertex);
                             }
-                            verticePointers[j] = (ushort)newVertIndex;
+                            vertexPointers[j] = (ushort)newVertIndex;
                         }
 
                         colouredQuads.Add(new TRFace4
                         {
                             Texture = face.Texture,
-                            Vertices = verticePointers
+                            Vertices = vertexPointers
                         });
                     }
                 }
