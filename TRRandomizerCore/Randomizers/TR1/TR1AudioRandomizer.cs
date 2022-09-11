@@ -18,9 +18,12 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR1AudioRandomizer : BaseTR1Randomizer
     {
+        private static readonly short _sfxUziID = 43;
+
         private AudioRandomizer _audioRandomizer;
 
         private List<TR1SFXDefinition> _soundEffects;
+        private TR1SFXDefinition _psUziDefinition;
         private List<TRSFXGeneralCategory> _sfxCategories;
         private List<TR1ScriptedLevel> _uncontrolledLevels;
 
@@ -75,6 +78,17 @@ namespace TRRandomizerCore.Randomizers
                     TRLevel level = levels[definition.SourceLevel];
                     definition.SoundData = SoundUtilities.BuildPackedSound(level.SoundMap, level.SoundDetails, level.SampleIndices, level.Samples, new short[] { definition.InternalIndex });
                 }
+
+                // PS uzis need some manual setup. Make a copy of the standard uzi definition
+                // then replace the sound data from the external wav file.
+                TRLevel caves = levels[TRLevelNames.CAVES];
+                _psUziDefinition = new TR1SFXDefinition
+                {
+                    InternalIndex = -1,
+                    SoundData = SoundUtilities.BuildPackedSound(caves.SoundMap, caves.SoundDetails, caves.SampleIndices, caves.Samples, new short[] { _sfxUziID })
+                };
+                uint sample = _psUziDefinition.SoundData.Samples.Keys.First();
+                _psUziDefinition.SoundData.Samples[sample] = File.ReadAllBytes(GetResourcePath(@"TR1\Audio\ps_uzis.wav"));
             }
         }
 
@@ -188,8 +202,18 @@ namespace TRRandomizerCore.Randomizers
                         pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && sfx != definition;
                     }
 
-                    // Try to find definitions that match
-                    List<TR1SFXDefinition> otherDefinitions = _soundEffects.FindAll(pred);
+                    List<TR1SFXDefinition> otherDefinitions;
+                    if (internalIndex == _sfxUziID && _generator.NextDouble() < 0.4)
+                    {
+                        // 2/5 chance of PS uzis replacing original uzis, but they won't be used for anything else
+                        otherDefinitions = new List<TR1SFXDefinition> { _psUziDefinition };
+                    }
+                    else
+                    {
+                        // Try to find definitions that match
+                        otherDefinitions = _soundEffects.FindAll(pred);
+                    }
+
                     if (otherDefinitions.Count > 0)
                     {
                         // Pick a new definition and try to import it into the level. This should only fail if
@@ -220,7 +244,7 @@ namespace TRRandomizerCore.Randomizers
             TRSoundDetails defDetails = definition.SoundData.SoundDetails.Values.First();
             TRSoundDetails newDetails;
 
-            if (level.SoundMap[definition.InternalIndex] != -1)
+            if (definition.InternalIndex > -1 && level.SoundMap[definition.InternalIndex] != -1)
             {
                 // In Tomp1, duplicated indices in SoundMap can cause crashes, so we make a new TRSoundDetails, but just point
                 // it to the existing sample(s) so we're not importing more WAV data than we have to.
