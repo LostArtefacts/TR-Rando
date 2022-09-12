@@ -46,6 +46,13 @@ namespace TRModelTransporter.Handlers
             }
             else if (!aliasPriority.ContainsKey(definition.Entity) || aliasPriority[definition.Entity] == definition.Alias)
             {
+                if (!definition.HasGraphics)
+                {
+                    // The original mesh data may still be needed so don't overwrite
+                    definition.Model.MeshTree = level.Models[i].MeshTree;
+                    definition.Model.NumMeshes = level.Models[i].NumMeshes;
+                    definition.Model.StartingMesh = level.Models[i].StartingMesh;
+                }
                 level.Models[i] = definition.Model;
             }
 

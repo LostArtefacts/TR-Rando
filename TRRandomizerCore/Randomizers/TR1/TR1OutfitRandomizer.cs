@@ -4,25 +4,40 @@ using System.IO;
 using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TRGE.Core;
+using TRLevelReader;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRModelTransporter.Handlers;
+using TRModelTransporter.Model.Sound;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Meshes;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Textures;
+using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Randomizers
 {
     public class TR1OutfitRandomizer : BaseTR1Randomizer
     {
+        private static readonly short[] _barefootSfxIDs = new short[] { 0, 4 };
+        private static readonly double _mauledLaraChance = (double)1 / 3;
+        private static readonly List<string> _permittedGymLevels = new List<string>
+        {
+            TRLevelNames.CAVES, TRLevelNames.VILCABAMBA, TRLevelNames.FOLLY,
+            TRLevelNames.COLOSSEUM, TRLevelNames.CISTERN, TRLevelNames.TIHOCAN
+        };
+
         internal TR1TextureMonitorBroker TextureMonitor { get; set; }
 
         private List<TR1ScriptedLevel> _braidLevels;
         private List<TR1ScriptedLevel> _invisibleLevels;
         private List<TR1ScriptedLevel> _gymLevels;
+        private List<TR1ScriptedLevel> _mauledLevels;
+
+        private Dictionary<short, List<byte[]>> _barefootSfx;
 
         public override void Randomize(int seed)
         {
@@ -89,14 +104,47 @@ namespace TRRandomizerCore.Randomizers
 
             if (Settings.AllowGymOutfit)
             {
-                // Gym outfits are only available in the following levels and we can only use it
+                // Gym outfits are only available in some levels and we can only use it
                 // if the T-Rex isn't present because that overwrites the MiscAnim's textures.
-                List<string> allowedGymLevels = new List<string>
+                _gymLevels = Levels.FindAll(l => _permittedGymLevels.Contains(l.LevelFileBaseName.ToUpper())).RandomSelection(_generator, _generator.Next(1, _permittedGymLevels.Count + 1));
+
+                // Cache Lara's barefoot SFX from the original Gym.
+                TRLevel gym = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TRLevelNames.ASSAULT));
+                _barefootSfx = new Dictionary<short, List<byte[]>>();
+                foreach (short soundID in _barefootSfxIDs)
                 {
-                    TRLevelNames.CAVES, TRLevelNames.VILCABAMBA, TRLevelNames.FOLLY,
-                    TRLevelNames.COLOSSEUM, TRLevelNames.CISTERN, TRLevelNames.TIHOCAN
-                };
-                _gymLevels = Levels.FindAll(l => allowedGymLevels.Contains(l.LevelFileBaseName.ToUpper())).RandomSelection(_generator, _generator.Next(1, allowedGymLevels.Count + 1));
+                    TRSoundDetails footstepDetails = gym.SoundDetails[gym.SoundMap[soundID]];
+                    TR1PackedSound sound = SoundUtilities.BuildPackedSound(gym.SoundMap, gym.SoundDetails, gym.SampleIndices, gym.Samples, new short[] { soundID });
+                    _barefootSfx[soundID] = sound.Samples.Values.ToList();
+                }
+            }
+
+            // Add a chance of Lara's mauled outfit being used.
+            _mauledLevels = new List<TR1ScriptedLevel>();
+            foreach (TR1ScriptedLevel level in Levels)
+            {
+                if (IsInvisibleLevel(level) || IsGymLevel(level) || level.Is(TRLevelNames.MIDAS))
+                {
+                    continue;
+                }
+                
+                TextureMonitor<TREntities> monitor = TextureMonitor.GetMonitor(level.LevelFileBaseName.ToUpper());
+                if (monitor != null && monitor.PreparedLevelMapping != null)
+                {
+                    foreach (StaticTextureSource<TREntities> source in monitor.PreparedLevelMapping.Keys)
+                    {
+                        if (source.TextureEntities.Contains(TREntities.LaraMiscAnim_H_Valley) && _generator.NextDouble() < _mauledLaraChance)
+                        {
+                            _mauledLevels.Add(level);
+                        }
+                    }
+                }
+
+                // Extra check for Valley and ToQ as they have this anim by default.
+                if ((level.Is(TRLevelNames.VALLEY) || level.Is(TRLevelNames.QUALOPEC)) && !_mauledLevels.Contains(level) && _generator.NextDouble() < _mauledLaraChance)
+                {
+                    _mauledLevels.Add(level);
+                }
             }
 
             if (ScriptEditor.Edition.IsCommunityPatch && _braidLevels.Count > 0)
@@ -118,6 +166,11 @@ namespace TRRandomizerCore.Randomizers
         private bool IsGymLevel(TR1ScriptedLevel lvl)
         {
             return _gymLevels != null && _gymLevels.Contains(lvl);
+        }
+
+        private bool IsMauledLevel(TR1ScriptedLevel lvl)
+        {
+            return _mauledLevels.Contains(lvl);
         }
 
         internal class OutfitProcessor : AbstractProcessorThread<TR1OutfitRandomizer>
@@ -190,6 +243,10 @@ namespace TRRandomizerCore.Randomizers
                     {
                         ConvertToGymOutfit(level);
                     }                   
+                    else if (_outer.IsMauledLevel(level.Script))
+                    {
+                        ConvertToMauledOutfit(level);
+                    }
 
                     _outer.SaveLevel(level);
 
@@ -349,6 +406,27 @@ namespace TRRandomizerCore.Randomizers
                     NewMesh = laraMisc[7],
                     TextureFaceCopies = Enumerable.Range(8, 12)
                 });
+
+                // Replace Lara's footstep SFX. This is done independently of Audio rando in case that is not enabled.
+                // The original volume from Gym is a bit much, so we just increase each slightly.
+                foreach (short soundID in _outer._barefootSfx.Keys)
+                {
+                    TRSoundDetails footstepDetails = level.Data.SoundDetails[level.Data.SoundMap[soundID]];
+                    footstepDetails.Volume += 3072;
+
+                    if (footstepDetails.NumSounds == _outer._barefootSfx[soundID].Count)
+                    {
+                        for (int i = 0; i < footstepDetails.NumSounds; i++)
+                        {
+                            uint samplePointer = level.Data.SampleIndices[footstepDetails.Sample + i];
+                            byte[] replacementSfx = _outer._barefootSfx[soundID][i];
+                            for (int j = 0; j < replacementSfx.Length; j++)
+                            {
+                                level.Data.Samples[samplePointer + j] = replacementSfx[j];
+                            }
+                        }
+                    }
+                }
             }
 
             private void CopyMeshParts(TRLevel level, MeshCopyData data)
@@ -429,6 +507,151 @@ namespace TRRandomizerCore.Randomizers
                 editor.WriteToLevel(level);
 
                 TRMeshUtilities.DuplicateMesh(level, data.BaseMesh, editor.Mesh);
+            }
+
+            private void ConvertToMauledOutfit(TR1CombinedLevel level)
+            {
+                TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara);
+                TRMesh[] laraShotgun = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraShotgunAnim_H);
+                TRMesh[] laraMisc = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraMiscAnim_H);
+
+                // Left leg
+                ReplaceTexture(lara[1], laraMisc[1], 1, 2, 0);
+                ConvertColourToTexture(lara[1], laraMisc[1], 3, 1, 0);
+                ConvertColourToTexture(lara[1], laraMisc[1], 5, 5, 0);
+
+                // Right leg
+                ConvertColourToTexture(lara[4], laraMisc[4], 5, 3, 1);
+                ConvertColourToTexture(lara[5], laraMisc[5], 1, 0, 1);
+
+                // Torso
+                ConvertColourToTexture(lara[7], laraMisc[7], 1, 2, 2);
+                ReplaceTexture(lara[7], laraMisc[7], 0, 0, 0);
+                ReplaceTexture(lara[7], laraMisc[7], 5, 8, 0);
+                ReplaceTexture(lara[7], laraMisc[7], 3, 6, 0);
+
+                // Left arm
+                ConvertColourToTexture(lara[9], laraMisc[9], 2, 0, 1);
+                ConvertColourToTexture(lara[9], laraMisc[9], 3, 1, 1);
+
+                // Right arm
+                ConvertColourToTexture(lara[11], laraMisc[11], 3, 0, 0);
+                ConvertColourToTexture(lara[12], laraMisc[12], 0, 0, 1);
+
+                // Shotgun - Torso
+                ConvertColourToTexture(laraShotgun[7], laraMisc[7], 3, 2, 2);
+                ReplaceTexture(laraShotgun[7], laraMisc[7], 0, 0, 0);
+                ReplaceTexture(laraShotgun[7], laraMisc[7], 7, 8, 0);
+                ReplaceTexture(laraShotgun[7], laraMisc[7], 5, 6, 0);
+
+                // Some commonality between the holstered guns
+                List<TREntities> gunAnims = new List<TREntities>
+                {
+                    TREntities.LaraPistolAnim_H, TREntities.LaraMagnumAnim_H, TREntities.LaraUziAnimation_H
+                };
+                foreach (TREntities gunAnimType in gunAnims)
+                {
+                    TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, gunAnimType);
+
+                    // Left leg
+                    ReplaceTexture(meshes[1], laraMisc[1], 1, 2, 0);
+                    ConvertColourToTexture(meshes[1], laraMisc[1], 1, 1, 0);
+                    MergeColouredTrianglesToTexture(level.Data, meshes[1], laraMisc[1], new int[] { 13, 9 }, 5, 2);
+
+                    // Right leg
+                    MergeColouredTrianglesToTexture(level.Data, meshes[4], laraMisc[4], new int[] { 12, 8 }, 3, 3);
+                }
+            }
+
+            private void ReplaceTexture(TRMesh baseMesh, TRMesh copyMesh, int baseIndex, int copyIndex, int rotations)
+            {
+                TRFace4 face = baseMesh.TexturedRectangles[baseIndex];
+                face.Texture = copyMesh.TexturedRectangles[copyIndex].Texture;
+
+                RotateFace(face, rotations);
+            }
+
+            private void ConvertColourToTexture(TRMesh baseMesh, TRMesh copyMesh, int baseIndex, int copyIndex, int rotations)
+            {
+                List<TRFace4> texturedQuads = baseMesh.TexturedRectangles.ToList();
+                List<TRFace4> colouredQuads = baseMesh.ColouredRectangles.ToList();
+
+                TRFace4 face = colouredQuads[baseIndex];
+                colouredQuads.Remove(face);
+                texturedQuads.Add(face);
+                face.Texture = copyMesh.TexturedRectangles[copyIndex].Texture;
+
+                baseMesh.ColouredRectangles = colouredQuads.ToArray();
+                baseMesh.NumColouredRectangles--;
+
+                baseMesh.TexturedRectangles = texturedQuads.ToArray();
+                baseMesh.NumTexturedRectangles++;
+
+                RotateFace(face, rotations);
+            }
+
+            private void MergeColouredTrianglesToTexture(TRLevel level, TRMesh baseMesh, TRMesh copyMesh, int[] triangleIndices, int copyIndex, int rotations)
+            {
+                MeshEditor editor = new MeshEditor();
+                editor.Mesh = baseMesh;
+
+                List<TRFace3> colouredTris = baseMesh.ColouredTriangles.ToList();
+                List<TRFace4> colouredQuads = baseMesh.ColouredRectangles.ToList();
+
+                List<int> indices = triangleIndices.ToList();
+                indices.Sort();
+
+                List<ushort> vertices = new List<ushort>();
+                foreach (int index in indices)
+                {
+                    TRFace3 face = colouredTris[index];
+                    foreach (ushort vert in face.Vertices)
+                    {
+                        if (!vertices.Contains(vert))
+                        {
+                            vertices.Add(vert);
+                        }
+                    }
+                }
+
+                indices.Reverse();
+                foreach (int index in indices)
+                {
+                    colouredTris.RemoveAt(index);
+                }
+
+                colouredQuads.Add(new TRFace4
+                {
+                    Vertices = vertices.ToArray()
+                });
+
+                baseMesh.ColouredTriangles = colouredTris.ToArray();
+                baseMesh.NumColouredTriangles -= (short)indices.Count;
+
+                baseMesh.ColouredRectangles = colouredQuads.ToArray();
+                baseMesh.NumColouredRectangles++;
+
+                editor.WriteToLevel(level);
+
+                ConvertColourToTexture(baseMesh, copyMesh, baseMesh.NumColouredRectangles - 1, copyIndex, rotations);
+            }
+
+            private void RotateFace(TRFace4 face, int rotations)
+            {
+                if (rotations > 0)
+                {
+                    Queue<ushort> queue = new Queue<ushort>(face.Vertices);
+                    Stack<ushort> stack = new Stack<ushort>();
+
+                    while (rotations > 0)
+                    {
+                        stack.Push(queue.Dequeue());
+                        queue.Enqueue(stack.Pop());
+                        rotations--;
+                    }
+
+                    face.Vertices = queue.ToArray();
+                }
             }
         }
     }
