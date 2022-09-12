@@ -34,7 +34,7 @@ namespace TRModelTransporter.Handlers
                     ushort sampleIndex = (ushort)(details.Sample + i);
                     samples[i] = sampleIndices[sampleIndex];
 
-                    uint nextIndex = sampleIndex == sampleIndices.Length - 1 ? (uint)sampleIndices.Length : sampleIndices[sampleIndex + 1];
+                    uint nextIndex = sampleIndex == sampleIndices.Length - 1 ? (uint)samples.Length : sampleIndices[sampleIndex + 1];
                     packedSound.Samples[samples[i]] = AnimationUtilities.GetSample(samples[i], nextIndex, wavSamples);
                 }
 
@@ -140,13 +140,46 @@ namespace TRModelTransporter.Handlers
 
         public static void ResortSoundIndices(TRLevel level)
         {
-            List<uint> sampleIndices = level.SampleIndices.ToList();
-            List<TRSoundDetails> soundDetails = level.SoundDetails.ToList();
-            List<short> soundMap = level.SoundMap.ToList();
+            List<short> newSoundMap = new List<short>();
+            List<TRSoundDetails> newSoundDetails = new List<TRSoundDetails>();
+            List<uint> newSampleIndices = new List<uint>();
+            List<byte> newSamples = new List<byte>();
 
-            level.SampleIndices = sampleIndices.ToArray();
-            level.SoundDetails = soundDetails.ToArray();
-            level.SoundMap = soundMap.ToArray();
+            for (int soundID = 0; soundID < level.SoundMap.Length; soundID++)
+            {
+                if (level.SoundMap[soundID] == -1)
+                {
+                    newSoundMap.Add(-1);
+                }
+                else
+                {
+                    TRSoundDetails details = level.SoundDetails[level.SoundMap[soundID]];
+                    newSoundMap.Add((short)newSoundDetails.Count);
+                    newSoundDetails.Add(details);
+
+                    ushort oldSample = details.Sample;
+                    details.Sample = (ushort)newSampleIndices.Count;
+                    for (int i = 0; i < details.NumSounds; i++)
+                    {
+                        ushort samplePointerIndex = (ushort)(oldSample + i);
+
+                        uint oldSampleIndex = level.SampleIndices[oldSample + i];
+                        uint nextSampleIndex = samplePointerIndex == level.SampleIndices.Length - 1 ? (uint)level.Samples.Length : level.SampleIndices[samplePointerIndex + 1];
+
+                        newSampleIndices.Add((uint)newSamples.Count);
+                        newSamples.AddRange(AnimationUtilities.GetSample(oldSampleIndex, nextSampleIndex, level.Samples));
+                    }
+                }
+            }
+
+            level.SoundMap = newSoundMap.ToArray();
+            level.SoundDetails = newSoundDetails.ToArray();
+            level.SampleIndices = newSampleIndices.ToArray();
+            level.Samples = newSamples.ToArray();
+
+            level.NumSoundDetails = (uint)newSoundDetails.Count;
+            level.NumSampleIndices = (uint)newSampleIndices.Count;
+            level.NumSamples = (uint)newSamples.Count;
         }
 
         public static void ResortSoundIndices(TR2Level level)
