@@ -30,7 +30,8 @@ namespace TRRandomizerCore.Textures
         {
             TREntities.Missile1_H, TREntities.Missile2_H, TREntities.Missile3_H,
             TREntities.CutsceneActor2, TREntities.CutsceneActor3, TREntities.CutsceneActor4,
-            TREntities.AdamEgg, TREntities.ScionHolder, TREntities.ScionPiece4_S_P
+            TREntities.AdamEgg, TREntities.ScionHolder, TREntities.ScionPiece3_S_P, TREntities.ScionPiece4_S_P,
+            TREntities.Skateboard
         };
 
         public override bool Is8BitPalette => true;
