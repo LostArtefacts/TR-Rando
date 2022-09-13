@@ -130,13 +130,13 @@ namespace TextureExport.Types
 
                         foreach (AbstractIndexedTRTexture texture in segment.Textures)
                         {
-                            if (texture is IndexedTRObjectTexture)
+                            if (texture is IndexedTRObjectTexture objTexture)
                             {
-                                objectData.Add(texture.Index + ": " + RectangleToString(texture.Bounds));
+                                objectData.Add(texture.Index + ":" + RectangleToString(texture.Bounds) + ":" + (objTexture.IsTriangle ? "T" : "Q"));
                             }
                             else
                             {
-                                spriteData.Add(texture.Index + ": " + RectangleToString(texture.Bounds));
+                                spriteData.Add(texture.Index + ":" + RectangleToString(texture.Bounds));
                             }
                         }
 
