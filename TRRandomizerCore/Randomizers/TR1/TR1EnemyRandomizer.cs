@@ -524,7 +524,7 @@ namespace TRRandomizerCore.Randomizers
                 {
                     if (level.Data.Entities.ToList().FindAll(e => enemyGroup.Enemies.Contains((TREntities)e.TypeID)).Count >= enemyGroup.MaximumCount)
                     {
-                        List<TREntities> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1EntityUtilities.TranslateEntityAlias(e)));
+                        List<TREntities> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1EntityUtilities.TranslateEntityAlias(e), difficulty));
                         if (pool.Count > 0)
                         {
                             newEntityType = pool[_generator.Next(0, pool.Count)];

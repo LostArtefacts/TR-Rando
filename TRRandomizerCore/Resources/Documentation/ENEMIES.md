@@ -7,12 +7,13 @@ Jump to:
 
 # TR1
 The following enemy restrictions are in place when using "Default" restriction mode during randomization.
-* Torso can appear only once per level.
+* Torso can appear only once per level in specific rooms.
+* SkateboardKid can appear only once per level in specific rooms.
 * Natla can appear only once per level.
+* SkateboardKid and Natla cannot appear in the same level together.
 * There can be at most 3 Torso appearances across the game.
 * There can be at most 2 Natla appearances across the game.
 * Cowboy can appear at most 3 times in one level.
-* SkateboardKid can appear at most 3 times in one level.
 * Kold can appear at most 3 times in one level.
 * Pierre can appear at most 3 times in one level.
 
@@ -24,6 +25,9 @@ Pierre will always be killable, as allocating runaway Pierres using current enem
 
 ### Larson
 Larson will always appear at the end of Tomb of Qualopec. He can appear elsewhere without restrictions and will have the same death animation as Sanctuary of the Scion (i.e. non level-ending).
+
+### SkateboardKid
+SkateboardKid is restricted to specific rooms due to resource limitations - the rooms allocated to him are those with much fewer enemies than others. He cannot appear with Natla in the same level as this can cause crashes.
 
 ### Atlanteans
 Collectively, there are some limits on Atlanteans per level to avoid extremely difficult areas. There will be a maximum grouping count for the following levels of any of the following enemies.
@@ -51,7 +55,15 @@ Collectively, there are some limits on Atlanteans per level to avoid extremely d
 Note that mummies can appear as flying mutants in other levels. This model is present in City of Khamoon but is unused in the original game.
 
 ## No Restrictions Mode
-This mode will switch off _**all**_ of the above restrictions other than Pierre always being killable, Larson appearing at the end of Qualopec and Torso appearing in Great Pyramid. This mode will also allow land enemies to appear underwater as the engine does not kill them (as in TR2 onwards).
+This mode will switch off _**most**_ of the above restrictions. The following will always remain:
+* Pierre always being killable
+* Larson appearing at the end of Qualopec
+* Torso appearing in Great Pyramid
+* SkateboardKid being limited to one per level and to specific rooms
+* Natla appearing once per level
+* SkateboardKid and Natla not sharing a level
+
+This mode will also allow land enemies to appear underwater as the engine does not kill them (as in TR2 onwards).
 
 ## Enemy Types
 Some levels have their total enemy types count increased for more variety. This is a maximum rather than a guaranteed number of types (e.g. for Caves, 5 models will always be imported, but no checks are performed to ensure at least one of each is assigned to entities). Levels in _italics_ remain unchanged.

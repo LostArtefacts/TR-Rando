@@ -36,7 +36,8 @@ namespace TRRandomizerCore.Utilities
                     (GetRestrictedEnemyGroup(lvlName, entity, RandoDifficulty.DefaultOrNoRestrictions) != null);
             }
 
-            return _restrictedEnemyZonesTechnical.ContainsKey(lvlName) && _restrictedEnemyZonesTechnical[lvlName].ContainsKey(entity);
+            return (_restrictedEnemyZonesTechnical.ContainsKey(lvlName) && _restrictedEnemyZonesTechnical[lvlName].ContainsKey(entity))
+                || _restrictedEnemyLevelCountsTechnical.ContainsKey(entity);
         }
 
         // This returns a set of ALLOWED rooms
@@ -284,11 +285,11 @@ namespace TRRandomizerCore.Utilities
 
         public static RestrictedEnemyGroup GetRestrictedEnemyGroup(string lvlName, TREntities entity, RandoDifficulty difficulty)
         {
-            if (difficulty != RandoDifficulty.NoRestrictions && _restrictedEnemyGroupCounts.ContainsKey(lvlName))
+            if (_restrictedEnemyGroupCounts.ContainsKey(lvlName))
             {
                 foreach (RestrictedEnemyGroup group in _restrictedEnemyGroupCounts[lvlName])
                 {
-                    if (group.Enemies.Contains(entity))
+                    if (group.Enemies.Contains(entity) && (group.IsSealed || difficulty != RandoDifficulty.NoRestrictions))
                     {
                         return group;
                     }
@@ -304,14 +305,14 @@ namespace TRRandomizerCore.Utilities
         // We (can) also limit the count per level for some, such as bosses.
         private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsTechnical = new Dictionary<TREntities, int>
         {
-            [TREntities.Natla] = 1
+            [TREntities.Natla] = 1,
+            [TREntities.SkateboardKid] = 1
         };
 
         private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsDefault = new Dictionary<TREntities, int>
         {
             [TREntities.Adam] = 1,
             [TREntities.Cowboy] = 3,
-            [TREntities.SkateboardKid] = 3,
             [TREntities.Kold] = 3,
             [TREntities.Pierre] = 3
         };
@@ -335,10 +336,21 @@ namespace TRRandomizerCore.Utilities
             TREntities.AtlanteanEgg
         };
 
+        private static readonly RestrictedEnemyGroup _natlaAndSkater = new RestrictedEnemyGroup
+        {
+            MaximumCount = 1,
+            IsSealed = true, // This cannot be switched off in "no restrictions"
+            Enemies = new List<TREntities>
+            {
+                TREntities.Natla, TREntities.SkateboardKid
+            }
+        };
+
         private static readonly Dictionary<string, List<RestrictedEnemyGroup>> _restrictedEnemyGroupCounts = new Dictionary<string, List<RestrictedEnemyGroup>>
         {
             [TRLevelNames.CAVES] = new List<RestrictedEnemyGroup>
             {
+                _natlaAndSkater,
                 new RestrictedEnemyGroup
                 {
                     MaximumCount = 5,
@@ -347,6 +359,7 @@ namespace TRRandomizerCore.Utilities
             },
             [TRLevelNames.VILCABAMBA] = new List<RestrictedEnemyGroup>
             {
+                _natlaAndSkater,
                 new RestrictedEnemyGroup
                 {
                     MaximumCount = 10,
@@ -355,6 +368,7 @@ namespace TRRandomizerCore.Utilities
             },
             [TRLevelNames.VALLEY] = new List<RestrictedEnemyGroup>
             {
+                _natlaAndSkater,
                 new RestrictedEnemyGroup
                 {
                     MaximumCount = 5,
@@ -363,6 +377,7 @@ namespace TRRandomizerCore.Utilities
             },
             [TRLevelNames.QUALOPEC] = new List<RestrictedEnemyGroup>
             {
+                _natlaAndSkater,
                 new RestrictedEnemyGroup
                 {
                     MaximumCount = 0,
@@ -371,6 +386,7 @@ namespace TRRandomizerCore.Utilities
             },
             [TRLevelNames.FOLLY] = new List<RestrictedEnemyGroup>
             {
+                _natlaAndSkater,
                 new RestrictedEnemyGroup
                 {
                     MaximumCount = 10,
@@ -379,6 +395,7 @@ namespace TRRandomizerCore.Utilities
             },
             [TRLevelNames.COLOSSEUM] = new List<RestrictedEnemyGroup>
             {
+                _natlaAndSkater,
                 new RestrictedEnemyGroup
                 {
                     MaximumCount = 11,
@@ -387,6 +404,7 @@ namespace TRRandomizerCore.Utilities
             },
             [TRLevelNames.MIDAS] = new List<RestrictedEnemyGroup>
             {
+                _natlaAndSkater,
                 new RestrictedEnemyGroup
                 {
                     MaximumCount = 15,
@@ -400,6 +418,7 @@ namespace TRRandomizerCore.Utilities
             },
             [TRLevelNames.CISTERN] = new List<RestrictedEnemyGroup>
             {
+                _natlaAndSkater,
                 new RestrictedEnemyGroup
                 {
                     MaximumCount = 13,
@@ -408,6 +427,7 @@ namespace TRRandomizerCore.Utilities
             },
             [TRLevelNames.TIHOCAN] = new List<RestrictedEnemyGroup>
             {
+                _natlaAndSkater,
                 new RestrictedEnemyGroup
                 {
                     MaximumCount = 9,
@@ -416,6 +436,7 @@ namespace TRRandomizerCore.Utilities
             },
             [TRLevelNames.KHAMOON] = new List<RestrictedEnemyGroup>
             {
+                _natlaAndSkater,
                 new RestrictedEnemyGroup
                 {
                     MaximumCount = 6,
@@ -424,11 +445,28 @@ namespace TRRandomizerCore.Utilities
             },
             [TRLevelNames.OBELISK] = new List<RestrictedEnemyGroup>
             {
+                _natlaAndSkater,
                 new RestrictedEnemyGroup
                 {
                     MaximumCount = 6,
                     Enemies = _allAtlanteans
                 }
+            },
+            [TRLevelNames.SANCTUARY] = new List<RestrictedEnemyGroup>
+            {
+                _natlaAndSkater
+            },
+            [TRLevelNames.MINES] = new List<RestrictedEnemyGroup>
+            {
+                _natlaAndSkater
+            },
+            [TRLevelNames.ATLANTIS] = new List<RestrictedEnemyGroup>
+            {
+                _natlaAndSkater
+            },
+            [TRLevelNames.PYRAMID] = new List<RestrictedEnemyGroup>
+            {
+                _natlaAndSkater
             }
         };
 
@@ -552,5 +590,6 @@ namespace TRRandomizerCore.Utilities
     {
         public List<TREntities> Enemies { get; set; }
         public int MaximumCount { get; set; }
+        public bool IsSealed { get; set; }
     }
 }
