@@ -703,25 +703,28 @@ namespace TRRandomizerCore.Randomizers
         private void AmendAtlanteanModels(TR1CombinedLevel level, EnemyRandomizationCollection enemies)
         {
             // If non-shooting grounded Atlanteans are present, we can just duplicate the model to make shooting Atlanteans
-            List<TRModel> models = level.Data.Models.ToList();
-            TRModel shooter = models.Find(m => m.ID == (uint)TREntities.ShootingAtlantean_N);
-            TRModel nonShooter = models.Find(m => m.ID == (uint)TREntities.NonShootingAtlantean_N);
-            if (shooter == null && nonShooter != null)
+            if (enemies.Available.Any(TR1EntityUtilities.GetEntityFamily(TREntities.ShootingAtlantean_N).Contains))
             {
-                models.Add(new TRModel
+                List<TRModel> models = level.Data.Models.ToList();
+                TRModel shooter = models.Find(m => m.ID == (uint)TREntities.ShootingAtlantean_N);
+                TRModel nonShooter = models.Find(m => m.ID == (uint)TREntities.NonShootingAtlantean_N);
+                if (shooter == null && nonShooter != null)
                 {
-                    ID = (uint)TREntities.ShootingAtlantean_N,
-                    Animation = nonShooter.Animation,
-                    FrameOffset = nonShooter.FrameOffset,
-                    MeshTree = nonShooter.MeshTree,
-                    NumMeshes = nonShooter.NumMeshes,
-                    StartingMesh = nonShooter.StartingMesh
-                });
+                    models.Add(new TRModel
+                    {
+                        ID = (uint)TREntities.ShootingAtlantean_N,
+                        Animation = nonShooter.Animation,
+                        FrameOffset = nonShooter.FrameOffset,
+                        MeshTree = nonShooter.MeshTree,
+                        NumMeshes = nonShooter.NumMeshes,
+                        StartingMesh = nonShooter.StartingMesh
+                    });
 
-                level.Data.Models = models.ToArray();
-                level.Data.NumModels++;
+                    level.Data.Models = models.ToArray();
+                    level.Data.NumModels++;
 
-                enemies.Available.Add(TREntities.ShootingAtlantean_N);
+                    enemies.Available.Add(TREntities.ShootingAtlantean_N);
+                }
             }
         }
 
