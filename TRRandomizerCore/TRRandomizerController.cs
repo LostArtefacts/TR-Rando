@@ -1328,10 +1328,10 @@ namespace TRRandomizerCore
             set => LevelRandomizer.RandoEnemyDifficulty = value;
         }
 
-        public bool MaximiseDragonAppearance
+        public DragonSpawnType DragonSpawnType
         {
-            get => LevelRandomizer.MaximiseDragonAppearance;
-            set => LevelRandomizer.MaximiseDragonAppearance = value;
+            get => LevelRandomizer.DragonSpawnType;
+            set => LevelRandomizer.DragonSpawnType = value;
         }
 
         public bool UseEnemyExclusions
