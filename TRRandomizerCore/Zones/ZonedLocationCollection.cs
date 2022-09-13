@@ -141,6 +141,12 @@ namespace TRRandomizerCore.Zones
             return null;
         }
 
+        /// <summary>
+        /// Populate <see cref="_zoneAppliedLocations"/>  to get for each secret or key item index the list of locations they are set to appear into in both json for Zone and location in this specific level
+        /// </summary>
+        /// <param name="zoneFilePath">path of the Zone file for the level @"TR2\Zones\" + _levelInstance.Name + "-Zones.json"</param>
+        /// <param name="locations">locations.json serialized</param>
+        /// <param name="popMethod">SecretsOnly;KeyPuzzleQuestOnly; are the only ones used today</param>
         public void PopulateZones(string zoneFilePath, List<Location> locations, ZonePopulationMethod popMethod)
         {
             Dictionary<int, List<int>> ZoneMap = JsonConvert.DeserializeObject<Dictionary<int, List<int>>>(File.ReadAllText(zoneFilePath));
@@ -150,7 +156,7 @@ namespace TRRandomizerCore.Zones
                 _zoneAppliedLocations.Add((int)LevelZones.StoneSecretZone, (from loc in locations
                                                                             where ZoneMap[(int)LevelZones.StoneSecretZone].Contains(loc.Room)
                                                                             select loc).ToList());
-
+                // HSH is not zoned... file is empty... so each secret can go everywhere
                 if (!DoesZoneHaveLocations((int)LevelZones.StoneSecretZone))
                     _zoneAppliedLocations[(int)LevelZones.StoneSecretZone] = locations;
 
@@ -238,8 +244,8 @@ namespace TRRandomizerCore.Zones
                     for (int i = ((int)LevelZones.ItemZones + 1); i < ZoneMap.Count; i++)
                     {
                         _zoneAppliedLocations.Add(i, (from loc in locations
-                                                    where ZoneMap[i].Contains(loc.Room)
-                                                    select loc).ToList());
+                                                      where ZoneMap[i].Contains(loc.Room)
+                                                      select loc).ToList());
 
                         if (!DoesZoneHaveLocations(i))
                         {

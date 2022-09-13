@@ -1,4 +1,5 @@
-﻿using TRViewInterop.Routes;
+﻿
+using TRViewInterop.Routes;
 
 namespace TRRandomizerCore.Helpers
 {
@@ -31,7 +32,7 @@ namespace TRRandomizerCore.Helpers
 
         public bool InvalidatesRoom { get; set; }
 
-        public LevelState LevelState {get; set;}
+        public LevelState LevelState { get; set; }
 
         public int EntityIndex { get; set; }
         public short TargetType { get; set; }
@@ -65,5 +66,21 @@ namespace TRRandomizerCore.Helpers
             Room = loc.Room;
             Angle = 16384;
         }
+
+        /// <summary>
+        /// Compare the location to the location in parameter only in a matter of X;Y;Z and Room
+        /// </summary>
+        /// <param name="locationToTest"></param>
+        /// <returns>True if they are the same</returns>
+        public bool IsTheSame(Location locationToTest)
+        {
+            if (X == locationToTest.X &&
+                Y == locationToTest.Y &&
+                Z == locationToTest.Z &&
+                Room == locationToTest.Room) return true;
+            else return false;
+        }
+
+
     }
 }

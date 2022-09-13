@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TRFDControl;
+using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -363,7 +365,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 TR2Entity entity = _levelInstance.Data.Entities[i];
                 TR2Entities currentType = (TR2Entities)entity.TypeID;
-                
+
                 if (i == _unarmedLevelPistolIndex)
                 {
                     // Handled separately in RandomizeAmmo
@@ -663,7 +665,10 @@ namespace TRRandomizerCore.Randomizers
 
             List<TR2Entity> levelEntities = _levelInstance.Data.Entities.ToList();
             int entityLimit = _levelInstance.GetMaximumEntityLimit();
-            if (vehicles.Count == 0 || vehicles.Count + levelEntities.Count > entityLimit)
+
+            TR2Entity[] boatToMove = Array.FindAll(_levelInstance.Data.Entities, e => e.TypeID == (short)TR2Entities.Boat);
+
+            if (vehicles.Count == 0 || vehicles.Count - boatToMove.Count() + levelEntities.Count > entityLimit)
             {
                 return;
             }
@@ -678,10 +683,12 @@ namespace TRRandomizerCore.Randomizers
                 TexturePositionMonitor = TextureMonitor.CreateMonitor(_levelInstance.Name, vehicles.Keys.ToList())
             };
 
+
             try
             {
                 importer.Import();
 
+                // looping on boats and or skidoo
                 foreach (TR2Entities entity in vehicles.Keys)
                 {
                     if (levelEntities.Count == entityLimit)
@@ -690,18 +697,77 @@ namespace TRRandomizerCore.Randomizers
                     }
 
                     Location location = vehicles[entity];
-                    levelEntities.Add(new TR2Entity
+
+                    if (entity == TR2Entities.Boat)
                     {
-                        TypeID = (short)entity,
-                        Room = (short)location.Room,
-                        X = location.X,
-                        Y = location.Y,
-                        Z = location.Z,
-                        Angle = location.Angle,
-                        Flags = 0,
-                        Intensity1 = -1,
-                        Intensity2 = -1
-                    });
+                        location = RoomWaterUtilities.MoveToTheSurface(location, _levelInstance.Data);
+                    }
+
+                    if (boatToMove.Count() == 0)
+                    {
+                        //Creation new entity
+                        levelEntities.Add(new TR2Entity
+                        {
+                            TypeID = (short)entity,
+                            Room = (short)location.Room,
+                            X = location.X,
+                            Y = location.Y,
+                            Z = location.Z,
+                            Angle = location.Angle,
+                            Flags = 0,
+                            Intensity1 = -1,
+                            Intensity2 = -1
+                        });
+                    }
+                    else
+                    {
+                        //I am in a level with 1 or 2 boat(s) to move
+                        for (int i = 0; i < boatToMove.Count(); i++)
+                        {
+                            if (i == 0) // for the first one i take the vehicle value
+                            {
+                                TR2Entity boat = boatToMove[i];
+
+                                boat.Room = (short)location.Room;
+                                boat.X = location.X;
+                                boat.Y = location.Y;
+                                boat.Z = location.Z;
+                                boat.Angle = location.Angle;
+                                boat.Flags = 0;
+                                boat.Intensity1 = -1;
+                                boat.Intensity2 = -1;
+
+                            }
+                            else // I have to find another location that is different
+                            {
+                                Location location2ndBoat = vehicles[entity];
+                                int checkCount = 0;
+                                while (location2ndBoat.IsTheSame(vehicles[entity]) && checkCount < 5)//compare locations in bottom of water ( authorize 5 round max in case there is only 1 valid location)
+                                {
+                                    location2ndBoat = VehicleUtilities.GetRandomLocation(_levelInstance, TR2Entities.Boat, _generator, false);
+                                    checkCount++;
+                                }
+
+                                if (checkCount < 5)// If i actually found a different location I proceed (if not vanilla location it is) 
+                                {
+                                    location2ndBoat = RoomWaterUtilities.MoveToTheSurface(location2ndBoat, _levelInstance.Data);
+
+                                    TR2Entity boat2 = boatToMove[i];
+
+                                    boat2.Room = (short)location2ndBoat.Room;
+                                    boat2.X = location2ndBoat.X;
+                                    boat2.Y = location2ndBoat.Y;
+                                    boat2.Z = location2ndBoat.Z;
+                                    boat2.Angle = location2ndBoat.Angle;
+                                    boat2.Flags = 0;
+                                    boat2.Intensity1 = -1;
+                                    boat2.Intensity2 = -1;
+                                }
+
+                            }
+
+                        }
+                    }
                 }
 
                 if (levelEntities.Count > _levelInstance.Data.NumEntities)
@@ -716,6 +782,11 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
+        /// <summary>
+        /// Populate (or add in) the locationMap with a random location designed for the specific entity type in parameter
+        /// </summary>
+        /// <param name="entity">Type of the entity <see cref="TR2Entities"/></param>
+        /// <param name="locationMap">Dictionnary EntityType/location </param>
         private void PopulateVehicleLocation(TR2Entities entity, Dictionary<TR2Entities, Location> locationMap)
         {
             Location location = VehicleUtilities.GetRandomLocation(_levelInstance, entity, _generator);
