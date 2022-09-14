@@ -438,6 +438,7 @@ namespace TRRandomizerCore.Randomizers
                 List<TRFace4> colouredQuads = editor.Mesh.ColouredRectangles.ToList();
 
                 List<TRVertex> vertices = editor.Mesh.Vertices.ToList();
+                List<TRVertex> normals = editor.Mesh.Normals.ToList();
 
                 if (data.TextureFaceCopies != null)
                 {
@@ -453,6 +454,10 @@ namespace TRRandomizerCore.Randomizers
                             {
                                 newVertIndex = vertices.Count;
                                 vertices.Add(origVertex);
+                                if (face.Vertices[j] < data.BaseMesh.Normals.Length)
+                                {
+                                    normals.Add(data.BaseMesh.Normals[face.Vertices[j]]);
+                                }
                             }
                             vertexPointers[j] = (ushort)newVertIndex;
                         }
@@ -479,6 +484,10 @@ namespace TRRandomizerCore.Randomizers
                             {
                                 newVertIndex = vertices.Count;
                                 vertices.Add(origVertex);
+                                if (face.Vertices[j] < data.BaseMesh.Normals.Length)
+                                {
+                                    normals.Add(data.BaseMesh.Normals[face.Vertices[j]]);
+                                }
                             }
                             vertexPointers[j] = (ushort)newVertIndex;
                         }
@@ -500,8 +509,8 @@ namespace TRRandomizerCore.Randomizers
                 editor.Mesh.Vertices = vertices.ToArray();
                 editor.Mesh.NumVertices = (short)vertices.Count;
 
-                editor.Mesh.Normals = data.BaseMesh.Normals;
-                editor.Mesh.NumNormals = data.BaseMesh.NumNormals;
+                editor.Mesh.Normals = normals.ToArray();
+                editor.Mesh.NumNormals = (short)normals.Count;
 
                 editor.Mesh.CollRadius = data.BaseMesh.CollRadius;
                 editor.WriteToLevel(level);
