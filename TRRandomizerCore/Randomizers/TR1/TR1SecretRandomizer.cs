@@ -118,17 +118,13 @@ namespace TRRandomizerCore.Randomizers
             {
                 TR1Script script = ScriptEditor.Script as TR1Script;
                 script.FixPyramidSecretTrigger = false;
+                script.Enable3dPickups = false;
 
                 if (Settings.GlitchedSecrets)
                 {
                     script.FixDescendingGlitch = false;
                     script.FixQwopGlitch = false;
                     script.FixWallJumpGlitch = false;
-                }
-
-                if (Settings.UseRecommendedCommunitySettings)
-                {
-                    script.Enable3dPickups = false;
                 }
 
                 ScriptEditor.SaveScript();
