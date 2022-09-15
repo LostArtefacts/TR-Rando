@@ -9,13 +9,14 @@ using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using System.IO;
 
 namespace TRRandomizerCore.Randomizers
 {
     public class TR2SecretRandomizer : BaseTR2Randomizer
     {
         private static readonly List<int> _devRooms = null;
-        
+
         private void RandomizeSecrets(List<Location> LevelLocations)
         {
             if (LevelLocations.Count > 2)
@@ -42,19 +43,19 @@ namespace TRRandomizerCore.Randomizers
                     goldLocation = ZonedLocations.GoldZone[_generator.Next(0, ZonedLocations.GoldZone.Count)];
                 } while ((goldLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
                         (goldLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
-                
+
 
                 do
                 {
                     jadeLocation = ZonedLocations.JadeZone[_generator.Next(0, ZonedLocations.JadeZone.Count)];
-                } while ((jadeLocation.Room == goldLocation.Room) || 
+                } while ((jadeLocation.Room == goldLocation.Room) ||
                         (jadeLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
                         (jadeLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
 
                 do
                 {
                     stoneLocation = ZonedLocations.StoneZone[_generator.Next(0, ZonedLocations.StoneZone.Count)];
-                } while ((stoneLocation.Room == goldLocation.Room) || 
+                } while ((stoneLocation.Room == goldLocation.Room) ||
                         (stoneLocation.Room == jadeLocation.Room) ||
                         (stoneLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
                         (stoneLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
@@ -78,7 +79,7 @@ namespace TRRandomizerCore.Randomizers
                 {
                     //Does the level contain an entity for this type?
                     TR2Entity secretEntity = Array.Find(_levelInstance.Data.Entities, ent => ent.TypeID == (short)secretType);
-                    
+
                     //If not, create a placeholder entity for now
                     if (secretEntity == null)
                     {
@@ -102,6 +103,7 @@ namespace TRRandomizerCore.Randomizers
                 _levelInstance.Data.NumEntities = (uint)ents.Count;
 
                 FixSecretTextures();
+                CheckForSecretDamage(secretMap);
             }
         }
 
@@ -204,6 +206,34 @@ namespace TRRandomizerCore.Randomizers
                 {
                     break;
                 }
+            }
+        }
+
+        private void CheckForSecretDamage(Dictionary<TR2Entities, Location> secretMap)
+        {
+            uint easyDamageCount = 0;
+            uint hardDamageCount = 0;
+
+            foreach (TR2Entities secretType in secretMap.Keys)
+            {
+                Location location = secretMap[secretType];
+
+                if (location.Difficulty == Difficulty.Hard)
+                    hardDamageCount++;
+                else
+                    easyDamageCount++;
+            }
+
+            //  If we found some secrets needing damage
+            if (hardDamageCount > 0 || easyDamageCount > 0)
+            {
+                // If this an unarmed level I add one hard damage
+                if (_levelInstance.Script.RemovesWeapons) hardDamageCount++;
+                // If its one of the firsts level I add one easy damage
+                if (_levelInstance.Sequence < 2) easyDamageCount++;
+
+                _levelInstance.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Entities.LargeMed_S_P), hardDamageCount);
+                _levelInstance.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Entities.SmallMed_S_P), easyDamageCount);
             }
         }
     }
