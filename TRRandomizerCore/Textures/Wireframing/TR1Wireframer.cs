@@ -34,6 +34,17 @@ namespace TRRandomizerCore.Textures
             TREntities.Skateboard
         };
 
+        private static readonly List<TREntities> _pickupModels = new List<TREntities>
+        {
+            TREntities.Pistols_M_H, TREntities.Shotgun_M_H, TREntities.Magnums_M_H, TREntities.Uzis_M_H,
+            TREntities.ShotgunAmmo_M_H, TREntities.MagnumAmmo_M_H, TREntities.UziAmmo_M_H,
+            TREntities.SmallMed_M_H, TREntities.LargeMed_M_H,
+            TREntities.Puzzle1_M_H, TREntities.Puzzle2_M_H, TREntities.Puzzle3_M_H, TREntities.Puzzle4_M_H,
+            TREntities.Key1_M_H, TREntities.Key2_M_H, TREntities.Key3_M_H, TREntities.Key4_M_H,
+            TREntities.Quest1_M_H, TREntities.Quest2_M_H,
+            TREntities.ScionPiece_M_H
+        };
+
         public override bool Is8BitPalette => true;
 
         private TR1TexturePacker _packer;
@@ -46,6 +57,11 @@ namespace TRRandomizerCore.Textures
         protected override bool IsSkybox(TRModel model)
         {
             return false;
+        }
+
+        protected override bool ShouldSolidifyModel(TRModel model)
+        {
+            return _data.Has3DPickups && _pickupModels.Contains((TREntities)model.ID);
         }
 
         protected override int GetBlackPaletteIndex(TRLevel level)

@@ -175,7 +175,8 @@ namespace TRRandomizerCore.Randomizers
                 _persistentWireColour = _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
             }
 
-            _wireframeData.Values.ToList().ForEach(d => d.HighlightLadders = Settings.UseWireframeLadders);
+            bool has3DPickups = ScriptEditor.Edition.IsCommunityPatch && (ScriptEditor as TR1ScriptEditor).Enable3dPickups;
+            _wireframeData.Values.ToList().ForEach(d => d.Has3DPickups = has3DPickups);
         }
 
         public string GetSourceVariant(AbstractTextureSource source)

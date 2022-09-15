@@ -24,7 +24,7 @@ namespace TRRandomizerCore.Textures
         private Dictionary<TRFace4, List<TRVertex>> _ladderFace4s;
 
         private ISet<ushort> _allTextures;
-        private WireframeData _data;
+        protected WireframeData _data;
 
         protected virtual bool IsTextureExcluded(ushort texture)
         {
