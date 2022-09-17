@@ -208,7 +208,8 @@
       "X": 59780,
       "Y": 11264,
       "Z": 61854,
-      "Room": 56
+      "Room": 56,
+      "RequiresDamage": true
     },
     {
       "X": 57822,
@@ -349,7 +350,8 @@
       "X": 85502,
       "Y": 20480,
       "Z": 68066,
-      "Room": 65
+      "Room": 65,
+      "RequiresDamage": true
     },
     {
       "X": 40913,
@@ -1288,7 +1290,8 @@
       "X": 48635,
       "Y": 2304,
       "Z": 40804,
-      "Room": 22
+      "Room": 22,
+      "RequiresDamage": true
     },
     {
       "X": 45527,
@@ -1768,7 +1771,8 @@
       "X": 60315,
       "Y": 3840,
       "Z": 45173,
-      "Room": 123
+      "Room": 123,
+      "RequiresDamage": true
     },
     {
       "X": 56421,
@@ -1950,7 +1954,8 @@
       "X": 71022,
       "Y": 3840,
       "Z": 47722,
-      "Room": 113
+      "Room": 113,
+      "RequiresDamage": true
     },
     {
       "X": 63387,
@@ -2033,7 +2038,8 @@
       "Y": 10752,
       "Z": 37908,
       "Room": 106,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresDamage": true
     },
     {
       "X": 77789,
@@ -2429,6 +2435,7 @@
       "Z": 92851,
       "Room": 2,
       "Difficulty": "Hard",
+      "RequiresDamage": true,
       "RequiresGlitch": true
     }
   ],
@@ -4836,7 +4843,8 @@
       "X": 36424,
       "Y": 0,
       "Z": 52973,
-      "Room": 39
+      "Room": 39,
+      "RequiresDamage": true
     },
     {
       "X": 35503,
@@ -5017,7 +5025,8 @@
       "Y": -763,
       "Z": 54265,
       "Room": 39,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresDamage": true
     },
     {
       "X": 48098,
@@ -5165,7 +5174,8 @@
       "X": 19433,
       "Y": 5120,
       "Z": 46229,
-      "Room": 36
+      "Room": 36,
+      "RequiresDamage": true
     },
     {
       "X": 18533,
@@ -6831,7 +6841,8 @@
       "Y": 0,
       "Z": 59606,
       "Room": 52,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresDamage": true
     },
     {
       "X": 46061,
