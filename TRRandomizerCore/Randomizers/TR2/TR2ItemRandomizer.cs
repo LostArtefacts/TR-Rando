@@ -57,12 +57,130 @@ namespace TRRandomizerCore.Randomizers
 
                 RandomizeVehicles();
 
+                RandomizeSeraph();
+
                 //Write back the level file
                 SaveLevelInstance();
 
                 if (!TriggerProgress())
                 {
                     break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// If Deck is before monastery Nothing happens... 
+        /// If monastery is before deck the Seraph becomes a pickup in monastery and the Deck finishes normally without Seraph pickup
+        /// We are mindfull of Tibet inventory forcing Seraph in Vanilla and leave it only when it has been picked up previously
+        /// </summary>
+        private void RandomizeSeraph()
+        {
+            bool SeraphInMonastery = false;
+
+            //List of pickup items
+            List<TR2Entities> stdItemTypes = TR2EntityUtilities.GetListOfGunTypes();
+            stdItemTypes.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
+
+            if (_levelInstance.Is(TR2LevelNames.MONASTERY))
+            {
+                TR2ScriptedLevel theDeck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
+
+                // if The deck is included in levels I check if its after monastery 
+                if (theDeck != null)
+                {
+                    if (theDeck.Sequence > _levelInstance.Sequence) SeraphInMonastery = true;
+                }
+                else // Id Deck is not included we force the seraph in monastery
+                {
+                    SeraphInMonastery = true;
+                }
+
+                if (true)
+                {
+                    // Get all visible pickups in the level (there may be invisible ones if using OneItem mode)
+                    List<TR2Entity> entities = _levelInstance.Data.Entities.ToList();
+                    List<TR2Entity> pickups = entities.FindAll(e => !e.Invisible && stdItemTypes.Contains((TR2Entities)e.TypeID));
+                    List<TR2Entity> replacementCandidates = new List<TR2Entity>(pickups);
+
+                    // Eliminate any that share a tile with an enemy in case of pacifist runs/unable to find guns
+                    FDControl floorData = new FDControl();
+                    floorData.ParseFromLevel(_levelInstance.Data);
+                    for (int i = replacementCandidates.Count - 1; i >= 0; i--)
+                    {
+                        TR2Entity pickup = replacementCandidates[i];
+                        TRRoomSector pickupTile = FDUtilities.GetRoomSector(pickup.X, pickup.Y, pickup.Z, pickup.Room, _levelInstance.Data, floorData);
+                        // Does an enemy share this tile? If so, remove it from the candidate list
+                        if (entities.Find(e => e != pickup
+                            && TR2EntityUtilities.IsEnemyType((TR2Entities)e.TypeID)
+                            && FDUtilities.GetRoomSector(e.X, e.Y, e.Z, e.Room, _levelInstance.Data, floorData) == pickupTile) != null)
+                        {
+                            replacementCandidates.RemoveAt(i);
+                        }
+                    }
+
+                    TR2Entity entityToReplace;
+                    if (replacementCandidates.Count > 0)
+                    {
+                        // We have at least one pickup that's visible and not under an enemy, so pick one at random
+                        entityToReplace = replacementCandidates[_generator.Next(0, replacementCandidates.Count)];
+                    }
+                    else
+                    {
+                        // We couldn't find anything, but because The Deck has been processed first, we should
+                        // add The Seraph somewhere to remain consistent - default to the puzzle slot itself and
+                        // just move an item to the same tile. This will be extremely rare.
+                        TR2Entity slot4 = entities.Find(e => e.TypeID == (short)TR2Entities.PuzzleHole4);
+                        entityToReplace = pickups[_generator.Next(0, pickups.Count)];
+                        entityToReplace.X = slot4.X;
+                        entityToReplace.Y = slot4.Y;
+                        entityToReplace.Z = slot4.Z;
+                        entityToReplace.Room = slot4.Room;
+                    }
+
+                    // Change the pickup type to The Seraph, and remove The Seraph from the inventory
+                    entityToReplace.TypeID = (short)TR2Entities.Puzzle4_S_P;
+                    _levelInstance.Script.RemoveStartInventoryItem(TRGE.Core.Item.Enums.TR2Items.Puzzle4);
+                }
+            }
+            else if (_levelInstance.Is(TR2LevelNames.TIBET))
+            {
+                TR2ScriptedLevel deck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
+                TR2ScriptedLevel monastery = Levels.Find(l => l.Is(TR2LevelNames.MONASTERY));
+
+                // Deck not present => Barkhang pickup and used instant (if it's not present its never picked up anyway)
+                // Deck present but Barkhang absent => Seraph picked up at Deck and never consumed
+                // Deck and Barkhang presents => remove Seraph from Tibet if comes before deck or after barkhang
+                if (deck == null ||
+                   (monastery == null && _levelInstance.Script.Sequence < deck.Sequence) ||
+                   (monastery != null && (_levelInstance.Script.Sequence < deck.Sequence || _levelInstance.Script.Sequence < monastery.Sequence)))
+                {
+                    _levelInstance.Script.RemoveStartInventoryItem(TRGE.Core.Item.Enums.TR2Items.Puzzle4);
+                }
+            }
+            else if (_levelInstance.Is(TR2LevelNames.DECK))
+            {
+                TR2ScriptedLevel monastery = Levels.Find(l => l.Is(TR2LevelNames.MONASTERY));
+
+                if (monastery != null)
+                {
+                    if (monastery.Sequence < _levelInstance.Sequence) SeraphInMonastery = true;
+                }
+                else // Id Monastery is not included we stay as before
+                {
+                    SeraphInMonastery = false;
+                }
+
+                if (SeraphInMonastery)
+                {
+                    //Replace Seraph by a pickup 
+
+                    TR2Entity seraph = _levelInstance.Data.Entities.ToList().Find(e => e.TypeID == (short)TR2Entities.Puzzle4_S_P);
+
+                    if (seraph != null)
+                    {
+                        seraph.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                    }
                 }
             }
         }
