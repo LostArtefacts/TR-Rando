@@ -96,7 +96,7 @@ namespace TRRandomizerCore.Randomizers
                     SeraphInMonastery = true;
                 }
 
-                if (true)
+                if (SeraphInMonastery)
                 {
                     // Get all visible pickups in the level (there may be invisible ones if using OneItem mode)
                     List<TR2Entity> entities = _levelInstance.Data.Entities.ToList();
