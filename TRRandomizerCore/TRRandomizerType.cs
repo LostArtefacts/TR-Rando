@@ -46,6 +46,7 @@
         ExtraPickups,
         AmbientTracks,
         AtlanteanEggBehaviour,
-        GymOutfit
+        GymOutfit,
+        HiddenEnemies
     }
 }

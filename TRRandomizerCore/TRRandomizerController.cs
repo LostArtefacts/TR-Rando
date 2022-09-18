@@ -1374,6 +1374,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.AllowEmptyEggs = value;
         }
 
+        public bool HideEnemiesUntilTriggered
+        {
+            get => LevelRandomizer.HideEnemiesUntilTriggered;
+            set => LevelRandomizer.HideEnemiesUntilTriggered = value;
+        }
+
         public bool RandomizeOutfits
         {
             get => LevelRandomizer.RandomizeOutfits;

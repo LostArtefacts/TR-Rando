@@ -69,6 +69,7 @@ namespace TRRandomizerCore.Editors
         public bool OneEnemyMode => IncludedEnemies.Count == 1;
         public bool SwapEnemyAppearance { get; set; }
         public bool AllowEmptyEggs { get; set; }
+        public bool HideEnemiesUntilTriggered { get; set; }
         public bool GlitchedSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
         public TRSecretCountMode SecretCountMode { get; set; }
@@ -161,6 +162,7 @@ namespace TRRandomizerCore.Editors
             DragonSpawnType = (DragonSpawnType)config.GetEnum(nameof(DragonSpawnType), typeof(DragonSpawnType), DragonSpawnType.Default);
             SwapEnemyAppearance = config.GetBool(nameof(SwapEnemyAppearance), true);
             AllowEmptyEggs = config.GetBool(nameof(AllowEmptyEggs));
+            HideEnemiesUntilTriggered = config.GetBool(nameof(HideEnemiesUntilTriggered), true);
             UseEnemyExclusions = config.GetBool(nameof(UseEnemyExclusions));
             ShowExclusionWarnings = config.GetBool(nameof(ShowExclusionWarnings));
             ExcludedEnemies = config.GetString(nameof(ExcludedEnemies))
@@ -287,6 +289,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(ShowExclusionWarnings)] = ShowExclusionWarnings;
             config[nameof(SwapEnemyAppearance)] = SwapEnemyAppearance;
             config[nameof(AllowEmptyEggs)] = AllowEmptyEggs;
+            config[nameof(HideEnemiesUntilTriggered)] = HideEnemiesUntilTriggered;
 
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;
