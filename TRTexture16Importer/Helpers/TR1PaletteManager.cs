@@ -233,7 +233,7 @@ namespace TRTexture16Importer.Helpers
             int colIndex = 0;
             int bestMatch = int.MaxValue;
 
-            for (int i = 0; i < _palette.Count; i++)
+            for (int i = 1; i < _palette.Count; i++)
             {
                 double match =
                     Math.Pow((colour.R - _palette[i].R) * _weightR, 2) +
