@@ -30,7 +30,7 @@ namespace TRRandomizerView.Model
         private TRSecretCountMode _secretCountMode;
         private uint _minSecretCount, _maxSecretCount;
         private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
-        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance, _allowEmptyEggs;
+        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies;
         private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
@@ -1891,6 +1891,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass HideEnemies
+        {
+            get => _hideEnemies;
+            set
+            {
+                _hideEnemies = value;
+                FirePropertyChanged();
+            }
+        }
+
         public RandoDifficulty RandoEnemyDifficulty
         {
             get => _randoEnemyDifficulty;
@@ -2256,6 +2266,12 @@ namespace TRRandomizerView.Model
                 Description = "Allow some Atlantean eggs to hatch nothing when Lara gets close to them."
             };
             BindingOperations.SetBinding(AllowEmptyEggs, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+            HideEnemies = new BoolItemControlClass
+            {
+                Title = "Hide enemies until triggered",
+                Description = "Most enemies will not be visible until they are triggered."
+            };
+            BindingOperations.SetBinding(HideEnemies, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
 
             // Textures
             Binding randomizeTexturesBinding = new Binding(nameof(RandomizeTextures)) { Source = this };
@@ -2438,7 +2454,7 @@ namespace TRRandomizerView.Model
             };
             EnemyBoolItemControls = new List<BoolItemControlClass>()
             {
-                _crossLevelEnemies, _docileWillard, _protectMonks, _maximiseDragonAppearance, _swapEnemyAppearance, _allowEmptyEggs
+                _crossLevelEnemies, _docileWillard, _protectMonks, _maximiseDragonAppearance, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2502,6 +2518,7 @@ namespace TRRandomizerView.Model
             _retainKeySpriteTextures.IsAvailable = IsKeyItemTexturesTypeSupported;
             _randomizeWaterColour.IsAvailable = IsWaterColourTypeSupported;
             _allowEmptyEggs.IsAvailable = IsAtlanteanEggBehaviourTypeSupported;
+            _hideEnemies.IsAvailable = IsHiddenEnemiesTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -2588,6 +2605,7 @@ namespace TRRandomizerView.Model
             MaximiseDragonAppearance.Value = _controller.MaximiseDragonAppearance;
             SwapEnemyAppearance.Value = _controller.SwapEnemyAppearance;
             AllowEmptyEggs.Value = _controller.AllowEmptyEggs;
+            HideEnemies.Value = _controller.HideEnemiesUntilTriggered;
             RandoEnemyDifficulty = _controller.RandoEnemyDifficulty;
             UseEnemyExclusions = _controller.UseEnemyExclusions;
             ShowExclusionWarnings = _controller.ShowExclusionWarnings;
@@ -2956,6 +2974,7 @@ namespace TRRandomizerView.Model
             _controller.MaximiseDragonAppearance = MaximiseDragonAppearance.Value;
             _controller.SwapEnemyAppearance = SwapEnemyAppearance.Value;
             _controller.AllowEmptyEggs = AllowEmptyEggs.Value;
+            _controller.HideEnemiesUntilTriggered = HideEnemies.Value;
             _controller.RandoEnemyDifficulty = RandoEnemyDifficulty;
             _controller.UseEnemyExclusions = UseEnemyExclusions;
             _controller.ShowExclusionWarnings = ShowExclusionWarnings;
@@ -3134,6 +3153,7 @@ namespace TRRandomizerView.Model
         public bool IsKeyItemTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItemTextures);
         public bool IsWaterColourTypeSupported => IsRandomizationSupported(TRRandomizerType.WaterColour);
         public bool IsAtlanteanEggBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.AtlanteanEggBehaviour);
+        public bool IsHiddenEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.HiddenEnemies);
         public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
 
         private bool IsRandomizationSupported(TRRandomizerType randomizerType)
