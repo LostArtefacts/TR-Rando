@@ -30,7 +30,7 @@ namespace TRRandomizerView.Model
         private TRSecretCountMode _secretCountMode;
         private uint _minSecretCount, _maxSecretCount;
         private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
-        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _maximiseDragonAppearance, _swapEnemyAppearance, _allowEmptyEggs;
+        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs;
         private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
@@ -73,6 +73,7 @@ namespace TRRandomizerView.Model
         private ItemDifficulty _randoItemDifficulty;
         private GlobeDisplayOption _globeDisplayOption;
         private BirdMonsterBehaviour _birdMonsterBehaviour;
+        private DragonSpawnType _dragonSpawnType;
 
         private Language[] _availableLanguages;
         private Language _gameStringLanguage;
@@ -1861,12 +1862,12 @@ namespace TRRandomizerView.Model
             }
         }
 
-        public BoolItemControlClass MaximiseDragonAppearance
+        public DragonSpawnType DragonSpawnType
         {
-            get => _maximiseDragonAppearance;
+            get => _dragonSpawnType;
             set
             {
-                _maximiseDragonAppearance = value;
+                _dragonSpawnType = value;
                 FirePropertyChanged();
             }
         }
@@ -2238,12 +2239,6 @@ namespace TRRandomizerView.Model
                 Description = "Allies will not be given pickups or be assigned to end-level triggers."
             };
             BindingOperations.SetBinding(ProtectMonks, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
-            MaximiseDragonAppearance = new BoolItemControlClass
-            {
-                Title = "Maximize dragon spawns",
-                Description = "Make a best effort attempt to have as many dragons as possible in the game."
-            };
-            BindingOperations.SetBinding(MaximiseDragonAppearance, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
             SwapEnemyAppearance = new BoolItemControlClass
             {
                 Title = "Swap enemy appearances",
@@ -2438,7 +2433,7 @@ namespace TRRandomizerView.Model
             };
             EnemyBoolItemControls = new List<BoolItemControlClass>()
             {
-                _crossLevelEnemies, _docileWillard, _protectMonks, _maximiseDragonAppearance, _swapEnemyAppearance, _allowEmptyEggs
+                _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2487,7 +2482,7 @@ namespace TRRandomizerView.Model
 
             _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
 
-            _maximiseDragonAppearance.IsAvailable = _swapEnemyAppearance.IsAvailable = IsOutfitDaggerSupported;
+            _swapEnemyAppearance.IsAvailable = IsOutfitDaggerSupported;
 
             _protectMonks.IsAvailable = !IsTR1;
             _docileWillard.IsAvailable = IsTR3;
@@ -2585,7 +2580,7 @@ namespace TRRandomizerView.Model
             ProtectMonks.Value = _controller.ProtectMonks;
             DocileWillard.Value = _controller.DocileWillard;
             BirdMonsterBehaviour = _controller.BirdMonsterBehaviour;
-            MaximiseDragonAppearance.Value = _controller.MaximiseDragonAppearance;
+            DragonSpawnType = _controller.DragonSpawnType;
             SwapEnemyAppearance.Value = _controller.SwapEnemyAppearance;
             AllowEmptyEggs.Value = _controller.AllowEmptyEggs;
             RandoEnemyDifficulty = _controller.RandoEnemyDifficulty;
@@ -2953,7 +2948,7 @@ namespace TRRandomizerView.Model
             _controller.ProtectMonks = ProtectMonks.Value;
             _controller.DocileWillard = DocileWillard.Value;
             _controller.BirdMonsterBehaviour = BirdMonsterBehaviour;
-            _controller.MaximiseDragonAppearance = MaximiseDragonAppearance.Value;
+            _controller.DragonSpawnType = DragonSpawnType;
             _controller.SwapEnemyAppearance = SwapEnemyAppearance.Value;
             _controller.AllowEmptyEggs = AllowEmptyEggs.Value;
             _controller.RandoEnemyDifficulty = RandoEnemyDifficulty;
@@ -3130,6 +3125,7 @@ namespace TRRandomizerView.Model
         public bool IsLaddersTypeSupported => IsRandomizationSupported(TRRandomizerType.Ladders);
         public bool IsWeatherTypeSupported => IsRandomizationSupported(TRRandomizerType.Weather);
         public bool IsBirdMonsterBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.BirdMonsterBehaviour);
+        public bool IsDragonSpawnTypeSupported => IsRandomizationSupported(TRRandomizerType.DragonSpawn);
         public bool IsSecretTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretTextures);
         public bool IsKeyItemTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItemTextures);
         public bool IsWaterColourTypeSupported => IsRandomizationSupported(TRRandomizerType.WaterColour);

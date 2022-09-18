@@ -30,7 +30,7 @@
         GlobeDisplay,
         RewardRooms,
         VFX,
-        MaximumDragons,
+        DragonSpawn,
         BirdMonsterBehaviour,
         SecretAudio,
         Mediless,

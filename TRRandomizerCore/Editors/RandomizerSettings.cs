@@ -60,7 +60,7 @@ namespace TRRandomizerCore.Editors
         public bool DocileWillard { get; set; }
         public BirdMonsterBehaviour BirdMonsterBehaviour { get; set; }
         public RandoDifficulty RandoEnemyDifficulty { get; set; }
-        public bool MaximiseDragonAppearance { get; set; }
+        public DragonSpawnType DragonSpawnType { get; set; }
         public bool UseEnemyExclusions { get; set; }
         public List<short> ExcludedEnemies { get; set; }
         public Dictionary<short, string> ExcludableEnemies { get; set; }
@@ -158,7 +158,7 @@ namespace TRRandomizerCore.Editors
             DocileWillard = config.GetBool(nameof(DocileWillard));
             BirdMonsterBehaviour = (BirdMonsterBehaviour)config.GetEnum(nameof(BirdMonsterBehaviour), typeof(BirdMonsterBehaviour), BirdMonsterBehaviour.Default);
             RandoEnemyDifficulty = (RandoDifficulty)config.GetEnum(nameof(RandoEnemyDifficulty), typeof(RandoDifficulty), RandoDifficulty.Default);
-            MaximiseDragonAppearance = config.GetBool(nameof(MaximiseDragonAppearance));
+            DragonSpawnType = (DragonSpawnType)config.GetEnum(nameof(DragonSpawnType), typeof(DragonSpawnType), DragonSpawnType.Default);
             SwapEnemyAppearance = config.GetBool(nameof(SwapEnemyAppearance), true);
             AllowEmptyEggs = config.GetBool(nameof(AllowEmptyEggs));
             UseEnemyExclusions = config.GetBool(nameof(UseEnemyExclusions));
@@ -281,7 +281,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(DocileWillard)] = DocileWillard;
             config[nameof(BirdMonsterBehaviour)] = BirdMonsterBehaviour;
             config[nameof(RandoEnemyDifficulty)] = RandoEnemyDifficulty;
-            config[nameof(MaximiseDragonAppearance)] = MaximiseDragonAppearance;
+            config[nameof(DragonSpawnType)] = DragonSpawnType;
             config[nameof(ExcludedEnemies)] = string.Join(",", ExcludedEnemies);
             config[nameof(UseEnemyExclusions)] = UseEnemyExclusions;
             config[nameof(ShowExclusionWarnings)] = ShowExclusionWarnings;

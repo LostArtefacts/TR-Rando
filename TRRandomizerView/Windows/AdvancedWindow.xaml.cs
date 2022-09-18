@@ -88,6 +88,11 @@ namespace TRRandomizerView.Windows
             nameof(HasBirdMonsterBehaviour), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty HasDragonSpawnProperty = DependencyProperty.Register
+        (
+            nameof(HasDragonSpawn), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public static readonly DependencyProperty HasHealthModeProperty = DependencyProperty.Register
         (
             nameof(HasHealthMode), typeof(bool), typeof(AdvancedWindow)
@@ -186,6 +191,12 @@ namespace TRRandomizerView.Windows
             set => SetValue(HasBirdMonsterBehaviourProperty, value);
         }
 
+        public bool HasDragonSpawn
+        {
+            get => (bool)GetValue(HasDragonSpawnProperty);
+            set => SetValue(HasDragonSpawnProperty, value);
+        }
+
         public bool HasHealthMode
         {
             get => (bool)GetValue(HasHealthModeProperty);
@@ -265,6 +276,21 @@ namespace TRRandomizerView.Windows
                         break;
                     case BirdMonsterBehaviour.Docile:
                         _docileBirdBehaviourButton.IsChecked = true;
+                        break;
+                }
+            }
+            if (HasDragonSpawn)
+            {
+                switch (ControllerProxy.DragonSpawnType)
+                {
+                    case DragonSpawnType.Default:
+                        _defaultDragonSpawnButton.IsChecked = true;
+                        break;
+                    case DragonSpawnType.Maximum:
+                        _maximumDragonSpawnButton.IsChecked = true;
+                        break;
+                    case DragonSpawnType.Minimum:
+                        _minimumDragonSpawnButton.IsChecked = true;
                         break;
                 }
             }

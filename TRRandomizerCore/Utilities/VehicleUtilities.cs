@@ -14,22 +14,31 @@ namespace TRRandomizerCore.Utilities
     {
         private static readonly Dictionary<string, List<Location>> _allVehicleLocations;
         private static readonly Dictionary<string, List<Location>> _allLocations;
- 
+
         static VehicleUtilities()
         {
             _allVehicleLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR2\Locations\vehicle_locations.json"));
-            _allLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR2\Locations\locations.json")); 
+            _allLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR2\Locations\locations.json"));
         }
 
-        public static Location GetRandomLocation(TR2CombinedLevel level, TR2Entities vehicle, Random random)
+        /// <summary>
+        /// Get a random locaiton for the specific vehicule while checking if a working vehicule is actually required by secrets
+        /// </summary>
+        /// <param name="level">The level <see cref="TR2CombinedLevel"/></param>
+        /// <param name="vehicle">The vehicule type <see cref="TR2Entities"/></param>
+        /// <param name="random">The random generator</param>
+        /// <param name="VehiculeRestriction">True by default to check for vehicule required, if false...we don't care (used for 2nd boat in BOAT.TR2)</param>
+        /// <returns></returns>
+        public static Location GetRandomLocation(TR2CombinedLevel level, TR2Entities vehicle, Random random, bool VehiculeRestriction = true)
         {
             if (_allVehicleLocations.ContainsKey(level.Name))
             {
                 short vehicleID = (short)vehicle;
 
-                bool vehicleRequired = IsVehicleRequired(level);
+                bool vehicleRequired = VehiculeRestriction ? IsVehicleRequired(level) : false;
 
-                List<Location> vehicleLocations = _allVehicleLocations[level.Name].FindAll(l => l.TargetType == vehicleID && (!vehicleRequired || (vehicleRequired && l.Validated == true) ));
+                List<Location> vehicleLocations = _allVehicleLocations[level.Name].FindAll(l => l.TargetType == vehicleID && (!vehicleRequired || (vehicleRequired && l.Validated == true)));
+                //List<Location> vehicleLocations = _allVehicleLocations[level.Name].FindAll(l => l.TargetType == vehicleID && l.VehicleRequired == true);
                 if (vehicleLocations.Count > 0)
                 {
                     return vehicleLocations[random.Next(0, vehicleLocations.Count)];
@@ -47,7 +56,7 @@ namespace TRRandomizerCore.Utilities
         public static bool IsVehicleRequired(TR2CombinedLevel level)
         {
 
-            if(!_allLocations.ContainsKey(level.Name))
+            if (!_allLocations.ContainsKey(level.Name))
             {
                 return false;
             }
@@ -55,7 +64,7 @@ namespace TRRandomizerCore.Utilities
             List<Location> levelLocations = _allLocations[level.Name];
             List<TR2Entities> secretTypes = new List<TR2Entities> { TR2Entities.StoneSecret_S_P, TR2Entities.JadeSecret_S_P, TR2Entities.GoldSecret_S_P };
 
-            foreach(TR2Entity entity in level.Data.Entities)
+            foreach (TR2Entity entity in level.Data.Entities)
             {
                 if (secretTypes.Contains((TR2Entities)entity.TypeID))
                 {
