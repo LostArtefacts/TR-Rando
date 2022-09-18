@@ -228,7 +228,8 @@ namespace TRTexture16Importer.Helpers
         {
             // Compare the colour with each in the palette by finding a greyscale value:
             // best match wins. We don't actually care what the match value is, hence
-            // no Sqrt so to boost performance.
+            // no Sqrt so to boost performance. We start at 1 because we don't want to
+            // match black to transparency.
 
             int colIndex = 0;
             int bestMatch = int.MaxValue;
