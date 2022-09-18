@@ -735,6 +735,15 @@
       }
     ],
 
+    "Seraph": [
+      {
+        "Segment": 0,
+        "Tile": 6,
+        "X": 88,
+        "Y": 66
+      }
+    ],
+
     "Tibet.Sky": [
       {
         "Segment": 1,
