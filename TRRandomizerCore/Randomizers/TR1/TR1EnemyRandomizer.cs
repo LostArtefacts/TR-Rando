@@ -466,11 +466,6 @@ namespace TRRandomizerCore.Randomizers
                         // #146 Ensure OneShot triggers are set for this enemy if needed
                         TR1EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
 
-                        if (Settings.HideEnemiesUntilTriggered || entity == TREntities.Adam)
-                        {
-                            targetEntity.Invisible = true;
-                        }
-
                         // Remove the target entity so it doesn't get replaced
                         enemyEntities.Remove(targetEntity);
                     }
@@ -554,13 +549,6 @@ namespace TRRandomizerCore.Randomizers
                     }
                 }
 
-                if (Settings.HideEnemiesUntilTriggered)
-                {
-                    // Default to hiding the enemy - checks below for eggs, ex-eggs, Adam and centaur
-                    // statues will override as necessary.
-                    currentEntity.Invisible = true;
-                }
-
                 if (newEntityType == TREntities.AtlanteanEgg)
                 {
                     List<TREntities> allEggTypes = TR1EntityUtilities.GetAtlanteanEggEnemies();
@@ -625,9 +613,6 @@ namespace TRRandomizerCore.Randomizers
                             currentEntity.Angle = eggLocation.Angle;
                             currentEntity.Room = (short)eggLocation.Room;
                         }
-
-                        // Eggs will always be visible
-                        currentEntity.Invisible = false;
                     }
                     else
                     {
@@ -645,12 +630,6 @@ namespace TRRandomizerCore.Randomizers
                 if (newEntityType == TREntities.CentaurStatue)
                 {
                     AdjustCentaurStatue(currentEntity, level.Data, floorData);
-                }
-                else if (newEntityType == TREntities.Adam)
-                {
-                    // Adam should always be invisible as he is inactive high above the ground
-                    // so this can interfere with Lara's route - see Cistern item 36
-                    currentEntity.Invisible = true;
                 }
 
                 if (newEntityType == TREntities.Pierre)
