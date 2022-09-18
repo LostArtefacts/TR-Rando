@@ -217,11 +217,14 @@ namespace TRRandomizerCore.Randomizers
             foreach (TR2Entities secretType in secretMap.Keys)
             {
                 Location location = secretMap[secretType];
-
-                if (location.Difficulty == Difficulty.Hard)
-                    hardDamageCount++;
-                else
-                    easyDamageCount++;
+                
+                if (location.RequiresDamage)
+                {
+                    if (location.Difficulty == Difficulty.Hard)
+                        hardDamageCount++;
+                    else
+                        easyDamageCount++;
+                }
             }
 
             //  If we found some secrets needing damage
