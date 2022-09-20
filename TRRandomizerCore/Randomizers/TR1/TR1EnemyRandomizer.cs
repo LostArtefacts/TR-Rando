@@ -747,6 +747,25 @@ namespace TRRandomizerCore.Randomizers
                     enemies.Available.Add(TREntities.ShootingAtlantean_N);
                 }
             }
+
+            // If we're using flying mummies, add a chance that they'll have proper wings
+            if (enemies.Available.Contains(TREntities.BandagedFlyer) && _generator.NextDouble() < 0.5)
+            {
+                TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.FlyingAtlantean);
+                ushort bandageTexture = meshes[1].TexturedRectangles[3].Texture;
+                for (int i = 15; i < 21; i++)
+                {
+                    TRMesh mesh = meshes[i];
+                    foreach (TRFace4 f in mesh.TexturedRectangles)
+                    {
+                        f.Texture = bandageTexture;
+                    }
+                    foreach (TRFace3 f in mesh.TexturedTriangles)
+                    {
+                        f.Texture = bandageTexture;
+                    }
+                }
+            }
         }
 
         private void AdjustCentaurStatue(TREntity entity, TRLevel level, FDControl floorData)
