@@ -957,12 +957,13 @@ namespace TRRandomizerCore.Randomizers
             {
                 if (availableEnemies.Contains(TREntities.Pierre) && _generator.NextDouble() < 0.25)
                 {
+                    // Replace Pierre's head with a slightly bigger version of Lara's (either angry Lara or normal Lara)
                     MeshEditor editor = new MeshEditor();
                     TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Pierre);
                     TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara);
+                    TRMesh[] laraUziAnim = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraUziAnimation_H);
 
-                    // Replace Pierre's head with a slightly bigger version of Lara's
-                    TRMeshUtilities.DuplicateMesh(level.Data, pierre[8], editor.CloneMesh(lara[14]));
+                    TRMeshUtilities.DuplicateMesh(level.Data, pierre[8], editor.CloneMesh(_generator.NextDouble() < 0.5 ? laraUziAnim[14] : lara[14]));
                     foreach (TRVertex vertex in pierre[8].Vertices)
                     {
                         vertex.X = (short)(vertex.X * 1.5 + 6);
@@ -970,7 +971,7 @@ namespace TRRandomizerCore.Randomizers
                         vertex.Z = (short)(vertex.Z * 1.5);
                     }
 
-                    pierre[8].CollRadius = (short)(pierre[8].CollRadius * 1.5);
+                    pierre[8].CollRadius = (short)(lara[14].CollRadius * 1.5);
                 }
             }
         }
