@@ -698,7 +698,7 @@ namespace TRRandomizerCore.Randomizers
                 AddUnarmedLevelAmmo(level);
             }
 
-            RandomizeMeshes(level);
+            RandomizeMeshes(level, enemies.Available);
         }
 
         private bool IsEnemyInOrAboveWater(TREntity entity, TRLevel level, FDControl floorData)
@@ -887,7 +887,7 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
-        private void RandomizeMeshes(TR1CombinedLevel level)
+        private void RandomizeMeshes(TR1CombinedLevel level, List<TREntities> availableEnemies)
         {
             // Currently just targeted at Atlantis and its cutscene
             if (level.Is(TRLevelNames.ATLANTIS))
@@ -951,6 +951,26 @@ namespace TRRandomizerCore.Randomizers
                         TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, natla[8], pierre[8]);
                         TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], pierre[8]);
                         break;
+                }
+            }
+            else
+            {
+                if (availableEnemies.Contains(TREntities.Pierre) && _generator.NextDouble() < 0.25)
+                {
+                    MeshEditor editor = new MeshEditor();
+                    TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Pierre);
+                    TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara);
+
+                    // Replace Pierre's head with a slightly bigger version of Lara's
+                    TRMeshUtilities.DuplicateMesh(level.Data, pierre[8], editor.CloneMesh(lara[14]));
+                    foreach (TRVertex vertex in pierre[8].Vertices)
+                    {
+                        vertex.X = (short)(vertex.X * 1.5 + 6);
+                        vertex.Y = (short)(vertex.Y * 1.5);
+                        vertex.Z = (short)(vertex.Z * 1.5);
+                    }
+
+                    pierre[8].CollRadius = (short)(pierre[8].CollRadius * 1.5);
                 }
             }
         }
