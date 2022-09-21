@@ -692,6 +692,12 @@ namespace TRRandomizerCore.Randomizers
                 level.Data.NumEntities++;
             }
 
+            // Fix Pierre's silent guns
+            if (enemies.Available.Contains(TREntities.Pierre))
+            {
+                FixPierreGunshot(level);
+            }
+
             // Add extra ammo based on this level's difficulty
             if (Settings.CrossLevelEnemies && ScriptEditor.Edition.IsCommunityPatch && level.Script.RemovesWeapons)
             {
@@ -973,6 +979,27 @@ namespace TRRandomizerCore.Randomizers
 
                     pierre[8].CollRadius = (short)(lara[14].CollRadius * 1.5);
                 }
+            }
+        }
+
+        private void FixPierreGunshot(TR1CombinedLevel level)
+        {
+            TRModel pierre = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.Pierre);
+            if (pierre != null)
+            {
+                // Get Pierre's shooting animation
+                TRAnimation anim = level.Data.Animations[pierre.Animation + 10];
+                List<TRAnimCommand> cmds = level.Data.AnimCommands.ToList();
+                anim.AnimCommand = (ushort)cmds.Count;
+                anim.NumAnimCommands = 1;
+
+                // On the second frame, play SFX 44 (magnums)
+                cmds.Add(new TRAnimCommand { Value = 5 });
+                cmds.Add(new TRAnimCommand { Value = (short)(anim.FrameStart + 1) });
+                cmds.Add(new TRAnimCommand { Value = 44 });
+
+                level.Data.AnimCommands = cmds.ToArray();
+                level.Data.NumAnimCommands = (uint)cmds.Count;
             }
         }
 
