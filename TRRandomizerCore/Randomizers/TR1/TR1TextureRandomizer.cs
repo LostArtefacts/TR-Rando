@@ -294,7 +294,10 @@ namespace TRRandomizerCore.Randomizers
                 : base(outer)
             {
                 _holders = new Dictionary<TR1CombinedLevel, TextureHolder<TREntities, TRLevel>>();
-                _landmarkImporter = new TR1LandmarkImporter();
+                _landmarkImporter = new TR1LandmarkImporter
+                {
+                    IsCommunityPatch = _outer.ScriptEditor.Edition.IsCommunityPatch
+                };
                 _wireframer = new TR1Wireframer();
             }
 

@@ -8,7 +8,7 @@ namespace TRRandomizerCore.Textures
 {
     public class TR1LandmarkImporter : AbstractLandmarkImporter<TREntities, TRLevel>
     {
-        protected override int MaxTextures => 2048;
+        protected override int MaxTextures => IsCommunityPatch ? 8192 : 2048;
 
         protected override AbstractTexturePacker<TREntities, TRLevel> CreatePacker(TRLevel level)
         {
