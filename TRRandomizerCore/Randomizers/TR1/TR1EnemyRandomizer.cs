@@ -895,7 +895,6 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeMeshes(TR1CombinedLevel level, List<TREntities> availableEnemies)
         {
-            // Currently just targeted at Atlantis and its cutscene
             if (level.Is(TRLevelNames.ATLANTIS))
             {
                 // Atlantis scion swap - Model => Mesh index
@@ -959,26 +958,73 @@ namespace TRRandomizerCore.Randomizers
                         break;
                 }
             }
-            else
+
+            if ((level.Is(TRLevelNames.PYRAMID) || availableEnemies.Contains(TREntities.Adam)) && _generator.NextDouble() < 0.4)
             {
-                if (availableEnemies.Contains(TREntities.Pierre) && _generator.NextDouble() < 0.25)
+                // Replace Adam's head with a much larger version of Natla's, Larson's or normal/angry Lara's.
+                MeshEditor editor = new MeshEditor();
+                TRMesh[] adam = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Adam);
+                TRMesh replacement;
+                if (availableEnemies.Contains(TREntities.Natla) && _generator.NextDouble() < 0.5)
                 {
-                    // Replace Pierre's head with a slightly bigger version of Lara's (either angry Lara or normal Lara)
-                    MeshEditor editor = new MeshEditor();
-                    TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Pierre);
-                    TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara);
-                    TRMesh[] laraUziAnim = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraUziAnimation_H);
-
-                    TRMeshUtilities.DuplicateMesh(level.Data, pierre[8], editor.CloneMesh(_generator.NextDouble() < 0.5 ? laraUziAnim[14] : lara[14]));
-                    foreach (TRVertex vertex in pierre[8].Vertices)
-                    {
-                        vertex.X = (short)(vertex.X * 1.5 + 6);
-                        vertex.Y = (short)(vertex.Y * 1.5);
-                        vertex.Z = (short)(vertex.Z * 1.5);
-                    }
-
-                    pierre[8].CollRadius = (short)(lara[14].CollRadius * 1.5);
+                    replacement = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Natla)[2];
                 }
+                else if (availableEnemies.Contains(TREntities.Larson) && _generator.NextDouble() < 0.5)
+                {
+                    replacement = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Larson)[8];
+                }
+                else if (availableEnemies.Contains(TREntities.Pierre) && _generator.NextDouble() < 0.5)
+                {
+                    replacement = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Pierre)[8];
+                }
+                else
+                {
+                    replacement = TRMeshUtilities.GetModelMeshes(level.Data, _generator.NextDouble() < 0.5 ? TREntities.LaraUziAnimation_H : TREntities.Lara)[14];
+                }
+
+                TRMeshUtilities.DuplicateMesh(level.Data, adam[3], editor.CloneMesh(replacement));
+
+                // Enlarge and rotate about Y
+                foreach (TRVertex vertex in adam[3].Vertices)
+                {
+                    vertex.X = (short)(vertex.X * -6);
+                    vertex.Y = (short)(vertex.Y * 6);
+                    vertex.Z = (short)(vertex.Z * -6);
+                }
+
+                adam[3].CollRadius *= 6;
+
+                // Replace the neck texture to suit the head
+                for (int i = 1; i < 3; i++)
+                {
+                    foreach (TRFace3 f in adam[i].TexturedTriangles)
+                    {
+                        f.Texture = adam[0].TexturedTriangles[0].Texture;
+                    }
+                    foreach (TRFace4 f in adam[i].TexturedRectangles)
+                    {
+                        f.Texture = adam[0].TexturedRectangles[0].Texture;
+                    }
+                }
+            }
+
+            if (availableEnemies.Contains(TREntities.Pierre) && _generator.NextDouble() < 0.25)
+            {
+                // Replace Pierre's head with a slightly bigger version of Lara's (either angry Lara or normal Lara)
+                MeshEditor editor = new MeshEditor();
+                TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Pierre);
+                TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara);
+                TRMesh[] laraUziAnim = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraUziAnimation_H);
+
+                TRMeshUtilities.DuplicateMesh(level.Data, pierre[8], editor.CloneMesh(_generator.NextDouble() < 0.5 ? laraUziAnim[14] : lara[14]));
+                foreach (TRVertex vertex in pierre[8].Vertices)
+                {
+                    vertex.X = (short)(vertex.X * 1.5 + 6);
+                    vertex.Y = (short)(vertex.Y * 1.5);
+                    vertex.Z = (short)(vertex.Z * 1.5);
+                }
+
+                pierre[8].CollRadius = (short)(lara[14].CollRadius * 1.5);
             }
         }
 
