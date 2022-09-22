@@ -24,7 +24,7 @@ namespace TRRandomizerCore.Randomizers
 
         private List<TR1SFXDefinition> _soundEffects;
         private TR1SFXDefinition _psUziDefinition;
-        private List<TRSFXGeneralCategory> _sfxCategories;
+        private List<TRSFXGeneralCategory> _sfxCategories, _persistentCategories;
         private List<TR1ScriptedLevel> _uncontrolledLevels;
 
         public override void Randomize(int seed)
@@ -58,6 +58,14 @@ namespace TRRandomizerCore.Randomizers
 
             // Decide which sound effect categories we want to randomize.
             _sfxCategories = _audioRandomizer.GetSFXCategories(Settings);
+
+            // SFX in these categories can potentially remain as they are
+            _persistentCategories = new List<TRSFXGeneralCategory>
+            {
+                TRSFXGeneralCategory.StandardWeaponFiring,
+                TRSFXGeneralCategory.Ricochet,
+                TRSFXGeneralCategory.Flying
+            };
 
             // Only load the SFX if we are changing at least one category
             if (_sfxCategories.Count > 0)
@@ -190,7 +198,7 @@ namespace TRRandomizerCore.Randomizers
                         pred = sfx =>
                         {
                             return sfx.Categories.Contains(definition.PrimaryCategory) &&
-                            sfx != definition &&
+                            (sfx != definition || _persistentCategories.Contains(definition.PrimaryCategory)) &&
                             (
                                 sfx.Creature == definition.Creature ||
                                 (sfx.Creature == TRSFXCreatureCategory.Lara && definition.Creature == TRSFXCreatureCategory.Human)
@@ -199,7 +207,7 @@ namespace TRRandomizerCore.Randomizers
                     }
                     else
                     {
-                        pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && sfx != definition;
+                        pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && (sfx != definition || _persistentCategories.Contains(definition.PrimaryCategory));
                     }
 
                     List<TR1SFXDefinition> otherDefinitions;
@@ -220,11 +228,14 @@ namespace TRRandomizerCore.Randomizers
                         // the JSON is misconfigured e.g. missing sample indices. In that case, we just leave 
                         // the current sound effect as-is.
                         TR1SFXDefinition nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
-                        short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition);
-                        if (soundDetailsIndex != -1)
+                        if (nextDefinition != definition)
                         {
-                            // Only change it if the import succeeded
-                            level.Data.SoundMap[internalIndex] = soundDetailsIndex;
+                            short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition);
+                            if (soundDetailsIndex != -1)
+                            {
+                                // Only change it if the import succeeded
+                                level.Data.SoundMap[internalIndex] = soundDetailsIndex;
+                            }
                         }
                     }
                 }
