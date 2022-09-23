@@ -32,8 +32,9 @@ namespace TRRandomizerCore.Utilities
                 return (_restrictedEnemyZonesTechnical.ContainsKey(lvlName) && _restrictedEnemyZonesTechnical[lvlName].ContainsKey(entity)) ||
                     (_restrictedEnemyZonesDefault.ContainsKey(lvlName) && _restrictedEnemyZonesDefault[lvlName].ContainsKey(entity)) ||
                     _restrictedEnemyGameCountsTechnical.ContainsKey(entity) ||
+                    _restrictedEnemyLevelCountsTechnical.ContainsKey(entity) ||
                     _restrictedEnemyLevelCountsDefault.ContainsKey(entity) ||
-                    (GetRestrictedEnemyGroup(lvlName, entity, RandoDifficulty.DefaultOrNoRestrictions) != null);
+                    (GetRestrictedEnemyGroup(lvlName, TR1EntityUtilities.TranslateEntityAlias(entity), RandoDifficulty.DefaultOrNoRestrictions) != null);
             }
 
             return (_restrictedEnemyZonesTechnical.ContainsKey(lvlName) && _restrictedEnemyZonesTechnical[lvlName].ContainsKey(entity))
