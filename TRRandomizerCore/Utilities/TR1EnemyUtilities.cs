@@ -383,6 +383,11 @@ namespace TRRandomizerCore.Utilities
                 {
                     MaximumCount = 0,
                     Enemies = new List<TREntities> { TREntities.Larson }
+                },
+                new RestrictedEnemyGroup
+                {
+                    MaximumCount = 3,
+                    Enemies = _allAtlanteans
                 }
             },
             [TRLevelNames.FOLLY] = new List<RestrictedEnemyGroup>
