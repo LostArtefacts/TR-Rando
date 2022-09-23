@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.BoardRaiders": {
+      "0": [
+        {
+          "RoomNumber": 111,
+          "RectangleIndices": [ 168 ],
+          "BackgroundIndex": 221
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Lara.Bobble": [
       {

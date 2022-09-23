@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.Zenuriko": {
+      "0": [
+        {
+          "RoomNumber": 41,
+          "RectangleIndices": [ 221, 235 ],
+          "BackgroundIndex": 94
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Lara.Bobble": [
       {

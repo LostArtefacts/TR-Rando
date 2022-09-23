@@ -1,4 +1,21 @@
 {
+  "Landmarks": {
+    "Landmarks.Radgryd": {
+      "0": [
+        {
+          "RoomNumber": 54,
+          "RectangleIndices": [ 90 ],
+          "BackgroundIndex": 122
+        },
+        {
+          "RoomNumber": 60,
+          "RectangleIndices": [ 90 ],
+          "BackgroundIndex": 122
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Lara.Bobble": [
       {

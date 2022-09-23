@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.Topixtor": {
+      "0": [
+        {
+          "RoomNumber": 46,
+          "RectangleIndices": [ 2, 3 ],
+          "BackgroundIndex": 130
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Lara.Bobble": [
       {

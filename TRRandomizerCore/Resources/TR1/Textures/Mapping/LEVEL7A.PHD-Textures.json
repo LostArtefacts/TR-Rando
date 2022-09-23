@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.Towandaa": {
+      "0": [
+        {
+          "RoomNumber": 29,
+          "RectangleIndices": [ 108 ],
+          "BackgroundIndex": 15
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Lara.Bobble": [
       {
