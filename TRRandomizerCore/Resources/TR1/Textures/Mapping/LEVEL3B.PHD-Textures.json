@@ -38,6 +38,32 @@
         "Y": 168
       }
     ],
+    "Lara.Mauled": [
+      {
+        "Segment": 0,
+        "Tile": 5,
+        "X": 0,
+        "Y": 152
+      },
+      {
+        "Segment": 1,
+        "Tile": 6,
+        "X": 152,
+        "Y": 0
+      },
+      {
+        "Segment": 2,
+        "Tile": 6,
+        "X": 136,
+        "Y": 168
+      },
+      {
+        "Segment": 9,
+        "Tile": 7,
+        "X": 64,
+        "Y": 0
+      }
+    ],
     "Lara.Top": [
       {
         "Segment": 0,
