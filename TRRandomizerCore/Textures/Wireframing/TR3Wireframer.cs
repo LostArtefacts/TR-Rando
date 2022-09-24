@@ -162,5 +162,16 @@ namespace TRRandomizerCore.Textures
         {
             return LadderUtilities.GetClimbableFaces(level);
         }
+
+        protected override TRAnimatedTexture[] GetAnimatedTextures(TR3Level level)
+        {
+            return level.AnimatedTextures;
+        }
+
+        protected override void SetAnimatedTextures(TR3Level level, TRAnimatedTexture[] animatedTextures, ushort length)
+        {
+            level.AnimatedTextures = animatedTextures;
+            level.NumAnimatedTextures = length;
+        }
     }
 }

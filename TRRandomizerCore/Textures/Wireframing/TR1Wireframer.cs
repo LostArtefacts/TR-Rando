@@ -189,5 +189,16 @@ namespace TRRandomizerCore.Textures
         {
             return new Dictionary<TRFace4, List<TRVertex>>();
         }
+
+        protected override TRAnimatedTexture[] GetAnimatedTextures(TRLevel level)
+        {
+            return level.AnimatedTextures;
+        }
+
+        protected override void SetAnimatedTextures(TRLevel level, TRAnimatedTexture[] animatedTextures, ushort length)
+        {
+            level.AnimatedTextures = animatedTextures;
+            level.NumAnimatedTextures = length;
+        }
     }
 }
