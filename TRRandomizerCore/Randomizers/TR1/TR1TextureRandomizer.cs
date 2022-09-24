@@ -274,10 +274,17 @@ namespace TRRandomizerCore.Randomizers
             }
             else
             {
+                int minValue = IsWireframeLevel(level) ? 30 : 10;
+                TextureMonitor<TREntities> monitor = TextureMonitor.GetMonitor(level.Name);
+                if (monitor != null && monitor.UseNightTextures)
+                {
+                    minValue += 10;
+                }
+
                 level.Script.WaterColor = new double[3];
                 for (int i = 0; i < 3; i++)
                 {
-                    level.Script.WaterColor[i] = Math.Round(_generator.Next(0, 101) * Math.Pow(10, -2), 2);
+                    level.Script.WaterColor[i] = Math.Round(_generator.Next(minValue, 101) * Math.Pow(10, -2), 2);
                 }
             }
         }
