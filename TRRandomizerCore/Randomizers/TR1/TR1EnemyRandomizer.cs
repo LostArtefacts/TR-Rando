@@ -513,7 +513,7 @@ namespace TRRandomizerCore.Randomizers
                 int maxEntityCount = TR1EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, difficulty);
                 if (maxEntityCount != -1)
                 {
-                    if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount)
+                    if (GetEntityCount(level, newEntityType) >= maxEntityCount)
                     {
                         List<TREntities> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1EntityUtilities.TranslateEntityAlias(e)));
                         if (pool.Count > 0)
@@ -705,6 +705,48 @@ namespace TRRandomizerCore.Randomizers
             }
 
             RandomizeMeshes(level, enemies.Available);
+        }
+
+        private int GetEntityCount(TR1CombinedLevel level, TREntities entityType)
+        {
+            int count = 0;
+            TREntities translatedType = TR1EntityUtilities.TranslateEntityAlias(entityType);
+            foreach (TREntity entity in level.Data.Entities)
+            {
+                TREntities type = (TREntities)entity.TypeID;
+                if (type == translatedType)
+                {
+                    count++;
+                }
+                else if (type == TREntities.AdamEgg || type == TREntities.AtlanteanEgg)
+                {
+                    TREntities eggType;
+                    switch (entity.CodeBits)
+                    {
+                        case 1:
+                            eggType = TREntities.ShootingAtlantean_N;
+                            break;
+                        case 2:
+                            eggType = TREntities.Centaur;
+                            break;
+                        case 4:
+                            eggType = TREntities.Adam;
+                            break;
+                        case 8:
+                            eggType = TREntities.NonShootingAtlantean_N;
+                            break;
+                        default:
+                            eggType = TREntities.FlyingAtlantean;
+                            break;
+                    }
+
+                    if (eggType == translatedType && Array.Find(level.Data.Models, m => m.ID == (uint)eggType) != null)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
         }
 
         private bool IsEnemyInOrAboveWater(TREntity entity, TRLevel level, FDControl floorData)
