@@ -5,14 +5,17 @@ using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
 using TRLevelReader.Helpers;
+using TRLevelReader.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
+using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Randomizers
 {
     public class TR1EnvironmentRandomizer : BaseTR1Randomizer
     {
         internal bool EnforcedModeOnly => !Settings.RandomizeEnvironment;
+        internal TR1TextureMonitorBroker TextureMonitor { get; set; }
 
         private List<EMType> _disallowedTypes;
         private List<TR1ScriptedLevel> _levelsToMirror;
@@ -180,6 +183,10 @@ namespace TRRandomizerCore.Randomizers
                 // Process packs that need to be applied after mirroring.
                 mapping.Mirrored.ApplyToLevel(level.Data, new EMType[] { });
             }
+
+            // Notify the texture monitor that this level has been flipped
+            TextureMonitor<TREntities> monitor = TextureMonitor.CreateMonitor(level.Name);
+            monitor.UseMirroring = true;
 
             if (ScriptEditor.Edition.IsCommunityPatch)
             {

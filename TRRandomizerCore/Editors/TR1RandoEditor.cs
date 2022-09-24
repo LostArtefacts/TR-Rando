@@ -137,7 +137,8 @@ namespace TRRandomizerCore.Editors
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
                 SaveMonitor = monitor,
-                Settings = Settings
+                Settings = Settings,
+                TextureMonitor = textureMonitor
             };
 
             using (textureMonitor)
