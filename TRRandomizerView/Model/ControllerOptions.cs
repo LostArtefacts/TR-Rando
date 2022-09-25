@@ -2612,8 +2612,8 @@ namespace TRRandomizerView.Model
             IsGlitchedSecrets.Value = _controller.GlitchedSecrets;
             UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
             SecretCountMode = _controller.SecretCountMode;
-            MinSecretCount = _controller.MinSecretCount;
             MaxSecretCount = _controller.MaxSecretCount;
+            MinSecretCount = _controller.MinSecretCount;
 
             RandomizeTextures = _controller.RandomizeTextures;
             TextureSeed = _controller.TextureSeed;
