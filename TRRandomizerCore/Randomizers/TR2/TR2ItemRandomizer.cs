@@ -28,6 +28,21 @@ namespace TRRandomizerCore.Randomizers
         private int _unarmedLevelPistolIndex;
         private readonly Dictionary<string, List<Location>> _pistolLocations;
 
+        /// <summary>
+        /// used only of the sprite randomisation is active and is in OnetitemPerGame Mode
+        /// </summary>
+        private short _randomSpriteID = short.MinValue;
+
+        // Variables to remove once they are included in settings vvv
+        bool RandomizeItemSprites = true;
+        bool RandomizeKeyItemSprites = true;
+        bool RandomizeSecretSprites = true;
+
+        SpriteRandoMode spriteRandoMode = SpriteRandoMode.Default;
+        // Variables to remove once they are included in settings ^^^
+
+
+
         public TR2ItemRandomizer()
         {
             _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\unarmed_locations.json"));
@@ -59,6 +74,9 @@ namespace TRRandomizerCore.Randomizers
 
                 RandomizeSeraph();
 
+                if (RandomizeItemSprites)
+                    RandomizeSprites();
+
                 //Write back the level file
                 SaveLevelInstance();
 
@@ -66,6 +84,111 @@ namespace TRRandomizerCore.Randomizers
                 {
                     break;
                 }
+            }
+        }
+
+        private void RandomizeSprites()
+        {
+            List<TR2Entity> entities = _levelInstance.Data.Entities.ToList();
+            List<TR2Entity> replacementCandidates = new List<TR2Entity>(); // keep all entities actually in the level and satisfying settings
+            List<TR2Entities> CommonTypesInAllLevels = new List<TR2Entities>();//for 1 item per game
+
+            // Recover candidates for switcharoos
+
+            //List of pickup items (in no moatter what) 
+            List<TR2Entities> stdItemTypes = TR2EntityUtilities.GetListOfGunTypes();
+            stdItemTypes.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
+
+            CommonTypesInAllLevels.AddRange(stdItemTypes);
+
+            List<TR2Entity> pickups = entities.FindAll(e => stdItemTypes.Contains((TR2Entities)e.TypeID));
+
+            replacementCandidates.AddRange(pickups);
+
+
+            if (RandomizeKeyItemSprites)
+            {
+                List<TR2Entities> keyItemTypes = TR2EntityUtilities.GetListOfKeyItemTypes();
+                List<TR2Entity> keys = entities.FindAll(e => keyItemTypes.Contains((TR2Entities)e.TypeID));
+
+                replacementCandidates.AddRange(keys);
+            }
+
+            if (RandomizeSecretSprites)
+            {
+                List<TR2Entities> secretItemTypes = TR2EntityUtilities.GetListOfSecretTypes();
+                List<TR2Entity> secrets = entities.FindAll(e => secretItemTypes.Contains((TR2Entities)e.TypeID));
+
+                replacementCandidates.AddRange(secrets);
+                CommonTypesInAllLevels.AddRange(secretItemTypes);
+            }
+
+            if (spriteRandoMode == SpriteRandoMode.Default)
+            {
+                foreach (TR2Entity entity in replacementCandidates)
+                {
+                    //I Chose the random item to replace with (there is a small chance it gets replaced with itslef... but i think thats ok :D )       
+                    short randomspriteID = replacementCandidates[_generator.Next(0, replacementCandidates.Count)].TypeID;
+
+                    TRSpriteSequence chosenItemSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == randomspriteID);
+
+                    if (chosenItemSequence != null && randomspriteID != entity.TypeID) //If i didn't find it or if it's the same i ignore
+                    {
+                        TRSpriteTexture chosenItemTexture = _levelInstance.Data.SpriteTextures[chosenItemSequence.Offset];
+
+                        TRSpriteSequence entitySequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == entity.TypeID);
+
+                        if (entitySequence != null)
+                        {
+                            _levelInstance.Data.SpriteTextures[entitySequence.Offset] = chosenItemTexture;
+                        }
+                    }
+                }
+
+            }
+            else if (spriteRandoMode == SpriteRandoMode.OneSpritePerLevel)
+            {
+                //I chose 1 random type among the items to switch
+                short randomspriteID = replacementCandidates[_generator.Next(0, replacementCandidates.Count)].TypeID;
+
+                TRSpriteSequence chosenItemSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == randomspriteID);
+
+                if (chosenItemSequence != null)
+                {
+                    TRSpriteTexture chosenItemTexture = _levelInstance.Data.SpriteTextures[chosenItemSequence.Offset];
+                    foreach (TR2Entity entity in replacementCandidates)
+                    {
+                        TRSpriteSequence entitySequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == entity.TypeID);
+
+                        if (entitySequence != null)
+                        {
+                            _levelInstance.Data.SpriteTextures[entitySequence.Offset] = chosenItemTexture;
+                        }
+                    }
+                }
+            }
+            else if (spriteRandoMode == SpriteRandoMode.OneSpritePerGame)
+            {
+                // I choose just once among pickups that should be in everylevel
+                if (_randomSpriteID == short.MinValue)
+                    _randomSpriteID = (short)CommonTypesInAllLevels[_generator.Next(0, CommonTypesInAllLevels.Count)];
+
+                TRSpriteSequence chosenItemSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == _randomSpriteID);
+
+                if (chosenItemSequence != null)
+                {
+                    TRSpriteTexture chosenItemTexture = _levelInstance.Data.SpriteTextures[chosenItemSequence.Offset];
+                    foreach (TR2Entity entity in replacementCandidates)
+                    {
+                        TRSpriteSequence entitySequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == entity.TypeID);
+
+                        if (entitySequence != null)
+                        {
+                            _levelInstance.Data.SpriteTextures[entitySequence.Offset] = chosenItemTexture;
+                        }
+                    }
+                }
+
             }
         }
 
@@ -85,6 +208,8 @@ namespace TRRandomizerCore.Randomizers
             if (_levelInstance.Is(TR2LevelNames.MONASTERY))
             {
                 TR2ScriptedLevel theDeck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
+
+                Location loc = null;
 
                 // if The deck is included in levels I check if its after monastery 
                 if (theDeck != null)
