@@ -17,6 +17,8 @@
         AddStaticMesh = 24,
         RemoveStaticMesh = 25,
         AddFace = 26,
+        MirrorStaticMesh = 27,
+        MirrorObjectTexture = 28,
 
         // Entity types 41-60
         MoveSlot = 41,
