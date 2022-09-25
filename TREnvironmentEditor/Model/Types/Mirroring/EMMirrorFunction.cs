@@ -663,6 +663,12 @@ namespace TREnvironmentEditor.Model.Types
                         case _west:
                             entity.Z += SectorSize;
                             break;
+                        case _north:
+                            entity.X += SectorSize;
+                            break;
+                        case _south:
+                            entity.X -= SectorSize;
+                            break;
                     }
                     break;
                 case TREntities.AdamEgg:
@@ -673,6 +679,12 @@ namespace TREnvironmentEditor.Model.Types
                             break;
                         case _west:
                             entity.Z += SectorSize * 2;
+                            break;
+                        case _north:
+                            entity.X += SectorSize * 2;
+                            break;
+                        case _south:
+                            entity.X -= SectorSize * 2;
                             break;
                     }
                     break;
