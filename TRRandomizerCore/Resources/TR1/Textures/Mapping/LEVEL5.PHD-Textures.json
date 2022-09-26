@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.NaBu": {
+      "0": [
+        {
+          "RoomNumber": 72,
+          "RectangleIndices": [ 65 ],
+          "BackgroundIndex": 6
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Lara.Bobble": [
       {

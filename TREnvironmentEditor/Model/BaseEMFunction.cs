@@ -49,7 +49,8 @@ namespace TREnvironmentEditor.Model
         {
             TRRoomVertex v = new TRRoomVertex
             {
-                Lighting = lighting
+                Lighting = lighting,
+                Vertex = vert
             };
 
             List<TRRoomVertex> verts = room.RoomData.Vertices.ToList();

@@ -1,4 +1,25 @@
 {
+  "Landmarks": {
+    "Landmarks.Danza": {
+      "0": [
+        {
+          "RoomNumber": 48,
+          "RectangleIndices": [ 99 ],
+          "BackgroundIndex": 13
+        }
+      ]
+    },
+    "Landmarks.Eycore": {
+      "0": [
+        {
+          "RoomNumber": 6,
+          "RectangleIndices": [ 3 ],
+          "BackgroundIndex": 24
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Lara.Bobble": [
       {

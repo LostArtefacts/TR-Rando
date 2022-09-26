@@ -52,6 +52,11 @@ namespace TRRandomizerCore.Textures
         /// </summary>
         public bool HighlightLadders { get; set; }
 
+        /// <summary>
+        /// Whether or not 3D pickups are in use, similar to TR3.
+        /// </summary>
+        public bool Has3DPickups { get; set; }
+
         public WireframeData()
         {
             ExcludedTextures = new List<ushort>();
@@ -63,6 +68,7 @@ namespace TRRandomizerCore.Textures
             ModelColours = new Dictionary<uint, Color>();
             ManualClips = new List<WireframeClip>();
             HighlightLadders = false;
+            Has3DPickups = false;
         }
     }
 }

@@ -69,16 +69,12 @@ namespace TRModelTransporter.Handlers
             // For TR1, sample WAVs are stored in the level files so we need to import each one provided
             // they don't already exist. Remap the sound keys to the new offset into Samples[].
             Dictionary<uint, uint> sampleMap = new Dictionary<uint, uint>();
-            List<uint> existingSampleIndices = level.SampleIndices.ToList();
             _samples = level.Samples.ToList();
 
             foreach (uint sampleIndex in sampleData.Keys)
             {
-                if (!existingSampleIndices.Contains(sampleIndex))
-                {
-                    sampleMap[sampleIndex] = (uint)_samples.Count;
-                    _samples.AddRange(sampleData[sampleIndex]);
-                }
+                sampleMap[sampleIndex] = (uint)_samples.Count;
+                _samples.AddRange(sampleData[sampleIndex]);
             }
 
             return sampleMap;

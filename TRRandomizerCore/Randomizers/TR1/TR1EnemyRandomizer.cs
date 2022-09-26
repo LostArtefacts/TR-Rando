@@ -466,6 +466,11 @@ namespace TRRandomizerCore.Randomizers
                         // #146 Ensure OneShot triggers are set for this enemy if needed
                         TR1EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
 
+                        if (Settings.HideEnemiesUntilTriggered || entity == TREntities.Adam)
+                        {
+                            targetEntity.Invisible = true;
+                        }
+
                         // Remove the target entity so it doesn't get replaced
                         enemyEntities.Remove(targetEntity);
                     }
@@ -508,7 +513,7 @@ namespace TRRandomizerCore.Randomizers
                 int maxEntityCount = TR1EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, difficulty);
                 if (maxEntityCount != -1)
                 {
-                    if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount)
+                    if (GetEntityCount(level, newEntityType) >= maxEntityCount)
                     {
                         List<TREntities> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1EntityUtilities.TranslateEntityAlias(e)));
                         if (pool.Count > 0)
@@ -524,7 +529,7 @@ namespace TRRandomizerCore.Randomizers
                 {
                     if (level.Data.Entities.ToList().FindAll(e => enemyGroup.Enemies.Contains((TREntities)e.TypeID)).Count >= enemyGroup.MaximumCount)
                     {
-                        List<TREntities> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1EntityUtilities.TranslateEntityAlias(e)));
+                        List<TREntities> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1EntityUtilities.TranslateEntityAlias(e), difficulty));
                         if (pool.Count > 0)
                         {
                             newEntityType = pool[_generator.Next(0, pool.Count)];
@@ -547,6 +552,13 @@ namespace TRRandomizerCore.Randomizers
                             newEntityType = TR1EntityUtilities.GetWaterEnemyLandCreature(pool[_generator.Next(0, pool.Count)]);
                         }
                     }
+                }
+
+                if (Settings.HideEnemiesUntilTriggered)
+                {
+                    // Default to hiding the enemy - checks below for eggs, ex-eggs, Adam and centaur
+                    // statues will override as necessary.
+                    currentEntity.Invisible = true;
                 }
 
                 if (newEntityType == TREntities.AtlanteanEgg)
@@ -613,6 +625,9 @@ namespace TRRandomizerCore.Randomizers
                             currentEntity.Angle = eggLocation.Angle;
                             currentEntity.Room = (short)eggLocation.Room;
                         }
+
+                        // Eggs will always be visible
+                        currentEntity.Invisible = false;
                     }
                     else
                     {
@@ -630,6 +645,12 @@ namespace TRRandomizerCore.Randomizers
                 if (newEntityType == TREntities.CentaurStatue)
                 {
                     AdjustCentaurStatue(currentEntity, level.Data, floorData);
+                }
+                else if (newEntityType == TREntities.Adam)
+                {
+                    // Adam should always be invisible as he is inactive high above the ground
+                    // so this can interfere with Lara's route - see Cistern item 36
+                    currentEntity.Invisible = true;
                 }
 
                 if (newEntityType == TREntities.Pierre)
@@ -671,13 +692,61 @@ namespace TRRandomizerCore.Randomizers
                 level.Data.NumEntities++;
             }
 
+            // Fix Pierre's silent guns
+            if (enemies.Available.Contains(TREntities.Pierre))
+            {
+                FixPierreGunshot(level);
+            }
+
             // Add extra ammo based on this level's difficulty
             if (Settings.CrossLevelEnemies && ScriptEditor.Edition.IsCommunityPatch && level.Script.RemovesWeapons)
             {
                 AddUnarmedLevelAmmo(level);
             }
 
-            RandomizeMeshes(level);
+            RandomizeMeshes(level, enemies.Available);
+        }
+
+        private int GetEntityCount(TR1CombinedLevel level, TREntities entityType)
+        {
+            int count = 0;
+            TREntities translatedType = TR1EntityUtilities.TranslateEntityAlias(entityType);
+            foreach (TREntity entity in level.Data.Entities)
+            {
+                TREntities type = (TREntities)entity.TypeID;
+                if (type == translatedType)
+                {
+                    count++;
+                }
+                else if (type == TREntities.AdamEgg || type == TREntities.AtlanteanEgg)
+                {
+                    TREntities eggType;
+                    switch (entity.CodeBits)
+                    {
+                        case 1:
+                            eggType = TREntities.ShootingAtlantean_N;
+                            break;
+                        case 2:
+                            eggType = TREntities.Centaur;
+                            break;
+                        case 4:
+                            eggType = TREntities.Adam;
+                            break;
+                        case 8:
+                            eggType = TREntities.NonShootingAtlantean_N;
+                            break;
+                        default:
+                            eggType = TREntities.FlyingAtlantean;
+                            break;
+                    }
+
+                    if (eggType == translatedType && Array.Find(level.Data.Models, m => m.ID == (uint)eggType) != null)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
         }
 
         private bool IsEnemyInOrAboveWater(TREntity entity, TRLevel level, FDControl floorData)
@@ -703,25 +772,47 @@ namespace TRRandomizerCore.Randomizers
         private void AmendAtlanteanModels(TR1CombinedLevel level, EnemyRandomizationCollection enemies)
         {
             // If non-shooting grounded Atlanteans are present, we can just duplicate the model to make shooting Atlanteans
-            List<TRModel> models = level.Data.Models.ToList();
-            TRModel shooter = models.Find(m => m.ID == (uint)TREntities.ShootingAtlantean_N);
-            TRModel nonShooter = models.Find(m => m.ID == (uint)TREntities.NonShootingAtlantean_N);
-            if (shooter == null && nonShooter != null)
+            if (enemies.Available.Any(TR1EntityUtilities.GetEntityFamily(TREntities.ShootingAtlantean_N).Contains))
             {
-                models.Add(new TRModel
+                List<TRModel> models = level.Data.Models.ToList();
+                TRModel shooter = models.Find(m => m.ID == (uint)TREntities.ShootingAtlantean_N);
+                TRModel nonShooter = models.Find(m => m.ID == (uint)TREntities.NonShootingAtlantean_N);
+                if (shooter == null && nonShooter != null)
                 {
-                    ID = (uint)TREntities.ShootingAtlantean_N,
-                    Animation = nonShooter.Animation,
-                    FrameOffset = nonShooter.FrameOffset,
-                    MeshTree = nonShooter.MeshTree,
-                    NumMeshes = nonShooter.NumMeshes,
-                    StartingMesh = nonShooter.StartingMesh
-                });
+                    models.Add(new TRModel
+                    {
+                        ID = (uint)TREntities.ShootingAtlantean_N,
+                        Animation = nonShooter.Animation,
+                        FrameOffset = nonShooter.FrameOffset,
+                        MeshTree = nonShooter.MeshTree,
+                        NumMeshes = nonShooter.NumMeshes,
+                        StartingMesh = nonShooter.StartingMesh
+                    });
 
-                level.Data.Models = models.ToArray();
-                level.Data.NumModels++;
+                    level.Data.Models = models.ToArray();
+                    level.Data.NumModels++;
 
-                enemies.Available.Add(TREntities.ShootingAtlantean_N);
+                    enemies.Available.Add(TREntities.ShootingAtlantean_N);
+                }
+            }
+
+            // If we're using flying mummies, add a chance that they'll have proper wings
+            if (enemies.Available.Contains(TREntities.BandagedFlyer) && _generator.NextDouble() < 0.5)
+            {
+                TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.FlyingAtlantean);
+                ushort bandageTexture = meshes[1].TexturedRectangles[3].Texture;
+                for (int i = 15; i < 21; i++)
+                {
+                    TRMesh mesh = meshes[i];
+                    foreach (TRFace4 f in mesh.TexturedRectangles)
+                    {
+                        f.Texture = bandageTexture;
+                    }
+                    foreach (TRFace3 f in mesh.TexturedTriangles)
+                    {
+                        f.Texture = bandageTexture;
+                    }
+                }
             }
         }
 
@@ -844,9 +935,8 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
-        private void RandomizeMeshes(TR1CombinedLevel level)
+        private void RandomizeMeshes(TR1CombinedLevel level, List<TREntities> availableEnemies)
         {
-            // Currently just targeted at Atlantis and its cutscene
             if (level.Is(TRLevelNames.ATLANTIS))
             {
                 // Atlantis scion swap - Model => Mesh index
@@ -909,6 +999,95 @@ namespace TRRandomizerCore.Randomizers
                         TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], pierre[8]);
                         break;
                 }
+            }
+
+            if ((level.Is(TRLevelNames.PYRAMID) || availableEnemies.Contains(TREntities.Adam)) && _generator.NextDouble() < 0.4)
+            {
+                // Replace Adam's head with a much larger version of Natla's, Larson's or normal/angry Lara's.
+                MeshEditor editor = new MeshEditor();
+                TRMesh[] adam = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Adam);
+                TRMesh replacement;
+                if (availableEnemies.Contains(TREntities.Natla) && _generator.NextDouble() < 0.5)
+                {
+                    replacement = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Natla)[2];
+                }
+                else if (availableEnemies.Contains(TREntities.Larson) && _generator.NextDouble() < 0.5)
+                {
+                    replacement = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Larson)[8];
+                }
+                else if (availableEnemies.Contains(TREntities.Pierre) && _generator.NextDouble() < 0.5)
+                {
+                    replacement = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Pierre)[8];
+                }
+                else
+                {
+                    replacement = TRMeshUtilities.GetModelMeshes(level.Data, _generator.NextDouble() < 0.5 ? TREntities.LaraUziAnimation_H : TREntities.Lara)[14];
+                }
+
+                TRMeshUtilities.DuplicateMesh(level.Data, adam[3], editor.CloneMesh(replacement));
+
+                // Enlarge and rotate about Y
+                foreach (TRVertex vertex in adam[3].Vertices)
+                {
+                    vertex.X = (short)(vertex.X * -6);
+                    vertex.Y = (short)(vertex.Y * 6);
+                    vertex.Z = (short)(vertex.Z * -6);
+                }
+
+                adam[3].CollRadius *= 6;
+
+                // Replace the neck texture to suit the head
+                for (int i = 1; i < 3; i++)
+                {
+                    foreach (TRFace3 f in adam[i].TexturedTriangles)
+                    {
+                        f.Texture = adam[0].TexturedTriangles[0].Texture;
+                    }
+                    foreach (TRFace4 f in adam[i].TexturedRectangles)
+                    {
+                        f.Texture = adam[0].TexturedRectangles[0].Texture;
+                    }
+                }
+            }
+
+            if (availableEnemies.Contains(TREntities.Pierre) && _generator.NextDouble() < 0.25)
+            {
+                // Replace Pierre's head with a slightly bigger version of Lara's (either angry Lara or normal Lara)
+                MeshEditor editor = new MeshEditor();
+                TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Pierre);
+                TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara);
+                TRMesh[] laraUziAnim = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraUziAnimation_H);
+
+                TRMeshUtilities.DuplicateMesh(level.Data, pierre[8], editor.CloneMesh(_generator.NextDouble() < 0.5 ? laraUziAnim[14] : lara[14]));
+                foreach (TRVertex vertex in pierre[8].Vertices)
+                {
+                    vertex.X = (short)(vertex.X * 1.5 + 6);
+                    vertex.Y = (short)(vertex.Y * 1.5);
+                    vertex.Z = (short)(vertex.Z * 1.5);
+                }
+
+                pierre[8].CollRadius = (short)(lara[14].CollRadius * 1.5);
+            }
+        }
+
+        private void FixPierreGunshot(TR1CombinedLevel level)
+        {
+            TRModel pierre = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.Pierre);
+            if (pierre != null)
+            {
+                // Get Pierre's shooting animation
+                TRAnimation anim = level.Data.Animations[pierre.Animation + 10];
+                List<TRAnimCommand> cmds = level.Data.AnimCommands.ToList();
+                anim.AnimCommand = (ushort)cmds.Count;
+                anim.NumAnimCommands = 1;
+
+                // On the second frame, play SFX 44 (magnums)
+                cmds.Add(new TRAnimCommand { Value = 5 });
+                cmds.Add(new TRAnimCommand { Value = (short)(anim.FrameStart + 1) });
+                cmds.Add(new TRAnimCommand { Value = 44 });
+
+                level.Data.AnimCommands = cmds.ToArray();
+                level.Data.NumAnimCommands = (uint)cmds.Count;
             }
         }
 

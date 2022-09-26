@@ -63,8 +63,26 @@
             line-height: 132%;
         }
 
-        .indprop {
+        .indprops {
+            display:table;
             margin-left:10px;
+        }
+
+        .indprops div {
+            display:table-row;
+        }
+
+        .indprops span {
+            display:table-cell;
+            padding:1px 4px;
+        }
+
+        .indprops span:first-child {
+            text-align:right;
+        }
+
+        .indprops span:nth-child(3) {
+            text-align: center;
         }
 
         #tiles {
@@ -252,8 +270,17 @@
                     }
                     markup += "</div>";
 
-                    for (let i = 0; i < textures.length; i++) {
-                        markup += `<div class="indprop">${textures[i]}</div>`;
+                    if (textures.length > 0) {
+                        markup += '<div class="indprops">';
+                        for (let i = 0; i < textures.length; i++) {
+                            let props = textures[i].split(":");
+                            markup += '<div>';
+                            for (let j = 0; j < props.length; j++) {
+                                markup += `<span>${props[j]}</span>`;
+                            }
+                            markup += '</div>';
+                        }
+                        markup += '</div>';
                     }
 
                     let rectArr = JSON.parse(t.attr("data-rect"));

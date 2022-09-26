@@ -69,6 +69,10 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMRemoveStaticMeshFunction>(jo.ToString(), _resolver);
                 case EMType.AddFace:
                     return JsonConvert.DeserializeObject<EMAddFaceFunction>(jo.ToString(), _resolver);
+                case EMType.MirrorStaticMesh:
+                    return JsonConvert.DeserializeObject<EMMirrorStaticMeshFunction>(jo.ToString(), _resolver);
+                case EMType.MirrorObjectTexture:
+                    return JsonConvert.DeserializeObject<EMMirrorObjectTexture>(jo.ToString(), _resolver);
 
                 // Entity types
                 case EMType.MoveSlot:

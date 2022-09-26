@@ -208,7 +208,6 @@ namespace TRRandomizerCore.Randomizers
                         }
                         while (!TR1EntityUtilities.IsWeaponPickup(entityType));
                         entity.TypeID = (short)entityType;
-                        hasPistols = entityType == TREntities.Pistols_S_P;
                     }
                 }
                 else if (TR1EntityUtilities.IsStandardPickupType(entityType))
@@ -225,6 +224,8 @@ namespace TRRandomizerCore.Randomizers
                     }
                     entity.TypeID = (short)newType;
                 }
+
+                hasPistols = Array.Find(level.Data.Entities, e => e.TypeID == (short)TREntities.Pistols_S_P) != null;
             }
         }
 

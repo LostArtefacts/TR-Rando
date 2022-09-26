@@ -175,7 +175,8 @@ namespace TRRandomizerCore.Randomizers
                 _persistentWireColour = _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
             }
 
-            _wireframeData.Values.ToList().ForEach(d => d.HighlightLadders = Settings.UseWireframeLadders);
+            bool has3DPickups = ScriptEditor.Edition.IsCommunityPatch && (ScriptEditor as TR1ScriptEditor).Enable3dPickups;
+            _wireframeData.Values.ToList().ForEach(d => d.Has3DPickups = has3DPickups);
         }
 
         public string GetSourceVariant(AbstractTextureSource source)
@@ -273,10 +274,17 @@ namespace TRRandomizerCore.Randomizers
             }
             else
             {
+                int minValue = IsWireframeLevel(level) ? 30 : 10;
+                TextureMonitor<TREntities> monitor = TextureMonitor.GetMonitor(level.Name);
+                if (monitor != null && monitor.UseNightTextures)
+                {
+                    minValue += 10;
+                }
+
                 level.Script.WaterColor = new double[3];
                 for (int i = 0; i < 3; i++)
                 {
-                    level.Script.WaterColor[i] = Math.Round(_generator.Next(0, 101) * Math.Pow(10, -2), 2);
+                    level.Script.WaterColor[i] = Math.Round(_generator.Next(minValue, 101) * Math.Pow(10, -2), 2);
                 }
             }
         }
@@ -293,7 +301,10 @@ namespace TRRandomizerCore.Randomizers
                 : base(outer)
             {
                 _holders = new Dictionary<TR1CombinedLevel, TextureHolder<TREntities, TRLevel>>();
-                _landmarkImporter = new TR1LandmarkImporter();
+                _landmarkImporter = new TR1LandmarkImporter
+                {
+                    IsCommunityPatch = _outer.ScriptEditor.Edition.IsCommunityPatch
+                };
                 _wireframer = new TR1Wireframer();
             }
 

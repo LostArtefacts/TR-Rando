@@ -137,7 +137,8 @@ namespace TRRandomizerCore.Editors
                 BasePath = wipDirectory,
                 BackupPath = backupDirectory,
                 SaveMonitor = monitor,
-                Settings = Settings
+                Settings = Settings,
+                TextureMonitor = textureMonitor
             };
 
             using (textureMonitor)
@@ -236,6 +237,21 @@ namespace TRRandomizerCore.Editors
                     environmentRandomizer.Randomize(Settings.EnvironmentSeed);
                 }
 
+                if (!monitor.IsCancelled && Settings.RandomizeOutfits)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing Lara's appearance");
+                    new TR1OutfitRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings,
+                        TextureMonitor = textureMonitor
+                    }.Randomize(Settings.OutfitSeed);
+                }
+
                 if (!monitor.IsCancelled && Settings.RandomizeAudio)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing audio tracks");
@@ -248,20 +264,6 @@ namespace TRRandomizerCore.Editors
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.AudioSeed);
-                }
-
-                if (!monitor.IsCancelled && Settings.RandomizeOutfits)
-                {
-                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing Lara's appearance");
-                    new TR1OutfitRandomizer
-                    {
-                        ScriptEditor = scriptEditor,
-                        Levels = levels,
-                        BasePath = wipDirectory,
-                        SaveMonitor = monitor,
-                        Settings = Settings,
-                        TextureMonitor = textureMonitor
-                    }.Randomize(Settings.OutfitSeed);
                 }
 
                 if (!monitor.IsCancelled && Settings.RandomizeNightMode)

@@ -24,7 +24,7 @@ namespace TRRandomizerCore.Textures
         private Dictionary<TRFace4, List<TRVertex>> _ladderFace4s;
 
         private ISet<ushort> _allTextures;
-        private WireframeData _data;
+        protected WireframeData _data;
 
         protected virtual bool IsTextureExcluded(ushort texture)
         {
@@ -107,6 +107,7 @@ namespace TRRandomizerCore.Textures
                 ResetMeshTextures(modelRemap);
                 TidyModels(level);
                 SetSkyboxVisible(level);
+                DeleteAnimatedTextures(level);
             }
         }
 
@@ -533,6 +534,41 @@ namespace TRRandomizerCore.Textures
             }
         }
 
+        private void DeleteAnimatedTextures(L level)
+        {
+            List<TRAnimatedTexture> animatedTextures = GetAnimatedTextures(level).ToList();
+
+            for (int i = animatedTextures.Count - 1; i >= 0; i--)
+            {
+                TRAnimatedTexture animatedTexture = animatedTextures[i];
+                List<ushort> textures = animatedTexture.Textures.ToList();
+                for (int j = textures.Count - 1; j >= 0; j--)
+                {
+                    if (!IsTextureExcluded(textures[j]))
+                    {
+                        textures.RemoveAt(j);
+                    }
+                }
+
+                if (textures.Count < 2)
+                {
+                    animatedTextures.RemoveAt(i);
+                }
+                else
+                {
+                    animatedTexture.Textures = textures.ToArray();
+                }
+            }
+
+            int length = 1;
+            foreach (TRAnimatedTexture animatedTexture in animatedTextures)
+            {
+                length += animatedTexture.NumTextures + 2;
+            }
+
+            SetAnimatedTextures(level, animatedTextures.ToArray(), (ushort)length);
+        }
+
         protected abstract Dictionary<TRFace4, List<TRVertex>> CollectLadders(L level);
         protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
         protected abstract IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(L level);
@@ -556,6 +592,8 @@ namespace TRRandomizerCore.Textures
         protected virtual bool IsEnemyPlaceholderModel(TRModel model) => false;
         protected virtual bool ShouldSolidifyModel(TRModel model) => false;
         protected abstract void SetSkyboxVisible(L level);
+        protected abstract TRAnimatedTexture[] GetAnimatedTextures(L level);
+        protected abstract void SetAnimatedTextures(L level, TRAnimatedTexture[] animatedTextures, ushort length);
 
         public virtual bool Is8BitPalette { get; }
     }

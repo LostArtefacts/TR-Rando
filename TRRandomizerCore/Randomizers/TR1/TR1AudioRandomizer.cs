@@ -18,10 +18,13 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR1AudioRandomizer : BaseTR1Randomizer
     {
+        private static readonly short _sfxUziID = 43;
+
         private AudioRandomizer _audioRandomizer;
 
         private List<TR1SFXDefinition> _soundEffects;
-        private List<TRSFXGeneralCategory> _sfxCategories;
+        private TR1SFXDefinition _psUziDefinition;
+        private List<TRSFXGeneralCategory> _sfxCategories, _persistentCategories;
         private List<TR1ScriptedLevel> _uncontrolledLevels;
 
         public override void Randomize(int seed)
@@ -56,6 +59,14 @@ namespace TRRandomizerCore.Randomizers
             // Decide which sound effect categories we want to randomize.
             _sfxCategories = _audioRandomizer.GetSFXCategories(Settings);
 
+            // SFX in these categories can potentially remain as they are
+            _persistentCategories = new List<TRSFXGeneralCategory>
+            {
+                TRSFXGeneralCategory.StandardWeaponFiring,
+                TRSFXGeneralCategory.Ricochet,
+                TRSFXGeneralCategory.Flying
+            };
+
             // Only load the SFX if we are changing at least one category
             if (_sfxCategories.Count > 0)
             {
@@ -75,6 +86,17 @@ namespace TRRandomizerCore.Randomizers
                     TRLevel level = levels[definition.SourceLevel];
                     definition.SoundData = SoundUtilities.BuildPackedSound(level.SoundMap, level.SoundDetails, level.SampleIndices, level.Samples, new short[] { definition.InternalIndex });
                 }
+
+                // PS uzis need some manual setup. Make a copy of the standard uzi definition
+                // then replace the sound data from the external wav file.
+                TRLevel caves = levels[TRLevelNames.CAVES];
+                _psUziDefinition = new TR1SFXDefinition
+                {
+                    InternalIndex = -1,
+                    SoundData = SoundUtilities.BuildPackedSound(caves.SoundMap, caves.SoundDetails, caves.SampleIndices, caves.Samples, new short[] { _sfxUziID })
+                };
+                uint sample = _psUziDefinition.SoundData.Samples.Keys.First();
+                _psUziDefinition.SoundData.Samples[sample] = File.ReadAllBytes(GetResourcePath(@"TR1\Audio\ps_uzis.wav"));
             }
         }
 
@@ -176,7 +198,7 @@ namespace TRRandomizerCore.Randomizers
                         pred = sfx =>
                         {
                             return sfx.Categories.Contains(definition.PrimaryCategory) &&
-                            sfx != definition &&
+                            (sfx != definition || _persistentCategories.Contains(definition.PrimaryCategory)) &&
                             (
                                 sfx.Creature == definition.Creature ||
                                 (sfx.Creature == TRSFXCreatureCategory.Lara && definition.Creature == TRSFXCreatureCategory.Human)
@@ -185,29 +207,42 @@ namespace TRRandomizerCore.Randomizers
                     }
                     else
                     {
-                        pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && sfx != definition;
+                        pred = sfx => sfx.Categories.Contains(definition.PrimaryCategory) && (sfx != definition || _persistentCategories.Contains(definition.PrimaryCategory));
                     }
 
-                    // Try to find definitions that match
-                    List<TR1SFXDefinition> otherDefinitions = _soundEffects.FindAll(pred);
+                    List<TR1SFXDefinition> otherDefinitions;
+                    if (internalIndex == _sfxUziID && _generator.NextDouble() < 0.4)
+                    {
+                        // 2/5 chance of PS uzis replacing original uzis, but they won't be used for anything else
+                        otherDefinitions = new List<TR1SFXDefinition> { _psUziDefinition };
+                    }
+                    else
+                    {
+                        // Try to find definitions that match
+                        otherDefinitions = _soundEffects.FindAll(pred);
+                    }
+
                     if (otherDefinitions.Count > 0)
                     {
                         // Pick a new definition and try to import it into the level. This should only fail if
                         // the JSON is misconfigured e.g. missing sample indices. In that case, we just leave 
                         // the current sound effect as-is.
                         TR1SFXDefinition nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
-                        short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition);
-                        if (soundDetailsIndex != -1)
+                        if (nextDefinition != definition)
                         {
-                            // Only change it if the import succeeded
-                            level.Data.SoundMap[internalIndex] = soundDetailsIndex;
+                            short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition);
+                            if (soundDetailsIndex != -1)
+                            {
+                                // Only change it if the import succeeded
+                                level.Data.SoundMap[internalIndex] = soundDetailsIndex;
+                            }
                         }
                     }
                 }
-
-                // Sample indices have to be in ascending order. Sort the level data only once.
-                SoundUtilities.ResortSoundIndices(level.Data);
             }
+
+            // Sample indices have to be in ascending order. Sort the level data only once.
+            SoundUtilities.ResortSoundIndices(level.Data);
         }
 
         private short ImportSoundEffect(TRLevel level, TR1SFXDefinition definition)
@@ -220,44 +255,31 @@ namespace TRRandomizerCore.Randomizers
             TRSoundDetails defDetails = definition.SoundData.SoundDetails.Values.First();
             TRSoundDetails newDetails;
 
-            if (level.SoundMap[definition.InternalIndex] != -1)
+            // This may result in duplicate WAV data if a sound definition is imported more than
+            // once, but ResortSoundIndices will tidy the data such that only the required WAV
+            // file is retained in the end.
+            List<byte> levelSamples = level.Samples.ToList();
+            List<uint> levelSampleIndices = level.SampleIndices.ToList();
+
+            foreach (byte[] sample in definition.SoundData.Samples.Values)
             {
-                // In Tomp1, duplicated indices in SoundMap can cause crashes, so we make a new TRSoundDetails, but just point
-                // it to the existing sample(s) so we're not importing more WAV data than we have to.
-                TRSoundDetails existingDetails = level.SoundDetails[level.SoundMap[definition.InternalIndex]];
-                newDetails = new TRSoundDetails
-                {
-                    Chance = defDetails.Chance,
-                    Characteristics = defDetails.Characteristics,
-                    Sample = existingDetails.Sample,
-                    Volume = defDetails.Volume
-                };
+                levelSampleIndices.Add((uint)levelSamples.Count);
+                levelSamples.AddRange(sample);
             }
-            else
+
+            newDetails = new TRSoundDetails
             {
-                List<byte> levelSamples = level.Samples.ToList();
-                List<uint> levelSampleIndices = level.SampleIndices.ToList();
+                Chance = defDetails.Chance,
+                Characteristics = defDetails.Characteristics,
+                Sample = (ushort)level.SampleIndices.Length,
+                Volume = defDetails.Volume
+            };
 
-                foreach (byte[] sample in definition.SoundData.Samples.Values)
-                {
-                    levelSampleIndices.Add((uint)levelSamples.Count);
-                    levelSamples.AddRange(sample);
-                }
+            level.Samples = levelSamples.ToArray();
+            level.NumSamples = (uint)levelSamples.Count;
 
-                newDetails = new TRSoundDetails
-                {
-                    Chance = defDetails.Chance,
-                    Characteristics = defDetails.Characteristics,
-                    Sample = (ushort)level.SampleIndices.Length,
-                    Volume = defDetails.Volume
-                };
-
-                level.Samples = levelSamples.ToArray();
-                level.NumSamples = (uint)levelSamples.Count;
-
-                level.SampleIndices = levelSampleIndices.ToArray();
-                level.NumSampleIndices = (uint)levelSampleIndices.Count;
-            }
+            level.SampleIndices = levelSampleIndices.ToArray();
+            level.NumSampleIndices = (uint)levelSampleIndices.Count;
 
             List<TRSoundDetails> levelSoundDetails = level.SoundDetails.ToList();
             levelSoundDetails.Add(newDetails);

@@ -136,6 +136,8 @@ namespace TRModelTransporter.Handlers
                 }
             }
 
+            SoundUtilities.ResortSoundIndices(level);
+
             AnimationUtilities.ImportAnimationFrames(level, definition);
         }
 

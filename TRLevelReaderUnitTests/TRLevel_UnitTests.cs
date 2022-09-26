@@ -12,6 +12,7 @@ using TRFDControl.Utilities;
 using System.Linq;
 using TRLevelReader.Model.Base.Enums;
 using TRLevelReader.Helpers;
+using TRModelTransporter.Handlers;
 
 namespace TRLevelReaderUnitTests
 {
@@ -436,6 +437,21 @@ namespace TRLevelReaderUnitTests
                 Assert.IsTrue(flipOnZones.ContainsKey(i));
                 CollectionAssert.AreEqual(flipOnZones[i], flipOn);
             }
+        }
+
+        [TestMethod]
+        public void ResortSoundsTest()
+        {
+            TR1LevelReader reader = new TR1LevelReader();
+            TRLevel lvl = reader.ReadLevel("level1.phd");
+
+            byte[] lvlBeforeSort = lvl.Serialize();
+
+            SoundUtilities.ResortSoundIndices(lvl);
+            
+            byte[] lvlAfterSort = lvl.Serialize();
+
+            CollectionAssert.AreEqual(lvlBeforeSort, lvlAfterSort);
         }
     }
 }

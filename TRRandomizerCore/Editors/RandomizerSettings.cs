@@ -69,6 +69,7 @@ namespace TRRandomizerCore.Editors
         public bool OneEnemyMode => IncludedEnemies.Count == 1;
         public bool SwapEnemyAppearance { get; set; }
         public bool AllowEmptyEggs { get; set; }
+        public bool HideEnemiesUntilTriggered { get; set; }
         public bool GlitchedSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
         public TRSecretCountMode SecretCountMode { get; set; }
@@ -79,6 +80,7 @@ namespace TRRandomizerCore.Editors
         public uint HaircutLevelCount { get; set; }
         public bool AssaultCourseHaircut { get; set; }
         public uint InvisibleLevelCount { get; set; }
+        public bool AllowGymOutfit { get; set; }
         public bool AssaultCourseInvisible { get; set; }
         public bool RetainLevelNames { get; set; }
         public bool RetainKeyItemNames { get; set; }
@@ -160,6 +162,7 @@ namespace TRRandomizerCore.Editors
             DragonSpawnType = (DragonSpawnType)config.GetEnum(nameof(DragonSpawnType), typeof(DragonSpawnType), DragonSpawnType.Default);
             SwapEnemyAppearance = config.GetBool(nameof(SwapEnemyAppearance), true);
             AllowEmptyEggs = config.GetBool(nameof(AllowEmptyEggs));
+            HideEnemiesUntilTriggered = config.GetBool(nameof(HideEnemiesUntilTriggered), true);
             UseEnemyExclusions = config.GetBool(nameof(UseEnemyExclusions));
             ShowExclusionWarnings = config.GetBool(nameof(ShowExclusionWarnings));
             ExcludedEnemies = config.GetString(nameof(ExcludedEnemies))
@@ -189,6 +192,7 @@ namespace TRRandomizerCore.Editors
             HaircutLevelCount = config.GetUInt(nameof(HaircutLevelCount), 9);
             AssaultCourseHaircut = config.GetBool(nameof(AssaultCourseHaircut), true);
             InvisibleLevelCount = config.GetUInt(nameof(InvisibleLevelCount), 2);
+            AllowGymOutfit = config.GetBool(nameof(AllowGymOutfit), true);
             AssaultCourseInvisible = config.GetBool(nameof(AssaultCourseInvisible));
 
             RandomizeGameStrings = config.GetBool(nameof(RandomizeGameStrings));
@@ -285,6 +289,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(ShowExclusionWarnings)] = ShowExclusionWarnings;
             config[nameof(SwapEnemyAppearance)] = SwapEnemyAppearance;
             config[nameof(AllowEmptyEggs)] = AllowEmptyEggs;
+            config[nameof(HideEnemiesUntilTriggered)] = HideEnemiesUntilTriggered;
 
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;
@@ -307,6 +312,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(HaircutLevelCount)] = HaircutLevelCount;
             config[nameof(AssaultCourseHaircut)] = AssaultCourseHaircut;
             config[nameof(InvisibleLevelCount)] = InvisibleLevelCount;
+            config[nameof(AllowGymOutfit)] = AllowGymOutfit;
             config[nameof(AssaultCourseInvisible)] = AssaultCourseInvisible;
 
             config[nameof(RandomizeGameStrings)] = RandomizeGameStrings;

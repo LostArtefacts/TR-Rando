@@ -128,6 +128,8 @@ namespace TRRandomizerCore.Randomizers
             {
                 // General death noises
                 sfxCategories.Add(TRSFXGeneralCategory.Death);
+                // Enemies getting hit
+                sfxCategories.Add(TRSFXGeneralCategory.TakingDamage);
                 // Standard footsteps, shuffles/scrapes (like Flamethrower & Winston)
                 sfxCategories.Add(TRSFXGeneralCategory.StandardFootstep);
                 // Chicken, T-Rex, Dragon

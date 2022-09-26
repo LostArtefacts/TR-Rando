@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.Lord": {
+      "0": [
+        {
+          "RoomNumber": 78,
+          "RectangleIndices": [ 69 ],
+          "BackgroundIndex": 5
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Lara.Bobble": [
       {

@@ -14,6 +14,8 @@ namespace TRRandomizerCore.Textures
         where E : Enum
         where L : class
     {
+        public bool IsCommunityPatch { get; set; }
+
         protected abstract int MaxTextures { get; }
 
         protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
