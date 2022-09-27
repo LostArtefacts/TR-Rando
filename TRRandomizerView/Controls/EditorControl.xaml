@@ -249,7 +249,7 @@
                                         BoolItemsSource="{Binding Data.ItemBoolItemControls, Source={StaticResource proxy}}"
                                         HasBoolItems="True"
                                         HasItemDifficulty="True"
-                                        HasItemSpriteRandomization="True"
+                                        HasItemSpriteRandomization="{Binding Data.IsItemSpriteTypeSupported, Source={StaticResource proxy}}"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>

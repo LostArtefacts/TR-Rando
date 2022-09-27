@@ -202,7 +202,7 @@
                 </StackPanel.Resources>
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
-                           Text="SpriteRandomization" />
+                           Text="Sprite Randomization" />
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>

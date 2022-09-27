@@ -3201,6 +3201,7 @@ namespace TRRandomizerView.Model
         public bool IsAtlanteanEggBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.AtlanteanEggBehaviour);
         public bool IsHiddenEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.HiddenEnemies);
         public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
+        public bool IsItemSpriteTypeSupported => IsRandomizationSupported(TRRandomizerType.ItemSprite);
 
         private bool IsRandomizationSupported(TRRandomizerType randomizerType)
         {
