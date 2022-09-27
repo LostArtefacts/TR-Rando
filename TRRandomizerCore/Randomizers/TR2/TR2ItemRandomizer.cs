@@ -30,14 +30,6 @@ namespace TRRandomizerCore.Randomizers
 
         private ItemSpriteRandomizer<TR2Entities> _spriteRandomizer;
 
-        // Variables to remove once they are included in settings vvv
-        bool _randomizeItemSprites = true;
-        bool _randomizeKeyItemSprites = true;
-        bool _randomizeSecretSprites = true;
-
-        SpriteRandoMode _spriteRandoMode = SpriteRandoMode.Default;
-        // Variables to remove once they are included in settings ^^^
-
         public TR2ItemRandomizer()
         {
             _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\unarmed_locations.json"));
@@ -69,7 +61,7 @@ namespace TRRandomizerCore.Randomizers
 
                 RandomizeSeraph();
 
-                if (_randomizeItemSprites)
+                if (Settings.RandomizeItemSprites)
                     RandomizeSprites();
 
                 //Write back the level file
@@ -94,9 +86,9 @@ namespace TRRandomizerCore.Randomizers
                     StandardItemTypes = TR2EntityUtilities.GetListOfGunTypes().Concat(TR2EntityUtilities.GetListOfAmmoTypes()).ToList(),
                     KeyItemTypes = TR2EntityUtilities.GetListOfKeyItemTypes(),
                     SecretItemTypes = TR2EntityUtilities.GetListOfSecretTypes(),
-                    RandomizeKeyItemSprites = _randomizeKeyItemSprites,
-                    RandomizeSecretSprites = _randomizeSecretSprites,
-                    Mode = _spriteRandoMode
+                    RandomizeKeyItemSprites = Settings.RandomizeKeyItemSprites,
+                    RandomizeSecretSprites = Settings.RandomizeSecretSprites,
+                    Mode = Settings.SpriteRandoMode
                 };
 #if DEBUG
                 _spriteRandomizer.TextureChanged += (object sender, SpriteEventArgs<TR2Entities> e) =>
