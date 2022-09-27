@@ -3,7 +3,7 @@
     public enum SpriteRandoMode
     {
         /// <summary>
-        /// For items chosen to change, all sprite would be shuffled 
+        /// For items chosen to change, all sprite would be shuffled but X will only look like Y 
         /// </summary>
         Default,
         /// <summary>
