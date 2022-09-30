@@ -71,7 +71,8 @@ namespace TRRandomizerCore
             TRRandomizerType.Sunset,
             TRRandomizerType.Text,
             TRRandomizerType.Texture,
-            TRRandomizerType.Unarmed
+            TRRandomizerType.Unarmed,
+            TRRandomizerType.ItemSprite
         };
 
         private static readonly List<TRRandomizerType> _tr3Types = new List<TRRandomizerType>
@@ -82,7 +83,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Braid,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
-            TRRandomizerType.GlitchedSecrets,            
+            TRRandomizerType.GlitchedSecrets,
             TRRandomizerType.GlobeDisplay,
             TRRandomizerType.HardSecrets,
             TRRandomizerType.Item,

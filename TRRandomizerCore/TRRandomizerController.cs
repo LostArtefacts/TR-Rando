@@ -1096,7 +1096,7 @@ namespace TRRandomizerCore
             get => LevelRandomizer.GlobeDisplay;
             set => LevelRandomizer.GlobeDisplay = value;
         }
-        
+
         public bool RandomizeSecrets
         {
             get => LevelRandomizer.RandomizeSecrets;
@@ -1284,6 +1284,27 @@ namespace TRRandomizerCore
         {
             get => LevelRandomizer.RandomizeItemPositions;
             set => LevelRandomizer.RandomizeItemPositions = value;
+        }
+
+        public SpriteRandoMode SpriteRandoMode
+        {
+            get => LevelRandomizer.SpriteRandoMode;
+            set => LevelRandomizer.SpriteRandoMode = value;
+        }
+        public bool RandomizeItemSprites
+        {
+            get => LevelRandomizer.RandomizeItemSprites;
+            set => LevelRandomizer.RandomizeItemSprites = value;
+        }
+        public bool RandomizeKeyItemSprites
+        {
+            get => LevelRandomizer.RandomizeKeyItemSprites;
+            set => LevelRandomizer.RandomizeKeyItemSprites = value;
+        }
+        public bool RandomizeSecretSprites
+        {
+            get => LevelRandomizer.RandomizeSecretSprites;
+            set => LevelRandomizer.RandomizeSecretSprites = value;
         }
 
         public bool DevelopmentMode

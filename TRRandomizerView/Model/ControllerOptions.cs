@@ -83,8 +83,11 @@ namespace TRRandomizerView.Model
         private uint _minStartingHealth, _maxStartingHealth, _medilessLevelCount;
         private bool _useRecommendedCommunitySettings;
 
+        private SpriteRandoMode _spriteRandoMode;
+        private bool _randomizeItemSprites, _randomizeKeyItemSprites, _randomizeSecretSprites;
+
         #region T1M Sepcifics
-        
+
         private bool _enableGameModes;
         public bool EnableGameModes
         {
@@ -820,7 +823,7 @@ namespace TRRandomizerView.Model
         public bool RandomizationPossible
         {
             get => RandomizeLevelSequencing || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeHealth || RandomizeSunsets ||
-                   RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits || 
+                   RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits ||
                    RandomizeText || RandomizeNightMode || RandomizeStartPosition || RandomizeEnvironment;
         }
 
@@ -2152,6 +2155,43 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public SpriteRandoMode SpriteRandoMode
+        {
+            get => _spriteRandoMode;
+            set
+            {
+                _spriteRandoMode = value;
+                FirePropertyChanged();
+            }
+        }
+        public bool RandomizeItemSprites
+        {
+            get => _randomizeItemSprites;
+            set
+            {
+                _randomizeItemSprites = value;
+                FirePropertyChanged();
+            }
+        }
+        public bool RandomizeKeyItemSprites
+        {
+            get => _randomizeKeyItemSprites;
+            set
+            {
+                _randomizeKeyItemSprites = value;
+                FirePropertyChanged();
+            }
+        }
+        public bool RandomizeSecretSprites
+        {
+            get => _randomizeSecretSprites;
+            set
+            {
+                _randomizeSecretSprites = value;
+                FirePropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void FirePropertyChanged([CallerMemberName] string name = null)
@@ -2664,6 +2704,11 @@ namespace TRRandomizerView.Model
             PuristMode = _controller.PuristMode;
             UseRecommendedCommunitySettings = _controller.UseRecommendedCommunitySettings;
 
+            SpriteRandoMode = _controller.SpriteRandoMode;
+            RandomizeItemSprites = _controller.RandomizeItemSprites;
+            RandomizeKeyItemSprites = _controller.RandomizeKeyItemSprites;
+            RandomizeSecretSprites = _controller.RandomizeSecretSprites;
+
             if (IsTR1Main)
             {
                 EnableGameModes = _controller.EnableGameModes;
@@ -3035,6 +3080,11 @@ namespace TRRandomizerView.Model
             _controller.PuristMode = PuristMode;
             _controller.UseRecommendedCommunitySettings = UseRecommendedCommunitySettings;
 
+            _controller.SpriteRandoMode = SpriteRandoMode;
+            _controller.RandomizeItemSprites = RandomizeItemSprites;
+            _controller.RandomizeKeyItemSprites = RandomizeKeyItemSprites;
+            _controller.RandomizeSecretSprites = RandomizeSecretSprites;
+
             if (IsTR1Main)
             {
                 _controller.EnableGameModes = EnableGameModes;
@@ -3151,6 +3201,7 @@ namespace TRRandomizerView.Model
         public bool IsAtlanteanEggBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.AtlanteanEggBehaviour);
         public bool IsHiddenEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.HiddenEnemies);
         public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
+        public bool IsItemSpriteTypeSupported => IsRandomizationSupported(TRRandomizerType.ItemSprite);
 
         private bool IsRandomizationSupported(TRRandomizerType randomizerType)
         {

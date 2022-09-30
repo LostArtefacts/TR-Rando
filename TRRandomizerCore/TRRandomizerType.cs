@@ -47,6 +47,7 @@
         AmbientTracks,
         AtlanteanEggBehaviour,
         GymOutfit,
-        HiddenEnemies
+        HiddenEnemies,
+        ItemSprite
     }
 }

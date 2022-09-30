@@ -65,7 +65,7 @@
                             Value="2" />
                 </Style>
             </Grid.Resources>
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -194,6 +194,119 @@
                 </Grid>
             </StackPanel>
 
+            <!-- (Item) SpriteRandomization -->
+            <StackPanel Grid.Row="3"
+                        Visibility="{Binding HasItemSpriteRandomization, Converter={StaticResource BoolToCollapsedConverter}}">
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Sprite Randomization" />
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Row="0">
+                        <CheckBox IsChecked="{Binding ControllerProxy.RandomizeItemSprites, Mode=TwoWay}"
+                                  VerticalAlignment="Center"
+                                 >
+                            <Label Padding="0"
+                                   Content="Randomize Sprites" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="0">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Activate the sprite randomization (pickups only)"/>
+                    </Border>
+
+                    <Border Grid.Row="1" IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
+                        <CheckBox IsChecked="{Binding ControllerProxy.RandomizeKeyItemSprites, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Include Key Sprites" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Keys items will be included in the randomization with the pickups"/>
+                    </Border>
+
+                    <Border Grid.Row="2" IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
+                        <CheckBox IsChecked="{Binding ControllerProxy.RandomizeSecretSprites, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Include Secrets Sprites" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="2">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Secrets items will be included in the randomization with the pickups"/>
+                    </Border>
+
+                    <Border Grid.Row="3" IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
+                        <RadioButton Content="Default Mode"
+                                     GroupName="spriteRandoMode"
+                                     x:Name="_defaultSpriteRandoMode"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.SpriteRandoMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:SpriteRandoMode.Default}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Row="3" Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="All included sprites will be shuffled ( but inside a level X will always looks like Y )."/>
+                    </Border>
+
+                    <Border Grid.Row="4" IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
+                        <RadioButton Content="OneSpritePerLevel Mode"
+                                     GroupName="spriteRandoMode"
+                                     x:Name="_oneSpritePerLevelSpriteRandoMode"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.SpriteRandoMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:SpriteRandoMode.OneSpritePerLevel}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Row="4"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="All included sprites will look the same, but the used sprite will change each level."/>
+                    </Border>
+
+                    <Border Grid.Row="5" IsEnabled="{Binding ControllerProxy.RandomizeItemSprites, Mode=OneWay}">
+                        <RadioButton Content="OneItemPerGame Mode"
+                                     GroupName="spriteRandoMode"
+                                     x:Name="_oneitemPerGameSpriteRandoMode"
+                                     VerticalAlignment="Center"
+                                     Padding="4,0,0,0"
+                                     IsChecked="{Binding ControllerProxy.SpriteRandoMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static helpers:SpriteRandoMode.OneSpritePerGame}, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Border Grid.Row="5"
+                            Grid.Column="1">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="All included sprites will look the same all game."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
             <!-- Chicken Behaviour -->
             <StackPanel Grid.Row="3"
                         Visibility="{Binding HasBirdMonsterBehaviour, Converter={StaticResource BoolToCollapsedConverter}}">
@@ -248,7 +361,7 @@
                             </TextBlock>
                         </Label>
                     </Border>
-                    
+
                     <Border Grid.Row="2">
                         <RadioButton Content="Docile"
                                      GroupName="birdMonsterBehaviour"
@@ -422,12 +535,12 @@
 
                     <Border>
                         <StackPanel Orientation="Vertical">
-                        <CheckBox IsChecked="{Binding ControllerProxy.UseEnemyExclusions, Mode=TwoWay}"
+                            <CheckBox IsChecked="{Binding ControllerProxy.UseEnemyExclusions, Mode=TwoWay}"
                                   VerticalAlignment="Center">
-                            <Label Padding="0"
+                                <Label Padding="0"
                                    Content="Exclude Certain Enemies" />
-                        </CheckBox>
-                        <Button x:Name="_exclusionsButton"
+                            </CheckBox>
+                            <Button x:Name="_exclusionsButton"
                                 Margin="0,10,0,0"
                                 Style="{StaticResource AltCallToAction}"
                                 Content="Select Enemies"
@@ -442,7 +555,7 @@
                     </Border>
                 </Grid>
             </StackPanel>
-            
+
             <!-- Language -->
             <StackPanel Grid.Row="7"
                         Visibility="{Binding HasLanguage, Converter={StaticResource BoolToCollapsedConverter}}">
@@ -494,7 +607,7 @@
                             <Label Content="Number of levels"
                                    VerticalAlignment="Center"
                                    Padding="0,0,5,0" Margin="0"/>
-                            
+
                             <ctrl:NumericUpDown 
                                 HorizontalAlignment="Left"
                                         VerticalAlignment="Center"  
@@ -567,7 +680,7 @@
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="Lara's braid will be present in the given number of levels."/>
                     </Border>
-                    
+
                     <Border Grid.Column="1"
                             Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource InverseBoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
@@ -588,7 +701,7 @@
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="Add Lara's braid to the assault course level in addition to or separately from above."/>
                     </Border>
-                    
+
                     <Border Grid.Column="1"
                             Grid.Row="1"
                             Visibility="{Binding ControllerProxy.IsTR1, Converter={StaticResource InverseBoolToCollapsedConverter}}">
@@ -965,7 +1078,7 @@
                     </Border>
                 </Grid>
             </StackPanel>
-            
+
             <!-- Level Count -->
             <StackPanel Grid.Row="14"
                         Visibility="{Binding HasGlobeOptions, Converter={StaticResource BoolToCollapsedConverter}}">
@@ -1119,7 +1232,7 @@
                                    Content="Keep ladders visible" />
                         </CheckBox>
                     </Border>
-                    
+
                     <Border Grid.Column="1"
                             Grid.Row="5"
                             Visibility="{Binding ControllerProxy.IsLaddersTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">

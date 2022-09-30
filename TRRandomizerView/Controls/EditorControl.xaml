@@ -52,7 +52,7 @@
             CustomIntDefault="{Binding TotalLevelCount}"
             CustomIntMaxValue="{Binding TotalLevelCount}"
             CustomIntTitle="Number of levels"/>
-        
+
         <ctrl:ManagedSeedAdvancedControl
             Visibility="{Binding IsGlobeDisplayTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
             Grid.Row="0"
@@ -151,7 +151,7 @@
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
-        
+
         <ctrl:ManagedSeedIntControl
             Grid.Row="3"
             Grid.Column="0"
@@ -249,6 +249,7 @@
                                         BoolItemsSource="{Binding Data.ItemBoolItemControls, Source={StaticResource proxy}}"
                                         HasBoolItems="True"
                                         HasItemDifficulty="True"
+                                        HasItemSpriteRandomization="{Binding Data.IsItemSpriteTypeSupported, Source={StaticResource proxy}}"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
@@ -326,7 +327,7 @@
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
             SeedValue="{Binding SecretRewardSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-        
+
         <ctrl:ManagedSeedControl
             Grid.Column="2"
             Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
