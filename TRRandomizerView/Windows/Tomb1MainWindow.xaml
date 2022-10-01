@@ -137,10 +137,10 @@
                             <StackPanel>
                                 <Label Content="Demo delay"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.DemoDelay, Mode=TwoWay}"
-                                                    DecimalPlaces="1"
+                                <ctrl:DecimalUpDown DecimalPlaces="1"
                                                     MinValue="1"
-                                                    MaxValue="1000"/>
+                                                    MaxValue="1000"
+                                                    Value="{Binding ControllerProxy.DemoDelay, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
                         <Border Grid.Column="1"
@@ -155,10 +155,10 @@
                             <StackPanel VerticalAlignment="Top">
                                 <Label Content="Draw distance fade"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.DrawDistanceFade, Mode=TwoWay}"
-                                                    DecimalPlaces="1"
+                                <ctrl:DecimalUpDown DecimalPlaces="1"
                                                     MinValue="1"
-                                                    MaxValue="1000"/>
+                                                    MaxValue="1000"
+                                                    Value="{Binding ControllerProxy.DrawDistanceFade, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
                         <Border Grid.Column="1"
@@ -178,10 +178,10 @@
                             <StackPanel VerticalAlignment="Top">
                                 <Label Content="Draw distance max"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.DrawDistanceMax, Mode=TwoWay}"
-                                                    DecimalPlaces="1"
+                                <ctrl:DecimalUpDown DecimalPlaces="1"
                                                     MinValue="1"
-                                                    MaxValue="1000"/>
+                                                    MaxValue="1000"
+                                                    Value="{Binding ControllerProxy.DrawDistanceMax, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
                         <Border Grid.Column="2"
@@ -252,11 +252,11 @@
                             <StackPanel>
                                 <Label Content="Water color (red) *"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorR, Mode=TwoWay}"
-                                                    ValueChanged="WaterColor_ValueChanged"
+                                <ctrl:DecimalUpDown ValueChanged="WaterColor_ValueChanged"
                                                     DecimalPlaces="2"
                                                     MinValue="0"
-                                                    MaxValue="1"/>
+                                                    MaxValue="1"
+                                                    Value="{Binding ControllerProxy.WaterColorR, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
                         <Border Grid.Row="6"
@@ -276,11 +276,11 @@
                             <StackPanel>
                                 <Label Content="Water color (green) *"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorG, Mode=TwoWay}"
-                                                    ValueChanged="WaterColor_ValueChanged"
+                                <ctrl:DecimalUpDown ValueChanged="WaterColor_ValueChanged"
                                                     DecimalPlaces="2"
                                                     MinValue="0"
-                                                    MaxValue="1"/>
+                                                    MaxValue="1"
+                                                    Value="{Binding ControllerProxy.WaterColorG, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
 
@@ -288,11 +288,11 @@
                             <StackPanel>
                                 <Label Content="Water color (blue) *"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorB, Mode=TwoWay}"
-                                                    ValueChanged="WaterColor_ValueChanged"
+                                <ctrl:DecimalUpDown ValueChanged="WaterColor_ValueChanged"
                                                     DecimalPlaces="2"
                                                     MinValue="0"
-                                                    MaxValue="1"/>
+                                                    MaxValue="1"
+                                                    Value="{Binding ControllerProxy.WaterColorB, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
 
@@ -659,10 +659,10 @@
                             <StackPanel>
                                 <Label Content="Anisotropy filter"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.AnisotropyFilter, Mode=TwoWay}"
-                                                    DecimalPlaces="1"
+                                <ctrl:DecimalUpDown DecimalPlaces="1"
                                                     MinValue="0"
-                                                    MaxValue="100"/>
+                                                    MaxValue="100"
+                                                    Value="{Binding ControllerProxy.AnisotropyFilter, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
                         <Border Grid.Column="1"
