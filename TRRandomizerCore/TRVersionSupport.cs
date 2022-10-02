@@ -21,6 +21,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Outfit,
             TRRandomizerType.RewardRooms,
             TRRandomizerType.Secret,
+            TRRandomizerType.SecretModels,
             TRRandomizerType.SecretReward,
             TRRandomizerType.SFX,
             TRRandomizerType.StartPosition,

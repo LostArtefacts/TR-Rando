@@ -26,7 +26,7 @@ namespace TRRandomizerView.Model
 
         private bool _disableDemos, _autoLaunchGame, _puristMode;
 
-        private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras;
+        private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras, _useRandomSecretModels;
         private TRSecretCountMode _secretCountMode;
         private uint _minSecretCount, _maxSecretCount;
         private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
@@ -1812,6 +1812,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass UseRandomSecretModels
+        {
+            get => _useRandomSecretModels;
+            set
+            {
+                _useRandomSecretModels = value;
+                FirePropertyChanged();
+            }
+        }
+
         public TRSecretCountMode SecretCountMode
         {
             get => _secretCountMode;
@@ -2241,6 +2251,12 @@ namespace TRRandomizerView.Model
                 Description = "When picking up secrets, show a hint where the reward room for the level is located."
             };
             BindingOperations.SetBinding(UseRewardRoomCameras, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
+            UseRandomSecretModels = new BoolItemControlClass()
+            {
+                Title = "Use random secret types",
+                Description = "If enabled, secret types will be randomized across levels; otherwise, pre-defined types will be allocated to each level."
+            };
+            BindingOperations.SetBinding(UseRandomSecretModels, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
 
             // Items
             Binding randomizeItemsBinding = new Binding(nameof(RandomizeItems)) { Source = this };
@@ -2481,7 +2497,7 @@ namespace TRRandomizerView.Model
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
             {
-                _isHardSecrets, _allowGlitched, _useRewardRoomCameras
+                _isHardSecrets, _allowGlitched, _useRewardRoomCameras, _useRandomSecretModels
             };
             ItemBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2537,6 +2553,7 @@ namespace TRRandomizerView.Model
             _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = IsSFXSupported;
 
             _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
+            _useRandomSecretModels.IsAvailable = IsSecretModelsTypeSupported;
 
             _swapEnemyAppearance.IsAvailable = IsOutfitDaggerSupported;
 
@@ -2651,6 +2668,7 @@ namespace TRRandomizerView.Model
             IsHardSecrets.Value = _controller.HardSecrets;
             IsGlitchedSecrets.Value = _controller.GlitchedSecrets;
             UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
+            UseRandomSecretModels.Value = _controller.UseRandomSecretModels;
             SecretCountMode = _controller.SecretCountMode;
             MaxSecretCount = _controller.MaxSecretCount;
             MinSecretCount = _controller.MinSecretCount;
@@ -3028,6 +3046,7 @@ namespace TRRandomizerView.Model
             _controller.HardSecrets = IsHardSecrets.Value;
             _controller.GlitchedSecrets = IsGlitchedSecrets.Value;
             _controller.UseRewardRoomCameras = UseRewardRoomCameras.Value;
+            _controller.UseRandomSecretModels = UseRandomSecretModels.Value;
             _controller.SecretCountMode = SecretCountMode;
             _controller.MinSecretCount = MinSecretCount;
             _controller.MaxSecretCount = MaxSecretCount;
@@ -3172,6 +3191,7 @@ namespace TRRandomizerView.Model
         public bool IsGlitchedSecretsSupported => IsRandomizationSupported(TRRandomizerType.GlitchedSecrets);
         public bool IsHardSecretsSupported => IsRandomizationSupported(TRRandomizerType.HardSecrets);
         public bool IsRewardRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.RewardRooms);
+        public bool IsSecretModelsTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretModels);
         public bool IsSecretCountTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretCount);
         public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
         public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);

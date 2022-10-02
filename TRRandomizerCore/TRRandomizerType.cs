@@ -48,6 +48,7 @@
         AtlanteanEggBehaviour,
         GymOutfit,
         HiddenEnemies,
-        ItemSprite
+        ItemSprite,
+        SecretModels
     }
 }

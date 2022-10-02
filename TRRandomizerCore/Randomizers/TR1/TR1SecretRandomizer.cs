@@ -940,6 +940,7 @@ namespace TRRandomizerCore.Randomizers
 
             protected override void StartImpl()
             {
+                List<TREntities> availableTypes = _secretModels.Keys.ToList();
                 foreach (TR1CombinedLevel level in _importAllocations.Keys)
                 {
                     if (level.IsAssault)
@@ -961,7 +962,10 @@ namespace TRRandomizerCore.Randomizers
                         }
                     }
 
-                    allocation.ImportModels.Add(TR1EntityUtilities.GetBestLevelSecretModel(level.Name));
+                    TREntities modelType = _outer.Settings.UseRandomSecretModels
+                        ? availableTypes[_outer._generator.Next(0, availableTypes.Count)]
+                        : TR1EntityUtilities.GetBestLevelSecretModel(level.Name);
+                    allocation.ImportModels.Add(modelType);
                 }
             }
 

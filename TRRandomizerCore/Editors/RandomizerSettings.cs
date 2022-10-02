@@ -72,6 +72,7 @@ namespace TRRandomizerCore.Editors
         public bool HideEnemiesUntilTriggered { get; set; }
         public bool GlitchedSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
+        public bool UseRandomSecretModels { get; set; }
         public TRSecretCountMode SecretCountMode { get; set; }
         public uint MinSecretCount { get; set; }
         public uint MaxSecretCount { get; set; }
@@ -158,6 +159,7 @@ namespace TRRandomizerCore.Editors
             HardSecrets = config.GetBool(nameof(HardSecrets));
             GlitchedSecrets = config.GetBool(nameof(GlitchedSecrets));
             UseRewardRoomCameras = config.GetBool(nameof(UseRewardRoomCameras), true);
+            UseRandomSecretModels = config.GetBool(nameof(UseRandomSecretModels));
             SecretCountMode = (TRSecretCountMode)config.GetEnum(nameof(SecretCountMode), typeof(TRSecretCountMode), TRSecretCountMode.Default);
             MinSecretCount = config.GetUInt(nameof(MinSecretCount), 1);
             MaxSecretCount = config.GetUInt(nameof(MaxSecretCount), 5);
@@ -288,6 +290,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(HardSecrets)] = HardSecrets;
             config[nameof(GlitchedSecrets)] = GlitchedSecrets;
             config[nameof(UseRewardRoomCameras)] = UseRewardRoomCameras;
+            config[nameof(UseRandomSecretModels)] = UseRandomSecretModels;
             config[nameof(SecretCountMode)] = SecretCountMode;
             config[nameof(MinSecretCount)] = MinSecretCount;
             config[nameof(MaxSecretCount)] = MaxSecretCount;

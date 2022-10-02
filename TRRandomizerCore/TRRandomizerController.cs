@@ -1244,6 +1244,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.UseRewardRoomCameras = value;
         }
 
+        public bool UseRandomSecretModels
+        {
+            get => LevelRandomizer.UseRandomSecretModels;
+            set => LevelRandomizer.UseRandomSecretModels = value;
+        }
+
         public TRSecretCountMode SecretCountMode
         {
             get => LevelRandomizer.SecretCountMode;
