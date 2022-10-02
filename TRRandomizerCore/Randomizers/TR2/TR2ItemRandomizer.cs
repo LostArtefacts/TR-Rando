@@ -28,6 +28,8 @@ namespace TRRandomizerCore.Randomizers
         private int _unarmedLevelPistolIndex;
         private readonly Dictionary<string, List<Location>> _pistolLocations;
 
+        private ItemSpriteRandomizer<TR2Entities> _spriteRandomizer;
+
         public TR2ItemRandomizer()
         {
             _pistolLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\unarmed_locations.json"));
@@ -59,6 +61,9 @@ namespace TRRandomizerCore.Randomizers
 
                 RandomizeSeraph();
 
+                if (Settings.RandomizeItemSprites)
+                    RandomizeSprites();
+
                 //Write back the level file
                 SaveLevelInstance();
 
@@ -67,6 +72,42 @@ namespace TRRandomizerCore.Randomizers
                     break;
                 }
             }
+        }
+
+
+        private void RandomizeSprites()
+        {
+            // If the _spriteRandomizer doesn't exists it gets fed all the settings of the rando and Lists of the game once. 
+            if (_spriteRandomizer == null)
+            {
+
+                _spriteRandomizer = new ItemSpriteRandomizer<TR2Entities>
+                {
+                    StandardItemTypes = TR2EntityUtilities.GetListOfGunTypes().Concat(TR2EntityUtilities.GetListOfAmmoTypes()).ToList(),
+                    KeyItemTypes = TR2EntityUtilities.GetListOfKeyItemTypes(),
+                    SecretItemTypes = TR2EntityUtilities.GetListOfSecretTypes(),
+                    RandomizeKeyItemSprites = Settings.RandomizeKeyItemSprites,
+                    RandomizeSecretSprites = Settings.RandomizeSecretSprites,
+                    Mode = Settings.SpriteRandoMode
+                };
+#if DEBUG
+                _spriteRandomizer.TextureChanged += (object sender, SpriteEventArgs<TR2Entities> e) =>
+                {
+                    System.Diagnostics.Debug.WriteLine(string.Format("{0}: {1} => {2}", _levelInstance.Name, e.OldSprite, e.NewSprite));
+                };
+#endif
+            }
+
+            // The _spriteRandomizer exists so it gets all the SpriteSquence and SpriteTexture from the level
+            // We cannot pass the level itself as ItemSpriteRandomizer is a shared class 
+            _spriteRandomizer.Sequences = _levelInstance.Data.SpriteSequences.ToList();
+            _spriteRandomizer.Textures = _levelInstance.Data.SpriteTextures.ToList();
+
+            //Calling the actual randomization
+            _spriteRandomizer.Randomize(_generator);
+
+            // Only the SpriteTexture needs to be rewritten 
+            _levelInstance.Data.SpriteTextures = _spriteRandomizer.Textures.ToArray();
         }
 
         /// <summary>
@@ -85,6 +126,8 @@ namespace TRRandomizerCore.Randomizers
             if (_levelInstance.Is(TR2LevelNames.MONASTERY))
             {
                 TR2ScriptedLevel theDeck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
+
+                Location loc = null;
 
                 // if The deck is included in levels I check if its after monastery 
                 if (theDeck != null)

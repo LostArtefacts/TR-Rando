@@ -129,6 +129,24 @@ namespace TRRandomizerCore.Editors
 
         public bool UseRecommendedCommunitySettings { get; set; }
 
+
+        /// <summary>
+        /// Randomisation mode used in ItemSpriteRandomizer
+        /// </summary>
+        public SpriteRandoMode SpriteRandoMode { get; set; }
+        /// <summary>
+        /// Activation of ItemSpriteRandomizer
+        /// </summary>
+        public bool RandomizeItemSprites { get; set; }
+        /// <summary>
+        /// Includes key items in ItemSpriteRandomizer
+        /// </summary>
+        public bool RandomizeKeyItemSprites { get; set; }
+        /// <summary>
+        /// Includes secret items in ItemSpriteRandomizer
+        /// </summary>
+        public bool RandomizeSecretSprites { get; set; }
+
         public void ApplyConfig(Config config)
         {
             int defaultSeed = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
@@ -238,7 +256,7 @@ namespace TRRandomizerCore.Editors
 
             RandomizeSecretRewardsPhysical = config.GetBool(nameof(RandomizeSecretRewardsPhysical));
             SecretRewardsPhysicalSeed = config.GetInt(nameof(SecretRewardsPhysicalSeed), defaultSeed);
-            
+
             RandomizeVfx = config.GetBool(nameof(RandomizeVfx));
             VfxFilterColor = Color.FromArgb(config.GetInt(nameof(VfxFilterColor)));
             VfxVivid = config.GetBool(nameof(VfxVivid));
@@ -253,6 +271,12 @@ namespace TRRandomizerCore.Editors
             MaxStartingHealth = config.GetUInt(nameof(MaxStartingHealth), 1000);
 
             UseRecommendedCommunitySettings = config.GetBool(nameof(UseRecommendedCommunitySettings), true);
+
+            SpriteRandoMode = (SpriteRandoMode)config.GetEnum(nameof(SpriteRandoMode), typeof(SpriteRandoMode), SpriteRandoMode.Default);
+            RandomizeItemSprites = config.GetBool(nameof(RandomizeItemSprites));
+            RandomizeKeyItemSprites = config.GetBool(nameof(RandomizeKeyItemSprites));
+            RandomizeSecretSprites = config.GetBool(nameof(RandomizeSecretSprites));
+
         }
 
         public void StoreConfig(Config config)
@@ -373,6 +397,11 @@ namespace TRRandomizerCore.Editors
             config[nameof(MaxStartingHealth)] = MaxStartingHealth;
 
             config[nameof(UseRecommendedCommunitySettings)] = UseRecommendedCommunitySettings;
+
+            config[nameof(SpriteRandoMode)] = SpriteRandoMode;
+            config[nameof(RandomizeItemSprites)] = RandomizeItemSprites;
+            config[nameof(RandomizeKeyItemSprites)] = RandomizeKeyItemSprites;
+            config[nameof(RandomizeSecretSprites)] = RandomizeSecretSprites;
         }
 
         public int GetSaveTarget(int numLevels)

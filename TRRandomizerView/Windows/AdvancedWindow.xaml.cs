@@ -38,6 +38,11 @@ namespace TRRandomizerView.Windows
             nameof(HasItemDifficulty), typeof(bool), typeof(AdvancedWindow)
         );
 
+        public static readonly DependencyProperty HasItemSpriteRandomizationProperty = DependencyProperty.Register
+        (
+            nameof(HasItemSpriteRandomization), typeof(bool), typeof(AdvancedWindow)
+        );
+
         public static readonly DependencyProperty HasDifficultyProperty = DependencyProperty.Register
         (
             nameof(HasDifficulty), typeof(bool), typeof(AdvancedWindow)
@@ -100,7 +105,7 @@ namespace TRRandomizerView.Windows
         public static readonly DependencyProperty HasSecretCountModeProperty = DependencyProperty.Register
         (
             nameof(HasSecretCountMode), typeof(bool), typeof(AdvancedWindow)
-        ); 
+        );
 
         public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
         (
@@ -129,6 +134,12 @@ namespace TRRandomizerView.Windows
         {
             get => (bool)GetValue(HasItemDifficultyProperty);
             set => SetValue(HasItemDifficultyProperty, value);
+        }
+
+        public bool HasItemSpriteRandomization
+        {
+            get => (bool)GetValue(HasItemSpriteRandomizationProperty);
+            set => SetValue(HasItemSpriteRandomizationProperty, value);
         }
 
         public bool HasDifficulty
@@ -306,6 +317,21 @@ namespace TRRandomizerView.Windows
                         break;
                     case TRSecretCountMode.Customized:
                         _customizedSecretCountButton.IsChecked = true;
+                        break;
+                }
+            }
+            if (HasItemSpriteRandomization)
+            {
+                switch (ControllerProxy.SpriteRandoMode)
+                {
+                    case SpriteRandoMode.Default:
+                        _defaultSpriteRandoMode.IsChecked = true;
+                        break;
+                    case SpriteRandoMode.OneSpritePerLevel:
+                        _oneSpritePerLevelSpriteRandoMode.IsChecked = true;
+                        break;
+                    case SpriteRandoMode.OneSpritePerGame:
+                        _oneitemPerGameSpriteRandoMode.IsChecked = true;
                         break;
                 }
             }

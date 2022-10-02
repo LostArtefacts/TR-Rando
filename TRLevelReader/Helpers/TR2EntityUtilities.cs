@@ -521,6 +521,16 @@ namespace TRLevelReader.Helpers
             };
         }
 
+        public static List<TR2Entities> GetListOfSecretTypes()
+        {
+            return new List<TR2Entities>
+            {
+                TR2Entities.StoneSecret_S_P,
+                TR2Entities.JadeSecret_S_P,
+                TR2Entities.GoldSecret_S_P
+            };
+        }
+
         public static bool IsKeyItemType(TR2Entities entity)
         {
             return (entity == TR2Entities.Key1_S_P ||
@@ -733,7 +743,7 @@ namespace TRLevelReader.Helpers
                 },
 
                 { "all",
-                    new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.ShotgunGoon, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Rat, 
+                    new List<TR2Entities>{ TR2Entities.Doberman, TR2Entities.MaskedGoon1, TR2Entities.ShotgunGoon, TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Rat,
                     TR2Entities.StickWieldingGoon1, TR2Entities.Gunman2, TR2Entities.Gunman1, TR2Entities.FlamethrowerGoon, TR2Entities.StickWieldingGoon2,
                     TR2Entities.Mercenary2, TR2Entities.Mercenary3, TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.Mercenary1, TR2Entities.Knifethrower
                     }
