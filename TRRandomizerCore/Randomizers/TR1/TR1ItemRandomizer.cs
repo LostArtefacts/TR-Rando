@@ -66,6 +66,7 @@ namespace TRRandomizerCore.Randomizers
         private TRSecretMapping<TREntity> _secretMapping;
 
         private List<Location> _locations;
+        private ItemSpriteRandomizer<TREntities> _spriteRandomizer;
 
         public ItemFactory ItemFactory { get; set; }
 
@@ -101,6 +102,9 @@ namespace TRRandomizerCore.Randomizers
 
                 if (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
                     EnforceOneLimit(_levelInstance);
+
+                if (Settings.RandomizeItemSprites)
+                    RandomizeSprites();
 
                 SaveLevelInstance();
 
@@ -388,6 +392,65 @@ namespace TRRandomizerCore.Randomizers
                     entity.Room = (short)location.Room;
                 }
             }
+        }
+
+        private void RandomizeSprites()
+        {
+            if (ScriptEditor.Edition.IsCommunityPatch
+                && !Settings.UseRecommendedCommunitySettings
+                && (ScriptEditor.Script as TR1Script).Enable3dPickups)
+            {
+                // With 3D pickups enabled, sprite randomization is meaningless
+                return;
+            }
+
+            if (_spriteRandomizer == null)
+            {
+                _spriteRandomizer = new ItemSpriteRandomizer<TREntities>
+                {
+                    StandardItemTypes = TR1EntityUtilities.GetStandardPickupTypes(),
+                    RandomizeKeyItemSprites = Settings.RandomizeKeyItemSprites,
+                    RandomizeSecretSprites = Settings.RandomizeSecretSprites,
+                    Mode = Settings.SpriteRandoMode
+                };
+
+                // Pistol ammo sprite is not available
+                _spriteRandomizer.StandardItemTypes.Remove(TREntities.PistolAmmo_S_P);
+#if DEBUG
+                _spriteRandomizer.TextureChanged += (object sender, SpriteEventArgs<TREntities> e) =>
+                {
+                    System.Diagnostics.Debug.WriteLine(string.Format("{0}: {1} => {2}", _levelInstance.Name, e.OldSprite, e.NewSprite));
+                };
+#endif
+            }
+
+            // For key items, some may be used as secrets so look for entity instances of each to determine what's what
+            _spriteRandomizer.SecretItemTypes = new List<TREntities>();
+            _spriteRandomizer.KeyItemTypes = new List<TREntities>();
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(_levelInstance.Data);
+            foreach (TREntities type in TR1EntityUtilities.GetListOfKeyItemTypes())
+            {
+                int typeInstanceIndex = Array.FindIndex(_levelInstance.Data.Entities, e => e.TypeID == (short)type);
+                if (typeInstanceIndex != -1)
+                {
+                    if (IsSecretItem(_levelInstance.Data.Entities[typeInstanceIndex], typeInstanceIndex, _levelInstance.Data, floorData))
+                    {
+                        _spriteRandomizer.SecretItemTypes.Add(type);
+                    }
+                    else
+                    {
+                        _spriteRandomizer.KeyItemTypes.Add(type);
+                    }
+                }
+            }
+
+            _spriteRandomizer.Sequences = _levelInstance.Data.SpriteSequences.ToList();
+            _spriteRandomizer.Textures = _levelInstance.Data.SpriteTextures.ToList();
+
+            _spriteRandomizer.Randomize(_generator);
+
+            _levelInstance.Data.SpriteTextures = _spriteRandomizer.Textures.ToArray();
         }
 
         private bool IsSecretItem(TREntity entity, int entityIndex, TRLevel level, FDControl floorData)

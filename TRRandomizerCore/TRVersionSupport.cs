@@ -16,6 +16,7 @@ namespace TRRandomizerCore
             TRRandomizerType.HardSecrets,
             TRRandomizerType.HiddenEnemies,
             TRRandomizerType.Item,
+            TRRandomizerType.ItemSprite,
             TRRandomizerType.KeyItems,
             TRRandomizerType.NightMode,
             TRRandomizerType.Outfit,
