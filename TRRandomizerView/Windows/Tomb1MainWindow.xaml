@@ -59,7 +59,7 @@
                 <ListBoxItem>Gameplay</ListBoxItem>
                 <ListBoxItem>Guns/Items</ListBoxItem>
                 <ListBoxItem>Lara</ListBoxItem>
-                <ListBoxItem>Music</ListBoxItem>
+                <ListBoxItem>Sound</ListBoxItem>
                 <ListBoxItem>Statistics</ListBoxItem>
                 <ListBoxItem>UI</ListBoxItem>
             </ListBox>
@@ -1067,9 +1067,10 @@
                         </Border>
                     </Grid>
                 
-                    <!-- 6. Music -->
+                    <!-- 6. Sound -->
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -1111,13 +1112,29 @@
 
                         <Border Grid.Row="2"
                                 Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnablePitchedSounds, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable pitched sounds" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Sound effects are randomly, slightly pitched to vary the game sounds."/>
+                            </TextBlock>
+                        </Border>
+                        
+                        <Border Grid.Row="3"
+                                Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.FixSecretsKillingMusic, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
                                        Content="Fix secrets killing music" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="2"
+                        <Border Grid.Row="3"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">

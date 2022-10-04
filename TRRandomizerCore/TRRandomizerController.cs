@@ -386,7 +386,7 @@ namespace TRRandomizerCore
         }
         #endregion
 
-        #region T1M Sepcifics
+        #region T1M Specifics
         public bool EnableGameModes
         {
             get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableGameModes;
@@ -1084,6 +1084,18 @@ namespace TRRandomizerCore
                 if (ScriptEditor is TR1ScriptEditor tr1Editor)
                 {
                     tr1Editor.EnableEnhancedSaves = value;
+                }
+            }
+        }
+
+        public bool EnablePitchedSounds
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnablePitchedSounds;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnablePitchedSounds = value;
                 }
             }
         }

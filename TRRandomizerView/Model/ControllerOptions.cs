@@ -753,6 +753,17 @@ namespace TRRandomizerView.Model
             }
         }
 
+        private bool _enablePitchedSounds;
+        public bool EnablePitchedSounds
+        {
+            get => _enablePitchedSounds;
+            set
+            {
+                _enablePitchedSounds = value;
+                FirePropertyChanged();
+            }
+        }
+
         #endregion
 
         public int TotalLevelCount
@@ -2787,6 +2798,7 @@ namespace TRRandomizerView.Model
                 MaximumSaveSlots = _controller.MaximumSaveSlots;
                 RevertToPistols = _controller.RevertToPistols;
                 EnableEnhancedSaves = _controller.EnableEnhancedSaves;
+                EnablePitchedSounds = _controller.EnablePitchedSounds;
             }
 
             FireSupportPropertiesChanged();
@@ -3164,6 +3176,7 @@ namespace TRRandomizerView.Model
                 _controller.MaximumSaveSlots = MaximumSaveSlots;
                 _controller.RevertToPistols = RevertToPistols;
                 _controller.EnableEnhancedSaves = EnableEnhancedSaves;
+                _controller.EnablePitchedSounds = EnablePitchedSounds;
             }
         }
 
