@@ -248,6 +248,8 @@ namespace TRRandomizerCore.Randomizers
                         ConvertToMauledOutfit(level);
                     }
 
+                    AmendBackpack(level);
+
                     _outer.SaveLevel(level);
 
                     if (!_outer.TriggerProgress())
@@ -332,6 +334,38 @@ namespace TRRandomizerCore.Randomizers
                 if (level.HasCutScene && !level.CutSceneLevel.Is(TRLevelNames.MINES_CUT))
                 {
                     HideEntities(level.CutSceneLevel, entities);
+                }
+            }
+
+            private void AmendBackpack(TR1CombinedLevel level)
+            {
+                bool trexPresent = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.TRex) != null;
+                if (!_outer.IsBraidLevel(level.Script)
+                    || _outer.IsInvisibleLevel(level.Script)
+                    || (_outer.IsGymLevel(level.Script) && !trexPresent))
+                {
+                    return;
+                }
+
+                List<TREntities> laraEntities = new List<TREntities>
+                {
+                    TREntities.Lara,
+                    TREntities.LaraShotgunAnim_H
+                };
+
+                if (trexPresent)
+                {
+                    laraEntities.Add(TREntities.LaraMiscAnim_H);
+                }
+
+                // Make the backpack shallower so the braid doesn't smash into it
+                foreach (TREntities ent in laraEntities)
+                {
+                    TRMesh mesh = TRMeshUtilities.GetModelMeshes(level.Data, ent)[7];
+                    for (int i = 26; i < 30; i++)
+                    {
+                        mesh.Vertices[i].Z += 12;
+                    }
                 }
             }
 
