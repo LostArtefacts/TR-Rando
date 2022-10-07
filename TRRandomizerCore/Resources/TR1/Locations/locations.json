@@ -2542,7 +2542,15 @@
       "X": 40925,
       "Y": -15104,
       "Z": 55822,
-      "Room": 55
+      "Room": 55,
+      "LevelState": "NotMirrored"
+    },
+    {
+      "X": 39971,
+      "Y": -15104,
+      "Z": 55822,
+      "Room": 55,
+      "LevelState": "Mirrored"
     },
     {
       "X": 65517,
