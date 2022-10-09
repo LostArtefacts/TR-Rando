@@ -76,6 +76,11 @@ namespace TRRandomizerCore.Editors
                 target += numLevels;
             }
 
+            if (Settings.RandomizeSecretRewardsPhysical)
+            {
+                target += numLevels;
+            }
+
             if (Settings.RandomizeNightMode)
             {
                 target += numLevels;
@@ -195,6 +200,19 @@ namespace TRRandomizerCore.Editors
                         Settings = Settings,
                         ItemFactory = itemFactory
                     }.Randomize(Settings.ItemSeed);
+                }
+
+                if (!monitor.IsCancelled && Settings.RandomizeSecretRewardsPhysical)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing secret rewards");
+                    new TR3SecretRewardRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings
+                    }.Randomize(Settings.SecretRewardsPhysicalSeed);
                 }
 
                 if (!monitor.IsCancelled && Settings.RandomizeEnemies)
