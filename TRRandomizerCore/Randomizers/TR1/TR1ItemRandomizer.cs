@@ -240,32 +240,30 @@ namespace TRRandomizerCore.Randomizers
                 return;
             }
 
-            List<TREntities> oneOfEachType = new List<TREntities>();
-            List<TREntity> allEntities = _levelInstance.Data.Entities.ToList();
-
-            // look for extra utility/ammo items and hide them
-            for (int i = 0; i < allEntities.Count; i++)
+            ISet<TREntities> oneOfEachType = new HashSet<TREntities>();
+            if (_unarmedLevelPistols != null)
             {
-                if (_secretMapping.RewardEntities.Contains(i))
+                // These will be excluded, but track their type before looking at other items.
+                oneOfEachType.Add((TREntities)_unarmedLevelPistols.TypeID);
+            }
+
+            // Look for extra utility/ammo items and hide them
+            for (int i = 0; i < level.Data.NumEntities; i++)
+            {
+                TREntity ent = level.Data.Entities[i];
+                if (_secretMapping.RewardEntities.Contains(i) || ent == _unarmedLevelPistols)
                 {
-                    // Rewards excluded
+                    // Rewards and unarmed level weapons excluded
                     continue;
                 }
-
-                TREntity ent = allEntities[i];
+                
                 TREntities eType = (TREntities)ent.TypeID;
-
-                if (TR1EntityUtilities.IsStandardPickupType(eType) ||
-                    TR1EntityUtilities.IsCrystalPickup(eType))
+                if (TR1EntityUtilities.IsStandardPickupType(eType) || TR1EntityUtilities.IsCrystalPickup(eType))
                 {
-                    if (oneOfEachType.Contains(eType))
+                    if (!oneOfEachType.Add(eType))
                     {
                         ItemUtilities.HideEntity(ent);
                         ItemFactory.FreeItem(level.Name, i);
-                    }
-                    else
-                    {
-                        oneOfEachType.Add((TREntities)ent.TypeID);
                     }
                 }
             }
