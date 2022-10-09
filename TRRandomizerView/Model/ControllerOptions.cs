@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using TRGE.Core;
@@ -17,6 +16,8 @@ namespace TRRandomizerView.Model
     public class ControllerOptions : INotifyPropertyChanged
     {
         public int MaxSeedValue => 1000000000;
+
+        private readonly OptionGenerator _optionRandomizer;
 
         private readonly ManagedSeed _secretRewardsControl;
         private readonly ManagedSeedNumeric _levelSequencingControl, _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl, _nightLevelsControl;
@@ -2224,6 +2225,8 @@ namespace TRRandomizerView.Model
 
         public ControllerOptions()
         {
+            _optionRandomizer = new OptionGenerator(this);
+
             _levelSequencingControl = new ManagedSeedNumeric();
             _unarmedLevelsControl = new ManagedSeedNumeric();
             _ammolessLevelsControl = new ManagedSeedNumeric();
@@ -2826,139 +2829,17 @@ namespace TRRandomizerView.Model
 
         public void RandomizeActiveSeeds()
         {
-            Random rng = new Random();
-            if (RandomizeLevelSequencing)
-            {
-                LevelSequencingSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeUnarmedLevels)
-            {
-                UnarmedLevelsSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeAmmolessLevels)
-            {
-                AmmolessLevelsSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeHealth)
-            {
-                HealthSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeSecretRewards)
-            {
-                SecretRewardSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeSunsets)
-            {
-                SunsetsSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeNightMode)
-            {
-                NightModeSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeAudioTracks)
-            {
-                AudioTracksSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeItems)
-            {
-                ItemSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeEnemies)
-            {
-                EnemySeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeSecrets)
-            {
-                SecretSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeTextures)
-            {
-                TextureSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeOutfits)
-            {
-                OutfitSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeText)
-            {
-                TextSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeStartPosition)
-            {
-                StartPositionSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeEnvironment)
-            {
-                EnvironmentSeed = rng.Next(1, MaxSeedValue);
-            }
+            _optionRandomizer.RandomizeActiveSeeds();
+        }
+
+        public void RandomizeActiveOptions()
+        {
+            _optionRandomizer.RandomizeActiveOptions();
         }
 
         public void SetGlobalSeed(int seed)
         {
-            if (RandomizeLevelSequencing)
-            {
-                LevelSequencingSeed = seed;
-            }
-            if (RandomizeUnarmedLevels)
-            {
-                UnarmedLevelsSeed = seed;
-            }
-            if (RandomizeAmmolessLevels)
-            {
-                AmmolessLevelsSeed = seed;
-            }
-            if (RandomizeHealth)
-            {
-                HealthSeed = seed;
-            }
-            if (RandomizeSecretRewards)
-            {
-                SecretRewardSeed = seed;
-            }
-            if (RandomizeSunsets)
-            {
-                SunsetsSeed = seed;
-            }
-            if (RandomizeNightMode)
-            {
-                NightModeSeed = seed;
-            }
-            if (RandomizeAudioTracks)
-            {
-                AudioTracksSeed = seed;
-            }
-            if (RandomizeItems)
-            {
-                ItemSeed = seed;
-            }
-            if (RandomizeEnemies)
-            {
-                EnemySeed = seed;
-            }
-            if (RandomizeSecrets)
-            {
-                SecretSeed = seed;
-            }
-            if (RandomizeTextures)
-            {
-                TextureSeed = seed;
-            }
-            if (RandomizeOutfits)
-            {
-                OutfitSeed = seed;
-            }
-            if (RandomizeText)
-            {
-                TextSeed = seed;
-            }
-            if (RandomizeStartPosition)
-            {
-                StartPositionSeed = seed;
-            }
-            if (RandomizeEnvironment)
-            {
-                EnvironmentSeed = seed;
-            }
+            _optionRandomizer.SetSeeds(seed);
         }
 
         public void Save()

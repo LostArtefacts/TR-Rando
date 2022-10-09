@@ -109,6 +109,7 @@
     <Compile Include="Model\ManagedSeedBool.cs" />
     <Compile Include="Model\ManagedSeed.cs" />
     <Compile Include="Model\ControllerOptions.cs" />
+    <Compile Include="Model\OptionGenerator.cs" />
     <Compile Include="Updates\Update.cs" />
     <Compile Include="Updates\UpdateChecker.cs" />
     <Compile Include="Updates\UpdateEventArgs.cs" />
