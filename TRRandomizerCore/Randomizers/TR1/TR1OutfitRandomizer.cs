@@ -107,7 +107,10 @@ namespace TRRandomizerCore.Randomizers
                 // Gym outfits are only available in some levels and we can only use it
                 // if the T-Rex isn't present because that overwrites the MiscAnim's textures.
                 _gymLevels = Levels.FindAll(l => _permittedGymLevels.Contains(l.LevelFileBaseName.ToUpper()));
-                _gymLevels = _gymLevels.RandomSelection(_generator, _generator.Next(1, _gymLevels.Count + 1));
+                if (_gymLevels.Count > 0)
+                {
+                    _gymLevels = _gymLevels.RandomSelection(_generator, _generator.Next(1, _gymLevels.Count + 1));
+                }
 
                 // Cache Lara's barefoot SFX from the original Gym.
                 TRLevel gym = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TRLevelNames.ASSAULT));
