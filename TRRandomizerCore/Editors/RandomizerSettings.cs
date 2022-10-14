@@ -194,7 +194,7 @@ namespace TRRandomizerCore.Editors
             RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
             TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
             PersistTextureVariants = config.GetBool(nameof(PersistTextureVariants));
-            RandomizeWaterColour = config.GetBool(nameof(RandomizeWaterColour));
+            RandomizeWaterColour = config.GetBool(nameof(RandomizeWaterColour), true);
             RetainMainLevelTextures = config.GetBool(nameof(RetainMainLevelTextures));
             RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures), true);
             RetainSecretSpriteTextures = config.GetBool(nameof(RetainSecretSpriteTextures), true);
