@@ -382,7 +382,7 @@ namespace TRRandomizerCore.Randomizers
                     {
                         location = pool[_generator.Next(0, pool.Count)];
                     }
-                    while (LocationContainsSecret(location, level.Data, floorData));
+                    while (location.ContainsSecret(level.Data, floorData));
 
                     entity.X = location.X;
                     entity.Y = location.Y;
@@ -459,19 +459,6 @@ namespace TRRandomizerCore.Randomizers
                 return floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
                     && trigger.TrigType == FDTrigType.Pickup
                     && trigger.TrigActionList[0].Parameter == entityIndex
-                    && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null;
-            }
-
-            return false;
-        }
-
-        private bool LocationContainsSecret(Location location, TRLevel level, FDControl floorData)
-        {
-            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, floorData);
-            if (sector.FDIndex != 0)
-            {
-                return floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
-                    && trigger.TrigType == FDTrigType.Pickup
                     && trigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.SecretFound) != null;
             }
 
