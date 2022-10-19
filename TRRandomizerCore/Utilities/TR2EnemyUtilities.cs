@@ -402,14 +402,15 @@ namespace TRRandomizerCore.Utilities
             [EnemyDifficulty.Easy] = new List<TR2Entities>
             {
                 TR2Entities.Crow, TR2Entities.Eagle, TR2Entities.ScubaDiver,
-                TR2Entities.TRex, TR2Entities.YellowMorayEel
+                TR2Entities.YellowMorayEel
             },
             [EnemyDifficulty.Medium] = new List<TR2Entities>
             {
                 TR2Entities.Doberman, TR2Entities.GiantSpider, TR2Entities.Gunman1,
                 TR2Entities.Gunman2, TR2Entities.Knifethrower, TR2Entities.MaskedGoon1,
                 TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Shark,
-                TR2Entities.StickWieldingGoon1, TR2Entities.StickWieldingGoon2, TR2Entities.TigerOrSnowLeopard
+                TR2Entities.StickWieldingGoon1, TR2Entities.StickWieldingGoon2, TR2Entities.TigerOrSnowLeopard,
+                TR2Entities.TRex
             },
             [EnemyDifficulty.Hard] = new List<TR2Entities>
             {
