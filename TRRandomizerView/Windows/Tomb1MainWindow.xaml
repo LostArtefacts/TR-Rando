@@ -201,7 +201,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableEnhancedSaves, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Enable enhanced saves **" />
+                                       Content="Enable enhanced saves" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Column="3"
@@ -674,33 +674,33 @@
 
                         <Border Grid.Row="1"
                                 Style="{StaticResource SeparatorBorder}">
-                            <CheckBox IsChecked="{Binding ControllerProxy.DisableCine, Mode=TwoWay}"
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableCine, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Disable cinematics" />
+                                       Content="Enable cinematics" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="1"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
-                                <Run Text="Disables ingame cinematics."/>
+                                <Run Text="Enables ingame cinematics."/>
                             </TextBlock>
                         </Border>
 
                         <Border Grid.Row="2"
                                 Style="{StaticResource SeparatorBorder}">
-                            <CheckBox IsChecked="{Binding ControllerProxy.DisableFmv, Mode=TwoWay}"
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableFmv, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Disable FMVs" />
+                                       Content="Enable FMVs" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="2"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
-                                <Run Text="Disables FMVs."/>
+                                <Run Text="Enables FMVs playing."/>
                             </TextBlock>
                         </Border>
 
@@ -1081,32 +1081,32 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Margin="0">
-                            <CheckBox IsChecked="{Binding ControllerProxy.DisableMusicInInventory, Mode=TwoWay}"
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableMusicInInventory, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Disable music in inventory" />
+                                       Content="Enable music in inventory" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Column="1"
                                 Margin="0">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
-                                <Run Text="Pauses sound in the inventory screen."/>
+                                <Run Text="Allows game sounds to continue to play in the inventory screen."/>
                             </TextBlock>
                         </Border>
 
                         <Border Grid.Row="1"
                                 Style="{StaticResource SeparatorBorder}">
-                            <CheckBox IsChecked="{Binding ControllerProxy.DisableMusicInMenu, Mode=TwoWay}"
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableMusicInMenu, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Disable music in menu" />
+                                       Content="Enable music in main menu" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="1"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
-                                <Run Text="Disables music in the main menu."/>
+                                <Run Text="Enables music in the main menu."/>
                             </TextBlock>
                         </Border>
 
@@ -1122,7 +1122,7 @@
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
-                                <Run Text="Sound effects are randomly, slightly pitched to vary the game sounds."/>
+                                <Run Text="Allows sound effects to be randomly, slightly pitched to vary the game sounds."/>
                             </TextBlock>
                         </Border>
                         

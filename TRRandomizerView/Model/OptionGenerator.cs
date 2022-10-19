@@ -329,8 +329,8 @@ namespace TRRandomizerView.Model
             _options.AirbarColor = GetRandomEnumValue<TRUIColour>(typeof(TRUIColour));
             _options.AirbarLocation = GetRandomEnumValue<TRUILocation>(typeof(TRUILocation));
             _options.AirbarShowingMode = GetRandomEnumValue<TRAirbarMode>(typeof(TRAirbarMode));
-            _options.DisableCine = GetRandomBool();
-            _options.DisableFmv = GetRandomBool();
+            _options.EnableCine = GetRandomBool();
+            _options.EnableFmv = GetRandomBool();
             _options.DisableMagnums = GetRandomBool();
             _options.DisableShotgun = GetRandomBool();
             _options.DisableUzis = GetRandomBool();

@@ -591,45 +591,45 @@ namespace TRRandomizerView.Model
             }
         }
 
-        private bool _disableFmv;
-        public bool DisableFmv
+        private bool _enableFmv;
+        public bool EnableFmv
         {
-            get => _disableFmv;
+            get => _enableFmv;
             set
             {
-                _disableFmv = value;
+                _enableFmv = value;
             }
         }
 
-        private bool _disableCine;
-        public bool DisableCine
+        private bool _enableCine;
+        public bool EnableCine
         {
-            get => _disableCine;
+            get => _enableCine;
             set
             {
-                _disableCine = value;
+                _enableCine = value;
                 FirePropertyChanged();
             }
         }
 
-        private bool _disableMusicInMenu;
-        public bool DisableMusicInMenu
+        private bool _enableMusicInMenu;
+        public bool EnableMusicInMenu
         {
-            get => _disableMusicInMenu;
+            get => _enableMusicInMenu;
             set
             {
-                _disableMusicInMenu = value;
+                _enableMusicInMenu = value;
                 FirePropertyChanged();
             }
         }
 
-        private bool _disableMusicInInventory;
-        public bool DisableMusicInInventory
+        private bool _enableMusicInInventory;
+        public bool EnableMusicInInventory
         {
-            get => _disableMusicInInventory;
+            get => _enableMusicInInventory;
             set
             {
-                _disableMusicInInventory = value;
+                _enableMusicInInventory = value;
                 FirePropertyChanged();
             }
         }
@@ -2786,10 +2786,10 @@ namespace TRRandomizerView.Model
                 ChangePierreSpawn = _controller.ChangePierreSpawn;
                 FovValue = _controller.FovValue;
                 FovVertical = _controller.FovVertical;
-                DisableFmv = _controller.DisableFmv;
-                DisableCine = _controller.DisableCine;
-                DisableMusicInMenu = _controller.DisableMusicInMenu;
-                DisableMusicInInventory = _controller.DisableMusicInInventory;
+                EnableFmv = _controller.EnableFmv;
+                EnableCine = _controller.EnableCine;
+                EnableMusicInMenu = _controller.EnableMusicInMenu;
+                EnableMusicInInventory = _controller.EnableMusicInInventory;
                 DisableTRexCollision = _controller.DisableTRexCollision;
                 AnisotropyFilter = _controller.AnisotropyFilter;
                 ResolutionWidth = _controller.ResolutionWidth;
@@ -3042,10 +3042,10 @@ namespace TRRandomizerView.Model
                 _controller.ChangePierreSpawn = ChangePierreSpawn;
                 _controller.FovValue = FovValue;
                 _controller.FovVertical = FovVertical;
-                _controller.DisableFmv = DisableFmv;
-                _controller.DisableCine = DisableCine;
-                _controller.DisableMusicInMenu = DisableMusicInMenu;
-                _controller.DisableMusicInInventory = DisableMusicInInventory;
+                _controller.EnableFmv = EnableFmv;
+                _controller.EnableCine = EnableCine;
+                _controller.EnableMusicInMenu = EnableMusicInMenu;
+                _controller.EnableMusicInInventory = EnableMusicInInventory;
                 _controller.DisableTRexCollision = DisableTRexCollision;
                 _controller.AnisotropyFilter = AnisotropyFilter;
                 _controller.ResolutionWidth = ResolutionWidth;

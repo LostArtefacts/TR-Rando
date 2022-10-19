@@ -120,10 +120,6 @@ namespace TRRandomizerCore.Editors
                 {
                     scriptEd.EnableCheats = true;
                 }
-                if (Settings.UseRecommendedCommunitySettings)
-                {
-                    scriptEd.EnableEnhancedSaves = false;
-                }
                 scriptEditor.SaveScript();
             }
 
