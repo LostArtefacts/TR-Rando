@@ -251,6 +251,38 @@
       "Y": 2048,
       "Z": 76768,
       "Room": 35
+    },
+    {
+      "X": 73698,
+      "Y": 1748,
+      "Z": 14393,
+      "Room": 0,
+      "Difficulty": "Hard"
+    },
+    {
+      "X": 73315,
+      "Y": 1172,
+      "Z": 14375,
+      "Room": 0,
+      "Difficulty": "Hard",
+      "LevelState": "Mirrored",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 82803,
+      "Y": 611,
+      "Z": 28852,
+      "Room": 5,
+      "Difficulty": "Hard",
+      "LevelState": "Mirrored",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 57492,
+      "Y": 1939,
+      "Z": 65425,
+      "Room": 8,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL2.PHD": [
@@ -549,6 +581,100 @@
       "Y": 6400,
       "Z": 13451,
       "Room": 47
+    },
+    {
+      "X": 54266,
+      "Y": 2043,
+      "Z": 17414,
+      "Room": 33
+    },
+    {
+      "X": 51287,
+      "Y": -1583,
+      "Z": 5098,
+      "Room": 39,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 57304,
+      "Y": -1643,
+      "Z": 3998,
+      "Room": 39,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 50946,
+      "Y": -5914,
+      "Z": 20274,
+      "Room": 54,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 46989,
+      "Y": -3840,
+      "Z": 22440,
+      "Room": 55,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 51132,
+      "Y": -3533,
+      "Z": 25525,
+      "Room": 55,
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 53760,
+      "Y": -1792,
+      "Z": 18944,
+      "Room": 64,
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 58098,
+      "Y": 659,
+      "Z": 19348,
+      "Room": 33,
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 49187,
+      "Y": -1580,
+      "Z": 27135,
+      "Room": 55,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 35809,
+      "Y": -1581,
+      "Z": 7093,
+      "Room": 32,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 42005,
+      "Y": 2276,
+      "Z": 69584,
+      "Room": 24,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 35807,
+      "Y": -1576,
+      "Z": 34862,
+      "Room": 6,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 35375,
+      "Y": -2117,
+      "Z": 17104,
+      "Room": 52,
+      "LevelState": "NotMirrored",
+      "RequiresGlitch": true
     }
   ],
   "LEVEL3B.PHD": [
@@ -713,6 +839,49 @@
       "Y": 3806,
       "Z": 43074,
       "Room": 16
+    },
+    {
+      "X": 45088,
+      "Y": 3813,
+      "Z": 58403,
+      "Room": 11,
+      "Difficulty": "Hard"
+    },
+    {
+      "X": 48640,
+      "Y": 6656,
+      "Z": 44544,
+      "Room": 37,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 50688,
+      "Y": 6656,
+      "Z": 45568,
+      "Room": 37,
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 55808,
+      "Y": 5632,
+      "Z": 48093,
+      "Room": 31,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 76756,
+      "Y": 4096,
+      "Z": 59451,
+      "Room": 5,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 44998,
+      "Y": -2048,
+      "Z": 64470,
+      "Room": 1,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL4.PHD": [
@@ -865,6 +1034,14 @@
       "Y": 18176,
       "Z": 39873,
       "Room": 23
+    },
+    {
+      "X": 49664,
+      "Y": 12800,
+      "Z": 36352,
+      "Room": 47,
+      "LevelState": "NotMirrored",
+      "RequiresGlitch": true
     }
   ],
   "LEVEL5.PHD": [
@@ -993,6 +1170,12 @@
       "Y": -512,
       "Z": 53363,
       "Room": 39
+    },
+    {
+      "X": 62859,
+      "Y": -3977,
+      "Z": 35895,
+      "Room": 9
     }
   ],
   "LEVEL6.PHD": [
@@ -1187,6 +1370,34 @@
       "Y": -4608,
       "Z": 43821,
       "Room": 13
+    },
+    {
+      "X": 35328,
+      "Y": -9194,
+      "Z": 53219,
+      "Room": 26
+    },
+    {
+      "X": 42430,
+      "Y": -7373,
+      "Z": 56355,
+      "Room": 45,
+      "RequiresDamage": true
+    },
+    {
+      "X": 75833,
+      "Y": -6590,
+      "Z": 33828,
+      "Room": 6,
+      "LevelState": "NotMirrored",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 16418,
+      "Y": -9472,
+      "Z": 39900,
+      "Room": 36,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL7A.PHD": [
@@ -1400,6 +1611,12 @@
       "X": 30671,
       "Y": -4803,
       "Z": 69567,
+      "Room": 89
+    },
+    {
+      "X": 24403,
+      "Y": -1601,
+      "Z": 69603,
       "Room": 89
     },
     {
@@ -1625,6 +1842,34 @@
       "Y": 0,
       "Z": 46118,
       "Room": 49
+    },
+    {
+      "X": 58341,
+      "Y": -4608,
+      "Z": 36903,
+      "Room": 68,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 48168,
+      "Y": -4608,
+      "Z": 36886,
+      "Room": 68,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 54232,
+      "Y": -5397,
+      "Z": 33395,
+      "Room": 41,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 23605,
+      "Y": -3072,
+      "Z": 32761,
+      "Room": 13,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL8B.PHD": [
@@ -1837,6 +2082,43 @@
       "Y": -241,
       "Z": 19519,
       "Room": 9
+    },
+    {
+      "X": 38880,
+      "Y": -5376,
+      "Z": 33838,
+      "Room": 25,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 44093,
+      "Y": -5366,
+      "Z": 33828,
+      "Room": 25,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 37911,
+      "Y": -1536,
+      "Z": 33858,
+      "Room": 23,
+      "LevelState": "Mirrored",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 39958,
+      "Y": -1536,
+      "Z": 33845,
+      "Room": 23,
+      "LevelState": "NotMirrored",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 43081,
+      "Y": -2304,
+      "Z": 24516,
+      "Room": 8,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL8C.PHD": [
@@ -2702,6 +2984,60 @@
       "Y": -8448,
       "Z": 35898,
       "Room": 71
+    },
+    {
+      "X": 42500,
+      "Y": 10496,
+      "Z": 52260,
+      "Room": 27,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 55808,
+      "Y": -13056,
+      "Z": 49664,
+      "Room": 47,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 53205,
+      "Y": -14080,
+      "Z": 57400,
+      "Room": 47,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 57325,
+      "Y": -13312,
+      "Z": 51550,
+      "Room": 47,
+      "Difficulty": "Hard",
+      "LevelState": "Mirrored",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 54291,
+      "Y": -13312,
+      "Z": 51550,
+      "Room": 47,
+      "Difficulty": "Hard",
+      "LevelState": "NotMirrored",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 46064,
+      "Y": -16915,
+      "Z": 62968,
+      "Room": 75,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 31772,
+      "Y": -15005,
+      "Z": 57446,
+      "Room": 10,
+      "LevelState": "NotMirrored",
+      "RequiresGlitch": true
     }
   ]
 }
