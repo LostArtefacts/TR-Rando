@@ -1042,6 +1042,13 @@
       "Room": 47,
       "LevelState": "NotMirrored",
       "RequiresGlitch": true
+    },
+    {
+      "X": 33280,
+      "Y": 12288,
+      "Z": 33280,
+      "Room": 40,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL5.PHD": [
@@ -1176,6 +1183,15 @@
       "Y": -3977,
       "Z": 35895,
       "Room": 9
+    },
+    {
+      "X": 69720,
+      "Y": -1468,
+      "Z": 36953,
+      "Room": 8,
+      "Difficulty": "Hard",
+      "LevelState": "Mirrored",
+      "RequiresGlitch": true
     }
   ],
   "LEVEL6.PHD": [
@@ -1562,6 +1578,13 @@
       "Y": -9216,
       "Z": 24510,
       "Room": 65
+    },
+    {
+      "X": 43520,
+      "Y": -5632,
+      "Z": 48640,
+      "Room": 84,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL7B.PHD": [
@@ -1708,6 +1731,20 @@
       "Y": 3840,
       "Z": 82008,
       "Room": 110
+    },
+    {
+      "X": 43520,
+      "Y": -2688,
+      "Z": 57856,
+      "Room": 78,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 33280,
+      "Y": -2688,
+      "Z": 58880,
+      "Room": 78,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL8A.PHD": [
@@ -1869,6 +1906,13 @@
       "Y": -3072,
       "Z": 32761,
       "Room": 13,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 32720,
+      "Y": -1536,
+      "Z": 45180,
+      "Room": 48,
       "RequiresGlitch": true
     }
   ],
@@ -2119,6 +2163,13 @@
       "Z": 24516,
       "Room": 8,
       "RequiresGlitch": true
+    },
+    {
+      "X": 35328,
+      "Y": 0,
+      "Z": 27136,
+      "Room": 22,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL8C.PHD": [
@@ -2295,6 +2346,13 @@
       "Y": 12678,
       "Z": 54734,
       "Room": 5
+    },
+    {
+      "X": 35811,
+      "Y": -10941,
+      "Z": 51168,
+      "Room": 12,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL10C.PHD": [
@@ -2710,6 +2768,13 @@
       "Y": 2556,
       "Z": 55309,
       "Room": 100
+    },
+    {
+      "X": 56832,
+      "Y": -9984,
+      "Z": 94720,
+      "Room": 64,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL10B.PHD": [
