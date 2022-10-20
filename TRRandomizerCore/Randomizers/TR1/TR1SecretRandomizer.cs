@@ -464,6 +464,7 @@ namespace TRRandomizerCore.Randomizers
 
             List<TREntity> entities = level.Data.Entities.ToList();
             List<Location> locations = _locations[level.Name];
+            locations.Shuffle(_generator);
             List<Location> usedLocations = new List<Location>();
 
             TRSecretPlacement<TREntities> secret = new TRSecretPlacement<TREntities>();
