@@ -1419,6 +1419,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.HideEnemiesUntilTriggered = value;
         }
 
+        public bool RemoveLevelEndingLarson
+        {
+            get => LevelRandomizer.RemoveLevelEndingLarson;
+            set => LevelRandomizer.RemoveLevelEndingLarson = value;
+        }
+
         public bool RandomizeOutfits
         {
             get => LevelRandomizer.RandomizeOutfits;

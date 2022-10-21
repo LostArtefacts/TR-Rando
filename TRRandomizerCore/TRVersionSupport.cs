@@ -19,6 +19,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Item,
             TRRandomizerType.ItemSprite,
             TRRandomizerType.KeyItems,
+            TRRandomizerType.LarsonBehaviour,
             TRRandomizerType.NightMode,
             TRRandomizerType.Outfit,
             TRRandomizerType.RewardRooms,

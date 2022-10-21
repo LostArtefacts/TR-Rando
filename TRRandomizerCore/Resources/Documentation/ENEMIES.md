@@ -24,7 +24,7 @@ Torso is restricted to appear only in certain rooms where there is a little more
 Pierre will always be killable, as allocating runaway Pierres using current enemy positioning is awkward, given that when they spawn they deactivate the previous one (or with TombATI the newly triggered one doesn't replace the existing). Pierre will also always drop the scion, magnums and a key. If Pierre is not present at the end of Tihocan, a key will be added to pickup (this location will be randomized if key item randomization is enabled).
 
 ### Larson
-Larson will always appear at the end of Tomb of Qualopec. He can appear elsewhere without restrictions and will have the same death animation as Sanctuary of the Scion (i.e. non level-ending).
+By default, Larson will end the level in Tomb of Qualopec when he is killed. This can be disabled by selecting `Remove level-ending Larson` in the enemy options window. In this case, an alternative level ending will be added to this level. If this option is *not* enabled, the single default Larson will appear when `Default` restrictions mode is selected; in `No restrictions` mode, he can appear anywhere in the level, and the level will end wherever he is killed.
 
 ### SkateboardKid
 SkateboardKid is restricted to specific rooms due to resource limitations - the rooms allocated to him are those with much fewer enemies than others. He cannot appear with Natla in the same level as this can cause crashes.
@@ -57,7 +57,6 @@ Note that mummies can appear as flying mutants in other levels. This model is pr
 ## No Restrictions Mode
 This mode will switch off _**most**_ of the above restrictions. The following will always remain:
 * Pierre always being killable
-* Larson appearing at the end of Qualopec
 * Torso appearing in Great Pyramid
 * SkateboardKid being limited to one per level and to specific rooms
 * Natla appearing once per level

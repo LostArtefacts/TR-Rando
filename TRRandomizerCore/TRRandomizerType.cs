@@ -49,6 +49,7 @@
         GymOutfit,
         HiddenEnemies,
         ItemSprite,
-        SecretModels
+        SecretModels,
+        LarsonBehaviour
     }
 }

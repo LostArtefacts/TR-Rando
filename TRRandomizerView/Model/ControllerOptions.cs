@@ -31,7 +31,7 @@ namespace TRRandomizerView.Model
         private TRSecretCountMode _secretCountMode;
         private uint _minSecretCount, _maxSecretCount;
         private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
-        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies;
+        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson;
         private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
@@ -1927,6 +1927,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RemoveLevelEndingLarson
+        {
+            get => _removeLevelEndingLarson;
+            set
+            {
+                _removeLevelEndingLarson = value;
+                FirePropertyChanged();
+            }
+        }
+
         public RandoDifficulty RandoEnemyDifficulty
         {
             get => _randoEnemyDifficulty;
@@ -2337,6 +2347,12 @@ namespace TRRandomizerView.Model
                 Description = "Most enemies will not be visible until they are triggered."
             };
             BindingOperations.SetBinding(HideEnemies, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+            RemoveLevelEndingLarson = new BoolItemControlClass
+            {
+                Title = "Remove level-ending Larson",
+                Description = "Prevents Larson triggering the end of the level in Tomb of Qualopec."
+            };
+            BindingOperations.SetBinding(RemoveLevelEndingLarson, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
 
             // Textures
             Binding randomizeTexturesBinding = new Binding(nameof(RandomizeTextures)) { Source = this };
@@ -2519,7 +2535,7 @@ namespace TRRandomizerView.Model
             };
             EnemyBoolItemControls = new List<BoolItemControlClass>()
             {
-                _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies
+                _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2585,6 +2601,7 @@ namespace TRRandomizerView.Model
             _randomizeWaterColour.IsAvailable = IsWaterColourTypeSupported;
             _allowEmptyEggs.IsAvailable = IsAtlanteanEggBehaviourTypeSupported;
             _hideEnemies.IsAvailable = IsHiddenEnemiesTypeSupported;
+            _removeLevelEndingLarson.IsAvailable = IsLarsonBehaviourTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -2672,6 +2689,7 @@ namespace TRRandomizerView.Model
             SwapEnemyAppearance.Value = _controller.SwapEnemyAppearance;
             AllowEmptyEggs.Value = _controller.AllowEmptyEggs;
             HideEnemies.Value = _controller.HideEnemiesUntilTriggered;
+            RemoveLevelEndingLarson.Value = _controller.RemoveLevelEndingLarson;
             RandoEnemyDifficulty = _controller.RandoEnemyDifficulty;
             UseEnemyExclusions = _controller.UseEnemyExclusions;
             ShowExclusionWarnings = _controller.ShowExclusionWarnings;
@@ -2926,6 +2944,7 @@ namespace TRRandomizerView.Model
             _controller.SwapEnemyAppearance = SwapEnemyAppearance.Value;
             _controller.AllowEmptyEggs = AllowEmptyEggs.Value;
             _controller.HideEnemiesUntilTriggered = HideEnemies.Value;
+            _controller.RemoveLevelEndingLarson = RemoveLevelEndingLarson.Value;
             _controller.RandoEnemyDifficulty = RandoEnemyDifficulty;
             _controller.UseEnemyExclusions = UseEnemyExclusions;
             _controller.ShowExclusionWarnings = ShowExclusionWarnings;
@@ -3114,6 +3133,7 @@ namespace TRRandomizerView.Model
         public bool IsWaterColourTypeSupported => IsRandomizationSupported(TRRandomizerType.WaterColour);
         public bool IsAtlanteanEggBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.AtlanteanEggBehaviour);
         public bool IsHiddenEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.HiddenEnemies);
+        public bool IsLarsonBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.LarsonBehaviour);
         public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
         public bool IsItemSpriteTypeSupported => IsRandomizationSupported(TRRandomizerType.ItemSprite);
 

@@ -167,6 +167,14 @@ namespace TRRandomizerCore.Randomizers
                 return null;
             }
 
+            // If level-ending Larson is disabled, we make an alternative ending to ToQ.
+            // Do this at this stage as it effectively gets rid of ToQ-Larson meaning
+            // Sanctuary-Larson can potentially be imported.
+            if (level.Is(TRLevelNames.QUALOPEC) && Settings.RemoveLevelEndingLarson)
+            {
+                AmendToQLarson(level);
+            }
+
             RandoDifficulty difficulty = GetImpliedDifficulty();
 
             // Get the list of enemy types currently in the level
@@ -177,6 +185,11 @@ namespace TRRandomizerCore.Randomizers
 
             // Work out how many we can support
             int enemyCount = oldEntities.Count + TR1EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
+            if (level.Is(TRLevelNames.QUALOPEC) && Settings.RemoveLevelEndingLarson)
+            {
+                // Account for Larson having been removed above.
+                ++enemyCount;
+            }
             List<TREntities> newEntities = new List<TREntities>(enemyCount);
 
             // Do we need at least one water creature?
@@ -192,6 +205,11 @@ namespace TRRandomizerCore.Randomizers
             // Are there any other types we need to retain?
             foreach (TREntities entity in TR1EnemyUtilities.GetRequiredEnemies(level.Name))
             {
+                if (level.Is(TRLevelNames.QUALOPEC) && entity == TREntities.Larson && Settings.RemoveLevelEndingLarson)
+                {
+                    // Only required if normal Larson behaviour is retained in this level.
+                    continue;
+                }
                 if (!newEntities.Contains(entity))
                 {
                     newEntities.Add(entity);
@@ -524,12 +542,18 @@ namespace TRRandomizerCore.Randomizers
                 }
 
                 // Rather than individual enemy limits, this accounts for enemy groups such as all Atlanteans
-                RestrictedEnemyGroup enemyGroup = TR1EnemyUtilities.GetRestrictedEnemyGroup(level.Name, TR1EntityUtilities.TranslateEntityAlias(newEntityType), difficulty);
+                RandoDifficulty groupDifficulty = difficulty;
+                if (level.Is(TRLevelNames.QUALOPEC) && newEntityType == TREntities.Larson && Settings.RemoveLevelEndingLarson)
+                {
+                    // Non-level ending Larson is not restricted in ToQ, otherwise we adhere to the normal rules.
+                    groupDifficulty = RandoDifficulty.NoRestrictions;
+                }
+                RestrictedEnemyGroup enemyGroup = TR1EnemyUtilities.GetRestrictedEnemyGroup(level.Name, TR1EntityUtilities.TranslateEntityAlias(newEntityType), groupDifficulty);
                 if (enemyGroup != null)
                 {
                     if (level.Data.Entities.ToList().FindAll(e => enemyGroup.Enemies.Contains((TREntities)e.TypeID)).Count >= enemyGroup.MaximumCount)
                     {
-                        List<TREntities> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1EntityUtilities.TranslateEntityAlias(e), difficulty));
+                        List<TREntities> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1EntityUtilities.TranslateEntityAlias(e), groupDifficulty));
                         if (pool.Count > 0)
                         {
                             newEntityType = pool[_generator.Next(0, pool.Count)];
@@ -767,6 +791,31 @@ namespace TRRandomizerCore.Randomizers
                 sector = FDUtilities.GetRoomSector(entity.X, (sector.Floor + 1) * 256, entity.Z, sector.RoomBelow, level, floorData);
             }
             return false;
+        }
+
+        private void AmendToQLarson(TR1CombinedLevel level)
+        {
+            TRModel larsonModel = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.Larson);
+            if (larsonModel != null)
+            {
+                // Convert Larson into a Great Pyramid scion, which is targetable. Environment mods will
+                // then add a heavy trigger to end the level. Add an additional enemy beside the scion.
+                larsonModel.ID = (uint)TREntities.ScionPiece3_S_P;
+                foreach (TREntity entity in Array.FindAll(level.Data.Entities, e => e.TypeID == (short)TREntities.Larson))
+                {
+                    entity.TypeID = (short)TREntities.ScionPiece3_S_P;
+                }
+
+                // Make scion-Larson invisible.
+                TRMesh[] larsonMeshes = TRMeshUtilities.GetModelMeshes(level.Data, larsonModel);
+                MeshEditor editor = new MeshEditor();
+                foreach (TRMesh mesh in larsonMeshes)
+                {
+                    editor.Mesh = mesh;
+                    editor.ClearAllPolygons();
+                    editor.WriteToLevel(level.Data);
+                }
+            }
         }
 
         private void AmendAtlanteanModels(TR1CombinedLevel level, EnemyRandomizationCollection enemies)
