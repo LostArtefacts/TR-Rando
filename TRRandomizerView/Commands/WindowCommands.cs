@@ -15,6 +15,7 @@ namespace TRRandomizerView.Commands
             DeSelectAll.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Control | ModifierKeys.Shift));
 
             RandomizeSeeds.InputGestures.Add(new KeyGesture(Key.R, ModifierKeys.Control));
+            RandomizeOptions.InputGestures.Add(new KeyGesture(Key.R, ModifierKeys.Control | ModifierKeys.Shift));
             CreateGlobalSeed.InputGestures.Add(new KeyGesture(Key.G, ModifierKeys.Control));
 
             ImportSettings.InputGestures.Add(new KeyGesture(Key.I, ModifierKeys.Control));
@@ -35,6 +36,7 @@ namespace TRRandomizerView.Commands
         public static readonly RoutedUICommand SelectAll = new RoutedUICommand();
         public static readonly RoutedUICommand DeSelectAll = new RoutedUICommand();
         public static readonly RoutedUICommand RandomizeSeeds = new RoutedUICommand();
+        public static readonly RoutedUICommand RandomizeOptions = new RoutedUICommand();
         public static readonly RoutedUICommand CreateGlobalSeed = new RoutedUICommand();
         public static readonly RoutedUICommand EditCommunitySettings = new RoutedUICommand();
 

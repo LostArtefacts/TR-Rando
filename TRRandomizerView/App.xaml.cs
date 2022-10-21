@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Markup;
 using TRRandomizerCore;
 using TRRandomizerCore.Helpers;
 using TRRandomizerView.Utilities;
@@ -13,6 +15,15 @@ namespace TRRandomizerView
     /// </summary>
     public partial class App : Application
     {
+        static App()
+        {
+            FrameworkElement.LanguageProperty.OverrideMetadata
+            (
+                typeof(FrameworkElement),
+                new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag))
+            );
+        }
+
         public string Title { get; private set; }
         public string Description { get; private set; }
         public string Version { get; private set; }

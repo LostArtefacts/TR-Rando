@@ -59,7 +59,7 @@
                 <ListBoxItem>Gameplay</ListBoxItem>
                 <ListBoxItem>Guns/Items</ListBoxItem>
                 <ListBoxItem>Lara</ListBoxItem>
-                <ListBoxItem>Music</ListBoxItem>
+                <ListBoxItem>Sound</ListBoxItem>
                 <ListBoxItem>Statistics</ListBoxItem>
                 <ListBoxItem>UI</ListBoxItem>
             </ListBox>
@@ -137,10 +137,10 @@
                             <StackPanel>
                                 <Label Content="Demo delay"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.DemoDelay, Mode=TwoWay}"
-                                                    DecimalPlaces="1"
+                                <ctrl:DecimalUpDown DecimalPlaces="1"
                                                     MinValue="1"
-                                                    MaxValue="1000"/>
+                                                    MaxValue="1000"
+                                                    Value="{Binding ControllerProxy.DemoDelay, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
                         <Border Grid.Column="1"
@@ -155,10 +155,10 @@
                             <StackPanel VerticalAlignment="Top">
                                 <Label Content="Draw distance fade"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.DrawDistanceFade, Mode=TwoWay}"
-                                                    DecimalPlaces="1"
+                                <ctrl:DecimalUpDown DecimalPlaces="1"
                                                     MinValue="1"
-                                                    MaxValue="1000"/>
+                                                    MaxValue="1000"
+                                                    Value="{Binding ControllerProxy.DrawDistanceFade, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
                         <Border Grid.Column="1"
@@ -178,10 +178,10 @@
                             <StackPanel VerticalAlignment="Top">
                                 <Label Content="Draw distance max"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.DrawDistanceMax, Mode=TwoWay}"
-                                                    DecimalPlaces="1"
+                                <ctrl:DecimalUpDown DecimalPlaces="1"
                                                     MinValue="1"
-                                                    MaxValue="1000"/>
+                                                    MaxValue="1000"
+                                                    Value="{Binding ControllerProxy.DrawDistanceMax, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
                         <Border Grid.Column="2"
@@ -201,7 +201,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableEnhancedSaves, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Enable enhanced saves **" />
+                                       Content="Enable enhanced saves" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Column="3"
@@ -252,11 +252,11 @@
                             <StackPanel>
                                 <Label Content="Water color (red) *"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorR, Mode=TwoWay}"
-                                                    ValueChanged="WaterColor_ValueChanged"
+                                <ctrl:DecimalUpDown ValueChanged="WaterColor_ValueChanged"
                                                     DecimalPlaces="2"
                                                     MinValue="0"
-                                                    MaxValue="1"/>
+                                                    MaxValue="1"
+                                                    Value="{Binding ControllerProxy.WaterColorR, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
                         <Border Grid.Row="6"
@@ -276,11 +276,11 @@
                             <StackPanel>
                                 <Label Content="Water color (green) *"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorG, Mode=TwoWay}"
-                                                    ValueChanged="WaterColor_ValueChanged"
+                                <ctrl:DecimalUpDown ValueChanged="WaterColor_ValueChanged"
                                                     DecimalPlaces="2"
                                                     MinValue="0"
-                                                    MaxValue="1"/>
+                                                    MaxValue="1"
+                                                    Value="{Binding ControllerProxy.WaterColorG, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
 
@@ -288,11 +288,11 @@
                             <StackPanel>
                                 <Label Content="Water color (blue) *"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.WaterColorB, Mode=TwoWay}"
-                                                    ValueChanged="WaterColor_ValueChanged"
+                                <ctrl:DecimalUpDown ValueChanged="WaterColor_ValueChanged"
                                                     DecimalPlaces="2"
                                                     MinValue="0"
-                                                    MaxValue="1"/>
+                                                    MaxValue="1"
+                                                    Value="{Binding ControllerProxy.WaterColorB, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
 
@@ -659,10 +659,10 @@
                             <StackPanel>
                                 <Label Content="Anisotropy filter"
                                        Style="{StaticResource OptionPromptStyle}"/>
-                                <ctrl:DecimalUpDown Value="{Binding ControllerProxy.AnisotropyFilter, Mode=TwoWay}"
-                                                    DecimalPlaces="1"
+                                <ctrl:DecimalUpDown DecimalPlaces="1"
                                                     MinValue="0"
-                                                    MaxValue="100"/>
+                                                    MaxValue="100"
+                                                    Value="{Binding ControllerProxy.AnisotropyFilter, Mode=TwoWay}"/>
                             </StackPanel>
                         </Border>
                         <Border Grid.Column="1"
@@ -674,33 +674,33 @@
 
                         <Border Grid.Row="1"
                                 Style="{StaticResource SeparatorBorder}">
-                            <CheckBox IsChecked="{Binding ControllerProxy.DisableCine, Mode=TwoWay}"
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableCine, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Disable cinematics" />
+                                       Content="Enable cinematics" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="1"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
-                                <Run Text="Disables ingame cinematics."/>
+                                <Run Text="Enables ingame cinematics."/>
                             </TextBlock>
                         </Border>
 
                         <Border Grid.Row="2"
                                 Style="{StaticResource SeparatorBorder}">
-                            <CheckBox IsChecked="{Binding ControllerProxy.DisableFmv, Mode=TwoWay}"
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableFmv, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Disable FMVs" />
+                                       Content="Enable FMVs" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="2"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
-                                <Run Text="Disables FMVs."/>
+                                <Run Text="Enables FMVs playing."/>
                             </TextBlock>
                         </Border>
 
@@ -1067,9 +1067,10 @@
                         </Border>
                     </Grid>
                 
-                    <!-- 6. Music -->
+                    <!-- 6. Sound -->
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -1080,36 +1081,52 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Margin="0">
-                            <CheckBox IsChecked="{Binding ControllerProxy.DisableMusicInInventory, Mode=TwoWay}"
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableMusicInInventory, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Disable music in inventory" />
+                                       Content="Enable music in inventory" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Column="1"
                                 Margin="0">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
-                                <Run Text="Pauses sound in the inventory screen."/>
+                                <Run Text="Allows game sounds to continue to play in the inventory screen."/>
                             </TextBlock>
                         </Border>
 
                         <Border Grid.Row="1"
                                 Style="{StaticResource SeparatorBorder}">
-                            <CheckBox IsChecked="{Binding ControllerProxy.DisableMusicInMenu, Mode=TwoWay}"
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableMusicInMenu, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Disable music in menu" />
+                                       Content="Enable music in main menu" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="1"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
-                                <Run Text="Disables music in the main menu."/>
+                                <Run Text="Enables music in the main menu."/>
                             </TextBlock>
                         </Border>
 
                         <Border Grid.Row="2"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnablePitchedSounds, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable pitched sounds" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Allows sound effects to be randomly, slightly pitched to vary the game sounds."/>
+                            </TextBlock>
+                        </Border>
+                        
+                        <Border Grid.Row="3"
                                 Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.FixSecretsKillingMusic, Mode=TwoWay}"
                                       VerticalAlignment="Center">
@@ -1117,7 +1134,7 @@
                                        Content="Fix secrets killing music" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="2"
+                        <Border Grid.Row="3"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">

@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using TRRandomizerCore;
 using TRRandomizerView.Events;
 using TRRandomizerView.Model;
@@ -58,6 +59,8 @@ namespace TRRandomizerView.Controls
 
         public TRRandomizerController Controller;
 
+        private readonly DispatcherTimer _popupTimer;
+
         public bool DevelopmentMode
         {
             get => _options.DevelopmentMode;
@@ -72,6 +75,12 @@ namespace TRRandomizerView.Controls
             _dirty = false;
             _showExternalModPrompt = true;
             _reloadRequested = false;
+
+            _popupTimer = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 0, 1, 500)
+            };
+            _popupTimer.Tick += PopupTimer_Tick;
         }
 
         private void Controller_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -360,12 +369,40 @@ namespace TRRandomizerView.Controls
         {
             if (_options.RandomizationPossible)
             {
+                _popupTimer.Stop();
                 _options.RandomizeActiveSeeds();
+                ShowPopupMessage("Seeds Randomized!");
             }
             else
             {
                 ShowInvalidSelectionMessage();
             }
+        }
+
+        public void RandomizeAllOptions()
+        {
+            if (_options.RandomizationPossible)
+            {
+                _popupTimer.Stop();
+                _options.RandomizeActiveOptions();
+                ShowPopupMessage("Options Randomized!");
+            }
+            else
+            {
+                ShowInvalidSelectionMessage();
+            }
+        }
+
+        private void ShowPopupMessage(string text)
+        {
+            _popupTextBlock.Text = text;
+            _feedbackPopup.IsOpen = true;
+            _popupTimer.Start();
+        }
+
+        private void PopupTimer_Tick(object sender, EventArgs e)
+        {
+            _feedbackPopup.IsOpen = false;
         }
 
         public void ConfigureGlobalSeed()

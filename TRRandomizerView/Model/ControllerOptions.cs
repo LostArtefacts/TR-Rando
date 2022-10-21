@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using TRGE.Core;
@@ -18,6 +17,8 @@ namespace TRRandomizerView.Model
     {
         public int MaxSeedValue => 1000000000;
 
+        private readonly OptionGenerator _optionRandomizer;
+
         private readonly ManagedSeed _secretRewardsControl;
         private readonly ManagedSeedNumeric _levelSequencingControl, _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl, _nightLevelsControl;
         private readonly ManagedSeedBool _audioTrackControl, _healthLevelsControl;
@@ -26,11 +27,11 @@ namespace TRRandomizerView.Model
 
         private bool _disableDemos, _autoLaunchGame, _puristMode;
 
-        private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras;
+        private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras, _useRandomSecretModels;
         private TRSecretCountMode _secretCountMode;
         private uint _minSecretCount, _maxSecretCount;
         private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
-        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies;
+        private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson;
         private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
         private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
@@ -590,45 +591,45 @@ namespace TRRandomizerView.Model
             }
         }
 
-        private bool _disableFmv;
-        public bool DisableFmv
+        private bool _enableFmv;
+        public bool EnableFmv
         {
-            get => _disableFmv;
+            get => _enableFmv;
             set
             {
-                _disableFmv = value;
+                _enableFmv = value;
             }
         }
 
-        private bool _disableCine;
-        public bool DisableCine
+        private bool _enableCine;
+        public bool EnableCine
         {
-            get => _disableCine;
+            get => _enableCine;
             set
             {
-                _disableCine = value;
+                _enableCine = value;
                 FirePropertyChanged();
             }
         }
 
-        private bool _disableMusicInMenu;
-        public bool DisableMusicInMenu
+        private bool _enableMusicInMenu;
+        public bool EnableMusicInMenu
         {
-            get => _disableMusicInMenu;
+            get => _enableMusicInMenu;
             set
             {
-                _disableMusicInMenu = value;
+                _enableMusicInMenu = value;
                 FirePropertyChanged();
             }
         }
 
-        private bool _disableMusicInInventory;
-        public bool DisableMusicInInventory
+        private bool _enableMusicInInventory;
+        public bool EnableMusicInInventory
         {
-            get => _disableMusicInInventory;
+            get => _enableMusicInInventory;
             set
             {
-                _disableMusicInInventory = value;
+                _enableMusicInInventory = value;
                 FirePropertyChanged();
             }
         }
@@ -749,6 +750,17 @@ namespace TRRandomizerView.Model
             set
             {
                 _enableEnhancedSaves = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enablePitchedSounds;
+        public bool EnablePitchedSounds
+        {
+            get => _enablePitchedSounds;
+            set
+            {
+                _enablePitchedSounds = value;
                 FirePropertyChanged();
             }
         }
@@ -1812,6 +1824,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass UseRandomSecretModels
+        {
+            get => _useRandomSecretModels;
+            set
+            {
+                _useRandomSecretModels = value;
+                FirePropertyChanged();
+            }
+        }
+
         public TRSecretCountMode SecretCountMode
         {
             get => _secretCountMode;
@@ -1901,6 +1923,16 @@ namespace TRRandomizerView.Model
             set
             {
                 _hideEnemies = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RemoveLevelEndingLarson
+        {
+            get => _removeLevelEndingLarson;
+            set
+            {
+                _removeLevelEndingLarson = value;
                 FirePropertyChanged();
             }
         }
@@ -2203,6 +2235,8 @@ namespace TRRandomizerView.Model
 
         public ControllerOptions()
         {
+            _optionRandomizer = new OptionGenerator(this);
+
             _levelSequencingControl = new ManagedSeedNumeric();
             _unarmedLevelsControl = new ManagedSeedNumeric();
             _ammolessLevelsControl = new ManagedSeedNumeric();
@@ -2241,6 +2275,12 @@ namespace TRRandomizerView.Model
                 Description = "When picking up secrets, show a hint where the reward room for the level is located."
             };
             BindingOperations.SetBinding(UseRewardRoomCameras, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
+            UseRandomSecretModels = new BoolItemControlClass()
+            {
+                Title = "Use random secret types",
+                Description = "If enabled, secret types will be randomized across levels; otherwise, pre-defined types will be allocated to each level."
+            };
+            BindingOperations.SetBinding(UseRandomSecretModels, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
 
             // Items
             Binding randomizeItemsBinding = new Binding(nameof(RandomizeItems)) { Source = this };
@@ -2307,6 +2347,12 @@ namespace TRRandomizerView.Model
                 Description = "Most enemies will not be visible until they are triggered."
             };
             BindingOperations.SetBinding(HideEnemies, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+            RemoveLevelEndingLarson = new BoolItemControlClass
+            {
+                Title = "Remove level-ending Larson",
+                Description = "Prevents Larson triggering the end of the level in Tomb of Qualopec."
+            };
+            BindingOperations.SetBinding(RemoveLevelEndingLarson, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
 
             // Textures
             Binding randomizeTexturesBinding = new Binding(nameof(RandomizeTextures)) { Source = this };
@@ -2481,7 +2527,7 @@ namespace TRRandomizerView.Model
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
             {
-                _isHardSecrets, _allowGlitched, _useRewardRoomCameras
+                _isHardSecrets, _allowGlitched, _useRewardRoomCameras, _useRandomSecretModels
             };
             ItemBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2489,7 +2535,7 @@ namespace TRRandomizerView.Model
             };
             EnemyBoolItemControls = new List<BoolItemControlClass>()
             {
-                _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies
+                _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2537,6 +2583,7 @@ namespace TRRandomizerView.Model
             _changeWeaponSFX.IsAvailable = _changeCrashSFX.IsAvailable = _changeEnemySFX.IsAvailable = _linkCreatureSFX.IsAvailable = IsSFXSupported;
 
             _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
+            _useRandomSecretModels.IsAvailable = IsSecretModelsTypeSupported;
 
             _swapEnemyAppearance.IsAvailable = IsOutfitDaggerSupported;
 
@@ -2554,6 +2601,7 @@ namespace TRRandomizerView.Model
             _randomizeWaterColour.IsAvailable = IsWaterColourTypeSupported;
             _allowEmptyEggs.IsAvailable = IsAtlanteanEggBehaviourTypeSupported;
             _hideEnemies.IsAvailable = IsHiddenEnemiesTypeSupported;
+            _removeLevelEndingLarson.IsAvailable = IsLarsonBehaviourTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -2641,6 +2689,7 @@ namespace TRRandomizerView.Model
             SwapEnemyAppearance.Value = _controller.SwapEnemyAppearance;
             AllowEmptyEggs.Value = _controller.AllowEmptyEggs;
             HideEnemies.Value = _controller.HideEnemiesUntilTriggered;
+            RemoveLevelEndingLarson.Value = _controller.RemoveLevelEndingLarson;
             RandoEnemyDifficulty = _controller.RandoEnemyDifficulty;
             UseEnemyExclusions = _controller.UseEnemyExclusions;
             ShowExclusionWarnings = _controller.ShowExclusionWarnings;
@@ -2651,6 +2700,7 @@ namespace TRRandomizerView.Model
             IsHardSecrets.Value = _controller.HardSecrets;
             IsGlitchedSecrets.Value = _controller.GlitchedSecrets;
             UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
+            UseRandomSecretModels.Value = _controller.UseRandomSecretModels;
             SecretCountMode = _controller.SecretCountMode;
             MaxSecretCount = _controller.MaxSecretCount;
             MinSecretCount = _controller.MinSecretCount;
@@ -2754,10 +2804,10 @@ namespace TRRandomizerView.Model
                 ChangePierreSpawn = _controller.ChangePierreSpawn;
                 FovValue = _controller.FovValue;
                 FovVertical = _controller.FovVertical;
-                DisableFmv = _controller.DisableFmv;
-                DisableCine = _controller.DisableCine;
-                DisableMusicInMenu = _controller.DisableMusicInMenu;
-                DisableMusicInInventory = _controller.DisableMusicInInventory;
+                EnableFmv = _controller.EnableFmv;
+                EnableCine = _controller.EnableCine;
+                EnableMusicInMenu = _controller.EnableMusicInMenu;
+                EnableMusicInInventory = _controller.EnableMusicInInventory;
                 DisableTRexCollision = _controller.DisableTRexCollision;
                 AnisotropyFilter = _controller.AnisotropyFilter;
                 ResolutionWidth = _controller.ResolutionWidth;
@@ -2769,6 +2819,7 @@ namespace TRRandomizerView.Model
                 MaximumSaveSlots = _controller.MaximumSaveSlots;
                 RevertToPistols = _controller.RevertToPistols;
                 EnableEnhancedSaves = _controller.EnableEnhancedSaves;
+                EnablePitchedSounds = _controller.EnablePitchedSounds;
             }
 
             FireSupportPropertiesChanged();
@@ -2796,139 +2847,17 @@ namespace TRRandomizerView.Model
 
         public void RandomizeActiveSeeds()
         {
-            Random rng = new Random();
-            if (RandomizeLevelSequencing)
-            {
-                LevelSequencingSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeUnarmedLevels)
-            {
-                UnarmedLevelsSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeAmmolessLevels)
-            {
-                AmmolessLevelsSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeHealth)
-            {
-                HealthSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeSecretRewards)
-            {
-                SecretRewardSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeSunsets)
-            {
-                SunsetsSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeNightMode)
-            {
-                NightModeSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeAudioTracks)
-            {
-                AudioTracksSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeItems)
-            {
-                ItemSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeEnemies)
-            {
-                EnemySeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeSecrets)
-            {
-                SecretSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeTextures)
-            {
-                TextureSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeOutfits)
-            {
-                OutfitSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeText)
-            {
-                TextSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeStartPosition)
-            {
-                StartPositionSeed = rng.Next(1, MaxSeedValue);
-            }
-            if (RandomizeEnvironment)
-            {
-                EnvironmentSeed = rng.Next(1, MaxSeedValue);
-            }
+            _optionRandomizer.RandomizeActiveSeeds();
+        }
+
+        public void RandomizeActiveOptions()
+        {
+            _optionRandomizer.RandomizeActiveOptions();
         }
 
         public void SetGlobalSeed(int seed)
         {
-            if (RandomizeLevelSequencing)
-            {
-                LevelSequencingSeed = seed;
-            }
-            if (RandomizeUnarmedLevels)
-            {
-                UnarmedLevelsSeed = seed;
-            }
-            if (RandomizeAmmolessLevels)
-            {
-                AmmolessLevelsSeed = seed;
-            }
-            if (RandomizeHealth)
-            {
-                HealthSeed = seed;
-            }
-            if (RandomizeSecretRewards)
-            {
-                SecretRewardSeed = seed;
-            }
-            if (RandomizeSunsets)
-            {
-                SunsetsSeed = seed;
-            }
-            if (RandomizeNightMode)
-            {
-                NightModeSeed = seed;
-            }
-            if (RandomizeAudioTracks)
-            {
-                AudioTracksSeed = seed;
-            }
-            if (RandomizeItems)
-            {
-                ItemSeed = seed;
-            }
-            if (RandomizeEnemies)
-            {
-                EnemySeed = seed;
-            }
-            if (RandomizeSecrets)
-            {
-                SecretSeed = seed;
-            }
-            if (RandomizeTextures)
-            {
-                TextureSeed = seed;
-            }
-            if (RandomizeOutfits)
-            {
-                OutfitSeed = seed;
-            }
-            if (RandomizeText)
-            {
-                TextSeed = seed;
-            }
-            if (RandomizeStartPosition)
-            {
-                StartPositionSeed = seed;
-            }
-            if (RandomizeEnvironment)
-            {
-                EnvironmentSeed = seed;
-            }
+            _optionRandomizer.SetSeeds(seed);
         }
 
         public void Save()
@@ -3015,6 +2944,7 @@ namespace TRRandomizerView.Model
             _controller.SwapEnemyAppearance = SwapEnemyAppearance.Value;
             _controller.AllowEmptyEggs = AllowEmptyEggs.Value;
             _controller.HideEnemiesUntilTriggered = HideEnemies.Value;
+            _controller.RemoveLevelEndingLarson = RemoveLevelEndingLarson.Value;
             _controller.RandoEnemyDifficulty = RandoEnemyDifficulty;
             _controller.UseEnemyExclusions = UseEnemyExclusions;
             _controller.ShowExclusionWarnings = ShowExclusionWarnings;
@@ -3028,6 +2958,7 @@ namespace TRRandomizerView.Model
             _controller.HardSecrets = IsHardSecrets.Value;
             _controller.GlitchedSecrets = IsGlitchedSecrets.Value;
             _controller.UseRewardRoomCameras = UseRewardRoomCameras.Value;
+            _controller.UseRandomSecretModels = UseRandomSecretModels.Value;
             _controller.SecretCountMode = SecretCountMode;
             _controller.MinSecretCount = MinSecretCount;
             _controller.MaxSecretCount = MaxSecretCount;
@@ -3130,10 +3061,10 @@ namespace TRRandomizerView.Model
                 _controller.ChangePierreSpawn = ChangePierreSpawn;
                 _controller.FovValue = FovValue;
                 _controller.FovVertical = FovVertical;
-                _controller.DisableFmv = DisableFmv;
-                _controller.DisableCine = DisableCine;
-                _controller.DisableMusicInMenu = DisableMusicInMenu;
-                _controller.DisableMusicInInventory = DisableMusicInInventory;
+                _controller.EnableFmv = EnableFmv;
+                _controller.EnableCine = EnableCine;
+                _controller.EnableMusicInMenu = EnableMusicInMenu;
+                _controller.EnableMusicInInventory = EnableMusicInInventory;
                 _controller.DisableTRexCollision = DisableTRexCollision;
                 _controller.AnisotropyFilter = AnisotropyFilter;
                 _controller.ResolutionWidth = ResolutionWidth;
@@ -3145,6 +3076,7 @@ namespace TRRandomizerView.Model
                 _controller.MaximumSaveSlots = MaximumSaveSlots;
                 _controller.RevertToPistols = RevertToPistols;
                 _controller.EnableEnhancedSaves = EnableEnhancedSaves;
+                _controller.EnablePitchedSounds = EnablePitchedSounds;
             }
         }
 
@@ -3172,6 +3104,7 @@ namespace TRRandomizerView.Model
         public bool IsGlitchedSecretsSupported => IsRandomizationSupported(TRRandomizerType.GlitchedSecrets);
         public bool IsHardSecretsSupported => IsRandomizationSupported(TRRandomizerType.HardSecrets);
         public bool IsRewardRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.RewardRooms);
+        public bool IsSecretModelsTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretModels);
         public bool IsSecretCountTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretCount);
         public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
         public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);
@@ -3200,6 +3133,7 @@ namespace TRRandomizerView.Model
         public bool IsWaterColourTypeSupported => IsRandomizationSupported(TRRandomizerType.WaterColour);
         public bool IsAtlanteanEggBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.AtlanteanEggBehaviour);
         public bool IsHiddenEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.HiddenEnemies);
+        public bool IsLarsonBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.LarsonBehaviour);
         public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
         public bool IsItemSpriteTypeSupported => IsRandomizationSupported(TRRandomizerType.ItemSprite);
 

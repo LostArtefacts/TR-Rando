@@ -14,22 +14,22 @@ namespace TRRandomizerView.Controls
         #region Dependency Properties
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register
         (
-            "Value", typeof(decimal), typeof(DecimalUpDown), new PropertyMetadata((decimal)1)
+            nameof(Value), typeof(decimal), typeof(DecimalUpDown), new PropertyMetadata((decimal)1)
         );
 
         public static readonly DependencyProperty DecimalPlacesProperty = DependencyProperty.Register
         (
-            "DecimalPlaces", typeof(int), typeof(DecimalUpDown), new PropertyMetadata(2)
+            nameof(DecimalPlaces), typeof(int), typeof(DecimalUpDown), new PropertyMetadata(2)
         );
 
         public static readonly DependencyProperty MinValueProperty = DependencyProperty.Register
         (
-            "MinValue", typeof(decimal), typeof(DecimalUpDown), new PropertyMetadata((decimal)0)
+            nameof(MinValue), typeof(decimal), typeof(DecimalUpDown), new PropertyMetadata((decimal)0)
         );
 
         public static readonly DependencyProperty MaxValueProperty = DependencyProperty.Register
         (
-            "MaxValue", typeof(decimal), typeof(DecimalUpDown), new PropertyMetadata(decimal.MaxValue)
+            nameof(MaxValue), typeof(decimal), typeof(DecimalUpDown), new PropertyMetadata(decimal.MaxValue)
         );
 
         public event EventHandler ValueChanged;
@@ -39,7 +39,8 @@ namespace TRRandomizerView.Controls
             get => (decimal)GetValue(ValueProperty);
             set
             {
-                SetValue(ValueProperty, AdjustValue(value));
+                SetValue(ValueProperty, Clamp(value));
+                SetDisplayText();
                 ValueChanged?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -72,6 +73,8 @@ namespace TRRandomizerView.Controls
 
         #endregion
 
+        private bool _editing;
+
         public DecimalUpDown()
         {
             InitializeComponent();
@@ -81,19 +84,17 @@ namespace TRRandomizerView.Controls
         private void RepeatUpButton_Click(object sender, RoutedEventArgs e)
         {
             Value += (decimal)Math.Pow(10, DecimalPlaces * -1);
-            SetDisplayText();
         }
 
         private void RepeatDownButton_Click(object sender, RoutedEventArgs e)
         {
             Value -= (decimal)Math.Pow(10, DecimalPlaces * -1);
-            SetDisplayText();
         }
 
         private void TextBox_Pasting(object sender, DataObjectPastingEventArgs e)
         {
             object data = e.DataObject.GetData(DataFormats.UnicodeText);
-            if (!ValidateInput(data.ToString()))
+            if (!decimal.TryParse(data.ToString(), out decimal _))
             {
                 e.CancelCommand();
             }
@@ -101,7 +102,7 @@ namespace TRRandomizerView.Controls
 
         private void TextBox_TextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !ValidateInput(e.Text);
+            e.Handled = !decimal.TryParse(e.Text, out decimal _);
         }
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -124,31 +125,25 @@ namespace TRRandomizerView.Controls
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //decimal v = Value;
-            //if (ValidateInput(_textBox.Text))
-            //{
-            //    v = decimal.Parse(_textBox.Text);
-            //}
-            //else
-            //{
-            //    e.Handled = true;
-            //}
-            //Value = v;
+            if (_editing)
+            {
+                return;
+            }
 
-            //SetDisplayText();
+            if (decimal.TryParse(_textBox.Text, out decimal val))
+            {
+                Value = val;
+            }
         }
 
         private void SetDisplayText()
         {
-            _textBox.Text = Value.ToString(CultureInfo.InvariantCulture);
+            _editing = true;
+            _textBox.Text = Value.ToString("F" + DecimalPlaces.ToString(CultureInfo.CurrentCulture), CultureInfo.CurrentCulture);
+            _editing = false;
         }
 
-        private bool ValidateInput(string text)
-        {
-            return decimal.TryParse(text, out decimal _);
-        }
-
-        private decimal AdjustValue(decimal value)
+        private decimal Clamp(decimal value)
         {
             return Math.Min(MaxValue, Math.Max(MinValue, value));
         }

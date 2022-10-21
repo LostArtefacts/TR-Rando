@@ -118,7 +118,11 @@ namespace TRRandomizerCore.Randomizers
             {
                 TR1Script script = ScriptEditor.Script as TR1Script;
                 script.FixPyramidSecretTrigger = false;
-                script.Enable3dPickups = false;
+
+                if (Settings.UseRecommendedCommunitySettings)
+                {
+                    script.Enable3dPickups = false;
+                }
 
                 if (Settings.GlitchedSecrets)
                 {
@@ -129,6 +133,13 @@ namespace TRRandomizerCore.Randomizers
 
                 ScriptEditor.SaveScript();
             }
+        }
+
+        private bool Are3DPickupsEnabled()
+        {
+            return ScriptEditor.Edition.IsCommunityPatch
+                && !Settings.UseRecommendedCommunitySettings
+                && (ScriptEditor.Script as TR1Script).Enable3dPickups;
         }
 
         private void SetSecretCounts()
@@ -453,6 +464,7 @@ namespace TRRandomizerCore.Randomizers
 
             List<TREntity> entities = level.Data.Entities.ToList();
             List<Location> locations = _locations[level.Name];
+            locations.Shuffle(_generator);
             List<Location> usedLocations = new List<Location>();
 
             TRSecretPlacement<TREntities> secret = new TRSecretPlacement<TREntities>();
@@ -929,6 +941,7 @@ namespace TRRandomizerCore.Randomizers
 
             protected override void StartImpl()
             {
+                List<TREntities> availableTypes = _secretModels.Keys.ToList();
                 foreach (TR1CombinedLevel level in _importAllocations.Keys)
                 {
                     if (level.IsAssault)
@@ -950,7 +963,10 @@ namespace TRRandomizerCore.Randomizers
                         }
                     }
 
-                    allocation.ImportModels.Add(TR1EntityUtilities.GetBestLevelSecretModel(level.Name));
+                    TREntities modelType = _outer.Settings.UseRandomSecretModels
+                        ? availableTypes[_outer._generator.Next(0, availableTypes.Count)]
+                        : TR1EntityUtilities.GetBestLevelSecretModel(level.Name);
+                    allocation.ImportModels.Add(modelType);
                 }
             }
 
@@ -976,7 +992,7 @@ namespace TRRandomizerCore.Randomizers
                         List<TRModel> models = level.Data.Models.ToList();
                         List<TRSpriteSequence> sequences = level.Data.SpriteSequences.ToList();
 
-                        // Redefine the artefacts as puzzle models otherwise the level ends on pickup
+                        // Redefine the artefacts as puzzle models
                         foreach (TREntities secretModelType in allocation.ImportModels)
                         {
                             TREntities secretPickupType = _secretModels[secretModelType];
@@ -986,6 +1002,17 @@ namespace TRRandomizerCore.Randomizers
 
                             models.Find(m => m.ID == (uint)secretModelType).ID = (uint)puzzleModelType;
                             sequences.Find(s => s.SpriteID == (int)secretPickupType).SpriteID = (int)puzzlePickupType;
+
+                            if (secretModelType == TREntities.SecretScion_M_H && _outer.Are3DPickupsEnabled())
+                            {
+                                // T1M embeds scions into the ground when they are puzzle/key types in 3D mode,
+                                // so we counteract that here to avoid uncollectable items.
+                                TRMesh scionMesh = TRMeshUtilities.GetModelFirstMesh(level.Data, puzzleModelType);
+                                foreach (TRVertex vertex in scionMesh.Vertices)
+                                {
+                                    vertex.Y -= 90;
+                                }
+                            }
 
                             // Remove this puzzle type from the available pool
                             allocation.AvailablePickupModels.RemoveAt(0);

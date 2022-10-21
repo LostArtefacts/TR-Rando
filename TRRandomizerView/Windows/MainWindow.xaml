@@ -11,7 +11,7 @@
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing"
-        Title="{Binding AppTitle}" Height="748" Width="1370">
+        Title="{Binding AppTitle}" Height="805" Width="1370">
 
     <Window.CommandBindings>
         <CommandBinding Command="cmds:WindowCommands.Open"
@@ -43,6 +43,10 @@
         <CommandBinding Command="cmds:WindowCommands.RandomizeSeeds"
                         CanExecute="RandomizeSeedsCommandBinding_CanExecute"
                         Executed="RandomizeSeedsCommandBinding_Executed"/>
+
+        <CommandBinding Command="cmds:WindowCommands.RandomizeOptions"
+                        CanExecute="RandomizeOptionsCommandBinding_CanExecute"
+                        Executed="RandomizeOptionsCommandBinding_Executed"/>
 
         <CommandBinding Command="cmds:WindowCommands.CreateGlobalSeed"
                         CanExecute="GlobalSeedCommandBinding_CanExecute"
@@ -162,6 +166,9 @@
 
                 <MenuItem Header="Randomize All Seeds"
                           Command="cmds:WindowCommands.RandomizeSeeds"/>
+
+                <MenuItem Header="Randomize All Options"
+                          Command="cmds:WindowCommands.RandomizeOptions"/>
 
                 <MenuItem Header="Configure Global Seed"
                           Command="cmds:WindowCommands.CreateGlobalSeed"/>

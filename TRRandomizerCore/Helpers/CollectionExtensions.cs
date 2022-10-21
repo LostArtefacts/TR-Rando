@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -46,6 +47,20 @@ namespace TRRandomizerCore.Helpers
             }
 
             return resultSet;
+        }
+
+        public static void Shuffle<T>(this List<T> list, Random rand)
+        {
+            List<T> iterList = new List<T>(list);
+            list.Clear();
+
+            int count = iterList.Count;
+            while (list.Count < count)
+            {
+                T item = iterList[rand.Next(0, iterList.Count)];
+                list.Add(item);
+                iterList.Remove(item);
+            }
         }
     }
 }

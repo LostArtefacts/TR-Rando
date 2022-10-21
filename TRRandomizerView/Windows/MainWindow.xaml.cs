@@ -324,6 +324,16 @@ namespace TRRandomizerView.Windows
             _editorControl.RandomizeAllSeeds();
         }
 
+        private void RandomizeOptionsCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = IsEditorActive && _editorControl.CanRandomize();
+        }
+
+        private void RandomizeOptionsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editorControl.RandomizeAllOptions();
+        }
+
         private void GlobalSeedCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = IsEditorActive && _editorControl.CanRandomize();

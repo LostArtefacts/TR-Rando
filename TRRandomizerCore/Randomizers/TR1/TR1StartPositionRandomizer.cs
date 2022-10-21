@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TRFDControl;
 using TRGE.Core;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
+using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers
 {
@@ -40,6 +42,9 @@ namespace TRRandomizerCore.Randomizers
             List<TREntity> entities = level.Data.Entities.ToList();
             TREntity lara = entities.Find(e => e.TypeID == (short)TREntities.Lara);
 
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level.Data);
+
             // If we haven't defined anything for a level, Lara will just be rotated. This is most likely where there are
             // triggers just after Lara's starting spot, so we just skip them here.
             if (!Settings.RotateStartPositionOnly && _startLocations.ContainsKey(level.Name))
@@ -67,7 +72,7 @@ namespace TRRandomizerCore.Randomizers
                     {
                         location = locations[_generator.Next(0, locations.Count)];
                     }
-                    while (!location.Validated);
+                    while (!location.Validated || location.ContainsSecret(level.Data, floorData));
 
                     lara.X = location.X;
                     lara.Y = location.Y;

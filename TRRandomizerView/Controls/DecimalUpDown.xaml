@@ -25,7 +25,6 @@
                      DataObject.Pasting="TextBox_Pasting" 
                      Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                      HorizontalContentAlignment="Right" 
-                     IsReadOnly="True"
                      VerticalAlignment="Center"
                      BorderThickness="0" 
                      Margin="3,0" 

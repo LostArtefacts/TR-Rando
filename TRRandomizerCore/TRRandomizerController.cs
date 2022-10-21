@@ -386,7 +386,7 @@ namespace TRRandomizerCore
         }
         #endregion
 
-        #region T1M Sepcifics
+        #region T1M Specifics
         public bool EnableGameModes
         {
             get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableGameModes;
@@ -908,50 +908,50 @@ namespace TRRandomizerCore
             }
         }
 
-        public bool DisableFmv
+        public bool EnableFmv
         {
-            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableFmv;
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableFmv;
             set
             {
                 if (ScriptEditor is TR1ScriptEditor tr1Editor)
                 {
-                    tr1Editor.DisableFmv = value;
+                    tr1Editor.EnableFmv = value;
                 }
             }
         }
 
-        public bool DisableCine
+        public bool EnableCine
         {
-            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableCine;
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableCine;
             set
             {
                 if (ScriptEditor is TR1ScriptEditor tr1Editor)
                 {
-                    tr1Editor.DisableCine = value;
+                    tr1Editor.EnableCine = value;
                 }
             }
         }
 
-        public bool DisableMusicInMenu
+        public bool EnableMusicInMenu
         {
-            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableMusicInMenu;
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableMusicInMenu;
             set
             {
                 if (ScriptEditor is TR1ScriptEditor tr1Editor)
                 {
-                    tr1Editor.DisableMusicInMenu = value;
+                    tr1Editor.EnableMusicInMenu = value;
                 }
             }
         }
 
-        public bool DisableMusicInInventory
+        public bool EnableMusicInInventory
         {
-            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.DisableMusicInInventory;
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableMusicInInventory;
             set
             {
                 if (ScriptEditor is TR1ScriptEditor tr1Editor)
                 {
-                    tr1Editor.DisableMusicInInventory = value;
+                    tr1Editor.EnableMusicInInventory = value;
                 }
             }
         }
@@ -1084,6 +1084,18 @@ namespace TRRandomizerCore
                 if (ScriptEditor is TR1ScriptEditor tr1Editor)
                 {
                     tr1Editor.EnableEnhancedSaves = value;
+                }
+            }
+        }
+
+        public bool EnablePitchedSounds
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnablePitchedSounds;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnablePitchedSounds = value;
                 }
             }
         }
@@ -1244,6 +1256,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.UseRewardRoomCameras = value;
         }
 
+        public bool UseRandomSecretModels
+        {
+            get => LevelRandomizer.UseRandomSecretModels;
+            set => LevelRandomizer.UseRandomSecretModels = value;
+        }
+
         public TRSecretCountMode SecretCountMode
         {
             get => LevelRandomizer.SecretCountMode;
@@ -1399,6 +1417,12 @@ namespace TRRandomizerCore
         {
             get => LevelRandomizer.HideEnemiesUntilTriggered;
             set => LevelRandomizer.HideEnemiesUntilTriggered = value;
+        }
+
+        public bool RemoveLevelEndingLarson
+        {
+            get => LevelRandomizer.RemoveLevelEndingLarson;
+            set => LevelRandomizer.RemoveLevelEndingLarson = value;
         }
 
         public bool RandomizeOutfits

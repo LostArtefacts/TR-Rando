@@ -120,10 +120,6 @@ namespace TRRandomizerCore.Editors
                 {
                     scriptEd.EnableCheats = true;
                 }
-                if (Settings.UseRecommendedCommunitySettings)
-                {
-                    scriptEd.EnableEnhancedSaves = false;
-                }
                 scriptEditor.SaveScript();
             }
 
@@ -170,7 +166,7 @@ namespace TRRandomizerCore.Editors
                         Settings = Settings,
                         ItemFactory = itemFactory,
                         MirrorLevels = environmentRandomizer.AllocateMirroredLevels(Settings.EnvironmentSeed)
-                    }.Randomize(Settings.EnemySeed);
+                    }.Randomize(Settings.SecretSeed);
                 }
 
                 if (!monitor.IsCancelled && Settings.RandomizeEnemies)

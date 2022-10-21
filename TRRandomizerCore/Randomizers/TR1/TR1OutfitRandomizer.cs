@@ -106,7 +106,11 @@ namespace TRRandomizerCore.Randomizers
             {
                 // Gym outfits are only available in some levels and we can only use it
                 // if the T-Rex isn't present because that overwrites the MiscAnim's textures.
-                _gymLevels = Levels.FindAll(l => _permittedGymLevels.Contains(l.LevelFileBaseName.ToUpper())).RandomSelection(_generator, _generator.Next(1, _permittedGymLevels.Count + 1));
+                _gymLevels = Levels.FindAll(l => _permittedGymLevels.Contains(l.LevelFileBaseName.ToUpper()));
+                if (_gymLevels.Count > 0)
+                {
+                    _gymLevels = _gymLevels.RandomSelection(_generator, _generator.Next(1, _gymLevels.Count + 1));
+                }
 
                 // Cache Lara's barefoot SFX from the original Gym.
                 TRLevel gym = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TRLevelNames.ASSAULT));
@@ -248,6 +252,8 @@ namespace TRRandomizerCore.Randomizers
                         ConvertToMauledOutfit(level);
                     }
 
+                    AmendBackpack(level);
+
                     _outer.SaveLevel(level);
 
                     if (!_outer.TriggerProgress())
@@ -332,6 +338,38 @@ namespace TRRandomizerCore.Randomizers
                 if (level.HasCutScene && !level.CutSceneLevel.Is(TRLevelNames.MINES_CUT))
                 {
                     HideEntities(level.CutSceneLevel, entities);
+                }
+            }
+
+            private void AmendBackpack(TR1CombinedLevel level)
+            {
+                bool trexPresent = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.TRex) != null;
+                if (!_outer.IsBraidLevel(level.Script)
+                    || _outer.IsInvisibleLevel(level.Script)
+                    || (_outer.IsGymLevel(level.Script) && !trexPresent))
+                {
+                    return;
+                }
+
+                List<TREntities> laraEntities = new List<TREntities>
+                {
+                    TREntities.Lara,
+                    TREntities.LaraShotgunAnim_H
+                };
+
+                if (trexPresent)
+                {
+                    laraEntities.Add(TREntities.LaraMiscAnim_H);
+                }
+
+                // Make the backpack shallower so the braid doesn't smash into it
+                foreach (TREntities ent in laraEntities)
+                {
+                    TRMesh mesh = TRMeshUtilities.GetModelMeshes(level.Data, ent)[7];
+                    for (int i = 26; i < 30; i++)
+                    {
+                        mesh.Vertices[i].Z += 12;
+                    }
                 }
             }
 
