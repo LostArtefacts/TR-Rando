@@ -6,5 +6,22 @@
   "OneOf": [],
   "ConditionalAllWithin": [],
   "ConditionalAll": [],
-  "Mirrored": []
+  "Mirrored": [
+    {
+      "Comments": "Move the antipad for the door after the lava flow traps in case there are items to collect on the other side.",
+      "EMType": 67,
+      "BaseLocation": {
+        "X": 31232,
+        "Y": -512,
+        "Z": 38400,
+        "Room": 57
+      },
+      "NewLocation": {
+        "X": 31232,
+        "Y": -512,
+        "Z": 40448,
+        "Room": 57
+      }
+    }
+  ]
 }
