@@ -818,7 +818,7 @@
 
                         <Border Grid.Row="9"
                                 Style="{StaticResource SeparatorBorder}">
-                            <CheckBox IsChecked="{Binding ControllerProxy.EnableTimerInInventory, Mode=TwoWay}"
+                            <CheckBox IsChecked="{Binding ControllerProxy.FovVertical, Mode=TwoWay}"
                                       VerticalAlignment="Top">
                                 <Label Padding="0"
                                        Content="FoV Vertical" />
