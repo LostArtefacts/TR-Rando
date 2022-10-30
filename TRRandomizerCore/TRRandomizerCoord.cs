@@ -60,6 +60,7 @@ namespace TRRandomizerCore
             TRInterop.TaggedVersion = taggedVersion;
             TRInterop.RandomisationSupported = true;
             TRInterop.SecretRewardsSupported = true;
+            TRInterop.ChecksumTester = new ChecksumTester();
 
             TRLevelEditorFactory.RegisterEditor(TRVersion.TR1, typeof(TR1RandoEditor));
             TRLevelEditorFactory.RegisterEditor(TRVersion.TR2, typeof(TR2RandoEditor));
@@ -77,15 +78,20 @@ namespace TRRandomizerCore
             TRCoord.Instance.BackupProgressChanged += TRCoord_BackupProgressChanged;
         }
 
-        public TRRandomizerController Open(string directoryPath)
+        public TRRandomizerController Open(string directoryPath, bool performChecksumTest)
         {
             _openEventArgs = new TROpenRestoreEventArgs();
-            return new TRRandomizerController(directoryPath);
+            return new TRRandomizerController(directoryPath, performChecksumTest);
         }
 
         public void ClearHistory()
         {
             TRCoord.Instance.ClearHistory();
+        }
+
+        public void ClearCurrentBackup()
+        {
+            TRCoord.Instance.ClearCurrentBackup();
         }
     }
 }

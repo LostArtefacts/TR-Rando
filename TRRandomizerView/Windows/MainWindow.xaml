@@ -68,6 +68,10 @@
                         CanExecute="EditorActiveCommandBinding_CanExecute"
                         Executed="RestoreCommandBinding_Executed"/>
 
+        <CommandBinding Command="cmds:WindowCommands.DeleteBackup"
+                        CanExecute="EditorActiveCommandBinding_CanExecute"
+                        Executed="DeleteBackupCommandBinding_Executed"/>
+
         <CommandBinding Command="cmds:WindowCommands.ImportSettings"
                         CanExecute="EditorActiveCommandBinding_CanExecute"
                         Executed="ImportSettingsCommandBinding_Executed"/>
@@ -182,8 +186,13 @@
                 <MenuItem Header="Show Error Folder"
                           Command="cmds:WindowCommands.ShowErrors"/>
 
+                <Separator/>
+                
                 <MenuItem Header="Restore To Default"
                           Command="cmds:WindowCommands.Restore"/>
+
+                <MenuItem Header="Delete Backup"
+                          Command="cmds:WindowCommands.DeleteBackup"/>
 
                 <Separator/>
 

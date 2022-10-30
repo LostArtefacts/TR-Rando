@@ -50,17 +50,19 @@ namespace TRRandomizerView.Windows
 
         private volatile bool _complete;
         private readonly string _folderPath;
+        private readonly bool _performChecksumTest;
 
         public Exception OpenException { get; private set; }
         public TRRandomizerController OpenedController { get; private set; }
 
-        public OpenProgressWindow(string folderPath)
+        public OpenProgressWindow(string folderPath, bool performChecksumTest)
         {
             InitializeComponent();
             Owner = WindowUtils.GetActiveWindow(this);
             DataContext = this;
             _complete = false;
             _folderPath = folderPath;
+            _performChecksumTest = performChecksumTest;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -76,7 +78,7 @@ namespace TRRandomizerView.Windows
 
             try
             {
-                OpenedController = TRRandomizerCoord.Instance.Open(_folderPath);
+                OpenedController = TRRandomizerCoord.Instance.Open(_folderPath, _performChecksumTest);
             }
             catch (Exception e)
             {

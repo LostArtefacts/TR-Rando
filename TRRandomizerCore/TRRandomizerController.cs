@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using TRRandomizerCore.Utilities;
 using TRRandomizerCore.Secrets;
-using System.Numerics;
+using TRGE.Coord.Helpers;
 
 namespace TRRandomizerCore
 {
@@ -22,10 +22,10 @@ namespace TRRandomizerCore
         internal AbstractTRScriptEditor ScriptEditor => _editor.ScriptEditor;
         internal RandomizerSettings LevelRandomizer => (_editor.LevelEditor as ISettingsProvider).Settings;
 
-        internal TRRandomizerController(string directoryPath)
+        internal TRRandomizerController(string directoryPath, bool performChecksumTest)
         {
             // If there is a checksum mismatch, we will just ignore the previous backup and open the folder afresh
-            _editor = TRCoord.Instance.Open(directoryPath, TRScriptOpenOption.DiscardBackup);
+            _editor = TRCoord.Instance.Open(directoryPath, TRScriptOpenOption.DiscardBackup, performChecksumTest ? TRBackupChecksumOption.PerformCheck : TRBackupChecksumOption.IgnoreIssues);
             _editor.SaveProgressChanged += Editor_SaveProgressChanged;
             _editor.RestoreProgressChanged += Editor_RestoreProgressChanged;
             StoreExternalOrganisations();
