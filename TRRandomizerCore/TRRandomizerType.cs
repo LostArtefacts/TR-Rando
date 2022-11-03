@@ -51,6 +51,7 @@
         ItemSprite,
         SecretModels,
         LarsonBehaviour,
-        DynamicTextures
+        DynamicTextures,
+        MeshSwaps
     }
 }

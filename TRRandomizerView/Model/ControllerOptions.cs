@@ -2586,7 +2586,7 @@ namespace TRRandomizerView.Model
             _useRewardRoomCameras.IsAvailable = IsRewardRoomsTypeSupported;
             _useRandomSecretModels.IsAvailable = IsSecretModelsTypeSupported;
 
-            _swapEnemyAppearance.IsAvailable = IsOutfitDaggerSupported;
+            _swapEnemyAppearance.IsAvailable = IsMeshSwapsTypeSupported;
 
             _protectMonks.IsAvailable = !IsTR1;
             _docileWillard.IsAvailable = IsTR3;
@@ -3124,6 +3124,7 @@ namespace TRRandomizerView.Model
         public bool IsBraidTypeSupported => IsRandomizationSupported(TRRandomizerType.Braid);
         public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
         public bool IsDynamicTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.DynamicTextures);
+        public bool IsMeshSwapsTypeSupported => IsRandomizationSupported(TRRandomizerType.MeshSwaps);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);
         public bool IsEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.Environment);
         public bool IsLaddersTypeSupported => IsRandomizationSupported(TRRandomizerType.Ladders);

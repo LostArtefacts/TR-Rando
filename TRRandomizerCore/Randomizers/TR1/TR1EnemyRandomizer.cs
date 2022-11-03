@@ -728,7 +728,10 @@ namespace TRRandomizerCore.Randomizers
                 AddUnarmedLevelAmmo(level);
             }
 
-            RandomizeMeshes(level, enemies.Available);
+            if (Settings.SwapEnemyAppearance)
+            {
+                RandomizeMeshes(level, enemies.Available);
+            }
         }
 
         private int GetEntityCount(TR1CombinedLevel level, TREntities entityType)
