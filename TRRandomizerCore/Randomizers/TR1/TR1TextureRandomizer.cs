@@ -332,6 +332,7 @@ namespace TRRandomizerCore.Randomizers
                     return lvl1.IsCutScene && lvl1.ParentLevel == lvl2 ? 1 : 0;
                 });
 
+                DynamicTextureBuilder dynamicBuilder = new DynamicTextureBuilder();
                 foreach (TR1CombinedLevel level in levels)
                 {
                     TR1TextureMapping mapping = _outer.GetMapping(level);
@@ -342,6 +343,13 @@ namespace TRRandomizerCore.Randomizers
                         {
                             parentHolder = _holders[level.ParentLevel];
                         }
+
+                        // Build dynamic mapping dynamically
+                        mapping.DynamicMapping = new Dictionary<DynamicTextureSource, DynamicTextureTarget>
+                        {
+                            [_outer._textureDatabase.GetDynamicSource("MainTheme")] = dynamicBuilder.Build(level, _outer.Settings.RetainMainLevelTextures)
+                        };
+
                         _holders[level] = new TextureHolder<TREntities, TRLevel>(mapping, _outer, parentHolder);
 
                         if (_outer.IsWireframeLevel(level))

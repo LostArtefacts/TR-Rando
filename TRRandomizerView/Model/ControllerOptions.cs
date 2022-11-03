@@ -2572,7 +2572,8 @@ namespace TRRandomizerView.Model
         {
             // Called after the version type has been identified, so allows for customising
             // individual settings based on what's available.
-            _removeRobeDagger.IsAvailable = _retainLevelTextures.IsAvailable = IsOutfitDaggerSupported;
+            _removeRobeDagger.IsAvailable = IsOutfitDaggerSupported;
+            _retainLevelTextures.IsAvailable = IsDynamicTexturesTypeSupported;
             _persistOutfits.IsAvailable = !IsTR1;
             _allowGymOutfit.IsAvailable = IsGymOutfitTypeSupported;
 
@@ -3122,6 +3123,7 @@ namespace TRRandomizerView.Model
         public bool IsGymOutfitTypeSupported => IsRandomizationSupported(TRRandomizerType.GymOutfit);
         public bool IsBraidTypeSupported => IsRandomizationSupported(TRRandomizerType.Braid);
         public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
+        public bool IsDynamicTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.DynamicTextures);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);
         public bool IsEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.Environment);
         public bool IsLaddersTypeSupported => IsRandomizationSupported(TRRandomizerType.Ladders);

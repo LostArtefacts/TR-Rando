@@ -187,6 +187,8 @@ namespace TRTexture16Importer.Textures
                     RedrawDynamicTargets(target.OptionalTileTargets[category], op);
                 }
             }
+
+            RecolourDynamicTargets(target.ModelColourTargets, op);
         }
 
         private void RedrawDynamicTargets(Dictionary<int, List<Rectangle>> targets, HSBOperation operation)
@@ -197,6 +199,60 @@ namespace TRTexture16Importer.Textures
                 foreach (Rectangle rect in targets[tileIndex])
                 {
                     bg.AdjustHSB(rect, operation);
+                }
+            }
+        }
+
+        private void RecolourDynamicTargets(List<TRMesh> meshes, HSBOperation operation)
+        {
+            TRColour[] palette = GetPalette8();
+            ISet<ushort> colourIndices = new HashSet<ushort>();
+            Dictionary<int, int> remapIndices = new Dictionary<int, int>();
+
+            foreach (TRMesh mesh in meshes)
+            {
+                foreach (TRFace4 f in mesh.ColouredRectangles)
+                {
+                    colourIndices.Add(f.Texture);
+                }
+                foreach (TRFace3 f in mesh.ColouredTriangles)
+                {
+                    colourIndices.Add(f.Texture);
+                }
+            }
+
+            foreach (ushort colourIndex in colourIndices)
+            {
+                if (colourIndex == 0)
+                {
+                    continue;
+                }
+                TRColour col = palette[colourIndex];
+                Color c = Color.FromArgb(col.Red * 4, col.Green * 4, col.Blue * 4);
+                HSB hsb = c.ToHSB();
+                hsb.H = operation.ModifyHue(hsb.H);
+                hsb.S = operation.ModifySaturation(hsb.S);
+                hsb.B = operation.ModifyBrightness(hsb.B);
+
+                int newColourIndex = ImportColour(hsb.ToColour());
+                remapIndices.Add(colourIndex, newColourIndex);
+            }
+
+            foreach (TRMesh mesh in meshes)
+            {
+                foreach (TRFace4 f in mesh.ColouredRectangles)
+                {
+                    if (remapIndices.ContainsKey(f.Texture))
+                    {
+                        f.Texture = (ushort)remapIndices[f.Texture];
+                    }
+                }
+                foreach (TRFace3 f in mesh.ColouredTriangles)
+                {
+                    if (remapIndices.ContainsKey(f.Texture))
+                    {
+                        f.Texture = (ushort)remapIndices[f.Texture];
+                    }
                 }
             }
         }

@@ -9,6 +9,7 @@ namespace TRRandomizerCore
         {
             TRRandomizerType.AtlanteanEggBehaviour,
             TRRandomizerType.Audio,
+            TRRandomizerType.DynamicTextures,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
             TRRandomizerType.ExtraPickups,
@@ -19,6 +20,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Item,
             TRRandomizerType.ItemSprite,
             TRRandomizerType.KeyItems,
+            TRRandomizerType.KeyItemTextures,
             TRRandomizerType.LarsonBehaviour,
             TRRandomizerType.NightMode,
             TRRandomizerType.Outfit,
@@ -26,6 +28,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Secret,
             TRRandomizerType.SecretModels,
             TRRandomizerType.SecretReward,
+            TRRandomizerType.SecretTextures,
             TRRandomizerType.SFX,
             TRRandomizerType.StartPosition,
             TRRandomizerType.Texture
@@ -54,6 +57,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Braid,
             TRRandomizerType.DisableDemos,
             TRRandomizerType.DragonSpawn,
+            TRRandomizerType.DynamicTextures,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
             TRRandomizerType.GlitchedSecrets,

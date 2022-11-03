@@ -50,6 +50,7 @@
         HiddenEnemies,
         ItemSprite,
         SecretModels,
-        LarsonBehaviour
+        LarsonBehaviour,
+        DynamicTextures
     }
 }

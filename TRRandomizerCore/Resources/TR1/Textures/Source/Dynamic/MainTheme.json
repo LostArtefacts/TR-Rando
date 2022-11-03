@@ -1,0 +1,51 @@
+{
+  "OperationMap": {
+    "BlackWhite": {
+      "Saturation": 0
+    },
+    "Dark": {
+      "Saturation": 0,
+      "Brightness": 60
+    },
+    "DeepPurple": {
+      "Hue": -160,
+      "Saturation": 75
+    },
+    "Lime": {
+      "Hue": 30
+    },
+    "Mint": {
+      "Hue": 50,
+      "Saturation": 75
+    },
+    "Orange": {
+      "Hue": -30
+    },
+    "PinkTeal": {
+      "Hue": -60,
+      "Saturation": 75
+    },
+    "Red": {
+      "Hue": -90
+    },
+    "SoftPurple": {
+      "Hue": -200,
+      "Saturation": 75
+    },
+    "ElectricGreen": {
+      "Hue": 60
+    },
+    "Decay": {
+      "Hue": 156
+    },
+    "YellowBlue": {
+      "Hue": -160,
+      "Saturation": 75
+    },
+    "PurpleHaze": {
+      "Hue": -93,
+      "Saturation": 89,
+      "Brightness": 41
+    }
+  }
+}
