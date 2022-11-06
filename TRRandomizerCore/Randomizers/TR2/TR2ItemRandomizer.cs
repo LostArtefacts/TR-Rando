@@ -61,8 +61,8 @@ namespace TRRandomizerCore.Randomizers
 
                 RandomizeSeraph();
 
-                if (Settings.RandomizeItemSprites)
-                    RandomizeSprites();
+               // if (Settings.RandomizeItemSprites)
+                 //   RandomizeSprites();
 
                 //Write back the level file
                 SaveLevelInstance();
@@ -72,6 +72,27 @@ namespace TRRandomizerCore.Randomizers
                     break;
                 }
             }
+        }
+
+        public void RandomizeLevelsSprites()
+        {
+           
+            foreach (TR2ScriptedLevel lvl in Levels)
+            {
+                //Read the level into a combined data/script level object
+                LoadLevelInstance(lvl);
+               
+                RandomizeSprites();
+
+                //Write back the level file
+                SaveLevelInstance();
+
+                if (!TriggerProgress())
+                {
+                    break;
+                }
+            }
+
         }
 
 

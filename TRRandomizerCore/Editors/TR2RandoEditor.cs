@@ -252,6 +252,12 @@ namespace TRRandomizerCore.Editors
                         }.Randomize(Settings.NightModeSeed);
                     }
                 }
+
+                if (!monitor.IsCancelled && Settings.RandomizeItems && Settings.RandomizeItemSprites)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing Sprites");
+                    itemRandomizer.RandomizeLevelsSprites();
+                }
             }
         }
     }
