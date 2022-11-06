@@ -1,0 +1,493 @@
+{
+  "OperationMap": {
+    "BlackWhite": {
+      "Saturation": 0
+    },
+    "Dark": {
+      "Saturation": 0,
+      "Brightness": 60
+    },
+    "DeepPurple": {
+      "Hue": -160,
+      "Saturation": 75
+    },
+    "Mint": {
+      "Hue": 50,
+      "Saturation": 75
+    },
+    "Orange": {
+      "Hue": -30
+    },
+    "PinkTeal": {
+      "Hue": -60,
+      "Saturation": 75
+    },
+    "Red": {
+      "Hue": -90
+    },
+    "SoftPurple": {
+      "Hue": -200,
+      "Saturation": 75
+    },
+    "Decay": {
+      "Hue": 156
+    },
+    "YellowBlue": {
+      "Hue": -160,
+      "Saturation": 75
+    },
+    "PurpleHaze": {
+      "Hue": -93,
+      "Saturation": 89,
+      "Brightness": 41
+    },
+    "[H20]": {
+      "Hue": 20
+    },
+    "[H20 S70]": {
+      "Hue": 20,
+      "Saturation": 70
+    },
+    "[H20 S80 B50]": {
+      "Hue": 20,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H20 B70]": {
+      "Hue": 20,
+      "Brightness": 70
+    },
+    "[H30]": {
+      "Hue": 30
+    },
+    "[H30 S70]": {
+      "Hue": 30,
+      "Saturation": 70
+    },
+    "[H30 S80 B50]": {
+      "Hue": 30,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H30 B70]": {
+      "Hue": 30,
+      "Brightness": 70
+    },
+    "[H40]": {
+      "Hue": 40
+    },
+    "[H40 S70]": {
+      "Hue": 40,
+      "Saturation": 70
+    },
+    "[H40 S80 B50]": {
+      "Hue": 40,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H40 B70]": {
+      "Hue": 40,
+      "Brightness": 70
+    },
+    "[H50]": {
+      "Hue": 50
+    },
+    "[H50 S70]": {
+      "Hue": 50,
+      "Saturation": 70
+    },
+    "[H50 S80 B50]": {
+      "Hue": 50,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H50 B70]": {
+      "Hue": 50,
+      "Brightness": 70
+    },
+    "[H60]": {
+      "Hue": 60
+    },
+    "[H60 S70]": {
+      "Hue": 60,
+      "Saturation": 70
+    },
+    "[H60 S80 B50]": {
+      "Hue": 60,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H60 B70]": {
+      "Hue": 60,
+      "Brightness": 70
+    },
+    "[H70]": {
+      "Hue": 70
+    },
+    "[H70 S70]": {
+      "Hue": 70,
+      "Saturation": 70
+    },
+    "[H70 S80 B50]": {
+      "Hue": 70,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H70 B70]": {
+      "Hue": 70,
+      "Brightness": 70
+    },
+    "[H80]": {
+      "Hue": 80
+    },
+    "[H80 S70]": {
+      "Hue": 80,
+      "Saturation": 70
+    },
+    "[H80 S80 B50]": {
+      "Hue": 80,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H80 B70]": {
+      "Hue": 80,
+      "Brightness": 70
+    },
+    "[H90]": {
+      "Hue": 90
+    },
+    "[H90 S70]": {
+      "Hue": 90,
+      "Saturation": 70
+    },
+    "[H90 S80 B50]": {
+      "Hue": 90,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H90 B70]": {
+      "Hue": 90,
+      "Brightness": 70
+    },
+    "[H100]": {
+      "Hue": 100
+    },
+    "[H100 S70]": {
+      "Hue": 100,
+      "Saturation": 70
+    },
+    "[H100 S80 B50]": {
+      "Hue": 100,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H100 B70]": {
+      "Hue": 100,
+      "Brightness": 70
+    },
+    "[H110]": {
+      "Hue": 110
+    },
+    "[H110 S70]": {
+      "Hue": 110,
+      "Saturation": 70
+    },
+    "[H110 S80 B50]": {
+      "Hue": 110,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H110 B70]": {
+      "Hue": 110,
+      "Brightness": 70
+    },
+    "[H120]": {
+      "Hue": 120
+    },
+    "[H120 S70]": {
+      "Hue": 120,
+      "Saturation": 70
+    },
+    "[H120 S80 B50]": {
+      "Hue": 120,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H120 B70]": {
+      "Hue": 120,
+      "Brightness": 70
+    },
+    "[H130]": {
+      "Hue": 130
+    },
+    "[H130 S70]": {
+      "Hue": 130,
+      "Saturation": 70
+    },
+    "[H130 S80 B50]": {
+      "Hue": 130,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H130 B70]": {
+      "Hue": 130,
+      "Brightness": 70
+    },
+    "[H140]": {
+      "Hue": 140
+    },
+    "[H140 S70]": {
+      "Hue": 140,
+      "Saturation": 70
+    },
+    "[H140 S80 B50]": {
+      "Hue": 140,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H140 B70]": {
+      "Hue": 140,
+      "Brightness": 70
+    },
+    "[H150]": {
+      "Hue": 150
+    },
+    "[H150 S70]": {
+      "Hue": 150,
+      "Saturation": 70
+    },
+    "[H150 S80 B50]": {
+      "Hue": 150,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H150 B70]": {
+      "Hue": 150,
+      "Brightness": 70
+    },
+    "[H160]": {
+      "Hue": 160
+    },
+    "[H160 S70]": {
+      "Hue": 160,
+      "Saturation": 70
+    },
+    "[H160 S80 B50]": {
+      "Hue": 160,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H160 B70]": {
+      "Hue": 160,
+      "Brightness": 70
+    },
+    "[H170]": {
+      "Hue": 170
+    },
+    "[H170 S70]": {
+      "Hue": 170,
+      "Saturation": 70
+    },
+    "[H170 S80 B50]": {
+      "Hue": 170,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H170 B70]": {
+      "Hue": 170,
+      "Brightness": 70
+    },
+    "[H180]": {
+      "Hue": 180
+    },
+    "[H180 S70]": {
+      "Hue": 180,
+      "Saturation": 70
+    },
+    "[H180 S80 B50]": {
+      "Hue": 180,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H180 B70]": {
+      "Hue": 180,
+      "Brightness": 70
+    },
+    "[H190]": {
+      "Hue": 190
+    },
+    "[H190 S70]": {
+      "Hue": 190,
+      "Saturation": 70
+    },
+    "[H190 S80 B50]": {
+      "Hue": 190,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H190 B70]": {
+      "Hue": 190,
+      "Brightness": 70
+    },
+    "[H200]": {
+      "Hue": 200
+    },
+    "[H200 S70]": {
+      "Hue": 200,
+      "Saturation": 70
+    },
+    "[H200 S80 B50]": {
+      "Hue": 200,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H200 B70]": {
+      "Hue": 200,
+      "Brightness": 70
+    },
+    "[H210]": {
+      "Hue": 210
+    },
+    "[H210 S70]": {
+      "Hue": 210,
+      "Saturation": 70
+    },
+    "[H210 S80 B50]": {
+      "Hue": 210,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H210 B70]": {
+      "Hue": 210,
+      "Brightness": 70
+    },
+    "[H220]": {
+      "Hue": 220
+    },
+    "[H220 S70]": {
+      "Hue": 220,
+      "Saturation": 70
+    },
+    "[H220 S80 B50]": {
+      "Hue": 220,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H220 B70]": {
+      "Hue": 220,
+      "Brightness": 70
+    },
+    "[H230]": {
+      "Hue": 230
+    },
+    "[H230 S70]": {
+      "Hue": 230,
+      "Saturation": 70
+    },
+    "[H230 S80 B50]": {
+      "Hue": 230,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H230 B70]": {
+      "Hue": 230,
+      "Brightness": 70
+    },
+    "[H240]": {
+      "Hue": 240
+    },
+    "[H240 S70]": {
+      "Hue": 240,
+      "Saturation": 70
+    },
+    "[H240 S80 B50]": {
+      "Hue": 240,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H240 B70]": {
+      "Hue": 240,
+      "Brightness": 70
+    },
+    "[H250]": {
+      "Hue": 250
+    },
+    "[H250 S70]": {
+      "Hue": 250,
+      "Saturation": 70
+    },
+    "[H250 S80 B50]": {
+      "Hue": 250,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H250 B70]": {
+      "Hue": 250,
+      "Brightness": 70
+    },
+    "[H260]": {
+      "Hue": 260
+    },
+    "[H260 S70]": {
+      "Hue": 260,
+      "Saturation": 70
+    },
+    "[H260 S80 B50]": {
+      "Hue": 260,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H260 B70]": {
+      "Hue": 260,
+      "Brightness": 70
+    },
+    "[H270]": {
+      "Hue": 270
+    },
+    "[H270 S70]": {
+      "Hue": 270,
+      "Saturation": 70
+    },
+    "[H270 S80 B50]": {
+      "Hue": 270,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H270 B70]": {
+      "Hue": 270,
+      "Brightness": 70
+    },
+    "[H280]": {
+      "Hue": 280
+    },
+    "[H280 S70]": {
+      "Hue": 280,
+      "Saturation": 70
+    },
+    "[H280 S80 B50]": {
+      "Hue": 280,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H280 B70]": {
+      "Hue": 280,
+      "Brightness": 70
+    },
+    "[H290]": {
+      "Hue": 290
+    },
+    "[H290 S70]": {
+      "Hue": 290,
+      "Saturation": 70
+    },
+    "[H290 S80 B50]": {
+      "Hue": 290,
+      "Saturation": 80,
+      "Brightness": 50
+    },
+    "[H290 B70]": {
+      "Hue": 290,
+      "Brightness": 70
+    }
+  }
+}

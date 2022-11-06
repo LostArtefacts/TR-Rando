@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TRGE.Core;
 using TRRandomizerCore;
 using TRRandomizerView.Events;
 using TRRandomizerView.Model;
@@ -101,9 +102,9 @@ namespace TRRandomizerView.Controls
             OpenDataFolder(folder.FolderPath);
         }
 
-        public void OpenDataFolder(string folderPath)
+        public void OpenDataFolder(string folderPath, bool performChecksumTest = true)
         {
-            OpenProgressWindow opw = new OpenProgressWindow(folderPath);
+            OpenProgressWindow opw = new OpenProgressWindow(folderPath, performChecksumTest);
             try
             {
                 if (opw.ShowDialog() ?? false)
@@ -113,6 +114,15 @@ namespace TRRandomizerView.Controls
                 else if (opw.OpenException != null)
                 {
                     throw opw.OpenException;
+                }
+            }
+            catch (ChecksumMismatchException)
+            {
+                if (!MessageWindow.ShowConfirm(folderPath + "\n\nGame data integrity check failed. Randomization may not perform as expected as the game data files in the chosen directory are not original." +
+                    "\n\nThe recommended action is for you to re-install the game. Once complete, open the data folder again in the randomizer to proceed." +
+                    "\n\nDo you want to cancel the current operation and take the recommended action?"))
+                {
+                    OpenDataFolder(folderPath, false);
                 }
             }
             catch (Exception e)

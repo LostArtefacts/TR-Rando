@@ -304,6 +304,30 @@ namespace TRRandomizerView.Controls
             }
         }
 
+        public bool DeleteBackup()
+        {
+            if (MessageWindow.ShowConfirm("The files that were backed up when this folder was first opened will be deleted and the editor will be closed.\n\nDo you wish to proceed?"))
+            {
+                try
+                {
+                    _showExternalModPrompt = false;
+                    TRRandomizerCoord.Instance.ClearCurrentBackup();
+                    _dirty = false;
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    MessageWindow.ShowException(e);
+                }
+                finally
+                {
+                    _showExternalModPrompt = true;
+                }
+            }
+
+            return false;
+        }
+
         private void EditorControl_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))

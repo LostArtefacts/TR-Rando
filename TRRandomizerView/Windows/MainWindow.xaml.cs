@@ -381,6 +381,15 @@ namespace TRRandomizerView.Windows
             _editorControl.RestoreDefaults();
         }
 
+        private void DeleteBackupCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (_editorControl.DeleteBackup())
+            {
+                _editorControl.Unload();
+                IsEditorActive = false;
+            }
+        }
+
         private void ImportSettingsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             _editorControl.ImportSettings();

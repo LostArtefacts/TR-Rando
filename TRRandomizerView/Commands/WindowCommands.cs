@@ -44,6 +44,7 @@ namespace TRRandomizerView.Commands
         public static readonly RoutedUICommand ShowBackup = new RoutedUICommand();
         public static readonly RoutedUICommand ShowErrors = new RoutedUICommand();
         public static readonly RoutedUICommand Restore = new RoutedUICommand();
+        public static readonly RoutedUICommand DeleteBackup = new RoutedUICommand();
         public static readonly RoutedUICommand ImportSettings = new RoutedUICommand();
         public static readonly RoutedUICommand ExportSettings = new RoutedUICommand();
         public static readonly RoutedUICommand DevelopmentMode = new RoutedUICommand();
