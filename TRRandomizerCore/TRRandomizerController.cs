@@ -1612,6 +1612,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.UncontrolledSFXAssaultCourse = value;
         }
 
+        public bool RandomizeWibble
+        {
+            get => LevelRandomizer.RandomizeWibble;
+            set => LevelRandomizer.RandomizeWibble = value;
+        }
+
         public bool RandomizeStartPosition
         {
             get => LevelRandomizer.RandomizeStartPosition;

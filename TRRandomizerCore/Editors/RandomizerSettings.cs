@@ -101,6 +101,7 @@ namespace TRRandomizerCore.Editors
         public bool LinkCreatureSFX { get; set; }
         public uint UncontrolledSFXCount { get; set; }
         public bool UncontrolledSFXAssaultCourse { get; set; }
+        public bool RandomizeWibble { get; set; }
         public bool RotateStartPositionOnly { get; set; }
         public bool RandomizeWaterLevels { get; set; }
         public bool RandomizeSlotPositions { get; set; }
@@ -241,6 +242,7 @@ namespace TRRandomizerCore.Editors
             LinkCreatureSFX = config.GetBool(nameof(LinkCreatureSFX));
             UncontrolledSFXCount = config.GetUInt(nameof(UncontrolledSFXCount), 0);
             UncontrolledSFXAssaultCourse = config.GetBool(nameof(UncontrolledSFXAssaultCourse));
+            RandomizeWibble = config.GetBool(nameof(RandomizeWibble));
 
             RandomizeStartPosition = config.GetBool(nameof(RandomizeStartPosition));
             StartPositionSeed = config.GetInt(nameof(StartPositionSeed), defaultSeed);
@@ -369,6 +371,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(LinkCreatureSFX)] = LinkCreatureSFX;
             config[nameof(UncontrolledSFXCount)] = UncontrolledSFXCount;
             config[nameof(UncontrolledSFXAssaultCourse)] = UncontrolledSFXAssaultCourse;
+            config[nameof(RandomizeWibble)] = RandomizeWibble;
 
             config[nameof(RandomizeStartPosition)] = RandomizeStartPosition;
             config[nameof(StartPositionSeed)] = StartPositionSeed;
