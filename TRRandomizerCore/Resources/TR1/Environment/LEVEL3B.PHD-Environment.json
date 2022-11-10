@@ -1,5 +1,18 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Get rid of the antipad that kills the music after the double block room.",
+      "EMType": 62,
+      "Locations": [
+        {
+          "X": 59904,
+          "Y": 6656,
+          "Z": 51712,
+          "Room": 25
+        }
+      ]
+    }
+  ],
   "NonPurist": [],
   "Any": [],
   "AllWithin": [],
