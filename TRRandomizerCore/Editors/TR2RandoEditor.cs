@@ -34,7 +34,12 @@ namespace TRRandomizerCore.Editors
 
         protected override int GetSaveTarget(int numLevels)
         {
-            return base.GetSaveTarget(numLevels) + Settings.GetSaveTarget(numLevels);
+            int target = base.GetSaveTarget(numLevels) + Settings.GetSaveTarget(numLevels);
+            if (Settings.RandomizeItems && Settings.RandomizeItemSprites)
+            {
+                target += numLevels;
+            }
+            return target;
         }
 
         protected override void SaveImpl(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
@@ -251,6 +256,12 @@ namespace TRRandomizerCore.Editors
                             TextureMonitor = textureMonitor
                         }.Randomize(Settings.NightModeSeed);
                     }
+                }
+
+                if (!monitor.IsCancelled && Settings.RandomizeItems && Settings.RandomizeItemSprites)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing Sprites");
+                    itemRandomizer.RandomizeLevelsSprites();
                 }
             }
         }
