@@ -68,6 +68,7 @@ namespace TRModelTransporter.Transport
                 };
             }
 
+            PreDefinitionCreation(level, entity);
             D definition = CreateModelDefinition(level, entity);
             ExportDependencies(definition);
             ModelExportReady(definition);
@@ -84,6 +85,7 @@ namespace TRModelTransporter.Transport
             return definition;
         }
 
+        protected virtual void PreDefinitionCreation(L level, E modelEntity) { }
         protected abstract D CreateModelDefinition(L level, E modelEntity);
         protected virtual void ModelExportReady(D definition) { }
 
