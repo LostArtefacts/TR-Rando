@@ -3284,6 +3284,13 @@
       "Room": 10,
       "LevelState": "NotMirrored",
       "RequiresGlitch": true
+    },
+    {
+      "X": 58410,
+      "Y": -235,
+      "Z": 54299,
+      "Room": 40,
+      "RequiresGlitch": true
     }
   ]
 }
