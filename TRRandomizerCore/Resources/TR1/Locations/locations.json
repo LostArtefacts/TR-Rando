@@ -730,6 +730,45 @@
       "Room": 6,
       "RequiresDamage": true,
       "RequiresGlitch": true
+    },
+    {
+      "X": 55267,
+      "Y": 506,
+      "Z": 11224,
+      "Room": 61,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 53223,
+      "Y": 780,
+      "Z": 10752,
+      "Room": 61,
+      "Difficulty": "Hard",
+      "LevelState": "Mirrored",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 35886,
+      "Y": 2271,
+      "Z": 27685,
+      "Room": 56,
+      "RequiresDamage": true,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 36841,
+      "Y": 748,
+      "Z": 29645,
+      "Room": 51,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 29226,
+      "Y": 5322,
+      "Z": 41002,
+      "Room": 16,
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     }
   ],
   "LEVEL3B.PHD": [
