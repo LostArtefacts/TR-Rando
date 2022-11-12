@@ -603,56 +603,11 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
 
-            // If we have also used a secret that requires damage and is glitched, add something to the
-            // top ring to allow medi dupes.
-            if (glitchedDamagingLocationUsed)
+            // If we have also used a secret that requires damage and is glitched, add an additional
+            // medi as these tend to occur where Lara has to drop far after picking them up.
+            if (glitchedDamagingLocationUsed && ScriptEditor.Edition.IsCommunityPatch)
             {
-                // If we have a spare model slot, duplicate one of the artefacts into this so that
-                // we can add a hint with the item name. Otherwise, just re-use a puzzle item.
-                List<TRModel> models = level.Data.Models.ToList();
-                Dictionary<TREntities, TREntities> artefacts = TR1EntityUtilities.GetSecretReplacements();
-
-                TREntities availablePickupType = default;
-                TREntities availableMenuType = default;
-                foreach (TREntities pickupType in artefacts.Keys)
-                {
-                    TREntities menuType = artefacts[pickupType];
-                    if (models.Find(m => m.ID == (uint)menuType) == null)
-                    {
-                        availablePickupType = pickupType;
-                        availableMenuType = menuType;
-                        break;
-                    }
-                }
-
-                if (availableMenuType != default)
-                {
-                    // We have a free slot, so duplicate a model
-                    TREntities baseArtefact = pickupTypes[_generator.Next(0, pickupTypes.Count)];
-                    TRModel artefactMenuModel = models.Find(m => m.ID == (uint)artefacts[baseArtefact]);
-                    models.Add(new TRModel
-                    {
-                        Animation = artefactMenuModel.Animation,
-                        FrameOffset = artefactMenuModel.FrameOffset,
-                        ID = (uint)availableMenuType,
-                        MeshTree = artefactMenuModel.MeshTree,
-                        NumMeshes = artefactMenuModel.NumMeshes,
-                        StartingMesh = artefactMenuModel.StartingMesh
-                    });
-
-                    level.Data.Models = models.ToArray();
-                    level.Data.NumModels++;
-
-                    // Add a script name - pull from GamestringRando once translations completed
-                    SetPuzzleTypeName(level, availablePickupType, "Infinite Medi Packs");
-                }
-                else
-                {
-                    // Otherwise, just use something already available (no change in name)
-                    availablePickupType = pickupTypes[_generator.Next(0, pickupTypes.Count)];
-                }
-
-                level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(availablePickupType));
+                level.Script.AddStartInventoryItem(TR1Items.SmallMedi);
             }
         }
 
@@ -739,6 +694,14 @@ namespace TRRandomizerCore.Randomizers
                 {
                     Debug.WriteLine(string.Format(_flipMapWarningMsg, level.Name, secret.Location.X, secret.Location.Y, secret.Location.Z, altRoom));
                 }
+            }
+
+            // Turn off walk-to-items in T1M if we are placing on a slope above water.
+            if (ScriptEditor.Edition.IsCommunityPatch 
+                && !level.Data.Rooms[secret.Location.Room].ContainsWater
+                && secret.Location.IsSlipperySlope(level.Data, floorData))
+            {
+                (ScriptEditor as TR1ScriptEditor).WalkToItems = false;
             }
 
             // Checks have passed, so we can actually create the entity.

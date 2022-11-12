@@ -1055,7 +1055,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.WalkToItems, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Walk to items" />
+                                       Content="Walk to items *" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="4"
