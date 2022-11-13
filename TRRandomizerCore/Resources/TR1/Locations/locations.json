@@ -769,6 +769,36 @@
       "Room": 16,
       "Difficulty": "Hard",
       "RequiresGlitch": true
+    },
+    {
+      "X": 76756,
+      "Y": -512,
+      "Z": 12320,
+      "Room": 44,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 76743,
+      "Y": -512,
+      "Z": 11222,
+      "Room": 44,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 74780,
+      "Y": -540,
+      "Z": 11773,
+      "Room": 44,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 52109,
+      "Y": -2429,
+      "Z": 17854,
+      "Room": 64,
+      "Difficulty": "Hard",
+      "RequiresDamage": true,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL3B.PHD": [
