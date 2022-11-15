@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RectanglePacker.Events;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -37,6 +38,8 @@ namespace TRRandomizerCore.Textures
 
             using (AbstractTexturePacker<E, L> packer = CreatePacker(level))
             {
+                Dictionary<LandmarkTextureTarget, TexturedTileSegment> targetSegmentMap = new Dictionary<LandmarkTextureTarget, TexturedTileSegment>();
+
                 foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
                 {
                     if (textures.Count == MaxTextures)
@@ -88,14 +91,16 @@ namespace TRRandomizerCore.Textures
                                 image = source.ClonedBitmap;
                             }
 
-                            packer.AddRectangle(new TexturedTileSegment(texture, image));
+                            TexturedTileSegment segment = new TexturedTileSegment(texture, image);
+                            packer.AddRectangle(segment);
+                            targetSegmentMap[target] = segment;
                         }
                     }
                 }
 
                 try
                 {
-                    packer.Pack(true);
+                    PackingResult<TexturedTile, TexturedTileSegment> result = packer.Pack(true);
 
                     // Perform the room data remapping
                     foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
@@ -109,7 +114,7 @@ namespace TRRandomizerCore.Textures
                         {
                             foreach (LandmarkTextureTarget target in mapping.LandmarkMapping[source][segmentIndex])
                             {
-                                if (target.MappedTextureIndex == -1)
+                                if (target.MappedTextureIndex == -1 || result.Packer.OrphanedRectangles.Contains(targetSegmentMap[target]))
                                 {
                                     // There wasn't enough space for this
                                     continue;
