@@ -1055,7 +1055,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.WalkToItems, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Walk to items" />
+                                       Content="Walk to items *" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="4"
@@ -1115,7 +1115,7 @@
                             <CheckBox IsChecked="{Binding ControllerProxy.EnablePitchedSounds, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
-                                       Content="Enable pitched sounds" />
+                                       Content="Enable pitched sounds *" />
                             </CheckBox>
                         </Border>
                         <Border Grid.Row="2"

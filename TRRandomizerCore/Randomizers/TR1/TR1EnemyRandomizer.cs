@@ -2,15 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using TRGE.Core;
+using TRLevelReader;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRModelTransporter.Handlers;
+using TRModelTransporter.Model.Sound;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
@@ -716,11 +720,8 @@ namespace TRRandomizerCore.Randomizers
                 level.Data.NumEntities++;
             }
 
-            // Fix Pierre's silent guns
-            if (enemies.Available.Contains(TREntities.Pierre))
-            {
-                FixPierreGunshot(level);
-            }
+            // Fix missing OG animation SFX
+            FixEnemyAnimations(level);
 
             // Add extra ammo based on this level's difficulty
             if (Settings.CrossLevelEnemies && ScriptEditor.Edition.IsCommunityPatch && level.Script.RemovesWeapons)
@@ -1122,24 +1123,39 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
-        private void FixPierreGunshot(TR1CombinedLevel level)
+        private void FixEnemyAnimations(TR1CombinedLevel level)
         {
-            TRModel pierre = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.Pierre);
-            if (pierre != null)
+            // Model transport will handle these missing SFX by default, but we need to fix them in
+            // the levels where these enemies already exist.
+            List<TREntities> entities = level.Data.Models.Select(m => (TREntities)m.ID).ToList();
+
+            if (entities.Contains(TREntities.Pierre)
+                && (level.Is(TRLevelNames.FOLLY) || level.Is(TRLevelNames.COLOSSEUM) || level.Is(TRLevelNames.CISTERN) || level.Is(TRLevelNames.TIHOCAN)))
             {
-                // Get Pierre's shooting animation
-                TRAnimation anim = level.Data.Animations[pierre.Animation + 10];
-                List<TRAnimCommand> cmds = level.Data.AnimCommands.ToList();
-                anim.AnimCommand = (ushort)cmds.Count;
-                anim.NumAnimCommands = 1;
+                TR1ModelExporter.AmendPierreGunshot(level.Data);
+                TR1ModelExporter.AmendPierreDeath(level.Data);
 
-                // On the second frame, play SFX 44 (magnums)
-                cmds.Add(new TRAnimCommand { Value = 5 });
-                cmds.Add(new TRAnimCommand { Value = (short)(anim.FrameStart + 1) });
-                cmds.Add(new TRAnimCommand { Value = 44 });
+                // Non one-shot-Pierre levels won't have the death sound by default, so borrow it from ToT.
+                if (level.Data.SoundMap[159] == -1)
+                {
+                    TRLevel tihocan = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TRLevelNames.TIHOCAN));
+                    SoundUtilities.ImportLevelSound(level.Data, tihocan, new short[] { 159 });
+                }
+            }
 
-                level.Data.AnimCommands = cmds.ToArray();
-                level.Data.NumAnimCommands = (uint)cmds.Count;
+            if (entities.Contains(TREntities.Larson) && level.Is(TRLevelNames.SANCTUARY))
+            {
+                TR1ModelExporter.AmendLarsonDeath(level.Data);
+            }
+
+            if (entities.Contains(TREntities.SkateboardKid) && level.Is(TRLevelNames.MINES))
+            {
+                TR1ModelExporter.AmendSkaterBoyDeath(level.Data);
+            }
+
+            if (entities.Contains(TREntities.Natla) && level.Is(TRLevelNames.PYRAMID))
+            {
+                TR1ModelExporter.AmendNatlaDeath(level.Data);
             }
         }
 

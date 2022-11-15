@@ -42,6 +42,8 @@ namespace TRRandomizerCore.Randomizers
 
                 RandomizeSoundEffects(_levelInstance);
 
+                RandomizeWibble(_levelInstance);
+                
                 SaveLevelInstance();
 
                 if (!TriggerProgress())
@@ -287,6 +289,25 @@ namespace TRRandomizerCore.Randomizers
             level.NumSoundDetails++;
 
             return (short)(level.NumSoundDetails - 1);
+        }
+
+        private void RandomizeWibble(TR1CombinedLevel level)
+        {
+            if (Settings.RandomizeWibble)
+            {
+                // The engine does the actual randomization, we just tell it that every
+                // sound effect should be included.
+                foreach (TRSoundDetails details in level.Data.SoundDetails)
+                {
+                    details.Wibble = true;
+                }
+
+                if (ScriptEditor.Edition.IsCommunityPatch)
+                {
+                    (ScriptEditor.Script as TR1Script).EnablePitchedSounds = true;
+                    ScriptEditor.SaveScript();
+                }
+            }
         }
     }
 }

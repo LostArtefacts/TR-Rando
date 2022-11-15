@@ -33,7 +33,7 @@ namespace TRRandomizerView.Model
         private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson;
         private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
-        private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX;
+        private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
@@ -1333,6 +1333,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RandomizeWibble
+        {
+            get => _randomizeWibble;
+            set
+            {
+                _randomizeWibble = value;
+                FirePropertyChanged();
+            }
+        }
+
         public uint UncontrolledSFXCount
         {
             get => _uncontrolledSFXCount;
@@ -2443,6 +2453,12 @@ namespace TRRandomizerView.Model
                 Description = "Enforce the use of human sounds for human enemies and animal sounds for animal enemies."
             };
             BindingOperations.SetBinding(LinkCreatureSFX, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
+            RandomizeWibble = new BoolItemControlClass
+            {
+                Title = "Apply maximum pitch variance",
+                Description = "Allow the engine to randomize the pitch of all sound effects and not just the defaults."
+            };
+            BindingOperations.SetBinding(RandomizeWibble, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
 
             // Outfits
             Binding randomizeOutfitsBinding = new Binding(nameof(RandomizeOutfits)) { Source = this };
@@ -2544,7 +2560,7 @@ namespace TRRandomizerView.Model
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
                 _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX,
-                _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX
+                _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble
             };
             OutfitBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2669,6 +2685,7 @@ namespace TRRandomizerView.Model
             ChangeEnemySFX.Value = _controller.ChangeEnemySFX;
             ChangeDoorSFX.Value = _controller.ChangeDoorSFX;
             LinkCreatureSFX.Value = _controller.LinkCreatureSFX;
+            RandomizeWibble.Value = _controller.RandomizeWibble;
             UncontrolledSFXCount = _controller.UncontrolledSFXCount;
             UncontrolledSFXAssaultCourse = _controller.UncontrolledSFXAssaultCourse;
 
@@ -2924,6 +2941,7 @@ namespace TRRandomizerView.Model
             _controller.ChangeEnemySFX = ChangeEnemySFX.Value;
             _controller.ChangeDoorSFX = ChangeDoorSFX.Value;
             _controller.LinkCreatureSFX = LinkCreatureSFX.Value;
+            _controller.RandomizeWibble = RandomizeWibble.Value;
             _controller.UncontrolledSFXCount = UncontrolledSFXCount;
             _controller.UncontrolledSFXAssaultCourse = UncontrolledSFXAssaultCourse;
 

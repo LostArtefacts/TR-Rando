@@ -7,6 +7,13 @@ namespace TRModelTransporter.Handlers
 {
     public static class SoundUtilities
     {
+        public static void ImportLevelSound(TRLevel baseLevel, TRLevel sourceLevel, short[] soundIDs)
+        {
+            TR1PackedSound sound = BuildPackedSound(sourceLevel.SoundMap, sourceLevel.SoundDetails, sourceLevel.SampleIndices, sourceLevel.Samples, soundIDs);
+            new SoundUnpacker().Unpack(sound, baseLevel);
+            SoundUtilities.ResortSoundIndices(baseLevel);
+        }
+
         public static TR1PackedSound BuildPackedSound(short[] soundMap, TRSoundDetails[] soundDetails, uint[] sampleIndices, byte[] wavSamples, short[] hardcodedSounds)
         {
             if (hardcodedSounds == null || hardcodedSounds.Length == 0)

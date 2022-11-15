@@ -25,6 +25,25 @@ namespace TRLevelReader.Model
 
         public int NumSounds => (Characteristics & 0x00FC) >> 2; // get bits 2-7
 
+        public bool Wibble
+        {
+            get
+            {
+                return (Characteristics & 0x2000) > 0;
+            }
+            set
+            {
+                if (value)
+                {
+                    Characteristics |= 0x2000;
+                }
+                else
+                {
+                    Characteristics = (short)(Characteristics & ~0x2000);
+                }
+            }
+        }
+
         public byte[] Serialize()
         {
             using (MemoryStream stream = new MemoryStream())

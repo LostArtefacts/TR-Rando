@@ -42,6 +42,8 @@ namespace TRRandomizerCore.Randomizers
 
                 RandomizeSoundEffects(_levelInstance);
 
+                RandomizeWibble(_levelInstance);
+
                 SaveLevelInstance();
 
                 if (!TriggerProgress())
@@ -316,6 +318,17 @@ namespace TRRandomizerCore.Randomizers
             level.NumSoundDetails++;
 
             return (short)(level.NumSoundDetails - 1);
+        }
+
+        private void RandomizeWibble(TR2CombinedLevel level)
+        {
+            if (Settings.RandomizeWibble)
+            {
+                foreach (TRSoundDetails details in level.Data.SoundDetails)
+                {
+                    details.Wibble = true;
+                }
+            }
         }
     }
 }
