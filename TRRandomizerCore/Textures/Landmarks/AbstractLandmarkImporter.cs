@@ -64,6 +64,7 @@ namespace TRRandomizerCore.Textures
                                 // The same graphic has already been added, so just copy the mapping.
                                 // This is most likely for flipped rooms.
                                 target.MappedTextureIndex = backgroundCache[target.BackgroundIndex].MappedTextureIndex;
+                                targetSegmentMap[target] = targetSegmentMap[backgroundCache[target.BackgroundIndex]];
                                 continue;
                             }
 
