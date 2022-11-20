@@ -39,6 +39,10 @@ namespace TRRandomizerCore.Editors
             {
                 target += numLevels;
             }
+            if (Settings.RandomizeEnemies)
+            {
+                target += numLevels; // Used to eliminate unused enemies prior to any other processing
+            }
             return target;
         }
 
@@ -69,6 +73,18 @@ namespace TRRandomizerCore.Editors
             // to track where imported enemies are placed.
             using (TR2TextureMonitorBroker textureMonitor = new TR2TextureMonitorBroker())
             {
+                if (!monitor.IsCancelled && Settings.RandomizeEnemies)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting enemy entities");
+                    new TR2EnemyAdjuster
+                    {
+                        ScriptEditor = tr23ScriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor
+                    }.AdjustEnemies();
+                }
+
                 if (!monitor.IsCancelled && (Settings.RandomizeGameStrings || Settings.ReassignPuzzleNames))
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Adjusting game strings");
