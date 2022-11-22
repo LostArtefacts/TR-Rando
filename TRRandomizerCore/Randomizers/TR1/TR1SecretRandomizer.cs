@@ -454,7 +454,7 @@ namespace TRRandomizerCore.Randomizers
 
             floorData.WriteToLevel(level.Data);
 
-            AddDamageControl(level, pickupTypes, damagingLocationUsed, glitchedDamagingLocationUsed);
+            AddDamageControl(level, damagingLocationUsed, glitchedDamagingLocationUsed);
         }
 
         private void RandomizeSecrets(TR1CombinedLevel level, List<TREntities> pickupTypes, TRSecretRoom<TREntity> rewardRoom)
@@ -480,7 +480,7 @@ namespace TRRandomizerCore.Randomizers
                 }
                 while
                 (
-                    !EvaluateProximity(location, usedLocations, level)
+                    !EvaluateProximity(location, usedLocations, level, floorData)
                 );
 
                 _proxEvaluationCount = 0;
@@ -524,10 +524,10 @@ namespace TRRandomizerCore.Randomizers
 
             floorData.WriteToLevel(level.Data);
 
-            AddDamageControl(level, pickupTypes, damagingLocationUsed, glitchedDamagingLocationUsed);
+            AddDamageControl(level, damagingLocationUsed, glitchedDamagingLocationUsed);
         }
 
-        private bool EvaluateProximity(Location loc, List<Location> usedLocs, TR1CombinedLevel level)
+        private bool EvaluateProximity(Location loc, List<Location> usedLocs, TR1CombinedLevel level, FDControl floorData)
         {
             bool SafeToPlace = true;
             if (loc.Difficulty == Difficulty.Hard && !Settings.HardSecrets)
@@ -567,10 +567,13 @@ namespace TRRandomizerCore.Randomizers
             }
 
             Sphere newLoc = new Sphere(new System.Numerics.Vector3(loc.X, loc.Y, loc.Z), proximity);
+            // Tilted sectors can still pass the proximity test, so in any case we never want 2 secrets sharing a tile.
+            TRRoomSector newSector = FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData);
 
             foreach (Location used in usedLocs)
             {
-                SafeToPlace = !newLoc.IsColliding(new Sphere(new System.Numerics.Vector3(used.X, used.Y, used.Z), proximity));
+                SafeToPlace = !newLoc.IsColliding(new Sphere(new System.Numerics.Vector3(used.X, used.Y, used.Z), proximity))
+                    && newSector != FDUtilities.GetRoomSector(used.X, used.Y, used.Z, (short)used.Room, level.Data, floorData);
 
                 if (SafeToPlace == false)
                     break;
@@ -579,7 +582,7 @@ namespace TRRandomizerCore.Randomizers
             return SafeToPlace;
         }
 
-        private void AddDamageControl(TR1CombinedLevel level, List<TREntities> pickupTypes, bool damagingLocationUsed, bool glitchedDamagingLocationUsed)
+        private void AddDamageControl(TR1CombinedLevel level, bool damagingLocationUsed, bool glitchedDamagingLocationUsed)
         {
             // If we have used a secret that requires damage, add a large medi to an unarmed level
             // weapon location.
@@ -710,7 +713,8 @@ namespace TRRandomizerCore.Randomizers
 
         private bool CheckSectorsBelow(TR1CombinedLevel level, Location location, TRRoomSector sector, FDControl floorData)
         {
-            if (sector.RoomBelow != 255)
+            // Allow this check to be overridden with Validated - covers glitched locations.
+            if (!location.Validated && sector.RoomBelow != 255)
             {
                 if (level.Data.Rooms[location.Room].ContainsWater)
                 {
@@ -734,7 +738,6 @@ namespace TRRandomizerCore.Randomizers
 
         private bool CreateSecretTriggers(TR1CombinedLevel level, TRSecretPlacement<TREntities> secret, short room, FDControl floorData, TRRoomSector baseSector)
         {
-            // Try to make the primary trigger
             if (!CreateSecretTrigger(level, secret, room, floorData, baseSector))
             {
                 return false;
@@ -754,7 +757,7 @@ namespace TRRandomizerCore.Randomizers
                     TRRoomSector neighbour = FDUtilities.GetRoomSector(x, secret.Location.Y, z, room, level.Data, floorData);
 
                     // Process each unique sector only once and if it's a valid neighbour, add the extra trigger
-                    if (processedSectors.Add(neighbour) && !IsInvalidNeighbour(baseSector, neighbour))
+                    if (processedSectors.Add(neighbour) && !IsInvalidNeighbour(neighbour))
                     {
                         if (neighbour.RoomBelow != baseSector.RoomBelow && neighbour.RoomBelow != 255)
                         {
@@ -777,7 +780,7 @@ namespace TRRandomizerCore.Randomizers
             return true;
         }
 
-        private bool IsInvalidNeighbour(TRRoomSector baseSector, TRRoomSector neighbour)
+        private bool IsInvalidNeighbour(TRRoomSector neighbour)
         {
             return neighbour.Floor == -127 && neighbour.Ceiling == -127; // Inside a wall
         }
