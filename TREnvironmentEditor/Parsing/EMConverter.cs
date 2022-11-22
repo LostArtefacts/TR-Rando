@@ -131,6 +131,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMHorizontalCollisionalPortalFunction>(jo.ToString(), _resolver);
                 case EMType.VerticalCollisionalPortal:
                     return JsonConvert.DeserializeObject<EMVerticalCollisionalPortalFunction>(jo.ToString(), _resolver);
+                case EMType.AdjustVisibilityPortal:
+                    return JsonConvert.DeserializeObject<EMAdjustVisibilityPortalFunction>(jo.ToString(), _resolver);
 
                 // Sounds
                 case EMType.AddSoundSource:

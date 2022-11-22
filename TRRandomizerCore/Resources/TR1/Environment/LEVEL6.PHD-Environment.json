@@ -1,6 +1,240 @@
 {
   "All": [],
-  "NonPurist": [],
+  "NonPurist": [
+    {
+      "Comments": "Patch holes in the wall in rooms 13, 5 and 30.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 13,
+          "FaceIndex": 61,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            },
+            "1": {
+              "Y": -256
+            },
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 13,
+          "FaceIndex": 65,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            },
+            "1": {
+              "Y": -256
+            },
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 13,
+          "FaceIndex": 67,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            },
+            "1": {
+              "Y": -256
+            },
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 13,
+          "FaceIndex": 105,
+          "VertexChanges": {
+            "1": {
+              "Y": -256
+            },
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 13,
+          "FaceIndex": 108,
+          "VertexChanges": {
+            "1": {
+              "Y": -256
+            },
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 13,
+          "FaceIndex": 110,
+          "VertexChanges": {
+            "1": {
+              "Y": -256
+            },
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 13,
+          "FaceIndex": 71,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 13,
+          "FaceIndex": 112,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 13,
+          "FaceIndex": 68,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            },
+            "1": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 13,
+          "FaceType": 1,
+          "VertexChanges": {
+            "0": {
+              "X": -1024
+            },
+            "1": {
+              "X": -2048,
+              "Y": -256,
+              "Z": 1024
+            },
+            "2": {
+              "X": -1024,
+              "Y": 256
+            }
+          }
+        },
+        {
+          "RoomNumber": 13,
+          "FaceIndex": 63,
+          "VertexChanges": {
+            "0": {
+              "Z": 1024
+            },
+            "1": {
+              "X": -1024,
+              "Z": 2048
+            },
+            "2": {
+              "X": -1024,
+              "Y": 256,
+              "Z": 2048
+            },
+            "3": {
+              "Y": -256,
+              "Z": 1024
+            }
+          }
+        },
+        {
+          "RoomNumber": 5,
+          "FaceIndex": 55,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            },
+            "1": {
+              "Y": 256
+            }
+          }
+        },
+        {
+          "RoomNumber": 30,
+          "FaceIndex": 171,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            },
+            "1": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 30,
+          "FaceIndex": 167,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            },
+            "1": {
+              "Y": -256
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Raise the visibility portals between 9 and 13 to match the face re-arrangement above.",
+      "EMType": 84,
+      "BaseRoom": 9,
+      "AdjoiningRoom": 13,
+      "VertexChanges": {
+        "0": {
+          "Y": -256
+        },
+        "3": {
+          "Y": -256
+        }
+      }
+    },
+    {
+      "Comments": "Raise the visibility portals between 13 and 9 to match the face re-arrangement above.",
+      "EMType": 84,
+      "BaseRoom": 13,
+      "AdjoiningRoom": 9,
+      "VertexChanges": {
+        "1": {
+          "Y": -256
+        },
+        "2": {
+          "Y": -256
+        }
+      }
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],
@@ -15,8 +249,7 @@
         "X": 68096,
         "Y": -4352,
         "Z": 31232,
-        "Room": 39,
-        "Angle": 0
+        "Room": 39
       }
     },
     {

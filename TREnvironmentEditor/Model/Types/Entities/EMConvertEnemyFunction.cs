@@ -12,6 +12,7 @@ namespace TREnvironmentEditor.Model.Types
         public List<int> EntityIndices { get; set; }
         public EnemyType NewEnemyType { get; set; }
         public List<short> Exclusions { get; set; }
+        public short PreferredType { get; set; }
 
         public override void ApplyToLevel(TRLevel level)
         {
@@ -30,13 +31,25 @@ namespace TREnvironmentEditor.Model.Types
                 potentialTypes.RemoveAll(e => Exclusions.Contains((short)e));
             }
 
-            TREntity enemyMatch = level.Entities.ToList().Find(e => potentialTypes.Contains((TREntities)e.TypeID));
+            EMLevelData data = GetData(level);
+            ConvertIndices(data);
+
+            TREntity enemyMatch = null;
+            List<TREntity> entities = level.Entities.ToList();
+            if (potentialTypes.Contains((TREntities)PreferredType))
+            {
+                enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
+            }
+            if (enemyMatch == null)
+            {
+                enemyMatch = entities.Find(e => potentialTypes.Contains((TREntities)e.TypeID));
+            }
+
             if (enemyMatch != null)
             {
-                EMLevelData data = GetData(level);
                 foreach (int index in EntityIndices)
                 {
-                    level.Entities[data.ConvertEntity(index)].TypeID = enemyMatch.TypeID;
+                    level.Entities[index].TypeID = enemyMatch.TypeID;
                 }
             }
         }
@@ -60,10 +73,22 @@ namespace TREnvironmentEditor.Model.Types
                 potentialTypes.RemoveAll(e => Exclusions.Contains((short)e));
             }
 
-            TR2Entity enemyMatch = level.Entities.ToList().Find(e => potentialTypes.Contains((TR2Entities)e.TypeID));
+            EMLevelData data = GetData(level);
+            ConvertIndices(data);
+
+            TR2Entity enemyMatch = null;
+            List<TR2Entity> entities = level.Entities.ToList();
+            if (potentialTypes.Contains((TR2Entities)PreferredType))
+            {
+                enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
+            }
+            if (enemyMatch == null)
+            {
+                enemyMatch = entities.Find(e => potentialTypes.Contains((TR2Entities)e.TypeID));
+            }
+
             if (enemyMatch != null)
             {
-                EMLevelData data = GetData(level);
                 foreach (int index in EntityIndices)
                 {
                     level.Entities[data.ConvertEntity(index)].TypeID = enemyMatch.TypeID;
@@ -88,14 +113,34 @@ namespace TREnvironmentEditor.Model.Types
                 potentialTypes.RemoveAll(e => Exclusions.Contains((short)e));
             }
 
-            TR2Entity enemyMatch = level.Entities.ToList().Find(e => potentialTypes.Contains((TR3Entities)e.TypeID));
+            EMLevelData data = GetData(level);
+            ConvertIndices(data);
+
+            TR2Entity enemyMatch = null;
+            List<TR2Entity> entities = level.Entities.ToList();
+            if (potentialTypes.Contains((TR3Entities)PreferredType))
+            {
+                enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
+            }
+            if (enemyMatch == null)
+            {
+                enemyMatch = entities.Find(e => potentialTypes.Contains((TR3Entities)e.TypeID));
+            }
+
             if (enemyMatch != null)
             {
-                EMLevelData data = GetData(level);
                 foreach (int index in EntityIndices)
                 {
                     level.Entities[data.ConvertEntity(index)].TypeID = enemyMatch.TypeID;
                 }
+            }
+        }
+
+        private void ConvertIndices(EMLevelData data)
+        {
+            for (int i = 0; i < EntityIndices.Count; i++)
+            {
+                EntityIndices[i] = data.ConvertEntity(EntityIndices[i]);
             }
         }
     }

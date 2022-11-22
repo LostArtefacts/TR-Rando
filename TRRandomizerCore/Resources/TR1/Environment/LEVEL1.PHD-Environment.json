@@ -1,6 +1,60 @@
 {
   "All": [],
-  "NonPurist": [],
+  "NonPurist": [
+    {
+      "Comments": "Patch the hole in the roof in room 10.",
+      "EMType": 26,
+      "Triangles": {
+        "10": [
+          {
+            "Vertices": [
+              119,
+              122,
+              89
+            ],
+            "Texture": 72
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Reopen the doors in room 26 to make a return path possible.",
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 26112,
+          "Y": 6656,
+          "Z": 88576,
+          "Room": 31
+        }
+      ],
+      "Trigger": {
+        "TrigType": 1,
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 43
+          },
+          {
+            "Parameter": 44
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Refacing for above.",
+      "EMType": 21,
+      "TextureMap": {
+        "82": {
+          "31": {
+            "Rectangles": [
+              8
+            ]
+          }
+        }
+      }
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],

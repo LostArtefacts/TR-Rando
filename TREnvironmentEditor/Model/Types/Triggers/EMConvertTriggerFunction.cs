@@ -11,6 +11,7 @@ namespace TREnvironmentEditor.Model.Types
     public class EMConvertTriggerFunction : BaseEMFunction
     {
         public EMLocation Location { get; set; }
+        public List<EMLocation> Locations { get; set; }
         public FDTrigType? TrigType { get; set; }
         public bool? OneShot { get; set; }
         public ushort? SwitchOrKeyRef { get; set; }
@@ -18,12 +19,16 @@ namespace TREnvironmentEditor.Model.Types
         public override void ApplyToLevel(TRLevel level)
         {
             EMLevelData data = GetData(level);
+            InitialiseLocations();
 
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, control);
-            ConvertTrigger(sector, control);
+            foreach (EMLocation location in Locations)
+            {
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                ConvertTrigger(sector, control);
+            }
 
             control.WriteToLevel(level);
         }
@@ -31,12 +36,16 @@ namespace TREnvironmentEditor.Model.Types
         public override void ApplyToLevel(TR2Level level)
         {
             EMLevelData data = GetData(level);
+            InitialiseLocations();
 
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, control);
-            ConvertTrigger(sector, control);
+            foreach (EMLocation location in Locations)
+            {
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                ConvertTrigger(sector, control);
+            }
 
             control.WriteToLevel(level);
         }
@@ -44,14 +53,31 @@ namespace TREnvironmentEditor.Model.Types
         public override void ApplyToLevel(TR3Level level)
         {
             EMLevelData data = GetData(level);
+            InitialiseLocations();
 
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, control);
-            ConvertTrigger(sector, control);
+            foreach (EMLocation location in Locations)
+            {
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                ConvertTrigger(sector, control);
+            }
 
             control.WriteToLevel(level);
+        }
+
+        private void InitialiseLocations()
+        {
+            if (Locations == null)
+            {
+                Locations = new List<EMLocation>();
+            }
+            if (Location != null)
+            {
+                // For backwards compatibility with mods already defined - using the List is the preferred way
+                Locations.Add(Location);
+            }
         }
 
         private void ConvertTrigger(TRRoomSector sector, FDControl floorData)
