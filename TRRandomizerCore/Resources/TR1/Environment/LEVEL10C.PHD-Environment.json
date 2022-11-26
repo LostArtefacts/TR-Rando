@@ -1,6 +1,20 @@
 {
   "All": [],
-  "NonPurist": [],
+  "NonPurist": [
+    {
+      "Comments": "Fix the out of place texture in room 2.",
+      "EMType": 21,
+      "TextureMap": {
+        "2": {
+          "2": {
+            "Rectangles": [
+              65
+            ]
+          }
+        }
+      }
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],

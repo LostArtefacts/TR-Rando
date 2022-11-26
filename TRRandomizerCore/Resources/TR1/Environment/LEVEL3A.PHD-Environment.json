@@ -1,6 +1,73 @@
 {
   "All": [],
-  "NonPurist": [],
+  "NonPurist": [
+    {
+      "Comments": "Patch the hole in the wall in room 27.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 27,
+          "FaceIndex": 135,
+          "VertexChanges": {
+            "0": {
+              "Y": -512
+            },
+            "3": {
+              "Y": 256
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Fix the out of place ToQ texture.",
+      "EMType": 21,
+      "TextureMap": {
+        "69": {
+          "6": {
+            "Triangles": [
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Comments": "Patch the hole in the wall in room 51.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 51,
+          "FaceIndex": 165,
+          "VertexChanges": {
+            "0": {
+              "Y": 256
+            },
+            "1": {
+              "Y": -768
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Add the missing underwater texture when entering the tomb.",
+      "EMType": 26,
+      "Quads": {
+        "90": [
+          {
+            "Vertices": [
+              49,
+              42,
+              65,
+              68
+            ],
+            "Texture": 10
+          }
+        ]
+      }
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],

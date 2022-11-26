@@ -13,7 +13,38 @@
       ]
     }
   ],
-  "NonPurist": [],
+  "NonPurist": [
+    {
+      "Comments": "Patch holes in the wall in room 8.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 8,
+          "FaceIndex": 107,
+          "VertexChanges": {
+            "0": {
+              "Y": 512
+            },
+            "1": {
+              "Y": -1024
+            }
+          }
+        },
+        {
+          "RoomNumber": 8,
+          "FaceIndex": 6,
+          "VertexChanges": {
+            "0": {
+              "Y": -1536
+            },
+            "1": {
+              "Y": 256
+            }
+          }
+        }
+      ]
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],
@@ -72,7 +103,7 @@
           "EMType": 51,
           "TypeID": 19,
           "Intensity": -1,
-          "location": {
+          "Location": {
             "X": 40448,
             "Y": 4864,
             "Z": 56832,

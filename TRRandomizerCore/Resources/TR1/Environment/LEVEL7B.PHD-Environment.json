@@ -1,6 +1,40 @@
 {
   "All": [],
-  "NonPurist": [],
+  "NonPurist": [
+    {
+      "Comments": "Fix the out of place lever textures in room 89.",
+      "EMType": 21,
+      "TextureMap": {
+        "121": {
+          "89": {
+            "Rectangles": [
+              1,
+              84
+            ]
+          }
+        }
+      }
+    },
+    {
+      "Comments": "Rotations for above.",
+      "EMType": 23,
+      "Rotations": [
+        {
+          "RoomNumber": 89,
+          "FaceIndices": [
+            1,
+            84
+          ],
+          "VertexRemap": {
+            "0": 1,
+            "1": 2,
+            "2": 3,
+            "3": 0
+          }
+        }
+      ]
+    }
+  ],
   "Any": [],
   "AllWithin": [],
   "OneOf": [],
