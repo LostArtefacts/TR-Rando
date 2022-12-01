@@ -49,5 +49,9 @@ Takes place after enemy randomization as priority is given to that for texture i
 Must take place before texture randomization to determine if specific night-time textures are required.
 
 ## 14 Textures
-No forward dependencies.
-Must take place after deduplication, enemy randomization and outfit randomization.
+Must take place after deduplication, enemy randomization and outfit randomization.  
+Must take place before sprite randomization when it's activated
+
+## 15 Sprites ( if activated )
+No forward dependencies.  
+Must take place after texture randomization to avoid overflow of random texture.
