@@ -917,6 +917,14 @@
       "Z": 18944,
       "Room": 60,
       "Difficulty": "Hard"
+    },
+    {
+      "X": 31232,
+      "Y": 3355,
+      "Z": 51181,
+      "Room": 16,
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     }
   ],
   "LEVEL3B.PHD": [
