@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using TRFDControl;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
@@ -160,7 +161,12 @@ namespace TRRandomizerCore.Textures
 
         protected override Dictionary<TRFace4, List<TRVertex>> CollectLadders(TR3Level level)
         {
-            return LadderUtilities.GetClimbableFaces(level);
+            return FaceUtilities.GetClimbableFaces(level);
+        }
+
+        protected override List<TRFace4> CollectTriggerFaces(TR3Level level, List<FDTrigType> triggerTypes)
+        {
+            return FaceUtilities.GetTriggerFaces(level, triggerTypes);
         }
 
         protected override TRAnimatedTexture[] GetAnimatedTextures(TR3Level level)

@@ -53,6 +53,11 @@ namespace TRRandomizerCore.Textures
         public bool HighlightLadders { get; set; }
 
         /// <summary>
+        /// Whether or not to generate special textures for heavy triggers and pads.
+        /// </summary>
+        public bool HighlightTriggers { get; set; }
+
+        /// <summary>
         /// Whether or not 3D pickups are in use, similar to TR3.
         /// </summary>
         public bool Has3DPickups { get; set; }

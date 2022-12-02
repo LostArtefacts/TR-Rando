@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using TRFDControl;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Packing;
+using TRRandomizerCore.Utilities;
 using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Textures
@@ -188,6 +190,11 @@ namespace TRRandomizerCore.Textures
         protected override Dictionary<TRFace4, List<TRVertex>> CollectLadders(TRLevel level)
         {
             return new Dictionary<TRFace4, List<TRVertex>>();
+        }
+
+        protected override List<TRFace4> CollectTriggerFaces(TRLevel level, List<FDTrigType> triggerTypes)
+        {
+            return FaceUtilities.GetTriggerFaces(level, triggerTypes);
         }
 
         protected override TRAnimatedTexture[] GetAnimatedTextures(TRLevel level)

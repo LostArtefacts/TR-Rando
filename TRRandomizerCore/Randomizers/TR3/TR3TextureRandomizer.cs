@@ -174,7 +174,11 @@ namespace TRRandomizerCore.Randomizers
                 _persistentWireColour = _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
             }
 
-            _wireframeData.Values.ToList().ForEach(d => d.HighlightLadders = Settings.UseWireframeLadders);
+            foreach (WireframeData data in _wireframeData.Values.ToList())
+            {
+                data.HighlightLadders = Settings.UseWireframeLadders;
+                data.HighlightTriggers = Settings.ShowWireframeTriggers;
+            }
         }
 
         public string GetSourceVariant(AbstractTextureSource source)

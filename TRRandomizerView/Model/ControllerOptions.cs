@@ -52,7 +52,7 @@ namespace TRRandomizerView.Model
         private bool _useSolidLaraWireframing;
         private bool _useSolidEnemyWireframing;
         private bool _useDifferentWireframeColours;
-        private bool _useWireframeLadders;
+        private bool _useWireframeLadders, _showWireframeTriggers;
         private bool _nightModeAssaultCourse;
         private bool _overrideSunsets;
         private Color _vfxFilterColor;
@@ -2047,6 +2047,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public bool ShowWireframeTriggers
+        {
+            get => _showWireframeTriggers;
+            set
+            {
+                _showWireframeTriggers = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool AutoLaunchGame
         {
             get => _autoLaunchGame;
@@ -2736,6 +2746,7 @@ namespace TRRandomizerView.Model
             UseSolidEnemyWireframing = _controller.UseSolidEnemyWireframing;
             UseDifferentWireframeColours = _controller.UseDifferentWireframeColours;
             UseWireframeLadders = _controller.UseWireframeLadders;
+            ShowWireframeTriggers = _controller.ShowWireframeTriggers;
 
             RandomizeOutfits = _controller.RandomizeOutfits;
             OutfitSeed = _controller.OutfitSeed;
@@ -2995,6 +3006,7 @@ namespace TRRandomizerView.Model
             _controller.UseSolidEnemyWireframing = UseSolidEnemyWireframing;
             _controller.UseDifferentWireframeColours = UseDifferentWireframeColours;
             _controller.UseWireframeLadders = UseWireframeLadders;
+            _controller.ShowWireframeTriggers = ShowWireframeTriggers;
 
             _controller.RandomizeOutfits = RandomizeOutfits;
             _controller.OutfitSeed = OutfitSeed;

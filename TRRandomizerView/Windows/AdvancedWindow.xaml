@@ -1141,6 +1141,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -1238,6 +1239,20 @@
                             Visibility="{Binding ControllerProxy.IsLaddersTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="If selected, special textures will be generated for ladders, otherwise they will look the same as walls."/>
+                    </Border>
+
+                    <Border Grid.Row="6">
+                        <CheckBox IsChecked="{Binding ControllerProxy.ShowWireframeTriggers, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Keep trigger hints visible" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="6">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="If selected, special textures will be generated for pads and heavy triggers."/>
                     </Border>
                 </Grid>
             </StackPanel>

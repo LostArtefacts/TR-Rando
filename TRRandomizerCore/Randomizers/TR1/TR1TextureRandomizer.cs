@@ -176,7 +176,11 @@ namespace TRRandomizerCore.Randomizers
             }
 
             bool has3DPickups = ScriptEditor.Edition.IsCommunityPatch && (ScriptEditor as TR1ScriptEditor).Enable3dPickups;
-            _wireframeData.Values.ToList().ForEach(d => d.Has3DPickups = has3DPickups);
+            foreach (WireframeData data in _wireframeData.Values.ToList())
+            {
+                data.Has3DPickups = has3DPickups;
+                data.HighlightTriggers = Settings.ShowWireframeTriggers;
+            }
         }
 
         public string GetSourceVariant(AbstractTextureSource source)

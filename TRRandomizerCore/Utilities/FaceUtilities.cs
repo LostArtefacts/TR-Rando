@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
@@ -7,11 +8,62 @@ using TRLevelReader.Model;
 
 namespace TRRandomizerCore.Utilities
 {
-    public static class LadderUtilities
+    public static class FaceUtilities
     {
         private static readonly byte _noRoom = 255;
         private static readonly int _fullSectorSize = 1024;
         private static readonly int _qrtSectorSize = 256;
+
+        public static List<TRFace4> GetTriggerFaces(TRLevel level, List<FDTrigType> triggerTypes)
+        {
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
+
+            List<TRFace4> faces = new List<TRFace4>();
+            foreach (TRRoom room in level.Rooms)
+            {
+                faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
+                {
+                    return room.RoomData.Vertices[v].Vertex;
+                }));
+            }
+
+            return faces;
+        }
+
+        public static List<TRFace4> GetTriggerFaces(TR2Level level, List<FDTrigType> triggerTypes)
+        {
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
+
+            List<TRFace4> faces = new List<TRFace4>();
+            foreach (TR2Room room in level.Rooms)
+            {
+                faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, room.SectorList, room.NumZSectors, room.RoomData.Rectangles, v =>
+                {
+                    return room.RoomData.Vertices[v].Vertex;
+                }));
+            }
+
+            return faces;
+        }
+
+        public static List<TRFace4> GetTriggerFaces(TR3Level level, List<FDTrigType> triggerTypes)
+        {
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
+
+            List<TRFace4> faces = new List<TRFace4>();
+            foreach (TR3Room room in level.Rooms)
+            {
+                faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
+                {
+                    return room.RoomData.Vertices[v].Vertex;
+                }));
+            }
+
+            return faces;
+        }
 
         public static Dictionary<TRFace4, List<TRVertex>> GetClimbableFaces(TR2Level level)
         {
@@ -42,6 +94,45 @@ namespace TRRandomizerCore.Utilities
                 {
                     ScanTR3SectorLadderFaces(faces, level, floorData, room, sector);
                     ScanTR3SectorMonkeyFaces(faces, level, floorData, room, sector);
+                }
+            }
+
+            return faces;
+        }
+
+        private static List<TRFace4> ScanTriggerFaces
+            (FDControl floorData, List<FDTrigType> triggerMatches, TRRoomSector[] sectors, ushort roomDepth, TRFace4[] roomFaces, Func<ushort, TRVertex> vertexAction)
+        {
+            List<TRFace4> faces = new List<TRFace4>();
+            for (int i = 0; i < sectors.Length; i++)
+            {
+                TRRoomSector sector = sectors[i];
+                if (sector.FDIndex == 0)
+                {
+                    continue;
+                }
+
+                if (floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger && triggerMatches.Contains(trigger.TrigType))
+                {
+                    short x = (short)(i / roomDepth * _fullSectorSize);
+                    short z = (short)(i % roomDepth * _fullSectorSize);
+                    short y = (short)(sector.Floor * _qrtSectorSize);
+
+                    List<TRVertex> vertMatches = GetFloorOrCeilingVerticesToMatch(x, z);
+
+                    foreach (TRFace4 face in roomFaces)
+                    {
+                        List<TRVertex> faceVertices = new List<TRVertex>();
+                        foreach (ushort v in face.Vertices)
+                        {
+                            faceVertices.Add(vertexAction.Invoke(v));
+                        }
+
+                        if (IsFloorMatch(vertMatches, faceVertices, y))
+                        {
+                            faces.Add(face);
+                        }
+                    }
                 }
             }
 
@@ -175,7 +266,7 @@ namespace TRRandomizerCore.Utilities
                 short z = (short)(sectorIndex % room.NumZSectors * _fullSectorSize);
                 short y = (short)(sector.Floor * _qrtSectorSize);
 
-                List<TRVertex> vertMatches = GetVerticesToMatch(monkeyEntry, x, z);
+                List<TRVertex> vertMatches = GetFloorOrCeilingVerticesToMatch(x, z);
 
                 foreach (TRFace4 face in room.RoomData.Rectangles)
                 {
@@ -270,7 +361,7 @@ namespace TRRandomizerCore.Utilities
             return vertMatches;
         }
 
-        private static List<TRVertex> GetVerticesToMatch(TR3MonkeySwingEntry monkeyEntry, short x, short z)
+        private static List<TRVertex> GetFloorOrCeilingVerticesToMatch(short x, short z)
         {
             List<TRVertex> vertMatches = new List<TRVertex>
             {
@@ -314,6 +405,13 @@ namespace TRRandomizerCore.Utilities
         {
             // Is this a ceiling and is every vertex in the sector check part of this face?
             return faceVertices.All(v => v.Y < floorY) &&
+                sectorVertices.All(v1 => faceVertices.Any(v2 => v1.X == v2.X && v1.Z == v2.Z));
+        }
+
+        public static bool IsFloorMatch(List<TRVertex> sectorVertices, List<TRVertex> faceVertices, short floorY)
+        {
+            // Is this a floor and is every vertex in the sector check part of this face?
+            return faceVertices.All(v => v.Y >= floorY) &&
                 sectorVertices.All(v1 => faceVertices.Any(v2 => v1.X == v2.X && v1.Z == v2.Z));
         }
     }
