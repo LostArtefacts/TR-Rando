@@ -50,7 +50,7 @@ namespace TRRandomizerCore.Textures
             _meshFace3s = new Dictionary<TRFace3, TRSize>();
             _meshFace4s = new Dictionary<TRFace4, TRSize>();
             _ladderFace4s = data.HighlightLadders ? CollectLadders(level) : new Dictionary<TRFace4, List<TRVertex>>();
-            _triggerFaces = data.HighlightTriggers ? CollectTriggerFaces(level, _highlightTriggerTypes) : new List<TRFace4>();
+            _triggerFaces = data.HighlightTriggers ? CollectTriggerFaces(level, _highlightTriggerTypes, data.HighlightDeathTiles) : new List<TRFace4>();
             _allTextures = new SortedSet<ushort>();
             _data = data;
 
@@ -608,7 +608,7 @@ namespace TRRandomizerCore.Textures
         }
 
         protected abstract Dictionary<TRFace4, List<TRVertex>> CollectLadders(L level);
-        protected abstract List<TRFace4> CollectTriggerFaces(L level, List<FDTrigType> triggerTypes);
+        protected abstract List<TRFace4> CollectTriggerFaces(L level, List<FDTrigType> triggerTypes, bool highlightDeathTiles);
         protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
         protected abstract IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(L level);
         protected abstract IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(L level);

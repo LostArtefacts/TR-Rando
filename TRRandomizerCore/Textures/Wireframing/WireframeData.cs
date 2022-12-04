@@ -58,6 +58,11 @@ namespace TRRandomizerCore.Textures
         public bool HighlightTriggers { get; set; }
 
         /// <summary>
+        /// Whether or not to include death tiles in trigger highlights.
+        /// </summary>
+        public bool HighlightDeathTiles { get; set; }
+
+        /// <summary>
         /// Whether or not 3D pickups are in use, similar to TR3.
         /// </summary>
         public bool Has3DPickups { get; set; }

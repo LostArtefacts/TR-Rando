@@ -179,7 +179,7 @@ namespace TRRandomizerCore.Randomizers
             foreach (WireframeData data in _wireframeData.Values.ToList())
             {
                 data.Has3DPickups = has3DPickups;
-                data.HighlightTriggers = Settings.ShowWireframeTriggers;
+                data.HighlightTriggers = data.HighlightDeathTiles = Settings.ShowWireframeTriggers;
             }
         }
 

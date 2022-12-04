@@ -192,9 +192,9 @@ namespace TRRandomizerCore.Textures
             return new Dictionary<TRFace4, List<TRVertex>>();
         }
 
-        protected override List<TRFace4> CollectTriggerFaces(TRLevel level, List<FDTrigType> triggerTypes)
+        protected override List<TRFace4> CollectTriggerFaces(TRLevel level, List<FDTrigType> triggerTypes, bool highlightDeathTiles)
         {
-            return FaceUtilities.GetTriggerFaces(level, triggerTypes);
+            return FaceUtilities.GetTriggerFaces(level, triggerTypes, highlightDeathTiles);
         }
 
         protected override TRAnimatedTexture[] GetAnimatedTextures(TRLevel level)

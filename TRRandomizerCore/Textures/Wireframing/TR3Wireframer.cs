@@ -164,9 +164,9 @@ namespace TRRandomizerCore.Textures
             return FaceUtilities.GetClimbableFaces(level);
         }
 
-        protected override List<TRFace4> CollectTriggerFaces(TR3Level level, List<FDTrigType> triggerTypes)
+        protected override List<TRFace4> CollectTriggerFaces(TR3Level level, List<FDTrigType> triggerTypes, bool highlightDeathTiles)
         {
-            return FaceUtilities.GetTriggerFaces(level, triggerTypes);
+            return FaceUtilities.GetTriggerFaces(level, triggerTypes, highlightDeathTiles);
         }
 
         protected override TRAnimatedTexture[] GetAnimatedTextures(TR3Level level)

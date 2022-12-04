@@ -177,7 +177,7 @@ namespace TRRandomizerCore.Randomizers
             foreach (WireframeData data in _wireframeData.Values.ToList())
             {
                 data.HighlightLadders = Settings.UseWireframeLadders;
-                data.HighlightTriggers = Settings.ShowWireframeTriggers;
+                data.HighlightTriggers = data.HighlightDeathTiles = Settings.ShowWireframeTriggers;
             }
         }
 
