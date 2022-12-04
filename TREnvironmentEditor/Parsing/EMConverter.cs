@@ -55,6 +55,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMCeilingFunction>(jo.ToString(), _resolver);
                 case EMType.Click:
                     return JsonConvert.DeserializeObject<EMClickFunction>(jo.ToString(), _resolver);
+                case EMType.Slant:
+                    return JsonConvert.DeserializeObject<EMSlantFunction>(jo.ToString(), _resolver);
 
                 // Texture types
                 case EMType.Reface:
@@ -73,6 +75,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMMirrorStaticMeshFunction>(jo.ToString(), _resolver);
                 case EMType.MirrorObjectTexture:
                     return JsonConvert.DeserializeObject<EMMirrorObjectTexture>(jo.ToString(), _resolver);
+                case EMType.OverwriteTexture:
+                    return JsonConvert.DeserializeObject<EMOverwriteTextureFunction>(jo.ToString(), _resolver);
 
                 // Entity types
                 case EMType.MoveSlot:
@@ -99,6 +103,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMAddEntityFunction>(jo.ToString(), _resolver);
                 case EMType.ConvertWheelDoor:
                     return JsonConvert.DeserializeObject<EMConvertWheelDoorFunction>(jo.ToString(), _resolver);
+                case EMType.MoveSecret:
+                    return JsonConvert.DeserializeObject<EMMoveSecretFunction>(jo.ToString(), _resolver);
 
                 // Trigger types
                 case EMType.Trigger:
@@ -133,6 +139,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMVerticalCollisionalPortalFunction>(jo.ToString(), _resolver);
                 case EMType.AdjustVisibilityPortal:
                     return JsonConvert.DeserializeObject<EMAdjustVisibilityPortalFunction>(jo.ToString(), _resolver);
+                case EMType.ReplaceCollisionalPortal:
+                    return JsonConvert.DeserializeObject<EMReplaceCollisionalPortalFunction>(jo.ToString(), _resolver);
 
                 // Sounds
                 case EMType.AddSoundSource:
@@ -187,6 +195,8 @@ namespace TREnvironmentEditor.Parsing
                 // Rooms
                 case EMConditionType.RoomContainsWater:
                     return JsonConvert.DeserializeObject<EMRoomContainsWaterCondition>(jo.ToString(), this);
+                case EMConditionType.SectorContainsSecret:
+                    return JsonConvert.DeserializeObject<EMSectorContainsSecretCondition>(jo.ToString(), this);
 
                 // Models
                 case EMConditionType.ModelExists:

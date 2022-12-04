@@ -9,6 +9,7 @@
         Drain = 3,
         Ceiling = 4,
         Click = 5,
+        Slant = 7,
 
         // Texture types 21-40
         Reface = 21,
@@ -19,6 +20,7 @@
         AddFace = 26,
         MirrorStaticMesh = 27,
         MirrorObjectTexture = 28,
+        OverwriteTexture = 29,
 
         // Entity types 41-60
         MoveSlot = 41,
@@ -33,6 +35,7 @@
         AdjustEntityPositions = 50,
         AddEntity = 51,
         ConvertWheelDoor = 52,
+        MoveSecret = 53,
 
         // Trigger types 61-80
         Trigger = 61,
@@ -52,6 +55,7 @@
         HorizontalCollisionalPortal = 82,
         VerticalCollisionalPortal = 83,
         AdjustVisibilityPortal = 84,
+        ReplaceCollisionalPortal = 85,
 
         // Sound types 101-120
         AddSoundSource = 101,

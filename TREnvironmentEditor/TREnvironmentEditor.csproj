@@ -9,8 +9,14 @@
     <ProjectReference Include="..\TRFDControl\TRFDControl.csproj" />
     <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj" />
     <ProjectReference Include="..\TRModelTransporter\TRModelTransporter.csproj" />
+    <ProjectReference Include="..\TRTexture16Importer\TRTexture16Importer.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="RectanglePacker">
+      <HintPath>..\Deps\RectanglePacker.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

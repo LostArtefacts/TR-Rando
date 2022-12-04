@@ -22,6 +22,22 @@ namespace TREnvironmentEditor.Model.Types
 
             TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, floorData);
             MoveSector(sector);
+
+            // Move any entities that share the same floor sector up or down the relevant number of clicks
+            if (FloorClicks.HasValue)
+            {
+                foreach (TREntity entity in level.Entities)
+                {
+                    if (entity.Room == Location.Room)
+                    {
+                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+                        if (entitySector == sector)
+                        {
+                            entity.Y += GetEntityYShift(FloorClicks.Value);
+                        }
+                    }
+                }
+            }
         }
 
         public override void ApplyToLevel(TR2Level level)
@@ -33,6 +49,21 @@ namespace TREnvironmentEditor.Model.Types
 
             TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, floorData);
             MoveSector(sector);
+
+            if (FloorClicks.HasValue)
+            {
+                foreach (TR2Entity entity in level.Entities)
+                {
+                    if (entity.Room == Location.Room)
+                    {
+                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+                        if (entitySector == sector)
+                        {
+                            entity.Y += GetEntityYShift(FloorClicks.Value);
+                        }
+                    }
+                }
+            }
         }
 
         public override void ApplyToLevel(TR3Level level)
@@ -44,6 +75,21 @@ namespace TREnvironmentEditor.Model.Types
 
             TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, floorData);
             MoveSector(sector);
+
+            if (FloorClicks.HasValue)
+            {
+                foreach (TR2Entity entity in level.Entities)
+                {
+                    if (entity.Room == Location.Room)
+                    {
+                        TRRoomSector entitySector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
+                        if (entitySector == sector)
+                        {
+                            entity.Y += GetEntityYShift(FloorClicks.Value);
+                        }
+                    }
+                }
+            }
         }
 
         private void MoveSector(TRRoomSector sector)
@@ -56,6 +102,11 @@ namespace TREnvironmentEditor.Model.Types
             {
                 sector.Ceiling += CeilingClicks.Value;
             }
+        }
+
+        protected virtual int GetEntityYShift(int clicks)
+        {
+            return clicks * 256;
         }
     }
 }

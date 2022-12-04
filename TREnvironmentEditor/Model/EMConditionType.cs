@@ -8,6 +8,7 @@
 
         // Rooms 21 -40
         RoomContainsWater = 21,
+        SectorContainsSecret = 22,
 
         // Models 41-60
         ModelExists = 41,

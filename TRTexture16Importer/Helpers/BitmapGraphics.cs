@@ -27,6 +27,8 @@ namespace TRTexture16Importer.Helpers
 
         public Graphics Graphics { get; private set; }
 
+        public event EventHandler GraphicChanged;
+
         public BitmapGraphics(Bitmap bitmap)
         {
             Bitmap = bitmap;
@@ -38,6 +40,7 @@ namespace TRTexture16Importer.Helpers
             {
                 return ApplyHSBOperation(c, operation);
             });
+            GraphicChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private Color ApplyHSBOperation(Color c, HSBOperation operation)
@@ -56,6 +59,7 @@ namespace TRTexture16Importer.Helpers
             {
                 return c == search ? replace : c;
             });
+            GraphicChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public void Scan(Rectangle rect, Func<Color, int, int, Color> action)
@@ -129,22 +133,29 @@ namespace TRTexture16Importer.Helpers
             Graphics.SetClip(path);
             Graphics.Clear(Color.Transparent);
             Graphics.ResetClip();
+            GraphicChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public void Fill(Rectangle rect, Color c)
         {
             Graphics.FillRectangle(new SolidBrush(c), rect);
+            GraphicChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public void Import(Bitmap bitmap, Rectangle rect)
+        public void Import(Bitmap bitmap, Rectangle rect, bool retainBackground = false)
         {
-            Delete(rect);
+            if (!retainBackground)
+            {
+                Delete(rect);
+            }
             Graphics.DrawImage(bitmap, rect);
+            GraphicChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public void Overlay(Bitmap bitmap)
         {
             Graphics.DrawImage(bitmap, new Rectangle(0, 0, Bitmap.Width, Bitmap.Height));
+            GraphicChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public Bitmap Extract(Rectangle rect, PixelFormat format = PixelFormat.Format32bppArgb)
