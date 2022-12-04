@@ -14,7 +14,7 @@ namespace TRRandomizerCore.Utilities
         private static readonly int _fullSectorSize = 1024;
         private static readonly int _qrtSectorSize = 256;
 
-        public static List<TRFace4> GetTriggerFaces(TRLevel level, List<FDTrigType> triggerTypes)
+        public static List<TRFace4> GetTriggerFaces(TRLevel level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
@@ -22,7 +22,7 @@ namespace TRRandomizerCore.Utilities
             List<TRFace4> faces = new List<TRFace4>();
             foreach (TRRoom room in level.Rooms)
             {
-                faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
+                faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
                 {
                     return room.RoomData.Vertices[v].Vertex;
                 }));
@@ -31,7 +31,7 @@ namespace TRRandomizerCore.Utilities
             return faces;
         }
 
-        public static List<TRFace4> GetTriggerFaces(TR2Level level, List<FDTrigType> triggerTypes)
+        public static List<TRFace4> GetTriggerFaces(TR2Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
@@ -39,7 +39,7 @@ namespace TRRandomizerCore.Utilities
             List<TRFace4> faces = new List<TRFace4>();
             foreach (TR2Room room in level.Rooms)
             {
-                faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, room.SectorList, room.NumZSectors, room.RoomData.Rectangles, v =>
+                faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.SectorList, room.NumZSectors, room.RoomData.Rectangles, v =>
                 {
                     return room.RoomData.Vertices[v].Vertex;
                 }));
@@ -48,7 +48,7 @@ namespace TRRandomizerCore.Utilities
             return faces;
         }
 
-        public static List<TRFace4> GetTriggerFaces(TR3Level level, List<FDTrigType> triggerTypes)
+        public static List<TRFace4> GetTriggerFaces(TR3Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
@@ -56,7 +56,7 @@ namespace TRRandomizerCore.Utilities
             List<TRFace4> faces = new List<TRFace4>();
             foreach (TR3Room room in level.Rooms)
             {
-                faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
+                faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
                 {
                     return room.RoomData.Vertices[v].Vertex;
                 }));
@@ -101,7 +101,7 @@ namespace TRRandomizerCore.Utilities
         }
 
         private static List<TRFace4> ScanTriggerFaces
-            (FDControl floorData, List<FDTrigType> triggerMatches, TRRoomSector[] sectors, ushort roomDepth, TRFace4[] roomFaces, Func<ushort, TRVertex> vertexAction)
+            (FDControl floorData, List<FDTrigType> triggerMatches, bool includeDeathTiles, TRRoomSector[] sectors, ushort roomDepth, TRFace4[] roomFaces, Func<ushort, TRVertex> vertexAction)
         {
             List<TRFace4> faces = new List<TRFace4>();
             for (int i = 0; i < sectors.Length; i++)
@@ -112,7 +112,9 @@ namespace TRRandomizerCore.Utilities
                     continue;
                 }
 
-                if (floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger && triggerMatches.Contains(trigger.TrigType))
+                List<FDEntry> entries = floorData.Entries[sector.FDIndex];
+                if ((entries.Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger && triggerMatches.Contains(trigger.TrigType))
+                    || (includeDeathTiles && entries.Any(e => e is FDKillLaraEntry)))
                 {
                     short x = (short)(i / roomDepth * _fullSectorSize);
                     short z = (short)(i % roomDepth * _fullSectorSize);
