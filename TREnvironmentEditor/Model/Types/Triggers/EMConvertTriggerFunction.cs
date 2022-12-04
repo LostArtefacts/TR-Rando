@@ -15,6 +15,8 @@ namespace TREnvironmentEditor.Model.Types
         public FDTrigType? TrigType { get; set; }
         public bool? OneShot { get; set; }
         public ushort? SwitchOrKeyRef { get; set; }
+        public byte? Mask { get; set; }
+        public byte? Timer { get; set; }
 
         public override void ApplyToLevel(TRLevel level)
         {
@@ -104,6 +106,14 @@ namespace TREnvironmentEditor.Model.Types
                     if (SwitchOrKeyRef.HasValue)
                     {
                         trigger.SwitchOrKeyRef = SwitchOrKeyRef.Value;
+                    }
+                    if (Mask.HasValue)
+                    {
+                        trigger.TrigSetup.Mask = Mask.Value;
+                    }
+                    if (Timer.HasValue)
+                    {
+                        trigger.TrigSetup.Timer = Timer.Value;
                     }
                 }
             }

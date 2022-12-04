@@ -129,17 +129,20 @@ namespace TREnvironmentEditor.Model.Types
 
         private void ModifyRectangles(TRRoom room, EMFaceModification mod)
         {
-            TRFace4 rect = room.RoomData.Rectangles[mod.FaceIndex];
             List<TRRoomVertex> allVertices = room.RoomData.Vertices.ToList();
-            foreach (int vertIndex in mod.VertexChanges.Keys)
+            foreach (int faceIndex in mod.GetIndices())
             {
-                TRRoomVertex currentRoomVertex = allVertices[rect.Vertices[vertIndex]];
-                TRVertex newVertex = mod.VertexChanges[vertIndex];
-                TRRoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
+                TRFace4 rect = room.RoomData.Rectangles[faceIndex];
+                foreach (int vertIndex in mod.VertexChanges.Keys)
+                {
+                    TRRoomVertex currentRoomVertex = allVertices[rect.Vertices[vertIndex]];
+                    TRVertex newVertex = mod.VertexChanges[vertIndex];
+                    TRRoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
-                // Remap the face to use this vertex
-                rect.Vertices[vertIndex] = (ushort)allVertices.Count;
-                allVertices.Add(newRoomVertex);
+                    // Remap the face to use this vertex
+                    rect.Vertices[vertIndex] = (ushort)allVertices.Count;
+                    allVertices.Add(newRoomVertex);
+                }
             }
 
             room.RoomData.Vertices = allVertices.ToArray();
@@ -149,17 +152,20 @@ namespace TREnvironmentEditor.Model.Types
 
         private void ModifyRectangles(TR2Room room, EMFaceModification mod)
         {
-            TRFace4 rect = room.RoomData.Rectangles[mod.FaceIndex];
             List<TR2RoomVertex> allVertices = room.RoomData.Vertices.ToList();
-            foreach (int vertIndex in mod.VertexChanges.Keys)
+            foreach (int faceIndex in mod.GetIndices())
             {
-                TR2RoomVertex currentRoomVertex = allVertices[rect.Vertices[vertIndex]];
-                TRVertex newVertex = mod.VertexChanges[vertIndex];
-                TR2RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
+                TRFace4 rect = room.RoomData.Rectangles[faceIndex];
+                foreach (int vertIndex in mod.VertexChanges.Keys)
+                {
+                    TR2RoomVertex currentRoomVertex = allVertices[rect.Vertices[vertIndex]];
+                    TRVertex newVertex = mod.VertexChanges[vertIndex];
+                    TR2RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
-                // Remap the face to use this vertex
-                rect.Vertices[vertIndex] = (ushort)allVertices.Count;
-                allVertices.Add(newRoomVertex);
+                    // Remap the face to use this vertex
+                    rect.Vertices[vertIndex] = (ushort)allVertices.Count;
+                    allVertices.Add(newRoomVertex);
+                }
             }
 
             room.RoomData.Vertices = allVertices.ToArray();
@@ -169,17 +175,20 @@ namespace TREnvironmentEditor.Model.Types
 
         private void ModifyRectangles(TR3Room room, EMFaceModification mod)
         {
-            TRFace4 rect = room.RoomData.Rectangles[mod.FaceIndex];
             List<TR3RoomVertex> allVertices = room.RoomData.Vertices.ToList();
-            foreach (int vertIndex in mod.VertexChanges.Keys)
+            foreach (int faceIndex in mod.GetIndices())
             {
-                TR3RoomVertex currentRoomVertex = allVertices[rect.Vertices[vertIndex]];
-                TRVertex newVertex = mod.VertexChanges[vertIndex];
-                TR3RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
+                TRFace4 rect = room.RoomData.Rectangles[faceIndex];
+                foreach (int vertIndex in mod.VertexChanges.Keys)
+                {
+                    TR3RoomVertex currentRoomVertex = allVertices[rect.Vertices[vertIndex]];
+                    TRVertex newVertex = mod.VertexChanges[vertIndex];
+                    TR3RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
-                // Remap the face to use this vertex
-                rect.Vertices[vertIndex] = (ushort)allVertices.Count;
-                allVertices.Add(newRoomVertex);
+                    // Remap the face to use this vertex
+                    rect.Vertices[vertIndex] = (ushort)allVertices.Count;
+                    allVertices.Add(newRoomVertex);
+                }
             }
 
             room.RoomData.Vertices = allVertices.ToArray();
@@ -189,17 +198,20 @@ namespace TREnvironmentEditor.Model.Types
 
         private void ModifyTriangles(TRRoom room, EMFaceModification mod)
         {
-            TRFace3 tri = room.RoomData.Triangles[mod.FaceIndex];
             List<TRRoomVertex> allVertices = room.RoomData.Vertices.ToList();
-            foreach (int vertIndex in mod.VertexChanges.Keys)
+            foreach (int faceIndex in mod.GetIndices())
             {
-                TRRoomVertex currentRoomVertex = allVertices[tri.Vertices[vertIndex]];
-                TRVertex newVertex = mod.VertexChanges[vertIndex];
-                TRRoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
+                TRFace3 tri = room.RoomData.Triangles[faceIndex];
+                foreach (int vertIndex in mod.VertexChanges.Keys)
+                {
+                    TRRoomVertex currentRoomVertex = allVertices[tri.Vertices[vertIndex]];
+                    TRVertex newVertex = mod.VertexChanges[vertIndex];
+                    TRRoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
-                // Remap the face to use this vertex
-                tri.Vertices[vertIndex] = (ushort)allVertices.Count;
-                allVertices.Add(newRoomVertex);
+                    // Remap the face to use this vertex
+                    tri.Vertices[vertIndex] = (ushort)allVertices.Count;
+                    allVertices.Add(newRoomVertex);
+                }
             }
 
             room.RoomData.Vertices = allVertices.ToArray();
@@ -209,17 +221,20 @@ namespace TREnvironmentEditor.Model.Types
 
         private void ModifyTriangles(TR2Room room, EMFaceModification mod)
         {
-            TRFace3 tri = room.RoomData.Triangles[mod.FaceIndex];
             List<TR2RoomVertex> allVertices = room.RoomData.Vertices.ToList();
-            foreach (int vertIndex in mod.VertexChanges.Keys)
+            foreach (int faceIndex in mod.GetIndices())
             {
-                TR2RoomVertex currentRoomVertex = allVertices[tri.Vertices[vertIndex]];
-                TRVertex newVertex = mod.VertexChanges[vertIndex];
-                TR2RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
+                TRFace3 tri = room.RoomData.Triangles[faceIndex];
+                foreach (int vertIndex in mod.VertexChanges.Keys)
+                {
+                    TR2RoomVertex currentRoomVertex = allVertices[tri.Vertices[vertIndex]];
+                    TRVertex newVertex = mod.VertexChanges[vertIndex];
+                    TR2RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
-                // Remap the face to use this vertex
-                tri.Vertices[vertIndex] = (ushort)allVertices.Count;
-                allVertices.Add(newRoomVertex);
+                    // Remap the face to use this vertex
+                    tri.Vertices[vertIndex] = (ushort)allVertices.Count;
+                    allVertices.Add(newRoomVertex);
+                }
             }
 
             room.RoomData.Vertices = allVertices.ToArray();
@@ -229,17 +244,20 @@ namespace TREnvironmentEditor.Model.Types
 
         private void ModifyTriangles(TR3Room room, EMFaceModification mod)
         {
-            TRFace3 tri = room.RoomData.Triangles[mod.FaceIndex];
             List<TR3RoomVertex> allVertices = room.RoomData.Vertices.ToList();
-            foreach (int vertIndex in mod.VertexChanges.Keys)
+            foreach (int faceIndex in mod.GetIndices())
             {
-                TR3RoomVertex currentRoomVertex = allVertices[tri.Vertices[vertIndex]];
-                TRVertex newVertex = mod.VertexChanges[vertIndex];
-                TR3RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
+                TRFace3 tri = room.RoomData.Triangles[faceIndex];
+                foreach (int vertIndex in mod.VertexChanges.Keys)
+                {
+                    TR3RoomVertex currentRoomVertex = allVertices[tri.Vertices[vertIndex]];
+                    TRVertex newVertex = mod.VertexChanges[vertIndex];
+                    TR3RoomVertex newRoomVertex = GenerateRoomVertex(currentRoomVertex, newVertex);
 
-                // Remap the face to use this vertex
-                tri.Vertices[vertIndex] = (ushort)allVertices.Count;
-                allVertices.Add(newRoomVertex);
+                    // Remap the face to use this vertex
+                    tri.Vertices[vertIndex] = (ushort)allVertices.Count;
+                    allVertices.Add(newRoomVertex);
+                }
             }
 
             room.RoomData.Vertices = allVertices.ToArray();
@@ -344,7 +362,13 @@ namespace TREnvironmentEditor.Model.Types
         public int RoomNumber { get; set; }
         public EMTextureFaceType FaceType { get; set; }
         public int FaceIndex { get; set; }
+        public int[] FaceIndices { get; set; }
         public Dictionary<int, TRVertex> VertexChanges { get; set; }
+
+        public int[] GetIndices()
+        {
+            return FaceIndices ?? new int[] { FaceIndex };
+        }
     }
 
     public class EMFaceRotation

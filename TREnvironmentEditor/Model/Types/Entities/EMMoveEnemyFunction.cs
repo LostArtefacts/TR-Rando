@@ -14,7 +14,7 @@ namespace TREnvironmentEditor.Model.Types
         {
             TREntity enemy = level.Entities[EntityIndex];
             TREntities enemyEntity = (TREntities)enemy.TypeID;
-            bool isWaterEnemy = TR1EntityUtilities.IsWaterCreature(enemyEntity);
+            bool isWaterEnemy = TR1EntityUtilities.IsWaterLandCreatureEquivalent(enemyEntity);
 
             // If the index doesn't point to an enemy or if we only want to move land creatures
             // but the enemy is a water creature (and vice-versa), bail out.
