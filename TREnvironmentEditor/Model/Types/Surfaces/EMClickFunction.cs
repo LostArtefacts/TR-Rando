@@ -20,8 +20,9 @@ namespace TREnvironmentEditor.Model.Types
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, floorData);
-            MoveSector(sector);
+            short roomIndex = data.ConvertRoom(Location.Room);
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomIndex, level, floorData);
+            MoveSector(sector, level.Rooms[roomIndex].Info);
 
             // Move any entities that share the same floor sector up or down the relevant number of clicks
             if (FloorClicks.HasValue)
@@ -47,8 +48,9 @@ namespace TREnvironmentEditor.Model.Types
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, floorData);
-            MoveSector(sector);
+            short roomIndex = data.ConvertRoom(Location.Room);
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomIndex, level, floorData);
+            MoveSector(sector, level.Rooms[roomIndex].Info);
 
             if (FloorClicks.HasValue)
             {
@@ -73,8 +75,9 @@ namespace TREnvironmentEditor.Model.Types
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, floorData);
-            MoveSector(sector);
+            short roomIndex = data.ConvertRoom(Location.Room);
+            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomIndex, level, floorData);
+            MoveSector(sector, level.Rooms[roomIndex].Info);
 
             if (FloorClicks.HasValue)
             {
@@ -92,8 +95,14 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
-        private void MoveSector(TRRoomSector sector)
+        private void MoveSector(TRRoomSector sector, TRRoomInfo roomInfo)
         {
+            if (sector.IsImpenetrable)
+            {
+                sector.Ceiling = (sbyte)(roomInfo.YTop / 256);
+                sector.Floor = (sbyte)(roomInfo.YBottom / 256);
+            }
+            
             if (FloorClicks.HasValue)
             {
                 sector.Floor += FloorClicks.Value;

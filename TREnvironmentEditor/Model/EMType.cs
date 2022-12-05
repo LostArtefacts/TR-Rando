@@ -56,6 +56,7 @@
         VerticalCollisionalPortal = 83,
         AdjustVisibilityPortal = 84,
         ReplaceCollisionalPortal = 85,
+        RemoveCollisionalPortal = 86,
 
         // Sound types 101-120
         AddSoundSource = 101,

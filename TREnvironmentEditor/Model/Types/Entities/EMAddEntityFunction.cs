@@ -18,8 +18,9 @@ namespace TREnvironmentEditor.Model.Types
         {
             if (level.NumEntities < _defaultEntityLimit)
             {
+                EMLevelData data = GetData(level);
                 List<TREntity> entities = level.Entities.ToList();
-                entities.Add(CreateTREntity());
+                entities.Add(CreateTREntity(data));
                 level.Entities = entities.ToArray();
                 level.NumEntities++;
             }
@@ -29,8 +30,9 @@ namespace TREnvironmentEditor.Model.Types
         {
             if (level.NumEntities < _defaultEntityLimit)
             {
+                EMLevelData data = GetData(level);
                 List<TR2Entity> entities = level.Entities.ToList();
-                entities.Add(CreateTR2Entity());
+                entities.Add(CreateTR2Entity(data));
                 level.Entities = entities.ToArray();
                 level.NumEntities++;
             }
@@ -40,14 +42,15 @@ namespace TREnvironmentEditor.Model.Types
         {
             if (level.NumEntities < _defaultEntityLimit)
             {
+                EMLevelData data = GetData(level);
                 List<TR2Entity> entities = level.Entities.ToList();
-                entities.Add(CreateTR2Entity());
+                entities.Add(CreateTR2Entity(data));
                 level.Entities = entities.ToArray();
                 level.NumEntities++;
             }
         }
 
-        private TREntity CreateTREntity()
+        private TREntity CreateTREntity(EMLevelData data)
         {
             return new TREntity
             {
@@ -55,14 +58,14 @@ namespace TREnvironmentEditor.Model.Types
                 X = Location.X,
                 Y = Location.Y,
                 Z = Location.Z,
-                Room = Location.Room,
+                Room = data.ConvertRoom(Location.Room),
                 Angle = Location.Angle,
                 Flags = Flags,
                 Intensity = Intensity ?? 6400
             };
         }
 
-        private TR2Entity CreateTR2Entity()
+        private TR2Entity CreateTR2Entity(EMLevelData data)
         {
             return new TR2Entity
             {
@@ -70,7 +73,7 @@ namespace TREnvironmentEditor.Model.Types
                 X = Location.X,
                 Y = Location.Y,
                 Z = Location.Z,
-                Room = Location.Room,
+                Room = data.ConvertRoom(Location.Room),
                 Angle = Location.Angle,
                 Flags = Flags,
                 Intensity1 = Intensity ?? -1,
