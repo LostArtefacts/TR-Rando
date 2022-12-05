@@ -21,7 +21,6 @@ namespace TRRandomizerCore.Textures
         protected static readonly int _ladderRungs = 4;
         protected static readonly List<FDTrigType> _highlightTriggerTypes = new List<FDTrigType>
         {
-            FDTrigType.Antipad, FDTrigType.HeavyAntiTrigger,
             FDTrigType.HeavyTrigger, FDTrigType.Pad
         };
 
