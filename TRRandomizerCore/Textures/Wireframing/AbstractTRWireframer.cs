@@ -460,6 +460,10 @@ namespace TRRandomizerCore.Textures
         {
             foreach (TRFace3 face in _meshFace3s.Keys)
             {
+                if (IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
+                {
+                    continue;
+                }
                 TRSize size = _meshFace3s[face];
                 if (!size.Equals(_nullSize))
                 {
@@ -473,6 +477,10 @@ namespace TRRandomizerCore.Textures
 
             foreach (TRFace4 face in _meshFace4s.Keys)
             {
+                if (IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
+                {
+                    continue;
+                }
                 TRSize size = _meshFace4s[face];
                 if (!size.Equals(_nullSize))
                 {
