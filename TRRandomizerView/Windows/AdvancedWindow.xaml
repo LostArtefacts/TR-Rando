@@ -1252,7 +1252,7 @@
                     <Border Grid.Column="1"
                             Grid.Row="6">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
-                               Content="If selected, special textures will be generated for pads and heavy triggers."/>
+                               Content="If selected, crosses will indicate pads and heavy triggers and stars will indicate death tiles."/>
                     </Border>
                 </Grid>
             </StackPanel>

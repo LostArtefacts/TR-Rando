@@ -27,7 +27,7 @@ namespace TRRandomizerCore.Textures
         private Dictionary<TRFace3, TRSize> _roomFace3s, _meshFace3s;
         private Dictionary<TRFace4, TRSize> _roomFace4s, _meshFace4s;
         private Dictionary<TRFace4, List<TRVertex>> _ladderFace4s;
-        private List<TRFace4> _triggerFaces;
+        private List<TRFace4> _triggerFaces, _deathFaces;
 
         private ISet<ushort> _allTextures;
         protected WireframeData _data;
@@ -49,7 +49,8 @@ namespace TRRandomizerCore.Textures
             _meshFace3s = new Dictionary<TRFace3, TRSize>();
             _meshFace4s = new Dictionary<TRFace4, TRSize>();
             _ladderFace4s = data.HighlightLadders ? CollectLadders(level) : new Dictionary<TRFace4, List<TRVertex>>();
-            _triggerFaces = data.HighlightTriggers ? CollectTriggerFaces(level, _highlightTriggerTypes, data.HighlightDeathTiles) : new List<TRFace4>();
+            _triggerFaces = data.HighlightTriggers ? CollectTriggerFaces(level, _highlightTriggerTypes) : new List<TRFace4>();
+            _deathFaces = data.HighlightDeathTiles ? CollectDeathFaces(level) : new List<TRFace4>();
             _allTextures = new SortedSet<ushort>();
             _data = data;
 
@@ -79,6 +80,7 @@ namespace TRRandomizerCore.Textures
                 IndexedTRObjectTexture roomTexture = CreateWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
                 IndexedTRObjectTexture ladderTexture = CreateLadderWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
                 IndexedTRObjectTexture triggerTexture = CreateTriggerWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
+                IndexedTRObjectTexture deathTexture = CreateDeathWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
                 ProcessClips(packer, level, roomPen, SmoothingMode.AntiAlias);
 
                 Dictionary<TRSize, IndexedTRObjectTexture> modelRemap = new Dictionary<TRSize, IndexedTRObjectTexture>();
@@ -102,6 +104,9 @@ namespace TRRandomizerCore.Textures
                 ushort triggerTextureIndex = (ushort)reusableTextures.Dequeue();
                 levelObjectTextures[triggerTextureIndex] = triggerTexture.Texture;
 
+                ushort deathTextureIndex = (ushort)reusableTextures.Dequeue();
+                levelObjectTextures[deathTextureIndex] = deathTexture.Texture;
+
                 foreach (TRSize size in modelRemap.Keys)
                 {
                     if (!size.Equals(_nullSize))
@@ -114,7 +119,7 @@ namespace TRRandomizerCore.Textures
 
                 SetObjectTextures(level, levelObjectTextures);
 
-                ResetRoomTextures(roomTextureIndex, ladderTextureIndex, triggerTextureIndex);
+                ResetRoomTextures(roomTextureIndex, ladderTextureIndex, triggerTextureIndex, deathTextureIndex);
                 ResetMeshTextures(modelRemap);
                 TidyModels(level);
                 SetSkyboxVisible(level);
@@ -138,7 +143,7 @@ namespace TRRandomizerCore.Textures
         {
             foreach (TRFace4 face in faces)
             {
-                if (_ladderFace4s.ContainsKey(face) || _triggerFaces.Contains(face))
+                if (_ladderFace4s.ContainsKey(face) || _triggerFaces.Contains(face) || _deathFaces.Contains(face))
                     continue;
 
                 ushort texture = (ushort)(face.Texture & 0x0fff);
@@ -282,6 +287,25 @@ namespace TRRandomizerCore.Textures
             return texture;
         }
 
+        private IndexedTRObjectTexture CreateDeathWireframe(AbstractTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+        {
+            if (size.Equals(_nullSize))
+            {
+                return null;
+            }
+
+            IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
+            BitmapGraphics frame = CreateFrame(size.W, size.H, pen, mode, true);
+            // Star symbol
+            frame.Graphics.DrawLine(pen, 0, size.H, size.W, 0);
+            frame.Graphics.DrawLine(pen, size.W / 2, 0, size.W / 2, size.H);
+            frame.Graphics.DrawLine(pen, 0, size.H / 2, size.W, size.H / 2);
+
+            packer.AddRectangle(new TexturedTileSegment(texture, frame.Bitmap));
+
+            return texture;
+        }
+
         private void ProcessClips(AbstractTexturePacker<E, L> packer, L level, Pen pen, SmoothingMode mode)
         {
             // Some animated textures are shared in segments e.g. 4 32x32 segments within a 64x64 container,
@@ -382,7 +406,7 @@ namespace TRRandomizerCore.Textures
             };
         }
 
-        private void ResetRoomTextures(ushort wireframeIndex, ushort ladderIndex, ushort triggerIndex)
+        private void ResetRoomTextures(ushort wireframeIndex, ushort ladderIndex, ushort triggerIndex, ushort deathIndex)
         {
             foreach (TRFace3 face in _roomFace3s.Keys)
             {
@@ -391,7 +415,7 @@ namespace TRRandomizerCore.Textures
 
             foreach (TRFace4 face in _roomFace4s.Keys)
             {
-                if (!_ladderFace4s.ContainsKey(face) && !_triggerFaces.Contains(face))
+                if (!_ladderFace4s.ContainsKey(face) && !_triggerFaces.Contains(face) && !_deathFaces.Contains(face))
                 {
                     face.Texture = RemapTexture(face.Texture, wireframeIndex);
                 }
@@ -420,6 +444,14 @@ namespace TRRandomizerCore.Textures
                 if (!IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
                 {
                     face.Texture = RemapTexture(face.Texture, triggerIndex);
+                }
+            }
+
+            foreach (TRFace4 face in _deathFaces)
+            {
+                if (!IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
+                {
+                    face.Texture = RemapTexture(face.Texture, deathIndex);
                 }
             }
         }
@@ -607,7 +639,8 @@ namespace TRRandomizerCore.Textures
         }
 
         protected abstract Dictionary<TRFace4, List<TRVertex>> CollectLadders(L level);
-        protected abstract List<TRFace4> CollectTriggerFaces(L level, List<FDTrigType> triggerTypes, bool highlightDeathTiles);
+        protected abstract List<TRFace4> CollectTriggerFaces(L level, List<FDTrigType> triggerTypes);
+        protected abstract List<TRFace4> CollectDeathFaces(L level);
         protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
         protected abstract IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(L level);
         protected abstract IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(L level);
