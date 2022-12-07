@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using TRFDControl;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Helpers;
+using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 using TRRandomizerCore.Utilities;
 using TRTexture16Importer.Helpers;
@@ -211,6 +214,130 @@ namespace TRRandomizerCore.Textures
         {
             level.AnimatedTextures = animatedTextures;
             level.NumAnimatedTextures = length;
+        }
+
+        protected override Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(TRLevel level, Pen pen)
+        {
+            Dictionary<ushort, TexturedTileSegment> segments = new Dictionary<ushort, TexturedTileSegment>();
+            foreach (SpecialTextureHandling special in _data.SpecialTextures)
+            {
+                switch (special.Type)
+                {
+                    case SpecialTextureType.MidasDoors:
+                        foreach (ushort texture in special.Textures)
+                        {
+                            if (CreateMidasDoor(level, pen, texture, special.Mode) is TexturedTileSegment segment)
+                            {
+                                segments[texture] = segment;
+                            }
+                        }
+                        break;
+                }
+            }
+
+            return segments;
+        }
+
+        private TexturedTileSegment CreateMidasDoor(TRLevel level, Pen pen, ushort textureIndex, SpecialTextureMode mode)
+        {
+            TRModel doorModel = FindDoorModel(level, textureIndex);
+            if (doorModel == null)
+            {
+                return null;
+            }
+
+            TREntity doorInstance = Array.Find(level.Entities, e => e.TypeID == doorModel.ID);
+            if (doorInstance == null)
+            {
+                return null;
+            }
+
+            const int width = 64;
+            const int height = 16;
+                        
+            IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, width, height));
+            BitmapGraphics frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, false);
+
+            int flags = (doorInstance.Flags & 0x3E00) >> 9;
+            for (int i = 0; i < 5; i++)
+            {
+                int x = 3 + i * 12;
+                int y = 3;
+                int w = 10;
+                int h = 10;
+
+                // Make a smaller rectangle
+                frame.Graphics.DrawRectangle(pen, x, y, w - 1, h - 1);
+
+                // Decorate based on the door's bits
+                bool doorBitSet = (flags & (1 << i)) == 0;
+                switch (mode)
+                {
+                    case SpecialTextureMode.MidasDoorBars:
+                        // Bar at top = lever up; at bottom = lever down
+                        y += doorBitSet ? 5 : 1;
+                        frame.Graphics.DrawLine(pen, x + 4, y, x + 4, y + 3);
+                        frame.Graphics.DrawLine(pen, x + 5, y, x + 5, y + 3);
+                        break;
+                    case SpecialTextureMode.MidasDoorFill:
+                        // Empty blocks need "filled" - levers go down
+                        if (!doorBitSet)
+                        {
+                            frame.Graphics.FillRectangle(pen.Brush, x, y, w - 1, h - 1);
+                        }
+                        break;
+                    case SpecialTextureMode.MidasDoorLines:
+                        if (doorBitSet)
+                        {
+                            // Lever up
+                            frame.Graphics.DrawLine(pen, x + 1, y + 4, x + 8, y + 4);
+                            frame.Graphics.DrawLine(pen, x + 1, y + 5, x + 8, y + 5);
+                        }
+                        else
+                        {
+                            // Lever down
+                            frame.Graphics.DrawLine(pen, x + 4, y + 1, x + 4, y + 8);
+                            frame.Graphics.DrawLine(pen, x + 5, y + 1, x + 5, y + 8);
+                        }
+                        break;
+                    case SpecialTextureMode.MidasDoorDiagonals:
+                        if (doorBitSet)
+                        {
+                            // Lever up \
+                            frame.Graphics.DrawLine(pen, x + 1, y + 1, x + 8, y + 8);
+                        }
+                        else
+                        {
+                            // Lever down /
+                            frame.Graphics.DrawLine(pen, x + 1, y + 8, x + 8, y + 1);
+                        }
+                        break;
+                }
+            }
+
+            return new TexturedTileSegment(texture, frame.Bitmap);
+        }
+
+        private TRModel FindDoorModel(TRLevel level, ushort textureIndex)
+        {
+            foreach (TRModel model in level.Models)
+            {
+                TREntities type = (TREntities)model.ID;
+                if (!TR1EntityUtilities.IsDoorType(type))
+                {
+                    continue;
+                }
+
+                foreach (TRMesh mesh in TRMeshUtilities.GetModelMeshes(level, type))
+                {
+                    if (mesh.TexturedRectangles.Any(f => f.Texture == textureIndex))
+                    {
+                        return model;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

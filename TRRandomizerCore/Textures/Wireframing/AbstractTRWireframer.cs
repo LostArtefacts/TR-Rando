@@ -81,6 +81,7 @@ namespace TRRandomizerCore.Textures
                 IndexedTRObjectTexture ladderTexture = CreateLadderWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
                 IndexedTRObjectTexture triggerTexture = CreateTriggerWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
                 IndexedTRObjectTexture deathTexture = CreateDeathWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
+                Dictionary<ushort, IndexedTRObjectTexture> specialTextures = CreateSpecialTextures(packer, level, roomPen);
                 ProcessClips(packer, level, roomPen, SmoothingMode.AntiAlias);
 
                 Dictionary<TRSize, IndexedTRObjectTexture> modelRemap = new Dictionary<TRSize, IndexedTRObjectTexture>();
@@ -107,6 +108,14 @@ namespace TRRandomizerCore.Textures
                 ushort deathTextureIndex = (ushort)reusableTextures.Dequeue();
                 levelObjectTextures[deathTextureIndex] = deathTexture.Texture;
 
+                Dictionary<ushort, ushort> specialTextureRemap = new Dictionary<ushort, ushort>();
+                foreach (ushort originalTexture in specialTextures.Keys)
+                {
+                    ushort newIndex = (ushort)reusableTextures.Dequeue();
+                    levelObjectTextures[newIndex] = specialTextures[originalTexture].Texture;
+                    specialTextureRemap[originalTexture] = newIndex;
+                }
+
                 foreach (TRSize size in modelRemap.Keys)
                 {
                     if (!size.Equals(_nullSize))
@@ -119,8 +128,8 @@ namespace TRRandomizerCore.Textures
 
                 SetObjectTextures(level, levelObjectTextures);
 
-                ResetRoomTextures(roomTextureIndex, ladderTextureIndex, triggerTextureIndex, deathTextureIndex);
-                ResetMeshTextures(modelRemap);
+                ResetRoomTextures(roomTextureIndex, ladderTextureIndex, triggerTextureIndex, deathTextureIndex, specialTextureRemap);
+                ResetMeshTextures(modelRemap, specialTextureRemap);
                 TidyModels(level);
                 SetSkyboxVisible(level);
                 DeleteAnimatedTextures(level);
@@ -306,6 +315,23 @@ namespace TRRandomizerCore.Textures
             return texture;
         }
 
+        private Dictionary<ushort, IndexedTRObjectTexture> CreateSpecialTextures(AbstractTexturePacker<E, L> packer, L level, Pen pen)
+        {
+            Dictionary<ushort, TexturedTileSegment> specialSegments = CreateSpecialSegments(level, pen);
+            Dictionary<ushort, IndexedTRObjectTexture> specialTextures = new Dictionary<ushort, IndexedTRObjectTexture>();
+            foreach (ushort textureIndex in specialSegments.Keys)
+            {
+                packer.AddRectangle(specialSegments[textureIndex]);
+                specialTextures[textureIndex] = specialSegments[textureIndex].FirstTexture as IndexedTRObjectTexture;
+            }
+            return specialTextures;
+        }
+
+        protected virtual Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(L level, Pen pen)
+        {
+            return new Dictionary<ushort, TexturedTileSegment>();
+        }
+
         private void ProcessClips(AbstractTexturePacker<E, L> packer, L level, Pen pen, SmoothingMode mode)
         {
             // Some animated textures are shared in segments e.g. 4 32x32 segments within a 64x64 container,
@@ -348,7 +374,7 @@ namespace TRRandomizerCore.Textures
             }
         }
 
-        private BitmapGraphics CreateFrame(int width, int height, Pen pen, SmoothingMode mode, bool addDiagonal)
+        protected BitmapGraphics CreateFrame(int width, int height, Pen pen, SmoothingMode mode, bool addDiagonal)
         {
             BitmapGraphics image = new BitmapGraphics(new Bitmap(width, height));
             image.Graphics.SmoothingMode = mode;
@@ -363,7 +389,7 @@ namespace TRRandomizerCore.Textures
             return image;
         }
 
-        private IndexedTRObjectTexture CreateTexture(Rectangle rectangle)
+        protected IndexedTRObjectTexture CreateTexture(Rectangle rectangle)
         {
             // Configure the points
             List<TRObjectTextureVert> vertices = new List<TRObjectTextureVert>
@@ -406,18 +432,24 @@ namespace TRRandomizerCore.Textures
             };
         }
 
-        private void ResetRoomTextures(ushort wireframeIndex, ushort ladderIndex, ushort triggerIndex, ushort deathIndex)
+        private void ResetRoomTextures(ushort wireframeIndex, ushort ladderIndex, ushort triggerIndex, ushort deathIndex, Dictionary<ushort, ushort> specialTextureRemap)
         {
             foreach (TRFace3 face in _roomFace3s.Keys)
             {
-                face.Texture = RemapTexture(face.Texture, wireframeIndex);
+                ushort currentTexture = (ushort)(face.Texture & 0x0fff);
+                face.Texture = RemapTexture(face.Texture, specialTextureRemap.ContainsKey(currentTexture)
+                    ? specialTextureRemap[currentTexture]
+                    : wireframeIndex);
             }
 
             foreach (TRFace4 face in _roomFace4s.Keys)
             {
                 if (!_ladderFace4s.ContainsKey(face) && !_triggerFaces.Contains(face) && !_deathFaces.Contains(face))
                 {
-                    face.Texture = RemapTexture(face.Texture, wireframeIndex);
+                    ushort currentTexture = (ushort)(face.Texture & 0x0fff);
+                    face.Texture = RemapTexture(face.Texture, specialTextureRemap.ContainsKey(currentTexture)
+                        ? specialTextureRemap[currentTexture]
+                        : wireframeIndex);
                 }
             }
 
@@ -456,39 +488,55 @@ namespace TRRandomizerCore.Textures
             }
         }
 
-        private void ResetMeshTextures(Dictionary<TRSize, IndexedTRObjectTexture> sizeRemap)
+        private void ResetMeshTextures(Dictionary<TRSize, IndexedTRObjectTexture> sizeRemap, Dictionary<ushort, ushort> specialTextureRemap)
         {
             foreach (TRFace3 face in _meshFace3s.Keys)
             {
-                if (IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
+                ushort currentTexture = (ushort)(face.Texture & 0x0fff);
+                if (IsTextureExcluded(currentTexture))
                 {
                     continue;
                 }
-                TRSize size = _meshFace3s[face];
-                if (!size.Equals(_nullSize))
+                if (specialTextureRemap.ContainsKey(currentTexture))
                 {
-                    if (!sizeRemap.ContainsKey(size))
+                    face.Texture = RemapTexture(face.Texture, specialTextureRemap[currentTexture]);
+                }
+                else
+                {
+                    TRSize size = _meshFace3s[face];
+                    if (!size.Equals(_nullSize))
                     {
-                        size = Find(size, sizeRemap);
+                        if (!sizeRemap.ContainsKey(size))
+                        {
+                            size = Find(size, sizeRemap);
+                        }
+                        face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
                     }
-                    face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
                 }
             }
 
             foreach (TRFace4 face in _meshFace4s.Keys)
             {
-                if (IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
+                ushort currentTexture = (ushort)(face.Texture & 0x0fff);
+                if (IsTextureExcluded(currentTexture))
                 {
                     continue;
                 }
-                TRSize size = _meshFace4s[face];
-                if (!size.Equals(_nullSize))
+                if (specialTextureRemap.ContainsKey(currentTexture))
                 {
-                    if (!sizeRemap.ContainsKey(size))
+                    face.Texture = RemapTexture(face.Texture, specialTextureRemap[currentTexture]);
+                }
+                else
+                {
+                    TRSize size = _meshFace4s[face];
+                    if (!size.Equals(_nullSize))
                     {
-                        size = Find(size, sizeRemap);
+                        if (!sizeRemap.ContainsKey(size))
+                        {
+                            size = Find(size, sizeRemap);
+                        }
+                        face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
                     }
-                    face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
                 }
             }
         }

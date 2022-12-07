@@ -7,9 +7,14 @@ namespace TRRandomizerCore.Textures
     public class WireframeData
     {
         /// <summary>
-        /// Textures that will be retained, such as water surfaces
+        /// Textures that will be retained, such as water surfaces.
         /// </summary>
         public List<ushort> ExcludedTextures { get; set; }
+
+        /// <summary>
+        /// Textures that require specific processing.
+        /// </summary>
+        public List<SpecialTextureHandling> SpecialTextures { get; set; }
 
         /// <summary>
         /// Textures that may share space with others that are being retained, but we want to still remove.
@@ -70,6 +75,7 @@ namespace TRRandomizerCore.Textures
         public WireframeData()
         {
             ExcludedTextures = new List<ushort>();
+            SpecialTextures = new List<SpecialTextureHandling>();
             ForcedOverrides = new List<ushort>();
             HighlightColour = Color.White;
             SolidLara = false;
@@ -80,5 +86,40 @@ namespace TRRandomizerCore.Textures
             HighlightLadders = false;
             Has3DPickups = false;
         }
+
+        public static List<SpecialTextureMode> GetDrawModes(SpecialTextureType type)
+        {
+            List<SpecialTextureMode> modes = new List<SpecialTextureMode>();
+            switch (type)
+            {
+                case SpecialTextureType.MidasDoors:
+                    modes.Add(SpecialTextureMode.MidasDoorBars);
+                    modes.Add(SpecialTextureMode.MidasDoorLines);
+                    modes.Add(SpecialTextureMode.MidasDoorFill);
+                    modes.Add(SpecialTextureMode.MidasDoorDiagonals);
+                    break;
+            }
+            return modes;
+        }
+    }
+
+    public enum SpecialTextureType
+    {
+        MidasDoors
+    }
+
+    public enum SpecialTextureMode
+    {
+        MidasDoorBars,
+        MidasDoorLines,
+        MidasDoorFill,
+        MidasDoorDiagonals
+    }
+
+    public class SpecialTextureHandling
+    {
+        public SpecialTextureType Type { get; set; }
+        public SpecialTextureMode Mode { get; set; }
+        public List<ushort> Textures { get; set; }
     }
 }
