@@ -173,6 +173,17 @@ namespace TRRandomizerCore.Randomizers
                         mod.ApplyToLevel(level.Data, _disallowedTypes);
                     }
                 }
+
+                // Identical to OneOf but different sets can be returned based on a given condition.
+                foreach (EMConditionalGroupedSet conditionalSet in mapping.ConditionalOneOf)
+                {
+                    EMEditorGroupedSet mod = conditionalSet.GetApplicableSet(level.Data);
+                    if (mod != null)
+                    {
+                        EMEditorSet follower = mod.Followers[_generator.Next(0, mod.Followers.Count)];
+                        mod.ApplyToLevel(level.Data, follower, _disallowedTypes);
+                    }
+                }
             }
 
             // Similar to All, but these mods will have conditions configured so may

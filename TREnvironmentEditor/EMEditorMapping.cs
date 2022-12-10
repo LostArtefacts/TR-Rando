@@ -22,7 +22,8 @@ namespace TREnvironmentEditor
         public List<List<EMEditorSet>> AllWithin { get; set; }
         public List<EMEditorGroupedSet> OneOf { get; set; }
         public List<EMConditionalEditorSet> ConditionalAllWithin { get; set; }
-        public List<EMConditionalSingleEditorSet> ConditionalAll { get; set; }        
+        public List<EMConditionalSingleEditorSet> ConditionalAll { get; set; }
+        public List<EMConditionalGroupedSet> ConditionalOneOf { get; set; }
         public EMEditorSet Mirrored { get; set; }
         public Dictionary<ushort, ushort> AlternativeTextures { get; set; }
 
@@ -35,6 +36,7 @@ namespace TREnvironmentEditor
             AllWithin = new List<List<EMEditorSet>>();
             ConditionalAllWithin = new List<EMConditionalEditorSet>();
             OneOf = new List<EMEditorGroupedSet>();
+            ConditionalOneOf = new List<EMConditionalGroupedSet>();
             Mirrored = new EMEditorSet();
         }
 
@@ -92,6 +94,10 @@ namespace TREnvironmentEditor
             if (OneOf != null)
             {
                 OneOf.ForEach(s => s.RemapTextures(AlternativeTextures));
+            }
+            if (ConditionalOneOf != null)
+            {
+                ConditionalOneOf.ForEach(s => s.RemapTextures(AlternativeTextures));
             }
             if (Mirrored != null)
             {
