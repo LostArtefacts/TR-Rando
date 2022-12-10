@@ -2746,6 +2746,13 @@
       "Room": 13,
       "Difficulty": "Hard",
       "RequiresDamage": true
+    },
+    {
+      "X": 39424,
+      "Y": -3840,
+      "Z": 18944,
+      "Room": 13,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL8C.PHD": [
