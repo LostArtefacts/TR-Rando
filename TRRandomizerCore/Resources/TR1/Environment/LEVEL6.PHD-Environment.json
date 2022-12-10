@@ -4025,6 +4025,7 @@
   ],
   "ConditionalAllWithin": [],
   "ConditionalAll": [],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Moves door 92 so that it can open properly, otherwise Lara has to glitch through.",
