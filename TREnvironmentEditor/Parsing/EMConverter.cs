@@ -77,6 +77,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMMirrorObjectTexture>(jo.ToString(), _resolver);
                 case EMType.OverwriteTexture:
                     return JsonConvert.DeserializeObject<EMOverwriteTextureFunction>(jo.ToString(), _resolver);
+                case EMType.MoveStaticMesh:
+                    return JsonConvert.DeserializeObject<EMMoveStaticMeshFunction>(jo.ToString(), _resolver);
 
                 // Entity types
                 case EMType.MoveSlot:

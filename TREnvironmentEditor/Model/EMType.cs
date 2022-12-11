@@ -21,6 +21,7 @@
         MirrorStaticMesh = 27,
         MirrorObjectTexture = 28,
         OverwriteTexture = 29,
+        MoveStaticMesh = 30,
 
         // Entity types 41-60
         MoveSlot = 41,
