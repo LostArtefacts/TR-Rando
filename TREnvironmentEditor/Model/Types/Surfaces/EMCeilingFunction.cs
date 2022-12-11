@@ -51,8 +51,11 @@ namespace TREnvironmentEditor.Model.Types
                 int min = int.MaxValue;
                 foreach (TRRoomSector sector in room.SectorList)
                 {
-                    sector.Ceiling = CeilingHeights[roomNumber];
-                    min = Math.Min(min, sector.Ceiling);
+                    if (!sector.IsImpenetrable)
+                    {
+                        sector.Ceiling = CeilingHeights[roomNumber];
+                        min = Math.Min(min, sector.Ceiling);
+                    }
                 }
                 room.Info.YTop = min * ClickSize;
 
@@ -79,8 +82,11 @@ namespace TREnvironmentEditor.Model.Types
                 int min = int.MaxValue;
                 foreach (TRRoomSector sector in room.Sectors)
                 {
-                    sector.Ceiling = CeilingHeights[roomNumber];
-                    min = Math.Min(min, sector.Ceiling);
+                    if (!sector.IsImpenetrable)
+                    {
+                        sector.Ceiling = CeilingHeights[roomNumber];
+                        min = Math.Min(min, sector.Ceiling);
+                    }
                 }
                 room.Info.YTop = min * ClickSize;
 
