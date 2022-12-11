@@ -33,13 +33,13 @@
       "Condition": {
         "Comments": "If Adam or Barney is present, we have to change the scion pickup as the MiscAnim that normally ends the level will have been overwritten.",
         "ConditionType": 41,
-        "ModelID": 34,
         "Or": [
           {
             "ConditionType": 41,
             "ModelID": 18
           }
-        ]
+        ],
+        "ModelID": 34
       },
       "OnTrue": [
         {
@@ -80,8 +80,8 @@
             }
           ],
           "Trigger": {
-            "Mask": 31,
             "TrigType": 4,
+            "Mask": 31,
             "Actions": [
               {
                 "Parameter": 73
@@ -95,5 +95,6 @@
       ]
     }
   ],
+  "ConditionalOneOf": [],
   "Mirrored": []
 }

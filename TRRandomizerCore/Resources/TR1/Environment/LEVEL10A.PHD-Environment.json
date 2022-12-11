@@ -48,6 +48,7 @@
       ]
     }
   ],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Moves door 62 so that it can open properly, otherwise Lara has to glitch through.",
