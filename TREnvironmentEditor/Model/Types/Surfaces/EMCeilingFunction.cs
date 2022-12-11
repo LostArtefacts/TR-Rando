@@ -8,6 +8,7 @@ namespace TREnvironmentEditor.Model.Types
     public class EMCeilingFunction : BaseEMFunction
     {
         public Dictionary<int, sbyte> CeilingHeights { get; set; }
+        public bool AmendVertices { get; set; }
 
         public override void ApplyToLevel(TRLevel level)
         {
@@ -15,13 +16,28 @@ namespace TREnvironmentEditor.Model.Types
             foreach (int roomNumber in CeilingHeights.Keys)
             {
                 TRRoom room = level.Rooms[data.ConvertRoom(roomNumber)];
-                int min = room.Info.YTop / ClickSize;
+                int oldYTop = room.Info.YTop;
+                int min = int.MaxValue;
                 foreach (TRRoomSector sector in room.Sectors)
                 {
-                    sector.Ceiling = CeilingHeights[roomNumber];
-                    min = Math.Min(min, sector.Ceiling);
+                    if (!sector.IsImpenetrable)
+                    {
+                        sector.Ceiling = CeilingHeights[roomNumber];
+                        min = Math.Min(min, sector.Ceiling);
+                    }
                 }
                 room.Info.YTop = min * ClickSize;
+
+                if (AmendVertices)
+                {
+                    foreach (TRRoomVertex vertex in room.RoomData.Vertices)
+                    {
+                        if (vertex.Vertex.Y == oldYTop)
+                        {
+                            vertex.Vertex.Y = (short)room.Info.YTop;
+                        }
+                    }
+                }
             }
         }
 
@@ -31,13 +47,25 @@ namespace TREnvironmentEditor.Model.Types
             foreach (int roomNumber in CeilingHeights.Keys)
             {
                 TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                int min = room.Info.YTop / ClickSize;
+                int oldYTop = room.Info.YTop;
+                int min = int.MaxValue;
                 foreach (TRRoomSector sector in room.SectorList)
                 {
                     sector.Ceiling = CeilingHeights[roomNumber];
                     min = Math.Min(min, sector.Ceiling);
                 }
                 room.Info.YTop = min * ClickSize;
+
+                if (AmendVertices)
+                {
+                    foreach (TR2RoomVertex vertex in room.RoomData.Vertices)
+                    {
+                        if (vertex.Vertex.Y == oldYTop)
+                        {
+                            vertex.Vertex.Y = (short)room.Info.YTop;
+                        }
+                    }
+                }
             }
         }
 
@@ -47,13 +75,25 @@ namespace TREnvironmentEditor.Model.Types
             foreach (int roomNumber in CeilingHeights.Keys)
             {
                 TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                int min = room.Info.YTop / ClickSize;
+                int oldYTop = room.Info.YTop;
+                int min = int.MaxValue;
                 foreach (TRRoomSector sector in room.Sectors)
                 {
                     sector.Ceiling = CeilingHeights[roomNumber];
                     min = Math.Min(min, sector.Ceiling);
                 }
                 room.Info.YTop = min * ClickSize;
+
+                if (AmendVertices)
+                {
+                    foreach (TR3RoomVertex vertex in room.RoomData.Vertices)
+                    {
+                        if (vertex.Vertex.Y == oldYTop)
+                        {
+                            vertex.Vertex.Y = (short)room.Info.YTop;
+                        }
+                    }
+                }
             }
         }
     }

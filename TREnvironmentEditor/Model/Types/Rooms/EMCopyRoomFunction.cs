@@ -21,7 +21,8 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TRLevel level)
         {
-            TRRoom baseRoom = level.Rooms[RoomIndex];
+            EMLevelData data = GetData(level);
+            TRRoom baseRoom = level.Rooms[data.ConvertRoom(RoomIndex)];
 
             int xdiff = NewLocation.X - baseRoom.Info.X;
             int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
@@ -143,7 +144,6 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             // Boxes, zones and sectors
-            EMLevelData data = GetData(level);
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
@@ -267,7 +267,8 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
-            TR2Room baseRoom = level.Rooms[RoomIndex];
+            EMLevelData data = GetData(level);
+            TR2Room baseRoom = level.Rooms[data.ConvertRoom(RoomIndex)];
 
             int xdiff = NewLocation.X - baseRoom.Info.X;
             int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
@@ -395,7 +396,6 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             // Boxes, zones and sectors
-            EMLevelData data = GetData(level);
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
@@ -518,7 +518,8 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
-            TR3Room baseRoom = level.Rooms[RoomIndex];
+            EMLevelData data = GetData(level);
+            TR3Room baseRoom = level.Rooms[data.ConvertRoom(RoomIndex)];
 
             int xdiff = NewLocation.X - baseRoom.Info.X;
             int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
@@ -647,7 +648,6 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             // Boxes, zones and sectors
-            EMLevelData data = GetData(level);
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
