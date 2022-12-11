@@ -1967,16 +1967,13 @@
             }
           ],
           "Mesh": {
-            "X": 39424,
-            "Y": 4864,
-            "Z": 55808,
             "Intensity1": 5200,
             "MeshID": 14
           },
           "IgnoreSectorEntities": true
         },
         {
-          "Comments": "Move the scion to the mesh location (it's here to avoid potential slope softlock').",
+          "Comments": "Move the scion to the mesh location (it's here to avoid potential slope softlock).",
           "EMType": 44,
           "EntityIndex": 30,
           "TargetLocation": {
