@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
+using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
@@ -22,8 +23,11 @@ namespace TREnvironmentEditor.Model.Types
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector sector1 = FDUtilities.GetRoomSector(Location1.X, Location1.Y, Location1.Z, Location1.Room, level, floorData);
-            TRRoomSector sector2 = FDUtilities.GetRoomSector(Location2.X, Location2.Y, Location2.Z, Location2.Room, level, floorData);
+            TRRoom room1 = level.Rooms[Location1.Room];
+            TRRoom room2 = level.Rooms[Location2.Room];
+
+            TRRoomSector sector1 = room1.Sectors[GetSectorIndex(room1.Info, Location1, room1.NumZSectors)];
+            TRRoomSector sector2 = room2.Sectors[GetSectorIndex(room2.Info, Location2, room2.NumZSectors)];
 
             RemovePortals(sector1, sector2, floorData);
 
@@ -39,8 +43,11 @@ namespace TREnvironmentEditor.Model.Types
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector sector1 = FDUtilities.GetRoomSector(Location1.X, Location1.Y, Location1.Z, Location1.Room, level, floorData);
-            TRRoomSector sector2 = FDUtilities.GetRoomSector(Location2.X, Location2.Y, Location2.Z, Location2.Room, level, floorData);
+            TR2Room room1 = level.Rooms[Location1.Room];
+            TR2Room room2 = level.Rooms[Location2.Room];
+
+            TRRoomSector sector1 = room1.SectorList[GetSectorIndex(room1.Info, Location1, room1.NumZSectors)];
+            TRRoomSector sector2 = room2.SectorList[GetSectorIndex(room2.Info, Location2, room2.NumZSectors)];
 
             RemovePortals(sector1, sector2, floorData);
 
@@ -56,8 +63,11 @@ namespace TREnvironmentEditor.Model.Types
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector sector1 = FDUtilities.GetRoomSector(Location1.X, Location1.Y, Location1.Z, Location1.Room, level, floorData);
-            TRRoomSector sector2 = FDUtilities.GetRoomSector(Location2.X, Location2.Y, Location2.Z, Location2.Room, level, floorData);
+            TR3Room room1 = level.Rooms[Location1.Room];
+            TR3Room room2 = level.Rooms[Location2.Room];
+
+            TRRoomSector sector1 = room1.Sectors[GetSectorIndex(room1.Info, Location1, room1.NumZSectors)];
+            TRRoomSector sector2 = room2.Sectors[GetSectorIndex(room2.Info, Location2, room2.NumZSectors)];
 
             RemovePortals(sector1, sector2, floorData);
 
@@ -97,11 +107,23 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             List<FDEntry> entries = floorData.Entries[sector.FDIndex];
-            entries.RemoveAll(e => e is FDPortalEntry portal && (portal.Room == Location1.Room || portal.Room == Location2.Room));
+            if (entries.RemoveAll(e => e is FDPortalEntry portal && (portal.Room == Location1.Room || portal.Room == Location2.Room)) > 0)
+            {
+                // Ensure it's a wall and remove all FD - don't leave nospace in our trails
+                sector.Floor = sector.Ceiling = -127;
+                entries.Clear();
+            }
             if (entries.Count == 0)
             {
                 floorData.RemoveFloorData(sector);
             }
+        }
+
+        private int GetSectorIndex(TRRoomInfo roomInfo, EMLocation location, int roomDepth)
+        {
+            int x = (location.X - roomInfo.X) / 1024;
+            int z = (location.Z - roomInfo.Z) / 1024;
+            return x * roomDepth + z;
         }
     }
 }
