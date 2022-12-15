@@ -22,6 +22,7 @@
         MirrorObjectTexture = 28,
         OverwriteTexture = 29,
         MoveStaticMesh = 30,
+        AddRoomSprite = 31,
 
         // Entity types 41-60
         MoveSlot = 41,
@@ -70,6 +71,7 @@
         CopyRoom = 123,
         CopyVertexAttributes = 124,
         ImportRoom = 125,
+        CreateRoom = 126,
 
         // Models
         ImportModel = 141,
