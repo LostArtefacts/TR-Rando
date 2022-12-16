@@ -46,6 +46,73 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #42 is in its default position. If not, ensure it is visible and add a replacement item on the conveyor belt.",
+        "ConditionType": 0,
+        "EntityIndex": 42,
+        "X": 78336,
+        "Y": -6656,
+        "Z": 43520,
+        "Room": 45
+      },
+      "OnFalse": [
+        {
+          "Comments": "Make it visible.",
+          "EMType": 48,
+          "EntityIndex": 42,
+          "Invisible": false
+        },
+        {
+          "Comments": "Add some ammo where the fuse used to be.",
+          "EMType": 51,
+          "TypeID": 89,
+          "Flags": 256,
+          "Intensity": 4096,
+          "Location": {
+            "X": 78336,
+            "Y": -6656,
+            "Z": 43520,
+            "Room": 45
+          }
+        },
+        {
+          "Comments": "Remove the fuse static mesh from the conveyor belt.",
+          "EMType": 25,
+          "ClearFromRooms": {
+            "36": [
+              45
+            ]
+          }
+        },
+        {
+          "Comments": "Add a sprite instead for the ammo.",
+          "EMType": 31,
+          "Texture": 4,
+          "Vertex": {
+            "Lighting": 4096
+          },
+          "Locations": [
+            {
+              "X": 78487,
+              "Y": -6912,
+              "Z": 48631,
+              "Room": 45
+            }
+          ]
+        },
+        {
+          "Comments": "Replace the switch trigger item.",
+          "EMType": 66,
+          "EntityLocations": [
+            79
+          ],
+          "Action": {
+            "Parameter": -1
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],
