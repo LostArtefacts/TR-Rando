@@ -115,32 +115,17 @@ namespace TREnvironmentEditor.Model
 
         protected EMLevelData GetData(TRLevel level)
         {
-            return new EMLevelData
-            {
-                NumCameras = level.NumCameras,
-                NumEntities = level.NumEntities,
-                NumRooms = level.NumRooms
-            };
+            return EMLevelData.GetData(level);
         }
 
         protected EMLevelData GetData(TR2Level level)
         {
-            return new EMLevelData
-            {
-                NumCameras = level.NumCameras,
-                NumEntities = level.NumEntities,
-                NumRooms = level.NumRooms
-            };
+            return EMLevelData.GetData(level);
         }
 
         protected EMLevelData GetData(TR3Level level)
         {
-            return new EMLevelData
-            {
-                NumCameras = level.NumCameras,
-                NumEntities = level.NumEntities,
-                NumRooms = level.NumRooms
-            };
+            return EMLevelData.GetData(level);
         }
     }
 }

@@ -72,6 +72,7 @@
         CopyVertexAttributes = 124,
         ImportRoom = 125,
         CreateRoom = 126,
+        CreateWall = 127,
 
         // Models
         ImportModel = 141,

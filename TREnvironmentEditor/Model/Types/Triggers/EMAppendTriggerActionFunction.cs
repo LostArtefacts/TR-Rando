@@ -10,27 +10,29 @@ namespace TREnvironmentEditor.Model.Types
     public class EMAppendTriggerActionFunction : BaseEMFunction
     {
         public EMLocation Location { get; set; }
+        public List<EMLocation> Locations { get; set; }
+        public EMLocationExpander LocationExpander { get; set; }
         public List<EMTriggerAction> Actions { get; set; }
 
         public override void ApplyToLevel(TRLevel level)
         {
             EMLevelData data = GetData(level);
             List<FDActionListItem> actions = InitialiseActionItems(data);
+            List<EMLocation> locations = InitialiseLocations();
 
-            FDControl control = new FDControl();
-            control.ParseFromLevel(level);
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, control);
-            if (sector.FDIndex == 0)
+            bool appended = false;
+            foreach (EMLocation location in locations)
             {
-                return;
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, floorData);
+                appended = AppendActions(sector, floorData, actions);
             }
 
-            FDTriggerEntry trigger = control.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) as FDTriggerEntry;
-            if (trigger != null)
+            if (appended)
             {
-                trigger.TrigActionList.AddRange(actions);
-                control.WriteToLevel(level);
+                floorData.WriteToLevel(level);
             }
         }
 
@@ -38,21 +40,21 @@ namespace TREnvironmentEditor.Model.Types
         {
             EMLevelData data = GetData(level);
             List<FDActionListItem> actions = InitialiseActionItems(data);
+            List<EMLocation> locations = InitialiseLocations();
 
-            FDControl control = new FDControl();
-            control.ParseFromLevel(level);
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, control);
-            if (sector.FDIndex == 0)
+            bool appended = false;
+            foreach (EMLocation location in locations)
             {
-                return;
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, floorData);
+                appended = AppendActions(sector, floorData, actions);
             }
 
-            FDTriggerEntry trigger = control.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) as FDTriggerEntry;
-            if (trigger != null)
+            if (appended)
             {
-                trigger.TrigActionList.AddRange(actions);
-                control.WriteToLevel(level);
+                floorData.WriteToLevel(level);
             }
         }
 
@@ -60,22 +62,41 @@ namespace TREnvironmentEditor.Model.Types
         {
             EMLevelData data = GetData(level);
             List<FDActionListItem> actions = InitialiseActionItems(data);
+            List<EMLocation> locations = InitialiseLocations();
 
-            FDControl control = new FDControl();
-            control.ParseFromLevel(level);
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, control);
-            if (sector.FDIndex == 0)
+            bool appended = false;
+            foreach (EMLocation location in locations)
             {
-                return;
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, floorData);
+                appended = AppendActions(sector, floorData, actions);
             }
 
-            FDTriggerEntry trigger = control.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) as FDTriggerEntry;
-            if (trigger != null)
+            if (appended)
             {
-                trigger.TrigActionList.AddRange(actions);
-                control.WriteToLevel(level);
+                floorData.WriteToLevel(level);
             }
+        }
+
+        private List<EMLocation> InitialiseLocations()
+        {
+            List<EMLocation> locations = new List<EMLocation>();
+            if (Location != null)
+            {
+                locations.Add(Location);
+            }
+            if (Locations != null)
+            {
+                locations.AddRange(Locations);
+            }
+            if (LocationExpander != null)
+            {
+                locations.AddRange(LocationExpander.Expand());
+            }
+
+            return locations;
         }
 
         private List<FDActionListItem> InitialiseActionItems(EMLevelData data)
@@ -86,6 +107,17 @@ namespace TREnvironmentEditor.Model.Types
                 actions.Add(action.ToFDAction(data));
             }
             return actions;
+        }
+
+        private bool AppendActions(TRRoomSector sector, FDControl floorData, List<FDActionListItem> actions)
+        {
+            if (sector.FDIndex != 0 && floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger)
+            {
+                trigger.TrigActionList.AddRange(actions);
+                return true;
+            }
+
+            return false;
         }
     }
 }

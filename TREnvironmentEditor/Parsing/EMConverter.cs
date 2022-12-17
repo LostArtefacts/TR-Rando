@@ -169,6 +169,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMImportRoomFunction>(jo.ToString(), _resolver);
                 case EMType.CreateRoom:
                     return JsonConvert.DeserializeObject<EMCreateRoomFunction>(jo.ToString(), _resolver);
+                case EMType.CreateWall:
+                    return JsonConvert.DeserializeObject<EMCreateWallFunction>(jo.ToString(), _resolver);
 
                 // Models
                 case EMType.ImportModel:
@@ -205,6 +207,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMRoomContainsWaterCondition>(jo.ToString(), this);
                 case EMConditionType.SectorContainsSecret:
                     return JsonConvert.DeserializeObject<EMSectorContainsSecretCondition>(jo.ToString(), this);
+                case EMConditionType.SectorIsWall:
+                    return JsonConvert.DeserializeObject<EMSectorIsWallCondition>(jo.ToString(), this);
 
                 // Models
                 case EMConditionType.ModelExists:
