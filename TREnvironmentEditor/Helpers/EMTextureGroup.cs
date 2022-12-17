@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using TREnvironmentEditor.Model.Types;
+using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Helpers
 {
@@ -15,7 +17,11 @@ namespace TREnvironmentEditor.Helpers
         // 64x32
         public ushort Wall2 { get; set; }
         // 64x16
-        public ushort Wall1 { get; set;}
+        public ushort Wall1 { get; set; }
+
+        public int RandomRotationSeed { get; set; }
+
+        private Random _generator;
 
         public EMTextureGroup()
         {
@@ -46,6 +52,62 @@ namespace TREnvironmentEditor.Helpers
             }
 
             return result == ushort.MaxValue ? Floor : result;
+        }
+
+        public void RandomizeRotation(TRFace4 face, int height)
+        {
+            if (RandomRotationSeed <= 0)
+            {
+                return;
+            }
+
+            if (_generator == null)
+            {
+                _generator = new Random(RandomRotationSeed);
+            }
+
+            Dictionary<int, int> remap = null;
+            switch (_generator.Next(0, 4))
+            {
+                case 1:
+                    remap = new Dictionary<int, int>
+                    {
+                        [0] = 1,
+                        [1] = 2,
+                        [2] = 3,
+                        [3] = 0
+                    };
+                    break;
+                case 2:
+                    remap = new Dictionary<int, int>
+                    {
+                        [0] = 2,
+                        [1] = 3,
+                        [2] = 0,
+                        [3] = 1
+                    };
+                    break;
+                case 3:
+                    remap = new Dictionary<int, int>
+                    {
+                        [0] = 3,
+                        [1] = 0,
+                        [2] = 1,
+                        [3] = 2
+                    };
+                    break;
+                default:
+                    // Leave it as-is
+                    break;
+            }
+
+            if (remap != null && height == 1024)
+            {
+                face.Vertices = EMModifyFaceFunction.RotateVertices(face.Vertices, new EMFaceRotation
+                {
+                    VertexRemap = remap
+                });
+            }
         }
     }
 }

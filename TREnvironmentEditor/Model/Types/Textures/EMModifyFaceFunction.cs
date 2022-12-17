@@ -338,7 +338,7 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
-        private static ushort[] RotateVertices(ushort[] originalVertices, EMFaceRotation rot)
+        public static ushort[] RotateVertices(ushort[] originalVertices, EMFaceRotation rot)
         {
             ushort[] remappedVertices = new ushort[originalVertices.Length];
             for (int i = 0; i < originalVertices.Length; i++)

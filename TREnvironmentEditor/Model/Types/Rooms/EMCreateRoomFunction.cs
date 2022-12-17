@@ -449,7 +449,9 @@ namespace TREnvironmentEditor.Model.Types
                 case Direction.East:
                     vertices.AddRange(BuildZWallVertices(x, y, z, height));
                     break;
-            }            
+            }
+
+            Textures.RandomizeRotation(face, height);
         }
 
         private List<TRVertex> BuildFlatVertices(int x, int y, int z)
