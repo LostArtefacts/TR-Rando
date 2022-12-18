@@ -1119,10 +1119,7 @@
             "Floor": 102,
             "Ceiling": 98,
             "WallAlignment": 4,
-            "Wall4": 96,
-            "Wall3": 65535,
-            "Wall2": 65535,
-            "Wall1": 65535
+            "Wall4": 96
           },
           "AmbientLighting": 7424,
           "DefaultVertex": {
@@ -1625,7 +1622,6 @@
             "Ceiling": 21,
             "WallAlignment": 5,
             "Wall4": 2,
-            "Wall3": 65535,
             "Wall2": 35,
             "Wall1": 138
           },
@@ -2157,10 +2153,7 @@
             "Floor": 102,
             "Ceiling": 98,
             "WallAlignment": 4,
-            "Wall4": 96,
-            "Wall3": 65535,
-            "Wall2": 65535,
-            "Wall1": 65535
+            "Wall4": 96
           },
           "AmbientLighting": 7424,
           "DefaultVertex": {
