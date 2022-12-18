@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using TREnvironmentEditor.Model.Types;
 using TRLevelReader.Model;
 
@@ -11,12 +12,16 @@ namespace TREnvironmentEditor.Helpers
         public ushort Ceiling { get; set; }
         public Direction WallAlignment { get; set; }
         // 64x64
+        [DefaultValue(ushort.MaxValue)]
         public ushort Wall4 { get; set; }
         // 64x48
+        [DefaultValue(ushort.MaxValue)]
         public ushort Wall3 { get; set; }
         // 64x32
+        [DefaultValue(ushort.MaxValue)]
         public ushort Wall2 { get; set; }
         // 64x16
+        [DefaultValue(ushort.MaxValue)]
         public ushort Wall1 { get; set; }
 
         public int RandomRotationSeed { get; set; }
