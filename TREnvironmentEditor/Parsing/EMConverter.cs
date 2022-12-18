@@ -171,6 +171,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMCreateRoomFunction>(jo.ToString(), _resolver);
                 case EMType.CreateWall:
                     return JsonConvert.DeserializeObject<EMCreateWallFunction>(jo.ToString(), _resolver);
+                case EMType.GenerateLight:
+                    return JsonConvert.DeserializeObject<EMGenerateLightFunction>(jo.ToString(), _resolver);
 
                 // Models
                 case EMType.ImportModel:

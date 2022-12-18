@@ -73,6 +73,7 @@
         ImportRoom = 125,
         CreateRoom = 126,
         CreateWall = 127,
+        GenerateLight = 128,
 
         // Models
         ImportModel = 141,
