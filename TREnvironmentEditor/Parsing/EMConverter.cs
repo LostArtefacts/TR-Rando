@@ -109,6 +109,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMConvertWheelDoorFunction>(jo.ToString(), _resolver);
                 case EMType.MoveSecret:
                     return JsonConvert.DeserializeObject<EMMoveSecretFunction>(jo.ToString(), _resolver);
+                case EMType.SwapGroupedSlots:
+                    return JsonConvert.DeserializeObject<EMSwapGroupedSlotsFunction>(jo.ToString(), _resolver);
 
                 // Trigger types
                 case EMType.Trigger:

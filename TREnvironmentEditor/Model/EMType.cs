@@ -38,6 +38,7 @@
         AddEntity = 51,
         ConvertWheelDoor = 52,
         MoveSecret = 53,
+        SwapGroupedSlots = 54,
 
         // Trigger types 61-80
         Trigger = 61,
