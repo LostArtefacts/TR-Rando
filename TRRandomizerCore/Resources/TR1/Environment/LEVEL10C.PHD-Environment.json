@@ -13,11 +13,1286 @@
           }
         }
       }
+    },
+    {
+      "Comments": "Add a missing face at the very end of the level.",
+      "EMType": 26,
+      "Quads": {
+        "66": [
+          {
+            "Vertices": [
+              13,
+              3,
+              9,
+              16
+            ],
+            "Texture": 9
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Convert Adam's door into the same style as the one in Atlantis.",
+      "EMType": 45,
+      "EntityIndex": 86,
+      "NewEntityType": 57
     }
   ],
-  "Any": [],
-  "AllWithin": [],
-  "OneOf": [],
+  "Any": [
+    [
+      {
+        "Comments": "Move dart 24.",
+        "EMType": 44,
+        "EntityIndex": 24,
+        "TargetLocation": {
+          "X": 46592,
+          "Y": -13312,
+          "Z": 22016,
+          "Room": 20,
+          "Angle": -32768
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Convert the unused Atlantis lever into spikes.",
+        "EMType": 45,
+        "EntityIndex": 109,
+        "NewEntityType": 37
+      },
+      {
+        "Comments": "Move them elsewhere.",
+        "EMType": 44,
+        "EntityIndex": 109,
+        "TargetLocation": {
+          "X": 47616,
+          "Y": -10752,
+          "Z": 30208,
+          "Room": 21
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Convert the other unused Atlantis lever into a blade.",
+        "EMType": 45,
+        "EntityIndex": 111,
+        "NewEntityType": 36
+      },
+      {
+        "Comments": "Move it and trigger it.",
+        "EMType": 44,
+        "EntityIndex": 111,
+        "TargetLocation": {
+          "X": 30208,
+          "Y": -5120,
+          "Z": 41472,
+          "Room": 25,
+          "Angle": 16384
+        }
+      },
+      {
+        "EMType": 68,
+        "LocationExpander": {
+          "Location": {
+            "X": 41472,
+            "Y": -9472,
+            "Z": 33280,
+            "Room": 22
+          },
+          "ExpandX": 1,
+          "ExpandZ": 3
+        },
+        "Actions": [
+          {
+            "Parameter": 111
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "EMType": 51,
+        "TypeID": 179,
+        "Location": {
+          "X": 59904,
+          "Y": -15616,
+          "Z": 13824,
+          "Room": 36
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 179,
+        "Location": {
+          "X": 64000,
+          "Y": -15616,
+          "Z": 13824,
+          "Room": 36
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 179,
+        "Location": {
+          "X": 59904,
+          "Y": -15616,
+          "Z": 9728,
+          "Room": 36
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 179,
+        "Location": {
+          "X": 64000,
+          "Y": -15616,
+          "Z": 9728,
+          "Room": 36
+        }
+      },
+      {
+        "EMType": 68,
+        "Location": {
+          "X": 58880,
+          "Y": -15616,
+          "Z": 11776,
+          "Room": 36
+        },
+        "Actions": [
+          {
+            "Parameter": -4
+          },
+          {
+            "Parameter": -3
+          },
+          {
+            "Parameter": -2
+          },
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    ]
+  ],
+  "AllWithin": [
+    [
+      [
+        {
+          "Comments": "Leave clang-clang 6 alone.",
+          "EMType": 1000
+        }
+      ],
+      [
+        {
+          "Comments": "Separate the clang-clang trigger from the one for the breakable tile.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 69120,
+              "Y": -14592,
+              "Z": 25088,
+              "Room": 9
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 6
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 69120,
+              "Y": -11008,
+              "Z": 26112,
+              "Room": 8
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 6
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Move the clang-clang to the middle of the breakable tile.",
+          "EMType": 44,
+          "EntityIndex": 6,
+          "TargetLocation": {
+            "X": 69120,
+            "Y": -14592,
+            "Z": 26624,
+            "Room": 9,
+            "Angle": -32768
+          }
+        },
+        {
+          "Comments": "Convert the breakable tile into another clang-clang.",
+          "EMType": 45,
+          "EntityIndex": 2,
+          "NewEntityType": 42
+        },
+        {
+          "Comments": "Move it upstairs.",
+          "EMType": 44,
+          "EntityIndex": 2,
+          "TargetLocation": {
+            "X": 69120,
+            "Y": -14592,
+            "Z": 27648,
+            "Room": 13,
+            "Angle": -32768
+          }
+        },
+        {
+          "Comments": "Fix its lighting.",
+          "EMType": 48,
+          "EntityIndex": 2,
+          "Intensity1": -1
+        },
+        {
+          "Comments": "Remove the old trigger.",
+          "EMType": 62,
+          "Locations": [
+            {
+              "X": 69120,
+              "Y": -11008,
+              "Z": 26112,
+              "Room": 8
+            }
+          ]
+        },
+        {
+          "Comments": "Replacement triggers for them both.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 69120,
+              "Y": -14592,
+              "Z": 27136,
+              "Room": 13
+            },
+            {
+              "X": 69120,
+              "Y": -14592,
+              "Z": 25088,
+              "Room": 9
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {
+                "Parameter": 2
+              },
+              {
+                "Parameter": 6
+              }
+            ]
+          }
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "TargetLocation": {
+            "X": 67072,
+            "Y": -15616,
+            "Z": 11776,
+            "Room": 48,
+            "Angle": 16384
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 68096,
+              "Y": -15616,
+              "Z": 11776,
+              "Room": 48
+            },
+            {
+              "X": 67072,
+              "Y": -15616,
+              "Z": 11776,
+              "Room": 48
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {}
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "TargetLocation": {
+            "X": 69120,
+            "Y": -15616,
+            "Z": 13824,
+            "Room": 6
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 69120,
+              "Y": -15616,
+              "Z": 14848,
+              "Room": 6
+            },
+            {
+              "X": 69120,
+              "Y": -15616,
+              "Z": 13824,
+              "Room": 6
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {}
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "TargetLocation": {
+            "X": 72192,
+            "Y": -12544,
+            "Z": 23040,
+            "Room": 12,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 72192,
+              "Y": -12544,
+              "Z": 23040,
+              "Room": 12
+            },
+            {
+              "X": 72192,
+              "Y": -12544,
+              "Z": 22016,
+              "Room": 12
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {}
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "TargetLocation": {
+            "X": 66048,
+            "Y": -14592,
+            "Z": 30720,
+            "Room": 16,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 66048,
+              "Y": -14592,
+              "Z": 30208,
+              "Room": 16
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {}
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "TargetLocation": {
+            "X": 62976,
+            "Y": -13568,
+            "Z": 26624,
+            "Room": 17
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 62976,
+              "Y": -13568,
+              "Z": 27136,
+              "Room": 17
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {}
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "TargetLocation": {
+            "X": 53760,
+            "Y": -13824,
+            "Z": 19456,
+            "Room": 38,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 53760,
+              "Y": -13824,
+              "Z": 18944,
+              "Room": 38
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {}
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "TargetLocation": {
+            "X": 53760,
+            "Y": -23040,
+            "Z": 14336,
+            "Room": 60
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 53760,
+              "Y": -23040,
+              "Z": 14848,
+              "Room": 60
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {}
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "TargetLocation": {
+            "X": 53248,
+            "Y": -23040,
+            "Z": 8704,
+            "Room": 60,
+            "Angle": -16384
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 52736,
+              "Y": -23040,
+              "Z": 8704,
+              "Room": 60
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {}
+            ]
+          }
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "EntityIndex": 1,
+          "TargetLocation": {
+            "X": 62976,
+            "Y": -13568,
+            "Z": 24576,
+            "Room": 17
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 62976,
+              "Y": -13568,
+              "Z": 25088,
+              "Room": 17
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {
+                "Parameter": 1
+              }
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "EntityIndex": 1,
+          "TargetLocation": {
+            "X": 53760,
+            "Y": -23040,
+            "Z": 12288,
+            "Room": 60
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 53760,
+              "Y": -23040,
+              "Z": 12800,
+              "Room": 60
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {
+                "Parameter": 1
+              }
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "EntityIndex": 1,
+          "TargetLocation": {
+            "X": 47616,
+            "Y": -12544,
+            "Z": 23552,
+            "Room": 21,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 47616,
+              "Y": -12544,
+              "Z": 23040,
+              "Room": 21
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {
+                "Parameter": 1
+              }
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "EntityIndex": 1,
+          "TargetLocation": {
+            "X": 28160,
+            "Y": -5120,
+            "Z": 37888,
+            "Room": 24,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 28160,
+              "Y": -5120,
+              "Z": 37376,
+              "Room": 24
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {
+                "Parameter": 1
+              }
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "EntityIndex": 1,
+          "TargetLocation": {
+            "X": 34816,
+            "Y": -512,
+            "Z": 40448,
+            "Room": 19,
+            "Angle": -16384
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 34304,
+              "Y": -512,
+              "Z": 40448,
+              "Room": 19
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {
+                "Parameter": 1
+              }
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "EntityIndex": 1,
+          "TargetLocation": {
+            "X": 43520,
+            "Y": -512,
+            "Z": 46080,
+            "Room": 57,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 43520,
+              "Y": -512,
+              "Z": 45568,
+              "Room": 57
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {
+                "Parameter": 1
+              }
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "EntityIndex": 1,
+          "TargetLocation": {
+            "X": 43520,
+            "Y": -512,
+            "Z": 49152,
+            "Room": 57,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 43520,
+              "Y": -512,
+              "Z": 48640,
+              "Room": 57
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {
+                "Parameter": 1
+              }
+            ]
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Make use of the clang-clang door from Atlantis.",
+          "EMType": 44,
+          "EntityIndex": 1,
+          "TargetLocation": {
+            "X": 53760,
+            "Y": -1792,
+            "Z": 62464,
+            "Room": 55
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 53760,
+              "Y": -1792,
+              "Z": 62976,
+              "Room": 55
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 1,
+            "Actions": [
+              {
+                "Parameter": 1
+              }
+            ]
+          }
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "Comments": "Leave boulder 94's trigger alone.",
+          "EMType": 1000
+        }
+      ],
+      [
+        {
+          "Comments": "Potential trigger shift for boulder 94.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 55808,
+            "Y": -14592,
+            "Z": 17920,
+            "Room": 38
+          },
+          "NewLocation": {
+            "X": 54784,
+            "Y": -14080,
+            "Z": 17920,
+            "Room": 38
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential trigger shift for boulder 94.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 55808,
+            "Y": -14592,
+            "Z": 17920,
+            "Room": 38
+          },
+          "NewLocation": {
+            "X": 56832,
+            "Y": -15104,
+            "Z": 17920,
+            "Room": 38
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential trigger shift for boulder 94.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 55808,
+            "Y": -14592,
+            "Z": 17920,
+            "Room": 38
+          },
+          "NewLocation": {
+            "X": 57856,
+            "Y": -15616,
+            "Z": 17920,
+            "Room": 38
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential trigger shift for boulder 94.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 55808,
+            "Y": -14592,
+            "Z": 17920,
+            "Room": 38
+          },
+          "NewLocation": {
+            "X": 58880,
+            "Y": -16128,
+            "Z": 17920,
+            "Room": 38
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential trigger shift for boulder 94.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 55808,
+            "Y": -14592,
+            "Z": 17920,
+            "Room": 38
+          },
+          "NewLocation": {
+            "X": 59904,
+            "Y": -16640,
+            "Z": 17920,
+            "Room": 38
+          }
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "Comments": "Leave boulder 120's trigger alone.",
+          "EMType": 1000
+        }
+      ],
+      [
+        {
+          "Comments": "Potential trigger shift for boulder 120.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 60928,
+            "Y": -20224,
+            "Z": 15872,
+            "Room": 61
+          },
+          "NewLocation": {
+            "X": 61952,
+            "Y": -19712,
+            "Z": 15872,
+            "Room": 61
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential trigger shift for boulder 120.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 60928,
+            "Y": -20224,
+            "Z": 15872,
+            "Room": 61
+          },
+          "NewLocation": {
+            "X": 62976,
+            "Y": -19200,
+            "Z": 15872,
+            "Room": 61
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential trigger shift for boulder 120.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 60928,
+            "Y": -20224,
+            "Z": 15872,
+            "Room": 61
+          },
+          "NewLocation": {
+            "X": 59904,
+            "Y": -20736,
+            "Z": 15872,
+            "Room": 61
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential trigger shift for boulder 120.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 60928,
+            "Y": -20224,
+            "Z": 15872,
+            "Room": 61
+          },
+          "NewLocation": {
+            "X": 58880,
+            "Y": -21248,
+            "Z": 15872,
+            "Room": 61
+          }
+        }
+      ]
+    ]
+  ],
+  "OneOf": [
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default lever texture in room 19.",
+          "EMType": 21,
+          "TextureMap": {
+            "54": {
+              "19": {
+                "Rectangles": [
+                  86
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 20,
+            "Location": {
+              "X": 42496,
+              "Y": -512,
+              "Z": 39424,
+              "Room": 19,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "65": {
+                "19": {
+                  "Rectangles": [
+                    84
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 20,
+            "Location": {
+              "X": 41472,
+              "Y": -512,
+              "Z": 39424,
+              "Room": 19,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "65": {
+                "19": {
+                  "Rectangles": [
+                    75
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 20,
+            "Location": {
+              "X": 40448,
+              "Y": -512,
+              "Z": 39424,
+              "Room": 19,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "65": {
+                "19": {
+                  "Rectangles": [
+                    63
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 20,
+            "Location": {
+              "X": 41472,
+              "Y": -512,
+              "Z": 40448,
+              "Room": 19
+            }
+          },
+          {
+            "Comments": "Lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "65": {
+                "19": {
+                  "Rectangles": [
+                    79
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 20,
+            "Location": {
+              "X": 41472,
+              "Y": -512,
+              "Z": 40448,
+              "Room": 19,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "65": {
+                "19": {
+                  "Rectangles": [
+                    85
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default lever texture in room 63.",
+          "EMType": 21,
+          "TextureMap": {
+            "51": {
+              "63": {
+                "Rectangles": [
+                  16
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Effectively NOOP.",
+            "EMType": 21,
+            "TextureMap": {
+              "65": {
+                "63": {
+                  "Rectangles": [
+                    16
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 125,
+            "Location": {
+              "X": 66048,
+              "Y": -13312,
+              "Z": 18944,
+              "Room": 63,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "65": {
+                "63": {
+                  "Rectangles": [
+                    14
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 125,
+            "Location": {
+              "X": 66048,
+              "Y": -13312,
+              "Z": 18944,
+              "Room": 63
+            }
+          },
+          {
+            "Comments": "Lever texture for above.",
+            "EMType": 21,
+            "TextureMap": {
+              "65": {
+                "63": {
+                  "Rectangles": [
+                    15
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "Comments": "Rotation for above.",
+            "EMType": 23,
+            "Rotations": [
+              {
+                "RoomNumber": 63,
+                "FaceIndices": [
+                  15
+                ],
+                "VertexRemap": {
+                  "0": 3,
+                  "1": 0,
+                  "2": 1,
+                  "3": 2
+                }
+              }
+            ]
+          }
+        ]
+      ]
+    }
+  ],
   "ConditionalAllWithin": [],
   "ConditionalAll": [],
   "ConditionalOneOf": [],
