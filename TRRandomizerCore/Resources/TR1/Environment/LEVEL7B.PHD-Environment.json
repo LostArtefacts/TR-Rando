@@ -40,6 +40,576 @@
           }
         }
       ]
+    },
+    {
+      "Comments": "Create rooms for a return path.",
+      "EMType": 126,
+      "Location": {
+        "X": 25600,
+        "Y": 3840,
+        "Z": 68608
+      },
+      "LinkedLocation": {
+        "X": 27136,
+        "Y": 3840,
+        "Z": 72192,
+        "Room": 90
+      },
+      "Textures": {
+        "Floor": 89,
+        "Ceiling": 89,
+        "WallAlignment": 4,
+        "Wall4": 14,
+        "Wall2": 115,
+        "Wall1": 117
+      },
+      "AmbientLighting": 6688,
+      "DefaultVertex": {
+        "Lighting": 5640
+      },
+      "Lights": [
+        {
+          "X": 1536,
+          "Y": -3072,
+          "Z": 2560,
+          "Intensity1": 3072,
+          "Fade1": 2048
+        }
+      ],
+      "Height": 18,
+      "Width": 4,
+      "Depth": 4,
+      "FloorHeights": {
+        "-7": [
+          5
+        ],
+        "-14": [
+          9
+        ],
+        "-127": [
+          10
+        ]
+      }
+    },
+    {
+      "EMType": 126,
+      "Location": {
+        "X": 27648,
+        "Y": 256,
+        "Z": 68608
+      },
+      "LinkedLocation": {
+        "X": 27136,
+        "Y": 3840,
+        "Z": 72192,
+        "Room": 90
+      },
+      "Textures": {
+        "Floor": 89,
+        "Ceiling": 89,
+        "WallAlignment": 4,
+        "Wall4": 14,
+        "Wall2": 115,
+        "Wall1": 117
+      },
+      "AmbientLighting": 6688,
+      "DefaultVertex": {
+        "Lighting": 5640
+      },
+      "Lights": [
+        {
+          "X": 1536,
+          "Y": -3072,
+          "Z": 1536,
+          "Intensity1": 3072,
+          "Fade1": 3072
+        }
+      ],
+      "Height": 18,
+      "Width": 4,
+      "Depth": 4,
+      "FloorHeights": {
+        "-7": [
+          9
+        ],
+        "-14": [
+          10
+        ],
+        "-127": [
+          6
+        ]
+      }
+    },
+    {
+      "EMType": 126,
+      "Location": {
+        "X": 28672,
+        "Y": -3328,
+        "Z": 70656
+      },
+      "LinkedLocation": {
+        "X": 27136,
+        "Y": 3840,
+        "Z": 72192,
+        "Room": 90
+      },
+      "Textures": {
+        "Floor": 89,
+        "Ceiling": 89,
+        "WallAlignment": 4,
+        "Wall4": 14,
+        "Wall2": 115,
+        "Wall1": 117
+      },
+      "AmbientLighting": 6688,
+      "DefaultVertex": {
+        "Lighting": 5640
+      },
+      "Lights": [
+        {
+          "X": 1536,
+          "Y": -1024,
+          "Z": 1536,
+          "Intensity1": 3072,
+          "Fade1": 2048
+        }
+      ],
+      "Height": 7,
+      "Width": 4,
+      "Depth": 3,
+      "FloorHeights": {}
+    },
+    {
+      "Comments": "Make visibility portals.",
+      "EMType": 81,
+      "Portals": [
+        {
+          "BaseRoom": 90,
+          "AdjoiningRoom": -3,
+          "Normal": {
+            "Z": 1
+          },
+          "Vertices": [
+            {
+              "X": 10240,
+              "Y": 2816,
+              "Z": 1024
+            },
+            {
+              "X": 9216,
+              "Y": 1536,
+              "Z": 1024
+            },
+            {
+              "X": 9216,
+              "Y": 3840,
+              "Z": 1024
+            },
+            {
+              "X": 10240,
+              "Y": 3840,
+              "Z": 1024
+            }
+          ]
+        },
+        {
+          "BaseRoom": -3,
+          "AdjoiningRoom": 90,
+          "Normal": {
+            "Z": -1
+          },
+          "Vertices": [
+            {
+              "X": 1024,
+              "Y": 1536,
+              "Z": 3072
+            },
+            {
+              "X": 2048,
+              "Y": 2816,
+              "Z": 3072
+            },
+            {
+              "X": 2048,
+              "Y": 3840,
+              "Z": 3072
+            },
+            {
+              "X": 1024,
+              "Y": 3840,
+              "Z": 3072
+            }
+          ]
+        },
+        {
+          "BaseRoom": -3,
+          "AdjoiningRoom": -2,
+          "Normal": {
+            "X": -1
+          },
+          "Vertices": [
+            {
+              "X": 3072,
+              "Y": -768,
+              "Z": 2048
+            },
+            {
+              "X": 3072,
+              "Y": -768,
+              "Z": 1024
+            },
+            {
+              "X": 3072,
+              "Y": 256,
+              "Z": 1024
+            },
+            {
+              "X": 3072,
+              "Y": 256,
+              "Z": 2048
+            }
+          ]
+        },
+        {
+          "BaseRoom": -2,
+          "AdjoiningRoom": -3,
+          "Normal": {
+            "X": 1
+          },
+          "Vertices": [
+            {
+              "X": 1024,
+              "Y": -768,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -768,
+              "Z": 2048
+            },
+            {
+              "X": 1024,
+              "Y": 256,
+              "Z": 2048
+            },
+            {
+              "X": 1024,
+              "Y": 256,
+              "Z": 1024
+            }
+          ]
+        },
+        {
+          "BaseRoom": -2,
+          "AdjoiningRoom": -1,
+          "Normal": {
+            "Z": -1
+          },
+          "Vertices": [
+            {
+              "X": 2048,
+              "Y": -4352,
+              "Z": 3072
+            },
+            {
+              "X": 3072,
+              "Y": -4352,
+              "Z": 3072
+            },
+            {
+              "X": 3072,
+              "Y": -3328,
+              "Z": 3072
+            },
+            {
+              "X": 2048,
+              "Y": -3328,
+              "Z": 3072
+            }
+          ]
+        },
+        {
+          "BaseRoom": -1,
+          "AdjoiningRoom": -2,
+          "Normal": {
+            "Z": 1
+          },
+          "Vertices": [
+            {
+              "X": 2048,
+              "Y": -4352,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -4352,
+              "Z": 1024
+            },
+            {
+              "X": 1024,
+              "Y": -3328,
+              "Z": 1024
+            },
+            {
+              "X": 2048,
+              "Y": -3328,
+              "Z": 1024
+            }
+          ]
+        },
+        {
+          "BaseRoom": -1,
+          "AdjoiningRoom": 81,
+          "Normal": {
+            "X": -1
+          },
+          "Vertices": [
+            {
+              "X": 3072,
+              "Y": -5120,
+              "Z": 2048
+            },
+            {
+              "X": 3072,
+              "Y": -5120,
+              "Z": 1024
+            },
+            {
+              "X": 3072,
+              "Y": -4096,
+              "Z": 1024
+            },
+            {
+              "X": 3072,
+              "Y": -4096,
+              "Z": 2048
+            }
+          ]
+        },
+        {
+          "BaseRoom": 81,
+          "AdjoiningRoom": -1,
+          "Normal": {
+            "X": 1
+          },
+          "Vertices": [
+            {
+              "X": 1024,
+              "Y": -5120,
+              "Z": 3072
+            },
+            {
+              "X": 1024,
+              "Y": -5120,
+              "Z": 4096
+            },
+            {
+              "X": 1024,
+              "Y": -4096,
+              "Z": 4096
+            },
+            {
+              "X": 1024,
+              "Y": -4096,
+              "Z": 3072
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Comments": "Make collisional portals.",
+      "EMType": 82,
+      "Portals": {
+        "90": {
+          "-3": [
+            {
+              "X": 27136,
+              "Y": 3840,
+              "Z": 71168,
+              "Room": 90
+            }
+          ]
+        },
+        "-3": {
+          "90": [
+            {
+              "X": 27136,
+              "Y": 3840,
+              "Z": 72192,
+              "Room": -3
+            }
+          ],
+          "-2": [
+            {
+              "X": 29184,
+              "Y": 256,
+              "Z": 70144,
+              "Room": -3
+            }
+          ]
+        },
+        "-2": {
+          "-3": [
+            {
+              "X": 28160,
+              "Y": 256,
+              "Z": 70144,
+              "Room": -2
+            }
+          ],
+          "-1": [
+            {
+              "X": 30208,
+              "Y": -3328,
+              "Z": 72192,
+              "Room": -2
+            }
+          ]
+        },
+        "-1": {
+          "-2": [
+            {
+              "X": 30208,
+              "Y": -3328,
+              "Z": 71168,
+              "Room": -1
+            }
+          ],
+          "81": [
+            {
+              "X": 32256,
+              "Y": -4096,
+              "Z": 72192,
+              "Room": -1
+            }
+          ]
+        },
+        "81": {
+          "-1": [
+            {
+              "X": 31232,
+              "Y": -4096,
+              "Z": 72192,
+              "Room": 81
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Amend some faces for the portals.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": -3,
+          "FaceIndex": 19,
+          "VertexChanges": {
+            "2": {
+              "Y": 1024
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": -1,
+          "FaceIndex": 12,
+          "VertexChanges": {
+            "0": {
+              "Y": 256
+            },
+            "1": {
+              "Y": 256
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Remove other faces for the portals.",
+      "EMType": 22,
+      "GeometryMap": {
+        "90": {
+          "Rectangles": [
+            325
+          ],
+          "Triangles": [
+            40
+          ]
+        },
+        "-3": {
+          "Rectangles": [
+            17,
+            18,
+            32
+          ]
+        },
+        "-2": {
+          "Rectangles": [
+            2,
+            32
+          ]
+        },
+        "-1": {
+          "Rectangles": [
+            6,
+            13
+          ]
+        },
+        "81": {
+          "Rectangles": [
+            10,
+            12
+          ]
+        }
+      }
+    },
+    {
+      "Comments": "Add a door.",
+      "EMType": 51,
+      "TypeID": 57,
+      "Intensity": 7168,
+      "Location": {
+        "X": 32256,
+        "Y": -4096,
+        "Z": 72192,
+        "Room": 81,
+        "Angle": 16384
+      }
+    },
+    {
+      "Comments": "Trigger the door and the other one in this room in case it wasn't opened before.",
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 30208,
+          "Y": -3328,
+          "Z": 71168,
+          "Room": -2
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": -1
+          },
+          {
+            "Parameter": 52
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Auto-generate vertex lighting in the new rooms.",
+      "EMType": 128,
+      "RoomIndices": [
+        -1,
+        -2,
+        -3
+      ]
     }
   ],
   "Any": [
