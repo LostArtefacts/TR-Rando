@@ -18,5 +18,10 @@ namespace TREnvironmentEditor.Helpers
         // Allow specific original textures to be replaced with others. If not
         // defined here, the defaults above will be used.
         public Dictionary<ushort, ushort> TextureMap { get; set; }
+
+        public EMMeshTextureData()
+        {
+            TexturedFace3 = TexturedFace4 = ColouredFace3 = ColouredFace4 = -1;
+        }
     }
 }
