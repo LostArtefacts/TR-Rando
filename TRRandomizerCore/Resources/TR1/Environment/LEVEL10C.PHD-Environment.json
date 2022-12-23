@@ -109,71 +109,6 @@
           }
         ]
       }
-    ],
-    [
-      {
-        "EMType": 51,
-        "TypeID": 179,
-        "Location": {
-          "X": 59904,
-          "Y": -15616,
-          "Z": 13824,
-          "Room": 36
-        }
-      },
-      {
-        "EMType": 51,
-        "TypeID": 179,
-        "Location": {
-          "X": 64000,
-          "Y": -15616,
-          "Z": 13824,
-          "Room": 36
-        }
-      },
-      {
-        "EMType": 51,
-        "TypeID": 179,
-        "Location": {
-          "X": 59904,
-          "Y": -15616,
-          "Z": 9728,
-          "Room": 36
-        }
-      },
-      {
-        "EMType": 51,
-        "TypeID": 179,
-        "Location": {
-          "X": 64000,
-          "Y": -15616,
-          "Z": 9728,
-          "Room": 36
-        }
-      },
-      {
-        "EMType": 68,
-        "Location": {
-          "X": 58880,
-          "Y": -15616,
-          "Z": 11776,
-          "Room": 36
-        },
-        "Actions": [
-          {
-            "Parameter": -4
-          },
-          {
-            "Parameter": -3
-          },
-          {
-            "Parameter": -2
-          },
-          {
-            "Parameter": -1
-          }
-        ]
-      }
     ]
   ],
   "AllWithin": [
@@ -1029,6 +964,399 @@
             "Z": 15872,
             "Room": 61
           }
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "Comments": "Leave the starting area alone.",
+          "EMType": 1000
+        }
+      ],
+      [
+        {
+          "Comments": "Move any pickups from the target fire tile.",
+          "EMType": 43,
+          "SectorLocations": [
+            {
+              "X": 64000,
+              "Y": -15616,
+              "Z": 9728,
+              "Room": 36
+            }
+          ],
+          "TargetLocation": {
+            "X": 61952,
+            "Y": -15616,
+            "Z": 11776,
+            "Room": 36
+          }
+        },
+        {
+          "Comments": "Raise the floor a little.",
+          "EMType": 1,
+          "Location": {
+            "X": 64000,
+            "Y": -15616,
+            "Z": 9728,
+            "Room": 36
+          },
+          "Clicks": -1,
+          "FloorTexture": 871,
+          "SideTexture": 119,
+          "Flags": 15
+        },
+        {
+          "Comments": "Add some fire.",
+          "EMType": 51,
+          "TypeID": 179,
+          "Location": {
+            "X": 64000,
+            "Y": -15872,
+            "Z": 9728,
+            "Room": 36
+          }
+        },
+        {
+          "Comments": "Move any pickups from the target fire tile.",
+          "EMType": 43,
+          "SectorLocations": [
+            {
+              "X": 64000,
+              "Y": -15616,
+              "Z": 13824,
+              "Room": 36
+            }
+          ],
+          "TargetLocation": {
+            "X": 61952,
+            "Y": -15616,
+            "Z": 11776,
+            "Room": 36
+          }
+        },
+        {
+          "Comments": "Raise the floor a little.",
+          "EMType": 1,
+          "Location": {
+            "X": 64000,
+            "Y": -15616,
+            "Z": 13824,
+            "Room": 36
+          },
+          "Clicks": -1,
+          "FloorTexture": 871,
+          "SideTexture": 119,
+          "Flags": 15
+        },
+        {
+          "Comments": "Add some fire.",
+          "EMType": 51,
+          "TypeID": 179,
+          "Location": {
+            "X": 64000,
+            "Y": -15872,
+            "Z": 13824,
+            "Room": 36
+          }
+        },
+        {
+          "Comments": "Move any pickups from the target fire tile.",
+          "EMType": 43,
+          "SectorLocations": [
+            {
+              "X": 59904,
+              "Y": -15616,
+              "Z": 9728,
+              "Room": 36
+            }
+          ],
+          "TargetLocation": {
+            "X": 61952,
+            "Y": -15616,
+            "Z": 11776,
+            "Room": 36
+          }
+        },
+        {
+          "Comments": "Raise the floor a little.",
+          "EMType": 1,
+          "Location": {
+            "X": 59904,
+            "Y": -15616,
+            "Z": 9728,
+            "Room": 36
+          },
+          "Clicks": -1,
+          "FloorTexture": 871,
+          "SideTexture": 119,
+          "Flags": 15
+        },
+        {
+          "Comments": "Add some fire.",
+          "EMType": 51,
+          "TypeID": 179,
+          "Location": {
+            "X": 59904,
+            "Y": -15872,
+            "Z": 9728,
+            "Room": 36
+          }
+        },
+        {
+          "Comments": "Move any pickups from the target fire tile.",
+          "EMType": 43,
+          "SectorLocations": [
+            {
+              "X": 59904,
+              "Y": -15616,
+              "Z": 13824,
+              "Room": 36
+            }
+          ],
+          "TargetLocation": {
+            "X": 61952,
+            "Y": -15616,
+            "Z": 11776,
+            "Room": 36
+          }
+        },
+        {
+          "Comments": "Raise the floor a little.",
+          "EMType": 1,
+          "Location": {
+            "X": 59904,
+            "Y": -15616,
+            "Z": 13824,
+            "Room": 36
+          },
+          "Clicks": -1,
+          "FloorTexture": 871,
+          "SideTexture": 119,
+          "Flags": 15
+        },
+        {
+          "Comments": "Add some fire.",
+          "EMType": 51,
+          "TypeID": 179,
+          "Location": {
+            "X": 59904,
+            "Y": -15872,
+            "Z": 13824,
+            "Room": 36
+          }
+        },
+        {
+          "Comments": "Trigger the fire.",
+          "EMType": 68,
+          "Location": {
+            "X": 58880,
+            "Y": -15616,
+            "Z": 11776,
+            "Room": 36
+          },
+          "Actions": [
+            {
+              "Parameter": -4
+            },
+            {
+              "Parameter": -3
+            },
+            {
+              "Parameter": -2
+            },
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "Comments": "Push some faces back a bit.",
+          "EMType": 23,
+          "Modifications": [
+            {
+              "RoomNumber": 36,
+              "FaceIndices": [
+                49,
+                52,
+                54,
+                56,
+                58,
+                60,
+                62
+              ],
+              "VertexChanges": {
+                "0": {
+                  "X": 5120
+                },
+                "1": {
+                  "X": 5120
+                },
+                "2": {
+                  "X": 5120
+                },
+                "3": {
+                  "X": 5120
+                }
+              }
+            },
+            {
+              "RoomNumber": 4,
+              "FaceIndices": [
+                110,
+                109,
+                108,
+                107,
+                106,
+                105,
+                102
+              ],
+              "VertexChanges": {
+                "0": {
+                  "X": 1024,
+                  "Y": -768
+                },
+                "1": {
+                  "X": 1024,
+                  "Y": -768
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Comments": "Remove some faces - but not the floor itself.",
+          "EMType": 22,
+          "GeometryMap": {
+            "36": {
+              "Rectangles": [
+                50,
+                48,
+                51,
+                53,
+                55,
+                57,
+                59,
+                61,
+                63,
+                71,
+                70,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                86,
+                85,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                101,
+                100,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                116,
+                115,
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123
+              ]
+            },
+            "4": {
+              "Rectangles": [
+                54,
+                53,
+                52,
+                51,
+                50,
+                49,
+                48,
+                67,
+                66,
+                65,
+                64,
+                63,
+                62,
+                61,
+                80,
+                79,
+                78,
+                77,
+                76,
+                75,
+                74,
+                94,
+                93,
+                92,
+                91,
+                90,
+                89,
+                87,
+                111,
+                95,
+                88,
+                103
+              ],
+              "Triangles": [
+                0,
+                1
+              ]
+            }
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Add a surprise behind Adam's door.",
+          "EMType": 51,
+          "TypeID": 38,
+          "Intensity": -1,
+          "Location": {
+            "X": 69120,
+            "Y": -15616,
+            "Z": 11776,
+            "Room": 48,
+            "Angle": -16384
+          }
+        },
+        {
+          "EMType": 68,
+          "LocationExpander": {
+            "Location": {
+              "X": 58880,
+              "Y": -15616,
+              "Z": 8704,
+              "Room": 36
+            },
+            "ExpandX": 7,
+            "ExpandZ": 7
+          },
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ],
+          "TargetTypes": [
+            5
+          ]
         }
       ]
     ]
