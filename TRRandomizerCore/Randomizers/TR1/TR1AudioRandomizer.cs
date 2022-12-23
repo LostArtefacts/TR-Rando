@@ -66,7 +66,8 @@ namespace TRRandomizerCore.Randomizers
             {
                 TRSFXGeneralCategory.StandardWeaponFiring,
                 TRSFXGeneralCategory.Ricochet,
-                TRSFXGeneralCategory.Flying
+                TRSFXGeneralCategory.Flying,
+                TRSFXGeneralCategory.Explosion
             };
 
             // Only load the SFX if we are changing at least one category
