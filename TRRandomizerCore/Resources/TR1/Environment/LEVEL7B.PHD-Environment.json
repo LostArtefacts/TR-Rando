@@ -2,7 +2,7 @@
   "All": [],
   "NonPurist": [
     {
-      "Comments": "Fix the out of place lever textures in room 89.",
+      "Comments": "Fix the out of place lever textures in room 89 and ceiling in room 75.",
       "EMType": 21,
       "TextureMap": {
         "121": {
@@ -10,6 +10,13 @@
             "Rectangles": [
               1,
               84
+            ]
+          }
+        },
+        "28": {
+          "75": {
+            "Rectangles": [
+              32
             ]
           }
         }
