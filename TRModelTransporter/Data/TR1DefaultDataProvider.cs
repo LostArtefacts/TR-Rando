@@ -144,6 +144,8 @@ namespace TRModelTransporter.Data
                 = new TREntities[] { TREntities.CrocodileLand },
             [TREntities.CentaurStatue]
                 = new TREntities[] { TREntities.Centaur },
+            [TREntities.DartEmitter]
+                = new TREntities[] { TREntities.Dart_H },
             [TREntities.MeatyAtlantean]
                 = new TREntities[] { TREntities.MeatyFlyer },
             [TREntities.MeatyFlyer]
@@ -160,6 +162,8 @@ namespace TRModelTransporter.Data
                 = new TREntities[] { TREntities.MeatyFlyer },
             [TREntities.SkateboardKid]
                 = new TREntities[] { TREntities.Skateboard },
+            [TREntities.ThorHammerHandle]
+                = new TREntities[] { TREntities.ThorHammerBlock },
             [TREntities.TRex]
                 = new TREntities[] { TREntities.LaraMiscAnim_H_Valley }
         };
@@ -271,6 +275,7 @@ namespace TRModelTransporter.Data
             [TREntities.BandagedFlyer] = new short[] { 104 },
             [TREntities.Bear] = new short[] { 12, 16 },
             [TREntities.Centaur] = new short[] { 104 },
+            [TREntities.DamoclesSword] = new short[] { 103 },
             [TREntities.Gorilla] = new short[] { 90, 91, 101 },
             [TREntities.Larson] = new short[] { 78 },
             [TREntities.Lion] = new short[] { 85, 86, 87 },
@@ -281,6 +286,8 @@ namespace TRModelTransporter.Data
             [TREntities.Natla] = new short[] { 104, 123, 124 },
             [TREntities.ShootingAtlantean_N] = new short[] { 104 },
             [TREntities.SkateboardKid] = new short[] { 132 },
+            [TREntities.ThorHammerHandle] = new short[] { 70 },
+            [TREntities.ThorLightning] = new short[] { 98 },
             [TREntities.Wolf] = new short[] { 20 }
         };
 
@@ -293,7 +300,9 @@ namespace TRModelTransporter.Data
             [TREntities.ShootingAtlantean_N]
                 = new List<int>(),
             [TREntities.Mummy]
-                = new List<int> { 130, 131, 132, 133, 134, 135, 136, 137, 140, 141 }
+                = new List<int> { 130, 131, 132, 133, 134, 135, 136, 137, 140, 141 },
+            [TREntities.ThorLightning]
+                = new List<int> { 150, 151, 154, 155, 156, 157, 158, 159, 160, 161 }
         };
 
         #endregion

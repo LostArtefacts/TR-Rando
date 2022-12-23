@@ -38,7 +38,11 @@ namespace TRModelTransporter.Transport
             {
                 remap = JsonConvert.DeserializeObject<TR3TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
             }
-            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
+
+            if (!IgnoreGraphics)
+            {
+                _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
+            }
 
             _soundHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
 
@@ -46,14 +50,20 @@ namespace TRModelTransporter.Transport
 
             foreach (TR3ModelDefinition definition in standardDefinitions)
             {
-                _colourHandler.Import(Level, definition);
+                if (!IgnoreGraphics)
+                {
+                    _colourHandler.Import(Level, definition);
+                }
                 _meshHandler.Import(Level, definition);
                 _animationHandler.Import(Level, definition);
                 _cinematicHandler.Import(Level, definition);
                 _modelHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants(), Data.GetUnsafeModelReplacements());
             }
 
-            _textureHandler.ResetUnusedTextures();
+            if (!IgnoreGraphics)
+            {
+                _textureHandler.ResetUnusedTextures();
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ namespace TRModelTransporter.Transport
         public string TextureRemapPath { get; set; }
         public ITexturePositionMonitor<E> TexturePositionMonitor { get; set; }
         public bool SortModels { get; set; }
+        public bool IgnoreGraphics { get; set; }
 
         protected AbstractTextureImportHandler<E, L, D> _textureHandler;
 

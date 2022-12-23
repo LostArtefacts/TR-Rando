@@ -36,11 +36,12 @@ namespace TRModelTransporter.Utilities
             [TRLevelNames.CAVES] = new List<TREntities>
             {
                 TREntities.Pistols_M_H, TREntities.Shotgun_M_H, TREntities.Magnums_M_H, TREntities.Uzis_M_H,
-                TREntities.Lara, TREntities.Bat, TREntities.Bear, TREntities.Wolf
+                TREntities.Lara, TREntities.Bat, TREntities.Bear, TREntities.Wolf,
+                TREntities.FallingBlock, TREntities.DartEmitter, TREntities.WallSwitch
             },
             [TRLevelNames.VILCABAMBA] = new List<TREntities>
             {
-                
+                TREntities.PushBlock1, TREntities.SwingingBlade, TREntities.Trapdoor1, TREntities.UnderwaterSwitch
             },
             [TRLevelNames.VALLEY] = new List<TREntities>
             {
@@ -48,11 +49,12 @@ namespace TRModelTransporter.Utilities
             },
             [TRLevelNames.QUALOPEC] = new List<TREntities>
             {
-                TREntities.Mummy
+                TREntities.Mummy, TREntities.RollingBall, TREntities.FallingCeiling1, TREntities.MovingBlock, TREntities.TeethSpikes
             },
             [TRLevelNames.FOLLY] = new List<TREntities>
             {
-                TREntities.CrocodileLand, TREntities.CrocodileWater, TREntities.Gorilla, TREntities.Lion, TREntities.Lioness
+                TREntities.CrocodileLand, TREntities.CrocodileWater, TREntities.Gorilla, TREntities.Lion, TREntities.Lioness,
+                TREntities.ThorHammerHandle, TREntities.ThorLightning, TREntities.DamoclesSword
             },
             [TRLevelNames.COLOSSEUM] = new List<TREntities>
             {
@@ -68,7 +70,8 @@ namespace TRModelTransporter.Utilities
             },
             [TRLevelNames.TIHOCAN] = new List<TREntities>
             {
-                TREntities.CentaurStatue, TREntities.Centaur, TREntities.Pierre, TREntities.ScionPiece_M_H
+                TREntities.CentaurStatue, TREntities.Centaur, TREntities.Pierre, TREntities.ScionPiece_M_H,
+                TREntities.SlammingDoor
             },
             [TRLevelNames.KHAMOON] = new List<TREntities>
             {

@@ -40,7 +40,11 @@ namespace TRModelTransporter.Transport
             {
                 remap = JsonConvert.DeserializeObject<TR2TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
             }
-            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
+
+            if (!IgnoreGraphics)
+            {
+                _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
+            }
 
             // Hardcoded sounds are also imported en-masse to ensure the correct SoundMap indices are assigned
             // before any animation sounds are dealt with.
@@ -51,8 +55,11 @@ namespace TRModelTransporter.Transport
 
             foreach (TR2ModelDefinition definition in standardDefinitions)
             {
-                // Colours next, again to remap Mesh rectangles/triangles to any new palette indices
-                _colourHandler.Import(Level, definition);
+                if (!IgnoreGraphics)
+                {
+                    // Colours next, again to remap Mesh rectangles/triangles to any new palette indices
+                    _colourHandler.Import(Level, definition);
+                }
 
                 // Meshes and trees should now be remapped, so import into the level
                 _meshHandler.Import(Level, definition);
@@ -67,7 +74,10 @@ namespace TRModelTransporter.Transport
                 _modelHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants());
             }
 
-            _textureHandler.ResetUnusedTextures();
+            if (!IgnoreGraphics)
+            {
+                _textureHandler.ResetUnusedTextures();
+            }
         }
     }
 }
