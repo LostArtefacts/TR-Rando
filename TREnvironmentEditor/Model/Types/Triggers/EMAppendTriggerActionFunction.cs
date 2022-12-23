@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
@@ -13,6 +14,7 @@ namespace TREnvironmentEditor.Model.Types
         public List<EMLocation> Locations { get; set; }
         public EMLocationExpander LocationExpander { get; set; }
         public List<EMTriggerAction> Actions { get; set; }
+        public List<FDTrigType> TargetTypes { get; set; }
 
         public override void ApplyToLevel(TRLevel level)
         {
@@ -23,17 +25,13 @@ namespace TREnvironmentEditor.Model.Types
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            bool appended = false;
             foreach (EMLocation location in locations)
             {
                 TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, floorData);
-                appended = AppendActions(sector, floorData, actions);
+                AppendActions(sector, floorData, actions);
             }
-
-            if (appended)
-            {
-                floorData.WriteToLevel(level);
-            }
+            
+            floorData.WriteToLevel(level);
         }
 
         public override void ApplyToLevel(TR2Level level)
@@ -45,17 +43,13 @@ namespace TREnvironmentEditor.Model.Types
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            bool appended = false;
             foreach (EMLocation location in locations)
             {
                 TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, floorData);
-                appended = AppendActions(sector, floorData, actions);
+                AppendActions(sector, floorData, actions);
             }
 
-            if (appended)
-            {
-                floorData.WriteToLevel(level);
-            }
+            floorData.WriteToLevel(level);
         }
 
         public override void ApplyToLevel(TR3Level level)
@@ -67,17 +61,13 @@ namespace TREnvironmentEditor.Model.Types
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            bool appended = false;
             foreach (EMLocation location in locations)
             {
                 TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, floorData);
-                appended = AppendActions(sector, floorData, actions);
+                AppendActions(sector, floorData, actions);
             }
 
-            if (appended)
-            {
-                floorData.WriteToLevel(level);
-            }
+            floorData.WriteToLevel(level);
         }
 
         private List<EMLocation> InitialiseLocations()
@@ -109,15 +99,19 @@ namespace TREnvironmentEditor.Model.Types
             return actions;
         }
 
-        private bool AppendActions(TRRoomSector sector, FDControl floorData, List<FDActionListItem> actions)
+        private void AppendActions(TRRoomSector sector, FDControl floorData, List<FDActionListItem> actions)
         {
-            if (sector.FDIndex != 0 && floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger)
+            if (sector.FDIndex != 0 && floorData.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) is FDTriggerEntry trigger
+                && (TargetTypes == null || TargetTypes.Contains(trigger.TrigType)))
             {
-                trigger.TrigActionList.AddRange(actions);
-                return true;
+                foreach (FDActionListItem item in actions)
+                {
+                    if (!trigger.TrigActionList.Any(a => a.TrigAction == item.TrigAction && a.Parameter == item.Parameter))
+                    {
+                        trigger.TrigActionList.Add(item);
+                    }
+                }
             }
-
-            return false;
         }
     }
 }
