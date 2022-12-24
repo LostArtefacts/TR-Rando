@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using TRLevelReader.Helpers;
+using TRLevelReader;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Data;
@@ -61,6 +64,9 @@ namespace TRModelTransporter.Transport
                     break;
                 case TREntities.Natla:
                     AmendNatlaDeath(level);
+                    break;
+                case TREntities.MovingBlock:
+                    AddMovingBlockSFX(level);
                     break;
             }
         }
@@ -174,6 +180,37 @@ namespace TRModelTransporter.Transport
             cmds.Add(new TRAnimCommand { Value = 5 });
             cmds.Add(new TRAnimCommand { Value = (short)(anim.FrameStart + 4) });
             cmds.Add(new TRAnimCommand { Value = 160 });
+
+            level.AnimCommands = cmds.ToArray();
+            level.NumAnimCommands = (uint)cmds.Count;
+        }
+
+        public static void AddMovingBlockSFX(TRLevel level)
+        {
+            // ToQ moving blocks are silent but we want them to scrape along the floor when they move.
+            // Import the trapdoor closing SFX from Vilcabamba and adjust the animations accordingly.
+
+            if (level.SoundMap[162] == -1)
+            {
+                TRLevel vilcabamba = new TR1LevelReader().ReadLevel(TRLevelNames.VILCABAMBA);
+                SoundUtilities.ImportLevelSound(level, vilcabamba, new short[] { 162 });
+            }
+
+            TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.MovingBlock);
+            List<TRAnimCommand> cmds = level.AnimCommands.ToList();
+            for (int i = 2; i < 4; i++)
+            {
+                TRAnimation anim = level.Animations[model.Animation + i];
+                anim.NumAnimCommands++;
+
+                anim.AnimCommand = (ushort)cmds.Count;
+                cmds.Add(new TRAnimCommand { Value = 4 }); // KillItem
+
+                // On the 1st frame, play SFX 162
+                cmds.Add(new TRAnimCommand { Value = 5 });
+                cmds.Add(new TRAnimCommand { Value = (short)(anim.FrameStart) });
+                cmds.Add(new TRAnimCommand { Value = 162 });
+            }            
 
             level.AnimCommands = cmds.ToArray();
             level.NumAnimCommands = (uint)cmds.Count;
