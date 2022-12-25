@@ -4053,6 +4053,16 @@
         "Z": 30208,
         "Room": 39
       }
+    },
+    {
+      "Comments": "Swap the main room door levers so the bits match up with the clues.",
+      "EMType": 54,
+      "EntityMap": {
+        "81": 84,
+        "84": 81,
+        "82": 85,
+        "85": 82
+      }
     }
   ]
 }
