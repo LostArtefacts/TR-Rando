@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model.Types;
 using TRFDControl;
@@ -566,14 +567,16 @@ namespace TRRandomizerCore.Randomizers
                 proximity = _TINY_RADIUS;
             }
 
-            Sphere newLoc = new Sphere(new System.Numerics.Vector3(loc.X, loc.Y, loc.Z), proximity);
+            Sphere newLoc = new Sphere(new Vector3(loc.X, loc.Y, loc.Z), proximity);
             // Tilted sectors can still pass the proximity test, so in any case we never want 2 secrets sharing a tile.
+            // We also want to try to avoid secrets in the same room, unless we've exhausted all other attempts.
             TRRoomSector newSector = FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData);
 
             foreach (Location used in usedLocs)
             {
-                SafeToPlace = !newLoc.IsColliding(new Sphere(new System.Numerics.Vector3(used.X, used.Y, used.Z), proximity))
-                    && newSector != FDUtilities.GetRoomSector(used.X, used.Y, used.Z, (short)used.Room, level.Data, floorData);
+                SafeToPlace = !newLoc.IsColliding(new Sphere(new Vector3(used.X, used.Y, used.Z), proximity))
+                    && newSector != FDUtilities.GetRoomSector(used.X, used.Y, used.Z, (short)used.Room, level.Data, floorData)
+                    && (proximity == _TINY_RADIUS || used.Room != loc.Room);
 
                 if (SafeToPlace == false)
                     break;
