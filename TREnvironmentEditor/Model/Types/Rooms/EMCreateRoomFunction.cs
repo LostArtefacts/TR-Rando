@@ -20,6 +20,7 @@ namespace TREnvironmentEditor.Model.Types
         public ushort Width { get; set; }
         public ushort Depth { get; set; }
         public Dictionary<sbyte, List<int>> FloorHeights { get; set; }
+        public Dictionary<sbyte, List<int>> CeilingHeights { get; set; }
 
         public override void ApplyToLevel(TRLevel level)
         {
@@ -290,27 +291,29 @@ namespace TREnvironmentEditor.Model.Types
                     int sectorIndex = x * Depth + z;
                     bool isWall = x == 0 || x == Width - 1 || z == 0 || z == Depth - 1;
 
-                    sbyte sectorFloor = isWall ? (sbyte)-127 : floor;
-                    if (!isWall && FloorHeights != null)
+                    sbyte sectorFloor = floor;
+                    sbyte sectorCeiling = ceiling;
+                    if (!isWall)
                     {
-                        foreach (sbyte specificFloor in FloorHeights.Keys)
-                        {
-                            if (FloorHeights[specificFloor].Contains(sectorIndex))
-                            {
-                                sectorFloor = specificFloor == -127 ? specificFloor : (sbyte)(floor + specificFloor);
-                                if (sectorFloor == -127)
-                                {
-                                    isWall = true;
-                                }
-                            }
-                        }
+                        sbyte height = GetSectorHeight(sectorIndex, FloorHeights);
+                        sectorFloor = height == -127 ? height : (sbyte)(sectorFloor + height);
+                    }
+                    if (!isWall)
+                    {
+                        sbyte height = GetSectorHeight(sectorIndex, CeilingHeights);
+                        sectorCeiling = height == -127 ? height : (sbyte)(sectorCeiling + height);
+                    }
+
+                    if (isWall || sectorFloor == -127 || sectorCeiling == -127)
+                    {
+                        sectorFloor = sectorCeiling = -127;
                     }
 
                     sectors.Add(new TRRoomSector
                     {
                         FDIndex = 0,
                         BoxIndex = ushort.MaxValue,
-                        Ceiling = isWall ? (sbyte)-127 : ceiling,
+                        Ceiling = sectorCeiling,
                         Floor = sectorFloor,
                         RoomAbove = 255,
                         RoomBelow = 255
@@ -321,9 +324,24 @@ namespace TREnvironmentEditor.Model.Types
             return sectors;
         }
 
+        private sbyte GetSectorHeight(int sectorIndex, Dictionary<sbyte, List<int>> specificHeights)
+        {
+            if (specificHeights != null)
+            {
+                foreach (sbyte height in specificHeights.Keys)
+                {
+                    if (specificHeights[height].Contains(sectorIndex))
+                    {
+                        return height;
+                    }
+                }
+            }
+
+            return 0;
+        }
+
         private void GenerateFaces(List<TRRoomSector> sectors, List<TRFace4> faces, List<TRVertex> vertices, int roomTop)
         {
-            sbyte ceiling = (sbyte)(roomTop / 256);
             for (int x = 0; x < Width; x++)
             {
                 for (int z = 0; z < Depth; z++)
@@ -340,23 +358,42 @@ namespace TREnvironmentEditor.Model.Types
                     TRRoomSector southNeighbour = sectors[x * Depth + (z - 1)];
 
                     BuildFace(faces, vertices, x, z, sector.Floor * 256, Direction.Down);
-                    BuildFace(faces, vertices, x, z, roomTop, Direction.Up);
+                    BuildFace(faces, vertices, x, z, sector.Ceiling * 256, Direction.Up);
 
                     if (westNeighbour.Floor < sector.Floor)
                     {
-                        BuildWallFaces(faces, vertices, x, z, westNeighbour.Floor, sector.Floor, ceiling, Direction.West);
+                        BuildWallFaces(faces, vertices, x, z, westNeighbour.Floor, sector.Floor, sector.Ceiling, Direction.West);
                     }
+                    if (westNeighbour.Ceiling > sector.Ceiling)
+                    {
+                        BuildWallFaces(faces, vertices, x, z, sector.Ceiling, westNeighbour.Ceiling, sector.Ceiling, Direction.West);
+                    }
+
                     if (northNeighbour.Floor < sector.Floor)
                     {
-                        BuildWallFaces(faces, vertices, x, z + 1, northNeighbour.Floor, sector.Floor, ceiling, Direction.North);
+                        BuildWallFaces(faces, vertices, x, z + 1, northNeighbour.Floor, sector.Floor, sector.Ceiling, Direction.North);
                     }
+                    if (northNeighbour.Ceiling > sector.Ceiling)
+                    {
+                        BuildWallFaces(faces, vertices, x, z + 1, sector.Ceiling, northNeighbour.Ceiling, sector.Ceiling, Direction.North);
+                    }
+
                     if (eastNeighbour.Floor < sector.Floor)
                     {
-                        BuildWallFaces(faces, vertices, x + 1, z, eastNeighbour.Floor, sector.Floor, ceiling, Direction.East);
+                        BuildWallFaces(faces, vertices, x + 1, z, eastNeighbour.Floor, sector.Floor, sector.Ceiling, Direction.East);
                     }
+                    if (eastNeighbour.Ceiling > sector.Ceiling)
+                    {
+                        BuildWallFaces(faces, vertices, x + 1, z, sector.Ceiling, eastNeighbour.Ceiling, sector.Ceiling, Direction.East);
+                    }
+
                     if (southNeighbour.Floor < sector.Floor)
                     {
-                        BuildWallFaces(faces, vertices, x, z, southNeighbour.Floor, sector.Floor, ceiling, Direction.South);
+                        BuildWallFaces(faces, vertices, x, z, southNeighbour.Floor, sector.Floor, sector.Ceiling, Direction.South);
+                    }
+                    if (southNeighbour.Ceiling > sector.Ceiling)
+                    {
+                        BuildWallFaces(faces, vertices, x, z, sector.Ceiling, southNeighbour.Ceiling, sector.Ceiling, Direction.South);
                     }
                 }
             }

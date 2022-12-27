@@ -18,13 +18,15 @@ namespace TREnvironmentEditor.Model.Types
             // Apply click changes first
             base.ApplyToLevel(level);
 
-            EMLevelData data = GetData(level);
-
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, floorData);
-            CreateSlantEntry(sector, floorData);
+            foreach (EMLocation location in _locations)
+            {
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
+                CreateSlantEntry(sector, floorData);
+            }
+
             floorData.WriteToLevel(level);
         }
 
@@ -32,13 +34,15 @@ namespace TREnvironmentEditor.Model.Types
         {
             base.ApplyToLevel(level);
 
-            EMLevelData data = GetData(level);
-
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, floorData);
-            CreateSlantEntry(sector, floorData);
+            foreach (EMLocation location in _locations)
+            {
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
+                CreateSlantEntry(sector, floorData);
+            }
+
             floorData.WriteToLevel(level);
         }
 
@@ -46,13 +50,15 @@ namespace TREnvironmentEditor.Model.Types
         {
             base.ApplyToLevel(level);
 
-            EMLevelData data = GetData(level);
-
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, floorData);
-            CreateSlantEntry(sector, floorData);
+            foreach (EMLocation location in _locations)
+            {
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
+                CreateSlantEntry(sector, floorData);
+            }
+
             floorData.WriteToLevel(level);
         }
 
