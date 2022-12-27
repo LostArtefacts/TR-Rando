@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TREnvironmentEditor;
-using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model;
-using TREnvironmentEditor.Model.Types;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
@@ -121,10 +119,12 @@ namespace TRRandomizerCore.Processors
                 // the mods are applied in this instance too.
                 AmendBossFight(level);
             }
-            else if ((level.Is(TR3LevelNames.COASTAL) && !level.IsCoastalSequence) || (level.Is(TR3LevelNames.MADUBU) && !level.IsMadubuSequence))
+            else if ((level.Is(TR3LevelNames.COASTAL) || level.Is(TR3LevelNames.MADUBU)) && !level.IsCoastalSequence && !level.IsMadubuSequence)
             {
-                // Coastal Village and Madubu spikes are raised on initialisation in the game, based
-                // on the level sequencing. So if out of sequence, perform the raising here.
+                // Spikes are only triggered in Coastal Village and Madubu, so we have to raise them
+                // out of the ground when their code bits are set, so effectively initialising them
+                // as the game does. The only ones lost are in room 128 in Coastal - these remain
+                // underground as there is no way to pass otherwise.
                 AmendSouthPacificSpikes(level);
             }
 
@@ -302,7 +302,14 @@ namespace TRRandomizerCore.Processors
             List<TR2Entity> entities = level.Data.Entities.ToList().FindAll(e => e.TypeID == spikes);
             foreach (TR2Entity entity in entities)
             {
-                entity.Y += _spikeHeightChange;
+                if (level.Is(TR3LevelNames.MADUBU) || entity.CodeBits == 31)
+                {
+                    entity.Y += _spikeHeightChange;
+                }
+                if (level.Is(TR3LevelNames.MADUBU))
+                {
+                    entity.Invisible = false;
+                }
             }
         }
     }
