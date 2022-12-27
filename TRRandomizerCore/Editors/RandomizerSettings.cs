@@ -53,6 +53,7 @@ namespace TRRandomizerCore.Editors
         public bool AssaultCourseWireframe { get; set; }
         public bool UseSolidLaraWireframing { get; set; }
         public bool UseSolidEnemyWireframing { get; set; }
+        public bool UseSolidInteractableWireframing { get; set; }
         public bool UseDifferentWireframeColours { get; set; }
         public bool UseWireframeLadders { get; set; }
         public bool ShowWireframeTriggers { get; set; }
@@ -206,6 +207,7 @@ namespace TRRandomizerCore.Editors
             AssaultCourseWireframe = config.GetBool(nameof(AssaultCourseWireframe));
             UseSolidLaraWireframing = config.GetBool(nameof(UseSolidLaraWireframing), true);
             UseSolidEnemyWireframing = config.GetBool(nameof(UseSolidEnemyWireframing), true);
+            UseSolidInteractableWireframing = config.GetBool(nameof(UseSolidInteractableWireframing), true);
             UseDifferentWireframeColours = config.GetBool(nameof(UseDifferentWireframeColours), true);
             UseWireframeLadders = config.GetBool(nameof(UseWireframeLadders), true);
             ShowWireframeTriggers = config.GetBool(nameof(ShowWireframeTriggers), true);
@@ -336,6 +338,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(AssaultCourseWireframe)] = AssaultCourseWireframe;
             config[nameof(UseSolidLaraWireframing)] = UseSolidLaraWireframing;
             config[nameof(UseSolidEnemyWireframing)] = UseSolidEnemyWireframing;
+            config[nameof(UseSolidInteractableWireframing)] = UseSolidInteractableWireframing;
             config[nameof(UseDifferentWireframeColours)] = UseDifferentWireframeColours;
             config[nameof(UseWireframeLadders)] = UseWireframeLadders;
             config[nameof(ShowWireframeTriggers)] = ShowWireframeTriggers;

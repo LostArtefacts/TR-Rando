@@ -598,6 +598,7 @@ namespace TRRandomizerCore.Textures
                 (
                     (_data.SolidLara && IsLaraModel(model)) ||
                     (_data.SolidEnemies && (IsEnemyModel(model) || _data.SolidModels.Contains(model.ID)) && !IsEnemyPlaceholderModel(model)) ||
+                    (_data.SolidInteractables && IsInteractableModel(model)) ||
                     ShouldSolidifyModel(model)
                 )
                 {
@@ -717,6 +718,7 @@ namespace TRRandomizerCore.Textures
         protected abstract bool IsLaraModel(TRModel model);
         protected abstract bool IsEnemyModel(TRModel model);
         protected virtual bool IsEnemyPlaceholderModel(TRModel model) => false;
+        protected abstract bool IsInteractableModel(TRModel model);
         protected virtual bool ShouldSolidifyModel(TRModel model) => false;
         protected abstract void SetSkyboxVisible(L level);
         protected abstract TRAnimatedTexture[] GetAnimatedTextures(L level);

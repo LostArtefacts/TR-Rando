@@ -447,6 +447,22 @@ namespace TRLevelReader.Helpers
             return GetSlotTypes().Contains(entity);
         }
 
+        public static List<TREntities> GetPushblockTypes()
+        {
+            return new List<TREntities>
+            {
+                TREntities.PushBlock1,
+                TREntities.PushBlock2,
+                TREntities.PushBlock3,
+                TREntities.PushBlock4
+            };
+        }
+
+        public static bool IsPushblockType(TREntities entity)
+        {
+            return GetPushblockTypes().Contains(entity);
+        }
+
         public static bool CanSharePickupSpace(TREntities entity)
         {
             // Can we place a standard pickup on the same tile as this entity?

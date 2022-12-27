@@ -40,6 +40,15 @@ namespace TRRandomizerCore.Textures
             return (TR2Entities)model.ID == TR2Entities.Skybox_H;
         }
 
+        protected override bool IsInteractableModel(TRModel model)
+        {
+            TR2Entities type = (TR2Entities)model.ID;
+            return TR2EntityUtilities.IsSwitchType(type)
+                || TR2EntityUtilities.IsKeyholeType(type)
+                || TR2EntityUtilities.IsSlotType(type)
+                || TR2EntityUtilities.IsPushblockType(type);
+        }
+
         protected override int GetBlackPaletteIndex(TR2Level level)
         {
             return level.Palette16.ToList().FindIndex(c => c.Red + c.Green + c.Blue == 0);

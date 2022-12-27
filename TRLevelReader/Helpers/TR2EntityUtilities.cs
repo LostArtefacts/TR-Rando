@@ -556,6 +556,75 @@ namespace TRLevelReader.Helpers
                 IsSecretType(entity);
         }
 
+        public static List<TR2Entities> GetSwitchTypes()
+        {
+            return new List<TR2Entities>
+            {
+                TR2Entities.WallSwitch,
+                TR2Entities.UnderwaterSwitch,
+                TR2Entities.PushButtonSwitch,
+                TR2Entities.SmallWallSwitch,
+                TR2Entities.WheelKnob
+            };
+        }
+
+        public static bool IsSwitchType(TR2Entities entity)
+        {
+            return GetSwitchTypes().Contains(entity);
+        }
+
+        public static List<TR2Entities> GetKeyholeTypes()
+        {
+            return new List<TR2Entities>
+            {
+                TR2Entities.Keyhole1,
+                TR2Entities.Keyhole2,
+                TR2Entities.Keyhole3,
+                TR2Entities.Keyhole4
+            };
+        }
+
+        public static bool IsKeyholeType(TR2Entities entity)
+        {
+            return GetKeyholeTypes().Contains(entity);
+        }
+
+        public static List<TR2Entities> GetSlotTypes()
+        {
+            return new List<TR2Entities>
+            {
+                TR2Entities.PuzzleHole1,
+                TR2Entities.PuzzleHole2,
+                TR2Entities.PuzzleHole3,
+                TR2Entities.PuzzleHole4,
+                TR2Entities.PuzzleDone1,
+                TR2Entities.PuzzleDone2,
+                TR2Entities.PuzzleDone3,
+                TR2Entities.PuzzleDone4
+            };
+        }
+
+        public static bool IsSlotType(TR2Entities entity)
+        {
+            return GetSlotTypes().Contains(entity);
+        }
+
+        public static List<TR2Entities> GetPushblockTypes()
+        {
+            return new List<TR2Entities>
+            {
+                TR2Entities.PushBlock1,
+                TR2Entities.PushBlock2,
+                TR2Entities.PushBlock3,
+                TR2Entities.PushBlock4
+            };
+        }
+
+        public static bool IsPushblockType(TR2Entities entity)
+        {
+            return GetPushblockTypes().Contains(entity);
+        }
+
         public static bool IsWaterCreature(TR2Entities entity)
         {
             return (entity == TR2Entities.Shark || entity == TR2Entities.YellowMorayEel || entity == TR2Entities.BlackMorayEel ||

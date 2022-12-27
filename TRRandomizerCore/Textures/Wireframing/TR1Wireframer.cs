@@ -64,6 +64,16 @@ namespace TRRandomizerCore.Textures
             return false;
         }
 
+        protected override bool IsInteractableModel(TRModel model)
+        {
+            TREntities type = (TREntities)model.ID;
+            return TR1EntityUtilities.IsSwitchType(type)
+                || TR1EntityUtilities.IsKeyholeType(type)
+                || TR1EntityUtilities.IsSlotType(type)
+                || TR1EntityUtilities.IsPushblockType(type)
+                || type == TREntities.Barricade;
+        }
+
         protected override bool ShouldSolidifyModel(TRModel model)
         {
             return _data.Has3DPickups && _pickupModels.Contains((TREntities)model.ID);

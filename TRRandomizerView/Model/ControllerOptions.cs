@@ -51,6 +51,7 @@ namespace TRRandomizerView.Model
         private bool _assaultCourseWireframe;
         private bool _useSolidLaraWireframing;
         private bool _useSolidEnemyWireframing;
+        private bool _useSolidInteractableWireframing;
         private bool _useDifferentWireframeColours;
         private bool _useWireframeLadders, _showWireframeTriggers;
         private bool _nightModeAssaultCourse;
@@ -2027,6 +2028,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public bool UseSolidInteractableWireframing
+        {
+            get => _useSolidInteractableWireframing;
+            set
+            {
+                _useSolidInteractableWireframing = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool UseDifferentWireframeColours
         {
             get => _useDifferentWireframeColours;
@@ -2744,6 +2755,7 @@ namespace TRRandomizerView.Model
             AssaultCourseWireframe = _controller.AssaultCourseWireframe;
             UseSolidLaraWireframing = _controller.UseSolidLaraWireframing;
             UseSolidEnemyWireframing = _controller.UseSolidEnemyWireframing;
+            UseSolidInteractableWireframing = _controller.UseSolidInteractableWireframing;
             UseDifferentWireframeColours = _controller.UseDifferentWireframeColours;
             UseWireframeLadders = _controller.UseWireframeLadders;
             ShowWireframeTriggers = _controller.ShowWireframeTriggers;
@@ -3004,6 +3016,7 @@ namespace TRRandomizerView.Model
             _controller.AssaultCourseWireframe = AssaultCourseWireframe;
             _controller.UseSolidLaraWireframing = UseSolidLaraWireframing;
             _controller.UseSolidEnemyWireframing = UseSolidEnemyWireframing;
+            _controller.UseSolidInteractableWireframing = UseSolidInteractableWireframing;
             _controller.UseDifferentWireframeColours = UseDifferentWireframeColours;
             _controller.UseWireframeLadders = UseWireframeLadders;
             _controller.ShowWireframeTriggers = ShowWireframeTriggers;

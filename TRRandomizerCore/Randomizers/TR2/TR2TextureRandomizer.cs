@@ -179,6 +179,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 data.HighlightLadders = Settings.UseWireframeLadders;
                 data.HighlightTriggers = data.HighlightDeathTiles = Settings.ShowWireframeTriggers;
+                data.SolidInteractables = Settings.UseSolidInteractableWireframing;
             }
         }
 

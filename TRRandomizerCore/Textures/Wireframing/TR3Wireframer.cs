@@ -33,6 +33,15 @@ namespace TRRandomizerCore.Textures
             return new TR3TexturePacker(level);
         }
 
+        protected override bool IsInteractableModel(TRModel model)
+        {
+            TR3Entities type = (TR3Entities)model.ID;
+            return TR3EntityUtilities.IsSwitchType(type)
+                || TR3EntityUtilities.IsKeyholeType(type)
+                || TR3EntityUtilities.IsSlotType(type)
+                || TR3EntityUtilities.IsPushblockType(type);
+        }
+
         protected override int GetBlackPaletteIndex(TR3Level level)
         {
             return level.Palette16.ToList().FindIndex(c => c.Red + c.Green + c.Blue == 0);

@@ -36,6 +36,11 @@ namespace TRRandomizerCore.Textures
         /// Enemies will become a solid version of the HighlightColour, otherwise they will be framed
         /// </summary>
         public bool SolidEnemies { get; set; }
+        
+        /// <summary>
+        /// Keyholes, switches etc will become a solid version of the HighlightColour, otherwise they will be framed
+        /// </summary>
+        public bool SolidInteractables { get; set; }
 
         /// <summary>
         /// Models that should also use solid textures if SolidEnemies is enabled (e.g. CutsceneActors)

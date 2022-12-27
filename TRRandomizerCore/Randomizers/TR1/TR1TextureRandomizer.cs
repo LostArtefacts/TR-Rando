@@ -180,6 +180,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 data.Has3DPickups = has3DPickups;
                 data.HighlightTriggers = data.HighlightDeathTiles = Settings.ShowWireframeTriggers;
+                data.SolidInteractables = Settings.UseSolidInteractableWireframing;
                 foreach (SpecialTextureHandling special in data.SpecialTextures)
                 {
                     List<SpecialTextureMode> modes = WireframeData.GetDrawModes(special.Type);

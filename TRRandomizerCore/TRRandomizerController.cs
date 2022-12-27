@@ -1226,6 +1226,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.UseSolidEnemyWireframing = value;
         }
 
+        public bool UseSolidInteractableWireframing
+        {
+            get => LevelRandomizer.UseSolidInteractableWireframing;
+            set => LevelRandomizer.UseSolidInteractableWireframing = value;
+        }
+
         public bool UseDifferentWireframeColours
         {
             get => LevelRandomizer.UseDifferentWireframeColours;
