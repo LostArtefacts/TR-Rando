@@ -289,6 +289,7 @@ namespace TRModelTransporter.Data
             [TREntities.TeethSpikes] = new short[] { 145 },
             [TREntities.ThorHammerHandle] = new short[] { 70 },
             [TREntities.ThorLightning] = new short[] { 98 },
+            [TREntities.UnderwaterSwitch] = new short[] { 61 },
             [TREntities.Wolf] = new short[] { 20 }
         };
 
