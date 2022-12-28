@@ -45,7 +45,110 @@
       ]
     }
   ],
-  "Any": [],
+  "Any": [
+    [
+      {
+        "Comments": "Add some boulders.",
+        "EMType": 51,
+        "TypeID": 38,
+        "Intensity": -1,
+        "Location": {
+          "X": 65024,
+          "Y": 3584,
+          "Z": 73216,
+          "Room": 39,
+          "Angle": -16384
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 38,
+        "Intensity": -1,
+        "Location": {
+          "X": 65024,
+          "Y": 3584,
+          "Z": 72192,
+          "Room": 39,
+          "Angle": -16384
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 38,
+        "Intensity": -1,
+        "Location": {
+          "X": 65024,
+          "Y": 3584,
+          "Z": 71168,
+          "Room": 39,
+          "Angle": -16384
+        }
+      },
+      {
+        "EMType": 61,
+        "ExpandedLocations": {
+          "Location": {
+            "X": 59904,
+            "Y": 6656,
+            "Z": 71168,
+            "Room": 39
+          },
+          "ExpandX": 1,
+          "ExpandZ": 3
+        },
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -3
+            },
+            {
+              "Parameter": -2
+            },
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Add some spikes.",
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 57856,
+          "Y": 6656,
+          "Z": 71168,
+          "Room": 39
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 57856,
+          "Y": 6656,
+          "Z": 72192,
+          "Room": 39
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 57856,
+          "Y": 6656,
+          "Z": 73216,
+          "Room": 39
+        }
+      }
+    ]
+  ],
   "AllWithin": [
     [
       [
@@ -251,6 +354,3469 @@
             "Z": 64000,
             "Room": 20,
             "Angle": -16384
+          }
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "Comments": "Make a trap/puzzle room off room 32.",
+          "EMType": 126,
+          "Location": {
+            "X": 59392,
+            "Y": 8192,
+            "Z": 28672
+          },
+          "LinkedLocation": {
+            "X": 61952,
+            "Y": 6656,
+            "Z": 38400,
+            "Room": 32
+          },
+          "Textures": {
+            "Floor": 33,
+            "Ceiling": 33,
+            "WallAlignment": 5,
+            "Wall4": 31,
+            "RandomRotationSeed": 28122214
+          },
+          "AmbientLighting": 7487,
+          "DefaultVertex": {
+            "Lighting": 7616
+          },
+          "Lights": [
+            {
+              "X": 3072,
+              "Y": -2048,
+              "Z": 5120,
+              "Intensity1": 3000,
+              "Fade1": 4096
+            },
+            {
+              "X": 3584,
+              "Y": -2816,
+              "Z": 8704,
+              "Intensity1": 2800,
+              "Fade1": 3000
+            },
+            {
+              "X": 3072,
+              "Y": -3072,
+              "Z": 1536,
+              "Intensity1": 3000,
+              "Fade1": 3000
+            }
+          ],
+          "Height": 16,
+          "Width": 6,
+          "Depth": 10,
+          "FloorHeights": {
+            "-127": [
+              11,
+              18,
+              41,
+              48
+            ],
+            "-8": [
+              21,
+              31
+            ],
+            "-6": [
+              28,
+              38
+            ]
+          },
+          "CeilingHeights": {
+            "2": [
+              21,
+              31,
+              28,
+              38
+            ]
+          }
+        },
+        {
+          "EMType": 126,
+          "Location": {
+            "X": 59392,
+            "Y": 12032,
+            "Z": 29696
+          },
+          "LinkedLocation": {
+            "X": 61952,
+            "Y": 6656,
+            "Z": 38400,
+            "Room": 32
+          },
+          "Textures": {
+            "Floor": 33,
+            "Ceiling": 33,
+            "WallAlignment": 5,
+            "Wall4": 31,
+            "RandomRotationSeed": 28122214
+          },
+          "AmbientLighting": 7487,
+          "DefaultVertex": {
+            "Lighting": 7616
+          },
+          "Lights": [
+            {
+              "X": 3072,
+              "Y": -2177,
+              "Z": 4096,
+              "Intensity1": 2600,
+              "Fade1": 4096
+            }
+          ],
+          "Height": 15,
+          "Width": 6,
+          "Depth": 8
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 60928,
+            "Y": 8192,
+            "Z": 31232,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 60928,
+            "Y": 9216,
+            "Z": 31232,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 61952,
+            "Y": 8192,
+            "Z": 31232,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 61952,
+            "Y": 9216,
+            "Z": 31232,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 62976,
+            "Y": 8192,
+            "Z": 31232,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 62976,
+            "Y": 9216,
+            "Z": 31232,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 64000,
+            "Y": 8192,
+            "Z": 31232,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 64000,
+            "Y": 9216,
+            "Z": 31232,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 64000,
+            "Y": 8192,
+            "Z": 32256,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 64000,
+            "Y": 9216,
+            "Z": 32256,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 62976,
+            "Y": 8192,
+            "Z": 32256,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 62976,
+            "Y": 9216,
+            "Z": 32256,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 61952,
+            "Y": 8192,
+            "Z": 32256,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 61952,
+            "Y": 9216,
+            "Z": 32256,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 60928,
+            "Y": 8192,
+            "Z": 32256,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 60928,
+            "Y": 9216,
+            "Z": 32256,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 60928,
+            "Y": 8192,
+            "Z": 33280,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 60928,
+            "Y": 9216,
+            "Z": 33280,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 61952,
+            "Y": 8192,
+            "Z": 33280,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 61952,
+            "Y": 9216,
+            "Z": 33280,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 62976,
+            "Y": 8192,
+            "Z": 33280,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 62976,
+            "Y": 9216,
+            "Z": 33280,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 64000,
+            "Y": 8192,
+            "Z": 33280,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 64000,
+            "Y": 9216,
+            "Z": 33280,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 64000,
+            "Y": 8192,
+            "Z": 34304,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 64000,
+            "Y": 9216,
+            "Z": 34304,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 62976,
+            "Y": 8192,
+            "Z": 34304,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 62976,
+            "Y": 9216,
+            "Z": 34304,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 61952,
+            "Y": 8192,
+            "Z": 34304,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 61952,
+            "Y": 9216,
+            "Z": 34304,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 60928,
+            "Y": 8192,
+            "Z": 34304,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 60928,
+            "Y": 9216,
+            "Z": 34304,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 60928,
+            "Y": 8192,
+            "Z": 35328,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 60928,
+            "Y": 9216,
+            "Z": 35328,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 61952,
+            "Y": 8192,
+            "Z": 35328,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 61952,
+            "Y": 9216,
+            "Z": 35328,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 62976,
+            "Y": 8192,
+            "Z": 35328,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 62976,
+            "Y": 9216,
+            "Z": 35328,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 64000,
+            "Y": 8192,
+            "Z": 35328,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 64000,
+            "Y": 9216,
+            "Z": 35328,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 64000,
+            "Y": 8192,
+            "Z": 36352,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 64000,
+            "Y": 9216,
+            "Z": 36352,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 62976,
+            "Y": 8192,
+            "Z": 36352,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 62976,
+            "Y": 9216,
+            "Z": 36352,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 61952,
+            "Y": 8192,
+            "Z": 36352,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 61952,
+            "Y": 9216,
+            "Z": 36352,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Pit portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 60928,
+            "Y": 8192,
+            "Z": 36352,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 60928,
+            "Y": 9216,
+            "Z": 36352,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Make visibility portals.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": -1,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 8192,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 8192,
+                  "Z": 8192
+                },
+                {
+                  "X": 5120,
+                  "Y": 8192,
+                  "Z": 8192
+                },
+                {
+                  "X": 5120,
+                  "Y": 8192,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -1,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 5120,
+                  "Y": 8192,
+                  "Z": 1024
+                },
+                {
+                  "X": 5120,
+                  "Y": 8192,
+                  "Z": 7168
+                },
+                {
+                  "X": 1024,
+                  "Y": 8192,
+                  "Z": 7168
+                },
+                {
+                  "X": 1024,
+                  "Y": 8192,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": 32,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": 4096,
+                  "Z": 9216
+                },
+                {
+                  "X": 4096,
+                  "Y": 4096,
+                  "Z": 9216
+                },
+                {
+                  "X": 4096,
+                  "Y": 6656,
+                  "Z": 9216
+                },
+                {
+                  "X": 2048,
+                  "Y": 6656,
+                  "Z": 9216
+                }
+              ]
+            },
+            {
+              "BaseRoom": 32,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 9216,
+                  "Y": 4096,
+                  "Z": 1024
+                },
+                {
+                  "X": 7168,
+                  "Y": 4096,
+                  "Z": 1024
+                },
+                {
+                  "X": 7168,
+                  "Y": 6656,
+                  "Z": 1024
+                },
+                {
+                  "X": 9216,
+                  "Y": 6656,
+                  "Z": 1024
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Comments": "Make collisional portals.",
+          "EMType": 82,
+          "Portals": {
+            "-2": {
+              "32": [
+                {
+                  "X": 61952,
+                  "Y": 6656,
+                  "Z": 38400,
+                  "Room": -2
+                },
+                {
+                  "X": 62976,
+                  "Y": 6656,
+                  "Z": 38400,
+                  "Room": -2
+                }
+              ]
+            },
+            "32": {
+              "-2": [
+                {
+                  "X": 61952,
+                  "Y": 6656,
+                  "Z": 37376,
+                  "Room": 32
+                },
+                {
+                  "X": 62976,
+                  "Y": 6656,
+                  "Z": 37376,
+                  "Room": 32
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Slant the ceiling to match room 32.",
+          "EMType": 7,
+          "Locations": [
+            {
+              "X": 61952,
+              "Y": 6656,
+              "Z": 37376,
+              "Room": -2
+            },
+            {
+              "X": 61952,
+              "Y": 6656,
+              "Z": 30208,
+              "Room": -2
+            }
+          ],
+          "XSlant": 2
+        },
+        {
+          "EMType": 7,
+          "Locations": [
+            {
+              "X": 62976,
+              "Y": 6656,
+              "Z": 37376,
+              "Room": -2
+            },
+            {
+              "X": 62976,
+              "Y": 6656,
+              "Z": 30208,
+              "Room": -2
+            }
+          ],
+          "XSlant": -2
+        },
+        {
+          "Comments": "Modify faces to match the geometry.",
+          "EMType": 23,
+          "Modifications": [
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                69,
+                75
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "1": {
+                  "Y": -512
+                }
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                99
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "3": {
+                  "Y": -512
+                }
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                45
+              ],
+              "VertexChanges": {
+                "1": {
+                  "Y": -512
+                },
+                "2": {
+                  "Y": -512
+                }
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                67,
+                84
+              ],
+              "VertexChanges": {
+                "2": {
+                  "Y": -512
+                }
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                54,
+                97
+              ],
+              "VertexChanges": {
+                "3": {
+                  "Y": -512
+                }
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                49
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "1": {
+                  "Y": -512
+                },
+                "2": {
+                  "Y": -512
+                }
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                79
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "2": {
+                  "Y": -512
+                },
+                "3": {
+                  "Y": -512
+                }
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                48,
+                78
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "1": {
+                  "Y": -512
+                }
+              }
+            }
+          ],
+          "Rotations": [
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                69
+              ],
+              "VertexRemap": {
+                "0": 3,
+                "1": 0,
+                "2": 1,
+                "3": 2
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                75
+              ],
+              "VertexRemap": {
+                "0": 1,
+                "1": 2,
+                "2": 3,
+                "3": 0
+              }
+            }
+          ]
+        },
+        {
+          "Comments": "Change some textures.",
+          "EMType": 21,
+          "TextureMap": {
+            "105": {
+              "-2": {
+                "Rectangles": [
+                  48,
+                  78
+                ]
+              }
+            },
+            "36": {
+              "-2": {
+                "Rectangles": [
+                  69,
+                  99,
+                  45,
+                  75
+                ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Remove redundant faces.",
+          "EMType": 22,
+          "GeometryMap": {
+            "-1": {
+              "Rectangles": [
+                85,
+                95,
+                101,
+                107,
+                113,
+                119,
+                65,
+                71,
+                73,
+                75,
+                77,
+                79,
+                45,
+                51,
+                53,
+                55,
+                57,
+                59,
+                1,
+                11,
+                17,
+                23,
+                29,
+                35
+              ]
+            },
+            "-2": {
+              "Rectangles": [
+                0,
+                10,
+                16,
+                22,
+                28,
+                34,
+                50,
+                55,
+                57,
+                59,
+                61,
+                63,
+                80,
+                85,
+                87,
+                89,
+                91,
+                93,
+                104,
+                114,
+                120,
+                126,
+                132,
+                138,
+                72,
+                73,
+                100,
+                101
+              ]
+            },
+            "32": {
+              "Rectangles": [
+                85,
+                100
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Add some skeletons.",
+          "EMType": 24,
+          "Locations": [
+            {
+              "X": 60928,
+              "Y": 12032,
+              "Z": 34304,
+              "Room": -1,
+              "Angle": -32768
+            }
+          ],
+          "Mesh": {
+            "Intensity1": 4864,
+            "MeshID": 45
+          }
+        },
+        {
+          "EMType": 24,
+          "Locations": [
+            {
+              "X": 62976,
+              "Y": 12032,
+              "Z": 32256,
+              "Room": -1,
+              "Angle": -16384
+            }
+          ],
+          "Mesh": {
+            "Intensity1": 5632,
+            "MeshID": 48
+          }
+        },
+        {
+          "Comments": "Add breakable tiles to reach the levers.",
+          "EMType": 51,
+          "TypeID": 35,
+          "Intensity": 6144,
+          "Location": {
+            "X": 64000,
+            "Y": 7168,
+            "Z": 35328,
+            "Room": -2
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 64000,
+              "Y": 9216,
+              "Z": 35328,
+              "Room": -1
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 35,
+          "Intensity": 6144,
+          "Location": {
+            "X": 64000,
+            "Y": 6656,
+            "Z": 32256,
+            "Room": -2
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 64000,
+              "Y": 9216,
+              "Z": 32256,
+              "Room": -1
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Ensure the trapdoor model is available.",
+          "EMType": 145,
+          "Data": [
+            {
+              "ModelID": 65,
+              "TexturedFace4": 31
+            }
+          ]
+        },
+        {
+          "Comments": "Add a timed trapdoor as a return path.",
+          "EMType": 51,
+          "TypeID": 65,
+          "Flags": 15872,
+          "Intensity": 6144,
+          "Location": {
+            "X": 60928,
+            "Y": 6656,
+            "Z": 33280,
+            "Room": -2,
+            "Angle": 16384
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 60928,
+              "Y": 9216,
+              "Z": 33280,
+              "Room": -1
+            }
+          ],
+          "Trigger": {
+            "TrigType": 8,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Add an additionl door to room 22.",
+          "EMType": 51,
+          "TypeID": 58,
+          "Intensity": -1,
+          "Location": {
+            "X": 55808,
+            "Y": 6656,
+            "Z": 70144,
+            "Room": 22,
+            "Angle": -32768
+          }
+        },
+        {
+          "Comments": "Add switches for the additional door and return trapdoor.",
+          "EMType": 51,
+          "TypeID": 55,
+          "Intensity": -1,
+          "Location": {
+            "X": 62976,
+            "Y": 6144,
+            "Z": 30208,
+            "Room": -2,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 55,
+          "Intensity": -1,
+          "Location": {
+            "X": 61952,
+            "Y": 6144,
+            "Z": 30208,
+            "Room": -2,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "EntityLocation": -1,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "Timer": 5,
+            "SwitchOrKeyRef": -1,
+            "Actions": [
+              {
+                "Parameter": -4
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 61,
+          "EntityLocation": -2,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": -2,
+            "Actions": [
+              {
+                "Parameter": -3
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Append the same camera action as the other door triggers.",
+          "EMType": 65,
+          "CameraIndex": 7,
+          "LookAtItem": 43,
+          "AttachToLocations": [
+            {
+              "X": 62976,
+              "Y": 6144,
+              "Z": 30208,
+              "Room": -2
+            }
+          ],
+          "CameraAction": {
+            "Value": 32771,
+            "Timer": 3
+          }
+        },
+        {
+          "Comments": "Generate lighting in the new rooms.",
+          "EMType": 128,
+          "RoomIndices": [
+            -1,
+            -2
+          ]
+        }
+      ],
+      [
+        {
+          "Comments": "Make a trap/puzzle room off room 27.",
+          "EMType": 126,
+          "Location": {
+            "X": 68608,
+            "Y": 6912,
+            "Z": 40960
+          },
+          "LinkedLocation": {
+            "X": 70144,
+            "Y": 8704,
+            "Z": 45568,
+            "Room": 27
+          },
+          "Textures": {
+            "Floor": 33,
+            "Ceiling": 33,
+            "WallAlignment": 5,
+            "Wall4": 31,
+            "Wall1": 34,
+            "RandomRotationSeed": 28122214
+          },
+          "AmbientLighting": 7487,
+          "DefaultVertex": {
+            "Lighting": 7616
+          },
+          "Lights": [
+            {
+              "X": 1536,
+              "Y": -768,
+              "Z": 1536,
+              "Intensity1": 4096,
+              "Fade1": 2248
+            }
+          ],
+          "Height": 5,
+          "Width": 3,
+          "Depth": 5,
+          "FloorHeights": {
+            "-1": [
+              7,
+              8
+            ]
+          }
+        },
+        {
+          "EMType": 126,
+          "Location": {
+            "X": 64512,
+            "Y": 8960,
+            "Z": 32768
+          },
+          "LinkedLocation": {
+            "X": 70144,
+            "Y": 8704,
+            "Z": 45568,
+            "Room": 27
+          },
+          "Textures": {
+            "Floor": 33,
+            "Ceiling": 33,
+            "WallAlignment": 5,
+            "Wall4": 31,
+            "RandomRotationSeed": 28122214
+          },
+          "AmbientLighting": 6624,
+          "DefaultVertex": {
+            "Lighting": 7616
+          },
+          "Lights": [
+            {
+              "X": 8704,
+              "Y": -1792,
+              "Z": 8704,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            },
+            {
+              "X": 8704,
+              "Y": -1792,
+              "Z": 2560,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            },
+            {
+              "X": 2560,
+              "Y": -1792,
+              "Z": 2560,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            },
+            {
+              "X": 2560,
+              "Y": -1792,
+              "Z": 8704,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            }
+          ],
+          "Height": 8,
+          "Width": 11,
+          "Depth": 11,
+          "FloorHeights": {
+            "-127": [
+              42,
+              53,
+              75,
+              86,
+              97,
+              73,
+              84,
+              106,
+              108,
+              105,
+              104,
+              103,
+              102,
+              101,
+              62,
+              51,
+              40,
+              18,
+              19,
+              17,
+              16,
+              15,
+              14,
+              12,
+              23,
+              34,
+              45,
+              56,
+              67,
+              78,
+              100,
+              83,
+              82,
+              81,
+              80,
+              69,
+              58,
+              47,
+              36,
+              37,
+              38,
+              39,
+              50,
+              61,
+              72,
+              71,
+              60,
+              49,
+              48,
+              59,
+              70,
+              20
+            ]
+          }
+        },
+        {
+          "Comments": "Make visibility portals.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": -1,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 6912,
+                  "Z": 2048
+                },
+                {
+                  "X": 2048,
+                  "Y": 6912,
+                  "Z": 2048
+                },
+                {
+                  "X": 2048,
+                  "Y": 6912,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 6912,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -1,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 5120,
+                  "Y": 6912,
+                  "Z": 9216
+                },
+                {
+                  "X": 6144,
+                  "Y": 6912,
+                  "Z": 9216
+                },
+                {
+                  "X": 6144,
+                  "Y": 6912,
+                  "Z": 10240
+                },
+                {
+                  "X": 5120,
+                  "Y": 6912,
+                  "Z": 10240
+                }
+              ]
+            },
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": 27,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 5632,
+                  "Z": 4096
+                },
+                {
+                  "X": 2048,
+                  "Y": 5632,
+                  "Z": 4096
+                },
+                {
+                  "X": 2048,
+                  "Y": 6656,
+                  "Z": 4096
+                },
+                {
+                  "X": 1024,
+                  "Y": 6656,
+                  "Z": 4096
+                }
+              ]
+            },
+            {
+              "BaseRoom": 27,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 5120,
+                  "Y": 5632,
+                  "Z": 1024
+                },
+                {
+                  "X": 4096,
+                  "Y": 5632,
+                  "Z": 1024
+                },
+                {
+                  "X": 4096,
+                  "Y": 6656,
+                  "Z": 1024
+                },
+                {
+                  "X": 5120,
+                  "Y": 6656,
+                  "Z": 1024
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Comments": "Make collisional portals.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 70144,
+            "Y": 6912,
+            "Z": 42496,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 70144,
+            "Y": 7936,
+            "Z": 42496,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "More collisional portals.",
+          "EMType": 82,
+          "Portals": {
+            "-2": {
+              "27": [
+                {
+                  "X": 70144,
+                  "Y": 6656,
+                  "Z": 45568,
+                  "Room": -2
+                }
+              ]
+            },
+            "27": {
+              "-2": [
+                {
+                  "X": 70144,
+                  "Y": 6656,
+                  "Z": 44544,
+                  "Room": 27
+                }
+              ]
+            },
+            "-1": {
+              "-2": [
+                {
+                  "X": 70144,
+                  "Y": 8960,
+                  "Z": 43520,
+                  "Room": -1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Amend some faces.",
+          "EMType": 23,
+          "Modifications": [
+            {
+              "RoomNumber": 27,
+              "FaceIndex": 78,
+              "VertexChanges": {
+                "1": {
+                  "Y": -1024
+                },
+                "2": {
+                  "Y": -1024
+                }
+              }
+            }
+          ],
+          "Rotations": [
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                12,
+                54
+              ],
+              "VertexRemap": {
+                "0": 1,
+                "1": 2,
+                "2": 3,
+                "3": 0
+              }
+            },
+            {
+              "RoomNumber": 27,
+              "FaceIndices": [
+                78
+              ],
+              "VertexRemap": {
+                "0": 3,
+                "1": 0,
+                "2": 1,
+                "3": 2
+              }
+            }
+          ]
+        },
+        {
+          "Comments": "Change some textures.",
+          "EMType": 21,
+          "TextureMap": {
+            "39": {
+              "-1": {
+                "Rectangles": [
+                  12,
+                  54
+                ]
+              },
+              "27": {
+                "Rectangles": [
+                  78
+                ]
+              }
+            },
+            "45": {
+              "-1": {
+                "Rectangles": [
+                  89
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  0
+                ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Remove a face for a portal.",
+          "EMType": 22,
+          "GeometryMap": {
+            "-2": {
+              "Rectangles": [
+                16
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Add moving blocks to the maze - à la Folklorist Diary.",
+          "EMType": 51,
+          "TypeID": 52,
+          "Intensity": -1,
+          "Location": {
+            "X": 72192,
+            "Y": 8960,
+            "Z": 41472,
+            "Room": -1,
+            "Angle": 16384
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 71168,
+              "Y": 8960,
+              "Z": 41472,
+              "Room": -1
+            },
+            {
+              "X": 72192,
+              "Y": 8960,
+              "Z": 41472,
+              "Room": -1
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Timer": 4,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 52,
+          "Intensity": -1,
+          "Location": {
+            "X": 73216,
+            "Y": 8960,
+            "Z": 36352,
+            "Room": -1,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 73216,
+              "Y": 8960,
+              "Z": 37376,
+              "Room": -1
+            },
+            {
+              "X": 73216,
+              "Y": 8960,
+              "Z": 36352,
+              "Room": -1
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Timer": 4,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 52,
+          "Intensity": -1,
+          "Location": {
+            "X": 68096,
+            "Y": 8960,
+            "Z": 35328,
+            "Room": -1,
+            "Angle": -16384
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 69120,
+              "Y": 8960,
+              "Z": 35328,
+              "Room": -1
+            },
+            {
+              "X": 68096,
+              "Y": 8960,
+              "Z": 35328,
+              "Room": -1
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Timer": 4,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 52,
+          "Intensity": -1,
+          "Location": {
+            "X": 67072,
+            "Y": 8960,
+            "Z": 40448,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 67072,
+              "Y": 8960,
+              "Z": 39424,
+              "Room": -1
+            },
+            {
+              "X": 67072,
+              "Y": 8960,
+              "Z": 40448,
+              "Room": -1
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Timer": 4,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Import the underwater lever model.",
+          "EMType": 145,
+          "Data": [
+            {
+              "ModelID": 56,
+              "TexturedFace3": 970,
+              "TextureMap": {
+                "693": 849,
+                "692": 970,
+                "691": 971,
+                "690": 971,
+                "689": 970
+              }
+            }
+          ]
+        },
+        {
+          "Comments": "Add an underwater lever to open the additional door.",
+          "EMType": 51,
+          "TypeID": 56,
+          "Intensity": -1,
+          "Location": {
+            "X": 66048,
+            "Y": 8192,
+            "Z": 35328,
+            "Room": -1,
+            "Angle": -16384
+          }
+        },
+        {
+          "Comments": "Add an additionl door to room 22.",
+          "EMType": 51,
+          "TypeID": 57,
+          "Intensity": -1,
+          "Location": {
+            "X": 55808,
+            "Y": 6656,
+            "Z": 70144,
+            "Room": 22,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "EntityLocation": -2,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": -2,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Append the same camera action as the other door triggers.",
+          "EMType": 65,
+          "CameraIndex": 7,
+          "LookAtItem": 43,
+          "AttachToLocations": [
+            {
+              "X": 66048,
+              "Y": 8192,
+              "Z": 35328,
+              "Room": -1
+            }
+          ],
+          "CameraAction": {
+            "Value": 32771,
+            "Timer": 3
+          }
+        },
+        {
+          "Comments": "Flood the maze.",
+          "EMType": 2,
+          "RoomNumbers": [
+            -1
+          ]
+        },
+        {
+          "Comments": "Generate lighting in the new rooms.",
+          "EMType": 128,
+          "RoomIndices": [
+            -1,
+            -2
+          ]
+        }
+      ],
+      [
+        {
+          "Comments": "Make a trap/puzzle room off room 37.",
+          "EMType": 126,
+          "Location": {
+            "X": 45056,
+            "Y": 5632,
+            "Z": 34816
+          },
+          "LinkedLocation": {
+            "X": 49664,
+            "Y": 6656,
+            "Z": 43520,
+            "Room": 37
+          },
+          "Textures": {
+            "Floor": 33,
+            "Ceiling": 33,
+            "WallAlignment": 5,
+            "Wall4": 31,
+            "Wall1": 34,
+            "RandomRotationSeed": 28122214
+          },
+          "AmbientLighting": 7487,
+          "DefaultVertex": {
+            "Lighting": 7616
+          },
+          "Lights": [
+            {
+              "X": 4608,
+              "Y": -1536,
+              "Z": 8704,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            },
+            {
+              "X": 4608,
+              "Y": -1536,
+              "Z": 1536,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            },
+            {
+              "X": 1536,
+              "Y": -1536,
+              "Z": 5120,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            },
+            {
+              "X": 7680,
+              "Y": -1536,
+              "Z": 5120,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            }
+          ],
+          "Height": 12,
+          "Width": 9,
+          "Depth": 10,
+          "FloorHeights": {
+            "-1": [
+              11,
+              12,
+              13,
+              16,
+              17,
+              18,
+              71,
+              72,
+              73,
+              76,
+              77,
+              78
+            ]
+          },
+          "CeilingHeights": {
+            "1": [
+              11,
+              18,
+              21,
+              28,
+              68,
+              78,
+              74,
+              64,
+              54
+            ]
+          }
+        },
+        {
+          "EMType": 126,
+          "Location": {
+            "X": 45056,
+            "Y": 2560,
+            "Z": 34816
+          },
+          "LinkedLocation": {
+            "X": 49664,
+            "Y": 6656,
+            "Z": 43520,
+            "Room": 37
+          },
+          "Textures": {
+            "Floor": 33,
+            "Ceiling": 33,
+            "WallAlignment": 5,
+            "Wall4": 31,
+            "Wall1": 34,
+            "RandomRotationSeed": 28122214
+          },
+          "AmbientLighting": 7487,
+          "DefaultVertex": {
+            "Lighting": 7616
+          },
+          "Lights": [
+            {
+              "X": 4608,
+              "Y": -1536,
+              "Z": 8704,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            },
+            {
+              "X": 4608,
+              "Y": -1536,
+              "Z": 1536,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            },
+            {
+              "X": 1536,
+              "Y": -1536,
+              "Z": 5120,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            },
+            {
+              "X": 7680,
+              "Y": -1536,
+              "Z": 5120,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            },
+            {
+              "X": 4608,
+              "Y": -3584,
+              "Z": 5120,
+              "Intensity1": 4096,
+              "Fade1": 5120
+            }
+          ],
+          "Height": 16,
+          "Width": 9,
+          "Depth": 10,
+          "FloorHeights": {},
+          "CeilingHeights": {
+            "4": [
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              21,
+              31,
+              41,
+              51,
+              61,
+              28,
+              38,
+              48,
+              58,
+              68
+            ],
+            "3": [
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              32,
+              42,
+              52,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              37,
+              47,
+              57
+            ]
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 46592,
+            "Y": 2560,
+            "Z": 38400,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 46592,
+            "Y": 3584,
+            "Z": 38400,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 46592,
+            "Y": 2560,
+            "Z": 39424,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 46592,
+            "Y": 3584,
+            "Z": 39424,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 46592,
+            "Y": 2560,
+            "Z": 40448,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 46592,
+            "Y": 3584,
+            "Z": 40448,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 46592,
+            "Y": 2560,
+            "Z": 41472,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 46592,
+            "Y": 3584,
+            "Z": 41472,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 46592,
+            "Y": 2560,
+            "Z": 42496,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 46592,
+            "Y": 3584,
+            "Z": 42496,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 48640,
+            "Y": 2560,
+            "Z": 43520,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 48640,
+            "Y": 3584,
+            "Z": 43520,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 49664,
+            "Y": 2560,
+            "Z": 43520,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 49664,
+            "Y": 3584,
+            "Z": 43520,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 50688,
+            "Y": 2560,
+            "Z": 43520,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 50688,
+            "Y": 3584,
+            "Z": 43520,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 52736,
+            "Y": 2560,
+            "Z": 42496,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 52736,
+            "Y": 3584,
+            "Z": 42496,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 52736,
+            "Y": 2560,
+            "Z": 41472,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 52736,
+            "Y": 3584,
+            "Z": 41472,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 52736,
+            "Y": 2560,
+            "Z": 40448,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 52736,
+            "Y": 3584,
+            "Z": 40448,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 52736,
+            "Y": 2560,
+            "Z": 38400,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 52736,
+            "Y": 3584,
+            "Z": 38400,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 52736,
+            "Y": 2560,
+            "Z": 37376,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 52736,
+            "Y": 3584,
+            "Z": 37376,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 52736,
+            "Y": 2560,
+            "Z": 36352,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 52736,
+            "Y": 3584,
+            "Z": 36352,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 51712,
+            "Y": 2560,
+            "Z": 37376,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 51712,
+            "Y": 3584,
+            "Z": 37376,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 50688,
+            "Y": 2560,
+            "Z": 37376,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 50688,
+            "Y": 3584,
+            "Z": 37376,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 46592,
+            "Y": 2560,
+            "Z": 37376,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 46592,
+            "Y": 3584,
+            "Z": 37376,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 47616,
+            "Y": 2560,
+            "Z": 37376,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 47616,
+            "Y": 3584,
+            "Z": 37376,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 48640,
+            "Y": 2560,
+            "Z": 36352,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 48640,
+            "Y": 3584,
+            "Z": 36352,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 49664,
+            "Y": 2560,
+            "Z": 36352,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 49664,
+            "Y": 3584,
+            "Z": 36352,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 50688,
+            "Y": 2560,
+            "Z": 36352,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 50688,
+            "Y": 3584,
+            "Z": 36352,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 51712,
+            "Y": 2560,
+            "Z": 36352,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 51712,
+            "Y": 3584,
+            "Z": 36352,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 49664,
+            "Y": 2560,
+            "Z": 37376,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 49664,
+            "Y": 3584,
+            "Z": 37376,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 48640,
+            "Y": 2560,
+            "Z": 37376,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 48640,
+            "Y": 3584,
+            "Z": 37376,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 47616,
+            "Y": 2560,
+            "Z": 38400,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 47616,
+            "Y": 3584,
+            "Z": 38400,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 48640,
+            "Y": 2560,
+            "Z": 38400,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 48640,
+            "Y": 3584,
+            "Z": 38400,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 50688,
+            "Y": 2560,
+            "Z": 38400,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 50688,
+            "Y": 3584,
+            "Z": 38400,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 51712,
+            "Y": 2560,
+            "Z": 38400,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 51712,
+            "Y": 3584,
+            "Z": 38400,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 49664,
+            "Y": 2560,
+            "Z": 39424,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 49664,
+            "Y": 3584,
+            "Z": 39424,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 48640,
+            "Y": 2560,
+            "Z": 39424,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 48640,
+            "Y": 3584,
+            "Z": 39424,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 47616,
+            "Y": 2560,
+            "Z": 39424,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 47616,
+            "Y": 3584,
+            "Z": 39424,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 51712,
+            "Y": 2560,
+            "Z": 40448,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 51712,
+            "Y": 3584,
+            "Z": 40448,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 50688,
+            "Y": 2560,
+            "Z": 40448,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 50688,
+            "Y": 3584,
+            "Z": 40448,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 49664,
+            "Y": 2560,
+            "Z": 40448,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 49664,
+            "Y": 3584,
+            "Z": 40448,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 48640,
+            "Y": 2560,
+            "Z": 40448,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 48640,
+            "Y": 3584,
+            "Z": 40448,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 47616,
+            "Y": 2560,
+            "Z": 40448,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 47616,
+            "Y": 3584,
+            "Z": 40448,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 47616,
+            "Y": 2560,
+            "Z": 41472,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 47616,
+            "Y": 3584,
+            "Z": 41472,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 47616,
+            "Y": 2560,
+            "Z": 42496,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 47616,
+            "Y": 3584,
+            "Z": 42496,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 48640,
+            "Y": 2560,
+            "Z": 42496,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 48640,
+            "Y": 3584,
+            "Z": 42496,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 48640,
+            "Y": 2560,
+            "Z": 41472,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 48640,
+            "Y": 3584,
+            "Z": 41472,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 49664,
+            "Y": 2560,
+            "Z": 41472,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 49664,
+            "Y": 3584,
+            "Z": 41472,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 49664,
+            "Y": 2560,
+            "Z": 42496,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 49664,
+            "Y": 3584,
+            "Z": 42496,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 50688,
+            "Y": 2560,
+            "Z": 42496,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 50688,
+            "Y": 3584,
+            "Z": 42496,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 50688,
+            "Y": 2560,
+            "Z": 41472,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 50688,
+            "Y": 3584,
+            "Z": 41472,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 51712,
+            "Y": 2560,
+            "Z": 41472,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 51712,
+            "Y": 3584,
+            "Z": 41472,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 51712,
+            "Y": 2560,
+            "Z": 42496,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 51712,
+            "Y": 3584,
+            "Z": 42496,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Vertical portal.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 49664,
+            "Y": 2560,
+            "Z": 38400,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 49664,
+            "Y": 3584,
+            "Z": 38400,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Collisional portals.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 49664,
+            "Y": 5632,
+            "Z": 43520,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 49664,
+            "Y": 6656,
+            "Z": 43520,
+            "Room": 37
+          }
+        },
+        {
+          "Comments": "Make visibility portals.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": -1,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 2560,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 2560,
+                  "Z": 9216
+                },
+                {
+                  "X": 8192,
+                  "Y": 2560,
+                  "Z": 9216
+                },
+                {
+                  "X": 8192,
+                  "Y": 2560,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": -1,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 8192,
+                  "Y": 2560,
+                  "Z": 1024
+                },
+                {
+                  "X": 8192,
+                  "Y": 2560,
+                  "Z": 9216
+                },
+                {
+                  "X": 1024,
+                  "Y": 2560,
+                  "Z": 9216
+                },
+                {
+                  "X": 1024,
+                  "Y": 2560,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": 37,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 4096,
+                  "Y": 5632,
+                  "Z": 9216
+                },
+                {
+                  "X": 5120,
+                  "Y": 5632,
+                  "Z": 9216
+                },
+                {
+                  "X": 5120,
+                  "Y": 5632,
+                  "Z": 8192
+                },
+                {
+                  "X": 4096,
+                  "Y": 5632,
+                  "Z": 8192
+                }
+              ]
+            },
+            {
+              "BaseRoom": 37,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": 5632,
+                  "Z": 2048
+                },
+                {
+                  "X": 4096,
+                  "Y": 5632,
+                  "Z": 2048
+                },
+                {
+                  "X": 4096,
+                  "Y": 5632,
+                  "Z": 3072
+                },
+                {
+                  "X": 3072,
+                  "Y": 5632,
+                  "Z": 3072
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Comments": "Change some textures.",
+          "EMType": 21,
+          "TextureMap": {
+            "105": {
+              "-1": {
+                "Rectangles": [
+                  5
+                ]
+              }
+            },
+            "41": {
+              "-2": {
+                "Rectangles": [
+                  118
+                ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Alter some faces.",
+          "EMType": 23,
+          "Rotations": [
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                5
+              ],
+              "VertexRemap": {
+                "0": 2,
+                "1": 3,
+                "2": 0,
+                "3": 1
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                118
+              ],
+              "VertexRemap": {
+                "0": 2,
+                "1": 3,
+                "2": 0,
+                "3": 1
+              }
+            }
+          ]
+        },
+        {
+          "Comments": "Remove faces for portals.",
+          "EMType": 22,
+          "GeometryMap": {
+            "-2": {
+              "Rectangles": [
+                184,
+                192,
+                197,
+                153,
+                159,
+                162,
+                128,
+                133,
+                135,
+                105,
+                110,
+                112,
+                81,
+                87,
+                89,
+                57,
+                61,
+                9,
+                15,
+                114,
+                91,
+                64,
+                20,
+                209,
+                168,
+                140,
+                117,
+                93,
+                66,
+                26,
+                216,
+                171,
+                143,
+                119,
+                95,
+                68,
+                32,
+                221,
+                174,
+                145,
+                121,
+                97,
+                71,
+                37,
+                99,
+                123,
+                147,
+                122
+              ]
+            },
+            "-1": {
+              "Rectangles": [
+                101,
+                127,
+                157,
+                33,
+                67,
+                98,
+                124,
+                154,
+                183,
+                225,
+                28,
+                64,
+                94,
+                121,
+                150,
+                180,
+                220,
+                23,
+                61,
+                91,
+                119,
+                147,
+                177,
+                215,
+                18,
+                58,
+                88,
+                117,
+                13,
+                55,
+                84,
+                114,
+                140,
+                171,
+                205,
+                8,
+                51,
+                81,
+                111,
+                137,
+                167,
+                200,
+                76,
+                106,
+                132,
+                162,
+                192
+              ]
+            },
+            "37": {
+              "Rectangles": [
+                27
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Add some statues.",
+          "EMType": 24,
+          "Locations": [
+            {
+              "X": 46080,
+              "Y": 5632,
+              "Z": 39936,
+              "Room": -2,
+              "Angle": -16384
+            },
+            {
+              "X": 53248,
+              "Y": 5632,
+              "Z": 39936,
+              "Room": -2,
+              "Angle": 16384
+            }
+          ],
+          "Mesh": {
+            "Intensity1": 5632,
+            "MeshID": 12
+          }
+        },
+        {
+          "Comments": "Ensure Thor's hammer model is available.",
+          "EMType": 145,
+          "Data": [
+            {
+              "ModelID": 44,
+              "TextureMap": {
+                "750": 35,
+                "751": 35,
+                "752": 35,
+                "753": 35
+              }
+            },
+            {
+              "ModelID": 45,
+              "TexturedFace4": 1016
+            }
+          ]
+        },
+        {
+          "Comments": "Add the hammer and trigger it.",
+          "EMType": 51,
+          "TypeID": 44,
+          "Intensity": -1,
+          "Location": {
+            "X": 49664,
+            "Y": 5632,
+            "Z": 38400,
+            "Room": -2
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 49664,
+              "Y": 5632,
+              "Z": 41472,
+              "Room": -2
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Add a pushblock.",
+          "EMType": 51,
+          "TypeID": 48,
+          "Flags": 256,
+          "Intensity": -1,
+          "Location": {
+            "X": 46592,
+            "Y": -512,
+            "Z": 41472,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Hammer triggers the pushblock.",
+          "EMType": 61,
+          "EntityLocation": -2,
+          "Trigger": {
+            "TrigType": 5,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Add a lever to open the additional door.",
+          "EMType": 51,
+          "TypeID": 55,
+          "Intensity": -1,
+          "Location": {
+            "X": 46592,
+            "Y": 2560,
+            "Z": 36352,
+            "Room": -1,
+            "Angle": -32768
+          }
+        },
+        {
+          "Comments": "Add an additionl door to room 22.",
+          "EMType": 51,
+          "TypeID": 59,
+          "Intensity": -1,
+          "Location": {
+            "X": 55808,
+            "Y": 6656,
+            "Z": 70144,
+            "Room": 22,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 61,
+          "EntityLocation": -2,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": -2,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Append the same camera action as the other door triggers.",
+          "EMType": 65,
+          "CameraIndex": 7,
+          "LookAtItem": 43,
+          "AttachToLocations": [
+            {
+              "X": 46592,
+              "Y": 2560,
+              "Z": 36352,
+              "Room": -1
+            }
+          ],
+          "CameraAction": {
+            "Value": 32771,
+            "Timer": 3
+          }
+        },
+        {
+          "Comments": "Add some darts to spice up the platforming.",
+          "EMType": 51,
+          "TypeID": 40,
+          "Intensity": -1,
+          "Location": {
+            "X": 47616,
+            "Y": 2560,
+            "Z": 36352,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 40,
+          "Intensity": -1,
+          "Location": {
+            "X": 50688,
+            "Y": 2560,
+            "Z": 36352,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 46592,
+              "Y": 2560,
+              "Z": 43520,
+              "Room": -1
+            },
+            {
+              "X": 47616,
+              "Y": 2560,
+              "Z": 43520,
+              "Room": -1
+            },
+            {
+              "X": 51712,
+              "Y": 2560,
+              "Z": 43520,
+              "Room": -1
+            },
+            {
+              "X": 52736,
+              "Y": 2560,
+              "Z": 43520,
+              "Room": -1
+            },
+            {
+              "X": 52736,
+              "Y": 2560,
+              "Z": 39424,
+              "Room": -1
+            },
+            {
+              "X": 51712,
+              "Y": 2560,
+              "Z": 39424,
+              "Room": -1
+            },
+            {
+              "X": 50688,
+              "Y": 2560,
+              "Z": 39424,
+              "Room": -1
+            },
+            {
+              "X": 47616,
+              "Y": 2560,
+              "Z": 36352,
+              "Room": -1
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 5,
+            "Actions": [
+              {
+                "Parameter": -2
+              },
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Generate lighting in the new rooms.",
+          "EMType": 128,
+          "RoomIndices": [
+            -1,
+            -2
+          ]
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "Comments": "Don't move the breakaway ceiling pieces in room 20.",
+          "EMType": 1000
+        }
+      ],
+      [
+        {
+          "Comments": "Move the breakaway ceiling pieces in room 20.",
+          "EMType": 44,
+          "EntityIndex": 38,
+          "TargetLocation": {
+            "X": 54784,
+            "Y": 2944,
+            "Z": 62976,
+            "Room": 20
+          }
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 39,
+          "TargetLocation": {
+            "X": 56832,
+            "Y": 2944,
+            "Z": 60928,
+            "Room": 20,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Move the breakaway ceiling pieces in room 20.",
+          "EMType": 44,
+          "EntityIndex": 38,
+          "TargetLocation": {
+            "X": 55808,
+            "Y": 2944,
+            "Z": 61952,
+            "Room": 20
+          }
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 39,
+          "TargetLocation": {
+            "X": 55808,
+            "Y": 2944,
+            "Z": 61952,
+            "Room": 20,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Move the breakaway ceiling pieces in room 20.",
+          "EMType": 44,
+          "EntityIndex": 39,
+          "TargetLocation": {
+            "X": 56832,
+            "Y": 2944,
+            "Z": 61952,
+            "Room": 20,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Move the breakaway ceiling pieces in room 20.",
+          "EMType": 44,
+          "EntityIndex": 38,
+          "TargetLocation": {
+            "X": 55808,
+            "Y": 2944,
+            "Z": 62976,
+            "Room": 20
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Move the breakaway ceiling pieces in room 20.",
+          "EMType": 44,
+          "EntityIndex": 38,
+          "TargetLocation": {
+            "X": 56832,
+            "Y": 2944,
+            "Z": 62976,
+            "Room": 20
+          }
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 39,
+          "TargetLocation": {
+            "X": 54784,
+            "Y": 2944,
+            "Z": 60928,
+            "Room": 20,
+            "Angle": 16384
           }
         }
       ]
