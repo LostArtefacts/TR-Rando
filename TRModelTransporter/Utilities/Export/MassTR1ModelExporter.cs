@@ -62,7 +62,7 @@ namespace TRModelTransporter.Utilities
             },
             [TRLevelNames.MIDAS] = new List<TREntities>
             {
-                
+                TREntities.PushBlock2
             },
             [TRLevelNames.CISTERN] = new List<TREntities>
             {

@@ -68,7 +68,333 @@
       }
     }
   ],
-  "Any": [],
+  "Any": [
+    [
+      {
+        "Comments": "Ensure the spikes model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 37,
+            "TexturedFace3": 109
+          }
+        ]
+      },
+      {
+        "Comments": "Add some spikes.",
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 37376,
+          "Y": 4864,
+          "Z": 58880,
+          "Room": 29
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the spikes model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 37,
+            "TexturedFace3": 109
+          }
+        ]
+      },
+      {
+        "Comments": "Add some spikes.",
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 37376,
+          "Y": 2304,
+          "Z": 43520,
+          "Room": 30
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the spikes model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 37,
+            "TexturedFace3": 109
+          }
+        ]
+      },
+      {
+        "Comments": "Add some spikes.",
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 38400,
+          "Y": 3584,
+          "Z": 42496,
+          "Room": 30
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the spikes model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 37,
+            "TexturedFace3": 109
+          }
+        ]
+      },
+      {
+        "Comments": "Add some spikes.",
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 39424,
+          "Y": 3584,
+          "Z": 42496,
+          "Room": 30
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the spikes model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 37,
+            "TexturedFace3": 109
+          }
+        ]
+      },
+      {
+        "Comments": "Add some spikes.",
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 28160,
+          "Y": -2048,
+          "Z": 85504,
+          "Room": 7
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the spikes model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 37,
+            "TexturedFace3": 109
+          }
+        ]
+      },
+      {
+        "Comments": "Add some spikes.",
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 38400,
+          "Y": -512,
+          "Z": 88576,
+          "Room": 5
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the boulder model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 38,
+            "TexturedFace3": 109,
+            "TexturedFace4": 105
+          }
+        ]
+      },
+      {
+        "Comments": "Add a boulder.",
+        "EMType": 51,
+        "TypeID": 38,
+        "Intensity": -1,
+        "Location": {
+          "X": 36352,
+          "Z": 45568,
+          "Room": 27
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 36352,
+            "Y": 3072,
+            "Z": 49664,
+            "Room": 27
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the clang-clang model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 42,
+            "TexturedFace3": 20,
+            "TexturedFace4": 104
+          }
+        ]
+      },
+      {
+        "Comments": "Add some clang-clang doors.",
+        "EMType": 51,
+        "TypeID": 42,
+        "Intensity": -1,
+        "Location": {
+          "X": 39936,
+          "Y": -2048,
+          "Z": 75264,
+          "Room": 14,
+          "Angle": 16384
+        },
+        "TargetRelocation": {
+          "X": 39424,
+          "Y": -2048,
+          "Z": 75264,
+          "Room": 14
+        }
+      },
+      {
+        "EMType": 61,
+        "EntityLocation": -1,
+        "Trigger": {
+          "TrigType": 1,
+          "Mask": 31,
+          "Timer": 1,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the clang-clang model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 42,
+            "TexturedFace3": 20,
+            "TexturedFace4": 104
+          }
+        ]
+      },
+      {
+        "Comments": "Add some clang-clang doors.",
+        "EMType": 51,
+        "TypeID": 42,
+        "Intensity": -1,
+        "Location": {
+          "X": 33792,
+          "Y": -2304,
+          "Z": 85504,
+          "Room": 3,
+          "Angle": 16384
+        },
+        "TargetRelocation": {
+          "X": 32256,
+          "Y": -2048,
+          "Z": 85504,
+          "Room": 7
+        }
+      },
+      {
+        "EMType": 61,
+        "EntityLocation": -1,
+        "Trigger": {
+          "TrigType": 1,
+          "Mask": 31,
+          "Timer": 1,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the clang-clang model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 42,
+            "TexturedFace3": 20,
+            "TexturedFace4": 104
+          }
+        ]
+      },
+      {
+        "Comments": "Add some clang-clang doors.",
+        "EMType": 51,
+        "TypeID": 42,
+        "Intensity": -1,
+        "Location": {
+          "X": 40960,
+          "Y": 6272,
+          "Z": 75264,
+          "Room": 50,
+          "Angle": 16384
+        },
+        "TargetRelocation": {
+          "X": 42496,
+          "Y": 6528,
+          "Z": 75264,
+          "Room": 50
+        }
+      },
+      {
+        "EMType": 61,
+        "EntityLocation": -1,
+        "Trigger": {
+          "TrigType": 1,
+          "Mask": 31,
+          "Timer": 1,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
+    ]
+  ],
   "AllWithin": [
     [
       [
@@ -1300,6 +1626,334 @@
             -1,
             -2,
             -3
+          ]
+        }
+      ],
+      [
+        {
+          "Comments": "Make a block puzzle room.",
+          "EMType": 126,
+          "Location": {
+            "X": 24576,
+            "Y": -256,
+            "Z": 77824
+          },
+          "LinkedLocation": {
+            "X": 27136,
+            "Y": -256,
+            "Z": 78336
+          },
+          "Textures": {
+            "Floor": 8,
+            "Ceiling": 3,
+            "WallAlignment": 5,
+            "Wall4": 3
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 5051
+          },
+          "Lights": [
+            {
+              "X": 2560,
+              "Y": -256,
+              "Z": 1536,
+              "Intensity1": 3000,
+              "Fade1": 2048
+            }
+          ],
+          "Height": 4,
+          "Width": 8,
+          "Depth": 7,
+          "FloorHeights": {
+            "-1": [
+              29
+            ],
+            "-127": [
+              11,
+              16,
+              18,
+              32,
+              33,
+              36,
+              37,
+              39
+            ]
+          }
+        },
+        {
+          "EMType": 7,
+          "Location": {
+            "X": 29184,
+            "Y": -256,
+            "Z": 79360,
+            "Room": -1
+          },
+          "SlantType": 1,
+          "XSlant": 1
+        },
+        {
+          "Comments": "Add visibility portals.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": -1,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": -1280,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": -1280,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": -256,
+                  "Z": 1024
+                },
+                {
+                  "X": 3072,
+                  "Y": -256,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "AdjoiningRoom": -1,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -1280,
+                  "Z": 4096
+                },
+                {
+                  "X": 2048,
+                  "Y": -1280,
+                  "Z": 4096
+                },
+                {
+                  "X": 2048,
+                  "Y": -256,
+                  "Z": 4096
+                },
+                {
+                  "X": 1024,
+                  "Y": -256,
+                  "Z": 4096
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Comments": "Add collisional portals.",
+          "EMType": 82,
+          "Portals": {
+            "-1": {
+              "0": [
+                {
+                  "X": 27136,
+                  "Y": -256,
+                  "Z": 78336,
+                  "Room": -1
+                }
+              ]
+            },
+            "0": {
+              "-1": [
+                {
+                  "X": 27136,
+                  "Y": -256,
+                  "Z": 79360
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Amend some faces to match the geometry.",
+          "EMType": 23,
+          "Modifications": [
+            {
+              "RoomNumber": -1,
+              "FaceIndex": 46,
+              "VertexChanges": {
+                "0": {
+                  "Y": 256
+                },
+                "3": {
+                  "Y": 256
+                }
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndex": 49,
+              "VertexChanges": {
+                "2": {
+                  "Y": 256
+                }
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndex": 53,
+              "VertexChanges": {
+                "1": {
+                  "Y": 256
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Comments": "Change a texture to look like the door to Vilcabamba.",
+          "EMType": 21,
+          "TextureMap": {
+            "771": {
+              "-1": {
+                "Rectangles": [
+                  70
+                ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Remove some faces.",
+          "EMType": 22,
+          "GeometryMap": {
+            "-1": {
+              "Rectangles": [
+                20,
+                31
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Ensure the pushblock model is available.",
+          "EMType": 145,
+          "Data": [
+            {
+              "ModelID": 49,
+              "TexturedFace4": 108
+            }
+          ]
+        },
+        {
+          "Comments": "Add some pushblocks.",
+          "EMType": 51,
+          "TypeID": 49,
+          "Intensity": -1,
+          "Location": {
+            "X": 30208,
+            "Y": -256,
+            "Z": 81408,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 49,
+          "Intensity": -1,
+          "Location": {
+            "X": 28160,
+            "Y": -256,
+            "Z": 79360,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 49,
+          "Intensity": -1,
+          "Location": {
+            "X": 27136,
+            "Y": -256,
+            "Z": 83456,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 45,
+          "EntityIndex": 1,
+          "NewEntityType": 49
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 1,
+          "TargetLocation": {
+            "X": 27136,
+            "Y": -256,
+            "Z": 79360,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Reposition Lara.",
+          "EMType": 44,
+          "TargetLocation": {
+            "X": 31232,
+            "Y": -256,
+            "Z": 79360,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Potential secret location will be moved into the new room.",
+          "EMType": 67,
+          "BaseLocation": {
+            "X": 27136,
+            "Y": -256,
+            "Z": 78336
+          },
+          "NewLocation": {
+            "X": 27136,
+            "Y": -256,
+            "Z": 83456,
+            "Room": -1
+          }
+        },
+        {
+          "EMType": 43,
+          "Types": [
+            111,
+            112,
+            113,
+            129,
+            130,
+            131,
+            132
+          ],
+          "SectorLocations": [
+            {
+              "X": 27136,
+              "Y": -256,
+              "Z": 78336
+            }
+          ],
+          "TargetLocation": {
+            "X": 27136,
+            "Y": -256,
+            "Z": 83456,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Auto-generate vertex lighting in the new room.",
+          "EMType": 128,
+          "RoomIndices": [
+            -1
           ]
         }
       ]
