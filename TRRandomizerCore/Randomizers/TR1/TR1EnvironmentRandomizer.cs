@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using TREnvironmentEditor;
 using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
+using TRLevelReader;
 using TRLevelReader.Helpers;
+using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
+using TRModelTransporter.Handlers;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
@@ -105,6 +109,15 @@ namespace TRRandomizerCore.Randomizers
 
         private void ApplyMappingToLevel(TR1CombinedLevel level, EMEditorMapping mapping)
         {
+            if ((level.Is(TRLevelNames.CAVES) || level.Is(TRLevelNames.FOLLY)) && level.Data.SoundMap[65] == -1)
+            {
+                // Caves and Folly have the swinging blade model (unused) but its SFX are missing - import here in case
+                // any mods want to make use of the model.
+                TRLevel vilcabamba = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TRLevelNames.VILCABAMBA));
+                SoundUtilities.ImportLevelSound(level.Data, vilcabamba, new short[] { 65 });
+                SoundUtilities.ResortSoundIndices(level.Data);
+            }
+
             EMType[] emptyExclusions = new EMType[] { };
 
             // Process enforced packs first. We do not pass disallowed types here.

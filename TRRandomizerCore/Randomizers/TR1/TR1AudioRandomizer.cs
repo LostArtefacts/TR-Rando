@@ -147,14 +147,6 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeSoundEffects(TR1CombinedLevel level)
         {
-            if (level.Is(TRLevelNames.CAVES) && level.Data.SoundMap[65] == -1)
-            {
-                // Caves has the swinging blade model (unused) but its SFX are missing - import here in case
-                // any other class wants to make use of the model.
-                TRLevel vilcabamba = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TRLevelNames.VILCABAMBA));
-                SoundUtilities.ImportLevelSound(level.Data, vilcabamba, new short[] { 65 });
-            }
-
             if (_sfxCategories.Count == 0)
             {
                 // We haven't selected any SFX categories to change.
