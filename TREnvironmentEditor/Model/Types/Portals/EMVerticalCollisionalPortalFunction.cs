@@ -10,6 +10,7 @@ namespace TREnvironmentEditor.Model.Types
         public EMLocation Ceiling { get; set; }
         public EMLocation Floor { get; set; }
         public bool AllSectors { get; set; }
+        public bool InheritFloorBox { get; set; }
 
         public override void ApplyToLevel(TRLevel level)
         {
@@ -48,6 +49,11 @@ namespace TREnvironmentEditor.Model.Types
                 {
                     ceilingSector.RoomBelow = (byte)floorRoom;
                     floorSector.RoomAbove = (byte)ceilingRoom;
+
+                    if (InheritFloorBox)
+                    {
+                        ceilingSector.BoxIndex = floorSector.BoxIndex;
+                    }
                 }
             }
         }
@@ -89,6 +95,11 @@ namespace TREnvironmentEditor.Model.Types
                 {
                     ceilingSector.RoomBelow = (byte)floorRoom;
                     floorSector.RoomAbove = (byte)ceilingRoom;
+
+                    if (InheritFloorBox)
+                    {
+                        ceilingSector.BoxIndex = floorSector.BoxIndex;
+                    }
                 }
             }
         }
@@ -130,6 +141,11 @@ namespace TREnvironmentEditor.Model.Types
                 {
                     ceilingSector.RoomBelow = (byte)floorRoom;
                     floorSector.RoomAbove = (byte)ceilingRoom;
+
+                    if (InheritFloorBox)
+                    {
+                        ceilingSector.BoxIndex = floorSector.BoxIndex;
+                    }
                 }
             }
         }
