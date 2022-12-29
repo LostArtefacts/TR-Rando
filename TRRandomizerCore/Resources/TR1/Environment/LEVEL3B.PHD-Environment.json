@@ -147,6 +147,91 @@
           "Room": 39
         }
       }
+    ],
+    [
+      {
+        "Comments": "Ensure the Damocles sword model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 43,
+            "TextureMap": {
+              "745": 1016,
+              "746": 1016,
+              "747": 1016,
+              "748": 1016,
+              "749": 16
+            }
+          }
+        ]
+      },
+      {
+        "Comments": "Add a sword.",
+        "EMType": 51,
+        "TypeID": 43,
+        "Flags": 256,
+        "Intensity": 4096,
+        "Location": {
+          "X": 58880,
+          "Y": 4608,
+          "Z": 61952,
+          "Room": 20
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 59904,
+            "Y": 6528,
+            "Z": 61952,
+            "Room": 47
+          }
+        ],
+        "Trigger": {
+          "OneShot": true,
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Another boulder.",
+        "EMType": 51,
+        "TypeID": 38,
+        "Flags": 256,
+        "Intensity": -1,
+        "Location": {
+          "X": 73216,
+          "Y": 3072,
+          "Z": 65024,
+          "Room": 5
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 73216,
+            "Y": 4608,
+            "Z": 71168,
+            "Room": 38
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
     ]
   ],
   "AllWithin": [
