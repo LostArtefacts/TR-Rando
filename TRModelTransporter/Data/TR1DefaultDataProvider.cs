@@ -276,6 +276,7 @@ namespace TRModelTransporter.Data
             [TREntities.Bear] = new short[] { 12, 16 },
             [TREntities.Centaur] = new short[] { 104 },
             [TREntities.DamoclesSword] = new short[] { 103 },
+            [TREntities.DartEmitter] = new short[] { 151 },
             [TREntities.Gorilla] = new short[] { 90, 91, 101 },
             [TREntities.Larson] = new short[] { 78 },
             [TREntities.Lion] = new short[] { 85, 86, 87 },
