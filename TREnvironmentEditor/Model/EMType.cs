@@ -75,6 +75,7 @@
         CreateRoom = 126,
         CreateWall = 127,
         GenerateLight = 128,
+        MoveCamera = 129,
 
         // Models
         ImportModel = 141,
