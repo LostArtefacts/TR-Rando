@@ -674,6 +674,176 @@
           ]
         }
       }
+    ],
+    [
+      {
+        "Comments": "Ensure the boulder model is available and add one.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 38,
+            "TexturedFace3": 154,
+            "TexturedFace4": 90
+          }
+        ]
+      },
+      {
+        "EMType": 51,
+        "TypeID": 38,
+        "Intensity": -1,
+        "Location": {
+          "X": 71168,
+          "Y": -2048,
+          "Z": 54784,
+          "Room": 68,
+          "Angle": -16384
+        }
+      },
+      {
+        "EMType": 68,
+        "Location": {
+          "X": 65024,
+          "Z": 54784,
+          "Room": 68
+        },
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the boulder model is available and add one.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 38,
+            "TexturedFace3": 154,
+            "TexturedFace4": 90
+          }
+        ]
+      },
+      {
+        "EMType": 51,
+        "TypeID": 38,
+        "Intensity": -1,
+        "Location": {
+          "X": 71168,
+          "Y": -2048,
+          "Z": 57856,
+          "Room": 68,
+          "Angle": -16384
+        }
+      },
+      {
+        "EMType": 68,
+        "Location": {
+          "X": 67072,
+          "Z": 57856,
+          "Room": 68
+        },
+        "Actions": [
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the boulder model is available and add one.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 38,
+            "TexturedFace3": 154,
+            "TexturedFace4": 90
+          }
+        ]
+      },
+      {
+        "EMType": 51,
+        "TypeID": 38,
+        "Intensity": -1,
+        "Location": {
+          "X": 49664,
+          "Y": 6400,
+          "Z": 40448,
+          "Room": 58
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 49664,
+            "Y": 7680,
+            "Z": 44544,
+            "Room": 63
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the clang-clang model is available and add one.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 42,
+            "TexturedFace3": 175,
+            "TexturedFace4": 84
+          }
+        ]
+      },
+      {
+        "EMType": 51,
+        "TypeID": 42,
+        "Intensity": -1,
+        "Location": {
+          "X": 44544,
+          "Y": 7552,
+          "Z": 40448,
+          "Room": 58,
+          "Angle": -16384
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 44544,
+            "Y": 7680,
+            "Z": 40448,
+            "Room": 58
+          },
+          {
+            "X": 43520,
+            "Y": 7680,
+            "Z": 40448,
+            "Room": 58
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Timer": 1,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
     ]
   ],
   "AllWithin": [
