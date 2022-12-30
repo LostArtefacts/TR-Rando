@@ -233,6 +233,214 @@
         "EntityIndex": 16,
         "Intensity1": 4096
       }
+    ],
+    [
+      {
+        "Comments": "Add some spikes.",
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 27136,
+          "Y": -512,
+          "Z": 20992,
+          "Room": 5
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 28160,
+          "Y": -512,
+          "Z": 20992,
+          "Room": 5
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Add some spikes.",
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 40448,
+          "Y": -2304,
+          "Z": 35328,
+          "Room": 28
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 40448,
+          "Y": -2304,
+          "Z": 34304,
+          "Room": 28
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 37,
+        "Intensity": 4096,
+        "Location": {
+          "X": 40448,
+          "Y": -2304,
+          "Z": 33280,
+          "Room": 28
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the swinging blade model is available.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 36,
+            "TextureMap": {
+              "666": 80,
+              "667": 80,
+              "668": 80,
+              "669": 910,
+              "670": 80,
+              "671": 716,
+              "672": 716,
+              "673": 716,
+              "674": 716,
+              "675": 716,
+              "676": 716,
+              "677": 716
+            }
+          }
+        ]
+      },
+      {
+        "Comments": "Add some blades.",
+        "EMType": 51,
+        "TypeID": 36,
+        "Intensity": -1,
+        "Location": {
+          "X": 46592,
+          "Y": 3840,
+          "Z": 41472,
+          "Room": 34,
+          "Angle": -16384
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 36,
+        "Intensity": -1,
+        "Location": {
+          "X": 46592,
+          "Y": 3840,
+          "Z": 40448,
+          "Room": 34,
+          "Angle": -16384
+        }
+      },
+      {
+        "EMType": 68,
+        "Location": {
+          "X": 49664,
+          "Y": 4096,
+          "Z": 42496,
+          "Room": 65
+        },
+        "Actions": [
+          {
+            "Parameter": -2
+          },
+          {
+            "Parameter": -1
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "Comments": "Ensure the Damocles sword model is available and add some.",
+        "EMType": 145,
+        "Data": [
+          {
+            "ModelID": 43,
+            "TextureMap": {
+              "745": 912,
+              "746": 912,
+              "747": 909,
+              "748": 912,
+              "749": 183
+            }
+          }
+        ]
+      },
+      {
+        "EMType": 51,
+        "TypeID": 43,
+        "Flags": 256,
+        "Intensity": 4096,
+        "Location": {
+          "X": 36352,
+          "Y": -5632,
+          "Z": 46592,
+          "Room": 51
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 43,
+        "Flags": 256,
+        "Intensity": 4096,
+        "Location": {
+          "X": 35328,
+          "Y": -5632,
+          "Z": 48640,
+          "Room": 51
+        }
+      },
+      {
+        "EMType": 51,
+        "TypeID": 43,
+        "Flags": 256,
+        "Intensity": 4096,
+        "Location": {
+          "X": 37376,
+          "Y": -5632,
+          "Z": 48640,
+          "Room": 51
+        }
+      },
+      {
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 40448,
+            "Y": -4352,
+            "Z": 45568,
+            "Room": 51
+          }
+        ],
+        "Trigger": {
+          "OneShot": true,
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": -3
+            },
+            {
+              "Parameter": -2
+            },
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
     ]
   ],
   "AllWithin": [
@@ -1783,6 +1991,273 @@
                 }
               }
             ]
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Add fake doors to room 12 so we can repurpose the actual entities.",
+          "EMType": 26,
+          "Quads": {
+            "12": [
+              {
+                "Vertices": [
+                  27,
+                  28,
+                  24,
+                  17
+                ],
+                "Texture": 620
+              },
+              {
+                "Vertices": [
+                  28,
+                  32,
+                  30,
+                  24
+                ],
+                "Texture": 624
+              }
+            ]
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Import the clang-clang model.",
+            "EMType": 145,
+            "Data": [
+              {
+                "ModelID": 42,
+                "TexturedFace3": 183,
+                "TexturedFace4": 114
+              }
+            ]
+          },
+          {
+            "Comments": "Change the doors into clang-clang doors and set them up elsewhere.",
+            "EMType": 45,
+            "EntityIndex": 18,
+            "NewEntityType": 42
+          },
+          {
+            "EMType": 45,
+            "EntityIndex": 19,
+            "NewEntityType": 42
+          },
+          {
+            "EMType": 44,
+            "EntityIndex": 18,
+            "TargetLocation": {
+              "X": 38400,
+              "Y": -1792,
+              "Z": 44544,
+              "Room": 56,
+              "Angle": -32768
+            }
+          },
+          {
+            "EMType": 61,
+            "Locations": [
+              {
+                "X": 38400,
+                "Y": -1792,
+                "Z": 44544,
+                "Room": 56
+              },
+              {
+                "X": 38400,
+                "Y": -1792,
+                "Z": 43520,
+                "Room": 56
+              }
+            ],
+            "Trigger": {
+              "TrigType": 1,
+              "Mask": 31,
+              "Timer": 1,
+              "Actions": [
+                {
+                  "Parameter": 18
+                }
+              ]
+            }
+          },
+          {
+            "EMType": 44,
+            "EntityIndex": 19,
+            "TargetLocation": {
+              "X": 48640,
+              "Y": 1024,
+              "Z": 42496,
+              "Room": 50,
+              "Angle": -32768
+            }
+          },
+          {
+            "EMType": 61,
+            "Locations": [
+              {
+                "X": 48640,
+                "Y": 1024,
+                "Z": 42496,
+                "Room": 50
+              },
+              {
+                "X": 48640,
+                "Y": 1024,
+                "Z": 41472,
+                "Room": 50
+              }
+            ],
+            "Trigger": {
+              "TrigType": 1,
+              "Mask": 31,
+              "Timer": 1,
+              "Actions": [
+                {
+                  "Parameter": 19
+                }
+              ]
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Import the clang-clang model.",
+            "EMType": 145,
+            "Data": [
+              {
+                "ModelID": 42,
+                "TexturedFace3": 183,
+                "TexturedFace4": 114
+              }
+            ]
+          },
+          {
+            "Comments": "Change the doors into clang-clang doors and set them up elsewhere.",
+            "EMType": 45,
+            "EntityIndex": 18,
+            "NewEntityType": 42
+          },
+          {
+            "EMType": 45,
+            "EntityIndex": 19,
+            "NewEntityType": 42
+          },
+          {
+            "EMType": 44,
+            "EntityIndex": 18,
+            "TargetLocation": {
+              "X": 31232,
+              "Z": 40448,
+              "Room": 47
+            }
+          },
+          {
+            "EMType": 44,
+            "EntityIndex": 19,
+            "TargetLocation": {
+              "X": 31232,
+              "Z": 41472,
+              "Room": 47
+            }
+          },
+          {
+            "EMType": 61,
+            "ExpandedLocations": {
+              "Location": {
+                "X": 31232,
+                "Z": 40448,
+                "Room": 47
+              },
+              "ExpandX": 1,
+              "ExpandZ": 3
+            },
+            "Trigger": {
+              "TrigType": 1,
+              "Mask": 31,
+              "Timer": 1,
+              "Actions": [
+                {
+                  "Parameter": 18
+                },
+                {
+                  "Parameter": 19
+                }
+              ]
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Import the clang-clang model.",
+            "EMType": 145,
+            "Data": [
+              {
+                "ModelID": 42,
+                "TexturedFace3": 183,
+                "TexturedFace4": 114
+              }
+            ]
+          },
+          {
+            "Comments": "Change one of the doors into clang-clang doors and the other into bait.",
+            "EMType": 45,
+            "EntityIndex": 18,
+            "NewEntityType": 42
+          },
+          {
+            "EMType": 45,
+            "EntityIndex": 19,
+            "NewEntityType": 94
+          },
+          {
+            "EMType": 44,
+            "EntityIndex": 18,
+            "TargetLocation": {
+              "X": 23040,
+              "Y": 3328,
+              "Z": 15872,
+              "Room": 11,
+              "Angle": -16384
+            }
+          },
+          {
+            "EMType": 44,
+            "EntityIndex": 19,
+            "TargetLocation": {
+              "X": 22016,
+              "Y": 3328,
+              "Z": 15872,
+              "Room": 11
+            }
+          },
+          {
+            "EMType": 61,
+            "ExpandedLocations": {
+              "Location": {
+                "X": 22016,
+                "Y": 3328,
+                "Z": 15872,
+                "Room": 11
+              },
+              "ExpandX": 2,
+              "ExpandZ": 1
+            },
+            "Trigger": {
+              "TrigType": 1,
+              "Mask": 31,
+              "Timer": 1,
+              "Actions": [
+                {
+                  "Parameter": 18
+                }
+              ]
+            }
           }
         ]
       ]
