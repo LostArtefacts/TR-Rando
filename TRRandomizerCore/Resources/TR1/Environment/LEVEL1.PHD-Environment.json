@@ -1307,6 +1307,27 @@
           }
         },
         {
+          "Comments": "Rotate the original doors so they open inwards.",
+          "EMType": 44,
+          "EntityIndex": 12,
+          "TargetLocation": {
+            "X": 43520,
+            "Y": 7168,
+            "Z": 86528,
+            "Room": 11
+          }
+        },
+        {
+          "EMType": 44,
+          "EntityIndex": 13,
+          "TargetLocation": {
+            "X": 42496,
+            "Y": 7168,
+            "Z": 86528,
+            "Room": 11
+          }
+        },
+        {
           "EMType": 24,
           "Locations": [
             {
