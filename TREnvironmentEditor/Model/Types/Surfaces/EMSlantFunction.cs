@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
@@ -120,7 +121,31 @@ namespace TREnvironmentEditor.Model.Types
 
         protected override int GetEntityYShift(int clicks)
         {
-            return clicks * 256 / 2;
+            List<sbyte> corners = new List<sbyte> { 0, 0, 0, 0 };
+            if (XSlant.HasValue && XSlant > 0)
+            {
+                corners[0] += XSlant.Value;
+                corners[1] += XSlant.Value;
+            }
+            else if (XSlant.HasValue && XSlant < 0)
+            {
+                corners[2] -= XSlant.Value;
+                corners[3] -= XSlant.Value;
+            }
+
+            if (ZSlant.HasValue && ZSlant > 0)
+            {
+                corners[0] += ZSlant.Value;
+                corners[2] += ZSlant.Value;
+            }
+            else if (ZSlant.HasValue && ZSlant < 0)
+            {
+                corners[1] -= ZSlant.Value;
+                corners[3] -= ZSlant.Value;
+            }
+
+            // Half-way down the slope
+            return (clicks * 256) + (corners.Max() - corners.Min()) * 256 / 2;
         }
     }
 }

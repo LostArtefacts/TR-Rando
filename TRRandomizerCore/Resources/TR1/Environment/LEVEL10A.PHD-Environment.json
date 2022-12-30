@@ -45,6 +45,203 @@
           }
         ]
       }
+    },
+    {
+      "Comments": "Increase the slope near the boat.",
+      "EMType": 7,
+      "Location": {
+        "X": 47616,
+        "Y": -6400,
+        "Z": 26112,
+        "Room": 3
+      },
+      "FloorClicks": -1,
+      "SlantType": 1,
+      "XSlant": -3
+    },
+    {
+      "EMType": 7,
+      "Location": {
+        "X": 47616,
+        "Y": -6400,
+        "Z": 26112,
+        "Room": 16
+      },
+      "FloorClicks": -1,
+      "SlantType": 1,
+      "XSlant": -3
+    },
+    {
+      "EMType": 7,
+      "Location": {
+        "X": 46592,
+        "Y": -6144,
+        "Z": 26112,
+        "Room": 3
+      },
+      "FloorClicks": -1,
+      "SlantType": 1,
+      "XSlant": 5
+    },
+    {
+      "EMType": 7,
+      "Location": {
+        "X": 46592,
+        "Y": -6144,
+        "Z": 26112,
+        "Room": 16
+      },
+      "FloorClicks": -1,
+      "SlantType": 1,
+      "XSlant": 5
+    },
+    {
+      "Comments": "Move some faces to fit the ramp.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 3,
+          "FaceIndex": 117,
+          "VertexChanges": {
+            "1": {
+              "Y": -256
+            },
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceIndex": 117,
+          "VertexChanges": {
+            "1": {
+              "Y": -256
+            },
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 3,
+          "FaceType": 1,
+          "FaceIndex": 17,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 3,
+          "FaceType": 1,
+          "FaceIndex": 11,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceType": 1,
+          "FaceIndex": 17,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceType": 1,
+          "FaceIndex": 11,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 3,
+          "FaceIndex": 119,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceIndex": 119,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 3,
+          "FaceIndex": 87,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceIndex": 87,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 3,
+          "FaceIndex": 82,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceIndex": 82,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Any pickups on the old slope will be moved to the floor.",
+      "EMType": 43,
+      "SectorLocations": [
+        {
+          "X": 47616,
+          "Y": -6400,
+          "Z": 26112,
+          "Room": 3
+        }
+      ],
+      "TargetLocation": {
+        "X": 46592,
+        "Y": -5632,
+        "Z": 25088,
+        "Room": 3
+      }
     }
   ],
   "Any": [
@@ -494,205 +691,6 @@
               "Parameter": 58
             }
           ]
-        }
-      }
-    ],
-    [
-      {
-        "Comments": "Increase the slope near the boat.",
-        "EMType": 7,
-        "Location": {
-          "X": 47616,
-          "Y": -6400,
-          "Z": 26112,
-          "Room": 3
-        },
-        "FloorClicks": -1,
-        "SlantType": 1,
-        "XSlant": -3
-      },
-      {
-        "EMType": 7,
-        "Location": {
-          "X": 47616,
-          "Y": -6400,
-          "Z": 26112,
-          "Room": 16
-        },
-        "FloorClicks": -1,
-        "SlantType": 1,
-        "XSlant": -3
-      },
-      {
-        "EMType": 7,
-        "Location": {
-          "X": 46592,
-          "Y": -6144,
-          "Z": 26112,
-          "Room": 3
-        },
-        "FloorClicks": -1,
-        "SlantType": 1,
-        "XSlant": 5
-      },
-      {
-        "EMType": 7,
-        "Location": {
-          "X": 46592,
-          "Y": -6144,
-          "Z": 26112,
-          "Room": 16
-        },
-        "FloorClicks": -1,
-        "SlantType": 1,
-        "XSlant": 5
-      },
-      {
-        "Comments": "Move some faces to fit the ramp.",
-        "EMType": 23,
-        "Modifications": [
-          {
-            "RoomNumber": 3,
-            "FaceIndex": 117,
-            "VertexChanges": {
-              "1": {
-                "Y": -256
-              },
-              "2": {
-                "Y": -256
-              }
-            }
-          },
-          {
-            "RoomNumber": 16,
-            "FaceIndex": 117,
-            "VertexChanges": {
-              "1": {
-                "Y": -256
-              },
-              "2": {
-                "Y": -256
-              }
-            }
-          },
-          {
-            "RoomNumber": 3,
-            "FaceType": 1,
-            "FaceIndex": 17,
-            "VertexChanges": {
-              "2": {
-                "Y": -256
-              }
-            }
-          },
-          {
-            "RoomNumber": 3,
-            "FaceType": 1,
-            "FaceIndex": 11,
-            "VertexChanges": {
-              "0": {
-                "Y": -256
-              }
-            }
-          },
-          {
-            "RoomNumber": 16,
-            "FaceType": 1,
-            "FaceIndex": 17,
-            "VertexChanges": {
-              "2": {
-                "Y": -256
-              }
-            }
-          },
-          {
-            "RoomNumber": 16,
-            "FaceType": 1,
-            "FaceIndex": 11,
-            "VertexChanges": {
-              "0": {
-                "Y": -256
-              }
-            }
-          },
-          {
-            "RoomNumber": 3,
-            "FaceIndex": 119,
-            "VertexChanges": {
-              "0": {
-                "Y": -256
-              }
-            }
-          },
-          {
-            "RoomNumber": 16,
-            "FaceIndex": 119,
-            "VertexChanges": {
-              "0": {
-                "Y": -256
-              }
-            }
-          },
-          {
-            "RoomNumber": 3,
-            "FaceIndex": 87,
-            "VertexChanges": {
-              "2": {
-                "Y": -256
-              }
-            }
-          },
-          {
-            "RoomNumber": 16,
-            "FaceIndex": 87,
-            "VertexChanges": {
-              "2": {
-                "Y": -256
-              }
-            }
-          },
-          {
-            "RoomNumber": 3,
-            "FaceIndex": 82,
-            "VertexChanges": {
-              "2": {
-                "Y": -256
-              },
-              "3": {
-                "Y": -256
-              }
-            }
-          },
-          {
-            "RoomNumber": 16,
-            "FaceIndex": 82,
-            "VertexChanges": {
-              "2": {
-                "Y": -256
-              },
-              "3": {
-                "Y": -256
-              }
-            }
-          }
-        ]
-      },
-      {
-        "Comments": "Any pickups on the old slope will be moved to the floor.",
-        "EMType": 43,
-        "SectorLocations": [
-          {
-            "X": 47616,
-            "Y": -6400,
-            "Z": 26112,
-            "Room": 3
-          }
-        ],
-        "TargetLocation": {
-          "X": 46592,
-          "Y": -5632,
-          "Z": 25088,
-          "Room": 3
         }
       }
     ]
