@@ -948,7 +948,7 @@ namespace TRRandomizerCore.Randomizers
                         TRSecretModelAllocation<TREntities> allocation = _importAllocations[level];
 
                         // Get the artefacts into the level and refresh the model list
-                        TR1ModelImporter importer = new TR1ModelImporter
+                        TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
                         {
                             Level = level.Data,
                             LevelName = level.Name,

@@ -265,7 +265,7 @@ namespace TRRandomizerCore.Randomizers
 
             private void ImportBraid(TR1CombinedLevel level)
             {
-                TR1ModelImporter importer = new TR1ModelImporter
+                TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
                 {
                     Level = level.Data,
                     LevelName = level.Name,
