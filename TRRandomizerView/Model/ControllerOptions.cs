@@ -2640,6 +2640,8 @@ namespace TRRandomizerView.Model
             _allowEmptyEggs.IsAvailable = IsAtlanteanEggBehaviourTypeSupported;
             _hideEnemies.IsAvailable = IsHiddenEnemiesTypeSupported;
             _removeLevelEndingLarson.IsAvailable = IsLarsonBehaviourTypeSupported;
+
+            _randomizeLadders.IsAvailable = !IsTR1;
         }
 
         public void Load(TRRandomizerController controller)

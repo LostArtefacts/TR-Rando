@@ -454,7 +454,7 @@
             <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
                 <windows:AdvancedWindow Title="Randomize Environment (Advanced)"
                                         MainDescription="Customize the environmental randomization."
-                                        HasBoolItems="{Binding Data.IsTR2, Source={StaticResource proxy}}"
+                                        HasBoolItems="{Binding Data.IsTR3, Source={StaticResource proxy}, Converter={StaticResource InverseBooleanConverter}}"
                                         HasMirroring="True"
                                         BoolItemsSource="{Binding Data.EnvironmentBoolItemControls, Source={StaticResource proxy}}"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
