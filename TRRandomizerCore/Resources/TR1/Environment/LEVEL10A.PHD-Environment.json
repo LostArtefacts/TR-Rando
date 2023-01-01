@@ -242,6 +242,17 @@
         "Z": 25088,
         "Room": 3
       }
+    },
+    {
+      "Comments": "Move the boat camera so you don't see the already moved boat in the flipmap.",
+      "EMType": 129,
+      "CameraIndex": 7,
+      "NewLocation": {
+        "X": 53760,
+        "Y": -7296,
+        "Z": 28160,
+        "Room": 3
+      }
     }
   ],
   "Any": [
