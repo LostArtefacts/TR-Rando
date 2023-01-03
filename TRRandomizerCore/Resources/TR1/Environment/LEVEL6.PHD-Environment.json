@@ -233,6 +233,32 @@
           "Y": -256
         }
       }
+    },
+    {
+      "Comments": "Add the missing faces in the pit in the OG secret garden area.",
+      "EMType": 26,
+      "Quads": {
+        "2": [
+          {
+            "Vertices": [
+              50,
+              52,
+              58,
+              57
+            ],
+            "Texture": 9
+          },
+          {
+            "Vertices": [
+              54,
+              50,
+              57,
+              56
+            ],
+            "Texture": 9
+          }
+        ]
+      }
     }
   ],
   "Any": [

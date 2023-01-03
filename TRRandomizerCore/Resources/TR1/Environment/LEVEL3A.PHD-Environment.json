@@ -51,7 +51,7 @@
       ]
     },
     {
-      "Comments": "Add the missing underwater texture when entering the tomb.",
+      "Comments": "Add the missing underwater texture when entering the tomb and at the top of the waterfall.",
       "EMType": 26,
       "Quads": {
         "90": [
@@ -61,6 +61,17 @@
               42,
               65,
               68
+            ],
+            "Texture": 10
+          }
+        ],
+        "26": [
+          {
+            "Vertices": [
+              3,
+              0,
+              5,
+              4
             ],
             "Texture": 10
           }
