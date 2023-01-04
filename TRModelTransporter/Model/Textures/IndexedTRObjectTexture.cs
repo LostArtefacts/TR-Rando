@@ -135,5 +135,39 @@ namespace TRModelTransporter.Model.Textures
         {
             return 613946457 + EqualityComparer<TRObjectTexture>.Default.GetHashCode(_texture);
         }
+
+        public override AbstractIndexedTRTexture Clone()
+        {
+            TRObjectTexture copiedTexture = new TRObjectTexture
+            {
+                AtlasAndFlag = Texture.AtlasAndFlag,
+                Attribute = Texture.Attribute,
+                Vertices = new TRObjectTextureVert[Texture.Vertices.Length]
+            };
+
+            for (int i = 0; i < Texture.Vertices.Length; i++)
+            {
+                copiedTexture.Vertices[i] = new TRObjectTextureVert
+                {
+                    XCoordinate = new FixedFloat16
+                    {
+                        Fraction = Texture.Vertices[i].XCoordinate.Fraction,
+                        Whole = Texture.Vertices[i].XCoordinate.Whole
+                    },
+                    YCoordinate = new FixedFloat16
+                    {
+                        Fraction = Texture.Vertices[i].YCoordinate.Fraction,
+                        Whole = Texture.Vertices[i].YCoordinate.Whole
+                    }
+                };
+            }
+
+            return new IndexedTRObjectTexture
+            {
+                Index = Index,
+                Classification = Classification,
+                Texture = copiedTexture
+            };
+        }
     }
 }

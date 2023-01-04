@@ -33,5 +33,26 @@ namespace TRModelTransporter.Model.Textures
             Texture.X += (byte)xDiff;
             Texture.Y += (byte)yDiff;
         }
+
+        public override AbstractIndexedTRTexture Clone()
+        {
+            return new IndexedTRSpriteTexture
+            {
+                Index = Index,
+                Classification = Classification,
+                Texture = new TRSpriteTexture
+                {
+                    Atlas = Texture.Atlas,
+                    BottomSide = Texture.BottomSide,
+                    Height = Texture.Height,
+                    Width = Texture.Width,
+                    LeftSide = Texture.LeftSide,
+                    RightSide = Texture.RightSide,
+                    TopSide = Texture.TopSide,
+                    X = Texture.X,
+                    Y = Texture.Y
+                }
+            };
+        }
     }
 }
