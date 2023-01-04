@@ -621,15 +621,26 @@ namespace TRRandomizerCore.Randomizers
         {
             if (TR1EntityUtilities.IsKeyType(itemType))
             {
+                PopulateScriptStrings(itemType - TREntities.Key1_S_P, level.Script.Keys, "K");
                 level.Script.Keys.Add(name);
             }
             else if (TR1EntityUtilities.IsPuzzleType(itemType))
             {
+                PopulateScriptStrings(itemType - TREntities.Puzzle1_S_P, level.Script.Puzzles, "P");
                 level.Script.Puzzles.Add(name);
             }
             else if (TR1EntityUtilities.IsQuestType(itemType))
             {
+                PopulateScriptStrings(itemType - TREntities.Quest1_S_P, level.Script.Pickups, "Q");
                 level.Script.Pickups.Add(name);
+            }
+        }
+
+        private void PopulateScriptStrings(int index, List<string> gameStrings, string id)
+        {
+            while (index > gameStrings.Count)
+            {
+                gameStrings.Add(id + (gameStrings.Count + 1));
             }
         }
 
