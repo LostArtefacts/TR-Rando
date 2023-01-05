@@ -2473,6 +2473,13 @@
       "Room": 68,
       "Difficulty": "Hard",
       "RequiresGlitch": true
+    },
+    {
+      "X": 30720,
+      "Y": -7168,
+      "Z": 35328,
+      "Room": 15,
+      "RequiresGlitch": true
     }
   ],
   "LEVEL8B.PHD": [
@@ -2752,6 +2759,14 @@
       "Y": -3840,
       "Z": 18944,
       "Room": 13,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 35871,
+      "Y": -6352,
+      "Z": 25517,
+      "Room": 13,
+      "Difficulty": "Hard",
       "RequiresGlitch": true
     }
   ],
