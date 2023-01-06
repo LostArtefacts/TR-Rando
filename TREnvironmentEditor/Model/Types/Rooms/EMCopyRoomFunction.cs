@@ -18,6 +18,7 @@ namespace TREnvironmentEditor.Model.Types
         public short RoomIndex { get; set; }
         public EMLocation NewLocation { get; set; }
         public EMLocation LinkedLocation { get; set; }
+        public Dictionary<sbyte, List<int>> FloorHeights { get; set; }
 
         public override void ApplyToLevel(TRLevel level)
         {
@@ -149,7 +150,7 @@ namespace TREnvironmentEditor.Model.Types
 
             for (int i = 0; i < newRoom.Sectors.Length; i++)
             {
-                newRoom.Sectors[i] = RebuildSector(baseRoom.Sectors[i], floorData, ydiff);
+                newRoom.Sectors[i] = RebuildSector(baseRoom.Sectors[i], i, floorData, ydiff, baseRoom.Info);
             }
 
             floorData.WriteToLevel(level);
@@ -304,7 +305,7 @@ namespace TREnvironmentEditor.Model.Types
 
             for (int i = 0; i < newRoom.SectorList.Length; i++)
             {
-                newRoom.SectorList[i] = RebuildSector(baseRoom.SectorList[i], floorData, ydiff);
+                newRoom.SectorList[i] = RebuildSector(baseRoom.SectorList[i], i, floorData, ydiff, baseRoom.Info);
             }
 
             floorData.WriteToLevel(level);
@@ -460,7 +461,7 @@ namespace TREnvironmentEditor.Model.Types
 
             for (int i = 0; i < newRoom.Sectors.Length; i++)
             {
-                newRoom.Sectors[i] = RebuildSector(baseRoom.Sectors[i], floorData, ydiff);
+                newRoom.Sectors[i] = RebuildSector(baseRoom.Sectors[i], i, floorData, ydiff, baseRoom.Info);
             }
 
             floorData.WriteToLevel(level);
@@ -479,7 +480,7 @@ namespace TREnvironmentEditor.Model.Types
             level.NumRooms++;
         }
 
-        private TRRoomSector RebuildSector(TRRoomSector originalSector, FDControl floorData, int ydiff)
+        private TRRoomSector RebuildSector(TRRoomSector originalSector, int sectorIndex, FDControl floorData, int ydiff, TRRoomInfo oldRoomInfo)
         {
             int sectorYDiff = 0;
             // Only change the sector if it's not impenetrable
@@ -488,12 +489,33 @@ namespace TREnvironmentEditor.Model.Types
                 sectorYDiff = ydiff / ClickSize;
             }
 
+            sbyte ceiling = originalSector.Ceiling;
+            sbyte floor = originalSector.Floor;
+
+            sbyte? customHeight = GetSectorHeight(sectorIndex);
+            bool wallOpened = false;
+            if (customHeight.HasValue)
+            {
+                floor = (sbyte)(oldRoomInfo.YBottom / ClickSize);
+                floor += customHeight.Value;
+
+                if (originalSector.IsImpenetrable)
+                {
+                    // This is effectively a promise that this sector is no longer
+                    // going to be a wall, so reset it to a standard sector.
+                    ceiling = (sbyte)(oldRoomInfo.YTop / ClickSize);
+                    sectorYDiff = ydiff / ClickSize;
+                }
+
+                wallOpened = originalSector.IsImpenetrable || originalSector.BoxIndex == ushort.MaxValue;
+            }
+
             TRRoomSector newSector = new TRRoomSector
             {
                 BoxIndex = ushort.MaxValue,
-                Ceiling = (sbyte)(originalSector.Ceiling + sectorYDiff),
+                Ceiling = (sbyte)(ceiling + sectorYDiff),
                 FDIndex = 0, // Initialise to no FD
-                Floor = (sbyte)(originalSector.Floor + sectorYDiff),
+                Floor = (sbyte)(floor + sectorYDiff),
                 RoomAbove = _noRoom,
                 RoomBelow = _noRoom
             };
@@ -510,8 +532,11 @@ namespace TREnvironmentEditor.Model.Types
                     {
                         case FDFunctions.PortalSector:
                             // This portal will no longer be valid in the new room's position,
-                            // so block off the wall
-                            newSector.Floor = newSector.Ceiling = _solidSector;
+                            // so block off the wall provided we haven't opened the wall above.
+                            if (!wallOpened)
+                            {
+                                newSector.Floor = newSector.Ceiling = _solidSector;
+                            }
                             break;
                         case FDFunctions.FloorSlant:
                             FDSlantEntry slantEntry = entry as FDSlantEntry;
@@ -591,6 +616,22 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             return newSector;
+        }
+
+        private sbyte? GetSectorHeight(int sectorIndex)
+        {
+            if (FloorHeights != null)
+            {
+                foreach (sbyte height in FloorHeights.Keys)
+                {
+                    if (FloorHeights[height].Contains(sectorIndex))
+                    {
+                        return height;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }
