@@ -3688,13 +3688,44 @@
       },
       "OnFalse": [
         {
-          "EMType": 67,
-          "BaseLocation": {
-            "X": 53760,
-            "Z": 52736,
-            "Room": 72
+          "EMType": 61,
+          "EntityLocation": 67,
+          "Trigger": {
+            "TrigType": 4,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 67
+              },
+              {
+                "Parameter": 65
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 53760,
+              "Z": 52736,
+              "Room": 56
+            },
+            {
+              "X": 53760,
+              "Z": 52736,
+              "Room": 72
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 104
+              }
+            ]
           },
-          "EntityLocation": 67
+          "Replace": true
         }
       ]
     }
