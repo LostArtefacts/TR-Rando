@@ -1,6 +1,23 @@
 {
   "All": [],
-  "NonPurist": [],
+  "NonPurist": [
+    {
+      "Comments": "Path the hole in the sphinx.",
+      "EMType": 26,
+      "Triangles": {
+        "0": [
+          {
+            "Vertices": [
+              145,
+              192,
+              144
+            ],
+            "Texture": 14
+          }
+        ]
+      }
+    }
+  ],
   "Any": [
     [
       {

@@ -253,6 +253,24 @@
         "Z": 28160,
         "Room": 3
       }
+    },
+    {
+      "Comments": "Fix the z-fighting in room 55.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 55,
+          "FaceIndex": 8,
+          "VertexChanges": {
+            "0": {
+              "Y": 1024
+            },
+            "1": {
+              "Y": 1024
+            }
+          }
+        }
+      ]
     }
   ],
   "Any": [
