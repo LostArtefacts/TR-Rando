@@ -3372,7 +3372,8 @@
       "X": 56832,
       "Y": -3840,
       "Z": 44544,
-      "Room": 13
+      "Room": 13,
+      "Difficulty": "Hard"
     },
     {
       "X": 56287,
@@ -3613,6 +3614,20 @@
       "Z": 43989,
       "Room": 13,
       "Difficulty": "Hard",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 79820,
+      "Y": 3840,
+      "Z": 70610,
+      "Room": 50,
+      "Difficulty": "Hard"
+    },
+    {
+      "X": 76864,
+      "Y": 2812,
+      "Z": 68568,
+      "Room": 50,
       "RequiresGlitch": true
     }
   ],
