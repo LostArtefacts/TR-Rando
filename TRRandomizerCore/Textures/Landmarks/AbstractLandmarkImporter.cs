@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using TRFDControl;
+using TRFDControl.FDEntryTypes;
 using TRLevelReader.Model;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
@@ -23,6 +25,7 @@ namespace TRRandomizerCore.Textures
         protected abstract TRObjectTexture[] GetObjectTextures(L level);
         protected abstract void SetObjectTextures(L level, IEnumerable<TRObjectTexture> textures);
         protected abstract void SetRoomTexture(L level, int roomIndex, int rectangleIndex, ushort textureIndex);
+        protected abstract short? GetRoomFromPortal(L level, PortalSector portalSector);
 
         public bool Import(L level, AbstractTextureMapping<E, L> mapping, bool isLevelMirrored)
         {
@@ -59,6 +62,22 @@ namespace TRRandomizerCore.Textures
 
                         foreach (LandmarkTextureTarget target in mapping.LandmarkMapping[source][segmentIndex])
                         {
+                            if (target.PortalSector != null)
+                            {
+                                // This target is meant for a room that has been created by environment mods.
+                                // Test the portal in the given location to get the room number. If it doesn't
+                                // exist, the landmark will not be imported.
+                                short? room = GetRoomFromPortal(level, target.PortalSector);
+                                if (room.HasValue)
+                                {
+                                    target.RoomNumber = room.Value;
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                            }
+
                             if (target.BackgroundIndex != -1 && backgroundCache.ContainsKey(target.BackgroundIndex))
                             {
                                 // The same graphic has already been added, so just copy the mapping.
@@ -97,6 +116,11 @@ namespace TRRandomizerCore.Textures
                             targetSegmentMap[target] = segment;
                         }
                     }
+                }
+
+                if (packer.TotalRectangles == 0)
+                {
+                    return false;
                 }
 
                 try
@@ -186,6 +210,17 @@ namespace TRRandomizerCore.Textures
                     Fraction = (byte)(y == 0 ? 0 : y - 1)
                 }
             };
+        }
+
+        protected short? GetSectorPortalRoom(TRRoomSector sector, FDControl floorData)
+        {
+            if (sector.FDIndex != 0
+                && floorData.Entries[sector.FDIndex].Find(e => e is FDPortalEntry) is FDPortalEntry portal)
+            {
+                return (short)portal.Room;
+            }
+
+            return null;
         }
     }
 }

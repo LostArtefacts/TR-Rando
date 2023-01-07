@@ -10,6 +10,7 @@ namespace TRTexture16Importer.Textures
         public BitmapGraphics Background { get; set; }
         public int RoomNumber { get; set; }
         public List<int> RectangleIndices { get; set; }
+        public PortalSector PortalSector { get; set; }
 
         public LandmarkTextureTarget()
         {
@@ -17,5 +18,12 @@ namespace TRTexture16Importer.Textures
             BackgroundIndex = -1;
             RectangleIndices = new List<int>();
         }
+    }
+
+    public class PortalSector
+    {
+        public int X { get; set; }
+        public int Z { get; set; }
+        public short Room { get; set; }
     }
 }

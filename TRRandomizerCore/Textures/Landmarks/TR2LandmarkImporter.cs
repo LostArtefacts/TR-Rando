@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TRFDControl;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Packing;
+using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Textures
 {
@@ -29,6 +31,17 @@ namespace TRRandomizerCore.Textures
         protected override void SetRoomTexture(TR2Level level, int roomIndex, int rectangleIndex, ushort textureIndex)
         {
             level.Rooms[roomIndex].RoomData.Rectangles[rectangleIndex].Texture = textureIndex;
+        }
+
+        protected override short? GetRoomFromPortal(TR2Level level, PortalSector portalSector)
+        {
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level);
+
+            TR2Room room = level.Rooms[portalSector.Room];
+            TRRoomSector sector = room.SectorList[portalSector.X * room.NumZSectors + portalSector.Z];
+
+            return GetSectorPortalRoom(sector, floorData);
         }
     }
 }
