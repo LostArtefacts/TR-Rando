@@ -2789,37 +2789,6 @@
       ],
       [
         {
-          "Comments": "Default count, but adjust the texture to obscure the number.",
-          "EMType": 29,
-          "Overwrites": [
-            {
-              "Texture": 110,
-              "Clip": "25, 14, 12, 35",
-              "Targets": {
-                "110": [
-                  "40, 14",
-                  "53, 14"
-                ],
-                "109": [
-                  "2, 14"
-                ]
-              }
-            },
-            {
-              "Texture": 816,
-              "Clip": "0, 0, 56, 48",
-              "RetainBackground": true,
-              "Targets": {
-                "110": [
-                  "31, 6"
-                ]
-              }
-            }
-          ]
-        }
-      ],
-      [
-        {
           "Comments": "Change one of the lead bars into something else.",
           "EMType": 45,
           "EntityIndex": 22,
@@ -2881,89 +2850,6 @@
               "Targets": {
                 "110": [
                   "40, 14"
-                ]
-              }
-            }
-          ]
-        }
-      ],
-      [
-        {
-          "Comments": "Change one of the lead bars into something else.",
-          "EMType": 45,
-          "EntityIndex": 22,
-          "NewEntityType": 179
-        },
-        {
-          "Comments": "Move it to a slot position.",
-          "EMType": 44,
-          "EntityIndex": 22,
-          "TargetLocation": {
-            "X": 25088,
-            "Y": -5120,
-            "Z": 17664,
-            "Room": 20
-          }
-        },
-        {
-          "Comments": "Trigger it.",
-          "EMType": 61,
-          "Locations": [
-            {
-              "X": 25088,
-              "Y": -5120,
-              "Z": 17920,
-              "Room": 20
-            }
-          ],
-          "Trigger": {
-            "TrigType": 3,
-            "Mask": 31,
-            "Timer": 1,
-            "SwitchOrKeyRef": 30,
-            "Actions": [
-              {
-                "Parameter": 22
-              }
-            ]
-          },
-          "Replace": true
-        },
-        {
-          "Comments": "Change the other trigger so the door can still open.",
-          "EMType": 69,
-          "Location": {
-            "X": 23040,
-            "Y": -5120,
-            "Z": 17920,
-            "Room": 20
-          },
-          "Mask": 3
-        },
-        {
-          "Comments": "No texture hint.",
-          "EMType": 29,
-          "Overwrites": [
-            {
-              "Texture": 110,
-              "Clip": "25, 14, 12, 35",
-              "Targets": {
-                "110": [
-                  "40, 14",
-                  "53, 14"
-                ],
-                "109": [
-                  "2, 14"
-                ]
-              }
-            },
-            {
-              "Texture": 816,
-              "Clip": "0, 0, 56, 48",
-              "RetainBackground": true,
-              "Targets": {
-                "110": [
-                  "31, 6"
                 ]
               }
             }
