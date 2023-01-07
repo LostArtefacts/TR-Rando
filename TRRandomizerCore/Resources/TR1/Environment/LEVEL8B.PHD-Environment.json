@@ -1265,28 +1265,6 @@
         }
       },
       {
-        "Comments": "Move the doors into the new room to avoid flickering.",
-        "EMType": 44,
-        "TargetLocation": {
-          "X": 19968,
-          "Y": 1280,
-          "Z": 20992,
-          "Room": -2,
-          "Angle": 16384
-        }
-      },
-      {
-        "EMType": 44,
-        "EntityIndex": 1,
-        "TargetLocation": {
-          "X": 19968,
-          "Y": 1280,
-          "Z": 22016,
-          "Room": -2,
-          "Angle": 16384
-        }
-      },
-      {
         "Comments": "Take another unused switch from City, and turn it into a door.",
         "EMType": 45,
         "EntityIndex": 28,
@@ -1303,10 +1281,10 @@
         "EMType": 44,
         "EntityIndex": 28,
         "TargetLocation": {
-          "X": 11776,
-          "Y": 2816,
+          "X": 19968,
+          "Y": 1280,
           "Z": 20992,
-          "Room": -1,
+          "Room": -2,
           "Angle": 16384
         }
       },
@@ -1316,6 +1294,28 @@
         "TypeID": 62,
         "Intensity": -1,
         "Location": {
+          "X": 19968,
+          "Y": 1280,
+          "Z": 22016,
+          "Room": -2,
+          "Angle": 16384
+        }
+      },
+      {
+        "Comments": "Move the original doors into the new room for easier trigger management later on (ConditionalAllWithin).",
+        "EMType": 44,
+        "TargetLocation": {
+          "X": 11776,
+          "Y": 2816,
+          "Z": 20992,
+          "Room": -1,
+          "Angle": 16384
+        }
+      },
+      {
+        "EMType": 44,
+        "EntityIndex": 1,
+        "TargetLocation": {
           "X": 11776,
           "Y": 2816,
           "Z": 22016,
@@ -1395,11 +1395,9 @@
         "Trigger": {
           "Mask": 31,
           "Actions": [
+            {},
             {
-              "Parameter": -1
-            },
-            {
-              "Parameter": 28
+              "Parameter": 1
             }
           ]
         }
@@ -1420,9 +1418,11 @@
         "Trigger": {
           "Mask": 31,
           "Actions": [
-            {},
             {
-              "Parameter": 1
+              "Parameter": -1
+            },
+            {
+              "Parameter": 28
             }
           ]
         }
@@ -3182,11 +3182,9 @@
               "TrigType": 1,
               "Mask": 1,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -3205,11 +3203,9 @@
               "TrigType": 1,
               "Mask": 2,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -3228,11 +3224,9 @@
               "TrigType": 1,
               "Mask": 4,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -3251,11 +3245,9 @@
               "TrigType": 1,
               "Mask": 8,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -3274,11 +3266,9 @@
               "TrigType": 1,
               "Mask": 16,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -3418,11 +3408,9 @@
               "TrigType": 6,
               "Mask": 31,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -3468,11 +3456,9 @@
               "TrigType": 1,
               "Mask": 1,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -3491,11 +3477,9 @@
               "TrigType": 1,
               "Mask": 2,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -3514,11 +3498,9 @@
               "TrigType": 1,
               "Mask": 4,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -3537,11 +3519,9 @@
               "TrigType": 1,
               "Mask": 8,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -3560,11 +3540,9 @@
               "TrigType": 1,
               "Mask": 16,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -3704,11 +3682,9 @@
               "TrigType": 6,
               "Mask": 31,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -4105,11 +4081,9 @@
               "TrigType": 1,
               "Mask": 1,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -4129,11 +4103,9 @@
               "TrigType": 1,
               "Mask": 2,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -4153,11 +4125,9 @@
               "TrigType": 1,
               "Mask": 4,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -4177,11 +4147,9 @@
               "TrigType": 1,
               "Mask": 8,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -4201,11 +4169,9 @@
               "TrigType": 1,
               "Mask": 16,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
@@ -4345,11 +4311,9 @@
               "TrigType": 6,
               "Mask": 31,
               "Actions": [
+                {},
                 {
-                  "Parameter": 28
-                },
-                {
-                  "Parameter": -1
+                  "Parameter": 1
                 }
               ]
             }
