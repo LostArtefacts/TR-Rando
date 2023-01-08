@@ -963,7 +963,12 @@ namespace TRRandomizerCore.Randomizers
                             resultantEnemy.TypeID = (short)TREntities.FlyingAtlantean;
                             break;
                     }
-                    levelEnemies.Add(resultantEnemy);
+
+                    // Only include it if the model is present i.e. it's not an empty egg.
+                    if (Array.Find(level.Data.Models, m => m.ID == resultantEnemy.TypeID) != null)
+                    {
+                        levelEnemies.Add(resultantEnemy);
+                    }
                 }
             }
 
