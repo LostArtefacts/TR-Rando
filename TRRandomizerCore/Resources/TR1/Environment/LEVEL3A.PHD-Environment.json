@@ -76,6 +76,18 @@
             "Texture": 10
           }
         ]
+      },
+      "Triangles": {
+        "9": [
+          {
+            "Vertices": [
+              79,
+              75,
+              74
+            ],
+            "Texture": 52
+          }
+        ]
       }
     }
   ],
