@@ -925,6 +925,28 @@
       "Room": 16,
       "Difficulty": "Hard",
       "RequiresGlitch": true
+    },
+    {
+      "X": 38852,
+      "Y": -2564,
+      "Z": 97260,
+      "Room": 9,
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
+    },
+    {
+      "X": 42017,
+      "Y": 1257,
+      "Z": 62446,
+      "Room": 24,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 37320,
+      "Y": 2704,
+      "Z": 69669,
+      "Room": 24,
+      "Difficulty": "Hard"
     }
   ],
   "LEVEL3B.PHD": [
@@ -1080,7 +1102,7 @@
     },
     {
       "X": 40898,
-      "Y": 1552,
+      "Y": 1328,
       "Z": 59344,
       "Room": 11
     },
@@ -1102,6 +1124,28 @@
       "Z": 58403,
       "Room": 11,
       "Difficulty": "Hard"
+    },
+    {
+      "X": 42453,
+      "Y": 2731,
+      "Z": 58398,
+      "Room": 11,
+      "Difficulty": "Hard"
+    },
+    {
+      "X": 47149,
+      "Y": 1253,
+      "Z": 51179,
+      "Room": 11,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 36352,
+      "Y": 3355,
+      "Z": 39917,
+      "Room": 8,
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 37852,
