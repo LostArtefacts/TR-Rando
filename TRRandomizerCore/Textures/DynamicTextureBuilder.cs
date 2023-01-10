@@ -207,7 +207,7 @@ namespace TRRandomizerCore.Textures
         private void AddModelTextures(TRLevel level, TRModel model, TRMesh dummyMesh, ISet<int> textures, ISet<TRMesh> meshCollection)
         {
             TREntities modelID = (TREntities)model.ID;
-            if (TextureMonitor != null && TextureMonitor.RemovedTextures.Contains(modelID))
+            if (TextureMonitor?.RemovedTextures?.Contains(modelID) ?? false)
             {
                 // Don't include textures that may have been re-assigned to other imported models (e.g. enemies).
                 return;
