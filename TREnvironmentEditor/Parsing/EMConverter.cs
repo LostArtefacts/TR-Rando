@@ -9,11 +9,6 @@ namespace TREnvironmentEditor.Parsing
 {
     public class EMConverter : JsonConverter
     {
-        private static readonly JsonSerializerSettings _resolver = new JsonSerializerSettings
-        {
-            ContractResolver = new EMDeserializationResolver()
-        };
-
         private static readonly string _emTypeName = "EMType";
         private static readonly string _conditionTypeName = "ConditionType";
 
@@ -44,155 +39,157 @@ namespace TREnvironmentEditor.Parsing
             {
                 // Surface types
                 case EMType.Ladder:
-                    return JsonConvert.DeserializeObject<EMLadderFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMLadderFunction>(jo.ToString(), this);
                 case EMType.Floor:
-                    return JsonConvert.DeserializeObject<EMFloorFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMFloorFunction>(jo.ToString(), this);
                 case EMType.Flood:
-                    return JsonConvert.DeserializeObject<EMFloodFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMFloodFunction>(jo.ToString(), this);
                 case EMType.Drain:
-                    return JsonConvert.DeserializeObject<EMDrainFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMDrainFunction>(jo.ToString(), this);
                 case EMType.Ceiling:
-                    return JsonConvert.DeserializeObject<EMCeilingFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMCeilingFunction>(jo.ToString(), this);
                 case EMType.Click:
-                    return JsonConvert.DeserializeObject<EMClickFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMClickFunction>(jo.ToString(), this);
                 case EMType.Slant:
-                    return JsonConvert.DeserializeObject<EMSlantFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMSlantFunction>(jo.ToString(), this);
 
                 // Texture types
                 case EMType.Reface:
-                    return JsonConvert.DeserializeObject<EMRefaceFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMRefaceFunction>(jo.ToString(), this);
                 case EMType.RemoveFace:
-                    return JsonConvert.DeserializeObject<EMRemoveFaceFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMRemoveFaceFunction>(jo.ToString(), this);
                 case EMType.ModifyFace:
-                    return JsonConvert.DeserializeObject<EMModifyFaceFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMModifyFaceFunction>(jo.ToString(), this);
                 case EMType.AddStaticMesh:
-                    return JsonConvert.DeserializeObject<EMAddStaticMeshFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMAddStaticMeshFunction>(jo.ToString(), this);
                 case EMType.RemoveStaticMesh:
-                    return JsonConvert.DeserializeObject<EMRemoveStaticMeshFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMRemoveStaticMeshFunction>(jo.ToString(), this);
                 case EMType.AddFace:
-                    return JsonConvert.DeserializeObject<EMAddFaceFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMAddFaceFunction>(jo.ToString(), this);
                 case EMType.MirrorStaticMesh:
-                    return JsonConvert.DeserializeObject<EMMirrorStaticMeshFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMirrorStaticMeshFunction>(jo.ToString(), this);
                 case EMType.MirrorObjectTexture:
-                    return JsonConvert.DeserializeObject<EMMirrorObjectTexture>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMirrorObjectTexture>(jo.ToString(), this);
                 case EMType.OverwriteTexture:
-                    return JsonConvert.DeserializeObject<EMOverwriteTextureFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMOverwriteTextureFunction>(jo.ToString(), this);
                 case EMType.MoveStaticMesh:
-                    return JsonConvert.DeserializeObject<EMMoveStaticMeshFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMoveStaticMeshFunction>(jo.ToString(), this);
                 case EMType.AddRoomSprite:
-                    return JsonConvert.DeserializeObject<EMAddRoomSpriteFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMAddRoomSpriteFunction>(jo.ToString(), this);
+                case EMType.SwapFace:
+                    return JsonConvert.DeserializeObject<EMSwapFaceFunction>(jo.ToString(), this);
 
                 // Entity types
                 case EMType.MoveSlot:
-                    return JsonConvert.DeserializeObject<EMMoveSlotFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMoveSlotFunction>(jo.ToString(), this);
                 case EMType.MoveEnemy:
-                    return JsonConvert.DeserializeObject<EMMoveEnemyFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMoveEnemyFunction>(jo.ToString(), this);
                 case EMType.MovePickup:
-                    return JsonConvert.DeserializeObject<EMMovePickupFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMovePickupFunction>(jo.ToString(), this);
                 case EMType.MoveEntity:
-                    return JsonConvert.DeserializeObject<EMMoveEntityFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMoveEntityFunction>(jo.ToString(), this);
                 case EMType.ConvertEntity:
-                    return JsonConvert.DeserializeObject<EMConvertEntityFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMConvertEntityFunction>(jo.ToString(), this);
                 case EMType.MoveTrap:
-                    return JsonConvert.DeserializeObject<EMMoveTrapFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMoveTrapFunction>(jo.ToString(), this);
                 case EMType.ConvertEnemy:
-                    return JsonConvert.DeserializeObject<EMConvertEnemyFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMConvertEnemyFunction>(jo.ToString(), this);
                 case EMType.ModifyEntity:
-                    return JsonConvert.DeserializeObject<EMModifyEntityFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMModifyEntityFunction>(jo.ToString(), this);
                 case EMType.SwapSlot:
-                    return JsonConvert.DeserializeObject<EMSwapSlotFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMSwapSlotFunction>(jo.ToString(), this);
                 case EMType.AdjustEntityPositions:
-                    return JsonConvert.DeserializeObject<EMAdjustEntityPositionFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMAdjustEntityPositionFunction>(jo.ToString(), this);
                 case EMType.AddEntity:
-                    return JsonConvert.DeserializeObject<EMAddEntityFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMAddEntityFunction>(jo.ToString(), this);
                 case EMType.ConvertWheelDoor:
-                    return JsonConvert.DeserializeObject<EMConvertWheelDoorFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMConvertWheelDoorFunction>(jo.ToString(), this);
                 case EMType.MoveSecret:
-                    return JsonConvert.DeserializeObject<EMMoveSecretFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMoveSecretFunction>(jo.ToString(), this);
                 case EMType.SwapGroupedSlots:
-                    return JsonConvert.DeserializeObject<EMSwapGroupedSlotsFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMSwapGroupedSlotsFunction>(jo.ToString(), this);
 
                 // Trigger types
                 case EMType.Trigger:
-                    return JsonConvert.DeserializeObject<EMTriggerFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMTriggerFunction>(jo.ToString(), this);
                 case EMType.RemoveTrigger:
-                    return JsonConvert.DeserializeObject<EMRemoveTriggerFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMRemoveTriggerFunction>(jo.ToString(), this);
                 case EMType.DuplicateTrigger:
-                    return JsonConvert.DeserializeObject<EMDuplicateTriggerFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMDuplicateTriggerFunction>(jo.ToString(), this);
                 case EMType.DuplicateSwitchTrigger:
-                    return JsonConvert.DeserializeObject<EMDuplicateSwitchTriggerFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMDuplicateSwitchTriggerFunction>(jo.ToString(), this);
                 case EMType.CameraTriggerFunction:
-                    return JsonConvert.DeserializeObject<EMCameraTriggerFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMCameraTriggerFunction>(jo.ToString(), this);
                 case EMType.ReplaceTriggerActionParameterFunction:
-                    return JsonConvert.DeserializeObject<EMReplaceTriggerActionParameterFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMReplaceTriggerActionParameterFunction>(jo.ToString(), this);
                 case EMType.MoveTrigger:
-                    return JsonConvert.DeserializeObject<EMMoveTriggerFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMoveTriggerFunction>(jo.ToString(), this);
                 case EMType.AppendTriggerActionFunction:
-                    return JsonConvert.DeserializeObject<EMAppendTriggerActionFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMAppendTriggerActionFunction>(jo.ToString(), this);
                 case EMType.ConvertTrigger:
-                    return JsonConvert.DeserializeObject<EMConvertTriggerFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMConvertTriggerFunction>(jo.ToString(), this);
                 case EMType.KillLara:
-                    return JsonConvert.DeserializeObject<EMKillLaraFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMKillLaraFunction>(jo.ToString(), this);
                 case EMType.RemoveTriggerAction:
-                    return JsonConvert.DeserializeObject<EMRemoveTriggerActionFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMRemoveTriggerActionFunction>(jo.ToString(), this);
 
                 // Portals
                 case EMType.VisibilityPortal:
-                    return JsonConvert.DeserializeObject<EMVisibilityPortalFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMVisibilityPortalFunction>(jo.ToString(), this);
                 case EMType.HorizontalCollisionalPortal:
-                    return JsonConvert.DeserializeObject<EMHorizontalCollisionalPortalFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMHorizontalCollisionalPortalFunction>(jo.ToString(), this);
                 case EMType.VerticalCollisionalPortal:
-                    return JsonConvert.DeserializeObject<EMVerticalCollisionalPortalFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMVerticalCollisionalPortalFunction>(jo.ToString(), this);
                 case EMType.AdjustVisibilityPortal:
-                    return JsonConvert.DeserializeObject<EMAdjustVisibilityPortalFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMAdjustVisibilityPortalFunction>(jo.ToString(), this);
                 case EMType.ReplaceCollisionalPortal:
-                    return JsonConvert.DeserializeObject<EMReplaceCollisionalPortalFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMReplaceCollisionalPortalFunction>(jo.ToString(), this);
                 case EMType.RemoveCollisionalPortal:
-                    return JsonConvert.DeserializeObject<EMRemoveCollisionalPortalFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMRemoveCollisionalPortalFunction>(jo.ToString(), this);
 
                 // Sounds
                 case EMType.AddSoundSource:
-                    return JsonConvert.DeserializeObject<EMAddSoundSourceFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMAddSoundSourceFunction>(jo.ToString(), this);
                 case EMType.MoveSoundSource:
-                    return JsonConvert.DeserializeObject<EMMoveSoundSourceFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMoveSoundSourceFunction>(jo.ToString(), this);
                 case EMType.RemoveSoundSource:
-                    return JsonConvert.DeserializeObject<EMRemoveSoundSourceFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMRemoveSoundSourceFunction>(jo.ToString(), this);
 
                 // Rooms
                 case EMType.ModifyRoom:
-                    return JsonConvert.DeserializeObject<EMModifyRoomFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMModifyRoomFunction>(jo.ToString(), this);
                 case EMType.ModifyOverlaps:
-                    return JsonConvert.DeserializeObject<EMModifyOverlapsFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMModifyOverlapsFunction>(jo.ToString(), this);
                 case EMType.CopyRoom:
-                    return JsonConvert.DeserializeObject<EMCopyRoomFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMCopyRoomFunction>(jo.ToString(), this);
                 case EMType.CopyVertexAttributes:
-                    return JsonConvert.DeserializeObject<EMCopyVertexAttributesFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMCopyVertexAttributesFunction>(jo.ToString(), this);
                 case EMType.ImportRoom:
-                    return JsonConvert.DeserializeObject<EMImportRoomFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMImportRoomFunction>(jo.ToString(), this);
                 case EMType.CreateRoom:
-                    return JsonConvert.DeserializeObject<EMCreateRoomFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMCreateRoomFunction>(jo.ToString(), this);
                 case EMType.CreateWall:
-                    return JsonConvert.DeserializeObject<EMCreateWallFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMCreateWallFunction>(jo.ToString(), this);
                 case EMType.GenerateLight:
-                    return JsonConvert.DeserializeObject<EMGenerateLightFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMGenerateLightFunction>(jo.ToString(), this);
                 case EMType.MoveCamera:
-                    return JsonConvert.DeserializeObject<EMMoveCameraFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMoveCameraFunction>(jo.ToString(), this);
 
                 // Models
                 case EMType.ImportModel:
-                    return JsonConvert.DeserializeObject<EMImportModelFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMImportModelFunction>(jo.ToString(), this);
                 case EMType.MirrorModel:
-                    return JsonConvert.DeserializeObject<EMMirrorModelFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMMirrorModelFunction>(jo.ToString(), this);
                 case EMType.ConvertSpriteSequence:
-                    return JsonConvert.DeserializeObject<EMConvertSpriteSequenceFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMConvertSpriteSequenceFunction>(jo.ToString(), this);
                 case EMType.ConvertModel:
-                    return JsonConvert.DeserializeObject<EMConvertModelFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMConvertModelFunction>(jo.ToString(), this);
                 case EMType.ImportNonGraphicsModel:
-                    return JsonConvert.DeserializeObject<EMImportNonGraphicsModelFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMImportNonGraphicsModelFunction>(jo.ToString(), this);
 
                 // NOOP
                 case EMType.NOOP:
-                    return JsonConvert.DeserializeObject<EMPlaceholderFunction>(jo.ToString(), _resolver);
+                    return JsonConvert.DeserializeObject<EMPlaceholderFunction>(jo.ToString(), this);
 
                 default:
                     throw new InvalidOperationException();

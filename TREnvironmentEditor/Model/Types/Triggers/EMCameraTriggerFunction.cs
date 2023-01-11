@@ -25,11 +25,12 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TRLevel level)
         {
+            EMLevelData data = GetData(level);
             ushort cameraIndex;
             if (Camera != null)
             {
                 List<TRCamera> cameras = level.Cameras.ToList();
-                cameras.Add(Camera);
+                cameras.Add(CreateCamera(data));
                 level.Cameras = cameras.ToArray();
 
                 cameraIndex = (ushort)level.NumCameras;
@@ -39,8 +40,6 @@ namespace TREnvironmentEditor.Model.Types
             {
                 cameraIndex = CameraIndex;
             }
-
-            EMLevelData data = GetData(level);
 
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
@@ -80,11 +79,12 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
+            EMLevelData data = GetData(level);
             ushort cameraIndex;
             if (Camera != null)
             {
                 List<TRCamera> cameras = level.Cameras.ToList();
-                cameras.Add(Camera);
+                cameras.Add(CreateCamera(data));
                 level.Cameras = cameras.ToArray();
 
                 cameraIndex = (ushort)level.NumCameras;
@@ -94,8 +94,6 @@ namespace TREnvironmentEditor.Model.Types
             {
                 cameraIndex = CameraIndex;
             }
-
-            EMLevelData data = GetData(level);
 
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
@@ -135,11 +133,12 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
+            EMLevelData data = GetData(level);
             ushort cameraIndex;
             if (Camera != null)
             {
                 List<TRCamera> cameras = level.Cameras.ToList();
-                cameras.Add(Camera);
+                cameras.Add(CreateCamera(data));
                 level.Cameras = cameras.ToArray();
 
                 cameraIndex = (ushort)level.NumCameras;
@@ -149,8 +148,6 @@ namespace TREnvironmentEditor.Model.Types
             {
                 cameraIndex = CameraIndex;
             }
-
-            EMLevelData data = GetData(level);
 
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
@@ -186,6 +183,18 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             control.WriteToLevel(level);
+        }
+
+        private TRCamera CreateCamera(EMLevelData data)
+        {
+            return new TRCamera
+            {
+                X = Camera.X,
+                Y = Camera.Y,
+                Z = Camera.Z,
+                Room = data.ConvertRoom(Camera.Room),
+                Flag = Camera.Flag,
+            };
         }
 
         private void AttachToSector(TRRoomSector sector, FDControl control, ushort cameraIndex)
