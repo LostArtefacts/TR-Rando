@@ -3064,6 +3064,14 @@
       "Z": 34787,
       "Room": 35,
       "Difficulty": "Hard"
+    },
+    {
+      "X": 29618,
+      "Y": 13017,
+      "Z": 50437,
+      "Room": 5,
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     }
   ],
   "LEVEL10C.PHD": [
