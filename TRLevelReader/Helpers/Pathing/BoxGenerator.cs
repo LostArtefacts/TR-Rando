@@ -132,9 +132,6 @@ namespace TRLevelReader.Helpers.Pathing
                     }
                 }
             }
-#if DEBUG
-            Debug.WriteLine(room.ToString());
-#endif
         }
     }
 }
