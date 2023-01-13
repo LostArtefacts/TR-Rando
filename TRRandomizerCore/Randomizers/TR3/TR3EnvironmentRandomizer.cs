@@ -17,7 +17,6 @@ namespace TRRandomizerCore.Randomizers
         internal bool EnforcedModeOnly => !Settings.RandomizeEnvironment;
         internal TR3TextureMonitorBroker TextureMonitor { get; set; }
 
-        private List<EMType> _disallowedTypes;
         private List<TR3ScriptedLevel> _levelsToMirror;
 
         public List<TR3ScriptedLevel> AllocateMirroredLevels(int seed)
@@ -55,22 +54,6 @@ namespace TRRandomizerCore.Randomizers
             if (_generator == null)
             {
                 _generator = new Random(seed);
-            }
-
-            _disallowedTypes = new List<EMType>();
-            if (!Settings.RandomizeWaterLevels)
-            {
-                _disallowedTypes.Add(EMType.Flood);
-                _disallowedTypes.Add(EMType.Drain);
-            }
-            if (!Settings.RandomizeSlotPositions)
-            {
-                _disallowedTypes.Add(EMType.MoveSlot);
-                _disallowedTypes.Add(EMType.SwapSlot);
-            }
-            if (!Settings.RandomizeLadders)
-            {
-                _disallowedTypes.Add(EMType.Ladder);
             }
 
             AllocateMirroredLevels(seed);
@@ -116,12 +99,15 @@ namespace TRRandomizerCore.Randomizers
 
         private void ApplyMappingToLevel(TR3CombinedLevel level, EMEditorMapping mapping)
         {
-            EMType[] emptyExclusions = new EMType[] { };
+            EnvironmentPicker picker = new EnvironmentPicker(Settings.HardEnvironmentMode)
+            {
+                Generator = _generator
+            };
 
             // Process enforced packs first. We do not pass disallowed types here.
             // These generally fix OG issues such as problems with box overlaps and
             // textures.
-            mapping.All.ApplyToLevel(level.Data, emptyExclusions);
+            mapping.All.ApplyToLevel(level.Data, picker.Options);
 
             if (!EnforcedModeOnly || !Settings.PuristMode)
             {
@@ -129,28 +115,24 @@ namespace TRRandomizerCore.Randomizers
                 // These are applied only if Purist mode is off or if Environment
                 // rando is on as a whole, because some other categories may rely
                 // on these changes having been made.
-                mapping.NonPurist.ApplyToLevel(level.Data, emptyExclusions);
+                mapping.NonPurist.ApplyToLevel(level.Data, picker.Options);
             }
 
             if (!EnforcedModeOnly)
             {
-                if (mapping.Any.Count > 0)
+                picker.LoadTags(Settings);
+
+                // Run a random selection of Any.
+                foreach (EMEditorSet mod in picker.GetRandomAny(mapping))
                 {
-                    // Pick a random number of packs to apply, but at least 1
-                    int packCount = _generator.Next(1, mapping.Any.Count + 1);
-                    List<EMEditorSet> randomSet = mapping.Any.RandomSelection(_generator, packCount);
-                    foreach (EMEditorSet mod in randomSet)
-                    {
-                        mod.ApplyToLevel(level.Data, _disallowedTypes);
-                    }
+                    mod.ApplyToLevel(level.Data, picker.Options);
                 }
 
                 // AllWithin means one from each set will be applied. Used for the likes of choosing a new
                 // keyhole position from a set.
                 foreach (List<EMEditorSet> modList in mapping.AllWithin)
                 {
-                    EMEditorSet mod = modList[_generator.Next(0, modList.Count)];
-                    mod.ApplyToLevel(level.Data, _disallowedTypes);
+                    picker.GetModToRun(modList)?.ApplyToLevel(level.Data, picker.Options);
                 }
 
                 // OneOf is used for a leader-follower situation, but where only one follower from
@@ -158,8 +140,10 @@ namespace TRRandomizerCore.Randomizers
                 // a different position, so the followers are the different positions from which we pick one.
                 foreach (EMEditorGroupedSet mod in mapping.OneOf)
                 {
-                    EMEditorSet follower = mod.Followers[_generator.Next(0, mod.Followers.Count)];
-                    mod.ApplyToLevel(level.Data, follower, _disallowedTypes);
+                    if (picker.GetModToRun(mod.Followers) is EMEditorSet follower)
+                    {
+                        mod.ApplyToLevel(level.Data, follower, picker.Options);
+                    }
                 }
 
                 // ConditionalAllWithin is similar to AllWithin, but different sets of mods can be returned based
@@ -169,8 +153,7 @@ namespace TRRandomizerCore.Randomizers
                     List<EMEditorSet> modList = conditionalSet.GetApplicableSets(level.Data);
                     if (modList != null && modList.Count > 0)
                     {
-                        EMEditorSet mod = modList[_generator.Next(0, modList.Count)];
-                        mod.ApplyToLevel(level.Data, _disallowedTypes);
+                        picker.GetModToRun(modList)?.ApplyToLevel(level.Data, picker.Options);
                     }
                 }
 
@@ -178,10 +161,9 @@ namespace TRRandomizerCore.Randomizers
                 foreach (EMConditionalGroupedSet conditionalSet in mapping.ConditionalOneOf)
                 {
                     EMEditorGroupedSet mod = conditionalSet.GetApplicableSet(level.Data);
-                    if (mod != null)
+                    if (mod != null && picker.GetModToRun(mod.Followers) is EMEditorSet follower)
                     {
-                        EMEditorSet follower = mod.Followers[_generator.Next(0, mod.Followers.Count)];
-                        mod.ApplyToLevel(level.Data, follower, _disallowedTypes);
+                        mod.ApplyToLevel(level.Data, follower, picker.Options);
                     }
                 }
             }
@@ -191,7 +173,7 @@ namespace TRRandomizerCore.Randomizers
             // mods can be used.
             foreach (EMConditionalSingleEditorSet mod in mapping.ConditionalAll)
             {
-                mod.ApplyToLevel(level.Data, emptyExclusions);
+                mod.ApplyToLevel(level.Data, picker.Options);
             }
         }
 
@@ -200,11 +182,9 @@ namespace TRRandomizerCore.Randomizers
             EMMirrorFunction mirrorer = new EMMirrorFunction();
             mirrorer.ApplyToLevel(level.Data);
 
-            if (mapping != null)
-            {
-                // Process packs that need to be applied after mirroring.
-                mapping.Mirrored.ApplyToLevel(level.Data, new EMType[] { });
-            }
+            EnvironmentPicker picker = new EnvironmentPicker(Settings.HardEnvironmentMode);
+            picker.LoadTags(Settings);
+            mapping?.Mirrored.ApplyToLevel(level.Data, picker.Options);
 
             // Notify the texture monitor that this level has been flipped
             TextureMonitor<TR3Entities> monitor = TextureMonitor.CreateMonitor(level.Name);

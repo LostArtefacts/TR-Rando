@@ -1,56 +1,69 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TREnvironmentEditor.Helpers;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model
 {
     public class EMEditorSet : List<BaseEMFunction>, ITextureModifier
     {
-        // A set of modifications that must be done together e.g. adding a ladder and a step
+        // If one member is classed as hard, the entire set is hard. This differs from
+        // mods having a hard variant - in that case, GetModToExecute will select the
+        // relevant function to run.
+        public bool IsHard => this.Any(e => e.Tags?.Contains(EMTag.Hard) ?? false);
 
-        public void ApplyToLevel(TRLevel level, IEnumerable<EMType> excludedTypes = null)
+        public void ApplyToLevel(TRLevel level, EMOptions options = null)
         {
-            if (IsApplicable(excludedTypes))
+            if (IsApplicable(options))
             {
                 foreach (BaseEMFunction mod in this)
                 {
-                    mod.ApplyToLevel(level);
+                    GetModToExecute(mod, options).ApplyToLevel(level);
                 }
             }
         }
 
-        public void ApplyToLevel(TR2Level level, IEnumerable<EMType> excludedTypes = null)
+        public void ApplyToLevel(TR2Level level, EMOptions options = null)
         {
-            if (IsApplicable(excludedTypes))
+            if (IsApplicable(options))
             {
                 foreach (BaseEMFunction mod in this)
                 {
-                    mod.ApplyToLevel(level);
+                    GetModToExecute(mod, options).ApplyToLevel(level);
                 }
             }
         }
 
-        public void ApplyToLevel(TR3Level level, IEnumerable<EMType> excludedTypes = null)
+        public void ApplyToLevel(TR3Level level, EMOptions options = null)
         {
-            if (IsApplicable(excludedTypes))
+            if (IsApplicable(options))
             {
                 foreach (BaseEMFunction mod in this)
                 {
-                    mod.ApplyToLevel(level);
+                    GetModToExecute(mod, options).ApplyToLevel(level);
                 }
             }
         }
 
-        public bool IsApplicable(IEnumerable<EMType> excludedTypes)
+        public bool IsApplicable(EMOptions options)
         {
-            if (excludedTypes != null)
+            if (options != null)
             {
-                // The modification will only be performed if all types in this set are to be included.
-                foreach (BaseEMFunction mod in this)
+                if (IsHard && !options.EnableHardMode)
                 {
-                    if (excludedTypes.Contains(mod.EMType))
+                    // This entire set is classed as difficult.
+                    return false;
+                }
+
+                if (options.ExcludedTags != null)
+                {
+                    // The modification will only be performed if all tags in this set are to be included.
+                    foreach (BaseEMFunction mod in this)
                     {
-                        return false;
+                        if (mod.Tags?.Any(options.ExcludedTags.Contains) ?? false)
+                        {
+                            return false;
+                        }
                     }
                 }
             }
@@ -68,6 +81,15 @@ namespace TREnvironmentEditor.Model
                     textureMod.RemapTextures(indexMap);
                 }
             }
+        }
+
+        private BaseEMFunction GetModToExecute(BaseEMFunction mod, EMOptions options)
+        {
+            return options != null 
+                && options.EnableHardMode 
+                && mod.HardVariant != null
+                    ? mod.HardVariant
+                    : mod;
         }
     }
 }

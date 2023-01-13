@@ -37,7 +37,7 @@ namespace TRRandomizerView.Model
         private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
-        private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders;
+        private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders, _randomizeTraps, _randomizeChallengeRooms, _hardEnvironmentMode;
         private BoolItemControlClass _disableHealingBetweenLevels, _disableMedpacks;
         private uint _mirroredLevelCount;
         private bool _mirrorAssaultCourse;
@@ -1764,6 +1764,36 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RandomizeTraps
+        {
+            get => _randomizeTraps;
+            set
+            {
+                _randomizeTraps = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RandomizeChallengeRooms
+        {
+            get => _randomizeChallengeRooms;
+            set
+            {
+                _randomizeChallengeRooms = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass HardEnvironmentMode
+        {
+            get => _hardEnvironmentMode;
+            set
+            {
+                _hardEnvironmentMode = value;
+                FirePropertyChanged();
+            }
+        }
+
         public uint MirroredLevelCount
         {
             get => _mirroredLevelCount;
@@ -2536,7 +2566,7 @@ namespace TRRandomizerView.Model
             BindingOperations.SetBinding(RandomizeWaterLevels, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
             RandomizeSlotPositions = new BoolItemControlClass
             {
-                Title = "Move keyholes",
+                Title = "Move keyholes/switches/puzzle slots",
                 Description = "Change where keyholes, switches and puzzle slots are located in each level."
             };
             BindingOperations.SetBinding(RandomizeSlotPositions, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
@@ -2546,6 +2576,24 @@ namespace TRRandomizerView.Model
                 Description = "Change where ladders are positioned in each level."
             };
             BindingOperations.SetBinding(RandomizeLadders, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
+            RandomizeTraps = new BoolItemControlClass
+            {
+                Title = "Randomize traps",
+                Description = "Change where traps appear in each level."
+            };
+            BindingOperations.SetBinding(RandomizeTraps, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
+            RandomizeChallengeRooms = new BoolItemControlClass
+            {
+                Title = "Randomize puzzles/challenge rooms",
+                Description = "Allow rooms and areas to be created with puzzles to solve or challenges to complete."
+            };
+            BindingOperations.SetBinding(RandomizeChallengeRooms, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
+            HardEnvironmentMode = new BoolItemControlClass
+            {
+                Title = "Enable hard mode",
+                Description = "Allow more difficult puzzles, rooms and other environmental changes."
+            };
+            BindingOperations.SetBinding(HardEnvironmentMode, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
 
             Binding randomizeHealthBinding = new Binding(nameof(RandomizeHealth)) { Source = this };
             DisableHealingBetweenLevels = new BoolItemControlClass
@@ -2597,7 +2645,8 @@ namespace TRRandomizerView.Model
             };
             EnvironmentBoolItemControls = new List<BoolItemControlClass>
             {
-                _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders
+                _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders, _randomizeTraps,
+                _randomizeChallengeRooms, _hardEnvironmentMode
             };
             HealthBoolItemControls = new List<BoolItemControlClass>
             {
@@ -2642,6 +2691,9 @@ namespace TRRandomizerView.Model
             _removeLevelEndingLarson.IsAvailable = IsLarsonBehaviourTypeSupported;
 
             _randomizeLadders.IsAvailable = !IsTR1;
+            _randomizeTraps.IsAvailable = IsTrapsTypeSupported;
+            _randomizeChallengeRooms.IsAvailable = IsChallengeRoomsTypeSupported;
+            _hardEnvironmentMode.IsAvailable = IsHardEnvironmentTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -2788,6 +2840,9 @@ namespace TRRandomizerView.Model
             RandomizeWaterLevels.Value = _controller.RandomizeWaterLevels;
             RandomizeSlotPositions.Value = _controller.RandomizeSlotPositions;
             RandomizeLadders.Value = _controller.RandomizeLadders;
+            RandomizeTraps.Value = _controller.RandomizeTraps;
+            RandomizeChallengeRooms.Value = _controller.RandomizeChallengeRooms;
+            HardEnvironmentMode.Value = _controller.HardEnvironmentMode;
             MirroredLevelCount = _controller.MirroredLevelCount;
             MirrorAssaultCourse = _controller.MirrorAssaultCourse;
 
@@ -3048,6 +3103,9 @@ namespace TRRandomizerView.Model
             _controller.RandomizeWaterLevels = RandomizeWaterLevels.Value;
             _controller.RandomizeSlotPositions = RandomizeSlotPositions.Value;
             _controller.RandomizeLadders = RandomizeLadders.Value;
+            _controller.RandomizeTraps = RandomizeTraps.Value;
+            _controller.RandomizeChallengeRooms = RandomizeChallengeRooms.Value;
+            _controller.HardEnvironmentMode = HardEnvironmentMode.Value;
             _controller.MirroredLevelCount = MirroredLevelCount;
             _controller.MirrorAssaultCourse = MirrorAssaultCourse;
 
@@ -3172,7 +3230,10 @@ namespace TRRandomizerView.Model
         public bool IsMeshSwapsTypeSupported => IsRandomizationSupported(TRRandomizerType.MeshSwaps);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);
         public bool IsEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.Environment);
+        public bool IsHardEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.HardEnvironment);
         public bool IsLaddersTypeSupported => IsRandomizationSupported(TRRandomizerType.Ladders);
+        public bool IsTrapsTypeSupported => IsRandomizationSupported(TRRandomizerType.Traps);
+        public bool IsChallengeRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.ChallengeRooms);
         public bool IsWeatherTypeSupported => IsRandomizationSupported(TRRandomizerType.Weather);
         public bool IsBirdMonsterBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.BirdMonsterBehaviour);
         public bool IsDragonSpawnTypeSupported => IsRandomizationSupported(TRRandomizerType.DragonSpawn);

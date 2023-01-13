@@ -9,12 +9,14 @@ namespace TRRandomizerCore
         {
             TRRandomizerType.AtlanteanEggBehaviour,
             TRRandomizerType.Audio,
+            TRRandomizerType.ChallengeRooms,
             TRRandomizerType.DynamicTextures,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
             TRRandomizerType.ExtraPickups,
             TRRandomizerType.GymOutfit,
             TRRandomizerType.GlitchedSecrets,
+            TRRandomizerType.HardEnvironment,
             TRRandomizerType.HardSecrets,
             TRRandomizerType.HiddenEnemies,
             TRRandomizerType.Item,
@@ -32,6 +34,7 @@ namespace TRRandomizerCore
             TRRandomizerType.SecretTextures,
             TRRandomizerType.SFX,
             TRRandomizerType.StartPosition,
+            TRRandomizerType.Traps,
             TRRandomizerType.Texture
         };
 
@@ -81,6 +84,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Sunset,
             TRRandomizerType.Text,
             TRRandomizerType.Texture,
+            TRRandomizerType.Traps,
             TRRandomizerType.Unarmed,
             TRRandomizerType.ItemSprite
         };

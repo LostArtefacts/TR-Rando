@@ -108,6 +108,9 @@ namespace TRRandomizerCore.Editors
         public bool RandomizeWaterLevels { get; set; }
         public bool RandomizeSlotPositions { get; set; }
         public bool RandomizeLadders { get; set; }
+        public bool RandomizeTraps { get; set; }
+        public bool RandomizeChallengeRooms { get; set; }
+        public bool HardEnvironmentMode { get; set; }
         public uint MirroredLevelCount { get; set; }
         public bool MirrorAssaultCourse { get; set; }
         public bool AutoLaunchGame { get; set; }
@@ -257,6 +260,9 @@ namespace TRRandomizerCore.Editors
             RandomizeWaterLevels = config.GetBool(nameof(RandomizeWaterLevels), true);
             RandomizeSlotPositions = config.GetBool(nameof(RandomizeSlotPositions), true);
             RandomizeLadders = config.GetBool(nameof(RandomizeLadders), true);
+            RandomizeTraps = config.GetBool(nameof(RandomizeTraps), true);
+            RandomizeChallengeRooms = config.GetBool(nameof(RandomizeChallengeRooms), true);
+            HardEnvironmentMode = config.GetBool(nameof(HardEnvironmentMode));
             MirroredLevelCount = config.GetUInt(nameof(MirroredLevelCount), 9);
             MirrorAssaultCourse = config.GetBool(nameof(MirrorAssaultCourse), true);
 
@@ -388,6 +394,9 @@ namespace TRRandomizerCore.Editors
             config[nameof(RandomizeWaterLevels)] = RandomizeWaterLevels;
             config[nameof(RandomizeSlotPositions)] = RandomizeSlotPositions;
             config[nameof(RandomizeLadders)] = RandomizeLadders;
+            config[nameof(RandomizeTraps)] = RandomizeTraps;
+            config[nameof(RandomizeChallengeRooms)] = RandomizeChallengeRooms;
+            config[nameof(HardEnvironmentMode)] = HardEnvironmentMode;
             config[nameof(MirroredLevelCount)] = MirroredLevelCount;
             config[nameof(MirrorAssaultCourse)] = MirrorAssaultCourse;
 

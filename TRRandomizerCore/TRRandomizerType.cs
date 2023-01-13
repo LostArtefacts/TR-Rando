@@ -52,6 +52,9 @@
         SecretModels,
         LarsonBehaviour,
         DynamicTextures,
-        MeshSwaps
+        MeshSwaps,
+        HardEnvironment,
+        Traps,
+        ChallengeRooms
     }
 }

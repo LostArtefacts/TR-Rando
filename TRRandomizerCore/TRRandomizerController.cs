@@ -1672,6 +1672,24 @@ namespace TRRandomizerCore
             set => LevelRandomizer.RandomizeLadders = value;
         }
 
+        public bool RandomizeTraps
+        {
+            get => LevelRandomizer.RandomizeTraps;
+            set => LevelRandomizer.RandomizeTraps = value;
+        }
+
+        public bool RandomizeChallengeRooms
+        {
+            get => LevelRandomizer.RandomizeChallengeRooms;
+            set => LevelRandomizer.RandomizeChallengeRooms = value;
+        }
+
+        public bool HardEnvironmentMode
+        {
+            get => LevelRandomizer.HardEnvironmentMode;
+            set => LevelRandomizer.HardEnvironmentMode = value;
+        }
+
         public uint MirroredLevelCount
         {
             get => LevelRandomizer.MirroredLevelCount;
