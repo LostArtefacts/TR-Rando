@@ -6,6 +6,9 @@
       {
         "Comments": "Drain the swimming pool.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           59,
           93
@@ -90,6 +93,9 @@
       {
         "Comments": "Make a ladder to get back to the starting area.",
         "EMType": 0,
+        "Tags": [
+          3
+        ],
         "TextureMap": {
           "1727": {
             "78": {
@@ -122,6 +128,9 @@
         {
           "Comments": "Potential new position for the stern keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 81,
           "Location": {
             "X": 33280,
@@ -135,6 +144,9 @@
         {
           "Comments": "Potential new position for the stern keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 81,
           "Location": {
             "X": 32256,
@@ -149,6 +161,9 @@
         {
           "Comments": "Potential new position for the stern keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 81,
           "Location": {
             "X": 32256,
@@ -163,6 +178,9 @@
         {
           "Comments": "Potential new position for the stern keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 81,
           "Location": {
             "X": 32256,
@@ -179,6 +197,9 @@
         {
           "Comments": "Potential new position for the storage keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 42,
           "Location": {
             "X": 34304,
@@ -193,6 +214,9 @@
         {
           "Comments": "Potential new position for the storage keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 42,
           "Location": {
             "X": 35328,
@@ -207,6 +231,9 @@
         {
           "Comments": "Potential new position for the storage keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 42,
           "Location": {
             "X": 39424,
@@ -221,6 +248,9 @@
         {
           "Comments": "Potential new position for the storage keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 42,
           "Location": {
             "X": 40448,
@@ -235,6 +265,9 @@
         {
           "Comments": "Potential new position for the storage keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 42,
           "Location": {
             "X": 39424,
@@ -292,6 +325,9 @@
         {
           "Comments": "Potential new position for the cabin keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 100,
           "Location": {
             "X": 40448,
@@ -306,6 +342,9 @@
         {
           "Comments": "Potential new position for the cabin keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 100,
           "Location": {
             "X": 40448,
@@ -320,6 +359,9 @@
         {
           "Comments": "Potential new position for the cabin keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 100,
           "Location": {
             "X": 40448,
@@ -334,6 +376,9 @@
         {
           "Comments": "Potential new position for the cabin keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 100,
           "Location": {
             "X": 40448,
@@ -348,6 +393,9 @@
         {
           "Comments": "Potential new position for the cabin keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 100,
           "Location": {
             "X": 41472,
@@ -362,6 +410,9 @@
         {
           "Comments": "Potential new position for the cabin keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 100,
           "Location": {
             "X": 42496,
@@ -376,6 +427,9 @@
         {
           "Comments": "Potential new position for the cabin keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 100,
           "Location": {
             "X": 42496,
@@ -390,6 +444,9 @@
         {
           "Comments": "Potential new position for the cabin keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 100,
           "Location": {
             "X": 42496,
@@ -404,6 +461,9 @@
         {
           "Comments": "Potential new position for the cabin keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 100,
           "Location": {
             "X": 42496,
@@ -417,6 +477,9 @@
         {
           "Comments": "Potential new position for the cabin keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 100,
           "Location": {
             "X": 41472,
@@ -430,6 +493,9 @@
         {
           "Comments": "Potential new position for the cabin keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 100,
           "Location": {
             "X": 40448,
@@ -445,6 +511,9 @@
         {
           "Comments": "Potential new position for the cabin button.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 59,
           "Location": {
             "X": 38400,
@@ -459,6 +528,9 @@
         {
           "Comments": "Potential new position for the cabin button.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 59,
           "Location": {
             "X": 38400,
@@ -472,6 +544,9 @@
         {
           "Comments": "Potential new position for the cabin button.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 59,
           "Location": {
             "X": 37376,
@@ -485,6 +560,9 @@
         {
           "Comments": "Potential new position for the cabin button.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 59,
           "Location": {
             "X": 37376,
@@ -501,6 +579,9 @@
         {
           "Comments": "Potential new position for the switch in room 109.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 97,
           "Location": {
             "X": 38400,
@@ -514,6 +595,9 @@
         {
           "Comments": "Potential new position for the switch in room 109.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 97,
           "Location": {
             "X": 38400,
@@ -528,6 +612,9 @@
         {
           "Comments": "Potential new position for the switch in room 109 and its pushable block.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 97,
           "Location": {
             "X": 37376,
@@ -539,6 +626,9 @@
         },
         {
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 98,
           "Location": {
             "X": 37376,
@@ -553,6 +643,9 @@
         {
           "Comments": "Potential new position for the switch in room 109 and its pushable block.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 97,
           "Location": {
             "X": 36352,
@@ -564,6 +657,9 @@
         },
         {
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 98,
           "Location": {
             "X": 36352,
@@ -578,6 +674,9 @@
         {
           "Comments": "Potential new position for the switch in room 109 and its pushable block.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 97,
           "Location": {
             "X": 36352,
@@ -589,6 +688,9 @@
         },
         {
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 98,
           "Location": {
             "X": 36352,
@@ -603,6 +705,9 @@
         {
           "Comments": "Potential new position for the switch in room 109 and its pushable block.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 97,
           "Location": {
             "X": 36352,
@@ -614,6 +719,9 @@
         },
         {
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 98,
           "Location": {
             "X": 36352,
@@ -628,6 +736,9 @@
         {
           "Comments": "Potential new position for the switch in room 109 and its pushable block.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 97,
           "Location": {
             "X": 37376,
@@ -639,6 +750,9 @@
         },
         {
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 98,
           "Location": {
             "X": 37376,
@@ -673,6 +787,9 @@
           {
             "Comments": "Potential new position for the stern flipmap lever.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 95,
             "Location": {
               "X": 39424,
@@ -700,6 +817,9 @@
           {
             "Comments": "Potential new position for the stern flipmap lever.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 95,
             "Location": {
               "X": 37376,
@@ -727,6 +847,9 @@
           {
             "Comments": "Potential new position for the stern flipmap lever.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 95,
             "Location": {
               "X": 37376,
@@ -773,6 +896,9 @@
           {
             "Comments": "Make a +Z ladder to get down to the lifeboat safely.",
             "EMType": 0,
+            "Tags": [
+              3
+            ],
             "TextureMap": {
               "1713": {
                 "15": {
@@ -802,6 +928,9 @@
           {
             "Comments": "Make a +X ladder to get down to the lifeboat safely.",
             "EMType": 0,
+            "Tags": [
+              3
+            ],
             "TextureMap": {
               "1713": {
                 "15": {
@@ -831,6 +960,9 @@
           {
             "Comments": "Make a -X ladder to get down to the lifeboat safely.",
             "EMType": 0,
+            "Tags": [
+              3
+            ],
             "TextureMap": {
               "1713": {
                 "15": {

@@ -675,6 +675,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 71168,
@@ -701,6 +704,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 69120,
@@ -727,6 +733,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 68096,
@@ -754,6 +763,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 68096,
@@ -781,6 +793,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 68096,
@@ -808,6 +823,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 68096,
@@ -835,6 +853,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 68096,
@@ -862,6 +883,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 68096,
@@ -889,6 +913,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 70144,
@@ -916,6 +943,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 75264,
@@ -943,6 +973,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 75264,
@@ -970,6 +1003,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 77312,
@@ -997,6 +1033,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 78336,
@@ -1024,6 +1063,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 78336,
@@ -1051,6 +1093,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 78336,
@@ -1077,6 +1122,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 78336,
@@ -1104,6 +1152,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 78336,
@@ -1131,6 +1182,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 78336,
@@ -1157,6 +1211,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 76288,
@@ -1183,6 +1240,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 75264,
@@ -1210,6 +1270,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 24,
             "Location": {
               "X": 72192,
@@ -1255,6 +1318,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 70144,
@@ -1281,6 +1347,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 68096,
@@ -1307,6 +1376,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 68096,
@@ -1334,6 +1406,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 68096,
@@ -1361,6 +1436,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 68096,
@@ -1387,6 +1465,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 68096,
@@ -1414,6 +1495,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 68096,
@@ -1441,6 +1525,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 69120,
@@ -1468,6 +1555,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 71168,
@@ -1495,6 +1585,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 71168,
@@ -1522,6 +1615,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 76288,
@@ -1549,6 +1645,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 78336,
@@ -1576,6 +1675,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 78336,
@@ -1603,6 +1705,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 78336,
@@ -1630,6 +1735,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 78336,
@@ -1657,6 +1765,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 78336,
@@ -1684,6 +1795,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 78336,
@@ -1711,6 +1825,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 77312,
@@ -1737,6 +1854,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 75264,
@@ -1763,6 +1883,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 75264,
@@ -1790,6 +1913,9 @@
           {
             "Comments": "Potential new position for the second lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 71168,
@@ -1817,6 +1943,9 @@
           {
             "Comments": "Potential new position for the lever in room 3.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 22,
             "Location": {
               "X": 74240,
@@ -1855,6 +1984,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 52736,
@@ -1868,6 +2000,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 51712,
@@ -1881,6 +2016,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 51712,
@@ -1895,6 +2033,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 51712,
@@ -1909,6 +2050,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 51712,
@@ -1923,6 +2067,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 51712,
@@ -1937,6 +2084,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 51712,
@@ -1951,6 +2101,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 51712,
@@ -1965,6 +2118,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 53760,
@@ -1979,6 +2135,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 53760,
@@ -1993,6 +2152,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 53760,
@@ -2007,6 +2169,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 53760,
@@ -2023,6 +2188,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 54784,
@@ -2037,6 +2205,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 54784,
@@ -2051,6 +2222,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 54784,
@@ -2065,6 +2239,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 54784,
@@ -2078,6 +2255,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 54784,
@@ -2092,6 +2272,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 54784,
@@ -2106,6 +2289,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 54784,
@@ -2120,6 +2306,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 54784,
@@ -2134,6 +2323,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 54784,
@@ -2148,6 +2340,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 54784,
@@ -2162,6 +2357,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 55808,
@@ -2176,6 +2374,9 @@
           {
             "Comments": "Potential new position for slot 1.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 5,
             "Location": {
               "X": 55808,

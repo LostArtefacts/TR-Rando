@@ -6,6 +6,9 @@
       {
         "Comments": "Move the ladder at the start to the other side below the door.",
         "EMType": 0,
+        "Tags": [
+          3
+        ],
         "TextureMap": {
           "1380": {
             "42": {
@@ -39,6 +42,9 @@
       },
       {
         "EMType": 0,
+        "Tags": [
+          3
+        ],
         "TextureMap": {
           "1387": {
             "42": {
@@ -298,6 +304,9 @@
       {
         "Comments": "Make a ladder to get up to the switch.",
         "EMType": 0,
+        "Tags": [
+          3
+        ],
         "TextureMap": {
           "1348": {
             "31": {
@@ -362,6 +371,9 @@
       {
         "Comments": "Drain the rooms below the lava bowl.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           71,
           29,
@@ -402,6 +414,9 @@
       {
         "Comments": "Flood the first pit near the end.",
         "EMType": 2,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           76,
           23,
@@ -431,6 +446,9 @@
       {
         "Comments": "Flood the talion room.",
         "EMType": 2,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           127
         ],
@@ -520,6 +538,9 @@
       {
         "Comments": "Make a ladder to reach the portal.",
         "EMType": 0,
+        "Tags": [
+          3
+        ],
         "TextureMap": {
           "1387": {
             "139": {
@@ -750,6 +771,9 @@
         {
           "Comments": "Potential new position for the bridge door slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 92,
           "Location": {
             "X": 53760,
@@ -764,6 +788,9 @@
         {
           "Comments": "Potential new position for the bridge door slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 92,
           "Location": {
             "X": 53760,
@@ -777,6 +804,9 @@
         {
           "Comments": "Potential new position for the bridge door slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 92,
           "Location": {
             "X": 52736,
@@ -791,6 +821,9 @@
         {
           "Comments": "Potential new position for the bridge door slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 92,
           "Location": {
             "X": 52736,
@@ -805,6 +838,9 @@
         {
           "Comments": "Potential new position for the bridge door slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 92,
           "Location": {
             "X": 52736,
@@ -819,6 +855,9 @@
         {
           "Comments": "Potential new position for the bridge door slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 92,
           "Location": {
             "X": 52736,
@@ -833,6 +872,9 @@
         {
           "Comments": "Potential new position for the bridge door slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 92,
           "Location": {
             "X": 52736,
@@ -847,6 +889,9 @@
         {
           "Comments": "Potential new position for the bridge door slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 92,
           "Location": {
             "X": 52736,
@@ -880,6 +925,9 @@
           {
             "Comments": "Potential new position for the lever in room 54.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 66,
             "Location": {
               "X": 68096,
@@ -906,6 +954,9 @@
           {
             "Comments": "Potential new position for the lever in room 54.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 66,
             "Location": {
               "X": 67072,
@@ -932,6 +983,9 @@
           {
             "Comments": "Potential new position for the lever in room 54.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 66,
             "Location": {
               "X": 67072,
@@ -959,6 +1013,9 @@
           {
             "Comments": "Potential new position for the lever in room 54.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 66,
             "Location": {
               "X": 67072,
@@ -986,6 +1043,9 @@
           {
             "Comments": "Potential new position for the lever in room 54.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 66,
             "Location": {
               "X": 68096,
@@ -1013,6 +1073,9 @@
           {
             "Comments": "Potential new position for the lever in room 54.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 66,
             "Location": {
               "X": 69120,
@@ -1040,6 +1103,9 @@
           {
             "Comments": "Potential new position for the lever in room 54.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 66,
             "Location": {
               "X": 69120,
@@ -1067,6 +1133,9 @@
           {
             "Comments": "Potential new position for the lever in room 54.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 66,
             "Location": {
               "X": 69120,
@@ -1094,6 +1163,9 @@
           {
             "Comments": "Potential new position for the lever in room 54.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 66,
             "Location": {
               "X": 69120,
@@ -1121,6 +1193,9 @@
           {
             "Comments": "Potential new position for the lever in room 54.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 66,
             "Location": {
               "X": 69120,
@@ -1167,6 +1242,9 @@
           {
             "Comments": "Potential new position for the lever in room 86.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 118,
             "Location": {
               "X": 75264,
@@ -1194,6 +1272,9 @@
           {
             "Comments": "Potential new position for the lever in room 86.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 118,
             "Location": {
               "X": 75264,
@@ -1221,6 +1302,9 @@
           {
             "Comments": "Potential new position for the lever in room 86.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 118,
             "Location": {
               "X": 75264,
@@ -1247,6 +1331,9 @@
           {
             "Comments": "Potential new position for the lever in room 86.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 118,
             "Location": {
               "X": 73216,
@@ -1273,6 +1360,9 @@
           {
             "Comments": "Potential new position for the lever in room 86.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 118,
             "Location": {
               "X": 73216,
@@ -1300,6 +1390,9 @@
           {
             "Comments": "Potential new position for the lever in room 86.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 118,
             "Location": {
               "X": 73216,
@@ -1327,6 +1420,9 @@
           {
             "Comments": "Potential new position for the lever in room 86.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 118,
             "Location": {
               "X": 73216,
@@ -1373,6 +1469,9 @@
           {
             "Comments": "Potential new position for the lever in room 63.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 91,
             "Location": {
               "X": 37376,
@@ -1400,6 +1499,9 @@
           {
             "Comments": "Potential new position for the lever in room 63.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 91,
             "Location": {
               "X": 38400,
@@ -1427,6 +1529,9 @@
           {
             "Comments": "Potential new position for the lever in room 63.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 91,
             "Location": {
               "X": 38400,
@@ -1454,6 +1559,9 @@
           {
             "Comments": "Potential new position for the lever in room 63.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 91,
             "Location": {
               "X": 39424,
@@ -1481,6 +1589,9 @@
           {
             "Comments": "Potential new position for the lever in room 63.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 91,
             "Location": {
               "X": 39424,
@@ -1586,6 +1697,9 @@
         {
           "Comments": "A ladder to get to the new room.",
           "EMType": 0,
+          "Tags": [
+            3
+          ],
           "TextureMap": {
             "1387": {
               "138": {

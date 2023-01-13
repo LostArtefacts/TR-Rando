@@ -98,6 +98,9 @@
       {
         "Comments": "Fill the kitchen sink.",
         "EMType": 2,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           51
         ],
@@ -113,6 +116,9 @@
       {
         "Comments": "Empty the bath.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           11
         ],
@@ -128,6 +134,9 @@
       {
         "Comments": "Drain the pool.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           13
         ],
@@ -141,6 +150,9 @@
       {
         "Comments": "Make a ladder to get out.",
         "EMType": 0,
+        "Tags": [
+          3
+        ],
         "TextureMap": {
           "217": {
             "13": {
@@ -167,6 +179,9 @@
         {
           "Comments": "Potential new position for the gun cupboard keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 47,
           "Location": {
             "X": 34304,
@@ -180,6 +195,9 @@
         {
           "Comments": "Potential new position for the gun cupboard keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 47,
           "Location": {
             "X": 35328,
@@ -193,6 +211,9 @@
         {
           "Comments": "Potential new position for the gun cupboard keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 47,
           "Location": {
             "X": 35328,
@@ -207,6 +228,9 @@
         {
           "Comments": "Potential new position for the gun cupboard keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 47,
           "Location": {
             "X": 30208,
@@ -257,6 +281,9 @@
         {
           "Comments": "Default new position for the music switch (needs to move for the plants).",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 107,
           "Location": {
             "X": 36352,
@@ -301,6 +328,9 @@
           {
             "Comments": "Potential new position for the music switch.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 107,
             "Location": {
               "X": 37376,
@@ -314,6 +344,9 @@
           {
             "Comments": "Potential new position for the music switch.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 107,
             "Location": {
               "X": 38400,
@@ -327,6 +360,9 @@
           {
             "Comments": "Potential new position for the music switch.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 107,
             "Location": {
               "X": 36352,
@@ -340,6 +376,9 @@
           {
             "Comments": "Potential new position for the music switch.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 107,
             "Location": {
               "X": 35328,
