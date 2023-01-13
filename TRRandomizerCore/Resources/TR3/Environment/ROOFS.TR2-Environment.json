@@ -6,6 +6,7 @@
   "OneOf": [],
   "ConditionalAllWithin": [],
   "ConditionalAll": [],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Move door #34 otherwise Lara can't pass.",

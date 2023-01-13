@@ -6,6 +6,7 @@
   "OneOf": [],
   "ConditionalAllWithin": [],
   "ConditionalAll": [],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Move the slots and doors leading to the village as it's an awkward corridor.",
