@@ -2600,6 +2600,77 @@
             }
           },
           {
+            "Comments": "Make the first jump easier.",
+            "EMType": 7,
+            "HardVariant": {
+              "Comments": "Placeholder for hard mode.",
+              "EMType": 1000
+            },
+            "Location": {
+              "X": 33280,
+              "Y": 768,
+              "Z": 98816,
+              "Room": -4
+            },
+            "FloorClicks": -1
+          },
+          {
+            "Comments": "Refacing for above.",
+            "EMType": 23,
+            "HardVariant": {
+              "Comments": "Placeholder for hard mode.",
+              "EMType": 1000
+            },
+            "Modifications": [
+              {
+                "RoomNumber": -4,
+                "FaceIndex": 102,
+                "VertexChanges": {
+                  "1": {
+                    "X": 1024,
+                    "Z": -1024
+                  },
+                  "2": {
+                    "X": 1024,
+                    "Z": -1024
+                  }
+                }
+              },
+              {
+                "RoomNumber": -4,
+                "FaceIndex": 105,
+                "VertexChanges": {
+                  "0": {
+                    "X": 1024,
+                    "Z": -1024
+                  },
+                  "3": {
+                    "X": 1024,
+                    "Z": -1024
+                  }
+                }
+              },
+              {
+                "RoomNumber": -4,
+                "FaceIndex": 100,
+                "VertexChanges": {
+                  "0": {
+                    "Y": -256
+                  },
+                  "1": {
+                    "Y": -256
+                  },
+                  "2": {
+                    "Y": -256
+                  },
+                  "3": {
+                    "Y": -256
+                  }
+                }
+              }
+            ]
+          },
+          {
             "Comments": "Remove redundant faces.",
             "EMType": 22,
             "GeometryMap": {
