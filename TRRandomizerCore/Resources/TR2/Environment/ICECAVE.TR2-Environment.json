@@ -1586,13 +1586,6 @@
         {
           "Comments": "A ladder to get to the new room.",
           "EMType": 0,
-          "Location": {
-            "X": 62976,
-            "Y": 11520,
-            "Z": 43520,
-            "Room": 138
-          },
-          "IsPositiveX": true,
           "TextureMap": {
             "1387": {
               "138": {
@@ -1608,7 +1601,14 @@
                 ]
               }
             }
-          }
+          },
+          "Location": {
+            "X": 62976,
+            "Y": 11520,
+            "Z": 43520,
+            "Room": 138
+          },
+          "IsPositiveX": true
         },
         {
           "Comments": "Make collisional portals between the rooms.",
@@ -1868,6 +1868,7 @@
       ]
     }
   ],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Move the heavy trigger underneath the gong.",

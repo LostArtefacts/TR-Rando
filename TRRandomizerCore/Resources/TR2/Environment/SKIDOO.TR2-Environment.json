@@ -49,13 +49,11 @@
       "Locations": [
         {
           "X": 15872,
-          "Y": 0,
           "Z": 65024,
           "Room": 96
         },
         {
           "X": 16896,
-          "Y": 0,
           "Z": 65024,
           "Room": 96
         }
@@ -76,13 +74,11 @@
       "Locations": [
         {
           "X": 17920,
-          "Y": 0,
           "Z": 65024,
           "Room": 96
         },
         {
           "X": 18944,
-          "Y": 0,
           "Z": 65024,
           "Room": 96
         }
@@ -855,7 +851,8 @@
           "CameraAction": {
             "Value": 37123,
             "Timer": 3,
-            "Once": true
+            "Once": true,
+            "MoveTimer": 8
           }
         }
       ],
@@ -893,7 +890,8 @@
           "CameraAction": {
             "Value": 37123,
             "Timer": 3,
-            "Once": true
+            "Once": true,
+            "MoveTimer": 8
           }
         }
       ],
@@ -929,7 +927,8 @@
           "CameraAction": {
             "Value": 37123,
             "Timer": 3,
-            "Once": true
+            "Once": true,
+            "MoveTimer": 8
           }
         }
       ]
@@ -1646,5 +1645,6 @@
   ],
   "ConditionalAllWithin": [],
   "ConditionalAll": [],
+  "ConditionalOneOf": [],
   "Mirrored": []
 }

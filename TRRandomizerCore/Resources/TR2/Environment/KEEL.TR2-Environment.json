@@ -1604,6 +1604,7 @@
       ]
     }
   ],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Moves door 133 so that it opens properly, otherwise Lara has to glitch through.",

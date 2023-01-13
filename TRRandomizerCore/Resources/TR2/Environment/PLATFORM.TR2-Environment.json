@@ -459,7 +459,8 @@
         "CameraAction": {
           "Value": 37123,
           "Timer": 3,
-          "Once": true
+          "Once": true,
+          "MoveTimer": 8
         }
       },
       {
@@ -1974,5 +1975,6 @@
       ]
     }
   ],
+  "ConditionalOneOf": [],
   "Mirrored": []
 }
