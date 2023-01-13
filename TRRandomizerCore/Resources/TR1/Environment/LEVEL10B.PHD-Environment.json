@@ -33,6 +33,125 @@
       ]
     },
     {
+      "Comments": "Modify the shortcut slope in room 40.",
+      "EMType": 7,
+      "Location": {
+        "X": 51712,
+        "Y": 768,
+        "Z": 56832,
+        "Room": 40
+      },
+      "FloorClicks": -6,
+      "SlantType": 1,
+      "XSlant": -3,
+      "ZSlant": -3
+    },
+    {
+      "Comments": "Any pickups on the old slope will be moved nearby",
+      "EMType": 43,
+      "SectorLocations": [
+        {
+          "X": 51712,
+          "Y": 768,
+          "Z": 56832,
+          "Room": 40
+        }
+      ],
+      "TargetLocation": {
+        "X": 50688,
+        "Y": 768,
+        "Z": 56832,
+        "Room": 40
+      }
+    },
+    {
+      "Comments": "Modify faces to fit.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 40,
+          "FaceIndex": 57,
+          "VertexChanges": {
+            "0": {
+              "Y": -1280
+            },
+            "1": {
+              "Y": -512
+            },
+            "2": {
+              "Y": -768
+            },
+            "3": {
+              "Y": -1536
+            }
+          }
+        },
+        {
+          "RoomNumber": 40,
+          "FaceIndex": 87,
+          "VertexChanges": {
+            "0": {
+              "Y": 512
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Patch the gaps in the walls.",
+      "EMType": 26,
+      "Quads": {
+        "40": [
+          {
+            "Vertices": [
+              484,
+              483,
+              87,
+              486
+            ],
+            "Texture": 26
+          },
+          {
+            "Vertices": [
+              483,
+              482,
+              38,
+              87
+            ],
+            "Texture": 67
+          },
+          {
+            "Vertices": [
+              482,
+              485,
+              35,
+              38
+            ],
+            "Texture": 27
+          },
+          {
+            "Vertices": [
+              485,
+              484,
+              85,
+              35
+            ],
+            "Texture": 27
+          }
+        ]
+      }
+    },
+    {
+      "EMType": 44,
+      "EntityIndex": 87,
+      "TargetLocation": {
+        "X": 54784,
+        "Y": 2432,
+        "Z": 56832,
+        "Room": 40
+      }
+    },
+    {
       "Comments": "Make a return path possible.",
       "EMType": 126,
       "Location": {
@@ -395,6 +514,9 @@
       {
         "Comments": "Convert one of the end trapdoors into a trap.",
         "EMType": 45,
+        "Tags": [
+          4
+        ],
         "EntityIndex": 120,
         "NewEntityType": 38
       },
@@ -478,6 +600,12 @@
             "Y": -16640,
             "Z": 39424,
             "Room": 56
+          },
+          {
+            "X": 54784,
+            "Y": -16640,
+            "Z": 39424,
+            "Room": 56
           }
         ],
         "Trigger": {
@@ -495,130 +623,12 @@
       {
         "Comments": "Potential lever shuffle before the scion.",
         "EMType": 54,
+        "Tags": [
+          1
+        ],
         "EntityMap": {
           "113": 114,
           "114": 113
-        }
-      }
-    ],
-    [
-      {
-        "Comments": "Modify the shortcut slope in room 40.",
-        "EMType": 7,
-        "Location": {
-          "X": 51712,
-          "Y": 768,
-          "Z": 56832,
-          "Room": 40
-        },
-        "FloorClicks": -6,
-        "SlantType": 1,
-        "XSlant": -3,
-        "ZSlant": -3
-      },
-      {
-        "Comments": "Any pickups on the old slope will be moved nearby",
-        "EMType": 43,
-        "SectorLocations": [
-          {
-            "X": 51712,
-            "Y": 768,
-            "Z": 56832,
-            "Room": 40
-          }
-        ],
-        "TargetLocation": {
-          "X": 50688,
-          "Y": 768,
-          "Z": 56832,
-          "Room": 40
-        }
-      },
-      {
-        "Comments": "Modify faces to fit.",
-        "EMType": 23,
-        "Modifications": [
-          {
-            "RoomNumber": 40,
-            "FaceIndex": 57,
-            "VertexChanges": {
-              "0": {
-                "Y": -1280
-              },
-              "1": {
-                "Y": -512
-              },
-              "2": {
-                "Y": -768
-              },
-              "3": {
-                "Y": -1536
-              }
-            }
-          },
-          {
-            "RoomNumber": 40,
-            "FaceIndex": 87,
-            "VertexChanges": {
-              "0": {
-                "Y": 512
-              }
-            }
-          }
-        ]
-      },
-      {
-        "Comments": "Patch the gaps in the walls.",
-        "EMType": 26,
-        "Quads": {
-          "40": [
-            {
-              "Vertices": [
-                484,
-                483,
-                87,
-                486
-              ],
-              "Texture": 26
-            },
-            {
-              "Vertices": [
-                483,
-                482,
-                38,
-                87
-              ],
-              "Texture": 67
-            },
-            {
-              "Vertices": [
-                482,
-                485,
-                35,
-                38
-              ],
-              "Texture": 27
-            },
-            {
-              "Vertices": [
-                485,
-                484,
-                85,
-                35
-              ],
-              "Texture": 27
-            }
-          ]
-        }
-      },
-      {
-        "EMType": 44,
-        "EntityIndex": 87,
-        "TargetLocation": {
-          "X": 54784,
-          "Y": 2432,
-          "Z": 56832,
-          "Room": 40
         }
       }
     ]
@@ -629,6 +639,9 @@
         {
           "Comments": "Potential lever shuffle in room 78.",
           "EMType": 54,
+          "Tags": [
+            1
+          ],
           "EntityMap": {
             "147": 148,
             "148": 149,
@@ -642,6 +655,9 @@
         {
           "Comments": "Potential lever shuffle in room 78.",
           "EMType": 54,
+          "Tags": [
+            1
+          ],
           "EntityMap": {
             "147": 149,
             "148": 150,
@@ -655,6 +671,9 @@
         {
           "Comments": "Potential lever shuffle in room 78.",
           "EMType": 54,
+          "Tags": [
+            1
+          ],
           "EntityMap": {
             "147": 150,
             "148": 151,
@@ -668,6 +687,9 @@
         {
           "Comments": "Potential lever shuffle in room 78.",
           "EMType": 54,
+          "Tags": [
+            1
+          ],
           "EntityMap": {
             "147": 151,
             "148": 147,
@@ -681,6 +703,9 @@
         {
           "Comments": "Potential lever shuffle in room 78.",
           "EMType": 54,
+          "Tags": [
+            1
+          ],
           "EntityMap": {
             "148": 151,
             "149": 148,
@@ -693,6 +718,9 @@
         {
           "Comments": "Potential lever shuffle in room 78.",
           "EMType": 54,
+          "Tags": [
+            1
+          ],
           "EntityMap": {
             "147": 149,
             "149": 151,
@@ -705,6 +733,9 @@
         {
           "Comments": "Potential lever shuffle in room 78.",
           "EMType": 54,
+          "Tags": [
+            1
+          ],
           "EntityMap": {
             "147": 148,
             "148": 150,
@@ -717,6 +748,9 @@
         {
           "Comments": "Potential lever shuffle in room 78.",
           "EMType": 54,
+          "Tags": [
+            1
+          ],
           "EntityMap": {
             "147": 151,
             "148": 149,
@@ -729,6 +763,9 @@
         {
           "Comments": "Potential lever shuffle in room 78.",
           "EMType": 54,
+          "Tags": [
+            1
+          ],
           "EntityMap": {
             "147": 149,
             "148": 150,
@@ -741,6 +778,9 @@
         {
           "Comments": "Potential lever shuffle in room 78.",
           "EMType": 54,
+          "Tags": [
+            1
+          ],
           "EntityMap": {
             "147": 151,
             "149": 147,
@@ -760,6 +800,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 4,
           "TargetLocation": {
             "X": 54784,
@@ -802,6 +845,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 4,
           "TargetLocation": {
             "X": 53760,
@@ -844,6 +890,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 4,
           "TargetLocation": {
             "X": 46592,
@@ -886,6 +935,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 4,
           "TargetLocation": {
             "X": 46592,
@@ -928,6 +980,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 4,
           "TargetLocation": {
             "X": 60928,
@@ -968,6 +1023,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 4,
           "TargetLocation": {
             "X": 58880,
@@ -1009,6 +1067,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 4,
           "TargetLocation": {
             "X": 62976,
@@ -1050,6 +1111,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 4,
           "TargetLocation": {
             "X": 65024,
@@ -1091,6 +1155,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 4,
           "TargetLocation": {
             "X": 64000,
@@ -1141,6 +1208,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 7,
           "TargetLocation": {
             "X": 62976,
@@ -1165,6 +1235,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 7,
           "TargetLocation": {
             "X": 64000,
@@ -1189,6 +1262,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 7,
           "TargetLocation": {
             "X": 65024,
@@ -1213,6 +1289,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 7,
           "TargetLocation": {
             "X": 59904,
@@ -1236,6 +1315,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 7,
           "TargetLocation": {
             "X": 59904,
@@ -1259,6 +1341,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 7,
           "TargetLocation": {
             "X": 66048,
@@ -1283,6 +1368,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 7,
           "TargetLocation": {
             "X": 68096,
@@ -1306,6 +1394,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 7,
           "TargetLocation": {
             "X": 50688,
@@ -1330,6 +1421,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 7,
           "TargetLocation": {
             "X": 42496,
@@ -1391,6 +1485,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 84,
           "TargetLocation": {
             "X": 48640,
@@ -1430,6 +1527,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 84,
           "TargetLocation": {
             "X": 47616,
@@ -1469,6 +1569,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 84,
           "TargetLocation": {
             "X": 47616,
@@ -1507,6 +1610,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 84,
           "TargetLocation": {
             "X": 47616,
@@ -1546,6 +1652,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 84,
           "TargetLocation": {
             "X": 49664,
@@ -1585,6 +1694,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 84,
           "TargetLocation": {
             "X": 54784,
@@ -1624,6 +1736,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 84,
           "TargetLocation": {
             "X": 38400,
@@ -1663,6 +1778,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 84,
           "TargetLocation": {
             "X": 53760,
@@ -1702,6 +1820,9 @@
         {
           "Comments": "Potential clang-clang relocation.",
           "EMType": 44,
+          "Tags": [
+            4
+          ],
           "EntityIndex": 84,
           "TargetLocation": {
             "X": 61952,
@@ -1741,14 +1862,11 @@
     [
       [
         {
-          "Comments": "No additional starting area.",
-          "EMType": 1000
-        }
-      ],
-      [
-        {
           "Comments": "Make a maze before the beginning.",
           "EMType": 126,
+          "Tags": [
+            5
+          ],
           "Location": {
             "X": 58368,
             "Y": 10240,
@@ -2224,12 +2342,27 @@
           "Trigger": {
             "TrigType": 1,
             "Mask": 31,
-            "Timer": 12,
+            "Timer": 18,
             "Actions": [
               {
                 "Parameter": 129
               }
             ]
+          }
+        },
+        {
+          "Comments": "Placeholder for default mode.",
+          "EMType": 1000,
+          "HardVariant": {
+            "Comments": "Tight timer in hard mode.",
+            "EMType": 69,
+            "Location": {
+              "X": 69120,
+              "Y": 10240,
+              "Z": 7680,
+              "Room": -2
+            },
+            "Timer": 12
           }
         },
         {
@@ -2271,6 +2404,9 @@
         {
           "Comments": "Make a long drop before the beginning.",
           "EMType": 126,
+          "Tags": [
+            5
+          ],
           "Location": {
             "X": 44032,
             "Y": -18688,
@@ -3415,6 +3551,9 @@
         {
           "Comments": "Make an RX-Tech style maze at the beginning.",
           "EMType": 126,
+          "Tags": [
+            5
+          ],
           "Location": {
             "X": 58368,
             "Y": 10240,
@@ -4470,6 +4609,18 @@
               "Y": 10240,
               "Z": 12800,
               "Room": -5
+            },
+            {
+              "X": 62976,
+              "Y": 10240,
+              "Z": 11776,
+              "Room": -5
+            },
+            {
+              "X": 62976,
+              "Y": 10240,
+              "Z": 13824,
+              "Room": -5
             }
           ],
           "Trigger": {
@@ -4561,6 +4712,9 @@
         {
           "Comments": "Remove the default lever texture in room 7.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "4": {
               "7": {
@@ -5039,6 +5193,9 @@
         {
           "Comments": "Remove the default lever texture in room 11.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "1": {
               "11": {
@@ -5511,6 +5668,9 @@
         {
           "Comments": "Remove the default lever texture in room 16.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "57": {
               "16": {
@@ -5770,6 +5930,9 @@
         {
           "Comments": "Remove the default lever texture in room 26.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "63": {
               "26": {
@@ -5920,6 +6083,9 @@
         {
           "Comments": "Remove the default lever texture in room 33.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "44": {
               "33": {
@@ -6187,6 +6353,9 @@
         {
           "Comments": "Remove the default lever texture in room 40.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "27": {
               "40": {
@@ -6362,6 +6531,9 @@
         {
           "Comments": "Remove the default lever texture in room 47.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "56": {
               "47": {
@@ -6625,6 +6797,9 @@
         {
           "Comments": "Remove the default lever texture in room 88.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "8": {
               "88": {
@@ -6912,6 +7087,9 @@
         {
           "Comments": "Remove the default lever texture in room 89.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "8": {
               "89": {

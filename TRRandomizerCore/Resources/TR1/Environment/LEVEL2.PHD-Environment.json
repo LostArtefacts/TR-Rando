@@ -20,6 +20,9 @@
       {
         "Comments": "Ensure the boulder model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 38,
@@ -64,6 +67,9 @@
       {
         "Comments": "Ensure the boulder model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 38,
@@ -127,6 +133,9 @@
       {
         "Comments": "Ensure the Damocles sword model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 43,
@@ -190,6 +199,9 @@
       {
         "Comments": "Ensure the clang-clang model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 42,
@@ -236,6 +248,9 @@
       {
         "Comments": "Ensure the clang-clang model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 42,
@@ -282,6 +297,9 @@
       {
         "Comments": "Switch the angle of one of the blades in room 61.",
         "EMType": 44,
+        "Tags": [
+          4
+        ],
         "EntityIndex": 58,
         "TargetLocation": {
           "X": 26112,
@@ -296,6 +314,9 @@
       {
         "Comments": "Add another random blade.",
         "EMType": 51,
+        "Tags": [
+          4
+        ],
         "TypeID": 36,
         "Intensity": -1,
         "Location": {
@@ -333,6 +354,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 55808,
@@ -345,6 +369,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 56832,
@@ -358,6 +385,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 56832,
@@ -371,6 +401,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 56832,
@@ -384,6 +417,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 56832,
@@ -397,6 +433,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 56832,
@@ -410,6 +449,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 56832,
@@ -423,6 +465,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 56832,
@@ -436,6 +481,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 56832,
@@ -449,6 +497,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 56832,
@@ -462,6 +513,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 56832,
@@ -475,6 +529,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 56832,
@@ -488,6 +545,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 55808,
@@ -501,6 +561,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 55808,
@@ -526,6 +589,9 @@
         {
           "Comments": "Potential new position for the skull keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 54784,
@@ -540,6 +606,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 12800,
@@ -553,6 +622,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 14848,
@@ -566,6 +638,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 16896,
@@ -579,6 +654,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 18944,
@@ -592,6 +670,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 18944,
@@ -606,6 +687,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 18944,
@@ -620,6 +704,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 18944,
@@ -634,6 +721,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 18944,
@@ -648,6 +738,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 18944,
@@ -662,6 +755,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 16896,
@@ -676,6 +772,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 14848,
@@ -690,6 +789,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 12800,
@@ -704,6 +806,9 @@
         {
           "Comments": "Potential new position for the idol slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 79,
           "Location": {
             "X": 12800,
@@ -720,6 +825,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 81408,
@@ -734,6 +842,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 79360,
@@ -748,6 +859,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 77312,
@@ -762,6 +876,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 75264,
@@ -776,6 +893,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 82432,
@@ -790,6 +910,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 78336,
@@ -804,6 +927,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 74240,
@@ -818,6 +944,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 82432,
@@ -832,6 +961,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 78336,
@@ -846,6 +978,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 74240,
@@ -860,6 +995,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 82432,
@@ -874,6 +1012,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 78336,
@@ -888,6 +1029,9 @@
         {
           "Comments": "Potential new position for the underwater OG secret room lever.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 30,
           "Location": {
             "X": 74240,
@@ -910,6 +1054,9 @@
         {
           "Comments": "Make an additional end area.",
           "EMType": 126,
+          "Tags": [
+            5
+          ],
           "Location": {
             "X": 7168,
             "Z": 23552
@@ -1587,6 +1734,9 @@
         {
           "Comments": "Ensure the clang-clang model is available.",
           "EMType": 145,
+          "Tags": [
+            4
+          ],
           "Data": [
             {
               "ModelID": 42,
@@ -1631,6 +1781,9 @@
         {
           "Comments": "Remove the default lever texture in room 9.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "5": {
               "9": {
@@ -1904,6 +2057,9 @@
         {
           "Comments": "Remove the default lever texture in room 67.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "174": {
               "67": {
@@ -2325,6 +2481,9 @@
         {
           "Comments": "Remove the default lever texture in room 58.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "174": {
               "58": {
@@ -2700,6 +2859,9 @@
         {
           "Comments": "Remove the default lever texture in room 9.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "171": {
               "81": {

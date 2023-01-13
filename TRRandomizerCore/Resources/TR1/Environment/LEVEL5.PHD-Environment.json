@@ -152,6 +152,24 @@
         "Z": 50688,
         "Room": 10
       }
+    },
+    {
+      "Comments": "Block the shortcut into the end area.",
+      "EMType": 24,
+      "Locations": [
+        {
+          "X": 39269,
+          "Y": -4608,
+          "Z": 45538,
+          "Room": 81,
+          "Angle": -32768
+        }
+      ],
+      "Mesh": {
+        "Intensity1": 4096,
+        "MeshID": 34
+      },
+      "IgnoreSectorEntities": true
     }
   ],
   "Any": [
@@ -159,6 +177,9 @@
       {
         "Comments": "Flood the crocodile pit.",
         "EMType": 2,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           87
         ],
@@ -383,6 +404,9 @@
       {
         "Comments": "Finally, drain the final area.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           39,
           38,
@@ -401,6 +425,9 @@
       {
         "Comments": "Ensure the clang-clang model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 42,
@@ -446,6 +473,9 @@
       {
         "Comments": "Ensure the clang-clang model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 42,
@@ -491,6 +521,9 @@
       {
         "Comments": "Ensure the clang-clang model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 42,
@@ -569,6 +602,9 @@
       {
         "Comments": "Add a boulder.",
         "EMType": 51,
+        "Tags": [
+          4
+        ],
         "TypeID": 38,
         "Flags": 256,
         "Intensity": -1,
@@ -604,6 +640,9 @@
       {
         "Comments": "Ensure the falling ceiling model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 53,
@@ -661,6 +700,9 @@
       {
         "Comments": "Ensure the swinging blade model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 36,
@@ -712,6 +754,9 @@
       {
         "Comments": "Import the trapdoor model.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 65,
@@ -748,6 +793,28 @@
       {
         "Comments": "Pad to raise the trapdoor.",
         "EMType": 61,
+        "HardVariant": {
+          "Comments": "A tighter timed run.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 81408,
+              "Y": 3072,
+              "Z": 43520,
+              "Room": 5
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 7,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
         "Locations": [
           {
             "X": 81408,
@@ -759,7 +826,7 @@
         "Trigger": {
           "TrigType": 1,
           "Mask": 31,
-          "Timer": 7,
+          "Timer": 10,
           "Actions": [
             {
               "Parameter": -1
@@ -783,6 +850,9 @@
       {
         "Comments": "Drain the starting pool.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           3,
           5
@@ -849,6 +919,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 36352,
@@ -863,6 +936,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 33280,
@@ -876,6 +952,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 33280,
@@ -890,6 +969,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 33280,
@@ -904,6 +986,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 33280,
@@ -918,6 +1003,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 33280,
@@ -932,6 +1020,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 33280,
@@ -946,6 +1037,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 33280,
@@ -960,6 +1054,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 34304,
@@ -974,6 +1071,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 35328,
@@ -988,6 +1088,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 36352,
@@ -1002,6 +1105,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 36352,
@@ -1016,6 +1122,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 36352,
@@ -1030,6 +1139,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 35328,
@@ -1044,6 +1156,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 34304,
@@ -1057,6 +1172,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 33280,
@@ -1071,6 +1189,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 23,
           "Location": {
             "X": 33280,
@@ -1089,6 +1210,9 @@
         {
           "Comments": "Remove the default lever texture in room 44.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "1": {
               "44": {
@@ -1849,6 +1973,9 @@
           {
             "Comments": "Make a set of platforming rooms.",
             "EMType": 126,
+            "Tags": [
+              5
+            ],
             "Location": {
               "X": 29696,
               "Y": 2560,
@@ -2719,7 +2846,7 @@
             ]
           },
           {
-            "Comments": "Add a moving block and its triggers.",
+            "Comments": "Add a moving block.",
             "EMType": 51,
             "TypeID": 52,
             "Intensity": -1,
@@ -2732,20 +2859,41 @@
             }
           },
           {
+            "Comments": "Trigger it after the first jump in easy mode.",
             "EMType": 61,
-            "ExpandedLocations": {
-              "Location": {
-                "X": 32256,
-                "Y": 2560,
-                "Z": 92672,
-                "Room": -4
+            "HardVariant": {
+              "Comments": "Triggers are on the floor instead, plus the block will return to its original spot after 5 seconds.",
+              "EMType": 61,
+              "ExpandedLocations": {
+                "Location": {
+                  "X": 32256,
+                  "Y": 2560,
+                  "Z": 92672,
+                  "Room": -4
+                },
+                "ExpandX": 2,
+                "ExpandZ": 2
               },
-              "ExpandX": 2,
-              "ExpandZ": 2
+              "Trigger": {
+                "Mask": 31,
+                "Timer": 5,
+                "Actions": [
+                  {
+                    "Parameter": -1
+                  }
+                ]
+              }
             },
+            "Locations": [
+              {
+                "X": 33280,
+                "Y": 512,
+                "Z": 94720,
+                "Room": -4
+              }
+            ],
             "Trigger": {
               "Mask": 31,
-              "Timer": 5,
               "Actions": [
                 {
                   "Parameter": -1
@@ -2754,19 +2902,74 @@
             }
           },
           {
-            "Comments": "Add spikes under the block's target as we can't add a death tile here.",
+            "Comments": "Add a trapdoor in easy mode for the 4th jump.",
             "EMType": 51,
-            "TypeID": 37,
+            "HardVariant": {
+              "Comments": "Add spikes under the block's target in hard mode as we can't add a death tile here.",
+              "EMType": 51,
+              "TypeID": 37,
+              "Intensity": 4096,
+              "Location": {
+                "X": 31232,
+                "Y": 2560,
+                "Z": 91648,
+                "Room": -4
+              }
+            },
+            "TypeID": 65,
+            "Flags": 15872,
             "Intensity": 4096,
             "Location": {
-              "X": 31232,
-              "Y": 2560,
-              "Z": 91648,
-              "Room": -4
+              "X": 30208,
+              "Y": 512,
+              "Z": 94720,
+              "Room": -3
             }
           },
           {
-            "Comments": "Add another moving block and its triggers.",
+            "Comments": "Trapdoor dummy trigger.",
+            "EMType": 61,
+            "HardVariant": {
+              "Comments": "Not required in hard mode.",
+              "EMType": 1000
+            },
+            "EntityLocation": -1,
+            "Trigger": {
+              "TrigType": 8,
+              "Mask": 31,
+              "Actions": [
+                {
+                  "Parameter": -1
+                }
+              ]
+            }
+          },
+          {
+            "Comments": "Trigger the trapdoor on the 3rd jump.",
+            "EMType": 61,
+            "HardVariant": {
+              "Comments": "No trigger needed in hard mode.",
+              "EMType": 1000
+            },
+            "Locations": [
+              {
+                "X": 28160,
+                "Y": 512,
+                "Z": 93696,
+                "Room": -3
+              }
+            ],
+            "Trigger": {
+              "Mask": 31,
+              "Actions": [
+                {
+                  "Parameter": -1
+                }
+              ]
+            }
+          },
+          {
+            "Comments": "Add another moving block.",
             "EMType": 51,
             "TypeID": 52,
             "Intensity": -1,
@@ -2779,20 +2982,41 @@
             }
           },
           {
+            "Comments": "Trigger the moving block.",
             "EMType": 61,
-            "ExpandedLocations": {
-              "Location": {
-                "X": 29184,
-                "Y": 2560,
-                "Z": 97792,
-                "Room": -3
+            "HardVariant": {
+              "Comments": "The hard variant will return the block to its original spot after 5 seconds.",
+              "EMType": 61,
+              "ExpandedLocations": {
+                "Location": {
+                  "X": 29184,
+                  "Y": 2560,
+                  "Z": 97792,
+                  "Room": -3
+                },
+                "ExpandX": 2,
+                "ExpandZ": 2
               },
-              "ExpandX": 2,
-              "ExpandZ": 2
+              "Trigger": {
+                "Mask": 31,
+                "Timer": 5,
+                "Actions": [
+                  {
+                    "Parameter": -1
+                  }
+                ]
+              }
             },
+            "Locations": [
+              {
+                "X": 30208,
+                "Y": -512,
+                "Z": 96768,
+                "Room": -3
+              }
+            ],
             "Trigger": {
               "Mask": 31,
-              "Timer": 5,
               "Actions": [
                 {
                   "Parameter": -1
@@ -2801,15 +3025,28 @@
             }
           },
           {
-            "Comments": "Same idea with the spikes under the block.",
+            "Comments": "An additional trapdoor to make exiting easier.",
             "EMType": 51,
-            "TypeID": 37,
-            "Intensity": 4096,
+            "HardVariant": {
+              "Comments": "Same idea with the spikes under the block.",
+              "EMType": 51,
+              "TypeID": 37,
+              "Intensity": 4096,
+              "Location": {
+                "X": 28160,
+                "Y": 2560,
+                "Z": 98816,
+                "Room": -3
+              }
+            },
+            "TypeID": 65,
+            "Flags": 15872,
+            "Intensity": 5632,
             "Location": {
-              "X": 28160,
-              "Y": 2560,
-              "Z": 98816,
-              "Room": -3
+              "X": 26112,
+              "Z": 95744,
+              "Room": -2,
+              "Angle": 16384
             }
           },
           {
@@ -2826,6 +3063,7 @@
             }
           },
           {
+            "Comments": "Trapdoor dummy trigger.",
             "EMType": 61,
             "EntityLocation": -1,
             "Trigger": {
@@ -2839,8 +3077,48 @@
             }
           },
           {
-            "Comments": "Pad to raise the trapdoor.",
+            "Comments": "Trapdoor dummy trigger.",
             "EMType": 61,
+            "HardVariant": {
+              "Comments": "Not required in hard mode.",
+              "EMType": 1000
+            },
+            "EntityLocation": -2,
+            "Trigger": {
+              "TrigType": 8,
+              "Mask": 31,
+              "Actions": [
+                {
+                  "Parameter": -2
+                }
+              ]
+            }
+          },
+          {
+            "Comments": "Pad to raise the trapdoor(s).",
+            "EMType": 61,
+            "HardVariant": {
+              "Comments": "The hard variant sets the trapdoor on a 15 second timer.",
+              "EMType": 61,
+              "Locations": [
+                {
+                  "X": 27136,
+                  "Y": 2304,
+                  "Z": 91648,
+                  "Room": -2
+                }
+              ],
+              "Trigger": {
+                "TrigType": 1,
+                "Mask": 31,
+                "Timer": 15,
+                "Actions": [
+                  {
+                    "Parameter": -1
+                  }
+                ]
+              }
+            },
             "Locations": [
               {
                 "X": 27136,
@@ -2852,8 +3130,10 @@
             "Trigger": {
               "TrigType": 1,
               "Mask": 31,
-              "Timer": 15,
               "Actions": [
+                {
+                  "Parameter": -2
+                },
                 {
                   "Parameter": -1
                 }
@@ -2989,6 +3269,9 @@
           {
             "Comments": "An easier variant of above.",
             "EMType": 126,
+            "Tags": [
+              5
+            ],
             "Location": {
               "X": 29696,
               "Y": 2560,

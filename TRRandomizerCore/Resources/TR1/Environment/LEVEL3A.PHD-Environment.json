@@ -96,6 +96,9 @@
       {
         "Comments": "Ensure the spikes model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 37,
@@ -120,6 +123,9 @@
       {
         "Comments": "Ensure the spikes model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 37,
@@ -144,6 +150,9 @@
       {
         "Comments": "Ensure the spikes model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 37,
@@ -168,6 +177,9 @@
       {
         "Comments": "Ensure the spikes model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 37,
@@ -192,6 +204,9 @@
       {
         "Comments": "Ensure the spikes model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 37,
@@ -216,6 +231,9 @@
       {
         "Comments": "Ensure the spikes model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 37,
@@ -240,6 +258,9 @@
       {
         "Comments": "Ensure the boulder model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 38,
@@ -283,6 +304,9 @@
       {
         "Comments": "Ensure the clang-clang model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 42,
@@ -329,6 +353,9 @@
       {
         "Comments": "Ensure the clang-clang model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 42,
@@ -375,6 +402,9 @@
       {
         "Comments": "Ensure the clang-clang model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 42,
@@ -430,6 +460,9 @@
         {
           "Comments": "Make a trap/puzzle area at the start.",
           "EMType": 126,
+          "Tags": [
+            5
+          ],
           "Location": {
             "X": 24576,
             "Y": -3072,
@@ -1656,6 +1689,9 @@
         {
           "Comments": "Make a block puzzle room.",
           "EMType": 126,
+          "Tags": [
+            5
+          ],
           "Location": {
             "X": 24576,
             "Y": -256,

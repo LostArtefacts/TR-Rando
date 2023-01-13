@@ -278,6 +278,9 @@
       {
         "Comments": "Remove the original boulder pads in room 38.",
         "EMType": 62,
+        "Tags": [
+          4
+        ],
         "Locations": [
           {
             "X": 100864,
@@ -340,6 +343,9 @@
       {
         "Comments": "Remove the original boulder triggers from room 56.",
         "EMType": 62,
+        "Tags": [
+          4
+        ],
         "Locations": [
           {
             "X": 73216,
@@ -392,6 +398,9 @@
       {
         "Comments": "Make some walls near the cowboy area.",
         "EMType": 127,
+        "Tags": [
+          5
+        ],
         "Locations": [
           {
             "X": 60928,
@@ -681,6 +690,9 @@
       {
         "Comments": "Remove the boulder triggers for item 58.",
         "EMType": 62,
+        "Tags": [
+          4
+        ],
         "Locations": [
           {
             "X": 59904,
@@ -730,6 +742,9 @@
         {
           "Comments": "Potential slot location.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 76,
           "Location": {
             "X": 34304,
@@ -743,6 +758,9 @@
         {
           "Comments": "Potential slot location.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 76,
           "Location": {
             "X": 36352,
@@ -756,6 +774,9 @@
         {
           "Comments": "Potential slot location.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 76,
           "Location": {
             "X": 36352,
@@ -770,6 +791,9 @@
         {
           "Comments": "Potential slot location.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 76,
           "Location": {
             "X": 50688,
@@ -784,6 +808,9 @@
         {
           "Comments": "Potential slot location.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 76,
           "Location": {
             "X": 50688,
@@ -798,6 +825,9 @@
         {
           "Comments": "Potential slot location.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 76,
           "Location": {
             "X": 48640,
@@ -812,6 +842,9 @@
         {
           "Comments": "Potential slot location.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 76,
           "Location": {
             "X": 48640,
@@ -826,6 +859,9 @@
         {
           "Comments": "Potential slot location.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 76,
           "Location": {
             "X": 47616,
@@ -840,6 +876,9 @@
         {
           "Comments": "Potential slot location.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 76,
           "Location": {
             "X": 47616,
@@ -854,6 +893,9 @@
         {
           "Comments": "Potential slot location.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 76,
           "Location": {
             "X": 47616,
@@ -876,6 +918,9 @@
         {
           "Comments": "Make a new area 'in Atlantis' - trapdoor timed run to the end.",
           "EMType": 126,
+          "Tags": [
+            5
+          ],
           "Location": {
             "X": 23552,
             "Y": 256,
@@ -2163,7 +2208,7 @@
           "Trigger": {
             "TrigType": 1,
             "Mask": 31,
-            "Timer": 17,
+            "Timer": 28,
             "Actions": [
               {
                 "Parameter": -6
@@ -2187,6 +2232,21 @@
           }
         },
         {
+          "Comments": "Placeholder for default mode.",
+          "EMType": 1000,
+          "HardVariant": {
+            "Comments": "Tighten the timer in hard mode.",
+            "EMType": 69,
+            "Location": {
+              "X": 28160,
+              "Y": -512,
+              "Z": 93696,
+              "Room": -2
+            },
+            "Timer": 17
+          }
+        },
+        {
           "Comments": "Auto-generate vertex lighting in the new rooms.",
           "EMType": 128,
           "RoomIndices": [
@@ -2201,6 +2261,9 @@
         {
           "Comments": "Make a drop from Mines into a new puzzle area.",
           "EMType": 126,
+          "Tags": [
+            5
+          ],
           "Location": {
             "X": 22528,
             "Y": 256,
@@ -3574,7 +3637,6 @@
           "Trigger": {
             "TrigType": 2,
             "Mask": 31,
-            "Timer": 28,
             "SwitchOrKeyRef": -1,
             "Actions": [
               {
@@ -3588,6 +3650,20 @@
                 "Parameter": 20
               }
             ]
+          }
+        },
+        {
+          "Comments": "Placeholder for default mode.",
+          "EMType": 1000,
+          "HardVariant": {
+            "Comments": "Tight timer in hard mode.",
+            "EMType": 69,
+            "Location": {
+              "X": 28160,
+              "Z": 90624,
+              "Room": -3
+            },
+            "Timer": 28
           }
         },
         {
@@ -3652,6 +3728,9 @@
         {
           "Comments": "Remove the default lever texture in room 11.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "55": {
               "11": {
@@ -3940,6 +4019,9 @@
         {
           "Comments": "Remove the default lever texture in room 12.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "3": {
               "12": {
@@ -4199,6 +4281,9 @@
         {
           "Comments": "Remove the default lever texture in room 14.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "2": {
               "14": {
@@ -4422,6 +4507,9 @@
         {
           "Comments": "Remove the default lever texture in room 27.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "3": {
               "27": {
@@ -4677,6 +4765,9 @@
         {
           "Comments": "Remove the default lever texture in room 40.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "2": {
               "40": {
@@ -4819,6 +4910,9 @@
         {
           "Comments": "Remove the default lever texture in room 44.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "3": {
               "44": {
@@ -4906,6 +5000,9 @@
         {
           "Comments": "Remove the default lever texture in room 64.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "125": {
               "64": {
@@ -4966,6 +5063,9 @@
         {
           "Comments": "Remove the default lever texture in room 64.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "125": {
               "67": {
@@ -5189,6 +5289,9 @@
         {
           "Comments": "Remove the default lever texture in room 89.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "1": {
               "89": {

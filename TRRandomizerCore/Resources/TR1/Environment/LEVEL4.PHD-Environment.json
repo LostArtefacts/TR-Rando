@@ -946,6 +946,9 @@
       {
         "Comments": "Ensure the dart model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 40,
@@ -1013,6 +1016,9 @@
       {
         "Comments": "Ensure the clang-clang model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 42,
@@ -1058,6 +1064,9 @@
       {
         "Comments": "Ensure the falling ceiling model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 53,
@@ -1103,6 +1112,9 @@
       {
         "Comments": "Ensure the falling ceiling model is available.",
         "EMType": 145,
+        "Tags": [
+          4
+        ],
         "Data": [
           {
             "ModelID": 53,
@@ -1142,6 +1154,9 @@
       {
         "Comments": "Add a blade.",
         "EMType": 51,
+        "Tags": [
+          4
+        ],
         "TypeID": 36,
         "Intensity": -1,
         "Location": {
@@ -1180,6 +1195,9 @@
         {
           "Comments": "Move the first heavy trigger back a tile.",
           "EMType": 67,
+          "Tags": [
+            5
+          ],
           "BaseLocation": {
             "X": 31232,
             "Y": 256,
@@ -1252,6 +1270,9 @@
         {
           "Comments": "Move the second heavy trigger forward a tile.",
           "EMType": 67,
+          "Tags": [
+            5
+          ],
           "BaseLocation": {
             "X": 33280,
             "Y": 256,
@@ -1324,6 +1345,9 @@
         {
           "Comments": "Move the Neptune keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 80,
           "Location": {
             "X": 36352,
@@ -1374,6 +1398,9 @@
         {
           "Comments": "Move the Neptune keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 80,
           "Location": {
             "X": 43520,
@@ -1424,6 +1451,9 @@
         {
           "Comments": "Move the Neptune keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 80,
           "Location": {
             "X": 50688,
@@ -1474,6 +1504,9 @@
         {
           "Comments": "Move the Neptune keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 80,
           "Location": {
             "X": 55808,
@@ -1524,6 +1557,9 @@
         {
           "Comments": "Move the Neptune keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 80,
           "Location": {
             "X": 56832,
@@ -1574,6 +1610,9 @@
         {
           "Comments": "Move the Neptune keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 80,
           "Location": {
             "X": 39424,
@@ -1626,6 +1665,9 @@
         {
           "Comments": "Move Thor's block.",
           "EMType": 44,
+          "Tags": [
+            5
+          ],
           "EntityIndex": 19,
           "TargetLocation": {
             "X": 55808,
@@ -1639,6 +1681,9 @@
         {
           "Comments": "Move Thor's block.",
           "EMType": 44,
+          "Tags": [
+            5
+          ],
           "EntityIndex": 19,
           "TargetLocation": {
             "X": 57856,
@@ -1652,6 +1697,9 @@
         {
           "Comments": "Move Thor's block.",
           "EMType": 44,
+          "Tags": [
+            5
+          ],
           "EntityIndex": 19,
           "TargetLocation": {
             "X": 58880,
@@ -1665,6 +1713,9 @@
         {
           "Comments": "Move Thor's block.",
           "EMType": 44,
+          "Tags": [
+            5
+          ],
           "EntityIndex": 19,
           "TargetLocation": {
             "X": 59904,
@@ -1678,6 +1729,9 @@
         {
           "Comments": "Move Thor's block.",
           "EMType": 44,
+          "Tags": [
+            5
+          ],
           "EntityIndex": 19,
           "TargetLocation": {
             "X": 60928,
@@ -1693,6 +1747,9 @@
         {
           "Comments": "Move Thor's other block.",
           "EMType": 44,
+          "Tags": [
+            5
+          ],
           "EntityIndex": 20,
           "TargetLocation": {
             "X": 60928,
@@ -1706,6 +1763,9 @@
         {
           "Comments": "Move Thor's other block.",
           "EMType": 44,
+          "Tags": [
+            5
+          ],
           "EntityIndex": 20,
           "TargetLocation": {
             "X": 60928,
@@ -1719,6 +1779,9 @@
         {
           "Comments": "Move Thor's other block.",
           "EMType": 44,
+          "Tags": [
+            5
+          ],
           "EntityIndex": 20,
           "TargetLocation": {
             "X": 61952,
@@ -1732,6 +1795,9 @@
         {
           "Comments": "Move Thor's other block.",
           "EMType": 44,
+          "Tags": [
+            5
+          ],
           "EntityIndex": 20,
           "TargetLocation": {
             "X": 59904,
@@ -1745,6 +1811,9 @@
         {
           "Comments": "Move Thor's other block.",
           "EMType": 44,
+          "Tags": [
+            5
+          ],
           "EntityIndex": 20,
           "TargetLocation": {
             "X": 55808,
@@ -1758,6 +1827,9 @@
         {
           "Comments": "Move Thor's other block.",
           "EMType": 44,
+          "Tags": [
+            5
+          ],
           "EntityIndex": 20,
           "TargetLocation": {
             "X": 56832,
@@ -1773,6 +1845,9 @@
         {
           "Comments": "Make an Atlas-style trap/puzzle area at the end (a bit like Tinnos).",
           "EMType": 126,
+          "Tags": [
+            5
+          ],
           "Location": {
             "X": 17408,
             "Y": 23296,
@@ -2542,6 +2617,9 @@
         {
           "Comments": "Make a Neptune-style trap/puzzle area at the end.",
           "EMType": 126,
+          "Tags": [
+            5
+          ],
           "Location": {
             "X": 17408,
             "Y": 25344,
@@ -2893,15 +2971,19 @@
           }
         },
         {
-          "Comments": "Import the clang-clang model.",
-          "EMType": 145,
-          "Data": [
-            {
-              "ModelID": 42,
-              "TexturedFace3": 33,
-              "TexturedFace4": 9
-            }
-          ]
+          "Comments": "Placeholder for easy mode.",
+          "EMType": 1000,
+          "HardVariant": {
+            "Comments": "Import the clang-clang model.",
+            "EMType": 145,
+            "Data": [
+              {
+                "ModelID": 42,
+                "TexturedFace3": 33,
+                "TexturedFace4": 9
+              }
+            ]
+          }
         },
         {
           "Comments": "Convert the end door into a blade.",
@@ -2958,67 +3040,85 @@
           }
         },
         {
-          "Comments": "Add a clang-clang and trigger it.",
-          "EMType": 51,
-          "TypeID": 42,
-          "Intensity": -1,
-          "Location": {
-            "X": 23552,
-            "Y": 25344,
-            "Z": 38400,
-            "Room": -2,
-            "Angle": -16384
-          }
-        },
-        {
-          "EMType": 61,
-          "Locations": [
-            {
-              "X": 24064,
+          "Comments": "Placeholder for easy mode.",
+          "EMType": 1000,
+          "HardVariant": {
+            "Comments": "Add clang-clang doors.",
+            "EMType": 51,
+            "TypeID": 42,
+            "Intensity": -1,
+            "Location": {
+              "X": 23552,
               "Y": 25344,
               "Z": 38400,
-              "Room": -2
+              "Room": -2,
+              "Angle": -16384
             }
-          ],
-          "Trigger": {
-            "Mask": 31,
-            "Actions": [
+          }
+        },
+        {
+          "Comments": "Placeholder for easy mode.",
+          "EMType": 1000,
+          "HardVariant": {
+            "Comments": "Trigger the clang-clang doors.",
+            "EMType": 61,
+            "Locations": [
               {
-                "Parameter": -1
+                "X": 24064,
+                "Y": 25344,
+                "Z": 38400,
+                "Room": -2
               }
-            ]
+            ],
+            "Trigger": {
+              "Mask": 31,
+              "Actions": [
+                {
+                  "Parameter": -1
+                }
+              ]
+            }
           }
         },
         {
-          "Comments": "Add a boulder and trigger it.",
-          "EMType": 51,
-          "TypeID": 38,
-          "Intensity": -1,
-          "Location": {
-            "X": 18944,
-            "Y": 23808,
-            "Z": 38400,
-            "Room": -2,
-            "Angle": 16384
-          }
-        },
-        {
-          "EMType": 61,
-          "Locations": [
-            {
-              "X": 20992,
-              "Y": 25344,
+          "Comments": "Placeholder for easy mode.",
+          "EMType": 1000,
+          "HardVariant": {
+            "Comments": "Add a boulder.",
+            "EMType": 51,
+            "TypeID": 38,
+            "Intensity": -1,
+            "Location": {
+              "X": 18944,
+              "Y": 23808,
               "Z": 38400,
-              "Room": -2
+              "Room": -2,
+              "Angle": 16384
             }
-          ],
-          "Trigger": {
-            "Mask": 31,
-            "Actions": [
+          }
+        },
+        {
+          "Comments": "Placeholder for easy mode.",
+          "EMType": 1000,
+          "HardVariant": {
+            "Comments": "Trigger the boulder.",
+            "EMType": 61,
+            "Locations": [
               {
-                "Parameter": -1
+                "X": 20992,
+                "Y": 25344,
+                "Z": 38400,
+                "Room": -2
               }
-            ]
+            ],
+            "Trigger": {
+              "Mask": 31,
+              "Actions": [
+                {
+                  "Parameter": -1
+                }
+              ]
+            }
           }
         },
         {
@@ -3041,6 +3141,10 @@
         {
           "Comments": "Make an extra platforming set of rooms at the end (is there a Greek God of Platforming?)",
           "EMType": 126,
+          "Tags": [
+            5,
+            6
+          ],
           "Location": {
             "X": 21504,
             "Y": 23296,
@@ -4173,6 +4277,9 @@
         {
           "Comments": "Move the first pushblock into the ceiling and hide it.",
           "EMType": 48,
+          "Tags": [
+            5
+          ],
           "Invisible": true
         },
         {
@@ -4456,6 +4563,9 @@
         {
           "Comments": "Remove the default lever texture in room 2.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "44": {
               "2": {
@@ -4608,6 +4718,9 @@
         {
           "Comments": "Remove the default lever texture in room 36.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "76": {
               "36": {
@@ -4934,6 +5047,9 @@
         {
           "Comments": "Remove the default lever texture in room 13.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "16": {
               "13": {
@@ -5229,6 +5345,9 @@
         {
           "Comments": "Remove the default lever texture in room 20.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "86": {
               "20": {
@@ -5460,6 +5579,9 @@
         {
           "Comments": "Remove the default lever texture in room 21.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "85": {
               "21": {
@@ -5614,6 +5736,9 @@
         {
           "Comments": "Remove the default lever texture in room 3.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "7": {
               "3": {
@@ -5740,6 +5865,9 @@
         {
           "Comments": "Remove one of the swords from the default trigger.",
           "EMType": 71,
+          "Tags": [
+            4
+          ],
           "Locations": [
             {
               "X": 17920,

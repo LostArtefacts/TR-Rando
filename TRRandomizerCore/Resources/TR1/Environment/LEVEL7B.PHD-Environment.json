@@ -617,6 +617,9 @@
       {
         "Comments": "Make a copy of room 27.",
         "EMType": 123,
+        "Tags": [
+          5
+        ],
         "RoomIndex": 27,
         "NewLocation": {
           "X": 25600,
@@ -1137,6 +1140,9 @@
       {
         "Comments": "Add a trap.",
         "EMType": 51,
+        "Tags": [
+          4
+        ],
         "TypeID": 42,
         "Intensity": -1,
         "Location": {
@@ -1167,6 +1173,9 @@
       {
         "Comments": "Add some more traps.",
         "EMType": 51,
+        "Tags": [
+          4
+        ],
         "TypeID": 40,
         "Intensity": -1,
         "Location": {
@@ -1248,6 +1257,9 @@
       {
         "Comments": "Create a puzzle area at the beginning of the level.",
         "EMType": 126,
+        "Tags": [
+          5
+        ],
         "Location": {
           "X": 56320,
           "Y": -10496
@@ -2021,6 +2033,9 @@
       {
         "Comments": "Add some extra clang-clangs.",
         "EMType": 51,
+        "Tags": [
+          4
+        ],
         "TypeID": 42,
         "Intensity": -1,
         "Location": {
@@ -2053,6 +2068,9 @@
         {
           "Comments": "Potential lever relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 41,
           "Location": {
             "X": 53760,
@@ -2066,6 +2084,9 @@
         {
           "Comments": "Potential lever relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 41,
           "Location": {
             "X": 51712,
@@ -2079,6 +2100,9 @@
         {
           "Comments": "Potential lever relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 41,
           "Location": {
             "X": 50688,
@@ -2092,6 +2116,9 @@
         {
           "Comments": "Potential lever relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 41,
           "Location": {
             "X": 49664,
@@ -2106,6 +2133,9 @@
         {
           "Comments": "Potential lever relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 41,
           "Location": {
             "X": 49664,
@@ -2120,6 +2150,9 @@
         {
           "Comments": "Potential lever relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 41,
           "Location": {
             "X": 50688,
@@ -2134,6 +2167,9 @@
         {
           "Comments": "Potential lever relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 41,
           "Location": {
             "X": 51712,
@@ -2148,6 +2184,9 @@
         {
           "Comments": "Potential lever relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 41,
           "Location": {
             "X": 52736,
@@ -2162,6 +2201,9 @@
         {
           "Comments": "Potential lever relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 41,
           "Location": {
             "X": 53760,
@@ -2176,6 +2218,9 @@
         {
           "Comments": "Potential lever relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 41,
           "Location": {
             "X": 54784,
@@ -2190,6 +2235,9 @@
         {
           "Comments": "Potential lever relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 41,
           "Location": {
             "X": 54784,
@@ -2206,6 +2254,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 48,
           "Location": {
             "X": 52736,
@@ -2220,6 +2271,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 48,
           "Location": {
             "X": 52736,
@@ -2234,6 +2288,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 48,
           "Location": {
             "X": 52736,
@@ -2248,6 +2305,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 48,
           "Location": {
             "X": 52736,
@@ -2261,6 +2321,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 48,
           "Location": {
             "X": 52736,
@@ -2275,6 +2338,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 48,
           "Location": {
             "X": 52736,
@@ -2291,6 +2357,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 33280,
@@ -2305,6 +2374,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 34304,
@@ -2319,6 +2391,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 35328,
@@ -2333,6 +2408,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 35328,
@@ -2347,6 +2425,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2361,6 +2442,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2375,6 +2459,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2389,6 +2476,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2402,6 +2492,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 35328,
@@ -2416,6 +2509,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2430,6 +2526,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2444,6 +2543,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2458,6 +2560,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2472,6 +2577,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2486,6 +2594,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2500,6 +2611,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2514,6 +2628,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2528,6 +2645,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 36352,
@@ -2541,6 +2661,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 31232,
@@ -2555,6 +2678,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 30208,
@@ -2569,6 +2695,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 29184,
@@ -2583,6 +2712,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 29184,
@@ -2597,6 +2729,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2611,6 +2746,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2625,6 +2763,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2639,6 +2780,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2652,6 +2796,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 29184,
@@ -2666,6 +2813,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2680,6 +2830,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2694,6 +2847,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2708,6 +2864,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2722,6 +2881,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2736,6 +2898,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2750,6 +2915,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2764,6 +2932,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2778,6 +2949,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 87,
           "Location": {
             "X": 28160,
@@ -2793,6 +2967,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 57,
           "Location": {
             "X": 32256,
@@ -2807,6 +2984,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 57,
           "Location": {
             "X": 34304,
@@ -2821,6 +3001,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 57,
           "Location": {
             "X": 37376,
@@ -2835,6 +3018,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 57,
           "Location": {
             "X": 38400,
@@ -2849,6 +3035,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 57,
           "Location": {
             "X": 35328,
@@ -2864,6 +3053,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 58,
           "Location": {
             "X": 32256,
@@ -2877,6 +3069,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 58,
           "Location": {
             "X": 34304,
@@ -2890,6 +3085,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 58,
           "Location": {
             "X": 36352,
@@ -2903,6 +3101,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 58,
           "Location": {
             "X": 38400,
@@ -2916,6 +3117,9 @@
         {
           "Comments": "Potential keyhole relocation.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 58,
           "Location": {
             "X": 38400,
@@ -2994,6 +3198,9 @@
         {
           "Comments": "Remove the default lever texture in room 23.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "52": {
               "23": {
@@ -3216,6 +3423,9 @@
         {
           "Comments": "Remove the default lever texture in room 21 and 52.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "49": {
               "21": {
@@ -3494,6 +3704,9 @@
         {
           "Comments": "Remove the default lever texture in room 28.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "28": {
               "28": {
@@ -3619,6 +3832,9 @@
         {
           "Comments": "Remove the default lever texture in room 49.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "81": {
               "49": {
@@ -3746,6 +3962,9 @@
         {
           "Comments": "Remove the default lever texture in room 94.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "33": {
               "94": {
@@ -3868,6 +4087,9 @@
         {
           "Comments": "Remove the default lever texture in room 108.",
           "EMType": 21,
+          "Tags": [
+            1
+          ],
           "TextureMap": {
             "17": {
               "108": {
@@ -4199,6 +4421,9 @@
         {
           "Comments": "Remove the default block floor textures in room 77.",
           "EMType": 21,
+          "Tags": [
+            5
+          ],
           "TextureMap": {
             "89": {
               "77": {
