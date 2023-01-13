@@ -84,7 +84,6 @@ namespace TRRandomizerCore
             TRRandomizerType.Sunset,
             TRRandomizerType.Text,
             TRRandomizerType.Texture,
-            TRRandomizerType.Traps,
             TRRandomizerType.Unarmed,
             TRRandomizerType.ItemSprite
         };
