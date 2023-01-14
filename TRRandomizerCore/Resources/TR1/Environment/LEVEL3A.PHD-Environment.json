@@ -742,6 +742,22 @@
         },
         {
           "EMType": 7,
+          "HardVariant": {
+            "EMType": 7,
+            "Locations": [
+              {
+                "X": 28160,
+                "Z": 80384,
+                "Room": -1
+              },
+              {
+                "X": 29184,
+                "Z": 80384,
+                "Room": -1
+              }
+            ],
+            "ZSlant": 1
+          },
           "Locations": [
             {
               "X": 28160,
@@ -754,7 +770,8 @@
               "Room": -1
             }
           ],
-          "ZSlant": 1
+          "CeilingClicks": -1,
+          "ZSlant": -1
         },
         {
           "Comments": "Make visibility portals.",
@@ -1360,45 +1377,6 @@
             {
               "RoomNumber": -1,
               "FaceIndices": [
-                24,
-                48,
-                14,
-                40
-              ],
-              "VertexChanges": {
-                "2": {
-                  "Y": -256
-                },
-                "3": {
-                  "Y": -256
-                }
-              }
-            },
-            {
-              "RoomNumber": -1,
-              "FaceIndices": [
-                29
-              ],
-              "VertexChanges": {
-                "0": {
-                  "Y": -256
-                }
-              }
-            },
-            {
-              "RoomNumber": -1,
-              "FaceIndices": [
-                53
-              ],
-              "VertexChanges": {
-                "1": {
-                  "Y": -256
-                }
-              }
-            },
-            {
-              "RoomNumber": -1,
-              "FaceIndices": [
                 35
               ],
               "VertexChanges": {
@@ -1463,6 +1441,130 @@
           ]
         },
         {
+          "Comments": "Specific face modifications based on default/hard mode.",
+          "EMType": 23,
+          "HardVariant": {
+            "EMType": 23,
+            "Modifications": [
+              {
+                "RoomNumber": -1,
+                "FaceIndices": [
+                  24,
+                  48,
+                  14,
+                  40
+                ],
+                "VertexChanges": {
+                  "2": {
+                    "Y": -256
+                  },
+                  "3": {
+                    "Y": -256
+                  }
+                }
+              },
+              {
+                "RoomNumber": -1,
+                "FaceIndices": [
+                  29
+                ],
+                "VertexChanges": {
+                  "0": {
+                    "Y": -256
+                  }
+                }
+              },
+              {
+                "RoomNumber": -1,
+                "FaceIndices": [
+                  53
+                ],
+                "VertexChanges": {
+                  "1": {
+                    "Y": -256
+                  }
+                }
+              }
+            ]
+          },
+          "Modifications": [
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                14,
+                40
+              ],
+              "VertexChanges": {
+                "2": {
+                  "Y": -256
+                },
+                "3": {
+                  "Y": -256
+                }
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                48,
+                24,
+                33
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "1": {
+                  "Y": -512
+                }
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                48,
+                24
+              ],
+              "VertexChanges": {
+                "2": {
+                  "Y": -256
+                },
+                "3": {
+                  "Y": -256
+                }
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                29
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -256
+                },
+                "1": {
+                  "Y": -512
+                }
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                53
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "1": {
+                  "Y": -256
+                }
+              }
+            }
+          ]
+        },
+        {
           "EMType": 22,
           "GeometryMap": {
             "-3": {
@@ -1486,6 +1588,20 @@
                 11,
                 74,
                 31
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Additional face to be removed in default mode only.",
+          "EMType": 22,
+          "HardVariant": {
+            "EMType": 1000
+          },
+          "GeometryMap": {
+            "-1": {
+              "Rectangles": [
+                70
               ]
             }
           }
