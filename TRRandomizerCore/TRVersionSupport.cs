@@ -11,6 +11,7 @@ namespace TRRandomizerCore
             TRRandomizerType.Audio,
             TRRandomizerType.ChallengeRooms,
             TRRandomizerType.DynamicTextures,
+            TRRandomizerType.DynamicEnemyTextures,
             TRRandomizerType.Enemy,
             TRRandomizerType.Environment,
             TRRandomizerType.ExtraPickups,

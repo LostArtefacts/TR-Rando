@@ -1202,6 +1202,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.RetainSecretSpriteTextures = value;
         }
 
+        public bool RetainEnemyTextures
+        {
+            get => LevelRandomizer.RetainEnemyTextures;
+            set => LevelRandomizer.RetainEnemyTextures = value;
+        }
+
         public uint WireframeLevelCount
         {
             get => LevelRandomizer.WireframeLevelCount;

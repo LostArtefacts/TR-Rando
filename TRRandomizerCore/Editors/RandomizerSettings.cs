@@ -49,6 +49,7 @@ namespace TRRandomizerCore.Editors
         public bool RetainMainLevelTextures { get; set; }
         public bool RetainKeySpriteTextures { get; set; }
         public bool RetainSecretSpriteTextures { get; set; }
+        public bool RetainEnemyTextures { get; set; }
         public uint WireframeLevelCount { get; set; }
         public bool AssaultCourseWireframe { get; set; }
         public bool UseSolidLaraWireframing { get; set; }
@@ -208,6 +209,7 @@ namespace TRRandomizerCore.Editors
             RetainMainLevelTextures = config.GetBool(nameof(RetainMainLevelTextures));
             RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures), true);
             RetainSecretSpriteTextures = config.GetBool(nameof(RetainSecretSpriteTextures), true);
+            RetainEnemyTextures = config.GetBool(nameof(RetainEnemyTextures));
             WireframeLevelCount = config.GetUInt(nameof(WireframeLevelCount));
             AssaultCourseWireframe = config.GetBool(nameof(AssaultCourseWireframe));
             UseSolidLaraWireframing = config.GetBool(nameof(UseSolidLaraWireframing), true);
@@ -343,6 +345,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(RetainMainLevelTextures)] = RetainMainLevelTextures;
             config[nameof(RetainKeySpriteTextures)] = RetainKeySpriteTextures;
             config[nameof(RetainSecretSpriteTextures)] = RetainSecretSpriteTextures;
+            config[nameof(RetainEnemyTextures)] = RetainEnemyTextures;
             config[nameof(WireframeLevelCount)] = WireframeLevelCount;
             config[nameof(AssaultCourseWireframe)] = AssaultCourseWireframe;
             config[nameof(UseSolidLaraWireframing)] = UseSolidLaraWireframing;

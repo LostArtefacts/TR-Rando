@@ -39,15 +39,23 @@ namespace TRRandomizerCore.Textures
             TREntities.Motorboat, TREntities.Barricade, TREntities.ThorHammerBlock, TREntities.ThorHammerHandle,
             TREntities.ThorLightning, TREntities.SlammingDoor, TREntities.CentaurStatue, TREntities.NatlasMineShack,
             TREntities.ScionHolder, TREntities.AtlanteanLava, TREntities.AdamEgg, TREntities.AtlanteanEgg,
-            TREntities.ScionPiece3_S_P, TREntities.ScionPiece4_S_P, TREntities.Adam, TREntities.Missile2_H,
-            TREntities.Missile3_H, TREntities.FlyingAtlantean, TREntities.BandagedFlyer, TREntities.Centaur,
-            TREntities.Mummy, TREntities.Doppelganger,
+            TREntities.ScionPiece3_S_P, TREntities.ScionPiece4_S_P, 
+        };
+
+        // Enemy models whos mesh textures should be targeted
+        private static readonly List<TREntities> _enemyIDs = new List<TREntities>
+        {
+            TREntities.Adam, TREntities.Missile2_H, TREntities.Missile3_H, TREntities.FlyingAtlantean,
+            TREntities.BandagedFlyer, TREntities.Centaur, TREntities.Mummy, TREntities.Doppelganger,
+            TREntities.TRex, TREntities.Raptor
         };
 
         // Sprite sequences that should be targeted
         private static readonly List<TREntities> _spriteIDs = new List<TREntities>
         {
-            TREntities.LavaParticles_S_H, TREntities.Flame_S_H, TREntities.Explosion1_S_H
+            TREntities.LavaParticles_S_H, TREntities.Flame_S_H, TREntities.Explosion1_S_H,
+            TREntities.DartEffect_S_H, TREntities.WaterRipples1_S_H, TREntities.WaterRipples2_S_H,
+            TREntities.FontGraphics_S_H
         };
 
         public TextureMonitor<TREntities> TextureMonitor { get; set; }
@@ -58,6 +66,7 @@ namespace TRRandomizerCore.Textures
         {
             ISet<int> defaultObjectTextures = new HashSet<int>();
             ISet<int> defaultSpriteTextures = new HashSet<int>();
+            ISet<int> enemyObjectTextures = new HashSet<int>();
             ISet<int> secretObjectTextures = new HashSet<int>();
             ISet<int> secretSpriteTextures = new HashSet<int>();
             ISet<int> keyItemObjectTextures = new HashSet<int>();
@@ -133,6 +142,15 @@ namespace TRRandomizerCore.Textures
                 }
             }
 
+            foreach (TREntities modelID in _enemyIDs)
+            {
+                TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)modelID);
+                if (model != null)
+                {
+                    AddModelTextures(level.Data, model, hips, enemyObjectTextures, modelMeshes);
+                }
+            }
+
             // If anything we have collected so far is an animated texture, add the other
             // textures from the same animation list.
             foreach (int texture in defaultObjectTextures.ToList())
@@ -187,9 +205,11 @@ namespace TRRandomizerCore.Textures
 
                 Dictionary<TextureCategory, Dictionary<int, List<Rectangle>>> optionalMapping = new Dictionary<TextureCategory, Dictionary<int, List<Rectangle>>>
                 {
+                    [TextureCategory.Enemy] = new Dictionary<int, List<Rectangle>>(),
                     [TextureCategory.Secret] = new Dictionary<int, List<Rectangle>>(),
                     [TextureCategory.KeyItem] = new Dictionary<int, List<Rectangle>>()
                 };
+                AddSegmentsToMapping(packer.GetObjectTextureSegments(enemyObjectTextures), optionalMapping[TextureCategory.Enemy]);
                 AddSegmentsToMapping(packer.GetObjectTextureSegments(secretObjectTextures), optionalMapping[TextureCategory.Secret]);
                 AddSegmentsToMapping(packer.GetSpriteTextureSegments(secretSpriteTextures), optionalMapping[TextureCategory.Secret]);
                 AddSegmentsToMapping(packer.GetObjectTextureSegments(keyItemObjectTextures), optionalMapping[TextureCategory.KeyItem]);

@@ -55,6 +55,7 @@
         MeshSwaps,
         HardEnvironment,
         Traps,
-        ChallengeRooms
+        ChallengeRooms,
+        DynamicEnemyTextures
     }
 }

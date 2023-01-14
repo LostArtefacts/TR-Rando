@@ -101,7 +101,8 @@ namespace TRRandomizerCore.Randomizers
             {
                 [TextureCategory.KeyItem] = !Settings.RetainKeySpriteTextures,
                 [TextureCategory.Secret] = !Settings.RetainSecretSpriteTextures,
-                [TextureCategory.LevelColours] = !Settings.RetainMainLevelTextures
+                [TextureCategory.LevelColours] = !Settings.RetainMainLevelTextures,
+                [TextureCategory.Enemy] = !Settings.RetainEnemyTextures
             };
 
             SetMessage("Randomizing textures - loading levels");

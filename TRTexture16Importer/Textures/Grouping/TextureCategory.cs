@@ -6,6 +6,7 @@
         Secret,
         DayMode,
         NightMode,
-        LevelColours
+        LevelColours,
+        Enemy
     }
 }
