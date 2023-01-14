@@ -54,11 +54,19 @@ namespace TRRandomizerCore.Randomizers
         public ItemFactory ItemFactory { get; set; }
         public List<TR1ScriptedLevel> MirrorLevels { get; set; }
 
+        private SecretPicker _picker;
+
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
             _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\locations.json"));
             _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\unarmed_locations.json"));
+
+            _picker = new SecretPicker
+            {
+                Settings = Settings,
+                Generator = _generator,
+            };
 
             if (ScriptEditor.Edition.IsCommunityPatch)
             {
@@ -468,6 +476,19 @@ namespace TRRandomizerCore.Randomizers
             locations.Shuffle(_generator);
             List<Location> usedLocations = new List<Location>();
 
+            Queue<Location> guaranteedLocations = _picker.GetGuaranteedLocations(locations, MirrorLevels.Contains(level.Script), level.Script.NumSecrets, location =>
+            {
+                bool result = EvaluateProximity(location, usedLocations, level, floorData);
+                if (result)
+                {
+                    usedLocations.Add(location);
+                }
+                _proxEvaluationCount = 0;
+                return result;
+            });
+
+            usedLocations.Clear();
+
             TRSecretPlacement<TREntities> secret = new TRSecretPlacement<TREntities>();
             int pickupIndex = 0;
             bool damagingLocationUsed = false;
@@ -475,14 +496,18 @@ namespace TRRandomizerCore.Randomizers
             while (secret.SecretIndex < level.Script.NumSecrets)
             {
                 Location location;
-                do
+                if (guaranteedLocations.Count > 0)
                 {
-                    location = locations[_generator.Next(0, locations.Count)];
+                    location = guaranteedLocations.Dequeue();
                 }
-                while
-                (
-                    !EvaluateProximity(location, usedLocations, level, floorData)
-                );
+                else
+                {
+                    do
+                    {
+                        location = locations[_generator.Next(0, locations.Count)];
+                    }
+                    while (!EvaluateProximity(location, usedLocations, level, floorData));
+                }
 
                 _proxEvaluationCount = 0;
 
@@ -526,6 +551,10 @@ namespace TRRandomizerCore.Randomizers
             floorData.WriteToLevel(level.Data);
 
             AddDamageControl(level, damagingLocationUsed, glitchedDamagingLocationUsed);
+
+#if DEBUG
+            Debug.WriteLine(level.Name + ": " +  _picker.DescribeLocations(usedLocations));
+#endif
         }
 
         private bool EvaluateProximity(Location loc, List<Location> usedLocs, TR1CombinedLevel level, FDControl floorData)

@@ -74,6 +74,7 @@ namespace TRRandomizerCore.Editors
         public bool HideEnemiesUntilTriggered { get; set; }
         public bool RemoveLevelEndingLarson { get; set; }
         public bool GlitchedSecrets { get; set; }
+        public bool GuaranteeSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
         public bool UseRandomSecretModels { get; set; }
         public TRSecretCountMode SecretCountMode { get; set; }
@@ -165,6 +166,7 @@ namespace TRRandomizerCore.Editors
             SecretSeed = config.GetInt(nameof(SecretSeed), defaultSeed);
             HardSecrets = config.GetBool(nameof(HardSecrets));
             GlitchedSecrets = config.GetBool(nameof(GlitchedSecrets));
+            GuaranteeSecrets = config.GetBool(nameof(GuaranteeSecrets), true);
             UseRewardRoomCameras = config.GetBool(nameof(UseRewardRoomCameras), true);
             UseRandomSecretModels = config.GetBool(nameof(UseRandomSecretModels));
             SecretCountMode = (TRSecretCountMode)config.GetEnum(nameof(SecretCountMode), typeof(TRSecretCountMode), TRSecretCountMode.Default);
@@ -303,6 +305,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(SecretSeed)] = SecretSeed;
             config[nameof(HardSecrets)] = HardSecrets;
             config[nameof(GlitchedSecrets)] = GlitchedSecrets;
+            config[nameof(GuaranteeSecrets)] = GuaranteeSecrets;
             config[nameof(UseRewardRoomCameras)] = UseRewardRoomCameras;
             config[nameof(UseRandomSecretModels)] = UseRandomSecretModels;
             config[nameof(SecretCountMode)] = SecretCountMode;

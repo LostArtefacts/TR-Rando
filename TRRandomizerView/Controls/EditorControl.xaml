@@ -192,7 +192,7 @@
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
         </ctrl:ManagedSeedAdvancedControl>
 
-        <ctrl:ManagedSeedBoolControl
+        <ctrl:ManagedSeedAdvancedControl
             Visibility="{Binding IsRewardRoomsTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
             Grid.Row="0"
             Grid.Column="1"
@@ -202,8 +202,20 @@
             Text="Randomize secret locations. You should expect to find Stone, then Jade, then Gold."
             SeedMinValue="1"
             SeedMaxValue="{Binding MaxSeedValue}"
-            SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            BoolItemsSource="{Binding SecretBoolItemControls}"/>
+            SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Secrets (Advanced)"
+                                        MainDescription="Customize the secret randomization."
+                                        BoolItemsSource="{Binding Data.SecretBoolItemControls, Source={StaticResource proxy}}"
+                                        HasBoolItems="True"
+                                        HasSecretCountMode="{Binding Data.IsSecretCountTypeSupported, Source={StaticResource proxy}}"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
 
         <ctrl:ManagedSeedAdvancedControl
             Visibility="{Binding IsRewardRoomsTypeSupported, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"

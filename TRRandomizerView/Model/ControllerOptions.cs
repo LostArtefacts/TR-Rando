@@ -27,7 +27,7 @@ namespace TRRandomizerView.Model
 
         private bool _disableDemos, _autoLaunchGame, _puristMode;
 
-        private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras, _useRandomSecretModels;
+        private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels;
         private TRSecretCountMode _secretCountMode;
         private uint _minSecretCount, _maxSecretCount;
         private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
@@ -1855,6 +1855,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass GuaranteeSecrets
+        {
+            get => _guaranteeSecrets;
+            set
+            {
+                _guaranteeSecrets = value;
+                FirePropertyChanged();
+            }
+        }
+
         public BoolItemControlClass UseRewardRoomCameras
         {
             get => _useRewardRoomCameras;
@@ -2330,6 +2340,12 @@ namespace TRRandomizerView.Model
                 Description = "Locations that require glitches to reach will be included in the randomization pool."
             };
             BindingOperations.SetBinding(IsGlitchedSecrets, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
+            GuaranteeSecrets = new BoolItemControlClass
+            {
+                Title = "Use guaranteed spawn mode",
+                Description = "Guarantees that at least one hard and/or glitched secret (based on above selection) will appear in each level where possible."
+            };
+            BindingOperations.SetBinding(GuaranteeSecrets, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
             UseRewardRoomCameras = new BoolItemControlClass()
             {
                 Title = "Enable reward room cameras",
@@ -2342,6 +2358,9 @@ namespace TRRandomizerView.Model
                 Description = "If enabled, secret types will be randomized across levels; otherwise, pre-defined types will be allocated to each level."
             };
             BindingOperations.SetBinding(UseRandomSecretModels, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
+
+            IsHardSecrets.PropertyChanged += SecretCategory_PropertyChanged;
+            IsGlitchedSecrets.PropertyChanged += SecretCategory_PropertyChanged;
 
             // Items
             Binding randomizeItemsBinding = new Binding(nameof(RandomizeItems)) { Source = this };
@@ -2612,7 +2631,7 @@ namespace TRRandomizerView.Model
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
             {
-                _isHardSecrets, _allowGlitched, _useRewardRoomCameras, _useRandomSecretModels
+                _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels
             };
             ItemBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2654,6 +2673,11 @@ namespace TRRandomizerView.Model
             };
         }
 
+        private void SecretCategory_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            GuaranteeSecrets.IsActive = IsGlitchedSecrets.Value || IsHardSecrets.Value;
+        }
+
         private void AdjustAvailableOptions()
         {
             // Called after the version type has been identified, so allows for customising
@@ -2682,6 +2706,7 @@ namespace TRRandomizerView.Model
 
             _allowGlitched.IsAvailable = IsGlitchedSecretsSupported;
             _isHardSecrets.IsAvailable = IsHardSecretsSupported;
+            _guaranteeSecrets.IsAvailable = IsGlitchedSecretsSupported || IsHardSecretsSupported;
 
             _retainSecretSpriteTextures.IsAvailable = IsSecretTexturesTypeSupported;
             _retainKeySpriteTextures.IsAvailable = IsKeyItemTexturesTypeSupported;
@@ -2792,6 +2817,7 @@ namespace TRRandomizerView.Model
             SecretSeed = _controller.SecretSeed;
             IsHardSecrets.Value = _controller.HardSecrets;
             IsGlitchedSecrets.Value = _controller.GlitchedSecrets;
+            GuaranteeSecrets.Value = _controller.GuaranteeSecrets;
             UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
             UseRandomSecretModels.Value = _controller.UseRandomSecretModels;
             SecretCountMode = _controller.SecretCountMode;
@@ -3056,6 +3082,7 @@ namespace TRRandomizerView.Model
             _controller.SecretSeed = SecretSeed;
             _controller.HardSecrets = IsHardSecrets.Value;
             _controller.GlitchedSecrets = IsGlitchedSecrets.Value;
+            _controller.GuaranteeSecrets = GuaranteeSecrets.Value;
             _controller.UseRewardRoomCameras = UseRewardRoomCameras.Value;
             _controller.UseRandomSecretModels = UseRandomSecretModels.Value;
             _controller.SecretCountMode = SecretCountMode;

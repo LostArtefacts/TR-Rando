@@ -1262,6 +1262,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.GlitchedSecrets = value;
         }
 
+        public bool GuaranteeSecrets
+        {
+            get => LevelRandomizer.GuaranteeSecrets;
+            set => LevelRandomizer.GuaranteeSecrets = value;
+        }
+
         public bool UseRewardRoomCameras
         {
             get => LevelRandomizer.UseRewardRoomCameras;

@@ -51,11 +51,19 @@ namespace TRRandomizerCore.Randomizers
         public ItemFactory ItemFactory { get; set; }
         public List<TR3ScriptedLevel> MirrorLevels { get; set; }
 
+        private SecretPicker _picker;
+
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
             _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\locations.json"));
             _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
+
+            _picker = new SecretPicker
+            {
+                Settings = Settings,
+                Generator = _generator,
+            };
 
             SetMessage("Randomizing secrets - loading levels");
 
@@ -396,6 +404,17 @@ namespace TRRandomizerCore.Randomizers
             List<Location> locations = _locations[level.Name];
             List<Location> usedLocations = new List<Location>();
 
+            Queue<Location> guaranteedLocations = _picker.GetGuaranteedLocations(locations, MirrorLevels.Contains(level.Script), level.Script.NumSecrets, location =>
+            {
+                bool result = EvaluateProximity(location, usedLocations, level);
+                if (result)
+                {
+                    usedLocations.Add(location);
+                }
+                _proxEvaluationCount = 0;
+                return result;
+            });
+
             TRSecretPlacement<TR3Entities> secret = new TRSecretPlacement<TR3Entities>();
             int pickupIndex = 0;
             bool damagingLocationUsed = false;
@@ -403,14 +422,18 @@ namespace TRRandomizerCore.Randomizers
             while (secret.SecretIndex < level.Script.NumSecrets)
             {
                 Location location;
-                do
+                if (guaranteedLocations.Count > 0)
                 {
-                    location = locations[_generator.Next(0, locations.Count)];
+                    location = guaranteedLocations.Dequeue();
                 }
-                while
-                (
-                    !EvaluateProximity(location, usedLocations, level)
-                );
+                else
+                {
+                    do
+                    {
+                        location = locations[_generator.Next(0, locations.Count)];
+                    }
+                    while (!EvaluateProximity(location, usedLocations, level));
+                }
 
                 _proxEvaluationCount = 0;
 
@@ -454,6 +477,10 @@ namespace TRRandomizerCore.Randomizers
             floorData.WriteToLevel(level.Data);
 
             AddDamageControl(level, pickupTypes, damagingLocationUsed, glitchedDamagingLocationUsed);
+
+#if DEBUG
+            Debug.WriteLine(level.Name + ": " + _picker.DescribeLocations(usedLocations));
+#endif
         }
 
         private bool EvaluateProximity(Location loc, List<Location> usedLocs, TR3CombinedLevel level)
