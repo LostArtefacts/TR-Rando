@@ -1558,24 +1558,58 @@
         {
           "Comments": "Add a timed trapdoor as a return path.",
           "EMType": 51,
+          "HardVariant": {
+            "Comments": "A more difficult position in hard mode.",
+            "EMType": 51,
+            "TypeID": 65,
+            "Flags": 15872,
+            "Intensity": 6144,
+            "Location": {
+              "X": 60928,
+              "Y": 6656,
+              "Z": 33280,
+              "Room": -2,
+              "Angle": 16384
+            }
+          },
           "TypeID": 65,
           "Flags": 15872,
           "Intensity": 6144,
           "Location": {
             "X": 60928,
-            "Y": 6656,
-            "Z": 33280,
+            "Y": 7168,
+            "Z": 34304,
             "Room": -2,
             "Angle": 16384
           }
         },
         {
           "EMType": 61,
+          "HardVariant": {
+            "EMType": 61,
+            "Locations": [
+              {
+                "X": 60928,
+                "Y": 9216,
+                "Z": 33280,
+                "Room": -1
+              }
+            ],
+            "Trigger": {
+              "TrigType": 8,
+              "Mask": 31,
+              "Actions": [
+                {
+                  "Parameter": -1
+                }
+              ]
+            }
+          },
           "Locations": [
             {
               "X": 60928,
               "Y": 9216,
-              "Z": 33280,
+              "Z": 34304,
               "Room": -1
             }
           ],

@@ -1165,12 +1165,6 @@
     [
       [
         {
-          "Comments": "Leave the starting area alone.",
-          "EMType": 1000
-        }
-      ],
-      [
-        {
           "Comments": "Move any pickups from the target fire tile.",
           "EMType": 43,
           "SectorLocations": [

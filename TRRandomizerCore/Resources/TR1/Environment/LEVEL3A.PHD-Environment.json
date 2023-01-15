@@ -1660,8 +1660,21 @@
           }
         },
         {
+          "Comments": "A med in default mode.",
           "EMType": 51,
-          "TypeID": 37,
+          "HardVariant": {
+            "Comments": "More spikes in hard mode.",
+            "EMType": 51,
+            "TypeID": 37,
+            "Intensity": 4096,
+            "Location": {
+              "X": 26112,
+              "Y": -3072,
+              "Z": 81408,
+              "Room": -3
+            }
+          },
+          "TypeID": 94,
           "Intensity": 4096,
           "Location": {
             "X": 26112,
