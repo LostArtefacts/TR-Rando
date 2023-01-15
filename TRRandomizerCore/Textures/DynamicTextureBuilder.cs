@@ -39,10 +39,10 @@ namespace TRRandomizerCore.Textures
             TREntities.Motorboat, TREntities.Barricade, TREntities.ThorHammerBlock, TREntities.ThorHammerHandle,
             TREntities.ThorLightning, TREntities.SlammingDoor, TREntities.CentaurStatue, TREntities.NatlasMineShack,
             TREntities.ScionHolder, TREntities.AtlanteanLava, TREntities.AdamEgg, TREntities.AtlanteanEgg,
-            TREntities.ScionPiece3_S_P, TREntities.ScionPiece4_S_P, 
+            TREntities.ScionPiece3_S_P, TREntities.ScionPiece4_S_P, TREntities.Gunflare_H
         };
 
-        // Enemy models whos mesh textures should be targeted
+        // Enemy models whose mesh textures should be targeted
         private static readonly List<TREntities> _enemyIDs = new List<TREntities>
         {
             TREntities.Adam, TREntities.Missile2_H, TREntities.Missile3_H, TREntities.FlyingAtlantean,
@@ -55,7 +55,7 @@ namespace TRRandomizerCore.Textures
         {
             TREntities.LavaParticles_S_H, TREntities.Flame_S_H, TREntities.Explosion1_S_H,
             TREntities.DartEffect_S_H, TREntities.WaterRipples1_S_H, TREntities.WaterRipples2_S_H,
-            TREntities.FontGraphics_S_H
+            TREntities.FontGraphics_S_H, TREntities.Ricochet_S_H, TREntities.Sparkles_S_H
         };
 
         public TextureMonitor<TREntities> TextureMonitor { get; set; }
@@ -129,6 +129,10 @@ namespace TRRandomizerCore.Textures
             else
             {
                 hips = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara)[0];
+                if (level.Is(TRLevelNames.MIDAS))
+                {
+                    modelIDs.Add(TREntities.LaraMiscAnim_H);
+                }
             }
 
             // Collect all model mesh textures, provided none use the dummy mesh, otherwise
