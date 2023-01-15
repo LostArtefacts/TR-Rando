@@ -1,17 +1,17 @@
 # TR-Rando
 Tomb Raider Game Randomizer
 
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando.PNG)
+![TR Rando](Resources/Screenshots/TR2_1.png)
 
 # Installation
 Please follow the steps provided in this video:
 
 https://user-images.githubusercontent.com/9203254/148436641-6dd771ad-7b41-422e-a938-1fb70a3d279c.mp4
 
-Download latest release here: https://github.com/DanzaG/TR2-Rando/releases/download/V1.5.5/V1.5.5.zip
+Download latest release here: https://github.com/DanzaG/TR2-Rando/releases/latest
 
 # Features
-![TR2 Rando UI](https://github.com/DanzaG/TR2-Rando/blob/master/UI.png)
+![TR Rando UI](Resources/UI.png)
 
 * **Secrets** - Randomizes locations of secrets and their rewards.
 * **Items** - Randomizes pickups, including key items!
@@ -19,35 +19,36 @@ Download latest release here: https://github.com/DanzaG/TR2-Rando/releases/downl
 * **Textures** - Randomly applies textures to levels.
 * **Level Sequencing** - Change the number of levels in the game and randomize their order.
 * **Inventory Loss** - Randomizes what levels Lara loses her guns and/or ammo and items.
-* **Audio** - Randomizes title screen, level ambience, trigger and secret soundtracks.
+* **Audio** - Randomizes title screen, level ambience, trigger soundtracks, secret soundtracks and sound effects.
 * **Sunsets** - Randomizes what levels have the Bartoli's Hideout sunset effect.
 * **Outfits** - Randomizes the outfit Lara wears in each level, including options like invisibility and haircuts.
 * **Text** - Randomizes in-game text, such as weapon and level names. Includes a variety of languages to choose from.
-* **Night Mode** - Darken levels to give a night-time effect.
+* **Night Mode/VFX** - Darken levels to give a night-time effect or apply visual effects to TR3.
 * **Starting Position** - Choose to have Lara start levels in different positions facing a different direction.
-* **Environment** - Modifies the level environment, such as mixing up water levels, mirroring levels and moving keyholes.
+* **Environment** - Modifies the level environment, such as mixing up water levels, mirroring levels, moving keyholes, randomizing traps and adding new puzzle/challenge areas.
 * And more!
 
 # Getting Started
 1. Download the latest version at https://github.com/DanzaG/TR2-Rando/releases. Make sure to download the zip and not the source code.
 2. Extract.
-3. Run "TR2Randomizer.exe" and follow the instructions.
+3. Run "TRRandomizer.exe" and follow the instructions.
 4. Play and enjoy!
 
 # Discord
 We have a friendly community Discord server [here](https://discord.gg/f4bUqwgcCN).
 
 # Tracker
-For keeping track of levels while you play, check out the [TR2RandoTracker](https://github.com/lahm86/TR2RandoTracker).
+For keeping track of levels while you play, check out the [TRRandoTracker](https://github.com/lahm86/TRRandoTracker).
 
 # Screenies
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando2.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando3.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando4.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando5.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando6.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando7.PNG)
-![TR2 Rando](https://github.com/DanzaG/TR2-Rando/blob/master/rando8.PNG)
+![TR1 Rando](Resources/Screenshots/TR1_3.png)
+![TR1 Rando](Resources/Screenshots/TR1_4.png)
+![TR2 Rando](Resources/Screenshots/TR2_4.png)
+![TR2 Rando](Resources/Screenshots/TR2_5.png)
+![TR3 Rando](Resources/Screenshots/TR3_2.png)
+![TR3 Rando](Resources/Screenshots/TR3_3.png)
+
+[View all](Resources/Screenshots).
 
 # Development
 You will need the following dependencies:
@@ -58,7 +59,7 @@ You will need the following dependencies:
 
 ### Additional Build Dependencies
 * https://github.com/lahm86/TRGameflowEditor/releases/latest - TRGameflowEditor by Lahm.
-* https://github.com/lahm86/RectanglePacker/releases/latest - ReactanglePacker by Lahm.
+* https://github.com/lahm86/RectanglePacker/releases/latest - RectanglePacker by Lahm.
 
 # Thanks
 * Everyone - For playing and reporting bugs/areas for improvement. Rando wouldn't be where it is today without exceptional support from players.
