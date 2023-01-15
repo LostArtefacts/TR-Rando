@@ -69,6 +69,16 @@ namespace TRRandomizerCore.Textures
             {
                 Alignment = PenAlignment.Inset
             };
+            Pen triggerPen = new Pen(_data.TriggerColour, 1)
+            {
+                Alignment = PenAlignment.Inset,
+                DashCap = DashCap.Round
+            };
+            Pen deathPen = new Pen(_data.DeathColour, 1)
+            {
+                Alignment = PenAlignment.Inset,
+                DashCap = DashCap.Round
+            };
 
             using (AbstractTexturePacker<E, L> packer = CreatePacker(level))
             {
@@ -79,8 +89,8 @@ namespace TRRandomizerCore.Textures
 
                 IndexedTRObjectTexture roomTexture = CreateWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
                 IndexedTRObjectTexture ladderTexture = CreateLadderWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
-                IndexedTRObjectTexture triggerTexture = CreateTriggerWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
-                IndexedTRObjectTexture deathTexture = CreateDeathWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
+                IndexedTRObjectTexture triggerTexture = CreateTriggerWireframe(packer, roomSize, triggerPen, SmoothingMode.AntiAlias);
+                IndexedTRObjectTexture deathTexture = CreateDeathWireframe(packer, roomSize, deathPen, SmoothingMode.AntiAlias);
                 Dictionary<ushort, IndexedTRObjectTexture> specialTextures = CreateSpecialTextures(packer, level, roomPen);
                 ProcessClips(packer, level, roomPen, SmoothingMode.AntiAlias);
 

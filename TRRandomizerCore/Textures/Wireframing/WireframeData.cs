@@ -28,6 +28,16 @@ namespace TRRandomizerCore.Textures
         public Color HighlightColour { get; set; }
 
         /// <summary>
+        /// The colour of the wire used to indicate triggers
+        /// </summary>
+        public Color TriggerColour { get; set; }
+
+        /// <summary>
+        /// The colour of the wire used to indicate death tiles
+        /// </summary>
+        public Color DeathColour { get; set; }
+
+        /// <summary>
         /// Lara will become a solid version of the HighlightColour, otherwise she will be a frame
         /// </summary>
         public bool SolidLara { get; set; }
@@ -83,6 +93,8 @@ namespace TRRandomizerCore.Textures
             SpecialTextures = new List<SpecialTextureHandling>();
             ForcedOverrides = new List<ushort>();
             HighlightColour = Color.White;
+            TriggerColour = Color.White;
+            DeathColour = Color.White;
             SolidLara = false;
             SolidEnemies = false;
             SolidModels = new List<uint>();

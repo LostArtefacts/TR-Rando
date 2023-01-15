@@ -1143,6 +1143,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -1268,6 +1269,21 @@
                             Grid.Row="7">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="If selected, crosses will indicate pads and heavy triggers and stars will indicate death tiles."/>
+                    </Border>
+
+                    <Border Grid.Row="8">
+                        <CheckBox IsChecked="{Binding ControllerProxy.ShowWireframeTriggerColours, Mode=TwoWay}"
+                                  IsEnabled="{Binding ControllerProxy.ShowWireframeTriggers}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Use different trigger hint colours" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="8">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Triggers and death tiles will not use the same colour as the regular wireframe."/>
                     </Border>
                 </Grid>
             </StackPanel>
