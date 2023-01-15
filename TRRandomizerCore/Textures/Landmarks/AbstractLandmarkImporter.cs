@@ -25,7 +25,7 @@ namespace TRRandomizerCore.Textures
         protected abstract TRObjectTexture[] GetObjectTextures(L level);
         protected abstract void SetObjectTextures(L level, IEnumerable<TRObjectTexture> textures);
         protected abstract void SetRoomTexture(L level, int roomIndex, int rectangleIndex, ushort textureIndex);
-        protected abstract short? GetRoomFromPortal(L level, PortalSector portalSector);
+        protected abstract short? GetRoomFromPortal(L level, PortalSector portalSector, bool isLevelMirrored);
 
         public bool Import(L level, AbstractTextureMapping<E, L> mapping, bool isLevelMirrored)
         {
@@ -65,9 +65,23 @@ namespace TRRandomizerCore.Textures
                             if (target.PortalSector != null)
                             {
                                 // This target is meant for a room that has been created by environment mods.
-                                // Test the portal in the given location to get the room number. If it doesn't
-                                // exist, the landmark will not be imported.
-                                short? room = GetRoomFromPortal(level, target.PortalSector);
+                                // Test the portal in the given location to get the room number, traversing
+                                // until we reach the target room. If it doesn't exist, the landmark will not
+                                // be imported.
+                                PortalSector sector = target.PortalSector;
+                                bool traverse = true;
+                                short? room;
+                                do
+                                {
+                                    room = GetRoomFromPortal(level, sector, isLevelMirrored);
+                                    if (traverse = room.HasValue && sector.NextPortal != null)
+                                    {
+                                        sector.NextPortal.Room = room.Value;
+                                        sector = sector.NextPortal;
+                                    }
+                                }
+                                while (traverse);
+
                                 if (room.HasValue)
                                 {
                                     target.RoomNumber = room.Value;
@@ -212,9 +226,17 @@ namespace TRRandomizerCore.Textures
             };
         }
 
-        protected short? GetSectorPortalRoom(TRRoomSector sector, FDControl floorData)
+        protected short? GetSectorPortalRoom(TRRoomSector sector, FDControl floorData, PortalDirection direction)
         {
-            if (sector.FDIndex != 0
+            if (direction == PortalDirection.Up && sector.RoomAbove != 255)
+            {
+                return sector.RoomAbove;
+            }
+            else if (direction == PortalDirection.Down && sector.RoomBelow != 255)
+            {
+                return sector.RoomBelow;
+            }
+            else if (sector.FDIndex != 0
                 && floorData.Entries[sector.FDIndex].Find(e => e is FDPortalEntry) is FDPortalEntry portal)
             {
                 return (short)portal.Room;

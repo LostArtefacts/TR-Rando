@@ -33,15 +33,16 @@ namespace TRRandomizerCore.Textures
             level.Rooms[roomIndex].RoomData.Rectangles[rectangleIndex].Texture = textureIndex;
         }
 
-        protected override short? GetRoomFromPortal(TR3Level level, PortalSector portalSector)
+        protected override short? GetRoomFromPortal(TR3Level level, PortalSector portalSector, bool isLevelMirrored)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
             TR3Room room = level.Rooms[portalSector.Room];
-            TRRoomSector sector = room.Sectors[portalSector.X * room.NumZSectors + portalSector.Z];
+            int x = isLevelMirrored ? (room.NumXSectors - portalSector.X - 1) : portalSector.X;
+            TRRoomSector sector = room.Sectors[x * room.NumZSectors + portalSector.Z];
 
-            return GetSectorPortalRoom(sector, floorData);
+            return GetSectorPortalRoom(sector, floorData, portalSector.Direction);
         }
     }
 }

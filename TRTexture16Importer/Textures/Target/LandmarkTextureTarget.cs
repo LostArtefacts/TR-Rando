@@ -25,5 +25,14 @@ namespace TRTexture16Importer.Textures
         public int X { get; set; }
         public int Z { get; set; }
         public short Room { get; set; }
+        public PortalDirection Direction { get; set; }
+        public PortalSector NextPortal { get; set; }
+    }
+
+    public enum PortalDirection
+    {
+        Horizontal,
+        Up,
+        Down,
     }
 }
