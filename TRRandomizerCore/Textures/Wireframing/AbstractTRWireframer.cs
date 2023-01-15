@@ -86,6 +86,7 @@ namespace TRRandomizerCore.Textures
                 ResetUnusedTextures(level);
 
                 TRSize roomSize = GetLargestSize(roomSizes);
+                roomSize.RoundDown();
 
                 IndexedTRObjectTexture roomTexture = CreateWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
                 IndexedTRObjectTexture ladderTexture = CreateLadderWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);

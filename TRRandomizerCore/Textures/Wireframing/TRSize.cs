@@ -14,6 +14,18 @@ namespace TRRandomizerCore.Textures
             H = h;
         }
 
+        public void RoundDown()
+        {
+            if (W > H)
+            {
+                W = H;
+            }
+            else if (W < H)
+            {
+                H = W;
+            }
+        }
+
         public int CompareTo(TRSize other)
         {
             if (W == other.W)
