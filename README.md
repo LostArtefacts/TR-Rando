@@ -10,6 +10,8 @@ https://user-images.githubusercontent.com/9203254/148436641-6dd771ad-7b41-422e-a
 
 Download latest release here: https://github.com/DanzaG/TR2-Rando/releases/latest
 
+View [detailed user guide](USING.md).
+
 # Features
 ![TR Rando UI](Resources/UI.png)
 
@@ -33,6 +35,8 @@ Download latest release here: https://github.com/DanzaG/TR2-Rando/releases/lates
 2. Extract.
 3. Run "TRRandomizer.exe" and follow the instructions.
 4. Play and enjoy!
+
+View [detailed user guide](USING.md).
 
 # Discord
 We have a friendly community Discord server [here](https://discord.gg/f4bUqwgcCN).
