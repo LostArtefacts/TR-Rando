@@ -96,6 +96,134 @@
           }
         ]
       }
+    },
+    {
+      "Comments": "Amend a slant near the beginning to allow returning.",
+      "EMType": 7,
+      "Location": {
+        "X": 28160,
+        "Y": -768,
+        "Z": 14848
+      },
+      "FloorClicks": 1,
+      "SlantType": 1,
+      "XSlant": 1
+    },
+    {
+      "Comments": "Raise another slant in room 42.",
+      "EMType": 7,
+      "Location": {
+        "X": 49664,
+        "Y": -128,
+        "Z": 35328,
+        "Room": 42
+      },
+      "FloorClicks": -1,
+      "SlantType": 1,
+      "ZSlant": 2
+    },
+    {
+      "Comments": "Amend some faces for above.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "FaceIndex": 105,
+          "VertexChanges": {
+            "0": {
+              "Y": 256
+            },
+            "3": {
+              "Y": 256
+            }
+          }
+        },
+        {
+          "FaceIndex": 122,
+          "VertexChanges": {
+            "2": {
+              "Y": 256
+            },
+            "3": {
+              "Y": 256
+            }
+          }
+        },
+        {
+          "RoomNumber": 1,
+          "FaceType": 1,
+          "FaceIndex": 10,
+          "VertexChanges": {
+            "0": {
+              "Y": 256
+            }
+          }
+        },
+        {
+          "RoomNumber": 42,
+          "FaceIndex": 42,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 42,
+          "FaceIndices": [
+            41,
+            43
+          ],
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Patch gaps.",
+      "EMType": 26,
+      "Triangles": {
+        "0": [
+          {
+            "Vertices": [
+              137,
+              109,
+              152
+            ],
+            "Texture": 23
+          }
+        ],
+        "42": [
+          {
+            "Vertices": [
+              69,
+              67,
+              330
+            ],
+            "Texture": 23
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Remove one of the trapdoor triggers so an escape route is possible beside the cat.",
+      "EMType": 71,
+      "Locations": [
+        {
+          "X": 45568,
+          "Y": -8192,
+          "Z": 26112,
+          "Room": 26
+        }
+      ],
+      "ActionItem": {
+        "Parameter": 55
+      }
     }
   ],
   "Any": [
