@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using TRFDControl;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Helpers;
+using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 using TRRandomizerCore.Utilities;
 using TRTexture16Importer;
+using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Textures
 {
@@ -192,6 +195,55 @@ namespace TRRandomizerCore.Textures
         {
             level.AnimatedTextures = animatedTextures;
             level.NumAnimatedTextures = length;
+        }
+
+        protected override Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(TR3Level level, Pen pen)
+        {
+            Dictionary<ushort, TexturedTileSegment> segments = new Dictionary<ushort, TexturedTileSegment>();
+            foreach (SpecialTextureHandling special in _data.SpecialTextures)
+            {
+                switch (special.Type)
+                {
+                    case SpecialTextureType.CrashPads:
+                        foreach (ushort texture in special.Textures)
+                        {
+                            if (CreateCrashPad(level, pen, texture, special.Mode) is TexturedTileSegment segment)
+                            {
+                                segments[texture] = segment;
+                            }
+                        }
+                        break;
+                }
+            }
+
+            return segments;
+        }
+
+        private TexturedTileSegment CreateCrashPad(TR3Level level, Pen pen, ushort textureIndex, SpecialTextureMode mode)
+        {
+            const int width = 64;
+            const int height = 64;
+
+            IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, width, height));
+            BitmapGraphics frame = CreateFrame(width, height, pen, SmoothingMode.AntiAlias, true);
+
+            switch (mode)
+            {
+                case SpecialTextureMode.CrashPadCircle:
+                    frame.Graphics.FillEllipse(pen.Brush, new Rectangle(16, 16, 46, 46));
+                    break;
+                case SpecialTextureMode.CrashPadDiamond:
+                    frame.Graphics.FillPolygon(pen.Brush, new Point[]
+                    {
+                        new Point(32, 16),
+                        new Point(48, 32),
+                        new Point(32, 48),
+                        new Point(16, 32),
+                    });
+                    break;
+            }
+
+            return new TexturedTileSegment(texture, frame.Bitmap);
         }
     }
 }

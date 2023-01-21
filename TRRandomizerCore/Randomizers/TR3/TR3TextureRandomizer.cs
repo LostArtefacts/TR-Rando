@@ -179,6 +179,11 @@ namespace TRRandomizerCore.Randomizers
                 data.HighlightLadders = Settings.UseWireframeLadders;
                 data.HighlightTriggers = data.HighlightDeathTiles = Settings.ShowWireframeTriggers;
                 data.SolidInteractables = Settings.UseSolidInteractableWireframing;
+                foreach (SpecialTextureHandling special in data.SpecialTextures)
+                {
+                    List<SpecialTextureMode> modes = WireframeData.GetDrawModes(special.Type);
+                    special.Mode = modes[_generator.Next(0, modes.Count)];
+                }
             }
         }
 

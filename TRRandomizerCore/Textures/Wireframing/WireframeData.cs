@@ -115,6 +115,10 @@ namespace TRRandomizerCore.Textures
                     modes.Add(SpecialTextureMode.MidasDoorFill);
                     modes.Add(SpecialTextureMode.MidasDoorDiagonals);
                     break;
+                case SpecialTextureType.CrashPads:
+                    modes.Add(SpecialTextureMode.CrashPadCircle);
+                    modes.Add(SpecialTextureMode.CrashPadDiamond);
+                    break;
             }
             return modes;
         }
@@ -122,7 +126,8 @@ namespace TRRandomizerCore.Textures
 
     public enum SpecialTextureType
     {
-        MidasDoors
+        MidasDoors,
+        CrashPads
     }
 
     public enum SpecialTextureMode
@@ -130,7 +135,9 @@ namespace TRRandomizerCore.Textures
         MidasDoorBars,
         MidasDoorLines,
         MidasDoorFill,
-        MidasDoorDiagonals
+        MidasDoorDiagonals,
+        CrashPadCircle,
+        CrashPadDiamond
     }
 
     public class SpecialTextureHandling
