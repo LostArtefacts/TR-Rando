@@ -226,19 +226,24 @@ namespace TRTexture16Importer.Helpers
 
         private int FindClosestColour(Color colour)
         {
+            return FindClosestColour(colour, _palette);
+        }
+
+        public static int FindClosestColour(Color colour, List<Color> palette)
+        {
             // Compare the colour with each in the palette by finding its closest match.
             // We start at 1 because we don't want to match black to transparency.
 
             int colIndex = 0;
             double bestMatch = double.MaxValue;
 
-            for (int i = 1; i < _palette.Count; i++)
+            for (int i = 1; i < palette.Count; i++)
             {
                 double match = Math.Sqrt
                 (
-                    Math.Pow((colour.R - _palette[i].R) * _weightR, 2) +
-                    Math.Pow((colour.G - _palette[i].G) * _weightG, 2) +
-                    Math.Pow((colour.B - _palette[i].B) * _weightB, 2)
+                    Math.Pow((colour.R - palette[i].R) * _weightR, 2) +
+                    Math.Pow((colour.G - palette[i].G) * _weightG, 2) +
+                    Math.Pow((colour.B - palette[i].B) * _weightB, 2)
                 );
 
                 if (match < bestMatch)

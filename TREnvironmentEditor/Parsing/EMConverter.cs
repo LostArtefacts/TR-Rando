@@ -78,6 +78,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMAddRoomSpriteFunction>(jo.ToString(), this);
                 case EMType.SwapFace:
                     return JsonConvert.DeserializeObject<EMSwapFaceFunction>(jo.ToString(), this);
+                case EMType.ImportTexture:
+                    return JsonConvert.DeserializeObject<EMImportTextureFunction>(jo.ToString(), this);
 
                 // Entity types
                 case EMType.MoveSlot:

@@ -170,6 +170,13 @@
         "MeshID": 34
       },
       "IgnoreSectorEntities": true
+    },
+    {
+      "Comments": "Restore the intended Colosseum roof from the beta version.",
+      "EMType": 33,
+      "Bitmap": "Resources\\TR1\\Textures\\Source\\Static\\Colosseum\\Segments.png",
+      "Tile": 3,
+      "X": 128
     }
   ],
   "Any": [

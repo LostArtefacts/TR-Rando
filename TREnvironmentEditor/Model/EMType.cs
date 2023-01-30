@@ -24,6 +24,7 @@
         MoveStaticMesh = 30,
         AddRoomSprite = 31,
         SwapFace = 32,
+        ImportTexture = 33,
 
         // Entity types 41-60
         MoveSlot = 41,
