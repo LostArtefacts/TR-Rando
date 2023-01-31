@@ -6273,7 +6273,55 @@
     }
   ],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "If there is a secret in this crevice, create an additional panther trigger.",
+        "ConditionType": 22,
+        "Location": {
+          "X": 25088,
+          "Y": -1280,
+          "Z": 19968,
+          "Room": 5
+        }
+      },
+      "OnTrue": [
+        {
+          "Comments": "Remove the panther action from the secret trigger.",
+          "EMType": 71,
+          "Locations": [
+            {
+              "X": 25088,
+              "Y": -1280,
+              "Z": 19968,
+              "Room": 5
+            }
+          ],
+          "ActionItem": {
+            "Parameter": 5
+          }
+        },
+        {
+          "Comments": "Duplicate the standard trigger onto the slope below.",
+          "EMType": 63,
+          "Locations": [
+            {
+              "X": 25088,
+              "Y": -128,
+              "Z": 18944,
+              "Room": 2
+            }
+          ],
+          "BaseLocation": {
+            "X": 26112,
+            "Y": -1280,
+            "Z": 19968,
+            "Room": 5
+          }
+        }
+      ]
+    }
+  ],
   "ConditionalOneOf": [],
   "Mirrored": []
 }
