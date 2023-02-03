@@ -173,9 +173,16 @@ namespace TRLevelReader.Helpers
         public static int InsertMesh(TRLevel level, TRMesh newMesh)
         {
             //get the final mesh we currently have
-            TRMesh lastMesh = level.Meshes[level.Meshes.Length - 1];
-            //new mesh pointer will be the current final mesh's pointer plus its length
-            newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
+            if(level.Meshes.Length > 0)
+            {
+                TRMesh lastMesh = level.Meshes[level.Meshes.Length - 1];
+                //new mesh pointer will be the current final mesh's pointer plus its length
+                newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
+            }
+            else
+            {
+                newMesh.Pointer = 0;
+            }
 
             List<TRMesh> meshes = level.Meshes.ToList();
             meshes.Add(newMesh);
@@ -196,9 +203,16 @@ namespace TRLevelReader.Helpers
         public static int InsertMesh(TR2Level level, TRMesh newMesh)
         {
             //get the final mesh we currently have
-            TRMesh lastMesh = level.Meshes[level.Meshes.Length - 1];
-            //new mesh pointer will be the current final mesh's pointer plus its length
-            newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
+            if (level.Meshes.Length > 0)
+            {
+                TRMesh lastMesh = level.Meshes[level.Meshes.Length - 1];
+                //new mesh pointer will be the current final mesh's pointer plus its length
+                newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
+            }
+            else
+            {
+                newMesh.Pointer = 0;
+            }
 
             List<TRMesh> meshes = level.Meshes.ToList();
             meshes.Add(newMesh);
@@ -219,9 +233,16 @@ namespace TRLevelReader.Helpers
         public static int InsertMesh(TR3Level level, TRMesh newMesh)
         {
             //get the final mesh we currently have
-            TRMesh lastMesh = level.Meshes[level.Meshes.Length - 1];
-            //new mesh pointer will be the current final mesh's pointer plus its length
-            newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
+            if (level.Meshes.Length > 0)
+            {
+                TRMesh lastMesh = level.Meshes[level.Meshes.Length - 1];
+                //new mesh pointer will be the current final mesh's pointer plus its length
+                newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
+            }
+            else
+            {
+                newMesh.Pointer = 0;
+            }
 
             List<TRMesh> meshes = level.Meshes.ToList();
             meshes.Add(newMesh);
