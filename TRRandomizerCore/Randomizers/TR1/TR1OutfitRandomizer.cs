@@ -22,6 +22,7 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR1OutfitRandomizer : BaseTR1Randomizer
     {
+        private static readonly Version _minBraidCutsceneVersion = new Version(2, 13, 0);
         private static readonly short[] _barefootSfxIDs = new short[] { 0, 4 };
         private static readonly double _mauledLaraChance = (double)1 / 3;
         private static readonly List<string> _permittedGymLevels = new List<string>
@@ -202,6 +203,12 @@ namespace TRRandomizerCore.Randomizers
                 {
                     [EMTextureFaceType.Rectangles] = new int[] { 6 },
                     [EMTextureFaceType.Triangles] = new int[] { 56, 57, 58, 59, 60, 61, 62, 63 }
+                },
+                [TREntities.CutsceneActor1] = new Dictionary<EMTextureFaceType, int[]>
+                {
+                    // Applies only to CUT1.PHD - CUT2 and CUT4 use the Lara entry above.
+                    [EMTextureFaceType.Rectangles] = new int[] { 6 },
+                    [EMTextureFaceType.Triangles] = new int[] { 53, 54, 55, 56, 57, 58, 59, 60 }
                 }
             };
 
@@ -227,7 +234,6 @@ namespace TRRandomizerCore.Randomizers
                     if (_outer.IsBraidLevel(level.Script))
                     {
                         // Only import the braid if Lara is visible. Note that it will automatically replace the model in Lost Valley.
-                        // Cutscenes don't currently support the braid in T1M.
                         if (!_outer.IsInvisibleLevel(level.Script))
                         {
                             ImportBraid(level);
@@ -289,7 +295,16 @@ namespace TRRandomizerCore.Randomizers
                 ushort plainHairQuad = ponytailMeshes[0].TexturedRectangles[0].Texture;
                 ushort plainHairTri = ponytailMeshes[5].TexturedTriangles[0].Texture;
 
-                foreach (TREntities laraType in _headAmendments.Keys)
+                Dictionary<TREntities, Dictionary<EMTextureFaceType, int[]>> headAmendments = _headAmendments;
+                if (level.Is(TRLevelNames.TIHOCAN_CUT) || level.Is(TRLevelNames.ATLANTIS_CUT))
+                {
+                    headAmendments = new Dictionary<TREntities, Dictionary<EMTextureFaceType, int[]>>
+                    {
+                        [TREntities.CutsceneActor1] = _headAmendments[TREntities.Lara]
+                    };
+                }
+
+                foreach (TREntities laraType in headAmendments.Keys)
                 {
                     TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, laraType);
                     if (meshes == null || meshes.Length < 15)
@@ -300,11 +315,11 @@ namespace TRRandomizerCore.Randomizers
                     TRMesh headMesh = meshes[14];
 
                     // Replace the hairband with plain hair - the imported ponytail has its own band so this is much tidier
-                    foreach (int face in _headAmendments[laraType][EMTextureFaceType.Rectangles])
+                    foreach (int face in headAmendments[laraType][EMTextureFaceType.Rectangles])
                     {
                         headMesh.TexturedRectangles[face].Texture = plainHairQuad;
                     }
-                    foreach (int face in _headAmendments[laraType][EMTextureFaceType.Triangles])
+                    foreach (int face in headAmendments[laraType][EMTextureFaceType.Triangles])
                     {
                         headMesh.TexturedTriangles[face].Texture = plainHairTri;
                     }
@@ -313,6 +328,12 @@ namespace TRRandomizerCore.Randomizers
                     headMesh.Vertices[headMesh.Vertices.Length - 1].Y = 36;
                     headMesh.Vertices[headMesh.Vertices.Length - 2].Y = 38;
                     headMesh.Vertices[headMesh.Vertices.Length - 3].Y = 38;
+                }
+
+                if (CutsceneSupportsBraid(level))
+                {
+                    ImportBraid(level.CutSceneLevel);
+                    level.CutSceneLevel.Script.LaraType = (uint)TREntities.CutsceneActor1;
                 }
             }
             
@@ -344,22 +365,28 @@ namespace TRRandomizerCore.Randomizers
             private void AmendBackpack(TR1CombinedLevel level)
             {
                 bool trexPresent = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.TRex) != null;
-                if (!_outer.IsBraidLevel(level.Script)
-                    || _outer.IsInvisibleLevel(level.Script)
-                    || (_outer.IsGymLevel(level.Script) && !trexPresent))
+                bool braidLevel = _outer.IsBraidLevel(level.Script) || (level.IsCutScene && _outer.IsBraidLevel(level.ParentLevel.Script));
+                bool invisibleLevel = _outer.IsInvisibleLevel(level.Script) || (level.IsCutScene && _outer.IsInvisibleLevel(level.ParentLevel.Script));
+                bool gymLevel = _outer.IsGymLevel(level.Script); // Cutscenes can never be gym levels
+
+                if (!braidLevel || invisibleLevel || (gymLevel && !trexPresent))
                 {
                     return;
                 }
 
-                List<TREntities> laraEntities = new List<TREntities>
+                List<TREntities> laraEntities = new List<TREntities>();
+                if (level.IsCutScene)
                 {
-                    TREntities.Lara,
-                    TREntities.LaraShotgunAnim_H
-                };
-
-                if (trexPresent)
+                    laraEntities.Add(TREntities.CutsceneActor1);
+                }
+                else
                 {
-                    laraEntities.Add(TREntities.LaraMiscAnim_H);
+                    laraEntities.Add(TREntities.Lara);
+                    laraEntities.Add(TREntities.LaraShotgunAnim_H);
+                    if (trexPresent)
+                    {
+                        laraEntities.Add(TREntities.LaraMiscAnim_H);
+                    }
                 }
 
                 // Make the backpack shallower so the braid doesn't smash into it
@@ -371,6 +398,36 @@ namespace TRRandomizerCore.Randomizers
                         mesh.Vertices[i].Z += 12;
                     }
                 }
+
+                if (CutsceneSupportsBraid(level))
+                {
+                    AmendBackpack(level.CutSceneLevel);
+                }
+            }
+
+            private bool CutsceneSupportsBraid(TR1CombinedLevel parentLevel)
+            {
+                if (!parentLevel.HasCutScene || parentLevel.Is(TRLevelNames.MINES))
+                {
+                    return false;
+                }
+
+                // Not supported before 2.13, so don't make any changes to Lara here.
+                Version t1mVersion = _outer.ScriptEditor.Edition.ExeVersion;
+                if (t1mVersion == null || t1mVersion < _minBraidCutsceneVersion)
+                {
+                    return false;
+                }
+
+                if (parentLevel.Is(TRLevelNames.ATLANTIS))
+                {
+                    // Lara's head may be Natla's or Pierre's, so only support the braid if
+                    // the mesh is the original.
+                    TRMesh larasHead = TRMeshUtilities.GetModelMeshes(parentLevel.CutSceneLevel.Data, TREntities.CutsceneActor1)[14];
+                    return larasHead.CollRadius == 68;
+                }
+
+                return true;
             }
 
             private void ConvertToGymOutfit(TR1CombinedLevel level)

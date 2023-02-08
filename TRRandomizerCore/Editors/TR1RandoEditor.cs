@@ -120,6 +120,12 @@ namespace TRRandomizerCore.Editors
                 {
                     scriptEd.EnableCheats = true;
                 }
+
+                // T1M 2.13+ allows data injection but we want to override this to
+                // avoid potential clashes with models imported by the randomizer.
+                (scriptEd.Script as TR1Script).Injections = null;
+                levels.ForEach(l => l.ResetInjections());
+
                 scriptEditor.SaveScript();
             }
 
