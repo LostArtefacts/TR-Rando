@@ -270,6 +270,20 @@ namespace TRRandomizerCore.Textures
                     }
                 }
             }
+            else if (modelID == TREntities.ScionPiece4_S_P && meshes[0].NumNormals != 123)
+            {
+                try
+                {
+                    // The scion is something else so try to duplicate it to avoid original
+                    // model issues.
+                    DuplicateMeshTextures(level, meshes[0]);
+                }
+                catch
+                {
+                    // If packing failed, just exclude this particular mesh.
+                    excludedMeshes.Add(meshes[0]);
+                }
+            }
 
             foreach (TRMesh mesh in meshes)
             {
