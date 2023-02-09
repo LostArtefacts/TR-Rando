@@ -77,9 +77,11 @@ You will need the following dependencies:
 * Anopob - For various contributions and bug fixes!
 * apel - Lots of ideas and development help.
 * Trxye - Lots of ideas and development help.
+* Towandaa - Lots of ideas and contributions, including secret, vehicle and sprite randomization.
 * Dash and Walkawayy - For providing great support and rando-related additions to [Tomb1Main](https://github.com/rr-/Tomb1Main).
 * Jimmy Beon - Providing us with an excellent assortment of custom textures for use in rando.
 * Topixtor - For endless testing to fix issues such as the opera house/barkhang entity freeze and mirrored levels, and providing enemy variations from his [TRLEs](https://trcustoms.org/users/927).
+* Radgryd - For endless TR1 testing and lots of great ideas for the rando.
 * Ralodosmovo - For providing an assortment of custom textures, and lots of ideas for the rando.
 * Lilly Jericho - For endless testing to fix issues such as the opera house/barkhang entity freeze, mirrored levels, and providing great continuous feedback. Lilly was also a coordinator of the huge translation effort by the community, with a special thanks to the following translators:
     * Lilly Jericho (German)
