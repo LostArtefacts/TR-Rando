@@ -7495,6 +7495,17 @@
       ]
     },
     {
+      "Comments": "Move the enemy off the slope otherwise it's likely to get stuck.",
+      "EMType": 44,
+      "EntityIndex": 126,
+      "TargetLocation": {
+        "X": 41472,
+        "Y": -13056,
+        "Z": 58880,
+        "Room": 10
+      }
+    },
+    {
       "Comments": "Remove the redundant camera triggers from the room.",
       "EMType": 62,
       "Locations": [
@@ -7797,13 +7808,28 @@
       "Trigger": {
         "TrigType": 2,
         "Mask": 31,
-        "Timer": 15,
+        "Timer": 18,
         "SwitchOrKeyRef": 30,
         "Actions": [
           {
             "Parameter": 31
           }
         ]
+      }
+    },
+    {
+      "Comments": "Placeholder for easy mode.",
+      "EMType": 1000,
+      "HardVariant": {
+        "Comments": "Tighter timer in hard mode.",
+        "EMType": 69,
+        "Location": {
+          "X": 42496,
+          "Y": -15104,
+          "Z": 65024,
+          "Room": 10
+        },
+        "Timer": 12
       }
     }
   ]
