@@ -253,6 +253,16 @@ namespace TRModelTransporter.Data
                 TR2Entities.StickWieldingGoon1Bandana, TR2Entities.StickWieldingGoon1BlackJacket, TR2Entities.StickWieldingGoon1BodyWarmer, TR2Entities.StickWieldingGoon1GreenVest, TR2Entities.StickWieldingGoon1WhiteVest
             },
 
+            [TR2Entities.FlamethrowerGoon] = new List<TR2Entities>
+            {
+                TR2Entities.FlamethrowerGoonOG, TR2Entities.FlamethrowerGoonTopixtor
+            },
+
+            [TR2Entities.Gunman1] = new List<TR2Entities>
+            {
+                TR2Entities.Gunman1OG, TR2Entities.Gunman1TopixtorORC, TR2Entities.Gunman1TopixtorCAC
+            },
+
             [TR2Entities.Barracuda] = new List<TR2Entities>
             {
                 TR2Entities.BarracudaIce, TR2Entities.BarracudaUnwater, TR2Entities.BarracudaXian

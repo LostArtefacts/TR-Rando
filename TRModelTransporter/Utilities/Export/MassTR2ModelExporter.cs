@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TRLevelReader;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -10,7 +11,14 @@ namespace TRModelTransporter.Utilities
 {
     public class MassTR2ModelExporter : AbstractMassTRModelExporter<TR2Entities, TR2Level, TR2ModelDefinition>
     {
-        public override List<string> LevelNames => TR2LevelNames.AsListWithAssault;
+        private static readonly List<string> _sourceLevels = TR2LevelNames.AsList.Concat(new List<string>
+        {
+            // https://trcustoms.org/levels/3013 by Topixtor
+            "TOPIORC.TR2",
+            "TOPICAC.TR2",
+        }).ToList();
+
+        public override List<string> LevelNames => _sourceLevels;
 
         public override Dictionary<string, List<TR2Entities>> ExportTypes => _exportModelTypes;
 
@@ -52,11 +60,11 @@ namespace TRModelTransporter.Utilities
             },
             [TR2LevelNames.RIG] = new List<TR2Entities>
             {
-                TR2Entities.Gunman1, TR2Entities.Gunman2, TR2Entities.ScubaDiver, TR2Entities.StickWieldingGoon1Bandana
+                TR2Entities.Gunman1OG, TR2Entities.Gunman2, TR2Entities.ScubaDiver, TR2Entities.StickWieldingGoon1Bandana
             },
             [TR2LevelNames.DA] = new List<TR2Entities>
             {
-                TR2Entities.FlamethrowerGoon
+                TR2Entities.FlamethrowerGoonOG
             },
             [TR2LevelNames.FATHOMS] = new List<TR2Entities>
             {
@@ -105,6 +113,14 @@ namespace TRModelTransporter.Utilities
             [TR2LevelNames.ASSAULT] = new List<TR2Entities>
             {
                 TR2Entities.Winston
+            },
+            ["TOPIORC.TR2"] = new List<TR2Entities>
+            {
+                TR2Entities.FlamethrowerGoonTopixtor, TR2Entities.Gunman1TopixtorORC
+            },
+            ["TOPICAC.TR2"] = new List<TR2Entities>
+            {
+                TR2Entities.Gunman1TopixtorCAC
             }
         };
     }

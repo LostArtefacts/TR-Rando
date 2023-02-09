@@ -48,6 +48,22 @@ namespace TRLevelReader.Helpers
                     new List<string> { TR2LevelNames.TIBET, TR2LevelNames.COT },
                 [TR2Entities.WhiteTiger] =
                     new List<string> { TR2LevelNames.CHICKEN }
+            },
+            [TR2Entities.FlamethrowerGoon] = new Dictionary<TR2Entities, List<string>>
+            {
+                [TR2Entities.FlamethrowerGoonOG]
+                    = new List<string> { TR2LevelNames.DA, TR2LevelNames.DECK },
+                [TR2Entities.FlamethrowerGoonTopixtor]
+                    = new List<string> { }
+            },
+            [TR2Entities.Gunman1] = new Dictionary<TR2Entities, List<string>>
+            {
+                [TR2Entities.Gunman1OG]
+                    = new List<string> { TR2LevelNames.RIG, TR2LevelNames.DA, TR2LevelNames.FATHOMS, TR2LevelNames.DORIA, TR2LevelNames.LQ, TR2LevelNames.DECK },
+                [TR2Entities.Gunman1TopixtorORC]
+                    = new List<string> { },
+                [TR2Entities.Gunman1TopixtorCAC]
+                    = new List<string> { }
             }
         };
 
@@ -69,6 +85,14 @@ namespace TRLevelReader.Helpers
             [TR2Entities.TigerOrSnowLeopard] = new List<TR2Entities>
             {
                 TR2Entities.BengalTiger, TR2Entities.SnowLeopard, TR2Entities.WhiteTiger
+            },
+            [TR2Entities.FlamethrowerGoon] = new List<TR2Entities>
+            {
+                TR2Entities.FlamethrowerGoonOG, TR2Entities.FlamethrowerGoonTopixtor
+            },
+            [TR2Entities.Gunman1] = new List<TR2Entities>
+            {
+                TR2Entities.Gunman1OG, TR2Entities.Gunman1TopixtorORC, TR2Entities.Gunman1TopixtorCAC
             }
         };
 
@@ -148,9 +172,12 @@ namespace TRLevelReader.Helpers
                 TR2Entities.Crow,
                 TR2Entities.Doberman,
                 TR2Entities.Eagle,
-                TR2Entities.FlamethrowerGoon,
+                TR2Entities.FlamethrowerGoonOG,
+                TR2Entities.FlamethrowerGoonTopixtor,
                 TR2Entities.GiantSpider,
-                TR2Entities.Gunman1,
+                TR2Entities.Gunman1OG,
+                TR2Entities.Gunman1TopixtorORC,
+                TR2Entities.Gunman1TopixtorCAC,
                 TR2Entities.Gunman2,
                 TR2Entities.Knifethrower,
                 TR2Entities.MarcoBartoli, // catch-all for Marco, the explosion when the dragon spawns, and the various dragon front/back pieces
@@ -193,9 +220,12 @@ namespace TRLevelReader.Helpers
                 TR2Entities.Crow,
                 TR2Entities.Doberman,
                 TR2Entities.Eagle,
-                TR2Entities.FlamethrowerGoon,
+                TR2Entities.FlamethrowerGoonOG,
+                TR2Entities.FlamethrowerGoonTopixtor,
                 TR2Entities.GiantSpider,
-                TR2Entities.Gunman1,
+                TR2Entities.Gunman1OG,
+                TR2Entities.Gunman1TopixtorORC,
+                TR2Entities.Gunman1TopixtorCAC,
                 TR2Entities.Gunman2,
                 TR2Entities.Knifethrower,
                 //TR2Entities.MarcoBartoli, // The dragon can drop items but we are limiting to 1 dragon per level so this is easier than re-allocating drops
@@ -252,8 +282,13 @@ namespace TRLevelReader.Helpers
                 TR2Entities.Doberman,
                 TR2Entities.Eagle,
                 TR2Entities.FlamethrowerGoon,
+                TR2Entities.FlamethrowerGoonOG,
+                TR2Entities.FlamethrowerGoonTopixtor,
                 TR2Entities.GiantSpider,
                 TR2Entities.Gunman1,
+                TR2Entities.Gunman1OG,
+                TR2Entities.Gunman1TopixtorORC,
+                TR2Entities.Gunman1TopixtorCAC,
                 TR2Entities.Gunman2,
                 TR2Entities.Knifethrower,
                 TR2Entities.MarcoBartoli,
