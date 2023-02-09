@@ -590,6 +590,24 @@
           ]
         }
       }
+    ],
+    [
+      {
+        "Comments": "Drain room 18.",
+        "EMType": 3,
+        "Tags": [
+          2
+        ],
+        "RoomNumbers": [
+          18
+        ],
+        "WaterTextures": [
+          71,
+          72,
+          73,
+          79
+        ]
+      }
     ]
   ],
   "AllWithin": [
@@ -4706,6 +4724,38 @@
               "Z": 59904,
               "Room": 71
             }
+          ]
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If there is a secret in this location and room 18 contains water, drain it.",
+        "ConditionType": 22,
+        "And": [
+          {
+            "ConditionType": 21,
+            "RoomIndex": 18
+          }
+        ],
+        "Location": {
+          "X": 70144,
+          "Y": -4864,
+          "Z": 33280,
+          "Room": 17
+        }
+      },
+      "OnTrue": [
+        {
+          "EMType": 3,
+          "RoomNumbers": [
+            18
+          ],
+          "WaterTextures": [
+            71,
+            72,
+            73,
+            79
           ]
         }
       ]
