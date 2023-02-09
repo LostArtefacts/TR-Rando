@@ -849,6 +849,15 @@
       }
     ],
 
+    "Vehicles.Plane.Rig": [
+      {
+        "Segment": 0,
+        "Tile": 1,
+        "X": 128,
+        "Y": 0
+      }
+    ],
+
     "Venice.Sky.Bartoli": [
       {
         "Segment": 1,
