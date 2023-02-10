@@ -78,6 +78,7 @@ You will need the following dependencies:
 * apel - Lots of ideas and development help.
 * Trxye - Lots of ideas and development help.
 * Towandaa - Lots of ideas and contributions, including secret, vehicle and sprite randomization.
+* Leoc1995 - For TR1 puzzle inspiration and contributing enemy variants from his [TRLEs](https://trcustoms.org/users/854).
 * Dash and Walkawayy - For providing great support and rando-related additions to [Tomb1Main](https://github.com/rr-/Tomb1Main).
 * Jimmy Beon - Providing us with an excellent assortment of custom textures for use in rando.
 * Topixtor - For endless testing to fix issues such as the opera house/barkhang entity freeze and mirrored levels, and providing enemy variations from his [TRLEs](https://trcustoms.org/users/927).
