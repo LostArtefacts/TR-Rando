@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using TRLevelReader.Helpers;
 using TRLevelReader;
+using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Data;
@@ -73,7 +72,7 @@ namespace TRModelTransporter.Transport
 
         protected override void ModelExportReady(TR1ModelDefinition definition)
         {
-            switch (definition.Entity)
+            switch (definition.Alias)
             {
                 case TREntities.Kold:
                     if (definition.Colours.ContainsKey(123))
@@ -92,6 +91,9 @@ namespace TRModelTransporter.Transport
                         definition.Colours[182].Green = 33;
                         definition.Colours[182].Blue = 22;
                     }
+                    break;
+                case TREntities.CowboyHeadless:
+                    AmendDXtre3DTextures(definition);
                     break;
                 default:
                     break;

@@ -243,6 +243,10 @@ namespace TRModelTransporter.Data
             [TREntities.NonShootingAtlantean_N] = new List<TREntities>
             {
                 TREntities.BandagedAtlantean, TREntities.MeatyAtlantean
+            },
+            [TREntities.Cowboy] = new List<TREntities>
+            {
+                TREntities.CowboyOG, TREntities.CowboyHeadless
             }
         };
 

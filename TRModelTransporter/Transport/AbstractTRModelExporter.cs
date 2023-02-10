@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using TRLevelReader.Model;
 using TRModelTransporter.Events;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model;
@@ -93,6 +95,51 @@ namespace TRModelTransporter.Transport
         {
             List<E> dependencies = new List<E>(Data.GetModelDependencies(definition.Alias));
             definition.Dependencies = dependencies.ToArray();
+        }
+
+        protected void AmendDXtre3DTextures(D definition)
+        {
+            // Dxtre3D can produce faulty UV mapping which can cause casting issues
+            // when used in model IO, so fix coordinates at this stage.
+            foreach (List<IndexedTRObjectTexture> textureList in definition.ObjectTextures.Values)
+            {
+                foreach (IndexedTRObjectTexture texture in textureList)
+                {
+                    Dictionary<TRObjectTextureVert, Point> points = new Dictionary<TRObjectTextureVert, Point>();
+                    foreach (TRObjectTextureVert vertex in texture.Texture.Vertices)
+                    {
+                        int x = vertex.XCoordinate.Fraction;
+                        if (vertex.XCoordinate.Whole == byte.MaxValue)
+                        {
+                            x++;
+                        }
+
+                        int y = vertex.YCoordinate.Fraction;
+                        if (vertex.YCoordinate.Whole == byte.MaxValue)
+                        {
+                            y++;
+                        }
+                        points[vertex] = new Point(x, y);
+                    }
+
+                    int maxX = points.Values.Max(p => p.X);
+                    int maxY = points.Values.Max(p => p.Y);
+                    foreach (TRObjectTextureVert vertex in texture.Texture.Vertices)
+                    {
+                        Point p = points[vertex];
+                        if (p.X == maxX && maxX != byte.MaxValue)
+                        {
+                            vertex.XCoordinate.Fraction--;
+                            vertex.XCoordinate.Whole = byte.MaxValue;
+                        }
+                        if (p.Y == maxY && maxY != byte.MaxValue)
+                        {
+                            vertex.YCoordinate.Fraction--;
+                            vertex.YCoordinate.Whole = byte.MaxValue;
+                        }
+                    }
+                }
+            }
         }
     }
 }

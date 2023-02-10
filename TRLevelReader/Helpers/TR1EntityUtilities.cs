@@ -21,6 +21,13 @@ namespace TRLevelReader.Helpers
                     new List<string> { TRLevelNames.KHAMOON, TRLevelNames.OBELISK },
                 [TREntities.MeatyAtlantean] =
                     new List<string> { TRLevelNames.SANCTUARY, TRLevelNames.ATLANTIS }
+            },
+            [TREntities.Cowboy] = new Dictionary<TREntities, List<string>>
+            {
+                [TREntities.CowboyOG] =
+                    new List<string> { TRLevelNames.MINES },
+                [TREntities.CowboyHeadless] =
+                    new List<string> { }
             }
         };
 
@@ -33,6 +40,10 @@ namespace TRLevelReader.Helpers
             [TREntities.NonShootingAtlantean_N] = new List<TREntities>
             {
                 TREntities.BandagedAtlantean, TREntities.MeatyAtlantean
+            },
+            [TREntities.Cowboy] = new List<TREntities>
+            {
+                TREntities.CowboyOG, TREntities.CowboyHeadless
             }
         };
 
@@ -294,7 +305,8 @@ namespace TRLevelReader.Helpers
                 TREntities.Bear,
                 TREntities.Centaur,
                 TREntities.CentaurStatue,
-                TREntities.Cowboy,
+                TREntities.CowboyOG,
+                TREntities.CowboyHeadless,
                 TREntities.CrocodileLand,
                 TREntities.CrocodileWater,                
                 TREntities.Gorilla,

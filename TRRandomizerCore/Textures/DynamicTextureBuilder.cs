@@ -47,7 +47,7 @@ namespace TRRandomizerCore.Textures
         {
             TREntities.Adam, TREntities.Missile2_H, TREntities.Missile3_H, TREntities.FlyingAtlantean,
             TREntities.BandagedFlyer, TREntities.Centaur, TREntities.Mummy, TREntities.Doppelganger,
-            TREntities.TRex, TREntities.Raptor
+            TREntities.TRex, TREntities.Raptor, TREntities.Cowboy
         };
 
         // Sprite sequences that should be targeted
@@ -241,6 +241,12 @@ namespace TRRandomizerCore.Textures
             {
                 // Can happen in ToT if the centaur statue was "removed", in which case we don't want to
                 // change any object textures that were repurposed for new enemies.
+                return;
+            }
+
+            if (modelID == TREntities.Cowboy && TRMeshUtilities.GetModelMeshes(level, TREntities.Cowboy)[2].NumTexturedRectangles > 0)
+            {
+                // We only want to target LeoC's headless cowboy - in this case the cowboy is OG.
                 return;
             }
 

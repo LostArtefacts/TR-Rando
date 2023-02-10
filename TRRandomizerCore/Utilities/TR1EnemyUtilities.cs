@@ -314,6 +314,8 @@ namespace TRRandomizerCore.Utilities
         {
             [TREntities.Adam] = 1,
             [TREntities.Cowboy] = 3,
+            [TREntities.CowboyOG] = 3,
+            [TREntities.CowboyHeadless] = 3,
             [TREntities.Kold] = 3,
             [TREntities.Pierre] = 3
         };

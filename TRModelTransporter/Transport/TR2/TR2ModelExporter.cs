@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Data;
@@ -80,51 +77,6 @@ namespace TRModelTransporter.Transport
                 foreach (IndexedTRSpriteTexture sprite in defaultSprites[id])
                 {
                     sprite.Index += 22;
-                }
-            }
-        }
-
-        private void AmendDXtre3DTextures(TR2ModelDefinition definition)
-        {
-            // Dxtre3D can produce faulty UV mapping which can cause casting issues
-            // when used in model IO, so fix coordinates at this stage.
-            foreach (List<IndexedTRObjectTexture> textureList in definition.ObjectTextures.Values)
-            {
-                foreach (IndexedTRObjectTexture texture in textureList)
-                {
-                    Dictionary<TRObjectTextureVert, Point> points = new Dictionary<TRObjectTextureVert, Point>();
-                    foreach (TRObjectTextureVert vertex in texture.Texture.Vertices)
-                    {
-                        int x = vertex.XCoordinate.Fraction;
-                        if (vertex.XCoordinate.Whole == byte.MaxValue)
-                        {
-                            x++;
-                        }
-
-                        int y = vertex.YCoordinate.Fraction;
-                        if (vertex.YCoordinate.Whole == byte.MaxValue)
-                        {
-                            y++;
-                        }
-                        points[vertex] = new Point(x, y);
-                    }
-
-                    int maxX = points.Values.Max(p => p.X);
-                    int maxY = points.Values.Max(p => p.Y);
-                    foreach (TRObjectTextureVert vertex in texture.Texture.Vertices)
-                    {
-                        Point p = points[vertex];
-                        if (p.X == maxX && maxX != byte.MaxValue)
-                        {
-                            vertex.XCoordinate.Fraction--;
-                            vertex.XCoordinate.Whole = byte.MaxValue;
-                        }
-                        if (p.Y == maxY && maxY != byte.MaxValue)
-                        {
-                            vertex.YCoordinate.Fraction--;
-                            vertex.YCoordinate.Whole = byte.MaxValue;
-                        }
-                    }
                 }
             }
         }

@@ -11,7 +11,7 @@ namespace TRModelTransporter.Utilities
 {
     public class MassTR2ModelExporter : AbstractMassTRModelExporter<TR2Entities, TR2Level, TR2ModelDefinition>
     {
-        private static readonly List<string> _sourceLevels = TR2LevelNames.AsList.Concat(new List<string>
+        private static readonly List<string> _sourceLevels = TR2LevelNames.AsListWithAssault.Concat(new List<string>
         {
             // https://trcustoms.org/levels/3013 by Topixtor
             "TOPIORC.TR2",
