@@ -276,7 +276,8 @@ namespace TRRandomizerCore.Textures
                     }
                 }
             }
-            else if (modelID == TREntities.ScionPiece4_S_P && meshes[0].NumNormals != 123)
+            else if ((modelID == TREntities.ScionPiece3_S_P || modelID == TREntities.ScionPiece4_S_P)
+                && meshes.Length == 1 && meshes[0].NumNormals != 123)
             {
                 try
                 {
