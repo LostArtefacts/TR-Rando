@@ -1,7 +1,7 @@
 # TR-Rando
 Tomb Raider Game Randomizer
 
-![TR Rando](Resources/Screenshots/TR2_1.png)
+![TR Rando](Resources/Screenshots/Compressed/TR2_1.jpg)
 
 # Installation
 Please follow the steps provided in this video:
@@ -45,12 +45,12 @@ We have a friendly community Discord server [here](https://discord.gg/f4bUqwgcCN
 For keeping track of levels while you play, check out the [TRRandoTracker](https://github.com/lahm86/TRRandoTracker).
 
 # Screenies
-![TR1 Rando](Resources/Screenshots/TR1_3.png)
-![TR1 Rando](Resources/Screenshots/TR1_4.png)
-![TR2 Rando](Resources/Screenshots/TR2_4.png)
-![TR2 Rando](Resources/Screenshots/TR2_5.png)
-![TR3 Rando](Resources/Screenshots/TR3_2.png)
-![TR3 Rando](Resources/Screenshots/TR3_3.png)
+![TR1 Rando](Resources/Screenshots/Compressed/TR1_3.jpg)
+![TR1 Rando](Resources/Screenshots/Compressed/TR1_4.jpg)
+![TR2 Rando](Resources/Screenshots/Compressed/TR2_4.jpg)
+![TR2 Rando](Resources/Screenshots/Compressed/TR2_5.jpg)
+![TR3 Rando](Resources/Screenshots/Compressed/TR3_2.jpg)
+![TR3 Rando](Resources/Screenshots/Compressed/TR3_3.jpg)
 
 [View all](Resources/Screenshots).
 
