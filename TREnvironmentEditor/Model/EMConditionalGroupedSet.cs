@@ -26,14 +26,8 @@ namespace TREnvironmentEditor.Model
 
         public void RemapTextures(Dictionary<ushort, ushort> indexMap)
         {
-            if (OnTrue != null)
-            {
-                OnTrue.RemapTextures(indexMap);
-            }
-            if (OnFalse != null)
-            {
-                OnFalse.RemapTextures(indexMap);
-            }
+            OnTrue?.RemapTextures(indexMap);
+            OnFalse?.RemapTextures(indexMap);
         }
     }
 }
