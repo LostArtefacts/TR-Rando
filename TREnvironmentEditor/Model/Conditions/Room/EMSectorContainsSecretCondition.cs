@@ -12,21 +12,21 @@ namespace TREnvironmentEditor.Model.Conditions
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
-            return Location.GetContainedSecret(level, floorData) != -1;
+            return Location.GetContainedSecretEntity(level, floorData) != -1;
         }
 
         protected override bool Evaluate(TR2Level level)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
-            return Location.GetContainedSecret(level, floorData) != -1;
+            return Location.GetContainedSecretEntity(level, floorData) != -1;
         }
 
         protected override bool Evaluate(TR3Level level)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
-            return Location.GetContainedSecret(level, floorData) != -1;
+            return Location.GetContainedSecretEntity(level, floorData) != -1;
         }
     }
 }

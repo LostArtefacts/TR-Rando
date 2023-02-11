@@ -14,10 +14,10 @@ namespace TREnvironmentEditor.Model.Types
             floorData.ParseFromLevel(level);
             foreach (EMLocation location in SectorLocations)
             {
-                int secretIndex = location.GetContainedSecret(level, floorData);
-                if (secretIndex != -1)
+                int entityIndex = location.GetContainedSecretEntity(level, floorData);
+                if (entityIndex != -1)
                 {
-                    Types.Add(level.Entities[secretIndex].TypeID);
+                    Types.Add(level.Entities[entityIndex].TypeID);
                 }
             }
 
@@ -31,10 +31,10 @@ namespace TREnvironmentEditor.Model.Types
             floorData.ParseFromLevel(level);
             foreach (EMLocation location in SectorLocations)
             {
-                int secretIndex = location.GetContainedSecret(level, floorData);
-                if (secretIndex != -1)
+                int entityIndex = location.GetContainedSecretEntity(level, floorData);
+                if (entityIndex != -1)
                 {
-                    Types.Add(level.Entities[secretIndex].TypeID);
+                    Types.Add(level.Entities[entityIndex].TypeID);
                 }
             }
 
@@ -48,10 +48,10 @@ namespace TREnvironmentEditor.Model.Types
             floorData.ParseFromLevel(level);
             foreach (EMLocation location in SectorLocations)
             {
-                int secretIndex = location.GetContainedSecret(level, floorData);
-                if (secretIndex != -1)
+                int entityIndex = location.GetContainedSecretEntity(level, floorData);
+                if (entityIndex != -1)
                 {
-                    Types.Add(level.Entities[secretIndex].TypeID);
+                    Types.Add(level.Entities[entityIndex].TypeID);
                 }
             }
 
