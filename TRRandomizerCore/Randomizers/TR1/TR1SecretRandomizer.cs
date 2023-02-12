@@ -781,7 +781,14 @@ namespace TRRandomizerCore.Randomizers
 
         private bool CreateSecretTriggers(TR1CombinedLevel level, TRSecretPlacement<TREntities> secret, short room, FDControl floorData, TRRoomSector baseSector)
         {
-            if (!CreateSecretTrigger(level, secret, room, floorData, baseSector))
+            TRRoomSector mainSector = baseSector;
+            while (mainSector.RoomBelow != 255)
+            {
+                // Ensure we go as far down as possible - for example, Atlantis room 47 sector 10,9
+                mainSector = FDUtilities.GetRoomSector(secret.Location.X, mainSector.Floor * 256 + 256, secret.Location.Z, mainSector.RoomBelow, level.Data, floorData);
+            }
+
+            if (!CreateSecretTrigger(level, secret, room, floorData, mainSector))
             {
                 return false;
             }
