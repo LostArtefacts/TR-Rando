@@ -86,7 +86,7 @@ namespace TREnvironmentEditor.Model.Types
             generator.Generate(room, level, linkedSector);
 
             // Stride the sectors again and make faces
-            GenerateFaces(sectors, faces, vertices, room.Info.YTop);
+            GenerateFaces(sectors, faces, vertices);
 
             // Write it all to the room
             room.RoomData.NumRectangles = (short)faces.Count;
@@ -172,7 +172,7 @@ namespace TREnvironmentEditor.Model.Types
             generator.Generate(room, level, linkedSector);
 
             // Stride the sectors again and make faces
-            GenerateFaces(sectors, faces, vertices, room.Info.YTop);
+            GenerateFaces(sectors, faces, vertices);
 
             // Write it all to the room
             room.RoomData.NumRectangles = (short)faces.Count;
@@ -259,7 +259,7 @@ namespace TREnvironmentEditor.Model.Types
             generator.Generate(room, level, linkedSector);
 
             // Stride the sectors again and make faces
-            GenerateFaces(sectors, faces, vertices, room.Info.YTop);
+            GenerateFaces(sectors, faces, vertices);
 
             // Write it all to the room
             room.RoomData.NumRectangles = (short)faces.Count;
@@ -340,7 +340,7 @@ namespace TREnvironmentEditor.Model.Types
             return 0;
         }
 
-        private void GenerateFaces(List<TRRoomSector> sectors, List<TRFace4> faces, List<TRVertex> vertices, int roomTop)
+        private void GenerateFaces(List<TRRoomSector> sectors, List<TRFace4> faces, List<TRVertex> vertices)
         {
             for (int x = 0; x < Width; x++)
             {
@@ -397,6 +397,23 @@ namespace TREnvironmentEditor.Model.Types
                     }
                 }
             }
+
+            // This is more in line with OG where vertices are shared and avoids odd caustic effects.
+            List<TRVertex> distinctVertices = vertices.GroupBy(v => new { v.X, v.Y, v.Z })
+                .Select(v => v.First())
+                .ToList();
+
+            foreach (TRFace4 face in faces)
+            {
+                for (int i = 0; i < face.Vertices.Length; i++)
+                {
+                    TRVertex vertex = vertices[face.Vertices[i]];
+                    face.Vertices[i] = (ushort)distinctVertices.FindIndex(v => v.X == vertex.X && v.Y == vertex.Y && v.Z == vertex.Z);
+                }
+            }
+
+            vertices.Clear();
+            vertices.AddRange(distinctVertices);
         }
 
         private void BuildWallFaces(List<TRFace4> faces, List<TRVertex> vertices, int x, int z, int topY, int bottomY, int ceiling, Direction direction)

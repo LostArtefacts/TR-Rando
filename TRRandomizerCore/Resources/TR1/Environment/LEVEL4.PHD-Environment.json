@@ -2222,81 +2222,81 @@
             "-2": [
               {
                 "Vertices": [
-                  126,
-                  127,
-                  227
-                ],
-                "Texture": 75
-              },
-              {
-                "Vertices": [
-                  294,
-                  295,
-                  371
-                ],
-                "Texture": 75
-              },
-              {
-                "Vertices": [
-                  438,
-                  439,
-                  535
-                ],
-                "Texture": 75
-              },
-              {
-                "Vertices": [
-                  274,
-                  328,
-                  275
-                ],
-                "Texture": 75
-              },
-              {
-                "Vertices": [
-                  414,
-                  468,
-                  415
-                ],
-                "Texture": 75
-              },
-              {
-                "Vertices": [
-                  151,
-                  177,
-                  148
-                ],
-                "Texture": 75
-              },
-              {
-                "Vertices": [
-                  262,
-                  321,
-                  261
-                ],
-                "Texture": 75
-              },
-              {
-                "Vertices": [
-                  402,
-                  500,
-                  401
-                ],
-                "Texture": 75
-              },
-              {
-                "Vertices": [
-                  170,
+                  77,
                   169,
-                  249
+                  58
                 ],
                 "Texture": 75
               },
               {
                 "Vertices": [
-                  318,
-                  317,
-                  460
+                  113,
+                  171,
+                  94
+                ],
+                "Texture": 75
+              },
+              {
+                "Vertices": [
+                  52,
+                  54,
+                  74
+                ],
+                "Texture": 75
+              },
+              {
+                "Vertices": [
+                  90,
+                  91,
+                  111
+                ],
+                "Texture": 75
+              },
+              {
+                "Vertices": [
+                  33,
+                  25,
+                  164
+                ],
+                "Texture": 75
+              },
+              {
+                "Vertices": [
+                  82,
+                  64,
+                  166
+                ],
+                "Texture": 75
+              },
+              {
+                "Vertices": [
+                  119,
+                  101,
+                  168
+                ],
+                "Texture": 75
+              },
+              {
+                "Vertices": [
+                  47,
+                  56,
+                  24
+                ],
+                "Texture": 75
+              },
+              {
+                "Vertices": [
+                  76,
+                  92,
+                  63
+                ],
+                "Texture": 75
+              },
+              {
+                "Vertices": [
+                  109,
+                  126,
+                  100
                 ],
                 "Texture": 75
               }
