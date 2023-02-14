@@ -337,7 +337,8 @@ namespace TRLevelReader.Helpers
         {
             List<TREntities> enemies = new List<TREntities>
             {
-                TREntities.FlyingAtlantean, TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N
+                // This ensures aliases are covered
+                TREntities.FlyingAtlantean, TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N, TREntities.Cowboy
             };
 
             enemies.AddRange(GetCandidateCrossLevelEnemies());
