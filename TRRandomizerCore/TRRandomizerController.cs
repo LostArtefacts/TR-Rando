@@ -1840,6 +1840,11 @@ namespace TRRandomizerCore
             _editor.ExportSettings(filePath);
         }
 
+        public void ResetSettings()
+        {
+            _editor.ResetSettings();
+        }
+
         public void Unload()
         {
             _editor.Unload();

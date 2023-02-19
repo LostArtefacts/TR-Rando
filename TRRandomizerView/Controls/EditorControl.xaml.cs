@@ -390,6 +390,19 @@ namespace TRRandomizerView.Controls
             }
         }
 
+        public void ResetSettings()
+        {
+            try
+            {
+                Controller.ResetSettings();
+                _options.Load(Controller);
+            }
+            catch (Exception e)
+            {
+                MessageWindow.ShowException(e);
+            }
+        }
+
         public void RandomizeAllSeeds()
         {
             if (_options.RandomizationPossible)
