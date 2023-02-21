@@ -715,8 +715,12 @@ namespace TRRandomizerCore.Randomizers
                     int z = secret.Location.Z + zNorm * _triggerEdgeLimit;
                     TRRoomSector neighbour = FDUtilities.GetRoomSector(x, secret.Location.Y, z, room, level.Data, floorData);
 
-                    // Process each unique sector only once and if it's a valid neighbour, add the extra trigger
-                    if (processedSectors.Add(neighbour) && !IsInvalidNeighbour(baseSector, neighbour))
+                    // Process each unique sector only once and if it's a valid neighbour, add the extra trigger.
+                    // We test neighbouring sector heights as Lara doesn't clip up in TR3 unlike TR1 if she is
+                    // against the wall, so this avoids unnecessary extra FD.
+                    if (processedSectors.Add(neighbour)
+                        && !IsInvalidNeighbour(baseSector, neighbour)
+                        && Math.Abs(secret.Location.Y - LocationUtilities.GetCornerHeight(neighbour, floorData, x, z)) < 256)
                     {
                         CreateSecretTrigger(level, secret, room, floorData, neighbour);
                         if (Settings.DevelopmentMode)
@@ -733,7 +737,6 @@ namespace TRRandomizerCore.Randomizers
         private bool IsInvalidNeighbour(TRRoomSector baseSector, TRRoomSector neighbour)
         {
             return (neighbour.Floor == -127 && neighbour.Ceiling == -127) // Inside a wall
-                || (neighbour.Floor != baseSector.Floor)                  // Change in height
                 || (neighbour.RoomBelow != baseSector.RoomBelow)          // Mid-air
                 ||
                 (
