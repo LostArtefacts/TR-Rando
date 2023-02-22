@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TREnvironmentEditor;
 using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
 using TRLevelReader.Helpers;
+using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
@@ -89,6 +91,11 @@ namespace TRRandomizerCore.Randomizers
             if (mapping != null)
             {
                 ApplyMappingToLevel(level, mapping);
+            }
+
+            if (Settings.RandomizeEnemies)
+            {
+                CheckMonkeyPickups(level);
             }
 
             if (!EnforcedModeOnly && _levelsToMirror.Contains(level.Script))
@@ -189,6 +196,35 @@ namespace TRRandomizerCore.Randomizers
             // Notify the texture monitor that this level has been flipped
             TextureMonitor<TR3Entities> monitor = TextureMonitor.CreateMonitor(level.Name);
             monitor.UseMirroring = true;
+        }
+
+        private void CheckMonkeyPickups(TR3CombinedLevel level)
+        {
+            // Do a global check for monkeys that may be sitting on more than one pickup.
+            // This has to happen after item, enemy and environment rando to account for
+            // any shifted, converted and added items.
+            TR2Entity[] monkeys = Array.FindAll(level.Data.Entities, e => e.TypeID == (short)TR3Entities.Monkey);
+            foreach (TR2Entity monkey in monkeys)
+            {
+                List<TR2Entity> pickups = Array.FindAll(level.Data.Entities, e =>
+                        e.X == monkey.X &&
+                        e.Y == monkey.Y &&
+                        e.Z == monkey.Z &&
+                        TR3EntityUtilities.IsAnyPickupType((TR3Entities)e.TypeID)).ToList();
+
+                if (pickups.Count == 1)
+                {
+                    continue;
+                }
+
+                // Leave one item to drop, favouring key items. The others will be shifted
+                // slightly so the monkey doesn't pick them up.
+                pickups.Sort((e1, e2) => TR3EntityUtilities.IsKeyItemType((TR3Entities)e1.TypeID) ? 1 : -1);
+                for (int i = 0; i < pickups.Count - 1; i++)
+                {
+                    ++pickups[i].X;
+                }
+            }
         }
     }
 }
