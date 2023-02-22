@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TRLevelReader;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
@@ -10,7 +11,13 @@ namespace TRModelTransporter.Utilities
 {
     public class MassTR1ModelExporter : AbstractMassTRModelExporter<TREntities, TRLevel, TR1ModelDefinition>
     {
-        public override List<string> LevelNames => TRLevelNames.AsList;
+        private static readonly List<string> _sourceLevels = TRLevelNames.AsListWithAssault.Concat(new List<string>
+        {
+            // https://trcustoms.org/users/854 by Leoc1995
+            "LEOC.TR2"
+        }).ToList();
+
+        public override List<string> LevelNames => _sourceLevels;
 
         public override Dictionary<string, List<TREntities>> ExportTypes => _exportModelTypes;
 
@@ -36,11 +43,12 @@ namespace TRModelTransporter.Utilities
             [TRLevelNames.CAVES] = new List<TREntities>
             {
                 TREntities.Pistols_M_H, TREntities.Shotgun_M_H, TREntities.Magnums_M_H, TREntities.Uzis_M_H,
-                TREntities.Lara, TREntities.Bat, TREntities.Bear, TREntities.Wolf
+                TREntities.Lara, TREntities.Bat, TREntities.Bear, TREntities.Wolf,
+                TREntities.FallingBlock, TREntities.DartEmitter, TREntities.WallSwitch
             },
             [TRLevelNames.VILCABAMBA] = new List<TREntities>
             {
-                
+                TREntities.PushBlock1, TREntities.SwingingBlade, TREntities.Trapdoor1, TREntities.UnderwaterSwitch
             },
             [TRLevelNames.VALLEY] = new List<TREntities>
             {
@@ -48,11 +56,12 @@ namespace TRModelTransporter.Utilities
             },
             [TRLevelNames.QUALOPEC] = new List<TREntities>
             {
-                TREntities.Mummy
+                TREntities.Mummy, TREntities.RollingBall, TREntities.FallingCeiling1, TREntities.MovingBlock, TREntities.TeethSpikes
             },
             [TRLevelNames.FOLLY] = new List<TREntities>
             {
-                TREntities.CrocodileLand, TREntities.CrocodileWater, TREntities.Gorilla, TREntities.Lion, TREntities.Lioness
+                TREntities.CrocodileLand, TREntities.CrocodileWater, TREntities.Gorilla, TREntities.Lion, TREntities.Lioness,
+                TREntities.ThorHammerHandle, TREntities.ThorLightning, TREntities.DamoclesSword
             },
             [TRLevelNames.COLOSSEUM] = new List<TREntities>
             {
@@ -60,7 +69,7 @@ namespace TRModelTransporter.Utilities
             },
             [TRLevelNames.MIDAS] = new List<TREntities>
             {
-                
+                TREntities.PushBlock2
             },
             [TRLevelNames.CISTERN] = new List<TREntities>
             {
@@ -68,7 +77,8 @@ namespace TRModelTransporter.Utilities
             },
             [TRLevelNames.TIHOCAN] = new List<TREntities>
             {
-                TREntities.CentaurStatue, TREntities.Centaur, TREntities.Pierre, TREntities.ScionPiece_M_H
+                TREntities.CentaurStatue, TREntities.Centaur, TREntities.Pierre, TREntities.ScionPiece_M_H,
+                TREntities.SlammingDoor
             },
             [TRLevelNames.KHAMOON] = new List<TREntities>
             {
@@ -84,7 +94,7 @@ namespace TRModelTransporter.Utilities
             },
             [TRLevelNames.MINES] = new List<TREntities>
             {
-                TREntities.Cowboy, TREntities.Kold, TREntities.SkateboardKid
+                TREntities.CowboyOG, TREntities.Kold, TREntities.SkateboardKid
             },
             [TRLevelNames.ATLANTIS] = new List<TREntities>
             {
@@ -93,6 +103,10 @@ namespace TRModelTransporter.Utilities
             [TRLevelNames.PYRAMID] = new List<TREntities>
             {
                 TREntities.Adam, TREntities.AdamEgg, TREntities.Natla
+            },
+            ["LEOC.PHD"] = new List<TREntities>
+            {
+                TREntities.CowboyHeadless
             }
         };
     }

@@ -18,6 +18,9 @@ namespace TREnvironmentEditor.Model
         [JsonProperty(Order = -2, DefaultValueHandling = DefaultValueHandling.Include)]
         public EMType EMType { get; set; }
 
+        public BaseEMFunction HardVariant { get; set; }
+        public List<EMTag> Tags { get; set; }
+
         public abstract void ApplyToLevel(TRLevel level);
         public abstract void ApplyToLevel(TR2Level level);
         public abstract void ApplyToLevel(TR3Level level);
@@ -115,32 +118,17 @@ namespace TREnvironmentEditor.Model
 
         protected EMLevelData GetData(TRLevel level)
         {
-            return new EMLevelData
-            {
-                NumCameras = level.NumCameras,
-                NumEntities = level.NumEntities,
-                NumRooms = level.NumRooms
-            };
+            return EMLevelData.GetData(level);
         }
 
         protected EMLevelData GetData(TR2Level level)
         {
-            return new EMLevelData
-            {
-                NumCameras = level.NumCameras,
-                NumEntities = level.NumEntities,
-                NumRooms = level.NumRooms
-            };
+            return EMLevelData.GetData(level);
         }
 
         protected EMLevelData GetData(TR3Level level)
         {
-            return new EMLevelData
-            {
-                NumCameras = level.NumCameras,
-                NumEntities = level.NumEntities,
-                NumRooms = level.NumRooms
-            };
+            return EMLevelData.GetData(level);
         }
     }
 }

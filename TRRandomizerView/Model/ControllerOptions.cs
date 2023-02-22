@@ -27,17 +27,17 @@ namespace TRRandomizerView.Model
 
         private bool _disableDemos, _autoLaunchGame, _puristMode;
 
-        private BoolItemControlClass _isHardSecrets, _allowGlitched, _useRewardRoomCameras, _useRandomSecretModels;
+        private BoolItemControlClass _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels;
         private TRSecretCountMode _secretCountMode;
         private uint _minSecretCount, _maxSecretCount;
         private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson;
-        private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures;
+        private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures, _retainEnemyTextures;
         private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
         private BoolItemControlClass _rotateStartPosition;
-        private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders;
+        private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders, _randomizeTraps, _randomizeChallengeRooms, _hardEnvironmentMode;
         private BoolItemControlClass _disableHealingBetweenLevels, _disableMedpacks;
         private uint _mirroredLevelCount;
         private bool _mirrorAssaultCourse;
@@ -51,8 +51,9 @@ namespace TRRandomizerView.Model
         private bool _assaultCourseWireframe;
         private bool _useSolidLaraWireframing;
         private bool _useSolidEnemyWireframing;
+        private bool _useSolidInteractableWireframing;
         private bool _useDifferentWireframeColours;
-        private bool _useWireframeLadders;
+        private bool _useWireframeLadders, _showWireframeTriggers, _showWireframeTriggerColours;
         private bool _nightModeAssaultCourse;
         private bool _overrideSunsets;
         private Color _vfxFilterColor;
@@ -1763,6 +1764,36 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RandomizeTraps
+        {
+            get => _randomizeTraps;
+            set
+            {
+                _randomizeTraps = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RandomizeChallengeRooms
+        {
+            get => _randomizeChallengeRooms;
+            set
+            {
+                _randomizeChallengeRooms = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass HardEnvironmentMode
+        {
+            get => _hardEnvironmentMode;
+            set
+            {
+                _hardEnvironmentMode = value;
+                FirePropertyChanged();
+            }
+        }
+
         public uint MirroredLevelCount
         {
             get => _mirroredLevelCount;
@@ -1820,6 +1851,16 @@ namespace TRRandomizerView.Model
             set
             {
                 _allowGlitched = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass GuaranteeSecrets
+        {
+            get => _guaranteeSecrets;
+            set
+            {
+                _guaranteeSecrets = value;
                 FirePropertyChanged();
             }
         }
@@ -1987,6 +2028,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RetainEnemyTextures
+        {
+            get => _retainEnemyTextures;
+            set
+            {
+                _retainEnemyTextures = value;
+                FirePropertyChanged();
+            }
+        }
+
         public uint WireframeLevelCount
         {
             get => _wireframeLevelCount;
@@ -2027,6 +2078,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public bool UseSolidInteractableWireframing
+        {
+            get => _useSolidInteractableWireframing;
+            set
+            {
+                _useSolidInteractableWireframing = value;
+                FirePropertyChanged();
+            }
+        }
+
         public bool UseDifferentWireframeColours
         {
             get => _useDifferentWireframeColours;
@@ -2043,6 +2104,26 @@ namespace TRRandomizerView.Model
             set
             {
                 _useWireframeLadders = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool ShowWireframeTriggers
+        {
+            get => _showWireframeTriggers;
+            set
+            {
+                _showWireframeTriggers = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool ShowWireframeTriggerColours
+        {
+            get => _showWireframeTriggerColours;
+            set
+            {
+                _showWireframeTriggerColours = value;
                 FirePropertyChanged();
             }
         }
@@ -2279,6 +2360,12 @@ namespace TRRandomizerView.Model
                 Description = "Locations that require glitches to reach will be included in the randomization pool."
             };
             BindingOperations.SetBinding(IsGlitchedSecrets, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
+            GuaranteeSecrets = new BoolItemControlClass
+            {
+                Title = "Use guaranteed spawn mode",
+                Description = "Guarantees that at least one hard and/or glitched secret (based on above selection) will appear in each level where possible."
+            };
+            BindingOperations.SetBinding(GuaranteeSecrets, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
             UseRewardRoomCameras = new BoolItemControlClass()
             {
                 Title = "Enable reward room cameras",
@@ -2291,6 +2378,9 @@ namespace TRRandomizerView.Model
                 Description = "If enabled, secret types will be randomized across levels; otherwise, pre-defined types will be allocated to each level."
             };
             BindingOperations.SetBinding(UseRandomSecretModels, BoolItemControlClass.IsActiveProperty, randomizeSecretsBinding);
+
+            IsHardSecrets.PropertyChanged += SecretCategory_PropertyChanged;
+            IsGlitchedSecrets.PropertyChanged += SecretCategory_PropertyChanged;
 
             // Items
             Binding randomizeItemsBinding = new Binding(nameof(RandomizeItems)) { Source = this };
@@ -2384,6 +2474,12 @@ namespace TRRandomizerView.Model
                 Description = "Texture mapping will not apply to levels as a whole e.g. walls, rock, snow etc."
             };
             BindingOperations.SetBinding(RetainMainLevelTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
+            RetainEnemyTextures = new BoolItemControlClass
+            {
+                Title = "Use original enemy textures",
+                Description = "Texture mapping will not apply to enemies."
+            };
+            BindingOperations.SetBinding(RetainEnemyTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
             RetainKeySpriteTextures = new BoolItemControlClass()
             {
                 Title = "Use original key item textures",
@@ -2515,7 +2611,7 @@ namespace TRRandomizerView.Model
             BindingOperations.SetBinding(RandomizeWaterLevels, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
             RandomizeSlotPositions = new BoolItemControlClass
             {
-                Title = "Move keyholes",
+                Title = "Move keyholes/switches/puzzle slots",
                 Description = "Change where keyholes, switches and puzzle slots are located in each level."
             };
             BindingOperations.SetBinding(RandomizeSlotPositions, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
@@ -2525,6 +2621,24 @@ namespace TRRandomizerView.Model
                 Description = "Change where ladders are positioned in each level."
             };
             BindingOperations.SetBinding(RandomizeLadders, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
+            RandomizeTraps = new BoolItemControlClass
+            {
+                Title = "Randomize traps",
+                Description = "Change where traps appear in each level."
+            };
+            BindingOperations.SetBinding(RandomizeTraps, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
+            RandomizeChallengeRooms = new BoolItemControlClass
+            {
+                Title = "Randomize puzzles/challenge rooms",
+                Description = "Allow rooms and areas to be created with puzzles to solve or challenges to complete."
+            };
+            BindingOperations.SetBinding(RandomizeChallengeRooms, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
+            HardEnvironmentMode = new BoolItemControlClass
+            {
+                Title = "Enable hard mode",
+                Description = "Allow more difficult puzzles, rooms and other environmental changes."
+            };
+            BindingOperations.SetBinding(HardEnvironmentMode, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
 
             Binding randomizeHealthBinding = new Binding(nameof(RandomizeHealth)) { Source = this };
             DisableHealingBetweenLevels = new BoolItemControlClass
@@ -2543,7 +2657,7 @@ namespace TRRandomizerView.Model
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
             {
-                _isHardSecrets, _allowGlitched, _useRewardRoomCameras, _useRandomSecretModels
+                _isHardSecrets, _allowGlitched, _guaranteeSecrets, _useRewardRoomCameras, _useRandomSecretModels
             };
             ItemBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2555,7 +2669,7 @@ namespace TRRandomizerView.Model
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
-                _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
+                _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainEnemyTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
             };
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2576,12 +2690,18 @@ namespace TRRandomizerView.Model
             };
             EnvironmentBoolItemControls = new List<BoolItemControlClass>
             {
-                _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders
+                _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders, _randomizeTraps,
+                _randomizeChallengeRooms, _hardEnvironmentMode
             };
             HealthBoolItemControls = new List<BoolItemControlClass>
             {
                 _disableHealingBetweenLevels, _disableMedpacks
             };
+        }
+
+        private void SecretCategory_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            GuaranteeSecrets.IsActive = IsGlitchedSecrets.Value || IsHardSecrets.Value;
         }
 
         private void AdjustAvailableOptions()
@@ -2612,13 +2732,20 @@ namespace TRRandomizerView.Model
 
             _allowGlitched.IsAvailable = IsGlitchedSecretsSupported;
             _isHardSecrets.IsAvailable = IsHardSecretsSupported;
+            _guaranteeSecrets.IsAvailable = IsGlitchedSecretsSupported || IsHardSecretsSupported;
 
             _retainSecretSpriteTextures.IsAvailable = IsSecretTexturesTypeSupported;
             _retainKeySpriteTextures.IsAvailable = IsKeyItemTexturesTypeSupported;
             _randomizeWaterColour.IsAvailable = IsWaterColourTypeSupported;
+            _retainEnemyTextures.IsAvailable = IsDynamicEnemyTexturesTypeSupported;
             _allowEmptyEggs.IsAvailable = IsAtlanteanEggBehaviourTypeSupported;
             _hideEnemies.IsAvailable = IsHiddenEnemiesTypeSupported;
             _removeLevelEndingLarson.IsAvailable = IsLarsonBehaviourTypeSupported;
+
+            _randomizeLadders.IsAvailable = !IsTR1;
+            _randomizeTraps.IsAvailable = IsTrapsTypeSupported;
+            _randomizeChallengeRooms.IsAvailable = IsChallengeRoomsTypeSupported;
+            _hardEnvironmentMode.IsAvailable = IsHardEnvironmentTypeSupported;
         }
 
         public void Load(TRRandomizerController controller)
@@ -2717,6 +2844,7 @@ namespace TRRandomizerView.Model
             SecretSeed = _controller.SecretSeed;
             IsHardSecrets.Value = _controller.HardSecrets;
             IsGlitchedSecrets.Value = _controller.GlitchedSecrets;
+            GuaranteeSecrets.Value = _controller.GuaranteeSecrets;
             UseRewardRoomCameras.Value = _controller.UseRewardRoomCameras;
             UseRandomSecretModels.Value = _controller.UseRandomSecretModels;
             SecretCountMode = _controller.SecretCountMode;
@@ -2728,14 +2856,18 @@ namespace TRRandomizerView.Model
             PersistTextures.Value = _controller.PersistTextures;
             RandomizeWaterColour.Value = _controller.RandomizeWaterColour;
             RetainMainLevelTextures.Value = _controller.RetainMainLevelTextures;
+            RetainEnemyTextures.Value = _controller.RetainEnemyTextures;
             RetainKeySpriteTextures.Value = _controller.RetainKeySpriteTextures;
             RetainSecretSpriteTextures.Value = _controller.RetainSecretSpriteTextures;
             WireframeLevelCount = _controller.WireframeLevelCount;
             AssaultCourseWireframe = _controller.AssaultCourseWireframe;
             UseSolidLaraWireframing = _controller.UseSolidLaraWireframing;
             UseSolidEnemyWireframing = _controller.UseSolidEnemyWireframing;
+            UseSolidInteractableWireframing = _controller.UseSolidInteractableWireframing;
             UseDifferentWireframeColours = _controller.UseDifferentWireframeColours;
             UseWireframeLadders = _controller.UseWireframeLadders;
+            ShowWireframeTriggers = _controller.ShowWireframeTriggers;
+            ShowWireframeTriggerColours = _controller.ShowWireframeTriggerColours;
 
             RandomizeOutfits = _controller.RandomizeOutfits;
             OutfitSeed = _controller.OutfitSeed;
@@ -2763,6 +2895,9 @@ namespace TRRandomizerView.Model
             RandomizeWaterLevels.Value = _controller.RandomizeWaterLevels;
             RandomizeSlotPositions.Value = _controller.RandomizeSlotPositions;
             RandomizeLadders.Value = _controller.RandomizeLadders;
+            RandomizeTraps.Value = _controller.RandomizeTraps;
+            RandomizeChallengeRooms.Value = _controller.RandomizeChallengeRooms;
+            HardEnvironmentMode.Value = _controller.HardEnvironmentMode;
             MirroredLevelCount = _controller.MirroredLevelCount;
             MirrorAssaultCourse = _controller.MirrorAssaultCourse;
 
@@ -2976,6 +3111,7 @@ namespace TRRandomizerView.Model
             _controller.SecretSeed = SecretSeed;
             _controller.HardSecrets = IsHardSecrets.Value;
             _controller.GlitchedSecrets = IsGlitchedSecrets.Value;
+            _controller.GuaranteeSecrets = GuaranteeSecrets.Value;
             _controller.UseRewardRoomCameras = UseRewardRoomCameras.Value;
             _controller.UseRandomSecretModels = UseRandomSecretModels.Value;
             _controller.SecretCountMode = SecretCountMode;
@@ -2987,14 +3123,18 @@ namespace TRRandomizerView.Model
             _controller.PersistTextures = PersistTextures.Value;
             _controller.RandomizeWaterColour = RandomizeWaterColour.Value;
             _controller.RetainMainLevelTextures = RetainMainLevelTextures.Value;
+            _controller.RetainEnemyTextures = RetainEnemyTextures.Value;
             _controller.RetainKeySpriteTextures = RetainKeySpriteTextures.Value;
             _controller.RetainSecretSpriteTextures = RetainSecretSpriteTextures.Value;
             _controller.WireframeLevelCount = WireframeLevelCount;
             _controller.AssaultCourseWireframe = AssaultCourseWireframe;
             _controller.UseSolidLaraWireframing = UseSolidLaraWireframing;
             _controller.UseSolidEnemyWireframing = UseSolidEnemyWireframing;
+            _controller.UseSolidInteractableWireframing = UseSolidInteractableWireframing;
             _controller.UseDifferentWireframeColours = UseDifferentWireframeColours;
             _controller.UseWireframeLadders = UseWireframeLadders;
+            _controller.ShowWireframeTriggers = ShowWireframeTriggers;
+            _controller.ShowWireframeTriggerColours = ShowWireframeTriggerColours;
 
             _controller.RandomizeOutfits = RandomizeOutfits;
             _controller.OutfitSeed = OutfitSeed;
@@ -3021,6 +3161,9 @@ namespace TRRandomizerView.Model
             _controller.RandomizeWaterLevels = RandomizeWaterLevels.Value;
             _controller.RandomizeSlotPositions = RandomizeSlotPositions.Value;
             _controller.RandomizeLadders = RandomizeLadders.Value;
+            _controller.RandomizeTraps = RandomizeTraps.Value;
+            _controller.RandomizeChallengeRooms = RandomizeChallengeRooms.Value;
+            _controller.HardEnvironmentMode = HardEnvironmentMode.Value;
             _controller.MirroredLevelCount = MirroredLevelCount;
             _controller.MirrorAssaultCourse = MirrorAssaultCourse;
 
@@ -3142,10 +3285,14 @@ namespace TRRandomizerView.Model
         public bool IsBraidTypeSupported => IsRandomizationSupported(TRRandomizerType.Braid);
         public bool IsOutfitDaggerSupported => IsRandomizationSupported(TRRandomizerType.OutfitDagger);
         public bool IsDynamicTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.DynamicTextures);
+        public bool IsDynamicEnemyTexturesTypeSupported => IsRandomizationSupported(TRRandomizerType.DynamicEnemyTextures);
         public bool IsMeshSwapsTypeSupported => IsRandomizationSupported(TRRandomizerType.MeshSwaps);
         public bool IsTextTypeSupported => IsRandomizationSupported(TRRandomizerType.Text);
         public bool IsEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.Environment);
+        public bool IsHardEnvironmentTypeSupported => IsRandomizationSupported(TRRandomizerType.HardEnvironment);
         public bool IsLaddersTypeSupported => IsRandomizationSupported(TRRandomizerType.Ladders);
+        public bool IsTrapsTypeSupported => IsRandomizationSupported(TRRandomizerType.Traps);
+        public bool IsChallengeRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.ChallengeRooms);
         public bool IsWeatherTypeSupported => IsRandomizationSupported(TRRandomizerType.Weather);
         public bool IsBirdMonsterBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.BirdMonsterBehaviour);
         public bool IsDragonSpawnTypeSupported => IsRandomizationSupported(TRRandomizerType.DragonSpawn);

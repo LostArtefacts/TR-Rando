@@ -607,6 +607,20 @@ namespace TRLevelReader.Helpers
             return GetSlotTypes().Contains(entity);
         }
 
+        public static List<TR3Entities> GetPushblockTypes()
+        {
+            return new List<TR3Entities>
+            {
+                TR3Entities.PushableBlock1,
+                TR3Entities.PushableBlock2
+            };
+        }
+
+        public static bool IsPushblockType(TR3Entities entity)
+        {
+            return GetPushblockTypes().Contains(entity);
+        }
+
         public static List<TR3Entities> GetLightTypes()
         {
             return new List<TR3Entities>

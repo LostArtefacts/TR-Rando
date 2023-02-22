@@ -7,9 +7,14 @@ namespace TRRandomizerCore.Textures
     public class WireframeData
     {
         /// <summary>
-        /// Textures that will be retained, such as water surfaces
+        /// Textures that will be retained, such as water surfaces.
         /// </summary>
         public List<ushort> ExcludedTextures { get; set; }
+
+        /// <summary>
+        /// Textures that require specific processing.
+        /// </summary>
+        public List<SpecialTextureHandling> SpecialTextures { get; set; }
 
         /// <summary>
         /// Textures that may share space with others that are being retained, but we want to still remove.
@@ -23,6 +28,16 @@ namespace TRRandomizerCore.Textures
         public Color HighlightColour { get; set; }
 
         /// <summary>
+        /// The colour of the wire used to indicate triggers
+        /// </summary>
+        public Color TriggerColour { get; set; }
+
+        /// <summary>
+        /// The colour of the wire used to indicate death tiles
+        /// </summary>
+        public Color DeathColour { get; set; }
+
+        /// <summary>
         /// Lara will become a solid version of the HighlightColour, otherwise she will be a frame
         /// </summary>
         public bool SolidLara { get; set; }
@@ -31,6 +46,11 @@ namespace TRRandomizerCore.Textures
         /// Enemies will become a solid version of the HighlightColour, otherwise they will be framed
         /// </summary>
         public bool SolidEnemies { get; set; }
+        
+        /// <summary>
+        /// Keyholes, switches etc will become a solid version of the HighlightColour, otherwise they will be framed
+        /// </summary>
+        public bool SolidInteractables { get; set; }
 
         /// <summary>
         /// Models that should also use solid textures if SolidEnemies is enabled (e.g. CutsceneActors)
@@ -53,6 +73,16 @@ namespace TRRandomizerCore.Textures
         public bool HighlightLadders { get; set; }
 
         /// <summary>
+        /// Whether or not to generate special textures for heavy triggers and pads.
+        /// </summary>
+        public bool HighlightTriggers { get; set; }
+
+        /// <summary>
+        /// Whether or not to include death tiles in trigger highlights.
+        /// </summary>
+        public bool HighlightDeathTiles { get; set; }
+
+        /// <summary>
         /// Whether or not 3D pickups are in use, similar to TR3.
         /// </summary>
         public bool Has3DPickups { get; set; }
@@ -60,8 +90,11 @@ namespace TRRandomizerCore.Textures
         public WireframeData()
         {
             ExcludedTextures = new List<ushort>();
+            SpecialTextures = new List<SpecialTextureHandling>();
             ForcedOverrides = new List<ushort>();
             HighlightColour = Color.White;
+            TriggerColour = Color.White;
+            DeathColour = Color.White;
             SolidLara = false;
             SolidEnemies = false;
             SolidModels = new List<uint>();
@@ -70,5 +103,47 @@ namespace TRRandomizerCore.Textures
             HighlightLadders = false;
             Has3DPickups = false;
         }
+
+        public static List<SpecialTextureMode> GetDrawModes(SpecialTextureType type)
+        {
+            List<SpecialTextureMode> modes = new List<SpecialTextureMode>();
+            switch (type)
+            {
+                case SpecialTextureType.MidasDoors:
+                    modes.Add(SpecialTextureMode.MidasDoorBars);
+                    modes.Add(SpecialTextureMode.MidasDoorLines);
+                    modes.Add(SpecialTextureMode.MidasDoorFill);
+                    modes.Add(SpecialTextureMode.MidasDoorDiagonals);
+                    break;
+                case SpecialTextureType.CrashPads:
+                    modes.Add(SpecialTextureMode.CrashPadCircle);
+                    modes.Add(SpecialTextureMode.CrashPadDiamond);
+                    break;
+            }
+            return modes;
+        }
+    }
+
+    public enum SpecialTextureType
+    {
+        MidasDoors,
+        CrashPads
+    }
+
+    public enum SpecialTextureMode
+    {
+        MidasDoorBars,
+        MidasDoorLines,
+        MidasDoorFill,
+        MidasDoorDiagonals,
+        CrashPadCircle,
+        CrashPadDiamond
+    }
+
+    public class SpecialTextureHandling
+    {
+        public SpecialTextureType Type { get; set; }
+        public SpecialTextureMode Mode { get; set; }
+        public List<ushort> Textures { get; set; }
     }
 }

@@ -16,6 +16,11 @@ namespace TRFDControl
             {
                 return (byte)(Value & 0x00FF);
             }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0x00FF));
+                Value |= value;
+            }
         }
 
         public bool Once
@@ -24,13 +29,29 @@ namespace TRFDControl
             {
                 return (Value & 0x0100) > 0;
             }
+            set
+            {
+                if (value)
+                {
+                    Value |= 0x0100;
+                }
+                else
+                {
+                    Value = (ushort)(Value & ~0x0100);
+                }
+            }
         }
 
         public byte MoveTimer
         {
             get
             {
-                return (byte)(Value & 0x3E00);
+                return (byte)((Value & 0x3E00) >> 9);
+            }
+            set
+            {
+                Value = (ushort)(Value & ~(Value & 0x3E00));
+                Value |= (ushort)(value << 9);
             }
         }
 

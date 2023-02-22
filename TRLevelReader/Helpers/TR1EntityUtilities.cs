@@ -21,6 +21,13 @@ namespace TRLevelReader.Helpers
                     new List<string> { TRLevelNames.KHAMOON, TRLevelNames.OBELISK },
                 [TREntities.MeatyAtlantean] =
                     new List<string> { TRLevelNames.SANCTUARY, TRLevelNames.ATLANTIS }
+            },
+            [TREntities.Cowboy] = new Dictionary<TREntities, List<string>>
+            {
+                [TREntities.CowboyOG] =
+                    new List<string> { TRLevelNames.MINES },
+                [TREntities.CowboyHeadless] =
+                    new List<string> { }
             }
         };
 
@@ -33,6 +40,10 @@ namespace TRLevelReader.Helpers
             [TREntities.NonShootingAtlantean_N] = new List<TREntities>
             {
                 TREntities.BandagedAtlantean, TREntities.MeatyAtlantean
+            },
+            [TREntities.Cowboy] = new List<TREntities>
+            {
+                TREntities.CowboyOG, TREntities.CowboyHeadless
             }
         };
 
@@ -294,7 +305,8 @@ namespace TRLevelReader.Helpers
                 TREntities.Bear,
                 TREntities.Centaur,
                 TREntities.CentaurStatue,
-                TREntities.Cowboy,
+                TREntities.CowboyOG,
+                TREntities.CowboyHeadless,
                 TREntities.CrocodileLand,
                 TREntities.CrocodileWater,                
                 TREntities.Gorilla,
@@ -325,7 +337,8 @@ namespace TRLevelReader.Helpers
         {
             List<TREntities> enemies = new List<TREntities>
             {
-                TREntities.FlyingAtlantean, TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N
+                // This ensures aliases are covered
+                TREntities.FlyingAtlantean, TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N, TREntities.Cowboy
             };
 
             enemies.AddRange(GetCandidateCrossLevelEnemies());
@@ -445,6 +458,22 @@ namespace TRLevelReader.Helpers
         public static bool IsSlotType(TREntities entity)
         {
             return GetSlotTypes().Contains(entity);
+        }
+
+        public static List<TREntities> GetPushblockTypes()
+        {
+            return new List<TREntities>
+            {
+                TREntities.PushBlock1,
+                TREntities.PushBlock2,
+                TREntities.PushBlock3,
+                TREntities.PushBlock4
+            };
+        }
+
+        public static bool IsPushblockType(TREntities entity)
+        {
+            return GetPushblockTypes().Contains(entity);
         }
 
         public static bool CanSharePickupSpace(TREntities entity)

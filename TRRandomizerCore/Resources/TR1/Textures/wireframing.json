@@ -21,7 +21,13 @@
     "ExcludedTextures": [ 18, 19, 20, 21 ]
   },
   "LEVEL6.PHD": {
-    "ExcludedTextures": [ 71, 72, 73, 79 ]
+    "ExcludedTextures": [ 71, 72, 73, 79, 108, 109, 110 ],
+    "SpecialTextures": [
+      {
+        "Type": 0,
+        "Textures": [ 597, 601, 604, 605 ]
+      }
+    ]
   },
   "LEVEL7A.PHD": {
     "ExcludedTextures": [ 1, 6, 8, 9 ]

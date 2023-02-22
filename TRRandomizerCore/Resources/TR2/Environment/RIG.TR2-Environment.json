@@ -6,6 +6,9 @@
       {
         "Comments": "Raise the water in the big pool area.",
         "EMType": 2,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           109,
           110,
@@ -112,6 +115,9 @@
       {
         "Comments": "Drain the DA pool.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           74
         ],
@@ -227,6 +233,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 52736,
@@ -240,6 +249,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 51712,
@@ -253,6 +265,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 50688,
@@ -266,6 +281,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 50688,
@@ -280,6 +298,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 51712,
@@ -294,6 +315,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 52736,
@@ -308,6 +332,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 49664,
@@ -322,6 +349,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 49664,
@@ -336,6 +366,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 49664,
@@ -350,6 +383,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 49664,
@@ -364,6 +400,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 49664,
@@ -378,6 +417,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 49664,
@@ -392,6 +434,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 49664,
@@ -406,6 +451,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 49664,
@@ -419,6 +467,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 49664,
@@ -433,6 +484,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 47620,
@@ -447,6 +501,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 47620,
@@ -461,6 +518,9 @@
         {
           "Comments": "Potential new position for the button at the start.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 48644,
@@ -476,6 +536,9 @@
         {
           "Comments": "Potential new position for the yellow key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 6,
           "Location": {
             "X": 36352,
@@ -490,6 +553,9 @@
         {
           "Comments": "Potential new position for the yellow key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 6,
           "Location": {
             "X": 36352,
@@ -504,6 +570,9 @@
         {
           "Comments": "Potential new position for the yellow key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 6,
           "Location": {
             "X": 34304,
@@ -518,6 +587,9 @@
         {
           "Comments": "Potential new position for the yellow key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 6,
           "Location": {
             "X": 44544,
@@ -533,6 +605,9 @@
         {
           "Comments": "Potential new position for the red key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 53,
           "Location": {
             "X": 41472,
@@ -547,6 +622,9 @@
         {
           "Comments": "Potential new position for the red key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 53,
           "Location": {
             "X": 41472,
@@ -561,6 +639,9 @@
         {
           "Comments": "Potential new position for the red key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 53,
           "Location": {
             "X": 41472,
@@ -575,6 +656,9 @@
         {
           "Comments": "Potential new position for the red key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 53,
           "Location": {
             "X": 41472,
@@ -589,6 +673,9 @@
         {
           "Comments": "Potential new position for the red key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 53,
           "Location": {
             "X": 41472,
@@ -603,6 +690,9 @@
         {
           "Comments": "Potential new position for the red key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 53,
           "Location": {
             "X": 42496,
@@ -617,6 +707,9 @@
         {
           "Comments": "Potential new position for the red key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 53,
           "Location": {
             "X": 42496,
@@ -630,6 +723,9 @@
         {
           "Comments": "Potential new position for the red key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 53,
           "Location": {
             "X": 37376,
@@ -644,6 +740,9 @@
         {
           "Comments": "Potential new position for the red key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 53,
           "Location": {
             "X": 37376,
@@ -660,6 +759,9 @@
         {
           "Comments": "Potential new position for the green key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 66,
           "Location": {
             "X": 50688,
@@ -673,6 +775,9 @@
         {
           "Comments": "Potential new position for the green key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 66,
           "Location": {
             "X": 50688,
@@ -687,6 +792,9 @@
         {
           "Comments": "Potential new position for the green key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 66,
           "Location": {
             "X": 53760,
@@ -701,6 +809,9 @@
         {
           "Comments": "Potential new position for the green key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 66,
           "Location": {
             "X": 53760,
@@ -715,6 +826,9 @@
         {
           "Comments": "Potential new position for the green key card slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 66,
           "Location": {
             "X": 53760,
@@ -731,6 +845,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 53760,
@@ -745,6 +862,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 51712,
@@ -759,6 +879,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 51712,
@@ -772,6 +895,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 52736,
@@ -786,6 +912,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 52736,
@@ -800,6 +929,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 52736,
@@ -814,6 +946,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 52736,
@@ -828,6 +963,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 52736,
@@ -842,6 +980,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 52736,
@@ -856,6 +997,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 48640,
@@ -870,6 +1014,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 48640,
@@ -884,6 +1031,9 @@
         {
           "Comments": "Potential new position for the switch in room 37.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 65,
           "Location": {
             "X": 48640,
@@ -900,6 +1050,9 @@
         {
           "Comments": "Potential new position for the dorm button",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 40,
           "Location": {
             "X": 27136,
@@ -913,6 +1066,9 @@
         {
           "Comments": "Potential new position for the dorm button",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 40,
           "Location": {
             "X": 27136,
@@ -927,6 +1083,9 @@
         {
           "Comments": "Potential new position for the dorm button",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 40,
           "Location": {
             "X": 27136,
@@ -940,6 +1099,9 @@
         {
           "Comments": "Potential new position for the dorm button",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 40,
           "Location": {
             "X": 27136,
@@ -954,6 +1116,9 @@
         {
           "Comments": "Potential new position for the dorm button.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 40,
           "Location": {
             "X": 27136,
@@ -967,6 +1132,9 @@
         {
           "Comments": "Potential new position for the dorm button.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 40,
           "Location": {
             "X": 29184,
@@ -980,6 +1148,9 @@
         {
           "Comments": "Potential new position for the dorm button.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 40,
           "Location": {
             "X": 29184,
@@ -994,6 +1165,9 @@
         {
           "Comments": "Potential new position for the dorm button.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 40,
           "Location": {
             "X": 29184,
@@ -1007,6 +1181,9 @@
         {
           "Comments": "Potential new position for the dorm button.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 40,
           "Location": {
             "X": 29184,
@@ -1021,6 +1198,9 @@
         {
           "Comments": "Potential new position for the dorm button.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 40,
           "Location": {
             "X": 29184,
@@ -1034,6 +1214,9 @@
         {
           "Comments": "Potential new position for the dorm button.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 40,
           "Location": {
             "X": 29184,
@@ -1052,6 +1235,9 @@
         {
           "Comments": "Drain the rooms at the start.",
           "EMType": 3,
+          "Tags": [
+            2
+          ],
           "RoomNumbers": [
             85,
             86,
@@ -1133,6 +1319,9 @@
         {
           "Comments": "Make the support climbable.",
           "EMType": 0,
+          "Tags": [
+            3
+          ],
           "TextureMap": {
             "1645": {
               "89": {
@@ -1253,6 +1442,9 @@
         {
           "Comments": "Make a ladder to get into the drained plane room.",
           "EMType": 0,
+          "Tags": [
+            3
+          ],
           "TextureMap": {
             "1645": {
               "88": {
@@ -1308,6 +1500,9 @@
         {
           "Comments": "Shift the button up.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 96,
           "Location": {
             "X": 24064,
@@ -1484,6 +1679,9 @@
         {
           "Comments": "Make a ladder to get out of room 14.",
           "EMType": 0,
+          "Tags": [
+            3
+          ],
           "TextureMap": {
             "1645": {
               "14": {
@@ -1532,6 +1730,9 @@
           {
             "Comments": "Move the button for door 97.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 96,
             "Location": {
               "X": 25088,
@@ -1545,6 +1746,9 @@
         [
           {
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 96,
             "Location": {
               "X": 24064,
@@ -1558,6 +1762,9 @@
         [
           {
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 96,
             "Location": {
               "X": 22016,
@@ -1571,6 +1778,9 @@
         [
           {
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 96,
             "Location": {
               "X": 24064,
@@ -1583,6 +1793,9 @@
         [
           {
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 96,
             "Location": {
               "X": 32256,
@@ -1596,6 +1809,9 @@
         [
           {
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 96,
             "Location": {
               "X": 32256,
@@ -1609,6 +1825,9 @@
         [
           {
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 96,
             "Location": {
               "X": 32256,
@@ -1664,6 +1883,9 @@
           {
             "Comments": "Shift the ladder to the outside area to -Z.",
             "EMType": 0,
+            "Tags": [
+              3
+            ],
             "TextureMap": {
               "1645": {
                 "52": {
@@ -1688,6 +1910,9 @@
           {
             "Comments": "Shift the ladder to the outside area to +Z.",
             "EMType": 0,
+            "Tags": [
+              3
+            ],
             "TextureMap": {
               "1645": {
                 "52": {
@@ -1856,5 +2081,6 @@
       ]
     }
   ],
+  "ConditionalOneOf": [],
   "Mirrored": []
 }

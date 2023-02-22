@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using TRFDControl;
 using TRLevelReader.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
@@ -18,10 +19,15 @@ namespace TRRandomizerCore.Textures
     {
         protected static readonly TRSize _nullSize = new TRSize(0, 0);
         protected static readonly int _ladderRungs = 4;
+        protected static readonly List<FDTrigType> _highlightTriggerTypes = new List<FDTrigType>
+        {
+            FDTrigType.HeavyTrigger, FDTrigType.Pad
+        };
 
         private Dictionary<TRFace3, TRSize> _roomFace3s, _meshFace3s;
         private Dictionary<TRFace4, TRSize> _roomFace4s, _meshFace4s;
         private Dictionary<TRFace4, List<TRVertex>> _ladderFace4s;
+        private List<TRFace4> _triggerFaces, _deathFaces;
 
         private ISet<ushort> _allTextures;
         protected WireframeData _data;
@@ -43,6 +49,8 @@ namespace TRRandomizerCore.Textures
             _meshFace3s = new Dictionary<TRFace3, TRSize>();
             _meshFace4s = new Dictionary<TRFace4, TRSize>();
             _ladderFace4s = data.HighlightLadders ? CollectLadders(level) : new Dictionary<TRFace4, List<TRVertex>>();
+            _triggerFaces = data.HighlightTriggers ? CollectTriggerFaces(level, _highlightTriggerTypes) : new List<TRFace4>();
+            _deathFaces = data.HighlightDeathTiles ? CollectDeathFaces(level) : new List<TRFace4>();
             _allTextures = new SortedSet<ushort>();
             _data = data;
 
@@ -61,6 +69,16 @@ namespace TRRandomizerCore.Textures
             {
                 Alignment = PenAlignment.Inset
             };
+            Pen triggerPen = new Pen(_data.TriggerColour, 1)
+            {
+                Alignment = PenAlignment.Inset,
+                DashCap = DashCap.Round
+            };
+            Pen deathPen = new Pen(_data.DeathColour, 1)
+            {
+                Alignment = PenAlignment.Inset,
+                DashCap = DashCap.Round
+            };
 
             using (AbstractTexturePacker<E, L> packer = CreatePacker(level))
             {
@@ -68,9 +86,13 @@ namespace TRRandomizerCore.Textures
                 ResetUnusedTextures(level);
 
                 TRSize roomSize = GetLargestSize(roomSizes);
+                roomSize.RoundDown();
 
                 IndexedTRObjectTexture roomTexture = CreateWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
                 IndexedTRObjectTexture ladderTexture = CreateLadderWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
+                IndexedTRObjectTexture triggerTexture = CreateTriggerWireframe(packer, roomSize, triggerPen, SmoothingMode.AntiAlias);
+                IndexedTRObjectTexture deathTexture = CreateDeathWireframe(packer, roomSize, deathPen, SmoothingMode.AntiAlias);
+                Dictionary<ushort, IndexedTRObjectTexture> specialTextures = CreateSpecialTextures(packer, level, roomPen);
                 ProcessClips(packer, level, roomPen, SmoothingMode.AntiAlias);
 
                 Dictionary<TRSize, IndexedTRObjectTexture> modelRemap = new Dictionary<TRSize, IndexedTRObjectTexture>();
@@ -91,6 +113,20 @@ namespace TRRandomizerCore.Textures
                 ushort ladderTextureIndex = (ushort)reusableTextures.Dequeue();
                 levelObjectTextures[ladderTextureIndex] = ladderTexture.Texture;
 
+                ushort triggerTextureIndex = (ushort)reusableTextures.Dequeue();
+                levelObjectTextures[triggerTextureIndex] = triggerTexture.Texture;
+
+                ushort deathTextureIndex = (ushort)reusableTextures.Dequeue();
+                levelObjectTextures[deathTextureIndex] = deathTexture.Texture;
+
+                Dictionary<ushort, ushort> specialTextureRemap = new Dictionary<ushort, ushort>();
+                foreach (ushort originalTexture in specialTextures.Keys)
+                {
+                    ushort newIndex = (ushort)reusableTextures.Dequeue();
+                    levelObjectTextures[newIndex] = specialTextures[originalTexture].Texture;
+                    specialTextureRemap[originalTexture] = newIndex;
+                }
+
                 foreach (TRSize size in modelRemap.Keys)
                 {
                     if (!size.Equals(_nullSize))
@@ -103,8 +139,8 @@ namespace TRRandomizerCore.Textures
 
                 SetObjectTextures(level, levelObjectTextures);
 
-                ResetRoomTextures(roomTextureIndex, ladderTextureIndex);
-                ResetMeshTextures(modelRemap);
+                ResetRoomTextures(roomTextureIndex, ladderTextureIndex, triggerTextureIndex, deathTextureIndex, specialTextureRemap);
+                ResetMeshTextures(modelRemap, specialTextureRemap);
                 TidyModels(level);
                 SetSkyboxVisible(level);
                 DeleteAnimatedTextures(level);
@@ -127,7 +163,7 @@ namespace TRRandomizerCore.Textures
         {
             foreach (TRFace4 face in faces)
             {
-                if (_ladderFace4s.ContainsKey(face))
+                if (_ladderFace4s.ContainsKey(face) || _triggerFaces.Contains(face) || _deathFaces.Contains(face))
                     continue;
 
                 ushort texture = (ushort)(face.Texture & 0x0fff);
@@ -254,6 +290,59 @@ namespace TRRandomizerCore.Textures
             return texture;
         }
 
+        private IndexedTRObjectTexture CreateTriggerWireframe(AbstractTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+        {
+            if (size.Equals(_nullSize))
+            {
+                return null;
+            }
+
+            IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
+            BitmapGraphics frame = CreateFrame(size.W, size.H, pen, mode, true);
+            // X marks the spot
+            frame.Graphics.DrawLine(pen, 0, size.H, size.W, 0);
+
+            packer.AddRectangle(new TexturedTileSegment(texture, frame.Bitmap));
+
+            return texture;
+        }
+
+        private IndexedTRObjectTexture CreateDeathWireframe(AbstractTexturePacker<E, L> packer, TRSize size, Pen pen, SmoothingMode mode)
+        {
+            if (size.Equals(_nullSize))
+            {
+                return null;
+            }
+
+            IndexedTRObjectTexture texture = CreateTexture(new Rectangle(0, 0, size.W, size.H));
+            BitmapGraphics frame = CreateFrame(size.W, size.H, pen, mode, true);
+            // Star symbol
+            frame.Graphics.DrawLine(pen, 0, size.H, size.W, 0);
+            frame.Graphics.DrawLine(pen, size.W / 2, 0, size.W / 2, size.H);
+            frame.Graphics.DrawLine(pen, 0, size.H / 2, size.W, size.H / 2);
+
+            packer.AddRectangle(new TexturedTileSegment(texture, frame.Bitmap));
+
+            return texture;
+        }
+
+        private Dictionary<ushort, IndexedTRObjectTexture> CreateSpecialTextures(AbstractTexturePacker<E, L> packer, L level, Pen pen)
+        {
+            Dictionary<ushort, TexturedTileSegment> specialSegments = CreateSpecialSegments(level, pen);
+            Dictionary<ushort, IndexedTRObjectTexture> specialTextures = new Dictionary<ushort, IndexedTRObjectTexture>();
+            foreach (ushort textureIndex in specialSegments.Keys)
+            {
+                packer.AddRectangle(specialSegments[textureIndex]);
+                specialTextures[textureIndex] = specialSegments[textureIndex].FirstTexture as IndexedTRObjectTexture;
+            }
+            return specialTextures;
+        }
+
+        protected virtual Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(L level, Pen pen)
+        {
+            return new Dictionary<ushort, TexturedTileSegment>();
+        }
+
         private void ProcessClips(AbstractTexturePacker<E, L> packer, L level, Pen pen, SmoothingMode mode)
         {
             // Some animated textures are shared in segments e.g. 4 32x32 segments within a 64x64 container,
@@ -296,7 +385,7 @@ namespace TRRandomizerCore.Textures
             }
         }
 
-        private BitmapGraphics CreateFrame(int width, int height, Pen pen, SmoothingMode mode, bool addDiagonal)
+        protected BitmapGraphics CreateFrame(int width, int height, Pen pen, SmoothingMode mode, bool addDiagonal)
         {
             BitmapGraphics image = new BitmapGraphics(new Bitmap(width, height));
             image.Graphics.SmoothingMode = mode;
@@ -311,7 +400,7 @@ namespace TRRandomizerCore.Textures
             return image;
         }
 
-        private IndexedTRObjectTexture CreateTexture(Rectangle rectangle)
+        protected IndexedTRObjectTexture CreateTexture(Rectangle rectangle)
         {
             // Configure the points
             List<TRObjectTextureVert> vertices = new List<TRObjectTextureVert>
@@ -354,18 +443,24 @@ namespace TRRandomizerCore.Textures
             };
         }
 
-        private void ResetRoomTextures(ushort wireframeIndex, ushort ladderIndex)
+        private void ResetRoomTextures(ushort wireframeIndex, ushort ladderIndex, ushort triggerIndex, ushort deathIndex, Dictionary<ushort, ushort> specialTextureRemap)
         {
             foreach (TRFace3 face in _roomFace3s.Keys)
             {
-                face.Texture = RemapTexture(face.Texture, wireframeIndex);
+                ushort currentTexture = (ushort)(face.Texture & 0x0fff);
+                face.Texture = RemapTexture(face.Texture, specialTextureRemap.ContainsKey(currentTexture)
+                    ? specialTextureRemap[currentTexture]
+                    : wireframeIndex);
             }
 
             foreach (TRFace4 face in _roomFace4s.Keys)
             {
-                if (!_ladderFace4s.ContainsKey(face))
+                if (!_ladderFace4s.ContainsKey(face) && !_triggerFaces.Contains(face) && !_deathFaces.Contains(face))
                 {
-                    face.Texture = RemapTexture(face.Texture, wireframeIndex);
+                    ushort currentTexture = (ushort)(face.Texture & 0x0fff);
+                    face.Texture = RemapTexture(face.Texture, specialTextureRemap.ContainsKey(currentTexture)
+                        ? specialTextureRemap[currentTexture]
+                        : wireframeIndex);
                 }
             }
 
@@ -385,33 +480,74 @@ namespace TRRandomizerCore.Textures
                     face.Vertices = vertIndices.ToArray();
                 }
             }
+
+            foreach (TRFace4 face in _triggerFaces)
+            {
+                // Exclusion example is Bacon Lara's heavy trigger - we want to retain the Lava here
+                if (!IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
+                {
+                    face.Texture = RemapTexture(face.Texture, triggerIndex);
+                }
+            }
+
+            foreach (TRFace4 face in _deathFaces)
+            {
+                if (!IsTextureExcluded((ushort)(face.Texture & 0x0fff)))
+                {
+                    face.Texture = RemapTexture(face.Texture, deathIndex);
+                }
+            }
         }
 
-        private void ResetMeshTextures(Dictionary<TRSize, IndexedTRObjectTexture> sizeRemap)
+        private void ResetMeshTextures(Dictionary<TRSize, IndexedTRObjectTexture> sizeRemap, Dictionary<ushort, ushort> specialTextureRemap)
         {
             foreach (TRFace3 face in _meshFace3s.Keys)
             {
-                TRSize size = _meshFace3s[face];
-                if (!size.Equals(_nullSize))
+                ushort currentTexture = (ushort)(face.Texture & 0x0fff);
+                if (IsTextureExcluded(currentTexture))
                 {
-                    if (!sizeRemap.ContainsKey(size))
+                    continue;
+                }
+                if (specialTextureRemap.ContainsKey(currentTexture))
+                {
+                    face.Texture = RemapTexture(face.Texture, specialTextureRemap[currentTexture]);
+                }
+                else
+                {
+                    TRSize size = _meshFace3s[face];
+                    if (!size.Equals(_nullSize))
                     {
-                        size = Find(size, sizeRemap);
+                        if (!sizeRemap.ContainsKey(size))
+                        {
+                            size = Find(size, sizeRemap);
+                        }
+                        face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
                     }
-                    face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
                 }
             }
 
             foreach (TRFace4 face in _meshFace4s.Keys)
             {
-                TRSize size = _meshFace4s[face];
-                if (!size.Equals(_nullSize))
+                ushort currentTexture = (ushort)(face.Texture & 0x0fff);
+                if (IsTextureExcluded(currentTexture))
                 {
-                    if (!sizeRemap.ContainsKey(size))
+                    continue;
+                }
+                if (specialTextureRemap.ContainsKey(currentTexture))
+                {
+                    face.Texture = RemapTexture(face.Texture, specialTextureRemap[currentTexture]);
+                }
+                else
+                {
+                    TRSize size = _meshFace4s[face];
+                    if (!size.Equals(_nullSize))
                     {
-                        size = Find(size, sizeRemap);
+                        if (!sizeRemap.ContainsKey(size))
+                        {
+                            size = Find(size, sizeRemap);
+                        }
+                        face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
                     }
-                    face.Texture = RemapTexture(face.Texture, (ushort)sizeRemap[size].Index);
                 }
             }
         }
@@ -473,6 +609,7 @@ namespace TRRandomizerCore.Textures
                 (
                     (_data.SolidLara && IsLaraModel(model)) ||
                     (_data.SolidEnemies && (IsEnemyModel(model) || _data.SolidModels.Contains(model.ID)) && !IsEnemyPlaceholderModel(model)) ||
+                    (_data.SolidInteractables && IsInteractableModel(model)) ||
                     ShouldSolidifyModel(model)
                 )
                 {
@@ -570,6 +707,8 @@ namespace TRRandomizerCore.Textures
         }
 
         protected abstract Dictionary<TRFace4, List<TRVertex>> CollectLadders(L level);
+        protected abstract List<TRFace4> CollectTriggerFaces(L level, List<FDTrigType> triggerTypes);
+        protected abstract List<TRFace4> CollectDeathFaces(L level);
         protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);
         protected abstract IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(L level);
         protected abstract IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(L level);
@@ -590,6 +729,7 @@ namespace TRRandomizerCore.Textures
         protected abstract bool IsLaraModel(TRModel model);
         protected abstract bool IsEnemyModel(TRModel model);
         protected virtual bool IsEnemyPlaceholderModel(TRModel model) => false;
+        protected abstract bool IsInteractableModel(TRModel model);
         protected virtual bool ShouldSolidifyModel(TRModel model) => false;
         protected abstract void SetSkyboxVisible(L level);
         protected abstract TRAnimatedTexture[] GetAnimatedTextures(L level);

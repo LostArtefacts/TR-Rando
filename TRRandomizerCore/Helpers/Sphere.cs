@@ -23,7 +23,7 @@ namespace TRRandomizerCore.Helpers
         {
             Vector3 distance = this.centre - other.centre;
 
-            float length = (float)Math.Sqrt((distance.X * distance.X) + (distance.Y * distance.Y) + (distance.Z + distance.Z));
+            float length = (float)Math.Sqrt((distance.X * distance.X) + (distance.Y * distance.Y) + (distance.Z * distance.Z));
 
             float sumRadius = this.radius + other.radius;
 

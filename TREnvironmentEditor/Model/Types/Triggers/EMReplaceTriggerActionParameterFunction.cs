@@ -9,6 +9,7 @@ namespace TREnvironmentEditor.Model.Types
     public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
     {
         public List<EMLocation> Locations { get; set; }
+        public List<int> EntityLocations { get; set; }
         public EMTriggerAction Action { get; set; }
 
         public override void ApplyToLevel(TRLevel level)
@@ -19,10 +20,22 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            foreach (EMLocation location in Locations)
+            if (Locations != null)
             {
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                ReplaceActionParameter(baseSector, control, action);
+                foreach (EMLocation location in Locations)
+                {
+                    TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                    ReplaceActionParameter(baseSector, control, action);
+                }
+            }
+            if (EntityLocations != null)
+            {
+                foreach (int entityIndex in EntityLocations)
+                {
+                    TREntity entity = level.Entities[data.ConvertEntity(entityIndex)];
+                    TRRoomSector baseSector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                    ReplaceActionParameter(baseSector, control, action);
+                }
             }
 
             control.WriteToLevel(level);
@@ -36,10 +49,22 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            foreach (EMLocation location in Locations)
+            if (Locations != null)
             {
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                ReplaceActionParameter(baseSector, control, action);
+                foreach (EMLocation location in Locations)
+                {
+                    TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                    ReplaceActionParameter(baseSector, control, action);
+                }
+            }
+            if (EntityLocations != null)
+            {
+                foreach (int entityIndex in EntityLocations)
+                {
+                    TR2Entity entity = level.Entities[data.ConvertEntity(entityIndex)];
+                    TRRoomSector baseSector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                    ReplaceActionParameter(baseSector, control, action);
+                }
             }
 
             control.WriteToLevel(level);
@@ -53,10 +78,22 @@ namespace TREnvironmentEditor.Model.Types
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
 
-            foreach (EMLocation location in Locations)
+            if (Locations != null)
             {
-                TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                ReplaceActionParameter(baseSector, control, action);
+                foreach (EMLocation location in Locations)
+                {
+                    TRRoomSector baseSector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                    ReplaceActionParameter(baseSector, control, action);
+                }
+            }
+            if (EntityLocations != null)
+            {
+                foreach (int entityIndex in EntityLocations)
+                {
+                    TR2Entity entity = level.Entities[data.ConvertEntity(entityIndex)];
+                    TRRoomSector baseSector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                    ReplaceActionParameter(baseSector, control, action);
+                }
             }
 
             control.WriteToLevel(level);

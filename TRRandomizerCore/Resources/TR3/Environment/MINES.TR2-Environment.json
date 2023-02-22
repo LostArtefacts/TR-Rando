@@ -78,6 +78,7 @@
       ]
     }
   ],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Move door #40 so the maze can be beaten",

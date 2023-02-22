@@ -50,7 +50,7 @@ namespace TRRandomizerView.Controls
         private const string _configFileExtension = "trr";
 
         private readonly ControllerOptions _options;
-        private bool _dirty, _reloadRequested;
+        private bool _dirty, _reloadRequested, _hideRandomOptionsPrompt;
         private volatile bool _showExternalModPrompt;
 
         private static int _lastGlobalSeed = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
@@ -232,6 +232,7 @@ namespace TRRandomizerView.Controls
 
             _dirty = false;
             _reloadRequested = false;
+            _hideRandomOptionsPrompt = false;
             FireEditorStateChanged();
         }
 
@@ -389,6 +390,19 @@ namespace TRRandomizerView.Controls
             }
         }
 
+        public void ResetSettings()
+        {
+            try
+            {
+                Controller.ResetSettings();
+                _options.Load(Controller);
+            }
+            catch (Exception e)
+            {
+                MessageWindow.ShowException(e);
+            }
+        }
+
         public void RandomizeAllSeeds()
         {
             if (_options.RandomizationPossible)
@@ -407,9 +421,13 @@ namespace TRRandomizerView.Controls
         {
             if (_options.RandomizationPossible)
             {
-                _popupTimer.Stop();
-                _options.RandomizeActiveOptions();
-                ShowPopupMessage("Options Randomized!");
+                if (_hideRandomOptionsPrompt || MessageWindow.ShowConfirm("This option can produce very challenging outcomes.\nAre you sure you wish to continue?"))
+                {
+                    _popupTimer.Stop();
+                    _options.RandomizeActiveOptions();
+                    ShowPopupMessage("Options Randomized!");
+                    _hideRandomOptionsPrompt = true;
+                }
             }
             else
             {

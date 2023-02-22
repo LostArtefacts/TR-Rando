@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model.Types;
 using TRFDControl;
@@ -53,11 +54,19 @@ namespace TRRandomizerCore.Randomizers
         public ItemFactory ItemFactory { get; set; }
         public List<TR1ScriptedLevel> MirrorLevels { get; set; }
 
+        private SecretPicker _picker;
+
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
             _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\locations.json"));
             _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR1\Locations\unarmed_locations.json"));
+
+            _picker = new SecretPicker
+            {
+                Settings = Settings,
+                Generator = _generator,
+            };
 
             if (ScriptEditor.Edition.IsCommunityPatch)
             {
@@ -467,6 +476,19 @@ namespace TRRandomizerCore.Randomizers
             locations.Shuffle(_generator);
             List<Location> usedLocations = new List<Location>();
 
+            Queue<Location> guaranteedLocations = _picker.GetGuaranteedLocations(locations, MirrorLevels.Contains(level.Script), level.Script.NumSecrets, location =>
+            {
+                bool result = EvaluateProximity(location, usedLocations, level, floorData);
+                if (result)
+                {
+                    usedLocations.Add(location);
+                }
+                _proxEvaluationCount = 0;
+                return result;
+            });
+
+            usedLocations.Clear();
+
             TRSecretPlacement<TREntities> secret = new TRSecretPlacement<TREntities>();
             int pickupIndex = 0;
             bool damagingLocationUsed = false;
@@ -474,14 +496,18 @@ namespace TRRandomizerCore.Randomizers
             while (secret.SecretIndex < level.Script.NumSecrets)
             {
                 Location location;
-                do
+                if (guaranteedLocations.Count > 0)
                 {
-                    location = locations[_generator.Next(0, locations.Count)];
+                    location = guaranteedLocations.Dequeue();
                 }
-                while
-                (
-                    !EvaluateProximity(location, usedLocations, level, floorData)
-                );
+                else
+                {
+                    do
+                    {
+                        location = locations[_generator.Next(0, locations.Count)];
+                    }
+                    while (!EvaluateProximity(location, usedLocations, level, floorData));
+                }
 
                 _proxEvaluationCount = 0;
 
@@ -525,6 +551,10 @@ namespace TRRandomizerCore.Randomizers
             floorData.WriteToLevel(level.Data);
 
             AddDamageControl(level, damagingLocationUsed, glitchedDamagingLocationUsed);
+
+#if DEBUG
+            Debug.WriteLine(level.Name + ": " +  _picker.DescribeLocations(usedLocations));
+#endif
         }
 
         private bool EvaluateProximity(Location loc, List<Location> usedLocs, TR1CombinedLevel level, FDControl floorData)
@@ -566,14 +596,16 @@ namespace TRRandomizerCore.Randomizers
                 proximity = _TINY_RADIUS;
             }
 
-            Sphere newLoc = new Sphere(new System.Numerics.Vector3(loc.X, loc.Y, loc.Z), proximity);
+            Sphere newLoc = new Sphere(new Vector3(loc.X, loc.Y, loc.Z), proximity);
             // Tilted sectors can still pass the proximity test, so in any case we never want 2 secrets sharing a tile.
+            // We also want to try to avoid secrets in the same room, unless we've exhausted all other attempts.
             TRRoomSector newSector = FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData);
 
             foreach (Location used in usedLocs)
             {
-                SafeToPlace = !newLoc.IsColliding(new Sphere(new System.Numerics.Vector3(used.X, used.Y, used.Z), proximity))
-                    && newSector != FDUtilities.GetRoomSector(used.X, used.Y, used.Z, (short)used.Room, level.Data, floorData);
+                SafeToPlace = !newLoc.IsColliding(new Sphere(new Vector3(used.X, used.Y, used.Z), proximity))
+                    && newSector != FDUtilities.GetRoomSector(used.X, used.Y, used.Z, (short)used.Room, level.Data, floorData)
+                    && (proximity == _TINY_RADIUS || used.Room != loc.Room);
 
                 if (SafeToPlace == false)
                     break;
@@ -618,15 +650,26 @@ namespace TRRandomizerCore.Randomizers
         {
             if (TR1EntityUtilities.IsKeyType(itemType))
             {
+                PopulateScriptStrings(itemType - TREntities.Key1_S_P, level.Script.Keys, "K");
                 level.Script.Keys.Add(name);
             }
             else if (TR1EntityUtilities.IsPuzzleType(itemType))
             {
+                PopulateScriptStrings(itemType - TREntities.Puzzle1_S_P, level.Script.Puzzles, "P");
                 level.Script.Puzzles.Add(name);
             }
             else if (TR1EntityUtilities.IsQuestType(itemType))
             {
+                PopulateScriptStrings(itemType - TREntities.Quest1_S_P, level.Script.Pickups, "Q");
                 level.Script.Pickups.Add(name);
+            }
+        }
+
+        private void PopulateScriptStrings(int index, List<string> gameStrings, string id)
+        {
+            while (index > gameStrings.Count)
+            {
+                gameStrings.Add(id + (gameStrings.Count + 1));
             }
         }
 
@@ -738,7 +781,14 @@ namespace TRRandomizerCore.Randomizers
 
         private bool CreateSecretTriggers(TR1CombinedLevel level, TRSecretPlacement<TREntities> secret, short room, FDControl floorData, TRRoomSector baseSector)
         {
-            if (!CreateSecretTrigger(level, secret, room, floorData, baseSector))
+            TRRoomSector mainSector = baseSector;
+            while (mainSector.RoomBelow != 255)
+            {
+                // Ensure we go as far down as possible - for example, Atlantis room 47 sector 10,9
+                mainSector = FDUtilities.GetRoomSector(secret.Location.X, mainSector.Floor * 256 + 256, secret.Location.Z, mainSector.RoomBelow, level.Data, floorData);
+            }
+
+            if (!CreateSecretTrigger(level, secret, room, floorData, mainSector))
             {
                 return false;
             }
@@ -945,7 +995,7 @@ namespace TRRandomizerCore.Randomizers
                         TRSecretModelAllocation<TREntities> allocation = _importAllocations[level];
 
                         // Get the artefacts into the level and refresh the model list
-                        TR1ModelImporter importer = new TR1ModelImporter
+                        TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
                         {
                             Level = level.Data,
                             LevelName = level.Name,

@@ -10,7 +10,20 @@ namespace TRModelTransporter.Packing
 {
     public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
     {
-        public BitmapGraphics BitmapGraphics { get; set; }
+        private BitmapGraphics _graphics;
+        public BitmapGraphics BitmapGraphics
+        {
+            get => _graphics;
+            set
+            {
+                _graphics = value;
+                // Listen to on-the-fly bitmap changes
+                _graphics.GraphicChanged += (object sender, EventArgs e) =>
+                {
+                    _graphicChanged = true;
+                };
+            }
+        }
 
         // Some room textures in Opera House (at least) overlap, so we need to 
         // allow this when initialising the tiles.
@@ -20,12 +33,12 @@ namespace TRModelTransporter.Packing
             set => _allowOverlapping = value;
         }
 
-        public bool BitmapChanged => _segmentAdded || _segmentRemoved;
-        private bool _segmentAdded, _segmentRemoved;
+        public bool BitmapChanged => _segmentAdded || _segmentRemoved || _graphicChanged;
+        private bool _segmentAdded, _segmentRemoved, _graphicChanged;
 
         public TexturedTile()
         {
-            _segmentAdded = _segmentRemoved = false;
+            _segmentAdded = _segmentRemoved = _graphicChanged = false;
         }
 
         public void AddTexture(AbstractIndexedTRTexture texture)

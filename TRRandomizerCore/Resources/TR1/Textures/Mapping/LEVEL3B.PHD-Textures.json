@@ -1,4 +1,19 @@
 {
+  "Landmarks": {
+    "Landmarks.Leoc1995": {
+      "0": [
+        {
+          "RectangleIndices": [ 8 ],
+          "BackgroundIndex": 31,
+          "PortalSector": {
+            "X": 4,
+            "Room": 27
+          }
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Lara.Bobble": [
       {

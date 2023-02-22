@@ -1202,6 +1202,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.RetainSecretSpriteTextures = value;
         }
 
+        public bool RetainEnemyTextures
+        {
+            get => LevelRandomizer.RetainEnemyTextures;
+            set => LevelRandomizer.RetainEnemyTextures = value;
+        }
+
         public uint WireframeLevelCount
         {
             get => LevelRandomizer.WireframeLevelCount;
@@ -1226,6 +1232,12 @@ namespace TRRandomizerCore
             set => LevelRandomizer.UseSolidEnemyWireframing = value;
         }
 
+        public bool UseSolidInteractableWireframing
+        {
+            get => LevelRandomizer.UseSolidInteractableWireframing;
+            set => LevelRandomizer.UseSolidInteractableWireframing = value;
+        }
+
         public bool UseDifferentWireframeColours
         {
             get => LevelRandomizer.UseDifferentWireframeColours;
@@ -1238,6 +1250,18 @@ namespace TRRandomizerCore
             set => LevelRandomizer.UseWireframeLadders = value;
         }
 
+        public bool ShowWireframeTriggers
+        {
+            get => LevelRandomizer.ShowWireframeTriggers;
+            set => LevelRandomizer.ShowWireframeTriggers = value;
+        }
+
+        public bool ShowWireframeTriggerColours
+        {
+            get => LevelRandomizer.ShowWireframeTriggerColours;
+            set => LevelRandomizer.ShowWireframeTriggerColours = value;
+        }
+
         public bool HardSecrets
         {
             get => LevelRandomizer.HardSecrets;
@@ -1248,6 +1272,12 @@ namespace TRRandomizerCore
         {
             get => LevelRandomizer.GlitchedSecrets;
             set => LevelRandomizer.GlitchedSecrets = value;
+        }
+
+        public bool GuaranteeSecrets
+        {
+            get => LevelRandomizer.GuaranteeSecrets;
+            set => LevelRandomizer.GuaranteeSecrets = value;
         }
 
         public bool UseRewardRoomCameras
@@ -1660,6 +1690,24 @@ namespace TRRandomizerCore
             set => LevelRandomizer.RandomizeLadders = value;
         }
 
+        public bool RandomizeTraps
+        {
+            get => LevelRandomizer.RandomizeTraps;
+            set => LevelRandomizer.RandomizeTraps = value;
+        }
+
+        public bool RandomizeChallengeRooms
+        {
+            get => LevelRandomizer.RandomizeChallengeRooms;
+            set => LevelRandomizer.RandomizeChallengeRooms = value;
+        }
+
+        public bool HardEnvironmentMode
+        {
+            get => LevelRandomizer.HardEnvironmentMode;
+            set => LevelRandomizer.HardEnvironmentMode = value;
+        }
+
         public uint MirroredLevelCount
         {
             get => LevelRandomizer.MirroredLevelCount;
@@ -1790,6 +1838,11 @@ namespace TRRandomizerCore
         public void ExportSettings(string filePath)
         {
             _editor.ExportSettings(filePath);
+        }
+
+        public void ResetSettings()
+        {
+            _editor.ResetSettings();
         }
 
         public void Unload()

@@ -80,6 +80,10 @@
                         CanExecute="ExportSettingsCommandBinding_CanExecute"
                         Executed="ExportCommandBinding_Executed"/>
 
+        <CommandBinding Command="cmds:WindowCommands.ResetSettings"
+                        CanExecute="EditorActiveCommandBinding_CanExecute"
+                        Executed="ResetSettingsCommandBinding_Executed"/>
+
         <CommandBinding Command="cmds:WindowCommands.DevelopmentMode"
                         CanExecute="EditorActiveCommandBinding_CanExecute"
                         Executed="DevelopmentModeCommandBinding_Executed" />
@@ -201,6 +205,9 @@
 
                 <MenuItem Header="Export Settings"
                           Command="cmds:WindowCommands.ExportSettings"/>
+
+                <MenuItem Header="Reset Settings"
+                          Command="cmds:WindowCommands.ResetSettings"/>
 
                 <Separator/>
 

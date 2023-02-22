@@ -447,6 +447,15 @@
       }
     ],
 
+    "Vehicles.Plane.Opera": [
+      {
+        "Segment": 0,
+        "Tile": 3,
+        "X": 0,
+        "Y": 0
+      }
+    ],
+
     "Venice.Curtains": [
       {
         "Segment": 0,

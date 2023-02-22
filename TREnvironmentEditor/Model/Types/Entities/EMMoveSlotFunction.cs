@@ -18,6 +18,7 @@ namespace TREnvironmentEditor.Model.Types
         public override void ApplyToLevel(TRLevel level)
         {
             EMLevelData data = GetData(level);
+            EntityIndex = data.ConvertEntity(EntityIndex);
 
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
@@ -46,6 +47,7 @@ namespace TREnvironmentEditor.Model.Types
         public override void ApplyToLevel(TR2Level level)
         {
             EMLevelData data = GetData(level);
+            EntityIndex = data.ConvertEntity(EntityIndex);
 
             FDControl control = new FDControl();
             control.ParseFromLevel(level);
@@ -86,6 +88,7 @@ namespace TREnvironmentEditor.Model.Types
         public override void ApplyToLevel(TR3Level level)
         {
             EMLevelData data = GetData(level);
+            EntityIndex = data.ConvertEntity(EntityIndex);
 
             FDControl control = new FDControl();
             control.ParseFromLevel(level);

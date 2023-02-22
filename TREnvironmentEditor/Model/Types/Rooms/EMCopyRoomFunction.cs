@@ -4,7 +4,7 @@ using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
-using TRLevelReader.Helpers;
+using TRLevelReader.Helpers.Pathing;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model.Types
@@ -18,10 +18,12 @@ namespace TREnvironmentEditor.Model.Types
         public short RoomIndex { get; set; }
         public EMLocation NewLocation { get; set; }
         public EMLocation LinkedLocation { get; set; }
+        public Dictionary<sbyte, List<int>> FloorHeights { get; set; }
 
         public override void ApplyToLevel(TRLevel level)
         {
-            TRRoom baseRoom = level.Rooms[RoomIndex];
+            EMLevelData data = GetData(level);
+            TRRoom baseRoom = level.Rooms[data.ConvertRoom(RoomIndex)];
 
             int xdiff = NewLocation.X - baseRoom.Info.X;
             int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
@@ -142,122 +144,24 @@ namespace TREnvironmentEditor.Model.Types
                 };
             }
 
-            // Boxes, zones and sectors
-            EMLevelData data = GetData(level);
+            // Rebuild the sectors
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-            ushort newBoxIndex = (ushort)level.NumBoxes;
-            int linkedBoxIndex = linkedSector.BoxIndex;
-
-            // Duplicate the zone for the new box and link the current box to the new room
-            TR1BoxUtilities.DuplicateZone(level, linkedBoxIndex);
-            TRBox linkedBox = level.Boxes[linkedBoxIndex];
-            List<ushort> overlaps = TR1BoxUtilities.GetOverlaps(level, linkedBox);
-            overlaps.Add(newBoxIndex);
-            TR1BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
-
-            // Make a new box for the new room. Tomp1 boxes are in world coordinates and they
-            // do not span into walls.
-            uint xmin = (uint)(newRoom.Info.X + SectorSize);
-            uint zmin = (uint)(newRoom.Info.Z + SectorSize);
-            uint xmax = (uint)(xmin + (newRoom.NumXSectors - 2) * SectorSize);
-            uint zmax = (uint)(zmin + (newRoom.NumZSectors - 2) * SectorSize);
-            TRBox box = new TRBox
-            {
-                XMin = xmin,
-                ZMin = zmin,
-                XMax = xmax,
-                ZMax = zmax,
-                TrueFloor = (short)newRoom.Info.YBottom
-            };
-            List<TRBox> boxes = level.Boxes.ToList();
-            boxes.Add(box);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
-
-            // Link the box to the room we're joining to
-            TR1BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
-
             for (int i = 0; i < newRoom.Sectors.Length; i++)
             {
-                int sectorYDiff = 0;
-                ushort sectorBoxIndex = baseRoom.Sectors[i].BoxIndex;
-                // Only change the sector if it's not impenetrable
-                if (baseRoom.Sectors[i].Ceiling != _solidSector || baseRoom.Sectors[i].Floor != _solidSector)
-                {
-                    sectorYDiff = ydiff / ClickSize;
-                    sectorBoxIndex = newBoxIndex;
-                }
-
-                newRoom.Sectors[i] = new TRRoomSector
-                {
-                    BoxIndex = sectorBoxIndex,
-                    Ceiling = (sbyte)(baseRoom.Sectors[i].Ceiling + sectorYDiff),
-                    FDIndex = 0, // Initialise to no FD
-                    Floor = (sbyte)(baseRoom.Sectors[i].Floor + sectorYDiff),
-                    RoomAbove = _noRoom,
-                    RoomBelow = _noRoom
-                };
-
-                // Duplicate the FD too for everything except triggers. Track any portals
-                // so they can be blocked off.
-                if (baseRoom.Sectors[i].FDIndex != 0)
-                {
-                    List<FDEntry> entries = floorData.Entries[baseRoom.Sectors[i].FDIndex];
-                    List<FDEntry> newEntries = new List<FDEntry>();
-                    foreach (FDEntry entry in entries)
-                    {
-                        switch ((FDFunctions)entry.Setup.Function)
-                        {
-                            case FDFunctions.PortalSector:
-                                // This portal will no longer be valid in the new room's position,
-                                // so block off the wall
-                                newRoom.Sectors[i].Floor = newRoom.Sectors[i].Ceiling = _solidSector;
-                                break;
-                            case FDFunctions.FloorSlant:
-                                FDSlantEntry slantEntry = entry as FDSlantEntry;
-                                newEntries.Add(new FDSlantEntry()
-                                {
-                                    Setup = new FDSetup() { Value = slantEntry.Setup.Value },
-                                    SlantValue = slantEntry.SlantValue,
-                                    Type = FDSlantEntryType.FloorSlant
-                                });
-                                break;
-                            case FDFunctions.CeilingSlant:
-                                FDSlantEntry ceilingSlant = entry as FDSlantEntry;
-                                newEntries.Add(new FDSlantEntry()
-                                {
-                                    Setup = new FDSetup() { Value = ceilingSlant.Setup.Value },
-                                    SlantValue = ceilingSlant.SlantValue,
-                                    Type = FDSlantEntryType.CeilingSlant
-                                });
-                                break;
-                            case FDFunctions.KillLara:
-                                newEntries.Add(new FDKillLaraEntry()
-                                {
-                                    Setup = new FDSetup() { Value = entry.Setup.Value }
-                                });
-                                break;
-                            case FDFunctions.ClimbableWalls:
-                                newEntries.Add(new FDClimbEntry()
-                                {
-                                    Setup = new FDSetup() { Value = entry.Setup.Value }
-                                });
-                                break;
-                        }
-                    }
-
-                    if (newEntries.Count > 0)
-                    {
-                        floorData.CreateFloorData(newRoom.Sectors[i]);
-                        floorData.Entries[newRoom.Sectors[i].FDIndex].AddRange(newEntries);
-                    }
-                }
+                newRoom.Sectors[i] = RebuildSector(baseRoom.Sectors[i], i, floorData, ydiff, baseRoom.Info);
             }
 
             floorData.WriteToLevel(level);
+
+            // Generate new boxes, unless this room is meant to be isolated
+            if (LinkedLocation != null)
+            {
+                TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
+                BoxGenerator generator = new BoxGenerator();
+                generator.Generate(newRoom, level, linkedSector);
+            }
 
             List<TRRoom> rooms = level.Rooms.ToList();
             rooms.Add(newRoom);
@@ -267,7 +171,8 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR2Level level)
         {
-            TR2Room baseRoom = level.Rooms[RoomIndex];
+            EMLevelData data = GetData(level);
+            TR2Room baseRoom = level.Rooms[data.ConvertRoom(RoomIndex)];
 
             int xdiff = NewLocation.X - baseRoom.Info.X;
             int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
@@ -394,121 +299,24 @@ namespace TREnvironmentEditor.Model.Types
                 };
             }
 
-            // Boxes, zones and sectors
-            EMLevelData data = GetData(level);
+            // Rebuild the sectors
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-            ushort newBoxIndex = (ushort)level.NumBoxes;
-            int linkedBoxIndex = linkedSector.BoxIndex;
-
-            // Duplicate the zone for the new box and link the current box to the new room
-            TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
-            TR2Box linkedBox = level.Boxes[linkedBoxIndex];
-            List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
-            overlaps.Add(newBoxIndex);
-            TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
-
-            // Make a new box for the new room
-            byte xmin = (byte)(newRoom.Info.X / SectorSize);
-            byte zmin = (byte)(newRoom.Info.Z / SectorSize);
-            byte xmax = (byte)(xmin + newRoom.NumXSectors);
-            byte zmax = (byte)(zmin + newRoom.NumZSectors);
-            TR2Box box = new TR2Box
-            {
-                XMin = xmin,
-                ZMin = zmin,
-                XMax = xmax,
-                ZMax = zmax,
-                TrueFloor = (short)newRoom.Info.YBottom
-            };
-            List<TR2Box> boxes = level.Boxes.ToList();
-            boxes.Add(box);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
-
-            // Link the box to the room we're joining to
-            TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
-
             for (int i = 0; i < newRoom.SectorList.Length; i++)
             {
-                int sectorYDiff = 0;
-                ushort sectorBoxIndex = baseRoom.SectorList[i].BoxIndex;
-                // Only change the sector if it's not impenetrable
-                if (baseRoom.SectorList[i].Ceiling != _solidSector || baseRoom.SectorList[i].Floor != _solidSector)
-                {
-                    sectorYDiff = ydiff / ClickSize;
-                    sectorBoxIndex = newBoxIndex;
-                }
-
-                newRoom.SectorList[i] = new TRRoomSector
-                {
-                    BoxIndex = sectorBoxIndex,
-                    Ceiling = (sbyte)(baseRoom.SectorList[i].Ceiling + sectorYDiff),
-                    FDIndex = 0, // Initialise to no FD
-                    Floor = (sbyte)(baseRoom.SectorList[i].Floor + sectorYDiff),
-                    RoomAbove = _noRoom,
-                    RoomBelow = _noRoom
-                };
-
-                // Duplicate the FD too for everything except triggers. Track any portals
-                // so they can be blocked off.
-                if (baseRoom.SectorList[i].FDIndex != 0)
-                {
-                    List<FDEntry> entries = floorData.Entries[baseRoom.SectorList[i].FDIndex];
-                    List<FDEntry> newEntries = new List<FDEntry>();
-                    foreach (FDEntry entry in entries)
-                    {
-                        switch ((FDFunctions)entry.Setup.Function)
-                        {
-                            case FDFunctions.PortalSector:
-                                // This portal will no longer be valid in the new room's position,
-                                // so block off the wall
-                                newRoom.SectorList[i].Floor = newRoom.SectorList[i].Ceiling = _solidSector;
-                                break;
-                            case FDFunctions.FloorSlant:
-                                FDSlantEntry slantEntry = entry as FDSlantEntry;
-                                newEntries.Add(new FDSlantEntry()
-                                {
-                                    Setup = new FDSetup() { Value = slantEntry.Setup.Value },
-                                    SlantValue = slantEntry.SlantValue,
-                                    Type = FDSlantEntryType.FloorSlant
-                                });
-                                break;
-                            case FDFunctions.CeilingSlant:
-                                FDSlantEntry ceilingSlant = entry as FDSlantEntry;
-                                newEntries.Add(new FDSlantEntry()
-                                {
-                                    Setup = new FDSetup() { Value = ceilingSlant.Setup.Value },
-                                    SlantValue = ceilingSlant.SlantValue,
-                                    Type = FDSlantEntryType.CeilingSlant
-                                });
-                                break;
-                            case FDFunctions.KillLara:
-                                newEntries.Add(new FDKillLaraEntry()
-                                {
-                                    Setup = new FDSetup() { Value = entry.Setup.Value }
-                                });
-                                break;
-                            case FDFunctions.ClimbableWalls:
-                                newEntries.Add(new FDClimbEntry()
-                                {
-                                    Setup = new FDSetup() { Value = entry.Setup.Value }
-                                });
-                                break;
-                        }
-                    }
-
-                    if (newEntries.Count > 0)
-                    {
-                        floorData.CreateFloorData(newRoom.SectorList[i]);
-                        floorData.Entries[newRoom.SectorList[i].FDIndex].AddRange(newEntries);
-                    }
-                }
+                newRoom.SectorList[i] = RebuildSector(baseRoom.SectorList[i], i, floorData, ydiff, baseRoom.Info);
             }
 
             floorData.WriteToLevel(level);
+
+            // Generate new boxes, unless this room is meant to be isolated
+            if (LinkedLocation != null)
+            {
+                TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
+                BoxGenerator generator = new BoxGenerator();
+                generator.Generate(newRoom, level, linkedSector);
+            }
 
             List<TR2Room> rooms = level.Rooms.ToList();
             rooms.Add(newRoom);
@@ -518,7 +326,8 @@ namespace TREnvironmentEditor.Model.Types
 
         public override void ApplyToLevel(TR3Level level)
         {
-            TR3Room baseRoom = level.Rooms[RoomIndex];
+            EMLevelData data = GetData(level);
+            TR3Room baseRoom = level.Rooms[data.ConvertRoom(RoomIndex)];
 
             int xdiff = NewLocation.X - baseRoom.Info.X;
             int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
@@ -646,169 +455,183 @@ namespace TREnvironmentEditor.Model.Types
                 };
             }
 
-            // Boxes, zones and sectors
-            EMLevelData data = GetData(level);
+            // Rebuild the sectors
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
 
-            TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-            ushort newBoxIndex = (ushort)level.NumBoxes;
-            int linkedBoxIndex = (linkedSector.BoxIndex & 0x7FF0) >> 4;
-            int linkedMaterial = linkedSector.BoxIndex & 0x000F; // TR3-5 store material in bits 0-3 - wood, mud etc
-
-            // Duplicate the zone for the new box and link the current box to the new room
-            TR2BoxUtilities.DuplicateZone(level, linkedBoxIndex);
-            TR2Box linkedBox = level.Boxes[linkedBoxIndex];
-            List<ushort> overlaps = TR2BoxUtilities.GetOverlaps(level, linkedBox);
-            overlaps.Add(newBoxIndex);
-            TR2BoxUtilities.UpdateOverlaps(level, linkedBox, overlaps);
-
-            // Make a new box for the new room
-            byte xmin = (byte)(newRoom.Info.X / SectorSize);
-            byte zmin = (byte)(newRoom.Info.Z / SectorSize);
-            byte xmax = (byte)(xmin + newRoom.NumXSectors);
-            byte zmax = (byte)(zmin + newRoom.NumZSectors);
-            TR2Box box = new TR2Box
-            {
-                XMin = xmin,
-                ZMin = zmin,
-                XMax = xmax,
-                ZMax = zmax,
-                TrueFloor = (short)newRoom.Info.YBottom
-            };
-            List<TR2Box> boxes = level.Boxes.ToList();
-            boxes.Add(box);
-            level.Boxes = boxes.ToArray();
-            level.NumBoxes++;
-
-            // Link the box to the room we're joining to
-            TR2BoxUtilities.UpdateOverlaps(level, box, new List<ushort> { (ushort)linkedBoxIndex });
-
-            // Now update each of the sectors in the new room. The box index in each sector
-            // needs to reference the material so pack this into the box index.
-            newBoxIndex <<= 4;
-            newBoxIndex |= (ushort)linkedMaterial;
-
             for (int i = 0; i < newRoom.Sectors.Length; i++)
             {
-                int sectorYDiff = 0;
-                ushort sectorBoxIndex = baseRoom.Sectors[i].BoxIndex;
-                // Only change the sector if it's not impenetrable
-                if (baseRoom.Sectors[i].Ceiling != _solidSector || baseRoom.Sectors[i].Floor != _solidSector)
-                {
-                    sectorYDiff = ydiff / ClickSize;
-                    sectorBoxIndex = newBoxIndex;
-                }
-
-                newRoom.Sectors[i] = new TRRoomSector
-                {
-                    BoxIndex = sectorBoxIndex,
-                    Ceiling = (sbyte)(baseRoom.Sectors[i].Ceiling + sectorYDiff),
-                    FDIndex = 0, // Initialise to no FD
-                    Floor = (sbyte)(baseRoom.Sectors[i].Floor + sectorYDiff),
-                    RoomAbove = _noRoom,
-                    RoomBelow = _noRoom
-                };
-
-                // Duplicate the FD too for everything except triggers. Track any portals
-                // so they can be blocked off.
-                if (baseRoom.Sectors[i].FDIndex != 0)
-                {
-                    List<FDEntry> entries = floorData.Entries[baseRoom.Sectors[i].FDIndex];
-                    List<FDEntry> newEntries = new List<FDEntry>();
-                    foreach (FDEntry entry in entries)
-                    {
-                        switch ((FDFunctions)entry.Setup.Function)
-                        {
-                            case FDFunctions.PortalSector:
-                                // This portal will no longer be valid in the new room's position,
-                                // so block off the wall
-                                newRoom.Sectors[i].Floor = newRoom.Sectors[i].Ceiling = _solidSector;
-                                break;
-                            case FDFunctions.FloorSlant:
-                                FDSlantEntry slantEntry = entry as FDSlantEntry;
-                                newEntries.Add(new FDSlantEntry()
-                                {
-                                    Setup = new FDSetup() { Value = slantEntry.Setup.Value },
-                                    SlantValue = slantEntry.SlantValue,
-                                    Type = FDSlantEntryType.FloorSlant
-                                });
-                                break;
-                            case FDFunctions.CeilingSlant:
-                                FDSlantEntry ceilingSlant = entry as FDSlantEntry;
-                                newEntries.Add(new FDSlantEntry()
-                                {
-                                    Setup = new FDSetup() { Value = ceilingSlant.Setup.Value },
-                                    SlantValue = ceilingSlant.SlantValue,
-                                    Type = FDSlantEntryType.CeilingSlant
-                                });
-                                break;
-                            case FDFunctions.KillLara:
-                                newEntries.Add(new FDKillLaraEntry()
-                                {
-                                    Setup = new FDSetup() { Value = entry.Setup.Value }
-                                });
-                                break;
-                            case FDFunctions.ClimbableWalls:
-                                newEntries.Add(new FDClimbEntry()
-                                {
-                                    Setup = new FDSetup() { Value = entry.Setup.Value }
-                                });
-                                break;
-                            case FDFunctions.FloorTriangulationNWSE_Solid:
-                            case FDFunctions.FloorTriangulationNESW_Solid:
-                            case FDFunctions.CeilingTriangulationNW_Solid:
-                            case FDFunctions.CeilingTriangulationNE_Solid:
-                            case FDFunctions.FloorTriangulationNWSE_SW:
-                            case FDFunctions.FloorTriangulationNWSE_NE:
-                            case FDFunctions.FloorTriangulationNESW_SE:
-                            case FDFunctions.FloorTriangulationNESW_NW:
-                            case FDFunctions.CeilingTriangulationNW_SW:
-                            case FDFunctions.CeilingTriangulationNW_NE:
-                            case FDFunctions.CeilingTriangulationNE_NW:
-                            case FDFunctions.CeilingTriangulationNE_SE:
-                                TR3TriangulationEntry triEntry = entry as TR3TriangulationEntry;
-                                newEntries.Add(new TR3TriangulationEntry
-                                {
-                                    Setup = new FDSetup { Value = triEntry.Setup.Value },
-                                    TriData = new FDTriangulationData { Value = triEntry.TriData.Value }
-                                });
-                                break;
-                            case FDFunctions.Monkeyswing:
-                                newEntries.Add(new TR3MonkeySwingEntry()
-                                {
-                                    Setup = new FDSetup() { Value = entry.Setup.Value }
-                                });
-                                break;
-                            case FDFunctions.DeferredTriggeringOrMinecartRotateLeft:
-                                newEntries.Add(new TR3MinecartRotateLeftEntry()
-                                {
-                                    Setup = new FDSetup() { Value = entry.Setup.Value }
-                                });
-                                break;
-                            case FDFunctions.MechBeetleOrMinecartRotateRight:
-                                newEntries.Add(new TR3MinecartRotateRightEntry()
-                                {
-                                    Setup = new FDSetup() { Value = entry.Setup.Value }
-                                });
-                                break;
-                        }
-                    }
-
-                    if (newEntries.Count > 0)
-                    {
-                        floorData.CreateFloorData(newRoom.Sectors[i]);
-                        floorData.Entries[newRoom.Sectors[i].FDIndex].AddRange(newEntries);
-                    }
-                }
+                newRoom.Sectors[i] = RebuildSector(baseRoom.Sectors[i], i, floorData, ydiff, baseRoom.Info);
             }
 
             floorData.WriteToLevel(level);
+
+            // Generate new boxes, unless this room is meant to be isolated
+            if (LinkedLocation != null)
+            {
+                TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
+                BoxGenerator generator = new BoxGenerator();
+                generator.Generate(newRoom, level, linkedSector);
+            }
 
             List<TR3Room> rooms = level.Rooms.ToList();
             rooms.Add(newRoom);
             level.Rooms = rooms.ToArray();
             level.NumRooms++;
+        }
+
+        private TRRoomSector RebuildSector(TRRoomSector originalSector, int sectorIndex, FDControl floorData, int ydiff, TRRoomInfo oldRoomInfo)
+        {
+            int sectorYDiff = 0;
+            // Only change the sector if it's not impenetrable
+            if (originalSector.Ceiling != _solidSector || originalSector.Floor != _solidSector)
+            {
+                sectorYDiff = ydiff / ClickSize;
+            }
+
+            sbyte ceiling = originalSector.Ceiling;
+            sbyte floor = originalSector.Floor;
+
+            sbyte? customHeight = GetSectorHeight(sectorIndex);
+            bool wallOpened = false;
+            if (customHeight.HasValue)
+            {
+                floor = (sbyte)(oldRoomInfo.YBottom / ClickSize);
+                floor += customHeight.Value;
+
+                if (originalSector.IsImpenetrable)
+                {
+                    // This is effectively a promise that this sector is no longer
+                    // going to be a wall, so reset it to a standard sector.
+                    ceiling = (sbyte)(oldRoomInfo.YTop / ClickSize);
+                    sectorYDiff = ydiff / ClickSize;
+                }
+
+                wallOpened = originalSector.IsImpenetrable || originalSector.BoxIndex == ushort.MaxValue;
+            }
+
+            TRRoomSector newSector = new TRRoomSector
+            {
+                BoxIndex = ushort.MaxValue,
+                Ceiling = (sbyte)(ceiling + sectorYDiff),
+                FDIndex = 0, // Initialise to no FD
+                Floor = (sbyte)(floor + sectorYDiff),
+                RoomAbove = _noRoom,
+                RoomBelow = _noRoom
+            };
+
+            // Duplicate the FD too for everything except triggers. Track any portals
+            // so they can be blocked off.
+            if (originalSector.FDIndex != 0)
+            {
+                List<FDEntry> entries = floorData.Entries[originalSector.FDIndex];
+                List<FDEntry> newEntries = new List<FDEntry>();
+                foreach (FDEntry entry in entries)
+                {
+                    switch ((FDFunctions)entry.Setup.Function)
+                    {
+                        case FDFunctions.PortalSector:
+                            // This portal will no longer be valid in the new room's position,
+                            // so block off the wall provided we haven't opened the wall above.
+                            if (!wallOpened)
+                            {
+                                newSector.Floor = newSector.Ceiling = _solidSector;
+                            }
+                            break;
+                        case FDFunctions.FloorSlant:
+                            FDSlantEntry slantEntry = entry as FDSlantEntry;
+                            newEntries.Add(new FDSlantEntry()
+                            {
+                                Setup = new FDSetup() { Value = slantEntry.Setup.Value },
+                                SlantValue = slantEntry.SlantValue,
+                                Type = FDSlantEntryType.FloorSlant
+                            });
+                            break;
+                        case FDFunctions.CeilingSlant:
+                            FDSlantEntry ceilingSlant = entry as FDSlantEntry;
+                            newEntries.Add(new FDSlantEntry()
+                            {
+                                Setup = new FDSetup() { Value = ceilingSlant.Setup.Value },
+                                SlantValue = ceilingSlant.SlantValue,
+                                Type = FDSlantEntryType.CeilingSlant
+                            });
+                            break;
+                        case FDFunctions.KillLara:
+                            newEntries.Add(new FDKillLaraEntry()
+                            {
+                                Setup = new FDSetup() { Value = entry.Setup.Value }
+                            });
+                            break;
+                        case FDFunctions.ClimbableWalls:
+                            newEntries.Add(new FDClimbEntry()
+                            {
+                                Setup = new FDSetup() { Value = entry.Setup.Value }
+                            });
+                            break;
+                        case FDFunctions.FloorTriangulationNWSE_Solid:
+                        case FDFunctions.FloorTriangulationNESW_Solid:
+                        case FDFunctions.CeilingTriangulationNW_Solid:
+                        case FDFunctions.CeilingTriangulationNE_Solid:
+                        case FDFunctions.FloorTriangulationNWSE_SW:
+                        case FDFunctions.FloorTriangulationNWSE_NE:
+                        case FDFunctions.FloorTriangulationNESW_SE:
+                        case FDFunctions.FloorTriangulationNESW_NW:
+                        case FDFunctions.CeilingTriangulationNW_SW:
+                        case FDFunctions.CeilingTriangulationNW_NE:
+                        case FDFunctions.CeilingTriangulationNE_NW:
+                        case FDFunctions.CeilingTriangulationNE_SE:
+                            TR3TriangulationEntry triEntry = entry as TR3TriangulationEntry;
+                            newEntries.Add(new TR3TriangulationEntry
+                            {
+                                Setup = new FDSetup { Value = triEntry.Setup.Value },
+                                TriData = new FDTriangulationData { Value = triEntry.TriData.Value }
+                            });
+                            break;
+                        case FDFunctions.Monkeyswing:
+                            newEntries.Add(new TR3MonkeySwingEntry()
+                            {
+                                Setup = new FDSetup() { Value = entry.Setup.Value }
+                            });
+                            break;
+                        case FDFunctions.DeferredTriggeringOrMinecartRotateLeft:
+                            newEntries.Add(new TR3MinecartRotateLeftEntry()
+                            {
+                                Setup = new FDSetup() { Value = entry.Setup.Value }
+                            });
+                            break;
+                        case FDFunctions.MechBeetleOrMinecartRotateRight:
+                            newEntries.Add(new TR3MinecartRotateRightEntry()
+                            {
+                                Setup = new FDSetup() { Value = entry.Setup.Value }
+                            });
+                            break;
+                    }
+                }
+
+                if (newEntries.Count > 0)
+                {
+                    floorData.CreateFloorData(newSector);
+                    floorData.Entries[newSector.FDIndex].AddRange(newEntries);
+                }
+            }
+
+            return newSector;
+        }
+
+        private sbyte? GetSectorHeight(int sectorIndex)
+        {
+            if (FloorHeights != null)
+            {
+                foreach (sbyte height in FloorHeights.Keys)
+                {
+                    if (FloorHeights[height].Contains(sectorIndex))
+                    {
+                        return height;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

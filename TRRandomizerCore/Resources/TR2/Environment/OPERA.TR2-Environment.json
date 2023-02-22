@@ -55,6 +55,9 @@
       {
         "Comments": "Drains the room at the start.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           23
         ],
@@ -79,6 +82,9 @@
       {
         "Comments": "Double-up the ladder before the breakaway tiles",
         "EMType": 0,
+        "Tags": [
+          3
+        ],
         "TextureMap": {
           "1682": {
             "6": {
@@ -196,6 +202,9 @@
       {
         "Comments": "Flood the final area. The plane will work just fine.",
         "EMType": 2,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           22,
           104,
@@ -325,6 +334,9 @@
         {
           "Comments": "Potential new position for the button in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 32,
           "Location": {
             "X": 72192,
@@ -338,6 +350,9 @@
         {
           "Comments": "Potential new position for the button in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 32,
           "Location": {
             "X": 71168,
@@ -352,6 +367,9 @@
         {
           "Comments": "Potential new position for the button in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 32,
           "Location": {
             "X": 71168,
@@ -366,6 +384,9 @@
         {
           "Comments": "Potential new position for the button in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 32,
           "Location": {
             "X": 71168,
@@ -380,6 +401,9 @@
         {
           "Comments": "Potential new position for the button in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 32,
           "Location": {
             "X": 71168,
@@ -393,6 +417,9 @@
         {
           "Comments": "Potential new position for the button in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 32,
           "Location": {
             "X": 71168,
@@ -407,6 +434,9 @@
         {
           "Comments": "Potential new position for the button in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 32,
           "Location": {
             "X": 72192,
@@ -420,6 +450,9 @@
         {
           "Comments": "Potential new position for the button in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 32,
           "Location": {
             "X": 74240,
@@ -433,6 +466,9 @@
         {
           "Comments": "Potential new position for the button in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 32,
           "Location": {
             "X": 78336,
@@ -447,6 +483,9 @@
         {
           "Comments": "Potential new position for the button in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 32,
           "Location": {
             "X": 82432,
@@ -463,6 +502,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 6.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 12,
           "Location": {
             "X": 87552,
@@ -477,6 +519,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 6.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 12,
           "Location": {
             "X": 87552,
@@ -491,6 +536,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 6.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 12,
           "Location": {
             "X": 87552,
@@ -505,6 +553,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 6.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 12,
           "Location": {
             "X": 87552,
@@ -519,6 +570,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 6.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 12,
           "Location": {
             "X": 87552,
@@ -533,6 +587,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 6.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 12,
           "Location": {
             "X": 87552,
@@ -547,6 +604,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 6.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 12,
           "Location": {
             "X": 87552,
@@ -561,6 +621,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 6.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 12,
           "Location": {
             "X": 87552,
@@ -577,6 +640,9 @@
         {
           "Comments": "Ladder for the large room below the breakaway tiles.",
           "EMType": 0,
+          "Tags": [
+            3
+          ],
           "TextureMap": {
             "1702": {
               "186": {
@@ -628,6 +694,9 @@
         {
           "Comments": "Ladder for the large room below the breakaway tiles.",
           "EMType": 0,
+          "Tags": [
+            3
+          ],
           "TextureMap": {
             "1702": {
               "186": {
@@ -746,6 +815,9 @@
         {
           "Comments": "Potential new position for the switch in room 46.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 57,
           "Location": {
             "X": 72192,
@@ -760,6 +832,9 @@
         {
           "Comments": "Potential new position for the switch in room 46.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 57,
           "Location": {
             "X": 72192,
@@ -773,6 +848,9 @@
         {
           "Comments": "Potential new position for the switch in room 46.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 57,
           "Location": {
             "X": 71168,
@@ -786,6 +864,9 @@
         {
           "Comments": "Potential new position for the switch in room 46.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 57,
           "Location": {
             "X": 72192,
@@ -800,6 +881,9 @@
         {
           "Comments": "Potential new position for the switch in room 46.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 57,
           "Location": {
             "X": 72192,
@@ -814,6 +898,9 @@
         {
           "Comments": "Potential new position for the switch in room 46.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 57,
           "Location": {
             "X": 71168,
@@ -832,6 +919,9 @@
         {
           "Comments": "Flood room 169.",
           "EMType": 2,
+          "Tags": [
+            2
+          ],
           "RoomNumbers": [
             169
           ],
@@ -884,6 +974,9 @@
           {
             "Comments": "Potential new position for the button in room 169.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 183,
             "Location": {
               "X": 88576,
@@ -908,6 +1001,9 @@
           {
             "Comments": "Potential new position for the button in room 169.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 183,
             "Location": {
               "X": 86528,
@@ -921,6 +1017,9 @@
           {
             "Comments": "Potential new position for the button in room 169.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 183,
             "Location": {
               "X": 87552,
@@ -935,6 +1034,9 @@
           {
             "Comments": "Potential new position for the button in room 169.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 183,
             "Location": {
               "X": 73216,
@@ -967,6 +1069,9 @@
           {
             "Comments": "Potential new position for the switch in room 144.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 158,
             "Location": {
               "X": 71168,
@@ -994,6 +1099,9 @@
           {
             "Comments": "Potential new position for the switch in room 144.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 158,
             "Location": {
               "X": 71168,
@@ -1021,6 +1129,9 @@
           {
             "Comments": "Potential new position for the switch in room 144.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 158,
             "Location": {
               "X": 71168,
@@ -1048,6 +1159,9 @@
           {
             "Comments": "Potential new position for the switch in room 144.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 158,
             "Location": {
               "X": 71168,
@@ -1075,6 +1189,9 @@
           {
             "Comments": "Potential new position for the switch in room 144.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 158,
             "Location": {
               "X": 72192,
@@ -1102,6 +1219,9 @@
           {
             "Comments": "Potential new position for the switch in room 144.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 158,
             "Location": {
               "X": 72192,
@@ -1129,6 +1249,9 @@
           {
             "Comments": "Potential new position for the switch in room 144.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 158,
             "Location": {
               "X": 72192,
@@ -1156,6 +1279,9 @@
           {
             "Comments": "Potential new position for the switch in room 144.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 158,
             "Location": {
               "X": 72192,
@@ -1184,6 +1310,7 @@
   ],
   "ConditionalAllWithin": [],
   "ConditionalAll": [],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Moves door 33 so that it opens properly, otherwise Lara has to glitch through.",

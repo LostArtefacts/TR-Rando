@@ -1141,6 +1141,9 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -1211,6 +1214,20 @@
                     </Border>
 
                     <Border Grid.Row="4">
+                        <CheckBox IsChecked="{Binding ControllerProxy.UseSolidInteractableWireframing, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Keep interactable objects solid" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="4">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="If selected, items such as levers, keyholes and pushblocks will always be a solid colour and opaque, otherwise they will have wireframing applied."/>
+                    </Border>
+
+                    <Border Grid.Row="5">
                         <CheckBox IsChecked="{Binding ControllerProxy.UseDifferentWireframeColours, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
@@ -1219,12 +1236,12 @@
                     </Border>
 
                     <Border Grid.Column="1"
-                            Grid.Row="4">
+                            Grid.Row="5">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="If selected, different models will use different colours when solid, otherwise they will use the same colour as Lara."/>
                     </Border>
 
-                    <Border Grid.Row="5"
+                    <Border Grid.Row="6"
                             Visibility="{Binding ControllerProxy.IsLaddersTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <CheckBox IsChecked="{Binding ControllerProxy.UseWireframeLadders, Mode=TwoWay}"
                                   VerticalAlignment="Center">
@@ -1234,10 +1251,39 @@
                     </Border>
 
                     <Border Grid.Column="1"
-                            Grid.Row="5"
+                            Grid.Row="6"
                             Visibility="{Binding ControllerProxy.IsLaddersTypeSupported, Converter={StaticResource BoolToCollapsedConverter}}">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="If selected, special textures will be generated for ladders, otherwise they will look the same as walls."/>
+                    </Border>
+
+                    <Border Grid.Row="7">
+                        <CheckBox IsChecked="{Binding ControllerProxy.ShowWireframeTriggers, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Keep trigger hints visible" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="7">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="If selected, crosses will indicate pads and heavy triggers and stars will indicate death tiles."/>
+                    </Border>
+
+                    <Border Grid.Row="8">
+                        <CheckBox IsChecked="{Binding ControllerProxy.ShowWireframeTriggerColours, Mode=TwoWay}"
+                                  IsEnabled="{Binding ControllerProxy.ShowWireframeTriggers}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Use different trigger hint colours" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="8">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="Triggers and death tiles will not use the same colour as the regular wireframe."/>
                     </Border>
                 </Grid>
             </StackPanel>

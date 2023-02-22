@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.Ralodosmovo": {
+      "0": [
+        {
+          "RoomNumber": 5,
+          "RectangleIndices": [ 72 ],
+          "BackgroundIndex": 1378
+        }
+      ]
+    }
+  },
+
   "Dynamic": {
     "Tibet.SnowTheme": {
       "Default": {

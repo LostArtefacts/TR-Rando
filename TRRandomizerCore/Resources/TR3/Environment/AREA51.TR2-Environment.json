@@ -348,6 +348,7 @@
       ]
     }
   ],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Make door #182 a split one so Lara can pass.",

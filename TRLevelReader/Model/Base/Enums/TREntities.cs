@@ -209,6 +209,8 @@
         MeatyAtlantean,
         BandagedFlyer,
         MeatyFlyer,
+        CowboyOG,
+        CowboyHeadless, // From LeoC's Folklorist Diary
 
         // Extra Lara animations
         LaraMiscAnim_H_General = 2000,

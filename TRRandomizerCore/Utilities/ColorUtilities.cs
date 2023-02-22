@@ -1,9 +1,29 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 namespace TRRandomizerCore.Utilities
 {
     public static class ColorUtilities
     {
+        private static readonly double _wireframeContrastMin;
+
+        static ColorUtilities()
+        {
+            ISet<double> diffs = new SortedSet<double>();
+            Color[] colors = GetWireframeColours();
+            for (int i = 0; i < colors.Length; i++)
+            {
+                for (int j = 0; j < colors.Length; j++)
+                {
+                    diffs.Add(GetDifference(colors[i], colors[j]));
+                }
+            }
+
+            _wireframeContrastMin = Math.Ceiling(diffs.Average() / 10) * 10;
+        }
+
         public static Color[] GetAvailableColors()
         {
             return new Color[]
@@ -271,6 +291,22 @@ namespace TRRandomizerCore.Utilities
                 Color.Yellow,
                 Color.YellowGreen
             };
+        }
+
+        public static bool TestWireframeContrast(Color color1, Color color2)
+        {
+            double d = _wireframeContrastMin;
+            return GetDifference(color1, color2) > _wireframeContrastMin;
+        }
+
+        public static double GetDifference(Color color1, Color color2)
+        {
+            return Math.Sqrt
+            (
+                Math.Pow(color1.R - color2.R, 2) +
+                Math.Pow(color1.G - color2.G, 2) +
+                Math.Pow(color1.B - color2.B, 2)
+            );
         }
     }
 }

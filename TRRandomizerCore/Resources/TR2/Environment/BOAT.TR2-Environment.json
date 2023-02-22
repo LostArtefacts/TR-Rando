@@ -44,6 +44,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room ground floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 52736,
@@ -57,6 +60,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room ground floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 52736,
@@ -70,6 +76,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room ground floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 52736,
@@ -83,6 +92,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room ground floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 50688,
@@ -96,6 +108,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room ground floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 50688,
@@ -109,6 +124,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room ground floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 50688,
@@ -123,6 +141,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room ground floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 9,
           "Location": {
             "X": 50688,
@@ -138,6 +159,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room first floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 50688,
@@ -151,6 +175,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room first floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 50688,
@@ -165,6 +192,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room first floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 50688,
@@ -179,6 +209,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room first floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 50688,
@@ -193,6 +226,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room first floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 50688,
@@ -207,6 +243,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room first floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 51712,
@@ -221,6 +260,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room first floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 52736,
@@ -235,6 +277,9 @@
         {
           "Comments": "Potential new button position for the trapdoor room first floor.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 21,
           "Location": {
             "X": 52736,
@@ -251,6 +296,9 @@
         {
           "Comments": "Potential new button position for the boathouse keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 28,
           "Location": {
             "X": 44544,
@@ -263,6 +311,9 @@
         {
           "Comments": "Potential new button position for the boathouse keyhole.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 28,
           "Location": {
             "X": 42496,
@@ -277,6 +328,9 @@
         {
           "Comments": "Potential new button position for the boathouse switch.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 27,
           "Location": {
             "X": 43520,
@@ -289,6 +343,9 @@
         {
           "Comments": "Potential new button position for the boathouse switch.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 27,
           "Location": {
             "X": 41472,
@@ -304,6 +361,9 @@
         {
           "Comments": "Potential new button position for the switch in room 33.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 29,
           "Location": {
             "X": 45568,
@@ -317,6 +377,9 @@
         {
           "Comments": "Potential new button position for the switch in room 33.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 29,
           "Location": {
             "X": 45568,
@@ -331,6 +394,9 @@
         {
           "Comments": "Potential new button position for the switch in room 33.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 29,
           "Location": {
             "X": 50688,
@@ -345,6 +411,9 @@
         {
           "Comments": "Potential new button position for the switch in room 33.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 29,
           "Location": {
             "X": 50688,
@@ -358,6 +427,9 @@
         {
           "Comments": "Potential new button position for the switch in room 33.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 29,
           "Location": {
             "X": 46592,
@@ -374,6 +446,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 34304,
@@ -387,6 +462,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 35328,
@@ -400,6 +478,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 35328,
@@ -414,6 +495,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 35328,
@@ -428,6 +512,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 35328,
@@ -442,6 +529,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 35328,
@@ -456,6 +546,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 34304,
@@ -470,6 +563,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 33280,
@@ -484,6 +580,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 32256,
@@ -498,6 +597,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 32256,
@@ -512,6 +614,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 31232,
@@ -526,6 +631,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 30208,
@@ -540,6 +648,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 30208,
@@ -554,6 +665,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 77.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 78,
           "Location": {
             "X": 31232,
@@ -569,6 +683,9 @@
         {
           "Comments": "Potential new position for the switch in room 110.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 112,
           "Location": {
             "X": 33280,
@@ -583,6 +700,9 @@
         {
           "Comments": "Potential new position for the switch in room 110.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 112,
           "Location": {
             "X": 35328,
@@ -597,6 +717,9 @@
         {
           "Comments": "Potential new position for the switch in room 110.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 112,
           "Location": {
             "X": 35328,
@@ -611,6 +734,9 @@
         {
           "Comments": "Potential new position for the switch in room 110.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 112,
           "Location": {
             "X": 35328,
@@ -625,6 +751,9 @@
         {
           "Comments": "Potential new position for the switch in room 110.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 112,
           "Location": {
             "X": 34304,
@@ -639,6 +768,9 @@
         {
           "Comments": "Potential new position for the switch in room 110.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 112,
           "Location": {
             "X": 33280,
@@ -653,6 +785,9 @@
         {
           "Comments": "Potential new position for the switch in room 110.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 112,
           "Location": {
             "X": 34304,
@@ -669,6 +804,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 81.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 88,
           "Location": {
             "X": 23040,
@@ -683,6 +821,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 81.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 88,
           "Location": {
             "X": 23040,
@@ -696,6 +837,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 81.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 88,
           "Location": {
             "X": 24064,
@@ -709,6 +853,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 81.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 88,
           "Location": {
             "X": 23040,
@@ -723,6 +870,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 81.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 88,
           "Location": {
             "X": 23040,
@@ -737,6 +887,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 81.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 88,
           "Location": {
             "X": 23040,
@@ -750,6 +903,9 @@
         {
           "Comments": "Potential new position for the keyhole in room 81.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 88,
           "Location": {
             "X": 23040,
@@ -1030,6 +1186,9 @@
         {
           "Comments": "Default button position for the double-double doors.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 20,
           "Location": {
             "X": 49664,
@@ -1120,6 +1279,9 @@
           {
             "Comments": "Potential new button position for the double-double doors button.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 20,
             "Location": {
               "X": 49664,
@@ -1133,6 +1295,9 @@
           {
             "Comments": "Potential new button position for the double-double doors button.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 20,
             "Location": {
               "X": 49664,
@@ -1146,6 +1311,9 @@
           {
             "Comments": "Potential new button position for the double-double doors button.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 20,
             "Location": {
               "X": 49664,
@@ -1159,6 +1327,9 @@
           {
             "Comments": "Potential new button position for the double-double doors button.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 20,
             "Location": {
               "X": 58880,
@@ -1171,6 +1342,9 @@
           {
             "Comments": "Potential new button position for the double-double doors button.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 20,
             "Location": {
               "X": 47600,
@@ -1296,6 +1470,9 @@
         {
           "Comments": "Make a ladder to get in and out.",
           "EMType": 0,
+          "Tags": [
+            3
+          ],
           "TextureMap": {
             "1565": {
               "155": {
@@ -1481,5 +1658,6 @@
       ]
     }
   ],
+  "ConditionalOneOf": [],
   "Mirrored": []
 }

@@ -14,6 +14,7 @@ namespace TREnvironmentEditor.Model.Types
         public List<EMLocation> Locations { get; set; }
         public List<short> Rooms { get; set; }
         public EMLocationExpander ExpandedLocations { get; set; }
+        public int? EntityLocation { get; set; }
         public EMTrigger Trigger { get; set; }
         public bool Replace { get; set; }
 
@@ -48,6 +49,13 @@ namespace TREnvironmentEditor.Model.Types
                 }
             }
 
+            if (EntityLocation.HasValue)
+            {
+                TREntity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
+                TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                CreateTrigger(sector, control, triggerEntry);
+            }
+
             control.WriteToLevel(level);
         }
 
@@ -80,6 +88,13 @@ namespace TREnvironmentEditor.Model.Types
                         }
                     }
                 }
+            }
+
+            if (EntityLocation.HasValue)
+            {
+                TR2Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
+                TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                CreateTrigger(sector, control, triggerEntry);
             }
 
             // Handle any specifics that the trigger may rely on
@@ -125,6 +140,13 @@ namespace TREnvironmentEditor.Model.Types
                         }
                     }
                 }
+            }
+
+            if (EntityLocation.HasValue)
+            {
+                TR2Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
+                TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+                CreateTrigger(sector, control, triggerEntry);
             }
 
             // Handle any specifics that the trigger may rely on

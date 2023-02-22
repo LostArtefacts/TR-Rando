@@ -6,6 +6,7 @@
   "OneOf": [],
   "ConditionalAllWithin": [],
   "ConditionalAll": [],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Convert two of the planes to the other kind.",

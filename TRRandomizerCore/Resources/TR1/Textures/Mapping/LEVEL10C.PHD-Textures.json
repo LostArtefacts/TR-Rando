@@ -1,4 +1,16 @@
 {
+  "Landmarks": {
+    "Landmarks.apel_": {
+      "0": [
+        {
+          "RectangleIndices": [ 152 ],
+          "BackgroundIndex": 2,
+          "RoomNumber": 49
+        }
+      ]
+    }
+  },
+
   "Static": {
     "Lara.Bobble": [
       {

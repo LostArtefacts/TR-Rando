@@ -1,21 +1,24 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using TRRandomizerCore.Helpers;
-using TRRandomizerCore.Utilities;
-using TRRandomizerCore.Zones;
 using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
-using System.IO;
+using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Utilities;
+using TRRandomizerCore.Zones;
 
 namespace TRRandomizerCore.Randomizers
 {
     public class TR2SecretRandomizer : BaseTR2Randomizer
     {
         private static readonly List<int> _devRooms = null;
+        private static readonly int _levelSecretCount = 3;
+
+        private SecretPicker _picker;
 
         private void RandomizeSecrets(List<Location> LevelLocations)
         {
@@ -32,33 +35,70 @@ namespace TRRandomizerCore.Randomizers
 
                 ZonedLocations.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), LevelLocations, ZonePopulationMethod.SecretsOnly);
 
-                Location goldLocation;
-                Location jadeLocation;
-                Location stoneLocation;
+                Location goldLocation = null;
+                Location jadeLocation = null;
+                Location stoneLocation = null;
 
-                //Find suitable locations, ensuring they are zoned, do not share a room and difficulty.
-                //Location = ZoneLocations[ZoneGroup][LocationInZoneGroup]
-                do
+                // Applied guaranteed logic first.
+                IEnumerable<Location> allLocations = ZonedLocations.GoldZone.Concat(ZonedLocations.JadeZone).Concat(ZonedLocations.StoneZone);
+                Queue<Location> guaranteedLocations = _picker.GetGuaranteedLocations(allLocations, false, _levelSecretCount);
+                while (guaranteedLocations.Count > 0)
                 {
-                    goldLocation = ZonedLocations.GoldZone[_generator.Next(0, ZonedLocations.GoldZone.Count)];
-                } while ((goldLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
-                        (goldLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
+                    Location location = guaranteedLocations.Dequeue();
+                    if (ZonedLocations.GoldZone.Contains(location) && goldLocation == null)
+                    {
+                        if ((stoneLocation == null || location.Room != stoneLocation.Room) && (jadeLocation == null || location.Room != jadeLocation.Room))
+                        {
+                            goldLocation = location;
+                        }
+                    }
+                    else if (ZonedLocations.JadeZone.Contains(location) && jadeLocation == null)
+                    {
+                        if ((stoneLocation == null || location.Room != stoneLocation.Room) && (goldLocation == null || location.Room != goldLocation.Room))
+                        {
+                            jadeLocation = location;
+                        }
+                    }
+                    else if (stoneLocation == null)
+                    {
+                        if ((jadeLocation == null || location.Room != jadeLocation.Room) && (goldLocation == null || location.Room != goldLocation.Room))
+                        {
+                            stoneLocation = location;
+                        }
+                    }
+                }
 
+                //Find suitable locations for those not allocated yet, ensuring they are zoned, do not share a room and difficulty.
 
-                do
+                if (goldLocation == null)
                 {
-                    jadeLocation = ZonedLocations.JadeZone[_generator.Next(0, ZonedLocations.JadeZone.Count)];
-                } while ((jadeLocation.Room == goldLocation.Room) ||
-                        (jadeLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
-                        (jadeLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
+                    do
+                    {
+                        goldLocation = ZonedLocations.GoldZone[_generator.Next(0, ZonedLocations.GoldZone.Count)];
+                    } while ((goldLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
+                            (goldLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
+                }
 
-                do
+                if (jadeLocation == null)
                 {
-                    stoneLocation = ZonedLocations.StoneZone[_generator.Next(0, ZonedLocations.StoneZone.Count)];
-                } while ((stoneLocation.Room == goldLocation.Room) ||
-                        (stoneLocation.Room == jadeLocation.Room) ||
-                        (stoneLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
-                        (stoneLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
+                    do
+                    {
+                        jadeLocation = ZonedLocations.JadeZone[_generator.Next(0, ZonedLocations.JadeZone.Count)];
+                    } while ((jadeLocation.Room == goldLocation.Room) ||
+                            (jadeLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
+                            (jadeLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
+                }
+
+                if (stoneLocation == null)
+                {
+                    do
+                    {
+                        stoneLocation = ZonedLocations.StoneZone[_generator.Next(0, ZonedLocations.StoneZone.Count)];
+                    } while ((stoneLocation.Room == goldLocation.Room) ||
+                            (stoneLocation.Room == jadeLocation.Room) ||
+                            (stoneLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
+                            (stoneLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
+                }
 
                 //Due to TRMod only accepting room space coords entities are actually stored in level space. So include some
                 //calls to support a transformation of any locations that are specified in room space to maintain backwards compatbility
@@ -104,6 +144,10 @@ namespace TRRandomizerCore.Randomizers
 
                 FixSecretTextures();
                 CheckForSecretDamage(secretMap);
+
+#if DEBUG
+                Debug.WriteLine(_levelInstance.Name + ": " + _picker.DescribeLocations(secretMap.Values));
+#endif
             }
         }
 
@@ -188,6 +232,11 @@ namespace TRRandomizerCore.Randomizers
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
+            _picker = new SecretPicker
+            {
+                Settings = Settings,
+                Generator = _generator,
+            };
 
             Dictionary<string, List<Location>> Locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\locations.json"));
 

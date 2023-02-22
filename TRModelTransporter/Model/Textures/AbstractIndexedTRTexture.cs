@@ -60,5 +60,7 @@ namespace TRModelTransporter.Model.Textures
 
         protected abstract void GetBoundsFromTexture();
         protected abstract void ApplyBoundDiffToTexture(int xDiff, int yDiff);
+
+        public abstract AbstractIndexedTRTexture Clone();
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace TREnvironmentEditor.Helpers
+﻿using TRLevelReader.Model;
+
+namespace TREnvironmentEditor.Helpers
 {
     public class EMLevelData
     {
@@ -36,6 +38,36 @@
         public short Convert(int itemIndex, uint numItems)
         {
             return (short)(itemIndex < 0 ? numItems + itemIndex : itemIndex);
+        }
+
+        public static EMLevelData GetData(TRLevel level)
+        {
+            return new EMLevelData
+            {
+                NumCameras = level.NumCameras,
+                NumEntities = level.NumEntities,
+                NumRooms = level.NumRooms
+            };
+        }
+
+        public static EMLevelData GetData(TR2Level level)
+        {
+            return new EMLevelData
+            {
+                NumCameras = level.NumCameras,
+                NumEntities = level.NumEntities,
+                NumRooms = level.NumRooms
+            };
+        }
+
+        public static EMLevelData GetData(TR3Level level)
+        {
+            return new EMLevelData
+            {
+                NumCameras = level.NumCameras,
+                NumEntities = level.NumEntities,
+                NumRooms = level.NumRooms
+            };
         }
     }
 }

@@ -284,6 +284,12 @@ namespace TRLevelReader.Model.Enums
         BarracudaIce,     //CoT, Ice Palace
         BarracudaXian,    //Temple
 
+        Gunman1OG,
+        Gunman1TopixtorORC,
+        Gunman1TopixtorCAC,
+        FlamethrowerGoonOG,
+        FlamethrowerGoonTopixtor,
+
         // These splits allow us to import misc animations into levels that do not have LaraMiscAnim_H
         // already defined, otherwise Lara tends to void when killed by these enemies and this sometimes crashes
         // the game. For levels that already have misc animations, the death animation will default to "normal".

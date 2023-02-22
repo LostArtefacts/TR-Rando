@@ -50,11 +50,14 @@ namespace TRModelTransporter.Transport
                 remap = JsonConvert.DeserializeObject<TR1TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
             }
 
-            PaletteManager.Level = Level;
-            PaletteManager.ObsoleteModels = EntitiesToRemove.Select(e => Data.TranslateAlias(e)).ToList();
+            if (!IgnoreGraphics)
+            {
+                PaletteManager.Level = Level;
+                PaletteManager.ObsoleteModels = EntitiesToRemove.Select(e => Data.TranslateAlias(e)).ToList();
 
-            (_textureHandler as TR1TextureImportHandler).PaletteManager = PaletteManager;
-            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
+                (_textureHandler as TR1TextureImportHandler).PaletteManager = PaletteManager;
+                _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
+            }
 
             _soundHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
 
@@ -62,16 +65,21 @@ namespace TRModelTransporter.Transport
 
             foreach (TR1ModelDefinition definition in standardDefinitions)
             {
-                _colourHandler.Import(Level, definition, PaletteManager);
+                if (!IgnoreGraphics)
+                {
+                    _colourHandler.Import(Level, definition, PaletteManager);
+                }
                 _meshHandler.Import(Level, definition);
                 _animationHandler.Import(Level, definition);
                 _cinematicHandler.Import(Level, definition);
                 _modelHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants());
             }
 
-            _textureHandler.ResetUnusedTextures();
-
-            PaletteManager.Dispose();
+            if (!IgnoreGraphics)
+            {
+                _textureHandler.ResetUnusedTextures();
+                PaletteManager.Dispose();
+            }
         }
     }
 }

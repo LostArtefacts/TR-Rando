@@ -49,12 +49,16 @@ namespace TRRandomizerCore.Editors
         public bool RetainMainLevelTextures { get; set; }
         public bool RetainKeySpriteTextures { get; set; }
         public bool RetainSecretSpriteTextures { get; set; }
+        public bool RetainEnemyTextures { get; set; }
         public uint WireframeLevelCount { get; set; }
         public bool AssaultCourseWireframe { get; set; }
         public bool UseSolidLaraWireframing { get; set; }
         public bool UseSolidEnemyWireframing { get; set; }
+        public bool UseSolidInteractableWireframing { get; set; }
         public bool UseDifferentWireframeColours { get; set; }
         public bool UseWireframeLadders { get; set; }
+        public bool ShowWireframeTriggers { get; set; }
+        public bool ShowWireframeTriggerColours { get; set; }
         public bool CrossLevelEnemies { get; set; }
         public bool ProtectMonks { get; set; }
         public bool DocileWillard { get; set; }
@@ -72,6 +76,7 @@ namespace TRRandomizerCore.Editors
         public bool HideEnemiesUntilTriggered { get; set; }
         public bool RemoveLevelEndingLarson { get; set; }
         public bool GlitchedSecrets { get; set; }
+        public bool GuaranteeSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
         public bool UseRandomSecretModels { get; set; }
         public TRSecretCountMode SecretCountMode { get; set; }
@@ -106,6 +111,9 @@ namespace TRRandomizerCore.Editors
         public bool RandomizeWaterLevels { get; set; }
         public bool RandomizeSlotPositions { get; set; }
         public bool RandomizeLadders { get; set; }
+        public bool RandomizeTraps { get; set; }
+        public bool RandomizeChallengeRooms { get; set; }
+        public bool HardEnvironmentMode { get; set; }
         public uint MirroredLevelCount { get; set; }
         public bool MirrorAssaultCourse { get; set; }
         public bool AutoLaunchGame { get; set; }
@@ -160,6 +168,7 @@ namespace TRRandomizerCore.Editors
             SecretSeed = config.GetInt(nameof(SecretSeed), defaultSeed);
             HardSecrets = config.GetBool(nameof(HardSecrets));
             GlitchedSecrets = config.GetBool(nameof(GlitchedSecrets));
+            GuaranteeSecrets = config.GetBool(nameof(GuaranteeSecrets), true);
             UseRewardRoomCameras = config.GetBool(nameof(UseRewardRoomCameras), true);
             UseRandomSecretModels = config.GetBool(nameof(UseRandomSecretModels));
             SecretCountMode = (TRSecretCountMode)config.GetEnum(nameof(SecretCountMode), typeof(TRSecretCountMode), TRSecretCountMode.Default);
@@ -201,12 +210,16 @@ namespace TRRandomizerCore.Editors
             RetainMainLevelTextures = config.GetBool(nameof(RetainMainLevelTextures));
             RetainKeySpriteTextures = config.GetBool(nameof(RetainKeySpriteTextures), true);
             RetainSecretSpriteTextures = config.GetBool(nameof(RetainSecretSpriteTextures), true);
+            RetainEnemyTextures = config.GetBool(nameof(RetainEnemyTextures));
             WireframeLevelCount = config.GetUInt(nameof(WireframeLevelCount));
             AssaultCourseWireframe = config.GetBool(nameof(AssaultCourseWireframe));
             UseSolidLaraWireframing = config.GetBool(nameof(UseSolidLaraWireframing), true);
             UseSolidEnemyWireframing = config.GetBool(nameof(UseSolidEnemyWireframing), true);
+            UseSolidInteractableWireframing = config.GetBool(nameof(UseSolidInteractableWireframing), true);
             UseDifferentWireframeColours = config.GetBool(nameof(UseDifferentWireframeColours), true);
             UseWireframeLadders = config.GetBool(nameof(UseWireframeLadders), true);
+            ShowWireframeTriggers = config.GetBool(nameof(ShowWireframeTriggers), true);
+            ShowWireframeTriggerColours = config.GetBool(nameof(ShowWireframeTriggerColours), true);
 
             RandomizeOutfits = config.GetBool(nameof(RandomizeOutfits));
             OutfitSeed = config.GetInt(nameof(OutfitSeed), defaultSeed);
@@ -253,6 +266,9 @@ namespace TRRandomizerCore.Editors
             RandomizeWaterLevels = config.GetBool(nameof(RandomizeWaterLevels), true);
             RandomizeSlotPositions = config.GetBool(nameof(RandomizeSlotPositions), true);
             RandomizeLadders = config.GetBool(nameof(RandomizeLadders), true);
+            RandomizeTraps = config.GetBool(nameof(RandomizeTraps), true);
+            RandomizeChallengeRooms = config.GetBool(nameof(RandomizeChallengeRooms), true);
+            HardEnvironmentMode = config.GetBool(nameof(HardEnvironmentMode));
             MirroredLevelCount = config.GetUInt(nameof(MirroredLevelCount), 9);
             MirrorAssaultCourse = config.GetBool(nameof(MirrorAssaultCourse), true);
 
@@ -293,6 +309,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(SecretSeed)] = SecretSeed;
             config[nameof(HardSecrets)] = HardSecrets;
             config[nameof(GlitchedSecrets)] = GlitchedSecrets;
+            config[nameof(GuaranteeSecrets)] = GuaranteeSecrets;
             config[nameof(UseRewardRoomCameras)] = UseRewardRoomCameras;
             config[nameof(UseRandomSecretModels)] = UseRandomSecretModels;
             config[nameof(SecretCountMode)] = SecretCountMode;
@@ -330,12 +347,16 @@ namespace TRRandomizerCore.Editors
             config[nameof(RetainMainLevelTextures)] = RetainMainLevelTextures;
             config[nameof(RetainKeySpriteTextures)] = RetainKeySpriteTextures;
             config[nameof(RetainSecretSpriteTextures)] = RetainSecretSpriteTextures;
+            config[nameof(RetainEnemyTextures)] = RetainEnemyTextures;
             config[nameof(WireframeLevelCount)] = WireframeLevelCount;
             config[nameof(AssaultCourseWireframe)] = AssaultCourseWireframe;
             config[nameof(UseSolidLaraWireframing)] = UseSolidLaraWireframing;
             config[nameof(UseSolidEnemyWireframing)] = UseSolidEnemyWireframing;
+            config[nameof(UseSolidInteractableWireframing)] = UseSolidInteractableWireframing;
             config[nameof(UseDifferentWireframeColours)] = UseDifferentWireframeColours;
             config[nameof(UseWireframeLadders)] = UseWireframeLadders;
+            config[nameof(ShowWireframeTriggers)] = ShowWireframeTriggers;
+            config[nameof(ShowWireframeTriggerColours)] = ShowWireframeTriggerColours;
 
             config[nameof(RandomizeOutfits)] = RandomizeOutfits;
             config[nameof(OutfitSeed)] = OutfitSeed;
@@ -382,6 +403,9 @@ namespace TRRandomizerCore.Editors
             config[nameof(RandomizeWaterLevels)] = RandomizeWaterLevels;
             config[nameof(RandomizeSlotPositions)] = RandomizeSlotPositions;
             config[nameof(RandomizeLadders)] = RandomizeLadders;
+            config[nameof(RandomizeTraps)] = RandomizeTraps;
+            config[nameof(RandomizeChallengeRooms)] = RandomizeChallengeRooms;
+            config[nameof(HardEnvironmentMode)] = HardEnvironmentMode;
             config[nameof(MirroredLevelCount)] = MirroredLevelCount;
             config[nameof(MirrorAssaultCourse)] = MirrorAssaultCourse;
 

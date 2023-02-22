@@ -934,6 +934,44 @@ namespace TRRandomizerCore.Randomizers
 
             List<TREntities> allEnemies = TR1EntityUtilities.GetFullListOfEnemies();
             List<TREntity> levelEnemies = levelEntities.FindAll(e => allEnemies.Contains((TREntities)e.TypeID));
+            // #409 Eggs are excluded as they are not part of the cross-level enemy pool, so create copies of any
+            // of these using their actual types so to ensure they are part of the difficulty calculation.
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level.Data);
+            for (int i = 0; i < levelEntities.Count; i++)
+            {
+                TREntity entity = levelEntities[i];
+                if ((entity.TypeID == (short)TREntities.AtlanteanEgg || entity.TypeID == (short)TREntities.AdamEgg)
+                    && FDUtilities.GetEntityTriggers(floorData, i).Count > 0)
+                {
+                    TREntity resultantEnemy = new TREntity();
+                    switch (entity.CodeBits)
+                    {
+                        case 1:
+                            resultantEnemy.TypeID = (short)TREntities.ShootingAtlantean_N;
+                            break;
+                        case 2:
+                            resultantEnemy.TypeID = (short)TREntities.Centaur;
+                            break;
+                        case 4:
+                            resultantEnemy.TypeID = (short)TREntities.Adam;
+                            break;
+                        case 8:
+                            resultantEnemy.TypeID = (short)TREntities.NonShootingAtlantean_N;
+                            break;
+                        default:
+                            resultantEnemy.TypeID = (short)TREntities.FlyingAtlantean;
+                            break;
+                    }
+
+                    // Only include it if the model is present i.e. it's not an empty egg.
+                    if (Array.Find(level.Data.Models, m => m.ID == resultantEnemy.TypeID) != null)
+                    {
+                        levelEnemies.Add(resultantEnemy);
+                    }
+                }
+            }
+
             EnemyDifficulty difficulty = TR1EnemyUtilities.GetEnemyDifficulty(levelEnemies);
 
             if (difficulty > EnemyDifficulty.Easy)

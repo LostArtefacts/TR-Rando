@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TREnvironmentEditor.Helpers;
 using TRLevelReader.Model;
 
 namespace TREnvironmentEditor.Model
@@ -8,30 +9,30 @@ namespace TREnvironmentEditor.Model
         public EMEditorSet Leader { get; set; }
         public List<EMEditorSet> Followers { get; set; }
 
-        public void ApplyToLevel(TRLevel level, EMEditorSet follower, IEnumerable<EMType> excludedTypes)
+        public void ApplyToLevel(TRLevel level, EMEditorSet follower, EMOptions options)
         {
-            if (Leader.IsApplicable(excludedTypes) && follower.IsApplicable(excludedTypes))
+            if (Leader.IsApplicable(options) && follower.IsApplicable(options))
             {
-                Leader.ApplyToLevel(level, excludedTypes);
-                follower.ApplyToLevel(level, excludedTypes);
+                Leader.ApplyToLevel(level, options);
+                follower.ApplyToLevel(level, options);
             }
         }
 
-        public void ApplyToLevel(TR2Level level, EMEditorSet follower, IEnumerable<EMType> excludedTypes)
+        public void ApplyToLevel(TR2Level level, EMEditorSet follower, EMOptions options)
         {
-            if (Leader.IsApplicable(excludedTypes) && follower.IsApplicable(excludedTypes))
+            if (Leader.IsApplicable(options) && follower.IsApplicable(options))
             {
-                Leader.ApplyToLevel(level, excludedTypes);
-                follower.ApplyToLevel(level, excludedTypes);
+                Leader.ApplyToLevel(level, options);
+                follower.ApplyToLevel(level, options);
             }
         }
 
-        public void ApplyToLevel(TR3Level level, EMEditorSet follower, IEnumerable<EMType> excludedTypes)
+        public void ApplyToLevel(TR3Level level, EMEditorSet follower, EMOptions options)
         {
-            if (Leader.IsApplicable(excludedTypes) && follower.IsApplicable(excludedTypes))
+            if (Leader.IsApplicable(options) && follower.IsApplicable(options))
             {
-                Leader.ApplyToLevel(level, excludedTypes);
-                follower.ApplyToLevel(level, excludedTypes);
+                Leader.ApplyToLevel(level, options);
+                follower.ApplyToLevel(level, options);
             }
         }
 

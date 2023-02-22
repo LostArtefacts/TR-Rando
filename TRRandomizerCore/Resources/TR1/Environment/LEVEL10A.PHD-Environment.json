@@ -1,10 +1,7584 @@
 {
   "All": [],
-  "NonPurist": [],
-  "Any": [],
-  "AllWithin": [],
-  "OneOf": [],
-  "ConditionalAllWithin": [],
+  "NonPurist": [
+    {
+      "Comments": "Anti-speedrun barriers.",
+      "EMType": 24,
+      "Locations": [
+        {
+          "X": 55808,
+          "Y": -3072,
+          "Z": 54784,
+          "Room": 17
+        },
+        {
+          "X": 54784,
+          "Y": -3072,
+          "Z": 54784,
+          "Room": 17
+        },
+        {
+          "X": 56832,
+          "Y": -3072,
+          "Z": 54784,
+          "Room": 17
+        }
+      ],
+      "Mesh": {
+        "Intensity1": 5632,
+        "MeshID": 19
+      },
+      "IgnoreSectorEntities": true
+    },
+    {
+      "Comments": "Fix the gap in the wall in room 35.",
+      "EMType": 26,
+      "Triangles": {
+        "35": [
+          {
+            "Vertices": [
+              0,
+              6,
+              5
+            ],
+            "Texture": 59
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Increase the slope near the boat.",
+      "EMType": 7,
+      "Location": {
+        "X": 47616,
+        "Y": -6400,
+        "Z": 26112,
+        "Room": 3
+      },
+      "FloorClicks": -1,
+      "SlantType": 1,
+      "XSlant": -3
+    },
+    {
+      "EMType": 7,
+      "Location": {
+        "X": 47616,
+        "Y": -6400,
+        "Z": 26112,
+        "Room": 16
+      },
+      "FloorClicks": -1,
+      "SlantType": 1,
+      "XSlant": -3
+    },
+    {
+      "EMType": 7,
+      "Location": {
+        "X": 46592,
+        "Y": -6144,
+        "Z": 26112,
+        "Room": 3
+      },
+      "FloorClicks": -1,
+      "SlantType": 1,
+      "XSlant": 5
+    },
+    {
+      "EMType": 7,
+      "Location": {
+        "X": 46592,
+        "Y": -6144,
+        "Z": 26112,
+        "Room": 16
+      },
+      "FloorClicks": -1,
+      "SlantType": 1,
+      "XSlant": 5
+    },
+    {
+      "Comments": "Move some faces to fit the ramp.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 3,
+          "FaceIndex": 117,
+          "VertexChanges": {
+            "1": {
+              "Y": -256
+            },
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceIndex": 117,
+          "VertexChanges": {
+            "1": {
+              "Y": -256
+            },
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 3,
+          "FaceType": 1,
+          "FaceIndex": 17,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 3,
+          "FaceType": 1,
+          "FaceIndex": 11,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceType": 1,
+          "FaceIndex": 17,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceType": 1,
+          "FaceIndex": 11,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 3,
+          "FaceIndex": 119,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceIndex": 119,
+          "VertexChanges": {
+            "0": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 3,
+          "FaceIndex": 87,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceIndex": 87,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 3,
+          "FaceIndex": 82,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        },
+        {
+          "RoomNumber": 16,
+          "FaceIndex": 82,
+          "VertexChanges": {
+            "2": {
+              "Y": -256
+            },
+            "3": {
+              "Y": -256
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Comments": "Any pickups on the old slope will be moved to the floor.",
+      "EMType": 43,
+      "SectorLocations": [
+        {
+          "X": 47616,
+          "Y": -6400,
+          "Z": 26112,
+          "Room": 3
+        }
+      ],
+      "TargetLocation": {
+        "X": 46592,
+        "Y": -5632,
+        "Z": 25088,
+        "Room": 3
+      }
+    },
+    {
+      "Comments": "Move the boat camera so you don't see the already moved boat in the flipmap.",
+      "EMType": 129,
+      "CameraIndex": 7,
+      "NewLocation": {
+        "X": 53760,
+        "Y": -7296,
+        "Z": 28160,
+        "Room": 3
+      }
+    },
+    {
+      "Comments": "Fix the z-fighting in room 55.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 55,
+          "FaceIndex": 8,
+          "VertexChanges": {
+            "0": {
+              "Y": 1024
+            },
+            "1": {
+              "Y": 1024
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "Any": [
+    [
+      {
+        "Comments": "Remove the original boulder pads in room 38.",
+        "EMType": 62,
+        "Tags": [
+          4
+        ],
+        "Locations": [
+          {
+            "X": 100864,
+            "Y": -7936,
+            "Z": 32256,
+            "Room": 38
+          },
+          {
+            "X": 99840,
+            "Y": -8064,
+            "Z": 32256,
+            "Room": 38
+          },
+          {
+            "X": 98816,
+            "Y": -8448,
+            "Z": 32256,
+            "Room": 38
+          },
+          {
+            "X": 99840,
+            "Y": -8064,
+            "Z": 33280,
+            "Room": 38
+          }
+        ]
+      },
+      {
+        "Comments": "Make combined pads further up the slope.",
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 95744,
+            "Y": -9728,
+            "Z": 32256,
+            "Room": 38
+          },
+          {
+            "X": 95744,
+            "Y": -9728,
+            "Z": 33280,
+            "Room": 38
+          }
+        ],
+        "Trigger": {
+          "TrigType": 1,
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": 38
+            },
+            {
+              "Parameter": 39
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Remove the original boulder triggers from room 56.",
+        "EMType": 62,
+        "Tags": [
+          4
+        ],
+        "Locations": [
+          {
+            "X": 73216,
+            "Y": -768,
+            "Z": 62976,
+            "Room": 56
+          },
+          {
+            "X": 72192,
+            "Y": -768,
+            "Z": 62976,
+            "Room": 56
+          },
+          {
+            "X": 73216,
+            "Y": -768,
+            "Z": 66048,
+            "Room": 56
+          },
+          {
+            "X": 72192,
+            "Y": -768,
+            "Z": 66048,
+            "Room": 56
+          }
+        ]
+      },
+      {
+        "Comments": "New trigger further up the slope.",
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 61952,
+            "Y": -1920,
+            "Z": 64000,
+            "Room": 54
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": 49
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Make some walls near the cowboy area.",
+        "EMType": 127,
+        "Tags": [
+          5
+        ],
+        "Locations": [
+          {
+            "X": 60928,
+            "Y": -3584,
+            "Z": 49664,
+            "Room": 21
+          },
+          {
+            "X": 62976,
+            "Y": -3584,
+            "Z": 49664,
+            "Room": 21
+          }
+        ],
+        "EntityMoveLocation": {
+          "X": 61952,
+          "Y": -3584,
+          "Z": 48640,
+          "Room": 21
+        }
+      },
+      {
+        "Comments": "If the fuse is in its default spot, move it too.",
+        "EMType": 43,
+        "SectorLocations": [
+          {
+            "X": 61952,
+            "Y": -3072,
+            "Z": 51712,
+            "Room": 17
+          }
+        ],
+        "TargetLocation": {
+          "X": 61952,
+          "Y": -3584,
+          "Z": 47616,
+          "Room": 21
+        }
+      },
+      {
+        "Comments": "Remove the extra portals.",
+        "EMType": 86,
+        "Location1": {
+          "X": 60928,
+          "Y": -3584,
+          "Z": 50688,
+          "Room": 21
+        },
+        "Location2": {
+          "X": 60928,
+          "Y": -3584,
+          "Z": 49664,
+          "Room": 17
+        }
+      },
+      {
+        "EMType": 86,
+        "Location1": {
+          "X": 62976,
+          "Y": -3584,
+          "Z": 50688,
+          "Room": 21
+        },
+        "Location2": {
+          "X": 62976,
+          "Y": -3584,
+          "Z": 49664,
+          "Room": 17
+        }
+      },
+      {
+        "Comments": "Reduce the size of the visibility portals.",
+        "EMType": 84,
+        "BaseRoom": 21,
+        "AdjoiningRoom": 17,
+        "VertexChanges": {
+          "0": {
+            "X": 1024
+          },
+          "1": {
+            "X": 1024
+          },
+          "2": {
+            "X": -1024
+          },
+          "3": {
+            "X": -1024
+          }
+        }
+      },
+      {
+        "EMType": 84,
+        "BaseRoom": 17,
+        "AdjoiningRoom": 21,
+        "VertexChanges": {
+          "0": {
+            "X": 1024
+          },
+          "1": {
+            "X": 1024
+          },
+          "2": {
+            "X": -1024
+          },
+          "3": {
+            "X": -1024
+          }
+        }
+      },
+      {
+        "Comments": "Move some faces for the walls.",
+        "EMType": 23,
+        "Modifications": [
+          {
+            "RoomNumber": 21,
+            "FaceIndex": 11,
+            "VertexChanges": {
+              "1": {
+                "X": 1024,
+                "Y": -512,
+                "Z": -1024
+              },
+              "2": {
+                "X": 1024,
+                "Z": -1024
+              }
+            }
+          },
+          {
+            "RoomNumber": 21,
+            "FaceIndex": 41,
+            "VertexChanges": {
+              "0": {
+                "X": -1024,
+                "Y": -512,
+                "Z": -1024
+              },
+              "3": {
+                "X": -1024,
+                "Z": -1024
+              }
+            }
+          },
+          {
+            "RoomNumber": 21,
+            "FaceIndex": 9,
+            "VertexChanges": {
+              "0": {
+                "Y": -1792
+              },
+              "1": {
+                "X": 1024,
+                "Y": -1792,
+                "Z": 1024
+              },
+              "2": {
+                "X": 1024
+              },
+              "3": {
+                "Z": -1024
+              }
+            }
+          },
+          {
+            "RoomNumber": 21,
+            "FaceIndex": 37,
+            "VertexChanges": {
+              "0": {
+                "X": -1024,
+                "Y": -1792,
+                "Z": 1024
+              },
+              "1": {
+                "Y": -1792
+              },
+              "2": {
+                "Z": -1024
+              },
+              "3": {
+                "X": -1024
+              }
+            }
+          }
+        ]
+      },
+      {
+        "Comments": "Replace some textures.",
+        "EMType": 21,
+        "TextureMap": {
+          "3": {
+            "21": {
+              "Rectangles": [
+                9,
+                37
+              ]
+            }
+          }
+        }
+      },
+      {
+        "Comments": "Add faces in the other room.",
+        "EMType": 26,
+        "Quads": {
+          "17": [
+            {
+              "Vertices": [
+                294,
+                266,
+                265,
+                293
+              ],
+              "Texture": 3
+            },
+            {
+              "Vertices": [
+                230,
+                194,
+                228,
+                229
+              ],
+              "Texture": 3
+            }
+          ]
+        }
+      },
+      {
+        "Comments": "Remove spare faces.",
+        "EMType": 22,
+        "GeometryMap": {
+          "21": {
+            "Rectangles": [
+              10,
+              38
+            ]
+          }
+        }
+      },
+      {
+        "Comments": "Add a keyhole - the key itself will be added in ConditionalAllWithin.",
+        "EMType": 51,
+        "TypeID": 137,
+        "Intensity": -1,
+        "Location": {
+          "X": 62976,
+          "Y": -3584,
+          "Z": 48640,
+          "Room": 21
+        }
+      },
+      {
+        "Comments": "Add a door.",
+        "EMType": 51,
+        "TypeID": 57,
+        "Intensity": 5376,
+        "Location": {
+          "X": 61952,
+          "Y": -3584,
+          "Z": 48640,
+          "Room": 21,
+          "Angle": -32768
+        }
+      },
+      {
+        "Comments": "Keyhole trigger to pass.",
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 62976,
+            "Y": -3584,
+            "Z": 48640,
+            "Room": 21
+          }
+        ],
+        "Trigger": {
+          "TrigType": 3,
+          "Mask": 31,
+          "SwitchOrKeyRef": -2,
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "Comments": "Remove the boulder triggers for item 58.",
+        "EMType": 62,
+        "Tags": [
+          4
+        ],
+        "Locations": [
+          {
+            "X": 59904,
+            "Y": 1664,
+            "Z": 96768,
+            "Room": 60
+          },
+          {
+            "X": 59904,
+            "Y": 1664,
+            "Z": 97792,
+            "Room": 60
+          },
+          {
+            "X": 59904,
+            "Y": 1664,
+            "Z": 98816,
+            "Room": 60
+          }
+        ]
+      },
+      {
+        "Comments": "New trigger further up the slope.",
+        "EMType": 61,
+        "Locations": [
+          {
+            "X": 56832,
+            "Y": 896,
+            "Z": 94720,
+            "Room": 61
+          }
+        ],
+        "Trigger": {
+          "Mask": 31,
+          "Actions": [
+            {
+              "Parameter": 58
+            }
+          ]
+        }
+      }
+    ]
+  ],
+  "AllWithin": [
+    [
+      [
+        {
+          "Comments": "Potential slot location.",
+          "EMType": 41,
+          "Tags": [
+            1
+          ],
+          "EntityIndex": 76,
+          "Location": {
+            "X": 34304,
+            "Y": -8704,
+            "Z": 93696,
+            "Room": 72
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential slot location.",
+          "EMType": 41,
+          "Tags": [
+            1
+          ],
+          "EntityIndex": 76,
+          "Location": {
+            "X": 36352,
+            "Y": -8960,
+            "Z": 93696,
+            "Room": 72
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential slot location.",
+          "EMType": 41,
+          "Tags": [
+            1
+          ],
+          "EntityIndex": 76,
+          "Location": {
+            "X": 36352,
+            "Y": -8960,
+            "Z": 92672,
+            "Room": 72,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential slot location.",
+          "EMType": 41,
+          "Tags": [
+            1
+          ],
+          "EntityIndex": 76,
+          "Location": {
+            "X": 50688,
+            "Y": -9984,
+            "Z": 90624,
+            "Room": 68,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential slot location.",
+          "EMType": 41,
+          "Tags": [
+            1
+          ],
+          "EntityIndex": 76,
+          "Location": {
+            "X": 50688,
+            "Y": -9984,
+            "Z": 90624,
+            "Room": 68,
+            "Angle": -32768
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential slot location.",
+          "EMType": 41,
+          "Tags": [
+            1
+          ],
+          "EntityIndex": 76,
+          "Location": {
+            "X": 48640,
+            "Y": -9984,
+            "Z": 94720,
+            "Room": 67,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential slot location.",
+          "EMType": 41,
+          "Tags": [
+            1
+          ],
+          "EntityIndex": 76,
+          "Location": {
+            "X": 48640,
+            "Y": -9984,
+            "Z": 95744,
+            "Room": 67,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential slot location.",
+          "EMType": 41,
+          "Tags": [
+            1
+          ],
+          "EntityIndex": 76,
+          "Location": {
+            "X": 47616,
+            "Y": -9984,
+            "Z": 91648,
+            "Room": 80,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential slot location.",
+          "EMType": 41,
+          "Tags": [
+            1
+          ],
+          "EntityIndex": 76,
+          "Location": {
+            "X": 47616,
+            "Y": -9984,
+            "Z": 90624,
+            "Room": 80,
+            "Angle": 16384
+          }
+        }
+      ],
+      [
+        {
+          "Comments": "Potential slot location.",
+          "EMType": 41,
+          "Tags": [
+            1
+          ],
+          "EntityIndex": 76,
+          "Location": {
+            "X": 47616,
+            "Y": -9984,
+            "Z": 89600,
+            "Room": 80,
+            "Angle": 16384
+          }
+        }
+      ]
+    ],
+    [
+      [
+        {
+          "Comments": "Make a new area 'in Atlantis' - trapdoor timed run to the end.",
+          "EMType": 126,
+          "Tags": [
+            5
+          ],
+          "Location": {
+            "X": 23552,
+            "Y": 256,
+            "Z": 91136
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 5,
+            "Ceiling": 147,
+            "WallAlignment": 4,
+            "Wall4": 147,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 7654
+          },
+          "Lights": [
+            {
+              "X": 1536,
+              "Y": -9216,
+              "Z": 2048,
+              "Intensity1": 4096,
+              "Fade1": 387
+            },
+            {
+              "X": 1536,
+              "Y": -512,
+              "Z": 2048,
+              "Intensity1": 2048,
+              "Fade1": 387
+            }
+          ],
+          "Height": 44,
+          "Width": 3,
+          "Depth": 4
+        },
+        {
+          "EMType": 126,
+          "Location": {
+            "X": 23552,
+            "Y": 2304,
+            "Z": 91136
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 147,
+            "Ceiling": 5,
+            "WallAlignment": 4,
+            "Wall4": 147,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 6144
+          },
+          "Lights": [
+            {
+              "X": 2560,
+              "Y": -1024,
+              "Z": 2048,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            }
+          ],
+          "Height": 8,
+          "Width": 5,
+          "Depth": 4,
+          "FloorHeights": {
+            "-127": [
+              13
+            ]
+          }
+        },
+        {
+          "EMType": 126,
+          "Location": {
+            "X": 25600,
+            "Y": 256,
+            "Z": 87040
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 125,
+            "Ceiling": 125,
+            "WallAlignment": 5,
+            "Wall4": 125,
+            "Wall2": 128,
+            "Wall1": 126,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 5120
+          },
+          "Lights": [
+            {
+              "X": 4096,
+              "Y": -1024,
+              "Z": 4096,
+              "Intensity1": 3072,
+              "Fade1": 3072
+            },
+            {
+              "X": 4096,
+              "Y": -5120,
+              "Z": 7168,
+              "Intensity1": 4096,
+              "Fade1": 4096
+            }
+          ],
+          "Height": 24,
+          "Width": 8,
+          "Depth": 9,
+          "FloorHeights": {
+            "-1": [
+              14
+            ],
+            "-2": [
+              23
+            ],
+            "-3": [
+              24
+            ],
+            "-8": [
+              51
+            ],
+            "-16": [
+              34,
+              43
+            ],
+            "-127": [
+              16,
+              25,
+              52,
+              60,
+              61,
+              55,
+              10
+            ]
+          }
+        },
+        {
+          "EMType": 126,
+          "Location": {
+            "X": 27648,
+            "Y": -3840,
+            "Z": 94208
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 125,
+            "Ceiling": 125,
+            "WallAlignment": 5,
+            "Wall4": 125,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 5120
+          },
+          "Lights": [
+            {
+              "X": 2048,
+              "Y": -1024,
+              "Z": 2048,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            }
+          ],
+          "Height": 8,
+          "Width": 4,
+          "Depth": 7
+        },
+        {
+          "Comments": "Visibility portals for the new rooms.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": 82,
+              "AdjoiningRoom": -4,
+              "Normal": {
+                "X": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -11008,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -11008,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": -8704,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": -8704,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -4,
+              "AdjoiningRoom": 82,
+              "Normal": {
+                "X": -1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": -11008,
+                  "Z": 3072
+                },
+                {
+                  "X": 2048,
+                  "Y": -11008,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": -8704,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": -8704,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -3,
+              "AdjoiningRoom": -4,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -4,
+              "AdjoiningRoom": -3,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -3,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 2048
+                },
+                {
+                  "X": 4096,
+                  "Y": 256,
+                  "Z": 2048
+                },
+                {
+                  "X": 4096,
+                  "Y": 256,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": -3,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 7168
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 7168
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 6144
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 6144
+                }
+              ]
+            },
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": -1,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": -5888,
+                  "Z": 8192
+                },
+                {
+                  "X": 5120,
+                  "Y": -5888,
+                  "Z": 8192
+                },
+                {
+                  "X": 5120,
+                  "Y": -3840,
+                  "Z": 8192
+                },
+                {
+                  "X": 3072,
+                  "Y": -3840,
+                  "Z": 8192
+                }
+              ]
+            },
+            {
+              "BaseRoom": -1,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": -5888,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -5888,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -3840,
+                  "Z": 1024
+                },
+                {
+                  "X": 3072,
+                  "Y": -3840,
+                  "Z": 1024
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Comments": "Collisional portals.",
+          "EMType": 82,
+          "Portals": {
+            "82": {
+              "-4": [
+                {
+                  "X": 25088,
+                  "Y": -8960,
+                  "Z": 92672,
+                  "Room": 82
+                },
+                {
+                  "X": 25088,
+                  "Y": -8960,
+                  "Z": 93696,
+                  "Room": 82
+                }
+              ]
+            },
+            "-4": {
+              "82": [
+                {
+                  "X": 26112,
+                  "Y": -8960,
+                  "Z": 92672,
+                  "Room": -4
+                },
+                {
+                  "X": 26112,
+                  "Y": -8960,
+                  "Z": 93696,
+                  "Room": -4
+                }
+              ]
+            },
+            "-2": {
+              "-1": [
+                {
+                  "X": 29184,
+                  "Y": -3840,
+                  "Z": 95744,
+                  "Room": -2
+                },
+                {
+                  "X": 30208,
+                  "Y": -3840,
+                  "Z": 95744,
+                  "Room": -2
+                }
+              ]
+            },
+            "-1": {
+              "-2": [
+                {
+                  "X": 29184,
+                  "Y": -3840,
+                  "Z": 94720,
+                  "Room": -1
+                },
+                {
+                  "X": 30208,
+                  "Y": -3840,
+                  "Z": 94720,
+                  "Room": -1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 25088,
+            "Y": 256,
+            "Z": 93696,
+            "Room": -4
+          },
+          "Floor": {
+            "X": 25088,
+            "Y": 1280,
+            "Z": 93696,
+            "Room": -3
+          }
+        },
+        {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 25088,
+            "Y": 256,
+            "Z": 92672,
+            "Room": -4
+          },
+          "Floor": {
+            "X": 25088,
+            "Y": 1280,
+            "Z": 92672,
+            "Room": -3
+          }
+        },
+        {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 27136,
+            "Y": 256,
+            "Z": 93696,
+            "Room": -2
+          },
+          "Floor": {
+            "X": 27136,
+            "Y": 1280,
+            "Z": 93696,
+            "Room": -3
+          }
+        },
+        {
+          "Comments": "Move some faces around.",
+          "EMType": 23,
+          "Modifications": [
+            {
+              "RoomNumber": -4,
+              "FaceIndices": [
+                69
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "3": {
+                  "Y": -768
+                }
+              }
+            },
+            {
+              "RoomNumber": -4,
+              "FaceIndices": [
+                23
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "1": {
+                  "Y": -768
+                }
+              }
+            },
+            {
+              "RoomNumber": -4,
+              "FaceIndices": [
+                68
+              ],
+              "VertexChanges": {
+                "2": {
+                  "Y": 768
+                },
+                "3": {
+                  "Y": 1024
+                }
+              }
+            },
+            {
+              "RoomNumber": -4,
+              "FaceIndices": [
+                22
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": 1024
+                },
+                "1": {
+                  "Y": 768
+                }
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                22
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -1024
+                },
+                "1": {
+                  "Y": -1024
+                }
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                44
+              ],
+              "VertexChanges": {
+                "2": {
+                  "Y": -1024
+                },
+                "3": {
+                  "Y": -1024
+                }
+              }
+            }
+          ],
+          "Rotations": [
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                182,
+                212,
+                148,
+                96,
+                56,
+                128,
+                164,
+                88,
+                14
+              ],
+              "VertexRemap": {
+                "0": 2,
+                "1": 3,
+                "2": 0,
+                "3": 1
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                105,
+                132,
+                168,
+                126,
+                80,
+                0,
+                196
+              ],
+              "VertexRemap": {
+                "0": 3,
+                "1": 0,
+                "2": 1,
+                "3": 2
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                72
+              ],
+              "VertexRemap": {
+                "0": 1,
+                "1": 2,
+                "2": 3,
+                "3": 0
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                44
+              ],
+              "VertexRemap": {
+                "0": 2,
+                "1": 3,
+                "2": 0,
+                "3": 1
+              }
+            }
+          ]
+        },
+        {
+          "Comments": "Change some textures.",
+          "EMType": 21,
+          "TextureMap": {
+            "5": {
+              "-2": {
+                "Rectangles": [
+                  40
+                ]
+              }
+            },
+            "147": {
+              "-3": {
+                "Rectangles": [
+                  13,
+                  19
+                ]
+              }
+            },
+            "148": {
+              "-2": {
+                "Rectangles": [
+                  80
+                ]
+              }
+            },
+            "65": {
+              "-2": {
+                "Rectangles": [
+                  74,
+                  126,
+                  166,
+                  102
+                ]
+              }
+            },
+            "84": {
+              "-2": {
+                "Rectangles": [
+                  100,
+                  132,
+                  162,
+                  98
+                ]
+              }
+            },
+            "81": {
+              "-2": {
+                "Rectangles": [
+                  22,
+                  182
+                ]
+              }
+            },
+            "78": {
+              "-2": {
+                "Rectangles": [
+                  22,
+                  105,
+                  134,
+                  56
+                ]
+              }
+            },
+            "72": {
+              "-2": {
+                "Rectangles": [
+                  74,
+                  148
+                ]
+              }
+            },
+            "75": {
+              "-2": {
+                "Rectangles": [
+                  100,
+                  0,
+                  196,
+                  88
+                ]
+              }
+            },
+            "73": {
+              "-2": {
+                "Rectangles": [
+                  102,
+                  212,
+                  14,
+                  118
+                ]
+              }
+            },
+            "79": {
+              "-2": {
+                "Rectangles": [
+                  130,
+                  168,
+                  204,
+                  96,
+                  72
+                ]
+              }
+            },
+            "63": {
+              "-2": {
+                "Rectangles": [
+                  70,
+                  164
+                ]
+              }
+            },
+            "85": {
+              "-2": {
+                "Rectangles": [
+                  128
+                ]
+              }
+            },
+            "588": {
+              "-1": {
+                "Rectangles": [
+                  22,
+                  44
+                ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Remove faces no longer required.",
+          "EMType": 22,
+          "GeometryMap": {
+            "-2": {
+              "Rectangles": [
+                116,
+                117,
+                144,
+                145
+              ]
+            },
+            "-1": {
+              "Rectangles": [
+                4,
+                5,
+                28,
+                29,
+                23,
+                45
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Flood the second room.",
+          "EMType": 2,
+          "RoomNumbers": [
+            -3
+          ]
+        },
+        {
+          "Comments": "Death tiles in the challenge room.",
+          "EMType": 70,
+          "Locations": [
+            {
+              "X": 29184,
+              "Y": 256,
+              "Z": 93696,
+              "Room": -2
+            },
+            {
+              "X": 30208,
+              "Y": 256,
+              "Z": 93696,
+              "Room": -2
+            },
+            {
+              "X": 29184,
+              "Y": 256,
+              "Z": 92672,
+              "Room": -2
+            },
+            {
+              "X": 30208,
+              "Y": 256,
+              "Z": 92672,
+              "Room": -2
+            },
+            {
+              "X": 31232,
+              "Y": 256,
+              "Z": 92672,
+              "Room": -2
+            },
+            {
+              "X": 32256,
+              "Y": 256,
+              "Z": 92672,
+              "Room": -2
+            },
+            {
+              "X": 32256,
+              "Y": 256,
+              "Z": 91648,
+              "Room": -2
+            },
+            {
+              "X": 31232,
+              "Y": 256,
+              "Z": 91648,
+              "Room": -2
+            },
+            {
+              "X": 30208,
+              "Y": 256,
+              "Z": 91648,
+              "Room": -2
+            },
+            {
+              "X": 29184,
+              "Y": 256,
+              "Z": 91648,
+              "Room": -2
+            },
+            {
+              "X": 28160,
+              "Y": 256,
+              "Z": 91648,
+              "Room": -2
+            },
+            {
+              "X": 27136,
+              "Y": 256,
+              "Z": 91648,
+              "Room": -2
+            },
+            {
+              "X": 27136,
+              "Y": 256,
+              "Z": 90624,
+              "Room": -2
+            },
+            {
+              "X": 28160,
+              "Y": 256,
+              "Z": 90624,
+              "Room": -2
+            },
+            {
+              "X": 29184,
+              "Y": 256,
+              "Z": 90624,
+              "Room": -2
+            },
+            {
+              "X": 30208,
+              "Y": 256,
+              "Z": 90624,
+              "Room": -2
+            },
+            {
+              "X": 31232,
+              "Y": 256,
+              "Z": 90624,
+              "Room": -2
+            },
+            {
+              "X": 32256,
+              "Y": 256,
+              "Z": 90624,
+              "Room": -2
+            },
+            {
+              "X": 32256,
+              "Y": 256,
+              "Z": 89600,
+              "Room": -2
+            },
+            {
+              "X": 31232,
+              "Y": 256,
+              "Z": 89600,
+              "Room": -2
+            },
+            {
+              "X": 30208,
+              "Y": 256,
+              "Z": 89600,
+              "Room": -2
+            },
+            {
+              "X": 29184,
+              "Y": 256,
+              "Z": 89600,
+              "Room": -2
+            },
+            {
+              "X": 28160,
+              "Y": 256,
+              "Z": 89600,
+              "Room": -2
+            },
+            {
+              "X": 27136,
+              "Y": 256,
+              "Z": 89600,
+              "Room": -2
+            },
+            {
+              "X": 28160,
+              "Y": 256,
+              "Z": 88576,
+              "Room": -2
+            },
+            {
+              "X": 29184,
+              "Y": 256,
+              "Z": 88576,
+              "Room": -2
+            },
+            {
+              "X": 30208,
+              "Y": 256,
+              "Z": 88576,
+              "Room": -2
+            },
+            {
+              "X": 31232,
+              "Y": 256,
+              "Z": 88576,
+              "Room": -2
+            }
+          ]
+        },
+        {
+          "Comments": "Add a lava sound source.",
+          "EMType": 101,
+          "Source": {
+            "X": 29686,
+            "Y": 256,
+            "Z": 91133,
+            "SoundID": 148,
+            "Flags": 192
+          }
+        },
+        {
+          "Comments": "Get rid of the normal end level trigger.",
+          "EMType": 62,
+          "Rooms": [
+            82
+          ]
+        },
+        {
+          "Comments": "Add end level triggers to the final room.",
+          "EMType": 61,
+          "ExpandedLocations": {
+            "Location": {
+              "X": 29184,
+              "Y": -3840,
+              "Z": 98816,
+              "Room": -1
+            },
+            "ExpandX": 2,
+            "ExpandZ": 1
+          },
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Action": 7
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Add doors to the final room.",
+          "EMType": 51,
+          "TypeID": 59,
+          "Intensity": 6400,
+          "Location": {
+            "X": 29184,
+            "Y": -3840,
+            "Z": 94720,
+            "Room": -2,
+            "Angle": -32768
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 60,
+          "Intensity": 5376,
+          "Location": {
+            "X": 30208,
+            "Y": -3840,
+            "Z": 94720,
+            "Room": -2,
+            "Angle": -32768
+          }
+        },
+        {
+          "Comments": "Trapdoors to reach the top.",
+          "EMType": 51,
+          "TypeID": 66,
+          "Flags": 15872,
+          "Intensity": 6144,
+          "Location": {
+            "X": 32256,
+            "Y": -1792,
+            "Z": 90624,
+            "Room": -2,
+            "Angle": -16384
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 32256,
+              "Y": 256,
+              "Z": 90624,
+              "Room": -2
+            }
+          ],
+          "Trigger": {
+            "TrigType": 8,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 66,
+          "Flags": 15872,
+          "Intensity": 6144,
+          "Location": {
+            "X": 31232,
+            "Y": -2816,
+            "Z": 88576,
+            "Room": -2
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 31232,
+              "Y": 256,
+              "Z": 88576,
+              "Room": -2
+            }
+          ],
+          "Trigger": {
+            "TrigType": 8,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 66,
+          "Flags": 15872,
+          "Intensity": 6144,
+          "Location": {
+            "X": 28160,
+            "Y": -3840,
+            "Z": 88576,
+            "Room": -2
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 28160,
+              "Y": 256,
+              "Z": 88576,
+              "Room": -2
+            }
+          ],
+          "Trigger": {
+            "TrigType": 8,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 66,
+          "Flags": 15872,
+          "Intensity": 6144,
+          "Location": {
+            "X": 27136,
+            "Y": -3840,
+            "Z": 91648,
+            "Room": -2,
+            "Angle": 16384
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 27136,
+              "Y": 256,
+              "Z": 91648,
+              "Room": -2
+            }
+          ],
+          "Trigger": {
+            "TrigType": 8,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "A little music.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 27136,
+              "Z": 92672,
+              "Room": -2
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Action": 8,
+                "Parameter": 12
+              }
+            ]
+          }
+        },
+        {
+          "EMType": 65,
+          "Camera": {
+            "X": 30928,
+            "Y": -5122,
+            "Z": 86775,
+            "Room": -2
+          },
+          "LookAtItem": 65535,
+          "AttachToLocations": [
+            {
+              "X": 27136,
+              "Z": 92672,
+              "Room": -2
+            }
+          ],
+          "CameraAction": {
+            "Value": 1280,
+            "Once": true,
+            "MoveTimer": 2,
+            "Continue": true
+          }
+        },
+        {
+          "Comments": "A pad to activate the trapdoors and final doors.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 28160,
+              "Y": -512,
+              "Z": 93696,
+              "Room": -2
+            }
+          ],
+          "Trigger": {
+            "TrigType": 1,
+            "Mask": 31,
+            "Timer": 28,
+            "Actions": [
+              {
+                "Parameter": -6
+              },
+              {
+                "Parameter": -5
+              },
+              {
+                "Parameter": -4
+              },
+              {
+                "Parameter": -3
+              },
+              {
+                "Parameter": -2
+              },
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Placeholder for default mode.",
+          "EMType": 1000,
+          "HardVariant": {
+            "Comments": "Tighten the timer in hard mode.",
+            "EMType": 69,
+            "Location": {
+              "X": 28160,
+              "Y": -512,
+              "Z": 93696,
+              "Room": -2
+            },
+            "Timer": 17
+          }
+        },
+        {
+          "Comments": "Auto-generate vertex lighting in the new rooms.",
+          "EMType": 128,
+          "RoomIndices": [
+            -1,
+            -2,
+            -3,
+            -4
+          ]
+        }
+      ],
+      [
+        {
+          "Comments": "Make a drop from Mines into a new puzzle area.",
+          "EMType": 126,
+          "Tags": [
+            5
+          ],
+          "Location": {
+            "X": 22528,
+            "Y": 256,
+            "Z": 91136
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 5,
+            "Ceiling": 147,
+            "WallAlignment": 4,
+            "Wall4": 147,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 7654
+          },
+          "Lights": [
+            {
+              "X": 2048,
+              "Y": -9216,
+              "Z": 2048,
+              "Intensity1": 4096,
+              "Fade1": 387
+            },
+            {
+              "X": 1536,
+              "Y": -1280,
+              "Z": 1536,
+              "Intensity1": 4096,
+              "Fade1": 387
+            }
+          ],
+          "Height": 44,
+          "Width": 4,
+          "Depth": 4
+        },
+        {
+          "Comments": "Make a pool at the bottom of the drop.",
+          "EMType": 126,
+          "Location": {
+            "X": 22528,
+            "Y": 2304,
+            "Z": 91136
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 147,
+            "Ceiling": 5,
+            "WallAlignment": 4,
+            "Wall4": 147,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 6144
+          },
+          "Lights": [
+            {
+              "X": 2048,
+              "Y": -1024,
+              "Z": 2048,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            }
+          ],
+          "Height": 8,
+          "Width": 6,
+          "Depth": 4,
+          "FloorHeights": {
+            "-127": [
+              13,
+              17
+            ]
+          }
+        },
+        {
+          "Comments": "Make an underwater maze.",
+          "EMType": 126,
+          "Location": {
+            "X": 26624,
+            "Y": 1280,
+            "Z": 80896
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 147,
+            "Ceiling": 147,
+            "WallAlignment": 4,
+            "Wall4": 147,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 6144
+          },
+          "Lights": [
+            {
+              "X": 2560,
+              "Y": -768,
+              "Z": 5632,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            },
+            {
+              "X": 6656,
+              "Y": -768,
+              "Z": 11776,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            },
+            {
+              "X": 4608,
+              "Y": -768,
+              "Z": 8704,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            },
+            {
+              "X": 11776,
+              "Y": -768,
+              "Z": 12800,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            },
+            {
+              "X": 10752,
+              "Y": -768,
+              "Z": 5632,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            },
+            {
+              "X": 7680,
+              "Y": -768,
+              "Z": 1536,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            }
+          ],
+          "Height": 4,
+          "Width": 14,
+          "Depth": 14,
+          "FloorHeights": {
+            "-127": [
+              25,
+              54,
+              53,
+              67,
+              81,
+              109,
+              123,
+              152,
+              151,
+              149,
+              121,
+              122,
+              120,
+              104,
+              105,
+              118,
+              132,
+              146,
+              148,
+              93,
+              106,
+              92,
+              179,
+              178,
+              177,
+              163,
+              162,
+              160,
+              174,
+              79,
+              51,
+              37,
+              20,
+              36,
+              63,
+              76,
+              90,
+              62,
+              50,
+              49,
+              48,
+              73,
+              74,
+              88,
+              102,
+              101,
+              85,
+              72,
+              114,
+              128,
+              155,
+              157,
+              173,
+              159,
+              130,
+              156,
+              46,
+              45,
+              44,
+              32,
+              16,
+              43
+            ]
+          }
+        },
+        {
+          "Comments": "Make a link corridor between the underwater and above water mazes.",
+          "EMType": 126,
+          "Location": {
+            "X": 37888,
+            "Y": 256,
+            "Z": 89088
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 147,
+            "Ceiling": 147,
+            "WallAlignment": 5,
+            "Wall4": 147,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 5120
+          },
+          "Lights": [
+            {
+              "X": 1536,
+              "Y": -1024,
+              "Z": 2048,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            }
+          ],
+          "Height": 5,
+          "Width": 3,
+          "Depth": 6,
+          "FloorHeights": {
+            "-1": [
+              7,
+              8,
+              9
+            ]
+          }
+        },
+        {
+          "Comments": "Make an above water maze.",
+          "EMType": 126,
+          "Location": {
+            "X": 26624,
+            "Z": 87040
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 147,
+            "Ceiling": 147,
+            "WallAlignment": 4,
+            "Wall4": 147,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 6144
+          },
+          "Lights": [
+            {
+              "X": 11776,
+              "Y": -768,
+              "Z": 3584,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            },
+            {
+              "X": 2560,
+              "Y": -768,
+              "Z": 2560,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            },
+            {
+              "X": 9728,
+              "Y": -768,
+              "Z": 5632,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            },
+            {
+              "X": 6656,
+              "Y": -768,
+              "Z": 2560,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            }
+          ],
+          "Height": 4,
+          "Width": 13,
+          "Depth": 8,
+          "FloorHeights": {
+            "-127": [
+              19,
+              46,
+              17,
+              25,
+              33,
+              34,
+              35,
+              12,
+              20,
+              22,
+              37,
+              90,
+              92,
+              93,
+              94,
+              82,
+              76,
+              65,
+              66,
+              67,
+              68,
+              52,
+              53,
+              45,
+              51,
+              49,
+              78,
+              70
+            ]
+          }
+        },
+        {
+          "Comments": "Room from above water maze back to the pool.",
+          "EMType": 126,
+          "Location": {
+            "X": 22528,
+            "Z": 89088
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 147,
+            "Ceiling": 147,
+            "WallAlignment": 4,
+            "Wall4": 147,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 6144
+          },
+          "Lights": [
+            {
+              "X": 2560,
+              "Y": -1024,
+              "Z": 1536,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            }
+          ],
+          "Height": 7,
+          "Width": 6,
+          "Depth": 4,
+          "FloorHeights": {
+            "-1": [
+              6,
+              13
+            ],
+            "-2": [
+              9
+            ],
+            "-3": [
+              5
+            ],
+            "-127": [
+              10,
+              14,
+              18
+            ]
+          }
+        },
+        {
+          "Comments": "Make a final room leading to Atlantis.",
+          "EMType": 126,
+          "Location": {
+            "X": 30720,
+            "Y": 256,
+            "Z": 75776
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 125,
+            "Ceiling": 125,
+            "WallAlignment": 5,
+            "Wall4": 125,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 5120
+          },
+          "Lights": [
+            {
+              "X": 2048,
+              "Y": -1024,
+              "Z": 2048,
+              "Intensity1": 4096,
+              "Fade1": 3072
+            }
+          ],
+          "Height": 9,
+          "Width": 4,
+          "Depth": 10,
+          "FloorHeights": {
+            "-1": [
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27
+            ],
+            "-127": [
+              18
+            ]
+          }
+        },
+        {
+          "Comments": "Visibility portals for the new rooms.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": 82,
+              "AdjoiningRoom": -7,
+              "Normal": {
+                "X": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -11008,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -11008,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": -8704,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": -8704,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -7,
+              "AdjoiningRoom": 82,
+              "Normal": {
+                "X": -1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": -11008,
+                  "Z": 3072
+                },
+                {
+                  "X": 3072,
+                  "Y": -11008,
+                  "Z": 1024
+                },
+                {
+                  "X": 3072,
+                  "Y": -8704,
+                  "Z": 1024
+                },
+                {
+                  "X": 3072,
+                  "Y": -8704,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -6,
+              "AdjoiningRoom": -7,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 1024
+                },
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -7,
+              "AdjoiningRoom": -6,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -6,
+              "AdjoiningRoom": -5,
+              "Normal": {
+                "X": -1
+              },
+              "Vertices": [
+                {
+                  "X": 5120,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 5120,
+                  "Y": 256,
+                  "Z": 2048
+                },
+                {
+                  "X": 5120,
+                  "Y": 1280,
+                  "Z": 2048
+                },
+                {
+                  "X": 4096,
+                  "Y": 1280,
+                  "Z": 2048
+                }
+              ]
+            },
+            {
+              "BaseRoom": -5,
+              "AdjoiningRoom": -6,
+              "Normal": {
+                "X": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 12288
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 13312
+                },
+                {
+                  "X": 1024,
+                  "Y": 1280,
+                  "Z": 13312
+                },
+                {
+                  "X": 1024,
+                  "Y": 1280,
+                  "Z": 12288
+                }
+              ]
+            },
+            {
+              "BaseRoom": -7,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": -3840,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -3840,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -256,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": -256,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": -7,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -3840,
+                  "Z": 3072
+                },
+                {
+                  "X": 2048,
+                  "Y": -3840,
+                  "Z": 3072
+                },
+                {
+                  "X": 2048,
+                  "Y": -256,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": -256,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": -3,
+              "Normal": {
+                "X": -1
+              },
+              "Vertices": [
+                {
+                  "X": 5120,
+                  "Y": -1024,
+                  "Z": 2048
+                },
+                {
+                  "X": 5120,
+                  "Y": -1024,
+                  "Z": 1024
+                },
+                {
+                  "X": 5120,
+                  "Z": 1024
+                },
+                {
+                  "X": 5120,
+                  "Z": 2048
+                }
+              ]
+            },
+            {
+              "BaseRoom": -3,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "X": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -1024,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": -1024,
+                  "Z": 4096
+                },
+                {
+                  "X": 1024,
+                  "Z": 4096
+                },
+                {
+                  "X": 1024,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -3,
+              "AdjoiningRoom": -4,
+              "Normal": {
+                "X": -1
+              },
+              "Vertices": [
+                {
+                  "X": 12288,
+                  "Y": -1024,
+                  "Z": 4096
+                },
+                {
+                  "X": 12288,
+                  "Y": -1024,
+                  "Z": 3072
+                },
+                {
+                  "X": 12288,
+                  "Z": 3072
+                },
+                {
+                  "X": 12288,
+                  "Z": 4096
+                }
+              ]
+            },
+            {
+              "BaseRoom": -4,
+              "AdjoiningRoom": -3,
+              "Normal": {
+                "X": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -1024,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -1024,
+                  "Z": 2048
+                },
+                {
+                  "X": 1024,
+                  "Z": 2048
+                },
+                {
+                  "X": 1024,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -4,
+              "AdjoiningRoom": -5,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 5120
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 5120
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 4096
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 4096
+                }
+              ]
+            },
+            {
+              "BaseRoom": -5,
+              "AdjoiningRoom": -4,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 12288,
+                  "Y": 256,
+                  "Z": 12288
+                },
+                {
+                  "X": 13312,
+                  "Y": 256,
+                  "Z": 12288
+                },
+                {
+                  "X": 13312,
+                  "Y": 256,
+                  "Z": 13312
+                },
+                {
+                  "X": 12288,
+                  "Y": 256,
+                  "Z": 13312
+                }
+              ]
+            },
+            {
+              "BaseRoom": -1,
+              "AdjoiningRoom": -5,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 9216
+                },
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 9216
+                },
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 8192
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 8192
+                }
+              ]
+            },
+            {
+              "BaseRoom": -5,
+              "AdjoiningRoom": -1,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 6144,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 7168,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 7168,
+                  "Y": 256,
+                  "Z": 4096
+                },
+                {
+                  "X": 6144,
+                  "Y": 256,
+                  "Z": 4096
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Comments": "Collisional portals between all the new rooms.",
+          "EMType": 82,
+          "Portals": {
+            "82": {
+              "-7": [
+                {
+                  "X": 25088,
+                  "Y": -8960,
+                  "Z": 92672,
+                  "Room": 82
+                },
+                {
+                  "X": 25088,
+                  "Y": -8960,
+                  "Z": 93696,
+                  "Room": 82
+                }
+              ]
+            },
+            "-7": {
+              "82": [
+                {
+                  "X": 26112,
+                  "Y": -8960,
+                  "Z": 92672,
+                  "Room": -7
+                },
+                {
+                  "X": 26112,
+                  "Y": -8960,
+                  "Z": 93696,
+                  "Room": -7
+                }
+              ],
+              "-2": [
+                {
+                  "X": 24064,
+                  "Y": 256,
+                  "Z": 91648,
+                  "Room": -7
+                }
+              ]
+            },
+            "-2": {
+              "-7": [
+                {
+                  "X": 24064,
+                  "Y": 256,
+                  "Z": 92672,
+                  "Room": -2
+                }
+              ],
+              "-3": [
+                {
+                  "X": 28160,
+                  "Z": 90624,
+                  "Room": -2
+                }
+              ]
+            },
+            "-6": {
+              "-5": [
+                {
+                  "X": 28160,
+                  "Y": 1280,
+                  "Z": 93696,
+                  "Room": -6
+                }
+              ]
+            },
+            "-5": {
+              "-6": [
+                {
+                  "X": 27136,
+                  "Y": 1280,
+                  "Z": 93696,
+                  "Room": -5
+                }
+              ]
+            },
+            "-3": {
+              "-2": [
+                {
+                  "X": 27136,
+                  "Z": 90624,
+                  "Room": -3
+                }
+              ],
+              "-4": [
+                {
+                  "X": 39424,
+                  "Z": 90624,
+                  "Room": -3
+                }
+              ]
+            },
+            "-4": {
+              "-3": [
+                {
+                  "X": 38400,
+                  "Z": 90624,
+                  "Room": -4
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Collisional portals between the big drop and pool below.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 25088,
+            "Y": 256,
+            "Z": 93696,
+            "Room": -7
+          },
+          "Floor": {
+            "X": 25088,
+            "Y": 1280,
+            "Z": 93696,
+            "Room": -6
+          }
+        },
+        {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 25088,
+            "Y": 256,
+            "Z": 92672,
+            "Room": -7
+          },
+          "Floor": {
+            "X": 25088,
+            "Y": 1280,
+            "Z": 92672,
+            "Room": -6
+          }
+        },
+        {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 24064,
+            "Y": 256,
+            "Z": 93696,
+            "Room": -7
+          },
+          "Floor": {
+            "X": 24064,
+            "Y": 1280,
+            "Z": 93696,
+            "Room": -6
+          }
+        },
+        {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 24064,
+            "Y": 256,
+            "Z": 92672,
+            "Room": -7
+          },
+          "Floor": {
+            "X": 24064,
+            "Y": 1280,
+            "Z": 92672,
+            "Room": -6
+          }
+        },
+        {
+          "Comments": "Collisional portals between the UW maze and path to the AW maze.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 39424,
+            "Y": 256,
+            "Z": 93696,
+            "Room": -4
+          },
+          "Floor": {
+            "X": 39424,
+            "Y": 1280,
+            "Z": 93696,
+            "Room": -5
+          }
+        },
+        {
+          "Comments": "Collisional portals between the UZ maze and final room.",
+          "EMType": 83,
+          "Ceiling": {
+            "X": 33280,
+            "Y": 256,
+            "Z": 84480,
+            "Room": -1
+          },
+          "Floor": {
+            "X": 33280,
+            "Y": 1280,
+            "Z": 84480,
+            "Room": -5
+          }
+        },
+        {
+          "Comments": "Move some faces around.",
+          "EMType": 23,
+          "Modifications": [
+            {
+              "RoomNumber": -7,
+              "FaceIndices": [
+                95
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -768
+                },
+                "1": {
+                  "Y": -512
+                }
+              }
+            },
+            {
+              "RoomNumber": -7,
+              "FaceIndices": [
+                60
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "1": {
+                  "Y": -768
+                }
+              }
+            },
+            {
+              "RoomNumber": -7,
+              "FaceIndices": [
+                94
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": 1024
+                },
+                "3": {
+                  "Y": 768
+                }
+              }
+            },
+            {
+              "RoomNumber": -7,
+              "FaceIndices": [
+                59
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": 1024
+                },
+                "1": {
+                  "Y": 768
+                }
+              }
+            },
+            {
+              "RoomNumber": -7,
+              "FaceIndices": [
+                13
+              ],
+              "VertexChanges": {
+                "1": {
+                  "Y": 512
+                },
+                "2": {
+                  "Y": 512
+                }
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                37,
+                5
+              ],
+              "VertexChanges": {
+                "2": {
+                  "Y": 1024
+                },
+                "3": {
+                  "Y": 1024
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Comments": "Change some textures.",
+          "EMType": 21,
+          "TextureMap": {
+            "147": {
+              "-6": {
+                "Rectangles": [
+                  23,
+                  29
+                ]
+              }
+            },
+            "5": {
+              "-1": {
+                "Rectangles": [
+                  62
+                ]
+              },
+              "-4": {
+                "Rectangles": [
+                  13
+                ]
+              },
+              "-5": {
+                "Rectangles": [
+                  145,
+                  324
+                ]
+              }
+            },
+            "588": {
+              "-1": {
+                "Rectangles": [
+                  5,
+                  37
+                ]
+              }
+            },
+            "127": {
+              "-3": {
+                "Rectangles": [
+                  12
+                ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Remove faces no longer required.",
+          "EMType": 22,
+          "GeometryMap": {
+            "-7": {
+              "Rectangles": [
+                14
+              ]
+            },
+            "-6": {
+              "Rectangles": [
+                33
+              ]
+            },
+            "-5": {
+              "Rectangles": [
+                35
+              ]
+            },
+            "-4": {
+              "Rectangles": [
+                2
+              ]
+            },
+            "-3": {
+              "Rectangles": [
+                10,
+                152
+              ]
+            },
+            "-2": {
+              "Rectangles": [
+                8,
+                9,
+                32
+              ]
+            },
+            "-1": {
+              "Rectangles": [
+                4,
+                36
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Flood the pool after the drop and the maze.",
+          "EMType": 2,
+          "RoomNumbers": [
+            -5,
+            -6
+          ]
+        },
+        {
+          "EMType": 51,
+          "TypeID": 59,
+          "Intensity": 5376,
+          "Location": {
+            "X": 33280,
+            "Z": 82432,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Add doors to the final room.",
+          "EMType": 51,
+          "TypeID": 60,
+          "Intensity": 5376,
+          "Location": {
+            "X": 32256,
+            "Z": 82432,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Switch for the doors.",
+          "EMType": 51,
+          "TypeID": 55,
+          "Intensity": 5632,
+          "Location": {
+            "X": 28160,
+            "Z": 90624,
+            "Room": -3,
+            "Angle": 16384
+          }
+        },
+        {
+          "Comments": "Timed swim to Atlantis.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 28160,
+              "Z": 90624,
+              "Room": -3
+            }
+          ],
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": -1,
+            "Actions": [
+              {
+                "Parameter": -3
+              },
+              {
+                "Parameter": -2
+              },
+              {
+                "Action": 8,
+                "Parameter": 20
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Placeholder for default mode.",
+          "EMType": 1000,
+          "HardVariant": {
+            "Comments": "Tight timer in hard mode.",
+            "EMType": 69,
+            "Location": {
+              "X": 28160,
+              "Z": 90624,
+              "Room": -3
+            },
+            "Timer": 28
+          }
+        },
+        {
+          "Comments": "Get rid of the normal end level trigger.",
+          "EMType": 62,
+          "Rooms": [
+            82
+          ]
+        },
+        {
+          "Comments": "Add end level triggers to the final room.",
+          "EMType": 61,
+          "ExpandedLocations": {
+            "Location": {
+              "X": 32256,
+              "Z": 78336,
+              "Room": -1
+            },
+            "ExpandX": 2,
+            "ExpandZ": 1
+          },
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Action": 7
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "A pickup for explorers.",
+          "EMType": 51,
+          "TypeID": 91,
+          "Intensity": 4096,
+          "Location": {
+            "X": 39424,
+            "Y": 1280,
+            "Z": 82432,
+            "Room": -5
+          }
+        },
+        {
+          "Comments": "Auto-generate vertex lighting in the new rooms.",
+          "EMType": 128,
+          "RoomIndices": [
+            -1,
+            -2,
+            -3,
+            -4,
+            -5,
+            -6,
+            -7
+          ]
+        }
+      ],
+      [
+        {
+          "Comments": "Tinnos-style fire room ending.",
+          "EMType": 126,
+          "Tags": [
+            5
+          ],
+          "Location": {
+            "X": 23552,
+            "Y": 256,
+            "Z": 91136
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 5,
+            "Ceiling": 147,
+            "WallAlignment": 4,
+            "Wall4": 147,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 7654
+          },
+          "Lights": [
+            {
+              "X": 1536,
+              "Y": -9216,
+              "Z": 2048,
+              "Intensity1": 4096,
+              "Fade1": 387
+            },
+            {
+              "X": 1536,
+              "Y": -512,
+              "Z": 2048,
+              "Intensity1": 2048,
+              "Fade1": 387
+            }
+          ],
+          "Height": 44,
+          "Width": 3,
+          "Depth": 4
+        },
+        {
+          "EMType": 126,
+          "Location": {
+            "X": 23552,
+            "Y": 2304,
+            "Z": 87040
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 147,
+            "Ceiling": 5,
+            "WallAlignment": 4,
+            "Wall4": 147,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 6144
+          },
+          "Lights": [
+            {
+              "X": 1536,
+              "Y": -1536,
+              "Z": 6144,
+              "Intensity1": 2048,
+              "Fade1": 387
+            },
+            {
+              "X": 1536,
+              "Y": -1536,
+              "Z": 2048,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            }
+          ],
+          "Height": 8,
+          "Width": 3,
+          "Depth": 8,
+          "FloorHeights": {
+            "-4": [
+              9,
+              10,
+              11
+            ]
+          }
+        },
+        {
+          "EMType": 126,
+          "Location": {
+            "X": 23552,
+            "Y": 256,
+            "Z": 87040
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 125,
+            "Ceiling": 125,
+            "WallAlignment": 5,
+            "Wall4": 125,
+            "Wall1": 126,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 6144
+          },
+          "Lights": [
+            {
+              "X": 1536,
+              "Y": -512,
+              "Z": 2048,
+              "Intensity1": 4096,
+              "Fade1": 1024
+            },
+            {
+              "X": 3584,
+              "Y": -768,
+              "Z": 2048,
+              "Intensity1": 3072,
+              "Fade1": 2048
+            }
+          ],
+          "Height": 9,
+          "Width": 5,
+          "Depth": 4,
+          "FloorHeights": {
+            "-1": [
+              9,
+              10,
+              13,
+              14
+            ]
+          }
+        },
+        {
+          "EMType": 126,
+          "Location": {
+            "X": 26624,
+            "Y": 2048,
+            "Z": 84992
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 125,
+            "Ceiling": 125,
+            "WallAlignment": 5,
+            "Wall4": 125,
+            "Wall2": 128,
+            "Wall1": 126,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 6144
+          },
+          "Lights": [
+            {
+              "X": 1536,
+              "Y": -2560,
+              "Z": 4096,
+              "Intensity1": 3072,
+              "Fade1": 2048
+            },
+            {
+              "X": 5632,
+              "Y": -4608,
+              "Z": 4096,
+              "Intensity1": 3072,
+              "Fade1": 2048
+            },
+            {
+              "X": 5120,
+              "Y": -2560,
+              "Z": 2048,
+              "Intensity1": 2500,
+              "Fade1": 2048
+            },
+            {
+              "X": 4608,
+              "Y": -1536,
+              "Z": 6656,
+              "Intensity1": 2500,
+              "Fade1": 2048
+            }
+          ],
+          "Height": 20,
+          "Width": 7,
+          "Depth": 8,
+          "FloorHeights": {
+            "-9": [
+              43,
+              26
+            ],
+            "-8": [
+              20,
+              9
+            ],
+            "-7": [
+              22
+            ],
+            "-6": [
+              37
+            ]
+          }
+        },
+        {
+          "EMType": 126,
+          "HardVariant": {
+            "Comments": "Difficult final jump in hard mode.",
+            "EMType": 126,
+            "Location": {
+              "X": 31744,
+              "Y": 2048,
+              "Z": 84992
+            },
+            "LinkedLocation": {
+              "X": 26112,
+              "Y": -8704,
+              "Z": 92672,
+              "Room": 82
+            },
+            "Textures": {
+              "Floor": 125,
+              "Ceiling": 125,
+              "WallAlignment": 5,
+              "Wall4": 125,
+              "Wall2": 128,
+              "Wall1": 126,
+              "RandomRotationSeed": 18541712
+            },
+            "AmbientLighting": 7680,
+            "DefaultVertex": {
+              "Lighting": 6144
+            },
+            "Lights": [
+              {
+                "X": 5632,
+                "Y": -2560,
+                "Z": 4096,
+                "Intensity1": 3072,
+                "Fade1": 2048
+              },
+              {
+                "X": 1536,
+                "Y": -4608,
+                "Z": 4096,
+                "Intensity1": 3072,
+                "Fade1": 2048
+              },
+              {
+                "X": 2048,
+                "Y": -2560,
+                "Z": 2048,
+                "Intensity1": 2500,
+                "Fade1": 2048
+              },
+              {
+                "X": 2560,
+                "Y": -1536,
+                "Z": 6656,
+                "Intensity1": 2500,
+                "Fade1": 2048
+              }
+            ],
+            "Height": 20,
+            "Width": 7,
+            "Depth": 8,
+            "FloorHeights": {
+              "-6": [
+                14,
+                45
+              ],
+              "-8": [
+                28
+              ],
+              "-9": [
+                25
+              ]
+            }
+          },
+          "Location": {
+            "X": 31744,
+            "Y": 2048,
+            "Z": 84992
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 125,
+            "Ceiling": 125,
+            "WallAlignment": 5,
+            "Wall4": 125,
+            "Wall2": 128,
+            "Wall1": 126,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 6144
+          },
+          "Lights": [
+            {
+              "X": 5632,
+              "Y": -2560,
+              "Z": 4096,
+              "Intensity1": 3072,
+              "Fade1": 2048
+            },
+            {
+              "X": 1536,
+              "Y": -4608,
+              "Z": 4096,
+              "Intensity1": 3072,
+              "Fade1": 2048
+            },
+            {
+              "X": 2048,
+              "Y": -2560,
+              "Z": 2048,
+              "Intensity1": 2500,
+              "Fade1": 2048
+            },
+            {
+              "X": 2560,
+              "Y": -1536,
+              "Z": 6656,
+              "Intensity1": 2500,
+              "Fade1": 2048
+            }
+          ],
+          "Height": 20,
+          "Width": 7,
+          "Depth": 8,
+          "FloorHeights": {
+            "-5": [
+              45
+            ],
+            "-6": [
+              14
+            ],
+            "-8": [
+              28
+            ],
+            "-9": [
+              25
+            ]
+          }
+        },
+        {
+          "EMType": 126,
+          "Location": {
+            "X": 36864,
+            "Z": 87040
+          },
+          "LinkedLocation": {
+            "X": 26112,
+            "Y": -8704,
+            "Z": 92672,
+            "Room": 82
+          },
+          "Textures": {
+            "Floor": 125,
+            "Ceiling": 125,
+            "WallAlignment": 5,
+            "Wall4": 125,
+            "RandomRotationSeed": 18541712
+          },
+          "AmbientLighting": 7680,
+          "DefaultVertex": {
+            "Lighting": 6144
+          },
+          "Lights": [
+            {
+              "X": 1536,
+              "Y": -512,
+              "Z": 2048,
+              "Intensity1": 3072,
+              "Fade1": 2048
+            }
+          ],
+          "Height": 8,
+          "Width": 6,
+          "Depth": 4
+        },
+        {
+          "Comments": "Visibility portals for the new rooms.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": 82,
+              "AdjoiningRoom": -6,
+              "Normal": {
+                "X": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -11008,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -11008,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": -8704,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": -8704,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -6,
+              "AdjoiningRoom": 82,
+              "Normal": {
+                "X": -1
+              },
+              "Vertices": [
+                {
+                  "X": 2048,
+                  "Y": -11008,
+                  "Z": 3072
+                },
+                {
+                  "X": 2048,
+                  "Y": -11008,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": -8704,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": -8704,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -5,
+              "AdjoiningRoom": -6,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 7168
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 5120
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 5120
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 7168
+                }
+              ]
+            },
+            {
+              "BaseRoom": -6,
+              "AdjoiningRoom": -5,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 3072,
+                  "Y": 256,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -5,
+              "AdjoiningRoom": -4,
+              "Normal": {
+                "Y": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 1024
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -4,
+              "AdjoiningRoom": -5,
+              "Normal": {
+                "Y": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 3072
+                },
+                {
+                  "X": 2048,
+                  "Y": 256,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -4,
+              "AdjoiningRoom": -3,
+              "Normal": {
+                "X": -1
+              },
+              "Vertices": [
+                {
+                  "X": 4096,
+                  "Y": -2048,
+                  "Z": 3072
+                },
+                {
+                  "X": 4096,
+                  "Y": -2048,
+                  "Z": 1024
+                },
+                {
+                  "X": 4096,
+                  "Z": 1024
+                },
+                {
+                  "X": 4096,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -3,
+              "AdjoiningRoom": -4,
+              "Normal": {
+                "X": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -2048,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": -2048,
+                  "Z": 5120
+                },
+                {
+                  "X": 1024,
+                  "Z": 5120
+                },
+                {
+                  "X": 1024,
+                  "Z": 3072
+                }
+              ]
+            },
+            {
+              "BaseRoom": -3,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "X": -1
+              },
+              "Vertices": [
+                {
+                  "X": 6144,
+                  "Y": -3072,
+                  "Z": 7168
+                },
+                {
+                  "X": 6144,
+                  "Y": -3072,
+                  "Z": 1024
+                },
+                {
+                  "X": 6144,
+                  "Y": 2048,
+                  "Z": 1024
+                },
+                {
+                  "X": 6144,
+                  "Y": 2048,
+                  "Z": 7168
+                }
+              ]
+            },
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": -3,
+              "Normal": {
+                "X": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -3072,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -3072,
+                  "Z": 7168
+                },
+                {
+                  "X": 1024,
+                  "Y": 2048,
+                  "Z": 7168
+                },
+                {
+                  "X": 1024,
+                  "Y": 2048,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -2,
+              "AdjoiningRoom": -1,
+              "Normal": {
+                "X": -1
+              },
+              "Vertices": [
+                {
+                  "X": 6144,
+                  "Y": -2048,
+                  "Z": 5120
+                },
+                {
+                  "X": 6144,
+                  "Y": -2048,
+                  "Z": 3072
+                },
+                {
+                  "X": 6144,
+                  "Z": 3072
+                },
+                {
+                  "X": 6144,
+                  "Z": 5120
+                }
+              ]
+            },
+            {
+              "BaseRoom": -1,
+              "AdjoiningRoom": -2,
+              "Normal": {
+                "X": 1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -2048,
+                  "Z": 1024
+                },
+                {
+                  "X": 1024,
+                  "Y": -2048,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Z": 1024
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Comments": "Collisional portals.",
+          "EMType": 82,
+          "Portals": {
+            "82": {
+              "-6": [
+                {
+                  "X": 25088,
+                  "Y": -8960,
+                  "Z": 92672,
+                  "Room": 82
+                },
+                {
+                  "X": 25088,
+                  "Y": -8960,
+                  "Z": 93696,
+                  "Room": 82
+                }
+              ]
+            },
+            "-6": {
+              "82": [
+                {
+                  "X": 26112,
+                  "Y": -8960,
+                  "Z": 92672,
+                  "Room": -6
+                },
+                {
+                  "X": 26112,
+                  "Y": -8960,
+                  "Z": 93696,
+                  "Room": -6
+                }
+              ]
+            },
+            "-5": {
+              "-4": [
+                {
+                  "X": 26112,
+                  "Y": 1280,
+                  "Z": 89600,
+                  "Room": -5
+                },
+                {
+                  "X": 26112,
+                  "Y": 1280,
+                  "Z": 88576,
+                  "Room": -5
+                }
+              ]
+            },
+            "-4": {
+              "-3": [
+                {
+                  "X": 28160,
+                  "Z": 89600,
+                  "Room": -4
+                },
+                {
+                  "X": 28160,
+                  "Z": 88576,
+                  "Room": -4
+                }
+              ]
+            },
+            "-3": {
+              "-4": [
+                {
+                  "X": 27136,
+                  "Z": 89600,
+                  "Room": -3
+                },
+                {
+                  "X": 27136,
+                  "Z": 88576,
+                  "Room": -3
+                }
+              ],
+              "-2": [
+                {
+                  "X": 33280,
+                  "Z": 91648,
+                  "Room": -3
+                },
+                {
+                  "X": 33280,
+                  "Z": 90624,
+                  "Room": -3
+                },
+                {
+                  "X": 33280,
+                  "Z": 89600,
+                  "Room": -3
+                },
+                {
+                  "X": 33280,
+                  "Z": 88576,
+                  "Room": -3
+                },
+                {
+                  "X": 33280,
+                  "Z": 87552,
+                  "Room": -3
+                },
+                {
+                  "X": 33280,
+                  "Z": 86528,
+                  "Room": -3
+                }
+              ]
+            },
+            "-2": {
+              "-3": [
+                {
+                  "X": 32256,
+                  "Z": 91648,
+                  "Room": -2
+                },
+                {
+                  "X": 32256,
+                  "Z": 90624,
+                  "Room": -2
+                },
+                {
+                  "X": 32256,
+                  "Z": 89600,
+                  "Room": -2
+                },
+                {
+                  "X": 32256,
+                  "Z": 88576,
+                  "Room": -2
+                },
+                {
+                  "X": 32256,
+                  "Z": 87552,
+                  "Room": -2
+                },
+                {
+                  "X": 32256,
+                  "Z": 86528,
+                  "Room": -2
+                }
+              ],
+              "-1": [
+                {
+                  "X": 38400,
+                  "Z": 89600,
+                  "Room": -2
+                },
+                {
+                  "X": 38400,
+                  "Z": 88576,
+                  "Room": -2
+                }
+              ]
+            },
+            "-1": {
+              "-2": [
+                {
+                  "X": 37376,
+                  "Z": 89600,
+                  "Room": -1
+                },
+                {
+                  "X": 37376,
+                  "Z": 88576,
+                  "Room": -1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 25088,
+            "Y": 256,
+            "Z": 93696,
+            "Room": -6
+          },
+          "Floor": {
+            "X": 25088,
+            "Y": 1280,
+            "Z": 93696,
+            "Room": -5
+          }
+        },
+        {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 25088,
+            "Y": 256,
+            "Z": 92672,
+            "Room": -6
+          },
+          "Floor": {
+            "X": 25088,
+            "Y": 1280,
+            "Z": 92672,
+            "Room": -5
+          }
+        },
+        {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 25088,
+            "Y": 256,
+            "Z": 89600,
+            "Room": -4
+          },
+          "Floor": {
+            "X": 25088,
+            "Y": 1280,
+            "Z": 89600,
+            "Room": -5
+          }
+        },
+        {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 25088,
+            "Y": 256,
+            "Z": 88576,
+            "Room": -4
+          },
+          "Floor": {
+            "X": 25088,
+            "Y": 1280,
+            "Z": 88576,
+            "Room": -5
+          }
+        },
+        {
+          "Comments": "Move some faces around.",
+          "EMType": 23,
+          "Modifications": [
+            {
+              "RoomNumber": -6,
+              "FaceIndices": [
+                69
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "3": {
+                  "Y": -768
+                }
+              }
+            },
+            {
+              "RoomNumber": -6,
+              "FaceIndices": [
+                23
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": -512
+                },
+                "1": {
+                  "Y": -768
+                }
+              }
+            },
+            {
+              "RoomNumber": -6,
+              "FaceIndices": [
+                68
+              ],
+              "VertexChanges": {
+                "2": {
+                  "Y": 768
+                },
+                "3": {
+                  "Y": 1024
+                }
+              }
+            },
+            {
+              "RoomNumber": -6,
+              "FaceIndices": [
+                22
+              ],
+              "VertexChanges": {
+                "0": {
+                  "Y": 1024
+                },
+                "1": {
+                  "Y": 768
+                }
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                39
+              ],
+              "VertexChanges": {
+                "2": {
+                  "Y": 1024
+                },
+                "3": {
+                  "Y": 1024
+                }
+              }
+            },
+            {
+              "RoomNumber": -3,
+              "FaceIndices": [
+                206
+              ],
+              "VertexChanges": {
+                "1": {
+                  "Y": 512
+                },
+                "2": {
+                  "Y": 512
+                }
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                23
+              ],
+              "VertexChanges": {
+                "2": {
+                  "Y": 768
+                },
+                "3": {
+                  "Y": 768
+                }
+              }
+            },
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                30
+              ],
+              "VertexChanges": {
+                "2": {
+                  "Y": -1024
+                },
+                "3": {
+                  "Y": -1024
+                }
+              }
+            }
+          ],
+          "Rotations": [
+            {
+              "RoomNumber": -1,
+              "FaceIndices": [
+                30
+              ],
+              "VertexRemap": {
+                "0": 2,
+                "1": 3,
+                "2": 0,
+                "3": 1
+              }
+            },
+            {
+              "RoomNumber": -3,
+              "FaceIndices": [
+                120,
+                152,
+                24
+              ],
+              "VertexRemap": {
+                "0": 2,
+                "1": 3,
+                "2": 0,
+                "3": 1
+              }
+            },
+            {
+              "RoomNumber": -3,
+              "FaceIndices": [
+                8,
+                33,
+                17,
+                103,
+                40
+              ],
+              "VertexRemap": {
+                "0": 1,
+                "1": 2,
+                "2": 3,
+                "3": 0
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                0,
+                52
+              ],
+              "VertexRemap": {
+                "0": 1,
+                "1": 2,
+                "2": 3,
+                "3": 0
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                163,
+                137,
+                101,
+                130,
+                66,
+                126
+              ],
+              "VertexRemap": {
+                "0": 3,
+                "1": 0,
+                "2": 1,
+                "3": 2
+              }
+            },
+            {
+              "RoomNumber": -2,
+              "FaceIndices": [
+                156,
+                149,
+                108
+              ],
+              "VertexRemap": {
+                "0": 2,
+                "1": 3,
+                "2": 0,
+                "3": 1
+              }
+            }
+          ]
+        },
+        {
+          "Comments": "Change some textures.",
+          "EMType": 21,
+          "TextureMap": {
+            "5": {
+              "-4": {
+                "Rectangles": [
+                  0,
+                  9
+                ]
+              }
+            },
+            "147": {
+              "-5": {
+                "Rectangles": [
+                  10,
+                  14
+                ]
+              }
+            },
+            "127": {
+              "-3": {
+                "Rectangles": [
+                  5
+                ]
+              }
+            },
+            "126": {
+              "-2": {
+                "Rectangles": [
+                  23
+                ]
+              }
+            },
+            "149": {
+              "-3": {
+                "Rectangles": [
+                  0,
+                  80,
+                  174
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  42,
+                  172
+                ]
+              }
+            },
+            "138": {
+              "-3": {
+                "Rectangles": [
+                  72,
+                  96,
+                  141
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  95,
+                  81
+                ]
+              }
+            },
+            "65": {
+              "-3": {
+                "Rectangles": [
+                  127,
+                  107
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  97,
+                  19,
+                  86
+                ]
+              }
+            },
+            "84": {
+              "-3": {
+                "Rectangles": [
+                  132,
+                  74
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  26,
+                  62
+                ]
+              }
+            },
+            "81": {
+              "-3": {
+                "Rectangles": [
+                  17,
+                  54
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  156
+                ]
+              }
+            },
+            "78": {
+              "-3": {
+                "Rectangles": [
+                  8,
+                  33,
+                  111,
+                  86,
+                  120,
+                  152,
+                  40
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  52,
+                  72,
+                  178,
+                  163,
+                  137,
+                  149,
+                  108
+                ]
+              }
+            },
+            "72": {
+              "-3": {
+                "Rectangles": [
+                  24
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  0,
+                  101
+                ]
+              }
+            },
+            "75": {
+              "-3": {
+                "Rectangles": [
+                  68,
+                  137,
+                  198,
+                  103
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  130
+                ]
+              }
+            },
+            "73": {
+              "-3": {
+                "Rectangles": [
+                  63,
+                  143,
+                  179
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  66,
+                  126
+                ]
+              }
+            },
+            "79": {
+              "-2": {
+                "Rectangles": [
+                  33,
+                  120,
+                  12
+                ]
+              }
+            },
+            "63": {
+              "-3": {
+                "Rectangles": [
+                  98
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  64,
+                  122,
+                  118
+                ]
+              }
+            },
+            "85": {
+              "-3": {
+                "Rectangles": [
+                  189,
+                  164
+                ]
+              },
+              "-2": {
+                "Rectangles": [
+                  70,
+                  91
+                ]
+              }
+            },
+            "588": {
+              "-1": {
+                "Rectangles": [
+                  30,
+                  39
+                ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Remove faces no longer required.",
+          "EMType": 22,
+          "GeometryMap": {
+            "-4": {
+              "Rectangles": [
+                28,
+                29,
+                36,
+                37
+              ]
+            },
+            "-3": {
+              "Rectangles": [
+                21,
+                22,
+                28,
+                29,
+                209,
+                197,
+                185,
+                178,
+                173,
+                158,
+                208,
+                196,
+                184,
+                176,
+                172,
+                157,
+                207,
+                195,
+                183,
+                176,
+                171,
+                156,
+                193,
+                194,
+                181,
+                182,
+                169,
+                170,
+                154,
+                155
+              ]
+            },
+            "-2": {
+              "Rectangles": [
+                169,
+                170,
+                160,
+                161,
+                2,
+                3,
+                4,
+                5,
+                6,
+                14,
+                15,
+                16,
+                17,
+                18,
+                24,
+                25,
+                28,
+                29,
+                30,
+                31,
+                32,
+                35,
+                36,
+                37,
+                38,
+                39,
+                44,
+                45,
+                46,
+                47
+              ]
+            },
+            "-1": {
+              "Rectangles": [
+                2,
+                3,
+                8,
+                9,
+                31,
+                38
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Add death tiles",
+          "EMType": 70,
+          "Locations": [
+            {
+              "X": 28160,
+              "Y": 2048,
+              "Z": 87552,
+              "Room": -3
+            },
+            {
+              "X": 28160,
+              "Y": 2048,
+              "Z": 88576,
+              "Room": -3
+            },
+            {
+              "X": 28160,
+              "Y": 2048,
+              "Z": 89600,
+              "Room": -3
+            },
+            {
+              "X": 28160,
+              "Y": 2048,
+              "Z": 90624,
+              "Room": -3
+            },
+            {
+              "X": 28160,
+              "Y": 2048,
+              "Z": 91648,
+              "Room": -3
+            },
+            {
+              "X": 29184,
+              "Y": 2048,
+              "Z": 90624,
+              "Room": -3
+            },
+            {
+              "X": 29184,
+              "Z": 89600,
+              "Room": -3
+            },
+            {
+              "X": 29184,
+              "Y": 2048,
+              "Z": 88576,
+              "Room": -3
+            },
+            {
+              "X": 29184,
+              "Y": 2048,
+              "Z": 87552,
+              "Room": -3
+            },
+            {
+              "X": 29184,
+              "Y": 2048,
+              "Z": 86528,
+              "Room": -3
+            },
+            {
+              "X": 30208,
+              "Y": 2048,
+              "Z": 86528,
+              "Room": -3
+            },
+            {
+              "X": 30208,
+              "Y": -256,
+              "Z": 87552,
+              "Room": -3
+            },
+            {
+              "X": 30208,
+              "Y": 2048,
+              "Z": 88576,
+              "Room": -3
+            },
+            {
+              "X": 30208,
+              "Y": 2048,
+              "Z": 89600,
+              "Room": -3
+            },
+            {
+              "X": 30208,
+              "Y": 2048,
+              "Z": 90624,
+              "Room": -3
+            },
+            {
+              "X": 30208,
+              "Y": 2048,
+              "Z": 91648,
+              "Room": -3
+            },
+            {
+              "X": 31232,
+              "Y": 2048,
+              "Z": 91648,
+              "Room": -3
+            },
+            {
+              "X": 32256,
+              "Y": 2048,
+              "Z": 91648,
+              "Room": -3
+            },
+            {
+              "X": 31232,
+              "Y": 512,
+              "Z": 90624,
+              "Room": -3
+            },
+            {
+              "X": 31232,
+              "Y": 2048,
+              "Z": 89600,
+              "Room": -3
+            },
+            {
+              "X": 31232,
+              "Y": 2048,
+              "Z": 88576,
+              "Room": -3
+            },
+            {
+              "X": 31232,
+              "Y": 2048,
+              "Z": 87552,
+              "Room": -3
+            },
+            {
+              "X": 31232,
+              "Y": 2048,
+              "Z": 86528,
+              "Room": -3
+            },
+            {
+              "X": 32256,
+              "Y": 2048,
+              "Z": 86528,
+              "Room": -3
+            },
+            {
+              "X": 32256,
+              "Y": 2048,
+              "Z": 87552,
+              "Room": -3
+            },
+            {
+              "X": 33280,
+              "Y": 2048,
+              "Z": 86528,
+              "Room": -2
+            },
+            {
+              "X": 33280,
+              "Y": 2048,
+              "Z": 87552,
+              "Room": -2
+            },
+            {
+              "X": 34304,
+              "Y": 2048,
+              "Z": 86528,
+              "Room": -2
+            },
+            {
+              "X": 34304,
+              "Y": 2048,
+              "Z": 87552,
+              "Room": -2
+            },
+            {
+              "X": 35328,
+              "Y": -256,
+              "Z": 86528,
+              "Room": -2
+            },
+            {
+              "X": 36352,
+              "Y": 2048,
+              "Z": 86528,
+              "Room": -2
+            },
+            {
+              "X": 37376,
+              "Y": 2048,
+              "Z": 86528,
+              "Room": -2
+            },
+            {
+              "X": 37376,
+              "Y": 2048,
+              "Z": 87552,
+              "Room": -2
+            },
+            {
+              "X": 36352,
+              "Y": 2048,
+              "Z": 87552,
+              "Room": -2
+            },
+            {
+              "X": 35328,
+              "Y": 2048,
+              "Z": 87552,
+              "Room": -2
+            },
+            {
+              "X": 33280,
+              "Y": 2048,
+              "Z": 88576,
+              "Room": -2
+            },
+            {
+              "X": 34304,
+              "Y": 2048,
+              "Z": 88576,
+              "Room": -2
+            },
+            {
+              "X": 35328,
+              "Y": 2048,
+              "Z": 88576,
+              "Room": -2
+            },
+            {
+              "X": 36352,
+              "Y": 2048,
+              "Z": 88576,
+              "Room": -2
+            },
+            {
+              "X": 37376,
+              "Y": 2048,
+              "Z": 88576,
+              "Room": -2
+            },
+            {
+              "X": 37376,
+              "Y": 2048,
+              "Z": 89600,
+              "Room": -2
+            },
+            {
+              "X": 36352,
+              "Y": 2048,
+              "Z": 89600,
+              "Room": -2
+            },
+            {
+              "X": 35328,
+              "Z": 89600,
+              "Room": -2
+            },
+            {
+              "X": 34304,
+              "Y": 2048,
+              "Z": 89600,
+              "Room": -2
+            },
+            {
+              "X": 33280,
+              "Y": 2048,
+              "Z": 89600,
+              "Room": -2
+            },
+            {
+              "X": 32256,
+              "Y": 2048,
+              "Z": 89600,
+              "Room": -3
+            },
+            {
+              "X": 32256,
+              "Y": 2048,
+              "Z": 90624,
+              "Room": -3
+            },
+            {
+              "X": 33280,
+              "Y": 2048,
+              "Z": 90624,
+              "Room": -2
+            },
+            {
+              "X": 34304,
+              "Y": 2048,
+              "Z": 90624,
+              "Room": -2
+            },
+            {
+              "X": 34304,
+              "Y": 2048,
+              "Z": 91648,
+              "Room": -2
+            },
+            {
+              "X": 35328,
+              "Y": 2048,
+              "Z": 90624,
+              "Room": -2
+            },
+            {
+              "X": 35328,
+              "Y": 2048,
+              "Z": 91648,
+              "Room": -2
+            },
+            {
+              "X": 36352,
+              "Y": 2048,
+              "Z": 90624,
+              "Room": -2
+            },
+            {
+              "X": 36352,
+              "Y": 2048,
+              "Z": 91648,
+              "Room": -2
+            },
+            {
+              "X": 37376,
+              "Y": 2048,
+              "Z": 91648,
+              "Room": -2
+            }
+          ]
+        },
+        {
+          "Comments": "Add a lava sound source.",
+          "EMType": 101,
+          "Source": {
+            "X": 32782,
+            "Y": 2048,
+            "Z": 89059,
+            "SoundID": 148,
+            "Flags": 192
+          }
+        },
+        {
+          "Comments": "Add some embers.",
+          "EMType": 51,
+          "TypeID": 177,
+          "Location": {
+            "X": 32256,
+            "Y": 2048,
+            "Z": 90624,
+            "Room": -2
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 177,
+          "Location": {
+            "X": 36352,
+            "Y": 2048,
+            "Z": 87552,
+            "Room": -2
+          }
+        },
+        {
+          "Comments": "Trigger the embers.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 26112,
+              "Z": 89600,
+              "Room": -4
+            },
+            {
+              "X": 26112,
+              "Z": 88576,
+              "Room": -4
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": -2
+              },
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Get rid of the normal end level trigger.",
+          "EMType": 62,
+          "Rooms": [
+            82
+          ]
+        },
+        {
+          "Comments": "Add end level triggers to the final room.",
+          "EMType": 61,
+          "ExpandedLocations": {
+            "Location": {
+              "X": 40448,
+              "Z": 88576,
+              "Room": -1
+            },
+            "ExpandX": 1,
+            "ExpandZ": 2
+          },
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Action": 7
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Add doors to the final room.",
+          "EMType": 51,
+          "TypeID": 59,
+          "Intensity": 6400,
+          "Location": {
+            "X": 37376,
+            "Z": 89600,
+            "Room": -1,
+            "Angle": -16384
+          }
+        },
+        {
+          "EMType": 51,
+          "TypeID": 60,
+          "Intensity": 5376,
+          "Location": {
+            "X": 37376,
+            "Z": 88576,
+            "Room": -1,
+            "Angle": -16384
+          }
+        },
+        {
+          "Comments": "Add a switch for the doors.",
+          "EMType": 51,
+          "TypeID": 55,
+          "Intensity": -1,
+          "Location": {
+            "X": 28160,
+            "Z": 86528,
+            "Room": -3,
+            "Angle": -32768
+          }
+        },
+        {
+          "Comments": "Trigger the doors.",
+          "EMType": 61,
+          "HardVariant": {
+            "Comments": "Timed run in hard mode.",
+            "EMType": 61,
+            "EntityLocation": -1,
+            "Trigger": {
+              "TrigType": 2,
+              "Mask": 31,
+              "Timer": 18,
+              "SwitchOrKeyRef": -1,
+              "Actions": [
+                {
+                  "Parameter": -3
+                },
+                {
+                  "Parameter": -2
+                },
+                {
+                  "Action": 8,
+                  "Parameter": 16
+                }
+              ]
+            }
+          },
+          "EntityLocation": -1,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": -1,
+            "Actions": [
+              {
+                "Parameter": -3
+              },
+              {
+                "Parameter": -2
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Add a camera (default mode only).",
+          "EMType": 65,
+          "HardVariant": {
+            "EMType": 1000
+          },
+          "Camera": {
+            "X": 31744,
+            "Y": 256,
+            "Z": 90624,
+            "Room": -2
+          },
+          "LookAtItem": -2,
+          "AttachToItems": [
+            -1
+          ],
+          "CameraAction": {
+            "Value": 5,
+            "Timer": 5,
+            "Continue": true
+          }
+        },
+        {
+          "Comments": "Flood the second room.",
+          "EMType": 2,
+          "RoomNumbers": [
+            -5
+          ]
+        },
+        {
+          "Comments": "Generate light.",
+          "EMType": 128,
+          "RoomIndices": [
+            -1,
+            -2,
+            -3,
+            -4,
+            -5,
+            -6
+          ]
+        }
+      ]
+    ]
+  ],
+  "OneOf": [
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default lever texture in room 11.",
+          "EMType": 21,
+          "Tags": [
+            1
+          ],
+          "TextureMap": {
+            "55": {
+              "11": {
+                "Rectangles": [
+                  10
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 38400,
+              "Y": -5632,
+              "Z": 25088,
+              "Room": 11,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "11": {
+                  "Rectangles": [
+                    16
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 38400,
+              "Y": -5632,
+              "Z": 24064,
+              "Room": 11,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "11": {
+                  "Rectangles": [
+                    14
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 38400,
+              "Y": -5632,
+              "Z": 25088,
+              "Room": 11,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "11": {
+                  "Rectangles": [
+                    9
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 38400,
+              "Y": -5632,
+              "Z": 24064,
+              "Room": 11,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "11": {
+                  "Rectangles": [
+                    6
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 38400,
+              "Y": -5632,
+              "Z": 23040,
+              "Room": 11,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "11": {
+                  "Rectangles": [
+                    2
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 38400,
+              "Y": -5632,
+              "Z": 23040,
+              "Room": 11,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "11": {
+                  "Rectangles": [
+                    3
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 39424,
+              "Y": -5632,
+              "Z": 23040,
+              "Room": 11,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "11": {
+                  "Rectangles": [
+                    13
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 39424,
+              "Y": -5632,
+              "Z": 23040,
+              "Room": 11
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "11": {
+                  "Rectangles": [
+                    15
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 41472,
+              "Y": -5632,
+              "Z": 25088,
+              "Room": 11,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "11": {
+                  "Rectangles": [
+                    47
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 5,
+            "Location": {
+              "X": 42496,
+              "Y": -5632,
+              "Z": 23040,
+              "Room": 11,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "11": {
+                  "Rectangles": [
+                    51
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default lever texture in room 12.",
+          "EMType": 21,
+          "Tags": [
+            1
+          ],
+          "TextureMap": {
+            "3": {
+              "12": {
+                "Rectangles": [
+                  37
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 10,
+            "Location": {
+              "X": 55808,
+              "Y": -5376,
+              "Z": 31232,
+              "Room": 12,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "12": {
+                  "Rectangles": [
+                    36
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 10,
+            "Location": {
+              "X": 55808,
+              "Y": -5376,
+              "Z": 32256,
+              "Room": 12,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "12": {
+                  "Rectangles": [
+                    40
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 10,
+            "Location": {
+              "X": 55808,
+              "Y": -5376,
+              "Z": 32256,
+              "Room": 12
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "12": {
+                  "Rectangles": [
+                    41
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 10,
+            "Location": {
+              "X": 56832,
+              "Y": -5376,
+              "Z": 32256,
+              "Room": 12
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "12": {
+                  "Rectangles": [
+                    54
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 10,
+            "Location": {
+              "X": 56832,
+              "Y": -5376,
+              "Z": 30208,
+              "Room": 5,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "5": {
+                  "Rectangles": [
+                    39
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 10,
+            "Location": {
+              "X": 56832,
+              "Y": -5376,
+              "Z": 29184,
+              "Room": 5,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "5": {
+                  "Rectangles": [
+                    36
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 10,
+            "Location": {
+              "X": 56832,
+              "Y": -5376,
+              "Z": 28160,
+              "Room": 5,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "5": {
+                  "Rectangles": [
+                    33
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 10,
+            "Location": {
+              "X": 56832,
+              "Y": -7936,
+              "Z": 36352,
+              "Room": 12
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "12": {
+                  "Rectangles": [
+                    63
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 10,
+            "Location": {
+              "X": 56832,
+              "Y": -7936,
+              "Z": 36352,
+              "Room": 12,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "12": {
+                  "Rectangles": [
+                    70
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default lever texture in room 14.",
+          "EMType": 21,
+          "Tags": [
+            1
+          ],
+          "TextureMap": {
+            "2": {
+              "14": {
+                "Rectangles": [
+                  12
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 13,
+            "Location": {
+              "X": 58880,
+              "Y": -6144,
+              "Z": 44544,
+              "Room": 14,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "14": {
+                  "Rectangles": [
+                    10
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 13,
+            "Location": {
+              "X": 57856,
+              "Y": -6144,
+              "Z": 44544,
+              "Room": 14,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "14": {
+                  "Rectangles": [
+                    6
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 13,
+            "Location": {
+              "X": 57856,
+              "Y": -6144,
+              "Z": 44544,
+              "Room": 14
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "14": {
+                  "Rectangles": [
+                    7
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 13,
+            "Location": {
+              "X": 58880,
+              "Y": -6144,
+              "Z": 44544,
+              "Room": 14
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "14": {
+                  "Rectangles": [
+                    11
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "Comments": "Rotate the face to suit the lever.",
+            "EMType": 23,
+            "Rotations": [
+              {
+                "RoomNumber": 14,
+                "FaceIndices": [
+                  11
+                ],
+                "VertexRemap": {
+                  "0": 3,
+                  "1": 0,
+                  "2": 1,
+                  "3": 2
+                }
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 13,
+            "Location": {
+              "X": 60928,
+              "Y": -3840,
+              "Z": 44544,
+              "Room": 21
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "21": {
+                  "Rectangles": [
+                    3
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 13,
+            "Location": {
+              "X": 60928,
+              "Y": -3840,
+              "Z": 44544,
+              "Room": 21,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "21": {
+                  "Rectangles": [
+                    2
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 13,
+            "Location": {
+              "X": 61952,
+              "Y": -3840,
+              "Z": 44544,
+              "Room": 21,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Remove the default lever texture in room 11.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "21": {
+                  "Rectangles": [
+                    14
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default lever texture in room 27.",
+          "EMType": 21,
+          "Tags": [
+            1
+          ],
+          "TextureMap": {
+            "3": {
+              "27": {
+                "Rectangles": [
+                  6
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Effectively NOOP.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "27": {
+                  "Rectangles": [
+                    6
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 53760,
+              "Y": -4352,
+              "Z": 56832,
+              "Room": 27,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "27": {
+                  "Rectangles": [
+                    22
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 53760,
+              "Y": -3072,
+              "Z": 61952,
+              "Room": 27
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "27": {
+                  "Rectangles": [
+                    33
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "Comments": "Rotate the face to suit the lever.",
+            "EMType": 23,
+            "Rotations": [
+              {
+                "RoomNumber": 27,
+                "FaceIndices": [
+                  33
+                ],
+                "VertexRemap": {
+                  "0": 3,
+                  "1": 0,
+                  "2": 1,
+                  "3": 2
+                }
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 54784,
+              "Y": -3072,
+              "Z": 61952,
+              "Room": 17
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "17": {
+                  "Rectangles": [
+                    33
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 55808,
+              "Y": -3072,
+              "Z": 61952,
+              "Room": 17
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "17": {
+                  "Rectangles": [
+                    56
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 57856,
+              "Y": -2816,
+              "Z": 61952,
+              "Room": 17
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "17": {
+                  "Rectangles": [
+                    114
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "Comments": "Rotate the face to suit the lever.",
+            "EMType": 23,
+            "Rotations": [
+              {
+                "RoomNumber": 17,
+                "FaceIndices": [
+                  114
+                ],
+                "VertexRemap": {
+                  "0": 3,
+                  "1": 0,
+                  "2": 1,
+                  "3": 2
+                }
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 59904,
+              "Y": -2304,
+              "Z": 62976,
+              "Room": 54,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "54": {
+                  "Rectangles": [
+                    7
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 24,
+            "Location": {
+              "X": 59904,
+              "Y": -2304,
+              "Z": 62976,
+              "Room": 54,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "54": {
+                  "Rectangles": [
+                    11
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default lever texture in room 40.",
+          "EMType": 21,
+          "Tags": [
+            1
+          ],
+          "TextureMap": {
+            "2": {
+              "40": {
+                "Rectangles": [
+                  9
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Effectively NOOP.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "40": {
+                  "Rectangles": [
+                    9
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 40,
+            "Location": {
+              "X": 46592,
+              "Y": -3840,
+              "Z": 51712,
+              "Room": 40,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "40": {
+                  "Rectangles": [
+                    12
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 40,
+            "Location": {
+              "X": 46592,
+              "Y": -3840,
+              "Z": 50688,
+              "Room": 40,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "40": {
+                  "Rectangles": [
+                    11
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 40,
+            "Location": {
+              "X": 46592,
+              "Y": -3840,
+              "Z": 50688,
+              "Room": 40,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "40": {
+                  "Rectangles": [
+                    5
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 40,
+            "Location": {
+              "X": 46592,
+              "Y": -3840,
+              "Z": 51712,
+              "Room": 40,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "40": {
+                  "Rectangles": [
+                    8
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default lever texture in room 44.",
+          "EMType": 21,
+          "Tags": [
+            1
+          ],
+          "TextureMap": {
+            "3": {
+              "44": {
+                "Rectangles": [
+                  17
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Effectively NOOP.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "44": {
+                  "Rectangles": [
+                    17
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 41,
+            "Location": {
+              "X": 76288,
+              "Y": -11008,
+              "Z": 20992,
+              "Room": 44,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "44": {
+                  "Rectangles": [
+                    12
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 41,
+            "Location": {
+              "X": 76288,
+              "Y": -11008,
+              "Z": 20992,
+              "Room": 44
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "44": {
+                  "Rectangles": [
+                    15
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default lever texture in room 64.",
+          "EMType": 21,
+          "Tags": [
+            1
+          ],
+          "TextureMap": {
+            "125": {
+              "64": {
+                "Rectangles": [
+                  3
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Effectively NOOP.",
+            "EMType": 21,
+            "TextureMap": {
+              "127": {
+                "64": {
+                  "Rectangles": [
+                    3
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 59,
+            "Location": {
+              "X": 55808,
+              "Y": -10240,
+              "Z": 93696,
+              "Room": 64
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "127": {
+                "64": {
+                  "Rectangles": [
+                    4
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default lever texture in room 64.",
+          "EMType": 21,
+          "Tags": [
+            1
+          ],
+          "TextureMap": {
+            "125": {
+              "67": {
+                "Rectangles": [
+                  38
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Effectively NOOP.",
+            "EMType": 21,
+            "TextureMap": {
+              "127": {
+                "67": {
+                  "Rectangles": [
+                    38
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 66,
+            "Location": {
+              "X": 51712,
+              "Y": -9984,
+              "Z": 95744,
+              "Room": 67,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "127": {
+                "67": {
+                  "Rectangles": [
+                    46
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 66,
+            "Location": {
+              "X": 51712,
+              "Y": -9984,
+              "Z": 95744,
+              "Room": 67,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "127": {
+                "67": {
+                  "Rectangles": [
+                    36
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 66,
+            "Location": {
+              "X": 50688,
+              "Y": -9984,
+              "Z": 95744,
+              "Room": 67,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "127": {
+                "67": {
+                  "Rectangles": [
+                    20
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 66,
+            "Location": {
+              "X": 50688,
+              "Y": -9984,
+              "Z": 96768,
+              "Room": 67,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "127": {
+                "67": {
+                  "Rectangles": [
+                    23
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 66,
+            "Location": {
+              "X": 50688,
+              "Y": -9984,
+              "Z": 97792,
+              "Room": 67,
+              "Angle": -16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "127": {
+                "67": {
+                  "Rectangles": [
+                    26
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 66,
+            "Location": {
+              "X": 51712,
+              "Y": -9984,
+              "Z": 97792,
+              "Room": 67,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "127": {
+                "67": {
+                  "Rectangles": [
+                    41
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 66,
+            "Location": {
+              "X": 51712,
+              "Y": -9984,
+              "Z": 97792,
+              "Room": 67,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "127": {
+                "67": {
+                  "Rectangles": [
+                    47
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "Leader": [
+        {
+          "Comments": "Remove the default lever texture in room 89.",
+          "EMType": 21,
+          "Tags": [
+            1
+          ],
+          "TextureMap": {
+            "1": {
+              "89": {
+                "Rectangles": [
+                  2
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "Followers": [
+        [
+          {
+            "Comments": "Effectively NOOP.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "89": {
+                  "Rectangles": [
+                    2
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 79,
+            "Location": {
+              "X": 75264,
+              "Y": -6656,
+              "Z": 51712,
+              "Room": 89,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "89": {
+                  "Rectangles": [
+                    3
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential lever location.",
+            "EMType": 41,
+            "EntityIndex": 79,
+            "Location": {
+              "X": 76288,
+              "Y": -6656,
+              "Z": 51712,
+              "Room": 89,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "Add a lever texture.",
+            "EMType": 21,
+            "TextureMap": {
+              "56": {
+                "89": {
+                  "Rectangles": [
+                    17
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      ]
+    }
+  ],
+  "ConditionalAllWithin": [
+    {
+      "Condition": {
+        "Comments": "If the portal between rooms 21 and 17 has been reduced, a key is now needed to pass.",
+        "ConditionType": 23,
+        "Location": {
+          "X": 60928,
+          "Y": -3584,
+          "Z": 49664,
+          "Room": 21
+        }
+      },
+      "OnTrue": [
+        [
+          {
+            "Comments": "Potential key location.",
+            "EMType": 51,
+            "TypeID": 129,
+            "Intensity": 4096,
+            "Location": {
+              "X": 53760,
+              "Y": -7168,
+              "Z": 24064,
+              "Room": 3
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Put the key in the shack.",
+            "EMType": 51,
+            "TypeID": 129,
+            "Flags": 256,
+            "Intensity": 4096,
+            "Location": {
+              "X": 68096,
+              "Y": -7168,
+              "Z": 28160,
+              "Room": 94
+            }
+          },
+          {
+            "Comments": "Trigger the key once the fuses are used (same method as pistols).",
+            "EMType": 68,
+            "Locations": [
+              {
+                "X": 66048,
+                "Y": -7296,
+                "Z": 32256,
+                "Room": 96
+              },
+              {
+                "X": 67072,
+                "Y": -7168,
+                "Z": 32256,
+                "Room": 96
+              },
+              {
+                "X": 68096,
+                "Y": -7296,
+                "Z": 32256,
+                "Room": 97
+              },
+              {
+                "X": 69120,
+                "Y": -7296,
+                "Z": 32256,
+                "Room": 97
+              },
+              {
+                "X": 70144,
+                "Y": -7680,
+                "Z": 32256,
+                "Room": 98
+              },
+              {
+                "X": 71168,
+                "Y": -7808,
+                "Z": 32256,
+                "Room": 98
+              },
+              {
+                "X": 72192,
+                "Y": -7424,
+                "Z": 32256,
+                "Room": 98
+              },
+              {
+                "X": 73216,
+                "Y": -7808,
+                "Z": 32256,
+                "Room": 98
+              }
+            ],
+            "Actions": [
+              {
+                "Parameter": -1
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "Comments": "Potential key location.",
+            "EMType": 51,
+            "TypeID": 129,
+            "Intensity": 4096,
+            "Location": {
+              "X": 61952,
+              "Y": -10496,
+              "Z": 29184,
+              "Room": 32
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential key location.",
+            "EMType": 51,
+            "TypeID": 129,
+            "Intensity": 4096,
+            "Location": {
+              "X": 77312,
+              "Y": -10240,
+              "Z": 24064,
+              "Room": 42
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential key location.",
+            "EMType": 51,
+            "TypeID": 129,
+            "Intensity": 4096,
+            "Location": {
+              "X": 82432,
+              "Y": -10240,
+              "Z": 27136,
+              "Room": 35
+            }
+          }
+        ],
+        [
+          {
+            "Comments": "Potential key location.",
+            "EMType": 51,
+            "TypeID": 129,
+            "Intensity": 4096,
+            "Location": {
+              "X": 99840,
+              "Y": -7808,
+              "Z": 31232,
+              "Room": 37
+            }
+          }
+        ]
+      ]
+    }
+  ],
   "ConditionalAll": [
     {
       "Condition": {
@@ -46,8 +7620,76 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if key item #42 is in its default position. If not, ensure it is visible and add a replacement item on the conveyor belt.",
+        "ConditionType": 0,
+        "EntityIndex": 42,
+        "X": 78336,
+        "Y": -6656,
+        "Z": 43520,
+        "Room": 45
+      },
+      "OnFalse": [
+        {
+          "Comments": "Make it visible.",
+          "EMType": 48,
+          "EntityIndex": 42,
+          "Invisible": false
+        },
+        {
+          "Comments": "Add some ammo where the fuse used to be.",
+          "EMType": 51,
+          "TypeID": 89,
+          "Flags": 256,
+          "Intensity": 4096,
+          "Location": {
+            "X": 78336,
+            "Y": -6656,
+            "Z": 43520,
+            "Room": 45
+          }
+        },
+        {
+          "Comments": "Remove the fuse static mesh from the conveyor belt.",
+          "EMType": 25,
+          "ClearFromRooms": {
+            "36": [
+              45
+            ]
+          }
+        },
+        {
+          "Comments": "Add a sprite instead for the ammo.",
+          "EMType": 31,
+          "Texture": 4,
+          "Vertex": {
+            "Lighting": 4096
+          },
+          "Locations": [
+            {
+              "X": 78487,
+              "Y": -6912,
+              "Z": 48631,
+              "Room": 45
+            }
+          ]
+        },
+        {
+          "Comments": "Replace the switch trigger item.",
+          "EMType": 66,
+          "EntityLocations": [
+            79
+          ],
+          "Action": {
+            "Parameter": -1
+          }
+        }
+      ]
     }
   ],
+  "ConditionalOneOf": [],
   "Mirrored": [
     {
       "Comments": "Moves door 62 so that it can open properly, otherwise Lara has to glitch through.",

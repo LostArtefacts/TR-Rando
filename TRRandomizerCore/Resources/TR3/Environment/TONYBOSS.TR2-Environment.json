@@ -6,5 +6,6 @@
   "OneOf": [],
   "ConditionalAllWithin": [],
   "ConditionalAll": [],
+  "ConditionalOneOf": [],
   "Mirrored": []
 }

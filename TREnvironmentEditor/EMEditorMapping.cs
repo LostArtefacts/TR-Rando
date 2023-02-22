@@ -22,7 +22,8 @@ namespace TREnvironmentEditor
         public List<List<EMEditorSet>> AllWithin { get; set; }
         public List<EMEditorGroupedSet> OneOf { get; set; }
         public List<EMConditionalEditorSet> ConditionalAllWithin { get; set; }
-        public List<EMConditionalSingleEditorSet> ConditionalAll { get; set; }        
+        public List<EMConditionalSingleEditorSet> ConditionalAll { get; set; }
+        public List<EMConditionalGroupedSet> ConditionalOneOf { get; set; }
         public EMEditorSet Mirrored { get; set; }
         public Dictionary<ushort, ushort> AlternativeTextures { get; set; }
 
@@ -35,6 +36,7 @@ namespace TREnvironmentEditor
             AllWithin = new List<List<EMEditorSet>>();
             ConditionalAllWithin = new List<EMConditionalEditorSet>();
             OneOf = new List<EMEditorGroupedSet>();
+            ConditionalOneOf = new List<EMConditionalGroupedSet>();
             Mirrored = new EMEditorSet();
         }
 
@@ -65,38 +67,15 @@ namespace TREnvironmentEditor
                 return;
             }
 
-            if (All != null)
-            {
-                All.RemapTextures(AlternativeTextures);
-            }
-            if (ConditionalAll != null)
-            {
-                ConditionalAll.ForEach(s => s.RemapTextures(AlternativeTextures));
-            }
-            if (NonPurist != null)
-            {
-                NonPurist.RemapTextures(AlternativeTextures);
-            }
-            if (Any != null)
-            {
-                Any.ForEach(s => s.RemapTextures(AlternativeTextures));
-            }
-            if (AllWithin != null)
-            {
-                AllWithin.ForEach(a => a.ForEach(s => s.RemapTextures(AlternativeTextures)));
-            }
-            if (ConditionalAllWithin != null)
-            {
-                ConditionalAllWithin.ForEach(s => s.RemapTextures(AlternativeTextures));
-            }
-            if (OneOf != null)
-            {
-                OneOf.ForEach(s => s.RemapTextures(AlternativeTextures));
-            }
-            if (Mirrored != null)
-            {
-                Mirrored.RemapTextures(AlternativeTextures);
-            }
+            All?.RemapTextures(AlternativeTextures);
+            ConditionalAll?.ForEach(s => s.RemapTextures(AlternativeTextures));
+            NonPurist?.RemapTextures(AlternativeTextures);
+            Any?.ForEach(s => s.RemapTextures(AlternativeTextures));
+            AllWithin?.ForEach(a => a.ForEach(s => s.RemapTextures(AlternativeTextures)));
+            ConditionalAllWithin?.ForEach(s => s.RemapTextures(AlternativeTextures));
+            OneOf?.ForEach(s => s.RemapTextures(AlternativeTextures));
+            ConditionalOneOf?.ForEach(s => s.RemapTextures(AlternativeTextures));
+            Mirrored?.RemapTextures(AlternativeTextures);
         }
     }
 }

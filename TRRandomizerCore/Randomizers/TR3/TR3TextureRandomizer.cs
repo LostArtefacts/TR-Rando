@@ -174,7 +174,17 @@ namespace TRRandomizerCore.Randomizers
                 _persistentWireColour = _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
             }
 
-            _wireframeData.Values.ToList().ForEach(d => d.HighlightLadders = Settings.UseWireframeLadders);
+            foreach (WireframeData data in _wireframeData.Values.ToList())
+            {
+                data.HighlightLadders = Settings.UseWireframeLadders;
+                data.HighlightTriggers = data.HighlightDeathTiles = Settings.ShowWireframeTriggers;
+                data.SolidInteractables = Settings.UseSolidInteractableWireframing;
+                foreach (SpecialTextureHandling special in data.SpecialTextures)
+                {
+                    List<SpecialTextureMode> modes = WireframeData.GetDrawModes(special.Type);
+                    special.Mode = modes[_generator.Next(0, modes.Count)];
+                }
+            }
         }
 
         public string GetSourceVariant(AbstractTextureSource source)
@@ -260,9 +270,9 @@ namespace TRRandomizerCore.Randomizers
             return null;
         }
 
-        private Color GetWireframeVariant()
+        private Color GetWireframeVariant(bool overridePersistent = false)
         {
-            return Settings.PersistTextureVariants ?
+            return Settings.PersistTextureVariants && !overridePersistent ?
                 _persistentWireColour :
                 _wireframeColours[_generator.Next(0, _wireframeColours.Length)];
         }
@@ -326,6 +336,26 @@ namespace TRRandomizerCore.Randomizers
                             {
                                 data.HighlightColour = _outer.GetWireframeVariant();
                                 data.SolidLara = _outer.IsSolidLaraLevel(level);
+                            }
+
+                            if (_outer.Settings.ShowWireframeTriggerColours)
+                            {
+                                do
+                                {
+                                    data.TriggerColour = _outer.GetWireframeVariant(true);
+                                }
+                                while (!ColorUtilities.TestWireframeContrast(data.TriggerColour, data.HighlightColour));
+                                do
+                                {
+                                    data.DeathColour = _outer.GetWireframeVariant(true);
+                                }
+                                while (!ColorUtilities.TestWireframeContrast(data.DeathColour, data.HighlightColour)
+                                    || !ColorUtilities.TestWireframeContrast(data.DeathColour, data.TriggerColour));
+                            }
+                            else
+                            {
+                                data.TriggerColour = data.HighlightColour;
+                                data.DeathColour = data.HighlightColour;
                             }
 
                             if (_outer.Settings.UseDifferentWireframeColours)

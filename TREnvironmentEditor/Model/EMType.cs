@@ -9,6 +9,7 @@
         Drain = 3,
         Ceiling = 4,
         Click = 5,
+        Slant = 7,
 
         // Texture types 21-40
         Reface = 21,
@@ -19,6 +20,11 @@
         AddFace = 26,
         MirrorStaticMesh = 27,
         MirrorObjectTexture = 28,
+        OverwriteTexture = 29,
+        MoveStaticMesh = 30,
+        AddRoomSprite = 31,
+        SwapFace = 32,
+        ImportTexture = 33,
 
         // Entity types 41-60
         MoveSlot = 41,
@@ -33,6 +39,8 @@
         AdjustEntityPositions = 50,
         AddEntity = 51,
         ConvertWheelDoor = 52,
+        MoveSecret = 53,
+        SwapGroupedSlots = 54,
 
         // Trigger types 61-80
         Trigger = 61,
@@ -52,6 +60,8 @@
         HorizontalCollisionalPortal = 82,
         VerticalCollisionalPortal = 83,
         AdjustVisibilityPortal = 84,
+        ReplaceCollisionalPortal = 85,
+        RemoveCollisionalPortal = 86,
 
         // Sound types 101-120
         AddSoundSource = 101,
@@ -64,12 +74,17 @@
         CopyRoom = 123,
         CopyVertexAttributes = 124,
         ImportRoom = 125,
+        CreateRoom = 126,
+        CreateWall = 127,
+        GenerateLight = 128,
+        MoveCamera = 129,
 
         // Models
         ImportModel = 141,
         MirrorModel = 142,
         ConvertSpriteSequence = 143,
         ConvertModel = 144,
+        ImportNonGraphicsModel = 145,
 
         // NOOP/Placeholder
         NOOP = 1000

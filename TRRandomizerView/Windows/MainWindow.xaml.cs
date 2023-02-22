@@ -408,6 +408,11 @@ namespace TRRandomizerView.Windows
             }
         }
 
+        private void ResetSettingsCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editorControl.ResetSettings();
+        }
+
         private void DevelopmentModeCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             _developmentModeMenuItem.IsChecked = _editorControl.DevelopmentMode = !_editorControl.DevelopmentMode;

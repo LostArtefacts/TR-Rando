@@ -181,6 +181,9 @@
       {
         "Comments": "Drain the Offshore Rig rooms.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           0,
           1,
@@ -249,6 +252,9 @@
       {
         "Comments": "Drain the pulley room.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           43,
           45
@@ -288,6 +294,9 @@
       {
         "Comments": "Ladder for blue key card pit.",
         "EMType": 0,
+        "Tags": [
+          3
+        ],
         "TextureMap": {
           "1925": {
             "52": {
@@ -322,6 +331,9 @@
       {
         "Comments": "Drain the submarine pool and adjoining rooms.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           20,
           66,
@@ -349,6 +361,9 @@
       {
         "Comments": "Ladder for the submarine pit.",
         "EMType": 0,
+        "Tags": [
+          3
+        ],
         "TextureMap": {
           "1925": {
             "20": {
@@ -383,6 +398,9 @@
       {
         "Comments": "Another ladder for the submarine pit.",
         "EMType": 0,
+        "Tags": [
+          3
+        ],
         "TextureMap": {
           "1925": {
             "20": {
@@ -459,7 +477,8 @@
         "CameraAction": {
           "Value": 37123,
           "Timer": 3,
-          "Once": true
+          "Once": true,
+          "MoveTimer": 8
         }
       },
       {
@@ -593,6 +612,9 @@
       {
         "Comments": "Drain one of the shallow pools towards level end.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           3
         ],
@@ -608,6 +630,9 @@
       {
         "Comments": "Drain one of the shallow pools towards level end.",
         "EMType": 3,
+        "Tags": [
+          2
+        ],
         "RoomNumbers": [
           9
         ],
@@ -626,6 +651,9 @@
         {
           "Comments": "Potential new position for the button to kill the underwater fan.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 69,
           "Location": {
             "X": 41472,
@@ -640,6 +668,9 @@
         {
           "Comments": "Potential new position for the button to kill the underwater fan.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 69,
           "Location": {
             "X": 41472,
@@ -654,6 +685,9 @@
         {
           "Comments": "Potential new position for the button to kill the underwater fan.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 69,
           "Location": {
             "X": 41472,
@@ -668,6 +702,9 @@
         {
           "Comments": "Potential new position for the button to kill the underwater fan.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 69,
           "Location": {
             "X": 42496,
@@ -682,6 +719,9 @@
         {
           "Comments": "Potential new position for the button to kill the underwater fan.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 69,
           "Location": {
             "X": 43520,
@@ -696,6 +736,9 @@
         {
           "Comments": "Potential new position for the button to kill the underwater fan.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 69,
           "Location": {
             "X": 43520,
@@ -709,6 +752,9 @@
         {
           "Comments": "Potential new position for the button to kill the underwater fan.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 69,
           "Location": {
             "X": 42496,
@@ -876,6 +922,9 @@
         {
           "Comments": "Potential new position for the blue keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 90,
           "Location": {
             "X": 33280,
@@ -889,6 +938,9 @@
         {
           "Comments": "Potential new position for the blue keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 90,
           "Location": {
             "X": 20992,
@@ -903,6 +955,9 @@
         {
           "Comments": "Potential new position for the blue keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 90,
           "Location": {
             "X": 20992,
@@ -916,6 +971,9 @@
         {
           "Comments": "Potential new position for the blue keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 90,
           "Location": {
             "X": 32256,
@@ -929,6 +987,9 @@
         {
           "Comments": "Potential new position for the blue keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 90,
           "Location": {
             "X": 29184,
@@ -964,6 +1025,9 @@
         {
           "Comments": "Potential new position for the switch above the submarine pool.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 27,
           "Location": {
             "X": 40448,
@@ -977,6 +1041,9 @@
         {
           "Comments": "Potential new position for the switch above the submarine pool.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 27,
           "Location": {
             "X": 40448,
@@ -991,6 +1058,9 @@
         {
           "Comments": "Potential new position for the switch above the submarine pool.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 27,
           "Location": {
             "X": 41472,
@@ -1005,6 +1075,9 @@
         {
           "Comments": "Potential new position for the switch above the submarine pool.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 27,
           "Location": {
             "X": 41472,
@@ -1018,6 +1091,9 @@
         {
           "Comments": "Potential new position for the switch above the submarine pool.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 27,
           "Location": {
             "X": 41472,
@@ -1032,6 +1108,9 @@
         {
           "Comments": "Potential new position for the switch above the submarine pool.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 27,
           "Location": {
             "X": 62976,
@@ -1053,6 +1132,9 @@
         {
           "Comments": "Potential new position for the circuit board slot and pushable block.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 55,
           "Location": {
             "X": 65024,
@@ -1076,6 +1158,9 @@
         {
           "Comments": "Potential new position for the circuit board slot and pushable block.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 55,
           "Location": {
             "X": 60928,
@@ -1099,6 +1184,9 @@
         {
           "Comments": "Potential new position for the circuit board slot and pushable block.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 55,
           "Location": {
             "X": 59904,
@@ -1122,6 +1210,9 @@
         {
           "Comments": "Potential new position for the circuit board slot and pushable block.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 55,
           "Location": {
             "X": 59904,
@@ -1147,6 +1238,9 @@
         {
           "Comments": "Potential new position for the circuit board slot and pushable block.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 55,
           "Location": {
             "X": 59904,
@@ -1172,6 +1266,9 @@
         {
           "Comments": "Potential new position for the circuit board slot and pushable block.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 55,
           "Location": {
             "X": 59904,
@@ -1198,6 +1295,9 @@
         {
           "Comments": "Potential new position for the switch in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 60,
           "Location": {
             "X": 69120,
@@ -1212,6 +1312,9 @@
         {
           "Comments": "Potential new position for the switch in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 60,
           "Location": {
             "X": 67072,
@@ -1225,6 +1328,9 @@
         {
           "Comments": "Potential new position for the switch in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 60,
           "Location": {
             "X": 67072,
@@ -1239,6 +1345,9 @@
         {
           "Comments": "Potential new position for the switch in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 60,
           "Location": {
             "X": 67072,
@@ -1253,6 +1362,9 @@
         {
           "Comments": "Potential new position for the switch in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 60,
           "Location": {
             "X": 67072,
@@ -1266,6 +1378,9 @@
         {
           "Comments": "Potential new position for the switch in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 60,
           "Location": {
             "X": 68096,
@@ -1279,6 +1394,9 @@
         {
           "Comments": "Potential new position for the switch in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 60,
           "Location": {
             "X": 69120,
@@ -1292,6 +1410,9 @@
         {
           "Comments": "Potential new position for the switch in room 31.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 60,
           "Location": {
             "X": 69120,
@@ -1308,6 +1429,9 @@
         {
           "Comments": "Potential new position for the red keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 8,
           "Location": {
             "X": 47616,
@@ -1322,6 +1446,9 @@
         {
           "Comments": "Potential new position for the red keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 8,
           "Location": {
             "X": 46592,
@@ -1335,6 +1462,9 @@
         {
           "Comments": "Potential new position for the red keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 8,
           "Location": {
             "X": 43520,
@@ -1349,6 +1479,9 @@
         {
           "Comments": "Potential new position for the red keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 8,
           "Location": {
             "X": 46592,
@@ -1363,6 +1496,9 @@
         {
           "Comments": "Potential new position for the red keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 8,
           "Location": {
             "X": 46592,
@@ -1376,6 +1512,9 @@
         {
           "Comments": "Potential new position for the red keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 8,
           "Location": {
             "X": 49664,
@@ -1390,6 +1529,9 @@
         {
           "Comments": "Potential new position for the red keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 8,
           "Location": {
             "X": 46592,
@@ -1404,6 +1546,9 @@
         {
           "Comments": "Potential new position for the red keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 8,
           "Location": {
             "X": 44544,
@@ -1418,6 +1563,9 @@
         {
           "Comments": "Potential new position for the red keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 8,
           "Location": {
             "X": 41472,
@@ -1432,6 +1580,9 @@
         {
           "Comments": "Potential new position for the red keycard slot.",
           "EMType": 41,
+          "Tags": [
+            1
+          ],
           "EntityIndex": 8,
           "Location": {
             "X": 41472,
@@ -1450,6 +1601,9 @@
         {
           "Comments": "Drain the rooms at the start.",
           "EMType": 3,
+          "Tags": [
+            2
+          ],
           "RoomNumbers": [
             41,
             51,
@@ -1495,6 +1649,9 @@
         {
           "Comments": "Make a ladder to get out of room 41.",
           "EMType": 0,
+          "Tags": [
+            3
+          ],
           "TextureMap": {
             "1911": {
               "41": {
@@ -1516,6 +1673,9 @@
         {
           "Comments": "Flipmap ladder.",
           "EMType": 0,
+          "Tags": [
+            3
+          ],
           "TextureMap": {
             "1911": {
               "90": {
@@ -1598,6 +1758,9 @@
           {
             "Comments": "Potential new position for the door button.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 70,
             "Location": {
               "X": 45568,
@@ -1611,6 +1774,9 @@
           {
             "Comments": "Potential new position for the door button.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 70,
             "Location": {
               "X": 46592,
@@ -1624,6 +1790,9 @@
           {
             "Comments": "Potential new position for the door button.",
             "EMType": 41,
+            "Tags": [
+              1
+            ],
             "EntityIndex": 70,
             "Location": {
               "X": 46592,
@@ -1756,6 +1925,9 @@
         {
           "Comments": "Make a ladder to get in and out.",
           "EMType": 0,
+          "Tags": [
+            3
+          ],
           "TextureMap": {
             "1911": {
               "96": {
@@ -1974,5 +2146,6 @@
       ]
     }
   ],
+  "ConditionalOneOf": [],
   "Mirrored": []
 }

@@ -1126,6 +1126,12 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             MirrorObjectTextures(textureReferences, level.ObjectTextures);
+            
+            // Models such as doors may use textures also used on walls, but
+            // these models aren't mirrored so the texture will end up being
+            // upside down. Rotate the relevant mesh faces.
+            MirrorDependentFaces(level.Models, textureReferences,
+                modelID => TRMeshUtilities.GetModelMeshes(level, (TREntities)modelID));
         }
 
         private void MirrorTextures(TR2Level level)
@@ -1292,6 +1298,30 @@ namespace TREnvironmentEditor.Model.Types
                 {
                     Swap(texture.Texture.Vertices, 0, 3);
                     Swap(texture.Texture.Vertices, 1, 2);
+                }
+            }
+        }
+
+        private void MirrorDependentFaces(TRModel[] models, ISet<ushort> textureReferences, Func<uint, TRMesh[]> meshAction)
+        {
+            foreach (TRModel model in models)
+            {
+                TRMesh[] meshes = meshAction.Invoke(model.ID);
+                if (meshes == null)
+                {
+                    continue;
+                }
+
+                foreach (TRMesh mesh in meshes)
+                {
+                    foreach (TRFace4 f in mesh.TexturedRectangles)
+                    {
+                        if (textureReferences.Contains(f.Texture))
+                        {
+                            Swap(f.Vertices, 0, 2);
+                            Swap(f.Vertices, 1, 3);
+                        }
+                    }
                 }
             }
         }
