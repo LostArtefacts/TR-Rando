@@ -11,8 +11,8 @@
     <None Remove="Properties\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MSTest.TestAdapter" version="2.1.0" />
-    <PackageReference Include="MSTest.TestFramework" version="2.1.0" />
+    <PackageReference Include="MSTest.TestAdapter" version="3.0.2" />
+    <PackageReference Include="MSTest.TestFramework" version="3.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TRFDControl\TRFDControl.csproj" />
