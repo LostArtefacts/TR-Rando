@@ -95,7 +95,7 @@ namespace TRRandomizerView.Updates
                 }
 
                 string latestVersion = releaseInfo["tag_name"].ToString();
-                if (latestVersion.Equals(currentVersion))
+                if (string.Compare(latestVersion, currentVersion, true) == 0)
                 {
                     return false;
                 }
