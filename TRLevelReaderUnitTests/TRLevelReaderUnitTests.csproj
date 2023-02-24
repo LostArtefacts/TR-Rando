@@ -6,6 +6,11 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter" version="2.1.0" />
     <PackageReference Include="MSTest.TestFramework" version="2.1.0" />
   </ItemGroup>
@@ -13,8 +18,5 @@
     <ProjectReference Include="..\TRFDControl\TRFDControl.csproj" />
     <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj" />
     <ProjectReference Include="..\TRRandomizerCore\TRRandomizerCore.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 </Project>
