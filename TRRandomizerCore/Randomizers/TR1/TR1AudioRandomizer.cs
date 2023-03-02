@@ -233,7 +233,7 @@ namespace TRRandomizerCore.Randomizers
                         TR1SFXDefinition nextDefinition = otherDefinitions[_generator.Next(0, otherDefinitions.Count)];
                         if (nextDefinition != definition)
                         {
-                            short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition);
+                            short soundDetailsIndex = ImportSoundEffect(level.Data, nextDefinition, definition.PrimaryCategory);
                             if (soundDetailsIndex != -1)
                             {
                                 // Only change it if the import succeeded
@@ -248,7 +248,7 @@ namespace TRRandomizerCore.Randomizers
             SoundUtilities.ResortSoundIndices(level.Data);
         }
 
-        private short ImportSoundEffect(TRLevel level, TR1SFXDefinition definition)
+        private short ImportSoundEffect(TRLevel level, TR1SFXDefinition definition, TRSFXGeneralCategory category)
         {
             if (definition.SoundData.SampleIndices.Count == 0)
             {
@@ -277,6 +277,12 @@ namespace TRRandomizerCore.Randomizers
                 Sample = (ushort)level.SampleIndices.Length,
                 Volume = defDetails.Volume
             };
+
+            if (category == TRSFXGeneralCategory.StandardWeaponFiring
+                || category == TRSFXGeneralCategory.FastWeaponFiring)
+            {
+                newDetails.LoopingMode = 1; // OneShotRewound
+            }
 
             level.Samples = levelSamples.ToArray();
             level.NumSamples = (uint)levelSamples.Count;
