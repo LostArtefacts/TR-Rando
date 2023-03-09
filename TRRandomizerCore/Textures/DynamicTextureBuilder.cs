@@ -132,6 +132,7 @@ namespace TRRandomizerCore.Textures
                 if (level.Is(TRLevelNames.MIDAS))
                 {
                     modelIDs.Add(TREntities.LaraMiscAnim_H);
+                    modelIDs.Add(TREntities.LaraPonytail_H_U);
                 }
             }
 
@@ -289,6 +290,15 @@ namespace TRRandomizerCore.Textures
                 {
                     // If packing failed, just exclude this particular mesh.
                     excludedMeshes.Add(meshes[0]);
+                }
+            }
+            else if (modelID == TREntities.LaraPonytail_H_U)
+            {
+                // For Midas "golden" hair, we only want the additional meshes that may have
+                // been created by outfit rando.
+                for (int i = 0; i < 6; i++)
+                {
+                    excludedMeshes.Add(meshes[i]);
                 }
             }
 

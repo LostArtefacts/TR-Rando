@@ -159,7 +159,7 @@ namespace TRRandomizerCore.Helpers
                 clone.ColouredRectangles[i] = new TRFace4
                 {
                     Texture = mesh.ColouredRectangles[i].Texture,
-                    Vertices = mesh.ColouredRectangles[i].Vertices
+                    Vertices = new List<ushort>(mesh.ColouredRectangles[i].Vertices).ToArray()
                 };
             }
 
@@ -168,7 +168,7 @@ namespace TRRandomizerCore.Helpers
                 clone.ColouredTriangles[i] = new TRFace3
                 {
                     Texture = mesh.ColouredTriangles[i].Texture,
-                    Vertices = mesh.ColouredTriangles[i].Vertices
+                    Vertices = new List<ushort>(mesh.ColouredTriangles[i].Vertices).ToArray()
                 };
             }
 
@@ -177,7 +177,7 @@ namespace TRRandomizerCore.Helpers
                 clone.TexturedRectangles[i] = new TRFace4
                 {
                     Texture = mesh.TexturedRectangles[i].Texture,
-                    Vertices = mesh.TexturedRectangles[i].Vertices
+                    Vertices = new List<ushort>(mesh.TexturedRectangles[i].Vertices).ToArray()
                 };
             }
 
@@ -186,7 +186,7 @@ namespace TRRandomizerCore.Helpers
                 clone.TexturedTriangles[i] = new TRFace3
                 {
                     Texture = mesh.TexturedTriangles[i].Texture,
-                    Vertices = mesh.TexturedTriangles[i].Vertices
+                    Vertices = new List<ushort>(mesh.TexturedTriangles[i].Vertices).ToArray()
                 };
             }
 
@@ -197,6 +197,40 @@ namespace TRRandomizerCore.Helpers
                     X = mesh.Vertices[i].X,
                     Y = mesh.Vertices[i].Y,
                     Z = mesh.Vertices[i].Z
+                };
+            }
+
+            return clone;
+        }
+
+        public TRMesh CloneMeshAsColoured(TRMesh mesh, ushort paletteIndex)
+        {
+            TRMesh clone = CloneMesh(mesh);
+
+            clone.ColouredRectangles = new TRFace4[mesh.NumTexturedRectangles];
+            clone.ColouredTriangles = new TRFace3[mesh.NumTexturedTriangles];
+            clone.NumColouredRectangles = mesh.NumTexturedRectangles;
+            clone.NumColouredTriangles = mesh.NumTexturedTriangles;
+            clone.NumTexturedRectangles = 0;
+            clone.NumTexturedTriangles = 0;
+            clone.TexturedRectangles = new TRFace4[] { };
+            clone.TexturedTriangles = new TRFace3[] { };
+
+            for (int i = 0; i < mesh.NumTexturedRectangles; i++)
+            {
+                clone.ColouredRectangles[i] = new TRFace4
+                {
+                    Texture = paletteIndex,
+                    Vertices = new List<ushort>(mesh.TexturedRectangles[i].Vertices).ToArray()
+                };
+            }
+
+            for (int i = 0; i < mesh.NumTexturedTriangles; i++)
+            {
+                clone.ColouredTriangles[i] = new TRFace3
+                {
+                    Texture = paletteIndex,
+                    Vertices = new List<ushort>(mesh.TexturedTriangles[i].Vertices).ToArray()
                 };
             }
 

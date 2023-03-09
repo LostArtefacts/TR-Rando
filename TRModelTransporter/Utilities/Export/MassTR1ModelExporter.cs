@@ -44,7 +44,7 @@ namespace TRModelTransporter.Utilities
             {
                 TREntities.Pistols_M_H, TREntities.Shotgun_M_H, TREntities.Magnums_M_H, TREntities.Uzis_M_H,
                 TREntities.Lara, TREntities.Bat, TREntities.Bear, TREntities.Wolf,
-                TREntities.FallingBlock, TREntities.DartEmitter, TREntities.WallSwitch
+                TREntities.FallingBlock, TREntities.DartEmitter, TREntities.WallSwitch, TREntities.LaraMiscAnim_H_General
             },
             [TRLevelNames.VILCABAMBA] = new List<TREntities>
             {

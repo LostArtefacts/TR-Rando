@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using TREnvironmentEditor.Helpers;
@@ -10,12 +11,14 @@ using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model.Sound;
+using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Meshes;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Textures;
+using TRTexture16Importer.Helpers;
 using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Randomizers
@@ -25,6 +28,7 @@ namespace TRRandomizerCore.Randomizers
         private static readonly Version _minBraidCutsceneVersion = new Version(2, 13, 0);
         private static readonly short[] _barefootSfxIDs = new short[] { 0, 4 };
         private static readonly double _mauledLaraChance = (double)1 / 3;
+        private static readonly double _partialGymChance = (double)1 / 3;
         private static readonly List<string> _permittedGymLevels = new List<string>
         {
             TRLevelNames.CAVES, TRLevelNames.VILCABAMBA, TRLevelNames.FOLLY,
@@ -35,7 +39,7 @@ namespace TRRandomizerCore.Randomizers
 
         private List<TR1ScriptedLevel> _braidLevels;
         private List<TR1ScriptedLevel> _invisibleLevels;
-        private List<TR1ScriptedLevel> _gymLevels;
+        private List<TR1ScriptedLevel> _gymLevels, _partialGymLevels;
         private List<TR1ScriptedLevel> _mauledLevels;
 
         private Dictionary<short, List<byte[]>> _barefootSfx;
@@ -111,6 +115,15 @@ namespace TRRandomizerCore.Randomizers
                 if (_gymLevels.Count > 0)
                 {
                     _gymLevels = _gymLevels.RandomSelection(_generator, _generator.Next(1, _gymLevels.Count + 1));
+                    _partialGymLevels = new List<TR1ScriptedLevel>();
+                    for (int i = _gymLevels.Count - 1; i >= 0; i--)
+                    {
+                        if (_generator.NextDouble() < _partialGymChance)
+                        {
+                            _partialGymLevels.Add(_gymLevels[i]);
+                            _gymLevels.RemoveAt(i);
+                        }
+                    }
                 }
 
                 // Cache Lara's barefoot SFX from the original Gym.
@@ -173,6 +186,11 @@ namespace TRRandomizerCore.Randomizers
             return _gymLevels != null && _gymLevels.Contains(lvl);
         }
 
+        private bool IsPartialGymLevel(TR1ScriptedLevel lvl)
+        {
+            return _partialGymLevels != null && _partialGymLevels.Contains(lvl);
+        }
+
         private bool IsMauledLevel(TR1ScriptedLevel lvl)
         {
             return _mauledLevels.Contains(lvl);
@@ -190,6 +208,11 @@ namespace TRRandomizerCore.Randomizers
             private static readonly List<TREntities> _ponytailEntities = new List<TREntities>
             {
                 TREntities.LaraPonytail_H_U
+            };
+
+            private static readonly List<TREntities> _mauledEntities = new List<TREntities>
+            {
+                TREntities.LaraMiscAnim_H_Valley
             };
 
             private static readonly Dictionary<TREntities, Dictionary<EMTextureFaceType, int[]>> _headAmendments = new Dictionary<TREntities, Dictionary<EMTextureFaceType, int[]>>
@@ -253,6 +276,10 @@ namespace TRRandomizerCore.Randomizers
                     {
                         ConvertToGymOutfit(level);
                     }                   
+                    else if (_outer.IsPartialGymLevel(level.Script))
+                    {
+                        ConvertToPartialGymOutfit(level);
+                    }
                     else if (_outer.IsMauledLevel(level.Script))
                     {
                         ConvertToMauledOutfit(level);
@@ -288,6 +315,11 @@ namespace TRRandomizerCore.Randomizers
                 }
 
                 importer.Import();
+
+                if (Array.Find(level.Data.Entities, e => e.TypeID == (short)TREntities.MidasHand_N) != null)
+                {
+                    CreateGoldenBraid(level);
+                }
 
                 // Find the texture references for the plain parts of imported hair
                 TRMesh[] ponytailMeshes = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraPonytail_H_U);
@@ -337,6 +369,27 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
             
+            private void CreateGoldenBraid(TR1CombinedLevel level)
+            {
+                TRMesh goldenHips = TRMeshUtilities.GetModelFirstMesh(level.Data, TREntities.LaraMiscAnim_H);
+                ushort goldPalette = goldenHips.ColouredRectangles[0].Texture;
+
+                TRModel ponytail = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.LaraPonytail_H_U);
+                TRMesh[] ponytailMeshes = TRMeshUtilities.GetModelMeshes(level.Data, ponytail);
+                MeshEditor editor = new MeshEditor();
+                foreach (TRMesh mesh in ponytailMeshes)
+                {
+                    TRMesh clonedMesh = editor.CloneMeshAsColoured(mesh, goldPalette);
+                    TRMeshUtilities.InsertMesh(level.Data, clonedMesh);
+                }
+
+                List<TRMeshTreeNode> nodes = level.Data.MeshTrees.ToList();
+                nodes.AddRange(TRMeshUtilities.GetModelMeshTrees(level.Data, ponytail));
+                level.Data.MeshTrees = nodes.ToArray();
+                level.Data.NumMeshTrees += ponytail.NumMeshes;
+                ponytail.NumMeshes *= 2;
+            }
+
             private void HideEntities(TR1CombinedLevel level, IEnumerable<TREntities> entities)
             {
                 MeshEditor editor = new MeshEditor();
@@ -364,10 +417,12 @@ namespace TRRandomizerCore.Randomizers
 
             private void AmendBackpack(TR1CombinedLevel level)
             {
-                bool trexPresent = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.TRex) != null;
+                bool trexPresent = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.TRex) != null ||
+                    (level.IsCutScene && Array.Find(level.ParentLevel.Data.Models, m => m.ID == (uint)TREntities.TRex) != null);
                 bool braidLevel = _outer.IsBraidLevel(level.Script) || (level.IsCutScene && _outer.IsBraidLevel(level.ParentLevel.Script));
                 bool invisibleLevel = _outer.IsInvisibleLevel(level.Script) || (level.IsCutScene && _outer.IsInvisibleLevel(level.ParentLevel.Script));
-                bool gymLevel = _outer.IsGymLevel(level.Script); // Cutscenes can never be gym levels
+                bool gymLevel = _outer.IsGymLevel(level.Script) || _outer.IsPartialGymLevel(level.Script) ||
+                    (level.IsCutScene && (_outer.IsGymLevel(level.ParentLevel.Script) || _outer.IsPartialGymLevel(level.ParentLevel.Script)));
 
                 if (!braidLevel || invisibleLevel || (gymLevel && !trexPresent))
                 {
@@ -432,12 +487,13 @@ namespace TRRandomizerCore.Randomizers
 
             private void ConvertToGymOutfit(TR1CombinedLevel level)
             {
-                if (Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.TRex) != null)
+                if (Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.TRex) != null
+                    || (level.IsCutScene && Array.Find(level.ParentLevel.Data.Models, m => m.ID == (uint)TREntities.TRex) != null))
                 {
                     return;
                 }
 
-                TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara);
+                TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, level.IsCutScene ? TREntities.CutsceneActor1 : TREntities.Lara);
                 TRMesh[] laraPistol = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraPistolAnim_H);
                 TRMesh[] laraShotgun = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraShotgunAnim_H);
                 TRMesh[] laraMagnums = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraMagnumAnim_H);
@@ -467,45 +523,60 @@ namespace TRRandomizerCore.Randomizers
                     });
 
                     // Holstered pistols
-                    CopyMeshParts(level.Data, new MeshCopyData
+                    if (laraPistol != null)
                     {
-                        BaseMesh = laraPistol[thigh],
-                        NewMesh = laraMisc[thigh],
-                        ColourFaceCopies = Enumerable.Range(4, 6),
-                        TextureFaceCopies = Enumerable.Range(5, 5)
-                    });
+                        CopyMeshParts(level.Data, new MeshCopyData
+                        {
+                            BaseMesh = laraPistol[thigh],
+                            NewMesh = laraMisc[thigh],
+                            ColourFaceCopies = Enumerable.Range(4, 6),
+                            TextureFaceCopies = Enumerable.Range(5, 5)
+                        });
+                    }
 
                     // Holstered magnums
-                    CopyMeshParts(level.Data, new MeshCopyData
+                    if (laraMagnums != null)
                     {
-                        BaseMesh = laraMagnums[thigh],
-                        NewMesh = laraMisc[thigh],
-                        ColourFaceCopies = Enumerable.Range(4, 6),
-                        TextureFaceCopies = Enumerable.Range(3, 5)
-                    });
+                        CopyMeshParts(level.Data, new MeshCopyData
+                        {
+                            BaseMesh = laraMagnums[thigh],
+                            NewMesh = laraMisc[thigh],
+                            ColourFaceCopies = Enumerable.Range(4, 6),
+                            TextureFaceCopies = Enumerable.Range(3, 5)
+                        });
+                    }
 
                     // Holstered uzis
-                    CopyMeshParts(level.Data, new MeshCopyData
+                    if (laraUzis != null)
                     {
-                        BaseMesh = laraUzis[thigh],
-                        NewMesh = laraMisc[thigh],
-                        ColourFaceCopies = Enumerable.Range(4, 7),
-                        TextureFaceCopies = Enumerable.Range(3, 19)
-                    });
+                        CopyMeshParts(level.Data, new MeshCopyData
+                        {
+                            BaseMesh = laraUzis[thigh],
+                            NewMesh = laraMisc[thigh],
+                            ColourFaceCopies = Enumerable.Range(4, 7),
+                            TextureFaceCopies = Enumerable.Range(3, 19)
+                        });
+                    }
                 }
 
                 // Don't forget the shotgun on her back
-                CopyMeshParts(level.Data, new MeshCopyData
+                if (laraShotgun != null)
                 {
-                    BaseMesh = laraShotgun[7],
-                    NewMesh = laraMisc[7],
-                    TextureFaceCopies = Enumerable.Range(8, 12)
-                });
+                    CopyMeshParts(level.Data, new MeshCopyData
+                    {
+                        BaseMesh = laraShotgun[7],
+                        NewMesh = laraMisc[7],
+                        TextureFaceCopies = Enumerable.Range(8, 12)
+                    });
+                }
 
                 // Replace Lara's footstep SFX. This is done independently of Audio rando in case that is not enabled.
                 // The original volume from Gym is a bit much, so we just increase each slightly.
                 foreach (short soundID in _outer._barefootSfx.Keys)
                 {
+                    if (level.Data.SoundMap[soundID] == -1)
+                        continue;
+
                     TRSoundDetails footstepDetails = level.Data.SoundDetails[level.Data.SoundMap[soundID]];
                     footstepDetails.Volume += 3072;
 
@@ -521,6 +592,103 @@ namespace TRRandomizerCore.Randomizers
                             }
                         }
                     }
+                }
+
+                if (level.HasCutScene)
+                {
+                    TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                    {
+                        Level = level.CutSceneLevel.Data,
+                        LevelName = level.CutSceneLevel.Name,
+                        ClearUnusedSprites = false,
+                        EntitiesToImport = new List<TREntities> { TREntities.LaraMiscAnim_H_General },
+                        DataFolder = _outer.GetResourcePath(@"TR1\Models")
+                    };
+
+                    string remapPath = _outer.GetResourcePath(@"TR1\Textures\Deduplication\" + level.CutSceneLevel.Name + "-TextureRemap.json");
+                    if (File.Exists(remapPath))
+                    {
+                        importer.TextureRemapPath = remapPath;
+                    }
+
+                    importer.Import();
+                    ConvertToGymOutfit(level.CutSceneLevel);
+                }
+            }
+
+            private void ConvertToPartialGymOutfit(TR1CombinedLevel level)
+            {
+                if (Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.TRex) != null
+                    || (level.IsCutScene && Array.Find(level.ParentLevel.Data.Models, m => m.ID == (uint)TREntities.TRex) != null))
+                {
+                    return;
+                }
+
+                TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, level.IsCutScene ? TREntities.CutsceneActor1 : TREntities.Lara);
+                TRMesh[] laraShotgun = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraShotgunAnim_H);
+                TRMesh[] laraMisc = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraMiscAnim_H);
+
+                // Just the torso
+                TRMeshUtilities.DuplicateMesh(level.Data, lara[7], laraMisc[7]);
+                
+                using (TR1TexturePacker packer = new TR1TexturePacker(level.Data))
+                {
+                    // Replace the blue parts on Lara's hips with skin tone
+                    List<int> faces = new List<int> { 5, 6, 7 };
+                    foreach (int face in faces)
+                    {
+                        Dictionary<TexturedTile, List<TexturedTileSegment>> segments = packer.GetObjectTextureSegments(new List<int> { lara[0].TexturedRectangles[face].Texture });
+                        foreach (TexturedTile tile in segments.Keys)
+                        {
+                            int index = -1;
+                            Rectangle rect = segments[tile].First().Bounds;
+                            tile.BitmapGraphics.Scan(rect, (c, x, y) =>
+                            {
+                                if (y - rect.Y < 2 || face == 7)
+                                {
+                                    if (c.A != 0 && index == -1)
+                                    {
+                                        // Top-left is skin tone in each of these cases.
+                                        index = level.Data.Images8[tile.Index].Pixels[y * 256 + x];
+                                    }
+
+                                    level.Data.Images8[tile.Index].Pixels[y * 256 + x] = (byte)(c.A == 0 ? 0 : index);
+                                }
+                                return c;
+                            });
+                        }
+                    }
+                }
+
+                if (laraShotgun != null)
+                {
+                    CopyMeshParts(level.Data, new MeshCopyData
+                    {
+                        BaseMesh = laraShotgun[7],
+                        NewMesh = laraMisc[7],
+                        TextureFaceCopies = Enumerable.Range(8, 12)
+                    });
+                }
+
+                if (level.HasCutScene)
+                {
+                    TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                    {
+                        Level = level.CutSceneLevel.Data,
+                        LevelName = level.CutSceneLevel.Name,
+                        ClearUnusedSprites = false,
+                        EntitiesToImport = new List<TREntities> { TREntities.LaraMiscAnim_H_General },
+                        DataFolder = _outer.GetResourcePath(@"TR1\Models")
+                    };
+
+                    string remapPath = _outer.GetResourcePath(@"TR1\Textures\Deduplication\" + level.CutSceneLevel.Name + "-TextureRemap.json");
+                    if (File.Exists(remapPath))
+                    {
+                        importer.TextureRemapPath = remapPath;
+                    }
+
+                    importer.Import();
+                    ConvertToPartialGymOutfit(level.CutSceneLevel);
                 }
             }
 
@@ -615,38 +783,56 @@ namespace TRRandomizerCore.Randomizers
 
             private void ConvertToMauledOutfit(TR1CombinedLevel level)
             {
-                TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara);
+                TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, level.IsCutScene ? TREntities.CutsceneActor1 : TREntities.Lara);
                 TRMesh[] laraShotgun = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraShotgunAnim_H);
                 TRMesh[] laraMisc = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraMiscAnim_H);
 
-                // Left leg
-                ReplaceTexture(lara[1], laraMisc[1], 1, 2, 0);
-                ConvertColourToTexture(lara[1], laraMisc[1], 3, 1, 0);
-                ConvertColourToTexture(lara[1], laraMisc[1], 5, 5, 0);
+                if (level.Is(TRLevelNames.QUALOPEC_CUT))
+                {
+                    // This model is completely different to all others, so just
+                    // duplicate the mauled meshes in this case.
+                    List<int> meshIndices = new List<int> { 1, 4, 5, 7, 9, 11, 12 };
+                    foreach (int index in meshIndices)
+                    {
+                        int colRad = lara[index].CollRadius;
+                        TRMeshUtilities.DuplicateMesh(level.Data, lara[index], laraMisc[index]);
+                        lara[index].CollRadius = colRad;
+                    }
+                }
+                else
+                {
+                    // Left leg
+                    ReplaceTexture(lara[1], laraMisc[1], 1, 2, 0);
+                    ConvertColourToTexture(lara[1], laraMisc[1], 3, 1, 0);
+                    ConvertColourToTexture(lara[1], laraMisc[1], 5, 5, 0);
 
-                // Right leg
-                ConvertColourToTexture(lara[4], laraMisc[4], 5, 3, 1);
-                ConvertColourToTexture(lara[5], laraMisc[5], 1, 0, 1);
+                    // Right leg
+                    ConvertColourToTexture(lara[4], laraMisc[4], 5, 3, 1);
+                    ConvertColourToTexture(lara[5], laraMisc[5], 1, 0, 1);
 
-                // Torso
-                ConvertColourToTexture(lara[7], laraMisc[7], 1, 2, 2);
-                ReplaceTexture(lara[7], laraMisc[7], 0, 0, 0);
-                ReplaceTexture(lara[7], laraMisc[7], 5, 8, 0);
-                ReplaceTexture(lara[7], laraMisc[7], 3, 6, 0);
+                    // Torso
+                    ConvertColourToTexture(lara[7], laraMisc[7], 1, 2, 2);
+                    ReplaceTexture(lara[7], laraMisc[7], 0, 0, 0);
+                    ReplaceTexture(lara[7], laraMisc[7], 5, 8, 0);
+                    ReplaceTexture(lara[7], laraMisc[7], 3, 6, 0);
 
-                // Left arm
-                ConvertColourToTexture(lara[9], laraMisc[9], 2, 0, 1);
-                ConvertColourToTexture(lara[9], laraMisc[9], 3, 1, 1);
+                    // Left arm
+                    ConvertColourToTexture(lara[9], laraMisc[9], 2, 0, 1);
+                    ConvertColourToTexture(lara[9], laraMisc[9], 3, 1, 1);
 
-                // Right arm
-                ConvertColourToTexture(lara[11], laraMisc[11], 3, 0, 0);
-                ConvertColourToTexture(lara[12], laraMisc[12], 0, 0, 1);
+                    // Right arm
+                    ConvertColourToTexture(lara[11], laraMisc[11], 3, 0, 0);
+                    ConvertColourToTexture(lara[12], laraMisc[12], 0, 0, 1);
 
-                // Shotgun - Torso
-                ConvertColourToTexture(laraShotgun[7], laraMisc[7], 3, 2, 2);
-                ReplaceTexture(laraShotgun[7], laraMisc[7], 0, 0, 0);
-                ReplaceTexture(laraShotgun[7], laraMisc[7], 7, 8, 0);
-                ReplaceTexture(laraShotgun[7], laraMisc[7], 5, 6, 0);
+                    // Shotgun - Torso
+                    if (laraShotgun != null)
+                    {
+                        ConvertColourToTexture(laraShotgun[7], laraMisc[7], 3, 2, 2);
+                        ReplaceTexture(laraShotgun[7], laraMisc[7], 0, 0, 0);
+                        ReplaceTexture(laraShotgun[7], laraMisc[7], 7, 8, 0);
+                        ReplaceTexture(laraShotgun[7], laraMisc[7], 5, 6, 0);
+                    }
+                }
 
                 // Some commonality between the holstered guns
                 List<TREntities> gunAnims = new List<TREntities>
@@ -656,6 +842,8 @@ namespace TRRandomizerCore.Randomizers
                 foreach (TREntities gunAnimType in gunAnims)
                 {
                     TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, gunAnimType);
+                    if (meshes == null)
+                        continue;
 
                     // Left leg
                     ReplaceTexture(meshes[1], laraMisc[1], 1, 2, 0);
@@ -664,6 +852,28 @@ namespace TRRandomizerCore.Randomizers
 
                     // Right leg
                     MergeColouredTrianglesToTexture(level.Data, meshes[4], laraMisc[4], new int[] { 12, 8 }, 3, 3);
+                }
+
+                if (level.HasCutScene && !level.Is(TRLevelNames.MINES))
+                {
+                    TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                    {
+                        Level = level.CutSceneLevel.Data,
+                        LevelName = level.CutSceneLevel.Name,
+                        ClearUnusedSprites = false,
+                        EntitiesToImport = _mauledEntities,
+                        TexturePositionMonitor = _outer.TextureMonitor.CreateMonitor(level.CutSceneLevel.Name, _mauledEntities),
+                        DataFolder = _outer.GetResourcePath(@"TR1\Models")
+                    };
+
+                    string remapPath = _outer.GetResourcePath(@"TR1\Textures\Deduplication\" + level.CutSceneLevel.Name + "-TextureRemap.json");
+                    if (File.Exists(remapPath))
+                    {
+                        importer.TextureRemapPath = remapPath;
+                    }
+
+                    importer.Import();
+                    ConvertToMauledOutfit(level.CutSceneLevel);
                 }
             }
 
