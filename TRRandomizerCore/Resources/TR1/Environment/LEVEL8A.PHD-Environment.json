@@ -5111,57 +5111,6 @@
             }
           },
           {
-            "Comments": "Antipads for above.",
-            "EMType": 61,
-            "Locations": [
-              {
-                "X": 28160,
-                "Y": 2304,
-                "Z": 16896,
-                "Room": 3
-              },
-              {
-                "X": 27136,
-                "Y": 2304,
-                "Z": 17920,
-                "Room": 3
-              },
-              {
-                "X": 26112,
-                "Y": 2304,
-                "Z": 18944,
-                "Room": 3
-              },
-              {
-                "X": 25088,
-                "Y": 2304,
-                "Z": 17920,
-                "Room": 3
-              },
-              {
-                "X": 25088,
-                "Y": 2304,
-                "Z": 16896,
-                "Room": 3
-              },
-              {
-                "X": 26112,
-                "Y": 2304,
-                "Z": 16896,
-                "Room": 3
-              }
-            ],
-            "Trigger": {
-              "TrigType": 6,
-              "Mask": 31,
-              "Actions": [
-                {
-                  "Parameter": 2
-                }
-              ]
-            }
-          },
-          {
             "Comments": "Refacing for above.",
             "EMType": 21,
             "TextureMap": {
@@ -5251,63 +5200,6 @@
             "Trigger": {
               "TrigType": 1,
               "Mask": 16,
-              "Actions": [
-                {
-                  "Parameter": 2
-                }
-              ]
-            }
-          },
-          {
-            "Comments": "Antipads for above.",
-            "EMType": 61,
-            "Locations": [
-              {
-                "X": 25088,
-                "Y": 2304,
-                "Z": 17920,
-                "Room": 3
-              },
-              {
-                "X": 26112,
-                "Y": 2304,
-                "Z": 16896,
-                "Room": 3
-              },
-              {
-                "X": 26112,
-                "Y": 2304,
-                "Z": 17920,
-                "Room": 3
-              },
-              {
-                "X": 27136,
-                "Y": 2304,
-                "Z": 16896,
-                "Room": 3
-              },
-              {
-                "X": 27136,
-                "Y": 2304,
-                "Z": 17920,
-                "Room": 3
-              },
-              {
-                "X": 27136,
-                "Y": 2304,
-                "Z": 18944,
-                "Room": 3
-              },
-              {
-                "X": 28160,
-                "Y": 2304,
-                "Z": 17920,
-                "Room": 3
-              }
-            ],
-            "Trigger": {
-              "TrigType": 6,
-              "Mask": 31,
               "Actions": [
                 {
                   "Parameter": 2
