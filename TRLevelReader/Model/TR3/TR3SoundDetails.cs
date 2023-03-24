@@ -25,6 +25,19 @@ namespace TRLevelReader.Model
 
         public int NumSounds => (Characteristics & 0x00FC) >> 2; // get bits 2-7
 
+        public byte LoopingMode
+        {
+            get
+            {
+                return (byte)(Characteristics & 3);
+            }
+            set
+            {
+                Characteristics = (short)(Characteristics & ~(Characteristics & 3));
+                Characteristics |= (short)(value & 3);
+            }
+        }
+
         public bool Wibble
         {
             get

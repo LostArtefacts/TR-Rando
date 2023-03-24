@@ -18,6 +18,19 @@ namespace TRLevelReader.Model
 
         public ushort Characteristics { get; set; }
 
+        public byte LoopingMode
+        {
+            get
+            {
+                return (byte)(Characteristics & 3);
+            }
+            set
+            {
+                Characteristics = (ushort)(Characteristics & ~(Characteristics & 3));
+                Characteristics |= (ushort)(value & 3);
+            }
+        }
+
         public int NumSounds
         {
             get
