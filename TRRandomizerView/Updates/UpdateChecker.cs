@@ -95,15 +95,15 @@ namespace TRRandomizerView.Updates
                 }
 
                 string latestVersion = releaseInfo["tag_name"].ToString();
-                if (latestVersion.Equals(currentVersion))
+                if (string.Compare(latestVersion, currentVersion, true) == 0)
                 {
                     return false;
                 }
 
                 LatestUpdate = new Update
                 {
-                    CurrentVersion = currentVersion,
-                    NewVersion = latestVersion,
+                    CurrentVersion = currentVersion.ToUpper(),
+                    NewVersion = latestVersion.ToUpper(),
                     ReleaseDate = DateTime.Parse(releaseInfo["published_at"].ToString()),
                     UpdateBody = releaseInfo["body"].ToString(),
                     UpdateURL = releaseInfo["html_url"].ToString()
