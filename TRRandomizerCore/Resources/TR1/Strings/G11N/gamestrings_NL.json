@@ -1,0 +1,501 @@
+{
+  "GlobalStrings": {
+    "HEADING_GAME_OVER": [
+      "Te hard geYOLOd",
+      "Je stierf",
+      "Fataliteit",
+      "Druk op F om respect te geven",
+      "F"
+    ],
+    "HEADING_INVENTORY": [
+      "Consumeerbaar",
+      "Spullen",
+      "Beste rugzak",
+      "Het goede spul",
+      "Al de dingen"
+    ],
+    "HEADING_ITEMS": [
+      "De belangrijke dingen",
+      "Missie voorwerpen",
+      "Schat",
+      "Verkoop dit niet",
+      "Dingen"
+    ],
+    "HEADING_OPTION": [
+      "Kenmerk draaimolen",
+      "Jij bent mooi",
+      "OwO",
+      "uwu",
+      "Verander dingen"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Doctor?",
+      "Dikke eerstehulp",
+      "Vol leven",
+      "Grote",
+      "Beter dan een kleintje"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Je moet naar t noorden",
+      "Draai ding",
+      "Gewoon een magneet",
+      "Werkt dit?",
+      "Wie gebruikt dit?"
+    ],
+    "INV_ITEM_CONTROLS": [
+      "ergonomie",
+      "Hoe te spelen",
+      "Keyboard is beter",
+      "Controller is beter",
+      "Welke knop is het?"
+    ],
+    "INV_ITEM_DETAILS": [
+      "John Lennon kostuum",
+      "Zonnebril",
+      "/o-o/",
+      "Roosgetinte glazen",
+      "Bril"
+    ],
+    "INV_ITEM_GAME": [
+      "Identiteits bewijs",
+      "reisdocument",
+      "gegevens",
+      "Pixel boekje",
+      "Paspoort"
+    ],
+    "INV_ITEM_LEADBAR": [
+      "Niet likken",
+      "Te zwaar om te dragen",
+      "Verkeerde materiaal",
+      "Lichtelijk giftig",
+      "Leg op de Midas hand"
+    ],
+    "INV_ITEM_MAGNUM": [
+      "Betere pistolen",
+      "Pistolen met zwarte skin",
+      "Soorvan saai",
+      "Schade",
+      "Klinkt dieper"
+    ],
+    "INV_ITEM_MAGNUM_AMMO": [
+      "ammunitie ijsje",
+      "Mars reep",
+      "50 kogels",
+      "Chocolade",
+      "Niet zo goed als uzi magazijn"
+    ],
+    "INV_ITEM_MEDI": [
+      "Slanke Eerstehulp",
+      "Kleintje",
+      "Half leven",
+      "Het is iets",
+      "Slechter dan een grote"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Pistolen",
+      "Zwakste uitrusting",
+      "Oud en betrouwbaar",
+      "Wie heeft er nou ammunitie nodig",
+      "Oneindige PiewPiew"
+    ],
+    "INV_ITEM_SCION": [
+      "Rond ding",
+      "Niet schieten!",
+      "Je hebt er 3 nodig",
+      "Het is Skie-on",
+      "Het is Saai-on"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Perfect accuraat",
+      "Gebruik gewoon pistolen",
+      "Beste schade",
+      "Klunkig",
+      "Grote Boem bazooka"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Niet genoeg ammunitie",
+      "maar 2 per doos?",
+      "de definitie van accuraat",
+      "het oppakken niet waard",
+      "Grote boem"
+    ],
+    "INV_ITEM_SOUND": [
+      "Mixpaneel",
+      "Zacht of hard?",
+      "catJAM",
+      "Hoofdtelefoon",
+      "Oorverkrachting"
+    ],
+    "INV_ITEM_UZI": [
+      "TRRRRRRRR",
+      "MAC-10",
+      "ijsje",
+      "PiewPiew",
+      "Heeft een nerf nodig"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Beste ammunitie",
+      "100 kogels",
+      "In elk geval raken deze de vijand",
+      "Magazijn chilt in oude tombe",
+      "PiewPiew Ammunitie"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "Jij bent adembenemend",
+      "Momenteel nutteloos",
+      "Red onze zielen",
+      "Persoonlijke opslag",
+      "Schrijf over mij heen"
+    ]
+  },
+  "LevelStrings": {
+    "GYM.PHD": {
+      "Names": [
+        "Inleiding",
+        "Huiswarming",
+        "404 tuin niet gevonden",
+        "Rondleiding",
+        "Kleed je uit"
+      ]
+    },
+    "LEVEL1.PHD": {
+      "Names": [
+        "Vleermuis grot",
+        "Eitje",
+        "Opnieuw",
+        "Moeilijkste Level",
+        "een hoop grijs"
+      ]
+    },
+    "LEVEL2.PHD": {
+      "Names": [
+        "Wolven orgie",
+        "Stad der wolven",
+        "De beer is het geheim",
+        "Te veel vleermuizen",
+        "Stad van vilcabanga"
+      ],
+      "KeyItems": {
+        "key1": [
+          "QWOP sleutel",
+          "Wolf sleutel",
+          "Vergeet het idool niet",
+          "Van de wolven in de wolven",
+          "object aan de rechter kant"
+        ],
+        "puzzle1": [
+          "Pop",
+          "Indiana's schat",
+          "Waarschijnlijk waardevol",
+          "object aan de linker kant",
+          "Gast met grappige hoed"
+        ]
+      }
+    },
+    "LEVEL3A.PHD": {
+      "Names": [
+        "Dino park",
+        "Dino wereld",
+        "Meest epische moment",
+        "Barney's rijk",
+        "Dinosaurus heiligdom"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "3 is het magische nummer",
+          "COGGERS",
+          "Tandwiel",
+          "Machinaal",
+          "Tandwiel"
+        ]
+      }
+    },
+    "LEVEL3B.PHD": {
+      "Names": [
+        "Alleen raptors hier",
+        "Larson's verrassing",
+        "Pas op voor de rots",
+        "Gelukknuffel voor mummie",
+        "Lara breekt dingen"
+      ]
+    },
+    "LEVEL4.PHD": {
+      "Names": [
+        "Niet vallen",
+        "Hamer me baby!",
+        "Oh god, niet dit level",
+        "Pierre de vervuiler",
+        "Een variëteit aan gaten"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Water sleutel",
+          "Hey, ik ben eigenlijk romeins",
+          "Nep poseidon",
+          "Helemaal naar beneden",
+          "Laten we gaan zwemmen!"
+        ],
+        "key2": [
+          "Vele vele kaarten",
+          "Een echte dame schiet altijd",
+          "Vervloekte gorilla",
+          "Massieve rots sleutel",
+          "Blij dat je niet geplet bent"
+        ],
+        "key3": [
+          "Pas op waar je loopt",
+          "Niet eens een god",
+          "Tijd voor een wandeling",
+          "Pas op voor de zwaarden",
+          "Inkomend"
+        ],
+        "key4": [
+          "Niet eens grieks",
+          "Mjölnir Sleutel",
+          "Hammer Sleutel",
+          "Bliksem Sleutel",
+          "Nou niet vallen"
+        ]
+      }
+    },
+    "LEVEL5.PHD": {
+      "Names": [
+        "Pierre's Theater",
+        "Gladiator Proef",
+        "Waarom is dit ondergrond",
+        "Zo veel vijanden",
+        "de menagerie"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Je weg naar buiten",
+          "Waarom is deze sleutel hier",
+          "Wat is deze kamer",
+          "Opent poort op het balkon",
+          "Kaartje van de dierentuin"
+        ]
+      }
+    },
+    "LEVEL6.PHD": {
+      "Names": [
+        "Voelt goud man",
+        "Op de hand voor OP wapen",
+        "De dierentuin",
+        "Gratis goude split",
+        "Terug naar Monke"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Je weg hier uit",
+          "Niet giftig",
+          "Juiste materiaal",
+          "Nu heb je er wat aan",
+          "Te zwaar om te dragen"
+        ]
+      }
+    },
+    "LEVEL7A.PHD": {
+      "Names": [
+        "Gewoon blijven zwemmen",
+        "Overstroomd",
+        "Gigantisch toilet",
+        "Krokodillen paradijs",
+        "Ratten dans"
+      ],
+      "KeyItems": {
+        "key1": [
+          "pffff eindelijk",
+          "Ooooh, glimmend",
+          "We zijn er bijna",
+          "Laatste sleutel",
+          "Beter dan zilver"
+        ],
+        "key2": [
+          "Beter dan roestig",
+          "Slechter dan goud",
+          "Te veel deuren om te openen",
+          "Je hebt er twee nodig",
+          "Hebben iets beters nodig"
+        ],
+        "key3": [
+          "Gebruik voor meer apen",
+          "eerste van vele sleutels",
+          "Slechter dan zilver",
+          "Zeker dat dat roest is?",
+          "Verroest ijzer"
+        ]
+      }
+    },
+    "LEVEL7B.PHD": {
+      "Names": [
+        "Wantrouw standbeelden",
+        "Klaar met griekenland",
+        "Pierre was hier eerst",
+        "Yay, blok duwen",
+        "Pierre's laatste verzet"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Hoe werkt deze sleutel",
+          "Dit is geen geheim",
+          "Maakt geheim geluid",
+          "Gebruik in goude slot",
+          "Glimmende sleutel"
+        ],
+        "key2": [
+          "Inkomende Ratten",
+          "Pas op voor de gorillas",
+          "vergeet het geheim niet",
+          "Je hebt nog een sleutel nodig",
+          "Rechtse slot sleutel"
+        ],
+        "key3": [
+          "Stop in sleutelgat",
+          "twee sleutels voor een deur",
+          "duw het blok nog meer",
+          "Je hebt er nog een nodig",
+          "Linkse slot sleutel"
+        ]
+      }
+    },
+    "LEVEL8A.PHD": {
+      "Names": [
+        "Knuffel de kittens",
+        "Terug naar egypte",
+        "Panter paradijs",
+        "Niet echt een stad",
+        "Mona's huis"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Hersen Operatie",
+          "Mona's sleutel",
+          "Gebruik in de sphinx",
+          "Blauwe edelsteen sleutel",
+          "Alminium oxide sleutel"
+        ]
+      }
+    },
+    "LEVEL8B.PHD": {
+      "Names": [
+        "Smiley sprong",
+        "Puur genot",
+        "Vier artefacten nodig",
+        "Egyptisch museum",
+        "Egyptische goden dingen"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Opent twee deuren",
+          "Blauwe edelsteen sleutel",
+          "Aluminium oxide sleutel",
+          "Waarom is hier een deur?",
+          "Krokodillensleutel"
+        ],
+        "puzzle1": [
+          "Oog van Seth's vijand",
+          "Zie je later",
+          "Altijd waakzaam",
+          "Valken oogbal",
+          "Kijk niet naar me"
+        ],
+        "puzzle2": [
+          "Gewoon een kever",
+          "Heracross",
+          "Kephri",
+          "Mestkever",
+          "Hoop dat je dit volgend level hebt"
+        ],
+        "puzzle3": [
+          "Zegel van Anpu",
+          "Zegel van de jakhals",
+          "Gewoon scribbles",
+          "De steen van Rosetta",
+          "Aardapple"
+        ],
+        "puzzle4": [
+          "Dit is niet TR4",
+          "Waar is Seth?",
+          "Beter leg je dat terug",
+          "Sleutel des Levens",
+          "Kruis met een lus"
+        ]
+      }
+    },
+    "LEVEL8C.PHD": {
+      "Names": [
+        "Hoe is Larson hier",
+        "Te veel atlantianen",
+        "Wacht, uzi's zijn waar?",
+        "Ingewikkeld he",
+        "Een goeie tijd"
+      ],
+      "KeyItems": {
+        "key1": [
+          "gebruik op de brug",
+          "Laat de centaurus los",
+          "Gebruik om de ankh te krijgen",
+          "Enige sleutel in dit level",
+          "Hoe is die niet verroest"
+        ],
+        "puzzle1": [
+          "Zet op de sphinx",
+          "Twee nodig",
+          "Waar is Seth",
+          "Sla me baby nog een keer",
+          "Centaurus poep"
+        ],
+        "puzzle2": [
+          "Maar een beestje",
+          "brengt vijanden voort",
+          "Uit dit level",
+          "geweldig terug bij het begin",
+          "Duurde land zeg"
+        ]
+      }
+    },
+    "LEVEL10A.PHD": {
+      "Names": [
+        "Level met de roeiboot",
+        "Dood aan Natla's troepen",
+        "Waarom is dit een mijn",
+        "Waar wapens?",
+        "Natla's grappen"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Wie heeft dit hier gelegd",
+          "Zap!",
+          "Wil je wapens?",
+          "Waarom werken deze nog?",
+          "Elektrische nagelknipper"
+        ],
+        "puzzle2": [
+          "Erg unieke sleutel",
+          "Je weg naar buiten",
+          "Eenofandere egyptische driehoek",
+          "Atlantis toegang",
+          "Redelijk edgy"
+        ]
+      }
+    },
+    "LEVEL10B.PHD": {
+      "Names": [
+        "Niet onder water",
+        "Vlees doolhof",
+        "Veel geluk",
+        "Neem verbanddozen mee",
+        "Toren des terror"
+      ]
+    },
+    "LEVEL10C.PHD": {
+      "Names": [
+        "De laatste countdown",
+        "Natla is niet dood",
+        "Dood aan atlantis",
+        "Het is een val",
+        "Geef torso een knuffel"
+      ]
+    }
+  }
+}

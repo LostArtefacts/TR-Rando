@@ -1523,7 +1523,26 @@ namespace TRRandomizerCore
 
         public Language[] AvailableGameStringLanguages
         {
-            get => G11N.Instance.Languages;
+            get
+            {
+                G11NGame game;
+                switch (_editor.Edition.Version)
+                {
+                    case TRVersion.TR1:
+                        game = G11NGame.TR1;
+                        break;
+                    case TRVersion.TR2:
+                        game = G11NGame.TR2;
+                        break;
+                    case TRVersion.TR3:
+                        game = G11NGame.TR3;
+                        break;
+                    default:
+                        return null;
+                }
+
+                return G11N.GetSupportedLanguages(game).ToArray();
+            }
         }
 
         public bool RetainKeyItemNames

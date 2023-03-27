@@ -49,6 +49,7 @@ namespace TRRandomizerCore
             TRRandomizerType.LevelSequence,
             TRRandomizerType.Mediless,
             TRRandomizerType.SecretCount,
+            TRRandomizerType.Text,
             TRRandomizerType.Unarmed,
             TRRandomizerType.WaterColour
         };

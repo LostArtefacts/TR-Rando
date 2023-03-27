@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
 
 namespace TRRandomizerCore.Globalisation
 {
-    public class GameStrings
+    public class TR23GameStrings : IGameStrings
     {
         public GlobalStrings[] GlobalStrings { get; set; }
-        public Dictionary<string, LevelStrings> LevelStrings { get; set; }
+        public Dictionary<string, TR23LevelStrings> LevelStrings { get; set; }
 
         // >  => +
         // =  => ß
@@ -26,12 +25,12 @@ namespace TRRandomizerCore.Globalisation
         //
         // Note that accent support on MultiPatch isn't great. The likes of Fidèle becomes Fid` ele.
         // UKBox, EPC and TR2Main work best.
-        public static string Encode(string text)
+        public string Encode(string text)
         {
             StringBuilder sb = new StringBuilder();
             foreach (char c in text)
             {
-                string n = Normalise(c);
+                string n = TextUtilities.Normalise(c);
                 char d = char.ToUpper(c);
                 switch (d)
                 {
@@ -93,20 +92,6 @@ namespace TRRandomizerCore.Globalisation
                     default:
                         sb.Append(n);
                         break;
-                }
-            }
-            return sb.ToString();
-        }
-
-        private static string Normalise(char c)
-        {
-            StringBuilder sb = new StringBuilder();
-            string data = c.ToString().Normalize(NormalizationForm.FormD);
-            foreach (char d in data)
-            {
-                if (CharUnicodeInfo.GetUnicodeCategory(d) != UnicodeCategory.NonSpacingMark)
-                {
-                    sb.Append(d);
                 }
             }
             return sb.ToString();

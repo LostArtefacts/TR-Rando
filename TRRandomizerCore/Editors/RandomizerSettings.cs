@@ -235,7 +235,7 @@ namespace TRRandomizerCore.Editors
             GameStringsSeed = config.GetInt(nameof(GameStringsSeed), defaultSeed);
             RetainKeyItemNames = config.GetBool(nameof(RetainKeyItemNames));
             RetainLevelNames = config.GetBool(nameof(RetainLevelNames));
-            GameStringLanguage = G11N.Instance.GetLanguage(config.GetString(nameof(GameStringLanguage), Language.DefaultTag));
+            GameStringLanguage = G11N.GetLanguage(config.GetString(nameof(GameStringLanguage), Language.DefaultTag));
 
             RandomizeNightMode = config.GetBool(nameof(RandomizeNightMode));
             NightModeSeed = config.GetInt(nameof(NightModeSeed), defaultSeed);

@@ -1,0 +1,501 @@
+{
+  "GlobalStrings": {
+    "HEADING_GAME_OVER": [
+      "Prejaki YOLO",
+      "Umrli ste",
+      "Fatalni kraj",
+      "Stisnite F kako bi odali pocast",
+      "Fatalni kraj"
+    ],
+    "HEADING_INVENTORY": [
+      "Potrošni materijal",
+      "Stvari",
+      "Najbolja naprtnjaca",
+      "Dobre stvari",
+      "Sve stvari"
+    ],
+    "HEADING_ITEMS": [
+      "Važne stvari",
+      "Stvari za zadatak",
+      "Blago",
+      "Nemoj prodavati ove",
+      "Stvari za zadatak"
+    ],
+    "HEADING_OPTION": [
+      "Karusel znacajki",
+      "Predivni ste!",
+      "OwO",
+      "UwU",
+      "Promijeni stvari"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Prva pomoc",
+      "Velika prva pomoc",
+      "Daje cijelo zdravlje",
+      "Mega",
+      "Bolje od male pomoci"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Trebaš ici na sjever",
+      "Vrteca stvar",
+      "Samo je magnet",
+      "Radi li ovo?",
+      "Tko ovo koristi?"
+    ],
+    "INV_ITEM_CONTROLS": [
+      "Ergonomika",
+      "Kako igrati",
+      "Tipkovnica je bolja",
+      "Kontroler je bolji",
+      "Koja je tipka?"
+    ],
+    "INV_ITEM_DETAILS": [
+      "John Lennon kostim",
+      "Sjene",
+      "\\o-o/",
+      "Ružicaste naocale",
+      "Naocake"
+    ],
+    "INV_ITEM_GAME": [
+      "Identifikacija",
+      "Putujuci dokument",
+      "Vjerodajnice",
+      "Pikselizirana knjiga",
+      "Putovnica"
+    ],
+    "INV_ITEM_LEADBAR": [
+      "Ne liži",
+      "Preteško za nošenje",
+      "Krivi materijal",
+      "Pomalo toksicno",
+      "Stavi na Midinu ruku"
+    ],
+    "INV_ITEM_MAGNUM": [
+      "Bolji pištolji",
+      "Pištolji ali crni",
+      "Pomalo dosadni",
+      "Šteta po sekundi",
+      "Zvuce dublje"
+    ],
+    "INV_ITEM_MAGNUM_AMMO": [
+      "Sladoled",
+      "Snikers",
+      "50 metaka",
+      "Cokolada",
+      "Nije kao uzi klip"
+    ],
+    "INV_ITEM_MEDI": [
+      "Nije prva pomoc",
+      "Mini pomoc",
+      "Daje pola zdravlja",
+      "I to je nešto",
+      "Gore od velike pomoci"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Klasicni pištolji",
+      "Najslabije oružje",
+      "Staro ali pouzdano",
+      "Kome trebaju metci?",
+      "Beskonacno pucanje"
+    ],
+    "INV_ITEM_SCION": [
+      "Okrugla stvarcica",
+      "Ne pucaj me",
+      "Treba ti tri",
+      "Ski-jion",
+      "Uzd-ah"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Perfektno preczina",
+      "Iskoristi pištolje",
+      "Najbolja šteta",
+      "Nezgrapan",
+      "Velika bazuka"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Nedovoljno metaka",
+      "Samo 2 cahure",
+      "Definicija preciznosti",
+      "Ne vrijedi pokupiti",
+      "Najbolja cahura"
+    ],
+    "INV_ITEM_SOUND": [
+      "Mikser",
+      "Tiho ili glasno?",
+      "catJam",
+      "Slušalice",
+      "Bole uši"
+    ],
+    "INV_ITEM_UZI": [
+      "TRRRRRRRRRRR",
+      "Mac 10",
+      "Najjaci pištolj",
+      "Piju piju",
+      "Treba ga oslabiti"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Najbolji metci",
+      "100 metaka",
+      "Svi pogadaju neprijatelje",
+      "Predugo odmaraju",
+      "Puuu metci"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "Oduzimaš mi dah",
+      "Trenutno beskorisno",
+      "Sacuvaj dušu",
+      "Osobna uštedevina",
+      "Spremi preko mene"
+    ]
+  },
+  "LevelStrings": {
+    "GYM.PHD": {
+      "Names": [
+        "Tutorijal",
+        "Useljavanje",
+        "Pogreška 404",
+        "Vodena tura",
+        "Skidaj odjecu"
+      ]
+    },
+    "LEVEL1.PHD": {
+      "Names": [
+        "Šišmiš špilja",
+        "Laganica",
+        "Resetiraj",
+        "Najteži level",
+        "Pregršt sivog"
+      ]
+    },
+    "LEVEL2.PHD": {
+      "Names": [
+        "Orgija vukova",
+        "Grd vukova",
+        "Tajna je u medvjedu",
+        "Previše šišmiša",
+        "Grad Vilcabange"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Qwop kljuc",
+          "Vuk kljuc",
+          "Ne zaboravi figuricu",
+          "Bježi od vukova",
+          "Na desno ti je stvar"
+        ],
+        "puzzle1": [
+          "Lutka",
+          "Indianina figurica",
+          "Vjerojatno vrijedi",
+          "Na lijevo ti je stvar",
+          "Tip sa smjiešnim šeširom"
+        ]
+      }
+    },
+    "LEVEL3A.PHD": {
+      "Names": [
+        "Jurski park",
+        "Jurski svijet",
+        "Najepskiji moment",
+        "Barnijev svijet",
+        "Svetište dinosaura"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "3 je magicni broj",
+          "Zupcanici",
+          "Kotac",
+          "Mašinerija",
+          "Cackalica"
+        ]
+      }
+    },
+    "LEVEL3B.PHD": {
+      "Names": [
+        "Samo raptori ovdje",
+        "Iznenadenje! Larson",
+        "Pazi na kuglu",
+        "Zagrli mumiju",
+        "Lara lomi stvari"
+      ]
+    },
+    "LEVEL4.PHD": {
+      "Names": [
+        "Nemoj past",
+        "Udari me cekicem",
+        "Ma ne ovaj level",
+        "Pierre, ti mangupe",
+        "Pregršt rupa"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Vodeni kljuc",
+          "Ja sam stvarno rimski",
+          "Lažni Posejdon",
+          "Sve do kraja",
+          "Ajmo plivati"
+        ],
+        "key2": [
+          "Puno puno mapa",
+          "Prava dama uvijek puca",
+          "Vražja gorila",
+          "Ogromni kuglin kljuc",
+          "Drago mi je što te nije zgnijecilo"
+        ],
+        "key3": [
+          "Pazi gdje hodaš",
+          "Cak nije ni bog",
+          "Vrijeme je za šetnju",
+          "Pazi na maceve",
+          "Dolazi!"
+        ],
+        "key4": [
+          "Nije ni Grcki",
+          "Mjolnirski kljuc",
+          "Cekic kljuc",
+          "Grom kljuc",
+          "Sad nemoj past"
+        ]
+      }
+    },
+    "LEVEL5.PHD": {
+      "Names": [
+        "Pierrovo kazalište",
+        "Gdje je borba",
+        "Zašto je ovo podzemno?",
+        "Previše neprijatelja",
+        "Zvjerinjak"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Tvoj put vani",
+          "Zašto je ovaj kljuc ovdje",
+          "Kakva je ovo soba?",
+          "Otvara balkon",
+          "Karta za zoološki"
+        ]
+      }
+    },
+    "LEVEL6.PHD": {
+      "Names": [
+        "Zlatne godine",
+        "Skoci na ruku",
+        "Zoološki",
+        "Besplatan zlatni split",
+        "Potvratak majmuna"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Tvoja karta vani",
+          "Nije toksicno",
+          "Pravi materijal",
+          "Sada je korisno!",
+          "Preteško za nošenje"
+        ]
+      }
+    },
+    "LEVEL7A.PHD": {
+      "Names": [
+        "Samo plivaj!",
+        "Poplava",
+        "Veliki zahod",
+        "Raj krokodila",
+        "Štakor parti"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Konacno",
+          "Oooo...sjajno",
+          "Skoro tamo",
+          "Zadnji kljuc",
+          "Bolji nego srebrni"
+        ],
+        "key2": [
+          "Bolji nego zahrdali",
+          "Gori nego zlatni",
+          "Previše vrata za otvaranje",
+          "Treba ti dva",
+          "Treba ti bolje"
+        ],
+        "key3": [
+          "Iskoristi za više kljuceva",
+          "Prvi od mnogo kljuceva",
+          "Gori nego srebrni",
+          "Sigurno zahrdao?",
+          "Oksidirano željezo"
+        ]
+      }
+    },
+    "LEVEL7B.PHD": {
+      "Names": [
+        "Ne vjeruj kipovima",
+        "Konacno gotova Grcka",
+        "Pierre je prije stigao",
+        "Jej! Blokovi za guranje",
+        "Pierrovo posljednje uporište"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Kako koristiti ovaj kljuc",
+          "Ovo nije tajna",
+          "Proizvodi zvuk tajne",
+          "Iskoristi u zlatnu kljucanicu",
+          "Svjetlucav kljuc"
+        ],
+        "key2": [
+          "Dolaze štakori",
+          "Pazi na gorile",
+          "Ne propusti tajnu",
+          "Potreban je još jedan kljuc",
+          "Radi samo na tocnoj kljucanici"
+        ],
+        "key3": [
+          "Stavi u kljucanicu",
+          "Treba 2 kljuca za jedna vrata",
+          "Guraj blok još okolo",
+          "Treba ti još jedan kljuc",
+          "Radi samo na lijevom bloku"
+        ]
+      }
+    },
+    "LEVEL8A.PHD": {
+      "Names": [
+        "Zagrli macke",
+        "Povratak u Egipat",
+        "Raj pantera",
+        "Nije baš grad",
+        "Monina kuca"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Operacija mozga",
+          "Monin kljuc",
+          "Iskoristi u sfingi",
+          "Plavo kameni kljuc",
+          "Oksidirani kljuc"
+        ]
+      }
+    },
+    "LEVEL8B.PHD": {
+      "Names": [
+        "Skok veselja",
+        "Cisto zadovoljstvo",
+        "Trebaju ti 4 artefakta",
+        "Egiptaski muzej",
+        "Egipatsko božanstvo"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Otvara dva vrata",
+          "Plavo kameni kljuc",
+          "Oksidirani kljuc",
+          "Zašto su vrata ovdje?",
+          "Krokodilski kljuc"
+        ],
+        "puzzle1": [
+          "Setovo oko",
+          "Vidimo se",
+          "Uvijek gledam",
+          "Vidim vas",
+          "Ne gledaj me"
+        ],
+        "puzzle2": [
+          "Ma samo je bug",
+          "Skarabej",
+          "Kepri",
+          "Balegar",
+          "Treba ti za sljedeci level"
+        ],
+        "puzzle3": [
+          "Pecat Anpua",
+          "Pecat Jackala",
+          "Neke škrabotine",
+          "Rosetin kamen",
+          "Krompir"
+        ],
+        "puzzle4": [
+          "Ovo nije TR4",
+          "Gdje je Seth?",
+          "Vrati to nazad",
+          "Kljuc života",
+          "Kljuc s petljom"
+        ]
+      }
+    },
+    "LEVEL8C.PHD": {
+      "Names": [
+        "Kako je Larson došao ovdje?",
+        "Previše Atlanteana",
+        "Cekaj, Uzi je ovdje",
+        "Tko je pustio mumije",
+        "Radosno vrijeme"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Iskoristi na mostu",
+          "Pusti kentaura",
+          "Iskoristi za ankh",
+          "Jedini kljuc na ovom levelu",
+          "Kako nije zahrdao"
+        ],
+        "puzzle1": [
+          "Stavi na Sfingu",
+          "Treba ti dva",
+          "Gdje je Seth?",
+          "Nikad kraja",
+          "Kentaurov izmet"
+        ],
+        "puzzle2": [
+          "Samo bug",
+          "Stvara neprijatelje",
+          "Izadi s ovog levela",
+          "Odlicno, povratak na pocetak",
+          "Treba ti toliko dugo?"
+        ]
+      }
+    },
+    "LEVEL10A.PHD": {
+      "Names": [
+        "Level sa gumenjakom",
+        "Ubit ce te Natline sluge",
+        "Zašto je ovo rudnik?",
+        "Gdje su pištolji?",
+        "Natlini memovi"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Tko je ovo stavio tu",
+          "Iznenadenje!",
+          "Želiš pištolje",
+          "Zašto ovo još radi?",
+          "Elektricne pincete"
+        ],
+        "puzzle2": [
+          "Vrlo unikatan kljuc",
+          "Tvoj izlaz vani",
+          "Neki egiptaski trokut",
+          "Pristup Atlantidi",
+          "Pomalo edgy"
+        ]
+      }
+    },
+    "LEVEL10B.PHD": {
+      "Names": [
+        "Nije podmorje",
+        "Labirint mesa",
+        "Sretno",
+        "Ponesi prvu pomoc",
+        "Toranj terora"
+      ]
+    },
+    "LEVEL10C.PHD": {
+      "Names": [
+        "Finalno odbrojavanje",
+        "Natla nije mrtva",
+        "Smrt u Atlantidi",
+        "To je zamka",
+        "Zagrli torza"
+      ]
+    }
+  }
+}

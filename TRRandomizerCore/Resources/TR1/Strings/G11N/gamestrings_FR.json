@@ -1,0 +1,501 @@
+{
+  "GlobalStrings": {
+    "HEADING_GAME_OVER": [
+      "Perdu",
+      "T'es mort",
+      "Recharge",
+      "Recommence",
+      "T'est nul !"
+    ],
+    "HEADING_INVENTORY": [
+      "Sac à dos",
+      "Réserve",
+      "Bazar",
+      "Sac dimensionnel",
+      "Objets ramassés"
+    ],
+    "HEADING_ITEMS": [
+      "Trucs utiles",
+      "Trésors",
+      "Porte clés",
+      "Rien à garder",
+      "Collection"
+    ],
+    "HEADING_OPTION": [
+      "Réglages",
+      "Utile",
+      "OwO",
+      "uwu",
+      "Change les trucs"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Grand soin",
+      "Maxi kit",
+      "Paquet",
+      "La croix rouge",
+      "100% de vie"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Nord",
+      "Ça sert à rien",
+      "Aimant",
+      "???",
+      "Utile dans le 4"
+    ],
+    "INV_ITEM_CONTROLS": [
+      "Les touches",
+      "Comment jouer",
+      "Tes contrôles",
+      "Clavier ?",
+      "Manette ?"
+    ],
+    "INV_ITEM_DETAILS": [
+      "Lunettes",
+      "Ombrage",
+      "\\o-o/",
+      "Lunettes de soleil",
+      "Visibilité"
+    ],
+    "INV_ITEM_GAME": [
+      "Papiers",
+      "Passe",
+      "À tamponner",
+      "Livre",
+      "Bouquin"
+    ],
+    "INV_ITEM_LEADBAR": [
+      "Lingot",
+      "Moins lourd que l'or",
+      "C'est pas de l'or",
+      "Goûte ça",
+      "Pour Midas"
+    ],
+    "INV_ITEM_MAGNUM": [
+      "Magnum chocolat",
+      "Pistolets au tomates",
+      "Pan Pan 2",
+      "Flingues niveau 2",
+      "Pas infini"
+    ],
+    "INV_ITEM_MAGNUM_AMMO": [
+      "Glace Magnum",
+      "Y en a plein",
+      "Par 50",
+      "Munitions",
+      "Utile si on veut"
+    ],
+    "INV_ITEM_MEDI": [
+      "Petit soin",
+      "Mini kit",
+      "Rouleau",
+      "Saucisse à cuire",
+      "50% de vie"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Flingues niveau 1",
+      "Pan Pan",
+      "Illimité en munitions",
+      "Arme de base",
+      "Tir avec"
+    ],
+    "INV_ITEM_SCION": [
+      "Scion en morceau",
+      "Beignet antique",
+      "Pour Natla",
+      "Y en a 3",
+      "Scion en kit"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Utile de près",
+      "Crac Crac PAN",
+      "Gros dégâts",
+      "PAN !",
+      "Tir ton coup"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Pour ton arme",
+      "2 par 2",
+      "Gaspille pas ça",
+      "Ramasse les toutes",
+      "Les gâches pas"
+    ],
+    "INV_ITEM_SOUND": [
+      "Sono",
+      "Plus fort ?",
+      "Moins fort ?",
+      "Écouteurs",
+      "Le son"
+    ],
+    "INV_ITEM_UZI": [
+      "Taratatatatatata",
+      "PanPanPanPanPan",
+      "Flingues niveau 3",
+      "Tir en rafale",
+      "Bonne arme"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Jamais assez",
+      "100 d'un coup",
+      "Pour tirer un coup rapide",
+      "Sans recharger",
+      "Plein de balles"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "Place libre",
+      "Sauvegarde ici",
+      "Emplacement libre",
+      "Clique ici",
+      "Sauvegarde ta partie"
+    ]
+  },
+  "LevelStrings": {
+    "GYM.PHD": {
+      "Names": [
+        "Apprend à jouer",
+        "Va juste à la piscine",
+        "Caisse à gogo",
+        "L'humble demeure",
+        "Chez Lara"
+      ]
+    },
+    "LEVEL1.PHD": {
+      "Names": [
+        "Niveau du début",
+        "3 minutes minimum",
+        "Chez les loups",
+        "Cave de glace",
+        "Momie creepy"
+      ]
+    },
+    "LEVEL2.PHD": {
+      "Names": [
+        "Après le 1er niveau",
+        "Encore plus de loups",
+        "Un village ça ?",
+        "La ville qu'a Bamba",
+        "Tu gardera pas l'idole"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Une clé",
+          "C'est une clé",
+          "Ça ouvre une porte",
+          "Truc en argent",
+          "Clé"
+        ],
+        "puzzle1": [
+          "Truc doré",
+          "Ça sert de clé",
+          "Tu le gardera pas",
+          "Ça brille",
+          "De l'or !!!"
+        ]
+      }
+    },
+    "LEVEL3A.PHD": {
+      "Names": [
+        "Jurassic Park",
+        "Dinoland",
+        "Encore des loups",
+        "Des rouages",
+        "Tuons des dinos !"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Rouage",
+          "Une roue",
+          "Truc qui tourne",
+          "Roue",
+          "Redstone"
+        ]
+      }
+    },
+    "LEVEL3B.PHD": {
+      "Names": [
+        "Un peu de loups ici",
+        "Scion partie 1",
+        "Momie creepy 2",
+        "Raptor encore",
+        "Larson t'attend"
+      ]
+    },
+    "LEVEL4.PHD": {
+      "Names": [
+        "Lions et gorilles",
+        "4 clés à trouver",
+        "Thor a tort",
+        "Ne tombe pas",
+        "Pierre ? Présent !"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Clé de l'eau",
+          "Clé mouillée",
+          "Clé des profondeurs",
+          "Une clé",
+          "Clé 1/4"
+        ],
+        "key2": [
+          "Clé du boulet",
+          "Boulet esquivé",
+          "Encore une clé ?",
+          "Une clé",
+          "Clé 2/4"
+        ],
+        "key3": [
+          "Clé tranchante",
+          "Clépée",
+          "Marche doucement",
+          "Une clé",
+          "Clé 3/4"
+        ],
+        "key4": [
+          "Même pas Romain",
+          "Clé du marteau",
+          "Clé éclair",
+          "Une clé",
+          "Clé 4/4"
+        ]
+      }
+    },
+    "LEVEL5.PHD": {
+      "Names": [
+        "L'arène",
+        "Massacre animalier",
+        "Dégage Pierre",
+        "Animaux à gogo",
+        "Gladiateur"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Vieille clé",
+          "Une clé",
+          "Clé",
+          "Ouvre un truc",
+          "Encore une clé"
+        ]
+      }
+    },
+    "LEVEL6.PHD": {
+      "Names": [
+        "Touche la main",
+        "Va sur la main",
+        "Statue de Lara dorée",
+        "Gorille+Lion+Croco",
+        "Bière Midas"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Lingot",
+          "C'est lourd",
+          "Tu le gardera pas",
+          "Comme une clé",
+          "Plus utile"
+        ]
+      }
+    },
+    "LEVEL7A.PHD": {
+      "Names": [
+        "Six ternes",
+        "Tu vas nager",
+        "Fait monter l'eau",
+        "Inondé",
+        "Problème de rats"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Clé qui brille",
+          "Une clé",
+          "Clé qui brille",
+          "Doré",
+          "Ouvre une porte"
+        ],
+        "key2": [
+          "Clé",
+          "Une clé",
+          "Pas en or",
+          "Encore une clé",
+          "Argenté"
+        ],
+        "key3": [
+          "Clé",
+          "Une clé",
+          "Marre des clés",
+          "Rouillée",
+          "Ça va où ?"
+        ]
+      }
+    },
+    "LEVEL7B.PHD": {
+      "Names": [
+        "Cent torts",
+        "Fin de la Grèce",
+        "Crève Pierre",
+        "Le Scion est là",
+        "Skip les centaurs"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Une clé",
+          "Clé",
+          "Oh ! une clé",
+          "Dorée",
+          "Encore une clé ?"
+        ],
+        "key2": [
+          "Rouillée",
+          "Clé",
+          "Une clé",
+          "Il en faut deux",
+          "C'est pas la dernière"
+        ],
+        "key3": [
+          "Rouillée",
+          "Clé",
+          "Une clé",
+          "C'est l'autre clé",
+          "Ouvre une des serrures"
+        ]
+      }
+    },
+    "LEVEL8A.PHD": {
+      "Names": [
+        "Egypte",
+        "Du sable partout",
+        "Traverse la grille",
+        "Revient plus tard",
+        "Face de Sphinx"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Une clé",
+          "Clé",
+          "Ah une clé",
+          "Clé bleue",
+          "Bah tient une clé"
+        ]
+      }
+    },
+    "LEVEL8B.PHD": {
+      "Names": [
+        "Obélix",
+        "Encore des momies",
+        "Retour au début à la fin",
+        "Baisse les ponts",
+        "Grand niveau"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Une clé",
+          "Clé",
+          "Ah une clé",
+          "Clé bleue",
+          "Bah tient une clé"
+        ],
+        "puzzle1": [
+          "Oeil",
+          "Je te vois",
+          "Garde un oeil",
+          "Vision",
+          "Artefact 1/4"
+        ],
+        "puzzle2": [
+          "Bestiole",
+          "Insecte",
+          "Bêbête",
+          "Vieux truc",
+          "Artefact 2/4"
+        ],
+        "puzzle3": [
+          "Anus bis",
+          "Chacal",
+          "Caillou taillé",
+          "Propriété d'Anubis",
+          "Artefact 3/4"
+        ],
+        "puzzle4": [
+          "Tony Ankh",
+          "C'est à Seth",
+          "Comme une clé",
+          "Machin truc",
+          "Artefact 4/4"
+        ]
+      }
+    },
+    "LEVEL8C.PHD": {
+      "Names": [
+        "Fin de l'Egypte",
+        "Pierre le retour",
+        "Grande salle d'eau",
+        "Momie volante ?",
+        "Sphinx 2"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Une clé",
+          "Clé",
+          "Ah une clé",
+          "Clé bleue",
+          "Bah tient une clé"
+        ],
+        "puzzle1": [
+          "Tony Ankh",
+          "Il y en a deux",
+          "Juste une clé",
+          "Encore ?",
+          "Pour le Sphinx"
+        ],
+        "puzzle2": [
+          "Facile à attraper",
+          "Bestiole",
+          "Le dernier",
+          "Remonter pour ça",
+          "Insecte"
+        ]
+      }
+    },
+    "LEVEL10A.PHD": {
+      "Names": [
+        "Une mine",
+        "Sans pistolets",
+        "Où sont mes flingues ?",
+        "Skate Parc",
+        "Tue tout le monde"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Pète un plomb",
+          "Pour récup tes flingues",
+          "Ça change des clés",
+          "Ça marche encore ?",
+          "Courant !"
+        ],
+        "puzzle2": [
+          "Uné clé ça ?",
+          "Triangle",
+          "Laissez-passer",
+          "Dernière clé",
+          "Ouvre la pyramide"
+        ]
+      }
+    },
+    "LEVEL10B.PHD": {
+      "Names": [
+        "Très charnel",
+        "Niveau \"musclé\"",
+        "Plein de bestiolles",
+        "Oeuf de Pâques ?",
+        "Monte en haut"
+      ]
+    },
+    "LEVEL10C.PHD": {
+      "Names": [
+        "Enfin la fin",
+        "Natla le retour",
+        "Boss Torse",
+        "Tombe pas en bas",
+        "Dernier niveau"
+      ]
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 namespace TRRandomizerCore.Globalisation
 {
-    public class LevelStrings
+    public class TR23LevelStrings
     {
         public string[] Names { get; set; }
         public Dictionary<int, string[]> Keys { get; set; }

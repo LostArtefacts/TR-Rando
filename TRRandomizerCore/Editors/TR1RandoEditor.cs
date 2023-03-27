@@ -37,6 +37,11 @@ namespace TRRandomizerCore.Editors
         {
             int target = base.GetSaveTarget(numLevels);
 
+            if (Settings.RandomizeGameStrings)
+            {
+                target++;
+            }
+
             if (Settings.RandomizeStartingHealth)
             {
                 target += numLevels;
@@ -145,6 +150,19 @@ namespace TRRandomizerCore.Editors
 
             using (textureMonitor)
             {
+                if (!monitor.IsCancelled && Settings.RandomizeGameStrings)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing text");
+                    new TR1GameStringRandomizer
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings
+                    }.Randomize(Settings.GameStringsSeed);
+                }
+
                 if (!monitor.IsCancelled && Settings.RandomizeStartingHealth)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing health");
