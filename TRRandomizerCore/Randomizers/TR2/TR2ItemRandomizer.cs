@@ -148,8 +148,6 @@ namespace TRRandomizerCore.Randomizers
             {
                 TR2ScriptedLevel theDeck = Levels.Find(l => l.Is(TR2LevelNames.DECK));
 
-                Location loc = null;
-
                 // if The deck is included in levels I check if its after monastery 
                 if (theDeck != null)
                 {
