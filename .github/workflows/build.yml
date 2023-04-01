@@ -22,6 +22,7 @@ jobs:
       - name: Build the solution
         run: |
           dotnet restore
+          dotnet test --filter 'FullyQualifiedName!~TRLevelReaderUnitTests'
           dotnet build TRRandomizerView -c Release -o build -a x86
           
       - name: Package the build
@@ -51,6 +52,7 @@ jobs:
       - name: Build the solution
         run: |
           dotnet restore
+          dotnet test --filter 'FullyQualifiedName!~TRLevelReaderUnitTests'
           dotnet build TRRandomizerView -c Release -o build -a x64
           
       - name: Package the build
