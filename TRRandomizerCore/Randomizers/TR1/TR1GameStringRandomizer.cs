@@ -106,36 +106,39 @@ namespace TRRandomizerCore.Randomizers
 
             for (int i = 0; i < level.Keys.Count; i++)
             {
-                string key = "key" + (i + 1);
-                Dictionary<string, List<string>> optionMap = GetLevelStrings(levelID).KeyItems;
-                if (optionMap.ContainsKey(key))
+                if (GenerateKeyItemName(levelID, "key" + (i + 1)) is string newName)
                 {
-                    List<string> options = optionMap[key];
-                    level.Keys[i] = _defaultGameStrings.Encode(options[_generator.Next(0, options.Count)]);
+                    level.Keys[i] = newName;
                 }
             }
 
             for (int i = 0; i < level.Pickups.Count; i++)
             {
-                string key = "pickup" + (i + 1);
-                Dictionary<string, List<string>> optionMap = GetLevelStrings(levelID).KeyItems;
-                if (optionMap.ContainsKey(key))
+                if (GenerateKeyItemName(levelID, "pickup" + (i + 1)) is string newName)
                 {
-                    List<string> options = optionMap[key];
-                    level.Pickups[i] = _defaultGameStrings.Encode(options[_generator.Next(0, options.Count)]);
+                    level.Pickups[i] = newName;
                 }
             }
 
             for (int i = 0; i < level.Puzzles.Count; i++)
             {
-                string key = "puzzle" + (i + 1);
-                Dictionary<string, List<string>> optionMap = GetLevelStrings(levelID).KeyItems;
-                if (optionMap.ContainsKey(key))
+                if (GenerateKeyItemName(levelID, "puzzle" + (i + 1)) is string newName)
                 {
-                    List<string> options = optionMap[key];
-                    level.Puzzles[i] = _defaultGameStrings.Encode(options[_generator.Next(0, options.Count)]);
+                    level.Puzzles[i] = newName;
                 }
             }
+        }
+
+        private string GenerateKeyItemName(string levelID, string keyName)
+        {
+            Dictionary<string, List<string>> optionMap = GetLevelStrings(levelID).KeyItems;
+            if (!optionMap.ContainsKey(keyName))
+            {
+                return null;
+            }
+
+            List<string> options = optionMap[keyName];
+            return _defaultGameStrings.Encode(options[_generator.Next(0, options.Count)]);
         }
     }
 }
