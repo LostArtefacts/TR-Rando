@@ -39,18 +39,8 @@ namespace TRRandomizerCore.Globalisation
             }
         }
 
-        public static List<Language> GetSupportedLanguages(G11NGame game)
-        {
-            List<Language> languages = new List<Language>();
-            foreach (Language language in _definedLanguages)
-            {
-                if (language.IsHybrid || LoadLanguage(language, game) != null)
-                {
-                    languages.Add(language);
-                }
-            }
-            return languages;
-        }
+        public static List<Language> GetSupportedLanguages(G11NGame game) =>
+            _definedLanguages.Where(l => l.IsHybrid || LoadLanguage(l, game) != null).ToList();
 
         public static Language GetLanguage(string tag)
         {
@@ -80,7 +70,7 @@ namespace TRRandomizerCore.Globalisation
 
         private static IGameStrings LoadLanguage(Language language, G11NGame game)
         {
-            string path = string.Format(@"Resources\{0}\Strings\G11N\gamestrings_{1}.json", game.ToString(), language.Tag);
+            string path = $@"Resources\{game}\Strings\G11N\gamestrings_{language.Tag}.json";
             if (!File.Exists(path))
             {
                 return null;
