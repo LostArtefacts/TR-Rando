@@ -41,11 +41,13 @@ namespace TRRandomizerCore.Globalisation
                     case '*':
                     case '£':
                     case '$':
+                    case '%':
                         sb.Append("#");
                         break;
                     case '~':
                     case '|':
                     case '_':
+                    case '—':
                         sb.Append('-');
                         break;
                     case '@':
@@ -53,6 +55,9 @@ namespace TRRandomizerCore.Globalisation
                         break;
                     case 'ß':
                         sb.Append('=');
+                        break;
+                    case '=':
+                        sb.Append(':');
                         break;
                     case 'à':
                     case 'è':
@@ -84,6 +89,9 @@ namespace TRRandomizerCore.Globalisation
                     case 'ü':
                     case 'ÿ':
                         sb.Append("~").Append(n);
+                        break;
+                    case 'ł':
+                        sb.Append("l");
                         break;
                     default:
                         sb.Append(n);
