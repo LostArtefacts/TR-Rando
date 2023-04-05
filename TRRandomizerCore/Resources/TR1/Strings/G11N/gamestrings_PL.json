@@ -1,0 +1,501 @@
+{
+  "GlobalStrings": {
+    "HEADING_GAME_OVER": [
+      "Koniec gry!",
+      "Znowu mi nie wyszlo!",
+      "NIE ZYJESZ!",
+      "Spoczywaj w Peperoni",
+      "F"
+    ],
+    "HEADING_INVENTORY": [
+      "Inwentarz",
+      "Sakwa",
+      "Torba z Biedry",
+      "Plecak z Angkor Wat",
+      "Giwery i apteczki"
+    ],
+    "HEADING_ITEMS": [
+      "Przedmioty",
+      "Zestaw kluczy",
+      "Klucze do skarbca",
+      "Klamoty",
+      "Bibeloty"
+    ],
+    "HEADING_OPTION": [
+      "Opcje gry",
+      "Ustawienia gry",
+      "Personalizacja",
+      "Karuzela ustawien",
+      "Dostrajanie gierki"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "1000HP",
+      "Duza Apteczka",
+      "Duzy zasobnik z zyciem",
+      "Beczka Obfitosci",
+      "Znowu pelnia zycia"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Kompas",
+      "Roza wiatrow",
+      "Prosto przed siebie!",
+      "Quo Vadis?",
+      "Ktoredy na Atlantyde?"
+    ],
+    "INV_ITEM_CONTROLS": [
+      "Gameboy",
+      "Steam Deck wersja '96",
+      "Instrukcja obslugi",
+      "Jak grac Panie Premierze?",
+      "Klawiszologia"
+    ],
+    "INV_ITEM_DETAILS": [
+      "OkuLARY Lary",
+      "Ustawienia grafiki",
+      "Ikonka okularow",
+      "/o-o/",
+      "Bryle"
+    ],
+    "INV_ITEM_GAME": [
+      "Paszport",
+      "Papieren Bitte!",
+      "Dowod osobisty",
+      "Paszport kowidowy",
+      "List przewozowy"
+    ],
+    "INV_ITEM_LEADBAR": [
+      "Olowiana sztabka",
+      "Sztabka z olowiu",
+      "Olowiany rygielek",
+      "Pb - 82",
+      "Ciezkie jak cholera!"
+    ],
+    "INV_ITEM_MAGNUM": [
+      "Pistolety Magnum",
+      "Magnumsy",
+      "Glosne pukawki",
+      "Orzelki z TR3",
+      "Dwa Digule"
+    ],
+    "INV_ITEM_MAGNUM_AMMO": [
+      "Bardzo glosna amunicja",
+      "Amunicja do Magnum",
+      "50 BMG",
+      "Powolne naboje",
+      "Gorzka czekolada"
+    ],
+    "INV_ITEM_MEDI": [
+      "500HP",
+      "Mala Apteczka",
+      "Maly zasobnik z zyciem",
+      "Soczek",
+      "Medyczna marihuana"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Pistolce",
+      "Pistolety",
+      "Najslabsza bron w grze",
+      "Pukawki",
+      "Plujki"
+    ],
+    "INV_ITEM_SCION": [
+      "Dzieciecie",
+      "Latorosl",
+      "Precelek",
+      "Ciasteczko",
+      "Barachlo"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Pompka",
+      "Srutowka",
+      "Szotgun",
+      "Strzelba",
+      "Mocna pukawka"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Amunicja do szotgunsa",
+      "Amunicja do srutowki",
+      "Amunicja do strzelby",
+      "Amunicja do giwery",
+      "Amunicja do pompki"
+    ],
+    "INV_ITEM_SOUND": [
+      ".mp3",
+      "Walkman",
+      "Ustawienia dzwieku",
+      "Ikonka Sluchawek",
+      "Poziom Glosnosci"
+    ],
+    "INV_ITEM_UZI": [
+      "Pistolety Uzi",
+      "PM-63 RAK",
+      "Szybkostrzelne pukawki",
+      "Uzisy",
+      "Automaty"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Bardzo szybka amunicja",
+      "Amunicja do Uzi",
+      "Duza ilosc pestek",
+      "Amunicja do Uzisow",
+      "Najlepsza amunicja"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "WOLNA PRZESTRZEN",
+      "WOLNY OTWOR",
+      "PUSTE MIEJSCE",
+      "MIEJSCE NA ZAPIS",
+      "TU NIC NIE MA"
+    ]
+  },
+  "LevelStrings": {
+    "GYM.PHD": {
+      "Names": [
+        "Poziom Testowy",
+        "Dom Croftow",
+        "Szkolenie z BHP",
+        "Domek z pudelkami",
+        "Tutorial"
+      ]
+    },
+    "LEVEL1.PHD": {
+      "Names": [
+        "Jaskinia",
+        "Great_Wall.TR1",
+        "Grota",
+        "Gorskie Jaskinie",
+        "Poziom treningowy #1"
+      ]
+    },
+    "LEVEL2.PHD": {
+      "Names": [
+        "Miasto Vilcabamby",
+        "Poziom treningowy #2",
+        "Ruiny Nowego Londo",
+        "Zagajnik Mysliwych",
+        "Zoo #1"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Srebrny kluczyk",
+          "Mowa jest srebrem",
+          "Bialy kluczyk",
+          "Nie zapomnij o zlotej statuetce",
+          "Ozdobny klucz"
+        ],
+        "puzzle1": [
+          "Filmowy Oskar",
+          "Zlota statuetka",
+          "Paczamama",
+          "Zlota lalka",
+          "Zlota figurka"
+        ]
+      }
+    },
+    "LEVEL3A.PHD": {
+      "Names": [
+        "Tajemnicza Dolina",
+        "Zaginiona Dolina",
+        "Park Jurajski",
+        "Wymieranie Kredowe",
+        "Dolina Uciech"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Zebatka",
+          "Kolo",
+          "Do trzech razy sztuka!",
+          "Nalesnik",
+          "Kwadratura kola"
+        ]
+      }
+    },
+    "LEVEL3B.PHD": {
+      "Names": [
+        "Grobowiec Qualopeka",
+        "Larson Pierwsze Starcie",
+        "Grobowiec Precelka",
+        "Do zobaczenia Larson!",
+        "Przytul Pana Mumie"
+      ]
+    },
+    "LEVEL4.PHD": {
+      "Names": [
+        "Swiatynia Sw. Franciszka",
+        "Kaplica Aerith",
+        "Antyczny Klasztor",
+        "Grecka komedia",
+        "Greckie szalenstwo"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Klucz Neptuna",
+          "Wodny Swiat",
+          "Klucz Posejdona",
+          "Droga na sam dol",
+          "Chodzmy poplywac"
+        ],
+        "key2": [
+          "Klucz Atlasa",
+          "Atlas Farnezyjski",
+          "Brawo nie dales sie splaszczyc!",
+          "Pomachaj Panu Kulce",
+          "Jeden z czterech kluczy"
+        ],
+        "key3": [
+          "Klucz Damoklesa",
+          "Miecz Damoklesa",
+          "Uwaga na miecze!",
+          "Spojrz w gore!",
+          "Uwazaj na miecze!"
+        ],
+        "key4": [
+          "Klucz Thora",
+          "Klucz Hefajstosa",
+          "Klucz Mjolnira",
+          "Kto sieje wiatr ten zbiera burze",
+          "Cisza przed burza"
+        ]
+      }
+    },
+    "LEVEL5.PHD": {
+      "Names": [
+        "Koloseum",
+        "Greckie Igrzyska",
+        "Igrzyska Smierci",
+        "Amfiteatr",
+        "Walki Gladiatorow"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Zardzewialy klucz",
+          "Stary klucz",
+          "Tajemniczy klucz",
+          "Klucz",
+          "Kawalek drutu"
+        ]
+      }
+    },
+    "LEVEL6.PHD": {
+      "Names": [
+        "Palac Midasa",
+        "Zoo #2",
+        "Sanktuarium Midasa",
+        "Zlota Raczka",
+        "Transmutacja"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Zlota sztabka",
+          "Bursztyn",
+          "TOMB-ak",
+          "Sztabka z mosiadzu",
+          "Zloty rygielek"
+        ]
+      }
+    },
+    "LEVEL7A.PHD": {
+      "Names": [
+        "Cysterna",
+        "Zbiornik na wode",
+        "Ogromny kibelek",
+        "Gowniany poziom",
+        "Raj Tadeusza Norka"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Zloty kluczyk",
+          "Milczenie jest zlotem",
+          "Blyszczacy klucz",
+          "Zolty Klucz",
+          "Juz prawie koniec!"
+        ],
+        "key2": [
+          "Srebrny kluczyk",
+          "Mowa jest srebrem",
+          "Bialy kluczyk",
+          "Potrzeba 2och takich",
+          "Znajdz jeszcze jeden"
+        ],
+        "key3": [
+          "Zardzewialy klucz",
+          "Stary klucz",
+          "Tajemniczy klucz",
+          "Klucz",
+          "Kawalek drutu"
+        ]
+      }
+    },
+    "LEVEL7B.PHD": {
+      "Names": [
+        "Grobowiec Tihokana",
+        "Zegnaj Grecjo",
+        "Kaplica Pushblockow",
+        "Ostatni dzien w Grecji",
+        "Grobowiec Swietego"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Zloty kluczyk",
+          "Milczenie jest zlotem",
+          "Blyszczacy klucz",
+          "Zolty Klucz",
+          "Przepustka do Egiptu"
+        ],
+        "key2": [
+          "Zardzewialy klucz",
+          "Stary klucz",
+          "Tajemniczy klucz",
+          "Klucz #1",
+          "Kawalek drutu"
+        ],
+        "key3": [
+          "Zardzewialy klucz",
+          "Stary klucz",
+          "Tajemniczy klucz",
+          "Klucz #2",
+          "Kawalek drutu"
+        ]
+      }
+    },
+    "LEVEL8A.PHD": {
+      "Names": [
+        "Miasto Khamoona",
+        "Swiatynia Khamoona",
+        "Sfinks #1",
+        "Zamek z piasku",
+        "W pustyni i w piasku"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Szafirowy klucz",
+          "Szlachetny klucz",
+          "Magiczny klucz",
+          "Diamentowy klucz",
+          "Bardzo wazny klucz"
+        ]
+      }
+    },
+    "LEVEL8B.PHD": {
+      "Names": [
+        "Obelisk Khamoona",
+        "Miasto na piasku",
+        "Znajdz 4 artefakty",
+        "Egipskie muzeum",
+        "Obelisk egipskich bogow"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Szafirowy klucz",
+          "Szlachetny klucz",
+          "Diamentowy klucz",
+          "Magiczny klucz",
+          "Bardzo wazny klucz"
+        ],
+        "puzzle1": [
+          "Oko Horusa",
+          "Ja wszystko widze!",
+          "Oko Barabasza",
+          "CCTV",
+          "Gapisz mi sie na bebech?"
+        ],
+        "puzzle2": [
+          "Skarabeusz",
+          "Klejnot rodowy",
+          "Zuczek",
+          "Robaczek",
+          "Kamien nerkowy"
+        ],
+        "puzzle3": [
+          "Pieczec Anubisa",
+          "Pieczec Anus-bisa",
+          "Stempel",
+          "Klocek",
+          "Pieczatka"
+        ],
+        "puzzle4": [
+          "Ankh",
+          "Amulet",
+          "Talizman",
+          "Znajdz jeszcze jeden",
+          "Bibelot"
+        ]
+      }
+    },
+    "LEVEL8C.PHD": {
+      "Names": [
+        "Sanktuarium Dzieciecia",
+        "Swiatynia Precelka",
+        "Sfinks #2",
+        "Zegnaj Egipcie",
+        "Piaski Czasu"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Szafirowy klucz",
+          "Szlachetny klucz",
+          "Magiczny klucz",
+          "Diamentowy klucz",
+          "Bardzo wazny klucz"
+        ],
+        "puzzle1": [
+          "Ankh",
+          "Amulet",
+          "Talizman",
+          "Znajdz jeszcze jeden",
+          "Bibelot"
+        ],
+        "puzzle2": [
+          "Skarabeusz",
+          "Klejnot rodowy",
+          "Zuczek",
+          "Robaczek",
+          "Bilet do Atlantydy"
+        ]
+      }
+    },
+    "LEVEL10A.PHD": {
+      "Names": [
+        "Kopalnia Natli",
+        "Kopalnia Natalii",
+        "Kopalnia wegla",
+        "Kopalnia uranu",
+        "Kopalnia Uciech"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Bezpiecznik",
+          "Sloiczek",
+          "Klucz do domku na linie",
+          "1 Lara 3 Sloiki",
+          "Skretka"
+        ],
+        "puzzle2": [
+          "Klucz do piramidy",
+          "Pomaranczowy trojkat",
+          "Illuminati",
+          "Trojkat ostrzegawczy",
+          "Trojkacik"
+        ]
+      }
+    },
+    "LEVEL10B.PHD": {
+      "Names": [
+        "Atlantyda",
+        "Za pozno na aborcje!",
+        "Atlantydzka Twierdza",
+        "Miesny labirynt",
+        "Bekonowa Lara"
+      ]
+    },
+    "LEVEL10C.PHD": {
+      "Names": [
+        "Wielka Piramida",
+        "Natla na pewno martwa?",
+        "TR Underworld cdn.",
+        "Ostateczna Walka",
+        "Wielka Ucieczka"
+      ]
+    }
+  }
+}

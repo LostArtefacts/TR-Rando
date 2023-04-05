@@ -1,0 +1,501 @@
+{
+  "GlobalStrings": {
+    "HEADING_GAME_OVER": [
+      "Zu hart ge-YOLO'd",
+      "Du bist gestorben!",
+      "Tödliche Entscheidung",
+      "Die letzte Ehre",
+      "F"
+    ],
+    "HEADING_INVENTORY": [
+      "Konsumgüter",
+      "Zeug",
+      "Bester Rucksack",
+      "Das gute Zeug",
+      "Alle wichtigen Dinge"
+    ],
+    "HEADING_ITEMS": [
+      "Die wichtigen Dinge",
+      "Missionsgegenstände",
+      "Schätze",
+      "Verkauf hier nichts!",
+      "Krempel"
+    ],
+    "HEADING_OPTION": [
+      "Funktionskarussell",
+      "Du bist wunderschön!",
+      "OwO",
+      "uwu",
+      "Ändere Dinge"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Sanitäter!",
+      "Dickes Medipack",
+      "Füll mich mit ganzem Leben",
+      "Etwas Großes",
+      "Besser als ein kleines Medipack"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Du solltest nach Norden gehen",
+      "Schleuderteil",
+      "Nur ein Magnet",
+      "Funktioniert das?",
+      "Wer benutzt das?"
+    ],
+    "INV_ITEM_CONTROLS": [
+      "Ergonomie",
+      "Wie spielt man",
+      "Tastatur ist das Beste",
+      "Controller ist das Beste",
+      "Welche Taste ist es?"
+    ],
+    "INV_ITEM_DETAILS": [
+      "John Lennon Kostüm",
+      "Sonnenbrille",
+      "/o-o/",
+      "Rosarote Brille",
+      "Augengläser"
+    ],
+    "INV_ITEM_GAME": [
+      "Personalausweis",
+      "Reisedokument",
+      "Bescheinigung",
+      "Verpixeltes Buch",
+      "Reisepass"
+    ],
+    "INV_ITEM_LEADBAR": [
+      "Nicht anlecken!",
+      "Zu schwer zum Tragen",
+      "Falsches Material",
+      "Ein bisschen giftig",
+      "Leg es auf Midas Hand"
+    ],
+    "INV_ITEM_MAGNUM": [
+      "Bessere Pistolen",
+      "Pistolen in Schwarz",
+      "Bisschen langweilig",
+      "Schaden pro Sekunde",
+      "Bisschen Tieferer Ton"
+    ],
+    "INV_ITEM_MAGNUM_AMMO": [
+      "Eiskrem Clips",
+      "Kinderriegel",
+      "50 Kugeln",
+      "Schokolade",
+      "Nicht soi gut wie Uzi Clips"
+    ],
+    "INV_ITEM_MEDI": [
+      "Kein dickes Medipack",
+      "Etwas Winziges",
+      "Füll mich mit halbem Leben",
+      "Wenigstens etwas",
+      "Schlechter als ein großes Medipack"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Pistolen 640",
+      "Schwächste Wahl",
+      "Die Zuverlässigen",
+      "Wer braucht Muni?",
+      "Unendliche Piffpaffs"
+    ],
+    "INV_ITEM_SCION": [
+      "Rundes Dingsda",
+      "Bitte nicht schießen!",
+      "Du brauchst Drei",
+      "Es heißt Ski-jon",
+      "Es heißt Sai-jon"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Sehr Präzise",
+      "Benutz lieber Pistolen",
+      "Bester Schaden",
+      "Klobig",
+      "Große Dröhnende Panzerfaust"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Nicht genug Muni",
+      "Nur 2x Schrot",
+      "Definition für Präzision",
+      "Nicht wert aufzuheben",
+      "Knaller"
+    ],
+    "INV_ITEM_SOUND": [
+      "Mischpult",
+      "Leise oder Laut?",
+      "catJAM",
+      "Kopfhörer",
+      "Gehörschutz Polizei"
+    ],
+    "INV_ITEM_UZI": [
+      "BRRRRRTTRRRTTRRT",
+      "MP 40",
+      "Rückschlag Maschinenpistole",
+      "Piffpaff",
+      "Braucht eine Drosselung"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Beste Muni",
+      "100 Kugeln",
+      "Wenigstens trifft die Muni",
+      "Altertümliche Munition",
+      "Piffpaff Muni"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "Du bist großartig!",
+      "Gerade sinnlos",
+      "Rettet unsere Seelen",
+      "Ersparnisse",
+      "Speichere Hier!"
+    ]
+  },
+  "LevelStrings": {
+    "GYM.PHD": {
+      "Names": [
+        "Lernprogramm",
+        "Der Einzug",
+        "404: Garten unauffindbar",
+        "Führung durchs Haus",
+        "Zieh dich aus!"
+      ]
+    },
+    "LEVEL1.PHD": {
+      "Names": [
+        "Fledermaushöhle",
+        "Lässig",
+        "Neustart",
+        "Schwerstes Level",
+        "Ganz viel Grau"
+      ]
+    },
+    "LEVEL2.PHD": {
+      "Names": [
+        "Wolfgelage",
+        "Großstadt der Wölfe",
+        "Das Bärgeheimnis",
+        "Zu viele Fledermäuse",
+        "Dörfchen Bumscabamba"
+      ],
+      "KeyItems": {
+        "key1": [
+          "QWOP Schlüssel",
+          "Lupus Schlüssel",
+          "Vergiss die Figur nicht!",
+          "Flieh von den Wölfen für mehr Wölfe",
+          "Gegenstand rechts"
+        ],
+        "puzzle1": [
+          "Puppe",
+          "Indiana's Goldfigur",
+          "Wahrscheinlich Wertvoll",
+          "Gegenstand links",
+          "Typ mit abgefahrenem Hut"
+        ]
+      }
+    },
+    "LEVEL3A.PHD": {
+      "Names": [
+        "Dinosaurieranlage",
+        "Dinowelten",
+        "Der epischste Moment",
+        "Barneysphäre",
+        "Dinosaurier Schutzgebiet"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "3 ist die magische Zahl",
+          "Viele kleine Zähnchen",
+          "Gebissteile",
+          "Rundstücke",
+          "Drehscheibe"
+        ]
+      }
+    },
+    "LEVEL3B.PHD": {
+      "Names": [
+        "Nur Raptoren Hier",
+        "Überraschung! Larson!",
+        "Achtung Felsbrocken!",
+        "Umarm Mumie für Glück",
+        "Lara macht alles kaputt"
+      ]
+    },
+    "LEVEL4.PHD": {
+      "Names": [
+        "Fall nicht!",
+        "Hämmer mich Baby!",
+        "Gott, nicht dieses Level",
+        "Pierre, du Dreckspatz",
+        "Eine Vielfalt an Löchern"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Wasserschlüssel",
+          "Eigentlich Römisch",
+          "Schwindelposeidon",
+          "Und wieder ganz nach unten",
+          "Lass uns schwimmen gehen"
+        ],
+        "key2": [
+          "Viele viele Landkarten",
+          "Eine echte Dame schießt immer",
+          "Verdammter Gorilla",
+          "Massiver Stein Schlüssel",
+          "Juhu, du wurdest nicht zerquetscht!"
+        ],
+        "key3": [
+          "Pass auf wo du hintrittst!",
+          "Nicht mal ein Gott",
+          "Zeit für einen Spaziergang",
+          "Vorsicht! Schwert!",
+          "Ich komme!"
+        ],
+        "key4": [
+          "Nicht mal Griechisch",
+          "Mjölnir Schlüssel",
+          "Hammerschlüssel",
+          "Blitzschlüssel",
+          "Jetzt nicht runterfallen"
+        ]
+      }
+    },
+    "LEVEL5.PHD": {
+      "Names": [
+        "Pierres Schaubühne",
+        "gladiatorenÜberprüfung",
+        "Wieso im Untergrund?",
+        "So viele Feinde",
+        "Die Tierschau"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Dein Ausweg",
+          "Wieso ist dieser Schlüssel hier?",
+          "Was ist das für ein Raum?",
+          "Öffnet die Tür auf dem Balkon",
+          "Eintrittskarte zum Zoo"
+        ]
+      }
+    },
+    "LEVEL6.PHD": {
+      "Names": [
+        "Fühlt sich goldig an!",
+        "Anfassen für Superwaffe",
+        "Der Zoo",
+        "Kostenloser Goldsplit",
+        "Zurück zum Affen"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Dein Notausgang",
+          "Nicht giftig",
+          "Richtiges Material",
+          "Jetzt ist es brauchbar!",
+          "Zu schwer zum Tragen"
+        ]
+      }
+    },
+    "LEVEL7A.PHD": {
+      "Names": [
+        "Einfach schwimmen!",
+        "ÜBERSCHWEMMT",
+        "Gigantische Toilette",
+        "Krokodilsparadis",
+        "Rattentanz"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Na endlich!",
+          "Oooo.. wie das funkelt!",
+          "Fast da",
+          "Letzter Schlüssel",
+          "Besser als Silber"
+        ],
+        "key2": [
+          "Besser als Rost",
+          "Schlechter als Gold",
+          "Zu viele Türen zum Öffnen",
+          "Du wirst Zwei brauchen",
+          "Besseres Gebraucht"
+        ],
+        "key3": [
+          "Benutzen für mehr Schlüssel",
+          "Der erste von vielen Schlüsseln",
+          "Schlechter als Silber",
+          "Bist du dir sicher, dass das Rost ist?",
+          "Verrostetes Eisen"
+        ]
+      }
+    },
+    "LEVEL7B.PHD": {
+      "Names": [
+        "Vertrau keinen Statuen",
+        "Fertig mit Griechenland",
+        "Pierre war zuerst hier",
+        "Juhu, Schubblöcke!",
+        "Pierres letztes Gefecht"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Wie funktioniert das?",
+          "Das ist kein Geheimnis",
+          "Löst ein Geheimnisgeräusch aus",
+          "Benutz' es fürs goldene Schlüsselloch",
+          "Glitzender Schlüssel"
+        ],
+        "key2": [
+          "Ratten im Überfluss",
+          "Achtung vor den Gorillas",
+          "Vergiss nicht das Geheimnis",
+          "Du braucht noch einen Schlüssel",
+          "Finde das richtige Loch"
+        ],
+        "key3": [
+          "Steck ihn ins Loch",
+          "Du brauchst 2 Schlüssel für 1 Tür",
+          "Schieb den Block ein bisschen mehr rum",
+          "Du brauchst noch einen Schlüssel",
+          "Finde das richtige Loch"
+        ]
+      }
+    },
+    "LEVEL8A.PHD": {
+      "Names": [
+        "Kuschel die Kätzchen",
+        "Rückkehr nach Ägypten",
+        "Pumakäfig",
+        "Nicht wirklich eine Stadt",
+        "Monas Zuhause"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Gehirnoperation",
+          "Monas Schlüssel",
+          "Benutz ihn in der Sphinx",
+          "Blauer Edelsteinschlüssel",
+          "Aluminimoxid Schlüssel"
+        ]
+      }
+    },
+    "LEVEL8B.PHD": {
+      "Names": [
+        "Smiley Sprung",
+        "Vollkommene Befriedigung",
+        "Vier Artefakte Benötigt",
+        "Ägyptisches Museum",
+        "Ägyptischer Götterzeug"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Öffnet zwei Türen",
+          "Blauer Edelsteinschlüssel",
+          "Aluminimoxid Schlüssel",
+          "Wieso ist dort eine Tür?",
+          "Krokodilsschlüssel"
+        ],
+        "puzzle1": [
+          "Auge von Seth's Verbrecher",
+          "Bis später!",
+          "Immer Wachsam",
+          "Falkenaugapfel",
+          "Hör auf mich anzugucken"
+        ],
+        "puzzle2": [
+          "Nur ein Käfer",
+          "Skaraborn",
+          "Chepre",
+          "Mistkäfer",
+          "Wünsch dir du hättest es fürs nächste Level"
+        ],
+        "puzzle3": [
+          "Siegel des Anpu",
+          "Siegel des Schakals",
+          "Steingekritzel",
+          "Stein von Rosette",
+          "Kartoffel"
+        ],
+        "puzzle4": [
+          "Das ist nicht TR4",
+          "Wo ist Seth?",
+          "Leg das lieber zurück",
+          "Schlüssel des Lebens",
+          "Kreuz mit Schleife"
+        ]
+      }
+    },
+    "LEVEL8C.PHD": {
+      "Names": [
+        "Woher kommt Larson?",
+        "Zu viele Atlanter",
+        "Moment die Uzis sind WO?",
+        "Flucht der Mumien",
+        "Verbring eine tolle Zeit"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Nutze ihn auf der Brücke",
+          "Entfessel den Zentaur",
+          "Benutze fürs Anch",
+          "Der einzige Schlüssel in diesem Level",
+          "Wieso rostest das nicht?"
+        ],
+        "puzzle1": [
+          "Schieb es in die Sphinx",
+          "Du brauchst Zwei",
+          "Wo ist Seth?",
+          "Triff mich Baby noch einmal",
+          "Zentaurenkacke"
+        ],
+        "puzzle2": [
+          "Nur ein Käfer",
+          "Aktiviere ein paar Gegner",
+          "Flüchte aus diesem Level",
+          "Großartig, zurück zum Anfang",
+          "Solange hast du gebraucht?"
+        ]
+      }
+    },
+    "LEVEL10A.PHD": {
+      "Names": [
+        "Level mit Schlauchboot",
+        "Tod Natlas Handlangern",
+        "Wieso ist das eine Mine?",
+        "Wo sind die Waffen?",
+        "Natlas Feuchthöhlen"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Wer hat das hier hingelegt?",
+          "ZZzzzZzztt!",
+          "Willst du Waffen?",
+          "Wieso funktioniert das noch?",
+          "Elektrische Pinzette"
+        ],
+        "puzzle2": [
+          "Einzigartiger Schlüssel",
+          "Dein Ausweg",
+          "Irgendein ägyptisches Dreieck",
+          "Einstieg nach Atlantis",
+          "Ziemlich Kantig"
+        ]
+      }
+    },
+    "LEVEL10B.PHD": {
+      "Names": [
+        "Nicht unter Wasser",
+        "Fleischlabyrinth",
+        "Viel Glück",
+        "Bring Verbandskästchen",
+        "Turm des Terrors"
+      ]
+    },
+    "LEVEL10C.PHD": {
+      "Names": [
+        "Der entgültige Countdown",
+        "Natla ist nicht tot",
+        "Untergang von Atlantis",
+        "Es ist eine Falle",
+        "Gib Torso eine Umarmung"
+      ]
+    }
+  }
+}

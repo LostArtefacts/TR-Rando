@@ -85,16 +85,16 @@ You will need the following dependencies:
 * Radgryd - For endless TR1 testing and lots of great ideas for the rando.
 * Ralodosmovo - For providing an assortment of custom textures, and lots of ideas for the rando.
 * Lilly Jericho - For endless testing to fix issues such as the opera house/barkhang entity freeze, mirrored levels, and providing great continuous feedback. Lilly was also a coordinator of the huge translation effort by the community, with a special thanks to the following translators:
-    * Lilly Jericho (German)
-    * Erackk (Croatian)
-    * LeonHeart & Hedteur (French)
-    * Diego (Italian)
-    * Sabatu (Czech)
-    * Woof Smit & Pikkufighter (Swedish)
-    * Dokus & BeardedBogle (Dutch)
-    * DJ_Full (Polish)
-    * Jumica & Fuse (Portuguese)
-    * ChiburuTV (Japanese)
-    * Fetch (Russian)
-    * Riku (Finnish)
+    * Croatian - Erackk
+    * Czech - Sabatu
+    * Dutch - BeardedBogle, Dokus, & LordMeShine
+    * Finnish - Riku
+    * French - Hedteur & LeonHeart
+    * German - Lilly Jericho & Radgryd
+    * Italian - Diego & Nanaki
+    * Japanese - ChiburuTV
+    * Polish - DJ_Full & NaBu
+    * Portuguese - Fuse & Jumica
+    * Russian - Fetch
+    * Swedish - Pikkufighter & Woof Smit
 

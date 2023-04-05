@@ -1,0 +1,510 @@
+{
+  "GlobalStrings": {
+    "HEADING_GAME_OVER": [
+      "You YOLO'd Too Hard",
+      "You Died",
+      "Fatality",
+      "Press F to Pay Respects",
+      "F"
+    ],
+    "HEADING_INVENTORY": [
+      "Consumables",
+      "Stuff",
+      "Best Backpack",
+      "The Good Stuff",
+      "All the Things"
+    ],
+    "HEADING_ITEMS": [
+      "The Important Stuff",
+      "Quest Items",
+      "Treasure",
+      "Don't Sell These",
+      "Things"
+    ],
+    "HEADING_OPTION": [
+      "Feature Carousel",
+      "You're Beautiful!",
+      "OwO",
+      "UwU",
+      "Change Things"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Medic!",
+      "Thicc Medi Pack",
+      "Full Health Giver",
+      "Mega",
+      "Better than a Small Med"
+    ],
+    "INV_ITEM_COMPASS": [
+      "You Should Go North",
+      "Spinny Thingy",
+      "Just a Magnet",
+      "Does This Work?",
+      "Who Uses This?"
+    ],
+    "INV_ITEM_CONTROLS": [
+      "Ergonomics",
+      "How to Play",
+      "Keyboard is Best",
+      "Controller is Best",
+      "Which button is it?"
+    ],
+    "INV_ITEM_DETAILS": [
+      "John Lennon Costume",
+      "Shades",
+      "/o-o/",
+      "Rose-tinted Goggles",
+      "Glasses"
+    ],
+    "INV_ITEM_GAME": [
+      "ID",
+      "Travel Document",
+      "Credentials",
+      "Pixelated Book",
+      "Passport"
+    ],
+    "INV_ITEM_LEADBAR": [
+      "Don't Lick",
+      "Too Heavy to Carry",
+      "Wrong Material",
+      "Slightly Toxic",
+      "Put on Midas Hand"
+    ],
+    "INV_ITEM_MAGNUM": [
+      "Better Pistols",
+      "Pistols",
+      "Kinda Boring",
+      "DPS",
+      "Slightly Deeper Sounding"
+    ],
+    "INV_ITEM_MAGNUM_AMMO": [
+      "Ice Cream Clips",
+      "Hershey Bar",
+      "50 bullets",
+      "Chocolate",
+      "Not as good as Uzi Clips"
+    ],
+    "INV_ITEM_MEDI": [
+      "Not Thicc Medi Pack",
+      "Mini",
+      "Half Health Giver",
+      "It's Something",
+      "Worse than a Large Med"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Browning Hi-Powers",
+      "Weakest build",
+      "Ol' Reliable",
+      "Who needs ammo?",
+      "Infinite Pew Pew"
+    ],
+    "INV_ITEM_SCION": [
+      "Round Thingy",
+      "Don't Shoot Me",
+      "You Need Three",
+      "It's Skee-On",
+      "It's Sigh-On"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Perfectly Accurate",
+      "Just Use Pistols",
+      "Best Damage",
+      "Clunky",
+      "Big Boom Bazooka"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Not Enough Ammo",
+      "Only 2 Shells Each",
+      "Definition of Accuracy",
+      "Not Worth Picking Up",
+      "Bang Shell"
+    ],
+    "INV_ITEM_SOUND": [
+      "Mixer",
+      "Quiet or Loud?",
+      "catJAM",
+      "Headphones",
+      "Earache Police"
+    ],
+    "INV_ITEM_UZI": [
+      "BRRRRRR",
+      "MAC-10",
+      "Blowback Operated Machine Pistol",
+      "Pew Pew",
+      "Needs Nerf"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Best Ammo",
+      "100 bullets",
+      "At least these hit the enemies",
+      "Ammo Chilling in Ancient Tombs",
+      "Pew Pew Ammo"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "You're Breathtaking",
+      "Currently Useless",
+      "Save Our Souls",
+      "Personal Savings",
+      "Save Over Me"
+    ]
+  },
+  "LevelStrings": {
+    "GYM.PHD": {
+      "Names": [
+        "Tutorial",
+        "Moving In",
+        "404 Garden Not Found",
+        "Guided Tour",
+        "Take Off Your Clothes"
+      ]
+    },
+    "LEVEL1.PHD": {
+      "Names": [
+        "The Batcave",
+        "EZY",
+        "RESET",
+        "Hardest Level",
+        "A Lot of Grey"
+      ]
+    },
+    "LEVEL2.PHD": {
+      "Names": [
+        "Wolf Orgy",
+        "City of Wolves",
+        "The Bear is the Secret",
+        "Too Many Bats",
+        "Town of Vilcabanga"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Qwop Key",
+          "Wolf Key",
+          "Don't Forget the Idol",
+          "Escape the Wolves for more Wolves",
+          "Item on the Right"
+        ],
+        "puzzle1": [
+          "Doll",
+          "Indiana's Idol",
+          "Probably Valuable",
+          "Item on the Left",
+          "Dude with Funky Hat"
+        ]
+      }
+    },
+    "LEVEL3A.PHD": {
+      "Names": [
+        "Jurassic Park",
+        "Jurassic World",
+        "Most Epic Moment",
+        "Barney's Realm",
+        "Dinosaur Sanctuary"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "3 Is The Magic Number",
+          "COGGERS",
+          "Gear",
+          "Machinery",
+          "Toothwheel"
+        ]
+      }
+    },
+    "LEVEL3B.PHD": {
+      "Names": [
+        "Only Raptors Here",
+        "Surprise! Larson!",
+        "Watch the Boulder",
+        "Hug Mummy for Good Luck",
+        "Lara Breaks S**t"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "3 Is The Magic Number",
+          "COGGERS",
+          "Gear",
+          "Machinery",
+          "Toothwheel"
+        ]
+      }
+    },
+    "LEVEL4.PHD": {
+      "Names": [
+        "Don't Fall",
+        "Hammer Me Baby",
+        "Oh God, Not This Level",
+        "Pierre, You Litter Bug",
+        "A Variety of Holes"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Water Key",
+          "Hey, I'm Actually Roman",
+          "Fake Poseidon",
+          "All the way down you go",
+          "Let's go for a swim"
+        ],
+        "key2": [
+          "Many Many Maps",
+          "A True Lady Always Shoots",
+          "Damn Gorilla",
+          "Massive Boulder Key",
+          "Glad You Didn't Get Squished"
+        ],
+        "key3": [
+          "Watch Your Step",
+          "Not Even a God",
+          "Time for a Stroll",
+          "Watch the Swords",
+          "Incoming"
+        ],
+        "key4": [
+          "Not Even Greek",
+          "Mjölnir Key",
+          "Hammer Key",
+          "Lightning Key",
+          "Now Don't Fall"
+        ]
+      }
+    },
+    "LEVEL5.PHD": {
+      "Names": [
+        "Pierre's Theatre",
+        "gladiatorCheck",
+        "Why is this Underground?",
+        "So Many Enemies",
+        "The Menagerie"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Your Way Out",
+          "Why is this Key In Here?",
+          "What is this room?",
+          "Opens Gate in Balcony",
+          "Ticket to the Zoo"
+        ]
+      }
+    },
+    "LEVEL6.PHD": {
+      "Names": [
+        "Feels Gold Man!",
+        "Jump on Hand for OP Gun",
+        "The Zoo",
+        "Free Gold Split",
+        "Return to Monke"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Your Ticket Out",
+          "Not Toxic",
+          "Right Material",
+          "Now It's Useful!",
+          "Too Heavy to Carry"
+        ]
+      }
+    },
+    "LEVEL7A.PHD": {
+      "Names": [
+        "Just Keep Swimming!",
+        "FLOODED",
+        "Giant Toilet",
+        "Crocodile's Paradise",
+        "ratJAM"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Freaking Finally",
+          "Ooooo...shiny",
+          "Almost There",
+          "Last Key",
+          "Better than Silver"
+        ],
+        "key2": [
+          "Better Than Rusty",
+          "Worse Than Gold",
+          "Too Many Doors to Open",
+          "You'll Need Two",
+          "Need Something Better"
+        ],
+        "key3": [
+          "Use to Get More Keys",
+          "First of Many Keys",
+          "Worse Than Silver",
+          "Sure That's Rust?",
+          "Oxidized Iron"
+        ]
+      }
+    },
+    "LEVEL7B.PHD": {
+      "Names": [
+        "Don't Trust the Statues",
+        "Finally Done with Greece",
+        "Pierre Got Here First",
+        "Yay! Pushblocks!",
+        "Pierre's Last Stand"
+      ],
+      "KeyItems": {
+        "key1": [
+          "How does this key do this?",
+          "This Isn't a Secret",
+          "Makes Secret Chime",
+          "Use in Gold Keyhole",
+          "Sparkly Key"
+        ],
+        "key2": [
+          "Rats are Abound",
+          "Watch for Gorillas",
+          "Don't Miss the Secret",
+          "You Need Another Key",
+          "Only Works on the Right Lock"
+        ],
+        "key3": [
+          "Put in Keyhole",
+          "Need 2 Keys for 1 Door",
+          "Push the Block Around More",
+          "You Need Another Key",
+          "Only Works on the Left Lock"
+        ]
+      }
+    },
+    "LEVEL8A.PHD": {
+      "Names": [
+        "Snuggle the Kitties",
+        "Return to Egypt",
+        "Panther Paradise",
+        "Not Quite a City",
+        "Mona's Home"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Brain Surgery",
+          "Mona's Key",
+          "Use in the Sphinx",
+          "Blue Gemstone Key",
+          "Aluminium Oxide Key"
+        ]
+      }
+    },
+    "LEVEL8B.PHD": {
+      "Names": [
+        "Smiley Jump",
+        "Pure Satisfaction",
+        "Four Artefacts Needed",
+        "Egyptian Museum",
+        "Egyptian God's Stuff"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Opens Two Doors",
+          "Blue Gemstone Key",
+          "Aluminium Oxide Key",
+          "Why is There a Door There?",
+          "Crocodile Key"
+        ],
+        "puzzle1": [
+          "Eye of Seth's Villain",
+          "See You Around",
+          "Always Watching",
+          "Falcon's Eyeball",
+          "Stop Looking At Me"
+        ],
+        "puzzle2": [
+          "Just a Bug",
+          "Heracross",
+          "Khepri",
+          "Dung Beetle",
+          "Wish You Had This for Next Level"
+        ],
+        "puzzle3": [
+          "Seal of Anpu",
+          "Seal of the Jackal",
+          "Just Some Scribbles",
+          "The Rosetta Stone",
+          "Potato"
+        ],
+        "puzzle4": [
+          "This Isn't TR4",
+          "Where is Seth?",
+          "You Better Put That Back",
+          "Key of Life",
+          "Cross with a Loop"
+        ]
+      }
+    },
+    "LEVEL8C.PHD": {
+      "Names": [
+        "How Did Larson Get Here?",
+        "Too Many Atlanteans",
+        "Wait, Uzis are Where?",
+        "Who Let the Mummies Out?",
+        "A Joyous Time"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Use on the Bridge",
+          "Unleash the Centaur",
+          "Use to get Ankh",
+          "Only Key in this Level",
+          "How is This Not Rusty?"
+        ],
+        "puzzle1": [
+          "Put on the Sphinx",
+          "Need Two",
+          "Where is Seth?",
+          "Hit Me Baby One More Time",
+          "Centaur Poop"
+        ],
+        "puzzle2": [
+          "Just a Bug",
+          "Spawns Some Enemies",
+          "Get Out of this Level",
+          "Great, Back To The Start",
+          "Took you that long?"
+        ]
+      }
+    },
+    "LEVEL10A.PHD": {
+      "Names": [
+        "Level with the Dinghy",
+        "Death to Natla's Goons",
+        "Why is this a Mine?",
+        "Where Guns?",
+        "Natla's Memes"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Who Put This Here",
+          "Zap!",
+          "You want guns?",
+          "Why do these still work?",
+          "Electric Tweezers"
+        ],
+        "puzzle2": [
+          "Very Unique Key",
+          "Your Way Out",
+          "Some Egyptian Triangle",
+          "Atlantis Access",
+          "Pretty Edgy"
+        ]
+      }
+    },
+    "LEVEL10B.PHD": {
+      "Names": [
+        "Not Underwater",
+        "Fleshmaze",
+        "Good Luck",
+        "Bring Meds",
+        "Tower of Terror"
+      ]
+    },
+    "LEVEL10C.PHD": {
+      "Names": [
+        "The Final Countdown",
+        "Natla's Not Dead",
+        "Death to Atlantis",
+        "It's a Trap",
+        "Give Torso a Hug"
+      ]
+    }
+  }
+}

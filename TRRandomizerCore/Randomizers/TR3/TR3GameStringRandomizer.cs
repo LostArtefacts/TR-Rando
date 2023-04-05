@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TRGE.Core;
 using TRRandomizerCore.Globalisation;
 
@@ -12,19 +9,21 @@ namespace TRRandomizerCore.Randomizers
     {
         private const int _maxLevelNameLength = 24;
 
-        private GameStrings _gameStrings, _defaultGameStrings;
+        private G11N _g11n;
+        private TR23GameStrings _gameStrings, _defaultGameStrings;
 
         public override void Randomize(int seed)
         {
             if (Settings.RandomizeGameStrings)
             {
                 _generator = new Random(seed);
+                _g11n = new G11N(G11NGame.TR3);
 
                 if (!Settings.GameStringLanguage.IsHybrid)
                 {
-                    _gameStrings = G11N.Instance.GetGameStrings(Settings.GameStringLanguage, G11NGame.TR3);
+                    _gameStrings = _g11n.GetGameStrings(Settings.GameStringLanguage) as TR23GameStrings;
                 }
-                _defaultGameStrings = G11N.Instance.GetDefaultGameStrings(G11NGame.TR3);
+                _defaultGameStrings = _g11n.GetDefaultGameStrings() as TR23GameStrings;
 
                 TR23Script script = ScriptEditor.Script as TR23Script;
                 List<string> gamestrings1 = new List<string>(script.GameStrings1);
@@ -47,13 +46,13 @@ namespace TRRandomizerCore.Randomizers
             TriggerProgress();
         }
 
-        private GameStrings GetGameStrings()
+        private TR23GameStrings GetGameStrings()
         {
             // This allows for a hybrid language to be used, so each call will randomly pick another language.
             if (Settings.GameStringLanguage.IsHybrid)
             {
-                Language[] availableLangs = G11N.Instance.RealLanguages;
-                return G11N.Instance.GetGameStrings(availableLangs[_generator.Next(0, availableLangs.Length)], G11NGame.TR3);
+                Language[] availableLangs = _g11n.RealLanguages;
+                return _g11n.GetGameStrings(availableLangs[_generator.Next(0, availableLangs.Length)]) as TR23GameStrings;
             }
 
             return _gameStrings;
@@ -64,7 +63,7 @@ namespace TRRandomizerCore.Randomizers
             return GetGameStrings().GlobalStrings[index];
         }
 
-        private LevelStrings GetLevelStrings(string lvlName)
+        private TR23LevelStrings GetLevelStrings(string lvlName)
         {
             return GetGameStrings().LevelStrings[lvlName];
         }
@@ -99,11 +98,11 @@ namespace TRRandomizerCore.Randomizers
                         {
                             // Ensure to use one from the languages options rather than defaulting
                             int customRandomIndex = _generator.Next(0, options.Length);
-                            scriptStrings[stringIndex] = GameStrings.Encode(options[customRandomIndex]);
+                            scriptStrings[stringIndex] = _defaultGameStrings.Encode(options[customRandomIndex]);
                         }
                         else
                         {
-                            scriptStrings[stringIndex] = GameStrings.Encode(options[randomIndex]);
+                            scriptStrings[stringIndex] = _defaultGameStrings.Encode(options[randomIndex]);
                         }
                     }
                 }
@@ -114,7 +113,7 @@ namespace TRRandomizerCore.Randomizers
                 foreach (int stringIndex in defaultGlobalStrings.StandaloneStrings.Keys)
                 {
                     string[] options = GetGlobalStrings(globalStringsIndex).StandaloneStrings[stringIndex];
-                    scriptStrings[stringIndex] = GameStrings.Encode(options[_generator.Next(0, options.Length)]);
+                    scriptStrings[stringIndex] = _defaultGameStrings.Encode(options[_generator.Next(0, options.Length)]);
                 }
             }
         }
@@ -127,7 +126,7 @@ namespace TRRandomizerCore.Randomizers
                 return;
             }
 
-            LevelStrings defaultLevelStrings = _defaultGameStrings.LevelStrings[levelID];
+            TR23LevelStrings defaultLevelStrings = _defaultGameStrings.LevelStrings[levelID];
 
             if (!Settings.RetainLevelNames && defaultLevelStrings.Names != null && defaultLevelStrings.Names.Length > 0)
             {
@@ -139,7 +138,7 @@ namespace TRRandomizerCore.Randomizers
                 }
                 while (levelName.Length > _maxLevelNameLength);
 
-                level.Name = GameStrings.Encode(levelName);
+                level.Name = _defaultGameStrings.Encode(levelName);
             }
 
             if (Settings.RetainKeyItemNames)
@@ -152,7 +151,7 @@ namespace TRRandomizerCore.Randomizers
                 foreach (int keyIndex in defaultLevelStrings.Keys.Keys)
                 {
                     string[] options = GetLevelStrings(levelID).Keys[keyIndex];
-                    level.Keys[keyIndex] = GameStrings.Encode(options[_generator.Next(0, options.Length)]);
+                    level.Keys[keyIndex] = _defaultGameStrings.Encode(options[_generator.Next(0, options.Length)]);
                 }
             }
 
@@ -161,7 +160,7 @@ namespace TRRandomizerCore.Randomizers
                 foreach (int pickupIndex in defaultLevelStrings.Pickups.Keys)
                 {
                     string[] options = GetLevelStrings(levelID).Pickups[pickupIndex];
-                    level.Pickups[pickupIndex] = GameStrings.Encode(options[_generator.Next(0, options.Length)]);
+                    level.Pickups[pickupIndex] = _defaultGameStrings.Encode(options[_generator.Next(0, options.Length)]);
                 }
             }
 
@@ -170,20 +169,8 @@ namespace TRRandomizerCore.Randomizers
                 foreach (int puzzleIndex in defaultLevelStrings.Puzzles.Keys)
                 {
                     string[] options = GetLevelStrings(levelID).Puzzles[puzzleIndex];
-                    level.Puzzles[puzzleIndex] = GameStrings.Encode(options[_generator.Next(0, options.Length)]);
+                    level.Puzzles[puzzleIndex] = _defaultGameStrings.Encode(options[_generator.Next(0, options.Length)]);
                 }
-            }
-        }
-
-        private void MoveAndReplacePuzzle(AbstractTRScriptedLevel level, int currentIndex, int newIndex, string replacement)
-        {
-            if (level.Puzzles[currentIndex] != replacement)
-            {
-                if (level.Puzzles[currentIndex] != "P" + (currentIndex + 1))
-                {
-                    level.Puzzles[newIndex] = level.Puzzles[currentIndex];
-                }
-                level.Puzzles[currentIndex] = replacement;
             }
         }
     }

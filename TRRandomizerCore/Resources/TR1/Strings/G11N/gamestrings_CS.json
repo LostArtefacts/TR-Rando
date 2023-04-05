@@ -1,0 +1,501 @@
+{
+  "GlobalStrings": {
+    "HEADING_GAME_OVER": [
+      "Ty NULO!",
+      "Si Mrtev",
+      "Fatalita Larita",
+      "F pro Respekt",
+      "F"
+    ],
+    "HEADING_INVENTORY": [
+      "Jidelni Listek",
+      "Veci",
+      "Top Batoh",
+      "Dobre Veci",
+      "Vsechno Harabundi"
+    ],
+    "HEADING_ITEMS": [
+      "Dulezite Veci",
+      "Dulezity Bordel",
+      "Poklady",
+      "Neprodavat!",
+      "Veci"
+    ],
+    "HEADING_OPTION": [
+      "Nastaveni Nenastaveni",
+      "Jsi Krasny",
+      "UwU",
+      "OwO",
+      "Zmente Veci"
+    ],
+    "INV_ITEM_BIG_MEDI": [
+      "Zavolej Doktora!",
+      "Tlusta Lekarna",
+      "Da Plny Zivot",
+      "Mega",
+      "Lepsi nez Mala Lekarna"
+    ],
+    "INV_ITEM_COMPASS": [
+      "Jdi Na Sever",
+      "TociToci Vecicka",
+      "Jen Magnet",
+      "Funguje Vubec?",
+      "Kdo To Pouziva?"
+    ],
+    "INV_ITEM_CONTROLS": [
+      "Ergonomika",
+      "Jak se Ovlada?",
+      "Klavesnice je Top",
+      "Ovladac je Top",
+      "Co dela Co"
+    ],
+    "INV_ITEM_DETAILS": [
+      "John Lennon volal a chce je",
+      "Nesnasim Slunce",
+      "\\o-o/",
+      "Ruzove Brejle",
+      "Brejlicky"
+    ],
+    "INV_ITEM_GAME": [
+      "ID",
+      "Cestovni Dokument",
+      "Cestovni Kniha",
+      "Pixelova Knizka",
+      "Pas"
+    ],
+    "INV_ITEM_LEADBAR": [
+      "Neolizovat",
+      "Moc Tezke, To Netaham",
+      "Spatnej Matros",
+      "Lehce Toxicky.",
+      "Vloz Na Ruku Midase"
+    ],
+    "INV_ITEM_MAGNUM": [
+      "Lepsi Pistole",
+      "Pistole v Cerne Kuzi",
+      "Bozsky Zvuk",
+      "Celkem Davaj",
+      "Ja Miluju Ten Zvuk"
+    ],
+    "INV_ITEM_MAGNUM_AMMO": [
+      "Naboje pro Bozi Zvuk",
+      "Cokoladky",
+      "50 Naboju",
+      "DZZ DZZ Munice",
+      "Neni pro Uzi"
+    ],
+    "INV_ITEM_MEDI": [
+      "Neni Tlusta Lekarna",
+      "Mini",
+      "Da Jen 50 procent",
+      "Aspon Neco",
+      "Horsi nez Velka Lekarna"
+    ],
+    "INV_ITEM_PISTOLS": [
+      "Pal Pal nekonecno",
+      "Nejslabsi",
+      "Nekonecne??",
+      "Kdo Potrebuje Munici?",
+      "Nekonecne PalPal"
+    ],
+    "INV_ITEM_SCION": [
+      "Cosi Kulateho",
+      "Nestrilej na me",
+      "Potrebujes 3",
+      "Je to Skijoon",
+      "Je to Skipassion"
+    ],
+    "INV_ITEM_SHOTGUN": [
+      "Perfektne Presne",
+      "Pouzij Pistole",
+      "Nejlepsi Poskozeni",
+      "Velky Rozptyl",
+      "Flusbrok"
+    ],
+    "INV_ITEM_SHOTGUN_AMMO": [
+      "Jen Po Dvou?",
+      "Nedostatek Munice",
+      "Definice Presnosti",
+      "Nesbirat",
+      "Rakety"
+    ],
+    "INV_ITEM_SOUND": [
+      "Mp3",
+      "Mp4",
+      "Mp5 ( uups chyba )",
+      "Sluchadla",
+      "Znasilneni Usi"
+    ],
+    "INV_ITEM_UZI": [
+      "RATATATATA",
+      "Uziny",
+      "PC Zvuk Je Hrozny",
+      "Uziky",
+      "Minigun"
+    ],
+    "INV_ITEM_UZI_AMMO": [
+      "Top Naboje",
+      "100 Naboju",
+      "Minimalni Rozptyl",
+      "Kde se to vzalo v hrobce?",
+      "Minigun Naboje"
+    ],
+    "MISC_EMPTY_SLOT_FMT": [
+      "Strelba Naslepo",
+      "Aktualne k Nicemu",
+      "Zachrante Nase Duse",
+      "Osobni Save",
+      "Uloz Na Me"
+    ]
+  },
+  "LevelStrings": {
+    "GYM.PHD": {
+      "Names": [
+        "Trening",
+        "Dej do toho Vse",
+        "404 Zahrada Nenalezena",
+        "Rozcvicka",
+        "Svlekni se"
+      ]
+    },
+    "LEVEL1.PHD": {
+      "Names": [
+        "Netopyrojeskyne",
+        "Primitivni",
+        "RESET",
+        "Brutalni Level",
+        "Mnoho Sediveho"
+      ]
+    },
+    "LEVEL2.PHD": {
+      "Names": [
+        "Vlci Orgie",
+        "Mesto Vlku",
+        "Medved jest sekret",
+        "Az Moc Netopejru",
+        "Mesto Hranatosti"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Qwop Klic",
+          "Vlci Klic",
+          "Nezapomen Zlatou Figuru",
+          "VSUDE VLCI",
+          "Predmet Napravo"
+        ],
+        "puzzle1": [
+          "Panenka",
+          "Indianova Panenka",
+          "Asi je to cenne",
+          "Item Nalevo",
+          "Typek z divno kloboukem"
+        ]
+      }
+    },
+    "LEVEL3A.PHD": {
+      "Names": [
+        "Jursky Park",
+        "Jursky Svet",
+        "Nejepictejsi Moment",
+        "Barnyho Svet",
+        "Svatyne Dinosauru"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "3 je magicke cislo",
+          "Tutununu Kolesko",
+          "KRUH",
+          "Masinerie",
+          "Zubni kolo"
+        ]
+      }
+    },
+    "LEVEL3B.PHD": {
+      "Names": [
+        "Jen Pro Raptory",
+        "Prekvapeni! Larson",
+        "Pozor na Kouly",
+        "Mumie se Vraci",
+        "Larsonuv Kopanec"
+      ]
+    },
+    "LEVEL4.PHD": {
+      "Names": [
+        "Nepadej",
+        "Zkladivuj Me Bejby",
+        "Boze Ne Tenhle Level",
+        "Pierre, Ty Prase",
+        "Variace Klicu"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Vodni Klic",
+          "Koukej, Jsem Riman",
+          "Falesny Poseidon",
+          "Az tam dolu",
+          "Tak si tak plavu"
+        ],
+        "key2": [
+          "Hodne mnoho map",
+          "Prava Dama Strili",
+          "Zatracena Gorila",
+          "Klic Obrovske Koule",
+          "Sem Rad Ze Nejsi Palacinka"
+        ],
+        "key3": [
+          "Pozor Kam Slapes",
+          "Ani To Neni Buh",
+          "Cas Na Prochazku",
+          "Pozor Na Mece",
+          "PRICHAZIM"
+        ],
+        "key4": [
+          "Ani Neni Z Recka",
+          "Mjolnirsky Klic",
+          "Kladivovej Klic",
+          "Hromovej Klic",
+          "Ted Nepadej"
+        ]
+      }
+    },
+    "LEVEL5.PHD": {
+      "Names": [
+        "Pierrovo Divadlo",
+        "Kde Je Strop",
+        "Proc Je to V Podzemi?",
+        "Prilis Mnoho Nepratel",
+        "Zverinec"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Tva Cesta Ven",
+          "Co To Tu Dela",
+          "Co To Je Za Mistnost",
+          "Balkone Otevri Se",
+          "Listek Do Zoo"
+        ]
+      }
+    },
+    "LEVEL6.PHD": {
+      "Names": [
+        "Zlatej Cosi",
+        "Skoc Na Ruku - Vyhrajes",
+        "Zoo",
+        "Zlata Odmena Zdarma",
+        "Midasovo Ho***"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Tva Cesta Ven",
+          "Neni Toxickej",
+          "Spravny Material",
+          "Ted je to k necemu",
+          "Moc Tezke, Netaham"
+        ]
+      }
+    },
+    "LEVEL7A.PHD": {
+      "Names": [
+        "Mel Bys Plavat",
+        "ZATOPENE!!",
+        "Velky Zachod",
+        "Aligatori Raj",
+        "KrysoParty"
+      ],
+      "KeyItems": {
+        "key1": [
+          "No Konecne",
+          "Oooo.. Leskle",
+          "Skoro U Konce",
+          "Posledni Klic",
+          "Lepsi Nez Stribro"
+        ],
+        "key2": [
+          "Lepsi Nez Rezave",
+          "Horsi Nez Zlato",
+          "Proc Tolik Dveri?",
+          "Potrebujes Dva",
+          "Potrebujes Neco Lepsiho"
+        ],
+        "key3": [
+          "Pouzij Pro Vice Klicu",
+          "Prvni Z Mnoha",
+          "Horsi Nez Stribro",
+          "Jsi si Jist Ze To je Rez?",
+          "Lezi Tu Moc Dlouho"
+        ]
+      }
+    },
+    "LEVEL7B.PHD": {
+      "Names": [
+        "Never Socham",
+        "Konecne Konec Recka",
+        "Pierr Tu Byl Prvni",
+        "Jupi! Tahaci Kostka",
+        "Pierrovo Posledni Utociste"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Jak To Ten Klic Udelal?",
+          "To Neni Tajemstvi",
+          "Dela Zvuk Sekretu",
+          "Pouzij Do Zlate Dirky",
+          "Leskly Klicek"
+        ],
+        "key2": [
+          "Krys je Mnoho",
+          "Pozor Na Gorilky",
+          "Nezapomen Tajemstvi",
+          "Potrebujes Dalsi Klic",
+          "Funguje Jen Na Pravej Zamek"
+        ],
+        "key3": [
+          "Vlozte Do Diry",
+          "2 Klice Pro 1 Dvere",
+          "Vic Potahej Kostku",
+          "Potrebujes Dalsi Klic",
+          "Funguje Na Levy Zamek"
+        ]
+      }
+    },
+    "LEVEL8A.PHD": {
+      "Names": [
+        "Pohladte Kotatka",
+        "Navrat Do Egypta",
+        "Panteruv Raj",
+        "Kde Je Mesto?",
+        "To Ze Ma Byt Sfinga?"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Operace Mozku",
+          "Sfingovej Klicek",
+          "Vloz Mezi Nohy",
+          "Modrodiamantovej Klic",
+          "Lehce Oprasit"
+        ]
+      }
+    },
+    "LEVEL8B.PHD": {
+      "Names": [
+        "Zabavne Skakani",
+        "Uplna Satisfakce",
+        "4 Artefakty Potrebujete",
+        "Egyptske Muzeum",
+        "Egyptsky Nabytek"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Otevre Dvoje Dvere",
+          "Diamklucik",
+          "Opatlanej Kli",
+          "Proc Tu Sou Dvere?",
+          "Krokoklicek"
+        ],
+        "puzzle1": [
+          "Kuk",
+          "Navidenou",
+          "Vsevidouci Oko",
+          "Vidim VAS!!!",
+          "Necum"
+        ],
+        "puzzle2": [
+          "Brouk",
+          "Hovnival",
+          "Hnusnej Brouk",
+          "Nejaka Kobyla? Asi.",
+          "Pral Bych Si To Vzit Do Dalsiho Levelu"
+        ],
+        "puzzle3": [
+          "Sakalova Pecet",
+          "Anticka Placka",
+          "Staroveka Palacinka",
+          "Nejaky Planek",
+          "Brambora Egyptskeho Typu"
+        ],
+        "puzzle4": [
+          "Toto Neni Tr4",
+          "Kde Je Seth",
+          "Radeji To Vratte",
+          "Klic Zivota",
+          "Odebranim Pustite Setha"
+        ]
+      }
+    },
+    "LEVEL8C.PHD": {
+      "Names": [
+        "Larsone? Jak Ses Sem Dostal?",
+        "Prilis Mnoho Mumii",
+        "Uziky? KDE???",
+        "Kdo Pustil Mumie?",
+        "Nejlepsi Level EVER!!!"
+      ],
+      "KeyItems": {
+        "key1": [
+          "Pouzij Na Moste",
+          "Vypustte Kentaura",
+          "Pouzitim Ziskas Ankh",
+          "Jediny Klic V Levelu",
+          "Jakpakto Ze Neni Rezavej"
+        ],
+        "puzzle1": [
+          "Dej Do Sfingy",
+          "Potrebujes 2",
+          "Kde Je Seth?",
+          "Kentauri Pozlaceny Bobek",
+          "Staroegyptska Pojistka"
+        ],
+        "puzzle2": [
+          "Zase Nejakej Brouk",
+          "Spusti Bossfight",
+          "Pustite Me Ven?",
+          "Bomba, Zase Na Zacatku",
+          "Tolik Stoupani Pro Brouka?"
+        ]
+      }
+    },
+    "LEVEL10A.PHD": {
+      "Names": [
+        "BublyBubly",
+        "Smrt Pobocnikum Natly",
+        "Proc To Je Dul?",
+        "Kde Mam Zbrane",
+        "Natlino Memecko"
+      ],
+      "KeyItems": {
+        "puzzle1": [
+          "Kdo To Sem Dal?",
+          "Harry, Jdu Do Baraku",
+          "Chcete Zbrane?",
+          "Jak Mohou Fungovat?",
+          "Elektricka Pinzeta"
+        ],
+        "puzzle2": [
+          "Unikatni Klic",
+          "Tva Cesta Dal",
+          "Nejakej Egyptskej Trojuhelnik",
+          "Atlantsky Vstup",
+          "0"
+        ]
+      }
+    },
+    "LEVEL10B.PHD": {
+      "Names": [
+        "Nemla Bejt Zatopena?",
+        "Masove Bludiste",
+        "Hodne Stesti",
+        "Nezapomen Lekarny",
+        "Vez Teroru"
+      ]
+    },
+    "LEVEL10C.PHD": {
+      "Names": [
+        "Posledni Odpocet",
+        "Natla Nechcipla",
+        "Smrt Atlantide!",
+        "Je To Past",
+        "Obejmuti Torza"
+      ]
+    }
+  }
+}
