@@ -504,6 +504,17 @@ namespace TRRandomizerView.Model
             }
         }
 
+        private bool _fixSpeechesKillingMusic;
+        public bool FixSpeechesKillingMusic
+        {
+            get => _fixSpeechesKillingMusic;
+            set
+            {
+                _fixSpeechesKillingMusic = value;
+                FirePropertyChanged();
+            }
+        }
+
         private bool _fixDescendingGlitch;
         public bool FixDescendingGlitch
         {
@@ -2949,6 +2960,7 @@ namespace TRRandomizerView.Model
                 FixTihocanSecretSound = _controller.FixTihocanSecretSound;
                 FixPyramidSecretTrigger = _controller.FixPyramidSecretTrigger;
                 FixSecretsKillingMusic = _controller.FixSecretsKillingMusic;
+                FixSpeechesKillingMusic = _controller.FixSpeechesKillingMusic;
                 FixDescendingGlitch = _controller.FixDescendingGlitch;
                 FixWallJumpGlitch = _controller.FixWallJumpGlitch;
                 FixBridgeCollision = _controller.FixBridgeCollision;
@@ -3215,6 +3227,7 @@ namespace TRRandomizerView.Model
                 _controller.FixTihocanSecretSound = FixTihocanSecretSound;
                 _controller.FixPyramidSecretTrigger = FixPyramidSecretTrigger;
                 _controller.FixSecretsKillingMusic = FixSecretsKillingMusic;
+                _controller.FixSpeechesKillingMusic = FixSpeechesKillingMusic;
                 _controller.FixDescendingGlitch = FixDescendingGlitch;
                 _controller.FixWallJumpGlitch = FixWallJumpGlitch;
                 _controller.FixBridgeCollision = FixBridgeCollision;

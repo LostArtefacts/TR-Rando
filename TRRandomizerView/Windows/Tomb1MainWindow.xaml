@@ -1074,6 +1074,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -1138,7 +1139,23 @@
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
-                                <Run Text="Fixes the sound of collecting a secret resetting the active music track."/>
+                                <Run Text="Fixes the sound of collecting a secret stopping the active music track."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="4"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.FixSpeechesKillingMusic, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Fix speech killing music" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="4"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Fixes enemies stopping the active music track when they speak."/>
                             </TextBlock>
                         </Border>
                     </Grid>
