@@ -670,6 +670,10 @@ namespace TRRandomizerCore.Randomizers
                     });
                 }
 
+                // Avoid remnants of Lara's default outfit affecting this partial outfit
+                // in texture randomization.
+                _outer.TextureMonitor.CreateMonitor(level.Name).UseLaraOutfitTextures = false;
+
                 if (level.HasCutScene)
                 {
                     TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)

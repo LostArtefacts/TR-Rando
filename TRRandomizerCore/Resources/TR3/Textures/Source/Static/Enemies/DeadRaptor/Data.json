@@ -1,4 +1,8 @@
 {
+  "Categories": [
+    5
+  ],
+
   "PNGPath": "Resources\\TR3\\Textures\\Source\\Static\\Enemies\\Raptor\\Segments.png",
 
   "EntityColourMap": {

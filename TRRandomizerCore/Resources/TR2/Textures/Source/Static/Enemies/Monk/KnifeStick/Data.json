@@ -1,4 +1,8 @@
 {
+  "Categories": [
+    5
+  ],
+
   "EntityTextureMap": {
     "54": {
       "801": 11,
@@ -21,7 +25,7 @@
       "901": 17
     }
   },
-  
+
   "VariantMap": {
     "Black": [
       "0, 0, 32, 32",
