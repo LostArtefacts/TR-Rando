@@ -13,7 +13,7 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <ApplicationIcon>Resources\rando.ico</ApplicationIcon>
 
-    <Version>1.6.0</Version>
+    <Version>1.7.0</Version>
     <Product>Tomb Raider Randomizer</Product>
     <Copyright>Copyright © Tomb Raider Community 2023</Copyright>
   </PropertyGroup>

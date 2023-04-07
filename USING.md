@@ -7,7 +7,7 @@ To play the randomizer, you will need to have the relevant TR1, TR2 or TR3 game(
 Before you launch the randomizer for the first time, you should carry out a few steps as follows.
 ***
 > ### TR1
-> It is **strongly** recommended that you use [Tomb1Main](https://github.com/rr-/Tomb1Main). Follow the installation guide on the Tomb1Main GitHub page, or you can also refer to [this video](https://www.youtube.com/watch?v=WfyHin4Hpgs&t=46s) for guidance.
+> It is **strongly** recommended that you use [Tomb1Main](https://github.com/LostArtefacts/Tomb1Main). Follow the installation guide on the Tomb1Main GitHub page, or you can also refer to [this video](https://www.youtube.com/watch?v=WfyHin4Hpgs&t=46s) for guidance.
 > 
 > The use of [TombATI](https://github.com/Carlmundo/TombRaider-AutomatedFix) is also supported but this is limited in terms of the options available and is not as customizable as Tomb1Main.
 ***
@@ -30,7 +30,7 @@ Let's say you are setting up TR2 and have it installed in `D:\Games\TR2`. You sh
 
 ## Installing the Randomizer
 Setting up the randomizer itself is straight-forward.
-1. Download the latest release from https://github.com/DanzaG/TR2-Rando/releases. Make sure to download the zip file with the current version name and not the source code.
+1. Download the latest release from https://github.com/LostArtefacts/TR-Rando/releases/latest. Make sure to download the `TRRando` zip file and not the source code. Choose the x64 or x86 version, depending on your system.
 
     ![Release example](Resources/Using/release.png)
     
@@ -100,4 +100,4 @@ If you encounter error messages during randomization, the most likely cause is u
 3. Reinstall the TR game from scratch (e.g. in Steam or GoG).
 4. Follow this guide carefully from the [beginning](USING.md#randomizer-setup).
 
-If you continue to experience issues, we have a friendly community [Discord server](https://discord.gg/f4bUqwgcCN) where you can get help or you can [raise an issue](https://github.com/DanzaG/TR2-Rando/issues/new) for investigation.
+If you continue to experience issues, we have a friendly community [Discord server](https://discord.gg/f4bUqwgcCN) where you can get help or you can [raise an issue](https://github.com/LostArtefacts/TR-Rando/issues/new) for investigation.
