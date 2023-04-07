@@ -32,7 +32,7 @@ namespace TRRandomizerView.Model
         private uint _minSecretCount, _maxSecretCount;
         private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
         private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson;
-        private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures, _retainEnemyTextures;
+        private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures, _retainEnemyTextures, _retainLaraTextures;
         private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble;
         private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
         private BoolItemControlClass _retainKeyItemNames, _retainLevelNames;
@@ -2049,6 +2049,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public BoolItemControlClass RetainLaraTextures
+        {
+            get => _retainLaraTextures;
+            set
+            {
+                _retainLaraTextures = value;
+                FirePropertyChanged();
+            }
+        }
+
         public uint WireframeLevelCount
         {
             get => _wireframeLevelCount;
@@ -2491,6 +2501,12 @@ namespace TRRandomizerView.Model
                 Description = "Texture mapping will not apply to enemies."
             };
             BindingOperations.SetBinding(RetainEnemyTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
+            RetainLaraTextures = new BoolItemControlClass
+            {
+                Title = "Use original outfit textures",
+                Description = "Texture mapping will not apply to Lara's outfits."
+            };
+            BindingOperations.SetBinding(RetainLaraTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
             RetainKeySpriteTextures = new BoolItemControlClass()
             {
                 Title = "Use original key item textures",
@@ -2680,7 +2696,7 @@ namespace TRRandomizerView.Model
             };
             TextureBoolItemControls = new List<BoolItemControlClass>()
             {
-                _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainEnemyTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
+                _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainLaraTextures, _retainEnemyTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures
             };
             AudioBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2868,6 +2884,7 @@ namespace TRRandomizerView.Model
             RandomizeWaterColour.Value = _controller.RandomizeWaterColour;
             RetainMainLevelTextures.Value = _controller.RetainMainLevelTextures;
             RetainEnemyTextures.Value = _controller.RetainEnemyTextures;
+            RetainLaraTextures.Value = _controller.RetainLaraTextures;
             RetainKeySpriteTextures.Value = _controller.RetainKeySpriteTextures;
             RetainSecretSpriteTextures.Value = _controller.RetainSecretSpriteTextures;
             WireframeLevelCount = _controller.WireframeLevelCount;
@@ -3136,6 +3153,7 @@ namespace TRRandomizerView.Model
             _controller.RandomizeWaterColour = RandomizeWaterColour.Value;
             _controller.RetainMainLevelTextures = RetainMainLevelTextures.Value;
             _controller.RetainEnemyTextures = RetainEnemyTextures.Value;
+            _controller.RetainLaraTextures = RetainLaraTextures.Value;
             _controller.RetainKeySpriteTextures = RetainKeySpriteTextures.Value;
             _controller.RetainSecretSpriteTextures = RetainSecretSpriteTextures.Value;
             _controller.WireframeLevelCount = WireframeLevelCount;

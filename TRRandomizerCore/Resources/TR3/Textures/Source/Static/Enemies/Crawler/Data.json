@@ -1,4 +1,8 @@
 {
+  "Categories": [
+    5
+  ],
+
   "EntityColourMap": {
     "42": {
       "48, 0, 0": 18,

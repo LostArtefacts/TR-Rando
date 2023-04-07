@@ -1,4 +1,8 @@
 {
+  "Categories": [
+    6
+  ],
+
   "PNGPath": "Resources\\TR2\\Textures\\Source\\Static\\Lara\\Socks\\Segments.png",
 
   "EntityTextureMap": {

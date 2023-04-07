@@ -101,7 +101,10 @@ namespace TRRandomizerCore.Randomizers
             {
                 [TextureCategory.KeyItem] = !Settings.RetainKeySpriteTextures,
                 [TextureCategory.Secret] = !Settings.RetainSecretSpriteTextures,
-                [TextureCategory.LevelColours] = !Settings.RetainMainLevelTextures
+                [TextureCategory.LevelColours] = !Settings.RetainMainLevelTextures,
+                [TextureCategory.Enemy] = !Settings.RetainEnemyTextures,
+                [TextureCategory.Lara] = !Settings.RetainLaraTextures,
+                [TextureCategory.Braid] = !Settings.RetainLaraTextures
             };
 
             SetMessage("Randomizing textures - loading levels");
@@ -403,6 +406,8 @@ namespace TRRandomizerCore.Randomizers
 
                 options[TextureCategory.NightMode] = monitor != null && monitor.UseNightTextures;
                 options[TextureCategory.DayMode] = !options[TextureCategory.NightMode];
+                options[TextureCategory.Lara] = _outer._textureOptions[TextureCategory.Lara]
+                    && (monitor == null || monitor.UseLaraOutfitTextures);
 
                 using (TextureHolder<TR2Entities, TR2Level> holder = _holders[level])
                 {

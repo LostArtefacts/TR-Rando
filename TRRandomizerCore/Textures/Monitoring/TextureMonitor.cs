@@ -16,6 +16,7 @@ namespace TRRandomizerCore.Textures
 
         public bool UseMirroring { get; set; }
         public bool UseNightTextures { get; set; }
+        public bool UseLaraOutfitTextures { get; set; }
 
         // Allow entities such as Artefacts to be defined in texture sources, but mapped to different types here
         public Dictionary<E, E> EntityMap { get; set; }
@@ -24,6 +25,7 @@ namespace TRRandomizerCore.Textures
         {
             _entitySources = sources;
             EntityMap = new Dictionary<E, E>();
+            UseLaraOutfitTextures = true;
         }
 
         public void AppendSources(IEnumerable<StaticTextureSource<E>> sources)

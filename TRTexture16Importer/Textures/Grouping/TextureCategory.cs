@@ -7,6 +7,8 @@
         DayMode,
         NightMode,
         LevelColours,
-        Enemy
+        Enemy,
+        Lara,
+        Braid
     }
 }

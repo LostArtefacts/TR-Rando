@@ -1,4 +1,8 @@
 {
+  "Categories": [
+    7
+  ],
+
   "PNGPath": "Resources\\TR2\\Textures\\Source\\Static\\Lara\\Bobble\\Segments.png",
 
   "EntityTextureMap": {

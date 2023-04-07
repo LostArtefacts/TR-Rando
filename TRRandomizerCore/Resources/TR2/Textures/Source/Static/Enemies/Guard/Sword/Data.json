@@ -1,4 +1,8 @@
 {
+  "Categories": [
+    5
+  ],
+
   "EntityTextureMap": {
     "44": {
       "1081": 16,
