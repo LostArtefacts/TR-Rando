@@ -812,6 +812,18 @@ namespace TRRandomizerCore
             }
         }
 
+        public bool FixSpeechesKillingMusic
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixSpeechesKillingMusic;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.FixSpeechesKillingMusic = value;
+                }
+            }
+        }
+
         public bool FixDescendingGlitch
         {
             get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.FixDescendingGlitch;

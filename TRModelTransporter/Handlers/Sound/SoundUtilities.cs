@@ -41,7 +41,7 @@ namespace TRModelTransporter.Handlers
                     ushort sampleIndex = (ushort)(details.Sample + i);
                     samples[i] = sampleIndices[sampleIndex];
 
-                    uint nextIndex = sampleIndex == sampleIndices.Length - 1 ? (uint)samples.Length : sampleIndices[sampleIndex + 1];
+                    uint nextIndex = sampleIndex == sampleIndices.Length - 1 ? (uint)wavSamples.Length : sampleIndices[sampleIndex + 1];
                     packedSound.Samples[samples[i]] = AnimationUtilities.GetSample(samples[i], nextIndex, wavSamples);
                 }
 

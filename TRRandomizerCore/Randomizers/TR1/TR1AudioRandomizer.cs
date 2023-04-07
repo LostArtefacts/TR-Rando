@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using TRFDControl;
+using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelReader;
 using TRLevelReader.Helpers;
@@ -18,6 +19,8 @@ namespace TRRandomizerCore.Randomizers
 {
     public class TR1AudioRandomizer : BaseTR1Randomizer
     {
+        private static readonly List<int> _speechTracks = Enumerable.Range(51, 6).ToList();
+        private static readonly short _sfxFirstSpeechID = 199;
         private static readonly short _sfxUziID = 43;
 
         private AudioRandomizer _audioRandomizer;
@@ -41,6 +44,8 @@ namespace TRRandomizerCore.Randomizers
                 RandomizeMusicTriggers(_levelInstance);
 
                 RandomizeSoundEffects(_levelInstance);
+
+                ImportSpeechSFX(_levelInstance);
 
                 RandomizeWibble(_levelInstance);
                 
@@ -296,6 +301,52 @@ namespace TRRandomizerCore.Randomizers
             level.NumSoundDetails++;
 
             return (short)(level.NumSoundDetails - 1);
+        }
+
+        private void ImportSpeechSFX(TR1CombinedLevel level)
+        {
+            if (!ScriptEditor.Edition.IsCommunityPatch
+                || !(ScriptEditor as TR1ScriptEditor).FixSpeechesKillingMusic)
+            {
+                return;
+            }
+
+            // T1M can play enemy speeches as SFX to avoid killing the current
+            // track, so ensure that the required data is in the level if any
+            // of these are used on the floor.
+
+            FDControl floorData = new FDControl();
+            floorData.ParseFromLevel(level.Data);
+
+            List<ushort> usedSpeechTracks = FDUtilities.GetActionListItems(floorData, FDTrigAction.PlaySoundtrack)
+                .Select(action => action.Parameter)
+                .Distinct()
+                .Where(trackID => _speechTracks.Contains(trackID))
+                .ToList();
+
+            if (usedSpeechTracks.Count == 0)
+            {
+                return;
+            }
+
+            foreach (ushort trackID in usedSpeechTracks)
+            {
+                int sfxID = _sfxFirstSpeechID + trackID - _speechTracks.First();
+                TR1SFXDefinition definition;
+                if (level.Data.SoundMap[sfxID] != -1 
+                    || (definition = _soundEffects.Find(sfx => sfx.InternalIndex == sfxID)) == null)
+                {
+                    continue;
+                }
+
+                short detailsIndex = ImportSoundEffect(level.Data, definition, definition.PrimaryCategory);
+                if (detailsIndex != -1)
+                {
+                    level.Data.SoundMap[sfxID] = detailsIndex;
+                }
+            }
+
+            SoundUtilities.ResortSoundIndices(level.Data);
         }
 
         private void RandomizeWibble(TR1CombinedLevel level)

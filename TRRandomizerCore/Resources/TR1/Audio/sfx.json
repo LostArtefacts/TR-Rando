@@ -1761,5 +1761,41 @@
       111
     ],
     "SourceLevel": "LEVEL10A.PHD"
+  },
+  {
+    "InternalIndex": 201,
+    "Description": "SFX_LARSON_SPEECH",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL8C.PHD"
+  },
+  {
+    "InternalIndex": 202,
+    "Description": "SFX_NATLA_SPEECH",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10C.PHD"
+  },
+  {
+    "InternalIndex": 203,
+    "Description": "SFX_PIERRE_SPEECH",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL7B.PHD"
+  },
+  {
+    "InternalIndex": 204,
+    "Description": "SFX_SKATEKID_SPEECH",
+    "Creature": 0,
+    "Categories": [
+      1
+    ],
+    "SourceLevel": "LEVEL10A.PHD"
   }
 ]
