@@ -2502,6 +2502,32 @@
       ],
       [
         {
+          "Comments": "Create a pushblock buffer room.",
+          "EMType": 126,
+          "Location": {
+            "X": 51200,
+            "Y": -512,
+            "Z": 37888
+          },
+          "LinkedLocation": {
+            "X": 49664,
+            "Y": 6656,
+            "Z": 43520,
+            "Room": 37
+          },
+          "Textures": {
+            "WallAlignment": 4
+          },
+          "AmbientLighting": 7487,
+          "DefaultVertex": {
+            "Lighting": 7616
+          },
+          "Lights": [],
+          "Height": 4,
+          "Width": 3,
+          "Depth": 3
+        },
+        {
           "Comments": "Make a trap/puzzle room off room 37.",
           "EMType": 126,
           "Tags": [
@@ -3479,6 +3505,21 @@
           }
         },
         {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 52736,
+            "Y": -512,
+            "Z": 39424,
+            "Room": -3
+          },
+          "Floor": {
+            "X": 52736,
+            "Y": 512,
+            "Z": 39424,
+            "Room": -1
+          }
+        },
+        {
           "Comments": "Make visibility portals.",
           "EMType": 81,
           "Portals": [
@@ -4038,9 +4079,9 @@
           "Intensity": -1,
           "Location": {
             "X": 52736,
-            "Y": -512,
+            "Y": -1536,
             "Z": 39424,
-            "Room": -1
+            "Room": -3
           }
         },
         {
