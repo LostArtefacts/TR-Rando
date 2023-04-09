@@ -3989,6 +3989,32 @@
       ],
       [
         {
+          "Comments": "Create a pushblock buffer room.",
+          "EMType": 126,
+          "Location": {
+            "X": 56320,
+            "Y": -20480,
+            "Z": 5120
+          },
+          "LinkedLocation": {
+            "X": 57856,
+            "Y": -3328,
+            "Z": 1536,
+            "Room": 19
+          },
+          "Textures": {
+            "WallAlignment": 4
+          },
+          "AmbientLighting": 7168,
+          "DefaultVertex": {
+            "Lighting": 7680
+          },
+          "Lights": [],
+          "Height": 4,
+          "Width": 3,
+          "Depth": 3
+        },
+        {
           "Comments": "Another variant of above.",
           "EMType": 126,
           "Tags": [
@@ -4392,6 +4418,21 @@
           }
         },
         {
+          "EMType": 83,
+          "Ceiling": {
+            "X": 57856,
+            "Y": -20480,
+            "Z": 6656,
+            "Room": -4
+          },
+          "Floor": {
+            "X": 57856,
+            "Y": -19456,
+            "Z": 6656,
+            "Room": -2
+          }
+        },
+        {
           "Comments": "Rotate some floor faces.",
           "EMType": 23,
           "Rotations": [
@@ -4558,9 +4599,9 @@
           "Intensity": -1,
           "Location": {
             "X": 57856,
-            "Y": -20480,
+            "Y": -21504,
             "Z": 6656,
-            "Room": -2
+            "Room": -4
           }
         },
         {
