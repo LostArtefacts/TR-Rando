@@ -507,6 +507,69 @@
         "Z": 48640,
         "Room": 50
       }
+    },
+    {
+      "Comments": "Remove the triggers that close door 143.",
+      "EMType": 62,
+      "Locations": [
+        {
+          "X": 45568,
+          "Y": -14592,
+          "Z": 59904,
+          "Room": 73
+        },
+        {
+          "X": 46592,
+          "Y": -14592,
+          "Z": 59904,
+          "Room": 73
+        },
+        {
+          "X": 47616,
+          "Y": -14592,
+          "Z": 59904,
+          "Room": 73
+        },
+        {
+          "X": 48640,
+          "Y": -14592,
+          "Z": 59904,
+          "Room": 73
+        },
+        {
+          "X": 49664,
+          "Y": -14592,
+          "Z": 59904,
+          "Room": 73
+        }
+      ]
+    },
+    {
+      "Comments": "Make a timed trigger for the door to open/close.",
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 47616,
+          "Y": -13056,
+          "Z": 54784,
+          "Room": 74
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Timer": 20,
+        "Actions": [
+          {
+            "Parameter": 143
+          }
+        ]
+      }
+    },
+    {
+      "Comments": "Don't activate the door by default.",
+      "EMType": 48,
+      "EntityIndex": 143,
+      "Flags": 0
     }
   ],
   "Any": [
