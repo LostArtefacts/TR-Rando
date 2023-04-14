@@ -37,10 +37,8 @@ namespace TRRandomizerCore.Editors
         {
             int target = base.GetSaveTarget(numLevels);
 
-            if (Settings.RandomizeGameStrings)
-            {
-                target++;
-            }
+            // String rando always runs
+            target++;
 
             if (Settings.RandomizeStartingHealth)
             {
@@ -150,7 +148,7 @@ namespace TRRandomizerCore.Editors
 
             using (textureMonitor)
             {
-                if (!monitor.IsCancelled && Settings.RandomizeGameStrings)
+                if (!monitor.IsCancelled)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing text");
                     new TR1GameStringRandomizer
