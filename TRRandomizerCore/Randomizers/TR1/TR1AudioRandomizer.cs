@@ -75,37 +75,33 @@ namespace TRRandomizerCore.Randomizers
                 TRSFXGeneralCategory.Explosion
             };
 
-            // Only load the SFX if we are changing at least one category
-            if (_sfxCategories.Count > 0)
+            _soundEffects = JsonConvert.DeserializeObject<List<TR1SFXDefinition>>(ReadResource(@"TR1\Audio\sfx.json"));
+
+            // We don't want to store all SFX WAV data in JSON, so instead we reference the source level
+            // and extract the details from there using the same format for model transport.
+            Dictionary<string, TRLevel> levels = new Dictionary<string, TRLevel>();
+            TR1LevelReader reader = new TR1LevelReader();
+            foreach (TR1SFXDefinition definition in _soundEffects)
             {
-                _soundEffects = JsonConvert.DeserializeObject<List<TR1SFXDefinition>>(ReadResource(@"TR1\Audio\sfx.json"));
-
-                // We don't want to store all SFX WAV data in JSON, so instead we reference the source level
-                // and extract the details from there using the same format for model transport.
-                Dictionary<string, TRLevel> levels = new Dictionary<string, TRLevel>();
-                TR1LevelReader reader = new TR1LevelReader();
-                foreach (TR1SFXDefinition definition in _soundEffects)
+                if (!levels.ContainsKey(definition.SourceLevel))
                 {
-                    if (!levels.ContainsKey(definition.SourceLevel))
-                    {
-                        levels[definition.SourceLevel] = reader.ReadLevel(Path.Combine(BackupPath, definition.SourceLevel));
-                    }
-
-                    TRLevel level = levels[definition.SourceLevel];
-                    definition.SoundData = SoundUtilities.BuildPackedSound(level.SoundMap, level.SoundDetails, level.SampleIndices, level.Samples, new short[] { definition.InternalIndex });
+                    levels[definition.SourceLevel] = reader.ReadLevel(Path.Combine(BackupPath, definition.SourceLevel));
                 }
 
-                // PS uzis need some manual setup. Make a copy of the standard uzi definition
-                // then replace the sound data from the external wav file.
-                TRLevel caves = levels[TRLevelNames.CAVES];
-                _psUziDefinition = new TR1SFXDefinition
-                {
-                    InternalIndex = -1,
-                    SoundData = SoundUtilities.BuildPackedSound(caves.SoundMap, caves.SoundDetails, caves.SampleIndices, caves.Samples, new short[] { _sfxUziID })
-                };
-                uint sample = _psUziDefinition.SoundData.Samples.Keys.First();
-                _psUziDefinition.SoundData.Samples[sample] = File.ReadAllBytes(GetResourcePath(@"TR1\Audio\ps_uzis.wav"));
+                TRLevel level = levels[definition.SourceLevel];
+                definition.SoundData = SoundUtilities.BuildPackedSound(level.SoundMap, level.SoundDetails, level.SampleIndices, level.Samples, new short[] { definition.InternalIndex });
             }
+
+            // PS uzis need some manual setup. Make a copy of the standard uzi definition
+            // then replace the sound data from the external wav file.
+            TRLevel caves = levels[TRLevelNames.CAVES];
+            _psUziDefinition = new TR1SFXDefinition
+            {
+                InternalIndex = -1,
+                SoundData = SoundUtilities.BuildPackedSound(caves.SoundMap, caves.SoundDetails, caves.SampleIndices, caves.Samples, new short[] { _sfxUziID })
+            };
+            uint sample = _psUziDefinition.SoundData.Samples.Keys.First();
+            _psUziDefinition.SoundData.Samples[sample] = File.ReadAllBytes(GetResourcePath(@"TR1\Audio\ps_uzis.wav"));
         }
 
         private void ChooseUncontrolledLevels()
