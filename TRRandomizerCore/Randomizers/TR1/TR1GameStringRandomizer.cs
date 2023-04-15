@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TRGE.Core;
+using TRLevelReader.Helpers;
 using TRRandomizerCore.Globalisation;
 
 namespace TRRandomizerCore.Randomizers
@@ -17,27 +18,43 @@ namespace TRRandomizerCore.Randomizers
         {
             _generator = new Random(seed);
             _g11n = new G11N(G11NGame.TR1);
-
-            if (!Settings.GameStringLanguage.IsHybrid)
-            {
-                _gameStrings = _g11n.GetGameStrings(Settings.GameStringLanguage) as TR1GameStrings;
-            }
             _defaultGameStrings = _g11n.GetDefaultGameStrings() as TR1GameStrings;
 
-            TR1Script script = ScriptEditor.Script as TR1Script;
-
-            ProcessGlobalStrings(script.Strings);
-            ProcessLevelStrings(ScriptEditor.AssaultLevel);
-            script.Strings["INV_ITEM_LARAS_HOME"] = ScriptEditor.AssaultLevel.Name;
-
-            foreach (AbstractTRScriptedLevel level in ScriptEditor.ScriptedLevels)
+            if (Settings.RandomizeGameStrings)
             {
-                ProcessLevelStrings(level);
+                if (!Settings.GameStringLanguage.IsHybrid)
+                {
+                    _gameStrings = _g11n.GetGameStrings(Settings.GameStringLanguage) as TR1GameStrings;
+                }
+                _defaultGameStrings = _g11n.GetDefaultGameStrings() as TR1GameStrings;
+
+                TR1Script script = ScriptEditor.Script as TR1Script;
+
+                ProcessGlobalStrings(script.Strings);
+                ProcessLevelStrings(ScriptEditor.AssaultLevel);
+                script.Strings["INV_ITEM_LARAS_HOME"] = ScriptEditor.AssaultLevel.Name;
+
+                foreach (AbstractTRScriptedLevel level in ScriptEditor.ScriptedLevels)
+                {
+                    ProcessLevelStrings(level);
+                }
             }
+
+            AmendDefaultStrings();
 
             SaveScript();
 
             TriggerProgress();
+        }
+
+        private void AmendDefaultStrings()
+        {
+            List<AbstractTRScriptedLevel> levels = ScriptEditor.Levels.ToList();
+            AbstractTRScriptedLevel cistern = levels.Find(l => l.Is(TRLevelNames.CISTERN));
+            AbstractTRScriptedLevel mines = levels.Find(l => l.Is(TRLevelNames.MINES));
+
+            // Duplicate whatever Cistern has for "Rusty Key" into Mines
+            mines.Keys.Add(cistern.Keys.Count > 2 ? cistern.Keys[2] : "Rusty Key");
         }
 
         private TR1GameStrings GetGameStrings()
