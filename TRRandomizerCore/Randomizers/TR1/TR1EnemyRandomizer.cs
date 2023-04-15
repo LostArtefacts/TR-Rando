@@ -196,8 +196,10 @@ namespace TRRandomizerCore.Randomizers
             }
             List<TREntities> newEntities = new List<TREntities>(enemyCount);
 
-            // Do we need at least one water creature?
-            bool waterEnemyRequired = TR1EntityUtilities.GetWaterEnemies().Any(e => oldEntities.Contains(e));
+            // TR1 doesn't kill land creatures when underwater, so if "no restrictions" is
+            // enabled, don't enforce any by default.
+            bool waterEnemyRequired = difficulty == RandoDifficulty.Default
+                && TR1EntityUtilities.GetWaterEnemies().Any(oldEntities.Contains);
 
             // Let's try to populate the list. Start by adding a water enemy if needed.
             if (waterEnemyRequired)
@@ -515,7 +517,7 @@ namespace TRRandomizerCore.Randomizers
                 }
 
                 List<TREntities> enemyPool;
-                if (IsEnemyInOrAboveWater(currentEntity, level.Data, floorData))
+                if (difficulty == RandoDifficulty.Default && IsEnemyInOrAboveWater(currentEntity, level.Data, floorData))
                 {
                     // Make sure we replace with another water enemy
                     enemyPool = enemies.Water;

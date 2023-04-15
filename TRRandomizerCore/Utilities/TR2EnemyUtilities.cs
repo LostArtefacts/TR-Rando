@@ -95,8 +95,15 @@ namespace TRRandomizerCore.Utilities
             return false;
         }
 
-        public static bool IsEnemySupported(string lvlName, TR2Entities entity, RandoDifficulty difficulty)
+        public static bool IsEnemySupported(string lvlName, TR2Entities entity, RandoDifficulty difficulty, bool protectMonks)
         {
+            if (lvlName == TR2LevelNames.HOME && TR2EntityUtilities.IsMonk(entity))
+            {
+                // Monks are excluded from HSH by default unless the player is happy
+                // with having to kill them.
+                return !protectMonks;
+            }
+
             bool isEnemyTechnicallySupported = IsEnemySupported(lvlName, entity, _unsupportedEnemiesTechnical);
             bool isEnemySupported = isEnemyTechnicallySupported;
 

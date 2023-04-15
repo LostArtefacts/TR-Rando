@@ -236,7 +236,8 @@ namespace TRRandomizerCore.Randomizers
                 }
 
                 // Get all other candidate supported enemies
-                List<TR2Entities> allEnemies = TR2EntityUtilities.GetCandidateCrossLevelEnemies().FindAll(e => TR2EnemyUtilities.IsEnemySupported(level.Name, e, difficulty));
+                List<TR2Entities> allEnemies = TR2EntityUtilities.GetCandidateCrossLevelEnemies()
+                    .FindAll(e => TR2EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, Settings.ProtectMonks));
                 if (Settings.OneEnemyMode || Settings.IncludedEnemies.Count < newEntities.Capacity || Settings.DragonSpawnType == DragonSpawnType.Minimum)
                 {
                     // Marco isn't excludable in his own right because supporting a dragon-only game is impossible.
@@ -263,7 +264,7 @@ namespace TRRandomizerCore.Randomizers
                     // Try to enforce Marco's appearance, but only if this isn't the final packing attempt
                     if (Settings.DragonSpawnType == DragonSpawnType.Maximum
                         && !newEntities.Contains(TR2Entities.MarcoBartoli)
-                        && TR2EnemyUtilities.IsEnemySupported(level.Name, TR2Entities.MarcoBartoli, difficulty)
+                        && TR2EnemyUtilities.IsEnemySupported(level.Name, TR2Entities.MarcoBartoli, difficulty, Settings.ProtectMonks)
                         && reduceEnemyCountBy == 0)
                     {
                         entity = TR2Entities.MarcoBartoli;
@@ -378,7 +379,7 @@ namespace TRRandomizerCore.Randomizers
                     }
                     while ((_excludedEnemies.Contains(fallbackEnemy) && pool.Any(e => !_excludedEnemies.Contains(e))) 
                     || newEntities.Contains(fallbackEnemy) 
-                    || !TR2EnemyUtilities.IsEnemySupported(level.Name, fallbackEnemy, difficulty));
+                    || !TR2EnemyUtilities.IsEnemySupported(level.Name, fallbackEnemy, difficulty, Settings.ProtectMonks));
                     newEntities.Add(fallbackEnemy);
                 }
                 while (newEntities.All(e => restrictedRoomEnemies.ContainsKey(e)));
@@ -415,7 +416,7 @@ namespace TRRandomizerCore.Randomizers
 
         private TR2Entities SelectRequiredEnemy(List<TR2Entities> pool, TR2CombinedLevel level, RandoDifficulty difficulty)
         {
-            pool.RemoveAll(e => !TR2EnemyUtilities.IsEnemySupported(level.Name, e, difficulty));
+            pool.RemoveAll(e => !TR2EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, Settings.ProtectMonks));
 
             TR2Entities entity;
             if (pool.All(_excludedEnemies.Contains))
