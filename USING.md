@@ -7,7 +7,7 @@ To play the randomizer, you will need to have the relevant TR1, TR2 or TR3 game(
 Before you launch the randomizer for the first time, you should carry out a few steps as follows.
 ***
 > ### TR1
-> It is **strongly** recommended that you use [Tomb1Main](https://github.com/LostArtefacts/Tomb1Main). Follow the installation guide on the Tomb1Main GitHub page, or you can also refer to [this video](https://www.youtube.com/watch?v=WfyHin4Hpgs&t=46s) for guidance.
+> It is **strongly** recommended that you use [Tomb1Main](https://github.com/LostArtefacts/Tomb1Main). Follow the installation guide on the Tomb1Main GitHub page, or you can also refer to [this video](https://www.youtube.com/watch?v=WfyHin4Hpgs) for guidance. Note that if using the Tomb1Main installer, the default directory where your game will be located is your Documents folder as opposed to the base game folder.
 > 
 > The use of [TombATI](https://github.com/Carlmundo/TombRaider-AutomatedFix) is also supported but this is limited in terms of the options available and is not as customizable as Tomb1Main.
 ***
