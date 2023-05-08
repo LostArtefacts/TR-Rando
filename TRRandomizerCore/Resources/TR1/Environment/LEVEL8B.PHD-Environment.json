@@ -10,6 +10,20 @@
           "Room": 11
         }
       ]
+    },
+    {
+      "Comments": "Fix the wrong flipmap trigger type in room 66.",
+      "EMType": 69,
+      "Locations": [
+        {
+          "X": 43520,
+          "Y": -896,
+          "Z": 56832,
+          "Room": 66
+        }
+      ],
+      "TrigType": 2,
+      "SwitchOrKeyRef": 34
     }
   ],
   "NonPurist": [],
