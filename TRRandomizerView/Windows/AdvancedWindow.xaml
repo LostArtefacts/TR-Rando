@@ -87,6 +87,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -1581,6 +1582,117 @@
                                                 MinValue="{Binding ControllerProxy.MinSecretCount}"
                                                 MaxValue="5"/>
                         </Grid>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!-- Weather -->
+            <StackPanel Grid.Row="20"
+                        Visibility="{Binding HasWeatherMode, Converter={StaticResource BoolToCollapsedConverter}}">
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Level Conditions"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Margin="0,3,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Rainy Levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"  
+                                                Value="{Binding ControllerProxy.RainLevelCount, Mode=TwoWay}"
+                                                MinValue="0"
+                                                MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Margin="0,5,0,0">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The number of levels with rain."/>
+                    </Border>
+
+                    <Border Margin="0,3,0,0"
+                            Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Snowy levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"  
+                                                Value="{Binding ControllerProxy.SnowLevelCount, Mode=TwoWay}"
+                                                MinValue="0"
+                                                MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="0,5,0,0">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The number of levels with snow."/>
+                    </Border>
+
+                    <Border Margin="0,3,0,0"
+                            Grid.Row="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="SSG2"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Cold levels"
+                                   VerticalAlignment="Center"
+                                   Padding="0,0,5,0" Margin="0"/>
+
+                            <ctrl:NumericUpDown HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"  
+                                                Value="{Binding ControllerProxy.ColdLevelCount, Mode=TwoWay}"
+                                                MinValue="0"
+                                                MaxValue="{Binding ControllerProxy.MaximumLevelCount}"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.Row="2"
+                            Margin="0,5,0,0">
+                        <Label Style="{StaticResource OptionDescriptionStyle}"
+                               Content="The number of levels with cold water."/>
                     </Border>
                 </Grid>
             </StackPanel>

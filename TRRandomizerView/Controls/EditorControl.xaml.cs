@@ -263,7 +263,7 @@ namespace TRRandomizerView.Controls
 
         public bool CanEditCommunitySettings()
         {
-            return _options.IsTR1Main;
+            return _options.IsTR1Main || _options.IsTR3Main;
         }
 
         public void OpenBackupFolder()
@@ -459,8 +459,37 @@ namespace TRRandomizerView.Controls
 
         public void EditCommunitySettings()
         {
+            if (_options.IsTR1Main)
+            {
+                LaunchTR1MainSettings();
+            }
+            else if (_options.IsTR3Main)
+            {
+                LaunchTR3MainSettings();
+            }
+        }
+
+        private void LaunchTR1MainSettings()
+        {
             Tomb1MainWindow window = new Tomb1MainWindow(_options);
             window.ShowDialog();
+        }
+
+        private void LaunchTR3MainSettings()
+        {
+            try
+            {
+                string exePath = Path.GetFullPath(Path.Combine(DataFolder, @"..\tomb3_ConfigTool.exe"));
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = exePath,
+                    WorkingDirectory = Path.GetDirectoryName(exePath)
+                });
+            }
+            catch (Exception e)
+            {
+                MessageWindow.ShowWarning(e.Message);
+            }
         }
 
         private void ShowInvalidSelectionMessage()

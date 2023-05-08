@@ -11,6 +11,7 @@ using TRLevelReader.Helpers;
 using TRLevelReader.Model;
 using TRLevelReader.Model.Enums;
 using TRModelTransporter.Transport;
+using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
@@ -47,7 +48,7 @@ namespace TRRandomizerCore.Processors
         private Dictionary<TR3Adventure, string> _adventureNames;
         private List<string> _gameStrings;
 
-        public GlobeDisplayOption GlobeDisplay { get; set; }
+        public RandomizerSettings Settings { get; set; }
         public TR3TextureMonitorBroker TextureMonitor { get; set; }
         public ItemFactory ItemFactory { get; set; }
 
@@ -128,20 +129,23 @@ namespace TRRandomizerCore.Processors
                 AmendSouthPacificSpikes(level);
             }
 
-            // #277 Make sure levels have artefact menu models because these vary based on original sequencing.
-            ImportArtefactMenuModels(level);
-
-            // If this level is the first in an adventure, update the globe string to match
-            if (_adventureStringSequences.ContainsKey((TR3Adventure)level.Sequence))
+            if (Settings.RandomizeSequencing)
             {
-                switch (GlobeDisplay)
+                // #277 Make sure levels have artefact menu models because these vary based on original sequencing.
+                ImportArtefactMenuModels(level);
+
+                // If this level is the first in an adventure, update the globe string to match
+                if (_adventureStringSequences.ContainsKey((TR3Adventure)level.Sequence))
                 {
-                    case GlobeDisplayOption.Area:
-                        _gameStrings[_adventureStringSequences[(TR3Adventure)level.Sequence]] = _adventureNames[level.Adventure];
-                        break;
-                    case GlobeDisplayOption.Level:
-                        _gameStrings[_adventureStringSequences[(TR3Adventure)level.Sequence]] = level.Script.Name;
-                        break;
+                    switch (Settings.GlobeDisplay)
+                    {
+                        case GlobeDisplayOption.Area:
+                            _gameStrings[_adventureStringSequences[(TR3Adventure)level.Sequence]] = _adventureNames[level.Adventure];
+                            break;
+                        case GlobeDisplayOption.Level:
+                            _gameStrings[_adventureStringSequences[(TR3Adventure)level.Sequence]] = level.Script.Name;
+                            break;
+                    }
                 }
             }
         }

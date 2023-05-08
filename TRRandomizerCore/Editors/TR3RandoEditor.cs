@@ -43,10 +43,13 @@ namespace TRRandomizerCore.Editors
                 target++;
             }
 
-            if (Settings.RandomizeSequencing)
+            if (_edition.IsCommunityPatch && Settings.RandomizeWeather)
             {
                 target += numLevels;
             }
+
+            // Sequencing checks
+            target += numLevels;
 
             if (Settings.RandomizeSecrets)
             {
@@ -145,7 +148,20 @@ namespace TRRandomizerCore.Editors
                     }.Randomize(Settings.GameStringsSeed);
                 }
 
-                if (!monitor.IsCancelled && Settings.RandomizeSequencing)
+                if (!monitor.IsCancelled && _edition.IsCommunityPatch && Settings.RandomizeWeather)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Randomizing weather");
+                    new TR3WeatherRandomizer
+                    {
+                        ScriptEditor = tr23ScriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                        Settings = Settings
+                    }.Randomize(Settings.WeatherSeed);
+                }
+
+                if (!monitor.IsCancelled)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Running level sequence checks");
                     new TR3SequenceProcessor
@@ -154,7 +170,7 @@ namespace TRRandomizerCore.Editors
                         Levels = levels,
                         BasePath = wipDirectory,
                         SaveMonitor = monitor,
-                        GlobeDisplay = Settings.GlobeDisplay,
+                        Settings = Settings,
                         TextureMonitor = textureMonitor,
                         ItemFactory = itemFactory
                     }.Run();
