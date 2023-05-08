@@ -1,5 +1,29 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Ensure the enemies in room 15 are always triggered rather than only from the invisible platform.",
+      "EMType": 61,
+      "Locations": [
+        {
+          "X": 47616,
+          "Y": -5376,
+          "Z": 33280,
+          "Room": 14
+        }
+      ],
+      "Trigger": {
+        "Mask": 31,
+        "Actions": [
+          {
+            "Parameter": 34
+          },
+          {
+            "Parameter": 35
+          }
+        ]
+      }
+    }
+  ],
   "NonPurist": [
     {
       "Comments": "Patch the hole in the sphinx.",

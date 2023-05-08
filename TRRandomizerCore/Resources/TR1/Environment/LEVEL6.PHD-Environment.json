@@ -235,7 +235,7 @@
       }
     },
     {
-      "Comments": "Add the missing faces in the pit in the OG secret garden area.",
+      "Comments": "Add the missing faces in the pit in the OG secret garden area and room 53.",
       "EMType": 26,
       "Quads": {
         "2": [
@@ -256,6 +256,18 @@
               56
             ],
             "Texture": 9
+          }
+        ]
+      },
+      "Triangles": {
+        "53": [
+          {
+            "Vertices": [
+              12,
+              7,
+              13
+            ],
+            "Texture": 7
           }
         ]
       }

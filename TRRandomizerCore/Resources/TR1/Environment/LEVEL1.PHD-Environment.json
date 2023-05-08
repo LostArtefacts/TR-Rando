@@ -57,6 +57,24 @@
       }
     },
     {
+      "Comments": "Patch a hole in the wall in room 14.",
+      "EMType": 23,
+      "Modifications": [
+        {
+          "RoomNumber": 14,
+          "FaceIndex": 108,
+          "VertexChanges": {
+            "0": {
+              "Y": 256
+            },
+            "1": {
+              "Y": -512
+            }
+          }
+        }
+      ]
+    },
+    {
       "Comments": "Reopen the doors in room 26 to make a return path possible.",
       "EMType": 61,
       "Locations": [
