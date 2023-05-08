@@ -1,6 +1,19 @@
 {
   "All": [],
-  "NonPurist": [],
+  "NonPurist": [
+    {
+      "Comments": "Add a pushblock to allow returning to the start.",
+      "EMType": 51,
+      "TypeID": 48,
+      "Intensity": -1,
+      "Location": {
+        "X": 44544,
+        "Y": -3328,
+        "Z": 70144,
+        "Room": 7
+      }
+    }
+  ],
   "Any": [],
   "AllWithin": [
     [
