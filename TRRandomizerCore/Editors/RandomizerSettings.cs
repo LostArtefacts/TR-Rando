@@ -139,6 +139,15 @@ namespace TRRandomizerCore.Editors
         public uint MinStartingHealth { get; set; }
         public uint MaxStartingHealth { get; set; }
 
+        public bool RandomizeWeather { get; set; }
+        public int WeatherSeed { get; set; }
+        public uint RainLevelCount { get; set; }
+        public uint SnowLevelCount { get; set; }
+        public uint ColdLevelCount { get; set; }
+        public bool RainyAssaultCourse { get; set; }
+        public bool SnowyAssaultCourse { get; set; }
+        public bool ColdAssaultCourse { get; set; }
+
         public bool UseRecommendedCommunitySettings { get; set; }
 
 
@@ -301,6 +310,14 @@ namespace TRRandomizerCore.Editors
             RandomizeKeyItemSprites = config.GetBool(nameof(RandomizeKeyItemSprites));
             RandomizeSecretSprites = config.GetBool(nameof(RandomizeSecretSprites));
 
+            RandomizeWeather = config.GetBool(nameof(RandomizeWeather));
+            WeatherSeed = config.GetInt(nameof(WeatherSeed), defaultSeed);
+            RainLevelCount = config.GetUInt(nameof(RainLevelCount), 5);
+            SnowLevelCount = config.GetUInt(nameof(SnowLevelCount), 2);
+            ColdLevelCount = config.GetUInt(nameof(ColdLevelCount), 2);
+            RainyAssaultCourse = config.GetBool(nameof(RainyAssaultCourse));
+            SnowyAssaultCourse = config.GetBool(nameof(SnowyAssaultCourse));
+            ColdAssaultCourse = config.GetBool(nameof(ColdAssaultCourse));
         }
 
         public void StoreConfig(Config config)
@@ -438,6 +455,15 @@ namespace TRRandomizerCore.Editors
             config[nameof(RandomizeItemSprites)] = RandomizeItemSprites;
             config[nameof(RandomizeKeyItemSprites)] = RandomizeKeyItemSprites;
             config[nameof(RandomizeSecretSprites)] = RandomizeSecretSprites;
+
+            config[nameof(RandomizeWeather)] = RandomizeWeather;
+            config[nameof(WeatherSeed)] = WeatherSeed;
+            config[nameof(RainLevelCount)] = RainLevelCount;
+            config[nameof(SnowLevelCount)] = SnowLevelCount;
+            config[nameof(ColdLevelCount)] = ColdLevelCount;
+            config[nameof(RainyAssaultCourse)] = RainyAssaultCourse;
+            config[nameof(SnowyAssaultCourse)] = SnowyAssaultCourse;
+            config[nameof(ColdAssaultCourse)] = ColdAssaultCourse;
         }
 
         public int GetSaveTarget(int numLevels)

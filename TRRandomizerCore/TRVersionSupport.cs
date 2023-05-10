@@ -124,7 +124,7 @@ namespace TRRandomizerCore
 
         private static readonly List<TRRandomizerType> _tr3MainTypes = new List<TRRandomizerType>
         {
-            //TRRandomizerType.Weather
+            TRRandomizerType.Weather
         };
 
         private static readonly Dictionary<TRVersion, TRVersionSupportGroup> _supportedTypes = new Dictionary<TRVersion, TRVersionSupportGroup>

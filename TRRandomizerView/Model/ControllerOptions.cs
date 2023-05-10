@@ -21,7 +21,7 @@ namespace TRRandomizerView.Model
 
         private readonly ManagedSeed _secretRewardsControl;
         private readonly ManagedSeedNumeric _levelSequencingControl, _unarmedLevelsControl, _ammolessLevelsControl, _sunsetLevelsControl, _nightLevelsControl;
-        private readonly ManagedSeedBool _audioTrackControl, _healthLevelsControl;
+        private readonly ManagedSeedBool _audioTrackControl, _healthLevelsControl, _weatherControl;
 
         private readonly ManagedSeedBool _randomSecretsControl, _randomItemsControl, _randomEnemiesControl, _randomTexturesControl, _randomOutfitsControl, _randomTextControl, _randomStartControl, _randomEnvironmentControl;
 
@@ -39,6 +39,7 @@ namespace TRRandomizerView.Model
         private BoolItemControlClass _rotateStartPosition;
         private BoolItemControlClass _randomizeWaterLevels, _randomizeSlotPositions, _randomizeLadders, _randomizeTraps, _randomizeChallengeRooms, _hardEnvironmentMode;
         private BoolItemControlClass _disableHealingBetweenLevels, _disableMedpacks;
+        private BoolItemControlClass _rainyAssaultCourse, _snowyAssaultCourse, _coldAssaultCourse;
         private uint _mirroredLevelCount;
         private bool _mirrorAssaultCourse;
         private uint _haircutLevelCount;
@@ -66,8 +67,9 @@ namespace TRRandomizerView.Model
         private bool _vfxWave;
         private uint _uncontrolledSFXCount;
         private bool _uncontrolledSFXAssaultCourse;
+        private uint _rainLevelCount, _snowLevelCount, _coldLevelCount;
 
-        private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls, _healthBoolItemControls;
+        private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls, _healthBoolItemControls, _weatherBoolItemControls;
         private List<BoolItemIDControlClass> _selectableEnemies;
         private bool _useEnemyExclusions, _showExclusionWarnings;
 
@@ -842,13 +844,16 @@ namespace TRRandomizerView.Model
             WireframeLevelCount = (uint)Math.Min(WireframeLevelCount, MaximumLevelCount);
             UncontrolledSFXCount = (uint)Math.Min(UncontrolledSFXCount, MaximumLevelCount);
             MedilessLevelCount = (uint)Math.Min(MedilessLevelCount, MaximumLevelCount);
+            RainLevelCount = (uint)Math.Min(RainLevelCount, MaximumLevelCount);
+            SnowLevelCount = (uint)Math.Min(SnowLevelCount, MaximumLevelCount);
+            ColdLevelCount = (uint)Math.Min(ColdLevelCount, MaximumLevelCount);
         }
 
         public bool RandomizationPossible
         {
             get => RandomizeLevelSequencing || RandomizeUnarmedLevels || RandomizeAmmolessLevels || RandomizeSecretRewards || RandomizeHealth || RandomizeSunsets ||
                    RandomizeAudioTracks || RandomizeItems || RandomizeEnemies || RandomizeSecrets || RandomizeTextures || RandomizeOutfits ||
-                   RandomizeText || RandomizeNightMode || RandomizeStartPosition || RandomizeEnvironment;
+                   RandomizeText || RandomizeNightMode || RandomizeStartPosition || RandomizeEnvironment || RandomizeWeather;
         }
 
         public bool RandomizeLevelSequencing
@@ -1081,6 +1086,86 @@ namespace TRRandomizerView.Model
             set
             {
                 _sunsetLevelsControl.CustomInt = (int)value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool RandomizeWeather
+        {
+            get => _weatherControl.IsActive;
+            set
+            {
+                _weatherControl.IsActive = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int WeatherSeed
+        {
+            get => _weatherControl.Seed;
+            set
+            {
+                _weatherControl.Seed = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint RainLevelCount
+        {
+            get => _rainLevelCount;
+            set
+            {
+                _rainLevelCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint SnowLevelCount
+        {
+            get => _snowLevelCount;
+            set
+            {
+                _snowLevelCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public uint ColdLevelCount
+        {
+            get => _coldLevelCount;
+            set
+            {
+                _coldLevelCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass RainyAssaultCourse
+        {
+            get => _rainyAssaultCourse;
+            set
+            {
+                _rainyAssaultCourse = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass SnowyAssaultCourse
+        {
+            get => _snowyAssaultCourse;
+            set
+            {
+                _snowyAssaultCourse = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public BoolItemControlClass ColdAssaultCourse
+        {
+            get => _coldAssaultCourse;
+            set
+            {
+                _coldAssaultCourse = value;
                 FirePropertyChanged();
             }
         }
@@ -2189,6 +2274,16 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public List<BoolItemControlClass> WeatherBoolItemControls
+        {
+            get => _weatherBoolItemControls;
+            set
+            {
+                _weatherBoolItemControls = value;
+                FirePropertyChanged();
+            }
+        }
+
         public List<BoolItemControlClass> ItemBoolItemControls
         {
             get => _itemBoolItemControls;
@@ -2355,6 +2450,7 @@ namespace TRRandomizerView.Model
             _secretRewardsControl = new ManagedSeed();
             _healthLevelsControl = new ManagedSeedBool();
             _sunsetLevelsControl = new ManagedSeedNumeric();
+            _weatherControl = new ManagedSeedBool();
             _nightLevelsControl = new ManagedSeedNumeric();
             _audioTrackControl = new ManagedSeedBool();
 
@@ -2681,6 +2777,27 @@ namespace TRRandomizerView.Model
             };
             BindingOperations.SetBinding(DisableMedpacks, BoolItemControlClass.IsActiveProperty, randomizeHealthBinding);
 
+            // Weather
+            Binding randomizeWeatherBinding = new Binding(nameof(RandomizeWeather)) { Source = this };
+            RainyAssaultCourse = new BoolItemControlClass
+            {
+                Title = "Rainy assault course",
+                Description = "Add rain to Lara's home."
+            };
+            BindingOperations.SetBinding(RainyAssaultCourse, BoolItemControlClass.IsActiveProperty, randomizeWeatherBinding);
+            SnowyAssaultCourse = new BoolItemControlClass
+            {
+                Title = "Snowy assault course",
+                Description = "Add snow to Lara's home."
+            };
+            BindingOperations.SetBinding(SnowyAssaultCourse, BoolItemControlClass.IsActiveProperty, randomizeWeatherBinding);
+            ColdAssaultCourse = new BoolItemControlClass
+            {
+                Title = "Cold assault course",
+                Description = "Make the water in Lara's home cold."
+            };
+            BindingOperations.SetBinding(ColdAssaultCourse, BoolItemControlClass.IsActiveProperty, randomizeWeatherBinding);
+
             // all item controls
             SecretBoolItemControls = new List<BoolItemControlClass>()
             {
@@ -2723,6 +2840,10 @@ namespace TRRandomizerView.Model
             HealthBoolItemControls = new List<BoolItemControlClass>
             {
                 _disableHealingBetweenLevels, _disableMedpacks
+            };
+            WeatherBoolItemControls = new List<BoolItemControlClass>
+            {
+                _rainyAssaultCourse, _snowyAssaultCourse, _coldAssaultCourse
             };
         }
 
@@ -2811,6 +2932,15 @@ namespace TRRandomizerView.Model
             RandomizeSunsets = _controller.RandomizeSunsets;
             SunsetsSeed = _controller.SunsetsSeed;
             SunsetCount = _controller.SunsetCount;
+
+            RandomizeWeather = _controller.RandomizeWeather;
+            WeatherSeed = _controller.WeatherSeed;
+            RainyAssaultCourse.Value = _controller.RainyAssaultCourse;
+            SnowyAssaultCourse.Value = _controller.SnowyAssaultCourse;
+            ColdAssaultCourse.Value = _controller.ColdAssaultCourse;
+            RainLevelCount = _controller.RainLevelCount;
+            SnowLevelCount = _controller.SnowLevelCount;
+            ColdLevelCount = _controller.ColdLevelCount;
 
             RandomizeNightMode = _controller.RandomizeNightMode;
             NightModeSeed = _controller.NightModeSeed;
@@ -3080,6 +3210,15 @@ namespace TRRandomizerView.Model
             _controller.SunsetsSeed = SunsetsSeed;
             _controller.SunsetCount = SunsetCount;
 
+            _controller.RandomizeWeather = RandomizeWeather;
+            _controller.WeatherSeed = WeatherSeed;
+            _controller.RainyAssaultCourse = RainyAssaultCourse.Value;
+            _controller.SnowyAssaultCourse = SnowyAssaultCourse.Value;
+            _controller.ColdAssaultCourse = ColdAssaultCourse.Value;
+            _controller.RainLevelCount = RainLevelCount;
+            _controller.SnowLevelCount = SnowLevelCount;
+            _controller.ColdLevelCount = ColdLevelCount;
+
             _controller.RandomizeNightMode = RandomizeNightMode;
             _controller.NightModeSeed = NightModeSeed;
             _controller.NightModeCount = NightModeCount;
@@ -3285,6 +3424,7 @@ namespace TRRandomizerView.Model
         public bool IsTR1Main => IsTR1 && _controller.IsCommunityPatch;
         public bool IsTR2 => _controller != null && _controller.IsTR2;
         public bool IsTR3 => _controller != null && _controller.IsTR3;
+        public bool IsTR3Main => IsTR3 && _controller.IsCommunityPatch;
         public bool IsLevelSequenceTypeSupported => IsRandomizationSupported(TRRandomizerType.LevelSequence);
         public bool IsGlobeDisplayTypeSupported => IsRandomizationSupported(TRRandomizerType.GlobeDisplay);
         public bool IsUnarmedTypeSupported => IsRandomizationSupported(TRRandomizerType.Unarmed);
@@ -3354,6 +3494,7 @@ namespace TRRandomizerView.Model
             FirePropertyChanged(nameof(IsTR3));
 
             FirePropertyChanged(nameof(IsTR1Main));
+            FirePropertyChanged(nameof(IsTR3Main));
 
             AdjustAvailableOptions();
         }

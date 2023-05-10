@@ -155,7 +155,7 @@
         <ctrl:ManagedSeedIntControl
             Grid.Row="3"
             Grid.Column="0"
-            Visibility="{Binding IsTR1, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBoolToCollapsedConverter}}"
+            Visibility="{Binding IsTR2, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
             IsEnabled="{Binding IsSunsetTypeSupported, UpdateSourceTrigger=PropertyChanged}"
             IsActive="{Binding RandomizeSunsets, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             Title="Randomize Sunsets"
@@ -168,6 +168,31 @@
             CustomIntDefault="{Binding DefaultSunsetCount}"
             CustomIntMaxValue="{Binding MaximumLevelCount}"
             CustomIntTitle="Number of levels"/>
+
+        <ctrl:ManagedSeedAdvancedControl
+            Grid.Row="3"
+            Grid.Column="0"
+            Visibility="{Binding IsTR3, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+            IsEnabled="{Binding IsWeatherTypeSupported, UpdateSourceTrigger=PropertyChanged}"
+            IsActive="{Binding RandomizeWeather, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Title="Randomize Weather"
+            Text="Randomize the weather and conditions in each level."
+            SeedMinValue="1"
+            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedValue="{Binding WeatherSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ctrl:ManagedSeedAdvancedControl.Resources>
+                <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </ctrl:ManagedSeedAdvancedControl.Resources>
+            <ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+                <windows:AdvancedWindow Title="Randomize Weather (Advanced)"
+                                        MainDescription="Customize the weather randomization."
+                                        HasBoolItems="True"
+                                        HasWeatherMode="True"
+                                        BoolItemsSource="{Binding Data.WeatherBoolItemControls, Source={StaticResource proxy}}"
+                                        ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
+                </windows:AdvancedWindow>
+            </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>
+        </ctrl:ManagedSeedAdvancedControl>
 
         <ctrl:ManagedSeedAdvancedControl
             Grid.Row="4"
@@ -589,6 +614,21 @@
                             Grid.Row="8"
                             Margin="0,0,0,18"
                             Content="Tomb1Main Settings" 
+                            Style="{StaticResource AltCallToAction}"
+                            Command="cmds:WindowCommands.EditCommunitySettings"/>
+
+                        <TextBlock
+                            Visibility="{Binding IsTR3Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                            Grid.Row="7"
+                            Margin="0,0,0,5"
+                            Text="Configure extra settings specific to tomb3."
+                            TextWrapping="Wrap"/>
+
+                        <Button
+                            Visibility="{Binding IsTR3Main, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsedConverter}}"
+                            Grid.Row="8"
+                            Margin="0,0,0,18"
+                            Content="tomb3 Settings" 
                             Style="{StaticResource AltCallToAction}"
                             Command="cmds:WindowCommands.EditCommunitySettings"/>
                     </Grid>

@@ -50,6 +50,10 @@ namespace TRRandomizerView.Model
             {
                 _options.SunsetsSeed = InterpretSeed(seed);
             }
+            if (_options.RandomizeWeather)
+            {
+                _options.WeatherSeed = InterpretSeed(seed);
+            }
             if (_options.RandomizeNightMode)
             {
                 _options.NightModeSeed = InterpretSeed(seed);
@@ -117,6 +121,10 @@ namespace TRRandomizerView.Model
             if (_options.RandomizeSunsets)
             {
                 RandomizeSunsetOptions();
+            }
+            if (_options.RandomizeWeather)
+            {
+                RandomizeWeatherOptions();
             }
             if (_options.RandomizeNightMode)
             {
@@ -199,6 +207,17 @@ namespace TRRandomizerView.Model
         private void RandomizeSunsetOptions()
         {
             _options.SunsetCount = GetRandomUInt(0, _options.MaximumLevelCount);
+        }
+
+        private void RandomizeWeatherOptions()
+        {
+            _options.RainLevelCount = GetRandomUInt(0, _options.MaximumLevelCount);
+            _options.SnowLevelCount = GetRandomUInt(0, _options.MaximumLevelCount);
+            _options.ColdLevelCount = GetRandomUInt(0, _options.MaximumLevelCount);
+
+            _options.RainyAssaultCourse.Value = GetRandomBool();
+            _options.SnowyAssaultCourse.Value = GetRandomBool();
+            _options.ColdAssaultCourse.Value = GetRandomBool();
         }
 
         private void RandomizeNightModeOptions()
