@@ -230,6 +230,15 @@ namespace TRRandomizerCore.Randomizers
                     continue;
                 }
 
+                // Monkeys are friendly when the tiger model is present, and when they are friendly,
+                // mounting a vehicle will crash the game.
+                if (level.HasVehicle
+                    && ((entity == TR3Entities.Monkey && newEntities.Contains(TR3Entities.Tiger))
+                    || (entity == TR3Entities.Tiger && newEntities.Contains(TR3Entities.Monkey))))
+                {
+                    continue;
+                }
+
                 // If this is a tracked enemy throughout the game, we only allow it if the number
                 // of unique levels is within the limit. Bear in mind we are collecting more than
                 // one group of enemies per level.
@@ -336,6 +345,15 @@ namespace TRRandomizerCore.Randomizers
             }
 
             List<TR3Entities> availableEnemyTypes = GetCurrentEnemyEntities(level);
+            if (level.HasVehicle
+                && availableEnemyTypes.Contains(TR3Entities.Tiger)
+                && availableEnemyTypes.Contains(TR3Entities.Monkey))
+            {
+                TR3Entities banishedType = _generator.NextDouble() < 0.5 ? TR3Entities.Tiger : TR3Entities.Monkey;
+                availableEnemyTypes.Remove(banishedType);
+                level.RemoveModel(banishedType);
+            }
+
             List<TR3Entities> droppableEnemies = TR3EntityUtilities.FilterDroppableEnemies(availableEnemyTypes, Settings.ProtectMonks);
             List<TR3Entities> waterEnemies = TR3EntityUtilities.FilterWaterEnemies(availableEnemyTypes);
 
@@ -723,6 +741,14 @@ namespace TRRandomizerCore.Randomizers
 
                         importer.Data.AliasPriority = TR3EnemyUtilities.GetAliasPriority(level.Name, enemies.EntitiesToImport);
                         importer.Import();
+
+                        // Remove stale tiger model if present to avoid friendly monkeys causing vehicle crashes.
+                        if (level.HasVehicle
+                            && enemies.EntitiesToImport.Contains(TR3Entities.Monkey)
+                            && level.Data.Models.Any(m => m.ID == (uint)TR3Entities.Tiger))
+                        {
+                            level.RemoveModel(TR3Entities.Tiger);
+                        }
                     }
 
                     if (!_outer.TriggerProgress())
