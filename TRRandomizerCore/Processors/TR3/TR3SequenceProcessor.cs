@@ -191,6 +191,18 @@ namespace TRRandomizerCore.Processors
             {
                 quad.TypeID = (short)TR3Entities.UPV;
             }
+
+            // If we're not randomizing enemies, we have to perform the monkey/tiger/vehicle crash
+            // test here for the likes of Jungle.
+            if (!Settings.RandomizeEnemies
+                && level.Data.Entities.Any(e => e.TypeID == (short)TR3Entities.Monkey)
+                && level.Data.Models.Any(m => m.ID == (uint)TR3Entities.Tiger))
+            {
+                level.RemoveModel(TR3Entities.Tiger);
+                level.Data.Entities.Where(e => e.TypeID == (short)TR3Entities.Tiger)
+                    .ToList()
+                    .ForEach(e => e.TypeID = (short)TR3Entities.Monkey);
+            }
         }
 
         private void AmendAntarctica(TR3CombinedLevel level)

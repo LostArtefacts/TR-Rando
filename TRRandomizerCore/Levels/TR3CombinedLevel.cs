@@ -1,6 +1,9 @@
-﻿using TRGE.Core;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
+using TRLevelReader.Model.Enums;
 
 namespace TRRandomizerCore.Levels
 {
@@ -87,6 +90,8 @@ namespace TRRandomizerCore.Levels
         /// </summary>
         public bool HasSecrets => Script.NumSecrets > 0;
 
+        public bool HasVehicle => Data.Entities.Any(e => TR3EntityUtilities.IsVehicleType((TR3Entities)e.TypeID));
+
         /// <summary>
         /// Get the adventure based on this level's name.
         /// </summary>
@@ -112,6 +117,17 @@ namespace TRRandomizerCore.Levels
                 }
 
                 return TR3Adventure.India;
+            }
+        }
+
+        public void RemoveModel(TR3Entities type)
+        {
+            List<TRModel> models = Data.Models.ToList();
+            if (models.Find(m => m.ID == (uint)type) is TRModel model)
+            {
+                models.Remove(model);
+                Data.Models = models.ToArray();
+                Data.NumModels--;
             }
         }
     }

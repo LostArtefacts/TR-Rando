@@ -359,6 +359,15 @@ namespace TRLevelReader.Helpers
                 || IsArtefactPickup(entity);
         }
 
+        public static bool IsVehicleType(TR3Entities entityType)
+        {
+            return entityType == TR3Entities.Quad
+                || entityType == TR3Entities.Kayak
+                || entityType == TR3Entities.UPV
+                || entityType == TR3Entities.Boat
+                || entityType == TR3Entities.MineCart;
+        }
+
         public static List<TR3Entities> GetCandidateCrossLevelEnemies()
         {
             return new List<TR3Entities>
