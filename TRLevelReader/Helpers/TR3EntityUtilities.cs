@@ -364,6 +364,7 @@ namespace TRLevelReader.Helpers
             return entityType == TR3Entities.Quad
                 || entityType == TR3Entities.Kayak
                 || entityType == TR3Entities.UPV
+                || entityType == TR3Entities.Boat
                 || entityType == TR3Entities.MineCart;
         }
 
