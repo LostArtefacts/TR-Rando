@@ -4264,10 +4264,6 @@
       "Y": 5888,
       "Z": 41497,
       "Room": 106,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4275,10 +4271,6 @@
       "Y": 3840,
       "Z": 51712,
       "Room": 72,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4286,10 +4278,6 @@
       "Y": 3840,
       "Z": 47595,
       "Room": 72,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4297,10 +4285,6 @@
       "Y": 3840,
       "Z": 45536,
       "Room": 72,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4308,10 +4292,6 @@
       "Y": 2048,
       "Z": 51576,
       "Room": 75,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4319,10 +4299,6 @@
       "Y": 5888,
       "Z": 41435,
       "Room": 70,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4330,10 +4306,6 @@
       "Y": 6272,
       "Z": 35328,
       "Room": 67,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4341,10 +4313,6 @@
       "Y": 6272,
       "Z": 35328,
       "Room": 67,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4352,10 +4320,6 @@
       "Y": 7936,
       "Z": 41473,
       "Room": 69,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4363,10 +4327,6 @@
       "Y": 5888,
       "Z": 44596,
       "Room": 70,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4374,10 +4334,6 @@
       "Y": 3840,
       "Z": 50688,
       "Room": 64,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4385,10 +4341,6 @@
       "Y": 4864,
       "Z": 42496,
       "Room": 2,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4396,10 +4348,6 @@
       "Y": -7936,
       "Z": 29160,
       "Room": 32,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4407,10 +4355,6 @@
       "Y": -8960,
       "Z": 27136,
       "Room": 32,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4418,10 +4362,6 @@
       "Y": -8333,
       "Z": 28106,
       "Room": 32,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4429,10 +4369,6 @@
       "Y": -1536,
       "Z": 28129,
       "Room": 23,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26312
     },
     {
@@ -4440,10 +4376,6 @@
       "Y": 7936,
       "Z": 70144,
       "Room": 80,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4451,10 +4383,6 @@
       "Y": 8065,
       "Z": 70128,
       "Room": 56,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4462,10 +4390,6 @@
       "Y": 7936,
       "Z": 58880,
       "Room": 77,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4473,10 +4397,6 @@
       "Y": 7936,
       "Z": 68096,
       "Room": 14,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4484,10 +4404,6 @@
       "Y": 8192,
       "Z": 65022,
       "Room": 18,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4495,10 +4411,6 @@
       "Y": 17152,
       "Z": 74240,
       "Room": 151,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4506,10 +4418,6 @@
       "Y": 16929,
       "Z": 73304,
       "Room": 151,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4517,10 +4425,6 @@
       "Y": 29696,
       "Z": 72192,
       "Room": 170,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4528,10 +4432,6 @@
       "Y": 24576,
       "Z": 62976,
       "Room": 153,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4539,10 +4439,6 @@
       "Y": 26624,
       "Z": 66048,
       "Room": 164,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4550,10 +4446,6 @@
       "Y": 26496,
       "Z": 56832,
       "Room": 160,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4561,10 +4453,6 @@
       "Y": 26624,
       "Z": 67072,
       "Room": 160,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4572,10 +4460,6 @@
       "Y": 25088,
       "Z": 67422,
       "Room": 160,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4583,10 +4467,6 @@
       "Y": 24811,
       "Z": 65019,
       "Room": 160,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4594,10 +4474,6 @@
       "Y": 25344,
       "Z": 57924,
       "Room": 160,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4605,10 +4481,6 @@
       "Y": 17920,
       "Z": 70171,
       "Room": 165,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4616,10 +4488,6 @@
       "Y": 14594,
       "Z": 71121,
       "Room": 166,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4627,10 +4495,6 @@
       "Y": 12301,
       "Z": 72240,
       "Room": 166,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4638,10 +4502,6 @@
       "Y": 2560,
       "Z": 67072,
       "Room": 167,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26365
     },
     {
@@ -4649,10 +4509,6 @@
       "Y": 7424,
       "Z": 60928,
       "Room": 124,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     },
     {
@@ -4660,10 +4516,6 @@
       "Y": 7424,
       "Z": 62976,
       "Room": 124,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     },
     {
@@ -4671,10 +4523,6 @@
       "Y": 6912,
       "Z": 60928,
       "Room": 118,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     },
     {
@@ -4682,10 +4530,6 @@
       "Y": 6912,
       "Z": 63557,
       "Room": 122,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     },
     {
@@ -4693,10 +4537,6 @@
       "Y": 6912,
       "Z": 64064,
       "Room": 123,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     },
     {
@@ -4704,10 +4544,6 @@
       "Y": 10752,
       "Z": 55812,
       "Room": 13,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     },
     {
@@ -4715,10 +4551,6 @@
       "Y": 8192,
       "Z": 53757,
       "Room": 11,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     },
     {
@@ -4726,10 +4558,6 @@
       "Y": 14848,
       "Z": 57856,
       "Room": 87,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     },
     {
@@ -4737,10 +4565,6 @@
       "Y": 14848,
       "Z": 58828,
       "Room": 89,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     },
     {
@@ -4748,10 +4572,6 @@
       "Y": 14976,
       "Z": 60928,
       "Room": 91,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     },
     {
@@ -4759,10 +4579,6 @@
       "Y": 15360,
       "Z": 58777,
       "Room": 159,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     },
     {
@@ -4770,10 +4586,6 @@
       "Y": 6912,
       "Z": 59892,
       "Room": 117,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 26333
     }
   ],
