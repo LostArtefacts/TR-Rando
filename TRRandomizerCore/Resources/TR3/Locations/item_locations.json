@@ -5018,18 +5018,6 @@
       "KeyItemGroupID": 27302
     }
   ],
-  "CHAMBER.TR2": [
-    {
-      "X": 0,
-      "Z": 0,
-      "Y": 0,
-      "Room": 0,
-      "RequiresGlitch": false,
-      "Difficulty": 0,
-      "IsInRoomSpace": false,
-      "IsItem": true
-    }
-  ],
   "STPAUL.TR2": [
     {
       "X": 49664,
