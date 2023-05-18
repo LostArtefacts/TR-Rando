@@ -758,10 +758,6 @@
       "Y": -2816,
       "Z": 35318,
       "Room": 55,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -769,10 +765,6 @@
       "Y": -2304,
       "Z": 35328,
       "Room": 99,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -780,10 +772,6 @@
       "Y": -2560,
       "Z": 40448,
       "Room": 98,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -791,10 +779,6 @@
       "Y": -2560,
       "Z": 41472,
       "Room": 98,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -802,10 +786,6 @@
       "Y": -2560,
       "Z": 45559,
       "Room": 98,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -813,10 +793,6 @@
       "Y": -2560,
       "Z": 42453,
       "Room": 91,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -824,10 +800,6 @@
       "Y": -2560,
       "Z": 44469,
       "Room": 91,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -835,10 +807,6 @@
       "Y": -1024,
       "Z": 47673,
       "Room": 89,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -846,10 +814,6 @@
       "Y": 768,
       "Z": 55834,
       "Room": 30,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -857,10 +821,6 @@
       "Y": -2304,
       "Z": 44561,
       "Room": 87,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -868,10 +828,6 @@
       "Y": -2560,
       "Z": 41486,
       "Room": 87,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -879,10 +835,6 @@
       "Y": -2560,
       "Z": 37376,
       "Room": 86,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -890,10 +842,6 @@
       "Y": -768,
       "Z": 37357,
       "Room": 85,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -901,10 +849,6 @@
       "Y": -768,
       "Z": 36358,
       "Room": 88,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -912,10 +856,6 @@
       "Y": -2816,
       "Z": 44491,
       "Room": 87,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12323
     },
     {
@@ -923,10 +863,6 @@
       "Y": 256,
       "Z": 34304,
       "Room": 72,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -934,10 +870,6 @@
       "Y": -643,
       "Z": 33264,
       "Room": 72,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -945,10 +877,6 @@
       "Y": -768,
       "Z": 33280,
       "Room": 59,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -956,10 +884,6 @@
       "Y": 512,
       "Z": 29184,
       "Room": 60,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -967,10 +891,6 @@
       "Y": 512,
       "Z": 30208,
       "Room": 60,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -978,10 +898,6 @@
       "Y": 768,
       "Z": 41523,
       "Room": 63,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -989,10 +905,6 @@
       "Y": 256,
       "Z": 36352,
       "Room": 78,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -1000,10 +912,6 @@
       "Y": 1536,
       "Z": 41472,
       "Room": 79,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -1011,10 +919,6 @@
       "Y": 1536,
       "Z": 43627,
       "Room": 79,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -1022,10 +926,6 @@
       "Y": 512,
       "Z": 42424,
       "Room": 80,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -1033,10 +933,6 @@
       "Y": 512,
       "Z": 45537,
       "Room": 80,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -1044,10 +940,6 @@
       "Y": 3072,
       "Z": 30208,
       "Room": 75,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     },
     {
@@ -1055,10 +947,6 @@
       "Y": 512,
       "Z": 26118,
       "Room": 58,
-      "Difficulty": "Easy",
-      "IsInRoomSpace": false,
-      "IsItem": false,
-      "RequiresGlitch": false,
       "KeyItemGroupID": 12239
     }
   ],
