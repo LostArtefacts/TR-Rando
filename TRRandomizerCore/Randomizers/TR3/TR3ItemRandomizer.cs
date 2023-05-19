@@ -334,50 +334,52 @@ namespace TRRandomizerCore.Randomizers
 
         public void RandomizeKeyItems(TR3CombinedLevel level)
         {
-            if (level.Name != TR3LevelNames.ASSAULT)
+            if (!_locations.ContainsKey(level.Name))
             {
-                //Get all locations that have a KeyItemGroupID - e.g. intended for key items
-                List<Location> levelLocations = _locations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
+                return;
+            }
 
-                foreach (TR2Entity ent in level.Data.Entities)
+            //Get all locations that have a KeyItemGroupID - e.g. intended for key items
+            List<Location> levelLocations = _locations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
+
+            foreach (TR2Entity ent in level.Data.Entities)
+            {
+                //Calculate its alias
+                TR3Entities AliasedKeyItemID = (TR3Entities)(ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name));
+
+                //Any special handling for key item entities
+                switch (AliasedKeyItemID)
                 {
-                    //Calculate its alias
-                    TR3Entities AliasedKeyItemID = (TR3Entities)(ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name));
+                    case TR3Entities.DetonatorKey:
+                        ent.Invisible = false;
+                        break;
+                    default:
+                        break;
+                }
 
-                    //Any special handling for key item entities
-                    switch (AliasedKeyItemID)
+                if (AliasedKeyItemID < TR3Entities.JungleKeyItemBase)
+                    throw new NotSupportedException("Level does not have key item alias group defined");
+
+                //Is entity one we are allowed/expected to move? (is the alias and base type correct?)
+                if (_keyItemZones[level.Name].AliasedExpectedKeyItems.Contains(AliasedKeyItemID) &&
+                    _keyItemZones[level.Name].BaseExpectedKeyItems.Contains((TR3Entities)ent.TypeID))
+                {
+                    do
                     {
-                        case TR3Entities.DetonatorKey:
-                            ent.Invisible = false;
-                            break;
-                        default:
-                            break;
-                    }
-
-                    if (AliasedKeyItemID < TR3Entities.JungleKeyItemBase)
-                        throw new NotSupportedException("Level does not have key item alias group defined");
-
-                    //Is entity one we are allowed/expected to move? (is the alias and base type correct?)
-                    if (_keyItemZones[level.Name].AliasedExpectedKeyItems.Contains(AliasedKeyItemID) &&
-                        _keyItemZones[level.Name].BaseExpectedKeyItems.Contains((TR3Entities)ent.TypeID))
-                    {
-                        do
-                        {
-                            //Only get locations that are to position the intended key item.
-                            //We can probably get rid of the do while loop as any location in this list should be valid
-                            List<Location> KeyItemLocations = levelLocations.Where(i => i.KeyItemGroupID == (int)AliasedKeyItemID).ToList();
+                        //Only get locations that are to position the intended key item.
+                        //We can probably get rid of the do while loop as any location in this list should be valid
+                        List<Location> KeyItemLocations = levelLocations.Where(i => i.KeyItemGroupID == (int)AliasedKeyItemID).ToList();
                                 
-                            Location loc = KeyItemLocations[_generator.Next(0, KeyItemLocations.Count)];
+                        Location loc = KeyItemLocations[_generator.Next(0, KeyItemLocations.Count)];
 
-                            ent.X = loc.X;
-                            ent.Y = loc.Y;
-                            ent.Z = loc.Z;
-                            ent.Room = (short)loc.Room;
+                        ent.X = loc.X;
+                        ent.Y = loc.Y;
+                        ent.Z = loc.Z;
+                        ent.Room = (short)loc.Room;
 
-                        } while (!_keyItemZones[level.Name].AllowedRooms[AliasedKeyItemID].Contains(ent.Room) &&
-                                (!_keyItemZones[level.Name].AllowedRooms[AliasedKeyItemID].Contains(_ANY_ROOM_ALLOWED)));
-                        //Try generating locations until it is in the zone - if list contains 2048 then any room is allowed.
-                    }
+                    } while (!_keyItemZones[level.Name].AllowedRooms[AliasedKeyItemID].Contains(ent.Room) &&
+                            (!_keyItemZones[level.Name].AllowedRooms[AliasedKeyItemID].Contains(_ANY_ROOM_ALLOWED)));
+                    //Try generating locations until it is in the zone - if list contains 2048 then any room is allowed.
                 }
             }
         }
