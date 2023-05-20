@@ -97,7 +97,12 @@ namespace TREnvironmentEditor.Model.Types
 
             foreach (int roomNumber in RoomNumbers)
             {
-                level.Rooms[data.ConvertRoom(roomNumber)].ContainsWater = true;
+                TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
+                room.ContainsWater = true;
+                foreach (TR3RoomVertex vertex in room.RoomData.Vertices)
+                {
+                    vertex.UseCaustics = true;
+                }
             }
 
             foreach (int roomNumber in RoomNumbers)

@@ -165,7 +165,7 @@ namespace TREnvironmentEditor.Model.Types
                         int vi = vertices.FindIndex(v => v.Vertex.X == vert.X && v.Vertex.Z == vert.Z && v.Vertex.Y == vert.Y);
                         if (vi == -1)
                         {
-                            vi = CreateRoomVertex(room, vert, useWaveMovement:true);
+                            vi = CreateRoomVertex(room, vert, useCaustics:true, useWaveMovement:true);
                         }
                         else
                         {
