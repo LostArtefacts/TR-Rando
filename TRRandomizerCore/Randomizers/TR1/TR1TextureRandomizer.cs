@@ -224,7 +224,7 @@ namespace TRRandomizerCore.Randomizers
                 return TR1TextureMapping.Get
                 (
                     level.Data,
-                    level.Name,
+                    level.JsonID,
                     _textureDatabase,
                     TextureMonitor.GetLevelMapping(level.Name),
                     TextureMonitor.GetIgnoredEntities(level.Name),

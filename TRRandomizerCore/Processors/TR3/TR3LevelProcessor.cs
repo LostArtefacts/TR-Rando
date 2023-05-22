@@ -27,7 +27,8 @@ namespace TRRandomizerCore.Processors
             TR3CombinedLevel level = new TR3CombinedLevel
             {
                 Data = LoadLevelData(scriptedLevel.LevelFileBaseName),
-                Script = scriptedLevel
+                Script = scriptedLevel,
+                Checksum = GetBackupChecksum(scriptedLevel.LevelFileBaseName)
             };
 
             if (scriptedLevel.HasCutScene)
