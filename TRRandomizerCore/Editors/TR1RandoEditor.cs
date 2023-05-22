@@ -6,6 +6,7 @@ using System.Linq;
 using TRGE.Coord;
 using TRGE.Core;
 using TRRandomizerCore.Helpers;
+using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;
 using TRRandomizerCore.Textures;
 using TRTexture16Importer.Helpers;
@@ -39,6 +40,12 @@ namespace TRRandomizerCore.Editors
 
             // String rando always runs
             target++;
+
+            if (_edition.IsCommunityPatch)
+            {
+                // Injection checks
+                target += numLevels;
+            }
 
             if (Settings.RandomizeStartingHealth)
             {
@@ -124,11 +131,6 @@ namespace TRRandomizerCore.Editors
                     scriptEd.EnableCheats = true;
                 }
 
-                // T1M 2.13+ allows data injection but we want to override this to
-                // avoid potential clashes with models imported by the randomizer.
-                (scriptEd.Script as TR1Script).Injections = null;
-                levels.ForEach(l => l.ResetInjections());
-
                 scriptEditor.SaveScript();
             }
 
@@ -159,6 +161,18 @@ namespace TRRandomizerCore.Editors
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.GameStringsSeed);
+                }
+
+                if (!monitor.IsCancelled && isTomb1Main)
+                {
+                    monitor.FireSaveStateBeginning(TRSaveCategory.Custom, "Validating data injections");
+                    new TR1InjectionProcessor
+                    {
+                        ScriptEditor = scriptEditor,
+                        Levels = levels,
+                        BasePath = wipDirectory,
+                        SaveMonitor = monitor,
+                    }.Run();
                 }
 
                 if (!monitor.IsCancelled && Settings.RandomizeStartingHealth)

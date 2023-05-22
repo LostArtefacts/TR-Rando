@@ -649,6 +649,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -833,6 +834,24 @@
                                 <Run Text="multi-screen setups, since it distorts the left and right side instead of cropping away the top and bottom part of the screen."/>
                             </TextBlock>
                         </Border>
+
+                        <Border Grid.Row="10"
+                                Style="{StaticResource SeparatorBorder}">
+                            <StackPanel>
+                                <Label Content="Camera speed"
+                                       Style="{StaticResource OptionPromptStyle}"/>
+                                <ctrl:NumericUpDown Value="{Binding ControllerProxy.CameraSpeed, Mode=TwoWay}"
+                                                    MinValue="1"
+                                                    MaxValue="10"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="10"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Changes how fast the manual camera moves."/>
+                            </TextBlock>
+                        </Border>
                     </Grid>
                 
                     <!-- 4. Guns/Items -->
@@ -982,6 +1001,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -1063,6 +1084,38 @@
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">
                                 <Run Text="Lara walks to pickups and switches when nearby instead of teleporting."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="5"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableJumpTwists, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable jump twists" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="5"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Enables TR2+ style jump twists and somersaults i.e. press roll during jump and swan dive animations."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="6"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableInvertedLook, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable inverted look" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="6"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Inverts the Y axis controls when Lara looks."/>
                             </TextBlock>
                         </Border>
                     </Grid>
