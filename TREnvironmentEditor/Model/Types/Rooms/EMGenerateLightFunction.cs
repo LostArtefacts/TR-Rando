@@ -110,7 +110,7 @@ namespace TREnvironmentEditor.Model.Types
                     TR3RoomLight nearestLight = null;
                     foreach (TR3RoomLight light in room.Lights)
                     {
-                        if (light.LightType == 1)
+                        if (light.LightType == 0)
                         {
                             // Sun light
                             continue;
@@ -132,16 +132,21 @@ namespace TREnvironmentEditor.Model.Types
 
                     if (nearestLight != null)
                     {
-                        ushort intensity = (ushort)((nearestLight.LightProperties[0] << 16) | ((nearestLight.LightProperties[1]) & 0xffff));
-                        uint fade = (uint)((nearestLight.LightProperties[2] << 16) | ((nearestLight.LightProperties[3]) & 0xffff));
-                        vertex.Lighting = room.ContainsWater ? (short)(8192 - intensity) :
-                        GenerateLight(intensity, fade, smallestDistance);
+                        vertex.Lighting = GenerateTR3Light(nearestLight.LightProperties[0], nearestLight.LightProperties[2], smallestDistance);                        
                     }
                 }
             }
         }
 
         private short GenerateLight(ushort intensity, uint fade, double distance)
+        {
+            double lighting = intensity;
+            lighting *= fade / distance;
+            lighting *= 0.4;
+            return (short)(8192 - lighting);
+        }
+
+        private short GenerateTR3Light(short intensity, short fade, double distance)
         {
             double lighting = intensity;
             lighting *= fade / distance;
