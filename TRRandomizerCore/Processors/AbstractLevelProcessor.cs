@@ -117,5 +117,11 @@ namespace TRRandomizerCore.Processors
         {
             return File.ReadAllText(GetResourcePath(filePath));
         }
+
+        public string GetBackupChecksum(string filePath)
+        {
+            string fullPath = Path.Combine(BackupPath, filePath);
+            return new FileInfo(fullPath).Checksum();
+        }
     }
 }

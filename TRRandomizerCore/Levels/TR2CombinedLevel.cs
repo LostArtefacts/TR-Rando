@@ -21,6 +21,11 @@ namespace TRRandomizerCore.Levels
         public TR2ScriptedLevel Script { get; set; }
 
         /// <summary>
+        /// The checksum of the backed up level file.
+        /// </summary>
+        public string Checksum { get; set; }
+
+        /// <summary>
         /// The uppercase base file name of the level e.g. KEEL.TR2
         /// </summary>
         public string Name => Script.LevelFileBaseName.ToUpper();
