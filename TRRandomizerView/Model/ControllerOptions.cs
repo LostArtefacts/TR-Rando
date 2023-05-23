@@ -3521,6 +3521,10 @@ namespace TRRandomizerView.Model
             {
                 RandomizeSunsets = enabled;
             }
+            if (IsWeatherTypeSupported)
+            {
+                RandomizeWeather = enabled;
+            }
             if (IsNightModeTypeSupported)
             {
                 RandomizeNightMode = enabled;
