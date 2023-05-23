@@ -156,6 +156,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = scriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.GameStringsSeed);
@@ -217,6 +218,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = scriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
                         ItemFactory = itemFactory
@@ -231,6 +233,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = scriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.SecretRewardsPhysicalSeed);
@@ -244,6 +247,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = scriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.StartPositionSeed);
@@ -292,6 +296,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = scriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
                         TextureMonitor = textureMonitor

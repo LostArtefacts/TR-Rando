@@ -121,6 +121,7 @@ namespace TRRandomizerCore.Editors
             // Each processor will have a reference to the script editor, so can
             // make on-the-fly changes as required.
             TR23ScriptEditor tr23ScriptEditor = scriptEditor as TR23ScriptEditor;
+            string backupDirectory = _io.BackupDirectory.FullName;
             string wipDirectory = _io.WIPOutputDirectory.FullName;
 
             if (Settings.DevelopmentMode)
@@ -143,6 +144,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.GameStringsSeed);
@@ -156,6 +158,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.WeatherSeed);
@@ -169,6 +172,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
                         TextureMonitor = textureMonitor,
@@ -181,6 +185,7 @@ namespace TRRandomizerCore.Editors
                     ScriptEditor = tr23ScriptEditor,
                     Levels = levels,
                     BasePath = wipDirectory,
+                    BackupPath = backupDirectory,
                     SaveMonitor = monitor,
                     Settings = Settings,
                     TextureMonitor = textureMonitor
@@ -194,6 +199,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
                         TextureMonitor = textureMonitor,
@@ -212,6 +218,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
                         ItemFactory = itemFactory
@@ -226,6 +233,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = scriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.SecretRewardsPhysicalSeed);
@@ -239,6 +247,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
                         TextureMonitor = textureMonitor,
@@ -254,6 +263,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.StartPositionSeed);
@@ -273,6 +283,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.AudioSeed);
@@ -286,6 +297,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
                         TextureMonitor = textureMonitor
@@ -300,6 +312,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
                         TextureMonitor = textureMonitor
@@ -314,6 +327,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = tr23ScriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings
                     }.Randomize(Settings.NightModeSeed);
@@ -329,6 +343,7 @@ namespace TRRandomizerCore.Editors
                             ScriptEditor = tr23ScriptEditor,
                             Levels = levels,
                             BasePath = wipDirectory,
+                            BackupPath = backupDirectory,
                             SaveMonitor = monitor,
                             Settings = Settings,
                             TextureMonitor = textureMonitor
@@ -342,6 +357,7 @@ namespace TRRandomizerCore.Editors
                             ScriptEditor = tr23ScriptEditor,
                             Levels = levels,
                             BasePath = wipDirectory,
+                            BackupPath = backupDirectory,
                             SaveMonitor = monitor,
                             Settings = Settings,
                             TextureMonitor = textureMonitor
