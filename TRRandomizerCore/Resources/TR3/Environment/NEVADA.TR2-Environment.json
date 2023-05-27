@@ -5,7 +5,130 @@
   "AllWithin": [],
   "OneOf": [],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if an alternative ending for cold Nevada is needed to avoid softlock.",
+        "ConditionType": 0,
+        "EntityIndex": 68,
+        "EntityType": 19
+      },
+      "OnTrue": [
+        {
+          "Comments": "Raise trapdoor 121 by default.",
+          "EMType": 48,
+          "EntityIndex": 121,
+          "Flags": 0
+        },
+        {
+          "Comments": "Remove the trapdoor triggers, except the dummy.",
+          "EMType": 72,
+          "Entities": [
+            121
+          ],
+          "ExcludedTypes": [
+            8
+          ]
+        },
+        {
+          "Comments": "Convert the UPV into a pushblock.",
+          "EMType": 45,
+          "EntityIndex": 68,
+          "NewEntityType": 97
+        },
+        {
+          "Comments": "Hide the pushblock.",
+          "EMType": 48,
+          "EntityIndex": 68,
+          "Flags": 256
+        },
+        {
+          "Comments": "Move the pushblock to the fence at the end.",
+          "EMType": 44,
+          "EntityIndex": 68,
+          "TargetLocation": {
+            "X": 74240,
+            "Y": -7168,
+            "Z": 79360,
+            "Room": 143
+          }
+        },
+        {
+          "Comments": "Boulder/heavy trigger for activating the pushblock.",
+          "EMType": 51,
+          "TypeID": 88,
+          "Location": {
+            "X": 73216,
+            "Y": 2560,
+            "Z": 87552,
+            "Room": 146,
+            "Angle": 16384
+          }
+        },
+        {
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 74240,
+              "Y": 2560,
+              "Z": 87552,
+              "Room": 146
+            }
+          ],
+          "Trigger": {
+            "TrigType": 5,
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 68
+              }
+            ]
+          }
+        },
+        {
+          "Comments": "Add a camera hint.",
+          "EMType": 65,
+          "Camera": {
+            "X": 67094,
+            "Y": -992,
+            "Z": 72596,
+            "Room": 144
+          },
+          "LookAtItem": 68,
+          "AttachToLocations": [
+            {
+              "X": 74240,
+              "Y": 2560,
+              "Z": 87552,
+              "Room": 146
+            }
+          ],
+          "CameraAction": {
+            "Value": 10,
+            "Timer": 10,
+            "Continue": true
+          }
+        },
+        {
+          "Comments": "Trigger the boulder from switch 80.",
+          "EMType": 68,
+          "Locations": [
+            {
+              "X": 52736,
+              "Y": -3072,
+              "Z": 61952,
+              "Room": 114
+            }
+          ],
+          "Actions": [
+            {
+              "Parameter": -1
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "ConditionalOneOf": [],
   "Mirrored": [
     {

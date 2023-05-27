@@ -54,6 +54,7 @@
         ConvertTrigger = 69,
         KillLara = 70,
         RemoveTriggerAction = 71,
+        RemoveEntityTriggers = 72,
 
         // Portal types 81-100
         VisibilityPortal = 81,
