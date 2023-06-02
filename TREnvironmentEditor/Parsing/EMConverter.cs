@@ -134,6 +134,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMKillLaraFunction>(jo.ToString(), this);
                 case EMType.RemoveTriggerAction:
                     return JsonConvert.DeserializeObject<EMRemoveTriggerActionFunction>(jo.ToString(), this);
+                case EMType.RemoveEntityTriggers:
+                    return JsonConvert.DeserializeObject<EMRemoveEntityTriggersFunction>(jo.ToString(), this);
 
                 // Portals
                 case EMType.VisibilityPortal:
