@@ -7,6 +7,7 @@
         TextureFix,
         PSUziSFX,
         FDFix,
-        LaraAnims
+        LaraAnims,
+        LaraJumps,
     }
 }

@@ -1003,6 +1003,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
@@ -1105,13 +1107,45 @@
 
                         <Border Grid.Row="6"
                                 Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableSwingCancel, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable swing cancel" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="6"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Allows Lara's ledge-swinging animation to be cancelled by letting go and quickly grabbing again, similar to TR2+."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="7"
+                                Style="{StaticResource SeparatorBorder}">
+                            <CheckBox IsChecked="{Binding ControllerProxy.EnableTr2Jumping, Mode=TwoWay}"
+                                      VerticalAlignment="Center">
+                                <Label Padding="0"
+                                       Content="Enable TR2 jumping" />
+                            </CheckBox>
+                        </Border>
+                        <Border Grid.Row="7"
+                                Grid.Column="1"
+                                Style="{StaticResource SeparatorBorder}">
+                            <TextBlock Style="{StaticResource OptionDescriptionStyle}">
+                                <Run Text="Allows Lara to jump at any point while running, similar to TR2+."/>
+                            </TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="8"
+                                Style="{StaticResource SeparatorBorder}">
                             <CheckBox IsChecked="{Binding ControllerProxy.EnableInvertedLook, Mode=TwoWay}"
                                       VerticalAlignment="Center">
                                 <Label Padding="0"
                                        Content="Enable inverted look" />
                             </CheckBox>
                         </Border>
-                        <Border Grid.Row="6"
+                        <Border Grid.Row="8"
                                 Grid.Column="1"
                                 Style="{StaticResource SeparatorBorder}">
                             <TextBlock Style="{StaticResource OptionDescriptionStyle}">

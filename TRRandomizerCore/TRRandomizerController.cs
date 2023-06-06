@@ -1148,6 +1148,30 @@ namespace TRRandomizerCore
             }
         }
 
+        public bool EnableSwingCancel
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableSwingCancel;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableSwingCancel = value;
+                }
+            }
+        }
+
+        public bool EnableTr2Jumping
+        {
+            get => ScriptEditor is TR1ScriptEditor tr1Editor && tr1Editor.EnableTr2Jumping;
+            set
+            {
+                if (ScriptEditor is TR1ScriptEditor tr1Editor)
+                {
+                    tr1Editor.EnableTr2Jumping = value;
+                }
+            }
+        }
+
         #endregion
 
         #region LevelRandomizer Passthrough

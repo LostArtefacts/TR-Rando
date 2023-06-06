@@ -13,7 +13,8 @@ namespace TRRandomizerCore.Processors
         private static readonly Version _minT1MVersion = new Version(2, 15);
         private static readonly List<T1MInjectionType> _permittedInjections = new List<T1MInjectionType>
         {
-            T1MInjectionType.LaraAnims
+            T1MInjectionType.LaraAnims,
+            T1MInjectionType.LaraJumps,
         };
 
         public void Run()

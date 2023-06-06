@@ -812,6 +812,28 @@ namespace TRRandomizerView.Model
             }
         }
 
+        private bool _enableSwingCancel;
+        public bool EnableSwingCancel
+        {
+            get => _enableSwingCancel;
+            set
+            {
+                _enableSwingCancel = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableTr2Jumping;
+        public bool EnableTr2Jumping
+        {
+            get => _enableTr2Jumping;
+            set
+            {
+                _enableTr2Jumping = value;
+                FirePropertyChanged();
+            }
+        }
+
         #endregion
 
         public int TotalLevelCount
@@ -3168,6 +3190,8 @@ namespace TRRandomizerView.Model
                 EnableJumpTwists = _controller.EnableJumpTwists;
                 EnableInvertedLook = _controller.EnableInvertedLook;
                 CameraSpeed = _controller.CameraSpeed;
+                EnableSwingCancel = _controller.EnableSwingCancel;
+                EnableTr2Jumping = _controller.EnableTr2Jumping;
             }
 
             FireSupportPropertiesChanged();
@@ -3448,6 +3472,8 @@ namespace TRRandomizerView.Model
                 _controller.EnableJumpTwists = EnableJumpTwists;
                 _controller.EnableInvertedLook = EnableInvertedLook;
                 _controller.CameraSpeed = CameraSpeed;
+                _controller.EnableSwingCancel = EnableSwingCancel;
+                _controller.EnableTr2Jumping = EnableTr2Jumping;
             }
         }
 
