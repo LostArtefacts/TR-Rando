@@ -271,7 +271,8 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
 
-            if (newEntities.Capacity > 1 && newEntities.All(e => TR3EnemyUtilities.IsEnemyRestricted(level.Name, e)))
+            if (newEntities.Count == 0
+                || (newEntities.Capacity > 1 && newEntities.All(e => TR3EnemyUtilities.IsEnemyRestricted(level.Name, e))))
             {
                 // Make sure we have an unrestricted enemy available for the individual level conditions. This will
                 // guarantee a "safe" enemy for the level; we avoid aliases here to avoid further complication.
@@ -286,7 +287,7 @@ namespace TRRandomizerCore.Randomizers
                 List<TR3Entities> unrestrictedPool = allEnemies.FindAll(e => !RestrictionCheck(e));
                 if (unrestrictedPool.Count == 0)
                 {
-                    // We are going to have to pull in the full list of candiates again, so ignoring any exclusions
+                    // We are going to have to pull in the full list of candidates again, so ignoring any user-defined exclusions
                     unrestrictedPool = TR3EntityUtilities.GetCandidateCrossLevelEnemies().FindAll(e => !RestrictionCheck(e));
                 }
 
