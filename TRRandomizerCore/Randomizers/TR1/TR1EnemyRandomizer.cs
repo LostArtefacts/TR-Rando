@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using TREnvironmentEditor.Helpers;
+using TREnvironmentEditor.Model.Types;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
@@ -174,7 +176,7 @@ namespace TRRandomizerCore.Randomizers
             // If level-ending Larson is disabled, we make an alternative ending to ToQ.
             // Do this at this stage as it effectively gets rid of ToQ-Larson meaning
             // Sanctuary-Larson can potentially be imported.
-            if (level.Is(TRLevelNames.QUALOPEC) && Settings.RemoveLevelEndingLarson)
+            if (level.Is(TRLevelNames.QUALOPEC) && Settings.ReplaceRequiredEnemies)
             {
                 AmendToQLarson(level);
             }
@@ -189,7 +191,7 @@ namespace TRRandomizerCore.Randomizers
 
             // Work out how many we can support
             int enemyCount = oldEntities.Count + TR1EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
-            if (level.Is(TRLevelNames.QUALOPEC) && Settings.RemoveLevelEndingLarson)
+            if (level.Is(TRLevelNames.QUALOPEC) && Settings.ReplaceRequiredEnemies)
             {
                 // Account for Larson having been removed above.
                 ++enemyCount;
@@ -209,16 +211,14 @@ namespace TRRandomizerCore.Randomizers
             }
 
             // Are there any other types we need to retain?
-            foreach (TREntities entity in TR1EnemyUtilities.GetRequiredEnemies(level.Name))
+            if (!Settings.ReplaceRequiredEnemies)
             {
-                if (level.Is(TRLevelNames.QUALOPEC) && entity == TREntities.Larson && Settings.RemoveLevelEndingLarson)
+                foreach (TREntities entity in TR1EnemyUtilities.GetRequiredEnemies(level.Name))
                 {
-                    // Only required if normal Larson behaviour is retained in this level.
-                    continue;
-                }
-                if (!newEntities.Contains(entity))
-                {
-                    newEntities.Add(entity);
+                    if (!newEntities.Contains(entity))
+                    {
+                        newEntities.Add(entity);
+                    }
                 }
             }
 
@@ -346,6 +346,11 @@ namespace TRRandomizerCore.Randomizers
                     TREntities eggType = preferredEggTypes[_generator.Next(0, preferredEggTypes.Count)];
                     newEntities.Add(eggType);
                 }
+            }
+
+            if (level.Is(TRLevelNames.PYRAMID) && Settings.ReplaceRequiredEnemies && !newEntities.Contains(TREntities.Adam))
+            {
+                AmendPyramidTorso(level);
             }
 
             if (Settings.DevelopmentMode)
@@ -510,7 +515,7 @@ namespace TRRandomizerCore.Randomizers
                 TREntities newEntityType = currentEntityType;
 
                 // If it's an existing enemy that has to remain in the same spot, skip it
-                if (TR1EnemyUtilities.IsEnemyRequired(level.Name, currentEntityType))
+                if (!Settings.ReplaceRequiredEnemies && TR1EnemyUtilities.IsEnemyRequired(level.Name, currentEntityType))
                 {
                     _resultantEnemies.Add(currentEntityType);
                     continue;
@@ -549,7 +554,7 @@ namespace TRRandomizerCore.Randomizers
 
                 // Rather than individual enemy limits, this accounts for enemy groups such as all Atlanteans
                 RandoDifficulty groupDifficulty = difficulty;
-                if (level.Is(TRLevelNames.QUALOPEC) && newEntityType == TREntities.Larson && Settings.RemoveLevelEndingLarson)
+                if (level.Is(TRLevelNames.QUALOPEC) && newEntityType == TREntities.Larson && Settings.ReplaceRequiredEnemies)
                 {
                     // Non-level ending Larson is not restricted in ToQ, otherwise we adhere to the normal rules.
                     groupDifficulty = RandoDifficulty.NoRestrictions;
@@ -824,6 +829,55 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
+        private void AmendPyramidTorso(TR1CombinedLevel level)
+        {
+            // We want to keep Adam's egg, but simulate something else hatching.
+            // In hard mode, two enemies take his place.
+            List<TREntity> entities = level.Data.Entities.ToList();
+            level.RemoveModel(TREntities.Adam);
+            
+            TREntity egg = entities.Find(e => e.TypeID == (short)TREntities.AdamEgg);
+            TREntity lara = entities.Find(e => e.TypeID == (short)TREntities.Lara);
+
+            EMAppendTriggerActionFunction trigFunc = new EMAppendTriggerActionFunction
+            {
+                Location = new EMLocation
+                {
+                    X = lara.X,
+                    Y = lara.Y,
+                    Z = lara.Z,
+                    Room = lara.Room
+                },
+                Actions = new List<EMTriggerAction>()
+            };
+
+            int count = Settings.RandoEnemyDifficulty == RandoDifficulty.Default ? 1 : 2;
+            for (int i = 0; i < count; i++)
+            {
+                trigFunc.Actions.Add(new EMTriggerAction
+                {
+                    Parameter = (short)entities.Count
+                });
+
+                entities.Add(new TREntity
+                {
+                    TypeID = (short)TREntities.Adam,
+                    X = egg.X,
+                    Y = egg.Y - i * 1024,
+                    Z = egg.Z - 1024,
+                    Room = egg.Room,
+                    Angle = egg.Angle,
+                    Intensity = egg.Intensity,
+                    Invisible = true
+                });
+            }
+
+            level.Data.Entities = entities.ToArray();
+            level.Data.NumEntities = (ushort)entities.Count;
+
+            trigFunc.ApplyToLevel(level.Data);
+        }
+
         private void AmendAtlanteanModels(TR1CombinedLevel level, EnemyRandomizationCollection enemies)
         {
             // If non-shooting grounded Atlanteans are present, we can just duplicate the model to make shooting Atlanteans
@@ -1094,7 +1148,7 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
 
-            if ((level.Is(TRLevelNames.PYRAMID) || availableEnemies.Contains(TREntities.Adam)) && _generator.NextDouble() < 0.4)
+            if (availableEnemies.Contains(TREntities.Adam) && _generator.NextDouble() < 0.4)
             {
                 // Replace Adam's head with a much larger version of Natla's, Larson's or normal/angry Lara's.
                 MeshEditor editor = new MeshEditor();

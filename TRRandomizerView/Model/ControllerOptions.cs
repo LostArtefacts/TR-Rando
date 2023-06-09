@@ -2621,8 +2621,8 @@ namespace TRRandomizerView.Model
             BindingOperations.SetBinding(HideEnemies, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
             RemoveLevelEndingLarson = new BoolItemControlClass
             {
-                Title = "Remove level-ending Larson",
-                Description = "Prevents Larson triggering the end of the level in Tomb of Qualopec."
+                Title = "Replace required enemies",
+                Description = "Replaces the normally required Larson in Tomb of Qualopec and Torso in Great Pyramid with randomized enemies."
             };
             BindingOperations.SetBinding(RemoveLevelEndingLarson, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
 

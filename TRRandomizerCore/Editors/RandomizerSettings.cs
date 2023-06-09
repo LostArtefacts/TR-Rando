@@ -75,7 +75,7 @@ namespace TRRandomizerCore.Editors
         public bool SwapEnemyAppearance { get; set; }
         public bool AllowEmptyEggs { get; set; }
         public bool HideEnemiesUntilTriggered { get; set; }
-        public bool RemoveLevelEndingLarson { get; set; }
+        public bool ReplaceRequiredEnemies { get; set; }
         public bool GlitchedSecrets { get; set; }
         public bool GuaranteeSecrets { get; set; }
         public bool UseRewardRoomCameras { get; set; }
@@ -204,7 +204,7 @@ namespace TRRandomizerCore.Editors
             SwapEnemyAppearance = config.GetBool(nameof(SwapEnemyAppearance), true);
             AllowEmptyEggs = config.GetBool(nameof(AllowEmptyEggs));
             HideEnemiesUntilTriggered = config.GetBool(nameof(HideEnemiesUntilTriggered), true);
-            RemoveLevelEndingLarson = config.GetBool(nameof(RemoveLevelEndingLarson), true);
+            ReplaceRequiredEnemies = config.GetBool(nameof(ReplaceRequiredEnemies), true);
             UseEnemyExclusions = config.GetBool(nameof(UseEnemyExclusions));
             ShowExclusionWarnings = config.GetBool(nameof(ShowExclusionWarnings));
             ExcludedEnemies = config.GetString(nameof(ExcludedEnemies))
@@ -357,7 +357,7 @@ namespace TRRandomizerCore.Editors
             config[nameof(SwapEnemyAppearance)] = SwapEnemyAppearance;
             config[nameof(AllowEmptyEggs)] = AllowEmptyEggs;
             config[nameof(HideEnemiesUntilTriggered)] = HideEnemiesUntilTriggered;
-            config[nameof(RemoveLevelEndingLarson)] = RemoveLevelEndingLarson;
+            config[nameof(ReplaceRequiredEnemies)] = ReplaceRequiredEnemies;
 
             config[nameof(RandomizeTextures)] = RandomizeTextures;
             config[nameof(TextureSeed)] = TextureSeed;
