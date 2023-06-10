@@ -779,6 +779,61 @@ namespace TRRandomizerView.Model
             }
         }
 
+        private bool _enableJumpTwists;
+        public bool EnableJumpTwists
+        {
+            get => _enableJumpTwists;
+            set
+            {
+                _enableJumpTwists = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableInvertedLook;
+        public bool EnableInvertedLook
+        {
+            get => _enableInvertedLook;
+            set
+            {
+                _enableInvertedLook = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private int _cameraSpeed;
+        public int CameraSpeed
+        {
+            get => _cameraSpeed;
+            set
+            {
+                _cameraSpeed = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableSwingCancel;
+        public bool EnableSwingCancel
+        {
+            get => _enableSwingCancel;
+            set
+            {
+                _enableSwingCancel = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private bool _enableTr2Jumping;
+        public bool EnableTr2Jumping
+        {
+            get => _enableTr2Jumping;
+            set
+            {
+                _enableTr2Jumping = value;
+                FirePropertyChanged();
+            }
+        }
+
         #endregion
 
         public int TotalLevelCount
@@ -3132,6 +3187,11 @@ namespace TRRandomizerView.Model
                 RevertToPistols = _controller.RevertToPistols;
                 EnableEnhancedSaves = _controller.EnableEnhancedSaves;
                 EnablePitchedSounds = _controller.EnablePitchedSounds;
+                EnableJumpTwists = _controller.EnableJumpTwists;
+                EnableInvertedLook = _controller.EnableInvertedLook;
+                CameraSpeed = _controller.CameraSpeed;
+                EnableSwingCancel = _controller.EnableSwingCancel;
+                EnableTr2Jumping = _controller.EnableTr2Jumping;
             }
 
             FireSupportPropertiesChanged();
@@ -3409,6 +3469,11 @@ namespace TRRandomizerView.Model
                 _controller.RevertToPistols = RevertToPistols;
                 _controller.EnableEnhancedSaves = EnableEnhancedSaves;
                 _controller.EnablePitchedSounds = EnablePitchedSounds;
+                _controller.EnableJumpTwists = EnableJumpTwists;
+                _controller.EnableInvertedLook = EnableInvertedLook;
+                _controller.CameraSpeed = CameraSpeed;
+                _controller.EnableSwingCancel = EnableSwingCancel;
+                _controller.EnableTr2Jumping = EnableTr2Jumping;
             }
         }
 
