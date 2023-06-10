@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TREnvironmentEditor;
+using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
@@ -110,6 +111,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 Generator = _generator
             };
+            picker.Options.ExclusionMode = EMExclusionMode.Individual;
 
             // Process enforced packs first. We do not pass disallowed types here.
             // These generally fix OG issues such as problems with box overlaps and
@@ -127,7 +129,8 @@ namespace TRRandomizerCore.Randomizers
 
             if (!EnforcedModeOnly)
             {
-                picker.LoadTags(Settings);
+                picker.LoadTags(Settings, ScriptEditor.Edition.IsCommunityPatch);
+                picker.Options.ExclusionMode = EMExclusionMode.BreakOnAny;
 
                 // Run a random selection of Any.
                 foreach (EMEditorSet mod in picker.GetRandomAny(mapping))
@@ -178,6 +181,7 @@ namespace TRRandomizerCore.Randomizers
             // Similar to All, but these mods will have conditions configured so may
             // or may not apply. Process these last so that conditions based on other
             // mods can be used.
+            picker.Options.ExclusionMode = EMExclusionMode.Individual;
             foreach (EMConditionalSingleEditorSet mod in mapping.ConditionalAll)
             {
                 mod.ApplyToLevel(level.Data, picker.Options);
@@ -190,7 +194,8 @@ namespace TRRandomizerCore.Randomizers
             mirrorer.ApplyToLevel(level.Data);
 
             EnvironmentPicker picker = new EnvironmentPicker(Settings.HardEnvironmentMode);
-            picker.LoadTags(Settings);
+            picker.LoadTags(Settings, ScriptEditor.Edition.IsCommunityPatch);
+            picker.Options.ExclusionMode = EMExclusionMode.Individual;
             mapping?.Mirrored.ApplyToLevel(level.Data, picker.Options);
 
             // Notify the texture monitor that this level has been flipped

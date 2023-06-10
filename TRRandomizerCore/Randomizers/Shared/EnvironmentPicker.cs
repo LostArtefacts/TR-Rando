@@ -22,7 +22,7 @@ namespace TRRandomizerCore.Randomizers
             };
         }
 
-        public void LoadTags(RandomizerSettings settings)
+        public void LoadTags(RandomizerSettings settings, bool isCommunityPatch)
         {
             List<EMTag> excludedTags = new List<EMTag>();
             if (!settings.RandomizeLadders)
@@ -45,6 +45,12 @@ namespace TRRandomizerCore.Randomizers
             {
                 excludedTags.Add(EMTag.PuzzleRoom);
             }
+
+            // If we're using a community patch, exclude mods that
+            // only apply to non-community patch and vice-versa.
+            excludedTags.Add(isCommunityPatch 
+                ? EMTag.NonCommunityPatchOnly 
+                : EMTag.CommunityPatchOnly);
 
             Options.ExcludedTags = excludedTags;
         }

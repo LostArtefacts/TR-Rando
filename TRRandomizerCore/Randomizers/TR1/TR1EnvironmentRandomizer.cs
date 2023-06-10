@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using TREnvironmentEditor;
+using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
@@ -89,6 +90,8 @@ namespace TRRandomizerCore.Randomizers
             {
                 MirrorLevel(level, mapping);
             }
+
+            UpdateDoppelgangerScript(level);
         }
 
         private void ApplyMappingToLevel(TR1CombinedLevel level, EMEditorMapping mapping)
@@ -106,6 +109,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 Generator = _generator
             };
+            picker.Options.ExclusionMode = EMExclusionMode.Individual;
 
             // Process enforced packs first. We do not pass disallowed types here.
             // These generally fix OG issues such as problems with box overlaps and
@@ -123,7 +127,8 @@ namespace TRRandomizerCore.Randomizers
 
             if (!EnforcedModeOnly)
             {
-                picker.LoadTags(Settings);
+                picker.LoadTags(Settings, ScriptEditor.Edition.IsCommunityPatch);
+                picker.Options.ExclusionMode = EMExclusionMode.BreakOnAny;
 
                 // Run a random selection of Any.
                 foreach (EMEditorSet mod in picker.GetRandomAny(mapping))
@@ -174,6 +179,7 @@ namespace TRRandomizerCore.Randomizers
             // Similar to All, but these mods will have conditions configured so may
             // or may not apply. Process these last so that conditions based on other
             // mods can be used.
+            picker.Options.ExclusionMode = EMExclusionMode.Individual;
             foreach (EMConditionalSingleEditorSet mod in mapping.ConditionalAll)
             {
                 mod.ApplyToLevel(level.Data, picker.Options);
@@ -187,7 +193,9 @@ namespace TRRandomizerCore.Randomizers
 
             // Process packs that need to be applied after mirroring.
             EnvironmentPicker picker = new EnvironmentPicker(Settings.HardEnvironmentMode);
-            picker.LoadTags(Settings);
+            picker.LoadTags(Settings, ScriptEditor.Edition.IsCommunityPatch);
+            picker.Options.ExclusionMode = EMExclusionMode.Individual;
+
             mapping?.Mirrored.ApplyToLevel(level.Data, picker.Options);
 
             // Notify the texture monitor that this level has been flipped
@@ -199,6 +207,49 @@ namespace TRRandomizerCore.Randomizers
                 // Remove the demo if it's set as it can crash the game
                 level.Script.Demo = null;
             }
+        }
+
+        private void UpdateDoppelgangerScript(TR1CombinedLevel level)
+        {
+            if (!ScriptEditor.Edition.IsCommunityPatch)
+            {
+                return;
+            }
+
+            // Bacon Lara may have been added as a trap/puzzle, so we need to ensure the script knows
+            // where to set her up. The mods will have stored this in a temporary flag as the entity
+            // starting room may not necessarily be where her positioning should be calculated from.
+            int anchorRoom = Array.FindIndex(level.Data.Rooms, r => (r.Flags & EMAddDoppelgangerFunction.AnchorRoomFlag) > 0);
+            if (anchorRoom == -1 && level.Is(TRLevelNames.ATLANTIS))
+            {
+                // Extra check for OG Atlantis to ensure the script is configured properly.
+                TREntity baconLara = Array.Find(level.Data.Entities, e => e.TypeID == (short)TREntities.Doppelganger);
+                if (baconLara?.Room == 57)
+                {
+                    anchorRoom = 10;
+                }
+            }
+
+            if (anchorRoom == -1)
+            {
+                level.Script.RemoveSequence(LevelSequenceType.Setup_Bacon_Lara);
+                return;
+            }
+
+            if (level.Script.Sequences.Find(s => s.Type == LevelSequenceType.Setup_Bacon_Lara) is SetupBaconLaraSequence sequence)
+            {
+                sequence.AnchorRoom = anchorRoom;
+            }
+            else
+            {
+                level.Script.AddSequenceBefore(LevelSequenceType.Loop_Game, new SetupBaconLaraSequence
+                {
+                    Type = LevelSequenceType.Setup_Bacon_Lara,
+                    AnchorRoom = anchorRoom
+                });
+            }
+
+            level.Data.Rooms[anchorRoom].Flags &= (short)~EMAddDoppelgangerFunction.AnchorRoomFlag;
         }
     }
 }
