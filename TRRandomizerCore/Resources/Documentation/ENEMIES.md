@@ -8,9 +8,8 @@ Jump to:
 # TR1
 The following enemy restrictions are in place when using "Default" restriction mode during randomization.
 * Torso can appear only once per level in specific rooms.
-* SkateboardKid can appear only once per level in specific rooms.
+* SkateboardKid can appear only twice per level.
 * Natla can appear only once per level.
-* SkateboardKid and Natla cannot appear in the same level together.
 * There can be at most 3 Torso appearances across the game.
 * There can be at most 2 Natla appearances across the game.
 * Cowboy can appear at most 3 times in one level.
@@ -18,16 +17,19 @@ The following enemy restrictions are in place when using "Default" restriction m
 * Pierre can appear at most 3 times in one level.
 
 ### Torso
-Torso is restricted to appear only in certain rooms where there is a little more space to fight. He will always appear in Great Pyramid in the usual place to activate the door.
+Torso is restricted to appear only in certain rooms where there is a little more space to fight. He will always appear in Great Pyramid in the usual place to activate the door, unless `Replace required enemies` is enabled. In this case, an alternative way to open the door will be provided.
 
 ### Pierre
 Pierre will always be killable, as allocating runaway Pierres using current enemy positioning is awkward, given that when they spawn they deactivate the previous one (or with TombATI the newly triggered one doesn't replace the existing). Pierre will also always drop the scion, magnums and a key. If Pierre is not present at the end of Tihocan, a key will be added to pickup (this location will be randomized if key item randomization is enabled).
 
 ### Larson
-By default, Larson will end the level in Tomb of Qualopec when he is killed. This can be disabled by selecting `Remove level-ending Larson` in the enemy options window. In this case, an alternative level ending will be added to this level. If this option is *not* enabled, the single default Larson will appear when `Default` restrictions mode is selected; in `No restrictions` mode, he can appear anywhere in the level, and the level will end wherever he is killed.
+By default, Larson will end the level in Tomb of Qualopec when he is killed. This can be disabled by selecting `Replace required enemies` in the enemy options window. In this case, an alternative level ending will be added to this level. If this option is *not* enabled, the single default Larson will appear when `Default` restrictions mode is selected; in `No restrictions` mode, he can appear anywhere in the level, and the level will end wherever he is killed.
 
 ### SkateboardKid
-SkateboardKid is restricted to specific rooms due to resource limitations - the rooms allocated to him are those with much fewer enemies than others. He cannot appear with Natla in the same level as this can cause crashes.
+SkateboardKid is restricted to only appear in Natla's Mines, *unless Tomb1Main is being used*. This is because of an OG bug that can cause a crash, which is present in TombATI but is fixed in Tomb1Main.
+
+### Natla
+Natla is restricted to only appear in Great Pyramid, *unless Tomb1Main is being used*. This is because of an OG bug that can cause a crash, which is present in TombATI but is fixed in Tomb1Main.
 
 ### Atlanteans
 Collectively, there are some limits on Atlanteans per level to avoid extremely difficult areas. There will be a maximum grouping count for the following levels of any of the following enemies.
@@ -54,13 +56,16 @@ Collectively, there are some limits on Atlanteans per level to avoid extremely d
 
 Note that mummies can appear as flying mutants in other levels. This model is present in City of Khamoon but is unused in the original game.
 
+### Bacon Lara
+Bacon Lara will always appear in her OG room in Atlantis, *unless the level is mirrored and TombATI is being used*. In this case, an alternative way to open the door will be provided.
+
 ## No Restrictions Mode
-This mode will switch off _**most**_ of the above restrictions. The following will always remain:
+In Tomb1Main, "No Restrictions" mode will switch off each of the above restrictions, apart from Pierre always being killable.
+
+In TombATI, the following restrictions will always remain:
 * Pierre always being killable
-* Torso appearing in Great Pyramid
-* SkateboardKid being limited to one per level and to specific rooms
-* Natla appearing once per level
-* SkateboardKid and Natla not sharing a level
+* SkateboardKid appearing in Natla's Mines only
+* Natla appearing in Great Pyramid only
 
 This mode will also allow land enemies to appear underwater as the engine does not kill them (as in TR2 onwards).
 
