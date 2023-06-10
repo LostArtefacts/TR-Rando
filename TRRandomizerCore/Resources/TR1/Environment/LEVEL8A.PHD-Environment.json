@@ -72,7 +72,7 @@
       "PreferredType": 22
     },
     {
-      "Comments": "Trigger the new enemy.",
+      "Comments": "Trigger the new enemy (one shot in case Pierre).",
       "EMType": 61,
       "Locations": [
         {
@@ -89,6 +89,7 @@
         }
       ],
       "Trigger": {
+        "OneShot": true,
         "Mask": 31,
         "Actions": [
           {
