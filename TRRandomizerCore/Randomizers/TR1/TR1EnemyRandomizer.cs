@@ -236,13 +236,14 @@ namespace TRRandomizerCore.Randomizers
             // looping infinitely if it's not possible to fill to capacity
             ISet<TREntities> testedEntities = new HashSet<TREntities>();
             List<TREntities> eggEntities = TR1EntityUtilities.GetAtlanteanEggEnemies();
+            bool isTomb1Main = ScriptEditor.Edition.IsCommunityPatch;
             while (newEntities.Count < newEntities.Capacity && testedEntities.Count < allEnemies.Count)
             {
                 TREntities entity = allEnemies[_generator.Next(0, allEnemies.Count)];
                 testedEntities.Add(entity);
 
                 // Make sure this isn't known to be unsupported in the level
-                if (!TR1EnemyUtilities.IsEnemySupported(level.Name, entity, difficulty))
+                if (!TR1EnemyUtilities.IsEnemySupported(level.Name, entity, difficulty, isTomb1Main))
                 {
                     continue;
                 }
@@ -319,7 +320,7 @@ namespace TRRandomizerCore.Randomizers
                 // Make sure we have an unrestricted enemy available for the individual level conditions. This will
                 // guarantee a "safe" enemy for the level; we avoid aliases here to avoid further complication.
                 bool RestrictionCheck(TREntities e) =>
-                    !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty)
+                    !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, isTomb1Main)
                     || newEntities.Contains(e)
                     || TR1EntityUtilities.IsWaterCreature(e)
                     || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)
@@ -376,7 +377,7 @@ namespace TRRandomizerCore.Randomizers
 
         private TREntities SelectRequiredEnemy(List<TREntities> pool, TR1CombinedLevel level, RandoDifficulty difficulty)
         {
-            pool.RemoveAll(e => !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty));
+            pool.RemoveAll(e => !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, ScriptEditor.Edition.IsCommunityPatch));
 
             TREntities entity;
             if (pool.All(_excludedEnemies.Contains))
