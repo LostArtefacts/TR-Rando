@@ -1422,6 +1422,9 @@
         {
           "Comments": "Remove some faces - but not the floor itself.",
           "EMType": 22,
+          "Tags": [
+            4
+          ],
           "GeometryMap": {
             "36": {
               "Rectangles": [
