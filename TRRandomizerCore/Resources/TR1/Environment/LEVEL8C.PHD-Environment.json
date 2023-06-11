@@ -1,5 +1,6 @@
 {
-  "All": [
+  "All": [],
+  "NonPurist": [
     {
       "Comments": "Ensure the enemies in room 15 are always triggered rather than only from the invisible platform.",
       "EMType": 61,
@@ -22,9 +23,7 @@
           }
         ]
       }
-    }
-  ],
-  "NonPurist": [
+    },
     {
       "Comments": "Patch the hole in the sphinx.",
       "EMType": 26,
