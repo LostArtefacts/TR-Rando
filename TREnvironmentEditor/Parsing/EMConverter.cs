@@ -110,6 +110,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMMoveSecretFunction>(jo.ToString(), this);
                 case EMType.SwapGroupedSlots:
                     return JsonConvert.DeserializeObject<EMSwapGroupedSlotsFunction>(jo.ToString(), this);
+                case EMType.AddDoppelganger:
+                    return JsonConvert.DeserializeObject<EMAddDoppelgangerFunction>(jo.ToString(), this);
 
                 // Trigger types
                 case EMType.Trigger:

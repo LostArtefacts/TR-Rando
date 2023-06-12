@@ -11,6 +11,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public List<EMLocation> Locations { get; set; }
         public List<int> Rooms { get; set; }
+        public List<FDTrigType> TrigTypes { get; set; }
 
         public override void ApplyToLevel(TRLevel level)
         {
@@ -109,7 +110,7 @@ namespace TREnvironmentEditor.Model.Types
             }
 
             List<FDEntry> entries = control.Entries[sector.FDIndex];
-            entries.RemoveAll(e => e is FDTriggerEntry);
+            entries.RemoveAll(e => e is FDTriggerEntry trig && (TrigTypes?.Contains(trig.TrigType) ?? true));
             if (entries.Count == 0)
             {
                 // If there isn't anything left, reset the sector to point to the dummy FD

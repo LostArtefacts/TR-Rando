@@ -8,6 +8,8 @@
         LadderChange,
         TrapChange,
         PuzzleRoom,
-        Hard
+        Hard,
+        CommunityPatchOnly,
+        NonCommunityPatchOnly,
     }
 }

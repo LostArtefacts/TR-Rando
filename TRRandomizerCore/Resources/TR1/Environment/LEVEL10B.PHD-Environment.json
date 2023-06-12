@@ -7545,8 +7545,11 @@
       }
     },
     {
-      "Comments": "Bacon Lara doesn't work when mirrored, so make an alternative scenario in this room.",
+      "Comments": "Bacon Lara doesn't work when mirrored, so make an alternative scenario in this room (TombATI only).",
       "EMType": 47,
+      "Tags": [
+        8
+      ],
       "EntityIndices": [
         126
       ],
@@ -7560,6 +7563,9 @@
     {
       "Comments": "Move the enemy off the slope otherwise it's likely to get stuck.",
       "EMType": 44,
+      "Tags": [
+        8
+      ],
       "EntityIndex": 126,
       "TargetLocation": {
         "X": 41472,
@@ -7571,6 +7577,9 @@
     {
       "Comments": "Remove the redundant camera triggers from the room.",
       "EMType": 62,
+      "Tags": [
+        8
+      ],
       "Locations": [
         {
           "X": 41472,
@@ -7811,12 +7820,18 @@
     {
       "Comments": "Turn the trapdoor into a pickup.",
       "EMType": 45,
+      "Tags": [
+        8
+      ],
       "EntityIndex": 32,
       "NewEntityType": 91
     },
     {
       "Comments": "And move it.",
       "EMType": 44,
+      "Tags": [
+        8
+      ],
       "EntityIndex": 32,
       "TargetLocation": {
         "X": 33280,
@@ -7828,6 +7843,9 @@
     {
       "Comments": "Moves the switch to the other side of the room.",
       "EMType": 44,
+      "Tags": [
+        8
+      ],
       "EntityIndex": 30,
       "TargetLocation": {
         "X": 42496,
@@ -7840,6 +7858,9 @@
     {
       "Comments": "Amend faces for above.",
       "EMType": 21,
+      "Tags": [
+        8
+      ],
       "TextureMap": {
         "32": {
           "10": {
@@ -7860,6 +7881,9 @@
     {
       "Comments": "Add a trigger to open the door, now on a timer.",
       "EMType": 61,
+      "Tags": [
+        8
+      ],
       "Locations": [
         {
           "X": 42496,
@@ -7893,7 +7917,10 @@
           "Room": 10
         },
         "Timer": 12
-      }
+      },
+      "Tags": [
+        8
+      ]
     }
   ]
 }

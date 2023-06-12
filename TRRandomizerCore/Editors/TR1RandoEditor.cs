@@ -172,6 +172,7 @@ namespace TRRandomizerCore.Editors
                         ScriptEditor = scriptEditor,
                         Levels = levels,
                         BasePath = wipDirectory,
+                        BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                     }.Run();
                 }

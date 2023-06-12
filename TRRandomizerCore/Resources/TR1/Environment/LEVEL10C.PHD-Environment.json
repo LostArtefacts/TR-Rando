@@ -1422,6 +1422,9 @@
         {
           "Comments": "Remove some faces - but not the floor itself.",
           "EMType": 22,
+          "Tags": [
+            4
+          ],
           "GeometryMap": {
             "36": {
               "Rectangles": [
@@ -3125,6 +3128,305 @@
             "Y": -5120,
             "Z": 15872,
             "Room": 3
+          }
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "If Adam isn't here, change the default way the door opens.",
+        "ConditionType": 41,
+        "ModelID": 34
+      },
+      "OnFalse": [
+        {
+          "Comments": "Make a room to house a switch.",
+          "EMType": 126,
+          "Location": {
+            "X": 57344,
+            "Y": -14592,
+            "Z": 4096
+          },
+          "LinkedLocation": {
+            "X": 58880,
+            "Y": -15616,
+            "Z": 8704,
+            "Room": 36
+          },
+          "Textures": {
+            "Floor": 118,
+            "Ceiling": 28,
+            "WallAlignment": 4,
+            "Wall4": 28,
+            "Wall2": 69
+          },
+          "AmbientLighting": 8191,
+          "DefaultVertex": {
+            "Lighting": 5726
+          },
+          "Lights": [
+            {
+              "X": 2560,
+              "Y": -768,
+              "Z": 1536,
+              "Intensity1": 2048,
+              "Fade1": 2048
+            },
+            {
+              "X": 1536,
+              "Y": -2816,
+              "Z": 2560,
+              "Intensity1": 2048,
+              "Fade1": 2048
+            }
+          ],
+          "Height": 12,
+          "Width": 4,
+          "Depth": 4,
+          "FloorHeights": {
+            "-8": [
+              6
+            ],
+            "-4": [
+              5
+            ],
+            "-127": [
+              10
+            ]
+          },
+          "CeilingHeights": {
+            "4": [
+              9
+            ]
+          }
+        },
+        {
+          "Comments": "Collisional portals.",
+          "EMType": 82,
+          "Portals": {
+            "36": {
+              "-1": [
+                {
+                  "X": 58880,
+                  "Y": -16640,
+                  "Z": 6656
+                }
+              ]
+            },
+            "-1": {
+              "36": [
+                {
+                  "X": 58880,
+                  "Y": -16640,
+                  "Z": 7680
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Comments": "Visibility portals.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": 36,
+              "AdjoiningRoom": -1,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 5120,
+                  "Y": -17664,
+                  "Z": 1024
+                },
+                {
+                  "X": 4096,
+                  "Y": -17664,
+                  "Z": 1024
+                },
+                {
+                  "X": 4096,
+                  "Y": -16640,
+                  "Z": 1024
+                },
+                {
+                  "X": 5120,
+                  "Y": -16640,
+                  "Z": 1024
+                }
+              ]
+            },
+            {
+              "BaseRoom": -1,
+              "AdjoiningRoom": 36,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 1024,
+                  "Y": -17664,
+                  "Z": 3072
+                },
+                {
+                  "X": 2048,
+                  "Y": -17664,
+                  "Z": 3072
+                },
+                {
+                  "X": 2048,
+                  "Y": -16640,
+                  "Z": 3072
+                },
+                {
+                  "X": 1024,
+                  "Y": -16640,
+                  "Z": 3072
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Comments": "Add a lever texture.",
+          "EMType": 21,
+          "TextureMap": {
+            "42": {
+              "-1": {
+                "Rectangles": [
+                  18
+                ]
+              }
+            }
+          }
+        },
+        {
+          "Comments": "Remove faces for portals.",
+          "EMType": 22,
+          "GeometryMap": {
+            "-1": {
+              "Rectangles": [
+                11
+              ]
+            }
+          }
+        },
+        {
+          "EMType": 23,
+          "Modifications": [
+            {
+              "RoomNumber": 36,
+              "FaceIndex": 47,
+              "VertexChanges": {
+                "2": {
+                  "Y": -1024
+                },
+                "3": {
+                  "Y": -1024
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Comments": "Let there be light.",
+          "EMType": 128,
+          "RoomIndices": [
+            -1
+          ]
+        },
+        {
+          "Comments": "Add a switch.",
+          "EMType": 51,
+          "TypeID": 55,
+          "Intensity": -1,
+          "Location": {
+            "X": 59904,
+            "Y": -14592,
+            "Z": 5632,
+            "Room": -1,
+            "Angle": 16384
+          }
+        },
+        {
+          "Comments": "Duplicate one of the heavy triggers to capture everything Adam would trigger.",
+          "EMType": 63,
+          "Locations": [
+            {
+              "X": 59904,
+              "Y": -14592,
+              "Z": 5632,
+              "Room": -1
+            }
+          ],
+          "BaseLocation": {
+            "X": 61952,
+            "Y": -15616,
+            "Z": 14848,
+            "Room": 36
+          }
+        },
+        {
+          "Comments": "Convert the duplicated trigger into a switch type.",
+          "EMType": 69,
+          "Location": {
+            "X": 59904,
+            "Y": -14592,
+            "Z": 5632,
+            "Room": -1
+          },
+          "TrigType": 2,
+          "SwitchOrKeyRef": -1
+        },
+        {
+          "Comments": "Clear the heavy triggers from the platform.",
+          "EMType": 62,
+          "Rooms": [
+            36
+          ],
+          "TrigTypes": [
+            5
+          ]
+        },
+        {
+          "Comments": "Add a door.",
+          "EMType": 51,
+          "TypeID": 57,
+          "Intensity": 4096,
+          "Location": {
+            "X": 58880,
+            "Y": -16640,
+            "Z": 7680,
+            "Room": -1
+          }
+        },
+        {
+          "Comments": "Add another switch.",
+          "EMType": 51,
+          "TypeID": 55,
+          "Intensity": -1,
+          "Location": {
+            "X": 65024,
+            "Y": -15616,
+            "Z": 12800,
+            "Room": 36,
+            "Angle": 16384
+          }
+        },
+        {
+          "Comments": "Trigger the new door.",
+          "EMType": 61,
+          "EntityLocation": -1,
+          "Trigger": {
+            "TrigType": 2,
+            "Mask": 31,
+            "SwitchOrKeyRef": -1,
+            "Actions": [
+              {
+                "Parameter": -2
+              }
+            ]
           }
         }
       ]

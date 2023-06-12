@@ -14,7 +14,7 @@ namespace TREnvironmentEditor.Model.Types
         public List<EMLocation> Locations { get; set; }
         public FDTrigType? TrigType { get; set; }
         public bool? OneShot { get; set; }
-        public ushort? SwitchOrKeyRef { get; set; }
+        public short? SwitchOrKeyRef { get; set; }
         public byte? Mask { get; set; }
         public byte? Timer { get; set; }
 
@@ -29,7 +29,7 @@ namespace TREnvironmentEditor.Model.Types
             foreach (EMLocation location in Locations)
             {
                 TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                ConvertTrigger(sector, control);
+                ConvertTrigger(sector, control, data);
             }
 
             control.WriteToLevel(level);
@@ -46,7 +46,7 @@ namespace TREnvironmentEditor.Model.Types
             foreach (EMLocation location in Locations)
             {
                 TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                ConvertTrigger(sector, control);
+                ConvertTrigger(sector, control, data);
             }
 
             control.WriteToLevel(level);
@@ -63,7 +63,7 @@ namespace TREnvironmentEditor.Model.Types
             foreach (EMLocation location in Locations)
             {
                 TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                ConvertTrigger(sector, control);
+                ConvertTrigger(sector, control, data);
             }
 
             control.WriteToLevel(level);
@@ -82,7 +82,7 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
-        private void ConvertTrigger(TRRoomSector sector, FDControl floorData)
+        private void ConvertTrigger(TRRoomSector sector, FDControl floorData, EMLevelData data)
         {
             if (sector.FDIndex != 0)
             {
@@ -105,7 +105,7 @@ namespace TREnvironmentEditor.Model.Types
                     }
                     if (SwitchOrKeyRef.HasValue)
                     {
-                        trigger.SwitchOrKeyRef = SwitchOrKeyRef.Value;
+                        trigger.SwitchOrKeyRef = (ushort)data.ConvertEntity(SwitchOrKeyRef.Value);
                     }
                     if (Mask.HasValue)
                     {

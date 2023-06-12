@@ -18,7 +18,7 @@ namespace TREnvironmentEditor.Model
             {
                 foreach (BaseEMFunction mod in this)
                 {
-                    GetModToExecute(mod, options).ApplyToLevel(level);
+                    GetModToExecute(mod, options)?.ApplyToLevel(level);
                 }
             }
         }
@@ -29,7 +29,7 @@ namespace TREnvironmentEditor.Model
             {
                 foreach (BaseEMFunction mod in this)
                 {
-                    GetModToExecute(mod, options).ApplyToLevel(level);
+                    GetModToExecute(mod, options)?.ApplyToLevel(level);
                 }
             }
         }
@@ -40,7 +40,7 @@ namespace TREnvironmentEditor.Model
             {
                 foreach (BaseEMFunction mod in this)
                 {
-                    GetModToExecute(mod, options).ApplyToLevel(level);
+                    GetModToExecute(mod, options)?.ApplyToLevel(level);
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace TREnvironmentEditor.Model
                     return false;
                 }
 
-                if (options.ExcludedTags != null)
+                if (options.ExcludedTags != null && options.ExclusionMode == EMExclusionMode.BreakOnAny)
                 {
                     // The modification will only be performed if all tags in this set are to be included.
                     foreach (BaseEMFunction mod in this)
@@ -85,11 +85,23 @@ namespace TREnvironmentEditor.Model
 
         private BaseEMFunction GetModToExecute(BaseEMFunction mod, EMOptions options)
         {
-            return options != null 
-                && options.EnableHardMode 
-                && mod.HardVariant != null
-                    ? mod.HardVariant
-                    : mod;
+            if (options != null)
+            {
+                // Check if individual tags in this mod result in it being excluded.
+                if (options.ExclusionMode == EMExclusionMode.Individual
+                    && (mod.Tags?.Any(options.ExcludedTags.Contains) ?? false))
+                {
+                    return null;
+                }
+
+                // Enforce the hard variant if hard mode is selected and it exists.
+                if (options.EnableHardMode && mod.HardVariant != null)
+                {
+                    return mod.HardVariant;
+                }
+            }
+
+            return mod;
         }
     }
 }

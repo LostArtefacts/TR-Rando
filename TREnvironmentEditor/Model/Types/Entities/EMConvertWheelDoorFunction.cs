@@ -67,7 +67,7 @@ namespace TREnvironmentEditor.Model.Types
                 // Make sure the trigger has the switch ref
                 new EMConvertTriggerFunction
                 {
-                    SwitchOrKeyRef = (ushort)WheelIndex,
+                    SwitchOrKeyRef = (short)WheelIndex,
                     Location = new EMLocation
                     {
                         X = wheel.X,

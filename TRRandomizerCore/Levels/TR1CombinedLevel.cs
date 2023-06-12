@@ -1,6 +1,9 @@
-﻿using TRGE.Core;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TRGE.Core;
 using TRLevelReader.Helpers;
 using TRLevelReader.Model;
+using TRLevelReader.Model.Enums;
 
 namespace TRRandomizerCore.Levels
 {
@@ -71,5 +74,16 @@ namespace TRRandomizerCore.Levels
         /// Returns {Name}-Steam if IsSteamPyramid, otherwise just {Name}.
         /// </summary>
         public string JsonID => IsSteamPyramid ? Name + "-Steam" : Name;
+
+        public void RemoveModel(TREntities type)
+        {
+            List<TRModel> models = Data.Models.ToList();
+            if (models.Find(m => m.ID == (uint)type) is TRModel model)
+            {
+                models.Remove(model);
+                Data.Models = models.ToArray();
+                Data.NumModels--;
+            }
+        }
     }
 }
