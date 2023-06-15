@@ -17,7 +17,7 @@ Before you launch the randomizer for the first time, you should carry out a few 
 > _This step is entirely optional based  on your own preference of gameplay._
 ***
 > ### TR3
-> Use the [Version Swapper](https://github.com/TombRunners/tr3-version-swapper) or install and configure [tomb3](https://github.com/Trxyebeep/tomb3).
+> Use the [Version Swapper](https://github.com/TombRunners/tr3-version-swapper) or install and configure [tomb3](https://github.com/Trxyebeep/tomb3). Using tomb3 is recommended to enable all features in the randomizer, plus to enjoy all of the benefits of the improved game. See https://github.com/Trxyebeep/tomb3/blob/master/USING.md for detailed installation steps.
 >
 > _This step is entirely optional based on your own preference of gameplay._
 ***
