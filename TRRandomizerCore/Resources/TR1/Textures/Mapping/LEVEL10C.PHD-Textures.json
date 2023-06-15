@@ -8,6 +8,15 @@
           "RoomNumber": 49
         }
       ]
+    },
+    "Landmarks.EycoreGold": {
+      "0": [
+        {
+          "RoomNumber": 55,
+          "RectangleIndices": [ 2 ],
+          "BackgroundIndex": 45
+        }
+      ]
     }
   },
 
