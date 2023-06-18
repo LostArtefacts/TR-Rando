@@ -1,5 +1,21 @@
 {
-  "All": [],
+  "All": [
+    {
+      "Comments": "Fix the final secret if secret randomization is not enabled (if the trigger isn't there, nothing is done).",
+      "EMType": 66,
+      "Locations": [
+        {
+          "X": 69120,
+          "Z": 51712,
+          "Room": 64
+        }
+      ],
+      "Action": {
+        "Action": 10,
+        "Parameter": 2
+      }
+    }
+  ],
   "NonPurist": [
     {
       "Comments": "Fix the out of place texture in room 2.",
