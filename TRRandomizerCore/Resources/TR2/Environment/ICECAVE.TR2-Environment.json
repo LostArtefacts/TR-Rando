@@ -1697,9 +1697,6 @@
         {
           "Comments": "A ladder to get to the new room.",
           "EMType": 0,
-          "Tags": [
-            3
-          ],
           "TextureMap": {
             "1387": {
               "138": {
