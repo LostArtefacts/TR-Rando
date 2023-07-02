@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using TRViewInterop.Routes;
 
 namespace TRRandomizerCore.Helpers
 {
@@ -62,15 +61,6 @@ namespace TRRandomizerCore.Helpers
             LevelState = LevelState.Any;
             EntityIndex = -1;
             TargetType = -1;
-        }
-
-        public Location(TRViewLocation loc)
-        {
-            X = loc.X;
-            Y = loc.Y;
-            Z = loc.Z;
-            Room = loc.Room;
-            Angle = 16384;
         }
 
         /// <summary>
