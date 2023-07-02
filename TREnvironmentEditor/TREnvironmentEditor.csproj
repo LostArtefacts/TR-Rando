@@ -7,7 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\TRFDControl\TRFDControl.csproj" />
-    <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj" />
+    <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
     <ProjectReference Include="..\TRModelTransporter\TRModelTransporter.csproj" />
     <ProjectReference Include="..\TRTexture16Importer\TRTexture16Importer.csproj" />
   </ItemGroup>

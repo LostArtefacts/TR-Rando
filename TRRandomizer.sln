@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelReader", "TRLevelReader\TRLevelReader.csproj", "{226C4A3A-4FBB-4C15-AED4-C9248EB3A144}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelControl", "TRLevelControl\TRLevelControl.csproj", "{226C4A3A-4FBB-4C15-AED4-C9248EB3A144}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelReaderUnitTests", "TRLevelReaderUnitTests\TRLevelReaderUnitTests.csproj", "{4364B084-8063-4D82-A12C-008D6482E3E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRLevelControlTests", "TRLevelControlTests\TRLevelControlTests.csproj", "{4364B084-8063-4D82-A12C-008D6482E3E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{5F1A11E5-F541-4E3B-B331-93574EE4C629}"
 EndProject
