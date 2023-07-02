@@ -18,7 +18,8 @@ namespace TRRandomizerCore.Randomizers
         {
             Options = new EMOptions
             {
-                EnableHardMode = hardMode
+                EnableHardMode = hardMode,
+                ExcludedTags = new List<EMTag>()
             };
         }
 
@@ -53,6 +54,16 @@ namespace TRRandomizerCore.Randomizers
                 : EMTag.CommunityPatchOnly);
 
             Options.ExcludedTags = excludedTags;
+        }
+
+        public void ResetTags(bool isCommunityPatch)
+        {
+            Options.ExcludedTags = new List<EMTag>
+            {
+                isCommunityPatch
+                ? EMTag.NonCommunityPatchOnly
+                : EMTag.CommunityPatchOnly
+            };
         }
 
         public List<EMEditorSet> GetRandomAny(EMEditorMapping mapping)

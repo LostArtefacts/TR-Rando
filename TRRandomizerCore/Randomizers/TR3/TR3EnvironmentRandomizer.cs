@@ -182,6 +182,7 @@ namespace TRRandomizerCore.Randomizers
             // or may not apply. Process these last so that conditions based on other
             // mods can be used.
             picker.Options.ExclusionMode = EMExclusionMode.Individual;
+            picker.ResetTags(ScriptEditor.Edition.IsCommunityPatch);
             foreach (EMConditionalSingleEditorSet mod in mapping.ConditionalAll)
             {
                 mod.ApplyToLevel(level.Data, picker.Options);
