@@ -26,7 +26,6 @@
     <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj" />
     <ProjectReference Include="..\TRModelTransporter\TRModelTransporter.csproj" />
     <ProjectReference Include="..\TRTexture16Importer\TRTexture16Importer.csproj" />
-    <ProjectReference Include="..\TRViewInterop\TRViewInterop.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\**">
