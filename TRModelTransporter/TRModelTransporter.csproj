@@ -11,7 +11,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TRLevelReader\TRLevelReader.csproj" />
+    <ProjectReference Include="..\TRLevelControl\TRLevelControl.csproj" />
     <ProjectReference Include="..\TRTexture16Importer\TRTexture16Importer.csproj" />
   </ItemGroup>
   <ItemGroup>
