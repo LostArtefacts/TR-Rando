@@ -1,5 +1,5 @@
 ﻿using System;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {

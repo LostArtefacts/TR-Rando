@@ -1,6 +1,6 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRFDControl;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Conditions
 {

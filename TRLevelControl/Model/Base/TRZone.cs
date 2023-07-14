@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TRLevelReader.Model.Base.Enums;
-using TRLevelReader.Serialization;
+using TRLevelControl.Model.Base.Enums;
+using TRLevelControl.Serialization;
 
-namespace TRLevelReader.Model
+namespace TRLevelControl.Model
 {
     public class TRZone : ISerializableCompact, ICloneable
     {

@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using TRFDControl;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;

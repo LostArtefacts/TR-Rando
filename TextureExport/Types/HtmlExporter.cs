@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 

@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TRLevelReader.Serialization;
+using TRLevelControl.Serialization;
 
-namespace TRLevelReader.Model
+namespace TRLevelControl.Model
 {
     //10 bytes - rosetta stone says 12, i think thats a mistype/miscalc
     public class TRFace4 : ISerializableCompact

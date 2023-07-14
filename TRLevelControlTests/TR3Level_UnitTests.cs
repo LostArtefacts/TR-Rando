@@ -3,17 +3,17 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-using TRLevelReader;
-using TRLevelReader.Model;
+using TRLevelControl;
+using TRLevelControl.Model;
 
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using System.Linq;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model.Base.Enums;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model.Base.Enums;
 using TRRandomizerCore.Secrets;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model.Enums;
 
 namespace TRLevelReaderUnitTests
 {

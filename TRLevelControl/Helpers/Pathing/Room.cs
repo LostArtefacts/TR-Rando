@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
-namespace TRLevelReader.Helpers
+namespace TRLevelControl.Helpers
 {
     public class Room
     {

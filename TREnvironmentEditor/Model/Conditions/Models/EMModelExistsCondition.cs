@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Conditions
 {

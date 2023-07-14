@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TRLevelReader.Helpers
+namespace TRLevelControl.Helpers
 {
     public static class TR2LevelNames
     {

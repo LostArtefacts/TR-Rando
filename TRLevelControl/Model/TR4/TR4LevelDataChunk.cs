@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using TRLevelReader.Serialization;
-using TRLevelReader.Compression;
+using TRLevelControl.Serialization;
+using TRLevelControl.Compression;
 
-namespace TRLevelReader.Model
+namespace TRLevelControl.Model
 {
     public class TR4LevelDataChunk : ISerializableCompact
     {

@@ -2,8 +2,8 @@
 using TRFDControl;
 using TRFDControl.Utilities;
 using TRGE.Core;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Processors
 {

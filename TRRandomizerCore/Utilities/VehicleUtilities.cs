@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using TRRandomizerCore.Helpers;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model.Enums;
 using System.Linq;
 using TRRandomizerCore.Levels;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Utilities
 {

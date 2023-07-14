@@ -4,7 +4,7 @@ using System.Numerics;
 using TRFDControl;
 using TRFDControl.Utilities;
 using TRGE.Core;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 using TRRandomizerCore.Editors;
 using TRRandomizerCore.SFX;
 

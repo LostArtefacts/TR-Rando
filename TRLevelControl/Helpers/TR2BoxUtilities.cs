@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Base.Enums;
-using TRLevelReader.Model.TR2.Enums;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Base.Enums;
+using TRLevelControl.Model.TR2.Enums;
 
-namespace TRLevelReader.Helpers
+namespace TRLevelControl.Helpers
 {
     public class TR2BoxUtilities
     {

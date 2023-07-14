@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TRRandomizerCore.Globalisation;
 using TRGE.Core;
-using TRLevelReader.Helpers;
+using TRLevelControl.Helpers;
 
 namespace TRRandomizerCore.Randomizers
 {

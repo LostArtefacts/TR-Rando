@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
-namespace TRLevelReader
+namespace TRLevelControl
 {
     public class TR3LevelWriter
     {

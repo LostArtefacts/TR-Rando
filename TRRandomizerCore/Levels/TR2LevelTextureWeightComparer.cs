@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TRLevelReader.Helpers;
+using TRLevelControl.Helpers;
 
 namespace TRRandomizerCore.Levels
 {

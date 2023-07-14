@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using TRLevelReader;
-using TRLevelReader.Model;
+using TRLevelControl;
+using TRLevelControl.Model;
 
 namespace SFXExport
 {

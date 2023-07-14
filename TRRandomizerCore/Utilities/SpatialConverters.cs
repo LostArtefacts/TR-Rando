@@ -1,5 +1,5 @@
 ﻿using TRRandomizerCore.Helpers;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Utilities
 {

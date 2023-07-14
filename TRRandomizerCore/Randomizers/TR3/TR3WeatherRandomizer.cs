@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using TRGE.Core;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 

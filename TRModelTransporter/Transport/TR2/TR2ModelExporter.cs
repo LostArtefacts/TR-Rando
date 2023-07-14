@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 using TRModelTransporter.Data;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model.Definitions;

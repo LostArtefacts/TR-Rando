@@ -7,9 +7,9 @@ using System.IO;
 using System.Linq;
 using TRFDControl;
 using TRFDControl.Utilities;
-using TRLevelReader;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model;
+using TRLevelControl;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 

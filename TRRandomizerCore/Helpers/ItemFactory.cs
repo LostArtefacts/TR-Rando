@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Helpers
 {

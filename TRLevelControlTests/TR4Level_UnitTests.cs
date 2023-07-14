@@ -2,9 +2,9 @@
 using System;
 using System.IO;
 using TRFDControl;
-using TRLevelReader;
-using TRLevelReader.Compression;
-using TRLevelReader.Model;
+using TRLevelControl;
+using TRLevelControl.Compression;
+using TRLevelControl.Model;
 
 namespace TRLevelReaderUnitTests
 {

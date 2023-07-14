@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
 namespace TRModelTransporter.Model.Textures
 {

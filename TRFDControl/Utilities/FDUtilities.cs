@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TRFDControl.FDEntryTypes;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
 namespace TRFDControl.Utilities
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TRLevelReader.Serialization
+namespace TRLevelControl.Serialization
 {
     public interface ISerializableCompact
     {

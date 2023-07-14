@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 using TRTexture16Importer.Helpers;
 
 namespace TRTexture16Importer.Textures

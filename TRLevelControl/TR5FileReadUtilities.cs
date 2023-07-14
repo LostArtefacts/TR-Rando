@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
-namespace TRLevelReader
+namespace TRLevelControl
 {
     internal static class TR5FileReadUtilities
     {

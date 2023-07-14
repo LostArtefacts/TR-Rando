@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 using TRModelTransporter.Packing;
 using TRTexture16Importer.Helpers;
 

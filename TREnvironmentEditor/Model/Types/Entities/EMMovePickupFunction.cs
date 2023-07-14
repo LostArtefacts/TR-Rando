@@ -4,7 +4,7 @@ using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.Utilities;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {

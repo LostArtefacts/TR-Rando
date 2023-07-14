@@ -5,8 +5,8 @@ using System.Linq;
 using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 

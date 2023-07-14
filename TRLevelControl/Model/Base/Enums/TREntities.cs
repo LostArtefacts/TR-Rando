@@ -1,4 +1,4 @@
-﻿namespace TRLevelReader.Model.Enums
+﻿namespace TRLevelControl.Model.Enums
 {
     //_S are sprites
     //_M are menu items

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 using TRTexture16Importer.Textures;
 

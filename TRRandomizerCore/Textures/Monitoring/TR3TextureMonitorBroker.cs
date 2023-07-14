@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model.Enums;
 using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Textures

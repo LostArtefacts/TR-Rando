@@ -4,7 +4,7 @@ using System.Linq;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Utilities

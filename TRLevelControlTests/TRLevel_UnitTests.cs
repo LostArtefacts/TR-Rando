@@ -3,15 +3,15 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-using TRLevelReader;
-using TRLevelReader.Model;
+using TRLevelControl;
+using TRLevelControl.Model;
 
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using System.Linq;
-using TRLevelReader.Model.Base.Enums;
-using TRLevelReader.Helpers;
+using TRLevelControl.Model.Base.Enums;
+using TRLevelControl.Helpers;
 using TRModelTransporter.Handlers;
 
 namespace TRLevelReaderUnitTests

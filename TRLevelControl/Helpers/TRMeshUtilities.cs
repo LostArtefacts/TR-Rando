@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 
-namespace TRLevelReader.Helpers
+namespace TRLevelControl.Helpers
 {
     public static class TRMeshUtilities
     {

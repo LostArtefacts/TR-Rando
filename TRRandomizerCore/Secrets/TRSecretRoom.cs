@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using TREnvironmentEditor.Model;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Secrets
