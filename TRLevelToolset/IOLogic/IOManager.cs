@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TREnvironmentEditor;
-using TRLevelReader;
-using TRLevelReader.Model;
+using TRLevelControl;
+using TRLevelControl.Model;
 
 namespace TRLevelToolset.IOLogic
 {

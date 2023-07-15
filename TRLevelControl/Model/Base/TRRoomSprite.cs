@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TRLevelReader.Serialization;
+using TRLevelControl.Serialization;
 
-namespace TRLevelReader.Model
+namespace TRLevelControl.Model
 {
     // 4 bytes
     public class TRRoomSprite : ISerializableCompact

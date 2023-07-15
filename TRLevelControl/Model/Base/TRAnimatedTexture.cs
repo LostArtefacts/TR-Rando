@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using TRLevelReader.Serialization;
+using TRLevelControl.Serialization;
 
-namespace TRLevelReader.Model
+namespace TRLevelControl.Model
 {
     public class TRAnimatedTexture : ISerializableCompact
     {

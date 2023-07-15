@@ -1,6 +1,6 @@
 ﻿using System;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 
 namespace TREnvironmentEditor.Model.Conditions
 {

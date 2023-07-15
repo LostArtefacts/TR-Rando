@@ -2,9 +2,9 @@
 using System.Linq;
 using TRRandomizerCore.Utilities;
 using TRGE.Core;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Levels
 {

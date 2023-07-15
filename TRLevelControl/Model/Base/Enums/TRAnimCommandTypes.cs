@@ -1,4 +1,4 @@
-﻿namespace TRLevelReader.Model.Enums
+﻿namespace TRLevelControl.Model.Enums
 {
     public enum TRAnimCommandTypes
     {

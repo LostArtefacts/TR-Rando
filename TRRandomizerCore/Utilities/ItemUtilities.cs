@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TRGE.Core.Item.Enums;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Utilities
 {

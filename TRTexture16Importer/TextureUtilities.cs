@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 using TRTexture16Importer.Helpers;
 
 namespace TRTexture16Importer

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using TRLevelReader;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 

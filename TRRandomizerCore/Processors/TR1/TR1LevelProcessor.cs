@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using TRRandomizerCore.Levels;
 using TRGE.Core;
-using TRLevelReader;
-using TRLevelReader.Model;
+using TRLevelControl;
+using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Processors
 {

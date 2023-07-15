@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Helpers
 {

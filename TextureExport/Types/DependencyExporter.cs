@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 
 namespace TextureExport.Types

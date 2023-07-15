@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 using TRTexture16Importer;
 
 namespace TextureExport.Types

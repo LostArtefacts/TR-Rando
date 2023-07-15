@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
-namespace TRLevelReader.Helpers
+namespace TRLevelControl.Helpers
 {
     public class Box
     {

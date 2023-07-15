@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Numerics;
 using TRFDControl.Utilities;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Utilities

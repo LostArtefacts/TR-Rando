@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using TRFDControl;
 using TRFDControl.Utilities;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Utilities

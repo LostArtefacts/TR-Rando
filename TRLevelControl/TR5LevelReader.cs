@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TRLevelReader.Compression;
-using TRLevelReader.Model;
+using TRLevelControl.Compression;
+using TRLevelControl.Model;
 
-namespace TRLevelReader
+namespace TRLevelControl
 {
     public class TR5LevelReader
     {

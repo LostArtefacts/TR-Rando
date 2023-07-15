@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TRLevelReader.Helpers;
-using TRLevelReader.Serialization;
+using TRLevelControl.Helpers;
+using TRLevelControl.Serialization;
 
-namespace TRLevelReader.Model
+namespace TRLevelControl.Model
 {
     public class TRTexImage16 : ISerializableCompact
     {

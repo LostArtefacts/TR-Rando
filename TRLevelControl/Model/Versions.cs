@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TRLevelReader.Model
+namespace TRLevelControl.Model
 {
     public static class Versions
     {

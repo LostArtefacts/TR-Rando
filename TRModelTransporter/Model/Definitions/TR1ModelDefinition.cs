@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Animations;
 using TRModelTransporter.Model.Sound;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TRGE.Core;
-using TRLevelReader.Helpers;
+using TRLevelControl.Helpers;
 using TRRandomizerCore.Globalisation;
 
 namespace TRRandomizerCore.Randomizers

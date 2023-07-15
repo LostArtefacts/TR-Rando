@@ -1,4 +1,4 @@
-﻿namespace TRLevelReader.Model.TR2.Enums
+﻿namespace TRLevelControl.Model.TR2.Enums
 {
     public enum TR2Zones
     {

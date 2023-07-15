@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 using TRModelTransporter.Events;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model;

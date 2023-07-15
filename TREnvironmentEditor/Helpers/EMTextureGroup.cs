@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using TREnvironmentEditor.Model.Types;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Helpers
 {

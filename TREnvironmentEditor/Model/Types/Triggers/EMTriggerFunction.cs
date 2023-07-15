@@ -3,9 +3,9 @@ using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 
 namespace TREnvironmentEditor.Model.Types
 {

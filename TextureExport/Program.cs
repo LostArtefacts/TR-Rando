@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using TextureExport.Types;
-using TRLevelReader;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model;
+using TRLevelControl;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
 
 namespace TextureExport
 {

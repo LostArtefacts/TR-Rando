@@ -1,4 +1,4 @@
-﻿using TRLevelReader.Model.Enums;
+﻿using TRLevelControl.Model.Enums;
 
 namespace TRTexture16Importer.Textures
 {

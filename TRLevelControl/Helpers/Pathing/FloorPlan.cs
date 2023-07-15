@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
-namespace TRLevelReader.Helpers
+namespace TRLevelControl.Helpers
 {
     public class FloorPlan
     {

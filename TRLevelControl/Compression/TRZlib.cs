@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 //  8   | 78 DA | 1F 8B
 //  9   | 78 DA | 1F 8B
 
-namespace TRLevelReader.Compression
+namespace TRLevelControl.Compression
 {
     public static class TRZlib
     {

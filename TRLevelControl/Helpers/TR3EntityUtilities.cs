@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model.Enums;
 
-namespace TRLevelReader.Helpers
+namespace TRLevelControl.Helpers
 {
     public static class TR3EntityUtilities
     {

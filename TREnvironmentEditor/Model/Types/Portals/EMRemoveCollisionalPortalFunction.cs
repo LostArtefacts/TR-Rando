@@ -4,8 +4,8 @@ using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {

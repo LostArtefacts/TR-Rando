@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Helpers
 {

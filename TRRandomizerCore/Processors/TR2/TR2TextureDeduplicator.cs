@@ -3,7 +3,7 @@ using System.IO;
 using TRRandomizerCore.Levels;
 using TRGE.Core;
 using TRModelTransporter.Utilities;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Processors
 {

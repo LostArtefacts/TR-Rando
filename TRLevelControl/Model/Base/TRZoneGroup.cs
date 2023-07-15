@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TRLevelReader.Model.Base.Enums;
+using TRLevelControl.Model.Base.Enums;
 
-namespace TRLevelReader.Model
+namespace TRLevelControl.Model
 {
     public class TRZoneGroup : Dictionary<FlipStatus, TRZone>
     {

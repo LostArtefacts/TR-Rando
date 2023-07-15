@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using TRGE.Core;
-using TRLevelReader.Helpers;
-using TRLevelReader.Model;
-using TRLevelReader.Model.Enums;
+using TRLevelControl.Helpers;
+using TRLevelControl.Model;
+using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;

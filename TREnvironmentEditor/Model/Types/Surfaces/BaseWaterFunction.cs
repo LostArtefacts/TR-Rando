@@ -2,7 +2,7 @@
 using System.Linq;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
-using TRLevelReader.Model;
+using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types
 {
