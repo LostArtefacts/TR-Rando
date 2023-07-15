@@ -189,7 +189,7 @@ public class TestBase
         TR5Level level2 = reader.ReadLevel(pathI);
 
         // Verify - have we lost any data?
-        Assert.AreEqual(originalSummary.LevelChunkUncompressedSize, (uint)TRZlib.Decompress(level2.LevelDataChunk.CompressedChunk).Length);
+        Assert.AreEqual(originalSummary.LevelChunkUncompressedSize, (uint)level2.LevelDataChunk.CompressedChunk.Length);
         Assert.AreEqual(originalSummary.Tex32ChunkUncompressedSize, (uint)TRZlib.Decompress(level2.Texture32Chunk.CompressedChunk).Length);
         Assert.AreEqual(originalSummary.Tex16ChunkUncompressedSize, (uint)TRZlib.Decompress(level2.Texture16Chunk.CompressedChunk).Length);
         Assert.AreEqual(originalSummary.Tex32MChunkUncompressedSize, (uint)TRZlib.Decompress(level2.SkyAndFont32Chunk.CompressedChunk).Length);
