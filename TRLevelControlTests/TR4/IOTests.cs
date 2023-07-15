@@ -7,7 +7,7 @@ namespace TRLevelControlTests.TR4;
 
 [TestClass]
 [TestCategory("OriginalIO")]
-public class TR4Level_UnitTests : TestBase
+public class IOTests : TestBase
 {
     [TestMethod]
     public void ReadWriteAngkor()
