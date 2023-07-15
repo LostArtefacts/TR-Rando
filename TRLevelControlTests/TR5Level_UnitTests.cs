@@ -5,7 +5,7 @@ using TRLevelControl;
 using TRLevelControl.Compression;
 using TRLevelControl.Model;
 
-namespace TRLevelReaderUnitTests
+namespace TRLevelControlTests
 {
     [TestClass]
     public class TR5Level_UnitTests

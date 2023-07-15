@@ -15,7 +15,7 @@ using TRLevelControl.Model.Base.Enums;
 using TRRandomizerCore.Secrets;
 using TRLevelControl.Model.Enums;
 
-namespace TRLevelReaderUnitTests
+namespace TRLevelControlTests
 {
     [TestClass]
     public class TR3Level_UnitTests

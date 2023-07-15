@@ -6,7 +6,7 @@ using TRLevelControl;
 using TRLevelControl.Compression;
 using TRLevelControl.Model;
 
-namespace TRLevelReaderUnitTests
+namespace TRLevelControlTests
 {
     [TestClass]
     public class TR4Level_UnitTests
@@ -1571,13 +1571,5 @@ namespace TRLevelReaderUnitTests
             TR4LevelWriter writer = new TR4LevelWriter();
             writer.WriteLevelToFile(lvl, "alexhub_fdata.tr4");
         }
-    }
-
-    internal class TR45LevelSummary
-    {
-        public uint LevelChunkUncompressedSize { get; set; }
-        public uint Tex32ChunkUncompressedSize { get; set; }
-        public uint Tex16ChunkUncompressedSize { get; set; }
-        public uint Tex32MChunkUncompressedSize { get; set; }
     }
 }

@@ -15,7 +15,7 @@ using TRLevelControl.Model.Base.Enums;
 using System.Drawing;
 using TRTexture16Importer;
 
-namespace TRLevelReaderUnitTests
+namespace TRLevelControlTests
 {
     [TestClass]
     public class TR2Level_UnitTests

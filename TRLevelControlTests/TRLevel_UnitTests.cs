@@ -14,7 +14,7 @@ using TRLevelControl.Model.Base.Enums;
 using TRLevelControl.Helpers;
 using TRModelTransporter.Handlers;
 
-namespace TRLevelReaderUnitTests
+namespace TRLevelControlTests
 {
     [TestClass]
     public class TRLevel_UnitTests
