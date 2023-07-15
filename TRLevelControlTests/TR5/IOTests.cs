@@ -10,81 +10,22 @@ namespace TRLevelControlTests.TR5;
 public class IOTests : TestBase
 {
     [TestMethod]
-    public void ReadWriteRome()
+    [DataRow(TR5LevelNames.ROME)]
+    [DataRow(TR5LevelNames.MARKETS)]
+    [DataRow(TR5LevelNames.COLOSSEUM)]
+    [DataRow(TR5LevelNames.BASE)]
+    [DataRow(TR5LevelNames.SUBMARINE)]
+    [DataRow(TR5LevelNames.DEEPSEA)]
+    [DataRow(TR5LevelNames.SINKING)]
+    [DataRow(TR5LevelNames.GALLOWS)]
+    [DataRow(TR5LevelNames.LABYRINTH)]
+    [DataRow(TR5LevelNames.MILL)]
+    [DataRow(TR5LevelNames.FLOOR13)]
+    [DataRow(TR5LevelNames.ESCAPE)]
+    [DataRow(TR5LevelNames.REDALERT)]
+    public void TestReadWrite(string levelName)
     {
-        ReadWriteTR5Level(TR5LevelNames.ROME);
-    }
-
-    [TestMethod]
-    public void ReadWriteMarkets()
-    {
-        ReadWriteTR5Level(TR5LevelNames.MARKETS);
-    }
-
-    [TestMethod]
-    public void ReadWriteColosseum()
-    {
-        ReadWriteTR5Level(TR5LevelNames.COLOSSEUM);
-    }
-
-    [TestMethod]
-    public void ReadWriteBase()
-    {
-        ReadWriteTR5Level(TR5LevelNames.BASE);
-    }
-
-    [TestMethod]
-    public void ReadWriteSubmarine()
-    {
-        ReadWriteTR5Level(TR5LevelNames.SUBMARINE);
-    }
-
-    [TestMethod]
-    public void ReadWriteDeepSea()
-    {
-        ReadWriteTR5Level(TR5LevelNames.DEEPSEA);
-    }
-
-    [TestMethod]
-    public void ReadWriteSinking()
-    {
-        ReadWriteTR5Level(TR5LevelNames.SINKING);
-    }
-
-    [TestMethod]
-    public void ReadWriteGallows()
-    {
-        ReadWriteTR5Level(TR5LevelNames.GALLOWS);
-    }
-
-    [TestMethod]
-    public void ReadWriteLabyrinth()
-    {
-        ReadWriteTR5Level(TR5LevelNames.LABYRINTH);
-    }
-
-    [TestMethod]
-    public void ReadWriteMill()
-    {
-        ReadWriteTR5Level(TR5LevelNames.MILL);
-    }
-
-    [TestMethod]
-    public void ReadWriteFloor13()
-    {
-        ReadWriteTR5Level(TR5LevelNames.FLOOR13);
-    }
-
-    [TestMethod]
-    public void ReadWriteEscape()
-    {
-        ReadWriteTR5Level(TR5LevelNames.ESCAPE);
-    }
-
-    [TestMethod]
-    public void ReadWriteRedAlert()
-    {
-        ReadWriteTR5Level(TR5LevelNames.REDALERT);
+        ReadWriteTR5Level(levelName);
     }
 
     [TestMethod]
