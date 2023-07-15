@@ -7,8 +7,8 @@ namespace TRLevelControlTests;
 
 public class TestBase
 {
-    public static readonly string _readPath = @"Levels\{0}\{1}";
-    public static readonly string _writePath = @"Levels\{0}\{1}_TEMP{2}";
+    protected static readonly string _readPath = @"Levels\{0}\{1}";
+    protected static readonly string _writePath = @"Levels\{0}\{1}_TEMP{2}";
 
     public static string GetReadPath(string level, TRGameVersion version)
     {
@@ -139,7 +139,7 @@ public class TestBase
         string pathI = GetReadPath(levelName, TRGameVersion.TR4);
         string pathO = GetWritePath(levelName, TRGameVersion.TR4);
 
-        // ZLib produces a slightly more optimal output that OG so we can't compare byte-for-byte
+        // ZLib produces a slightly more optimal output than OG so we can't compare byte-for-byte
         TR4Level level = reader.ReadLevel(pathI);
         TR45LevelSummary originalSummary = new()
         {
@@ -174,7 +174,7 @@ public class TestBase
         string pathI = GetReadPath(levelName, TRGameVersion.TR5);
         string pathO = GetWritePath(levelName, TRGameVersion.TR5);
 
-        // ZLib produces a slightly more optimal output that OG so we can't compare byte-for-byte
+        // ZLib produces a slightly more optimal output than OG so we can't compare byte-for-byte
         TR5Level level = reader.ReadLevel(pathI);
         TR45LevelSummary originalSummary = new()
         {
