@@ -13,231 +13,47 @@ namespace TRLevelControlTests.TR3;
 public class IOTests : TestBase
 {
     [TestMethod]
-    public void ReadWriteGym()
+    [DataRow(TR3LevelNames.ASSAULT)]
+    [DataRow(TR3LevelNames.JUNGLE)]
+    [DataRow(TR3LevelNames.JUNGLE_CUT)]
+    [DataRow(TR3LevelNames.RUINS)]
+    [DataRow(TR3LevelNames.RUINS_CUT)]
+    [DataRow(TR3LevelNames.GANGES)]
+    [DataRow(TR3LevelNames.CAVES)]
+    [DataRow(TR3LevelNames.COASTAL)]
+    [DataRow(TR3LevelNames.COASTAL_CUT)]
+    [DataRow(TR3LevelNames.CRASH)]
+    [DataRow(TR3LevelNames.CRASH_CUT)]
+    [DataRow(TR3LevelNames.MADUBU)]
+    [DataRow(TR3LevelNames.PUNA)]
+    [DataRow(TR3LevelNames.THAMES)]
+    [DataRow(TR3LevelNames.THAMES_CUT)]
+    [DataRow(TR3LevelNames.ALDWYCH)]
+    [DataRow(TR3LevelNames.ALDWYCH_CUT)]
+    [DataRow(TR3LevelNames.LUDS)]
+    [DataRow(TR3LevelNames.LUDS_CUT)]
+    [DataRow(TR3LevelNames.CITY)]
+    [DataRow(TR3LevelNames.HALLOWS)]
+    [DataRow(TR3LevelNames.NEVADA)]
+    [DataRow(TR3LevelNames.NEVADA_CUT)]
+    [DataRow(TR3LevelNames.HSC)]
+    [DataRow(TR3LevelNames.HSC_CUT)]
+    [DataRow(TR3LevelNames.AREA51)]
+    [DataRow(TR3LevelNames.ANTARC)]
+    [DataRow(TR3LevelNames.ANTARC_CUT)]
+    [DataRow(TR3LevelNames.RXTECH)]
+    [DataRow(TR3LevelNames.TINNOS)]
+    [DataRow(TR3LevelNames.TINNOS_CUT)]
+    [DataRow(TR3LevelNames.WILLIE)]
+    [DataRow(TR3LevelNames.FLING)]
+    [DataRow(TR3LevelNames.LAIR)]
+    [DataRow(TR3LevelNames.CLIFF)]
+    [DataRow(TR3LevelNames.FISHES)]
+    [DataRow(TR3LevelNames.MADHOUSE)]
+    [DataRow(TR3LevelNames.REUNION)]
+    public void TestReadWrite(string levelName)
     {
-        ReadWriteTR3Level(TR3LevelNames.ASSAULT);
-    }
-
-    [TestMethod]
-
-    public void ReadWriteJungle()
-    {
-        ReadWriteTR3Level(TR3LevelNames.JUNGLE);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut1()
-    {
-        ReadWriteTR3Level(TR3LevelNames.JUNGLE_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteTemple()
-    {
-        ReadWriteTR3Level(TR3LevelNames.RUINS);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut2()
-    {
-        ReadWriteTR3Level(TR3LevelNames.RUINS_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteGanges()
-    {
-        ReadWriteTR3Level(TR3LevelNames.GANGES);
-    }
-
-    [TestMethod]
-    public void ReadWriteKaliya()
-    {
-        ReadWriteTR3Level(TR3LevelNames.CAVES);
-    }
-
-    [TestMethod]
-    public void ReadWriteCoastal()
-    {
-        ReadWriteTR3Level(TR3LevelNames.COASTAL);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut3()
-    {
-        ReadWriteTR3Level(TR3LevelNames.COASTAL_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteCrash()
-    {
-        ReadWriteTR3Level(TR3LevelNames.CRASH);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut4()
-    {
-        ReadWriteTR3Level(TR3LevelNames.CRASH_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteMadubu()
-    {
-        ReadWriteTR3Level(TR3LevelNames.MADUBU);
-    }
-
-    [TestMethod]
-    public void ReadWritePuna()
-    {
-        ReadWriteTR3Level(TR3LevelNames.PUNA);
-    }
-
-    [TestMethod]
-    public void ReadWriteThames()
-    {
-        ReadWriteTR3Level(TR3LevelNames.THAMES);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut5()
-    {
-        ReadWriteTR3Level(TR3LevelNames.THAMES_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteAldwych()
-    {
-        ReadWriteTR3Level(TR3LevelNames.ALDWYCH);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut6()
-    {
-        ReadWriteTR3Level(TR3LevelNames.ALDWYCH_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteLuds()
-    {
-        ReadWriteTR3Level(TR3LevelNames.LUDS);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut7()
-    {
-        ReadWriteTR3Level(TR3LevelNames.LUDS_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteCity()
-    {
-        ReadWriteTR3Level(TR3LevelNames.CITY);
-    }
-
-    [TestMethod]
-    public void ReadWriteNevada()
-    {
-        ReadWriteTR3Level(TR3LevelNames.NEVADA);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut8()
-    {
-        ReadWriteTR3Level(TR3LevelNames.NEVADA_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteHSC()
-    {
-        ReadWriteTR3Level(TR3LevelNames.HSC);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut9()
-    {
-        ReadWriteTR3Level(TR3LevelNames.HSC_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteArea51()
-    {
-        ReadWriteTR3Level(TR3LevelNames.AREA51);
-    }
-
-    [TestMethod]
-    public void ReadWriteAntarctica()
-    {
-        ReadWriteTR3Level(TR3LevelNames.ANTARC);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut10()
-    {
-        ReadWriteTR3Level(TR3LevelNames.ANTARC_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteMines()
-    {
-        ReadWriteTR3Level(TR3LevelNames.RXTECH);
-    }
-
-    [TestMethod]
-    public void ReadWriteTinnos()
-    {
-        ReadWriteTR3Level(TR3LevelNames.TINNOS);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut11()
-    {
-        ReadWriteTR3Level(TR3LevelNames.TINNOS_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteWillie()
-    {
-        ReadWriteTR3Level(TR3LevelNames.WILLIE);
-    }
-
-    [TestMethod]
-    public void ReadWriteHallows()
-    {
-        ReadWriteTR3Level(TR3LevelNames.HALLOWS);
-    }
-
-    [TestMethod]
-    public void ReadWriteFling()
-    {
-        ReadWriteTR3Level(TR3LevelNames.FLING);
-    }
-
-    [TestMethod]
-    public void ReadWriteLair()
-    {
-        ReadWriteTR3Level(TR3LevelNames.LAIR);
-    }
-
-    [TestMethod]
-    public void ReadWriteCliff()
-    {
-        ReadWriteTR3Level(TR3LevelNames.CLIFF);
-    }
-
-    [TestMethod]
-    public void ReadWriteFishes()
-    {
-        ReadWriteTR3Level(TR3LevelNames.FISHES);
-    }
-    [TestMethod]
-    public void ReadWriteMadhouse()
-    {
-        ReadWriteTR3Level(TR3LevelNames.MADHOUSE);
-    }
-
-    [TestMethod]
-    public void ReadWriteReunion()
-    {
-        ReadWriteTR3Level(TR3LevelNames.REUNION);
+        ReadWriteLevel(levelName, TRGameVersion.TR3);
     }
 
     [TestMethod]

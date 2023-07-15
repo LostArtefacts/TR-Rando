@@ -12,147 +12,33 @@ namespace TRLevelControlTests.TR1;
 public class IOTests : TestBase
 {
     [TestMethod]
-    public void ReadWriteGym()
+    [DataRow(TRLevelNames.ASSAULT)]
+    [DataRow(TRLevelNames.CAVES)]
+    [DataRow(TRLevelNames.VILCABAMBA)]
+    [DataRow(TRLevelNames.VALLEY)]
+    [DataRow(TRLevelNames.QUALOPEC)]
+    [DataRow(TRLevelNames.QUALOPEC_CUT)]
+    [DataRow(TRLevelNames.FOLLY)]
+    [DataRow(TRLevelNames.COLOSSEUM)]
+    [DataRow(TRLevelNames.MIDAS)]
+    [DataRow(TRLevelNames.CISTERN)]
+    [DataRow(TRLevelNames.TIHOCAN)]
+    [DataRow(TRLevelNames.TIHOCAN_CUT)]
+    [DataRow(TRLevelNames.KHAMOON)]
+    [DataRow(TRLevelNames.OBELISK)]
+    [DataRow(TRLevelNames.SANCTUARY)]
+    [DataRow(TRLevelNames.MINES)]
+    [DataRow(TRLevelNames.MINES_CUT)]
+    [DataRow(TRLevelNames.ATLANTIS)]
+    [DataRow(TRLevelNames.ATLANTIS_CUT)]
+    [DataRow(TRLevelNames.PYRAMID)]
+    [DataRow(TRLevelNames.EGYPT)]
+    [DataRow(TRLevelNames.CAT)]
+    [DataRow(TRLevelNames.HIVE)]
+    [DataRow(TRLevelNames.STRONGHOLD)]
+    public void TestReadWrite(string levelName)
     {
-        ReadWriteTR1Level(TRLevelNames.ASSAULT);
-    }
-
-    [TestMethod]
-    public void ReadWriteCaves()
-    {
-        ReadWriteTR1Level(TRLevelNames.CAVES);
-    }
-
-    [TestMethod]
-    public void ReadWriteVilcabamba()
-    {
-        ReadWriteTR1Level(TRLevelNames.VILCABAMBA);
-    }
-
-    [TestMethod]
-    public void ReadWriteValley()
-    {
-        ReadWriteTR1Level(TRLevelNames.VALLEY);
-    }
-
-    [TestMethod]
-    public void ReadWriteToQ()
-    {
-        ReadWriteTR1Level(TRLevelNames.QUALOPEC);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut1()
-    {
-        ReadWriteTR1Level(TRLevelNames.QUALOPEC_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteFolly()
-    {
-        ReadWriteTR1Level(TRLevelNames.FOLLY);
-    }
-
-    [TestMethod]
-    public void ReadWriteColosseum()
-    {
-        ReadWriteTR1Level(TRLevelNames.COLOSSEUM);
-    }
-
-    [TestMethod]
-    public void ReadWriteMidas()
-    {
-        ReadWriteTR1Level(TRLevelNames.MIDAS);
-    }
-
-    [TestMethod]
-    public void ReadWriteCistern()
-    {
-        ReadWriteTR1Level(TRLevelNames.CISTERN);
-    }
-
-    [TestMethod]
-    public void ReadWriteToT()
-    {
-        ReadWriteTR1Level(TRLevelNames.TIHOCAN);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut2()
-    {
-        ReadWriteTR1Level(TRLevelNames.TIHOCAN_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteKhamoon()
-    {
-        ReadWriteTR1Level(TRLevelNames.KHAMOON);
-    }
-
-    [TestMethod]
-    public void ReadWriteObelisk()
-    {
-        ReadWriteTR1Level(TRLevelNames.OBELISK);
-    }
-
-    [TestMethod]
-    public void ReadWriteSanctuary()
-    {
-        ReadWriteTR1Level(TRLevelNames.SANCTUARY);
-    }
-
-    [TestMethod]
-    public void ReadWriteMines()
-    {
-        ReadWriteTR1Level(TRLevelNames.MINES);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut3()
-    {
-        ReadWriteTR1Level(TRLevelNames.MINES_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteAtlantis()
-    {
-        ReadWriteTR1Level(TRLevelNames.ATLANTIS);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut4()
-    {
-        ReadWriteTR1Level(TRLevelNames.ATLANTIS_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWritePyramid()
-    {
-        ReadWriteTR1Level(TRLevelNames.PYRAMID);
-    }
-
-    [TestMethod]
-    public void ReadWriteEgypt()
-    {
-        ReadWriteTR1Level(TRLevelNames.EGYPT);
-    }
-
-    [TestMethod]
-    public void ReadWriteCat()
-    {
-        ReadWriteTR1Level(TRLevelNames.CAT);
-    }
-
-    [TestMethod]
-    public void ReadWriteHive()
-    {
-        ReadWriteTR1Level(TRLevelNames.HIVE);
-    }
-
-    [TestMethod]
-    public void ReadWriteStronghold()
-    {
-        ReadWriteTR1Level(TRLevelNames.STRONGHOLD);
+        ReadWriteLevel(levelName, TRGameVersion.TR1);
     }
 
     [TestMethod]

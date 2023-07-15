@@ -80,51 +80,30 @@ public class TestBase
         return control.ReadLevel(GetReadPath(level, TRGameVersion.TR5));
     }
 
-    public static void ReadWriteTR1Level(string levelName)
+    public static void ReadWriteLevel(string levelName, TRGameVersion version)
     {
-        TR1LevelReader reader = new();
-        TR1LevelWriter writer = new();
+        string pathI = GetReadPath(levelName, version);
+        string pathO = GetWritePath(levelName, version);
 
-        string pathI = GetReadPath(levelName, TRGameVersion.TR1);
-        string pathO = GetWritePath(levelName, TRGameVersion.TR1);
+        switch (version)
+        {
+            case TRGameVersion.TR1:
+                TRLevel level1 = new TR1LevelReader().ReadLevel(pathI);
+                new TR1LevelWriter().WriteLevelToFile(level1, pathO);
+                break;
+            case TRGameVersion.TR2:
+                TR2Level level2 = new TR2LevelReader().ReadLevel(pathI);
+                new TR2LevelWriter().WriteLevelToFile(level2, pathO);
+                break;
+            case TRGameVersion.TR3:
+                TR3Level level3 = new TR3LevelReader().ReadLevel(pathI);
+                new TR3LevelWriter().WriteLevelToFile(level3, pathO);
+                break;
+            default:
+                throw new Exception("Utility IO method suitable only for TR1-3.");
+        }
 
-        TRLevel level = reader.ReadLevel(pathI);
-        writer.WriteLevelToFile(level, pathO);
-
-        byte[] b1 = File.ReadAllBytes(pathI);
-        byte[] b2 = File.ReadAllBytes(pathO);
-
-        CollectionAssert.AreEqual(b1, b2);
-    }
-
-    public static void ReadWriteTR2Level(string levelName)
-    {
-        TR2LevelReader reader = new();
-        TR2LevelWriter writer = new();
-
-        string pathI = GetReadPath(levelName, TRGameVersion.TR2);
-        string pathO = GetWritePath(levelName, TRGameVersion.TR2);
-
-        TR2Level level = reader.ReadLevel(pathI);
-        writer.WriteLevelToFile(level, pathO);
-
-        byte[] b1 = File.ReadAllBytes(pathI);
-        byte[] b2 = File.ReadAllBytes(pathO);
-
-        CollectionAssert.AreEqual(b1, b2);
-    }
-
-    public static void ReadWriteTR3Level(string levelName)
-    {
-        TR3LevelReader reader = new();
-        TR3LevelWriter writer = new();
-
-        string pathI = GetReadPath(levelName, TRGameVersion.TR3);
-        string pathO = GetWritePath(levelName, TRGameVersion.TR3);
-
-        TR3Level level = reader.ReadLevel(pathI);
-        writer.WriteLevelToFile(level, pathO);
-
+        // TODO: allow level control to read/write from stream and not files alone
         byte[] b1 = File.ReadAllBytes(pathI);
         byte[] b2 = File.ReadAllBytes(pathO);
 
@@ -218,6 +197,7 @@ public class TestBase
 
     public static TRLevel WriteReadTempLevel(TRLevel level, string levelName)
     {
+        // TODO: allow level control to read/write from stream and not files alone
         string path = GetWritePath(levelName, TRGameVersion.TR1);
         TR1LevelReader reader = new();
         TR1LevelWriter writer = new();

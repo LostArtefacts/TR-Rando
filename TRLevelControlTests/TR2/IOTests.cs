@@ -15,171 +15,37 @@ namespace TRLevelControlTests.TR2;
 public class IOTests : TestBase
 {
     [TestMethod]
-    public void ReadWriteGym()
+    [DataRow(TR2LevelNames.ASSAULT)]
+    [DataRow(TR2LevelNames.GW)]
+    [DataRow(TR2LevelNames.GW_CUT)]
+    [DataRow(TR2LevelNames.VENICE)]
+    [DataRow(TR2LevelNames.BARTOLI)]
+    [DataRow(TR2LevelNames.OPERA)]
+    [DataRow(TR2LevelNames.OPERA_CUT)]
+    [DataRow(TR2LevelNames.RIG)]
+    [DataRow(TR2LevelNames.DA)]
+    [DataRow(TR2LevelNames.DA_CUT)]
+    [DataRow(TR2LevelNames.FATHOMS)]
+    [DataRow(TR2LevelNames.DORIA)]
+    [DataRow(TR2LevelNames.LQ)]
+    [DataRow(TR2LevelNames.DECK)]
+    [DataRow(TR2LevelNames.TIBET)]
+    [DataRow(TR2LevelNames.MONASTERY)]
+    [DataRow(TR2LevelNames.COT)]
+    [DataRow(TR2LevelNames.CHICKEN)]
+    [DataRow(TR2LevelNames.XIAN)]
+    [DataRow(TR2LevelNames.XIAN_CUT)]
+    [DataRow(TR2LevelNames.FLOATER)]
+    [DataRow(TR2LevelNames.LAIR)]
+    [DataRow(TR2LevelNames.HOME)]
+    [DataRow(TR2LevelNames.COLDWAR)]
+    [DataRow(TR2LevelNames.FOOLGOLD)]
+    [DataRow(TR2LevelNames.FURNACE)]
+    [DataRow(TR2LevelNames.KINGDOM)]
+    [DataRow(TR2LevelNames.VEGAS)]
+    public void TestReadWrite(string levelName)
     {
-        ReadWriteTR2Level(TR2LevelNames.ASSAULT);
-    }
-
-    [TestMethod]
-    public void ReadWriteGW()
-    {
-        ReadWriteTR2Level(TR2LevelNames.GW);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut1()
-    {
-        ReadWriteTR2Level(TR2LevelNames.GW_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteVenice()
-    {
-        ReadWriteTR2Level(TR2LevelNames.VENICE);
-    }
-
-    [TestMethod]
-    public void ReadWriteBartoli()
-    {
-        ReadWriteTR2Level(TR2LevelNames.BARTOLI);
-    }
-
-    [TestMethod]
-    public void ReadWriteOpera()
-    {
-        ReadWriteTR2Level(TR2LevelNames.OPERA);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut2()
-    {
-        ReadWriteTR2Level(TR2LevelNames.OPERA_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteRig()
-    {
-        ReadWriteTR2Level(TR2LevelNames.RIG);
-    }
-
-    [TestMethod]
-    public void ReadWriteDA()
-    {
-        ReadWriteTR2Level(TR2LevelNames.DA);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut3()
-    {
-        ReadWriteTR2Level(TR2LevelNames.DA_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWrite40F()
-    {
-        ReadWriteTR2Level(TR2LevelNames.FATHOMS);
-    }
-
-    [TestMethod]
-    public void ReadWriteDoria()
-    {
-        ReadWriteTR2Level(TR2LevelNames.DORIA);
-    }
-
-    [TestMethod]
-    public void ReadWriteLQ()
-    {
-        ReadWriteTR2Level(TR2LevelNames.LQ);
-    }
-
-    [TestMethod]
-    public void ReadWriteDeck()
-    {
-        ReadWriteTR2Level(TR2LevelNames.DECK);
-    }
-
-    [TestMethod]
-    public void ReadWriteTibet()
-    {
-        ReadWriteTR2Level(TR2LevelNames.TIBET);
-    }
-
-    [TestMethod]
-    public void ReadWriteBarkhang()
-    {
-        ReadWriteTR2Level(TR2LevelNames.MONASTERY);
-    }
-
-    [TestMethod]
-    public void ReadWriteCatacombs()
-    {
-        ReadWriteTR2Level(TR2LevelNames.COT);
-    }
-
-    [TestMethod]
-    public void ReadWriteIcePalace()
-    {
-        ReadWriteTR2Level(TR2LevelNames.CHICKEN);
-    }
-
-    [TestMethod]
-    public void ReadWriteXian()
-    {
-        ReadWriteTR2Level(TR2LevelNames.XIAN);
-    }
-
-    [TestMethod]
-    public void ReadWriteCut4()
-    {
-        ReadWriteTR2Level(TR2LevelNames.XIAN_CUT);
-    }
-
-    [TestMethod]
-    public void ReadWriteFloater()
-    {
-        ReadWriteTR2Level(TR2LevelNames.FLOATER);
-    }
-
-    [TestMethod]
-    public void ReadWriteLair()
-    {
-        ReadWriteTR2Level(TR2LevelNames.LAIR);
-    }
-
-    [TestMethod]
-    public void ReadWriteHSH()
-    {
-        ReadWriteTR2Level(TR2LevelNames.HOME);
-    }
-
-    [TestMethod]
-    public void ReadWriteColdWar()
-    {
-        ReadWriteTR2Level(TR2LevelNames.COLDWAR);
-    }
-
-    [TestMethod]
-    public void ReadWriteFoolsGold()
-    {
-        ReadWriteTR2Level(TR2LevelNames.FOOLGOLD);
-    }
-
-    [TestMethod]
-    public void ReadWriteFurnace()
-    {
-        ReadWriteTR2Level(TR2LevelNames.FURNACE);
-    }
-
-    [TestMethod]
-    public void ReadWriteKingdom()
-    {
-        ReadWriteTR2Level(TR2LevelNames.KINGDOM);
-    }
-
-    [TestMethod]
-    public void ReadWriteVegas()
-    {
-        ReadWriteTR2Level(TR2LevelNames.VEGAS);
+        ReadWriteLevel(levelName, TRGameVersion.TR2);
     }
 
     [TestMethod]
