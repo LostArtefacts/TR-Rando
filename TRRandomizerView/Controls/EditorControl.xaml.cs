@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -206,11 +205,7 @@ namespace TRRandomizerView.Controls
                     throw new IOException("The game could not be launched automatically as no suitable executable was found.");
                 }
 
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = exePath,
-                    WorkingDirectory = Path.GetDirectoryName(exePath)
-                });
+                ProcessUtils.OpenFile(exePath);
             }
             catch (Exception e)
             {
@@ -267,7 +262,7 @@ namespace TRRandomizerView.Controls
 
         public void OpenBackupFolder()
         {
-            Process.Start("explorer.exe", Controller.BackupDirectory);
+            ProcessUtils.OpenFolder(Controller.BackupDirectory);
         }
 
         public bool CanOpenErrorFolder()
@@ -277,7 +272,7 @@ namespace TRRandomizerView.Controls
 
         public void OpenErrorFolder()
         {
-            Process.Start("explorer.exe", Controller.ErrorDirectory);
+            ProcessUtils.OpenFolder(Controller.ErrorDirectory);
         }
 
         public void RestoreDefaults()
@@ -477,11 +472,7 @@ namespace TRRandomizerView.Controls
             try
             {
                 string exePath = Path.GetFullPath(Path.Combine(DataFolder, @"..\tomb3_ConfigTool.exe"));
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = exePath,
-                    WorkingDirectory = Path.GetDirectoryName(exePath)
-                });
+                ProcessUtils.OpenFile(exePath);
             }
             catch (Exception e)
             {

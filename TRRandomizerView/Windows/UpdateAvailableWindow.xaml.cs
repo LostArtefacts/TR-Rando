@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using TRRandomizerView.Updates;
 using TRRandomizerView.Utilities;
@@ -105,7 +104,7 @@ namespace TRRandomizerView.Windows
 
         private void GitHubButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(UpdateURL);
+            ProcessUtils.OpenURL(UpdateURL);
             DialogResult = true;
         }
 

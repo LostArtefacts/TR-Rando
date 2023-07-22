@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
@@ -8,6 +7,7 @@ using TRRandomizerCore;
 using TRRandomizerView.Events;
 using TRRandomizerView.Model;
 using TRRandomizerView.Updates;
+using TRRandomizerView.Utilities;
 
 namespace TRRandomizerView.Windows
 {
@@ -420,7 +420,7 @@ namespace TRRandomizerView.Windows
 
         private void EditorFolder_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(e.Uri.AbsoluteUri);
+            ProcessUtils.OpenURL(e.Uri.AbsoluteUri);
             e.Handled = true;
         }
         #endregion
@@ -428,12 +428,12 @@ namespace TRRandomizerView.Windows
         #region Help
         private void GitHubCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Process.Start("https://github.com/DanzaG/TR2-Rando");
+            ProcessUtils.OpenURL("https://github.com/DanzaG/TR2-Rando");
         }
 
         private void DiscordCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Process.Start("https://discord.gg/f4bUqwgcCN");
+            ProcessUtils.OpenURL("https://discord.gg/f4bUqwgcCN");
         }
 
         private void CheckForUpdateCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
