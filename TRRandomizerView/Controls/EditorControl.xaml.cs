@@ -1,6 +1,5 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -343,14 +342,14 @@ namespace TRRandomizerView.Controls
 
         public void ImportSettings()
         {
-            using (CommonOpenFileDialog dlg = new CommonOpenFileDialog())
+            OpenFileDialog dlg = new()
             {
-                dlg.Filters.Add(new CommonFileDialogFilter(_configFileDisplayName, _configFileExtension));
-                dlg.Title = "Import Settings";
-                if (dlg.ShowDialog(WindowUtils.GetActiveWindowHandle()) == CommonFileDialogResult.Ok)
-                {
-                    ImportSettings(dlg.FileName);
-                }
+                Filter = $"{_configFileDisplayName}|*.{_configFileExtension}",
+                Title = "Import Settings"
+            };
+            if (dlg.ShowDialog(WindowUtils.GetActiveWindow()) ?? false)
+            {
+                ImportSettings(dlg.FileName);
             }
         }
 
@@ -369,23 +368,21 @@ namespace TRRandomizerView.Controls
 
         public void ExportSettings()
         {
-            using (CommonSaveFileDialog dlg = new CommonSaveFileDialog())
+            SaveFileDialog dlg = new()
             {
-                dlg.DefaultFileName = GetSafeFileName(Edition, _configFileExtension);
-                dlg.DefaultExtension = "." + _configFileExtension;
-                dlg.Filters.Add(new CommonFileDialogFilter(_configFileDisplayName, _configFileExtension));
-                dlg.OverwritePrompt = true;
-                dlg.Title = "Export Settings";
-                if (dlg.ShowDialog(WindowUtils.GetActiveWindowHandle()) == CommonFileDialogResult.Ok)
+                Filter = $"{_configFileDisplayName}|*.{_configFileExtension}",
+                Title = "Export Settings",
+                FileName = GetSafeFileName(Edition, _configFileExtension),
+            };
+            if (dlg.ShowDialog(WindowUtils.GetActiveWindow()) ?? false)
+            {
+                try
                 {
-                    try
-                    {
-                        Controller.ExportSettings(dlg.FileName);
-                    }
-                    catch (Exception e)
-                    {
-                        MessageWindow.ShowException(e);
-                    }
+                    Controller.ExportSettings(dlg.FileName);
+                }
+                catch (Exception e)
+                {
+                    MessageWindow.ShowException(e);
                 }
             }
         }

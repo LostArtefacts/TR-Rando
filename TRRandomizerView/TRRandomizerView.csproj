@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <UseWpf>true</UseWpf>
+    <UseWindowsForms>true</UseWindowsForms>
 
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <AssemblyName>TRRandomizer</AssemblyName>
@@ -55,10 +56,6 @@
     <Reference Include="TRGE.Core">
       <HintPath>..\Deps\TRGE.Core.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="WindowsAPICodePack-Core" version="1.1.1" />
-    <PackageReference Include="WindowsAPICodePack-Shell" version="1.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\arrows.png" />

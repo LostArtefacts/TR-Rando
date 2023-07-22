@@ -1,5 +1,4 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -9,6 +8,7 @@ using TRRandomizerView.Events;
 using TRRandomizerView.Model;
 using TRRandomizerView.Utilities;
 using TRRandomizerView.Windows;
+using SWF = System.Windows.Forms;
 
 namespace TRRandomizerView.Controls
 {
@@ -86,14 +86,14 @@ namespace TRRandomizerView.Controls
 
         public void OpenDataFolder()
         {
-            using (CommonOpenFileDialog dlg = new CommonOpenFileDialog())
+            using SWF.FolderBrowserDialog dlg = new()
             {
-                dlg.IsFolderPicker = true;
-                dlg.Title = "Select Data Folder";
-                if (dlg.ShowDialog(WindowUtils.GetActiveWindowHandle()) == CommonFileDialogResult.Ok)
-                {
-                    OpenDataFolder(dlg.FileName);
-                }
+                Description = "Select Data Folder",
+                UseDescriptionForTitle = true,
+            };
+            if (dlg.ShowDialog() == SWF.DialogResult.OK)
+            {
+                OpenDataFolder(dlg.SelectedPath);
             }
         }
 
