@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Net.Cache;
+using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -79,40 +79,44 @@ namespace TRRandomizerView.Updates
 
         public bool CheckForUpdates()
         {
-            HttpWebRequest req = WebRequest.CreateHttp(_updateUrl);
-            req.UserAgent = _userAgent;
-            req.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
-
-            using (WebResponse response = req.GetResponse())
-            using (Stream receiveStream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(receiveStream))
+            HttpClient client = new();
+            client.DefaultRequestHeaders.UserAgent.Add(new(_userAgent, "1.0"));
+            client.DefaultRequestHeaders.CacheControl = new()
             {
-                Dictionary<string, object> releaseInfo = JsonConvert.DeserializeObject<Dictionary<string, object>>(reader.ReadToEnd());
-                string currentVersion = ((App)Application.Current).TaggedVersion;
-                if (!releaseInfo.ContainsKey("tag_name"))
-                {
-                    throw new IOException("Invalid response from GitHub - missing tag_name field.");
-                }
+                NoCache = true
+            };
 
-                string latestVersion = releaseInfo["tag_name"].ToString();
-                if (string.Compare(latestVersion, currentVersion, true) == 0)
-                {
-                    return false;
-                }
+            HttpResponseMessage response = client.Send(new(HttpMethod.Get, _updateUrl));
+            response.EnsureSuccessStatusCode();
 
-                LatestUpdate = new Update
-                {
-                    CurrentVersion = currentVersion.ToUpper(),
-                    NewVersion = latestVersion.ToUpper(),
-                    ReleaseDate = DateTime.Parse(releaseInfo["published_at"].ToString()),
-                    UpdateBody = releaseInfo["body"].ToString(),
-                    UpdateURL = releaseInfo["html_url"].ToString()
-                };
+            using Stream receiveStream = response.Content.ReadAsStream();
+            using StreamReader reader = new(receiveStream);
 
-                UpdateAvailable?.Invoke(this, new UpdateEventArgs(LatestUpdate));
-
-                return true;
+            JObject releaseInfo = JObject.Parse(reader.ReadToEnd());
+            if (!releaseInfo.ContainsKey("tag_name"))
+            {
+                throw new IOException("Invalid response from GitHub - missing tag_name field.");
             }
+
+            string currentVersion = ((App)Application.Current).TaggedVersion;
+            string latestVersion = releaseInfo["tag_name"].ToString();
+            if (string.Compare(latestVersion, currentVersion, true) == 0)
+            {
+                return false;
+            }
+
+            LatestUpdate = new()
+            {
+                CurrentVersion = currentVersion.ToUpper(),
+                NewVersion = latestVersion.ToUpper(),
+                ReleaseDate = DateTime.Parse(releaseInfo["published_at"].ToString()),
+                UpdateBody = Regex.Replace(releaseInfo["body"].ToString(), "<.*?>", string.Empty),
+                UpdateURL = releaseInfo["html_url"].ToString()
+            };
+
+            UpdateAvailable?.Invoke(this, new(LatestUpdate));
+
+            return true;
         }
     }
 }
