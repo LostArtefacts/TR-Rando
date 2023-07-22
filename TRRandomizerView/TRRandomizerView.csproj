@@ -11,8 +11,13 @@
     <AssemblyName>TRRandomizer</AssemblyName>
     <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>false</PublishTrimmed>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <EnableCompressionInSingleFile>false</EnableCompressionInSingleFile>
+    <SelfContained>false</SelfContained>
     <ApplicationIcon>Resources\rando.ico</ApplicationIcon>
 
     <Version>1.7.2</Version>

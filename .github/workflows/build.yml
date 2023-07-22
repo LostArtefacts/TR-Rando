@@ -23,11 +23,11 @@ jobs:
         run: |
           dotnet restore
           dotnet test --filter TestCategory!=OriginalIO
-          dotnet build TRRandomizerView -c Release -o build -a x86
+          dotnet publish -c Release -a x86 --property:PublishDir=build
           
       - name: Package the build
         run: |
-          cd build
+          cd TRRandomizerView/build
           dir
           Compress-Archive -Path (Get-ChildItem -Exclude *.pdb) -DestinationPath TRRando-x86.zip
           
@@ -53,11 +53,11 @@ jobs:
         run: |
           dotnet restore
           dotnet test --filter TestCategory!=OriginalIO
-          dotnet build TRRandomizerView -c Release -o build -a x64
+          dotnet publish -c Release -a x64 --property:PublishDir=build
           
       - name: Package the build
         run: |
-          cd build
+          cd TRRandomizerView/build
           dir
           Compress-Archive -Path (Get-ChildItem -Exclude *.pdb) -DestinationPath TRRando-x64.zip
           
