@@ -8,7 +8,6 @@ using TRRandomizerView.Events;
 using TRRandomizerView.Model;
 using TRRandomizerView.Utilities;
 using TRRandomizerView.Windows;
-using SWF = System.Windows.Forms;
 
 namespace TRRandomizerView.Controls
 {
@@ -86,14 +85,9 @@ namespace TRRandomizerView.Controls
 
         public void OpenDataFolder()
         {
-            using SWF.FolderBrowserDialog dlg = new()
+            if (FileUtils.GetFolderPath("Select Data Folder") is string path)
             {
-                Description = "Select Data Folder",
-                UseDescriptionForTitle = true,
-            };
-            if (dlg.ShowDialog() == SWF.DialogResult.OK)
-            {
-                OpenDataFolder(dlg.SelectedPath);
+                OpenDataFolder(path);
             }
         }
 

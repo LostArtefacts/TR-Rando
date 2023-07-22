@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -44,8 +43,8 @@ namespace TRRandomizerView.Controls
         }
         #endregion
 
-        private const string _configFileDisplayName = "TR Rando Config Files";
-        private const string _configFileExtension = "trr";
+        private const string _configExtension = "trr";
+        private const string _configFilter = $"TR Rando Config Files|*.{_configExtension}";
 
         private readonly ControllerOptions _options;
         private bool _dirty, _reloadRequested, _hideRandomOptionsPrompt;
@@ -337,14 +336,9 @@ namespace TRRandomizerView.Controls
 
         public void ImportSettings()
         {
-            OpenFileDialog dlg = new()
+            if (FileUtils.GetOpenPath("Import Settings", _configFilter) is string path)
             {
-                Filter = $"{_configFileDisplayName}|*.{_configFileExtension}",
-                Title = "Import Settings"
-            };
-            if (dlg.ShowDialog(WindowUtils.GetActiveWindow()) ?? false)
-            {
-                ImportSettings(dlg.FileName);
+                ImportSettings(path);
             }
         }
 
@@ -363,17 +357,12 @@ namespace TRRandomizerView.Controls
 
         public void ExportSettings()
         {
-            SaveFileDialog dlg = new()
-            {
-                Filter = $"{_configFileDisplayName}|*.{_configFileExtension}",
-                Title = "Export Settings",
-                FileName = GetSafeFileName(Edition, _configFileExtension),
-            };
-            if (dlg.ShowDialog(WindowUtils.GetActiveWindow()) ?? false)
+            string initialName = GetSafeFileName(Edition, _configExtension);
+            if (FileUtils.GetSavePath("Export Settings", _configFilter, initialName) is string path)
             {
                 try
                 {
-                    Controller.ExportSettings(dlg.FileName);
+                    Controller.ExportSettings(path);
                 }
                 catch (Exception e)
                 {
