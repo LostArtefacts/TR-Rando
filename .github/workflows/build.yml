@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: TRRando-x86
-          path: build/TRRando-x86.zip
+          path: TRRandomizerView/build/TRRando-x86.zip
           
   buildx64:
     name: Build x64
@@ -65,4 +65,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: TRRando-x64
-          path: build/TRRando-x64.zip
+          path: TRRandomizerView/build/TRRando-x64.zip
