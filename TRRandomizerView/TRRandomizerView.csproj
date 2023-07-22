@@ -2,7 +2,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <UseWpf>true</UseWpf>
 
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
@@ -89,10 +90,4 @@
     <Resource Include="Resources\rando.png" />
     <Resource Include="Resources\up.png" />
   </ItemGroup>
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="rmdir /S /Q &quot;$(TargetDir)\Lib&quot;" />
-  </Target>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="mkdir &quot;$(TargetDir)\Lib&quot;&#xD;&#xA;move /Y &quot;$(TargetDir)\*.dll&quot; &quot;$(TargetDir)\Lib&quot;" />
-  </Target>
 </Project>
