@@ -1,8 +1,5 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -46,8 +43,8 @@ namespace TRRandomizerView.Controls
         }
         #endregion
 
-        private const string _configFileDisplayName = "TR Rando Config Files";
-        private const string _configFileExtension = "trr";
+        private const string _configExtension = "trr";
+        private const string _configFilter = $"TR Rando Config Files|*.{_configExtension}";
 
         private readonly ControllerOptions _options;
         private bool _dirty, _reloadRequested, _hideRandomOptionsPrompt;
@@ -207,11 +204,7 @@ namespace TRRandomizerView.Controls
                     throw new IOException("The game could not be launched automatically as no suitable executable was found.");
                 }
 
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = exePath,
-                    WorkingDirectory = Path.GetDirectoryName(exePath)
-                });
+                ProcessUtils.OpenFile(exePath);
             }
             catch (Exception e)
             {
@@ -268,7 +261,7 @@ namespace TRRandomizerView.Controls
 
         public void OpenBackupFolder()
         {
-            Process.Start("explorer.exe", Controller.BackupDirectory);
+            ProcessUtils.OpenFolder(Controller.BackupDirectory);
         }
 
         public bool CanOpenErrorFolder()
@@ -278,7 +271,7 @@ namespace TRRandomizerView.Controls
 
         public void OpenErrorFolder()
         {
-            Process.Start("explorer.exe", Controller.ErrorDirectory);
+            ProcessUtils.OpenFolder(Controller.ErrorDirectory);
         }
 
         public void RestoreDefaults()
@@ -343,14 +336,9 @@ namespace TRRandomizerView.Controls
 
         public void ImportSettings()
         {
-            using (CommonOpenFileDialog dlg = new CommonOpenFileDialog())
+            if (FileUtils.GetOpenPath("Import Settings", _configFilter) is string path)
             {
-                dlg.Filters.Add(new CommonFileDialogFilter(_configFileDisplayName, _configFileExtension));
-                dlg.Title = "Import Settings";
-                if (dlg.ShowDialog(WindowUtils.GetActiveWindowHandle()) == CommonFileDialogResult.Ok)
-                {
-                    ImportSettings(dlg.FileName);
-                }
+                ImportSettings(path);
             }
         }
 
@@ -369,23 +357,16 @@ namespace TRRandomizerView.Controls
 
         public void ExportSettings()
         {
-            using (CommonSaveFileDialog dlg = new CommonSaveFileDialog())
+            string initialName = GetSafeFileName(Edition, _configExtension);
+            if (FileUtils.GetSavePath("Export Settings", _configFilter, initialName) is string path)
             {
-                dlg.DefaultFileName = GetSafeFileName(Edition, _configFileExtension);
-                dlg.DefaultExtension = "." + _configFileExtension;
-                dlg.Filters.Add(new CommonFileDialogFilter(_configFileDisplayName, _configFileExtension));
-                dlg.OverwritePrompt = true;
-                dlg.Title = "Export Settings";
-                if (dlg.ShowDialog(WindowUtils.GetActiveWindowHandle()) == CommonFileDialogResult.Ok)
+                try
                 {
-                    try
-                    {
-                        Controller.ExportSettings(dlg.FileName);
-                    }
-                    catch (Exception e)
-                    {
-                        MessageWindow.ShowException(e);
-                    }
+                    Controller.ExportSettings(path);
+                }
+                catch (Exception e)
+                {
+                    MessageWindow.ShowException(e);
                 }
             }
         }
@@ -480,11 +461,7 @@ namespace TRRandomizerView.Controls
             try
             {
                 string exePath = Path.GetFullPath(Path.Combine(DataFolder, @"..\tomb3_ConfigTool.exe"));
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = exePath,
-                    WorkingDirectory = Path.GetDirectoryName(exePath)
-                });
+                ProcessUtils.OpenFile(exePath);
             }
             catch (Exception e)
             {

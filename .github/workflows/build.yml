@@ -23,11 +23,11 @@ jobs:
         run: |
           dotnet restore
           dotnet test --filter TestCategory!=OriginalIO
-          dotnet build TRRandomizerView -c Release -o build -a x86
+          dotnet publish -c Release -a x86 --property:PublishDir=build
           
       - name: Package the build
         run: |
-          cd build
+          cd TRRandomizerView/build
           dir
           Compress-Archive -Path (Get-ChildItem -Exclude *.pdb) -DestinationPath TRRando-x86.zip
           
@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: TRRando-x86
-          path: build/TRRando-x86.zip
+          path: TRRandomizerView/build/TRRando-x86.zip
           
   buildx64:
     name: Build x64
@@ -53,11 +53,11 @@ jobs:
         run: |
           dotnet restore
           dotnet test --filter TestCategory!=OriginalIO
-          dotnet build TRRandomizerView -c Release -o build -a x64
+          dotnet publish -c Release -a x64 --property:PublishDir=build
           
       - name: Package the build
         run: |
-          cd build
+          cd TRRandomizerView/build
           dir
           Compress-Archive -Path (Get-ChildItem -Exclude *.pdb) -DestinationPath TRRando-x64.zip
           
@@ -65,4 +65,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: TRRando-x64
-          path: build/TRRando-x64.zip
+          path: TRRandomizerView/build/TRRando-x64.zip

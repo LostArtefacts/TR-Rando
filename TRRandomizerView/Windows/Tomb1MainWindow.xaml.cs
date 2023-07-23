@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using TRGE.Core;
 using TRRandomizerView.Model;
@@ -95,7 +93,7 @@ namespace TRRandomizerView.Windows
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(e.Uri.AbsoluteUri);
+            ProcessUtils.OpenURL(e.Uri.AbsoluteUri);
             e.Handled = true;
         }
 

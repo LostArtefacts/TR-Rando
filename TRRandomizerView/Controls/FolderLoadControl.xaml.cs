@@ -1,5 +1,4 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -86,14 +85,9 @@ namespace TRRandomizerView.Controls
 
         public void OpenDataFolder()
         {
-            using (CommonOpenFileDialog dlg = new CommonOpenFileDialog())
+            if (FileUtils.GetFolderPath("Select Data Folder") is string path)
             {
-                dlg.IsFolderPicker = true;
-                dlg.Title = "Select Data Folder";
-                if (dlg.ShowDialog(WindowUtils.GetActiveWindowHandle()) == CommonFileDialogResult.Ok)
-                {
-                    OpenDataFolder(dlg.FileName);
-                }
+                OpenDataFolder(path);
             }
         }
 

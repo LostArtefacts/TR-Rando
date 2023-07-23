@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Navigation;
 using TRRandomizerView.Utilities;
 
@@ -76,7 +75,7 @@ namespace TRRandomizerView.Windows
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(e.Uri.AbsoluteUri);
+            ProcessUtils.OpenURL(e.Uri.AbsoluteUri);
             e.Handled = true;
         }
     }

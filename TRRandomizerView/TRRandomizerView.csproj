@@ -2,15 +2,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <UseWpf>true</UseWpf>
+    <UseWindowsForms>true</UseWindowsForms>
 
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <AssemblyName>TRRandomizer</AssemblyName>
     <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>false</PublishTrimmed>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <EnableCompressionInSingleFile>false</EnableCompressionInSingleFile>
+    <SelfContained>false</SelfContained>
     <ApplicationIcon>Resources\rando.ico</ApplicationIcon>
 
     <Version>1.7.2</Version>
@@ -56,10 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WindowsAPICodePack-Core" version="1.1.1" />
-    <PackageReference Include="WindowsAPICodePack-Shell" version="1.1.1" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\arrows.png" />
     <Resource Include="Resources\Darkness\TR1\0.jpg" />
     <Resource Include="Resources\Darkness\TR1\1.jpg" />
@@ -89,10 +92,4 @@
     <Resource Include="Resources\rando.png" />
     <Resource Include="Resources\up.png" />
   </ItemGroup>
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="rmdir /S /Q &quot;$(TargetDir)\Lib&quot;" />
-  </Target>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="mkdir &quot;$(TargetDir)\Lib&quot;&#xD;&#xA;move /Y &quot;$(TargetDir)\*.dll&quot; &quot;$(TargetDir)\Lib&quot;" />
-  </Target>
 </Project>

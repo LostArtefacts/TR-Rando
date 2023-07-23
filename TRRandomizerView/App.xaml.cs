@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Markup;
@@ -43,7 +42,7 @@ namespace TRRandomizerView
             }
             else
             {
-                Title = Path.GetFileNameWithoutExtension(assembly.CodeBase);
+                Title = "TRRandomizer";
             }
 
             attributes = assembly.GetCustomAttributes(typeof(AssemblyProductAttribute), false);
