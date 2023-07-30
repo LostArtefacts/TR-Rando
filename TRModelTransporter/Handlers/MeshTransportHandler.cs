@@ -6,7 +6,7 @@ namespace TRModelTransporter.Handlers
 {
     public class MeshTransportHandler
     {
-        public void Export(TRLevel level, TR1ModelDefinition definition)
+        public void Export(TR1Level level, TR1ModelDefinition definition)
         {
             definition.MeshTrees = TRMeshUtilities.GetModelMeshTrees(level, definition.Model);
             definition.Meshes = TRMeshUtilities.GetModelMeshes(level, definition.Model);
@@ -24,7 +24,7 @@ namespace TRModelTransporter.Handlers
             definition.Meshes = TRMeshUtilities.GetModelMeshes(level, definition.Model);
         }
 
-        public void Import(TRLevel level, TR1ModelDefinition definition)
+        public void Import(TR1Level level, TR1ModelDefinition definition)
         {
             // Copy the MeshTreeNodes and Meshes into the level, making a note of the first
             // inserted index for each - this is used to update the Model to point to the

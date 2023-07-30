@@ -9,7 +9,7 @@ namespace TRModelTransporter.Handlers
 {
     public class ModelTransportHandler
     {
-        public void Export(TRLevel level, TR1ModelDefinition definition, TREntities entity)
+        public void Export(TR1Level level, TR1ModelDefinition definition, TREntities entity)
         {
             definition.Model = GetTRModel(level.Models, (short)entity);
         }
@@ -34,7 +34,7 @@ namespace TRModelTransporter.Handlers
             return model;
         }
 
-        public void Import(TRLevel level, TR1ModelDefinition definition, Dictionary<TREntities, TREntities> aliasPriority, IEnumerable<TREntities> laraDependants)
+        public void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TREntities, TREntities> aliasPriority, IEnumerable<TREntities> laraDependants)
         {
             List<TRModel> levelModels = level.Models.ToList();
             int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);

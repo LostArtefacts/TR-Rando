@@ -14,7 +14,7 @@ namespace TREnvironmentEditor.Model.Types
         public ushort X { get; set; }
         public ushort Y { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             using (BitmapGraphics bg = new BitmapGraphics(new Bitmap(Bitmap)))
             {

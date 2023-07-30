@@ -7,7 +7,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public ushort[] Textures { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             MirrorObjectTextures(level.ObjectTextures);
         }

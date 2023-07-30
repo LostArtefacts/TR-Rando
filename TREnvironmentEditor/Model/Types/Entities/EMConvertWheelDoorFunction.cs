@@ -13,7 +13,7 @@ namespace TREnvironmentEditor.Model.Types
         public short NewDoorType { get; set; }
         public EMLocation NewLocation { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             throw new NotSupportedException();
         }

@@ -54,7 +54,7 @@ namespace TRFDControl
             }
         }
 
-        public void ParseFromLevel (TRLevel lvl)
+        public void ParseFromLevel (TR1Level lvl)
         {
             _entries = new SortedDictionary<int, List<FDEntry>>();
 
@@ -320,7 +320,7 @@ namespace TRFDControl
             _entries.Add(sector.FDIndex, floordataFunctions);
         }
 
-        public void WriteToLevel(TRLevel lvl)
+        public void WriteToLevel(TR1Level lvl)
         {
             List<ushort> data = new List<ushort>
             {

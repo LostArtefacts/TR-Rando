@@ -7,7 +7,7 @@ namespace TRModelTransporter.Handlers
 {
     public static class SoundUtilities
     {
-        public static void ImportLevelSound(TRLevel baseLevel, TRLevel sourceLevel, short[] soundIDs)
+        public static void ImportLevelSound(TR1Level baseLevel, TR1Level sourceLevel, short[] soundIDs)
         {
             TR1PackedSound sound = BuildPackedSound(sourceLevel.SoundMap, sourceLevel.SoundDetails, sourceLevel.SampleIndices, sourceLevel.Samples, soundIDs);
             new SoundUnpacker().Unpack(sound, baseLevel);
@@ -145,7 +145,7 @@ namespace TRModelTransporter.Handlers
             return packedSound;
         }
 
-        public static void ResortSoundIndices(TRLevel level)
+        public static void ResortSoundIndices(TR1Level level)
         {
             List<short> newSoundMap = new List<short>();
             List<TRSoundDetails> newSoundDetails = new List<TRSoundDetails>();

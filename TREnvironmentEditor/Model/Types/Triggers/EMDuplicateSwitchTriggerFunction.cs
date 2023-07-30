@@ -13,7 +13,7 @@ namespace TREnvironmentEditor.Model.Types
         public ushort NewSwitchIndex { get; set; }
         public ushort OldSwitchIndex { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
 

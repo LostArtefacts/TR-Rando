@@ -14,7 +14,7 @@ namespace TREnvironmentEditor.Model.Types
         public EMLocation Location { get; set; }
         public List<EMLocation> TriggerLocations { get; set; }
 
-        protected void RepositionTriggerable(TREntity entity, TRLevel level)
+        protected void RepositionTriggerable(TREntity entity, TR1Level level)
         {
             EMLevelData data = GetData(level);
 

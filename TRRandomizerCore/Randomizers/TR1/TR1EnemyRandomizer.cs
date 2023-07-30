@@ -176,7 +176,7 @@ namespace TRRandomizerCore.Randomizers
             // If level-ending Larson is disabled, we make an alternative ending to ToQ.
             // Do this at this stage as it effectively gets rid of ToQ-Larson meaning
             // Sanctuary-Larson can potentially be imported.
-            if (level.Is(TRLevelNames.QUALOPEC) && Settings.ReplaceRequiredEnemies)
+            if (level.Is(TR1LevelNames.QUALOPEC) && Settings.ReplaceRequiredEnemies)
             {
                 AmendToQLarson(level);
             }
@@ -191,7 +191,7 @@ namespace TRRandomizerCore.Randomizers
 
             // Work out how many we can support
             int enemyCount = oldEntities.Count + TR1EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
-            if (level.Is(TRLevelNames.QUALOPEC) && Settings.ReplaceRequiredEnemies)
+            if (level.Is(TR1LevelNames.QUALOPEC) && Settings.ReplaceRequiredEnemies)
             {
                 // Account for Larson having been removed above.
                 ++enemyCount;
@@ -349,7 +349,7 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
 
-            if (level.Is(TRLevelNames.PYRAMID) && Settings.ReplaceRequiredEnemies && !newEntities.Contains(TREntities.Adam))
+            if (level.Is(TR1LevelNames.PYRAMID) && Settings.ReplaceRequiredEnemies && !newEntities.Contains(TREntities.Adam))
             {
                 AmendPyramidTorso(level);
             }
@@ -555,7 +555,7 @@ namespace TRRandomizerCore.Randomizers
 
                 // Rather than individual enemy limits, this accounts for enemy groups such as all Atlanteans
                 RandoDifficulty groupDifficulty = difficulty;
-                if (level.Is(TRLevelNames.QUALOPEC) && newEntityType == TREntities.Larson && Settings.ReplaceRequiredEnemies)
+                if (level.Is(TR1LevelNames.QUALOPEC) && newEntityType == TREntities.Larson && Settings.ReplaceRequiredEnemies)
                 {
                     // Non-level ending Larson is not restricted in ToQ, otherwise we adhere to the normal rules.
                     groupDifficulty = RandoDifficulty.NoRestrictions;
@@ -711,7 +711,7 @@ namespace TRRandomizerCore.Randomizers
                 _resultantEnemies.Add(newEntityType);
             }
 
-            if (level.Is(TRLevelNames.TIHOCAN) && level.Data.Entities[82].TypeID != (short)TREntities.Pierre)
+            if (level.Is(TR1LevelNames.TIHOCAN) && level.Data.Entities[82].TypeID != (short)TREntities.Pierre)
             {
                 // Add a guaranteed key at the end of the level. Item rando can reposition it.
                 List<TREntity> entities = level.Data.Entities.ToList();
@@ -785,7 +785,7 @@ namespace TRRandomizerCore.Randomizers
             return count;
         }
 
-        private bool IsEnemyInOrAboveWater(TREntity entity, TRLevel level, FDControl floorData)
+        private bool IsEnemyInOrAboveWater(TREntity entity, TR1Level level, FDControl floorData)
         {
             if (level.Rooms[entity.Room].ContainsWater)
             {
@@ -926,7 +926,7 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
-        private void AdjustCentaurStatue(TREntity entity, TRLevel level, FDControl floorData)
+        private void AdjustCentaurStatue(TREntity entity, TR1Level level, FDControl floorData)
         {
             // If they're floating, they tend not to trigger as Lara's not within range
             TR1LocationGenerator locationGenerator = new TR1LocationGenerator();
@@ -1085,7 +1085,7 @@ namespace TRRandomizerCore.Randomizers
 
         private void RandomizeMeshes(TR1CombinedLevel level, List<TREntities> availableEnemies)
         {
-            if (level.Is(TRLevelNames.ATLANTIS))
+            if (level.Is(TR1LevelNames.ATLANTIS))
             {
                 // Atlantis scion swap - Model => Mesh index
                 Dictionary<TREntities, int> scionSwaps = new Dictionary<TREntities, int>
@@ -1225,7 +1225,7 @@ namespace TRRandomizerCore.Randomizers
             List<TREntities> entities = level.Data.Models.Select(m => (TREntities)m.ID).ToList();
 
             if (entities.Contains(TREntities.Pierre)
-                && (level.Is(TRLevelNames.FOLLY) || level.Is(TRLevelNames.COLOSSEUM) || level.Is(TRLevelNames.CISTERN) || level.Is(TRLevelNames.TIHOCAN)))
+                && (level.Is(TR1LevelNames.FOLLY) || level.Is(TR1LevelNames.COLOSSEUM) || level.Is(TR1LevelNames.CISTERN) || level.Is(TR1LevelNames.TIHOCAN)))
             {
                 TR1ModelExporter.AmendPierreGunshot(level.Data);
                 TR1ModelExporter.AmendPierreDeath(level.Data);
@@ -1233,22 +1233,22 @@ namespace TRRandomizerCore.Randomizers
                 // Non one-shot-Pierre levels won't have the death sound by default, so borrow it from ToT.
                 if (level.Data.SoundMap[159] == -1)
                 {
-                    TRLevel tihocan = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TRLevelNames.TIHOCAN));
+                    TR1Level tihocan = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TR1LevelNames.TIHOCAN));
                     SoundUtilities.ImportLevelSound(level.Data, tihocan, new short[] { 159 });
                 }
             }
 
-            if (entities.Contains(TREntities.Larson) && level.Is(TRLevelNames.SANCTUARY))
+            if (entities.Contains(TREntities.Larson) && level.Is(TR1LevelNames.SANCTUARY))
             {
                 TR1ModelExporter.AmendLarsonDeath(level.Data);
             }
 
-            if (entities.Contains(TREntities.SkateboardKid) && level.Is(TRLevelNames.MINES))
+            if (entities.Contains(TREntities.SkateboardKid) && level.Is(TR1LevelNames.MINES))
             {
                 TR1ModelExporter.AmendSkaterBoyDeath(level.Data);
             }
 
-            if (entities.Contains(TREntities.Natla) && level.Is(TRLevelNames.PYRAMID))
+            if (entities.Contains(TREntities.Natla) && level.Is(TR1LevelNames.PYRAMID))
             {
                 TR1ModelExporter.AmendNatlaDeath(level.Data);
             }
@@ -1291,7 +1291,7 @@ namespace TRRandomizerCore.Randomizers
                     {
                         EnemyTransportCollection enemies = _enemyMapping[level];
                         List<TREntities> importModels = new List<TREntities>(enemies.EntitiesToImport);
-                        if (level.Is(TRLevelNames.KHAMOON) && (importModels.Contains(TREntities.BandagedAtlantean) || importModels.Contains(TREntities.BandagedFlyer)))
+                        if (level.Is(TR1LevelNames.KHAMOON) && (importModels.Contains(TREntities.BandagedAtlantean) || importModels.Contains(TREntities.BandagedFlyer)))
                         {
                             // Mummies may become shooters in Khamoon, but the missiles won't be available by default, so ensure they do get imported.
                             importModels.Add(TREntities.Missile2_H);

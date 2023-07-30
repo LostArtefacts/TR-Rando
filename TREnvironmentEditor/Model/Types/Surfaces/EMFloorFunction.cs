@@ -25,7 +25,7 @@ namespace TREnvironmentEditor.Model.Types
             Flags = 0xF;
         }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             if (Clicks == 0)
             {
@@ -45,7 +45,7 @@ namespace TREnvironmentEditor.Model.Types
             MoveFloor(level);
         }
 
-        private void MoveFloor(TRLevel level)
+        private void MoveFloor(TR1Level level)
         {
             int clickChange = Clicks * ClickSize;
 
@@ -209,7 +209,7 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
-        private void AlterSectorBox(TRLevel level, TRRoom room, int sectorIndex)
+        private void AlterSectorBox(TR1Level level, TRRoom room, int sectorIndex)
         {
             TRRoomSector sector = room.Sectors[sectorIndex];
             if (sector.BoxIndex == ushort.MaxValue)
@@ -260,7 +260,7 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
-        private void GenerateOverlaps(TRLevel level, ushort currentBoxIndex, ushort newBoxIndex)
+        private void GenerateOverlaps(TR1Level level, ushort currentBoxIndex, ushort newBoxIndex)
         {
             for (int i = 0; i < level.NumBoxes; i++)
             {

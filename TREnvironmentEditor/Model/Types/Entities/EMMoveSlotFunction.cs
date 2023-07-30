@@ -15,7 +15,7 @@ namespace TREnvironmentEditor.Model.Types
         public int EntityIndex { get; set; }
         public EMLocation Location { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             EntityIndex = data.ConvertEntity(EntityIndex);

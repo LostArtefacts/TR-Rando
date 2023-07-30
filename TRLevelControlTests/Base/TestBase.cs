@@ -20,10 +20,10 @@ public class TestBase
         return string.Format(_writePath, version.ToString(), Path.GetFileNameWithoutExtension(level), Path.GetExtension(level));
     }
 
-    public static TRLevel GetTR1TestLevel()
+    public static TR1Level GetTR1TestLevel()
         => GetTR1Level("TEST1.PHD");
 
-    public static TRLevel GetTR1AltTestLevel()
+    public static TR1Level GetTR1AltTestLevel()
         => GetTR1Level("TEST2.PHD");
 
     public static TR2Level GetTR2TestLevel()
@@ -50,7 +50,7 @@ public class TestBase
     public static TR5Level GetTR5AltTestLevel()
         => GetTR5Level("TEST2.TRC");
 
-    public static TRLevel GetTR1Level(string level)
+    public static TR1Level GetTR1Level(string level)
     {
         TR1LevelReader control = new();
         return control.ReadLevel(GetReadPath(level, TRGameVersion.TR1));
@@ -88,7 +88,7 @@ public class TestBase
         switch (version)
         {
             case TRGameVersion.TR1:
-                TRLevel level1 = new TR1LevelReader().ReadLevel(pathI);
+                TR1Level level1 = new TR1LevelReader().ReadLevel(pathI);
                 new TR1LevelWriter().WriteLevelToFile(level1, pathO);
                 break;
             case TRGameVersion.TR2:
@@ -180,7 +180,7 @@ public class TestBase
         CollectionAssert.AreEqual(TRZlib.Decompress(level.SkyAndFont32Chunk.CompressedChunk), TRZlib.Decompress(level2.SkyAndFont32Chunk.CompressedChunk));
     }
 
-    public static TRLevel WriteReadTempLevel(TRLevel level)
+    public static TR1Level WriteReadTempLevel(TR1Level level)
         => WriteReadTempLevel(level, "TEST1.PHD");
 
     public static TR2Level WriteReadTempLevel(TR2Level level)
@@ -195,7 +195,7 @@ public class TestBase
     public static TR5Level WriteReadTempLevel(TR5Level level)
         => WriteReadTempLevel(level, "TEST1.TRC");
 
-    public static TRLevel WriteReadTempLevel(TRLevel level, string levelName)
+    public static TR1Level WriteReadTempLevel(TR1Level level, string levelName)
     {
         // TODO: allow level control to read/write from stream and not files alone
         string path = GetWritePath(levelName, TRGameVersion.TR1);

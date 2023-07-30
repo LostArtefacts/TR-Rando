@@ -4,7 +4,7 @@ namespace TREnvironmentEditor.Model.Types
 {
     public class EMMoveTrapFunction : BaseMoveTriggerableFunction
     {
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             TREntity trap = level.Entities[EntityIndex];
             RepositionTriggerable(trap, level);

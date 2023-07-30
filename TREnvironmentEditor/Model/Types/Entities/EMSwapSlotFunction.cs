@@ -11,7 +11,7 @@ namespace TREnvironmentEditor.Model.Types
         public int Slot1Index { get; set; }
         public int Slot2Index { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             if (Slot1Index == Slot2Index)
             {

@@ -8,7 +8,7 @@ namespace TextureExport.Types
 {
     public static class PngExporter
     {
-        public static void Export(TRLevel level, string lvl)
+        public static void Export(TR1Level level, string lvl)
         {
             Export(@"TR1\PNG", lvl, level.Images8, level.Palette);
         }

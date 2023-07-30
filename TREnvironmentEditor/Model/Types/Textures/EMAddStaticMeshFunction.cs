@@ -13,7 +13,7 @@ namespace TREnvironmentEditor.Model.Types
         public TR2RoomStaticMesh Mesh { get; set; }
         public bool IgnoreSectorEntities { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
 

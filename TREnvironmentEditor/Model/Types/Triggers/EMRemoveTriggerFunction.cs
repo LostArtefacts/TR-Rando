@@ -13,7 +13,7 @@ namespace TREnvironmentEditor.Model.Types
         public List<int> Rooms { get; set; }
         public List<FDTrigType> TrigTypes { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
 

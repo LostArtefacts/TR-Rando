@@ -12,7 +12,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public List<TextureOverwrite> Overwrites { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             using (TR1TexturePacker packer = new TR1TexturePacker(level))
             {

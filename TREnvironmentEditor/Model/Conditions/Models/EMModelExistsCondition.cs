@@ -7,7 +7,7 @@ namespace TREnvironmentEditor.Model.Conditions
     {
         public uint ModelID { get; set; }
 
-        protected override bool Evaluate(TRLevel level)
+        protected override bool Evaluate(TR1Level level)
         {
             TRModel model = level.Models.ToList().Find(m => m.ID == ModelID);
             return model != null;

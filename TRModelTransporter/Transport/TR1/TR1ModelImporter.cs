@@ -13,7 +13,7 @@ using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Transport
 {
-    public class TR1ModelImporter : AbstractTRModelImporter<TREntities, TRLevel, TR1ModelDefinition>
+    public class TR1ModelImporter : AbstractTRModelImporter<TREntities, TR1Level, TR1ModelDefinition>
     {
         public TR1PaletteManager PaletteManager { get; set; }
 
@@ -30,7 +30,7 @@ namespace TRModelTransporter.Transport
             }
         }
 
-        protected override AbstractTextureImportHandler<TREntities, TRLevel, TR1ModelDefinition> CreateTextureHandler()
+        protected override AbstractTextureImportHandler<TREntities, TR1Level, TR1ModelDefinition> CreateTextureHandler()
         {
             return new TR1TextureImportHandler();
         }

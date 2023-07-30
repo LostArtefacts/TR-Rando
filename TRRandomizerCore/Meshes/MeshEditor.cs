@@ -237,7 +237,7 @@ namespace TRRandomizerCore.Helpers
             return clone;
         }
 
-        public void WriteToLevel(TRLevel level)
+        public void WriteToLevel(TR1Level level)
         {
             TRMeshUtilities.UpdateMeshPointers(level, Mesh, _oldLength);
             _oldLength = _mesh.Serialize().Length; // in case of any further changes without changing the mesh var

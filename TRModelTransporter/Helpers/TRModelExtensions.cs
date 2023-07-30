@@ -8,7 +8,7 @@ namespace TRModelTransporter.Helpers
     {
         private static readonly FixedFloat16 _nullCoord = new FixedFloat16 { Fraction = 0, Whole = 0 };
 
-        public static void ResetUnusedTextures(this TRLevel level)
+        public static void ResetUnusedTextures(this TR1Level level)
         {
             ResetUnusedObjectTextures(level.ObjectTextures);
             ResetUnusedSpriteTextures(level.SpriteTextures);
@@ -94,7 +94,7 @@ namespace TRModelTransporter.Helpers
             texture.Width = texture.Height = 1;
         }
 
-        public static List<int> GetInvalidObjectTextureIndices(this TRLevel level)
+        public static List<int> GetInvalidObjectTextureIndices(this TR1Level level)
         {
             return GetInvalidObjectTextureIndices(level.ObjectTextures);
         }

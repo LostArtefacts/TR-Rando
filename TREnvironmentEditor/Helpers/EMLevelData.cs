@@ -40,7 +40,7 @@ namespace TREnvironmentEditor.Helpers
             return (short)(itemIndex < 0 ? numItems + itemIndex : itemIndex);
         }
 
-        public static EMLevelData GetData(TRLevel level)
+        public static EMLevelData GetData(TR1Level level)
         {
             return new EMLevelData
             {

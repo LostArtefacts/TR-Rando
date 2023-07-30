@@ -7,7 +7,7 @@ namespace TRLevelControl.Helpers
 {
     public static class TRMeshUtilities
     {
-        public static TRMesh GetModelFirstMesh(TRLevel level, TREntities entity)
+        public static TRMesh GetModelFirstMesh(TR1Level level, TREntities entity)
         {
             TRModel model = level.Models.ToList().Find(e => e.ID == (uint)entity);
             if (model != null)
@@ -37,7 +37,7 @@ namespace TRLevelControl.Helpers
             return null;
         }
 
-        public static TRMesh GetModelFirstMesh(TRLevel level, TRModel model)
+        public static TRMesh GetModelFirstMesh(TR1Level level, TRModel model)
         {
             return GetMesh(level, model.StartingMesh);
         }
@@ -52,7 +52,7 @@ namespace TRLevelControl.Helpers
             return GetMesh(level, model.StartingMesh);
         }
 
-        public static TRMesh[] GetModelMeshes(TRLevel level, TREntities entity)
+        public static TRMesh[] GetModelMeshes(TR1Level level, TREntities entity)
         {
             TRModel model = level.Models.ToList().Find(e => e.ID == (uint)entity);
             if (model != null)
@@ -82,7 +82,7 @@ namespace TRLevelControl.Helpers
             return null;
         }
 
-        public static TRMesh[] GetModelMeshes(TRLevel level, TRModel model)
+        public static TRMesh[] GetModelMeshes(TR1Level level, TRModel model)
         {
             return GetModelMeshes(level.Meshes, level.MeshPointers, model);
         }
@@ -108,7 +108,7 @@ namespace TRLevelControl.Helpers
             return modelMeshes.ToArray();
         }
 
-        public static TRMesh GetMesh(TRLevel level, uint meshPointer)
+        public static TRMesh GetMesh(TR1Level level, uint meshPointer)
         {
             return GetMesh(level.Meshes, level.MeshPointers[meshPointer]);
         }
@@ -137,7 +137,7 @@ namespace TRLevelControl.Helpers
             return null;
         }
 
-        public static TRMeshTreeNode[] GetModelMeshTrees(TRLevel level, TRModel model)
+        public static TRMeshTreeNode[] GetModelMeshTrees(TR1Level level, TRModel model)
         {
             return GetModelMeshTrees(level.MeshTrees, model);
         }
@@ -170,7 +170,7 @@ namespace TRLevelControl.Helpers
         /// <summary>
         /// Inserts a new mesh and returns its index in MeshPointers.
         /// </summary>
-        public static int InsertMesh(TRLevel level, TRMesh newMesh)
+        public static int InsertMesh(TR1Level level, TRMesh newMesh)
         {
             //get the final mesh we currently have
             if(level.Meshes.Length > 0)
@@ -264,7 +264,7 @@ namespace TRLevelControl.Helpers
         /// Duplicates the data from one mesh to another and ensures that the contents
         /// of MeshPointers remains consistent with respect to the mesh lengths.
         /// </summary>
-        public static void DuplicateMesh(TRLevel level, TRMesh originalMesh, TRMesh replacementMesh)
+        public static void DuplicateMesh(TR1Level level, TRMesh originalMesh, TRMesh replacementMesh)
         {
             int oldLength = originalMesh.Serialize().Length;
             ReplaceMesh(originalMesh, replacementMesh);
@@ -314,7 +314,7 @@ namespace TRLevelControl.Helpers
         /// For a given mesh that has been changed and its previous serialized length, ensures that all
         /// mesh pointers above the modified mesh are updated correctly.
         /// </summary>
-        public static void UpdateMeshPointers(TRLevel level, TRMesh modifiedMesh, int previousMeshLength)
+        public static void UpdateMeshPointers(TR1Level level, TRMesh modifiedMesh, int previousMeshLength)
         {
             int lengthDiff = modifiedMesh.Serialize().Length - previousMeshLength;
             List<uint> pointers = level.MeshPointers.ToList();
@@ -413,7 +413,7 @@ namespace TRLevelControl.Helpers
         /// <summary>
         /// Inserts a new mesh tree node and returns its index in MeshTrees. 
         /// </summary>
-        public static int InsertMeshTreeNode(TRLevel level, TRMeshTreeNode newNode)
+        public static int InsertMeshTreeNode(TR1Level level, TRMeshTreeNode newNode)
         {
             List<TRMeshTreeNode> nodes = level.MeshTrees.ToList();
             nodes.Add(newNode);

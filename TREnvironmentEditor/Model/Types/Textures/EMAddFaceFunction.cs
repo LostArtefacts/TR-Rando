@@ -10,7 +10,7 @@ namespace TREnvironmentEditor.Model.Types
         public Dictionary<short, List<TRFace4>> Quads { get; set; }
         public Dictionary<short, List<TRFace3>> Triangles { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
 

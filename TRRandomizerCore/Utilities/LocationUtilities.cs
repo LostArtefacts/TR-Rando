@@ -11,13 +11,13 @@ namespace TRRandomizerCore.Utilities
 {
     public static class LocationUtilities
     {
-        public static bool ContainsSecret(this Location location, TRLevel level, FDControl floorData)
+        public static bool ContainsSecret(this Location location, TR1Level level, FDControl floorData)
         {
             TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, floorData);
             return SectorContainsSecret(sector, floorData);
         }
 
-        public static bool IsSlipperySlope(this Location location, TRLevel level, FDControl floorData)
+        public static bool IsSlipperySlope(this Location location, TR1Level level, FDControl floorData)
         {
             TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, floorData);
             return SectorIsSlipperySlope(sector, floorData);

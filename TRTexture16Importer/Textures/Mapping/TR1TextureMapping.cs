@@ -8,14 +8,14 @@ using TRTexture16Importer.Helpers;
 
 namespace TRTexture16Importer.Textures
 {
-    public class TR1TextureMapping : AbstractTextureMapping<TREntities, TRLevel>
+    public class TR1TextureMapping : AbstractTextureMapping<TREntities, TR1Level>
     {
         public TR1PaletteManager PaletteManager { get; set; }
 
-        protected TR1TextureMapping(TRLevel level)
+        protected TR1TextureMapping(TR1Level level)
             : base(level) { }
 
-        public static TR1TextureMapping Get(TRLevel level, string mappingFilePrefix, TR1TextureDatabase database, Dictionary<StaticTextureSource<TREntities>, List<StaticTextureTarget>> predefinedMapping = null, List<TREntities> entitiesToIgnore = null, Dictionary<TREntities, TREntities> entityMap = null)
+        public static TR1TextureMapping Get(TR1Level level, string mappingFilePrefix, TR1TextureDatabase database, Dictionary<StaticTextureSource<TREntities>, List<StaticTextureTarget>> predefinedMapping = null, List<TREntities> entitiesToIgnore = null, Dictionary<TREntities, TREntities> entityMap = null)
         {
             string mapFile = Path.Combine(@"Resources\TR1\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
             if (!File.Exists(mapFile))

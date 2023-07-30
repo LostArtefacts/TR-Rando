@@ -11,7 +11,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public uint[] ModelIDs { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             List<TRMesh> meshes = new List<TRMesh>();
             foreach (uint modelID in ModelIDs)

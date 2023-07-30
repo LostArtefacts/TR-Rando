@@ -80,7 +80,7 @@ namespace TRFDControl.Utilities
             return items;
         }
 
-        public static void RemoveEntityTriggers(TRLevel level, int entityIndex, FDControl control)
+        public static void RemoveEntityTriggers(TR1Level level, int entityIndex, FDControl control)
         {
             foreach (TRRoom room in level.Rooms)
             {
@@ -138,7 +138,7 @@ namespace TRFDControl.Utilities
         public static readonly short NO_ROOM = 0xff;
         public static readonly short WALL_SHIFT = 10;
 
-        public static TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TRLevel level, FDControl floorData)
+        public static TRRoomSector GetRoomSector(int x, int y, int z, short roomNumber, TR1Level level, FDControl floorData)
         {
             int xFloor, yFloor;
             TRRoom room = level.Rooms[roomNumber];

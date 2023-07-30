@@ -8,7 +8,7 @@ namespace TREnvironmentEditor.Model.Conditions
     {
         public EMLocation Location { get; set; }
 
-        protected override bool Evaluate(TRLevel level)
+        protected override bool Evaluate(TR1Level level)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);

@@ -12,19 +12,19 @@ using TRModelTransporter.Model.Definitions;
 
 namespace TRModelTransporter.Transport
 {
-    public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TRLevel, TR1ModelDefinition>
+    public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR1ModelDefinition>
     {
         public TR1ModelExporter()
         {
             Data = new TR1DefaultDataProvider();
         }
 
-        protected override AbstractTextureExportHandler<TREntities, TRLevel, TR1ModelDefinition> CreateTextureHandler()
+        protected override AbstractTextureExportHandler<TREntities, TR1Level, TR1ModelDefinition> CreateTextureHandler()
         {
             return new TR1TextureExportHandler();
         }
 
-        protected override TR1ModelDefinition CreateModelDefinition(TRLevel level, TREntities modelEntity)
+        protected override TR1ModelDefinition CreateModelDefinition(TR1Level level, TREntities modelEntity)
         {
             TR1ModelDefinition definition = new TR1ModelDefinition
             {
@@ -47,7 +47,7 @@ namespace TRModelTransporter.Transport
             return definition;
         }
 
-        protected override void PreDefinitionCreation(TRLevel level, TREntities modelEntity)
+        protected override void PreDefinitionCreation(TR1Level level, TREntities modelEntity)
         {
             switch (modelEntity)
             {
@@ -100,7 +100,7 @@ namespace TRModelTransporter.Transport
             }
         }
 
-        public static void AmendPierreGunshot(TRLevel level)
+        public static void AmendPierreGunshot(TR1Level level)
         {
             TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.Pierre);
             // Get his shooting animation
@@ -118,7 +118,7 @@ namespace TRModelTransporter.Transport
             level.NumAnimCommands = (uint)cmds.Count;
         }
 
-        public static void AmendPierreDeath(TRLevel level)
+        public static void AmendPierreDeath(TR1Level level)
         {
             TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.Pierre);
             // Get his death animation
@@ -138,7 +138,7 @@ namespace TRModelTransporter.Transport
             level.NumAnimCommands = (uint)cmds.Count;
         }
 
-        public static void AmendLarsonDeath(TRLevel level)
+        public static void AmendLarsonDeath(TR1Level level)
         {
             TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.Larson);
             // Get his death animation
@@ -158,7 +158,7 @@ namespace TRModelTransporter.Transport
             level.NumAnimCommands = (uint)cmds.Count;
         }
 
-        public static void AmendSkaterBoyDeath(TRLevel level)
+        public static void AmendSkaterBoyDeath(TR1Level level)
         {
             TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.SkateboardKid);
             // Get his death animation
@@ -167,7 +167,7 @@ namespace TRModelTransporter.Transport
             level.AnimCommands[anim.AnimCommand + 2].Value++;
         }
 
-        public static void AmendNatlaDeath(TRLevel level)
+        public static void AmendNatlaDeath(TR1Level level)
         {
             TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.Natla);
             // Get her death animation
@@ -187,14 +187,14 @@ namespace TRModelTransporter.Transport
             level.NumAnimCommands = (uint)cmds.Count;
         }
 
-        public static void AddMovingBlockSFX(TRLevel level)
+        public static void AddMovingBlockSFX(TR1Level level)
         {
             // ToQ moving blocks are silent but we want them to scrape along the floor when they move.
             // Import the trapdoor closing SFX from Vilcabamba and adjust the animations accordingly.
 
             if (level.SoundMap[162] == -1)
             {
-                TRLevel vilcabamba = new TR1LevelReader().ReadLevel(TRLevelNames.VILCABAMBA);
+                TR1Level vilcabamba = new TR1LevelReader().ReadLevel(TR1LevelNames.VILCABAMBA);
                 SoundUtilities.ImportLevelSound(level, vilcabamba, new short[] { 162 });
             }
 

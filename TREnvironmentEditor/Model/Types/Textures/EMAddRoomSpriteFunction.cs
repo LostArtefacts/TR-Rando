@@ -11,7 +11,7 @@ namespace TREnvironmentEditor.Model.Types
         public EMRoomVertex Vertex { get; set; }
         public List<EMLocation> Locations { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             foreach (EMLocation location in Locations)

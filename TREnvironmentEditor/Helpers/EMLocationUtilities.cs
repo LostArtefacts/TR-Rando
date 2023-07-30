@@ -10,7 +10,7 @@ namespace TREnvironmentEditor.Helpers
 {
     public static class EMLocationUtilities
     {
-        public static int GetContainedSecretEntity(this EMLocation location, TRLevel level, FDControl floorData)
+        public static int GetContainedSecretEntity(this EMLocation location, TR1Level level, FDControl floorData)
         {
             TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
             return GetSectorSecretEntity(sector, floorData);

@@ -10,7 +10,7 @@ namespace TREnvironmentEditor.Model.Types
         public short EntityType { get; set; }
         public Dictionary<int, Dictionary<short, EMLocation>> RoomMap { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             List<TREntity> entities = level.Entities.ToList().FindAll(e => e.TypeID == EntityType);
             AdjustEntities(entities);

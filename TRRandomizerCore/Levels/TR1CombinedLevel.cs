@@ -14,7 +14,7 @@ namespace TRRandomizerCore.Levels
         /// <summary>
         /// The main level data stored in the corresponding .PHD file.
         /// </summary>
-        public TRLevel Data { get; set; }
+        public TR1Level Data { get; set; }
 
         /// <summary>
         /// The scripting information for the level stored in Tomb1Main_gameflow.json5.
@@ -63,12 +63,12 @@ namespace TRRandomizerCore.Levels
         /// <summary>
         /// Checks if the current level is the assault course.
         /// </summary>
-        public bool IsAssault => Is(TRLevelNames.ASSAULT);
+        public bool IsAssault => Is(TR1LevelNames.ASSAULT);
 
         /// <summary>
         /// Tests if this level is the Steam/GoG version of Great Pyramid.
         /// </summary>
-        public bool IsSteamPyramid => Is(TRLevelNames.PYRAMID) && Checksum == _steamPyramidChecksum;
+        public bool IsSteamPyramid => Is(TR1LevelNames.PYRAMID) && Checksum == _steamPyramidChecksum;
 
         /// <summary>
         /// Returns {Name}-Steam if IsSteamPyramid, otherwise just {Name}.

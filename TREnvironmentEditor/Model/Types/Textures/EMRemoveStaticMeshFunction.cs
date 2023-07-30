@@ -10,7 +10,7 @@ namespace TREnvironmentEditor.Model.Types
         public EMLocation Location { get; set; }
         public Dictionary<ushort, List<int>> ClearFromRooms { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
 

@@ -11,7 +11,7 @@ namespace TREnvironmentEditor.Model.Types
         public short AdjoiningRoom { get; set; }
         public Dictionary<int, TRVertex> VertexChanges { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = new EMLevelData { NumRooms = level.NumRooms };
             AdjustPortal(Array.Find(level.Rooms[data.ConvertRoom(BaseRoom)].Portals, p => p.AdjoiningRoom == data.ConvertRoom(AdjoiningRoom)));

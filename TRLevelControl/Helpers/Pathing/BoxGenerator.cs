@@ -8,7 +8,7 @@ namespace TRLevelControl.Helpers.Pathing
 {
     public class BoxGenerator
     {
-        public void Generate(TRRoom room, TRLevel level, TRRoomSector linkedSector)
+        public void Generate(TRRoom room, TR1Level level, TRRoomSector linkedSector)
         {
             Room boxRoom = Room.Create(room);
             Generate(boxRoom, (int)level.NumBoxes);

@@ -21,35 +21,35 @@ namespace TRRandomizerCore.Randomizers
         // The number of extra pickups to add per level
         private static readonly Dictionary<string, int> _extraItemCounts = new Dictionary<string, int>
         {
-            [TRLevelNames.CAVES]
+            [TR1LevelNames.CAVES]
                 = 10, // Default = 4
-            [TRLevelNames.VILCABAMBA]
+            [TR1LevelNames.VILCABAMBA]
                 = 9,  // Default = 7
-            [TRLevelNames.VALLEY]
+            [TR1LevelNames.VALLEY]
                 = 15, // Default = 2
-            [TRLevelNames.QUALOPEC]
+            [TR1LevelNames.QUALOPEC]
                 = 6,  // Default = 5
-            [TRLevelNames.FOLLY]
+            [TR1LevelNames.FOLLY]
                 = 8,  // Default = 8
-            [TRLevelNames.COLOSSEUM]
+            [TR1LevelNames.COLOSSEUM]
                 = 11, // Default = 7
-            [TRLevelNames.MIDAS]
+            [TR1LevelNames.MIDAS]
                 = 4,  // Default = 12
-            [TRLevelNames.CISTERN]
+            [TR1LevelNames.CISTERN]
                 = 0,  // Default = 16
-            [TRLevelNames.TIHOCAN]
+            [TR1LevelNames.TIHOCAN]
                 = 0,  // Default = 16
-            [TRLevelNames.KHAMOON]
+            [TR1LevelNames.KHAMOON]
                 = 0,  // Default = 18
-            [TRLevelNames.OBELISK]
+            [TR1LevelNames.OBELISK]
                 = 0,  // Default = 26
-            [TRLevelNames.SANCTUARY]
+            [TR1LevelNames.SANCTUARY]
                 = 0,  // Default = 22
-            [TRLevelNames.MINES]
+            [TR1LevelNames.MINES]
                 = 0,  // Default = 16
-            [TRLevelNames.ATLANTIS]
+            [TR1LevelNames.ATLANTIS]
                 = 0,  // Default = 44
-            [TRLevelNames.PYRAMID]
+            [TR1LevelNames.PYRAMID]
                 = 0,  // Default = 21
         };
 
@@ -451,7 +451,7 @@ namespace TRRandomizerCore.Randomizers
             _levelInstance.Data.SpriteTextures = _spriteRandomizer.Textures.ToArray();
         }
 
-        private bool IsSecretItem(TREntity entity, int entityIndex, TRLevel level, FDControl floorData)
+        private bool IsSecretItem(TREntity entity, int entityIndex, TR1Level level, FDControl floorData)
         {
             TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
             if (sector.FDIndex != 0)

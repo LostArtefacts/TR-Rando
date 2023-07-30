@@ -10,7 +10,7 @@ namespace TREnvironmentEditor.Model.Types
         public Dictionary<short, Dictionary<EMTextureFaceType, Dictionary<int, int>>> FaceMap { get; set; }
         public Dictionary<short, TR3RoomVertex> RoomMap { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
 

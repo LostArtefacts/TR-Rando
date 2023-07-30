@@ -9,7 +9,7 @@ namespace TRModelTransporter.Handlers
 {
     public class ColourTransportHandler
     {
-        public void Export(TRLevel level, TR1ModelDefinition definition)
+        public void Export(TR1Level level, TR1ModelDefinition definition)
         {
             definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette);
         }
@@ -68,7 +68,7 @@ namespace TRModelTransporter.Handlers
             return colourIndices;
         }
 
-        public void Import(TRLevel level, TR1ModelDefinition definition, TR1PaletteManager paletteManager)
+        public void Import(TR1Level level, TR1ModelDefinition definition, TR1PaletteManager paletteManager)
         {
             Dictionary<int, int> indexMap = new Dictionary<int, int>();
 

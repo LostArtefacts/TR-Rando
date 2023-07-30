@@ -9,7 +9,7 @@ namespace TREnvironmentEditor.Model
         public EMEditorSet Leader { get; set; }
         public List<EMEditorSet> Followers { get; set; }
 
-        public void ApplyToLevel(TRLevel level, EMEditorSet follower, EMOptions options)
+        public void ApplyToLevel(TR1Level level, EMEditorSet follower, EMOptions options)
         {
             if (Leader.IsApplicable(options) && follower.IsApplicable(options))
             {

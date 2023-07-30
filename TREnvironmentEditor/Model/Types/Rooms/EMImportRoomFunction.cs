@@ -29,7 +29,7 @@ namespace TREnvironmentEditor.Model.Types
             RectangleTexture = TriangleTexture = ushort.MaxValue;
         }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             // Not yet implemented, plan is to rework this class to read level files instead of JSON
             throw new NotImplementedException();

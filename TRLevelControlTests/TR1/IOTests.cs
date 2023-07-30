@@ -12,30 +12,30 @@ namespace TRLevelControlTests.TR1;
 public class IOTests : TestBase
 {
     [TestMethod]
-    [DataRow(TRLevelNames.ASSAULT)]
-    [DataRow(TRLevelNames.CAVES)]
-    [DataRow(TRLevelNames.VILCABAMBA)]
-    [DataRow(TRLevelNames.VALLEY)]
-    [DataRow(TRLevelNames.QUALOPEC)]
-    [DataRow(TRLevelNames.QUALOPEC_CUT)]
-    [DataRow(TRLevelNames.FOLLY)]
-    [DataRow(TRLevelNames.COLOSSEUM)]
-    [DataRow(TRLevelNames.MIDAS)]
-    [DataRow(TRLevelNames.CISTERN)]
-    [DataRow(TRLevelNames.TIHOCAN)]
-    [DataRow(TRLevelNames.TIHOCAN_CUT)]
-    [DataRow(TRLevelNames.KHAMOON)]
-    [DataRow(TRLevelNames.OBELISK)]
-    [DataRow(TRLevelNames.SANCTUARY)]
-    [DataRow(TRLevelNames.MINES)]
-    [DataRow(TRLevelNames.MINES_CUT)]
-    [DataRow(TRLevelNames.ATLANTIS)]
-    [DataRow(TRLevelNames.ATLANTIS_CUT)]
-    [DataRow(TRLevelNames.PYRAMID)]
-    [DataRow(TRLevelNames.EGYPT)]
-    [DataRow(TRLevelNames.CAT)]
-    [DataRow(TRLevelNames.HIVE)]
-    [DataRow(TRLevelNames.STRONGHOLD)]
+    [DataRow(TR1LevelNames.ASSAULT)]
+    [DataRow(TR1LevelNames.CAVES)]
+    [DataRow(TR1LevelNames.VILCABAMBA)]
+    [DataRow(TR1LevelNames.VALLEY)]
+    [DataRow(TR1LevelNames.QUALOPEC)]
+    [DataRow(TR1LevelNames.QUALOPEC_CUT)]
+    [DataRow(TR1LevelNames.FOLLY)]
+    [DataRow(TR1LevelNames.COLOSSEUM)]
+    [DataRow(TR1LevelNames.MIDAS)]
+    [DataRow(TR1LevelNames.CISTERN)]
+    [DataRow(TR1LevelNames.TIHOCAN)]
+    [DataRow(TR1LevelNames.TIHOCAN_CUT)]
+    [DataRow(TR1LevelNames.KHAMOON)]
+    [DataRow(TR1LevelNames.OBELISK)]
+    [DataRow(TR1LevelNames.SANCTUARY)]
+    [DataRow(TR1LevelNames.MINES)]
+    [DataRow(TR1LevelNames.MINES_CUT)]
+    [DataRow(TR1LevelNames.ATLANTIS)]
+    [DataRow(TR1LevelNames.ATLANTIS_CUT)]
+    [DataRow(TR1LevelNames.PYRAMID)]
+    [DataRow(TR1LevelNames.EGYPT)]
+    [DataRow(TR1LevelNames.CAT)]
+    [DataRow(TR1LevelNames.HIVE)]
+    [DataRow(TR1LevelNames.STRONGHOLD)]
     public void TestReadWrite(string levelName)
     {
         ReadWriteLevel(levelName, TRGameVersion.TR1);
@@ -44,7 +44,7 @@ public class IOTests : TestBase
     [TestMethod]
     public void Floordata_ReadWrite_DefaultTest()
     {
-        TRLevel lvl = GetTR1Level(TRLevelNames.ATLANTIS);
+        TR1Level lvl = GetTR1Level(TR1LevelNames.ATLANTIS);
 
         //Store the original floordata from the level
         ushort[] originalFData = new ushort[lvl.NumFloorData];
@@ -66,7 +66,7 @@ public class IOTests : TestBase
     [TestMethod]
     public void ModifyZonesTest()
     {
-        TRLevel lvl = GetTR1Level(TRLevelNames.CAVES);
+        TR1Level lvl = GetTR1Level(TR1LevelNames.CAVES);
 
         // For every box, store the current zone. We use the serialized form
         // for comparison.
@@ -94,7 +94,7 @@ public class IOTests : TestBase
         Assert.AreEqual(TR1BoxUtilities.FlattenZones(lvl.Zones).Length, (int)(6 * lvl.NumBoxes));
 
         // Write and re-read the level
-        lvl = WriteReadTempLevel(lvl, TRLevelNames.CAVES);
+        lvl = WriteReadTempLevel(lvl, TR1LevelNames.CAVES);
 
         // Capture all of the zones again. Make sure the addition of the zone above didn't
         // affect any of the others and that the addition itself matches after IO.
@@ -113,7 +113,7 @@ public class IOTests : TestBase
     [TestMethod]
     public void ResortSoundsTest()
     {
-        TRLevel lvl = GetTR1Level(TRLevelNames.CAVES);
+        TR1Level lvl = GetTR1Level(TR1LevelNames.CAVES);
 
         byte[] lvlBeforeSort = lvl.Serialize();
 

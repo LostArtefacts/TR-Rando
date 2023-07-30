@@ -31,8 +31,8 @@ namespace TRRandomizerCore.Randomizers
         private static readonly double _partialGymChance = (double)1 / 3;
         private static readonly List<string> _permittedGymLevels = new List<string>
         {
-            TRLevelNames.CAVES, TRLevelNames.VILCABAMBA, TRLevelNames.FOLLY,
-            TRLevelNames.COLOSSEUM, TRLevelNames.CISTERN, TRLevelNames.TIHOCAN
+            TR1LevelNames.CAVES, TR1LevelNames.VILCABAMBA, TR1LevelNames.FOLLY,
+            TR1LevelNames.COLOSSEUM, TR1LevelNames.CISTERN, TR1LevelNames.TIHOCAN
         };
 
         internal TR1TextureMonitorBroker TextureMonitor { get; set; }
@@ -91,7 +91,7 @@ namespace TRRandomizerCore.Randomizers
 
         private void ChooseFilteredLevels()
         {
-            TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TRLevelNames.ASSAULT));
+            TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
             ISet<TR1ScriptedLevel> exlusions = new HashSet<TR1ScriptedLevel> { assaultCourse };
 
             // "Haircut" settings = hair extensions in TR1
@@ -127,7 +127,7 @@ namespace TRRandomizerCore.Randomizers
                 }
 
                 // Cache Lara's barefoot SFX from the original Gym.
-                TRLevel gym = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TRLevelNames.ASSAULT));
+                TR1Level gym = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TR1LevelNames.ASSAULT));
                 _barefootSfx = new Dictionary<short, List<byte[]>>();
                 foreach (short soundID in _barefootSfxIDs)
                 {
@@ -141,7 +141,7 @@ namespace TRRandomizerCore.Randomizers
             _mauledLevels = new List<TR1ScriptedLevel>();
             foreach (TR1ScriptedLevel level in Levels)
             {
-                if (IsInvisibleLevel(level) || IsGymLevel(level) || level.Is(TRLevelNames.MIDAS))
+                if (IsInvisibleLevel(level) || IsGymLevel(level) || level.Is(TR1LevelNames.MIDAS))
                 {
                     continue;
                 }
@@ -159,7 +159,7 @@ namespace TRRandomizerCore.Randomizers
                 }
 
                 // Extra check for Valley and ToQ as they have this anim by default.
-                if ((level.Is(TRLevelNames.VALLEY) || level.Is(TRLevelNames.QUALOPEC)) && !_mauledLevels.Contains(level) && _generator.NextDouble() < _mauledLaraChance)
+                if ((level.Is(TR1LevelNames.VALLEY) || level.Is(TR1LevelNames.QUALOPEC)) && !_mauledLevels.Contains(level) && _generator.NextDouble() < _mauledLaraChance)
                 {
                     _mauledLevels.Add(level);
                 }
@@ -262,7 +262,7 @@ namespace TRRandomizerCore.Randomizers
                             ImportBraid(level);
                         }
                     }
-                    else if (level.Is(TRLevelNames.VALLEY))
+                    else if (level.Is(TR1LevelNames.VALLEY))
                     {
                         // The global setting may be on so we need to hide the OG braid
                         HideEntities(level, _ponytailEntities);
@@ -328,7 +328,7 @@ namespace TRRandomizerCore.Randomizers
                 ushort plainHairTri = ponytailMeshes[5].TexturedTriangles[0].Texture;
 
                 Dictionary<TREntities, Dictionary<EMTextureFaceType, int[]>> headAmendments = _headAmendments;
-                if (level.Is(TRLevelNames.TIHOCAN_CUT) || level.Is(TRLevelNames.ATLANTIS_CUT))
+                if (level.Is(TR1LevelNames.TIHOCAN_CUT) || level.Is(TR1LevelNames.ATLANTIS_CUT))
                 {
                     headAmendments = new Dictionary<TREntities, Dictionary<EMTextureFaceType, int[]>>
                     {
@@ -409,7 +409,7 @@ namespace TRRandomizerCore.Randomizers
 
                 // Repeat the process if there is a cutscene after this level.
                 // Skip Mines because CutsceneActor1 is Natla, not Lara.
-                if (level.HasCutScene && !level.CutSceneLevel.Is(TRLevelNames.MINES_CUT))
+                if (level.HasCutScene && !level.CutSceneLevel.Is(TR1LevelNames.MINES_CUT))
                 {
                     HideEntities(level.CutSceneLevel, entities);
                 }
@@ -462,7 +462,7 @@ namespace TRRandomizerCore.Randomizers
 
             private bool CutsceneSupportsBraid(TR1CombinedLevel parentLevel)
             {
-                if (!parentLevel.HasCutScene || parentLevel.Is(TRLevelNames.MINES))
+                if (!parentLevel.HasCutScene || parentLevel.Is(TR1LevelNames.MINES))
                 {
                     return false;
                 }
@@ -474,7 +474,7 @@ namespace TRRandomizerCore.Randomizers
                     return false;
                 }
 
-                if (parentLevel.Is(TRLevelNames.ATLANTIS))
+                if (parentLevel.Is(TR1LevelNames.ATLANTIS))
                 {
                     // Lara's head may be Natla's or Pierre's, so only support the braid if
                     // the mesh is the original.
@@ -696,7 +696,7 @@ namespace TRRandomizerCore.Randomizers
                 }
             }
 
-            private void CopyMeshParts(TRLevel level, MeshCopyData data)
+            private void CopyMeshParts(TR1Level level, MeshCopyData data)
             {
                 MeshEditor editor = new MeshEditor();
                 TRMeshUtilities.InsertMesh(level, editor.Mesh = editor.CloneMesh(data.NewMesh));
@@ -791,7 +791,7 @@ namespace TRRandomizerCore.Randomizers
                 TRMesh[] laraShotgun = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraShotgunAnim_H);
                 TRMesh[] laraMisc = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraMiscAnim_H);
 
-                if (level.Is(TRLevelNames.QUALOPEC_CUT))
+                if (level.Is(TR1LevelNames.QUALOPEC_CUT))
                 {
                     // This model is completely different to all others, so just
                     // duplicate the mauled meshes in this case.
@@ -858,7 +858,7 @@ namespace TRRandomizerCore.Randomizers
                     MergeColouredTrianglesToTexture(level.Data, meshes[4], laraMisc[4], new int[] { 12, 8 }, 3, 3);
                 }
 
-                if (level.HasCutScene && !level.Is(TRLevelNames.MINES))
+                if (level.HasCutScene && !level.Is(TR1LevelNames.MINES))
                 {
                     TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
                     {
@@ -908,7 +908,7 @@ namespace TRRandomizerCore.Randomizers
                 RotateFace(face, rotations);
             }
 
-            private void MergeColouredTrianglesToTexture(TRLevel level, TRMesh baseMesh, TRMesh copyMesh, int[] triangleIndices, int copyIndex, int rotations)
+            private void MergeColouredTrianglesToTexture(TR1Level level, TRMesh baseMesh, TRMesh copyMesh, int[] triangleIndices, int copyIndex, int rotations)
             {
                 MeshEditor editor = new MeshEditor();
                 editor.Mesh = baseMesh;

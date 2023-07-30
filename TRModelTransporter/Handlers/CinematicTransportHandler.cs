@@ -8,7 +8,7 @@ namespace TRModelTransporter.Handlers
 {
     public class CinematicTransportHandler
     {
-        public void Export(TRLevel level, TR1ModelDefinition definition, IEnumerable<TREntities> entityTypes)
+        public void Export(TR1Level level, TR1ModelDefinition definition, IEnumerable<TREntities> entityTypes)
         {
             List<TRCinematicFrame> frames = new List<TRCinematicFrame>();
             if (entityTypes != null && entityTypes.Contains(definition.Entity))
@@ -41,7 +41,7 @@ namespace TRModelTransporter.Handlers
             definition.CinematicFrames = frames.ToArray();
         }
 
-        public void Import(TRLevel level, TR1ModelDefinition definition)
+        public void Import(TR1Level level, TR1ModelDefinition definition)
         {
             // We only import frames if the level doesn't have any already.
             if (level.NumCinematicFrames == 0)

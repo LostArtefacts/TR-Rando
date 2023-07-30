@@ -41,7 +41,7 @@ namespace LocationExport
             }
             else if (levelType == "TR1")
             {
-                foreach (string lvl in TRLevelNames.AsList)
+                foreach (string lvl in TR1LevelNames.AsList)
                 {
                     if (File.Exists(lvl))
                     {
@@ -147,7 +147,7 @@ namespace LocationExport
 
         private static List<Location> ExportTR1Locations(string lvl)
         {
-            TRLevel level = _reader1.ReadLevel(lvl);
+            TR1Level level = _reader1.ReadLevel(lvl);
             List<Location> exclusions = new List<Location>();
             if (_allTR1Exclusions.ContainsKey(lvl))
             {

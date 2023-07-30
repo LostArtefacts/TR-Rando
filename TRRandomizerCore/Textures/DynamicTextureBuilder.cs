@@ -115,12 +115,12 @@ namespace TRRandomizerCore.Textures
             {
                 // Cutscene actors vary between levels so we can't include all by default. These
                 // are the only ones we want to change.
-                if (level.Is(TRLevelNames.MINES_CUT))
+                if (level.Is(TR1LevelNames.MINES_CUT))
                 {
                     modelIDs.Add(TREntities.CutsceneActor1); // ScionHolder
                     modelIDs.Add(TREntities.CutsceneActor3); // Scion
                 }
-                else if (level.Is(TRLevelNames.ATLANTIS_CUT))
+                else if (level.Is(TR1LevelNames.ATLANTIS_CUT))
                 {
                     modelIDs.Add(TREntities.CutsceneActor2); // ScionHolder
                     modelIDs.Add(TREntities.CutsceneActor4); // Scion
@@ -129,7 +129,7 @@ namespace TRRandomizerCore.Textures
             else
             {
                 hips = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara)[0];
-                if (level.Is(TRLevelNames.MIDAS))
+                if (level.Is(TR1LevelNames.MIDAS))
                 {
                     modelIDs.Add(TREntities.LaraMiscAnim_H);
                     modelIDs.Add(TREntities.LaraPonytail_H_U);
@@ -229,7 +229,7 @@ namespace TRRandomizerCore.Textures
             }
         }
 
-        private void AddModelTextures(TRLevel level, TRModel model, TRMesh dummyMesh, ISet<int> textures, ISet<TRMesh> meshCollection)
+        private void AddModelTextures(TR1Level level, TRModel model, TRMesh dummyMesh, ISet<int> textures, ISet<TRMesh> meshCollection)
         {
             TREntities modelID = (TREntities)model.ID;
             if (TextureMonitor?.RemovedTextures?.Contains(modelID) ?? false)
@@ -312,7 +312,7 @@ namespace TRRandomizerCore.Textures
             }
         }
 
-        private void DuplicateMeshTextures(TRLevel level, TRMesh mesh)
+        private void DuplicateMeshTextures(TR1Level level, TRMesh mesh)
         {
             using (TR1TexturePacker packer = new TR1TexturePacker(level))
             {
@@ -387,7 +387,7 @@ namespace TRRandomizerCore.Textures
                 textures.Add(f.Texture);
         }
 
-        private void AddSpriteTextures(TRLevel level, TREntities spriteID, ISet<int> textures)
+        private void AddSpriteTextures(TR1Level level, TREntities spriteID, ISet<int> textures)
         {
             TRSpriteSequence sequence = Array.Find(level.SpriteSequences, s => s.SpriteID == (int)spriteID);
             if (sequence != null)

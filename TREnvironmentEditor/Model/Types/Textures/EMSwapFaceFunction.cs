@@ -10,7 +10,7 @@ namespace TREnvironmentEditor.Model.Types
         public EMTextureFaceType FaceType { get; set; }
         public Dictionary<int, int> Swaps { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             TRRoom room = level.Rooms[data.ConvertRoom(RoomIndex)];

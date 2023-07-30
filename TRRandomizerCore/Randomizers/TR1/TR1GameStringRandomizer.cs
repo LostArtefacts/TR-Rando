@@ -50,8 +50,8 @@ namespace TRRandomizerCore.Randomizers
         private void AmendDefaultStrings()
         {
             List<AbstractTRScriptedLevel> levels = ScriptEditor.Levels.ToList();
-            AbstractTRScriptedLevel cistern = levels.Find(l => l.Is(TRLevelNames.CISTERN));
-            AbstractTRScriptedLevel mines = levels.Find(l => l.Is(TRLevelNames.MINES));
+            AbstractTRScriptedLevel cistern = levels.Find(l => l.Is(TR1LevelNames.CISTERN));
+            AbstractTRScriptedLevel mines = levels.Find(l => l.Is(TR1LevelNames.MINES));
 
             // Duplicate whatever Cistern has for "Rusty Key" into Mines
             mines.Keys.Add(cistern.Keys.Count > 2 ? cistern.Keys[2] : "Rusty Key");

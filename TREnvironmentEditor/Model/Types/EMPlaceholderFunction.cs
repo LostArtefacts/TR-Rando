@@ -6,7 +6,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         // NOOP
 
-        public override void ApplyToLevel(TRLevel level) { }
+        public override void ApplyToLevel(TR1Level level) { }
 
         public override void ApplyToLevel(TR2Level level) { }
 

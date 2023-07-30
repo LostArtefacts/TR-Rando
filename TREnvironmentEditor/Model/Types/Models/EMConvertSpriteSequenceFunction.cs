@@ -8,7 +8,7 @@ namespace TREnvironmentEditor.Model.Types
         public short OldSpriteID { get; set; }
         public short NewSpriteID { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             ConvertSpriteSequence(level.SpriteSequences);
             UpdateSpriteEntities(level.Entities);

@@ -7,46 +7,46 @@ using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Utilities
 {
-    public class TR1LocationGenerator : AbstractLocationGenerator<TRLevel>
+    public class TR1LocationGenerator : AbstractLocationGenerator<TR1Level>
     {
         public override bool CrawlspacesAllowed => false;
 
-        protected override void ReadFloorData(TRLevel level)
+        protected override void ReadFloorData(TR1Level level)
         {
             _floorData.ParseFromLevel(level);
         }
 
-        protected override TRRoomSector GetSector(Location location, TRLevel level)
+        protected override TRRoomSector GetSector(Location location, TR1Level level)
         {
             return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, (short)location.Room, level, _floorData);
         }
 
-        protected override List<TRRoomSector> GetRoomSectors(TRLevel level, int room)
+        protected override List<TRRoomSector> GetRoomSectors(TR1Level level, int room)
         {
             return level.Rooms[room].Sectors.ToList();
         }
 
-        protected override List<TRStaticMesh> GetStaticMeshes(TRLevel level)
+        protected override List<TRStaticMesh> GetStaticMeshes(TR1Level level)
         {
             return level.StaticMeshes.ToList();
         }
 
-        protected override int GetRoomCount(TRLevel level)
+        protected override int GetRoomCount(TR1Level level)
         {
             return level.NumRooms;
         }
 
-        protected override short GetFlipMapRoom(TRLevel level, short room)
+        protected override short GetFlipMapRoom(TR1Level level, short room)
         {
             return level.Rooms[room].AlternateRoom;
         }
 
-        protected override bool IsRoomValid(TRLevel level, short room)
+        protected override bool IsRoomValid(TR1Level level, short room)
         {
             return true;
         }
 
-        protected override Dictionary<ushort, List<Location>> GetRoomStaticMeshLocations(TRLevel level, short room)
+        protected override Dictionary<ushort, List<Location>> GetRoomStaticMeshLocations(TR1Level level, short room)
         {
             Dictionary<ushort, List<Location>> locations = new Dictionary<ushort, List<Location>>();
             foreach (TRRoomStaticMesh staticMesh in level.Rooms[room].StaticMeshes)
@@ -68,17 +68,17 @@ namespace TRRandomizerCore.Utilities
             return locations;
         }
 
-        protected override ushort GetRoomDepth(TRLevel level, short room)
+        protected override ushort GetRoomDepth(TR1Level level, short room)
         {
             return level.Rooms[room].NumZSectors;
         }
 
-        protected override int GetRoomYTop(TRLevel level, short room)
+        protected override int GetRoomYTop(TR1Level level, short room)
         {
             return level.Rooms[room].Info.YTop;
         }
 
-        protected override Vector2 GetRoomPosition(TRLevel level, short room)
+        protected override Vector2 GetRoomPosition(TR1Level level, short room)
         {
             return new Vector2(level.Rooms[room].Info.X, level.Rooms[room].Info.Z);
         }

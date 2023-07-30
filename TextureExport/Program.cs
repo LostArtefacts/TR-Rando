@@ -81,7 +81,7 @@ namespace TextureExport
             }
             else if (levelType == "tr1")
             {
-                foreach (string lvl in TRLevelNames.AsOrderedList)
+                foreach (string lvl in TR1LevelNames.AsOrderedList)
                 {
                     if (File.Exists(lvl))
                     {
@@ -91,7 +91,7 @@ namespace TextureExport
             }
             else if (levelType == "tr1g")
             {
-                foreach (string lvl in TRLevelNames.AsListGold)
+                foreach (string lvl in TR1LevelNames.AsListGold)
                 {
                     if (File.Exists(lvl))
                     {
@@ -147,7 +147,7 @@ namespace TextureExport
             return (TRFileVersion)reader.ReadUInt32();
         }
 
-        static void ExportAllTextures(string lvl, TRLevel inst, Mode mode)
+        static void ExportAllTextures(string lvl, TR1Level inst, Mode mode)
         {
             switch (mode)
             {

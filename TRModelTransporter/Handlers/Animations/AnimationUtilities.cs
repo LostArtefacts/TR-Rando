@@ -9,7 +9,7 @@ namespace TRModelTransporter.Handlers
 {
     public static class AnimationUtilities
     {
-        public static int GetModelAnimationCount(TRLevel level, TRModel model)
+        public static int GetModelAnimationCount(TR1Level level, TRModel model)
         {
             return GetModelAnimationCount(level.Models, model, level.NumAnimations);
         }
@@ -46,7 +46,7 @@ namespace TRModelTransporter.Handlers
             return model.Animation == ushort.MaxValue ? 0 : nextStartAnimation - model.Animation;
         }
 
-        public static void PackStateChanges(TRLevel level, TRAnimation animation, TR1PackedAnimation packedAnimation)
+        public static void PackStateChanges(TR1Level level, TRAnimation animation, TR1PackedAnimation packedAnimation)
         {
             for (int stateChangeIndex = 0; stateChangeIndex < animation.NumStateChanges; stateChangeIndex++)
             {
@@ -103,7 +103,7 @@ namespace TRModelTransporter.Handlers
             }
         }
 
-        public static void PackAnimCommands(TRLevel level, TRAnimation animation, TR1PackedAnimation packedAnimation)
+        public static void PackAnimCommands(TR1Level level, TRAnimation animation, TR1PackedAnimation packedAnimation)
         {
             packedAnimation.Commands = PackAnimCommands(level.AnimCommands, animation);
         }
@@ -160,7 +160,7 @@ namespace TRModelTransporter.Handlers
             return cmds;
         }
 
-        public static void PackAnimSounds(TRLevel level, TR1PackedAnimation packedAnimation)
+        public static void PackAnimSounds(TR1Level level, TR1PackedAnimation packedAnimation)
         {
             PackAnimSounds(level.SoundMap, level.SoundDetails, level.SampleIndices, level.Samples, packedAnimation);
         }
@@ -270,7 +270,7 @@ namespace TRModelTransporter.Handlers
             }
         }
 
-        public static ushort[] GetAnimationFrames(TRLevel level, TRModel model)
+        public static ushort[] GetAnimationFrames(TR1Level level, TRModel model)
         {
             return GetAnimationFrames(model, level.Models, level.Frames);
         }
@@ -449,7 +449,7 @@ namespace TRModelTransporter.Handlers
             }
         }
 
-        public static void UnpackAnimSounds(TRLevel level, TR1PackedAnimation packedAnimation)
+        public static void UnpackAnimSounds(TR1Level level, TR1PackedAnimation packedAnimation)
         {
             SoundUnpacker soundUnpacker = new SoundUnpacker();
             soundUnpacker.Unpack(packedAnimation.Sound, level, false);
@@ -488,7 +488,7 @@ namespace TRModelTransporter.Handlers
             }
         }
 
-        public static int UnpackAnimation(TRLevel level, TR1PackedAnimation animation)
+        public static int UnpackAnimation(TR1Level level, TR1PackedAnimation animation)
         {
             List<TRAnimation> levelAnimations = level.Animations.ToList();
             levelAnimations.Add(animation.Animation);
@@ -518,7 +518,7 @@ namespace TRModelTransporter.Handlers
             return levelAnimations.Count - 1;
         }
 
-        public static void ImportAnimationFrames(TRLevel level, TR1ModelDefinition definition)
+        public static void ImportAnimationFrames(TR1Level level, TR1ModelDefinition definition)
         {
             List<ushort> levelFrames = level.Frames.ToList();
             definition.Model.FrameOffset = (uint)levelFrames.Count * 2;

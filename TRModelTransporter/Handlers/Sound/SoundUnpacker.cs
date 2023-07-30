@@ -21,7 +21,7 @@ namespace TRModelTransporter.Handlers
 
         public IReadOnlyDictionary<int, int> SoundIndexMap => _soundIndexMap;
 
-        public void Unpack(TR1PackedSound sound, TRLevel level, bool retainInternalIndices = false)
+        public void Unpack(TR1PackedSound sound, TR1Level level, bool retainInternalIndices = false)
         {
             Dictionary<uint, uint> sampleDataMap = ImportSamples(level, sound.Samples);
             GenerateSampleMap(level.SampleIndices, sound.SampleIndices, sampleDataMap);
@@ -64,7 +64,7 @@ namespace TRModelTransporter.Handlers
             level.NumSoundDetails = (uint)soundDetails.Count;
         }
 
-        private Dictionary<uint, uint> ImportSamples(TRLevel level, Dictionary<uint, byte[]> sampleData)
+        private Dictionary<uint, uint> ImportSamples(TR1Level level, Dictionary<uint, byte[]> sampleData)
         {
             // For TR1, sample WAVs are stored in the level files so we need to import each one provided
             // they don't already exist. Remap the sound keys to the new offset into Samples[].
@@ -201,7 +201,7 @@ namespace TRModelTransporter.Handlers
             );
         }
 
-        private void GenerateSoundIndexMap(TRLevel level, bool retainInternalIndices, Dictionary<int, short> packedSoundMapIndices)
+        private void GenerateSoundIndexMap(TR1Level level, bool retainInternalIndices, Dictionary<int, short> packedSoundMapIndices)
         {
             _soundIndexMap = new Dictionary<int, int>();
             if (retainInternalIndices)

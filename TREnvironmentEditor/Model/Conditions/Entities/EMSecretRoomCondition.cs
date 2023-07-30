@@ -15,7 +15,7 @@ namespace TREnvironmentEditor.Model.Conditions
         // Does a room contain a secret?
         public short RoomIndex { get; set; }
 
-        protected override bool Evaluate(TRLevel level)
+        protected override bool Evaluate(TR1Level level)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);

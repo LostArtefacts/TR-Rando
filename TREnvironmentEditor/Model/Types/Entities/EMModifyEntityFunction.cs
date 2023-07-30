@@ -12,7 +12,7 @@ namespace TREnvironmentEditor.Model.Types
         public short? Intensity2 { get; set; }
         public ushort? Flags { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             ModifyEntity(level.Entities[data.ConvertEntity(EntityIndex)]);

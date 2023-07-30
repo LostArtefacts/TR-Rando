@@ -6,7 +6,7 @@ namespace TREnvironmentEditor.Model.Conditions
 {
     public class EMUnconditionalBirdCheck : BaseEMCondition
     {
-        protected override bool Evaluate(TRLevel level)
+        protected override bool Evaluate(TR1Level level)
         {
             throw new NotSupportedException();
         }

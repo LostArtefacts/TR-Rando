@@ -11,7 +11,7 @@ namespace TREnvironmentEditor.Model.Types
         public bool? IsWindy { get; set; }
         public bool? IsSwamp { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             throw new NotSupportedException();
         }

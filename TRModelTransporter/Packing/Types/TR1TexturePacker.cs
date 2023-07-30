@@ -11,7 +11,7 @@ using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Packing
 {
-    public class TR1TexturePacker : AbstractTexturePacker<TREntities, TRLevel>
+    public class TR1TexturePacker : AbstractTexturePacker<TREntities, TR1Level>
     {
         private const int _maximumTiles = 16;
 
@@ -19,7 +19,7 @@ namespace TRModelTransporter.Packing
 
         public override uint NumLevelImages => Level.NumImages;
 
-        public TR1TexturePacker(TRLevel level, ITextureClassifier classifier = null)
+        public TR1TexturePacker(TR1Level level, ITextureClassifier classifier = null)
             : base(level, _maximumTiles, classifier) { }
 
         protected override List<AbstractIndexedTRTexture> LoadObjectTextures()

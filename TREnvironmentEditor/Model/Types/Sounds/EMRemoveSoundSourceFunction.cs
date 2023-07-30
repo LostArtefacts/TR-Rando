@@ -8,7 +8,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public TRSoundSource Source { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             // Can't remove by index in case several are called in succession
             List<TRSoundSource> sources = level.SoundSources.ToList();

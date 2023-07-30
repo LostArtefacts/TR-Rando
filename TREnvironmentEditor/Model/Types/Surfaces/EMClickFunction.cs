@@ -18,7 +18,7 @@ namespace TREnvironmentEditor.Model.Types
 
         protected List<EMLocation> _locations;
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             _locations = InitialiseLocations(data);

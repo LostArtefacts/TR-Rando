@@ -22,7 +22,7 @@ namespace TREnvironmentEditor.Model.Types
         public Dictionary<sbyte, List<int>> FloorHeights { get; set; }
         public Dictionary<sbyte, List<int>> CeilingHeights { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             TRRoom room = new TRRoom
             {

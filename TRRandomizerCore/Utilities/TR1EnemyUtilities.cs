@@ -163,7 +163,7 @@ namespace TRRandomizerCore.Utilities
             return entities;
         }
 
-        public static void SetEntityTriggers(TRLevel level, TREntity entity)
+        public static void SetEntityTriggers(TR1Level level, TREntity entity)
         {
             if (_oneShotEnemies.Contains((TREntities)entity.TypeID))
             {
@@ -239,7 +239,7 @@ namespace TRRandomizerCore.Utilities
             bool trexPresent = importEntities.Contains(TREntities.TRex);
             bool adamPresent = importEntities.Contains(TREntities.Adam);
 
-            if ((trexPresent || adamPresent) && (lvlName == TRLevelNames.SANCTUARY || lvlName == TRLevelNames.ATLANTIS))
+            if ((trexPresent || adamPresent) && (lvlName == TR1LevelNames.SANCTUARY || lvlName == TR1LevelNames.ATLANTIS))
             {
                 // We have to override the scion pickup animation otherwise death-by-adam will cause the level to end.
                 // Environment mods will deal with workarounds for the pickups.
@@ -251,16 +251,16 @@ namespace TRRandomizerCore.Utilities
                 {
                     // Essential MiscAnims - e.g. they contain level end triggers or cinematics.
                     // ToQ pickup cinematic works with T-Rex, but not Torso
-                    case TRLevelNames.QUALOPEC:
+                    case TR1LevelNames.QUALOPEC:
                         priorities[TREntities.LaraMiscAnim_H] = trexPresent ? TREntities.LaraMiscAnim_H_Valley : TREntities.LaraMiscAnim_H_Qualopec;
                         break;
-                    case TRLevelNames.MIDAS:
+                    case TR1LevelNames.MIDAS:
                         priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Midas;
                         break;
-                    case TRLevelNames.SANCTUARY:
+                    case TR1LevelNames.SANCTUARY:
                         priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Sanctuary;
                         break;
-                    case TRLevelNames.ATLANTIS:
+                    case TR1LevelNames.ATLANTIS:
                         priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Atlantis;
                         break;
 
@@ -346,7 +346,7 @@ namespace TRRandomizerCore.Utilities
 
         private static readonly Dictionary<string, List<RestrictedEnemyGroup>> _restrictedEnemyGroupCounts = new Dictionary<string, List<RestrictedEnemyGroup>>
         {
-            [TRLevelNames.CAVES] = new List<RestrictedEnemyGroup>
+            [TR1LevelNames.CAVES] = new List<RestrictedEnemyGroup>
             {
                 new RestrictedEnemyGroup
                 {
@@ -354,7 +354,7 @@ namespace TRRandomizerCore.Utilities
                     Enemies = _allAtlanteans
                 }
             },
-            [TRLevelNames.VILCABAMBA] = new List<RestrictedEnemyGroup>
+            [TR1LevelNames.VILCABAMBA] = new List<RestrictedEnemyGroup>
             {
                 new RestrictedEnemyGroup
                 {
@@ -362,7 +362,7 @@ namespace TRRandomizerCore.Utilities
                     Enemies = _allAtlanteans
                 }
             },
-            [TRLevelNames.VALLEY] = new List<RestrictedEnemyGroup>
+            [TR1LevelNames.VALLEY] = new List<RestrictedEnemyGroup>
             {
                 new RestrictedEnemyGroup
                 {
@@ -370,7 +370,7 @@ namespace TRRandomizerCore.Utilities
                     Enemies = _allAtlanteans
                 }
             },
-            [TRLevelNames.QUALOPEC] = new List<RestrictedEnemyGroup>
+            [TR1LevelNames.QUALOPEC] = new List<RestrictedEnemyGroup>
             {
                 new RestrictedEnemyGroup
                 {
@@ -383,7 +383,7 @@ namespace TRRandomizerCore.Utilities
                     Enemies = _allAtlanteans
                 }
             },
-            [TRLevelNames.FOLLY] = new List<RestrictedEnemyGroup>
+            [TR1LevelNames.FOLLY] = new List<RestrictedEnemyGroup>
             {
                 new RestrictedEnemyGroup
                 {
@@ -391,7 +391,7 @@ namespace TRRandomizerCore.Utilities
                     Enemies = _allAtlanteans
                 }
             },
-            [TRLevelNames.COLOSSEUM] = new List<RestrictedEnemyGroup>
+            [TR1LevelNames.COLOSSEUM] = new List<RestrictedEnemyGroup>
             {
                 new RestrictedEnemyGroup
                 {
@@ -399,7 +399,7 @@ namespace TRRandomizerCore.Utilities
                     Enemies = _allAtlanteans
                 }
             },
-            [TRLevelNames.MIDAS] = new List<RestrictedEnemyGroup>
+            [TR1LevelNames.MIDAS] = new List<RestrictedEnemyGroup>
             {
                 new RestrictedEnemyGroup
                 {
@@ -412,7 +412,7 @@ namespace TRRandomizerCore.Utilities
                     Enemies = new List<TREntities> { TREntities.TRex }
                 }
             },
-            [TRLevelNames.CISTERN] = new List<RestrictedEnemyGroup>
+            [TR1LevelNames.CISTERN] = new List<RestrictedEnemyGroup>
             {
                 new RestrictedEnemyGroup
                 {
@@ -420,7 +420,7 @@ namespace TRRandomizerCore.Utilities
                     Enemies = _allAtlanteans
                 }
             },
-            [TRLevelNames.TIHOCAN] = new List<RestrictedEnemyGroup>
+            [TR1LevelNames.TIHOCAN] = new List<RestrictedEnemyGroup>
             {
                 new RestrictedEnemyGroup
                 {
@@ -428,7 +428,7 @@ namespace TRRandomizerCore.Utilities
                     Enemies = _allAtlanteans
                 }
             },
-            [TRLevelNames.KHAMOON] = new List<RestrictedEnemyGroup>
+            [TR1LevelNames.KHAMOON] = new List<RestrictedEnemyGroup>
             {
                 new RestrictedEnemyGroup
                 {
@@ -436,7 +436,7 @@ namespace TRRandomizerCore.Utilities
                     Enemies = _allAtlanteans
                 }
             },
-            [TRLevelNames.OBELISK] = new List<RestrictedEnemyGroup>
+            [TR1LevelNames.OBELISK] = new List<RestrictedEnemyGroup>
             {
                 new RestrictedEnemyGroup
                 {
@@ -454,13 +454,13 @@ namespace TRRandomizerCore.Utilities
         // SkaterBoy and Natla can appear only in their OG levels in TombATI.
         private static readonly Dictionary<TREntities, string> _atiEnemyRestrictions = new Dictionary<TREntities, string>
         {
-            [TREntities.SkateboardKid] = TRLevelNames.MINES,
-            [TREntities.Natla] = TRLevelNames.PYRAMID,
+            [TREntities.SkateboardKid] = TR1LevelNames.MINES,
+            [TREntities.Natla] = TR1LevelNames.PYRAMID,
         };
 
         private static readonly Dictionary<string, List<TREntities>> _unsupportedEnemiesDefault = new Dictionary<string, List<TREntities>>
         {
-            [TRLevelNames.QUALOPEC] = new List<TREntities>
+            [TR1LevelNames.QUALOPEC] = new List<TREntities>
             {
                 TREntities.Adam
             }
@@ -469,11 +469,11 @@ namespace TRRandomizerCore.Utilities
         // Any enemies that must remain untouched in a given level
         private static readonly Dictionary<string, List<TREntities>> _requiredEnemies = new Dictionary<string, List<TREntities>>
         {
-            [TRLevelNames.QUALOPEC] = new List<TREntities>
+            [TR1LevelNames.QUALOPEC] = new List<TREntities>
             {
                 TREntities.Larson // Ends the level
             },
-            [TRLevelNames.PYRAMID] = new List<TREntities>
+            [TR1LevelNames.PYRAMID] = new List<TREntities>
             {
                 TREntities.Adam // Heavy trigger
             }
@@ -483,35 +483,35 @@ namespace TRRandomizerCore.Utilities
         // current total e.g. Caves becomes 5 types, Vilcabamba becomes 4 etc.
         private static readonly Dictionary<string, int> _enemyAdjustmentCount = new Dictionary<string, int>
         {
-            [TRLevelNames.CAVES]
+            [TR1LevelNames.CAVES]
                 = 2, // Defaults: 3 types, 14 enemies
-            [TRLevelNames.VILCABAMBA]
+            [TR1LevelNames.VILCABAMBA]
                 = 1, // Defaults: 3 types, 29 enemies
-            [TRLevelNames.VALLEY]
+            [TR1LevelNames.VALLEY]
                 = 2, // Defaults: 3 types, 13 enemies
-            [TRLevelNames.QUALOPEC]
+            [TR1LevelNames.QUALOPEC]
                 = 0, // Defaults: 3 types, 7 enemies
-            [TRLevelNames.FOLLY]
+            [TR1LevelNames.FOLLY]
                 = 0, // Defaults: 6 types, 25 enemies
-            [TRLevelNames.COLOSSEUM]
+            [TR1LevelNames.COLOSSEUM]
                 = 0, // Defaults: 7 types, 29 enemies
-            [TRLevelNames.MIDAS]
+            [TR1LevelNames.MIDAS]
                 = 0, // Defaults: 6 types, 43 enemies
-            [TRLevelNames.CISTERN]
+            [TR1LevelNames.CISTERN]
                 = 0, // Defaults: 8 types, 37 enemies
-            [TRLevelNames.TIHOCAN]
+            [TR1LevelNames.TIHOCAN]
                 = 0, // Defaults: 7 types, 18 enemies
-            [TRLevelNames.KHAMOON]
+            [TR1LevelNames.KHAMOON]
                 = 1, // Defaults: 4 types, 14 enemies
-            [TRLevelNames.OBELISK]
+            [TR1LevelNames.OBELISK]
                 = 1, // Defaults: 3 types, 16 enemies
-            [TRLevelNames.SANCTUARY]
+            [TR1LevelNames.SANCTUARY]
                 = 0, // Defaults: 5 types, 15 enemies
-            [TRLevelNames.MINES]
+            [TR1LevelNames.MINES]
                 = 0, // Defaults: 3 types, 3 enemies
-            [TRLevelNames.ATLANTIS]
+            [TR1LevelNames.ATLANTIS]
                 = 1, // Defaults: 5 types, 32 enemies
-            [TRLevelNames.PYRAMID]
+            [TR1LevelNames.PYRAMID]
                 = 0  // Defaults: 2 types, 4 enemies
         };
 

@@ -18,7 +18,7 @@ namespace TREnvironmentEditor.Model.Types
         public byte? Mask { get; set; }
         public byte? Timer { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             InitialiseLocations();

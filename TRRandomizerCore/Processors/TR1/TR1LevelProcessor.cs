@@ -35,7 +35,7 @@ namespace TRRandomizerCore.Processors
             return level;
         }
 
-        public TRLevel LoadLevelData(string name)
+        public TR1Level LoadLevelData(string name)
         {
             lock (_readLock)
             {
@@ -64,7 +64,7 @@ namespace TRRandomizerCore.Processors
             SaveScript();
         }
 
-        public void SaveLevel(TRLevel level, string name)
+        public void SaveLevel(TR1Level level, string name)
         {
             lock (_writeLock)
             {
