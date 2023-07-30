@@ -10,7 +10,7 @@ using TRLevelControl.Model;
 
 namespace TRLevelControl
 {
-    public class TR5LevelReader
+    public class TR5LevelReader : TRLevelControlBase<TR5Level>
     {
         private BinaryReader reader;
 
@@ -30,11 +30,12 @@ namespace TRLevelControl
             reader = new BinaryReader(File.Open(Filename, FileMode.Open));
 
             //Version
-            level.Version = reader.ReadUInt32();
-            if (level.Version != Versions.TR45)
+            level.Version = new()
             {
-                throw new NotImplementedException("File reader only suppors TR4 levels");
-            }
+                File = (TRFileVersion)reader.ReadUInt32(),
+                Game = TRGameVersion.TR5
+            };
+            TestVersion(level, TRFileVersion.TR45);
 
             //Texture Counts
             level.NumRoomTextiles = reader.ReadUInt16();

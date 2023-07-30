@@ -10,7 +10,7 @@ using TRLevelControl.Model;
 
 namespace TRLevelControl
 {
-    public class TR1LevelReader
+    public class TR1LevelReader : TRLevelControlBase<TRLevel>
     {
         private const uint MAX_PALETTE_SIZE = 256;
 
@@ -23,20 +23,16 @@ namespace TRLevelControl
 
         public TRLevel ReadLevel(string Filename)
         {
-            if (!Filename.ToUpper().Contains("PHD"))
-            {
-                throw new NotImplementedException("File reader only supports TR1 levels");
-            }
-
             TRLevel level = new TRLevel();
             reader = new BinaryReader(File.Open(Filename, FileMode.Open));
 
             //Version
-            level.Version = reader.ReadUInt32();
-            if (level.Version != Versions.TR1)
+            level.Version = new()
             {
-                throw new NotImplementedException("File reader only suppors TR1 levels");
-            }
+                File = (TRFileVersion)reader.ReadUInt32(),
+                Game = TRGameVersion.TR1
+            };
+            TestVersion(level, TRFileVersion.TR1);
 
             level.NumImages = reader.ReadUInt32();
             level.Images8 = new TRTexImage8[level.NumImages];

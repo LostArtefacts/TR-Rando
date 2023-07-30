@@ -10,7 +10,7 @@ using TRLevelControl.Model;
 
 namespace TRLevelControl
 {
-    public class TR2LevelReader
+    public class TR2LevelReader : TRLevelControlBase<TR2Level>
     {
         private const uint MAX_PALETTE_SIZE = 256;
 
@@ -23,20 +23,16 @@ namespace TRLevelControl
 
         public TR2Level ReadLevel(string Filename)
         {
-            if (!Filename.ToUpper().Contains("TR2"))
-            {
-                throw new NotImplementedException("File reader only supports TR2 levels");
-            }
-
             TR2Level level = new TR2Level();
             reader = new BinaryReader(File.Open(Filename, FileMode.Open));
 
             //Version
-            level.Version = reader.ReadUInt32();
-            if (level.Version != Versions.TR2)
+            level.Version = new()
             {
-                throw new NotImplementedException("File reader only suppors TR2 levels");
-            }
+                File = (TRFileVersion)reader.ReadUInt32(),
+                Game = TRGameVersion.TR2
+            };
+            TestVersion(level, TRFileVersion.TR2);
 
             //Colour palettes and textures
             level.Palette = PopulateColourPalette(reader.ReadBytes((int)MAX_PALETTE_SIZE * 3));

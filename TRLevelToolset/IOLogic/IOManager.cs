@@ -11,7 +11,7 @@ namespace TRLevelToolset.IOLogic
 {
     public static class IOManager
     {
-        public static BaseTRLevel? CurrentLevel { get; set; }
+        public static TRLevelBase? CurrentLevel { get; set; }
 
         public static string? FileName { get; set; }
 

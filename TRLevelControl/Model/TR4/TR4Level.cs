@@ -9,7 +9,7 @@ using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model
 {
-    public class TR4Level : BaseTRLevel, ISerializableCompact
+    public class TR4Level : TRLevelBase, ISerializableCompact
     {
         public ushort NumRoomTextiles { get; set; }
 
@@ -35,7 +35,7 @@ namespace TRLevelControl.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-                    writer.Write(Version);
+                    writer.Write((uint)Version.File);
                     writer.Write(NumRoomTextiles);
                     writer.Write(NumObjTextiles);
                     writer.Write(NumBumpTextiles);

@@ -9,7 +9,7 @@ using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model
 {
-    public class TRLevel : BaseTRLevel, ISerializableCompact
+    public class TRLevel : TRLevelBase, ISerializableCompact
     {
         /// <summary>
         /// 4 Bytes
@@ -313,7 +313,7 @@ namespace TRLevelControl.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-                    writer.Write(Version);
+                    writer.Write((uint)Version.File);
                     writer.Write(NumImages);
                     foreach (TRTexImage8 tex in Images8) { writer.Write(tex.Serialize()); }
                     writer.Write(Unused);

@@ -1,11 +1,10 @@
-﻿namespace TRLevelControl.Model
+﻿namespace TRLevelControl.Model;
+
+public enum TRGameVersion
 {
-    public enum TRGameVersion
-    {
-        TR1,
-        TR2,
-        TR3,
-        TR4,
-        TR5,
-    }
+    TR1,
+    TR2,
+    TR3,
+    TR4,
+    TR5,
 }
