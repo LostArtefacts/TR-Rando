@@ -51,8 +51,8 @@ namespace LocationExport
             }
             else if (levelType.EndsWith(".TR2"))
             {
-                uint version = DetectVersion(args[0]);
-                if (version == Versions.TR3a || version == Versions.TR3b)
+                TRFileVersion version = DetectVersion(args[0]);
+                if (version == TRFileVersion.TR3a || version == TRFileVersion.TR3b)
                 {
                     allLocations[levelType] = ExportTR3Locations(levelType);
                 }
@@ -139,12 +139,10 @@ namespace LocationExport
             }
         }
 
-        private static uint DetectVersion(string path)
+        private static TRFileVersion DetectVersion(string path)
         {
-            using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open)))
-            {
-                return reader.ReadUInt32();
-            }
+            using BinaryReader reader = new(File.Open(path, FileMode.Open));
+            return (TRFileVersion)reader.ReadUInt32();
         }
 
         private static List<Location> ExportTR1Locations(string lvl)

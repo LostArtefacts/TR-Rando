@@ -16,7 +16,7 @@ namespace TRLevelToolset.Components
         {
             ImGui.BeginChildFrame(0, new System.Numerics.Vector2(1280, 45));
             ImGui.Text("Level: " + IOManager.FileName);
-            ImGui.Text("Version: " + IOManager.CurrentLevel?.Version.ToString("X8"));
+            ImGui.Text("Version: " + IOManager.CurrentLevel?.Version.File.ToString("X8"));
             ImGui.EndChildFrame();
         }
     }

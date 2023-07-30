@@ -69,12 +69,12 @@ namespace TextureExport
             }
             else if (levelType.EndsWith(".tr2"))
             {
-                uint version = DetectVersion(args[0]);
-                if (version == Versions.TR2)
+                TRFileVersion version = DetectVersion(args[0]);
+                if (version == TRFileVersion.TR2)
                 {
                     ExportAllTextures(args[0], _reader2.ReadLevel(args[0]), mode);
                 }
-                else if (version == Versions.TR3a || version == Versions.TR3b)
+                else if (version == TRFileVersion.TR3a || version == TRFileVersion.TR3b)
                 {
                     ExportAllTextures(args[0], _reader3.ReadLevel(args[0]), mode);
                 }
@@ -141,12 +141,10 @@ namespace TextureExport
             }
         }
 
-        static uint DetectVersion(string path)
+        static TRFileVersion DetectVersion(string path)
         {
-            using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open)))
-            {
-                return reader.ReadUInt32();
-            }
+            using BinaryReader reader = new(File.Open(path, FileMode.Open));
+            return (TRFileVersion)reader.ReadUInt32();
         }
 
         static void ExportAllTextures(string lvl, TRLevel inst, Mode mode)

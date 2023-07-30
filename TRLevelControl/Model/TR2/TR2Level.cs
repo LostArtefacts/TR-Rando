@@ -13,7 +13,7 @@ using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model
 {
-    public class TR2Level : BaseTRLevel, ISerializableCompact
+    public class TR2Level : TRLevelBase, ISerializableCompact
     {
         /// <summary>
         /// 256 entries * 3 components = 768 Bytes
@@ -326,7 +326,7 @@ namespace TRLevelControl.Model
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-                    writer.Write(Version);
+                    writer.Write((uint)Version.File);
                     foreach (TRColour col in Palette) { writer.Write(col.Serialize()); }
                     foreach (TRColour4 col in Palette16) { writer.Write(col.Serialize()); }
                     writer.Write(NumImages);
