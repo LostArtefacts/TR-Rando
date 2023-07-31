@@ -20,7 +20,7 @@ namespace TREnvironmentEditor.Model.Types
         public EMLocation LinkedLocation { get; set; }
         public Dictionary<sbyte, List<int>> FloorHeights { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             TRRoom baseRoom = level.Rooms[data.ConvertRoom(RoomIndex)];

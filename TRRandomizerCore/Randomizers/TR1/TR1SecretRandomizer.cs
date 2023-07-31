@@ -153,7 +153,7 @@ namespace TRRandomizerCore.Randomizers
 
         private void SetSecretCounts()
         {
-            List<TR1ScriptedLevel> levels = Levels.FindAll(l => !l.Is(TRLevelNames.ASSAULT));
+            List<TR1ScriptedLevel> levels = Levels.FindAll(l => !l.Is(TR1LevelNames.ASSAULT));
 
             switch (Settings.SecretCountMode)
             {
@@ -371,7 +371,7 @@ namespace TRRandomizerCore.Randomizers
             }
         }
 
-        private static void CreateTrapdoorTrigger(TREntity door, ushort doorIndex, TRLevel level)
+        private static void CreateTrapdoorTrigger(TREntity door, ushort doorIndex, TR1Level level)
         {
             new EMTriggerFunction
             {

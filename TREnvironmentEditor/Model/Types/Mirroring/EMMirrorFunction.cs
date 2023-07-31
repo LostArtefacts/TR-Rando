@@ -20,7 +20,7 @@ namespace TREnvironmentEditor.Model.Types
 
         private int _worldWidth, _xAdjustment;
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             CalculateWorldWidth(level);
 
@@ -65,7 +65,7 @@ namespace TREnvironmentEditor.Model.Types
             MirrorTextures(level);
         }
 
-        private void CalculateWorldWidth(TRLevel level)
+        private void CalculateWorldWidth(TR1Level level)
         {
             _worldWidth = 0;
             _xAdjustment = 0;
@@ -121,7 +121,7 @@ namespace TREnvironmentEditor.Model.Types
             arr[pos2] = temp;
         }
 
-        private void MirrorFloorData(TRLevel level)
+        private void MirrorFloorData(TR1Level level)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);
@@ -301,7 +301,7 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
-        private void MirrorRooms(TRLevel level)
+        private void MirrorRooms(TR1Level level)
         {
             foreach (TRRoom room in level.Rooms)
             {
@@ -520,7 +520,7 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
-        private void MirrorBoxes(TRLevel level)
+        private void MirrorBoxes(TR1Level level)
         {
             MirrorBoxes(level.Boxes);
         }
@@ -564,7 +564,7 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
-        private void MirrorStaticMeshes(TRLevel level)
+        private void MirrorStaticMeshes(TR1Level level)
         {
             MirrorStaticMeshes(level.StaticMeshes, delegate (TRStaticMesh staticMesh)
             {
@@ -612,7 +612,7 @@ namespace TREnvironmentEditor.Model.Types
             box.MaxX = (short)(min * -1);
         }
 
-        private void MirrorEntities(TRLevel level)
+        private void MirrorEntities(TR1Level level)
         {
             foreach (TREntity entity in level.Entities)
             {
@@ -999,7 +999,7 @@ namespace TREnvironmentEditor.Model.Types
                 (Math.Abs(door1.X - door2.X) == SectorSize || Math.Abs(door1.Z - door2.Z) == SectorSize);
         }
 
-        private void MirrorNullMeshes(TRLevel level)
+        private void MirrorNullMeshes(TR1Level level)
         {
             // The deals with actual cameras as well as sinks
             foreach (TRCamera camera in level.Cameras)
@@ -1053,7 +1053,7 @@ namespace TREnvironmentEditor.Model.Types
             }
         }
 
-        private void MirrorTextures(TRLevel level)
+        private void MirrorTextures(TR1Level level)
         {
             // Collect unique texture references from each of the rooms
             ISet<ushort> textureReferences = new HashSet<ushort>();

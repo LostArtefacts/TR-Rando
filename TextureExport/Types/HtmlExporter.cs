@@ -14,7 +14,7 @@ namespace TextureExport.Types
 {
     public static class HtmlExporter
     {
-        public static void Export(TRLevel level, string lvlName)
+        public static void Export(TR1Level level, string lvlName)
         {
             using (TR1TexturePacker packer = new TR1TexturePacker(level))
             {
@@ -22,7 +22,7 @@ namespace TextureExport.Types
                 BuildTiles(tiles, packer.Tiles, level.Palette);
 
                 StringBuilder levelSel = new StringBuilder();
-                BuildLevelSelect(levelSel, lvlName, TRLevelNames.AsOrderedList);
+                BuildLevelSelect(levelSel, lvlName, TR1LevelNames.AsOrderedList);
 
                 StringBuilder skyboxInfo = new StringBuilder();
                 Dictionary<int, TRColour4> skyColours = new Dictionary<int, TRColour4>();

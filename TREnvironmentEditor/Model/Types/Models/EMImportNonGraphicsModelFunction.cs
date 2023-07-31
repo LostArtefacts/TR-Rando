@@ -13,7 +13,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public List<EMMeshTextureData> Data { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             List<EMMeshTextureData> data = PrepareImportData(level.Models);
             if (data.Count == 0)

@@ -18,7 +18,7 @@ namespace TREnvironmentEditor.Model.Types
         // If defined, anything else on the same tile will be moved here
         public EMLocation TargetRelocation { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             if (level.NumEntities < _defaultEntityLimit)
             {

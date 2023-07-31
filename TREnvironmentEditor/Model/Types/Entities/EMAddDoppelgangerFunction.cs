@@ -11,7 +11,7 @@ namespace TREnvironmentEditor.Model.Types
 
         public short AnchorRoom { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             TypeID = (short)TREntities.Doppelganger;
             base.ApplyToLevel(level);

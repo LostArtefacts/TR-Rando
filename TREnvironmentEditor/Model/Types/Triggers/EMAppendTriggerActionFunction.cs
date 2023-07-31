@@ -16,7 +16,7 @@ namespace TREnvironmentEditor.Model.Types
         public List<EMTriggerAction> Actions { get; set; }
         public List<FDTrigType> TargetTypes { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             List<FDActionListItem> actions = InitialiseActionItems(data);

@@ -12,7 +12,7 @@ namespace TREnvironmentEditor.Model.Types
         public short Z { get; set; }
         public short AdjoiningRoom { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
 

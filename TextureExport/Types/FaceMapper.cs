@@ -17,7 +17,7 @@ namespace TextureExport.Types
 {
     public static class FaceMapper
     {
-        public static void DrawFaces(TRLevel level, string lvl, int[] roomNumbers)
+        public static void DrawFaces(TR1Level level, string lvl, int[] roomNumbers)
         {
             using (TR1TexturePacker packer = new TR1TexturePacker(level))
             {

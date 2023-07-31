@@ -10,7 +10,7 @@ namespace TREnvironmentEditor.Model
         public EMEditorSet OnTrue { get; set; }
         public EMEditorSet OnFalse { get; set; }
 
-        public void ApplyToLevel(TRLevel level, EMOptions options = null)
+        public void ApplyToLevel(TR1Level level, EMOptions options = null)
         {
             EMEditorSet edits = Condition.GetResult(level) ? OnTrue : OnFalse;
             edits?.ApplyToLevel(level, options);

@@ -39,7 +39,7 @@ namespace TRRandomizerCore.Randomizers
 
             if (_levelsToMirror == null)
             {
-                TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TRLevelNames.ASSAULT));
+                TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
                 _levelsToMirror = Levels.RandomSelection(_generator, (int)Settings.MirroredLevelCount, exclusions: new HashSet<TR1ScriptedLevel>
                 {
                     assaultCourse
@@ -96,11 +96,11 @@ namespace TRRandomizerCore.Randomizers
 
         private void ApplyMappingToLevel(TR1CombinedLevel level, EMEditorMapping mapping)
         {
-            if ((level.Is(TRLevelNames.CAVES) || level.Is(TRLevelNames.FOLLY)) && level.Data.SoundMap[65] == -1)
+            if ((level.Is(TR1LevelNames.CAVES) || level.Is(TR1LevelNames.FOLLY)) && level.Data.SoundMap[65] == -1)
             {
                 // Caves and Folly have the swinging blade model (unused) but its SFX are missing - import here in case
                 // any mods want to make use of the model.
-                TRLevel vilcabamba = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TRLevelNames.VILCABAMBA));
+                TR1Level vilcabamba = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TR1LevelNames.VILCABAMBA));
                 SoundUtilities.ImportLevelSound(level.Data, vilcabamba, new short[] { 65 });
                 SoundUtilities.ResortSoundIndices(level.Data);
             }
@@ -221,7 +221,7 @@ namespace TRRandomizerCore.Randomizers
             // where to set her up. The mods will have stored this in a temporary flag as the entity
             // starting room may not necessarily be where her positioning should be calculated from.
             int anchorRoom = Array.FindIndex(level.Data.Rooms, r => (r.Flags & EMAddDoppelgangerFunction.AnchorRoomFlag) > 0);
-            if (anchorRoom == -1 && level.Is(TRLevelNames.ATLANTIS))
+            if (anchorRoom == -1 && level.Is(TR1LevelNames.ATLANTIS))
             {
                 // Extra check for OG Atlantis to ensure the script is configured properly.
                 TREntity baconLara = Array.Find(level.Data.Entities, e => e.TypeID == (short)TREntities.Doppelganger);

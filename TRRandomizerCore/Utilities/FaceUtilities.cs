@@ -14,7 +14,7 @@ namespace TRRandomizerCore.Utilities
         private static readonly int _fullSectorSize = 1024;
         private static readonly int _qrtSectorSize = 256;
 
-        public static List<TRFace4> GetTriggerFaces(TRLevel level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
+        public static List<TRFace4> GetTriggerFaces(TR1Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
         {
             FDControl floorData = new FDControl();
             floorData.ParseFromLevel(level);

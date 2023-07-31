@@ -14,7 +14,7 @@ namespace TREnvironmentEditor.Model.Types
         public List<short> Exclusions { get; set; }
         public short PreferredType { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             List<TREntities> potentialTypes = TR1EntityUtilities.GetFullListOfEnemies();
             if (NewEnemyType == EnemyType.Land)

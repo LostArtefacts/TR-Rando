@@ -18,7 +18,7 @@ namespace TREnvironmentEditor.Model.Types
         public EMTrigger Trigger { get; set; }
         public bool Replace { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             FDTriggerEntry triggerEntry = InitialiseTriggerEntry(data);

@@ -8,7 +8,7 @@ namespace TRModelTransporter.Handlers
 {
     public class AnimationTransportHandler
     {
-        public void Export(TRLevel level, TR1ModelDefinition definition)
+        public void Export(TR1Level level, TR1ModelDefinition definition)
         {
             definition.Animations = new Dictionary<int, TR1PackedAnimation>();
 
@@ -86,7 +86,7 @@ namespace TRModelTransporter.Handlers
             definition.AnimationFrames = AnimationUtilities.GetAnimationFrames(level, definition.Model);
         }
 
-        public void Import(TRLevel level, TR1ModelDefinition definition)
+        public void Import(TR1Level level, TR1ModelDefinition definition)
         {
             Dictionary<int, TR1PackedAnimation> animations = definition.Animations;
             bool firstAnimationConfigured = false;

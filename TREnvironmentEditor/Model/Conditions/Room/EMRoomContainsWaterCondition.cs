@@ -6,7 +6,7 @@ namespace TREnvironmentEditor.Model.Conditions
     {
         public short RoomIndex { get; set; }
 
-        protected override bool Evaluate(TRLevel level)
+        protected override bool Evaluate(TR1Level level)
         {
             TRRoom room = level.Rooms[RoomIndex];
             return room.ContainsWater;

@@ -14,7 +14,7 @@ namespace TREnvironmentEditor.Model.Types
         public EMLocation Location1 { get; set; }
         public EMLocation Location2 { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             Location1.Room = data.ConvertRoom(Location1.Room);

@@ -15,7 +15,7 @@ using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Textures
 {
-    public class TR1Wireframer : AbstractTRWireframer<TREntities, TRLevel>
+    public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
     {
         private static readonly List<TREntities> _laraEntities = new List<TREntities>
         {
@@ -54,7 +54,7 @@ namespace TRRandomizerCore.Textures
 
         private TR1TexturePacker _packer;
 
-        protected override AbstractTexturePacker<TREntities, TRLevel> CreatePacker(TRLevel level)
+        protected override AbstractTexturePacker<TREntities, TR1Level> CreatePacker(TR1Level level)
         {
             return _packer = new TR1TexturePacker(level);
         }
@@ -79,22 +79,22 @@ namespace TRRandomizerCore.Textures
             return _data.Has3DPickups && _pickupModels.Contains((TREntities)model.ID);
         }
 
-        protected override int GetBlackPaletteIndex(TRLevel level)
+        protected override int GetBlackPaletteIndex(TR1Level level)
         {
             return ImportColour(level, Color.Black);
         }
 
-        protected override IEnumerable<int> GetInvalidObjectTextureIndices(TRLevel level)
+        protected override IEnumerable<int> GetInvalidObjectTextureIndices(TR1Level level)
         {
             return level.GetInvalidObjectTextureIndices();
         }
 
-        protected override TRMesh[] GetLevelMeshes(TRLevel level)
+        protected override TRMesh[] GetLevelMeshes(TR1Level level)
         {
             return level.Meshes;
         }
 
-        protected override Dictionary<TREntities, TRMesh[]> GetModelMeshes(TRLevel level)
+        protected override Dictionary<TREntities, TRMesh[]> GetModelMeshes(TR1Level level)
         {
             Dictionary<TREntities, TRMesh[]> modelMeshes = new Dictionary<TREntities, TRMesh[]>();
             foreach (TRModel model in level.Models)
@@ -108,22 +108,22 @@ namespace TRRandomizerCore.Textures
             return modelMeshes;
         }
 
-        protected override TRMesh[] GetModelMeshes(TRLevel level, TRModel model)
+        protected override TRMesh[] GetModelMeshes(TR1Level level, TRModel model)
         {
             return TRMeshUtilities.GetModelMeshes(level, model);
         }
 
-        protected override TRModel[] GetModels(TRLevel level)
+        protected override TRModel[] GetModels(TR1Level level)
         {
             return level.Models;
         }
 
-        protected override TRObjectTexture[] GetObjectTextures(TRLevel level)
+        protected override TRObjectTexture[] GetObjectTextures(TR1Level level)
         {
             return level.ObjectTextures;
         }
 
-        protected override IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(TRLevel level)
+        protected override IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(TR1Level level)
         {
             List<List<TRFace3>> faces = new List<List<TRFace3>>();
             foreach (TRRoom room in level.Rooms)
@@ -133,7 +133,7 @@ namespace TRRandomizerCore.Textures
             return faces;
         }
 
-        protected override IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(TRLevel level)
+        protected override IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(TR1Level level)
         {
             List<List<TRFace4>> faces = new List<List<TRFace4>>();
             foreach (TRRoom room in level.Rooms)
@@ -143,17 +143,17 @@ namespace TRRandomizerCore.Textures
             return faces;
         }
 
-        protected override TRMesh GetStaticMesh(TRLevel level, TRStaticMesh staticMesh)
+        protected override TRMesh GetStaticMesh(TR1Level level, TRStaticMesh staticMesh)
         {
             return TRMeshUtilities.GetMesh(level, staticMesh.Mesh);
         }
 
-        protected override TRStaticMesh[] GetStaticMeshes(TRLevel level)
+        protected override TRStaticMesh[] GetStaticMeshes(TR1Level level)
         {
             return level.StaticMeshes;
         }
 
-        protected override int ImportColour(TRLevel level, Color c)
+        protected override int ImportColour(TR1Level level, Color c)
         {
             if (_packer.PaletteManager == null)
             {
@@ -179,7 +179,7 @@ namespace TRRandomizerCore.Textures
             return _enemyPlaceholderEntities.Contains(id);
         }
 
-        protected override void ResetPaletteTracking(TRLevel level)
+        protected override void ResetPaletteTracking(TR1Level level)
         {
             if (_packer.PaletteManager != null)
             {
@@ -187,46 +187,46 @@ namespace TRRandomizerCore.Textures
             }
         }
 
-        protected override void ResetUnusedTextures(TRLevel level)
+        protected override void ResetUnusedTextures(TR1Level level)
         {
             level.ResetUnusedTextures();
         }
 
-        protected override void SetObjectTextures(TRLevel level, IEnumerable<TRObjectTexture> textures)
+        protected override void SetObjectTextures(TR1Level level, IEnumerable<TRObjectTexture> textures)
         {
             level.ObjectTextures = textures.ToArray();
             level.NumObjectTextures = (uint)level.ObjectTextures.Length;
         }
 
-        protected override void SetSkyboxVisible(TRLevel level) { }
+        protected override void SetSkyboxVisible(TR1Level level) { }
 
-        protected override Dictionary<TRFace4, List<TRVertex>> CollectLadders(TRLevel level)
+        protected override Dictionary<TRFace4, List<TRVertex>> CollectLadders(TR1Level level)
         {
             return new Dictionary<TRFace4, List<TRVertex>>();
         }
 
-        protected override List<TRFace4> CollectTriggerFaces(TRLevel level, List<FDTrigType> triggerTypes)
+        protected override List<TRFace4> CollectTriggerFaces(TR1Level level, List<FDTrigType> triggerTypes)
         {
             return FaceUtilities.GetTriggerFaces(level, triggerTypes, false);
         }
 
-        protected override List<TRFace4> CollectDeathFaces(TRLevel level)
+        protected override List<TRFace4> CollectDeathFaces(TR1Level level)
         {
             return FaceUtilities.GetTriggerFaces(level, new List<FDTrigType>(), true);
         }
 
-        protected override TRAnimatedTexture[] GetAnimatedTextures(TRLevel level)
+        protected override TRAnimatedTexture[] GetAnimatedTextures(TR1Level level)
         {
             return level.AnimatedTextures;
         }
 
-        protected override void SetAnimatedTextures(TRLevel level, TRAnimatedTexture[] animatedTextures, ushort length)
+        protected override void SetAnimatedTextures(TR1Level level, TRAnimatedTexture[] animatedTextures, ushort length)
         {
             level.AnimatedTextures = animatedTextures;
             level.NumAnimatedTextures = length;
         }
 
-        protected override Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(TRLevel level, Pen pen)
+        protected override Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(TR1Level level, Pen pen)
         {
             Dictionary<ushort, TexturedTileSegment> segments = new Dictionary<ushort, TexturedTileSegment>();
             foreach (SpecialTextureHandling special in _data.SpecialTextures)
@@ -248,7 +248,7 @@ namespace TRRandomizerCore.Textures
             return segments;
         }
 
-        private TexturedTileSegment CreateMidasDoor(TRLevel level, Pen pen, ushort textureIndex, SpecialTextureMode mode)
+        private TexturedTileSegment CreateMidasDoor(TR1Level level, Pen pen, ushort textureIndex, SpecialTextureMode mode)
         {
             TRModel doorModel = FindDoorModel(level, textureIndex);
             if (doorModel == null)
@@ -328,7 +328,7 @@ namespace TRRandomizerCore.Textures
             return new TexturedTileSegment(texture, frame.Bitmap);
         }
 
-        private TRModel FindDoorModel(TRLevel level, ushort textureIndex)
+        private TRModel FindDoorModel(TR1Level level, ushort textureIndex)
         {
             foreach (TRModel model in level.Models)
             {

@@ -12,8 +12,8 @@ namespace TRLevelToolset.Components
 {
     public class SelectLevelComponent : IDrawable
     {
-        LevelSelectListBox TR1Selector = new LevelSelectListBox { Items = TRLevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR1 };
-        LevelSelectListBox TR1GSelector = new LevelSelectListBox { Items = TRLevelNames.AsListGold.ToArray(), Game = IOLogic.TRGame.TR1 };
+        LevelSelectListBox TR1Selector = new LevelSelectListBox { Items = TR1LevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR1 };
+        LevelSelectListBox TR1GSelector = new LevelSelectListBox { Items = TR1LevelNames.AsListGold.ToArray(), Game = IOLogic.TRGame.TR1 };
         LevelSelectListBox TR2Selector = new LevelSelectListBox { Items = TR2LevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR2 };
         LevelSelectListBox TR2GSelector = new LevelSelectListBox { Items = TR2LevelNames.AsListGold.ToArray(), Game = IOLogic.TRGame.TR2 };
         LevelSelectListBox TR3Selector = new LevelSelectListBox { Items = TR3LevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR3 };

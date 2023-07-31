@@ -114,7 +114,7 @@ namespace TRModelTransporter.Data
 
         public IEnumerable<int> GetIgnorableTextureIndices(TREntities entity, string level)
         {
-            if (entity == TREntities.LaraMiscAnim_H && level == TRLevelNames.VALLEY)
+            if (entity == TREntities.LaraMiscAnim_H && level == TR1LevelNames.VALLEY)
             {
                 // Mesh swap when Lara is killed by T-Rex
                 return null;

@@ -12,7 +12,7 @@ namespace TREnvironmentEditor.Model.Types
         public List<int> EntityLocations { get; set; }
         public EMTriggerAction Action { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             FDActionListItem action = InitialiseActionItem(data);

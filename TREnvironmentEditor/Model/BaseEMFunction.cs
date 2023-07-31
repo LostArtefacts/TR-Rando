@@ -21,7 +21,7 @@ namespace TREnvironmentEditor.Model
         public BaseEMFunction HardVariant { get; set; }
         public List<EMTag> Tags { get; set; }
 
-        public abstract void ApplyToLevel(TRLevel level);
+        public abstract void ApplyToLevel(TR1Level level);
         public abstract void ApplyToLevel(TR2Level level);
         public abstract void ApplyToLevel(TR3Level level);
 
@@ -116,7 +116,7 @@ namespace TREnvironmentEditor.Model
             return rooms;
         }
 
-        protected EMLevelData GetData(TRLevel level)
+        protected EMLevelData GetData(TR1Level level)
         {
             return EMLevelData.GetData(level);
         }

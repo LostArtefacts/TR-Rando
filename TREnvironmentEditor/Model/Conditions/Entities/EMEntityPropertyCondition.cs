@@ -18,7 +18,7 @@ namespace TREnvironmentEditor.Model.Conditions
         public int? Z { get; set; }
         public short? Room { get; set; }
 
-        protected override bool Evaluate(TRLevel level)
+        protected override bool Evaluate(TR1Level level)
         {
             return GetResult(level.Entities[EntityIndex]);
         }

@@ -11,21 +11,21 @@ namespace TRLevelControl.Helpers
             [TREntities.FlyingAtlantean] = new Dictionary<TREntities, List<string>>
             {
                 [TREntities.BandagedFlyer] =
-                    new List<string> { TRLevelNames.KHAMOON, TRLevelNames.OBELISK },
+                    new List<string> { TR1LevelNames.KHAMOON, TR1LevelNames.OBELISK },
                 [TREntities.MeatyFlyer] =
-                    new List<string> { TRLevelNames.SANCTUARY, TRLevelNames.ATLANTIS }
+                    new List<string> { TR1LevelNames.SANCTUARY, TR1LevelNames.ATLANTIS }
             },
             [TREntities.NonShootingAtlantean_N] = new Dictionary<TREntities, List<string>>
             {
                 [TREntities.BandagedAtlantean] =
-                    new List<string> { TRLevelNames.KHAMOON, TRLevelNames.OBELISK },
+                    new List<string> { TR1LevelNames.KHAMOON, TR1LevelNames.OBELISK },
                 [TREntities.MeatyAtlantean] =
-                    new List<string> { TRLevelNames.SANCTUARY, TRLevelNames.ATLANTIS }
+                    new List<string> { TR1LevelNames.SANCTUARY, TR1LevelNames.ATLANTIS }
             },
             [TREntities.Cowboy] = new Dictionary<TREntities, List<string>>
             {
                 [TREntities.CowboyOG] =
-                    new List<string> { TRLevelNames.MINES },
+                    new List<string> { TR1LevelNames.MINES },
                 [TREntities.CowboyHeadless] =
                     new List<string> { }
             }
@@ -541,35 +541,35 @@ namespace TRLevelControl.Helpers
 
         private static readonly Dictionary<string, TREntities> _levelSecretModels = new Dictionary<string, TREntities>
         {
-            [TRLevelNames.CAVES]
+            [TR1LevelNames.CAVES]
                 = TREntities.SecretScion_M_H,
-            [TRLevelNames.VILCABAMBA]
+            [TR1LevelNames.VILCABAMBA]
                 = TREntities.SecretGoldBar_M_H,
-            [TRLevelNames.VALLEY]
+            [TR1LevelNames.VALLEY]
                 = TREntities.SecretGoldIdol_M_H,
-            [TRLevelNames.QUALOPEC]
+            [TR1LevelNames.QUALOPEC]
                 = TREntities.SecretGoldIdol_M_H,
-            [TRLevelNames.FOLLY]
+            [TR1LevelNames.FOLLY]
                 = TREntities.SecretLeadBar_M_H,
-            [TRLevelNames.COLOSSEUM]
+            [TR1LevelNames.COLOSSEUM]
                 = TREntities.SecretLeadBar_M_H,
-            [TRLevelNames.MIDAS]
+            [TR1LevelNames.MIDAS]
                 = TREntities.SecretAnkh_M_H,
-            [TRLevelNames.CISTERN]
+            [TR1LevelNames.CISTERN]
                 = TREntities.SecretScion_M_H,
-            [TRLevelNames.TIHOCAN]
+            [TR1LevelNames.TIHOCAN]
                 = TREntities.SecretGoldIdol_M_H,
-            [TRLevelNames.KHAMOON]
+            [TR1LevelNames.KHAMOON]
                 = TREntities.SecretLeadBar_M_H,
-            [TRLevelNames.OBELISK]
+            [TR1LevelNames.OBELISK]
                 = TREntities.SecretLeadBar_M_H,
-            [TRLevelNames.SANCTUARY]
+            [TR1LevelNames.SANCTUARY]
                 = TREntities.SecretAnkh_M_H,
-            [TRLevelNames.MINES]
+            [TR1LevelNames.MINES]
                 = TREntities.SecretGoldBar_M_H,
-            [TRLevelNames.ATLANTIS]
+            [TR1LevelNames.ATLANTIS]
                 = TREntities.SecretGoldIdol_M_H,
-            [TRLevelNames.PYRAMID]
+            [TR1LevelNames.PYRAMID]
                 = TREntities.SecretGoldIdol_M_H
         };
     }

@@ -14,7 +14,7 @@ namespace TREnvironmentEditor.Model.Types
         public sbyte? XSlant { get; set; }
         public sbyte? ZSlant { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             // Apply click changes first
             base.ApplyToLevel(level);

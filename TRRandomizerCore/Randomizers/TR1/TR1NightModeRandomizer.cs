@@ -16,7 +16,7 @@ namespace TRRandomizerCore.Randomizers
 
         private static readonly Dictionary<string, List<int>> _excludedRooms = new Dictionary<string, List<int>>
         {
-            [TRLevelNames.ATLANTIS]
+            [TR1LevelNames.ATLANTIS]
                 = new List<int> { 85, 95, 96 } // We want to retain the flicker effect at the start
         };
 
@@ -51,7 +51,7 @@ namespace TRRandomizerCore.Randomizers
 
         private void ChooseNightLevels()
         {
-            TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TRLevelNames.ASSAULT));
+            TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
             ISet<TR1ScriptedLevel> exlusions = new HashSet<TR1ScriptedLevel> { assaultCourse };
 
             _nightLevels = Levels.RandomSelection(_generator, (int)Settings.NightModeCount, exclusions: exlusions);

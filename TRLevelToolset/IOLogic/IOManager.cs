@@ -17,13 +17,13 @@ namespace TRLevelToolset.IOLogic
 
         public static TRGame LoadedGame { get; set; }
 
-        public static TRLevel? CurrentLevelAsTR1 
+        public static TR1Level? CurrentLevelAsTR1 
         {
             get
             {
                 if (CurrentLevel != null && LoadedGame == TRGame.TR1)
                 {
-                    return CurrentLevel as TRLevel;
+                    return CurrentLevel as TR1Level;
                 }
                 else
                 {

@@ -14,7 +14,7 @@ namespace TRLevelControl.Helpers
         public static readonly int Blockable = 0x8000;
         public static readonly int Blocked = 0x4000;
 
-        public static void DuplicateZone(TRLevel level, int boxIndex)
+        public static void DuplicateZone(TR1Level level, int boxIndex)
         {
             TRZoneGroup zoneGroup = level.Zones[boxIndex];
             List<TRZoneGroup> zones = level.Zones.ToList();
@@ -91,7 +91,7 @@ namespace TRLevelControl.Helpers
             return zones.ToArray();
         }
 
-        public static int GetSectorCount(TRLevel level, int boxIndex)
+        public static int GetSectorCount(TR1Level level, int boxIndex)
         {
             int count = 0;
             foreach (TRRoom room in level.Rooms)
@@ -107,7 +107,7 @@ namespace TRLevelControl.Helpers
             return count;
         }
 
-        public static List<ushort> GetOverlaps(TRLevel level, TRBox box)
+        public static List<ushort> GetOverlaps(TR1Level level, TRBox box)
         {
             List<ushort> overlaps = new List<ushort>();
 
@@ -132,7 +132,7 @@ namespace TRLevelControl.Helpers
             return overlaps;
         }
 
-        public static void UpdateOverlaps(TRLevel level, TRBox box, List<ushort> overlaps)
+        public static void UpdateOverlaps(TR1Level level, TRBox box, List<ushort> overlaps)
         {
             List<ushort> newOverlaps = new List<ushort>();
             foreach (TRBox lvlBox in level.Boxes)

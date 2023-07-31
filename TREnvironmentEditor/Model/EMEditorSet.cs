@@ -12,7 +12,7 @@ namespace TREnvironmentEditor.Model
         // relevant function to run.
         public bool IsHard => this.Any(e => e.Tags?.Contains(EMTag.Hard) ?? false);
 
-        public void ApplyToLevel(TRLevel level, EMOptions options = null)
+        public void ApplyToLevel(TR1Level level, EMOptions options = null)
         {
             if (IsApplicable(options))
             {

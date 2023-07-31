@@ -9,7 +9,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public uint[] MeshIDs { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             IEnumerable<TRMesh> meshes = level.StaticMeshes.ToList()
                 .FindAll(s => MeshIDs.Contains(s.ID))

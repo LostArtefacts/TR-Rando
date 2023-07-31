@@ -6,7 +6,7 @@ namespace TRModelTransporter.Handlers
 {
     public class SoundTransportHandler
     {
-        public void Export(TRLevel level, TR1ModelDefinition definition, short[] hardcodedSounds)
+        public void Export(TR1Level level, TR1ModelDefinition definition, short[] hardcodedSounds)
         {
             definition.HardcodedSound = SoundUtilities.BuildPackedSound(level.SoundMap, level.SoundDetails, level.SampleIndices, level.Samples, hardcodedSounds);
         }
@@ -21,7 +21,7 @@ namespace TRModelTransporter.Handlers
             definition.HardcodedSound = SoundUtilities.BuildPackedSound(level.SoundMap, level.SoundDetails, level.SampleIndices, hardcodedSounds);
         }
 
-        public void Import(TRLevel level, IEnumerable<TR1ModelDefinition> definitions)
+        public void Import(TR1Level level, IEnumerable<TR1ModelDefinition> definitions)
         {
             SoundUnpacker unpacker = new SoundUnpacker();
             foreach (TR1ModelDefinition definition in definitions)

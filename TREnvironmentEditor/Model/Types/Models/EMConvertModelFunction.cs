@@ -8,7 +8,7 @@ namespace TREnvironmentEditor.Model.Types
         public uint OldModelID { get; set; }
         public uint NewModelID { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             ConvertModel(level.Models);
             UpdateModelEntities(level.Entities);

@@ -10,7 +10,7 @@ namespace TREnvironmentEditor.Model.Types
         public bool IfLandCreature { get; set; }
         public bool AttemptWaterCreature { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             TREntity enemy = level.Entities[EntityIndex];
             TREntities enemyEntity = (TREntities)enemy.TypeID;

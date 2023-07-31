@@ -9,7 +9,7 @@ using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Handlers.Textures
 {
-    public class TR1TextureImportHandler : AbstractTextureImportHandler<TREntities, TRLevel, TR1ModelDefinition>
+    public class TR1TextureImportHandler : AbstractTextureImportHandler<TREntities, TR1Level, TR1ModelDefinition>
     {
         public TR1PaletteManager PaletteManager { get; set; }
 
@@ -42,7 +42,7 @@ namespace TRModelTransporter.Handlers.Textures
             _level.NumSpriteTextures = (uint)_level.SpriteTextures.Length;
         }
 
-        protected override AbstractTexturePacker<TREntities, TRLevel> CreatePacker()
+        protected override AbstractTexturePacker<TREntities, TR1Level> CreatePacker()
         {
             return new TR1TexturePacker(_level)
             {
@@ -50,7 +50,7 @@ namespace TRModelTransporter.Handlers.Textures
             };
         }
 
-        protected override void ProcessRemovals(AbstractTexturePacker<TREntities, TRLevel> packer)
+        protected override void ProcessRemovals(AbstractTexturePacker<TREntities, TR1Level> packer)
         {
             List<TREntities> removals = new List<TREntities>();
             if (_clearUnusedSprites)
@@ -70,7 +70,7 @@ namespace TRModelTransporter.Handlers.Textures
             }
         }
 
-        private void RemoveUnusedSprites(AbstractTexturePacker<TREntities, TRLevel> packer)
+        private void RemoveUnusedSprites(AbstractTexturePacker<TREntities, TR1Level> packer)
         {
             List<TREntities> unusedItems = new List<TREntities>
             {

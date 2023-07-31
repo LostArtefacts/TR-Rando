@@ -7,7 +7,7 @@ namespace TREnvironmentEditor.Model.Conditions
     {
         public EMLocation Location { get; set; }
 
-        protected override bool Evaluate(TRLevel level)
+        protected override bool Evaluate(TR1Level level)
         {
             EMLevelData data = EMLevelData.GetData(level);
             TRRoom room = level.Rooms[data.ConvertRoom(Location.Room)];

@@ -17,7 +17,7 @@ namespace TRTexture16Importer.Helpers
 
         private readonly Rectangle _defaultBounds = new Rectangle(0, 0, 256, 256);
 
-        public TRLevel Level { get; set; }
+        public TR1Level Level { get; set; }
         public Dictionary<int, Bitmap> ChangedTiles { get; set; }
         public List<TREntities> ObsoleteModels { get; set; }
 

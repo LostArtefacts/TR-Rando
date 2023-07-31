@@ -8,7 +8,7 @@ namespace TREnvironmentEditor.Model.Types
         public int Index { get; set; }
         public EMLocation Relocation { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             MoveSoundSource(level.SoundSources[Index]);
         }

@@ -15,7 +15,7 @@ namespace TRLevelControl
 
         }
 
-        public void WriteLevelToFile(TRLevel lvl, string filepath)
+        public void WriteLevelToFile(TR1Level lvl, string filepath)
         {
             using (BinaryWriter writer = new BinaryWriter(File.Create(filepath)))
             {

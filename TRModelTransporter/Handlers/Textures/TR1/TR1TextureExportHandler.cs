@@ -6,9 +6,9 @@ using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Handlers.Textures
 {
-    public class TR1TextureExportHandler : AbstractTextureExportHandler<TREntities, TRLevel, TR1ModelDefinition>
+    public class TR1TextureExportHandler : AbstractTextureExportHandler<TREntities, TR1Level, TR1ModelDefinition>
     {
-        protected override AbstractTexturePacker<TREntities, TRLevel> CreatePacker()
+        protected override AbstractTexturePacker<TREntities, TR1Level> CreatePacker()
         {
             return new TR1TexturePacker(_level, _classifier);
         }

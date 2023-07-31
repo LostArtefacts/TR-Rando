@@ -10,7 +10,7 @@ using TRLevelControl.Model;
 
 namespace TRLevelControl
 {
-    public class TR1LevelReader : TRLevelControlBase<TRLevel>
+    public class TR1LevelReader : TRLevelControlBase<TR1Level>
     {
         private const uint MAX_PALETTE_SIZE = 256;
 
@@ -21,9 +21,9 @@ namespace TRLevelControl
 
         }
 
-        public TRLevel ReadLevel(string Filename)
+        public TR1Level ReadLevel(string Filename)
         {
-            TRLevel level = new TRLevel();
+            TR1Level level = new TR1Level();
             reader = new BinaryReader(File.Open(Filename, FileMode.Open));
 
             //Version

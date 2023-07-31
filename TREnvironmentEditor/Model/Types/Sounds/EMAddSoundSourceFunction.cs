@@ -8,7 +8,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public TRSoundSource Source { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             List<TRSoundSource> soundSources = level.SoundSources.ToList();
             soundSources.Add(Source);

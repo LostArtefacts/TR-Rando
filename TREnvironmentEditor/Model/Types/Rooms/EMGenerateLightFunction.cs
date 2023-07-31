@@ -10,7 +10,7 @@ namespace TREnvironmentEditor.Model.Types
     {
         public List<short> RoomIndices { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             foreach (short roomIndex in RoomIndices)

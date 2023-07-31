@@ -12,7 +12,7 @@ namespace TREnvironmentEditor.Model.Types
         public bool AllSectors { get; set; }
         public bool InheritFloorBox { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
 

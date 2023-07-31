@@ -8,7 +8,7 @@ namespace TextureExport.Types
 {
     public static class DependencyExporter
     {
-        public static void Export(TRLevel level, string lvl)
+        public static void Export(TR1Level level, string lvl)
         {
             TR1TextureRemapGroup remapGroup = new TR1TextureRemapGroup();
             foreach (TRModel model in level.Models)

@@ -16,7 +16,7 @@ namespace TREnvironmentEditor.Model.Types
         public bool IsNegativeX { get; set; }
         public bool IsNegativeZ { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             throw new NotSupportedException();
         }

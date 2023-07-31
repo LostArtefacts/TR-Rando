@@ -9,7 +9,7 @@ namespace TREnvironmentEditor.Model.Types
         public Dictionary<ushort, List<ushort>> RemoveLinks { get; set; }
         public Dictionary<ushort, List<ushort>> AddLinks { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             if (RemoveLinks != null)
             {

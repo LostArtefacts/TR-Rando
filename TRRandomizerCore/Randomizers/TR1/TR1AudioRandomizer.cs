@@ -79,7 +79,7 @@ namespace TRRandomizerCore.Randomizers
 
             // We don't want to store all SFX WAV data in JSON, so instead we reference the source level
             // and extract the details from there using the same format for model transport.
-            Dictionary<string, TRLevel> levels = new Dictionary<string, TRLevel>();
+            Dictionary<string, TR1Level> levels = new Dictionary<string, TR1Level>();
             TR1LevelReader reader = new TR1LevelReader();
             foreach (TR1SFXDefinition definition in _soundEffects)
             {
@@ -88,13 +88,13 @@ namespace TRRandomizerCore.Randomizers
                     levels[definition.SourceLevel] = reader.ReadLevel(Path.Combine(BackupPath, definition.SourceLevel));
                 }
 
-                TRLevel level = levels[definition.SourceLevel];
+                TR1Level level = levels[definition.SourceLevel];
                 definition.SoundData = SoundUtilities.BuildPackedSound(level.SoundMap, level.SoundDetails, level.SampleIndices, level.Samples, new short[] { definition.InternalIndex });
             }
 
             // PS uzis need some manual setup. Make a copy of the standard uzi definition
             // then replace the sound data from the external wav file.
-            TRLevel caves = levels[TRLevelNames.CAVES];
+            TR1Level caves = levels[TR1LevelNames.CAVES];
             _psUziDefinition = new TR1SFXDefinition
             {
                 InternalIndex = -1,
@@ -106,7 +106,7 @@ namespace TRRandomizerCore.Randomizers
 
         private void ChooseUncontrolledLevels()
         {
-            TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TRLevelNames.ASSAULT));
+            TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
             ISet<TR1ScriptedLevel> exlusions = new HashSet<TR1ScriptedLevel> { assaultCourse };
 
             _uncontrolledLevels = Levels.RandomSelection(_generator, (int)Settings.UncontrolledSFXCount, exclusions: exlusions);
@@ -249,7 +249,7 @@ namespace TRRandomizerCore.Randomizers
             SoundUtilities.ResortSoundIndices(level.Data);
         }
 
-        private short ImportSoundEffect(TRLevel level, TR1SFXDefinition definition, TRSFXGeneralCategory category)
+        private short ImportSoundEffect(TR1Level level, TR1SFXDefinition definition, TRSFXGeneralCategory category)
         {
             if (definition.SoundData.SampleIndices.Count == 0)
             {

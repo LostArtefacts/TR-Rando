@@ -7,7 +7,7 @@ namespace TREnvironmentEditor.Model.Types
 {
     public class EMMoveSecretFunction : EMMovePickupFunction
     {
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             Types = new List<short>();
             FDControl floorData = new FDControl();

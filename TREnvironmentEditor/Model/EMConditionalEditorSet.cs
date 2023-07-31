@@ -9,7 +9,7 @@ namespace TREnvironmentEditor.Model
         public List<EMEditorSet> OnTrue { get; set; }
         public List<EMEditorSet> OnFalse { get; set; }
 
-        public List<EMEditorSet> GetApplicableSets(TRLevel level)
+        public List<EMEditorSet> GetApplicableSets(TR1Level level)
         {
             return Condition.GetResult(level) ? OnTrue : OnFalse;
         }

@@ -10,7 +10,7 @@ namespace TREnvironmentEditor.Model.Types
         public Dictionary<int, sbyte> CeilingHeights { get; set; }
         public bool AmendVertices { get; set; }
 
-        public override void ApplyToLevel(TRLevel level)
+        public override void ApplyToLevel(TR1Level level)
         {
             EMLevelData data = GetData(level);
             foreach (int roomNumber in CeilingHeights.Keys)

@@ -9,7 +9,7 @@ using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model
 {
-    public class TRLevel : TRLevelBase, ISerializableCompact
+    public class TR1Level : TRLevelBase, ISerializableCompact
     {
         /// <summary>
         /// 4 Bytes
@@ -302,7 +302,7 @@ namespace TRLevelControl.Model
         /// </summary>
         public uint[] SampleIndices { get; set; }
 
-        public TRLevel()
+        public TR1Level()
         {
 
         }

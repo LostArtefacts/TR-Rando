@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace TRLevelControl.Helpers
+﻿namespace TRLevelControl.Helpers
 {
-    public static class TRLevelNames
+    public static class TR1LevelNames
     {
         public const string CAVES        = "LEVEL1.PHD";
         public const string VILCABAMBA   = "LEVEL2.PHD";
