@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using TRRandomizerCore.Editors;
+﻿using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Randomizers
@@ -15,9 +12,33 @@ namespace TRRandomizerCore.Randomizers
         {
             Queue<Location> locations = new Queue<Location>();
 
+            if (Settings.UseAuthoredSecrets)
+            {
+                List<Location> pool = allLocations
+                    .Where(l => l.Author == Settings.SecretAuthor)
+                    .ToList();
+
+                if (pool.Any(l => l.LevelState == LevelState.Mirrored)
+                    && pool.Any(l => l.LevelState == LevelState.NotMirrored))
+                {
+                    // Invalid, authors should be aware of this. Default to removing all mirrored locations.
+                    pool.RemoveAll(l => l.LevelState == LevelState.Mirrored);
+                }
+
+                for (int i = 0; i < pool.Count && locations.Count < totalCount; i++)
+                {
+                    locations.Enqueue(pool[i]);
+                }
+
+                if (locations.Count == totalCount)
+                {
+                    return locations;
+                }
+            }
+
             if (Settings.GuaranteeSecrets)
             {
-                int maxCount = Math.Max(1, (int)Math.Floor(totalCount / 2d));
+                int maxCount = Math.Max(1, (int)Math.Floor(totalCount / 2d)) + locations.Count;
 
                 // Create location pools for the categories selected.
                 List<IEnumerable<Location>> pools = new List<IEnumerable<Location>>();

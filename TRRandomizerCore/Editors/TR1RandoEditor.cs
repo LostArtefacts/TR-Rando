@@ -147,6 +147,7 @@ namespace TRRandomizerCore.Editors
                 Settings = Settings,
                 TextureMonitor = textureMonitor
             };
+            environmentRandomizer.AllocateMirroredLevels(Settings.EnvironmentSeed);
 
             using (textureMonitor)
             {
@@ -203,7 +204,7 @@ namespace TRRandomizerCore.Editors
                         SaveMonitor = monitor,
                         Settings = Settings,
                         ItemFactory = itemFactory,
-                        MirrorLevels = environmentRandomizer.AllocateMirroredLevels(Settings.EnvironmentSeed)
+                        Mirrorer = environmentRandomizer
                     }.Randomize(Settings.SecretSeed);
                 }
 

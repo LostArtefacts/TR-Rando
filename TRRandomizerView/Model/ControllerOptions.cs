@@ -68,6 +68,9 @@ namespace TRRandomizerView.Model
         private uint _uncontrolledSFXCount;
         private bool _uncontrolledSFXAssaultCourse;
         private uint _rainLevelCount, _snowLevelCount, _coldLevelCount;
+        private bool _useAuthoredSecrets;
+        private string _secretAuthor;
+        private string[] _availableSecretAuthors;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls, _healthBoolItemControls, _weatherBoolItemControls;
         private List<BoolItemIDControlClass> _selectableEnemies;
@@ -2069,6 +2072,43 @@ namespace TRRandomizerView.Model
             }
         }
 
+        public bool UseAuthoredSecrets
+        {
+            get => _useAuthoredSecrets;
+            set
+            {
+                _useAuthoredSecrets = value;
+                FirePropertyChanged();
+                FirePropertyChanged(nameof(UseGenericSecrets));
+            }
+        }
+
+        public bool UseGenericSecrets
+        {
+            get => !IsAuthoredSecretsTypeSupported || !UseAuthoredSecrets;
+        }
+
+        public string SecretAuthor
+        {
+            get => _secretAuthor;
+            set
+            {
+                _secretAuthor = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public string[] AvailableSecretAuthors
+        {
+            get => _availableSecretAuthors;
+            set
+            {
+                _availableSecretAuthors = value;
+                FirePropertyChanged();
+                FirePropertyChanged(nameof(IsAuthoredSecretsTypeSupported));
+            }
+        }
+
         public BoolItemControlClass DocileWillard
         {
             get => _docileWillard;
@@ -3061,7 +3101,14 @@ namespace TRRandomizerView.Model
             UseRandomSecretModels.Value = _controller.UseRandomSecretModels;
             SecretCountMode = _controller.SecretCountMode;
             MaxSecretCount = _controller.MaxSecretCount;
-            MinSecretCount = _controller.MinSecretCount;
+            MinSecretCount = _controller.MinSecretCount;            
+            AvailableSecretAuthors = _controller.AvailableSecretAuthors;
+            SecretAuthor = _controller.SecretAuthor;
+            UseAuthoredSecrets = _controller.UseAuthoredSecrets;
+            if ((SecretAuthor == null || SecretAuthor == string.Empty) && AvailableSecretAuthors.Length > 0)
+            {
+                SecretAuthor = AvailableSecretAuthors[0];
+            }
 
             RandomizeTextures = _controller.RandomizeTextures;
             TextureSeed = _controller.TextureSeed;
@@ -3345,6 +3392,8 @@ namespace TRRandomizerView.Model
             _controller.SecretCountMode = SecretCountMode;
             _controller.MinSecretCount = MinSecretCount;
             _controller.MaxSecretCount = MaxSecretCount;
+            _controller.UseAuthoredSecrets = UseAuthoredSecrets;
+            _controller.SecretAuthor = SecretAuthor;
 
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
@@ -3504,6 +3553,7 @@ namespace TRRandomizerView.Model
         public bool IsRewardRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.RewardRooms);
         public bool IsSecretModelsTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretModels);
         public bool IsSecretCountTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretCount);
+        public bool IsAuthoredSecretsTypeSupported => AvailableSecretAuthors?.Length > 0;
         public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
         public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);
         public bool IsKeyItemTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItems);
