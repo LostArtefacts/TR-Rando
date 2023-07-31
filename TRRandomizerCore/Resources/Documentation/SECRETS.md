@@ -74,7 +74,33 @@ Currently, the number of secrets per level is hard-coded to the level's original
 # Generating Locations
 Use trview to generate secret locations by making use of the available [randomizer settings](https://github.com/chreden/trview#randomizer-integration) feature. The file below should be copied locally to `%LOCALAPPDATA%/trview`.
 
-https://github.com/DanzaG/TR2-Rando/blob/master/TRRandomizerCore/Resources/Shared/randomizer.json
+https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Shared/randomizer.json
+
+## Authored Secrets
+The randomizer supports the idea of branded secrets by specific authors, so allowing players to pick those specific secrets in a playthrough. To author your own secrets, follow these steps.
+
+1. Open your copy of `%LOCALAPPDATA%/trview/randomizer.json` and locate the `Author` property. Add your name to the `options` array (this is how your name will be displayed both in trview and the randomizer itself).
+2. Restart trview if you have it open.
+3. Setup a local folder with each level for the game you wish to author secrets for. Ensure that the levels are vanilla, and that the level file names are all in uppercase.
+4. In trview, open the first level in the folder you have created above.
+5. Click on `Settings` and ensure that `Enable Randomizer Tools` is selected in the `General` tab.
+6. Click on `Windows > Route`, then in the Route window, select `File > Open`. Select the relevant randomizer locations file for the game.
+7. You will now see waypoints marking secret locations. You can add new waypoints and set the `Author` property to your name, or edit existing ones if applicable.
+8. Clicking on the other level names in the Route window will open that level.
+9. Once you have finished, click `File > Save` in the Route window.
+10. You can now submit a pull request with the changed locations file and `randomizer.json` trview file if applicable.
+
+Note that the `Requires Glitch` and `Difficulty` properties are ignored for authored secrets - that is, they will be included regardless. However, you should ensure that these properties are correctly set anyway, as your secrets may be included in standard playthroughs, and so the user's choices in the randomizer should be honoured.
+
+### Level State
+Be sure to set the `Level State` property as well. If an authored secret only works when the level is mirrored, then this will enforce mirroring on that level. Equally, `Not Mirrored` means the secret only works when the level is in its normal state. `Any` is the default, and means the secret works in either state.
+
+Be careful not to enforce a mirrored secret and non-mirrored in the same authored set. If this does happen, the randomizer will ignore your mirrored secret. You can create different authored sets instead as an alternative.
+
+Note that in normal mode, secrets whose states do not match the level are simply skipped and another is chosen.
+
+### TR2 Zoning
+As authored secrets may not necessarily fall into the default [secret zones](https://github.com/LostArtefacts/TR-Rando/wiki/Zones#secrets), you should position your waypoints manually in stone-jade-gold order instead. For TR1 and TR3, this is not important due to the different zoning technique and the arbitrary artefact types.
 
 ### Underwater Corner Secrets
 When placing secrets in corners underwater, there is a minimum distance from each wall the secret will need to be positioned - this is 130 units. Any closer to the wall and Lara won't pick the secret up.
