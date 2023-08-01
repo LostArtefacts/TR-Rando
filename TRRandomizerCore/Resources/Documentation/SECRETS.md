@@ -76,6 +76,25 @@ Use trview to generate secret locations by making use of the available [randomiz
 
 https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Shared/randomizer.json
 
+### Property guide
+
+| Property | Usage | Description |
+|-|-|-|
+| Angle | Items, Enemies, Vehicles | Sets the Y rotation of an entity. |
+| Author | Secrets | Used in [authored secrets mode](#authored-secrets) |
+| Difficulty | Secrets | Sets the difficulty level of a secret. |
+| Entity Index | Enemies | For TR1 only, used to link normal enemies to Atlantean egg wall locations during randomization. |
+| Entity Index | Secrets | Allows a secret to be linked to another pickup entity, such that the pickup location will be locked i.e. ignored in item randomization. |
+| Invalidates Room | Items | Indicates that every sector in a room is invalid for general item positioning. |
+| Key Item Group ID | Items | For TR1 and TR3, links locations to key items IDs to form zoning. See `TREntities` and `TR3Entities`. |
+| Level State | Secrets | Indicates that a secret can only be used when a level is in a specific mirroring state e.g. for specific glitches. |
+| Requires Damage | Secrets | Indicates that Lara will take damage collecting this secret; medipacks will be provided when this flag is detected. |
+| Requires Glitch | Secrets | A glitch is needed to collect this secret - links to the UI option available to users. |
+| Target Type | Vehicles | Links a location to a specific model ID, currently used for positioning randomized vehicles. |
+| Validated | Items | If a room has `Invalidates Room` set to `true`, additional locations can be added with `Validated` set to `false` - this means that the entire room is excluded apart from those specific locations. |
+| Validated | Secrets | For TR1 and TR3, if secrets are to be placed where there are already triggers, they will not be chosen during randomization unless `Validated` is selected. This allows for debugging to test that trigger behaviour remains as expected. |
+| Vehicle Required | Secrets | Indicates that a vehicle is required to collect this secret, and so any planned randomization of existing vehicles in the level will not take place. Note that this will not automatically add a vehicle. |
+
 ## Authored Secrets
 The randomizer supports the idea of branded secrets by specific authors, so allowing players to pick those specific secrets in a playthrough. To author your own secrets, follow these steps.
 
