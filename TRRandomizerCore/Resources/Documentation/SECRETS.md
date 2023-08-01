@@ -77,6 +77,7 @@ Use trview to generate secret locations by making use of the available [randomiz
 https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Shared/randomizer.json
 
 ### Property guide
+Not all properties are used in every circumstance, and their meanings can differ based on where they are used. Use the guide below for reference.
 
 | Property | Usage | Description |
 |-|-|-|
