@@ -56,6 +56,12 @@
       "default": -1,
       "display": "Target Type",
       "type": "number"
+    },
+    "Author": {
+      "default": "TRRando",
+      "display": "Author",
+      "options": [ "TRRando", "apel", "Danza", "Eycore", "Lahm" ],
+      "type": "string"
     }
   }
 }
