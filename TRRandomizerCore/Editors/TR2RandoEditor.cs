@@ -5,6 +5,7 @@ using System.Linq;
 using TRGE.Coord;
 using TRGE.Core;
 using TRLevelControl.Helpers;
+using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;
 using TRRandomizerCore.Textures;
@@ -70,6 +71,7 @@ namespace TRRandomizerCore.Editors
                 scriptEditor.SaveScript();
             }
 
+            ItemFactory itemFactory = new();
             TR2TextureMonitorBroker textureMonitor = new();
             TR2EnvironmentRandomizer environmentRandomizer = new()
             {
@@ -141,7 +143,8 @@ namespace TRRandomizerCore.Editors
                         BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
-                        Mirrorer = environmentRandomizer
+                        Mirrorer = environmentRandomizer,
+                        ItemFactory = itemFactory,
                     }.Randomize(Settings.SecretSeed);
                 }
 
@@ -157,7 +160,8 @@ namespace TRRandomizerCore.Editors
                         BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
-                        TextureMonitor = textureMonitor
+                        TextureMonitor = textureMonitor,
+                        ItemFactory = itemFactory,
                     }).Randomize(Settings.ItemSeed);
                 }
 

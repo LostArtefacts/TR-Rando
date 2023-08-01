@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Helpers
@@ -12,11 +9,15 @@ namespace TRRandomizerCore.Helpers
 
         private readonly Dictionary<string, List<int>> _reusableItemDefaults;
         private readonly Dictionary<string, Queue<int>> _availableItems;
+        private readonly Dictionary<string, HashSet<int>> _lockedItems;
 
-        public ItemFactory(string dataPath)
+        public ItemFactory(string dataPath = null)
         {
-            _reusableItemDefaults = JsonConvert.DeserializeObject<Dictionary<string, List<int>>>(File.ReadAllText(dataPath));
-            _availableItems = new Dictionary<string, Queue<int>>();
+            _reusableItemDefaults = dataPath == null
+                ? new()
+                : JsonConvert.DeserializeObject<Dictionary<string, List<int>>>(File.ReadAllText(dataPath));
+            _availableItems = new();
+            _lockedItems = new();
         }
 
         public Queue<int> GetItemPool(string lvl)
@@ -146,6 +147,20 @@ namespace TRRandomizerCore.Helpers
         public void FreeItem(string lvl, int itemIndex)
         {
             GetItemPool(lvl).Enqueue(itemIndex);
+        }
+
+        public void LockItem(string level, int itemIndex)
+        {
+            if (!_lockedItems.ContainsKey(level))
+            {
+                _lockedItems[level] = new();
+            }
+            _lockedItems[level].Add(itemIndex);
+        }
+
+        public bool IsItemLocked(string level, int itemIndex)
+        {
+            return _lockedItems.ContainsKey(level) && _lockedItems[level].Contains(itemIndex);
         }
     }
 }

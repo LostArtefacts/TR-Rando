@@ -74,6 +74,8 @@ namespace TRRandomizerCore.Randomizers
             {
                 Settings = Settings,
                 Generator = _generator,
+                ItemFactory = ItemFactory,
+                Mirrorer = Mirrorer,
             };
 
             if (ScriptEditor.Edition.IsCommunityPatch && !Settings.UseAuthoredSecrets)
@@ -560,15 +562,7 @@ namespace TRRandomizerCore.Randomizers
 
             AddDamageControl(level, damagingLocationUsed, glitchedDamagingLocationUsed);
 
-            // Authored secrets are permitted to enforce level state
-            if (usedLocations.Any(l => l.LevelState == LevelState.Mirrored))
-            {
-                Mirrorer.SetIsMirrored(level.Name, true);
-            }
-            else if (usedLocations.Any(l => l.LevelState == LevelState.NotMirrored))
-            {
-                Mirrorer.SetIsMirrored(level.Name, false);
-            }
+            _picker.FinaliseSecretPool(usedLocations, level.Name);
 
 #if DEBUG
             Debug.WriteLine(level.Name + ": " +  _picker.DescribeLocations(usedLocations));

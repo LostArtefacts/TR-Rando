@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using TRFDControl;
 using TRFDControl.Utilities;
 using TRGE.Core;
@@ -22,6 +19,7 @@ namespace TRRandomizerCore.Randomizers
         private static readonly List<int> _devRooms = null;
 
         internal TR2TextureMonitorBroker TextureMonitor { get; set; }
+        public ItemFactory ItemFactory { get; set; }
 
         // This replaces plane cargo index as TRGE may have randomized the weaponless level(s), but will also have injected pistols
         // into predefined locations. See FindUnarmedPistolsLocation below.
@@ -342,6 +340,11 @@ namespace TRRandomizerCore.Randomizers
 
                 for (int i = 0; i < _levelInstance.Data.Entities.Count(); i++)
                 {
+                    if (ItemFactory.IsItemLocked(_levelInstance.Name, i))
+                    {
+                        continue;
+                    }
+
                     if (targetents.Contains((TR2Entities)_levelInstance.Data.Entities[i].TypeID) && (i != _unarmedLevelPistolIndex))
                     {
                         Location RandomLocation = new Location();

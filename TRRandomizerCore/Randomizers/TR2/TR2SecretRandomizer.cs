@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
-using System.Reflection.Emit;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -20,6 +19,7 @@ namespace TRRandomizerCore.Randomizers
         private SecretPicker _picker;
 
         public IMirrorControl Mirrorer { get; set; }
+        public ItemFactory ItemFactory { get; set; }
 
         public TR2SecretRandomizer()
         {
@@ -187,14 +187,7 @@ namespace TRRandomizerCore.Randomizers
                 FixSecretTextures();
                 CheckForSecretDamage(secretMap);
 
-                if (secretMap.Values.Any(l => l.LevelState == LevelState.Mirrored))
-                {
-                    Mirrorer.SetIsMirrored(_levelInstance.Name, true);
-                }
-                else if (secretMap.Values.Any(l => l.LevelState == LevelState.NotMirrored))
-                {
-                    Mirrorer.SetIsMirrored(_levelInstance.Name, false);
-                }
+                _picker.FinaliseSecretPool(secretMap.Values, _levelInstance.Name);
 
 #if DEBUG
                 Debug.WriteLine(_levelInstance.Name + ": " + _picker.DescribeLocations(secretMap.Values));
@@ -287,6 +280,8 @@ namespace TRRandomizerCore.Randomizers
             {
                 Settings = Settings,
                 Generator = _generator,
+                ItemFactory = ItemFactory,
+                Mirrorer = Mirrorer,
             };
 
             foreach (TR2ScriptedLevel lvl in Levels)

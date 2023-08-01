@@ -278,9 +278,9 @@ namespace TRRandomizerCore.Randomizers
 
             for (int i = 0; i < level.Data.NumEntities; i++)
             {
-                if (_secretMapping.RewardEntities.Contains(i))
+                if (_secretMapping.RewardEntities.Contains(i)
+                    || ItemFactory.IsItemLocked(_levelInstance.Name, i))
                 {
-                    // These will either be in their default spot or in their dedicated reward room, so leave them be
                     continue;
                 }
 
