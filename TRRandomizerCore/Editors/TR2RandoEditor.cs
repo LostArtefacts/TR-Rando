@@ -5,6 +5,7 @@ using System.Linq;
 using TRGE.Coord;
 using TRGE.Core;
 using TRLevelControl.Helpers;
+using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;
 using TRRandomizerCore.Textures;
@@ -70,9 +71,23 @@ namespace TRRandomizerCore.Editors
                 scriptEditor.SaveScript();
             }
 
+            ItemFactory itemFactory = new();
+            TR2TextureMonitorBroker textureMonitor = new();
+            TR2EnvironmentRandomizer environmentRandomizer = new()
+            {
+                ScriptEditor = tr23ScriptEditor,
+                Levels = levels,
+                BasePath = wipDirectory,
+                BackupPath = backupDirectory,
+                SaveMonitor = monitor,
+                Settings = Settings,
+                TextureMonitor = textureMonitor
+            };
+            environmentRandomizer.AllocateMirroredLevels(Settings.EnvironmentSeed);
+
             // Texture monitoring is needed between enemy and texture randomization
             // to track where imported enemies are placed.
-            using (TR2TextureMonitorBroker textureMonitor = new TR2TextureMonitorBroker())
+            using (textureMonitor)
             {
                 if (!monitor.IsCancelled && Settings.RandomizeEnemies)
                 {
@@ -127,7 +142,9 @@ namespace TRRandomizerCore.Editors
                         BasePath = wipDirectory,
                         BackupPath = backupDirectory,
                         SaveMonitor = monitor,
-                        Settings = Settings
+                        Settings = Settings,
+                        Mirrorer = environmentRandomizer,
+                        ItemFactory = itemFactory,
                     }.Randomize(Settings.SecretSeed);
                 }
 
@@ -143,7 +160,8 @@ namespace TRRandomizerCore.Editors
                         BackupPath = backupDirectory,
                         SaveMonitor = monitor,
                         Settings = Settings,
-                        TextureMonitor = textureMonitor
+                        TextureMonitor = textureMonitor,
+                        ItemFactory = itemFactory,
                     }).Randomize(Settings.ItemSeed);
                 }
 
@@ -201,16 +219,7 @@ namespace TRRandomizerCore.Editors
                 if (!monitor.IsCancelled)
                 {
                     monitor.FireSaveStateBeginning(TRSaveCategory.Custom, Settings.RandomizeEnvironment ? "Randomizing environment" : "Applying default environment packs");
-                    new TR2EnvironmentRandomizer
-                    {
-                        ScriptEditor = tr23ScriptEditor,
-                        Levels = levels,
-                        BasePath = wipDirectory,
-                        BackupPath = backupDirectory,
-                        SaveMonitor = monitor,
-                        Settings = Settings,
-                        TextureMonitor = textureMonitor
-                    }.Randomize(Settings.EnvironmentSeed);
+                    environmentRandomizer.Randomize(Settings.EnvironmentSeed);
                 }
 
                 if (!monitor.IsCancelled && Settings.RandomizeAudio)

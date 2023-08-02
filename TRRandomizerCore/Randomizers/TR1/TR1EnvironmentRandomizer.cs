@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using TREnvironmentEditor;
+﻿using TREnvironmentEditor;
 using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Model.Types;
@@ -17,41 +14,57 @@ using TRRandomizerCore.Textures;
 
 namespace TRRandomizerCore.Randomizers
 {
-    public class TR1EnvironmentRandomizer : BaseTR1Randomizer
+    public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
     {
         internal bool EnforcedModeOnly => !Settings.RandomizeEnvironment;
         internal TR1TextureMonitorBroker TextureMonitor { get; set; }
 
         private List<TR1ScriptedLevel> _levelsToMirror;
 
-        public List<TR1ScriptedLevel> AllocateMirroredLevels(int seed)
+        public void AllocateMirroredLevels(int seed)
         {
-            if (!Settings.RandomizeEnvironment)
+            if (!Settings.RandomizeEnvironment || _levelsToMirror != null)
             {
-                return new List<TR1ScriptedLevel>();
+                return;
             }
 
             // This will only allocate once
-            if (_generator == null)
+            _generator ??= new(seed);
+
+            TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
+            _levelsToMirror = Levels.RandomSelection(_generator, (int)Settings.MirroredLevelCount, exclusions: new HashSet<TR1ScriptedLevel>
             {
-                _generator = new Random(seed);
+                assaultCourse
+            });
+
+            if (Settings.MirrorAssaultCourse)
+            {
+                _levelsToMirror.Add(assaultCourse);
+            }
+        }
+
+        public bool IsMirrored(string levelName)
+        {
+            return _levelsToMirror?.Contains(Levels.Find(l => l.Is(levelName))) ?? false;
+        }
+
+        public void SetIsMirrored(string levelName, bool mirrored)
+        {
+            TR1ScriptedLevel level = Levels.Find(l => l.Is(levelName));
+            if (level == null)
+            {
+                return;
             }
 
-            if (_levelsToMirror == null)
+            _levelsToMirror ??= new();
+            if (mirrored && !_levelsToMirror.Contains(level))
             {
-                TR1ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR1LevelNames.ASSAULT));
-                _levelsToMirror = Levels.RandomSelection(_generator, (int)Settings.MirroredLevelCount, exclusions: new HashSet<TR1ScriptedLevel>
-                {
-                    assaultCourse
-                });
-
-                if (Settings.MirrorAssaultCourse)
-                {
-                    _levelsToMirror.Add(assaultCourse);
-                }
+                _levelsToMirror.Add(level);
             }
-
-            return new List<TR1ScriptedLevel>(_levelsToMirror);
+            else if (!mirrored)
+            {
+                _levelsToMirror.Remove(level);
+            }
         }
 
         public override void Randomize(int seed)
@@ -86,7 +99,7 @@ namespace TRRandomizerCore.Randomizers
                 ApplyMappingToLevel(level, mapping);
             }
 
-            if (!EnforcedModeOnly && (_levelsToMirror.Contains(level.Script) || (level.IsAssault && Settings.MirrorAssaultCourse)))
+            if (_levelsToMirror?.Contains(level.Script) ?? false)
             {
                 MirrorLevel(level, mapping);
             }

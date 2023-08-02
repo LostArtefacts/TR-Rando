@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using TRRandomizerCore.Editors;
+﻿using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
 
 namespace TRRandomizerCore.Randomizers
@@ -10,14 +7,40 @@ namespace TRRandomizerCore.Randomizers
     {
         public RandomizerSettings Settings { get; set; }
         public Random Generator { get; set; }
+        public IMirrorControl Mirrorer { get; set; }
+        public ItemFactory ItemFactory { get; set; }
 
         public Queue<Location> GetGuaranteedLocations(IEnumerable<Location> allLocations, bool isMirrored, int totalCount, Func<Location, bool> validCallback = null)
         {
             Queue<Location> locations = new Queue<Location>();
 
+            if (Settings.UseSecretPack)
+            {
+                List<Location> pool = allLocations
+                    .Where(l => l.PackID == Settings.SecretPack)
+                    .ToList();
+
+                if (pool.Any(l => l.LevelState == LevelState.Mirrored)
+                    && pool.Any(l => l.LevelState == LevelState.NotMirrored))
+                {
+                    // Invalid, authors should be aware of this. Default to removing all mirrored locations.
+                    pool.RemoveAll(l => l.LevelState == LevelState.Mirrored);
+                }
+
+                for (int i = 0; i < pool.Count && locations.Count < totalCount; i++)
+                {
+                    locations.Enqueue(pool[i]);
+                }
+
+                if (locations.Count == totalCount)
+                {
+                    return locations;
+                }
+            }
+
             if (Settings.GuaranteeSecrets)
             {
-                int maxCount = Math.Max(1, (int)Math.Floor(totalCount / 2d));
+                int maxCount = Math.Max(1, (int)Math.Floor(totalCount / 2d)) + locations.Count;
 
                 // Create location pools for the categories selected.
                 List<IEnumerable<Location>> pools = new List<IEnumerable<Location>>();
@@ -69,6 +92,25 @@ namespace TRRandomizerCore.Randomizers
             }
 
             return locations;
+        }
+
+        public void FinaliseSecretPool(IEnumerable<Location> usedLocations, string level)
+        {
+            // Secrets in packs are permitted to enforce level state
+            if (usedLocations.Any(l => l.LevelState == LevelState.Mirrored))
+            {
+                Mirrorer.SetIsMirrored(level, true);
+            }
+            else if (usedLocations.Any(l => l.LevelState == LevelState.NotMirrored))
+            {
+                Mirrorer.SetIsMirrored(level, false);
+            }
+
+            foreach (Location location in usedLocations.Where(l => l.EntityIndex != -1))
+            {
+                // Indicates that a secret relies on another item to remain in its original position
+                ItemFactory.LockItem(level, location.EntityIndex);
+            }
         }
 
         private IEnumerable<Location> FilterLocations(IEnumerable<Location> locations, bool isMirrored, Difficulty difficulty, bool glitched)

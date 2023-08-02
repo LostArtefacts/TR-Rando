@@ -21,7 +21,7 @@ using TRRandomizerCore.Utilities;
 
 namespace TRRandomizerCore.Randomizers
 {
-    public class TR3SecretRandomizer : BaseTR3Randomizer
+    public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
     {
         private static readonly string _invalidLocationMsg = "Cannot place a nonvalidated secret where a trigger already exists - {0} [X={1}, Y={2}, Z={3}, R={4}]";
         private static readonly string _trapdoorLocationMsg = "Cannot place a secret on the same sector as a bridge/trapdoor - {0} [X={1}, Y={2}, Z={3}, R={4}]";
@@ -32,7 +32,7 @@ namespace TRRandomizerCore.Randomizers
         private static readonly List<int> _devRooms = null;
         private static readonly ushort _devModeSecretCount = 6;
 
-        private Dictionary<string, List<Location>> _locations, _unarmedLocations;
+        private readonly Dictionary<string, List<Location>> _locations, _unarmedLocations;
 
         private int _proxEvaluationCount;
 
@@ -49,20 +49,33 @@ namespace TRRandomizerCore.Randomizers
 
         internal TR3TextureMonitorBroker TextureMonitor { get; set; }
         public ItemFactory ItemFactory { get; set; }
-        public List<TR3ScriptedLevel> MirrorLevels { get; set; }
+        public IMirrorControl Mirrorer { get; set; }
 
         private SecretPicker _picker;
+
+        public TR3SecretRandomizer()
+        {
+            _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\locations.json"));
+            _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
+        }
+
+        public IEnumerable<string> GetPacks()
+        {
+            return _locations.Values
+                .SelectMany(v => v.Select(l => l.PackID))
+                .Where(a => a != Location.DefaultPackID)
+                .Distinct();
+        }
 
         public override void Randomize(int seed)
         {
             _generator = new Random(seed);
-            _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\locations.json"));
-            _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
-
             _picker = new SecretPicker
             {
                 Settings = Settings,
                 Generator = _generator,
+                ItemFactory = ItemFactory,
+                Mirrorer = Mirrorer,
             };
 
             SetMessage("Randomizing secrets - loading levels");
@@ -346,10 +359,10 @@ namespace TRRandomizerCore.Randomizers
             {
                 if (_devRooms == null || _devRooms.Contains(location.Room))
                 {
-                    if (MirrorLevels.Contains(level.Script) && location.LevelState == LevelState.NotMirrored)
+                    if (Mirrorer.IsMirrored(level.Name) && location.LevelState == LevelState.NotMirrored)
                         continue;
 
-                    if (!MirrorLevels.Contains(level.Script) && location.LevelState == LevelState.Mirrored)
+                    if (!Mirrorer.IsMirrored(level.Name) && location.LevelState == LevelState.Mirrored)
                         continue;
 
                     secret.Location = location;
@@ -404,7 +417,7 @@ namespace TRRandomizerCore.Randomizers
             List<Location> locations = _locations[level.Name];
             List<Location> usedLocations = new List<Location>();
 
-            Queue<Location> guaranteedLocations = _picker.GetGuaranteedLocations(locations, MirrorLevels.Contains(level.Script), level.Script.NumSecrets, location =>
+            Queue<Location> guaranteedLocations = _picker.GetGuaranteedLocations(locations, Mirrorer.IsMirrored(level.Name), level.Script.NumSecrets, location =>
             {
                 bool result = EvaluateProximity(location, usedLocations, level);
                 if (result)
@@ -478,6 +491,8 @@ namespace TRRandomizerCore.Randomizers
 
             AddDamageControl(level, pickupTypes, damagingLocationUsed, glitchedDamagingLocationUsed);
 
+            _picker.FinaliseSecretPool(usedLocations, level.Name);
+
 #if DEBUG
             Debug.WriteLine(level.Name + ": " + _picker.DescribeLocations(usedLocations));
 #endif
@@ -494,10 +509,10 @@ namespace TRRandomizerCore.Randomizers
             if (loc.RequiresGlitch && !Settings.GlitchedSecrets)
                 return false;
 
-            if (MirrorLevels.Contains(level.Script) && loc.LevelState == LevelState.NotMirrored)
+            if (Mirrorer.IsMirrored(level.Name) && loc.LevelState == LevelState.NotMirrored)
                 return false;
 
-            if (!MirrorLevels.Contains(level.Script) && loc.LevelState == LevelState.Mirrored)
+            if (!Mirrorer.IsMirrored(level.Name) && loc.LevelState == LevelState.Mirrored)
                 return false;
 
             if (usedLocs.Count == 0 || usedLocs == null)

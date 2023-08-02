@@ -74,7 +74,53 @@ Currently, the number of secrets per level is hard-coded to the level's original
 # Generating Locations
 Use trview to generate secret locations by making use of the available [randomizer settings](https://github.com/chreden/trview#randomizer-integration) feature. The file below should be copied locally to `%LOCALAPPDATA%/trview`.
 
-https://github.com/DanzaG/TR2-Rando/blob/master/TRRandomizerCore/Resources/Shared/randomizer.json
+https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Shared/randomizer.json
+
+### Property guide
+Not all properties are used in every circumstance, and their meanings can differ based on where they are used. Use the guide below for reference.
+
+| Property | Usage | Description |
+|-|-|-|
+| Angle | Items, Enemies, Vehicles | Sets the Y rotation of an entity. |
+| Difficulty | Secrets | Sets the difficulty level of a secret. |
+| Entity Index | Enemies | For TR1 only, used to link normal enemies to Atlantean egg wall locations during randomization. |
+| Entity Index | Secrets | Allows a secret to be linked to another pickup entity, such that the pickup location will be locked i.e. ignored in item randomization. |
+| Invalidates Room | Items | Indicates that every sector in a room is invalid for general item positioning. |
+| Key Item Group ID | Items | For TR1 and TR3, links locations to key items IDs to form zoning. See `TREntities` and `TR3Entities`. |
+| Level State | Secrets | Indicates that a secret can only be used when a level is in a specific mirroring state e.g. for specific glitches. |
+| Pack ID | Secrets | Used in [secret pack mode](#secret-packs) |
+| Requires Damage | Secrets | Indicates that Lara will take damage collecting this secret; medipacks will be provided when this flag is detected. |
+| Requires Glitch | Secrets | A glitch is needed to collect this secret - links to the UI option available to users. |
+| Target Type | Vehicles | Links a location to a specific model ID, currently used for positioning randomized vehicles. |
+| Validated | Items | If a room has `Invalidates Room` set to `true`, additional locations can be added with `Validated` set to `false` - this means that the entire room is excluded apart from those specific locations. |
+| Validated | Secrets | For TR1 and TR3, if secrets are to be placed where there are already triggers, they will not be chosen during randomization unless `Validated` is selected. This allows for debugging to test that trigger behaviour remains as expected. |
+| Vehicle Required | Secrets | Indicates that a vehicle is required to collect this secret, and so any planned randomization of existing vehicles in the level will not take place. Note that this will not automatically add a vehicle. |
+
+## Secret Packs
+The randomizer supports pre-defined secret packs, so allowing players to play with secrets that have been chosen by community members. To author your own secret pack, follow these steps.
+
+1. Open your copy of `%LOCALAPPDATA%/trview/randomizer.json` and locate the `PackID` property. Add your pack title to the `options` array (this is what will be displayed both in trview and the randomizer itself).
+2. Restart trview if you have it open.
+3. Setup a local folder with each level for the game you wish to create a secret pack for. Ensure that the levels are vanilla, and that the level file names are all in uppercase.
+4. In trview, open the first level in the folder you have created above.
+5. Click on `Settings` and ensure that `Enable Randomizer Tools` is selected in the `General` tab.
+6. Click on `Windows > Route`, then in the Route window, select `File > Open`. Select the relevant randomizer locations file for the game e.g. `Resources/TR1/locations.json` in your randomizer folder.
+7. You will now see waypoints marking secret locations. You can add new waypoints and set the `PackID` property to your pack, or edit existing ones if applicable.
+8. Clicking on the other level names in the Route window will open that level.
+9. Once you have finished, click `File > Save` in the Route window.
+10. You can now submit a pull request with the changed locations file and `randomizer.json` trview file if applicable.
+
+Note that the `Requires Glitch` and `Difficulty` properties are ignored for secrets that are part of a pack - that is, they will be included regardless. However, you should ensure that these properties are correctly set anyway, as your secrets may be included in standard playthroughs, and so the user's choices in the randomizer should be honoured.
+
+### Level State
+Be sure to set the `Level State` property as well. If a secret within a pack only works when the level is mirrored, then this will enforce mirroring on that level. Equally, `Not Mirrored` means the secret only works when the level is in its normal state. `Any` is the default, and means the secret works in either state.
+
+Be careful not to enforce a mirrored secret and non-mirrored in the same level. If this does happen, the randomizer will ignore your mirrored secret. You can create separate packs as an alternative.
+
+Note that in normal mode, secrets whose states do not match the level are simply skipped and another is chosen.
+
+### TR2 Zoning
+As pre-defined secrets may not necessarily fall into the default [zones](https://github.com/LostArtefacts/TR-Rando/wiki/Zones#secrets), you should position your waypoints manually in stone-jade-gold order instead. For TR1 and TR3, this is not important due to the different zoning technique and the arbitrary artefact types.
 
 ### Underwater Corner Secrets
 When placing secrets in corners underwater, there is a minimum distance from each wall the secret will need to be positioned - this is 130 units. Any closer to the wall and Lara won't pick the secret up.

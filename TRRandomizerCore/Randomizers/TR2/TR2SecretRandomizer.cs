@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
@@ -13,12 +10,29 @@ using TRRandomizerCore.Zones;
 
 namespace TRRandomizerCore.Randomizers
 {
-    public class TR2SecretRandomizer : BaseTR2Randomizer
+    public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
     {
         private static readonly List<int> _devRooms = null;
         private static readonly int _levelSecretCount = 3;
 
+        private readonly Dictionary<string, List<Location>> _locations;
         private SecretPicker _picker;
+
+        public IMirrorControl Mirrorer { get; set; }
+        public ItemFactory ItemFactory { get; set; }
+
+        public TR2SecretRandomizer()
+        {
+            _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\locations.json"));
+        }
+
+        public IEnumerable<string> GetPacks()
+        {
+            return _locations.Values
+                .SelectMany(v => v.Select(l => l.PackID))
+                .Where(a => a != Location.DefaultPackID)
+                .Distinct();
+        }
 
         private void RandomizeSecrets(List<Location> LevelLocations)
         {
@@ -30,38 +44,66 @@ namespace TRRandomizerCore.Randomizers
                     return;
                 }
 
-                //Apply zoning to the locations to ensure they are spread out.
-                ZonedLocationCollection ZonedLocations = new ZonedLocationCollection();
-
-                ZonedLocations.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), LevelLocations, ZonePopulationMethod.SecretsOnly);
-
                 Location goldLocation = null;
                 Location jadeLocation = null;
                 Location stoneLocation = null;
 
                 // Applied guaranteed logic first.
-                IEnumerable<Location> allLocations = ZonedLocations.GoldZone.Concat(ZonedLocations.JadeZone).Concat(ZonedLocations.StoneZone);
-                Queue<Location> guaranteedLocations = _picker.GetGuaranteedLocations(allLocations, false, _levelSecretCount);
+                Queue<Location> guaranteedLocations = _picker.GetGuaranteedLocations(LevelLocations, false, _levelSecretCount);
+
+                //Apply zoning to the locations to ensure they are spread out.                
+                List<Location> stoneZone, jadeZone, goldZone;
+                bool secretPackMode = Settings.UseSecretPack && LevelLocations.Any(l => l.PackID != Location.DefaultPackID);
+                if (secretPackMode)
+                {
+                    stoneZone = jadeZone = goldZone = LevelLocations;
+                    guaranteedLocations = new(guaranteedLocations.Reverse());
+                }
+                else
+                {
+                    ZonedLocationCollection zones = new();
+                    zones.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), LevelLocations, ZonePopulationMethod.SecretsOnly);
+                    stoneZone = zones.StoneZone;
+                    jadeZone = zones.JadeZone;
+                    goldZone = zones.GoldZone;
+                }
+
+                bool TestLocation(Location location, params Location[] setLocations)
+                {
+                    if (secretPackMode)
+                    {
+                        return true;
+                    }
+
+                    bool valid = true;
+                    foreach (Location setLocation in setLocations)
+                    {
+                        valid &= setLocation == null || setLocation.Room != location.Room;
+                    }
+
+                    return valid;
+                }
+
                 while (guaranteedLocations.Count > 0)
                 {
                     Location location = guaranteedLocations.Dequeue();
-                    if (ZonedLocations.GoldZone.Contains(location) && goldLocation == null)
+                    if (goldZone.Contains(location) && goldLocation == null)
                     {
-                        if ((stoneLocation == null || location.Room != stoneLocation.Room) && (jadeLocation == null || location.Room != jadeLocation.Room))
+                        if (TestLocation(location, stoneLocation, jadeLocation))
                         {
                             goldLocation = location;
                         }
                     }
-                    else if (ZonedLocations.JadeZone.Contains(location) && jadeLocation == null)
+                    else if (jadeZone.Contains(location) && jadeLocation == null)
                     {
-                        if ((stoneLocation == null || location.Room != stoneLocation.Room) && (goldLocation == null || location.Room != goldLocation.Room))
+                        if (TestLocation(location, stoneLocation, goldLocation))
                         {
                             jadeLocation = location;
                         }
                     }
                     else if (stoneLocation == null)
                     {
-                        if ((jadeLocation == null || location.Room != jadeLocation.Room) && (goldLocation == null || location.Room != goldLocation.Room))
+                        if (TestLocation(location, jadeLocation, goldLocation))
                         {
                             stoneLocation = location;
                         }
@@ -74,7 +116,7 @@ namespace TRRandomizerCore.Randomizers
                 {
                     do
                     {
-                        goldLocation = ZonedLocations.GoldZone[_generator.Next(0, ZonedLocations.GoldZone.Count)];
+                        goldLocation = goldZone[_generator.Next(0, goldZone.Count)];
                     } while ((goldLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
                             (goldLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
                 }
@@ -83,7 +125,7 @@ namespace TRRandomizerCore.Randomizers
                 {
                     do
                     {
-                        jadeLocation = ZonedLocations.JadeZone[_generator.Next(0, ZonedLocations.JadeZone.Count)];
+                        jadeLocation = jadeZone[_generator.Next(0, jadeZone.Count)];
                     } while ((jadeLocation.Room == goldLocation.Room) ||
                             (jadeLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
                             (jadeLocation.RequiresGlitch == true && Settings.GlitchedSecrets == false));
@@ -93,7 +135,7 @@ namespace TRRandomizerCore.Randomizers
                 {
                     do
                     {
-                        stoneLocation = ZonedLocations.StoneZone[_generator.Next(0, ZonedLocations.StoneZone.Count)];
+                        stoneLocation = stoneZone[_generator.Next(0, stoneZone.Count)];
                     } while ((stoneLocation.Room == goldLocation.Room) ||
                             (stoneLocation.Room == jadeLocation.Room) ||
                             (stoneLocation.Difficulty == Difficulty.Hard && Settings.HardSecrets == false) ||
@@ -144,6 +186,8 @@ namespace TRRandomizerCore.Randomizers
 
                 FixSecretTextures();
                 CheckForSecretDamage(secretMap);
+
+                _picker.FinaliseSecretPool(secretMap.Values, _levelInstance.Name);
 
 #if DEBUG
                 Debug.WriteLine(_levelInstance.Name + ": " + _picker.DescribeLocations(secretMap.Values));
@@ -236,20 +280,22 @@ namespace TRRandomizerCore.Randomizers
             {
                 Settings = Settings,
                 Generator = _generator,
+                ItemFactory = ItemFactory,
+                Mirrorer = Mirrorer,
             };
-
-            Dictionary<string, List<Location>> Locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\locations.json"));
 
             foreach (TR2ScriptedLevel lvl in Levels)
             {
                 //Read the level into a level object
                 LoadLevelInstance(lvl);
+                if (_locations.ContainsKey(_levelInstance.Name))
+                {
+                    //Apply the modifications
+                    RandomizeSecrets(_locations[_levelInstance.Name]);
 
-                //Apply the modifications
-                RandomizeSecrets(Locations[_levelInstance.Name]);
-
-                //Write back the level file
-                SaveLevelInstance();
+                    //Write back the level file
+                    SaveLevelInstance();
+                }
 
                 if (!TriggerProgress())
                 {

@@ -56,6 +56,18 @@
       "default": -1,
       "display": "Target Type",
       "type": "number"
+    },
+    "PackID": {
+      "default": "TRRando",
+      "display": "Pack ID",
+      "options": [
+        "TRRando",
+        "apel",
+        "Danza",
+        "Eycore",
+        "Lahm"
+      ],
+      "type": "string"
     }
   }
 }

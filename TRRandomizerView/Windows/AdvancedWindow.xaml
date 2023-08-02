@@ -88,6 +88,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -1471,7 +1472,8 @@
 
             <!-- Secret Count -->
             <StackPanel Grid.Row="19"
-                        Visibility="{Binding HasSecretCountMode, Converter={StaticResource BoolToCollapsedConverter}}">
+                        Visibility="{Binding HasSecretCountMode, Converter={StaticResource BoolToCollapsedConverter}}"
+                        IsEnabled="{Binding ControllerProxy.UseGenericSecrets}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
                 </StackPanel.Resources>
@@ -1586,8 +1588,60 @@
                 </Grid>
             </StackPanel>
 
-            <!-- Weather -->
+            <!-- Secret Packs -->
             <StackPanel Grid.Row="20"
+                        Visibility="{Binding HasSecretPackMode, Converter={StaticResource BoolToCollapsedConverter}}">
+                <StackPanel.Resources>
+                    <cvt:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+
+                <TextBlock Style="{StaticResource HeaderStyle}"
+                           Text="Secret Packs"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <CheckBox IsChecked="{Binding ControllerProxy.UseSecretPack, Mode=TwoWay}"
+                                  VerticalAlignment="Center">
+                            <Label Padding="0"
+                                   Content="Use secret pack" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Grid.RowSpan="2">
+                        <Label Style="{StaticResource OptionDescriptionStyle}">
+                            <TextBlock>
+                                Use a pre-defined secret pack, compiled by community members. This may enforce glitched/hard secrets, and may
+                                <LineBreak/>modify level environments to match. See
+                                <Hyperlink ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/SECRETS.md#secret-packs"
+                                           NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/SECRETS.md#secret-packs"
+                                           RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink> for full details.
+                            </TextBlock>
+                        </Label>
+                    </Border>
+
+                    <Border Margin="0,3,0,0"
+                            Grid.Row="1">
+                        <ComboBox ItemsSource="{Binding ControllerProxy.AvailableSecretPacks}"
+                                  SelectedItem="{Binding ControllerProxy.SecretPack, Mode=TwoWay}"
+                                  IsEnabled="{Binding ControllerProxy.UseSecretPack}"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Center"/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!-- Weather -->
+            <StackPanel Grid.Row="21"
                         Visibility="{Binding HasWeatherMode, Converter={StaticResource BoolToCollapsedConverter}}">
 
                 <TextBlock Style="{StaticResource HeaderStyle}"

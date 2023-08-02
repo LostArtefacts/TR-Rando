@@ -1388,6 +1388,35 @@ namespace TRRandomizerCore
             set => LevelRandomizer.MaxSecretCount = value;
         }
 
+        public bool UseSecretPack
+        {
+            get => LevelRandomizer.UseSecretPack;
+            set => LevelRandomizer.UseSecretPack = value;
+        }
+
+        public string SecretPack
+        {
+            get => LevelRandomizer.SecretPack;
+            set => LevelRandomizer.SecretPack = value;
+        }
+
+        public string[] AvailableSecretPacks
+        {
+            get
+            {
+                ISecretRandomizer randomizer = _editor.Edition.Version switch
+                {
+                    TRVersion.TR1 => new TR1SecretRandomizer(),
+                    TRVersion.TR2 => new TR2SecretRandomizer(),
+                    TRVersion.TR3 => new TR3SecretRandomizer(),
+                    _ => throw new Exception(),
+                };
+                return randomizer.GetPacks()
+                    .OrderBy(a => a.ToLower())
+                    .ToArray();
+            }
+        }
+
         public bool IncludeKeyItems
         {
             get => LevelRandomizer.IncludeKeyItems;
