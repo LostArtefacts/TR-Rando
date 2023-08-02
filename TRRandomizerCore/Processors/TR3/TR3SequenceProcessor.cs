@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq;
 using TREnvironmentEditor;
 using TREnvironmentEditor.Model;
 using TRFDControl;
@@ -42,6 +40,8 @@ namespace TRRandomizerCore.Processors
             [TR3Adventure.Nevada] = 86,
             [TR3Adventure.Antarctica] = 88
         };
+
+        private static readonly uint _defaultColdMediCount = 3;
 
         private Dictionary<string, List<Location>> _upvLocations;
 
@@ -94,6 +94,7 @@ namespace TRRandomizerCore.Processors
                     // The UPV keeps Lara warm underwater so make this available for
                     // those levels that have long underwater sections.
                     ImportUPV(level);
+                    AddColdLevelMedis(level);
                 }
             }
             else if (level.Is(TR3LevelNames.ANTARC))
@@ -203,6 +204,29 @@ namespace TRRandomizerCore.Processors
                     .ToList()
                     .ForEach(e => e.TypeID = (short)TR3Entities.Monkey);
             }
+        }
+
+        private void AddColdLevelMedis(TR3CombinedLevel level)
+        {
+            if (!level.Data.Entities.Any(e => e.TypeID == (short)TR3Entities.UPV))
+            {
+                return;
+            }
+            
+            uint largeMediCount = _defaultColdMediCount;
+            uint smallMediCount = (uint)Math.Ceiling(level.Data.Entities.Where(e => e.TypeID == (short)TR3Entities.UnderwaterSwitch).Count() / 2d);
+            if (smallMediCount > 0)
+            {
+                largeMediCount++;
+            }
+            if (level.Script.RemovesAmmo)
+            {
+                largeMediCount *= 2;
+                smallMediCount *= 2;
+            }
+
+            level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3Entities.LargeMed_P), largeMediCount);
+            level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3Entities.SmallMed_P), smallMediCount);
         }
 
         private void AmendAntarctica(TR3CombinedLevel level)
