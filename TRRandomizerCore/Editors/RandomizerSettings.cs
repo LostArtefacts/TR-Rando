@@ -83,8 +83,8 @@ namespace TRRandomizerCore.Editors
         public TRSecretCountMode SecretCountMode { get; set; }
         public uint MinSecretCount { get; set; }
         public uint MaxSecretCount { get; set; }
-        public bool UseAuthoredSecrets { get; set; }
-        public string SecretAuthor { get; set; }
+        public bool UseSecretPack { get; set; }
+        public string SecretPack { get; set; }
         public bool PersistOutfits { get; set; }
         public bool RemoveRobeDagger { get; set; }
         public uint HaircutLevelCount { get; set; }
@@ -186,8 +186,8 @@ namespace TRRandomizerCore.Editors
             SecretCountMode = (TRSecretCountMode)config.GetEnum(nameof(SecretCountMode), typeof(TRSecretCountMode), TRSecretCountMode.Default);
             MinSecretCount = config.GetUInt(nameof(MinSecretCount), 1);
             MaxSecretCount = config.GetUInt(nameof(MaxSecretCount), 5);
-            UseAuthoredSecrets = config.GetBool(nameof(UseAuthoredSecrets));
-            SecretAuthor = config.GetString(nameof(SecretAuthor));
+            UseSecretPack = config.GetBool(nameof(UseSecretPack));
+            SecretPack = config.GetString(nameof(SecretPack));
 
             RandomizeItems = config.GetBool(nameof(RandomizeItems));
             ItemSeed = config.GetInt(nameof(ItemSeed), defaultSeed);
@@ -338,8 +338,8 @@ namespace TRRandomizerCore.Editors
             config[nameof(SecretCountMode)] = SecretCountMode;
             config[nameof(MinSecretCount)] = MinSecretCount;
             config[nameof(MaxSecretCount)] = MaxSecretCount;
-            config[nameof(UseAuthoredSecrets)] = UseAuthoredSecrets;
-            config[nameof(SecretAuthor)] = SecretAuthor;
+            config[nameof(UseSecretPack)] = UseSecretPack;
+            config[nameof(SecretPack)] = SecretPack;
 
             config[nameof(RandomizeItems)] = RandomizeItems;
             config[nameof(ItemSeed)] = ItemSeed;

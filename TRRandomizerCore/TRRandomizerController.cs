@@ -1388,19 +1388,19 @@ namespace TRRandomizerCore
             set => LevelRandomizer.MaxSecretCount = value;
         }
 
-        public bool UseAuthoredSecrets
+        public bool UseSecretPack
         {
-            get => LevelRandomizer.UseAuthoredSecrets;
-            set => LevelRandomizer.UseAuthoredSecrets = value;
+            get => LevelRandomizer.UseSecretPack;
+            set => LevelRandomizer.UseSecretPack = value;
         }
 
-        public string SecretAuthor
+        public string SecretPack
         {
-            get => LevelRandomizer.SecretAuthor;
-            set => LevelRandomizer.SecretAuthor = value;
+            get => LevelRandomizer.SecretPack;
+            set => LevelRandomizer.SecretPack = value;
         }
 
-        public string[] AvailableSecretAuthors
+        public string[] AvailableSecretPacks
         {
             get
             {
@@ -1411,7 +1411,7 @@ namespace TRRandomizerCore
                     TRVersion.TR3 => new TR3SecretRandomizer(),
                     _ => throw new Exception(),
                 };
-                return randomizer.GetAuthors()
+                return randomizer.GetPacks()
                     .OrderBy(a => a.ToLower())
                     .ToArray();
             }

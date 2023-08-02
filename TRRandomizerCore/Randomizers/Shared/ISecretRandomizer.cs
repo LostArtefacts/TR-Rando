@@ -2,5 +2,5 @@
 
 public interface ISecretRandomizer
 {
-    IEnumerable<string> GetAuthors();
+    IEnumerable<string> GetPacks();
 }

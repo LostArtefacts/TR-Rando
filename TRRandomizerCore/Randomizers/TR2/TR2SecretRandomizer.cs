@@ -26,11 +26,11 @@ namespace TRRandomizerCore.Randomizers
             _locations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR2\Locations\locations.json"));
         }
 
-        public IEnumerable<string> GetAuthors()
+        public IEnumerable<string> GetPacks()
         {
             return _locations.Values
-                .SelectMany(v => v.Select(l => l.Author))
-                .Where(a => a != Location.DefaultAuthor)
+                .SelectMany(v => v.Select(l => l.PackID))
+                .Where(a => a != Location.DefaultPackID)
                 .Distinct();
         }
 
@@ -53,8 +53,8 @@ namespace TRRandomizerCore.Randomizers
 
                 //Apply zoning to the locations to ensure they are spread out.                
                 List<Location> stoneZone, jadeZone, goldZone;
-                bool authorMode = Settings.UseAuthoredSecrets && LevelLocations.Any(l => l.Author != Location.DefaultAuthor);
-                if (authorMode)
+                bool secretPackMode = Settings.UseSecretPack && LevelLocations.Any(l => l.PackID != Location.DefaultPackID);
+                if (secretPackMode)
                 {
                     stoneZone = jadeZone = goldZone = LevelLocations;
                     guaranteedLocations = new(guaranteedLocations.Reverse());
@@ -70,7 +70,7 @@ namespace TRRandomizerCore.Randomizers
 
                 bool TestLocation(Location location, params Location[] setLocations)
                 {
-                    if (authorMode)
+                    if (secretPackMode)
                     {
                         return true;
                     }

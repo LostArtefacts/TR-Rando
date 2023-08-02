@@ -1588,15 +1588,15 @@
                 </Grid>
             </StackPanel>
 
-            <!-- Authored Secret Mode -->
+            <!-- Secret Packs -->
             <StackPanel Grid.Row="20"
-                        Visibility="{Binding HasAuthoredSecretMode, Converter={StaticResource BoolToCollapsedConverter}}">
+                        Visibility="{Binding HasSecretPackMode, Converter={StaticResource BoolToCollapsedConverter}}">
                 <StackPanel.Resources>
                     <cvt:ComparisonConverter x:Key="ComparisonConverter" />
                 </StackPanel.Resources>
 
                 <TextBlock Style="{StaticResource HeaderStyle}"
-                           Text="Authored Secret Mode"/>
+                           Text="Secret Packs"/>
 
                 <Grid Margin="0,5,0,0">
                     <Grid.RowDefinitions>
@@ -1609,10 +1609,10 @@
                     </Grid.ColumnDefinitions>
 
                     <Border>
-                        <CheckBox IsChecked="{Binding ControllerProxy.UseAuthoredSecrets, Mode=TwoWay}"
+                        <CheckBox IsChecked="{Binding ControllerProxy.UseSecretPack, Mode=TwoWay}"
                                   VerticalAlignment="Center">
                             <Label Padding="0"
-                                   Content="Use authored mode" />
+                                   Content="Use secret pack" />
                         </CheckBox>
                     </Border>
 
@@ -1620,10 +1620,10 @@
                             Grid.RowSpan="2">
                         <Label Style="{StaticResource OptionDescriptionStyle}">
                             <TextBlock>
-                                Use pre-defined secrets by your chosen author. This may enforce glitched/hard secrets, and may
+                                Use a pre-defined secret pack, compiled by community members. This may enforce glitched/hard secrets, and may
                                 <LineBreak/>modify level environments to match. See
-                                <Hyperlink ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/SECRETS.md"
-                                           NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/SECRETS.md"
+                                <Hyperlink ToolTip="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/SECRETS.md#secret-packs"
+                                           NavigateUri="https://github.com/LostArtefacts/TR-Rando/blob/master/TRRandomizerCore/Resources/Documentation/SECRETS.md#secret-packs"
                                            RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink> for full details.
                             </TextBlock>
                         </Label>
@@ -1631,9 +1631,9 @@
 
                     <Border Margin="0,3,0,0"
                             Grid.Row="1">
-                        <ComboBox ItemsSource="{Binding ControllerProxy.AvailableSecretAuthors}"
-                                  SelectedItem="{Binding ControllerProxy.SecretAuthor, Mode=TwoWay}"
-                                  IsEnabled="{Binding ControllerProxy.UseAuthoredSecrets}"
+                        <ComboBox ItemsSource="{Binding ControllerProxy.AvailableSecretPacks}"
+                                  SelectedItem="{Binding ControllerProxy.SecretPack, Mode=TwoWay}"
+                                  IsEnabled="{Binding ControllerProxy.UseSecretPack}"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Center"/>
                     </Border>

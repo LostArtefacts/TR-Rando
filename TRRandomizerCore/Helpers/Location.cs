@@ -4,7 +4,7 @@ namespace TRRandomizerCore.Helpers
 {
     public class Location
     {
-        public const string DefaultAuthor = "TRRando";
+        public const string DefaultPackID = "TRRando";
 
         public int X { get; set; }
 
@@ -44,8 +44,8 @@ namespace TRRandomizerCore.Helpers
         [DefaultValue(-1)]
         public short TargetType { get; set; }
 
-        [DefaultValue(DefaultAuthor)]
-        public string Author { get; set; }
+        [DefaultValue(DefaultPackID)]
+        public string PackID { get; set; }
 
         public Location()
         {
@@ -66,7 +66,7 @@ namespace TRRandomizerCore.Helpers
             LevelState = LevelState.Any;
             EntityIndex = -1;
             TargetType = -1;
-            Author = DefaultAuthor;
+            PackID = DefaultPackID;
         }
 
         /// <summary>

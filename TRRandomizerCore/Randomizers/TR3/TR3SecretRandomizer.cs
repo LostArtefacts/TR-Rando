@@ -59,11 +59,11 @@ namespace TRRandomizerCore.Randomizers
             _unarmedLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(ReadResource(@"TR3\Locations\unarmed_locations.json"));
         }
 
-        public IEnumerable<string> GetAuthors()
+        public IEnumerable<string> GetPacks()
         {
             return _locations.Values
-                .SelectMany(v => v.Select(l => l.Author))
-                .Where(a => a != Location.DefaultAuthor)
+                .SelectMany(v => v.Select(l => l.PackID))
+                .Where(a => a != Location.DefaultPackID)
                 .Distinct();
         }
 

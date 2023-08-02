@@ -14,10 +14,10 @@ namespace TRRandomizerCore.Randomizers
         {
             Queue<Location> locations = new Queue<Location>();
 
-            if (Settings.UseAuthoredSecrets)
+            if (Settings.UseSecretPack)
             {
                 List<Location> pool = allLocations
-                    .Where(l => l.Author == Settings.SecretAuthor)
+                    .Where(l => l.PackID == Settings.SecretPack)
                     .ToList();
 
                 if (pool.Any(l => l.LevelState == LevelState.Mirrored)
@@ -96,7 +96,7 @@ namespace TRRandomizerCore.Randomizers
 
         public void FinaliseSecretPool(IEnumerable<Location> usedLocations, string level)
         {
-            // Authored secrets are permitted to enforce level state
+            // Secrets in packs are permitted to enforce level state
             if (usedLocations.Any(l => l.LevelState == LevelState.Mirrored))
             {
                 Mirrorer.SetIsMirrored(level, true);

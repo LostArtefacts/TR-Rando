@@ -57,10 +57,16 @@
       "display": "Target Type",
       "type": "number"
     },
-    "Author": {
+    "PackID": {
       "default": "TRRando",
-      "display": "Author",
-      "options": [ "TRRando", "apel", "Danza", "Eycore", "Lahm" ],
+      "display": "Pack ID",
+      "options": [
+        "TRRando",
+        "apel",
+        "Danza",
+        "Eycore",
+        "Lahm"
+      ],
       "type": "string"
     }
   }

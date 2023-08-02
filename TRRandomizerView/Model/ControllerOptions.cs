@@ -68,9 +68,9 @@ namespace TRRandomizerView.Model
         private uint _uncontrolledSFXCount;
         private bool _uncontrolledSFXAssaultCourse;
         private uint _rainLevelCount, _snowLevelCount, _coldLevelCount;
-        private bool _useAuthoredSecrets;
-        private string _secretAuthor;
-        private string[] _availableSecretAuthors;
+        private bool _useSecretPack;
+        private string _secretPack;
+        private string[] _availableSecretPacks;
 
         private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls, _healthBoolItemControls, _weatherBoolItemControls;
         private List<BoolItemIDControlClass> _selectableEnemies;
@@ -2072,12 +2072,12 @@ namespace TRRandomizerView.Model
             }
         }
 
-        public bool UseAuthoredSecrets
+        public bool UseSecretPack
         {
-            get => _useAuthoredSecrets;
+            get => _useSecretPack;
             set
             {
-                _useAuthoredSecrets = value;
+                _useSecretPack = value;
                 FirePropertyChanged();
                 FirePropertyChanged(nameof(UseGenericSecrets));
             }
@@ -2085,27 +2085,27 @@ namespace TRRandomizerView.Model
 
         public bool UseGenericSecrets
         {
-            get => !IsAuthoredSecretsTypeSupported || !UseAuthoredSecrets;
+            get => !IsSecretPackTypeSupported || !UseSecretPack;
         }
 
-        public string SecretAuthor
+        public string SecretPack
         {
-            get => _secretAuthor;
+            get => _secretPack;
             set
             {
-                _secretAuthor = value;
+                _secretPack = value;
                 FirePropertyChanged();
             }
         }
 
-        public string[] AvailableSecretAuthors
+        public string[] AvailableSecretPacks
         {
-            get => _availableSecretAuthors;
+            get => _availableSecretPacks;
             set
             {
-                _availableSecretAuthors = value;
+                _availableSecretPacks = value;
                 FirePropertyChanged();
-                FirePropertyChanged(nameof(IsAuthoredSecretsTypeSupported));
+                FirePropertyChanged(nameof(IsSecretPackTypeSupported));
             }
         }
 
@@ -3102,12 +3102,12 @@ namespace TRRandomizerView.Model
             SecretCountMode = _controller.SecretCountMode;
             MaxSecretCount = _controller.MaxSecretCount;
             MinSecretCount = _controller.MinSecretCount;            
-            AvailableSecretAuthors = _controller.AvailableSecretAuthors;
-            SecretAuthor = _controller.SecretAuthor;
-            UseAuthoredSecrets = _controller.UseAuthoredSecrets;
-            if ((SecretAuthor == null || SecretAuthor == string.Empty) && AvailableSecretAuthors.Length > 0)
+            AvailableSecretPacks = _controller.AvailableSecretPacks;
+            SecretPack = _controller.SecretPack;
+            UseSecretPack = _controller.UseSecretPack;
+            if ((SecretPack == null || SecretPack == string.Empty) && AvailableSecretPacks.Length > 0)
             {
-                SecretAuthor = AvailableSecretAuthors[0];
+                SecretPack = AvailableSecretPacks[0];
             }
 
             RandomizeTextures = _controller.RandomizeTextures;
@@ -3392,8 +3392,8 @@ namespace TRRandomizerView.Model
             _controller.SecretCountMode = SecretCountMode;
             _controller.MinSecretCount = MinSecretCount;
             _controller.MaxSecretCount = MaxSecretCount;
-            _controller.UseAuthoredSecrets = UseAuthoredSecrets;
-            _controller.SecretAuthor = SecretAuthor;
+            _controller.UseSecretPack = UseSecretPack;
+            _controller.SecretPack = SecretPack;
 
             _controller.RandomizeTextures = RandomizeTextures;
             _controller.TextureSeed = TextureSeed;
@@ -3553,7 +3553,7 @@ namespace TRRandomizerView.Model
         public bool IsRewardRoomsTypeSupported => IsRandomizationSupported(TRRandomizerType.RewardRooms);
         public bool IsSecretModelsTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretModels);
         public bool IsSecretCountTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretCount);
-        public bool IsAuthoredSecretsTypeSupported => AvailableSecretAuthors?.Length > 0;
+        public bool IsSecretPackTypeSupported => AvailableSecretPacks?.Length > 0;
         public bool IsSecretRewardTypeSupported => IsRandomizationSupported(TRRandomizerType.SecretReward);
         public bool IsItemTypeSupported => IsRandomizationSupported(TRRandomizerType.Item);
         public bool IsKeyItemTypeSupported => IsRandomizationSupported(TRRandomizerType.KeyItems);
