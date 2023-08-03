@@ -6079,6 +6079,55 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if a specific secret is present.",
+        "ConditionType": 22,
+        "Location": {
+          "X": 39952,
+          "Y": 12544,
+          "Z": 35930,
+          "Room": 12
+        }
+      },
+      "OnTrue": [
+        {
+          "Comments": "Add a one-way visibility portal.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": 20,
+              "AdjoiningRoom": 12,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 7168,
+                  "Y": 12288,
+                  "Z": 1024
+                },
+                {
+                  "X": 6144,
+                  "Y": 12288,
+                  "Z": 1024
+                },
+                {
+                  "X": 6144,
+                  "Y": 12544,
+                  "Z": 1024
+                },
+                {
+                  "X": 7168,
+                  "Y": 12544,
+                  "Z": 1024
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],

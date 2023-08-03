@@ -3162,7 +3162,106 @@
     }
   ],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if a specific secret is present.",
+        "ConditionType": 22,
+        "Location": {
+          "X": 59444,
+          "Y": -1024,
+          "Z": 28602,
+          "Room": 35
+        }
+      },
+      "OnTrue": [
+        {
+          "Comments": "Add a one-way visibility portal.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": 8,
+              "AdjoiningRoom": 35,
+              "Normal": {
+                "Z": -1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": -1280,
+                  "Z": 3072
+                },
+                {
+                  "X": 4096,
+                  "Y": -1280,
+                  "Z": 3072
+                },
+                {
+                  "X": 4096,
+                  "Y": -1024,
+                  "Z": 3072
+                },
+                {
+                  "X": 3072,
+                  "Y": -1024,
+                  "Z": 3072
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if a specific secret is present.",
+        "ConditionType": 22,
+        "Location": {
+          "X": 32737,
+          "Y": -6144,
+          "Z": 23642,
+          "Room": 57
+        }
+      },
+      "OnTrue": [
+        {
+          "Comments": "Add a one-way visibility portal.",
+          "EMType": 81,
+          "Portals": [
+            {
+              "BaseRoom": 56,
+              "AdjoiningRoom": 57,
+              "Normal": {
+                "Z": 1
+              },
+              "Vertices": [
+                {
+                  "X": 3072,
+                  "Y": -6144,
+                  "Z": 2048
+                },
+                {
+                  "X": 2048,
+                  "Y": -6144,
+                  "Z": 2048
+                },
+                {
+                  "X": 2048,
+                  "Y": -5888,
+                  "Z": 2048
+                },
+                {
+                  "X": 3072,
+                  "Y": -5888,
+                  "Z": 2048
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "ConditionalOneOf": [],
   "Mirrored": []
 }
