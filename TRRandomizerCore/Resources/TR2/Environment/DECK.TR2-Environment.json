@@ -992,7 +992,33 @@
     }
   ],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if a specific secret is present.",
+        "ConditionType": 22,
+        "Location": {
+          "X": 39424,
+          "Y": -16512,
+          "Z": 73216,
+          "Room": 61
+        }
+      },
+      "OnTrue": [
+        {
+          "Comments": "Move key3.",
+          "EMType": 44,
+          "EntityIndex": 45,
+          "TargetLocation": {
+            "X": 61278,
+            "Y": 1970,
+            "Z": 67389,
+            "Room": 10
+          }
+        }
+      ]
+    }
+  ],
   "ConditionalOneOf": [],
   "Mirrored": []
 }

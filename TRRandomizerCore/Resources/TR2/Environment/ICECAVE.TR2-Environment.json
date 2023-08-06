@@ -1977,6 +1977,63 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if a specific secret is present.",
+        "ConditionType": 22,
+        "Location": {
+          "X": 64000,
+          "Y": 5632,
+          "Z": 70144,
+          "Room": 46
+        }
+      },
+      "OnTrue": [
+        {
+          "Comments": "Move Lara.",
+          "EMType": 44,
+          "EntityIndex": 58,
+          "TargetLocation": {
+            "X": 76288,
+            "Y": -1792,
+            "Z": 54784,
+            "Room": 97
+          }
+        },
+        {
+          "Comments": "Move switch 66.",
+          "EMType": 44,
+          "EntityIndex": 66,
+          "TargetLocation": {
+            "X": 68096,
+            "Y": -7184,
+            "Z": 73216,
+            "Room": 54,
+            "Angle": -16384
+          }
+        },
+        {
+          "Comments": "Add a trigger to open the door by the first bell.",
+          "EMType": 61,
+          "Locations": [
+            {
+              "X": 60928,
+              "Y": 7936,
+              "Z": 72192,
+              "Room": 93
+            }
+          ],
+          "Trigger": {
+            "Mask": 31,
+            "Actions": [
+              {
+                "Parameter": 60
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],

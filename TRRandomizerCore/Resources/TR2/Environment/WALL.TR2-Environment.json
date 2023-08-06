@@ -1035,6 +1035,40 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "Check if there is a secret in room 45.",
+        "ConditionType": 1,
+        "RoomIndex": 45
+      },
+      "OnTrue": [
+        {
+          "Comments": "Undo any draining that may have been performed.",
+          "EMType": 2,
+          "RoomNumbers": [
+            46
+          ],
+          "WaterTextures": [
+            1229,
+            1254,
+            1346,
+            1347
+          ]
+        },
+        {
+          "Comments": "Ensure there are flares in the level.",
+          "EMType": 51,
+          "TypeID": 151,
+          "Intensity": 7424,
+          "Location": {
+            "X": 55808,
+            "Y": -1536,
+            "Z": 32256,
+            "Room": 70
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],

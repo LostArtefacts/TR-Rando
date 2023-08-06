@@ -87,6 +87,7 @@
         ConvertSpriteSequence = 143,
         ConvertModel = 144,
         ImportNonGraphicsModel = 145,
+        CopySpriteSequence = 146,
 
         // NOOP/Placeholder
         NOOP = 1000

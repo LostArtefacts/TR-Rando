@@ -917,447 +917,7 @@
       ]
     ]
   ],
-  "OneOf": [
-    {
-      "Leader": [
-        {
-          "Comments": "Move the first duplicated door downwards and to the other side.",
-          "EMType": 44,
-          "EntityIndex": 57,
-          "TargetLocation": {
-            "X": 46592,
-            "Y": 2304,
-            "Z": 47616,
-            "Room": 15,
-            "Angle": -32768
-          }
-        },
-        {
-          "Comments": "Move the second duplicated door downwards and to the other side.",
-          "EMType": 44,
-          "EntityIndex": 58,
-          "TargetLocation": {
-            "X": 47616,
-            "Y": 2304,
-            "Z": 47616,
-            "Room": 15,
-            "Angle": -32768
-          }
-        },
-        {
-          "Comments": "Make visibility portals between rooms 22 & 68 and 15 & 98.",
-          "EMType": 81,
-          "Portals": [
-            {
-              "BaseRoom": 22,
-              "AdjoiningRoom": 68,
-              "Normal": {
-                "Z": -1
-              },
-              "Vertices": [
-                {
-                  "X": 1024,
-                  "Y": 256,
-                  "Z": 6144
-                },
-                {
-                  "X": 1024,
-                  "Y": -2048,
-                  "Z": 6144
-                },
-                {
-                  "X": 3072,
-                  "Y": -2048,
-                  "Z": 6144
-                },
-                {
-                  "X": 3072,
-                  "Y": 256,
-                  "Z": 6144
-                }
-              ]
-            },
-            {
-              "BaseRoom": 68,
-              "AdjoiningRoom": 22,
-              "Normal": {
-                "Z": 1
-              },
-              "Vertices": [
-                {
-                  "X": 4096,
-                  "Y": 256,
-                  "Z": 1024
-                },
-                {
-                  "X": 4096,
-                  "Y": -1792,
-                  "Z": 1024
-                },
-                {
-                  "X": 6144,
-                  "Y": -1792,
-                  "Z": 1024
-                },
-                {
-                  "X": 6144,
-                  "Y": 256,
-                  "Z": 1024
-                }
-              ]
-            },
-            {
-              "BaseRoom": 15,
-              "AdjoiningRoom": 98,
-              "Normal": {
-                "Z": -1
-              },
-              "Vertices": [
-                {
-                  "X": 1024,
-                  "Y": 1024,
-                  "Z": 6144
-                },
-                {
-                  "X": 1024,
-                  "Y": 256,
-                  "Z": 6144
-                },
-                {
-                  "X": 3072,
-                  "Y": 256,
-                  "Z": 6144
-                },
-                {
-                  "X": 3072,
-                  "Y": 1024,
-                  "Z": 6144
-                }
-              ]
-            },
-            {
-              "BaseRoom": 98,
-              "AdjoiningRoom": 15,
-              "Normal": {
-                "Z": 1
-              },
-              "Vertices": [
-                {
-                  "X": 4096,
-                  "Y": 1536,
-                  "Z": 1024
-                },
-                {
-                  "X": 4096,
-                  "Y": 256,
-                  "Z": 1024
-                },
-                {
-                  "X": 6144,
-                  "Y": 256,
-                  "Z": 1024
-                },
-                {
-                  "X": 6144,
-                  "Y": 1536,
-                  "Z": 1024
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Comments": "Make collisional portals between rooms 22 & 68 and 15 & 98.",
-          "EMType": 82,
-          "Portals": {
-            "22": {
-              "68": [
-                {
-                  "X": 47551,
-                  "Y": 1358,
-                  "Z": 48285
-                },
-                {
-                  "X": 46527,
-                  "Y": 1358,
-                  "Z": 48285
-                }
-              ]
-            },
-            "15": {
-              "98": [
-                {
-                  "X": 47551,
-                  "Y": 1358,
-                  "Z": 48285
-                },
-                {
-                  "X": 46527,
-                  "Y": 1358,
-                  "Z": 48285
-                }
-              ]
-            },
-            "68": {
-              "22": [
-                {
-                  "X": 47608,
-                  "Y": 256,
-                  "Z": 47886
-                },
-                {
-                  "X": 46534,
-                  "Y": 256,
-                  "Z": 47872
-                }
-              ]
-            },
-            "98": {
-              "15": [
-                {
-                  "X": 47608,
-                  "Y": 256,
-                  "Z": 47886
-                },
-                {
-                  "X": 46534,
-                  "Y": 256,
-                  "Z": 47872
-                }
-              ]
-            }
-          }
-        },
-        {
-          "Comments": "Remove rectangles 15 and 26 from room 15.",
-          "EMType": 22,
-          "GeometryMap": {
-            "15": {
-              "Rectangles": [
-                15,
-                26
-              ]
-            }
-          }
-        },
-        {
-          "Comments": "Decrease the height of rectangles 26 and 34 in room 98 to match the geometry in room 15.",
-          "EMType": 23,
-          "Modifications": [
-            {
-              "RoomNumber": 98,
-              "FaceIndex": 26,
-              "VertexChanges": {
-                "0": {
-                  "Y": 768
-                },
-                "1": {
-                  "Y": 256
-                }
-              }
-            },
-            {
-              "RoomNumber": 98,
-              "FaceIndex": 34,
-              "VertexChanges": {
-                "0": {
-                  "Y": 768
-                },
-                "1": {
-                  "Y": 768
-                }
-              }
-            }
-          ]
-        },
-        {
-          "Comments": "Refacing for above to avoid squashing.",
-          "EMType": 21,
-          "TextureMap": {
-            "1623": {
-              "98": {
-                "Rectangles": [
-                  34
-                ]
-              }
-            }
-          }
-        },
-        {
-          "Comments": "Default button position for the double-double doors.",
-          "EMType": 41,
-          "Tags": [
-            1
-          ],
-          "EntityIndex": 20,
-          "Location": {
-            "X": 49664,
-            "Z": 41472,
-            "Room": 20,
-            "Angle": 16384
-          }
-        },
-        {
-          "Comments": "A trigger for above - open doors 17, 18, 57 and 58.",
-          "EMType": 61,
-          "Locations": [
-            {
-              "X": 49664,
-              "Z": 41472,
-              "Room": 20
-            }
-          ],
-          "Trigger": {
-            "TrigType": 2,
-            "Mask": 31,
-            "SwitchOrKeyRef": 20,
-            "Actions": [
-              {
-                "Parameter": 17
-              },
-              {
-                "Parameter": 18
-              },
-              {
-                "Parameter": 57
-              },
-              {
-                "Parameter": 58
-              }
-            ]
-          }
-        },
-        {
-          "Comments": "Add a camera for above",
-          "EMType": 65,
-          "Camera": {
-            "X": 54256,
-            "Y": -512,
-            "Z": 51336,
-            "Room": 79
-          },
-          "LookAtItem": 17,
-          "AttachToItems": [
-            20
-          ],
-          "CameraAction": {
-            "Value": 2,
-            "Timer": 2,
-            "Continue": true
-          }
-        },
-        {
-          "Comments": "A glitched secret may be in the hidden room 152, so move it as this is no longer reachable.",
-          "EMType": 43,
-          "Types": [
-            190
-          ],
-          "SectorLocations": [
-            {
-              "X": 46181,
-              "Y": 256,
-              "Z": 47205,
-              "Room": 152
-            }
-          ],
-          "TargetLocation": {
-            "X": 63589,
-            "Y": -4403,
-            "Z": 59493,
-            "Room": 111
-          }
-        }
-      ],
-      "Followers": [
-        [
-          {
-            "Comments": "NOOP - use the default button position.",
-            "EMType": 1000
-          }
-        ],
-        [
-          {
-            "Comments": "Potential new button position for the double-double doors button.",
-            "EMType": 41,
-            "Tags": [
-              1
-            ],
-            "EntityIndex": 20,
-            "Location": {
-              "X": 49664,
-              "Z": 42496,
-              "Room": 20,
-              "Angle": 16384
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential new button position for the double-double doors button.",
-            "EMType": 41,
-            "Tags": [
-              1
-            ],
-            "EntityIndex": 20,
-            "Location": {
-              "X": 49664,
-              "Z": 40448,
-              "Room": 20,
-              "Angle": 16384
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential new button position for the double-double doors button.",
-            "EMType": 41,
-            "Tags": [
-              1
-            ],
-            "EntityIndex": 20,
-            "Location": {
-              "X": 49664,
-              "Z": 38400,
-              "Room": 20,
-              "Angle": 16384
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential new button position for the double-double doors button.",
-            "EMType": 41,
-            "Tags": [
-              1
-            ],
-            "EntityIndex": 20,
-            "Location": {
-              "X": 58880,
-              "Z": 31232,
-              "Angle": 16384
-            }
-          }
-        ],
-        [
-          {
-            "Comments": "Potential new button position for the double-double doors button.",
-            "EMType": 41,
-            "Tags": [
-              1
-            ],
-            "EntityIndex": 20,
-            "Location": {
-              "X": 47600,
-              "Y": -4096,
-              "Z": 32256,
-              "Room": 34,
-              "Angle": -16384
-            }
-          }
-        ]
-      ]
-    }
-  ],
+  "OneOf": [],
   "ConditionalAllWithin": [],
   "ConditionalAll": [
     {
@@ -1658,6 +1218,432 @@
       ]
     }
   ],
-  "ConditionalOneOf": [],
+  "ConditionalOneOf": [
+    {
+      "Condition": {
+        "Comments": "If room 152 does not contain a secret, add a shortcut between rooms 22 and 68.",
+        "ConditionType": 1,
+        "RoomIndex": 152
+      },
+      "OnFalse": {
+        "Leader": [
+          {
+            "Comments": "Move the first duplicated door downwards and to the other side.",
+            "EMType": 44,
+            "EntityIndex": 57,
+            "TargetLocation": {
+              "X": 46592,
+              "Y": 2304,
+              "Z": 47616,
+              "Room": 15,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Move the second duplicated door downwards and to the other side.",
+            "EMType": 44,
+            "EntityIndex": 58,
+            "TargetLocation": {
+              "X": 47616,
+              "Y": 2304,
+              "Z": 47616,
+              "Room": 15,
+              "Angle": -32768
+            }
+          },
+          {
+            "Comments": "Make visibility portals between rooms 22 & 68 and 15 & 98.",
+            "EMType": 81,
+            "Portals": [
+              {
+                "BaseRoom": 22,
+                "AdjoiningRoom": 68,
+                "Normal": {
+                  "Z": -1
+                },
+                "Vertices": [
+                  {
+                    "X": 1024,
+                    "Y": 256,
+                    "Z": 6144
+                  },
+                  {
+                    "X": 1024,
+                    "Y": -2048,
+                    "Z": 6144
+                  },
+                  {
+                    "X": 3072,
+                    "Y": -2048,
+                    "Z": 6144
+                  },
+                  {
+                    "X": 3072,
+                    "Y": 256,
+                    "Z": 6144
+                  }
+                ]
+              },
+              {
+                "BaseRoom": 68,
+                "AdjoiningRoom": 22,
+                "Normal": {
+                  "Z": 1
+                },
+                "Vertices": [
+                  {
+                    "X": 4096,
+                    "Y": 256,
+                    "Z": 1024
+                  },
+                  {
+                    "X": 4096,
+                    "Y": -1792,
+                    "Z": 1024
+                  },
+                  {
+                    "X": 6144,
+                    "Y": -1792,
+                    "Z": 1024
+                  },
+                  {
+                    "X": 6144,
+                    "Y": 256,
+                    "Z": 1024
+                  }
+                ]
+              },
+              {
+                "BaseRoom": 15,
+                "AdjoiningRoom": 98,
+                "Normal": {
+                  "Z": -1
+                },
+                "Vertices": [
+                  {
+                    "X": 1024,
+                    "Y": 1024,
+                    "Z": 6144
+                  },
+                  {
+                    "X": 1024,
+                    "Y": 256,
+                    "Z": 6144
+                  },
+                  {
+                    "X": 3072,
+                    "Y": 256,
+                    "Z": 6144
+                  },
+                  {
+                    "X": 3072,
+                    "Y": 1024,
+                    "Z": 6144
+                  }
+                ]
+              },
+              {
+                "BaseRoom": 98,
+                "AdjoiningRoom": 15,
+                "Normal": {
+                  "Z": 1
+                },
+                "Vertices": [
+                  {
+                    "X": 4096,
+                    "Y": 1536,
+                    "Z": 1024
+                  },
+                  {
+                    "X": 4096,
+                    "Y": 256,
+                    "Z": 1024
+                  },
+                  {
+                    "X": 6144,
+                    "Y": 256,
+                    "Z": 1024
+                  },
+                  {
+                    "X": 6144,
+                    "Y": 1536,
+                    "Z": 1024
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "Comments": "Make collisional portals between rooms 22 & 68 and 15 & 98.",
+            "EMType": 82,
+            "Portals": {
+              "22": {
+                "68": [
+                  {
+                    "X": 47551,
+                    "Y": 1358,
+                    "Z": 48285
+                  },
+                  {
+                    "X": 46527,
+                    "Y": 1358,
+                    "Z": 48285
+                  }
+                ]
+              },
+              "15": {
+                "98": [
+                  {
+                    "X": 47551,
+                    "Y": 1358,
+                    "Z": 48285
+                  },
+                  {
+                    "X": 46527,
+                    "Y": 1358,
+                    "Z": 48285
+                  }
+                ]
+              },
+              "68": {
+                "22": [
+                  {
+                    "X": 47608,
+                    "Y": 256,
+                    "Z": 47886
+                  },
+                  {
+                    "X": 46534,
+                    "Y": 256,
+                    "Z": 47872
+                  }
+                ]
+              },
+              "98": {
+                "15": [
+                  {
+                    "X": 47608,
+                    "Y": 256,
+                    "Z": 47886
+                  },
+                  {
+                    "X": 46534,
+                    "Y": 256,
+                    "Z": 47872
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "Comments": "Remove rectangles 15 and 26 from room 15.",
+            "EMType": 22,
+            "GeometryMap": {
+              "15": {
+                "Rectangles": [
+                  15,
+                  26
+                ]
+              }
+            }
+          },
+          {
+            "Comments": "Decrease the height of rectangles 26 and 34 in room 98 to match the geometry in room 15.",
+            "EMType": 23,
+            "Modifications": [
+              {
+                "RoomNumber": 98,
+                "FaceIndex": 26,
+                "VertexChanges": {
+                  "0": {
+                    "Y": 768
+                  },
+                  "1": {
+                    "Y": 256
+                  }
+                }
+              },
+              {
+                "RoomNumber": 98,
+                "FaceIndex": 34,
+                "VertexChanges": {
+                  "0": {
+                    "Y": 768
+                  },
+                  "1": {
+                    "Y": 768
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "Comments": "Refacing for above to avoid squashing.",
+            "EMType": 21,
+            "TextureMap": {
+              "1623": {
+                "98": {
+                  "Rectangles": [
+                    34
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "Comments": "Default button position for the double-double doors.",
+            "EMType": 41,
+            "Tags": [
+              1
+            ],
+            "EntityIndex": 20,
+            "Location": {
+              "X": 49664,
+              "Z": 41472,
+              "Room": 20,
+              "Angle": 16384
+            }
+          },
+          {
+            "Comments": "A trigger for above - open doors 17, 18, 57 and 58.",
+            "EMType": 61,
+            "Locations": [
+              {
+                "X": 49664,
+                "Z": 41472,
+                "Room": 20
+              }
+            ],
+            "Trigger": {
+              "TrigType": 2,
+              "Mask": 31,
+              "SwitchOrKeyRef": 20,
+              "Actions": [
+                {
+                  "Parameter": 17
+                },
+                {
+                  "Parameter": 18
+                },
+                {
+                  "Parameter": 57
+                },
+                {
+                  "Parameter": 58
+                }
+              ]
+            }
+          },
+          {
+            "Comments": "Add a camera for above",
+            "EMType": 65,
+            "Camera": {
+              "X": 54256,
+              "Y": -512,
+              "Z": 51336,
+              "Room": 79
+            },
+            "LookAtItem": 17,
+            "AttachToItems": [
+              20
+            ],
+            "CameraAction": {
+              "Value": 2,
+              "Timer": 2,
+              "Continue": true
+            }
+          }
+        ],
+        "Followers": [
+          [
+            {
+              "Comments": "NOOP - use the default button position.",
+              "EMType": 1000
+            }
+          ],
+          [
+            {
+              "Comments": "Potential new button position for the double-double doors button.",
+              "EMType": 41,
+              "Tags": [
+                1
+              ],
+              "EntityIndex": 20,
+              "Location": {
+                "X": 49664,
+                "Z": 42496,
+                "Room": 20,
+                "Angle": 16384
+              }
+            }
+          ],
+          [
+            {
+              "Comments": "Potential new button position for the double-double doors button.",
+              "EMType": 41,
+              "Tags": [
+                1
+              ],
+              "EntityIndex": 20,
+              "Location": {
+                "X": 49664,
+                "Z": 40448,
+                "Room": 20,
+                "Angle": 16384
+              }
+            }
+          ],
+          [
+            {
+              "Comments": "Potential new button position for the double-double doors button.",
+              "EMType": 41,
+              "Tags": [
+                1
+              ],
+              "EntityIndex": 20,
+              "Location": {
+                "X": 49664,
+                "Z": 38400,
+                "Room": 20,
+                "Angle": 16384
+              }
+            }
+          ],
+          [
+            {
+              "Comments": "Potential new button position for the double-double doors button.",
+              "EMType": 41,
+              "Tags": [
+                1
+              ],
+              "EntityIndex": 20,
+              "Location": {
+                "X": 58880,
+                "Z": 31232,
+                "Angle": 16384
+              }
+            }
+          ],
+          [
+            {
+              "Comments": "Potential new button position for the double-double doors button.",
+              "EMType": 41,
+              "Tags": [
+                1
+              ],
+              "EntityIndex": 20,
+              "Location": {
+                "X": 47600,
+                "Y": -4096,
+                "Z": 32256,
+                "Room": 34,
+                "Angle": -16384
+              }
+            }
+          ]
+        ]
+      }
+    }
+  ],
   "Mirrored": []
 }
