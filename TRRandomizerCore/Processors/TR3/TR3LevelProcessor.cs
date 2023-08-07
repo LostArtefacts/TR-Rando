@@ -13,13 +13,11 @@ namespace TRRandomizerCore.Processors
         /// </summary>
         public bool IsJPVersion => (ScriptEditor.Script as TR23Script).NumRPLs == 5;
 
-        protected TR3LevelReader _reader;
-        protected TR3LevelWriter _writer;
+        protected TR3LevelControl _control;
 
         public TR3LevelProcessor()
         {
-            _reader = new TR3LevelReader();
-            _writer = new TR3LevelWriter();
+            _control = new();
         }
 
         protected override TR3CombinedLevel LoadCombinedLevel(TR3ScriptedLevel scriptedLevel)
@@ -42,10 +40,10 @@ namespace TRRandomizerCore.Processors
 
         public TR3Level LoadLevelData(string name)
         {
-            lock (_readLock)
+            lock (_controlLock)
             {
                 string fullPath = Path.Combine(BasePath, name);
-                return _reader.ReadLevel(fullPath);
+                return _control.Read(fullPath);
             }
         }
 
@@ -71,10 +69,10 @@ namespace TRRandomizerCore.Processors
 
         public void SaveLevel(TR3Level level, string name)
         {
-            lock (_writeLock)
+            lock (_controlLock)
             {
                 string fullPath = Path.Combine(BasePath, name);
-                _writer.WriteLevelToFile(level, fullPath);
+                _control.Write(level, fullPath);
             }
         }
     }

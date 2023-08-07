@@ -80,12 +80,12 @@ namespace TRRandomizerCore.Randomizers
             // We don't want to store all SFX WAV data in JSON, so instead we reference the source level
             // and extract the details from there using the same format for model transport.
             Dictionary<string, TR1Level> levels = new Dictionary<string, TR1Level>();
-            TR1LevelReader reader = new TR1LevelReader();
+            TR1LevelControl reader = new();
             foreach (TR1SFXDefinition definition in _soundEffects)
             {
                 if (!levels.ContainsKey(definition.SourceLevel))
                 {
-                    levels[definition.SourceLevel] = reader.ReadLevel(Path.Combine(BackupPath, definition.SourceLevel));
+                    levels[definition.SourceLevel] = reader.Read(Path.Combine(BackupPath, definition.SourceLevel));
                 }
 
                 TR1Level level = levels[definition.SourceLevel];

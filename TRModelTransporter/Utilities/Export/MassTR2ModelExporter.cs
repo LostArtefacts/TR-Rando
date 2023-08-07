@@ -22,11 +22,11 @@ namespace TRModelTransporter.Utilities
 
         public override Dictionary<string, List<TR2Entities>> ExportTypes => _exportModelTypes;
 
-        private readonly TR2LevelReader _reader;
+        private readonly TR2LevelControl _reader;
 
         public MassTR2ModelExporter()
         {
-            _reader = new TR2LevelReader();
+            _reader = new();
         }
 
         protected override AbstractTRModelExporter<TR2Entities, TR2Level, TR2ModelDefinition> CreateExporter()
@@ -36,7 +36,7 @@ namespace TRModelTransporter.Utilities
 
         protected override TR2Level ReadLevel(string path)
         {
-            return _reader.ReadLevel(path);
+            return _reader.Read(path);
         }
 
         private static readonly Dictionary<string, List<TR2Entities>> _exportModelTypes = new Dictionary<string, List<TR2Entities>>

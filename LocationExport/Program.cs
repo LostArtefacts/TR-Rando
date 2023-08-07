@@ -14,8 +14,8 @@ namespace LocationExport
 {
     class Program
     {
-        private static TR1LevelReader _reader1;
-        private static TR3LevelReader _reader3;
+        private static TR1LevelControl _reader1;
+        private static TR3LevelControl _reader3;
         private static Dictionary<string, List<Location>> _allTR1Exclusions;
         private static Dictionary<string, List<Location>> _allTR3Exclusions;
 
@@ -27,8 +27,8 @@ namespace LocationExport
                 return;
             }
 
-            _reader1 = new TR1LevelReader();
-            _reader3 = new TR3LevelReader();
+            _reader1 = new();
+            _reader3 = new();
             _allTR1Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\invalid_item_locations.json"));
             _allTR3Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR3\Locations\invalid_item_locations.json"));
             Dictionary<string, List<Location>> allLocations = new Dictionary<string, List<Location>>();
@@ -147,7 +147,7 @@ namespace LocationExport
 
         private static List<Location> ExportTR1Locations(string lvl)
         {
-            TR1Level level = _reader1.ReadLevel(lvl);
+            TR1Level level = _reader1.Read(lvl);
             List<Location> exclusions = new List<Location>();
             if (_allTR1Exclusions.ContainsKey(lvl))
             {
@@ -174,7 +174,7 @@ namespace LocationExport
 
         private static List<Location> ExportTR3Locations(string lvl)
         {
-            TR3Level level = _reader3.ReadLevel(lvl);
+            TR3Level level = _reader3.Read(lvl);
             List<Location> exclusions = new List<Location>();
             if (_allTR3Exclusions.ContainsKey(lvl))
             {

@@ -113,7 +113,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 // Caves and Folly have the swinging blade model (unused) but its SFX are missing - import here in case
                 // any mods want to make use of the model.
-                TR1Level vilcabamba = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TR1LevelNames.VILCABAMBA));
+                TR1Level vilcabamba = new TR1LevelControl().Read(Path.Combine(BackupPath, TR1LevelNames.VILCABAMBA));
                 SoundUtilities.ImportLevelSound(level.Data, vilcabamba, new short[] { 65 });
                 SoundUtilities.ResortSoundIndices(level.Data);
             }

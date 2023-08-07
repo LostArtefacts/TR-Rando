@@ -194,7 +194,7 @@ namespace TRModelTransporter.Transport
 
             if (level.SoundMap[162] == -1)
             {
-                TR1Level vilcabamba = new TR1LevelReader().ReadLevel(TR1LevelNames.VILCABAMBA);
+                TR1Level vilcabamba = new TR1LevelControl().Read(TR1LevelNames.VILCABAMBA);
                 SoundUtilities.ImportLevelSound(level, vilcabamba, new short[] { 162 });
             }
 

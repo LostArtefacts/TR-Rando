@@ -100,24 +100,24 @@ namespace TRLevelToolset.IOLogic
             switch (game)
             {
                 case TRGame.TR1:
-                    TR1LevelReader TR1reader = new TR1LevelReader();
-                    CurrentLevel = TR1reader.ReadLevel(fname);
+                    TR1LevelControl TR1reader = new();
+                    CurrentLevel = TR1reader.Read(fname);
                     break;
                 case TRGame.TR2:
-                    TR2LevelReader TR2reader = new TR2LevelReader();
-                    CurrentLevel = TR2reader.ReadLevel(fname);
+                    TR2LevelControl TR2reader = new();
+                    CurrentLevel = TR2reader.Read(fname);
                     break;
                 case TRGame.TR3:
-                    TR3LevelReader TR3reader = new TR3LevelReader();
-                    CurrentLevel = TR3reader.ReadLevel(fname);
+                    TR3LevelControl TR3reader = new();
+                    CurrentLevel = TR3reader.Read(fname);
                     break;
                 case TRGame.TR4:
-                    TR4LevelReader TR4reader = new TR4LevelReader();
-                    CurrentLevel = TR4reader.ReadLevel(fname);
+                    TR4LevelControl TR4reader = new();
+                    CurrentLevel = TR4reader.Read(fname);
                     break;
                 case TRGame.TR5:
-                    TR5LevelReader TR5reader = new TR5LevelReader();
-                    CurrentLevel = TR5reader.ReadLevel(fname);
+                    TR5LevelControl TR5reader = new();
+                    CurrentLevel = TR5reader.Read(fname);
                     break;
                 default:
                     break;
