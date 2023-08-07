@@ -6,6 +6,8 @@ using Veldrid.StartupUtilities;
 using TRLevelToolset.Components;
 using System.Diagnostics;
 
+namespace TRLevelToolset;
+
 public static class Program
 {
     static void Main(string[] args)
@@ -45,11 +47,11 @@ public static class Program
 
             ImGui.SetNextWindowPos(new Vector2(0, 0));
             ImGui.SetNextWindowSize(new Vector2(1280, 720));
-            
+
             sw.Start();
 
             ImGui.Begin("Tomb Raider Level Toolset", ref isMainWindowOpen);
-            
+
             sw.Stop();
 
             selectLevelScreen.Draw();
@@ -74,5 +76,3 @@ public static class Program
         }
     }
 }
-
-
