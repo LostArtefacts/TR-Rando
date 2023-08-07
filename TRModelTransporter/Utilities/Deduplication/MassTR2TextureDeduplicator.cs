@@ -12,13 +12,11 @@ namespace TRModelTransporter.Utilities
     {
         public override List<string> LevelNames => TR2LevelNames.AsList;
 
-        private readonly TR2LevelControl _reader;
-        private readonly TR2LevelWriter _writer;
+        private readonly TR2LevelControl _control;
 
         public MassTR2TextureDeduplicator()
         {
-            _reader = new TR2LevelControl();
-            _writer = new TR2LevelWriter();
+            _control = new TR2LevelControl();
         }
 
         protected override AbstractTexturePacker<TR2Entities, TR2Level> CreatePacker(TR2Level level)
@@ -38,12 +36,12 @@ namespace TRModelTransporter.Utilities
 
         protected override TR2Level ReadLevel(string path)
         {
-            return _reader.Read(path);
+            return _control.Read(path);
         }
 
         protected override void WriteLevel(TR2Level level, string path)
         {
-            _writer.WriteLevelToFile(level, path);
+            _control.WriteLevelToFile(level, path);
         }
     }
 }

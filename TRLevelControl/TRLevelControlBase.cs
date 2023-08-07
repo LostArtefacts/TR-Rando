@@ -29,8 +29,6 @@ public abstract class TRLevelControlBase<L>
     {
         using BinaryWriter writer = new(outputStream);
 
-        writer.Write((uint)level.Version.File);
-
         _level = level;
         Write(writer);
     }

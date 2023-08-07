@@ -8,13 +8,11 @@ namespace TRRandomizerCore.Processors
 {
     public class TR2LevelProcessor : AbstractLevelProcessor<TR2ScriptedLevel, TR2CombinedLevel>
     {
-        protected TR2LevelControl _reader;
-        protected TR2LevelWriter _writer;
+        protected TR2LevelControl _control;
 
         public TR2LevelProcessor()
         {
-            _reader = new TR2LevelControl();
-            _writer = new TR2LevelWriter();
+            _control = new TR2LevelControl();
         }
 
         protected override TR2CombinedLevel LoadCombinedLevel(TR2ScriptedLevel scriptedLevel)
@@ -40,7 +38,7 @@ namespace TRRandomizerCore.Processors
             lock (_readLock)
             {
                 string fullPath = Path.Combine(BasePath, name);
-                return _reader.Read(fullPath);
+                return _control.Read(fullPath);
             }
         }
 
@@ -69,7 +67,7 @@ namespace TRRandomizerCore.Processors
             lock (_writeLock)
             {
                 string fullPath = Path.Combine(BasePath, name);
-                _writer.WriteLevelToFile(level, fullPath);
+                _control.WriteLevelToFile(level, fullPath);
             }
         }
     }

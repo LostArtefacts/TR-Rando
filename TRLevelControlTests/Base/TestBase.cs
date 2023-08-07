@@ -88,16 +88,19 @@ public class TestBase
         switch (version)
         {
             case TRGameVersion.TR1:
-                TR1Level level1 = new TR1LevelControl().Read(pathI);
-                new TR1LevelWriter().WriteLevelToFile(level1, pathO);
+                TR1LevelControl control1 = new();
+                TR1Level level1 = control1.Read(pathI);
+                control1.WriteLevelToFile(level1, pathO);
                 break;
             case TRGameVersion.TR2:
-                TR2Level level2 = new TR2LevelControl().Read(pathI);
-                new TR2LevelWriter().WriteLevelToFile(level2, pathO);
+                TR2LevelControl control2 = new();
+                TR2Level level2 = control2.Read(pathI);
+                control2.WriteLevelToFile(level2, pathO);
                 break;
             case TRGameVersion.TR3:
-                TR3Level level3 = new TR3LevelControl().Read(pathI);
-                new TR3LevelWriter().WriteLevelToFile(level3, pathO);
+                TR3LevelControl control3 = new();
+                TR3Level level3 = control3.Read(pathI);
+                control3.WriteLevelToFile(level3, pathO);
                 break;
             default:
                 throw new Exception("Utility IO method suitable only for TR1-3.");
@@ -112,14 +115,13 @@ public class TestBase
 
     public static void ReadWriteTR4Level(string levelName)
     {
-        TR4LevelControl reader = new();
-        TR4LevelWriter writer = new();
+        TR4LevelControl control = new();
 
         string pathI = GetReadPath(levelName, TRGameVersion.TR4);
         string pathO = GetWritePath(levelName, TRGameVersion.TR4);
 
         // ZLib produces a slightly more optimal output than OG so we can't compare byte-for-byte
-        TR4Level level = reader.Read(pathI);
+        TR4Level level = control.Read(pathI);
         TR45LevelSummary originalSummary = new()
         {
             LevelChunkUncompressedSize = level.LevelDataChunk.UncompressedSize,
@@ -128,9 +130,9 @@ public class TestBase
             Tex32MChunkUncompressedSize = level.SkyAndFont32Chunk.UncompressedSize
         };
 
-        writer.WriteLevelToFile(level, pathO);
+        control.WriteLevelToFile(level, pathO);
         // Read in again what we wrote out
-        TR4Level level2 = reader.Read(pathI);
+        TR4Level level2 = control.Read(pathI);
 
         // Verify - have we lost any data?
         Assert.AreEqual(originalSummary.LevelChunkUncompressedSize, (uint)TRZlib.Decompress(level2.LevelDataChunk.CompressedChunk).Length);
@@ -147,14 +149,13 @@ public class TestBase
 
     public static void ReadWriteTR5Level(string levelName)
     {
-        TR5LevelControl reader = new();
-        TR5LevelWriter writer = new();
+        TR5LevelControl control = new();
 
         string pathI = GetReadPath(levelName, TRGameVersion.TR5);
         string pathO = GetWritePath(levelName, TRGameVersion.TR5);
 
         // ZLib produces a slightly more optimal output than OG so we can't compare byte-for-byte
-        TR5Level level = reader.Read(pathI);
+        TR5Level level = control.Read(pathI);
         TR45LevelSummary originalSummary = new()
         {
             LevelChunkUncompressedSize = level.LevelDataChunk.UncompressedSize,
@@ -163,9 +164,9 @@ public class TestBase
             Tex32MChunkUncompressedSize = level.SkyAndFont32Chunk.UncompressedSize
         };
 
-        writer.WriteLevelToFile(level, pathO);
+        control.WriteLevelToFile(level, pathO);
         // Read in again what we wrote out
-        TR5Level level2 = reader.Read(pathI);
+        TR5Level level2 = control.Read(pathI);
 
         // Verify - have we lost any data?
         Assert.AreEqual(originalSummary.LevelChunkUncompressedSize, (uint)level2.LevelDataChunk.CompressedChunk.Length);
@@ -199,45 +200,40 @@ public class TestBase
     {
         // TODO: allow level control to read/write from stream and not files alone
         string path = GetWritePath(levelName, TRGameVersion.TR1);
-        TR1LevelControl reader = new();
-        TR1LevelWriter writer = new();
-        writer.WriteLevelToFile(level, path);
-        return reader.Read(path);
+        TR1LevelControl control = new();
+        control.WriteLevelToFile(level, path);
+        return control.Read(path);
     }
 
     public static TR2Level WriteReadTempLevel(TR2Level level, string levelName)
     {
         string path = GetWritePath(levelName, TRGameVersion.TR2);
-        TR2LevelControl reader = new();
-        TR2LevelWriter writer = new();
-        writer.WriteLevelToFile(level, path);
-        return reader.Read(path);
+        TR2LevelControl control = new();
+        control.WriteLevelToFile(level, path);
+        return control.Read(path);
     }
 
     public static TR3Level WriteReadTempLevel(TR3Level level, string levelName)
     {
         string path = GetWritePath(levelName, TRGameVersion.TR3);
-        TR3LevelControl reader = new();
-        TR3LevelWriter writer = new();
-        writer.WriteLevelToFile(level, path);
-        return reader.Read(path);
+        TR3LevelControl control = new();
+        control.WriteLevelToFile(level, path);
+        return control.Read(path);
     }
 
     public static TR4Level WriteReadTempLevel(TR4Level level, string levelName)
     {
         string path = GetWritePath(levelName, TRGameVersion.TR4);
-        TR4LevelControl reader = new();
-        TR4LevelWriter writer = new();
-        writer.WriteLevelToFile(level, path);
-        return reader.Read(path);
+        TR4LevelControl control = new();
+        control.WriteLevelToFile(level, path);
+        return control.Read(path);
     }
 
     public static TR5Level WriteReadTempLevel(TR5Level level, string levelName)
     {
         string path = GetWritePath(levelName, TRGameVersion.TR5);
-        TR5LevelControl reader = new();
-        TR5LevelWriter writer = new();
-        writer.WriteLevelToFile(level, path);
-        return reader.Read(path);
+        TR5LevelControl control = new();
+        control.WriteLevelToFile(level, path);
+        return control.Read(path);
     }
 }
