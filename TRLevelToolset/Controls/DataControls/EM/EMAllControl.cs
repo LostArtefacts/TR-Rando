@@ -1,13 +1,5 @@
-﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TREnvironmentEditor.Model;
-using TRLevelControl.Model;
+﻿using TREnvironmentEditor.Model;
 using TRLevelToolset.Interfaces;
-using TRLevelToolset.IOLogic;
 
 namespace TRLevelToolset.Controls.DataControls.EM;
 

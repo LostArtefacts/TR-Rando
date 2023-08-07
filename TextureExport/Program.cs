@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using TextureExport.Types;
+﻿using TextureExport.Types;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;

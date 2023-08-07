@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 
