@@ -30,7 +30,7 @@ public class EnvironmentEditComponent : IDrawable
         {
             if (ImGui.BeginListBox(""))
             {
-                for (int i = 0; i < _items.Count(); i++)
+                for (int i = 0; i < _items.Length; i++)
                 {
                     bool isSelected = (_selectedIndex == i);
 

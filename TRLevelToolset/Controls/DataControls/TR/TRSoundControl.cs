@@ -14,7 +14,7 @@ internal class TRSoundControl : IDrawable
             ImGui.Text("Sound details count: " + IOManager.CurrentLevelAsTR1?.NumSoundDetails);
             ImGui.Text("Sound samples count: " + IOManager.CurrentLevelAsTR1?.NumSamples);
             ImGui.Text("Sound sample indices count: " + IOManager.CurrentLevelAsTR1?.NumSampleIndices);
-            ImGui.Text("Sound map size: " + IOManager.CurrentLevelAsTR1?.SoundMap.Count());
+            ImGui.Text("Sound map size: " + IOManager.CurrentLevelAsTR1?.SoundMap.Length);
 
             ImGui.TreePop();
         }

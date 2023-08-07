@@ -21,7 +21,7 @@ public class LevelSelectListBox  : IDrawable
     {
         if (ImGui.BeginListBox(""))
         {
-            for (int i = 0; i < Items.Count(); i++)
+            for (int i = 0; i < Items.Length; i++)
             {
                 bool isSelected = (SelectedIndex == i);
 
