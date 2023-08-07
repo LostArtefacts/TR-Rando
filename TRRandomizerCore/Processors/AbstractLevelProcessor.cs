@@ -26,8 +26,8 @@ namespace TRRandomizerCore.Processors
 
         public AbstractLevelProcessor()
         {
-            _controlLock = new object();
-            _monitorLock = new object();
+            _controlLock = new();
+            _monitorLock = new();
 
             _maxThreads = 3;
         }

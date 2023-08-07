@@ -26,7 +26,7 @@ namespace TRModelTransporter.Utilities
 
         public MassTR2ModelExporter()
         {
-            _reader = new TR2LevelControl();
+            _reader = new();
         }
 
         protected override AbstractTRModelExporter<TR2Entities, TR2Level, TR2ModelDefinition> CreateExporter()

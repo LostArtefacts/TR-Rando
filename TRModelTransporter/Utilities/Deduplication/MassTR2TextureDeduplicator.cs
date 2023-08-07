@@ -16,7 +16,7 @@ namespace TRModelTransporter.Utilities
 
         public MassTR2TextureDeduplicator()
         {
-            _control = new TR2LevelControl();
+            _control = new();
         }
 
         protected override AbstractTexturePacker<TR2Entities, TR2Level> CreatePacker(TR2Level level)

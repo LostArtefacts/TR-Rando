@@ -17,7 +17,7 @@ namespace TRRandomizerCore.Processors
 
         public TR3LevelProcessor()
         {
-            _control = new TR3LevelControl();
+            _control = new();
         }
 
         protected override TR3CombinedLevel LoadCombinedLevel(TR3ScriptedLevel scriptedLevel)

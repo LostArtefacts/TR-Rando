@@ -27,8 +27,8 @@ namespace LocationExport
                 return;
             }
 
-            _reader1 = new TR1LevelControl();
-            _reader3 = new TR3LevelControl();
+            _reader1 = new();
+            _reader3 = new();
             _allTR1Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\invalid_item_locations.json"));
             _allTR3Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR3\Locations\invalid_item_locations.json"));
             Dictionary<string, List<Location>> allLocations = new Dictionary<string, List<Location>>();
