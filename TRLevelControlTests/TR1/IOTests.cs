@@ -94,7 +94,7 @@ public class IOTests : TestBase
         Assert.AreEqual(TR1BoxUtilities.FlattenZones(lvl.Zones).Length, (int)(6 * lvl.NumBoxes));
 
         // Write and re-read the level
-        lvl = WriteReadTempLevel(lvl, TR1LevelNames.CAVES);
+        lvl = WriteReadTempLevel(lvl);
 
         // Capture all of the zones again. Make sure the addition of the zone above didn't
         // affect any of the others and that the addition itself matches after IO.

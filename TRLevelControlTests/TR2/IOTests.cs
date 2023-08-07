@@ -148,7 +148,7 @@ public class IOTests : TestBase
         fdataReader.WriteToLevel(lvl);
 
         //Save it and read it back in
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.GW);
+        lvl = WriteReadTempLevel(lvl);
 
         fdataReader = new FDControl();
         fdataReader.ParseFromLevel(lvl);
@@ -172,7 +172,7 @@ public class IOTests : TestBase
         fdataReader.WriteToLevel(lvl);
 
         //Save it and read it back in
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.GW);
+        lvl = WriteReadTempLevel(lvl);
 
         fdataReader = new FDControl();
         fdataReader.ParseFromLevel(lvl);
@@ -218,7 +218,7 @@ public class IOTests : TestBase
         fdataReader.WriteToLevel(lvl);
 
         //Save it and read it back in
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.GW);
+        lvl = WriteReadTempLevel(lvl);
 
         fdataReader = new FDControl();
         fdataReader.ParseFromLevel(lvl);
@@ -284,7 +284,7 @@ public class IOTests : TestBase
         fdataReader.WriteToLevel(lvl);
 
         //Save it and read it back in
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.LAIR);
+        lvl = WriteReadTempLevel(lvl);
 
         //Reassign the sector
         sector = lvl.Rooms[room].SectorList[roomSector];
@@ -345,7 +345,7 @@ public class IOTests : TestBase
         fdataReader.WriteToLevel(lvl);
 
         //Save it and read it back in
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.LAIR);
+        lvl = WriteReadTempLevel(lvl);
 
         //Reassign the sector
         sector = lvl.Rooms[room].SectorList[roomSector];
@@ -461,7 +461,7 @@ public class IOTests : TestBase
         fdataReader.WriteToLevel(lvl);
 
         //Save it and read it back in
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.LAIR);
+        lvl = WriteReadTempLevel(lvl);
 
         fdataReader = new FDControl();
         fdataReader.ParseFromLevel(lvl);
@@ -506,7 +506,7 @@ public class IOTests : TestBase
         fdataReader.WriteToLevel(lvl);
 
         //Save it and read it back in
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.LAIR);
+        lvl = WriteReadTempLevel(lvl);
 
         fdataReader = new FDControl();
         fdataReader.ParseFromLevel(lvl);
@@ -723,7 +723,7 @@ public class IOTests : TestBase
         fdataReader.WriteToLevel(lvl);
 
         // Save it and read it back in
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.GW);
+        lvl = WriteReadTempLevel(lvl);
 
         fdataReader.ParseFromLevel(lvl);
 
@@ -756,7 +756,7 @@ public class IOTests : TestBase
         fdataReader.WriteToLevel(lvl);
 
         // Save it and read it back in
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.GW);
+        lvl = WriteReadTempLevel(lvl);
 
         fdataReader.ParseFromLevel(lvl);
 
@@ -861,7 +861,7 @@ public class IOTests : TestBase
 
         // Save the level and re-read it to confirm it still matches.
         fdataReader.WriteToLevel(lvl);
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.DORIA);
+        lvl = WriteReadTempLevel(lvl);
 
         fdataReader.ParseFromLevel(lvl);
 
@@ -909,7 +909,7 @@ public class IOTests : TestBase
         Assert.AreEqual(TR2BoxUtilities.FlattenZones(lvl.Zones).Length, (int)(10 * lvl.NumBoxes));
 
         // Write and re-read the level
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.GW);
+        lvl = WriteReadTempLevel(lvl);
 
         // Capture all of the zones again. Make sure the addition of the zone above didn't
         // affect any of the others and that the addition itself matches after IO.
@@ -977,7 +977,7 @@ public class IOTests : TestBase
         TR2BoxUtilities.UpdateOverlaps(lvl, lvl.Boxes[0], boxOverlaps[0]);
 
         // Write and re-read the level
-        lvl = WriteReadTempLevel(lvl, TR2LevelNames.GW);
+        lvl = WriteReadTempLevel(lvl);
 
         // Capture all of the overlaps again and confirm the numbers are what we expect i.e.
         // the new overlap for box 0 exists and none of the other overlaps were affected by
