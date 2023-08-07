@@ -22,8 +22,22 @@ public abstract class TRLevelControlBase<L>
         return _level;
     }
 
+    public void WriteLevelToFile(L level, string filePath)
+        => Write(level, File.Create(filePath));
+
+    public void Write(L level, Stream outputStream)
+    {
+        using BinaryWriter writer = new(outputStream);
+
+        writer.Write((uint)level.Version.File);
+
+        _level = level;
+        Write(writer);
+    }
+
     protected abstract L CreateLevel(TRFileVersion version);
     protected abstract void Read(BinaryReader reader);
+    protected abstract void Write(BinaryWriter writer);
 
     protected void TestVersion(L level, params TRFileVersion[] acceptedVersions)
     {

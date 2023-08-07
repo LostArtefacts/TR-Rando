@@ -87,6 +87,11 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         }
     }
 
+    protected override void Write(BinaryWriter writer)
+    {
+        writer.Write(_level.Serialize());
+    }
+
     private void DecompressTexture32Chunk(TR4Level lvl)
     {
         //Decompressed buffer as bytes

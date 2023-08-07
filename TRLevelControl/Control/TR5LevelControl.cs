@@ -92,6 +92,11 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         }
     }
 
+    protected override void Write(BinaryWriter writer)
+    {
+        writer.Write(_level.Serialize());
+    }
+
     private void DecompressTexture32Chunk(TR5Level lvl)
     {
         //Decompressed buffer as bytes

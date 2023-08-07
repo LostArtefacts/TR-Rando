@@ -359,6 +359,11 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         }
     }
 
+    protected override void Write(BinaryWriter writer)
+    {
+        writer.Write(_level.Serialize());
+    }
+
     private static TRColour[] PopulateColourPalette(byte[] palette)
     {
         TRColour[] colourPalette = new TRColour[MAX_PALETTE_SIZE];
