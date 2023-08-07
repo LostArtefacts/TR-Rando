@@ -3540,6 +3540,33 @@
           }
         }
       ]
+    },
+    {
+      "Condition": {
+        "Comments": "If room 81 contains a secret but Lara has also spawned here, move her back to the OG spot.",
+        "ConditionType": 1,
+        "And": [
+          {
+            "ConditionType": 0,
+            "EntityIndex": 186,
+            "Room": 81
+          }
+        ],
+        "RoomIndex": 81
+      },
+      "OnTrue": [
+        {
+          "EMType": 44,
+          "EntityIndex": 186,
+          "TargetLocation": {
+            "X": 96768,
+            "Y": 3456,
+            "Z": 16896,
+            "Room": 128,
+            "Angle": -16384
+          }
+        }
+      ]
     }
   ],
   "ConditionalOneOf": [],

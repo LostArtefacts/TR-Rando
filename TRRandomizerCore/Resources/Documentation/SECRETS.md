@@ -119,6 +119,8 @@ Be careful not to enforce a mirrored secret and non-mirrored in the same level. 
 
 Note that in normal mode, secrets whose states do not match the level are simply skipped and another is chosen.
 
+Other environment changes should also be kept in mind when placing secrets; for example, rooms may be flooded/drained or some geometry may change. Refer to the specific level environment files in each case. Conditional changes can be made to either undo other environment modifications, or to add your own changes to fit your secrets. Conditional changes are performed following all other standard environment changes, aside from level mirroring, which is always performed last.
+
 ### TR2 Zoning
 As pre-defined secrets may not necessarily fall into the default [zones](https://github.com/LostArtefacts/TR-Rando/wiki/Zones#secrets), you should position your waypoints manually in stone-jade-gold order instead. For TR1 and TR3, this is not important due to the different zoning technique and the arbitrary artefact types.
 

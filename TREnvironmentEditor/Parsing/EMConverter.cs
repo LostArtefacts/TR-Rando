@@ -192,6 +192,8 @@ namespace TREnvironmentEditor.Parsing
                     return JsonConvert.DeserializeObject<EMConvertModelFunction>(jo.ToString(), this);
                 case EMType.ImportNonGraphicsModel:
                     return JsonConvert.DeserializeObject<EMImportNonGraphicsModelFunction>(jo.ToString(), this);
+                case EMType.CopySpriteSequence:
+                    return JsonConvert.DeserializeObject<EMCopySpriteSequenceFunction>(jo.ToString(), this);
 
                 // NOOP
                 case EMType.NOOP:

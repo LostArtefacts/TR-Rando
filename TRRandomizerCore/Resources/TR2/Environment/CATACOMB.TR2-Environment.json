@@ -2403,7 +2403,45 @@
     }
   ],
   "ConditionalAllWithin": [],
-  "ConditionalAll": [],
+  "ConditionalAll": [
+    {
+      "Condition": {
+        "Comments": "Check if a specific secret is present.",
+        "ConditionType": 22,
+        "Location": {
+          "X": 43520,
+          "Y": 5632,
+          "Z": 50688,
+          "Room": 128
+        }
+      },
+      "OnTrue": [
+        {
+          "Comments": "Make the gong hammer accessible.",
+          "EMType": 44,
+          "EntityIndex": 76,
+          "TargetLocation": {
+            "X": 12800,
+            "Y": 2304,
+            "Z": 45568,
+            "Room": 23
+          }
+        },
+        {
+          "Comments": "Turn it into a puzzle item.",
+          "EMType": 45,
+          "EntityIndex": 76,
+          "NewEntityType": 175
+        },
+        {
+          "Comments": "Change its appearance.",
+          "EMType": 146,
+          "BaseSpriteID": 190,
+          "TargetSpriteID": 175
+        }
+      ]
+    }
+  ],
   "ConditionalOneOf": [],
   "Mirrored": [
     {
