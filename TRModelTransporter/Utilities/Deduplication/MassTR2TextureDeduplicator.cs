@@ -41,7 +41,7 @@ namespace TRModelTransporter.Utilities
 
         protected override void WriteLevel(TR2Level level, string path)
         {
-            _control.WriteLevelToFile(level, path);
+            _control.Write(level, path);
         }
     }
 }

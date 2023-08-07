@@ -22,7 +22,7 @@ public abstract class TRLevelControlBase<L>
         return _level;
     }
 
-    public void WriteLevelToFile(L level, string filePath)
+    public void Write(L level, string filePath)
         => Write(level, File.Create(filePath));
 
     public void Write(L level, Stream outputStream)

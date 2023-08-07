@@ -92,7 +92,7 @@ namespace TextureExport.Types
                 level.NumObjectTextures = (uint)objectTextures.Count;
 
                 Directory.CreateDirectory(@"TR1\Faces");
-                new TR1LevelControl().WriteLevelToFile(level, @"TR1\Faces\" + lvl);
+                new TR1LevelControl().Write(level, @"TR1\Faces\" + lvl);
             }
         }
 
@@ -171,7 +171,7 @@ namespace TextureExport.Types
                 level.NumObjectTextures = (uint)objectTextures.Count;
 
                 Directory.CreateDirectory(@"TR2\Faces");
-                new TR2LevelControl().WriteLevelToFile(level, @"TR2\Faces\" + lvl);
+                new TR2LevelControl().Write(level, @"TR2\Faces\" + lvl);
             }
         }
 
@@ -250,7 +250,7 @@ namespace TextureExport.Types
                 level.NumObjectTextures = (uint)objectTextures.Count;
 
                 Directory.CreateDirectory(@"TR3\Faces");
-                new TR3LevelControl().WriteLevelToFile(level, @"TR3\Faces\" + lvl);
+                new TR3LevelControl().Write(level, @"TR3\Faces\" + lvl);
             }
         }
 
@@ -306,7 +306,7 @@ namespace TextureExport.Types
                 level.NumObjectTextures = (uint)objectTextures.Count;
 
                 Directory.CreateDirectory(@"TR2\Boxes");
-                new TR2LevelControl().WriteLevelToFile(level, @"TR2\Boxes\" + lvl);
+                new TR2LevelControl().Write(level, @"TR2\Boxes\" + lvl);
             }
         }
 

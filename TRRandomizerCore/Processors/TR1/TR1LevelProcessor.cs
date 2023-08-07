@@ -67,7 +67,7 @@ namespace TRRandomizerCore.Processors
             lock (_writeLock)
             {
                 string fullPath = Path.Combine(BasePath, name);
-                _control.WriteLevelToFile(level, fullPath);
+                _control.Write(level, fullPath);
             }
         }
     }

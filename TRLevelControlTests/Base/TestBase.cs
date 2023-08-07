@@ -90,17 +90,17 @@ public class TestBase
             case TRGameVersion.TR1:
                 TR1LevelControl control1 = new();
                 TR1Level level1 = control1.Read(pathI);
-                control1.WriteLevelToFile(level1, pathO);
+                control1.Write(level1, pathO);
                 break;
             case TRGameVersion.TR2:
                 TR2LevelControl control2 = new();
                 TR2Level level2 = control2.Read(pathI);
-                control2.WriteLevelToFile(level2, pathO);
+                control2.Write(level2, pathO);
                 break;
             case TRGameVersion.TR3:
                 TR3LevelControl control3 = new();
                 TR3Level level3 = control3.Read(pathI);
-                control3.WriteLevelToFile(level3, pathO);
+                control3.Write(level3, pathO);
                 break;
             default:
                 throw new Exception("Utility IO method suitable only for TR1-3.");
@@ -130,7 +130,7 @@ public class TestBase
             Tex32MChunkUncompressedSize = level.SkyAndFont32Chunk.UncompressedSize
         };
 
-        control.WriteLevelToFile(level, pathO);
+        control.Write(level, pathO);
         // Read in again what we wrote out
         TR4Level level2 = control.Read(pathI);
 
@@ -164,7 +164,7 @@ public class TestBase
             Tex32MChunkUncompressedSize = level.SkyAndFont32Chunk.UncompressedSize
         };
 
-        control.WriteLevelToFile(level, pathO);
+        control.Write(level, pathO);
         // Read in again what we wrote out
         TR5Level level2 = control.Read(pathI);
 
@@ -201,7 +201,7 @@ public class TestBase
         // TODO: allow level control to read/write from stream and not files alone
         string path = GetWritePath(levelName, TRGameVersion.TR1);
         TR1LevelControl control = new();
-        control.WriteLevelToFile(level, path);
+        control.Write(level, path);
         return control.Read(path);
     }
 
@@ -209,7 +209,7 @@ public class TestBase
     {
         string path = GetWritePath(levelName, TRGameVersion.TR2);
         TR2LevelControl control = new();
-        control.WriteLevelToFile(level, path);
+        control.Write(level, path);
         return control.Read(path);
     }
 
@@ -217,7 +217,7 @@ public class TestBase
     {
         string path = GetWritePath(levelName, TRGameVersion.TR3);
         TR3LevelControl control = new();
-        control.WriteLevelToFile(level, path);
+        control.Write(level, path);
         return control.Read(path);
     }
 
@@ -225,7 +225,7 @@ public class TestBase
     {
         string path = GetWritePath(levelName, TRGameVersion.TR4);
         TR4LevelControl control = new();
-        control.WriteLevelToFile(level, path);
+        control.Write(level, path);
         return control.Read(path);
     }
 
@@ -233,7 +233,7 @@ public class TestBase
     {
         string path = GetWritePath(levelName, TRGameVersion.TR5);
         TR5LevelControl control = new();
-        control.WriteLevelToFile(level, path);
+        control.Write(level, path);
         return control.Read(path);
     }
 }
