@@ -8,22 +8,22 @@ namespace TRLevelToolset.Components;
 public class DataEditComponent : IDrawable
 {
     #region TR Controls
-        private TRTexImage8Control _TRTexImage8Control = new();
-        private TRRoomControl _TRRoomControl = new();
-        private TRAnimatedTextureControl _TRAnimatedTextureControl = new();
-        private TRFloorDataControl _TRFloorDataControl = new();
-        private TRMeshControl _TRMeshControl = new();
-        private TRANimationControl _TRAnimationControl = new();
-        private TRModelControl _TRModelControl = new();
-        private TRStaticMeshControls _TRStaticMeshControl = new();
-        private TRSpriteAndObjTextureControl _TRSpriteAndObjTextureControl = new();
-        private TRCamerasControl _TRCamerasControl = new();
-        private TRSoundControl _TRSoundControl = new();
-        private TRZoneControl _TRZoneControl = new();
-        private TREntityControl _TREntityControl = new();
-        private TRPaletteControl _TRPaletteControl = new();
-        private TRCinematicsControl _TRCinematicsControl = new();
-        private TRDemoDataControl _TRDemoDataControl = new();
+        private readonly TRTexImage8Control _TRTexImage8Control = new();
+        private readonly TRRoomControl _TRRoomControl = new();
+        private readonly TRAnimatedTextureControl _TRAnimatedTextureControl = new();
+        private readonly TRFloorDataControl _TRFloorDataControl = new();
+        private readonly TRMeshControl _TRMeshControl = new();
+        private readonly TRANimationControl _TRAnimationControl = new();
+        private readonly TRModelControl _TRModelControl = new();
+        private readonly TRStaticMeshControls _TRStaticMeshControl = new();
+        private readonly TRSpriteAndObjTextureControl _TRSpriteAndObjTextureControl = new();
+        private readonly TRCamerasControl _TRCamerasControl = new();
+        private readonly TRSoundControl _TRSoundControl = new();
+        private readonly TRZoneControl _TRZoneControl = new();
+        private readonly TREntityControl _TREntityControl = new();
+        private readonly TRPaletteControl _TRPaletteControl = new();
+        private readonly TRCinematicsControl _TRCinematicsControl = new();
+        private readonly TRDemoDataControl _TRDemoDataControl = new();
     #endregion
 
     public void Draw()

@@ -7,12 +7,12 @@ namespace TRLevelToolset.Components;
 
 public class SelectLevelComponent : IDrawable
 {
-    LevelSelectListBox TR1Selector = new() { Items = TR1LevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR1 };
-    LevelSelectListBox TR1GSelector = new() { Items = TR1LevelNames.AsListGold.ToArray(), Game = IOLogic.TRGame.TR1 };
-    LevelSelectListBox TR2Selector = new() { Items = TR2LevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR2 };
-    LevelSelectListBox TR2GSelector = new() { Items = TR2LevelNames.AsListGold.ToArray(), Game = IOLogic.TRGame.TR2 };
-    LevelSelectListBox TR3Selector = new() { Items = TR3LevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR3 };
-    LevelSelectListBox TR3GSelector = new() { Items = TR3LevelNames.AsListGold.ToArray(), Game = IOLogic.TRGame.TR3 };
+    readonly LevelSelectListBox TR1Selector = new() { Items = TR1LevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR1 };
+    readonly LevelSelectListBox TR1GSelector = new() { Items = TR1LevelNames.AsListGold.ToArray(), Game = IOLogic.TRGame.TR1 };
+    readonly LevelSelectListBox TR2Selector = new() { Items = TR2LevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR2 };
+    readonly LevelSelectListBox TR2GSelector = new() { Items = TR2LevelNames.AsListGold.ToArray(), Game = IOLogic.TRGame.TR2 };
+    readonly LevelSelectListBox TR3Selector = new() { Items = TR3LevelNames.AsListWithAssault.ToArray(), Game = IOLogic.TRGame.TR3 };
+    readonly LevelSelectListBox TR3GSelector = new() { Items = TR3LevelNames.AsListGold.ToArray(), Game = IOLogic.TRGame.TR3 };
 
     public void Draw()
     {
