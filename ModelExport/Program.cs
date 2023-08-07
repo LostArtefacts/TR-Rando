@@ -6,7 +6,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        if (args.Length < 1 || args[0].Contains("?"))
+        if (args.Length < 1 || args[0].Contains('?'))
         {
             Usage();
             return;
