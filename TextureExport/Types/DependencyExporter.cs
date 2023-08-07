@@ -9,7 +9,7 @@ public static class DependencyExporter
 {
     public static void Export(TR1Level level, string lvl)
     {
-        TR1TextureRemapGroup remapGroup = new TR1TextureRemapGroup();
+        TR1TextureRemapGroup remapGroup = new();
         foreach (TRModel model in level.Models)
         {
             remapGroup.CalculateDependencies(level, (TREntities)model.ID);
@@ -46,7 +46,7 @@ public static class DependencyExporter
 
     public static void Export(TR2Level level, string lvl)
     {
-        TR2TextureRemapGroup remapGroup = new TR2TextureRemapGroup();
+        TR2TextureRemapGroup remapGroup = new();
         foreach (TRModel model in level.Models)
         {
             remapGroup.CalculateDependencies(level, (TR2Entities)model.ID);
@@ -59,7 +59,7 @@ public static class DependencyExporter
 
     public static void Export(TR3Level level, string lvl)
     {
-        TR3TextureRemapGroup remapGroup = new TR3TextureRemapGroup();
+        TR3TextureRemapGroup remapGroup = new();
         foreach (TRModel model in level.Models)
         {
             remapGroup.CalculateDependencies(level, (TR3Entities)model.ID);

@@ -13,19 +13,19 @@ public static class HtmlExporter
 {
     public static void Export(TR1Level level, string lvlName)
     {
-        using (TR1TexturePacker packer = new TR1TexturePacker(level))
+        using (TR1TexturePacker packer = new(level))
         {
-            StringBuilder tiles = new StringBuilder();
+            StringBuilder tiles = new();
             BuildTiles(tiles, packer.Tiles, level.Palette);
 
-            StringBuilder levelSel = new StringBuilder();
+            StringBuilder levelSel = new();
             BuildLevelSelect(levelSel, lvlName, TR1LevelNames.AsOrderedList);
 
-            StringBuilder skyboxInfo = new StringBuilder();
-            Dictionary<int, TRColour4> skyColours = new Dictionary<int, TRColour4>();
+            StringBuilder skyboxInfo = new();
+            Dictionary<int, TRColour4> skyColours = new();
             BuildSkyBox(skyboxInfo, skyColours);
 
-            StringBuilder palette = new StringBuilder();
+            StringBuilder palette = new();
             ISet<Color> colors = new HashSet<Color>();
             foreach (TRColour c in level.Palette)
             {
@@ -39,15 +39,15 @@ public static class HtmlExporter
 
     public static void Export(TR2Level level, string lvlName)
     {
-        using (TR2TexturePacker packer = new TR2TexturePacker(level))
+        using (TR2TexturePacker packer = new(level))
         {
-            StringBuilder tiles = new StringBuilder();
+            StringBuilder tiles = new();
             BuildTiles(tiles, packer.Tiles);
 
-            StringBuilder levelSel = new StringBuilder();
+            StringBuilder levelSel = new();
             BuildLevelSelect(levelSel, lvlName, TR2LevelNames.AsOrderedList);
 
-            StringBuilder skyboxInfo = new StringBuilder();
+            StringBuilder skyboxInfo = new();
             Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR2Entities.Skybox_H), level.Palette16);
             BuildSkyBox(skyboxInfo, skyColours);
 
@@ -57,15 +57,15 @@ public static class HtmlExporter
 
     public static void Export(TR3Level level, string lvlName)
     {
-        using (TR3TexturePacker packer = new TR3TexturePacker(level))
+        using (TR3TexturePacker packer = new(level))
         {
-            StringBuilder tiles = new StringBuilder();
+            StringBuilder tiles = new();
             BuildTiles(tiles, packer.Tiles);
 
-            StringBuilder levelSel = new StringBuilder();
+            StringBuilder levelSel = new();
             BuildLevelSelect(levelSel, lvlName, TR3LevelNames.AsOrderedList);
 
-            StringBuilder skyboxInfo = new StringBuilder();
+            StringBuilder skyboxInfo = new();
             Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR3Entities.Skybox_H), level.Palette16);
             BuildSkyBox(skyboxInfo, skyColours);
 
@@ -81,7 +81,7 @@ public static class HtmlExporter
 
             foreach (TexturedTileSegment segment in tile.Rectangles)
             {
-                using (MemoryStream ms = new MemoryStream())
+                using (MemoryStream ms = new())
                 {
                     segment.Bitmap.Save(ms, ImageFormat.Png);
 
@@ -104,7 +104,7 @@ public static class HtmlExporter
                                 Color c = segment.Bitmap.GetPixel(x, y);
                                 if (c.A != 0)
                                 {
-                                    TRColour col = new TRColour
+                                    TRColour col = new()
                                     {
                                         Red = (byte)(c.R / 4),
                                         Green = (byte)(c.G / 4),
@@ -122,8 +122,8 @@ public static class HtmlExporter
                         html.Append(string.Format("data-palette=\"{0}\" ", string.Join(",", paletteIndices)));
                     }
 
-                    List<string> objectData = new List<string>();
-                    List<string> spriteData = new List<string>();
+                    List<string> objectData = new();
+                    List<string> spriteData = new();
 
                     foreach (AbstractIndexedTRTexture texture in segment.Textures)
                     {
@@ -161,7 +161,7 @@ public static class HtmlExporter
 
     private static List<int> GetObjectTextureList(TexturedTileSegment segment)
     {
-        List<int> indices = new List<int>();
+        List<int> indices = new();
         foreach (AbstractIndexedTRTexture texture in segment.Textures)
         {
             if (texture is IndexedTRObjectTexture)
@@ -174,7 +174,7 @@ public static class HtmlExporter
 
     private static List<int> GetSpriteTextureList(TexturedTileSegment segment)
     {
-        List<int> indices = new List<int>();
+        List<int> indices = new();
         foreach (AbstractIndexedTRTexture texture in segment.Textures)
         {
             if (texture is IndexedTRSpriteTexture)
@@ -200,7 +200,7 @@ public static class HtmlExporter
 
     private static Dictionary<int, TRColour4> GetSkyBoxColours(TRMesh[] meshes, TRColour4[] palette16)
     {
-        Dictionary<int, TRColour4> colours = new Dictionary<int, TRColour4>();
+        Dictionary<int, TRColour4> colours = new();
         if (meshes != null)
         {
             ISet<int> colourIndices = new SortedSet<int>();

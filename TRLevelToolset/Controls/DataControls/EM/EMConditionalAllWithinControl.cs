@@ -21,7 +21,7 @@ internal class EMConditionalAllWithinControl : IDrawable
         {
             ImGui.Text("Set " + i);
             ImGui.Indent();
-            EMConditionalEditorSetControl ctrl = new EMConditionalEditorSetControl(set);
+            EMConditionalEditorSetControl ctrl = new(set);
             ctrl.Draw();
             ImGui.Unindent();
             i++;

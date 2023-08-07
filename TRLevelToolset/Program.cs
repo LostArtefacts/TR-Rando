@@ -29,12 +29,12 @@ public static class Program
             gd.MainSwapchain.Resize((uint)window.Width, (uint)window.Height);
         };
 
-        SelectLevelComponent selectLevelScreen = new SelectLevelComponent();
-        VersionComponent versionComponent = new VersionComponent();
-        DataEditComponent dataEditComponent = new DataEditComponent();
-        EnvironmentEditComponent envComponent = new EnvironmentEditComponent();
+        SelectLevelComponent selectLevelScreen = new();
+        VersionComponent versionComponent = new();
+        DataEditComponent dataEditComponent = new();
+        EnvironmentEditComponent envComponent = new();
 
-        Stopwatch sw = new Stopwatch();
+        Stopwatch sw = new();
 
         while (window.Exists)
         {

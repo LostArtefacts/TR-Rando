@@ -15,14 +15,14 @@ internal class EMConditionalSingleEditorSetControl : IDrawable
     
     public void Draw()
     {
-        EMConditionControl condCtrl = new EMConditionControl(_data.Condition);
+        EMConditionControl condCtrl = new(_data.Condition);
         ImGui.Text("Condition");
         ImGui.Indent();
         condCtrl.Draw();
 
         if (_data.OnTrue != null)
         {
-            EMAllControl trueList = new EMAllControl(_data.OnTrue);
+            EMAllControl trueList = new(_data.OnTrue);
             ImGui.Text("On True");
             ImGui.Indent();
             trueList.Draw();
@@ -31,7 +31,7 @@ internal class EMConditionalSingleEditorSetControl : IDrawable
 
         if (_data.OnFalse != null)
         {
-            EMAllControl falseList = new EMAllControl(_data.OnFalse);
+            EMAllControl falseList = new(_data.OnFalse);
             ImGui.Text("On False");
             ImGui.Indent();
             falseList.Draw();

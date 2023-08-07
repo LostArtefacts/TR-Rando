@@ -24,7 +24,7 @@ internal class EMAllWithinGroupControl : IDrawable
         {
             ImGui.Text("Group  " + _groupNum + " Set " + i);
             
-            EMAllControl ctrl = new EMAllControl(set);
+            EMAllControl ctrl = new(set);
             
             ImGui.Indent();
             ctrl.Draw();

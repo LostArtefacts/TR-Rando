@@ -19,7 +19,7 @@ internal class EMAllWithinControl : IDrawable
 
         foreach (List<EMEditorSet> set in _data)
         {
-            EMAllWithinGroupControl ctrl = new EMAllWithinGroupControl(set, i);
+            EMAllWithinGroupControl ctrl = new(set, i);
 
             ImGui.Text("Group " + i);
 

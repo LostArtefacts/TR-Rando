@@ -21,7 +21,7 @@ internal class EMOneOfControl : IDrawable
         {
             ImGui.Text("Grouped Set " + i);
             ImGui.Indent();
-            EMEditorGroupedSetControl ctrl = new EMEditorGroupedSetControl(set);
+            EMEditorGroupedSetControl ctrl = new(set);
             ctrl.Draw();
             ImGui.Unindent();
             i++;

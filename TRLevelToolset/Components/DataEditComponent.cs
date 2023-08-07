@@ -8,22 +8,22 @@ namespace TRLevelToolset.Components;
 public class DataEditComponent : IDrawable
 {
     #region TR Controls
-        private TRTexImage8Control _TRTexImage8Control = new TRTexImage8Control();
-        private TRRoomControl _TRRoomControl = new TRRoomControl();
-        private TRAnimatedTextureControl _TRAnimatedTextureControl = new TRAnimatedTextureControl();
-        private TRFloorDataControl _TRFloorDataControl = new TRFloorDataControl();
-        private TRMeshControl _TRMeshControl = new TRMeshControl();
-        private TRANimationControl _TRAnimationControl = new TRANimationControl();
-        private TRModelControl _TRModelControl = new TRModelControl();
-        private TRStaticMeshControls _TRStaticMeshControl = new TRStaticMeshControls();
-        private TRSpriteAndObjTextureControl _TRSpriteAndObjTextureControl = new TRSpriteAndObjTextureControl();
-        private TRCamerasControl _TRCamerasControl = new TRCamerasControl();
-        private TRSoundControl _TRSoundControl = new TRSoundControl();
-        private TRZoneControl _TRZoneControl = new TRZoneControl();
-        private TREntityControl _TREntityControl = new TREntityControl();
-        private TRPaletteControl _TRPaletteControl = new TRPaletteControl();
-        private TRCinematicsControl _TRCinematicsControl = new TRCinematicsControl();
-        private TRDemoDataControl _TRDemoDataControl = new TRDemoDataControl();
+        private TRTexImage8Control _TRTexImage8Control = new();
+        private TRRoomControl _TRRoomControl = new();
+        private TRAnimatedTextureControl _TRAnimatedTextureControl = new();
+        private TRFloorDataControl _TRFloorDataControl = new();
+        private TRMeshControl _TRMeshControl = new();
+        private TRANimationControl _TRAnimationControl = new();
+        private TRModelControl _TRModelControl = new();
+        private TRStaticMeshControls _TRStaticMeshControl = new();
+        private TRSpriteAndObjTextureControl _TRSpriteAndObjTextureControl = new();
+        private TRCamerasControl _TRCamerasControl = new();
+        private TRSoundControl _TRSoundControl = new();
+        private TRZoneControl _TRZoneControl = new();
+        private TREntityControl _TREntityControl = new();
+        private TRPaletteControl _TRPaletteControl = new();
+        private TRCinematicsControl _TRCinematicsControl = new();
+        private TRDemoDataControl _TRDemoDataControl = new();
     #endregion
 
     public void Draw()

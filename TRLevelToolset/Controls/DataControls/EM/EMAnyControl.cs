@@ -21,7 +21,7 @@ internal class EMAnyControl : IDrawable
         {
             ImGui.Text("Set " + i);
             
-            EMAllControl ctrl = new EMAllControl(set);
+            EMAllControl ctrl = new(set);
             
             ImGui.Indent();
             ctrl.Draw();

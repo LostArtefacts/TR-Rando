@@ -27,7 +27,7 @@ class Program
         _reader3 = new();
         _allTR1Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR1\Locations\invalid_item_locations.json"));
         _allTR3Exclusions = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(@"Resources\TR3\Locations\invalid_item_locations.json"));
-        Dictionary<string, List<Location>> allLocations = new Dictionary<string, List<Location>>();
+        Dictionary<string, List<Location>> allLocations = new();
 
         string levelType = args[0].ToUpper();
 
@@ -93,7 +93,7 @@ class Program
             if (compPath != null)
             {
                 Dictionary<string, List<Location>> previousLocations = JsonConvert.DeserializeObject<Dictionary<string, List<Location>>>(File.ReadAllText(compPath));
-                Dictionary<string, List<Location>> newLocations = new Dictionary<string, List<Location>>();
+                Dictionary<string, List<Location>> newLocations = new();
                 foreach (string lvl in allLocations.Keys)
                 {
                     newLocations[lvl] = new List<Location>();
@@ -144,7 +144,7 @@ class Program
     private static List<Location> ExportTR1Locations(string lvl)
     {
         TR1Level level = _reader1.Read(lvl);
-        List<Location> exclusions = new List<Location>();
+        List<Location> exclusions = new();
         if (_allTR1Exclusions.ContainsKey(lvl))
         {
             exclusions.AddRange(_allTR1Exclusions[lvl]);
@@ -164,14 +164,14 @@ class Program
             }
         }
 
-        TR1LocationGenerator generator = new TR1LocationGenerator();
+        TR1LocationGenerator generator = new();
         return generator.Generate(level, exclusions);
     }
 
     private static List<Location> ExportTR3Locations(string lvl)
     {
         TR3Level level = _reader3.Read(lvl);
-        List<Location> exclusions = new List<Location>();
+        List<Location> exclusions = new();
         if (_allTR3Exclusions.ContainsKey(lvl))
         {
             exclusions.AddRange(_allTR3Exclusions[lvl]);
@@ -191,7 +191,7 @@ class Program
             }
         }
 
-        TR3LocationGenerator generator = new TR3LocationGenerator();
+        TR3LocationGenerator generator = new();
         return generator.Generate(level, exclusions);
     }
 

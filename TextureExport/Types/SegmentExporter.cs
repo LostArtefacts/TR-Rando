@@ -9,7 +9,7 @@ public static class SegmentExporter
     public static void Export(TR2Level level, string lvl)
     {
         string folder = PrepareDirectory("TR2", lvl);
-        using (TR2TexturePacker packer = new TR2TexturePacker(level))
+        using (TR2TexturePacker packer = new(level))
         {
             Export(packer.Tiles, folder);
         }
@@ -18,7 +18,7 @@ public static class SegmentExporter
     public static void Export(TR3Level level, string lvl)
     {
         string folder = PrepareDirectory("TR3", lvl);
-        using (TR3TexturePacker packer = new TR3TexturePacker(level))
+        using (TR3TexturePacker packer = new(level))
         {
             Export(packer.Tiles, folder);
         }

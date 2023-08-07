@@ -38,7 +38,7 @@ class Program
     private static void ExtractFromSFX(string file, string exportDir)
     {
         int sample = 0;
-        using (BinaryReader reader = new BinaryReader(File.Open(file, FileMode.Open)))
+        using (BinaryReader reader = new(File.Open(file, FileMode.Open)))
         {
             while (reader.BaseStream.Position < reader.BaseStream.Length)
             {
@@ -48,7 +48,7 @@ class Program
                     header[i] = reader.ReadUInt32();
                 }
 
-                using (BinaryWriter writer = new BinaryWriter(File.Create(Path.Combine(exportDir, sample++ + ".wav"))))
+                using (BinaryWriter writer = new(File.Create(Path.Combine(exportDir, sample++ + ".wav"))))
                 {
                     for (int i = 0; i < header.Length; i++)
                     {
@@ -77,7 +77,7 @@ class Program
                 sampleEnd = (uint)level.Samples.Length;
             }
 
-            using (BinaryWriter writer = new BinaryWriter(File.Create(Path.Combine(exportDir, i + ".wav"))))
+            using (BinaryWriter writer = new(File.Create(Path.Combine(exportDir, i + ".wav"))))
             {
                 for (uint j = sampleStart; j < sampleEnd; j++)
                 {

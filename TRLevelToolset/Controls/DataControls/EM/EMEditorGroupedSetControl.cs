@@ -15,13 +15,13 @@ internal class EMEditorGroupedSetControl : IDrawable
     
     public void Draw()
     {
-        EMAllControl leader = new EMAllControl(_data.Leader);
+        EMAllControl leader = new(_data.Leader);
         ImGui.Text("Leader");
         ImGui.Indent();
         leader.Draw();
         ImGui.Unindent();
         
-        EMAnyControl followers = new EMAnyControl(_data.Followers);
+        EMAnyControl followers = new(_data.Followers);
         ImGui.Text("Followers");
         ImGui.Indent();
         followers.Draw();

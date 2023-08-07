@@ -15,17 +15,17 @@ public static class FaceMapper
 {
     public static void DrawFaces(TR1Level level, string lvl, int[] roomNumbers)
     {
-        using (TR1TexturePacker packer = new TR1TexturePacker(level))
+        using (TR1TexturePacker packer = new(level))
         {
             packer.MaximumTiles = 255;
 
             List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
 
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new Dictionary<int, Dictionary<int, TexturedTileSegment>>();
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new Dictionary<int, Dictionary<int, TexturedTileSegment>>();
+            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
+            Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
 
-            Dictionary<int, Dictionary<int, int>> newRectFaces = new Dictionary<int, Dictionary<int, int>>();
-            Dictionary<int, Dictionary<int, int>> newTriFaces = new Dictionary<int, Dictionary<int, int>>();
+            Dictionary<int, Dictionary<int, int>> newRectFaces = new();
+            Dictionary<int, Dictionary<int, int>> newTriFaces = new();
 
             foreach (int roomNumber in roomNumbers)
             {
@@ -94,17 +94,17 @@ public static class FaceMapper
 
     public static void DrawFaces(TR2Level level, string lvl, int[] roomNumbers)
     {
-        using (TR2TexturePacker packer = new TR2TexturePacker(level))
+        using (TR2TexturePacker packer = new(level))
         {
             packer.MaximumTiles = 255;
 
             List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
 
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new Dictionary<int, Dictionary<int, TexturedTileSegment>>();
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new Dictionary<int, Dictionary<int, TexturedTileSegment>>();
+            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
+            Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
 
-            Dictionary<int, Dictionary<int, int>> newRectFaces = new Dictionary<int, Dictionary<int, int>>();
-            Dictionary<int, Dictionary<int, int>> newTriFaces = new Dictionary<int, Dictionary<int, int>>();
+            Dictionary<int, Dictionary<int, int>> newRectFaces = new();
+            Dictionary<int, Dictionary<int, int>> newTriFaces = new();
 
             foreach (int roomNumber in roomNumbers)
             {
@@ -173,17 +173,17 @@ public static class FaceMapper
 
     public static void DrawFaces(TR3Level level, string lvl, int[] roomNumbers)
     {
-        using (TR3TexturePacker packer = new TR3TexturePacker(level))
+        using (TR3TexturePacker packer = new(level))
         {
             packer.MaximumTiles = 255;
 
             List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
 
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new Dictionary<int, Dictionary<int, TexturedTileSegment>>();
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new Dictionary<int, Dictionary<int, TexturedTileSegment>>();
+            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
+            Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
 
-            Dictionary<int, Dictionary<int, int>> newRectFaces = new Dictionary<int, Dictionary<int, int>>();
-            Dictionary<int, Dictionary<int, int>> newTriFaces = new Dictionary<int, Dictionary<int, int>>();
+            Dictionary<int, Dictionary<int, int>> newRectFaces = new();
+            Dictionary<int, Dictionary<int, int>> newTriFaces = new();
 
             foreach (int roomNumber in roomNumbers)
             {
@@ -252,15 +252,15 @@ public static class FaceMapper
 
     public static void DrawBoxes(TR2Level level, string lvl, int[] roomNumbers)
     {
-        using (TR2TexturePacker packer = new TR2TexturePacker(level))
+        using (TR2TexturePacker packer = new(level))
         {
             packer.MaximumTiles = 10000;
 
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new Dictionary<int, Dictionary<int, TexturedTileSegment>>();
-            Dictionary<int, Dictionary<int, int>> newRectFaces = new Dictionary<int, Dictionary<int, int>>();
+            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
+            Dictionary<int, Dictionary<int, int>> newRectFaces = new();
 
             List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
-            FDControl control = new FDControl();
+            FDControl control = new();
             control.ParseFromLevel(level);
 
             foreach (int roomNumber in roomNumbers)
@@ -329,7 +329,7 @@ public static class FaceMapper
 
     private static TexturedTileSegment GetFaceSegment(int textureIndex, IReadOnlyList<TexturedTile> tiles)
     {
-        List<int> indices = new List<int> { textureIndex & 0x0fff };
+        List<int> indices = new() { textureIndex & 0x0fff };
         foreach (TexturedTile tile in tiles)
         {
             List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
@@ -344,7 +344,7 @@ public static class FaceMapper
     private static IndexedTRObjectTexture CreateTexture(Rectangle rectangle)
     {
         // Make a dummy texture object with the given bounds
-        TRObjectTexture texture = new TRObjectTexture
+        TRObjectTexture texture = new()
         {
             AtlasAndFlag = 0,
             Attribute = 0,
@@ -385,7 +385,7 @@ public static class FaceMapper
     {
         TRFace4 face = room.RoomData.Rectangles[rectIndex];
 
-        List<TRVertex> verts = new List<TRVertex>
+        List<TRVertex> verts = new()
         {
             room.RoomData.Vertices[face.Vertices[0]].Vertex,
             room.RoomData.Vertices[face.Vertices[1]].Vertex,
@@ -399,7 +399,7 @@ public static class FaceMapper
             return null;
         }
 
-        List<int> indices = new List<int> { face.Texture };
+        List<int> indices = new() { face.Texture };
         foreach (TexturedTile tile in tiles)
         {
             List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
@@ -415,7 +415,7 @@ public static class FaceMapper
     {
         TR2Room room = level.Rooms[roomNumber];
         TRFace4 face = room.RoomData.Rectangles[rectIndex];
-        List<TRVertex> verts = new List<TRVertex>
+        List<TRVertex> verts = new()
         {
             room.RoomData.Vertices[face.Vertices[0]].Vertex,
             room.RoomData.Vertices[face.Vertices[1]].Vertex,

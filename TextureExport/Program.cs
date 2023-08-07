@@ -222,7 +222,7 @@ class Program
     static int[] GetRoomArgs()
     {
         string[] args = Environment.GetCommandLineArgs()[3].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-        List<int> rooms = new List<int>();
+        List<int> rooms = new();
         foreach (string rm in args)
         {
             if (int.TryParse(rm.Trim(), out int r))
