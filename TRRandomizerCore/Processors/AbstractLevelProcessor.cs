@@ -13,7 +13,7 @@ namespace TRRandomizerCore.Processors
 
         protected ExceptionDispatchInfo _processingException;
 
-        protected readonly object _readLock, _writeLock, _monitorLock;
+        protected readonly object _controlLock, _monitorLock;
 
         internal AbstractTRScriptEditor ScriptEditor { get; set; }
         internal List<S> Levels { get; set; }
@@ -26,8 +26,7 @@ namespace TRRandomizerCore.Processors
 
         public AbstractLevelProcessor()
         {
-            _readLock = new object();
-            _writeLock = new object();
+            _controlLock = new object();
             _monitorLock = new object();
 
             _maxThreads = 3;
@@ -56,7 +55,7 @@ namespace TRRandomizerCore.Processors
 
         protected void SaveScript()
         {
-            lock (_writeLock)
+            lock (_controlLock)
             {
                 // Save any script changes.
                 ScriptEditor.SaveScript();

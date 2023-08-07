@@ -35,7 +35,7 @@ namespace TRRandomizerCore.Processors
 
         public TR1Level LoadLevelData(string name)
         {
-            lock (_readLock)
+            lock (_controlLock)
             {
                 string fullPath = Path.Combine(BasePath, name);
                 return _control.Read(fullPath);
@@ -64,7 +64,7 @@ namespace TRRandomizerCore.Processors
 
         public void SaveLevel(TR1Level level, string name)
         {
-            lock (_writeLock)
+            lock (_controlLock)
             {
                 string fullPath = Path.Combine(BasePath, name);
                 _control.Write(level, fullPath);
