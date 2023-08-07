@@ -38,29 +38,25 @@ class Program
     private static void ExtractFromSFX(string file, string exportDir)
     {
         int sample = 0;
-        using (BinaryReader reader = new(File.Open(file, FileMode.Open)))
+        using BinaryReader reader = new(File.Open(file, FileMode.Open));
+        while (reader.BaseStream.Position < reader.BaseStream.Length)
         {
-            while (reader.BaseStream.Position < reader.BaseStream.Length)
+            uint[] header = new uint[11];
+            for (int i = 0; i < header.Length; i++)
             {
-                uint[] header = new uint[11];
-                for (int i = 0; i < header.Length; i++)
-                {
-                    header[i] = reader.ReadUInt32();
-                }
+                header[i] = reader.ReadUInt32();
+            }
 
-                using (BinaryWriter writer = new(File.Create(Path.Combine(exportDir, sample++ + ".wav"))))
-                {
-                    for (int i = 0; i < header.Length; i++)
-                    {
-                        writer.Write(header[i]);
-                    }
+            using BinaryWriter writer = new(File.Create(Path.Combine(exportDir, sample++ + ".wav")));
+            for (int i = 0; i < header.Length; i++)
+            {
+                writer.Write(header[i]);
+            }
 
-                    uint dataLength = header[10];
-                    for (int i = 0; i < dataLength; i++)
-                    {
-                        writer.Write(reader.ReadByte());
-                    }
-                }
+            uint dataLength = header[10];
+            for (int i = 0; i < dataLength; i++)
+            {
+                writer.Write(reader.ReadByte());
             }
         }
     }
@@ -77,12 +73,10 @@ class Program
                 sampleEnd = (uint)level.Samples.Length;
             }
 
-            using (BinaryWriter writer = new(File.Create(Path.Combine(exportDir, i + ".wav"))))
+            using BinaryWriter writer = new(File.Create(Path.Combine(exportDir, i + ".wav")));
+            for (uint j = sampleStart; j < sampleEnd; j++)
             {
-                for (uint j = sampleStart; j < sampleEnd; j++)
-                {
-                    writer.Write(level.Samples[j]);
-                }
+                writer.Write(level.Samples[j]);
             }
         }
     }

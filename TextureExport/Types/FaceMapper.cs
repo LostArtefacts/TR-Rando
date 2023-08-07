@@ -15,272 +15,39 @@ public static class FaceMapper
 {
     public static void DrawFaces(TR1Level level, string lvl, int[] roomNumbers)
     {
-        using (TR1TexturePacker packer = new(level))
+        using TR1TexturePacker packer = new(level);
+        packer.MaximumTiles = 255;
+
+        List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
+
+        Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
+        Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
+
+        Dictionary<int, Dictionary<int, int>> newRectFaces = new();
+        Dictionary<int, Dictionary<int, int>> newTriFaces = new();
+
+        foreach (int roomNumber in roomNumbers)
         {
-            packer.MaximumTiles = 255;
+            rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+            triFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+            newRectFaces[roomNumber] = new Dictionary<int, int>();
+            newTriFaces[roomNumber] = new Dictionary<int, int>();
 
-            List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
-
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
-
-            Dictionary<int, Dictionary<int, int>> newRectFaces = new();
-            Dictionary<int, Dictionary<int, int>> newTriFaces = new();
-
-            foreach (int roomNumber in roomNumbers)
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
             {
-                rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
-                triFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
-                newRectFaces[roomNumber] = new Dictionary<int, int>();
-                newTriFaces[roomNumber] = new Dictionary<int, int>();
-
-                for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
-                {
-                    rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
-                }
-                for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumTriangles; i++)
-                {
-                    triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
-                }
-
-                foreach (int rectIndex in rectFaces[roomNumber].Keys)
-                {
-                    TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
-                    if (segment != null)
-                    {
-                        TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex, true);
-                        packer.AddRectangle(newSegment);
-
-                        newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
-                        objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
-                    }
-                }
-
-                foreach (int triIndex in triFaces[roomNumber].Keys)
-                {
-                    TexturedTileSegment segment = triFaces[roomNumber][triIndex];
-                    if (segment != null)
-                    {
-                        TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex, true);
-                        packer.AddRectangle(newSegment);
-
-                        newTriFaces[roomNumber][triIndex] = objectTextures.Count;
-                        objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
-                    }
-                }
+                rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
+            }
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumTriangles; i++)
+            {
+                triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
             }
 
-            packer.Pack(true);
-
-            foreach (int roomNumber in roomNumbers)
+            foreach (int rectIndex in rectFaces[roomNumber].Keys)
             {
-                foreach (int rectIndex in newRectFaces[roomNumber].Keys)
+                TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
+                if (segment != null)
                 {
-                    level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
-                }
-                foreach (int triIndex in newTriFaces[roomNumber].Keys)
-                {
-                    level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
-                }
-            }
-
-            level.ObjectTextures = objectTextures.ToArray();
-            level.NumObjectTextures = (uint)objectTextures.Count;
-
-            Directory.CreateDirectory(@"TR1\Faces");
-            new TR1LevelControl().Write(level, @"TR1\Faces\" + lvl);
-        }
-    }
-
-    public static void DrawFaces(TR2Level level, string lvl, int[] roomNumbers)
-    {
-        using (TR2TexturePacker packer = new(level))
-        {
-            packer.MaximumTiles = 255;
-
-            List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
-
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
-
-            Dictionary<int, Dictionary<int, int>> newRectFaces = new();
-            Dictionary<int, Dictionary<int, int>> newTriFaces = new();
-
-            foreach (int roomNumber in roomNumbers)
-            {
-                rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
-                triFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
-                newRectFaces[roomNumber] = new Dictionary<int, int>();
-                newTriFaces[roomNumber] = new Dictionary<int, int>();
-
-                for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
-                {
-                    rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
-                }
-                for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumTriangles; i++)
-                {
-                    triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
-                }
-
-                foreach (int rectIndex in rectFaces[roomNumber].Keys)
-                {
-                    TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
-                    if (segment != null)
-                    {
-                        TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex);
-                        packer.AddRectangle(newSegment);
-
-                        newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
-                        objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
-                    }
-                }
-
-                foreach (int triIndex in triFaces[roomNumber].Keys)
-                {
-                    TexturedTileSegment segment = triFaces[roomNumber][triIndex];
-                    if (segment != null)
-                    {
-                        TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex);
-                        packer.AddRectangle(newSegment);
-
-                        newTriFaces[roomNumber][triIndex] = objectTextures.Count;
-                        objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
-                    }
-                }
-            }
-
-            packer.Pack(true);
-
-            foreach (int roomNumber in roomNumbers)
-            {
-                foreach (int rectIndex in newRectFaces[roomNumber].Keys)
-                {
-                    level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
-                }
-                foreach (int triIndex in newTriFaces[roomNumber].Keys)
-                {
-                    level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
-                }
-            }
-
-            level.ObjectTextures = objectTextures.ToArray();
-            level.NumObjectTextures = (uint)objectTextures.Count;
-
-            Directory.CreateDirectory(@"TR2\Faces");
-            new TR2LevelControl().Write(level, @"TR2\Faces\" + lvl);
-        }
-    }
-
-    public static void DrawFaces(TR3Level level, string lvl, int[] roomNumbers)
-    {
-        using (TR3TexturePacker packer = new(level))
-        {
-            packer.MaximumTiles = 255;
-
-            List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
-
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
-
-            Dictionary<int, Dictionary<int, int>> newRectFaces = new();
-            Dictionary<int, Dictionary<int, int>> newTriFaces = new();
-
-            foreach (int roomNumber in roomNumbers)
-            {
-                rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
-                triFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
-                newRectFaces[roomNumber] = new Dictionary<int, int>();
-                newTriFaces[roomNumber] = new Dictionary<int, int>();
-
-                for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
-                {
-                    rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
-                }
-                for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumTriangles; i++)
-                {
-                    triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
-                }
-
-                foreach (int rectIndex in rectFaces[roomNumber].Keys)
-                {
-                    TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
-                    if (segment != null)
-                    {
-                        TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex);
-                        packer.AddRectangle(newSegment);
-
-                        newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
-                        objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
-                    }
-                }
-
-                foreach (int triIndex in triFaces[roomNumber].Keys)
-                {
-                    TexturedTileSegment segment = triFaces[roomNumber][triIndex];
-                    if (segment != null)
-                    {
-                        TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex);
-                        packer.AddRectangle(newSegment);
-
-                        newTriFaces[roomNumber][triIndex] = objectTextures.Count;
-                        objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
-                    }
-                }
-            }
-
-            packer.Pack(true);
-
-            foreach (int roomNumber in roomNumbers)
-            {
-                foreach (int rectIndex in newRectFaces[roomNumber].Keys)
-                {
-                    level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
-                }
-                foreach (int triIndex in newTriFaces[roomNumber].Keys)
-                {
-                    level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
-                }
-            }
-
-            level.ObjectTextures = objectTextures.ToArray();
-            level.NumObjectTextures = (uint)objectTextures.Count;
-
-            Directory.CreateDirectory(@"TR3\Faces");
-            new TR3LevelControl().Write(level, @"TR3\Faces\" + lvl);
-        }
-    }
-
-    public static void DrawBoxes(TR2Level level, string lvl, int[] roomNumbers)
-    {
-        using (TR2TexturePacker packer = new(level))
-        {
-            packer.MaximumTiles = 10000;
-
-            Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
-            Dictionary<int, Dictionary<int, int>> newRectFaces = new();
-
-            List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
-            FDControl control = new();
-            control.ParseFromLevel(level);
-
-            foreach (int roomNumber in roomNumbers)
-            {
-                rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
-                newRectFaces[roomNumber] = new Dictionary<int, int>();
-
-                for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
-                {
-                    TexturedTileSegment seg = GetBoxFaceSegment(level.Rooms[roomNumber], i, packer.Tiles);
-                    if (seg != null)
-                    {
-                        rectFaces[roomNumber][i] = seg;
-                    }
-                }
-
-                foreach (int rectIndex in rectFaces[roomNumber].Keys)
-                {
-                    TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
-                    TexturedTileSegment newSegment = DrawNewFace(segment, GetBoxDescription(level, control, roomNumber, rectIndex));
+                    TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex, true);
                     packer.AddRectangle(newSegment);
 
                     newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
@@ -288,22 +55,247 @@ public static class FaceMapper
                 }
             }
 
-            packer.Pack(true);
-
-            foreach (int roomNumber in roomNumbers)
+            foreach (int triIndex in triFaces[roomNumber].Keys)
             {
-                foreach (int rectIndex in newRectFaces[roomNumber].Keys)
+                TexturedTileSegment segment = triFaces[roomNumber][triIndex];
+                if (segment != null)
                 {
-                    level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
+                    TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex, true);
+                    packer.AddRectangle(newSegment);
+
+                    newTriFaces[roomNumber][triIndex] = objectTextures.Count;
+                    objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                }
+            }
+        }
+
+        packer.Pack(true);
+
+        foreach (int roomNumber in roomNumbers)
+        {
+            foreach (int rectIndex in newRectFaces[roomNumber].Keys)
+            {
+                level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
+            }
+            foreach (int triIndex in newTriFaces[roomNumber].Keys)
+            {
+                level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
+            }
+        }
+
+        level.ObjectTextures = objectTextures.ToArray();
+        level.NumObjectTextures = (uint)objectTextures.Count;
+
+        Directory.CreateDirectory(@"TR1\Faces");
+        new TR1LevelControl().Write(level, @"TR1\Faces\" + lvl);
+    }
+
+    public static void DrawFaces(TR2Level level, string lvl, int[] roomNumbers)
+    {
+        using TR2TexturePacker packer = new(level);
+        packer.MaximumTiles = 255;
+
+        List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
+
+        Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
+        Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
+
+        Dictionary<int, Dictionary<int, int>> newRectFaces = new();
+        Dictionary<int, Dictionary<int, int>> newTriFaces = new();
+
+        foreach (int roomNumber in roomNumbers)
+        {
+            rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+            triFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+            newRectFaces[roomNumber] = new Dictionary<int, int>();
+            newTriFaces[roomNumber] = new Dictionary<int, int>();
+
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
+            {
+                rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
+            }
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumTriangles; i++)
+            {
+                triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
+            }
+
+            foreach (int rectIndex in rectFaces[roomNumber].Keys)
+            {
+                TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
+                if (segment != null)
+                {
+                    TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex);
+                    packer.AddRectangle(newSegment);
+
+                    newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
+                    objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
                 }
             }
 
-            level.ObjectTextures = objectTextures.ToArray();
-            level.NumObjectTextures = (uint)objectTextures.Count;
+            foreach (int triIndex in triFaces[roomNumber].Keys)
+            {
+                TexturedTileSegment segment = triFaces[roomNumber][triIndex];
+                if (segment != null)
+                {
+                    TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex);
+                    packer.AddRectangle(newSegment);
 
-            Directory.CreateDirectory(@"TR2\Boxes");
-            new TR2LevelControl().Write(level, @"TR2\Boxes\" + lvl);
+                    newTriFaces[roomNumber][triIndex] = objectTextures.Count;
+                    objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                }
+            }
         }
+
+        packer.Pack(true);
+
+        foreach (int roomNumber in roomNumbers)
+        {
+            foreach (int rectIndex in newRectFaces[roomNumber].Keys)
+            {
+                level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
+            }
+            foreach (int triIndex in newTriFaces[roomNumber].Keys)
+            {
+                level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
+            }
+        }
+
+        level.ObjectTextures = objectTextures.ToArray();
+        level.NumObjectTextures = (uint)objectTextures.Count;
+
+        Directory.CreateDirectory(@"TR2\Faces");
+        new TR2LevelControl().Write(level, @"TR2\Faces\" + lvl);
+    }
+
+    public static void DrawFaces(TR3Level level, string lvl, int[] roomNumbers)
+    {
+        using TR3TexturePacker packer = new(level);
+        packer.MaximumTiles = 255;
+
+        List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
+
+        Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
+        Dictionary<int, Dictionary<int, TexturedTileSegment>> triFaces = new();
+
+        Dictionary<int, Dictionary<int, int>> newRectFaces = new();
+        Dictionary<int, Dictionary<int, int>> newTriFaces = new();
+
+        foreach (int roomNumber in roomNumbers)
+        {
+            rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+            triFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+            newRectFaces[roomNumber] = new Dictionary<int, int>();
+            newTriFaces[roomNumber] = new Dictionary<int, int>();
+
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
+            {
+                rectFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Rectangles[i].Texture, packer.Tiles);
+            }
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumTriangles; i++)
+            {
+                triFaces[roomNumber][i] = GetFaceSegment(level.Rooms[roomNumber].RoomData.Triangles[i].Texture, packer.Tiles);
+            }
+
+            foreach (int rectIndex in rectFaces[roomNumber].Keys)
+            {
+                TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
+                if (segment != null)
+                {
+                    TexturedTileSegment newSegment = DrawNewFace(segment, "Q" + rectIndex);
+                    packer.AddRectangle(newSegment);
+
+                    newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
+                    objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                }
+            }
+
+            foreach (int triIndex in triFaces[roomNumber].Keys)
+            {
+                TexturedTileSegment segment = triFaces[roomNumber][triIndex];
+                if (segment != null)
+                {
+                    TexturedTileSegment newSegment = DrawNewFace(segment, "T" + triIndex);
+                    packer.AddRectangle(newSegment);
+
+                    newTriFaces[roomNumber][triIndex] = objectTextures.Count;
+                    objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+                }
+            }
+        }
+
+        packer.Pack(true);
+
+        foreach (int roomNumber in roomNumbers)
+        {
+            foreach (int rectIndex in newRectFaces[roomNumber].Keys)
+            {
+                level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
+            }
+            foreach (int triIndex in newTriFaces[roomNumber].Keys)
+            {
+                level.Rooms[roomNumber].RoomData.Triangles[triIndex].Texture = (ushort)newTriFaces[roomNumber][triIndex];
+            }
+        }
+
+        level.ObjectTextures = objectTextures.ToArray();
+        level.NumObjectTextures = (uint)objectTextures.Count;
+
+        Directory.CreateDirectory(@"TR3\Faces");
+        new TR3LevelControl().Write(level, @"TR3\Faces\" + lvl);
+    }
+
+    public static void DrawBoxes(TR2Level level, string lvl, int[] roomNumbers)
+    {
+        using TR2TexturePacker packer = new(level);
+        packer.MaximumTiles = 10000;
+
+        Dictionary<int, Dictionary<int, TexturedTileSegment>> rectFaces = new();
+        Dictionary<int, Dictionary<int, int>> newRectFaces = new();
+
+        List<TRObjectTexture> objectTextures = level.ObjectTextures.ToList();
+        FDControl control = new();
+        control.ParseFromLevel(level);
+
+        foreach (int roomNumber in roomNumbers)
+        {
+            rectFaces[roomNumber] = new Dictionary<int, TexturedTileSegment>();
+            newRectFaces[roomNumber] = new Dictionary<int, int>();
+
+            for (int i = 0; i < level.Rooms[roomNumber].RoomData.NumRectangles; i++)
+            {
+                TexturedTileSegment seg = GetBoxFaceSegment(level.Rooms[roomNumber], i, packer.Tiles);
+                if (seg != null)
+                {
+                    rectFaces[roomNumber][i] = seg;
+                }
+            }
+
+            foreach (int rectIndex in rectFaces[roomNumber].Keys)
+            {
+                TexturedTileSegment segment = rectFaces[roomNumber][rectIndex];
+                TexturedTileSegment newSegment = DrawNewFace(segment, GetBoxDescription(level, control, roomNumber, rectIndex));
+                packer.AddRectangle(newSegment);
+
+                newRectFaces[roomNumber][rectIndex] = objectTextures.Count;
+                objectTextures.Add((newSegment.FirstTexture as IndexedTRObjectTexture).Texture);
+            }
+        }
+
+        packer.Pack(true);
+
+        foreach (int roomNumber in roomNumbers)
+        {
+            foreach (int rectIndex in newRectFaces[roomNumber].Keys)
+            {
+                level.Rooms[roomNumber].RoomData.Rectangles[rectIndex].Texture = (ushort)newRectFaces[roomNumber][rectIndex];
+            }
+        }
+
+        level.ObjectTextures = objectTextures.ToArray();
+        level.NumObjectTextures = (uint)objectTextures.Count;
+
+        Directory.CreateDirectory(@"TR2\Boxes");
+        new TR2LevelControl().Write(level, @"TR2\Boxes\" + lvl);
     }
 
     private static TexturedTileSegment DrawNewFace(TexturedTileSegment segment, string text, bool fillBackground = false)

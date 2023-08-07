@@ -13,64 +13,58 @@ public static class HtmlExporter
 {
     public static void Export(TR1Level level, string lvlName)
     {
-        using (TR1TexturePacker packer = new(level))
+        using TR1TexturePacker packer = new(level);
+        StringBuilder tiles = new();
+        BuildTiles(tiles, packer.Tiles, level.Palette);
+
+        StringBuilder levelSel = new();
+        BuildLevelSelect(levelSel, lvlName, TR1LevelNames.AsOrderedList);
+
+        StringBuilder skyboxInfo = new();
+        Dictionary<int, TRColour4> skyColours = new();
+        BuildSkyBox(skyboxInfo, skyColours);
+
+        StringBuilder palette = new();
+        ISet<Color> colors = new HashSet<Color>();
+        foreach (TRColour c in level.Palette)
         {
-            StringBuilder tiles = new();
-            BuildTiles(tiles, packer.Tiles, level.Palette);
-
-            StringBuilder levelSel = new();
-            BuildLevelSelect(levelSel, lvlName, TR1LevelNames.AsOrderedList);
-
-            StringBuilder skyboxInfo = new();
-            Dictionary<int, TRColour4> skyColours = new();
-            BuildSkyBox(skyboxInfo, skyColours);
-
-            StringBuilder palette = new();
-            ISet<Color> colors = new HashSet<Color>();
-            foreach (TRColour c in level.Palette)
-            {
-                colors.Add(Color.FromArgb(c.Red, c.Green, c.Blue));
-            }
-            palette.Append(colors.Count).Append(" unique colours");
-
-            Write("TR1", lvlName, tiles, levelSel, skyboxInfo, palette);
+            colors.Add(Color.FromArgb(c.Red, c.Green, c.Blue));
         }
+        palette.Append(colors.Count).Append(" unique colours");
+
+        Write("TR1", lvlName, tiles, levelSel, skyboxInfo, palette);
     }
 
     public static void Export(TR2Level level, string lvlName)
     {
-        using (TR2TexturePacker packer = new(level))
-        {
-            StringBuilder tiles = new();
-            BuildTiles(tiles, packer.Tiles);
+        using TR2TexturePacker packer = new(level);
+        StringBuilder tiles = new();
+        BuildTiles(tiles, packer.Tiles);
 
-            StringBuilder levelSel = new();
-            BuildLevelSelect(levelSel, lvlName, TR2LevelNames.AsOrderedList);
+        StringBuilder levelSel = new();
+        BuildLevelSelect(levelSel, lvlName, TR2LevelNames.AsOrderedList);
 
-            StringBuilder skyboxInfo = new();
-            Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR2Entities.Skybox_H), level.Palette16);
-            BuildSkyBox(skyboxInfo, skyColours);
+        StringBuilder skyboxInfo = new();
+        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR2Entities.Skybox_H), level.Palette16);
+        BuildSkyBox(skyboxInfo, skyColours);
 
-            Write("TR2", lvlName, tiles, levelSel, skyboxInfo);
-        }
+        Write("TR2", lvlName, tiles, levelSel, skyboxInfo);
     }
 
     public static void Export(TR3Level level, string lvlName)
     {
-        using (TR3TexturePacker packer = new(level))
-        {
-            StringBuilder tiles = new();
-            BuildTiles(tiles, packer.Tiles);
+        using TR3TexturePacker packer = new(level);
+        StringBuilder tiles = new();
+        BuildTiles(tiles, packer.Tiles);
 
-            StringBuilder levelSel = new();
-            BuildLevelSelect(levelSel, lvlName, TR3LevelNames.AsOrderedList);
+        StringBuilder levelSel = new();
+        BuildLevelSelect(levelSel, lvlName, TR3LevelNames.AsOrderedList);
 
-            StringBuilder skyboxInfo = new();
-            Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR3Entities.Skybox_H), level.Palette16);
-            BuildSkyBox(skyboxInfo, skyColours);
+        StringBuilder skyboxInfo = new();
+        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR3Entities.Skybox_H), level.Palette16);
+        BuildSkyBox(skyboxInfo, skyColours);
 
-            Write("TR3", lvlName, tiles, levelSel, skyboxInfo);
-        }
+        Write("TR3", lvlName, tiles, levelSel, skyboxInfo);
     }
 
     private static void BuildTiles(StringBuilder html, IReadOnlyList<TexturedTile> tiles, TRColour[] palette = null)
@@ -81,73 +75,71 @@ public static class HtmlExporter
 
             foreach (TexturedTileSegment segment in tile.Rectangles)
             {
-                using (MemoryStream ms = new())
+                using MemoryStream ms = new();
+                segment.Bitmap.Save(ms, ImageFormat.Png);
+
+                List<int> objectTextures = GetObjectTextureList(segment);
+                List<int> spriteTextures = GetSpriteTextureList(segment);
+
+                html.Append(string.Format("<img src=\"data:image/png;base64, {0}\" ", Convert.ToBase64String(ms.ToArray())));
+                html.Append(string.Format("style=\"top:{0}px;left:{1}px;width:{2}px;height:{3}px\" ", segment.Bounds.Y, segment.Bounds.X, segment.Bounds.Width, segment.Bounds.Height));
+                html.Append(string.Format("data-tile=\"{0}\" ", tile.Index));
+                html.Append(string.Format("data-rect=\"{0}\" ", RectangleToString(segment.Bounds)));
+
+                if (palette != null)
                 {
-                    segment.Bitmap.Save(ms, ImageFormat.Png);
-
-                    List<int> objectTextures = GetObjectTextureList(segment);
-                    List<int> spriteTextures = GetSpriteTextureList(segment);
-
-                    html.Append(string.Format("<img src=\"data:image/png;base64, {0}\" ", Convert.ToBase64String(ms.ToArray())));
-                    html.Append(string.Format("style=\"top:{0}px;left:{1}px;width:{2}px;height:{3}px\" ", segment.Bounds.Y, segment.Bounds.X, segment.Bounds.Width, segment.Bounds.Height));
-                    html.Append(string.Format("data-tile=\"{0}\" ", tile.Index));
-                    html.Append(string.Format("data-rect=\"{0}\" ", RectangleToString(segment.Bounds)));
-
-                    if (palette != null)
+                    // Assume 8-bit so we want to see the palette indices for this segment
+                    ISet<int> paletteIndices = new SortedSet<int>();
+                    for (int y = 0; y < segment.Bitmap.Height; y++)
                     {
-                        // Assume 8-bit so we want to see the palette indices for this segment
-                        ISet<int> paletteIndices = new SortedSet<int>();
-                        for (int y = 0; y < segment.Bitmap.Height; y++)
+                        for (int x = 0; x < segment.Bitmap.Width; x++)
                         {
-                            for (int x = 0; x < segment.Bitmap.Width; x++)
+                            Color c = segment.Bitmap.GetPixel(x, y);
+                            if (c.A != 0)
                             {
-                                Color c = segment.Bitmap.GetPixel(x, y);
-                                if (c.A != 0)
+                                TRColour col = new()
                                 {
-                                    TRColour col = new()
-                                    {
-                                        Red = (byte)(c.R / 4),
-                                        Green = (byte)(c.G / 4),
-                                        Blue = (byte)(c.B / 4)
-                                    };
-                                    int index = Array.FindIndex(palette, p => p.Red == col.Red && p.Green == col.Green && p.Blue == col.Blue);
-                                    if (index != -1)
-                                    {
-                                        paletteIndices.Add(index);
-                                    }
+                                    Red = (byte)(c.R / 4),
+                                    Green = (byte)(c.G / 4),
+                                    Blue = (byte)(c.B / 4)
+                                };
+                                int index = Array.FindIndex(palette, p => p.Red == col.Red && p.Green == col.Green && p.Blue == col.Blue);
+                                if (index != -1)
+                                {
+                                    paletteIndices.Add(index);
                                 }
                             }
                         }
-
-                        html.Append(string.Format("data-palette=\"{0}\" ", string.Join(",", paletteIndices)));
                     }
 
-                    List<string> objectData = new();
-                    List<string> spriteData = new();
-
-                    foreach (AbstractIndexedTRTexture texture in segment.Textures)
-                    {
-                        if (texture is IndexedTRObjectTexture objTexture)
-                        {
-                            objectData.Add(texture.Index + ":" + RectangleToString(texture.Bounds) + ":" + (objTexture.IsTriangle ? "T" : "Q"));
-                        }
-                        else
-                        {
-                            spriteData.Add(texture.Index + ":" + RectangleToString(texture.Bounds));
-                        }
-                    }
-
-                    if (objectData.Count > 0)
-                    {
-                        html.Append(string.Format("data-objects=\"{0}\" ", string.Join(";", objectData)));
-                    }
-                    if (spriteData.Count > 0)
-                    {
-                        html.Append(string.Format("data-sprites=\"{0}\" ", string.Join(";", spriteData)));
-                    }
-
-                    html.Append("/>");
+                    html.Append(string.Format("data-palette=\"{0}\" ", string.Join(",", paletteIndices)));
                 }
+
+                List<string> objectData = new();
+                List<string> spriteData = new();
+
+                foreach (AbstractIndexedTRTexture texture in segment.Textures)
+                {
+                    if (texture is IndexedTRObjectTexture objTexture)
+                    {
+                        objectData.Add(texture.Index + ":" + RectangleToString(texture.Bounds) + ":" + (objTexture.IsTriangle ? "T" : "Q"));
+                    }
+                    else
+                    {
+                        spriteData.Add(texture.Index + ":" + RectangleToString(texture.Bounds));
+                    }
+                }
+
+                if (objectData.Count > 0)
+                {
+                    html.Append(string.Format("data-objects=\"{0}\" ", string.Join(";", objectData)));
+                }
+                if (spriteData.Count > 0)
+                {
+                    html.Append(string.Format("data-sprites=\"{0}\" ", string.Join(";", spriteData)));
+                }
+
+                html.Append("/>");
             }
 
             html.Append("</div>");
