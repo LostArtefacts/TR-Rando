@@ -69,7 +69,7 @@ namespace SFXExport
 
         private static void ExtractFromPHD(string file, string exportDir)
         {
-            TR1Level level = new TR1LevelControl().ReadLevel(file);
+            TR1Level level = new TR1LevelControl().Read(file);
             for (int i = 0; i < level.NumSampleIndices; i++)
             {
                 uint sampleStart = level.SampleIndices[i];

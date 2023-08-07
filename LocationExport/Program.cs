@@ -147,7 +147,7 @@ namespace LocationExport
 
         private static List<Location> ExportTR1Locations(string lvl)
         {
-            TR1Level level = _reader1.ReadLevel(lvl);
+            TR1Level level = _reader1.Read(lvl);
             List<Location> exclusions = new List<Location>();
             if (_allTR1Exclusions.ContainsKey(lvl))
             {
@@ -174,7 +174,7 @@ namespace LocationExport
 
         private static List<Location> ExportTR3Locations(string lvl)
         {
-            TR3Level level = _reader3.ReadLevel(lvl);
+            TR3Level level = _reader3.Read(lvl);
             List<Location> exclusions = new List<Location>();
             if (_allTR3Exclusions.ContainsKey(lvl))
             {

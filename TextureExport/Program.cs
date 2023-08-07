@@ -65,18 +65,18 @@ namespace TextureExport
 
             if (levelType.EndsWith(".phd"))
             {
-                ExportAllTextures(args[0], _reader1.ReadLevel(args[0]), mode);
+                ExportAllTextures(args[0], _reader1.Read(args[0]), mode);
             }
             else if (levelType.EndsWith(".tr2"))
             {
                 TRFileVersion version = DetectVersion(args[0]);
                 if (version == TRFileVersion.TR2)
                 {
-                    ExportAllTextures(args[0], _reader2.ReadLevel(args[0]), mode);
+                    ExportAllTextures(args[0], _reader2.Read(args[0]), mode);
                 }
                 else if (version == TRFileVersion.TR3a || version == TRFileVersion.TR3b)
                 {
-                    ExportAllTextures(args[0], _reader3.ReadLevel(args[0]), mode);
+                    ExportAllTextures(args[0], _reader3.Read(args[0]), mode);
                 }
             }
             else if (levelType == "tr1")
@@ -85,7 +85,7 @@ namespace TextureExport
                 {
                     if (File.Exists(lvl))
                     {
-                        ExportAllTextures(lvl, _reader1.ReadLevel(lvl), mode);
+                        ExportAllTextures(lvl, _reader1.Read(lvl), mode);
                     }
                 }
             }
@@ -95,7 +95,7 @@ namespace TextureExport
                 {
                     if (File.Exists(lvl))
                     {
-                        ExportAllTextures(lvl, _reader1.ReadLevel(lvl), mode);
+                        ExportAllTextures(lvl, _reader1.Read(lvl), mode);
                     }
                 }
             }
@@ -105,7 +105,7 @@ namespace TextureExport
                 {
                     if (File.Exists(lvl))
                     {
-                        ExportAllTextures(lvl, _reader2.ReadLevel(lvl), mode);
+                        ExportAllTextures(lvl, _reader2.Read(lvl), mode);
                     }
                 }
             }
@@ -115,7 +115,7 @@ namespace TextureExport
                 {
                     if (File.Exists(lvl))
                     {
-                        ExportAllTextures(lvl, _reader3.ReadLevel(lvl), mode);
+                        ExportAllTextures(lvl, _reader3.Read(lvl), mode);
                     }
                 }
             }
@@ -125,7 +125,7 @@ namespace TextureExport
                 {
                     if (File.Exists(lvl))
                     {
-                        ExportAllTextures(lvl, _reader3.ReadLevel(lvl), mode);
+                        ExportAllTextures(lvl, _reader3.Read(lvl), mode);
                     }
                 }
             }
@@ -135,7 +135,7 @@ namespace TextureExport
                 {
                     if (File.Exists(lvl))
                     {
-                        ExportAllTextures(lvl, _reader2.ReadLevel(lvl), mode);
+                        ExportAllTextures(lvl, _reader2.Read(lvl), mode);
                     }
                 }
             }

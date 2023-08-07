@@ -1233,7 +1233,7 @@ namespace TRRandomizerCore.Randomizers
                 // Non one-shot-Pierre levels won't have the death sound by default, so borrow it from ToT.
                 if (level.Data.SoundMap[159] == -1)
                 {
-                    TR1Level tihocan = new TR1LevelControl().ReadLevel(Path.Combine(BackupPath, TR1LevelNames.TIHOCAN));
+                    TR1Level tihocan = new TR1LevelControl().Read(Path.Combine(BackupPath, TR1LevelNames.TIHOCAN));
                     SoundUtilities.ImportLevelSound(level.Data, tihocan, new short[] { 159 });
                 }
             }

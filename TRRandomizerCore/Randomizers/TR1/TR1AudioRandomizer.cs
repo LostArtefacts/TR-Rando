@@ -85,7 +85,7 @@ namespace TRRandomizerCore.Randomizers
             {
                 if (!levels.ContainsKey(definition.SourceLevel))
                 {
-                    levels[definition.SourceLevel] = reader.ReadLevel(Path.Combine(BackupPath, definition.SourceLevel));
+                    levels[definition.SourceLevel] = reader.Read(Path.Combine(BackupPath, definition.SourceLevel));
                 }
 
                 TR1Level level = levels[definition.SourceLevel];

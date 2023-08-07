@@ -36,7 +36,7 @@ namespace TRModelTransporter.Utilities
 
         protected override TR2Level ReadLevel(string path)
         {
-            return _reader.ReadLevel(path);
+            return _reader.Read(path);
         }
 
         private static readonly Dictionary<string, List<TR2Entities>> _exportModelTypes = new Dictionary<string, List<TR2Entities>>

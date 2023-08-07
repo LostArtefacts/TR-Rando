@@ -38,7 +38,7 @@ namespace TRModelTransporter.Utilities
 
         protected override TR2Level ReadLevel(string path)
         {
-            return _reader.ReadLevel(path);
+            return _reader.Read(path);
         }
 
         protected override void WriteLevel(TR2Level level, string path)

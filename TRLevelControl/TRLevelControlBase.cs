@@ -8,7 +8,7 @@ public abstract class TRLevelControlBase<L>
 {
     protected L _level;
 
-    public L ReadLevel(string filePath)
+    public L Read(string filePath)
         => Read(File.OpenRead(filePath));
 
     public L Read(Stream stream)

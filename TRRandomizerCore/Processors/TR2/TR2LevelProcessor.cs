@@ -40,7 +40,7 @@ namespace TRRandomizerCore.Processors
             lock (_readLock)
             {
                 string fullPath = Path.Combine(BasePath, name);
-                return _reader.ReadLevel(fullPath);
+                return _reader.Read(fullPath);
             }
         }
 
