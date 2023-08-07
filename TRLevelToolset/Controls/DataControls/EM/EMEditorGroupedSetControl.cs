@@ -6,7 +6,7 @@ namespace TRLevelToolset.Controls.DataControls.EM;
 
 internal class EMEditorGroupedSetControl : IDrawable
 {
-    private EMEditorGroupedSet _data { get; set; }
+    private readonly EMEditorGroupedSet _data;
 
     public EMEditorGroupedSetControl(EMEditorGroupedSet data)
     {

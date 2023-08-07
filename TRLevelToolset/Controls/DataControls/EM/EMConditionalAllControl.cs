@@ -6,7 +6,7 @@ namespace TRLevelToolset.Controls.DataControls.EM;
 
 internal class EMConditionalAllControl : IDrawable
 {
-    private List<EMConditionalSingleEditorSet> _data { get; set; }
+    private readonly List<EMConditionalSingleEditorSet> _data;
 
     public EMConditionalAllControl(List<EMConditionalSingleEditorSet> data)
     {

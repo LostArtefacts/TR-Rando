@@ -6,7 +6,7 @@ namespace TRLevelToolset.Controls.DataControls.EM;
 
 internal class EMAllWithinControl : IDrawable
 {
-    private List<List<EMEditorSet>> _data { get; set; }
+    private readonly List<List<EMEditorSet>> _data;
 
     public EMAllWithinControl(List<List<EMEditorSet>> data)
     {

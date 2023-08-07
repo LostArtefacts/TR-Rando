@@ -6,7 +6,7 @@ namespace TRLevelToolset.Controls.DataControls.EM;
 
 internal class EMFunctionControl : IDrawable
 {
-    private BaseEMFunction _data { get; set; }
+    private readonly BaseEMFunction _data;
 
     public EMFunctionControl(BaseEMFunction data)
     {

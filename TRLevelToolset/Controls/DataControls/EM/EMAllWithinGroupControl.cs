@@ -6,9 +6,8 @@ namespace TRLevelToolset.Controls.DataControls.EM;
 
 internal class EMAllWithinGroupControl : IDrawable
 {
-    private List<EMEditorSet> _data { get; set; }
-    
-    private int _groupNum { get; set; }
+    private readonly List<EMEditorSet> _data;
+    private readonly int _groupNum;
 
     public EMAllWithinGroupControl(List<EMEditorSet> data, int groupNum)
     {

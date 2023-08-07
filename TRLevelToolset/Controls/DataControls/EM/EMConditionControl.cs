@@ -6,7 +6,7 @@ namespace TRLevelToolset.Controls.DataControls.EM;
 
 internal class EMConditionControl : IDrawable
 {
-    private BaseEMCondition _data { get; set; }
+    private readonly BaseEMCondition _data;
 
     public EMConditionControl(BaseEMCondition data)
     {

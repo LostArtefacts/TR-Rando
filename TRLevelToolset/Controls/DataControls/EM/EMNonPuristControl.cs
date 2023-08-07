@@ -5,8 +5,8 @@ namespace TRLevelToolset.Controls.DataControls.EM;
 
 internal class EMNonPuristControl : IDrawable
 {
-    private EMEditorSet _data { get; set; }
-    private List<EMFunctionControl> _funcControls { get; set; }
+    private readonly EMEditorSet _data;
+    private readonly List<EMFunctionControl> _funcControls;
 
     public EMNonPuristControl(EMEditorSet data)
     {
