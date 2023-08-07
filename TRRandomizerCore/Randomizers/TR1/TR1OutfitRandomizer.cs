@@ -127,7 +127,7 @@ namespace TRRandomizerCore.Randomizers
                 }
 
                 // Cache Lara's barefoot SFX from the original Gym.
-                TR1Level gym = new TR1LevelReader().ReadLevel(Path.Combine(BackupPath, TR1LevelNames.ASSAULT));
+                TR1Level gym = new TR1LevelControl().ReadLevel(Path.Combine(BackupPath, TR1LevelNames.ASSAULT));
                 _barefootSfx = new Dictionary<short, List<byte[]>>();
                 foreach (short soundID in _barefootSfxIDs)
                 {

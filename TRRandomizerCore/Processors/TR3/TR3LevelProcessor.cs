@@ -13,12 +13,12 @@ namespace TRRandomizerCore.Processors
         /// </summary>
         public bool IsJPVersion => (ScriptEditor.Script as TR23Script).NumRPLs == 5;
 
-        protected TR3LevelReader _reader;
+        protected TR3LevelControl _reader;
         protected TR3LevelWriter _writer;
 
         public TR3LevelProcessor()
         {
-            _reader = new TR3LevelReader();
+            _reader = new TR3LevelControl();
             _writer = new TR3LevelWriter();
         }
 

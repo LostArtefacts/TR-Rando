@@ -12,12 +12,12 @@ namespace TRModelTransporter.Utilities
     {
         public override List<string> LevelNames => TR2LevelNames.AsList;
 
-        private readonly TR2LevelReader _reader;
+        private readonly TR2LevelControl _reader;
         private readonly TR2LevelWriter _writer;
 
         public MassTR2TextureDeduplicator()
         {
-            _reader = new TR2LevelReader();
+            _reader = new TR2LevelControl();
             _writer = new TR2LevelWriter();
         }
 

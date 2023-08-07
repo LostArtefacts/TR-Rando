@@ -21,11 +21,11 @@ namespace TRModelTransporter.Utilities
 
         public override Dictionary<string, List<TREntities>> ExportTypes => _exportModelTypes;
 
-        private readonly TR1LevelReader _reader;
+        private readonly TR1LevelControl _reader;
 
         public MassTR1ModelExporter()
         {
-            _reader = new TR1LevelReader();
+            _reader = new TR1LevelControl();
         }
 
         protected override AbstractTRModelExporter<TREntities, TR1Level, TR1ModelDefinition> CreateExporter()

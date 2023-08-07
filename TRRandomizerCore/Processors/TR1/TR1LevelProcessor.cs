@@ -8,12 +8,12 @@ namespace TRRandomizerCore.Processors
 {
     public class TR1LevelProcessor : AbstractLevelProcessor<TR1ScriptedLevel, TR1CombinedLevel>
     {
-        protected TR1LevelReader _reader;
+        protected TR1LevelControl _reader;
         protected TR1LevelWriter _writer;
 
         public TR1LevelProcessor()
         {
-            _reader = new TR1LevelReader();
+            _reader = new TR1LevelControl();
             _writer = new TR1LevelWriter();
         }
 

@@ -15,9 +15,9 @@ namespace TextureExport
             Png, Html, Segments, Faces, Boxes, Dependencies
         }
 
-        static readonly TR1LevelReader _reader1 = new TR1LevelReader();
-        static readonly TR2LevelReader _reader2 = new TR2LevelReader();
-        static readonly TR3LevelReader _reader3 = new TR3LevelReader();
+        static readonly TR1LevelControl _reader1 = new TR1LevelControl();
+        static readonly TR2LevelControl _reader2 = new TR2LevelControl();
+        static readonly TR3LevelControl _reader3 = new TR3LevelControl();
 
         static void Main(string[] args)
         {

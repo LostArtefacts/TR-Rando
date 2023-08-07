@@ -52,31 +52,31 @@ public class TestBase
 
     public static TR1Level GetTR1Level(string level)
     {
-        TR1LevelReader control = new();
+        TR1LevelControl control = new();
         return control.ReadLevel(GetReadPath(level, TRGameVersion.TR1));
     }
 
     public static TR2Level GetTR2Level(string level)
     {
-        TR2LevelReader control = new();
+        TR2LevelControl control = new();
         return control.ReadLevel(GetReadPath(level, TRGameVersion.TR2));
     }
 
     public static TR3Level GetTR3Level(string level)
     {
-        TR3LevelReader control = new();
+        TR3LevelControl control = new();
         return control.ReadLevel(GetReadPath(level, TRGameVersion.TR3));
     }
 
     public static TR4Level GetTR4Level(string level)
     {
-        TR4LevelReader control = new();
+        TR4LevelControl control = new();
         return control.ReadLevel(GetReadPath(level, TRGameVersion.TR4));
     }
 
     public static TR5Level GetTR5Level(string level)
     {
-        TR5LevelReader control = new();
+        TR5LevelControl control = new();
         return control.ReadLevel(GetReadPath(level, TRGameVersion.TR5));
     }
 
@@ -88,15 +88,15 @@ public class TestBase
         switch (version)
         {
             case TRGameVersion.TR1:
-                TR1Level level1 = new TR1LevelReader().ReadLevel(pathI);
+                TR1Level level1 = new TR1LevelControl().ReadLevel(pathI);
                 new TR1LevelWriter().WriteLevelToFile(level1, pathO);
                 break;
             case TRGameVersion.TR2:
-                TR2Level level2 = new TR2LevelReader().ReadLevel(pathI);
+                TR2Level level2 = new TR2LevelControl().ReadLevel(pathI);
                 new TR2LevelWriter().WriteLevelToFile(level2, pathO);
                 break;
             case TRGameVersion.TR3:
-                TR3Level level3 = new TR3LevelReader().ReadLevel(pathI);
+                TR3Level level3 = new TR3LevelControl().ReadLevel(pathI);
                 new TR3LevelWriter().WriteLevelToFile(level3, pathO);
                 break;
             default:
@@ -112,7 +112,7 @@ public class TestBase
 
     public static void ReadWriteTR4Level(string levelName)
     {
-        TR4LevelReader reader = new();
+        TR4LevelControl reader = new();
         TR4LevelWriter writer = new();
 
         string pathI = GetReadPath(levelName, TRGameVersion.TR4);
@@ -147,7 +147,7 @@ public class TestBase
 
     public static void ReadWriteTR5Level(string levelName)
     {
-        TR5LevelReader reader = new();
+        TR5LevelControl reader = new();
         TR5LevelWriter writer = new();
 
         string pathI = GetReadPath(levelName, TRGameVersion.TR5);
@@ -199,7 +199,7 @@ public class TestBase
     {
         // TODO: allow level control to read/write from stream and not files alone
         string path = GetWritePath(levelName, TRGameVersion.TR1);
-        TR1LevelReader reader = new();
+        TR1LevelControl reader = new();
         TR1LevelWriter writer = new();
         writer.WriteLevelToFile(level, path);
         return reader.ReadLevel(path);
@@ -208,7 +208,7 @@ public class TestBase
     public static TR2Level WriteReadTempLevel(TR2Level level, string levelName)
     {
         string path = GetWritePath(levelName, TRGameVersion.TR2);
-        TR2LevelReader reader = new();
+        TR2LevelControl reader = new();
         TR2LevelWriter writer = new();
         writer.WriteLevelToFile(level, path);
         return reader.ReadLevel(path);
@@ -217,7 +217,7 @@ public class TestBase
     public static TR3Level WriteReadTempLevel(TR3Level level, string levelName)
     {
         string path = GetWritePath(levelName, TRGameVersion.TR3);
-        TR3LevelReader reader = new();
+        TR3LevelControl reader = new();
         TR3LevelWriter writer = new();
         writer.WriteLevelToFile(level, path);
         return reader.ReadLevel(path);
@@ -226,7 +226,7 @@ public class TestBase
     public static TR4Level WriteReadTempLevel(TR4Level level, string levelName)
     {
         string path = GetWritePath(levelName, TRGameVersion.TR4);
-        TR4LevelReader reader = new();
+        TR4LevelControl reader = new();
         TR4LevelWriter writer = new();
         writer.WriteLevelToFile(level, path);
         return reader.ReadLevel(path);
@@ -235,7 +235,7 @@ public class TestBase
     public static TR5Level WriteReadTempLevel(TR5Level level, string levelName)
     {
         string path = GetWritePath(levelName, TRGameVersion.TR5);
-        TR5LevelReader reader = new();
+        TR5LevelControl reader = new();
         TR5LevelWriter writer = new();
         writer.WriteLevelToFile(level, path);
         return reader.ReadLevel(path);
