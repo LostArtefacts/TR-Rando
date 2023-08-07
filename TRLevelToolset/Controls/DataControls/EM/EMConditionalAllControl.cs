@@ -9,30 +9,29 @@ using TRLevelControl.Model;
 using TRLevelToolset.Interfaces;
 using TRLevelToolset.IOLogic;
 
-namespace TRLevelToolset.Controls.DataControls.EM
-{
-    internal class EMConditionalAllControl : IDrawable
-    {
-        private List<EMConditionalSingleEditorSet> _data { get; set; }
+namespace TRLevelToolset.Controls.DataControls.EM;
 
-        public EMConditionalAllControl(List<EMConditionalSingleEditorSet> data)
-        {
-            _data = data;
-        }
+internal class EMConditionalAllControl : IDrawable
+{
+    private List<EMConditionalSingleEditorSet> _data { get; set; }
+
+    public EMConditionalAllControl(List<EMConditionalSingleEditorSet> data)
+    {
+        _data = data;
+    }
+    
+    public void Draw()
+    {
+        int i = 0;
         
-        public void Draw()
+        foreach (EMConditionalSingleEditorSet set in _data)
         {
-            int i = 0;
-            
-            foreach (EMConditionalSingleEditorSet set in _data)
-            {
-                ImGui.Text("Set " + i);
-                ImGui.Indent();
-                EMConditionalSingleEditorSetControl ctrl = new EMConditionalSingleEditorSetControl(set);
-                ctrl.Draw();
-                ImGui.Unindent();
-                i++;
-            }
+            ImGui.Text("Set " + i);
+            ImGui.Indent();
+            EMConditionalSingleEditorSetControl ctrl = new EMConditionalSingleEditorSetControl(set);
+            ctrl.Draw();
+            ImGui.Unindent();
+            i++;
         }
     }
 }

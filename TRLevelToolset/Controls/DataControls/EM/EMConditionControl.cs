@@ -9,20 +9,19 @@ using TRLevelControl.Model;
 using TRLevelToolset.Interfaces;
 using TRLevelToolset.IOLogic;
 
-namespace TRLevelToolset.Controls.DataControls.EM
-{
-    internal class EMConditionControl : IDrawable
-    {
-        private BaseEMCondition _data { get; set; }
+namespace TRLevelToolset.Controls.DataControls.EM;
 
-        public EMConditionControl(BaseEMCondition data)
-        {
-            _data = data;
-        }
-        
-        public void Draw()
-        {
-            ImGui.Button(_data.GetType().Name);
-        }
+internal class EMConditionControl : IDrawable
+{
+    private BaseEMCondition _data { get; set; }
+
+    public EMConditionControl(BaseEMCondition data)
+    {
+        _data = data;
+    }
+    
+    public void Draw()
+    {
+        ImGui.Button(_data.GetType().Name);
     }
 }

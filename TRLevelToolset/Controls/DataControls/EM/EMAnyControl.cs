@@ -9,33 +9,32 @@ using TRLevelControl.Model;
 using TRLevelToolset.Interfaces;
 using TRLevelToolset.IOLogic;
 
-namespace TRLevelToolset.Controls.DataControls.EM
-{
-    internal class EMAnyControl : IDrawable
-    {
-        private List<EMEditorSet> _data { get; set; }
+namespace TRLevelToolset.Controls.DataControls.EM;
 
-        public EMAnyControl(List<EMEditorSet> data)
-        {
-            _data = data;
-        }
+internal class EMAnyControl : IDrawable
+{
+    private List<EMEditorSet> _data { get; set; }
+
+    public EMAnyControl(List<EMEditorSet> data)
+    {
+        _data = data;
+    }
+    
+    public void Draw()
+    {
+        int i = 0;
         
-        public void Draw()
+        foreach (EMEditorSet set in _data)
         {
-            int i = 0;
+            ImGui.Text("Set " + i);
             
-            foreach (EMEditorSet set in _data)
-            {
-                ImGui.Text("Set " + i);
-                
-                EMAllControl ctrl = new EMAllControl(set);
-                
-                ImGui.Indent();
-                ctrl.Draw();
-                ImGui.Unindent();
-                
-                i++;
-            }
+            EMAllControl ctrl = new EMAllControl(set);
+            
+            ImGui.Indent();
+            ctrl.Draw();
+            ImGui.Unindent();
+            
+            i++;
         }
     }
 }

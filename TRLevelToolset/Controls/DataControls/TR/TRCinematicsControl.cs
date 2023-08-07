@@ -8,17 +8,16 @@ using TRLevelControl.Model;
 using TRLevelToolset.Interfaces;
 using TRLevelToolset.IOLogic;
 
-namespace TRLevelToolset.Controls.DataControls.TR
+namespace TRLevelToolset.Controls.DataControls.TR;
+
+internal class TRCinematicsControl : IDrawable
 {
-    internal class TRCinematicsControl : IDrawable
+    public void Draw()
     {
-        public void Draw()
+        if (ImGui.TreeNodeEx("Cinematic Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            if (ImGui.TreeNodeEx("Cinematic Data", ImGuiTreeNodeFlags.OpenOnArrow))
-            {
-                ImGui.Text("Cinematic frame Count: " + IOManager.CurrentLevelAsTR1?.NumCinematicFrames);
-                ImGui.TreePop();
-            }
+            ImGui.Text("Cinematic frame Count: " + IOManager.CurrentLevelAsTR1?.NumCinematicFrames);
+            ImGui.TreePop();
         }
     }
 }
