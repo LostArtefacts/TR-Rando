@@ -4,19 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TRFDControl.FDEntryTypes
-{
-    public class FDPortalEntry : FDEntry
-    {
-        public ushort Room { get; set; }
+namespace TRFDControl.FDEntryTypes;
 
-        public override ushort[] Flatten()
+public class FDPortalEntry : FDEntry
+{
+    public ushort Room { get; set; }
+
+    public override ushort[] Flatten()
+    {
+        return new ushort[]
         {
-            return new ushort[]
-            {
-                Setup.Value,
-                Room
-            };
-        }
+            Setup.Value,
+            Room
+        };
     }
 }

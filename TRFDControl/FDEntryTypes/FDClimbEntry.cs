@@ -4,83 +4,82 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TRFDControl.FDEntryTypes
+namespace TRFDControl.FDEntryTypes;
+
+public class FDClimbEntry : FDEntry
 {
-    public class FDClimbEntry : FDEntry
+    public bool IsPositiveX
     {
-        public bool IsPositiveX
+        get
         {
-            get
+            return (Setup.SubFunction & (byte)FDClimbDirection.PositiveX) > 0;
+        }
+        set
+        {
+            if (value)
             {
-                return (Setup.SubFunction & (byte)FDClimbDirection.PositiveX) > 0;
+                Setup.SubFunction |= (byte)FDClimbDirection.PositiveX;
             }
-            set
+            else
             {
-                if (value)
-                {
-                    Setup.SubFunction |= (byte)FDClimbDirection.PositiveX;
-                }
-                else
-                {
-                    Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.PositiveX);
-                }
+                Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.PositiveX);
             }
         }
+    }
 
-        public bool IsPositiveZ
+    public bool IsPositiveZ
+    {
+        get
         {
-            get
+            return (Setup.SubFunction & (byte)FDClimbDirection.PositiveZ) > 0;
+        }
+        set
+        {
+            if (value)
             {
-                return (Setup.SubFunction & (byte)FDClimbDirection.PositiveZ) > 0;
+                Setup.SubFunction |= (byte)FDClimbDirection.PositiveZ;
             }
-            set
+            else
             {
-                if (value)
-                {
-                    Setup.SubFunction |= (byte)FDClimbDirection.PositiveZ;
-                }
-                else
-                {
-                    Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.PositiveZ);
-                }
+                Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.PositiveZ);
             }
         }
+    }
 
-        public bool IsNegativeX
+    public bool IsNegativeX
+    {
+        get
         {
-            get
+            return (Setup.SubFunction & (byte)FDClimbDirection.NegativeX) > 0;
+        }
+        set
+        {
+            if (value)
             {
-                return (Setup.SubFunction & (byte)FDClimbDirection.NegativeX) > 0;
+                Setup.SubFunction |= (byte)FDClimbDirection.NegativeX;
             }
-            set
+            else
             {
-                if (value)
-                {
-                    Setup.SubFunction |= (byte)FDClimbDirection.NegativeX;
-                }
-                else
-                {
-                    Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.NegativeX);
-                }
+                Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.NegativeX);
             }
         }
+    }
 
-        public bool IsNegativeZ
+    public bool IsNegativeZ
+    {
+        get
         {
-            get
+            return (Setup.SubFunction & (byte)FDClimbDirection.NegativeZ) > 0;
+        }
+        set
+        {
+            if (value)
             {
-                return (Setup.SubFunction & (byte)FDClimbDirection.NegativeZ) > 0;
+                Setup.SubFunction |= (byte)FDClimbDirection.NegativeZ;
             }
-            set
+            else
             {
-                if (value)
-                {
-                    Setup.SubFunction |= (byte)FDClimbDirection.NegativeZ;
-                }
-                else
-                {
-                    Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.NegativeZ);
-                }
+                Setup.SubFunction = (byte)(Setup.SubFunction & ~(byte)FDClimbDirection.NegativeZ);
             }
         }
     }

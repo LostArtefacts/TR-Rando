@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TRFDControl
+namespace TRFDControl;
+
+public enum FDClimbDirection
 {
-    public enum FDClimbDirection
-    {
-        PositiveZ = 0x01,
-        PositiveX = 0x02,
-        NegativeZ = 0x04,
-        NegativeX = 0x08
-    }
+    PositiveZ = 0x01,
+    PositiveX = 0x02,
+    NegativeZ = 0x04,
+    NegativeX = 0x08
 }

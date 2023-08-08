@@ -4,74 +4,73 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TRFDControl
+namespace TRFDControl;
+
+public class FDCameraAction
 {
-    public class FDCameraAction
+    public ushort Value { get; set; }
+
+    public byte Timer
     {
-        public ushort Value { get; set; }
-
-        public byte Timer
+        get
         {
-            get
+            return (byte)(Value & 0x00FF);
+        }
+        set
+        {
+            Value = (ushort)(Value & ~(Value & 0x00FF));
+            Value |= value;
+        }
+    }
+
+    public bool Once
+    {
+        get
+        {
+            return (Value & 0x0100) > 0;
+        }
+        set
+        {
+            if (value)
             {
-                return (byte)(Value & 0x00FF);
+                Value |= 0x0100;
             }
-            set
+            else
             {
-                Value = (ushort)(Value & ~(Value & 0x00FF));
-                Value |= value;
+                Value = (ushort)(Value & ~0x0100);
             }
         }
+    }
 
-        public bool Once
+    public byte MoveTimer
+    {
+        get
         {
-            get
-            {
-                return (Value & 0x0100) > 0;
-            }
-            set
-            {
-                if (value)
-                {
-                    Value |= 0x0100;
-                }
-                else
-                {
-                    Value = (ushort)(Value & ~0x0100);
-                }
-            }
+            return (byte)((Value & 0x3E00) >> 9);
         }
-
-        public byte MoveTimer
+        set
         {
-            get
-            {
-                return (byte)((Value & 0x3E00) >> 9);
-            }
-            set
-            {
-                Value = (ushort)(Value & ~(Value & 0x3E00));
-                Value |= (ushort)(value << 9);
-            }
+            Value = (ushort)(Value & ~(Value & 0x3E00));
+            Value |= (ushort)(value << 9);
         }
+    }
 
-        public bool Continue
+    public bool Continue
+    {
+        get
         {
-            get
+            //Continue bit set to 0 means to continue, not 1...
+            return !((Value & 0x8000) > 0);
+        }
+        internal set
+        {
+            if (value)
             {
-                //Continue bit set to 0 means to continue, not 1...
-                return !((Value & 0x8000) > 0);
+                Value = (ushort)(Value & ~0x8000);
             }
-            internal set
+            else
             {
-                if (value)
-                {
-                    Value = (ushort)(Value & ~0x8000);
-                }
-                else
-                {
-                    Value |= 0x8000;
-                }
+                Value |= 0x8000;
             }
         }
     }

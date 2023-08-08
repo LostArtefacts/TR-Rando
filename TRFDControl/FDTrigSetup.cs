@@ -4,56 +4,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TRFDControl
+namespace TRFDControl;
+
+public class FDTrigSetup
 {
-    public class FDTrigSetup
+    public ushort Value { get; set; }
+
+    public byte Timer
     {
-        public ushort Value { get; set; }
-
-        public byte Timer
+        get
         {
-            get
+            return (byte)(Value & 0x00FF);
+        }
+        set
+        {
+            Value = (ushort)(Value & ~(Value & 0x00FF));
+            Value |= value;
+        }
+    }
+
+    public bool OneShot
+    {
+        get
+        {
+            return (Value & 0x0100) > 0;
+        }
+        set
+        {
+            if (value)
             {
-                return (byte)(Value & 0x00FF);
+                Value |= 0x0100;
             }
-            set
+            else
             {
-                Value = (ushort)(Value & ~(Value & 0x00FF));
-                Value |= value;
+                // Rather than Xor'ing, this allows successive calls with the same bool val
+                Value = (ushort)(Value & ~0x0100);
             }
         }
+    }
 
-        public bool OneShot
+    public byte Mask
+    {
+        get
         {
-            get
-            {
-                return (Value & 0x0100) > 0;
-            }
-            set
-            {
-                if (value)
-                {
-                    Value |= 0x0100;
-                }
-                else
-                {
-                    // Rather than Xor'ing, this allows successive calls with the same bool val
-                    Value = (ushort)(Value & ~0x0100);
-                }
-            }
+            return (byte)((Value & 0x3E00) >> 9);
         }
-
-        public byte Mask
+        set
         {
-            get
-            {
-                return (byte)((Value & 0x3E00) >> 9);
-            }
-            set
-            {
-                Value = (ushort)(Value & ~(Value & 0x3E00));
-                Value |= (ushort)(value << 9);
-            }
+            Value = (ushort)(Value & ~(Value & 0x3E00));
+            Value |= (ushort)(value << 9);
         }
     }
 }

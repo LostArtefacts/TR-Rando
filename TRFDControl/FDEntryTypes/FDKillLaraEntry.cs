@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TRFDControl.FDEntryTypes
-{
-    public class FDKillLaraEntry : FDEntry
-    {
+namespace TRFDControl.FDEntryTypes;
 
-    }
+public class FDKillLaraEntry : FDEntry
+{
+
 }
