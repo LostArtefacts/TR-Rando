@@ -146,10 +146,7 @@ public class TR1PaletteManager : IDisposable
 
     public int AddPredefinedColour(Color c)
     {
-        if (_predefinedPalette == null)
-        {
-            _predefinedPalette = new List<Color>();
-        }
+        _predefinedPalette ??= new();
 
         int colIndex = _predefinedPalette.IndexOf(c);
         if (colIndex == -1)

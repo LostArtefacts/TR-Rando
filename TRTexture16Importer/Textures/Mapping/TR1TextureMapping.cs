@@ -39,13 +39,10 @@ public class TR1TextureMapping : AbstractTextureMapping<TREntities, TR1Level>
 
     protected override int ImportColour(Color colour)
     {
-        if (PaletteManager == null)
+        PaletteManager ??= new()
         {
-            PaletteManager = new TR1PaletteManager
-            {
-                Level = _level
-            };
-        }
+            Level = _level
+        };
         return PaletteManager.AddPredefinedColour(colour);
     }
 
@@ -71,13 +68,10 @@ public class TR1TextureMapping : AbstractTextureMapping<TREntities, TR1Level>
 
     protected override void SetTile(int tileIndex, Bitmap bitmap)
     {
-        if (PaletteManager == null)
+        PaletteManager ??= new()
         {
-            PaletteManager = new TR1PaletteManager
-            {
-                Level = _level
-            };
-        }
+            Level = _level
+        };
         PaletteManager.ChangedTiles[tileIndex] = bitmap;
     }
 

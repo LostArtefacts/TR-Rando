@@ -99,10 +99,7 @@ public class TextureDatabase<E> : IDisposable
         StaticTextureSource<E> source = JsonConvert.DeserializeObject<StaticTextureSource<E>>(File.ReadAllText(mapping));
 
         // PNG paths may be set within the data, but if not look for the file in the same folder.
-        if (source.PNGPath == null)
-        {
-            source.PNGPath = Path.Combine(dir, _staticPngFile);
-        }
+        source.PNGPath ??= Path.Combine(dir, _staticPngFile);
 
         if (!File.Exists(source.PNGPath))
         {

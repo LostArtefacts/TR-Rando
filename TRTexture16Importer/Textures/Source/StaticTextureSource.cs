@@ -21,14 +21,7 @@ public class StaticTextureSource<E> : AbstractTextureSource, IDisposable
     private Bitmap _bitmap;
     public Bitmap Bitmap
     {
-        get
-        {
-            if (_bitmap == null)
-            {
-                _bitmap = new Bitmap(PNGPath);
-            }
-            return _bitmap;
-        }
+        get => _bitmap ??= new(PNGPath);
     }
 
     public Bitmap ClonedBitmap => Bitmap.Clone(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), PixelFormat.Format32bppArgb);
