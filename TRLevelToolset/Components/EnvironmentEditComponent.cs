@@ -9,18 +9,18 @@ namespace TRLevelToolset.Components;
 public class EnvironmentEditComponent : IDrawable
 {
     private int _selectedIndex;
-    private string[] _items;
-    private string _name;
-    private EMEditorMapping _mapping;
+    private string[]? _items;
+    private string? _name;
+    private EMEditorMapping? _mapping;
 
-    private EMAllControl _allControl;
-    private EMConditionalAllControl _conditionalAllControl;
-    private EMNonPuristControl _nonPuristControl;
-    private EMAnyControl _anyControl;
-    private EMAllWithinControl _allWithinControl;
-    private EMConditionalAllWithinControl _conditionalAllWithinControl;
-    private EMOneOfControl _oneOfControl;
-    private EMMirroredControl _mirroredControl;
+    private EMAllControl? _allControl;
+    private EMConditionalAllControl? _conditionalAllControl;
+    private EMNonPuristControl? _nonPuristControl;
+    private EMAnyControl? _anyControl;
+    private EMAllWithinControl? _allWithinControl;
+    private EMConditionalAllWithinControl? _conditionalAllWithinControl;
+    private EMOneOfControl? _oneOfControl;
+    private EMMirroredControl? _mirroredControl;
     
     public void Draw()
     {
@@ -55,7 +55,7 @@ public class EnvironmentEditComponent : IDrawable
                 {
                     ImGui.SetNextWindowSize(new Vector2(400, 600));
                     ImGui.Begin("All Properties", ImGuiWindowFlags.HorizontalScrollbar);
-                    _allControl.Draw();
+                    _allControl?.Draw();
                     ImGui.End();
                 }
                 
@@ -63,7 +63,7 @@ public class EnvironmentEditComponent : IDrawable
                 {
                     ImGui.SetNextWindowSize(new Vector2(400, 600));
                     ImGui.Begin("Conditional All Properties", ImGuiWindowFlags.HorizontalScrollbar);
-                    _conditionalAllControl.Draw();
+                    _conditionalAllControl?.Draw();
                     ImGui.End();
                 }
                 
@@ -71,7 +71,7 @@ public class EnvironmentEditComponent : IDrawable
                 {
                     ImGui.SetNextWindowSize(new Vector2(400, 600));
                     ImGui.Begin("Non Purist Properties", ImGuiWindowFlags.HorizontalScrollbar);
-                    _nonPuristControl.Draw();
+                    _nonPuristControl?.Draw();
                     ImGui.End();
                 }
                 
@@ -79,7 +79,7 @@ public class EnvironmentEditComponent : IDrawable
                 {
                     ImGui.SetNextWindowSize(new Vector2(400, 600));
                     ImGui.Begin("Any Properties", ImGuiWindowFlags.HorizontalScrollbar);
-                    _anyControl.Draw();
+                    _anyControl?.Draw();
                     ImGui.End();
                 }
                 
@@ -87,7 +87,7 @@ public class EnvironmentEditComponent : IDrawable
                 {
                     ImGui.SetNextWindowSize(new Vector2(400, 600));
                     ImGui.Begin("All Within Properties", ImGuiWindowFlags.HorizontalScrollbar);
-                    _allWithinControl.Draw();
+                    _allWithinControl?.Draw();
                     ImGui.End();
                 }
                 
@@ -95,7 +95,7 @@ public class EnvironmentEditComponent : IDrawable
                 {
                     ImGui.SetNextWindowSize(new Vector2(400, 600));
                     ImGui.Begin("Conditional All Within Properties", ImGuiWindowFlags.HorizontalScrollbar);
-                    _conditionalAllWithinControl.Draw();
+                    _conditionalAllWithinControl?.Draw();
                     ImGui.End();
                 }
                 
@@ -103,7 +103,7 @@ public class EnvironmentEditComponent : IDrawable
                 {
                     ImGui.SetNextWindowSize(new Vector2(400, 600));
                     ImGui.Begin("One Of Properties", ImGuiWindowFlags.HorizontalScrollbar);
-                    _oneOfControl.Draw();
+                    _oneOfControl?.Draw();
                     ImGui.End();
                 }
                 
@@ -111,7 +111,7 @@ public class EnvironmentEditComponent : IDrawable
                 {
                     ImGui.SetNextWindowSize(new Vector2(400, 600));
                     ImGui.Begin("Mirrored Properties", ImGuiWindowFlags.HorizontalScrollbar);
-                    _mirroredControl.Draw();
+                    _mirroredControl?.Draw();
                     ImGui.End();
                 }
             }
@@ -122,7 +122,7 @@ public class EnvironmentEditComponent : IDrawable
 
     private void Load()
     {
-        _name = _items[_selectedIndex];
+        _name = _items?[_selectedIndex];
         _mapping = EMEditorMapping.Get(_name);
         _allControl = new EMAllControl(_mapping.All);
         _conditionalAllControl = new EMConditionalAllControl(_mapping.ConditionalAll);

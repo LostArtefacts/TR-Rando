@@ -8,7 +8,7 @@ namespace TRLevelToolset.Controls.DataControls.TR;
 
 internal class TRCamerasControl : IDrawable, IModelUpdater
 {
-    private TRCamera _camera;
+    private TRCamera? _camera;
 
     private int _index = 0;
     private int _x;
@@ -62,8 +62,9 @@ internal class TRCamerasControl : IDrawable, IModelUpdater
         if (_index < 0)
             _index = 0;
 
-        if (_index >= IOManager.CurrentLevelAsTR1?.NumCameras)
-            _index = (int)(IOManager.CurrentLevelAsTR1?.NumCameras - 1);
+        TR1Level level = IOManager.CurrentLevelAsTR1;
+        if (_index >= level.NumCameras)
+            _index = (int)(level.NumCameras - 1);
     }
 
     public void Populate()
@@ -75,6 +76,10 @@ internal class TRCamerasControl : IDrawable, IModelUpdater
             return;
         
         _camera = IOManager.CurrentLevelAsTR1?.Cameras[_index];
+        if (_camera is null)
+        {
+            return;
+        }
         
         _x = _camera.X;
         _y = _camera.Y;
@@ -85,7 +90,7 @@ internal class TRCamerasControl : IDrawable, IModelUpdater
 
     public void Apply()
     {
-        if (IOManager.CurrentLevelAsTR1 is null)
+        if (IOManager.CurrentLevelAsTR1 is null || _camera is null)
             return;
         
         if (IOManager.CurrentLevelAsTR1?.NumCameras == 0)

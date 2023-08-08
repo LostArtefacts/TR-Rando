@@ -5,13 +5,13 @@ namespace TRLevelToolset.IOLogic;
 
 public static class IOManager
 {
-    public static TRLevelBase CurrentLevel { get; set; }
+    public static TRLevelBase? CurrentLevel { get; set; }
 
-    public static string FileName { get; set; }
+    public static string? FileName { get; set; }
 
     public static TRGame LoadedGame { get; set; }
 
-    public static TR1Level CurrentLevelAsTR1 
+    public static TR1Level? CurrentLevelAsTR1 
     {
         get
         {
@@ -26,7 +26,7 @@ public static class IOManager
         }
     }
 
-    public static TR2Level CurrentLevelAsTR2 
+    public static TR2Level? CurrentLevelAsTR2 
     {
         get
         {
@@ -41,7 +41,7 @@ public static class IOManager
         }
     }
 
-    public static TR3Level CurrentLevelAsTR3
+    public static TR3Level? CurrentLevelAsTR3
     {
         get
         {
@@ -56,7 +56,7 @@ public static class IOManager
         }
     }
 
-    public static TR4Level CurrentLevelAsTR4
+    public static TR4Level? CurrentLevelAsTR4
     {
         get
         {
@@ -71,7 +71,7 @@ public static class IOManager
         }
     }
 
-    public static TR5Level CurrentLevelAsTR5
+    public static TR5Level? CurrentLevelAsTR5
     {
         get
         {
