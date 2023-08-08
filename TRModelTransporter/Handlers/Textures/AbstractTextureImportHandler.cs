@@ -80,13 +80,48 @@ public abstract class AbstractTextureImportHandler<E, L, D>
             }
 
             _importSegments[definition] = new List<TexturedTileSegment>();
-            using (BitmapGraphics bg = new(definition.Bitmap))
+            using BitmapGraphics bg = new(definition.Bitmap);
+            foreach (int segmentIndex in definition.ObjectTextures.Keys)
             {
-                foreach (int segmentIndex in definition.ObjectTextures.Keys)
+                Bitmap segmentClip = bg.Extract(definition.TextureSegments[segmentIndex]);
+                TexturedTileSegment segment = null;
+                foreach (IndexedTRObjectTexture texture in definition.ObjectTextures[segmentIndex])
+                {
+                    if (segment == null)
+                    {
+                        _importSegments[definition].Add(segment = new TexturedTileSegment(texture, segmentClip));
+                    }
+                    else
+                    {
+                        segment.AddTexture(texture);
+                    }
+                }
+            }
+
+            List<E> spriteEntities = new(definition.SpriteSequences.Keys);
+            foreach (E spriteEntity in spriteEntities)
+            {
+                TRSpriteSequence existingSequence = spriteSequences.Find(s => s.SpriteID == Convert.ToInt32(spriteEntity));
+                if (existingSequence != null)
+                {
+                    definition.SpriteSequences.Remove(spriteEntity);
+                    continue;
+                }
+                else
+                {
+                    // Add it to the tracking list in case we are importing 2 or more models
+                    // that share a sequence e.g. Dragon/Flamethrower and Flame_S_H
+                    spriteSequences.Add(new TRSpriteSequence { SpriteID = Convert.ToInt32(spriteEntity) });
+                }
+
+                // The sequence will be merged later when we know the sprite texture offsets.
+                // For now, add the segments we need for packing.
+                Dictionary<int, List<IndexedTRSpriteTexture>> spriteTextures = definition.SpriteTextures[spriteEntity];
+                foreach (int segmentIndex in spriteTextures.Keys)
                 {
                     Bitmap segmentClip = bg.Extract(definition.TextureSegments[segmentIndex]);
                     TexturedTileSegment segment = null;
-                    foreach (IndexedTRObjectTexture texture in definition.ObjectTextures[segmentIndex])
+                    foreach (IndexedTRSpriteTexture texture in spriteTextures[segmentIndex])
                     {
                         if (segment == null)
                         {
@@ -98,89 +133,50 @@ public abstract class AbstractTextureImportHandler<E, L, D>
                         }
                     }
                 }
-
-                List<E> spriteEntities = new(definition.SpriteSequences.Keys);
-                foreach (E spriteEntity in spriteEntities)
-                {
-                    TRSpriteSequence existingSequence = spriteSequences.Find(s => s.SpriteID == Convert.ToInt32(spriteEntity));
-                    if (existingSequence != null)
-                    {
-                        definition.SpriteSequences.Remove(spriteEntity);
-                        continue;
-                    }
-                    else
-                    {
-                        // Add it to the tracking list in case we are importing 2 or more models
-                        // that share a sequence e.g. Dragon/Flamethrower and Flame_S_H
-                        spriteSequences.Add(new TRSpriteSequence { SpriteID = Convert.ToInt32(spriteEntity) });
-                    }
-
-                    // The sequence will be merged later when we know the sprite texture offsets.
-                    // For now, add the segments we need for packing.
-                    Dictionary<int, List<IndexedTRSpriteTexture>> spriteTextures = definition.SpriteTextures[spriteEntity];
-                    foreach (int segmentIndex in spriteTextures.Keys)
-                    {
-                        Bitmap segmentClip = bg.Extract(definition.TextureSegments[segmentIndex]);
-                        TexturedTileSegment segment = null;
-                        foreach (IndexedTRSpriteTexture texture in spriteTextures[segmentIndex])
-                        {
-                            if (segment == null)
-                            {
-                                _importSegments[definition].Add(segment = new TexturedTileSegment(texture, segmentClip));
-                            }
-                            else
-                            {
-                                segment.AddTexture(texture);
-                            }
-                        }
-                    }
-                }
             }
         }
     }
 
     protected virtual PackingResult<TexturedTile, TexturedTileSegment> Pack()
     {
-        using (AbstractTexturePacker<E, L> packer = CreatePacker())
+        using AbstractTexturePacker<E, L> packer = CreatePacker();
+        packer.MaximumTiles = Data.TextureTileLimit;
+
+        ProcessRemovals(packer);
+
+        List<TexturedTileSegment> allSegments = new();
+        foreach (List<TexturedTileSegment> segmentList in _importSegments.Values)
         {
-            packer.MaximumTiles = Data.TextureTileLimit;
-
-            ProcessRemovals(packer);
-
-            List<TexturedTileSegment> allSegments = new();
-            foreach (List<TexturedTileSegment> segmentList in _importSegments.Values)
+            // We only add unique segments, so if another segment already exists, 
+            // remap the definition's segment to that one. Example of when this is
+            // needed is importing the dragon as DragonBack duplicates a lot of
+            // DragonFront, so this will greatly reduce the import cost.
+            for (int i = 0; i < segmentList.Count; i++)
             {
-                // We only add unique segments, so if another segment already exists, 
-                // remap the definition's segment to that one. Example of when this is
-                // needed is importing the dragon as DragonBack duplicates a lot of
-                // DragonFront, so this will greatly reduce the import cost.
-                for (int i = 0; i < segmentList.Count; i++)
+                TexturedTileSegment segment = segmentList[i];
+                int j = FindMatchingSegment(allSegments, segment);
+                if (j == -1)
                 {
-                    TexturedTileSegment segment = segmentList[i];
-                    int j = FindMatchingSegment(allSegments, segment);
-                    if (j == -1)
+                    allSegments.Add(segment);
+                }
+                else
+                {
+                    TexturedTileSegment otherSegment = allSegments[j];
+                    segmentList[i] = allSegments[j];
+                    foreach (IndexedTRObjectTexture texture in segment.Textures)
                     {
-                        allSegments.Add(segment);
-                    }
-                    else
-                    {
-                        TexturedTileSegment otherSegment = allSegments[j];
-                        segmentList[i] = allSegments[j];
-                        foreach (IndexedTRObjectTexture texture in segment.Textures)
+                        if (!otherSegment.IsObjectTextureFor(texture.Index))
                         {
-                            if (!otherSegment.IsObjectTextureFor(texture.Index))
-                            {
-                                otherSegment.AddTexture(texture);
-                            }
+                            otherSegment.AddTexture(texture);
                         }
                     }
                 }
             }
-
-            packer.AddRectangles(allSegments);
-
-            return packer.Pack(true);
         }
+
+        packer.AddRectangles(allSegments);
+
+        return packer.Pack(true);
     }
 
     protected virtual void MergeObjectTextures()

@@ -21,37 +21,35 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
 
     public void Deduplicate(string remappingPath)
     {
-        using (AbstractTexturePacker<E, L> levelPacker = CreatePacker(Level))
+        using AbstractTexturePacker<E, L> levelPacker = CreatePacker(Level);
+        Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new();
+        foreach (TexturedTile tile in levelPacker.Tiles)
         {
-            Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new();
-            foreach (TexturedTile tile in levelPacker.Tiles)
-            {
-                allTextures[tile] = new List<TexturedTileSegment>(tile.Rectangles);
-            }
-
-            AbstractTextureRemapGroup<E, L> remapGroup = GetRemapGroup(remappingPath);
-
-            _deduplicator.SegmentMap = allTextures;
-            _deduplicator.PrecompiledRemapping = remapGroup.Remapping;
-            _deduplicator.Deduplicate();
-
-            levelPacker.AllowEmptyPacking = true;
-            levelPacker.Pack(true);
-
-            // Now we want to go through every IndexedTexture and see if it's
-            // pointing to the same thing - so tile, position, and point direction
-            // have to be equal. See IndexedTRObjectTexture
-            Dictionary<int, int> indexMap = new();
-            foreach (TexturedTile tile in allTextures.Keys)
-            {
-                foreach (TexturedTileSegment segment in allTextures[tile])
-                {
-                    TidySegment(segment, indexMap);
-                }
-            }
-
-            ReindexTextures(indexMap);
+            allTextures[tile] = new List<TexturedTileSegment>(tile.Rectangles);
         }
+
+        AbstractTextureRemapGroup<E, L> remapGroup = GetRemapGroup(remappingPath);
+
+        _deduplicator.SegmentMap = allTextures;
+        _deduplicator.PrecompiledRemapping = remapGroup.Remapping;
+        _deduplicator.Deduplicate();
+
+        levelPacker.AllowEmptyPacking = true;
+        levelPacker.Pack(true);
+
+        // Now we want to go through every IndexedTexture and see if it's
+        // pointing to the same thing - so tile, position, and point direction
+        // have to be equal. See IndexedTRObjectTexture
+        Dictionary<int, int> indexMap = new();
+        foreach (TexturedTile tile in allTextures.Keys)
+        {
+            foreach (TexturedTileSegment segment in allTextures[tile])
+            {
+                TidySegment(segment, indexMap);
+            }
+        }
+
+        ReindexTextures(indexMap);
     }
 
     protected abstract AbstractTexturePacker<E, L> CreatePacker(L level);

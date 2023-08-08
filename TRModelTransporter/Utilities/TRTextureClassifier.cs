@@ -10,16 +10,14 @@ public class TRTextureClassifier : ITextureClassifier
 
     public TRTextureClassifier(string levelPath)
     {
-        using (MD5 md5 = MD5.Create())
+        using MD5 md5 = MD5.Create();
+        byte[] hash = md5.ComputeHash(Encoding.Default.GetBytes(Path.GetFileNameWithoutExtension(levelPath).ToUpper()));
+        StringBuilder sb = new();
+        for (int i = 0; i < hash.Length; i++)
         {
-            byte[] hash = md5.ComputeHash(Encoding.Default.GetBytes(Path.GetFileNameWithoutExtension(levelPath).ToUpper()));
-            StringBuilder sb = new();
-            for (int i = 0; i < hash.Length; i++)
-            {
-                sb.Append(hash[i].ToString("x2"));
-            }
-            _levelClassification = sb.ToString();
+            sb.Append(hash[i].ToString("x2"));
         }
+        _levelClassification = sb.ToString();
     }
 
     public string GetClassification()

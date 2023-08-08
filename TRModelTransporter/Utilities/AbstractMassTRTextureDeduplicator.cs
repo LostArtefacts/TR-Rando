@@ -63,31 +63,29 @@ public abstract class AbstractMassTRTextureDeduplicator<E, L>
 
     private void ExportDuplicateLevelTextures(string lvlPath)
     {
-        using (AbstractTexturePacker<E, L> levelPacker = CreatePacker(ReadLevel(lvlPath)))
+        using AbstractTexturePacker<E, L> levelPacker = CreatePacker(ReadLevel(lvlPath));
+        Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new();
+        foreach (TexturedTile tile in levelPacker.Tiles)
         {
-            Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new();
-            foreach (TexturedTile tile in levelPacker.Tiles)
-            {
-                allTextures[tile] = new List<TexturedTileSegment>(tile.Rectangles);
-            }
+            allTextures[tile] = new List<TexturedTileSegment>(tile.Rectangles);
+        }
 
-            _deduplicator.SegmentMap = allTextures;
-            _deduplicator.Deduplicate();
+        _deduplicator.SegmentMap = allTextures;
+        _deduplicator.Deduplicate();
 
-            if (_levelRemap.ContainsKey(_currentLevel))
+        if (_levelRemap.ContainsKey(_currentLevel))
+        {
+            if (OutputTileImages)
             {
-                if (OutputTileImages)
+                string dir = Path.Combine(OutputDirectory, _currentLevel);
+                Directory.CreateDirectory(dir);
+                foreach (TexturedTile tile in allTextures.Keys)
                 {
-                    string dir = Path.Combine(OutputDirectory, _currentLevel);
-                    Directory.CreateDirectory(dir);
-                    foreach (TexturedTile tile in allTextures.Keys)
-                    {
-                        tile.BitmapGraphics.Bitmap.Save(Path.Combine(dir, tile.Index.ToString() + ".png"), ImageFormat.Png);
-                    }
+                    tile.BitmapGraphics.Bitmap.Save(Path.Combine(dir, tile.Index.ToString() + ".png"), ImageFormat.Png);
                 }
-
-                File.WriteAllText(Path.Combine(OutputDirectory, _currentLevel + "-TextureRemap.json"), JsonConvert.SerializeObject(_levelRemap[_currentLevel], Formatting.Indented));
             }
+
+            File.WriteAllText(Path.Combine(OutputDirectory, _currentLevel + "-TextureRemap.json"), JsonConvert.SerializeObject(_levelRemap[_currentLevel], Formatting.Indented));
         }
     }
 

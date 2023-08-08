@@ -189,12 +189,10 @@ public class TRTextureDeduplicator<E> where E : Enum
             for (int y = 0; y <= yEnd; y++)
             {
                 rect.Y = y;
-                using (Bitmap bmp = containerSegment.Segment.Bitmap.Clone(rect, PixelFormat.Format32bppArgb))
+                using Bitmap bmp = containerSegment.Segment.Bitmap.Clone(rect, PixelFormat.Format32bppArgb);
+                if (CompareBitmaps(segmentToLocate.Segment.Bitmap, bmp))
                 {
-                    if (CompareBitmaps(segmentToLocate.Segment.Bitmap, bmp))
-                    {
-                        return new Point(x, y);
-                    }
+                    return new Point(x, y);
                 }
             }
         }

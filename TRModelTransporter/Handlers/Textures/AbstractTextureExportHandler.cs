@@ -109,48 +109,46 @@ public abstract class AbstractTextureExportHandler<E, L, D>
             return;
         }
 
-        using (DefaultTexturePacker segmentPacker = new())
+        using DefaultTexturePacker segmentPacker = new();
+        segmentPacker.AddRectangles(_allSegments);
+
+        segmentPacker.Options = new PackingOptions
         {
-            segmentPacker.AddRectangles(_allSegments);
+            FillMode = PackingFillMode.Horizontal,
+            OrderMode = PackingOrderMode.Area,
+            Order = PackingOrder.Descending,
+            GroupMode = PackingGroupMode.Squares
+        };
+        segmentPacker.TileWidth = _exportBitmapWidth;
+        segmentPacker.TileHeight = _exportBitmapHeight;
+        segmentPacker.MaximumTiles = 1;
 
-            segmentPacker.Options = new PackingOptions
+        segmentPacker.Pack();
+
+        if (segmentPacker.OrphanedRectangles.Count > 0)
+        {
+            throw new PackingException(string.Format("Failed to export textures for {0}.", _definition.Entity));
+        }
+
+        TexturedTile tile = segmentPacker.Tiles[0];
+        List<Rectangle> rects = new();
+        foreach (TexturedTileSegment segment in _allSegments)
+        {
+            rects.Add(segment.MappedBounds);
+        }
+
+        _definition.TextureSegments = rects.ToArray();
+
+        Rectangle region = tile.GetOccupiedRegion();
+        _definition.Bitmap = tile.BitmapGraphics.Extract(region);
+
+        foreach (TexturedTileSegment segment in _allSegments)
+        {
+            SegmentExported?.Invoke(this, new SegmentEventArgs
             {
-                FillMode = PackingFillMode.Horizontal,
-                OrderMode = PackingOrderMode.Area,
-                Order = PackingOrder.Descending,
-                GroupMode = PackingGroupMode.Squares
-            };
-            segmentPacker.TileWidth = _exportBitmapWidth;
-            segmentPacker.TileHeight = _exportBitmapHeight;
-            segmentPacker.MaximumTiles = 1;
-
-            segmentPacker.Pack();
-
-            if (segmentPacker.OrphanedRectangles.Count > 0)
-            {
-                throw new PackingException(string.Format("Failed to export textures for {0}.", _definition.Entity));
-            }
-
-            TexturedTile tile = segmentPacker.Tiles[0];
-            List<Rectangle> rects = new();
-            foreach (TexturedTileSegment segment in _allSegments)
-            {
-                rects.Add(segment.MappedBounds);
-            }
-
-            _definition.TextureSegments = rects.ToArray();
-
-            Rectangle region = tile.GetOccupiedRegion();
-            _definition.Bitmap = tile.BitmapGraphics.Extract(region);
-
-            foreach (TexturedTileSegment segment in _allSegments)
-            {
-                SegmentExported?.Invoke(this, new SegmentEventArgs
-                {
-                    SegmentIndex = segment.FirstTextureIndex,
-                    Bitmap = segment.Bitmap
-                });
-            }
+                SegmentIndex = segment.FirstTextureIndex,
+                Bitmap = segment.Bitmap
+            });
         }
     }
 }
