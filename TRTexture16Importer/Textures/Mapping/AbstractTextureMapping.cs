@@ -494,6 +494,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
     public void Dispose()
     {
         CommitGraphics();
+        GC.SuppressFinalize(this);
     }
 
     public virtual void CommitGraphics()

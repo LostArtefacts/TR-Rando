@@ -166,5 +166,6 @@ public class BitmapGraphics : IDisposable
     {
         Graphics.Dispose();
         Bitmap.Dispose();
+        GC.SuppressFinalize(this);
     }
 }

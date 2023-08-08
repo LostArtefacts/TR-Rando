@@ -257,5 +257,6 @@ public class TR1PaletteManager : IDisposable
             bmp.Dispose();
         }
         ChangedTiles.Clear();
+        GC.SuppressFinalize(this);
     }
 }

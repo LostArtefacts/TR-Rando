@@ -34,6 +34,7 @@ public class TextureDatabase<E> : IDisposable
         {
             source.Dispose();
         }
+        GC.SuppressFinalize(this);
     }
 
     public DynamicTextureSource GetDynamicSource(string name)

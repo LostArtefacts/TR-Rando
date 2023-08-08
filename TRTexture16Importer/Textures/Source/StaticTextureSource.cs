@@ -32,6 +32,7 @@ public class StaticTextureSource<E> : AbstractTextureSource, IDisposable
         {
             _bitmap.Dispose();
         }
+        GC.SuppressFinalize(this);
     }
 
     public override bool Equals(object obj)
