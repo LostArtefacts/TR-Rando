@@ -125,23 +125,12 @@ public static class AnimationUtilities
         {
             int cmdIndex = cmdOffset++;
             TRAnimCommand cmd = animCommands[cmdIndex];
-
-            int paramCount;
-            switch ((TRAnimCommandTypes)cmd.Value)
+            int paramCount = (TRAnimCommandTypes)cmd.Value switch
             {
-                case TRAnimCommandTypes.SetPosition:
-                    paramCount = 3;
-                    break;
-                case TRAnimCommandTypes.JumpDistance:
-                case TRAnimCommandTypes.PlaySound:
-                case TRAnimCommandTypes.FlipEffect:
-                    paramCount = 2;
-                    break;
-                default:
-                    paramCount = 0;
-                    break;
-            }
-
+                TRAnimCommandTypes.SetPosition => 3,
+                TRAnimCommandTypes.JumpDistance or TRAnimCommandTypes.PlaySound or TRAnimCommandTypes.FlipEffect => 2,
+                _ => 0,
+            };
             short[] paramArr = new short[paramCount];
             for (int j = 0; j < paramCount; j++)
             {
