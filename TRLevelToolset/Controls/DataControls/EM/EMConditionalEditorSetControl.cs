@@ -1,49 +1,41 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TREnvironmentEditor.Model;
-using TRLevelControl.Model;
 using TRLevelToolset.Interfaces;
-using TRLevelToolset.IOLogic;
 
-namespace TRLevelToolset.Controls.DataControls.EM
+namespace TRLevelToolset.Controls.DataControls.EM;
+
+internal class EMConditionalEditorSetControl : IDrawable
 {
-    internal class EMConditionalEditorSetControl : IDrawable
+    private readonly EMConditionalEditorSet _data;
+
+    public EMConditionalEditorSetControl(EMConditionalEditorSet data)
     {
-        private EMConditionalEditorSet _data { get; set; }
+        _data = data;
+    }
+    
+    public void Draw()
+    {
+        EMConditionControl condCtrl = new(_data.Condition);
+        ImGui.Text("Condition");
+        ImGui.Indent();
+        condCtrl.Draw();
 
-        public EMConditionalEditorSetControl(EMConditionalEditorSet data)
+        if (_data.OnTrue != null)
         {
-            _data = data;
-        }
-        
-        public void Draw()
-        {
-            EMConditionControl condCtrl = new EMConditionControl(_data.Condition);
-            ImGui.Text("Condition");
+            EMAnyControl trueList = new(_data.OnTrue);
+            ImGui.Text("On True");
             ImGui.Indent();
-            condCtrl.Draw();
+            trueList.Draw();
+            ImGui.Unindent();
+        }
 
-            if (_data.OnTrue != null)
-            {
-                EMAnyControl trueList = new EMAnyControl(_data.OnTrue);
-                ImGui.Text("On True");
-                ImGui.Indent();
-                trueList.Draw();
-                ImGui.Unindent();
-            }
-
-            if (_data.OnFalse != null)
-            {
-                EMAnyControl falseList = new EMAnyControl(_data.OnFalse);
-                ImGui.Text("On False");
-                ImGui.Indent();
-                falseList.Draw();
-                ImGui.Unindent();
-            }
+        if (_data.OnFalse != null)
+        {
+            EMAnyControl falseList = new(_data.OnFalse);
+            ImGui.Text("On False");
+            ImGui.Indent();
+            falseList.Draw();
+            ImGui.Unindent();
         }
     }
 }

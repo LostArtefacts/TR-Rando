@@ -1,25 +1,18 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TRLevelControl.Model;
 using TRLevelToolset.Interfaces;
 using TRLevelToolset.IOLogic;
 
-namespace TRLevelToolset.Controls.DataControls.TR
+namespace TRLevelToolset.Controls.DataControls.TR;
+
+internal class TRPaletteControl : IDrawable
 {
-    internal class TRPaletteControl : IDrawable
+    public void Draw()
     {
-        public void Draw()
+        if (ImGui.TreeNodeEx("Palette Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            if (ImGui.TreeNodeEx("Palette Data", ImGuiTreeNodeFlags.OpenOnArrow))
-            {
-                ImGui.Text("Light map Count: " + IOManager.CurrentLevelAsTR1?.LightMap.Count());
-                ImGui.Text("Palette Count: " + IOManager.CurrentLevelAsTR1?.Palette.Count());
-                ImGui.TreePop();
-            }
+            ImGui.Text("Light map Count: " + IOManager.CurrentLevelAsTR1?.LightMap.Length);
+            ImGui.Text("Palette Count: " + IOManager.CurrentLevelAsTR1?.Palette.Length);
+            ImGui.TreePop();
         }
     }
 }

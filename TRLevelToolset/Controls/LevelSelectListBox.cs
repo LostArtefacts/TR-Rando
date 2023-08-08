@@ -1,55 +1,48 @@
 ﻿using ImGuiNET;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TRLevelToolset.Interfaces;
 using TRLevelToolset.IOLogic;
 
-namespace TRLevelToolset.Controls
+namespace TRLevelToolset.Controls;
+
+public class LevelSelectListBox  : IDrawable
 {
-    public class LevelSelectListBox  : IDrawable
+    public string[] Items { get; set; }
+    public int SelectedIndex { get; set; }
+    public TRGame Game { get; set; }
+
+    public LevelSelectListBox()
     {
-        public string[] Items { get; set; }
-        public int SelectedIndex { get; set; }
-        public TRGame Game { get; set; }
+        Items = new string[] { "Placeholder" };
+        SelectedIndex = 0;
+        Game = TRGame.TR1;
+    }
 
-        public LevelSelectListBox()
+    public void Draw()
+    {
+        if (ImGui.BeginListBox(""))
         {
-            Items = new string[] { "Placeholder" };
-            SelectedIndex = 0;
-            Game = TRGame.TR1;
-        }
-
-        public void Draw()
-        {
-            if (ImGui.BeginListBox(""))
+            for (int i = 0; i < Items.Length; i++)
             {
-                for (int i = 0; i < Items.Count(); i++)
-                {
-                    bool isSelected = (SelectedIndex == i);
+                bool isSelected = (SelectedIndex == i);
 
-                    if (ImGui.Selectable(Items[i], isSelected))
-                        SelectedIndex = i;
+                if (ImGui.Selectable(Items[i], isSelected))
+                    SelectedIndex = i;
 
-                    if (isSelected)
-                        ImGui.SetItemDefaultFocus();
-                }
-
-                ImGui.EndListBox();
+                if (isSelected)
+                    ImGui.SetItemDefaultFocus();
             }
 
-            if (ImGui.Button("Load"))
-            {
-                Load();
-            }
+            ImGui.EndListBox();
         }
 
-        private void Load()
+        if (ImGui.Button("Load"))
         {
-            IOManager.Load(Items[SelectedIndex], Game);
+            Load();
         }
+    }
+
+    private void Load()
+    {
+        IOManager.Load(Items[SelectedIndex], Game);
     }
 }

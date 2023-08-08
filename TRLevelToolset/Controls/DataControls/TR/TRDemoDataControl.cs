@@ -1,24 +1,17 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TRLevelControl.Model;
 using TRLevelToolset.Interfaces;
 using TRLevelToolset.IOLogic;
 
-namespace TRLevelToolset.Controls.DataControls.TR
+namespace TRLevelToolset.Controls.DataControls.TR;
+
+internal class TRDemoDataControl : IDrawable
 {
-    internal class TRDemoDataControl : IDrawable
+    public void Draw()
     {
-        public void Draw()
+        if (ImGui.TreeNodeEx("Demo Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            if (ImGui.TreeNodeEx("Demo Data", ImGuiTreeNodeFlags.OpenOnArrow))
-            {
-                ImGui.Text("Demo Data Size: " + IOManager.CurrentLevelAsTR1?.NumDemoData);
-                ImGui.TreePop();
-            }
+            ImGui.Text("Demo Data Size: " + IOManager.CurrentLevelAsTR1?.NumDemoData);
+            ImGui.TreePop();
         }
     }
 }

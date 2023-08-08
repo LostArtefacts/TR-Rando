@@ -1,41 +1,33 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TREnvironmentEditor.Model;
-using TRLevelControl.Model;
 using TRLevelToolset.Interfaces;
-using TRLevelToolset.IOLogic;
 
-namespace TRLevelToolset.Controls.DataControls.EM
+namespace TRLevelToolset.Controls.DataControls.EM;
+
+internal class EMAnyControl : IDrawable
 {
-    internal class EMAnyControl : IDrawable
-    {
-        private List<EMEditorSet> _data { get; set; }
+    private readonly List<EMEditorSet> _data;
 
-        public EMAnyControl(List<EMEditorSet> data)
-        {
-            _data = data;
-        }
+    public EMAnyControl(List<EMEditorSet> data)
+    {
+        _data = data;
+    }
+    
+    public void Draw()
+    {
+        int i = 0;
         
-        public void Draw()
+        foreach (EMEditorSet set in _data)
         {
-            int i = 0;
+            ImGui.Text("Set " + i);
             
-            foreach (EMEditorSet set in _data)
-            {
-                ImGui.Text("Set " + i);
-                
-                EMAllControl ctrl = new EMAllControl(set);
-                
-                ImGui.Indent();
-                ctrl.Draw();
-                ImGui.Unindent();
-                
-                i++;
-            }
+            EMAllControl ctrl = new(set);
+            
+            ImGui.Indent();
+            ctrl.Draw();
+            ImGui.Unindent();
+            
+            i++;
         }
     }
 }

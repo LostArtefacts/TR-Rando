@@ -1,38 +1,29 @@
-﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TREnvironmentEditor.Model;
-using TRLevelControl.Model;
+﻿using TREnvironmentEditor.Model;
 using TRLevelToolset.Interfaces;
-using TRLevelToolset.IOLogic;
 
-namespace TRLevelToolset.Controls.DataControls.EM
+namespace TRLevelToolset.Controls.DataControls.EM;
+
+internal class EMMirroredControl : IDrawable
 {
-    internal class EMMirroredControl : IDrawable
+    private readonly EMEditorSet _data;
+    private readonly List<EMFunctionControl> _funcControls;
+
+    public EMMirroredControl(EMEditorSet data)
     {
-        private EMEditorSet _data { get; set; }
-        private List<EMFunctionControl> _funcControls { get; set; }
+        _data = data;
+        _funcControls = new List<EMFunctionControl>();
 
-        public EMMirroredControl(EMEditorSet data)
+        for (int i = 0; i < _data.Count; i++)
         {
-            _data = data;
-            _funcControls = new List<EMFunctionControl>();
-
-            for (int i = 0; i < _data.Count; i++)
-            {
-                _funcControls.Add(new EMFunctionControl(_data[i]));
-            }
+            _funcControls.Add(new EMFunctionControl(_data[i]));
         }
-        
-        public void Draw()
+    }
+    
+    public void Draw()
+    {
+        foreach (var control in _funcControls)
         {
-            foreach (var control in _funcControls)
-            {
-                control.Draw();
-            }
+            control.Draw();
         }
     }
 }
