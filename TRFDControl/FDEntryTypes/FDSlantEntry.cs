@@ -1,58 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace TRFDControl.FDEntryTypes;
 
-namespace TRFDControl.FDEntryTypes
+public class FDSlantEntry : FDEntry
 {
-    public class FDSlantEntry : FDEntry
+    public FDSlantEntryType Type { get; set; }
+
+    public ushort SlantValue { get; set; }
+
+    public sbyte XSlant
     {
-        public FDSlantEntryType Type { get; set; }
-
-        public ushort SlantValue { get; set; }
-
-        public sbyte XSlant
+        get
         {
-            get
-            {
-                return (sbyte)(SlantValue & 0x00ff);
-            }
-            set
-            {
-                SetSlants(value, ZSlant);
-            }
+            return (sbyte)(SlantValue & 0x00ff);
         }
-
-        public sbyte ZSlant
+        set
         {
-            get
-            {
-                return (sbyte)(SlantValue >> 8);
-            }
-            set
-            {
-                SetSlants(XSlant, value);
-            }
+            SetSlants(value, ZSlant);
         }
+    }
 
-        private void SetSlants(sbyte xSlant, sbyte zSlant)
+    public sbyte ZSlant
+    {
+        get
         {
-            int value = (xSlant & 0xff) + (zSlant << 8);
-            if (value < 0)
-            {
-                value = ushort.MaxValue + 1 + value;
-            }
-            SlantValue = (ushort)value;
+            return (sbyte)(SlantValue >> 8);
         }
+        set
+        {
+            SetSlants(XSlant, value);
+        }
+    }
 
-        public override ushort[] Flatten()
+    private void SetSlants(sbyte xSlant, sbyte zSlant)
+    {
+        int value = (xSlant & 0xff) + (zSlant << 8);
+        if (value < 0)
         {
-            return new ushort[]
-            {
-                Setup.Value,
-                SlantValue
-            };
+            value = ushort.MaxValue + 1 + value;
         }
+        SlantValue = (ushort)value;
+    }
+
+    public override ushort[] Flatten()
+    {
+        return new ushort[]
+        {
+            Setup.Value,
+            SlantValue
+        };
     }
 }

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace TRFDControl.FDEntryTypes;
 
-namespace TRFDControl.FDEntryTypes
+public enum FDSlantEntryType
 {
-    public enum FDSlantEntryType
-    {
-        CeilingSlant,
-        FloorSlant
-    }
+    CeilingSlant,
+    FloorSlant
 }
