@@ -141,8 +141,6 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
             = new TREntities[] { TREntities.CrocodileWater },
         [TREntities.CrocodileWater]
             = new TREntities[] { TREntities.CrocodileLand },
-        [TREntities.CentaurStatue]
-            = new TREntities[] { TREntities.Centaur },
         [TREntities.DartEmitter]
             = new TREntities[] { TREntities.Dart_H },
         [TREntities.MeatyAtlantean]
