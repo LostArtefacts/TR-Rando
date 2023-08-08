@@ -1,5 +1,4 @@
-﻿using System;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 
 namespace TREnvironmentEditor.Model.Conditions;

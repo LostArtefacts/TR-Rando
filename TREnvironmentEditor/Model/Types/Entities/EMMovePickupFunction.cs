@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using TREnvironmentEditor.Helpers;
+﻿using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.Utilities;
 using TRLevelControl.Model;

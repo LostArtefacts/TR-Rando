@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TRLevelControl.Helpers;
+﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;

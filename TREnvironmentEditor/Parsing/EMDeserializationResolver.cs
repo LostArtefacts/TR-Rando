@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
 using TREnvironmentEditor.Model;
 
 namespace TREnvironmentEditor.Parsing;

@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
 using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Parsing;
 

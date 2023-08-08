@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TREnvironmentEditor.Helpers;
+﻿namespace TREnvironmentEditor.Helpers;
 
 public class EMOptions
 {

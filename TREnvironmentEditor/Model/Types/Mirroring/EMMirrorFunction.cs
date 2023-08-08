@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRLevelControl.Helpers;

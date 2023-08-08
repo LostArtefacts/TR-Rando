@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TREnvironmentEditor.Helpers;
+﻿using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
-using TRFDControl.Utilities;
-using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;

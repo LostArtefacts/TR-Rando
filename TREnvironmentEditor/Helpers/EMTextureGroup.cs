@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using TREnvironmentEditor.Model.Types;
 using TRLevelControl.Model;
 

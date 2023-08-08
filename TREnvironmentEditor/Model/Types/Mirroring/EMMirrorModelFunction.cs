@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TRLevelControl.Helpers;
+﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;

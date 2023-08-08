@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TREnvironmentEditor.Model;
+﻿namespace TREnvironmentEditor.Model;
 
 public interface ITextureModifier
 {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TREnvironmentEditor.Helpers;
+﻿namespace TREnvironmentEditor.Helpers;
 
 // Texture index => room index => rect/tri indices
 public class EMTextureMap : Dictionary<ushort, EMGeometryMap>

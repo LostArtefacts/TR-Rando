@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Model.Conditions;
 using TREnvironmentEditor.Model.Types;

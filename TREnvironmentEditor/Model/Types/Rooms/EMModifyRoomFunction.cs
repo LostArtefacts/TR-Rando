@@ -1,5 +1,4 @@
-﻿using System;
-using TREnvironmentEditor.Helpers;
+﻿using TREnvironmentEditor.Helpers;
 using TRLevelControl.Model;
 
 namespace TREnvironmentEditor.Model.Types;

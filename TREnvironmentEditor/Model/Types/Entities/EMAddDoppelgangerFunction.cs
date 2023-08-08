@@ -1,5 +1,4 @@
-﻿using System;
-using TREnvironmentEditor.Helpers;
+﻿using TREnvironmentEditor.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TRFDControl;
+﻿using TRFDControl;
 using TRFDControl.FDEntryTypes;
 
 namespace TREnvironmentEditor.Helpers;
