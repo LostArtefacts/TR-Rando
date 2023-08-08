@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TRFDControl.FDEntryTypes;
+﻿using TRFDControl.FDEntryTypes;
 using TRLevelControl.Model;
 
 namespace TRFDControl;

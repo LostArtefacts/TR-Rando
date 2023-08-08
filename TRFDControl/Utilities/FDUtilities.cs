@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TRFDControl.FDEntryTypes;
+﻿using TRFDControl.FDEntryTypes;
 using TRLevelControl.Model;
 
 namespace TRFDControl.Utilities;
