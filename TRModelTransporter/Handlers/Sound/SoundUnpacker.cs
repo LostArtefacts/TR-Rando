@@ -174,7 +174,7 @@ public class SoundUnpacker
         return soundDetails;
     }
 
-    private int FindSoundDetailsIndex(TRSoundDetails details, List<TRSoundDetails> allDetails)
+    private static int FindSoundDetailsIndex(TRSoundDetails details, List<TRSoundDetails> allDetails)
     {
         return allDetails.FindIndex
         (
@@ -186,7 +186,7 @@ public class SoundUnpacker
         );
     }
 
-    private int FindSoundDetailsIndex(TR3SoundDetails details, List<TR3SoundDetails> allDetails)
+    private static int FindSoundDetailsIndex(TR3SoundDetails details, List<TR3SoundDetails> allDetails)
     {
         return allDetails.FindIndex
         (

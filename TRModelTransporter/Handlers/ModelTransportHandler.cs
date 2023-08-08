@@ -6,28 +6,28 @@ namespace TRModelTransporter.Handlers;
 
 public class ModelTransportHandler
 {
-    public void Export(TR1Level level, TR1ModelDefinition definition, TREntities entity)
+    public static void Export(TR1Level level, TR1ModelDefinition definition, TREntities entity)
     {
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
 
-    public void Export(TR2Level level, TR2ModelDefinition definition, TR2Entities entity)
+    public static void Export(TR2Level level, TR2ModelDefinition definition, TR2Entities entity)
     {
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
 
-    public void Export(TR3Level level, TR3ModelDefinition definition, TR3Entities entity)
+    public static void Export(TR3Level level, TR3ModelDefinition definition, TR3Entities entity)
     {
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
 
-    private TRModel GetTRModel(IEnumerable<TRModel> models, short entityID)
+    private static TRModel GetTRModel(IEnumerable<TRModel> models, short entityID)
     {
         TRModel model = models.ToList().Find(m => m.ID == entityID);
         return model ?? throw new ArgumentException($"The model for {entityID} could not be found.");
     }
 
-    public void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TREntities, TREntities> aliasPriority, IEnumerable<TREntities> laraDependants)
+    public static void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TREntities, TREntities> aliasPriority, IEnumerable<TREntities> laraDependants)
     {
         List<TRModel> levelModels = level.Models.ToList();
         int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
@@ -62,7 +62,7 @@ public class ModelTransportHandler
         }
     }
 
-    public void Import(TR2Level level, TR2ModelDefinition definition, Dictionary<TR2Entities, TR2Entities> aliasPriority, IEnumerable<TR2Entities> laraDependants)
+    public static void Import(TR2Level level, TR2ModelDefinition definition, Dictionary<TR2Entities, TR2Entities> aliasPriority, IEnumerable<TR2Entities> laraDependants)
     {
         List<TRModel> levelModels = level.Models.ToList();
         int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
@@ -90,7 +90,7 @@ public class ModelTransportHandler
         }
     }
 
-    public void Import(TR3Level level, TR3ModelDefinition definition, Dictionary<TR3Entities, TR3Entities> aliasPriority, IEnumerable<TR3Entities> laraDependants, IEnumerable<TR3Entities> unsafeReplacements)
+    public static void Import(TR3Level level, TR3ModelDefinition definition, Dictionary<TR3Entities, TR3Entities> aliasPriority, IEnumerable<TR3Entities> laraDependants, IEnumerable<TR3Entities> unsafeReplacements)
     {
         List<TRModel> levelModels = level.Models.ToList();
         int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
@@ -124,7 +124,7 @@ public class ModelTransportHandler
         }
     }
 
-    private void ReplaceLaraDependants(List<TRModel> models, TRModel lara, IEnumerable<short> entityIDs)
+    private static void ReplaceLaraDependants(List<TRModel> models, TRModel lara, IEnumerable<short> entityIDs)
     {
         foreach (short dependant in entityIDs)
         {

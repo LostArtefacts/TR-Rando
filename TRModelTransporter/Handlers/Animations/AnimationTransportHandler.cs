@@ -6,7 +6,7 @@ namespace TRModelTransporter.Handlers;
 
 public class AnimationTransportHandler
 {
-    public void Export(TR1Level level, TR1ModelDefinition definition)
+    public static void Export(TR1Level level, TR1ModelDefinition definition)
     {
         definition.Animations = new Dictionary<int, TR1PackedAnimation>();
 
@@ -32,7 +32,7 @@ public class AnimationTransportHandler
         definition.AnimationFrames = AnimationUtilities.GetAnimationFrames(level, definition.Model);
     }
 
-    public void Export(TR2Level level, TR2ModelDefinition definition)
+    public static void Export(TR2Level level, TR2ModelDefinition definition)
     {
         definition.Animations = new Dictionary<int, TR2PackedAnimation>();
 
@@ -58,7 +58,7 @@ public class AnimationTransportHandler
         definition.AnimationFrames = AnimationUtilities.GetAnimationFrames(level, definition.Model);
     }
 
-    public void Export(TR3Level level, TR3ModelDefinition definition)
+    public static void Export(TR3Level level, TR3ModelDefinition definition)
     {
         definition.Animations = new Dictionary<int, TR3PackedAnimation>();
 
@@ -84,7 +84,7 @@ public class AnimationTransportHandler
         definition.AnimationFrames = AnimationUtilities.GetAnimationFrames(level, definition.Model);
     }
 
-    public void Import(TR1Level level, TR1ModelDefinition definition)
+    public static void Import(TR1Level level, TR1ModelDefinition definition)
     {
         Dictionary<int, TR1PackedAnimation> animations = definition.Animations;
         bool firstAnimationConfigured = false;
@@ -139,7 +139,7 @@ public class AnimationTransportHandler
         AnimationUtilities.ImportAnimationFrames(level, definition);
     }
 
-    public void Import(TR2Level level, TR2ModelDefinition definition)
+    public static void Import(TR2Level level, TR2ModelDefinition definition)
     {
         Dictionary<int, TR2PackedAnimation> animations = definition.Animations;
         bool firstAnimationConfigured = false;
@@ -194,7 +194,7 @@ public class AnimationTransportHandler
         AnimationUtilities.ImportAnimationFrames(level, definition);
     }
 
-    public void Import(TR3Level level, TR3ModelDefinition definition)
+    public static void Import(TR3Level level, TR3ModelDefinition definition)
     {
         Dictionary<int, TR3PackedAnimation> animations = definition.Animations;
         bool firstAnimationConfigured = false;

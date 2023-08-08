@@ -33,13 +33,13 @@ public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR
             modelEntity = Data.TranslateAlias(modelEntity);
         }
 
-        _modelHandler.Export(level, definition, modelEntity);
-        _meshHandler.Export(level, definition);
-        _colourHandler.Export(level, definition);
+        ModelTransportHandler.Export(level, definition, modelEntity);
+        MeshTransportHandler.Export(level, definition);
+        ColourTransportHandler.Export(level, definition);
         _textureHandler.Export(level, definition, TextureClassifier, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity, LevelName));
-        _animationHandler.Export(level, definition);
-        _cinematicHandler.Export(level, definition, Data.GetCinematicEntities());
-        _soundHandler.Export(level, definition, Data.GetHardcodedSounds(definition.Alias));
+        AnimationTransportHandler.Export(level, definition);
+        CinematicTransportHandler.Export(level, definition, Data.GetCinematicEntities());
+        SoundTransportHandler.Export(level, definition, Data.GetHardcodedSounds(definition.Alias));
 
         return definition;
     }

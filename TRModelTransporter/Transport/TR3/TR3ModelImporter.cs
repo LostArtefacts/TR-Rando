@@ -41,7 +41,7 @@ public class TR3ModelImporter : AbstractTRModelImporter<TR3Entities, TR3Level, T
             _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
         }
 
-        _soundHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
+        SoundTransportHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
 
         Dictionary<TR3Entities, TR3Entities> aliasPriority = Data.AliasPriority ?? new Dictionary<TR3Entities, TR3Entities>();
 
@@ -49,12 +49,12 @@ public class TR3ModelImporter : AbstractTRModelImporter<TR3Entities, TR3Level, T
         {
             if (!IgnoreGraphics)
             {
-                _colourHandler.Import(Level, definition);
+                ColourTransportHandler.Import(Level, definition);
             }
-            _meshHandler.Import(Level, definition);
-            _animationHandler.Import(Level, definition);
-            _cinematicHandler.Import(Level, definition);
-            _modelHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants(), Data.GetUnsafeModelReplacements());
+            MeshTransportHandler.Import(Level, definition);
+            AnimationTransportHandler.Import(Level, definition);
+            CinematicTransportHandler.Import(Level, definition);
+            ModelTransportHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants(), Data.GetUnsafeModelReplacements());
         }
 
         if (!IgnoreGraphics)

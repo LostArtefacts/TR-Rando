@@ -6,7 +6,7 @@ namespace TRModelTransporter.Handlers;
 
 public class CinematicTransportHandler
 {
-    public void Export(TR1Level level, TR1ModelDefinition definition, IEnumerable<TREntities> entityTypes)
+    public static void Export(TR1Level level, TR1ModelDefinition definition, IEnumerable<TREntities> entityTypes)
     {
         List<TRCinematicFrame> frames = new();
         if (entityTypes != null && entityTypes.Contains(definition.Entity))
@@ -17,7 +17,7 @@ public class CinematicTransportHandler
         definition.CinematicFrames = frames.ToArray();
     }
 
-    public void Export(TR2Level level, TR2ModelDefinition definition, IEnumerable<TR2Entities> entityTypes)
+    public static void Export(TR2Level level, TR2ModelDefinition definition, IEnumerable<TR2Entities> entityTypes)
     {
         List<TRCinematicFrame> frames = new();
         if (entityTypes != null && entityTypes.Contains(definition.Entity))
@@ -28,7 +28,7 @@ public class CinematicTransportHandler
         definition.CinematicFrames = frames.ToArray();
     }
 
-    public void Export(TR3Level level, TR3ModelDefinition definition, IEnumerable<TR3Entities> entityTypes)
+    public static void Export(TR3Level level, TR3ModelDefinition definition, IEnumerable<TR3Entities> entityTypes)
     {
         List<TRCinematicFrame> frames = new();
         if (entityTypes != null && entityTypes.Contains(definition.Entity))
@@ -39,7 +39,7 @@ public class CinematicTransportHandler
         definition.CinematicFrames = frames.ToArray();
     }
 
-    public void Import(TR1Level level, TR1ModelDefinition definition)
+    public static void Import(TR1Level level, TR1ModelDefinition definition)
     {
         // We only import frames if the level doesn't have any already.
         if (level.NumCinematicFrames == 0)
@@ -49,7 +49,7 @@ public class CinematicTransportHandler
         }
     }
 
-    public void Import(TR2Level level, TR2ModelDefinition definition)
+    public static void Import(TR2Level level, TR2ModelDefinition definition)
     {
         if (level.NumCinematicFrames == 0)
         {
@@ -58,7 +58,7 @@ public class CinematicTransportHandler
         }
     }
 
-    public void Import(TR3Level level, TR3ModelDefinition definition)
+    public static void Import(TR3Level level, TR3ModelDefinition definition)
     {
         if (level.NumCinematicFrames == 0)
         {

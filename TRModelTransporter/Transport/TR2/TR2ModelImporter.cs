@@ -45,7 +45,7 @@ public class TR2ModelImporter : AbstractTRModelImporter<TR2Entities, TR2Level, T
 
         // Hardcoded sounds are also imported en-masse to ensure the correct SoundMap indices are assigned
         // before any animation sounds are dealt with.
-        _soundHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
+        SoundTransportHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
 
         // Allow external alias model priorities to be defined
         Dictionary<TR2Entities, TR2Entities> aliasPriority = Data.AliasPriority ?? new Dictionary<TR2Entities, TR2Entities>();
@@ -55,20 +55,20 @@ public class TR2ModelImporter : AbstractTRModelImporter<TR2Entities, TR2Level, T
             if (!IgnoreGraphics)
             {
                 // Colours next, again to remap Mesh rectangles/triangles to any new palette indices
-                _colourHandler.Import(Level, definition);
+                ColourTransportHandler.Import(Level, definition);
             }
 
             // Meshes and trees should now be remapped, so import into the level
-            _meshHandler.Import(Level, definition);
+            MeshTransportHandler.Import(Level, definition);
 
             // Animations, AnimCommands, AnimDispatches, Sounds, StateChanges and Frames
-            _animationHandler.Import(Level, definition);
+            AnimationTransportHandler.Import(Level, definition);
 
             // Cinematic frames
-            _cinematicHandler.Import(Level, definition);
+            CinematicTransportHandler.Import(Level, definition);
 
             // Add the model, which will have the correct StartingMesh, MeshTree, Frame and Animation offset.
-            _modelHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants());
+            ModelTransportHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants());
         }
 
         if (!IgnoreGraphics)

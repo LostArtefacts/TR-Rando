@@ -56,7 +56,7 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
     protected abstract AbstractTextureRemapGroup<E, L> GetRemapGroup(string path);
     protected abstract void ReindexTextures(Dictionary<int, int> indexMap);
 
-    private void TidySegment(TexturedTileSegment segment, Dictionary<int, int> reindexMap)
+    private static void TidySegment(TexturedTileSegment segment, Dictionary<int, int> reindexMap)
     {
         for (int i = segment.Textures.Count - 1; i > 0; i--) //ignore the first = the largest
         {

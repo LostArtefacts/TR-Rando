@@ -177,7 +177,7 @@ public class TRTextureDeduplicator<E> where E : Enum
         });
     }
 
-    private Point? LocateSubSegment(MappedSegment segmentToLocate, MappedSegment containerSegment)
+    private static Point? LocateSubSegment(MappedSegment segmentToLocate, MappedSegment containerSegment)
     {
         int xEnd = containerSegment.Segment.Bounds.Width - segmentToLocate.Segment.Bounds.Width;
         int yEnd = containerSegment.Segment.Bounds.Height - segmentToLocate.Segment.Bounds.Height;
@@ -199,7 +199,7 @@ public class TRTextureDeduplicator<E> where E : Enum
         return null;
     }
 
-    private bool CompareBitmaps(Bitmap bmp1, Bitmap bmp2)
+    private static bool CompareBitmaps(Bitmap bmp1, Bitmap bmp2)
     {
         for (int x = 0; x < bmp1.Width; x++)
         {

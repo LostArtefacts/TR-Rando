@@ -31,13 +31,13 @@ public class TR2ModelExporter : AbstractTRModelExporter<TR2Entities, TR2Level, T
             modelEntity = Data.TranslateAlias(modelEntity);
         }
 
-        _modelHandler.Export(level, definition, modelEntity);
-        _meshHandler.Export(level, definition);
-        _colourHandler.Export(level, definition);
+        ModelTransportHandler.Export(level, definition, modelEntity);
+        MeshTransportHandler.Export(level, definition);
+        ColourTransportHandler.Export(level, definition);
         _textureHandler.Export(level, definition, TextureClassifier, Data.GetSpriteDependencies(modelEntity), Data.GetIgnorableTextureIndices(modelEntity, LevelName));
-        _animationHandler.Export(level, definition);
-        _cinematicHandler.Export(level, definition, Data.GetCinematicEntities());
-        _soundHandler.Export(level, definition, Data.GetHardcodedSounds(definition.Alias));
+        AnimationTransportHandler.Export(level, definition);
+        CinematicTransportHandler.Export(level, definition, Data.GetCinematicEntities());
+        SoundTransportHandler.Export(level, definition, Data.GetHardcodedSounds(definition.Alias));
 
         return definition;
     }
@@ -59,7 +59,7 @@ public class TR2ModelExporter : AbstractTRModelExporter<TR2Entities, TR2Level, T
         }
     }
 
-    private void AmendDXtre3DFlameTextures(TR2ModelDefinition definition)
+    private static void AmendDXtre3DFlameTextures(TR2ModelDefinition definition)
     {
         if (!definition.SpriteSequences.ContainsKey(TR2Entities.Flame_S_H))
         {
