@@ -41,10 +41,10 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
 
     protected static void LoadMapping(AbstractTextureMapping<E, L> levelMapping, string mapFile, TextureDatabase<E> database, Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> predefinedMapping = null, List<E> entitiesToIgnore = null)
     {
-        Dictionary<DynamicTextureSource, DynamicTextureTarget> dynamicMapping = new Dictionary<DynamicTextureSource, DynamicTextureTarget>();
-        Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> staticMapping = new Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>>();
-        List<ReplacementTextureTarget> replacementMapping = new List<ReplacementTextureTarget>();
-        Dictionary<StaticTextureSource<E>, Dictionary<int, List<LandmarkTextureTarget>>> landmarkMapping = new Dictionary<StaticTextureSource<E>, Dictionary<int, List<LandmarkTextureTarget>>>();
+        Dictionary<DynamicTextureSource, DynamicTextureTarget> dynamicMapping = new();
+        Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>> staticMapping = new();
+        List<ReplacementTextureTarget> replacementMapping = new();
+        Dictionary<StaticTextureSource<E>, Dictionary<int, List<LandmarkTextureTarget>>> landmarkMapping = new();
         Color skyBoxColour = _defaultSkyBox;
 
         Dictionary<string, object> rootMapping = JsonConvert.DeserializeObject<Dictionary<string, object>>(File.ReadAllText(mapFile));
@@ -56,7 +56,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
             foreach (string sourceName in mapping.Keys)
             {
                 DynamicTextureSource source = database.GetDynamicSource(sourceName);
-                DynamicTextureTarget target = new DynamicTextureTarget
+                DynamicTextureTarget target = new()
                 {
                     DefaultTileTargets = JsonConvert.DeserializeObject<Dictionary<int, List<Rectangle>>>(mapping[sourceName]["Default"].ToString())
                 };
@@ -102,7 +102,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         // imports ready for it, we need to make sure they are ignored.
         if (entitiesToIgnore != null)
         {
-            List<StaticTextureSource<E>> sources = new List<StaticTextureSource<E>>(staticMapping.Keys);
+            List<StaticTextureSource<E>> sources = new(staticMapping.Keys);
             for (int i = 0; i < sources.Count; i++)
             {
                 StaticTextureSource<E> source = sources[i];
@@ -203,7 +203,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
     {
         TRColour[] palette = GetPalette8();
         ISet<ushort> colourIndices = new HashSet<ushort>();
-        Dictionary<int, int> remapIndices = new Dictionary<int, int>();
+        Dictionary<int, int> remapIndices = new();
 
         foreach (TRMesh mesh in meshes)
         {
@@ -317,7 +317,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                     }
                 }
 
-                Dictionary<int, int> remapIndices = new Dictionary<int, int>();
+                Dictionary<int, int> remapIndices = new();
                 foreach (Color targetColour in source.EntityColourMap[entity].Keys)
                 {
                     int matchedIndex = -1;
@@ -374,12 +374,12 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                     continue;
                 }
 
-                Dictionary<int, int> remapIndices = new Dictionary<int, int>();
+                Dictionary<int, int> remapIndices = new();
 
                 TRColour[] palette = GetPalette8();
                 foreach (Color targetColour in source.EntityColourMap8[entity].Keys)
                 {
-                    TRColour col = new TRColour
+                    TRColour col = new()
                     {
                         Red = (byte)(targetColour.R / 4),
                         Green = (byte)(targetColour.G / 4),

@@ -12,7 +12,7 @@ public class TR1PaletteManager : IDisposable
     private const double _weightG = 1;
     private const double _weightB = 1;
 
-    private readonly Rectangle _defaultBounds = new Rectangle(0, 0, 256, 256);
+    private readonly Rectangle _defaultBounds = new(0, 0, 256, 256);
 
     public TR1Level Level { get; set; }
     public Dictionary<int, Bitmap> ChangedTiles { get; set; }
@@ -44,7 +44,7 @@ public class TR1PaletteManager : IDisposable
         for (int i = 0; i < Level.Images8.Length; i++)
         {
             Bitmap bmp = ChangedTiles.ContainsKey(i) ? ChangedTiles[i] : GetOriginalTile(i);
-            BitmapGraphics bg = new BitmapGraphics(bmp);
+            BitmapGraphics bg = new(bmp);
             bg.Scan(_defaultBounds, (c, x, y) =>
             {
                 int colIndex;
@@ -66,7 +66,7 @@ public class TR1PaletteManager : IDisposable
         }
 
         // Grab meshes we aren't interested in - but don't remove Lara's hips e.g. Atlantean spawns
-        List<TRMesh> ignoredMeshes = new List<TRMesh>();
+        List<TRMesh> ignoredMeshes = new();
         TRMesh[] laraMeshes = TRMeshUtilities.GetModelMeshes(Level, TREntities.Lara);
         foreach (TREntities entity in ObsoleteModels)
         {

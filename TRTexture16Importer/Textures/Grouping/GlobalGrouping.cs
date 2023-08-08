@@ -34,7 +34,7 @@ public class GlobalGrouping<E>
             List<Dictionary<string, object>> groupListData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(globalData["GlobalGrouping"].ToString());
             foreach (IDictionary<string, object> groupData in groupListData)
             {
-                TextureGrouping<E> grouping = new TextureGrouping<E>
+                TextureGrouping<E> grouping = new()
                 {
                     Leader = database.GetStaticSource(groupData["Leader"].ToString())
                 };
@@ -60,7 +60,7 @@ public class GlobalGrouping<E>
                     Dictionary<string, Dictionary<string, string>> alternatives = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(groupData["ThemeAlternatives"].ToString());
                     foreach (string theme in alternatives.Keys)
                     {
-                        Dictionary<StaticTextureSource<E>, string> map = new Dictionary<StaticTextureSource<E>, string>();
+                        Dictionary<StaticTextureSource<E>, string> map = new();
                         foreach (string sourceName in alternatives[theme].Keys)
                         {
                             map.Add(database.GetStaticSource(sourceName), alternatives[theme][sourceName]);
@@ -76,7 +76,7 @@ public class GlobalGrouping<E>
 
     public List<TextureGrouping<E>> GetGrouping(IEnumerable<StaticTextureSource<E>> sources)
     {
-        List<TextureGrouping<E>> groupSet = new List<TextureGrouping<E>>();
+        List<TextureGrouping<E>> groupSet = new();
 
         foreach (StaticTextureSource<E> source in sources)
         {

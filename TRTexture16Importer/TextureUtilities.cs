@@ -13,7 +13,7 @@ public static class TextureUtilities
 
     public static ushort[] ImportFrom32PNG(string filename)
     {
-        using (Bitmap texture = new Bitmap(filename))
+        using (Bitmap texture = new(filename))
         {
             return ImportFromBitmap(texture);
         }
@@ -40,10 +40,10 @@ public static class TextureUtilities
 
     public static Bitmap ToBitmap(this TRTexImage8 tex, TRColour[] palette)
     {
-        Bitmap bmp = new Bitmap(_tileSize, _tileSize, PixelFormat.Format32bppArgb);
+        Bitmap bmp = new(_tileSize, _tileSize, PixelFormat.Format32bppArgb);
         BitmapData bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
-        List<byte> pixelCollection = new List<byte>();
+        List<byte> pixelCollection = new();
         foreach (byte colourIndex in tex.Pixels)
         {
             TRColour c = palette[colourIndex];
@@ -61,10 +61,10 @@ public static class TextureUtilities
 
     public static Bitmap ToBitmap(this TRTexImage16 tex)
     {
-        Bitmap bmp = new Bitmap(_tileSize, _tileSize, PixelFormat.Format32bppArgb);
+        Bitmap bmp = new(_tileSize, _tileSize, PixelFormat.Format32bppArgb);
         BitmapData bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
-        List<byte> pixelCollection = new List<byte>();
+        List<byte> pixelCollection = new();
 
         foreach (Textile16Pixel px in tex.To32BPPFormat())
         {

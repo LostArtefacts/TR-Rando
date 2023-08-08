@@ -112,7 +112,7 @@ public class BitmapGraphics : IDisposable
             sourceRectangle.Height = target.Clip.Height;
         }
 
-        Rectangle targetRectangle = new Rectangle(target.X, target.Y, sourceRectangle.Width, sourceRectangle.Height);
+        Rectangle targetRectangle = new(target.X, target.Y, sourceRectangle.Width, sourceRectangle.Height);
         
         if (target.Clear)
         {
@@ -127,7 +127,7 @@ public class BitmapGraphics : IDisposable
 
     public void Delete(Rectangle rect)
     {
-        GraphicsPath path = new GraphicsPath();
+        GraphicsPath path = new();
         path.AddRectangle(rect);
         Graphics.SetClip(path);
         Graphics.Clear(Color.Transparent);

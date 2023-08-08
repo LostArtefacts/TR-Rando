@@ -18,7 +18,7 @@ public class TR3TextureMapping : AbstractTextureMapping<TR3Entities, TR3Level>
             return null;
         }
 
-        TR3TextureMapping mapping = new TR3TextureMapping(level);
+        TR3TextureMapping mapping = new(level);
         LoadMapping(mapping, mapFile, database, predefinedMapping, entitiesToIgnore);
         mapping.EntityMap = entityMap;
         return mapping;

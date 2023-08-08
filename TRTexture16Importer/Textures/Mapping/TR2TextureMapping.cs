@@ -18,7 +18,7 @@ public class TR2TextureMapping : AbstractTextureMapping<TR2Entities, TR2Level>
             return null;
         }
 
-        TR2TextureMapping mapping = new TR2TextureMapping(level);
+        TR2TextureMapping mapping = new(level);
         LoadMapping(mapping, mapFile, database, predefinedMapping, entitiesToIgnore);
         return mapping;
     }

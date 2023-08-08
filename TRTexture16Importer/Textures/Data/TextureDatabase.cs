@@ -60,7 +60,7 @@ public class TextureDatabase<E> : IDisposable
 
     public StaticTextureSource<E>[] GetStaticSource(E entity)
     {
-        List<StaticTextureSource<E>> sources = new List<StaticTextureSource<E>>();
+        List<StaticTextureSource<E>> sources = new();
         if (_entityMap.ContainsKey(entity))
         {
             foreach (string src in _entityMap[entity])

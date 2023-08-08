@@ -4,7 +4,7 @@ namespace TRTexture16Importer.Textures;
 
 public class StaticTextureTarget
 {
-    private static readonly Rectangle _noClip = new Rectangle(-1, -1, 0, 0);
+    private static readonly Rectangle _noClip = new(-1, -1, 0, 0);
 
     public int Segment { get; set; }
     public int Tile { get; set; }
