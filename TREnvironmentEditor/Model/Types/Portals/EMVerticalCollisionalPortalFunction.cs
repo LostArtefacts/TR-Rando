@@ -16,7 +16,7 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         short ceilingRoom = data.ConvertRoom(Ceiling.Room);
@@ -62,7 +62,7 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         short ceilingRoom = data.ConvertRoom(Ceiling.Room);
@@ -108,7 +108,7 @@ public class EMVerticalCollisionalPortalFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         short ceilingRoom = data.ConvertRoom(Ceiling.Room);

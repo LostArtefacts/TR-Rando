@@ -8,7 +8,7 @@ public class EMLocationExpander
 
     public List<EMLocation> Expand()
     {
-        List<EMLocation> locs = new List<EMLocation> { Location };
+        List<EMLocation> locs = new() { Location };
         for (int i = 0; i < ExpandX; i++)
         {
             for (int j = 0; j < ExpandZ; j++)

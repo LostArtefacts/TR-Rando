@@ -14,10 +14,10 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
-        Dictionary<TRRoomSector, List<ushort>> sectorMap = new Dictionary<TRRoomSector, List<ushort>>();
+        Dictionary<TRRoomSector, List<ushort>> sectorMap = new();
 
         foreach (short fromRoomNumber in Portals.Keys)
         {
@@ -51,10 +51,10 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
 
         EMLevelData data = GetData(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
-        Dictionary<TRRoomSector, List<ushort>> sectorMap = new Dictionary<TRRoomSector, List<ushort>>();
+        Dictionary<TRRoomSector, List<ushort>> sectorMap = new();
 
         // Because some sectors may be shared, we need to call GetRoomSector to get all the sectors we are
         // interested in first before making any changes.
@@ -87,10 +87,10 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
-        Dictionary<TRRoomSector, List<ushort>> sectorMap = new Dictionary<TRRoomSector, List<ushort>>();
+        Dictionary<TRRoomSector, List<ushort>> sectorMap = new();
 
         foreach (short fromRoomNumber in Portals.Keys)
         {

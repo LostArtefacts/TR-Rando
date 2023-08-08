@@ -18,7 +18,7 @@ public class EMMoveSlotFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         EntityIndex = data.ConvertEntity(EntityIndex);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         TREntity slot = level.Entities[EntityIndex];
@@ -47,7 +47,7 @@ public class EMMoveSlotFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         EntityIndex = data.ConvertEntity(EntityIndex);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         TR2Entity slot = level.Entities[EntityIndex];
@@ -88,7 +88,7 @@ public class EMMoveSlotFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         EntityIndex = data.ConvertEntity(EntityIndex);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         TR2Entity slot = level.Entities[EntityIndex];

@@ -23,7 +23,7 @@ public class EMAddEntityFunction : BaseEMFunction
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
             {
-                FDControl floorData = new FDControl();
+                FDControl floorData = new();
                 floorData.ParseFromLevel(level);
                 short room = data.ConvertRoom(Location.Room);
                 TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, room, level, floorData);
@@ -53,7 +53,7 @@ public class EMAddEntityFunction : BaseEMFunction
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
             {
-                FDControl floorData = new FDControl();
+                FDControl floorData = new();
                 floorData.ParseFromLevel(level);
                 short room = data.ConvertRoom(Location.Room);
                 TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, room, level, floorData);
@@ -83,7 +83,7 @@ public class EMAddEntityFunction : BaseEMFunction
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
             {
-                FDControl floorData = new FDControl();
+                FDControl floorData = new();
                 floorData.ParseFromLevel(level);
                 short room = data.ConvertRoom(Location.Room);
                 TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, room, level, floorData);

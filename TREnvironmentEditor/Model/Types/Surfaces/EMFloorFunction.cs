@@ -48,7 +48,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         EMLevelData data = GetData(level);
 
-        FDControl fdc = new FDControl();
+        FDControl fdc = new();
         fdc.ParseFromLevel(level);
 
         short roomNumber = data.ConvertRoom(Location.Room);
@@ -62,7 +62,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         short y = (short)(sector.Floor * ClickSize);
 
         List<TRRoomVertex> vertices = room.RoomData.Vertices.ToList();
-        List<ushort> oldVertIndices = new List<ushort>();
+        List<ushort> oldVertIndices = new();
 
         List<TRVertex> defVerts = GetTileVertices(x, y, z, false);
         // Check the Y vals are unanimous because we currently only support raising/lowering flat surfaces
@@ -88,12 +88,12 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         // Create new vertices - we can't just change the original vertex Y vals as adjoining tiles also use 
         // those and we need the originals for the new sides to this platform.
-        List<ushort> newVertIndices = new List<ushort>();
+        List<ushort> newVertIndices = new();
         foreach (ushort vert in oldVertIndices)
         {
             TRRoomVertex oldRoomVertex = vertices[vert];
             TRVertex oldVert = vertices[vert].Vertex;
-            TRVertex newVertex = new TRVertex
+            TRVertex newVertex = new()
             {
                 X = oldVert.X,
                 Y = (short)(oldVert.Y + clickChange),
@@ -236,7 +236,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             uint zmin = (uint)(room.Info.Z + (sectorIndex % room.NumZSectors) * SectorSize);
             uint xmax = (uint)(xmin + SectorSize);
             uint zmax = (uint)(zmin + SectorSize);
-            TRBox box = new TRBox
+            TRBox box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
@@ -285,7 +285,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         EMLevelData data = GetData(level);
 
-        FDControl fdc = new FDControl();
+        FDControl fdc = new();
         fdc.ParseFromLevel(level);
 
         short roomNumber = data.ConvertRoom(Location.Room);
@@ -299,7 +299,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         short y = (short)(sector.Floor * ClickSize);
 
         List<TR2RoomVertex> vertices = room.RoomData.Vertices.ToList();
-        List<ushort> oldVertIndices = new List<ushort>();
+        List<ushort> oldVertIndices = new();
 
         List<TRVertex> defVerts = GetTileVertices(x, y, z, false);
         // Check the Y vals are unanimous because we currently only support raising/lowering flat surfaces
@@ -325,12 +325,12 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         // Create new vertices - we can't just change the original vertex Y vals as adjoining tiles also use 
         // those and we need the originals for the new sides to this platform.
-        List<ushort> newVertIndices = new List<ushort>();
+        List<ushort> newVertIndices = new();
         foreach (ushort vert in oldVertIndices)
         {
             TR2RoomVertex oldRoomVertex = vertices[vert];
             TRVertex oldVert = vertices[vert].Vertex;
-            TRVertex newVertex = new TRVertex
+            TRVertex newVertex = new()
             {
                 X = oldVert.X,
                 Y = (short)(oldVert.Y + clickChange),
@@ -471,7 +471,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             // Make a new box for the sector.
             byte xmin = (byte)((room.Info.X / SectorSize) + (sectorIndex / room.NumZSectors));
             byte zmin = (byte)((room.Info.Z / SectorSize) + (sectorIndex % room.NumZSectors));
-            TR2Box box = new TR2Box
+            TR2Box box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
@@ -542,7 +542,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         EMLevelData data = GetData(level);
 
-        FDControl fdc = new FDControl();
+        FDControl fdc = new();
         fdc.ParseFromLevel(level);
 
         short roomNumber = data.ConvertRoom(Location.Room);
@@ -556,7 +556,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         short y = (short)(sector.Floor * ClickSize);
 
         List<TR3RoomVertex> vertices = room.RoomData.Vertices.ToList();
-        List<ushort> oldVertIndices = new List<ushort>();
+        List<ushort> oldVertIndices = new();
 
         List<TRVertex> defVerts = GetTileVertices(x, y, z, false);
         // Check the Y vals are unanimous because we currently only support raising/lowering flat surfaces
@@ -577,12 +577,12 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
 
         // Create new vertices - we can't just change the original vertex Y vals as adjoining tiles also use 
         // those and we need the originals for the new sides to this platform.
-        List<ushort> newVertIndices = new List<ushort>();
+        List<ushort> newVertIndices = new();
         foreach (ushort vert in oldVertIndices)
         {
             TR3RoomVertex oldRoomVertex = vertices[vert];
             TRVertex oldVert = vertices[vert].Vertex;
-            TRVertex newVertex = new TRVertex
+            TRVertex newVertex = new()
             {
                 X = oldVert.X,
                 Y = (short)(oldVert.Y + clickChange),
@@ -723,7 +723,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
             // Make a new box for the sector.
             byte xmin = (byte)((room.Info.X / SectorSize) + (sectorIndex / room.NumZSectors));
             byte zmin = (byte)((room.Info.Z / SectorSize) + (sectorIndex % room.NumZSectors));
-            TR2Box box = new TR2Box
+            TR2Box box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,

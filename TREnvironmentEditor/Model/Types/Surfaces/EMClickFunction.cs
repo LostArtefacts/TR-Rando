@@ -22,7 +22,7 @@ public class EMClickFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         _locations = InitialiseLocations(data);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in _locations)
@@ -53,7 +53,7 @@ public class EMClickFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         _locations = InitialiseLocations(data);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in _locations)
@@ -84,7 +84,7 @@ public class EMClickFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         _locations = InitialiseLocations(data);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in _locations)
@@ -112,7 +112,7 @@ public class EMClickFunction : BaseEMFunction
 
     protected List<EMLocation> InitialiseLocations(EMLevelData data)
     {
-        List<EMLocation> locations = new List<EMLocation>();
+        List<EMLocation> locations = new();
         if (Location != null)
         {
             locations.Add(Location);

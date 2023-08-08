@@ -91,7 +91,7 @@ public class EMFloodFunction : BaseWaterFunction
     public override void ApplyToLevel(TR3Level level)
     {
         EMLevelData data = GetData(level);
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (int roomNumber in RoomNumbers)

@@ -16,7 +16,7 @@ public class EMRemoveTriggerActionFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDActionListItem action = InitialiseActionItem(data);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         foreach (EMLocation location in Locations)
@@ -33,7 +33,7 @@ public class EMRemoveTriggerActionFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDActionListItem action = InitialiseActionItem(data);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         foreach (EMLocation location in Locations)
@@ -50,7 +50,7 @@ public class EMRemoveTriggerActionFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDActionListItem action = InitialiseActionItem(data);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         foreach (EMLocation location in Locations)

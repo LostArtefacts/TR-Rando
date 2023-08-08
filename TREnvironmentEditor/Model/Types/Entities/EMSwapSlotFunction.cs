@@ -23,7 +23,7 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
 
         // We can only swap if the slots are corresponding done/not done types.
         // So for now, just check that one doesn't have any triggers
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         TRRoomSector slot1Sector = FDUtilities.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room, level, control);
@@ -62,7 +62,7 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
 
         // We can only swap if the slots are corresponding done/not done types.
         // So for now, just check that one doesn't have any triggers
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         TRRoomSector slot1Sector = FDUtilities.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room, level, control);
@@ -101,7 +101,7 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
 
         // We can only swap if the slots are corresponding done/not done types.
         // So for now, just check that one doesn't have any triggers
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         TRRoomSector slot1Sector = FDUtilities.GetRoomSector(slot1.X, slot1.Y, slot1.Z, slot1.Room, level, control);
@@ -140,7 +140,7 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
 
     private void SwapSlots(TREntity slot1, TREntity slot2, EMLevelData data)
     {
-        EMLocation temp = new EMLocation
+        EMLocation temp = new()
         {
             X = slot1.X,
             Y = slot1.Y,
@@ -164,7 +164,7 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
 
     private void SwapSlots(TR2Entity slot1, TR2Entity slot2, EMLevelData data)
     {
-        EMLocation temp = new EMLocation
+        EMLocation temp = new()
         {
             X = slot1.X,
             Y = slot1.Y,

@@ -14,8 +14,8 @@ public class EMRemoveFaceFunction : BaseEMFunction
         foreach (int roomNumber in GeometryMap.Keys)
         {
             TRRoom room = level.Rooms[data.ConvertRoom(roomNumber)];
-            List<int> rectangleRemovals = new List<int>();
-            List<int> triangleRemovals = new List<int>();
+            List<int> rectangleRemovals = new();
+            List<int> triangleRemovals = new();
 
             foreach (EMTextureFaceType faceType in GeometryMap[roomNumber].Keys)
             {
@@ -50,8 +50,8 @@ public class EMRemoveFaceFunction : BaseEMFunction
         foreach (int roomNumber in GeometryMap.Keys)
         {
             TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-            List<int> rectangleRemovals = new List<int>();
-            List<int> triangleRemovals = new List<int>();
+            List<int> rectangleRemovals = new();
+            List<int> triangleRemovals = new();
 
             foreach (EMTextureFaceType faceType in GeometryMap[roomNumber].Keys)
             {
@@ -86,8 +86,8 @@ public class EMRemoveFaceFunction : BaseEMFunction
         foreach (int roomNumber in GeometryMap.Keys)
         {
             TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-            List<int> rectangleRemovals = new List<int>();
-            List<int> triangleRemovals = new List<int>();
+            List<int> rectangleRemovals = new();
+            List<int> triangleRemovals = new();
 
             foreach (EMTextureFaceType faceType in GeometryMap[roomNumber].Keys)
             {

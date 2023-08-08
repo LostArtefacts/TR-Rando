@@ -21,7 +21,7 @@ public class EMTrigger
 
     public FDTriggerEntry ToFDEntry(EMLevelData levelData)
     {
-        FDTriggerEntry entry = new FDTriggerEntry
+        FDTriggerEntry entry = new()
         {
             Setup = new FDSetup(FDFunctions.Trigger),
             TrigType = TrigType,
@@ -45,7 +45,7 @@ public class EMTrigger
 
     public static EMTrigger FromFDEntry(FDTriggerEntry entry)
     {
-        EMTrigger trigger = new EMTrigger
+        EMTrigger trigger = new()
         {
             TrigType = entry.TrigType,
             OneShot = entry.TrigSetup.OneShot,

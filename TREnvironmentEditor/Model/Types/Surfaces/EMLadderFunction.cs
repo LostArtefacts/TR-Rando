@@ -23,7 +23,7 @@ public class EMLadderFunction : EMRefaceFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, control);
@@ -42,7 +42,7 @@ public class EMLadderFunction : EMRefaceFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, data.ConvertRoom(Location.Room), level, control);
@@ -85,7 +85,7 @@ public class EMLadderFunction : EMRefaceFunction
         }
         else
         {
-            FDClimbEntry climbEntry = new FDClimbEntry
+            FDClimbEntry climbEntry = new()
             {
                 Setup = new FDSetup(FDFunctions.ClimbableWalls),
                 IsPositiveX = IsPositiveX,

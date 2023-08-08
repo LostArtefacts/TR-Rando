@@ -17,7 +17,7 @@ public class EMSlantFunction : EMClickFunction
         // Apply click changes first
         base.ApplyToLevel(level);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in _locations)
@@ -33,7 +33,7 @@ public class EMSlantFunction : EMClickFunction
     {
         base.ApplyToLevel(level);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in _locations)
@@ -49,7 +49,7 @@ public class EMSlantFunction : EMClickFunction
     {
         base.ApplyToLevel(level);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in _locations)
@@ -68,7 +68,7 @@ public class EMSlantFunction : EMClickFunction
             floorData.CreateFloorData(sector);
         }
 
-        FDSlantEntry newSlant = new FDSlantEntry
+        FDSlantEntry newSlant = new()
         {
             Setup = new FDSetup(SlantType == FDSlantEntryType.FloorSlant ? FDFunctions.FloorSlant : FDFunctions.CeilingSlant),
             Type = SlantType
@@ -119,7 +119,7 @@ public class EMSlantFunction : EMClickFunction
 
     protected override int GetEntityYShift(int clicks)
     {
-        List<sbyte> corners = new List<sbyte> { 0, 0, 0, 0 };
+        List<sbyte> corners = new() { 0, 0, 0, 0 };
         if (XSlant.HasValue && XSlant > 0)
         {
             corners[0] += XSlant.Value;

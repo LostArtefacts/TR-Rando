@@ -22,7 +22,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        TRRoom room = new TRRoom
+        TRRoom room = new()
         {
             NumXSectors = Width,
             NumZSectors = Depth,
@@ -67,20 +67,20 @@ public class EMCreateRoomFunction : BaseEMFunction
         sbyte ceiling = (sbyte)(room.Info.YTop / 256);
         sbyte floor = (sbyte)(room.Info.YBottom / 256);
 
-        List<TRFace4> faces = new List<TRFace4>();
-        List<TRVertex> vertices = new List<TRVertex>();
+        List<TRFace4> faces = new();
+        List<TRVertex> vertices = new();
 
         // Make the sectors first
         List<TRRoomSector> sectors = GenerateSectors(ceiling, floor);
         room.Sectors = sectors.ToArray();
 
         // Generate the box, zone and overlap data
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         EMLevelData data = GetData(level);
         TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-        BoxGenerator generator = new BoxGenerator();
+        BoxGenerator generator = new();
         generator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
@@ -106,7 +106,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        TR2Room room = new TR2Room
+        TR2Room room = new()
         {
             NumXSectors = Width,
             NumZSectors = Depth,
@@ -153,20 +153,20 @@ public class EMCreateRoomFunction : BaseEMFunction
         sbyte ceiling = (sbyte)(room.Info.YTop / 256);
         sbyte floor = (sbyte)(room.Info.YBottom / 256);
 
-        List<TRFace4> faces = new List<TRFace4>();
-        List<TRVertex> vertices = new List<TRVertex>();
+        List<TRFace4> faces = new();
+        List<TRVertex> vertices = new();
 
         // Make the sectors first
         List<TRRoomSector> sectors = GenerateSectors(ceiling, floor);
         room.SectorList = sectors.ToArray();
 
         // Generate the box, zone and overlap data
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         EMLevelData data = GetData(level);
         TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-        BoxGenerator generator = new BoxGenerator();
+        BoxGenerator generator = new();
         generator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
@@ -194,7 +194,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        TR3Room room = new TR3Room
+        TR3Room room = new()
         {
             NumXSectors = Width,
             NumZSectors = Depth,
@@ -240,20 +240,20 @@ public class EMCreateRoomFunction : BaseEMFunction
         sbyte ceiling = (sbyte)(room.Info.YTop / 256);
         sbyte floor = (sbyte)(room.Info.YBottom / 256);
 
-        List<TRFace4> faces = new List<TRFace4>();
-        List<TRVertex> vertices = new List<TRVertex>();
+        List<TRFace4> faces = new();
+        List<TRVertex> vertices = new();
 
         // Make the sectors first
         List<TRRoomSector> sectors = GenerateSectors(ceiling, floor);
         room.Sectors = sectors.ToArray();
 
         // Generate the box, zone and overlap data
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         EMLevelData data = GetData(level);
         TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-        BoxGenerator generator = new BoxGenerator();
+        BoxGenerator generator = new();
         generator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
@@ -281,7 +281,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
     private List<TRRoomSector> GenerateSectors(sbyte ceiling, sbyte floor)
     {
-        List<TRRoomSector> sectors = new List<TRRoomSector>();
+        List<TRRoomSector> sectors = new();
         for (int x = 0; x < Width; x++)
         {
             for (int z = 0; z < Depth; z++)
@@ -467,7 +467,7 @@ public class EMCreateRoomFunction : BaseEMFunction
                 texture = Textures.GetWall(height);
                 break;
         }
-        TRFace4 face = new TRFace4
+        TRFace4 face = new()
         {
             Texture = texture,
             Vertices = new ushort[]

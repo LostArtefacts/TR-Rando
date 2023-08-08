@@ -14,7 +14,7 @@ public class EMSecretRoomCondition : BaseEMCondition
 
     protected override bool Evaluate(TR1Level level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (TRRoomSector sector in level.Rooms[RoomIndex].Sectors)
@@ -48,11 +48,10 @@ public class EMSecretRoomCondition : BaseEMCondition
             // It's difficult to tell if a particular model is being used for secret pickups,
             // so instead we check the FD under each entity in the room to see if it triggers
             // a secret found.
-            FDControl floorData = new FDControl();
+            FDControl floorData = new();
             floorData.ParseFromLevel(level);
 
-            Predicate<FDEntry> pred = new Predicate<FDEntry>
-            (
+            Predicate<FDEntry> pred = new(
                 e => 
                     e is FDTriggerEntry trig && trig.TrigType == FDTrigType.Pickup
                  && trig.TrigActionList.Count > 1

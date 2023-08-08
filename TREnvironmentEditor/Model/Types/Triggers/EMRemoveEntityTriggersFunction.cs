@@ -16,7 +16,7 @@ public class EMRemoveEntityTriggersFunction : BaseEMFunction
         List<int> entities = GetEntities(data);
         List<FDTrigType> excludedTypes = GetExcludedTypes();
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (TRRoom room in level.Rooms)
@@ -33,7 +33,7 @@ public class EMRemoveEntityTriggersFunction : BaseEMFunction
         List<int> entities = GetEntities(data);
         List<FDTrigType> excludedTypes = GetExcludedTypes();
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (TR2Room room in level.Rooms)
@@ -50,7 +50,7 @@ public class EMRemoveEntityTriggersFunction : BaseEMFunction
         List<int> entities = GetEntities(data);
         List<FDTrigType> excludedTypes = GetExcludedTypes();
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (TR3Room room in level.Rooms)
@@ -63,7 +63,7 @@ public class EMRemoveEntityTriggersFunction : BaseEMFunction
 
     private List<int> GetEntities(EMLevelData data)
     {
-        List<int> entities = new List<int>();
+        List<int> entities = new();
         if (Entities != null)
         {
             entities.AddRange(Entities.Select(e => (int)data.ConvertEntity(e)));
@@ -73,7 +73,7 @@ public class EMRemoveEntityTriggersFunction : BaseEMFunction
 
     private List<FDTrigType> GetExcludedTypes()
     {
-        List<FDTrigType> types = new List<FDTrigType>();
+        List<FDTrigType> types = new();
         if (ExcludedTypes != null)
         {
             types.AddRange(ExcludedTypes);

@@ -16,7 +16,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);
@@ -59,7 +59,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);
@@ -102,7 +102,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         TRRoomSector baseSector = FDUtilities.GetRoomSector(BaseLocation.X, BaseLocation.Y, BaseLocation.Z, data.ConvertRoom(BaseLocation.Room), level, control);

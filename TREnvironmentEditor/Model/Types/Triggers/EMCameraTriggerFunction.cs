@@ -39,7 +39,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
             cameraIndex = (ushort)data.ConvertCamera(CameraIndex);
         }
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         if (AttachToItems != null)
@@ -93,7 +93,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
             cameraIndex = (ushort)data.ConvertCamera(CameraIndex);
         }
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         if (AttachToItems != null)
@@ -147,7 +147,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
             cameraIndex = (ushort)data.ConvertCamera(CameraIndex);
         }
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         if (AttachToItems != null)

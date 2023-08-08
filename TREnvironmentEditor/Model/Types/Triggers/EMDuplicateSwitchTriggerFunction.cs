@@ -21,7 +21,7 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         base.ApplyToLevel(level);
 
         // Go one step further and replace the duplicated trigger with the new switch ref
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         UpdateTriggers(data, control, delegate (EMLocation location)
@@ -42,7 +42,7 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         base.ApplyToLevel(level);
 
         // Go one step further and replace the duplicated trigger with the new switch ref
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         UpdateTriggers(data, control, delegate (EMLocation location)
@@ -61,7 +61,7 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
 
         base.ApplyToLevel(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         UpdateTriggers(data, control, delegate (EMLocation location)

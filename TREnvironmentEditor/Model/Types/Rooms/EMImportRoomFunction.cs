@@ -46,7 +46,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         int ydiff = NewLocation.Y - roomDef.Room.Info.YBottom;
         int zdiff = NewLocation.Z - roomDef.Room.Info.Z;
 
-        TR2Room newRoom = new TR2Room
+        TR2Room newRoom = new()
         {
             AlternateRoom = -1,
             AmbientIntensity = roomDef.Room.AmbientIntensity,
@@ -182,7 +182,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 
         // Boxes, zones and sectors
         EMLevelData data = GetData(level);
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         ushort newBoxIndex = ushort.MaxValue;
@@ -204,7 +204,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             byte zmin = (byte)(newRoom.Info.Z / SectorSize);
             byte xmax = (byte)(xmin + newRoom.NumXSectors);
             byte zmax = (byte)(zmin + newRoom.NumZSectors);
-            TR2Box box = new TR2Box
+            TR2Box box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
@@ -251,7 +251,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             if (roomDef.FloorData.ContainsKey(fdIndex))
             {
                 List<FDEntry> entries = roomDef.FloorData[fdIndex];
-                List<FDEntry> newEntries = new List<FDEntry>();
+                List<FDEntry> newEntries = new();
                 foreach (FDEntry entry in entries)
                 {
                     switch ((FDFunctions)entry.Setup.Function)
@@ -324,7 +324,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
         int ydiff = NewLocation.Y - roomDef.Room.Info.YBottom;
         int zdiff = NewLocation.Z - roomDef.Room.Info.Z;
 
-        TR3Room newRoom = new TR3Room
+        TR3Room newRoom = new()
         {
             AlternateRoom = -1,
             AmbientIntensity = roomDef.Room.AmbientIntensity,
@@ -448,7 +448,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
 
         // Boxes, zones and sectors
         EMLevelData data = GetData(level);
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
@@ -472,7 +472,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             byte zmin = (byte)(newRoom.Info.Z / SectorSize);
             byte xmax = (byte)(xmin + newRoom.NumXSectors);
             byte zmax = (byte)(zmin + newRoom.NumZSectors);
-            TR2Box box = new TR2Box
+            TR2Box box = new()
             {
                 XMin = xmin,
                 ZMin = zmin,
@@ -524,7 +524,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             if (roomDef.FloorData.ContainsKey(fdIndex))
             {
                 List<FDEntry> entries = roomDef.FloorData[fdIndex];
-                List<FDEntry> newEntries = new List<FDEntry>();
+                List<FDEntry> newEntries = new();
                 foreach (FDEntry entry in entries)
                 {
                     switch ((FDFunctions)entry.Setup.Function)

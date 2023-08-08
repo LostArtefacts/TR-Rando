@@ -4,7 +4,7 @@ namespace TREnvironmentEditor.Model.Types;
 
 public abstract class BaseEMRoomImportFunction : BaseEMFunction
 {
-    protected static readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings
+    protected static readonly JsonSerializerSettings _jsonSettings = new()
     {
         TypeNameHandling = TypeNameHandling.All
     };

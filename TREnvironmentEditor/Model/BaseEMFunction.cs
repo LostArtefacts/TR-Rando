@@ -30,7 +30,7 @@ public abstract class BaseEMFunction
     /// </summary>
     public List<TRVertex> GetTileVertices(short x, short y, short z, bool asCeiling)
     {
-        List<TRVertex> vertices = new List<TRVertex>
+        List<TRVertex> vertices = new()
         {
             new TRVertex { X = (short)(x + SectorSize), Y = y, Z = z },
             new TRVertex { X = x, Y = y, Z = z },
@@ -48,7 +48,7 @@ public abstract class BaseEMFunction
 
     public int CreateRoomVertex(TRRoom room, TRVertex vert, short lighting = 6574)
     {
-        TRRoomVertex v = new TRRoomVertex
+        TRRoomVertex v = new()
         {
             Lighting = lighting,
             Vertex = vert
@@ -63,7 +63,7 @@ public abstract class BaseEMFunction
 
     public int CreateRoomVertex(TR2Room room, TRVertex vert, short lighting = 6574, short lighting2 = 6574)
     {
-        TR2RoomVertex v = new TR2RoomVertex
+        TR2RoomVertex v = new()
         {
             Attributes = 32784, // This stops it shimmering if viewed from underwater, should be configurable
             Lighting = lighting,
@@ -80,7 +80,7 @@ public abstract class BaseEMFunction
 
     public int CreateRoomVertex(TR3Room room, TRVertex vert, short lighting = 6574, ushort colour = 6574, bool useCaustics = false, bool useWaveMovement = false)
     {
-        TR3RoomVertex v = new TR3RoomVertex
+        TR3RoomVertex v = new()
         {
             Attributes = 32784,
             Lighting = lighting,

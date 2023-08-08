@@ -20,7 +20,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         List<FDActionListItem> actions = InitialiseActionItems(data);
         List<EMLocation> locations = InitialiseLocations();
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in locations)
@@ -38,7 +38,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         List<FDActionListItem> actions = InitialiseActionItems(data);
         List<EMLocation> locations = InitialiseLocations();
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in locations)
@@ -56,7 +56,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
         List<FDActionListItem> actions = InitialiseActionItems(data);
         List<EMLocation> locations = InitialiseLocations();
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in locations)
@@ -70,7 +70,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
 
     private List<EMLocation> InitialiseLocations()
     {
-        List<EMLocation> locations = new List<EMLocation>();
+        List<EMLocation> locations = new();
         if (Location != null)
         {
             locations.Add(Location);
@@ -89,7 +89,7 @@ public class EMAppendTriggerActionFunction : BaseEMFunction
 
     private List<FDActionListItem> InitialiseActionItems(EMLevelData data)
     {
-        List<FDActionListItem> actions = new List<FDActionListItem>();
+        List<FDActionListItem> actions = new();
         foreach (EMTriggerAction action in Actions)
         {
             actions.Add(action.ToFDAction(data));

@@ -34,7 +34,7 @@ public class EMTextureGroup
 
     public ushort GetWall(int height)
     {
-        List<ushort> temp = new List<ushort> { Wall1, Wall2, Wall3, Wall4 };
+        List<ushort> temp = new() { Wall1, Wall2, Wall3, Wall4 };
         ushort result = ushort.MaxValue;
         int clicks = Math.Min(height / 256, 4);
         

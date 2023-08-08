@@ -9,7 +9,7 @@ public class EMMoveSecretFunction : EMMovePickupFunction
     public override void ApplyToLevel(TR1Level level)
     {
         Types = new List<short>();
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
         foreach (EMLocation location in SectorLocations)
         {
@@ -26,7 +26,7 @@ public class EMMoveSecretFunction : EMMovePickupFunction
     public override void ApplyToLevel(TR2Level level)
     {
         Types = new List<short>();
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
         foreach (EMLocation location in SectorLocations)
         {
@@ -43,7 +43,7 @@ public class EMMoveSecretFunction : EMMovePickupFunction
     public override void ApplyToLevel(TR3Level level)
     {
         Types = new List<short>();
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
         foreach (EMLocation location in SectorLocations)
         {

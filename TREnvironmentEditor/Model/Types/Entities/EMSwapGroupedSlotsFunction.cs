@@ -15,10 +15,10 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseEntityMap(data);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        Dictionary<short, SlotInfo> slotInfo = new Dictionary<short, SlotInfo>();
+        Dictionary<short, SlotInfo> slotInfo = new();
         foreach (short entityIndex in EntityMap.Keys)
         {
             TREntity entity = level.Entities[entityIndex];
@@ -48,10 +48,10 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseEntityMap(data);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        Dictionary<short, SlotInfo> slotInfo = new Dictionary<short, SlotInfo>();
+        Dictionary<short, SlotInfo> slotInfo = new();
         foreach (short entityIndex in EntityMap.Keys)
         {
             TR2Entity entity = level.Entities[entityIndex];
@@ -81,10 +81,10 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseEntityMap(data);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        Dictionary<short, SlotInfo> slotInfo = new Dictionary<short, SlotInfo>();
+        Dictionary<short, SlotInfo> slotInfo = new();
         foreach (short entityIndex in EntityMap.Keys)
         {
             TR2Entity entity = level.Entities[entityIndex];
@@ -116,7 +116,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
             throw new ArgumentException("All values must also be defined as keys to collectively move grouped slots.");
         }
 
-        Dictionary<short, short> remap = new Dictionary<short, short>();
+        Dictionary<short, short> remap = new();
         foreach (short entityIndex in EntityMap.Keys)
         {
             short index1 = data.ConvertEntity(entityIndex);

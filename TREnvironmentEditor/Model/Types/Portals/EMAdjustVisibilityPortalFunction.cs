@@ -11,19 +11,19 @@ public class EMAdjustVisibilityPortalFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        EMLevelData data = new EMLevelData { NumRooms = level.NumRooms };
+        EMLevelData data = new() { NumRooms = level.NumRooms };
         AdjustPortal(Array.Find(level.Rooms[data.ConvertRoom(BaseRoom)].Portals, p => p.AdjoiningRoom == data.ConvertRoom(AdjoiningRoom)));
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        EMLevelData data = new EMLevelData { NumRooms = level.NumRooms };
+        EMLevelData data = new() { NumRooms = level.NumRooms };
         AdjustPortal(Array.Find(level.Rooms[data.ConvertRoom(BaseRoom)].Portals, p => p.AdjoiningRoom == data.ConvertRoom(AdjoiningRoom)));
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        EMLevelData data = new EMLevelData { NumRooms = level.NumRooms };
+        EMLevelData data = new() { NumRooms = level.NumRooms };
         AdjustPortal(Array.Find(level.Rooms[data.ConvertRoom(BaseRoom)].Portals, p => p.AdjoiningRoom == data.ConvertRoom(AdjoiningRoom)));
     }
 

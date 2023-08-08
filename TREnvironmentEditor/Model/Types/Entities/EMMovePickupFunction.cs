@@ -16,7 +16,7 @@ public class EMMovePickupFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         MovePickups(level.Entities.ToList(), data, delegate (EMLocation location)
@@ -29,7 +29,7 @@ public class EMMovePickupFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         MovePickups(level.Entities.ToList(), data, delegate (EMLocation location)
@@ -42,7 +42,7 @@ public class EMMovePickupFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         MovePickups(level.Entities.ToList(), data, delegate (EMLocation location)
@@ -54,7 +54,7 @@ public class EMMovePickupFunction : BaseEMFunction
     private void MovePickups(List<TREntity> entities, EMLevelData data, Func<EMLocation, TRRoomSector> sectorGetter)
     {
         // Store the sectors we are interested in
-        Dictionary<TRRoomSector, EMLocation> sectors = new Dictionary<TRRoomSector, EMLocation>();
+        Dictionary<TRRoomSector, EMLocation> sectors = new();
         foreach (EMLocation location in SectorLocations)
         {
             TRRoomSector sector = sectorGetter.Invoke(location);
@@ -102,7 +102,7 @@ public class EMMovePickupFunction : BaseEMFunction
     private void MovePickups(List<TR2Entity> entities, EMLevelData data, Func<EMLocation, TRRoomSector> sectorGetter)
     {
         // Store the sectors we are interested in
-        Dictionary<TRRoomSector, EMLocation> sectors = new Dictionary<TRRoomSector, EMLocation>();
+        Dictionary<TRRoomSector, EMLocation> sectors = new();
         foreach (EMLocation location in SectorLocations)
         {
             TRRoomSector sector = sectorGetter.Invoke(location);

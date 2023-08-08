@@ -14,7 +14,7 @@ public class EMCreateWallFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in Locations)
@@ -50,7 +50,7 @@ public class EMCreateWallFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in Locations)
@@ -86,7 +86,7 @@ public class EMCreateWallFunction : BaseEMFunction
     {
         EMLevelData data = GetData(level);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (EMLocation location in Locations)

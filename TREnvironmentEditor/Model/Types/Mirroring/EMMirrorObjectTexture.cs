@@ -26,7 +26,7 @@ public class EMMirrorObjectTexture : BaseEMFunction
     {
         foreach (ushort textureRef in Textures)
         {
-            IndexedTRObjectTexture texture = new IndexedTRObjectTexture
+            IndexedTRObjectTexture texture = new()
             {
                 Texture = levelTextures[textureRef]
             };

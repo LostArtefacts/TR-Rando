@@ -11,7 +11,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
 
     public override void ApplyToLevel(TR1Level level)
     {
-        using (TR1TexturePacker packer = new TR1TexturePacker(level))
+        using (TR1TexturePacker packer = new(level))
         {
             ApplyOverwrites(texture =>
             {
@@ -26,7 +26,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
 
     public override void ApplyToLevel(TR2Level level)
     {
-        using (TR2TexturePacker packer = new TR2TexturePacker(level))
+        using (TR2TexturePacker packer = new(level))
         {
             ApplyOverwrites(texture =>
             {
@@ -41,7 +41,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
 
     public override void ApplyToLevel(TR3Level level)
     {
-        using (TR3TexturePacker packer = new TR3TexturePacker(level))
+        using (TR3TexturePacker packer = new(level))
         {
             ApplyOverwrites(texture =>
             {
@@ -79,7 +79,7 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
         foreach (TextureOverwrite overwrite in Overwrites)
         {
             Tuple<TexturedTile, TexturedTileSegment> segment = segmentAction(overwrite.Texture);
-            BitmapGraphics segmentBmp = new BitmapGraphics(segment.Item2.Bitmap);
+            BitmapGraphics segmentBmp = new(segment.Item2.Bitmap);
             Bitmap clipBmp = segmentBmp.Extract(overwrite.Clip);
 
             foreach (ushort targetTexture in overwrite.Targets.Keys)

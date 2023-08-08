@@ -18,7 +18,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
             return;
         }
 
-        TR1ModelImporter importer = new TR1ModelImporter
+        TR1ModelImporter importer = new()
         {
             Level = level,
             ClearUnusedSprites = false,
@@ -39,7 +39,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
             return;
         }
 
-        TR2ModelImporter importer = new TR2ModelImporter
+        TR2ModelImporter importer = new()
         {
             Level = level,
             ClearUnusedSprites = false,
@@ -60,7 +60,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
             return;
         }
 
-        TR3ModelImporter importer = new TR3ModelImporter
+        TR3ModelImporter importer = new()
         {
             Level = level,
             ClearUnusedSprites = false,
@@ -75,7 +75,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
 
     private List<EMMeshTextureData> PrepareImportData(TRModel[] existingModels)
     {
-        List<EMMeshTextureData> importData = new List<EMMeshTextureData>();
+        List<EMMeshTextureData> importData = new();
         foreach (EMMeshTextureData data in Data)
         {
             if (Array.Find(existingModels, m => m.ID == data.ModelID) == null)

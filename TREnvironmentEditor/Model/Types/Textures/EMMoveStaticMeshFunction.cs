@@ -16,7 +16,7 @@ public class EMMoveStaticMeshFunction : BaseEMFunction
             foreach (int meshIndex in Relocations[roomIndex].Keys)
             {
                 TRRoomStaticMesh mesh = room.StaticMeshes[meshIndex];
-                EMLocation location = new EMLocation
+                EMLocation location = new()
                 {
                     X = (int)mesh.X,
                     Y = (int)mesh.Y,
@@ -49,7 +49,7 @@ public class EMMoveStaticMeshFunction : BaseEMFunction
             foreach (int meshIndex in Relocations[roomIndex].Keys)
             {
                 TR2RoomStaticMesh mesh = room.StaticMeshes[meshIndex];
-                EMLocation location = new EMLocation
+                EMLocation location = new()
                 {
                     X = (int)mesh.X,
                     Y = (int)mesh.Y,
@@ -75,7 +75,7 @@ public class EMMoveStaticMeshFunction : BaseEMFunction
             foreach (int meshIndex in Relocations[roomIndex].Keys)
             {
                 TR3RoomStaticMesh mesh = room.StaticMeshes[meshIndex];
-                EMLocation location = new EMLocation
+                EMLocation location = new()
                 {
                     X = (int)mesh.X,
                     Y = (int)mesh.Y,

@@ -11,7 +11,7 @@ public class EMMirrorModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        List<TRMesh> meshes = new List<TRMesh>();
+        List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
             TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TREntities)modelID);
@@ -28,7 +28,7 @@ public class EMMirrorModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        List<TRMesh> meshes = new List<TRMesh>();
+        List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
             TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR2Entities)modelID);
@@ -45,7 +45,7 @@ public class EMMirrorModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        List<TRMesh> meshes = new List<TRMesh>();
+        List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
             TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR3Entities)modelID);
@@ -111,7 +111,7 @@ public class EMMirrorModelFunction : BaseEMFunction
     {
         foreach (ushort textureRef in textureReferences)
         {
-            IndexedTRObjectTexture texture = new IndexedTRObjectTexture
+            IndexedTRObjectTexture texture = new()
             {
                 Texture = objectTextures[textureRef]
             };

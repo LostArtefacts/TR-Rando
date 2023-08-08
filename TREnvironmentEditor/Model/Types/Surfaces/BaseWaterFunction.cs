@@ -33,7 +33,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
                 short z = (short)(i % room.NumZSectors * SectorSize);
                 short y = (short)((ceilingMatch ? sector.Ceiling : sector.Floor) * ClickSize);
 
-                List<ushort> vertIndices = new List<ushort>();
+                List<ushort> vertIndices = new();
 
                 List<TRVertex> defaultVerts = GetTileVertices(x, y, z, asCeiling);
 
@@ -91,7 +91,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
                 short z = (short)(i % room.NumZSectors * SectorSize);
                 short y = (short)((ceilingMatch ? sector.Ceiling : sector.Floor) * ClickSize);
 
-                List<ushort> vertIndices = new List<ushort>();
+                List<ushort> vertIndices = new();
 
                 List<TRVertex> defaultVerts = GetTileVertices(x, y, z, asCeiling);
 
@@ -153,7 +153,7 @@ public abstract class BaseWaterFunction : BaseEMFunction, ITextureModifier
                 short z = (short)(i % room.NumZSectors * SectorSize);
                 short y = (short)((ceilingMatch ? sector.Ceiling : sector.Floor) * ClickSize);
 
-                List<ushort> vertIndices = new List<ushort>();
+                List<ushort> vertIndices = new();
 
                 List<TRVertex> defaultVerts = GetTileVertices(x, y, z, asCeiling);
 

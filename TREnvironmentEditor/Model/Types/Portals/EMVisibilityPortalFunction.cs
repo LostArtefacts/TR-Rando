@@ -9,7 +9,7 @@ public class EMVisibilityPortalFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        EMLevelData data = new EMLevelData { NumRooms = level.NumRooms };
+        EMLevelData data = new() { NumRooms = level.NumRooms };
 
         foreach (EMVisibilityPortal emPortal in Portals)
         {
@@ -24,7 +24,7 @@ public class EMVisibilityPortalFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        EMLevelData data = new EMLevelData { NumRooms = level.NumRooms };
+        EMLevelData data = new() { NumRooms = level.NumRooms };
 
         foreach (EMVisibilityPortal emPortal in Portals)
         {
@@ -39,7 +39,7 @@ public class EMVisibilityPortalFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        EMLevelData data = new EMLevelData { NumRooms = level.NumRooms };
+        EMLevelData data = new() { NumRooms = level.NumRooms };
 
         foreach (EMVisibilityPortal emPortal in Portals)
         {

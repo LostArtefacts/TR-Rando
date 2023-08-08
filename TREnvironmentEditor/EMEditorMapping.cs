@@ -6,8 +6,8 @@ namespace TREnvironmentEditor;
 
 public class EMEditorMapping
 {
-    public static readonly EMConverter Converter = new EMConverter();
-    public static readonly JsonSerializerSettings Serializer = new JsonSerializerSettings
+    public static readonly EMConverter Converter = new();
+    public static readonly JsonSerializerSettings Serializer = new()
     {
         ContractResolver = new EMSerializationResolver(),
         DefaultValueHandling = DefaultValueHandling.Ignore,

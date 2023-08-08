@@ -22,7 +22,7 @@ public class EMTriggerFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDTriggerEntry triggerEntry = InitialiseTriggerEntry(data);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         if (Locations != null)
@@ -63,7 +63,7 @@ public class EMTriggerFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDTriggerEntry triggerEntry = InitialiseTriggerEntry(data);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         if (Locations != null)
@@ -115,7 +115,7 @@ public class EMTriggerFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDTriggerEntry triggerEntry = InitialiseTriggerEntry(data);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         if (Locations != null)

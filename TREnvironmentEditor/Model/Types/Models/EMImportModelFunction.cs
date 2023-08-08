@@ -11,7 +11,7 @@ public class EMImportModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        TR1ModelImporter importer = new TR1ModelImporter(Tags?.Contains(EMTag.CommunityPatchOnly) ?? false)
+        TR1ModelImporter importer = new(Tags?.Contains(EMTag.CommunityPatchOnly) ?? false)
         {
             Level = level,
             EntitiesToImport = Models.Select(m => (TREntities)m),
@@ -23,7 +23,7 @@ public class EMImportModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        TR2ModelImporter importer = new TR2ModelImporter
+        TR2ModelImporter importer = new()
         {
             Level = level,
             EntitiesToImport = Models.Select(m => (TR2Entities)m),
@@ -35,7 +35,7 @@ public class EMImportModelFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        TR3ModelImporter importer = new TR3ModelImporter
+        TR3ModelImporter importer = new()
         {
             Level = level,
             EntitiesToImport = Models.Select(m => (TR3Entities)m),

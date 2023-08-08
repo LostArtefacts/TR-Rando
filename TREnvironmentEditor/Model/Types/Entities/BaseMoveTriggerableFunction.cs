@@ -27,7 +27,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
             return;
         }
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         // Make a new Trigger based on the first one we find (to ensure things like one-shot are copied)
@@ -60,7 +60,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
             return;
         }
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         // Make a new Trigger based on the first one we find (to ensure things like one-shot are copied)
@@ -92,7 +92,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
             return;
         }
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         List<FDTriggerEntry> currentTriggers = FDUtilities.GetEntityTriggers(control, EntityIndex);
@@ -124,7 +124,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
                 currentObjectAction = currentTrigger.TrigActionList.Find(a => a.TrigAction == FDTrigAction.Object);
             }
 
-            FDActionListItem newAction = new FDActionListItem
+            FDActionListItem newAction = new()
             {
                 TrigAction = FDTrigAction.Object,
                 Parameter = (ushort)EntityIndex

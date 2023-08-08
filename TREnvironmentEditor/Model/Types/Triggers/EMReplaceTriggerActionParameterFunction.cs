@@ -16,7 +16,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDActionListItem action = InitialiseActionItem(data);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         if (Locations != null)
@@ -45,7 +45,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDActionListItem action = InitialiseActionItem(data);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         if (Locations != null)
@@ -74,7 +74,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         FDActionListItem action = InitialiseActionItem(data);
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         if (Locations != null)

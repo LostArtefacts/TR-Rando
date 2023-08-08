@@ -19,11 +19,11 @@ public class EMGenerateLightFunction : BaseEMFunction
                 continue;
             }
 
-            Dictionary<TRRoomLight, Vector3> lightPositions = new Dictionary<TRRoomLight, Vector3>();
+            Dictionary<TRRoomLight, Vector3> lightPositions = new();
             foreach (TRRoomVertex vertex in room.RoomData.Vertices)
             {
                 // Several lights per room - for now just use whichever is nearest this point
-                Vector3 vertexPosition = new Vector3(vertex.Vertex.X, vertex.Vertex.Y, vertex.Vertex.Z);
+                Vector3 vertexPosition = new(vertex.Vertex.X, vertex.Vertex.Y, vertex.Vertex.Z);
                 double smallestDistance = double.MaxValue;
                 TRRoomLight nearestLight = room.Lights[0];
                 foreach (TRRoomLight light in room.Lights)
@@ -59,11 +59,11 @@ public class EMGenerateLightFunction : BaseEMFunction
                 continue;
             }
 
-            Dictionary<TR2RoomLight, Vector3> lightPositions = new Dictionary<TR2RoomLight, Vector3>();
+            Dictionary<TR2RoomLight, Vector3> lightPositions = new();
             foreach (TR2RoomVertex vertex in room.RoomData.Vertices)
             {
                 // Several lights per room - for now just use whichever is nearest this point
-                Vector3 vertexPosition = new Vector3(vertex.Vertex.X, vertex.Vertex.Y, vertex.Vertex.Z);
+                Vector3 vertexPosition = new(vertex.Vertex.X, vertex.Vertex.Y, vertex.Vertex.Z);
                 double smallestDistance = double.MaxValue;
                 TR2RoomLight nearestLight = room.Lights[0];
                 foreach (TR2RoomLight light in room.Lights)
@@ -99,11 +99,11 @@ public class EMGenerateLightFunction : BaseEMFunction
                 continue;
             }
 
-            Dictionary<TR3RoomLight, Vector3> lightPositions = new Dictionary<TR3RoomLight, Vector3>();
+            Dictionary<TR3RoomLight, Vector3> lightPositions = new();
             foreach (TR3RoomVertex vertex in room.RoomData.Vertices)
             {
                 // Several lights per room - for now just use whichever is nearest this point
-                Vector3 vertexPosition = new Vector3(vertex.Vertex.X, vertex.Vertex.Y, vertex.Vertex.Z);
+                Vector3 vertexPosition = new(vertex.Vertex.X, vertex.Vertex.Y, vertex.Vertex.Z);
                 double smallestDistance = double.MaxValue;
                 TR3RoomLight nearestLight = null;
                 foreach (TR3RoomLight light in room.Lights)

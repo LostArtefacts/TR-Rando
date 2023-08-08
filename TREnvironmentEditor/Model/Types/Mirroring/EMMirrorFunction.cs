@@ -120,7 +120,7 @@ public class EMMirrorFunction : BaseEMFunction
 
     private void MirrorFloorData(TR1Level level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (TRRoom room in level.Rooms)
@@ -135,7 +135,7 @@ public class EMMirrorFunction : BaseEMFunction
 
     private void MirrorFloorData(TR2Level level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (TR2Room room in level.Rooms)
@@ -150,7 +150,7 @@ public class EMMirrorFunction : BaseEMFunction
 
     private void MirrorFloorData(TR3Level level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (TR3Room room in level.Rooms)
@@ -166,7 +166,7 @@ public class EMMirrorFunction : BaseEMFunction
     private void MirrorSectors(List<TRRoomSector> sectors, ushort numXSectors, ushort numZSectors, FDControl floorData)
     {
         // Convert the flattened sector list to 2D            
-        List<List<TRRoomSector>> sectorMap = new List<List<TRRoomSector>>();
+        List<List<TRRoomSector>> sectorMap = new();
         for (int x = 0; x < numXSectors; x++)
         {
             sectorMap.Add(new List<TRRoomSector>());
@@ -307,7 +307,7 @@ public class EMMirrorFunction : BaseEMFunction
             room.Info.X -= room.NumXSectors * SectorSize;
             Debug.Assert(room.Info.X >= 0);
             // Flip room sprites separately as they don't sit on tile edges
-            List<TRRoomVertex> processedVerts = new List<TRRoomVertex>();
+            List<TRRoomVertex> processedVerts = new();
             foreach (TRRoomSprite sprite in room.RoomData.Sprites)
             {
                 TRRoomVertex roomVertex = room.RoomData.Vertices[sprite.Vertex];
@@ -381,7 +381,7 @@ public class EMMirrorFunction : BaseEMFunction
             room.Info.X -= room.NumXSectors * SectorSize;
             Debug.Assert(room.Info.X >= 0);
             // Flip room sprites separately as they don't sit on tile edges
-            List<TR2RoomVertex> processedVerts = new List<TR2RoomVertex>();
+            List<TR2RoomVertex> processedVerts = new();
             foreach (TRRoomSprite sprite in room.RoomData.Sprites)
             {
                 TR2RoomVertex roomVertex = room.RoomData.Vertices[sprite.Vertex];
@@ -455,7 +455,7 @@ public class EMMirrorFunction : BaseEMFunction
             room.Info.X -= room.NumXSectors * SectorSize;
             Debug.Assert(room.Info.X >= 0);
             // Flip room sprites separately as they don't sit on tile edges
-            List<TR3RoomVertex> processedVerts = new List<TR3RoomVertex>();
+            List<TR3RoomVertex> processedVerts = new();
             foreach (TRRoomSprite sprite in room.RoomData.Sprites)
             {
                 TR3RoomVertex roomVertex = room.RoomData.Vertices[sprite.Vertex];
@@ -1282,7 +1282,7 @@ public class EMMirrorFunction : BaseEMFunction
         // Flip the object texture vertices in the same way as done for faces
         foreach (ushort textureRef in textureReferences)
         {
-            IndexedTRObjectTexture texture = new IndexedTRObjectTexture
+            IndexedTRObjectTexture texture = new()
             {
                 Texture = objectTextures[textureRef]
             };

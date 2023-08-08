@@ -118,7 +118,7 @@ public class EMDrainFunction : BaseWaterFunction
             return;
         }
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         foreach (int roomNumber in RoomNumbers)

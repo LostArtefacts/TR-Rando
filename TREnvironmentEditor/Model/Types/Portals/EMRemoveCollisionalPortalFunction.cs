@@ -16,7 +16,7 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
         Location1.Room = data.ConvertRoom(Location1.Room);
         Location2.Room = data.ConvertRoom(Location2.Room);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         TRRoom room1 = level.Rooms[Location1.Room];
@@ -36,7 +36,7 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
         Location1.Room = data.ConvertRoom(Location1.Room);
         Location2.Room = data.ConvertRoom(Location2.Room);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         TR2Room room1 = level.Rooms[Location1.Room];
@@ -56,7 +56,7 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
         Location1.Room = data.ConvertRoom(Location1.Room);
         Location2.Room = data.ConvertRoom(Location2.Room);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         TR3Room room1 = level.Rooms[Location1.Room];

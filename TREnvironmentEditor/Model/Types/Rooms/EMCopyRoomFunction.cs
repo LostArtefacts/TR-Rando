@@ -27,7 +27,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
         int zdiff = NewLocation.Z - baseRoom.Info.Z;
 
-        TRRoom newRoom = new TRRoom
+        TRRoom newRoom = new()
         {
             AlternateRoom = -1,
             AmbientIntensity = baseRoom.AmbientIntensity,
@@ -143,7 +143,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         }
 
         // Rebuild the sectors
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         for (int i = 0; i < newRoom.Sectors.Length; i++)
@@ -157,7 +157,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         if (LinkedLocation != null)
         {
             TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-            BoxGenerator generator = new BoxGenerator();
+            BoxGenerator generator = new();
             generator.Generate(newRoom, level, linkedSector);
         }
 
@@ -176,7 +176,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
         int zdiff = NewLocation.Z - baseRoom.Info.Z;
 
-        TR2Room newRoom = new TR2Room
+        TR2Room newRoom = new()
         {
             AlternateRoom = -1,
             AmbientIntensity = baseRoom.AmbientIntensity,
@@ -298,7 +298,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         }
 
         // Rebuild the sectors
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         for (int i = 0; i < newRoom.SectorList.Length; i++)
@@ -312,7 +312,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         if (LinkedLocation != null)
         {
             TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-            BoxGenerator generator = new BoxGenerator();
+            BoxGenerator generator = new();
             generator.Generate(newRoom, level, linkedSector);
         }
 
@@ -331,7 +331,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         int ydiff = NewLocation.Y - baseRoom.Info.YBottom;
         int zdiff = NewLocation.Z - baseRoom.Info.Z;
 
-        TR3Room newRoom = new TR3Room
+        TR3Room newRoom = new()
         {
             AlternateRoom = -1,
             AmbientIntensity = baseRoom.AmbientIntensity,
@@ -454,7 +454,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         }
 
         // Rebuild the sectors
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         for (int i = 0; i < newRoom.Sectors.Length; i++)
@@ -468,7 +468,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         if (LinkedLocation != null)
         {
             TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-            BoxGenerator generator = new BoxGenerator();
+            BoxGenerator generator = new();
             generator.Generate(newRoom, level, linkedSector);
         }
 
@@ -508,7 +508,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             wallOpened = originalSector.IsImpenetrable || originalSector.BoxIndex == ushort.MaxValue;
         }
 
-        TRRoomSector newSector = new TRRoomSector
+        TRRoomSector newSector = new()
         {
             BoxIndex = ushort.MaxValue,
             Ceiling = (sbyte)(ceiling + sectorYDiff),
@@ -523,7 +523,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         if (originalSector.FDIndex != 0)
         {
             List<FDEntry> entries = floorData.Entries[originalSector.FDIndex];
-            List<FDEntry> newEntries = new List<FDEntry>();
+            List<FDEntry> newEntries = new();
             foreach (FDEntry entry in entries)
             {
                 switch ((FDFunctions)entry.Setup.Function)

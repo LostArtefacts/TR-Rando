@@ -21,7 +21,7 @@ public class EMConvertTriggerFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseLocations();
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         foreach (EMLocation location in Locations)
@@ -38,7 +38,7 @@ public class EMConvertTriggerFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseLocations();
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         foreach (EMLocation location in Locations)
@@ -55,7 +55,7 @@ public class EMConvertTriggerFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         InitialiseLocations();
 
-        FDControl control = new FDControl();
+        FDControl control = new();
         control.ParseFromLevel(level);
 
         foreach (EMLocation location in Locations)
