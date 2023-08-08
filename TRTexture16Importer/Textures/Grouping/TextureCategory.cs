@@ -1,14 +1,13 @@
-﻿namespace TRTexture16Importer.Textures
+﻿namespace TRTexture16Importer.Textures;
+
+public enum TextureCategory
 {
-    public enum TextureCategory
-    {
-        KeyItem,
-        Secret,
-        DayMode,
-        NightMode,
-        LevelColours,
-        Enemy,
-        Lara,
-        Braid
-    }
+    KeyItem,
+    Secret,
+    DayMode,
+    NightMode,
+    LevelColours,
+    Enemy,
+    Lara,
+    Braid
 }

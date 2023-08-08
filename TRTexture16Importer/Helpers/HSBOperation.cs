@@ -1,59 +1,58 @@
-﻿namespace TRTexture16Importer.Helpers
+﻿namespace TRTexture16Importer.Helpers;
+
+public class HSBOperation
 {
-    public class HSBOperation
+    private static readonly int _unset = int.MinValue;
+
+    public int Hue { get; set; }
+    public int Saturation { get; set; }
+    public int Brightness { get; set; }
+
+    public HSBOperation()
     {
-        private static readonly int _unset = int.MinValue;
+        Hue = Saturation = Brightness = _unset;
+    }
 
-        public int Hue { get; set; }
-        public int Saturation { get; set; }
-        public int Brightness { get; set; }
-
-        public HSBOperation()
+    public int ModifyHue(int hue)
+    {
+        if (Hue == _unset)
         {
-            Hue = Saturation = Brightness = _unset;
-        }
-
-        public int ModifyHue(int hue)
-        {
-            if (Hue == _unset)
-            {
-                return hue;
-            }
-
-            hue += Hue;
-            if (hue < 0)
-            {
-                hue += 360;
-            }
-            else if (hue > 360)
-            {
-                hue -= 360;
-            }
             return hue;
         }
 
-        public int ModifySaturation(int saturation)
+        hue += Hue;
+        if (hue < 0)
         {
-            if (Saturation == _unset)
-            {
-                return saturation;
-            }
+            hue += 360;
+        }
+        else if (hue > 360)
+        {
+            hue -= 360;
+        }
+        return hue;
+    }
 
-            double d = Saturation / 100.0;
-            d = saturation * d;
-            return (int)d;
+    public int ModifySaturation(int saturation)
+    {
+        if (Saturation == _unset)
+        {
+            return saturation;
         }
 
-        public int ModifyBrightness(int brightness)
-        {
-            if (Brightness == _unset)
-            {
-                return brightness;
-            }
+        double d = Saturation / 100.0;
+        d = saturation * d;
+        return (int)d;
+    }
 
-            double d = Brightness / 100.0;
-            d = brightness * d;
-            return (int)d;
+    public int ModifyBrightness(int brightness)
+    {
+        if (Brightness == _unset)
+        {
+            return brightness;
         }
+
+        double d = Brightness / 100.0;
+        d = brightness * d;
+        return (int)d;
     }
 }
