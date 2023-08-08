@@ -114,7 +114,7 @@ public partial class EnemyWindow : Window
 
     private ObservableCollection<BoolItemIDControlClass> CloneControls(IEnumerable<BoolItemIDControlClass> controls)
     {
-        List<BoolItemIDControlClass> clones = new List<BoolItemIDControlClass>();
+        List<BoolItemIDControlClass> clones = new();
         foreach (BoolItemIDControlClass item in controls)
         {
             clones.Add(item.Clone());
@@ -186,7 +186,7 @@ public partial class EnemyWindow : Window
         ObservableCollection<BoolItemIDControlClass> fromControls = fromBox.ItemsSource as ObservableCollection<BoolItemIDControlClass>;
         ObservableCollection<BoolItemIDControlClass> toControls = toBox.ItemsSource as ObservableCollection<BoolItemIDControlClass>;
 
-        List<int> indices = new List<int>();
+        List<int> indices = new();
         for (int i = 0; i < fromBox.SelectedItems.Count; i++)
         {
             BoolItemIDControlClass control = (BoolItemIDControlClass)fromBox.SelectedItems[i];

@@ -179,7 +179,7 @@ public partial class MessageWindow : Window
 
     private static MessageBoxResult Show(string message, Icon icon, MessageBoxButton buttons, string details = null)
     {
-        MessageWindow mw = new MessageWindow(message, icon, buttons, details);
+        MessageWindow mw = new(message, icon, buttons, details);
         mw.ShowDialog();
         return mw._result;
     }

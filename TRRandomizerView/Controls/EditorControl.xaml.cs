@@ -168,7 +168,7 @@ public partial class EditorControl : UserControl
             }
         }
 
-        RandomizeProgressWindow spw = new RandomizeProgressWindow(Controller, _options);
+        RandomizeProgressWindow spw = new(Controller, _options);
         if (spw.ShowDialog() ?? false)
         {
             _dirty = false;
@@ -278,7 +278,7 @@ public partial class EditorControl : UserControl
     {
         if (MessageWindow.ShowConfirm("The files that were backed up when this folder was first opened will be copied back to the original directory.\n\nDo you wish to proceed?"))
         {
-            RestoreProgressWindow rpw = new RestoreProgressWindow(Controller);
+            RestoreProgressWindow rpw = new(Controller);
             try
             {
                 if (rpw.ShowDialog() ?? false)
@@ -430,7 +430,7 @@ public partial class EditorControl : UserControl
 
     public void ConfigureGlobalSeed()
     {
-        GlobalSeedWindow gsw = new GlobalSeedWindow(1, _options.MaxSeedValue, _lastGlobalSeed);
+        GlobalSeedWindow gsw = new(1, _options.MaxSeedValue, _lastGlobalSeed);
         if (gsw.ShowDialog() ?? false)
         {
             _options.SetGlobalSeed(gsw.Seed);
@@ -452,7 +452,7 @@ public partial class EditorControl : UserControl
 
     private void LaunchTR1MainSettings()
     {
-        Tomb1MainWindow window = new Tomb1MainWindow(_options);
+        Tomb1MainWindow window = new(_options);
         window.ShowDialog();
     }
 

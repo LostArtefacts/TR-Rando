@@ -26,36 +26,36 @@ public static class WindowCommands
     }
 
     // File
-    public static readonly RoutedUICommand Open = new RoutedUICommand();
-    public static readonly RoutedUICommand Randomize = new RoutedUICommand();
-    public static readonly RoutedUICommand Close = new RoutedUICommand();
-    public static readonly RoutedUICommand EmptyRecent = new RoutedUICommand();
-    public static readonly RoutedUICommand Exit = new RoutedUICommand();
+    public static readonly RoutedUICommand Open = new();
+    public static readonly RoutedUICommand Randomize = new();
+    public static readonly RoutedUICommand Close = new();
+    public static readonly RoutedUICommand EmptyRecent = new();
+    public static readonly RoutedUICommand Exit = new();
 
     // Edit
-    public static readonly RoutedUICommand SelectAll = new RoutedUICommand();
-    public static readonly RoutedUICommand DeSelectAll = new RoutedUICommand();
-    public static readonly RoutedUICommand RandomizeSeeds = new RoutedUICommand();
-    public static readonly RoutedUICommand RandomizeOptions = new RoutedUICommand();
-    public static readonly RoutedUICommand CreateGlobalSeed = new RoutedUICommand();
-    public static readonly RoutedUICommand EditCommunitySettings = new RoutedUICommand();
+    public static readonly RoutedUICommand SelectAll = new();
+    public static readonly RoutedUICommand DeSelectAll = new();
+    public static readonly RoutedUICommand RandomizeSeeds = new();
+    public static readonly RoutedUICommand RandomizeOptions = new();
+    public static readonly RoutedUICommand CreateGlobalSeed = new();
+    public static readonly RoutedUICommand EditCommunitySettings = new();
 
     // Tools
-    public static readonly RoutedUICommand ShowBackup = new RoutedUICommand();
-    public static readonly RoutedUICommand ShowErrors = new RoutedUICommand();
-    public static readonly RoutedUICommand Restore = new RoutedUICommand();
-    public static readonly RoutedUICommand DeleteBackup = new RoutedUICommand();
-    public static readonly RoutedUICommand ImportSettings = new RoutedUICommand();
-    public static readonly RoutedUICommand ExportSettings = new RoutedUICommand();
-    public static readonly RoutedUICommand ResetSettings = new RoutedUICommand();
-    public static readonly RoutedUICommand DevelopmentMode = new RoutedUICommand();
+    public static readonly RoutedUICommand ShowBackup = new();
+    public static readonly RoutedUICommand ShowErrors = new();
+    public static readonly RoutedUICommand Restore = new();
+    public static readonly RoutedUICommand DeleteBackup = new();
+    public static readonly RoutedUICommand ImportSettings = new();
+    public static readonly RoutedUICommand ExportSettings = new();
+    public static readonly RoutedUICommand ResetSettings = new();
+    public static readonly RoutedUICommand DevelopmentMode = new();
 
     // Help
-    public static readonly RoutedUICommand GitHub = new RoutedUICommand();
-    public static readonly RoutedUICommand Discord = new RoutedUICommand();
-    public static readonly RoutedUICommand CheckForUpdate = new RoutedUICommand();
-    public static readonly RoutedUICommand About = new RoutedUICommand();
+    public static readonly RoutedUICommand GitHub = new();
+    public static readonly RoutedUICommand Discord = new();
+    public static readonly RoutedUICommand CheckForUpdate = new();
+    public static readonly RoutedUICommand About = new();
 
     // Other
-    public static readonly RoutedUICommand OpenAdvancedWindowCommand = new RoutedUICommand();
+    public static readonly RoutedUICommand OpenAdvancedWindowCommand = new();
 }

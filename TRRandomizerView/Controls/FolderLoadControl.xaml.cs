@@ -98,7 +98,7 @@ public partial class FolderLoadControl : UserControl
 
     public void OpenDataFolder(string folderPath, bool performChecksumTest = true)
     {
-        OpenProgressWindow opw = new OpenProgressWindow(folderPath, performChecksumTest);
+        OpenProgressWindow opw = new(folderPath, performChecksumTest);
         try
         {
             if (opw.ShowDialog() ?? false)

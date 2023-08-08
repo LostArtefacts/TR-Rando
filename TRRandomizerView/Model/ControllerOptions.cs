@@ -2559,7 +2559,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _randomEnvironmentControl = new ManagedSeedBool();
 
         // Secrets
-        Binding randomizeSecretsBinding = new Binding(nameof(RandomizeSecrets)) { Source = this };
+        Binding randomizeSecretsBinding = new(nameof(RandomizeSecrets)) { Source = this };
         IsHardSecrets = new BoolItemControlClass()
         {
             Title = "Enable hard secrets",
@@ -2595,7 +2595,7 @@ public class ControllerOptions : INotifyPropertyChanged
         IsGlitchedSecrets.PropertyChanged += SecretCategory_PropertyChanged;
 
         // Items
-        Binding randomizeItemsBinding = new Binding(nameof(RandomizeItems)) { Source = this };
+        Binding randomizeItemsBinding = new(nameof(RandomizeItems)) { Source = this };
         RandomizeItemTypes = new BoolItemControlClass
         {
             Title = "Randomize types",
@@ -2622,7 +2622,7 @@ public class ControllerOptions : INotifyPropertyChanged
         BindingOperations.SetBinding(IncludeExtraPickups, BoolItemControlClass.IsActiveProperty, randomizeItemsBinding);
 
         // Enemies
-        Binding randomizeEnemiesBinding = new Binding(nameof(RandomizeEnemies)) { Source = this };
+        Binding randomizeEnemiesBinding = new(nameof(RandomizeEnemies)) { Source = this };
         CrossLevelEnemies = new BoolItemControlClass()
         {
             Title = "Enable cross-level enemies",
@@ -2667,7 +2667,7 @@ public class ControllerOptions : INotifyPropertyChanged
         BindingOperations.SetBinding(RemoveLevelEndingLarson, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
 
         // Textures
-        Binding randomizeTexturesBinding = new Binding(nameof(RandomizeTextures)) { Source = this };
+        Binding randomizeTexturesBinding = new(nameof(RandomizeTextures)) { Source = this };
         PersistTextures = new BoolItemControlClass()
         {
             Title = "Use persistent textures",
@@ -2712,7 +2712,7 @@ public class ControllerOptions : INotifyPropertyChanged
         BindingOperations.SetBinding(RetainSecretSpriteTextures, BoolItemControlClass.IsActiveProperty, randomizeTexturesBinding);
 
         // Audio
-        Binding randomizeAudioBinding = new Binding(nameof(RandomizeAudioTracks)) { Source = this };
+        Binding randomizeAudioBinding = new(nameof(RandomizeAudioTracks)) { Source = this };
         ChangeAmbientTracks = new BoolItemControlClass
         {
             Title = "Change ambient tracks",
@@ -2775,7 +2775,7 @@ public class ControllerOptions : INotifyPropertyChanged
         BindingOperations.SetBinding(RandomizeWibble, BoolItemControlClass.IsActiveProperty, randomizeAudioBinding);
 
         // Outfits
-        Binding randomizeOutfitsBinding = new Binding(nameof(RandomizeOutfits)) { Source = this };
+        Binding randomizeOutfitsBinding = new(nameof(RandomizeOutfits)) { Source = this };
         PersistOutfits = new BoolItemControlClass()
         {
             Title = "Use persistent outfit",
@@ -2796,7 +2796,7 @@ public class ControllerOptions : INotifyPropertyChanged
         BindingOperations.SetBinding(AllowGymOutfit, BoolItemControlClass.IsActiveProperty, randomizeOutfitsBinding);
 
         // Text
-        Binding randomizeTextBinding = new Binding(nameof(RandomizeText)) { Source = this };
+        Binding randomizeTextBinding = new(nameof(RandomizeText)) { Source = this };
         RetainKeyItemNames = new BoolItemControlClass
         {
             Title = "Use original key item names",
@@ -2811,7 +2811,7 @@ public class ControllerOptions : INotifyPropertyChanged
         BindingOperations.SetBinding(RetainLevelNames, BoolItemControlClass.IsActiveProperty, randomizeTextBinding);
 
         // Start positions
-        Binding randomizeStartPositionBinding = new Binding(nameof(RandomizeStartPosition)) { Source = this };
+        Binding randomizeStartPositionBinding = new(nameof(RandomizeStartPosition)) { Source = this };
         RotateStartPositionOnly = new BoolItemControlClass
         {
             Title = "Rotate Lara only",
@@ -2820,7 +2820,7 @@ public class ControllerOptions : INotifyPropertyChanged
         BindingOperations.SetBinding(RotateStartPositionOnly, BoolItemControlClass.IsActiveProperty, randomizeStartPositionBinding);
 
         // Environment
-        Binding randomizeEnvironmentBinding = new Binding(nameof(RandomizeEnvironment)) { Source = this };
+        Binding randomizeEnvironmentBinding = new(nameof(RandomizeEnvironment)) { Source = this };
         RandomizeWaterLevels = new BoolItemControlClass
         {
             Title = "Change water levels",
@@ -2858,7 +2858,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         BindingOperations.SetBinding(HardEnvironmentMode, BoolItemControlClass.IsActiveProperty, randomizeEnvironmentBinding);
 
-        Binding randomizeHealthBinding = new Binding(nameof(RandomizeHealth)) { Source = this };
+        Binding randomizeHealthBinding = new(nameof(RandomizeHealth)) { Source = this };
         DisableHealingBetweenLevels = new BoolItemControlClass
         {
             Title = "Disable healing between levels",
@@ -2873,7 +2873,7 @@ public class ControllerOptions : INotifyPropertyChanged
         BindingOperations.SetBinding(DisableMedpacks, BoolItemControlClass.IsActiveProperty, randomizeHealthBinding);
 
         // Weather
-        Binding randomizeWeatherBinding = new Binding(nameof(RandomizeWeather)) { Source = this };
+        Binding randomizeWeatherBinding = new(nameof(RandomizeWeather)) { Source = this };
         RainyAssaultCourse = new BoolItemControlClass
         {
             Title = "Rainy assault course",
@@ -3378,7 +3378,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.UseEnemyExclusions = UseEnemyExclusions;
         _controller.ShowExclusionWarnings = ShowExclusionWarnings;
 
-        List<short> excludedEnemies = new List<short>();
+        List<short> excludedEnemies = new();
         SelectableEnemyControls.FindAll(c => c.Value).ForEach(c => excludedEnemies.Add((short)c.ID));
         _controller.ExcludedEnemies = excludedEnemies;
 

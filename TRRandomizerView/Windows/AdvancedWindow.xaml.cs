@@ -372,7 +372,7 @@ public partial class AdvancedWindow : Window
 
     private void ExclusionsButton_Click(object sender, RoutedEventArgs e)
     {
-        EnemyWindow ew = new EnemyWindow(ControllerProxy);
+        EnemyWindow ew = new(ControllerProxy);
         if (ew.ShowDialog() ?? false)
         {
             ControllerProxy.SelectableEnemyControls = ew.Controls;
