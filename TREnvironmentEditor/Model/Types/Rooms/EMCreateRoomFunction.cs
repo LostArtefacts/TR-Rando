@@ -454,19 +454,12 @@ public class EMCreateRoomFunction : BaseEMFunction
 
     private void BuildFace(List<TRFace4> faces, List<TRVertex> vertices, int x, int z, int y, Direction direction, int height = 1024)
     {
-        ushort texture;
-        switch (direction)
+        ushort texture = direction switch
         {
-            case Direction.Down:
-                texture = Textures.Floor;
-                break;
-            case Direction.Up:
-                texture = Textures.Ceiling;
-                break;
-            default:
-                texture = Textures.GetWall(height);
-                break;
-        }
+            Direction.Down => Textures.Floor,
+            Direction.Up => Textures.Ceiling,
+            _ => Textures.GetWall(height),
+        };
         TRFace4 face = new()
         {
             Texture = texture,
