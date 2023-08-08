@@ -6,266 +6,265 @@ using System.Linq;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 
-namespace TRModelTransporter.Utilities
+namespace TRModelTransporter.Utilities;
+
+public class TRTextureDeduplicator<E> where E : Enum
 {
-    public class TRTextureDeduplicator<E> where E : Enum
+    public Dictionary<TexturedTile, List<TexturedTileSegment>> SegmentMap { get; set; }
+    public List<TextureRemap> PrecompiledRemapping { get; set; }
+    public bool UpdateGraphics { get; set; }
+
+    private Dictionary<TexturedTile, List<int>> _segmentRemovalPositions;
+    private List<MappedSegment> _segments;
+
+    public EventHandler<TRTextureRemapEventArgs> SegmentRemapped;
+
+    public TRTextureDeduplicator()
     {
-        public Dictionary<TexturedTile, List<TexturedTileSegment>> SegmentMap { get; set; }
-        public List<TextureRemap> PrecompiledRemapping { get; set; }
-        public bool UpdateGraphics { get; set; }
+        UpdateGraphics = false;
+    }
 
-        private Dictionary<TexturedTile, List<int>> _segmentRemovalPositions;
-        private List<MappedSegment> _segments;
+    // This allows us to "fix" some of Core Design's approach in duplicating graphics. For example, In DragonFront_H, there
+    // is a lot of clips taken from the largest piece of the dragon's spikes, and these are stored as separate textures. This 
+    // attempts to merge these into one segment by comparing each bitmap with every other larger or equal in size to itself.
+    public void Deduplicate()
+    {
+        InitialiseSegments();
+        DeduplicateSegments();
+        RemoveStaleSegments();
+    }
 
-        public EventHandler<TRTextureRemapEventArgs> SegmentRemapped;
+    private void InitialiseSegments()
+    {
+        _segmentRemovalPositions = new Dictionary<TexturedTile, List<int>>();
+        _segments = new List<MappedSegment>();
 
-        public TRTextureDeduplicator()
+        foreach (TexturedTile tile in SegmentMap.Keys)
         {
-            UpdateGraphics = false;
-        }
-
-        // This allows us to "fix" some of Core Design's approach in duplicating graphics. For example, In DragonFront_H, there
-        // is a lot of clips taken from the largest piece of the dragon's spikes, and these are stored as separate textures. This 
-        // attempts to merge these into one segment by comparing each bitmap with every other larger or equal in size to itself.
-        public void Deduplicate()
-        {
-            InitialiseSegments();
-            DeduplicateSegments();
-            RemoveStaleSegments();
-        }
-
-        private void InitialiseSegments()
-        {
-            _segmentRemovalPositions = new Dictionary<TexturedTile, List<int>>();
-            _segments = new List<MappedSegment>();
-
-            foreach (TexturedTile tile in SegmentMap.Keys)
+            for (int i = 0; i < SegmentMap[tile].Count; i++)
             {
-                for (int i = 0; i < SegmentMap[tile].Count; i++)
+                _segments.Add(new MappedSegment
                 {
-                    _segments.Add(new MappedSegment
-                    {
-                        Tile = tile,
-                        Segment = SegmentMap[tile][i],
-                        SegmentPosition = i
-                    });
-                }
+                    Tile = tile,
+                    Segment = SegmentMap[tile][i],
+                    SegmentPosition = i
+                });
             }
-
-            _segments.Sort(delegate (MappedSegment ms1, MappedSegment ms2)
-            {
-                return ms1.Segment.Area.CompareTo(ms2.Segment.Area);
-            });
         }
 
-        private MappedSegment FindSegmentFromTilePosition(int tileIndex, Rectangle bounds, bool exactMatch = true)
+        _segments.Sort(delegate (MappedSegment ms1, MappedSegment ms2)
         {
-            MappedSegment segment;
-            for (int i = 0; i < _segments.Count; i++)
-            {
-                segment = _segments[i];
-                if (segment.Tile.Index == tileIndex && ((exactMatch && segment.Segment.Bounds == bounds) || segment.Segment.Bounds.Contains(bounds)))
-                {
-                    return segment;
-                }
-            }
+            return ms1.Segment.Area.CompareTo(ms2.Segment.Area);
+        });
+    }
 
-            return null;
+    private MappedSegment FindSegmentFromTilePosition(int tileIndex, Rectangle bounds, bool exactMatch = true)
+    {
+        MappedSegment segment;
+        for (int i = 0; i < _segments.Count; i++)
+        {
+            segment = _segments[i];
+            if (segment.Tile.Index == tileIndex && ((exactMatch && segment.Segment.Bounds == bounds) || segment.Segment.Bounds.Contains(bounds)))
+            {
+                return segment;
+            }
         }
 
-        private void DeduplicateSegments()
+        return null;
+    }
+
+    private void DeduplicateSegments()
+    {
+        if (PrecompiledRemapping == null)
         {
-            if (PrecompiledRemapping == null)
+            // Exhaustively check each segment against every other. If it
+            // is successfully moved, remove it from the list.
+            for (int i = _segments.Count - 1; i >= 0; i--)
             {
-                // Exhaustively check each segment against every other. If it
-                // is successfully moved, remove it from the list.
-                for (int i = _segments.Count - 1; i >= 0; i--)
+                MappedSegment mappedSegment = _segments[i];
+                if (MoveSegment(mappedSegment, i))
                 {
-                    MappedSegment mappedSegment = _segments[i];
-                    if (MoveSegment(mappedSegment, i))
-                    {
-                        _segments.RemoveAt(i);
-                    }
-                }
-            }
-            else
-            {
-                // We can skip the exhaustive bitmap checking and jump straight
-                // to moving the segments if we have a precompiled list ready.
-                foreach (TextureRemap remap in PrecompiledRemapping)
-                {
-                    ProcessRemap(remap);
+                    _segments.RemoveAt(i);
                 }
             }
         }
-
-        private void StoreSegmentRemoval(MappedSegment mappedSegment)
+        else
         {
-            if (!_segmentRemovalPositions.ContainsKey(mappedSegment.Tile))
+            // We can skip the exhaustive bitmap checking and jump straight
+            // to moving the segments if we have a precompiled list ready.
+            foreach (TextureRemap remap in PrecompiledRemapping)
             {
-                _segmentRemovalPositions[mappedSegment.Tile] = new List<int>();
-            }
-            _segmentRemovalPositions[mappedSegment.Tile].Add(mappedSegment.SegmentPosition);
-        }
-
-        private bool MoveSegment(MappedSegment mappedSegment, int index)
-        {
-            for (int i = 0; i < _segments.Count; i++)
-            {
-                if (i == index)
-                {
-                    continue;
-                }
-
-                MappedSegment candidate = _segments[i];
-
-                // Check to see if the segment is contained within the other.
-                // The returned point will be relative to the containing segment.
-                Point? p = LocateSubSegment(mappedSegment, candidate);
-                if (!p.HasValue)
-                {
-                    continue;
-                }
-
-                // Make the point relative to the tile
-                Point adjustmentPoint = p.Value;
-                adjustmentPoint.X += candidate.Segment.MappedX;
-                adjustmentPoint.Y += candidate.Segment.MappedY;
-
-                ProcessRemap(mappedSegment, candidate, adjustmentPoint);
-
-                return true;
-            }
-
-            return false;
-        }
-
-        private void ProcessRemap(TextureRemap remap)
-        {
-            // Find the original MappedSegment
-            MappedSegment originalSegment = FindSegmentFromTilePosition(remap.OriginalTile, remap.OriginalBounds);
-            // Find the candiate MappedSegment
-            MappedSegment candidateSegment = FindSegmentFromTilePosition(remap.NewTile, remap.NewBounds/*, false*/);
-            // Move it!
-            if (originalSegment != null && candidateSegment != null)
-            {
-                // Move it!
-                ProcessRemap(originalSegment, candidateSegment, remap.AdjustmentPoint);
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Could not remap " + remap.OriginalTile + " : " + remap.OriginalIndex);
+                ProcessRemap(remap);
             }
         }
+    }
 
-        private void ProcessRemap(MappedSegment originalSegment, MappedSegment candidateSegment, Point adjustmentPoint)
+    private void StoreSegmentRemoval(MappedSegment mappedSegment)
+    {
+        if (!_segmentRemovalPositions.ContainsKey(mappedSegment.Tile))
         {
-            Rectangle oldBounds = originalSegment.Segment.Bounds;
-            // We pull all of the sub textures from the original segment into the candidate
-            int oldFirstTextureIndex = originalSegment.Segment.FirstTextureIndex;
-            candidateSegment.Segment.InheritTextures(originalSegment.Segment, adjustmentPoint, candidateSegment.Tile.Index);
-            // Store the removal for later processing in RemoveStaleSegments
-            StoreSegmentRemoval(originalSegment);
-
-            SegmentRemapped?.Invoke(this, new TRTextureRemapEventArgs
-            {
-                OldFirstTextureIndex = oldFirstTextureIndex,
-                OldArea = originalSegment.Segment.Area,
-                NewSegment = candidateSegment.Segment,
-                OldTile = originalSegment.Tile,
-                NewTile = candidateSegment.Tile,
-                OldBounds = oldBounds,
-                NewBounds = candidateSegment.Segment.Bounds,
-                AdjustmentPoint = adjustmentPoint
-            });
+            _segmentRemovalPositions[mappedSegment.Tile] = new List<int>();
         }
+        _segmentRemovalPositions[mappedSegment.Tile].Add(mappedSegment.SegmentPosition);
+    }
 
-        private Point? LocateSubSegment(MappedSegment segmentToLocate, MappedSegment containerSegment)
+    private bool MoveSegment(MappedSegment mappedSegment, int index)
+    {
+        for (int i = 0; i < _segments.Count; i++)
         {
-            int xEnd = containerSegment.Segment.Bounds.Width - segmentToLocate.Segment.Bounds.Width;
-            int yEnd = containerSegment.Segment.Bounds.Height - segmentToLocate.Segment.Bounds.Height;
-            Rectangle rect = new Rectangle(0, 0, segmentToLocate.Segment.Bounds.Width, segmentToLocate.Segment.Bounds.Height);
-
-            for (int x = 0; x <= xEnd; x++)
+            if (i == index)
             {
-                rect.X = x;
-                for (int y = 0; y <= yEnd; y++)
-                {
-                    rect.Y = y;
-                    using (Bitmap bmp = containerSegment.Segment.Bitmap.Clone(rect, PixelFormat.Format32bppArgb))
-                    {
-                        if (CompareBitmaps(segmentToLocate.Segment.Bitmap, bmp))
-                        {
-                            return new Point(x, y);
-                        }
-                    }
-                }
+                continue;
             }
-            return null;
-        }
 
-        private bool CompareBitmaps(Bitmap bmp1, Bitmap bmp2)
-        {
-            for (int x = 0; x < bmp1.Width; x++)
+            MappedSegment candidate = _segments[i];
+
+            // Check to see if the segment is contained within the other.
+            // The returned point will be relative to the containing segment.
+            Point? p = LocateSubSegment(mappedSegment, candidate);
+            if (!p.HasValue)
             {
-                for (int y = 0; y < bmp1.Height; y++)
-                {
-                    if (bmp1.GetPixel(x, y) != bmp2.GetPixel(x, y))
-                    {
-                        return false;
-                    }
-                }
+                continue;
             }
+
+            // Make the point relative to the tile
+            Point adjustmentPoint = p.Value;
+            adjustmentPoint.X += candidate.Segment.MappedX;
+            adjustmentPoint.Y += candidate.Segment.MappedY;
+
+            ProcessRemap(mappedSegment, candidate, adjustmentPoint);
+
             return true;
         }
 
-        private void RemoveStaleSegments()
-        {
-            foreach (TexturedTile tile in _segmentRemovalPositions.Keys)
-            {
-                List<int> removals = _segmentRemovalPositions[tile];
-                removals.Sort();
-                for (int i = removals.Count - 1; i >= 0; i--)
-                {
-                    if (UpdateGraphics)
-                    {
-                        tile.Remove(SegmentMap[tile][removals[i]]);
-                    }
-                    SegmentMap[tile].RemoveAt(removals[i]);
-                }
+        return false;
+    }
 
-                if (SegmentMap[tile].Count == 0)
+    private void ProcessRemap(TextureRemap remap)
+    {
+        // Find the original MappedSegment
+        MappedSegment originalSegment = FindSegmentFromTilePosition(remap.OriginalTile, remap.OriginalBounds);
+        // Find the candiate MappedSegment
+        MappedSegment candidateSegment = FindSegmentFromTilePosition(remap.NewTile, remap.NewBounds/*, false*/);
+        // Move it!
+        if (originalSegment != null && candidateSegment != null)
+        {
+            // Move it!
+            ProcessRemap(originalSegment, candidateSegment, remap.AdjustmentPoint);
+        }
+        else
+        {
+            System.Diagnostics.Debug.WriteLine("Could not remap " + remap.OriginalTile + " : " + remap.OriginalIndex);
+        }
+    }
+
+    private void ProcessRemap(MappedSegment originalSegment, MappedSegment candidateSegment, Point adjustmentPoint)
+    {
+        Rectangle oldBounds = originalSegment.Segment.Bounds;
+        // We pull all of the sub textures from the original segment into the candidate
+        int oldFirstTextureIndex = originalSegment.Segment.FirstTextureIndex;
+        candidateSegment.Segment.InheritTextures(originalSegment.Segment, adjustmentPoint, candidateSegment.Tile.Index);
+        // Store the removal for later processing in RemoveStaleSegments
+        StoreSegmentRemoval(originalSegment);
+
+        SegmentRemapped?.Invoke(this, new TRTextureRemapEventArgs
+        {
+            OldFirstTextureIndex = oldFirstTextureIndex,
+            OldArea = originalSegment.Segment.Area,
+            NewSegment = candidateSegment.Segment,
+            OldTile = originalSegment.Tile,
+            NewTile = candidateSegment.Tile,
+            OldBounds = oldBounds,
+            NewBounds = candidateSegment.Segment.Bounds,
+            AdjustmentPoint = adjustmentPoint
+        });
+    }
+
+    private Point? LocateSubSegment(MappedSegment segmentToLocate, MappedSegment containerSegment)
+    {
+        int xEnd = containerSegment.Segment.Bounds.Width - segmentToLocate.Segment.Bounds.Width;
+        int yEnd = containerSegment.Segment.Bounds.Height - segmentToLocate.Segment.Bounds.Height;
+        Rectangle rect = new Rectangle(0, 0, segmentToLocate.Segment.Bounds.Width, segmentToLocate.Segment.Bounds.Height);
+
+        for (int x = 0; x <= xEnd; x++)
+        {
+            rect.X = x;
+            for (int y = 0; y <= yEnd; y++)
+            {
+                rect.Y = y;
+                using (Bitmap bmp = containerSegment.Segment.Bitmap.Clone(rect, PixelFormat.Format32bppArgb))
                 {
-                    SegmentMap.Remove(tile);
+                    if (CompareBitmaps(segmentToLocate.Segment.Bitmap, bmp))
+                    {
+                        return new Point(x, y);
+                    }
                 }
             }
         }
+        return null;
+    }
 
-        public bool ShouldIgnoreSegment(IEnumerable<int> ignoredIndices, TexturedTileSegment segment)
+    private bool CompareBitmaps(Bitmap bmp1, Bitmap bmp2)
+    {
+        for (int x = 0; x < bmp1.Width; x++)
         {
-            if (ignoredIndices != null)
+            for (int y = 0; y < bmp1.Height; y++)
             {
-                if (ignoredIndices.Count() == 0)
+                if (bmp1.GetPixel(x, y) != bmp2.GetPixel(x, y))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private void RemoveStaleSegments()
+    {
+        foreach (TexturedTile tile in _segmentRemovalPositions.Keys)
+        {
+            List<int> removals = _segmentRemovalPositions[tile];
+            removals.Sort();
+            for (int i = removals.Count - 1; i >= 0; i--)
+            {
+                if (UpdateGraphics)
+                {
+                    tile.Remove(SegmentMap[tile][removals[i]]);
+                }
+                SegmentMap[tile].RemoveAt(removals[i]);
+            }
+
+            if (SegmentMap[tile].Count == 0)
+            {
+                SegmentMap.Remove(tile);
+            }
+        }
+    }
+
+    public bool ShouldIgnoreSegment(IEnumerable<int> ignoredIndices, TexturedTileSegment segment)
+    {
+        if (ignoredIndices != null)
+        {
+            if (ignoredIndices.Count() == 0)
+            {
+                return true;
+            }
+
+            foreach (int textureIndex in ignoredIndices)
+            {
+                if (segment.IsObjectTextureFor(textureIndex))
                 {
                     return true;
                 }
-
-                foreach (int textureIndex in ignoredIndices)
-                {
-                    if (segment.IsObjectTextureFor(textureIndex))
-                    {
-                        return true;
-                    }
-                }
             }
-            return false;
         }
+        return false;
+    }
 
-        private class MappedSegment
-        {
-            public TexturedTile Tile { get; set; }
-            public TexturedTileSegment Segment { get; set; }
-            public int SegmentPosition { get; set; }
-        }
+    private class MappedSegment
+    {
+        public TexturedTile Tile { get; set; }
+        public TexturedTileSegment Segment { get; set; }
+        public int SegmentPosition { get; set; }
     }
 }

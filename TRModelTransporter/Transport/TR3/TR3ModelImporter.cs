@@ -9,61 +9,60 @@ using TRModelTransporter.Handlers;
 using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Model.Textures;
 
-namespace TRModelTransporter.Transport
+namespace TRModelTransporter.Transport;
+
+public class TR3ModelImporter : AbstractTRModelImporter<TR3Entities, TR3Level, TR3ModelDefinition>
 {
-    public class TR3ModelImporter : AbstractTRModelImporter<TR3Entities, TR3Level, TR3ModelDefinition>
+    public TR3ModelImporter()
     {
-        public TR3ModelImporter()
+        Data = new TR3DefaultDataProvider();
+        SortModels = true;
+    }
+
+    protected override AbstractTextureImportHandler<TR3Entities, TR3Level, TR3ModelDefinition> CreateTextureHandler()
+    {
+        return new TR3TextureImportHandler();
+    }
+
+    protected override List<TR3Entities> GetExistingModelTypes()
+    {
+        List<TR3Entities> existingEntities = new List<TR3Entities>();
+        Level.Models.ToList().ForEach(m => existingEntities.Add((TR3Entities)m.ID));
+        return existingEntities;
+    }
+
+    protected override void Import(IEnumerable<TR3ModelDefinition> standardDefinitions, IEnumerable<TR3ModelDefinition> soundOnlyDefinitions)
+    {
+        TR3TextureRemapGroup remap = null;
+        if (TextureRemapPath != null)
         {
-            Data = new TR3DefaultDataProvider();
-            SortModels = true;
+            remap = JsonConvert.DeserializeObject<TR3TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
         }
 
-        protected override AbstractTextureImportHandler<TR3Entities, TR3Level, TR3ModelDefinition> CreateTextureHandler()
+        if (!IgnoreGraphics)
         {
-            return new TR3TextureImportHandler();
+            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
         }
 
-        protected override List<TR3Entities> GetExistingModelTypes()
-        {
-            List<TR3Entities> existingEntities = new List<TR3Entities>();
-            Level.Models.ToList().ForEach(m => existingEntities.Add((TR3Entities)m.ID));
-            return existingEntities;
-        }
+        _soundHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
 
-        protected override void Import(IEnumerable<TR3ModelDefinition> standardDefinitions, IEnumerable<TR3ModelDefinition> soundOnlyDefinitions)
-        {
-            TR3TextureRemapGroup remap = null;
-            if (TextureRemapPath != null)
-            {
-                remap = JsonConvert.DeserializeObject<TR3TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
-            }
+        Dictionary<TR3Entities, TR3Entities> aliasPriority = Data.AliasPriority ?? new Dictionary<TR3Entities, TR3Entities>();
 
+        foreach (TR3ModelDefinition definition in standardDefinitions)
+        {
             if (!IgnoreGraphics)
             {
-                _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
+                _colourHandler.Import(Level, definition);
             }
+            _meshHandler.Import(Level, definition);
+            _animationHandler.Import(Level, definition);
+            _cinematicHandler.Import(Level, definition);
+            _modelHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants(), Data.GetUnsafeModelReplacements());
+        }
 
-            _soundHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
-
-            Dictionary<TR3Entities, TR3Entities> aliasPriority = Data.AliasPriority ?? new Dictionary<TR3Entities, TR3Entities>();
-
-            foreach (TR3ModelDefinition definition in standardDefinitions)
-            {
-                if (!IgnoreGraphics)
-                {
-                    _colourHandler.Import(Level, definition);
-                }
-                _meshHandler.Import(Level, definition);
-                _animationHandler.Import(Level, definition);
-                _cinematicHandler.Import(Level, definition);
-                _modelHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants(), Data.GetUnsafeModelReplacements());
-            }
-
-            if (!IgnoreGraphics)
-            {
-                _textureHandler.ResetUnusedTextures();
-            }
+        if (!IgnoreGraphics)
+        {
+            _textureHandler.ResetUnusedTextures();
         }
     }
 }

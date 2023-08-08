@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace TRModelTransporter.Transport
+namespace TRModelTransporter.Transport;
+
+public class TransportException : Exception
 {
-    public class TransportException : Exception
-    {
-        public TransportException()
-            : base() { }
+    public TransportException()
+        : base() { }
 
-        public TransportException(string message)
-            : base(message) { }
+    public TransportException(string message)
+        : base(message) { }
 
-        public TransportException(string message, Exception innerException)
-            : base(message, innerException) { }
-    }
+    public TransportException(string message, Exception innerException)
+        : base(message, innerException) { }
 }

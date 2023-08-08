@@ -4,43 +4,42 @@ using System;
 using System.Collections.Generic;
 using TRModelTransporter.Model.Textures;
 
-namespace TRModelTransporter.Packing
+namespace TRModelTransporter.Packing;
+
+public class DefaultTexturePacker : AbstractPacker<TexturedTile, TexturedTileSegment>, IDisposable
 {
-    public class DefaultTexturePacker : AbstractPacker<TexturedTile, TexturedTileSegment>, IDisposable
+    public IReadOnlyList<AbstractIndexedTRTexture> AllTextures => _allTextures;
+
+    private readonly List<AbstractIndexedTRTexture> _allTextures;
+
+    public DefaultTexturePacker()
     {
-        public IReadOnlyList<AbstractIndexedTRTexture> AllTextures => _allTextures;
+        TileWidth = 256;
+        TileHeight = 256;
+        MaximumTiles = 16;
 
-        private readonly List<AbstractIndexedTRTexture> _allTextures;
-
-        public DefaultTexturePacker()
+        Options = new PackingOptions
         {
-            TileWidth = 256;
-            TileHeight = 256;
-            MaximumTiles = 16;
+            FillMode = PackingFillMode.Vertical,
+            OrderMode = PackingOrderMode.Height,
+            Order = PackingOrder.Descending,
+            GroupMode = PackingGroupMode.None,
+            StartMethod = PackingStartMethod.EndTile
+        };
 
-            Options = new PackingOptions
-            {
-                FillMode = PackingFillMode.Vertical,
-                OrderMode = PackingOrderMode.Height,
-                Order = PackingOrder.Descending,
-                GroupMode = PackingGroupMode.None,
-                StartMethod = PackingStartMethod.EndTile
-            };
+        _allTextures = new List<AbstractIndexedTRTexture>();
+    }
 
-            _allTextures = new List<AbstractIndexedTRTexture>();
-        }
-
-        public void Dispose()
+    public void Dispose()
+    {
+        foreach (TexturedTile tile in _tiles)
         {
-            foreach (TexturedTile tile in _tiles)
-            {
-                tile.Dispose();
-            }
+            tile.Dispose();
         }
+    }
 
-        protected override TexturedTile CreateTile()
-        {
-            return new TexturedTile();
-        }
+    protected override TexturedTile CreateTile()
+    {
+        return new TexturedTile();
     }
 }
