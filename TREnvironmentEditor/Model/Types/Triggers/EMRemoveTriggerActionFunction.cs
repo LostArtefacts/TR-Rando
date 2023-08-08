@@ -67,7 +67,7 @@ public class EMRemoveTriggerActionFunction : BaseEMFunction
         return ActionItem.ToFDAction(data);
     }
 
-    private void RemoveAction(TRRoomSector sector, FDControl control, FDActionListItem action)
+    private static void RemoveAction(TRRoomSector sector, FDControl control, FDActionListItem action)
     {
         if (sector.FDIndex == 0)
         {

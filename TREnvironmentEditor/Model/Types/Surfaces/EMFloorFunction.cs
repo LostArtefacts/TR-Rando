@@ -206,7 +206,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    private void AlterSectorBox(TR1Level level, TRRoom room, int sectorIndex)
+    private static void AlterSectorBox(TR1Level level, TRRoom room, int sectorIndex)
     {
         TRRoomSector sector = room.Sectors[sectorIndex];
         if (sector.BoxIndex == ushort.MaxValue)
@@ -257,7 +257,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    private void GenerateOverlaps(TR1Level level, ushort currentBoxIndex, ushort newBoxIndex)
+    private static void GenerateOverlaps(TR1Level level, ushort currentBoxIndex, ushort newBoxIndex)
     {
         for (int i = 0; i < level.NumBoxes; i++)
         {
@@ -443,7 +443,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    private void AlterSectorBox(TR2Level level, TR2Room room, int sectorIndex)
+    private static void AlterSectorBox(TR2Level level, TR2Room room, int sectorIndex)
     {
         TRRoomSector sector = room.SectorList[sectorIndex];
         if (sector.BoxIndex == ushort.MaxValue)
@@ -492,7 +492,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    private void GenerateOverlaps(TR2Level level, ushort currentBoxIndex, ushort newBoxIndex)
+    private static void GenerateOverlaps(TR2Level level, ushort currentBoxIndex, ushort newBoxIndex)
     {
         for (int i = 0; i < level.NumBoxes; i++)
         {
@@ -693,7 +693,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    private void AlterSectorBox(TR3Level level, TR3Room room, int sectorIndex)
+    private static void AlterSectorBox(TR3Level level, TR3Room room, int sectorIndex)
     {
         TRRoomSector sector = room.Sectors[sectorIndex];
         if (sector.BoxIndex == ushort.MaxValue)
@@ -746,7 +746,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         }
     }
 
-    private void GenerateOverlaps(TR3Level level, ushort currentBoxIndex, ushort newBoxIndex)
+    private static void GenerateOverlaps(TR3Level level, ushort currentBoxIndex, ushort newBoxIndex)
     {
         for (int i = 0; i < level.NumBoxes; i++)
         {

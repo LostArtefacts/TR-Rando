@@ -95,7 +95,7 @@ public class EMDuplicateTriggerFunction : BaseEMFunction
         control.WriteToLevel(level);
     }
 
-    private void AppendTriggers(TRRoomSector sector, List<FDEntry> triggerEntries, FDControl control)
+    private static void AppendTriggers(TRRoomSector sector, List<FDEntry> triggerEntries, FDControl control)
     {
         if (sector.FDIndex == 0)
         {

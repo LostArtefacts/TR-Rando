@@ -129,13 +129,13 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         EntityMap = remap;
     }
 
-    private void SwapTriggers(SlotInfo slotInfo1, SlotInfo slotInfo2, FDControl floorData)
+    private static void SwapTriggers(SlotInfo slotInfo1, SlotInfo slotInfo2, FDControl floorData)
     {
         floorData.Entries[slotInfo1.FDIndex].RemoveAll(slotInfo1.Triggers.Contains);
         floorData.Entries[slotInfo2.FDIndex].AddRange(slotInfo1.Triggers);
     }
 
-    private void MoveSlot(TREntity entity, EMLocation location)
+    private static void MoveSlot(TREntity entity, EMLocation location)
     {
         entity.X = location.X;
         entity.Y = location.Y;
@@ -144,7 +144,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         entity.Angle = location.Angle;
     }
 
-    private void MoveSlot(TR2Entity entity, EMLocation location)
+    private static void MoveSlot(TR2Entity entity, EMLocation location)
     {
         entity.X = location.X;
         entity.Y = location.Y;
@@ -153,7 +153,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         entity.Angle = location.Angle;
     }
 
-    private EMLocation GetLocation(TREntity entity)
+    private static EMLocation GetLocation(TREntity entity)
     {
         return new EMLocation
         {
@@ -165,7 +165,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         };
     }
 
-    private EMLocation GetLocation(TR2Entity entity)
+    private static EMLocation GetLocation(TR2Entity entity)
     {
         return new EMLocation
         {

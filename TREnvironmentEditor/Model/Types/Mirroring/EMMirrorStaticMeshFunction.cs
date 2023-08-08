@@ -34,7 +34,7 @@ public class EMMirrorStaticMeshFunction : BaseEMFunction
         MirrorMeshes(meshes);
     }
 
-    private void MirrorMeshes(IEnumerable<TRMesh> meshes)
+    private static void MirrorMeshes(IEnumerable<TRMesh> meshes)
     {
         foreach (TRMesh mesh in meshes)
         {

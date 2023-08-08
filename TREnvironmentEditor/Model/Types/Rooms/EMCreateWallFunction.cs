@@ -118,7 +118,7 @@ public class EMCreateWallFunction : BaseEMFunction
         floorData.WriteToLevel(level);
     }
 
-    private void BlockSector(TRRoomSector sector, FDControl floorData)
+    private static void BlockSector(TRRoomSector sector, FDControl floorData)
     {
         sector.Floor = sector.Ceiling = -127;
         sector.BoxIndex = ushort.MaxValue;

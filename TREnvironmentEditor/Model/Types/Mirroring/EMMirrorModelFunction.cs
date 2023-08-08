@@ -60,7 +60,7 @@ public class EMMirrorModelFunction : BaseEMFunction
         MirrorObjectTextures(MirrorMeshes(meshes), level.ObjectTextures);
     }
 
-    private ISet<ushort> MirrorMeshes(List<TRMesh> meshes)
+    private static ISet<ushort> MirrorMeshes(List<TRMesh> meshes)
     {
         ISet<ushort> textureReferences = new HashSet<ushort>();
 
@@ -107,7 +107,7 @@ public class EMMirrorModelFunction : BaseEMFunction
         return textureReferences;
     }
 
-    private void MirrorObjectTextures(ISet<ushort> textureReferences, TRObjectTexture[] objectTextures)
+    private static void MirrorObjectTextures(ISet<ushort> textureReferences, TRObjectTexture[] objectTextures)
     {
         foreach (ushort textureRef in textureReferences)
         {

@@ -322,7 +322,7 @@ public class EMCreateRoomFunction : BaseEMFunction
         return sectors;
     }
 
-    private sbyte GetSectorHeight(int sectorIndex, Dictionary<sbyte, List<int>> specificHeights)
+    private static sbyte GetSectorHeight(int sectorIndex, Dictionary<sbyte, List<int>> specificHeights)
     {
         if (specificHeights != null)
         {
@@ -506,7 +506,7 @@ public class EMCreateRoomFunction : BaseEMFunction
         Textures.RandomizeRotation(face, height);
     }
 
-    private List<TRVertex> BuildFlatVertices(int x, int y, int z)
+    private static List<TRVertex> BuildFlatVertices(int x, int y, int z)
     {
         return new List<TRVertex>
         {
@@ -537,7 +537,7 @@ public class EMCreateRoomFunction : BaseEMFunction
         };
     }
 
-    private List<TRVertex> BuildZWallVertices(int x, int y, int z, int height)
+    private static List<TRVertex> BuildZWallVertices(int x, int y, int z, int height)
     {
         return new List<TRVertex>
         {
@@ -568,7 +568,7 @@ public class EMCreateRoomFunction : BaseEMFunction
         };
     }
 
-    private List<TRVertex> BuildXWallVertices(int x, int y, int z, int height)
+    private static List<TRVertex> BuildXWallVertices(int x, int y, int z, int height)
     {
         return new List<TRVertex>
         {

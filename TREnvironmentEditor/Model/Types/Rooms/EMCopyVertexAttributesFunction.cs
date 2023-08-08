@@ -171,29 +171,29 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
     }
 
     // TR3RoomVertex is a placeholder in the data to cover all levels
-    private void CopyAttributes(TR3RoomVertex baseVertex, TRRoomVertex copyVertex)
+    private static void CopyAttributes(TR3RoomVertex baseVertex, TRRoomVertex copyVertex)
     {
         copyVertex.Lighting = baseVertex.Lighting;
     }
 
-    private void CopyAttributes(TRRoomVertex baseVertex, TRRoomVertex copyVertex)
+    private static void CopyAttributes(TRRoomVertex baseVertex, TRRoomVertex copyVertex)
     {
         copyVertex.Lighting = baseVertex.Lighting;
     }
 
-    private void CopyAttributes(TR3RoomVertex baseVertex, TR2RoomVertex copyVertex)
-    {
-        copyVertex.Lighting = baseVertex.Lighting;
-        copyVertex.Attributes = baseVertex.Attributes;
-    }
-
-    private void CopyAttributes(TR2RoomVertex baseVertex, TR2RoomVertex copyVertex)
+    private static void CopyAttributes(TR3RoomVertex baseVertex, TR2RoomVertex copyVertex)
     {
         copyVertex.Lighting = baseVertex.Lighting;
         copyVertex.Attributes = baseVertex.Attributes;
     }
 
-    private void CopyAttributes(TR3RoomVertex baseVertex, TR3RoomVertex copyVertex)
+    private static void CopyAttributes(TR2RoomVertex baseVertex, TR2RoomVertex copyVertex)
+    {
+        copyVertex.Lighting = baseVertex.Lighting;
+        copyVertex.Attributes = baseVertex.Attributes;
+    }
+
+    private static void CopyAttributes(TR3RoomVertex baseVertex, TR3RoomVertex copyVertex)
     {
         copyVertex.Attributes = baseVertex.Attributes;
         copyVertex.Colour = baseVertex.Colour;

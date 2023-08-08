@@ -136,7 +136,7 @@ public class EMGenerateLightFunction : BaseEMFunction
         }
     }
 
-    private short GenerateLight(ushort intensity, uint fade, double distance)
+    private static short GenerateLight(ushort intensity, uint fade, double distance)
     {
         double lighting = intensity;
         lighting *= fade / distance;
@@ -144,7 +144,7 @@ public class EMGenerateLightFunction : BaseEMFunction
         return (short)(8192 - lighting);
     }
 
-    private short GenerateTR3Light(short intensity, short fade, double distance)
+    private static short GenerateTR3Light(short intensity, short fade, double distance)
     {
         double lighting = intensity;
         lighting *= fade / distance;

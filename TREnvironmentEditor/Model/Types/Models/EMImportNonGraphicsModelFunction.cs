@@ -86,7 +86,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         return importData;
     }
 
-    private void RemapFaces(List<EMMeshTextureData> data, uint maximumTexture, Func<short, TRMesh[]> meshAction)
+    private static void RemapFaces(List<EMMeshTextureData> data, uint maximumTexture, Func<short, TRMesh[]> meshAction)
     {
         foreach (EMMeshTextureData textureData in data)
         {
@@ -113,7 +113,7 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         }
     }
 
-    private ushort SelectReplacementTexture(EMMeshTextureData data, ushort currentTexture, int defaultTexture, uint maximumTexture)
+    private static ushort SelectReplacementTexture(EMMeshTextureData data, ushort currentTexture, int defaultTexture, uint maximumTexture)
     {
         if (data.TextureMap != null && data.TextureMap.ContainsKey(currentTexture))
         {

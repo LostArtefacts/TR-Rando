@@ -125,7 +125,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         }
     }
 
-    private void ModifyRectangles(TRRoom room, EMFaceModification mod)
+    private static void ModifyRectangles(TRRoom room, EMFaceModification mod)
     {
         List<TRRoomVertex> allVertices = room.RoomData.Vertices.ToList();
         foreach (int faceIndex in mod.GetIndices())
@@ -148,7 +148,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
-    private void ModifyRectangles(TR2Room room, EMFaceModification mod)
+    private static void ModifyRectangles(TR2Room room, EMFaceModification mod)
     {
         List<TR2RoomVertex> allVertices = room.RoomData.Vertices.ToList();
         foreach (int faceIndex in mod.GetIndices())
@@ -171,7 +171,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
-    private void ModifyRectangles(TR3Room room, EMFaceModification mod)
+    private static void ModifyRectangles(TR3Room room, EMFaceModification mod)
     {
         List<TR3RoomVertex> allVertices = room.RoomData.Vertices.ToList();
         foreach (int faceIndex in mod.GetIndices())
@@ -194,7 +194,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
-    private void ModifyTriangles(TRRoom room, EMFaceModification mod)
+    private static void ModifyTriangles(TRRoom room, EMFaceModification mod)
     {
         List<TRRoomVertex> allVertices = room.RoomData.Vertices.ToList();
         foreach (int faceIndex in mod.GetIndices())
@@ -217,7 +217,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
-    private void ModifyTriangles(TR2Room room, EMFaceModification mod)
+    private static void ModifyTriangles(TR2Room room, EMFaceModification mod)
     {
         List<TR2RoomVertex> allVertices = room.RoomData.Vertices.ToList();
         foreach (int faceIndex in mod.GetIndices())
@@ -240,7 +240,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
-    private void ModifyTriangles(TR3Room room, EMFaceModification mod)
+    private static void ModifyTriangles(TR3Room room, EMFaceModification mod)
     {
         List<TR3RoomVertex> allVertices = room.RoomData.Vertices.ToList();
         foreach (int faceIndex in mod.GetIndices())
@@ -263,7 +263,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         room.NumDataWords = (uint)(room.RoomData.Serialize().Length / 2);
     }
 
-    private TRRoomVertex GenerateRoomVertex(TRRoomVertex currentRoomVertex, TRVertex newVertex)
+    private static TRRoomVertex GenerateRoomVertex(TRRoomVertex currentRoomVertex, TRVertex newVertex)
     {
         // We create a new vertex because we can't guarantee nothing else is using it.
         // Note the vertex values in the mod are added to the existing values, so we
@@ -280,7 +280,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         };
     }
 
-    private TR2RoomVertex GenerateRoomVertex(TR2RoomVertex currentRoomVertex, TRVertex newVertex)
+    private static TR2RoomVertex GenerateRoomVertex(TR2RoomVertex currentRoomVertex, TRVertex newVertex)
     {
         // We create a new vertex because we can't guarantee nothing else is using it.
         // Note the vertex values in the mod are added to the existing values, so we
@@ -299,7 +299,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         };
     }
 
-    private TR3RoomVertex GenerateRoomVertex(TR3RoomVertex currentRoomVertex, TRVertex newVertex)
+    private static TR3RoomVertex GenerateRoomVertex(TR3RoomVertex currentRoomVertex, TRVertex newVertex)
     {
         // We create a new vertex because we can't guarantee nothing else is using it.
         // Note the vertex values in the mod are added to the existing values, so we
@@ -318,7 +318,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         };
     }
 
-    private void RotateRectangles(TRFace4[] rectangles, EMFaceRotation rot)
+    private static void RotateRectangles(TRFace4[] rectangles, EMFaceRotation rot)
     {
         foreach (int rectIndex in rot.FaceIndices)
         {
@@ -327,7 +327,7 @@ public class EMModifyFaceFunction : BaseEMFunction
         }
     }
 
-    private void RotateTriangles(TRFace3[] triangles, EMFaceRotation rot)
+    private static void RotateTriangles(TRFace3[] triangles, EMFaceRotation rot)
     {
         foreach (int triIndex in rot.FaceIndices)
         {

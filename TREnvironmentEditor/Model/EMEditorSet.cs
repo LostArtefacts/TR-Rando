@@ -81,7 +81,7 @@ public class EMEditorSet : List<BaseEMFunction>, ITextureModifier
         }
     }
 
-    private BaseEMFunction GetModToExecute(BaseEMFunction mod, EMOptions options)
+    private static BaseEMFunction GetModToExecute(BaseEMFunction mod, EMOptions options)
     {
         if (options != null)
         {

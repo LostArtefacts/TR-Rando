@@ -116,7 +116,7 @@ public class EMHorizontalCollisionalPortalFunction : BaseEMFunction
         control.WriteToLevel(level);
     }
 
-    private void CreatePortals(Dictionary<TRRoomSector, List<ushort>> sectorMap, FDControl control)
+    private static void CreatePortals(Dictionary<TRRoomSector, List<ushort>> sectorMap, FDControl control)
     {
         foreach (TRRoomSector sector in sectorMap.Keys)
         {

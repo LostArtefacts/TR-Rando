@@ -54,7 +54,7 @@ public class EMReplaceCollisionalPortalFunction : BaseEMFunction
         floorData.WriteToLevel(level);
     }
 
-    private void ReplacePortal(TRRoomSector sector, ushort adjoiningRoom, FDControl floorData)
+    private static void ReplacePortal(TRRoomSector sector, ushort adjoiningRoom, FDControl floorData)
     {
         if (sector.FDIndex == 0)
         {

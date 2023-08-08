@@ -118,7 +118,7 @@ public class EMMirrorFunction : BaseEMFunction
         arr[pos2] = temp;
     }
 
-    private void MirrorFloorData(TR1Level level)
+    private static void MirrorFloorData(TR1Level level)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
@@ -133,7 +133,7 @@ public class EMMirrorFunction : BaseEMFunction
         floorData.WriteToLevel(level);
     }
 
-    private void MirrorFloorData(TR2Level level)
+    private static void MirrorFloorData(TR2Level level)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
@@ -148,7 +148,7 @@ public class EMMirrorFunction : BaseEMFunction
         floorData.WriteToLevel(level);
     }
 
-    private void MirrorFloorData(TR3Level level)
+    private static void MirrorFloorData(TR3Level level)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
@@ -163,7 +163,7 @@ public class EMMirrorFunction : BaseEMFunction
         floorData.WriteToLevel(level);
     }
 
-    private void MirrorSectors(List<TRRoomSector> sectors, ushort numXSectors, ushort numZSectors, FDControl floorData)
+    private static void MirrorSectors(List<TRRoomSector> sectors, ushort numXSectors, ushort numZSectors, FDControl floorData)
     {
         // Convert the flattened sector list to 2D            
         List<List<TRRoomSector>> sectorMap = new();
@@ -561,7 +561,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private void MirrorStaticMeshes(TR1Level level)
+    private static void MirrorStaticMeshes(TR1Level level)
     {
         MirrorStaticMeshes(level.StaticMeshes, delegate (TRStaticMesh staticMesh)
         {
@@ -569,7 +569,7 @@ public class EMMirrorFunction : BaseEMFunction
         });
     }
 
-    private void MirrorStaticMeshes(TR2Level level)
+    private static void MirrorStaticMeshes(TR2Level level)
     {
         MirrorStaticMeshes(level.StaticMeshes, delegate (TRStaticMesh staticMesh)
         {
@@ -577,7 +577,7 @@ public class EMMirrorFunction : BaseEMFunction
         });
     }
 
-    private void MirrorStaticMeshes(TR3Level level)
+    private static void MirrorStaticMeshes(TR3Level level)
     {
         MirrorStaticMeshes(level.StaticMeshes, delegate (TRStaticMesh staticMesh)
         {
@@ -585,7 +585,7 @@ public class EMMirrorFunction : BaseEMFunction
         });
     }
 
-    private void MirrorStaticMeshes(TRStaticMesh[] staticMeshes, Func<TRStaticMesh, TRMesh> meshFunc)
+    private static void MirrorStaticMeshes(TRStaticMesh[] staticMeshes, Func<TRStaticMesh, TRMesh> meshFunc)
     {
         foreach (TRStaticMesh staticMesh in staticMeshes)
         {
@@ -601,7 +601,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private void FlipBoundingBox(TRBoundingBox box)
+    private static void FlipBoundingBox(TRBoundingBox box)
     {
         short min = box.MinX;
         short max = box.MaxX;
@@ -642,7 +642,7 @@ public class EMMirrorFunction : BaseEMFunction
         AdjustDoors(level.Entities.ToList().FindAll(e => TR3EntityUtilities.IsDoorType((TR3Entities)e.TypeID)));
     }
 
-    private void AdjustTR1EntityPosition(TREntity entity)
+    private static void AdjustTR1EntityPosition(TREntity entity)
     {
         entity.Angle *= -1;
 
@@ -706,7 +706,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private void AdjustTR2EntityPosition(TR2Entity entity)
+    private static void AdjustTR2EntityPosition(TR2Entity entity)
     {
         // If it's facing +/-X direction, flip it
         if (entity.Angle == _east || entity.Angle == _west)
@@ -827,7 +827,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private void AdjustTR3EntityPosition(TR2Entity entity)
+    private static void AdjustTR3EntityPosition(TR2Entity entity)
     {
         // Flip the angle - north and south remain, everything else moves appropriately
         entity.Angle *= -1;
@@ -912,7 +912,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private void AdjustDoors(List<TREntity> doors)
+    private static void AdjustDoors(List<TREntity> doors)
     {
         // Double doors need to be swapped otherwise they open in the wrong direction.
         // Iterate backwards and try to find doors that are next to each other.
@@ -943,7 +943,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private void AdjustDoors(List<TR2Entity> doors)
+    private static void AdjustDoors(List<TR2Entity> doors)
     {
         // Double doors need to be swapped otherwise they open in the wrong direction.
         // Iterate backwards and try to find doors that are next to each other.
@@ -974,7 +974,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private bool AreDoubleDoors(TREntity door1, TREntity door2)
+    private static bool AreDoubleDoors(TREntity door1, TREntity door2)
     {
         // If the difference between X or Z position is one sector size, they share the same Y val,
         // and they are facing the same diretion, then they're double doors.
@@ -985,7 +985,7 @@ public class EMMirrorFunction : BaseEMFunction
             (Math.Abs(door1.X - door2.X) == SectorSize || Math.Abs(door1.Z - door2.Z) == SectorSize);
     }
 
-    private bool AreDoubleDoors(TR2Entity door1, TR2Entity door2)
+    private static bool AreDoubleDoors(TR2Entity door1, TR2Entity door2)
     {
         // If the difference between X or Z position is one sector size, they share the same Y val,
         // and they are facing the same diretion, then they're double doors.
@@ -1050,7 +1050,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private void MirrorTextures(TR1Level level)
+    private static void MirrorTextures(TR1Level level)
     {
         // Collect unique texture references from each of the rooms
         ISet<ushort> textureReferences = new HashSet<ushort>();
@@ -1123,7 +1123,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
 
         MirrorObjectTextures(textureReferences, level.ObjectTextures);
-        
+
         // Models such as doors may use textures also used on walls, but
         // these models aren't mirrored so the texture will end up being
         // upside down. Rotate the relevant mesh faces.
@@ -1131,7 +1131,7 @@ public class EMMirrorFunction : BaseEMFunction
             modelID => TRMeshUtilities.GetModelMeshes(level, (TREntities)modelID));
     }
 
-    private void MirrorTextures(TR2Level level)
+    private static void MirrorTextures(TR2Level level)
     {
         // Collect unique texture references from each of the rooms
         ISet<ushort> textureReferences = new HashSet<ushort>();
@@ -1206,7 +1206,7 @@ public class EMMirrorFunction : BaseEMFunction
         MirrorObjectTextures(textureReferences, level.ObjectTextures);
     }
 
-    private void MirrorTextures(TR3Level level)
+    private static void MirrorTextures(TR3Level level)
     {
         ISet<ushort> textureReferences = new HashSet<ushort>();
 
@@ -1277,7 +1277,7 @@ public class EMMirrorFunction : BaseEMFunction
         MirrorObjectTextures(textureReferences, level.ObjectTextures);
     }
 
-    private void MirrorObjectTextures(ISet<ushort> textureReferences, TRObjectTexture[] objectTextures)
+    private static void MirrorObjectTextures(ISet<ushort> textureReferences, TRObjectTexture[] objectTextures)
     {
         // Flip the object texture vertices in the same way as done for faces
         foreach (ushort textureRef in textureReferences)
@@ -1299,7 +1299,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private void MirrorDependentFaces(TRModel[] models, ISet<ushort> textureReferences, Func<uint, TRMesh[]> meshAction)
+    private static void MirrorDependentFaces(TRModel[] models, ISet<ushort> textureReferences, Func<uint, TRMesh[]> meshAction)
     {
         foreach (TRModel model in models)
         {

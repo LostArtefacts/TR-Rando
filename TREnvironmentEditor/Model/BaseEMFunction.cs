@@ -28,7 +28,7 @@ public abstract class BaseEMFunction
     /// asCeiling = true  => looking up
     /// asCeiling = false => looking down
     /// </summary>
-    public List<TRVertex> GetTileVertices(short x, short y, short z, bool asCeiling)
+    public static List<TRVertex> GetTileVertices(short x, short y, short z, bool asCeiling)
     {
         List<TRVertex> vertices = new()
         {
@@ -46,7 +46,7 @@ public abstract class BaseEMFunction
         return vertices;
     }
 
-    public int CreateRoomVertex(TRRoom room, TRVertex vert, short lighting = 6574)
+    public static int CreateRoomVertex(TRRoom room, TRVertex vert, short lighting = 6574)
     {
         TRRoomVertex v = new()
         {
@@ -61,7 +61,7 @@ public abstract class BaseEMFunction
         return verts.Count - 1;
     }
 
-    public int CreateRoomVertex(TR2Room room, TRVertex vert, short lighting = 6574, short lighting2 = 6574)
+    public static int CreateRoomVertex(TR2Room room, TRVertex vert, short lighting = 6574, short lighting2 = 6574)
     {
         TR2RoomVertex v = new()
         {
@@ -78,7 +78,7 @@ public abstract class BaseEMFunction
         return verts.Count - 1;
     }
 
-    public int CreateRoomVertex(TR3Room room, TRVertex vert, short lighting = 6574, ushort colour = 6574, bool useCaustics = false, bool useWaveMovement = false)
+    public static int CreateRoomVertex(TR3Room room, TRVertex vert, short lighting = 6574, ushort colour = 6574, bool useCaustics = false, bool useWaveMovement = false)
     {
         TR3RoomVertex v = new()
         {
@@ -100,7 +100,7 @@ public abstract class BaseEMFunction
     /// <summary>
     /// Gets the indices of rooms above or below the provided room.
     /// </summary>
-    public ISet<byte> GetAdjacentRooms(IEnumerable<TRRoomSector> sectors, bool above)
+    public static ISet<byte> GetAdjacentRooms(IEnumerable<TRRoomSector> sectors, bool above)
     {
         ISet<byte> rooms = new HashSet<byte>();
         foreach (TRRoomSector sector in sectors)
@@ -114,17 +114,17 @@ public abstract class BaseEMFunction
         return rooms;
     }
 
-    protected EMLevelData GetData(TR1Level level)
+    protected static EMLevelData GetData(TR1Level level)
     {
         return EMLevelData.GetData(level);
     }
 
-    protected EMLevelData GetData(TR2Level level)
+    protected static EMLevelData GetData(TR2Level level)
     {
         return EMLevelData.GetData(level);
     }
 
-    protected EMLevelData GetData(TR3Level level)
+    protected static EMLevelData GetData(TR3Level level)
     {
         return EMLevelData.GetData(level);
     }

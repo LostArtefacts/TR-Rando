@@ -33,7 +33,7 @@ public class EMMoveStaticMeshFunction : BaseEMFunction
         }
     }
 
-    private void AmendLocation(EMLocation location, EMLocation amendment)
+    private static void AmendLocation(EMLocation location, EMLocation amendment)
     {
         location.X += amendment.X;
         location.Y += amendment.Y;

@@ -103,7 +103,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         return Action.ToFDAction(data);
     }
 
-    private void ReplaceActionParameter(TRRoomSector baseSector, FDControl control, FDActionListItem actionItem)
+    private static void ReplaceActionParameter(TRRoomSector baseSector, FDControl control, FDActionListItem actionItem)
     {
         if (baseSector.FDIndex == 0)
         {

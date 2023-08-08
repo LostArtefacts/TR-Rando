@@ -35,7 +35,7 @@ public class EMLevelData
         return Convert(room, NumRooms);
     }
 
-    public short Convert(int itemIndex, uint numItems)
+    public static short Convert(int itemIndex, uint numItems)
     {
         return (short)(itemIndex < 0 ? numItems + itemIndex : itemIndex);
     }

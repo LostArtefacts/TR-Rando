@@ -115,7 +115,7 @@ public class EMRemoveCollisionalPortalFunction : BaseEMFunction
         }
     }
 
-    private int GetSectorIndex(TRRoomInfo roomInfo, EMLocation location, int roomDepth)
+    private static int GetSectorIndex(TRRoomInfo roomInfo, EMLocation location, int roomDepth)
     {
         int x = (location.X - roomInfo.X) / 1024;
         int z = (location.Z - roomInfo.Z) / 1024;

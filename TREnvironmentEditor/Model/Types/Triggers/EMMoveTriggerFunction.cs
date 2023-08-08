@@ -141,7 +141,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
         }
     }
 
-    private bool MoveTriggers(TRRoomSector baseSector, TRRoomSector newSector, FDControl control)
+    private static bool MoveTriggers(TRRoomSector baseSector, TRRoomSector newSector, FDControl control)
     {
         if (baseSector != newSector && baseSector.FDIndex != 0)
         {

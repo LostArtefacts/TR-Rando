@@ -128,7 +128,7 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
         }
     }
 
-    private bool SectorHasTriggers(TRRoomSector sector, FDControl control)
+    private static bool SectorHasTriggers(TRRoomSector sector, FDControl control)
     {
         if (sector.FDIndex != 0)
         {
@@ -138,7 +138,7 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
         return false;
     }
 
-    private void SwapSlots(TREntity slot1, TREntity slot2, EMLevelData data)
+    private static void SwapSlots(TREntity slot1, TREntity slot2, EMLevelData data)
     {
         EMLocation temp = new()
         {
@@ -162,7 +162,7 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
         slot2.Angle = temp.Angle;
     }
 
-    private void SwapSlots(TR2Entity slot1, TR2Entity slot2, EMLevelData data)
+    private static void SwapSlots(TR2Entity slot1, TR2Entity slot2, EMLevelData data)
     {
         EMLocation temp = new()
         {

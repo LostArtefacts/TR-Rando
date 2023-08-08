@@ -192,7 +192,7 @@ public class EMTriggerFunction : BaseEMFunction
         }
     }
 
-    private void SetEnemyClearBodies(IEnumerable<TR2Entity> levelEntities)
+    private static void SetEnemyClearBodies(IEnumerable<TR2Entity> levelEntities)
     {
         foreach (TR2Entity entity in levelEntities)
         {

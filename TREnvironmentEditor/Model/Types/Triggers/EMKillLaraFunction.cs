@@ -58,7 +58,7 @@ public class EMKillLaraFunction : BaseEMFunction
         control.WriteToLevel(level);
     }
 
-    private void CreateTrigger(TRRoomSector sector, FDControl control)
+    private static void CreateTrigger(TRRoomSector sector, FDControl control)
     {
         // If there is no floor data create the FD to begin with.
         if (sector.FDIndex == 0)
