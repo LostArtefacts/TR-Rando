@@ -5,64 +5,63 @@ using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 
-namespace TRTexture16Importer.Textures
+namespace TRTexture16Importer.Textures;
+
+public class TR2TextureMapping : AbstractTextureMapping<TR2Entities, TR2Level>
 {
-    public class TR2TextureMapping : AbstractTextureMapping<TR2Entities, TR2Level>
+    protected TR2TextureMapping(TR2Level level)
+        : base(level) { }
+
+    public static TR2TextureMapping Get(TR2Level level, string mappingFilePrefix, TR2TextureDatabase database, Dictionary<StaticTextureSource<TR2Entities>, List<StaticTextureTarget>> predefinedMapping = null, List<TR2Entities> entitiesToIgnore = null)
     {
-        protected TR2TextureMapping(TR2Level level)
-            : base(level) { }
-
-        public static TR2TextureMapping Get(TR2Level level, string mappingFilePrefix, TR2TextureDatabase database, Dictionary<StaticTextureSource<TR2Entities>, List<StaticTextureTarget>> predefinedMapping = null, List<TR2Entities> entitiesToIgnore = null)
+        string mapFile = Path.Combine(@"Resources\TR2\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
+        if (!File.Exists(mapFile))
         {
-            string mapFile = Path.Combine(@"Resources\TR2\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
-            if (!File.Exists(mapFile))
-            {
-                return null;
-            }
-
-            TR2TextureMapping mapping = new TR2TextureMapping(level);
-            LoadMapping(mapping, mapFile, database, predefinedMapping, entitiesToIgnore);
-            return mapping;
+            return null;
         }
 
-        protected override TRColour[] GetPalette8()
-        {
-            return _level.Palette;
-        }
+        TR2TextureMapping mapping = new TR2TextureMapping(level);
+        LoadMapping(mapping, mapFile, database, predefinedMapping, entitiesToIgnore);
+        return mapping;
+    }
 
-        protected override TRColour4[] GetPalette16()
-        {
-            return _level.Palette16;
-        }
+    protected override TRColour[] GetPalette8()
+    {
+        return _level.Palette;
+    }
 
-        protected override int ImportColour(Color colour)
-        {
-            return PaletteUtilities.Import(_level, colour);
-        }
+    protected override TRColour4[] GetPalette16()
+    {
+        return _level.Palette16;
+    }
 
-        protected override TRMesh[] GetModelMeshes(TR2Entities entity)
-        {
-            return TRMeshUtilities.GetModelMeshes(_level, entity);
-        }
+    protected override int ImportColour(Color colour)
+    {
+        return PaletteUtilities.Import(_level, colour);
+    }
 
-        protected override TRSpriteSequence[] GetSpriteSequences()
-        {
-            return _level.SpriteSequences;
-        }
+    protected override TRMesh[] GetModelMeshes(TR2Entities entity)
+    {
+        return TRMeshUtilities.GetModelMeshes(_level, entity);
+    }
 
-        protected override TRSpriteTexture[] GetSpriteTextures()
-        {
-            return _level.SpriteTextures;
-        }
+    protected override TRSpriteSequence[] GetSpriteSequences()
+    {
+        return _level.SpriteSequences;
+    }
 
-        protected override Bitmap GetTile(int tileIndex)
-        {
-            return _level.Images16[tileIndex].ToBitmap();
-        }
+    protected override TRSpriteTexture[] GetSpriteTextures()
+    {
+        return _level.SpriteTextures;
+    }
 
-        protected override void SetTile(int tileIndex, Bitmap bitmap)
-        {
-            _level.Images16[tileIndex].Pixels = TextureUtilities.ImportFromBitmap(bitmap);
-        }
+    protected override Bitmap GetTile(int tileIndex)
+    {
+        return _level.Images16[tileIndex].ToBitmap();
+    }
+
+    protected override void SetTile(int tileIndex, Bitmap bitmap)
+    {
+        _level.Images16[tileIndex].Pixels = TextureUtilities.ImportFromBitmap(bitmap);
     }
 }
