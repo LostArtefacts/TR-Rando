@@ -6,112 +6,108 @@ using TRRandomizerCore;
 using TRRandomizerCore.Helpers;
 using TRRandomizerView.Utilities;
 
-namespace TRRandomizerView.Windows
+namespace TRRandomizerView.Windows;
+
+public partial class RestoreProgressWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for RestoreProgressWindow.xaml
-    /// </summary>
-    public partial class RestoreProgressWindow : Window
+    #region Dependency Properties
+    public static readonly DependencyProperty ProgressValueProperty = DependencyProperty.Register
+    (
+        "ProgressValue", typeof(int), typeof(RestoreProgressWindow), new PropertyMetadata(0)
+    );
+
+    public static readonly DependencyProperty ProgressTargetProperty = DependencyProperty.Register
+    (
+        "ProgressTarget", typeof(int), typeof(RestoreProgressWindow), new PropertyMetadata(100)
+    );
+
+    public static readonly DependencyProperty ProgressDescriptionProperty = DependencyProperty.Register
+    (
+        "ProgressDescription", typeof(string), typeof(RestoreProgressWindow), new PropertyMetadata("Restoring original data files")
+    );
+
+    public int ProgressValue
     {
-        #region Dependency Properties
-        public static readonly DependencyProperty ProgressValueProperty = DependencyProperty.Register
-        (
-            "ProgressValue", typeof(int), typeof(RestoreProgressWindow), new PropertyMetadata(0)
-        );
+        get => (int)GetValue(ProgressValueProperty);
+        set => SetValue(ProgressValueProperty, value);
+    }
 
-        public static readonly DependencyProperty ProgressTargetProperty = DependencyProperty.Register
-        (
-            "ProgressTarget", typeof(int), typeof(RestoreProgressWindow), new PropertyMetadata(100)
-        );
+    public int ProgressTarget
+    {
+        get => (int)GetValue(ProgressTargetProperty);
+        set => SetValue(ProgressTargetProperty, value);
+    }
 
-        public static readonly DependencyProperty ProgressDescriptionProperty = DependencyProperty.Register
-        (
-            "ProgressDescription", typeof(string), typeof(RestoreProgressWindow), new PropertyMetadata("Restoring original data files")
-        );
+    public string ProgressDescription
+    {
+        get => (string)GetValue(ProgressDescriptionProperty);
+        set => SetValue(ProgressDescriptionProperty, value);
+    }
+    #endregion
 
-        public int ProgressValue
+    private volatile bool _complete;
+    private readonly TRRandomizerController _controller;
+
+    public Exception RestoreException { get; private set; }
+
+    public RestoreProgressWindow(TRRandomizerController controller)
+    {
+        InitializeComponent();
+        Owner = WindowUtils.GetActiveWindow(this);
+        DataContext = this;
+        _complete = false;
+        _controller = controller;
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        WindowUtils.EnableCloseButton(this, false);
+        WindowUtils.TidyMenu(this);
+        new Thread(Restore).Start();
+    }
+
+    private void Restore()
+    {
+        _controller.RestoreProgressChanged += Controller_RestoreProgressChanged;
+
+        try
         {
-            get => (int)GetValue(ProgressValueProperty);
-            set => SetValue(ProgressValueProperty, value);
+            _controller.Restore();
         }
-
-        public int ProgressTarget
+        catch (Exception e)
         {
-            get => (int)GetValue(ProgressTargetProperty);
-            set => SetValue(ProgressTargetProperty, value);
+            RestoreException = e;
         }
-
-        public string ProgressDescription
+        finally
         {
-            get => (string)GetValue(ProgressDescriptionProperty);
-            set => SetValue(ProgressDescriptionProperty, value);
-        }
-        #endregion
+            _controller.RestoreProgressChanged -= Controller_RestoreProgressChanged;
 
-        private volatile bool _complete;
-        private readonly TRRandomizerController _controller;
-
-        public Exception RestoreException { get; private set; }
-
-        public RestoreProgressWindow(TRRandomizerController controller)
-        {
-            InitializeComponent();
-            Owner = WindowUtils.GetActiveWindow(this);
-            DataContext = this;
-            _complete = false;
-            _controller = controller;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            WindowUtils.EnableCloseButton(this, false);
-            WindowUtils.TidyMenu(this);
-            new Thread(Restore).Start();
-        }
-
-        private void Restore()
-        {
-            _controller.RestoreProgressChanged += Controller_RestoreProgressChanged;
-
-            try
-            {
-                _controller.Restore();
-            }
-            catch (Exception e)
-            {
-                RestoreException = e;
-            }
-            finally
-            {
-                _controller.RestoreProgressChanged -= Controller_RestoreProgressChanged;
-
-                Dispatcher.Invoke(delegate
-                {
-                    Dispatcher.Invoke(delegate
-                    {
-                        _complete = true;
-                        WindowUtils.EnableCloseButton(this, true);
-                        DialogResult = RestoreException == null;
-                    });
-                });
-            }
-        }
-
-        private void Controller_RestoreProgressChanged(object sender, TROpenRestoreEventArgs e)
-        {
             Dispatcher.Invoke(delegate
             {
-                ProgressTarget = e.ProgressTarget;
-                ProgressValue = e.ProgressValue;
+                Dispatcher.Invoke(delegate
+                {
+                    _complete = true;
+                    WindowUtils.EnableCloseButton(this, true);
+                    DialogResult = RestoreException == null;
+                });
             });
         }
+    }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
+    private void Controller_RestoreProgressChanged(object sender, TROpenRestoreEventArgs e)
+    {
+        Dispatcher.Invoke(delegate
         {
-            if (!_complete)
-            {
-                e.Cancel = true;
-            }
+            ProgressTarget = e.ProgressTarget;
+            ProgressValue = e.ProgressValue;
+        });
+    }
+
+    private void Window_Closing(object sender, CancelEventArgs e)
+    {
+        if (!_complete)
+        {
+            e.Cancel = true;
         }
     }
 }

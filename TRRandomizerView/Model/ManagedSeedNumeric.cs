@@ -1,7 +1,6 @@
-﻿namespace TRRandomizerView.Model
+﻿namespace TRRandomizerView.Model;
+
+public class ManagedSeedNumeric : ManagedSeed
 {
-    public class ManagedSeedNumeric : ManagedSeed
-    {
-        public int CustomInt { get; set; }
-    }
+    public int CustomInt { get; set; }
 }

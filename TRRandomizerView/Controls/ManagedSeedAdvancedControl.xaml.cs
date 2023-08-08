@@ -4,111 +4,107 @@ using System.Windows.Input;
 using TRRandomizerView.Utilities;
 using TRRandomizerView.Windows;
 
-namespace TRRandomizerView.Controls
+namespace TRRandomizerView.Controls;
+
+public partial class ManagedSeedAdvancedControl : UserControl
 {
-    /// <summary>
-    /// Interaction logic for ManagedSeedAdvancedControl.xaml
-    /// </summary>
-    public partial class ManagedSeedAdvancedControl : UserControl
+    #region Dependency Properties
+    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register
+    (
+        nameof(Title), typeof(string), typeof(ManagedSeedAdvancedControl)
+    );
+
+    public static readonly DependencyProperty TextProperty = DependencyProperty.Register
+    (
+        nameof(Text), typeof(string), typeof(ManagedSeedAdvancedControl)
+    );
+
+    public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register
+    (
+        nameof(IsActive), typeof(bool), typeof(ManagedSeedAdvancedControl)
+    );
+
+    public static readonly DependencyProperty SeedValueProperty = DependencyProperty.Register
+    (
+        nameof(SeedValue), typeof(int), typeof(ManagedSeedAdvancedControl)
+    );
+
+    public static readonly DependencyProperty SeedMinValueProperty = DependencyProperty.Register
+    (
+        nameof(SeedMinValue), typeof(int), typeof(ManagedSeedAdvancedControl), new PropertyMetadata(1)
+    );
+
+    public static readonly DependencyProperty SeedMaxValueProperty = DependencyProperty.Register
+    (
+        nameof(SeedMaxValue), typeof(int), typeof(ManagedSeedAdvancedControl), new PropertyMetadata(int.MaxValue)
+    );
+
+    public static readonly DependencyProperty AdvancedWindowToOpenProperty = DependencyProperty.Register
+    (
+        nameof(AdvancedWindowToOpen), typeof(AdvancedWindow), typeof(ManagedSeedAdvancedControl)
+    );
+
+    public string Title
     {
-        #region Dependency Properties
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register
-        (
-            nameof(Title), typeof(string), typeof(ManagedSeedAdvancedControl)
-        );
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
+    }
 
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register
-        (
-            nameof(Text), typeof(string), typeof(ManagedSeedAdvancedControl)
-        );
+    public string Text
+    {
+        get => (string)GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
+    }
 
-        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register
-        (
-            nameof(IsActive), typeof(bool), typeof(ManagedSeedAdvancedControl)
-        );
+    public bool IsActive
+    {
+        get => (bool)GetValue(IsActiveProperty);
+        set => SetValue(IsActiveProperty, value);
+    }
 
-        public static readonly DependencyProperty SeedValueProperty = DependencyProperty.Register
-        (
-            nameof(SeedValue), typeof(int), typeof(ManagedSeedAdvancedControl)
-        );
+    public int SeedValue
+    {
+        get => (int)GetValue(SeedValueProperty);
+        set => SetValue(SeedValueProperty, value);
+    }
 
-        public static readonly DependencyProperty SeedMinValueProperty = DependencyProperty.Register
-        (
-            nameof(SeedMinValue), typeof(int), typeof(ManagedSeedAdvancedControl), new PropertyMetadata(1)
-        );
+    public int SeedMinValue
+    {
+        get => (int)GetValue(SeedMinValueProperty);
+        set => SetValue(SeedMinValueProperty, value);
+    }
 
-        public static readonly DependencyProperty SeedMaxValueProperty = DependencyProperty.Register
-        (
-            nameof(SeedMaxValue), typeof(int), typeof(ManagedSeedAdvancedControl), new PropertyMetadata(int.MaxValue)
-        );
+    public int SeedMaxValue
+    {
+        get => (int)GetValue(SeedMaxValueProperty);
+        set => SetValue(SeedMaxValueProperty, value);
+    }
 
-        public static readonly DependencyProperty AdvancedWindowToOpenProperty = DependencyProperty.Register
-        (
-            nameof(AdvancedWindowToOpen), typeof(AdvancedWindow), typeof(ManagedSeedAdvancedControl)
-        );
+    public AdvancedWindow AdvancedWindowToOpen
+    {
+        get => (AdvancedWindow)GetValue(AdvancedWindowToOpenProperty);
+        set => SetValue(AdvancedWindowToOpenProperty, value);
+    }
+    #endregion
 
-        public string Title
+    public ManagedSeedAdvancedControl()
+    {
+        InitializeComponent();
+        _content.DataContext = this;
+    }
+
+    private void AdvancedWindowCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = true;// IsEditorActive && _editorControl.CanRandomize();
+    }
+
+    private void AdvancedWindowCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        if (AdvancedWindowToOpen.Owner == null)
+            AdvancedWindowToOpen.Owner = WindowUtils.GetActiveWindow(AdvancedWindowToOpen);
+        if (AdvancedWindowToOpen.ShowDialog() ?? false)
         {
-            get => (string)GetValue(TitleProperty);
-            set => SetValue(TitleProperty, value);
-        }
 
-        public string Text
-        {
-            get => (string)GetValue(TextProperty);
-            set => SetValue(TextProperty, value);
-        }
-
-        public bool IsActive
-        {
-            get => (bool)GetValue(IsActiveProperty);
-            set => SetValue(IsActiveProperty, value);
-        }
-
-        public int SeedValue
-        {
-            get => (int)GetValue(SeedValueProperty);
-            set => SetValue(SeedValueProperty, value);
-        }
-
-        public int SeedMinValue
-        {
-            get => (int)GetValue(SeedMinValueProperty);
-            set => SetValue(SeedMinValueProperty, value);
-        }
-
-        public int SeedMaxValue
-        {
-            get => (int)GetValue(SeedMaxValueProperty);
-            set => SetValue(SeedMaxValueProperty, value);
-        }
-
-        public AdvancedWindow AdvancedWindowToOpen
-        {
-            get => (AdvancedWindow)GetValue(AdvancedWindowToOpenProperty);
-            set => SetValue(AdvancedWindowToOpenProperty, value);
-        }
-        #endregion
-
-        public ManagedSeedAdvancedControl()
-        {
-            InitializeComponent();
-            _content.DataContext = this;
-        }
-
-        private void AdvancedWindowCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;// IsEditorActive && _editorControl.CanRandomize();
-        }
-
-        private void AdvancedWindowCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (AdvancedWindowToOpen.Owner == null)
-                AdvancedWindowToOpen.Owner = WindowUtils.GetActiveWindow(AdvancedWindowToOpen);
-            if (AdvancedWindowToOpen.ShowDialog() ?? false)
-            {
-
-            }
         }
     }
 }

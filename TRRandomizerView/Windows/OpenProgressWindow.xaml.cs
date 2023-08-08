@@ -6,112 +6,108 @@ using TRRandomizerCore;
 using TRRandomizerCore.Helpers;
 using TRRandomizerView.Utilities;
 
-namespace TRRandomizerView.Windows
+namespace TRRandomizerView.Windows;
+
+public partial class OpenProgressWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for OpenProgressWindow.xaml
-    /// </summary>
-    public partial class OpenProgressWindow : Window
+    #region Dependency Properties
+    public static readonly DependencyProperty ProgressValueProperty = DependencyProperty.Register
+    (
+        "ProgressValue", typeof(int), typeof(OpenProgressWindow), new PropertyMetadata(0)
+    );
+
+    public static readonly DependencyProperty ProgressTargetProperty = DependencyProperty.Register
+    (
+        "ProgressTarget", typeof(int), typeof(OpenProgressWindow), new PropertyMetadata(100)
+    );
+
+    public static readonly DependencyProperty ProgressDescriptionProperty = DependencyProperty.Register
+    (
+        "ProgressDescription", typeof(string), typeof(OpenProgressWindow), new PropertyMetadata("Checking backup status")
+    );
+
+    public int ProgressValue
     {
-        #region Dependency Properties
-        public static readonly DependencyProperty ProgressValueProperty = DependencyProperty.Register
-        (
-            "ProgressValue", typeof(int), typeof(OpenProgressWindow), new PropertyMetadata(0)
-        );
+        get => (int)GetValue(ProgressValueProperty);
+        set => SetValue(ProgressValueProperty, value);
+    }
 
-        public static readonly DependencyProperty ProgressTargetProperty = DependencyProperty.Register
-        (
-            "ProgressTarget", typeof(int), typeof(OpenProgressWindow), new PropertyMetadata(100)
-        );
+    public int ProgressTarget
+    {
+        get => (int)GetValue(ProgressTargetProperty);
+        set => SetValue(ProgressTargetProperty, value);
+    }
 
-        public static readonly DependencyProperty ProgressDescriptionProperty = DependencyProperty.Register
-        (
-            "ProgressDescription", typeof(string), typeof(OpenProgressWindow), new PropertyMetadata("Checking backup status")
-        );
+    public string ProgressDescription
+    {
+        get => (string)GetValue(ProgressDescriptionProperty);
+        set => SetValue(ProgressDescriptionProperty, value);
+    }
+    #endregion
 
-        public int ProgressValue
+    private volatile bool _complete;
+    private readonly string _folderPath;
+    private readonly bool _performChecksumTest;
+
+    public Exception OpenException { get; private set; }
+    public TRRandomizerController OpenedController { get; private set; }
+
+    public OpenProgressWindow(string folderPath, bool performChecksumTest)
+    {
+        InitializeComponent();
+        Owner = WindowUtils.GetActiveWindow(this);
+        DataContext = this;
+        _complete = false;
+        _folderPath = folderPath;
+        _performChecksumTest = performChecksumTest;
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        WindowUtils.EnableCloseButton(this, false);
+        WindowUtils.TidyMenu(this);
+        new Thread(Open).Start();
+    }
+
+    private void Open()
+    {
+        TRRandomizerCoord.Instance.OpenProgressChanged += Coord_OpenProgressChanged;
+
+        try
         {
-            get => (int)GetValue(ProgressValueProperty);
-            set => SetValue(ProgressValueProperty, value);
+            OpenedController = TRRandomizerCoord.Instance.Open(_folderPath, _performChecksumTest);
         }
-
-        public int ProgressTarget
+        catch (Exception e)
         {
-            get => (int)GetValue(ProgressTargetProperty);
-            set => SetValue(ProgressTargetProperty, value);
+            OpenException = e;
         }
-
-        public string ProgressDescription
+        finally
         {
-            get => (string)GetValue(ProgressDescriptionProperty);
-            set => SetValue(ProgressDescriptionProperty, value);
-        }
-        #endregion
+            TRRandomizerCoord.Instance.OpenProgressChanged -= Coord_OpenProgressChanged;
 
-        private volatile bool _complete;
-        private readonly string _folderPath;
-        private readonly bool _performChecksumTest;
-
-        public Exception OpenException { get; private set; }
-        public TRRandomizerController OpenedController { get; private set; }
-
-        public OpenProgressWindow(string folderPath, bool performChecksumTest)
-        {
-            InitializeComponent();
-            Owner = WindowUtils.GetActiveWindow(this);
-            DataContext = this;
-            _complete = false;
-            _folderPath = folderPath;
-            _performChecksumTest = performChecksumTest;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            WindowUtils.EnableCloseButton(this, false);
-            WindowUtils.TidyMenu(this);
-            new Thread(Open).Start();
-        }
-
-        private void Open()
-        {
-            TRRandomizerCoord.Instance.OpenProgressChanged += Coord_OpenProgressChanged;
-
-            try
-            {
-                OpenedController = TRRandomizerCoord.Instance.Open(_folderPath, _performChecksumTest);
-            }
-            catch (Exception e)
-            {
-                OpenException = e;
-            }
-            finally
-            {
-                TRRandomizerCoord.Instance.OpenProgressChanged -= Coord_OpenProgressChanged;
-
-                Dispatcher.Invoke(delegate
-                {
-                    _complete = true;
-                    WindowUtils.EnableCloseButton(this, true);
-                    DialogResult = OpenException == null;
-                });
-            }
-        }
-
-        private void Coord_OpenProgressChanged(object sender, TROpenRestoreEventArgs e)
-        {
             Dispatcher.Invoke(delegate
             {
-                ProgressTarget = e.ProgressTarget;
-                ProgressValue = e.ProgressValue;
+                _complete = true;
+                WindowUtils.EnableCloseButton(this, true);
+                DialogResult = OpenException == null;
             });
         }
+    }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
+    private void Coord_OpenProgressChanged(object sender, TROpenRestoreEventArgs e)
+    {
+        Dispatcher.Invoke(delegate
         {
-            if (!_complete)
-            {
-                e.Cancel = true;
-            }
+            ProgressTarget = e.ProgressTarget;
+            ProgressValue = e.ProgressValue;
+        });
+    }
+
+    private void Window_Closing(object sender, CancelEventArgs e)
+    {
+        if (!_complete)
+        {
+            e.Cancel = true;
         }
     }
 }

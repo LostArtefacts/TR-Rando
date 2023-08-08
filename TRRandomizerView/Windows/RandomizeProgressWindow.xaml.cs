@@ -8,188 +8,184 @@ using TRRandomizerCore.Helpers;
 using TRRandomizerView.Model;
 using TRRandomizerView.Utilities;
 
-namespace TRRandomizerView.Windows
+namespace TRRandomizerView.Windows;
+
+public partial class RandomizeProgressWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for RandomizeProgressWindow.xaml
-    /// </summary>
-    public partial class RandomizeProgressWindow : Window
+    #region Dependency Properties
+    public static readonly DependencyProperty ProgressValueProperty = DependencyProperty.Register
+    (
+        "ProgressValue", typeof(int), typeof(RandomizeProgressWindow), new PropertyMetadata(0)
+    );
+
+    public static readonly DependencyProperty ProgressTargetProperty = DependencyProperty.Register
+    (
+        "ProgressTarget", typeof(int), typeof(RandomizeProgressWindow), new PropertyMetadata(100)
+    );
+
+    public static readonly DependencyProperty ProgressDescriptionProperty = DependencyProperty.Register
+    (
+        "ProgressDescription", typeof(string), typeof(RandomizeProgressWindow), new PropertyMetadata("Preparing randomization")
+    );
+
+    public int ProgressValue
     {
-        #region Dependency Properties
-        public static readonly DependencyProperty ProgressValueProperty = DependencyProperty.Register
-        (
-            "ProgressValue", typeof(int), typeof(RandomizeProgressWindow), new PropertyMetadata(0)
-        );
+        get => (int)GetValue(ProgressValueProperty);
+        set => SetValue(ProgressValueProperty, value);
+    }
 
-        public static readonly DependencyProperty ProgressTargetProperty = DependencyProperty.Register
-        (
-            "ProgressTarget", typeof(int), typeof(RandomizeProgressWindow), new PropertyMetadata(100)
-        );
+    public int ProgressTarget
+    {
+        get => (int)GetValue(ProgressTargetProperty);
+        set => SetValue(ProgressTargetProperty, value);
+    }
 
-        public static readonly DependencyProperty ProgressDescriptionProperty = DependencyProperty.Register
-        (
-            "ProgressDescription", typeof(string), typeof(RandomizeProgressWindow), new PropertyMetadata("Preparing randomization")
-        );
+    public string ProgressDescription
+    {
+        get => (string)GetValue(ProgressDescriptionProperty);
+        set => SetValue(ProgressDescriptionProperty, value);
+    }
+    #endregion
 
-        public int ProgressValue
+    private readonly TRRandomizerController _controller;
+    private readonly ControllerOptions _options;
+    private bool _cancelPending, _cancelled;
+
+    public RandomizeProgressWindow(TRRandomizerController controller, ControllerOptions options)
+    {
+        InitializeComponent();
+        Owner = WindowUtils.GetActiveWindow(this);
+        DataContext = this;
+        _controller = controller;
+        _options = options;
+        _cancelPending = _cancelled = false;
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        WindowUtils.TidyMenu(this);
+        Owner.TaskbarItemInfo = new TaskbarItemInfo
         {
-            get => (int)GetValue(ProgressValueProperty);
-            set => SetValue(ProgressValueProperty, value);
+            ProgressState = TaskbarItemProgressState.Normal
+        };
+        new Thread(Randomize).Start();
+    }
+
+    private void Randomize()
+    {
+        _controller.RandomizationProgressChanged += Controller_RandomizationProgressChanged;
+        Exception error = null;
+
+        try
+        {
+            _options.Save();
+            _controller.Randomize();
         }
-
-        public int ProgressTarget
+        catch (Exception e)
         {
-            get => (int)GetValue(ProgressTargetProperty);
-            set => SetValue(ProgressTargetProperty, value);
+            error = e;
         }
-
-        public string ProgressDescription
+        finally
         {
-            get => (string)GetValue(ProgressDescriptionProperty);
-            set => SetValue(ProgressDescriptionProperty, value);
-        }
-        #endregion
+            _controller.RandomizationProgressChanged -= Controller_RandomizationProgressChanged;
 
-        private readonly TRRandomizerController _controller;
-        private readonly ControllerOptions _options;
-        private bool _cancelPending, _cancelled;
-
-        public RandomizeProgressWindow(TRRandomizerController controller, ControllerOptions options)
-        {
-            InitializeComponent();
-            Owner = WindowUtils.GetActiveWindow(this);
-            DataContext = this;
-            _controller = controller;
-            _options = options;
-            _cancelPending = _cancelled = false;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            WindowUtils.TidyMenu(this);
-            Owner.TaskbarItemInfo = new TaskbarItemInfo
-            {
-                ProgressState = TaskbarItemProgressState.Normal
-            };
-            new Thread(Randomize).Start();
-        }
-
-        private void Randomize()
-        {
-            _controller.RandomizationProgressChanged += Controller_RandomizationProgressChanged;
-            Exception error = null;
-
-            try
-            {
-                _options.Save();
-                _controller.Randomize();
-            }
-            catch (Exception e)
-            {
-                error = e;
-            }
-            finally
-            {
-                _controller.RandomizationProgressChanged -= Controller_RandomizationProgressChanged;
-
-                Dispatcher.Invoke(delegate
-                {
-                    WindowUtils.EnableCloseButton(this, true);
-                    if (error != null)
-                    {
-                        Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Error;
-                        MessageWindow.ShowException(error);
-                        DialogResult = false;
-                    }
-                    else
-                    {
-                        DialogResult = !_cancelled;
-                    }
-                    Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
-                });
-            }
-        }
-
-        private void Controller_RandomizationProgressChanged(object sender, TRRandomizationEventArgs e)
-        {
             Dispatcher.Invoke(delegate
             {
-                if (_cancelPending)
+                WindowUtils.EnableCloseButton(this, true);
+                if (error != null)
                 {
-                    e.IsCancelled = true;
-                    _cancelPending = false;
-                    _cancelled = true;
-                }
-                else if (e.Category == TRRandomizationCategory.Warning)
-                {
-                    Dispatcher.Invoke(delegate
-                    {
-                        Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Paused;
-                        if (!MessageWindow.ShowConfirm(FormatWarningMessage(e.CustomDescription)))
-                        {
-                            Cancel();
-                        }
-                        Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
-                    });
+                    Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Error;
+                    MessageWindow.ShowException(error);
+                    DialogResult = false;
                 }
                 else
                 {
-                    ProgressTarget = e.ProgressTarget;
-                    ProgressValue = e.ProgressValue;
-                    Owner.TaskbarItemInfo.ProgressValue = ((double)ProgressValue) / ProgressTarget;
-
-                    if (e.CustomDescription != null)
-                    {
-                        ProgressDescription = e.CustomDescription;
-                    }
-                    else
-                    {
-                        switch (e.Category)
-                        {
-                            case TRRandomizationCategory.Script:
-                                ProgressDescription = "Randomizing script data";
-                                break;
-                            case TRRandomizationCategory.PreRandomize:
-                                ProgressDescription = "Preparing level files";
-                                break;
-                            case TRRandomizationCategory.Randomize:
-                                ProgressDescription = "Randomizing level files";
-                                break;
-                            case TRRandomizationCategory.Commit:
-                                _cancelButton.IsEnabled = false;
-                                WindowUtils.EnableCloseButton(this, false);
-                                ProgressDescription = "Committing changes";
-                                break;
-                        }
-                    }
+                    DialogResult = !_cancelled;
                 }
+                Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
             });
         }
+    }
 
-        private string FormatWarningMessage(string message)
+    private void Controller_RandomizationProgressChanged(object sender, TRRandomizationEventArgs e)
+    {
+        Dispatcher.Invoke(delegate
         {
-            return string.Format("{0}{1}{1}Do you wish to continue?", message, Environment.NewLine);
-        }
+            if (_cancelPending)
+            {
+                e.IsCancelled = true;
+                _cancelPending = false;
+                _cancelled = true;
+            }
+            else if (e.Category == TRRandomizationCategory.Warning)
+            {
+                Dispatcher.Invoke(delegate
+                {
+                    Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Paused;
+                    if (!MessageWindow.ShowConfirm(FormatWarningMessage(e.CustomDescription)))
+                    {
+                        Cancel();
+                    }
+                    Owner.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
+                });
+            }
+            else
+            {
+                ProgressTarget = e.ProgressTarget;
+                ProgressValue = e.ProgressValue;
+                Owner.TaskbarItemInfo.ProgressValue = ((double)ProgressValue) / ProgressTarget;
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+                if (e.CustomDescription != null)
+                {
+                    ProgressDescription = e.CustomDescription;
+                }
+                else
+                {
+                    switch (e.Category)
+                    {
+                        case TRRandomizationCategory.Script:
+                            ProgressDescription = "Randomizing script data";
+                            break;
+                        case TRRandomizationCategory.PreRandomize:
+                            ProgressDescription = "Preparing level files";
+                            break;
+                        case TRRandomizationCategory.Randomize:
+                            ProgressDescription = "Randomizing level files";
+                            break;
+                        case TRRandomizationCategory.Commit:
+                            _cancelButton.IsEnabled = false;
+                            WindowUtils.EnableCloseButton(this, false);
+                            ProgressDescription = "Committing changes";
+                            break;
+                    }
+                }
+            }
+        });
+    }
+
+    private static string FormatWarningMessage(string message)
+    {
+        return string.Format("{0}{1}{1}Do you wish to continue?", message, Environment.NewLine);
+    }
+
+    private void CancelButton_Click(object sender, RoutedEventArgs e)
+    {
+        Cancel();
+    }
+
+    private void Cancel()
+    {
+        _cancelPending = true;
+        _cancelButton.IsEnabled = false;
+        WindowUtils.EnableCloseButton(this, false);
+    }
+
+    private void Window_Closing(object sender, CancelEventArgs e)
+    {
+        if (!_cancelPending && DialogResult == null)
         {
             Cancel();
-        }
-
-        private void Cancel()
-        {
-            _cancelPending = true;
-            _cancelButton.IsEnabled = false;
-            WindowUtils.EnableCloseButton(this, false);
-        }
-
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            if (!_cancelPending && DialogResult == null)
-            {
-                Cancel();
-                e.Cancel = true;
-            }
+            e.Cancel = true;
         }
     }
 }

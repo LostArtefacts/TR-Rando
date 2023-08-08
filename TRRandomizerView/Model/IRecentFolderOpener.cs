@@ -1,7 +1,6 @@
-﻿namespace TRRandomizerView.Model
+﻿namespace TRRandomizerView.Model;
+
+public interface IRecentFolderOpener
 {
-    public interface IRecentFolderOpener
-    {
-        void OpenDataFolder(RecentFolder folder);
-    }
+    void OpenDataFolder(RecentFolder folder);
 }

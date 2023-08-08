@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace TRRandomizerView.Updates
-{
-    public class UpdateEventArgs : EventArgs
-    {
-        public Update Update { get; private set; }
+namespace TRRandomizerView.Updates;
 
-        public UpdateEventArgs(Update update)
-        {
-            Update = update;
-        }
+public class UpdateEventArgs : EventArgs
+{
+    public Update Update { get; private set; }
+
+    public UpdateEventArgs(Update update)
+    {
+        Update = update;
     }
 }

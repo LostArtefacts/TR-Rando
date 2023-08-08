@@ -1,9 +1,8 @@
-﻿namespace TRRandomizerView.Model
-{
-    public class ManagedSeed
-    {
-        public bool IsActive { get; set; }
+﻿namespace TRRandomizerView.Model;
 
-        public int Seed { get; set; }
-    }
+public class ManagedSeed
+{
+    public bool IsActive { get; set; }
+
+    public int Seed { get; set; }
 }
