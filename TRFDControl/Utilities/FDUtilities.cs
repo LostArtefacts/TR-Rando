@@ -17,7 +17,7 @@ public static class FDUtilities
 
     public static List<FDTriggerEntry> GetTriggers(FDControl control, FDTrigAction action, int parameter = -1)
     {
-        List<FDTriggerEntry> entries = new List<FDTriggerEntry>();
+        List<FDTriggerEntry> entries = new();
 
         foreach (List<FDEntry> entryList in control.Entries.Values)
         {
@@ -43,7 +43,7 @@ public static class FDUtilities
 
     public static List<FDActionListItem> GetActionListItems(FDControl control, FDTrigAction trigAction, int sectorIndex = -1)
     {
-        List<FDActionListItem> items = new List<FDActionListItem>();
+        List<FDActionListItem> items = new();
 
         List<List<FDEntry>> entrySearch;
         if (sectorIndex == -1)

@@ -126,11 +126,11 @@ public class FDControl
         }
 
         //List of floordata functions for the sector
-        List<FDEntry> floordataFunctions = new List<FDEntry>();
+        List<FDEntry> floordataFunctions = new();
 
         while (true)
         {
-            FDSetup data = new FDSetup()
+            FDSetup data = new()
             {
                 Value = FloorData[index]
             };
@@ -139,7 +139,7 @@ public class FDControl
             {
                 case FDFunctions.PortalSector:
 
-                    FDPortalEntry portal = new FDPortalEntry()
+                    FDPortalEntry portal = new()
                     {
                         Setup = new FDSetup() { Value = FloorData[index] },
                         Room = FloorData[++index]
@@ -150,7 +150,7 @@ public class FDControl
                     break;
                 case FDFunctions.FloorSlant:
 
-                    FDSlantEntry floorSlant = new FDSlantEntry()
+                    FDSlantEntry floorSlant = new()
                     {
                         Setup = new FDSetup() { Value = FloorData[index] },
                         SlantValue = FloorData[++index],
@@ -162,7 +162,7 @@ public class FDControl
                     break;
                 case FDFunctions.CeilingSlant:
 
-                    FDSlantEntry ceilingSlant = new FDSlantEntry()
+                    FDSlantEntry ceilingSlant = new()
                     {
                         Setup = new FDSetup() { Value = FloorData[index] },
                         SlantValue = FloorData[++index],
@@ -174,7 +174,7 @@ public class FDControl
                     break;
                 case FDFunctions.Trigger:
 
-                    FDTriggerEntry trig = new FDTriggerEntry()
+                    FDTriggerEntry trig = new()
                     {
                         Setup = new FDSetup() { Value = FloorData[index] },
                         TrigSetup = new FDTrigSetup() {  Value = FloorData[++index] }
@@ -196,14 +196,14 @@ public class FDControl
                         do
                         {
                             //New trigger action
-                            FDActionListItem action = new FDActionListItem() { Value = FloorData[++index] };
+                            FDActionListItem action = new() { Value = FloorData[++index] };
 
                             continueFDParse = action.Continue;
 
                             if (action.TrigAction == FDTrigAction.Camera || action.TrigAction == FDTrigAction.Flyby)
                             {
                                 //Camera trig actions have a special extra uint16...
-                                FDCameraAction camAction = new FDCameraAction() { Value = FloorData[++index] };
+                                FDCameraAction camAction = new() { Value = FloorData[++index] };
 
                                 //store associated camera action
                                 action.CamAction = camAction;
@@ -223,7 +223,7 @@ public class FDControl
                     break;
                 case FDFunctions.KillLara:
 
-                    FDKillLaraEntry kill = new FDKillLaraEntry()
+                    FDKillLaraEntry kill = new()
                     {
                         Setup = new FDSetup() { Value = FloorData[index] }
                     };
@@ -233,7 +233,7 @@ public class FDControl
                     break;
                 case FDFunctions.ClimbableWalls:
 
-                    FDClimbEntry climb = new FDClimbEntry()
+                    FDClimbEntry climb = new()
                     {
                         Setup = new FDSetup() { Value = FloorData[index] }
                     };
@@ -254,7 +254,7 @@ public class FDControl
                 case FDFunctions.CeilingTriangulationNE_NW:
                 case FDFunctions.CeilingTriangulationNE_SE:
 
-                    TR3TriangulationEntry tri = new TR3TriangulationEntry()
+                    TR3TriangulationEntry tri = new()
                     {
                         Setup = new FDSetup() { Value = FloorData[index] },
                         TriData = new FDTriangulationData() { Value = FloorData[++index] }
@@ -265,7 +265,7 @@ public class FDControl
                     break;
                 case FDFunctions.Monkeyswing:
 
-                    TR3MonkeySwingEntry swing = new TR3MonkeySwingEntry()
+                    TR3MonkeySwingEntry swing = new()
                     {
                         Setup = new FDSetup() { Value = FloorData[index] },
                     };
@@ -275,7 +275,7 @@ public class FDControl
                     break;
                 case FDFunctions.DeferredTriggeringOrMinecartRotateLeft:
 
-                    TR3MinecartRotateLeftEntry mineleft = new TR3MinecartRotateLeftEntry()
+                    TR3MinecartRotateLeftEntry mineleft = new()
                     {
                         Setup = new FDSetup() { Value = FloorData[index] },
                     };
@@ -285,7 +285,7 @@ public class FDControl
                     break;
                 case FDFunctions.MechBeetleOrMinecartRotateRight:
 
-                    TR3MinecartRotateRightEntry mineright = new TR3MinecartRotateRightEntry()
+                    TR3MinecartRotateRightEntry mineright = new()
                     {
                         Setup = new FDSetup() { Value = FloorData[index] },
                     };
@@ -317,12 +317,12 @@ public class FDControl
 
     public void WriteToLevel(TR1Level lvl)
     {
-        List<ushort> data = new List<ushort>
+        List<ushort> data = new()
         {
             lvl.FloorData[0] // Index 0 is always dummy
         };
 
-        Dictionary<int, int> entryLengths = new Dictionary<int, int>();
+        Dictionary<int, int> entryLengths = new();
 
         foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
         {
@@ -355,7 +355,7 @@ public class FDControl
 
         // Recalculate the indices based on the length of the floor data for each.
         // This allows for new entries to be added (or their entries added to) or removed.
-        Dictionary<int, int> newIndices = new Dictionary<int, int>();
+        Dictionary<int, int> newIndices = new();
         int newIndex = 1; // Always start at 1 as 0 is dummy data
         foreach (int index in entryLengths.Keys)
         {
@@ -365,7 +365,7 @@ public class FDControl
         }
 
         // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
-        SortedDictionary<int, List<FDEntry>> _updatedEntries = new SortedDictionary<int, List<FDEntry>>();
+        SortedDictionary<int, List<FDEntry>> _updatedEntries = new();
         foreach (TRRoom room in lvl.Rooms)
         {
             foreach (TRRoomSector sector in room.Sectors)
@@ -391,12 +391,12 @@ public class FDControl
 
     public void WriteToLevel(TR2Level lvl)
     {
-        List<ushort> data = new List<ushort>
+        List<ushort> data = new()
         {
             lvl.FloorData[0] // Index 0 is always dummy
         };
 
-        Dictionary<int, int> entryLengths = new Dictionary<int, int>();
+        Dictionary<int, int> entryLengths = new();
 
         foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
         {
@@ -429,7 +429,7 @@ public class FDControl
 
         // Recalculate the indices based on the length of the floor data for each.
         // This allows for new entries to be added (or their entries added to) or removed.
-        Dictionary<int, int> newIndices = new Dictionary<int, int>();
+        Dictionary<int, int> newIndices = new();
         int newIndex = 1; // Always start at 1 as 0 is dummy data
         foreach (int index in entryLengths.Keys)
         {
@@ -439,7 +439,7 @@ public class FDControl
         }
 
         // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
-        SortedDictionary<int, List<FDEntry>> _updatedEntries = new SortedDictionary<int, List<FDEntry>>();
+        SortedDictionary<int, List<FDEntry>> _updatedEntries = new();
         foreach (TR2Room room in lvl.Rooms)
         {
             foreach (TRRoomSector sector in room.SectorList)
@@ -465,12 +465,12 @@ public class FDControl
 
     public void WriteToLevel(TR3Level lvl)
     {
-        List<ushort> data = new List<ushort>
+        List<ushort> data = new()
         {
             lvl.FloorData[0] // Index 0 is always dummy
         };
 
-        Dictionary<int, int> entryLengths = new Dictionary<int, int>();
+        Dictionary<int, int> entryLengths = new();
 
         foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
         {
@@ -503,7 +503,7 @@ public class FDControl
 
         // Recalculate the indices based on the length of the floor data for each.
         // This allows for new entries to be added (or their entries added to) or removed.
-        Dictionary<int, int> newIndices = new Dictionary<int, int>();
+        Dictionary<int, int> newIndices = new();
         int newIndex = 1; // Always start at 1 as 0 is dummy data
         foreach (int index in entryLengths.Keys)
         {
@@ -513,7 +513,7 @@ public class FDControl
         }
 
         // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
-        SortedDictionary<int, List<FDEntry>> _updatedEntries = new SortedDictionary<int, List<FDEntry>>();
+        SortedDictionary<int, List<FDEntry>> _updatedEntries = new();
         foreach (TR3Room room in lvl.Rooms)
         {
             foreach (TRRoomSector sector in room.Sectors)
@@ -539,12 +539,12 @@ public class FDControl
 
     public void WriteToLevel(TR4Level lvl)
     {
-        List<ushort> data = new List<ushort>
+        List<ushort> data = new()
         {
             lvl.LevelDataChunk.Floordata[0] // Index 0 is always dummy
         };
 
-        Dictionary<int, int> entryLengths = new Dictionary<int, int>();
+        Dictionary<int, int> entryLengths = new();
 
         foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
         {
@@ -577,7 +577,7 @@ public class FDControl
 
         // Recalculate the indices based on the length of the floor data for each.
         // This allows for new entries to be added (or their entries added to) or removed.
-        Dictionary<int, int> newIndices = new Dictionary<int, int>();
+        Dictionary<int, int> newIndices = new();
         int newIndex = 1; // Always start at 1 as 0 is dummy data
         foreach (int index in entryLengths.Keys)
         {
@@ -587,7 +587,7 @@ public class FDControl
         }
 
         // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
-        SortedDictionary<int, List<FDEntry>> _updatedEntries = new SortedDictionary<int, List<FDEntry>>();
+        SortedDictionary<int, List<FDEntry>> _updatedEntries = new();
         foreach (TR4Room room in lvl.LevelDataChunk.Rooms)
         {
             foreach (TRRoomSector sector in room.Sectors)
@@ -613,12 +613,12 @@ public class FDControl
 
     public void WriteToLevel(TR5Level lvl)
     {
-        List<ushort> data = new List<ushort>
+        List<ushort> data = new()
         {
             lvl.LevelDataChunk.Floordata[0] // Index 0 is always dummy
         };
 
-        Dictionary<int, int> entryLengths = new Dictionary<int, int>();
+        Dictionary<int, int> entryLengths = new();
 
         foreach (KeyValuePair<int, List<FDEntry>> entry in Entries)
         {
@@ -651,7 +651,7 @@ public class FDControl
 
         // Recalculate the indices based on the length of the floor data for each.
         // This allows for new entries to be added (or their entries added to) or removed.
-        Dictionary<int, int> newIndices = new Dictionary<int, int>();
+        Dictionary<int, int> newIndices = new();
         int newIndex = 1; // Always start at 1 as 0 is dummy data
         foreach (int index in entryLengths.Keys)
         {
@@ -661,7 +661,7 @@ public class FDControl
         }
 
         // Update each TRRoomSector by repointing its FDIndex value to the newly calculated value.
-        SortedDictionary<int, List<FDEntry>> _updatedEntries = new SortedDictionary<int, List<FDEntry>>();
+        SortedDictionary<int, List<FDEntry>> _updatedEntries = new();
         foreach (TR5Room room in lvl.LevelDataChunk.Rooms)
         {
             foreach (TRRoomSector sector in room.RoomData.SectorList)

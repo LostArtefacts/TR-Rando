@@ -48,7 +48,7 @@ public class FDTriggerEntry : FDEntry
     public override ushort[] Flatten()
     {
         //FD Setup followed by TrigSetup
-        List<ushort> dataArray = new List<ushort>
+        List<ushort> dataArray = new()
         {
             Setup.Value,
             TrigSetup.Value
