@@ -27,5 +27,6 @@ public abstract class AbstractTRModelDefinition<E> : IDisposable where E : Enum
     public void Dispose()
     {
         Bitmap?.Dispose();
+        GC.SuppressFinalize(this);
     }
 }

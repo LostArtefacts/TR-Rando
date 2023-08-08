@@ -153,5 +153,6 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
         {
             segment.Dispose();
         }
+        GC.SuppressFinalize(this);
     }
 }

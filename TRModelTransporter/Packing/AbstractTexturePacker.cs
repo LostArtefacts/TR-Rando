@@ -359,6 +359,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
         {
             tile.Dispose();
         }
+        GC.SuppressFinalize(this);
     }
 
     protected override TexturedTile CreateTile()

@@ -34,6 +34,7 @@ public class DefaultTexturePacker : AbstractPacker<TexturedTile, TexturedTileSeg
         {
             tile.Dispose();
         }
+        GC.SuppressFinalize(this);
     }
 
     protected override TexturedTile CreateTile()
