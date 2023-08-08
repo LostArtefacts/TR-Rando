@@ -59,8 +59,8 @@ public static class ControlUtils
     {
         private static Icon _largeFolderIcon, _smallFolderIcon;
 
-        public static Icon FolderLarge => _largeFolderIcon ?? (_largeFolderIcon = GetStockIcon(SHSIID_FOLDER, SHGSI_LARGEICON));
-        public static Icon FolderSmall => _smallFolderIcon ?? (_smallFolderIcon = GetStockIcon(SHSIID_FOLDER, SHGSI_SMALLICON));
+        public static Icon FolderLarge => _largeFolderIcon ??= GetStockIcon(SHSIID_FOLDER, SHGSI_LARGEICON);
+        public static Icon FolderSmall => _smallFolderIcon ??= GetStockIcon(SHSIID_FOLDER, SHGSI_SMALLICON);
 
         [DllImport("shell32.dll")]
         private static extern int SHGetStockIconInfo(uint siid, uint uFlags, ref SHSTOCKICONINFO psii);

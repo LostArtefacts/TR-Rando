@@ -16,14 +16,7 @@ public class UpdateChecker
 
     public static UpdateChecker Instance
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new UpdateChecker();
-            }
-            return _instance;
-        }
+        get => _instance ??= new();
     }
 
     private const string _updateUrl = "https://api.github.com/repos/DanzaG/TR2-Rando/releases/latest";
