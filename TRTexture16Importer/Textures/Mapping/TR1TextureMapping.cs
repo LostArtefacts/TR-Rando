@@ -84,10 +84,7 @@ public class TR1TextureMapping : AbstractTextureMapping<TREntities, TR1Level>
                 SetTile(tile, _tileMap[tile].Bitmap);
             }
 
-            if (PaletteManager != null)
-            {
-                PaletteManager.MergeTiles();
-            }
+            PaletteManager?.MergeTiles();
 
             foreach (int tile in _tileMap.Keys)
             {

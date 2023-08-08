@@ -28,10 +28,7 @@ public class StaticTextureSource<E> : AbstractTextureSource, IDisposable
 
     public void Dispose()
     {
-        if (_bitmap != null)
-        {
-            _bitmap.Dispose();
-        }
+        _bitmap?.Dispose();
         GC.SuppressFinalize(this);
     }
 
