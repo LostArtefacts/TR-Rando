@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TRTexture16Importer.Textures;
+﻿namespace TRTexture16Importer.Textures;
 
 public class TextureGrouping<E>
     where E : Enum

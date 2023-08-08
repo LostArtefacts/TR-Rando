@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace TRTexture16Importer.Textures;
+﻿namespace TRTexture16Importer.Textures;
 
 public abstract class AbstractTextureSource
 {

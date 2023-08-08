@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TRTexture16Importer.Helpers;
+﻿using TRTexture16Importer.Helpers;
 
 namespace TRTexture16Importer.Textures;
 
