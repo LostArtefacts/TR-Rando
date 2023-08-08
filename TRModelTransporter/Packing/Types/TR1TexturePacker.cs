@@ -110,9 +110,6 @@ public class TR1TexturePacker : AbstractTexturePacker<TREntities, TR1Level>
 
     protected override void PostCommit()
     {
-        if (PaletteManager != null)
-        {
-            PaletteManager.MergeTiles();
-        }
+        PaletteManager?.MergeTiles();
     }
 }

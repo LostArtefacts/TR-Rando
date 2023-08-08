@@ -26,9 +26,6 @@ public abstract class AbstractTRModelDefinition<E> : IDisposable where E : Enum
 
     public void Dispose()
     {
-        if (Bitmap != null)
-        {
-            Bitmap.Dispose();
-        }
+        Bitmap?.Dispose();
     }
 }

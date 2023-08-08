@@ -147,10 +147,7 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
 
     public void Dispose()
     {
-        if (BitmapGraphics != null)
-        {
-            BitmapGraphics.Dispose();
-        }
+        BitmapGraphics?.Dispose();
 
         foreach (TexturedTileSegment segment in _rectangles)
         {

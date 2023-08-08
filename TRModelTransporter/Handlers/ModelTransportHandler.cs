@@ -24,11 +24,7 @@ public class ModelTransportHandler
     private TRModel GetTRModel(IEnumerable<TRModel> models, short entityID)
     {
         TRModel model = models.ToList().Find(m => m.ID == entityID);
-        if (model == null)
-        {
-            throw new ArgumentException(string.Format("The model for {0} could not be found.", entityID));
-        }
-        return model;
+        return model ?? throw new ArgumentException($"The model for {entityID} could not be found.");
     }
 
     public void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TREntities, TREntities> aliasPriority, IEnumerable<TREntities> laraDependants)

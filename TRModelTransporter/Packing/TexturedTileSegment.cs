@@ -134,10 +134,7 @@ public class TexturedTileSegment : DefaultRectangle, IDisposable
 
     public void Dispose()
     {
-        if (Bitmap != null)
-        {
-            Bitmap.Dispose();
-        }
+        Bitmap?.Dispose();
     }
 
     public TexturedTileSegment Clone()
