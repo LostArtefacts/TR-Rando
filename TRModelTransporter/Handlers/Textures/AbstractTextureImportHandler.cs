@@ -199,7 +199,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
             {
                 foreach (AbstractIndexedTRTexture texture in segment.Textures)
                 {
-                    if (!(texture is IndexedTRObjectTexture objTexture)) // Sprites handled later
+                    if (texture is not IndexedTRObjectTexture objTexture) // Sprites handled later
                     {
                         continue;
                     }
