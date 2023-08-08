@@ -240,7 +240,7 @@ public class TRTextureDeduplicator<E> where E : Enum
     {
         if (ignoredIndices != null)
         {
-            if (ignoredIndices.Count() == 0)
+            if (!ignoredIndices.Any())
             {
                 return true;
             }

@@ -120,7 +120,7 @@ public abstract class AbstractTRModelImporter<E, L, D> : AbstractTRModelTranspor
                 // There may be null meshes dependent on this removal, so we can only remove it if they're
                 // being removed as well.
                 IEnumerable<E> exclusions = Data.GetRemovalExclusions(entity);
-                if (exclusions.Count() > 0 && exclusions.All(EntitiesToRemove.Contains))
+                if (exclusions.Any() && exclusions.All(EntitiesToRemove.Contains))
                 {
                     entityClean = false;
                 }

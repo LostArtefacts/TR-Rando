@@ -238,7 +238,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
     public void RemoveModelSegmentsChecked(IEnumerable<E> modelEntitiesToRemove)
     {
-        if (modelEntitiesToRemove.Count() == 0)
+        if (!modelEntitiesToRemove.Any())
         {
             return;
         }
