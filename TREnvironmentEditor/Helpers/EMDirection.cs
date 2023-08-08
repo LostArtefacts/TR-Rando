@@ -1,12 +1,11 @@
-﻿namespace TREnvironmentEditor.Helpers
+﻿namespace TREnvironmentEditor.Helpers;
+
+public enum Direction
 {
-    public enum Direction
-    {
-        North,
-        East,
-        South,
-        West,
-        Up,
-        Down
-    }
+    North,
+    East,
+    South,
+    West,
+    Up,
+    Down
 }

@@ -1,8 +1,7 @@
-﻿namespace TREnvironmentEditor.Helpers
+﻿namespace TREnvironmentEditor.Helpers;
+
+public enum EMExclusionMode
 {
-    public enum EMExclusionMode
-    {
-        BreakOnAny,
-        Individual,
-    }
+    BreakOnAny,
+    Individual,
 }

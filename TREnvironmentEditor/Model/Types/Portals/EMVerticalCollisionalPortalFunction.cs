@@ -3,149 +3,148 @@ using TRFDControl;
 using TRFDControl.Utilities;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types
+namespace TREnvironmentEditor.Model.Types;
+
+public class EMVerticalCollisionalPortalFunction : BaseEMFunction
 {
-    public class EMVerticalCollisionalPortalFunction : BaseEMFunction
+    public EMLocation Ceiling { get; set; }
+    public EMLocation Floor { get; set; }
+    public bool AllSectors { get; set; }
+    public bool InheritFloorBox { get; set; }
+
+    public override void ApplyToLevel(TR1Level level)
     {
-        public EMLocation Ceiling { get; set; }
-        public EMLocation Floor { get; set; }
-        public bool AllSectors { get; set; }
-        public bool InheritFloorBox { get; set; }
+        EMLevelData data = GetData(level);
 
-        public override void ApplyToLevel(TR1Level level)
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level);
+
+        short ceilingRoom = data.ConvertRoom(Ceiling.Room);
+        short floorRoom = data.ConvertRoom(Floor.Room);
+
+        if (AllSectors)
         {
-            EMLevelData data = GetData(level);
-
-            FDControl floorData = new FDControl();
-            floorData.ParseFromLevel(level);
-
-            short ceilingRoom = data.ConvertRoom(Ceiling.Room);
-            short floorRoom = data.ConvertRoom(Floor.Room);
-
-            if (AllSectors)
+            foreach (TRRoomSector sector in level.Rooms[ceilingRoom].Sectors)
             {
-                foreach (TRRoomSector sector in level.Rooms[ceilingRoom].Sectors)
+                if (!sector.IsImpenetrable && sector.RoomBelow != 255)
                 {
-                    if (!sector.IsImpenetrable && sector.RoomBelow != 255)
-                    {
-                        sector.RoomBelow = (byte)floorRoom;
-                    }
-                }
-
-                foreach (TRRoomSector sector in level.Rooms[floorRoom].Sectors)
-                {
-                    if (!sector.IsImpenetrable && sector.RoomAbove != 255)
-                    {
-                        sector.RoomAbove = (byte)ceilingRoom;
-                    }
+                    sector.RoomBelow = (byte)floorRoom;
                 }
             }
-            else
+
+            foreach (TRRoomSector sector in level.Rooms[floorRoom].Sectors)
             {
-                TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
-                TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
-
-                if (ceilingSector != floorSector)
+                if (!sector.IsImpenetrable && sector.RoomAbove != 255)
                 {
-                    ceilingSector.RoomBelow = (byte)floorRoom;
-                    floorSector.RoomAbove = (byte)ceilingRoom;
-
-                    if (InheritFloorBox)
-                    {
-                        ceilingSector.BoxIndex = floorSector.BoxIndex;
-                    }
+                    sector.RoomAbove = (byte)ceilingRoom;
                 }
             }
         }
-
-        public override void ApplyToLevel(TR2Level level)
+        else
         {
-            EMLevelData data = GetData(level);
+            TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
+            TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
 
-            FDControl floorData = new FDControl();
-            floorData.ParseFromLevel(level);
-
-            short ceilingRoom = data.ConvertRoom(Ceiling.Room);
-            short floorRoom = data.ConvertRoom(Floor.Room);
-
-            if (AllSectors)
+            if (ceilingSector != floorSector)
             {
-                foreach (TRRoomSector sector in level.Rooms[ceilingRoom].SectorList)
-                {
-                    if (!sector.IsImpenetrable && sector.RoomBelow != 255)
-                    {
-                        sector.RoomBelow = (byte)floorRoom;
-                    }
-                }
+                ceilingSector.RoomBelow = (byte)floorRoom;
+                floorSector.RoomAbove = (byte)ceilingRoom;
 
-                foreach (TRRoomSector sector in level.Rooms[floorRoom].SectorList)
+                if (InheritFloorBox)
                 {
-                    if (!sector.IsImpenetrable && sector.RoomAbove != 255)
-                    {
-                        sector.RoomAbove = (byte)ceilingRoom;
-                    }
-                }
-            }
-            else
-            {
-                TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
-                TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
-
-                if (ceilingSector != floorSector)
-                {
-                    ceilingSector.RoomBelow = (byte)floorRoom;
-                    floorSector.RoomAbove = (byte)ceilingRoom;
-
-                    if (InheritFloorBox)
-                    {
-                        ceilingSector.BoxIndex = floorSector.BoxIndex;
-                    }
+                    ceilingSector.BoxIndex = floorSector.BoxIndex;
                 }
             }
         }
+    }
 
-        public override void ApplyToLevel(TR3Level level)
+    public override void ApplyToLevel(TR2Level level)
+    {
+        EMLevelData data = GetData(level);
+
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level);
+
+        short ceilingRoom = data.ConvertRoom(Ceiling.Room);
+        short floorRoom = data.ConvertRoom(Floor.Room);
+
+        if (AllSectors)
         {
-            EMLevelData data = GetData(level);
-
-            FDControl floorData = new FDControl();
-            floorData.ParseFromLevel(level);
-
-            short ceilingRoom = data.ConvertRoom(Ceiling.Room);
-            short floorRoom = data.ConvertRoom(Floor.Room);
-
-            if (AllSectors)
+            foreach (TRRoomSector sector in level.Rooms[ceilingRoom].SectorList)
             {
-                foreach (TRRoomSector sector in level.Rooms[ceilingRoom].Sectors)
+                if (!sector.IsImpenetrable && sector.RoomBelow != 255)
                 {
-                    if (!sector.IsImpenetrable && sector.RoomBelow != 255)
-                    {
-                        sector.RoomBelow = (byte)floorRoom;
-                    }
-                }
-
-                foreach (TRRoomSector sector in level.Rooms[floorRoom].Sectors)
-                {
-                    if (!sector.IsImpenetrable && sector.RoomAbove != 255)
-                    {
-                        sector.RoomAbove = (byte)ceilingRoom;
-                    }
+                    sector.RoomBelow = (byte)floorRoom;
                 }
             }
-            else
+
+            foreach (TRRoomSector sector in level.Rooms[floorRoom].SectorList)
             {
-                TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
-                TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
-
-                if (ceilingSector != floorSector)
+                if (!sector.IsImpenetrable && sector.RoomAbove != 255)
                 {
-                    ceilingSector.RoomBelow = (byte)floorRoom;
-                    floorSector.RoomAbove = (byte)ceilingRoom;
+                    sector.RoomAbove = (byte)ceilingRoom;
+                }
+            }
+        }
+        else
+        {
+            TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
+            TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
 
-                    if (InheritFloorBox)
-                    {
-                        ceilingSector.BoxIndex = floorSector.BoxIndex;
-                    }
+            if (ceilingSector != floorSector)
+            {
+                ceilingSector.RoomBelow = (byte)floorRoom;
+                floorSector.RoomAbove = (byte)ceilingRoom;
+
+                if (InheritFloorBox)
+                {
+                    ceilingSector.BoxIndex = floorSector.BoxIndex;
+                }
+            }
+        }
+    }
+
+    public override void ApplyToLevel(TR3Level level)
+    {
+        EMLevelData data = GetData(level);
+
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level);
+
+        short ceilingRoom = data.ConvertRoom(Ceiling.Room);
+        short floorRoom = data.ConvertRoom(Floor.Room);
+
+        if (AllSectors)
+        {
+            foreach (TRRoomSector sector in level.Rooms[ceilingRoom].Sectors)
+            {
+                if (!sector.IsImpenetrable && sector.RoomBelow != 255)
+                {
+                    sector.RoomBelow = (byte)floorRoom;
+                }
+            }
+
+            foreach (TRRoomSector sector in level.Rooms[floorRoom].Sectors)
+            {
+                if (!sector.IsImpenetrable && sector.RoomAbove != 255)
+                {
+                    sector.RoomAbove = (byte)ceilingRoom;
+                }
+            }
+        }
+        else
+        {
+            TRRoomSector ceilingSector = FDUtilities.GetRoomSector(Ceiling.X, Ceiling.Y, Ceiling.Z, ceilingRoom, level, floorData);
+            TRRoomSector floorSector = FDUtilities.GetRoomSector(Floor.X, Floor.Y, Floor.Z, floorRoom, level, floorData);
+
+            if (ceilingSector != floorSector)
+            {
+                ceilingSector.RoomBelow = (byte)floorRoom;
+                floorSector.RoomAbove = (byte)ceilingRoom;
+
+                if (InheritFloorBox)
+                {
+                    ceilingSector.BoxIndex = floorSector.BoxIndex;
                 }
             }
         }

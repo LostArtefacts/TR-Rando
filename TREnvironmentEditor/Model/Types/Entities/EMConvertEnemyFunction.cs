@@ -1,153 +1,141 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TREnvironmentEditor.Helpers;
+﻿using TREnvironmentEditor.Helpers;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 
-namespace TREnvironmentEditor.Model.Types
+namespace TREnvironmentEditor.Model.Types;
+
+public class EMConvertEnemyFunction : BaseEMFunction
 {
-    public class EMConvertEnemyFunction : BaseEMFunction
+    public List<int> EntityIndices { get; set; }
+    public EnemyType NewEnemyType { get; set; }
+    public List<short> Exclusions { get; set; }
+    public short PreferredType { get; set; }
+
+    public override void ApplyToLevel(TR1Level level)
     {
-        public List<int> EntityIndices { get; set; }
-        public EnemyType NewEnemyType { get; set; }
-        public List<short> Exclusions { get; set; }
-        public short PreferredType { get; set; }
-
-        public override void ApplyToLevel(TR1Level level)
+        List<TREntities> potentialTypes = TR1EntityUtilities.GetFullListOfEnemies();
+        if (NewEnemyType == EnemyType.Land)
         {
-            List<TREntities> potentialTypes = TR1EntityUtilities.GetFullListOfEnemies();
-            if (NewEnemyType == EnemyType.Land)
-            {
-                potentialTypes.RemoveAll(e => TR1EntityUtilities.IsWaterCreature(e));
-            }
-            else
-            {
-                potentialTypes.RemoveAll(e => !TR1EntityUtilities.IsWaterCreature(e));
-            }
-
-            if (Exclusions != null && Exclusions.Count > 0)
-            {
-                potentialTypes.RemoveAll(e => Exclusions.Contains((short)e));
-            }
-
-            EMLevelData data = GetData(level);
-            ConvertIndices(data);
-
-            TREntity enemyMatch = null;
-            List<TREntity> entities = level.Entities.ToList();
-            if (potentialTypes.Contains((TREntities)PreferredType))
-            {
-                enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
-            }
-            if (enemyMatch == null)
-            {
-                enemyMatch = entities.Find(e => potentialTypes.Contains((TREntities)e.TypeID));
-            }
-
-            if (enemyMatch != null)
-            {
-                foreach (int index in EntityIndices)
-                {
-                    level.Entities[index].TypeID = enemyMatch.TypeID;
-                }
-            }
+            potentialTypes.RemoveAll(e => TR1EntityUtilities.IsWaterCreature(e));
+        }
+        else
+        {
+            potentialTypes.RemoveAll(e => !TR1EntityUtilities.IsWaterCreature(e));
         }
 
-        public override void ApplyToLevel(TR2Level level)
+        if (Exclusions != null && Exclusions.Count > 0)
         {
-            // Find the first instance of an existing enemy of the same type
-            // we want to convert to. If none found, no action is taken.
-            List<TR2Entities> potentialTypes = TR2EntityUtilities.GetFullListOfEnemies();
-            if (NewEnemyType == EnemyType.Land)
-            {
-                potentialTypes.RemoveAll(e => TR2EntityUtilities.IsWaterCreature(e));
-            }
-            else
-            {
-                potentialTypes.RemoveAll(e => !TR2EntityUtilities.IsWaterCreature(e));
-            }
-
-            if (Exclusions != null && Exclusions.Count > 0)
-            {
-                potentialTypes.RemoveAll(e => Exclusions.Contains((short)e));
-            }
-
-            EMLevelData data = GetData(level);
-            ConvertIndices(data);
-
-            TR2Entity enemyMatch = null;
-            List<TR2Entity> entities = level.Entities.ToList();
-            if (potentialTypes.Contains((TR2Entities)PreferredType))
-            {
-                enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
-            }
-            if (enemyMatch == null)
-            {
-                enemyMatch = entities.Find(e => potentialTypes.Contains((TR2Entities)e.TypeID));
-            }
-
-            if (enemyMatch != null)
-            {
-                foreach (int index in EntityIndices)
-                {
-                    level.Entities[data.ConvertEntity(index)].TypeID = enemyMatch.TypeID;
-                }
-            }
+            potentialTypes.RemoveAll(e => Exclusions.Contains((short)e));
         }
 
-        public override void ApplyToLevel(TR3Level level)
+        EMLevelData data = GetData(level);
+        ConvertIndices(data);
+
+        TREntity enemyMatch = null;
+        List<TREntity> entities = level.Entities.ToList();
+        if (potentialTypes.Contains((TREntities)PreferredType))
         {
-            List<TR3Entities> potentialTypes = TR3EntityUtilities.GetFullListOfEnemies();
-            if (NewEnemyType == EnemyType.Land)
-            {
-                potentialTypes.RemoveAll(e => TR3EntityUtilities.IsWaterCreature(e));
-            }
-            else
-            {
-                potentialTypes.RemoveAll(e => !TR3EntityUtilities.IsWaterCreature(e));
-            }
-
-            if (Exclusions != null && Exclusions.Count > 0)
-            {
-                potentialTypes.RemoveAll(e => Exclusions.Contains((short)e));
-            }
-
-            EMLevelData data = GetData(level);
-            ConvertIndices(data);
-
-            TR2Entity enemyMatch = null;
-            List<TR2Entity> entities = level.Entities.ToList();
-            if (potentialTypes.Contains((TR3Entities)PreferredType))
-            {
-                enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
-            }
-            if (enemyMatch == null)
-            {
-                enemyMatch = entities.Find(e => potentialTypes.Contains((TR3Entities)e.TypeID));
-            }
-
-            if (enemyMatch != null)
-            {
-                foreach (int index in EntityIndices)
-                {
-                    level.Entities[data.ConvertEntity(index)].TypeID = enemyMatch.TypeID;
-                }
-            }
+            enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
         }
+        enemyMatch ??= entities.Find(e => potentialTypes.Contains((TREntities)e.TypeID));
 
-        private void ConvertIndices(EMLevelData data)
+        if (enemyMatch != null)
         {
-            for (int i = 0; i < EntityIndices.Count; i++)
+            foreach (int index in EntityIndices)
             {
-                EntityIndices[i] = data.ConvertEntity(EntityIndices[i]);
+                level.Entities[index].TypeID = enemyMatch.TypeID;
             }
         }
     }
 
-    public enum EnemyType
+    public override void ApplyToLevel(TR2Level level)
     {
-        Water = 0,
-        Land = 1
+        // Find the first instance of an existing enemy of the same type
+        // we want to convert to. If none found, no action is taken.
+        List<TR2Entities> potentialTypes = TR2EntityUtilities.GetFullListOfEnemies();
+        if (NewEnemyType == EnemyType.Land)
+        {
+            potentialTypes.RemoveAll(e => TR2EntityUtilities.IsWaterCreature(e));
+        }
+        else
+        {
+            potentialTypes.RemoveAll(e => !TR2EntityUtilities.IsWaterCreature(e));
+        }
+
+        if (Exclusions != null && Exclusions.Count > 0)
+        {
+            potentialTypes.RemoveAll(e => Exclusions.Contains((short)e));
+        }
+
+        EMLevelData data = GetData(level);
+        ConvertIndices(data);
+
+        TR2Entity enemyMatch = null;
+        List<TR2Entity> entities = level.Entities.ToList();
+        if (potentialTypes.Contains((TR2Entities)PreferredType))
+        {
+            enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
+        }
+        enemyMatch ??= entities.Find(e => potentialTypes.Contains((TR2Entities)e.TypeID));
+
+        if (enemyMatch != null)
+        {
+            foreach (int index in EntityIndices)
+            {
+                level.Entities[data.ConvertEntity(index)].TypeID = enemyMatch.TypeID;
+            }
+        }
     }
+
+    public override void ApplyToLevel(TR3Level level)
+    {
+        List<TR3Entities> potentialTypes = TR3EntityUtilities.GetFullListOfEnemies();
+        if (NewEnemyType == EnemyType.Land)
+        {
+            potentialTypes.RemoveAll(e => TR3EntityUtilities.IsWaterCreature(e));
+        }
+        else
+        {
+            potentialTypes.RemoveAll(e => !TR3EntityUtilities.IsWaterCreature(e));
+        }
+
+        if (Exclusions != null && Exclusions.Count > 0)
+        {
+            potentialTypes.RemoveAll(e => Exclusions.Contains((short)e));
+        }
+
+        EMLevelData data = GetData(level);
+        ConvertIndices(data);
+
+        TR2Entity enemyMatch = null;
+        List<TR2Entity> entities = level.Entities.ToList();
+        if (potentialTypes.Contains((TR3Entities)PreferredType))
+        {
+            enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
+        }
+        enemyMatch ??= entities.Find(e => potentialTypes.Contains((TR3Entities)e.TypeID));
+
+        if (enemyMatch != null)
+        {
+            foreach (int index in EntityIndices)
+            {
+                level.Entities[data.ConvertEntity(index)].TypeID = enemyMatch.TypeID;
+            }
+        }
+    }
+
+    private void ConvertIndices(EMLevelData data)
+    {
+        for (int i = 0; i < EntityIndices.Count; i++)
+        {
+            EntityIndices[i] = data.ConvertEntity(EntityIndices[i]);
+        }
+    }
+}
+
+public enum EnemyType
+{
+    Water = 0,
+    Land = 1
 }

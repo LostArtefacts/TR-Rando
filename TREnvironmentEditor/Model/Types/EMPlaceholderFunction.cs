@@ -1,15 +1,14 @@
 ﻿using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types
+namespace TREnvironmentEditor.Model.Types;
+
+public class EMPlaceholderFunction : BaseEMFunction
 {
-    public class EMPlaceholderFunction : BaseEMFunction
-    {
-        // NOOP
+    // NOOP
 
-        public override void ApplyToLevel(TR1Level level) { }
+    public override void ApplyToLevel(TR1Level level) { }
 
-        public override void ApplyToLevel(TR2Level level) { }
+    public override void ApplyToLevel(TR2Level level) { }
 
-        public override void ApplyToLevel(TR3Level level) { }
-    }
+    public override void ApplyToLevel(TR3Level level) { }
 }

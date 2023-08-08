@@ -1,80 +1,78 @@
-﻿using System.Collections.Generic;
-using TREnvironmentEditor.Helpers;
+﻿using TREnvironmentEditor.Helpers;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types
+namespace TREnvironmentEditor.Model.Types;
+
+public class EMKillLaraFunction : BaseEMFunction
 {
-    public class EMKillLaraFunction : BaseEMFunction
+    public List<EMLocation> Locations { get; set; }
+
+    public override void ApplyToLevel(TR1Level level)
     {
-        public List<EMLocation> Locations { get; set; }
+        EMLevelData data = GetData(level);
 
-        public override void ApplyToLevel(TR1Level level)
+        FDControl control = new();
+        control.ParseFromLevel(level);
+
+        foreach (EMLocation location in Locations)
         {
-            EMLevelData data = GetData(level);
-
-            FDControl control = new FDControl();
-            control.ParseFromLevel(level);
-
-            foreach (EMLocation location in Locations)
-            {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                CreateTrigger(sector, control);
-            }
-
-            control.WriteToLevel(level);
+            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+            CreateTrigger(sector, control);
         }
 
-        public override void ApplyToLevel(TR2Level level)
+        control.WriteToLevel(level);
+    }
+
+    public override void ApplyToLevel(TR2Level level)
+    {
+        EMLevelData data = GetData(level);
+
+        FDControl control = new();
+        control.ParseFromLevel(level);
+
+        foreach (EMLocation location in Locations)
         {
-            EMLevelData data = GetData(level);
-
-            FDControl control = new FDControl();
-            control.ParseFromLevel(level);
-
-            foreach (EMLocation location in Locations)
-            {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                CreateTrigger(sector, control);
-            }
-
-            control.WriteToLevel(level);
+            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+            CreateTrigger(sector, control);
         }
 
-        public override void ApplyToLevel(TR3Level level)
+        control.WriteToLevel(level);
+    }
+
+    public override void ApplyToLevel(TR3Level level)
+    {
+        EMLevelData data = GetData(level);
+
+        FDControl control = new();
+        control.ParseFromLevel(level);
+
+        foreach (EMLocation location in Locations)
         {
-            EMLevelData data = GetData(level);
-
-            FDControl control = new FDControl();
-            control.ParseFromLevel(level);
-
-            foreach (EMLocation location in Locations)
-            {
-                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                CreateTrigger(sector, control);
-            }
-
-            control.WriteToLevel(level);
+            TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+            CreateTrigger(sector, control);
         }
 
-        private void CreateTrigger(TRRoomSector sector, FDControl control)
-        {
-            // If there is no floor data create the FD to begin with.
-            if (sector.FDIndex == 0)
-            {
-                control.CreateFloorData(sector);
-            }
+        control.WriteToLevel(level);
+    }
 
-            List<FDEntry> entries = control.Entries[sector.FDIndex];
-            if (entries.FindIndex(e => e is FDKillLaraEntry) == -1)
+    private static void CreateTrigger(TRRoomSector sector, FDControl control)
+    {
+        // If there is no floor data create the FD to begin with.
+        if (sector.FDIndex == 0)
+        {
+            control.CreateFloorData(sector);
+        }
+
+        List<FDEntry> entries = control.Entries[sector.FDIndex];
+        if (entries.FindIndex(e => e is FDKillLaraEntry) == -1)
+        {
+            entries.Add(new FDKillLaraEntry
             {
-                entries.Add(new FDKillLaraEntry
-                {
-                    Setup = new FDSetup(FDFunctions.KillLara)
-                });
-            }
+                Setup = new FDSetup(FDFunctions.KillLara)
+            });
         }
     }
 }
