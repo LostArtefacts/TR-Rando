@@ -89,7 +89,7 @@ public static class ControlUtils
             SHSTOCKICONINFO info = new();
             info.cbSize = (uint)Marshal.SizeOf(info);
 
-            SHGetStockIconInfo(type, SHGSI_ICON | size, ref info);
+            _ = SHGetStockIconInfo(type, SHGSI_ICON | size, ref info);
 
             Icon icon = (Icon)Icon.FromHandle(info.hIcon).Clone();
             DestroyIcon(info.hIcon);

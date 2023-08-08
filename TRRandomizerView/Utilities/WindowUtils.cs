@@ -21,7 +21,7 @@ public static class WindowUtils
     [DllImport("user32.dll")]
     private static extern IntPtr RemoveMenu(IntPtr hWind, uint uPostition, uint uFlags);
 
-    [DllImport("user32.dll")]
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     private static extern IntPtr InsertMenu(IntPtr hWind, int iPosition, uint uFlags, int iIDNewItem, string lpNewItem);
 
     [DllImport("user32.dll", SetLastError = true)]
@@ -168,7 +168,7 @@ public static class WindowUtils
         IntPtr h = GetWindowHandle(w);
         long value = GetWindowLong(h, GWL_STYLE);
         int newVal = (int)(enabled ? (value | WS_MINIMIZE) : (value & ~WS_MINIMIZE));
-        SetWindowLong(h, GWL_STYLE, newVal);
+        _ = SetWindowLong(h, GWL_STYLE, newVal);
     }
     #endregion
 }
