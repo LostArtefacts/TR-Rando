@@ -44,7 +44,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
 
         if (AttachToItems != null)
         {
-            foreach (short item in AttachToItems)
+            foreach (int item in AttachToItems)
             {
                 TREntity attachToEntity = level.Entities[data.ConvertEntity(item)];
                 TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level, control);
@@ -98,7 +98,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
 
         if (AttachToItems != null)
         {
-            foreach (short item in AttachToItems)
+            foreach (int item in AttachToItems)
             {
                 TR2Entity attachToEntity = level.Entities[data.ConvertEntity(item)];
                 TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level, control);
@@ -152,7 +152,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
 
         if (AttachToItems != null)
         {
-            foreach (short item in AttachToItems)
+            foreach (int item in AttachToItems)
             {
                 TR2Entity attachToEntity = level.Entities[data.ConvertEntity(item)];
                 TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level, control);
