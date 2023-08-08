@@ -113,9 +113,7 @@ public class EMMirrorFunction : BaseEMFunction
 
     private static void Swap<T>(T[] arr, int pos1, int pos2)
     {
-        T temp = arr[pos1];
-        arr[pos1] = arr[pos2];
-        arr[pos2] = temp;
+        (arr[pos2], arr[pos1]) = (arr[pos1], arr[pos2]);
     }
 
     private static void MirrorFloorData(TR1Level level)
@@ -931,9 +929,7 @@ public class EMMirrorFunction : BaseEMFunction
 
                 if (AreDoubleDoors(door1, door2))
                 {
-                    short tmp = door1.TypeID;
-                    door1.TypeID = door2.TypeID;
-                    door2.TypeID = tmp;
+                    (door2.TypeID, door1.TypeID) = (door1.TypeID, door2.TypeID);
 
                     // Don't process these doors again, so just remove the first
                     doors.RemoveAt(i);
@@ -962,9 +958,7 @@ public class EMMirrorFunction : BaseEMFunction
 
                 if (AreDoubleDoors(door1, door2))
                 {
-                    short tmp = door1.TypeID;
-                    door1.TypeID = door2.TypeID;
-                    door2.TypeID = tmp;
+                    (door2.TypeID, door1.TypeID) = (door1.TypeID, door2.TypeID);
 
                     // Don't process these doors again, so just remove the first
                     doors.RemoveAt(i);

@@ -77,8 +77,6 @@ public class EMMirrorStaticMeshFunction : BaseEMFunction
 
     private static void Swap<T>(T[] arr, int pos1, int pos2)
     {
-        T temp = arr[pos1];
-        arr[pos1] = arr[pos2];
-        arr[pos2] = temp;
+        (arr[pos2], arr[pos1]) = (arr[pos1], arr[pos2]);
     }
 }
