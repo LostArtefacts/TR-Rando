@@ -1,7 +1,6 @@
-﻿namespace TRRandomizerView.Model
+﻿namespace TRRandomizerView.Model;
+
+public class ManagedSeedBool : ManagedSeed
 {
-    public class ManagedSeedBool : ManagedSeed
-    {
-        public bool CustomBool { get; set; }
-    }
+    public bool CustomBool { get; set; }
 }

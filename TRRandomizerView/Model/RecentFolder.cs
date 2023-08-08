@@ -1,33 +1,32 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace TRRandomizerView.Model
+namespace TRRandomizerView.Model;
+
+public class RecentFolder : ICommand
 {
-    public class RecentFolder : ICommand
+    public event EventHandler CanExecuteChanged;
+
+    public int Index { get; set; }
+    public string DisplayIndex => Index + ".";
+    public string FolderPath { get; set; }
+    public ICommand OpenCommandExecuted => this;
+
+    private readonly IRecentFolderOpener _opener;
+
+    public RecentFolder(IRecentFolderOpener opener)
     {
-        public event EventHandler CanExecuteChanged;
+        _opener = opener;
+        CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+    }
 
-        public int Index { get; set; }
-        public string DisplayIndex => Index + ".";
-        public string FolderPath { get; set; }
-        public ICommand OpenCommandExecuted => this;
+    public bool CanExecute(object parameter)
+    {
+        return true;
+    }
 
-        private readonly IRecentFolderOpener _opener;
-
-        public RecentFolder(IRecentFolderOpener opener)
-        {
-            _opener = opener;
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            _opener.OpenDataFolder(this);
-        }
+    public void Execute(object parameter)
+    {
+        _opener.OpenDataFolder(this);
     }
 }

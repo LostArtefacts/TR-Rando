@@ -2,24 +2,23 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace TRRandomizerView.Converters
+namespace TRRandomizerView.Converters;
+
+public class BooleanAndConverter : IMultiValueConverter
 {
-    public class BooleanAndConverter : IMultiValueConverter
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        foreach (object value in values)
         {
-            foreach (object value in values)
+            if ((value is bool) && (bool)value == false)
             {
-                if ((value is bool) && (bool)value == false)
-                {
-                    return false;
-                }
+                return false;
             }
-            return true;
         }
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException("BooleanAndConverter is a OneWay converter.");
-        }
+        return true;
+    }
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+    {
+        throw new NotSupportedException("BooleanAndConverter is a OneWay converter.");
     }
 }

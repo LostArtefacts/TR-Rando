@@ -1,19 +1,18 @@
 ﻿using System;
 
-namespace TRRandomizerView.Model
+namespace TRRandomizerView.Model;
+
+public class BoolItemIDControlClass : BoolItemControlClass, ICloneable
 {
-    public class BoolItemIDControlClass : BoolItemControlClass, ICloneable
+    public int ID { get; set; }
+
+    public BoolItemIDControlClass Clone()
     {
-        public int ID { get; set; }
+        return (BoolItemIDControlClass)MemberwiseClone();
+    }
 
-        public BoolItemIDControlClass Clone()
-        {
-            return (BoolItemIDControlClass)MemberwiseClone();
-        }
-
-        object ICloneable.Clone()
-        {
-            return Clone();
-        }
+    object ICloneable.Clone()
+    {
+        return Clone();
     }
 }
