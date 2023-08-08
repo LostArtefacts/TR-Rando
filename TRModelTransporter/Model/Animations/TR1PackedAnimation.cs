@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRModelTransporter.Model.Sound;
 
 namespace TRModelTransporter.Model.Animations;

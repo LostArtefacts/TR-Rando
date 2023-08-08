@@ -1,8 +1,5 @@
 ﻿using RectanglePacker.Events;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using TRLevelControl.Model;
 using TRModelTransporter.Data;
 using TRModelTransporter.Model;

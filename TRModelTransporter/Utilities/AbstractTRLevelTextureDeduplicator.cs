@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TRModelTransporter.Model.Textures;
+﻿using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Utilities;

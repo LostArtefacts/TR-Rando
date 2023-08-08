@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Animations;
 using TRModelTransporter.Model.Definitions;

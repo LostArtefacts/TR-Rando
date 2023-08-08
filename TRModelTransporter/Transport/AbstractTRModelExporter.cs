@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 using TRLevelControl.Model;
 using TRModelTransporter.Events;
 using TRModelTransporter.Handlers;

@@ -1,10 +1,7 @@
 ﻿using RectanglePacker;
 using RectanglePacker.Events;
 using RectanglePacker.Organisation;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using TRLevelControl.Model;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;

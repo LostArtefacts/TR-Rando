@@ -1,7 +1,5 @@
 ﻿using RectanglePacker;
 using RectanglePacker.Organisation;
-using System;
-using System.Collections.Generic;
 using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Packing;

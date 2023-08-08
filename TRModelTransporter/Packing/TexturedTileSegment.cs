@@ -1,6 +1,4 @@
 ﻿using RectanglePacker.Defaults;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using TRModelTransporter.Model.Textures;
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TRModelTransporter.Model.Textures;
+﻿using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Helpers;
 

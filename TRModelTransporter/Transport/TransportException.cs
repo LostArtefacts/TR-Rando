@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TRModelTransporter.Transport;
+﻿namespace TRModelTransporter.Transport;
 
 public class TransportException : Exception
 {

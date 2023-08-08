@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TRModelTransporter.Data;
+﻿namespace TRModelTransporter.Data;
 
 public interface ITransportDataProvider<E> where E : Enum
 {

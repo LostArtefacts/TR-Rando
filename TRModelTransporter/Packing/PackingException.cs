@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TRModelTransporter.Packing;
+﻿namespace TRModelTransporter.Packing;
 
 public class PackingException : Exception
 {

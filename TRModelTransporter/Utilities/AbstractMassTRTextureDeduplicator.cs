@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Imaging;
-using System.IO;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 

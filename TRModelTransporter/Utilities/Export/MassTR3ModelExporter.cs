@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TRLevelControl;
+﻿using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;

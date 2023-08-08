@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using TRLevelControl.Model;
 using TRModelTransporter.Model.Textures;

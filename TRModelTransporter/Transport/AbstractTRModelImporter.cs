@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using TRModelTransporter.Handlers;
+﻿using TRModelTransporter.Handlers;
 using TRModelTransporter.Model;
 using TRModelTransporter.Model.Textures;
 

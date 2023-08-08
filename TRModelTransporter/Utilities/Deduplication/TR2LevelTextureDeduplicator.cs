@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 using TRModelTransporter.Helpers;
