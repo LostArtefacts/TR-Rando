@@ -34,7 +34,7 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
                                 copyVertices = room.RoomData.Triangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
                                 break;
                             default:
-                                throw new ArgumentException();
+                                throw new ArgumentException($"Unknown face type {faceType}");
                         }
 
                         for (int i = 0; i < baseVertices.Length; i++)
@@ -88,7 +88,7 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
                                 copyVertices = room.RoomData.Triangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
                                 break;
                             default:
-                                throw new ArgumentException();
+                                throw new ArgumentException($"Unknown face type {faceType}");
                         }
 
                         for (int i = 0; i < baseVertices.Length; i++)
@@ -142,7 +142,7 @@ public class EMCopyVertexAttributesFunction : BaseEMFunction
                                 copyVertices = room.RoomData.Triangles[FaceMap[roomNumber][faceType][baseFaceIndex]].Vertices;
                                 break;
                             default:
-                                throw new ArgumentException();
+                                throw new ArgumentException($"Unknown face type {faceType}");
                         }
 
                         for (int i = 0; i < baseVertices.Length; i++)
