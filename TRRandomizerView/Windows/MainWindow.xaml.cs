@@ -289,7 +289,7 @@ public partial class MainWindow : Window, IRecentFolderOpener
 
     private void EmptyRecentCommand_Executed(object sender, ExecutedRoutedEventArgs e)
     {
-        _folderControl.EmptyRecentFolders();
+        Controls.FolderLoadControl.EmptyRecentFolders();
     }
     #endregion
 
@@ -472,7 +472,7 @@ public partial class MainWindow : Window, IRecentFolderOpener
         ShowUpdateWindow();
     }
 
-    private void ShowUpdateWindow()
+    private static void ShowUpdateWindow()
     {
         new UpdateAvailableWindow().ShowDialog();
     }

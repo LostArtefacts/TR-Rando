@@ -199,7 +199,7 @@ public class OptionGenerator
         _options.MaxStartingHealth = GetRandomUInt((int)_options.MinStartingHealth, 1000);
     }
 
-    private void RandomizeSecretRewardOptions()
+    private static void RandomizeSecretRewardOptions()
     {
         // None currently
     }

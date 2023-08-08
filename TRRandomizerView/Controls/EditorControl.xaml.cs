@@ -469,12 +469,12 @@ public partial class EditorControl : UserControl
         }
     }
 
-    private void ShowInvalidSelectionMessage()
+    private static void ShowInvalidSelectionMessage()
     {
         MessageWindow.ShowMessage("Please choose at least one element to include in the randomization.");
     }
 
-    private string GetSafeFileName(string str, string ext)
+    private static string GetSafeFileName(string str, string ext)
     {
         return new Regex("[^a-zA-Z0-9_-]").Replace(str, string.Empty) + "." + ext;
     }

@@ -166,7 +166,7 @@ public partial class RandomizeProgressWindow : Window
         });
     }
 
-    private string FormatWarningMessage(string message)
+    private static string FormatWarningMessage(string message)
     {
         return string.Format("{0}{1}{1}Do you wish to continue?", message, Environment.NewLine);
     }

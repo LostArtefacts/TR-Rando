@@ -116,7 +116,7 @@ public partial class NumericUpDown : UserControl
         Value = v;
     }
 
-    private bool ValidateInput(string text)
+    private static bool ValidateInput(string text)
     {
         return int.TryParse(text, out int _);
     }

@@ -112,7 +112,7 @@ public partial class EnemyWindow : Window
         MinWidth = Width;
     }
 
-    private ObservableCollection<BoolItemIDControlClass> CloneControls(IEnumerable<BoolItemIDControlClass> controls)
+    private static ObservableCollection<BoolItemIDControlClass> CloneControls(IEnumerable<BoolItemIDControlClass> controls)
     {
         List<BoolItemIDControlClass> clones = new();
         foreach (BoolItemIDControlClass item in controls)

@@ -125,7 +125,7 @@ public partial class FolderLoadControl : UserControl
         }
     }
 
-    public void EmptyRecentFolders()
+    public static void EmptyRecentFolders()
     {
         string msg = string.Format
         (
