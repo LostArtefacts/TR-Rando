@@ -89,7 +89,7 @@ public abstract class AbstractTRModelExporter<E, L, D> : AbstractTRModelTranspor
 
     private void ExportDependencies(D definition)
     {
-        List<E> dependencies = new List<E>(Data.GetModelDependencies(definition.Alias));
+        List<E> dependencies = new(Data.GetModelDependencies(definition.Alias));
         definition.Dependencies = dependencies.ToArray();
     }
 
@@ -101,7 +101,7 @@ public abstract class AbstractTRModelExporter<E, L, D> : AbstractTRModelTranspor
         {
             foreach (IndexedTRObjectTexture texture in textureList)
             {
-                Dictionary<TRObjectTextureVert, Point> points = new Dictionary<TRObjectTextureVert, Point>();
+                Dictionary<TRObjectTextureVert, Point> points = new();
                 foreach (TRObjectTextureVert vertex in texture.Texture.Vertices)
                 {
                     int x = vertex.XCoordinate.Fraction;

@@ -125,7 +125,7 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
 
     private static readonly IEnumerable<TREntities> _emptyEntities = new List<TREntities>();
 
-    private static readonly Dictionary<TREntities, TREntities[]> _entityDependencies = new Dictionary<TREntities, TREntities[]>
+    private static readonly Dictionary<TREntities, TREntities[]> _entityDependencies = new()
     {
         [TREntities.Adam]
             = new TREntities[] { TREntities.LaraMiscAnim_H_Pyramid },
@@ -167,7 +167,7 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
             = new TREntities[] { TREntities.LaraMiscAnim_H_Valley }
     };
 
-    private static readonly Dictionary<TREntities, TREntities[]> _cyclicDependencies = new Dictionary<TREntities, TREntities[]>
+    private static readonly Dictionary<TREntities, TREntities[]> _cyclicDependencies = new()
     {
         [TREntities.CrocodileLand]
             = new TREntities[] { TREntities.CrocodileWater },
@@ -181,13 +181,13 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
             = new TREntities[] { TREntities.ScionPiece_M_H },
     };
 
-    private static readonly Dictionary<TREntities, List<TREntities>> _removalExclusions = new Dictionary<TREntities, List<TREntities>>
+    private static readonly Dictionary<TREntities, List<TREntities>> _removalExclusions = new()
     {
         [TREntities.FlyingAtlantean]
             = new List<TREntities> { TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N }
     };
 
-    private static readonly Dictionary<TREntities, List<TREntities>> _spriteDependencies = new Dictionary<TREntities, List<TREntities>>
+    private static readonly Dictionary<TREntities, List<TREntities>> _spriteDependencies = new()
     {
         [TREntities.SecretScion_M_H]
             = new List<TREntities> { TREntities.ScionPiece4_S_P },
@@ -218,17 +218,17 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
             = new List<TREntities> { TREntities.Explosion1_S_H },
     };
 
-    private static readonly List<TREntities> _cinematicEntities = new List<TREntities>
+    private static readonly List<TREntities> _cinematicEntities = new()
     {
     };
 
     // These are models that use Lara's hips as placeholders
-    private static readonly List<TREntities> _laraDependentModels = new List<TREntities>
+    private static readonly List<TREntities> _laraDependentModels = new()
     {
         TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N
     };
 
-    private static readonly Dictionary<TREntities, List<TREntities>> _entityAliases = new Dictionary<TREntities, List<TREntities>>
+    private static readonly Dictionary<TREntities, List<TREntities>> _entityAliases = new()
     {
         [TREntities.FlyingAtlantean] = new List<TREntities>
         {
@@ -249,30 +249,30 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
         }
     };
 
-    private static readonly List<TREntities> _permittedAliasDuplicates = new List<TREntities>
+    private static readonly List<TREntities> _permittedAliasDuplicates = new()
     {
         TREntities.LaraMiscAnim_H
     };
 
-    private static readonly List<TREntities> _permittedOverrides = new List<TREntities>
+    private static readonly List<TREntities> _permittedOverrides = new()
     {
         TREntities.LaraPonytail_H_U, TREntities.ScionPiece_M_H
     };
 
-    private static readonly List<TREntities> _unsafeModelReplacements = new List<TREntities>
+    private static readonly List<TREntities> _unsafeModelReplacements = new()
     {
     };
 
-    private static readonly List<TREntities> _nonGraphicsDependencies = new List<TREntities>
+    private static readonly List<TREntities> _nonGraphicsDependencies = new()
     {
     };
 
     // If these are imported into levels that already have another alias for them, only their hardcoded sounds will be imported
-    protected static readonly List<TREntities> _soundOnlyDependencies = new List<TREntities>
+    protected static readonly List<TREntities> _soundOnlyDependencies = new()
     {
     };
 
-    private static readonly Dictionary<TREntities, short[]> _hardcodedSoundIndices = new Dictionary<TREntities, short[]>
+    private static readonly Dictionary<TREntities, short[]> _hardcodedSoundIndices = new()
     {
         [TREntities.Adam] = new short[] { 104, 137, 138, 140, 141, 142 },
         [TREntities.BandagedFlyer] = new short[] { 104 },
@@ -297,7 +297,7 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
         [TREntities.Wolf] = new short[] { 20 }
     };
 
-    private static readonly Dictionary<TREntities, List<int>> _ignoreEntityTextures = new Dictionary<TREntities, List<int>>
+    private static readonly Dictionary<TREntities, List<int>> _ignoreEntityTextures = new()
     {
         [TREntities.LaraMiscAnim_H]
             = new List<int>(), // empty list indicates to ignore everything

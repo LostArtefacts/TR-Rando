@@ -66,7 +66,7 @@ public class SoundUnpacker
     {
         // For TR1, sample WAVs are stored in the level files so we need to import each one provided
         // they don't already exist. Remap the sound keys to the new offset into Samples[].
-        Dictionary<uint, uint> sampleMap = new Dictionary<uint, uint>();
+        Dictionary<uint, uint> sampleMap = new();
         _samples = level.Samples.ToList();
 
         foreach (uint sampleIndex in sampleData.Keys)

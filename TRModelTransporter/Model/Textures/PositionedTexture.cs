@@ -8,7 +8,7 @@ public class PositionedTexture
 
     public int OriginalIndex => _texture.Index;
     public int TileIndex => _texture.Atlas;
-    public Point Position => new Point(_texture.Bounds.X, _texture.Bounds.Y);
+    public Point Position => new(_texture.Bounds.X, _texture.Bounds.Y);
     public Rectangle Bounds => _texture.Bounds;
 
     public PositionedTexture(AbstractIndexedTRTexture texture)

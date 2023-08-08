@@ -37,7 +37,7 @@ public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Entities,
 
     protected override void ProcessRemovals(AbstractTexturePacker<TR3Entities, TR3Level> packer)
     {
-        List<TR3Entities> removals = new List<TR3Entities>();
+        List<TR3Entities> removals = new();
         if (_clearUnusedSprites)
         {
             removals.Add(TR3Entities.Map_H);
@@ -57,7 +57,7 @@ public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Entities,
 
     private void RemoveUnusedSprites(AbstractTexturePacker<TR3Entities, TR3Level> packer)
     {
-        List<TR3Entities> unusedItems = new List<TR3Entities>
+        List<TR3Entities> unusedItems = new()
         {
             TR3Entities.PistolAmmo_M_H,
             TR3Entities.Map_H,

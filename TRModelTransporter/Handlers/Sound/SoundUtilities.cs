@@ -19,7 +19,7 @@ public static class SoundUtilities
             return null;
         }
 
-        TR1PackedSound packedSound = new TR1PackedSound();
+        TR1PackedSound packedSound = new();
 
         short id = -2;
         foreach (int index in hardcodedSounds)
@@ -65,7 +65,7 @@ public static class SoundUtilities
             return null;
         }
 
-        TR2PackedSound packedSound = new TR2PackedSound();
+        TR2PackedSound packedSound = new();
 
         short id = -2;
         foreach (int index in hardcodedSounds)
@@ -107,7 +107,7 @@ public static class SoundUtilities
             return null;
         }
 
-        TR3PackedSound packedSound = new TR3PackedSound();
+        TR3PackedSound packedSound = new();
 
         short id = -2;
         foreach (int index in hardcodedSounds)
@@ -145,10 +145,10 @@ public static class SoundUtilities
 
     public static void ResortSoundIndices(TR1Level level)
     {
-        List<short> newSoundMap = new List<short>();
-        List<TRSoundDetails> newSoundDetails = new List<TRSoundDetails>();
-        List<uint> newSampleIndices = new List<uint>();
-        List<byte> newSamples = new List<byte>();
+        List<short> newSoundMap = new();
+        List<TRSoundDetails> newSoundDetails = new();
+        List<uint> newSampleIndices = new();
+        List<byte> newSamples = new();
 
         for (int soundID = 0; soundID < level.SoundMap.Length; soundID++)
         {
@@ -217,7 +217,7 @@ public static class SoundUtilities
     {
         // Store the values from SampleIndices against their current positions
         // in the list.             
-        Dictionary<int, uint> indexMap = new Dictionary<int, uint>();
+        Dictionary<int, uint> indexMap = new();
         for (int i = 0; i < sampleIndices.Count; i++)
         {
             indexMap[i] = sampleIndices[i];
@@ -233,7 +233,7 @@ public static class SoundUtilities
         }
 
         // Repeat for SoundMap -> SoundDetails
-        Dictionary<int, TRSoundDetails> soundMapIndices = new Dictionary<int, TRSoundDetails>();
+        Dictionary<int, TRSoundDetails> soundMapIndices = new();
         for (int i = 0; i < soundMap.Count; i++)
         {
             if (soundMap[i] != -1)
@@ -258,7 +258,7 @@ public static class SoundUtilities
     {
         // Store the values from SampleIndices against their current positions
         // in the list.             
-        Dictionary<int, uint> indexMap = new Dictionary<int, uint>();
+        Dictionary<int, uint> indexMap = new();
         for (int i = 0; i < sampleIndices.Count; i++)
         {
             indexMap[i] = sampleIndices[i];
@@ -274,7 +274,7 @@ public static class SoundUtilities
         }
 
         // Repeat for SoundMap -> SoundDetails
-        Dictionary<int, TR3SoundDetails> soundMapIndices = new Dictionary<int, TR3SoundDetails>();
+        Dictionary<int, TR3SoundDetails> soundMapIndices = new();
         for (int i = 0; i < soundMap.Count; i++)
         {
             if (soundMap[i] != -1)

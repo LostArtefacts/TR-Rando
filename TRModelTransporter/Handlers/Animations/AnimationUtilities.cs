@@ -118,7 +118,7 @@ public static class AnimationUtilities
 
     private static Dictionary<int, TR1PackedAnimationCommand> PackAnimCommands(TRAnimCommand[] animCommands, TRAnimation animation)
     {
-        Dictionary<int, TR1PackedAnimationCommand> cmds = new Dictionary<int, TR1PackedAnimationCommand>();
+        Dictionary<int, TR1PackedAnimationCommand> cmds = new();
 
         int cmdOffset = animation.AnimCommand;
         for (int i = 0; i < animation.NumAnimCommands; i++)
@@ -206,7 +206,7 @@ public static class AnimationUtilities
 
     public static byte[] GetSample(uint offset, uint endOffset, byte[] wavSamples)
     {
-        List<byte> data = new List<byte>();
+        List<byte> data = new();
         for (uint i = offset; i < endOffset; i++)
         {
             data.Add(wavSamples[i]);
@@ -299,7 +299,7 @@ public static class AnimationUtilities
             }
         }
 
-        List<ushort> frames = new List<ushort>();
+        List<ushort> frames = new();
         for (uint i = model.FrameOffset / 2; i < endFrame; i++)
         {
             frames.Add(allFrames[i]);
@@ -316,7 +316,7 @@ public static class AnimationUtilities
         }
 
         // Import the AnimDispatches first, noting their new indices            
-        Dictionary<int, int> indexMap = new Dictionary<int, int>();
+        Dictionary<int, int> indexMap = new();
         foreach (int oldDispatchIndex in packedAnimation.AnimationDispatches.Keys)
         {
             TRAnimDispatch dispatch = packedAnimation.AnimationDispatches[oldDispatchIndex];
@@ -343,7 +343,7 @@ public static class AnimationUtilities
         }
 
         // Import the AnimDispatches first, noting their new indices            
-        Dictionary<int, int> indexMap = new Dictionary<int, int>();
+        Dictionary<int, int> indexMap = new();
         foreach (int oldDispatchIndex in packedAnimation.AnimationDispatches.Keys)
         {
             TRAnimDispatch dispatch = packedAnimation.AnimationDispatches[oldDispatchIndex];
@@ -370,7 +370,7 @@ public static class AnimationUtilities
         }
 
         // Import the AnimDispatches first, noting their new indices            
-        Dictionary<int, int> indexMap = new Dictionary<int, int>();
+        Dictionary<int, int> indexMap = new();
         foreach (int oldDispatchIndex in packedAnimation.AnimationDispatches.Keys)
         {
             TRAnimDispatch dispatch = packedAnimation.AnimationDispatches[oldDispatchIndex];
@@ -449,21 +449,21 @@ public static class AnimationUtilities
 
     public static void UnpackAnimSounds(TR1Level level, TR1PackedAnimation packedAnimation)
     {
-        SoundUnpacker soundUnpacker = new SoundUnpacker();
+        SoundUnpacker soundUnpacker = new();
         soundUnpacker.Unpack(packedAnimation.Sound, level, false);
         RemapSoundIndices(packedAnimation.Commands.Values, soundUnpacker.SoundIndexMap);
     }
 
     public static void UnpackAnimSounds(TR2Level level, TR2PackedAnimation packedAnimation)
     {
-        SoundUnpacker soundUnpacker = new SoundUnpacker();
+        SoundUnpacker soundUnpacker = new();
         soundUnpacker.Unpack(packedAnimation.Sound, level, false);
         RemapSoundIndices(packedAnimation.Commands.Values, soundUnpacker.SoundIndexMap);
     }
 
     public static void UnpackAnimSounds(TR3Level level, TR3PackedAnimation packedAnimation)
     {
-        SoundUnpacker soundUnpacker = new SoundUnpacker();
+        SoundUnpacker soundUnpacker = new();
         soundUnpacker.Unpack(packedAnimation.Sound, level, false);
         RemapSoundIndices(packedAnimation.Commands.Values, soundUnpacker.SoundIndexMap);
     }

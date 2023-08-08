@@ -52,13 +52,13 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
         }
 
         // Otherwise, make a new segment
-        TexturedTileSegment newSegment = new TexturedTileSegment(texture, BitmapGraphics.Extract(texture.Bounds));
+        TexturedTileSegment newSegment = new(texture, BitmapGraphics.Extract(texture.Bounds));
         base.Add(newSegment, texture.Bounds.X, texture.Bounds.Y);
     }
 
     public List<TexturedTileSegment> GetObjectTextureIndexSegments(IEnumerable<int> indices)
     {
-        List<TexturedTileSegment> segments = new List<TexturedTileSegment>();
+        List<TexturedTileSegment> segments = new();
         foreach (int index in indices)
         {
             foreach (TexturedTileSegment segment in Rectangles)
@@ -74,7 +74,7 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
 
     public List<TexturedTileSegment> GetSpriteTextureIndexSegments(IEnumerable<int> indices)
     {
-        List<TexturedTileSegment> segments = new List<TexturedTileSegment>();
+        List<TexturedTileSegment> segments = new();
         foreach (int index in indices)
         {
             foreach (TexturedTileSegment segment in Rectangles)

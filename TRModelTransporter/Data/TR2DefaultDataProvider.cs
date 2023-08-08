@@ -120,7 +120,7 @@ public class TR2DefaultDataProvider : ITransportDataProvider<TR2Entities>
 
     private static readonly IEnumerable<TR2Entities> _emptyEntities = new List<TR2Entities>();
 
-    private static readonly Dictionary<TR2Entities, TR2Entities[]> _entityDependencies = new Dictionary<TR2Entities, TR2Entities[]>
+    private static readonly Dictionary<TR2Entities, TR2Entities[]> _entityDependencies = new()
     {
         [TR2Entities.LaraSun] =
             new TR2Entities[] { TR2Entities.LaraPistolAnim_H_Sun, TR2Entities.LaraAutoAnim_H_Sun, TR2Entities.LaraUziAnim_H_Sun },
@@ -185,7 +185,7 @@ public class TR2DefaultDataProvider : ITransportDataProvider<TR2Entities>
             }
     };
 
-    private static readonly Dictionary<TR2Entities, List<TR2Entities>> _spriteDependencies = new Dictionary<TR2Entities, List<TR2Entities>>
+    private static readonly Dictionary<TR2Entities, List<TR2Entities>> _spriteDependencies = new()
     {
         [TR2Entities.FlamethrowerGoon] 
             = new List<TR2Entities> { TR2Entities.Flame_S_H },
@@ -203,13 +203,13 @@ public class TR2DefaultDataProvider : ITransportDataProvider<TR2Entities>
             = new List<TR2Entities> { TR2Entities.Key2_S_P }
     };
 
-    private static readonly List<TR2Entities> _cinematicEntities = new List<TR2Entities>
+    private static readonly List<TR2Entities> _cinematicEntities = new()
     {
         TR2Entities.DragonExplosionEmitter_N
     };
 
     // These are models that use Lara's hips as placeholders
-    private static readonly List<TR2Entities> _laraDependentModels = new List<TR2Entities>
+    private static readonly List<TR2Entities> _laraDependentModels = new()
     {
         TR2Entities.CameraTarget_N, TR2Entities.FlameEmitter_N, TR2Entities.LaraCutscenePlacement_N,
         TR2Entities.DragonExplosionEmitter_N, TR2Entities.BartoliHideoutClock_N, TR2Entities.SingingBirds_N,
@@ -217,7 +217,7 @@ public class TR2DefaultDataProvider : ITransportDataProvider<TR2Entities>
         TR2Entities.AlarmBell_N, TR2Entities.DoorBell_N
     };
 
-    private static readonly Dictionary<TR2Entities, List<TR2Entities>> _entityAliases = new Dictionary<TR2Entities, List<TR2Entities>>
+    private static readonly Dictionary<TR2Entities, List<TR2Entities>> _entityAliases = new()
     {
         [TR2Entities.Lara] = new List<TR2Entities>
         {
@@ -282,32 +282,32 @@ public class TR2DefaultDataProvider : ITransportDataProvider<TR2Entities>
         }
     };
 
-    private static readonly List<TR2Entities> _permittedAliasDuplicates = new List<TR2Entities>
+    private static readonly List<TR2Entities> _permittedAliasDuplicates = new()
     {
         TR2Entities.LaraMiscAnim_H
     };
 
-    private static readonly List<TR2Entities> _permittedOverrides = new List<TR2Entities>
+    private static readonly List<TR2Entities> _permittedOverrides = new()
     {
         TR2Entities.MarcoBartoli
     };
 
-    private static readonly List<TR2Entities> _unsafeModelReplacements = new List<TR2Entities>
+    private static readonly List<TR2Entities> _unsafeModelReplacements = new()
     {
     };
 
-    private static readonly List<TR2Entities> _nonGraphicsDependencies = new List<TR2Entities>
+    private static readonly List<TR2Entities> _nonGraphicsDependencies = new()
     {
         TR2Entities.StickWieldingGoon1GreenVest, TR2Entities.MaskedGoon1, TR2Entities.Mercenary2
     };
 
     // If these are imported into levels that already have another alias for them, only their hardcoded sounds will be imported
-    protected static readonly List<TR2Entities> _soundOnlyDependencies = new List<TR2Entities>
+    protected static readonly List<TR2Entities> _soundOnlyDependencies = new()
     {
         TR2Entities.StickWieldingGoon1GreenVest
     };
 
-    private static readonly Dictionary<TR2Entities, short[]> _hardcodedSoundIndices = new Dictionary<TR2Entities, short[]>
+    private static readonly Dictionary<TR2Entities, short[]> _hardcodedSoundIndices = new()
     {
         [TR2Entities.DragonExplosionEmitter_N] = new short[]
         {
@@ -395,7 +395,7 @@ public class TR2DefaultDataProvider : ITransportDataProvider<TR2Entities>
         }
     };
 
-    private static readonly Dictionary<TR2Entities, List<int>> _ignoreEntityTextures = new Dictionary<TR2Entities, List<int>>
+    private static readonly Dictionary<TR2Entities, List<int>> _ignoreEntityTextures = new()
     {
         [TR2Entities.LaraMiscAnim_H] 
             = new List<int>(), // empty list indicates to ignore everything

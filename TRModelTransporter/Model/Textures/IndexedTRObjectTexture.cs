@@ -55,7 +55,7 @@ public class IndexedTRObjectTexture : AbstractIndexedTRTexture
         // the graphic as [top-right,bottom-right,bottom-left,top-left], others
         // as [top-left,top-right.... etc
 
-        List<TRObjectTextureVert> vertices = new List<TRObjectTextureVert>(_vertexPoints.Keys);
+        List<TRObjectTextureVert> vertices = new(_vertexPoints.Keys);
         foreach (TRObjectTextureVert vertex in vertices)
         {
             Point p = _vertexPoints[vertex];
@@ -120,8 +120,8 @@ public class IndexedTRObjectTexture : AbstractIndexedTRTexture
             if (_vertexPoints.Count == otherTexture._vertexPoints.Count)
             {
                 // Are all the points in the same order?
-                List<Point> points1 = new List<Point>(_vertexPoints.Values);
-                List<Point> points2 = new List<Point>(otherTexture._vertexPoints.Values);
+                List<Point> points1 = new(_vertexPoints.Values);
+                List<Point> points2 = new(otherTexture._vertexPoints.Values);
                 return points1.SequenceEqual(points2);
             }
         }
@@ -136,7 +136,7 @@ public class IndexedTRObjectTexture : AbstractIndexedTRTexture
 
     public override AbstractIndexedTRTexture Clone()
     {
-        TRObjectTexture copiedTexture = new TRObjectTexture
+        TRObjectTexture copiedTexture = new()
         {
             AtlasAndFlag = Texture.AtlasAndFlag,
             Attribute = Texture.Attribute,

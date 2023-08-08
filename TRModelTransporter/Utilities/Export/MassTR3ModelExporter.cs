@@ -30,7 +30,7 @@ public class MassTR3ModelExporter : AbstractMassTRModelExporter<TR3Entities, TR3
         return _reader.Read(path);
     }
 
-    private static readonly Dictionary<string, List<TR3Entities>> _exportModelTypes = new Dictionary<string, List<TR3Entities>>
+    private static readonly Dictionary<string, List<TR3Entities>> _exportModelTypes = new()
     {
         [TR3LevelNames.JUNGLE] = new List<TR3Entities>
         {

@@ -21,7 +21,7 @@ public class TR2ModelExporter : AbstractTRModelExporter<TR2Entities, TR2Level, T
 
     protected override TR2ModelDefinition CreateModelDefinition(TR2Level level, TR2Entities modelEntity)
     {
-        TR2ModelDefinition definition = new TR2ModelDefinition
+        TR2ModelDefinition definition = new()
         {
             Alias = modelEntity
         };

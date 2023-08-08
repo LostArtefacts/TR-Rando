@@ -22,7 +22,7 @@ public class SoundTransportHandler
 
     public void Import(TR1Level level, IEnumerable<TR1ModelDefinition> definitions)
     {
-        SoundUnpacker unpacker = new SoundUnpacker();
+        SoundUnpacker unpacker = new();
         foreach (TR1ModelDefinition definition in definitions)
         {
             if (definition.HardcodedSound != null)
@@ -34,7 +34,7 @@ public class SoundTransportHandler
 
     public void Import(TR2Level level, IEnumerable<TR2ModelDefinition> definitions)
     {
-        SoundUnpacker unpacker = new SoundUnpacker();
+        SoundUnpacker unpacker = new();
         foreach (TR2ModelDefinition definition in definitions)
         {
             if (definition.HardcodedSound != null)
@@ -46,7 +46,7 @@ public class SoundTransportHandler
 
     public void Import(TR3Level level, IEnumerable<TR3ModelDefinition> definitions)
     {
-        SoundUnpacker unpacker = new SoundUnpacker();
+        SoundUnpacker unpacker = new();
         foreach (TR3ModelDefinition definition in definitions)
         {
             if (definition.HardcodedSound != null)

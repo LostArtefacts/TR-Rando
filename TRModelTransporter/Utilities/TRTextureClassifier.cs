@@ -13,7 +13,7 @@ public class TRTextureClassifier : ITextureClassifier
         using (MD5 md5 = MD5.Create())
         {
             byte[] hash = md5.ComputeHash(Encoding.Default.GetBytes(Path.GetFileNameWithoutExtension(levelPath).ToUpper()));
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             for (int i = 0; i < hash.Length; i++)
             {
                 sb.Append(hash[i].ToString("x2"));

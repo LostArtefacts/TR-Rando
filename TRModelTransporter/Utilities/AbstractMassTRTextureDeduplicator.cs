@@ -65,7 +65,7 @@ public abstract class AbstractMassTRTextureDeduplicator<E, L>
     {
         using (AbstractTexturePacker<E, L> levelPacker = CreatePacker(ReadLevel(lvlPath)))
         {
-            Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new Dictionary<TexturedTile, List<TexturedTileSegment>>();
+            Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new();
             foreach (TexturedTile tile in levelPacker.Tiles)
             {
                 allTextures[tile] = new List<TexturedTileSegment>(tile.Rectangles);

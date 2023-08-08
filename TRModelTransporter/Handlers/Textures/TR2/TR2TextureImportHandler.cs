@@ -37,7 +37,7 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Entities,
 
     protected override void ProcessRemovals(AbstractTexturePacker<TR2Entities, TR2Level> packer)
     {
-        List<TR2Entities> removals = new List<TR2Entities>();
+        List<TR2Entities> removals = new();
         if (_clearUnusedSprites)
         {
             removals.Add(TR2Entities.Map_M_U);
@@ -71,7 +71,7 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Entities,
         // We need to ensure that if these models are present in any level, that the sprite sequences for the blasts point
         // to the same as the grenade blast instead.
 
-        List<TR2Entities> flameEnemies = new List<TR2Entities>
+        List<TR2Entities> flameEnemies = new()
         {
             TR2Entities.FlamethrowerGoon, TR2Entities.DragonExplosionEmitter_N
         };
@@ -116,7 +116,7 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Entities,
 
     private void RemoveUnusedSprites(AbstractTexturePacker<TR2Entities, TR2Level> packer)
     {
-        List<TR2Entities> unusedItems = new List<TR2Entities>
+        List<TR2Entities> unusedItems = new()
         {
             TR2Entities.PistolAmmo_S_P,
             TR2Entities.Map_M_U,
@@ -183,7 +183,7 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Entities,
     {
         // Ensure the likes of the flamethrower having been imported triggers the fact that
         // the flame sprite sequence has been positioned.
-        List<TR2Entities> entities = new List<TR2Entities>();
+        List<TR2Entities> entities = new();
         foreach (TR2Entities spriteEntity in definition.SpriteSequences.Keys)
         {
             if (watchedEntities.Contains(spriteEntity))

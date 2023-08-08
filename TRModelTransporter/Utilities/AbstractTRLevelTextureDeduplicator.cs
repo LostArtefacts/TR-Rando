@@ -23,7 +23,7 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
     {
         using (AbstractTexturePacker<E, L> levelPacker = CreatePacker(Level))
         {
-            Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new Dictionary<TexturedTile, List<TexturedTileSegment>>();
+            Dictionary<TexturedTile, List<TexturedTileSegment>> allTextures = new();
             foreach (TexturedTile tile in levelPacker.Tiles)
             {
                 allTextures[tile] = new List<TexturedTileSegment>(tile.Rectangles);
@@ -41,7 +41,7 @@ public abstract class AbstractTRLevelTextureDeduplicator<E, L>
             // Now we want to go through every IndexedTexture and see if it's
             // pointing to the same thing - so tile, position, and point direction
             // have to be equal. See IndexedTRObjectTexture
-            Dictionary<int, int> indexMap = new Dictionary<int, int>();
+            Dictionary<int, int> indexMap = new();
             foreach (TexturedTile tile in allTextures.Keys)
             {
                 foreach (TexturedTileSegment segment in allTextures[tile])

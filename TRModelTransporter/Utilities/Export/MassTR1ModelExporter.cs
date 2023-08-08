@@ -36,7 +36,7 @@ public class MassTR1ModelExporter : AbstractMassTRModelExporter<TREntities, TR1L
         return _reader.Read(path);
     }
 
-    private static readonly Dictionary<string, List<TREntities>> _exportModelTypes = new Dictionary<string, List<TREntities>>
+    private static readonly Dictionary<string, List<TREntities>> _exportModelTypes = new()
     {
         [TR1LevelNames.CAVES] = new List<TREntities>
         {

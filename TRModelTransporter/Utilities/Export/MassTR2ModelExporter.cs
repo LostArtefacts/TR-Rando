@@ -37,7 +37,7 @@ public class MassTR2ModelExporter : AbstractMassTRModelExporter<TR2Entities, TR2
         return _reader.Read(path);
     }
 
-    private static readonly Dictionary<string, List<TR2Entities>> _exportModelTypes = new Dictionary<string, List<TR2Entities>>
+    private static readonly Dictionary<string, List<TR2Entities>> _exportModelTypes = new()
     {
         [TR2LevelNames.GW] = new List<TR2Entities>
         {

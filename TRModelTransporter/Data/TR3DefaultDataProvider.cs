@@ -120,7 +120,7 @@ public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
 
     private static readonly IEnumerable<TR3Entities> _emptyEntities = new List<TR3Entities>();
 
-    private static readonly Dictionary<TR3Entities, TR3Entities[]> _entityDependencies = new Dictionary<TR3Entities, TR3Entities[]>
+    private static readonly Dictionary<TR3Entities, TR3Entities[]> _entityDependencies = new()
     {
         [TR3Entities.LaraIndia]
             = new TR3Entities[] { TR3Entities.LaraSkin_H_India, TR3Entities.LaraPistolAnimation_H_India, TR3Entities.LaraDeagleAnimation_H_India, TR3Entities.LaraUziAnimation_H_India },
@@ -188,22 +188,22 @@ public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
             = new TR3Entities[] { TR3Entities.HarpoonSingle2 }
     };
 
-    private static readonly Dictionary<TR3Entities, List<TR3Entities>> _spriteDependencies = new Dictionary<TR3Entities, List<TR3Entities>>
+    private static readonly Dictionary<TR3Entities, List<TR3Entities>> _spriteDependencies = new()
     {
         
     };
 
-    private static readonly List<TR3Entities> _cinematicEntities = new List<TR3Entities>
+    private static readonly List<TR3Entities> _cinematicEntities = new()
     {
         
     };
 
-    private static readonly List<TR3Entities> _laraDependentModels = new List<TR3Entities>
+    private static readonly List<TR3Entities> _laraDependentModels = new()
     {
         
     };
 
-    private static readonly Dictionary<TR3Entities, List<TR3Entities>> _entityAliases = new Dictionary<TR3Entities, List<TR3Entities>>
+    private static readonly Dictionary<TR3Entities, List<TR3Entities>> _entityAliases = new()
     {
         [TR3Entities.Lara] = new List<TR3Entities>
         {
@@ -243,33 +243,33 @@ public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
         }
     };
 
-    private static readonly List<TR3Entities> _permittedAliasDuplicates = new List<TR3Entities>
+    private static readonly List<TR3Entities> _permittedAliasDuplicates = new()
     {
         TR3Entities.LaraVehicleAnimation_H
     };
 
-    private static readonly List<TR3Entities> _permittedOverrides = new List<TR3Entities>
+    private static readonly List<TR3Entities> _permittedOverrides = new()
     {
         TR3Entities.Infada_M_H, TR3Entities.EyeOfIsis_M_H, TR3Entities.OraDagger_M_H, TR3Entities.Element115_M_H
     };
 
-    private static readonly List<TR3Entities> _unsafeModelReplacements = new List<TR3Entities>
+    private static readonly List<TR3Entities> _unsafeModelReplacements = new()
     {
          TR3Entities.Lara, TR3Entities.LaraSkin_H, TR3Entities.LaraPistolAnimation_H, TR3Entities.LaraUziAnimation_H, TR3Entities.LaraDeagleAnimation_H
     };
 
-    private static readonly List<TR3Entities> _nonGraphicsDependencies = new List<TR3Entities>
+    private static readonly List<TR3Entities> _nonGraphicsDependencies = new()
     {
         TR3Entities.Monkey
     };
 
     // If these are imported into levels that already have another alias for them, only their hardcoded sounds will be imported
-    protected static readonly List<TR3Entities> _soundOnlyDependencies = new List<TR3Entities>
+    protected static readonly List<TR3Entities> _soundOnlyDependencies = new()
     {
         
     };
 
-    private static readonly Dictionary<TR3Entities, short[]> _hardcodedSoundIndices = new Dictionary<TR3Entities, short[]>
+    private static readonly Dictionary<TR3Entities, short[]> _hardcodedSoundIndices = new()
     {
         [TR3Entities.Quad] = new short[]
         {
@@ -358,7 +358,7 @@ public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
         }
     };
 
-    private static readonly Dictionary<TR3Entities, List<int>> _ignoreEntityTextures = new Dictionary<TR3Entities, List<int>>
+    private static readonly Dictionary<TR3Entities, List<int>> _ignoreEntityTextures = new()
     {
         [TR3Entities.LaraVehicleAnimation_H]
             = new List<int>(), // empty list indicates to ignore everything

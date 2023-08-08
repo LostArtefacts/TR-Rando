@@ -19,7 +19,7 @@ public class TR2TexturePacker : AbstractTexturePacker<TR2Entities, TR2Level>
 
     protected override List<AbstractIndexedTRTexture> LoadObjectTextures()
     {
-        List<AbstractIndexedTRTexture> textures = new List<AbstractIndexedTRTexture>((int)Level.NumObjectTextures);
+        List<AbstractIndexedTRTexture> textures = new((int)Level.NumObjectTextures);
         for (int i = 0; i < Level.NumObjectTextures; i++)
         {
             TRObjectTexture texture = Level.ObjectTextures[i];
@@ -38,7 +38,7 @@ public class TR2TexturePacker : AbstractTexturePacker<TR2Entities, TR2Level>
 
     protected override List<AbstractIndexedTRTexture> LoadSpriteTextures()
     {
-        List<AbstractIndexedTRTexture> textures = new List<AbstractIndexedTRTexture>((int)Level.NumSpriteTextures);
+        List<AbstractIndexedTRTexture> textures = new((int)Level.NumSpriteTextures);
         for (int i = 0; i < Level.NumSpriteTextures; i++)
         {
             TRSpriteTexture texture = Level.SpriteTextures[i];
@@ -67,7 +67,7 @@ public class TR2TexturePacker : AbstractTexturePacker<TR2Entities, TR2Level>
 
     protected override IEnumerable<TR2Entities> GetAllModelTypes()
     {
-        List<TR2Entities> modelIDs = new List<TR2Entities>();
+        List<TR2Entities> modelIDs = new();
         foreach (TRModel model in Level.Models)
         {
             modelIDs.Add((TR2Entities)model.ID);

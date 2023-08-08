@@ -14,7 +14,7 @@ public class AnimationTransportHandler
         for (int animationIndex = definition.Model.Animation; animationIndex < endAnimation; animationIndex++)
         {
             TRAnimation animation = level.Animations[animationIndex];
-            TR1PackedAnimation packedAnimation = new TR1PackedAnimation
+            TR1PackedAnimation packedAnimation = new()
             {
                 Animation = animation,
             };
@@ -40,7 +40,7 @@ public class AnimationTransportHandler
         for (int animationIndex = definition.Model.Animation; animationIndex < endAnimation; animationIndex++)
         {
             TRAnimation animation = level.Animations[animationIndex];
-            TR2PackedAnimation packedAnimation = new TR2PackedAnimation
+            TR2PackedAnimation packedAnimation = new()
             {
                 Animation = animation,
             };
@@ -66,7 +66,7 @@ public class AnimationTransportHandler
         for (int animationIndex = definition.Model.Animation; animationIndex < endAnimation; animationIndex++)
         {
             TRAnimation animation = level.Animations[animationIndex];
-            TR3PackedAnimation packedAnimation = new TR3PackedAnimation
+            TR3PackedAnimation packedAnimation = new()
             {
                 Animation = animation,
             };
@@ -88,7 +88,7 @@ public class AnimationTransportHandler
     {
         Dictionary<int, TR1PackedAnimation> animations = definition.Animations;
         bool firstAnimationConfigured = false;
-        Dictionary<int, int> indexMap = new Dictionary<int, int>();
+        Dictionary<int, int> indexMap = new();
 
         List<TRAnimDispatch> animDispatches = level.AnimDispatches.ToList();
         List<TRStateChange> stateChanges = level.StateChanges.ToList();
@@ -143,7 +143,7 @@ public class AnimationTransportHandler
     {
         Dictionary<int, TR2PackedAnimation> animations = definition.Animations;
         bool firstAnimationConfigured = false;
-        Dictionary<int, int> indexMap = new Dictionary<int, int>();
+        Dictionary<int, int> indexMap = new();
 
         List<TRAnimDispatch> animDispatches = level.AnimDispatches.ToList();
         List<TRStateChange> stateChanges = level.StateChanges.ToList();
@@ -198,7 +198,7 @@ public class AnimationTransportHandler
     {
         Dictionary<int, TR3PackedAnimation> animations = definition.Animations;
         bool firstAnimationConfigured = false;
-        Dictionary<int, int> indexMap = new Dictionary<int, int>();
+        Dictionary<int, int> indexMap = new();
 
         List<TRAnimDispatch> animDispatches = level.AnimDispatches.ToList();
         List<TRStateChange> stateChanges = level.StateChanges.ToList();

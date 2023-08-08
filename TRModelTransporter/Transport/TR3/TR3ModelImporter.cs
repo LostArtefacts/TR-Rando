@@ -23,7 +23,7 @@ public class TR3ModelImporter : AbstractTRModelImporter<TR3Entities, TR3Level, T
 
     protected override List<TR3Entities> GetExistingModelTypes()
     {
-        List<TR3Entities> existingEntities = new List<TR3Entities>();
+        List<TR3Entities> existingEntities = new();
         Level.Models.ToList().ForEach(m => existingEntities.Add((TR3Entities)m.ID));
         return existingEntities;
     }

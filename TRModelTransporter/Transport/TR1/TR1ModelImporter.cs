@@ -34,7 +34,7 @@ public class TR1ModelImporter : AbstractTRModelImporter<TREntities, TR1Level, TR
 
     protected override List<TREntities> GetExistingModelTypes()
     {
-        List<TREntities> existingEntities = new List<TREntities>();
+        List<TREntities> existingEntities = new();
         Level.Models.ToList().ForEach(m => existingEntities.Add((TREntities)m.ID));
         return existingEntities;
     }

@@ -54,7 +54,7 @@ public abstract class AbstractTextureExportHandler<E, L, D>
     {
         Dictionary<TexturedTile, List<TexturedTileSegment>> textureSegments = _packer.GetModelSegments(_definition.Entity);
 
-        TRTextureDeduplicator<E> deduplicator = new TRTextureDeduplicator<E>
+        TRTextureDeduplicator<E> deduplicator = new()
         {
             SegmentMap = textureSegments,
             UpdateGraphics = false,
@@ -109,7 +109,7 @@ public abstract class AbstractTextureExportHandler<E, L, D>
             return;
         }
 
-        using (DefaultTexturePacker segmentPacker = new DefaultTexturePacker())
+        using (DefaultTexturePacker segmentPacker = new())
         {
             segmentPacker.AddRectangles(_allSegments);
 
@@ -132,7 +132,7 @@ public abstract class AbstractTextureExportHandler<E, L, D>
             }
 
             TexturedTile tile = segmentPacker.Tiles[0];
-            List<Rectangle> rects = new List<Rectangle>();
+            List<Rectangle> rects = new();
             foreach (TexturedTileSegment segment in _allSegments)
             {
                 rects.Add(segment.MappedBounds);

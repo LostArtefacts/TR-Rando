@@ -8,7 +8,7 @@ public class TR2TextureRemapGroup : AbstractTextureRemapGroup<TR2Entities, TR2Le
 {
     protected override IEnumerable<TR2Entities> GetModelTypes(TR2Level level)
     {
-        List<TR2Entities> types = new List<TR2Entities>();
+        List<TR2Entities> types = new();
         foreach (TRModel model in level.Models)
         {
             types.Add((TR2Entities)model.ID);

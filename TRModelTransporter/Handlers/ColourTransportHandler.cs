@@ -26,7 +26,7 @@ public class ColourTransportHandler
     {
         ISet<int> colourIndices = GetAllColourIndices(meshes, false);
 
-        Dictionary<int, TRColour> usedColours = new Dictionary<int, TRColour>();
+        Dictionary<int, TRColour> usedColours = new();
         foreach (int i in colourIndices)
         {
             usedColours[i] = colours[i];
@@ -39,7 +39,7 @@ public class ColourTransportHandler
     {
         ISet<int> colourIndices = GetAllColourIndices(meshes, true);
 
-        Dictionary<int, TRColour4> usedColours = new Dictionary<int, TRColour4>();
+        Dictionary<int, TRColour4> usedColours = new();
         foreach (int i in colourIndices)
         {
             usedColours[i] = colours[i];
@@ -68,7 +68,7 @@ public class ColourTransportHandler
 
     public void Import(TR1Level level, TR1ModelDefinition definition, TR1PaletteManager paletteManager)
     {
-        Dictionary<int, int> indexMap = new Dictionary<int, int>();
+        Dictionary<int, int> indexMap = new();
 
         foreach (int paletteIndex in definition.Colours.Keys)
         {
@@ -83,7 +83,7 @@ public class ColourTransportHandler
     public void Import(TR2Level level, TR2ModelDefinition definition)
     {
         List<TRColour4> palette16 = level.Palette16.ToList();
-        Dictionary<int, int> indexMap = new Dictionary<int, int>();
+        Dictionary<int, int> indexMap = new();
         
         foreach (int paletteIndex in definition.Colours.Keys)
         {
@@ -100,7 +100,7 @@ public class ColourTransportHandler
     public void Import(TR3Level level, TR3ModelDefinition definition)
     {
         List<TRColour4> palette16 = level.Palette16.ToList();
-        Dictionary<int, int> indexMap = new Dictionary<int, int>();
+        Dictionary<int, int> indexMap = new();
 
         foreach (int paletteIndex in definition.Colours.Keys)
         {

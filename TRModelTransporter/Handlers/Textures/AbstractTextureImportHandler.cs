@@ -41,7 +41,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
         PackingResult<TexturedTile, TexturedTileSegment> packingResult = Pack();
         if (packingResult.OrphanCount > 0)
         {
-            List<string> entityNames = new List<string>();
+            List<string> entityNames = new();
             foreach (D def in _definitions)
             {
                 entityNames.Add(def.Entity.ToString());
@@ -71,7 +71,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
         _importSegments = new Dictionary<D, List<TexturedTileSegment>>();
 
         // Track existing sprite sequences to avoid duplication
-        List<TRSpriteSequence> spriteSequences = new List<TRSpriteSequence>(GetExistingSpriteSequences());
+        List<TRSpriteSequence> spriteSequences = new(GetExistingSpriteSequences());
         foreach (D definition in _definitions)
         {
             if (!definition.HasGraphics || definition.IsDependencyOnly)
@@ -80,7 +80,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
             }
 
             _importSegments[definition] = new List<TexturedTileSegment>();
-            using (BitmapGraphics bg = new BitmapGraphics(definition.Bitmap))
+            using (BitmapGraphics bg = new(definition.Bitmap))
             {
                 foreach (int segmentIndex in definition.ObjectTextures.Keys)
                 {
@@ -99,7 +99,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
                     }
                 }
 
-                List<E> spriteEntities = new List<E>(definition.SpriteSequences.Keys);
+                List<E> spriteEntities = new(definition.SpriteSequences.Keys);
                 foreach (E spriteEntity in spriteEntities)
                 {
                     TRSpriteSequence existingSequence = spriteSequences.Find(s => s.SpriteID == Convert.ToInt32(spriteEntity));
@@ -147,7 +147,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
 
             ProcessRemovals(packer);
 
-            List<TexturedTileSegment> allSegments = new List<TexturedTileSegment>();
+            List<TexturedTileSegment> allSegments = new();
             foreach (List<TexturedTileSegment> segmentList in _importSegments.Values)
             {
                 // We only add unique segments, so if another segment already exists, 
@@ -188,9 +188,9 @@ public abstract class AbstractTextureImportHandler<E, L, D>
         // Add each ObjectTexture to the level and store a map of old index to new index.
         // Make use of any invalid texture first because we are limited to 2048 entries
         List<TRObjectTexture> levelObjectTextures = GetExistingObjectTextures().ToList();
-        Queue<int> reusableIndices = new Queue<int>(GetInvalidObjectTextureIndices());
+        Queue<int> reusableIndices = new(GetInvalidObjectTextureIndices());
 
-        Dictionary<D, Dictionary<int, int>> indexMap = new Dictionary<D, Dictionary<int, int>>();
+        Dictionary<D, Dictionary<int, int>> indexMap = new();
         foreach (D definition in _definitions)
         {
             if (!_importSegments.ContainsKey(definition))
@@ -320,12 +320,12 @@ public abstract class AbstractTextureImportHandler<E, L, D>
             return;
         }
 
-        Dictionary<E, List<PositionedTexture>> textureResults = new Dictionary<E, List<PositionedTexture>>();
+        Dictionary<E, List<PositionedTexture>> textureResults = new();
 
         foreach (D definition in _importSegments.Keys)
         {
             // Does this definition have any entities we are interested in?
-            List<E> entities = new List<E>();
+            List<E> entities = new();
             if (watchedTextures.ContainsKey(definition.Alias))
             {
                 entities.Add(definition.Alias);

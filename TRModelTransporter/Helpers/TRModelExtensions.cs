@@ -4,7 +4,7 @@ namespace TRModelTransporter.Helpers;
 
 public static class TRModelExtensions
 {
-    private static readonly FixedFloat16 _nullCoord = new FixedFloat16 { Fraction = 0, Whole = 0 };
+    private static readonly FixedFloat16 _nullCoord = new() { Fraction = 0, Whole = 0 };
 
     public static void ResetUnusedTextures(this TR1Level level)
     {
@@ -109,7 +109,7 @@ public static class TRModelExtensions
 
     private static List<int> GetInvalidObjectTextureIndices(TRObjectTexture[] objectTextures)
     {
-        List<int> reusableIndices = new List<int>();
+        List<int> reusableIndices = new();
         for (int i = 0; i < objectTextures.Length; i++)
         {
             if (!objectTextures[i].IsValid())

@@ -22,7 +22,7 @@ public class TR1TexturePacker : AbstractTexturePacker<TREntities, TR1Level>
 
     protected override List<AbstractIndexedTRTexture> LoadObjectTextures()
     {
-        List<AbstractIndexedTRTexture> textures = new List<AbstractIndexedTRTexture>((int)Level.NumObjectTextures);
+        List<AbstractIndexedTRTexture> textures = new((int)Level.NumObjectTextures);
         for (int i = 0; i < Level.NumObjectTextures; i++)
         {
             TRObjectTexture texture = Level.ObjectTextures[i];
@@ -41,7 +41,7 @@ public class TR1TexturePacker : AbstractTexturePacker<TREntities, TR1Level>
 
     protected override List<AbstractIndexedTRTexture> LoadSpriteTextures()
     {
-        List<AbstractIndexedTRTexture> textures = new List<AbstractIndexedTRTexture>((int)Level.NumSpriteTextures);
+        List<AbstractIndexedTRTexture> textures = new((int)Level.NumSpriteTextures);
         for (int i = 0; i < Level.NumSpriteTextures; i++)
         {
             TRSpriteTexture texture = Level.SpriteTextures[i];
@@ -70,7 +70,7 @@ public class TR1TexturePacker : AbstractTexturePacker<TREntities, TR1Level>
 
     protected override IEnumerable<TREntities> GetAllModelTypes()
     {
-        List<TREntities> modelIDs = new List<TREntities>();
+        List<TREntities> modelIDs = new();
         foreach (TRModel model in Level.Models)
         {
             modelIDs.Add((TREntities)model.ID);

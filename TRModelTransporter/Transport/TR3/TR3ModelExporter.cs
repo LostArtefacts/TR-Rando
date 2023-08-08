@@ -20,7 +20,7 @@ public class TR3ModelExporter : AbstractTRModelExporter<TR3Entities, TR3Level, T
 
     protected override TR3ModelDefinition CreateModelDefinition(TR3Level level, TR3Entities modelEntity)
     {
-        TR3ModelDefinition definition = new TR3ModelDefinition
+        TR3ModelDefinition definition = new()
         {
             Alias = modelEntity
         };

@@ -181,7 +181,7 @@ public class TRTextureDeduplicator<E> where E : Enum
     {
         int xEnd = containerSegment.Segment.Bounds.Width - segmentToLocate.Segment.Bounds.Width;
         int yEnd = containerSegment.Segment.Bounds.Height - segmentToLocate.Segment.Bounds.Height;
-        Rectangle rect = new Rectangle(0, 0, segmentToLocate.Segment.Bounds.Width, segmentToLocate.Segment.Bounds.Height);
+        Rectangle rect = new(0, 0, segmentToLocate.Segment.Bounds.Width, segmentToLocate.Segment.Bounds.Height);
 
         for (int x = 0; x <= xEnd; x++)
         {

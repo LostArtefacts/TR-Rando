@@ -8,7 +8,7 @@ public class CinematicTransportHandler
 {
     public void Export(TR1Level level, TR1ModelDefinition definition, IEnumerable<TREntities> entityTypes)
     {
-        List<TRCinematicFrame> frames = new List<TRCinematicFrame>();
+        List<TRCinematicFrame> frames = new();
         if (entityTypes != null && entityTypes.Contains(definition.Entity))
         {
             frames.AddRange(level.CinematicFrames);
@@ -19,7 +19,7 @@ public class CinematicTransportHandler
 
     public void Export(TR2Level level, TR2ModelDefinition definition, IEnumerable<TR2Entities> entityTypes)
     {
-        List<TRCinematicFrame> frames = new List<TRCinematicFrame>();
+        List<TRCinematicFrame> frames = new();
         if (entityTypes != null && entityTypes.Contains(definition.Entity))
         {
             frames.AddRange(level.CinematicFrames);
@@ -30,7 +30,7 @@ public class CinematicTransportHandler
 
     public void Export(TR3Level level, TR3ModelDefinition definition, IEnumerable<TR3Entities> entityTypes)
     {
-        List<TRCinematicFrame> frames = new List<TRCinematicFrame>();
+        List<TRCinematicFrame> frames = new();
         if (entityTypes != null && entityTypes.Contains(definition.Entity))
         {
             frames.AddRange(level.CinematicFrames);

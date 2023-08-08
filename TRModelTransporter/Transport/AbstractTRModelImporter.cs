@@ -45,8 +45,8 @@ public abstract class AbstractTRModelImporter<E, L, D> : AbstractTRModelTranspor
 
         CleanAliases();
 
-        List<D> standardModelDefinitions = new List<D>();
-        List<D> soundModelDefinitions = new List<D>();
+        List<D> standardModelDefinitions = new();
+        List<D> soundModelDefinitions = new();
         foreach (E entity in EntitiesToImport)
         {
             BuildDefinitionList(standardModelDefinitions, soundModelDefinitions, existingEntities, entity, false);
@@ -86,7 +86,7 @@ public abstract class AbstractTRModelImporter<E, L, D> : AbstractTRModelTranspor
     {
         // If an entity is marked to be removed but is also in the list
         // to import, don't remove it in the first place.
-        List<E> cleanedEntities = new List<E>();
+        List<E> cleanedEntities = new();
         foreach (E entity in EntitiesToRemove)
         {
             bool entityClean = false;
@@ -136,7 +136,7 @@ public abstract class AbstractTRModelImporter<E, L, D> : AbstractTRModelTranspor
 
     private void CleanAliases()
     {
-        List<E> cleanedEntities = new List<E>();
+        List<E> cleanedEntities = new();
         // Do we have any aliases?
         foreach (E importEntity in EntitiesToImport)
         {
@@ -175,7 +175,7 @@ public abstract class AbstractTRModelImporter<E, L, D> : AbstractTRModelTranspor
 
     private void ValidateDefinitionList(List<E> modelEntities, List<D> importDefinitions)
     {
-        Dictionary<E, List<E>> detectedAliases = new Dictionary<E, List<E>>();
+        Dictionary<E, List<E>> detectedAliases = new();
         foreach (E entity in modelEntities)
         {
             if (Data.IsAlias(entity))

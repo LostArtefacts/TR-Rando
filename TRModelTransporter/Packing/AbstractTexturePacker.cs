@@ -90,7 +90,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
     public Dictionary<TexturedTile, List<TexturedTileSegment>> GetModelSegments(E modelEntity)
     {
-        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new Dictionary<TexturedTile, List<TexturedTileSegment>>();
+        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new();
         TRMesh[] meshes = GetModelMeshes(modelEntity);
         if (meshes != null)
         {
@@ -110,7 +110,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
     public Dictionary<TexturedTile, List<TexturedTileSegment>> GetObjectTextureSegments(IEnumerable<int> indices)
     {
-        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new Dictionary<TexturedTile, List<TexturedTileSegment>>();
+        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new();
         foreach (TexturedTile tile in _tiles)
         {
             List<TexturedTileSegment> segments = tile.GetObjectTextureIndexSegments(indices);
@@ -127,11 +127,11 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
     public Dictionary<TexturedTile, List<TexturedTileSegment>> GetSpriteSegments(E entity)
     {
-        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new Dictionary<TexturedTile, List<TexturedTileSegment>>();
+        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new();
         TRSpriteSequence sequence = GetSpriteSequence(entity);
         if (sequence != null)
         {
-            List<int> indices = new List<int>();
+            List<int> indices = new();
             for (int j = 0; j < sequence.NegativeLength * -1; j++)
             {
                 indices.Add(sequence.Offset + j);
@@ -152,7 +152,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
     public Dictionary<TexturedTile, List<TexturedTileSegment>> GetSpriteTextureSegments(IEnumerable<int> indices)
     {
-        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new Dictionary<TexturedTile, List<TexturedTileSegment>>();
+        Dictionary<TexturedTile, List<TexturedTileSegment>> segmentMap = new();
         foreach (TexturedTile tile in _tiles)
         {
             List<TexturedTileSegment> segments = tile.GetSpriteTextureIndexSegments(indices);
@@ -245,7 +245,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
         // Perform an exhaustive check against every other model in the level to find shared textures.
 
-        Dictionary<E, Dictionary<TexturedTile, List<TexturedTileSegment>>> candidateSegments = new Dictionary<E, Dictionary<TexturedTile, List<TexturedTileSegment>>>();
+        Dictionary<E, Dictionary<TexturedTile, List<TexturedTileSegment>>> candidateSegments = new();
 
         // First cache each segment for the models we wish to remove
         foreach (E modelEntity in modelEntitiesToRemove)
@@ -304,7 +304,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
     public void RemoveSpriteSegments(IEnumerable<E> entitiesToRemove)
     {
-        Dictionary<E, Dictionary<TexturedTile, List<TexturedTileSegment>>> candidateSegments = new Dictionary<E, Dictionary<TexturedTile, List<TexturedTileSegment>>>();
+        Dictionary<E, Dictionary<TexturedTile, List<TexturedTileSegment>>> candidateSegments = new();
 
         // First cache each segment for the models we wish to remove
         foreach (E entity in entitiesToRemove)

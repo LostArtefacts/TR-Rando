@@ -142,7 +142,7 @@ public class TexturedTileSegment : DefaultRectangle, IDisposable
 
     public TexturedTileSegment Clone()
     {
-        TexturedTileSegment copy = new TexturedTileSegment(FirstTexture.Clone(), (Bitmap)Bitmap.Clone());
+        TexturedTileSegment copy = new(FirstTexture.Clone(), (Bitmap)Bitmap.Clone());
         for (int i = 1; i < Textures.Count; i++)
         {
             copy.AddTexture(Textures[i].Clone());
