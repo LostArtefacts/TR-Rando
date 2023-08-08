@@ -42,7 +42,7 @@ public class BitmapGraphics : IDisposable
         GraphicChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    private Color ApplyHSBOperation(Color c, HSBOperation operation)
+    private static Color ApplyHSBOperation(Color c, HSBOperation operation)
     {
         HSB hsb = c.ToHSB();
         hsb.H = operation.ModifyHue(hsb.H);

@@ -471,7 +471,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         }
     }
 
-    private ushort ConvertMeshTexture(ushort texture, Dictionary<int, int> remapIndices)
+    private static ushort ConvertMeshTexture(ushort texture, Dictionary<int, int> remapIndices)
     {
         int p16 = texture >> 8;
         if (remapIndices.ContainsKey(p16))
