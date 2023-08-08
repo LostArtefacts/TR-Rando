@@ -22,14 +22,8 @@ public abstract class BaseEMCondition
             result = !result;
         }
 
-        if (And != null)
-        {
-            And.ForEach(a => result &= a.GetResult(level));
-        }
-        if (Or != null)
-        {
-            Or.ForEach(o => result |= o.GetResult(level));
-        }
+        And?.ForEach(a => result &= a.GetResult(level));
+        Or?.ForEach(o => result |= o.GetResult(level));
         if (Xor != null)
         {
             result ^= Xor.GetResult(level);
@@ -46,14 +40,8 @@ public abstract class BaseEMCondition
             result = !result;
         }
 
-        if (And != null)
-        {
-            And.ForEach(a => result &= a.GetResult(level));
-        }
-        if (Or != null)
-        {
-            Or.ForEach(o => result |= o.GetResult(level));
-        }
+        And?.ForEach(a => result &= a.GetResult(level));
+        Or?.ForEach(o => result |= o.GetResult(level));
         if (Xor != null)
         {
             result ^= Xor.GetResult(level);
@@ -70,14 +58,8 @@ public abstract class BaseEMCondition
             result = !result;
         }
 
-        if (And != null)
-        {
-            And.ForEach(a => result &= a.GetResult(level));
-        }
-        if (Or != null)
-        {
-            Or.ForEach(o => result |= o.GetResult(level));
-        }
+        And?.ForEach(a => result &= a.GetResult(level));
+        Or?.ForEach(o => result |= o.GetResult(level));
         if (Xor != null)
         {
             result ^= Xor.GetResult(level);
