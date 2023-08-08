@@ -66,7 +66,7 @@ public class ColourTransportHandler
         return colourIndices;
     }
 
-    public static void Import(TR1Level level, TR1ModelDefinition definition, TR1PaletteManager paletteManager)
+    public static void Import(TR1ModelDefinition definition, TR1PaletteManager paletteManager)
     {
         Dictionary<int, int> indexMap = new();
 

@@ -64,7 +64,7 @@ public class TR1ModelImporter : AbstractTRModelImporter<TREntities, TR1Level, TR
         {
             if (!IgnoreGraphics)
             {
-                ColourTransportHandler.Import(Level, definition, PaletteManager);
+                ColourTransportHandler.Import(definition, PaletteManager);
             }
             MeshTransportHandler.Import(Level, definition);
             AnimationTransportHandler.Import(Level, definition);
