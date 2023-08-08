@@ -47,7 +47,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             NumStaticMeshes = baseRoom.NumStaticMeshes,
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
-            Portals = new TRRoomPortal[] { },
+            Portals = Array.Empty<TRRoomPortal>(),
             RoomData = new TRRoomData
             {
                 NumRectangles = baseRoom.RoomData.NumRectangles,
@@ -197,7 +197,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             NumStaticMeshes = baseRoom.NumStaticMeshes,
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
-            Portals = new TRRoomPortal[] { },
+            Portals = Array.Empty<TRRoomPortal>(),
             RoomData = new TR2RoomData
             {
                 NumRectangles = baseRoom.RoomData.NumRectangles,
@@ -352,7 +352,7 @@ public class EMCopyRoomFunction : BaseEMFunction
             NumStaticMeshes = baseRoom.NumStaticMeshes,
             NumXSectors = baseRoom.NumXSectors,
             NumZSectors = baseRoom.NumZSectors,
-            Portals = new TRRoomPortal[] { },
+            Portals = Array.Empty<TRRoomPortal>(),
             ReverbInfo = baseRoom.ReverbInfo,
             RoomData = new TR3RoomData
             {

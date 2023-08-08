@@ -345,7 +345,7 @@ public class EMImportRoomFunction : BaseEMRoomImportFunction, ITextureModifier
             NumStaticMeshes = roomDef.Room.NumStaticMeshes,
             NumXSectors = roomDef.Room.NumXSectors,
             NumZSectors = roomDef.Room.NumZSectors,
-            Portals = new TRRoomPortal[] { },
+            Portals = Array.Empty<TRRoomPortal>(),
             ReverbInfo = roomDef.Room.ReverbInfo,
             RoomData = new TR3RoomData
             {

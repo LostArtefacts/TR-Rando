@@ -31,8 +31,8 @@ public class EMCreateRoomFunction : BaseEMFunction
             NumLights = (ushort)(Lights == null ? 0 : Lights.Length),
             NumPortals = 0,
             NumStaticMeshes = 0,
-            Portals = new TRRoomPortal[] { },
-            StaticMeshes = new TRRoomStaticMesh[] { },
+            Portals = Array.Empty<TRRoomPortal>(),
+            StaticMeshes = Array.Empty<TRRoomStaticMesh>(),
             Info = new TRRoomInfo
             {
                 X = Location.X,
@@ -45,8 +45,8 @@ public class EMCreateRoomFunction : BaseEMFunction
                 // Ignored for now
                 NumSprites = 0,
                 NumTriangles = 0,
-                Sprites = new TRRoomSprite[0],
-                Triangles = new TRFace3[0],
+                Sprites = Array.Empty<TRRoomSprite>(),
+                Triangles = Array.Empty<TRFace3>(),
             }
         };
 
@@ -115,8 +115,8 @@ public class EMCreateRoomFunction : BaseEMFunction
             NumLights = (ushort)(Lights == null ? 0 : Lights.Length),
             NumPortals = 0,
             NumStaticMeshes = 0,
-            Portals = new TRRoomPortal[] { },
-            StaticMeshes = new TR2RoomStaticMesh[] { },
+            Portals = Array.Empty<TRRoomPortal>(),
+            StaticMeshes = Array.Empty<TR2RoomStaticMesh>(),
             Info = new TRRoomInfo
             {
                 X = Location.X,
@@ -129,8 +129,8 @@ public class EMCreateRoomFunction : BaseEMFunction
                 // Ignored for now
                 NumSprites = 0,
                 NumTriangles = 0,
-                Sprites = new TRRoomSprite[0],
-                Triangles = new TRFace3[0],
+                Sprites = Array.Empty<TRRoomSprite>(),
+                Triangles = Array.Empty<TRFace3>(),
             }
         };
 
@@ -203,8 +203,8 @@ public class EMCreateRoomFunction : BaseEMFunction
             NumLights = (ushort)(Lights == null ? 0 : Lights.Length),
             NumPortals = 0,
             NumStaticMeshes = 0,
-            Portals = new TRRoomPortal[] { },
-            StaticMeshes = new TR3RoomStaticMesh[] { },
+            Portals = Array.Empty<TRRoomPortal>(),
+            StaticMeshes = Array.Empty<TR3RoomStaticMesh>(),
             Info = new TRRoomInfo
             {
                 X = Location.X,
@@ -217,8 +217,8 @@ public class EMCreateRoomFunction : BaseEMFunction
                 // Ignored for now
                 NumSprites = 0,
                 NumTriangles = 0,
-                Sprites = new TRRoomSprite[0],
-                Triangles = new TRFace3[0],
+                Sprites = Array.Empty<TRRoomSprite>(),
+                Triangles = Array.Empty<TRFace3>(),
             }
         };
 
