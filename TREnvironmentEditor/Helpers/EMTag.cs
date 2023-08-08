@@ -1,15 +1,14 @@
-﻿namespace TREnvironmentEditor.Helpers
+﻿namespace TREnvironmentEditor.Helpers;
+
+public enum EMTag
 {
-    public enum EMTag
-    {
-        General,
-        SlotChange,
-        WaterChange,
-        LadderChange,
-        TrapChange,
-        PuzzleRoom,
-        Hard,
-        CommunityPatchOnly,
-        NonCommunityPatchOnly,
-    }
+    General,
+    SlotChange,
+    WaterChange,
+    LadderChange,
+    TrapChange,
+    PuzzleRoom,
+    Hard,
+    CommunityPatchOnly,
+    NonCommunityPatchOnly,
 }

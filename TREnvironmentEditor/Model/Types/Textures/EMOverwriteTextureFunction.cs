@@ -6,108 +6,107 @@ using TRLevelControl.Model;
 using TRModelTransporter.Packing;
 using TRTexture16Importer.Helpers;
 
-namespace TREnvironmentEditor.Model.Types
+namespace TREnvironmentEditor.Model.Types;
+
+public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
 {
-    public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
+    public List<TextureOverwrite> Overwrites { get; set; }
+
+    public override void ApplyToLevel(TR1Level level)
     {
-        public List<TextureOverwrite> Overwrites { get; set; }
-
-        public override void ApplyToLevel(TR1Level level)
+        using (TR1TexturePacker packer = new TR1TexturePacker(level))
         {
-            using (TR1TexturePacker packer = new TR1TexturePacker(level))
+            ApplyOverwrites(texture =>
             {
-                ApplyOverwrites(texture =>
-                {
-                    return packer.GetObjectTextureSegments(new List<int> { texture })
-                        .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
-                        .First();
-                });
-                packer.AllowEmptyPacking = true;
-                packer.Pack(true);
-            }
+                return packer.GetObjectTextureSegments(new List<int> { texture })
+                    .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
+                    .First();
+            });
+            packer.AllowEmptyPacking = true;
+            packer.Pack(true);
         }
+    }
 
-        public override void ApplyToLevel(TR2Level level)
+    public override void ApplyToLevel(TR2Level level)
+    {
+        using (TR2TexturePacker packer = new TR2TexturePacker(level))
         {
-            using (TR2TexturePacker packer = new TR2TexturePacker(level))
+            ApplyOverwrites(texture =>
             {
-                ApplyOverwrites(texture =>
-                {
-                    return packer.GetObjectTextureSegments(new List<int> { texture })
-                        .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
-                        .First();
-                });
-                packer.AllowEmptyPacking = true;
-                packer.Pack(true);
-            }
+                return packer.GetObjectTextureSegments(new List<int> { texture })
+                    .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
+                    .First();
+            });
+            packer.AllowEmptyPacking = true;
+            packer.Pack(true);
         }
+    }
 
-        public override void ApplyToLevel(TR3Level level)
+    public override void ApplyToLevel(TR3Level level)
+    {
+        using (TR3TexturePacker packer = new TR3TexturePacker(level))
         {
-            using (TR3TexturePacker packer = new TR3TexturePacker(level))
+            ApplyOverwrites(texture =>
             {
-                ApplyOverwrites(texture =>
-                {
-                    return packer.GetObjectTextureSegments(new List<int> { texture })
-                        .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
-                        .First();
-                });
-                packer.AllowEmptyPacking = true;
-                packer.Pack(true);
-            }
+                return packer.GetObjectTextureSegments(new List<int> { texture })
+                    .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
+                    .First();
+            });
+            packer.AllowEmptyPacking = true;
+            packer.Pack(true);
         }
+    }
 
-        public void RemapTextures(Dictionary<ushort, ushort> indexMap)
+    public void RemapTextures(Dictionary<ushort, ushort> indexMap)
+    {
+        foreach (TextureOverwrite overwrite in Overwrites)
         {
-            foreach (TextureOverwrite overwrite in Overwrites)
+            if (indexMap.ContainsKey(overwrite.Texture))
             {
-                if (indexMap.ContainsKey(overwrite.Texture))
-                {
-                    overwrite.Texture = indexMap[overwrite.Texture];
-                }
-                foreach (ushort target in overwrite.Targets.Keys.ToList())
-                {
-                    if (indexMap.ContainsKey(target))
-                    {
-                        List<Point> points = overwrite.Targets[target];
-                        overwrite.Targets.Remove(target);
-                        overwrite.Targets[indexMap[target]] = points;
-                    }
-                }
+                overwrite.Texture = indexMap[overwrite.Texture];
             }
-        }
-
-        private void ApplyOverwrites(Func<ushort, Tuple<TexturedTile, TexturedTileSegment>> segmentAction)
-        {
-            foreach (TextureOverwrite overwrite in Overwrites)
+            foreach (ushort target in overwrite.Targets.Keys.ToList())
             {
-                Tuple<TexturedTile, TexturedTileSegment> segment = segmentAction(overwrite.Texture);
-                BitmapGraphics segmentBmp = new BitmapGraphics(segment.Item2.Bitmap);
-                Bitmap clipBmp = segmentBmp.Extract(overwrite.Clip);
-
-                foreach (ushort targetTexture in overwrite.Targets.Keys)
+                if (indexMap.ContainsKey(target))
                 {
-                    Tuple<TexturedTile, TexturedTileSegment> targetSegment = segmentAction(targetTexture);
-                    foreach (Point point in overwrite.Targets[targetTexture])
-                    {
-                        targetSegment.Item1.BitmapGraphics.Import(clipBmp, new Rectangle
-                        (
-                            targetSegment.Item2.Bounds.X + point.X, 
-                            targetSegment.Item2.Bounds.Y + point.Y, 
-                            clipBmp.Width, 
-                            clipBmp.Height
-                        ), overwrite.RetainBackground);
-                    }
+                    List<Point> points = overwrite.Targets[target];
+                    overwrite.Targets.Remove(target);
+                    overwrite.Targets[indexMap[target]] = points;
                 }
             }
         }
     }
 
-    public class TextureOverwrite
+    private void ApplyOverwrites(Func<ushort, Tuple<TexturedTile, TexturedTileSegment>> segmentAction)
     {
-        public ushort Texture { get; set; }
-        public Rectangle Clip { get; set; }
-        public bool RetainBackground { get; set; }
-        public Dictionary<ushort, List<Point>> Targets { get; set; }
+        foreach (TextureOverwrite overwrite in Overwrites)
+        {
+            Tuple<TexturedTile, TexturedTileSegment> segment = segmentAction(overwrite.Texture);
+            BitmapGraphics segmentBmp = new BitmapGraphics(segment.Item2.Bitmap);
+            Bitmap clipBmp = segmentBmp.Extract(overwrite.Clip);
+
+            foreach (ushort targetTexture in overwrite.Targets.Keys)
+            {
+                Tuple<TexturedTile, TexturedTileSegment> targetSegment = segmentAction(targetTexture);
+                foreach (Point point in overwrite.Targets[targetTexture])
+                {
+                    targetSegment.Item1.BitmapGraphics.Import(clipBmp, new Rectangle
+                    (
+                        targetSegment.Item2.Bounds.X + point.X, 
+                        targetSegment.Item2.Bounds.Y + point.Y, 
+                        clipBmp.Width, 
+                        clipBmp.Height
+                    ), overwrite.RetainBackground);
+                }
+            }
+        }
     }
+}
+
+public class TextureOverwrite
+{
+    public ushort Texture { get; set; }
+    public Rectangle Clip { get; set; }
+    public bool RetainBackground { get; set; }
+    public Dictionary<ushort, List<Point>> Targets { get; set; }
 }

@@ -2,52 +2,51 @@
 using System.Linq;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types
+namespace TREnvironmentEditor.Model.Types;
+
+public class EMRemoveSoundSourceFunction : BaseEMFunction
 {
-    public class EMRemoveSoundSourceFunction : BaseEMFunction
+    public TRSoundSource Source { get; set; }
+
+    public override void ApplyToLevel(TR1Level level)
     {
-        public TRSoundSource Source { get; set; }
-
-        public override void ApplyToLevel(TR1Level level)
+        // Can't remove by index in case several are called in succession
+        List<TRSoundSource> sources = level.SoundSources.ToList();
+        if (RemoveSource(sources))
         {
-            // Can't remove by index in case several are called in succession
-            List<TRSoundSource> sources = level.SoundSources.ToList();
-            if (RemoveSource(sources))
-            {
-                level.SoundSources = sources.ToArray();
-                level.NumSoundSources--;
-            }
+            level.SoundSources = sources.ToArray();
+            level.NumSoundSources--;
         }
+    }
 
-        public override void ApplyToLevel(TR2Level level)
+    public override void ApplyToLevel(TR2Level level)
+    {
+        // Can't remove by index in case several are called in succession
+        List<TRSoundSource> sources = level.SoundSources.ToList();
+        if (RemoveSource(sources))
         {
-            // Can't remove by index in case several are called in succession
-            List<TRSoundSource> sources = level.SoundSources.ToList();
-            if (RemoveSource(sources))
-            {
-                level.SoundSources = sources.ToArray();
-                level.NumSoundSources--;
-            }
+            level.SoundSources = sources.ToArray();
+            level.NumSoundSources--;
         }
+    }
 
-        public override void ApplyToLevel(TR3Level level)
+    public override void ApplyToLevel(TR3Level level)
+    {
+        List<TRSoundSource> sources = level.SoundSources.ToList();
+        if (RemoveSource(sources))
         {
-            List<TRSoundSource> sources = level.SoundSources.ToList();
-            if (RemoveSource(sources))
-            {
-                level.SoundSources = sources.ToArray();
-                level.NumSoundSources--;
-            }
+            level.SoundSources = sources.ToArray();
+            level.NumSoundSources--;
         }
+    }
 
-        private bool RemoveSource(List<TRSoundSource> sources)
+    private bool RemoveSource(List<TRSoundSource> sources)
+    {
+        TRSoundSource source = sources.Find(s => s.X == Source.X && s.Y == Source.Y && s.Z == Source.Z);
+        if (source != null)
         {
-            TRSoundSource source = sources.Find(s => s.X == Source.X && s.Y == Source.Y && s.Z == Source.Z);
-            if (source != null)
-            {
-                return sources.Remove(source);
-            }
-            return false;
+            return sources.Remove(source);
         }
+        return false;
     }
 }

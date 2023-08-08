@@ -1,62 +1,61 @@
 ﻿using System;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types
+namespace TREnvironmentEditor.Model.Types;
+
+public class EMConvertSpriteSequenceFunction : BaseEMFunction
 {
-    public class EMConvertSpriteSequenceFunction : BaseEMFunction
+    public short OldSpriteID { get; set; }
+    public short NewSpriteID { get; set; }
+
+    public override void ApplyToLevel(TR1Level level)
     {
-        public short OldSpriteID { get; set; }
-        public short NewSpriteID { get; set; }
+        ConvertSpriteSequence(level.SpriteSequences);
+        UpdateSpriteEntities(level.Entities);
+    }
 
-        public override void ApplyToLevel(TR1Level level)
-        {
-            ConvertSpriteSequence(level.SpriteSequences);
-            UpdateSpriteEntities(level.Entities);
-        }
+    public override void ApplyToLevel(TR2Level level)
+    {
+        ConvertSpriteSequence(level.SpriteSequences);
+        UpdateSpriteEntities(level.Entities);
+    }
 
-        public override void ApplyToLevel(TR2Level level)
-        {
-            ConvertSpriteSequence(level.SpriteSequences);
-            UpdateSpriteEntities(level.Entities);
-        }
+    public override void ApplyToLevel(TR3Level level)
+    {
+        ConvertSpriteSequence(level.SpriteSequences);
+        UpdateSpriteEntities(level.Entities);
+    }
 
-        public override void ApplyToLevel(TR3Level level)
+    private void ConvertSpriteSequence(TRSpriteSequence[] sequences)
+    {
+        if (Array.Find(sequences, s => s.SpriteID == NewSpriteID) == null)
         {
-            ConvertSpriteSequence(level.SpriteSequences);
-            UpdateSpriteEntities(level.Entities);
-        }
-
-        private void ConvertSpriteSequence(TRSpriteSequence[] sequences)
-        {
-            if (Array.Find(sequences, s => s.SpriteID == NewSpriteID) == null)
+            TRSpriteSequence oldSequence = Array.Find(sequences, s => s.SpriteID == OldSpriteID);
+            if (oldSequence != null)
             {
-                TRSpriteSequence oldSequence = Array.Find(sequences, s => s.SpriteID == OldSpriteID);
-                if (oldSequence != null)
-                {
-                    oldSequence.SpriteID = NewSpriteID;
-                }
+                oldSequence.SpriteID = NewSpriteID;
             }
         }
+    }
 
-        private void UpdateSpriteEntities(TREntity[] entities)
+    private void UpdateSpriteEntities(TREntity[] entities)
+    {
+        foreach (TREntity entity in entities)
         {
-            foreach (TREntity entity in entities)
+            if (entity.TypeID == OldSpriteID)
             {
-                if (entity.TypeID == OldSpriteID)
-                {
-                    entity.TypeID = NewSpriteID;
-                }
+                entity.TypeID = NewSpriteID;
             }
         }
+    }
 
-        private void UpdateSpriteEntities(TR2Entity[] entities)
+    private void UpdateSpriteEntities(TR2Entity[] entities)
+    {
+        foreach (TR2Entity entity in entities)
         {
-            foreach (TR2Entity entity in entities)
+            if (entity.TypeID == OldSpriteID)
             {
-                if (entity.TypeID == OldSpriteID)
-                {
-                    entity.TypeID = NewSpriteID;
-                }
+                entity.TypeID = NewSpriteID;
             }
         }
     }

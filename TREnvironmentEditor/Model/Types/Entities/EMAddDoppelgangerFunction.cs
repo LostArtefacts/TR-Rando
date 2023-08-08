@@ -3,31 +3,30 @@ using TREnvironmentEditor.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 
-namespace TREnvironmentEditor.Model.Types
+namespace TREnvironmentEditor.Model.Types;
+
+public class EMAddDoppelgangerFunction : EMAddEntityFunction
 {
-    public class EMAddDoppelgangerFunction : EMAddEntityFunction
+    public static readonly short AnchorRoomFlag = 0x200;
+
+    public short AnchorRoom { get; set; }
+
+    public override void ApplyToLevel(TR1Level level)
     {
-        public static readonly short AnchorRoomFlag = 0x200;
+        TypeID = (short)TREntities.Doppelganger;
+        base.ApplyToLevel(level);
 
-        public short AnchorRoom { get; set; }
+        EMLevelData data = GetData(level);
+        level.Rooms[data.ConvertRoom(AnchorRoom)].Flags |= AnchorRoomFlag;
+    }
 
-        public override void ApplyToLevel(TR1Level level)
-        {
-            TypeID = (short)TREntities.Doppelganger;
-            base.ApplyToLevel(level);
+    public override void ApplyToLevel(TR2Level level)
+    {
+        throw new NotSupportedException();
+    }
 
-            EMLevelData data = GetData(level);
-            level.Rooms[data.ConvertRoom(AnchorRoom)].Flags |= AnchorRoomFlag;
-        }
-
-        public override void ApplyToLevel(TR2Level level)
-        {
-            throw new NotSupportedException();
-        }
-
-        public override void ApplyToLevel(TR3Level level)
-        {
-            throw new NotSupportedException();
-        }
+    public override void ApplyToLevel(TR3Level level)
+    {
+        throw new NotSupportedException();
     }
 }

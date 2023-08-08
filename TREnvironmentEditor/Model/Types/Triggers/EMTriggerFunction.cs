@@ -7,200 +7,199 @@ using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 
-namespace TREnvironmentEditor.Model.Types
+namespace TREnvironmentEditor.Model.Types;
+
+public class EMTriggerFunction : BaseEMFunction
 {
-    public class EMTriggerFunction : BaseEMFunction
+    public List<EMLocation> Locations { get; set; }
+    public List<short> Rooms { get; set; }
+    public EMLocationExpander ExpandedLocations { get; set; }
+    public int? EntityLocation { get; set; }
+    public EMTrigger Trigger { get; set; }
+    public bool Replace { get; set; }
+
+    public override void ApplyToLevel(TR1Level level)
     {
-        public List<EMLocation> Locations { get; set; }
-        public List<short> Rooms { get; set; }
-        public EMLocationExpander ExpandedLocations { get; set; }
-        public int? EntityLocation { get; set; }
-        public EMTrigger Trigger { get; set; }
-        public bool Replace { get; set; }
+        EMLevelData data = GetData(level);
+        FDTriggerEntry triggerEntry = InitialiseTriggerEntry(data);
 
-        public override void ApplyToLevel(TR1Level level)
+        FDControl control = new FDControl();
+        control.ParseFromLevel(level);
+
+        if (Locations != null)
         {
-            EMLevelData data = GetData(level);
-            FDTriggerEntry triggerEntry = InitialiseTriggerEntry(data);
-
-            FDControl control = new FDControl();
-            control.ParseFromLevel(level);
-
-            if (Locations != null)
+            foreach (EMLocation location in Locations)
             {
-                foreach (EMLocation location in Locations)
-                {
-                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                    CreateTrigger(sector, control, triggerEntry);
-                }
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                CreateTrigger(sector, control, triggerEntry);
             }
+        }
 
-            if (Rooms != null)
+        if (Rooms != null)
+        {
+            foreach (short room in Rooms)
             {
-                foreach (short room in Rooms)
+                foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
                 {
-                    foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
+                    if (!sector.IsImpenetrable && sector.RoomBelow == 255)
                     {
-                        if (!sector.IsImpenetrable && sector.RoomBelow == 255)
-                        {
-                            CreateTrigger(sector, control, triggerEntry);
-                        }
+                        CreateTrigger(sector, control, triggerEntry);
                     }
                 }
             }
-
-            if (EntityLocation.HasValue)
-            {
-                TREntity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
-                TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
-                CreateTrigger(sector, control, triggerEntry);
-            }
-
-            control.WriteToLevel(level);
         }
 
-        public override void ApplyToLevel(TR2Level level)
+        if (EntityLocation.HasValue)
         {
-            EMLevelData data = GetData(level);
-            FDTriggerEntry triggerEntry = InitialiseTriggerEntry(data);
+            TREntity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
+            TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+            CreateTrigger(sector, control, triggerEntry);
+        }
 
-            FDControl control = new FDControl();
-            control.ParseFromLevel(level);
+        control.WriteToLevel(level);
+    }
 
-            if (Locations != null)
+    public override void ApplyToLevel(TR2Level level)
+    {
+        EMLevelData data = GetData(level);
+        FDTriggerEntry triggerEntry = InitialiseTriggerEntry(data);
+
+        FDControl control = new FDControl();
+        control.ParseFromLevel(level);
+
+        if (Locations != null)
+        {
+            foreach (EMLocation location in Locations)
             {
-                foreach (EMLocation location in Locations)
-                {
-                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                    CreateTrigger(sector, control, triggerEntry);
-                }
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                CreateTrigger(sector, control, triggerEntry);
             }
+        }
 
-            if (Rooms != null)
+        if (Rooms != null)
+        {
+            foreach (short room in Rooms)
             {
-                foreach (short room in Rooms)
+                foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].SectorList)
                 {
-                    foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].SectorList)
+                    if (!sector.IsImpenetrable && sector.RoomBelow == 255)
                     {
-                        if (!sector.IsImpenetrable && sector.RoomBelow == 255)
-                        {
-                            CreateTrigger(sector, control, triggerEntry);
-                        }
+                        CreateTrigger(sector, control, triggerEntry);
                     }
                 }
             }
-
-            if (EntityLocation.HasValue)
-            {
-                TR2Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
-                TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
-                CreateTrigger(sector, control, triggerEntry);
-            }
-
-            // Handle any specifics that the trigger may rely on
-            foreach (FDActionListItem action in triggerEntry.TrigActionList)
-            {
-                switch (action.TrigAction)
-                {
-                    case FDTrigAction.ClearBodies:
-                        SetEnemyClearBodies(level.Entities);
-                        break;
-                }
-            }
-
-            control.WriteToLevel(level);
         }
 
-        public override void ApplyToLevel(TR3Level level)
+        if (EntityLocation.HasValue)
         {
-            EMLevelData data = GetData(level);
-            FDTriggerEntry triggerEntry = InitialiseTriggerEntry(data);
+            TR2Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
+            TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+            CreateTrigger(sector, control, triggerEntry);
+        }
 
-            FDControl control = new FDControl();
-            control.ParseFromLevel(level);
-
-            if (Locations != null)
+        // Handle any specifics that the trigger may rely on
+        foreach (FDActionListItem action in triggerEntry.TrigActionList)
+        {
+            switch (action.TrigAction)
             {
-                foreach (EMLocation location in Locations)
-                {
-                    TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
-                    CreateTrigger(sector, control, triggerEntry);
-                }
+                case FDTrigAction.ClearBodies:
+                    SetEnemyClearBodies(level.Entities);
+                    break;
             }
+        }
 
-            if (Rooms != null)
+        control.WriteToLevel(level);
+    }
+
+    public override void ApplyToLevel(TR3Level level)
+    {
+        EMLevelData data = GetData(level);
+        FDTriggerEntry triggerEntry = InitialiseTriggerEntry(data);
+
+        FDControl control = new FDControl();
+        control.ParseFromLevel(level);
+
+        if (Locations != null)
+        {
+            foreach (EMLocation location in Locations)
             {
-                foreach (short room in Rooms)
+                TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
+                CreateTrigger(sector, control, triggerEntry);
+            }
+        }
+
+        if (Rooms != null)
+        {
+            foreach (short room in Rooms)
+            {
+                foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
                 {
-                    foreach (TRRoomSector sector in level.Rooms[data.ConvertRoom(room)].Sectors)
+                    if (!sector.IsImpenetrable && sector.RoomBelow == 255)
                     {
-                        if (!sector.IsImpenetrable && sector.RoomBelow == 255)
-                        {
-                            CreateTrigger(sector, control, triggerEntry);
-                        }
+                        CreateTrigger(sector, control, triggerEntry);
                     }
                 }
             }
-
-            if (EntityLocation.HasValue)
-            {
-                TR2Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
-                TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
-                CreateTrigger(sector, control, triggerEntry);
-            }
-
-            // Handle any specifics that the trigger may rely on
-            foreach (FDActionListItem action in triggerEntry.TrigActionList)
-            {
-                switch (action.TrigAction)
-                {
-                    case FDTrigAction.ClearBodies:
-                        SetEnemyClearBodies(level.Entities);
-                        break;
-                }
-            }
-
-            control.WriteToLevel(level);
         }
 
-        private FDTriggerEntry InitialiseTriggerEntry(EMLevelData data)
+        if (EntityLocation.HasValue)
         {
-            // Expand locations
-            if (ExpandedLocations != null)
-            {
-                Locations = ExpandedLocations.Expand();
-            }
-            
-            return Trigger.ToFDEntry(data);
+            TR2Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
+            TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
+            CreateTrigger(sector, control, triggerEntry);
         }
 
-        private void CreateTrigger(TRRoomSector sector, FDControl control, FDTriggerEntry triggerEntry)
+        // Handle any specifics that the trigger may rely on
+        foreach (FDActionListItem action in triggerEntry.TrigActionList)
         {
-            // If there is no floor data create the FD to begin with.
-            if (sector.FDIndex == 0)
+            switch (action.TrigAction)
             {
-                control.CreateFloorData(sector);
-            }
-
-            List<FDEntry> entries = control.Entries[sector.FDIndex];
-            if (Replace)
-            {
-                entries.Clear();
-            }
-            if (entries.FindIndex(e => e is FDTriggerEntry) == -1)
-            {
-                entries.Add(triggerEntry);
+                case FDTrigAction.ClearBodies:
+                    SetEnemyClearBodies(level.Entities);
+                    break;
             }
         }
 
-        private void SetEnemyClearBodies(IEnumerable<TR2Entity> levelEntities)
+        control.WriteToLevel(level);
+    }
+
+    private FDTriggerEntry InitialiseTriggerEntry(EMLevelData data)
+    {
+        // Expand locations
+        if (ExpandedLocations != null)
         {
-            foreach (TR2Entity entity in levelEntities)
+            Locations = ExpandedLocations.Expand();
+        }
+        
+        return Trigger.ToFDEntry(data);
+    }
+
+    private void CreateTrigger(TRRoomSector sector, FDControl control, FDTriggerEntry triggerEntry)
+    {
+        // If there is no floor data create the FD to begin with.
+        if (sector.FDIndex == 0)
+        {
+            control.CreateFloorData(sector);
+        }
+
+        List<FDEntry> entries = control.Entries[sector.FDIndex];
+        if (Replace)
+        {
+            entries.Clear();
+        }
+        if (entries.FindIndex(e => e is FDTriggerEntry) == -1)
+        {
+            entries.Add(triggerEntry);
+        }
+    }
+
+    private void SetEnemyClearBodies(IEnumerable<TR2Entity> levelEntities)
+    {
+        foreach (TR2Entity entity in levelEntities)
+        {
+            if (TR2EntityUtilities.IsEnemyType((TR2Entities)entity.TypeID))
             {
-                if (TR2EntityUtilities.IsEnemyType((TR2Entities)entity.TypeID))
-                {
-                    entity.ClearBody = true;
-                }
+                entity.ClearBody = true;
             }
         }
     }

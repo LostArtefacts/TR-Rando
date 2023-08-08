@@ -2,91 +2,90 @@
 using TREnvironmentEditor.Helpers;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types
+namespace TREnvironmentEditor.Model.Types;
+
+public class EMRefaceFunction : BaseEMFunction, ITextureModifier
 {
-    public class EMRefaceFunction : BaseEMFunction, ITextureModifier
+    public EMTextureMap TextureMap { get; set; }
+
+    public override void ApplyToLevel(TR1Level level)
     {
-        public EMTextureMap TextureMap { get; set; }
+        ApplyTextures(level);
+    }
 
-        public override void ApplyToLevel(TR1Level level)
+    public override void ApplyToLevel(TR2Level level)
+    {
+        ApplyTextures(level);
+    }
+
+    public override void ApplyToLevel(TR3Level level)
+    {
+        ApplyTextures(level);
+    }
+
+    public void ApplyTextures(TR1Level level)
+    {
+        EMLevelData data = GetData(level);
+
+        foreach (ushort texture in TextureMap.Keys)
         {
-            ApplyTextures(level);
-        }
-
-        public override void ApplyToLevel(TR2Level level)
-        {
-            ApplyTextures(level);
-        }
-
-        public override void ApplyToLevel(TR3Level level)
-        {
-            ApplyTextures(level);
-        }
-
-        public void ApplyTextures(TR1Level level)
-        {
-            EMLevelData data = GetData(level);
-
-            foreach (ushort texture in TextureMap.Keys)
+            foreach (int roomIndex in TextureMap[texture].Keys)
             {
-                foreach (int roomIndex in TextureMap[texture].Keys)
+                TRRoom room = level.Rooms[data.ConvertRoom(roomIndex)];
+                ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
+            }
+        }
+    }
+
+    public void ApplyTextures(TR2Level level)
+    {
+        EMLevelData data = GetData(level);
+
+        foreach (ushort texture in TextureMap.Keys)
+        {
+            foreach (int roomIndex in TextureMap[texture].Keys)
+            {
+                TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
+                ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
+            }
+        }
+    }
+
+    public void ApplyTextures(TR3Level level)
+    {
+        EMLevelData data = GetData(level);
+
+        foreach (ushort texture in TextureMap.Keys)
+        {
+            foreach (int roomIndex in TextureMap[texture].Keys)
+            {
+                TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
+                ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
+            }
+        }
+    }
+
+    private void ApplyTextures(ushort texture, Dictionary<EMTextureFaceType, int[]> faceMap, TRFace4[] rectangles, TRFace3[] triangles)
+    {
+        foreach (EMTextureFaceType faceType in faceMap.Keys)
+        {
+            foreach (int faceIndex in faceMap[faceType])
+            {
+                switch (faceType)
                 {
-                    TRRoom room = level.Rooms[data.ConvertRoom(roomIndex)];
-                    ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
+                    case EMTextureFaceType.Rectangles:
+                        rectangles[faceIndex].Texture = texture;
+                        break;
+                    case EMTextureFaceType.Triangles:
+                        triangles[faceIndex].Texture = texture;
+                        break;
                 }
             }
         }
+    }
 
-        public void ApplyTextures(TR2Level level)
-        {
-            EMLevelData data = GetData(level);
-
-            foreach (ushort texture in TextureMap.Keys)
-            {
-                foreach (int roomIndex in TextureMap[texture].Keys)
-                {
-                    TR2Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                    ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
-                }
-            }
-        }
-
-        public void ApplyTextures(TR3Level level)
-        {
-            EMLevelData data = GetData(level);
-
-            foreach (ushort texture in TextureMap.Keys)
-            {
-                foreach (int roomIndex in TextureMap[texture].Keys)
-                {
-                    TR3Room room = level.Rooms[data.ConvertRoom(roomIndex)];
-                    ApplyTextures(texture, TextureMap[texture][roomIndex], room.RoomData.Rectangles, room.RoomData.Triangles);
-                }
-            }
-        }
-
-        private void ApplyTextures(ushort texture, Dictionary<EMTextureFaceType, int[]> faceMap, TRFace4[] rectangles, TRFace3[] triangles)
-        {
-            foreach (EMTextureFaceType faceType in faceMap.Keys)
-            {
-                foreach (int faceIndex in faceMap[faceType])
-                {
-                    switch (faceType)
-                    {
-                        case EMTextureFaceType.Rectangles:
-                            rectangles[faceIndex].Texture = texture;
-                            break;
-                        case EMTextureFaceType.Triangles:
-                            triangles[faceIndex].Texture = texture;
-                            break;
-                    }
-                }
-            }
-        }
-
-        public void RemapTextures(Dictionary<ushort, ushort> indexMap)
-        {
-            TextureMap.Remap(indexMap);
-        }
+    public void RemapTextures(Dictionary<ushort, ushort> indexMap)
+    {
+        TextureMap.Remap(indexMap);
     }
 }

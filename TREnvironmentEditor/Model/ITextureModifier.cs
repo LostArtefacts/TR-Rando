@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace TREnvironmentEditor.Model
+namespace TREnvironmentEditor.Model;
+
+public interface ITextureModifier
 {
-    public interface ITextureModifier
-    {
-        void RemapTextures(Dictionary<ushort, ushort> indexMap);
-    }
+    void RemapTextures(Dictionary<ushort, ushort> indexMap);
 }

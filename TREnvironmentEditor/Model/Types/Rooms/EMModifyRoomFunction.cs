@@ -2,55 +2,54 @@
 using TREnvironmentEditor.Helpers;
 using TRLevelControl.Model;
 
-namespace TREnvironmentEditor.Model.Types
+namespace TREnvironmentEditor.Model.Types;
+
+public class EMModifyRoomFunction : BaseEMFunction
 {
-    public class EMModifyRoomFunction : BaseEMFunction
+    public int[] Rooms { get; set; }
+    public bool? IsSkyboxVisible { get; set; }
+    public bool? IsWindy { get; set; }
+    public bool? IsSwamp { get; set; }
+
+    public override void ApplyToLevel(TR1Level level)
     {
-        public int[] Rooms { get; set; }
-        public bool? IsSkyboxVisible { get; set; }
-        public bool? IsWindy { get; set; }
-        public bool? IsSwamp { get; set; }
+        throw new NotSupportedException();
+    }
 
-        public override void ApplyToLevel(TR1Level level)
+    public override void ApplyToLevel(TR2Level level)
+    {
+        EMLevelData data = GetData(level);
+        foreach (int roomNumber in Rooms)
         {
-            throw new NotSupportedException();
-        }
-
-        public override void ApplyToLevel(TR2Level level)
-        {
-            EMLevelData data = GetData(level);
-            foreach (int roomNumber in Rooms)
+            TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
+            if (IsSkyboxVisible.HasValue)
             {
-                TR2Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                if (IsSkyboxVisible.HasValue)
-                {
-                    room.IsSkyboxVisible = IsSkyboxVisible.Value;
-                }
-                if (IsWindy.HasValue)
-                {
-                    room.IsWindy = IsWindy.Value;
-                }
+                room.IsSkyboxVisible = IsSkyboxVisible.Value;
+            }
+            if (IsWindy.HasValue)
+            {
+                room.IsWindy = IsWindy.Value;
             }
         }
+    }
 
-        public override void ApplyToLevel(TR3Level level)
+    public override void ApplyToLevel(TR3Level level)
+    {
+        EMLevelData data = GetData(level);
+        foreach (int roomNumber in Rooms)
         {
-            EMLevelData data = GetData(level);
-            foreach (int roomNumber in Rooms)
+            TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
+            if (IsSkyboxVisible.HasValue)
             {
-                TR3Room room = level.Rooms[data.ConvertRoom(roomNumber)];
-                if (IsSkyboxVisible.HasValue)
-                {
-                    room.IsSkyboxVisible = IsSkyboxVisible.Value;
-                }
-                if (IsWindy.HasValue)
-                {
-                    room.IsWindy = IsWindy.Value;
-                }
-                if (IsSwamp.HasValue)
-                {
-                    room.IsSwamp = IsSwamp.Value;
-                }
+                room.IsSkyboxVisible = IsSkyboxVisible.Value;
+            }
+            if (IsWindy.HasValue)
+            {
+                room.IsWindy = IsWindy.Value;
+            }
+            if (IsSwamp.HasValue)
+            {
+                room.IsSwamp = IsSwamp.Value;
             }
         }
     }
