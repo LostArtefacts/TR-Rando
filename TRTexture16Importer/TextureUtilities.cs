@@ -13,10 +13,8 @@ public static class TextureUtilities
 
     public static ushort[] ImportFrom32PNG(string filename)
     {
-        using (Bitmap texture = new(filename))
-        {
-            return ImportFromBitmap(texture);
-        }
+        using Bitmap texture = new(filename);
+        return ImportFromBitmap(texture);
     }
 
     public static ushort[] ImportFromBitmap(Bitmap texture)

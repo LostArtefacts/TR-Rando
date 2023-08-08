@@ -502,10 +502,8 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
         {
             foreach (int tile in _tileMap.Keys)
             {
-                using (BitmapGraphics bmp = _tileMap[tile])
-                {
-                    SetTile(tile, bmp.Bitmap);
-                }
+                using BitmapGraphics bmp = _tileMap[tile];
+                SetTile(tile, bmp.Bitmap);
             }
             _committed = true;
         }
