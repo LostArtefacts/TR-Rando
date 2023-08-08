@@ -163,7 +163,7 @@ public abstract class AbstractTextureImportHandler<E, L, D>
                 {
                     TexturedTileSegment otherSegment = allSegments[j];
                     segmentList[i] = allSegments[j];
-                    foreach (IndexedTRObjectTexture texture in segment.Textures)
+                    foreach (AbstractIndexedTRTexture texture in segment.Textures)
                     {
                         if (!otherSegment.IsObjectTextureFor(texture.Index))
                         {

@@ -28,7 +28,7 @@ public static class SoundUtilities
         }
 
         int offset = 2;
-        foreach (short index in packedSound.SoundMapIndices.Keys)
+        foreach (int index in packedSound.SoundMapIndices.Keys)
         {
             short val = packedSound.SoundMapIndices[index];
             TRSoundDetails details = soundDetails[soundMap[index]];
@@ -74,7 +74,7 @@ public static class SoundUtilities
         }
 
         int offset = 2;
-        foreach (short index in packedSound.SoundMapIndices.Keys)
+        foreach (int index in packedSound.SoundMapIndices.Keys)
         {
             short val = packedSound.SoundMapIndices[index];
             TRSoundDetails details = soundDetails[soundMap[index]];
@@ -116,7 +116,7 @@ public static class SoundUtilities
         }
 
         int offset = 2;
-        foreach (short index in packedSound.SoundMapIndices.Keys)
+        foreach (int index in packedSound.SoundMapIndices.Keys)
         {
             short val = packedSound.SoundMapIndices[index];
             TR3SoundDetails details = soundDetails[soundMap[index]];
