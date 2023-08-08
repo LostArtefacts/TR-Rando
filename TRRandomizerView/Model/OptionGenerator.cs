@@ -394,7 +394,7 @@ public class OptionGenerator
     {
         if (min < 0 || max > 100)
         {
-            throw new ArgumentException();
+            throw new ArgumentException("Min/max must be within range 0-100");
         }
         return Math.Round(_generator.Next(min, max + 1) * Math.Pow(10, -2), decimalPlaces);
     }
