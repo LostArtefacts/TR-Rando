@@ -10,9 +10,6 @@ using TRRandomizerView.Utilities;
 
 namespace TRRandomizerView.Windows;
 
-/// <summary>
-/// Interaction logic for AdvancedWindow.xaml
-/// </summary>
 public partial class AdvancedWindow : Window
 {
     private static readonly string _darknessPreviewPath = @"pack://application:,,,/TRRandomizer;component/Resources/Darkness/{0}/{1}.jpg";

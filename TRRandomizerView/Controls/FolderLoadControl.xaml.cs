@@ -11,9 +11,6 @@ using TRRandomizerView.Windows;
 
 namespace TRRandomizerView.Controls;
 
-/// <summary>
-/// Interaction logic for FolderLoadControl.xaml
-/// </summary>
 public partial class FolderLoadControl : UserControl
 {
     #region Dependency Properties

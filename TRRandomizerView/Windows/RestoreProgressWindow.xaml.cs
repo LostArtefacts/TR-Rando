@@ -8,9 +8,6 @@ using TRRandomizerView.Utilities;
 
 namespace TRRandomizerView.Windows;
 
-/// <summary>
-/// Interaction logic for RestoreProgressWindow.xaml
-/// </summary>
 public partial class RestoreProgressWindow : Window
 {
     #region Dependency Properties

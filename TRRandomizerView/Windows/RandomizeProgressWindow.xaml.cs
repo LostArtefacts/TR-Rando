@@ -10,9 +10,6 @@ using TRRandomizerView.Utilities;
 
 namespace TRRandomizerView.Windows;
 
-/// <summary>
-/// Interaction logic for RandomizeProgressWindow.xaml
-/// </summary>
 public partial class RandomizeProgressWindow : Window
 {
     #region Dependency Properties

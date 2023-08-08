@@ -14,9 +14,6 @@ using TRRandomizerView.Windows;
 
 namespace TRRandomizerView.Controls;
 
-/// <summary>
-/// Interaction logic for EditorControl.xaml
-/// </summary>
 public partial class EditorControl : UserControl
 {
     #region Dependency Properties

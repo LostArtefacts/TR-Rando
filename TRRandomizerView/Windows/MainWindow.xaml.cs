@@ -11,9 +11,6 @@ using TRRandomizerView.Utilities;
 
 namespace TRRandomizerView.Windows;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow : Window, IRecentFolderOpener
 {
     #region Dependency Properties

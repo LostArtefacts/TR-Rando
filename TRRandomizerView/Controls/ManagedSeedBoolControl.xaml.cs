@@ -5,9 +5,6 @@ using TRRandomizerView.Model;
 
 namespace TRRandomizerView.Controls;
 
-/// <summary>
-/// Interaction logic for ManagedSeedBoolControl.xaml
-/// </summary>
 public partial class ManagedSeedBoolControl : UserControl
 {
     #region Dependency Properties

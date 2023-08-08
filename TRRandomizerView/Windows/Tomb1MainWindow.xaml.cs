@@ -11,9 +11,6 @@ using TRRandomizerView.Utilities;
 
 namespace TRRandomizerView.Windows;
 
-/// <summary>
-/// Interaction logic for Tomb1MainWindow.xaml
-/// </summary>
 public partial class Tomb1MainWindow : Window
 {
     public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register

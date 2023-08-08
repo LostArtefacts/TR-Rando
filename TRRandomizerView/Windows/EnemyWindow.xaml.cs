@@ -8,9 +8,6 @@ using TRRandomizerView.Utilities;
 
 namespace TRRandomizerView.Windows;
 
-/// <summary>
-/// Interaction logic for EnemyWindow.xaml
-/// </summary>
 public partial class EnemyWindow : Window
 {
     #region Dependency Properties

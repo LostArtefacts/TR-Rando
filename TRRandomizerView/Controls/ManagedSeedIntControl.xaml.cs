@@ -3,9 +3,6 @@ using System.Windows.Controls;
 
 namespace TRRandomizerView.Controls;
 
-/// <summary>
-/// Interaction logic for ManagedSeedIntControl.xaml
-/// </summary>
 public partial class ManagedSeedIntControl : UserControl
 {
     #region Dependency Properties

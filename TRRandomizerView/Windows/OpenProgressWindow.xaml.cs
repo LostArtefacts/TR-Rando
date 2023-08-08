@@ -8,9 +8,6 @@ using TRRandomizerView.Utilities;
 
 namespace TRRandomizerView.Windows;
 
-/// <summary>
-/// Interaction logic for OpenProgressWindow.xaml
-/// </summary>
 public partial class OpenProgressWindow : Window
 {
     #region Dependency Properties

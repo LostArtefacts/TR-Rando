@@ -9,9 +9,6 @@ using TRRandomizerView.Utilities;
 
 namespace TRRandomizerView.Windows;
 
-/// <summary>
-/// Interaction logic for MessageWindow.xaml
-/// </summary>
 public partial class MessageWindow : Window
 {
     #region Dependency Properties

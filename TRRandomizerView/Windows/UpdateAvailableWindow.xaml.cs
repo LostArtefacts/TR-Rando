@@ -5,9 +5,6 @@ using TRRandomizerView.Utilities;
 
 namespace TRRandomizerView.Windows;
 
-/// <summary>
-/// Interaction logic for UpdateAvailableWindow.xaml
-/// </summary>
 public partial class UpdateAvailableWindow : Window
 {
     #region Dependency Properties

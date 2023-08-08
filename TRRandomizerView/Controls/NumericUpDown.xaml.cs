@@ -5,9 +5,6 @@ using System.Windows.Input;
 
 namespace TRRandomizerView.Controls;
 
-/// <summary>
-/// Interaction logic for NumericUpDown.xaml
-/// </summary>
 public partial class NumericUpDown : UserControl
 {
     #region Dependency Properties
