@@ -98,13 +98,10 @@ public class TR1TexturePacker : AbstractTexturePacker<TREntities, TR1Level>
 
     public override void SetTile(int tileIndex, Bitmap bitmap)
     {
-        if (PaletteManager == null)
+        PaletteManager ??= new TR1PaletteManager
         {
-            PaletteManager = new TR1PaletteManager
-            {
-                Level = Level
-            };
-        }
+            Level = Level
+        };
         PaletteManager.ChangedTiles[tileIndex] = bitmap;
     }
 

@@ -139,10 +139,7 @@ public class TexturedTile : DefaultTile<TexturedTileSegment>, IDisposable
 
     private void CheckBitmapStatus()
     {
-        if (BitmapGraphics == null)
-        {
-            BitmapGraphics = new BitmapGraphics(new Bitmap(Width, Height, PixelFormat.Format32bppArgb));
-        }
+        BitmapGraphics ??= new(new Bitmap(Width, Height, PixelFormat.Format32bppArgb));
     }
 
     public void Dispose()
