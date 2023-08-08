@@ -64,10 +64,7 @@ public class EMTextureGroup
             return;
         }
 
-        if (_generator == null)
-        {
-            _generator = new Random(RandomRotationSeed);
-        }
+        _generator ??= new(RandomRotationSeed);
 
         Dictionary<int, int> remap = null;
         switch (_generator.Next(0, 4))

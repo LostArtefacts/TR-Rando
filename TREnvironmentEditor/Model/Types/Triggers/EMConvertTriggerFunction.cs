@@ -69,10 +69,7 @@ public class EMConvertTriggerFunction : BaseEMFunction
 
     private void InitialiseLocations()
     {
-        if (Locations == null)
-        {
-            Locations = new List<EMLocation>();
-        }
+        Locations ??= new();
         if (Location != null)
         {
             // For backwards compatibility with mods already defined - using the List is the preferred way
