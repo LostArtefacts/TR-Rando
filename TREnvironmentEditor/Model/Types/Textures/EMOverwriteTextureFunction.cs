@@ -11,47 +11,41 @@ public class EMOverwriteTextureFunction : BaseEMFunction, ITextureModifier
 
     public override void ApplyToLevel(TR1Level level)
     {
-        using (TR1TexturePacker packer = new(level))
+        using TR1TexturePacker packer = new(level);
+        ApplyOverwrites(texture =>
         {
-            ApplyOverwrites(texture =>
-            {
-                return packer.GetObjectTextureSegments(new List<int> { texture })
-                    .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
-                    .First();
-            });
-            packer.AllowEmptyPacking = true;
-            packer.Pack(true);
-        }
+            return packer.GetObjectTextureSegments(new List<int> { texture })
+                .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
+                .First();
+        });
+        packer.AllowEmptyPacking = true;
+        packer.Pack(true);
     }
 
     public override void ApplyToLevel(TR2Level level)
     {
-        using (TR2TexturePacker packer = new(level))
+        using TR2TexturePacker packer = new(level);
+        ApplyOverwrites(texture =>
         {
-            ApplyOverwrites(texture =>
-            {
-                return packer.GetObjectTextureSegments(new List<int> { texture })
-                    .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
-                    .First();
-            });
-            packer.AllowEmptyPacking = true;
-            packer.Pack(true);
-        }
+            return packer.GetObjectTextureSegments(new List<int> { texture })
+                .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
+                .First();
+        });
+        packer.AllowEmptyPacking = true;
+        packer.Pack(true);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        using (TR3TexturePacker packer = new(level))
+        using TR3TexturePacker packer = new(level);
+        ApplyOverwrites(texture =>
         {
-            ApplyOverwrites(texture =>
-            {
-                return packer.GetObjectTextureSegments(new List<int> { texture })
-                    .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
-                    .First();
-            });
-            packer.AllowEmptyPacking = true;
-            packer.Pack(true);
-        }
+            return packer.GetObjectTextureSegments(new List<int> { texture })
+                .Select(k => new Tuple<TexturedTile, TexturedTileSegment>(k.Key, k.Value[0]))
+                .First();
+        });
+        packer.AllowEmptyPacking = true;
+        packer.Pack(true);
     }
 
     public void RemapTextures(Dictionary<ushort, ushort> indexMap)
