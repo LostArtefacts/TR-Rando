@@ -72,7 +72,7 @@ public class FloorPlan
         _scans.AddRange(positiveScans.Count <= negativeScans.Count ? positiveScans : negativeScans);
     }
 
-    private void MergeFloorSpace(List<Rectangle> scans, bool positiveLookup)
+    private static void MergeFloorSpace(List<Rectangle> scans, bool positiveLookup)
     {
         for (int i = scans.Count - 1; i >= 0; i--)
         {

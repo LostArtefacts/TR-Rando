@@ -406,7 +406,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         return colourPalette;
     }
 
-    private TRColour4[] PopulateColourPalette16(byte[] palette)
+    private static TRColour4[] PopulateColourPalette16(byte[] palette)
     {
         TRColour4[] colourPalette = new TRColour4[MAX_PALETTE_SIZE];
 
@@ -435,7 +435,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         return colourPalette;
     }
 
-    private TR2RoomData ConvertToRoomData(TR2Room room)
+    private static TR2RoomData ConvertToRoomData(TR2Room room)
     {
         int RoomDataOffset = 0;
 
@@ -546,7 +546,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         return RoomData;
     }
 
-    private TRMesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
+    private static TRMesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
     {
         byte[] target = new byte[rawMeshData.Length * 2];
         Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);

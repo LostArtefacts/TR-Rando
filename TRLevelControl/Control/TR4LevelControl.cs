@@ -100,7 +100,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         writer.Write(_level.Serialize());
     }
 
-    private void DecompressTexture32Chunk(TR4Level lvl)
+    private static void DecompressTexture32Chunk(TR4Level lvl)
     {
         //Decompressed buffer as bytes
         byte[] buffer = TRZlib.Decompress(lvl.Texture32Chunk.CompressedChunk);
@@ -130,7 +130,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         }
     }
 
-    private void DecompressTexture16Chunk(TR4Level lvl)
+    private static void DecompressTexture16Chunk(TR4Level lvl)
     {
         //Decompressed buffer as bytes
         byte[] buffer = TRZlib.Decompress(lvl.Texture16Chunk.CompressedChunk);
@@ -160,7 +160,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         }
     }
 
-    private void DecompressSkyAndFont32Chunk(TR4Level lvl)
+    private static void DecompressSkyAndFont32Chunk(TR4Level lvl)
     {
         //Decompressed buffer as bytes
         byte[] buffer = TRZlib.Decompress(lvl.SkyAndFont32Chunk.CompressedChunk);
@@ -190,7 +190,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         }
     }
 
-    private void DecompressLevelDataChunk(TR4Level lvl)
+    private static void DecompressLevelDataChunk(TR4Level lvl)
     {
         byte[] buffer = TRZlib.Decompress(lvl.LevelDataChunk.CompressedChunk);
 

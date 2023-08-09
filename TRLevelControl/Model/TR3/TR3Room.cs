@@ -214,12 +214,12 @@ public class TR3Room : ISerializableCompact
         }
     }
 
-    private byte ConvertColorChannelToRGB555(byte col)
+    private static byte ConvertColorChannelToRGB555(byte col)
     {
         return (byte)(((col - byte.MinValue) * (31 - 0)) / (byte.MaxValue - byte.MinValue) + 0);
     }
 
-    private byte Blend(byte curChannel, byte newChannel)
+    private static byte Blend(byte curChannel, byte newChannel)
     {
         return Math.Min((byte)((newChannel * 0.1) + curChannel * (1 - 0.1)), (byte)31);
     }

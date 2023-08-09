@@ -391,7 +391,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         return colourPalette;
     }
 
-    private TRRoomData ConvertToRoomData(TRRoom room)
+    private static TRRoomData ConvertToRoomData(TRRoom room)
     {
         int RoomDataOffset = 0;
 
@@ -498,7 +498,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         return RoomData;
     }
 
-    private TRMesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
+    private static TRMesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
     {
         byte[] target = new byte[rawMeshData.Length * 2];
         Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);

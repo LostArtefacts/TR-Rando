@@ -5,7 +5,7 @@ namespace TRLevelControl.Helpers.Pathing;
 
 public class BoxGenerator
 {
-    public void Generate(TRRoom room, TR1Level level, TRRoomSector linkedSector)
+    public static void Generate(TRRoom room, TR1Level level, TRRoomSector linkedSector)
     {
         Room boxRoom = Room.Create(room);
         Generate(boxRoom, (int)level.NumBoxes);
@@ -22,7 +22,7 @@ public class BoxGenerator
         }
     }
 
-    public void Generate(TR2Room room, TR2Level level, TRRoomSector linkedSector)
+    public static void Generate(TR2Room room, TR2Level level, TRRoomSector linkedSector)
     {
         Room boxRoom = Room.Create(room);
         Generate(boxRoom, (int)level.NumBoxes);
@@ -39,7 +39,7 @@ public class BoxGenerator
         }
     }
 
-    public void Generate(TR3Room room, TR3Level level, TRRoomSector linkedSector)
+    public static void Generate(TR3Room room, TR3Level level, TRRoomSector linkedSector)
     {
         Room boxRoom = Room.Create(room);
         Generate(boxRoom, (int)level.NumBoxes);
@@ -66,7 +66,7 @@ public class BoxGenerator
         }
     }
 
-    private void Generate(Room room, int boxIndexStart)
+    private static void Generate(Room room, int boxIndexStart)
     {
         for (sbyte height = room.Floor; height > room.Ceiling; height--)
         {

@@ -80,8 +80,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         EMLevelData data = GetData(level);
         TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-        BoxGenerator generator = new();
-        generator.Generate(room, level, linkedSector);
+        BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
         GenerateFaces(sectors, faces, vertices);
@@ -166,8 +165,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         EMLevelData data = GetData(level);
         TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-        BoxGenerator generator = new();
-        generator.Generate(room, level, linkedSector);
+        BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
         GenerateFaces(sectors, faces, vertices);
@@ -253,8 +251,7 @@ public class EMCreateRoomFunction : BaseEMFunction
 
         EMLevelData data = GetData(level);
         TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-        BoxGenerator generator = new();
-        generator.Generate(room, level, linkedSector);
+        BoxGenerator.Generate(room, level, linkedSector);
 
         // Stride the sectors again and make faces
         GenerateFaces(sectors, faces, vertices);

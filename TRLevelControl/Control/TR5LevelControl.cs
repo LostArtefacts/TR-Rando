@@ -105,7 +105,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         writer.Write(_level.Serialize());
     }
 
-    private void DecompressTexture32Chunk(TR5Level lvl)
+    private static void DecompressTexture32Chunk(TR5Level lvl)
     {
         //Decompressed buffer as bytes
         byte[] buffer = TRZlib.Decompress(lvl.Texture32Chunk.CompressedChunk);
@@ -135,7 +135,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         }
     }
 
-    private void DecompressTexture16Chunk(TR5Level lvl)
+    private static void DecompressTexture16Chunk(TR5Level lvl)
     {
         //Decompressed buffer as bytes
         byte[] buffer = TRZlib.Decompress(lvl.Texture16Chunk.CompressedChunk);
@@ -165,7 +165,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         }
     }
 
-    private void DecompressSkyAndFont32Chunk(TR5Level lvl)
+    private static void DecompressSkyAndFont32Chunk(TR5Level lvl)
     {
         //Decompressed buffer as bytes
         byte[] buffer = TRZlib.Decompress(lvl.SkyAndFont32Chunk.CompressedChunk);
@@ -195,7 +195,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         }
     }
 
-    private void DecompressLevelDataChunk(TR5Level lvl)
+    private static void DecompressLevelDataChunk(TR5Level lvl)
     {
         //TR5 level chunk is not compressed
         byte[] buffer = lvl.LevelDataChunk.CompressedChunk;
