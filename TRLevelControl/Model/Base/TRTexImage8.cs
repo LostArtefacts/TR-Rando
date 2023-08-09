@@ -27,7 +27,7 @@ public class TRTexImage8 : ISerializableCompact
     {
         StringBuilder sb = new(base.ToString());
 
-        sb.Append("\n");
+        sb.Append('\n');
 
         int Count = 1;
         foreach (byte pixel in Pixels)
@@ -38,7 +38,7 @@ public class TRTexImage8 : ISerializableCompact
 
             if (Count % 8 == 0)
             {
-                sb.Append("\n");
+                sb.Append('\n');
             }
         }
 
