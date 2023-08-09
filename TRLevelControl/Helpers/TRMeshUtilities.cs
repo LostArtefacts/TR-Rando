@@ -175,7 +175,7 @@ public static class TRMeshUtilities
         //get the final mesh we currently have
         if(level.Meshes.Length > 0)
         {
-            TRMesh lastMesh = level.Meshes[level.Meshes.Length - 1];
+            TRMesh lastMesh = level.Meshes[^1];
             //new mesh pointer will be the current final mesh's pointer plus its length
             newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
         }
@@ -205,7 +205,7 @@ public static class TRMeshUtilities
         //get the final mesh we currently have
         if (level.Meshes.Length > 0)
         {
-            TRMesh lastMesh = level.Meshes[level.Meshes.Length - 1];
+            TRMesh lastMesh = level.Meshes[^1];
             //new mesh pointer will be the current final mesh's pointer plus its length
             newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
         }
@@ -235,7 +235,7 @@ public static class TRMeshUtilities
         //get the final mesh we currently have
         if (level.Meshes.Length > 0)
         {
-            TRMesh lastMesh = level.Meshes[level.Meshes.Length - 1];
+            TRMesh lastMesh = level.Meshes[^1];
             //new mesh pointer will be the current final mesh's pointer plus its length
             newMesh.Pointer = lastMesh.Pointer + (uint)lastMesh.Serialize().Length;
         }
