@@ -261,17 +261,13 @@ public static class TR1EntityUtilities
 
     public static TREntities GetWeaponAmmo(TREntities weapon)
     {
-        switch (weapon)
+        return weapon switch
         {
-            case TREntities.Shotgun_S_P:
-                return TREntities.ShotgunAmmo_S_P;
-            case TREntities.Magnums_S_P:
-                return TREntities.MagnumAmmo_S_P;
-            case TREntities.Uzis_S_P:
-                return TREntities.UziAmmo_S_P;
-            default:
-                return TREntities.PistolAmmo_S_P;
-        }
+            TREntities.Shotgun_S_P => TREntities.ShotgunAmmo_S_P,
+            TREntities.Magnums_S_P => TREntities.MagnumAmmo_S_P,
+            TREntities.Uzis_S_P => TREntities.UziAmmo_S_P,
+            _ => TREntities.PistolAmmo_S_P,
+        };
     }
 
     public static bool IsCrystalPickup(TREntities entity)
