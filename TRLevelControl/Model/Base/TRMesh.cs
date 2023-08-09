@@ -83,7 +83,7 @@ public class TRMesh : ISerializableCompact
         }
         else
         {
-            foreach (ushort light in Lights)
+            foreach (short light in Lights)
             {
                 writer.Write(light);
             }

@@ -316,7 +316,7 @@ public class TR4LevelDataChunk : ISerializableCompact
             writer.Write(NumDemoData);
             writer.Write(DemoData);
 
-            foreach (ushort sound in SoundMap)
+            foreach (short sound in SoundMap)
             {
                 writer.Write(sound);
             }

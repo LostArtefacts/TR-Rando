@@ -62,7 +62,7 @@ public class TR4Mesh : ISerializableCompact
             }
             else
             {
-                foreach (ushort light in Lights)
+                foreach (short light in Lights)
                 {
                     writer.Write(light);
                 }

@@ -35,7 +35,7 @@ public class TR3RoomLight : ISerializableCompact
             writer.Write(Colour.Serialize());
             writer.Write(LightType);
 
-            foreach (ushort property in LightProperties)
+            foreach (short property in LightProperties)
             {
                 writer.Write(property);
             }
