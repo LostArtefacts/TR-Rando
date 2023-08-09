@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TRLevelControl.Helpers;
+﻿namespace TRLevelControl.Helpers;
 
 public static class TR3LevelNames
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using TRLevelControl.Model.TR2.Enums;
+﻿using TRLevelControl.Model.TR2.Enums;
 using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using TRLevelControl.Serialization;
+﻿using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 

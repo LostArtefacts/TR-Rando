@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TRLevelControl.Model.Enums;
+﻿namespace TRLevelControl.Model.Enums;
 
 //_S are sprites
 //_M are menu items

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TRLevelControl.Model.Base.Enums;
+﻿using TRLevelControl.Model.Base.Enums;
 
 namespace TRLevelControl.Model;
 
