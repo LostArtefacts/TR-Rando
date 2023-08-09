@@ -7,29 +7,28 @@ using System.Threading.Tasks;
 
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TR3CDAudioEntry : ISerializableCompact
 {
-    public class TR3CDAudioEntry : ISerializableCompact
+    public string Name { get; set; }
+
+    public uint WavLength { get; set; }
+
+    public uint WavOffset { get; set; }
+
+    public byte[] Serialize()
     {
-        public string Name { get; set; }
-
-        public uint WavLength { get; set; }
-
-        public uint WavOffset { get; set; }
-
-        public byte[] Serialize()
+        using (MemoryStream stream = new MemoryStream())
         {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(Name);
-                    writer.Write(WavLength);
-                    writer.Write(WavOffset);
-                }
-
-                return stream.ToArray();
+                writer.Write(Name);
+                writer.Write(WavLength);
+                writer.Write(WavOffset);
             }
+
+            return stream.ToArray();
         }
     }
 }

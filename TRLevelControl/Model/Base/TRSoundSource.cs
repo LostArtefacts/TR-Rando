@@ -6,48 +6,47 @@ using System.Text;
 using System.Threading.Tasks;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TRSoundSource : ISerializableCompact
 {
-    public class TRSoundSource : ISerializableCompact
+    public int X { get; set; }
+
+    public int Y { get; set; }
+
+    public int Z { get; set; }
+
+    public ushort SoundID { get; set; }
+
+    public ushort Flags { get; set; }
+
+    public override string ToString()
     {
-        public int X { get; set; }
+        StringBuilder sb = new StringBuilder(base.ToString());
 
-        public int Y { get; set; }
+        sb.Append(" X: " + X);
+        sb.Append(" Y: " + Y);
+        sb.Append(" Z: " + Z);
+        sb.Append(" SoundID: " + SoundID);
+        sb.Append(" Flags: " + Flags.ToString("X4"));
 
-        public int Z { get; set; }
+        return sb.ToString();
+    }
 
-        public ushort SoundID { get; set; }
-
-        public ushort Flags { get; set; }
-
-        public override string ToString()
+    public byte[] Serialize()
+    {
+        using (MemoryStream stream = new MemoryStream())
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" X: " + X);
-            sb.Append(" Y: " + Y);
-            sb.Append(" Z: " + Z);
-            sb.Append(" SoundID: " + SoundID);
-            sb.Append(" Flags: " + Flags.ToString("X4"));
-
-            return sb.ToString();
-        }
-
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(X);
-                    writer.Write(Y);
-                    writer.Write(Z);
-                    writer.Write(SoundID);
-                    writer.Write(Flags);
-                }
-
-                return stream.ToArray();
+                writer.Write(X);
+                writer.Write(Y);
+                writer.Write(Z);
+                writer.Write(SoundID);
+                writer.Write(Flags);
             }
+
+            return stream.ToArray();
         }
     }
 }

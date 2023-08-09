@@ -6,44 +6,43 @@ using System.Text;
 using System.Threading.Tasks;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TRAnimDispatch : ISerializableCompact
 {
-    public class TRAnimDispatch : ISerializableCompact
+    public short Low { get; set; }
+
+    public short High { get; set; }
+
+    public short NextAnimation { get; set; }
+
+    public short NextFrame { get; set; }
+
+    public override string ToString()
     {
-        public short Low { get; set; }
+        StringBuilder sb = new StringBuilder(base.ToString());
 
-        public short High { get; set; }
+        sb.Append(" Low: " + Low);
+        sb.Append(" High: " + High);
+        sb.Append(" NextAnimation: " + NextAnimation);
+        sb.Append(" NextFrame: " + NextFrame);
 
-        public short NextAnimation { get; set; }
+        return sb.ToString();
+    }
 
-        public short NextFrame { get; set; }
-
-        public override string ToString()
+    public byte[] Serialize()
+    {
+        using (MemoryStream stream = new MemoryStream())
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" Low: " + Low);
-            sb.Append(" High: " + High);
-            sb.Append(" NextAnimation: " + NextAnimation);
-            sb.Append(" NextFrame: " + NextFrame);
-
-            return sb.ToString();
-        }
-
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(Low);
-                    writer.Write(High);
-                    writer.Write(NextAnimation);
-                    writer.Write(NextFrame);
-                }
-
-                return stream.ToArray();
+                writer.Write(Low);
+                writer.Write(High);
+                writer.Write(NextAnimation);
+                writer.Write(NextFrame);
             }
+
+            return stream.ToArray();
         }
     }
 }

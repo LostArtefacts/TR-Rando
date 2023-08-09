@@ -6,32 +6,31 @@ using System.Text;
 using System.Threading.Tasks;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TR3RoomSun : ISerializableCompact
 {
-    public class TR3RoomSun : ISerializableCompact
+    public short NormalX { get; set; }
+
+    public short NormalY { get; set; }
+
+    public short NormalZ { get; set; }
+
+    public short Unused { get; set; }
+
+    public byte[] Serialize()
     {
-        public short NormalX { get; set; }
-
-        public short NormalY { get; set; }
-
-        public short NormalZ { get; set; }
-
-        public short Unused { get; set; }
-
-        public byte[] Serialize()
+        using (MemoryStream stream = new MemoryStream())
         {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(NormalX);
-                    writer.Write(NormalY);
-                    writer.Write(NormalZ);
-                    writer.Write(Unused);
-                }
-
-                return stream.ToArray();
+                writer.Write(NormalX);
+                writer.Write(NormalY);
+                writer.Write(NormalZ);
+                writer.Write(Unused);
             }
+
+            return stream.ToArray();
         }
     }
 }

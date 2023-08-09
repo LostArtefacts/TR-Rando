@@ -6,32 +6,31 @@ using System.Text;
 using System.Threading.Tasks;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TRAnimCommand : ISerializableCompact
 {
-    public class TRAnimCommand : ISerializableCompact
+    public short Value { get; set; }
+
+    public override string ToString()
     {
-        public short Value { get; set; }
+        StringBuilder sb = new StringBuilder(base.ToString());
 
-        public override string ToString()
+        sb.Append(" Value: " + Value.ToString("X4"));
+
+        return sb.ToString();
+    }
+
+    public byte[] Serialize()
+    {
+        using (MemoryStream stream = new MemoryStream())
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" Value: " + Value.ToString("X4"));
-
-            return sb.ToString();
-        }
-
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(Value);
-                }
-
-                return stream.ToArray();
+                writer.Write(Value);
             }
+
+            return stream.ToArray();
         }
     }
 }

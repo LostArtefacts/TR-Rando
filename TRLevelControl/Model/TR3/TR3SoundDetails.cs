@@ -7,72 +7,71 @@ using System.Threading.Tasks;
 
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TR3SoundDetails : ISerializableCompact
 {
-    public class TR3SoundDetails : ISerializableCompact
+    public ushort Sample { get; set; }
+
+    public byte Volume { get; set; }
+
+    public byte Range { get; set; }
+
+    public byte Chance { get; set; }
+
+    public byte Pitch { get; set; }
+
+    public short Characteristics { get; set; }
+
+    public int NumSounds => (Characteristics & 0x00FC) >> 2; // get bits 2-7
+
+    public byte LoopingMode
     {
-        public ushort Sample { get; set; }
-
-        public byte Volume { get; set; }
-
-        public byte Range { get; set; }
-
-        public byte Chance { get; set; }
-
-        public byte Pitch { get; set; }
-
-        public short Characteristics { get; set; }
-
-        public int NumSounds => (Characteristics & 0x00FC) >> 2; // get bits 2-7
-
-        public byte LoopingMode
+        get
         {
-            get
+            return (byte)(Characteristics & 3);
+        }
+        set
+        {
+            Characteristics = (short)(Characteristics & ~(Characteristics & 3));
+            Characteristics |= (short)(value & 3);
+        }
+    }
+
+    public bool Wibble
+    {
+        get
+        {
+            return (Characteristics & 0x2000) > 0;
+        }
+        set
+        {
+            if (value)
             {
-                return (byte)(Characteristics & 3);
+                Characteristics |= 0x2000;
             }
-            set
+            else
             {
-                Characteristics = (short)(Characteristics & ~(Characteristics & 3));
-                Characteristics |= (short)(value & 3);
+                Characteristics = (short)(Characteristics & ~0x2000);
             }
         }
+    }
 
-        public bool Wibble
+    public byte[] Serialize()
+    {
+        using (MemoryStream stream = new MemoryStream())
         {
-            get
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                return (Characteristics & 0x2000) > 0;
+                writer.Write(Sample);
+                writer.Write(Volume);
+                writer.Write(Range);
+                writer.Write(Chance);
+                writer.Write(Pitch);
+                writer.Write(Characteristics);
             }
-            set
-            {
-                if (value)
-                {
-                    Characteristics |= 0x2000;
-                }
-                else
-                {
-                    Characteristics = (short)(Characteristics & ~0x2000);
-                }
-            }
-        }
 
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(Sample);
-                    writer.Write(Volume);
-                    writer.Write(Range);
-                    writer.Write(Chance);
-                    writer.Write(Pitch);
-                    writer.Write(Characteristics);
-                }
-
-                return stream.ToArray();
-            }
+            return stream.ToArray();
         }
     }
 }

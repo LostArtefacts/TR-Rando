@@ -6,48 +6,47 @@ using System.Text;
 using System.Threading.Tasks;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+//10 bytes - rosetta stone says 12, i think thats a mistype/miscalc
+public class TRFace4 : ISerializableCompact
 {
-    //10 bytes - rosetta stone says 12, i think thats a mistype/miscalc
-    public class TRFace4 : ISerializableCompact
+    //4 vertices in a quad
+    public ushort[] Vertices { get; set; }
+
+    public ushort Texture { get; set; }
+
+    public byte[] Serialize()
     {
-        //4 vertices in a quad
-        public ushort[] Vertices { get; set; }
-
-        public ushort Texture { get; set; }
-
-        public byte[] Serialize()
+        using (MemoryStream stream = new MemoryStream())
         {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
+                foreach(ushort vert in Vertices)
                 {
-                    foreach(ushort vert in Vertices)
-                    {
-                        writer.Write(vert);
-                    }
-
-                    writer.Write(Texture);
+                    writer.Write(vert);
                 }
 
-                return stream.ToArray();
+                writer.Write(Texture);
             }
-        }
 
-        public override string ToString()
+            return stream.ToArray();
+        }
+    }
+
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder(base.ToString());
+
+        int index = 0;
+        foreach (ushort vertex in Vertices)
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            int index = 0;
-            foreach (ushort vertex in Vertices)
-            {
-                sb.Append(" Vertex[" + index + "]: " + vertex);
-                index++;
-            }
-
-            sb.Append(" Texture: " + Texture);
-
-            return sb.ToString();
+            sb.Append(" Vertex[" + index + "]: " + vertex);
+            index++;
         }
+
+        sb.Append(" Texture: " + Texture);
+
+        return sb.ToString();
     }
 }

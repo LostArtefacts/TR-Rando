@@ -6,40 +6,39 @@ using System.Text;
 using System.Threading.Tasks;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TRStateChange : ISerializableCompact
 {
-    public class TRStateChange : ISerializableCompact
+    public ushort StateID { get; set; }
+
+    public ushort NumAnimDispatches { get; set; }
+
+    public ushort AnimDispatch { get; set; }
+
+    public override string ToString()
     {
-        public ushort StateID { get; set; }
+        StringBuilder sb = new StringBuilder(base.ToString());
 
-        public ushort NumAnimDispatches { get; set; }
+        sb.Append(" StateID: " + StateID);
+        sb.Append(" NumAnimDispatches: " + NumAnimDispatches);
+        sb.Append(" AnimDispatch: " + AnimDispatch);
 
-        public ushort AnimDispatch { get; set; }
+        return sb.ToString();
+    }
 
-        public override string ToString()
+    public byte[] Serialize()
+    {
+        using (MemoryStream stream = new MemoryStream())
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" StateID: " + StateID);
-            sb.Append(" NumAnimDispatches: " + NumAnimDispatches);
-            sb.Append(" AnimDispatch: " + AnimDispatch);
-
-            return sb.ToString();
-        }
-
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(StateID);
-                    writer.Write(NumAnimDispatches);
-                    writer.Write(AnimDispatch);
-                }
-
-                return stream.ToArray();
+                writer.Write(StateID);
+                writer.Write(NumAnimDispatches);
+                writer.Write(AnimDispatch);
             }
+
+            return stream.ToArray();
         }
     }
 }

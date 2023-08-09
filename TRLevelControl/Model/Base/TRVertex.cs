@@ -6,41 +6,40 @@ using System.Text;
 using System.Threading.Tasks;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+//6 bytes
+public class TRVertex : ISerializableCompact
 {
-    //6 bytes
-    public class TRVertex : ISerializableCompact
+    public short X { get; set; }
+
+    public short Y { get; set; }
+
+    public short Z { get; set; }
+
+    public override string ToString()
     {
-        public short X { get; set; }
+        StringBuilder sb = new StringBuilder(base.ToString());
 
-        public short Y { get; set; }
+        sb.Append(" X: " + X);
+        sb.Append(" Y: " + Y);
+        sb.Append(" Z: " + Z);
 
-        public short Z { get; set; }
+        return sb.ToString();
+    }
 
-        public override string ToString()
+    public byte[] Serialize()
+    {
+        using (MemoryStream stream = new MemoryStream())
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" X: " + X);
-            sb.Append(" Y: " + Y);
-            sb.Append(" Z: " + Z);
-
-            return sb.ToString();
-        }
-
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(X);
-                    writer.Write(Y);
-                    writer.Write(Z);
-                }
-
-                return stream.ToArray();
+                writer.Write(X);
+                writer.Write(Y);
+                writer.Write(Z);
             }
+
+            return stream.ToArray();
         }
     }
 }

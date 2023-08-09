@@ -6,44 +6,43 @@ using System.Text;
 using System.Threading.Tasks;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TRRoomInfo : ISerializableCompact
 {
-    public class TRRoomInfo : ISerializableCompact
+    public int X { get; set; }
+
+    public int Z { get; set; }
+
+    public int YBottom { get; set; }
+
+    public int YTop { get; set; }
+
+    public override string ToString()
     {
-        public int X { get; set; }
+        StringBuilder sb = new StringBuilder(base.ToString());
 
-        public int Z { get; set; }
+        sb.Append(" X: " + X);
+        sb.Append(" Z: " + Z);
+        sb.Append(" YBottom: " + YBottom);
+        sb.Append(" YTop: " + YTop);
 
-        public int YBottom { get; set; }
+        return sb.ToString();
+    }
 
-        public int YTop { get; set; }
-
-        public override string ToString()
+    public byte[] Serialize()
+    {
+        using (MemoryStream stream = new MemoryStream())
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" X: " + X);
-            sb.Append(" Z: " + Z);
-            sb.Append(" YBottom: " + YBottom);
-            sb.Append(" YTop: " + YTop);
-
-            return sb.ToString();
-        }
-
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(X);
-                    writer.Write(Z);
-                    writer.Write(YBottom);
-                    writer.Write(YTop);
-                }
-
-                return stream.ToArray();
+                writer.Write(X);
+                writer.Write(Z);
+                writer.Write(YBottom);
+                writer.Write(YTop);
             }
+
+            return stream.ToArray();
         }
     }
 }

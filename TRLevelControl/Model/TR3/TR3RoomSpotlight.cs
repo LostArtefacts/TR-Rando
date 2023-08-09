@@ -7,26 +7,25 @@ using System.Threading.Tasks;
 
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TR3RoomSpotlight : ISerializableCompact
 {
-    public class TR3RoomSpotlight : ISerializableCompact
+    public int Intensity { get; set; }
+
+    public int Fade { get; set; }
+
+    public byte[] Serialize()
     {
-        public int Intensity { get; set; }
-
-        public int Fade { get; set; }
-
-        public byte[] Serialize()
+        using (MemoryStream stream = new MemoryStream())
         {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(Intensity);
-                    writer.Write(Fade);
-                }
-
-                return stream.ToArray();
+                writer.Write(Intensity);
+                writer.Write(Fade);
             }
+
+            return stream.ToArray();
         }
     }
 }

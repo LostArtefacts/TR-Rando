@@ -7,154 +7,153 @@ using System.Threading.Tasks;
 using TRLevelControl.Helpers;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TRTexImage16 : ISerializableCompact
 {
-    public class TRTexImage16 : ISerializableCompact
+    public ushort[] Pixels { get; set; }
+
+    public byte[] Serialize()
     {
-        public ushort[] Pixels { get; set; }
-
-        public byte[] Serialize()
+        using (MemoryStream stream = new MemoryStream())
         {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
+                foreach (ushort pixel in Pixels)
                 {
-                    foreach (ushort pixel in Pixels)
-                    {
-                        writer.Write(pixel);
-                    }
-                }
-
-                return stream.ToArray();
-            }
-        }
-
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append("\n");
-
-            int Count = 1;
-            foreach (ushort pixel in Pixels)
-            {
-                sb.Append(pixel + " ");
-
-                Count++;
-
-                if (Count % 8 == 0)
-                {
-                    sb.Append("\n");
+                    writer.Write(pixel);
                 }
             }
 
-            return sb.ToString();
-        }
-
-        public Textile16Pixel[] To32BPPFormat()
-        {
-            Textile16Pixel[] pixels = new Textile16Pixel[256 * 256];
-
-            for (int i = 0; i < pixels.Length; i++)
-            {
-                pixels[i] = new Textile16Pixel { Value = this.Pixels[i] };
-            }
-
-            return pixels;
+            return stream.ToArray();
         }
     }
 
-    //256 * 256
-    //1-bit transparency (0 = transparent, 1 = opaque) (0x8000)
-    //5-bit red channel(0x7C00)
-    //5-bit green channel(0x03E0)
-    //5-bit blue channel(0x001F)
-    public class Textile16Pixel
+    public override string ToString()
     {
-        public ushort Value { get; set; }
+        StringBuilder sb = new StringBuilder(base.ToString());
 
-        private byte _Red 
-        { 
-            get
-            {
-                return Convert.ToByte((Value & 0x7C00) >> 10);
-            }
-        }
+        sb.Append("\n");
 
-        public byte Red
+        int Count = 1;
+        foreach (ushort pixel in Pixels)
         {
-            get
+            sb.Append(pixel + " ");
+
+            Count++;
+
+            if (Count % 8 == 0)
             {
-                return TextileToBitmapConverter.To32BPP(_Red);
+                sb.Append("\n");
             }
         }
 
-        private byte _Blue 
-        { 
-            get
-            {
-                return Convert.ToByte(Value & 0x001F);
-            }
-        }
+        return sb.ToString();
+    }
 
-        public byte Blue
+    public Textile16Pixel[] To32BPPFormat()
+    {
+        Textile16Pixel[] pixels = new Textile16Pixel[256 * 256];
+
+        for (int i = 0; i < pixels.Length; i++)
         {
-            get
-            {
-                return TextileToBitmapConverter.To32BPP(_Blue);
-            }
+            pixels[i] = new Textile16Pixel { Value = this.Pixels[i] };
         }
 
-        private byte _Green 
-        { 
-            get
-            {
-                return Convert.ToByte((Value & 0x03E0) >> 5);
-            }
-        }
+        return pixels;
+    }
+}
 
-        public byte Green
+//256 * 256
+//1-bit transparency (0 = transparent, 1 = opaque) (0x8000)
+//5-bit red channel(0x7C00)
+//5-bit green channel(0x03E0)
+//5-bit blue channel(0x001F)
+public class Textile16Pixel
+{
+    public ushort Value { get; set; }
+
+    private byte _Red 
+    { 
+        get
         {
-            get
-            {
-                return TextileToBitmapConverter.To32BPP(_Green);
-            }
+            return Convert.ToByte((Value & 0x7C00) >> 10);
         }
+    }
 
-        private byte _Transparent 
-        { 
-            get
-            {
-                return Convert.ToByte((Value & 0x8000) >> 15);
-            }
-        }
-
-        public byte Transparency
+    public byte Red
+    {
+        get
         {
-            get
+            return TextileToBitmapConverter.To32BPP(_Red);
+        }
+    }
+
+    private byte _Blue 
+    { 
+        get
+        {
+            return Convert.ToByte(Value & 0x001F);
+        }
+    }
+
+    public byte Blue
+    {
+        get
+        {
+            return TextileToBitmapConverter.To32BPP(_Blue);
+        }
+    }
+
+    private byte _Green 
+    { 
+        get
+        {
+            return Convert.ToByte((Value & 0x03E0) >> 5);
+        }
+    }
+
+    public byte Green
+    {
+        get
+        {
+            return TextileToBitmapConverter.To32BPP(_Green);
+        }
+    }
+
+    private byte _Transparent 
+    { 
+        get
+        {
+            return Convert.ToByte((Value & 0x8000) >> 15);
+        }
+    }
+
+    public byte Transparency
+    {
+        get
+        {
+            if (_Transparent == 0x1)
             {
-                if (_Transparent == 0x1)
-                {
-                    return 0xFF;
-                }
-                else
-                {
-                    return 0x00;
-                }
+                return 0xFF;
+            }
+            else
+            {
+                return 0x00;
             }
         }
+    }
 
-        public byte[] RGB32
+    public byte[] RGB32
+    {
+        get
         {
-            get
-            {
-                return new byte[] { Blue, Green, Red, Transparency };
-            }
+            return new byte[] { Blue, Green, Red, Transparency };
         }
+    }
 
-        public Textile16Pixel()
-        {
-            
-        }
+    public Textile16Pixel()
+    {
+        
     }
 }

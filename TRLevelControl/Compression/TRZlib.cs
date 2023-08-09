@@ -21,31 +21,30 @@ using System.Threading.Tasks;
 //  8   | 78 DA | 1F 8B
 //  9   | 78 DA | 1F 8B
 
-namespace TRLevelControl.Compression
-{
-    public static class TRZlib
-    {
-        public static byte[] Decompress(byte[] data)
-        {
-            var outputStream = new MemoryStream();
-            using (var compressedStream = new MemoryStream(data))
-            using (var inputStream = new InflaterInputStream(compressedStream))
-            {
-                inputStream.CopyTo(outputStream);
-                return outputStream.ToArray();
-            }
-        }
+namespace TRLevelControl.Compression;
 
-        public static byte[] Compress(byte[] data)
+public static class TRZlib
+{
+    public static byte[] Decompress(byte[] data)
+    {
+        var outputStream = new MemoryStream();
+        using (var compressedStream = new MemoryStream(data))
+        using (var inputStream = new InflaterInputStream(compressedStream))
         {
-            using (MemoryStream outMemoryStream = new MemoryStream())
-            using (DeflaterOutputStream outZStream = new DeflaterOutputStream(outMemoryStream))
-            using (Stream inMemoryStream = new MemoryStream(data))
-            {
-                inMemoryStream.CopyTo(outZStream);
-                outZStream.Finish();
-                return outMemoryStream.ToArray();
-            }
+            inputStream.CopyTo(outputStream);
+            return outputStream.ToArray();
+        }
+    }
+
+    public static byte[] Compress(byte[] data)
+    {
+        using (MemoryStream outMemoryStream = new MemoryStream())
+        using (DeflaterOutputStream outZStream = new DeflaterOutputStream(outMemoryStream))
+        using (Stream inMemoryStream = new MemoryStream(data))
+        {
+            inMemoryStream.CopyTo(outZStream);
+            outZStream.Finish();
+            return outMemoryStream.ToArray();
         }
     }
 }

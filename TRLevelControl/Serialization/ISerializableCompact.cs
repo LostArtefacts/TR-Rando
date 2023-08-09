@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TRLevelControl.Serialization
+namespace TRLevelControl.Serialization;
+
+public interface ISerializableCompact
 {
-    public interface ISerializableCompact
-    {
-        byte[] Serialize();
-    }
+    byte[] Serialize();
 }

@@ -7,29 +7,28 @@ using System.Threading.Tasks;
 
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TR5Vertex : ISerializableCompact
 {
-    public class TR5Vertex : ISerializableCompact
+    public float X { get; set; }
+
+    public float Y { get; set; }
+
+    public float Z { get; set; }
+
+    public byte[] Serialize()
     {
-        public float X { get; set; }
-
-        public float Y { get; set; }
-
-        public float Z { get; set; }
-
-        public byte[] Serialize()
+        using (MemoryStream stream = new MemoryStream())
         {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(X);
-                    writer.Write(Y);
-                    writer.Write(Z);
-                }
-
-                return stream.ToArray();
+                writer.Write(X);
+                writer.Write(Y);
+                writer.Write(Z);
             }
+
+            return stream.ToArray();
         }
     }
 }

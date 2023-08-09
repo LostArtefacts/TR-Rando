@@ -6,44 +6,43 @@ using System.Text;
 using System.Threading.Tasks;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TRMeshTreeNode : ISerializableCompact
 {
-    public class TRMeshTreeNode : ISerializableCompact
+    public uint Flags { get; set; }
+
+    public int OffsetX { get; set; }
+
+    public int OffsetY { get; set; }
+
+    public int OffsetZ { get; set; }
+
+    public override string ToString()
     {
-        public uint Flags { get; set; }
+        StringBuilder sb = new StringBuilder(base.ToString());
 
-        public int OffsetX { get; set; }
+        sb.Append(" Flags: " + Flags.ToString("X8"));
+        sb.Append(" OffsetX: " + OffsetX);
+        sb.Append(" OffsetY: " + OffsetY);
+        sb.Append(" OffsetZ: " + OffsetZ);
 
-        public int OffsetY { get; set; }
+        return sb.ToString();
+    }
 
-        public int OffsetZ { get; set; }
-
-        public override string ToString()
+    public byte[] Serialize()
+    {
+        using (MemoryStream stream = new MemoryStream())
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" Flags: " + Flags.ToString("X8"));
-            sb.Append(" OffsetX: " + OffsetX);
-            sb.Append(" OffsetY: " + OffsetY);
-            sb.Append(" OffsetZ: " + OffsetZ);
-
-            return sb.ToString();
-        }
-
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(Flags);
-                    writer.Write(OffsetX);
-                    writer.Write(OffsetY);
-                    writer.Write(OffsetZ);
-                }
-
-                return stream.ToArray();
+                writer.Write(Flags);
+                writer.Write(OffsetX);
+                writer.Write(OffsetY);
+                writer.Write(OffsetZ);
             }
+
+            return stream.ToArray();
         }
     }
 }

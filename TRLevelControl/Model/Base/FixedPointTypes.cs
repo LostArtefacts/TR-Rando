@@ -6,56 +6,55 @@ using System.Text;
 using System.Threading.Tasks;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class FixedFloat<T, U>
 {
-    public class FixedFloat<T, U>
+    public T Whole { get; set; }
+
+    public U Fraction { get; set; }
+
+    public override string ToString()
     {
-        public T Whole { get; set; }
+        StringBuilder sb = new StringBuilder(base.ToString());
 
-        public U Fraction { get; set; }
+        sb.Append(" Whole: " + Whole);
+        sb.Append(" Fraction: " + Fraction);
 
-        public override string ToString()
+        return sb.ToString();
+    }
+}
+
+public sealed class FixedFloat32 : FixedFloat<short, ushort>, ISerializableCompact
+{
+    public byte[] Serialize()
+    {
+        using (MemoryStream stream = new MemoryStream())
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                writer.Write(Whole);
+                writer.Write(Fraction);
+            }
 
-            sb.Append(" Whole: " + Whole);
-            sb.Append(" Fraction: " + Fraction);
-
-            return sb.ToString();
+            return stream.ToArray();
         }
     }
+}
 
-    public sealed class FixedFloat32 : FixedFloat<short, ushort>, ISerializableCompact
+public sealed class FixedFloat16 : FixedFloat<byte, byte>, ISerializableCompact
+{
+    public byte[] Serialize()
     {
-        public byte[] Serialize()
+        using (MemoryStream stream = new MemoryStream())
         {
-            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(Whole);
-                    writer.Write(Fraction);
-                }
-
-                return stream.ToArray();
+                writer.Write(Whole);
+                writer.Write(Fraction);
             }
-        }
-    }
 
-    public sealed class FixedFloat16 : FixedFloat<byte, byte>, ISerializableCompact
-    {
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(Whole);
-                    writer.Write(Fraction);
-                }
-
-                return stream.ToArray();
-            }
+            return stream.ToArray();
         }
     }
 }

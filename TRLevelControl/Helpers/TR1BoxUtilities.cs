@@ -4,190 +4,189 @@ using System.Linq;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Base.Enums;
 
-namespace TRLevelControl.Helpers
-{
-    public static class TR1BoxUtilities
-    {
-        public static readonly ushort BoxNumber = 0x7fff;
-        public static readonly short OverlapIndex = 0x3fff;
-        public static readonly ushort EndBit = 0x8000;
-        public static readonly int Blockable = 0x8000;
-        public static readonly int Blocked = 0x4000;
+namespace TRLevelControl.Helpers;
 
-        public static void DuplicateZone(TR1Level level, int boxIndex)
+public static class TR1BoxUtilities
+{
+    public static readonly ushort BoxNumber = 0x7fff;
+    public static readonly short OverlapIndex = 0x3fff;
+    public static readonly ushort EndBit = 0x8000;
+    public static readonly int Blockable = 0x8000;
+    public static readonly int Blocked = 0x4000;
+
+    public static void DuplicateZone(TR1Level level, int boxIndex)
+    {
+        TRZoneGroup zoneGroup = level.Zones[boxIndex];
+        List<TRZoneGroup> zones = level.Zones.ToList();
+        zones.Add(new TRZoneGroup
         {
-            TRZoneGroup zoneGroup = level.Zones[boxIndex];
-            List<TRZoneGroup> zones = level.Zones.ToList();
-            zones.Add(new TRZoneGroup
+            NormalZone = zoneGroup.NormalZone.Clone(),
+            AlternateZone = zoneGroup.AlternateZone.Clone()
+        });
+        level.Zones = zones.ToArray();
+    }
+
+    public static TRZoneGroup[] ReadZones(uint numBoxes, ushort[] zoneData)
+    {
+        // Initialise the zone groups - one for every box.
+        TRZoneGroup[] zones = new TRZoneGroup[numBoxes];
+        for (int i = 0; i < zones.Length; i++)
+        {
+            zones[i] = new TRZoneGroup
             {
-                NormalZone = zoneGroup.NormalZone.Clone(),
-                AlternateZone = zoneGroup.AlternateZone.Clone()
-            });
-            level.Zones = zones.ToArray();
+                NormalZone = new TRZone(),
+                AlternateZone = new TRZone()
+            };
         }
 
-        public static TRZoneGroup[] ReadZones(uint numBoxes, ushort[] zoneData)
+        // Build the zones, mapping the multidimensional ushort structures into the corresponding
+        // zone object values.
+        IEnumerable<FlipStatus> flipValues = Enum.GetValues(typeof(FlipStatus)).Cast<FlipStatus>();
+        IEnumerable<TRZones> zoneValues = Enum.GetValues(typeof(TRZones)).Cast<TRZones>();
+
+        int valueIndex = 0;
+        foreach (FlipStatus flip in flipValues)
         {
-            // Initialise the zone groups - one for every box.
-            TRZoneGroup[] zones = new TRZoneGroup[numBoxes];
-            for (int i = 0; i < zones.Length; i++)
+            foreach (TRZones zone in zoneValues)
             {
-                zones[i] = new TRZoneGroup
-                {
-                    NormalZone = new TRZone(),
-                    AlternateZone = new TRZone()
-                };
-            }
-
-            // Build the zones, mapping the multidimensional ushort structures into the corresponding
-            // zone object values.
-            IEnumerable<FlipStatus> flipValues = Enum.GetValues(typeof(FlipStatus)).Cast<FlipStatus>();
-            IEnumerable<TRZones> zoneValues = Enum.GetValues(typeof(TRZones)).Cast<TRZones>();
-
-            int valueIndex = 0;
-            foreach (FlipStatus flip in flipValues)
-            {
-                foreach (TRZones zone in zoneValues)
-                {
-                    for (int box = 0; box < zones.Length; box++)
-                    {
-                        zones[box][flip].GroundZones[zone] = zoneData[valueIndex++];
-                    }
-                }
-
                 for (int box = 0; box < zones.Length; box++)
                 {
-                    zones[box][flip].FlyZone = zoneData[valueIndex++];
+                    zones[box][flip].GroundZones[zone] = zoneData[valueIndex++];
                 }
             }
 
-            return zones;
+            for (int box = 0; box < zones.Length; box++)
+            {
+                zones[box][flip].FlyZone = zoneData[valueIndex++];
+            }
         }
 
-        public static ushort[] FlattenZones(TRZoneGroup[] zoneGroups)
+        return zones;
+    }
+
+    public static ushort[] FlattenZones(TRZoneGroup[] zoneGroups)
+    {
+        // Convert the zone objects back into a flat ushort list.
+        IEnumerable<FlipStatus> flipValues = Enum.GetValues(typeof(FlipStatus)).Cast<FlipStatus>();
+        IEnumerable<TRZones> zoneValues = Enum.GetValues(typeof(TRZones)).Cast<TRZones>();
+
+        List<ushort> zones = new List<ushort>();
+
+        foreach (FlipStatus flip in flipValues)
         {
-            // Convert the zone objects back into a flat ushort list.
-            IEnumerable<FlipStatus> flipValues = Enum.GetValues(typeof(FlipStatus)).Cast<FlipStatus>();
-            IEnumerable<TRZones> zoneValues = Enum.GetValues(typeof(TRZones)).Cast<TRZones>();
-
-            List<ushort> zones = new List<ushort>();
-
-            foreach (FlipStatus flip in flipValues)
+            foreach (TRZones zone in zoneValues)
             {
-                foreach (TRZones zone in zoneValues)
-                {
-                    for (int box = 0; box < zoneGroups.Length; box++)
-                    {
-                        zones.Add(zoneGroups[box][flip].GroundZones[zone]);
-                    }
-                }
-
                 for (int box = 0; box < zoneGroups.Length; box++)
                 {
-                    zones.Add(zoneGroups[box][flip].FlyZone);
+                    zones.Add(zoneGroups[box][flip].GroundZones[zone]);
                 }
             }
 
-            return zones.ToArray();
+            for (int box = 0; box < zoneGroups.Length; box++)
+            {
+                zones.Add(zoneGroups[box][flip].FlyZone);
+            }
         }
 
-        public static int GetSectorCount(TR1Level level, int boxIndex)
+        return zones.ToArray();
+    }
+
+    public static int GetSectorCount(TR1Level level, int boxIndex)
+    {
+        int count = 0;
+        foreach (TRRoom room in level.Rooms)
         {
-            int count = 0;
-            foreach (TRRoom room in level.Rooms)
+            foreach (TRRoomSector sector in room.Sectors)
             {
-                foreach (TRRoomSector sector in room.Sectors)
+                if (sector.BoxIndex == boxIndex)
                 {
-                    if (sector.BoxIndex == boxIndex)
-                    {
-                        count++;
-                    }
+                    count++;
                 }
             }
-            return count;
         }
+        return count;
+    }
 
-        public static List<ushort> GetOverlaps(TR1Level level, TRBox box)
+    public static List<ushort> GetOverlaps(TR1Level level, TRBox box)
+    {
+        List<ushort> overlaps = new List<ushort>();
+
+        if ((short)box.OverlapIndex != -1)
         {
-            List<ushort> overlaps = new List<ushort>();
-
-            if ((short)box.OverlapIndex != -1)
+            int index = box.OverlapIndex & OverlapIndex;
+            ushort boxNumber;
+            bool done = false;
+            do
             {
-                int index = box.OverlapIndex & OverlapIndex;
-                ushort boxNumber;
-                bool done = false;
-                do
+                boxNumber = level.Overlaps[index++];
+                if ((boxNumber & EndBit) > 0)
                 {
-                    boxNumber = level.Overlaps[index++];
-                    if ((boxNumber & EndBit) > 0)
-                    {
-                        done = true;
-                        boxNumber &= BoxNumber;
-                    }
-                    overlaps.Add(boxNumber);
+                    done = true;
+                    boxNumber &= BoxNumber;
                 }
-                while (!done);
+                overlaps.Add(boxNumber);
             }
-
-            return overlaps;
+            while (!done);
         }
 
-        public static void UpdateOverlaps(TR1Level level, TRBox box, List<ushort> overlaps)
-        {
-            List<ushort> newOverlaps = new List<ushort>();
-            foreach (TRBox lvlBox in level.Boxes)
-            {
-                // Either append the current overlaps, or the new ones if this is the box being updated.
-                // Do nothing for boxes that have no overlaps.
-                List<ushort> boxOverlaps = lvlBox == box ? overlaps : GetOverlaps(level, lvlBox);
-                UpdateOverlaps(lvlBox, boxOverlaps, newOverlaps, -1);
-            }
+        return overlaps;
+    }
 
-            // Update the level data
-            level.Overlaps = newOverlaps.ToArray();
-            level.NumOverlaps = (uint)newOverlaps.Count;
-        }
-
-        private static void UpdateOverlaps(TRBox lvlBox, List<ushort> boxOverlaps, List<ushort> newOverlaps, short noOverlap)
+    public static void UpdateOverlaps(TR1Level level, TRBox box, List<ushort> overlaps)
+    {
+        List<ushort> newOverlaps = new List<ushort>();
+        foreach (TRBox lvlBox in level.Boxes)
         {
             // Either append the current overlaps, or the new ones if this is the box being updated.
             // Do nothing for boxes that have no overlaps.
-            if (boxOverlaps.Count > 0)
-            {
-                // TR2 uses -1 as NoOverlap, but TR3+ uses 2047. So we can never use 2047
-                // as an index itself. Add a dummy entry, which will never be referenced.
-                if (newOverlaps.Count == noOverlap)
-                {
-                    newOverlaps.Add(0);
-                }
-
-                // Mark the overlap offset for this box to the insertion point
-                UpdateOverlapIndex(lvlBox, newOverlaps.Count);
-
-                for (int i = 0; i < boxOverlaps.Count; i++)
-                {
-                    ushort index = boxOverlaps[i];
-                    if (i == boxOverlaps.Count - 1)
-                    {
-                        // Make sure the final overlap has the end bit set.
-                        index |= EndBit;
-                    }
-                    newOverlaps.Add(index);
-                }
-            }
+            List<ushort> boxOverlaps = lvlBox == box ? overlaps : GetOverlaps(level, lvlBox);
+            UpdateOverlaps(lvlBox, boxOverlaps, newOverlaps, -1);
         }
 
-        private static void UpdateOverlapIndex(TRBox box, int index)
+        // Update the level data
+        level.Overlaps = newOverlaps.ToArray();
+        level.NumOverlaps = (uint)newOverlaps.Count;
+    }
+
+    private static void UpdateOverlaps(TRBox lvlBox, List<ushort> boxOverlaps, List<ushort> newOverlaps, short noOverlap)
+    {
+        // Either append the current overlaps, or the new ones if this is the box being updated.
+        // Do nothing for boxes that have no overlaps.
+        if (boxOverlaps.Count > 0)
         {
-            if ((box.OverlapIndex & Blockable) > 0)
+            // TR2 uses -1 as NoOverlap, but TR3+ uses 2047. So we can never use 2047
+            // as an index itself. Add a dummy entry, which will never be referenced.
+            if (newOverlaps.Count == noOverlap)
             {
-                index |= Blockable;
+                newOverlaps.Add(0);
             }
-            if ((box.OverlapIndex & Blocked) > 0)
+
+            // Mark the overlap offset for this box to the insertion point
+            UpdateOverlapIndex(lvlBox, newOverlaps.Count);
+
+            for (int i = 0; i < boxOverlaps.Count; i++)
             {
-                index |= Blocked;
+                ushort index = boxOverlaps[i];
+                if (i == boxOverlaps.Count - 1)
+                {
+                    // Make sure the final overlap has the end bit set.
+                    index |= EndBit;
+                }
+                newOverlaps.Add(index);
             }
-            box.OverlapIndex = (ushort)index;
         }
+    }
+
+    private static void UpdateOverlapIndex(TRBox box, int index)
+    {
+        if ((box.OverlapIndex & Blockable) > 0)
+        {
+            index |= Blockable;
+        }
+        if ((box.OverlapIndex & Blocked) > 0)
+        {
+            index |= Blocked;
+        }
+        box.OverlapIndex = (ushort)index;
     }
 }
