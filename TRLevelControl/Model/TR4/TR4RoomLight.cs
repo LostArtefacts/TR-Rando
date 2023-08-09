@@ -33,11 +33,11 @@ public class TR4RoomLight : ISerializableCompact
 
     public float CutOff { get; set; }
 
-    public float dx { get; set; }
+    public float Dx { get; set; }
 
-    public float dy { get; set; }
+    public float Dy { get; set; }
 
-    public float dz { get; set; }
+    public float Dz { get; set; }
 
     public byte[] Serialize()
     {
@@ -55,9 +55,9 @@ public class TR4RoomLight : ISerializableCompact
             writer.Write(Out);
             writer.Write(Length);
             writer.Write(CutOff);
-            writer.Write(dx);
-            writer.Write(dy);
-            writer.Write(dz);
+            writer.Write(Dx);
+            writer.Write(Dy);
+            writer.Write(Dz);
         }
 
         return stream.ToArray();

@@ -17,9 +17,9 @@ public class TR5RoomInfo : ISerializableCompact
 
     public int Z { get; set; }
 
-    public int yBottom { get; set; }
+    public int YBottom { get; set; }
 
-    public int yTop { get; set; }
+    public int YTop { get; set; }
 
     public byte[] Serialize()
     {
@@ -29,8 +29,8 @@ public class TR5RoomInfo : ISerializableCompact
             writer.Write(X);
             writer.Write(Y);
             writer.Write(Z);
-            writer.Write(yBottom);
-            writer.Write(yTop);
+            writer.Write(YBottom);
+            writer.Write(YTop);
         }
 
         return stream.ToArray();

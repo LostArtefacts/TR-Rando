@@ -42,8 +42,8 @@ internal static class TR5FileReadUtilities
                 X = reader.ReadInt32(),
                 Y = reader.ReadInt32(),
                 Z = reader.ReadInt32(),
-                yBottom = reader.ReadInt32(),
-                yTop = reader.ReadInt32()
+                YBottom = reader.ReadInt32(),
+                YTop = reader.ReadInt32()
             };
 
             room.Info = info;

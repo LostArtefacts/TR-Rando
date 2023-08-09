@@ -526,9 +526,9 @@ internal static class TR4FileReadUtilities
             Out = reader.ReadSingle(),
             Length = reader.ReadSingle(),
             CutOff = reader.ReadSingle(),
-            dx = reader.ReadSingle(),
-            dy = reader.ReadSingle(),
-            dz = reader.ReadSingle()
+            Dx = reader.ReadSingle(),
+            Dy = reader.ReadSingle(),
+            Dz = reader.ReadSingle()
         };
     }
 
@@ -694,9 +694,9 @@ internal static class TR4FileReadUtilities
             X = reader.ReadInt32(),
             Y = reader.ReadInt32(),
             Z = reader.ReadInt32(),
-            dx = reader.ReadInt32(),
-            dy = reader.ReadInt32(),
-            dz = reader.ReadInt32(),
+            Dx = reader.ReadInt32(),
+            Dy = reader.ReadInt32(),
+            Dz = reader.ReadInt32(),
             Sequence = reader.ReadByte(),
             Index = reader.ReadByte(),
             FOV = reader.ReadUInt16(),
