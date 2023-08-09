@@ -66,7 +66,7 @@ public class IOTests : TestBase
         Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
 
         //Parse the floordata using FDControl and re-write the parsed data back
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
         fdataReader.WriteToLevel(lvl);
 
@@ -88,7 +88,7 @@ public class IOTests : TestBase
         Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
 
         //Parse the floordata using FDControl and re-write the parsed data back
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
         fdataReader.WriteToLevel(lvl);
 
@@ -107,8 +107,8 @@ public class IOTests : TestBase
 
         // For every box, store the current zone. We use the serialized form
         // for comparison.
-        Dictionary<int, byte[]> flipOffZones = new Dictionary<int, byte[]>();
-        Dictionary<int, byte[]> flipOnZones = new Dictionary<int, byte[]>();
+        Dictionary<int, byte[]> flipOffZones = new();
+        Dictionary<int, byte[]> flipOnZones = new();
         for (int i = 0; i < lvl.NumBoxes; i++)
         {
             flipOffZones[i] = lvl.Zones[i][FlipStatus.Off].Serialize();
@@ -157,8 +157,8 @@ public class IOTests : TestBase
 
         // For every box, store the current list of overlaps and the overlap starting
         // index itself (which also stores Blockable/Blocked bits).
-        Dictionary<int, List<ushort>> boxOverlaps = new Dictionary<int, List<ushort>>();
-        Dictionary<int, short> boxOverlapIndices = new Dictionary<int, short>();
+        Dictionary<int, List<ushort>> boxOverlaps = new();
+        Dictionary<int, short> boxOverlapIndices = new();
         for (int i = 0; i < lvl.NumBoxes; i++)
         {
             boxOverlaps[i] = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
@@ -175,7 +175,7 @@ public class IOTests : TestBase
             TR2BoxUtilities.UpdateOverlaps(lvl, lvl.Boxes[i], boxOverlaps[i]);
         }
 
-        Dictionary<int, List<ushort>> newBoxOverlaps = new Dictionary<int, List<ushort>>();
+        Dictionary<int, List<ushort>> newBoxOverlaps = new();
         for (int i = 0; i < lvl.NumBoxes; i++)
         {
             newBoxOverlaps[i] = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);
@@ -222,18 +222,18 @@ public class IOTests : TestBase
         {
             // The number of doors determines the trigger masks
             int requiredDoors = (int)Math.Ceiling((double)totalSecrets / TRSecretPlacement<TR3Entities>.MaskBits);
-            List<int> doors = new List<int>(requiredDoors);
+            List<int> doors = new(requiredDoors);
             for (int i = 0; i < requiredDoors; i++)
             {
                 doors.Add(i);
             }
 
-            List<TRSecretPlacement<TR3Entities>> secrets = new List<TRSecretPlacement<TR3Entities>>();
+            List<TRSecretPlacement<TR3Entities>> secrets = new();
 
             // Create a secret up to the limit for this "level" and set its mask and door
             for (ushort secretIndex = 0; secretIndex < totalSecrets; secretIndex++)
             {
-                TRSecretPlacement<TR3Entities> secret = new TRSecretPlacement<TR3Entities>
+                TRSecretPlacement<TR3Entities> secret = new()
                 {
                     SecretIndex = secretIndex
                 };

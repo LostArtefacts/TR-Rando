@@ -38,7 +38,7 @@ public class IOTests : TestBase
         Array.Copy(lvl.LevelDataChunk.Floordata, originalFData, lvl.LevelDataChunk.NumFloorData);
 
         //Parse the floordata using FDControl and re-write the parsed data back
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
         fdataReader.WriteToLevel(lvl);
 
