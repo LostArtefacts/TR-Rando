@@ -59,19 +59,17 @@ public class TR3SoundDetails : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Sample);
-                writer.Write(Volume);
-                writer.Write(Range);
-                writer.Write(Chance);
-                writer.Write(Pitch);
-                writer.Write(Characteristics);
-            }
-
-            return stream.ToArray();
+            writer.Write(Sample);
+            writer.Write(Volume);
+            writer.Write(Range);
+            writer.Write(Chance);
+            writer.Write(Pitch);
+            writer.Write(Characteristics);
         }
+
+        return stream.ToArray();
     }
 }

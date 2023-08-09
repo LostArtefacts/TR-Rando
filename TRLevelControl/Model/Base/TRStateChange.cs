@@ -29,16 +29,14 @@ public class TRStateChange : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(StateID);
-                writer.Write(NumAnimDispatches);
-                writer.Write(AnimDispatch);
-            }
-
-            return stream.ToArray();
+            writer.Write(StateID);
+            writer.Write(NumAnimDispatches);
+            writer.Write(AnimDispatch);
         }
+
+        return stream.ToArray();
     }
 }

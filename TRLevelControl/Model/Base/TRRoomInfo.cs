@@ -32,17 +32,15 @@ public class TRRoomInfo : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(X);
-                writer.Write(Z);
-                writer.Write(YBottom);
-                writer.Write(YTop);
-            }
-
-            return stream.ToArray();
+            writer.Write(X);
+            writer.Write(Z);
+            writer.Write(YBottom);
+            writer.Write(YTop);
         }
+
+        return stream.ToArray();
     }
 }

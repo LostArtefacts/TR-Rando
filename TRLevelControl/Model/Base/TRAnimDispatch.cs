@@ -32,17 +32,15 @@ public class TRAnimDispatch : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Low);
-                writer.Write(High);
-                writer.Write(NextAnimation);
-                writer.Write(NextFrame);
-            }
-
-            return stream.ToArray();
+            writer.Write(Low);
+            writer.Write(High);
+            writer.Write(NextAnimation);
+            writer.Write(NextFrame);
         }
+
+        return stream.ToArray();
     }
 }

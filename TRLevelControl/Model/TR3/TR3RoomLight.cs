@@ -26,23 +26,21 @@ public class TR3RoomLight : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
+            writer.Write(X);
+            writer.Write(Y);
+            writer.Write(Z);
+            writer.Write(Colour.Serialize());
+            writer.Write(LightType);
+
+            foreach (ushort property in LightProperties)
             {
-                writer.Write(X);
-                writer.Write(Y);
-                writer.Write(Z);
-                writer.Write(Colour.Serialize());
-                writer.Write(LightType);
-
-                foreach (ushort property in LightProperties)
-                {
-                    writer.Write(property);
-                }
+                writer.Write(property);
             }
-
-            return stream.ToArray();
         }
+
+        return stream.ToArray();
     }
 }

@@ -18,20 +18,18 @@ public class TRFace3 : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
+            foreach (ushort vertex in Vertices)
             {
-                foreach (ushort vertex in Vertices)
-                {
-                    writer.Write(vertex);
-                }
-
-                writer.Write(Texture);
+                writer.Write(vertex);
             }
 
-            return stream.ToArray();
+            writer.Write(Texture);
         }
+
+        return stream.ToArray();
     }
 
     public override string ToString()

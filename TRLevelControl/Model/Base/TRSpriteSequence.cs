@@ -29,16 +29,14 @@ public class TRSpriteSequence : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(SpriteID);
-                writer.Write(NegativeLength);
-                writer.Write(Offset);
-            }
-
-            return stream.ToArray();
+            writer.Write(SpriteID);
+            writer.Write(NegativeLength);
+            writer.Write(Offset);
         }
+
+        return stream.ToArray();
     }
 }

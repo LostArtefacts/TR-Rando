@@ -17,15 +17,13 @@ public class TR3RoomSpotlight : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Intensity);
-                writer.Write(Fade);
-            }
-
-            return stream.ToArray();
+            writer.Write(Intensity);
+            writer.Write(Fade);
         }
+
+        return stream.ToArray();
     }
 }

@@ -27,15 +27,13 @@ public class TRRoomSprite : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Vertex);
-                writer.Write(Texture);
-            }
-
-            return stream.ToArray();
+            writer.Write(Vertex);
+            writer.Write(Texture);
         }
+
+        return stream.ToArray();
     }
 }

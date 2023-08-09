@@ -19,16 +19,14 @@ public class TR3CDAudioEntry : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Name);
-                writer.Write(WavLength);
-                writer.Write(WavOffset);
-            }
-
-            return stream.ToArray();
+            writer.Write(Name);
+            writer.Write(WavLength);
+            writer.Write(WavOffset);
         }
+
+        return stream.ToArray();
     }
 }

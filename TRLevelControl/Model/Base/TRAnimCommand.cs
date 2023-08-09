@@ -23,14 +23,12 @@ public class TRAnimCommand : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Value);
-            }
-
-            return stream.ToArray();
+            writer.Write(Value);
         }
+
+        return stream.ToArray();
     }
 }

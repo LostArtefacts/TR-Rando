@@ -140,209 +140,207 @@ public class TR5LevelDataChunk
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
+            writer.Write(Unused);
+            writer.Write(NumRooms);
+
+            foreach (TR5Room room in Rooms)
             {
-                writer.Write(Unused);
-                writer.Write(NumRooms);
-
-                foreach (TR5Room room in Rooms)
-                {
-                    writer.Write(room.Serialize());
-                }
-
-                writer.Write(NumFloorData);
-
-                foreach (ushort data in Floordata)
-                {
-                    writer.Write(data);
-                }
-
-                writer.Write(NumMeshData);
-
-                foreach (TR4Mesh mesh in Meshes)
-                {
-                    writer.Write(mesh.Serialize());
-                }
-
-                writer.Write(NumMeshPointers);
-
-                foreach (uint data in MeshPointers)
-                {
-                    writer.Write(data);
-                }
-
-                writer.Write(NumAnimations);
-
-                foreach (TR4Animation anim in Animations)
-                {
-                    writer.Write(anim.Serialize());
-                }
-
-                writer.Write(NumStateChanges);
-
-                foreach (TRStateChange sc in StateChanges)
-                {
-                    writer.Write(sc.Serialize());
-                }
-
-                writer.Write(NumAnimDispatches);
-
-                foreach (TRAnimDispatch ad in AnimDispatches)
-                {
-                    writer.Write(ad.Serialize());
-                }
-
-                writer.Write(NumAnimCommands);
-
-                foreach (TRAnimCommand ac in AnimCommands)
-                {
-                    writer.Write(ac.Serialize());
-                }
-
-                writer.Write(NumMeshTrees * 4); //To get the correct number /= 4 is done during read, make sure to reverse it here.
-
-                foreach (TRMeshTreeNode node in MeshTrees)
-                {
-                    writer.Write(node.Serialize());
-                }
-
-                writer.Write(NumFrames);
-
-                foreach (ushort frame in Frames)
-                {
-                    writer.Write(frame);
-                }
-
-                writer.Write(NumModels);
-
-                foreach (TR5Model model in Models)
-                {
-                    writer.Write(model.Serialize());
-                }
-
-                writer.Write(NumStaticMeshes);
-
-                foreach (TRStaticMesh sm in StaticMeshes)
-                {
-                    writer.Write(sm.Serialize());
-                }
-
-                writer.Write(SPRMarker);
-
-                writer.Write(NumSpriteTextures);
-
-                foreach (TRSpriteTexture st in SpriteTextures)
-                {
-                    writer.Write(st.Serialize());
-                }
-
-                writer.Write(NumSpriteSequences);
-
-                foreach (TRSpriteSequence seq in SpriteSequences)
-                {
-                    writer.Write(seq.Serialize());
-                }
-
-                writer.Write(NumCameras);
-
-                foreach (TRCamera cam in Cameras)
-                {
-                    writer.Write(cam.Serialize());
-                }
-
-                writer.Write(NumFlybyCameras);
-
-                foreach (TR4FlyByCamera flycam in FlybyCameras)
-                {
-                    writer.Write(flycam.Serialize());
-                }
-
-                writer.Write(NumSoundSources);
-
-                foreach (TRSoundSource ssrc in SoundSources)
-                {
-                    writer.Write(ssrc.Serialize());
-                }
-
-                writer.Write(NumBoxes);
-
-                foreach (TR2Box box in Boxes)
-                {
-                    writer.Write(box.Serialize());
-                }
-
-                writer.Write(NumOverlaps);
-
-                foreach (ushort overlap in Overlaps)
-                {
-                    writer.Write(overlap);
-                }
-
-                foreach (short zone in Zones)
-                {
-                    writer.Write(zone);
-                }
-
-                writer.Write(NumAnimatedTextures);
-                writer.Write((ushort)AnimatedTextures.Length);
-                foreach (TRAnimatedTexture texture in AnimatedTextures) { writer.Write(texture.Serialize()); }
-                writer.Write(AnimatedTexturesUVCount);
-
-                writer.Write(TEXMarker);
-
-                writer.Write(NumObjectTextures);
-
-                foreach (TR5ObjectTexture otex in ObjectTextures)
-                {
-                    writer.Write(otex.Serialize());
-                }
-
-                writer.Write(NumEntities);
-
-                foreach (TR4Entity ent in Entities)
-                {
-                    writer.Write(ent.Serialize());
-                }
-
-                writer.Write(NumAIObjects);
-
-                foreach (TR4AIObject ai in AIObjects)
-                {
-                    writer.Write(ai.Serialize());
-                }
-
-                writer.Write(NumDemoData);
-                writer.Write(DemoData);
-
-                foreach (ushort sound in SoundMap)
-                {
-                    writer.Write(sound);
-                }
-
-                writer.Write(NumSoundDetails);
-
-                foreach (TR3SoundDetails snd in SoundDetails)
-                {
-                    writer.Write(snd.Serialize());
-                }
-
-                writer.Write(NumSampleIndices);
-
-                foreach (uint sampleindex in SampleIndices)
-                {
-                    writer.Write(sampleindex);
-                }
-
-                writer.Write(Seperator);
+                writer.Write(room.Serialize());
             }
 
-            byte[] uncompressed = stream.ToArray();
-            this.UncompressedSize = (uint)uncompressed.Length;
-            this.CompressedSize = this.UncompressedSize;
+            writer.Write(NumFloorData);
 
-            return uncompressed;
+            foreach (ushort data in Floordata)
+            {
+                writer.Write(data);
+            }
+
+            writer.Write(NumMeshData);
+
+            foreach (TR4Mesh mesh in Meshes)
+            {
+                writer.Write(mesh.Serialize());
+            }
+
+            writer.Write(NumMeshPointers);
+
+            foreach (uint data in MeshPointers)
+            {
+                writer.Write(data);
+            }
+
+            writer.Write(NumAnimations);
+
+            foreach (TR4Animation anim in Animations)
+            {
+                writer.Write(anim.Serialize());
+            }
+
+            writer.Write(NumStateChanges);
+
+            foreach (TRStateChange sc in StateChanges)
+            {
+                writer.Write(sc.Serialize());
+            }
+
+            writer.Write(NumAnimDispatches);
+
+            foreach (TRAnimDispatch ad in AnimDispatches)
+            {
+                writer.Write(ad.Serialize());
+            }
+
+            writer.Write(NumAnimCommands);
+
+            foreach (TRAnimCommand ac in AnimCommands)
+            {
+                writer.Write(ac.Serialize());
+            }
+
+            writer.Write(NumMeshTrees * 4); //To get the correct number /= 4 is done during read, make sure to reverse it here.
+
+            foreach (TRMeshTreeNode node in MeshTrees)
+            {
+                writer.Write(node.Serialize());
+            }
+
+            writer.Write(NumFrames);
+
+            foreach (ushort frame in Frames)
+            {
+                writer.Write(frame);
+            }
+
+            writer.Write(NumModels);
+
+            foreach (TR5Model model in Models)
+            {
+                writer.Write(model.Serialize());
+            }
+
+            writer.Write(NumStaticMeshes);
+
+            foreach (TRStaticMesh sm in StaticMeshes)
+            {
+                writer.Write(sm.Serialize());
+            }
+
+            writer.Write(SPRMarker);
+
+            writer.Write(NumSpriteTextures);
+
+            foreach (TRSpriteTexture st in SpriteTextures)
+            {
+                writer.Write(st.Serialize());
+            }
+
+            writer.Write(NumSpriteSequences);
+
+            foreach (TRSpriteSequence seq in SpriteSequences)
+            {
+                writer.Write(seq.Serialize());
+            }
+
+            writer.Write(NumCameras);
+
+            foreach (TRCamera cam in Cameras)
+            {
+                writer.Write(cam.Serialize());
+            }
+
+            writer.Write(NumFlybyCameras);
+
+            foreach (TR4FlyByCamera flycam in FlybyCameras)
+            {
+                writer.Write(flycam.Serialize());
+            }
+
+            writer.Write(NumSoundSources);
+
+            foreach (TRSoundSource ssrc in SoundSources)
+            {
+                writer.Write(ssrc.Serialize());
+            }
+
+            writer.Write(NumBoxes);
+
+            foreach (TR2Box box in Boxes)
+            {
+                writer.Write(box.Serialize());
+            }
+
+            writer.Write(NumOverlaps);
+
+            foreach (ushort overlap in Overlaps)
+            {
+                writer.Write(overlap);
+            }
+
+            foreach (short zone in Zones)
+            {
+                writer.Write(zone);
+            }
+
+            writer.Write(NumAnimatedTextures);
+            writer.Write((ushort)AnimatedTextures.Length);
+            foreach (TRAnimatedTexture texture in AnimatedTextures) { writer.Write(texture.Serialize()); }
+            writer.Write(AnimatedTexturesUVCount);
+
+            writer.Write(TEXMarker);
+
+            writer.Write(NumObjectTextures);
+
+            foreach (TR5ObjectTexture otex in ObjectTextures)
+            {
+                writer.Write(otex.Serialize());
+            }
+
+            writer.Write(NumEntities);
+
+            foreach (TR4Entity ent in Entities)
+            {
+                writer.Write(ent.Serialize());
+            }
+
+            writer.Write(NumAIObjects);
+
+            foreach (TR4AIObject ai in AIObjects)
+            {
+                writer.Write(ai.Serialize());
+            }
+
+            writer.Write(NumDemoData);
+            writer.Write(DemoData);
+
+            foreach (ushort sound in SoundMap)
+            {
+                writer.Write(sound);
+            }
+
+            writer.Write(NumSoundDetails);
+
+            foreach (TR3SoundDetails snd in SoundDetails)
+            {
+                writer.Write(snd.Serialize());
+            }
+
+            writer.Write(NumSampleIndices);
+
+            foreach (uint sampleindex in SampleIndices)
+            {
+                writer.Write(sampleindex);
+            }
+
+            writer.Write(Seperator);
         }
+
+        byte[] uncompressed = stream.ToArray();
+        this.UncompressedSize = (uint)uncompressed.Length;
+        this.CompressedSize = this.UncompressedSize;
+
+        return uncompressed;
     }
 }

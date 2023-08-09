@@ -53,17 +53,15 @@ public class TR3RoomVertex : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Vertex.Serialize());
-                writer.Write(Lighting);
-                writer.Write(Attributes);
-                writer.Write(Colour);
-            }
-
-            return stream.ToArray();
+            writer.Write(Vertex.Serialize());
+            writer.Write(Lighting);
+            writer.Write(Attributes);
+            writer.Write(Colour);
         }
+
+        return stream.ToArray();
     }
 }

@@ -44,21 +44,19 @@ public class TRCinematicFrame : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(TargetX);
-                writer.Write(TargetY);
-                writer.Write(TargetZ);
-                writer.Write(PosZ);
-                writer.Write(PosY);
-                writer.Write(PosX);
-                writer.Write(FOV);
-                writer.Write(Roll);
-            }
-
-            return stream.ToArray();
+            writer.Write(TargetX);
+            writer.Write(TargetY);
+            writer.Write(TargetZ);
+            writer.Write(PosZ);
+            writer.Write(PosY);
+            writer.Write(PosX);
+            writer.Write(FOV);
+            writer.Write(Roll);
         }
+
+        return stream.ToArray();
     }
 }

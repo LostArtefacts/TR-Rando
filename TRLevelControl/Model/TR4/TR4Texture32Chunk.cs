@@ -22,20 +22,18 @@ public class TR4Texture32Chunk : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                foreach (TR4TexImage32 tex in Textiles) { writer.Write(tex.Serialize()); }
-            }
-
-            byte[] uncompressed = stream.ToArray();
-            this.UncompressedSize = (uint)uncompressed.Length;
-
-            byte[] compressed = TRZlib.Compress(uncompressed);
-            this.CompressedSize = (uint)compressed.Length;
-
-            return compressed;
+            foreach (TR4TexImage32 tex in Textiles) { writer.Write(tex.Serialize()); }
         }
+
+        byte[] uncompressed = stream.ToArray();
+        this.UncompressedSize = (uint)uncompressed.Length;
+
+        byte[] compressed = TRZlib.Compress(uncompressed);
+        this.CompressedSize = (uint)compressed.Length;
+
+        return compressed;
     }
 }

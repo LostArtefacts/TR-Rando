@@ -121,62 +121,60 @@ public class TR5Room : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(XELALandmark);
-                writer.Write(RoomDataSize);
-                writer.Write(Seperator);
-                writer.Write(EndSDOffset);
-                writer.Write(StartSDOffset);
-                writer.Write(Seperator2);
-                writer.Write(EndPortalOffset);
-                writer.Write(Info.Serialize());
-                writer.Write(NumZSectors);
-                writer.Write(NumXSectors);
-                writer.Write(RoomColourARGB);
-                writer.Write(NumLights);
-                writer.Write(NumStaticMeshes);
-                writer.Write(Reverb);
-                writer.Write(AlternateGroup);
-                writer.Write(WaterScheme);
-                foreach (uint data in Filler) { writer.Write(data); }
-                foreach (uint data in Seperator3) { writer.Write(data); }
-                writer.Write(Filler2);
-                writer.Write(AlternateRoom);
-                writer.Write(Flags);
-                writer.Write(Unknown1);
-                writer.Write(Unknown2);
-                writer.Write(Unknown3);
-                writer.Write(Seperator4);
-                writer.Write(Unknown4);
-                writer.Write(Unknown5);
-                writer.Write(RoomX);
-                writer.Write(RoomY);
-                writer.Write(RoomZ);
-                foreach (uint data in Seperator5) { writer.Write(data); }
-                writer.Write(Seperator6);
-                writer.Write(Seperator7);
-                writer.Write(NumRoomTriangles);
-                writer.Write(NumRoomRectangles);
-                writer.Write(RoomLightsPtr);
-                writer.Write(RoomFogBulbsPtr);
-                writer.Write(NumLights2);
-                writer.Write(NumFogBulbs);
-                writer.Write(RoomYTop);
-                writer.Write(RoomYBottom);
-                writer.Write(NumLayers);
-                writer.Write(LayersPtr);
-                writer.Write(VerticesDataSize);
-                writer.Write(PolyOffset);
-                writer.Write(PolyOffset2);
-                writer.Write(NumVertices);
-                foreach (uint data in Seperator8) { writer.Write(data); }
-                writer.Write(RoomData.SerializeRaw());
-            }
-
-            return stream.ToArray();
+            writer.Write(XELALandmark);
+            writer.Write(RoomDataSize);
+            writer.Write(Seperator);
+            writer.Write(EndSDOffset);
+            writer.Write(StartSDOffset);
+            writer.Write(Seperator2);
+            writer.Write(EndPortalOffset);
+            writer.Write(Info.Serialize());
+            writer.Write(NumZSectors);
+            writer.Write(NumXSectors);
+            writer.Write(RoomColourARGB);
+            writer.Write(NumLights);
+            writer.Write(NumStaticMeshes);
+            writer.Write(Reverb);
+            writer.Write(AlternateGroup);
+            writer.Write(WaterScheme);
+            foreach (uint data in Filler) { writer.Write(data); }
+            foreach (uint data in Seperator3) { writer.Write(data); }
+            writer.Write(Filler2);
+            writer.Write(AlternateRoom);
+            writer.Write(Flags);
+            writer.Write(Unknown1);
+            writer.Write(Unknown2);
+            writer.Write(Unknown3);
+            writer.Write(Seperator4);
+            writer.Write(Unknown4);
+            writer.Write(Unknown5);
+            writer.Write(RoomX);
+            writer.Write(RoomY);
+            writer.Write(RoomZ);
+            foreach (uint data in Seperator5) { writer.Write(data); }
+            writer.Write(Seperator6);
+            writer.Write(Seperator7);
+            writer.Write(NumRoomTriangles);
+            writer.Write(NumRoomRectangles);
+            writer.Write(RoomLightsPtr);
+            writer.Write(RoomFogBulbsPtr);
+            writer.Write(NumLights2);
+            writer.Write(NumFogBulbs);
+            writer.Write(RoomYTop);
+            writer.Write(RoomYBottom);
+            writer.Write(NumLayers);
+            writer.Write(LayersPtr);
+            writer.Write(VerticesDataSize);
+            writer.Write(PolyOffset);
+            writer.Write(PolyOffset2);
+            writer.Write(NumVertices);
+            foreach (uint data in Seperator8) { writer.Write(data); }
+            writer.Write(RoomData.SerializeRaw());
         }
+
+        return stream.ToArray();
     }
 }

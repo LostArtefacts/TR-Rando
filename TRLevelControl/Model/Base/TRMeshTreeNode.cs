@@ -32,17 +32,15 @@ public class TRMeshTreeNode : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Flags);
-                writer.Write(OffsetX);
-                writer.Write(OffsetY);
-                writer.Write(OffsetZ);
-            }
-
-            return stream.ToArray();
+            writer.Write(Flags);
+            writer.Write(OffsetX);
+            writer.Write(OffsetY);
+            writer.Write(OffsetZ);
         }
+
+        return stream.ToArray();
     }
 }

@@ -27,24 +27,20 @@ public static class TRZlib
 {
     public static byte[] Decompress(byte[] data)
     {
-        MemoryStream outputStream = new();
-        using (MemoryStream compressedStream = new(data))
-        using (InflaterInputStream inputStream = new(compressedStream))
-        {
-            inputStream.CopyTo(outputStream);
-            return outputStream.ToArray();
-        }
+        using MemoryStream outputStream = new();
+        using MemoryStream compressedStream = new(data);
+        using InflaterInputStream inputStream = new(compressedStream);
+        inputStream.CopyTo(outputStream);
+        return outputStream.ToArray();
     }
 
     public static byte[] Compress(byte[] data)
     {
-        using (MemoryStream outMemoryStream = new())
-        using (DeflaterOutputStream outZStream = new(outMemoryStream))
-        using (Stream inMemoryStream = new MemoryStream(data))
-        {
-            inMemoryStream.CopyTo(outZStream);
-            outZStream.Finish();
-            return outMemoryStream.ToArray();
-        }
+        using MemoryStream outMemoryStream = new();
+        using DeflaterOutputStream outZStream = new(outMemoryStream);
+        using Stream inMemoryStream = new MemoryStream(data);
+        inMemoryStream.CopyTo(outZStream);
+        outZStream.Finish();
+        return outMemoryStream.ToArray();
     }
 }

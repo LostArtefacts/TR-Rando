@@ -137,29 +137,25 @@ internal static class TR5FileReadUtilities
     {
         if (data.AsBytes != null)
         {
-            using (MemoryStream stream = new(data.AsBytes, false))
+            using MemoryStream stream = new(data.AsBytes, false);
+            using BinaryReader rdatareader = new(stream);
+            data.Lights = new TR5RoomLight[room.NumLights];
+            data.FogBulbs = new TR5FogBulb[room.NumFogBulbs];
+            data.SectorList = new TRRoomSector[room.NumXSectors * room.NumZSectors];
+
+            for (int i = 0; i < room.NumLights; i++)
             {
-                using (BinaryReader rdatareader = new(stream))
-                {
-                    data.Lights = new TR5RoomLight[room.NumLights];
-                    data.FogBulbs = new TR5FogBulb[room.NumFogBulbs];
-                    data.SectorList = new TRRoomSector[room.NumXSectors * room.NumZSectors];
+                data.Lights[i] = TR5FileReadUtilities.ReadRoomLight(rdatareader);
+            }
 
-                    for (int i = 0; i < room.NumLights; i++)
-                    {
-                        data.Lights[i] = TR5FileReadUtilities.ReadRoomLight(rdatareader);
-                    }
+            for (int i = 0; i < room.NumFogBulbs; i++)
+            {
+                data.FogBulbs[i] = TR5FileReadUtilities.ReadRoomBulbs(rdatareader);
+            }
 
-                    for (int i = 0; i < room.NumFogBulbs; i++)
-                    {
-                        data.FogBulbs[i] = TR5FileReadUtilities.ReadRoomBulbs(rdatareader);
-                    }
-
-                    for (int i = 0; i < room.NumXSectors * room.NumZSectors; i++)
-                    {
-                        data.SectorList[i] = TR2FileReadUtilities.ReadRoomSector(rdatareader);
-                    }
-                }
+            for (int i = 0; i < room.NumXSectors * room.NumZSectors; i++)
+            {
+                data.SectorList[i] = TR2FileReadUtilities.ReadRoomSector(rdatareader);
             }
         }
     }

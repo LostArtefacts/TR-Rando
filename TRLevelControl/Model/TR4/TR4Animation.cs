@@ -47,29 +47,27 @@ public class TR4Animation : ISerializableCompact
     
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(FrameOffset);
-                writer.Write(FrameRate);
-                writer.Write(FrameSize);
-                writer.Write(StateID);
-                writer.Write(Speed.Serialize());
-                writer.Write(Accel.Serialize());
-                writer.Write(SpeedLateral.Serialize());
-                writer.Write(AccelLateral.Serialize());
-                writer.Write(FrameStart);
-                writer.Write(FrameEnd);
-                writer.Write(NextAnimation);
-                writer.Write(NextFrame);
-                writer.Write(NumStateChanges);
-                writer.Write(StateChangeOffset);
-                writer.Write(NumAnimCommands);
-                writer.Write(AnimCommand);
-            }
-
-            return stream.ToArray();
+            writer.Write(FrameOffset);
+            writer.Write(FrameRate);
+            writer.Write(FrameSize);
+            writer.Write(StateID);
+            writer.Write(Speed.Serialize());
+            writer.Write(Accel.Serialize());
+            writer.Write(SpeedLateral.Serialize());
+            writer.Write(AccelLateral.Serialize());
+            writer.Write(FrameStart);
+            writer.Write(FrameEnd);
+            writer.Write(NextAnimation);
+            writer.Write(NextFrame);
+            writer.Write(NumStateChanges);
+            writer.Write(StateChangeOffset);
+            writer.Write(NumAnimCommands);
+            writer.Write(AnimCommand);
         }
+
+        return stream.ToArray();
     }
 }

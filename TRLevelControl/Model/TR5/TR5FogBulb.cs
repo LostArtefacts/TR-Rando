@@ -31,22 +31,20 @@ public class TR5FogBulb : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(X);
-                writer.Write(Y);
-                writer.Write(Z);
-                writer.Write(R);
-                writer.Write(G);
-                writer.Write(B);
-                writer.Write(Seperator);
-                writer.Write(In);
-                writer.Write(Out);
-            }
-
-            return stream.ToArray();
+            writer.Write(X);
+            writer.Write(Y);
+            writer.Write(Z);
+            writer.Write(R);
+            writer.Write(G);
+            writer.Write(B);
+            writer.Write(Seperator);
+            writer.Write(In);
+            writer.Write(Out);
         }
+
+        return stream.ToArray();
     }
 }

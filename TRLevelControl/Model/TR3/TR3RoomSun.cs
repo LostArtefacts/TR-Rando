@@ -20,17 +20,15 @@ public class TR3RoomSun : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(NormalX);
-                writer.Write(NormalY);
-                writer.Write(NormalZ);
-                writer.Write(Unused);
-            }
-
-            return stream.ToArray();
+            writer.Write(NormalX);
+            writer.Write(NormalY);
+            writer.Write(NormalZ);
+            writer.Write(Unused);
         }
+
+        return stream.ToArray();
     }
 }

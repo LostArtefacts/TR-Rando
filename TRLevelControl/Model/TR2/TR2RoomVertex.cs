@@ -24,17 +24,15 @@ public class TR2RoomVertex : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Vertex.Serialize());
-                writer.Write(Lighting);
-                writer.Write(Attributes);
-                writer.Write(Lighting2);
-            }
-
-            return stream.ToArray();
+            writer.Write(Vertex.Serialize());
+            writer.Write(Lighting);
+            writer.Write(Attributes);
+            writer.Write(Lighting2);
         }
+
+        return stream.ToArray();
     }
 }

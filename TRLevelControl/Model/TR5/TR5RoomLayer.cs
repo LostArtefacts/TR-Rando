@@ -47,30 +47,28 @@ public class TR5RoomLayer : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(NumLayerVertices);
-                writer.Write(UnknownL1);
-                writer.Write(NumLayerRectangles);
-                writer.Write(NumLayerTriangles);
-                writer.Write(UnknownL2);
-                writer.Write(Filler);
-                writer.Write(Filler2);
-                writer.Write(LayerBoundingBoxX1);
-                writer.Write(LayerBoundingBoxY1);
-                writer.Write(LayerBoundingBoxZ1);
-                writer.Write(LayerBoundingBoxX2);
-                writer.Write(LayerBoundingBoxY2);
-                writer.Write(LayerBoundingBoxZ2);
-                writer.Write(Filler3);
-                writer.Write(UnknownL6);
-                writer.Write(UnknownL7);
-                writer.Write(UnknownL8);
-            }
-
-            return stream.ToArray();
+            writer.Write(NumLayerVertices);
+            writer.Write(UnknownL1);
+            writer.Write(NumLayerRectangles);
+            writer.Write(NumLayerTriangles);
+            writer.Write(UnknownL2);
+            writer.Write(Filler);
+            writer.Write(Filler2);
+            writer.Write(LayerBoundingBoxX1);
+            writer.Write(LayerBoundingBoxY1);
+            writer.Write(LayerBoundingBoxZ1);
+            writer.Write(LayerBoundingBoxX2);
+            writer.Write(LayerBoundingBoxY2);
+            writer.Write(LayerBoundingBoxZ2);
+            writer.Write(Filler3);
+            writer.Write(UnknownL6);
+            writer.Write(UnknownL7);
+            writer.Write(UnknownL8);
         }
+
+        return stream.ToArray();
     }
 }

@@ -58,36 +58,34 @@ public class TR5RoomLight : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(X);
-                writer.Write(Y);
-                writer.Write(Z);
-                writer.Write(R);
-                writer.Write(G);
-                writer.Write(B);
-                writer.Write(Seperator);
-                writer.Write(In);
-                writer.Write(Out);
-                writer.Write(RadIn);
-                writer.Write(RadOut);
-                writer.Write(Range);
-                writer.Write(DX);
-                writer.Write(DY);
-                writer.Write(DZ);
-                writer.Write(X2);
-                writer.Write(Y2);
-                writer.Write(Z2);
-                writer.Write(DX2);
-                writer.Write(DY2);
-                writer.Write(DZ2);
-                writer.Write(LightType);
-                writer.Write(Filler);
-            }
-
-            return stream.ToArray();
+            writer.Write(X);
+            writer.Write(Y);
+            writer.Write(Z);
+            writer.Write(R);
+            writer.Write(G);
+            writer.Write(B);
+            writer.Write(Seperator);
+            writer.Write(In);
+            writer.Write(Out);
+            writer.Write(RadIn);
+            writer.Write(RadOut);
+            writer.Write(Range);
+            writer.Write(DX);
+            writer.Write(DY);
+            writer.Write(DZ);
+            writer.Write(X2);
+            writer.Write(Y2);
+            writer.Write(Z2);
+            writer.Write(DX2);
+            writer.Write(DY2);
+            writer.Write(DZ2);
+            writer.Write(LightType);
+            writer.Write(Filler);
         }
+
+        return stream.ToArray();
     }
 }

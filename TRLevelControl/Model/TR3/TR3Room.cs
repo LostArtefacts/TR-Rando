@@ -241,53 +241,51 @@ public class TR3Room : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
+            writer.Write(Info.Serialize());
+            writer.Write(NumDataWords);
+
+            writer.Write(RoomData.Serialize());
+            writer.Write(NumPortals);
+
+            foreach (TRRoomPortal portal in Portals)
             {
-                writer.Write(Info.Serialize());
-                writer.Write(NumDataWords);
-
-                writer.Write(RoomData.Serialize());
-                writer.Write(NumPortals);
-
-                foreach (TRRoomPortal portal in Portals)
-                {
-                    writer.Write(portal.Serialize());
-                }
-
-                writer.Write(NumZSectors);
-                writer.Write(NumXSectors);
-
-                foreach (TRRoomSector sector in Sectors)
-                {
-                    writer.Write(sector.Serialize());
-                }
-
-                writer.Write(AmbientIntensity);
-                writer.Write(LightMode);
-                writer.Write(NumLights);
-
-                foreach (TR3RoomLight light in Lights)
-                {
-                    writer.Write(light.Serialize());
-                }
-
-                writer.Write(NumStaticMeshes);
-
-                foreach (TR3RoomStaticMesh mesh in StaticMeshes)
-                {
-                    writer.Write(mesh.Serialize());
-                }
-
-                writer.Write(AlternateRoom);
-                writer.Write(Flags);
-                writer.Write(WaterScheme);
-                writer.Write(ReverbInfo);
-                writer.Write(Filler);
+                writer.Write(portal.Serialize());
             }
 
-            return stream.ToArray();
+            writer.Write(NumZSectors);
+            writer.Write(NumXSectors);
+
+            foreach (TRRoomSector sector in Sectors)
+            {
+                writer.Write(sector.Serialize());
+            }
+
+            writer.Write(AmbientIntensity);
+            writer.Write(LightMode);
+            writer.Write(NumLights);
+
+            foreach (TR3RoomLight light in Lights)
+            {
+                writer.Write(light.Serialize());
+            }
+
+            writer.Write(NumStaticMeshes);
+
+            foreach (TR3RoomStaticMesh mesh in StaticMeshes)
+            {
+                writer.Write(mesh.Serialize());
+            }
+
+            writer.Write(AlternateRoom);
+            writer.Write(Flags);
+            writer.Write(WaterScheme);
+            writer.Write(ReverbInfo);
+            writer.Write(Filler);
         }
+
+        return stream.ToArray();
     }
 }

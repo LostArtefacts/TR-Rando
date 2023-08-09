@@ -41,20 +41,18 @@ public class TR2RoomLight : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(X);
-                writer.Write(Y);
-                writer.Write(Z);
-                writer.Write(Intensity1);
-                writer.Write(Intensity2);
-                writer.Write(Fade1);
-                writer.Write(Fade2);
-            }
-
-            return stream.ToArray();
+            writer.Write(X);
+            writer.Write(Y);
+            writer.Write(Z);
+            writer.Write(Intensity1);
+            writer.Write(Intensity2);
+            writer.Write(Fade1);
+            writer.Write(Fade2);
         }
+
+        return stream.ToArray();
     }
 }

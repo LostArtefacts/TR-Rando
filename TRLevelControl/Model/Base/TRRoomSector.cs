@@ -43,19 +43,17 @@ public class TRRoomSector : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(FDIndex);
-                writer.Write(BoxIndex);
-                writer.Write(RoomBelow);
-                writer.Write(Floor);
-                writer.Write(RoomAbove);
-                writer.Write(Ceiling);
-            }
-
-            return stream.ToArray();
+            writer.Write(FDIndex);
+            writer.Write(BoxIndex);
+            writer.Write(RoomBelow);
+            writer.Write(Floor);
+            writer.Write(RoomAbove);
+            writer.Write(Ceiling);
         }
+
+        return stream.ToArray();
     }
 }

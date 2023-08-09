@@ -71,21 +71,19 @@ public class TREntity : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(TypeID);
-                writer.Write(Room);
-                writer.Write(X);
-                writer.Write(Y);
-                writer.Write(Z);
-                writer.Write(Angle);
-                writer.Write(Intensity);
-                writer.Write(Flags);
-            }
-
-            return stream.ToArray();
+            writer.Write(TypeID);
+            writer.Write(Room);
+            writer.Write(X);
+            writer.Write(Y);
+            writer.Write(Z);
+            writer.Write(Angle);
+            writer.Write(Intensity);
+            writer.Write(Flags);
         }
+
+        return stream.ToArray();
     }
 }

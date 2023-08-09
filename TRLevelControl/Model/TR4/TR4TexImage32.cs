@@ -15,14 +15,12 @@ public class TR4TexImage32 : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                foreach (uint t in Tile) { writer.Write(t); }
-            }
-
-            return stream.ToArray();
+            foreach (uint t in Tile) { writer.Write(t); }
         }
+
+        return stream.ToArray();
     }
 }

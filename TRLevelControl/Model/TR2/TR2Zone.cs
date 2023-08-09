@@ -19,19 +19,17 @@ public class TR2Zone : ISerializableCompact, ICloneable
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
+            foreach (ushort zone in GroundZones.Values)
             {
-                foreach (ushort zone in GroundZones.Values)
-                {
-                    writer.Write(zone);
-                }
-                writer.Write(FlyZone);
+                writer.Write(zone);
             }
-
-            return stream.ToArray();
+            writer.Write(FlyZone);
         }
+
+        return stream.ToArray();
     }
 
     public TR2Zone Clone()

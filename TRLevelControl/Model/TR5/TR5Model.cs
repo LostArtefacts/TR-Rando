@@ -40,20 +40,18 @@ public class TR5Model : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(ID);
-                writer.Write(NumMeshes);
-                writer.Write(StartingMesh);
-                writer.Write(MeshTree);
-                writer.Write(FrameOffset);
-                writer.Write(Animation);
-                writer.Write(Filler);
-            }
-
-            return stream.ToArray();
+            writer.Write(ID);
+            writer.Write(NumMeshes);
+            writer.Write(StartingMesh);
+            writer.Write(MeshTree);
+            writer.Write(FrameOffset);
+            writer.Write(Animation);
+            writer.Write(Filler);
         }
+
+        return stream.ToArray();
     }
 }

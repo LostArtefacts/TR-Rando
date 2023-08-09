@@ -29,16 +29,14 @@ public sealed class FixedFloat32 : FixedFloat<short, ushort>, ISerializableCompa
 {
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Whole);
-                writer.Write(Fraction);
-            }
-
-            return stream.ToArray();
+            writer.Write(Whole);
+            writer.Write(Fraction);
         }
+
+        return stream.ToArray();
     }
 }
 
@@ -46,15 +44,13 @@ public sealed class FixedFloat16 : FixedFloat<byte, byte>, ISerializableCompact
 {
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Whole);
-                writer.Write(Fraction);
-            }
-
-            return stream.ToArray();
+            writer.Write(Whole);
+            writer.Write(Fraction);
         }
+
+        return stream.ToArray();
     }
 }

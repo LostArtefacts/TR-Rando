@@ -39,57 +39,55 @@ public class TR4Mesh : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
+            writer.Write(Centre.Serialize());
+            writer.Write(CollRadius);
+            writer.Write(NumVertices);
+
+            foreach (TRVertex vert in Vertices)
             {
-                writer.Write(Centre.Serialize());
-                writer.Write(CollRadius);
-                writer.Write(NumVertices);
+                writer.Write(vert.Serialize());
+            }
 
-                foreach (TRVertex vert in Vertices)
+            writer.Write(NumNormals);
+
+            if (NumNormals > 0)
+            {
+                foreach (TRVertex normal in Normals)
                 {
-                    writer.Write(vert.Serialize());
+                    writer.Write(normal.Serialize());
                 }
-
-                writer.Write(NumNormals);
-
-                if (NumNormals > 0)
+            }
+            else
+            {
+                foreach (ushort light in Lights)
                 {
-                    foreach (TRVertex normal in Normals)
-                    {
-                        writer.Write(normal.Serialize());
-                    }
-                }
-                else
-                {
-                    foreach (ushort light in Lights)
-                    {
-                        writer.Write(light);
-                    }
-                }
-
-                writer.Write(NumTexturedRectangles);
-                foreach (TR4MeshFace4 face in TexturedRectangles)
-                {
-                    writer.Write(face.Serialize());
-                }
-
-                writer.Write(NumTexturedTriangles);
-                foreach (TR4MeshFace3 face in TexturedTriangles)
-                {
-                    writer.Write(face.Serialize());
-                }
-
-                // 4-byte alignment for mesh data
-                long padding = writer.BaseStream.Position % 4;
-                for (int i = 0; i < padding; i++)
-                {
-                    writer.Write((byte)0);
+                    writer.Write(light);
                 }
             }
 
-            return stream.ToArray();
+            writer.Write(NumTexturedRectangles);
+            foreach (TR4MeshFace4 face in TexturedRectangles)
+            {
+                writer.Write(face.Serialize());
+            }
+
+            writer.Write(NumTexturedTriangles);
+            foreach (TR4MeshFace3 face in TexturedTriangles)
+            {
+                writer.Write(face.Serialize());
+            }
+
+            // 4-byte alignment for mesh data
+            long padding = writer.BaseStream.Position % 4;
+            for (int i = 0; i < padding; i++)
+            {
+                writer.Write((byte)0);
+            }
         }
+
+        return stream.ToArray();
     }
 }

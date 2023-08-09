@@ -47,22 +47,20 @@ public class TRSpriteTexture : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Atlas);
-                writer.Write(X);
-                writer.Write(Y);
-                writer.Write(Width);
-                writer.Write(Height);
-                writer.Write(LeftSide);
-                writer.Write(TopSide);
-                writer.Write(RightSide);
-                writer.Write(BottomSide);
-            }
-
-            return stream.ToArray();
+            writer.Write(Atlas);
+            writer.Write(X);
+            writer.Write(Y);
+            writer.Write(Width);
+            writer.Write(Height);
+            writer.Write(LeftSide);
+            writer.Write(TopSide);
+            writer.Write(RightSide);
+            writer.Write(BottomSide);
         }
+
+        return stream.ToArray();
     }
 }

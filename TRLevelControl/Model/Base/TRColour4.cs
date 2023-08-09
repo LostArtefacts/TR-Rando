@@ -32,17 +32,15 @@ public class TRColour4 : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Red);
-                writer.Write(Green);
-                writer.Write(Blue);
-                writer.Write(Unused);
-            }
-
-            return stream.ToArray();
+            writer.Write(Red);
+            writer.Write(Green);
+            writer.Write(Blue);
+            writer.Write(Unused);
         }
+
+        return stream.ToArray();
     }
 }

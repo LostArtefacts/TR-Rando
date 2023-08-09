@@ -35,18 +35,16 @@ public class TRSoundSource : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(X);
-                writer.Write(Y);
-                writer.Write(Z);
-                writer.Write(SoundID);
-                writer.Write(Flags);
-            }
-
-            return stream.ToArray();
+            writer.Write(X);
+            writer.Write(Y);
+            writer.Write(Z);
+            writer.Write(SoundID);
+            writer.Write(Flags);
         }
+
+        return stream.ToArray();
     }
 }

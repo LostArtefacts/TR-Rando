@@ -15,18 +15,16 @@ public class TRTexImage16 : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
+            foreach (ushort pixel in Pixels)
             {
-                foreach (ushort pixel in Pixels)
-                {
-                    writer.Write(pixel);
-                }
+                writer.Write(pixel);
             }
-
-            return stream.ToArray();
         }
+
+        return stream.ToArray();
     }
 
     public override string ToString()

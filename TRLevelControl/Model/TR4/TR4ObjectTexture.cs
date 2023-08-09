@@ -29,21 +29,19 @@ public class TR4ObjectTexture : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Attribute);
-                writer.Write(TileAndFlag);
-                writer.Write(NewFlags);
-                foreach (TRObjectTextureVert vert in Vertices) { writer.Write(vert.Serialize()); }
-                writer.Write(OriginalU);
-                writer.Write(OriginalV);
-                writer.Write(WidthMinusOne);
-                writer.Write(HeightMinusOne);
-            }
-
-            return stream.ToArray();
+            writer.Write(Attribute);
+            writer.Write(TileAndFlag);
+            writer.Write(NewFlags);
+            foreach (TRObjectTextureVert vert in Vertices) { writer.Write(vert.Serialize()); }
+            writer.Write(OriginalU);
+            writer.Write(OriginalV);
+            writer.Write(WidthMinusOne);
+            writer.Write(HeightMinusOne);
         }
+
+        return stream.ToArray();
     }
 }

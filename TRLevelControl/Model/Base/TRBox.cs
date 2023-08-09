@@ -25,19 +25,17 @@ public class TRBox : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(ZMin);
-                writer.Write(ZMax);
-                writer.Write(XMin);
-                writer.Write(XMax);
-                writer.Write(TrueFloor);
-                writer.Write(OverlapIndex);
-            }
-
-            return stream.ToArray();
+            writer.Write(ZMin);
+            writer.Write(ZMax);
+            writer.Write(XMin);
+            writer.Write(XMax);
+            writer.Write(TrueFloor);
+            writer.Write(OverlapIndex);
         }
+
+        return stream.ToArray();
     }
 }

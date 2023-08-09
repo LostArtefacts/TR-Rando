@@ -18,20 +18,18 @@ public class TRObjectTexture : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
+            writer.Write(Attribute);
+            writer.Write(AtlasAndFlag);
+
+            foreach (TRObjectTextureVert vert in Vertices)
             {
-                writer.Write(Attribute);
-                writer.Write(AtlasAndFlag);
-
-                foreach (TRObjectTextureVert vert in Vertices)
-                {
-                    writer.Write(vert.Serialize());
-                }
+                writer.Write(vert.Serialize());
             }
-
-            return stream.ToArray();
         }
+
+        return stream.ToArray();
     }
 }

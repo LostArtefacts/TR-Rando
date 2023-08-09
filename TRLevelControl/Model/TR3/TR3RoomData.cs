@@ -37,40 +37,38 @@ public class TR3RoomData : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
+            writer.Write(NumVertices);
+
+            foreach (TR3RoomVertex vert in Vertices)
             {
-                writer.Write(NumVertices);
-
-                foreach (TR3RoomVertex vert in Vertices)
-                {
-                    writer.Write(vert.Serialize());
-                }
-
-                writer.Write(NumRectangles);
-
-                foreach (TRFace4 face in Rectangles)
-                {
-                    writer.Write(face.Serialize());
-                }
-
-                writer.Write(NumTriangles);
-
-                foreach (TRFace3 face in Triangles)
-                {
-                    writer.Write(face.Serialize());
-                }
-
-                writer.Write(NumSprites);
-
-                foreach (TRRoomSprite sprite in Sprites)
-                {
-                    writer.Write(sprite.Serialize());
-                }
+                writer.Write(vert.Serialize());
             }
 
-            return stream.ToArray();
+            writer.Write(NumRectangles);
+
+            foreach (TRFace4 face in Rectangles)
+            {
+                writer.Write(face.Serialize());
+            }
+
+            writer.Write(NumTriangles);
+
+            foreach (TRFace3 face in Triangles)
+            {
+                writer.Write(face.Serialize());
+            }
+
+            writer.Write(NumSprites);
+
+            foreach (TRRoomSprite sprite in Sprites)
+            {
+                writer.Write(sprite.Serialize());
+            }
         }
+
+        return stream.ToArray();
     }
 }

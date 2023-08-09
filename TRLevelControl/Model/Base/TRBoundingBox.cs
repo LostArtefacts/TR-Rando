@@ -38,19 +38,17 @@ public class TRBoundingBox : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(MinX);
-                writer.Write(MaxX);
-                writer.Write(MinY);
-                writer.Write(MaxY);
-                writer.Write(MinZ);
-                writer.Write(MaxZ);
-            }
-
-            return stream.ToArray();
+            writer.Write(MinX);
+            writer.Write(MaxX);
+            writer.Write(MinY);
+            writer.Write(MaxY);
+            writer.Write(MinZ);
+            writer.Write(MaxZ);
         }
+
+        return stream.ToArray();
     }
 }

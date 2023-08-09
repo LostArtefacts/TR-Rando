@@ -14,15 +14,13 @@ public class TRTexImage8 : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Pixels);
-            }
-
-            return stream.ToArray();
+            writer.Write(Pixels);
         }
+
+        return stream.ToArray();
     }
 
     public override string ToString()

@@ -189,28 +189,24 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         //Is the decompressed chunk the size we expected?
         Debug.Assert(buffer.Length == lvl.LevelDataChunk.UncompressedSize);
 
-        using (MemoryStream stream = new(buffer, false))
-        {
-            using (BinaryReader lvlChunkReader = new(stream))
-            {
-                TR4FileReadUtilities.PopulateRooms(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateFloordata(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateMeshes(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateAnimations(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateMeshTreesFramesModels(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateStaticMeshes(lvlChunkReader, lvl);
-                TR4FileReadUtilities.VerifySPRMarker(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateSprites(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateCameras(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateSoundSources(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateBoxesOverlapsZones(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateAnimatedTextures(lvlChunkReader, lvl);
-                TR4FileReadUtilities.VerifyTEXMarker(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateObjectTextures(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateEntitiesAndAI(lvlChunkReader, lvl);
-                TR4FileReadUtilities.PopulateDemoSoundSampleIndices(lvlChunkReader, lvl);
-                TR4FileReadUtilities.VerifyLevelDataFinalSeperator(lvlChunkReader, lvl);
-            }    
-        }
+        using MemoryStream stream = new(buffer, false);
+        using BinaryReader lvlChunkReader = new(stream);
+        TR4FileReadUtilities.PopulateRooms(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateFloordata(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateMeshes(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateAnimations(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateMeshTreesFramesModels(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateStaticMeshes(lvlChunkReader, lvl);
+        TR4FileReadUtilities.VerifySPRMarker(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateSprites(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateCameras(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateSoundSources(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateBoxesOverlapsZones(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateAnimatedTextures(lvlChunkReader, lvl);
+        TR4FileReadUtilities.VerifyTEXMarker(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateObjectTextures(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateEntitiesAndAI(lvlChunkReader, lvl);
+        TR4FileReadUtilities.PopulateDemoSoundSampleIndices(lvlChunkReader, lvl);
+        TR4FileReadUtilities.VerifyLevelDataFinalSeperator(lvlChunkReader, lvl);
     }
 }

@@ -19,16 +19,14 @@ public class TR5RoomVertex : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(Vert.Serialize());
-                writer.Write(Norm.Serialize());
-                writer.Write(Colour);
-            }
-
-            return stream.ToArray();
+            writer.Write(Vert.Serialize());
+            writer.Write(Norm.Serialize());
+            writer.Write(Colour);
         }
+
+        return stream.ToArray();
     }
 }

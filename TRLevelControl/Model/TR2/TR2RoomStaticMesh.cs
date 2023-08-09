@@ -42,20 +42,18 @@ public class TR2RoomStaticMesh : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(X);
-                writer.Write(Y);
-                writer.Write(Z);
-                writer.Write(Rotation);
-                writer.Write(Intensity1);
-                writer.Write(Intensity2);
-                writer.Write(MeshID);
-            }
-
-            return stream.ToArray();
+            writer.Write(X);
+            writer.Write(Y);
+            writer.Write(Z);
+            writer.Write(Rotation);
+            writer.Write(Intensity1);
+            writer.Write(Intensity2);
+            writer.Write(MeshID);
         }
+
+        return stream.ToArray();
     }
 }

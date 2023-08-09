@@ -54,19 +54,17 @@ public class TRStaticMesh : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new())
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (BinaryWriter writer = new(stream))
-            {
-                writer.Write(ID);
-                writer.Write(Mesh);
-                writer.Write(VisibilityBox.Serialize());
-                writer.Write(CollisionBox.Serialize());
-                writer.Write(Flags);
-            }
-
-            return stream.ToArray();
+            writer.Write(ID);
+            writer.Write(Mesh);
+            writer.Write(VisibilityBox.Serialize());
+            writer.Write(CollisionBox.Serialize());
+            writer.Write(Flags);
         }
+
+        return stream.ToArray();
     }
 
     public override string ToString()
