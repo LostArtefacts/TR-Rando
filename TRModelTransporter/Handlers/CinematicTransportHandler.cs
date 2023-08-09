@@ -1,72 +1,69 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Definitions;
 
-namespace TRModelTransporter.Handlers
+namespace TRModelTransporter.Handlers;
+
+public class CinematicTransportHandler
 {
-    public class CinematicTransportHandler
+    public static void Export(TR1Level level, TR1ModelDefinition definition, IEnumerable<TREntities> entityTypes)
     {
-        public void Export(TR1Level level, TR1ModelDefinition definition, IEnumerable<TREntities> entityTypes)
+        List<TRCinematicFrame> frames = new();
+        if (entityTypes != null && entityTypes.Contains(definition.Entity))
         {
-            List<TRCinematicFrame> frames = new List<TRCinematicFrame>();
-            if (entityTypes != null && entityTypes.Contains(definition.Entity))
-            {
-                frames.AddRange(level.CinematicFrames);
-            }
-
-            definition.CinematicFrames = frames.ToArray();
+            frames.AddRange(level.CinematicFrames);
         }
 
-        public void Export(TR2Level level, TR2ModelDefinition definition, IEnumerable<TR2Entities> entityTypes)
-        {
-            List<TRCinematicFrame> frames = new List<TRCinematicFrame>();
-            if (entityTypes != null && entityTypes.Contains(definition.Entity))
-            {
-                frames.AddRange(level.CinematicFrames);
-            }
+        definition.CinematicFrames = frames.ToArray();
+    }
 
-            definition.CinematicFrames = frames.ToArray();
+    public static void Export(TR2Level level, TR2ModelDefinition definition, IEnumerable<TR2Entities> entityTypes)
+    {
+        List<TRCinematicFrame> frames = new();
+        if (entityTypes != null && entityTypes.Contains(definition.Entity))
+        {
+            frames.AddRange(level.CinematicFrames);
         }
 
-        public void Export(TR3Level level, TR3ModelDefinition definition, IEnumerable<TR3Entities> entityTypes)
-        {
-            List<TRCinematicFrame> frames = new List<TRCinematicFrame>();
-            if (entityTypes != null && entityTypes.Contains(definition.Entity))
-            {
-                frames.AddRange(level.CinematicFrames);
-            }
+        definition.CinematicFrames = frames.ToArray();
+    }
 
-            definition.CinematicFrames = frames.ToArray();
+    public static void Export(TR3Level level, TR3ModelDefinition definition, IEnumerable<TR3Entities> entityTypes)
+    {
+        List<TRCinematicFrame> frames = new();
+        if (entityTypes != null && entityTypes.Contains(definition.Entity))
+        {
+            frames.AddRange(level.CinematicFrames);
         }
 
-        public void Import(TR1Level level, TR1ModelDefinition definition)
-        {
-            // We only import frames if the level doesn't have any already.
-            if (level.NumCinematicFrames == 0)
-            {
-                level.CinematicFrames = definition.CinematicFrames;
-                level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
-            }
-        }
+        definition.CinematicFrames = frames.ToArray();
+    }
 
-        public void Import(TR2Level level, TR2ModelDefinition definition)
+    public static void Import(TR1Level level, TR1ModelDefinition definition)
+    {
+        // We only import frames if the level doesn't have any already.
+        if (level.NumCinematicFrames == 0)
         {
-            if (level.NumCinematicFrames == 0)
-            {
-                level.CinematicFrames = definition.CinematicFrames;
-                level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
-            }
+            level.CinematicFrames = definition.CinematicFrames;
+            level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
         }
+    }
 
-        public void Import(TR3Level level, TR3ModelDefinition definition)
+    public static void Import(TR2Level level, TR2ModelDefinition definition)
+    {
+        if (level.NumCinematicFrames == 0)
         {
-            if (level.NumCinematicFrames == 0)
-            {
-                level.CinematicFrames = definition.CinematicFrames;
-                level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
-            }
+            level.CinematicFrames = definition.CinematicFrames;
+            level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
+        }
+    }
+
+    public static void Import(TR3Level level, TR3ModelDefinition definition)
+    {
+        if (level.NumCinematicFrames == 0)
+        {
+            level.CinematicFrames = definition.CinematicFrames;
+            level.NumCinematicFrames = (ushort)definition.CinematicFrames.Length;
         }
     }
 }

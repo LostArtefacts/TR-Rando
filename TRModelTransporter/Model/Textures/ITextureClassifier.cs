@@ -1,7 +1,6 @@
-﻿namespace TRModelTransporter.Model.Textures
+﻿namespace TRModelTransporter.Model.Textures;
+
+public interface ITextureClassifier
 {
-    public interface ITextureClassifier
-    {
-        string GetClassification();
-    }
+    string GetClassification();
 }

@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 using TRModelTransporter.Data;
@@ -11,75 +8,74 @@ using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Model.Textures;
 using TRTexture16Importer.Helpers;
 
-namespace TRModelTransporter.Transport
+namespace TRModelTransporter.Transport;
+
+public class TR1ModelImporter : AbstractTRModelImporter<TREntities, TR1Level, TR1ModelDefinition>
 {
-    public class TR1ModelImporter : AbstractTRModelImporter<TREntities, TR1Level, TR1ModelDefinition>
+    public TR1PaletteManager PaletteManager { get; set; }
+
+    public TR1ModelImporter(bool isCommunityPatch = false)
     {
-        public TR1PaletteManager PaletteManager { get; set; }
+        Data = new TR1DefaultDataProvider();
+        SortModels = true;
+        PaletteManager = new TR1PaletteManager();
 
-        public TR1ModelImporter(bool isCommunityPatch = false)
+        if (isCommunityPatch)
         {
-            Data = new TR1DefaultDataProvider();
-            SortModels = true;
-            PaletteManager = new TR1PaletteManager();
+            Data.TextureTileLimit = 128;
+            Data.TextureObjectLimit = 8192;
+        }
+    }
 
-            if (isCommunityPatch)
-            {
-                Data.TextureTileLimit = 128;
-                Data.TextureObjectLimit = 8192;
-            }
+    protected override AbstractTextureImportHandler<TREntities, TR1Level, TR1ModelDefinition> CreateTextureHandler()
+    {
+        return new TR1TextureImportHandler();
+    }
+
+    protected override List<TREntities> GetExistingModelTypes()
+    {
+        List<TREntities> existingEntities = new();
+        Level.Models.ToList().ForEach(m => existingEntities.Add((TREntities)m.ID));
+        return existingEntities;
+    }
+
+    protected override void Import(IEnumerable<TR1ModelDefinition> standardDefinitions, IEnumerable<TR1ModelDefinition> soundOnlyDefinitions)
+    {
+        TR1TextureRemapGroup remap = null;
+        if (TextureRemapPath != null)
+        {
+            remap = JsonConvert.DeserializeObject<TR1TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
         }
 
-        protected override AbstractTextureImportHandler<TREntities, TR1Level, TR1ModelDefinition> CreateTextureHandler()
+        if (!IgnoreGraphics)
         {
-            return new TR1TextureImportHandler();
+            PaletteManager.Level = Level;
+            PaletteManager.ObsoleteModels = EntitiesToRemove.Select(e => Data.TranslateAlias(e)).ToList();
+
+            (_textureHandler as TR1TextureImportHandler).PaletteManager = PaletteManager;
+            _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
         }
 
-        protected override List<TREntities> GetExistingModelTypes()
-        {
-            List<TREntities> existingEntities = new List<TREntities>();
-            Level.Models.ToList().ForEach(m => existingEntities.Add((TREntities)m.ID));
-            return existingEntities;
-        }
+        SoundTransportHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
 
-        protected override void Import(IEnumerable<TR1ModelDefinition> standardDefinitions, IEnumerable<TR1ModelDefinition> soundOnlyDefinitions)
-        {
-            TR1TextureRemapGroup remap = null;
-            if (TextureRemapPath != null)
-            {
-                remap = JsonConvert.DeserializeObject<TR1TextureRemapGroup>(File.ReadAllText(TextureRemapPath));
-            }
+        Dictionary<TREntities, TREntities> aliasPriority = Data.AliasPriority ?? new Dictionary<TREntities, TREntities>();
 
+        foreach (TR1ModelDefinition definition in standardDefinitions)
+        {
             if (!IgnoreGraphics)
             {
-                PaletteManager.Level = Level;
-                PaletteManager.ObsoleteModels = EntitiesToRemove.Select(e => Data.TranslateAlias(e)).ToList();
-
-                (_textureHandler as TR1TextureImportHandler).PaletteManager = PaletteManager;
-                _textureHandler.Import(Level, standardDefinitions, EntitiesToRemove, remap, ClearUnusedSprites, TexturePositionMonitor);
+                ColourTransportHandler.Import(definition, PaletteManager);
             }
+            MeshTransportHandler.Import(Level, definition);
+            AnimationTransportHandler.Import(Level, definition);
+            CinematicTransportHandler.Import(Level, definition);
+            ModelTransportHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants());
+        }
 
-            _soundHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
-
-            Dictionary<TREntities, TREntities> aliasPriority = Data.AliasPriority ?? new Dictionary<TREntities, TREntities>();
-
-            foreach (TR1ModelDefinition definition in standardDefinitions)
-            {
-                if (!IgnoreGraphics)
-                {
-                    _colourHandler.Import(Level, definition, PaletteManager);
-                }
-                _meshHandler.Import(Level, definition);
-                _animationHandler.Import(Level, definition);
-                _cinematicHandler.Import(Level, definition);
-                _modelHandler.Import(Level, definition, aliasPriority, Data.GetLaraDependants());
-            }
-
-            if (!IgnoreGraphics)
-            {
-                _textureHandler.ResetUnusedTextures();
-                PaletteManager.Dispose();
-            }
+        if (!IgnoreGraphics)
+        {
+            _textureHandler.ResetUnusedTextures();
+            PaletteManager.Dispose();
         }
     }
 }

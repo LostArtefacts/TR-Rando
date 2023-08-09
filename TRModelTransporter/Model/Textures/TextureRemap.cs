@@ -1,15 +1,14 @@
 ﻿using System.Drawing;
 
-namespace TRModelTransporter.Model.Textures
+namespace TRModelTransporter.Model.Textures;
+
+public class TextureRemap
 {
-    public class TextureRemap
-    {
-        public int OriginalTile { get; set; }
-        public int OriginalIndex { get; set; }
-        public Rectangle OriginalBounds { get; set; }
-        public int NewTile { get; set; }
-        public int NewIndex { get; set; }
-        public Rectangle NewBounds { get; set; }
-        public Point AdjustmentPoint { get; set; }
-    }
+    public int OriginalTile { get; set; }
+    public int OriginalIndex { get; set; }
+    public Rectangle OriginalBounds { get; set; }
+    public int NewTile { get; set; }
+    public int NewIndex { get; set; }
+    public Rectangle NewBounds { get; set; }
+    public Point AdjustmentPoint { get; set; }
 }
