@@ -90,28 +90,8 @@ public class IOTests : TestBase
         Assert.AreEqual((uint)newFData.Length, lvl.NumFloorData);
 
         //Test pattern/type matching example for fdata.
-        bool isPortal = false;
-
-        foreach (KeyValuePair<int, List<FDEntry>> sector in fdataReader.Entries)
-        {
-            foreach (FDEntry entry in sector.Value)
-            {
-                switch (entry)
-                {
-                    case FDClimbEntry climbEntry:
-                        break;
-                    case FDKillLaraEntry killEntry:
-                        break;
-                    case FDPortalEntry portalEntry:
-                        isPortal = true;
-                        break;
-                    case FDSlantEntry slantEntry:
-                        break;
-                    case FDTriggerEntry triggerEntry:
-                        break;
-                }
-            }
-        }
+        bool isPortal = fdataReader.Entries.Values
+            .Any(entries => entries.Any(entry => entry is FDPortalEntry));
 
         Assert.IsTrue(isPortal);
     }
