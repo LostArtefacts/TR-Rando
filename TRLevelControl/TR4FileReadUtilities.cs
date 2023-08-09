@@ -20,19 +20,20 @@ internal static class TR4FileReadUtilities
 
         for (int i = 0; i < lvl.LevelDataChunk.NumRooms; i++)
         {
-            TR4Room room = new();
-
-            //Grab info
-            room.Info = new TRRoomInfo
+            TR4Room room = new()
             {
-                X = reader.ReadInt32(),
-                Z = reader.ReadInt32(),
-                YBottom = reader.ReadInt32(),
-                YTop = reader.ReadInt32()
-            };
+                //Grab info
+                Info = new TRRoomInfo
+                {
+                    X = reader.ReadInt32(),
+                    Z = reader.ReadInt32(),
+                    YBottom = reader.ReadInt32(),
+                    YTop = reader.ReadInt32()
+                },
 
-            //Grab data
-            room.NumDataWords = reader.ReadUInt32();
+                //Grab data
+                NumDataWords = reader.ReadUInt32()
+            };
             room.Data = new ushort[room.NumDataWords];
             for (int j = 0; j < room.NumDataWords; j++)
             {
@@ -399,10 +400,11 @@ internal static class TR4FileReadUtilities
         int RoomDataOffset = 0;
 
         //Grab detailed room data
-        TR3RoomData RoomData = new();
-
-        //Room vertices
-        RoomData.NumVertices = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
+        TR3RoomData RoomData = new()
+        {
+            //Room vertices
+            NumVertices = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset])
+        };
         RoomData.Vertices = new TR3RoomVertex[RoomData.NumVertices];
 
         RoomDataOffset++;
@@ -438,9 +440,10 @@ internal static class TR4FileReadUtilities
 
         for (int j = 0; j < RoomData.NumRectangles; j++)
         {
-            TRFace4 face = new();
-
-            face.Vertices = new ushort[4];
+            TRFace4 face = new()
+            {
+                Vertices = new ushort[4]
+            };
             face.Vertices[0] = room.Data[RoomDataOffset];
             RoomDataOffset++;
             face.Vertices[1] = room.Data[RoomDataOffset];
@@ -463,9 +466,10 @@ internal static class TR4FileReadUtilities
 
         for (int j = 0; j < RoomData.NumTriangles; j++)
         {
-            TRFace3 face = new();
-
-            face.Vertices = new ushort[3];
+            TRFace3 face = new()
+            {
+                Vertices = new ushort[3]
+            };
             face.Vertices[0] = room.Data[RoomDataOffset];
             RoomDataOffset++;
             face.Vertices[1] = room.Data[RoomDataOffset];
@@ -486,9 +490,10 @@ internal static class TR4FileReadUtilities
 
         for (int j = 0; j < RoomData.NumSprites; j++)
         {
-            TRRoomSprite face = new();
-
-            face.Vertex = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
+            TRRoomSprite face = new()
+            {
+                Vertex = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset])
+            };
             RoomDataOffset++;
             face.Texture = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
             RoomDataOffset++;

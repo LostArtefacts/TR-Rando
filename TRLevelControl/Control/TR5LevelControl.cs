@@ -30,9 +30,11 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         //Texture 32 Chunk
         //Get Raw Chunk Data
-        _level.Texture32Chunk = new TR4Texture32Chunk();
-        _level.Texture32Chunk.UncompressedSize = reader.ReadUInt32();
-        _level.Texture32Chunk.CompressedSize = reader.ReadUInt32();
+        _level.Texture32Chunk = new TR4Texture32Chunk
+        {
+            UncompressedSize = reader.ReadUInt32(),
+            CompressedSize = reader.ReadUInt32()
+        };
         _level.Texture32Chunk.CompressedChunk = reader.ReadBytes((int)_level.Texture32Chunk.CompressedSize);
 
         //Decompress
@@ -40,9 +42,11 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         //Texture 16 Chunk
         //Get Raw Chunk Data
-        _level.Texture16Chunk = new TR4Texture16Chunk();
-        _level.Texture16Chunk.UncompressedSize = reader.ReadUInt32();
-        _level.Texture16Chunk.CompressedSize = reader.ReadUInt32();
+        _level.Texture16Chunk = new TR4Texture16Chunk
+        {
+            UncompressedSize = reader.ReadUInt32(),
+            CompressedSize = reader.ReadUInt32()
+        };
         _level.Texture16Chunk.CompressedChunk = reader.ReadBytes((int)_level.Texture16Chunk.CompressedSize);
 
         //Decompress
@@ -50,9 +54,11 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         //Sky and Font 32 Chunk
         //Get Raw Chunk Data
-        _level.SkyAndFont32Chunk = new TR4SkyAndFont32Chunk();
-        _level.SkyAndFont32Chunk.UncompressedSize = reader.ReadUInt32();
-        _level.SkyAndFont32Chunk.CompressedSize = reader.ReadUInt32();
+        _level.SkyAndFont32Chunk = new TR4SkyAndFont32Chunk
+        {
+            UncompressedSize = reader.ReadUInt32(),
+            CompressedSize = reader.ReadUInt32()
+        };
         _level.SkyAndFont32Chunk.CompressedChunk = reader.ReadBytes((int)_level.SkyAndFont32Chunk.CompressedSize);
 
         //Decompress
@@ -65,9 +71,11 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         //Level Data Chunk
         //Get Raw Chunk Data
-        _level.LevelDataChunk = new TR5LevelDataChunk();
-        _level.LevelDataChunk.UncompressedSize = reader.ReadUInt32();
-        _level.LevelDataChunk.CompressedSize = reader.ReadUInt32();
+        _level.LevelDataChunk = new TR5LevelDataChunk
+        {
+            UncompressedSize = reader.ReadUInt32(),
+            CompressedSize = reader.ReadUInt32()
+        };
         _level.LevelDataChunk.CompressedChunk = reader.ReadBytes((int)_level.LevelDataChunk.CompressedSize);
 
         //Decompress
