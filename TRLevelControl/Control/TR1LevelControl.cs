@@ -389,34 +389,6 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         return colourPalette;
     }
 
-    private TRColour4[] PopulateColourPalette16(byte[] palette)
-    {
-        TRColour4[] colourPalette = new TRColour4[MAX_PALETTE_SIZE];
-
-        int ci = 0;
-
-        for (int i = 0; i < MAX_PALETTE_SIZE; i++)
-        {
-            TRColour4 col = new();
-
-            col.Red = palette[ci];
-            ci++;
-
-            col.Green = palette[ci];
-            ci++;
-
-            col.Blue = palette[ci];
-            ci++;
-
-            col.Unused = palette[ci];
-            ci++;
-
-            colourPalette[i] = col;
-        }
-
-        return colourPalette;
-    }
-
     private TRRoomData ConvertToRoomData(TRRoom room)
     {
         int RoomDataOffset = 0;

@@ -206,52 +206,6 @@ internal static class TR5FileReadUtilities
         };
     }
 
-    private static TR5RoomLayer ReadRoomLayer(BinaryReader r)
-    {
-        return new TR5RoomLayer()
-        {
-            NumLayerVertices = r.ReadUInt32(),
-            UnknownL1 = r.ReadUInt16(),
-            NumLayerRectangles = r.ReadUInt16(),
-            NumLayerTriangles = r.ReadUInt16(),
-            UnknownL2 = r.ReadUInt16(),
-            Filler = r.ReadUInt16(),
-            Filler2 = r.ReadUInt16(),
-            LayerBoundingBoxX1 = r.ReadSingle(),
-            LayerBoundingBoxY1 = r.ReadSingle(),
-            LayerBoundingBoxZ1 = r.ReadSingle(),
-            LayerBoundingBoxX2 = r.ReadSingle(),
-            LayerBoundingBoxY2 = r.ReadSingle(),
-            LayerBoundingBoxZ2 = r.ReadSingle(),
-            Filler3 = r.ReadUInt32(),
-            UnknownL6 = r.ReadUInt32(),
-            UnknownL7 = r.ReadUInt32(),
-            UnknownL8 = r.ReadUInt32()
-        };
-    }
-
-    private static TR5RoomVertex ReadRoomVertex(BinaryReader r)
-    {
-        return new TR5RoomVertex()
-        {
-            Vert = new TR5Vertex()
-            {
-                X = r.ReadSingle(),
-                Y = r.ReadSingle(),
-                Z = r.ReadSingle()
-            },
-
-            Norm = new TR5Vertex()
-            {
-                X = r.ReadSingle(),
-                Y = r.ReadSingle(),
-                Z = r.ReadSingle()
-            },
-
-            Colour = r.ReadUInt32()
-        };
-    }
-
     public static void PopulateFloordata(BinaryReader reader, TR5Level lvl)
     {
         lvl.LevelDataChunk.NumFloorData = reader.ReadUInt32();

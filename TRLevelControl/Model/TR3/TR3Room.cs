@@ -159,14 +159,6 @@ public class TR3Room : ISerializableCompact
         }
     }
 
-    public void SetStaticMeshLights(ushort val)
-    {
-        foreach (TR3RoomStaticMesh mesh in StaticMeshes)
-        {
-            //No light properties?
-        }
-    }
-
     public void SetVertexLight(short val)
     {
         foreach (TR3RoomVertex vert in RoomData.Vertices)
