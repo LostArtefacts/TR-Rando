@@ -152,9 +152,6 @@ public class IOTests : TestBase
     {
         TR3Level lvl = GetTR3Level(TR3LevelNames.JUNGLE);
 
-        // Store the current list of overlaps
-        List<ushort> originalOverlaps = lvl.Overlaps.ToList();
-
         // For every box, store the current list of overlaps and the overlap starting
         // index itself (which also stores Blockable/Blocked bits).
         Dictionary<int, List<ushort>> boxOverlaps = new();
