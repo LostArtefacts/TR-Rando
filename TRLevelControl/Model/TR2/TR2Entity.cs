@@ -108,7 +108,7 @@ public class TR2Entity : ISerializableCompact, ICloneable
 
     public TR2Entity Clone()
     {
-        return (TR2Entity)this.MemberwiseClone();
+        return (TR2Entity)MemberwiseClone();
     }
 
     object ICloneable.Clone()

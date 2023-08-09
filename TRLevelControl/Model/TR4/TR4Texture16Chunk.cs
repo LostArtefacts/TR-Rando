@@ -29,10 +29,10 @@ public class TR4Texture16Chunk : ISerializableCompact
         }
 
         byte[] uncompressed = stream.ToArray();
-        this.UncompressedSize = (uint)uncompressed.Length;
+        UncompressedSize = (uint)uncompressed.Length;
 
         byte[] compressed = TRZlib.Compress(uncompressed);
-        this.CompressedSize = (uint)compressed.Length;
+        CompressedSize = (uint)compressed.Length;
 
         return compressed;
     }

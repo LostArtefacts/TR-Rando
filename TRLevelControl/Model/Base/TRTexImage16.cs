@@ -55,7 +55,7 @@ public class TRTexImage16 : ISerializableCompact
 
         for (int i = 0; i < pixels.Length; i++)
         {
-            pixels[i] = new Textile16Pixel { Value = this.Pixels[i] };
+            pixels[i] = new Textile16Pixel { Value = Pixels[i] };
         }
 
         return pixels;

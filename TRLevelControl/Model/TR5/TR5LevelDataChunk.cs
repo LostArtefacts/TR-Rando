@@ -338,8 +338,8 @@ public class TR5LevelDataChunk
         }
 
         byte[] uncompressed = stream.ToArray();
-        this.UncompressedSize = (uint)uncompressed.Length;
-        this.CompressedSize = this.UncompressedSize;
+        UncompressedSize = (uint)uncompressed.Length;
+        CompressedSize = UncompressedSize;
 
         return uncompressed;
     }
