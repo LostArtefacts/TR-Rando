@@ -2,6 +2,7 @@
 
 public static class TR3LevelNames
 {
+    public const string ASSAULT     = "HOUSE.TR2";
     public const string JUNGLE      = "JUNGLE.TR2";
     public const string RUINS       = "TEMPLE.TR2";
     public const string GANGES      = "QUADCHAS.TR2";
@@ -22,7 +23,6 @@ public static class TR3LevelNames
     public const string TINNOS      = "CITY.TR2";
     public const string WILLIE      = "CHAMBER.TR2";
     public const string HALLOWS     = "STPAUL.TR2";
-    public const string ASSAULT     = "HOUSE.TR2";
 
     public const string JUNGLE_CUT  = "CUT6.TR2";
     public const string RUINS_CUT   = "CUT9.TR2";
@@ -43,226 +43,126 @@ public static class TR3LevelNames
     public const string MADHOUSE    = "ZOO.TR2";
     public const string REUNION     = "SLINC.TR2";
 
-    public static List<string> AsList
-    {
-        get
-        {
-            return new List<string>
-            {
-                JUNGLE,
-                RUINS,
-                GANGES,
-                CAVES,
-                COASTAL,
-                CRASH,
-                MADUBU,
-                PUNA,
-                THAMES,
-                ALDWYCH,
-                LUDS,
-                CITY,
-                NEVADA,
-                HSC,
-                AREA51,
-                ANTARC,
-                RXTECH,
-                TINNOS,
-                WILLIE,
-                HALLOWS
-            };
-        }
-    }
+    public static List<string> AsList => India
+        .Concat(SouthPacific)
+        .Concat(London)
+        .Concat(Nevada)
+        .Concat(Antarctica)
+        .Append(HALLOWS)
+        .ToList();
 
-    public static List<string> AsListWithAssault
-    {
-        get
-        {
-            List<string> lvls = AsList;
-            lvls.Add(ASSAULT);
-            return lvls;
-        }
-    }
+    public static List<string> AsListWithAssault => AsList
+        .Prepend(ASSAULT)
+        .ToList();
 
-    public static List<string> AsListGold
-    {
-        get
-        {
-            return new List<string>
-            {
-                FLING,
-                LAIR,
-                CLIFF,
-                FISHES,
-                MADHOUSE,
-                REUNION
-            };
-        }
-    }
+    public static List<string> AsOrderedList => IndiaWithCutscenes
+        .Prepend(ASSAULT)
+        .Concat(SouthPacificWithCutscenes)
+        .Concat(LondonWithCutscenes)
+        .Concat(NevadaWithCutscenes)
+        .Concat(AntarcticaWithCutscenes)
+        .Append(HALLOWS)
+        .Concat(AsListGold)
+        .ToList();
 
-    public static List<string> IndiaLevels
+    public static List<string> India => new()
     {
-        get
-        {
-            return new List<string>
-            {
-                JUNGLE,
-                RUINS,
-                GANGES,
-                CAVES
-            };
-        }
-    }
+        JUNGLE,
+        RUINS,
+        GANGES,
+        CAVES
+    };
 
-    public static List<string> IndiaLevelsWithCutscenes
+    public static List<string> IndiaWithCutscenes => new()
     {
-        get
-        {
-            return new List<string>
-            {
-                JUNGLE,
-                JUNGLE_CUT,
-                RUINS,
-                RUINS_CUT,
-                GANGES,
-                CAVES
-            };
-        }
-    }
+        JUNGLE,
+        JUNGLE_CUT,
+        RUINS,
+        RUINS_CUT,
+        GANGES,
+        CAVES
+    };
 
-    public static List<string> SouthPacificLevels
+    public static List<string> SouthPacific => new()
     {
-        get
-        {
-            return new List<string>
-            {
-                COASTAL,
-                CRASH,
-                MADUBU,
-                PUNA
-            };
-        }
-    }
+        COASTAL,
+        CRASH,
+        MADUBU,
+        PUNA
+    };
 
-    public static List<string> SouthPacificLevelsWithCutscenes
+    public static List<string> SouthPacificWithCutscenes => new()
     {
-        get
-        {
-            return new List<string>
-            {
-                COASTAL,
-                COASTAL_CUT,
-                CRASH,
-                CRASH_CUT,
-                MADUBU,
-                PUNA
-            };
-        }
-    }
+        COASTAL,
+        COASTAL_CUT,
+        CRASH,
+        CRASH_CUT,
+        MADUBU,
+        PUNA
+    };
 
-    public static List<string> LondonLevels
+    public static List<string> London => new()
     {
-        get
-        {
-            return new List<string>
-            {
-                THAMES,
-                ALDWYCH,
-                LUDS,
-                CITY,
-                HALLOWS
-            };
-        }
-    }
+        THAMES,
+        ALDWYCH,
+        LUDS,
+        CITY,
+        HALLOWS
+    };
 
-    public static List<string> LondonLevelsWithCutscenes
+    public static List<string> LondonWithCutscenes => new()
     {
-        get
-        {
-            return new List<string>
-            {
-                THAMES,
-                THAMES_CUT,
-                ALDWYCH,
-                ALDWYCH_CUT,
-                LUDS,
-                LUDS_CUT,
-                CITY,
-                HALLOWS
-            };
-        }
-    }
+        THAMES,
+        THAMES_CUT,
+        ALDWYCH,
+        ALDWYCH_CUT,
+        LUDS,
+        LUDS_CUT,
+        CITY,
+        HALLOWS
+    };
 
-    public static List<string> NevadaLevels
+    public static List<string> Nevada => new()
     {
-        get
-        {
-            return new List<string>
-            {
-                NEVADA,
-                HSC,
-                AREA51
-            };
-        }
-    }
+        NEVADA,
+        HSC,
+        AREA51
+    };
 
-    public static List<string> NevadaLevelsWithCutscenes
+    public static List<string> NevadaWithCutscenes => new()
     {
-        get
-        {
-            return new List<string>
-            {
-                NEVADA,
-                NEVADA_CUT,
-                HSC,
-                HSC_CUT,
-                AREA51
-            };
-        }
-    }
+        NEVADA,
+        NEVADA_CUT,
+        HSC,
+        HSC_CUT,
+        AREA51
+    };
 
-    public static List<string> AntarcticaLevels
+    public static List<string> Antarctica => new()
     {
-        get
-        {
-            return new List<string>
-            {
-                ANTARC,
-                RXTECH,
-                TINNOS,
-                WILLIE
-            };
-        }
-    }
+        ANTARC,
+        RXTECH,
+        TINNOS,
+        WILLIE
+    };
 
-    public static List<string> AntarcticaLevelsWithCutscenes
+    public static List<string> AntarcticaWithCutscenes => new()
     {
-        get
-        {
-            return new List<string>
-            {
-                ANTARC,
-                ANTARC_CUT,
-                RXTECH,
-                TINNOS,
-                TINNOS_CUT,
-                WILLIE
-            };
-        }
-    }
+        ANTARC,
+        ANTARC_CUT,
+        RXTECH,
+        TINNOS,
+        TINNOS_CUT,
+        WILLIE
+    };
 
-    public static List<string> AsOrderedList
+    public static List<string> AsListGold => new()
     {
-        get
-        {
-            List<string> lvls = new();
-            lvls.AddRange(IndiaLevelsWithCutscenes);
-            lvls.AddRange(SouthPacificLevelsWithCutscenes);
-            lvls.AddRange(LondonLevelsWithCutscenes);
-            lvls.AddRange(NevadaLevelsWithCutscenes);
-            lvls.AddRange(AntarcticaLevelsWithCutscenes);
-            lvls.Add(ASSAULT);
-            lvls.AddRange(AsListGold);
-            return lvls;
-        }
-    }
+        FLING,
+        LAIR,
+        CLIFF,
+        FISHES,
+        MADHOUSE,
+        REUNION
+    };
 }

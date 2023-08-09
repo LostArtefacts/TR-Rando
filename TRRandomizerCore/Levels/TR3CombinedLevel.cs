@@ -104,19 +104,19 @@ namespace TRRandomizerCore.Levels
         {
             get
             {
-                if (TR3LevelNames.SouthPacificLevels.Contains(Name))
+                if (TR3LevelNames.SouthPacific.Contains(Name))
                 {
                     return TR3Adventure.SouthPacific;
                 }
-                else if (TR3LevelNames.LondonLevels.Contains(Name))
+                else if (TR3LevelNames.London.Contains(Name))
                 {
                     return TR3Adventure.London;
                 }
-                else if (TR3LevelNames.NevadaLevels.Contains(Name))
+                else if (TR3LevelNames.Nevada.Contains(Name))
                 {
                     return TR3Adventure.Nevada;
                 }
-                else if (TR3LevelNames.AntarcticaLevels.Contains(Name))
+                else if (TR3LevelNames.Antarctica.Contains(Name))
                 {
                     return TR3Adventure.Antarctica;
                 }

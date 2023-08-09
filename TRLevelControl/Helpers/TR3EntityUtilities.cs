@@ -9,30 +9,30 @@ public static class TR3EntityUtilities
         [TR3Entities.Lara] = new Dictionary<TR3Entities, List<string>>
         {
             [TR3Entities.LaraIndia]
-                = TR3LevelNames.IndiaLevelsWithCutscenes,
+                = TR3LevelNames.IndiaWithCutscenes,
             [TR3Entities.LaraCoastal]
-                = TR3LevelNames.SouthPacificLevelsWithCutscenes,
+                = TR3LevelNames.SouthPacificWithCutscenes,
             [TR3Entities.LaraLondon]
-                = TR3LevelNames.LondonLevelsWithCutscenes,
+                = TR3LevelNames.LondonWithCutscenes,
             [TR3Entities.LaraNevada]
-                = TR3LevelNames.NevadaLevelsWithCutscenes,
+                = TR3LevelNames.NevadaWithCutscenes,
             [TR3Entities.LaraAntarc]
-                = TR3LevelNames.AntarcticaLevelsWithCutscenes,
+                = TR3LevelNames.AntarcticaWithCutscenes,
             [TR3Entities.LaraHome]
                 = new List<string> { TR3LevelNames.ASSAULT }
         },
         [TR3Entities.LaraSkin_H] = new Dictionary<TR3Entities, List<string>>
         {
             [TR3Entities.LaraSkin_H_India]
-                = TR3LevelNames.IndiaLevelsWithCutscenes,
+                = TR3LevelNames.IndiaWithCutscenes,
             [TR3Entities.LaraSkin_H_Coastal]
-                = TR3LevelNames.SouthPacificLevelsWithCutscenes,
+                = TR3LevelNames.SouthPacificWithCutscenes,
             [TR3Entities.LaraSkin_H_London]
-                = TR3LevelNames.LondonLevelsWithCutscenes,
+                = TR3LevelNames.LondonWithCutscenes,
             [TR3Entities.LaraSkin_H_Nevada]
-                = TR3LevelNames.NevadaLevelsWithCutscenes,
+                = TR3LevelNames.NevadaWithCutscenes,
             [TR3Entities.LaraSkin_H_Antarc]
-                = TR3LevelNames.AntarcticaLevelsWithCutscenes,
+                = TR3LevelNames.AntarcticaWithCutscenes,
             [TR3Entities.LaraSkin_H_Home]
                 = new List<string> { TR3LevelNames.ASSAULT }
         },
