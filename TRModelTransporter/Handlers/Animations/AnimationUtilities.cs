@@ -128,7 +128,9 @@ public static class AnimationUtilities
             int paramCount = (TRAnimCommandTypes)cmd.Value switch
             {
                 TRAnimCommandTypes.SetPosition => 3,
-                TRAnimCommandTypes.JumpDistance or TRAnimCommandTypes.PlaySound or TRAnimCommandTypes.FlipEffect => 2,
+                TRAnimCommandTypes.JumpDistance
+                or TRAnimCommandTypes.PlaySound
+                or TRAnimCommandTypes.FlipEffect => 2,
                 _ => 0,
             };
             short[] paramArr = new short[paramCount];
