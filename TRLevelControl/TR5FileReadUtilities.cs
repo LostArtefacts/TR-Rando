@@ -421,7 +421,7 @@ internal static class TR5FileReadUtilities
             lvl.LevelDataChunk.Overlaps[i] = reader.ReadUInt16();
         }
 
-        for (int i = 0; i < lvl.LevelDataChunk.Zones.Count(); i++)
+        for (int i = 0; i < lvl.LevelDataChunk.Zones.Length; i++)
         {
             lvl.LevelDataChunk.Zones[i] = reader.ReadInt16();
         }
@@ -538,7 +538,7 @@ internal static class TR5FileReadUtilities
         //Sound Map (370 shorts) & Sound Details
         lvl.LevelDataChunk.SoundMap = new short[450];
 
-        for (int i = 0; i < lvl.LevelDataChunk.SoundMap.Count(); i++)
+        for (int i = 0; i < lvl.LevelDataChunk.SoundMap.Length; i++)
         {
             lvl.LevelDataChunk.SoundMap[i] = reader.ReadInt16();
         }

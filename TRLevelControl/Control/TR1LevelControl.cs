@@ -301,7 +301,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         //Light Map - 32 * 256 = 8192 bytes
         _level.LightMap = new byte[32 * 256];
 
-        for (int i = 0; i < _level.LightMap.Count(); i++)
+        for (int i = 0; i < _level.LightMap.Length; i++)
         {
             _level.LightMap[i] = reader.ReadByte();
         }
@@ -329,7 +329,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         //Sound Map & Sound Details
         _level.SoundMap = new short[256];
 
-        for (int i = 0; i < _level.SoundMap.Count(); i++)
+        for (int i = 0; i < _level.SoundMap.Length; i++)
         {
             _level.SoundMap[i] = reader.ReadInt16();
         }

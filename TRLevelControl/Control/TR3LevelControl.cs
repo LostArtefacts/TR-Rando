@@ -53,7 +53,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         {
             _level.Images16[i].Pixels = new ushort[256 * 256];
 
-            for (int j = 0; j < _level.Images16[i].Pixels.Count(); j++)
+            for (int j = 0; j < _level.Images16[i].Pixels.Length; j++)
             {
                 _level.Images16[i].Pixels[j] = reader.ReadUInt16();
             }
@@ -328,7 +328,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         //Light Map - 32 * 256 = 8192 bytes
         _level.LightMap = new byte[32 * 256];
 
-        for (int i = 0; i < _level.LightMap.Count(); i++)
+        for (int i = 0; i < _level.LightMap.Length; i++)
         {
             _level.LightMap[i] = reader.ReadByte();
         }
@@ -354,7 +354,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         //Sound Map (370 shorts = 740 bytes) & Sound Details
         _level.SoundMap = new short[370];
 
-        for (int i = 0; i < _level.SoundMap.Count(); i++)
+        for (int i = 0; i < _level.SoundMap.Length; i++)
         {
             _level.SoundMap[i] = reader.ReadInt16();
         }
