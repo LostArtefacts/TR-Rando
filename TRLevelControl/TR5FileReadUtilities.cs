@@ -17,9 +17,6 @@ internal static class TR5FileReadUtilities
         lvl.LevelDataChunk.Unused = reader.ReadUInt32();
         lvl.LevelDataChunk.NumRooms = reader.ReadUInt32();
         lvl.LevelDataChunk.Rooms = new TR5Room[lvl.LevelDataChunk.NumRooms];
-
-        long lastPosition = 0;
-
         for (int i = 0; i < lvl.LevelDataChunk.NumRooms; i++)
         {
             TR5Room room = new()
@@ -33,8 +30,7 @@ internal static class TR5FileReadUtilities
             Debug.Assert(room.XELALandmark[3] == 'A');
 
             room.RoomDataSize = reader.ReadUInt32();
-            lastPosition = reader.BaseStream.Position;
-
+            long lastPosition = reader.BaseStream.Position;
             room.Seperator = reader.ReadUInt32();
             room.EndSDOffset = reader.ReadUInt32();
             room.StartSDOffset = reader.ReadUInt32();
