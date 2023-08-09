@@ -22,9 +22,9 @@ public class TR4SkyAndFont32Chunk : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 foreach (TR4TexImage32 tex in Textiles) { writer.Write(tex.Serialize()); }
             }

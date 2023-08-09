@@ -66,7 +66,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         for (int i = 0; i < _level.NumRooms; i++)
         {
-            TR2Room room = new TR2Room();
+            TR2Room room = new();
 
             //Grab info
             room.Info = new TRRoomInfo
@@ -387,7 +387,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         for (int i = 0; i < MAX_PALETTE_SIZE; i++)
         {
-            TRColour col = new TRColour();
+            TRColour col = new();
 
             col.Red = palette[ci];
             ci++;
@@ -412,7 +412,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         for (int i = 0; i < MAX_PALETTE_SIZE; i++)
         {
-            TRColour4 col = new TRColour4();
+            TRColour4 col = new();
 
             col.Red = palette[ci];
             ci++;
@@ -437,7 +437,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         int RoomDataOffset = 0;
 
         //Grab detailed room data
-        TR2RoomData RoomData = new TR2RoomData();
+        TR2RoomData RoomData = new();
 
         //Room vertices
         RoomData.NumVertices = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
@@ -447,7 +447,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         for (int j = 0; j < RoomData.NumVertices; j++)
         {
-            TR2RoomVertex vertex = new TR2RoomVertex()
+            TR2RoomVertex vertex = new()
             {
                 Vertex = new TRVertex()
             };
@@ -476,7 +476,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         for (int j = 0; j < RoomData.NumRectangles; j++)
         {
-            TRFace4 face = new TRFace4();
+            TRFace4 face = new();
 
             face.Vertices = new ushort[4];
             face.Vertices[0] = room.Data[RoomDataOffset];
@@ -501,7 +501,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         for (int j = 0; j < RoomData.NumTriangles; j++)
         {
-            TRFace3 face = new TRFace3();
+            TRFace3 face = new();
 
             face.Vertices = new ushort[3];
             face.Vertices[0] = room.Data[RoomDataOffset];
@@ -524,7 +524,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
         for (int j = 0; j < RoomData.NumSprites; j++)
         {
-            TRRoomSprite face = new TRRoomSprite();
+            TRRoomSprite face = new();
 
             face.Vertex = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
             RoomDataOffset++;
@@ -548,14 +548,14 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         // sure to iterate over distinct values only
         meshPointers = meshPointers.Distinct().ToArray();
 
-        List<TRMesh> meshes = new List<TRMesh>();
+        List<TRMesh> meshes = new();
 
-        using (MemoryStream ms = new MemoryStream(target))
-        using (BinaryReader br = new BinaryReader(ms))
+        using (MemoryStream ms = new(target))
+        using (BinaryReader br = new(ms))
         {
             for (int i = 0; i < meshPointers.Length; i++)
             {
-                TRMesh mesh = new TRMesh();
+                TRMesh mesh = new();
                 meshes.Add(mesh);
 
                 uint meshPointer = meshPointers[i];         

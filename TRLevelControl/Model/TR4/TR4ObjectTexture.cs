@@ -29,9 +29,9 @@ public class TR4ObjectTexture : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 writer.Write(Attribute);
                 writer.Write(TileAndFlag);

@@ -99,7 +99,7 @@ public static class TRMeshUtilities
 
     public static TRMesh[] GetModelMeshes(IEnumerable<TRMesh> meshes, uint[] meshPointers, TRModel model)
     {
-        List<TRMesh> modelMeshes = new List<TRMesh>();
+        List<TRMesh> modelMeshes = new();
         uint meshPointer = model.StartingMesh;
         for (uint j = 0; j < model.NumMeshes; j++)
         {
@@ -154,7 +154,7 @@ public static class TRMeshUtilities
 
     public static TRMeshTreeNode[] GetModelMeshTrees(TRMeshTreeNode[] meshTrees, TRModel model)
     {
-        List<TRMeshTreeNode> nodes = new List<TRMeshTreeNode>();
+        List<TRMeshTreeNode> nodes = new();
         int index = (int)model.MeshTree / 4;
         for (int i = 0; i < model.NumMeshes; i++)
         {
@@ -319,7 +319,7 @@ public static class TRMeshUtilities
         int lengthDiff = modifiedMesh.Serialize().Length - previousMeshLength;
         List<uint> pointers = level.MeshPointers.ToList();
         int pointerIndex = pointers.IndexOf(modifiedMesh.Pointer);
-        Dictionary<uint, uint> pointerMap = new Dictionary<uint, uint>();
+        Dictionary<uint, uint> pointerMap = new();
         for (int i = pointerIndex + 1; i < pointers.Count; i++)
         {
             if (pointers[i] > 0)
@@ -351,7 +351,7 @@ public static class TRMeshUtilities
         int lengthDiff = modifiedMesh.Serialize().Length - previousMeshLength;
         List<uint> pointers = level.MeshPointers.ToList();
         int pointerIndex = pointers.IndexOf(modifiedMesh.Pointer);
-        Dictionary<uint, uint> pointerMap = new Dictionary<uint, uint>();
+        Dictionary<uint, uint> pointerMap = new();
         for (int i = pointerIndex + 1; i < pointers.Count; i++)
         {
             if (pointers[i] > 0)
@@ -383,7 +383,7 @@ public static class TRMeshUtilities
         int lengthDiff = modifiedMesh.Serialize().Length - previousMeshLength;
         List<uint> pointers = level.MeshPointers.ToList();
         int pointerIndex = pointers.IndexOf(modifiedMesh.Pointer);
-        Dictionary<uint, uint> pointerMap = new Dictionary<uint, uint>();
+        Dictionary<uint, uint> pointerMap = new();
         for (int i = pointerIndex + 1; i < pointers.Count; i++)
         {
             if (pointers[i] > 0)

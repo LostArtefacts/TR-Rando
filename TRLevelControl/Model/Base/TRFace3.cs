@@ -18,9 +18,9 @@ public class TRFace3 : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 foreach (ushort vertex in Vertices)
                 {
@@ -36,7 +36,7 @@ public class TRFace3 : ISerializableCompact
 
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder(base.ToString());
+        StringBuilder sb = new(base.ToString());
 
         int index = 0;
         foreach (ushort vertex in Vertices)

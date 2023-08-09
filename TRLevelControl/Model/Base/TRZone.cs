@@ -19,9 +19,9 @@ public class TRZone : ISerializableCompact, ICloneable
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 foreach (ushort zone in GroundZones.Values)
                 {

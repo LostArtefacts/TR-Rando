@@ -16,7 +16,7 @@ public class FixedFloat<T, U>
 
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder(base.ToString());
+        StringBuilder sb = new(base.ToString());
 
         sb.Append(" Whole: " + Whole);
         sb.Append(" Fraction: " + Fraction);
@@ -29,9 +29,9 @@ public sealed class FixedFloat32 : FixedFloat<short, ushort>, ISerializableCompa
 {
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 writer.Write(Whole);
                 writer.Write(Fraction);
@@ -46,9 +46,9 @@ public sealed class FixedFloat16 : FixedFloat<byte, byte>, ISerializableCompact
 {
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 writer.Write(Whole);
                 writer.Write(Fraction);

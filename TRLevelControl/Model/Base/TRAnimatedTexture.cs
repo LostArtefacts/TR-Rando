@@ -11,8 +11,8 @@ public class TRAnimatedTexture : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
-        using (BinaryWriter writer = new BinaryWriter(stream))
+        using (MemoryStream stream = new())
+        using (BinaryWriter writer = new(stream))
         {
             writer.Write(NumTextures);
             foreach (ushort texture in Textures)

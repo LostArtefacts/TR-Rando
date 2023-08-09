@@ -6,7 +6,7 @@ namespace TRLevelControl.Helpers;
 
 public static class TR1EntityUtilities
 {
-    public static readonly Dictionary<TREntities, Dictionary<TREntities, List<string>>> LevelEntityAliases = new Dictionary<TREntities, Dictionary<TREntities, List<string>>>
+    public static readonly Dictionary<TREntities, Dictionary<TREntities, List<string>>> LevelEntityAliases = new()
     {
         [TREntities.FlyingAtlantean] = new Dictionary<TREntities, List<string>>
         {
@@ -31,7 +31,7 @@ public static class TR1EntityUtilities
         }
     };
 
-    public static readonly Dictionary<TREntities, List<TREntities>> EntityFamilies = new Dictionary<TREntities, List<TREntities>>
+    public static readonly Dictionary<TREntities, List<TREntities>> EntityFamilies = new()
     {
         [TREntities.FlyingAtlantean] = new List<TREntities>
         {
@@ -90,7 +90,7 @@ public static class TR1EntityUtilities
 
     public static List<TREntities> RemoveAliases(IEnumerable<TREntities> entities)
     {
-        List<TREntities> ents = new List<TREntities>();
+        List<TREntities> ents = new();
         foreach (TREntities ent in entities)
         {
             TREntities normalisedEnt = TranslateEntityAlias(ent);
@@ -335,7 +335,7 @@ public static class TR1EntityUtilities
 
     public static List<TREntities> GetFullListOfEnemies()
     {
-        List<TREntities> enemies = new List<TREntities>
+        List<TREntities> enemies = new()
         {
             // This ensures aliases are covered
             TREntities.FlyingAtlantean, TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N, TREntities.Cowboy
@@ -386,7 +386,7 @@ public static class TR1EntityUtilities
 
     public static List<TREntities> FilterWaterEnemies(List<TREntities> entities)
     {
-        List<TREntities> waterEntities = new List<TREntities>();
+        List<TREntities> waterEntities = new();
         foreach (TREntities entity in entities)
         {
             if (IsWaterCreature(entity))
@@ -539,7 +539,7 @@ public static class TR1EntityUtilities
         return _levelSecretModels.ContainsKey(lvl) ? _levelSecretModels[lvl] : GetSecretModels().Keys.FirstOrDefault();
     }
 
-    private static readonly Dictionary<string, TREntities> _levelSecretModels = new Dictionary<string, TREntities>
+    private static readonly Dictionary<string, TREntities> _levelSecretModels = new()
     {
         [TR1LevelNames.CAVES]
             = TREntities.SecretScion_M_H,

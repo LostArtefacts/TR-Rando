@@ -19,9 +19,9 @@ public class TR4MeshFace3 : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 foreach (ushort vert in Vertices) { writer.Write(vert); }
                 writer.Write(Texture);

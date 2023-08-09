@@ -65,8 +65,8 @@ public class FloorPlan
     {
         // Scan the floor using positive then negative lookup - the
         // method that produces the fewest boxes wins.
-        List<Rectangle> positiveScans = new List<Rectangle>(_scans);
-        List<Rectangle> negativeScans = new List<Rectangle>(_scans);
+        List<Rectangle> positiveScans = new(_scans);
+        List<Rectangle> negativeScans = new(_scans);
         MergeFloorSpace(positiveScans, true);
         MergeFloorSpace(negativeScans, false);
         _scans.Clear();

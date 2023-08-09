@@ -20,7 +20,7 @@ internal static class TR4FileReadUtilities
 
         for (int i = 0; i < lvl.LevelDataChunk.NumRooms; i++)
         {
-            TR4Room room = new TR4Room();
+            TR4Room room = new();
 
             //Grab info
             room.Info = new TRRoomInfo
@@ -399,7 +399,7 @@ internal static class TR4FileReadUtilities
         int RoomDataOffset = 0;
 
         //Grab detailed room data
-        TR3RoomData RoomData = new TR3RoomData();
+        TR3RoomData RoomData = new();
 
         //Room vertices
         RoomData.NumVertices = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
@@ -409,7 +409,7 @@ internal static class TR4FileReadUtilities
 
         for (int j = 0; j < RoomData.NumVertices; j++)
         {
-            TR3RoomVertex vertex = new TR3RoomVertex()
+            TR3RoomVertex vertex = new()
             {
                 Vertex = new TRVertex()
             };
@@ -438,7 +438,7 @@ internal static class TR4FileReadUtilities
 
         for (int j = 0; j < RoomData.NumRectangles; j++)
         {
-            TRFace4 face = new TRFace4();
+            TRFace4 face = new();
 
             face.Vertices = new ushort[4];
             face.Vertices[0] = room.Data[RoomDataOffset];
@@ -463,7 +463,7 @@ internal static class TR4FileReadUtilities
 
         for (int j = 0; j < RoomData.NumTriangles; j++)
         {
-            TRFace3 face = new TRFace3();
+            TRFace3 face = new();
 
             face.Vertices = new ushort[3];
             face.Vertices[0] = room.Data[RoomDataOffset];
@@ -486,7 +486,7 @@ internal static class TR4FileReadUtilities
 
         for (int j = 0; j < RoomData.NumSprites; j++)
         {
-            TRRoomSprite face = new TRRoomSprite();
+            TRRoomSprite face = new();
 
             face.Vertex = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
             RoomDataOffset++;
@@ -536,14 +536,14 @@ internal static class TR4FileReadUtilities
         // sure to iterate over distinct values only
         meshPointers = meshPointers.Distinct().ToArray();
 
-        List<TR4Mesh> meshes = new List<TR4Mesh>();
+        List<TR4Mesh> meshes = new();
 
-        using (MemoryStream ms = new MemoryStream(target))
-        using (BinaryReader br = new BinaryReader(ms))
+        using (MemoryStream ms = new(target))
+        using (BinaryReader br = new(ms))
         {
             for (int i = 0; i < meshPointers.Length; i++)
             {
-                TR4Mesh mesh = new TR4Mesh();
+                TR4Mesh mesh = new();
                 meshes.Add(mesh);
 
                 uint meshPointer = meshPointers[i];

@@ -57,13 +57,13 @@ public class TR4LevelNames
         .Append(TIMES)
         .ToList();
 
-    public static List<string> Cambodia => new List<string>
+    public static List<string> Cambodia => new()
     {
         ANGKOR,
         IRIS_RACE
     };
 
-    public static List<string> ValleyOfTheKings => new List<string>
+    public static List<string> ValleyOfTheKings => new()
     {
         SETH,
         BURIAL,
@@ -71,7 +71,7 @@ public class TR4LevelNames
         KV5
     };
 
-    public static List<string> Karnak => new List<string>
+    public static List<string> Karnak => new()
     {
         KARNAK,
         HYPOSTYLE,
@@ -81,7 +81,7 @@ public class TR4LevelNames
         TRAIN,
     };
 
-    public static List<string> Alexandria => new List<string>
+    public static List<string> Alexandria => new()
     {
         ALEXANDRIA,
         COASTAL,
@@ -93,7 +93,7 @@ public class TR4LevelNames
         DEMETRIUS,
     };
 
-    public static List<string> Cairo => new List<string>
+    public static List<string> Cairo => new()
     {
         CITY,
         TRENCHES,
@@ -103,7 +103,7 @@ public class TR4LevelNames
         CITADEL
     };
 
-    public static List<string> Giza => new List<string>
+    public static List<string> Giza => new()
     {
         SPHINX_COMPLEX,
         SPHINX_UNDER,

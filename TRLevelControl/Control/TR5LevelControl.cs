@@ -79,7 +79,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         for (int i = 0; i < _level.NumSamples; i++)
         {
-            TR4Sample sample = new TR4Sample
+            TR4Sample sample = new()
             {
                 UncompSize = reader.ReadUInt32(),
                 CompSize = reader.ReadUInt32(),
@@ -115,7 +115,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         //Copy from tiles to textile objects
         for (int i = 0; i < lvl.Texture32Chunk.Textiles.Length; i++)
         {
-            TR4TexImage32 tex = new TR4TexImage32
+            TR4TexImage32 tex = new()
             {
                 Tile = new uint[256 * 256]
             };
@@ -145,7 +145,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         //Copy from tiles to textile objects
         for (int i = 0; i < lvl.Texture16Chunk.Textiles.Length; i++)
         {
-            TRTexImage16 tex = new TRTexImage16
+            TRTexImage16 tex = new()
             {
                 Pixels = new ushort[256 * 256]
             };
@@ -175,7 +175,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         //Copy from tiles to textile objects
         for (int i = 0; i < lvl.SkyAndFont32Chunk.Textiles.Length; i++)
         {
-            TR4TexImage32 tex = new TR4TexImage32
+            TR4TexImage32 tex = new()
             {
                 Tile = new uint[256 * 256]
             };
@@ -195,9 +195,9 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         //Is the decompressed chunk the size we expected?
         Debug.Assert(buffer.Length == lvl.LevelDataChunk.UncompressedSize);
 
-        using (MemoryStream stream = new MemoryStream(buffer, false))
+        using (MemoryStream stream = new(buffer, false))
         {
-            using (BinaryReader lvlChunkReader = new BinaryReader(stream))
+            using (BinaryReader lvlChunkReader = new(stream))
             {
                 TR5FileReadUtilities.PopulateRooms(lvlChunkReader, lvl);
                 TR5FileReadUtilities.PopulateFloordata(lvlChunkReader, lvl);

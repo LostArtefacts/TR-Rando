@@ -24,7 +24,7 @@ public class TRBoundingBox : ISerializableCompact
 
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder(base.ToString());
+        StringBuilder sb = new(base.ToString());
 
         sb.Append(" MinX: " + MinX);
         sb.Append(" MaxX: " + MaxX);
@@ -38,9 +38,9 @@ public class TRBoundingBox : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 writer.Write(MinX);
                 writer.Write(MaxX);

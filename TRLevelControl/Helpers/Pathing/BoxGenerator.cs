@@ -73,7 +73,7 @@ public class BoxGenerator
     {
         for (sbyte height = room.Floor; height > room.Ceiling; height--)
         {
-            FloorPlan plan = new FloorPlan(room.NumZSectors);
+            FloorPlan plan = new(room.NumZSectors);
 
             for (int x = 1; x < room.NumXSectors - 1; x++)
             {

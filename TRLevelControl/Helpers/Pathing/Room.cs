@@ -59,7 +59,7 @@ public class Room
 
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
         for (int z = NumZSectors - 1; z >= 0; z--)
         {
             for (int x = 0; x < NumXSectors; x++)

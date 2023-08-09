@@ -143,7 +143,7 @@ public class TR3Room : ISerializableCompact
             } 
             else if (light.LightType == SPOT_LIGHT_TYPE)
             {
-                TR3RoomSpotlight spotLight = new TR3RoomSpotlight
+                TR3RoomSpotlight spotLight = new()
                 {
                     Intensity = ((light.LightProperties[0] << 16) | ((light.LightProperties[1]) & 0xffff)),
                     Fade = ((light.LightProperties[2] << 16) | ((light.LightProperties[3]) & 0xffff))
@@ -241,9 +241,9 @@ public class TR3Room : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 writer.Write(Info.Serialize());
                 writer.Write(NumDataWords);

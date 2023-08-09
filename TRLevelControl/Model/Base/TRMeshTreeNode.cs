@@ -20,7 +20,7 @@ public class TRMeshTreeNode : ISerializableCompact
 
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder(base.ToString());
+        StringBuilder sb = new(base.ToString());
 
         sb.Append(" Flags: " + Flags.ToString("X8"));
         sb.Append(" OffsetX: " + OffsetX);
@@ -32,9 +32,9 @@ public class TRMeshTreeNode : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 writer.Write(Flags);
                 writer.Write(OffsetX);

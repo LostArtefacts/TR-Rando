@@ -72,7 +72,7 @@ public class TR2Entity : ISerializableCompact, ICloneable
 
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder(base.ToString());
+        StringBuilder sb = new(base.ToString());
 
         sb.Append(" TypeID: " + TypeID);
         sb.Append(" Room: " + Room);
@@ -89,9 +89,9 @@ public class TR2Entity : ISerializableCompact, ICloneable
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 writer.Write(TypeID);
                 writer.Write(Room);

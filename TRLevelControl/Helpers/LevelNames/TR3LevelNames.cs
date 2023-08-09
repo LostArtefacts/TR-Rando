@@ -256,7 +256,7 @@ public static class TR3LevelNames
     {
         get
         {
-            List<string> lvls = new List<string>();
+            List<string> lvls = new();
             lvls.AddRange(IndiaLevelsWithCutscenes);
             lvls.AddRange(SouthPacificLevelsWithCutscenes);
             lvls.AddRange(LondonLevelsWithCutscenes);

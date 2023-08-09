@@ -86,7 +86,7 @@ public class TR2BoxUtilities
         IEnumerable<FlipStatus> flipValues = Enum.GetValues(typeof(FlipStatus)).Cast<FlipStatus>();
         IEnumerable<TR2Zones> zoneValues = Enum.GetValues(typeof(TR2Zones)).Cast<TR2Zones>();
 
-        List<ushort> zones = new List<ushort>();
+        List<ushort> zones = new();
 
         foreach (FlipStatus flip in flipValues)
         {
@@ -151,7 +151,7 @@ public class TR2BoxUtilities
 
     private static List<ushort> GetOverlaps(ushort[] allOverlaps, TR2Box box, short noOverlap)
     {
-        List<ushort> overlaps = new List<ushort>();
+        List<ushort> overlaps = new();
 
         if (box.OverlapIndex != noOverlap)
         {
@@ -176,7 +176,7 @@ public class TR2BoxUtilities
 
     public static void UpdateOverlaps(TR2Level level, TR2Box box, List<ushort> overlaps)
     {
-        List<ushort> newOverlaps = new List<ushort>();
+        List<ushort> newOverlaps = new();
         foreach (TR2Box lvlBox in level.Boxes)
         {
             // Either append the current overlaps, or the new ones if this is the box being updated.
@@ -192,7 +192,7 @@ public class TR2BoxUtilities
 
     public static void UpdateOverlaps(TR3Level level, TR2Box box, List<ushort> overlaps)
     {
-        List<ushort> newOverlaps = new List<ushort>();
+        List<ushort> newOverlaps = new();
         foreach (TR2Box lvlBox in level.Boxes)
         {
             List<ushort> boxOverlaps = lvlBox == box ? overlaps : GetOverlaps(level, lvlBox);

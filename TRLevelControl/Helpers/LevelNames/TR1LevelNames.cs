@@ -82,7 +82,7 @@ public static class TR1LevelNames
     {
         get
         {
-            List<string> lvls = new List<string>
+            List<string> lvls = new()
             {
                 CAVES,
                 VILCABAMBA,

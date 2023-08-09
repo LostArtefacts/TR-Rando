@@ -34,9 +34,9 @@ public class TR5RoomData : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 foreach (TR5RoomLight light in Lights) { writer.Write(light.Serialize()); }
                 foreach (TR5FogBulb fbulb in FogBulbs) { writer.Write(fbulb.Serialize()); }
@@ -63,9 +63,9 @@ public class TR5RoomData : ISerializableCompact
     {
         if (AsBytes != null)
         {
-            using (MemoryStream stream = new MemoryStream())
+            using (MemoryStream stream = new())
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
+                using (BinaryWriter writer = new(stream))
                 {
                     foreach (TR5RoomLight light in Lights) { writer.Write(light.Serialize()); }
                     foreach (TR5FogBulb fbulb in FogBulbs) { writer.Write(fbulb.Serialize()); }

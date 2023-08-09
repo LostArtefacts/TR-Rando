@@ -6,7 +6,7 @@ namespace TRLevelControl.Helpers;
 
 public static class TR3EntityUtilities
 {
-    public static readonly Dictionary<TR3Entities, Dictionary<TR3Entities, List<string>>> LevelEntityAliases = new Dictionary<TR3Entities, Dictionary<TR3Entities, List<string>>>
+    public static readonly Dictionary<TR3Entities, Dictionary<TR3Entities, List<string>>> LevelEntityAliases = new()
     {
         [TR3Entities.Lara] = new Dictionary<TR3Entities, List<string>>
         {
@@ -97,7 +97,7 @@ public static class TR3EntityUtilities
 
     public static List<TR3Entities> RemoveAliases(IEnumerable<TR3Entities> entities)
     {
-        List<TR3Entities> ents = new List<TR3Entities>();
+        List<TR3Entities> ents = new();
         foreach (TR3Entities ent in entities)
         {
             TR3Entities normalisedEnt = TranslateEntityAlias(ent);
@@ -424,7 +424,7 @@ public static class TR3EntityUtilities
 
     public static List<TR3Entities> GetFullListOfEnemies()
     {
-        List<TR3Entities> enemies = new List<TR3Entities>
+        List<TR3Entities> enemies = new()
         {
             TR3Entities.SophiaLee, TR3Entities.Puna, TR3Entities.CrawlerMutantInCloset, TR3Entities.Cobra, TR3Entities.Dog
         };
@@ -450,7 +450,7 @@ public static class TR3EntityUtilities
 
     public static List<TR3Entities> FilterWaterEnemies(List<TR3Entities> entities)
     {
-        List<TR3Entities> waterEntities = new List<TR3Entities>();
+        List<TR3Entities> waterEntities = new();
         foreach (TR3Entities entity in entities)
         {
             if (IsWaterCreature(entity))
@@ -477,7 +477,7 @@ public static class TR3EntityUtilities
 
     public static List<TR3Entities> FilterDroppableEnemies(List<TR3Entities> entities, bool protectFriendlyEnemies)
     {
-        List<TR3Entities> droppableEntities = new List<TR3Entities>();
+        List<TR3Entities> droppableEntities = new();
         foreach (TR3Entities entity in entities)
         {
             if (CanDropPickups(entity, protectFriendlyEnemies))
@@ -490,7 +490,7 @@ public static class TR3EntityUtilities
 
     public static List<TR3Entities> GetDroppableEnemies(bool protectFriendlyEnemies)
     {
-        List<TR3Entities> enemies = new List<TR3Entities>
+        List<TR3Entities> enemies = new()
         {
             TR3Entities.BruteMutant,
             TR3Entities.CobraIndia,

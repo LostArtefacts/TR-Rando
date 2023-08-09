@@ -25,14 +25,14 @@ public class TR5LevelNames
         .Concat(VCI)
         .ToList();
 
-    public static List<string> Rome => new List<string>
+    public static List<string> Rome => new()
     {
         ROME,
         MARKETS,
         COLOSSEUM
     };
 
-    public static List<string> Russia => new List<string>
+    public static List<string> Russia => new()
     {
         BASE,
         SUBMARINE,
@@ -40,14 +40,14 @@ public class TR5LevelNames
         SINKING
     };
 
-    public static List<string> Ireland => new List<string>
+    public static List<string> Ireland => new()
     {
         GALLOWS,
         LABYRINTH,
         MILL
     };
 
-    public static List<string> VCI => new List<string>
+    public static List<string> VCI => new()
     {
         FLOOR13,
         ESCAPE,

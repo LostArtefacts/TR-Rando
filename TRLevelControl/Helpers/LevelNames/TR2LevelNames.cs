@@ -92,7 +92,7 @@ public static class TR2LevelNames
     {
         get
         {
-            List<string> lvls = new List<string>
+            List<string> lvls = new()
             {
                 GW,
                 GW_CUT,

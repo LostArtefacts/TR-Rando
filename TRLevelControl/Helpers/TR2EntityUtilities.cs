@@ -5,7 +5,7 @@ namespace TRLevelControl.Helpers;
 
 public static class TR2EntityUtilities
 {
-    public static readonly Dictionary<TR2Entities, Dictionary<TR2Entities, List<string>>> LevelEntityAliases = new Dictionary<TR2Entities, Dictionary<TR2Entities, List<string>>>
+    public static readonly Dictionary<TR2Entities, Dictionary<TR2Entities, List<string>>> LevelEntityAliases = new()
     {
         [TR2Entities.Lara] = new Dictionary<TR2Entities, List<string>>
         {
@@ -67,7 +67,7 @@ public static class TR2EntityUtilities
         }
     };
 
-    public static readonly Dictionary<TR2Entities, List<TR2Entities>> EntityFamilies = new Dictionary<TR2Entities, List<TR2Entities>>
+    public static readonly Dictionary<TR2Entities, List<TR2Entities>> EntityFamilies = new()
     {
         [TR2Entities.Lara] = new List<TR2Entities>
         {
@@ -139,7 +139,7 @@ public static class TR2EntityUtilities
 
     public static List<TR2Entities> RemoveAliases(IEnumerable<TR2Entities> entities)
     {
-        List<TR2Entities> ents = new List<TR2Entities>();
+        List<TR2Entities> ents = new();
         foreach (TR2Entities ent in entities)
         {
             TR2Entities normalisedEnt = TranslateEntityAlias(ent);
@@ -214,7 +214,7 @@ public static class TR2EntityUtilities
 
     public static List<TR2Entities> GetCrossLevelDroppableEnemies(bool monksAreKillable, bool unconditionalChickens)
     {
-        List<TR2Entities> entities = new List<TR2Entities>
+        List<TR2Entities> entities = new()
         {
             TR2Entities.BengalTiger,
             TR2Entities.Crow,
@@ -705,7 +705,7 @@ public static class TR2EntityUtilities
 
     public static List<TR2Entities> FilterWaterEnemies(List<TR2Entities> entities)
     {
-        List<TR2Entities> waterEntities = new List<TR2Entities>();
+        List<TR2Entities> waterEntities = new();
         foreach (TR2Entities entity in entities)
         {
             if (IsWaterCreature(entity))
@@ -744,7 +744,7 @@ public static class TR2EntityUtilities
 
     public static List<TR2Entities> FilterDroppableEnemies(List<TR2Entities> entities, bool monksAreKillable, bool unconditionalChickens)
     {
-        List<TR2Entities> droppableEntities = new List<TR2Entities>();
+        List<TR2Entities> droppableEntities = new();
         foreach (TR2Entities entity in entities)
         {
             if (CanDropPickups(entity, monksAreKillable, unconditionalChickens))

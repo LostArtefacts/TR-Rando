@@ -30,7 +30,7 @@ public class TRSpriteTexture : ISerializableCompact
 
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder(base.ToString());
+        StringBuilder sb = new(base.ToString());
 
         sb.Append(" Atlas: " + Atlas);
         sb.Append(" X: " + X);
@@ -47,9 +47,9 @@ public class TRSpriteTexture : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 writer.Write(Atlas);
                 writer.Write(X);

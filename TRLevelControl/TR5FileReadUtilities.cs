@@ -22,7 +22,7 @@ internal static class TR5FileReadUtilities
 
         for (int i = 0; i < lvl.LevelDataChunk.NumRooms; i++)
         {
-            TR5Room room = new TR5Room();
+            TR5Room room = new();
 
             room.XELALandmark = reader.ReadBytes(4);
 
@@ -40,7 +40,7 @@ internal static class TR5FileReadUtilities
             room.Seperator2 = reader.ReadUInt32();
             room.EndPortalOffset = reader.ReadUInt32();
 
-            TR5RoomInfo info = new TR5RoomInfo
+            TR5RoomInfo info = new()
             {
                 X = reader.ReadInt32(),
                 Y = reader.ReadInt32(),
@@ -123,7 +123,7 @@ internal static class TR5FileReadUtilities
 
             //Room data is currently read as bytes.
             //To modify in future we will need to parse properly.
-            TR5RoomData data = new TR5RoomData();
+            TR5RoomData data = new();
             data.AsBytes = reader.ReadBytes((int)(lastPosition + room.RoomDataSize) - (int)afterhdr);
 
             PopulateLightsBulbsAndSectors(room, data);
@@ -137,9 +137,9 @@ internal static class TR5FileReadUtilities
     {
         if (data.AsBytes != null)
         {
-            using (MemoryStream stream = new MemoryStream(data.AsBytes, false))
+            using (MemoryStream stream = new(data.AsBytes, false))
             {
-                using (BinaryReader rdatareader = new BinaryReader(stream))
+                using (BinaryReader rdatareader = new(stream))
                 {
                     data.Lights = new TR5RoomLight[room.NumLights];
                     data.FogBulbs = new TR5FogBulb[room.NumFogBulbs];

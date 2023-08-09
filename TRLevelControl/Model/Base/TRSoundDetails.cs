@@ -65,7 +65,7 @@ public class TRSoundDetails : ISerializableCompact
 
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder(base.ToString());
+        StringBuilder sb = new(base.ToString());
 
         sb.Append(" Sample: " + Sample);
         sb.Append(" Volume: " + Volume);
@@ -78,9 +78,9 @@ public class TRSoundDetails : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (BinaryWriter writer = new(stream))
             {
                 writer.Write(Sample);
                 writer.Write(Volume);

@@ -61,8 +61,8 @@ public class TRMesh : ISerializableCompact
 
     public byte[] Serialize()
     {
-        using (MemoryStream stream = new MemoryStream())
-        using (BinaryWriter writer = new BinaryWriter(stream))
+        using (MemoryStream stream = new())
+        using (BinaryWriter writer = new(stream))
         {
             writer.Write(Centre.Serialize());
             writer.Write(CollRadius);
