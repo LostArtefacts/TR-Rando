@@ -335,17 +335,22 @@ public class DynamicTextureBuilder
         Dictionary<int, int> reindex = new();
         foreach (TexturedTileSegment segment in duplicates)
         {
-            foreach (IndexedTRObjectTexture texture in segment.Textures)
+            foreach (AbstractIndexedTRTexture texture in segment.Textures)
             {
+                if (texture is not IndexedTRObjectTexture objTexture)
+                {
+                    continue;
+                }
+
                 int newIndex;
                 if (reusableIndices.Count > 0)
                 {
                     newIndex = reusableIndices.Dequeue();
-                    levelObjectTextures[newIndex] = texture.Texture;
+                    levelObjectTextures[newIndex] = objTexture.Texture;
                 }
                 else if (levelObjectTextures.Count < maximumObjects)
                 {
-                    levelObjectTextures.Add(texture.Texture);
+                    levelObjectTextures.Add(objTexture.Texture);
                     newIndex = levelObjectTextures.Count - 1;
                 }
                 else
@@ -353,7 +358,7 @@ public class DynamicTextureBuilder
                     throw new PackingException(string.Format("Limit of {0} textures reached.", maximumObjects));
                 }
 
-                reindex[texture.Index] = newIndex;
+                reindex[objTexture.Index] = newIndex;
             }
         }
 
