@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace TRRandomizerCore.Processors
+namespace TRRandomizerCore.Processors;
+
+public interface ILevelProcessor
 {
-    public interface ILevelProcessor
-    {
-        void HandleException(Exception e);
-        bool TriggerProgress(int progress);
-    }
+    void HandleException(Exception e);
+    bool TriggerProgress(int progress);
 }

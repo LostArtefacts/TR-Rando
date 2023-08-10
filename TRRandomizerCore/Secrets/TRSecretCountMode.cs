@@ -1,9 +1,8 @@
-﻿namespace TRRandomizerCore.Secrets
+﻿namespace TRRandomizerCore.Secrets;
+
+public enum TRSecretCountMode
 {
-    public enum TRSecretCountMode
-    {
-        Default,
-        Shuffled,
-        Customized
-    }
+    Default,
+    Shuffled,
+    Customized
 }

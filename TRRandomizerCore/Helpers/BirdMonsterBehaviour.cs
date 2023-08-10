@@ -1,7 +1,6 @@
-﻿namespace TRRandomizerCore.Helpers
+﻿namespace TRRandomizerCore.Helpers;
+
+public enum BirdMonsterBehaviour
 {
-    public enum BirdMonsterBehaviour
-    {
-        Default, Unconditional, Docile
-    }
+    Default, Unconditional, Docile
 }

@@ -4,123 +4,122 @@ using System.IO;
 using System.Runtime.ExceptionServices;
 using TRGE.Core;
 
-namespace TRRandomizerCore.Processors
+namespace TRRandomizerCore.Processors;
+
+public abstract class AbstractLevelProcessor<S, C> : ILevelProcessor where S : AbstractTRScriptedLevel
 {
-    public abstract class AbstractLevelProcessor<S, C> : ILevelProcessor where S : AbstractTRScriptedLevel
+    protected uint _maxThreads;
+    protected C _levelInstance; // Combined script/data level
+
+    protected ExceptionDispatchInfo _processingException;
+
+    protected readonly object _controlLock, _monitorLock;
+
+    internal AbstractTRScriptEditor ScriptEditor { get; set; }
+    internal List<S> Levels { get; set; }
+    internal TRSaveMonitor SaveMonitor;
+
+    // The WIP folder where levels are saved before being copied to the target at the end of the process
+    public string BasePath { get; set; }
+    // The backup folder that contains the untouched levels from when the user first opened the folder
+    public string BackupPath { get; set; }
+
+    public AbstractLevelProcessor()
     {
-        protected uint _maxThreads;
-        protected C _levelInstance; // Combined script/data level
+        _controlLock = new();
+        _monitorLock = new();
 
-        protected ExceptionDispatchInfo _processingException;
+        _maxThreads = 3;
+    }
 
-        protected readonly object _controlLock, _monitorLock;
+    protected void LoadLevelInstance(S scriptedLevel)
+    {
+        _levelInstance = LoadCombinedLevel(scriptedLevel);
+    }
 
-        internal AbstractTRScriptEditor ScriptEditor { get; set; }
-        internal List<S> Levels { get; set; }
-        internal TRSaveMonitor SaveMonitor;
+    protected abstract C LoadCombinedLevel(S scriptedLevel);
 
-        // The WIP folder where levels are saved before being copied to the target at the end of the process
-        public string BasePath { get; set; }
-        // The backup folder that contains the untouched levels from when the user first opened the folder
-        public string BackupPath { get; set; }
+    protected void ReloadLevelInstanceData()
+    {
+        ReloadLevelData(_levelInstance);
+    }
 
-        public AbstractLevelProcessor()
+    protected abstract void ReloadLevelData(C level);     
+
+    protected void SaveLevelInstance()
+    {
+        SaveLevel(_levelInstance);
+    }
+
+    protected abstract void SaveLevel(C level);
+
+    protected void SaveScript()
+    {
+        lock (_controlLock)
         {
-            _controlLock = new();
-            _monitorLock = new();
-
-            _maxThreads = 3;
+            // Save any script changes.
+            ScriptEditor.SaveScript();
         }
+    }
 
-        protected void LoadLevelInstance(S scriptedLevel)
+    /// <summary>
+    /// Informs the save monitor to update its progress by 1.
+    /// </summary>
+    /// <returns>True if the save process has not been cancelled and the current error state is null.</returns>
+    public bool TriggerProgress(int progress = 1)
+    {
+        lock (_monitorLock)
         {
-            _levelInstance = LoadCombinedLevel(scriptedLevel);
+            SaveMonitor.FireSaveStateChanged(progress);
+            return !SaveMonitor.IsCancelled && _processingException == null;
         }
+    }
 
-        protected abstract C LoadCombinedLevel(S scriptedLevel);
-
-        protected void ReloadLevelInstanceData()
+    internal void SetMessage(string text)
+    {
+        lock (_monitorLock)
         {
-            ReloadLevelData(_levelInstance);
+            SaveMonitor.FireSaveStateChanged(customDescription: text);
         }
+    }
 
-        protected abstract void ReloadLevelData(C level);     
-
-        protected void SaveLevelInstance()
+    internal void SetWarning(string text)
+    {
+        lock (_monitorLock)
         {
-            SaveLevel(_levelInstance);
+            SaveMonitor.FireSaveStateChanged(category: TRSaveCategory.Warning, customDescription: text);
         }
+    }
 
-        protected abstract void SaveLevel(C level);
-
-        protected void SaveScript()
+    public void HandleException(Exception e)
+    {
+        lock (_monitorLock)
         {
-            lock (_controlLock)
+            if (_processingException == null)
             {
-                // Save any script changes.
-                ScriptEditor.SaveScript();
+                _processingException = ExceptionDispatchInfo.Capture(e);
             }
         }
+    }
 
-        /// <summary>
-        /// Informs the save monitor to update its progress by 1.
-        /// </summary>
-        /// <returns>True if the save process has not been cancelled and the current error state is null.</returns>
-        public bool TriggerProgress(int progress = 1)
-        {
-            lock (_monitorLock)
-            {
-                SaveMonitor.FireSaveStateChanged(progress);
-                return !SaveMonitor.IsCancelled && _processingException == null;
-            }
-        }
+    protected bool ResourceExists(string filePath)
+    {
+        return File.Exists(GetResourcePath(filePath));
+    }
 
-        internal void SetMessage(string text)
-        {
-            lock (_monitorLock)
-            {
-                SaveMonitor.FireSaveStateChanged(customDescription: text);
-            }
-        }
+    protected string GetResourcePath(string filePath)
+    {
+        return Path.Combine("Resources", filePath);
+    }
 
-        internal void SetWarning(string text)
-        {
-            lock (_monitorLock)
-            {
-                SaveMonitor.FireSaveStateChanged(category: TRSaveCategory.Warning, customDescription: text);
-            }
-        }
+    protected string ReadResource(string filePath)
+    {
+        return File.ReadAllText(GetResourcePath(filePath));
+    }
 
-        public void HandleException(Exception e)
-        {
-            lock (_monitorLock)
-            {
-                if (_processingException == null)
-                {
-                    _processingException = ExceptionDispatchInfo.Capture(e);
-                }
-            }
-        }
-
-        protected bool ResourceExists(string filePath)
-        {
-            return File.Exists(GetResourcePath(filePath));
-        }
-
-        protected string GetResourcePath(string filePath)
-        {
-            return Path.Combine("Resources", filePath);
-        }
-
-        protected string ReadResource(string filePath)
-        {
-            return File.ReadAllText(GetResourcePath(filePath));
-        }
-
-        public string GetBackupChecksum(string filePath)
-        {
-            string fullPath = Path.Combine(BackupPath, filePath);
-            return new FileInfo(fullPath).Checksum();
-        }
+    public string GetBackupChecksum(string filePath)
+    {
+        string fullPath = Path.Combine(BackupPath, filePath);
+        return new FileInfo(fullPath).Checksum();
     }
 }

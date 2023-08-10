@@ -5,89 +5,88 @@ using TRGE.Core;
 using TRModelTransporter.Utilities;
 using TRLevelControl.Model.Enums;
 
-namespace TRRandomizerCore.Processors
+namespace TRRandomizerCore.Processors;
+
+internal class TR2TextureDeduplicator : TR2LevelProcessor
 {
-    internal class TR2TextureDeduplicator : TR2LevelProcessor
+    public void Deduplicate()
     {
-        public void Deduplicate()
+        List<DeduplicationProcessor> processors = new List<DeduplicationProcessor> { new DeduplicationProcessor(this) };
+        int levelSplit = (int)(Levels.Count / _maxThreads);
+
+        bool beginProcessing = true;
+        foreach (TR2ScriptedLevel lvl in Levels)
         {
-            List<DeduplicationProcessor> processors = new List<DeduplicationProcessor> { new DeduplicationProcessor(this) };
-            int levelSplit = (int)(Levels.Count / _maxThreads);
-
-            bool beginProcessing = true;
-            foreach (TR2ScriptedLevel lvl in Levels)
+            if (processors[processors.Count - 1].LevelCount == levelSplit)
             {
-                if (processors[processors.Count - 1].LevelCount == levelSplit)
-                {
-                    // Kick start the last one
-                    processors[processors.Count - 1].Start();
-                    processors.Add(new DeduplicationProcessor(this));
-                }
-
-                processors[processors.Count - 1].AddLevel(LoadCombinedLevel(lvl));
-
-                if (!TriggerProgress())
-                {
-                    beginProcessing = false;
-                    break;
-                }
+                // Kick start the last one
+                processors[processors.Count - 1].Start();
+                processors.Add(new DeduplicationProcessor(this));
             }
 
-            if (beginProcessing)
-            {
-                foreach (DeduplicationProcessor processor in processors)
-                {
-                    processor.Start();
-                }
+            processors[processors.Count - 1].AddLevel(LoadCombinedLevel(lvl));
 
-                foreach (DeduplicationProcessor processor in processors)
-                {
-                    processor.Join();
-                }
-            }
-
-            if (_processingException != null)
+            if (!TriggerProgress())
             {
-                _processingException.Throw();
+                beginProcessing = false;
+                break;
             }
         }
 
-        internal class DeduplicationProcessor : AbstractProcessorThread<TR2TextureDeduplicator>
+        if (beginProcessing)
         {
-            private readonly List<TR2CombinedLevel> _levels;
-            private readonly TR2LevelTextureDeduplicator _deduplicator;
-
-            internal override int LevelCount => _levels.Count;
-
-            internal DeduplicationProcessor(TR2TextureDeduplicator outer)
-                :base(outer)
+            foreach (DeduplicationProcessor processor in processors)
             {
-                _levels = new List<TR2CombinedLevel>();
-                _deduplicator = new TR2LevelTextureDeduplicator();
+                processor.Start();
             }
 
-            internal void AddLevel(TR2CombinedLevel level)
+            foreach (DeduplicationProcessor processor in processors)
             {
-                _levels.Add(level);
+                processor.Join();
             }
+        }
 
-            protected override void ProcessImpl()
+        if (_processingException != null)
+        {
+            _processingException.Throw();
+        }
+    }
+
+    internal class DeduplicationProcessor : AbstractProcessorThread<TR2TextureDeduplicator>
+    {
+        private readonly List<TR2CombinedLevel> _levels;
+        private readonly TR2LevelTextureDeduplicator _deduplicator;
+
+        internal override int LevelCount => _levels.Count;
+
+        internal DeduplicationProcessor(TR2TextureDeduplicator outer)
+            :base(outer)
+        {
+            _levels = new List<TR2CombinedLevel>();
+            _deduplicator = new TR2LevelTextureDeduplicator();
+        }
+
+        internal void AddLevel(TR2CombinedLevel level)
+        {
+            _levels.Add(level);
+        }
+
+        protected override void ProcessImpl()
+        {
+            foreach (TR2CombinedLevel level in _levels)
             {
-                foreach (TR2CombinedLevel level in _levels)
+                string dedupPath = _outer.GetResourcePath(@"TR2\Textures\Deduplication\" + level.JsonID + "-TextureRemap.json");
+                if (File.Exists(dedupPath))
                 {
-                    string dedupPath = _outer.GetResourcePath(@"TR2\Textures\Deduplication\" + level.JsonID + "-TextureRemap.json");
-                    if (File.Exists(dedupPath))
-                    {
-                        _deduplicator.Level = level.Data;
-                        _deduplicator.Deduplicate(dedupPath);
+                    _deduplicator.Level = level.Data;
+                    _deduplicator.Deduplicate(dedupPath);
 
-                        _outer.SaveLevel(level);
-                    }
+                    _outer.SaveLevel(level);
+                }
 
-                    if (!_outer.TriggerProgress())
-                    {
-                        break;
-                    }
+                if (!_outer.TriggerProgress())
+                {
+                    break;
                 }
             }
         }

@@ -10,99 +10,98 @@ using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
 using TRRandomizerCore.Utilities;
 
-namespace TRRandomizerCore.Randomizers
+namespace TRRandomizerCore.Randomizers;
+
+public class TR3VfxRandomizer : BaseTR3Randomizer
 {
-    public class TR3VfxRandomizer : BaseTR3Randomizer
+    private List<TR3ScriptedLevel> _filterLevels;
+
+    private Color[] _colors;
+
+    public override void Randomize(int seed)
     {
-        private List<TR3ScriptedLevel> _filterLevels;
+        _generator = new Random(seed);
 
-        private Color[] _colors;
+        _colors = ColorUtilities.GetAvailableColors();
 
-        public override void Randomize(int seed)
+        ChooseFilterLevels();
+
+        foreach (TR3ScriptedLevel lvl in Levels)
         {
-            _generator = new Random(seed);
+            LoadLevelInstance(lvl);
 
-            _colors = ColorUtilities.GetAvailableColors();
-
-            ChooseFilterLevels();
-
-            foreach (TR3ScriptedLevel lvl in Levels)
+            if (_filterLevels.Contains(lvl))
             {
-                LoadLevelInstance(lvl);
+                SetVertexFilterMode(_levelInstance);
+                SaveLevelInstance();
+            }
 
-                if (_filterLevels.Contains(lvl))
-                {
-                    SetVertexFilterMode(_levelInstance);
-                    SaveLevelInstance();
-                }
-
-                if (!TriggerProgress())
-                {
-                    break;
-                }
+            if (!TriggerProgress())
+            {
+                break;
             }
         }
+    }
 
-        private void ChooseFilterLevels()
+    private void ChooseFilterLevels()
+    {
+        TR3ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR3LevelNames.ASSAULT));
+        ISet<TR3ScriptedLevel> exlusions = new HashSet<TR3ScriptedLevel> { assaultCourse };
+
+        _filterLevels = Levels.RandomSelection(_generator, (int)Settings.NightModeCount, exclusions: exlusions);
+        if (Settings.NightModeAssaultCourse)
         {
-            TR3ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR3LevelNames.ASSAULT));
-            ISet<TR3ScriptedLevel> exlusions = new HashSet<TR3ScriptedLevel> { assaultCourse };
-
-            _filterLevels = Levels.RandomSelection(_generator, (int)Settings.NightModeCount, exclusions: exlusions);
-            if (Settings.NightModeAssaultCourse)
-            {
-                _filterLevels.Add(assaultCourse);
-            }
+            _filterLevels.Add(assaultCourse);
         }
+    }
 
-        private void SetVertexFilterMode(TR3CombinedLevel level)
+    private void SetVertexFilterMode(TR3CombinedLevel level)
+    {
+        if (Settings.VfxRoom)
         {
-            if (Settings.VfxRoom)
-            {
-                //Change every room
-                FilterVerticesRandomRoom(level.Data);
-            }
-            else if (Settings.VfxLevel)
-            {
-                //Change every level
-                FilterVerticesRandomLevel(level.Data, _colors[_generator.Next(0, _colors.Length - 1)]);
-            }
-            else
-            {
-                //Normal filter
-                FilterVertices(level.Data);
-            } 
-
-            if (level.HasCutScene)
-            {
-                SetVertexFilterMode(level.CutSceneLevel);
-            }
+            //Change every room
+            FilterVerticesRandomRoom(level.Data);
         }
-
-        private void FilterVertices(TR3Level level)
+        else if (Settings.VfxLevel)
         {
-            foreach (TR3Room room in level.Rooms)
-            {
-                room.SetColourFilter(Settings.VfxFilterColor, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
-            }
+            //Change every level
+            FilterVerticesRandomLevel(level.Data, _colors[_generator.Next(0, _colors.Length - 1)]);
         }
-
-        private void FilterVerticesRandomLevel(TR3Level level, Color col)
+        else
         {
-            foreach (TR3Room room in level.Rooms)
-            {
-                room.SetColourFilter(col, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
-            }
+            //Normal filter
+            FilterVertices(level.Data);
+        } 
+
+        if (level.HasCutScene)
+        {
+            SetVertexFilterMode(level.CutSceneLevel);
         }
+    }
 
-        private void FilterVerticesRandomRoom(TR3Level level)
+    private void FilterVertices(TR3Level level)
+    {
+        foreach (TR3Room room in level.Rooms)
         {
-            foreach (TR3Room room in level.Rooms)
-            {
-                Color col = _colors[_generator.Next(0, _colors.Length - 1)];
+            room.SetColourFilter(Settings.VfxFilterColor, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
+        }
+    }
 
-                room.SetColourFilter(col, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
-            }
+    private void FilterVerticesRandomLevel(TR3Level level, Color col)
+    {
+        foreach (TR3Room room in level.Rooms)
+        {
+            room.SetColourFilter(col, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
+        }
+    }
+
+    private void FilterVerticesRandomRoom(TR3Level level)
+    {
+        foreach (TR3Room room in level.Rooms)
+        {
+            Color col = _colors[_generator.Next(0, _colors.Length - 1)];
+
+            room.SetColourFilter(col, Settings.VfxVivid, Settings.VfxCaustics, Settings.VfxWave);
         }
     }
 }

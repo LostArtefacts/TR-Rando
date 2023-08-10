@@ -7,47 +7,46 @@ using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Secrets;
 
-namespace TRRandomizerCore.Randomizers
+namespace TRRandomizerCore.Randomizers;
+
+public class TR3SecretRewardRandomizer : BaseTR3Randomizer
 {
-    public class TR3SecretRewardRandomizer : BaseTR3Randomizer
+    public override void Randomize(int seed)
     {
-        public override void Randomize(int seed)
+        _generator = new Random(seed);
+
+        foreach (TR3ScriptedLevel lvl in Levels)
         {
-            _generator = new Random(seed);
+            LoadLevelInstance(lvl);
 
-            foreach (TR3ScriptedLevel lvl in Levels)
+            RandomizeRewards(_levelInstance);
+
+            SaveLevelInstance();
+
+            if (!TriggerProgress())
             {
-                LoadLevelInstance(lvl);
-
-                RandomizeRewards(_levelInstance);
-
-                SaveLevelInstance();
-
-                if (!TriggerProgress())
-                {
-                    break;
-                }
+                break;
             }
         }
+    }
 
-        private void RandomizeRewards(TR3CombinedLevel level)
+    private void RandomizeRewards(TR3CombinedLevel level)
+    {
+        if (level.IsAssault)
         {
-            if (level.IsAssault)
-            {
-                return;
-            }
+            return;
+        }
 
-            TRSecretMapping<TR2Entity> secretMapping = TRSecretMapping<TR2Entity>.Get(GetResourcePath(@"TR3\SecretMapping\" + level.Name + "-SecretMapping.json"));
+        TRSecretMapping<TR2Entity> secretMapping = TRSecretMapping<TR2Entity>.Get(GetResourcePath(@"TR3\SecretMapping\" + level.Name + "-SecretMapping.json"));
 
-            List<TR3Entities> stdItemTypes = TR3EntityUtilities.GetStandardPickupTypes();
-            // A bit cruel as rewards?
-            stdItemTypes.Remove(TR3Entities.PistolAmmo_P);
-            stdItemTypes.Remove(TR3Entities.Pistols_P);
+        List<TR3Entities> stdItemTypes = TR3EntityUtilities.GetStandardPickupTypes();
+        // A bit cruel as rewards?
+        stdItemTypes.Remove(TR3Entities.PistolAmmo_P);
+        stdItemTypes.Remove(TR3Entities.Pistols_P);
 
-            foreach (int rewardIndex in secretMapping.RewardEntities)
-            {
-                level.Data.Entities[rewardIndex].TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
-            }
+        foreach (int rewardIndex in secretMapping.RewardEntities)
+        {
+            level.Data.Entities[rewardIndex].TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
         }
     }
 }

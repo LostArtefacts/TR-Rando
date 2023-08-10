@@ -1,9 +1,8 @@
-﻿namespace TRRandomizerCore.Helpers
+﻿namespace TRRandomizerCore.Helpers;
+
+public enum GlobeDisplayOption
 {
-    public enum GlobeDisplayOption
-    {
-        Default,
-        Area,
-        Level
-    }
+    Default,
+    Area,
+    Level
 }

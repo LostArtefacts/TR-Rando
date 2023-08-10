@@ -1,7 +1,6 @@
-﻿namespace TRRandomizerCore.Editors
+﻿namespace TRRandomizerCore.Editors;
+
+public interface ISettingsProvider
 {
-    public interface ISettingsProvider
-    {
-        RandomizerSettings Settings { get; }
-    }
+    RandomizerSettings Settings { get; }
 }

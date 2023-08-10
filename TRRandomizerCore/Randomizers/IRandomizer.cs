@@ -1,7 +1,6 @@
-﻿namespace TRRandomizerCore.Randomizers
+﻿namespace TRRandomizerCore.Randomizers;
+
+public interface IRandomizer
 {
-    public interface IRandomizer
-    {
-        void Randomize(int seed);
-    }
+    void Randomize(int seed);
 }

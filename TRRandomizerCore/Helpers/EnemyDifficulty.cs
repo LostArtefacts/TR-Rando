@@ -1,11 +1,10 @@
-﻿namespace TRRandomizerCore.Helpers
+﻿namespace TRRandomizerCore.Helpers;
+
+public enum EnemyDifficulty
 {
-    public enum EnemyDifficulty
-    {
-        VeryEasy = 1, 
-        Easy, 
-        Medium, 
-        Hard, 
-        VeryHard
-    }
+    VeryEasy = 1, 
+    Easy, 
+    Medium, 
+    Hard, 
+    VeryHard
 }
