@@ -8,7 +8,7 @@ namespace TRRandomizerCore.Utilities;
 
 public static class RoomWaterUtilities
 {
-    public static Dictionary<string, List<List<int>>> RoomRemovalWaterMap = new()
+    public static readonly Dictionary<string, List<List<int>>> RoomRemovalWaterMap = new()
     {
         { TR2LevelNames.GW, new List<List<int>>
             {   
@@ -102,7 +102,7 @@ public static class RoomWaterUtilities
         }
     };
 
-    public static Dictionary<string, int> DefaultRoomCountDictionary = new()
+    public static readonly Dictionary<string, int> DefaultRoomCountDictionary = new()
     {
         { TR1LevelNames.CAVES, 38 },
         { TR1LevelNames.VILCABAMBA, 94 },
