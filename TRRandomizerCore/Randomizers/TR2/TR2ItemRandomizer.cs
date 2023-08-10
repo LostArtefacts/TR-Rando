@@ -338,7 +338,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             ZonedLocationCollection ZonedLocations = new();
             ZonedLocations.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), ItemLocs, ZonePopulationMethod.KeyPuzzleQuestOnly);
 
-            for (int i = 0; i < _levelInstance.Data.Entities.Count(); i++)
+            for (int i = 0; i < _levelInstance.Data.Entities.Length; i++)
             {
                 if (ItemFactory.IsItemLocked(_levelInstance.Name, i))
                 {
@@ -843,7 +843,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
         TR2Entity[] boatToMove = Array.FindAll(_levelInstance.Data.Entities, e => e.TypeID == (short)TR2Entities.Boat);
 
-        if (vehicles.Count == 0 || vehicles.Count - boatToMove.Count() + levelEntities.Count > entityLimit)
+        if (vehicles.Count == 0 || vehicles.Count - boatToMove.Length + levelEntities.Count > entityLimit)
         {
             return;
         }
@@ -878,7 +878,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     location = RoomWaterUtilities.MoveToTheSurface(location, _levelInstance.Data);
                 }
 
-                if (boatToMove.Count() == 0)
+                if (boatToMove.Length == 0)
                 {
                     //Creation new entity
                     levelEntities.Add(new TR2Entity
@@ -897,7 +897,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 else
                 {
                     //I am in a level with 1 or 2 boat(s) to move
-                    for (int i = 0; i < boatToMove.Count(); i++)
+                    for (int i = 0; i < boatToMove.Length; i++)
                     {
                         if (i == 0) // for the first one i take the vehicle value
                         {
