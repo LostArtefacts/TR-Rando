@@ -30,9 +30,11 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         //Texture 32 Chunk
         //Get Raw Chunk Data
-        _level.Texture32Chunk = new TR4Texture32Chunk();
-        _level.Texture32Chunk.UncompressedSize = reader.ReadUInt32();
-        _level.Texture32Chunk.CompressedSize = reader.ReadUInt32();
+        _level.Texture32Chunk = new TR4Texture32Chunk
+        {
+            UncompressedSize = reader.ReadUInt32(),
+            CompressedSize = reader.ReadUInt32()
+        };
         _level.Texture32Chunk.CompressedChunk = reader.ReadBytes((int)_level.Texture32Chunk.CompressedSize);
 
         //Decompress
@@ -40,9 +42,11 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         //Texture 16 Chunk
         //Get Raw Chunk Data
-        _level.Texture16Chunk = new TR4Texture16Chunk();
-        _level.Texture16Chunk.UncompressedSize = reader.ReadUInt32();
-        _level.Texture16Chunk.CompressedSize = reader.ReadUInt32();
+        _level.Texture16Chunk = new TR4Texture16Chunk
+        {
+            UncompressedSize = reader.ReadUInt32(),
+            CompressedSize = reader.ReadUInt32()
+        };
         _level.Texture16Chunk.CompressedChunk = reader.ReadBytes((int)_level.Texture16Chunk.CompressedSize);
 
         //Decompress
@@ -50,9 +54,11 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         //Sky and Font 32 Chunk
         //Get Raw Chunk Data
-        _level.SkyAndFont32Chunk = new TR4SkyAndFont32Chunk();
-        _level.SkyAndFont32Chunk.UncompressedSize = reader.ReadUInt32();
-        _level.SkyAndFont32Chunk.CompressedSize = reader.ReadUInt32();
+        _level.SkyAndFont32Chunk = new TR4SkyAndFont32Chunk
+        {
+            UncompressedSize = reader.ReadUInt32(),
+            CompressedSize = reader.ReadUInt32()
+        };
         _level.SkyAndFont32Chunk.CompressedChunk = reader.ReadBytes((int)_level.SkyAndFont32Chunk.CompressedSize);
 
         //Decompress
@@ -65,9 +71,11 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         //Level Data Chunk
         //Get Raw Chunk Data
-        _level.LevelDataChunk = new TR5LevelDataChunk();
-        _level.LevelDataChunk.UncompressedSize = reader.ReadUInt32();
-        _level.LevelDataChunk.CompressedSize = reader.ReadUInt32();
+        _level.LevelDataChunk = new TR5LevelDataChunk
+        {
+            UncompressedSize = reader.ReadUInt32(),
+            CompressedSize = reader.ReadUInt32()
+        };
         _level.LevelDataChunk.CompressedChunk = reader.ReadBytes((int)_level.LevelDataChunk.CompressedSize);
 
         //Decompress
@@ -79,7 +87,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
         for (int i = 0; i < _level.NumSamples; i++)
         {
-            TR4Sample sample = new TR4Sample
+            TR4Sample sample = new()
             {
                 UncompSize = reader.ReadUInt32(),
                 CompSize = reader.ReadUInt32(),
@@ -97,7 +105,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         writer.Write(_level.Serialize());
     }
 
-    private void DecompressTexture32Chunk(TR5Level lvl)
+    private static void DecompressTexture32Chunk(TR5Level lvl)
     {
         //Decompressed buffer as bytes
         byte[] buffer = TRZlib.Decompress(lvl.Texture32Chunk.CompressedChunk);
@@ -115,7 +123,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         //Copy from tiles to textile objects
         for (int i = 0; i < lvl.Texture32Chunk.Textiles.Length; i++)
         {
-            TR4TexImage32 tex = new TR4TexImage32
+            TR4TexImage32 tex = new()
             {
                 Tile = new uint[256 * 256]
             };
@@ -127,7 +135,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         }
     }
 
-    private void DecompressTexture16Chunk(TR5Level lvl)
+    private static void DecompressTexture16Chunk(TR5Level lvl)
     {
         //Decompressed buffer as bytes
         byte[] buffer = TRZlib.Decompress(lvl.Texture16Chunk.CompressedChunk);
@@ -145,7 +153,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         //Copy from tiles to textile objects
         for (int i = 0; i < lvl.Texture16Chunk.Textiles.Length; i++)
         {
-            TRTexImage16 tex = new TRTexImage16
+            TRTexImage16 tex = new()
             {
                 Pixels = new ushort[256 * 256]
             };
@@ -157,7 +165,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         }
     }
 
-    private void DecompressSkyAndFont32Chunk(TR5Level lvl)
+    private static void DecompressSkyAndFont32Chunk(TR5Level lvl)
     {
         //Decompressed buffer as bytes
         byte[] buffer = TRZlib.Decompress(lvl.SkyAndFont32Chunk.CompressedChunk);
@@ -175,7 +183,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         //Copy from tiles to textile objects
         for (int i = 0; i < lvl.SkyAndFont32Chunk.Textiles.Length; i++)
         {
-            TR4TexImage32 tex = new TR4TexImage32
+            TR4TexImage32 tex = new()
             {
                 Tile = new uint[256 * 256]
             };
@@ -187,7 +195,7 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         }
     }
 
-    private void DecompressLevelDataChunk(TR5Level lvl)
+    private static void DecompressLevelDataChunk(TR5Level lvl)
     {
         //TR5 level chunk is not compressed
         byte[] buffer = lvl.LevelDataChunk.CompressedChunk;
@@ -195,28 +203,24 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
         //Is the decompressed chunk the size we expected?
         Debug.Assert(buffer.Length == lvl.LevelDataChunk.UncompressedSize);
 
-        using (MemoryStream stream = new MemoryStream(buffer, false))
-        {
-            using (BinaryReader lvlChunkReader = new BinaryReader(stream))
-            {
-                TR5FileReadUtilities.PopulateRooms(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateFloordata(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateMeshes(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateAnimations(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateMeshTreesFramesModels(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateStaticMeshes(lvlChunkReader, lvl);
-                TR5FileReadUtilities.VerifySPRMarker(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateSprites(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateCameras(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateSoundSources(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateBoxesOverlapsZones(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateAnimatedTextures(lvlChunkReader, lvl);
-                TR5FileReadUtilities.VerifyTEXMarker(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateObjectTextures(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateEntitiesAndAI(lvlChunkReader, lvl);
-                TR5FileReadUtilities.PopulateDemoSoundSampleIndices(lvlChunkReader, lvl);
-                TR5FileReadUtilities.VerifyLevelDataFinalSeperator(lvlChunkReader, lvl);
-            }
-        }
+        using MemoryStream stream = new(buffer, false);
+        using BinaryReader lvlChunkReader = new(stream);
+        TR5FileReadUtilities.PopulateRooms(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateFloordata(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateMeshes(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateAnimations(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateMeshTreesFramesModels(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateStaticMeshes(lvlChunkReader, lvl);
+        TR5FileReadUtilities.VerifySPRMarker(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateSprites(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateCameras(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateSoundSources(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateBoxesOverlapsZones(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateAnimatedTextures(lvlChunkReader, lvl);
+        TR5FileReadUtilities.VerifyTEXMarker(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateObjectTextures(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateEntitiesAndAI(lvlChunkReader, lvl);
+        TR5FileReadUtilities.PopulateDemoSoundSampleIndices(lvlChunkReader, lvl);
+        TR5FileReadUtilities.VerifyLevelDataFinalSeperator(lvlChunkReader, lvl);
     }
 }

@@ -59,7 +59,7 @@ public class IOTests : TestBase
         Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
 
         //Parse the floordata using FDControl and re-write the parsed data back
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
         fdataReader.WriteToLevel(lvl);
 
@@ -90,28 +90,8 @@ public class IOTests : TestBase
         Assert.AreEqual((uint)newFData.Length, lvl.NumFloorData);
 
         //Test pattern/type matching example for fdata.
-        bool isPortal = false;
-
-        foreach (KeyValuePair<int, List<FDEntry>> sector in fdataReader.Entries)
-        {
-            foreach (FDEntry entry in sector.Value)
-            {
-                switch (entry)
-                {
-                    case FDClimbEntry climbEntry:
-                        break;
-                    case FDKillLaraEntry killEntry:
-                        break;
-                    case FDPortalEntry portalEntry:
-                        isPortal = true;
-                        break;
-                    case FDSlantEntry slantEntry:
-                        break;
-                    case FDTriggerEntry triggerEntry:
-                        break;
-                }
-            }
-        }
+        bool isPortal = fdataReader.Entries.Values
+            .Any(entries => entries.Any(entry => entry is FDPortalEntry));
 
         Assert.IsTrue(isPortal);
     }
@@ -123,7 +103,7 @@ public class IOTests : TestBase
         TR2Level lvl = GetTR2Level(TR2LevelNames.GW);
 
         //Parse the floordata using FDControl
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
 
         //Get all triggers for entity ID 18
@@ -194,7 +174,7 @@ public class IOTests : TestBase
         TR2Level lvl = GetTR2Level(TR2LevelNames.GW);
 
         //Parse the floordata using FDControl
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
 
         //Get all triggers for entity ID 18
@@ -240,7 +220,7 @@ public class IOTests : TestBase
         TR2Level lvl = GetTR2Level(TR2LevelNames.LAIR);
 
         //Parse the floordata using FDControl
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
 
         //Find a sector that currently has no floor data
@@ -316,7 +296,7 @@ public class IOTests : TestBase
         TR2Level lvl = GetTR2Level(TR2LevelNames.LAIR);
 
         //Parse the floordata using FDControl
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
 
         //Find a sector that currently has floor data
@@ -368,7 +348,7 @@ public class IOTests : TestBase
         Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
 
         //Parse the floordata using FDControl
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
 
         //Verify index 9 has one entry and that it's currently 
@@ -439,7 +419,7 @@ public class IOTests : TestBase
         TR2Level lvl = GetTR2Level(TR2LevelNames.LAIR);
 
         //Parse the floordata using FDControl
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
 
         //Add a music trigger to index 9
@@ -490,7 +470,7 @@ public class IOTests : TestBase
         TR2Level lvl = GetTR2Level(TR2LevelNames.LAIR);
 
         //Parse the floordata using FDControl
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
 
         //Add a music action to the trigger at index 13
@@ -528,7 +508,7 @@ public class IOTests : TestBase
         TR2Level lvl = GetTR2Level(TR2LevelNames.LAIR);
 
         //Parse the floordata using FDControl
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
 
         //Add a music action to the trigger at index 6010
@@ -563,7 +543,7 @@ public class IOTests : TestBase
         // Get original ladders in +/-X directions
         TR2Level lvl = GetTR2Level(TR2LevelNames.GW);
 
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
 
         // Second guardhouse ladder
@@ -683,7 +663,7 @@ public class IOTests : TestBase
     {
         TR2Level lvl = GetTR2Level(TR2LevelNames.GW);
 
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
 
         // Get a sector that is slanted in both X and Z directions
@@ -801,7 +781,7 @@ public class IOTests : TestBase
     {
         TR2Level lvl = GetTR2Level(TR2LevelNames.MONASTERY);
 
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
 
         // For the end doors to open in Barkhang, all 5 activation bits must be set.
@@ -885,8 +865,8 @@ public class IOTests : TestBase
 
         // For every box, store the current zone. We use the serialized form
         // for comparison.
-        Dictionary<int, byte[]> flipOffZones = new Dictionary<int, byte[]>();
-        Dictionary<int, byte[]> flipOnZones = new Dictionary<int, byte[]>();
+        Dictionary<int, byte[]> flipOffZones = new();
+        Dictionary<int, byte[]> flipOnZones = new();
         for (int i = 0; i < lvl.NumBoxes; i++)
         {
             flipOffZones[i] = lvl.Zones[i][FlipStatus.Off].Serialize();
@@ -935,8 +915,8 @@ public class IOTests : TestBase
 
         // For every box, store the current list of overlaps and the overlap starting
         // index itself (which also stores Blockable/Blocked bits).
-        Dictionary<int, List<ushort>> boxOverlaps = new Dictionary<int, List<ushort>>();
-        Dictionary<int, short> boxOverlapIndices = new Dictionary<int, short>();
+        Dictionary<int, List<ushort>> boxOverlaps = new();
+        Dictionary<int, short> boxOverlapIndices = new();
         for (int i = 0; i < lvl.NumBoxes; i++)
         {
             boxOverlaps[i] = TR2BoxUtilities.GetOverlaps(lvl, lvl.Boxes[i]);

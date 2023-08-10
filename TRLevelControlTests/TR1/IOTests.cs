@@ -51,7 +51,7 @@ public class IOTests : TestBase
         Array.Copy(lvl.FloorData, originalFData, lvl.NumFloorData);
 
         //Parse the floordata using FDControl and re-write the parsed data back
-        FDControl fdataReader = new FDControl();
+        FDControl fdataReader = new();
         fdataReader.ParseFromLevel(lvl);
         fdataReader.WriteToLevel(lvl);
 
@@ -70,8 +70,8 @@ public class IOTests : TestBase
 
         // For every box, store the current zone. We use the serialized form
         // for comparison.
-        Dictionary<int, byte[]> flipOffZones = new Dictionary<int, byte[]>();
-        Dictionary<int, byte[]> flipOnZones = new Dictionary<int, byte[]>();
+        Dictionary<int, byte[]> flipOffZones = new();
+        Dictionary<int, byte[]> flipOnZones = new();
         for (int i = 0; i < lvl.NumBoxes; i++)
         {
             flipOffZones[i] = lvl.Zones[i][FlipStatus.Off].Serialize();

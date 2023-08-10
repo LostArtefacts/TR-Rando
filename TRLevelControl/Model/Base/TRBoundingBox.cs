@@ -1,57 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TRBoundingBox : ISerializableCompact
 {
-    public class TRBoundingBox : ISerializableCompact
+    public short MinX { get; set; }
+
+    public short MaxX { get; set; }
+
+    public short MinY { get; set; }
+
+    public short MaxY { get; set; }
+
+    public short MinZ { get; set; }
+
+    public short MaxZ { get; set; }
+
+    public override string ToString()
     {
-        public short MinX { get; set; }
+        StringBuilder sb = new(base.ToString());
 
-        public short MaxX { get; set; }
+        sb.Append(" MinX: " + MinX);
+        sb.Append(" MaxX: " + MaxX);
+        sb.Append(" MinY: " + MinY);
+        sb.Append(" MaxY: " + MaxY);
+        sb.Append(" MinZ: " + MinZ);
+        sb.Append(" MaxZ: " + MaxZ);
 
-        public short MinY { get; set; }
+        return sb.ToString();
+    }
 
-        public short MaxY { get; set; }
-
-        public short MinZ { get; set; }
-
-        public short MaxZ { get; set; }
-
-        public override string ToString()
+    public byte[] Serialize()
+    {
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" MinX: " + MinX);
-            sb.Append(" MaxX: " + MaxX);
-            sb.Append(" MinY: " + MinY);
-            sb.Append(" MaxY: " + MaxY);
-            sb.Append(" MinZ: " + MinZ);
-            sb.Append(" MaxZ: " + MaxZ);
-
-            return sb.ToString();
+            writer.Write(MinX);
+            writer.Write(MaxX);
+            writer.Write(MinY);
+            writer.Write(MaxY);
+            writer.Write(MinZ);
+            writer.Write(MaxZ);
         }
 
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(MinX);
-                    writer.Write(MaxX);
-                    writer.Write(MinY);
-                    writer.Write(MaxY);
-                    writer.Write(MinZ);
-                    writer.Write(MaxZ);
-                }
-
-                return stream.ToArray();
-            }
-        }
+        return stream.ToArray();
     }
 }

@@ -157,8 +157,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         if (LinkedLocation != null)
         {
             TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-            BoxGenerator generator = new();
-            generator.Generate(newRoom, level, linkedSector);
+            BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
         List<TRRoom> rooms = level.Rooms.ToList();
@@ -312,8 +311,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         if (LinkedLocation != null)
         {
             TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-            BoxGenerator generator = new();
-            generator.Generate(newRoom, level, linkedSector);
+            BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
         List<TR2Room> rooms = level.Rooms.ToList();
@@ -468,8 +466,7 @@ public class EMCopyRoomFunction : BaseEMFunction
         if (LinkedLocation != null)
         {
             TRRoomSector linkedSector = FDUtilities.GetRoomSector(LinkedLocation.X, LinkedLocation.Y, LinkedLocation.Z, data.ConvertRoom(LinkedLocation.Room), level, floorData);
-            BoxGenerator generator = new();
-            generator.Generate(newRoom, level, linkedSector);
+            BoxGenerator.Generate(newRoom, level, linkedSector);
         }
 
         List<TR3Room> rooms = level.Rooms.ToList();

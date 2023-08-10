@@ -1,8 +1,7 @@
-﻿namespace TRLevelControl.Model.Base.Enums
+﻿namespace TRLevelControl.Model.Base.Enums;
+
+public enum FlipStatus
 {
-    public enum FlipStatus
-    {
-        Off = 0,
-        On = 1
-    }
+    Off = 0,
+    On = 1
 }

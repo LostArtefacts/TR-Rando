@@ -53,7 +53,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         {
             _level.Images16[i].Pixels = new ushort[256 * 256];
 
-            for (int j = 0; j < _level.Images16[i].Pixels.Count(); j++)
+            for (int j = 0; j < _level.Images16[i].Pixels.Length; j++)
             {
                 _level.Images16[i].Pixels[j] = reader.ReadUInt16();
             }
@@ -66,19 +66,20 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         for (int i = 0; i < _level.NumRooms; i++)
         {
-            TR3Room room = new TR3Room();
-
-            //Grab info
-            room.Info = new TRRoomInfo
+            TR3Room room = new()
             {
-                X = reader.ReadInt32(),
-                Z = reader.ReadInt32(),
-                YBottom = reader.ReadInt32(),
-                YTop = reader.ReadInt32()
-            };
+                //Grab info
+                Info = new TRRoomInfo
+                {
+                    X = reader.ReadInt32(),
+                    Z = reader.ReadInt32(),
+                    YBottom = reader.ReadInt32(),
+                    YTop = reader.ReadInt32()
+                },
 
-            //Grab data
-            room.NumDataWords = reader.ReadUInt32();
+                //Grab data
+                NumDataWords = reader.ReadUInt32()
+            };
             room.Data = new ushort[room.NumDataWords];
             for (int j = 0; j < room.NumDataWords; j++)
             {
@@ -327,7 +328,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         //Light Map - 32 * 256 = 8192 bytes
         _level.LightMap = new byte[32 * 256];
 
-        for (int i = 0; i < _level.LightMap.Count(); i++)
+        for (int i = 0; i < _level.LightMap.Length; i++)
         {
             _level.LightMap[i] = reader.ReadByte();
         }
@@ -353,7 +354,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         //Sound Map (370 shorts = 740 bytes) & Sound Details
         _level.SoundMap = new short[370];
 
-        for (int i = 0; i < _level.SoundMap.Count(); i++)
+        for (int i = 0; i < _level.SoundMap.Length; i++)
         {
             _level.SoundMap[i] = reader.ReadInt16();
         }
@@ -389,9 +390,10 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         for (int i = 0; i < MAX_PALETTE_SIZE; i++)
         {
-            TRColour col = new TRColour();
-
-            col.Red = palette[ci];
+            TRColour col = new()
+            {
+                Red = palette[ci]
+            };
             ci++;
 
             col.Green = palette[ci];
@@ -406,7 +408,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         return colourPalette;
     }
 
-    private TRColour4[] PopulateColourPalette16(byte[] palette)
+    private static TRColour4[] PopulateColourPalette16(byte[] palette)
     {
         TRColour4[] colourPalette = new TRColour4[MAX_PALETTE_SIZE];
 
@@ -414,9 +416,10 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         for (int i = 0; i < MAX_PALETTE_SIZE; i++)
         {
-            TRColour4 col = new TRColour4();
-
-            col.Red = palette[ci];
+            TRColour4 col = new()
+            {
+                Red = palette[ci]
+            };
             ci++;
 
             col.Green = palette[ci];
@@ -434,22 +437,23 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         return colourPalette;
     }
 
-    private TR3RoomData ConvertToRoomData(TR3Room room)
+    private static TR3RoomData ConvertToRoomData(TR3Room room)
     {
         int RoomDataOffset = 0;
 
         //Grab detailed room data
-        TR3RoomData RoomData = new TR3RoomData();
-
-        //Room vertices
-        RoomData.NumVertices = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
+        TR3RoomData RoomData = new()
+        {
+            //Room vertices
+            NumVertices = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset])
+        };
         RoomData.Vertices = new TR3RoomVertex[RoomData.NumVertices];
 
         RoomDataOffset++;
 
         for (int j = 0; j < RoomData.NumVertices; j++)
         {
-            TR3RoomVertex vertex = new TR3RoomVertex()
+            TR3RoomVertex vertex = new()
             {
                 Vertex = new TRVertex()
             };
@@ -478,9 +482,10 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         for (int j = 0; j < RoomData.NumRectangles; j++)
         {
-            TRFace4 face = new TRFace4();
-
-            face.Vertices = new ushort[4];
+            TRFace4 face = new()
+            {
+                Vertices = new ushort[4]
+            };
             face.Vertices[0] = room.Data[RoomDataOffset];
             RoomDataOffset++;
             face.Vertices[1] = room.Data[RoomDataOffset];
@@ -503,9 +508,10 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         for (int j = 0; j < RoomData.NumTriangles; j++)
         {
-            TRFace3 face = new TRFace3();
-
-            face.Vertices = new ushort[3];
+            TRFace3 face = new()
+            {
+                Vertices = new ushort[3]
+            };
             face.Vertices[0] = room.Data[RoomDataOffset];
             RoomDataOffset++;
             face.Vertices[1] = room.Data[RoomDataOffset];
@@ -526,9 +532,10 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         for (int j = 0; j < RoomData.NumSprites; j++)
         {
-            TRRoomSprite face = new TRRoomSprite();
-
-            face.Vertex = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
+            TRRoomSprite face = new()
+            {
+                Vertex = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset])
+            };
             RoomDataOffset++;
             face.Texture = UnsafeConversions.UShortToShort(room.Data[RoomDataOffset]);
             RoomDataOffset++;
@@ -541,7 +548,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         return RoomData;
     }
 
-    private TRMesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
+    private static TRMesh[] ConstructMeshData(uint[] meshPointers, ushort[] rawMeshData)
     {
         byte[] target = new byte[rawMeshData.Length * 2];
         Buffer.BlockCopy(rawMeshData, 0, target, 0, target.Length);
@@ -550,14 +557,14 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         // sure to iterate over distinct values only
         meshPointers = meshPointers.Distinct().ToArray();
 
-        List<TRMesh> meshes = new List<TRMesh>();
+        List<TRMesh> meshes = new();
 
-        using (MemoryStream ms = new MemoryStream(target))
-        using (BinaryReader br = new BinaryReader(ms))
+        using (MemoryStream ms = new(target))
+        using (BinaryReader br = new(ms))
         {
             for (int i = 0; i < meshPointers.Length; i++)
             {
-                TRMesh mesh = new TRMesh();
+                TRMesh mesh = new();
                 meshes.Add(mesh);
 
                 uint meshPointer = meshPointers[i];

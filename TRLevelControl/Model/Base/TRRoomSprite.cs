@@ -1,42 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+// 4 bytes
+public class TRRoomSprite : ISerializableCompact
 {
-    // 4 bytes
-    public class TRRoomSprite : ISerializableCompact
+    public short Vertex { get; set; }
+
+    public short Texture { get; set; }
+
+    public override string ToString()
     {
-        public short Vertex { get; set; }
+        StringBuilder sb = new(base.ToString());
 
-        public short Texture { get; set; }
+        sb.Append(" Vertex: " + Vertex);
+        sb.Append(" Texture: " + Texture);
 
-        public override string ToString()
+        return sb.ToString();
+    }
+
+    public byte[] Serialize()
+    {
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" Vertex: " + Vertex);
-            sb.Append(" Texture: " + Texture);
-
-            return sb.ToString();
+            writer.Write(Vertex);
+            writer.Write(Texture);
         }
 
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(Vertex);
-                    writer.Write(Texture);
-                }
-
-                return stream.ToArray();
-            }
-        }
+        return stream.ToArray();
     }
 }

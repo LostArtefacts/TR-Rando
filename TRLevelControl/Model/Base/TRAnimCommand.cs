@@ -1,37 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TRAnimCommand : ISerializableCompact
 {
-    public class TRAnimCommand : ISerializableCompact
+    public short Value { get; set; }
+
+    public override string ToString()
     {
-        public short Value { get; set; }
+        StringBuilder sb = new(base.ToString());
 
-        public override string ToString()
+        sb.Append(" Value: " + Value.ToString("X4"));
+
+        return sb.ToString();
+    }
+
+    public byte[] Serialize()
+    {
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" Value: " + Value.ToString("X4"));
-
-            return sb.ToString();
+            writer.Write(Value);
         }
 
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(Value);
-                }
-
-                return stream.ToArray();
-            }
-        }
+        return stream.ToArray();
     }
 }

@@ -1,62 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TR2RoomStaticMesh : ISerializableCompact
 {
-    public class TR2RoomStaticMesh : ISerializableCompact
+    public uint X { get; set; }
+
+    public uint Y { get; set; }
+
+    public uint Z { get; set; }
+
+    public ushort Rotation { get; set; }
+
+    public ushort Intensity1 { get; set; }
+
+    public ushort Intensity2 { get; set; }
+
+    public ushort MeshID { get; set; }
+
+    public override string ToString()
     {
-        public uint X { get; set; }
+        StringBuilder sb = new(base.ToString());
 
-        public uint Y { get; set; }
+        sb.Append(" X: " + X);
+        sb.Append(" Y: " + Y);
+        sb.Append(" Z: " + Z);
+        sb.Append(" Rotation: " + Rotation);
+        sb.Append(" Int1: " + Intensity1);
+        sb.Append(" Int2: " + Intensity2);
+        sb.Append(" MeshID: " + MeshID);
 
-        public uint Z { get; set; }
+        return sb.ToString();
+    }
 
-        public ushort Rotation { get; set; }
-
-        public ushort Intensity1 { get; set; }
-
-        public ushort Intensity2 { get; set; }
-
-        public ushort MeshID { get; set; }
-
-        public override string ToString()
+    public byte[] Serialize()
+    {
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" X: " + X);
-            sb.Append(" Y: " + Y);
-            sb.Append(" Z: " + Z);
-            sb.Append(" Rotation: " + Rotation);
-            sb.Append(" Int1: " + Intensity1);
-            sb.Append(" Int2: " + Intensity2);
-            sb.Append(" MeshID: " + MeshID);
-
-            return sb.ToString();
+            writer.Write(X);
+            writer.Write(Y);
+            writer.Write(Z);
+            writer.Write(Rotation);
+            writer.Write(Intensity1);
+            writer.Write(Intensity2);
+            writer.Write(MeshID);
         }
 
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(X);
-                    writer.Write(Y);
-                    writer.Write(Z);
-                    writer.Write(Rotation);
-                    writer.Write(Intensity1);
-                    writer.Write(Intensity2);
-                    writer.Write(MeshID);
-                }
-
-                return stream.ToArray();
-            }
-        }
+        return stream.ToArray();
     }
 }

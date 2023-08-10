@@ -1,60 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+public class TR5Model : ISerializableCompact
 {
-    public class TR5Model : ISerializableCompact
+    public uint ID { get; set; }
+
+    public ushort NumMeshes { get; set; }
+
+    public ushort StartingMesh { get; set; }
+
+    public uint MeshTree { get; set; }
+
+    public uint FrameOffset { get; set; }
+
+    public ushort Animation { get; set; }
+
+    public ushort Filler { get; set; }
+
+    public override string ToString()
     {
-        public uint ID { get; set; }
+        StringBuilder sb = new(base.ToString());
 
-        public ushort NumMeshes { get; set; }
+        sb.Append(" ID: " + ID);
+        sb.Append(" NumMeshes: " + NumMeshes);
+        sb.Append(" StartingMesh: " + StartingMesh);
+        sb.Append(" MeshTree: " + MeshTree);
+        sb.Append(" FrameOffset: " + FrameOffset);
+        sb.Append(" Animation: " + Animation);
 
-        public ushort StartingMesh { get; set; }
+        return sb.ToString();
+    }
 
-        public uint MeshTree { get; set; }
-
-        public uint FrameOffset { get; set; }
-
-        public ushort Animation { get; set; }
-
-        public ushort Filler { get; set; }
-
-        public override string ToString()
+    public byte[] Serialize()
+    {
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
-
-            sb.Append(" ID: " + ID);
-            sb.Append(" NumMeshes: " + NumMeshes);
-            sb.Append(" StartingMesh: " + StartingMesh);
-            sb.Append(" MeshTree: " + MeshTree);
-            sb.Append(" FrameOffset: " + FrameOffset);
-            sb.Append(" Animation: " + Animation);
-
-            return sb.ToString();
+            writer.Write(ID);
+            writer.Write(NumMeshes);
+            writer.Write(StartingMesh);
+            writer.Write(MeshTree);
+            writer.Write(FrameOffset);
+            writer.Write(Animation);
+            writer.Write(Filler);
         }
 
-        public byte[] Serialize()
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(ID);
-                    writer.Write(NumMeshes);
-                    writer.Write(StartingMesh);
-                    writer.Write(MeshTree);
-                    writer.Write(FrameOffset);
-                    writer.Write(Animation);
-                    writer.Write(Filler);
-                }
-
-                return stream.ToArray();
-            }
-        }
+        return stream.ToArray();
     }
 }

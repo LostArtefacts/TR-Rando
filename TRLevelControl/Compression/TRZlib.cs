@@ -1,10 +1,4 @@
 ﻿using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 //ref: https://benfoster.io/blog/zlib-compression-net-core/
 
@@ -21,31 +15,26 @@ using System.Threading.Tasks;
 //  8   | 78 DA | 1F 8B
 //  9   | 78 DA | 1F 8B
 
-namespace TRLevelControl.Compression
-{
-    public static class TRZlib
-    {
-        public static byte[] Decompress(byte[] data)
-        {
-            var outputStream = new MemoryStream();
-            using (var compressedStream = new MemoryStream(data))
-            using (var inputStream = new InflaterInputStream(compressedStream))
-            {
-                inputStream.CopyTo(outputStream);
-                return outputStream.ToArray();
-            }
-        }
+namespace TRLevelControl.Compression;
 
-        public static byte[] Compress(byte[] data)
-        {
-            using (MemoryStream outMemoryStream = new MemoryStream())
-            using (DeflaterOutputStream outZStream = new DeflaterOutputStream(outMemoryStream))
-            using (Stream inMemoryStream = new MemoryStream(data))
-            {
-                inMemoryStream.CopyTo(outZStream);
-                outZStream.Finish();
-                return outMemoryStream.ToArray();
-            }
-        }
+public static class TRZlib
+{
+    public static byte[] Decompress(byte[] data)
+    {
+        using MemoryStream outputStream = new();
+        using MemoryStream compressedStream = new(data);
+        using InflaterInputStream inputStream = new(compressedStream);
+        inputStream.CopyTo(outputStream);
+        return outputStream.ToArray();
+    }
+
+    public static byte[] Compress(byte[] data)
+    {
+        using MemoryStream outMemoryStream = new();
+        using DeflaterOutputStream outZStream = new(outMemoryStream);
+        using Stream inMemoryStream = new MemoryStream(data);
+        inMemoryStream.CopyTo(outZStream);
+        outZStream.Finish();
+        return outMemoryStream.ToArray();
     }
 }

@@ -1,40 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TRLevelControl.Serialization;
+﻿using TRLevelControl.Serialization;
 
-namespace TRLevelControl.Model
+namespace TRLevelControl.Model;
+
+//32 bytes
+public class TRRoomPortal : ISerializableCompact
 {
-    //32 bytes
-    public class TRRoomPortal : ISerializableCompact
+    public ushort AdjoiningRoom { get; set; }
+
+    public TRVertex Normal { get; set; }
+
+    // 4 vertices
+    public TRVertex[] Vertices { get; set; }
+
+    public byte[] Serialize()
     {
-        public ushort AdjoiningRoom { get; set; }
-
-        public TRVertex Normal { get; set; }
-
-        // 4 vertices
-        public TRVertex[] Vertices { get; set; }
-
-        public byte[] Serialize()
+        using MemoryStream stream = new();
+        using (BinaryWriter writer = new(stream))
         {
-            using (MemoryStream stream = new MemoryStream())
+            writer.Write(AdjoiningRoom);
+            writer.Write(Normal.Serialize());
+
+            foreach (TRVertex vert in Vertices)
             {
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
-                    writer.Write(AdjoiningRoom);
-                    writer.Write(Normal.Serialize());
-
-                    foreach (TRVertex vert in Vertices)
-                    {
-                        writer.Write(vert.Serialize());
-                    }
-                }
-
-                return stream.ToArray();
+                writer.Write(vert.Serialize());
             }
         }
+
+        return stream.ToArray();
     }
 }
