@@ -267,9 +267,9 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
             TRSpriteSequence stoneSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == (int)TR2Entities.StoneSecret_S_P);
             TRSpriteSequence jadeSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == (int)TR2Entities.JadeSecret_S_P);
 
-            TRSpriteTexture stoneTexture = _levelInstance.Data.SpriteTextures[stoneSequence.Offset];
-            _levelInstance.Data.SpriteTextures[stoneSequence.Offset] = _levelInstance.Data.SpriteTextures[jadeSequence.Offset];
-            _levelInstance.Data.SpriteTextures[jadeSequence.Offset] = stoneTexture;
+            TRSpriteTexture[] textures = _levelInstance.Data.SpriteTextures;
+            (textures[jadeSequence.Offset], textures[stoneSequence.Offset]) 
+                = (textures[stoneSequence.Offset], textures[jadeSequence.Offset]);
         }
     }
 
