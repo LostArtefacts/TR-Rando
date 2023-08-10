@@ -205,7 +205,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
                 case SpecialTextureType.CrashPads:
                     foreach (ushort texture in special.Textures)
                     {
-                        if (CreateCrashPad(level, pen, texture, special.Mode) is TexturedTileSegment segment)
+                        if (CreateCrashPad(pen, special.Mode) is TexturedTileSegment segment)
                         {
                             segments[texture] = segment;
                         }
@@ -217,7 +217,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
         return segments;
     }
 
-    private TexturedTileSegment CreateCrashPad(TR3Level level, Pen pen, ushort textureIndex, SpecialTextureMode mode)
+    private TexturedTileSegment CreateCrashPad(Pen pen, SpecialTextureMode mode)
     {
         const int width = 64;
         const int height = 64;
