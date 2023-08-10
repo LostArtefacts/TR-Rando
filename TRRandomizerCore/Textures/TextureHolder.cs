@@ -85,5 +85,6 @@ public class TextureHolder<E, L> : IDisposable
     public void Dispose()
     {
         Mapping.Dispose();
+        GC.SuppressFinalize(this);
     }
 }

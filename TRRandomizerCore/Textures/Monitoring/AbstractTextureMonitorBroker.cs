@@ -133,5 +133,6 @@ public abstract class AbstractTextureMonitorBroker<E> : IDisposable
     public void Dispose()
     {
         _textureDatabase.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
