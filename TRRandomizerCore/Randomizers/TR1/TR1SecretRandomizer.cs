@@ -128,10 +128,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             }
         }
 
-        if (_processingException != null)
-        {
-            _processingException.Throw();
-        }
+        _processingException?.Throw();
 
         if (ScriptEditor.Edition.IsCommunityPatch)
         {

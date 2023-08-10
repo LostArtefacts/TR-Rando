@@ -132,10 +132,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             }
         }
 
-        if (_processingException != null)
-        {
-            _processingException.Throw();
-        }
+        _processingException?.Throw();
 
         // If any exclusions failed to be avoided, send a message
         if (Settings.ShowExclusionWarnings)

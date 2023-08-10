@@ -120,10 +120,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             }
         }
 
-        if (_processingException != null)
-        {
-            _processingException.Throw();
-        }
+        _processingException?.Throw();
     }
 
     private void RemoveDefaultSecrets(TR3CombinedLevel level)

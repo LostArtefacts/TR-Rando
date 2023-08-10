@@ -175,10 +175,7 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
 
     protected override void ResetPaletteTracking(TR1Level level)
     {
-        if (_packer.PaletteManager != null)
-        {
-            _packer.PaletteManager.MergePredefinedColours();
-        }
+        _packer.PaletteManager?.MergePredefinedColours();
     }
 
     protected override void ResetUnusedTextures(TR1Level level)

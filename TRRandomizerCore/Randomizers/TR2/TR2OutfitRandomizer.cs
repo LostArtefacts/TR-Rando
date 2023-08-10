@@ -76,10 +76,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             processor.Join();
         }
 
-        if (_processingException != null)
-        {
-            _processingException.Throw();
-        }
+        _processingException?.Throw();
     }
 
     private List<TR2Entities> GetLaraTypes()

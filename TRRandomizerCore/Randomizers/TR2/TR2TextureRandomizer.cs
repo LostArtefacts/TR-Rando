@@ -144,10 +144,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
             }
         }
 
-        if (_processingException != null)
-        {
-            _processingException.Throw();
-        }
+        _processingException?.Throw();
     }
 
     private void ChooseWireframeLevels()

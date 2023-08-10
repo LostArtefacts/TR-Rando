@@ -43,10 +43,7 @@ internal class TR2TextureDeduplicator : TR2LevelProcessor
             }
         }
 
-        if (_processingException != null)
-        {
-            _processingException.Throw();
-        }
+        _processingException?.Throw();
     }
 
     internal class DeduplicationProcessor : AbstractProcessorThread<TR2TextureDeduplicator>

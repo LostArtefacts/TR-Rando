@@ -78,10 +78,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             processor.Join();
         }
 
-        if (_processingException != null)
-        {
-            _processingException.Throw();
-        }
+        _processingException?.Throw();
     }
 
     private void ChooseFilteredLevels()
