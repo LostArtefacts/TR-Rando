@@ -25,10 +25,7 @@ public abstract class AbstractTextureMonitorBroker<E> : IDisposable
     {
         lock (_lock)
         {
-            if (entities == null)
-            {
-                entities = new List<E>();
-            }
+            entities ??= new();
             List<StaticTextureSource<E>> sources = GetSourcesToMonitor(entities);
             TextureMonitor<E> monitor = GetMonitor(lvlName);
             if (monitor == null)

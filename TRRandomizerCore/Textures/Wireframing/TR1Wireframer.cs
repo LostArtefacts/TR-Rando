@@ -152,10 +152,7 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
 
     protected override int ImportColour(TR1Level level, Color c)
     {
-        if (_packer.PaletteManager == null)
-        {
-            _packer.PaletteManager = new TR1PaletteManager();
-        }
+        _packer.PaletteManager ??= new();
         return _packer.PaletteManager.AddPredefinedColour(c);
     }
 

@@ -70,10 +70,7 @@ public class TextureMonitor<E> : ITexturePositionMonitor<E>
 
     public void MonitoredTexturesPositioned(Dictionary<E, List<PositionedTexture>> texturePositions)
     {
-        if (PreparedLevelMapping == null)
-        {
-            PreparedLevelMapping = new Dictionary<StaticTextureSource<E>, List<StaticTextureTarget>>();
-        }
+        PreparedLevelMapping ??= new();
 
         foreach (E entity in texturePositions.Keys)
         {

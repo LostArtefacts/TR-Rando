@@ -145,10 +145,7 @@ public static class FaceUtilities
             return;
         }
 
-        if (entry == null)
-        {
-            entry = floorData.Entries[sector.FDIndex].Find(e => e is FDClimbEntry);
-        }
+        entry ??= floorData.Entries[sector.FDIndex].Find(e => e is FDClimbEntry);
 
         if (entry is FDClimbEntry climbEntry)
         {
@@ -199,10 +196,7 @@ public static class FaceUtilities
             return;
         }
 
-        if (entry == null)
-        {
-            entry = floorData.Entries[sector.FDIndex].Find(e => e is FDClimbEntry);
-        }
+        entry ??= floorData.Entries[sector.FDIndex].Find(e => e is FDClimbEntry);
 
         if (entry is FDClimbEntry climbEntry)
         {
@@ -253,10 +247,7 @@ public static class FaceUtilities
             return;
         }
 
-        if (entry == null)
-        {
-            entry = floorData.Entries[sector.FDIndex].Find(e => e is TR3MonkeySwingEntry);
-        }
+        entry ??= floorData.Entries[sector.FDIndex].Find(e => e is TR3MonkeySwingEntry);
 
         if (entry is TR3MonkeySwingEntry monkeyEntry)
         {

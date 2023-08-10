@@ -92,10 +92,7 @@ public abstract class AbstractLevelProcessor<S, C> : ILevelProcessor where S : A
     {
         lock (_monitorLock)
         {
-            if (_processingException == null)
-            {
-                _processingException = ExceptionDispatchInfo.Capture(e);
-            }
+            _processingException ??= ExceptionDispatchInfo.Capture(e);
         }
     }
 

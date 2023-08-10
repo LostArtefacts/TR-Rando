@@ -11,14 +11,7 @@ public class TRRandomizerCoord
 
     public static TRRandomizerCoord Instance
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new TRRandomizerCoord();
-            }
-            return _instance;
-        }
+        get => _instance ??= new();
     }
 
     public IReadOnlyList<string> History => TRCoord.Instance.History;

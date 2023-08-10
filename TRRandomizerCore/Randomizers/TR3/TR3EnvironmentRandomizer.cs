@@ -67,10 +67,7 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
 
     public override void Randomize(int seed)
     {
-        if (_generator == null)
-        {
-            _generator = new Random(seed);
-        }
+        _generator ??= new(seed);
 
         AllocateMirroredLevels(seed);
 
