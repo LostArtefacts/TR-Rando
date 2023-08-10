@@ -153,7 +153,7 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
         _audioRandomizer = new AudioRandomizer(ScriptEditor.AudioProvider.GetCategorisedTracks());
 
         // Decide which sound effect categories we want to randomize.
-        _sfxCategories = _audioRandomizer.GetSFXCategories(Settings);
+        _sfxCategories = AudioRandomizer.GetSFXCategories(Settings);
 
         // Only load the SFX if we are changing at least one category
         if (_sfxCategories.Count > 0)
@@ -235,7 +235,7 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
         SoundUtilities.ResortSoundIndices(level.Data);
     }
 
-    private short ImportSoundEffect(TR3Level level, TRSFXDefinition<TR3SoundDetails> currentDefinition, TRSFXDefinition<TR3SoundDetails> newDefinition)
+    private static short ImportSoundEffect(TR3Level level, TRSFXDefinition<TR3SoundDetails> currentDefinition, TRSFXDefinition<TR3SoundDetails> newDefinition)
     {
         if (newDefinition.SampleIndices.Count == 0)
         {

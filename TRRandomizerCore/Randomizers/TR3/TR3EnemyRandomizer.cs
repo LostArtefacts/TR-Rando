@@ -300,7 +300,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         };
     }
 
-    private List<TR3Entities> GetCurrentEnemyEntities(TR3CombinedLevel level)
+    private static List<TR3Entities> GetCurrentEnemyEntities(TR3CombinedLevel level)
     {
         List<TR3Entities> allGameEnemies = TR3EntityUtilities.GetFullListOfEnemies();
         ISet<TR3Entities> allLevelEnts = new SortedSet<TR3Entities>();

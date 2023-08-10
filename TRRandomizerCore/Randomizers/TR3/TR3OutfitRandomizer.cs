@@ -63,7 +63,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
         _processingException?.Throw();
     }
 
-    private List<TR3Entities> GetLaraTypes()
+    private static List<TR3Entities> GetLaraTypes()
     {
         List<TR3Entities> allLaras = TR3EntityUtilities.GetLaraTypes();
         allLaras.Remove(TR3Entities.LaraInvisible);
@@ -153,7 +153,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
         protected override void StartImpl()
         {
             // Make the outfit selection outwith the processing thread to ensure consistent RNG.
-            List<TR3Entities> allLaras = _outer.GetLaraTypes();
+            List<TR3Entities> allLaras = GetLaraTypes();
             List<TR3CombinedLevel> levels = new(_outfitAllocations.Keys);
 
             foreach (TR3CombinedLevel level in levels)

@@ -69,7 +69,7 @@ public class TR3WeatherRandomizer : BaseTR3Randomizer
         }
     }
 
-    private void SetWeatherDependencies(TR3CombinedLevel level)
+    private static void SetWeatherDependencies(TR3CombinedLevel level)
     {
         if (level.Script.HasRain || level.Script.HasSnow)
         {
@@ -81,7 +81,7 @@ public class TR3WeatherRandomizer : BaseTR3Randomizer
         }
     }
 
-    private void SetWeatherRooms(TR3Room[] rooms)
+    private static void SetWeatherRooms(TR3Room[] rooms)
     {
         rooms.Where(r => r.IsSkyboxVisible)
             .ToList()

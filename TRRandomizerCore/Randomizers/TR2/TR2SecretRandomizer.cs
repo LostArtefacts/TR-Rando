@@ -190,7 +190,7 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
             _picker.FinaliseSecretPool(secretMap.Values, _levelInstance.Name);
 
 #if DEBUG
-            Debug.WriteLine(_levelInstance.Name + ": " + _picker.DescribeLocations(secretMap.Values));
+            Debug.WriteLine(_levelInstance.Name + ": " + SecretPicker.DescribeLocations(secretMap.Values));
 #endif
         }
     }

@@ -14,14 +14,14 @@ public class TRRandomizerCoord
         get => _instance ??= new();
     }
 
-    public IReadOnlyList<string> History => TRCoord.Instance.History;
+    public static IReadOnlyList<string> History => TRCoord.Instance.History;
     public event EventHandler HistoryChanged;
 
     public event EventHandler<TROpenRestoreEventArgs> OpenProgressChanged;
     private TROpenRestoreEventArgs _openEventArgs;
 
-    public string ConfigDirectory => TRCoord.Instance.ConfigDirectory;
-    public string ConfigFilePath => TRCoord.Instance.ConfigFilePath;
+    public static string ConfigDirectory => TRCoord.Instance.ConfigDirectory;
+    public static string ConfigFilePath => TRCoord.Instance.ConfigFilePath;
 
     private TRRandomizerCoord() { }
 
@@ -75,12 +75,12 @@ public class TRRandomizerCoord
         return new TRRandomizerController(directoryPath, performChecksumTest);
     }
 
-    public void ClearHistory()
+    public static void ClearHistory()
     {
         TRCoord.Instance.ClearHistory();
     }
 
-    public void ClearCurrentBackup()
+    public static void ClearCurrentBackup()
     {
         TRCoord.Instance.ClearCurrentBackup();
     }

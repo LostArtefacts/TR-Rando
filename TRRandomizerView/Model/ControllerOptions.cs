@@ -3043,10 +3043,10 @@ public class ControllerOptions : INotifyPropertyChanged
         NightModeAssaultCourse = _controller.NightModeAssaultCourse;
         OverrideSunsets = _controller.OverrideSunsets;
         NightModeDarkness = _controller.NightModeDarkness;
-        NightModeDarknessMaximum = _controller.NightModeDarknessRange;
+        NightModeDarknessMaximum = TRRandomizerController.NightModeDarknessRange;
         VfxFilterColor = _controller.VfxFilterColor;
         VfxRandomize = _controller.RandomizeVfx;
-        VfxAvailColors = _controller.VfxAvailableColorChoices;
+        VfxAvailColors = TRRandomizerController.VfxAvailableColorChoices;
         VfxVivid = _controller.VfxVivid;
         VfxLevel = _controller.VfxLevel;
         VfxRoom = _controller.VfxRoom;

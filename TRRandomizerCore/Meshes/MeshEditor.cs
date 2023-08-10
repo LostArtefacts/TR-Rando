@@ -130,7 +130,7 @@ public class MeshEditor
         Mesh.NumTexturedTriangles = (short)triangles.Count;
     }
 
-    public TRMesh CloneMesh(TRMesh mesh)
+    public static TRMesh CloneMesh(TRMesh mesh)
     {
         TRMesh clone = new()
         {
@@ -201,7 +201,7 @@ public class MeshEditor
         return clone;
     }
 
-    public TRMesh CloneMeshAsColoured(TRMesh mesh, ushort paletteIndex)
+    public static TRMesh CloneMeshAsColoured(TRMesh mesh, ushort paletteIndex)
     {
         TRMesh clone = CloneMesh(mesh);
 

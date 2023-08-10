@@ -214,7 +214,7 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
         monitor.UseMirroring = true;
     }
 
-    private void CheckMonkeyPickups(TR3CombinedLevel level)
+    private static void CheckMonkeyPickups(TR3CombinedLevel level)
     {
         // Do a global check for monkeys that may be sitting on more than one pickup.
         // This has to happen after item, enemy and environment rando to account for

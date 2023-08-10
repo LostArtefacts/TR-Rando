@@ -475,7 +475,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         });
     }
 
-    private void DisguiseEntity(TR2CombinedLevel level, TR2Entities guiser, TR2Entities targetEntity)
+    private static void DisguiseEntity(TR2CombinedLevel level, TR2Entities guiser, TR2Entities targetEntity)
     {
         List<TRModel> models = level.Data.Models.ToList();
         int existingIndex = models.FindIndex(m => m.ID == (short)guiser);
@@ -1024,7 +1024,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         }
     }
 
-    private void MakeChickensUnconditional(TR2CombinedLevel level)
+    private static void MakeChickensUnconditional(TR2CombinedLevel level)
     {
         // #327 Trick the game into never reaching the final frame of the death animation.
         // This results in a very abrupt death but avoids the level ending. For Ice Palace,
@@ -1180,7 +1180,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
                         if (_outer.Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && importedCollection.BirdMonsterGuiser != TR2Entities.BirdMonster)
                         {
-                            _outer.DisguiseEntity(level, importedCollection.BirdMonsterGuiser, TR2Entities.BirdMonster);
+                            DisguiseEntity(level, importedCollection.BirdMonsterGuiser, TR2Entities.BirdMonster);
                             enemies.BirdMonsterGuiser = importedCollection.BirdMonsterGuiser;
                         }
 

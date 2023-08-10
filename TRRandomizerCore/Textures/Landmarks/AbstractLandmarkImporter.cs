@@ -173,7 +173,7 @@ public abstract class AbstractLandmarkImporter<E, L>
         }
     }
 
-    private IndexedTRObjectTexture CreateTexture(Rectangle rectangle, bool mirrored)
+    private static IndexedTRObjectTexture CreateTexture(Rectangle rectangle, bool mirrored)
     {
         // Configure the points and reverse them if the level is mirrored
         List<TRObjectTextureVert> vertices = new()
@@ -204,7 +204,7 @@ public abstract class AbstractLandmarkImporter<E, L>
         };
     }
 
-    private TRObjectTextureVert CreatePoint(int x, int y)
+    private static TRObjectTextureVert CreatePoint(int x, int y)
     {
         return new TRObjectTextureVert
         {

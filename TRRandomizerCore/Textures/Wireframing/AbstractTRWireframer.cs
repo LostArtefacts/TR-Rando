@@ -232,7 +232,7 @@ public abstract class AbstractTRWireframer<E, L>
         packer.RemoveObjectTextureSegments(textures);
     }
 
-    private TRSize GetLargestSize(IEnumerable<TRSize> sizes)
+    private static TRSize GetLargestSize(IEnumerable<TRSize> sizes)
     {
         List<TRSize> compSizes = new(sizes);
         if (compSizes.Count > 0)
@@ -421,7 +421,7 @@ public abstract class AbstractTRWireframer<E, L>
         };
     }
 
-    private TRObjectTextureVert CreatePoint(int x, int y)
+    private static TRObjectTextureVert CreatePoint(int x, int y)
     {
         return new TRObjectTextureVert
         {
@@ -547,7 +547,7 @@ public abstract class AbstractTRWireframer<E, L>
         }
     }
 
-    private TRSize Find(TRSize s, Dictionary<TRSize, IndexedTRObjectTexture> map)
+    private static TRSize Find(TRSize s, Dictionary<TRSize, IndexedTRObjectTexture> map)
     {
         foreach (TRSize size in map.Keys)
         {
@@ -559,7 +559,7 @@ public abstract class AbstractTRWireframer<E, L>
         return s;
     }
 
-    private ushort RemapTexture(ushort currentTexture, ushort newTexture)
+    private static ushort RemapTexture(ushort currentTexture, ushort newTexture)
     {
         // Make sure double-sided textures are retained
         if ((currentTexture & 0x8000) > 0)

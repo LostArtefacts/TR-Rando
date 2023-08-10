@@ -361,7 +361,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
         }
         
-        private void CreateGoldenBraid(TR1CombinedLevel level)
+        private static void CreateGoldenBraid(TR1CombinedLevel level)
         {
             TRMesh goldenHips = TRMeshUtilities.GetModelFirstMesh(level.Data, TREntities.LaraMiscAnim_H);
             ushort goldPalette = goldenHips.ColouredRectangles[0].Texture;
@@ -371,7 +371,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             MeshEditor editor = new();
             foreach (TRMesh mesh in ponytailMeshes)
             {
-                TRMesh clonedMesh = editor.CloneMeshAsColoured(mesh, goldPalette);
+                TRMesh clonedMesh = MeshEditor.CloneMeshAsColoured(mesh, goldPalette);
                 TRMeshUtilities.InsertMesh(level.Data, clonedMesh);
             }
 
@@ -688,10 +688,10 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
         }
 
-        private void CopyMeshParts(TR1Level level, MeshCopyData data)
+        private static void CopyMeshParts(TR1Level level, MeshCopyData data)
         {
             MeshEditor editor = new();
-            TRMeshUtilities.InsertMesh(level, editor.Mesh = editor.CloneMesh(data.NewMesh));
+            TRMeshUtilities.InsertMesh(level, editor.Mesh = MeshEditor.CloneMesh(data.NewMesh));
 
             List<TRFace4> texturedQuads = editor.Mesh.TexturedRectangles.ToList();
             List<TRFace4> colouredQuads = editor.Mesh.ColouredRectangles.ToList();
@@ -873,7 +873,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
         }
 
-        private void ReplaceTexture(TRMesh baseMesh, TRMesh copyMesh, int baseIndex, int copyIndex, int rotations)
+        private static void ReplaceTexture(TRMesh baseMesh, TRMesh copyMesh, int baseIndex, int copyIndex, int rotations)
         {
             TRFace4 face = baseMesh.TexturedRectangles[baseIndex];
             face.Texture = copyMesh.TexturedRectangles[copyIndex].Texture;
@@ -881,7 +881,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             RotateFace(face, rotations);
         }
 
-        private void ConvertColourToTexture(TRMesh baseMesh, TRMesh copyMesh, int baseIndex, int copyIndex, int rotations)
+        private static void ConvertColourToTexture(TRMesh baseMesh, TRMesh copyMesh, int baseIndex, int copyIndex, int rotations)
         {
             List<TRFace4> texturedQuads = baseMesh.TexturedRectangles.ToList();
             List<TRFace4> colouredQuads = baseMesh.ColouredRectangles.ToList();
@@ -900,7 +900,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             RotateFace(face, rotations);
         }
 
-        private void MergeColouredTrianglesToTexture(TR1Level level, TRMesh baseMesh, TRMesh copyMesh, int[] triangleIndices, int copyIndex, int rotations)
+        private static void MergeColouredTrianglesToTexture(TR1Level level, TRMesh baseMesh, TRMesh copyMesh, int[] triangleIndices, int copyIndex, int rotations)
         {
             MeshEditor editor = new()
             {
@@ -948,7 +948,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             ConvertColourToTexture(baseMesh, copyMesh, baseMesh.NumColouredRectangles - 1, copyIndex, rotations);
         }
 
-        private void RotateFace(TRFace4 face, int rotations)
+        private static void RotateFace(TRFace4 face, int rotations)
         {
             if (rotations > 0)
             {

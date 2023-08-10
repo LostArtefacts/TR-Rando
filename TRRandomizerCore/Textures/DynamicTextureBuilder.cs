@@ -377,7 +377,7 @@ public class DynamicTextureBuilder
         level.ResetUnusedTextures();
     }
 
-    private void AddMeshTextures(TRMesh mesh, ISet<int> textures)
+    private static void AddMeshTextures(TRMesh mesh, ISet<int> textures)
     {
         foreach (TRFace3 f in mesh.TexturedTriangles)
             textures.Add(f.Texture);
@@ -385,7 +385,7 @@ public class DynamicTextureBuilder
             textures.Add(f.Texture);
     }
 
-    private void AddSpriteTextures(TR1Level level, TREntities spriteID, ISet<int> textures)
+    private static void AddSpriteTextures(TR1Level level, TREntities spriteID, ISet<int> textures)
     {
         TRSpriteSequence sequence = Array.Find(level.SpriteSequences, s => s.SpriteID == (int)spriteID);
         if (sequence != null)
@@ -397,7 +397,7 @@ public class DynamicTextureBuilder
         }
     }
 
-    private void AddSegmentsToMapping(Dictionary<TexturedTile, List<TexturedTileSegment>> segments, Dictionary<int, List<Rectangle>> mapping)
+    private static void AddSegmentsToMapping(Dictionary<TexturedTile, List<TexturedTileSegment>> segments, Dictionary<int, List<Rectangle>> mapping)
     {
         foreach (TexturedTile tile in segments.Keys)
         {

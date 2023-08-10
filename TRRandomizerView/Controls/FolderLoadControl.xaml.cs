@@ -127,14 +127,14 @@ public partial class FolderLoadControl : UserControl
         string msg = string.Format
         (
             "All backup files and edit configuration files will be removed from the directory below. Make sure to backup any files you want to keep.\n\n{0}\n\nDo you wish to proceed?",
-            TRRandomizerCoord.Instance.ConfigDirectory
+            TRRandomizerCoord.ConfigDirectory
         );
 
         if (MessageWindow.ShowConfirm(msg))
         {
             try
             {
-                TRRandomizerCoord.Instance.ClearHistory();
+                TRRandomizerCoord.ClearHistory();
             }
             catch (Exception e)
             {

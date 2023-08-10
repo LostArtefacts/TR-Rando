@@ -737,7 +737,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         }
     }
 
-    private TR2Entities GetWeaponAmmo(TR2Entities weapon)
+    private static TR2Entities GetWeaponAmmo(TR2Entities weapon)
     {
         return weapon switch
         {

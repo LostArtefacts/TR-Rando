@@ -123,7 +123,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         _processingException?.Throw();
     }
 
-    private void RemoveDefaultSecrets(TR3CombinedLevel level)
+    private static void RemoveDefaultSecrets(TR3CombinedLevel level)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
@@ -488,7 +488,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         _picker.FinaliseSecretPool(usedLocations, level.Name);
 
 #if DEBUG
-        Debug.WriteLine(level.Name + ": " + _picker.DescribeLocations(usedLocations));
+        Debug.WriteLine(level.Name + ": " + SecretPicker.DescribeLocations(usedLocations));
 #endif
     }
 
@@ -622,7 +622,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         }
     }
 
-    private void SetPuzzleTypeName(TR3CombinedLevel level, TR3Entities itemType, string name)
+    private static void SetPuzzleTypeName(TR3CombinedLevel level, TR3Entities itemType, string name)
     {
         if (TR3EntityUtilities.IsKeyType(itemType))
         {
@@ -743,7 +743,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         return true;
     }
 
-    private bool IsInvalidNeighbour(TRRoomSector baseSector, TRRoomSector neighbour)
+    private static bool IsInvalidNeighbour(TRRoomSector baseSector, TRRoomSector neighbour)
     {
         return (neighbour.Floor == -127 && neighbour.Ceiling == -127) // Inside a wall
             || (neighbour.RoomBelow != baseSector.RoomBelow)          // Mid-air
@@ -986,7 +986,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                         allocation.AssignedPickupModels.Add(puzzlePickupType);
 
                         // Assign a name for the script
-                        _outer.SetPuzzleTypeName(level, puzzlePickupType, _pickupNames[artefactPickupType]);
+                        SetPuzzleTypeName(level, puzzlePickupType, _pickupNames[artefactPickupType]);
 
                         // Tell the texture monitor that these artefacts are puzzle items
                         monitor.EntityMap[artefactPickupType] = puzzlePickupType;
@@ -1009,7 +1009,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             foreach (TR3CombinedLevel level in _importAllocations.Keys)
             {
                 // Get rid of existing secret triggers
-                _outer.RemoveDefaultSecrets(level);
+                RemoveDefaultSecrets(level);
 
                 // Only create new secrets if applicable
                 if (level.HasSecrets || _outer.Settings.DevelopmentMode)

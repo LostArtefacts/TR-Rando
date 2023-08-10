@@ -448,7 +448,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         _levelInstance.Data.SpriteTextures = _spriteRandomizer.Textures.ToArray();
     }
 
-    private bool IsSecretItem(TREntity entity, int entityIndex, TR1Level level, FDControl floorData)
+    private static bool IsSecretItem(TREntity entity, int entityIndex, TR1Level level, FDControl floorData)
     {
         TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
         if (sector.FDIndex != 0)

@@ -113,7 +113,7 @@ public class SecretPicker
         }
     }
 
-    private IEnumerable<Location> FilterLocations(IEnumerable<Location> locations, bool isMirrored, Difficulty difficulty, bool glitched)
+    private static IEnumerable<Location> FilterLocations(IEnumerable<Location> locations, bool isMirrored, Difficulty difficulty, bool glitched)
     {
         return locations.Where
         (
@@ -125,7 +125,7 @@ public class SecretPicker
         );
     }
 
-    public string DescribeLocations(IEnumerable<Location> locations)
+    public static string DescribeLocations(IEnumerable<Location> locations)
     {
         int glitchlessEasy = FilterLocations(locations, false, Difficulty.Easy, false).Count();
         int glitchlessHard = FilterLocations(locations, false, Difficulty.Hard, false).Count();

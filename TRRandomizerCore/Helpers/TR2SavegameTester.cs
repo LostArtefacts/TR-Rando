@@ -60,12 +60,12 @@ public class TR2SavegameTester
             + 5 * (_sgSizes[SGFlags.Position] + sizeof(int))
     };
 
-    public bool Test(TR2Level level)
+    public static bool Test(TR2Level level)
     {
         return EstimateSGSize(level) <= _maxSize;
     }
 
-    public int EstimateSGSize(TR2Level level)
+    public static int EstimateSGSize(TR2Level level)
     {
         int size = 0;
 

@@ -184,7 +184,7 @@ public class TR2GameStringRandomizer : BaseTR2Randomizer
         }
     }
 
-    private void MoveAndReplacePuzzle(AbstractTRScriptedLevel level, int currentIndex, int newIndex, string replacement)
+    private static void MoveAndReplacePuzzle(AbstractTRScriptedLevel level, int currentIndex, int newIndex, string replacement)
     {
         if (level.Puzzles[currentIndex] != replacement)
         {

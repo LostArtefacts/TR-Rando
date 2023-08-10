@@ -14,7 +14,6 @@ namespace TRRandomizerCore;
 public class TRRandomizerController
 {
     private readonly TREditor _editor;
-    private readonly TRVersionSupport _support;
 
     internal AbstractTRScriptEditor ScriptEditor => _editor.ScriptEditor;
     internal RandomizerSettings LevelRandomizer => (_editor.LevelEditor as ISettingsProvider).Settings;
@@ -27,7 +26,6 @@ public class TRRandomizerController
         _editor.RestoreProgressChanged += Editor_RestoreProgressChanged;
         StoreExternalOrganisations();
 
-        _support = new TRVersionSupport();
         if (!IsRandomizationSupported())
         {
             throw new NotSupportedException(string.Format("Randomization of {0} is not currently supported.", EditionTitle));
@@ -37,17 +35,17 @@ public class TRRandomizerController
     #region Version Support
     public bool IsRandomizationSupported()
     {
-        return _support.IsRandomizationSupported(_editor.Edition);
+        return TRVersionSupport.IsRandomizationSupported(_editor.Edition);
     }
 
     public bool IsRandomizationSupported(TRRandomizerType randomizerType)
     {
-        return _support.IsRandomizationSupported(_editor.Edition, randomizerType);
+        return TRVersionSupport.IsRandomizationSupported(_editor.Edition, randomizerType);
     }
 
     public List<string> GetExecutables()
     {
-        return _support.GetExecutables(_editor.Edition);
+        return TRVersionSupport.GetExecutables(_editor.Edition);
     }
 
     public bool IsTR1 => _editor.Edition.Version == TRVersion.TR1;
@@ -1691,7 +1689,7 @@ public class TRRandomizerController
         set => LevelRandomizer.NightModeDarkness = value;
     }
 
-    public uint NightModeDarknessRange => TR2NightModeRandomizer.DarknessRange;
+    public static uint NightModeDarknessRange => TR2NightModeRandomizer.DarknessRange;
 
     public bool NightModeAssaultCourse
     {
@@ -1867,7 +1865,7 @@ public class TRRandomizerController
         set => LevelRandomizer.VfxFilterColor = value;
     }
 
-    public Color[] VfxAvailableColorChoices
+    public static Color[] VfxAvailableColorChoices
     {
         get
         {

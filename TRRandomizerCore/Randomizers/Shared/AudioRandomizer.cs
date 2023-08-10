@@ -99,7 +99,7 @@ public class AudioRandomizer
         return _tracks[category];
     }
 
-    public List<TRSFXGeneralCategory> GetSFXCategories(RandomizerSettings settings)
+    public static List<TRSFXGeneralCategory> GetSFXCategories(RandomizerSettings settings)
     {
         List<TRSFXGeneralCategory> sfxCategories = new();
         if (settings.ChangeWeaponSFX)

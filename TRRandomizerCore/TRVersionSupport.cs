@@ -151,12 +151,12 @@ internal class TRVersionSupport
         [TRVersion.TR3] = new List<string> { "Tomb3.exe" }
     };
 
-    public bool IsRandomizationSupported(TREdition edition)
+    public static bool IsRandomizationSupported(TREdition edition)
     {
         return _supportedTypes.ContainsKey(edition.Version);
     }
 
-    public bool IsRandomizationSupported(TREdition edition, TRRandomizerType randomizerType)
+    public static bool IsRandomizationSupported(TREdition edition, TRRandomizerType randomizerType)
     {
         if (!IsRandomizationSupported(edition))
         {
@@ -176,7 +176,7 @@ internal class TRVersionSupport
         return supported;
     }
 
-    public List<string> GetExecutables(TREdition edition)
+    public static List<string> GetExecutables(TREdition edition)
     {
         List<string> exes = new();
         if (_versionExes.ContainsKey(edition.Version))

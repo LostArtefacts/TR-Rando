@@ -358,7 +358,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         };
     }
 
-    private List<TREntities> GetCurrentEnemyEntities(TR1CombinedLevel level)
+    private static List<TREntities> GetCurrentEnemyEntities(TR1CombinedLevel level)
     {
         List<TREntities> allGameEnemies = TR1EntityUtilities.GetFullListOfEnemies();
         ISet<TREntities> allLevelEnts = new SortedSet<TREntities>();
@@ -717,7 +717,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
     }
 
-    private int GetEntityCount(TR1CombinedLevel level, TREntities entityType)
+    private static int GetEntityCount(TR1CombinedLevel level, TREntities entityType)
     {
         int count = 0;
         TREntities translatedType = TR1EntityUtilities.TranslateEntityAlias(entityType);
@@ -764,7 +764,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         };
     }
 
-    private bool IsEnemyInOrAboveWater(TREntity entity, TR1Level level, FDControl floorData)
+    private static bool IsEnemyInOrAboveWater(TREntity entity, TR1Level level, FDControl floorData)
     {
         if (level.Rooms[entity.Room].ContainsWater)
         {
@@ -784,7 +784,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         return false;
     }
 
-    private void AmendToQLarson(TR1CombinedLevel level)
+    private static void AmendToQLarson(TR1CombinedLevel level)
     {
         TRModel larsonModel = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.Larson);
         if (larsonModel != null)
@@ -905,7 +905,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
     }
 
-    private void AdjustCentaurStatue(TREntity entity, TR1Level level, FDControl floorData)
+    private static void AdjustCentaurStatue(TREntity entity, TR1Level level, FDControl floorData)
     {
         // If they're floating, they tend not to trigger as Lara's not within range
         TR1LocationGenerator locationGenerator = new();
@@ -1091,9 +1091,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     break;
                 case 2:
                     // Switch Lara and Natla
-                    MeshEditor editor = new();
-                    TRMesh laraHead = editor.CloneMesh(lara[14]);
-                    TRMesh natlaHead = editor.CloneMesh(natla[8]);
+                    TRMesh laraHead = MeshEditor.CloneMesh(lara[14]);
+                    TRMesh natlaHead = MeshEditor.CloneMesh(natla[8]);
                     TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], natlaHead);
                     TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, natla[8], laraHead);
                     break;
@@ -1116,7 +1115,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (availableEnemies.Contains(TREntities.Adam) && _generator.NextDouble() < 0.4)
         {
             // Replace Adam's head with a much larger version of Natla's, Larson's or normal/angry Lara's.
-            MeshEditor editor = new();
             TRMesh[] adam = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Adam);
             TRMesh replacement;
             if (availableEnemies.Contains(TREntities.Natla) && _generator.NextDouble() < 0.5)
@@ -1136,7 +1134,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 replacement = TRMeshUtilities.GetModelMeshes(level.Data, _generator.NextDouble() < 0.5 ? TREntities.LaraUziAnimation_H : TREntities.Lara)[14];
             }
 
-            TRMeshUtilities.DuplicateMesh(level.Data, adam[3], editor.CloneMesh(replacement));
+            TRMeshUtilities.DuplicateMesh(level.Data, adam[3], MeshEditor.CloneMesh(replacement));
 
             // Enlarge and rotate about Y
             foreach (TRVertex vertex in adam[3].Vertices)
@@ -1165,12 +1163,11 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (availableEnemies.Contains(TREntities.Pierre) && _generator.NextDouble() < 0.25)
         {
             // Replace Pierre's head with a slightly bigger version of Lara's (either angry Lara or normal Lara)
-            MeshEditor editor = new();
             TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Pierre);
             TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara);
             TRMesh[] laraUziAnim = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraUziAnimation_H);
 
-            TRMeshUtilities.DuplicateMesh(level.Data, pierre[8], editor.CloneMesh(_generator.NextDouble() < 0.5 ? laraUziAnim[14] : lara[14]));
+            TRMeshUtilities.DuplicateMesh(level.Data, pierre[8], MeshEditor.CloneMesh(_generator.NextDouble() < 0.5 ? laraUziAnim[14] : lara[14]));
             foreach (TRVertex vertex in pierre[8].Vertices)
             {
                 vertex.X = (short)(vertex.X * 1.5 + 6);

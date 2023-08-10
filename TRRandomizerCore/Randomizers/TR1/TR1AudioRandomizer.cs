@@ -60,7 +60,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         _audioRandomizer = new AudioRandomizer(ScriptEditor.AudioProvider.GetCategorisedTracks());
 
         // Decide which sound effect categories we want to randomize.
-        _sfxCategories = _audioRandomizer.GetSFXCategories(Settings);
+        _sfxCategories = AudioRandomizer.GetSFXCategories(Settings);
 
         // SFX in these categories can potentially remain as they are
         _persistentCategories = new List<TRSFXGeneralCategory>
@@ -245,7 +245,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         SoundUtilities.ResortSoundIndices(level.Data);
     }
 
-    private short ImportSoundEffect(TR1Level level, TR1SFXDefinition definition, TRSFXGeneralCategory category)
+    private static short ImportSoundEffect(TR1Level level, TR1SFXDefinition definition, TRSFXGeneralCategory category)
     {
         if (definition.SoundData.SampleIndices.Count == 0)
         {

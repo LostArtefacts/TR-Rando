@@ -79,7 +79,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
         _processingException?.Throw();
     }
 
-    private List<TR2Entities> GetLaraTypes()
+    private static List<TR2Entities> GetLaraTypes()
     {
         List<TR2Entities> allLaras = TR2EntityUtilities.GetLaraTypes();
         allLaras.Remove(TR2Entities.LaraInvisible);
@@ -171,7 +171,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             // We select all potential Laras including the default for the level as there are
             // only 5 to choose from (there is also Assault Course Lara, but when holstering pistols
             // her trousers disappear, so she is excluded for the time being...).
-            List<TR2Entities> allLaras = _outer.GetLaraTypes();
+            List<TR2Entities> allLaras = GetLaraTypes();
             List<TR2CombinedLevel> levels = new(_outfitAllocations.Keys);
 
             foreach (TR2CombinedLevel level in levels)
@@ -308,16 +308,15 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             }
         }
 
-        private void CloneLaraMeshes(TR2CombinedLevel level, List<TRModel> clones, TRModel laraModel)
+        private static void CloneLaraMeshes(TR2CombinedLevel level, List<TRModel> clones, TRModel laraModel)
         {
             if (clones.Count > 0)
             {
-                MeshEditor editor = new();
                 TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, laraModel);
                 int firstMeshIndex = -1;
                 for (int i = 0; i < meshes.Length; i++)
                 {
-                    int insertedIndex = TRMeshUtilities.InsertMesh(level.Data, editor.CloneMesh(meshes[i]));
+                    int insertedIndex = TRMeshUtilities.InsertMesh(level.Data, MeshEditor.CloneMesh(meshes[i]));
                     if (firstMeshIndex == -1)
                     {
                         firstMeshIndex = insertedIndex;

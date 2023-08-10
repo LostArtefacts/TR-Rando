@@ -319,7 +319,7 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
         return new TexturedTileSegment(texture, frame.Bitmap);
     }
 
-    private TRModel FindDoorModel(TR1Level level, ushort textureIndex)
+    private static TRModel FindDoorModel(TR1Level level, ushort textureIndex)
     {
         foreach (TRModel model in level.Models)
         {

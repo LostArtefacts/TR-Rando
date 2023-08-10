@@ -172,7 +172,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         }
     }
 
-    private Dictionary<int, TR2Entity> GetSecretItems(TR2Level level)
+    private static Dictionary<int, TR2Entity> GetSecretItems(TR2Level level)
     {
         Dictionary<int, TR2Entity> entities = new();
         for (int i = 0; i < level.NumEntities; i++)
@@ -192,7 +192,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         _audioRandomizer = new AudioRandomizer(ScriptEditor.AudioProvider.GetCategorisedTracks());
 
         // Decide which sound effect categories we want to randomize.
-        _sfxCategories = _audioRandomizer.GetSFXCategories(Settings);
+        _sfxCategories = AudioRandomizer.GetSFXCategories(Settings);
 
         // Only load the SFX if we are changing at least one category
         if (_sfxCategories.Count > 0)
@@ -274,7 +274,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         SoundUtilities.ResortSoundIndices(level.Data);
     }
 
-    private short ImportSoundEffect(TR2Level level, TRSFXDefinition<TRSoundDetails> definition)
+    private static short ImportSoundEffect(TR2Level level, TRSFXDefinition<TRSoundDetails> definition)
     {
         if (definition.SampleIndices.Count == 0)
         {

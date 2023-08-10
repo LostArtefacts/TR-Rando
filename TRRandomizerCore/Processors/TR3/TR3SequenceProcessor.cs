@@ -206,7 +206,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         }
     }
 
-    private void AddColdLevelMedis(TR3CombinedLevel level)
+    private static void AddColdLevelMedis(TR3CombinedLevel level)
     {
         if (!level.Data.Entities.Any(e => e.TypeID == (short)TR3Entities.UPV))
         {
@@ -229,7 +229,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3Entities.SmallMed_P), smallMediCount);
     }
 
-    private void AmendAntarctica(TR3CombinedLevel level)
+    private static void AmendAntarctica(TR3CombinedLevel level)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
@@ -336,7 +336,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         }
     }
 
-    private void AmendSouthPacificSpikes(TR3CombinedLevel level)
+    private static void AmendSouthPacificSpikes(TR3CombinedLevel level)
     {
         short spikes = (short)TR3Entities.TeethSpikesOrBarbedWire;
         List<TR2Entity> entities = level.Data.Entities.ToList().FindAll(e => e.TypeID == spikes);

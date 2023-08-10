@@ -285,7 +285,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
             || ((sector.Floor - sector.Ceiling) < (CrawlspacesAllowed ? 2 : 4) && sector.RoomAbove == _noRoom);
     }
 
-    private bool IsTriggerInvalid(FDTriggerEntry trigger)
+    private static bool IsTriggerInvalid(FDTriggerEntry trigger)
     {
         // Any trigger types where we don't want items placed
         return trigger.TrigType == FDTrigType.Pickup
@@ -365,7 +365,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
     }
 
     // Returned vector contains x, y, z and angle adjustments for midpoint
-    private Vector4? GetBestTriangleMidpoint(TRRoomSector sector, TR3TriangulationEntry triangulation, int sectorIndex, int roomDepth, int roomYTop)
+    private static Vector4? GetBestTriangleMidpoint(TRRoomSector sector, TR3TriangulationEntry triangulation, int sectorIndex, int roomDepth, int roomYTop)
     {
         int t0 = triangulation.TriData.C10;
         int t1 = triangulation.TriData.C00;
@@ -596,7 +596,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
         return null;
     }
 
-    private Location CreateLocation(short roomIndex, TRRoomSector sector, int sectorIndex, ushort roomDepth, Vector2 roomPosition)
+    private static Location CreateLocation(short roomIndex, TRRoomSector sector, int sectorIndex, ushort roomDepth, Vector2 roomPosition)
     {
         // Get the sector's position in its room
         int x = sectorIndex / roomDepth * _fullSectorSize;

@@ -381,7 +381,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         }
     }
 
-    private int GetLevelKeyItemBaseAlias(string name)
+    private static int GetLevelKeyItemBaseAlias(string name)
     {
         TR3Entities alias = name switch
         {

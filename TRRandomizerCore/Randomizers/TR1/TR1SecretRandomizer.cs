@@ -188,7 +188,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         }
     }
 
-    private void RemoveDefaultSecrets(TR1CombinedLevel level)
+    private static void RemoveDefaultSecrets(TR1CombinedLevel level)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
@@ -562,7 +562,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         _picker.FinaliseSecretPool(usedLocations, level.Name);
 
 #if DEBUG
-        Debug.WriteLine(level.Name + ": " +  _picker.DescribeLocations(usedLocations));
+        Debug.WriteLine(level.Name + ": " + SecretPicker.DescribeLocations(usedLocations));
 #endif
     }
 
@@ -655,7 +655,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         }
     }
 
-    private void SetPuzzleTypeName(TR1CombinedLevel level, TREntities itemType, string name)
+    private static void SetPuzzleTypeName(TR1CombinedLevel level, TREntities itemType, string name)
     {
         if (TR1EntityUtilities.IsKeyType(itemType))
         {
@@ -674,7 +674,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         }
     }
 
-    private void PopulateScriptStrings(int index, List<string> gameStrings, string id)
+    private static void PopulateScriptStrings(int index, List<string> gameStrings, string id)
     {
         while (index > gameStrings.Count)
         {
@@ -763,7 +763,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         return true;
     }
 
-    private bool CheckSectorsBelow(TR1CombinedLevel level, Location location, TRRoomSector sector, FDControl floorData)
+    private static bool CheckSectorsBelow(TR1CombinedLevel level, Location location, TRRoomSector sector, FDControl floorData)
     {
         // Allow this check to be overridden with Validated - covers glitched locations.
         if (!location.Validated && sector.RoomBelow != 255)
@@ -839,7 +839,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         return true;
     }
 
-    private bool IsInvalidNeighbour(TRRoomSector neighbour)
+    private static bool IsInvalidNeighbour(TRRoomSector neighbour)
     {
         return neighbour.Floor == -127 && neighbour.Ceiling == -127; // Inside a wall
     }
@@ -1046,7 +1046,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                         allocation.AssignedPickupModels.Add(puzzlePickupType);
 
                         // Assign a name for the script
-                        _outer.SetPuzzleTypeName(level, puzzlePickupType, _pickupNames[secretModelType]);
+                        SetPuzzleTypeName(level, puzzlePickupType, _pickupNames[secretModelType]);
                     }
 
                     level.Data.Models = models.ToArray();
@@ -1067,7 +1067,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                 if (!level.IsAssault)
                 {
                     // Get rid of existing secret triggers
-                    _outer.RemoveDefaultSecrets(level);
+                    RemoveDefaultSecrets(level);
 
                     TRSecretModelAllocation<TREntities> allocation = _importAllocations[level];
 
