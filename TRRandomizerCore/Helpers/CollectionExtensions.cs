@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-
-namespace TRRandomizerCore.Helpers;
+﻿namespace TRRandomizerCore.Helpers;
 
 public static class CollectionExtensions
 {

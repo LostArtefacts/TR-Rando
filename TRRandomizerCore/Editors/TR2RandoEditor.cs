@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using TRGE.Coord;
 using TRGE.Core;
-using TRLevelControl.Helpers;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Processors;
 using TRRandomizerCore.Randomizers;

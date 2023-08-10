@@ -1,12 +1,9 @@
-﻿using System;
-using System.IO;
-using TRRandomizerCore.Editors;
+﻿using TRRandomizerCore.Editors;
 using TRRandomizerCore.Globalisation;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Randomizers;
 using TRGE.Coord;
 using TRGE.Core;
-using System.Collections.Generic;
 using System.Drawing;
 using TRRandomizerCore.Utilities;
 using TRRandomizerCore.Secrets;

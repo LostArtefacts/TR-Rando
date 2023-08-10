@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using TREnvironmentEditor;
+﻿using TREnvironmentEditor;
 using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model;
 using TRRandomizerCore.Editors;

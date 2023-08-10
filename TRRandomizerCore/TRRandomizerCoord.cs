@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TRRandomizerCore.Editors;
+﻿using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
 using TRGE.Coord;
 using TRGE.Core;

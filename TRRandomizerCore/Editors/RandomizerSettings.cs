@@ -1,10 +1,7 @@
-﻿using System;
-using TRRandomizerCore.Globalisation;
+﻿using TRRandomizerCore.Globalisation;
 using TRRandomizerCore.Helpers;
 using TRGE.Core;
 using System.Drawing;
-using System.Collections.Generic;
-using System.Linq;
 using TRRandomizerCore.Secrets;
 
 namespace TRRandomizerCore.Editors;

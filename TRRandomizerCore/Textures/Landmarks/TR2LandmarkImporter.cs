@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TRFDControl;
+﻿using TRFDControl;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 using TRModelTransporter.Packing;

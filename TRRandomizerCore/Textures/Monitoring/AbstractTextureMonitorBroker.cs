@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TRTexture16Importer.Textures;
+﻿using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Textures;
 

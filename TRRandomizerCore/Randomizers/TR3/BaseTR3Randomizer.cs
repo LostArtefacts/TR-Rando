@@ -1,5 +1,4 @@
-﻿using System;
-using TRRandomizerCore.Editors;
+﻿using TRRandomizerCore.Editors;
 using TRRandomizerCore.Processors;
 
 namespace TRRandomizerCore.Randomizers;

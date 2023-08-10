@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-
-namespace TRRandomizerCore.Processors;
+﻿namespace TRRandomizerCore.Processors;
 
 internal abstract class AbstractProcessorThread<R> where R : ILevelProcessor
 {

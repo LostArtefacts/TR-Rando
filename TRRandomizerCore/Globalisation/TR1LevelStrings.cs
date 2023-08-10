@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace TRRandomizerCore.Globalisation;
+﻿namespace TRRandomizerCore.Globalisation;
 
 public class TR1LevelStrings
 {

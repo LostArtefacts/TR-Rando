@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using TRFDControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;

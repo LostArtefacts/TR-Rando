@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TRGE.Core;
+﻿using TRGE.Core;
 
 namespace TRRandomizerCore;
 

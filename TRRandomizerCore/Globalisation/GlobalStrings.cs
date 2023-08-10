@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TRRandomizerCore.Globalisation;
+﻿namespace TRRandomizerCore.Globalisation;
 
 public class GlobalStrings
 {

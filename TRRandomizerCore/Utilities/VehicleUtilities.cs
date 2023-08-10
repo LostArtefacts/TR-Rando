@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using TRRandomizerCore.Helpers;
 using TRLevelControl.Model.Enums;
-using System.Linq;
 using TRRandomizerCore.Levels;
 using TRLevelControl.Model;
 

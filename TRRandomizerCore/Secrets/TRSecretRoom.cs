@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 using TREnvironmentEditor.Model;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TRGE.Core.Item.Enums;
+﻿using TRGE.Core.Item.Enums;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 

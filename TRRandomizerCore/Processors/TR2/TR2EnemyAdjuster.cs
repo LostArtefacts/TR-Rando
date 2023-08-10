@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TRFDControl;
+﻿using TRFDControl;
 using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;

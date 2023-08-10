@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TRRandomizerCore.Textures;
+﻿namespace TRRandomizerCore.Textures;
 
 public class TRSize : IComparable<TRSize>
 {

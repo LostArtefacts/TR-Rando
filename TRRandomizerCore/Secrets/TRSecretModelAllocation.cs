@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TRRandomizerCore.Secrets;
+﻿namespace TRRandomizerCore.Secrets;
 
 public class TRSecretModelAllocation<E> where E : Enum
 {

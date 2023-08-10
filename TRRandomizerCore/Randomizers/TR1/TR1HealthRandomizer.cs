@@ -1,5 +1,4 @@
-﻿using System;
-using TRGE.Core;
+﻿using TRGE.Core;
 
 namespace TRRandomizerCore.Randomizers;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TRRandomizerCore.Processors;
+﻿namespace TRRandomizerCore.Processors;
 
 public interface ILevelProcessor
 {
