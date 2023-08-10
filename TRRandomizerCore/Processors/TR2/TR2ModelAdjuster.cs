@@ -7,14 +7,14 @@ namespace TRRandomizerCore.Processors;
 
 public class TR2ModelAdjuster : TR2LevelProcessor
 {
-    private static readonly Dictionary<TR2Entities, TR2Entities> _modelRemap = new Dictionary<TR2Entities, TR2Entities>
+    private static readonly Dictionary<TR2Entities, TR2Entities> _modelRemap = new()
     {
         [TR2Entities.Puzzle2_M_H] = TR2Entities.Puzzle3_M_H,
         [TR2Entities.PuzzleHole2] = TR2Entities.PuzzleHole3,
         [TR2Entities.PuzzleDone2] = TR2Entities.PuzzleDone3
     };
 
-    private static readonly Dictionary<TR2Entities, TR2Entities> _spriteRemap = new Dictionary<TR2Entities, TR2Entities>
+    private static readonly Dictionary<TR2Entities, TR2Entities> _spriteRemap = new()
     {
         [TR2Entities.Puzzle2_S_P] = TR2Entities.Puzzle3_S_P
     };

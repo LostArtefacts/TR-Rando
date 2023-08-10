@@ -77,13 +77,13 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
         SetMessage("Randomizing secrets - loading levels");
 
-        List<SecretProcessor> processors = new List<SecretProcessor>();
+        List<SecretProcessor> processors = new();
         for (int i = 0; i < _maxThreads; i++)
         {
             processors.Add(new SecretProcessor(this));
         }
 
-        List<TR3CombinedLevel> levels = new List<TR3CombinedLevel>(Levels.Count);
+        List<TR3CombinedLevel> levels = new(Levels.Count);
         foreach (TR3ScriptedLevel lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
@@ -128,7 +128,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private void RemoveDefaultSecrets(TR3CombinedLevel level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         // Scan all rooms and remove any existing secret triggers.
@@ -274,7 +274,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             level.Data.Cameras = cameras.ToArray();
             level.Data.NumCameras = (uint)cameras.Count;
 
-            FDControl floorData = new FDControl();
+            FDControl floorData = new();
             floorData.ParseFromLevel(level.Data);
 
             // Get each trigger created for each secret index and add the camera, provided
@@ -308,7 +308,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private static void CreateTrapdoorTrigger(TR2Entity door, ushort doorIndex, TR3Level level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         TRRoomSector sector = FDUtilities.GetRoomSector(door.X, door.Y, door.Z, door.Room, level, floorData);
@@ -340,13 +340,13 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private void PlaceAllSecrets(TR3CombinedLevel level, List<TR3Entities> pickupTypes, TRSecretRoom<TR2Entity> rewardRoom)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         List<TR2Entity> entities = level.Data.Entities.ToList();
         List<Location> locations = _locations[level.Name];
 
-        TRSecretPlacement<TR3Entities> secret = new TRSecretPlacement<TR3Entities>();
+        TRSecretPlacement<TR3Entities> secret = new();
         int pickupIndex = 0;
         ushort secretIndex = 0;
         ushort countedSecrets = _devModeSecretCount; // For dev mode test the max number of secrets in TR3
@@ -407,12 +407,12 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private void RandomizeSecrets(TR3CombinedLevel level, List<TR3Entities> pickupTypes, TRSecretRoom<TR2Entity> rewardRoom)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         List<TR2Entity> entities = level.Data.Entities.ToList();
         List<Location> locations = _locations[level.Name];
-        List<Location> usedLocations = new List<Location>();
+        List<Location> usedLocations = new();
 
         Queue<Location> guaranteedLocations = _picker.GetGuaranteedLocations(locations, Mirrorer.IsMirrored(level.Name), level.Script.NumSecrets, location =>
         {
@@ -425,7 +425,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             return result;
         });
 
-        TRSecretPlacement<TR3Entities> secret = new TRSecretPlacement<TR3Entities>();
+        TRSecretPlacement<TR3Entities> secret = new();
         int pickupIndex = 0;
         bool damagingLocationUsed = false;
         bool glitchedDamagingLocationUsed = false;
@@ -535,7 +535,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             proximity = _TINY_RADIUS;
         }
 
-        Sphere newLoc = new Sphere(new System.Numerics.Vector3(loc.X, loc.Y, loc.Z), proximity);
+        Sphere newLoc = new(new System.Numerics.Vector3(loc.X, loc.Y, loc.Z), proximity);
 
         foreach (Location used in usedLocs)
         {
@@ -777,7 +777,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         }
 
         // Make a new pickup trigger
-        FDTriggerEntry trigger = new FDTriggerEntry
+        FDTriggerEntry trigger = new()
         {
             Setup = new FDSetup { Value = 4 },
             TrigSetup = new FDTrigSetup
@@ -814,7 +814,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         // move Object actions if the mask on this trigger is full.
         if (existingTrigger != null)
         {
-            List<FDActionListItem> existingActions = new List<FDActionListItem>();
+            List<FDActionListItem> existingActions = new();
             foreach (FDActionListItem actionItem in existingTrigger.TrigActionList)
             {
                 if (actionItem.TrigAction == FDTrigAction.Object)
@@ -850,7 +850,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         private static readonly Dictionary<TR3Entities, TR3Entities> _artefactReplacements = TR3EntityUtilities.GetArtefactReplacements();
 
         // Move this to Gamestring Rando once implemented
-        private static readonly Dictionary<TR3Entities, string> _pickupNames = new Dictionary<TR3Entities, string>
+        private static readonly Dictionary<TR3Entities, string> _pickupNames = new()
         {
             [TR3Entities.Infada_P] = "Secret Infada Stone",
             [TR3Entities.OraDagger_P] = "Secret Ora Dagger",
@@ -945,7 +945,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
                     // Get the artefacts into the level and refresh the model list
                     TextureMonitor<TR3Entities> monitor = _outer.TextureMonitor.CreateMonitor(level.Name, allocation.ImportModels);
-                    TR3ModelImporter importer = new TR3ModelImporter
+                    TR3ModelImporter importer = new()
                     {
                         Level = level.Data,
                         LevelName = level.Name,

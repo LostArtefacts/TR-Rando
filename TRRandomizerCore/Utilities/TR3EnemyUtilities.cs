@@ -75,7 +75,7 @@ public static class TR3EnemyUtilities
 
     public static Dictionary<TR3Entities, List<string>> PrepareEnemyGameTracker(RandoDifficulty difficulty)
     {
-        Dictionary<TR3Entities, List<string>> tracker = new Dictionary<TR3Entities, List<string>>();
+        Dictionary<TR3Entities, List<string>> tracker = new();
 
         if (difficulty == RandoDifficulty.Default)
         {
@@ -139,7 +139,7 @@ public static class TR3EnemyUtilities
 
     public static List<TR3Entities> GetRequiredEnemies(string lvlName)
     {
-        List<TR3Entities> entities = new List<TR3Entities>();
+        List<TR3Entities> entities = new();
         if (_requiredEnemies.ContainsKey(lvlName))
         {
             entities.AddRange(_requiredEnemies[lvlName]);
@@ -149,7 +149,7 @@ public static class TR3EnemyUtilities
 
     public static List<Location> GetAIPathing(string lvlName, TR3Entities entity, short room)
     {
-        List<Location> locations = new List<Location>();
+        List<Location> locations = new();
         if (_restrictedEnemyPathing.ContainsKey(lvlName) && _restrictedEnemyPathing[lvlName].ContainsKey(entity) && _restrictedEnemyPathing[lvlName][entity].ContainsKey(room))
         {
             locations.AddRange(_restrictedEnemyPathing[lvlName][entity][room]);
@@ -162,7 +162,7 @@ public static class TR3EnemyUtilities
         TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR3EntityUtilities.IsEnemyType((TR3Entities)e.TypeID));
         foreach (TR2Entity entityInstance in enemies)
         {
-            List<TR2Entity> sharedItems = new List<TR2Entity>(Array.FindAll
+            List<TR2Entity> sharedItems = new(Array.FindAll
             (
                 level.Data.Entities,
                 e =>
@@ -190,7 +190,7 @@ public static class TR3EnemyUtilities
     {
         // If the priorities map doesn't contain an entity we are trying to import as a key, TRModelTransporter
         // will assume it always has priority (e.g. DogNevada replacing DogLondon).
-        Dictionary<TR3Entities, TR3Entities> priorities = new Dictionary<TR3Entities, TR3Entities>();
+        Dictionary<TR3Entities, TR3Entities> priorities = new();
 
         return priorities;
     }
@@ -201,7 +201,7 @@ public static class TR3EnemyUtilities
         {
             int entityID = level.Entities.ToList().IndexOf(entity);
 
-            FDControl fdControl = new FDControl();
+            FDControl fdControl = new();
             fdControl.ParseFromLevel(level);
 
             List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(fdControl, entityID);
@@ -240,7 +240,7 @@ public static class TR3EnemyUtilities
         double average = (double)weight / enemyEntities.Count;
         weight = Convert.ToInt32(Math.Round(average, 0, MidpointRounding.AwayFromZero));
 
-        List<EnemyDifficulty> allDifficulties = new List<EnemyDifficulty>(Enum.GetValues(typeof(EnemyDifficulty)).Cast<EnemyDifficulty>());
+        List<EnemyDifficulty> allDifficulties = new(Enum.GetValues(typeof(EnemyDifficulty)).Cast<EnemyDifficulty>());
 
         if (weight > 0)
         {
@@ -271,7 +271,7 @@ public static class TR3EnemyUtilities
 
     // We also limit the count per level for some, such as bosses.
     // Winston is an easter egg so maybe keep it low.
-    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyLevelCountsTechnical = new Dictionary<TR3Entities, int>
+    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyLevelCountsTechnical = new()
     {
         [TR3Entities.TonyFirehands] = 1,
         [TR3Entities.Puna] = 1,
@@ -279,7 +279,7 @@ public static class TR3EnemyUtilities
         [TR3Entities.WinstonInCamoSuit] = 1
     };
 
-    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyLevelCountsDefault = new Dictionary<TR3Entities, int>
+    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyLevelCountsDefault = new()
     {
         [TR3Entities.TonyFirehands] = 1,
         [TR3Entities.Puna] = 1,
@@ -287,19 +287,19 @@ public static class TR3EnemyUtilities
     };
 
     // These enemies are restricted a set number of times throughout the entire game.
-    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyGameCountsTechnical = new Dictionary<TR3Entities, int>
+    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyGameCountsTechnical = new()
     {
         [TR3Entities.Winston] = 2,
         [TR3Entities.WinstonInCamoSuit] = 2
     };
 
-    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyGameCountsDefault = new Dictionary<TR3Entities, int>
+    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyGameCountsDefault = new()
     {
         [TR3Entities.Willie] = 2
     };
 
     // These enemies are unsupported due to technical reasons, NOT difficulty reasons.
-    private static readonly Dictionary<string, List<TR3Entities>> _unsupportedEnemiesTechnical = new Dictionary<string, List<TR3Entities>>
+    private static readonly Dictionary<string, List<TR3Entities>> _unsupportedEnemiesTechnical = new()
     {
         [TR3LevelNames.JUNGLE] =
             new List<TR3Entities> { TR3Entities.TonyFirehands },
@@ -337,14 +337,14 @@ public static class TR3EnemyUtilities
             new List<TR3Entities> { TR3Entities.TonyFirehands }
     };
 
-    private static readonly Dictionary<string, List<TR3Entities>> _unsupportedEnemiesDefault = new Dictionary<string, List<TR3Entities>>
+    private static readonly Dictionary<string, List<TR3Entities>> _unsupportedEnemiesDefault = new()
     {
         [TR3LevelNames.HALLOWS] =
             new List<TR3Entities> { TR3Entities.Willie }
     };
 
     // Any enemies that must remain untouched in a given level
-    private static readonly Dictionary<string, List<TR3Entities>> _requiredEnemies = new Dictionary<string, List<TR3Entities>>
+    private static readonly Dictionary<string, List<TR3Entities>> _requiredEnemies = new()
     {
         [TR3LevelNames.CAVES] = new List<TR3Entities>
         {
@@ -362,7 +362,7 @@ public static class TR3EnemyUtilities
 
     // Control the number of types of enemy that appear in levels, so these numbers are added to the
     // current total e.g. Jungle becomes 6 types, Ruins becomes 7 etc.
-    private static readonly Dictionary<string, int> _enemyAdjustmentCount = new Dictionary<string, int>
+    private static readonly Dictionary<string, int> _enemyAdjustmentCount = new()
     {
         [TR3LevelNames.JUNGLE]
             = 4, // Defaults: 2 types, 19 enemies
@@ -407,7 +407,7 @@ public static class TR3EnemyUtilities
     };
 
     // Enemies who can only spawn once. These are enemies whose triggers in OG are all OneShot throughout.
-    private static readonly List<TR3Entities> _oneShotEnemies = new List<TR3Entities>
+    private static readonly List<TR3Entities> _oneShotEnemies = new()
     {
         TR3Entities.Croc,
         TR3Entities.KillerWhale,
@@ -415,7 +415,7 @@ public static class TR3EnemyUtilities
         TR3Entities.Rat
     };
 
-    private static readonly Dictionary<EnemyDifficulty, List<TR3Entities>> _enemyDifficulties = new Dictionary<EnemyDifficulty, List<TR3Entities>>
+    private static readonly Dictionary<EnemyDifficulty, List<TR3Entities>> _enemyDifficulties = new()
     {
         [EnemyDifficulty.VeryEasy] = new List<TR3Entities>
         {
@@ -446,7 +446,7 @@ public static class TR3EnemyUtilities
         }
     };
 
-    private static readonly Dictionary<TR3Entities, uint> _startingAmmoToGive = new Dictionary<TR3Entities, uint>()
+    private static readonly Dictionary<TR3Entities, uint> _startingAmmoToGive = new()
     {
         [TR3Entities.Shotgun_P] = 8,
         [TR3Entities.Deagle_P] = 4,

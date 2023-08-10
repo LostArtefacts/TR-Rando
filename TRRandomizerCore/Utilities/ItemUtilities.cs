@@ -61,7 +61,7 @@ public static class ItemUtilities
         entity.Invisible = true;
     }
 
-    private static readonly Dictionary<TR2Entities, TR2Items> _tr2EntityToScriptItemMap = new Dictionary<TR2Entities, TR2Items>
+    private static readonly Dictionary<TR2Entities, TR2Items> _tr2EntityToScriptItemMap = new()
     {
         [TR2Entities.Pistols_S_P]
             = TR2Items.Pistols,
@@ -130,7 +130,7 @@ public static class ItemUtilities
             = TR2Items.Key4
     };
 
-    private static readonly Dictionary<TR3Entities, TR3Items> _tr3EntityToScriptItemMap = new Dictionary<TR3Entities, TR3Items>
+    private static readonly Dictionary<TR3Entities, TR3Items> _tr3EntityToScriptItemMap = new()
     {
         [TR3Entities.Pistols_P]
             = TR3Items.Pistols,

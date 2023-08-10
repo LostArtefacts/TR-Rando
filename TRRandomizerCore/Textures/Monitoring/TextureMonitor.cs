@@ -53,7 +53,7 @@ public class TextureMonitor<E> : ITexturePositionMonitor<E>
         // The keys defined in the source ObjectTextureMap are TRObjectTexture index references
         // from the original level they were extracted from. We want to track what happens to
         // these textures.
-        Dictionary<E, List<int>> entityIndices = new Dictionary<E, List<int>>();
+        Dictionary<E, List<int>> entityIndices = new();
         foreach (StaticTextureSource<E> source in _entitySources)
         {
             foreach (E entity in source.EntityTextureMap.Keys)
@@ -78,7 +78,7 @@ public class TextureMonitor<E> : ITexturePositionMonitor<E>
         foreach (E entity in texturePositions.Keys)
         {
             StaticTextureSource<E>[] sources = GetSources(entity);
-            List<StaticTextureTarget> targets = new List<StaticTextureTarget>();
+            List<StaticTextureTarget> targets = new();
             foreach (PositionedTexture texture in texturePositions[entity])
             {
                 foreach (StaticTextureSource<E> source in sources)
@@ -107,7 +107,7 @@ public class TextureMonitor<E> : ITexturePositionMonitor<E>
 
     private StaticTextureSource<E>[] GetSources(E entity)
     {
-        List<StaticTextureSource<E>> sources = new List<StaticTextureSource<E>>();
+        List<StaticTextureSource<E>> sources = new();
         foreach (StaticTextureSource<E> source in _entitySources)
         {
             if (source.EntityTextureMap.ContainsKey(entity))

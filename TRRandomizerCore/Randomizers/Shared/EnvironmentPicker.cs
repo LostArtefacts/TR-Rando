@@ -22,7 +22,7 @@ public class EnvironmentPicker
 
     public void LoadTags(RandomizerSettings settings, bool isCommunityPatch)
     {
-        List<EMTag> excludedTags = new List<EMTag>();
+        List<EMTag> excludedTags = new();
         if (!settings.RandomizeLadders)
         {
             excludedTags.Add(EMTag.LadderChange);
@@ -65,7 +65,7 @@ public class EnvironmentPicker
 
     public List<EMEditorSet> GetRandomAny(EMEditorMapping mapping)
     {
-        List<EMEditorSet> sets = new List<EMEditorSet>();
+        List<EMEditorSet> sets = new();
         
         List<EMEditorSet> pool = Options.EnableHardMode 
             ? mapping.Any 

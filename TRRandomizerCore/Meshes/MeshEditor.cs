@@ -132,7 +132,7 @@ public class MeshEditor
 
     public TRMesh CloneMesh(TRMesh mesh)
     {
-        TRMesh clone = new TRMesh
+        TRMesh clone = new()
         {
             Centre = mesh.Centre,
             CollRadius = mesh.CollRadius,

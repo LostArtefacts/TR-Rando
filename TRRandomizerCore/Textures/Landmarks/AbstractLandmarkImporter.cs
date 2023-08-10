@@ -38,7 +38,7 @@ public abstract class AbstractLandmarkImporter<E, L>
 
         using (AbstractTexturePacker<E, L> packer = CreatePacker(level))
         {
-            Dictionary<LandmarkTextureTarget, TexturedTileSegment> targetSegmentMap = new Dictionary<LandmarkTextureTarget, TexturedTileSegment>();
+            Dictionary<LandmarkTextureTarget, TexturedTileSegment> targetSegmentMap = new();
 
             foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
             {
@@ -55,7 +55,7 @@ public abstract class AbstractLandmarkImporter<E, L>
                 List<Rectangle> segments = source.VariantMap[source.Variants[0]];
                 foreach (int segmentIndex in mapping.LandmarkMapping[source].Keys)
                 {
-                    Dictionary<int, LandmarkTextureTarget> backgroundCache = new Dictionary<int, LandmarkTextureTarget>();
+                    Dictionary<int, LandmarkTextureTarget> backgroundCache = new();
 
                     foreach (LandmarkTextureTarget target in mapping.LandmarkMapping[source][segmentIndex])
                     {
@@ -105,13 +105,13 @@ public abstract class AbstractLandmarkImporter<E, L>
                         Bitmap image;
                         if (target.BackgroundIndex != -1)
                         {
-                            IndexedTRObjectTexture indexedTexture = new IndexedTRObjectTexture
+                            IndexedTRObjectTexture indexedTexture = new()
                             {
                                 Index = target.BackgroundIndex,
                                 Texture = textures[target.BackgroundIndex]
                             };
                             BitmapGraphics tile = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
-                            BitmapGraphics clip = new BitmapGraphics(tile.Extract(indexedTexture.Bounds));
+                            BitmapGraphics clip = new(tile.Extract(indexedTexture.Bounds));
                             clip.Overlay(source.Bitmap);
                             image = clip.Bitmap;
 
@@ -122,7 +122,7 @@ public abstract class AbstractLandmarkImporter<E, L>
                             image = source.ClonedBitmap;
                         }
 
-                        TexturedTileSegment segment = new TexturedTileSegment(texture, image);
+                        TexturedTileSegment segment = new(texture, image);
                         packer.AddRectangle(segment);
                         targetSegmentMap[target] = segment;
                     }
@@ -178,7 +178,7 @@ public abstract class AbstractLandmarkImporter<E, L>
     private IndexedTRObjectTexture CreateTexture(Rectangle rectangle, bool mirrored)
     {
         // Configure the points and reverse them if the level is mirrored
-        List<TRObjectTextureVert> vertices = new List<TRObjectTextureVert>
+        List<TRObjectTextureVert> vertices = new()
         {
             CreatePoint(0, 0),
             CreatePoint(rectangle.Width, 0),
@@ -192,7 +192,7 @@ public abstract class AbstractLandmarkImporter<E, L>
         }
 
         // Make a dummy texture object with the given bounds
-        TRObjectTexture texture = new TRObjectTexture
+        TRObjectTexture texture = new()
         {
             AtlasAndFlag = 0,
             Attribute = 0,

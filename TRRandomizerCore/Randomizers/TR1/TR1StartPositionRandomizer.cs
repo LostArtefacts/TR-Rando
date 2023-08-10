@@ -39,7 +39,7 @@ public class TR1StartPositionRandomizer : BaseTR1Randomizer
         List<TREntity> entities = level.Data.Entities.ToList();
         TREntity lara = entities.Find(e => e.TypeID == (short)TREntities.Lara);
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         // If we haven't defined anything for a level, Lara will just be rotated. This is most likely where there are

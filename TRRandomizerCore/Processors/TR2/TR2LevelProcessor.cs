@@ -16,7 +16,7 @@ public class TR2LevelProcessor : AbstractLevelProcessor<TR2ScriptedLevel, TR2Com
 
     protected override TR2CombinedLevel LoadCombinedLevel(TR2ScriptedLevel scriptedLevel)
     {
-        TR2CombinedLevel level = new TR2CombinedLevel
+        TR2CombinedLevel level = new()
         {
             Data = LoadLevelData(scriptedLevel.LevelFileBaseName),
             Script = scriptedLevel,

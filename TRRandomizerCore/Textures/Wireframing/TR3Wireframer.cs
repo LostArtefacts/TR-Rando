@@ -15,7 +15,7 @@ namespace TRRandomizerCore.Textures;
 
 public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
 {
-    private static readonly List<TR3Entities> _laraEntities = new List<TR3Entities>
+    private static readonly List<TR3Entities> _laraEntities = new()
     {
         TR3Entities.Lara, TR3Entities.LaraPonytail_H, TR3Entities.LaraFlareAnimation_H,
         TR3Entities.LaraPistolAnimation_H, TR3Entities.LaraShotgunAnimation_H, TR3Entities.LaraUziAnimation_H,
@@ -24,7 +24,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
         TR3Entities.LaraHarpoonAnimation_H, TR3Entities.LaraVehicleAnimation_H
     };
 
-    private static readonly List<TR3Entities> _additionalEnemyEntities = new List<TR3Entities>
+    private static readonly List<TR3Entities> _additionalEnemyEntities = new()
     {
         TR3Entities.ShivaStatue, TR3Entities.MonkeyKeyMeshswap, TR3Entities.MonkeyMedMeshswap
     };
@@ -60,7 +60,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
 
     protected override Dictionary<TR3Entities, TRMesh[]> GetModelMeshes(TR3Level level)
     {
-        Dictionary<TR3Entities, TRMesh[]> modelMeshes = new Dictionary<TR3Entities, TRMesh[]>();
+        Dictionary<TR3Entities, TRMesh[]> modelMeshes = new();
         foreach (TRModel model in level.Models)
         {
             TRMesh[] meshes = GetModelMeshes(level, model);
@@ -89,7 +89,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
 
     protected override IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(TR3Level level)
     {
-        List<List<TRFace3>> faces = new List<List<TRFace3>>();
+        List<List<TRFace3>> faces = new();
         foreach (TR3Room room in level.Rooms)
         {
             faces.Add(room.RoomData.Triangles.ToList());
@@ -99,7 +99,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
 
     protected override IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(TR3Level level)
     {
-        List<List<TRFace4>> faces = new List<List<TRFace4>>();
+        List<List<TRFace4>> faces = new();
         foreach (TR3Room room in level.Rooms)
         {
             faces.Add(room.RoomData.Rectangles.ToList());
@@ -197,7 +197,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
 
     protected override Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(TR3Level level, Pen pen)
     {
-        Dictionary<ushort, TexturedTileSegment> segments = new Dictionary<ushort, TexturedTileSegment>();
+        Dictionary<ushort, TexturedTileSegment> segments = new();
         foreach (SpecialTextureHandling special in _data.SpecialTextures)
         {
             switch (special.Type)

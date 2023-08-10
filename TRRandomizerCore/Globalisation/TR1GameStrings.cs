@@ -12,7 +12,7 @@ public class TR1GameStrings : IGameStrings
         // Uppercase accented characters will be normalised in all cases.
         // Some lowercase accented characters are supported.
         // We ignore accented i's because the dot remains.
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
         foreach (char c in text)
         {
             string n = TextUtilities.Normalise(c);

@@ -118,7 +118,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
             SoundUtilities.ResortSoundIndices(level.Data);
         }
 
-        EnvironmentPicker picker = new EnvironmentPicker(Settings.HardEnvironmentMode)
+        EnvironmentPicker picker = new(Settings.HardEnvironmentMode)
         {
             Generator = _generator
         };
@@ -202,11 +202,11 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
 
     private void MirrorLevel(TR1CombinedLevel level, EMEditorMapping mapping)
     {
-        EMMirrorFunction mirrorer = new EMMirrorFunction();
+        EMMirrorFunction mirrorer = new();
         mirrorer.ApplyToLevel(level.Data);
 
         // Process packs that need to be applied after mirroring.
-        EnvironmentPicker picker = new EnvironmentPicker(Settings.HardEnvironmentMode);
+        EnvironmentPicker picker = new(Settings.HardEnvironmentMode);
         picker.LoadTags(Settings, ScriptEditor.Edition.IsCommunityPatch);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
 

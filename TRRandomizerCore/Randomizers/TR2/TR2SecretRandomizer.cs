@@ -149,7 +149,7 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
             jadeLocation = SpatialConverters.TransformToLevelSpace(jadeLocation, _levelInstance.Data.Rooms[jadeLocation.Room].Info);
             stoneLocation = SpatialConverters.TransformToLevelSpace(stoneLocation, _levelInstance.Data.Rooms[stoneLocation.Room].Info);
 
-            Dictionary<TR2Entities, Location> secretMap = new Dictionary<TR2Entities, Location>
+            Dictionary<TR2Entities, Location> secretMap = new()
             {
                 [TR2Entities.StoneSecret_S_P] = stoneLocation,
                 [TR2Entities.JadeSecret_S_P] = jadeLocation,
@@ -197,14 +197,14 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
 
     private void PlaceAllSecrets(List<Location> LevelLocations)
     {
-        ZonedLocationCollection ZonedLocations = new ZonedLocationCollection();
+        ZonedLocationCollection ZonedLocations = new();
 
         ZonedLocations.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), LevelLocations, ZonePopulationMethod.SecretsOnly);
 
         List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
 
         // Store existing secret indices for re-use (avoids FD problems when the originals are removed)
-        Queue<int> existingIndices = new Queue<int>();
+        Queue<int> existingIndices = new();
         for (int i = 0; i < ents.Count; i++)
         {
             if (TR2EntityUtilities.IsSecretType((TR2Entities)ents[i].TypeID))
@@ -214,7 +214,7 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
         }
 
         //Add new entities
-        Dictionary<TR2Entities, List<Location>> secretMap = new Dictionary<TR2Entities, List<Location>>
+        Dictionary<TR2Entities, List<Location>> secretMap = new()
         {
             [TR2Entities.StoneSecret_S_P] = ZonedLocations.StoneZone,
             [TR2Entities.JadeSecret_S_P] = ZonedLocations.JadeZone,

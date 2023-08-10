@@ -86,7 +86,7 @@ public static class LocationUtilities
             }
             else if (entry is TR3TriangulationEntry triangulation)
             {
-                List<byte> triangleCorners = new List<byte>
+                List<byte> triangleCorners = new()
                 {
                     triangulation.TriData.C00,
                     triangulation.TriData.C01,
@@ -95,7 +95,7 @@ public static class LocationUtilities
                 };
 
                 int max = triangleCorners.Max();
-                List<sbyte> corners = new List<sbyte>
+                List<sbyte> corners = new()
                 {
                     (sbyte)(max - triangleCorners[0]),
                     (sbyte)(max - triangleCorners[1]),

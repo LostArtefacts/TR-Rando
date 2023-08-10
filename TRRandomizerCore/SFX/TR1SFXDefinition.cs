@@ -26,7 +26,7 @@ public class TR1SFXDefinition
 
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder(base.ToString());
+        StringBuilder sb = new(base.ToString());
 
         sb.Append(" ID: " + InternalIndex);
         sb.Append(" Description: " + Description);

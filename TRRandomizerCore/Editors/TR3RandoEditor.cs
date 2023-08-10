@@ -105,8 +105,7 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
 
     protected override void SaveImpl(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
     {
-        List<TR3ScriptedLevel> levels = new List<TR3ScriptedLevel>
-        (
+        List<TR3ScriptedLevel> levels = new(
             scriptEditor.EnabledScriptedLevels.Cast<TR3ScriptedLevel>().ToList()
         );
 
@@ -128,8 +127,8 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
         }
 
         // Shared tracker objects between randomizers
-        ItemFactory itemFactory = new ItemFactory(@"Resources\TR3\Items\repurposable_items.json");
-        TR3TextureMonitorBroker textureMonitor = new TR3TextureMonitorBroker();
+        ItemFactory itemFactory = new(@"Resources\TR3\Items\repurposable_items.json");
+        TR3TextureMonitorBroker textureMonitor = new();
 
         using (textureMonitor)
         {
@@ -177,7 +176,7 @@ public class TR3RandoEditor : TR3LevelEditor, ISettingsProvider
                 }.Run();
             }
 
-            TR3EnvironmentRandomizer environmentRandomizer = new TR3EnvironmentRandomizer
+            TR3EnvironmentRandomizer environmentRandomizer = new()
             {
                 ScriptEditor = tr23ScriptEditor,
                 Levels = levels,

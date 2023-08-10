@@ -11,7 +11,7 @@ public class ChecksumTester : IChecksumTester
         return _checksums.Contains(new FileInfo(file).Checksum());
     }
 
-    private static readonly List<string> _checksums = new List<string>
+    private static readonly List<string> _checksums = new()
     {
         // TR1
         "313986cb46c1ed68a29c83913e4cd5d6", // GYM.PHD

@@ -8,7 +8,7 @@ namespace TRRandomizerCore.Processors;
 
 public class TR2EnemyAdjuster : TR2LevelProcessor
 {
-    private static readonly Dictionary<string, List<int>> _enemyTargets = new Dictionary<string, List<int>>
+    private static readonly Dictionary<string, List<int>> _enemyTargets = new()
     {
         [TR2LevelNames.OPERA] = new List<int> { 127 },
         [TR2LevelNames.MONASTERY] = new List<int> { 38, 39, 118 }
@@ -36,7 +36,7 @@ public class TR2EnemyAdjuster : TR2LevelProcessor
 
     private void AdjustInstanceEnemies()
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(_levelInstance.Data);
 
         foreach (int enemyIndex in _enemyTargets[_levelInstance.Name])

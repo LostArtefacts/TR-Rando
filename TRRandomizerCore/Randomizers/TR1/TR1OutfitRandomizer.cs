@@ -20,11 +20,11 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR1OutfitRandomizer : BaseTR1Randomizer
 {
-    private static readonly Version _minBraidCutsceneVersion = new Version(2, 13, 0);
+    private static readonly Version _minBraidCutsceneVersion = new(2, 13, 0);
     private static readonly short[] _barefootSfxIDs = new short[] { 0, 4 };
     private static readonly double _mauledLaraChance = (double)1 / 3;
     private static readonly double _partialGymChance = (double)1 / 3;
-    private static readonly List<string> _permittedGymLevels = new List<string>
+    private static readonly List<string> _permittedGymLevels = new()
     {
         TR1LevelNames.CAVES, TR1LevelNames.VILCABAMBA, TR1LevelNames.FOLLY,
         TR1LevelNames.COLOSSEUM, TR1LevelNames.CISTERN, TR1LevelNames.TIHOCAN
@@ -45,13 +45,13 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         ChooseFilteredLevels();
 
-        List<OutfitProcessor> processors = new List<OutfitProcessor>();
+        List<OutfitProcessor> processors = new();
         for (int i = 0; i < _maxThreads; i++)
         {
             processors.Add(new OutfitProcessor(this));
         }
 
-        List<TR1CombinedLevel> levels = new List<TR1CombinedLevel>(Levels.Count);
+        List<TR1CombinedLevel> levels = new(Levels.Count);
         foreach (TR1ScriptedLevel lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
@@ -193,24 +193,24 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
     internal class OutfitProcessor : AbstractProcessorThread<TR1OutfitRandomizer>
     {
-        private static readonly List<TREntities> _invisibleLaraEntities = new List<TREntities>
+        private static readonly List<TREntities> _invisibleLaraEntities = new()
         {
             TREntities.Lara, TREntities.LaraPonytail_H_U,
             TREntities.LaraPistolAnim_H, TREntities.LaraShotgunAnim_H, TREntities.LaraMagnumAnim_H,
             TREntities.LaraUziAnimation_H, TREntities.LaraMiscAnim_H, TREntities.CutsceneActor1
         };
 
-        private static readonly List<TREntities> _ponytailEntities = new List<TREntities>
+        private static readonly List<TREntities> _ponytailEntities = new()
         {
             TREntities.LaraPonytail_H_U
         };
 
-        private static readonly List<TREntities> _mauledEntities = new List<TREntities>
+        private static readonly List<TREntities> _mauledEntities = new()
         {
             TREntities.LaraMiscAnim_H_Valley
         };
 
-        private static readonly Dictionary<TREntities, Dictionary<EMTextureFaceType, int[]>> _headAmendments = new Dictionary<TREntities, Dictionary<EMTextureFaceType, int[]>>
+        private static readonly Dictionary<TREntities, Dictionary<EMTextureFaceType, int[]>> _headAmendments = new()
         {
             [TREntities.Lara] = new Dictionary<EMTextureFaceType, int[]>
             {
@@ -293,7 +293,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private void ImportBraid(TR1CombinedLevel level)
         {
-            TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
+            TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
             {
                 Level = level.Data,
                 LevelName = level.Name,
@@ -371,7 +371,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             TRModel ponytail = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.LaraPonytail_H_U);
             TRMesh[] ponytailMeshes = TRMeshUtilities.GetModelMeshes(level.Data, ponytail);
-            MeshEditor editor = new MeshEditor();
+            MeshEditor editor = new();
             foreach (TRMesh mesh in ponytailMeshes)
             {
                 TRMesh clonedMesh = editor.CloneMeshAsColoured(mesh, goldPalette);
@@ -387,7 +387,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private void HideEntities(TR1CombinedLevel level, IEnumerable<TREntities> entities)
         {
-            MeshEditor editor = new MeshEditor();
+            MeshEditor editor = new();
             foreach (TREntities ent in entities)
             {
                 TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
@@ -424,7 +424,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 return;
             }
 
-            List<TREntities> laraEntities = new List<TREntities>();
+            List<TREntities> laraEntities = new();
             if (level.IsCutScene)
             {
                 laraEntities.Add(TREntities.CutsceneActor1);
@@ -591,7 +591,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             if (level.HasCutScene)
             {
-                TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
                 {
                     Level = level.CutSceneLevel.Data,
                     LevelName = level.CutSceneLevel.Name,
@@ -626,10 +626,10 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             // Just the torso
             TRMeshUtilities.DuplicateMesh(level.Data, lara[7], laraMisc[7]);
             
-            using (TR1TexturePacker packer = new TR1TexturePacker(level.Data))
+            using (TR1TexturePacker packer = new(level.Data))
             {
                 // Replace the blue parts on Lara's hips with skin tone
-                List<int> faces = new List<int> { 5, 6, 7 };
+                List<int> faces = new() { 5, 6, 7 };
                 foreach (int face in faces)
                 {
                     Dictionary<TexturedTile, List<TexturedTileSegment>> segments = packer.GetObjectTextureSegments(new List<int> { lara[0].TexturedRectangles[face].Texture });
@@ -671,7 +671,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             if (level.HasCutScene)
             {
-                TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
                 {
                     Level = level.CutSceneLevel.Data,
                     LevelName = level.CutSceneLevel.Name,
@@ -693,7 +693,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private void CopyMeshParts(TR1Level level, MeshCopyData data)
         {
-            MeshEditor editor = new MeshEditor();
+            MeshEditor editor = new();
             TRMeshUtilities.InsertMesh(level, editor.Mesh = editor.CloneMesh(data.NewMesh));
 
             List<TRFace4> texturedQuads = editor.Mesh.TexturedRectangles.ToList();
@@ -790,7 +790,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             {
                 // This model is completely different to all others, so just
                 // duplicate the mauled meshes in this case.
-                List<int> meshIndices = new List<int> { 1, 4, 5, 7, 9, 11, 12 };
+                List<int> meshIndices = new() { 1, 4, 5, 7, 9, 11, 12 };
                 foreach (int index in meshIndices)
                 {
                     int colRad = lara[index].CollRadius;
@@ -834,7 +834,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             }
 
             // Some commonality between the holstered guns
-            List<TREntities> gunAnims = new List<TREntities>
+            List<TREntities> gunAnims = new()
             {
                 TREntities.LaraPistolAnim_H, TREntities.LaraMagnumAnim_H, TREntities.LaraUziAnimation_H
             };
@@ -855,7 +855,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             if (level.HasCutScene && !level.Is(TR1LevelNames.MINES))
             {
-                TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
                 {
                     Level = level.CutSceneLevel.Data,
                     LevelName = level.CutSceneLevel.Name,
@@ -905,7 +905,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private void MergeColouredTrianglesToTexture(TR1Level level, TRMesh baseMesh, TRMesh copyMesh, int[] triangleIndices, int copyIndex, int rotations)
         {
-            MeshEditor editor = new MeshEditor();
+            MeshEditor editor = new();
             editor.Mesh = baseMesh;
 
             List<TRFace3> colouredTris = baseMesh.ColouredTriangles.ToList();
@@ -914,7 +914,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
             List<int> indices = triangleIndices.ToList();
             indices.Sort();
 
-            List<ushort> vertices = new List<ushort>();
+            List<ushort> vertices = new();
             foreach (int index in indices)
             {
                 TRFace3 face = colouredTris[index];
@@ -953,8 +953,8 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
         {
             if (rotations > 0)
             {
-                Queue<ushort> queue = new Queue<ushort>(face.Vertices);
-                Stack<ushort> stack = new Stack<ushort>();
+                Queue<ushort> queue = new(face.Vertices);
+                Stack<ushort> stack = new();
 
                 while (rotations > 0)
                 {

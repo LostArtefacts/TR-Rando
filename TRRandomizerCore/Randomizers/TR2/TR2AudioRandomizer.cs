@@ -69,7 +69,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
 
     private void RandomizeMusicTriggers(TR2CombinedLevel level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         if (Settings.ChangeTriggerTracks)
@@ -138,7 +138,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
             }
 
             // Generate a new music action
-            FDActionListItem musicAction = new FDActionListItem
+            FDActionListItem musicAction = new()
             {
                 TrigAction = FDTrigAction.PlaySoundtrack,
                 Parameter = secretTracks[_generator.Next(0, secretTracks.Count)].ID
@@ -174,7 +174,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
 
     private Dictionary<int, TR2Entity> GetSecretItems(TR2Level level)
     {
-        Dictionary<int, TR2Entity> entities = new Dictionary<int, TR2Entity>();
+        Dictionary<int, TR2Entity> entities = new();
         for (int i = 0; i < level.NumEntities; i++)
         {
             if (TR2EntityUtilities.IsSecretType((TR2Entities)level.Entities[i].TypeID))
@@ -296,7 +296,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         // point to the first sample, and then return the new index. Make sure the 
         // samples are sorted first.
         ushort newSampleIndex = (ushort)levelSamples.Count;
-        List<uint> sortedSamples = new List<uint>(definition.SampleIndices);
+        List<uint> sortedSamples = new(definition.SampleIndices);
         sortedSamples.Sort();
         levelSamples.AddRange(sortedSamples);
 

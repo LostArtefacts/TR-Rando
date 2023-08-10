@@ -79,7 +79,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         // #312 We need all item models plus Lara's associated weapon animations for the
         // assault course. The DEagle and Uzi anims will match Lara's default home outfit
         // - outfit rando will take care of replacing these if it's enabled.
-        TR3ModelImporter importer = new TR3ModelImporter
+        TR3ModelImporter importer = new()
         {
             Level = level.Data,
             LevelName = level.Name,
@@ -207,7 +207,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         }
 
         // FD for removing crystal triggers if applicable.
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         // Look for extra utility/ammo items and hide them
@@ -279,7 +279,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     private List<Location> GetItemLocationPool(TR3CombinedLevel level)
     {
-        List<Location> exclusions = new List<Location>();
+        List<Location> exclusions = new();
         if (_excludedLocations.ContainsKey(level.Name))
         {
             exclusions.AddRange(_excludedLocations[level.Name]);
@@ -325,7 +325,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             }
         }
 
-        TR3LocationGenerator generator = new TR3LocationGenerator();
+        TR3LocationGenerator generator = new();
         return generator.Generate(level.Data, exclusions);
     }
 

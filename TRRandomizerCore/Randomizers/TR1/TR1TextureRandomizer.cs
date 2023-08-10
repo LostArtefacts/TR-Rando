@@ -68,7 +68,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
             if (monitor != null && monitor.UseNightTextures)
             {
                 TR1TextureMapping mapping = GetMapping(_levelInstance);
-                using (TextureHolder<TREntities, TR1Level> holder = new TextureHolder<TREntities, TR1Level>(mapping, this))
+                using (TextureHolder<TREntities, TR1Level> holder = new(mapping, this))
                 {
                     foreach (AbstractTextureSource source in holder.Variants.Keys)
                     {
@@ -108,7 +108,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
 
         ChooseWireframeLevels();
 
-        List<TextureProcessor> processors = new List<TextureProcessor> { new TextureProcessor(this) };
+        List<TextureProcessor> processors = new() { new TextureProcessor(this) };
         int levelSplit = (int)(Levels.Count / _maxThreads);
 
         bool beginProcessing = true;
@@ -336,13 +336,13 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
             // the variants allocated there. We don't yet do forward lookup, for example
             // the Floater stone at the end of Xian might be purple, but Floater itself
             // Red.
-            List<TR1CombinedLevel> levels = new List<TR1CombinedLevel>(_holders.Keys);
+            List<TR1CombinedLevel> levels = new(_holders.Keys);
             levels.Sort(delegate (TR1CombinedLevel lvl1, TR1CombinedLevel lvl2)
             {
                 return lvl1.IsCutScene && lvl1.ParentLevel == lvl2 ? 1 : 0;
             });
 
-            DynamicTextureBuilder dynamicBuilder = new DynamicTextureBuilder
+            DynamicTextureBuilder dynamicBuilder = new()
             {
                 RetainMainTextures = _outer.Settings.RetainMainLevelTextures,
                 IsCommunityPatch = _outer.ScriptEditor.Edition.IsCommunityPatch
@@ -421,7 +421,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
 
         protected override void ProcessImpl()
         {
-            Dictionary<TextureCategory, bool> options = new Dictionary<TextureCategory, bool>(_outer._textureOptions);
+            Dictionary<TextureCategory, bool> options = new(_outer._textureOptions);
 
             foreach (TR1CombinedLevel level in _holders.Keys)
             {

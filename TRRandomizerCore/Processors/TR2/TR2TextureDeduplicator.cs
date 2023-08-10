@@ -8,7 +8,7 @@ internal class TR2TextureDeduplicator : TR2LevelProcessor
 {
     public void Deduplicate()
     {
-        List<DeduplicationProcessor> processors = new List<DeduplicationProcessor> { new DeduplicationProcessor(this) };
+        List<DeduplicationProcessor> processors = new() { new DeduplicationProcessor(this) };
         int levelSplit = (int)(Levels.Count / _maxThreads);
 
         bool beginProcessing = true;

@@ -33,7 +33,7 @@ public class TR3LandmarkImporter : AbstractLandmarkImporter<TR3Entities, TR3Leve
 
     protected override short? GetRoomFromPortal(TR3Level level, PortalSector portalSector, bool isLevelMirrored)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
         TR3Room room = level.Rooms[portalSector.Room];

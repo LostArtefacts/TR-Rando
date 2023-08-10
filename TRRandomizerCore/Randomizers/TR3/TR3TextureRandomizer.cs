@@ -68,7 +68,7 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
             if (monitor != null && monitor.UseNightTextures)
             {
                 TR3TextureMapping mapping = GetMapping(_levelInstance);
-                using (TextureHolder<TR3Entities, TR3Level> holder = new TextureHolder<TR3Entities, TR3Level>(mapping, this))
+                using (TextureHolder<TR3Entities, TR3Level> holder = new(mapping, this))
                 {
                     foreach (AbstractTextureSource source in holder.Variants.Keys)
                     {
@@ -107,7 +107,7 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
 
         ChooseWireframeLevels();
 
-        List<TextureProcessor> processors = new List<TextureProcessor> { new TextureProcessor(this) };
+        List<TextureProcessor> processors = new() { new TextureProcessor(this) };
         int levelSplit = (int)(Levels.Count / _maxThreads);
 
         bool beginProcessing = true;
@@ -304,7 +304,7 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
 
         protected override void StartImpl()
         {
-            List<TR3CombinedLevel> levels = new List<TR3CombinedLevel>(_holders.Keys);
+            List<TR3CombinedLevel> levels = new(_holders.Keys);
             levels.Sort(delegate (TR3CombinedLevel lvl1, TR3CombinedLevel lvl2)
             {
                 return lvl1.IsCutScene && lvl1.ParentLevel == lvl2 ? 1 : 0;
@@ -377,7 +377,7 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
 
         protected override void ProcessImpl()
         {
-            Dictionary<TextureCategory, bool> options = new Dictionary<TextureCategory, bool>(_outer._textureOptions);
+            Dictionary<TextureCategory, bool> options = new(_outer._textureOptions);
 
             foreach (TR3CombinedLevel level in _holders.Keys)
             {

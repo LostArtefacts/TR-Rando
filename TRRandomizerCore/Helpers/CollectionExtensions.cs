@@ -15,7 +15,7 @@ public static class CollectionExtensions
             return list;
         }
 
-        List<T> iterList = new List<T>(list);
+        List<T> iterList = new(list);
         if (exclusions != null && exclusions.Count > 0)
         {
             foreach (T excludeItem in exclusions)
@@ -24,7 +24,7 @@ public static class CollectionExtensions
             }
         }
 
-        List<T> resultSet = new List<T>();
+        List<T> resultSet = new();
         if (iterList.Count > 0)
         {
             int maxIter = allowDuplicates ? count : Math.Min(count, iterList.Count);
@@ -45,7 +45,7 @@ public static class CollectionExtensions
 
     public static void Shuffle<T>(this List<T> list, Random rand)
     {
-        List<T> iterList = new List<T>(list);
+        List<T> iterList = new(list);
         list.Clear();
 
         int count = iterList.Count;

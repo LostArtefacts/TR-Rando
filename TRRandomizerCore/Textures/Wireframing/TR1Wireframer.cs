@@ -14,7 +14,7 @@ namespace TRRandomizerCore.Textures;
 
 public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
 {
-    private static readonly List<TREntities> _laraEntities = new List<TREntities>
+    private static readonly List<TREntities> _laraEntities = new()
     {
         TREntities.Lara, TREntities.LaraPonytail_H_U, TREntities.CutsceneActor1,
         TREntities.LaraPistolAnim_H, TREntities.LaraShotgunAnim_H, TREntities.LaraMagnumAnim_H,
@@ -23,12 +23,12 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
         TREntities.MidasHand_N
     };
 
-    private static readonly List<TREntities> _enemyPlaceholderEntities = new List<TREntities>
+    private static readonly List<TREntities> _enemyPlaceholderEntities = new()
     {
         TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N
     };
 
-    private static readonly List<TREntities> _additionalEnemyEntities = new List<TREntities>
+    private static readonly List<TREntities> _additionalEnemyEntities = new()
     {
         TREntities.Missile1_H, TREntities.Missile2_H, TREntities.Missile3_H,
         TREntities.CutsceneActor2, TREntities.CutsceneActor3, TREntities.CutsceneActor4,
@@ -36,7 +36,7 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
         TREntities.Skateboard
     };
 
-    private static readonly List<TREntities> _pickupModels = new List<TREntities>
+    private static readonly List<TREntities> _pickupModels = new()
     {
         TREntities.Pistols_M_H, TREntities.Shotgun_M_H, TREntities.Magnums_M_H, TREntities.Uzis_M_H,
         TREntities.ShotgunAmmo_M_H, TREntities.MagnumAmmo_M_H, TREntities.UziAmmo_M_H,
@@ -93,7 +93,7 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
 
     protected override Dictionary<TREntities, TRMesh[]> GetModelMeshes(TR1Level level)
     {
-        Dictionary<TREntities, TRMesh[]> modelMeshes = new Dictionary<TREntities, TRMesh[]>();
+        Dictionary<TREntities, TRMesh[]> modelMeshes = new();
         foreach (TRModel model in level.Models)
         {
             TRMesh[] meshes = GetModelMeshes(level, model);
@@ -122,7 +122,7 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
 
     protected override IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(TR1Level level)
     {
-        List<List<TRFace3>> faces = new List<List<TRFace3>>();
+        List<List<TRFace3>> faces = new();
         foreach (TRRoom room in level.Rooms)
         {
             faces.Add(room.RoomData.Triangles.ToList());
@@ -132,7 +132,7 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
 
     protected override IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(TR1Level level)
     {
-        List<List<TRFace4>> faces = new List<List<TRFace4>>();
+        List<List<TRFace4>> faces = new();
         foreach (TRRoom room in level.Rooms)
         {
             faces.Add(room.RoomData.Rectangles.ToList());
@@ -225,7 +225,7 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
 
     protected override Dictionary<ushort, TexturedTileSegment> CreateSpecialSegments(TR1Level level, Pen pen)
     {
-        Dictionary<ushort, TexturedTileSegment> segments = new Dictionary<ushort, TexturedTileSegment>();
+        Dictionary<ushort, TexturedTileSegment> segments = new();
         foreach (SpecialTextureHandling special in _data.SpecialTextures)
         {
             switch (special.Type)

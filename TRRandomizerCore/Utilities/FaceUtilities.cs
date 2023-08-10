@@ -13,10 +13,10 @@ public static class FaceUtilities
 
     public static List<TRFace4> GetTriggerFaces(TR1Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        List<TRFace4> faces = new List<TRFace4>();
+        List<TRFace4> faces = new();
         foreach (TRRoom room in level.Rooms)
         {
             faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
@@ -30,10 +30,10 @@ public static class FaceUtilities
 
     public static List<TRFace4> GetTriggerFaces(TR2Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        List<TRFace4> faces = new List<TRFace4>();
+        List<TRFace4> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
             faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.SectorList, room.NumZSectors, room.RoomData.Rectangles, v =>
@@ -47,10 +47,10 @@ public static class FaceUtilities
 
     public static List<TRFace4> GetTriggerFaces(TR3Level level, List<FDTrigType> triggerTypes, bool includeDeathTiles)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        List<TRFace4> faces = new List<TRFace4>();
+        List<TRFace4> faces = new();
         foreach (TR3Room room in level.Rooms)
         {
             faces.AddRange(ScanTriggerFaces(floorData, triggerTypes, includeDeathTiles, room.Sectors, room.NumZSectors, room.RoomData.Rectangles, v =>
@@ -64,10 +64,10 @@ public static class FaceUtilities
 
     public static Dictionary<TRFace4, List<TRVertex>> GetClimbableFaces(TR2Level level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        Dictionary<TRFace4, List<TRVertex>> faces = new Dictionary<TRFace4, List<TRVertex>>();
+        Dictionary<TRFace4, List<TRVertex>> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
             foreach (TRRoomSector sector in room.SectorList)
@@ -81,10 +81,10 @@ public static class FaceUtilities
 
     public static Dictionary<TRFace4, List<TRVertex>> GetClimbableFaces(TR3Level level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
 
-        Dictionary<TRFace4, List<TRVertex>> faces = new Dictionary<TRFace4, List<TRVertex>>();
+        Dictionary<TRFace4, List<TRVertex>> faces = new();
         foreach (TR3Room room in level.Rooms)
         {
             foreach (TRRoomSector sector in room.Sectors)
@@ -100,7 +100,7 @@ public static class FaceUtilities
     private static List<TRFace4> ScanTriggerFaces
         (FDControl floorData, List<FDTrigType> triggerMatches, bool includeDeathTiles, TRRoomSector[] sectors, ushort roomDepth, TRFace4[] roomFaces, Func<ushort, TRVertex> vertexAction)
     {
-        List<TRFace4> faces = new List<TRFace4>();
+        List<TRFace4> faces = new();
         for (int i = 0; i < sectors.Length; i++)
         {
             TRRoomSector sector = sectors[i];
@@ -121,7 +121,7 @@ public static class FaceUtilities
 
                 foreach (TRFace4 face in roomFaces)
                 {
-                    List<TRVertex> faceVertices = new List<TRVertex>();
+                    List<TRVertex> faceVertices = new();
                     foreach (ushort v in face.Vertices)
                     {
                         faceVertices.Add(vertexAction.Invoke(v));
@@ -165,7 +165,7 @@ public static class FaceUtilities
                     continue;
                 }
 
-                List<TRVertex> faceVertices = new List<TRVertex>();
+                List<TRVertex> faceVertices = new();
                 foreach (ushort v in face.Vertices)
                 {
                     faceVertices.Add(room.RoomData.Vertices[v].Vertex);
@@ -219,7 +219,7 @@ public static class FaceUtilities
                     continue;
                 }
 
-                List<TRVertex> faceVertices = new List<TRVertex>();
+                List<TRVertex> faceVertices = new();
                 foreach (ushort v in face.Vertices)
                 {
                     faceVertices.Add(room.RoomData.Vertices[v].Vertex);
@@ -274,7 +274,7 @@ public static class FaceUtilities
                     continue;
                 }
 
-                List<TRVertex> faceVertices = new List<TRVertex>();
+                List<TRVertex> faceVertices = new();
                 foreach (ushort v in face.Vertices)
                 {
                     faceVertices.Add(room.RoomData.Vertices[v].Vertex);
@@ -303,7 +303,7 @@ public static class FaceUtilities
 
     private static List<TRVertex> GetVerticesToMatch(FDClimbEntry climbEntry, short x, short z)
     {
-        List<TRVertex> vertMatches = new List<TRVertex>();
+        List<TRVertex> vertMatches = new();
         if (climbEntry.IsNegativeX)
         {
             vertMatches.Add(new TRVertex
@@ -362,7 +362,7 @@ public static class FaceUtilities
 
     private static List<TRVertex> GetFloorOrCeilingVerticesToMatch(short x, short z)
     {
-        List<TRVertex> vertMatches = new List<TRVertex>
+        List<TRVertex> vertMatches = new()
         {
             new TRVertex
             {

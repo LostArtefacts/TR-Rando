@@ -85,13 +85,13 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
         SetMessage("Randomizing secrets - loading levels");
 
-        List<SecretProcessor> processors = new List<SecretProcessor>();
+        List<SecretProcessor> processors = new();
         for (int i = 0; i < _maxThreads; i++)
         {
             processors.Add(new SecretProcessor(this));
         }
 
-        List<TR1CombinedLevel> levels = new List<TR1CombinedLevel>(Levels.Count);
+        List<TR1CombinedLevel> levels = new(Levels.Count);
         foreach (TR1ScriptedLevel lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
@@ -193,7 +193,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
     private void RemoveDefaultSecrets(TR1CombinedLevel level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         // Scan all rooms and remove any existing secret triggers.
@@ -349,7 +349,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                 cameraTarget = (ushort)rewardRoom.DoorIndices[0];
             }
 
-            FDControl floorData = new FDControl();
+            FDControl floorData = new();
             floorData.ParseFromLevel(level.Data);
 
             // Get each trigger created for each secret index and add the camera, provided
@@ -411,13 +411,13 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
     private void PlaceAllSecrets(TR1CombinedLevel level, List<TREntities> pickupTypes, TRSecretRoom<TREntity> rewardRoom)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         List<TREntity> entities = level.Data.Entities.ToList();
         List<Location> locations = _locations[level.Name];
 
-        TRSecretPlacement<TREntities> secret = new TRSecretPlacement<TREntities>();
+        TRSecretPlacement<TREntities> secret = new();
         int pickupIndex = 0;
         ushort secretIndex = 0;
         ushort countedSecrets = _maxSecretCount;
@@ -478,13 +478,13 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
     private void RandomizeSecrets(TR1CombinedLevel level, List<TREntities> pickupTypes, TRSecretRoom<TREntity> rewardRoom)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         List<TREntity> entities = level.Data.Entities.ToList();
         List<Location> locations = _locations[level.Name];
         locations.Shuffle(_generator);
-        List<Location> usedLocations = new List<Location>();
+        List<Location> usedLocations = new();
 
         Queue<Location> guaranteedLocations = _picker.GetGuaranteedLocations(locations, Mirrorer.IsMirrored(level.Name), level.Script.NumSecrets, location =>
         {
@@ -499,7 +499,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
         usedLocations.Clear();
 
-        TRSecretPlacement<TREntities> secret = new TRSecretPlacement<TREntities>();
+        TRSecretPlacement<TREntities> secret = new();
         int pickupIndex = 0;
         bool damagingLocationUsed = false;
         bool glitchedDamagingLocationUsed = false;
@@ -608,7 +608,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             proximity = _TINY_RADIUS;
         }
 
-        Sphere newLoc = new Sphere(new Vector3(loc.X, loc.Y, loc.Z), proximity);
+        Sphere newLoc = new(new Vector3(loc.X, loc.Y, loc.Z), proximity);
         // Tilted sectors can still pass the proximity test, so in any case we never want 2 secrets sharing a tile.
         // We also want to try to avoid secrets in the same room, unless we've exhausted all other attempts.
         TRRoomSector newSector = FDUtilities.GetRoomSector(loc.X, loc.Y, loc.Z, (short)loc.Room, level.Data, floorData);
@@ -867,7 +867,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         }
 
         // Make a new pickup trigger
-        FDTriggerEntry trigger = new FDTriggerEntry
+        FDTriggerEntry trigger = new()
         {
             Setup = new FDSetup { Value = 4 },
             TrigSetup = new FDTrigSetup
@@ -904,7 +904,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         // move Object actions if the mask on this trigger is full.
         if (existingTrigger != null)
         {
-            List<FDActionListItem> existingActions = new List<FDActionListItem>();
+            List<FDActionListItem> existingActions = new();
             foreach (FDActionListItem actionItem in existingTrigger.TrigActionList)
             {
                 if (actionItem.TrigAction == FDTrigAction.Object)
@@ -943,7 +943,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         private static readonly Dictionary<TREntities, TREntities> _modelReplacements = TR1EntityUtilities.GetSecretReplacements();
 
         // Move this to Gamestring Rando once implemented
-        private static readonly Dictionary<TREntities, string> _pickupNames = new Dictionary<TREntities, string>
+        private static readonly Dictionary<TREntities, string> _pickupNames = new()
         {
             [TREntities.SecretAnkh_M_H] = "Secret Ankh",
             [TREntities.SecretGoldBar_M_H] = "Secret Gold Bar",
@@ -1007,7 +1007,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                     TRSecretModelAllocation<TREntities> allocation = _importAllocations[level];
 
                     // Get the artefacts into the level and refresh the model list
-                    TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                    TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
                     {
                         Level = level.Data,
                         LevelName = level.Name,

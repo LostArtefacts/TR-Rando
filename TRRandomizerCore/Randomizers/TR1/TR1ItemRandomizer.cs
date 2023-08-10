@@ -16,7 +16,7 @@ namespace TRRandomizerCore.Randomizers;
 public class TR1ItemRandomizer : BaseTR1Randomizer
 {
     // The number of extra pickups to add per level
-    private static readonly Dictionary<string, int> _extraItemCounts = new Dictionary<string, int>
+    private static readonly Dictionary<string, int> _extraItemCounts = new()
     {
         [TR1LevelNames.CAVES]
             = 10, // Default = 4
@@ -313,7 +313,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
     private List<Location> GetItemLocationPool(TR1CombinedLevel level)
     {
-        List<Location> exclusions = new List<Location>();
+        List<Location> exclusions = new();
         if (_excludedLocations.ContainsKey(level.Name))
         {
             exclusions.AddRange(_excludedLocations[level.Name]);
@@ -343,7 +343,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             });
         }
 
-        TR1LocationGenerator generator = new TR1LocationGenerator();
+        TR1LocationGenerator generator = new();
         return generator.Generate(level.Data, exclusions);
     }
 
@@ -355,7 +355,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             return;
         }
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         for (int i = 0; i < level.Data.NumEntities; i++)
@@ -422,7 +422,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         // For key items, some may be used as secrets so look for entity instances of each to determine what's what
         _spriteRandomizer.SecretItemTypes = new List<TREntities>();
         _spriteRandomizer.KeyItemTypes = new List<TREntities>();
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(_levelInstance.Data);
         foreach (TREntities type in TR1EntityUtilities.GetListOfKeyItemTypes())
         {

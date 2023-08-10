@@ -12,7 +12,7 @@ public class TR1NightModeRandomizer : BaseTR1Randomizer
 {
     public const uint DarknessRange = 10; // 0 = Dusk, 10 = Night
 
-    private static readonly Dictionary<string, List<int>> _excludedRooms = new Dictionary<string, List<int>>
+    private static readonly Dictionary<string, List<int>> _excludedRooms = new()
     {
         [TR1LevelNames.ATLANTIS]
             = new List<int> { 85, 95, 96 } // We want to retain the flicker effect at the start

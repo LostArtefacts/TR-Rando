@@ -101,7 +101,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
 
     protected List<TRStaticMesh> GetCollidableStaticMeshes(L level)
     {
-        List<TRStaticMesh> meshes = new List<TRStaticMesh>();
+        List<TRStaticMesh> meshes = new();
 
         foreach (TRStaticMesh mesh in GetStaticMeshes(level))
         {
@@ -164,7 +164,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
 
     private List<Location> GetValidLocations(L level)
     {
-        List<Location> locations = new List<Location>();
+        List<Location> locations = new();
         for (short r = 0; r < GetRoomCount(level); r++)
         {
             List<TRRoomSector> sectors = GetRoomSectors(level, r);
@@ -305,7 +305,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
             return null;
         }
 
-        List<sbyte> corners = new List<sbyte> { 0, 0, 0, 0 };
+        List<sbyte> corners = new() { 0, 0, 0, 0 };
         if (slant.XSlant > 0)
         {
             corners[0] += slant.XSlant;
@@ -372,7 +372,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
         int t2 = triangulation.TriData.C01;
         int t3 = triangulation.TriData.C11;
 
-        List<byte> triangleCorners = new List<byte>
+        List<byte> triangleCorners = new()
         {
             triangulation.TriData.C00,
             triangulation.TriData.C01,
@@ -381,7 +381,7 @@ public abstract class AbstractLocationGenerator<L> where L : class
         };
 
         int max = triangleCorners.Max();
-        List<int> corners = new List<int>
+        List<int> corners = new()
         {
             max - triangleCorners[0],
             max - triangleCorners[1],

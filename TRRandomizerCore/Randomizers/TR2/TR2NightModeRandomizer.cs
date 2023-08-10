@@ -135,12 +135,12 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
         }
     }
 
-    private static readonly Dictionary<TR2Entities, TR2Entities> _entitiesToReplace = new Dictionary<TR2Entities, TR2Entities>
+    private static readonly Dictionary<TR2Entities, TR2Entities> _entitiesToReplace = new()
     {
         [TR2Entities.SingingBirds_N] = TR2Entities.Flares_S_P // Birds don't sing at night
     };
 
-    private static readonly Dictionary<string, uint[]> _staticMeshesToHide = new Dictionary<string, uint[]>
+    private static readonly Dictionary<string, uint[]> _staticMeshesToHide = new()
     {
         // The washing lines come in at night
         [TR2LevelNames.VENICE] = 

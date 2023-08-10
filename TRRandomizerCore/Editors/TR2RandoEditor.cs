@@ -45,8 +45,7 @@ public class TR2RandoEditor : TR2LevelEditor, ISettingsProvider
 
     protected override void SaveImpl(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
     {
-        List<TR2ScriptedLevel> levels = new List<TR2ScriptedLevel>
-        (
+        List<TR2ScriptedLevel> levels = new(
             scriptEditor.EnabledScriptedLevels.Cast<TR2ScriptedLevel>().ToList()
         );
 

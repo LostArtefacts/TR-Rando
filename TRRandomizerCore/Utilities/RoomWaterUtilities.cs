@@ -8,7 +8,7 @@ namespace TRRandomizerCore.Utilities;
 
 public static class RoomWaterUtilities
 {
-    public static Dictionary<string, List<List<int>>> RoomRemovalWaterMap = new Dictionary<string, List<List<int>>>
+    public static Dictionary<string, List<List<int>>> RoomRemovalWaterMap = new()
     {
         { TR2LevelNames.GW, new List<List<int>>
             {   
@@ -102,7 +102,7 @@ public static class RoomWaterUtilities
         }
     };
 
-    public static Dictionary<string, int> DefaultRoomCountDictionary = new Dictionary<string, int>
+    public static Dictionary<string, int> DefaultRoomCountDictionary = new()
     {
         { TR1LevelNames.CAVES, 38 },
         { TR1LevelNames.VILCABAMBA, 94 },
@@ -152,7 +152,7 @@ public static class RoomWaterUtilities
     /// <returns></returns>
     public static Location MoveToTheSurface(Location location, TR2Level level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level);
         // Make sure the boat is just on the water surface
         while (level.Rooms[location.Room].ContainsWater)

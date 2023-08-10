@@ -75,7 +75,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
 
         // We don't want to store all SFX WAV data in JSON, so instead we reference the source level
         // and extract the details from there using the same format for model transport.
-        Dictionary<string, TR1Level> levels = new Dictionary<string, TR1Level>();
+        Dictionary<string, TR1Level> levels = new();
         TR1LevelControl reader = new();
         foreach (TR1SFXDefinition definition in _soundEffects)
         {
@@ -121,7 +121,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
     {
         if (Settings.ChangeTriggerTracks)
         {
-            FDControl floorData = new FDControl();
+            FDControl floorData = new();
             floorData.ParseFromLevel(level.Data);
 
             _audioRandomizer.ResetFloorMap();
@@ -152,8 +152,8 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
 
         if (IsUncontrolledLevel(level.Script))
         {
-            List<uint> newSampleIndices = new List<uint>();
-            List<byte> newSamples = new List<byte>();
+            List<uint> newSampleIndices = new();
+            List<byte> newSamples = new();
             ISet<string> usedSamples = new HashSet<string>();
 
             // Replace each sample but be sure to avoid duplicates
@@ -307,7 +307,7 @@ public class TR1AudioRandomizer : BaseTR1Randomizer
         // track, so ensure that the required data is in the level if any
         // of these are used on the floor.
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         List<ushort> usedSpeechTracks = FDUtilities.GetActionListItems(floorData, FDTrigAction.PlaySoundtrack)

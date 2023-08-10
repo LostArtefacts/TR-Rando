@@ -120,7 +120,7 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
 
     private void ApplyMappingToLevel(TR3CombinedLevel level, EMEditorMapping mapping)
     {
-        EnvironmentPicker picker = new EnvironmentPicker(Settings.HardEnvironmentMode)
+        EnvironmentPicker picker = new(Settings.HardEnvironmentMode)
         {
             Generator = _generator
         };
@@ -204,10 +204,10 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
 
     private void MirrorLevel(TR3CombinedLevel level, EMEditorMapping mapping)
     {
-        EMMirrorFunction mirrorer = new EMMirrorFunction();
+        EMMirrorFunction mirrorer = new();
         mirrorer.ApplyToLevel(level.Data);
 
-        EnvironmentPicker picker = new EnvironmentPicker(Settings.HardEnvironmentMode);
+        EnvironmentPicker picker = new(Settings.HardEnvironmentMode);
         picker.LoadTags(Settings, ScriptEditor.Edition.IsCommunityPatch);
         picker.Options.ExclusionMode = EMExclusionMode.Individual;
         mapping?.Mirrored.ApplyToLevel(level.Data, picker.Options);

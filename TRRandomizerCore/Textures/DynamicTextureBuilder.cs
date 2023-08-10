@@ -18,7 +18,7 @@ namespace TRRandomizerCore.Textures;
 public class DynamicTextureBuilder
 {
     // Models whose mesh textures should be targeted
-    private static readonly List<TREntities> _modelIDs = new List<TREntities>
+    private static readonly List<TREntities> _modelIDs = new()
     {
         TREntities.Door1, TREntities.Door2, TREntities.Door3, TREntities.Door4,
         TREntities.Door5, TREntities.Door6, TREntities.Door7, TREntities.Door8,
@@ -40,7 +40,7 @@ public class DynamicTextureBuilder
     };
 
     // Enemy models whose mesh textures should be targeted
-    private static readonly List<TREntities> _enemyIDs = new List<TREntities>
+    private static readonly List<TREntities> _enemyIDs = new()
     {
         TREntities.Adam, TREntities.Missile2_H, TREntities.Missile3_H, TREntities.FlyingAtlantean,
         TREntities.BandagedFlyer, TREntities.Centaur, TREntities.Mummy, TREntities.Doppelganger,
@@ -48,7 +48,7 @@ public class DynamicTextureBuilder
     };
 
     // Sprite sequences that should be targeted
-    private static readonly List<TREntities> _spriteIDs = new List<TREntities>
+    private static readonly List<TREntities> _spriteIDs = new()
     {
         TREntities.LavaParticles_S_H, TREntities.Flame_S_H, TREntities.Explosion1_S_H,
         TREntities.DartEffect_S_H, TREntities.WaterRipples1_S_H, TREntities.WaterRipples2_S_H,
@@ -107,7 +107,7 @@ public class DynamicTextureBuilder
         }
 
         TRMesh hips = null;
-        List<TREntities> modelIDs = new List<TREntities>(_modelIDs);
+        List<TREntities> modelIDs = new(_modelIDs);
         if (level.IsCutScene)
         {
             // Cutscene actors vary between levels so we can't include all by default. These
@@ -168,7 +168,7 @@ public class DynamicTextureBuilder
         }
 
         // Key items and secrets
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         Dictionary<TREntities, TREntities> keyItems = TR1EntityUtilities.GetKeyItemMap();
@@ -199,13 +199,13 @@ public class DynamicTextureBuilder
         }
 
         // Put it all together into the required format for texture re-mapping.
-        using (TR1TexturePacker packer = new TR1TexturePacker(level.Data))
+        using (TR1TexturePacker packer = new(level.Data))
         {
-            Dictionary<int, List<Rectangle>> defaultMapping = new Dictionary<int, List<Rectangle>>();
+            Dictionary<int, List<Rectangle>> defaultMapping = new();
             AddSegmentsToMapping(packer.GetObjectTextureSegments(defaultObjectTextures), defaultMapping);
             AddSegmentsToMapping(packer.GetSpriteTextureSegments(defaultSpriteTextures), defaultMapping);
 
-            Dictionary<TextureCategory, Dictionary<int, List<Rectangle>>> optionalMapping = new Dictionary<TextureCategory, Dictionary<int, List<Rectangle>>>
+            Dictionary<TextureCategory, Dictionary<int, List<Rectangle>>> optionalMapping = new()
             {
                 [TextureCategory.Enemy] = new Dictionary<int, List<Rectangle>>(),
                 [TextureCategory.Secret] = new Dictionary<int, List<Rectangle>>(),
@@ -249,7 +249,7 @@ public class DynamicTextureBuilder
         }
 
         TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level, model);
-        List<TRMesh> excludedMeshes = new List<TRMesh> { dummyMesh };
+        List<TRMesh> excludedMeshes = new() { dummyMesh };
 
         if (modelID == TREntities.Adam)
         {                
@@ -311,7 +311,7 @@ public class DynamicTextureBuilder
 
     private void DuplicateMeshTextures(TR1Level level, TRMesh mesh)
     {
-        using (TR1TexturePacker packer = new TR1TexturePacker(level))
+        using (TR1TexturePacker packer = new(level))
         {
             packer.MaximumTiles = IsCommunityPatch ? 128 : 16;
             int maximumObjects = IsCommunityPatch ? 8192 : 2048;
@@ -322,7 +322,7 @@ public class DynamicTextureBuilder
             Dictionary<TexturedTile, List<TexturedTileSegment>> segments = packer.GetObjectTextureSegments(textures.ToHashSet());
 
             // Clone each segment ready for packing.
-            List<TexturedTileSegment> duplicates = new List<TexturedTileSegment>();                
+            List<TexturedTileSegment> duplicates = new();                
             foreach (List<TexturedTileSegment> segs in segments.Values)
             {
                 duplicates.AddRange(segs.Select(s => s.Clone()));                    
@@ -334,8 +334,8 @@ public class DynamicTextureBuilder
 
             // Map the packed segments to object textures.
             List<TRObjectTexture> levelObjectTextures = level.ObjectTextures.ToList();
-            Queue<int> reusableIndices = new Queue<int>(level.GetInvalidObjectTextureIndices());
-            Dictionary<int, int> reindex = new Dictionary<int, int>();
+            Queue<int> reusableIndices = new(level.GetInvalidObjectTextureIndices());
+            Dictionary<int, int> reindex = new();
             foreach (TexturedTileSegment segment in duplicates)
             {
                 foreach (IndexedTRObjectTexture texture in segment.Textures)

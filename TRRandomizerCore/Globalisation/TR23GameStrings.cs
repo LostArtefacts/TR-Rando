@@ -26,7 +26,7 @@ public class TR23GameStrings : IGameStrings
     // UKBox, EPC and TR2Main work best.
     public string Encode(string text)
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
         foreach (char c in text)
         {
             string n = TextUtilities.Normalise(c);

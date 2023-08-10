@@ -66,7 +66,7 @@ public class AudioRandomizer
                 {
                     int x2 = x + xNorm * FullSectorSize;
                     int z2 = z + zNorm * FullSectorSize;
-                    Vector2 p2 = new Vector2(x2, z2);
+                    Vector2 p2 = new(x2, z2);
                     if (!_trackMap.ContainsKey(p2))
                     {
                         _trackMap[p2] = _trackMap[position];
@@ -101,7 +101,7 @@ public class AudioRandomizer
 
     public List<TRSFXGeneralCategory> GetSFXCategories(RandomizerSettings settings)
     {
-        List<TRSFXGeneralCategory> sfxCategories = new List<TRSFXGeneralCategory>();
+        List<TRSFXGeneralCategory> sfxCategories = new();
         if (settings.ChangeWeaponSFX)
         {
             // Pistols, Autos etc

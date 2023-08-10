@@ -104,7 +104,7 @@ public class WireframeData
 
     public static List<SpecialTextureMode> GetDrawModes(SpecialTextureType type)
     {
-        List<SpecialTextureMode> modes = new List<SpecialTextureMode>();
+        List<SpecialTextureMode> modes = new();
         switch (type)
         {
             case SpecialTextureType.MidasDoors:

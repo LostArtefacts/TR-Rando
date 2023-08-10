@@ -29,13 +29,13 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
         SetPersistentOutfit();
         ChooseFilteredLevels();
 
-        List<OutfitProcessor> processors = new List<OutfitProcessor>();
+        List<OutfitProcessor> processors = new();
         for (int i = 0; i < _maxThreads; i++)
         {
             processors.Add(new OutfitProcessor(this));
         }
 
-        List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(Levels.Count);
+        List<TR2CombinedLevel> levels = new(Levels.Count);
         foreach (TR2ScriptedLevel lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
@@ -130,7 +130,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
     {
         // Each of these needs to be removed and replaced with the corresponding animation
         // models for the associated outfit.
-        private static readonly List<TR2Entities> _laraRemovals = new List<TR2Entities>
+        private static readonly List<TR2Entities> _laraRemovals = new()
         {
             TR2Entities.LaraPistolAnim_H,
             TR2Entities.LaraAutoAnim_H,
@@ -139,13 +139,13 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
         };
 
         // Entities to hide for haircuts
-        private static readonly List<TR2Entities> _invisiblePonytailEntities = new List<TR2Entities>
+        private static readonly List<TR2Entities> _invisiblePonytailEntities = new()
         {
             TR2Entities.LaraPonytail_H
         };
 
         // Entities to hide for Lara entirely
-        private static readonly List<TR2Entities> _invisibleLaraEntities = new List<TR2Entities>
+        private static readonly List<TR2Entities> _invisibleLaraEntities = new()
         {
             TR2Entities.Lara, TR2Entities.LaraPonytail_H, TR2Entities.LaraFlareAnim_H,
             TR2Entities.LaraPistolAnim_H, TR2Entities.LaraShotgunAnim_H, TR2Entities.LaraAutoAnim_H,
@@ -175,7 +175,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             // only 5 to choose from (there is also Assault Course Lara, but when holstering pistols
             // her trousers disappear, so she is excluded for the time being...).
             List<TR2Entities> allLaras = _outer.GetLaraTypes();
-            List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(_outfitAllocations.Keys);
+            List<TR2CombinedLevel> levels = new(_outfitAllocations.Keys);
 
             foreach (TR2CombinedLevel level in levels)
             {
@@ -247,15 +247,15 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 return true;
             }
 
-            List<TR2Entities> laraImport = new List<TR2Entities>();
-            List<TR2Entities> laraRemovals = new List<TR2Entities>();
+            List<TR2Entities> laraImport = new();
+            List<TR2Entities> laraRemovals = new();
             if (lara != TR2EntityUtilities.GetAliasForLevel(level.Name, TR2Entities.Lara))
             {
                 laraImport.Add(lara);
                 laraRemovals.AddRange(_laraRemovals);
             }
             
-            TR2ModelImporter importer = new TR2ModelImporter
+            TR2ModelImporter importer = new()
             {
                 Level = level.Data,
                 LevelName = level.Name,
@@ -315,7 +315,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
         {
             if (clones.Count > 0)
             {
-                MeshEditor editor = new MeshEditor();
+                MeshEditor editor = new();
                 TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, laraModel);
                 int firstMeshIndex = -1;
                 for (int i = 0; i < meshes.Length; i++)
@@ -336,7 +336,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
 
         private void HideEntities(TR2CombinedLevel level, IEnumerable<TR2Entities> entities)
         {
-            MeshEditor editor = new MeshEditor();
+            MeshEditor editor = new();
             foreach (TR2Entities ent in entities)
             {
                 TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
@@ -382,7 +382,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                 {
                     if (lara == TR2Entities.LaraHome)
                     {
-                        MeshEditor editor = new MeshEditor
+                        MeshEditor editor = new()
                         {
                             Mesh = TRMeshUtilities.GetModelFirstMesh(level.Data, TR2Entities.Lara)
                         };
@@ -398,7 +398,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
                     {
                         // This removes it from the starting cutscene - mesh 10 is Lara's hand holding the dagger,
                         // so we basically just retain the hand.
-                        MeshEditor editor = new MeshEditor
+                        MeshEditor editor = new()
                         {
                             Mesh = TRMeshUtilities.GetModelMeshes(level.Data, TR2Entities.LaraMiscAnim_H)[10]
                         };

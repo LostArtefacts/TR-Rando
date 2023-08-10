@@ -21,7 +21,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 {
     private static readonly int _spikeHeightChange = -768;
 
-    private static readonly Dictionary<TR3Entities, TR3Entities> _artefactAssignment = new Dictionary<TR3Entities, TR3Entities>
+    private static readonly Dictionary<TR3Entities, TR3Entities> _artefactAssignment = new()
     {
         [TR3Entities.Infada_P] = TR3Entities.Key1_P,
         [TR3Entities.OraDagger_P] = TR3Entities.Key2_P,
@@ -33,7 +33,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         [TR3Entities.Element115_M_H] = TR3Entities.Key4_M_H,
     };
 
-    private static readonly Dictionary<TR3Adventure, int> _adventureStringSequences = new Dictionary<TR3Adventure, int>
+    private static readonly Dictionary<TR3Adventure, int> _adventureStringSequences = new()
     {
         [TR3Adventure.SouthPacific] = 87,
         [TR3Adventure.London] = 85,
@@ -158,8 +158,8 @@ public class TR3SequenceProcessor : TR3LevelProcessor
             return;
         }
 
-        List<TR3Entities> upvImport = new List<TR3Entities> { TR3Entities.UPV };
-        TR3ModelImporter importer = new TR3ModelImporter
+        List<TR3Entities> upvImport = new() { TR3Entities.UPV };
+        TR3ModelImporter importer = new()
         {
             Level = level.Data,
             LevelName = level.Name,
@@ -231,7 +231,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private void AmendAntarctica(TR3CombinedLevel level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
         TRRoomSector sector = FDUtilities.GetRoomSector(53760, -3328, 28160, 185, level.Data, floorData);
         if (sector.FDIndex == 0)
@@ -250,7 +250,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
     private void ImportArtefactMenuModels(TR3CombinedLevel level)
     {
         List<TRModel> models = level.Data.Models.ToList();
-        List<TR3Entities> imports = new List<TR3Entities>();
+        List<TR3Entities> imports = new();
         foreach (TR3Entities artefactMenuModel in TR3EntityUtilities.GetArtefactMenuModels())
         {
             if (models.Find(m => m.ID == (uint)artefactMenuModel) == null)
@@ -261,7 +261,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
         if (imports.Count > 0)
         {
-            TR3ModelImporter importer = new TR3ModelImporter
+            TR3ModelImporter importer = new()
             {
                 Level = level.Data,
                 LevelName = level.Name,

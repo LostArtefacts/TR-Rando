@@ -82,7 +82,7 @@ public static class TR1EnemyUtilities
 
     public static Dictionary<TREntities, List<string>> PrepareEnemyGameTracker(RandoDifficulty difficulty)
     {
-        Dictionary<TREntities, List<string>> tracker = new Dictionary<TREntities, List<string>>();
+        Dictionary<TREntities, List<string>> tracker = new();
 
         if (difficulty == RandoDifficulty.Default)
         {
@@ -151,7 +151,7 @@ public static class TR1EnemyUtilities
 
     public static List<TREntities> GetRequiredEnemies(string lvlName)
     {
-        List<TREntities> entities = new List<TREntities>();
+        List<TREntities> entities = new();
         if (_requiredEnemies.ContainsKey(lvlName))
         {
             entities.AddRange(_requiredEnemies[lvlName]);
@@ -165,7 +165,7 @@ public static class TR1EnemyUtilities
         {
             int entityID = level.Entities.ToList().IndexOf(entity);
 
-            FDControl fdControl = new FDControl();
+            FDControl fdControl = new();
             fdControl.ParseFromLevel(level);
 
             List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(fdControl, entityID);
@@ -204,7 +204,7 @@ public static class TR1EnemyUtilities
         double average = (double)weight / enemyEntities.Count;
         weight = Convert.ToInt32(Math.Round(average, 0, MidpointRounding.AwayFromZero));
 
-        List<EnemyDifficulty> allDifficulties = new List<EnemyDifficulty>(Enum.GetValues(typeof(EnemyDifficulty)).Cast<EnemyDifficulty>());
+        List<EnemyDifficulty> allDifficulties = new(Enum.GetValues(typeof(EnemyDifficulty)).Cast<EnemyDifficulty>());
 
         if (weight > 0)
         {
@@ -230,7 +230,7 @@ public static class TR1EnemyUtilities
 
     public static Dictionary<TREntities, TREntities> GetAliasPriority(string lvlName, List<TREntities> importEntities)
     {
-        Dictionary<TREntities, TREntities> priorities = new Dictionary<TREntities, TREntities>();
+        Dictionary<TREntities, TREntities> priorities = new();
 
         bool trexPresent = importEntities.Contains(TREntities.TRex);
         bool adamPresent = importEntities.Contains(TREntities.Adam);
@@ -305,11 +305,11 @@ public static class TR1EnemyUtilities
     private static readonly Dictionary<string, Dictionary<TREntities, List<int>>> _restrictedEnemyZonesTechnical;
 
     // We (can) also limit the count per level for some, such as bosses.
-    private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsTechnical = new Dictionary<TREntities, int>
+    private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsTechnical = new()
     {
     };
 
-    private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsDefault = new Dictionary<TREntities, int>
+    private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsDefault = new()
     {
         [TREntities.Adam] = 1,
         [TREntities.Cowboy] = 3,
@@ -323,24 +323,24 @@ public static class TR1EnemyUtilities
 
     // These enemies are restricted a set number of times throughout the entire game.
     // Perhaps add level-ending larson as an option
-    private static readonly Dictionary<TREntities, int> _restrictedEnemyGameCountsTechnical = new Dictionary<TREntities, int>
+    private static readonly Dictionary<TREntities, int> _restrictedEnemyGameCountsTechnical = new()
     {
     };
 
-    private static readonly Dictionary<TREntities, int> _restrictedEnemyGameCountsDefault = new Dictionary<TREntities, int>
+    private static readonly Dictionary<TREntities, int> _restrictedEnemyGameCountsDefault = new()
     {
         [TREntities.Adam] = 3,
         [TREntities.Natla] = 2
     };
 
-    private static readonly List<TREntities> _allAtlanteans = new List<TREntities>
+    private static readonly List<TREntities> _allAtlanteans = new()
     {
         TREntities.Adam, TREntities.Centaur, TREntities.CentaurStatue, TREntities.FlyingAtlantean,
         TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N, TREntities.Natla,
         TREntities.AtlanteanEgg
     };
 
-    private static readonly Dictionary<string, List<RestrictedEnemyGroup>> _restrictedEnemyGroupCounts = new Dictionary<string, List<RestrictedEnemyGroup>>
+    private static readonly Dictionary<string, List<RestrictedEnemyGroup>> _restrictedEnemyGroupCounts = new()
     {
         [TR1LevelNames.CAVES] = new List<RestrictedEnemyGroup>
         {
@@ -443,18 +443,18 @@ public static class TR1EnemyUtilities
     };
 
     // These enemies are unsupported due to technical reasons, NOT difficulty reasons (T1M only).
-    private static readonly Dictionary<string, List<TREntities>> _unsupportedEnemiesTechnical = new Dictionary<string, List<TREntities>>
+    private static readonly Dictionary<string, List<TREntities>> _unsupportedEnemiesTechnical = new()
     {
     };
 
     // SkaterBoy and Natla can appear only in their OG levels in TombATI.
-    private static readonly Dictionary<TREntities, string> _atiEnemyRestrictions = new Dictionary<TREntities, string>
+    private static readonly Dictionary<TREntities, string> _atiEnemyRestrictions = new()
     {
         [TREntities.SkateboardKid] = TR1LevelNames.MINES,
         [TREntities.Natla] = TR1LevelNames.PYRAMID,
     };
 
-    private static readonly Dictionary<string, List<TREntities>> _unsupportedEnemiesDefault = new Dictionary<string, List<TREntities>>
+    private static readonly Dictionary<string, List<TREntities>> _unsupportedEnemiesDefault = new()
     {
         [TR1LevelNames.QUALOPEC] = new List<TREntities>
         {
@@ -463,7 +463,7 @@ public static class TR1EnemyUtilities
     };
 
     // Any enemies that must remain untouched in a given level
-    private static readonly Dictionary<string, List<TREntities>> _requiredEnemies = new Dictionary<string, List<TREntities>>
+    private static readonly Dictionary<string, List<TREntities>> _requiredEnemies = new()
     {
         [TR1LevelNames.QUALOPEC] = new List<TREntities>
         {
@@ -477,7 +477,7 @@ public static class TR1EnemyUtilities
 
     // Control the number of types of enemy that appear in levels, so these numbers are added to the
     // current total e.g. Caves becomes 5 types, Vilcabamba becomes 4 etc.
-    private static readonly Dictionary<string, int> _enemyAdjustmentCount = new Dictionary<string, int>
+    private static readonly Dictionary<string, int> _enemyAdjustmentCount = new()
     {
         [TR1LevelNames.CAVES]
             = 2, // Defaults: 3 types, 14 enemies
@@ -512,12 +512,12 @@ public static class TR1EnemyUtilities
     };
 
     // Enemies who can only spawn once.
-    private static readonly List<TREntities> _oneShotEnemies = new List<TREntities>
+    private static readonly List<TREntities> _oneShotEnemies = new()
     {
         TREntities.Pierre
     };
 
-    private static readonly Dictionary<EnemyDifficulty, List<TREntities>> _enemyDifficulties = new Dictionary<EnemyDifficulty, List<TREntities>>
+    private static readonly Dictionary<EnemyDifficulty, List<TREntities>> _enemyDifficulties = new()
     {
         [EnemyDifficulty.VeryEasy] = new List<TREntities>
         {
@@ -545,7 +545,7 @@ public static class TR1EnemyUtilities
         }
     };
 
-    private static readonly Dictionary<TREntities, uint> _startingAmmoToGive = new Dictionary<TREntities, uint>()
+    private static readonly Dictionary<TREntities, uint> _startingAmmoToGive = new()
     {
         [TREntities.Shotgun_S_P] = 10,
         [TREntities.Magnums_S_P] = 6,

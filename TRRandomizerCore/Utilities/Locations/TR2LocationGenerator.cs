@@ -46,7 +46,7 @@ public class TR2LocationGenerator : AbstractLocationGenerator<TR2Level>
 
     protected override Dictionary<ushort, List<Location>> GetRoomStaticMeshLocations(TR2Level level, short room)
     {
-        Dictionary<ushort, List<Location>> locations = new Dictionary<ushort, List<Location>>();
+        Dictionary<ushort, List<Location>> locations = new();
         foreach (TR2RoomStaticMesh staticMesh in level.Rooms[room].StaticMeshes)
         {
             if (!locations.ContainsKey(staticMesh.MeshID))

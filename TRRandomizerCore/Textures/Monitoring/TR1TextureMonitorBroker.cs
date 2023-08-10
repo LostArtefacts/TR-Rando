@@ -6,7 +6,7 @@ namespace TRRandomizerCore.Textures;
 
 public class TR1TextureMonitorBroker : AbstractTextureMonitorBroker<TREntities>
 {
-    private static readonly Dictionary<TREntities, TREntities> _expandedMonitorMap = new Dictionary<TREntities, TREntities>
+    private static readonly Dictionary<TREntities, TREntities> _expandedMonitorMap = new()
     {
         [TREntities.TRex] = TREntities.LaraMiscAnim_H_Valley
     };

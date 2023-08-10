@@ -62,7 +62,7 @@ public abstract class AbstractTextureMonitorBroker<E> : IDisposable
 
     private List<StaticTextureSource<E>> GetSourcesToMonitor(List<E> entities)
     {
-        List<E> expandedEntities = new List<E>(entities);
+        List<E> expandedEntities = new(entities);
 
         // We need to capture things like flames being imported into Boat, Opera, Skidoo and the fact that
         // the red Skidoo is available when importing MercSnomobDriver.
@@ -77,7 +77,7 @@ public abstract class AbstractTextureMonitorBroker<E> : IDisposable
             }
         }
 
-        List<StaticTextureSource<E>> sources = new List<StaticTextureSource<E>>();
+        List<StaticTextureSource<E>> sources = new();
         foreach (E entity in expandedEntities)
         {
             foreach (StaticTextureSource<E> source in _textureDatabase.GetStaticSource(entity))
@@ -117,7 +117,7 @@ public abstract class AbstractTextureMonitorBroker<E> : IDisposable
         TextureMonitor<E> monitor = GetMonitor(lvlName);
         if (monitor != null && monitor.RemovedTextures != null)
         {
-            List<E> entities = new List<E>();
+            List<E> entities = new();
             foreach (E entity in monitor.RemovedTextures)
             {
                 entities.Add(TranslateAlias(lvlName, entity));

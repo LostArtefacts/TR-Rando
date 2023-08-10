@@ -17,7 +17,7 @@ public enum SGFlags
 
 public class TR2SavegameTester
 {
-    private static readonly Dictionary<SGFlags, int> _sgSizes = new Dictionary<SGFlags, int>
+    private static readonly Dictionary<SGFlags, int> _sgSizes = new()
     {
         [SGFlags.Animation]
             = 5 * sizeof(short), // CurrentAnim,GoalAnim,RequiredAnim,AnumNum,FrameNum
@@ -46,7 +46,7 @@ public class TR2SavegameTester
     private static readonly int _flipmapStatus = 10 * sizeof(sbyte);
     private static readonly int _cdTrackStatus = 64 * sizeof(short);
 
-    private static readonly Dictionary<TR2Entities, int> _extraSizes = new Dictionary<TR2Entities, int>
+    private static readonly Dictionary<TR2Entities, int> _extraSizes = new()
     {
         [TR2Entities.RedSnowmobile]
             = 4 * sizeof(int) + 3 * sizeof(short),

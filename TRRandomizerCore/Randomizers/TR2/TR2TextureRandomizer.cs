@@ -68,7 +68,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
             if (monitor != null && monitor.UseNightTextures)
             {
                 TR2TextureMapping mapping = GetMapping(_levelInstance);
-                using (TextureHolder<TR2Entities, TR2Level> holder = new TextureHolder<TR2Entities, TR2Level>(mapping, this))
+                using (TextureHolder<TR2Entities, TR2Level> holder = new(mapping, this))
                 {
                     foreach (AbstractTextureSource source in holder.Variants.Keys)
                     {
@@ -108,7 +108,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
 
         ChooseWireframeLevels();
 
-        List<TextureProcessor> processors = new List<TextureProcessor> { new TextureProcessor(this) };
+        List<TextureProcessor> processors = new() { new TextureProcessor(this) };
         int levelSplit = (int)(Levels.Count / _maxThreads);
 
         bool beginProcessing = true;
@@ -298,7 +298,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
             // the variants allocated there. We don't yet do forward lookup, for example
             // the Floater stone at the end of Xian might be purple, but Floater itself
             // Red.
-            List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(_holders.Keys);
+            List<TR2CombinedLevel> levels = new(_holders.Keys);
             levels.Sort(delegate (TR2CombinedLevel lvl1, TR2CombinedLevel lvl2)
             {
                 return lvl1.IsCutScene && lvl1.ParentLevel == lvl2 ? 1 : 0;
@@ -376,7 +376,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
 
         protected override void ProcessImpl()
         {
-            Dictionary<TextureCategory, bool> options = new Dictionary<TextureCategory, bool>(_outer._textureOptions);
+            Dictionary<TextureCategory, bool> options = new(_outer._textureOptions);
 
             foreach (TR2CombinedLevel level in _holders.Keys)
             {

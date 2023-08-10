@@ -70,7 +70,7 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
 
     private void RandomizeMusicTriggers(TR3CombinedLevel level)
     {
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         if (Settings.ChangeTriggerTracks)
@@ -128,7 +128,7 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
                 continue;
             }
 
-            FDActionListItem musicAction = new FDActionListItem
+            FDActionListItem musicAction = new()
             {
                 TrigAction = FDTrigAction.PlaySoundtrack,
                 Parameter = secretTrack.ID
@@ -257,7 +257,7 @@ public class TR3AudioRandomizer : BaseTR3Randomizer
         // point to the first sample, and then return the new index. Make sure the 
         // samples are sorted first.
         ushort newSampleIndex = (ushort)levelSamples.Count;
-        List<uint> sortedSamples = new List<uint>(newDefinition.SampleIndices);
+        List<uint> sortedSamples = new(newDefinition.SampleIndices);
         sortedSamples.Sort();
         levelSamples.AddRange(sortedSamples);
 

@@ -80,13 +80,13 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     {
         SetMessage("Randomizing enemies - loading levels");
 
-        List<EnemyProcessor> processors = new List<EnemyProcessor>();
+        List<EnemyProcessor> processors = new();
         for (int i = 0; i < _maxThreads; i++)
         {
             processors.Add(new EnemyProcessor(this));
         }
 
-        List<TR1CombinedLevel> levels = new List<TR1CombinedLevel>(Levels.Count);
+        List<TR1CombinedLevel> levels = new(Levels.Count);
         foreach (TR1ScriptedLevel lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
@@ -150,7 +150,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (failedExclusions.Count > 0)
         {
             // A little formatting
-            List<string> failureNames = new List<string>();
+            List<string> failureNames = new();
             foreach (TREntities entity in failedExclusions)
             {
                 failureNames.Add(Settings.ExcludableEnemies[(short)entity]);
@@ -191,7 +191,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             // Account for Larson having been removed above.
             ++enemyCount;
         }
-        List<TREntities> newEntities = new List<TREntities>(enemyCount);
+        List<TREntities> newEntities = new(enemyCount);
 
         // TR1 doesn't kill land creatures when underwater, so if "no restrictions" is
         // enabled, don't enforce any by default.
@@ -439,7 +439,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         RandoDifficulty difficulty = GetImpliedDifficulty();
 
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
         // First iterate through any enemies that are restricted by room
@@ -606,7 +606,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     if (Settings.AllowEmptyEggs)
                     {
                         // Add 1/4 chance of an empty egg, provided at least one spawn model is not available
-                        List<TREntities> allModels = new List<TREntities>();
+                        List<TREntities> allModels = new();
                         foreach (TRModel model in level.Data.Models)
                         {
                             allModels.Add((TREntities)model.ID);
@@ -815,7 +815,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
             // Make scion-Larson invisible.
             TRMesh[] larsonMeshes = TRMeshUtilities.GetModelMeshes(level.Data, larsonModel);
-            MeshEditor editor = new MeshEditor();
+            MeshEditor editor = new();
             foreach (TRMesh mesh in larsonMeshes)
             {
                 editor.Mesh = mesh;
@@ -835,7 +835,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         TREntity egg = entities.Find(e => e.TypeID == (short)TREntities.AdamEgg);
         TREntity lara = entities.Find(e => e.TypeID == (short)TREntities.Lara);
 
-        EMAppendTriggerActionFunction trigFunc = new EMAppendTriggerActionFunction
+        EMAppendTriggerActionFunction trigFunc = new()
         {
             Location = new EMLocation
             {
@@ -924,7 +924,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     private void AdjustCentaurStatue(TREntity entity, TR1Level level, FDControl floorData)
     {
         // If they're floating, they tend not to trigger as Lara's not within range
-        TR1LocationGenerator locationGenerator = new TR1LocationGenerator();
+        TR1LocationGenerator locationGenerator = new();
 
         int y = entity.Y;
         short room = entity.Room;
@@ -988,7 +988,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         List<TREntity> levelEnemies = levelEntities.FindAll(e => allEnemies.Contains((TREntities)e.TypeID));
         // #409 Eggs are excluded as they are not part of the cross-level enemy pool, so create copies of any
         // of these using their actual types so to ensure they are part of the difficulty calculation.
-        FDControl floorData = new FDControl();
+        FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
         for (int i = 0; i < levelEntities.Count; i++)
         {
@@ -996,7 +996,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             if ((entity.TypeID == (short)TREntities.AtlanteanEgg || entity.TypeID == (short)TREntities.AdamEgg)
                 && FDUtilities.GetEntityTriggers(floorData, i).Count > 0)
             {
-                TREntity resultantEnemy = new TREntity();
+                TREntity resultantEnemy = new();
                 switch (entity.CodeBits)
                 {
                     case 1:
@@ -1083,7 +1083,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (level.Is(TR1LevelNames.ATLANTIS))
         {
             // Atlantis scion swap - Model => Mesh index
-            Dictionary<TREntities, int> scionSwaps = new Dictionary<TREntities, int>
+            Dictionary<TREntities, int> scionSwaps = new()
             {
                 [TREntities.Lara] = 3,
                 [TREntities.Pistols_M_H] = 1,
@@ -1122,7 +1122,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     break;
                 case 2:
                     // Switch Lara and Natla
-                    MeshEditor editor = new MeshEditor();
+                    MeshEditor editor = new();
                     TRMesh laraHead = editor.CloneMesh(lara[14]);
                     TRMesh natlaHead = editor.CloneMesh(natla[8]);
                     TRMeshUtilities.DuplicateMesh(level.CutSceneLevel.Data, lara[14], natlaHead);
@@ -1147,7 +1147,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (availableEnemies.Contains(TREntities.Adam) && _generator.NextDouble() < 0.4)
         {
             // Replace Adam's head with a much larger version of Natla's, Larson's or normal/angry Lara's.
-            MeshEditor editor = new MeshEditor();
+            MeshEditor editor = new();
             TRMesh[] adam = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Adam);
             TRMesh replacement;
             if (availableEnemies.Contains(TREntities.Natla) && _generator.NextDouble() < 0.5)
@@ -1196,7 +1196,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (availableEnemies.Contains(TREntities.Pierre) && _generator.NextDouble() < 0.25)
         {
             // Replace Pierre's head with a slightly bigger version of Lara's (either angry Lara or normal Lara)
-            MeshEditor editor = new MeshEditor();
+            MeshEditor editor = new();
             TRMesh[] pierre = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Pierre);
             TRMesh[] lara = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara);
             TRMesh[] laraUziAnim = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.LaraUziAnimation_H);
@@ -1270,7 +1270,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         {
             // Load initially outwith the processor thread to ensure the RNG selected for each
             // level/enemy group remains consistent between randomization sessions.
-            List<TR1CombinedLevel> levels = new List<TR1CombinedLevel>(_enemyMapping.Keys);
+            List<TR1CombinedLevel> levels = new(_enemyMapping.Keys);
             foreach (TR1CombinedLevel level in levels)
             {
                 _enemyMapping[level] = _outer.SelectCrossLevelEnemies(level);
@@ -1285,7 +1285,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 if (!level.IsAssault)
                 {
                     EnemyTransportCollection enemies = _enemyMapping[level];
-                    List<TREntities> importModels = new List<TREntities>(enemies.EntitiesToImport);
+                    List<TREntities> importModels = new(enemies.EntitiesToImport);
                     if (level.Is(TR1LevelNames.KHAMOON) && (importModels.Contains(TREntities.BandagedAtlantean) || importModels.Contains(TREntities.BandagedFlyer)))
                     {
                         // Mummies may become shooters in Khamoon, but the missiles won't be available by default, so ensure they do get imported.
@@ -1293,7 +1293,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         importModels.Add(TREntities.Missile3_H);
                     }
 
-                    TR1ModelImporter importer = new TR1ModelImporter(_outer.ScriptEditor.Edition.IsCommunityPatch)
+                    TR1ModelImporter importer = new(_outer.ScriptEditor.Edition.IsCommunityPatch)
                     {
                         EntitiesToImport = importModels,
                         EntitiesToRemove = enemies.EntitiesToRemove,
@@ -1327,7 +1327,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             {
                 if (!level.IsAssault)
                 {
-                    EnemyRandomizationCollection enemies = new EnemyRandomizationCollection
+                    EnemyRandomizationCollection enemies = new()
                     {
                         Available = _enemyMapping[level].EntitiesToImport,
                         Water = TR1EntityUtilities.FilterWaterEnemies(_enemyMapping[level].EntitiesToImport)

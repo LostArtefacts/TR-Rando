@@ -4,7 +4,7 @@ namespace TRRandomizerCore;
 
 internal class TRVersionSupport
 {
-    private static readonly List<TRRandomizerType> _tr1Types = new List<TRRandomizerType>
+    private static readonly List<TRRandomizerType> _tr1Types = new()
     {
         TRRandomizerType.AtlanteanEggBehaviour,
         TRRandomizerType.Audio,
@@ -38,7 +38,7 @@ internal class TRVersionSupport
         TRRandomizerType.Texture
     };
 
-    private static readonly List<TRRandomizerType> _tr1MainTypes = new List<TRRandomizerType>
+    private static readonly List<TRRandomizerType> _tr1MainTypes = new()
     {
         TRRandomizerType.AmbientTracks,
         TRRandomizerType.Ammoless,
@@ -53,7 +53,7 @@ internal class TRVersionSupport
         TRRandomizerType.WaterColour
     };
 
-    private static readonly List<TRRandomizerType> _tr2Types = new List<TRRandomizerType>
+    private static readonly List<TRRandomizerType> _tr2Types = new()
     {
         TRRandomizerType.AmbientTracks,
         TRRandomizerType.Ammoless,
@@ -90,7 +90,7 @@ internal class TRVersionSupport
         TRRandomizerType.ItemSprite
     };
 
-    private static readonly List<TRRandomizerType> _tr3Types = new List<TRRandomizerType>
+    private static readonly List<TRRandomizerType> _tr3Types = new()
     {
         TRRandomizerType.AmbientTracks,
         TRRandomizerType.Ammoless,
@@ -121,12 +121,12 @@ internal class TRVersionSupport
         TRRandomizerType.VFX
     };
 
-    private static readonly List<TRRandomizerType> _tr3MainTypes = new List<TRRandomizerType>
+    private static readonly List<TRRandomizerType> _tr3MainTypes = new()
     {
         TRRandomizerType.Weather
     };
 
-    private static readonly Dictionary<TRVersion, TRVersionSupportGroup> _supportedTypes = new Dictionary<TRVersion, TRVersionSupportGroup>
+    private static readonly Dictionary<TRVersion, TRVersionSupportGroup> _supportedTypes = new()
     {
         [TRVersion.TR1] = new TRVersionSupportGroup
         {
@@ -144,7 +144,7 @@ internal class TRVersionSupport
         }
     };
 
-    private static readonly Dictionary<TRVersion, List<string>> _versionExes = new Dictionary<TRVersion, List<string>>
+    private static readonly Dictionary<TRVersion, List<string>> _versionExes = new()
     {
         [TRVersion.TR1] = new List<string> { "Tomb1Main.exe", "tombati.exe" },
         [TRVersion.TR2] = new List<string> { "Tomb2.exe" },
@@ -178,7 +178,7 @@ internal class TRVersionSupport
 
     public List<string> GetExecutables(TREdition edition)
     {
-        List<string> exes = new List<string>();
+        List<string> exes = new();
         if (_versionExes.ContainsKey(edition.Version))
         {
             exes.AddRange(_versionExes[edition.Version]);

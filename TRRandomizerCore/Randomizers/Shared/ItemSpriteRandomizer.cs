@@ -68,9 +68,9 @@ public class ItemSpriteRandomizer<E> where E : Enum
     /// <param name="generator">Random generator</param>
     public void Randomize(Random generator)
     {
-        List<E> replacementCandidates = new List<E>(); // Unique list of item types we wish to target in this level
-        List<E> commonTypesInAllLevels = new List<E>();// for 1 item per game
-        Dictionary<E, TRSpriteTexture> spriteTextures = new Dictionary<E, TRSpriteTexture>();
+        List<E> replacementCandidates = new(); // Unique list of item types we wish to target in this level
+        List<E> commonTypesInAllLevels = new();// for 1 item per game
+        Dictionary<E, TRSpriteTexture> spriteTextures = new();
 
         commonTypesInAllLevels.AddRange(StandardItemTypes);
         replacementCandidates.AddRange(StandardItemTypes);

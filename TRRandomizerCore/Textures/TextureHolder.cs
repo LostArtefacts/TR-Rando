@@ -16,7 +16,7 @@ public class TextureHolder<E, L> : IDisposable
 
         // Check first for any grouped sources, but only if the parent holder is null
         // as regrouping is not currently possible.
-        List<StaticTextureSource<E>> handledSources = new List<StaticTextureSource<E>>();
+        List<StaticTextureSource<E>> handledSources = new();
         if (parentHolder == null)
         {
             List<TextureGrouping<E>> groupingList = mapping.StaticGrouping;

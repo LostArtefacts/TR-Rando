@@ -65,13 +65,13 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
     {
         SetMessage("Randomizing enemies - loading levels");
 
-        List<EnemyProcessor> processors = new List<EnemyProcessor>();
+        List<EnemyProcessor> processors = new();
         for (int i = 0; i < _maxThreads; i++)
         {
             processors.Add(new EnemyProcessor(this));
         }
 
-        List<TR3CombinedLevel> levels = new List<TR3CombinedLevel>(Levels.Count);
+        List<TR3CombinedLevel> levels = new(Levels.Count);
         foreach (TR3ScriptedLevel lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
@@ -135,7 +135,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         if (failedExclusions.Count > 0)
         {
             // A little formatting
-            List<string> failureNames = new List<string>();
+            List<string> failureNames = new();
             foreach (TR3Entities entity in failedExclusions)
             {
                 failureNames.Add(Settings.ExcludableEnemies[(short)entity]);
@@ -161,7 +161,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         
         // Work out how many we can support
         int enemyCount = oldEntities.Count + TR3EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
-        List<TR3Entities> newEntities = new List<TR3Entities>(enemyCount);
+        List<TR3Entities> newEntities = new(enemyCount);
 
         // Do we need at least one water creature?
         bool waterEnemyRequired = TR3EntityUtilities.GetWaterEnemies().Any(e => oldEntities.Contains(e));
@@ -371,7 +371,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         List<TR2Entity> enemyEntities = levelEntities.FindAll(e => allEnemies.Contains((TR3Entities)e.TypeID));
 
         // Keep track of any new entities added (e.g. Lizard for Puna)
-        List<TR2Entity> newEntities = new List<TR2Entity>();
+        List<TR2Entity> newEntities = new();
 
         // First iterate through any enemies that are restricted by room
         Dictionary<TR3Entities, List<int>> enemyRooms = TR3EnemyUtilities.GetRestrictedEnemyRooms(level.Name, Settings.RandoEnemyDifficulty);
@@ -706,7 +706,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         {
             // Load initially outwith the processor thread to ensure the RNG selected for each
             // level/enemy group remains consistent between randomization sessions.
-            List<TR3CombinedLevel> levels = new List<TR3CombinedLevel>(_enemyMapping.Keys);
+            List<TR3CombinedLevel> levels = new(_enemyMapping.Keys);
             foreach (TR3CombinedLevel level in levels)
             {
                 _enemyMapping[level] = _outer.SelectCrossLevelEnemies(level);
@@ -721,7 +721,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                 if (!level.IsAssault)
                 {
                     EnemyTransportCollection enemies = _enemyMapping[level];
-                    TR3ModelImporter importer = new TR3ModelImporter
+                    TR3ModelImporter importer = new()
                     {
                         EntitiesToImport = enemies.EntitiesToImport,
                         EntitiesToRemove = enemies.EntitiesToRemove,
@@ -763,7 +763,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             {
                 if (!level.IsAssault)
                 {
-                    EnemyRandomizationCollection enemies = new EnemyRandomizationCollection
+                    EnemyRandomizationCollection enemies = new()
                     {
                         Available = _enemyMapping[level].EntitiesToImport,
                         Droppable = TR3EntityUtilities.FilterDroppableEnemies(_enemyMapping[level].EntitiesToImport, _outer.Settings.ProtectMonks),

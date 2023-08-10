@@ -58,7 +58,7 @@ public static class VehicleUtilities
         }
 
         List<Location> levelLocations = _allLocations[level.Name];
-        List<TR2Entities> secretTypes = new List<TR2Entities> { TR2Entities.StoneSecret_S_P, TR2Entities.JadeSecret_S_P, TR2Entities.GoldSecret_S_P };
+        List<TR2Entities> secretTypes = new() { TR2Entities.StoneSecret_S_P, TR2Entities.JadeSecret_S_P, TR2Entities.GoldSecret_S_P };
 
         foreach (TR2Entity entity in level.Data.Entities)
         {

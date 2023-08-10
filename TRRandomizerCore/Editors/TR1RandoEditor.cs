@@ -106,8 +106,7 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
 
     protected override void SaveImpl(AbstractTRScriptEditor scriptEditor, TRSaveMonitor monitor)
     {
-        List<TR1ScriptedLevel> levels = new List<TR1ScriptedLevel>
-        (
+        List<TR1ScriptedLevel> levels = new(
             scriptEditor.EnabledScriptedLevels.Cast<TR1ScriptedLevel>().ToList()
         );
 
@@ -131,10 +130,10 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
             scriptEditor.SaveScript();
         }
 
-        ItemFactory itemFactory = new ItemFactory(@"Resources\TR1\Items\repurposable_items.json");
-        TR1TextureMonitorBroker textureMonitor = new TR1TextureMonitorBroker();
+        ItemFactory itemFactory = new(@"Resources\TR1\Items\repurposable_items.json");
+        TR1TextureMonitorBroker textureMonitor = new();
 
-        TR1EnvironmentRandomizer environmentRandomizer = new TR1EnvironmentRandomizer
+        TR1EnvironmentRandomizer environmentRandomizer = new()
         {
             ScriptEditor = scriptEditor,
             Levels = levels,
@@ -347,8 +346,8 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
         if (File.Exists(backupTitle))
         {
             string editedTitle = Path.Combine(GetWriteBasePath(), mainMenuPic);
-            using (BitmapGraphics bg = new BitmapGraphics(new Bitmap(backupTitle)))
-            using (Bitmap badge = new Bitmap(@"Resources\Shared\Graphics\goldbadge-small.png"))
+            using (BitmapGraphics bg = new(new Bitmap(backupTitle)))
+            using (Bitmap badge = new(@"Resources\Shared\Graphics\goldbadge-small.png"))
             {
                 bg.Graphics.DrawImage(badge, new Rectangle(706, 537, badge.Width, badge.Height));
                 bg.Bitmap.Save(editedTitle);
@@ -359,8 +358,8 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
             string creditFile = Path.Combine(_io.OutputDirectory.FullName, "trrando.png");
             string creditPath = @"data\trrando.png";
 
-            using (BitmapGraphics bg = new BitmapGraphics(new Bitmap(1920, 1080)))
-            using (Bitmap badge = new Bitmap(@"Resources\Shared\Graphics\goldbadge-large.png"))
+            using (BitmapGraphics bg = new(new Bitmap(1920, 1080)))
+            using (Bitmap badge = new(@"Resources\Shared\Graphics\goldbadge-large.png"))
             {
                 bg.Graphics.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, 1920, 1080));
                 bg.Graphics.DrawImage(badge, new Rectangle(960 - badge.Width / 2, 540 - badge.Height / 2, badge.Width, badge.Height));

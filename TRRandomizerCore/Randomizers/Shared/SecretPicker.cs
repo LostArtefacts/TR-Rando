@@ -12,7 +12,7 @@ public class SecretPicker
 
     public Queue<Location> GetGuaranteedLocations(IEnumerable<Location> allLocations, bool isMirrored, int totalCount, Func<Location, bool> validCallback = null)
     {
-        Queue<Location> locations = new Queue<Location>();
+        Queue<Location> locations = new();
 
         if (Settings.UseSecretPack)
         {
@@ -43,7 +43,7 @@ public class SecretPicker
             int maxCount = Math.Max(1, (int)Math.Floor(totalCount / 2d)) + locations.Count;
 
             // Create location pools for the categories selected.
-            List<IEnumerable<Location>> pools = new List<IEnumerable<Location>>();
+            List<IEnumerable<Location>> pools = new();
             if (Settings.HardSecrets)
             {
                 pools.Add(FilterLocations(allLocations, isMirrored, Difficulty.Hard, false));

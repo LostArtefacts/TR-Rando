@@ -12,7 +12,7 @@ namespace TRRandomizerCore.Textures;
 
 public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
 {
-    private static readonly List<TR2Entities> _laraEntities = new List<TR2Entities>
+    private static readonly List<TR2Entities> _laraEntities = new()
     {
         TR2Entities.Lara, TR2Entities.LaraPonytail_H, TR2Entities.LaraFlareAnim_H,
         TR2Entities.LaraPistolAnim_H, TR2Entities.LaraShotgunAnim_H, TR2Entities.LaraAutoAnim_H,
@@ -23,7 +23,7 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
         TR2Entities.DrippingWater_N, TR2Entities.LavaAirParticleEmitter_N, TR2Entities.AlarmBell_N, TR2Entities.DoorBell_N
     };
 
-    private static readonly List<TR2Entities> _additionalEnemyEntities = new List<TR2Entities>
+    private static readonly List<TR2Entities> _additionalEnemyEntities = new()
     {
         TR2Entities.DragonFront_H, TR2Entities.DragonBack_H, TR2Entities.XianGuardSpearStatue, TR2Entities.XianGuardSwordStatue
     };
@@ -64,7 +64,7 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
 
     protected override Dictionary<TR2Entities, TRMesh[]> GetModelMeshes(TR2Level level)
     {
-        Dictionary<TR2Entities, TRMesh[]> modelMeshes = new Dictionary<TR2Entities, TRMesh[]>();
+        Dictionary<TR2Entities, TRMesh[]> modelMeshes = new();
         foreach (TRModel model in level.Models)
         {
             TRMesh[] meshes = GetModelMeshes(level, model);
@@ -93,7 +93,7 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
 
     protected override IEnumerable<IEnumerable<TRFace3>> GetRoomFace3s(TR2Level level)
     {
-        List<List<TRFace3>> faces = new List<List<TRFace3>>();
+        List<List<TRFace3>> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
             faces.Add(room.RoomData.Triangles.ToList());
@@ -103,7 +103,7 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
 
     protected override IEnumerable<IEnumerable<TRFace4>> GetRoomFace4s(TR2Level level)
     {
-        List<List<TRFace4>> faces = new List<List<TRFace4>>();
+        List<List<TRFace4>> faces = new();
         foreach (TR2Room room in level.Rooms)
         {
             faces.Add(room.RoomData.Rectangles.ToList());

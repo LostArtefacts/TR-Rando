@@ -14,9 +14,9 @@ public abstract class AbstractTRWireframer<E, L>
     where E : Enum
     where L : class
 {
-    protected static readonly TRSize _nullSize = new TRSize(0, 0);
+    protected static readonly TRSize _nullSize = new(0, 0);
     protected static readonly int _ladderRungs = 4;
-    protected static readonly List<FDTrigType> _highlightTriggerTypes = new List<FDTrigType>
+    protected static readonly List<FDTrigType> _highlightTriggerTypes = new()
     {
         FDTrigType.HeavyTrigger, FDTrigType.Pad
     };
@@ -57,21 +57,21 @@ public abstract class AbstractTRWireframer<E, L>
         ISet<TRSize> roomSizes = new SortedSet<TRSize>(_roomFace3s.Values.Concat(_roomFace4s.Values));
         ISet<TRSize> meshSizes = new SortedSet<TRSize>(_meshFace3s.Values.Concat(_meshFace4s.Values));
 
-        Pen roomPen = new Pen(_data.HighlightColour, 1)
+        Pen roomPen = new(_data.HighlightColour, 1)
         {
             Alignment = PenAlignment.Inset,
             DashCap = DashCap.Round
         };            
-        Pen modelPen = new Pen(_data.HighlightColour, 1)
+        Pen modelPen = new(_data.HighlightColour, 1)
         {
             Alignment = PenAlignment.Inset
         };
-        Pen triggerPen = new Pen(_data.TriggerColour, 1)
+        Pen triggerPen = new(_data.TriggerColour, 1)
         {
             Alignment = PenAlignment.Inset,
             DashCap = DashCap.Round
         };
-        Pen deathPen = new Pen(_data.DeathColour, 1)
+        Pen deathPen = new(_data.DeathColour, 1)
         {
             Alignment = PenAlignment.Inset,
             DashCap = DashCap.Round
@@ -92,7 +92,7 @@ public abstract class AbstractTRWireframer<E, L>
             Dictionary<ushort, IndexedTRObjectTexture> specialTextures = CreateSpecialTextures(packer, level, roomPen);
             ProcessClips(packer, level, roomPen, SmoothingMode.AntiAlias);
 
-            Dictionary<TRSize, IndexedTRObjectTexture> modelRemap = new Dictionary<TRSize, IndexedTRObjectTexture>();
+            Dictionary<TRSize, IndexedTRObjectTexture> modelRemap = new();
             foreach (TRSize size in meshSizes)
             {
                 modelRemap[size] = CreateWireframe(packer, size, modelPen, SmoothingMode.None);
@@ -101,7 +101,7 @@ public abstract class AbstractTRWireframer<E, L>
             packer.Options.StartMethod = PackingStartMethod.FirstTile;
             packer.Pack(true);
 
-            Queue<int> reusableTextures = new Queue<int>(GetInvalidObjectTextureIndices(level));
+            Queue<int> reusableTextures = new(GetInvalidObjectTextureIndices(level));
             List<TRObjectTexture> levelObjectTextures = GetObjectTextures(level).ToList();
 
             ushort roomTextureIndex = (ushort)reusableTextures.Dequeue();
@@ -116,7 +116,7 @@ public abstract class AbstractTRWireframer<E, L>
             ushort deathTextureIndex = (ushort)reusableTextures.Dequeue();
             levelObjectTextures[deathTextureIndex] = deathTexture.Texture;
 
-            Dictionary<ushort, ushort> specialTextureRemap = new Dictionary<ushort, ushort>();
+            Dictionary<ushort, ushort> specialTextureRemap = new();
             foreach (ushort originalTexture in specialTextures.Keys)
             {
                 ushort newIndex = (ushort)reusableTextures.Dequeue();
@@ -210,7 +210,7 @@ public abstract class AbstractTRWireframer<E, L>
         if (texture.IsValid())
         {
             _allTextures.Add(textureIndex);
-            IndexedTRObjectTexture itext = new IndexedTRObjectTexture
+            IndexedTRObjectTexture itext = new()
             {
                 Texture = texture
             };
@@ -222,7 +222,7 @@ public abstract class AbstractTRWireframer<E, L>
 
     private void DeleteTextures(AbstractTexturePacker<E, L> packer)
     {
-        List<int> textures = new List<int>();
+        List<int> textures = new();
         foreach (ushort t in _allTextures)
         {
             if (!IsTextureExcluded(t) && !IsTextureOverriden(t))
@@ -236,7 +236,7 @@ public abstract class AbstractTRWireframer<E, L>
 
     private TRSize GetLargestSize(IEnumerable<TRSize> sizes)
     {
-        List<TRSize> compSizes = new List<TRSize>(sizes);
+        List<TRSize> compSizes = new(sizes);
         if (compSizes.Count > 0)
         {
             compSizes.Sort();
@@ -326,7 +326,7 @@ public abstract class AbstractTRWireframer<E, L>
     private Dictionary<ushort, IndexedTRObjectTexture> CreateSpecialTextures(AbstractTexturePacker<E, L> packer, L level, Pen pen)
     {
         Dictionary<ushort, TexturedTileSegment> specialSegments = CreateSpecialSegments(level, pen);
-        Dictionary<ushort, IndexedTRObjectTexture> specialTextures = new Dictionary<ushort, IndexedTRObjectTexture>();
+        Dictionary<ushort, IndexedTRObjectTexture> specialTextures = new();
         foreach (ushort textureIndex in specialSegments.Keys)
         {
             packer.AddRectangle(specialSegments[textureIndex]);
@@ -351,7 +351,7 @@ public abstract class AbstractTRWireframer<E, L>
 
             foreach (ushort texture in clip.Textures)
             {
-                IndexedTRObjectTexture indexedTexture = new IndexedTRObjectTexture
+                IndexedTRObjectTexture indexedTexture = new()
                 {
                     Index = texture,
                     Texture = textures[texture]
@@ -384,7 +384,7 @@ public abstract class AbstractTRWireframer<E, L>
 
     protected BitmapGraphics CreateFrame(int width, int height, Pen pen, SmoothingMode mode, bool addDiagonal)
     {
-        BitmapGraphics image = new BitmapGraphics(new Bitmap(width, height));
+        BitmapGraphics image = new(new Bitmap(width, height));
         image.Graphics.SmoothingMode = mode;
 
         image.Graphics.FillRectangle(new SolidBrush(Color.Transparent), new Rectangle(0, 0, width, height));
@@ -400,7 +400,7 @@ public abstract class AbstractTRWireframer<E, L>
     protected IndexedTRObjectTexture CreateTexture(Rectangle rectangle)
     {
         // Configure the points
-        List<TRObjectTextureVert> vertices = new List<TRObjectTextureVert>
+        List<TRObjectTextureVert> vertices = new()
         {
             CreatePoint(0, 0),
             CreatePoint(rectangle.Width, 0),
@@ -409,7 +409,7 @@ public abstract class AbstractTRWireframer<E, L>
         };
 
         // Make a dummy texture object with the given bounds
-        TRObjectTexture texture = new TRObjectTexture
+        TRObjectTexture texture = new()
         {
             AtlasAndFlag = 0,
             Attribute = 1,
@@ -472,7 +472,7 @@ public abstract class AbstractTRWireframer<E, L>
                 vertices[0].Y != vertices[1].Y &&
                 (vertices.All(v => v.X == vertices[0].X) || vertices.All(v => v.Z == vertices[0].Z)))
             {
-                Queue<ushort> vertIndices = new Queue<ushort>(face.Vertices);
+                Queue<ushort> vertIndices = new(face.Vertices);
                 vertIndices.Enqueue(vertIndices.Dequeue());
                 face.Vertices = vertIndices.ToArray();
             }

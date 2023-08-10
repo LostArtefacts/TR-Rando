@@ -25,8 +25,8 @@ public class TR2GameStringRandomizer : BaseTR2Randomizer
             _defaultGameStrings = _g11n.GetDefaultGameStrings() as TR23GameStrings;
 
             TR23Script script = ScriptEditor.Script as TR23Script;
-            List<string> gamestrings1 = new List<string>(script.GameStrings1);
-            List<string> gamestrings2 = new List<string>(script.GameStrings2);
+            List<string> gamestrings1 = new(script.GameStrings1);
+            List<string> gamestrings2 = new(script.GameStrings2);
 
             ProcessGlobalStrings(0, gamestrings1);
             ProcessGlobalStrings(1, gamestrings2);

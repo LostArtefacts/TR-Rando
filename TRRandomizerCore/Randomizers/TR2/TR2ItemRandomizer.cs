@@ -161,10 +161,10 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 // Get all visible pickups in the level (there may be invisible ones if using OneItem mode)
                 List<TR2Entity> entities = _levelInstance.Data.Entities.ToList();
                 List<TR2Entity> pickups = entities.FindAll(e => !e.Invisible && stdItemTypes.Contains((TR2Entities)e.TypeID));
-                List<TR2Entity> replacementCandidates = new List<TR2Entity>(pickups);
+                List<TR2Entity> replacementCandidates = new(pickups);
 
                 // Eliminate any that share a tile with an enemy in case of pacifist runs/unable to find guns
-                FDControl floorData = new FDControl();
+                FDControl floorData = new();
                 floorData.ParseFromLevel(_levelInstance.Data);
                 for (int i = replacementCandidates.Count - 1; i >= 0; i--)
                 {
@@ -316,7 +316,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         if (ItemLocs.Count > 0)
         {
             //We are currently looking guns + ammo
-            List<TR2Entities> targetents = new List<TR2Entities>();
+            List<TR2Entities> targetents = new();
             if (Settings.RandomizeItemPositions)
             {
                 targetents.AddRange(TR2EntityUtilities.GetListOfGunTypes());
@@ -335,7 +335,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             }
 
             //It's important to now start zoning key items as softlocks must be avoided.
-            ZonedLocationCollection ZonedLocations = new ZonedLocationCollection();
+            ZonedLocationCollection ZonedLocations = new();
             ZonedLocations.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), ItemLocs, ZonePopulationMethod.KeyPuzzleQuestOnly);
 
             for (int i = 0; i < _levelInstance.Data.Entities.Count(); i++)
@@ -347,7 +347,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
                 if (targetents.Contains((TR2Entities)_levelInstance.Data.Entities[i].TypeID) && (i != _unarmedLevelPistolIndex))
                 {
-                    Location RandomLocation = new Location();
+                    Location RandomLocation = new();
                     bool FoundPossibleLocation = false;
 
                     if (TR2EntityUtilities.IsKeyItemType((TR2Entities)_levelInstance.Data.Entities[i].TypeID))
@@ -371,7 +371,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                                         if (i == burnerChipID)
                                         {
                                             //Burner Chip
-                                            List<int> AllowedBurnerRooms = new List<int>() { 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 29, 32, 75, 80, 83, 84, 85, 86, 87, 88, 89 };
+                                            List<int> AllowedBurnerRooms = new() { 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 29, 32, 75, 80, 83, 84, 85, 86, 87, 88, 89 };
 
                                             while (!AllowedBurnerRooms.Contains(RandomLocation.Room))
                                             {
@@ -383,7 +383,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                                         else if (i == consoleChipID)
                                         {
                                             //Center Console Chip
-                                            List<int> AllowedConsoleRooms = new List<int>() { 2, 12, 13, 14, 15, 16, 17, 21, 22, 23, 24, 25, 26, 29, 30, 32, 34, 35, 64, 65, 66, 68, 69, 70, 75, 80, 82, 83, 84, 85, 86, 87, 88, 89 };
+                                            List<int> AllowedConsoleRooms = new() { 2, 12, 13, 14, 15, 16, 17, 21, 22, 23, 24, 25, 26, 29, 30, 32, 34, 35, 64, 65, 66, 68, 69, 70, 75, 80, 82, 83, 84, 85, 86, 87, 88, 89 };
 
                                             while (!AllowedConsoleRooms.Contains(RandomLocation.Room))
                                             {
@@ -438,7 +438,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                                         if (i == startKeyID)
                                         {
                                             //Start key
-                                            List<int> AllowedStartRooms = new List<int>() { 10, 23, 25, 27, 29, 30, 31, 32, 33, 35, 127, 162, 163 };
+                                            List<int> AllowedStartRooms = new() { 10, 23, 25, 27, 29, 30, 31, 32, 33, 35, 127, 162, 163 };
 
                                             while (!AllowedStartRooms.Contains(RandomLocation.Room))
                                             {
@@ -450,7 +450,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                                         else if (i == fanKeyID)
                                         {
                                             //Fan area key
-                                            List<int> AllowedFanRooms = new List<int>() { 1, 5, 8, 16, 37, 38, 44, 46, 47, 48, 49, 50, 52, 53, 55, 57, 59, 60, 63, 65, 66, 67, 68, 69, 70, 71, 72, 75, 76, 77, 78, 82, 83, 86, 87, 88, 89, 90, 93, 95, 96, 100, 102, 103, 105, 107, 109, 111, 120, 132, 139, 141, 143, 144, 151, 153, 154, 155, 156, 158, 159, 161, 174, 176, 177, 178, 179, 183, 185, 187, 188, 189 };
+                                            List<int> AllowedFanRooms = new() { 1, 5, 8, 16, 37, 38, 44, 46, 47, 48, 49, 50, 52, 53, 55, 57, 59, 60, 63, 65, 66, 67, 68, 69, 70, 71, 72, 75, 76, 77, 78, 82, 83, 86, 87, 88, 89, 90, 93, 95, 96, 100, 102, 103, 105, 107, 109, 111, 120, 132, 139, 141, 143, 144, 151, 153, 154, 155, 156, 158, 159, 161, 174, 176, 177, 178, 179, 183, 185, 187, 188, 189 };
 
                                             while (!AllowedFanRooms.Contains(RandomLocation.Room))
                                             {
@@ -563,7 +563,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void EnforceOneLimit()
     {
-        List<TR2Entities> oneOfEachType = new List<TR2Entities>();
+        List<TR2Entities> oneOfEachType = new();
         List<TR2Entity> allEntities = _levelInstance.Data.Entities.ToList();
 
         // look for extra utility/ammo items and hide them
@@ -601,7 +601,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             {
                 // Sanity check that the location is one that we expect
                 TR2Entity pistols = _levelInstance.Data.Entities[pistolIndex];
-                Location pistolLocation = new Location
+                Location pistolLocation = new()
                 {
                     X = pistols.X,
                     Y = pistols.Y,
@@ -626,7 +626,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         }
     }
 
-    private readonly Dictionary<TR2Entities, uint> _startingAmmoToGive = new Dictionary<TR2Entities, uint>()
+    private readonly Dictionary<TR2Entities, uint> _startingAmmoToGive = new()
     {
         {TR2Entities.Shotgun_S_P, 8},
         {TR2Entities.Automags_S_P, 4},
@@ -786,7 +786,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
         List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
         TR2Entity harpoonWeapon = null;
-        List<TR2Entities> oneOfEachType = new List<TR2Entities>();
+        List<TR2Entities> oneOfEachType = new();
         foreach (TR2Entity entity in ents)
         {
             if (entity.Room != 57)
@@ -838,7 +838,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         // to include it potentially in any level.
         // This perhaps needs better tracking, for example if every level has a vehicle location defined
         // we might not necessarily want to include it in every level.
-        Dictionary<TR2Entities, Location> vehicles = new Dictionary<TR2Entities, Location>();
+        Dictionary<TR2Entities, Location> vehicles = new();
         PopulateVehicleLocation(TR2Entities.Boat, vehicles);
         if (_levelInstance.IsAssault)
         {
@@ -856,7 +856,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             return;
         }
 
-        TR2ModelImporter importer = new TR2ModelImporter
+        TR2ModelImporter importer = new()
         {
             Level = _levelInstance.Data,
             LevelName = _levelInstance.Name,

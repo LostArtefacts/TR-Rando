@@ -73,13 +73,13 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
         SetMessage("Randomizing enemies - loading levels");
 
-        List<EnemyProcessor> processors = new List<EnemyProcessor>();
+        List<EnemyProcessor> processors = new();
         for (int i = 0; i < _maxThreads; i++)
         {
             processors.Add(new EnemyProcessor(this));
         }
 
-        List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(Levels.Count);
+        List<TR2CombinedLevel> levels = new(Levels.Count);
         foreach (TR2ScriptedLevel lvl in Levels)
         {
             levels.Add(LoadCombinedLevel(lvl));
@@ -146,7 +146,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         if (failedExclusions.Count > 0)
         {
             // A little formatting
-            List<string> failureNames = new List<string>();
+            List<string> failureNames = new();
             foreach (TR2Entities entity in failedExclusions)
             {
                 failureNames.Add(Settings.ExcludableEnemies[(short)entity]);
@@ -169,7 +169,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
         // Work out how many we can support
         int enemyCount = oldEntities.Count - reduceEnemyCountBy + TR2EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
-        List<TR2Entities> newEntities = new List<TR2Entities>(enemyCount);
+        List<TR2Entities> newEntities = new(enemyCount);
 
         List<TR2Entities> chickenGuisers = TR2EnemyUtilities.GetEnemyGuisers(TR2Entities.BirdMonster);
         TR2Entities chickenGuiser = TR2Entities.BirdMonster;
@@ -521,7 +521,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         List<TR2Entity> allEntities = level.Data.Entities.ToList();
 
         // Keep track of any new entities added (e.g. Skidoo)
-        List<TR2Entity> newEntities = new List<TR2Entity>();
+        List<TR2Entity> newEntities = new();
 
         RandoDifficulty difficulty = GetImpliedDifficulty();
 
@@ -621,7 +621,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
             //#45 - Check to see if any items are at the same location as the enemy.
             //If there are we need to ensure that the new random enemy type is one that can drop items.
-            List<TR2Entity> sharedItems = new List<TR2Entity>(Array.FindAll
+            List<TR2Entity> sharedItems = new(Array.FindAll
             (
                 level.Data.Entities,
                 e =>
@@ -898,9 +898,9 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
         if (skidooRemovalCount > 0)
         {
-            FDControl floorData = new FDControl();
+            FDControl floorData = new();
             floorData.ParseFromLevel(level.Data);
-            TR2LocationGenerator locationGenerator = new TR2LocationGenerator();
+            TR2LocationGenerator locationGenerator = new();
             List<TR2Entities> replacementPool;
             if (!Settings.RandomizeItems || Settings.RandoItemDifficulty == ItemDifficulty.Default)
             {
@@ -978,7 +978,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             return;
         }
         
-        List<TR2Entities> laraClones = new List<TR2Entities>();
+        List<TR2Entities> laraClones = new();
         const int chance = 2;
         if (Settings.BirdMonsterBehaviour != BirdMonsterBehaviour.Docile)
         {
@@ -1062,7 +1062,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             // level/enemy group remains consistent between randomization sessions. We allocate
             // MaxPackingAttempts number of enemy collections to attempt for packing. On the final
             // attempt, the number of entities will be reduced by one.
-            List<TR2CombinedLevel> levels = new List<TR2CombinedLevel>(_enemyMapping.Keys);
+            List<TR2CombinedLevel> levels = new(_enemyMapping.Keys);
             foreach (TR2CombinedLevel level in levels)
             {
                 int count = _enemyMapping[level].Capacity;
@@ -1110,7 +1110,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             {
                 // The importer will handle any duplication between the entities to import and 
                 // remove so just pass the unfiltered lists to it.
-                TR2ModelImporter importer = new TR2ModelImporter
+                TR2ModelImporter importer = new()
                 {
                     ClearUnusedSprites = true,
                     EntitiesToImport = enemies.EntitiesToImport,
@@ -1173,7 +1173,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                         // The import worked, so randomize the entities based on what we now have in place.
                         // All refers to the unmodified list so that checks such as those in RandomizeEnemyMeshes
                         // can refer to the original list, as actual entity randomization may remove models.
-                        EnemyRandomizationCollection enemies = new EnemyRandomizationCollection
+                        EnemyRandomizationCollection enemies = new()
                         {
                             Available = importedCollection.EntitiesToImport,
                             Droppable = TR2EntityUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.Settings.ProtectMonks, _outer.Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional),

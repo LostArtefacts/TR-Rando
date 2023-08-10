@@ -58,7 +58,7 @@ public static class TR2EnemyUtilities
         TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR2EntityUtilities.IsEnemyType((TR2Entities)e.TypeID));
         foreach (TR2Entity entityInstance in enemies)
         {
-            List<TR2Entity> sharedItems = new List<TR2Entity>(Array.FindAll
+            List<TR2Entity> sharedItems = new(Array.FindAll
             (
                 level.Data.Entities,
                 e =>
@@ -131,7 +131,7 @@ public static class TR2EnemyUtilities
 
     public static List<TR2Entities> GetRequiredEnemies(string lvlName)
     {
-        List<TR2Entities> entities = new List<TR2Entities>();
+        List<TR2Entities> entities = new();
         if (_requiredEnemies.ContainsKey(lvlName))
         {
             entities.AddRange(_requiredEnemies[lvlName]);
@@ -209,7 +209,7 @@ public static class TR2EnemyUtilities
 
     public static Dictionary<TR2Entities, List<string>> PrepareEnemyGameTracker(bool docileBirdMonster, RandoDifficulty difficulty)
     {
-        Dictionary<TR2Entities, List<string>> tracker = new Dictionary<TR2Entities, List<string>>();
+        Dictionary<TR2Entities, List<string>> tracker = new();
 
         if (difficulty == RandoDifficulty.Default)
         {
@@ -273,7 +273,7 @@ public static class TR2EnemyUtilities
         double average = (double)weight / enemyEntities.Count;
         weight = Convert.ToInt32(Math.Round(average, 0, MidpointRounding.AwayFromZero));
 
-        List<EnemyDifficulty> allDifficulties = new List<EnemyDifficulty>(Enum.GetValues(typeof(EnemyDifficulty)).Cast<EnemyDifficulty>());
+        List<EnemyDifficulty> allDifficulties = new(Enum.GetValues(typeof(EnemyDifficulty)).Cast<EnemyDifficulty>());
 
         if (weight > 0)
         {
@@ -289,7 +289,7 @@ public static class TR2EnemyUtilities
     }
 
     // These enemies are unsupported due to technical reasons, NOT difficulty reasons.
-    private static readonly Dictionary<string, List<TR2Entities>> _unsupportedEnemiesTechnical = new Dictionary<string, List<TR2Entities>>
+    private static readonly Dictionary<string, List<TR2Entities>> _unsupportedEnemiesTechnical = new()
     {
         // #192 The Barkhang/Opera House freeze appears to be caused by dead floating water creatures, so they're all banished
         [TR2LevelNames.OPERA] =
@@ -317,7 +317,7 @@ public static class TR2EnemyUtilities
             }
     };
 
-    private static readonly Dictionary<string, List<TR2Entities>> _unsupportedEnemiesDefault = new Dictionary<string, List<TR2Entities>>
+    private static readonly Dictionary<string, List<TR2Entities>> _unsupportedEnemiesDefault = new()
     {
         [TR2LevelNames.LAIR] =
             new List<TR2Entities> { TR2Entities.MercSnowmobDriver },
@@ -325,7 +325,7 @@ public static class TR2EnemyUtilities
             new List<TR2Entities> { TR2Entities.Spider, TR2Entities.Rat }
     };
 
-    private static readonly Dictionary<string, List<TR2Entities>> _requiredEnemies = new Dictionary<string, List<TR2Entities>>
+    private static readonly Dictionary<string, List<TR2Entities>> _requiredEnemies = new()
     {
         [TR2LevelNames.CHICKEN] =
             new List<TR2Entities> { TR2Entities.BirdMonster },  // #60 - Ice Palace chicken man must remain to avoid softlock.
@@ -346,28 +346,28 @@ public static class TR2EnemyUtilities
 
     // We also limit the count for some - more than 1 dragon tends to cause crashes if they spawn close together.
     // Winston is an easter egg so maybe keep it low.
-    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyLevelCountsTechnical = new Dictionary<TR2Entities, int>
+    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyLevelCountsTechnical = new()
     {
         [TR2Entities.MarcoBartoli] = 1,
         [TR2Entities.Winston] = 2
     };
-    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyLevelCountsDefault = new Dictionary<TR2Entities, int>
+    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyLevelCountsDefault = new()
     {
         [TR2Entities.MercSnowmobDriver] = 2,
     };
 
     // These enemies are restricted a set number of times throughout the entire game.
-    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyGameCountsTechnical = new Dictionary<TR2Entities, int>
+    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyGameCountsTechnical = new()
     {
         [TR2Entities.Winston] = 2,
     };
-    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyGameCountsDefault = new Dictionary<TR2Entities, int>
+    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyGameCountsDefault = new()
     {
         [TR2Entities.BirdMonster] = 3,
     };
 
     // Predefined absolute limits for skidoo drivers
-    private static readonly Dictionary<string, int> _skidooLimits = new Dictionary<string, int>
+    private static readonly Dictionary<string, int> _skidooLimits = new()
     {
         [TR2LevelNames.OPERA] = 18,
         [TR2LevelNames.MONASTERY] = 22,
@@ -395,7 +395,7 @@ public static class TR2EnemyUtilities
         );
     }
 
-    private static readonly Dictionary<EnemyDifficulty, List<TR2Entities>> _enemyDifficulties = new Dictionary<EnemyDifficulty, List<TR2Entities>>
+    private static readonly Dictionary<EnemyDifficulty, List<TR2Entities>> _enemyDifficulties = new()
     {
         [EnemyDifficulty.VeryEasy] = new List<TR2Entities>
         {
@@ -450,7 +450,7 @@ public static class TR2EnemyUtilities
      * LAIR: 3, 12, 1517
      * HSH : N/A
      */
-    private static readonly Dictionary<string, int> _enemyAdjustmentCount = new Dictionary<string, int>
+    private static readonly Dictionary<string, int> _enemyAdjustmentCount = new()
     {
         [TR2LevelNames.GW] = 2,
         [TR2LevelNames.OPERA] = -1,
@@ -463,7 +463,7 @@ public static class TR2EnemyUtilities
     };
 
     // Trigger a redim of the imported enemy count if one of these entities is selected
-    private static readonly Dictionary<TR2Entities, Dictionary<string, int>> _targetEnemyAdjustmentCount = new Dictionary<TR2Entities, Dictionary<string, int>>
+    private static readonly Dictionary<TR2Entities, Dictionary<string, int>> _targetEnemyAdjustmentCount = new()
     {
         [TR2Entities.MarcoBartoli] = new Dictionary<string, int>
         {
@@ -478,7 +478,7 @@ public static class TR2EnemyUtilities
 
     public static List<TR2Entities> GetEnemyGuisers(TR2Entities entity)
     {
-        List<TR2Entities> entities = new List<TR2Entities>();
+        List<TR2Entities> entities = new();
         if (_enemyGuisers.ContainsKey(entity))
         {
             entities.AddRange(_enemyGuisers[entity]);
@@ -486,7 +486,7 @@ public static class TR2EnemyUtilities
         return entities;
     }
 
-    private static readonly Dictionary<TR2Entities, List<TR2Entities>> _enemyGuisers = new Dictionary<TR2Entities, List<TR2Entities>>
+    private static readonly Dictionary<TR2Entities, List<TR2Entities>> _enemyGuisers = new()
     {
         [TR2Entities.BirdMonster] = new List<TR2Entities>
         {
@@ -499,13 +499,13 @@ public static class TR2EnemyUtilities
         return new List<TR2Entities>(_friendlyEnemies);
     }
 
-    private static readonly List<TR2Entities> _friendlyEnemies = new List<TR2Entities>
+    private static readonly List<TR2Entities> _friendlyEnemies = new()
     {
         TR2Entities.Winston, TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick
     };
 
     // #146 Ensure Marco is spawned only once
-    private static readonly List<TR2Entities> _oneShotEnemies = new List<TR2Entities>
+    private static readonly List<TR2Entities> _oneShotEnemies = new()
     {
         TR2Entities.MarcoBartoli
     };
@@ -516,7 +516,7 @@ public static class TR2EnemyUtilities
         {
             int entityID = level.Entities.ToList().IndexOf(entity);
 
-            FDControl fdControl = new FDControl();
+            FDControl fdControl = new();
             fdControl.ParseFromLevel(level);
 
             List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(fdControl, entityID);
@@ -533,7 +533,7 @@ public static class TR2EnemyUtilities
     {
         // If the priorities map doesn't contain an entity we are trying to import as a key, TRModelTransporter
         // will assume it always has priority (e.g. BengalTiger replacing SnowLeopard).
-        Dictionary<TR2Entities, TR2Entities> priorities = new Dictionary<TR2Entities, TR2Entities>();
+        Dictionary<TR2Entities, TR2Entities> priorities = new();
 
         // If the dragon is being imported, we want the matching dagger cutscene to be available via misc anim
         // and the dagger model for the inventory. Otherwise, we need to ensure the existing misc anim matches

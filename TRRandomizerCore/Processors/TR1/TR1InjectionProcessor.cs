@@ -7,8 +7,8 @@ namespace TRRandomizerCore.Processors;
 public class TR1InjectionProcessor : TR1LevelProcessor
 {
     private static readonly uint _t1mMagic = 'T' | ('1' << 8) | ('M' << 16) | ('J' << 24);
-    private static readonly Version _minT1MVersion = new Version(2, 15);
-    private static readonly List<T1MInjectionType> _permittedInjections = new List<T1MInjectionType>
+    private static readonly Version _minT1MVersion = new(2, 15);
+    private static readonly List<T1MInjectionType> _permittedInjections = new()
     {
         T1MInjectionType.LaraAnims,
         T1MInjectionType.LaraJumps,
@@ -62,7 +62,7 @@ public class TR1InjectionProcessor : TR1LevelProcessor
             return injections;
         }
 
-        List<string> validInjections = new List<string>();
+        List<string> validInjections = new();
         foreach (string injection in injections)
         {
             string path = Path.Combine(ScriptEditor.OriginalFile.DirectoryName, @"..\", injection);
@@ -71,7 +71,7 @@ public class TR1InjectionProcessor : TR1LevelProcessor
                 continue;
             }
 
-            using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+            using (BinaryReader reader = new(File.OpenRead(path)))
             {
                 if (reader.ReadUInt32() != _t1mMagic)
                 {
