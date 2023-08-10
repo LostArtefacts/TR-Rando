@@ -905,8 +905,10 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
         private void MergeColouredTrianglesToTexture(TR1Level level, TRMesh baseMesh, TRMesh copyMesh, int[] triangleIndices, int copyIndex, int rotations)
         {
-            MeshEditor editor = new();
-            editor.Mesh = baseMesh;
+            MeshEditor editor = new()
+            {
+                Mesh = baseMesh
+            };
 
             List<TRFace3> colouredTris = baseMesh.ColouredTriangles.ToList();
             List<TRFace4> colouredQuads = baseMesh.ColouredRectangles.ToList();

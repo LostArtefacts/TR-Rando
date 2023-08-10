@@ -983,8 +983,10 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             if ((entity.TypeID == (short)TREntities.AtlanteanEgg || entity.TypeID == (short)TREntities.AdamEgg)
                 && FDUtilities.GetEntityTriggers(floorData, i).Count > 0)
             {
-                TREntity resultantEnemy = new();
-                resultantEnemy.TypeID = (short)CodeBitsToAtlantean(entity.CodeBits);
+                TREntity resultantEnemy = new()
+                {
+                    TypeID = (short)CodeBitsToAtlantean(entity.CodeBits)
+                };
 
                 // Only include it if the model is present i.e. it's not an empty egg.
                 if (Array.Find(level.Data.Models, m => m.ID == resultantEnemy.TypeID) != null)
