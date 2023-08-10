@@ -36,142 +36,140 @@ public abstract class AbstractLandmarkImporter<E, L>
             return false;
         }
 
-        using (AbstractTexturePacker<E, L> packer = CreatePacker(level))
-        {
-            Dictionary<LandmarkTextureTarget, TexturedTileSegment> targetSegmentMap = new();
+        using AbstractTexturePacker<E, L> packer = CreatePacker(level);
+        Dictionary<LandmarkTextureTarget, TexturedTileSegment> targetSegmentMap = new();
 
+        foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
+        {
+            if (textures.Count == MaxTextures)
+            {
+                break;
+            }
+
+            if (!source.HasVariants)
+            {
+                continue;
+            }
+
+            List<Rectangle> segments = source.VariantMap[source.Variants[0]];
+            foreach (int segmentIndex in mapping.LandmarkMapping[source].Keys)
+            {
+                Dictionary<int, LandmarkTextureTarget> backgroundCache = new();
+
+                foreach (LandmarkTextureTarget target in mapping.LandmarkMapping[source][segmentIndex])
+                {
+                    if (target.PortalSector != null)
+                    {
+                        // This target is meant for a room that has been created by environment mods.
+                        // Test the portal in the given location to get the room number, traversing
+                        // until we reach the target room. If it doesn't exist, the landmark will not
+                        // be imported.
+                        PortalSector sector = target.PortalSector;
+                        bool traverse = true;
+                        short? room;
+                        do
+                        {
+                            room = GetRoomFromPortal(level, sector, isLevelMirrored);
+                            if (traverse = room.HasValue && sector.NextPortal != null)
+                            {
+                                sector.NextPortal.Room = room.Value;
+                                sector = sector.NextPortal;
+                            }
+                        }
+                        while (traverse);
+
+                        if (room.HasValue)
+                        {
+                            target.RoomNumber = room.Value;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (target.BackgroundIndex != -1 && backgroundCache.ContainsKey(target.BackgroundIndex))
+                    {
+                        // The same graphic has already been added, so just copy the mapping.
+                        // This is most likely for flipped rooms.
+                        target.MappedTextureIndex = backgroundCache[target.BackgroundIndex].MappedTextureIndex;
+                        targetSegmentMap[target] = targetSegmentMap[backgroundCache[target.BackgroundIndex]];
+                        continue;
+                    }
+
+                    IndexedTRObjectTexture texture = CreateTexture(segments[segmentIndex], isLevelMirrored);
+                    target.MappedTextureIndex = textures.Count;
+                    textures.Add(texture.Texture);
+
+                    Bitmap image;
+                    if (target.BackgroundIndex != -1)
+                    {
+                        IndexedTRObjectTexture indexedTexture = new()
+                        {
+                            Index = target.BackgroundIndex,
+                            Texture = textures[target.BackgroundIndex]
+                        };
+                        BitmapGraphics tile = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
+                        BitmapGraphics clip = new(tile.Extract(indexedTexture.Bounds));
+                        clip.Overlay(source.Bitmap);
+                        image = clip.Bitmap;
+
+                        backgroundCache[target.BackgroundIndex] = target;
+                    }
+                    else
+                    {
+                        image = source.ClonedBitmap;
+                    }
+
+                    TexturedTileSegment segment = new(texture, image);
+                    packer.AddRectangle(segment);
+                    targetSegmentMap[target] = segment;
+                }
+            }
+        }
+
+        if (packer.TotalRectangles == 0)
+        {
+            return false;
+        }
+
+        try
+        {
+            PackingResult<TexturedTile, TexturedTileSegment> result = packer.Pack(true);
+
+            // Perform the room data remapping
             foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
             {
-                if (textures.Count == MaxTextures)
-                {
-                    break;
-                }
-
                 if (!source.HasVariants)
                 {
                     continue;
                 }
 
-                List<Rectangle> segments = source.VariantMap[source.Variants[0]];
                 foreach (int segmentIndex in mapping.LandmarkMapping[source].Keys)
                 {
-                    Dictionary<int, LandmarkTextureTarget> backgroundCache = new();
-
                     foreach (LandmarkTextureTarget target in mapping.LandmarkMapping[source][segmentIndex])
                     {
-                        if (target.PortalSector != null)
+                        if (target.MappedTextureIndex == -1 || result.Packer.OrphanedRectangles.Contains(targetSegmentMap[target]))
                         {
-                            // This target is meant for a room that has been created by environment mods.
-                            // Test the portal in the given location to get the room number, traversing
-                            // until we reach the target room. If it doesn't exist, the landmark will not
-                            // be imported.
-                            PortalSector sector = target.PortalSector;
-                            bool traverse = true;
-                            short? room;
-                            do
-                            {
-                                room = GetRoomFromPortal(level, sector, isLevelMirrored);
-                                if (traverse = room.HasValue && sector.NextPortal != null)
-                                {
-                                    sector.NextPortal.Room = room.Value;
-                                    sector = sector.NextPortal;
-                                }
-                            }
-                            while (traverse);
-
-                            if (room.HasValue)
-                            {
-                                target.RoomNumber = room.Value;
-                            }
-                            else
-                            {
-                                continue;
-                            }
-                        }
-
-                        if (target.BackgroundIndex != -1 && backgroundCache.ContainsKey(target.BackgroundIndex))
-                        {
-                            // The same graphic has already been added, so just copy the mapping.
-                            // This is most likely for flipped rooms.
-                            target.MappedTextureIndex = backgroundCache[target.BackgroundIndex].MappedTextureIndex;
-                            targetSegmentMap[target] = targetSegmentMap[backgroundCache[target.BackgroundIndex]];
+                            // There wasn't enough space for this
                             continue;
                         }
 
-                        IndexedTRObjectTexture texture = CreateTexture(segments[segmentIndex], isLevelMirrored);
-                        target.MappedTextureIndex = textures.Count;
-                        textures.Add(texture.Texture);
-
-                        Bitmap image;
-                        if (target.BackgroundIndex != -1)
+                        foreach (int rectIndex in target.RectangleIndices)
                         {
-                            IndexedTRObjectTexture indexedTexture = new()
-                            {
-                                Index = target.BackgroundIndex,
-                                Texture = textures[target.BackgroundIndex]
-                            };
-                            BitmapGraphics tile = packer.Tiles[indexedTexture.Atlas].BitmapGraphics;
-                            BitmapGraphics clip = new(tile.Extract(indexedTexture.Bounds));
-                            clip.Overlay(source.Bitmap);
-                            image = clip.Bitmap;
-
-                            backgroundCache[target.BackgroundIndex] = target;
-                        }
-                        else
-                        {
-                            image = source.ClonedBitmap;
-                        }
-
-                        TexturedTileSegment segment = new(texture, image);
-                        packer.AddRectangle(segment);
-                        targetSegmentMap[target] = segment;
-                    }
-                }
-            }
-
-            if (packer.TotalRectangles == 0)
-            {
-                return false;
-            }
-
-            try
-            {
-                PackingResult<TexturedTile, TexturedTileSegment> result = packer.Pack(true);
-
-                // Perform the room data remapping
-                foreach (StaticTextureSource<E> source in mapping.LandmarkMapping.Keys)
-                {
-                    if (!source.HasVariants)
-                    {
-                        continue;
-                    }
-
-                    foreach (int segmentIndex in mapping.LandmarkMapping[source].Keys)
-                    {
-                        foreach (LandmarkTextureTarget target in mapping.LandmarkMapping[source][segmentIndex])
-                        {
-                            if (target.MappedTextureIndex == -1 || result.Packer.OrphanedRectangles.Contains(targetSegmentMap[target]))
-                            {
-                                // There wasn't enough space for this
-                                continue;
-                            }
-
-                            foreach (int rectIndex in target.RectangleIndices)
-                            {
-                                SetRoomTexture(level, target.RoomNumber, rectIndex, (ushort)target.MappedTextureIndex);
-                            }
+                            SetRoomTexture(level, target.RoomNumber, rectIndex, (ushort)target.MappedTextureIndex);
                         }
                     }
                 }
-
-                SetObjectTextures(level, textures);
-
-                return true;
             }
-            catch (PackingException)
-            {
-                return false;
-            }
+
+            SetObjectTextures(level, textures);
+
+            return true;
+        }
+        catch (PackingException)
+        {
+            return false;
         }
     }
 

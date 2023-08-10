@@ -71,18 +71,16 @@ public class TR1InjectionProcessor : TR1LevelProcessor
                 continue;
             }
 
-            using (BinaryReader reader = new(File.OpenRead(path)))
+            using BinaryReader reader = new(File.OpenRead(path));
+            if (reader.ReadUInt32() != _t1mMagic)
             {
-                if (reader.ReadUInt32() != _t1mMagic)
-                {
-                    continue;
-                }
+                continue;
+            }
 
-                reader.ReadUInt32(); // Skip version
-                if (_permittedInjections.Contains((T1MInjectionType)reader.ReadUInt32()))
-                {
-                    validInjections.Add(injection);
-                }
+            reader.ReadUInt32(); // Skip version
+            if (_permittedInjections.Contains((T1MInjectionType)reader.ReadUInt32()))
+            {
+                validInjections.Add(injection);
             }
         }
 

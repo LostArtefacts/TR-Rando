@@ -346,12 +346,10 @@ public class TR1RandoEditor : TR1LevelEditor, ISettingsProvider
         if (File.Exists(backupTitle))
         {
             string editedTitle = Path.Combine(GetWriteBasePath(), mainMenuPic);
-            using (BitmapGraphics bg = new(new Bitmap(backupTitle)))
-            using (Bitmap badge = new(@"Resources\Shared\Graphics\goldbadge-small.png"))
-            {
-                bg.Graphics.DrawImage(badge, new Rectangle(706, 537, badge.Width, badge.Height));
-                bg.Bitmap.Save(editedTitle);
-            }
+            using BitmapGraphics bg = new(new Bitmap(backupTitle));
+            using Bitmap badge = new(@"Resources\Shared\Graphics\goldbadge-small.png");
+            bg.Graphics.DrawImage(badge, new Rectangle(706, 537, badge.Width, badge.Height));
+            bg.Bitmap.Save(editedTitle);
         }
 
         {

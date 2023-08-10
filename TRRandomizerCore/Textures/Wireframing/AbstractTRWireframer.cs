@@ -77,71 +77,69 @@ public abstract class AbstractTRWireframer<E, L>
             DashCap = DashCap.Round
         };
 
-        using (AbstractTexturePacker<E, L> packer = CreatePacker(level))
+        using AbstractTexturePacker<E, L> packer = CreatePacker(level);
+        DeleteTextures(packer);
+        ResetUnusedTextures(level);
+
+        TRSize roomSize = GetLargestSize(roomSizes);
+        roomSize.RoundDown();
+
+        IndexedTRObjectTexture roomTexture = CreateWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
+        IndexedTRObjectTexture ladderTexture = CreateLadderWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
+        IndexedTRObjectTexture triggerTexture = CreateTriggerWireframe(packer, roomSize, triggerPen, SmoothingMode.AntiAlias);
+        IndexedTRObjectTexture deathTexture = CreateDeathWireframe(packer, roomSize, deathPen, SmoothingMode.AntiAlias);
+        Dictionary<ushort, IndexedTRObjectTexture> specialTextures = CreateSpecialTextures(packer, level, roomPen);
+        ProcessClips(packer, level, roomPen, SmoothingMode.AntiAlias);
+
+        Dictionary<TRSize, IndexedTRObjectTexture> modelRemap = new();
+        foreach (TRSize size in meshSizes)
         {
-            DeleteTextures(packer);
-            ResetUnusedTextures(level);
-
-            TRSize roomSize = GetLargestSize(roomSizes);
-            roomSize.RoundDown();
-
-            IndexedTRObjectTexture roomTexture = CreateWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
-            IndexedTRObjectTexture ladderTexture = CreateLadderWireframe(packer, roomSize, roomPen, SmoothingMode.AntiAlias);
-            IndexedTRObjectTexture triggerTexture = CreateTriggerWireframe(packer, roomSize, triggerPen, SmoothingMode.AntiAlias);
-            IndexedTRObjectTexture deathTexture = CreateDeathWireframe(packer, roomSize, deathPen, SmoothingMode.AntiAlias);
-            Dictionary<ushort, IndexedTRObjectTexture> specialTextures = CreateSpecialTextures(packer, level, roomPen);
-            ProcessClips(packer, level, roomPen, SmoothingMode.AntiAlias);
-
-            Dictionary<TRSize, IndexedTRObjectTexture> modelRemap = new();
-            foreach (TRSize size in meshSizes)
-            {
-                modelRemap[size] = CreateWireframe(packer, size, modelPen, SmoothingMode.None);
-            }
-
-            packer.Options.StartMethod = PackingStartMethod.FirstTile;
-            packer.Pack(true);
-
-            Queue<int> reusableTextures = new(GetInvalidObjectTextureIndices(level));
-            List<TRObjectTexture> levelObjectTextures = GetObjectTextures(level).ToList();
-
-            ushort roomTextureIndex = (ushort)reusableTextures.Dequeue();
-            levelObjectTextures[roomTextureIndex] = roomTexture.Texture;
-
-            ushort ladderTextureIndex = (ushort)reusableTextures.Dequeue();
-            levelObjectTextures[ladderTextureIndex] = ladderTexture.Texture;
-
-            ushort triggerTextureIndex = (ushort)reusableTextures.Dequeue();
-            levelObjectTextures[triggerTextureIndex] = triggerTexture.Texture;
-
-            ushort deathTextureIndex = (ushort)reusableTextures.Dequeue();
-            levelObjectTextures[deathTextureIndex] = deathTexture.Texture;
-
-            Dictionary<ushort, ushort> specialTextureRemap = new();
-            foreach (ushort originalTexture in specialTextures.Keys)
-            {
-                ushort newIndex = (ushort)reusableTextures.Dequeue();
-                levelObjectTextures[newIndex] = specialTextures[originalTexture].Texture;
-                specialTextureRemap[originalTexture] = newIndex;
-            }
-
-            foreach (TRSize size in modelRemap.Keys)
-            {
-                if (!size.Equals(_nullSize))
-                {
-                    ushort texture = (ushort)reusableTextures.Dequeue();
-                    levelObjectTextures[texture] = modelRemap[size].Texture;
-                    modelRemap[size].Index = texture;
-                }
-            }
-
-            SetObjectTextures(level, levelObjectTextures);
-
-            ResetRoomTextures(roomTextureIndex, ladderTextureIndex, triggerTextureIndex, deathTextureIndex, specialTextureRemap);
-            ResetMeshTextures(modelRemap, specialTextureRemap);
-            TidyModels(level);
-            SetSkyboxVisible(level);
-            DeleteAnimatedTextures(level);
+            modelRemap[size] = CreateWireframe(packer, size, modelPen, SmoothingMode.None);
         }
+
+        packer.Options.StartMethod = PackingStartMethod.FirstTile;
+        packer.Pack(true);
+
+        Queue<int> reusableTextures = new(GetInvalidObjectTextureIndices(level));
+        List<TRObjectTexture> levelObjectTextures = GetObjectTextures(level).ToList();
+
+        ushort roomTextureIndex = (ushort)reusableTextures.Dequeue();
+        levelObjectTextures[roomTextureIndex] = roomTexture.Texture;
+
+        ushort ladderTextureIndex = (ushort)reusableTextures.Dequeue();
+        levelObjectTextures[ladderTextureIndex] = ladderTexture.Texture;
+
+        ushort triggerTextureIndex = (ushort)reusableTextures.Dequeue();
+        levelObjectTextures[triggerTextureIndex] = triggerTexture.Texture;
+
+        ushort deathTextureIndex = (ushort)reusableTextures.Dequeue();
+        levelObjectTextures[deathTextureIndex] = deathTexture.Texture;
+
+        Dictionary<ushort, ushort> specialTextureRemap = new();
+        foreach (ushort originalTexture in specialTextures.Keys)
+        {
+            ushort newIndex = (ushort)reusableTextures.Dequeue();
+            levelObjectTextures[newIndex] = specialTextures[originalTexture].Texture;
+            specialTextureRemap[originalTexture] = newIndex;
+        }
+
+        foreach (TRSize size in modelRemap.Keys)
+        {
+            if (!size.Equals(_nullSize))
+            {
+                ushort texture = (ushort)reusableTextures.Dequeue();
+                levelObjectTextures[texture] = modelRemap[size].Texture;
+                modelRemap[size].Index = texture;
+            }
+        }
+
+        SetObjectTextures(level, levelObjectTextures);
+
+        ResetRoomTextures(roomTextureIndex, ladderTextureIndex, triggerTextureIndex, deathTextureIndex, specialTextureRemap);
+        ResetMeshTextures(modelRemap, specialTextureRemap);
+        TidyModels(level);
+        SetSkyboxVisible(level);
+        DeleteAnimatedTextures(level);
     }
 
     private void ScanRooms(L level)

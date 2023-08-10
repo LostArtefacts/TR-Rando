@@ -199,31 +199,29 @@ public class DynamicTextureBuilder
         }
 
         // Put it all together into the required format for texture re-mapping.
-        using (TR1TexturePacker packer = new(level.Data))
+        using TR1TexturePacker packer = new(level.Data);
+        Dictionary<int, List<Rectangle>> defaultMapping = new();
+        AddSegmentsToMapping(packer.GetObjectTextureSegments(defaultObjectTextures), defaultMapping);
+        AddSegmentsToMapping(packer.GetSpriteTextureSegments(defaultSpriteTextures), defaultMapping);
+
+        Dictionary<TextureCategory, Dictionary<int, List<Rectangle>>> optionalMapping = new()
         {
-            Dictionary<int, List<Rectangle>> defaultMapping = new();
-            AddSegmentsToMapping(packer.GetObjectTextureSegments(defaultObjectTextures), defaultMapping);
-            AddSegmentsToMapping(packer.GetSpriteTextureSegments(defaultSpriteTextures), defaultMapping);
+            [TextureCategory.Enemy] = new Dictionary<int, List<Rectangle>>(),
+            [TextureCategory.Secret] = new Dictionary<int, List<Rectangle>>(),
+            [TextureCategory.KeyItem] = new Dictionary<int, List<Rectangle>>()
+        };
+        AddSegmentsToMapping(packer.GetObjectTextureSegments(enemyObjectTextures), optionalMapping[TextureCategory.Enemy]);
+        AddSegmentsToMapping(packer.GetObjectTextureSegments(secretObjectTextures), optionalMapping[TextureCategory.Secret]);
+        AddSegmentsToMapping(packer.GetSpriteTextureSegments(secretSpriteTextures), optionalMapping[TextureCategory.Secret]);
+        AddSegmentsToMapping(packer.GetObjectTextureSegments(keyItemObjectTextures), optionalMapping[TextureCategory.KeyItem]);
+        AddSegmentsToMapping(packer.GetSpriteTextureSegments(keyItemSpriteTextures), optionalMapping[TextureCategory.KeyItem]);
 
-            Dictionary<TextureCategory, Dictionary<int, List<Rectangle>>> optionalMapping = new()
-            {
-                [TextureCategory.Enemy] = new Dictionary<int, List<Rectangle>>(),
-                [TextureCategory.Secret] = new Dictionary<int, List<Rectangle>>(),
-                [TextureCategory.KeyItem] = new Dictionary<int, List<Rectangle>>()
-            };
-            AddSegmentsToMapping(packer.GetObjectTextureSegments(enemyObjectTextures), optionalMapping[TextureCategory.Enemy]);
-            AddSegmentsToMapping(packer.GetObjectTextureSegments(secretObjectTextures), optionalMapping[TextureCategory.Secret]);
-            AddSegmentsToMapping(packer.GetSpriteTextureSegments(secretSpriteTextures), optionalMapping[TextureCategory.Secret]);
-            AddSegmentsToMapping(packer.GetObjectTextureSegments(keyItemObjectTextures), optionalMapping[TextureCategory.KeyItem]);
-            AddSegmentsToMapping(packer.GetSpriteTextureSegments(keyItemSpriteTextures), optionalMapping[TextureCategory.KeyItem]);
-
-            return new DynamicTextureTarget
-            {
-                DefaultTileTargets = defaultMapping,
-                OptionalTileTargets = optionalMapping,
-                ModelColourTargets = modelMeshes.ToList()
-            };
-        }
+        return new DynamicTextureTarget
+        {
+            DefaultTileTargets = defaultMapping,
+            OptionalTileTargets = optionalMapping,
+            ModelColourTargets = modelMeshes.ToList()
+        };
     }
 
     private void AddModelTextures(TR1Level level, TRModel model, TRMesh dummyMesh, ISet<int> textures, ISet<TRMesh> meshCollection)
@@ -311,69 +309,67 @@ public class DynamicTextureBuilder
 
     private void DuplicateMeshTextures(TR1Level level, TRMesh mesh)
     {
-        using (TR1TexturePacker packer = new(level))
+        using TR1TexturePacker packer = new(level);
+        packer.MaximumTiles = IsCommunityPatch ? 128 : 16;
+        int maximumObjects = IsCommunityPatch ? 8192 : 2048;
+
+        // Collect all texture pointers from each face in the mesh.
+        IEnumerable<int> textures = mesh.TexturedRectangles.Select(f => (int)f.Texture);
+        textures = textures.Concat(mesh.TexturedTriangles.Select(f => (int)f.Texture));
+        Dictionary<TexturedTile, List<TexturedTileSegment>> segments = packer.GetObjectTextureSegments(textures.ToHashSet());
+
+        // Clone each segment ready for packing.
+        List<TexturedTileSegment> duplicates = new();
+        foreach (List<TexturedTileSegment> segs in segments.Values)
         {
-            packer.MaximumTiles = IsCommunityPatch ? 128 : 16;
-            int maximumObjects = IsCommunityPatch ? 8192 : 2048;
-
-            // Collect all texture pointers from each face in the mesh.
-            IEnumerable<int> textures = mesh.TexturedRectangles.Select(f => (int)f.Texture);
-            textures = textures.Concat(mesh.TexturedTriangles.Select(f => (int)f.Texture));
-            Dictionary<TexturedTile, List<TexturedTileSegment>> segments = packer.GetObjectTextureSegments(textures.ToHashSet());
-
-            // Clone each segment ready for packing.
-            List<TexturedTileSegment> duplicates = new();                
-            foreach (List<TexturedTileSegment> segs in segments.Values)
-            {
-                duplicates.AddRange(segs.Select(s => s.Clone()));                    
-            }
-
-            // Pack the clones into the tiles.
-            packer.AddRectangles(duplicates);
-            packer.Pack(true);
-
-            // Map the packed segments to object textures.
-            List<TRObjectTexture> levelObjectTextures = level.ObjectTextures.ToList();
-            Queue<int> reusableIndices = new(level.GetInvalidObjectTextureIndices());
-            Dictionary<int, int> reindex = new();
-            foreach (TexturedTileSegment segment in duplicates)
-            {
-                foreach (IndexedTRObjectTexture texture in segment.Textures)
-                {
-                    int newIndex;
-                    if (reusableIndices.Count > 0)
-                    {
-                        newIndex = reusableIndices.Dequeue();
-                        levelObjectTextures[newIndex] = texture.Texture;
-                    }
-                    else if (levelObjectTextures.Count < maximumObjects)
-                    {
-                        levelObjectTextures.Add(texture.Texture);
-                        newIndex = levelObjectTextures.Count - 1;
-                    }
-                    else
-                    {
-                        throw new PackingException(string.Format("Limit of {0} textures reached.", maximumObjects));
-                    }
-
-                    reindex[texture.Index] = newIndex;
-                }
-            }
-
-            // Remap the mesh's faces.
-            foreach (TRFace4 f in mesh.TexturedRectangles)
-            {
-                f.Texture = (ushort)reindex[f.Texture];
-            }
-            foreach (TRFace3 f in mesh.TexturedTriangles)
-            {
-                f.Texture = (ushort)reindex[f.Texture];
-            }
-
-            level.ObjectTextures = levelObjectTextures.ToArray();
-            level.NumObjectTextures = (uint)levelObjectTextures.Count;
-            level.ResetUnusedTextures();
+            duplicates.AddRange(segs.Select(s => s.Clone()));
         }
+
+        // Pack the clones into the tiles.
+        packer.AddRectangles(duplicates);
+        packer.Pack(true);
+
+        // Map the packed segments to object textures.
+        List<TRObjectTexture> levelObjectTextures = level.ObjectTextures.ToList();
+        Queue<int> reusableIndices = new(level.GetInvalidObjectTextureIndices());
+        Dictionary<int, int> reindex = new();
+        foreach (TexturedTileSegment segment in duplicates)
+        {
+            foreach (IndexedTRObjectTexture texture in segment.Textures)
+            {
+                int newIndex;
+                if (reusableIndices.Count > 0)
+                {
+                    newIndex = reusableIndices.Dequeue();
+                    levelObjectTextures[newIndex] = texture.Texture;
+                }
+                else if (levelObjectTextures.Count < maximumObjects)
+                {
+                    levelObjectTextures.Add(texture.Texture);
+                    newIndex = levelObjectTextures.Count - 1;
+                }
+                else
+                {
+                    throw new PackingException(string.Format("Limit of {0} textures reached.", maximumObjects));
+                }
+
+                reindex[texture.Index] = newIndex;
+            }
+        }
+
+        // Remap the mesh's faces.
+        foreach (TRFace4 f in mesh.TexturedRectangles)
+        {
+            f.Texture = (ushort)reindex[f.Texture];
+        }
+        foreach (TRFace3 f in mesh.TexturedTriangles)
+        {
+            f.Texture = (ushort)reindex[f.Texture];
+        }
+
+        level.ObjectTextures = levelObjectTextures.ToArray();
+        level.NumObjectTextures = (uint)levelObjectTextures.Count;
+        level.ResetUnusedTextures();
     }
 
     private void AddMeshTextures(TRMesh mesh, ISet<int> textures)
