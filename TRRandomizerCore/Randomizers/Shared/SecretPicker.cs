@@ -57,7 +57,7 @@ public class SecretPicker
                 pools.Add(FilterLocations(allLocations, isMirrored, Difficulty.Easy, true));
             }
 
-            pools.RemoveAll(p => p.Count() == 0);
+            pools.RemoveAll(p => !p.Any());
             if (pools.Count > 0)
             {
                 // Select at least one pool.
