@@ -498,7 +498,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
     private bool EvaluateProximity(Location loc, List<Location> usedLocs, TR3CombinedLevel level)
     {
         bool SafeToPlace = true;
-        float proximity = 10000.0f;
+        float proximity;
 
         if (loc.Difficulty == Difficulty.Hard && !Settings.HardSecrets)
             return false;

@@ -292,7 +292,6 @@ public static class ColorUtilities
 
     public static bool TestWireframeContrast(Color color1, Color color2)
     {
-        double d = _wireframeContrastMin;
         return GetDifference(color1, color2) > _wireframeContrastMin;
     }
 

@@ -648,7 +648,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             // force pistols for OneLimit and then we're done
             if (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
             {
-                weaponType = replacementWeapons[replacementWeapons.Count - 1];
                 return;
             }
 
