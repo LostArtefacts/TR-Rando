@@ -133,22 +133,14 @@ public class TR2SavegameTester
             
             if (TR2EntityUtilities.IsEnemyType(type))
             {
-                switch (type)
+                saveFlags = type switch
                 {
-                    case TR2Entities.MarcoBartoli:
-                        saveFlags = SGFlags.Animation | SGFlags.Flags;
-                        break;
-                    case TR2Entities.BlackMorayEel:
-                    case TR2Entities.YellowMorayEel:
-                        saveFlags = SGFlags.Animation | SGFlags.Flags | SGFlags.Hitpoints;
-                        break;
-                    case TR2Entities.Winston:
-                        saveFlags = SGFlags.Animation | SGFlags.Flags | SGFlags.Position | SGFlags.Intelligence;
-                        break;
-                    default:
-                        saveFlags = SGFlags.Animation | SGFlags.Flags | SGFlags.Hitpoints | SGFlags.Intelligence | SGFlags.Position;
-                        break;
-                }
+                    TR2Entities.MarcoBartoli => SGFlags.Animation | SGFlags.Flags,
+                    TR2Entities.BlackMorayEel
+                    or TR2Entities.YellowMorayEel => SGFlags.Animation | SGFlags.Flags | SGFlags.Hitpoints,
+                    TR2Entities.Winston => SGFlags.Animation | SGFlags.Flags | SGFlags.Position | SGFlags.Intelligence,
+                    _ => SGFlags.Animation | SGFlags.Flags | SGFlags.Hitpoints | SGFlags.Intelligence | SGFlags.Position,
+                };
             }
             else if (TR2EntityUtilities.IsAnyPickupType(type))
             {

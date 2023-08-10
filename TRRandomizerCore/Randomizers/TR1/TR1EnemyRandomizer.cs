@@ -629,25 +629,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                         }
                     }
 
-                    switch (spawnType)
-                    {
-                        case TREntities.ShootingAtlantean_N:
-                            currentEntity.CodeBits = 1;
-                            break;
-                        case TREntities.Centaur:
-                            currentEntity.CodeBits = 2;
-                            break;
-                        case TREntities.Adam:
-                            currentEntity.CodeBits = 4;
-                            break;
-                        case TREntities.NonShootingAtlantean_N:
-                            currentEntity.CodeBits = 8;
-                            break;
-                        default:
-                            currentEntity.CodeBits = 0;
-                            break;
-                    }
-
+                    currentEntity.CodeBits = AtlanteanToCodeBits(spawnType);
                     if (eggLocation != null)
                     {
                         currentEntity.X = eggLocation.X;
@@ -751,26 +733,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             }
             else if (type == TREntities.AdamEgg || type == TREntities.AtlanteanEgg)
             {
-                TREntities eggType;
-                switch (entity.CodeBits)
-                {
-                    case 1:
-                        eggType = TREntities.ShootingAtlantean_N;
-                        break;
-                    case 2:
-                        eggType = TREntities.Centaur;
-                        break;
-                    case 4:
-                        eggType = TREntities.Adam;
-                        break;
-                    case 8:
-                        eggType = TREntities.NonShootingAtlantean_N;
-                        break;
-                    default:
-                        eggType = TREntities.FlyingAtlantean;
-                        break;
-                }
-
+                TREntities eggType = CodeBitsToAtlantean(entity.CodeBits);
                 if (eggType == translatedType && Array.Find(level.Data.Models, m => m.ID == (uint)eggType) != null)
                 {
                     count++;
@@ -778,6 +741,30 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             }
         }
         return count;
+    }
+
+    private static ushort AtlanteanToCodeBits(TREntities atlantean)
+    {
+        return atlantean switch
+        {
+            TREntities.ShootingAtlantean_N => 1,
+            TREntities.Centaur => 2,
+            TREntities.Adam => 4,
+            TREntities.NonShootingAtlantean_N => 8,
+            _ => 0,
+        };
+    }
+
+    private static TREntities CodeBitsToAtlantean(ushort codeBits)
+    {
+        return codeBits switch
+        {
+            1 => TREntities.ShootingAtlantean_N,
+            2 => TREntities.Centaur,
+            4 => TREntities.Adam,
+            8 => TREntities.NonShootingAtlantean_N,
+            _ => TREntities.FlyingAtlantean,
+        };
     }
 
     private bool IsEnemyInOrAboveWater(TREntity entity, TR1Level level, FDControl floorData)
@@ -997,24 +984,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 && FDUtilities.GetEntityTriggers(floorData, i).Count > 0)
             {
                 TREntity resultantEnemy = new();
-                switch (entity.CodeBits)
-                {
-                    case 1:
-                        resultantEnemy.TypeID = (short)TREntities.ShootingAtlantean_N;
-                        break;
-                    case 2:
-                        resultantEnemy.TypeID = (short)TREntities.Centaur;
-                        break;
-                    case 4:
-                        resultantEnemy.TypeID = (short)TREntities.Adam;
-                        break;
-                    case 8:
-                        resultantEnemy.TypeID = (short)TREntities.NonShootingAtlantean_N;
-                        break;
-                    default:
-                        resultantEnemy.TypeID = (short)TREntities.FlyingAtlantean;
-                        break;
-                }
+                resultantEnemy.TypeID = (short)CodeBitsToAtlantean(entity.CodeBits);
 
                 // Only include it if the model is present i.e. it's not an empty egg.
                 if (Array.Find(level.Data.Models, m => m.ID == resultantEnemy.TypeID) != null)

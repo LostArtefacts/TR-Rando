@@ -73,16 +73,14 @@ public class G11N
             return null;
         }
 
-        switch (game)
+        string data = File.ReadAllText(path, Encoding.UTF8);
+        return game switch
         {
-            case G11NGame.TR1:
-                return JsonConvert.DeserializeObject<TR1GameStrings>(File.ReadAllText(path, Encoding.UTF8));
-            case G11NGame.TR2:
-            case G11NGame.TR3:
-                return JsonConvert.DeserializeObject<TR23GameStrings>(File.ReadAllText(path, Encoding.UTF8));
-            default:
-                return null;
-        }
+            G11NGame.TR1 => JsonConvert.DeserializeObject<TR1GameStrings>(data),
+            G11NGame.TR2
+            or G11NGame.TR3 => JsonConvert.DeserializeObject<TR23GameStrings>(data),
+            _ => null,
+        };
     }
 }
 

@@ -740,23 +740,16 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private TR2Entities GetWeaponAmmo(TR2Entities weapon)
     {
-        switch (weapon)
+        return weapon switch
         {
-            case TR2Entities.Shotgun_S_P:
-                return TR2Entities.ShotgunAmmo_S_P;
-            case TR2Entities.Automags_S_P:
-                return TR2Entities.AutoAmmo_S_P;
-            case TR2Entities.Uzi_S_P:
-                return TR2Entities.UziAmmo_S_P;
-            case TR2Entities.Harpoon_S_P:
-                return TR2Entities.HarpoonAmmo_S_P;
-            case TR2Entities.M16_S_P:
-                return TR2Entities.M16Ammo_S_P;
-            case TR2Entities.GrenadeLauncher_S_P:
-                return TR2Entities.Grenades_S_P;
-            default:
-                return TR2Entities.PistolAmmo_S_P;
-        }
+            TR2Entities.Shotgun_S_P => TR2Entities.ShotgunAmmo_S_P,
+            TR2Entities.Automags_S_P => TR2Entities.AutoAmmo_S_P,
+            TR2Entities.Uzi_S_P => TR2Entities.UziAmmo_S_P,
+            TR2Entities.Harpoon_S_P => TR2Entities.HarpoonAmmo_S_P,
+            TR2Entities.M16_S_P => TR2Entities.M16Ammo_S_P,
+            TR2Entities.GrenadeLauncher_S_P => TR2Entities.Grenades_S_P,
+            _ => TR2Entities.PistolAmmo_S_P,
+        };
     }
 
     private void AddUnarmedLevelAmmo(TR2Entities ammoType, uint count)

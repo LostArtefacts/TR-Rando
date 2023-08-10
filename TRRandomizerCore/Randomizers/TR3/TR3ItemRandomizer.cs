@@ -383,50 +383,31 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     private int GetLevelKeyItemBaseAlias(string name)
     {
-        switch (name)
+        TR3Entities alias = name switch
         {
-            case TR3LevelNames.JUNGLE:
-                return (int)TR3Entities.JungleKeyItemBase;
-            case TR3LevelNames.RUINS:
-                return (int)TR3Entities.TempleKeyItemBase;
-            case TR3LevelNames.GANGES:
-                return (int)TR3Entities.GangesKeyItemBase;
-            case TR3LevelNames.CAVES:
-                return (int)TR3Entities.KaliyaKeyItemBase;
-            case TR3LevelNames.NEVADA:
-                return (int)TR3Entities.NevadaKeyItemBase;
-            case TR3LevelNames.HSC:
-                return (int)TR3Entities.HSCKeyItemBase;
-            case TR3LevelNames.AREA51:
-                return (int)TR3Entities.Area51KeyItemBase;
-            case TR3LevelNames.COASTAL:
-                return (int)TR3Entities.CoastalKeyItemBase;
-            case TR3LevelNames.CRASH:
-                return (int)TR3Entities.CrashKeyItemBase;
-            case TR3LevelNames.MADUBU:
-                return (int)TR3Entities.MadubuKeyItemBase;
-            case TR3LevelNames.PUNA:
-                return (int)TR3Entities.PunaKeyItemBase;
-            case TR3LevelNames.THAMES:
-                return (int)TR3Entities.ThamesKeyItemBase;
-            case TR3LevelNames.ALDWYCH:
-                return (int)TR3Entities.AldwychKeyItemBase;
-            case TR3LevelNames.LUDS:
-                return (int)TR3Entities.LudsKeyItemBase;
-            case TR3LevelNames.CITY:
-                return (int)TR3Entities.CityKeyItemBase;
-            case TR3LevelNames.ANTARC:
-                return (int)TR3Entities.AntarcticaKeyItemBase;
-            case TR3LevelNames.RXTECH:
-                return (int)TR3Entities.RXKeyItemBase;
-            case TR3LevelNames.TINNOS:
-                return (int)TR3Entities.TinnosKeyItemBase;
-            case TR3LevelNames.WILLIE:
-                return (int)TR3Entities.CavernKeyItemBase;
-            case TR3LevelNames.HALLOWS:
-                return (int)TR3Entities.HallowsKeyItemBase;
-        }
+            TR3LevelNames.JUNGLE => TR3Entities.JungleKeyItemBase,
+            TR3LevelNames.RUINS => TR3Entities.TempleKeyItemBase,
+            TR3LevelNames.GANGES => TR3Entities.GangesKeyItemBase,
+            TR3LevelNames.CAVES => TR3Entities.KaliyaKeyItemBase,
+            TR3LevelNames.NEVADA => TR3Entities.NevadaKeyItemBase,
+            TR3LevelNames.HSC => TR3Entities.HSCKeyItemBase,
+            TR3LevelNames.AREA51 => TR3Entities.Area51KeyItemBase,
+            TR3LevelNames.COASTAL => TR3Entities.CoastalKeyItemBase,
+            TR3LevelNames.CRASH => TR3Entities.CrashKeyItemBase,
+            TR3LevelNames.MADUBU => TR3Entities.MadubuKeyItemBase,
+            TR3LevelNames.PUNA => TR3Entities.PunaKeyItemBase,
+            TR3LevelNames.THAMES => TR3Entities.ThamesKeyItemBase,
+            TR3LevelNames.ALDWYCH => TR3Entities.AldwychKeyItemBase,
+            TR3LevelNames.LUDS => TR3Entities.LudsKeyItemBase,
+            TR3LevelNames.CITY => TR3Entities.CityKeyItemBase,
+            TR3LevelNames.ANTARC => TR3Entities.AntarcticaKeyItemBase,
+            TR3LevelNames.RXTECH => TR3Entities.RXKeyItemBase,
+            TR3LevelNames.TINNOS => TR3Entities.TinnosKeyItemBase,
+            TR3LevelNames.WILLIE => TR3Entities.CavernKeyItemBase,
+            TR3LevelNames.HALLOWS => TR3Entities.HallowsKeyItemBase,
+            _ => default,
+        };
 
-        return 0;
+        return (int)alias;
     }
 }
