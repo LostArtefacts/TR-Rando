@@ -4,23 +4,23 @@ namespace TRRandomizerCore.Helpers;
 
 public class Sphere
 {
-    public Vector3 centre { get; set; }
+    public Vector3 Centre { get; set; }
 
-    public float radius { get; set; }
+    public float Radius { get; set; }
 
     public Sphere(Vector3 centre, float radius)
     {
-        this.centre = centre;
-        this.radius = radius;
+        Centre = centre;
+        Radius = radius;
     }
 
     public bool IsColliding(Sphere other)
     {
-        Vector3 distance = this.centre - other.centre;
+        Vector3 distance = Centre - other.Centre;
 
         float length = (float)Math.Sqrt((distance.X * distance.X) + (distance.Y * distance.Y) + (distance.Z * distance.Z));
 
-        float sumRadius = this.radius + other.radius;
+        float sumRadius = Radius + other.Radius;
 
         return (length < sumRadius);
     }
