@@ -41,7 +41,7 @@ public class TR1GameStrings : IGameStrings
                 case '£':
                 case '$':
                 case '%':
-                    sb.Append("#");
+                    sb.Append('#');
                     break;
                 case '~':
                 case '|':
@@ -62,7 +62,7 @@ public class TR1GameStrings : IGameStrings
                 case 'è':
                 case 'ò':
                 case 'ù':
-                    sb.Append("$").Append(n);
+                    sb.Append('$').Append(n);
                     break;
                 case 'á':
                 case 'ć':
@@ -73,24 +73,24 @@ public class TR1GameStrings : IGameStrings
                 case 'ú':
                 case 'ý':
                 case 'ź':
-                    sb.Append(")").Append(n);
+                    sb.Append(')').Append(n);
                     break;
                 case 'â':
                 case 'ĉ':
                 case 'ê':
                 case 'ô':
                 case 'û':
-                    sb.Append("(").Append(n);
+                    sb.Append('(').Append(n);
                     break;
                 case 'ä':
                 case 'ë':
                 case 'ö':
                 case 'ü':
                 case 'ÿ':
-                    sb.Append("~").Append(n);
+                    sb.Append('~').Append(n);
                     break;
                 case 'ł':
-                    sb.Append("l");
+                    sb.Append('l');
                     break;
                 default:
                     sb.Append(n);

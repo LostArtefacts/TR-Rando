@@ -59,7 +59,7 @@ public class TR23GameStrings : IGameStrings
                 case 'Ì':
                 case 'Ò':
                 case 'Ù':
-                    sb.Append("$").Append(n);
+                    sb.Append('$').Append(n);
                     break;
                 case 'Á':
                 case 'Ć':
@@ -71,14 +71,14 @@ public class TR23GameStrings : IGameStrings
                 case 'Ú':
                 case 'Ý':
                 case 'Ź':
-                    sb.Append(")").Append(n);
+                    sb.Append(')').Append(n);
                     break;
                 case 'Â':
                 case 'Ê':
                 case 'Î':
                 case 'Ô':
                 case 'Û':
-                    sb.Append("(").Append(n);
+                    sb.Append('(').Append(n);
                     break;
                 case 'Ä':
                 case 'Ë':
@@ -86,7 +86,7 @@ public class TR23GameStrings : IGameStrings
                 case 'Ö':
                 case 'Ü':
                 case 'Ÿ':
-                    sb.Append("~").Append(n);
+                    sb.Append('~').Append(n);
                     break;
                 default:
                     sb.Append(n);
