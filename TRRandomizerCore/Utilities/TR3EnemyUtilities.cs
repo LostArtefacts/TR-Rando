@@ -186,15 +186,6 @@ public static class TR3EnemyUtilities
         return false;
     }
 
-    public static Dictionary<TR3Entities, TR3Entities> GetAliasPriority(string lvlName, List<TR3Entities> importEntities)
-    {
-        // If the priorities map doesn't contain an entity we are trying to import as a key, TRModelTransporter
-        // will assume it always has priority (e.g. DogNevada replacing DogLondon).
-        Dictionary<TR3Entities, TR3Entities> priorities = new();
-
-        return priorities;
-    }
-
     public static void SetEntityTriggers(TR3Level level, TR2Entity entity)
     {
         if (_oneShotEnemies.Contains((TR3Entities)entity.TypeID))

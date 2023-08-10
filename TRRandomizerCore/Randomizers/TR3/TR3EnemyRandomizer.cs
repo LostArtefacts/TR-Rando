@@ -737,7 +737,6 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                         importer.TextureRemapPath = _outer.GetResourcePath(remapPath);
                     }
 
-                    importer.Data.AliasPriority = TR3EnemyUtilities.GetAliasPriority(level.Name, enemies.EntitiesToImport);
                     importer.Import();
 
                     // Remove stale tiger model if present to avoid friendly monkeys causing vehicle crashes.
