@@ -349,9 +349,9 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
                 }
 
                 // Move the base of Lara's bun up so the ponytail looks more natural
-                headMesh.Vertices[headMesh.Vertices.Length - 1].Y = 36;
-                headMesh.Vertices[headMesh.Vertices.Length - 2].Y = 38;
-                headMesh.Vertices[headMesh.Vertices.Length - 3].Y = 38;
+                headMesh.Vertices[^1].Y = 36;
+                headMesh.Vertices[^2].Y = 38;
+                headMesh.Vertices[^3].Y = 38;
             }
 
             if (CutsceneSupportsBraid(level))

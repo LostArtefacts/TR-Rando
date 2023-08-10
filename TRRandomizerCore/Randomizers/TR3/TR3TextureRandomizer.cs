@@ -113,14 +113,14 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
         bool beginProcessing = true;
         foreach (TR3ScriptedLevel lvl in Levels)
         {
-            if (processors[processors.Count - 1].LevelCount >= levelSplit)
+            if (processors[^1].LevelCount >= levelSplit)
             {
                 // Kick start the last one
-                processors[processors.Count - 1].Start();
+                processors[^1].Start();
                 processors.Add(new TextureProcessor(this));
             }
 
-            processors[processors.Count - 1].AddLevel(LoadCombinedLevel(lvl));
+            processors[^1].AddLevel(LoadCombinedLevel(lvl));
 
             if (!TriggerProgress())
             {

@@ -95,7 +95,7 @@ public class TextureMonitor<E> : ITexturePositionMonitor<E>
                         {
                             PreparedLevelMapping[source] = new List<StaticTextureTarget>();
                         }
-                        PreparedLevelMapping[source].Add(targets[targets.Count - 1]);
+                        PreparedLevelMapping[source].Add(targets[^1]);
                     }
                 }
             }
