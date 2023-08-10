@@ -28,7 +28,7 @@ public class MeshEditor
 
     public void ClearTexturedRectangles()
     {
-        Mesh.TexturedRectangles = new TRFace4[] { };
+        Mesh.TexturedRectangles = Array.Empty<TRFace4>();
         Mesh.NumTexturedRectangles = 0;
     }
 
@@ -50,7 +50,7 @@ public class MeshEditor
 
     public void ClearColouredRectangles()
     {
-        Mesh.ColouredRectangles = new TRFace4[] { };
+        Mesh.ColouredRectangles = Array.Empty<TRFace4>();
         Mesh.NumColouredRectangles = 0;
     }
 
@@ -72,7 +72,7 @@ public class MeshEditor
 
     public void ClearTexturedTriangles()
     {
-        Mesh.TexturedTriangles = new TRFace3[] { };
+        Mesh.TexturedTriangles = Array.Empty<TRFace3>();
         Mesh.NumTexturedTriangles = 0;
     }
 
@@ -94,7 +94,7 @@ public class MeshEditor
 
     public void ClearColouredTriangles()
     {
-        Mesh.ColouredTriangles = new TRFace3[] { };
+        Mesh.ColouredTriangles = Array.Empty<TRFace3>();
         Mesh.NumColouredTriangles = 0;
     }
 
@@ -211,8 +211,8 @@ public class MeshEditor
         clone.NumColouredTriangles = mesh.NumTexturedTriangles;
         clone.NumTexturedRectangles = 0;
         clone.NumTexturedTriangles = 0;
-        clone.TexturedRectangles = new TRFace4[] { };
-        clone.TexturedTriangles = new TRFace3[] { };
+        clone.TexturedRectangles = Array.Empty<TRFace4>();
+        clone.TexturedTriangles = Array.Empty<TRFace3>();
 
         for (int i = 0; i < mesh.NumTexturedRectangles; i++)
         {

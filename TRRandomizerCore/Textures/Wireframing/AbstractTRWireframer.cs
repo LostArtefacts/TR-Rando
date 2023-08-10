@@ -594,7 +594,7 @@ public abstract class AbstractTRWireframer<E, L>
                         rect.Texture = mesh.ColouredTriangles[0].Texture;
                         rects.Add(rect);
                     }
-                    mesh.TexturedRectangles = new TRFace4[] { };
+                    mesh.TexturedRectangles = Array.Empty<TRFace4>();
                     mesh.NumTexturedRectangles = 0;
                     mesh.ColouredRectangles = rects.ToArray();
                     mesh.NumColouredRectangles = (short)rects.Count;
@@ -632,12 +632,12 @@ public abstract class AbstractTRWireframer<E, L>
                         SetFace4Colours(rects, paletteIndex);
                         SetFace3Colours(tris, paletteIndex);
 
-                        mesh.TexturedRectangles = new TRFace4[] { };
+                        mesh.TexturedRectangles = Array.Empty<TRFace4>();
                         mesh.NumTexturedRectangles = 0;
                         mesh.ColouredRectangles = rects.ToArray();
                         mesh.NumColouredRectangles = (short)rects.Count;
 
-                        mesh.TexturedTriangles = new TRFace3[] { };
+                        mesh.TexturedTriangles = Array.Empty<TRFace3>();
                         mesh.NumTexturedTriangles = 0;
                         mesh.ColouredTriangles = tris.ToArray();
                         mesh.NumColouredTriangles = (short)tris.Count;
