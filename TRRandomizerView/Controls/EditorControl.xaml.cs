@@ -427,7 +427,7 @@ public partial class EditorControl : UserControl
 
     public void ConfigureGlobalSeed()
     {
-        GlobalSeedWindow gsw = new(1, _options.MaxSeedValue, _lastGlobalSeed);
+        GlobalSeedWindow gsw = new(1, ControllerOptions.MaxSeedValue, _lastGlobalSeed);
         if (gsw.ShowDialog() ?? false)
         {
             _options.SetGlobalSeed(gsw.Seed);
