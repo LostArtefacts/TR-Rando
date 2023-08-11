@@ -25,20 +25,8 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
     protected override void Read(TRLevelReader reader)
     {
-        _level.NumImages = reader.ReadUInt32();
-        _level.Images8 = new TRTexImage8[_level.NumImages];
-
-        //Initialize the texture arrays
-        for (int i = 0; i < _level.NumImages; i++)
-        {
-            _level.Images8[i] = new TRTexImage8();
-        }
-
-        //For each texture8 there are 256 * 256 bytes (65536) we can just do a straight byte read
-        for (int i = 0; i < _level.NumImages; i++)
-        {
-            _level.Images8[i].Pixels = reader.ReadBytes(256 * 256);
-        }
+        uint numImages = reader.ReadUInt32();
+        _level.Images8 = reader.ReadImage8s(numImages);
 
         //Rooms
         _level.Unused = reader.ReadUInt32();
@@ -362,8 +350,8 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
     protected override void Write(TRLevelWriter writer)
     {
-        writer.Write(_level.NumImages);
-        foreach (TRTexImage8 tex in _level.Images8) { writer.Write(tex.Serialize()); }
+        writer.Write((uint)_level.Images8.Count);
+        writer.Write(_level.Images8);
 
         writer.Write(_level.Unused);
 

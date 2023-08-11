@@ -2,15 +2,7 @@
 
 public class TR1Level : TRLevelBase
 {
-    /// <summary>
-    /// 4 Bytes
-    /// </summary>
-    public uint NumImages { get; set; }
-
-    /// <summary>
-    /// NumImages * 65536 bytes
-    /// </summary>
-    public TRTexImage8[] Images8 { get; set; }
+    public List<TRTexImage8> Images8 { get; set; }
 
     /// <summary>
     /// 4 bytes
