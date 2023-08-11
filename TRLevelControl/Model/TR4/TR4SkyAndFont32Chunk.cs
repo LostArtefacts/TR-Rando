@@ -3,16 +3,9 @@ using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TR4SkyAndFont32Chunk : ISerializableCompact
+public class TR4SkyAndFont32Chunk : TR4Chunk, ISerializableCompact
 {
-    public uint UncompressedSize { get; set; }
-
-    public uint CompressedSize { get; set; }
-
-    public TR4TexImage32[] Textiles { get; set; }
-
-    //Optional - mainly just for testing, this is just to store the raw zlib compressed chunk.
-    public byte[] CompressedChunk { get; set; }
+    public List<TR4TexImage32> Textiles { get; set; }
 
     public byte[] Serialize()
     {
