@@ -97,7 +97,39 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     protected override void Write(TRLevelWriter writer)
     {
-        writer.Write(_level.Serialize());
+        writer.Write((uint)_level.Version.File);
+        writer.Write(_level.NumRoomTextiles);
+        writer.Write(_level.NumObjTextiles);
+        writer.Write(_level.NumBumpTextiles);
+
+        byte[] chunk = _level.Texture32Chunk.Serialize();
+        writer.Write(_level.Texture32Chunk.UncompressedSize);
+        writer.Write(_level.Texture32Chunk.CompressedSize);
+        writer.Write(chunk);
+
+        chunk = _level.Texture16Chunk.Serialize();
+        writer.Write(_level.Texture16Chunk.UncompressedSize);
+        writer.Write(_level.Texture16Chunk.CompressedSize);
+        writer.Write(chunk);
+
+        chunk = _level.SkyAndFont32Chunk.Serialize();
+        writer.Write(_level.SkyAndFont32Chunk.UncompressedSize);
+        writer.Write(_level.SkyAndFont32Chunk.CompressedSize);
+        writer.Write(chunk);
+
+        chunk = _level.LevelDataChunk.Serialize();
+        writer.Write(_level.LevelDataChunk.UncompressedSize);
+        writer.Write(_level.LevelDataChunk.CompressedSize);
+        writer.Write(chunk);
+
+        writer.Write(_level.NumSamples);
+
+        foreach (TR4Sample sample in _level.Samples)
+        {
+            writer.Write(sample.UncompSize);
+            writer.Write(sample.CompSize);
+            writer.Write(sample.CompressedChunk);
+        }
     }
 
     private static void DecompressTexture32Chunk(TR4Level lvl)
