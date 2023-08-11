@@ -302,7 +302,7 @@ public partial class EditorControl : UserControl
             try
             {
                 _showExternalModPrompt = false;
-                TRRandomizerCoord.Instance.ClearCurrentBackup();
+                TRRandomizerCoord.ClearCurrentBackup();
                 _dirty = false;
                 return true;
             }

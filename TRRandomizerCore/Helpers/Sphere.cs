@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Numerics;
+﻿using System.Numerics;
 
-namespace TRRandomizerCore.Helpers
+namespace TRRandomizerCore.Helpers;
+
+public class Sphere
 {
-    public class Sphere
+    public Vector3 Centre { get; set; }
+
+    public float Radius { get; set; }
+
+    public Sphere(Vector3 centre, float radius)
     {
-        public Vector3 centre { get; set; }
+        Centre = centre;
+        Radius = radius;
+    }
 
-        public float radius { get; set; }
+    public bool IsColliding(Sphere other)
+    {
+        Vector3 distance = Centre - other.Centre;
 
-        public Sphere(Vector3 centre, float radius)
-        {
-            this.centre = centre;
-            this.radius = radius;
-        }
+        float length = (float)Math.Sqrt((distance.X * distance.X) + (distance.Y * distance.Y) + (distance.Z * distance.Z));
 
-        public bool IsColliding(Sphere other)
-        {
-            Vector3 distance = this.centre - other.centre;
+        float sumRadius = Radius + other.Radius;
 
-            float length = (float)Math.Sqrt((distance.X * distance.X) + (distance.Y * distance.Y) + (distance.Z * distance.Z));
-
-            float sumRadius = this.radius + other.radius;
-
-            return (length < sumRadius);
-        }
+        return (length < sumRadius);
     }
 }

@@ -1,13 +1,12 @@
-﻿namespace TRRandomizerCore.Helpers
+﻿namespace TRRandomizerCore.Helpers;
+
+public enum TRRandomizationCategory
 {
-    public enum TRRandomizationCategory
-    {
-        None,
-        Script,
-        PreRandomize,
-        Randomize,
-        Commit,
-        Cancel,
-        Warning
-    }
+    None,
+    Script,
+    PreRandomize,
+    Randomize,
+    Commit,
+    Cancel,
+    Warning
 }

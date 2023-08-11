@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using TRLevelControl.Model;
+﻿using TRLevelControl.Model;
 
-namespace TRRandomizerCore.Meshes
+namespace TRRandomizerCore.Meshes;
+
+public class MeshCopyData
 {
-    public class MeshCopyData
-    {
-        public TRMesh BaseMesh { get; set; }
-        public TRMesh NewMesh { get; set; }
-        public IEnumerable<int> TextureFaceCopies { get; set; }
-        public IEnumerable<int> ColourFaceCopies { get; set; }
-    }
+    public TRMesh BaseMesh { get; set; }
+    public TRMesh NewMesh { get; set; }
+    public IEnumerable<int> TextureFaceCopies { get; set; }
+    public IEnumerable<int> ColourFaceCopies { get; set; }
 }

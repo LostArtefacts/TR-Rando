@@ -1,11 +1,10 @@
-﻿namespace TRRandomizerCore.Levels
+﻿namespace TRRandomizerCore.Levels;
+
+public enum TR3Adventure
 {
-    public enum TR3Adventure
-    {
-        India = 1,
-        SouthPacific = 5,
-        London = 9,
-        Nevada = 13,
-        Antarctica = 16
-    }
+    India = 1,
+    SouthPacific = 5,
+    London = 9,
+    Nevada = 13,
+    Antarctica = 16
 }

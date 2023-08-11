@@ -1,57 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using TRGE.Core;
+﻿using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Secrets;
 
-namespace TRRandomizerCore.Randomizers
+namespace TRRandomizerCore.Randomizers;
+
+public class TR1SecretRewardRandomizer : BaseTR1Randomizer
 {
-    public class TR1SecretRewardRandomizer : BaseTR1Randomizer
+    public override void Randomize(int seed)
     {
-        public override void Randomize(int seed)
+        _generator = new Random(seed);
+
+        foreach (TR1ScriptedLevel lvl in Levels)
         {
-            _generator = new Random(seed);
+            LoadLevelInstance(lvl);
 
-            foreach (TR1ScriptedLevel lvl in Levels)
+            RandomizeRewards(_levelInstance);
+
+            SaveLevelInstance();
+
+            if (!TriggerProgress())
             {
-                LoadLevelInstance(lvl);
-
-                RandomizeRewards(_levelInstance);
-
-                SaveLevelInstance();
-
-                if (!TriggerProgress())
-                {
-                    break;
-                }
+                break;
             }
         }
+    }
 
-        private void RandomizeRewards(TR1CombinedLevel level)
+    private void RandomizeRewards(TR1CombinedLevel level)
+    {
+        if (level.IsAssault)
         {
-            if (level.IsAssault)
+            return;
+        }
+
+        TRSecretMapping<TREntity> secretMapping = TRSecretMapping<TREntity>.Get(GetResourcePath(@"TR1\SecretMapping\" + level.Name + "-SecretMapping.json"));
+
+        List<TREntities> stdItemTypes = TR1EntityUtilities.GetStandardPickupTypes();
+        stdItemTypes.Remove(TREntities.PistolAmmo_S_P); // Sprite/model not available
+        stdItemTypes.Remove(TREntities.Pistols_S_P); // A bit cruel as a reward?
+
+        for (int i = 0; i < level.Data.NumEntities; i++)
+        {
+            if (!secretMapping.RewardEntities.Contains(i))
             {
-                return;
+                continue;
             }
 
-            TRSecretMapping<TREntity> secretMapping = TRSecretMapping<TREntity>.Get(GetResourcePath(@"TR1\SecretMapping\" + level.Name + "-SecretMapping.json"));
-
-            List<TREntities> stdItemTypes = TR1EntityUtilities.GetStandardPickupTypes();
-            stdItemTypes.Remove(TREntities.PistolAmmo_S_P); // Sprite/model not available
-            stdItemTypes.Remove(TREntities.Pistols_S_P); // A bit cruel as a reward?
-
-            for (int i = 0; i < level.Data.NumEntities; i++)
-            {
-                if (!secretMapping.RewardEntities.Contains(i))
-                {
-                    continue;
-                }
-
-                level.Data.Entities[i].TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
-            }
+            level.Data.Entities[i].TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
         }
     }
 }

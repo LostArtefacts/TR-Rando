@@ -1,13 +1,12 @@
-﻿namespace TRRandomizerCore.Helpers
+﻿namespace TRRandomizerCore.Helpers;
+
+public enum T1MInjectionType
 {
-    public enum T1MInjectionType
-    {
-        General,
-        Braid,
-        TextureFix,
-        PSUziSFX,
-        FDFix,
-        LaraAnims,
-        LaraJumps,
-    }
+    General,
+    Braid,
+    TextureFix,
+    PSUziSFX,
+    FDFix,
+    LaraAnims,
+    LaraJumps,
 }

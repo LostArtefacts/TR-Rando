@@ -1,10 +1,9 @@
 ﻿using System.Drawing;
 
-namespace TRRandomizerCore.Textures
+namespace TRRandomizerCore.Textures;
+
+public class WireframeClip
 {
-    public class WireframeClip
-    {
-        public Rectangle Clip { get; set; }
-        public ushort[] Textures { get; set; }
-    }
+    public Rectangle Clip { get; set; }
+    public ushort[] Textures { get; set; }
 }

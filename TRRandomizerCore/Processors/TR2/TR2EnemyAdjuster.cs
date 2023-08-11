@@ -1,52 +1,50 @@
-﻿using System.Collections.Generic;
-using TRFDControl;
+﻿using TRFDControl;
 using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model.Enums;
 
-namespace TRRandomizerCore.Processors
+namespace TRRandomizerCore.Processors;
+
+public class TR2EnemyAdjuster : TR2LevelProcessor
 {
-    public class TR2EnemyAdjuster : TR2LevelProcessor
+    private static readonly Dictionary<string, List<int>> _enemyTargets = new()
     {
-        private static readonly Dictionary<string, List<int>> _enemyTargets = new Dictionary<string, List<int>>
-        {
-            [TR2LevelNames.OPERA] = new List<int> { 127 },
-            [TR2LevelNames.MONASTERY] = new List<int> { 38, 39, 118 }
-        };
+        [TR2LevelNames.OPERA] = new List<int> { 127 },
+        [TR2LevelNames.MONASTERY] = new List<int> { 38, 39, 118 }
+    };
 
-        public void AdjustEnemies()
+    public void AdjustEnemies()
+    {
+        foreach (TR2ScriptedLevel lvl in Levels)
         {
-            foreach (TR2ScriptedLevel lvl in Levels)
+            if (_enemyTargets.ContainsKey(lvl.LevelFileBaseName.ToUpper()))
             {
-                if (_enemyTargets.ContainsKey(lvl.LevelFileBaseName.ToUpper()))
-                {
-                    LoadLevelInstance(lvl);
+                LoadLevelInstance(lvl);
 
-                    AdjustInstanceEnemies();
+                AdjustInstanceEnemies();
 
-                    SaveLevelInstance();
-                }
-                
-                if (!TriggerProgress())
-                {
-                    break;
-                }
+                SaveLevelInstance();
+            }
+            
+            if (!TriggerProgress())
+            {
+                break;
             }
         }
+    }
 
-        private void AdjustInstanceEnemies()
+    private void AdjustInstanceEnemies()
+    {
+        FDControl floorData = new();
+        floorData.ParseFromLevel(_levelInstance.Data);
+
+        foreach (int enemyIndex in _enemyTargets[_levelInstance.Name])
         {
-            FDControl floorData = new FDControl();
-            floorData.ParseFromLevel(_levelInstance.Data);
-
-            foreach (int enemyIndex in _enemyTargets[_levelInstance.Name])
-            {
-                _levelInstance.Data.Entities[enemyIndex].TypeID = (short)TR2Entities.CameraTarget_N;
-                FDUtilities.RemoveEntityTriggers(_levelInstance.Data, enemyIndex, floorData);
-            }
-
-            floorData.WriteToLevel(_levelInstance.Data);
+            _levelInstance.Data.Entities[enemyIndex].TypeID = (short)TR2Entities.CameraTarget_N;
+            FDUtilities.RemoveEntityTriggers(_levelInstance.Data, enemyIndex, floorData);
         }
+
+        floorData.WriteToLevel(_levelInstance.Data);
     }
 }

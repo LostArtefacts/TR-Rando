@@ -7,7 +7,7 @@ public class RecentFolderList : List<RecentFolder>
 {
     public RecentFolderList(IRecentFolderOpener folderOpener)
     {
-        foreach (string folder in TRRandomizerCoord.Instance.History)
+        foreach (string folder in TRRandomizerCoord.History)
         {
             Add(new RecentFolder(folderOpener)
             {

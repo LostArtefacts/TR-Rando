@@ -1,7 +1,6 @@
-﻿namespace TRRandomizerCore.Helpers
+﻿namespace TRRandomizerCore.Helpers;
+
+public enum ItemDifficulty
 {
-    public enum ItemDifficulty
-    {
-        Default, OneLimit
-    }
+    Default, OneLimit
 }

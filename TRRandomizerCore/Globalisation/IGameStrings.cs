@@ -1,7 +1,6 @@
-﻿namespace TRRandomizerCore.Globalisation
+﻿namespace TRRandomizerCore.Globalisation;
+
+public interface IGameStrings
 {
-    public interface IGameStrings
-    {
-        string Encode(string text);
-    }
+    string Encode(string text);
 }

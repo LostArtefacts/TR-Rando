@@ -1,94 +1,90 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using TRGE.Core;
+﻿using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 
-namespace TRRandomizerCore.Randomizers
+namespace TRRandomizerCore.Randomizers;
+
+public class TR3WeatherRandomizer : BaseTR3Randomizer
 {
-    public class TR3WeatherRandomizer : BaseTR3Randomizer
+    private List<TR3ScriptedLevel> _rainLevels, _snowLevels, _coldLevels;
+
+    public override void Randomize(int seed)
     {
-        private List<TR3ScriptedLevel> _rainLevels, _snowLevels, _coldLevels;
+        _generator = new Random(seed);
+        ChooseWeatherLevels();
 
-        public override void Randomize(int seed)
+        foreach (TR3ScriptedLevel lvl in Levels)
         {
-            _generator = new Random(seed);
-            ChooseWeatherLevels();
+            LoadLevelInstance(lvl);
 
-            foreach (TR3ScriptedLevel lvl in Levels)
+            SetWeatherFlags(_levelInstance.Script);
+            SetWeatherDependencies(_levelInstance);
+
+            SaveLevelInstance();
+
+            if (!TriggerProgress())
             {
-                LoadLevelInstance(lvl);
-
-                SetWeatherFlags(_levelInstance.Script);
-                SetWeatherDependencies(_levelInstance);
-
-                SaveLevelInstance();
-
-                if (!TriggerProgress())
-                {
-                    break;
-                }
+                break;
             }
         }
+    }
 
-        private void ChooseWeatherLevels()
+    private void ChooseWeatherLevels()
+    {
+        _rainLevels = ChooseWeatherLevels(Settings.RainLevelCount, Settings.RainyAssaultCourse);
+        _snowLevels = ChooseWeatherLevels(Settings.SnowLevelCount, Settings.SnowyAssaultCourse);
+        _coldLevels = ChooseWeatherLevels(Settings.ColdLevelCount, Settings.ColdAssaultCourse);
+    }
+
+    private List<TR3ScriptedLevel> ChooseWeatherLevels(uint levelCount, bool includeAssault)
+    {
+        TR3ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR3LevelNames.ASSAULT));
+        List<TR3ScriptedLevel> levels = Levels.RandomSelection(_generator, (int)levelCount, exclusions: new HashSet<TR3ScriptedLevel>
         {
-            _rainLevels = ChooseWeatherLevels(Settings.RainLevelCount, Settings.RainyAssaultCourse);
-            _snowLevels = ChooseWeatherLevels(Settings.SnowLevelCount, Settings.SnowyAssaultCourse);
-            _coldLevels = ChooseWeatherLevels(Settings.ColdLevelCount, Settings.ColdAssaultCourse);
+            assaultCourse
+        });
+
+        if (includeAssault)
+        {
+            levels.Add(assaultCourse);
         }
 
-        private List<TR3ScriptedLevel> ChooseWeatherLevels(uint levelCount, bool includeAssault)
+        return levels;
+    }
+
+    private void SetWeatherFlags(TR3ScriptedLevel level)
+    {
+        level.HasRain = _rainLevels.Contains(level);
+        level.HasSnow = _snowLevels.Contains(level);
+        level.HasColdWater = _coldLevels.Contains(level);
+
+        if (level.HasCutScene)
         {
-            TR3ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR3LevelNames.ASSAULT));
-            List<TR3ScriptedLevel> levels = Levels.RandomSelection(_generator, (int)levelCount, exclusions: new HashSet<TR3ScriptedLevel>
-            {
-                assaultCourse
-            });
-
-            if (includeAssault)
-            {
-                levels.Add(assaultCourse);
-            }
-
-            return levels;
+            TR3ScriptedLevel cutscene = level.CutSceneLevel as TR3ScriptedLevel;
+            cutscene.HasRain = level.HasRain;
+            cutscene.HasSnow = level.HasSnow;
+            cutscene.HasColdWater = level.HasColdWater;
         }
+    }
 
-        private void SetWeatherFlags(TR3ScriptedLevel level)
+    private static void SetWeatherDependencies(TR3CombinedLevel level)
+    {
+        if (level.Script.HasRain || level.Script.HasSnow)
         {
-            level.HasRain = _rainLevels.Contains(level);
-            level.HasSnow = _snowLevels.Contains(level);
-            level.HasColdWater = _coldLevels.Contains(level);
-
+            SetWeatherRooms(level.Data.Rooms);
             if (level.HasCutScene)
             {
-                TR3ScriptedLevel cutscene = level.CutSceneLevel as TR3ScriptedLevel;
-                cutscene.HasRain = level.HasRain;
-                cutscene.HasSnow = level.HasSnow;
-                cutscene.HasColdWater = level.HasColdWater;
+                SetWeatherRooms(level.CutSceneLevel.Data.Rooms);
             }
         }
+    }
 
-        private void SetWeatherDependencies(TR3CombinedLevel level)
-        {
-            if (level.Script.HasRain || level.Script.HasSnow)
-            {
-                SetWeatherRooms(level.Data.Rooms);
-                if (level.HasCutScene)
-                {
-                    SetWeatherRooms(level.CutSceneLevel.Data.Rooms);
-                }
-            }
-        }
-
-        private void SetWeatherRooms(TR3Room[] rooms)
-        {
-            rooms.Where(r => r.IsSkyboxVisible)
-                .ToList()
-                .ForEach(r => r.IsWindy = true);
-        }
+    private static void SetWeatherRooms(TR3Room[] rooms)
+    {
+        rooms.Where(r => r.IsSkyboxVisible)
+            .ToList()
+            .ForEach(r => r.IsWindy = true);
     }
 }

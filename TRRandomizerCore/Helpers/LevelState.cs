@@ -1,9 +1,8 @@
-﻿namespace TRRandomizerCore.Helpers
+﻿namespace TRRandomizerCore.Helpers;
+
+public enum LevelState
 {
-    public enum LevelState
-    {
-        Any,
-        Mirrored,
-        NotMirrored
-    }
+    Any,
+    Mirrored,
+    NotMirrored
 }

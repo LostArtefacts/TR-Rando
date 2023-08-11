@@ -1,10 +1,9 @@
-﻿namespace TRRandomizerCore.SFX
+﻿namespace TRRandomizerCore.SFX;
+
+public enum TRSFXCreatureCategory
 {
-    public enum TRSFXCreatureCategory
-    {
-        None,
-        Lara,
-        Human,
-        Animal
-    }
+    None,
+    Lara,
+    Human,
+    Animal
 }

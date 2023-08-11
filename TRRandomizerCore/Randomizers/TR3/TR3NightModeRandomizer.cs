@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using TRGE.Core;
+﻿using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
@@ -9,73 +6,72 @@ using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
 
-namespace TRRandomizerCore.Randomizers
+namespace TRRandomizerCore.Randomizers;
+
+public class TR3NightModeRandomizer : BaseTR3Randomizer
 {
-    public class TR3NightModeRandomizer : BaseTR3Randomizer
+    public const uint DarknessRange = 10; // 0 = Dusk, 10 = Night
+
+    private List<TR3ScriptedLevel> _nightLevels;
+
+    internal TR3TextureMonitorBroker TextureMonitor { get; set; }
+
+    public override void Randomize(int seed)
     {
-        public const uint DarknessRange = 10; // 0 = Dusk, 10 = Night
+        _generator = new Random(seed);
 
-        private List<TR3ScriptedLevel> _nightLevels;
+        Settings.NightModeDarkness = Math.Min(Settings.NightModeDarkness, DarknessRange);
 
-        internal TR3TextureMonitorBroker TextureMonitor { get; set; }
+        ChooseNightLevels();
 
-        public override void Randomize(int seed)
+        foreach (TR3ScriptedLevel lvl in Levels)
         {
-            _generator = new Random(seed);
+            LoadLevelInstance(lvl);
 
-            Settings.NightModeDarkness = Math.Min(Settings.NightModeDarkness, DarknessRange);
-
-            ChooseNightLevels();
-
-            foreach (TR3ScriptedLevel lvl in Levels)
+            if (_nightLevels.Contains(lvl))
             {
-                LoadLevelInstance(lvl);
+                SetNightMode(_levelInstance);
+                SaveLevelInstance();
+            }
 
-                if (_nightLevels.Contains(lvl))
-                {
-                    SetNightMode(_levelInstance);
-                    SaveLevelInstance();
-                }
-
-                if (!TriggerProgress())
-                {
-                    break;
-                }
+            if (!TriggerProgress())
+            {
+                break;
             }
         }
+    }
 
-        private void ChooseNightLevels()
+    private void ChooseNightLevels()
+    {
+        TR3ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR3LevelNames.ASSAULT));
+        ISet<TR3ScriptedLevel> exlusions = new HashSet<TR3ScriptedLevel> { assaultCourse };
+
+        _nightLevels = Levels.RandomSelection(_generator, (int)Settings.NightModeCount, exclusions: exlusions);
+        if (Settings.NightModeAssaultCourse)
         {
-            TR3ScriptedLevel assaultCourse = Levels.Find(l => l.Is(TR3LevelNames.ASSAULT));
-            ISet<TR3ScriptedLevel> exlusions = new HashSet<TR3ScriptedLevel> { assaultCourse };
+            _nightLevels.Add(assaultCourse);
+        }
+    }
 
-            _nightLevels = Levels.RandomSelection(_generator, (int)Settings.NightModeCount, exclusions: exlusions);
-            if (Settings.NightModeAssaultCourse)
-            {
-                _nightLevels.Add(assaultCourse);
-            }
+    private void SetNightMode(TR3CombinedLevel level)
+    {
+        DarkenRooms(level.Data);
+
+        if (level.HasCutScene)
+        {
+            SetNightMode(level.CutSceneLevel);
         }
 
-        private void SetNightMode(TR3CombinedLevel level)
+        // Notify the texture monitor that this level is now in night mode
+        TextureMonitor<TR3Entities> monitor = TextureMonitor.CreateMonitor(level.Name);
+        monitor.UseNightTextures = true;
+    }
+
+    private void DarkenRooms(TR3Level level)
+    {
+        foreach (TR3Room room in level.Rooms)
         {
-            DarkenRooms(level.Data);
-
-            if (level.HasCutScene)
-            {
-                SetNightMode(level.CutSceneLevel);
-            }
-
-            // Notify the texture monitor that this level is now in night mode
-            TextureMonitor<TR3Entities> monitor = TextureMonitor.CreateMonitor(level.Name);
-            monitor.UseNightTextures = true;
-        }
-
-        private void DarkenRooms(TR3Level level)
-        {
-            foreach (TR3Room room in level.Rooms)
-            {
-                room.SetVertexLight((short)(Settings.NightModeDarkness * 10));
-            }
+            room.SetVertexLight((short)(Settings.NightModeDarkness * 10));
         }
     }
 }

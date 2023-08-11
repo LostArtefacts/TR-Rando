@@ -1,9 +1,8 @@
-﻿namespace TRRandomizerCore.Helpers
+﻿namespace TRRandomizerCore.Helpers;
+
+public enum DragonSpawnType
 {
-    public enum DragonSpawnType
-    {
-        Default,
-        Minimum,
-        Maximum
-    }
+    Default,
+    Minimum,
+    Maximum
 }

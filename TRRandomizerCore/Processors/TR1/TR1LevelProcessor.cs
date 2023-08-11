@@ -1,74 +1,72 @@
-﻿using System.IO;
-using TRRandomizerCore.Levels;
+﻿using TRRandomizerCore.Levels;
 using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Model;
 
-namespace TRRandomizerCore.Processors
+namespace TRRandomizerCore.Processors;
+
+public class TR1LevelProcessor : AbstractLevelProcessor<TR1ScriptedLevel, TR1CombinedLevel>
 {
-    public class TR1LevelProcessor : AbstractLevelProcessor<TR1ScriptedLevel, TR1CombinedLevel>
+    protected TR1LevelControl _control;
+
+    public TR1LevelProcessor()
     {
-        protected TR1LevelControl _control;
+        _control = new();
+    }
 
-        public TR1LevelProcessor()
+    protected override TR1CombinedLevel LoadCombinedLevel(TR1ScriptedLevel scriptedLevel)
+    {
+        TR1CombinedLevel level = new()
         {
-            _control = new();
+            Data = LoadLevelData(scriptedLevel.LevelFileBaseName),
+            Script = scriptedLevel,
+            Checksum = GetBackupChecksum(scriptedLevel.LevelFileBaseName)
+        };
+
+        if (scriptedLevel.HasCutScene)
+        {
+            level.CutSceneLevel = LoadCombinedLevel(scriptedLevel.CutSceneLevel as TR1ScriptedLevel);
+            level.CutSceneLevel.ParentLevel = level;
         }
 
-        protected override TR1CombinedLevel LoadCombinedLevel(TR1ScriptedLevel scriptedLevel)
+        return level;
+    }
+
+    public TR1Level LoadLevelData(string name)
+    {
+        lock (_controlLock)
         {
-            TR1CombinedLevel level = new TR1CombinedLevel
-            {
-                Data = LoadLevelData(scriptedLevel.LevelFileBaseName),
-                Script = scriptedLevel,
-                Checksum = GetBackupChecksum(scriptedLevel.LevelFileBaseName)
-            };
+            string fullPath = Path.Combine(BasePath, name);
+            return _control.Read(fullPath);
+        }
+    }
 
-            if (scriptedLevel.HasCutScene)
-            {
-                level.CutSceneLevel = LoadCombinedLevel(scriptedLevel.CutSceneLevel as TR1ScriptedLevel);
-                level.CutSceneLevel.ParentLevel = level;
-            }
+    protected override void ReloadLevelData(TR1CombinedLevel level)
+    {
+        level.Data = LoadLevelData(level.Name);
+        if (level.HasCutScene)
+        {
+            level.CutSceneLevel.Data = LoadLevelData(level.CutSceneLevel.Name);
+        }
+    }
 
-            return level;
+    protected override void SaveLevel(TR1CombinedLevel level)
+    {
+        SaveLevel(level.Data, level.Name);
+        if (level.HasCutScene)
+        {
+            SaveLevel(level.CutSceneLevel.Data, level.CutSceneLevel.Name);
         }
 
-        public TR1Level LoadLevelData(string name)
-        {
-            lock (_controlLock)
-            {
-                string fullPath = Path.Combine(BasePath, name);
-                return _control.Read(fullPath);
-            }
-        }
+        SaveScript();
+    }
 
-        protected override void ReloadLevelData(TR1CombinedLevel level)
+    public void SaveLevel(TR1Level level, string name)
+    {
+        lock (_controlLock)
         {
-            level.Data = LoadLevelData(level.Name);
-            if (level.HasCutScene)
-            {
-                level.CutSceneLevel.Data = LoadLevelData(level.CutSceneLevel.Name);
-            }
-        }
-
-        protected override void SaveLevel(TR1CombinedLevel level)
-        {
-            SaveLevel(level.Data, level.Name);
-            if (level.HasCutScene)
-            {
-                SaveLevel(level.CutSceneLevel.Data, level.CutSceneLevel.Name);
-            }
-
-            SaveScript();
-        }
-
-        public void SaveLevel(TR1Level level, string name)
-        {
-            lock (_controlLock)
-            {
-                string fullPath = Path.Combine(BasePath, name);
-                _control.Write(level, fullPath);
-            }
+            string fullPath = Path.Combine(BasePath, name);
+            _control.Write(level, fullPath);
         }
     }
 }
