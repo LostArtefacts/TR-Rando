@@ -34,7 +34,7 @@ public partial class SeedControl : UserControl
         set
         {
             SetValue(MinValueProperty, value);
-            Value = Value;
+            Value = Clamp(Value);
         }
     }
 
@@ -44,7 +44,7 @@ public partial class SeedControl : UserControl
         set
         {
             SetValue(MaxValueProperty, value);
-            Value = Value;
+            Value = Clamp(Value);
         }
     }
     #endregion
@@ -58,5 +58,10 @@ public partial class SeedControl : UserControl
     private void RandomizeButton_Click(object sender, RoutedEventArgs e)
     {
         Value = new Random().Next(MinValue, MaxValue);
+    }
+
+    private int Clamp(int value)
+    {
+        return Math.Min(MaxValue, Math.Max(MinValue, value));
     }
 }

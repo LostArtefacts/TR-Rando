@@ -26,7 +26,7 @@ public partial class NumericUpDown : UserControl
     public int Value
     {
         get => (int)GetValue(ValueProperty);
-        set => SetValue(ValueProperty, AdjustValue(value));
+        set => SetValue(ValueProperty, Clamp(value));
     }
 
     public int MinValue
@@ -35,7 +35,7 @@ public partial class NumericUpDown : UserControl
         set
         {
             SetValue(MinValueProperty, value);
-            Value = Value;
+            Value = Clamp(Value);
         }
     }
 
@@ -45,7 +45,7 @@ public partial class NumericUpDown : UserControl
         set
         {
             SetValue(MaxValueProperty, value);
-            Value = Value;
+            Value = Clamp(Value);
         }
     }
     #endregion
@@ -118,7 +118,7 @@ public partial class NumericUpDown : UserControl
         return int.TryParse(text, out int _);
     }
 
-    private int AdjustValue(int value)
+    private int Clamp(int value)
     {
         return Math.Min(MaxValue, Math.Max(MinValue, value));
     }

@@ -54,7 +54,7 @@ public partial class DecimalUpDown : UserControl
         set
         {
             SetValue(MinValueProperty, value);
-            Value = Value;
+            Value = Clamp(Value);
         }
     }
 
@@ -64,7 +64,7 @@ public partial class DecimalUpDown : UserControl
         set
         {
             SetValue(MaxValueProperty, value);
-            Value = Value;
+            Value = Clamp(Value);
         }
     }
 
