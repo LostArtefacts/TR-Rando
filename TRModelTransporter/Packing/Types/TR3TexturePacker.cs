@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
@@ -12,7 +13,7 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Entities, TR3Level>
 {
     private const int _maximumTiles = 32;
 
-    public override uint NumLevelImages => Level.NumImages;
+    public override uint NumLevelImages => (uint)Level.Images8.Count;
 
     public TR3TexturePacker(TR3Level level, ITextureClassifier classifier = null)
         : base(level, _maximumTiles, classifier) { }
@@ -77,18 +78,14 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Entities, TR3Level>
 
     protected override void CreateImageSpace(uint count)
     {
-        List<TRTexImage16> imgs16 = Level.Images16.ToList();
-        List<TRTexImage8> imgs8 = Level.Images8.ToList();
-
         for (int i = 0; i < count; i++)
         {
-            imgs16.Add(new TRTexImage16());
-            imgs8.Add(new TRTexImage8 { Pixels = new byte[256 * 256] });
+            Level.Images16.Add(new());
+            Level.Images8.Add(new()
+            {
+                Pixels = new byte[TRConsts.TPageSize]
+            });
         }
-
-        Level.Images16 = imgs16.ToArray();
-        Level.Images8 = imgs8.ToArray();
-        Level.NumImages += count;
     }
 
     public override Bitmap GetTile(int tileIndex)
