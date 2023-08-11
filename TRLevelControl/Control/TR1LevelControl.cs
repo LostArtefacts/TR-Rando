@@ -23,7 +23,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         return level;
     }
 
-    protected override void Read(BinaryReader reader)
+    protected override void Read(TRLevelReader reader)
     {
         _level.NumImages = reader.ReadUInt32();
         _level.Images8 = new TRTexImage8[_level.NumImages];
@@ -360,7 +360,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         }
     }
 
-    protected override void Write(BinaryWriter writer)
+    protected override void Write(TRLevelWriter writer)
     {
         writer.Write(_level.Serialize());
     }

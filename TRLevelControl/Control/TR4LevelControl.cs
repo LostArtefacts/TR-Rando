@@ -21,7 +21,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         return level;
     }
 
-    protected override void Read(BinaryReader reader)
+    protected override void Read(TRLevelReader reader)
     {            
         //Texture Counts
         _level.NumRoomTextiles = reader.ReadUInt16();
@@ -95,7 +95,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         }
     }
 
-    protected override void Write(BinaryWriter writer)
+    protected override void Write(TRLevelWriter writer)
     {
         writer.Write(_level.Serialize());
     }

@@ -23,7 +23,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         return level;
     }
 
-    protected override void Read(BinaryReader reader)
+    protected override void Read(TRLevelReader reader)
     {
         //Colour palettes and textures
         _level.Palette = PopulateColourPalette(reader.ReadBytes((int)MAX_PALETTE_SIZE * 3));
@@ -375,7 +375,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         }
     }
 
-    protected override void Write(BinaryWriter writer)
+    protected override void Write(TRLevelWriter writer)
     {
         writer.Write(_level.Serialize());
     }
