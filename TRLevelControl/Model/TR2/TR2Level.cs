@@ -11,21 +11,8 @@ public class TR2Level : TRLevelBase
     /// 256 entries * 4 components = 1024 bytes
     /// </summary>
     public TRColour4[] Palette16 { get; set; }
-
-    /// <summary>
-    /// 4 Bytes
-    /// </summary>
-    public uint NumImages { get; set; }
-
-    /// <summary>
-    /// NumImages * 65536 bytes
-    /// </summary>
-    public TRTexImage8[] Images8 { get; set; }
-
-    /// <summary>
-    /// NumImages * 131072 bytes
-    /// </summary>
-    public TRTexImage16[] Images16 { get; set; }
+    public List<TRTexImage8> Images8 { get; set; }
+    public List<TRTexImage16> Images16 { get; set; }
 
     /// <summary>
     /// 4 bytes
