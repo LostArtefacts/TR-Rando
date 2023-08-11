@@ -377,7 +377,7 @@ public class OptionGenerator
 
     private int GetRandomSeed()
     {
-        return GetRandomInt(1, _options.MaxSeedValue);
+        return GetRandomInt(1, ControllerOptions.MaxSeedValue);
     }
 
     private int GetRandomInt(int min, int max)

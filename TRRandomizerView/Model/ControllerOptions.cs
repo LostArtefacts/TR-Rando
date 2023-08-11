@@ -15,7 +15,7 @@ namespace TRRandomizerView.Model;
 
 public class ControllerOptions : INotifyPropertyChanged
 {
-    public int MaxSeedValue => 1000000000;
+    public static readonly int MaxSeedValue = 1000000000;
 
     private readonly OptionGenerator _optionRandomizer;
 

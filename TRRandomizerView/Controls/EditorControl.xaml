@@ -6,6 +6,7 @@
              xmlns:cmds="clr-namespace:TRRandomizerView.Commands"
              xmlns:ctrl="clr-namespace:TRRandomizerView.Controls"
              xmlns:cvt="clr-namespace:TRRandomizerView.Converters"
+             xmlns:model="clr-namespace:TRRandomizerView.Model"
              xmlns:windows="clr-namespace:TRRandomizerView.Windows"
              mc:Ignorable="d"
              Background="#fff"
@@ -45,7 +46,7 @@
             Title="Randomize Playable Levels and Sequencing"
             Text="Change the number of levels in the game and randomize the order in which they are played."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding LevelSequencingSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding PlayableLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="1"
@@ -62,7 +63,7 @@
             Title="Randomize Playable Levels and Sequencing"
             Text="Change the number of levels in the game and randomize the order in which they are played."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding LevelSequencingSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -85,7 +86,7 @@
             Title="Randomize Unarmed Levels"
             Text="Randomize the levels in which Lara loses her weapons at the start. A weapon will be added in unarmed levels for Lara to find."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding UnarmedLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding UnarmedLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="0"
@@ -102,7 +103,7 @@
             Title="Randomize Ammoless Levels"
             Text="Randomize the levels in which Lara loses her ammo."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding AmmolessLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding AmmolessLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="0"
@@ -119,7 +120,7 @@
             Title="Randomize Ammoless Levels"
             Text="Randomize the levels in which Lara loses her ammo, medi-packs and flares at the start."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding AmmolessLevelsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding AmmolessLevelCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="0"
@@ -136,7 +137,7 @@
             Title="Randomize Lara's Health"
             Text="Randomize Lara's starting health and medi-packs."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding HealthSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -161,7 +162,7 @@
             Title="Randomize Sunsets"
             Text="Randomize the levels that have sunsets. The lighting will gradually fade over 20 minutes.&#x0a;&#x0a;Default: 1"
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding SunsetsSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomInt="{Binding SunsetCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             CustomIntMinValue="0"
@@ -178,7 +179,7 @@
             Title="Randomize Weather"
             Text="Randomize the weather and conditions in each level."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding WeatherSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -202,7 +203,7 @@
             Title="Randomize Night Mode"
             Text="Randomize the levels Lara visits at night."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding NightModeSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -226,7 +227,7 @@
             Title="Randomize Secrets"
             Text="Randomize secret locations. You should expect to find Stone, then Jade, then Gold."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -252,7 +253,7 @@
             Title="Randomize Secrets"
             Text="Randomize secret locations. Artefacts will be added as pickups and reward rooms created for collecting all secrets."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding SecretSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -277,7 +278,7 @@
             Title="Randomize Items"
             Text="Randomize the items in each level."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding ItemSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -302,7 +303,7 @@
             Title="Randomize Enemies"
             Text="Randomize the types of enemies you encounter in each level."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding EnemySeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -328,7 +329,7 @@
             Title="Randomize Textures"
             Text="Randomly apply texture packs to each level."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding TextureSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -352,7 +353,7 @@
             Title="Randomize Starting Position"
             Text="Randomize the position where Lara starts each level."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding StartPositionSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             BoolItemsSource="{Binding StartBoolItemControls}"/>
 
@@ -364,7 +365,7 @@
             Title="Randomize Secret Rewards"
             Text="Randomize the rewards given for finding secrets in each level."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding SecretRewardSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
         <ctrl:ManagedSeedControl
@@ -375,7 +376,7 @@
             Title="Randomize Secret Rewards"
             Text="Randomize the rewards for collecting all secrets in each level. Rewards are selected randomly on a generosity scale."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding SecretRewardSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
         <ctrl:ManagedSeedAdvancedControl
@@ -387,7 +388,7 @@
             Title="Randomize Audio"
             Text="Randomize the tracks for the title screen, level ambience and triggers, as well as general sound effects."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -412,7 +413,7 @@
             Title="Randomize Audio"
             Text="Randomize the tracks for the title screen, level ambience, triggers and secrets, as well as general sound effects."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding AudioTracksSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -436,7 +437,7 @@
             Title="Randomize Lara's Appearance"
             Text="Randomize Lara's look in each level."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding OutfitSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -461,7 +462,7 @@
             Title="Randomize Game Text"
             Text="Randomize in-game text, such as weapon and level names."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding TextSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -485,7 +486,7 @@
             Title="Randomize Environment"
             Text="Randomize Lara's surroundings in each level."
             SeedMinValue="1"
-            SeedMaxValue="{Binding MaxSeedValue}"
+            SeedMaxValue="{x:Static model:ControllerOptions.MaxSeedValue}"
             SeedValue="{Binding EnvironmentSeed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ctrl:ManagedSeedAdvancedControl.Resources>
                 <cvt:BindingProxy x:Key="proxy" Data="{Binding}" />
