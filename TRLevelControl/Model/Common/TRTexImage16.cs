@@ -1,34 +1,9 @@
-﻿using System.Text;
-using TRLevelControl.Helpers;
+﻿using TRLevelControl.Helpers;
 
 namespace TRLevelControl.Model;
 
-public class TRTexImage16
+public class TRTexImage16 : TRTexImage<ushort>
 {
-    public ushort[] Pixels { get; set; }
-
-    public override string ToString()
-    {
-        StringBuilder sb = new(base.ToString());
-
-        sb.Append('\n');
-
-        int Count = 1;
-        foreach (ushort pixel in Pixels)
-        {
-            sb.Append(pixel + " ");
-
-            Count++;
-
-            if (Count % 8 == 0)
-            {
-                sb.Append('\n');
-            }
-        }
-
-        return sb.ToString();
-    }
-
     public Textile16Pixel[] To32BPPFormat()
     {
         Textile16Pixel[] pixels = new Textile16Pixel[256 * 256];

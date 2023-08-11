@@ -82,14 +82,14 @@ public class TRLevelReader : BinaryReader
         return images;
     }
 
-    public List<TR4TexImage32> ReadImage32s(long numImages)
+    public List<TRTexImage32> ReadImage32s(long numImages)
     {
-        List<TR4TexImage32> images = new((int)numImages);
+        List<TRTexImage32> images = new((int)numImages);
         for (long i = 0; i < numImages; i++)
         {
             images.Add(new()
             {
-                Tile = ReadUInt32s(TRConsts.TPageSize)
+                Pixels = ReadUInt32s(TRConsts.TPageSize)
             });
         }
         return images;

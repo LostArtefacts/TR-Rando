@@ -69,11 +69,11 @@ public class TRLevelWriter : BinaryWriter
         }
     }
 
-    public void Write(IEnumerable<TR4TexImage32> images)
+    public void Write(IEnumerable<TRTexImage32> images)
     {
-        foreach (TR4TexImage32 image in images)
+        foreach (TRTexImage32 image in images)
         {
-            Write(image.Tile);
+            Write(image.Pixels);
         }
     }
 }

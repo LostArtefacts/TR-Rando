@@ -2,27 +2,20 @@
 
 namespace TRLevelControl.Model;
 
-public class TRTexImage8
+public class TRTexImage<T>
 {
-    public byte[] Pixels { get; set; }
+    public T[] Pixels { get; set; }
 
     public override string ToString()
     {
         StringBuilder sb = new(base.ToString());
-
-        sb.Append('\n');
-
-        int Count = 1;
-        foreach (byte pixel in Pixels)
+        for (int i = 0; i < Pixels.Length; i++)
         {
-            sb.Append(pixel + " ");
-
-            Count++;
-
-            if (Count % 8 == 0)
+            if (i % 8 == 0)
             {
                 sb.Append('\n');
             }
+            sb.Append(Pixels[i] + " ");
         }
 
         return sb.ToString();
