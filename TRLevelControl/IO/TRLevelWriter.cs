@@ -15,6 +15,14 @@ public class TRLevelWriter : BinaryWriter
         }
     }
 
+    public void Write(IEnumerable<uint> data)
+    {
+        foreach (uint value in data)
+        {
+            Write(value);
+        }
+    }
+
     public void Write(IEnumerable<TRTexImage8> images)
     {
         foreach (TRTexImage8 image in images)
@@ -28,6 +36,14 @@ public class TRLevelWriter : BinaryWriter
         foreach (TRTexImage16 image in images)
         {
             Write(image.Pixels);
+        }
+    }
+
+    public void Write(IEnumerable<TR4TexImage32> images)
+    {
+        foreach (TR4TexImage32 image in images)
+        {
+            Write(image.Tile);
         }
     }
 }

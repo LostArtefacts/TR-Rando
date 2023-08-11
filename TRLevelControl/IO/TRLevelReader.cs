@@ -18,6 +18,17 @@ public class TRLevelReader : BinaryReader
         return data;
     }
 
+    public uint[] ReadUInt32s(long numData)
+    {
+        uint[] data = new uint[numData];
+        for (int i = 0; i < numData; i++)
+        {
+            data[i] = ReadUInt32();
+        }
+
+        return data;
+    }
+
     public List<TRTexImage8> ReadImage8s(long numImages)
     {
         List<TRTexImage8> images = new((int)numImages);
@@ -39,6 +50,19 @@ public class TRLevelReader : BinaryReader
             images.Add(new()
             {
                 Pixels = ReadUInt16s(TRConsts.TPageSize)
+            });
+        }
+        return images;
+    }
+
+    public List<TR4TexImage32> ReadImage32s(long numImages)
+    {
+        List<TR4TexImage32> images = new((int)numImages);
+        for (long i = 0; i < numImages; i++)
+        {
+            images.Add(new()
+            {
+                Tile = ReadUInt32s(TRConsts.TPageSize)
             });
         }
         return images;
