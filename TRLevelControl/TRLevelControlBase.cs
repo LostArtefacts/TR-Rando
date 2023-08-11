@@ -13,7 +13,7 @@ public abstract class TRLevelControlBase<L>
 
     public L Read(Stream stream)
     {
-        using BinaryReader reader = new(stream);
+        using TRLevelReader reader = new(stream);
 
         _level = CreateLevel((TRFileVersion)reader.ReadUInt32());
         Read(reader);
@@ -27,15 +27,17 @@ public abstract class TRLevelControlBase<L>
 
     public void Write(L level, Stream outputStream)
     {
-        using BinaryWriter writer = new(outputStream);
+        using TRLevelWriter writer = new(outputStream);
+
+        writer.Write((uint)level.Version.File);
 
         _level = level;
         Write(writer);
     }
 
     protected abstract L CreateLevel(TRFileVersion version);
-    protected abstract void Read(BinaryReader reader);
-    protected abstract void Write(BinaryWriter writer);
+    protected abstract void Read(TRLevelReader reader);
+    protected abstract void Write(TRLevelWriter writer);
 
     protected void TestVersion(L level, params TRFileVersion[] acceptedVersions)
     {

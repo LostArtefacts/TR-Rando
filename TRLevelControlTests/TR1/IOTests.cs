@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TRFDControl;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Base.Enums;
@@ -115,11 +116,17 @@ public class IOTests : TestBase
     {
         TR1Level lvl = GetTR1Level(TR1LevelNames.CAVES);
 
-        byte[] lvlBeforeSort = lvl.Serialize();
+        TR1LevelControl control = new();
+        using MemoryStream ms1 = new();
+        using MemoryStream ms2 = new();
+
+        control.Write(lvl, ms1);
+        byte[] lvlBeforeSort = ms1.ToArray();
 
         SoundUtilities.ResortSoundIndices(lvl);
 
-        byte[] lvlAfterSort = lvl.Serialize();
+        control.Write(lvl, ms2);
+        byte[] lvlAfterSort = ms2.ToArray();
 
         CollectionAssert.AreEqual(lvlBeforeSort, lvlAfterSort);
     }

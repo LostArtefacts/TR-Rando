@@ -23,7 +23,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         return level;
     }
 
-    protected override void Read(BinaryReader reader)
+    protected override void Read(TRLevelReader reader)
     {
         _level.NumImages = reader.ReadUInt32();
         _level.Images8 = new TRTexImage8[_level.NumImages];
@@ -360,9 +360,84 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         }
     }
 
-    protected override void Write(BinaryWriter writer)
+    protected override void Write(TRLevelWriter writer)
     {
-        writer.Write(_level.Serialize());
+        writer.Write(_level.NumImages);
+        foreach (TRTexImage8 tex in _level.Images8) { writer.Write(tex.Serialize()); }
+
+        writer.Write(_level.Unused);
+
+        writer.Write(_level.NumRooms);
+        foreach (TRRoom room in _level.Rooms) { writer.Write(room.Serialize()); }
+
+        writer.Write(_level.NumFloorData);
+        foreach (ushort data in _level.FloorData) { writer.Write(data); }
+
+        writer.Write(_level.NumMeshData);
+        foreach (TRMesh mesh in _level.Meshes) { writer.Write(mesh.Serialize()); }
+        writer.Write(_level.NumMeshPointers);
+        foreach (uint ptr in _level.MeshPointers) { writer.Write(ptr); }
+
+        writer.Write(_level.NumAnimations);
+        foreach (TRAnimation anim in _level.Animations) { writer.Write(anim.Serialize()); }
+        writer.Write(_level.NumStateChanges);
+        foreach (TRStateChange statec in _level.StateChanges) { writer.Write(statec.Serialize()); }
+        writer.Write(_level.NumAnimDispatches);
+        foreach (TRAnimDispatch dispatch in _level.AnimDispatches) { writer.Write(dispatch.Serialize()); }
+        writer.Write(_level.NumAnimCommands);
+        foreach (TRAnimCommand cmd in _level.AnimCommands) { writer.Write(cmd.Serialize()); }
+        writer.Write(_level.NumMeshTrees * 4); //To get the correct number /= 4 is done during read, make sure to reverse it here.
+        foreach (TRMeshTreeNode node in _level.MeshTrees) { writer.Write(node.Serialize()); }
+        writer.Write(_level.NumFrames);
+        foreach (ushort frame in _level.Frames) { writer.Write(frame); }
+
+        writer.Write(_level.NumModels);
+        foreach (TRModel model in _level.Models) { writer.Write(model.Serialize()); }
+        writer.Write(_level.NumStaticMeshes);
+        foreach (TRStaticMesh mesh in _level.StaticMeshes) { writer.Write(mesh.Serialize()); }
+
+        writer.Write(_level.NumObjectTextures);
+        foreach (TRObjectTexture tex in _level.ObjectTextures) { writer.Write(tex.Serialize()); }
+        writer.Write(_level.NumSpriteTextures);
+        foreach (TRSpriteTexture tex in _level.SpriteTextures) { writer.Write(tex.Serialize()); }
+        writer.Write(_level.NumSpriteSequences);
+        foreach (TRSpriteSequence sequence in _level.SpriteSequences) { writer.Write(sequence.Serialize()); }
+
+        writer.Write(_level.NumCameras);
+        foreach (TRCamera cam in _level.Cameras) { writer.Write(cam.Serialize()); }
+
+        writer.Write(_level.NumSoundSources);
+        foreach (TRSoundSource src in _level.SoundSources) { writer.Write(src.Serialize()); }
+
+        writer.Write(_level.NumBoxes);
+        foreach (TRBox box in _level.Boxes) { writer.Write(box.Serialize()); }
+        writer.Write(_level.NumOverlaps);
+        foreach (ushort overlap in _level.Overlaps) { writer.Write(overlap); }
+        foreach (ushort zone in TR1BoxUtilities.FlattenZones(_level.Zones)) { writer.Write(zone); }
+
+        writer.Write(_level.NumAnimatedTextures);
+        writer.Write((ushort)_level.AnimatedTextures.Length);
+        foreach (TRAnimatedTexture texture in _level.AnimatedTextures) { writer.Write(texture.Serialize()); }
+
+        writer.Write(_level.NumEntities);
+        foreach (TREntity entity in _level.Entities) { writer.Write(entity.Serialize()); }
+
+        writer.Write(_level.LightMap);
+        foreach (TRColour col in _level.Palette) { writer.Write(col.Serialize()); }
+
+        writer.Write(_level.NumCinematicFrames);
+        foreach (TRCinematicFrame cineframe in _level.CinematicFrames) { writer.Write(cineframe.Serialize()); }
+
+        writer.Write(_level.NumDemoData);
+        writer.Write(_level.DemoData);
+
+        foreach (short sound in _level.SoundMap) { writer.Write(sound); }
+        writer.Write(_level.NumSoundDetails);
+        foreach (TRSoundDetails snddetail in _level.SoundDetails) { writer.Write(snddetail.Serialize()); }
+        writer.Write(_level.NumSamples);
+        foreach (byte sample in _level.Samples) { writer.Write(sample); }
+        writer.Write(_level.NumSampleIndices);
+        foreach (uint index in _level.SampleIndices) { writer.Write(index); }
     }
 
     private static TRColour[] PopulateColourPalette(byte[] palette)

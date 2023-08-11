@@ -3,6 +3,7 @@ using System.Drawing;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Base.Enums;
@@ -975,8 +976,13 @@ public class IOTests : TestBase
     {
         TR2Level lvl = GetTR2Level(TR2LevelNames.MONASTERY);
 
+        TR2LevelControl control = new();
+        using MemoryStream ms1 = new();
+        using MemoryStream ms2 = new();
+
         // Store the untouched raw data
-        byte[] lvlAsBytes = lvl.Serialize();
+        control.Write(lvl, ms1);
+        byte[] lvlAsBytes = ms1.ToArray();
 
         // Convert each tile to a bitmap, and then convert it back
         foreach (TRTexImage16 tile in lvl.Images16)
@@ -985,7 +991,10 @@ public class IOTests : TestBase
             tile.Pixels = TextureUtilities.ImportFromBitmap(bmp);
         }
 
+        control.Write(lvl, ms2);
+        byte[] lvlAfterWrite = ms2.ToArray();
+
         // Confirm the raw data still matches
-        CollectionAssert.AreEqual(lvlAsBytes, lvl.Serialize(), "Read does not match byte for byte");
+        CollectionAssert.AreEqual(lvlAsBytes, lvlAfterWrite, "Read does not match byte for byte");
     }
 }

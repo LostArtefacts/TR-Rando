@@ -1,11 +1,6 @@
-﻿using TRLevelControl.Helpers;
-using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-//https://trwiki.earvillage.net/doku.php?id=trsone
-
-namespace TRLevelControl.Model;
-
-public class TR2Level : TRLevelBase, ISerializableCompact
+public class TR2Level : TRLevelBase
 {
     /// <summary>
     /// 256 entries * 3 components = 768 Bytes
@@ -306,86 +301,4 @@ public class TR2Level : TRLevelBase, ISerializableCompact
     /// NumSampleIndices * 4 bytes
     /// </summary>
     public uint[] SampleIndices { get; set; }
-
-    public TR2Level()
-    {
-
-    }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write((uint)Version.File);
-            foreach (TRColour col in Palette) { writer.Write(col.Serialize()); }
-            foreach (TRColour4 col in Palette16) { writer.Write(col.Serialize()); }
-            writer.Write(NumImages);
-            foreach (TRTexImage8 tex in Images8) { writer.Write(tex.Serialize()); }
-            foreach (TRTexImage16 tex in Images16) { writer.Write(tex.Serialize()); }
-            writer.Write(Unused);
-            writer.Write(NumRooms);
-            foreach (TR2Room room in Rooms) { writer.Write(room.Serialize()); }
-            writer.Write(NumFloorData);
-            foreach (ushort data in FloorData) { writer.Write(data); }
-            writer.Write(NumMeshData);
-
-            //Because mesh construction still hasnt been resolved, we will
-            //just write the raw mesh data as words for testing
-            foreach (TRMesh mesh in Meshes) { writer.Write(mesh.Serialize()); }
-            //foreach (ushort word in RawMeshData) { writer.Write(word); }
-
-            writer.Write(NumMeshPointers);
-            foreach (uint ptr in MeshPointers) { writer.Write(ptr); }
-            writer.Write(NumAnimations);
-            foreach (TRAnimation anim in Animations) { writer.Write(anim.Serialize()); }
-            writer.Write(NumStateChanges);
-            foreach (TRStateChange statec in StateChanges) { writer.Write(statec.Serialize()); }
-            writer.Write(NumAnimDispatches);
-            foreach (TRAnimDispatch dispatch in AnimDispatches) { writer.Write(dispatch.Serialize()); }
-            writer.Write(NumAnimCommands);
-            foreach (TRAnimCommand cmd in AnimCommands) { writer.Write(cmd.Serialize()); }
-            writer.Write(NumMeshTrees * 4); //To get the correct number /= 4 is done during read, make sure to reverse it here.
-            foreach (TRMeshTreeNode node in MeshTrees) { writer.Write(node.Serialize()); }
-            writer.Write(NumFrames);
-            foreach (ushort frame in Frames) { writer.Write(frame); }
-            writer.Write(NumModels);
-            foreach (TRModel model in Models) { writer.Write(model.Serialize()); }
-            writer.Write(NumStaticMeshes);
-            foreach (TRStaticMesh mesh in StaticMeshes) { writer.Write(mesh.Serialize()); }
-            writer.Write(NumObjectTextures);
-            foreach (TRObjectTexture tex in ObjectTextures) { writer.Write(tex.Serialize()); }
-            writer.Write(NumSpriteTextures);
-            foreach (TRSpriteTexture tex in SpriteTextures) { writer.Write(tex.Serialize()); }
-            writer.Write(NumSpriteSequences);
-            foreach (TRSpriteSequence sequence in SpriteSequences) { writer.Write(sequence.Serialize()); }
-            writer.Write(NumCameras);
-            foreach (TRCamera cam in Cameras) { writer.Write(cam.Serialize()); }
-            writer.Write(NumSoundSources);
-            foreach (TRSoundSource src in SoundSources) { writer.Write(src.Serialize()); }
-            writer.Write(NumBoxes);
-            foreach (TR2Box box in Boxes) { writer.Write(box.Serialize()); }
-            writer.Write(NumOverlaps);
-            foreach (ushort overlap in Overlaps) { writer.Write(overlap); }
-            //See note in TR2LevelReader re zones
-            foreach (ushort zone in TR2BoxUtilities.FlattenZones(Zones)) { writer.Write(zone); }
-            writer.Write(NumAnimatedTextures);
-            writer.Write((ushort)AnimatedTextures.Length);
-            foreach (TRAnimatedTexture texture in AnimatedTextures) { writer.Write(texture.Serialize()); }
-            writer.Write(NumEntities);
-            foreach (TR2Entity entity in Entities) { writer.Write(entity.Serialize()); }
-            writer.Write(LightMap);
-            writer.Write(NumCinematicFrames);
-            foreach (TRCinematicFrame cineframe in CinematicFrames) { writer.Write(cineframe.Serialize()); }
-            writer.Write(NumDemoData);
-            writer.Write(DemoData);
-            foreach (short sound in SoundMap) { writer.Write(sound); }
-            writer.Write(NumSoundDetails);
-            foreach (TRSoundDetails snddetail in SoundDetails) { writer.Write(snddetail.Serialize()); }
-            writer.Write(NumSampleIndices);
-            foreach (uint index in SampleIndices) { writer.Write(index); }
-        }
-
-        return stream.ToArray();
-    }
 }
