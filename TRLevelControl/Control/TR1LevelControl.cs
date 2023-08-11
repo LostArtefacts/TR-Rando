@@ -362,8 +362,6 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
     protected override void Write(TRLevelWriter writer)
     {
-        writer.Write((uint)_level.Version.File);
-
         writer.Write(_level.NumImages);
         foreach (TRTexImage8 tex in _level.Images8) { writer.Write(tex.Serialize()); }
 

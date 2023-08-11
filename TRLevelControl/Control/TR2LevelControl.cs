@@ -377,8 +377,6 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
 
     protected override void Write(TRLevelWriter writer)
     {
-        writer.Write((uint)_level.Version.File);
-
         foreach (TRColour col in _level.Palette) { writer.Write(col.Serialize()); }
         foreach (TRColour4 col in _level.Palette16) { writer.Write(col.Serialize()); }
 

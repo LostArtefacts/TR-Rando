@@ -97,7 +97,6 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
 
     protected override void Write(TRLevelWriter writer)
     {
-        writer.Write((uint)_level.Version.File);
         writer.Write(_level.NumRoomTextiles);
         writer.Write(_level.NumObjTextiles);
         writer.Write(_level.NumBumpTextiles);
