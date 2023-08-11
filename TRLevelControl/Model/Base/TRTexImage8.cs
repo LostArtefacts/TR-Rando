@@ -1,22 +1,10 @@
 ﻿using System.Text;
-using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TRTexImage8 : ISerializableCompact
+public class TRTexImage8
 {
     public byte[] Pixels { get; set; }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(Pixels);
-        }
-
-        return stream.ToArray();
-    }
 
     public override string ToString()
     {

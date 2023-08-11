@@ -1,26 +1,11 @@
 ﻿using System.Text;
 using TRLevelControl.Helpers;
-using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TRTexImage16 : ISerializableCompact
+public class TRTexImage16
 {
     public ushort[] Pixels { get; set; }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            foreach (ushort pixel in Pixels)
-            {
-                writer.Write(pixel);
-            }
-        }
-
-        return stream.ToArray();
-    }
 
     public override string ToString()
     {
