@@ -14,6 +14,7 @@ public class EMClickFunction : BaseEMFunction
     public EMLocationExpander LocationExpander { get; set; }
     public sbyte? FloorClicks { get; set; }
     public sbyte? CeilingClicks { get; set; }
+    public bool RetainItemPositions { get; set; }
 
     protected List<EMLocation> _locations;
 
@@ -31,7 +32,7 @@ public class EMClickFunction : BaseEMFunction
             MoveSector(sector, level.Rooms[location.Room].Info);
 
             // Move any entities that share the same floor sector up or down the relevant number of clicks
-            if (FloorClicks.HasValue)
+            if (FloorClicks.HasValue && !RetainItemPositions)
             {
                 foreach (TREntity entity in level.Entities)
                 {
@@ -62,7 +63,7 @@ public class EMClickFunction : BaseEMFunction
             MoveSector(sector, level.Rooms[location.Room].Info);
 
             // Move any entities that share the same floor sector up or down the relevant number of clicks
-            if (FloorClicks.HasValue)
+            if (FloorClicks.HasValue && !RetainItemPositions)
             {
                 foreach (TR2Entity entity in level.Entities)
                 {
@@ -93,7 +94,7 @@ public class EMClickFunction : BaseEMFunction
             MoveSector(sector, level.Rooms[location.Room].Info);
 
             // Move any entities that share the same floor sector up or down the relevant number of clicks
-            if (FloorClicks.HasValue)
+            if (FloorClicks.HasValue && !RetainItemPositions)
             {
                 foreach (TR2Entity entity in level.Entities)
                 {

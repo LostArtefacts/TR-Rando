@@ -40,7 +40,8 @@
             "Z": 19968,
             "Room": 1
           },
-          "FloorClicks": 2
+          "FloorClicks": 2,
+          "RetainItemPositions": true
         }
       ]
     },
@@ -58,7 +59,8 @@
             "Z": 25088,
             "Room": 1
           },
-          "FloorClicks": 2
+          "FloorClicks": 2,
+          "RetainItemPositions": true
         }
       ]
     },
@@ -76,7 +78,8 @@
             "Z": 19968,
             "Room": 1
           },
-          "FloorClicks": 2
+          "FloorClicks": 2,
+          "RetainItemPositions": true
         }
       ]
     },
@@ -94,7 +97,8 @@
             "Z": 19968,
             "Room": 1
           },
-          "FloorClicks": 2
+          "FloorClicks": 2,
+          "RetainItemPositions": true
         }
       ]
     },
