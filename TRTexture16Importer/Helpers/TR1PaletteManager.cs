@@ -135,12 +135,7 @@ public class TR1PaletteManager : IDisposable
         for (int i = 0; i < Level.Palette.Length; i++)
         {
             Color c = _palette[i];
-            Level.Palette[i] = new TRColour
-            {
-                Red = (byte)(c.R / 4),
-                Green = (byte)(c.G / 4),
-                Blue = (byte)(c.B / 4)
-            };
+            Level.Palette[i] = c.ToTRColour();
         }
     }
 
@@ -194,7 +189,7 @@ public class TR1PaletteManager : IDisposable
 
     public int GetOrAddPaletteIndex(TRColour c)
     {
-        return GetOrAddPaletteIndex(Color.FromArgb(c.Red * 4, c.Green * 4, c.Blue * 4));
+        return GetOrAddPaletteIndex(c.ToColor());
     }
 
     public int GetOrAddPaletteIndex(Color c)

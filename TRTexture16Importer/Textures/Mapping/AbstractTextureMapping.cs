@@ -224,8 +224,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 continue;
             }
             TRColour col = palette[colourIndex];
-            Color c = Color.FromArgb(col.Red * 4, col.Green * 4, col.Blue * 4);
-            HSB hsb = c.ToHSB();
+            HSB hsb = col.ToColor().ToHSB();
             hsb.H = operation.ModifyHue(hsb.H);
             hsb.S = operation.ModifySaturation(hsb.S);
             hsb.B = operation.ModifyBrightness(hsb.B);
@@ -379,12 +378,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 TRColour[] palette = GetPalette8();
                 foreach (Color targetColour in source.EntityColourMap8[entity].Keys)
                 {
-                    TRColour col = new()
-                    {
-                        Red = (byte)(targetColour.R / 4),
-                        Green = (byte)(targetColour.G / 4),
-                        Blue = (byte)(targetColour.B / 4)
-                    };
+                    TRColour col = targetColour.ToTRColour();
                     int matchedIndex = Array.FindIndex(palette, c => c.Red == col.Red && c.Green == col.Green && c.Blue == col.Blue);
                     if (matchedIndex == -1)
                     {

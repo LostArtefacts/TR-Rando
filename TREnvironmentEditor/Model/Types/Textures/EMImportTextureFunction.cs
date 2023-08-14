@@ -15,7 +15,7 @@ public class EMImportTextureFunction : BaseEMFunction
     public override void ApplyToLevel(TR1Level level)
     {
         using BitmapGraphics bg = new(new Bitmap(Bitmap));
-        List<Color> palette = level.Palette.Select(c => Color.FromArgb(c.Red * 4, c.Green * 4, c.Blue * 4)).ToList();
+        List<Color> palette = level.Palette.Select(c => c.ToColor()).ToList();
         Rectangle size = new(0, 0, bg.Bitmap.Width, bg.Bitmap.Height);
         bg.Scan(size, (c, x, y) =>
         {

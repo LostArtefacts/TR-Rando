@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using TRLevelControl;
 using TRLevelControl.Model;
 using TRTexture16Importer.Helpers;
 
@@ -45,9 +46,9 @@ public static class TextureUtilities
         foreach (byte colourIndex in tex.Pixels)
         {
             TRColour c = palette[colourIndex];
-            pixelCollection.Add((byte)(4 * c.Blue));
-            pixelCollection.Add((byte)(4 * c.Green));
-            pixelCollection.Add((byte)(4 * c.Red));
+            pixelCollection.Add((byte)(TRConsts.Palette8Multiplier * c.Blue));
+            pixelCollection.Add((byte)(TRConsts.Palette8Multiplier * c.Green));
+            pixelCollection.Add((byte)(TRConsts.Palette8Multiplier * c.Red));
             pixelCollection.Add((byte)(colourIndex == 0 ? 0 : 0xFF)); // The first entry in the palette is used for transparency
         }
 

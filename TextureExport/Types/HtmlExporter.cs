@@ -6,6 +6,7 @@ using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
+using TRTexture16Importer.Helpers;
 
 namespace TextureExport.Types;
 
@@ -25,12 +26,10 @@ public static class HtmlExporter
         BuildSkyBox(skyboxInfo, skyColours);
 
         StringBuilder palette = new();
-        ISet<Color> colors = new HashSet<Color>();
-        foreach (TRColour c in level.Palette)
-        {
-            colors.Add(Color.FromArgb(c.Red, c.Green, c.Blue));
-        }
-        palette.Append(colors.Count).Append(" unique colours");
+        IEnumerable<Color> colors = level.Palette
+            .Select(c => c.ToColor())
+            .Distinct();
+        palette.Append(colors.Count()).Append(" unique colours");
 
         Write("TR1", lvlName, tiles, levelSel, skyboxInfo, palette);
     }
@@ -97,12 +96,7 @@ public static class HtmlExporter
                             Color c = segment.Bitmap.GetPixel(x, y);
                             if (c.A != 0)
                             {
-                                TRColour col = new()
-                                {
-                                    Red = (byte)(c.R / 4),
-                                    Green = (byte)(c.G / 4),
-                                    Blue = (byte)(c.B / 4)
-                                };
+                                TRColour col = c.ToTRColour();
                                 int index = Array.FindIndex(palette, p => p.Red == col.Red && p.Green == col.Green && p.Blue == col.Blue);
                                 if (index != -1)
                                 {
