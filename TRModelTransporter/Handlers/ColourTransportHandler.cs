@@ -19,7 +19,7 @@ public class ColourTransportHandler
 
     public static void Export(TR3Level level, TR3ModelDefinition definition)
     {
-        definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16);
+        definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16.ToArray());
     }
 
     private static Dictionary<int, TRColour> GetUsedMeshColours(TRMesh[] meshes, TRColour[] colours)

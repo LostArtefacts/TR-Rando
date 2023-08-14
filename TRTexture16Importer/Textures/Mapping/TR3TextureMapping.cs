@@ -26,12 +26,12 @@ public class TR3TextureMapping : AbstractTextureMapping<TR3Entities, TR3Level>
 
     protected override TRColour[] GetPalette8()
     {
-        return _level.Palette;
+        return _level.Palette.ToArray();
     }
 
     protected override TRColour4[] GetPalette16()
     {
-        return _level.Palette16;
+        return _level.Palette16.ToArray();
     }
 
     protected override int ImportColour(Color colour)
