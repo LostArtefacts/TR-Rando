@@ -13,7 +13,7 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Entities, TR3Level>
 {
     private const int _maximumTiles = 32;
 
-    public override uint NumLevelImages => (uint)Level.Images8.Count;
+    public override int NumLevelImages => Level.Images8.Count;
 
     public TR3TexturePacker(TR3Level level, ITextureClassifier classifier = null)
         : base(level, _maximumTiles, classifier) { }
@@ -76,7 +76,7 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Entities, TR3Level>
         return modelIDs;
     }
 
-    protected override void CreateImageSpace(uint count)
+    protected override void CreateImageSpace(int count)
     {
         for (int i = 0; i < count; i++)
         {

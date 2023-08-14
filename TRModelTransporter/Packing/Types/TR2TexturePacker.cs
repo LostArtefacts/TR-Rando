@@ -13,7 +13,7 @@ public class TR2TexturePacker : AbstractTexturePacker<TR2Entities, TR2Level>
 {
     private const int _maximumTiles = 16;
 
-    public override uint NumLevelImages => (uint)Level.Images8.Count;
+    public override int NumLevelImages => Level.Images8.Count;
 
     public TR2TexturePacker(TR2Level level, ITextureClassifier classifier = null)
         : base(level, _maximumTiles, classifier) { }
@@ -76,7 +76,7 @@ public class TR2TexturePacker : AbstractTexturePacker<TR2Entities, TR2Level>
         return modelIDs;
     }
 
-    protected override void CreateImageSpace(uint count)
+    protected override void CreateImageSpace(int count)
     {
         // We ignore 8-bit images, but the numbers must match
         for (int i = 0; i < count; i++)

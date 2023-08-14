@@ -16,7 +16,7 @@ public class TR1TexturePacker : AbstractTexturePacker<TREntities, TR1Level>
 
     public TR1PaletteManager PaletteManager { get; set; }
 
-    public override uint NumLevelImages => (uint)Level.Images8.Count;
+    public override int NumLevelImages => Level.Images8.Count;
 
     public TR1TexturePacker(TR1Level level, ITextureClassifier classifier = null)
         : base(level, _maximumTiles, classifier) { }
@@ -79,7 +79,7 @@ public class TR1TexturePacker : AbstractTexturePacker<TREntities, TR1Level>
         return modelIDs;
     }
 
-    protected override void CreateImageSpace(uint count)
+    protected override void CreateImageSpace(int count)
     {
         for (int i = 0; i < count; i++)
         {
