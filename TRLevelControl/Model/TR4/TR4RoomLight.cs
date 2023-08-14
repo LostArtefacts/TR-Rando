@@ -35,12 +35,12 @@ public class TR4RoomLight : ISerializableCompact
     public byte[] Serialize()
     {
         using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
+        using (TRLevelWriter writer = new(stream))
         {
             writer.Write(X);
             writer.Write(Y);
             writer.Write(Z);
-            writer.Write(Colour.Serialize());
+            writer.Write(Colour);
             writer.Write(LightType);
             writer.Write(Unknown);
             writer.Write(Intensity);
