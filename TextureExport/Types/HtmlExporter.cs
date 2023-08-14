@@ -44,7 +44,7 @@ public static class HtmlExporter
         BuildLevelSelect(levelSel, lvlName, TR2LevelNames.AsOrderedList);
 
         StringBuilder skyboxInfo = new();
-        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR2Entities.Skybox_H), level.Palette16);
+        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR2Entities.Skybox_H), level.Palette16.ToArray()); // Temporary until TR3 converted
         BuildSkyBox(skyboxInfo, skyColours);
 
         Write("TR2", lvlName, tiles, levelSel, skyboxInfo);

@@ -27,7 +27,7 @@ public static class PaletteUtilities
 
     public static int Import(TR2Level lvl, TRColour4 c)
     {
-        int nextAvailableIndex = GetNextPaletteIndex(lvl.Meshes, lvl.Palette16);
+        int nextAvailableIndex = GetNextPaletteIndex(lvl.Meshes, lvl.Palette16.ToArray()); // Temporary until TR3 converted
         if (nextAvailableIndex != -1)
         {
             lvl.Palette16[nextAvailableIndex] = c;

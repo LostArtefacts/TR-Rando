@@ -14,7 +14,7 @@ public class ColourTransportHandler
 
     public static void Export(TR2Level level, TR2ModelDefinition definition)
     {
-        definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16);
+        definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16.ToArray()); // Temporary until TR3 converted
     }
 
     public static void Export(TR3Level level, TR3ModelDefinition definition)

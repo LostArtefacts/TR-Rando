@@ -25,12 +25,12 @@ public class TR2TextureMapping : AbstractTextureMapping<TR2Entities, TR2Level>
 
     protected override TRColour[] GetPalette8()
     {
-        return _level.Palette;
+        return _level.Palette.ToArray(); // Temporary until TR3 converted
     }
 
     protected override TRColour4[] GetPalette16()
     {
-        return _level.Palette16;
+        return _level.Palette16.ToArray(); // Temporary until TR3 converted
     }
 
     protected override int ImportColour(Color colour)
