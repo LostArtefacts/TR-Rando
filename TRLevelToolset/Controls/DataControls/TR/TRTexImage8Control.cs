@@ -10,7 +10,7 @@ internal class TRTexImage8Control : IDrawable
     {
         if (ImGui.TreeNodeEx("Texture Image 8 Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Texture Count: " + IOManager.CurrentLevelAsTR1?.NumImages);
+            ImGui.Text("Texture Count: " + IOManager.CurrentLevelAsTR1?.Images8.Count);
 
             ImGui.TreePop();
         }

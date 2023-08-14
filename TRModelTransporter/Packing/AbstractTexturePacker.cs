@@ -14,7 +14,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
     where L : class
 {
     public L Level { get; private set; }
-    public abstract uint NumLevelImages { get; }
+    public abstract int NumLevelImages { get; }
 
     protected readonly string _levelClassifier;
 
@@ -327,7 +327,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
 
     public abstract Bitmap GetTile(int tileIndex);
 
-    protected abstract void CreateImageSpace(uint count);
+    protected abstract void CreateImageSpace(int count);
 
     public abstract void SetTile(int tileIndex, Bitmap bitmap);
 
@@ -335,7 +335,7 @@ public abstract class AbstractTexturePacker<E, L> : AbstractPacker<TexturedTile,
     {
         if (_tiles.Count > NumLevelImages)
         {
-            CreateImageSpace((uint)_tiles.Count - NumLevelImages);
+            CreateImageSpace(_tiles.Count - NumLevelImages);
         }
 
         for (int i = 0; i < _tiles.Count; i++)

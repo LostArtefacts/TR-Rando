@@ -30,34 +30,9 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         _level.Palette16 = PopulateColourPalette16(reader.ReadBytes((int)MAX_PALETTE_SIZE * 4));
 
-        _level.NumImages = reader.ReadUInt32();
-
-        _level.Images8 = new TRTexImage8[_level.NumImages];
-        _level.Images16 = new TRTexImage16[_level.NumImages];
-
-        //Initialize the texture arrays
-        for (int i = 0; i < _level.NumImages; i++)
-        {
-            _level.Images8[i] = new TRTexImage8();
-            _level.Images16[i] = new TRTexImage16();
-        }
-
-        //For each texture8 there are 256 * 256 bytes (65536) we can just do a straight byte read
-        for (int i = 0; i < _level.NumImages; i++)
-        {
-            _level.Images8[i].Pixels = reader.ReadBytes(256 * 256);
-        }
-
-        //For each texture16 there are 256 * 256 * 2 bytes (131072)
-        for (int i = 0; i < _level.NumImages; i++)
-        {
-            _level.Images16[i].Pixels = new ushort[256 * 256];
-
-            for (int j = 0; j < _level.Images16[i].Pixels.Length; j++)
-            {
-                _level.Images16[i].Pixels[j] = reader.ReadUInt16();
-            }
-        }
+        uint numImages = reader.ReadUInt32();
+        _level.Images8 = reader.ReadImage8s(numImages);
+        _level.Images16 = reader.ReadImage16s(numImages);
 
         //Rooms
         _level.Unused = reader.ReadUInt32();
@@ -382,9 +357,10 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         foreach (TRColour col in _level.Palette) { writer.Write(col.Serialize()); }
         foreach (TRColour4 col in _level.Palette16) { writer.Write(col.Serialize()); }
 
-        writer.Write(_level.NumImages);
-        foreach (TRTexImage8 tex in _level.Images8) { writer.Write(tex.Serialize()); }
-        foreach (TRTexImage16 tex in _level.Images16) { writer.Write(tex.Serialize()); }
+        Debug.Assert(_level.Images8.Count == _level.Images16.Count);
+        writer.Write((uint)_level.Images8.Count);
+        writer.Write(_level.Images8);
+        writer.Write(_level.Images16);
 
         writer.Write(_level.Unused);
 

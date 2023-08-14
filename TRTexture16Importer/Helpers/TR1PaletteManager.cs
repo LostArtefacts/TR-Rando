@@ -41,7 +41,7 @@ public class TR1PaletteManager : IDisposable
         // Scan over replacement and original images, the idea being they will have been
         // updated as necessary with removals and additions. Store each unique colour in the
         // palette or replace with a suitable match.
-        for (int i = 0; i < Level.Images8.Length; i++)
+        for (int i = 0; i < Level.Images8.Count; i++)
         {
             Bitmap bmp = ChangedTiles.ContainsKey(i) ? ChangedTiles[i] : GetOriginalTile(i);
             BitmapGraphics bg = new(bmp);

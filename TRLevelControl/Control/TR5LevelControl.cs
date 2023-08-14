@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using TRLevelControl.Compression;
 using TRLevelControl.Model;
 
 namespace TRLevelControl;
@@ -23,46 +22,24 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     protected override void Read(TRLevelReader reader)
     {
-        //Texture Counts
-        _level.NumRoomTextiles = reader.ReadUInt16();
-        _level.NumObjTextiles = reader.ReadUInt16();
-        _level.NumBumpTextiles = reader.ReadUInt16();
+        // Texture chunk
+        ushort roomCount = reader.ReadUInt16();
+        ushort objectCount = reader.ReadUInt16();
+        reader.ReadUInt16(); // Previously bump in TR4, no longer used
 
-        //Texture 32 Chunk
-        //Get Raw Chunk Data
-        _level.Texture32Chunk = new TR4Texture32Chunk
-        {
-            UncompressedSize = reader.ReadUInt32(),
-            CompressedSize = reader.ReadUInt32()
-        };
-        _level.Texture32Chunk.CompressedChunk = reader.ReadBytes((int)_level.Texture32Chunk.CompressedSize);
+        _level.Texture32Chunk = new();
+        using TRLevelReader reader32 = reader.Inflate(_level.Texture32Chunk);
+        _level.Texture32Chunk.Rooms = reader32.ReadImage32s(roomCount);
+        _level.Texture32Chunk.Objects = reader32.ReadImage32s(objectCount);
 
-        //Decompress
-        DecompressTexture32Chunk(_level);
+        _level.Texture16Chunk = new();
+        using TRLevelReader reader16 = reader.Inflate(_level.Texture16Chunk);
+        _level.Texture16Chunk.Rooms = reader16.ReadImage16s(roomCount);
+        _level.Texture16Chunk.Objects = reader16.ReadImage16s(objectCount);
 
-        //Texture 16 Chunk
-        //Get Raw Chunk Data
-        _level.Texture16Chunk = new TR4Texture16Chunk
-        {
-            UncompressedSize = reader.ReadUInt32(),
-            CompressedSize = reader.ReadUInt32()
-        };
-        _level.Texture16Chunk.CompressedChunk = reader.ReadBytes((int)_level.Texture16Chunk.CompressedSize);
-
-        //Decompress
-        DecompressTexture16Chunk(_level);
-
-        //Sky and Font 32 Chunk
-        //Get Raw Chunk Data
-        _level.SkyAndFont32Chunk = new TR4SkyAndFont32Chunk
-        {
-            UncompressedSize = reader.ReadUInt32(),
-            CompressedSize = reader.ReadUInt32()
-        };
-        _level.SkyAndFont32Chunk.CompressedChunk = reader.ReadBytes((int)_level.SkyAndFont32Chunk.CompressedSize);
-
-        //Decompress
-        DecompressSkyAndFont32Chunk(_level);
+        _level.SkyAndFont32Chunk = new();
+        using TRLevelReader skyReader = reader.Inflate(_level.SkyAndFont32Chunk);
+        _level.SkyAndFont32Chunk.Textiles = skyReader.ReadImage32s(3); // Shine, Font, Sky
 
         //TR5 Specific
         _level.LaraType = reader.ReadUInt16();
@@ -102,31 +79,35 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
 
     protected override void Write(TRLevelWriter writer)
     {
-        writer.Write(_level.NumRoomTextiles);
-        writer.Write(_level.NumObjTextiles);
-        writer.Write(_level.NumBumpTextiles);
+        // Texture chunk
+        Debug.Assert(_level.Texture32Chunk.Rooms.Count == _level.Texture16Chunk.Rooms.Count);
+        Debug.Assert(_level.Texture32Chunk.Objects.Count == _level.Texture16Chunk.Objects.Count);
+        Debug.Assert(_level.SkyAndFont32Chunk.Textiles.Count == 3);
 
-        byte[] chunk = _level.Texture32Chunk.Serialize();
-        writer.Write(_level.Texture32Chunk.UncompressedSize);
-        writer.Write(_level.Texture32Chunk.CompressedSize);
-        writer.Write(chunk);
+        writer.Write((ushort)_level.Texture32Chunk.Rooms.Count);
+        writer.Write((ushort)_level.Texture32Chunk.Objects.Count);
+        writer.Write((ushort)0); // No bump
 
-        chunk = _level.Texture16Chunk.Serialize();
-        writer.Write(_level.Texture16Chunk.UncompressedSize);
-        writer.Write(_level.Texture16Chunk.CompressedSize);
-        writer.Write(chunk);
+        using TRLevelWriter writer32 = new();
+        writer32.Write(_level.Texture32Chunk.Rooms);
+        writer32.Write(_level.Texture32Chunk.Objects);
+        writer.Deflate(writer32, _level.Texture32Chunk);
 
-        chunk = _level.SkyAndFont32Chunk.Serialize();
-        writer.Write(_level.SkyAndFont32Chunk.UncompressedSize);
-        writer.Write(_level.SkyAndFont32Chunk.CompressedSize);
-        writer.Write(chunk);
+        using TRLevelWriter writer16 = new();
+        writer16.Write(_level.Texture16Chunk.Rooms);
+        writer16.Write(_level.Texture16Chunk.Objects);
+        writer.Deflate(writer16, _level.Texture16Chunk);
+
+        using TRLevelWriter skyWriter = new();
+        skyWriter.Write(_level.SkyAndFont32Chunk.Textiles);
+        writer.Deflate(skyWriter, _level.SkyAndFont32Chunk);
 
         writer.Write(_level.LaraType);
         writer.Write(_level.WeatherType);
         writer.Write(_level.Padding);
 
         //Note - a TR5 Level data chunk is not compressed.
-        chunk = _level.LevelDataChunk.Serialize();
+        byte[] chunk = _level.LevelDataChunk.Serialize();
         writer.Write(_level.LevelDataChunk.UncompressedSize);
         writer.Write(_level.LevelDataChunk.CompressedSize);
         writer.Write(chunk);
@@ -138,96 +119,6 @@ public class TR5LevelControl : TRLevelControlBase<TR5Level>
             writer.Write(sample.UncompSize);
             writer.Write(sample.CompSize);
             writer.Write(sample.CompressedChunk);
-        }
-    }
-
-    private static void DecompressTexture32Chunk(TR5Level lvl)
-    {
-        //Decompressed buffer as bytes
-        byte[] buffer = TRZlib.Decompress(lvl.Texture32Chunk.CompressedChunk);
-        uint[] tiles = new uint[buffer.Length / 4];
-
-        //Convert via block copy to uints
-        Buffer.BlockCopy(buffer, 0, tiles, 0, buffer.Length);
-
-        //Is the decompressed chunk the size we expected?
-        Debug.Assert(buffer.Length == lvl.Texture32Chunk.UncompressedSize);
-
-        //Allocate expected number of textiles
-        lvl.Texture32Chunk.Textiles = new TR4TexImage32[lvl.NumRoomTextiles + lvl.NumObjTextiles + lvl.NumBumpTextiles];
-
-        //Copy from tiles to textile objects
-        for (int i = 0; i < lvl.Texture32Chunk.Textiles.Length; i++)
-        {
-            TR4TexImage32 tex = new()
-            {
-                Tile = new uint[256 * 256]
-            };
-
-            //262144 = 256 * 256 * 4
-            Buffer.BlockCopy(tiles, (i * 262144), tex.Tile, 0, 262144);
-
-            lvl.Texture32Chunk.Textiles[i] = tex;
-        }
-    }
-
-    private static void DecompressTexture16Chunk(TR5Level lvl)
-    {
-        //Decompressed buffer as bytes
-        byte[] buffer = TRZlib.Decompress(lvl.Texture16Chunk.CompressedChunk);
-        ushort[] tiles = new ushort[buffer.Length / 2];
-
-        //Convert via block copy to ushorts
-        Buffer.BlockCopy(buffer, 0, tiles, 0, buffer.Length);
-
-        //Is the decompressed chunk the size we expected?
-        Debug.Assert(buffer.Length == lvl.Texture16Chunk.UncompressedSize);
-
-        //Allocate expected number of textiles
-        lvl.Texture16Chunk.Textiles = new TRTexImage16[lvl.NumRoomTextiles + lvl.NumObjTextiles + lvl.NumBumpTextiles];
-
-        //Copy from tiles to textile objects
-        for (int i = 0; i < lvl.Texture16Chunk.Textiles.Length; i++)
-        {
-            TRTexImage16 tex = new()
-            {
-                Pixels = new ushort[256 * 256]
-            };
-
-            //131072 = 256 * 256 * 2
-            Buffer.BlockCopy(tiles, (i * 131072), tex.Pixels, 0, 131072);
-
-            lvl.Texture16Chunk.Textiles[i] = tex;
-        }
-    }
-
-    private static void DecompressSkyAndFont32Chunk(TR5Level lvl)
-    {
-        //Decompressed buffer as bytes
-        byte[] buffer = TRZlib.Decompress(lvl.SkyAndFont32Chunk.CompressedChunk);
-        uint[] tiles = new uint[buffer.Length / 4];
-
-        //Convert via block copy to uints
-        Buffer.BlockCopy(buffer, 0, tiles, 0, buffer.Length);
-
-        //Is the decompressed chunk the size we expected?
-        Debug.Assert(buffer.Length == lvl.SkyAndFont32Chunk.UncompressedSize);
-
-        //Allocate expected number of textiles
-        lvl.SkyAndFont32Chunk.Textiles = new TR4TexImage32[3];
-
-        //Copy from tiles to textile objects
-        for (int i = 0; i < lvl.SkyAndFont32Chunk.Textiles.Length; i++)
-        {
-            TR4TexImage32 tex = new()
-            {
-                Tile = new uint[256 * 256]
-            };
-
-            //262144 = 256 * 256 * 4
-            Buffer.BlockCopy(tiles, (i * 262144), tex.Tile, 0, 262144);
-
-            lvl.SkyAndFont32Chunk.Textiles[i] = tex;
         }
     }
 
