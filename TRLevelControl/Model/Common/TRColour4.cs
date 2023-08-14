@@ -1,28 +1,17 @@
-﻿using System.Text;
-using TRLevelControl.Serialization;
+﻿using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
 public class TRColour4 : ISerializableCompact
 {
     public byte Red { get; set; }
-
     public byte Green { get; set; }
-
     public byte Blue { get; set; }
-
     public byte Unused { get; set; }
 
     public override string ToString()
     {
-        StringBuilder sb = new(base.ToString());
-
-        sb.Append(" Red: " + Red);
-        sb.Append(" Green: " + Green);
-        sb.Append(" Blue: " + Blue);
-        sb.Append(" Unused: " + Unused);
-
-        return sb.ToString();
+        return $"{base.ToString()} R: {Red} G: {Green} B: {Blue} Unused: {Unused}";
     }
 
     public byte[] Serialize()
