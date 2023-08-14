@@ -295,13 +295,7 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
             _level.Entities[i] = TR2FileReadUtilities.ReadEntity(reader);
         }
 
-        //Light Map - 32 * 256 = 8192 bytes
-        _level.LightMap = new byte[32 * 256];
-
-        for (int i = 0; i < _level.LightMap.Length; i++)
-        {
-            _level.LightMap[i] = reader.ReadByte();
-        }
+        _level.LightMap = new(reader.ReadBytes(TRConsts.LightMapSize));
 
         //Cinematic Frames
         _level.NumCinematicFrames = reader.ReadUInt16();
@@ -414,7 +408,8 @@ public class TR2LevelControl : TRLevelControlBase<TR2Level>
         writer.Write(_level.NumEntities);
         foreach (TR2Entity entity in _level.Entities) { writer.Write(entity.Serialize()); }
 
-        writer.Write(_level.LightMap);
+        Debug.Assert(_level.LightMap.Count == TRConsts.LightMapSize);
+        writer.Write(_level.LightMap.ToArray());
 
         writer.Write(_level.NumCinematicFrames);
         foreach (TRCinematicFrame cineframe in _level.CinematicFrames) { writer.Write(cineframe.Serialize()); }

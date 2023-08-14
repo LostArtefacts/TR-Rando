@@ -10,7 +10,7 @@ internal class TRPaletteControl : IDrawable
     {
         if (ImGui.TreeNodeEx("Palette Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Light map Count: " + IOManager.CurrentLevelAsTR1?.LightMap.Length);
+            ImGui.Text("Light map Count: " + IOManager.CurrentLevelAsTR1?.LightMap.Count);
             ImGui.Text("Palette Count: " + IOManager.CurrentLevelAsTR1?.Palette.Count);
             ImGui.TreePop();
         }
