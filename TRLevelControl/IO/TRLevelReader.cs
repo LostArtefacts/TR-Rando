@@ -12,12 +12,7 @@ public class TRLevelReader : BinaryReader
     {
         chunk.UncompressedSize = ReadUInt32();
         chunk.CompressedSize = ReadUInt32();
-
-        chunk.CompressedChunk = new byte[chunk.CompressedSize];
-        for (uint i = 0; i < chunk.CompressedSize; i++)
-        {
-            chunk.CompressedChunk[i] = ReadByte();
-        }
+        chunk.CompressedChunk = ReadBytes((int)chunk.CompressedSize);
 
         MemoryStream inflatedStream = new();
         using MemoryStream ms = new(chunk.CompressedChunk);
