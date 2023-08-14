@@ -8,4 +8,5 @@ public static class TRConsts
 
     public const int PaletteSize = 256;
     public const int Palette8Multiplier = 4;
+    public const int LightMapSize = PaletteSize * 32;
 }
