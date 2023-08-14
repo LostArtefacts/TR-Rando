@@ -27,7 +27,7 @@ public static class PaletteUtilities
 
     public static int Import(TR2Level lvl, TRColour4 c)
     {
-        int nextAvailableIndex = GetNextPaletteIndex(lvl.Meshes, lvl.Palette16.ToArray()); // Temporary until TR3 converted
+        int nextAvailableIndex = GetNextPaletteIndex(lvl.Meshes, lvl.Palette16);
         if (nextAvailableIndex != -1)
         {
             lvl.Palette16[nextAvailableIndex] = c;
@@ -39,7 +39,7 @@ public static class PaletteUtilities
 
     public static int Import(TR3Level lvl, TRColour4 c)
     {
-        int nextAvailableIndex = GetNextPaletteIndex(lvl.Meshes, lvl.Palette16.ToArray());
+        int nextAvailableIndex = GetNextPaletteIndex(lvl.Meshes, lvl.Palette16);
         if (nextAvailableIndex != -1)
         {
             lvl.Palette16[nextAvailableIndex] = c;
@@ -53,7 +53,7 @@ public static class PaletteUtilities
     // so instead we will check for the next available palette slot and use that. Each level
     // seems to only have around 30-40 used colours. We still use the Unused field to track
     // what we are making use of during imports.
-    public static int GetNextPaletteIndex(TRMesh[] meshes, TRColour4[] colours)
+    public static int GetNextPaletteIndex(TRMesh[] meshes, List<TRColour4> colours)
     {
         int highestUsedPalette = -1;
         foreach (TRMesh mesh in meshes)
@@ -68,7 +68,7 @@ public static class PaletteUtilities
             }
         }
 
-        while (highestUsedPalette < colours.Length - 1)
+        while (highestUsedPalette < colours.Count - 1)
         {
             TRColour4 palette = colours[++highestUsedPalette];
             if (palette.Unused == 0)

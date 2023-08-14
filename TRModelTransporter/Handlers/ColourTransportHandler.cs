@@ -9,20 +9,20 @@ public class ColourTransportHandler
 {
     public static void Export(TR1Level level, TR1ModelDefinition definition)
     {
-        definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette.ToArray()); // Temporary until TR2/3 converted
+        definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette);
     }
 
     public static void Export(TR2Level level, TR2ModelDefinition definition)
     {
-        definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16.ToArray()); // Temporary until TR3 converted
+        definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16);
     }
 
     public static void Export(TR3Level level, TR3ModelDefinition definition)
     {
-        definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16.ToArray());
+        definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16);
     }
 
-    private static Dictionary<int, TRColour> GetUsedMeshColours(TRMesh[] meshes, TRColour[] colours)
+    private static Dictionary<int, TRColour> GetUsedMeshColours(TRMesh[] meshes, List<TRColour> colours)
     {
         ISet<int> colourIndices = GetAllColourIndices(meshes, false);
 
@@ -35,7 +35,7 @@ public class ColourTransportHandler
         return usedColours;
     }
 
-    private static Dictionary<int, TRColour4> GetUsedMeshColours(TRMesh[] meshes, TRColour4[] colours)
+    private static Dictionary<int, TRColour4> GetUsedMeshColours(TRMesh[] meshes, List<TRColour4> colours)
     {
         ISet<int> colourIndices = GetAllColourIndices(meshes, true);
 

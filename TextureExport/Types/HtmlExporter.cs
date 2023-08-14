@@ -44,7 +44,7 @@ public static class HtmlExporter
         BuildLevelSelect(levelSel, lvlName, TR2LevelNames.AsOrderedList);
 
         StringBuilder skyboxInfo = new();
-        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR2Entities.Skybox_H), level.Palette16.ToArray()); // Temporary until TR3 converted
+        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR2Entities.Skybox_H), level.Palette16);
         BuildSkyBox(skyboxInfo, skyColours);
 
         Write("TR2", lvlName, tiles, levelSel, skyboxInfo);
@@ -60,7 +60,7 @@ public static class HtmlExporter
         BuildLevelSelect(levelSel, lvlName, TR3LevelNames.AsOrderedList);
 
         StringBuilder skyboxInfo = new();
-        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR3Entities.Skybox_H), level.Palette16.ToArray());
+        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR3Entities.Skybox_H), level.Palette16);
         BuildSkyBox(skyboxInfo, skyColours);
 
         Write("TR3", lvlName, tiles, levelSel, skyboxInfo);
@@ -184,7 +184,7 @@ public static class HtmlExporter
         }
     }
 
-    private static Dictionary<int, TRColour4> GetSkyBoxColours(TRMesh[] meshes, TRColour4[] palette16)
+    private static Dictionary<int, TRColour4> GetSkyBoxColours(TRMesh[] meshes, List<TRColour4> palette16)
     {
         Dictionary<int, TRColour4> colours = new();
         if (meshes != null)
