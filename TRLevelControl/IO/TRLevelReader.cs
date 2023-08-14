@@ -89,4 +89,35 @@ public class TRLevelReader : BinaryReader
         }
         return images;
     }
+
+    public List<TRColour> ReadColours(long numColours)
+    {
+        List<TRColour> colours = new((int)numColours);
+        for (long i = 0; i < numColours; i++)
+        {
+            colours.Add(new()
+            {
+                Red = ReadByte(),
+                Green = ReadByte(),
+                Blue = ReadByte()
+            });
+        }
+        return colours;
+    }
+
+    public List<TRColour4> ReadColour4s(long numColours)
+    {
+        List<TRColour4> colours = new((int)numColours);
+        for (long i = 0; i < numColours; i++)
+        {
+            colours.Add(new()
+            {
+                Red = ReadByte(),
+                Green = ReadByte(),
+                Blue = ReadByte(),
+                Unused = ReadByte()
+            });
+        }
+        return colours;
+    }
 }
