@@ -21,7 +21,7 @@ public static class PngExporter
         Export(@"TR3\PNG", lvl, level.Images16);
     }
 
-    public static void Export(string topDir, string lvl, IEnumerable<TRTexImage8> images, TRColour[] palette)
+    public static void Export(string topDir, string lvl, IEnumerable<TRTexImage8> images, List<TRColour> palette)
     {
         string dir = MakeDir(topDir, lvl);
         int index = 0;

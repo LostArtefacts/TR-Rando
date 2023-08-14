@@ -37,7 +37,7 @@ public static class TextureUtilities
         return convertedPixels;
     }
 
-    public static Bitmap ToBitmap(this TRTexImage8 tex, TRColour[] palette)
+    public static Bitmap ToBitmap(this TRTexImage8 tex, List<TRColour> palette)
     {
         Bitmap bmp = new(_tileSize, _tileSize, PixelFormat.Format32bppArgb);
         BitmapData bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);

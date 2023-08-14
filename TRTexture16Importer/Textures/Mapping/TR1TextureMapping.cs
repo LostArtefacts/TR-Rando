@@ -29,7 +29,7 @@ public class TR1TextureMapping : AbstractTextureMapping<TREntities, TR1Level>
 
     protected override TRColour[] GetPalette8()
     {
-        return _level.Palette;
+        return _level.Palette.ToArray(); // Temporary until TR2/3 converted
     }
 
     protected override TRColour4[] GetPalette16()

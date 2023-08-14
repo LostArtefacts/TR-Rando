@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
@@ -7,7 +8,7 @@ namespace TRTexture16Importer.Helpers;
 
 public class TR1PaletteManager : IDisposable
 {
-    private const int _paletteLimit = byte.MaxValue;
+    private const int _paletteLimit = TRConsts.PaletteSize - 1;
     private const double _weightR = 1;
     private const double _weightG = 1;
     private const double _weightB = 1;
@@ -131,12 +132,8 @@ public class TR1PaletteManager : IDisposable
             _palette.Add(Color.Black);
         }
 
-        Level.Palette = new TRColour[_paletteLimit + 1];
-        for (int i = 0; i < Level.Palette.Length; i++)
-        {
-            Color c = _palette[i];
-            Level.Palette[i] = c.ToTRColour();
-        }
+        Level.Palette.Clear();
+        Level.Palette.AddRange(_palette.Select(c => c.ToTRColour()));
     }
 
     public int AddPredefinedColour(Color c)

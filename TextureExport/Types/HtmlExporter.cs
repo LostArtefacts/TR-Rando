@@ -66,7 +66,7 @@ public static class HtmlExporter
         Write("TR3", lvlName, tiles, levelSel, skyboxInfo);
     }
 
-    private static void BuildTiles(StringBuilder html, IReadOnlyList<TexturedTile> tiles, TRColour[] palette = null)
+    private static void BuildTiles(StringBuilder html, IReadOnlyList<TexturedTile> tiles, List<TRColour> palette = null)
     {
         foreach (TexturedTile tile in tiles)
         {
@@ -97,7 +97,7 @@ public static class HtmlExporter
                             if (c.A != 0)
                             {
                                 TRColour col = c.ToTRColour();
-                                int index = Array.FindIndex(palette, p => p.Red == col.Red && p.Green == col.Green && p.Blue == col.Blue);
+                                int index = palette.FindIndex(p => p.Red == col.Red && p.Green == col.Green && p.Blue == col.Blue);
                                 if (index != -1)
                                 {
                                     paletteIndices.Add(index);

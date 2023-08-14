@@ -230,11 +230,7 @@ public class TR1Level : TRLevelBase
     /// (32 * 256 entries) of 1 byte = 8192 bytes
     /// </summary>
     public byte[] LightMap { get; set; }
-
-    /// <summary>
-    /// 256 entries * 3 components = 768 Bytes
-    /// </summary>
-    public TRColour[] Palette { get; set; }
+    public List<TRColour> Palette { get; set; }
 
     /// <summary>
     /// 2 bytes
