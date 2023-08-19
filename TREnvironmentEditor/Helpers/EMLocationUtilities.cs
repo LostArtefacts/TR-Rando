@@ -18,16 +18,10 @@ public static class EMLocationUtilities
     public static int GetContainedSecretEntity(this EMLocation location, TR2Level level, FDControl floorData)
     {
         TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-        for (int i = 0; i < level.NumEntities; i++)
-        {
-            TR2Entity entity = level.Entities[i];
-            if (TR2EntityUtilities.IsSecretType((TR2Entities)entity.TypeID)
-                && FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData) == sector)
-            {
-                return i;
-            }
-        }
-        return -1;
+        return Array.FindIndex(level.Entities, e =>
+            TR2EntityUtilities.IsSecretType((TR2Entities)e.TypeID)
+            && FDUtilities.GetRoomSector(e.X, e.Y, e.Z, e.Room, level, floorData) == sector
+        );
     }
 
     public static int GetContainedSecretEntity(this EMLocation location, TR3Level level, FDControl floorData)
