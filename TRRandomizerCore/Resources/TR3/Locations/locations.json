@@ -4,7 +4,8 @@
       "X": 22052,
       "Y": 1536,
       "Z": 3598,
-      "Room": 11
+      "Room": 11,
+      "PackID": "Danza"
     },
     {
       "X": 27070,
@@ -35,7 +36,8 @@
       "Y": -7279,
       "Z": 6707,
       "Room": 13,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza"
     },
     {
       "X": 28386,
@@ -90,13 +92,15 @@
       "Y": -8704,
       "Z": 54245,
       "Room": 41,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza"
     },
     {
       "X": 53733,
       "Y": -6144,
       "Z": 53785,
-      "Room": 98
+      "Room": 98,
+      "PackID": "Danza"
     },
     {
       "X": 55795,
@@ -108,7 +112,8 @@
       "X": 68071,
       "Y": 768,
       "Z": 60923,
-      "Room": 141
+      "Room": 141,
+      "PackID": "Danza"
     },
     {
       "X": 65079,
@@ -126,7 +131,8 @@
       "X": 59758,
       "Y": -6144,
       "Z": 78079,
-      "Room": 55
+      "Room": 55,
+      "PackID": "Danza"
     },
     {
       "X": 64451,
@@ -159,7 +165,8 @@
       "X": 63994,
       "Y": 2048,
       "Z": 50658,
-      "Room": 31
+      "Room": 31,
+      "PackID": "Danza"
     },
     {
       "X": 56161,
@@ -171,13 +178,15 @@
       "X": 48185,
       "Y": -1024,
       "Z": 52097,
-      "Room": 13
+      "Room": 13,
+      "PackID": "Danza"
     },
     {
       "X": 44562,
       "Y": 1024,
       "Z": 59940,
-      "Room": 41
+      "Room": 41,
+      "PackID": "Danza"
     },
     {
       "X": 31839,
@@ -276,7 +285,8 @@
       "X": 18973,
       "Y": -7936,
       "Z": 47351,
-      "Room": 150
+      "Room": 150,
+      "PackID": "Danza"
     },
     {
       "X": 14598,
@@ -312,13 +322,15 @@
       "X": 30252,
       "Y": -768,
       "Z": 48664,
-      "Room": 138
+      "Room": 138,
+      "PackID": "Danza"
     },
     {
       "X": 45569,
       "Y": -8909,
       "Z": 32357,
-      "Room": 102
+      "Room": 102,
+      "PackID": "Danza"
     },
     {
       "X": 38460,
@@ -345,13 +357,15 @@
       "X": 53932,
       "Y": -3072,
       "Z": 62079,
-      "Room": 10
+      "Room": 10,
+      "PackID": "Danza"
     },
     {
       "X": 38321,
       "Y": -3840,
       "Z": 27143,
       "Room": 31,
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -365,6 +379,7 @@
       "Y": -3840,
       "Z": 33109,
       "Room": 31,
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -372,8 +387,9 @@
       "Y": -2816,
       "Z": 29197,
       "Room": 35,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 36320,
@@ -391,7 +407,8 @@
       "X": 49684,
       "Y": 0,
       "Z": 35255,
-      "Room": 23
+      "Room": 23,
+      "PackID": "Danza"
     },
     {
       "X": 38404,
@@ -409,7 +426,8 @@
       "X": 58883,
       "Y": -12032,
       "Z": 66051,
-      "Room": 12
+      "Room": 12,
+      "PackID": "Danza"
     }
   ],
   "CITY.TR2": [
@@ -436,7 +454,8 @@
       "Y": -3328,
       "Z": 46613,
       "Room": 43,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza"
     },
     {
       "X": 67094,
@@ -448,7 +467,8 @@
       "X": 69554,
       "Y": -19,
       "Z": 54340,
-      "Room": 51
+      "Room": 51,
+      "PackID": "Danza"
     },
     {
       "X": 46168,
@@ -460,7 +480,8 @@
       "X": 57781,
       "Y": 3365,
       "Z": 54800,
-      "Room": 54
+      "Room": 54,
+      "PackID": "Danza"
     },
     {
       "X": 51742,
@@ -514,7 +535,8 @@
       "X": 44994,
       "Y": -256,
       "Z": 35778,
-      "Room": 196
+      "Room": 196,
+      "PackID": "Danza"
     },
     {
       "X": 25514,
@@ -538,7 +560,8 @@
       "X": 23089,
       "Y": -1536,
       "Z": 75262,
-      "Room": 125
+      "Room": 125,
+      "PackID": "Danza"
     },
     {
       "X": 36343,
@@ -563,6 +586,7 @@
       "Y": -4346,
       "Z": 79348,
       "Room": 116,
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -619,7 +643,8 @@
       "X": 11782,
       "Y": -256,
       "Z": 37387,
-      "Room": 9
+      "Room": 9,
+      "PackID": "Danza"
     },
     {
       "X": 20003,
@@ -651,7 +676,8 @@
       "X": 48649,
       "Y": 2048,
       "Z": 34291,
-      "Room": 102
+      "Room": 102,
+      "PackID": "Danza"
     },
     {
       "X": 30197,
@@ -724,6 +750,7 @@
       "Y": -11264,
       "Z": 36159,
       "Room": 134,
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -731,8 +758,9 @@
       "Y": -7680,
       "Z": 30180,
       "Room": 100,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 54207,
@@ -774,7 +802,8 @@
       "X": 74656,
       "Y": 8704,
       "Z": 17483,
-      "Room": 118
+      "Room": 118,
+      "PackID": "Danza"
     },
     {
       "X": 76310,
@@ -792,7 +821,8 @@
       "X": 84827,
       "Y": 1065,
       "Z": 59851,
-      "Room": 67
+      "Room": 67,
+      "PackID": "Danza"
     },
     {
       "X": 78320,
@@ -848,7 +878,8 @@
       "X": 3734,
       "Y": 0,
       "Z": 82283,
-      "Room": 82
+      "Room": 82,
+      "PackID": "Danza"
     },
     {
       "X": 15144,
@@ -867,7 +898,8 @@
       "Y": -5120,
       "Z": 82208,
       "Room": 97,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza"
     },
     {
       "X": 26104,
@@ -894,24 +926,25 @@
       "Y": -5120,
       "Z": 74209,
       "Room": 97,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 23058,
       "Y": -5120,
       "Z": 77285,
       "Room": 97,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 24900,
       "Y": -6400,
       "Z": 83647,
       "Room": 95,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 36541,
@@ -968,8 +1001,9 @@
       "Y": -5888,
       "Z": 58881,
       "Room": 11,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 71168,
@@ -1018,22 +1052,23 @@
       "Y": -4096,
       "Z": 34322,
       "Room": 14,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 72306,
       "Y": -6912,
       "Z": 35314,
       "Room": 14,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 76361,
       "Y": -1792,
       "Z": 37448,
       "Room": 12,
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -1064,7 +1099,8 @@
       "X": 72090,
       "Y": -6144,
       "Z": 23790,
-      "Room": 60
+      "Room": 60,
+      "PackID": "Danza"
     },
     {
       "X": 60321,
@@ -1093,16 +1129,17 @@
       "Y": -2048,
       "Z": 29148,
       "Room": 13,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 25347,
       "Y": 1216,
       "Z": 41204,
       "Room": 4,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 32253,
@@ -1213,7 +1250,8 @@
       "Y": 22272,
       "Z": 75955,
       "Room": 25,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza"
     },
     {
       "X": 24083,
@@ -1297,7 +1335,8 @@
       "Y": 23100,
       "Z": 57428,
       "Room": 34,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza"
     },
     {
       "X": 42487,
@@ -1317,16 +1356,16 @@
       "Y": 19884,
       "Z": 81587,
       "Room": 150,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 52058,
       "Y": 20557,
       "Z": 82394,
       "Room": 150,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 52980,
@@ -1398,7 +1437,8 @@
       "X": 93081,
       "Y": 26342,
       "Z": 53183,
-      "Room": 70
+      "Room": 70,
+      "PackID": "Danza"
     },
     {
       "X": 86641,
@@ -1434,7 +1474,8 @@
       "X": 67433,
       "Y": 26431,
       "Z": 72830,
-      "Room": 63
+      "Room": 63,
+      "PackID": "Danza"
     },
     {
       "X": 77436,
@@ -1500,7 +1541,8 @@
       "X": 43467,
       "Y": 24320,
       "Z": 91670,
-      "Room": 97
+      "Room": 97,
+      "PackID": "Danza"
     },
     {
       "X": 43520,
@@ -1548,7 +1590,8 @@
       "X": 51728,
       "Y": 2048,
       "Z": 51690,
-      "Room": 75
+      "Room": 75,
+      "PackID": "Danza"
     },
     {
       "X": 59973,
@@ -1604,13 +1647,15 @@
       "X": 34303,
       "Y": 4608,
       "Z": 53668,
-      "Room": 10
+      "Room": 10,
+      "PackID": "Danza"
     },
     {
       "X": 66129,
       "Y": 7787,
       "Z": 66074,
-      "Room": 95
+      "Room": 95,
+      "PackID": "Danza"
     },
     {
       "X": 54806,
@@ -1646,7 +1691,8 @@
       "X": 61437,
       "Y": 25083,
       "Z": 57327,
-      "Room": 160
+      "Room": 160,
+      "PackID": "Danza"
     },
     {
       "X": 71763,
@@ -1670,7 +1716,8 @@
       "X": 14287,
       "Y": 7424,
       "Z": 61349,
-      "Room": 124
+      "Room": 124,
+      "PackID": "Danza"
     },
     {
       "X": 12315,
@@ -1732,7 +1779,8 @@
       "X": 6679,
       "Y": -2048,
       "Z": 19912,
-      "Room": 6
+      "Room": 6,
+      "PackID": "Danza"
     },
     {
       "X": 7367,
@@ -1766,15 +1814,17 @@
       "Y": -5120,
       "Z": 18889,
       "Room": 20,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza"
     },
     {
       "X": 29505,
       "Y": -5632,
       "Z": 8447,
       "Room": 2,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 29755,
@@ -1878,31 +1928,33 @@
       "X": 16599,
       "Y": -9472,
       "Z": 55909,
-      "Room": 52
+      "Room": 52,
+      "PackID": "Danza"
     },
     {
       "X": 27112,
       "Y": -17152,
       "Z": 85497,
       "Room": 66,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 44620,
       "Y": -14592,
       "Z": 68098,
       "Room": 66,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 41092,
       "Y": -14592,
       "Z": 84086,
       "Room": 66,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 36769,
@@ -1916,8 +1968,8 @@
       "Y": -14592,
       "Z": 81874,
       "Room": 66,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 42836,
@@ -1935,7 +1987,8 @@
       "X": 35685,
       "Y": -5632,
       "Z": 71175,
-      "Room": 177
+      "Room": 177,
+      "PackID": "Danza"
     },
     {
       "X": 75414,
@@ -2029,32 +2082,33 @@
       "Y": 2560,
       "Z": 88116,
       "Room": 146,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 58864,
       "Y": -2048,
       "Z": 81416,
       "Room": 143,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 58864,
       "Y": -2048,
       "Z": 89634,
       "Room": 143,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 76266,
       "Y": -2048,
       "Z": 88594,
       "Room": 143,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     }
   ],
   "OFFICE.TR2": [
@@ -2062,7 +2116,8 @@
       "X": 52786,
       "Y": 0,
       "Z": 42457,
-      "Room": 19
+      "Room": 19,
+      "PackID": "Danza"
     },
     {
       "X": 52722,
@@ -2092,7 +2147,8 @@
       "X": 36353,
       "Y": -6144,
       "Z": 51675,
-      "Room": 11
+      "Room": 11,
+      "PackID": "Danza"
     },
     {
       "X": 31237,
@@ -2104,7 +2160,8 @@
       "X": 37378,
       "Y": -13056,
       "Z": 52727,
-      "Room": 14
+      "Room": 14,
+      "PackID": "Danza"
     },
     {
       "X": 34711,
@@ -2129,6 +2186,7 @@
       "Y": -15804,
       "Z": 63933,
       "Room": 16,
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -2136,6 +2194,7 @@
       "Y": -14080,
       "Z": 65210,
       "Room": 15,
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -2143,6 +2202,7 @@
       "Y": -16896,
       "Z": 56665,
       "Room": 17,
+      "PackID": "Danza",
       "RequiresGlitch": true
     }
   ],
@@ -2159,6 +2219,7 @@
       "Y": -5378,
       "Z": 53004,
       "Room": 13,
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -2221,7 +2282,8 @@
       "X": 38344,
       "Y": -5376,
       "Z": 32229,
-      "Room": 138
+      "Room": 138,
+      "PackID": "Danza"
     },
     {
       "X": 43513,
@@ -2258,7 +2320,8 @@
       "X": 48612,
       "Y": 936,
       "Z": 65186,
-      "Room": 23
+      "Room": 23,
+      "PackID": "Danza"
     },
     {
       "X": 50264,
@@ -2306,13 +2369,15 @@
       "X": 81791,
       "Y": 191,
       "Z": 24745,
-      "Room": 57
+      "Room": 57,
+      "PackID": "Danza"
     },
     {
       "X": 66996,
       "Y": 512,
       "Z": 22077,
-      "Room": 27
+      "Room": 27,
+      "PackID": "Danza"
     },
     {
       "X": 67737,
@@ -2330,7 +2395,8 @@
       "X": 46275,
       "Y": 1950,
       "Z": 73571,
-      "Room": 160
+      "Room": 160,
+      "PackID": "Danza"
     },
     {
       "X": 39375,
@@ -2357,6 +2423,7 @@
       "Y": -26880,
       "Z": 52205,
       "Room": 50,
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -2364,8 +2431,8 @@
       "Y": -28618,
       "Z": 44412,
       "Room": 53,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 63948,
@@ -2409,7 +2476,8 @@
       "X": 80117,
       "Y": -23040,
       "Z": 34037,
-      "Room": 14
+      "Room": 14,
+      "PackID": "Danza"
     },
     {
       "X": 79127,
@@ -2428,15 +2496,16 @@
       "Y": -18136,
       "Z": 22003,
       "Room": 18,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 81158,
       "Y": -17539,
       "Z": 28414,
       "Room": 18,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza"
     },
     {
       "X": 51547,
@@ -2448,7 +2517,8 @@
       "X": 41836,
       "Y": -4699,
       "Z": 37228,
-      "Room": 66
+      "Room": 66,
+      "PackID": "Danza"
     },
     {
       "X": 43507,
@@ -2461,7 +2531,8 @@
       "X": 41459,
       "Y": 13056,
       "Z": 72237,
-      "Room": 95
+      "Room": 95,
+      "PackID": "Danza"
     },
     {
       "X": 54004,
@@ -2517,7 +2588,8 @@
       "X": 68100,
       "Y": -20736,
       "Z": 39457,
-      "Room": 49
+      "Room": 49,
+      "PackID": "Danza"
     }
   ],
   "ROOFS.TR2": [
@@ -2589,6 +2661,7 @@
       "Y": -26103,
       "Z": 37906,
       "Room": 128,
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -2596,7 +2669,8 @@
       "Y": -20736,
       "Z": 25130,
       "Room": 112,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza"
     },
     {
       "X": 57944,
@@ -2609,14 +2683,15 @@
       "Y": -27329,
       "Z": 49893,
       "Room": 1,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 38416,
       "Y": -23040,
       "Z": 54774,
       "Room": 25,
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -2637,22 +2712,25 @@
       "X": 52732,
       "Y": -21504,
       "Z": 55761,
-      "Room": 116
+      "Room": 116,
+      "PackID": "Danza"
     },
     {
       "X": 46599,
       "Y": -14848,
       "Z": 74206,
       "Room": 53,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 68077,
       "Y": -18944,
       "Z": 68099,
       "Room": 118,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza"
     },
     {
       "X": 68098,
@@ -2666,8 +2744,8 @@
       "Y": -19200,
       "Z": 75209,
       "Room": 188,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "RequiresGlitch": true
     },
     {
       "X": 34235,
@@ -2743,8 +2821,9 @@
       "Y": 5888,
       "Z": 65118,
       "Room": 138,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 70073,
@@ -2762,7 +2841,8 @@
       "X": 61972,
       "Y": -7424,
       "Z": 85527,
-      "Room": 37
+      "Room": 37,
+      "PackID": "Danza"
     },
     {
       "X": 70505,
@@ -2775,8 +2855,9 @@
       "Y": 7835,
       "Z": 55305,
       "Room": 141,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 65574,
@@ -2887,7 +2968,8 @@
       "X": 51264,
       "Y": -2304,
       "Z": 63375,
-      "Room": 69
+      "Room": 69,
+      "PackID": "Danza"
     },
     {
       "X": 62980,
@@ -2905,7 +2987,8 @@
       "X": 40419,
       "Y": -3840,
       "Z": 64087,
-      "Room": 55
+      "Room": 55,
+      "PackID": "Danza"
     },
     {
       "X": 39416,
@@ -2935,7 +3018,8 @@
       "X": 51182,
       "Y": -4096,
       "Z": 77967,
-      "Room": 67
+      "Room": 67,
+      "PackID": "Danza"
     },
     {
       "X": 44451,
@@ -2969,7 +3053,8 @@
       "X": 14469,
       "Y": -1280,
       "Z": 26501,
-      "Room": 3
+      "Room": 3,
+      "PackID": "Danza"
     },
     {
       "X": 26803,
@@ -3020,6 +3105,7 @@
       "Z": 37374,
       "Room": 2,
       "Difficulty": "Hard",
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -3038,7 +3124,8 @@
       "X": 18280,
       "Y": -8008,
       "Z": 84777,
-      "Room": 15
+      "Room": 15,
+      "PackID": "Danza"
     },
     {
       "X": 12435,
@@ -3062,7 +3149,8 @@
       "X": 25082,
       "Y": 2430,
       "Z": 93704,
-      "Room": 53
+      "Room": 53,
+      "PackID": "Danza"
     },
     {
       "X": 57859,
@@ -3143,6 +3231,7 @@
       "Z": 92461,
       "Room": 115,
       "Difficulty": "Hard",
+      "PackID": "Danza",
       "RequiresGlitch": true
     },
     {
@@ -3159,6 +3248,7 @@
       "Z": 82855,
       "Room": 190,
       "Difficulty": "Hard",
+      "PackID": "Danza",
       "RequiresGlitch": true
     }
   ],
@@ -3173,31 +3263,36 @@
       "X": 48651,
       "Y": -12032,
       "Z": 67092,
-      "Room": 0
+      "Room": 0,
+      "PackID": "Danza"
     },
     {
       "X": 52732,
       "Y": -9472,
       "Z": 58865,
-      "Room": 20
+      "Room": 20,
+      "PackID": "Danza"
     },
     {
       "X": 40447,
       "Y": -4352,
       "Z": 57848,
-      "Room": 55
+      "Room": 55,
+      "PackID": "Danza"
     },
     {
       "X": 44505,
       "Y": -256,
       "Z": 66052,
-      "Room": 62
+      "Room": 62,
+      "PackID": "Danza"
     },
     {
       "X": 49703,
       "Y": -3968,
       "Z": 61940,
-      "Room": 47
+      "Room": 47,
+      "PackID": "Danza"
     },
     {
       "X": 48641,
@@ -3246,7 +3341,8 @@
       "X": 36419,
       "Y": 1535,
       "Z": 38408,
-      "Room": 6
+      "Room": 6,
+      "PackID": "Danza"
     }
   ],
   "TEMPLE.TR2": [
@@ -3261,6 +3357,7 @@
       "Y": 7168,
       "Z": 61960,
       "Room": 85,
+      "PackID": "Danza",
       "Validated": false
     },
     {
@@ -3309,7 +3406,8 @@
       "X": 47206,
       "Y": 2585,
       "Z": 26061,
-      "Room": 201
+      "Room": 201,
+      "PackID": "Danza"
     },
     {
       "X": 32227,
@@ -3352,7 +3450,8 @@
       "X": 14842,
       "Y": 4352,
       "Z": 46580,
-      "Room": 215
+      "Room": 215,
+      "PackID": "Danza"
     },
     {
       "X": 19999,
@@ -3400,7 +3499,8 @@
       "X": 87216,
       "Y": 3968,
       "Z": 57677,
-      "Room": 9
+      "Room": 9,
+      "PackID": "Danza"
     },
     {
       "X": 78900,
@@ -3433,8 +3533,9 @@
       "Y": -9728,
       "Z": 57975,
       "Room": 33,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 81402,
@@ -3454,7 +3555,8 @@
       "Y": -6017,
       "Z": 29179,
       "Room": 26,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza"
     },
     {
       "X": 66440,
@@ -3475,20 +3577,23 @@
       "Y": -17408,
       "Z": 50687,
       "Room": 20,
-      "RequiresGlitch": true,
-      "Difficulty": "Hard"
+      "Difficulty": "Hard",
+      "PackID": "Danza",
+      "RequiresGlitch": true
     },
     {
       "X": 18940,
       "Y": -12288,
       "Z": 43460,
-      "Room": 15
+      "Room": 15,
+      "PackID": "Danza"
     },
     {
       "X": 15952,
       "Y": -15360,
       "Z": 51631,
-      "Room": 9
+      "Room": 9,
+      "PackID": "Danza"
     },
     {
       "X": 16909,
@@ -3500,25 +3605,29 @@
       "X": 15903,
       "Y": -14848,
       "Z": 65979,
-      "Room": 16
+      "Room": 16,
+      "PackID": "Danza"
     },
     {
       "X": 20986,
       "Y": -14848,
       "Z": 59801,
-      "Room": 17
+      "Room": 17,
+      "PackID": "Danza"
     },
     {
       "X": 11707,
       "Y": -12032,
       "Z": 67128,
-      "Room": 10
+      "Room": 10,
+      "PackID": "Danza"
     },
     {
       "X": 15817,
       "Y": -12032,
       "Z": 58907,
-      "Room": 10
+      "Room": 10,
+      "PackID": "Danza"
     }
   ],
   "TOWER.TR2": [
@@ -3618,13 +3727,15 @@
       "X": 57760,
       "Y": -8704,
       "Z": 31743,
-      "Room": 72
+      "Room": 72,
+      "PackID": "Danza"
     },
     {
       "X": 71008,
       "Y": 1792,
       "Z": 56603,
-      "Room": 97
+      "Room": 97,
+      "PackID": "Danza"
     },
     {
       "X": 61569,
@@ -3654,7 +3765,8 @@
       "X": 59911,
       "Y": -3840,
       "Z": 29141,
-      "Room": 69
+      "Room": 69,
+      "PackID": "Danza"
     },
     {
       "X": 28270,
@@ -3672,7 +3784,8 @@
       "X": 25807,
       "Y": -1792,
       "Z": 35267,
-      "Room": 181
+      "Room": 181,
+      "PackID": "Danza"
     },
     {
       "X": 24484,
@@ -3684,7 +3797,8 @@
       "X": 33263,
       "Y": -1940,
       "Z": 16978,
-      "Room": 146
+      "Room": 146,
+      "PackID": "Danza"
     },
     {
       "X": 73684,
@@ -3710,6 +3824,7 @@
       "Z": 50689,
       "Room": 104,
       "Difficulty": "Hard",
+      "PackID": "Danza",
       "RequiresGlitch": true
     }
   ],
@@ -3718,38 +3833,43 @@
       "X": 46572,
       "Y": -10130,
       "Z": 41398,
-      "Room": 23
+      "Room": 23,
+      "PackID": "Danza"
     },
     {
       "X": 65236,
       "Y": -5170,
       "Z": 57248,
-      "Room": 29
+      "Room": 29,
+      "PackID": "Danza"
     },
     {
       "X": 65187,
       "Y": -5183,
       "Z": 58461,
-      "Room": 29
+      "Room": 29,
+      "PackID": "Danza"
     },
     {
       "X": 41984,
       "Y": -17920,
       "Z": 47116,
-      "Room": 15
+      "Room": 15,
+      "PackID": "Danza"
     },
     {
       "X": 41978,
       "Y": -17920,
       "Z": 57301,
-      "Room": 15
+      "Room": 15,
+      "PackID": "Danza"
     },
     {
       "X": 49668,
       "Y": -14592,
       "Z": 52741,
-      "Room": 20
+      "Room": 20,
+      "PackID": "Danza"
     }
-  ],
-  "HOUSE.TR2": []
+  ]
 }
