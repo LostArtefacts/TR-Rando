@@ -74,6 +74,11 @@ public class TR3CombinedLevel
     public bool IsCoastalSequence => Sequence == 5;
 
     /// <summary>
+    /// Whether or not this level is in the sequence of original Crash Site.
+    /// </summary>
+    public bool IsCrashSequence => Sequence == 6;
+
+    /// <summary>
     /// Whether or not this level is in the sequence of original Madubu Gorge.
     /// </summary>
     public bool IsMadubuSequence => Sequence == 7;
