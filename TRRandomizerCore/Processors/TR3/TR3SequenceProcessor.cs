@@ -129,6 +129,11 @@ public class TR3SequenceProcessor : TR3LevelProcessor
             // underground as there is no way to pass otherwise.
             AmendSouthPacificSpikes(level);
         }
+        else if (level.Is(TR3LevelNames.CRASH) && !level.IsCrashSequence)
+        {
+            // Piranhas don't attack the raptor when it falls into the pool, so Lara can't (easily) pull the lever.
+            AmendCrashSitePiranhas(level);
+        }
 
         if (Settings.RandomizeSequencing)
         {
@@ -350,6 +355,18 @@ public class TR3SequenceProcessor : TR3LevelProcessor
             {
                 entity.Invisible = false;
             }
+        }
+    }
+
+    private static void AmendCrashSitePiranhas(TR3CombinedLevel level)
+    {
+        TR2Entity piranhas = Array.Find(
+            level.Data.Entities, e => e.TypeID == (short)TR3Entities.Piranhas_N && e.Room == 61);
+        if (piranhas != null)
+        {
+            // Move them behind the gate, which is an unreachable room
+            piranhas.X = 59904;
+            piranhas.Room = 65;
         }
     }
 }
