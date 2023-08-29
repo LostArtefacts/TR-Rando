@@ -44,6 +44,11 @@ public class TR3SecretRewardRandomizer : BaseTR3Randomizer
 
         foreach (int rewardIndex in secretMapping.RewardEntities)
         {
+            if (level.Data.Entities[rewardIndex].TypeID == (short)TR3Entities.SaveCrystal_P)
+            {
+                continue;
+            }
+
             level.Data.Entities[rewardIndex].TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
         }
     }
