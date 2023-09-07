@@ -1790,7 +1790,7 @@
 
                     <Border
                         Grid.Row="1"
-                        IsEnabled="{Binding ControllerProxy.UseEnemyClones, Mode=TwoWay}">
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
                         <CheckBox
                             IsChecked="{Binding ControllerProxy.CloneOriginalEnemies, Mode=TwoWay}"
                             VerticalAlignment="Center">
@@ -1803,15 +1803,15 @@
                     <Border
                         Grid.Column="1"
                         Grid.Row="1"
-                        IsEnabled="{Binding ControllerProxy.UseEnemyClones, Mode=TwoWay}">
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
                         <Label 
                             Style="{StaticResource OptionDescriptionStyle}"
-                            Content="Override all other enemy options and revert to using the original enemies plus their clones only."/>
+                            Content="Override enemy type randomization and revert to using the original enemies plus their clones only."/>
                     </Border>
 
                     <Border
                         Grid.Row="2"
-                        IsEnabled="{Binding ControllerProxy.UseEnemyClones, Mode=TwoWay}">
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
                         <CheckBox
                             IsChecked="{Binding ControllerProxy.UseKillableClonePierres, Mode=TwoWay}"
                             VerticalAlignment="Center">
@@ -1824,7 +1824,7 @@
                     <Border
                         Grid.Column="1"
                         Grid.Row="2"
-                        IsEnabled="{Binding ControllerProxy.UseEnemyClones, Mode=TwoWay}">
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
                         <Label 
                             Style="{StaticResource OptionDescriptionStyle}"
                             Content="Makes Pierre always killable, otherwise only one will ever spawn at a time."/>
@@ -1833,7 +1833,7 @@
                     <Border
                         Margin="0,3,0,0"
                         Grid.Row="3"
-                        IsEnabled="{Binding ControllerProxy.UseEnemyClones, Mode=TwoWay}">
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
                         <StackPanel
                             Orientation="Horizontal" 
                             HorizontalAlignment="Left">
@@ -1855,7 +1855,7 @@
                     <Border
                         Grid.Column="1"
                         Grid.Row="3"
-                        IsEnabled="{Binding ControllerProxy.UseEnemyClones, Mode=TwoWay}">
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
                         <Label
                             Style="{StaticResource OptionDescriptionStyle}"
                             Content="Set the total enemy count per instance e.g. 2 implies each enemy will be cloned once; 3 implies cloned twice etc."/>
