@@ -3,7 +3,7 @@
   "NonPurist": [
     {
       "Comments": "Ensure the enemies in room 15 are always triggered rather than only from the invisible platform.",
-      "EMType": 61,
+      "EMType": 63,
       "Locations": [
         {
           "X": 47616,
@@ -12,16 +12,49 @@
           "Room": 14
         }
       ],
-      "Trigger": {
-        "Mask": 31,
-        "Actions": [
-          {
-            "Parameter": 34
-          },
-          {
-            "Parameter": 35
-          }
-        ]
+      "BaseLocation": {
+        "X": 45568,
+        "Y": -8704,
+        "Z": 54784,
+        "Room": 3
+      }
+    },
+    {
+      "EMType": 69,
+      "Location": {
+        "X": 47616,
+        "Y": -5376,
+        "Z": 33280,
+        "Room": 14
+      },
+      "TrigType": 0
+    },
+    {
+      "EMType": 71,
+      "Locations": [
+        {
+          "X": 47616,
+          "Y": -5376,
+          "Z": 33280,
+          "Room": 14
+        }
+      ],
+      "ActionItem": {
+        "Parameter": 10
+      }
+    },
+    {
+      "EMType": 71,
+      "Locations": [
+        {
+          "X": 47616,
+          "Y": -5376,
+          "Z": 33280,
+          "Room": 14
+        }
+      ],
+      "ActionItem": {
+        "Action": 10
       }
     },
     {
