@@ -316,6 +316,7 @@
                                         HasDifficulty="True"
                                         HasDragonSpawn="{Binding Data.IsDragonSpawnTypeSupported, Source={StaticResource proxy}}"
                                         HasBirdMonsterBehaviour="{Binding Data.IsBirdMonsterBehaviourTypeSupported, Source={StaticResource proxy}}"
+                                        HasClonedEnemyMode="{Binding Data.IsClonedEnemiesTypeSupported, Source={StaticResource proxy}}"
                                         ControllerProxy="{Binding Data, Source={StaticResource proxy}}">
                 </windows:AdvancedWindow>
             </ctrl:ManagedSeedAdvancedControl.AdvancedWindowToOpen>

@@ -56,5 +56,6 @@ public enum TRRandomizerType
     HardEnvironment,
     Traps,
     ChallengeRooms,
-    DynamicEnemyTextures
+    DynamicEnemyTextures,
+    ClonedEnemies,
 }
