@@ -1557,6 +1557,12 @@ public class TRRandomizerController
         set => LevelRandomizer.ReplaceRequiredEnemies = value;
     }
 
+    public bool GiveUnarmedItems
+    {
+        get => LevelRandomizer.GiveUnarmedItems;
+        set => LevelRandomizer.GiveUnarmedItems = value;
+    }
+
     public bool RandomizeOutfits
     {
         get => LevelRandomizer.RandomizeOutfits;
