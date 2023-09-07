@@ -176,7 +176,8 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             TR3Entities currentType = (TR3Entities)ent.TypeID;
             // If this is an unarmed level's pistols, make sure they're replaced with another weapon.
             // Similar case for the assault course, so that Lara can still shoot Winnie.
-            if (ent == _unarmedLevelPistols || (level.IsAssault && TR3EntityUtilities.IsWeaponPickup(currentType)))
+            if ((ent == _unarmedLevelPistols && Settings.GiveUnarmedItems)
+                || (level.IsAssault && TR3EntityUtilities.IsWeaponPickup(currentType)))
             {
                 do
                 {

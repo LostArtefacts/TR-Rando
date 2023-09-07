@@ -600,6 +600,11 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
     private void AddUnarmedLevelAmmo(TR3CombinedLevel level)
     {
+        if (!Settings.GiveUnarmedItems)
+        {
+            return;
+        }
+
         // Find out which gun we have for this level
         List<TR2Entity> levelEntities = level.Data.Entities.ToList();
         List<TR3Entities> weaponTypes = TR3EntityUtilities.GetWeaponPickups();

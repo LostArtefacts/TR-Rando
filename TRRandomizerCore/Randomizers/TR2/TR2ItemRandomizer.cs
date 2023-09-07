@@ -638,6 +638,11 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void RandomizeUnarmedLevelWeapon()
     {
+        if (!Settings.GiveUnarmedItems)
+        {
+            return;
+        }
+
         //Is there something in the unarmed level pistol location?
         if (_unarmedLevelPistolIndex != -1)
         {

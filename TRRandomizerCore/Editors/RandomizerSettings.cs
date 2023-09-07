@@ -73,6 +73,7 @@ public class RandomizerSettings
     public bool AllowEmptyEggs { get; set; }
     public bool HideEnemiesUntilTriggered { get; set; }
     public bool ReplaceRequiredEnemies { get; set; }
+    public bool GiveUnarmedItems { get; set; }
     public bool GlitchedSecrets { get; set; }
     public bool GuaranteeSecrets { get; set; }
     public bool UseRewardRoomCameras { get; set; }
@@ -213,6 +214,8 @@ public class RandomizerSettings
             .Select(s => short.Parse(s))
             .Where(s => ExcludableEnemies.ContainsKey(s))
             .ToList();
+
+        GiveUnarmedItems = config.GetBool(nameof(GiveUnarmedItems), true);
 
         RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
         TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
@@ -361,6 +364,7 @@ public class RandomizerSettings
         config[nameof(AllowEmptyEggs)] = AllowEmptyEggs;
         config[nameof(HideEnemiesUntilTriggered)] = HideEnemiesUntilTriggered;
         config[nameof(ReplaceRequiredEnemies)] = ReplaceRequiredEnemies;
+        config[nameof(GiveUnarmedItems)] = GiveUnarmedItems;
 
         config[nameof(RandomizeTextures)] = RandomizeTextures;
         config[nameof(TextureSeed)] = TextureSeed;

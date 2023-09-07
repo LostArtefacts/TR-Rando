@@ -31,7 +31,7 @@ public class ControllerOptions : INotifyPropertyChanged
     private TRSecretCountMode _secretCountMode;
     private uint _minSecretCount, _maxSecretCount;
     private BoolItemControlClass _includeKeyItems, _includeExtraPickups, _randomizeItemTypes, _randomizeItemLocations;
-    private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson;
+    private BoolItemControlClass _crossLevelEnemies, _protectMonks, _docileWillard, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems;
     private BoolItemControlClass _persistTextures, _randomizeWaterColour, _retainLevelTextures, _retainKeySpriteTextures, _retainSecretSpriteTextures, _retainEnemyTextures, _retainLaraTextures;
     private BoolItemControlClass _changeAmbientTracks, _includeBlankTracks, _changeTriggerTracks, _separateSecretTracks, _changeWeaponSFX, _changeCrashSFX, _changeEnemySFX, _changeDoorSFX, _linkCreatureSFX, _randomizeWibble;
     private BoolItemControlClass _persistOutfits, _removeRobeDagger, _allowGymOutfit;
@@ -2179,6 +2179,16 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public BoolItemControlClass GiveUnarmedItems
+    {
+        get => _giveUnarmedItems;
+        set
+        {
+            _giveUnarmedItems = value;
+            FirePropertyChanged();
+        }
+    }
+
     public RandoDifficulty RandoEnemyDifficulty
     {
         get => _randoEnemyDifficulty;
@@ -2665,6 +2675,12 @@ public class ControllerOptions : INotifyPropertyChanged
             Description = "Replaces the normally required Larson in Tomb of Qualopec and Torso in Great Pyramid with randomized enemies."
         };
         BindingOperations.SetBinding(RemoveLevelEndingLarson, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
+        GiveUnarmedItems = new()
+        {
+            Title = "Give unarmed level items",
+            Description = "If a level is unarmed, give extra ammo, medipacks and a weapon other than the pistols (based on enemy difficulty)."
+        };
+        BindingOperations.SetBinding(GiveUnarmedItems, BoolItemControlClass.IsActiveProperty, randomizeEnemiesBinding);
 
         // Textures
         Binding randomizeTexturesBinding = new(nameof(RandomizeTextures)) { Source = this };
@@ -2904,7 +2920,7 @@ public class ControllerOptions : INotifyPropertyChanged
         };
         EnemyBoolItemControls = new List<BoolItemControlClass>()
         {
-            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson
+            _crossLevelEnemies, _docileWillard, _protectMonks, _swapEnemyAppearance, _allowEmptyEggs, _hideEnemies, _removeLevelEndingLarson, _giveUnarmedItems
         };
         TextureBoolItemControls = new List<BoolItemControlClass>()
         {
@@ -3087,6 +3103,7 @@ public class ControllerOptions : INotifyPropertyChanged
         AllowEmptyEggs.Value = _controller.AllowEmptyEggs;
         HideEnemies.Value = _controller.HideEnemiesUntilTriggered;
         RemoveLevelEndingLarson.Value = _controller.RemoveLevelEndingLarson;
+        GiveUnarmedItems.Value = _controller.GiveUnarmedItems;
         RandoEnemyDifficulty = _controller.RandoEnemyDifficulty;
         UseEnemyExclusions = _controller.UseEnemyExclusions;
         ShowExclusionWarnings = _controller.ShowExclusionWarnings;
@@ -3374,6 +3391,7 @@ public class ControllerOptions : INotifyPropertyChanged
         _controller.AllowEmptyEggs = AllowEmptyEggs.Value;
         _controller.HideEnemiesUntilTriggered = HideEnemies.Value;
         _controller.RemoveLevelEndingLarson = RemoveLevelEndingLarson.Value;
+        _controller.GiveUnarmedItems = GiveUnarmedItems.Value;
         _controller.RandoEnemyDifficulty = RandoEnemyDifficulty;
         _controller.UseEnemyExclusions = UseEnemyExclusions;
         _controller.ShowExclusionWarnings = ShowExclusionWarnings;

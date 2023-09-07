@@ -201,7 +201,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             {
                 // Enemy rando may have changed this already to something else and allocated
                 // ammo to the inventory, so only change pistols.
-                if (entityType == TREntities.Pistols_S_P)
+                if (entityType == TREntities.Pistols_S_P && Settings.GiveUnarmedItems)
                 {
                     do
                     {
