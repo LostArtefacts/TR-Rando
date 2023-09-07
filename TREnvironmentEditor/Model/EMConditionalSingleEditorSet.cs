@@ -32,4 +32,10 @@ public class EMConditionalSingleEditorSet : ITextureModifier
         OnTrue?.RemapTextures(indexMap);
         OnFalse?.RemapTextures(indexMap);
     }
+
+    public void SetCommunityPatch(bool isCommunityPatch)
+    {
+        OnTrue?.SetCommunityPatch(isCommunityPatch);
+        OnFalse?.SetCommunityPatch(isCommunityPatch);
+    }
 }

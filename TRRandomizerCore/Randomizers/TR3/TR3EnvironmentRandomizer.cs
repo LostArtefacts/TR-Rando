@@ -101,6 +101,7 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
         EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath(json));
         if (mapping != null)
         {
+            mapping.SetCommunityPatch(ScriptEditor.Edition.IsCommunityPatch);
             ApplyMappingToLevel(level, mapping);
         }
 

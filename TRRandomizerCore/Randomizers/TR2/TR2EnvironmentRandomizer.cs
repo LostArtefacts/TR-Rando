@@ -90,6 +90,7 @@ public class TR2EnvironmentRandomizer : BaseTR2Randomizer, IMirrorControl
         EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath(@"TR2\Environment\" + level.Name + "-Environment.json"));
         if (mapping != null)
         {
+            mapping.SetCommunityPatch(ScriptEditor.Edition.IsCommunityPatch);
             if (level.IsUKBox)
             {
                 // The mapping is configured for EPC and Multipatch texture indices, but should

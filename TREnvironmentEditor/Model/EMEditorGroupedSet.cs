@@ -40,4 +40,10 @@ public class EMEditorGroupedSet : ITextureModifier
         Leader.RemapTextures(indexMap);
         Followers.ForEach(s => s.RemapTextures(indexMap));
     }
+
+    public void SetCommunityPatch(bool isCommunityPatch)
+    {
+        Leader.SetCommunityPatch(isCommunityPatch);
+        Followers.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
+    }
 }

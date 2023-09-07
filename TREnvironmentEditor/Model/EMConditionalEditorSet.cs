@@ -28,4 +28,10 @@ public class EMConditionalEditorSet
         OnTrue?.ForEach(s => s.RemapTextures(indexMap));
         OnFalse?.ForEach(s => s.RemapTextures(indexMap));
     }
+
+    public void SetCommunityPatch(bool isCommunityPatch)
+    {
+        OnTrue?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
+        OnFalse?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
+    }
 }
