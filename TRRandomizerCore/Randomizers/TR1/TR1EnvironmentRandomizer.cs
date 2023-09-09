@@ -93,6 +93,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
         EMEditorMapping mapping = EMEditorMapping.Get(GetResourcePath(@"TR1\Environment\" + level.Name + "-Environment.json"));
         if (mapping != null)
         {
+            mapping.SetCommunityPatch(ScriptEditor.Edition.IsCommunityPatch);
             ApplyMappingToLevel(level, mapping);
         }
 

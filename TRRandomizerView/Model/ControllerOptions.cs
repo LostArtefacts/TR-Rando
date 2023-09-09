@@ -72,6 +72,12 @@ public class ControllerOptions : INotifyPropertyChanged
     private string _secretPack;
     private string[] _availableSecretPacks;
 
+    private bool _useEnemyClones;
+    private uint _enemyMultiplier;
+    private uint _maxEnemyMultiplier;
+    private bool _cloneOriginalEnemies;
+    private bool _useKillableClonePierres;
+
     private List<BoolItemControlClass> _secretBoolItemControls, _itemBoolItemControls, _enemyBoolItemControls, _textureBoolItemControls, _audioBoolItemControls, _outfitBoolItemControls, _textBoolItemControls, _startBoolItemControls, _environmentBoolItemControls, _healthBoolItemControls, _weatherBoolItemControls;
     private List<BoolItemIDControlClass> _selectableEnemies;
     private bool _useEnemyExclusions, _showExclusionWarnings;
@@ -2439,6 +2445,56 @@ public class ControllerOptions : INotifyPropertyChanged
         }
     }
 
+    public bool UseEnemyClones
+    {
+        get => _useEnemyClones;
+        set
+        {
+            _useEnemyClones = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public uint EnemyMultiplier
+    {
+        get => _enemyMultiplier;
+        set
+        {
+            _enemyMultiplier = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public uint MaxEnemyMultiplier
+    {
+        get => _maxEnemyMultiplier;
+        private set
+        {
+            _maxEnemyMultiplier = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public bool CloneOriginalEnemies
+    {
+        get => _cloneOriginalEnemies;
+        set
+        {
+            _cloneOriginalEnemies = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public bool UseKillableClonePierres
+    {
+        get => _useKillableClonePierres;
+        set
+        {
+            _useKillableClonePierres = value;
+            FirePropertyChanged();
+        }
+    }
+
     public List<BoolItemControlClass> TextureBoolItemControls
     {
         get => _textureBoolItemControls;
@@ -3109,6 +3165,12 @@ public class ControllerOptions : INotifyPropertyChanged
         ShowExclusionWarnings = _controller.ShowExclusionWarnings;
         LoadEnemyExclusions();
 
+        UseEnemyClones = _controller.UseEnemyClones;
+        MaxEnemyMultiplier = TRRandomizerController.MaxEnemyMultiplier;
+        EnemyMultiplier = _controller.EnemyMultiplier;        
+        CloneOriginalEnemies = _controller.CloneOriginalEnemies;
+        UseKillableClonePierres = _controller.UseKillableClonePierres;
+
         RandomizeSecrets = _controller.RandomizeSecrets;
         SecretSeed = _controller.SecretSeed;
         IsHardSecrets.Value = _controller.HardSecrets;
@@ -3400,6 +3462,11 @@ public class ControllerOptions : INotifyPropertyChanged
         SelectableEnemyControls.FindAll(c => c.Value).ForEach(c => excludedEnemies.Add((short)c.ID));
         _controller.ExcludedEnemies = excludedEnemies;
 
+        _controller.UseEnemyClones = UseEnemyClones;
+        _controller.EnemyMultiplier = EnemyMultiplier;
+        _controller.CloneOriginalEnemies = CloneOriginalEnemies;
+        _controller.UseKillableClonePierres = UseKillableClonePierres;
+
         _controller.RandomizeSecrets = RandomizeSecrets;
         _controller.SecretSeed = SecretSeed;
         _controller.HardSecrets = IsHardSecrets.Value;
@@ -3606,6 +3673,7 @@ public class ControllerOptions : INotifyPropertyChanged
     public bool IsAtlanteanEggBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.AtlanteanEggBehaviour);
     public bool IsHiddenEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.HiddenEnemies);
     public bool IsLarsonBehaviourTypeSupported => IsRandomizationSupported(TRRandomizerType.LarsonBehaviour);
+    public bool IsClonedEnemiesTypeSupported => IsRandomizationSupported(TRRandomizerType.ClonedEnemies);
     public bool IsDisableDemosTypeSupported => IsRandomizationSupported(TRRandomizerType.DisableDemos);
     public bool IsItemSpriteTypeSupported => IsRandomizationSupported(TRRandomizerType.ItemSprite);
 

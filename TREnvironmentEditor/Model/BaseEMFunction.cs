@@ -19,9 +19,14 @@ public abstract class BaseEMFunction
     public BaseEMFunction HardVariant { get; set; }
     public List<EMTag> Tags { get; set; }
 
+    protected bool _isCommunityPatch;
+
     public abstract void ApplyToLevel(TR1Level level);
     public abstract void ApplyToLevel(TR2Level level);
     public abstract void ApplyToLevel(TR3Level level);
+
+    public void SetCommunityPatch(bool isCommunityPatch)
+        => _isCommunityPatch = isCommunityPatch;
 
     /// <summary>
     /// Gets the expected vertices for a flat tile.

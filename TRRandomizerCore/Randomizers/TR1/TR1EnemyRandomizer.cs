@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.Numerics;
 using TREnvironmentEditor.Helpers;
@@ -23,6 +24,13 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR1EnemyRandomizer : BaseTR1Randomizer
 {
+    public static readonly uint MaxClones = 8;
+    private static readonly EnemyTransportCollection _emptyEnemies = new()
+    {
+        EntitiesToImport = new(),
+        EntitiesToRemove = new()
+    };
+
     private Dictionary<TREntities, List<string>> _gameEnemyTracker;
     private Dictionary<string, List<Location>> _pistolLocations;
     private Dictionary<string, List<Location>> _eggLocations;
@@ -163,6 +171,12 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (level.IsAssault)
         {
             return null;
+        }
+
+        if (Settings.UseEnemyClones && Settings.CloneOriginalEnemies)
+        {
+            // Skip import altogether for OG clone mode
+            return _emptyEnemies;
         }
 
         // If level-ending Larson is disabled, we make an alternative ending to ToQ.
@@ -415,14 +429,19 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             return;
         }
 
-        List<TREntities> availableEnemyTypes = GetCurrentEnemyEntities(level);
-        List<TREntities> waterEnemies = TR1EntityUtilities.FilterWaterEnemies(availableEnemyTypes);
-
-        RandomizeEnemies(level, new EnemyRandomizationCollection
+        EnemyRandomizationCollection enemies = new()
         {
-            Available = availableEnemyTypes,
-            Water = waterEnemies
-        });
+            Available = new(),
+            Water = new()
+        };
+
+        if (!Settings.UseEnemyClones || !Settings.CloneOriginalEnemies)
+        {
+            enemies.Available.AddRange(GetCurrentEnemyEntities(level));
+            enemies.Water.AddRange(TR1EntityUtilities.FilterWaterEnemies(enemies.Available));
+        }
+
+        RandomizeEnemies(level, enemies);
     }
 
     private void RandomizeEnemies(TR1CombinedLevel level, EnemyRandomizationCollection enemies)
@@ -504,6 +523,11 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         foreach (TREntity currentEntity in enemyEntities)
         {
+            if (enemies.Available.Count == 0)
+            {
+                continue;
+            }
+
             TREntities currentEntityType = (TREntities)currentEntity.TypeID;
             TREntities newEntityType = currentEntityType;
 
@@ -685,6 +709,11 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             _resultantEnemies.Add(newEntityType);
         }
 
+        if (level.Is(TR1LevelNames.COLOSSEUM) && !Settings.PuristMode)
+        {
+            FixColosseumBats(level);
+        }
+
         if (level.Is(TR1LevelNames.TIHOCAN) && level.Data.Entities[82].TypeID != (short)TREntities.Pierre)
         {
             // Add a guaranteed key at the end of the level. Item rando can reposition it.
@@ -704,6 +733,11 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         // Fix missing OG animation SFX
         FixEnemyAnimations(level);
+
+        if (Settings.UseEnemyClones)
+        {
+            CloneEnemies(level);
+        }
 
         // Add extra ammo based on this level's difficulty
         if (Settings.CrossLevelEnemies && ScriptEditor.Edition.IsCommunityPatch && level.Script.RemovesWeapons)
@@ -789,15 +823,15 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         TRModel larsonModel = Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.Larson);
         if (larsonModel != null)
         {
-            // Convert Larson into a Great Pyramid scion, which is targetable. Environment mods will
-            // then add a heavy trigger to end the level. Add an additional enemy beside the scion.
+            // Convert the Larson model into the Great Pyramid scion to allow ending the level. Larson will
+            // become a raptor to allow for normal randomization. Environment mods will handle the specifics here. 
             larsonModel.ID = (uint)TREntities.ScionPiece3_S_P;
-            foreach (TREntity entity in Array.FindAll(level.Data.Entities, e => e.TypeID == (short)TREntities.Larson))
-            {
-                entity.TypeID = (short)TREntities.ScionPiece3_S_P;
-            }
+            level.Data.Entities
+                .Where(e => e.TypeID == (short)TREntities.Larson)
+                .ToList()
+                .ForEach(e => e.TypeID = (short)TREntities.Raptor);
 
-            // Make scion-Larson invisible.
+            // Make the scion invisible.
             TRMesh[] larsonMeshes = TRMeshUtilities.GetModelMeshes(level.Data, larsonModel);
             MeshEditor editor = new();
             foreach (TRMesh mesh in larsonMeshes)
@@ -1218,6 +1252,84 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         {
             TR1ModelExporter.AmendNatlaDeath(level.Data);
         }
+    }
+
+    private static void FixColosseumBats(TR1CombinedLevel level)
+    {
+        // Fix the bat trigger in Colosseum. Done outside of environment mods to allow for cloning.
+        // Item 74 is duplicated in each trigger.
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level.Data);
+
+        foreach (FDTriggerEntry trigger in FDUtilities.GetEntityTriggers(floorData, 74))
+        {
+            List<FDActionListItem> actions = trigger.TrigActionList
+                .FindAll(a => a.TrigAction == FDTrigAction.Object && a.Parameter == 74);
+            if (actions.Count == 2)
+            {
+                actions[0].Parameter = 73;
+            }
+        }
+
+        floorData.WriteToLevel(level.Data);
+    }
+
+    private void CloneEnemies(TR1CombinedLevel level)
+    {
+        List<TREntities> enemyTypes = TR1EntityUtilities.GetFullListOfEnemies();
+        List<TREntity> levelEntities = level.Data.Entities.ToList();
+        List<TREntity> enemies = levelEntities.FindAll(e => enemyTypes.Contains((TREntities)e.TypeID));
+
+        // If Adam is still in his egg, clone the egg as well. Otherwise there will be separate
+        // entities inside the egg that will have already been accounted for.
+        TREntity adamEgg = levelEntities.Find(e => e.TypeID == (short)TREntities.AdamEgg);
+        if (adamEgg != null
+            && CodeBitsToAtlantean(adamEgg.CodeBits) == TREntities.Adam
+            && Array.Find(level.Data.Models, m => m.ID == (uint)TREntities.Adam) != null)
+        {
+            enemies.Add(adamEgg);
+        }
+
+        FDControl floorData = new();
+        floorData.ParseFromLevel(level.Data);
+        
+        uint cloneCount = Math.Max(2, Math.Min(MaxClones, Settings.EnemyMultiplier)) - 1;
+        short angleDiff = (short)Math.Ceiling(ushort.MaxValue / (cloneCount + 1d));
+
+        foreach (TREntity enemy in enemies)
+        {
+            List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(floorData, levelEntities.IndexOf(enemy));
+            if (Settings.UseKillableClonePierres && enemy.TypeID == (short)TREntities.Pierre)
+            {
+                // Ensure OneShot, otherwise only ever one runaway Pierre
+                triggers.ForEach(t => t.TrigSetup.OneShot = true);
+            }
+
+            for (int i = 0; i < cloneCount; i++)
+            {
+                foreach (FDTriggerEntry trigger in triggers)
+                {
+                    trigger.TrigActionList.Add(new()
+                    {
+                        TrigAction = FDTrigAction.Object,
+                        Parameter = (ushort)levelEntities.Count
+                    });
+                }
+
+                TREntity clone = enemy.Clone();
+                levelEntities.Add(clone);
+
+                if (enemy.TypeID != (short)TREntities.AtlanteanEgg
+                    && enemy.TypeID != (short)TREntities.AdamEgg)
+                {
+                    clone.Angle -= (short)((i + 1) * angleDiff);
+                }
+            }
+        }
+
+        floorData.WriteToLevel(level.Data);
+        level.Data.Entities = levelEntities.ToArray();
+        level.Data.NumEntities = (uint)levelEntities.Count;
     }
 
     internal class EnemyProcessor : AbstractProcessorThread<TR1EnemyRandomizer>

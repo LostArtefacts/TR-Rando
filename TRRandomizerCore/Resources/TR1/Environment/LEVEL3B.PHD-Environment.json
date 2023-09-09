@@ -5881,10 +5881,9 @@
   "ConditionalAll": [
     {
       "Condition": {
-        "Comments": "If Larson has been converted into a (Great Pyramid) scion, add an alternative enemy and a level-end trigger.",
-        "ConditionType": 0,
-        "EntityIndex": 30,
-        "EntityType": 145
+        "Comments": "If Larson doesn't end the level, add a Great Pyramid scion to do so.",
+        "ConditionType": 41,
+        "ModelID": 145
       },
       "OnTrue": [
         {
@@ -5913,10 +5912,11 @@
           "IgnoreSectorEntities": true
         },
         {
-          "Comments": "Move the scion to the mesh location (it's here to avoid potential slope softlock).",
-          "EMType": 44,
-          "EntityIndex": 30,
-          "TargetLocation": {
+          "Comments": "Add the invisible scion.",
+          "EMType": 51,
+          "TypeID": 145,
+          "Intensity": -1,
+          "Location": {
             "X": 39424,
             "Y": 4864,
             "Z": 55808,
@@ -5925,32 +5925,7 @@
           }
         },
         {
-          "Comments": "Alternative normal enemy to fight.",
-          "EMType": 51,
-          "TypeID": 19,
-          "Intensity": -1,
-          "Location": {
-            "X": 40448,
-            "Y": 4864,
-            "Z": 56832,
-            "Room": 11,
-            "Angle": -32768
-          }
-        },
-        {
-          "Comments": "Convert the new enemy into one the level supports.",
-          "EMType": 47,
-          "EntityIndices": [
-            -1
-          ],
-          "NewEnemyType": 1,
-          "Exclusions": [
-            30,
-            33
-          ]
-        },
-        {
-          "Comments": "Trigger the new enemy.",
+          "Comments": "Trigger the scion.",
           "EMType": 68,
           "Location": {
             "X": 43520,

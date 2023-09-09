@@ -81,6 +81,11 @@ public class EMEditorSet : List<BaseEMFunction>, ITextureModifier
         }
     }
 
+    public void SetCommunityPatch(bool isCommunityPatch)
+    {
+        ForEach(m => m.SetCommunityPatch(isCommunityPatch));
+    }
+
     private static BaseEMFunction GetModToExecute(BaseEMFunction mod, EMOptions options)
     {
         if (options != null)

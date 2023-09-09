@@ -75,4 +75,17 @@ public class EMEditorMapping
         ConditionalOneOf?.ForEach(s => s.RemapTextures(AlternativeTextures));
         Mirrored?.RemapTextures(AlternativeTextures);
     }
+
+    public void SetCommunityPatch(bool isCommunityPatch)
+    {
+        All?.SetCommunityPatch(isCommunityPatch);
+        ConditionalAll?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
+        NonPurist?.SetCommunityPatch(isCommunityPatch);
+        Any?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
+        AllWithin?.ForEach(a => a.ForEach(s => s.SetCommunityPatch(isCommunityPatch)));
+        ConditionalAllWithin?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
+        OneOf?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
+        ConditionalOneOf?.ForEach(s => s.SetCommunityPatch(isCommunityPatch));
+        Mirrored?.SetCommunityPatch(isCommunityPatch);
+    }
 }

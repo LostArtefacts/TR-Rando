@@ -43,6 +43,7 @@ internal class TRVersionSupport
         TRRandomizerType.AmbientTracks,
         TRRandomizerType.Ammoless,
         TRRandomizerType.Braid,
+        TRRandomizerType.ClonedEnemies,
         TRRandomizerType.DisableDemos,
         TRRandomizerType.Health,
         TRRandomizerType.LevelSequence,

@@ -74,6 +74,10 @@ public class RandomizerSettings
     public bool HideEnemiesUntilTriggered { get; set; }
     public bool ReplaceRequiredEnemies { get; set; }
     public bool GiveUnarmedItems { get; set; }
+    public bool UseEnemyClones { get; set; }
+    public uint EnemyMultiplier { get; set; }
+    public bool CloneOriginalEnemies { get; set; }
+    public bool UseKillableClonePierres { get; set; }
     public bool GlitchedSecrets { get; set; }
     public bool GuaranteeSecrets { get; set; }
     public bool UseRewardRoomCameras { get; set; }
@@ -216,6 +220,10 @@ public class RandomizerSettings
             .ToList();
 
         GiveUnarmedItems = config.GetBool(nameof(GiveUnarmedItems), true);
+        UseEnemyClones = config.GetBool(nameof(UseEnemyClones));
+        EnemyMultiplier = config.GetUInt(nameof(EnemyMultiplier), 2);
+        CloneOriginalEnemies = config.GetBool(nameof(CloneOriginalEnemies));
+        UseKillableClonePierres = config.GetBool(nameof(UseKillableClonePierres), true);
 
         RandomizeTextures = config.GetBool(nameof(RandomizeTextures));
         TextureSeed = config.GetInt(nameof(TextureSeed), defaultSeed);
@@ -365,6 +373,10 @@ public class RandomizerSettings
         config[nameof(HideEnemiesUntilTriggered)] = HideEnemiesUntilTriggered;
         config[nameof(ReplaceRequiredEnemies)] = ReplaceRequiredEnemies;
         config[nameof(GiveUnarmedItems)] = GiveUnarmedItems;
+        config[nameof(UseEnemyClones)] = UseEnemyClones;
+        config[nameof(EnemyMultiplier)] = EnemyMultiplier;
+        config[nameof(CloneOriginalEnemies)] = CloneOriginalEnemies;
+        config[nameof(UseKillableClonePierres)] = UseKillableClonePierres;
 
         config[nameof(RandomizeTextures)] = RandomizeTextures;
         config[nameof(TextureSeed)] = TextureSeed;

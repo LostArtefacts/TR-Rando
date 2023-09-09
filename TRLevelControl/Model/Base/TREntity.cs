@@ -1,8 +1,9 @@
-﻿using TRLevelControl.Serialization;
+﻿using System;
+using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TREntity : ISerializableCompact
+public class TREntity : ISerializableCompact, ICloneable
 {
     public short TypeID { get; set; }
     
@@ -79,4 +80,22 @@ public class TREntity : ISerializableCompact
 
         return stream.ToArray();
     }
+
+    public TREntity Clone()
+    {
+        return new()
+        {
+            TypeID = TypeID,
+            Room = Room,
+            X = X,
+            Y = Y,
+            Z = Z,
+            Angle = Angle,
+            Intensity = Intensity,
+            Flags = Flags,
+        };
+    }
+
+    object ICloneable.Clone()
+        => Clone();
 }

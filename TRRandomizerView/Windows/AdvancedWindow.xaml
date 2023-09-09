@@ -89,6 +89,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -1747,6 +1748,117 @@
                             Margin="0,5,0,0">
                         <Label Style="{StaticResource OptionDescriptionStyle}"
                                Content="The number of levels with cold water."/>
+                    </Border>
+                </Grid>
+            </StackPanel>
+            
+            <!-- Enemy Clones -->
+            <StackPanel
+                Grid.Row="22"
+                Visibility="{Binding HasClonedEnemyMode, Converter={StaticResource BoolToCollapsedConverter}}">
+                <TextBlock
+                    Style="{StaticResource HeaderStyle}"
+                    Text="Cloned Enemy Mode"/>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="SSG1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border>
+                        <CheckBox
+                            IsChecked="{Binding ControllerProxy.UseEnemyClones, Mode=TwoWay}"
+                            VerticalAlignment="Center">
+                            <Label
+                                Padding="0"
+                                Content="Clone enemies" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Label
+                            Style="{StaticResource OptionDescriptionStyle}"
+                            Content="Enable enemy cloning mode. Clones will spawn in the same location as their originals."/>
+                    </Border>
+
+                    <Border
+                        Grid.Row="1"
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
+                        <CheckBox
+                            IsChecked="{Binding ControllerProxy.CloneOriginalEnemies, Mode=TwoWay}"
+                            VerticalAlignment="Center">
+                            <Label
+                                Padding="0"
+                                Content="Use original enemies" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
+                        <Label 
+                            Style="{StaticResource OptionDescriptionStyle}"
+                            Content="Override enemy type randomization and revert to using the original enemies plus their clones only."/>
+                    </Border>
+
+                    <Border
+                        Grid.Row="2"
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
+                        <CheckBox
+                            IsChecked="{Binding ControllerProxy.UseKillableClonePierres, Mode=TwoWay}"
+                            VerticalAlignment="Center">
+                            <Label
+                                Padding="0"
+                                Content="Make all Pierres killable" />
+                        </CheckBox>
+                    </Border>
+
+                    <Border
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
+                        <Label 
+                            Style="{StaticResource OptionDescriptionStyle}"
+                            Content="Makes Pierre always killable, otherwise only one will ever spawn at a time."/>
+                    </Border>
+
+                    <Border
+                        Margin="0,3,0,0"
+                        Grid.Row="3"
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
+                        <StackPanel
+                            Orientation="Horizontal" 
+                            HorizontalAlignment="Left">
+                            <Label
+                                Content="Multiplier"
+                                VerticalAlignment="Center"
+                                Padding="0,0,5,0"
+                                Margin="0"/>
+
+                            <ctrl:NumericUpDown 
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Value="{Binding ControllerProxy.EnemyMultiplier, Mode=TwoWay}"
+                                MinValue="2"
+                                MaxValue="{Binding ControllerProxy.MaxEnemyMultiplier}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        IsEnabled="{Binding ControllerProxy.UseEnemyClones}">
+                        <Label
+                            Style="{StaticResource OptionDescriptionStyle}"
+                            Content="Set the total enemy count per instance e.g. 2 implies each enemy will be cloned once; 3 implies cloned twice etc."/>
                     </Border>
                 </Grid>
             </StackPanel>

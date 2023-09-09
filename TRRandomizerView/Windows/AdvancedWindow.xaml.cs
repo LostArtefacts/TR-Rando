@@ -114,6 +114,11 @@ public partial class AdvancedWindow : Window
         nameof(HasWeatherMode), typeof(bool), typeof(AdvancedWindow)
     );
 
+    public static readonly DependencyProperty HasClonedEnemyModeProperty = DependencyProperty.Register
+    (
+        nameof(HasClonedEnemyMode), typeof(bool), typeof(AdvancedWindow)
+    );
+
     public static readonly DependencyProperty ControllerProperty = DependencyProperty.Register
     (
         nameof(ControllerProxy), typeof(ControllerOptions), typeof(AdvancedWindow)
@@ -237,6 +242,12 @@ public partial class AdvancedWindow : Window
     {
         get => (bool)GetValue(HasWeatherModeProperty);
         set => SetValue(HasWeatherModeProperty, value);
+    }
+
+    public bool HasClonedEnemyMode
+    {
+        get => (bool)GetValue(HasClonedEnemyModeProperty);
+        set => SetValue(HasClonedEnemyModeProperty, value);
     }
 
     public ControllerOptions ControllerProxy

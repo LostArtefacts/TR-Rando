@@ -1563,6 +1563,32 @@ public class TRRandomizerController
         set => LevelRandomizer.GiveUnarmedItems = value;
     }
 
+    public bool UseEnemyClones
+    {
+        get => LevelRandomizer.UseEnemyClones;
+        set => LevelRandomizer.UseEnemyClones = value;
+    }
+
+    public uint EnemyMultiplier
+    {
+        get => LevelRandomizer.EnemyMultiplier;
+        set => LevelRandomizer.EnemyMultiplier = value;
+    }
+
+    public static uint MaxEnemyMultiplier => TR1EnemyRandomizer.MaxClones;
+
+    public bool CloneOriginalEnemies
+    {
+        get => LevelRandomizer.CloneOriginalEnemies;
+        set => LevelRandomizer.CloneOriginalEnemies = value;
+    }
+
+    public bool UseKillableClonePierres
+    {
+        get => LevelRandomizer.UseKillableClonePierres;
+        set => LevelRandomizer.UseKillableClonePierres = value;
+    }
+
     public bool RandomizeOutfits
     {
         get => LevelRandomizer.RandomizeOutfits;

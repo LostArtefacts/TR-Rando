@@ -18,7 +18,8 @@ public class EMAddEntityFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        if (level.NumEntities < _defaultEntityLimit)
+        int limit = _isCommunityPatch ? 10240 : _defaultEntityLimit;
+        if (level.NumEntities < limit)
         {
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
@@ -78,7 +79,8 @@ public class EMAddEntityFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        if (level.NumEntities < _defaultEntityLimit)
+        int limit = _isCommunityPatch ? 1024 : _defaultEntityLimit;
+        if (level.NumEntities < limit)
         {
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
