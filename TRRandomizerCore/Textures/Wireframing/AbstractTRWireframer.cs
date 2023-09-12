@@ -714,7 +714,6 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract Dictionary<E, TRMesh[]> GetModelMeshes(L level);
     protected abstract int GetBlackPaletteIndex(L level);
     protected abstract int ImportColour(L level, Color c);
-    protected abstract void ResetPaletteTracking(L level);
     protected abstract TRModel[] GetModels(L level);
     protected abstract TRMesh[] GetModelMeshes(L level, TRModel model);
     protected abstract TRMesh[] GetLevelMeshes(L level);
@@ -731,4 +730,5 @@ public abstract class AbstractTRWireframer<E, L>
     protected abstract void SetAnimatedTextures(L level, TRAnimatedTexture[] animatedTextures, ushort length);
 
     public virtual bool Is8BitPalette { get; }
+    protected virtual void ResetPaletteTracking(L level) { }
 }

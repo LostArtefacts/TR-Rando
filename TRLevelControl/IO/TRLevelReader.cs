@@ -115,7 +115,7 @@ public class TRLevelReader : BinaryReader
                 Red = ReadByte(),
                 Green = ReadByte(),
                 Blue = ReadByte(),
-                Unused = ReadByte()
+                Alpha = ReadByte()
             });
         }
         return colours;

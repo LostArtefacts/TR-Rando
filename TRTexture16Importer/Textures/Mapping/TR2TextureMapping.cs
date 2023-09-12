@@ -7,6 +7,8 @@ namespace TRTexture16Importer.Textures;
 
 public class TR2TextureMapping : AbstractTextureMapping<TR2Entities, TR2Level>
 {
+    private PaletteTracker _paletteTracker;
+
     protected TR2TextureMapping(TR2Level level)
         : base(level) { }
 
@@ -35,7 +37,8 @@ public class TR2TextureMapping : AbstractTextureMapping<TR2Entities, TR2Level>
 
     protected override int ImportColour(Color colour)
     {
-        return PaletteUtilities.Import(_level, colour);
+        _paletteTracker ??= new();
+        return _paletteTracker.Import(_level, colour);
     }
 
     protected override TRMesh[] GetModelMeshes(TR2Entities entity)

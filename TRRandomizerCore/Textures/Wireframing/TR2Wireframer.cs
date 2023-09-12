@@ -28,6 +28,8 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
         TR2Entities.DragonFront_H, TR2Entities.DragonBack_H, TR2Entities.XianGuardSpearStatue, TR2Entities.XianGuardSwordStatue
     };
 
+    private PaletteTracker _paletteTracker;
+
     protected override AbstractTexturePacker<TR2Entities, TR2Level> CreatePacker(TR2Level level)
     {
         return new TR2TexturePacker(level);
@@ -123,8 +125,8 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
 
     protected override int ImportColour(TR2Level level, Color c)
     {
-        int index = level.Palette16.ToList().FindIndex(col => col.Red == c.R && col.Green == c.G && col.Blue == c.B);
-        return index == -1 ? PaletteUtilities.Import(level, c) : index;
+        _paletteTracker ??= new();
+        return _paletteTracker.Import(level, c);
     }
 
     protected override bool IsLaraModel(TRModel model)
@@ -136,11 +138,6 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
     {
         TR2Entities id = (TR2Entities)model.ID;
         return TR2EntityUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
-    }
-
-    protected override void ResetPaletteTracking(TR2Level level)
-    {
-        PaletteUtilities.ResetPaletteTracking(level.Palette16);
     }
 
     protected override void ResetUnusedTextures(TR2Level level)

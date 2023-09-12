@@ -96,10 +96,15 @@ public class TRLevelWriter : BinaryWriter
     {
         foreach (TRColour4 colour in colours)
         {
-            Write(colour.Red);
-            Write(colour.Green);
-            Write(colour.Blue);
-            Write(colour.Unused);
+            Write(colour);
         }
+    }
+
+    public void Write(TRColour4 colour)
+    {
+        Write(colour.Red);
+        Write(colour.Green);
+        Write(colour.Blue);
+        Write(colour.Alpha);
     }
 }

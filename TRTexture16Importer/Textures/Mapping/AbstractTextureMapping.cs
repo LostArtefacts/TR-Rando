@@ -353,9 +353,6 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                     }
                 }
             }
-
-            // Reset the palette tracking 
-            PaletteUtilities.ResetPaletteTracking(palette);
         }
 
         if (source.EntityColourMap8 != null)
