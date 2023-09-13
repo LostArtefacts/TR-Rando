@@ -1,6 +1,5 @@
 ﻿using TRLevelControl.Model;
 using TRModelTransporter.Model.Definitions;
-using TRTexture16Importer;
 using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Handlers;
@@ -66,7 +65,7 @@ public class ColourTransportHandler
         return colourIndices;
     }
 
-    public static void Import(TR1ModelDefinition definition, TR1PaletteManager paletteManager)
+    public static void Import(TR1ModelDefinition definition, TRPalette8Control paletteManager)
     {
         Dictionary<int, int> indexMap = new();
 
@@ -83,12 +82,12 @@ public class ColourTransportHandler
     public static void Import(TR2Level level, TR2ModelDefinition definition)
     {
         Dictionary<int, int> indexMap = new();
-        PaletteTracker tracker = new();
+        TRPalette16Control tracker = new(level);
         
         foreach (int paletteIndex in definition.Colours.Keys)
         {
             TRColour4 newColour = definition.Colours[paletteIndex];
-            indexMap[paletteIndex] = tracker.Import(level, newColour);
+            indexMap[paletteIndex] = tracker.Import(newColour);
         }
 
         ReindexMeshTextures(definition.Meshes, indexMap, true);
@@ -97,12 +96,12 @@ public class ColourTransportHandler
     public static void Import(TR3Level level, TR3ModelDefinition definition)
     {
         Dictionary<int, int> indexMap = new();
-        PaletteTracker tracker = new();
+        TRPalette16Control tracker = new(level);
 
         foreach (int paletteIndex in definition.Colours.Keys)
         {
             TRColour4 newColour = definition.Colours[paletteIndex];
-            indexMap[paletteIndex] = tracker.Import(level, newColour);
+            indexMap[paletteIndex] = tracker.Import(newColour);
         }
 
         ReindexMeshTextures(definition.Meshes, indexMap, true);
@@ -125,7 +124,7 @@ public class ColourTransportHandler
 
     private static ushort ReindexTexture(ushort value, Dictionary<int, int> indexMap, bool has16Bit)
     {
-        int p16 = value;;
+        int p16 = value;
         if (has16Bit)
         {
             p16 >>= 8;

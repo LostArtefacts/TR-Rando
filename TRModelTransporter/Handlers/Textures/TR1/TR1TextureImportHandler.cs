@@ -9,7 +9,7 @@ namespace TRModelTransporter.Handlers.Textures;
 
 public class TR1TextureImportHandler : AbstractTextureImportHandler<TREntities, TR1Level, TR1ModelDefinition>
 {
-    public TR1PaletteManager PaletteManager { get; set; }
+    public TRPalette8Control PaletteManager { get; set; }
 
     protected override IEnumerable<TRSpriteSequence> GetExistingSpriteSequences()
     {

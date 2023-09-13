@@ -155,6 +155,11 @@ public static class ColourExtensions
         return Color.FromArgb(c.Red * multiplier, c.Green * multiplier, c.Blue * multiplier);
     }
 
+    public static Color ToColor(this TRColour4 c)
+    {
+        return Color.FromArgb(c.Red, c.Green, c.Blue);
+    }
+
     public static TRColour ToTRColour(this Color c)
     {
         int divisor = TRConsts.Palette8Multiplier;
@@ -164,5 +169,39 @@ public static class ColourExtensions
             Green = (byte)(c.G / divisor),
             Blue = (byte)(c.B / divisor)
         };
+    }
+
+    public static TRColour4 ToTRColour4(this Color c)
+    {
+        return new()
+        {
+            Red = c.R,
+            Green = c.G,
+            Blue = c.B
+        };
+    }
+
+    public static int FindClosest(this List<Color> palette, Color colour, int startIndex = 0)
+    {
+        int colIndex = 0;
+        double bestMatch = double.MaxValue;
+
+        for (int i = startIndex; i < palette.Count; i++)
+        {
+            double match = Math.Sqrt
+            (
+                Math.Pow(colour.R - palette[i].R, 2) +
+                Math.Pow(colour.G - palette[i].G, 2) +
+                Math.Pow(colour.B - palette[i].B, 2)
+            );
+
+            if (match < bestMatch)
+            {
+                colIndex = i;
+                bestMatch = match;
+            }
+        }
+
+        return colIndex;
     }
 }

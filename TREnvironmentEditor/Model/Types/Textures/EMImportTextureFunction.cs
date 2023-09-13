@@ -26,7 +26,7 @@ public class EMImportTextureFunction : BaseEMFunction
             }
             else
             {
-                colIndex = TR1PaletteManager.FindClosestColour(c, palette);
+                colIndex = TRPalette8Control.FindClosestColour(c, palette);
                 c = palette[colIndex];
             }
 

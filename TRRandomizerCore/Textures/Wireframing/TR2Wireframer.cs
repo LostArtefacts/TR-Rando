@@ -6,7 +6,7 @@ using TRLevelControl.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Packing;
 using TRRandomizerCore.Utilities;
-using TRTexture16Importer;
+using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Textures;
 
@@ -28,7 +28,7 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
         TR2Entities.DragonFront_H, TR2Entities.DragonBack_H, TR2Entities.XianGuardSpearStatue, TR2Entities.XianGuardSwordStatue
     };
 
-    private PaletteTracker _paletteTracker;
+    private TRPalette16Control _paletteTracker;
 
     protected override AbstractTexturePacker<TR2Entities, TR2Level> CreatePacker(TR2Level level)
     {
@@ -125,8 +125,8 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
 
     protected override int ImportColour(TR2Level level, Color c)
     {
-        _paletteTracker ??= new();
-        return _paletteTracker.Import(level, c);
+        _paletteTracker ??= new(level);
+        return _paletteTracker.Import(c);
     }
 
     protected override bool IsLaraModel(TRModel model)

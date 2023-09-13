@@ -8,7 +8,6 @@ using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 using TRRandomizerCore.Utilities;
-using TRTexture16Importer;
 using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Textures;
@@ -29,7 +28,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
         TR3Entities.ShivaStatue, TR3Entities.MonkeyKeyMeshswap, TR3Entities.MonkeyMedMeshswap
     };
 
-    private PaletteTracker _paletteTracker;
+    private TRPalette16Control _paletteTracker;
 
     protected override AbstractTexturePacker<TR3Entities, TR3Level> CreatePacker(TR3Level level)
     {
@@ -121,8 +120,8 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
 
     protected override int ImportColour(TR3Level level, Color c)
     {
-        _paletteTracker ??= new();
-        return _paletteTracker.Import(level, c);
+        _paletteTracker ??= new(level);
+        return _paletteTracker.Import(c);
     }
 
     protected override bool IsLaraModel(TRModel model)
