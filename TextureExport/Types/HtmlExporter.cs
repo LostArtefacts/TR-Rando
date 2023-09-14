@@ -27,7 +27,7 @@ public static class HtmlExporter
 
         StringBuilder palette = new();
         IEnumerable<Color> colors = level.Palette
-            .Select(c => c.ToColor())
+            .Select(c => c.ToTR1Color())
             .Distinct();
         palette.Append(colors.Count()).Append(" unique colours");
 

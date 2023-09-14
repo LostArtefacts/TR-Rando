@@ -181,7 +181,7 @@ public class TRPalette8Control : IDisposable
 
     public int GetOrAddPaletteIndex(TRColour c)
     {
-        return GetOrAddPaletteIndex(c.ToColor());
+        return GetOrAddPaletteIndex(c.ToTR1Color());
     }
 
     public int GetOrAddPaletteIndex(Color c)

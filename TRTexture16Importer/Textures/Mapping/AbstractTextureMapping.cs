@@ -224,7 +224,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 continue;
             }
             TRColour col = palette[colourIndex];
-            HSB hsb = col.ToColor().ToHSB();
+            HSB hsb = col.ToTR1Color().ToHSB();
             hsb.H = operation.ModifyHue(hsb.H);
             hsb.S = operation.ModifySaturation(hsb.S);
             hsb.B = operation.ModifyBrightness(hsb.B);

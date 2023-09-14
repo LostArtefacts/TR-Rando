@@ -149,7 +149,7 @@ public static class ColourExtensions
         return (ushort)(a | r | g | b);
     }
 
-    public static Color ToColor(this TRColour c)
+    public static Color ToTR1Color(this TRColour c)
     {
         int multiplier = TRConsts.Palette8Multiplier;
         return Color.FromArgb(c.Red * multiplier, c.Green * multiplier, c.Blue * multiplier);
