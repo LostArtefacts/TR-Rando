@@ -181,27 +181,17 @@ public static class ColourExtensions
         };
     }
 
-    public static int FindClosest(this List<Color> palette, Color colour, int startIndex = 0)
+    public static int FindClosest(this IEnumerable<Color> palette, Color colour, int startIndex = 0)
     {
-        int colIndex = 0;
-        double bestMatch = double.MaxValue;
-
-        for (int i = startIndex; i < palette.Count; i++)
-        {
-            double match = Math.Sqrt
-            (
-                Math.Pow(colour.R - palette[i].R, 2) +
-                Math.Pow(colour.G - palette[i].G, 2) +
-                Math.Pow(colour.B - palette[i].B, 2)
-            );
-
-            if (match < bestMatch)
+        return palette
+            .Select((paletteColour, index) => new
             {
-                colIndex = i;
-                bestMatch = match;
-            }
-        }
-
-        return colIndex;
+                Index = index,
+                Delta = Math.Pow(colour.R - paletteColour.R, 2)
+                    + Math.Pow(colour.G - paletteColour.G, 2)
+                    + Math.Pow(colour.B - paletteColour.B, 2)
+            })
+            .Where(item => item.Index >= startIndex)
+            .MinBy(item => item.Delta).Index;
     }
 }

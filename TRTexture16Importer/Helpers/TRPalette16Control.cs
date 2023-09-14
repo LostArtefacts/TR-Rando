@@ -56,10 +56,10 @@ public class TRPalette16Control
     private int FindClosestColour(TRColour4 colour)
     {
         return FindClosestColour(
-            colour.ToColor(), new(_palette.Select(c => c.ToColor())));
+            colour.ToColor(), _palette.Select(c => c.ToColor()));
     }
 
-    public static int FindClosestColour(Color colour, List<Color> palette)
+    public static int FindClosestColour(Color colour, IEnumerable<Color> palette)
     {
         return palette.FindClosest(colour);
     }

@@ -210,7 +210,7 @@ public class TRPalette8Control : IDisposable
         return FindClosestColour(colour, _palette);
     }
 
-    public static int FindClosestColour(Color colour, List<Color> palette)
+    public static int FindClosestColour(Color colour, IEnumerable<Color> palette)
     {
         // Start at 1 to avoid matching black to transparency.
         return palette.FindClosest(colour, 1);
