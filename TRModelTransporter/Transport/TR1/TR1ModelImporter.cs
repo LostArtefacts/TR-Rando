@@ -12,13 +12,13 @@ namespace TRModelTransporter.Transport;
 
 public class TR1ModelImporter : AbstractTRModelImporter<TREntities, TR1Level, TR1ModelDefinition>
 {
-    public TR1PaletteManager PaletteManager { get; set; }
+    public TRPalette8Control PaletteManager { get; set; }
 
     public TR1ModelImporter(bool isCommunityPatch = false)
     {
         Data = new TR1DefaultDataProvider();
         SortModels = true;
-        PaletteManager = new TR1PaletteManager();
+        PaletteManager = new();
 
         if (isCommunityPatch)
         {

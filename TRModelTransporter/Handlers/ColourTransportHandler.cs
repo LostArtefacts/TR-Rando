@@ -1,6 +1,5 @@
 ﻿using TRLevelControl.Model;
 using TRModelTransporter.Model.Definitions;
-using TRTexture16Importer;
 using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Handlers;
@@ -22,7 +21,7 @@ public class ColourTransportHandler
         definition.Colours = GetUsedMeshColours(definition.Meshes, level.Palette16);
     }
 
-    private static Dictionary<int, TRColour> GetUsedMeshColours(TRMesh[] meshes, TRColour[] colours)
+    private static Dictionary<int, TRColour> GetUsedMeshColours(TRMesh[] meshes, List<TRColour> colours)
     {
         ISet<int> colourIndices = GetAllColourIndices(meshes, false);
 
@@ -35,7 +34,7 @@ public class ColourTransportHandler
         return usedColours;
     }
 
-    private static Dictionary<int, TRColour4> GetUsedMeshColours(TRMesh[] meshes, TRColour4[] colours)
+    private static Dictionary<int, TRColour4> GetUsedMeshColours(TRMesh[] meshes, List<TRColour4> colours)
     {
         ISet<int> colourIndices = GetAllColourIndices(meshes, true);
 
@@ -66,7 +65,7 @@ public class ColourTransportHandler
         return colourIndices;
     }
 
-    public static void Import(TR1ModelDefinition definition, TR1PaletteManager paletteManager)
+    public static void Import(TR1ModelDefinition definition, TRPalette8Control paletteManager)
     {
         Dictionary<int, int> indexMap = new();
 
@@ -82,44 +81,30 @@ public class ColourTransportHandler
 
     public static void Import(TR2Level level, TR2ModelDefinition definition)
     {
-        List<TRColour4> palette16 = level.Palette16.ToList();
         Dictionary<int, int> indexMap = new();
+        TRPalette16Control tracker = new(level);
         
         foreach (int paletteIndex in definition.Colours.Keys)
         {
             TRColour4 newColour = definition.Colours[paletteIndex];
-            int existingIndex = FindPaletteIndex(palette16, newColour);
-            indexMap[paletteIndex] = existingIndex == -1 ? PaletteUtilities.Import(level, newColour) : existingIndex;
+            indexMap[paletteIndex] = tracker.Import(newColour);
         }
 
         ReindexMeshTextures(definition.Meshes, indexMap, true);
-
-        PaletteUtilities.ResetPaletteTracking(level.Palette16);
     }
 
     public static void Import(TR3Level level, TR3ModelDefinition definition)
     {
-        List<TRColour4> palette16 = level.Palette16.ToList();
         Dictionary<int, int> indexMap = new();
+        TRPalette16Control tracker = new(level);
 
         foreach (int paletteIndex in definition.Colours.Keys)
         {
             TRColour4 newColour = definition.Colours[paletteIndex];
-            int existingIndex = FindPaletteIndex(palette16, newColour);
-            indexMap[paletteIndex] = existingIndex == -1 ? PaletteUtilities.Import(level, newColour) : existingIndex;
+            indexMap[paletteIndex] = tracker.Import(newColour);
         }
 
         ReindexMeshTextures(definition.Meshes, indexMap, true);
-
-        PaletteUtilities.ResetPaletteTracking(level.Palette16);
-    }
-
-    private static int FindPaletteIndex(List<TRColour4> colours, TRColour4 colour)
-    {
-        return colours.FindIndex
-        (
-            e => e.Red == colour.Red && e.Green == colour.Green && e.Blue == colour.Blue
-        );
     }
 
     private static void ReindexMeshTextures(TRMesh[] meshes, Dictionary<int, int> indexMap, bool has16Bit)
@@ -139,7 +124,7 @@ public class ColourTransportHandler
 
     private static ushort ReindexTexture(ushort value, Dictionary<int, int> indexMap, bool has16Bit)
     {
-        int p16 = value;;
+        int p16 = value;
         if (has16Bit)
         {
             p16 >>= 8;

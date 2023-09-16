@@ -1,18 +1,16 @@
 ﻿using System.Drawing;
+using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
 
 namespace TRTexture16Importer.Helpers;
 
-public class TR1PaletteManager : IDisposable
+public class TRPalette8Control : IDisposable
 {
-    private const int _paletteLimit = byte.MaxValue;
-    private const double _weightR = 1;
-    private const double _weightG = 1;
-    private const double _weightB = 1;
+    private const int _paletteLimit = TRConsts.PaletteSize - 1;
 
-    private readonly Rectangle _defaultBounds = new(0, 0, 256, 256);
+    private readonly Rectangle _defaultBounds = new(0, 0, TRConsts.TPageWidth, TRConsts.TPageHeight);
 
     public TR1Level Level { get; set; }
     public Dictionary<int, Bitmap> ChangedTiles { get; set; }
@@ -20,10 +18,10 @@ public class TR1PaletteManager : IDisposable
 
     private List<Color> _palette, _predefinedPalette;
 
-    public TR1PaletteManager()
+    public TRPalette8Control()
     {
-        ChangedTiles = new Dictionary<int, Bitmap>();
-        ObsoleteModels = new List<TREntities>();
+        ChangedTiles = new();
+        ObsoleteModels = new();
     }
 
     public Bitmap GetOriginalTile(int tileIndex)
@@ -33,7 +31,7 @@ public class TR1PaletteManager : IDisposable
 
     public void MergeTiles()
     {
-        _palette = new List<Color>
+        _palette = new()
         {
             Color.FromArgb(0, 0, 0, 0) // Placeholder for transparency
         };
@@ -59,7 +57,7 @@ public class TR1PaletteManager : IDisposable
                 }
 
                 // Store the pointer in the level tiles
-                Level.Images8[i].Pixels[y * 256 + x] = (byte)colIndex;
+                Level.Images8[i].Pixels[y * TRConsts.TPageWidth + x] = (byte)colIndex;
 
                 return c;
             });
@@ -114,10 +112,8 @@ public class TR1PaletteManager : IDisposable
                 colourRef -= (_paletteLimit + 1);
                 return (ushort)GetOrAddPaletteIndex(_predefinedPalette[colourRef]);
             }
-            else
-            {
-                return 0;
-            }
+
+            return 0;
         }
 
         return (ushort)GetOrAddPaletteIndex(Level.Palette[colourRef]);
@@ -131,17 +127,8 @@ public class TR1PaletteManager : IDisposable
             _palette.Add(Color.Black);
         }
 
-        Level.Palette = new TRColour[_paletteLimit + 1];
-        for (int i = 0; i < Level.Palette.Length; i++)
-        {
-            Color c = _palette[i];
-            Level.Palette[i] = new TRColour
-            {
-                Red = (byte)(c.R / 4),
-                Green = (byte)(c.G / 4),
-                Blue = (byte)(c.B / 4)
-            };
-        }
+        Level.Palette.Clear();
+        Level.Palette.AddRange(_palette.Select(c => c.ToTRColour()));
     }
 
     public int AddPredefinedColour(Color c)
@@ -194,7 +181,7 @@ public class TR1PaletteManager : IDisposable
 
     public int GetOrAddPaletteIndex(TRColour c)
     {
-        return GetOrAddPaletteIndex(Color.FromArgb(c.Red * 4, c.Green * 4, c.Blue * 4));
+        return GetOrAddPaletteIndex(c.ToTR1Color());
     }
 
     public int GetOrAddPaletteIndex(Color c)
@@ -223,31 +210,10 @@ public class TR1PaletteManager : IDisposable
         return FindClosestColour(colour, _palette);
     }
 
-    public static int FindClosestColour(Color colour, List<Color> palette)
+    public static int FindClosestColour(Color colour, IEnumerable<Color> palette)
     {
-        // Compare the colour with each in the palette by finding its closest match.
-        // We start at 1 because we don't want to match black to transparency.
-
-        int colIndex = 0;
-        double bestMatch = double.MaxValue;
-
-        for (int i = 1; i < palette.Count; i++)
-        {
-            double match = Math.Sqrt
-            (
-                Math.Pow((colour.R - palette[i].R) * _weightR, 2) +
-                Math.Pow((colour.G - palette[i].G) * _weightG, 2) +
-                Math.Pow((colour.B - palette[i].B) * _weightB, 2)
-            );
-
-            if (match < bestMatch)
-            {
-                colIndex = i;
-                bestMatch = match;
-            }
-        }
-
-        return colIndex;
+        // Start at 1 to avoid matching black to transparency.
+        return palette.FindClosest(colour, 1);
     }
 
     public void Dispose()

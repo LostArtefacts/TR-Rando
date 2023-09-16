@@ -8,7 +8,6 @@ using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 using TRRandomizerCore.Utilities;
-using TRTexture16Importer;
 using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Textures;
@@ -28,6 +27,8 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
     {
         TR3Entities.ShivaStatue, TR3Entities.MonkeyKeyMeshswap, TR3Entities.MonkeyMedMeshswap
     };
+
+    private TRPalette16Control _paletteTracker;
 
     protected override AbstractTexturePacker<TR3Entities, TR3Level> CreatePacker(TR3Level level)
     {
@@ -119,8 +120,8 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
 
     protected override int ImportColour(TR3Level level, Color c)
     {
-        int index = level.Palette16.ToList().FindIndex(col => col.Red == c.R && col.Green == c.G && col.Blue == c.B);
-        return index == -1 ? PaletteUtilities.Import(level, c) : index;
+        _paletteTracker ??= new(level);
+        return _paletteTracker.Import(c);
     }
 
     protected override bool IsLaraModel(TRModel model)
@@ -143,11 +144,6 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
     {
         TR3Entities type = (TR3Entities)model.ID;
         return TR3EntityUtilities.IsAnyPickupType(type) || TR3EntityUtilities.IsCrystalPickup(type);
-    }
-
-    protected override void ResetPaletteTracking(TR3Level level)
-    {
-        PaletteUtilities.ResetPaletteTracking(level.Palette16);
     }
 
     protected override void ResetUnusedTextures(TR3Level level)

@@ -31,8 +31,8 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
     }
 
     protected abstract TRMesh[] GetModelMeshes(E entity);
-    protected abstract TRColour[] GetPalette8();
-    protected abstract TRColour4[] GetPalette16();
+    protected abstract List<TRColour> GetPalette8();
+    protected abstract List<TRColour4> GetPalette16();
     protected abstract int ImportColour(Color colour);
     protected abstract TRSpriteSequence[] GetSpriteSequences();
     protected abstract TRSpriteTexture[] GetSpriteTextures();
@@ -201,7 +201,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
 
     private void RecolourDynamicTargets(List<TRMesh> meshes, HSBOperation operation)
     {
-        TRColour[] palette = GetPalette8();
+        List<TRColour> palette = GetPalette8();
         ISet<ushort> colourIndices = new HashSet<ushort>();
         Dictionary<int, int> remapIndices = new();
 
@@ -224,8 +224,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                 continue;
             }
             TRColour col = palette[colourIndex];
-            Color c = Color.FromArgb(col.Red * 4, col.Green * 4, col.Blue * 4);
-            HSB hsb = c.ToHSB();
+            HSB hsb = col.ToTR1Color().ToHSB();
             hsb.H = operation.ModifyHue(hsb.H);
             hsb.S = operation.ModifySaturation(hsb.S);
             hsb.B = operation.ModifyBrightness(hsb.B);
@@ -294,7 +293,7 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
 
         if (source.EntityColourMap != null)
         {
-            TRColour4[] palette = GetPalette16();
+            List<TRColour4> palette = GetPalette16();
 
             foreach (E entity in source.EntityColourMap.Keys)
             {
@@ -354,9 +353,6 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
                     }
                 }
             }
-
-            // Reset the palette tracking 
-            PaletteUtilities.ResetPaletteTracking(palette);
         }
 
         if (source.EntityColourMap8 != null)
@@ -376,16 +372,11 @@ public abstract class AbstractTextureMapping<E, L> : IDisposable
 
                 Dictionary<int, int> remapIndices = new();
 
-                TRColour[] palette = GetPalette8();
+                List<TRColour> palette = GetPalette8();
                 foreach (Color targetColour in source.EntityColourMap8[entity].Keys)
                 {
-                    TRColour col = new()
-                    {
-                        Red = (byte)(targetColour.R / 4),
-                        Green = (byte)(targetColour.G / 4),
-                        Blue = (byte)(targetColour.B / 4)
-                    };
-                    int matchedIndex = Array.FindIndex(palette, c => c.Red == col.Red && c.Green == col.Green && c.Blue == col.Blue);
+                    TRColour col = targetColour.ToTRColour();
+                    int matchedIndex = palette.FindIndex(c => c.Red == col.Red && c.Green == col.Green && c.Blue == col.Blue);
                     if (matchedIndex == -1)
                     {
                         continue;

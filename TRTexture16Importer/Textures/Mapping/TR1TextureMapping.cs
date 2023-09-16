@@ -8,7 +8,7 @@ namespace TRTexture16Importer.Textures;
 
 public class TR1TextureMapping : AbstractTextureMapping<TREntities, TR1Level>
 {
-    public TR1PaletteManager PaletteManager { get; set; }
+    public TRPalette8Control PaletteManager { get; set; }
 
     protected TR1TextureMapping(TR1Level level)
         : base(level) { }
@@ -27,12 +27,12 @@ public class TR1TextureMapping : AbstractTextureMapping<TREntities, TR1Level>
         return mapping;
     }
 
-    protected override TRColour[] GetPalette8()
+    protected override List<TRColour> GetPalette8()
     {
         return _level.Palette;
     }
 
-    protected override TRColour4[] GetPalette16()
+    protected override List<TRColour4> GetPalette16()
     {
         return null;
     }

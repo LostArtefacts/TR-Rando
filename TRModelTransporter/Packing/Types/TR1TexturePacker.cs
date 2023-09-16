@@ -14,7 +14,7 @@ public class TR1TexturePacker : AbstractTexturePacker<TREntities, TR1Level>
 {
     private const int _maximumTiles = 16;
 
-    public TR1PaletteManager PaletteManager { get; set; }
+    public TRPalette8Control PaletteManager { get; set; }
 
     public override int NumLevelImages => Level.Images8.Count;
 
@@ -97,7 +97,7 @@ public class TR1TexturePacker : AbstractTexturePacker<TREntities, TR1Level>
 
     public override void SetTile(int tileIndex, Bitmap bitmap)
     {
-        PaletteManager ??= new TR1PaletteManager
+        PaletteManager ??= new()
         {
             Level = Level
         };

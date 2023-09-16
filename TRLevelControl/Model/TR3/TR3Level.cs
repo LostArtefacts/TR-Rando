@@ -2,15 +2,8 @@
 
 public class TR3Level : TRLevelBase
 {
-    /// <summary>
-    /// 256 entries * 3 components = 768 Bytes
-    /// </summary>
-    public TRColour[] Palette { get; set; }
-
-    /// <summary>
-    /// 256 entries * 4 components = 1024 bytes
-    /// </summary>
-    public TRColour4[] Palette16 { get; set; }
+    public List<TRColour> Palette { get; set; }
+    public List<TRColour4> Palette16 { get; set; }
     public List<TRTexImage8> Images8 { get; set; }
     public List<TRTexImage16> Images16 { get; set; }
 
@@ -238,11 +231,7 @@ public class TR3Level : TRLevelBase
     /// NumEntities * 24 bytes
     /// </summary>
     public TR2Entity[] Entities { get; set; }
-
-    /// <summary>
-    /// (32 * 256 entries) of 1 byte = 8192 bytes
-    /// </summary>
-    public byte[] LightMap { get; set; }
+    public List<byte> LightMap { get; set; }
 
     /// <summary>
     /// 2 bytes

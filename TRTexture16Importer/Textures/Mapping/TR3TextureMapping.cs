@@ -2,11 +2,14 @@
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Enums;
+using TRTexture16Importer.Helpers;
 
 namespace TRTexture16Importer.Textures;
 
 public class TR3TextureMapping : AbstractTextureMapping<TR3Entities, TR3Level>
 {
+    private TRPalette16Control _paletteTracker;
+
     protected TR3TextureMapping(TR3Level level)
         : base(level) { }
 
@@ -24,19 +27,20 @@ public class TR3TextureMapping : AbstractTextureMapping<TR3Entities, TR3Level>
         return mapping;
     }
 
-    protected override TRColour[] GetPalette8()
+    protected override List<TRColour> GetPalette8()
     {
         return _level.Palette;
     }
 
-    protected override TRColour4[] GetPalette16()
+    protected override List<TRColour4> GetPalette16()
     {
         return _level.Palette16;
     }
 
     protected override int ImportColour(Color colour)
     {
-        return PaletteUtilities.Import(_level, colour);
+        _paletteTracker ??= new(_level);
+        return _paletteTracker.Import(colour);
     }
 
     protected override TRMesh[] GetModelMeshes(TR3Entities entity)

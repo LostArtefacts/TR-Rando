@@ -6,8 +6,6 @@ namespace TRLevelControl;
 
 public class TR3LevelControl : TRLevelControlBase<TR3Level>
 {
-    private const uint MAX_PALETTE_SIZE = 256;
-
     protected override TR3Level CreateLevel(TRFileVersion version)
     {
         TR3Level level = new()
@@ -25,10 +23,9 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
     protected override void Read(TRLevelReader reader)
     {
-        //Colour palettes and textures
-        _level.Palette = PopulateColourPalette(reader.ReadBytes((int)MAX_PALETTE_SIZE * 3));
-
-        _level.Palette16 = PopulateColourPalette16(reader.ReadBytes((int)MAX_PALETTE_SIZE * 4));
+        // Colour palettes and textures
+        _level.Palette = reader.ReadColours(TRConsts.PaletteSize);
+        _level.Palette16 = reader.ReadColour4s(TRConsts.PaletteSize);
 
         uint numImages = reader.ReadUInt32();
         _level.Images8 = reader.ReadImage8s(numImages);
@@ -300,13 +297,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
             _level.Entities[i] = TR2FileReadUtilities.ReadEntity(reader);
         }
 
-        //Light Map - 32 * 256 = 8192 bytes
-        _level.LightMap = new byte[32 * 256];
-
-        for (int i = 0; i < _level.LightMap.Length; i++)
-        {
-            _level.LightMap[i] = reader.ReadByte();
-        }
+        _level.LightMap = new(reader.ReadBytes(TRConsts.LightMapSize));
 
         //Cinematic Frames
         _level.NumCinematicFrames = reader.ReadUInt16();
@@ -354,8 +345,10 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
     protected override void Write(TRLevelWriter writer)
     {
-        foreach (TRColour col in _level.Palette) { writer.Write(col.Serialize()); }
-        foreach (TRColour4 col in _level.Palette16) { writer.Write(col.Serialize()); }
+        Debug.Assert(_level.Palette.Count == TRConsts.PaletteSize);
+        Debug.Assert(_level.Palette16.Count == TRConsts.PaletteSize);
+        writer.Write(_level.Palette);
+        writer.Write(_level.Palette16);
 
         Debug.Assert(_level.Images8.Count == _level.Images16.Count);
         writer.Write((uint)_level.Images8.Count);
@@ -418,7 +411,8 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         writer.Write(_level.NumEntities);
         foreach (TR2Entity entity in _level.Entities) { writer.Write(entity.Serialize()); }
 
-        writer.Write(_level.LightMap);
+        Debug.Assert(_level.LightMap.Count == TRConsts.LightMapSize);
+        writer.Write(_level.LightMap.ToArray());
 
         writer.Write(_level.NumCinematicFrames);
         foreach (TRCinematicFrame cineframe in _level.CinematicFrames) { writer.Write(cineframe.Serialize()); }
@@ -431,61 +425,6 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
         foreach (TR3SoundDetails snddetail in _level.SoundDetails) { writer.Write(snddetail.Serialize()); }
         writer.Write(_level.NumSampleIndices);
         foreach (uint index in _level.SampleIndices) { writer.Write(index); }
-    }
-
-    private static TRColour[] PopulateColourPalette(byte[] palette)
-    {
-        TRColour[] colourPalette = new TRColour[MAX_PALETTE_SIZE];
-
-        int ci = 0;
-
-        for (int i = 0; i < MAX_PALETTE_SIZE; i++)
-        {
-            TRColour col = new()
-            {
-                Red = palette[ci]
-            };
-            ci++;
-
-            col.Green = palette[ci];
-            ci++;
-
-            col.Blue = palette[ci];
-            ci++;
-
-            colourPalette[i] = col;
-        }
-
-        return colourPalette;
-    }
-
-    private static TRColour4[] PopulateColourPalette16(byte[] palette)
-    {
-        TRColour4[] colourPalette = new TRColour4[MAX_PALETTE_SIZE];
-
-        int ci = 0;
-
-        for (int i = 0; i < MAX_PALETTE_SIZE; i++)
-        {
-            TRColour4 col = new()
-            {
-                Red = palette[ci]
-            };
-            ci++;
-
-            col.Green = palette[ci];
-            ci++;
-
-            col.Blue = palette[ci];
-            ci++;
-
-            col.Unused = palette[ci];
-            ci++;
-
-            colourPalette[i] = col;
-        }
-
-        return colourPalette;
     }
 
     private static TR3RoomData ConvertToRoomData(TR3Room room)

@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using TRLevelControl;
+using TRLevelControl.Model;
 
 namespace TRTexture16Importer.Helpers;
 
@@ -145,5 +147,51 @@ public static class ColourExtensions
         int b = (argb >> 3) & 0x1F;
 
         return (ushort)(a | r | g | b);
+    }
+
+    public static Color ToTR1Color(this TRColour c)
+    {
+        int multiplier = TRConsts.Palette8Multiplier;
+        return Color.FromArgb(c.Red * multiplier, c.Green * multiplier, c.Blue * multiplier);
+    }
+
+    public static Color ToColor(this TRColour4 c)
+    {
+        return Color.FromArgb(c.Red, c.Green, c.Blue);
+    }
+
+    public static TRColour ToTRColour(this Color c)
+    {
+        int divisor = TRConsts.Palette8Multiplier;
+        return new()
+        {
+            Red = (byte)(c.R / divisor),
+            Green = (byte)(c.G / divisor),
+            Blue = (byte)(c.B / divisor)
+        };
+    }
+
+    public static TRColour4 ToTRColour4(this Color c)
+    {
+        return new()
+        {
+            Red = c.R,
+            Green = c.G,
+            Blue = c.B
+        };
+    }
+
+    public static int FindClosest(this IEnumerable<Color> palette, Color colour, int startIndex = 0)
+    {
+        return palette
+            .Select((paletteColour, index) => new
+            {
+                Index = index,
+                Delta = Math.Pow(colour.R - paletteColour.R, 2)
+                    + Math.Pow(colour.G - paletteColour.G, 2)
+                    + Math.Pow(colour.B - paletteColour.B, 2)
+            })
+            .Where(item => item.Index >= startIndex)
+            .MinBy(item => item.Delta).Index;
     }
 }
