@@ -582,6 +582,15 @@
   ],
   "LEVEL3A.PHD": [
     {
+      "X": 39042,
+      "Y": -422,
+      "Z": 70822,
+      "Room": 17,
+      "Difficulty": "Hard",
+      "PackID": "Lahm",
+      "RequiresGlitch": true
+    },
+    {
       "X": 27202,
       "Y": -256,
       "Z": 78746,
@@ -795,7 +804,6 @@
       "Z": 25525,
       "Room": 55,
       "Difficulty": "Hard",
-      "PackID": "Lahm",
       "RequiresGlitch": true
     },
     {
@@ -2281,6 +2289,29 @@
     }
   ],
   "LEVEL7A.PHD": [
+    {
+      "X": 58299,
+      "Y": -4608,
+      "Z": 53194,
+      "Room": 30,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 37376,
+      "Y": -4352,
+      "Z": 65582,
+      "Room": 100,
+      "RequiresGlitch": true
+    },
+    {
+      "X": 28634,
+      "Y": -7936,
+      "Z": 57380,
+      "Room": 22,
+      "Difficulty": "Hard",
+      "PackID": "Lahm",
+      "RequiresGlitch": true
+    },
     {
       "X": 45107,
       "Y": -5632,
