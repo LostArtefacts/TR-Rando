@@ -201,7 +201,7 @@ public class TR2EnvironmentRandomizer : BaseTR2Randomizer, IMirrorControl
         mapping?.Mirrored.ApplyToLevel(level.Data, picker.Options);
 
         // Notify the texture monitor that this level has been flipped
-        TextureMonitor<TR2Entities> monitor = TextureMonitor.CreateMonitor(level.Name);
+        TextureMonitor<TR2Type> monitor = TextureMonitor.CreateMonitor(level.Name);
         monitor.UseMirroring = true;
     }
 }

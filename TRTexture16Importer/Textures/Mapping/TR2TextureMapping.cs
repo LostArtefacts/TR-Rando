@@ -5,14 +5,14 @@ using TRTexture16Importer.Helpers;
 
 namespace TRTexture16Importer.Textures;
 
-public class TR2TextureMapping : AbstractTextureMapping<TR2Entities, TR2Level>
+public class TR2TextureMapping : AbstractTextureMapping<TR2Type, TR2Level>
 {
     private TRPalette16Control _paletteTracker;
 
     protected TR2TextureMapping(TR2Level level)
         : base(level) { }
 
-    public static TR2TextureMapping Get(TR2Level level, string mappingFilePrefix, TR2TextureDatabase database, Dictionary<StaticTextureSource<TR2Entities>, List<StaticTextureTarget>> predefinedMapping = null, List<TR2Entities> entitiesToIgnore = null)
+    public static TR2TextureMapping Get(TR2Level level, string mappingFilePrefix, TR2TextureDatabase database, Dictionary<StaticTextureSource<TR2Type>, List<StaticTextureTarget>> predefinedMapping = null, List<TR2Type> entitiesToIgnore = null)
     {
         string mapFile = Path.Combine(@"Resources\TR2\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
         if (!File.Exists(mapFile))
@@ -41,7 +41,7 @@ public class TR2TextureMapping : AbstractTextureMapping<TR2Entities, TR2Level>
         return _paletteTracker.Import(colour);
     }
 
-    protected override TRMesh[] GetModelMeshes(TR2Entities entity)
+    protected override TRMesh[] GetModelMeshes(TR2Type entity)
     {
         return TRMeshUtilities.GetModelMeshes(_level, entity);
     }

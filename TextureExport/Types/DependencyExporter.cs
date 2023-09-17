@@ -49,7 +49,7 @@ public static class DependencyExporter
         TR2TextureRemapGroup remapGroup = new();
         foreach (TRModel model in level.Models)
         {
-            remapGroup.CalculateDependencies(level, (TR2Entities)model.ID);
+            remapGroup.CalculateDependencies(level, (TR2Type)model.ID);
         }
 
         string dir = @"TR2\Deduplication";

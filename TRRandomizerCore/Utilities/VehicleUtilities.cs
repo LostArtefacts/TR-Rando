@@ -21,11 +21,11 @@ public static class VehicleUtilities
     /// Get a random locaiton for the specific vehicle while checking if a working vehicle is actually required by secrets
     /// </summary>
     /// <param name="level">The level <see cref="TR2CombinedLevel"/></param>
-    /// <param name="vehicle">The vehicle type <see cref="TR2Entities"/></param>
+    /// <param name="vehicle">The vehicle type <see cref="TR2Type"/></param>
     /// <param name="random">The random generator</param>
     /// <param name="testSecrets">True by default to check if a vehicle is required for a secret; false indicates a second "spare" vehicle as in BOAT.TR2</param>
     /// <returns></returns>
-    public static Location GetRandomLocation(TR2CombinedLevel level, TR2Entities vehicle, Random random, bool testSecrets = true)
+    public static Location GetRandomLocation(TR2CombinedLevel level, TR2Type vehicle, Random random, bool testSecrets = true)
     {
         if (_allVehicleLocations.ContainsKey(level.Name))
         {
@@ -58,11 +58,11 @@ public static class VehicleUtilities
         }
 
         List<Location> levelLocations = _allLocations[level.Name];
-        List<TR2Entities> secretTypes = TR2EntityUtilities.GetListOfSecretTypes();
+        List<TR2Type> secretTypes = TR2EntityUtilities.GetListOfSecretTypes();
 
         foreach (TR2Entity entity in level.Data.Entities)
         {
-            if (secretTypes.Contains((TR2Entities)entity.TypeID))
+            if (secretTypes.Contains((TR2Type)entity.TypeID))
             {
                 Location usedlocation = levelLocations
                     .Find(l => l.X == entity.X && l.Y == entity.Y && l.Z == entity.Z && l.Room == entity.Room && l.VehicleRequired);

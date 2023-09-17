@@ -53,7 +53,7 @@ public class EMConvertEnemyFunction : BaseEMFunction
     {
         // Find the first instance of an existing enemy of the same type
         // we want to convert to. If none found, no action is taken.
-        List<TR2Entities> potentialTypes = TR2EntityUtilities.GetFullListOfEnemies();
+        List<TR2Type> potentialTypes = TR2EntityUtilities.GetFullListOfEnemies();
         if (NewEnemyType == EnemyType.Land)
         {
             potentialTypes.RemoveAll(e => TR2EntityUtilities.IsWaterCreature(e));
@@ -73,11 +73,11 @@ public class EMConvertEnemyFunction : BaseEMFunction
 
         TR2Entity enemyMatch = null;
         List<TR2Entity> entities = level.Entities.ToList();
-        if (potentialTypes.Contains((TR2Entities)PreferredType))
+        if (potentialTypes.Contains((TR2Type)PreferredType))
         {
             enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
         }
-        enemyMatch ??= entities.Find(e => potentialTypes.Contains((TR2Entities)e.TypeID));
+        enemyMatch ??= entities.Find(e => potentialTypes.Contains((TR2Type)e.TypeID));
 
         if (enemyMatch != null)
         {

@@ -8,7 +8,7 @@ using TRTexture16Importer;
 
 namespace TRModelTransporter.Packing;
 
-public class TR2TexturePacker : AbstractTexturePacker<TR2Entities, TR2Level>
+public class TR2TexturePacker : AbstractTexturePacker<TR2Type, TR2Level>
 {
     private const int _maximumTiles = 16;
 
@@ -55,22 +55,22 @@ public class TR2TexturePacker : AbstractTexturePacker<TR2Entities, TR2Level>
         return textures;
     }
 
-    protected override TRMesh[] GetModelMeshes(TR2Entities modelEntity)
+    protected override TRMesh[] GetModelMeshes(TR2Type modelEntity)
     {
         return TRMeshUtilities.GetModelMeshes(Level, modelEntity);
     }
 
-    protected override TRSpriteSequence GetSpriteSequence(TR2Entities entity)
+    protected override TRSpriteSequence GetSpriteSequence(TR2Type entity)
     {
         return Level.SpriteSequences.ToList().Find(s => s.SpriteID == (int)entity);
     }
 
-    protected override IEnumerable<TR2Entities> GetAllModelTypes()
+    protected override IEnumerable<TR2Type> GetAllModelTypes()
     {
-        List<TR2Entities> modelIDs = new();
+        List<TR2Type> modelIDs = new();
         foreach (TRModel model in Level.Models)
         {
-            modelIDs.Add((TR2Entities)model.ID);
+            modelIDs.Add((TR2Type)model.ID);
         }
         return modelIDs;
     }

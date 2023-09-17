@@ -17,7 +17,7 @@ public class CinematicTransportHandler
         definition.CinematicFrames = frames.ToArray();
     }
 
-    public static void Export(TR2Level level, TR2ModelDefinition definition, IEnumerable<TR2Entities> entityTypes)
+    public static void Export(TR2Level level, TR2ModelDefinition definition, IEnumerable<TR2Type> entityTypes)
     {
         List<TRCinematicFrame> frames = new();
         if (entityTypes != null && entityTypes.Contains(definition.Entity))

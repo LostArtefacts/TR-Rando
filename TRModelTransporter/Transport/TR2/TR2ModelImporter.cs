@@ -7,22 +7,22 @@ using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Transport;
 
-public class TR2ModelImporter : AbstractTRModelImporter<TR2Entities, TR2Level, TR2ModelDefinition>
+public class TR2ModelImporter : AbstractTRModelImporter<TR2Type, TR2Level, TR2ModelDefinition>
 {
     public TR2ModelImporter()
     {
         Data = new TR2DefaultDataProvider();
     }
 
-    protected override AbstractTextureImportHandler<TR2Entities, TR2Level, TR2ModelDefinition> CreateTextureHandler()
+    protected override AbstractTextureImportHandler<TR2Type, TR2Level, TR2ModelDefinition> CreateTextureHandler()
     {
         return new TR2TextureImportHandler();
     }
 
-    protected override List<TR2Entities> GetExistingModelTypes()
+    protected override List<TR2Type> GetExistingModelTypes()
     {
-        List<TR2Entities> existingEntities = new();
-        Level.Models.ToList().ForEach(m => existingEntities.Add((TR2Entities)m.ID));
+        List<TR2Type> existingEntities = new();
+        Level.Models.ToList().ForEach(m => existingEntities.Add((TR2Type)m.ID));
         return existingEntities;
     }
 
@@ -47,7 +47,7 @@ public class TR2ModelImporter : AbstractTRModelImporter<TR2Entities, TR2Level, T
         SoundTransportHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
 
         // Allow external alias model priorities to be defined
-        Dictionary<TR2Entities, TR2Entities> aliasPriority = Data.AliasPriority ?? new Dictionary<TR2Entities, TR2Entities>();
+        Dictionary<TR2Type, TR2Type> aliasPriority = Data.AliasPriority ?? new Dictionary<TR2Type, TR2Type>();
 
         foreach (TR2ModelDefinition definition in standardDefinitions)
         {

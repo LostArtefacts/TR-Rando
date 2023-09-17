@@ -626,7 +626,7 @@ public class EMMirrorFunction : BaseEMFunction
             AdjustTR2EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.ToList().FindAll(e => TR2EntityUtilities.IsDoorType((TR2Entities)e.TypeID)));
+        AdjustDoors(level.Entities.ToList().FindAll(e => TR2EntityUtilities.IsDoorType((TR2Type)e.TypeID)));
     }
 
     private void MirrorEntities(TR3Level level)
@@ -712,12 +712,12 @@ public class EMMirrorFunction : BaseEMFunction
             entity.Angle *= -1;
         }
 
-        switch ((TR2Entities)entity.TypeID)
+        switch ((TR2Type)entity.TypeID)
         {
             // These take up 2 tiles so need some fiddling
-            case TR2Entities.Elevator:
-            case TR2Entities.SpikyCeiling:
-            case TR2Entities.SpikyWall:
+            case TR2Type.Elevator:
+            case TR2Type.SpikyCeiling:
+            case TR2Type.SpikyWall:
                 switch (entity.Angle)
                 {
                     case _south:
@@ -734,7 +734,7 @@ public class EMMirrorFunction : BaseEMFunction
                         break;
                 }
                 break;
-            case TR2Entities.Gong: // case 0 applicable to IceCave
+            case TR2Type.Gong: // case 0 applicable to IceCave
                 switch (entity.Angle)
                 {
                     case _south:
@@ -752,7 +752,7 @@ public class EMMirrorFunction : BaseEMFunction
                 }
                 break;
 
-            case TR2Entities.StatueWithKnifeBlade:
+            case TR2Type.StatueWithKnifeBlade:
                 if (entity.Angle == _east)
                 {
                     entity.Angle = _west;
@@ -766,8 +766,8 @@ public class EMMirrorFunction : BaseEMFunction
                 break;
 
             // Bridge tilts need to be rotated
-            case TR2Entities.BridgeTilt1:
-            case TR2Entities.BridgeTilt2:
+            case TR2Type.BridgeTilt1:
+            case TR2Type.BridgeTilt2:
                 switch (entity.Angle)
                 {
                     case _south:
@@ -785,28 +785,28 @@ public class EMMirrorFunction : BaseEMFunction
                 }
                 break;
 
-            case TR2Entities.AirplanePropeller:
+            case TR2Type.AirplanePropeller:
                 if (entity.Angle == _west)
                 {
                     entity.Angle = _east;
                 }
                 break;
 
-            case TR2Entities.OverheadPulleyHook:
+            case TR2Type.OverheadPulleyHook:
                 if (entity.Angle == _south || entity.Angle == _north)
                 {
                     entity.Angle += _south;
                 }
                 break;
 
-            case TR2Entities.PowerSaw:
+            case TR2Type.PowerSaw:
                 if (entity.Angle == _north)
                 {
                     entity.X += SectorSize;
                 }
                 break;
 
-            case TR2Entities.Helicopter:
+            case TR2Type.Helicopter:
                 if (entity.Angle == _west)
                 {
                     entity.Angle = _north;
@@ -815,7 +815,7 @@ public class EMMirrorFunction : BaseEMFunction
                 }
                 break;
 
-            case TR2Entities.MarcoBartoli:
+            case TR2Type.MarcoBartoli:
                 // InitialiseBartoli in Dragon.c always shifts Bartoli as follows,
                 // so we need to move him 512 in the +X to avoid him ending up either
                 // OOB or in mid-air.

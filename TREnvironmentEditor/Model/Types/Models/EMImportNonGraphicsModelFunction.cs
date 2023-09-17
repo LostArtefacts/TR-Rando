@@ -43,13 +43,13 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         {
             Level = level,
             ClearUnusedSprites = false,
-            EntitiesToImport = data.Select(m => (TR2Entities)m.ModelID),
+            EntitiesToImport = data.Select(m => (TR2Type)m.ModelID),
             DataFolder = @"Resources\TR2\Models",
             IgnoreGraphics = true
         };
         importer.Import();
 
-        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR2Entities)modelID));
+        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR2Type)modelID));
     }
 
     public override void ApplyToLevel(TR3Level level)

@@ -15,7 +15,7 @@ public static class TRMeshUtilities
         return null;
     }
 
-    public static TRMesh GetModelFirstMesh(TR2Level level, TR2Entities entity)
+    public static TRMesh GetModelFirstMesh(TR2Level level, TR2Type entity)
     {
         TRModel model = level.Models.ToList().Find(e => e.ID == (uint)entity);
         if (model != null)
@@ -60,7 +60,7 @@ public static class TRMeshUtilities
         return null;
     }
 
-    public static TRMesh[] GetModelMeshes(TR2Level level, TR2Entities entity)
+    public static TRMesh[] GetModelMeshes(TR2Level level, TR2Type entity)
     {
         TRModel model = level.Models.ToList().Find(e => e.ID == (uint)entity);
         if (model != null)

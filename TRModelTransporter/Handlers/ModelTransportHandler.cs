@@ -11,7 +11,7 @@ public class ModelTransportHandler
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
 
-    public static void Export(TR2Level level, TR2ModelDefinition definition, TR2Entities entity)
+    public static void Export(TR2Level level, TR2ModelDefinition definition, TR2Type entity)
     {
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
@@ -62,7 +62,7 @@ public class ModelTransportHandler
         }
     }
 
-    public static void Import(TR2Level level, TR2ModelDefinition definition, Dictionary<TR2Entities, TR2Entities> aliasPriority, IEnumerable<TR2Entities> laraDependants)
+    public static void Import(TR2Level level, TR2ModelDefinition definition, Dictionary<TR2Type, TR2Type> aliasPriority, IEnumerable<TR2Type> laraDependants)
     {
         List<TRModel> levelModels = level.Models.ToList();
         int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
@@ -84,7 +84,7 @@ public class ModelTransportHandler
         // as these use Lara's hips as placeholders. This means we can avoid texture corruption in
         // TRView but it's also needed for the shower cutscene in HSH. If these entities are found,
         // their starting mesh and mesh tree indices are just remapped to Lara's.
-        if (definition.Entity == TR2Entities.Lara && laraDependants != null)
+        if (definition.Entity == TR2Type.Lara && laraDependants != null)
         {
             ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
         }

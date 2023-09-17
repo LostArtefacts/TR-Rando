@@ -26,7 +26,7 @@ public class EMImportModelFunction : BaseEMFunction
         TR2ModelImporter importer = new()
         {
             Level = level,
-            EntitiesToImport = Models.Select(m => (TR2Entities)m),
+            EntitiesToImport = Models.Select(m => (TR2Type)m),
             DataFolder = @"Resources\TR2\Models"
         };
 

@@ -6,14 +6,14 @@ using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Utilities;
 
-public class TR2LevelTextureDeduplicator : AbstractTRLevelTextureDeduplicator<TR2Entities, TR2Level>
+public class TR2LevelTextureDeduplicator : AbstractTRLevelTextureDeduplicator<TR2Type, TR2Level>
 {
-    protected override AbstractTexturePacker<TR2Entities, TR2Level> CreatePacker(TR2Level level)
+    protected override AbstractTexturePacker<TR2Type, TR2Level> CreatePacker(TR2Level level)
     {
         return new TR2TexturePacker(level);
     }
 
-    protected override AbstractTextureRemapGroup<TR2Entities, TR2Level> GetRemapGroup(string path)
+    protected override AbstractTextureRemapGroup<TR2Type, TR2Level> GetRemapGroup(string path)
     {
         return JsonConvert.DeserializeObject<TR2TextureRemapGroup>(File.ReadAllText(path));
     }

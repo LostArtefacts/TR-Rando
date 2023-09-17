@@ -35,7 +35,7 @@ public class EMSecretRoomCondition : BaseEMCondition
     protected override bool Evaluate(TR2Level level)
     {
         List<TR2Entity> entities = level.Entities.ToList();
-        return entities.Any(e => e.Room == RoomIndex && TR2EntityUtilities.IsSecretType((TR2Entities)e.TypeID));
+        return entities.Any(e => e.Room == RoomIndex && TR2EntityUtilities.IsSecretType((TR2Type)e.TypeID));
     }
 
     protected override bool Evaluate(TR3Level level)

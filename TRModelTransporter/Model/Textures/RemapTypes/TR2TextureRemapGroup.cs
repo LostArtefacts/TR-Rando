@@ -3,19 +3,19 @@ using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Model.Textures;
 
-public class TR2TextureRemapGroup : AbstractTextureRemapGroup<TR2Entities, TR2Level>
+public class TR2TextureRemapGroup : AbstractTextureRemapGroup<TR2Type, TR2Level>
 {
-    protected override IEnumerable<TR2Entities> GetModelTypes(TR2Level level)
+    protected override IEnumerable<TR2Type> GetModelTypes(TR2Level level)
     {
-        List<TR2Entities> types = new();
+        List<TR2Type> types = new();
         foreach (TRModel model in level.Models)
         {
-            types.Add((TR2Entities)model.ID);
+            types.Add((TR2Type)model.ID);
         }
         return types;
     }
 
-    protected override AbstractTexturePacker<TR2Entities, TR2Level> CreatePacker(TR2Level level)
+    protected override AbstractTexturePacker<TR2Type, TR2Level> CreatePacker(TR2Level level)
     {
         return new TR2TexturePacker(level);
     }

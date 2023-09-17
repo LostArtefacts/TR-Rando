@@ -63,11 +63,11 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
         {
             LoadLevelInstance(lvl);
 
-            TextureMonitor<TR2Entities> monitor = TextureMonitor.GetMonitor(_levelInstance.Name);
+            TextureMonitor<TR2Type> monitor = TextureMonitor.GetMonitor(_levelInstance.Name);
             if (monitor != null && monitor.UseNightTextures)
             {
                 TR2TextureMapping mapping = GetMapping(_levelInstance);
-                using (TextureHolder<TR2Entities, TR2Level> holder = new(mapping, this))
+                using (TextureHolder<TR2Type, TR2Level> holder = new(mapping, this))
                 {
                     foreach (AbstractTextureSource source in holder.Variants.Keys)
                     {
@@ -219,7 +219,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
         }
     }
 
-    private void RedrawTargets(AbstractTextureMapping<TR2Entities, TR2Level> mapping, AbstractTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
+    private void RedrawTargets(AbstractTextureMapping<TR2Type, TR2Level> mapping, AbstractTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
     {
         lock (_drawLock)
         {
@@ -227,7 +227,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
         }
     }
 
-    private void DrawReplacements(AbstractTextureMapping<TR2Entities, TR2Level> mapping)
+    private void DrawReplacements(AbstractTextureMapping<TR2Type, TR2Level> mapping)
     {
         lock (_drawLock)
         {
@@ -262,7 +262,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
 
     internal class TextureProcessor : AbstractProcessorThread<TR2TextureRandomizer>
     {
-        private readonly Dictionary<TR2CombinedLevel, TextureHolder<TR2Entities, TR2Level>> _holders;
+        private readonly Dictionary<TR2CombinedLevel, TextureHolder<TR2Type, TR2Level>> _holders;
         private readonly TR2LandmarkImporter _landmarkImporter;
         private readonly TR2Wireframer _wireframer;
 
@@ -271,7 +271,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
         internal TextureProcessor(TR2TextureRandomizer outer)
             :base(outer)
         {
-            _holders = new Dictionary<TR2CombinedLevel, TextureHolder<TR2Entities, TR2Level>>();
+            _holders = new Dictionary<TR2CombinedLevel, TextureHolder<TR2Type, TR2Level>>();
             _landmarkImporter = new TR2LandmarkImporter();
             _wireframer = new TR2Wireframer();
         }
@@ -305,12 +305,12 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
                 TR2TextureMapping mapping = _outer.GetMapping(level);
                 if (mapping != null)
                 {
-                    TextureHolder<TR2Entities, TR2Level> parentHolder = null;
+                    TextureHolder<TR2Type, TR2Level> parentHolder = null;
                     if (level.IsCutScene)
                     {
                         parentHolder = _holders[level.ParentLevel];
                     }
-                    _holders[level] = new TextureHolder<TR2Entities, TR2Level>(mapping, _outer, parentHolder);
+                    _holders[level] = new TextureHolder<TR2Type, TR2Level>(mapping, _outer, parentHolder);
 
                     if (_outer.IsWireframeLevel(level))
                     {
@@ -356,9 +356,9 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
                             }
 
                             // Make sure the front and back of the dragon match
-                            if (data.ModelColours.ContainsKey((uint)TR2Entities.DragonFront_H))
+                            if (data.ModelColours.ContainsKey((uint)TR2Type.DragonFront_H))
                             {
-                                data.ModelColours[(uint)TR2Entities.DragonBack_H] = data.ModelColours[(uint)TR2Entities.DragonFront_H];
+                                data.ModelColours[(uint)TR2Type.DragonBack_H] = data.ModelColours[(uint)TR2Type.DragonFront_H];
                             }
                         }
                     }
@@ -394,7 +394,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
 
         private void ProcessLevel(TR2CombinedLevel level, Dictionary<TextureCategory, bool> options)
         {
-            TextureMonitor<TR2Entities> monitor = _outer.TextureMonitor.GetMonitor(level.Name);
+            TextureMonitor<TR2Type> monitor = _outer.TextureMonitor.GetMonitor(level.Name);
             bool isWireframe = _outer.IsWireframeLevel(level);
 
             options[TextureCategory.NightMode] = monitor != null && monitor.UseNightTextures;
@@ -402,7 +402,7 @@ public class TR2TextureRandomizer : BaseTR2Randomizer, ITextureVariantHandler
             options[TextureCategory.Lara] = _outer._textureOptions[TextureCategory.Lara]
                 && (monitor == null || monitor.UseLaraOutfitTextures);
 
-            using (TextureHolder<TR2Entities, TR2Level> holder = _holders[level])
+            using (TextureHolder<TR2Type, TR2Level> holder = _holders[level])
             {
                 foreach (AbstractTextureSource source in holder.Variants.Keys)
                 {

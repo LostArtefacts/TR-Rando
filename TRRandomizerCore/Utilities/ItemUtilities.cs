@@ -16,12 +16,12 @@ public static class ItemUtilities
         return (TR1Type)item;
     }
 
-    public static TR2Items ConvertToScriptItem(TR2Entities entity, TR2Items defaultItem = TR2Items.Pistols)
+    public static TR2Items ConvertToScriptItem(TR2Type entity, TR2Items defaultItem = TR2Items.Pistols)
     {
         return Convert(entity, defaultItem, _tr2EntityToScriptItemMap);
     }
 
-    public static TR2Entities ConvertToEntity(TR2Items item, TR2Entities defaultEntity = TR2Entities.Pistols_S_P)
+    public static TR2Type ConvertToEntity(TR2Items item, TR2Type defaultEntity = TR2Type.Pistols_S_P)
     {
         return Convert(item, defaultEntity, _tr2ScriptItemToEntitymap);
     }
@@ -61,72 +61,72 @@ public static class ItemUtilities
         entity.Invisible = true;
     }
 
-    private static readonly Dictionary<TR2Entities, TR2Items> _tr2EntityToScriptItemMap = new()
+    private static readonly Dictionary<TR2Type, TR2Items> _tr2EntityToScriptItemMap = new()
     {
-        [TR2Entities.Pistols_S_P]
+        [TR2Type.Pistols_S_P]
             = TR2Items.Pistols,
-        [TR2Entities.PistolAmmo_S_P]
+        [TR2Type.PistolAmmo_S_P]
             = TR2Items.PistolClips,
 
-        [TR2Entities.Shotgun_S_P]
+        [TR2Type.Shotgun_S_P]
             = TR2Items.Shotgun,
-        [TR2Entities.ShotgunAmmo_S_P]
+        [TR2Type.ShotgunAmmo_S_P]
             = TR2Items.ShotgunShells,
 
-        [TR2Entities.Automags_S_P]
+        [TR2Type.Automags_S_P]
             = TR2Items.AutoPistols,
-        [TR2Entities.AutoAmmo_S_P]
+        [TR2Type.AutoAmmo_S_P]
             = TR2Items.AutoClips,
 
-        [TR2Entities.Uzi_S_P]
+        [TR2Type.Uzi_S_P]
             = TR2Items.Uzis,
-        [TR2Entities.UziAmmo_S_P]
+        [TR2Type.UziAmmo_S_P]
             = TR2Items.UziClips,
 
-        [TR2Entities.Harpoon_S_P]
+        [TR2Type.Harpoon_S_P]
             = TR2Items.HarpoonGun,
-        [TR2Entities.HarpoonAmmo_S_P]
+        [TR2Type.HarpoonAmmo_S_P]
             = TR2Items.Harpoons,
 
-        [TR2Entities.M16_S_P]
+        [TR2Type.M16_S_P]
             = TR2Items.M16,
-        [TR2Entities.M16Ammo_S_P]
+        [TR2Type.M16Ammo_S_P]
             = TR2Items.M16Clips,
 
-        [TR2Entities.GrenadeLauncher_S_P]
+        [TR2Type.GrenadeLauncher_S_P]
             = TR2Items.GrenadeLauncher,
-        [TR2Entities.Grenades_S_P]
+        [TR2Type.Grenades_S_P]
             = TR2Items.Grenades,
 
-        [TR2Entities.SmallMed_S_P]
+        [TR2Type.SmallMed_S_P]
             = TR2Items.SmallMedi,
-        [TR2Entities.LargeMed_S_P]
+        [TR2Type.LargeMed_S_P]
             = TR2Items.LargeMedi,
 
-        [TR2Entities.Flares_S_P]
+        [TR2Type.Flares_S_P]
             = TR2Items.Flare, // Single flare, not a pack
 
-        [TR2Entities.Quest1_S_P]
+        [TR2Type.Quest1_S_P]
             = TR2Items.Pickup1,
-        [TR2Entities.Quest2_S_P]
+        [TR2Type.Quest2_S_P]
              = TR2Items.Pickup2,
 
-        [TR2Entities.Puzzle1_S_P]
+        [TR2Type.Puzzle1_S_P]
             = TR2Items.Puzzle1,
-        [TR2Entities.Puzzle2_S_P]
+        [TR2Type.Puzzle2_S_P]
             = TR2Items.Puzzle2,
-        [TR2Entities.Puzzle3_S_P]
+        [TR2Type.Puzzle3_S_P]
             = TR2Items.Puzzle3,
-        [TR2Entities.Puzzle4_S_P]
+        [TR2Type.Puzzle4_S_P]
             = TR2Items.Puzzle4,
 
-        [TR2Entities.Key1_S_P]
+        [TR2Type.Key1_S_P]
             = TR2Items.Key1,
-        [TR2Entities.Key2_S_P]
+        [TR2Type.Key2_S_P]
             = TR2Items.Key2,
-        [TR2Entities.Key3_S_P]
+        [TR2Type.Key3_S_P]
             = TR2Items.Key3,
-        [TR2Entities.Key4_S_P]
+        [TR2Type.Key4_S_P]
             = TR2Items.Key4
     };
 
@@ -205,7 +205,7 @@ public static class ItemUtilities
     };
 
     // The reverse of above for the sake of ConvertToEntity, but initialised dynamically.
-    private static readonly Dictionary<TR2Items, TR2Entities> _tr2ScriptItemToEntitymap;
+    private static readonly Dictionary<TR2Items, TR2Type> _tr2ScriptItemToEntitymap;
     private static readonly Dictionary<TR3Items, TR3Entities> _tr3ScriptItemToEntitymap;
 
     static ItemUtilities()
