@@ -65,7 +65,7 @@ public class EMMoveSlotFunction : BaseEMFunction
         }
 
         // Make sure there isn't a static enemy on the same sector e.g. MorayEel
-        List<TR2Entity> staticEnemies = level.Entities.ToList().FindAll(e => e.Room == roomNumber && TR2EntityUtilities.IsStaticCreature((TR2Type)e.TypeID));
+        List<TR2Entity> staticEnemies = level.Entities.ToList().FindAll(e => e.Room == roomNumber && TR2TypeUtilities.IsStaticCreature((TR2Type)e.TypeID));
         foreach (TR2Entity staticEnemy in staticEnemies)
         {
             TRRoomSector enemySector = FDUtilities.GetRoomSector(staticEnemy.X, staticEnemy.Y, staticEnemy.Z, staticEnemy.Room, level, control);

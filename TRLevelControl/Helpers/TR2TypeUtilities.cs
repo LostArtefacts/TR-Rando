@@ -2,9 +2,9 @@
 
 namespace TRLevelControl.Helpers;
 
-public static class TR2EntityUtilities
+public static class TR2TypeUtilities
 {
-    public static readonly Dictionary<TR2Type, Dictionary<TR2Type, List<string>>> LevelEntityAliases = new()
+    public static readonly Dictionary<TR2Type, Dictionary<TR2Type, List<string>>> LevelAliases = new()
     {
         [TR2Type.Lara] = new Dictionary<TR2Type, List<string>>
         {
@@ -66,7 +66,7 @@ public static class TR2EntityUtilities
         }
     };
 
-    public static readonly Dictionary<TR2Type, List<TR2Type>> EntityFamilies = new()
+    public static readonly Dictionary<TR2Type, List<TR2Type>> TypeFamilies = new()
     {
         [TR2Type.Lara] = new List<TR2Type>
         {
@@ -95,59 +95,59 @@ public static class TR2EntityUtilities
         }
     };
 
-    public static TR2Type TranslateEntityAlias(TR2Type entity)
+    public static TR2Type TranslateAlias(TR2Type type)
     {
-        foreach (TR2Type parentEntity in EntityFamilies.Keys)
+        foreach (TR2Type parentType in TypeFamilies.Keys)
         {
-            if (EntityFamilies[parentEntity].Contains(entity))
+            if (TypeFamilies[parentType].Contains(type))
             {
-                return parentEntity;
+                return parentType;
             }
         }
 
-        return entity;
+        return type;
     }
 
-    public static TR2Type GetAliasForLevel(string lvl, TR2Type entity)
+    public static TR2Type GetAliasForLevel(string lvl, TR2Type type)
     {
-        if (LevelEntityAliases.ContainsKey(entity))
+        if (LevelAliases.ContainsKey(type))
         {
-            foreach (TR2Type alias in LevelEntityAliases[entity].Keys)
+            foreach (TR2Type alias in LevelAliases[type].Keys)
             {
-                if (LevelEntityAliases[entity][alias].Contains(lvl))
+                if (LevelAliases[type][alias].Contains(lvl))
                 {
                     return alias;
                 }
             }
         }
-        return entity;
+        return type;
     }
 
-    public static List<TR2Type> GetEntityFamily(TR2Type entity)
+    public static List<TR2Type> GetFamily(TR2Type type)
     {
-        foreach (TR2Type parentEntity in EntityFamilies.Keys)
+        foreach (TR2Type parentType in TypeFamilies.Keys)
         {
-            if (EntityFamilies[parentEntity].Contains(entity))
+            if (TypeFamilies[parentType].Contains(type))
             {
-                return EntityFamilies[parentEntity];
+                return TypeFamilies[parentType];
             }
         }
 
-        return new List<TR2Type> { entity };
+        return new List<TR2Type> { type };
     }
 
-    public static List<TR2Type> RemoveAliases(IEnumerable<TR2Type> entities)
+    public static List<TR2Type> RemoveAliases(IEnumerable<TR2Type> types)
     {
-        List<TR2Type> ents = new();
-        foreach (TR2Type ent in entities)
+        List<TR2Type> normalisedTypes = new();
+        foreach (TR2Type ent in types)
         {
-            TR2Type normalisedEnt = TranslateEntityAlias(ent);
-            if (!ents.Contains(normalisedEnt))
+            TR2Type normalisedType = TranslateAlias(ent);
+            if (!normalisedTypes.Contains(normalisedType))
             {
-                ents.Add(normalisedEnt);
+                normalisedTypes.Add(normalisedType);
             }
         }
-        return ents;
+        return normalisedTypes;
     }
 
     public static List<TR2Type> GetLaraTypes()
@@ -213,7 +213,7 @@ public static class TR2EntityUtilities
 
     public static List<TR2Type> GetCrossLevelDroppableEnemies(bool monksAreKillable, bool unconditionalChickens)
     {
-        List<TR2Type> entities = new()
+        List<TR2Type> types = new()
         {
             TR2Type.BengalTiger,
             TR2Type.Crow,
@@ -227,7 +227,6 @@ public static class TR2EntityUtilities
             TR2Type.Gunman1TopixtorCAC,
             TR2Type.Gunman2,
             TR2Type.Knifethrower,
-            //TR2Entities.MarcoBartoli, // The dragon can drop items but we are limiting to 1 dragon per level so this is easier than re-allocating drops
             TR2Type.MaskedGoon1,
             TR2Type.MaskedGoon2,
             TR2Type.MaskedGoon3,
@@ -251,20 +250,20 @@ public static class TR2EntityUtilities
         // #131 Provides an option to exclude monks as having to be killed
         if (monksAreKillable)
         {
-            entities.Add(TR2Type.MonkWithKnifeStick);
-            entities.Add(TR2Type.MonkWithLongStick);
+            types.Add(TR2Type.MonkWithKnifeStick);
+            types.Add(TR2Type.MonkWithLongStick);
         }
 
         if (unconditionalChickens)
         {
-            entities.Add(TR2Type.BirdMonster);
+            types.Add(TR2Type.BirdMonster);
         }
 
-        return entities;
+        return types;
     }
 
     // This is the full list of enemies including alias duplicates - used for 
-    // checking while iterating an entity list to determine if an entity is 
+    // checking while iterating an type list to determine if an type is 
     // an enemy and can be replaced.
     public static List<TR2Type> GetFullListOfEnemies()
     {
@@ -324,55 +323,10 @@ public static class TR2EntityUtilities
         };
     }
 
-    public static bool IsEnemyType(TR2Type entity)
+    public static bool IsEnemyType(TR2Type type)
     {
-        return GetFullListOfEnemies().Contains(entity);
+        return GetFullListOfEnemies().Contains(type);
     }
-
-    /*public static List<TR2Entities> GetListOfEnemyTypes()
-    {
-        return new List<TR2Entities>
-        {
-            TR2Entities.Doberman,
-            TR2Entities.MaskedGoon1,
-            TR2Entities.MaskedGoon2,
-            TR2Entities.MaskedGoon3,
-            TR2Entities.Knifethrower,
-            TR2Entities.ShotgunGoon,
-            TR2Entities.Rat,
-            TR2Entities.Shark,
-            TR2Entities.YellowMorayEel,
-            TR2Entities.BlackMorayEel,
-            TR2Entities.Barracuda,
-            TR2Entities.ScubaDiver,
-            TR2Entities.Gunman1,
-            TR2Entities.Gunman2,
-            TR2Entities.StickWieldingGoon1,
-            TR2Entities.StickWieldingGoon2,
-            TR2Entities.FlamethrowerGoon,
-            TR2Entities.Spider,
-            TR2Entities.GiantSpider,
-            TR2Entities.Crow,
-            TR2Entities.TigerOrSnowLeopard,
-            TR2Entities.MarcoBartoli,
-            TR2Entities.XianGuardSpear,
-            TR2Entities.XianGuardSpearStatue,
-            TR2Entities.XianGuardSword,
-            TR2Entities.XianGuardSwordStatue,
-            TR2Entities.Yeti,
-            TR2Entities.BirdMonster,
-            TR2Entities.Eagle,
-            TR2Entities.Mercenary1,
-            TR2Entities.Mercenary2,
-            TR2Entities.Mercenary3,
-            TR2Entities.MercSnowmobDriver,
-            TR2Entities.MonkWithLongStick,
-            TR2Entities.MonkWithKnifeStick,
-            TR2Entities.TRex,
-            TR2Entities.Monk,
-            TR2Entities.Winston
-        };
-    }*/
 
     public static Dictionary<string, List<TR2Type>> GetEnemyTypeDictionary()
     {
@@ -479,14 +433,14 @@ public static class TR2EntityUtilities
         };
     }
 
-    public static bool IsGunType(TR2Type entity)
+    public static bool IsGunType(TR2Type type)
     {
-        return (entity == TR2Type.Shotgun_S_P ||
-                entity == TR2Type.Automags_S_P ||
-                entity == TR2Type.Uzi_S_P ||
-                entity == TR2Type.Harpoon_S_P ||
-                entity == TR2Type.M16_S_P ||
-                entity == TR2Type.GrenadeLauncher_S_P);
+        return (type == TR2Type.Shotgun_S_P ||
+                type == TR2Type.Automags_S_P ||
+                type == TR2Type.Uzi_S_P ||
+                type == TR2Type.Harpoon_S_P ||
+                type == TR2Type.M16_S_P ||
+                type == TR2Type.GrenadeLauncher_S_P);
     }
 
     public static List<TR2Type> GetListOfAmmoTypes()
@@ -505,37 +459,32 @@ public static class TR2EntityUtilities
         };
     }
 
-    public static bool IsUtilityType(TR2Type entity)
+    public static bool IsUtilityType(TR2Type type)
     {
-        return (entity == TR2Type.ShotgunAmmo_S_P ||
-                entity == TR2Type.AutoAmmo_S_P ||
-                entity == TR2Type.UziAmmo_S_P ||
-                entity == TR2Type.HarpoonAmmo_S_P ||
-                entity == TR2Type.M16Ammo_S_P ||
-                entity == TR2Type.Grenades_S_P ||
-                entity == TR2Type.SmallMed_S_P ||
-                entity == TR2Type.LargeMed_S_P ||
-                entity == TR2Type.Flares_S_P);
+        return (type == TR2Type.ShotgunAmmo_S_P ||
+                type == TR2Type.AutoAmmo_S_P ||
+                type == TR2Type.UziAmmo_S_P ||
+                type == TR2Type.HarpoonAmmo_S_P ||
+                type == TR2Type.M16Ammo_S_P ||
+                type == TR2Type.Grenades_S_P ||
+                type == TR2Type.SmallMed_S_P ||
+                type == TR2Type.LargeMed_S_P ||
+                type == TR2Type.Flares_S_P);
     }
 
-    /// <summary>
-    /// returns true if the parameter provided is of one of the 3 secrets type 
-    /// </summary>
-    /// <param name="entity"><see cref="TR2Type"/></param>
-    /// <returns>entity == TR2Entities.StoneSecret_S_P || entity == TR2Entities.JadeSecret_S_P || entity == TR2Entities.GoldSecret_S_P;</returns>
-    public static bool IsSecretType(TR2Type entity)
+    public static bool IsSecretType(TR2Type type)
     {
-        return entity == TR2Type.StoneSecret_S_P || entity == TR2Type.JadeSecret_S_P || entity == TR2Type.GoldSecret_S_P;
+        return type == TR2Type.StoneSecret_S_P || type == TR2Type.JadeSecret_S_P || type == TR2Type.GoldSecret_S_P;
     }
 
-    public static bool IsAmmoType(TR2Type entity)
+    public static bool IsAmmoType(TR2Type type)
     {
-        return (entity == TR2Type.ShotgunAmmo_S_P ||
-                entity == TR2Type.AutoAmmo_S_P ||
-                entity == TR2Type.UziAmmo_S_P ||
-                entity == TR2Type.HarpoonAmmo_S_P ||
-                entity == TR2Type.M16Ammo_S_P ||
-                entity == TR2Type.Grenades_S_P);
+        return (type == TR2Type.ShotgunAmmo_S_P ||
+                type == TR2Type.AutoAmmo_S_P ||
+                type == TR2Type.UziAmmo_S_P ||
+                type == TR2Type.HarpoonAmmo_S_P ||
+                type == TR2Type.M16Ammo_S_P ||
+                type == TR2Type.Grenades_S_P);
     }
 
     public static List<TR2Type> GetListOfKeyItemTypes()
@@ -565,29 +514,29 @@ public static class TR2EntityUtilities
         };
     }
 
-    public static bool IsKeyItemType(TR2Type entity)
+    public static bool IsKeyItemType(TR2Type type)
     {
-        return (entity == TR2Type.Key1_S_P ||
-                entity == TR2Type.Key2_S_P ||
-                entity == TR2Type.Key3_S_P ||
-                entity == TR2Type.Key4_S_P ||
-                entity == TR2Type.Puzzle1_S_P ||
-                entity == TR2Type.Puzzle2_S_P ||
-                entity == TR2Type.Puzzle3_S_P ||
-                entity == TR2Type.Puzzle4_S_P ||
-                entity == TR2Type.Quest1_S_P ||
-                entity == TR2Type.Quest2_S_P);
+        return (type == TR2Type.Key1_S_P ||
+                type == TR2Type.Key2_S_P ||
+                type == TR2Type.Key3_S_P ||
+                type == TR2Type.Key4_S_P ||
+                type == TR2Type.Puzzle1_S_P ||
+                type == TR2Type.Puzzle2_S_P ||
+                type == TR2Type.Puzzle3_S_P ||
+                type == TR2Type.Puzzle4_S_P ||
+                type == TR2Type.Quest1_S_P ||
+                type == TR2Type.Quest2_S_P);
     }
 
-    public static bool IsAnyPickupType(TR2Type entity)
+    public static bool IsAnyPickupType(TR2Type type)
     {
-        return entity == TR2Type.Pistols_S_P ||
-            entity == TR2Type.PistolAmmo_S_P ||
-            IsAmmoType(entity) ||
-            IsGunType(entity) ||
-            IsKeyItemType(entity) ||
-            IsUtilityType(entity) ||
-            IsSecretType(entity);
+        return type == TR2Type.Pistols_S_P ||
+            type == TR2Type.PistolAmmo_S_P ||
+            IsAmmoType(type) ||
+            IsGunType(type) ||
+            IsKeyItemType(type) ||
+            IsUtilityType(type) ||
+            IsSecretType(type);
     }
 
     public static List<TR2Type> GetSwitchTypes()
@@ -602,9 +551,9 @@ public static class TR2EntityUtilities
         };
     }
 
-    public static bool IsSwitchType(TR2Type entity)
+    public static bool IsSwitchType(TR2Type type)
     {
-        return GetSwitchTypes().Contains(entity);
+        return GetSwitchTypes().Contains(type);
     }
 
     public static List<TR2Type> GetKeyholeTypes()
@@ -618,9 +567,9 @@ public static class TR2EntityUtilities
         };
     }
 
-    public static bool IsKeyholeType(TR2Type entity)
+    public static bool IsKeyholeType(TR2Type type)
     {
-        return GetKeyholeTypes().Contains(entity);
+        return GetKeyholeTypes().Contains(type);
     }
 
     public static List<TR2Type> GetSlotTypes()
@@ -638,9 +587,9 @@ public static class TR2EntityUtilities
         };
     }
 
-    public static bool IsSlotType(TR2Type entity)
+    public static bool IsSlotType(TR2Type type)
     {
-        return GetSlotTypes().Contains(entity);
+        return GetSlotTypes().Contains(type);
     }
 
     public static List<TR2Type> GetPushblockTypes()
@@ -654,16 +603,16 @@ public static class TR2EntityUtilities
         };
     }
 
-    public static bool IsPushblockType(TR2Type entity)
+    public static bool IsPushblockType(TR2Type type)
     {
-        return GetPushblockTypes().Contains(entity);
+        return GetPushblockTypes().Contains(type);
     }
 
-    public static bool IsWaterCreature(TR2Type entity)
+    public static bool IsWaterCreature(TR2Type type)
     {
-        return (entity == TR2Type.Shark || entity == TR2Type.YellowMorayEel || entity == TR2Type.BlackMorayEel ||
-            entity == TR2Type.Barracuda || entity == TR2Type.BarracudaIce || entity == TR2Type.BarracudaUnwater ||
-            entity == TR2Type.BarracudaXian || entity == TR2Type.ScubaDiver);
+        return (type == TR2Type.Shark || type == TR2Type.YellowMorayEel || type == TR2Type.BlackMorayEel ||
+            type == TR2Type.Barracuda || type == TR2Type.BarracudaIce || type == TR2Type.BarracudaUnwater ||
+            type == TR2Type.BarracudaXian || type == TR2Type.ScubaDiver);
     }
 
     public static List<TR2Type> WaterCreatures()
@@ -692,66 +641,50 @@ public static class TR2EntityUtilities
         };
     }
 
-    public static bool IsStaticCreature(TR2Type entity)
+    public static bool IsStaticCreature(TR2Type type)
     {
-        return entity == TR2Type.YellowMorayEel || entity == TR2Type.BlackMorayEel;
+        return type == TR2Type.YellowMorayEel || type == TR2Type.BlackMorayEel;
     }
 
-    public static bool IsHazardCreature(TR2Type entity)
+    public static bool IsHazardCreature(TR2Type type)
     {
-        return entity == TR2Type.YellowMorayEel || entity == TR2Type.BlackMorayEel || entity == TR2Type.Winston;
+        return type == TR2Type.YellowMorayEel || type == TR2Type.BlackMorayEel || type == TR2Type.Winston;
     }
 
-    public static List<TR2Type> FilterWaterEnemies(List<TR2Type> entities)
+    public static List<TR2Type> FilterWaterEnemies(List<TR2Type> types)
     {
-        List<TR2Type> waterEntities = new();
-        foreach (TR2Type entity in entities)
+        List<TR2Type> waterTypes = new();
+        foreach (TR2Type type in types)
         {
-            if (IsWaterCreature(entity))
+            if (IsWaterCreature(type))
             {
-                waterEntities.Add(entity);
+                waterTypes.Add(type);
             }
         }
-        return waterEntities;
+        return waterTypes;
     }
 
-    public static bool CanDropPickups(TR2Type entity, bool monksAreKillable, bool unconditionalChickens)
+    public static bool CanDropPickups(TR2Type type, bool monksAreKillable, bool unconditionalChickens)
     {
-        return GetCrossLevelDroppableEnemies(monksAreKillable, unconditionalChickens).Contains(entity);
-        /*return (entity == TR2Entities.Doberman ||
-                entity == TR2Entities.MaskedGoon1 ||
-                entity == TR2Entities.MaskedGoon2 ||
-                entity == TR2Entities.MaskedGoon3 ||
-                entity == TR2Entities.Knifethrower ||
-                entity == TR2Entities.ShotgunGoon ||
-                entity == TR2Entities.Gunman1 ||
-                entity == TR2Entities.Gunman2 ||
-                entity == TR2Entities.StickWieldingGoon1 ||
-                entity == TR2Entities.StickWieldingGoon2 ||
-                entity == TR2Entities.FlamethrowerGoon ||
-                entity == TR2Entities.Mercenary1 ||
-                entity == TR2Entities.Mercenary2 ||
-                entity == TR2Entities.Mercenary3 ||
-                entity == TR2Entities.MonkWithLongStick ||
-                entity == TR2Entities.MonkWithKnifeStick);*/
+        return GetCrossLevelDroppableEnemies(monksAreKillable, unconditionalChickens).Contains(type);
     }
 
-    public static bool IsMonk(TR2Type entity)
+    public static bool IsMonk(TR2Type type)
     {
-        return entity == TR2Type.MonkWithKnifeStick || entity == TR2Type.MonkWithLongStick;
+        return type == TR2Type.MonkWithKnifeStick || type == TR2Type.MonkWithLongStick;
     }
 
-    public static List<TR2Type> FilterDroppableEnemies(List<TR2Type> entities, bool monksAreKillable, bool unconditionalChickens)
+    public static List<TR2Type> FilterDroppableEnemies(List<TR2Type> types, bool monksAreKillable, bool unconditionalChickens)
     {
-        List<TR2Type> droppableEntities = new();
-        foreach (TR2Type entity in entities)
+        List<TR2Type> droppableTypes = new();
+        foreach (TR2Type type in types)
         {
-            if (CanDropPickups(entity, monksAreKillable, unconditionalChickens))
+            if (CanDropPickups(type, monksAreKillable, unconditionalChickens))
             {
-                droppableEntities.Add(entity);
+                droppableTypes.Add(type);
             }
         }
-        return droppableEntities;
+        return droppableTypes;
     }
 
     public static List<TR2Type> DoorTypes()
@@ -764,9 +697,9 @@ public static class TR2EntityUtilities
         };
     }
 
-    public static bool IsDoorType(TR2Type entity)
+    public static bool IsDoorType(TR2Type type)
     {
-        return DoorTypes().Contains(entity);
+        return DoorTypes().Contains(type);
     }
 
     public static Dictionary<string, List<TR2Type>> DroppableEnemyTypes()

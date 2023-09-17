@@ -108,7 +108,7 @@ public class TR2CombinedLevel
 
     public List<TR2Entity> GetEnemyEntities()
     {
-        List<TR2Type> allEnemies = TR2EntityUtilities.GetFullListOfEnemies();
+        List<TR2Type> allEnemies = TR2TypeUtilities.GetFullListOfEnemies();
         List<TR2Entity> levelEntities = new();
         for (int i = 0; i < Data.NumEntities; i++)
         {

@@ -58,7 +58,7 @@ public static class VehicleUtilities
         }
 
         List<Location> levelLocations = _allLocations[level.Name];
-        List<TR2Type> secretTypes = TR2EntityUtilities.GetListOfSecretTypes();
+        List<TR2Type> secretTypes = TR2TypeUtilities.GetListOfSecretTypes();
 
         foreach (TR2Entity entity in level.Data.Entities)
         {

@@ -161,7 +161,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         }
 
         // Get the list of enemy types currently in the level
-        List<TR2Type> oldEntities = TR2EntityUtilities.GetEnemyTypeDictionary()[level.Name];
+        List<TR2Type> oldEntities = TR2TypeUtilities.GetEnemyTypeDictionary()[level.Name];
 
         // Work out how many we can support
         int enemyCount = oldEntities.Count - reduceEnemyCountBy + TR2EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
@@ -180,7 +180,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         if (level.Is(TR2LevelNames.HOME) && reduceEnemyCountBy > 0)
         {
             TR2Type newGoon = TR2Type.StickWieldingGoon1BlackJacket;
-            List<TR2Type> goonies = TR2EntityUtilities.GetEntityFamily(newGoon);
+            List<TR2Type> goonies = TR2TypeUtilities.GetFamily(newGoon);
             do
             {
                 newGoon = goonies[_generator.Next(0, goonies.Count)];
@@ -209,13 +209,13 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             // enemy if they are needed. If we want to exclude, try to select based on user priority.
             if (waterEnemyRequired)
             {
-                List<TR2Type> waterEnemies = TR2EntityUtilities.KillableWaterCreatures();
+                List<TR2Type> waterEnemies = TR2TypeUtilities.KillableWaterCreatures();
                 newEntities.Add(SelectRequiredEnemy(waterEnemies, level, difficulty));
             }
 
             if (droppableEnemyRequired)
             {
-                List<TR2Type> droppableEnemies = TR2EntityUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional);
+                List<TR2Type> droppableEnemies = TR2TypeUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional);
                 newEntities.Add(SelectRequiredEnemy(droppableEnemies, level, difficulty));
             }
 
@@ -229,7 +229,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             }
 
             // Get all other candidate supported enemies
-            List<TR2Type> allEnemies = TR2EntityUtilities.GetCandidateCrossLevelEnemies()
+            List<TR2Type> allEnemies = TR2TypeUtilities.GetCandidateCrossLevelEnemies()
                 .FindAll(e => TR2EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, Settings.ProtectMonks));
             if (Settings.OneEnemyMode || Settings.IncludedEnemies.Count < newEntities.Capacity || Settings.DragonSpawnType == DragonSpawnType.Minimum)
             {
@@ -241,8 +241,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             // Remove all exclusions from the pool, and adjust the target capacity
             allEnemies.RemoveAll(e => _excludedEnemies.Contains(e));
 
-            IEnumerable<TR2Type> ex = allEnemies.Where(e => !newEntities.Any(TR2EntityUtilities.GetEntityFamily(e).Contains));
-            List<TR2Type> unalisedEntities = TR2EntityUtilities.RemoveAliases(ex);
+            IEnumerable<TR2Type> ex = allEnemies.Where(e => !newEntities.Any(TR2TypeUtilities.GetFamily(e).Contains));
+            List<TR2Type> unalisedEntities = TR2TypeUtilities.RemoveAliases(ex);
             while (unalisedEntities.Count < newEntities.Capacity - newEntities.Count)
             {
                 --newEntities.Capacity;
@@ -327,7 +327,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 // GetEntityFamily returns all aliases for the likes of the tigers, but if an entity
                 // doesn't have any, the returned list just contains the entity itself. This means
                 // we can avoid duplicating standard enemies as well as avoiding alias-clashing.
-                List<TR2Type> family = TR2EntityUtilities.GetEntityFamily(entity);
+                List<TR2Type> family = TR2TypeUtilities.GetFamily(entity);
                 if (!newEntities.Any(e1 => family.Any(e2 => e1 == e2)))
                 {
                     // #144 We can include docile chickens provided we aren't including everything
@@ -362,7 +362,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         Dictionary<TR2Type, List<int>> restrictedRoomEnemies = TR2EnemyUtilities.GetRestrictedEnemyRooms(level.Name, difficulty);
         if (restrictedRoomEnemies != null && newEntities.All(e => restrictedRoomEnemies.ContainsKey(e)))
         {
-            List<TR2Type> pool = TR2EntityUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional);
+            List<TR2Type> pool = TR2TypeUtilities.GetCrossLevelDroppableEnemies(!Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional);
             do
             {
                 TR2Type fallbackEnemy;
@@ -384,7 +384,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             if ((level.Is(TR2LevelNames.OPERA) || level.Is(TR2LevelNames.MONASTERY)) && newEntities.All(friends.Contains))
             {
                 // Add an additional "safe" enemy - so pick from the droppable range, monks and chickens excluded
-                List<TR2Type> droppableEnemies = TR2EntityUtilities.GetCrossLevelDroppableEnemies(false, false);
+                List<TR2Type> droppableEnemies = TR2TypeUtilities.GetCrossLevelDroppableEnemies(false, false);
                 newEntities.Add(SelectRequiredEnemy(droppableEnemies, level, difficulty));
             }
         }
@@ -455,9 +455,9 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             return;
         }
 
-        List<TR2Type> availableEnemyTypes = TR2EntityUtilities.GetEnemyTypeDictionary()[level.Name];
-        List<TR2Type> droppableEnemies = TR2EntityUtilities.DroppableEnemyTypes()[level.Name];
-        List<TR2Type> waterEnemies = TR2EntityUtilities.FilterWaterEnemies(availableEnemyTypes);
+        List<TR2Type> availableEnemyTypes = TR2TypeUtilities.GetEnemyTypeDictionary()[level.Name];
+        List<TR2Type> droppableEnemies = TR2TypeUtilities.DroppableEnemyTypes()[level.Name];
+        List<TR2Type> waterEnemies = TR2TypeUtilities.FilterWaterEnemies(availableEnemyTypes);
 
         if (Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Docile && level.Is(TR2LevelNames.CHICKEN))
         {
@@ -584,12 +584,12 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
                     // If the room has water but this enemy isn't a water enemy, we will assume that environment
                     // modifications will handle assignment of the enemy to entities.
-                    if (!TR2EntityUtilities.IsWaterCreature(entity) && level.Data.Rooms[targetEntity.Room].ContainsWater)
+                    if (!TR2TypeUtilities.IsWaterCreature(entity) && level.Data.Rooms[targetEntity.Room].ContainsWater)
                     {
                         continue;
                     }
 
-                    targetEntity.TypeID = (short)TR2EntityUtilities.TranslateEntityAlias(entity);
+                    targetEntity.TypeID = (short)TR2TypeUtilities.TranslateAlias(entity);
 
                     // #146 Ensure OneShot triggers are set for this enemy if needed
                     TR2EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
@@ -638,9 +638,9 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 {
                     TR2Type entType = (TR2Type)ent.TypeID;
 
-                    isPickupItem = TR2EntityUtilities.IsUtilityType(entType) ||
-                                   TR2EntityUtilities.IsGunType(entType) ||
-                                   TR2EntityUtilities.IsKeyItemType(entType);
+                    isPickupItem = TR2TypeUtilities.IsUtilityType(entType) ||
+                                   TR2TypeUtilities.IsGunType(entType) ||
+                                   TR2TypeUtilities.IsKeyItemType(entType);
 
                     if (isPickupItem)
                         break;
@@ -650,7 +650,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 newEntityType = enemies.Available[_generator.Next(0, enemies.Available.Count)];
 
                 //Do we need to ensure the enemy can drop the item on the same tile?
-                if (!TR2EntityUtilities.CanDropPickups(newEntityType, !Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional) && isPickupItem)
+                if (!TR2TypeUtilities.CanDropPickups(newEntityType, !Settings.ProtectMonks, Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional) && isPickupItem)
                 {
                     //Ensure the new random entity can drop pickups
                     newEntityType = enemies.Droppable[_generator.Next(0, enemies.Droppable.Count)];
@@ -668,13 +668,13 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             if (level.Is(TR2LevelNames.DA) && roomIndex == 77)
             {
                 // Make sure the end level trigger isn't blocked by an unkillable enemy
-                while (TR2EntityUtilities.IsHazardCreature(newEntityType) || (Settings.ProtectMonks && TR2EntityUtilities.IsMonk(newEntityType)))
+                while (TR2TypeUtilities.IsHazardCreature(newEntityType) || (Settings.ProtectMonks && TR2TypeUtilities.IsMonk(newEntityType)))
                 {
                     newEntityType = enemies.Available[_generator.Next(0, enemies.Available.Count)];
                 }
             }
 
-            if (TR2EntityUtilities.IsWaterCreature(currentEntityType) && !TR2EntityUtilities.IsWaterCreature(newEntityType))
+            if (TR2TypeUtilities.IsWaterCreature(currentEntityType) && !TR2TypeUtilities.IsWaterCreature(newEntityType))
             {
                 // Check alternate rooms too - e.g. rooms 74/48 in 40 Fathoms
                 short roomDrainIndex = -1;
@@ -753,7 +753,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             }
 
             // Make sure to convert BengalTiger, StickWieldingGoonBandana etc back to their actual types
-            currentEntity.TypeID = (short)TR2EntityUtilities.TranslateEntityAlias(newEntityType);
+            currentEntity.TypeID = (short)TR2TypeUtilities.TranslateAlias(newEntityType);
 
             // #146 Ensure OneShot triggers are set for this enemy if needed. This currently only applies
             // to the dragon, which will be handled above in defined rooms, but the check should be made
@@ -901,7 +901,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             if (!Settings.RandomizeItems || Settings.RandoItemDifficulty == ItemDifficulty.Default)
             {
                 // The user is not specifically attempting one-item rando, so we can add anything as replacements
-                replacementPool = TR2EntityUtilities.GetListOfAmmoTypes();
+                replacementPool = TR2TypeUtilities.GetListOfAmmoTypes();
             }
             else
             {
@@ -923,7 +923,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 TR2Type newType = replacementPool[_generator.Next(0, replacementPool.Count)];
                 skidMan.TypeID = (short)newType;
 
-                if (TR2EntityUtilities.IsAnyPickupType(newType))
+                if (TR2TypeUtilities.IsAnyPickupType(newType))
                 {
                     // Make sure the pickup is pickupable
                     TRRoomSector sector = FDUtilities.GetRoomSector(skidMan.X, skidMan.Y, skidMan.Z, skidMan.Room, level.Data, floorData);
@@ -960,7 +960,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         while (levelFriends.Count > limit)
         {
             TR2Entity entity = levelFriends[_generator.Next(0, levelFriends.Count)];
-            entity.TypeID = (short)TR2EntityUtilities.TranslateEntityAlias(pool[_generator.Next(0, pool.Count)]);
+            entity.TypeID = (short)TR2TypeUtilities.TranslateAlias(pool[_generator.Next(0, pool.Count)]);
             levelFriends.Remove(entity);
         }
     }
@@ -1172,8 +1172,8 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                         EnemyRandomizationCollection enemies = new()
                         {
                             Available = importedCollection.EntitiesToImport,
-                            Droppable = TR2EntityUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.Settings.ProtectMonks, _outer.Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional),
-                            Water = TR2EntityUtilities.FilterWaterEnemies(importedCollection.EntitiesToImport),
+                            Droppable = TR2TypeUtilities.FilterDroppableEnemies(importedCollection.EntitiesToImport, !_outer.Settings.ProtectMonks, _outer.Settings.BirdMonsterBehaviour == BirdMonsterBehaviour.Unconditional),
+                            Water = TR2TypeUtilities.FilterWaterEnemies(importedCollection.EntitiesToImport),
                             All = new List<TR2Type>(importedCollection.EntitiesToImport)
                         };
 

@@ -206,7 +206,7 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
         Queue<int> existingIndices = new();
         for (int i = 0; i < ents.Count; i++)
         {
-            if (TR2EntityUtilities.IsSecretType((TR2Type)ents[i].TypeID))
+            if (TR2TypeUtilities.IsSecretType((TR2Type)ents[i].TypeID))
             {
                 existingIndices.Enqueue(i);
             }

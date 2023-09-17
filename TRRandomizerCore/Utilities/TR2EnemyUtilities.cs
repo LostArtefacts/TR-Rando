@@ -40,7 +40,7 @@ public static class TR2EnemyUtilities
         foreach (TR2Entity entityInstance in level.Data.Entities)
         {
             TR2Type entity = (TR2Type)entityInstance.TypeID;
-            if (TR2EntityUtilities.IsWaterCreature(entity))
+            if (TR2TypeUtilities.IsWaterCreature(entity))
             {
                 if (!level.CanPerformDraining(entityInstance.Room))
                 {
@@ -54,7 +54,7 @@ public static class TR2EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR2CombinedLevel level)
     {
-        TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR2EntityUtilities.IsEnemyType((TR2Type)e.TypeID));
+        TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR2TypeUtilities.IsEnemyType((TR2Type)e.TypeID));
         foreach (TR2Entity entityInstance in enemies)
         {
             List<TR2Entity> sharedItems = new(Array.FindAll
@@ -76,9 +76,9 @@ public static class TR2EnemyUtilities
 
                     if
                     (
-                        TR2EntityUtilities.IsUtilityType(EntType) ||
-                        TR2EntityUtilities.IsGunType(EntType) ||
-                        TR2EntityUtilities.IsKeyItemType(EntType)
+                        TR2TypeUtilities.IsUtilityType(EntType) ||
+                        TR2TypeUtilities.IsGunType(EntType) ||
+                        TR2TypeUtilities.IsKeyItemType(EntType)
                     )
                     {
                         return true;
@@ -92,7 +92,7 @@ public static class TR2EnemyUtilities
 
     public static bool IsEnemySupported(string lvlName, TR2Type entity, RandoDifficulty difficulty, bool protectMonks)
     {
-        if (lvlName == TR2LevelNames.HOME && TR2EntityUtilities.IsMonk(entity))
+        if (lvlName == TR2LevelNames.HOME && TR2TypeUtilities.IsMonk(entity))
         {
             // Monks are excluded from HSH by default unless the player is happy
             // with having to kill them.
@@ -117,7 +117,7 @@ public static class TR2EnemyUtilities
         if (dict.ContainsKey(lvlName))
         {
             // if the dictionaries contain the enemy, the enemy is NOT supported
-            return !dict[lvlName].Contains(TR2EntityUtilities.TranslateEntityAlias(entity));
+            return !dict[lvlName].Contains(TR2TypeUtilities.TranslateAlias(entity));
         }
         // all enemies are supported by default
         return true;

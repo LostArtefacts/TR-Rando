@@ -101,9 +101,9 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
             _spriteRandomizer = new ItemSpriteRandomizer<TR2Type>
             {
-                StandardItemTypes = TR2EntityUtilities.GetListOfGunTypes().Concat(TR2EntityUtilities.GetListOfAmmoTypes()).ToList(),
-                KeyItemTypes = TR2EntityUtilities.GetListOfKeyItemTypes(),
-                SecretItemTypes = TR2EntityUtilities.GetListOfSecretTypes(),
+                StandardItemTypes = TR2TypeUtilities.GetListOfGunTypes().Concat(TR2TypeUtilities.GetListOfAmmoTypes()).ToList(),
+                KeyItemTypes = TR2TypeUtilities.GetListOfKeyItemTypes(),
+                SecretItemTypes = TR2TypeUtilities.GetListOfSecretTypes(),
                 RandomizeKeyItemSprites = Settings.RandomizeKeyItemSprites,
                 RandomizeSecretSprites = Settings.RandomizeSecretSprites,
                 Mode = Settings.SpriteRandoMode
@@ -138,8 +138,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         bool SeraphInMonastery = false;
 
         //List of pickup items
-        List<TR2Type> stdItemTypes = TR2EntityUtilities.GetListOfGunTypes();
-        stdItemTypes.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
+        List<TR2Type> stdItemTypes = TR2TypeUtilities.GetListOfGunTypes();
+        stdItemTypes.AddRange(TR2TypeUtilities.GetListOfAmmoTypes());
 
         if (_levelInstance.Is(TR2LevelNames.MONASTERY))
         {
@@ -171,7 +171,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     TRRoomSector pickupTile = FDUtilities.GetRoomSector(pickup.X, pickup.Y, pickup.Z, pickup.Room, _levelInstance.Data, floorData);
                     // Does an enemy share this tile? If so, remove it from the candidate list
                     if (entities.Find(e => e != pickup
-                        && TR2EntityUtilities.IsEnemyType((TR2Type)e.TypeID)
+                        && TR2TypeUtilities.IsEnemyType((TR2Type)e.TypeID)
                         && FDUtilities.GetRoomSector(e.X, e.Y, e.Z, e.Room, _levelInstance.Data, floorData) == pickupTile) != null)
                     {
                         replacementCandidates.RemoveAt(i);
@@ -318,14 +318,14 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             List<TR2Type> targetents = new();
             if (Settings.RandomizeItemPositions)
             {
-                targetents.AddRange(TR2EntityUtilities.GetListOfGunTypes());
-                targetents.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
+                targetents.AddRange(TR2TypeUtilities.GetListOfGunTypes());
+                targetents.AddRange(TR2TypeUtilities.GetListOfAmmoTypes());
             }
 
             //And also key items...
             if (Settings.IncludeKeyItems)
             {
-                targetents.AddRange(TR2EntityUtilities.GetListOfKeyItemTypes());
+                targetents.AddRange(TR2TypeUtilities.GetListOfKeyItemTypes());
             }
 
             if (targetents.Count == 0)
@@ -349,7 +349,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     Location RandomLocation = new();
                     bool FoundPossibleLocation = false;
 
-                    if (TR2EntityUtilities.IsKeyItemType((TR2Type)_levelInstance.Data.Entities[i].TypeID))
+                    if (TR2TypeUtilities.IsKeyItemType((TR2Type)_levelInstance.Data.Entities[i].TypeID))
                     {
                         TR2Type type = (TR2Type)_levelInstance.Data.Entities[i].TypeID;
 
@@ -540,8 +540,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             return;
         }
 
-        List<TR2Type> stdItemTypes = TR2EntityUtilities.GetListOfGunTypes();
-        stdItemTypes.AddRange(TR2EntityUtilities.GetListOfAmmoTypes());
+        List<TR2Type> stdItemTypes = TR2TypeUtilities.GetListOfGunTypes();
+        stdItemTypes.AddRange(TR2TypeUtilities.GetListOfAmmoTypes());
 
         for (int i = 0; i < _levelInstance.Data.NumEntities; i++)
         {
@@ -569,8 +569,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         foreach (TR2Entity ent in allEntities)
         {
             TR2Type eType = (TR2Type)ent.TypeID;
-            if (TR2EntityUtilities.IsUtilityType(eType) ||
-                TR2EntityUtilities.IsGunType(eType))
+            if (TR2TypeUtilities.IsUtilityType(eType) ||
+                TR2TypeUtilities.IsGunType(eType))
             {
                 if (oneOfEachType.Contains(eType))
                 {
@@ -645,7 +645,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         //Is there something in the unarmed level pistol location?
         if (_unarmedLevelPistolIndex != -1)
         {
-            List<TR2Type> replacementWeapons = TR2EntityUtilities.GetListOfGunTypes();
+            List<TR2Type> replacementWeapons = TR2TypeUtilities.GetListOfGunTypes();
             replacementWeapons.Add(TR2Type.Pistols_S_P);
             TR2Type weaponType = replacementWeapons[_generator.Next(0, replacementWeapons.Count)];
 
@@ -764,7 +764,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void PopulateHSHCloset()
     {
-        List<TR2Type> replacementWeapons = TR2EntityUtilities.GetListOfGunTypes();
+        List<TR2Type> replacementWeapons = TR2TypeUtilities.GetListOfGunTypes();
         if (_levelInstance.Script.RemovesWeapons)
         {
             replacementWeapons.Add(TR2Type.Pistols_S_P);
@@ -791,7 +791,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             }
 
             TR2Type entityType = (TR2Type)entity.TypeID;
-            if (TR2EntityUtilities.IsGunType(entityType))
+            if (TR2TypeUtilities.IsGunType(entityType))
             {
                 entity.TypeID = (short)replacementWeapon;
 
@@ -800,7 +800,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     harpoonWeapon = entity;
                 }
             }
-            else if (TR2EntityUtilities.IsAmmoType(entityType) && replacementWeapon != TR2Type.Pistols_S_P)
+            else if (TR2TypeUtilities.IsAmmoType(entityType) && replacementWeapon != TR2Type.Pistols_S_P)
             {
                 entity.TypeID = (short)replacementAmmo;
             }
@@ -809,8 +809,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             {
                 // look for extra utility/ammo items and hide them
                 TR2Type eType = (TR2Type)entity.TypeID;
-                if (TR2EntityUtilities.IsUtilityType(eType) ||
-                    TR2EntityUtilities.IsGunType(eType))
+                if (TR2TypeUtilities.IsUtilityType(eType) ||
+                    TR2TypeUtilities.IsGunType(eType))
                 {
                     if (oneOfEachType.Contains(eType))
                     {

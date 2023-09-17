@@ -46,7 +46,7 @@ public class TR2StartPositionRandomizer : BaseTR2Randomizer
         // We only change position if there is not a secret in the same room as Lara, This is just in case it ends up
         // where she starts on a slope (GW or Opera House for example), as its X,Y,Z values may not be identical to Lara's,
         // or she may have to jump on the first frame to get it.
-        if (!Settings.DevelopmentMode && entities.Find(e => e.Room == lara.Room && TR2EntityUtilities.IsSecretType((TR2Type)e.TypeID)) != null)
+        if (!Settings.DevelopmentMode && entities.Find(e => e.Room == lara.Room && TR2TypeUtilities.IsSecretType((TR2Type)e.TypeID)) != null)
         {
             return;
         }

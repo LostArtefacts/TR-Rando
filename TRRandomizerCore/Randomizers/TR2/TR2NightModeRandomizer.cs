@@ -97,9 +97,9 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
         List<TR2Entity> items = entities.Where
         (
             e =>
-                TR2EntityUtilities.IsAmmoType((TR2Type)e.TypeID) ||
-                TR2EntityUtilities.IsGunType((TR2Type)e.TypeID) ||
-                TR2EntityUtilities.IsUtilityType((TR2Type)e.TypeID)
+                TR2TypeUtilities.IsAmmoType((TR2Type)e.TypeID) ||
+                TR2TypeUtilities.IsGunType((TR2Type)e.TypeID) ||
+                TR2TypeUtilities.IsUtilityType((TR2Type)e.TypeID)
         ).ToList();
 
         foreach (TR2Type entityToReplace in _entitiesToReplace.Keys)

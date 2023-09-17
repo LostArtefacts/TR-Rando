@@ -626,7 +626,7 @@ public class EMMirrorFunction : BaseEMFunction
             AdjustTR2EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.ToList().FindAll(e => TR2EntityUtilities.IsDoorType((TR2Type)e.TypeID)));
+        AdjustDoors(level.Entities.ToList().FindAll(e => TR2TypeUtilities.IsDoorType((TR2Type)e.TypeID)));
     }
 
     private void MirrorEntities(TR3Level level)

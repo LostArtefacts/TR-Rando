@@ -130,7 +130,7 @@ public class TR2SavegameTester
             TR2Type type = (TR2Type)entity.TypeID;
             SGFlags saveFlags = SGFlags.None;
             
-            if (TR2EntityUtilities.IsEnemyType(type))
+            if (TR2TypeUtilities.IsEnemyType(type))
             {
                 saveFlags = type switch
                 {
@@ -141,7 +141,7 @@ public class TR2SavegameTester
                     _ => SGFlags.Animation | SGFlags.Flags | SGFlags.Hitpoints | SGFlags.Intelligence | SGFlags.Position,
                 };
             }
-            else if (TR2EntityUtilities.IsAnyPickupType(type))
+            else if (TR2TypeUtilities.IsAnyPickupType(type))
             {
                 saveFlags = SGFlags.Flags | SGFlags.Position;
             }

@@ -42,10 +42,10 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
     protected override bool IsInteractableModel(TRModel model)
     {
         TR2Type type = (TR2Type)model.ID;
-        return TR2EntityUtilities.IsSwitchType(type)
-            || TR2EntityUtilities.IsKeyholeType(type)
-            || TR2EntityUtilities.IsSlotType(type)
-            || TR2EntityUtilities.IsPushblockType(type);
+        return TR2TypeUtilities.IsSwitchType(type)
+            || TR2TypeUtilities.IsKeyholeType(type)
+            || TR2TypeUtilities.IsSlotType(type)
+            || TR2TypeUtilities.IsPushblockType(type);
     }
 
     protected override int GetBlackPaletteIndex(TR2Level level)
@@ -136,7 +136,7 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
     protected override bool IsEnemyModel(TRModel model)
     {
         TR2Type id = (TR2Type)model.ID;
-        return TR2EntityUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
+        return TR2TypeUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
     }
 
     protected override void ResetUnusedTextures(TR2Level level)
