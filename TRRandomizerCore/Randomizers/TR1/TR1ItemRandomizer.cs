@@ -423,7 +423,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         _spriteRandomizer.KeyItemTypes = new List<TR1Type>();
         FDControl floorData = new();
         floorData.ParseFromLevel(_levelInstance.Data);
-        foreach (TR1Type type in TR1TypeUtilities.GetListOfKeyItemTypes())
+        foreach (TR1Type type in TR1TypeUtilities.GetKeyItemTypes())
         {
             int typeInstanceIndex = Array.FindIndex(_levelInstance.Data.Entities, e => e.TypeID == (short)type);
             if (typeInstanceIndex != -1)

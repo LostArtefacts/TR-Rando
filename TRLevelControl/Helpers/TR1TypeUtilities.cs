@@ -6,40 +6,40 @@ public static class TR1TypeUtilities
 {
     public static readonly Dictionary<TR1Type, Dictionary<TR1Type, List<string>>> LevelAliases = new()
     {
-        [TR1Type.FlyingAtlantean] = new Dictionary<TR1Type, List<string>>
+        [TR1Type.FlyingAtlantean] = new()
         {
             [TR1Type.BandagedFlyer] =
-                new List<string> { TR1LevelNames.KHAMOON, TR1LevelNames.OBELISK },
+                new() { TR1LevelNames.KHAMOON, TR1LevelNames.OBELISK },
             [TR1Type.MeatyFlyer] =
-                new List<string> { TR1LevelNames.SANCTUARY, TR1LevelNames.ATLANTIS }
+                new() { TR1LevelNames.SANCTUARY, TR1LevelNames.ATLANTIS }
         },
-        [TR1Type.NonShootingAtlantean_N] = new Dictionary<TR1Type, List<string>>
+        [TR1Type.NonShootingAtlantean_N] = new()
         {
             [TR1Type.BandagedAtlantean] =
-                new List<string> { TR1LevelNames.KHAMOON, TR1LevelNames.OBELISK },
+                new() { TR1LevelNames.KHAMOON, TR1LevelNames.OBELISK },
             [TR1Type.MeatyAtlantean] =
-                new List<string> { TR1LevelNames.SANCTUARY, TR1LevelNames.ATLANTIS }
+                new() { TR1LevelNames.SANCTUARY, TR1LevelNames.ATLANTIS }
         },
-        [TR1Type.Cowboy] = new Dictionary<TR1Type, List<string>>
+        [TR1Type.Cowboy] = new()
         {
             [TR1Type.CowboyOG] =
-                new List<string> { TR1LevelNames.MINES },
+                new() { TR1LevelNames.MINES },
             [TR1Type.CowboyHeadless] =
-                new List<string> { }
+                new()
         }
     };
 
     public static readonly Dictionary<TR1Type, List<TR1Type>> TypeFamilies = new()
     {
-        [TR1Type.FlyingAtlantean] = new List<TR1Type>
+        [TR1Type.FlyingAtlantean] = new()
         {
             TR1Type.BandagedFlyer, TR1Type.MeatyFlyer
         },
-        [TR1Type.NonShootingAtlantean_N] = new List<TR1Type>
+        [TR1Type.NonShootingAtlantean_N] = new()
         {
             TR1Type.BandagedAtlantean, TR1Type.MeatyAtlantean
         },
-        [TR1Type.Cowboy] = new List<TR1Type>
+        [TR1Type.Cowboy] = new()
         {
             TR1Type.CowboyOG, TR1Type.CowboyHeadless
         }
@@ -83,7 +83,7 @@ public static class TR1TypeUtilities
             }
         }
 
-        return new List<TR1Type> { type };
+        return new() { type };
     }
 
     public static List<TR1Type> RemoveAliases(IEnumerable<TR1Type> types)
@@ -100,9 +100,9 @@ public static class TR1TypeUtilities
         return normalisedTypes;
     }
 
-    public static List<TR1Type> GetListOfKeyTypes()
+    public static List<TR1Type> GetKeyTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.Key1_S_P,
             TR1Type.Key2_S_P,
@@ -111,9 +111,9 @@ public static class TR1TypeUtilities
         };
     }
 
-    public static List<TR1Type> GetListOfPuzzleTypes()
+    public static List<TR1Type> GetPuzzleTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.Puzzle1_S_P,
             TR1Type.Puzzle2_S_P,
@@ -122,32 +122,36 @@ public static class TR1TypeUtilities
         };
     }
 
-    public static List<TR1Type> GetListOfQuestTypes()
+    public static List<TR1Type> GetQuestTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.Quest1_S_P,
             TR1Type.Quest2_S_P
         };
     }
 
-    public static List<TR1Type> GetListOfLeadTypes()
+    public static List<TR1Type> GetLeadTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.LeadBar_S_P
         };
     }
 
-    public static List<TR1Type> GetListOfKeyItemTypes()
+    public static List<TR1Type> GetKeyItemTypes()
     {
-        return GetListOfKeyTypes().Concat(GetListOfPuzzleTypes()).Concat(GetListOfQuestTypes()).Concat(GetListOfLeadTypes()).ToList();
+        return GetKeyTypes()
+                .Concat(GetPuzzleTypes())
+                .Concat(GetQuestTypes())
+                .Concat(GetLeadTypes())
+                .ToList();
     }
 
     public static Dictionary<TR1Type, TR1Type> GetKeyItemMap()
     {
         // Maps pickups to inventory models
-        return new Dictionary<TR1Type, TR1Type>
+        return new()
         {
             [TR1Type.Key1_S_P] = TR1Type.Key1_M_H,
             [TR1Type.Key2_S_P] = TR1Type.Key2_M_H,
@@ -167,22 +171,22 @@ public static class TR1TypeUtilities
 
     public static bool IsKeyType(TR1Type type)
     {
-        return GetListOfKeyTypes().Contains(type);
+        return GetKeyTypes().Contains(type);
     }
 
     public static bool IsPuzzleType(TR1Type type)
     {
-        return GetListOfPuzzleTypes().Contains(type);
+        return GetPuzzleTypes().Contains(type);
     }
 
     public static bool IsQuestType(TR1Type type)
     {
-        return GetListOfQuestTypes().Contains(type);
+        return GetQuestTypes().Contains(type);
     }
 
     public static bool IsKeyItemType(TR1Type type)
     {
-        return GetListOfKeyItemTypes().Contains(type);
+        return GetKeyItemTypes().Contains(type);
     }
 
     public static bool IsTrapdoor(TR1Type type)
@@ -197,7 +201,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> GetTrapdoorTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.Trapdoor1, TR1Type.Trapdoor2, TR1Type.Trapdoor3
         };
@@ -205,7 +209,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> GetBridgeTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.BridgeFlat, TR1Type.BridgeTilt1, TR1Type.BridgeTilt2
         };
@@ -213,7 +217,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> GetStandardPickupTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.Pistols_S_P,
             TR1Type.Shotgun_S_P,
@@ -240,7 +244,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> GetWeaponPickups()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.Pistols_S_P,
             TR1Type.Shotgun_S_P,
@@ -251,10 +255,10 @@ public static class TR1TypeUtilities
 
     public static bool IsAmmoPickup(TR1Type type)
     {
-        return (type == TR1Type.PistolAmmo_S_P)
-            || (type == TR1Type.ShotgunAmmo_S_P)
-            || (type == TR1Type.MagnumAmmo_S_P)
-            || (type == TR1Type.UziAmmo_S_P);
+        return type == TR1Type.PistolAmmo_S_P
+            || type == TR1Type.ShotgunAmmo_S_P
+            || type == TR1Type.MagnumAmmo_S_P
+            || type == TR1Type.UziAmmo_S_P;
     }
 
     public static TR1Type GetWeaponAmmo(TR1Type weapon)
@@ -275,8 +279,8 @@ public static class TR1TypeUtilities
 
     public static bool IsUtilityPickup(TR1Type type)
     {
-        return (type == TR1Type.SmallMed_S_P)
-            || (type == TR1Type.LargeMed_S_P);
+        return type == TR1Type.SmallMed_S_P
+            || type == TR1Type.LargeMed_S_P;
     }
 
     public static bool IsAnyPickupType(TR1Type type)
@@ -289,7 +293,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> GetCandidateCrossLevelEnemies()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.Adam,
             TR1Type.AtlanteanEgg,
@@ -341,7 +345,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> GetWaterEnemies()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.CrocodileWater,
             TR1Type.RatWater
@@ -350,7 +354,7 @@ public static class TR1TypeUtilities
 
     public static Dictionary<TR1Type, TR1Type> GetWaterEnemyLandCreatures()
     {
-        return new Dictionary<TR1Type, TR1Type>
+        return new()
         {
             [TR1Type.CrocodileWater] = TR1Type.CrocodileLand,
             [TR1Type.RatWater] = TR1Type.RatLand
@@ -393,7 +397,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> GetAtlanteanEggEnemies()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.BandagedAtlantean,
             TR1Type.BandagedFlyer,
@@ -406,7 +410,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> GetSwitchTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.WallSwitch,
             TR1Type.UnderwaterSwitch
@@ -420,7 +424,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> GetKeyholeTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.Keyhole1,
             TR1Type.Keyhole2,
@@ -436,7 +440,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> GetSlotTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.PuzzleHole1,
             TR1Type.PuzzleHole2,
@@ -456,7 +460,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> GetPushblockTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.PushBlock1,
             TR1Type.PushBlock2,
@@ -486,7 +490,7 @@ public static class TR1TypeUtilities
 
     public static List<TR1Type> DoorTypes()
     {
-        return new List<TR1Type>
+        return new()
         {
             TR1Type.Door1, TR1Type.Door2, TR1Type.Door3,
             TR1Type.Door4, TR1Type.Door5, TR1Type.Door6,
@@ -501,7 +505,7 @@ public static class TR1TypeUtilities
 
     public static Dictionary<TR1Type, TR1Type> GetSecretModels()
     {
-        return new Dictionary<TR1Type, TR1Type>
+        return new()
         {
             [TR1Type.SecretAnkh_M_H] = TR1Type.ScionPiece4_S_P,
             [TR1Type.SecretGoldBar_M_H] = TR1Type.ScionPiece4_S_P,
@@ -514,7 +518,7 @@ public static class TR1TypeUtilities
     public static Dictionary<TR1Type, TR1Type> GetSecretReplacements()
     {
         // Note Key1 is omitted because of Pierre
-        return new Dictionary<TR1Type, TR1Type>
+        return new()
         {
             [TR1Type.Puzzle1_M_H] = TR1Type.Puzzle1_S_P,
             [TR1Type.Puzzle2_M_H] = TR1Type.Puzzle2_S_P,
@@ -530,7 +534,9 @@ public static class TR1TypeUtilities
 
     public static TR1Type GetBestLevelSecretModel(string lvl)
     {
-        return _levelSecretModels.ContainsKey(lvl) ? _levelSecretModels[lvl] : GetSecretModels().Keys.FirstOrDefault();
+        return _levelSecretModels.ContainsKey(lvl)
+            ? _levelSecretModels[lvl]
+            : GetSecretModels().Keys.FirstOrDefault();
     }
 
     private static readonly Dictionary<string, TR1Type> _levelSecretModels = new()
