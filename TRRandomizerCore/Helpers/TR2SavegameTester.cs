@@ -1,6 +1,5 @@
 ﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Helpers;
 

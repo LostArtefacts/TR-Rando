@@ -2,7 +2,6 @@
 using TRFDControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Packing;
 using TRRandomizerCore.Utilities;

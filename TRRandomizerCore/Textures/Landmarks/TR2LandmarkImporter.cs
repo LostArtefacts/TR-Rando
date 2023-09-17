@@ -1,6 +1,5 @@
 ﻿using TRFDControl;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Packing;
 using TRTexture16Importer.Textures;
 

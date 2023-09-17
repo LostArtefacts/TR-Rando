@@ -4,7 +4,7 @@ using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
 using TRLevelControl.Helpers;
-using TRLevelControl.Model.Enums;
+using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;

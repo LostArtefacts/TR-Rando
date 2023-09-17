@@ -6,7 +6,6 @@ using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Packing;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;

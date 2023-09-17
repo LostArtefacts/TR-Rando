@@ -7,7 +7,6 @@ using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Handlers;
 using TRRandomizerCore.Helpers;
 using System.Numerics;

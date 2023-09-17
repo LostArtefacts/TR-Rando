@@ -6,7 +6,6 @@ using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Utilities;
 
