@@ -1,5 +1,5 @@
 ﻿using TRLevelControl.Helpers;
-using TRLevelControl.Model.Enums;
+using TRLevelControl.Model;
 using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Textures;

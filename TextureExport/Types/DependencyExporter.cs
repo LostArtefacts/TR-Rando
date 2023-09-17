@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 
 namespace TextureExport.Types;

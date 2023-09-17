@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRTexture16Importer.Helpers;
 
 namespace TRTexture16Importer.Textures;

@@ -3,7 +3,6 @@ using System.Drawing.Imaging;
 using System.Text;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 using TRTexture16Importer.Helpers;

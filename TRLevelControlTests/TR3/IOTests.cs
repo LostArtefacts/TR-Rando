@@ -3,7 +3,6 @@ using TRFDControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
 using TRLevelControl.Model.Base.Enums;
-using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Secrets;
 
 namespace TRLevelControlTests.TR3;

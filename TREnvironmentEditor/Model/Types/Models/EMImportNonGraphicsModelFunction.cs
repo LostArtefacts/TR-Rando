@@ -1,7 +1,6 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Transport;
 
 namespace TREnvironmentEditor.Model.Types;

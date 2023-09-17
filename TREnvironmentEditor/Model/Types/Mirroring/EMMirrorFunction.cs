@@ -3,7 +3,6 @@ using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 
 namespace TREnvironmentEditor.Model.Types;

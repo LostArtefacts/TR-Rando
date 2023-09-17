@@ -1,5 +1,5 @@
 ﻿using TRLevelControl.Helpers;
-using TRLevelControl.Model.Enums;
+using TRLevelControl.Model;
 
 namespace TRModelTransporter.Data;
 

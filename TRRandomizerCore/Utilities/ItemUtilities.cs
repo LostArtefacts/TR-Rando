@@ -1,6 +1,5 @@
 ﻿using TRGE.Core.Item.Enums;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Utilities;
 

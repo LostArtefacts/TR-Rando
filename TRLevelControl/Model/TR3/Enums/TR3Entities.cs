@@ -1,4 +1,4 @@
-﻿namespace TRLevelControl.Model.Enums;
+﻿namespace TRLevelControl.Model;
 
 //_S are sprites - BOLD
 //_M are menu items - ITALIC
