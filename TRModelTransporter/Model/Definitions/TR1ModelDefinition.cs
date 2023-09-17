@@ -4,9 +4,9 @@ using TRModelTransporter.Model.Sound;
 
 namespace TRModelTransporter.Model.Definitions;
 
-public class TR1ModelDefinition : AbstractTRModelDefinition<TREntities>
+public class TR1ModelDefinition : AbstractTRModelDefinition<TR1Type>
 {
-    public override TREntities Entity => (TREntities)Model.ID;
+    public override TR1Type Entity => (TR1Type)Model.ID;
     public Dictionary<int, TR1PackedAnimation> Animations { get; set; }
     public ushort[] AnimationFrames { get; set; }
     public TRCinematicFrame[] CinematicFrames { get; set; }

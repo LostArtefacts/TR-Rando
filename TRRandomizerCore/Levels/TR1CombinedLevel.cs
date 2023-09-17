@@ -72,7 +72,7 @@ public class TR1CombinedLevel
     /// </summary>
     public string JsonID => IsSteamPyramid ? Name + "-Steam" : Name;
 
-    public void RemoveModel(TREntities type)
+    public void RemoveModel(TR1Type type)
     {
         List<TRModel> models = Data.Models.ToList();
         if (models.Find(m => m.ID == (uint)type) is TRModel model)

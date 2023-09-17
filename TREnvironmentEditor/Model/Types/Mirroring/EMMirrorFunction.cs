@@ -615,7 +615,7 @@ public class EMMirrorFunction : BaseEMFunction
             AdjustTR1EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.ToList().FindAll(e => TR1EntityUtilities.IsDoorType((TREntities)e.TypeID)));
+        AdjustDoors(level.Entities.ToList().FindAll(e => TR1EntityUtilities.IsDoorType((TR1Type)e.TypeID)));
     }
 
     private void MirrorEntities(TR2Level level)
@@ -644,12 +644,12 @@ public class EMMirrorFunction : BaseEMFunction
     {
         entity.Angle *= -1;
 
-        switch ((TREntities)entity.TypeID)
+        switch ((TR1Type)entity.TypeID)
         {
-            case TREntities.Animating1:
-            case TREntities.Animating2:
-            case TREntities.Animating3:
-            case TREntities.AtlanteanEgg:
+            case TR1Type.Animating1:
+            case TR1Type.Animating2:
+            case TR1Type.Animating3:
+            case TR1Type.AtlanteanEgg:
                 switch (entity.Angle)
                 {
                     case _east:
@@ -666,7 +666,7 @@ public class EMMirrorFunction : BaseEMFunction
                         break;
                 }
                 break;
-            case TREntities.AdamEgg:
+            case TR1Type.AdamEgg:
                 switch (entity.Angle)
                 {
                     case _east:
@@ -683,8 +683,8 @@ public class EMMirrorFunction : BaseEMFunction
                         break;
                 }
                 break;
-            case TREntities.BridgeTilt1:
-            case TREntities.BridgeTilt2:
+            case TR1Type.BridgeTilt1:
+            case TR1Type.BridgeTilt2:
                 switch (entity.Angle)
                 {
                     case _south:
@@ -1122,7 +1122,7 @@ public class EMMirrorFunction : BaseEMFunction
         // these models aren't mirrored so the texture will end up being
         // upside down. Rotate the relevant mesh faces.
         MirrorDependentFaces(level.Models, textureReferences,
-            modelID => TRMeshUtilities.GetModelMeshes(level, (TREntities)modelID));
+            modelID => TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID));
     }
 
     private static void MirrorTextures(TR2Level level)

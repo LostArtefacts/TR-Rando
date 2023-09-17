@@ -22,13 +22,13 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         {
             Level = level,
             ClearUnusedSprites = false,
-            EntitiesToImport = data.Select(m => (TREntities)m.ModelID),
+            EntitiesToImport = data.Select(m => (TR1Type)m.ModelID),
             DataFolder = @"Resources\TR1\Models",
             IgnoreGraphics = true
         };
         importer.Import();
 
-        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TREntities)modelID));
+        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID));
     }
 
     public override void ApplyToLevel(TR2Level level)

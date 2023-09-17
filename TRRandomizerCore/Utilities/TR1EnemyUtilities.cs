@@ -20,7 +20,7 @@ public static class TR1EnemyUtilities
     }
 
     // Check if an enemy is restricted in any way
-    public static bool IsEnemyRestricted(string lvlName, TREntities entity, RandoDifficulty difficulty = RandoDifficulty.DefaultOrNoRestrictions)
+    public static bool IsEnemyRestricted(string lvlName, TR1Type entity, RandoDifficulty difficulty = RandoDifficulty.DefaultOrNoRestrictions)
     {
         if (difficulty == RandoDifficulty.Default || difficulty == RandoDifficulty.DefaultOrNoRestrictions)
         {
@@ -37,10 +37,10 @@ public static class TR1EnemyUtilities
     }
 
     // This returns a set of ALLOWED rooms
-    public static Dictionary<TREntities, List<int>> GetRestrictedEnemyRooms(string lvlName, RandoDifficulty difficulty)
+    public static Dictionary<TR1Type, List<int>> GetRestrictedEnemyRooms(string lvlName, RandoDifficulty difficulty)
     {
         var technicallyAllowedRooms = GetRestrictedEnemyRooms(lvlName, _restrictedEnemyZonesTechnical);
-        var multiDict = new List<Dictionary<TREntities, List<int>>>() { technicallyAllowedRooms };
+        var multiDict = new List<Dictionary<TR1Type, List<int>>>() { technicallyAllowedRooms };
 
         // we need to merge dictionaries in order to get the complete set of allowed rooms, per level and per enemy
         if (difficulty == RandoDifficulty.Default)
@@ -55,14 +55,14 @@ public static class TR1EnemyUtilities
         return null;
     }
 
-    private static Dictionary<TREntities, List<int>> GetRestrictedEnemyRooms(string lvlName, Dictionary<string, Dictionary<TREntities, List<int>>> restrictions)
+    private static Dictionary<TR1Type, List<int>> GetRestrictedEnemyRooms(string lvlName, Dictionary<string, Dictionary<TR1Type, List<int>>> restrictions)
     {
         if (restrictions.ContainsKey(lvlName))
             return restrictions[lvlName];
         return null;
     }
 
-    public static int GetRestrictedEnemyLevelCount(TREntities entity, RandoDifficulty difficulty)
+    public static int GetRestrictedEnemyLevelCount(TR1Type entity, RandoDifficulty difficulty)
     {
         // Remember that technical count is MAXIMUM allowed, and there may be overlap.
         // For example, maybe technically Dragon is allowed once, but an Easy difficulty might have that set to 0.
@@ -79,19 +79,19 @@ public static class TR1EnemyUtilities
         return -1;
     }
 
-    public static Dictionary<TREntities, List<string>> PrepareEnemyGameTracker(RandoDifficulty difficulty)
+    public static Dictionary<TR1Type, List<string>> PrepareEnemyGameTracker(RandoDifficulty difficulty)
     {
-        Dictionary<TREntities, List<string>> tracker = new();
+        Dictionary<TR1Type, List<string>> tracker = new();
 
         if (difficulty == RandoDifficulty.Default)
         {
-            foreach (TREntities entity in _restrictedEnemyGameCountsDefault.Keys)
+            foreach (TR1Type entity in _restrictedEnemyGameCountsDefault.Keys)
             {
                 tracker.Add(entity, new List<string>(_restrictedEnemyGameCountsDefault[entity]));
             }
         }
 
-        foreach (TREntities entity in _restrictedEnemyGameCountsTechnical.Keys)
+        foreach (TR1Type entity in _restrictedEnemyGameCountsTechnical.Keys)
         {
             tracker.Add(entity, new List<string>(_restrictedEnemyGameCountsTechnical[entity]));
         }
@@ -99,7 +99,7 @@ public static class TR1EnemyUtilities
         // Pre-populate required enemies
         foreach (string level in _requiredEnemies.Keys)
         {
-            foreach (TREntities enemy in _requiredEnemies[level])
+            foreach (TR1Type enemy in _requiredEnemies[level])
             {
                 if (tracker.ContainsKey(enemy))
                 {
@@ -111,7 +111,7 @@ public static class TR1EnemyUtilities
         return tracker;
     }
 
-    public static bool IsEnemySupported(string lvlName, TREntities entity, RandoDifficulty difficulty, bool isTomb1Main)
+    public static bool IsEnemySupported(string lvlName, TR1Type entity, RandoDifficulty difficulty, bool isTomb1Main)
     {
         bool supported;
         if (!isTomb1Main && _atiEnemyRestrictions.ContainsKey(entity))
@@ -132,7 +132,7 @@ public static class TR1EnemyUtilities
         return supported;
     }
 
-    private static bool IsEnemySupported(string lvlName, TREntities entity, Dictionary<string, List<TREntities>> dict)
+    private static bool IsEnemySupported(string lvlName, TR1Type entity, Dictionary<string, List<TR1Type>> dict)
     {
         if (dict.ContainsKey(lvlName))
         {
@@ -143,14 +143,14 @@ public static class TR1EnemyUtilities
         return true;
     }
 
-    public static bool IsEnemyRequired(string lvlName, TREntities entity)
+    public static bool IsEnemyRequired(string lvlName, TR1Type entity)
     {
         return _requiredEnemies.ContainsKey(lvlName) && _requiredEnemies[lvlName].Contains(entity);
     }
 
-    public static List<TREntities> GetRequiredEnemies(string lvlName)
+    public static List<TR1Type> GetRequiredEnemies(string lvlName)
     {
-        List<TREntities> entities = new();
+        List<TR1Type> entities = new();
         if (_requiredEnemies.ContainsKey(lvlName))
         {
             entities.AddRange(_requiredEnemies[lvlName]);
@@ -160,7 +160,7 @@ public static class TR1EnemyUtilities
 
     public static void SetEntityTriggers(TR1Level level, TREntity entity)
     {
-        if (_oneShotEnemies.Contains((TREntities)entity.TypeID))
+        if (_oneShotEnemies.Contains((TR1Type)entity.TypeID))
         {
             int entityID = level.Entities.ToList().IndexOf(entity);
 
@@ -190,7 +190,7 @@ public static class TR1EnemyUtilities
             EnemyDifficulty enemyDifficulty = EnemyDifficulty.Medium;
             foreach (EnemyDifficulty difficulty in _enemyDifficulties.Keys)
             {
-                if (_enemyDifficulties[difficulty].Contains((TREntities)enemyEntity.TypeID))
+                if (_enemyDifficulties[difficulty].Contains((TR1Type)enemyEntity.TypeID))
                 {
                     enemyDifficulty = difficulty;
                     break;
@@ -218,7 +218,7 @@ public static class TR1EnemyUtilities
         return allDifficulties[weight];
     }
 
-    public static uint GetStartingAmmo(TREntities weaponType)
+    public static uint GetStartingAmmo(TR1Type weaponType)
     {
         if (_startingAmmoToGive.ContainsKey(weaponType))
         {
@@ -227,18 +227,18 @@ public static class TR1EnemyUtilities
         return 0;
     }
 
-    public static Dictionary<TREntities, TREntities> GetAliasPriority(string lvlName, List<TREntities> importEntities)
+    public static Dictionary<TR1Type, TR1Type> GetAliasPriority(string lvlName, List<TR1Type> importEntities)
     {
-        Dictionary<TREntities, TREntities> priorities = new();
+        Dictionary<TR1Type, TR1Type> priorities = new();
 
-        bool trexPresent = importEntities.Contains(TREntities.TRex);
-        bool adamPresent = importEntities.Contains(TREntities.Adam);
+        bool trexPresent = importEntities.Contains(TR1Type.TRex);
+        bool adamPresent = importEntities.Contains(TR1Type.Adam);
 
         if ((trexPresent || adamPresent) && (lvlName == TR1LevelNames.SANCTUARY || lvlName == TR1LevelNames.ATLANTIS))
         {
             // We have to override the scion pickup animation otherwise death-by-adam will cause the level to end.
             // Environment mods will deal with workarounds for the pickups.
-            priorities[TREntities.LaraMiscAnim_H] = trexPresent ? TREntities.LaraMiscAnim_H_Valley : TREntities.LaraMiscAnim_H_Pyramid;
+            priorities[TR1Type.LaraMiscAnim_H] = trexPresent ? TR1Type.LaraMiscAnim_H_Valley : TR1Type.LaraMiscAnim_H_Pyramid;
         }
         else
         {
@@ -247,16 +247,16 @@ public static class TR1EnemyUtilities
                 // Essential MiscAnims - e.g. they contain level end triggers or cinematics.
                 // ToQ pickup cinematic works with T-Rex, but not Torso
                 case TR1LevelNames.QUALOPEC:
-                    priorities[TREntities.LaraMiscAnim_H] = trexPresent ? TREntities.LaraMiscAnim_H_Valley : TREntities.LaraMiscAnim_H_Qualopec;
+                    priorities[TR1Type.LaraMiscAnim_H] = trexPresent ? TR1Type.LaraMiscAnim_H_Valley : TR1Type.LaraMiscAnim_H_Qualopec;
                     break;
                 case TR1LevelNames.MIDAS:
-                    priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Midas;
+                    priorities[TR1Type.LaraMiscAnim_H] = TR1Type.LaraMiscAnim_H_Midas;
                     break;
                 case TR1LevelNames.SANCTUARY:
-                    priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Sanctuary;
+                    priorities[TR1Type.LaraMiscAnim_H] = TR1Type.LaraMiscAnim_H_Sanctuary;
                     break;
                 case TR1LevelNames.ATLANTIS:
-                    priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Atlantis;
+                    priorities[TR1Type.LaraMiscAnim_H] = TR1Type.LaraMiscAnim_H_Atlantis;
                     break;
 
                 // Lara's specific deaths:
@@ -267,15 +267,15 @@ public static class TR1EnemyUtilities
                 default:
                     if (trexPresent)
                     {
-                        priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Valley;
+                        priorities[TR1Type.LaraMiscAnim_H] = TR1Type.LaraMiscAnim_H_Valley;
                     }
                     else if (adamPresent)
                     {
-                        priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_Pyramid;
+                        priorities[TR1Type.LaraMiscAnim_H] = TR1Type.LaraMiscAnim_H_Pyramid;
                     }
                     else
                     {
-                        priorities[TREntities.LaraMiscAnim_H] = TREntities.LaraMiscAnim_H_General;
+                        priorities[TR1Type.LaraMiscAnim_H] = TR1Type.LaraMiscAnim_H_General;
                     }
                     break;
             }
@@ -284,7 +284,7 @@ public static class TR1EnemyUtilities
         return priorities;
     }
 
-    public static RestrictedEnemyGroup GetRestrictedEnemyGroup(string lvlName, TREntities entity, RandoDifficulty difficulty)
+    public static RestrictedEnemyGroup GetRestrictedEnemyGroup(string lvlName, TR1Type entity, RandoDifficulty difficulty)
     {
         if (_restrictedEnemyGroupCounts.ContainsKey(lvlName))
         {
@@ -300,43 +300,43 @@ public static class TR1EnemyUtilities
     }
 
     // We (can) restrict some enemies to specific rooms in levels.
-    private static readonly Dictionary<string, Dictionary<TREntities, List<int>>> _restrictedEnemyZonesDefault;
-    private static readonly Dictionary<string, Dictionary<TREntities, List<int>>> _restrictedEnemyZonesTechnical;
+    private static readonly Dictionary<string, Dictionary<TR1Type, List<int>>> _restrictedEnemyZonesDefault;
+    private static readonly Dictionary<string, Dictionary<TR1Type, List<int>>> _restrictedEnemyZonesTechnical;
 
     // We (can) also limit the count per level for some, such as bosses.
-    private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsTechnical = new()
+    private static readonly Dictionary<TR1Type, int> _restrictedEnemyLevelCountsTechnical = new()
     {
     };
 
-    private static readonly Dictionary<TREntities, int> _restrictedEnemyLevelCountsDefault = new()
+    private static readonly Dictionary<TR1Type, int> _restrictedEnemyLevelCountsDefault = new()
     {
-        [TREntities.Adam] = 1,
-        [TREntities.Cowboy] = 3,
-        [TREntities.CowboyOG] = 3,
-        [TREntities.CowboyHeadless] = 3,
-        [TREntities.Kold] = 3,
-        [TREntities.Pierre] = 3,
-        [TREntities.Natla] = 1,
-        [TREntities.SkateboardKid] = 2,
+        [TR1Type.Adam] = 1,
+        [TR1Type.Cowboy] = 3,
+        [TR1Type.CowboyOG] = 3,
+        [TR1Type.CowboyHeadless] = 3,
+        [TR1Type.Kold] = 3,
+        [TR1Type.Pierre] = 3,
+        [TR1Type.Natla] = 1,
+        [TR1Type.SkateboardKid] = 2,
     };
 
     // These enemies are restricted a set number of times throughout the entire game.
     // Perhaps add level-ending larson as an option
-    private static readonly Dictionary<TREntities, int> _restrictedEnemyGameCountsTechnical = new()
+    private static readonly Dictionary<TR1Type, int> _restrictedEnemyGameCountsTechnical = new()
     {
     };
 
-    private static readonly Dictionary<TREntities, int> _restrictedEnemyGameCountsDefault = new()
+    private static readonly Dictionary<TR1Type, int> _restrictedEnemyGameCountsDefault = new()
     {
-        [TREntities.Adam] = 3,
-        [TREntities.Natla] = 2
+        [TR1Type.Adam] = 3,
+        [TR1Type.Natla] = 2
     };
 
-    private static readonly List<TREntities> _allAtlanteans = new()
+    private static readonly List<TR1Type> _allAtlanteans = new()
     {
-        TREntities.Adam, TREntities.Centaur, TREntities.CentaurStatue, TREntities.FlyingAtlantean,
-        TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N, TREntities.Natla,
-        TREntities.AtlanteanEgg
+        TR1Type.Adam, TR1Type.Centaur, TR1Type.CentaurStatue, TR1Type.FlyingAtlantean,
+        TR1Type.NonShootingAtlantean_N, TR1Type.ShootingAtlantean_N, TR1Type.Natla,
+        TR1Type.AtlanteanEgg
     };
 
     private static readonly Dictionary<string, List<RestrictedEnemyGroup>> _restrictedEnemyGroupCounts = new()
@@ -370,7 +370,7 @@ public static class TR1EnemyUtilities
             new RestrictedEnemyGroup
             {
                 MaximumCount = 0,
-                Enemies = new List<TREntities> { TREntities.Larson }
+                Enemies = new List<TR1Type> { TR1Type.Larson }
             },
             new RestrictedEnemyGroup
             {
@@ -404,7 +404,7 @@ public static class TR1EnemyUtilities
             new RestrictedEnemyGroup
             {
                 MaximumCount = 10,
-                Enemies = new List<TREntities> { TREntities.TRex }
+                Enemies = new List<TR1Type> { TR1Type.TRex }
             }
         },
         [TR1LevelNames.CISTERN] = new List<RestrictedEnemyGroup>
@@ -442,35 +442,35 @@ public static class TR1EnemyUtilities
     };
 
     // These enemies are unsupported due to technical reasons, NOT difficulty reasons (T1M only).
-    private static readonly Dictionary<string, List<TREntities>> _unsupportedEnemiesTechnical = new()
+    private static readonly Dictionary<string, List<TR1Type>> _unsupportedEnemiesTechnical = new()
     {
     };
 
     // SkaterBoy and Natla can appear only in their OG levels in TombATI.
-    private static readonly Dictionary<TREntities, string> _atiEnemyRestrictions = new()
+    private static readonly Dictionary<TR1Type, string> _atiEnemyRestrictions = new()
     {
-        [TREntities.SkateboardKid] = TR1LevelNames.MINES,
-        [TREntities.Natla] = TR1LevelNames.PYRAMID,
+        [TR1Type.SkateboardKid] = TR1LevelNames.MINES,
+        [TR1Type.Natla] = TR1LevelNames.PYRAMID,
     };
 
-    private static readonly Dictionary<string, List<TREntities>> _unsupportedEnemiesDefault = new()
+    private static readonly Dictionary<string, List<TR1Type>> _unsupportedEnemiesDefault = new()
     {
-        [TR1LevelNames.QUALOPEC] = new List<TREntities>
+        [TR1LevelNames.QUALOPEC] = new List<TR1Type>
         {
-            TREntities.Adam
+            TR1Type.Adam
         }
     };
 
     // Any enemies that must remain untouched in a given level
-    private static readonly Dictionary<string, List<TREntities>> _requiredEnemies = new()
+    private static readonly Dictionary<string, List<TR1Type>> _requiredEnemies = new()
     {
-        [TR1LevelNames.QUALOPEC] = new List<TREntities>
+        [TR1LevelNames.QUALOPEC] = new List<TR1Type>
         {
-            TREntities.Larson // Ends the level
+            TR1Type.Larson // Ends the level
         },
-        [TR1LevelNames.PYRAMID] = new List<TREntities>
+        [TR1LevelNames.PYRAMID] = new List<TR1Type>
         {
-            TREntities.Adam // Heavy trigger
+            TR1Type.Adam // Heavy trigger
         }
     };
 
@@ -511,53 +511,53 @@ public static class TR1EnemyUtilities
     };
 
     // Enemies who can only spawn once.
-    private static readonly List<TREntities> _oneShotEnemies = new()
+    private static readonly List<TR1Type> _oneShotEnemies = new()
     {
-        TREntities.Pierre
+        TR1Type.Pierre
     };
 
-    private static readonly Dictionary<EnemyDifficulty, List<TREntities>> _enemyDifficulties = new()
+    private static readonly Dictionary<EnemyDifficulty, List<TR1Type>> _enemyDifficulties = new()
     {
-        [EnemyDifficulty.VeryEasy] = new List<TREntities>
+        [EnemyDifficulty.VeryEasy] = new List<TR1Type>
         {
-            TREntities.Bat
+            TR1Type.Bat
         },
-        [EnemyDifficulty.Easy] = new List<TREntities>
+        [EnemyDifficulty.Easy] = new List<TR1Type>
         {
-            TREntities.Bear, TREntities.Gorilla, TREntities.RatLand, TREntities.RatWater,
-            TREntities.Wolf
+            TR1Type.Bear, TR1Type.Gorilla, TR1Type.RatLand, TR1Type.RatWater,
+            TR1Type.Wolf
         },
-        [EnemyDifficulty.Medium] = new List<TREntities>
+        [EnemyDifficulty.Medium] = new List<TR1Type>
         {
-            TREntities.Cowboy, TREntities.Raptor, TREntities.Lion, TREntities.Lioness,
-            TREntities.Panther,TREntities.CrocodileLand, TREntities.CrocodileWater, TREntities.Pierre,
-            TREntities.Larson
+            TR1Type.Cowboy, TR1Type.Raptor, TR1Type.Lion, TR1Type.Lioness,
+            TR1Type.Panther,TR1Type.CrocodileLand, TR1Type.CrocodileWater, TR1Type.Pierre,
+            TR1Type.Larson
         },
-        [EnemyDifficulty.Hard] = new List<TREntities>
+        [EnemyDifficulty.Hard] = new List<TR1Type>
         {
-            TREntities.TRex, TREntities.SkateboardKid, TREntities.Kold, TREntities.Centaur,
-            TREntities.CentaurStatue, TREntities.FlyingAtlantean, TREntities.ShootingAtlantean_N, TREntities.NonShootingAtlantean_N
+            TR1Type.TRex, TR1Type.SkateboardKid, TR1Type.Kold, TR1Type.Centaur,
+            TR1Type.CentaurStatue, TR1Type.FlyingAtlantean, TR1Type.ShootingAtlantean_N, TR1Type.NonShootingAtlantean_N
         },
-        [EnemyDifficulty.VeryHard] = new List<TREntities>
+        [EnemyDifficulty.VeryHard] = new List<TR1Type>
         {
-            TREntities.Adam, TREntities.Natla
+            TR1Type.Adam, TR1Type.Natla
         }
     };
 
-    private static readonly Dictionary<TREntities, uint> _startingAmmoToGive = new()
+    private static readonly Dictionary<TR1Type, uint> _startingAmmoToGive = new()
     {
-        [TREntities.Shotgun_S_P] = 10,
-        [TREntities.Magnums_S_P] = 6,
-        [TREntities.Uzis_S_P] = 6
+        [TR1Type.Shotgun_S_P] = 10,
+        [TR1Type.Magnums_S_P] = 6,
+        [TR1Type.Uzis_S_P] = 6
     };
 
     static TR1EnemyUtilities()
     {
-        _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TREntities, List<int>>>>
+        _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR1Type, List<int>>>>
         (
             File.ReadAllText(@"Resources\TR1\Restrictions\enemy_restrictions_default.json")
         );
-        _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TREntities, List<int>>>>
+        _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR1Type, List<int>>>>
         (
             File.ReadAllText(@"Resources\TR1\Restrictions\enemy_restrictions_technical.json")
         );
@@ -566,7 +566,7 @@ public static class TR1EnemyUtilities
 
 public class RestrictedEnemyGroup
 {
-    public List<TREntities> Enemies { get; set; }
+    public List<TR1Type> Enemies { get; set; }
     public int MaximumCount { get; set; }
     public bool IsSealed { get; set; }
 }

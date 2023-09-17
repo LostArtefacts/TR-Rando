@@ -68,7 +68,7 @@ public class TR1NightModeRandomizer : BaseTR1Randomizer
         }
 
         // Notify the texture monitor that this level is now in night mode
-        TextureMonitor<TREntities> monitor = TextureMonitor.CreateMonitor(level.Name);
+        TextureMonitor<TR1Type> monitor = TextureMonitor.CreateMonitor(level.Name);
         monitor.UseNightTextures = true;
     }
 

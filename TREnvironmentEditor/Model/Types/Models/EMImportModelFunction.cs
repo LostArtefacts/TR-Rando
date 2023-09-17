@@ -14,7 +14,7 @@ public class EMImportModelFunction : BaseEMFunction
         TR1ModelImporter importer = new(Tags?.Contains(EMTag.CommunityPatchOnly) ?? false)
         {
             Level = level,
-            EntitiesToImport = Models.Select(m => (TREntities)m),
+            EntitiesToImport = Models.Select(m => (TR1Type)m),
             DataFolder = @"Resources\TR1\Models"
         };
 

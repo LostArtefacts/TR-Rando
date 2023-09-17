@@ -11,46 +11,46 @@ using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Textures;
 
-public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
+public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
 {
-    private static readonly List<TREntities> _laraEntities = new()
+    private static readonly List<TR1Type> _laraEntities = new()
     {
-        TREntities.Lara, TREntities.LaraPonytail_H_U, TREntities.CutsceneActor1,
-        TREntities.LaraPistolAnim_H, TREntities.LaraShotgunAnim_H, TREntities.LaraMagnumAnim_H,
-        TREntities.LaraUziAnimation_H, TREntities.LaraMiscAnim_H, TREntities.CameraTarget_N,
-        TREntities.FlameEmitter_N, TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N,
-        TREntities.MidasHand_N
+        TR1Type.Lara, TR1Type.LaraPonytail_H_U, TR1Type.CutsceneActor1,
+        TR1Type.LaraPistolAnim_H, TR1Type.LaraShotgunAnim_H, TR1Type.LaraMagnumAnim_H,
+        TR1Type.LaraUziAnimation_H, TR1Type.LaraMiscAnim_H, TR1Type.CameraTarget_N,
+        TR1Type.FlameEmitter_N, TR1Type.NonShootingAtlantean_N, TR1Type.ShootingAtlantean_N,
+        TR1Type.MidasHand_N
     };
 
-    private static readonly List<TREntities> _enemyPlaceholderEntities = new()
+    private static readonly List<TR1Type> _enemyPlaceholderEntities = new()
     {
-        TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N
+        TR1Type.NonShootingAtlantean_N, TR1Type.ShootingAtlantean_N
     };
 
-    private static readonly List<TREntities> _additionalEnemyEntities = new()
+    private static readonly List<TR1Type> _additionalEnemyEntities = new()
     {
-        TREntities.Missile1_H, TREntities.Missile2_H, TREntities.Missile3_H,
-        TREntities.CutsceneActor2, TREntities.CutsceneActor3, TREntities.CutsceneActor4,
-        TREntities.AdamEgg, TREntities.ScionHolder, TREntities.ScionPiece3_S_P, TREntities.ScionPiece4_S_P,
-        TREntities.Skateboard
+        TR1Type.Missile1_H, TR1Type.Missile2_H, TR1Type.Missile3_H,
+        TR1Type.CutsceneActor2, TR1Type.CutsceneActor3, TR1Type.CutsceneActor4,
+        TR1Type.AdamEgg, TR1Type.ScionHolder, TR1Type.ScionPiece3_S_P, TR1Type.ScionPiece4_S_P,
+        TR1Type.Skateboard
     };
 
-    private static readonly List<TREntities> _pickupModels = new()
+    private static readonly List<TR1Type> _pickupModels = new()
     {
-        TREntities.Pistols_M_H, TREntities.Shotgun_M_H, TREntities.Magnums_M_H, TREntities.Uzis_M_H,
-        TREntities.ShotgunAmmo_M_H, TREntities.MagnumAmmo_M_H, TREntities.UziAmmo_M_H,
-        TREntities.SmallMed_M_H, TREntities.LargeMed_M_H,
-        TREntities.Puzzle1_M_H, TREntities.Puzzle2_M_H, TREntities.Puzzle3_M_H, TREntities.Puzzle4_M_H,
-        TREntities.Key1_M_H, TREntities.Key2_M_H, TREntities.Key3_M_H, TREntities.Key4_M_H,
-        TREntities.Quest1_M_H, TREntities.Quest2_M_H,
-        TREntities.ScionPiece_M_H
+        TR1Type.Pistols_M_H, TR1Type.Shotgun_M_H, TR1Type.Magnums_M_H, TR1Type.Uzis_M_H,
+        TR1Type.ShotgunAmmo_M_H, TR1Type.MagnumAmmo_M_H, TR1Type.UziAmmo_M_H,
+        TR1Type.SmallMed_M_H, TR1Type.LargeMed_M_H,
+        TR1Type.Puzzle1_M_H, TR1Type.Puzzle2_M_H, TR1Type.Puzzle3_M_H, TR1Type.Puzzle4_M_H,
+        TR1Type.Key1_M_H, TR1Type.Key2_M_H, TR1Type.Key3_M_H, TR1Type.Key4_M_H,
+        TR1Type.Quest1_M_H, TR1Type.Quest2_M_H,
+        TR1Type.ScionPiece_M_H
     };
 
     public override bool Is8BitPalette => true;
 
     private TR1TexturePacker _packer;
 
-    protected override AbstractTexturePacker<TREntities, TR1Level> CreatePacker(TR1Level level)
+    protected override AbstractTexturePacker<TR1Type, TR1Level> CreatePacker(TR1Level level)
     {
         return _packer = new TR1TexturePacker(level);
     }
@@ -62,17 +62,17 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
 
     protected override bool IsInteractableModel(TRModel model)
     {
-        TREntities type = (TREntities)model.ID;
+        TR1Type type = (TR1Type)model.ID;
         return TR1EntityUtilities.IsSwitchType(type)
             || TR1EntityUtilities.IsKeyholeType(type)
             || TR1EntityUtilities.IsSlotType(type)
             || TR1EntityUtilities.IsPushblockType(type)
-            || type == TREntities.Barricade;
+            || type == TR1Type.Barricade;
     }
 
     protected override bool ShouldSolidifyModel(TRModel model)
     {
-        return _data.Has3DPickups && _pickupModels.Contains((TREntities)model.ID);
+        return _data.Has3DPickups && _pickupModels.Contains((TR1Type)model.ID);
     }
 
     protected override int GetBlackPaletteIndex(TR1Level level)
@@ -90,15 +90,15 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
         return level.Meshes;
     }
 
-    protected override Dictionary<TREntities, TRMesh[]> GetModelMeshes(TR1Level level)
+    protected override Dictionary<TR1Type, TRMesh[]> GetModelMeshes(TR1Level level)
     {
-        Dictionary<TREntities, TRMesh[]> modelMeshes = new();
+        Dictionary<TR1Type, TRMesh[]> modelMeshes = new();
         foreach (TRModel model in level.Models)
         {
             TRMesh[] meshes = GetModelMeshes(level, model);
             if (meshes != null)
             {
-                modelMeshes[(TREntities)model.ID] = meshes;
+                modelMeshes[(TR1Type)model.ID] = meshes;
             }
         }
         return modelMeshes;
@@ -157,18 +157,18 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
 
     protected override bool IsLaraModel(TRModel model)
     {
-        return _laraEntities.Contains((TREntities)model.ID);
+        return _laraEntities.Contains((TR1Type)model.ID);
     }
 
     protected override bool IsEnemyModel(TRModel model)
     {
-        TREntities id = (TREntities)model.ID;
+        TR1Type id = (TR1Type)model.ID;
         return TR1EntityUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
     }
 
     protected override bool IsEnemyPlaceholderModel(TRModel model)
     {
-        TREntities id = (TREntities)model.ID;
+        TR1Type id = (TR1Type)model.ID;
         return _enemyPlaceholderEntities.Contains(id);
     }
 
@@ -322,7 +322,7 @@ public class TR1Wireframer : AbstractTRWireframer<TREntities, TR1Level>
     {
         foreach (TRModel model in level.Models)
         {
-            TREntities type = (TREntities)model.ID;
+            TR1Type type = (TR1Type)model.ID;
             if (!TR1EntityUtilities.IsDoorType(type))
             {
                 continue;

@@ -12,21 +12,21 @@ public static class DependencyExporter
         TR1TextureRemapGroup remapGroup = new();
         foreach (TRModel model in level.Models)
         {
-            remapGroup.CalculateDependencies(level, (TREntities)model.ID);
+            remapGroup.CalculateDependencies(level, (TR1Type)model.ID);
         }
 
-        foreach (TextureDependency<TREntities> dependency in remapGroup.Dependencies)
+        foreach (TextureDependency<TR1Type> dependency in remapGroup.Dependencies)
         {
             // We need to ensure Atlantean spawns are accounted for because these are null meshes
-            if (dependency.Entities.Contains(TREntities.FlyingAtlantean))
+            if (dependency.Entities.Contains(TR1Type.FlyingAtlantean))
             {
-                dependency.AddEntity(TREntities.ShootingAtlantean_N);
-                dependency.AddEntity(TREntities.NonShootingAtlantean_N);
+                dependency.AddEntity(TR1Type.ShootingAtlantean_N);
+                dependency.AddEntity(TR1Type.NonShootingAtlantean_N);
                 dependency.Entities.Sort();
             }
         }
 
-        remapGroup.Dependencies.Sort(delegate (TextureDependency<TREntities> d1, TextureDependency<TREntities> d2)
+        remapGroup.Dependencies.Sort(delegate (TextureDependency<TR1Type> d1, TextureDependency<TR1Type> d2)
         {
             if (d1.TileIndex == d2.TileIndex)
             {

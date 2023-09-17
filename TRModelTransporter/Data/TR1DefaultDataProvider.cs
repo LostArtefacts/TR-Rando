@@ -3,46 +3,46 @@ using TRLevelControl.Model;
 
 namespace TRModelTransporter.Data;
 
-public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
+public class TR1DefaultDataProvider : ITransportDataProvider<TR1Type>
 {
     public int TextureTileLimit { get; set; } = 16;
     public int TextureObjectLimit { get; set; } = 2048;
 
-    public Dictionary<TREntities, TREntities> AliasPriority { get; set; }
+    public Dictionary<TR1Type, TR1Type> AliasPriority { get; set; }
 
-    public IEnumerable<TREntities> GetModelDependencies(TREntities entity)
+    public IEnumerable<TR1Type> GetModelDependencies(TR1Type entity)
     {
         return _entityDependencies.ContainsKey(entity) ? _entityDependencies[entity] : _emptyEntities;
     }
 
-    public IEnumerable<TREntities> GetRemovalExclusions(TREntities entity)
+    public IEnumerable<TR1Type> GetRemovalExclusions(TR1Type entity)
     {
         return _removalExclusions.ContainsKey(entity) ? _removalExclusions[entity] : _emptyEntities;
     }
 
-    public IEnumerable<TREntities> GetCyclicDependencies(TREntities entity)
+    public IEnumerable<TR1Type> GetCyclicDependencies(TR1Type entity)
     {
         return _cyclicDependencies.ContainsKey(entity) ? _cyclicDependencies[entity] : _emptyEntities;
     }
 
-    public IEnumerable<TREntities> GetSpriteDependencies(TREntities entity)
+    public IEnumerable<TR1Type> GetSpriteDependencies(TR1Type entity)
     {
         return _spriteDependencies.ContainsKey(entity) ? _spriteDependencies[entity] : _emptyEntities;
     }
 
-    public IEnumerable<TREntities> GetCinematicEntities()
+    public IEnumerable<TR1Type> GetCinematicEntities()
     {
         return _cinematicEntities;
     }
 
-    public IEnumerable<TREntities> GetLaraDependants()
+    public IEnumerable<TR1Type> GetLaraDependants()
     {
         return _laraDependentModels;
     }
 
-    public bool IsAlias(TREntities entity)
+    public bool IsAlias(TR1Type entity)
     {
-        foreach (List<TREntities> aliases in _entityAliases.Values)
+        foreach (List<TR1Type> aliases in _entityAliases.Values)
         {
             if (aliases.Contains(entity))
             {
@@ -53,14 +53,14 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
         return false;
     }
 
-    public bool HasAliases(TREntities entity)
+    public bool HasAliases(TR1Type entity)
     {
         return _entityAliases.ContainsKey(entity);
     }
 
-    public TREntities TranslateAlias(TREntities entity)
+    public TR1Type TranslateAlias(TR1Type entity)
     {
-        foreach (TREntities root in _entityAliases.Keys)
+        foreach (TR1Type root in _entityAliases.Keys)
         {
             if (_entityAliases[root].Contains(entity))
             {
@@ -71,49 +71,49 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
         return entity;
     }
 
-    public IEnumerable<TREntities> GetAliases(TREntities entity)
+    public IEnumerable<TR1Type> GetAliases(TR1Type entity)
     {
         return _entityAliases.ContainsKey(entity) ? _entityAliases[entity] : _emptyEntities;
     }
 
-    public TREntities GetLevelAlias(string level, TREntities entity)
+    public TR1Type GetLevelAlias(string level, TR1Type entity)
     {
         return TR1EntityUtilities.GetAliasForLevel(level, entity);
     }
 
-    public bool IsAliasDuplicatePermitted(TREntities entity)
+    public bool IsAliasDuplicatePermitted(TR1Type entity)
     {
         return _permittedAliasDuplicates.Contains(entity);
     }
 
-    public bool IsOverridePermitted(TREntities entity)
+    public bool IsOverridePermitted(TR1Type entity)
     {
         return _permittedOverrides.Contains(entity);
     }
 
-    public IEnumerable<TREntities> GetUnsafeModelReplacements()
+    public IEnumerable<TR1Type> GetUnsafeModelReplacements()
     {
         return _unsafeModelReplacements;
     }
 
-    public bool IsNonGraphicsDependency(TREntities entity)
+    public bool IsNonGraphicsDependency(TR1Type entity)
     {
         return _nonGraphicsDependencies.Contains(entity);
     }
 
-    public bool IsSoundOnlyDependency(TREntities entity)
+    public bool IsSoundOnlyDependency(TR1Type entity)
     {
         return _soundOnlyDependencies.Contains(entity);
     }
 
-    public short[] GetHardcodedSounds(TREntities entity)
+    public short[] GetHardcodedSounds(TR1Type entity)
     {
         return _hardcodedSoundIndices.ContainsKey(entity) ? _hardcodedSoundIndices[entity] : null;
     }
 
-    public IEnumerable<int> GetIgnorableTextureIndices(TREntities entity, string level)
+    public IEnumerable<int> GetIgnorableTextureIndices(TR1Type entity, string level)
     {
-        if (entity == TREntities.LaraMiscAnim_H && level == TR1LevelNames.VALLEY)
+        if (entity == TR1Type.LaraMiscAnim_H && level == TR1LevelNames.VALLEY)
         {
             // Mesh swap when Lara is killed by T-Rex
             return null;
@@ -123,189 +123,189 @@ public class TR1DefaultDataProvider : ITransportDataProvider<TREntities>
 
     #region Data
 
-    private static readonly IEnumerable<TREntities> _emptyEntities = new List<TREntities>();
+    private static readonly IEnumerable<TR1Type> _emptyEntities = new List<TR1Type>();
 
-    private static readonly Dictionary<TREntities, TREntities[]> _entityDependencies = new()
+    private static readonly Dictionary<TR1Type, TR1Type[]> _entityDependencies = new()
     {
-        [TREntities.Adam]
-            = new TREntities[] { TREntities.LaraMiscAnim_H_Pyramid },
-        [TREntities.BandagedAtlantean]
-            = new TREntities[] { TREntities.BandagedFlyer },
-        [TREntities.BandagedFlyer]
-            = new TREntities[] { TREntities.Missile2_H, TREntities.Missile3_H },
-        [TREntities.Centaur]
-            = new TREntities[] { TREntities.Missile3_H },
-        [TREntities.CentaurStatue]
-            = new TREntities[] { TREntities.Centaur },
-        [TREntities.CrocodileLand]
-            = new TREntities[] { TREntities.CrocodileWater },
-        [TREntities.CrocodileWater]
-            = new TREntities[] { TREntities.CrocodileLand },
-        [TREntities.DartEmitter]
-            = new TREntities[] { TREntities.Dart_H },
-        [TREntities.MeatyAtlantean]
-            = new TREntities[] { TREntities.MeatyFlyer },
-        [TREntities.MeatyFlyer]
-            = new TREntities[] { TREntities.Missile2_H, TREntities.Missile3_H },
-        [TREntities.Natla]
-            = new TREntities[] { TREntities.Missile2_H, TREntities.Missile3_H },
-        [TREntities.Pierre]
-            = new TREntities[] { TREntities.Key1_M_H, TREntities.ScionPiece_M_H },
-        [TREntities.RatLand]
-            = new TREntities[] { TREntities.RatWater },
-        [TREntities.RatWater]
-            = new TREntities[] { TREntities.RatLand },
-        [TREntities.ShootingAtlantean_N]
-            = new TREntities[] { TREntities.MeatyFlyer },
-        [TREntities.SkateboardKid]
-            = new TREntities[] { TREntities.Skateboard },
-        [TREntities.ThorHammerHandle]
-            = new TREntities[] { TREntities.ThorHammerBlock },
-        [TREntities.TRex]
-            = new TREntities[] { TREntities.LaraMiscAnim_H_Valley }
+        [TR1Type.Adam]
+            = new TR1Type[] { TR1Type.LaraMiscAnim_H_Pyramid },
+        [TR1Type.BandagedAtlantean]
+            = new TR1Type[] { TR1Type.BandagedFlyer },
+        [TR1Type.BandagedFlyer]
+            = new TR1Type[] { TR1Type.Missile2_H, TR1Type.Missile3_H },
+        [TR1Type.Centaur]
+            = new TR1Type[] { TR1Type.Missile3_H },
+        [TR1Type.CentaurStatue]
+            = new TR1Type[] { TR1Type.Centaur },
+        [TR1Type.CrocodileLand]
+            = new TR1Type[] { TR1Type.CrocodileWater },
+        [TR1Type.CrocodileWater]
+            = new TR1Type[] { TR1Type.CrocodileLand },
+        [TR1Type.DartEmitter]
+            = new TR1Type[] { TR1Type.Dart_H },
+        [TR1Type.MeatyAtlantean]
+            = new TR1Type[] { TR1Type.MeatyFlyer },
+        [TR1Type.MeatyFlyer]
+            = new TR1Type[] { TR1Type.Missile2_H, TR1Type.Missile3_H },
+        [TR1Type.Natla]
+            = new TR1Type[] { TR1Type.Missile2_H, TR1Type.Missile3_H },
+        [TR1Type.Pierre]
+            = new TR1Type[] { TR1Type.Key1_M_H, TR1Type.ScionPiece_M_H },
+        [TR1Type.RatLand]
+            = new TR1Type[] { TR1Type.RatWater },
+        [TR1Type.RatWater]
+            = new TR1Type[] { TR1Type.RatLand },
+        [TR1Type.ShootingAtlantean_N]
+            = new TR1Type[] { TR1Type.MeatyFlyer },
+        [TR1Type.SkateboardKid]
+            = new TR1Type[] { TR1Type.Skateboard },
+        [TR1Type.ThorHammerHandle]
+            = new TR1Type[] { TR1Type.ThorHammerBlock },
+        [TR1Type.TRex]
+            = new TR1Type[] { TR1Type.LaraMiscAnim_H_Valley }
     };
 
-    private static readonly Dictionary<TREntities, TREntities[]> _cyclicDependencies = new()
+    private static readonly Dictionary<TR1Type, TR1Type[]> _cyclicDependencies = new()
     {
-        [TREntities.CrocodileLand]
-            = new TREntities[] { TREntities.CrocodileWater },
-        [TREntities.CrocodileWater]
-            = new TREntities[] { TREntities.CrocodileLand },
-        [TREntities.RatLand]
-            = new TREntities[] { TREntities.RatWater },
-        [TREntities.RatWater]
-            = new TREntities[] { TREntities.RatLand },
-        [TREntities.Pierre]
-            = new TREntities[] { TREntities.ScionPiece_M_H },
+        [TR1Type.CrocodileLand]
+            = new TR1Type[] { TR1Type.CrocodileWater },
+        [TR1Type.CrocodileWater]
+            = new TR1Type[] { TR1Type.CrocodileLand },
+        [TR1Type.RatLand]
+            = new TR1Type[] { TR1Type.RatWater },
+        [TR1Type.RatWater]
+            = new TR1Type[] { TR1Type.RatLand },
+        [TR1Type.Pierre]
+            = new TR1Type[] { TR1Type.ScionPiece_M_H },
     };
 
-    private static readonly Dictionary<TREntities, List<TREntities>> _removalExclusions = new()
+    private static readonly Dictionary<TR1Type, List<TR1Type>> _removalExclusions = new()
     {
-        [TREntities.FlyingAtlantean]
-            = new List<TREntities> { TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N }
+        [TR1Type.FlyingAtlantean]
+            = new List<TR1Type> { TR1Type.NonShootingAtlantean_N, TR1Type.ShootingAtlantean_N }
     };
 
-    private static readonly Dictionary<TREntities, List<TREntities>> _spriteDependencies = new()
+    private static readonly Dictionary<TR1Type, List<TR1Type>> _spriteDependencies = new()
     {
-        [TREntities.SecretScion_M_H]
-            = new List<TREntities> { TREntities.ScionPiece4_S_P },
-        [TREntities.SecretGoldIdol_M_H]
-            = new List<TREntities> { TREntities.ScionPiece4_S_P },
-        [TREntities.SecretLeadBar_M_H]
-            = new List<TREntities> { TREntities.ScionPiece4_S_P },
-        [TREntities.SecretGoldBar_M_H]
-            = new List<TREntities> { TREntities.ScionPiece4_S_P },
-        [TREntities.SecretAnkh_M_H]
-            = new List<TREntities> { TREntities.ScionPiece4_S_P },
+        [TR1Type.SecretScion_M_H]
+            = new List<TR1Type> { TR1Type.ScionPiece4_S_P },
+        [TR1Type.SecretGoldIdol_M_H]
+            = new List<TR1Type> { TR1Type.ScionPiece4_S_P },
+        [TR1Type.SecretLeadBar_M_H]
+            = new List<TR1Type> { TR1Type.ScionPiece4_S_P },
+        [TR1Type.SecretGoldBar_M_H]
+            = new List<TR1Type> { TR1Type.ScionPiece4_S_P },
+        [TR1Type.SecretAnkh_M_H]
+            = new List<TR1Type> { TR1Type.ScionPiece4_S_P },
 
-        [TREntities.Adam]
-            = new List<TREntities> { TREntities.Explosion1_S_H },
-        [TREntities.Centaur]
-            = new List<TREntities> { TREntities.Explosion1_S_H },
-        [TREntities.FlyingAtlantean]
-            = new List<TREntities> { TREntities.Explosion1_S_H },
-        [TREntities.Key1_M_H]
-            = new List<TREntities> { TREntities.Key1_S_P },
-        [TREntities.Natla]
-            = new List<TREntities> { TREntities.Explosion1_S_H },
-        [TREntities.ScionPiece_M_H]
-            = new List<TREntities> { TREntities.ScionPiece2_S_P },
-        [TREntities.ShootingAtlantean_N]
-            = new List<TREntities> { TREntities.Explosion1_S_H },
-        [TREntities.Missile3_H]
-            = new List<TREntities> { TREntities.Explosion1_S_H },
+        [TR1Type.Adam]
+            = new List<TR1Type> { TR1Type.Explosion1_S_H },
+        [TR1Type.Centaur]
+            = new List<TR1Type> { TR1Type.Explosion1_S_H },
+        [TR1Type.FlyingAtlantean]
+            = new List<TR1Type> { TR1Type.Explosion1_S_H },
+        [TR1Type.Key1_M_H]
+            = new List<TR1Type> { TR1Type.Key1_S_P },
+        [TR1Type.Natla]
+            = new List<TR1Type> { TR1Type.Explosion1_S_H },
+        [TR1Type.ScionPiece_M_H]
+            = new List<TR1Type> { TR1Type.ScionPiece2_S_P },
+        [TR1Type.ShootingAtlantean_N]
+            = new List<TR1Type> { TR1Type.Explosion1_S_H },
+        [TR1Type.Missile3_H]
+            = new List<TR1Type> { TR1Type.Explosion1_S_H },
     };
 
-    private static readonly List<TREntities> _cinematicEntities = new()
+    private static readonly List<TR1Type> _cinematicEntities = new()
     {
     };
 
     // These are models that use Lara's hips as placeholders
-    private static readonly List<TREntities> _laraDependentModels = new()
+    private static readonly List<TR1Type> _laraDependentModels = new()
     {
-        TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N
+        TR1Type.NonShootingAtlantean_N, TR1Type.ShootingAtlantean_N
     };
 
-    private static readonly Dictionary<TREntities, List<TREntities>> _entityAliases = new()
+    private static readonly Dictionary<TR1Type, List<TR1Type>> _entityAliases = new()
     {
-        [TREntities.FlyingAtlantean] = new List<TREntities>
+        [TR1Type.FlyingAtlantean] = new List<TR1Type>
         {
-            TREntities.BandagedFlyer, TREntities.MeatyFlyer
+            TR1Type.BandagedFlyer, TR1Type.MeatyFlyer
         },
-        [TREntities.LaraMiscAnim_H] = new List<TREntities>
+        [TR1Type.LaraMiscAnim_H] = new List<TR1Type>
         {
-            TREntities.LaraMiscAnim_H_General, TREntities.LaraMiscAnim_H_Valley, TREntities.LaraMiscAnim_H_Qualopec, TREntities.LaraMiscAnim_H_Midas,
-            TREntities.LaraMiscAnim_H_Sanctuary, TREntities.LaraMiscAnim_H_Atlantis, TREntities.LaraMiscAnim_H_Pyramid
+            TR1Type.LaraMiscAnim_H_General, TR1Type.LaraMiscAnim_H_Valley, TR1Type.LaraMiscAnim_H_Qualopec, TR1Type.LaraMiscAnim_H_Midas,
+            TR1Type.LaraMiscAnim_H_Sanctuary, TR1Type.LaraMiscAnim_H_Atlantis, TR1Type.LaraMiscAnim_H_Pyramid
         },
-        [TREntities.NonShootingAtlantean_N] = new List<TREntities>
+        [TR1Type.NonShootingAtlantean_N] = new List<TR1Type>
         {
-            TREntities.BandagedAtlantean, TREntities.MeatyAtlantean
+            TR1Type.BandagedAtlantean, TR1Type.MeatyAtlantean
         },
-        [TREntities.Cowboy] = new List<TREntities>
+        [TR1Type.Cowboy] = new List<TR1Type>
         {
-            TREntities.CowboyOG, TREntities.CowboyHeadless
+            TR1Type.CowboyOG, TR1Type.CowboyHeadless
         }
     };
 
-    private static readonly List<TREntities> _permittedAliasDuplicates = new()
+    private static readonly List<TR1Type> _permittedAliasDuplicates = new()
     {
-        TREntities.LaraMiscAnim_H
+        TR1Type.LaraMiscAnim_H
     };
 
-    private static readonly List<TREntities> _permittedOverrides = new()
+    private static readonly List<TR1Type> _permittedOverrides = new()
     {
-        TREntities.LaraPonytail_H_U, TREntities.ScionPiece_M_H
+        TR1Type.LaraPonytail_H_U, TR1Type.ScionPiece_M_H
     };
 
-    private static readonly List<TREntities> _unsafeModelReplacements = new()
+    private static readonly List<TR1Type> _unsafeModelReplacements = new()
     {
     };
 
-    private static readonly List<TREntities> _nonGraphicsDependencies = new()
+    private static readonly List<TR1Type> _nonGraphicsDependencies = new()
     {
     };
 
     // If these are imported into levels that already have another alias for them, only their hardcoded sounds will be imported
-    protected static readonly List<TREntities> _soundOnlyDependencies = new()
+    protected static readonly List<TR1Type> _soundOnlyDependencies = new()
     {
     };
 
-    private static readonly Dictionary<TREntities, short[]> _hardcodedSoundIndices = new()
+    private static readonly Dictionary<TR1Type, short[]> _hardcodedSoundIndices = new()
     {
-        [TREntities.Adam] = new short[] { 104, 137, 138, 140, 141, 142 },
-        [TREntities.BandagedFlyer] = new short[] { 104 },
-        [TREntities.Bear] = new short[] { 12, 16 },
-        [TREntities.Centaur] = new short[] { 104 },
-        [TREntities.DamoclesSword] = new short[] { 103 },
-        [TREntities.DartEmitter] = new short[] { 151 },
-        [TREntities.Gorilla] = new short[] { 90, 91, 101 },
-        [TREntities.Larson] = new short[] { 78 },
-        [TREntities.Lion] = new short[] { 85, 86, 87 },
-        [TREntities.Lioness] = new short[] { 85, 86, 87 },
-        [TREntities.MeatyAtlantean] = new short[] { 104 },
-        [TREntities.MeatyFlyer] = new short[] { 104, 120, 121, 122, 123, 124, 125, 126 },
-        [TREntities.Missile3_H] = new short[] { 104 },
-        [TREntities.Natla] = new short[] { 104, 123, 124, 202 },
-        [TREntities.ShootingAtlantean_N] = new short[] { 104 },
-        [TREntities.SkateboardKid] = new short[] { 132, 204 },
-        [TREntities.TeethSpikes] = new short[] { 145 },
-        [TREntities.ThorHammerHandle] = new short[] { 70 },
-        [TREntities.ThorLightning] = new short[] { 98 },
-        [TREntities.UnderwaterSwitch] = new short[] { 61 },
-        [TREntities.Wolf] = new short[] { 20 }
+        [TR1Type.Adam] = new short[] { 104, 137, 138, 140, 141, 142 },
+        [TR1Type.BandagedFlyer] = new short[] { 104 },
+        [TR1Type.Bear] = new short[] { 12, 16 },
+        [TR1Type.Centaur] = new short[] { 104 },
+        [TR1Type.DamoclesSword] = new short[] { 103 },
+        [TR1Type.DartEmitter] = new short[] { 151 },
+        [TR1Type.Gorilla] = new short[] { 90, 91, 101 },
+        [TR1Type.Larson] = new short[] { 78 },
+        [TR1Type.Lion] = new short[] { 85, 86, 87 },
+        [TR1Type.Lioness] = new short[] { 85, 86, 87 },
+        [TR1Type.MeatyAtlantean] = new short[] { 104 },
+        [TR1Type.MeatyFlyer] = new short[] { 104, 120, 121, 122, 123, 124, 125, 126 },
+        [TR1Type.Missile3_H] = new short[] { 104 },
+        [TR1Type.Natla] = new short[] { 104, 123, 124, 202 },
+        [TR1Type.ShootingAtlantean_N] = new short[] { 104 },
+        [TR1Type.SkateboardKid] = new short[] { 132, 204 },
+        [TR1Type.TeethSpikes] = new short[] { 145 },
+        [TR1Type.ThorHammerHandle] = new short[] { 70 },
+        [TR1Type.ThorLightning] = new short[] { 98 },
+        [TR1Type.UnderwaterSwitch] = new short[] { 61 },
+        [TR1Type.Wolf] = new short[] { 20 }
     };
 
-    private static readonly Dictionary<TREntities, List<int>> _ignoreEntityTextures = new()
+    private static readonly Dictionary<TR1Type, List<int>> _ignoreEntityTextures = new()
     {
-        [TREntities.LaraMiscAnim_H]
+        [TR1Type.LaraMiscAnim_H]
             = new List<int>(), // empty list indicates to ignore everything
-        [TREntities.NonShootingAtlantean_N]
+        [TR1Type.NonShootingAtlantean_N]
             = new List<int>(),
-        [TREntities.ShootingAtlantean_N]
+        [TR1Type.ShootingAtlantean_N]
             = new List<int>(),
-        [TREntities.Mummy]
+        [TR1Type.Mummy]
             = new List<int> { 130, 131, 132, 133, 134, 135, 136, 137, 140, 141 },
-        [TREntities.ThorLightning]
+        [TR1Type.ThorLightning]
             = new List<int> { 150, 151, 154, 155, 156, 157, 158, 159, 160, 161 }
     };
 

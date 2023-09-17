@@ -4,50 +4,50 @@ namespace TRLevelControl.Helpers;
 
 public static class TR1EntityUtilities
 {
-    public static readonly Dictionary<TREntities, Dictionary<TREntities, List<string>>> LevelEntityAliases = new()
+    public static readonly Dictionary<TR1Type, Dictionary<TR1Type, List<string>>> LevelEntityAliases = new()
     {
-        [TREntities.FlyingAtlantean] = new Dictionary<TREntities, List<string>>
+        [TR1Type.FlyingAtlantean] = new Dictionary<TR1Type, List<string>>
         {
-            [TREntities.BandagedFlyer] =
+            [TR1Type.BandagedFlyer] =
                 new List<string> { TR1LevelNames.KHAMOON, TR1LevelNames.OBELISK },
-            [TREntities.MeatyFlyer] =
+            [TR1Type.MeatyFlyer] =
                 new List<string> { TR1LevelNames.SANCTUARY, TR1LevelNames.ATLANTIS }
         },
-        [TREntities.NonShootingAtlantean_N] = new Dictionary<TREntities, List<string>>
+        [TR1Type.NonShootingAtlantean_N] = new Dictionary<TR1Type, List<string>>
         {
-            [TREntities.BandagedAtlantean] =
+            [TR1Type.BandagedAtlantean] =
                 new List<string> { TR1LevelNames.KHAMOON, TR1LevelNames.OBELISK },
-            [TREntities.MeatyAtlantean] =
+            [TR1Type.MeatyAtlantean] =
                 new List<string> { TR1LevelNames.SANCTUARY, TR1LevelNames.ATLANTIS }
         },
-        [TREntities.Cowboy] = new Dictionary<TREntities, List<string>>
+        [TR1Type.Cowboy] = new Dictionary<TR1Type, List<string>>
         {
-            [TREntities.CowboyOG] =
+            [TR1Type.CowboyOG] =
                 new List<string> { TR1LevelNames.MINES },
-            [TREntities.CowboyHeadless] =
+            [TR1Type.CowboyHeadless] =
                 new List<string> { }
         }
     };
 
-    public static readonly Dictionary<TREntities, List<TREntities>> EntityFamilies = new()
+    public static readonly Dictionary<TR1Type, List<TR1Type>> EntityFamilies = new()
     {
-        [TREntities.FlyingAtlantean] = new List<TREntities>
+        [TR1Type.FlyingAtlantean] = new List<TR1Type>
         {
-            TREntities.BandagedFlyer, TREntities.MeatyFlyer
+            TR1Type.BandagedFlyer, TR1Type.MeatyFlyer
         },
-        [TREntities.NonShootingAtlantean_N] = new List<TREntities>
+        [TR1Type.NonShootingAtlantean_N] = new List<TR1Type>
         {
-            TREntities.BandagedAtlantean, TREntities.MeatyAtlantean
+            TR1Type.BandagedAtlantean, TR1Type.MeatyAtlantean
         },
-        [TREntities.Cowboy] = new List<TREntities>
+        [TR1Type.Cowboy] = new List<TR1Type>
         {
-            TREntities.CowboyOG, TREntities.CowboyHeadless
+            TR1Type.CowboyOG, TR1Type.CowboyHeadless
         }
     };
 
-    public static TREntities TranslateEntityAlias(TREntities entity)
+    public static TR1Type TranslateEntityAlias(TR1Type entity)
     {
-        foreach (TREntities parentEntity in EntityFamilies.Keys)
+        foreach (TR1Type parentEntity in EntityFamilies.Keys)
         {
             if (EntityFamilies[parentEntity].Contains(entity))
             {
@@ -58,11 +58,11 @@ public static class TR1EntityUtilities
         return entity;
     }
 
-    public static TREntities GetAliasForLevel(string lvl, TREntities entity)
+    public static TR1Type GetAliasForLevel(string lvl, TR1Type entity)
     {
         if (LevelEntityAliases.ContainsKey(entity))
         {
-            foreach (TREntities alias in LevelEntityAliases[entity].Keys)
+            foreach (TR1Type alias in LevelEntityAliases[entity].Keys)
             {
                 if (LevelEntityAliases[entity][alias].Contains(lvl))
                 {
@@ -73,9 +73,9 @@ public static class TR1EntityUtilities
         return entity;
     }
 
-    public static List<TREntities> GetEntityFamily(TREntities entity)
+    public static List<TR1Type> GetEntityFamily(TR1Type entity)
     {
-        foreach (TREntities parentEntity in EntityFamilies.Keys)
+        foreach (TR1Type parentEntity in EntityFamilies.Keys)
         {
             if (EntityFamilies[parentEntity].Contains(entity))
             {
@@ -83,15 +83,15 @@ public static class TR1EntityUtilities
             }
         }
 
-        return new List<TREntities> { entity };
+        return new List<TR1Type> { entity };
     }
 
-    public static List<TREntities> RemoveAliases(IEnumerable<TREntities> entities)
+    public static List<TR1Type> RemoveAliases(IEnumerable<TR1Type> entities)
     {
-        List<TREntities> ents = new();
-        foreach (TREntities ent in entities)
+        List<TR1Type> ents = new();
+        foreach (TR1Type ent in entities)
         {
-            TREntities normalisedEnt = TranslateEntityAlias(ent);
+            TR1Type normalisedEnt = TranslateEntityAlias(ent);
             if (!ents.Contains(normalisedEnt))
             {
                 ents.Add(normalisedEnt);
@@ -100,186 +100,186 @@ public static class TR1EntityUtilities
         return ents;
     }
 
-    public static List<TREntities> GetListOfKeyTypes()
+    public static List<TR1Type> GetListOfKeyTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.Key1_S_P,
-            TREntities.Key2_S_P,
-            TREntities.Key3_S_P,
-            TREntities.Key4_S_P
+            TR1Type.Key1_S_P,
+            TR1Type.Key2_S_P,
+            TR1Type.Key3_S_P,
+            TR1Type.Key4_S_P
         };
     }
 
-    public static List<TREntities> GetListOfPuzzleTypes()
+    public static List<TR1Type> GetListOfPuzzleTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.Puzzle1_S_P,
-            TREntities.Puzzle2_S_P,
-            TREntities.Puzzle3_S_P,
-            TREntities.Puzzle4_S_P
+            TR1Type.Puzzle1_S_P,
+            TR1Type.Puzzle2_S_P,
+            TR1Type.Puzzle3_S_P,
+            TR1Type.Puzzle4_S_P
         };
     }
 
-    public static List<TREntities> GetListOfQuestTypes()
+    public static List<TR1Type> GetListOfQuestTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.Quest1_S_P,
-            TREntities.Quest2_S_P
+            TR1Type.Quest1_S_P,
+            TR1Type.Quest2_S_P
         };
     }
 
-    public static List<TREntities> GetListOfLeadTypes()
+    public static List<TR1Type> GetListOfLeadTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.LeadBar_S_P
+            TR1Type.LeadBar_S_P
         };
     }
 
-    public static List<TREntities> GetListOfKeyItemTypes()
+    public static List<TR1Type> GetListOfKeyItemTypes()
     {
         return GetListOfKeyTypes().Concat(GetListOfPuzzleTypes()).Concat(GetListOfQuestTypes()).Concat(GetListOfLeadTypes()).ToList();
     }
 
-    public static Dictionary<TREntities, TREntities> GetKeyItemMap()
+    public static Dictionary<TR1Type, TR1Type> GetKeyItemMap()
     {
         // Maps pickups to inventory models
-        return new Dictionary<TREntities, TREntities>
+        return new Dictionary<TR1Type, TR1Type>
         {
-            [TREntities.Key1_S_P] = TREntities.Key1_M_H,
-            [TREntities.Key2_S_P] = TREntities.Key2_M_H,
-            [TREntities.Key3_S_P] = TREntities.Key3_M_H,
-            [TREntities.Key4_S_P] = TREntities.Key4_M_H,
-            [TREntities.Puzzle1_S_P] = TREntities.Puzzle1_M_H,
-            [TREntities.Puzzle2_S_P] = TREntities.Puzzle2_M_H,
-            [TREntities.Puzzle3_S_P] = TREntities.Puzzle3_M_H,
-            [TREntities.Puzzle4_S_P] = TREntities.Puzzle4_M_H,
-            [TREntities.Quest1_S_P] = TREntities.Quest1_M_H,
-            [TREntities.Quest2_S_P] = TREntities.Quest2_M_H,
-            [TREntities.LeadBar_S_P] = TREntities.LeadBar_M_H,
-            [TREntities.ScionPiece1_S_P] = TREntities.ScionPiece_M_H,
-            [TREntities.ScionPiece2_S_P] = TREntities.ScionPiece_M_H,
+            [TR1Type.Key1_S_P] = TR1Type.Key1_M_H,
+            [TR1Type.Key2_S_P] = TR1Type.Key2_M_H,
+            [TR1Type.Key3_S_P] = TR1Type.Key3_M_H,
+            [TR1Type.Key4_S_P] = TR1Type.Key4_M_H,
+            [TR1Type.Puzzle1_S_P] = TR1Type.Puzzle1_M_H,
+            [TR1Type.Puzzle2_S_P] = TR1Type.Puzzle2_M_H,
+            [TR1Type.Puzzle3_S_P] = TR1Type.Puzzle3_M_H,
+            [TR1Type.Puzzle4_S_P] = TR1Type.Puzzle4_M_H,
+            [TR1Type.Quest1_S_P] = TR1Type.Quest1_M_H,
+            [TR1Type.Quest2_S_P] = TR1Type.Quest2_M_H,
+            [TR1Type.LeadBar_S_P] = TR1Type.LeadBar_M_H,
+            [TR1Type.ScionPiece1_S_P] = TR1Type.ScionPiece_M_H,
+            [TR1Type.ScionPiece2_S_P] = TR1Type.ScionPiece_M_H,
         };
     }
 
-    public static bool IsKeyType(TREntities entity)
+    public static bool IsKeyType(TR1Type entity)
     {
         return GetListOfKeyTypes().Contains(entity);
     }
 
-    public static bool IsPuzzleType(TREntities entity)
+    public static bool IsPuzzleType(TR1Type entity)
     {
         return GetListOfPuzzleTypes().Contains(entity);
     }
 
-    public static bool IsQuestType(TREntities entity)
+    public static bool IsQuestType(TR1Type entity)
     {
         return GetListOfQuestTypes().Contains(entity);
     }
 
-    public static bool IsKeyItemType(TREntities entity)
+    public static bool IsKeyItemType(TR1Type entity)
     {
         return GetListOfKeyItemTypes().Contains(entity);
     }
 
-    public static bool IsTrapdoor(TREntities entity)
+    public static bool IsTrapdoor(TR1Type entity)
     {
         return GetTrapdoorTypes().Contains(entity);
     }
 
-    public static bool IsBridge(TREntities entity)
+    public static bool IsBridge(TR1Type entity)
     {
         return GetBridgeTypes().Contains(entity);
     }
 
-    public static List<TREntities> GetTrapdoorTypes()
+    public static List<TR1Type> GetTrapdoorTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.Trapdoor1, TREntities.Trapdoor2, TREntities.Trapdoor3
+            TR1Type.Trapdoor1, TR1Type.Trapdoor2, TR1Type.Trapdoor3
         };
     }
 
-    public static List<TREntities> GetBridgeTypes()
+    public static List<TR1Type> GetBridgeTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.BridgeFlat, TREntities.BridgeTilt1, TREntities.BridgeTilt2
+            TR1Type.BridgeFlat, TR1Type.BridgeTilt1, TR1Type.BridgeTilt2
         };
     }
 
-    public static List<TREntities> GetStandardPickupTypes()
+    public static List<TR1Type> GetStandardPickupTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.Pistols_S_P,
-            TREntities.Shotgun_S_P,
-            TREntities.Magnums_S_P,
-            TREntities.Uzis_S_P,
-            TREntities.PistolAmmo_S_P,
-            TREntities.ShotgunAmmo_S_P,
-            TREntities.MagnumAmmo_S_P,
-            TREntities.UziAmmo_S_P,
-            TREntities.SmallMed_S_P,
-            TREntities.LargeMed_S_P
+            TR1Type.Pistols_S_P,
+            TR1Type.Shotgun_S_P,
+            TR1Type.Magnums_S_P,
+            TR1Type.Uzis_S_P,
+            TR1Type.PistolAmmo_S_P,
+            TR1Type.ShotgunAmmo_S_P,
+            TR1Type.MagnumAmmo_S_P,
+            TR1Type.UziAmmo_S_P,
+            TR1Type.SmallMed_S_P,
+            TR1Type.LargeMed_S_P
         };
     }
 
-    public static bool IsStandardPickupType(TREntities entity)
+    public static bool IsStandardPickupType(TR1Type entity)
     {
         return GetStandardPickupTypes().Contains(entity);
     }
 
-    public static bool IsWeaponPickup(TREntities entity)
+    public static bool IsWeaponPickup(TR1Type entity)
     {
         return GetWeaponPickups().Contains(entity);
     }
 
-    public static List<TREntities> GetWeaponPickups()
+    public static List<TR1Type> GetWeaponPickups()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.Pistols_S_P,
-            TREntities.Shotgun_S_P,
-            TREntities.Magnums_S_P,
-            TREntities.Uzis_S_P
+            TR1Type.Pistols_S_P,
+            TR1Type.Shotgun_S_P,
+            TR1Type.Magnums_S_P,
+            TR1Type.Uzis_S_P
         };
     }
 
-    public static bool IsAmmoPickup(TREntities entity)
+    public static bool IsAmmoPickup(TR1Type entity)
     {
-        return (entity == TREntities.PistolAmmo_S_P)
-            || (entity == TREntities.ShotgunAmmo_S_P)
-            || (entity == TREntities.MagnumAmmo_S_P)
-            || (entity == TREntities.UziAmmo_S_P);
+        return (entity == TR1Type.PistolAmmo_S_P)
+            || (entity == TR1Type.ShotgunAmmo_S_P)
+            || (entity == TR1Type.MagnumAmmo_S_P)
+            || (entity == TR1Type.UziAmmo_S_P);
     }
 
-    public static TREntities GetWeaponAmmo(TREntities weapon)
+    public static TR1Type GetWeaponAmmo(TR1Type weapon)
     {
         return weapon switch
         {
-            TREntities.Shotgun_S_P => TREntities.ShotgunAmmo_S_P,
-            TREntities.Magnums_S_P => TREntities.MagnumAmmo_S_P,
-            TREntities.Uzis_S_P => TREntities.UziAmmo_S_P,
-            _ => TREntities.PistolAmmo_S_P,
+            TR1Type.Shotgun_S_P => TR1Type.ShotgunAmmo_S_P,
+            TR1Type.Magnums_S_P => TR1Type.MagnumAmmo_S_P,
+            TR1Type.Uzis_S_P => TR1Type.UziAmmo_S_P,
+            _ => TR1Type.PistolAmmo_S_P,
         };
     }
 
-    public static bool IsCrystalPickup(TREntities entity)
+    public static bool IsCrystalPickup(TR1Type entity)
     {
-        return entity == TREntities.SavegameCrystal_P;
+        return entity == TR1Type.SavegameCrystal_P;
     }
 
-    public static bool IsUtilityPickup(TREntities entity)
+    public static bool IsUtilityPickup(TR1Type entity)
     {
-        return (entity == TREntities.SmallMed_S_P)
-            || (entity == TREntities.LargeMed_S_P);
+        return (entity == TR1Type.SmallMed_S_P)
+            || (entity == TR1Type.LargeMed_S_P);
     }
 
-    public static bool IsAnyPickupType(TREntities entity)
+    public static bool IsAnyPickupType(TR1Type entity)
     {
         return IsUtilityPickup(entity)
             || IsAmmoPickup(entity)
@@ -287,101 +287,101 @@ public static class TR1EntityUtilities
             || IsKeyItemType(entity);
     }
 
-    public static List<TREntities> GetCandidateCrossLevelEnemies()
+    public static List<TR1Type> GetCandidateCrossLevelEnemies()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.Adam,
-            TREntities.AtlanteanEgg,
-            TREntities.BandagedAtlantean,
-            TREntities.BandagedFlyer,
-            TREntities.Bat,
-            TREntities.Bear,
-            TREntities.Centaur,
-            TREntities.CentaurStatue,
-            TREntities.CowboyOG,
-            TREntities.CowboyHeadless,
-            TREntities.CrocodileLand,
-            TREntities.CrocodileWater,                
-            TREntities.Gorilla,
-            TREntities.Kold,
-            TREntities.Larson,
-            TREntities.Lion,
-            TREntities.Lioness,
-            TREntities.MeatyAtlantean,
-            TREntities.MeatyFlyer,
-            TREntities.Natla,
-            TREntities.Panther,
-            TREntities.Pierre,
-            TREntities.Raptor,
-            TREntities.RatLand,
-            TREntities.RatWater,
-            TREntities.SkateboardKid,
-            TREntities.TRex,
-            TREntities.Wolf
+            TR1Type.Adam,
+            TR1Type.AtlanteanEgg,
+            TR1Type.BandagedAtlantean,
+            TR1Type.BandagedFlyer,
+            TR1Type.Bat,
+            TR1Type.Bear,
+            TR1Type.Centaur,
+            TR1Type.CentaurStatue,
+            TR1Type.CowboyOG,
+            TR1Type.CowboyHeadless,
+            TR1Type.CrocodileLand,
+            TR1Type.CrocodileWater,                
+            TR1Type.Gorilla,
+            TR1Type.Kold,
+            TR1Type.Larson,
+            TR1Type.Lion,
+            TR1Type.Lioness,
+            TR1Type.MeatyAtlantean,
+            TR1Type.MeatyFlyer,
+            TR1Type.Natla,
+            TR1Type.Panther,
+            TR1Type.Pierre,
+            TR1Type.Raptor,
+            TR1Type.RatLand,
+            TR1Type.RatWater,
+            TR1Type.SkateboardKid,
+            TR1Type.TRex,
+            TR1Type.Wolf
         };
     }
 
-    public static bool IsEnemyType(TREntities entity)
+    public static bool IsEnemyType(TR1Type entity)
     {
         return GetFullListOfEnemies().Contains(entity);
     }
 
-    public static List<TREntities> GetFullListOfEnemies()
+    public static List<TR1Type> GetFullListOfEnemies()
     {
-        List<TREntities> enemies = new()
+        List<TR1Type> enemies = new()
         {
             // This ensures aliases are covered
-            TREntities.FlyingAtlantean, TREntities.NonShootingAtlantean_N, TREntities.ShootingAtlantean_N, TREntities.Cowboy
+            TR1Type.FlyingAtlantean, TR1Type.NonShootingAtlantean_N, TR1Type.ShootingAtlantean_N, TR1Type.Cowboy
         };
 
         enemies.AddRange(GetCandidateCrossLevelEnemies());
         return enemies;
     }
 
-    public static List<TREntities> GetWaterEnemies()
+    public static List<TR1Type> GetWaterEnemies()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.CrocodileWater,
-            TREntities.RatWater
+            TR1Type.CrocodileWater,
+            TR1Type.RatWater
         };
     }
 
-    public static Dictionary<TREntities, TREntities> GetWaterEnemyLandCreatures()
+    public static Dictionary<TR1Type, TR1Type> GetWaterEnemyLandCreatures()
     {
-        return new Dictionary<TREntities, TREntities>
+        return new Dictionary<TR1Type, TR1Type>
         {
-            [TREntities.CrocodileWater] = TREntities.CrocodileLand,
-            [TREntities.RatWater] = TREntities.RatLand
+            [TR1Type.CrocodileWater] = TR1Type.CrocodileLand,
+            [TR1Type.RatWater] = TR1Type.RatLand
         };
     }
 
-    public static TREntities GetWaterEnemyLandCreature(TREntities entity)
+    public static TR1Type GetWaterEnemyLandCreature(TR1Type entity)
     {
-        Dictionary<TREntities, TREntities> entities = GetWaterEnemyLandCreatures();
+        Dictionary<TR1Type, TR1Type> entities = GetWaterEnemyLandCreatures();
         return entities.ContainsKey(entity) ? entities[entity] : entity;
     }
 
-    public static bool IsWaterCreature(TREntities entity)
+    public static bool IsWaterCreature(TR1Type entity)
     {
         return GetWaterEnemies().Contains(entity);
     }
 
-    public static bool IsWaterLandCreatureEquivalent(TREntities entity)
+    public static bool IsWaterLandCreatureEquivalent(TR1Type entity)
     {
         return GetWaterEnemyLandCreatures().ContainsValue(entity);
     }
 
-    public static List<TREntities> GetWaterLandCreatures()
+    public static List<TR1Type> GetWaterLandCreatures()
     {
         return GetWaterEnemyLandCreatures().Values.ToList();
     }
 
-    public static List<TREntities> FilterWaterEnemies(List<TREntities> entities)
+    public static List<TR1Type> FilterWaterEnemies(List<TR1Type> entities)
     {
-        List<TREntities> waterEntities = new();
-        foreach (TREntities entity in entities)
+        List<TR1Type> waterEntities = new();
+        foreach (TR1Type entity in entities)
         {
             if (IsWaterCreature(entity))
             {
@@ -391,86 +391,86 @@ public static class TR1EntityUtilities
         return waterEntities;
     }
 
-    public static List<TREntities> GetAtlanteanEggEnemies()
+    public static List<TR1Type> GetAtlanteanEggEnemies()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.BandagedAtlantean,
-            TREntities.BandagedFlyer,
-            TREntities.Centaur,
-            TREntities.MeatyAtlantean,
-            TREntities.MeatyFlyer,
-            TREntities.ShootingAtlantean_N
+            TR1Type.BandagedAtlantean,
+            TR1Type.BandagedFlyer,
+            TR1Type.Centaur,
+            TR1Type.MeatyAtlantean,
+            TR1Type.MeatyFlyer,
+            TR1Type.ShootingAtlantean_N
         };
     }
 
-    public static List<TREntities> GetSwitchTypes()
+    public static List<TR1Type> GetSwitchTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.WallSwitch,
-            TREntities.UnderwaterSwitch
+            TR1Type.WallSwitch,
+            TR1Type.UnderwaterSwitch
         };
     }
 
-    public static bool IsSwitchType(TREntities entity)
+    public static bool IsSwitchType(TR1Type entity)
     {
         return GetSwitchTypes().Contains(entity);
     }
 
-    public static List<TREntities> GetKeyholeTypes()
+    public static List<TR1Type> GetKeyholeTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.Keyhole1,
-            TREntities.Keyhole2,
-            TREntities.Keyhole3,
-            TREntities.Keyhole4
+            TR1Type.Keyhole1,
+            TR1Type.Keyhole2,
+            TR1Type.Keyhole3,
+            TR1Type.Keyhole4
         };
     }
 
-    public static bool IsKeyholeType(TREntities entity)
+    public static bool IsKeyholeType(TR1Type entity)
     {
         return GetKeyholeTypes().Contains(entity);
     }
 
-    public static List<TREntities> GetSlotTypes()
+    public static List<TR1Type> GetSlotTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.PuzzleHole1,
-            TREntities.PuzzleHole2,
-            TREntities.PuzzleHole3,
-            TREntities.PuzzleHole4,
-            TREntities.PuzzleDone1,
-            TREntities.PuzzleDone2,
-            TREntities.PuzzleDone3,
-            TREntities.PuzzleDone4
+            TR1Type.PuzzleHole1,
+            TR1Type.PuzzleHole2,
+            TR1Type.PuzzleHole3,
+            TR1Type.PuzzleHole4,
+            TR1Type.PuzzleDone1,
+            TR1Type.PuzzleDone2,
+            TR1Type.PuzzleDone3,
+            TR1Type.PuzzleDone4
         };
     }
 
-    public static bool IsSlotType(TREntities entity)
+    public static bool IsSlotType(TR1Type entity)
     {
         return GetSlotTypes().Contains(entity);
     }
 
-    public static List<TREntities> GetPushblockTypes()
+    public static List<TR1Type> GetPushblockTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.PushBlock1,
-            TREntities.PushBlock2,
-            TREntities.PushBlock3,
-            TREntities.PushBlock4
+            TR1Type.PushBlock1,
+            TR1Type.PushBlock2,
+            TR1Type.PushBlock3,
+            TR1Type.PushBlock4
         };
     }
 
-    public static bool IsPushblockType(TREntities entity)
+    public static bool IsPushblockType(TR1Type entity)
     {
         return GetPushblockTypes().Contains(entity);
     }
 
-    public static bool CanSharePickupSpace(TREntities entity)
+    public static bool CanSharePickupSpace(TR1Type entity)
     {
         // Can we place a standard pickup on the same tile as this entity?
         return IsStandardPickupType(entity)
@@ -479,91 +479,91 @@ public static class TR1EntityUtilities
             || IsKeyholeType(entity)
             || IsSlotType(entity)
             || IsEnemyType(entity)
-            || entity == TREntities.CameraTarget_N
-            || entity == TREntities.Earthquake_N
-            || entity == TREntities.Lara;
+            || entity == TR1Type.CameraTarget_N
+            || entity == TR1Type.Earthquake_N
+            || entity == TR1Type.Lara;
     }
 
-    public static List<TREntities> DoorTypes()
+    public static List<TR1Type> DoorTypes()
     {
-        return new List<TREntities>
+        return new List<TR1Type>
         {
-            TREntities.Door1, TREntities.Door2, TREntities.Door3,
-            TREntities.Door4, TREntities.Door5, TREntities.Door6,
-            TREntities.Door7, TREntities.Door8
+            TR1Type.Door1, TR1Type.Door2, TR1Type.Door3,
+            TR1Type.Door4, TR1Type.Door5, TR1Type.Door6,
+            TR1Type.Door7, TR1Type.Door8
         };
     }
 
-    public static bool IsDoorType(TREntities entity)
+    public static bool IsDoorType(TR1Type entity)
     {
         return DoorTypes().Contains(entity);
     }
 
-    public static Dictionary<TREntities, TREntities> GetSecretModels()
+    public static Dictionary<TR1Type, TR1Type> GetSecretModels()
     {
-        return new Dictionary<TREntities, TREntities>
+        return new Dictionary<TR1Type, TR1Type>
         {
-            [TREntities.SecretAnkh_M_H] = TREntities.ScionPiece4_S_P,
-            [TREntities.SecretGoldBar_M_H] = TREntities.ScionPiece4_S_P,
-            [TREntities.SecretGoldIdol_M_H] = TREntities.ScionPiece4_S_P,
-            [TREntities.SecretLeadBar_M_H] = TREntities.ScionPiece4_S_P,
-            [TREntities.SecretScion_M_H] = TREntities.ScionPiece4_S_P
+            [TR1Type.SecretAnkh_M_H] = TR1Type.ScionPiece4_S_P,
+            [TR1Type.SecretGoldBar_M_H] = TR1Type.ScionPiece4_S_P,
+            [TR1Type.SecretGoldIdol_M_H] = TR1Type.ScionPiece4_S_P,
+            [TR1Type.SecretLeadBar_M_H] = TR1Type.ScionPiece4_S_P,
+            [TR1Type.SecretScion_M_H] = TR1Type.ScionPiece4_S_P
         };
     }
 
-    public static Dictionary<TREntities, TREntities> GetSecretReplacements()
+    public static Dictionary<TR1Type, TR1Type> GetSecretReplacements()
     {
         // Note Key1 is omitted because of Pierre
-        return new Dictionary<TREntities, TREntities>
+        return new Dictionary<TR1Type, TR1Type>
         {
-            [TREntities.Puzzle1_M_H] = TREntities.Puzzle1_S_P,
-            [TREntities.Puzzle2_M_H] = TREntities.Puzzle2_S_P,
-            [TREntities.Puzzle3_M_H] = TREntities.Puzzle3_S_P,
-            [TREntities.Puzzle4_M_H] = TREntities.Puzzle4_S_P,
-            [TREntities.Key2_M_H] = TREntities.Key2_S_P,
-            [TREntities.Key3_M_H] = TREntities.Key3_S_P,
-            [TREntities.Key4_M_H] = TREntities.Key4_S_P,
-            [TREntities.Quest1_M_H] = TREntities.Quest1_S_P,
-            [TREntities.Quest2_M_H] = TREntities.Quest2_S_P
+            [TR1Type.Puzzle1_M_H] = TR1Type.Puzzle1_S_P,
+            [TR1Type.Puzzle2_M_H] = TR1Type.Puzzle2_S_P,
+            [TR1Type.Puzzle3_M_H] = TR1Type.Puzzle3_S_P,
+            [TR1Type.Puzzle4_M_H] = TR1Type.Puzzle4_S_P,
+            [TR1Type.Key2_M_H] = TR1Type.Key2_S_P,
+            [TR1Type.Key3_M_H] = TR1Type.Key3_S_P,
+            [TR1Type.Key4_M_H] = TR1Type.Key4_S_P,
+            [TR1Type.Quest1_M_H] = TR1Type.Quest1_S_P,
+            [TR1Type.Quest2_M_H] = TR1Type.Quest2_S_P
         };
     }
 
-    public static TREntities GetBestLevelSecretModel(string lvl)
+    public static TR1Type GetBestLevelSecretModel(string lvl)
     {
         return _levelSecretModels.ContainsKey(lvl) ? _levelSecretModels[lvl] : GetSecretModels().Keys.FirstOrDefault();
     }
 
-    private static readonly Dictionary<string, TREntities> _levelSecretModels = new()
+    private static readonly Dictionary<string, TR1Type> _levelSecretModels = new()
     {
         [TR1LevelNames.CAVES]
-            = TREntities.SecretScion_M_H,
+            = TR1Type.SecretScion_M_H,
         [TR1LevelNames.VILCABAMBA]
-            = TREntities.SecretGoldBar_M_H,
+            = TR1Type.SecretGoldBar_M_H,
         [TR1LevelNames.VALLEY]
-            = TREntities.SecretGoldIdol_M_H,
+            = TR1Type.SecretGoldIdol_M_H,
         [TR1LevelNames.QUALOPEC]
-            = TREntities.SecretGoldIdol_M_H,
+            = TR1Type.SecretGoldIdol_M_H,
         [TR1LevelNames.FOLLY]
-            = TREntities.SecretLeadBar_M_H,
+            = TR1Type.SecretLeadBar_M_H,
         [TR1LevelNames.COLOSSEUM]
-            = TREntities.SecretLeadBar_M_H,
+            = TR1Type.SecretLeadBar_M_H,
         [TR1LevelNames.MIDAS]
-            = TREntities.SecretAnkh_M_H,
+            = TR1Type.SecretAnkh_M_H,
         [TR1LevelNames.CISTERN]
-            = TREntities.SecretScion_M_H,
+            = TR1Type.SecretScion_M_H,
         [TR1LevelNames.TIHOCAN]
-            = TREntities.SecretGoldIdol_M_H,
+            = TR1Type.SecretGoldIdol_M_H,
         [TR1LevelNames.KHAMOON]
-            = TREntities.SecretLeadBar_M_H,
+            = TR1Type.SecretLeadBar_M_H,
         [TR1LevelNames.OBELISK]
-            = TREntities.SecretLeadBar_M_H,
+            = TR1Type.SecretLeadBar_M_H,
         [TR1LevelNames.SANCTUARY]
-            = TREntities.SecretAnkh_M_H,
+            = TR1Type.SecretAnkh_M_H,
         [TR1LevelNames.MINES]
-            = TREntities.SecretGoldBar_M_H,
+            = TR1Type.SecretGoldBar_M_H,
         [TR1LevelNames.ATLANTIS]
-            = TREntities.SecretGoldIdol_M_H,
+            = TR1Type.SecretGoldIdol_M_H,
         [TR1LevelNames.PYRAMID]
-            = TREntities.SecretGoldIdol_M_H
+            = TR1Type.SecretGoldIdol_M_H
     };
 }

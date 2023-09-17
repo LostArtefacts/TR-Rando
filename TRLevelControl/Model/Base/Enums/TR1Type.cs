@@ -7,7 +7,7 @@
 //_N are nullmeshes (no render/collision)
 //_H are helper entities (not placed)
 //_U are unused entities
-public enum TREntities
+public enum TR1Type
 {
     Lara                   = 0,
     LaraPistolAnim_H       = 1,

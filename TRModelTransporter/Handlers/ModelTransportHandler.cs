@@ -6,7 +6,7 @@ namespace TRModelTransporter.Handlers;
 
 public class ModelTransportHandler
 {
-    public static void Export(TR1Level level, TR1ModelDefinition definition, TREntities entity)
+    public static void Export(TR1Level level, TR1ModelDefinition definition, TR1Type entity)
     {
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
@@ -27,7 +27,7 @@ public class ModelTransportHandler
         return model ?? throw new ArgumentException($"The model for {entityID} could not be found.");
     }
 
-    public static void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TREntities, TREntities> aliasPriority, IEnumerable<TREntities> laraDependants)
+    public static void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TR1Type, TR1Type> aliasPriority, IEnumerable<TR1Type> laraDependants)
     {
         List<TRModel> levelModels = level.Models.ToList();
         int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
@@ -51,13 +51,13 @@ public class ModelTransportHandler
 
         if (laraDependants != null)
         {
-            if (definition.Entity == TREntities.Lara)
+            if (definition.Entity == TR1Type.Lara)
             {
                 ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
             }
-            else if (laraDependants.Contains((TREntities)definition.Model.ID))
+            else if (laraDependants.Contains((TR1Type)definition.Model.ID))
             {
-                ReplaceLaraDependants(levelModels, levelModels.Find(m => m.ID == (uint)TREntities.Lara), new short[] { (short)definition.Model.ID });
+                ReplaceLaraDependants(levelModels, levelModels.Find(m => m.ID == (uint)TR1Type.Lara), new short[] { (short)definition.Model.ID });
             }
         }
     }

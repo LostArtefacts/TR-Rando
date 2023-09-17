@@ -8,19 +8,19 @@ using TRModelTransporter.Model.Definitions;
 
 namespace TRModelTransporter.Transport;
 
-public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR1ModelDefinition>
+public class TR1ModelExporter : AbstractTRModelExporter<TR1Type, TR1Level, TR1ModelDefinition>
 {
     public TR1ModelExporter()
     {
         Data = new TR1DefaultDataProvider();
     }
 
-    protected override AbstractTextureExportHandler<TREntities, TR1Level, TR1ModelDefinition> CreateTextureHandler()
+    protected override AbstractTextureExportHandler<TR1Type, TR1Level, TR1ModelDefinition> CreateTextureHandler()
     {
         return new TR1TextureExportHandler();
     }
 
-    protected override TR1ModelDefinition CreateModelDefinition(TR1Level level, TREntities modelEntity)
+    protected override TR1ModelDefinition CreateModelDefinition(TR1Level level, TR1Type modelEntity)
     {
         TR1ModelDefinition definition = new()
         {
@@ -43,24 +43,24 @@ public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR
         return definition;
     }
 
-    protected override void PreDefinitionCreation(TR1Level level, TREntities modelEntity)
+    protected override void PreDefinitionCreation(TR1Level level, TR1Type modelEntity)
     {
         switch (modelEntity)
         {
-            case TREntities.Pierre:
+            case TR1Type.Pierre:
                 AmendPierreGunshot(level);
                 AmendPierreDeath(level);
                 break;
-            case TREntities.Larson:
+            case TR1Type.Larson:
                 AmendLarsonDeath(level);
                 break;
-            case TREntities.SkateboardKid:
+            case TR1Type.SkateboardKid:
                 AmendSkaterBoyDeath(level);
                 break;
-            case TREntities.Natla:
+            case TR1Type.Natla:
                 AmendNatlaDeath(level);
                 break;
-            case TREntities.MovingBlock:
+            case TR1Type.MovingBlock:
                 AddMovingBlockSFX(level);
                 break;
         }
@@ -70,7 +70,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR
     {
         switch (definition.Alias)
         {
-            case TREntities.Kold:
+            case TR1Type.Kold:
                 if (definition.Colours.ContainsKey(123))
                 {
                     // Incorrect orange colouring on head and hands
@@ -79,7 +79,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR
                     definition.Colours[123].Blue = 4;
                 }
                 break;
-            case TREntities.SkateboardKid:
+            case TR1Type.SkateboardKid:
                 if (definition.Colours.ContainsKey(182))
                 {
                     // Incorrect yellow colouring on his arm
@@ -88,7 +88,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR
                     definition.Colours[182].Blue = 22;
                 }
                 break;
-            case TREntities.CowboyHeadless:
+            case TR1Type.CowboyHeadless:
                 AmendDXtre3DTextures(definition);
                 break;
             default:
@@ -98,7 +98,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR
 
     public static void AmendPierreGunshot(TR1Level level)
     {
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.Pierre);
+        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.Pierre);
         // Get his shooting animation
         TRAnimation anim = level.Animations[model.Animation + 10];
         List<TRAnimCommand> cmds = level.AnimCommands.ToList();
@@ -116,7 +116,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR
 
     public static void AmendPierreDeath(TR1Level level)
     {
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.Pierre);
+        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.Pierre);
         // Get his death animation
         TRAnimation anim = level.Animations[model.Animation + 12];
         anim.NumAnimCommands++;
@@ -136,7 +136,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR
 
     public static void AmendLarsonDeath(TR1Level level)
     {
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.Larson);
+        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.Larson);
         // Get his death animation
         TRAnimation anim = level.Animations[model.Animation + 15];
         anim.NumAnimCommands++;
@@ -156,7 +156,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR
 
     public static void AmendSkaterBoyDeath(TR1Level level)
     {
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.SkateboardKid);
+        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.SkateboardKid);
         // Get his death animation
         TRAnimation anim = level.Animations[model.Animation + 13];
         // Play the death sound on the 2nd frame (doesn't work on the 1st, which is OG).
@@ -165,7 +165,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR
 
     public static void AmendNatlaDeath(TR1Level level)
     {
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.Natla);
+        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.Natla);
         // Get her death animation
         TRAnimation anim = level.Animations[model.Animation + 13];
         anim.NumAnimCommands++;
@@ -194,7 +194,7 @@ public class TR1ModelExporter : AbstractTRModelExporter<TREntities, TR1Level, TR
             SoundUtilities.ImportLevelSound(level, vilcabamba, new short[] { 162 });
         }
 
-        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TREntities.MovingBlock);
+        TRModel model = Array.Find(level.Models, m => m.ID == (uint)TR1Type.MovingBlock);
         List<TRAnimCommand> cmds = level.AnimCommands.ToList();
         for (int i = 2; i < 4; i++)
         {

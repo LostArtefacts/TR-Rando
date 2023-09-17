@@ -14,7 +14,7 @@ public class EMMirrorModelFunction : BaseEMFunction
         List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
-            TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TREntities)modelID);
+            TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID);
             if (modelMeshes == null || modelMeshes.Length > 1)
             {
                 throw new NotSupportedException("Only models with single meshes can be mirrored.");
