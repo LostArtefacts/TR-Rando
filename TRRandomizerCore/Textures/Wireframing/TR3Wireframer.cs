@@ -37,10 +37,10 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
     protected override bool IsInteractableModel(TRModel model)
     {
         TR3Type type = (TR3Type)model.ID;
-        return TR3EntityUtilities.IsSwitchType(type)
-            || TR3EntityUtilities.IsKeyholeType(type)
-            || TR3EntityUtilities.IsSlotType(type)
-            || TR3EntityUtilities.IsPushblockType(type);
+        return TR3TypeUtilities.IsSwitchType(type)
+            || TR3TypeUtilities.IsKeyholeType(type)
+            || TR3TypeUtilities.IsSlotType(type)
+            || TR3TypeUtilities.IsPushblockType(type);
     }
 
     protected override int GetBlackPaletteIndex(TR3Level level)
@@ -131,7 +131,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
     protected override bool IsEnemyModel(TRModel model)
     {
         TR3Type id = (TR3Type)model.ID;
-        return TR3EntityUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
+        return TR3TypeUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
     }
 
     protected override bool IsSkybox(TRModel model)
@@ -142,7 +142,7 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
     protected override bool ShouldSolidifyModel(TRModel model)
     {
         TR3Type type = (TR3Type)model.ID;
-        return TR3EntityUtilities.IsAnyPickupType(type) || TR3EntityUtilities.IsCrystalPickup(type);
+        return TR3TypeUtilities.IsAnyPickupType(type) || TR3TypeUtilities.IsCrystalPickup(type);
     }
 
     protected override void ResetUnusedTextures(TR3Level level)

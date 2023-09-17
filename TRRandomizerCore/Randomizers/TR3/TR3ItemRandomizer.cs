@@ -161,7 +161,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     public void RandomizeItemTypes(TR3CombinedLevel level)
     {
-        List<TR3Type> stdItemTypes = TR3EntityUtilities.GetStandardPickupTypes();
+        List<TR3Type> stdItemTypes = TR3TypeUtilities.GetStandardPickupTypes();
 
         for (int i = 0; i < level.Data.NumEntities; i++)
         {
@@ -176,21 +176,21 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             // If this is an unarmed level's pistols, make sure they're replaced with another weapon.
             // Similar case for the assault course, so that Lara can still shoot Winnie.
             if ((ent == _unarmedLevelPistols && Settings.GiveUnarmedItems)
-                || (level.IsAssault && TR3EntityUtilities.IsWeaponPickup(currentType)))
+                || (level.IsAssault && TR3TypeUtilities.IsWeaponPickup(currentType)))
             {
                 do
                 {
                     ent.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
                 }
-                while (!TR3EntityUtilities.IsWeaponPickup((TR3Type)ent.TypeID));
+                while (!TR3TypeUtilities.IsWeaponPickup((TR3Type)ent.TypeID));
 
                 if (level.IsAssault)
                 {
                     // Add some extra ammo too
-                    level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3EntityUtilities.GetWeaponAmmo((TR3Type)ent.TypeID)), 20);
+                    level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3TypeUtilities.GetWeaponAmmo((TR3Type)ent.TypeID)), 20);
                 }
             }
-            else if (TR3EntityUtilities.IsStandardPickupType(currentType))
+            else if (TR3TypeUtilities.IsStandardPickupType(currentType))
             {
                 ent.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
             }
@@ -221,13 +221,13 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             }
 
             TR3Type eType = (TR3Type)ent.TypeID;
-            if (TR3EntityUtilities.IsStandardPickupType(eType) || TR3EntityUtilities.IsCrystalPickup(eType))
+            if (TR3TypeUtilities.IsStandardPickupType(eType) || TR3TypeUtilities.IsCrystalPickup(eType))
             {
                 if (!oneOfEachType.Add(eType))
                 {
                     ItemUtilities.HideEntity(ent);
                     ItemFactory.FreeItem(level.Name, i);
-                    if (TR3EntityUtilities.IsCrystalPickup(eType))
+                    if (TR3TypeUtilities.IsCrystalPickup(eType))
                     {
                         FDUtilities.RemoveEntityTriggers(level.Data, i, floorData);
                     }
@@ -257,7 +257,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
             TR2Entity ent = level.Data.Entities[i];
             // Move standard items only, excluding any unarmed level pistols, and reward items
-            if (TR3EntityUtilities.IsStandardPickupType((TR3Type)ent.TypeID) && ent != _unarmedLevelPistols)
+            if (TR3TypeUtilities.IsStandardPickupType((TR3Type)ent.TypeID) && ent != _unarmedLevelPistols)
             {
                 Location location = locations[_generator.Next(0, locations.Count)];
                 ent.X = location.X;
@@ -287,7 +287,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
         foreach (TR2Entity entity in level.Data.Entities)
         {
-            if (!TR3EntityUtilities.CanSharePickupSpace((TR3Type)entity.TypeID))
+            if (!TR3TypeUtilities.CanSharePickupSpace((TR3Type)entity.TypeID))
             {
                 exclusions.Add(new Location
                 {

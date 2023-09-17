@@ -78,7 +78,7 @@ public class TR3DefaultDataProvider : ITransportDataProvider<TR3Type>
 
     public TR3Type GetLevelAlias(string level, TR3Type entity)
     {
-        return TR3EntityUtilities.GetAliasForLevel(level, entity);
+        return TR3TypeUtilities.GetAliasForLevel(level, entity);
     }
 
     public bool IsAliasDuplicatePermitted(TR3Type entity)

@@ -125,7 +125,7 @@ public static class TR3EnemyUtilities
         if (dict.ContainsKey(lvlName))
         {
             // if the dictionaries contain the enemy, the enemy is NOT supported
-            return !dict[lvlName].Contains(TR3EntityUtilities.TranslateEntityAlias(entity));
+            return !dict[lvlName].Contains(TR3TypeUtilities.TranslateAlias(entity));
         }
         // all enemies are supported by default
         return true;
@@ -158,7 +158,7 @@ public static class TR3EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR3CombinedLevel level)
     {
-        TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR3EntityUtilities.IsEnemyType((TR3Type)e.TypeID));
+        TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR3TypeUtilities.IsEnemyType((TR3Type)e.TypeID));
         foreach (TR2Entity entityInstance in enemies)
         {
             List<TR2Entity> sharedItems = new(Array.FindAll
@@ -174,7 +174,7 @@ public static class TR3EnemyUtilities
                 // Are any entities that are sharing a location a droppable pickup?
                 foreach (TR2Entity ent in sharedItems)
                 {
-                    if (TR3EntityUtilities.IsAnyPickupType((TR3Type)ent.TypeID))
+                    if (TR3TypeUtilities.IsAnyPickupType((TR3Type)ent.TypeID))
                     {
                         return true;
                     }

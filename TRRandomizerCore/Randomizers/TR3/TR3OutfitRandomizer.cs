@@ -64,7 +64,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
 
     private static List<TR3Type> GetLaraTypes()
     {
-        List<TR3Type> allLaras = TR3EntityUtilities.GetLaraTypes();
+        List<TR3Type> allLaras = TR3TypeUtilities.GetLaraTypes();
         allLaras.Remove(TR3Type.LaraInvisible);
         return allLaras;
     }
@@ -220,7 +220,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
 
             List<TR3Type> laraImport = new();
             List<TR3Type> laraRemovals = new();
-            if (lara != TR3EntityUtilities.GetAliasForLevel(level.Name, TR3Type.Lara))
+            if (lara != TR3TypeUtilities.GetAliasForLevel(level.Name, TR3Type.Lara))
             {
                 laraImport.Add(lara);
                 laraRemovals.AddRange(_laraRemovals);

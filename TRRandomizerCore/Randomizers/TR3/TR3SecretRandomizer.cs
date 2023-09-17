@@ -227,7 +227,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             level.Data.Entities[doorIndex] = door;
 
             // If it's a trapdoor, we need to make a dummy trigger for it
-            if (TR3EntityUtilities.IsTrapdoor((TR3Type)door.TypeID))
+            if (TR3TypeUtilities.IsTrapdoor((TR3Type)door.TypeID))
             {
                 CreateTrapdoorTrigger(door, (ushort)doorIndex, level.Data);
             }
@@ -575,7 +575,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             // If we have a spare model slot, duplicate one of the artefacts into this so that
             // we can add a hint with the item name. Otherwise, just re-use a puzzle item.
             List<TRModel> models = level.Data.Models.ToList();
-            Dictionary<TR3Type, TR3Type> artefacts = TR3EntityUtilities.GetArtefactReplacements();
+            Dictionary<TR3Type, TR3Type> artefacts = TR3TypeUtilities.GetArtefactReplacements();
 
             TR3Type availablePickupType = default;
             TR3Type availableMenuType = default;
@@ -623,15 +623,15 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private static void SetPuzzleTypeName(TR3CombinedLevel level, TR3Type itemType, string name)
     {
-        if (TR3EntityUtilities.IsKeyType(itemType))
+        if (TR3TypeUtilities.IsKeyType(itemType))
         {
             level.Script.Keys[itemType - TR3Type.Key1_P] = name;
         }
-        else if (TR3EntityUtilities.IsPuzzleType(itemType))
+        else if (TR3TypeUtilities.IsPuzzleType(itemType))
         {
             level.Script.Puzzles[itemType - TR3Type.Puzzle1_P] = name;
         }
-        else if (TR3EntityUtilities.IsQuestType(itemType))
+        else if (TR3TypeUtilities.IsQuestType(itemType))
         {
             level.Script.Pickups[itemType - TR3Type.Quest1_P] = name;
         }
@@ -662,7 +662,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         foreach (TR2Entity otherEntity in level.Data.Entities)
         {
             TR3Type type = (TR3Type)otherEntity.TypeID;
-            if (secret.Location.Room == otherEntity.Room && (TR3EntityUtilities.IsTrapdoor(type) || TR3EntityUtilities.IsBridge(type)))
+            if (secret.Location.Room == otherEntity.Room && (TR3TypeUtilities.IsTrapdoor(type) || TR3TypeUtilities.IsBridge(type)))
             {
                 TRRoomSector otherSector = FDUtilities.GetRoomSector(otherEntity.X, otherEntity.Y, otherEntity.Z, otherEntity.Room, level.Data, floorData);
                 if (otherSector == sector)
@@ -842,8 +842,8 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     internal class SecretProcessor : AbstractProcessorThread<TR3SecretRandomizer>
     {
-        private static readonly Dictionary<TR3Type, TR3Type> _artefactPickups = TR3EntityUtilities.GetArtefactPickups();
-        private static readonly Dictionary<TR3Type, TR3Type> _artefactReplacements = TR3EntityUtilities.GetArtefactReplacements();
+        private static readonly Dictionary<TR3Type, TR3Type> _artefactPickups = TR3TypeUtilities.GetArtefactPickups();
+        private static readonly Dictionary<TR3Type, TR3Type> _artefactReplacements = TR3TypeUtilities.GetArtefactReplacements();
 
         // Move this to Gamestring Rando once implemented
         private static readonly Dictionary<TR3Type, string> _pickupNames = new()

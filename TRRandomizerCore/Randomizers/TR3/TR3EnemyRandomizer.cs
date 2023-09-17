@@ -153,14 +153,14 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         List<TR3Type> oldEntities = GetCurrentEnemyEntities(level);
 
         // Get the list of canidadates
-        List<TR3Type> allEnemies = TR3EntityUtilities.GetCandidateCrossLevelEnemies().FindAll(e => TR3EnemyUtilities.IsEnemySupported(level.Name, e, Settings.RandoEnemyDifficulty));
+        List<TR3Type> allEnemies = TR3TypeUtilities.GetCandidateCrossLevelEnemies().FindAll(e => TR3EnemyUtilities.IsEnemySupported(level.Name, e, Settings.RandoEnemyDifficulty));
         
         // Work out how many we can support
         int enemyCount = oldEntities.Count + TR3EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
         List<TR3Type> newEntities = new(enemyCount);
 
         // Do we need at least one water creature?
-        bool waterEnemyRequired = TR3EntityUtilities.GetWaterEnemies().Any(e => oldEntities.Contains(e));
+        bool waterEnemyRequired = TR3TypeUtilities.GetWaterEnemies().Any(e => oldEntities.Contains(e));
         // Do we need at least one enemy that can drop?
         bool droppableEnemyRequired = TR3EnemyUtilities.IsDroppableEnemyRequired(level);
 
@@ -168,13 +168,13 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         // and one droppable enemy if they are needed.
         if (waterEnemyRequired)
         {
-            List<TR3Type> waterEnemies = TR3EntityUtilities.GetKillableWaterEnemies();
+            List<TR3Type> waterEnemies = TR3TypeUtilities.GetKillableWaterEnemies();
             newEntities.Add(SelectRequiredEnemy(waterEnemies, level, Settings.RandoEnemyDifficulty));
         }
 
         if (droppableEnemyRequired)
         {
-            List<TR3Type> droppableEnemies = TR3EntityUtilities.FilterDroppableEnemies(allEnemies, Settings.ProtectMonks);
+            List<TR3Type> droppableEnemies = TR3TypeUtilities.FilterDroppableEnemies(allEnemies, Settings.ProtectMonks);
             newEntities.Add(SelectRequiredEnemy(droppableEnemies, level, Settings.RandoEnemyDifficulty));
         }
 
@@ -196,8 +196,8 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         // Remove all exclusions from the pool, and adjust the target capacity
         allEnemies.RemoveAll(e => _excludedEnemies.Contains(e));
 
-        IEnumerable<TR3Type> ex = allEnemies.Where(e => !newEntities.Any(TR3EntityUtilities.GetEntityFamily(e).Contains));
-        List<TR3Type> unalisedEntities = TR3EntityUtilities.RemoveAliases(ex);
+        IEnumerable<TR3Type> ex = allEnemies.Where(e => !newEntities.Any(TR3TypeUtilities.GetFamily(e).Contains));
+        List<TR3Type> unalisedEntities = TR3TypeUtilities.RemoveAliases(ex);
         while (unalisedEntities.Count < newEntities.Capacity - newEntities.Count)
         {
             --newEntities.Capacity;
@@ -257,7 +257,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             // GetEntityFamily returns all aliases for the likes of the dogs, but if an entity
             // doesn't have any, the returned list just contains the entity itself. This means
             // we can avoid duplicating standard enemies as well as avoiding alias-clashing.
-            List<TR3Type> family = TR3EntityUtilities.GetEntityFamily(entity);
+            List<TR3Type> family = TR3TypeUtilities.GetFamily(entity);
             if (!newEntities.Any(e1 => family.Any(e2 => e1 == e2)))
             {
                 newEntities.Add(entity);
@@ -270,18 +270,18 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             // Make sure we have an unrestricted enemy available for the individual level conditions. This will
             // guarantee a "safe" enemy for the level; we avoid aliases here to avoid further complication.
             bool RestrictionCheck(TR3Type e) =>
-                (droppableEnemyRequired && !TR3EntityUtilities.CanDropPickups(e, Settings.ProtectMonks))
+                (droppableEnemyRequired && !TR3TypeUtilities.CanDropPickups(e, Settings.ProtectMonks))
                 || !TR3EnemyUtilities.IsEnemySupported(level.Name, e, Settings.RandoEnemyDifficulty)
                 || newEntities.Contains(e)
-                || TR3EntityUtilities.IsWaterCreature(e)
+                || TR3TypeUtilities.IsWaterCreature(e)
                 || TR3EnemyUtilities.IsEnemyRestricted(level.Name, e)
-                || TR3EntityUtilities.TranslateEntityAlias(e) != e;
+                || TR3TypeUtilities.TranslateAlias(e) != e;
 
             List<TR3Type> unrestrictedPool = allEnemies.FindAll(e => !RestrictionCheck(e));
             if (unrestrictedPool.Count == 0)
             {
                 // We are going to have to pull in the full list of candidates again, so ignoring any user-defined exclusions
-                unrestrictedPool = TR3EntityUtilities.GetCandidateCrossLevelEnemies().FindAll(e => !RestrictionCheck(e));
+                unrestrictedPool = TR3TypeUtilities.GetCandidateCrossLevelEnemies().FindAll(e => !RestrictionCheck(e));
             }
 
             newEntities.Add(unrestrictedPool[_generator.Next(0, unrestrictedPool.Count)]);
@@ -301,7 +301,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
     private static List<TR3Type> GetCurrentEnemyEntities(TR3CombinedLevel level)
     {
-        List<TR3Type> allGameEnemies = TR3EntityUtilities.GetFullListOfEnemies();
+        List<TR3Type> allGameEnemies = TR3TypeUtilities.GetFullListOfEnemies();
         ISet<TR3Type> allLevelEnts = new SortedSet<TR3Type>();
         level.Data.Entities.ToList().ForEach(e => allLevelEnts.Add((TR3Type)e.TypeID));
         List<TR3Type> oldEntities = allLevelEnts.ToList().FindAll(e => allGameEnemies.Contains(e));
@@ -348,8 +348,8 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             level.RemoveModel(banishedType);
         }
 
-        List<TR3Type> droppableEnemies = TR3EntityUtilities.FilterDroppableEnemies(availableEnemyTypes, Settings.ProtectMonks);
-        List<TR3Type> waterEnemies = TR3EntityUtilities.FilterWaterEnemies(availableEnemyTypes);
+        List<TR3Type> droppableEnemies = TR3TypeUtilities.FilterDroppableEnemies(availableEnemyTypes, Settings.ProtectMonks);
+        List<TR3Type> waterEnemies = TR3TypeUtilities.FilterWaterEnemies(availableEnemyTypes);
 
         RandomizeEnemies(level, new EnemyRandomizationCollection
         {
@@ -362,7 +362,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
     private void RandomizeEnemies(TR3CombinedLevel level, EnemyRandomizationCollection enemies)
     {
         // Get a list of current enemy entities
-        List<TR3Type> allEnemies = TR3EntityUtilities.GetFullListOfEnemies();
+        List<TR3Type> allEnemies = TR3TypeUtilities.GetFullListOfEnemies();
         List<TR2Entity> levelEntities = level.Data.Entities.ToList();
         List<TR2Entity> enemyEntities = levelEntities.FindAll(e => allEnemies.Contains((TR3Type)e.TypeID));
 
@@ -408,7 +408,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
                     // If the room has water but this enemy isn't a water enemy, we will assume that environment
                     // modifications will handle assignment of the enemy to entities.
-                    if (!TR3EntityUtilities.IsWaterCreature(entity) && level.Data.Rooms[targetEntity.Room].ContainsWater)
+                    if (!TR3TypeUtilities.IsWaterCreature(entity) && level.Data.Rooms[targetEntity.Room].ContainsWater)
                     {
                         continue;
                     }
@@ -417,7 +417,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                     List<Location> paths = TR3EnemyUtilities.GetAIPathing(level.Name, entity, targetEntity.Room);
                     if (ItemFactory.CanCreateItems(level.Name, levelEntities, paths.Count))
                     {
-                        targetEntity.TypeID = (short)TR3EntityUtilities.TranslateEntityAlias(entity);
+                        targetEntity.TypeID = (short)TR3TypeUtilities.TranslateAlias(entity);
 
                         // #146 Ensure OneShot triggers are set for this enemy if needed
                         TR3EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
@@ -468,7 +468,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                     e.X == currentEntity.X &&
                     e.Y == currentEntity.Y &&
                     e.Z == currentEntity.Z &&
-                    TR3EntityUtilities.IsAnyPickupType((TR3Type)e.TypeID)
+                    TR3TypeUtilities.IsAnyPickupType((TR3Type)e.TypeID)
             );
 
             if (pickupEntity != null)
@@ -476,7 +476,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                 // Make sure this enemy can also drop
                 enemyPool = enemies.Droppable;
             }
-            else if (TR3EntityUtilities.IsWaterCreature(currentEntityType))
+            else if (TR3TypeUtilities.IsWaterCreature(currentEntityType))
             {
                 // Make sure we replace with another water enemy
                 enemyPool = enemies.Water;
@@ -519,7 +519,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                     TR2Entity raptorSpawn = level.Data.Entities.ToList().Find(e => e.TypeID == (short)TR3Type.RaptorRespawnPoint_N && e.Room != 15);
                     if (raptorSpawn != null)
                     {
-                        (targetEntity = raptorSpawn).TypeID = (short)TR3EntityUtilities.TranslateEntityAlias(newEntityType);
+                        (targetEntity = raptorSpawn).TypeID = (short)TR3TypeUtilities.TranslateAlias(newEntityType);
                         currentEntity.TypeID = (short)TR3Type.RaptorRespawnPoint_N;
                     }
                 }
@@ -573,7 +573,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             }
             
             // Make sure to convert back to the actual type
-            targetEntity.TypeID = (short)TR3EntityUtilities.TranslateEntityAlias(newEntityType);
+            targetEntity.TypeID = (short)TR3TypeUtilities.TranslateAlias(newEntityType);
 
             // #146 Ensure OneShot triggers are set for this enemy if needed
             TR3EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
@@ -606,7 +606,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
         // Find out which gun we have for this level
         List<TR2Entity> levelEntities = level.Data.Entities.ToList();
-        List<TR3Type> weaponTypes = TR3EntityUtilities.GetWeaponPickups();
+        List<TR3Type> weaponTypes = TR3TypeUtilities.GetWeaponPickups();
         List<TR2Entity> levelWeapons = levelEntities.FindAll(e => weaponTypes.Contains((TR3Type)e.TypeID));
         TR2Entity weaponEntity = null;
         foreach (TR2Entity weapon in levelWeapons)
@@ -631,7 +631,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             return;
         }
 
-        List<TR3Type> allEnemies = TR3EntityUtilities.GetFullListOfEnemies();
+        List<TR3Type> allEnemies = TR3TypeUtilities.GetFullListOfEnemies();
         List<TR2Entity> levelEnemies = levelEntities.FindAll(e => allEnemies.Contains((TR3Type)e.TypeID));
         EnemyDifficulty difficulty = TR3EnemyUtilities.GetEnemyDifficulty(levelEnemies);
 
@@ -648,7 +648,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         if (ammoToGive > 0)
         {
             ammoToGive *= (uint)difficulty;
-            TR3Type ammoType = TR3EntityUtilities.GetWeaponAmmo(weaponType);
+            TR3Type ammoType = TR3TypeUtilities.GetWeaponAmmo(weaponType);
             level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(ammoType), ammoToGive);
 
             uint smallMediToGive = 0;
@@ -766,8 +766,8 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                     EnemyRandomizationCollection enemies = new()
                     {
                         Available = _enemyMapping[level].EntitiesToImport,
-                        Droppable = TR3EntityUtilities.FilterDroppableEnemies(_enemyMapping[level].EntitiesToImport, _outer.Settings.ProtectMonks),
-                        Water = TR3EntityUtilities.FilterWaterEnemies(_enemyMapping[level].EntitiesToImport)
+                        Droppable = TR3TypeUtilities.FilterDroppableEnemies(_enemyMapping[level].EntitiesToImport, _outer.Settings.ProtectMonks),
+                        Water = TR3TypeUtilities.FilterWaterEnemies(_enemyMapping[level].EntitiesToImport)
                     };
 
                     _outer.RandomizeEnemies(level, enemies);

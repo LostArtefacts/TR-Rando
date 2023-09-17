@@ -2,9 +2,9 @@
 
 namespace TRLevelControl.Helpers;
 
-public static class TR3EntityUtilities
+public static class TR3TypeUtilities
 {
-    public static readonly Dictionary<TR3Type, Dictionary<TR3Type, List<string>>> LevelEntityAliases = new()
+    public static readonly Dictionary<TR3Type, Dictionary<TR3Type, List<string>>> LevelAliases = new()
     {
         [TR3Type.Lara] = new Dictionary<TR3Type, List<string>>
         {
@@ -52,59 +52,59 @@ public static class TR3EntityUtilities
         },
     };
 
-    public static List<TR3Type> GetEntityFamily(TR3Type entity)
+    public static List<TR3Type> GetFamily(TR3Type type)
     {
-        foreach (TR3Type parentEntity in LevelEntityAliases.Keys)
+        foreach (TR3Type parentType in LevelAliases.Keys)
         {
-            if (LevelEntityAliases[parentEntity].ContainsKey(entity))
+            if (LevelAliases[parentType].ContainsKey(type))
             {
-                return LevelEntityAliases[parentEntity].Keys.ToList();
+                return LevelAliases[parentType].Keys.ToList();
             }
         }
 
-        return new List<TR3Type> { entity };
+        return new List<TR3Type> { type };
     }
 
-    public static TR3Type TranslateEntityAlias(TR3Type entity)
+    public static TR3Type TranslateAlias(TR3Type type)
     {
-        foreach (TR3Type parentEntity in LevelEntityAliases.Keys)
+        foreach (TR3Type parentType in LevelAliases.Keys)
         {
-            if (LevelEntityAliases[parentEntity].ContainsKey(entity))
+            if (LevelAliases[parentType].ContainsKey(type))
             {
-                return parentEntity;
+                return parentType;
             }
         }
 
-        return entity;
+        return type;
     }
 
-    public static TR3Type GetAliasForLevel(string lvl, TR3Type entity)
+    public static TR3Type GetAliasForLevel(string lvl, TR3Type type)
     {
-        if (LevelEntityAliases.ContainsKey(entity))
+        if (LevelAliases.ContainsKey(type))
         {
-            foreach (TR3Type alias in LevelEntityAliases[entity].Keys)
+            foreach (TR3Type alias in LevelAliases[type].Keys)
             {
-                if (LevelEntityAliases[entity][alias].Contains(lvl))
+                if (LevelAliases[type][alias].Contains(lvl))
                 {
                     return alias;
                 }
             }
         }
-        return entity;
+        return type;
     }
 
-    public static List<TR3Type> RemoveAliases(IEnumerable<TR3Type> entities)
+    public static List<TR3Type> RemoveAliases(IEnumerable<TR3Type> types)
     {
-        List<TR3Type> ents = new();
-        foreach (TR3Type ent in entities)
+        List<TR3Type> normalisedTypes = new();
+        foreach (TR3Type type in types)
         {
-            TR3Type normalisedEnt = TranslateEntityAlias(ent);
-            if (!ents.Contains(normalisedEnt))
+            TR3Type normalisedType = TranslateAlias(type);
+            if (!normalisedTypes.Contains(normalisedType))
             {
-                ents.Add(normalisedEnt);
+                normalisedTypes.Add(normalisedType);
             }
         }
-        return ents;
+        return normalisedTypes;
     }
 
     public static List<TR3Type> GetLaraTypes()
@@ -151,24 +151,24 @@ public static class TR3EntityUtilities
         return GetListOfKeyTypes().Concat(GetListOfPuzzleTypes()).Concat(GetListOfQuestTypes()).ToList();
     }
 
-    public static bool IsKeyType(TR3Type entity)
+    public static bool IsKeyType(TR3Type type)
     {
-        return GetListOfKeyTypes().Contains(entity);
+        return GetListOfKeyTypes().Contains(type);
     }
 
-    public static bool IsPuzzleType(TR3Type entity)
+    public static bool IsPuzzleType(TR3Type type)
     {
-        return GetListOfPuzzleTypes().Contains(entity);
+        return GetListOfPuzzleTypes().Contains(type);
     }
 
-    public static bool IsQuestType(TR3Type entity)
+    public static bool IsQuestType(TR3Type type)
     {
-        return GetListOfQuestTypes().Contains(entity);
+        return GetListOfQuestTypes().Contains(type);
     }
 
-    public static bool IsKeyItemType(TR3Type entity)
+    public static bool IsKeyItemType(TR3Type type)
     {
-        return GetListOfKeyItemTypes().Contains(entity);
+        return GetListOfKeyItemTypes().Contains(type);
     }
 
     public static Dictionary<TR3Type, TR3Type> GetArtefactPickups()
@@ -209,14 +209,14 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsTrapdoor(TR3Type entity)
+    public static bool IsTrapdoor(TR3Type type)
     {
-        return GetTrapdoorTypes().Contains(entity);
+        return GetTrapdoorTypes().Contains(type);
     }
 
-    public static bool IsBridge(TR3Type entity)
+    public static bool IsBridge(TR3Type type)
     {
-        return GetBridgeTypes().Contains(entity);
+        return GetBridgeTypes().Contains(type);
     }
 
     public static List<TR3Type> GetTrapdoorTypes()
@@ -261,21 +261,21 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsStandardPickupType(TR3Type entity)
+    public static bool IsStandardPickupType(TR3Type type)
     {
-        return GetStandardPickupTypes().Contains(entity);
+        return GetStandardPickupTypes().Contains(type);
     }
 
-    public static bool IsWeaponPickup(TR3Type entity)
+    public static bool IsWeaponPickup(TR3Type type)
     {
-        return (entity == TR3Type.Pistols_P)
-            || (entity == TR3Type.Shotgun_P)
-            || (entity == TR3Type.Deagle_P)
-            || (entity == TR3Type.Uzis_P)
-            || (entity == TR3Type.Harpoon_P)
-            || (entity == TR3Type.MP5_P)
-            || (entity == TR3Type.RocketLauncher_P)
-            || (entity == TR3Type.GrenadeLauncher_P);
+        return (type == TR3Type.Pistols_P)
+            || (type == TR3Type.Shotgun_P)
+            || (type == TR3Type.Deagle_P)
+            || (type == TR3Type.Uzis_P)
+            || (type == TR3Type.Harpoon_P)
+            || (type == TR3Type.MP5_P)
+            || (type == TR3Type.RocketLauncher_P)
+            || (type == TR3Type.GrenadeLauncher_P);
     }
 
     public static List<TR3Type> GetWeaponPickups()
@@ -293,16 +293,16 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsAmmoPickup(TR3Type entity)
+    public static bool IsAmmoPickup(TR3Type type)
     {
-        return (entity == TR3Type.PistolAmmo_P)
-            || (entity == TR3Type.ShotgunAmmo_P)
-            || (entity == TR3Type.DeagleAmmo_P)
-            || (entity == TR3Type.UziAmmo_P)
-            || (entity == TR3Type.Harpoons_P)
-            || (entity == TR3Type.MP5Ammo_P)
-            || (entity == TR3Type.Rockets_P)
-            || (entity == TR3Type.Grenades_P);
+        return (type == TR3Type.PistolAmmo_P)
+            || (type == TR3Type.ShotgunAmmo_P)
+            || (type == TR3Type.DeagleAmmo_P)
+            || (type == TR3Type.UziAmmo_P)
+            || (type == TR3Type.Harpoons_P)
+            || (type == TR3Type.MP5Ammo_P)
+            || (type == TR3Type.Rockets_P)
+            || (type == TR3Type.Grenades_P);
     }
 
     public static TR3Type GetWeaponAmmo(TR3Type weapon)
@@ -320,42 +320,42 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsCrystalPickup(TR3Type entity)
+    public static bool IsCrystalPickup(TR3Type type)
     {
-        return (entity == TR3Type.SaveCrystal_P);
+        return (type == TR3Type.SaveCrystal_P);
     }
 
-    public static bool IsUtilityPickup(TR3Type entity)
+    public static bool IsUtilityPickup(TR3Type type)
     {
-        return (entity == TR3Type.SmallMed_P)
-            || (entity == TR3Type.LargeMed_P)
-            || (entity == TR3Type.Flares_P);
+        return (type == TR3Type.SmallMed_P)
+            || (type == TR3Type.LargeMed_P)
+            || (type == TR3Type.Flares_P);
     }
 
-    public static bool IsArtefactPickup(TR3Type entity)
+    public static bool IsArtefactPickup(TR3Type type)
     {
-        return entity == TR3Type.Infada_P
-            || entity == TR3Type.OraDagger_P
-            || entity == TR3Type.EyeOfIsis_P
-            || entity == TR3Type.Element115_P;
+        return type == TR3Type.Infada_P
+            || type == TR3Type.OraDagger_P
+            || type == TR3Type.EyeOfIsis_P
+            || type == TR3Type.Element115_P;
     }
 
-    public static bool IsAnyPickupType(TR3Type entity)
+    public static bool IsAnyPickupType(TR3Type type)
     {
-        return IsUtilityPickup(entity)
-            || IsAmmoPickup(entity)
-            || IsWeaponPickup(entity)
-            || IsKeyItemType(entity)
-            || IsArtefactPickup(entity);
+        return IsUtilityPickup(type)
+            || IsAmmoPickup(type)
+            || IsWeaponPickup(type)
+            || IsKeyItemType(type)
+            || IsArtefactPickup(type);
     }
 
-    public static bool IsVehicleType(TR3Type entityType)
+    public static bool IsVehicleType(TR3Type typeType)
     {
-        return entityType == TR3Type.Quad
-            || entityType == TR3Type.Kayak
-            || entityType == TR3Type.UPV
-            || entityType == TR3Type.Boat
-            || entityType == TR3Type.MineCart;
+        return typeType == TR3Type.Quad
+            || typeType == TR3Type.Kayak
+            || typeType == TR3Type.UPV
+            || typeType == TR3Type.Boat
+            || typeType == TR3Type.MineCart;
     }
 
     public static List<TR3Type> GetCandidateCrossLevelEnemies()
@@ -367,7 +367,6 @@ public static class TR3EntityUtilities
             TR3Type.CobraNevada,
             TR3Type.Compsognathus,
             TR3Type.Crawler,
-            //TR3Entities.CrawlerMutantInCloset, // Dies immediately on activation
             TR3Type.Croc,
             TR3Type.Crow,
             TR3Type.DamGuard,
@@ -384,7 +383,6 @@ public static class TR3EntityUtilities
             TR3Type.MPWithMP5,
             TR3Type.MPWithStick,
             TR3Type.Prisoner,
-            //TR3Entities.Puna, // Activates Lizard at hardcoded coordinates, which are OOB in all other levels
             TR3Type.Punk,
             TR3Type.Raptor,
             TR3Type.Rat,
@@ -407,9 +405,9 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsEnemyType(TR3Type entity)
+    public static bool IsEnemyType(TR3Type type)
     {
-        return GetFullListOfEnemies().Contains(entity);
+        return GetFullListOfEnemies().Contains(type);
     }
 
     public static List<TR3Type> GetFullListOfEnemies()
@@ -433,22 +431,22 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsWaterCreature(TR3Type entity)
+    public static bool IsWaterCreature(TR3Type type)
     {
-        return GetWaterEnemies().Contains(entity);
+        return GetWaterEnemies().Contains(type);
     }
 
-    public static List<TR3Type> FilterWaterEnemies(List<TR3Type> entities)
+    public static List<TR3Type> FilterWaterEnemies(List<TR3Type> types)
     {
-        List<TR3Type> waterEntities = new();
-        foreach (TR3Type entity in entities)
+        List<TR3Type> waterTypes = new();
+        foreach (TR3Type type in types)
         {
-            if (IsWaterCreature(entity))
+            if (IsWaterCreature(type))
             {
-                waterEntities.Add(entity);
+                waterTypes.Add(type);
             }
         }
-        return waterEntities;
+        return waterTypes;
     }
 
     public static List<TR3Type> GetKillableWaterEnemies()
@@ -460,22 +458,22 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool CanDropPickups(TR3Type entity, bool protectFriendlyEnemies)
+    public static bool CanDropPickups(TR3Type type, bool protectFriendlyEnemies)
     {
-        return GetDroppableEnemies(protectFriendlyEnemies).Contains(entity);
+        return GetDroppableEnemies(protectFriendlyEnemies).Contains(type);
     }
 
-    public static List<TR3Type> FilterDroppableEnemies(List<TR3Type> entities, bool protectFriendlyEnemies)
+    public static List<TR3Type> FilterDroppableEnemies(List<TR3Type> types, bool protectFriendlyEnemies)
     {
-        List<TR3Type> droppableEntities = new();
-        foreach (TR3Type entity in entities)
+        List<TR3Type> droppableTypes = new();
+        foreach (TR3Type type in types)
         {
-            if (CanDropPickups(entity, protectFriendlyEnemies))
+            if (CanDropPickups(type, protectFriendlyEnemies))
             {
-                droppableEntities.Add(entity);
+                droppableTypes.Add(type);
             }
         }
-        return droppableEntities;
+        return droppableTypes;
     }
 
     public static List<TR3Type> GetDroppableEnemies(bool protectFriendlyEnemies)
@@ -528,7 +526,7 @@ public static class TR3EntityUtilities
         return enemies;
     }
 
-    public static List<TR3Type> GetUnrenderedEntities()
+    public static List<TR3Type> GetUnrenderedTypes()
     {
         return new List<TR3Type>
         {
@@ -549,9 +547,9 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsUnrenderedEntity(TR3Type entity)
+    public static bool IsUnrenderedType(TR3Type type)
     {
-        return GetUnrenderedEntities().Contains(entity);
+        return GetUnrenderedTypes().Contains(type);
     }
 
     public static List<TR3Type> GetSwitchTypes()
@@ -565,9 +563,9 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsSwitchType(TR3Type entity)
+    public static bool IsSwitchType(TR3Type type)
     {
-        return GetSwitchTypes().Contains(entity);
+        return GetSwitchTypes().Contains(type);
     }
 
     public static List<TR3Type> GetKeyholeTypes()
@@ -581,9 +579,9 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsKeyholeType(TR3Type entity)
+    public static bool IsKeyholeType(TR3Type type)
     {
-        return GetKeyholeTypes().Contains(entity);
+        return GetKeyholeTypes().Contains(type);
     }
 
     public static List<TR3Type> GetSlotTypes()
@@ -601,9 +599,9 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsSlotType(TR3Type entity)
+    public static bool IsSlotType(TR3Type type)
     {
-        return GetSlotTypes().Contains(entity);
+        return GetSlotTypes().Contains(type);
     }
 
     public static List<TR3Type> GetPushblockTypes()
@@ -615,9 +613,9 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsPushblockType(TR3Type entity)
+    public static bool IsPushblockType(TR3Type type)
     {
-        return GetPushblockTypes().Contains(entity);
+        return GetPushblockTypes().Contains(type);
     }
 
     public static List<TR3Type> GetLightTypes()
@@ -636,23 +634,23 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsLightType(TR3Type entity)
+    public static bool IsLightType(TR3Type type)
     {
-        return GetLightTypes().Contains(entity);
+        return GetLightTypes().Contains(type);
     }
 
-    public static bool CanSharePickupSpace(TR3Type entity)
+    public static bool CanSharePickupSpace(TR3Type type)
     {
-        // Can we place a standard pickup on the same tile as this entity?
-        return IsStandardPickupType(entity)
-            || IsCrystalPickup(entity)
-            || IsUnrenderedEntity(entity)
-            || CanDropPickups(entity, true)
-            || IsSwitchType(entity)
-            || IsKeyholeType(entity)
-            || IsSlotType(entity)
-            || IsLightType(entity)
-            || entity == TR3Type.Lara;
+        // Can we place a standard pickup on the same tile as this type?
+        return IsStandardPickupType(type)
+            || IsCrystalPickup(type)
+            || IsUnrenderedType(type)
+            || CanDropPickups(type, true)
+            || IsSwitchType(type)
+            || IsKeyholeType(type)
+            || IsSlotType(type)
+            || IsLightType(type)
+            || type == TR3Type.Lara;
     }
 
     public static List<TR3Type> DoorTypes()
@@ -665,8 +663,8 @@ public static class TR3EntityUtilities
         };
     }
 
-    public static bool IsDoorType(TR3Type entity)
+    public static bool IsDoorType(TR3Type type)
     {
-        return DoorTypes().Contains(entity);
+        return DoorTypes().Contains(type);
     }
 }

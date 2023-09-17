@@ -15,6 +15,6 @@ public class TR3TextureMonitorBroker : AbstractTextureMonitorBroker<TR3Type>
 
     protected override TR3Type TranslateAlias(string lvlName, TR3Type entity)
     {
-        return TR3EntityUtilities.GetAliasForLevel(lvlName, entity);
+        return TR3TypeUtilities.GetAliasForLevel(lvlName, entity);
     }
 }
