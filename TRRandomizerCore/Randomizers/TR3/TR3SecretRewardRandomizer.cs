@@ -36,14 +36,14 @@ public class TR3SecretRewardRandomizer : BaseTR3Randomizer
 
         TRSecretMapping<TR2Entity> secretMapping = TRSecretMapping<TR2Entity>.Get(GetResourcePath(@"TR3\SecretMapping\" + level.Name + "-SecretMapping.json"));
 
-        List<TR3Entities> stdItemTypes = TR3EntityUtilities.GetStandardPickupTypes();
+        List<TR3Type> stdItemTypes = TR3EntityUtilities.GetStandardPickupTypes();
         // A bit cruel as rewards?
-        stdItemTypes.Remove(TR3Entities.PistolAmmo_P);
-        stdItemTypes.Remove(TR3Entities.Pistols_P);
+        stdItemTypes.Remove(TR3Type.PistolAmmo_P);
+        stdItemTypes.Remove(TR3Type.Pistols_P);
 
         foreach (int rewardIndex in secretMapping.RewardEntities)
         {
-            if (level.Data.Entities[rewardIndex].TypeID == (short)TR3Entities.SaveCrystal_P)
+            if (level.Data.Entities[rewardIndex].TypeID == (short)TR3Type.SaveCrystal_P)
             {
                 continue;
             }

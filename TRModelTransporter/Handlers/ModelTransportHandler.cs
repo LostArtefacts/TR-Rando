@@ -15,7 +15,7 @@ public class ModelTransportHandler
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
 
-    public static void Export(TR3Level level, TR3ModelDefinition definition, TR3Entities entity)
+    public static void Export(TR3Level level, TR3ModelDefinition definition, TR3Type entity)
     {
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
@@ -89,7 +89,7 @@ public class ModelTransportHandler
         }
     }
 
-    public static void Import(TR3Level level, TR3ModelDefinition definition, Dictionary<TR3Entities, TR3Entities> aliasPriority, IEnumerable<TR3Entities> laraDependants, IEnumerable<TR3Entities> unsafeReplacements)
+    public static void Import(TR3Level level, TR3ModelDefinition definition, Dictionary<TR3Type, TR3Type> aliasPriority, IEnumerable<TR3Type> laraDependants, IEnumerable<TR3Type> unsafeReplacements)
     {
         List<TRModel> levelModels = level.Models.ToList();
         int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
@@ -117,7 +117,7 @@ public class ModelTransportHandler
             }
         }
 
-        if (definition.Entity == TR3Entities.Lara && laraDependants != null)
+        if (definition.Entity == TR3Type.Lara && laraDependants != null)
         {
             ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
         }

@@ -83,32 +83,32 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             Level = level.Data,
             LevelName = level.Name,
             ClearUnusedSprites = false,
-            EntitiesToImport = new List<TR3Entities>
+            EntitiesToImport = new List<TR3Type>
             {
-                TR3Entities.LaraShotgunAnimation_H,
-                TR3Entities.LaraDeagleAnimation_H_Home,
-                TR3Entities.LaraUziAnimation_H_Home,
-                TR3Entities.LaraMP5Animation_H,
-                TR3Entities.LaraRocketAnimation_H,
-                TR3Entities.LaraGrenadeAnimation_H,
-                TR3Entities.LaraHarpoonAnimation_H,
-                TR3Entities.PistolAmmo_P,
-                TR3Entities.Shotgun_P, TR3Entities.Shotgun_M_H,
-                TR3Entities.ShotgunAmmo_P, TR3Entities.ShotgunAmmo_M_H,
-                TR3Entities.Deagle_P, TR3Entities.Deagle_M_H,
-                TR3Entities.DeagleAmmo_P, TR3Entities.DeagleAmmo_M_H,
-                TR3Entities.Uzis_P, TR3Entities.Uzis_M_H,
-                TR3Entities.UziAmmo_P, TR3Entities.UziAmmo_M_H,
-                TR3Entities.MP5_P, TR3Entities.MP5_M_H,
-                TR3Entities.MP5Ammo_P, TR3Entities.MP5Ammo_M_H,
-                TR3Entities.RocketLauncher_M_H, TR3Entities.RocketLauncher_P,
-                TR3Entities.Rockets_M_H, TR3Entities.Rockets_P,
-                TR3Entities.GrenadeLauncher_M_H, TR3Entities.GrenadeLauncher_P,
-                TR3Entities.Grenades_M_H, TR3Entities.Grenades_P,
-                TR3Entities.Harpoon_M_H, TR3Entities.Harpoon_P,
-                TR3Entities.Harpoons_M_H, TR3Entities.Harpoons_P,
-                TR3Entities.SmallMed_P, TR3Entities.SmallMed_M_H,
-                TR3Entities.LargeMed_P, TR3Entities.LargeMed_M_H
+                TR3Type.LaraShotgunAnimation_H,
+                TR3Type.LaraDeagleAnimation_H_Home,
+                TR3Type.LaraUziAnimation_H_Home,
+                TR3Type.LaraMP5Animation_H,
+                TR3Type.LaraRocketAnimation_H,
+                TR3Type.LaraGrenadeAnimation_H,
+                TR3Type.LaraHarpoonAnimation_H,
+                TR3Type.PistolAmmo_P,
+                TR3Type.Shotgun_P, TR3Type.Shotgun_M_H,
+                TR3Type.ShotgunAmmo_P, TR3Type.ShotgunAmmo_M_H,
+                TR3Type.Deagle_P, TR3Type.Deagle_M_H,
+                TR3Type.DeagleAmmo_P, TR3Type.DeagleAmmo_M_H,
+                TR3Type.Uzis_P, TR3Type.Uzis_M_H,
+                TR3Type.UziAmmo_P, TR3Type.UziAmmo_M_H,
+                TR3Type.MP5_P, TR3Type.MP5_M_H,
+                TR3Type.MP5Ammo_P, TR3Type.MP5Ammo_M_H,
+                TR3Type.RocketLauncher_M_H, TR3Type.RocketLauncher_P,
+                TR3Type.Rockets_M_H, TR3Type.Rockets_P,
+                TR3Type.GrenadeLauncher_M_H, TR3Type.GrenadeLauncher_P,
+                TR3Type.Grenades_M_H, TR3Type.Grenades_P,
+                TR3Type.Harpoon_M_H, TR3Type.Harpoon_P,
+                TR3Type.Harpoons_M_H, TR3Type.Harpoons_P,
+                TR3Type.SmallMed_P, TR3Type.SmallMed_M_H,
+                TR3Type.LargeMed_P, TR3Type.LargeMed_M_H
             },
             DataFolder = GetResourcePath(@"TR3\Models")
         };
@@ -135,7 +135,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
     {
         if (level.Script.RemovesWeapons)
         {
-            List<TR2Entity> pistolEntities = level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)TR3Entities.Pistols_P);
+            List<TR2Entity> pistolEntities = level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)TR3Type.Pistols_P);
             foreach (TR2Entity pistols in pistolEntities)
             {
                 int match = _pistolLocations[level.Name].FindIndex
@@ -161,7 +161,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     public void RandomizeItemTypes(TR3CombinedLevel level)
     {
-        List<TR3Entities> stdItemTypes = TR3EntityUtilities.GetStandardPickupTypes();
+        List<TR3Type> stdItemTypes = TR3EntityUtilities.GetStandardPickupTypes();
 
         for (int i = 0; i < level.Data.NumEntities; i++)
         {
@@ -172,7 +172,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             }
 
             TR2Entity ent = level.Data.Entities[i];
-            TR3Entities currentType = (TR3Entities)ent.TypeID;
+            TR3Type currentType = (TR3Type)ent.TypeID;
             // If this is an unarmed level's pistols, make sure they're replaced with another weapon.
             // Similar case for the assault course, so that Lara can still shoot Winnie.
             if ((ent == _unarmedLevelPistols && Settings.GiveUnarmedItems)
@@ -182,12 +182,12 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 {
                     ent.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
                 }
-                while (!TR3EntityUtilities.IsWeaponPickup((TR3Entities)ent.TypeID));
+                while (!TR3EntityUtilities.IsWeaponPickup((TR3Type)ent.TypeID));
 
                 if (level.IsAssault)
                 {
                     // Add some extra ammo too
-                    level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3EntityUtilities.GetWeaponAmmo((TR3Entities)ent.TypeID)), 20);
+                    level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3EntityUtilities.GetWeaponAmmo((TR3Type)ent.TypeID)), 20);
                 }
             }
             else if (TR3EntityUtilities.IsStandardPickupType(currentType))
@@ -199,11 +199,11 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     public void EnforceOneLimit(TR3CombinedLevel level)
     {
-        ISet<TR3Entities> oneOfEachType = new HashSet<TR3Entities>();
+        ISet<TR3Type> oneOfEachType = new HashSet<TR3Type>();
         if (_unarmedLevelPistols != null)
         {
             // These will be excluded, but track their type before looking at other items.
-            oneOfEachType.Add((TR3Entities)_unarmedLevelPistols.TypeID);
+            oneOfEachType.Add((TR3Type)_unarmedLevelPistols.TypeID);
         }
 
         // FD for removing crystal triggers if applicable.
@@ -220,7 +220,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 continue;
             }
 
-            TR3Entities eType = (TR3Entities)ent.TypeID;
+            TR3Type eType = (TR3Type)ent.TypeID;
             if (TR3EntityUtilities.IsStandardPickupType(eType) || TR3EntityUtilities.IsCrystalPickup(eType))
             {
                 if (!oneOfEachType.Add(eType))
@@ -257,7 +257,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
             TR2Entity ent = level.Data.Entities[i];
             // Move standard items only, excluding any unarmed level pistols, and reward items
-            if (TR3EntityUtilities.IsStandardPickupType((TR3Entities)ent.TypeID) && ent != _unarmedLevelPistols)
+            if (TR3EntityUtilities.IsStandardPickupType((TR3Type)ent.TypeID) && ent != _unarmedLevelPistols)
             {
                 Location location = locations[_generator.Next(0, locations.Count)];
                 ent.X = location.X;
@@ -287,7 +287,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
         foreach (TR2Entity entity in level.Data.Entities)
         {
-            if (!TR3EntityUtilities.CanSharePickupSpace((TR3Entities)entity.TypeID))
+            if (!TR3EntityUtilities.CanSharePickupSpace((TR3Type)entity.TypeID))
             {
                 exclusions.Add(new Location
                 {
@@ -342,24 +342,24 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         foreach (TR2Entity ent in level.Data.Entities)
         {
             //Calculate its alias
-            TR3Entities AliasedKeyItemID = (TR3Entities)(ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name));
+            TR3Type AliasedKeyItemID = (TR3Type)(ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name));
 
             //Any special handling for key item entities
             switch (AliasedKeyItemID)
             {
-                case TR3Entities.DetonatorKey:
+                case TR3Type.DetonatorKey:
                     ent.Invisible = false;
                     break;
                 default:
                     break;
             }
 
-            if (AliasedKeyItemID < TR3Entities.JungleKeyItemBase)
+            if (AliasedKeyItemID < TR3Type.JungleKeyItemBase)
                 throw new NotSupportedException("Level does not have key item alias group defined");
 
             //Is entity one we are allowed/expected to move? (is the alias and base type correct?)
             if (_keyItemZones[level.Name].AliasedExpectedKeyItems.Contains(AliasedKeyItemID) &&
-                _keyItemZones[level.Name].BaseExpectedKeyItems.Contains((TR3Entities)ent.TypeID))
+                _keyItemZones[level.Name].BaseExpectedKeyItems.Contains((TR3Type)ent.TypeID))
             {
                 do
                 {
@@ -383,28 +383,28 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
     private static int GetLevelKeyItemBaseAlias(string name)
     {
-        TR3Entities alias = name switch
+        TR3Type alias = name switch
         {
-            TR3LevelNames.JUNGLE => TR3Entities.JungleKeyItemBase,
-            TR3LevelNames.RUINS => TR3Entities.TempleKeyItemBase,
-            TR3LevelNames.GANGES => TR3Entities.GangesKeyItemBase,
-            TR3LevelNames.CAVES => TR3Entities.KaliyaKeyItemBase,
-            TR3LevelNames.NEVADA => TR3Entities.NevadaKeyItemBase,
-            TR3LevelNames.HSC => TR3Entities.HSCKeyItemBase,
-            TR3LevelNames.AREA51 => TR3Entities.Area51KeyItemBase,
-            TR3LevelNames.COASTAL => TR3Entities.CoastalKeyItemBase,
-            TR3LevelNames.CRASH => TR3Entities.CrashKeyItemBase,
-            TR3LevelNames.MADUBU => TR3Entities.MadubuKeyItemBase,
-            TR3LevelNames.PUNA => TR3Entities.PunaKeyItemBase,
-            TR3LevelNames.THAMES => TR3Entities.ThamesKeyItemBase,
-            TR3LevelNames.ALDWYCH => TR3Entities.AldwychKeyItemBase,
-            TR3LevelNames.LUDS => TR3Entities.LudsKeyItemBase,
-            TR3LevelNames.CITY => TR3Entities.CityKeyItemBase,
-            TR3LevelNames.ANTARC => TR3Entities.AntarcticaKeyItemBase,
-            TR3LevelNames.RXTECH => TR3Entities.RXKeyItemBase,
-            TR3LevelNames.TINNOS => TR3Entities.TinnosKeyItemBase,
-            TR3LevelNames.WILLIE => TR3Entities.CavernKeyItemBase,
-            TR3LevelNames.HALLOWS => TR3Entities.HallowsKeyItemBase,
+            TR3LevelNames.JUNGLE => TR3Type.JungleKeyItemBase,
+            TR3LevelNames.RUINS => TR3Type.TempleKeyItemBase,
+            TR3LevelNames.GANGES => TR3Type.GangesKeyItemBase,
+            TR3LevelNames.CAVES => TR3Type.KaliyaKeyItemBase,
+            TR3LevelNames.NEVADA => TR3Type.NevadaKeyItemBase,
+            TR3LevelNames.HSC => TR3Type.HSCKeyItemBase,
+            TR3LevelNames.AREA51 => TR3Type.Area51KeyItemBase,
+            TR3LevelNames.COASTAL => TR3Type.CoastalKeyItemBase,
+            TR3LevelNames.CRASH => TR3Type.CrashKeyItemBase,
+            TR3LevelNames.MADUBU => TR3Type.MadubuKeyItemBase,
+            TR3LevelNames.PUNA => TR3Type.PunaKeyItemBase,
+            TR3LevelNames.THAMES => TR3Type.ThamesKeyItemBase,
+            TR3LevelNames.ALDWYCH => TR3Type.AldwychKeyItemBase,
+            TR3LevelNames.LUDS => TR3Type.LudsKeyItemBase,
+            TR3LevelNames.CITY => TR3Type.CityKeyItemBase,
+            TR3LevelNames.ANTARC => TR3Type.AntarcticaKeyItemBase,
+            TR3LevelNames.RXTECH => TR3Type.RXKeyItemBase,
+            TR3LevelNames.TINNOS => TR3Type.TinnosKeyItemBase,
+            TR3LevelNames.WILLIE => TR3Type.CavernKeyItemBase,
+            TR3LevelNames.HALLOWS => TR3Type.HallowsKeyItemBase,
             _ => default,
         };
 

@@ -63,11 +63,11 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
         {
             LoadLevelInstance(lvl);
 
-            TextureMonitor<TR3Entities> monitor = TextureMonitor.GetMonitor(_levelInstance.Name);
+            TextureMonitor<TR3Type> monitor = TextureMonitor.GetMonitor(_levelInstance.Name);
             if (monitor != null && monitor.UseNightTextures)
             {
                 TR3TextureMapping mapping = GetMapping(_levelInstance);
-                using (TextureHolder<TR3Entities, TR3Level> holder = new(mapping, this))
+                using (TextureHolder<TR3Type, TR3Level> holder = new(mapping, this))
                 {
                     foreach (AbstractTextureSource source in holder.Variants.Keys)
                     {
@@ -224,7 +224,7 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
         }
     }
 
-    private void RedrawTargets(AbstractTextureMapping<TR3Entities, TR3Level> mapping, AbstractTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
+    private void RedrawTargets(AbstractTextureMapping<TR3Type, TR3Level> mapping, AbstractTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
     {
         lock (_drawLock)
         {
@@ -232,7 +232,7 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
         }
     }
 
-    private void DrawReplacements(AbstractTextureMapping<TR3Entities, TR3Level> mapping)
+    private void DrawReplacements(AbstractTextureMapping<TR3Type, TR3Level> mapping)
     {
         lock (_drawLock)
         {
@@ -275,7 +275,7 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
 
     internal class TextureProcessor : AbstractProcessorThread<TR3TextureRandomizer>
     {
-        private readonly Dictionary<TR3CombinedLevel, TextureHolder<TR3Entities, TR3Level>> _holders;
+        private readonly Dictionary<TR3CombinedLevel, TextureHolder<TR3Type, TR3Level>> _holders;
         private readonly TR3LandmarkImporter _landmarkImporter;
         private readonly TR3Wireframer _wireframer;
 
@@ -284,7 +284,7 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
         internal TextureProcessor(TR3TextureRandomizer outer)
             : base(outer)
         {
-            _holders = new Dictionary<TR3CombinedLevel, TextureHolder<TR3Entities, TR3Level>>();
+            _holders = new Dictionary<TR3CombinedLevel, TextureHolder<TR3Type, TR3Level>>();
             _landmarkImporter = new TR3LandmarkImporter();
             _wireframer = new TR3Wireframer();
         }
@@ -311,12 +311,12 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
                 TR3TextureMapping mapping = _outer.GetMapping(level);
                 if (mapping != null)
                 {
-                    TextureHolder<TR3Entities, TR3Level> parentHolder = null;
+                    TextureHolder<TR3Type, TR3Level> parentHolder = null;
                     if (level.IsCutScene)
                     {
                         parentHolder = _holders[level.ParentLevel];
                     }
-                    _holders[level] = new TextureHolder<TR3Entities, TR3Level>(mapping, _outer, parentHolder);
+                    _holders[level] = new TextureHolder<TR3Type, TR3Level>(mapping, _outer, parentHolder);
 
                     if (_outer.IsWireframeLevel(level))
                     {
@@ -395,7 +395,7 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
 
         private void ProcessLevel(TR3CombinedLevel level, Dictionary<TextureCategory, bool> options)
         {
-            TextureMonitor<TR3Entities> monitor = _outer.TextureMonitor.GetMonitor(level.Name);
+            TextureMonitor<TR3Type> monitor = _outer.TextureMonitor.GetMonitor(level.Name);
             bool isWireframe = _outer.IsWireframeLevel(level);
 
             options[TextureCategory.NightMode] = monitor != null && monitor.UseNightTextures;
@@ -403,7 +403,7 @@ public class TR3TextureRandomizer : BaseTR3Randomizer, ITextureVariantHandler
             options[TextureCategory.Lara] = _outer._textureOptions[TextureCategory.Lara]
                 && (monitor == null || monitor.UseLaraOutfitTextures);
 
-            using (TextureHolder<TR3Entities, TR3Level> holder = _holders[level])
+            using (TextureHolder<TR3Type, TR3Level> holder = _holders[level])
             {
                 foreach (AbstractTextureSource source in holder.Variants.Keys)
                 {

@@ -12,7 +12,7 @@ namespace TRRandomizerCore.Randomizers;
 
 public class TR3OutfitRandomizer : BaseTR3Randomizer
 {
-    private TR3Entities _persistentOutfit;
+    private TR3Type _persistentOutfit;
 
     private List<TR3ScriptedLevel> _haircutLevels;
     private List<TR3ScriptedLevel> _invisibleLevels;
@@ -62,10 +62,10 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
         _processingException?.Throw();
     }
 
-    private static List<TR3Entities> GetLaraTypes()
+    private static List<TR3Type> GetLaraTypes()
     {
-        List<TR3Entities> allLaras = TR3EntityUtilities.GetLaraTypes();
-        allLaras.Remove(TR3Entities.LaraInvisible);
+        List<TR3Type> allLaras = TR3EntityUtilities.GetLaraTypes();
+        allLaras.Remove(TR3Type.LaraInvisible);
         return allLaras;
     }
 
@@ -73,7 +73,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
     {
         if (Settings.PersistOutfits)
         {
-            List<TR3Entities> allLaras = GetLaraTypes();
+            List<TR3Type> allLaras = GetLaraTypes();
             _persistentOutfit = allLaras[_generator.Next(0, allLaras.Count)];
         }
     }
@@ -110,49 +110,49 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
     {
         // Each of these needs to be removed and replaced with the corresponding animation
         // or skin models for the associated outfit.
-        private static readonly List<TR3Entities> _laraRemovals = new()
+        private static readonly List<TR3Type> _laraRemovals = new()
         {
-            TR3Entities.LaraPistolAnimation_H,
-            TR3Entities.LaraUziAnimation_H,
-            TR3Entities.LaraDeagleAnimation_H,
-            TR3Entities.LaraSkin_H,
-            TR3Entities.Lara
+            TR3Type.LaraPistolAnimation_H,
+            TR3Type.LaraUziAnimation_H,
+            TR3Type.LaraDeagleAnimation_H,
+            TR3Type.LaraSkin_H,
+            TR3Type.Lara
         };
 
         // Entities to hide for haircuts
-        private static readonly List<TR3Entities> _invisiblePonytailEntities = new()
+        private static readonly List<TR3Type> _invisiblePonytailEntities = new()
         {
-            TR3Entities.LaraPonytail_H
+            TR3Type.LaraPonytail_H
         };
 
         // Entities to hide for Lara entirely
-        private static readonly List<TR3Entities> _invisibleLaraEntities = new()
+        private static readonly List<TR3Type> _invisibleLaraEntities = new()
         {
-            TR3Entities.Lara, TR3Entities.LaraPonytail_H, TR3Entities.LaraFlareAnimation_H,
-            TR3Entities.LaraPistolAnimation_H, TR3Entities.LaraShotgunAnimation_H, TR3Entities.LaraUziAnimation_H,
-            TR3Entities.LaraDeagleAnimation_H, TR3Entities.LaraMP5Animation_H, TR3Entities.LaraGrenadeAnimation_H,
-            TR3Entities.LaraRocketAnimation_H, TR3Entities.LaraExtraAnimation_H, TR3Entities.LaraSkin_H
+            TR3Type.Lara, TR3Type.LaraPonytail_H, TR3Type.LaraFlareAnimation_H,
+            TR3Type.LaraPistolAnimation_H, TR3Type.LaraShotgunAnimation_H, TR3Type.LaraUziAnimation_H,
+            TR3Type.LaraDeagleAnimation_H, TR3Type.LaraMP5Animation_H, TR3Type.LaraGrenadeAnimation_H,
+            TR3Type.LaraRocketAnimation_H, TR3Type.LaraExtraAnimation_H, TR3Type.LaraSkin_H
         };
 
-        private readonly Dictionary<TR3CombinedLevel, List<TR3Entities>> _outfitAllocations;
+        private readonly Dictionary<TR3CombinedLevel, List<TR3Type>> _outfitAllocations;
 
         internal override int LevelCount => _outfitAllocations.Count;
 
         internal OutfitProcessor(TR3OutfitRandomizer outer)
             : base(outer)
         {
-            _outfitAllocations = new Dictionary<TR3CombinedLevel, List<TR3Entities>>();
+            _outfitAllocations = new Dictionary<TR3CombinedLevel, List<TR3Type>>();
         }
 
         internal void AddLevel(TR3CombinedLevel level)
         {
-            _outfitAllocations.Add(level, new List<TR3Entities>());
+            _outfitAllocations.Add(level, new List<TR3Type>());
         }
 
         protected override void StartImpl()
         {
             // Make the outfit selection outwith the processing thread to ensure consistent RNG.
-            List<TR3Entities> allLaras = GetLaraTypes();
+            List<TR3Type> allLaras = GetLaraTypes();
             List<TR3CombinedLevel> levels = new(_outfitAllocations.Keys);
 
             foreach (TR3CombinedLevel level in levels)
@@ -160,7 +160,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
                 // If invisible is chosen for this level, this overrides persistent outfits
                 if (_outer.IsInvisibleLevel(level.Script))
                 {
-                    _outfitAllocations[level].Add(TR3Entities.LaraInvisible);
+                    _outfitAllocations[level].Add(TR3Type.LaraInvisible);
                 }
                 else
                 {
@@ -173,7 +173,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
 
                     while (_outfitAllocations[level].Count < allLaras.Count)
                     {
-                        TR3Entities nextLara = allLaras[_outer._generator.Next(0, allLaras.Count)];
+                        TR3Type nextLara = allLaras[_outer._generator.Next(0, allLaras.Count)];
                         if (!_outfitAllocations[level].Contains(nextLara))
                         {
                             _outfitAllocations[level].Add(nextLara);
@@ -187,7 +187,7 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
         {
             foreach (TR3CombinedLevel level in _outfitAllocations.Keys)
             {
-                foreach (TR3Entities lara in _outfitAllocations[level])
+                foreach (TR3Type lara in _outfitAllocations[level])
                 {
                     if (Import(level, lara))
                     {
@@ -209,18 +209,18 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
             }
         }
 
-        private bool Import(TR3CombinedLevel level, TR3Entities lara)
+        private bool Import(TR3CombinedLevel level, TR3Type lara)
         {
-            if (lara == TR3Entities.LaraInvisible)
+            if (lara == TR3Type.LaraInvisible)
             {
                 // No import needed, just clear each of Lara's meshes.
                 HideEntities(level, _invisibleLaraEntities);
                 return true;
             }
 
-            List<TR3Entities> laraImport = new();
-            List<TR3Entities> laraRemovals = new();
-            if (lara != TR3EntityUtilities.GetAliasForLevel(level.Name, TR3Entities.Lara))
+            List<TR3Type> laraImport = new();
+            List<TR3Type> laraRemovals = new();
+            if (lara != TR3EntityUtilities.GetAliasForLevel(level.Name, TR3Type.Lara))
             {
                 laraImport.Add(lara);
                 laraRemovals.AddRange(_laraRemovals);
@@ -266,10 +266,10 @@ public class TR3OutfitRandomizer : BaseTR3Randomizer
             }
         }
 
-        private void HideEntities(TR3CombinedLevel level, IEnumerable<TR3Entities> entities)
+        private void HideEntities(TR3CombinedLevel level, IEnumerable<TR3Type> entities)
         {
             MeshEditor editor = new();
-            foreach (TR3Entities ent in entities)
+            foreach (TR3Type ent in entities)
             {
                 TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level.Data, ent);
                 if (meshes != null)

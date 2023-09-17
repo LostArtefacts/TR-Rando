@@ -37,7 +37,7 @@ public class EMImportModelFunction : BaseEMFunction
         TR3ModelImporter importer = new()
         {
             Level = level,
-            EntitiesToImport = Models.Select(m => (TR3Entities)m),
+            EntitiesToImport = Models.Select(m => (TR3Type)m),
             DataFolder = @"Resources\TR3\Models"
         };
 

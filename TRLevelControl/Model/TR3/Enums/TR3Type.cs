@@ -7,7 +7,7 @@
 //_N are nullmeshes (no render/collision) - RED
 //_H are helper entities (not placed) - GREEN
 //_U are unused entities - PURPLE
-public enum TR3Entities
+public enum TR3Type
 {
     Lara                       = 0,
     LaraPistolAnimation_H      = 1,

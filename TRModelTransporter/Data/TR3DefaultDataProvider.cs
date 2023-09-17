@@ -3,46 +3,46 @@ using TRLevelControl.Model;
 
 namespace TRModelTransporter.Data;
 
-public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
+public class TR3DefaultDataProvider : ITransportDataProvider<TR3Type>
 {
     public int TextureTileLimit { get; set; } = 32;
     public int TextureObjectLimit { get; set; } = 4096;
 
-    public Dictionary<TR3Entities, TR3Entities> AliasPriority { get; set; }
+    public Dictionary<TR3Type, TR3Type> AliasPriority { get; set; }
 
-    public IEnumerable<TR3Entities> GetModelDependencies(TR3Entities entity)
+    public IEnumerable<TR3Type> GetModelDependencies(TR3Type entity)
     {
         return _entityDependencies.ContainsKey(entity) ? _entityDependencies[entity] : _emptyEntities;
     }
 
-    public IEnumerable<TR3Entities> GetRemovalExclusions(TR3Entities entity)
+    public IEnumerable<TR3Type> GetRemovalExclusions(TR3Type entity)
     {
         return _emptyEntities;
     }
 
-    public IEnumerable<TR3Entities> GetCyclicDependencies(TR3Entities entity)
+    public IEnumerable<TR3Type> GetCyclicDependencies(TR3Type entity)
     {
         return _emptyEntities;
     }
 
-    public IEnumerable<TR3Entities> GetSpriteDependencies(TR3Entities entity)
+    public IEnumerable<TR3Type> GetSpriteDependencies(TR3Type entity)
     {
         return _spriteDependencies.ContainsKey(entity) ? _spriteDependencies[entity] : _emptyEntities;
     }
 
-    public IEnumerable<TR3Entities> GetCinematicEntities()
+    public IEnumerable<TR3Type> GetCinematicEntities()
     {
         return _cinematicEntities;
     }
 
-    public IEnumerable<TR3Entities> GetLaraDependants()
+    public IEnumerable<TR3Type> GetLaraDependants()
     {
         return _laraDependentModels;
     }
 
-    public bool IsAlias(TR3Entities entity)
+    public bool IsAlias(TR3Type entity)
     {
-        foreach (List<TR3Entities> aliases in _entityAliases.Values)
+        foreach (List<TR3Type> aliases in _entityAliases.Values)
         {
             if (aliases.Contains(entity))
             {
@@ -53,14 +53,14 @@ public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
         return false;
     }
 
-    public bool HasAliases(TR3Entities entity)
+    public bool HasAliases(TR3Type entity)
     {
         return _entityAliases.ContainsKey(entity);
     }
 
-    public TR3Entities TranslateAlias(TR3Entities entity)
+    public TR3Type TranslateAlias(TR3Type entity)
     {
-        foreach (TR3Entities root in _entityAliases.Keys)
+        foreach (TR3Type root in _entityAliases.Keys)
         {
             if (_entityAliases[root].Contains(entity))
             {
@@ -71,207 +71,207 @@ public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
         return entity;
     }
 
-    public IEnumerable<TR3Entities> GetAliases(TR3Entities entity)
+    public IEnumerable<TR3Type> GetAliases(TR3Type entity)
     {
         return _entityAliases.ContainsKey(entity) ? _entityAliases[entity] : _emptyEntities;
     }
 
-    public TR3Entities GetLevelAlias(string level, TR3Entities entity)
+    public TR3Type GetLevelAlias(string level, TR3Type entity)
     {
         return TR3EntityUtilities.GetAliasForLevel(level, entity);
     }
 
-    public bool IsAliasDuplicatePermitted(TR3Entities entity)
+    public bool IsAliasDuplicatePermitted(TR3Type entity)
     {
         return _permittedAliasDuplicates.Contains(entity);
     }
 
-    public bool IsOverridePermitted(TR3Entities entity)
+    public bool IsOverridePermitted(TR3Type entity)
     {
         return _permittedOverrides.Contains(entity);
     }
 
-    public IEnumerable<TR3Entities> GetUnsafeModelReplacements()
+    public IEnumerable<TR3Type> GetUnsafeModelReplacements()
     {
         return _unsafeModelReplacements;
     }
 
-    public bool IsNonGraphicsDependency(TR3Entities entity)
+    public bool IsNonGraphicsDependency(TR3Type entity)
     {
         return _nonGraphicsDependencies.Contains(entity);
     }
 
-    public bool IsSoundOnlyDependency(TR3Entities entity)
+    public bool IsSoundOnlyDependency(TR3Type entity)
     {
         return _soundOnlyDependencies.Contains(entity);
     }
 
-    public short[] GetHardcodedSounds(TR3Entities entity)
+    public short[] GetHardcodedSounds(TR3Type entity)
     {
         return _hardcodedSoundIndices.ContainsKey(entity) ? _hardcodedSoundIndices[entity] : null;
     }
 
-    public IEnumerable<int> GetIgnorableTextureIndices(TR3Entities entity, string level)
+    public IEnumerable<int> GetIgnorableTextureIndices(TR3Type entity, string level)
     {
         return _ignoreEntityTextures.ContainsKey(entity) ? _ignoreEntityTextures[entity] : null;
     }
 
     #region Data
 
-    private static readonly IEnumerable<TR3Entities> _emptyEntities = new List<TR3Entities>();
+    private static readonly IEnumerable<TR3Type> _emptyEntities = new List<TR3Type>();
 
-    private static readonly Dictionary<TR3Entities, TR3Entities[]> _entityDependencies = new()
+    private static readonly Dictionary<TR3Type, TR3Type[]> _entityDependencies = new()
     {
-        [TR3Entities.LaraIndia]
-            = new TR3Entities[] { TR3Entities.LaraSkin_H_India, TR3Entities.LaraPistolAnimation_H_India, TR3Entities.LaraDeagleAnimation_H_India, TR3Entities.LaraUziAnimation_H_India },
+        [TR3Type.LaraIndia]
+            = new TR3Type[] { TR3Type.LaraSkin_H_India, TR3Type.LaraPistolAnimation_H_India, TR3Type.LaraDeagleAnimation_H_India, TR3Type.LaraUziAnimation_H_India },
 
-        [TR3Entities.LaraCoastal]
-            = new TR3Entities[] { TR3Entities.LaraSkin_H_Coastal, TR3Entities.LaraPistolAnimation_H_Coastal, TR3Entities.LaraDeagleAnimation_H_Coastal, TR3Entities.LaraUziAnimation_H_Coastal },
+        [TR3Type.LaraCoastal]
+            = new TR3Type[] { TR3Type.LaraSkin_H_Coastal, TR3Type.LaraPistolAnimation_H_Coastal, TR3Type.LaraDeagleAnimation_H_Coastal, TR3Type.LaraUziAnimation_H_Coastal },
 
-        [TR3Entities.LaraLondon]
-            = new TR3Entities[] { TR3Entities.LaraSkin_H_London, TR3Entities.LaraPistolAnimation_H_London, TR3Entities.LaraDeagleAnimation_H_London, TR3Entities.LaraUziAnimation_H_London },
+        [TR3Type.LaraLondon]
+            = new TR3Type[] { TR3Type.LaraSkin_H_London, TR3Type.LaraPistolAnimation_H_London, TR3Type.LaraDeagleAnimation_H_London, TR3Type.LaraUziAnimation_H_London },
 
-        [TR3Entities.LaraNevada]
-            = new TR3Entities[] { TR3Entities.LaraSkin_H_Nevada, TR3Entities.LaraPistolAnimation_H_Nevada, TR3Entities.LaraDeagleAnimation_H_Nevada, TR3Entities.LaraUziAnimation_H_Nevada },
+        [TR3Type.LaraNevada]
+            = new TR3Type[] { TR3Type.LaraSkin_H_Nevada, TR3Type.LaraPistolAnimation_H_Nevada, TR3Type.LaraDeagleAnimation_H_Nevada, TR3Type.LaraUziAnimation_H_Nevada },
 
-        [TR3Entities.LaraAntarc]
-            = new TR3Entities[] { TR3Entities.LaraSkin_H_Antarc, TR3Entities.LaraPistolAnimation_H_Antarc, TR3Entities.LaraDeagleAnimation_H_Antarc, TR3Entities.LaraUziAnimation_H_Antarc },
+        [TR3Type.LaraAntarc]
+            = new TR3Type[] { TR3Type.LaraSkin_H_Antarc, TR3Type.LaraPistolAnimation_H_Antarc, TR3Type.LaraDeagleAnimation_H_Antarc, TR3Type.LaraUziAnimation_H_Antarc },
 
-        [TR3Entities.LaraHome]
-            = new TR3Entities[] { TR3Entities.LaraSkin_H_Home, TR3Entities.LaraPistolAnimation_H_Home/*, TR3Entities.LaraDeagleAnimation_H_Home, TR3Entities.LaraUziAnimation_H_Home*/ },
+        [TR3Type.LaraHome]
+            = new TR3Type[] { TR3Type.LaraSkin_H_Home, TR3Type.LaraPistolAnimation_H_Home/*, TR3Entities.LaraDeagleAnimation_H_Home, TR3Entities.LaraUziAnimation_H_Home*/ },
 
-        [TR3Entities.Monkey]
-            = new TR3Entities[] { TR3Entities.MonkeyMedMeshswap, TR3Entities.MonkeyKeyMeshswap },
+        [TR3Type.Monkey]
+            = new TR3Type[] { TR3Type.MonkeyMedMeshswap, TR3Type.MonkeyKeyMeshswap },
 
-        [TR3Entities.Shiva]
-            = new TR3Entities[] { TR3Entities.ShivaStatue, TR3Entities.LaraExtraAnimation_H, TR3Entities.Monkey },
+        [TR3Type.Shiva]
+            = new TR3Type[] { TR3Type.ShivaStatue, TR3Type.LaraExtraAnimation_H, TR3Type.Monkey },
 
-        [TR3Entities.Quad]
-            = new TR3Entities[] { TR3Entities.LaraVehicleAnimation_H_Quad },
+        [TR3Type.Quad]
+            = new TR3Type[] { TR3Type.LaraVehicleAnimation_H_Quad },
 
-        [TR3Entities.Kayak]
-            = new TR3Entities[] { TR3Entities.LaraVehicleAnimation_H_Kayak },
+        [TR3Type.Kayak]
+            = new TR3Type[] { TR3Type.LaraVehicleAnimation_H_Kayak },
 
-        [TR3Entities.UPV]
-            = new TR3Entities[] { TR3Entities.LaraVehicleAnimation_H_UPV },
+        [TR3Type.UPV]
+            = new TR3Type[] { TR3Type.LaraVehicleAnimation_H_UPV },
 
-        [TR3Entities.Boat]
-            = new TR3Entities[] { TR3Entities.LaraVehicleAnimation_H_Boat },
+        [TR3Type.Boat]
+            = new TR3Type[] { TR3Type.LaraVehicleAnimation_H_Boat },
 
-        [TR3Entities.Tyrannosaur]
-             = new TR3Entities[] { TR3Entities.LaraExtraAnimation_H },
+        [TR3Type.Tyrannosaur]
+             = new TR3Type[] { TR3Type.LaraExtraAnimation_H },
 
-        [TR3Entities.Willie]
-             = new TR3Entities[] { TR3Entities.LaraExtraAnimation_H, TR3Entities.AIPath_N },
+        [TR3Type.Willie]
+             = new TR3Type[] { TR3Type.LaraExtraAnimation_H, TR3Type.AIPath_N },
 
-        [TR3Entities.Infada_P]
-             = new TR3Entities[] { TR3Entities.Infada_M_H },
-        [TR3Entities.OraDagger_P]
-             = new TR3Entities[] { TR3Entities.OraDagger_M_H },
-        [TR3Entities.EyeOfIsis_P]
-             = new TR3Entities[] { TR3Entities.EyeOfIsis_M_H },
-        [TR3Entities.Element115_P]
-             = new TR3Entities[] { TR3Entities.Element115_M_H },
+        [TR3Type.Infada_P]
+             = new TR3Type[] { TR3Type.Infada_M_H },
+        [TR3Type.OraDagger_P]
+             = new TR3Type[] { TR3Type.OraDagger_M_H },
+        [TR3Type.EyeOfIsis_P]
+             = new TR3Type[] { TR3Type.EyeOfIsis_M_H },
+        [TR3Type.Element115_P]
+             = new TR3Type[] { TR3Type.Element115_M_H },
 
-        [TR3Entities.Quest1_P]
-            = new TR3Entities[] { TR3Entities.Quest1_M_H },
-        [TR3Entities.Quest2_P]
-            = new TR3Entities[] { TR3Entities.Quest2_M_H },
+        [TR3Type.Quest1_P]
+            = new TR3Type[] { TR3Type.Quest1_M_H },
+        [TR3Type.Quest2_P]
+            = new TR3Type[] { TR3Type.Quest2_M_H },
 
-        [TR3Entities.MP5_P]
-            = new TR3Entities[] { TR3Entities.GunflareMP5_H },
-        [TR3Entities.RocketLauncher_P]
-            = new TR3Entities[] { TR3Entities.RocketSingle },
-        [TR3Entities.GrenadeLauncher_P]
-            = new TR3Entities[] { TR3Entities.GrenadeSingle },
-        [TR3Entities.Harpoon_P]
-            = new TR3Entities[] { TR3Entities.HarpoonSingle2 }
+        [TR3Type.MP5_P]
+            = new TR3Type[] { TR3Type.GunflareMP5_H },
+        [TR3Type.RocketLauncher_P]
+            = new TR3Type[] { TR3Type.RocketSingle },
+        [TR3Type.GrenadeLauncher_P]
+            = new TR3Type[] { TR3Type.GrenadeSingle },
+        [TR3Type.Harpoon_P]
+            = new TR3Type[] { TR3Type.HarpoonSingle2 }
     };
 
-    private static readonly Dictionary<TR3Entities, List<TR3Entities>> _spriteDependencies = new()
+    private static readonly Dictionary<TR3Type, List<TR3Type>> _spriteDependencies = new()
     {
         
     };
 
-    private static readonly List<TR3Entities> _cinematicEntities = new()
+    private static readonly List<TR3Type> _cinematicEntities = new()
     {
         
     };
 
-    private static readonly List<TR3Entities> _laraDependentModels = new()
+    private static readonly List<TR3Type> _laraDependentModels = new()
     {
         
     };
 
-    private static readonly Dictionary<TR3Entities, List<TR3Entities>> _entityAliases = new()
+    private static readonly Dictionary<TR3Type, List<TR3Type>> _entityAliases = new()
     {
-        [TR3Entities.Lara] = new List<TR3Entities>
+        [TR3Type.Lara] = new List<TR3Type>
         {
-            TR3Entities.LaraIndia, TR3Entities.LaraCoastal, TR3Entities.LaraLondon, TR3Entities.LaraNevada, TR3Entities.LaraAntarc, TR3Entities.LaraHome
+            TR3Type.LaraIndia, TR3Type.LaraCoastal, TR3Type.LaraLondon, TR3Type.LaraNevada, TR3Type.LaraAntarc, TR3Type.LaraHome
         },
-        [TR3Entities.LaraSkin_H] = new List<TR3Entities>
+        [TR3Type.LaraSkin_H] = new List<TR3Type>
         {
-            TR3Entities.LaraSkin_H_India, TR3Entities.LaraSkin_H_Coastal, TR3Entities.LaraSkin_H_London, TR3Entities.LaraSkin_H_Nevada, TR3Entities.LaraSkin_H_Antarc, TR3Entities.LaraSkin_H_Home
-        },
-
-        [TR3Entities.LaraPistolAnimation_H] = new List<TR3Entities>
-        {
-            TR3Entities.LaraPistolAnimation_H_India, TR3Entities.LaraPistolAnimation_H_Coastal, TR3Entities.LaraPistolAnimation_H_London, TR3Entities.LaraPistolAnimation_H_Nevada, TR3Entities.LaraPistolAnimation_H_Antarc, TR3Entities.LaraPistolAnimation_H_Home
-        },
-        [TR3Entities.LaraDeagleAnimation_H] = new List<TR3Entities>
-        {
-            TR3Entities.LaraDeagleAnimation_H_India, TR3Entities.LaraDeagleAnimation_H_Coastal, TR3Entities.LaraDeagleAnimation_H_London, TR3Entities.LaraDeagleAnimation_H_Nevada, TR3Entities.LaraDeagleAnimation_H_Antarc, TR3Entities.LaraDeagleAnimation_H_Home
-        },
-        [TR3Entities.LaraUziAnimation_H] = new List<TR3Entities>
-        {
-            TR3Entities.LaraUziAnimation_H_India, TR3Entities.LaraUziAnimation_H_Coastal, TR3Entities.LaraUziAnimation_H_London, TR3Entities.LaraUziAnimation_H_Nevada, TR3Entities.LaraUziAnimation_H_Antarc, TR3Entities.LaraUziAnimation_H_Home
+            TR3Type.LaraSkin_H_India, TR3Type.LaraSkin_H_Coastal, TR3Type.LaraSkin_H_London, TR3Type.LaraSkin_H_Nevada, TR3Type.LaraSkin_H_Antarc, TR3Type.LaraSkin_H_Home
         },
 
-        [TR3Entities.LaraVehicleAnimation_H] = new List<TR3Entities>
+        [TR3Type.LaraPistolAnimation_H] = new List<TR3Type>
         {
-            TR3Entities.LaraVehicleAnimation_H_Quad, TR3Entities.LaraVehicleAnimation_H_BigGun, TR3Entities.LaraVehicleAnimation_H_Kayak, TR3Entities.LaraVehicleAnimation_H_UPV, TR3Entities.LaraVehicleAnimation_H_Boat
+            TR3Type.LaraPistolAnimation_H_India, TR3Type.LaraPistolAnimation_H_Coastal, TR3Type.LaraPistolAnimation_H_London, TR3Type.LaraPistolAnimation_H_Nevada, TR3Type.LaraPistolAnimation_H_Antarc, TR3Type.LaraPistolAnimation_H_Home
+        },
+        [TR3Type.LaraDeagleAnimation_H] = new List<TR3Type>
+        {
+            TR3Type.LaraDeagleAnimation_H_India, TR3Type.LaraDeagleAnimation_H_Coastal, TR3Type.LaraDeagleAnimation_H_London, TR3Type.LaraDeagleAnimation_H_Nevada, TR3Type.LaraDeagleAnimation_H_Antarc, TR3Type.LaraDeagleAnimation_H_Home
+        },
+        [TR3Type.LaraUziAnimation_H] = new List<TR3Type>
+        {
+            TR3Type.LaraUziAnimation_H_India, TR3Type.LaraUziAnimation_H_Coastal, TR3Type.LaraUziAnimation_H_London, TR3Type.LaraUziAnimation_H_Nevada, TR3Type.LaraUziAnimation_H_Antarc, TR3Type.LaraUziAnimation_H_Home
         },
 
-        [TR3Entities.Cobra] = new List<TR3Entities>
+        [TR3Type.LaraVehicleAnimation_H] = new List<TR3Type>
         {
-            TR3Entities.CobraIndia, TR3Entities.CobraNevada
+            TR3Type.LaraVehicleAnimation_H_Quad, TR3Type.LaraVehicleAnimation_H_BigGun, TR3Type.LaraVehicleAnimation_H_Kayak, TR3Type.LaraVehicleAnimation_H_UPV, TR3Type.LaraVehicleAnimation_H_Boat
         },
 
-        [TR3Entities.Dog] = new List<TR3Entities>
+        [TR3Type.Cobra] = new List<TR3Type>
         {
-            TR3Entities.DogLondon, TR3Entities.DogNevada
+            TR3Type.CobraIndia, TR3Type.CobraNevada
+        },
+
+        [TR3Type.Dog] = new List<TR3Type>
+        {
+            TR3Type.DogLondon, TR3Type.DogNevada
         }
     };
 
-    private static readonly List<TR3Entities> _permittedAliasDuplicates = new()
+    private static readonly List<TR3Type> _permittedAliasDuplicates = new()
     {
-        TR3Entities.LaraVehicleAnimation_H
+        TR3Type.LaraVehicleAnimation_H
     };
 
-    private static readonly List<TR3Entities> _permittedOverrides = new()
+    private static readonly List<TR3Type> _permittedOverrides = new()
     {
-        TR3Entities.Infada_M_H, TR3Entities.EyeOfIsis_M_H, TR3Entities.OraDagger_M_H, TR3Entities.Element115_M_H
+        TR3Type.Infada_M_H, TR3Type.EyeOfIsis_M_H, TR3Type.OraDagger_M_H, TR3Type.Element115_M_H
     };
 
-    private static readonly List<TR3Entities> _unsafeModelReplacements = new()
+    private static readonly List<TR3Type> _unsafeModelReplacements = new()
     {
-         TR3Entities.Lara, TR3Entities.LaraSkin_H, TR3Entities.LaraPistolAnimation_H, TR3Entities.LaraUziAnimation_H, TR3Entities.LaraDeagleAnimation_H
+         TR3Type.Lara, TR3Type.LaraSkin_H, TR3Type.LaraPistolAnimation_H, TR3Type.LaraUziAnimation_H, TR3Type.LaraDeagleAnimation_H
     };
 
-    private static readonly List<TR3Entities> _nonGraphicsDependencies = new()
+    private static readonly List<TR3Type> _nonGraphicsDependencies = new()
     {
-        TR3Entities.Monkey
+        TR3Type.Monkey
     };
 
     // If these are imported into levels that already have another alias for them, only their hardcoded sounds will be imported
-    protected static readonly List<TR3Entities> _soundOnlyDependencies = new()
+    protected static readonly List<TR3Type> _soundOnlyDependencies = new()
     {
         
     };
 
-    private static readonly Dictionary<TR3Entities, short[]> _hardcodedSoundIndices = new()
+    private static readonly Dictionary<TR3Type, short[]> _hardcodedSoundIndices = new()
     {
-        [TR3Entities.Quad] = new short[]
+        [TR3Type.Quad] = new short[]
         {
             152, // Starting
             153, // Idling
@@ -279,7 +279,7 @@ public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
             155, // High RPM,
             156  // Switch off 2
         },
-        [TR3Entities.TonyFirehands] = new short[]
+        [TR3Type.TonyFirehands] = new short[]
         {
             76,  // Powering down
             234, // Dying
@@ -289,59 +289,59 @@ public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
             367, // Fireball2
             368  // Fireball3
         },
-        [TR3Entities.Puna] = new short[]
+        [TR3Type.Puna] = new short[]
         {
             359  // Hoo-uh!
         },
-        [TR3Entities.LondonMerc] = new short[]
+        [TR3Type.LondonMerc] = new short[]
         {
             299  // Hey/Oi!
         },
-        [TR3Entities.LondonGuard] = new short[]
+        [TR3Type.LondonGuard] = new short[]
         {
             299, // Hey/Oi!
             305  // Gunshot
         },
-        [TR3Entities.Punk] = new short[]
+        [TR3Type.Punk] = new short[]
         {
             299  // Hey/Oi!
         },
-        [TR3Entities.UPV] = new short[]
+        [TR3Type.UPV] = new short[]
         {
             346, // Starting
             347, // Running
             348  // Stopping
         },
-        [TR3Entities.MPWithStick] = new short[]
+        [TR3Type.MPWithStick] = new short[]
         {
             300  // Hey!
         },
-        [TR3Entities.MPWithGun] = new short[]
+        [TR3Type.MPWithGun] = new short[]
         {
             300  // Hey!
         },
-        [TR3Entities.MPWithMP5] = new short[]
+        [TR3Type.MPWithMP5] = new short[]
         {
             137, // Gunshot
             300  // Hey!
         },
-        [TR3Entities.DamGuard] = new short[]
+        [TR3Type.DamGuard] = new short[]
         {
             300  // Hey!
         },
-        [TR3Entities.Prisoner] = new short[]
+        [TR3Type.Prisoner] = new short[]
         {
             300  // Hey!
         },
-        [TR3Entities.RXRedBoi] = new short[]
+        [TR3Type.RXRedBoi] = new short[]
         {
             300  // Hey!
         },
-        [TR3Entities.RXGunLad] = new short[]
+        [TR3Type.RXGunLad] = new short[]
         {
             300  // Hey!
         },
-        [TR3Entities.Boat] = new short[]
+        [TR3Type.Boat] = new short[]
         {
             194, // Starting
             195, // Idling
@@ -350,7 +350,7 @@ public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
             198, // Stopping
             199  // Hitting something
         },
-        [TR3Entities.Winston] = new short[]
+        [TR3Type.Winston] = new short[]
         {
             308, // Shuffle
             311, // Hit by shield
@@ -358,11 +358,11 @@ public class TR3DefaultDataProvider : ITransportDataProvider<TR3Entities>
         }
     };
 
-    private static readonly Dictionary<TR3Entities, List<int>> _ignoreEntityTextures = new()
+    private static readonly Dictionary<TR3Type, List<int>> _ignoreEntityTextures = new()
     {
-        [TR3Entities.LaraVehicleAnimation_H]
+        [TR3Type.LaraVehicleAnimation_H]
             = new List<int>(), // empty list indicates to ignore everything
-        [TR3Entities.LaraExtraAnimation_H]
+        [TR3Type.LaraExtraAnimation_H]
             = new List<int>()
     };
 

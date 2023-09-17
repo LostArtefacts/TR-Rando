@@ -217,19 +217,19 @@ public class IOTests : TestBase
         for (int totalSecrets = 1; totalSecrets <= 21; totalSecrets++)
         {
             // The number of doors determines the trigger masks
-            int requiredDoors = (int)Math.Ceiling((double)totalSecrets / TRSecretPlacement<TR3Entities>.MaskBits);
+            int requiredDoors = (int)Math.Ceiling((double)totalSecrets / TRSecretPlacement<TR3Type>.MaskBits);
             List<int> doors = new(requiredDoors);
             for (int i = 0; i < requiredDoors; i++)
             {
                 doors.Add(i);
             }
 
-            List<TRSecretPlacement<TR3Entities>> secrets = new();
+            List<TRSecretPlacement<TR3Type>> secrets = new();
 
             // Create a secret up to the limit for this "level" and set its mask and door
             for (ushort secretIndex = 0; secretIndex < totalSecrets; secretIndex++)
             {
-                TRSecretPlacement<TR3Entities> secret = new()
+                TRSecretPlacement<TR3Type> secret = new()
                 {
                     SecretIndex = secretIndex
                 };
@@ -241,11 +241,11 @@ public class IOTests : TestBase
             // allocated to it equals full activation i.e. 31.
             for (int i = 0; i < requiredDoors; i++)
             {
-                List<TRSecretPlacement<TR3Entities>> doorTriggers = secrets.FindAll(s => s.DoorIndex == i);
+                List<TRSecretPlacement<TR3Type>> doorTriggers = secrets.FindAll(s => s.DoorIndex == i);
                 int mask = 0;
                 doorTriggers.ForEach(s => mask += s.TriggerMask);
 
-                Assert.AreEqual(TRSecretPlacement<TR3Entities>.FullActivation, mask);
+                Assert.AreEqual(TRSecretPlacement<TR3Type>.FullActivation, mask);
             }
         }
     }

@@ -89,7 +89,7 @@ public class EMConvertEnemyFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        List<TR3Entities> potentialTypes = TR3EntityUtilities.GetFullListOfEnemies();
+        List<TR3Type> potentialTypes = TR3EntityUtilities.GetFullListOfEnemies();
         if (NewEnemyType == EnemyType.Land)
         {
             potentialTypes.RemoveAll(e => TR3EntityUtilities.IsWaterCreature(e));
@@ -109,11 +109,11 @@ public class EMConvertEnemyFunction : BaseEMFunction
 
         TR2Entity enemyMatch = null;
         List<TR2Entity> entities = level.Entities.ToList();
-        if (potentialTypes.Contains((TR3Entities)PreferredType))
+        if (potentialTypes.Contains((TR3Type)PreferredType))
         {
             enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));
         }
-        enemyMatch ??= entities.Find(e => potentialTypes.Contains((TR3Entities)e.TypeID));
+        enemyMatch ??= entities.Find(e => potentialTypes.Contains((TR3Type)e.TypeID));
 
         if (enemyMatch != null)
         {

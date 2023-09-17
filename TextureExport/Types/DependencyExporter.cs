@@ -61,10 +61,10 @@ public static class DependencyExporter
         TR3TextureRemapGroup remapGroup = new();
         foreach (TRModel model in level.Models)
         {
-            remapGroup.CalculateDependencies(level, (TR3Entities)model.ID);
+            remapGroup.CalculateDependencies(level, (TR3Type)model.ID);
         }
 
-        remapGroup.Dependencies.Sort(delegate (TextureDependency<TR3Entities> d1, TextureDependency<TR3Entities> d2)
+        remapGroup.Dependencies.Sort(delegate (TextureDependency<TR3Type> d1, TextureDependency<TR3Type> d2)
         {
             if (d1.TileIndex == d2.TileIndex)
             {

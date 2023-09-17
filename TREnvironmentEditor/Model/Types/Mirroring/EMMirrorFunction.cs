@@ -90,11 +90,11 @@ public class EMMirrorFunction : BaseEMFunction
             _worldWidth = Math.Max(_worldWidth, room.Info.X + SectorSize * room.NumXSectors);
         }
 
-        TR2Entity puna = Array.Find(level.Entities, e => e.TypeID == (short)TR3Entities.Puna);
+        TR2Entity puna = Array.Find(level.Entities, e => e.TypeID == (short)TR3Type.Puna);
         if (puna != null)
         {
             // Rebuild the world around Puna's Lizard
-            TR2Entity lizardMan = Array.Find(level.Entities, e => e.Room == puna.Room && e.TypeID == (short)TR3Entities.LizardMan);
+            TR2Entity lizardMan = Array.Find(level.Entities, e => e.Room == puna.Room && e.TypeID == (short)TR3Type.LizardMan);
             _xAdjustment = lizardMan.X - FlipWorldX(lizardMan.X);
         }
     }
@@ -636,7 +636,7 @@ public class EMMirrorFunction : BaseEMFunction
             AdjustTR3EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.ToList().FindAll(e => TR3EntityUtilities.IsDoorType((TR3Entities)e.TypeID)));
+        AdjustDoors(level.Entities.ToList().FindAll(e => TR3EntityUtilities.IsDoorType((TR3Type)e.TypeID)));
     }
 
     private static void AdjustTR1EntityPosition(TREntity entity)
@@ -829,12 +829,12 @@ public class EMMirrorFunction : BaseEMFunction
         // Flip the angle - north and south remain, everything else moves appropriately
         entity.Angle *= -1;
 
-        switch ((TR3Entities)entity.TypeID)
+        switch ((TR3Type)entity.TypeID)
         {
             // These take up several tiles so need some fiddling
-            case TR3Entities.SpikyVertWallOrTunnelBorer:
-            case TR3Entities.SpikyWall:
-            case TR3Entities.SubwayTrain:
+            case TR3Type.SpikyVertWallOrTunnelBorer:
+            case TR3Type.SpikyWall:
+            case TR3Type.SubwayTrain:
                 switch (entity.Angle)
                 {
                     case _north:
@@ -852,7 +852,7 @@ public class EMMirrorFunction : BaseEMFunction
                 }
                 break;
 
-            case TR3Entities.Area51Swinger:
+            case TR3Type.Area51Swinger:
                 switch (entity.Angle)
                 {
                     case _north:
@@ -863,8 +863,8 @@ public class EMMirrorFunction : BaseEMFunction
                         break;
                 }
                 break;
-            case TR3Entities.BigMissile:
-            case TR3Entities.MovableBoom:
+            case TR3Type.BigMissile:
+            case TR3Type.MovableBoom:
                 switch (entity.Angle)
                 {
                     case _east:
@@ -874,9 +874,9 @@ public class EMMirrorFunction : BaseEMFunction
                 break;
 
             // Bridge tilts need to be rotated
-            case TR3Entities.BridgeTilt1:
-            case TR3Entities.BridgeTilt2:
-            case TR3Entities.FireBreathingDragonStatue:
+            case TR3Type.BridgeTilt1:
+            case TR3Type.BridgeTilt2:
+            case TR3Type.FireBreathingDragonStatue:
                 switch (entity.Angle)
                 {
                     case _north:
@@ -895,7 +895,7 @@ public class EMMirrorFunction : BaseEMFunction
                 break;
 
             // The Crash Site walls
-            case TR3Entities.DestroyableBoardedUpWall:
+            case TR3Type.DestroyableBoardedUpWall:
                 switch (entity.Angle)
                 {
                     case _east:

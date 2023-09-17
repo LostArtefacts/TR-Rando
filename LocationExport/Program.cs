@@ -178,7 +178,7 @@ class Program
 
         foreach (TR2Entity entity in level.Entities)
         {
-            if (!TR3EntityUtilities.CanSharePickupSpace((TR3Entities)entity.TypeID))
+            if (!TR3EntityUtilities.CanSharePickupSpace((TR3Type)entity.TypeID))
             {
                 exclusions.Add(new Location
                 {

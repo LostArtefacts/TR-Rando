@@ -21,7 +21,7 @@ public static class TR3EnemyUtilities
     }
 
     // Check if an enemy is restricted in any way
-    public static bool IsEnemyRestricted(string lvlName, TR3Entities entity)
+    public static bool IsEnemyRestricted(string lvlName, TR3Type entity)
     {
         return (_restrictedEnemyZonesTechnical.ContainsKey(lvlName) && _restrictedEnemyZonesTechnical[lvlName].ContainsKey(entity)) ||
             (_restrictedEnemyZonesDefault.ContainsKey(lvlName) && _restrictedEnemyZonesDefault[lvlName].ContainsKey(entity)) ||
@@ -30,10 +30,10 @@ public static class TR3EnemyUtilities
     }
 
     // This returns a set of ALLOWED rooms
-    public static Dictionary<TR3Entities, List<int>> GetRestrictedEnemyRooms(string lvlName, RandoDifficulty difficulty)
+    public static Dictionary<TR3Type, List<int>> GetRestrictedEnemyRooms(string lvlName, RandoDifficulty difficulty)
     {
         var technicallyAllowedRooms = GetRestrictedEnemyRooms(lvlName, _restrictedEnemyZonesTechnical);
-        var multiDict = new List<Dictionary<TR3Entities, List<int>>>() { technicallyAllowedRooms };
+        var multiDict = new List<Dictionary<TR3Type, List<int>>>() { technicallyAllowedRooms };
 
         // we need to merge dictionaries in order to get the complete set of allowed rooms, per level and per enemy
         if (difficulty == RandoDifficulty.Default)
@@ -48,14 +48,14 @@ public static class TR3EnemyUtilities
         return null;
     }
 
-    private static Dictionary<TR3Entities, List<int>> GetRestrictedEnemyRooms(string lvlName, Dictionary<string, Dictionary<TR3Entities, List<int>>> restrictions)
+    private static Dictionary<TR3Type, List<int>> GetRestrictedEnemyRooms(string lvlName, Dictionary<string, Dictionary<TR3Type, List<int>>> restrictions)
     {
         if (restrictions.ContainsKey(lvlName))
             return restrictions[lvlName];
         return null;
     }
 
-    public static int GetRestrictedEnemyLevelCount(TR3Entities entity, RandoDifficulty difficulty)
+    public static int GetRestrictedEnemyLevelCount(TR3Type entity, RandoDifficulty difficulty)
     {
         // Remember that technical count is MAXIMUM allowed, and there may be overlap.
         // For example, maybe technically Dragon is allowed once, but an Easy difficulty might have that set to 0.
@@ -72,19 +72,19 @@ public static class TR3EnemyUtilities
         return -1;
     }
 
-    public static Dictionary<TR3Entities, List<string>> PrepareEnemyGameTracker(RandoDifficulty difficulty)
+    public static Dictionary<TR3Type, List<string>> PrepareEnemyGameTracker(RandoDifficulty difficulty)
     {
-        Dictionary<TR3Entities, List<string>> tracker = new();
+        Dictionary<TR3Type, List<string>> tracker = new();
 
         if (difficulty == RandoDifficulty.Default)
         {
-            foreach (TR3Entities entity in _restrictedEnemyGameCountsDefault.Keys)
+            foreach (TR3Type entity in _restrictedEnemyGameCountsDefault.Keys)
             {
                 tracker.Add(entity, new List<string>(_restrictedEnemyGameCountsDefault[entity]));
             }
         }
 
-        foreach (TR3Entities entity in _restrictedEnemyGameCountsTechnical.Keys)
+        foreach (TR3Type entity in _restrictedEnemyGameCountsTechnical.Keys)
         {
             tracker.Add(entity, new List<string>(_restrictedEnemyGameCountsTechnical[entity]));
         }
@@ -92,7 +92,7 @@ public static class TR3EnemyUtilities
         // Pre-populate required enemies
         foreach (string level in _requiredEnemies.Keys)
         {
-            foreach (TR3Entities enemy in _requiredEnemies[level])
+            foreach (TR3Type enemy in _requiredEnemies[level])
             {
                 if (tracker.ContainsKey(enemy))
                 {
@@ -104,7 +104,7 @@ public static class TR3EnemyUtilities
         return tracker;
     }
 
-    public static bool IsEnemySupported(string lvlName, TR3Entities entity, RandoDifficulty difficulty)
+    public static bool IsEnemySupported(string lvlName, TR3Type entity, RandoDifficulty difficulty)
     {
         bool isEnemyTechnicallySupported = IsEnemySupported(lvlName, entity, _unsupportedEnemiesTechnical);
         bool isEnemySupported = isEnemyTechnicallySupported;
@@ -120,7 +120,7 @@ public static class TR3EnemyUtilities
         return isEnemySupported;
     }
 
-    private static bool IsEnemySupported(string lvlName, TR3Entities entity, Dictionary<string, List<TR3Entities>> dict)
+    private static bool IsEnemySupported(string lvlName, TR3Type entity, Dictionary<string, List<TR3Type>> dict)
     {
         if (dict.ContainsKey(lvlName))
         {
@@ -131,14 +131,14 @@ public static class TR3EnemyUtilities
         return true;
     }
 
-    public static bool IsEnemyRequired(string lvlName, TR3Entities entity)
+    public static bool IsEnemyRequired(string lvlName, TR3Type entity)
     {
         return _requiredEnemies.ContainsKey(lvlName) && _requiredEnemies[lvlName].Contains(entity);
     }
 
-    public static List<TR3Entities> GetRequiredEnemies(string lvlName)
+    public static List<TR3Type> GetRequiredEnemies(string lvlName)
     {
-        List<TR3Entities> entities = new();
+        List<TR3Type> entities = new();
         if (_requiredEnemies.ContainsKey(lvlName))
         {
             entities.AddRange(_requiredEnemies[lvlName]);
@@ -146,7 +146,7 @@ public static class TR3EnemyUtilities
         return entities;
     }
 
-    public static List<Location> GetAIPathing(string lvlName, TR3Entities entity, short room)
+    public static List<Location> GetAIPathing(string lvlName, TR3Type entity, short room)
     {
         List<Location> locations = new();
         if (_restrictedEnemyPathing.ContainsKey(lvlName) && _restrictedEnemyPathing[lvlName].ContainsKey(entity) && _restrictedEnemyPathing[lvlName][entity].ContainsKey(room))
@@ -158,7 +158,7 @@ public static class TR3EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR3CombinedLevel level)
     {
-        TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR3EntityUtilities.IsEnemyType((TR3Entities)e.TypeID));
+        TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR3EntityUtilities.IsEnemyType((TR3Type)e.TypeID));
         foreach (TR2Entity entityInstance in enemies)
         {
             List<TR2Entity> sharedItems = new(Array.FindAll
@@ -174,7 +174,7 @@ public static class TR3EnemyUtilities
                 // Are any entities that are sharing a location a droppable pickup?
                 foreach (TR2Entity ent in sharedItems)
                 {
-                    if (TR3EntityUtilities.IsAnyPickupType((TR3Entities)ent.TypeID))
+                    if (TR3EntityUtilities.IsAnyPickupType((TR3Type)ent.TypeID))
                     {
                         return true;
                     }
@@ -187,7 +187,7 @@ public static class TR3EnemyUtilities
 
     public static void SetEntityTriggers(TR3Level level, TR2Entity entity)
     {
-        if (_oneShotEnemies.Contains((TR3Entities)entity.TypeID))
+        if (_oneShotEnemies.Contains((TR3Type)entity.TypeID))
         {
             int entityID = level.Entities.ToList().IndexOf(entity);
 
@@ -217,7 +217,7 @@ public static class TR3EnemyUtilities
             EnemyDifficulty enemyDifficulty = EnemyDifficulty.Medium;
             foreach (EnemyDifficulty difficulty in _enemyDifficulties.Keys)
             {
-                if (_enemyDifficulties[difficulty].Contains((TR3Entities)enemyEntity.TypeID))
+                if (_enemyDifficulties[difficulty].Contains((TR3Type)enemyEntity.TypeID))
                 {
                     enemyDifficulty = difficulty;
                     break;
@@ -245,7 +245,7 @@ public static class TR3EnemyUtilities
         return allDifficulties[weight];
     }
 
-    public static uint GetStartingAmmo(TR3Entities weaponType)
+    public static uint GetStartingAmmo(TR3Type weaponType)
     {
         if (_startingAmmoToGive.ContainsKey(weaponType))
         {
@@ -255,98 +255,98 @@ public static class TR3EnemyUtilities
     }
 
     // We (can) restrict some enemies to specific rooms in levels. Some may also need pathing like Willie.
-    private static readonly Dictionary<string, Dictionary<TR3Entities, List<int>>> _restrictedEnemyZonesDefault;
-    private static readonly Dictionary<string, Dictionary<TR3Entities, List<int>>> _restrictedEnemyZonesTechnical;
-    private static readonly Dictionary<string, Dictionary<TR3Entities, Dictionary<short, List<Location>>>> _restrictedEnemyPathing;
+    private static readonly Dictionary<string, Dictionary<TR3Type, List<int>>> _restrictedEnemyZonesDefault;
+    private static readonly Dictionary<string, Dictionary<TR3Type, List<int>>> _restrictedEnemyZonesTechnical;
+    private static readonly Dictionary<string, Dictionary<TR3Type, Dictionary<short, List<Location>>>> _restrictedEnemyPathing;
 
     // We also limit the count per level for some, such as bosses.
     // Winston is an easter egg so maybe keep it low.
-    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyLevelCountsTechnical = new()
+    private static readonly Dictionary<TR3Type, int> _restrictedEnemyLevelCountsTechnical = new()
     {
-        [TR3Entities.TonyFirehands] = 1,
-        [TR3Entities.Puna] = 1,
-        [TR3Entities.Winston] = 1,
-        [TR3Entities.WinstonInCamoSuit] = 1
+        [TR3Type.TonyFirehands] = 1,
+        [TR3Type.Puna] = 1,
+        [TR3Type.Winston] = 1,
+        [TR3Type.WinstonInCamoSuit] = 1
     };
 
-    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyLevelCountsDefault = new()
+    private static readonly Dictionary<TR3Type, int> _restrictedEnemyLevelCountsDefault = new()
     {
-        [TR3Entities.TonyFirehands] = 1,
-        [TR3Entities.Puna] = 1,
-        [TR3Entities.Willie] = 1
+        [TR3Type.TonyFirehands] = 1,
+        [TR3Type.Puna] = 1,
+        [TR3Type.Willie] = 1
     };
 
     // These enemies are restricted a set number of times throughout the entire game.
-    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyGameCountsTechnical = new()
+    private static readonly Dictionary<TR3Type, int> _restrictedEnemyGameCountsTechnical = new()
     {
-        [TR3Entities.Winston] = 2,
-        [TR3Entities.WinstonInCamoSuit] = 2
+        [TR3Type.Winston] = 2,
+        [TR3Type.WinstonInCamoSuit] = 2
     };
 
-    private static readonly Dictionary<TR3Entities, int> _restrictedEnemyGameCountsDefault = new()
+    private static readonly Dictionary<TR3Type, int> _restrictedEnemyGameCountsDefault = new()
     {
-        [TR3Entities.Willie] = 2
+        [TR3Type.Willie] = 2
     };
 
     // These enemies are unsupported due to technical reasons, NOT difficulty reasons.
-    private static readonly Dictionary<string, List<TR3Entities>> _unsupportedEnemiesTechnical = new()
+    private static readonly Dictionary<string, List<TR3Type>> _unsupportedEnemiesTechnical = new()
     {
         [TR3LevelNames.JUNGLE] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands },
+            new List<TR3Type> { TR3Type.TonyFirehands },
         [TR3LevelNames.RUINS] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands },
+            new List<TR3Type> { TR3Type.TonyFirehands },
         [TR3LevelNames.CAVES] =
-            new List<TR3Entities> { TR3Entities.Willie },
+            new List<TR3Type> { TR3Type.Willie },
         [TR3LevelNames.COASTAL] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands },
+            new List<TR3Type> { TR3Type.TonyFirehands },
         [TR3LevelNames.CRASH] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands },
+            new List<TR3Type> { TR3Type.TonyFirehands },
         [TR3LevelNames.MADUBU] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands },
+            new List<TR3Type> { TR3Type.TonyFirehands },
         [TR3LevelNames.PUNA] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands, TR3Entities.Willie },
+            new List<TR3Type> { TR3Type.TonyFirehands, TR3Type.Willie },
         [TR3LevelNames.THAMES] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands },
+            new List<TR3Type> { TR3Type.TonyFirehands },
         [TR3LevelNames.ALDWYCH] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands, TR3Entities.Willie },
+            new List<TR3Type> { TR3Type.TonyFirehands, TR3Type.Willie },
         [TR3LevelNames.LUDS] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands, TR3Entities.Willie },
+            new List<TR3Type> { TR3Type.TonyFirehands, TR3Type.Willie },
         [TR3LevelNames.CITY] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands, TR3Entities.Willie },
+            new List<TR3Type> { TR3Type.TonyFirehands, TR3Type.Willie },
         [TR3LevelNames.NEVADA] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands },
+            new List<TR3Type> { TR3Type.TonyFirehands },
         [TR3LevelNames.HSC] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands, TR3Entities.Willie },
+            new List<TR3Type> { TR3Type.TonyFirehands, TR3Type.Willie },
         [TR3LevelNames.AREA51] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands, TR3Entities.Willie },
+            new List<TR3Type> { TR3Type.TonyFirehands, TR3Type.Willie },
         [TR3LevelNames.RXTECH] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands, TR3Entities.Willie },
+            new List<TR3Type> { TR3Type.TonyFirehands, TR3Type.Willie },
         [TR3LevelNames.TINNOS] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands, TR3Entities.Willie },
+            new List<TR3Type> { TR3Type.TonyFirehands, TR3Type.Willie },
         [TR3LevelNames.WILLIE] =
-            new List<TR3Entities> { TR3Entities.TonyFirehands }
+            new List<TR3Type> { TR3Type.TonyFirehands }
     };
 
-    private static readonly Dictionary<string, List<TR3Entities>> _unsupportedEnemiesDefault = new()
+    private static readonly Dictionary<string, List<TR3Type>> _unsupportedEnemiesDefault = new()
     {
         [TR3LevelNames.HALLOWS] =
-            new List<TR3Entities> { TR3Entities.Willie }
+            new List<TR3Type> { TR3Type.Willie }
     };
 
     // Any enemies that must remain untouched in a given level
-    private static readonly Dictionary<string, List<TR3Entities>> _requiredEnemies = new()
+    private static readonly Dictionary<string, List<TR3Type>> _requiredEnemies = new()
     {
-        [TR3LevelNames.CAVES] = new List<TR3Entities>
+        [TR3LevelNames.CAVES] = new List<TR3Type>
         {
-            TR3Entities.TonyFirehands // End room flip-map
+            TR3Type.TonyFirehands // End room flip-map
         },
-        [TR3LevelNames.PUNA] = new List<TR3Entities>
+        [TR3LevelNames.PUNA] = new List<TR3Type>
         {
-            TR3Entities.Puna, TR3Entities.LizardMan // Complicated spawn points
+            TR3Type.Puna, TR3Type.LizardMan // Complicated spawn points
         },
-        [TR3LevelNames.TINNOS] = new List<TR3Entities>
+        [TR3LevelNames.TINNOS] = new List<TR3Type>
         {
-            TR3Entities.TinnosWasp // Complicated spawn points
+            TR3Type.TinnosWasp // Complicated spawn points
         }
     };
 
@@ -397,67 +397,67 @@ public static class TR3EnemyUtilities
     };
 
     // Enemies who can only spawn once. These are enemies whose triggers in OG are all OneShot throughout.
-    private static readonly List<TR3Entities> _oneShotEnemies = new()
+    private static readonly List<TR3Type> _oneShotEnemies = new()
     {
-        TR3Entities.Croc,
-        TR3Entities.KillerWhale,
-        TR3Entities.Raptor,
-        TR3Entities.Rat
+        TR3Type.Croc,
+        TR3Type.KillerWhale,
+        TR3Type.Raptor,
+        TR3Type.Rat
     };
 
-    private static readonly Dictionary<EnemyDifficulty, List<TR3Entities>> _enemyDifficulties = new()
+    private static readonly Dictionary<EnemyDifficulty, List<TR3Type>> _enemyDifficulties = new()
     {
-        [EnemyDifficulty.VeryEasy] = new List<TR3Entities>
+        [EnemyDifficulty.VeryEasy] = new List<TR3Type>
         {
-            TR3Entities.KillerWhale, TR3Entities.Winston, TR3Entities.WinstonInCamoSuit,
-            TR3Entities.Rat, TR3Entities.Compsognathus
+            TR3Type.KillerWhale, TR3Type.Winston, TR3Type.WinstonInCamoSuit,
+            TR3Type.Rat, TR3Type.Compsognathus
         },
-        [EnemyDifficulty.Easy] = new List<TR3Entities>
+        [EnemyDifficulty.Easy] = new List<TR3Type>
         {
-            TR3Entities.Cobra, TR3Entities.Crow, TR3Entities.Vulture, TR3Entities.TinnosWasp,
-            TR3Entities.RXTechFlameLad, TR3Entities.Prisoner, TR3Entities.Monkey, TR3Entities.Mercenary
+            TR3Type.Cobra, TR3Type.Crow, TR3Type.Vulture, TR3Type.TinnosWasp,
+            TR3Type.RXTechFlameLad, TR3Type.Prisoner, TR3Type.Monkey, TR3Type.Mercenary
         },
-        [EnemyDifficulty.Medium] = new List<TR3Entities>
+        [EnemyDifficulty.Medium] = new List<TR3Type>
         {
-            TR3Entities.Crawler, TR3Entities.CrawlerMutantInCloset, TR3Entities.Croc, TR3Entities.DamGuard,
-            TR3Entities.DogAntarc, TR3Entities.Dog, TR3Entities.TribesmanAxe, TR3Entities.TribesmanDart,
-            TR3Entities.Tiger, TR3Entities.ScubaSteve, TR3Entities.RXRedBoi, TR3Entities.RXGunLad,
-            TR3Entities.Punk, TR3Entities.MPWithStick, TR3Entities.MPWithGun, TR3Entities.LondonMerc,
-            TR3Entities.LondonGuard, TR3Entities.LizardMan
+            TR3Type.Crawler, TR3Type.CrawlerMutantInCloset, TR3Type.Croc, TR3Type.DamGuard,
+            TR3Type.DogAntarc, TR3Type.Dog, TR3Type.TribesmanAxe, TR3Type.TribesmanDart,
+            TR3Type.Tiger, TR3Type.ScubaSteve, TR3Type.RXRedBoi, TR3Type.RXGunLad,
+            TR3Type.Punk, TR3Type.MPWithStick, TR3Type.MPWithGun, TR3Type.LondonMerc,
+            TR3Type.LondonGuard, TR3Type.LizardMan
         },
-        [EnemyDifficulty.Hard] = new List<TR3Entities>
+        [EnemyDifficulty.Hard] = new List<TR3Type>
         {
-            TR3Entities.BruteMutant, TR3Entities.TonyFirehands, TR3Entities.TinnosMonster, TR3Entities.Shiva,
-            TR3Entities.Raptor, TR3Entities.Puna, TR3Entities.SophiaLee
+            TR3Type.BruteMutant, TR3Type.TonyFirehands, TR3Type.TinnosMonster, TR3Type.Shiva,
+            TR3Type.Raptor, TR3Type.Puna, TR3Type.SophiaLee
         },
-        [EnemyDifficulty.VeryHard] = new List<TR3Entities>
+        [EnemyDifficulty.VeryHard] = new List<TR3Type>
         {
-            TR3Entities.Tyrannosaur, TR3Entities.Willie
+            TR3Type.Tyrannosaur, TR3Type.Willie
         }
     };
 
-    private static readonly Dictionary<TR3Entities, uint> _startingAmmoToGive = new()
+    private static readonly Dictionary<TR3Type, uint> _startingAmmoToGive = new()
     {
-        [TR3Entities.Shotgun_P] = 8,
-        [TR3Entities.Deagle_P] = 4,
-        [TR3Entities.Uzis_P] = 6,
-        [TR3Entities.Harpoon_P] = 10,
-        [TR3Entities.MP5_P] = 4,
-        [TR3Entities.GrenadeLauncher_P] = 6,
-        [TR3Entities.RocketLauncher_P] = 6
+        [TR3Type.Shotgun_P] = 8,
+        [TR3Type.Deagle_P] = 4,
+        [TR3Type.Uzis_P] = 6,
+        [TR3Type.Harpoon_P] = 10,
+        [TR3Type.MP5_P] = 4,
+        [TR3Type.GrenadeLauncher_P] = 6,
+        [TR3Type.RocketLauncher_P] = 6
     };
 
     static TR3EnemyUtilities()
     {
-        _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR3Entities, List<int>>>>
+        _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR3Type, List<int>>>>
         (
             File.ReadAllText(@"Resources\TR3\Restrictions\enemy_restrictions_default.json")
         );
-        _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR3Entities, List<int>>>>
+        _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR3Type, List<int>>>>
         (
             File.ReadAllText(@"Resources\TR3\Restrictions\enemy_restrictions_technical.json")
         );
-        _restrictedEnemyPathing = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR3Entities, Dictionary<short, List<Location>>>>>
+        _restrictedEnemyPathing = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR3Type, Dictionary<short, List<Location>>>>>
         (
             File.ReadAllText(@"Resources\TR3\Restrictions\enemy_restrictions_pathing.json")
         );
