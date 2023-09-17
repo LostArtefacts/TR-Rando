@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Diagnostics;
 using System.Numerics;
 using TREnvironmentEditor.Helpers;
@@ -11,7 +10,6 @@ using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Helpers;

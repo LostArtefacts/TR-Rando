@@ -1,7 +1,6 @@
 ﻿using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Data;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Handlers.Textures;
