@@ -170,7 +170,7 @@ public class DynamicTextureBuilder
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
-        Dictionary<TR1Type, TR1Type> keyItems = TR1EntityUtilities.GetKeyItemMap();
+        Dictionary<TR1Type, TR1Type> keyItems = TR1TypeUtilities.GetKeyItemMap();
         foreach (TR1Type pickupType in keyItems.Keys)
         {
             TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)keyItems[pickupType]);

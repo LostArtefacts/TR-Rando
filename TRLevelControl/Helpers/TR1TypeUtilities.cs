@@ -2,9 +2,9 @@
 
 namespace TRLevelControl.Helpers;
 
-public static class TR1EntityUtilities
+public static class TR1TypeUtilities
 {
-    public static readonly Dictionary<TR1Type, Dictionary<TR1Type, List<string>>> LevelEntityAliases = new()
+    public static readonly Dictionary<TR1Type, Dictionary<TR1Type, List<string>>> LevelAliases = new()
     {
         [TR1Type.FlyingAtlantean] = new Dictionary<TR1Type, List<string>>
         {
@@ -29,7 +29,7 @@ public static class TR1EntityUtilities
         }
     };
 
-    public static readonly Dictionary<TR1Type, List<TR1Type>> EntityFamilies = new()
+    public static readonly Dictionary<TR1Type, List<TR1Type>> TypeFamilies = new()
     {
         [TR1Type.FlyingAtlantean] = new List<TR1Type>
         {
@@ -45,59 +45,59 @@ public static class TR1EntityUtilities
         }
     };
 
-    public static TR1Type TranslateEntityAlias(TR1Type entity)
+    public static TR1Type TranslateAlias(TR1Type type)
     {
-        foreach (TR1Type parentEntity in EntityFamilies.Keys)
+        foreach (TR1Type parentType in TypeFamilies.Keys)
         {
-            if (EntityFamilies[parentEntity].Contains(entity))
+            if (TypeFamilies[parentType].Contains(type))
             {
-                return parentEntity;
+                return parentType;
             }
         }
 
-        return entity;
+        return type;
     }
 
-    public static TR1Type GetAliasForLevel(string lvl, TR1Type entity)
+    public static TR1Type GetAliasForLevel(string lvl, TR1Type type)
     {
-        if (LevelEntityAliases.ContainsKey(entity))
+        if (LevelAliases.ContainsKey(type))
         {
-            foreach (TR1Type alias in LevelEntityAliases[entity].Keys)
+            foreach (TR1Type alias in LevelAliases[type].Keys)
             {
-                if (LevelEntityAliases[entity][alias].Contains(lvl))
+                if (LevelAliases[type][alias].Contains(lvl))
                 {
                     return alias;
                 }
             }
         }
-        return entity;
+        return type;
     }
 
-    public static List<TR1Type> GetEntityFamily(TR1Type entity)
+    public static List<TR1Type> GetFamily(TR1Type type)
     {
-        foreach (TR1Type parentEntity in EntityFamilies.Keys)
+        foreach (TR1Type parentType in TypeFamilies.Keys)
         {
-            if (EntityFamilies[parentEntity].Contains(entity))
+            if (TypeFamilies[parentType].Contains(type))
             {
-                return EntityFamilies[parentEntity];
+                return TypeFamilies[parentType];
             }
         }
 
-        return new List<TR1Type> { entity };
+        return new List<TR1Type> { type };
     }
 
-    public static List<TR1Type> RemoveAliases(IEnumerable<TR1Type> entities)
+    public static List<TR1Type> RemoveAliases(IEnumerable<TR1Type> types)
     {
-        List<TR1Type> ents = new();
-        foreach (TR1Type ent in entities)
+        List<TR1Type> normalisedTypes = new();
+        foreach (TR1Type type in types)
         {
-            TR1Type normalisedEnt = TranslateEntityAlias(ent);
-            if (!ents.Contains(normalisedEnt))
+            TR1Type normalisedType = TranslateAlias(type);
+            if (!normalisedTypes.Contains(normalisedType))
             {
-                ents.Add(normalisedEnt);
+                normalisedTypes.Add(normalisedType);
             }
         }
-        return ents;
+        return normalisedTypes;
     }
 
     public static List<TR1Type> GetListOfKeyTypes()
@@ -165,34 +165,34 @@ public static class TR1EntityUtilities
         };
     }
 
-    public static bool IsKeyType(TR1Type entity)
+    public static bool IsKeyType(TR1Type type)
     {
-        return GetListOfKeyTypes().Contains(entity);
+        return GetListOfKeyTypes().Contains(type);
     }
 
-    public static bool IsPuzzleType(TR1Type entity)
+    public static bool IsPuzzleType(TR1Type type)
     {
-        return GetListOfPuzzleTypes().Contains(entity);
+        return GetListOfPuzzleTypes().Contains(type);
     }
 
-    public static bool IsQuestType(TR1Type entity)
+    public static bool IsQuestType(TR1Type type)
     {
-        return GetListOfQuestTypes().Contains(entity);
+        return GetListOfQuestTypes().Contains(type);
     }
 
-    public static bool IsKeyItemType(TR1Type entity)
+    public static bool IsKeyItemType(TR1Type type)
     {
-        return GetListOfKeyItemTypes().Contains(entity);
+        return GetListOfKeyItemTypes().Contains(type);
     }
 
-    public static bool IsTrapdoor(TR1Type entity)
+    public static bool IsTrapdoor(TR1Type type)
     {
-        return GetTrapdoorTypes().Contains(entity);
+        return GetTrapdoorTypes().Contains(type);
     }
 
-    public static bool IsBridge(TR1Type entity)
+    public static bool IsBridge(TR1Type type)
     {
-        return GetBridgeTypes().Contains(entity);
+        return GetBridgeTypes().Contains(type);
     }
 
     public static List<TR1Type> GetTrapdoorTypes()
@@ -228,14 +228,14 @@ public static class TR1EntityUtilities
         };
     }
 
-    public static bool IsStandardPickupType(TR1Type entity)
+    public static bool IsStandardPickupType(TR1Type type)
     {
-        return GetStandardPickupTypes().Contains(entity);
+        return GetStandardPickupTypes().Contains(type);
     }
 
-    public static bool IsWeaponPickup(TR1Type entity)
+    public static bool IsWeaponPickup(TR1Type type)
     {
-        return GetWeaponPickups().Contains(entity);
+        return GetWeaponPickups().Contains(type);
     }
 
     public static List<TR1Type> GetWeaponPickups()
@@ -249,12 +249,12 @@ public static class TR1EntityUtilities
         };
     }
 
-    public static bool IsAmmoPickup(TR1Type entity)
+    public static bool IsAmmoPickup(TR1Type type)
     {
-        return (entity == TR1Type.PistolAmmo_S_P)
-            || (entity == TR1Type.ShotgunAmmo_S_P)
-            || (entity == TR1Type.MagnumAmmo_S_P)
-            || (entity == TR1Type.UziAmmo_S_P);
+        return (type == TR1Type.PistolAmmo_S_P)
+            || (type == TR1Type.ShotgunAmmo_S_P)
+            || (type == TR1Type.MagnumAmmo_S_P)
+            || (type == TR1Type.UziAmmo_S_P);
     }
 
     public static TR1Type GetWeaponAmmo(TR1Type weapon)
@@ -268,23 +268,23 @@ public static class TR1EntityUtilities
         };
     }
 
-    public static bool IsCrystalPickup(TR1Type entity)
+    public static bool IsCrystalPickup(TR1Type type)
     {
-        return entity == TR1Type.SavegameCrystal_P;
+        return type == TR1Type.SavegameCrystal_P;
     }
 
-    public static bool IsUtilityPickup(TR1Type entity)
+    public static bool IsUtilityPickup(TR1Type type)
     {
-        return (entity == TR1Type.SmallMed_S_P)
-            || (entity == TR1Type.LargeMed_S_P);
+        return (type == TR1Type.SmallMed_S_P)
+            || (type == TR1Type.LargeMed_S_P);
     }
 
-    public static bool IsAnyPickupType(TR1Type entity)
+    public static bool IsAnyPickupType(TR1Type type)
     {
-        return IsUtilityPickup(entity)
-            || IsAmmoPickup(entity)
-            || IsWeaponPickup(entity)
-            || IsKeyItemType(entity);
+        return IsUtilityPickup(type)
+            || IsAmmoPickup(type)
+            || IsWeaponPickup(type)
+            || IsKeyItemType(type);
     }
 
     public static List<TR1Type> GetCandidateCrossLevelEnemies()
@@ -322,9 +322,9 @@ public static class TR1EntityUtilities
         };
     }
 
-    public static bool IsEnemyType(TR1Type entity)
+    public static bool IsEnemyType(TR1Type type)
     {
-        return GetFullListOfEnemies().Contains(entity);
+        return GetFullListOfEnemies().Contains(type);
     }
 
     public static List<TR1Type> GetFullListOfEnemies()
@@ -357,20 +357,20 @@ public static class TR1EntityUtilities
         };
     }
 
-    public static TR1Type GetWaterEnemyLandCreature(TR1Type entity)
+    public static TR1Type GetWaterEnemyLandCreature(TR1Type type)
     {
-        Dictionary<TR1Type, TR1Type> entities = GetWaterEnemyLandCreatures();
-        return entities.ContainsKey(entity) ? entities[entity] : entity;
+        Dictionary<TR1Type, TR1Type> types = GetWaterEnemyLandCreatures();
+        return types.ContainsKey(type) ? types[type] : type;
     }
 
-    public static bool IsWaterCreature(TR1Type entity)
+    public static bool IsWaterCreature(TR1Type type)
     {
-        return GetWaterEnemies().Contains(entity);
+        return GetWaterEnemies().Contains(type);
     }
 
-    public static bool IsWaterLandCreatureEquivalent(TR1Type entity)
+    public static bool IsWaterLandCreatureEquivalent(TR1Type type)
     {
-        return GetWaterEnemyLandCreatures().ContainsValue(entity);
+        return GetWaterEnemyLandCreatures().ContainsValue(type);
     }
 
     public static List<TR1Type> GetWaterLandCreatures()
@@ -378,17 +378,17 @@ public static class TR1EntityUtilities
         return GetWaterEnemyLandCreatures().Values.ToList();
     }
 
-    public static List<TR1Type> FilterWaterEnemies(List<TR1Type> entities)
+    public static List<TR1Type> FilterWaterEnemies(List<TR1Type> types)
     {
-        List<TR1Type> waterEntities = new();
-        foreach (TR1Type entity in entities)
+        List<TR1Type> waterTypes = new();
+        foreach (TR1Type type in types)
         {
-            if (IsWaterCreature(entity))
+            if (IsWaterCreature(type))
             {
-                waterEntities.Add(entity);
+                waterTypes.Add(type);
             }
         }
-        return waterEntities;
+        return waterTypes;
     }
 
     public static List<TR1Type> GetAtlanteanEggEnemies()
@@ -413,9 +413,9 @@ public static class TR1EntityUtilities
         };
     }
 
-    public static bool IsSwitchType(TR1Type entity)
+    public static bool IsSwitchType(TR1Type type)
     {
-        return GetSwitchTypes().Contains(entity);
+        return GetSwitchTypes().Contains(type);
     }
 
     public static List<TR1Type> GetKeyholeTypes()
@@ -429,9 +429,9 @@ public static class TR1EntityUtilities
         };
     }
 
-    public static bool IsKeyholeType(TR1Type entity)
+    public static bool IsKeyholeType(TR1Type type)
     {
-        return GetKeyholeTypes().Contains(entity);
+        return GetKeyholeTypes().Contains(type);
     }
 
     public static List<TR1Type> GetSlotTypes()
@@ -449,9 +449,9 @@ public static class TR1EntityUtilities
         };
     }
 
-    public static bool IsSlotType(TR1Type entity)
+    public static bool IsSlotType(TR1Type type)
     {
-        return GetSlotTypes().Contains(entity);
+        return GetSlotTypes().Contains(type);
     }
 
     public static List<TR1Type> GetPushblockTypes()
@@ -465,23 +465,23 @@ public static class TR1EntityUtilities
         };
     }
 
-    public static bool IsPushblockType(TR1Type entity)
+    public static bool IsPushblockType(TR1Type type)
     {
-        return GetPushblockTypes().Contains(entity);
+        return GetPushblockTypes().Contains(type);
     }
 
-    public static bool CanSharePickupSpace(TR1Type entity)
+    public static bool CanSharePickupSpace(TR1Type type)
     {
-        // Can we place a standard pickup on the same tile as this entity?
-        return IsStandardPickupType(entity)
-            || IsCrystalPickup(entity)
-            || IsSwitchType(entity)
-            || IsKeyholeType(entity)
-            || IsSlotType(entity)
-            || IsEnemyType(entity)
-            || entity == TR1Type.CameraTarget_N
-            || entity == TR1Type.Earthquake_N
-            || entity == TR1Type.Lara;
+        // Can we place a standard pickup on the same tile as this type?
+        return IsStandardPickupType(type)
+            || IsCrystalPickup(type)
+            || IsSwitchType(type)
+            || IsKeyholeType(type)
+            || IsSlotType(type)
+            || IsEnemyType(type)
+            || type == TR1Type.CameraTarget_N
+            || type == TR1Type.Earthquake_N
+            || type == TR1Type.Lara;
     }
 
     public static List<TR1Type> DoorTypes()
@@ -494,9 +494,9 @@ public static class TR1EntityUtilities
         };
     }
 
-    public static bool IsDoorType(TR1Type entity)
+    public static bool IsDoorType(TR1Type type)
     {
-        return DoorTypes().Contains(entity);
+        return DoorTypes().Contains(type);
     }
 
     public static Dictionary<TR1Type, TR1Type> GetSecretModels()

@@ -191,7 +191,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         List<TR1Type> oldEntities = GetCurrentEnemyEntities(level);
 
         // Get the list of canidadates
-        List<TR1Type> allEnemies = TR1EntityUtilities.GetCandidateCrossLevelEnemies();
+        List<TR1Type> allEnemies = TR1TypeUtilities.GetCandidateCrossLevelEnemies();
 
         // Work out how many we can support
         int enemyCount = oldEntities.Count + TR1EnemyUtilities.GetEnemyAdjustmentCount(level.Name);
@@ -205,12 +205,12 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // TR1 doesn't kill land creatures when underwater, so if "no restrictions" is
         // enabled, don't enforce any by default.
         bool waterEnemyRequired = difficulty == RandoDifficulty.Default
-            && TR1EntityUtilities.GetWaterEnemies().Any(oldEntities.Contains);
+            && TR1TypeUtilities.GetWaterEnemies().Any(oldEntities.Contains);
 
         // Let's try to populate the list. Start by adding a water enemy if needed.
         if (waterEnemyRequired)
         {
-            List<TR1Type> waterEnemies = TR1EntityUtilities.GetWaterEnemies();
+            List<TR1Type> waterEnemies = TR1TypeUtilities.GetWaterEnemies();
             newEntities.Add(SelectRequiredEnemy(waterEnemies, level, difficulty));
         }
 
@@ -229,8 +229,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // Remove all exclusions from the pool, and adjust the target capacity
         allEnemies.RemoveAll(e => _excludedEnemies.Contains(e));
 
-        IEnumerable<TR1Type> ex = allEnemies.Where(e => !newEntities.Any(TR1EntityUtilities.GetEntityFamily(e).Contains));
-        List<TR1Type> unalisedEntities = TR1EntityUtilities.RemoveAliases(ex);
+        IEnumerable<TR1Type> ex = allEnemies.Where(e => !newEntities.Any(TR1TypeUtilities.GetFamily(e).Contains));
+        List<TR1Type> unalisedEntities = TR1TypeUtilities.RemoveAliases(ex);
         while (unalisedEntities.Count < newEntities.Capacity - newEntities.Count)
         {
             --newEntities.Capacity;
@@ -239,7 +239,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         // Fill the list from the remaining candidates. Keep track of ones tested to avoid
         // looping infinitely if it's not possible to fill to capacity
         ISet<TR1Type> testedEntities = new HashSet<TR1Type>();
-        List<TR1Type> eggEntities = TR1EntityUtilities.GetAtlanteanEggEnemies();
+        List<TR1Type> eggEntities = TR1TypeUtilities.GetAtlanteanEggEnemies();
         bool isTomb1Main = ScriptEditor.Edition.IsCommunityPatch;
         while (newEntities.Count < newEntities.Capacity && testedEntities.Count < allEnemies.Count)
         {
@@ -308,7 +308,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             // GetEntityFamily returns all aliases for the likes of the dogs, but if an entity
             // doesn't have any, the returned list just contains the entity itself. This means
             // we can avoid duplicating standard enemies as well as avoiding alias-clashing.
-            List<TR1Type> family = TR1EntityUtilities.GetEntityFamily(entity);
+            List<TR1Type> family = TR1TypeUtilities.GetFamily(entity);
             if (!newEntities.Any(e1 => family.Any(e2 => e1 == e2)))
             {
                 newEntities.Add(entity);
@@ -317,7 +317,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         if
         (
-            newEntities.All(e => TR1EntityUtilities.IsWaterCreature(e) || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)) || 
+            newEntities.All(e => TR1TypeUtilities.IsWaterCreature(e) || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)) || 
             (newEntities.Capacity > 1 && newEntities.All(e => TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)))
         )
         {
@@ -326,15 +326,15 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             bool RestrictionCheck(TR1Type e) =>
                 !TR1EnemyUtilities.IsEnemySupported(level.Name, e, difficulty, isTomb1Main)
                 || newEntities.Contains(e)
-                || TR1EntityUtilities.IsWaterCreature(e)
+                || TR1TypeUtilities.IsWaterCreature(e)
                 || TR1EnemyUtilities.IsEnemyRestricted(level.Name, e, difficulty)
-                || TR1EntityUtilities.TranslateEntityAlias(e) != e;
+                || TR1TypeUtilities.TranslateAlias(e) != e;
 
             List<TR1Type> unrestrictedPool = allEnemies.FindAll(e => !RestrictionCheck(e));
             if (unrestrictedPool.Count == 0)
             {
                 // We are going to have to pull in the full list of candidates again, so ignoring any exclusions
-                unrestrictedPool = TR1EntityUtilities.GetCandidateCrossLevelEnemies().FindAll(e => !RestrictionCheck(e));
+                unrestrictedPool = TR1TypeUtilities.GetCandidateCrossLevelEnemies().FindAll(e => !RestrictionCheck(e));
             }
 
             TR1Type entity = unrestrictedPool[_generator.Next(0, unrestrictedPool.Count)];
@@ -372,7 +372,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
     private static List<TR1Type> GetCurrentEnemyEntities(TR1CombinedLevel level)
     {
-        List<TR1Type> allGameEnemies = TR1EntityUtilities.GetFullListOfEnemies();
+        List<TR1Type> allGameEnemies = TR1TypeUtilities.GetFullListOfEnemies();
         ISet<TR1Type> allLevelEnts = new SortedSet<TR1Type>();
         level.Data.Entities.ToList().ForEach(e => allLevelEnts.Add((TR1Type)e.TypeID));
         List<TR1Type> oldEntities = allLevelEnts.ToList().FindAll(e => allGameEnemies.Contains(e));
@@ -436,7 +436,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (!Settings.UseEnemyClones || !Settings.CloneOriginalEnemies)
         {
             enemies.Available.AddRange(GetCurrentEnemyEntities(level));
-            enemies.Water.AddRange(TR1EntityUtilities.FilterWaterEnemies(enemies.Available));
+            enemies.Water.AddRange(TR1TypeUtilities.FilterWaterEnemies(enemies.Available));
         }
 
         RandomizeEnemies(level, enemies);
@@ -447,7 +447,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         AmendAtlanteanModels(level, enemies);
 
         // Get a list of current enemy entities
-        List<TR1Type> allEnemies = TR1EntityUtilities.GetFullListOfEnemies();
+        List<TR1Type> allEnemies = TR1TypeUtilities.GetFullListOfEnemies();
         List<TREntity> levelEntities = level.Data.Entities.ToList();
         List<TREntity> enemyEntities = levelEntities.FindAll(e => allEnemies.Contains((TR1Type)e.TypeID));
 
@@ -495,12 +495,12 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
                     // If the room has water but this enemy isn't a water enemy, we will assume that environment
                     // modifications will handle assignment of the enemy to entities.
-                    if (!TR1EntityUtilities.IsWaterCreature(entity) && level.Data.Rooms[targetEntity.Room].ContainsWater)
+                    if (!TR1TypeUtilities.IsWaterCreature(entity) && level.Data.Rooms[targetEntity.Room].ContainsWater)
                     {
                         continue;
                     }
 
-                    targetEntity.TypeID = (short)TR1EntityUtilities.TranslateEntityAlias(entity);
+                    targetEntity.TypeID = (short)TR1TypeUtilities.TranslateAlias(entity);
 
                     // #146 Ensure OneShot triggers are set for this enemy if needed
                     TR1EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
@@ -559,7 +559,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             {
                 if (GetEntityCount(level, newEntityType) >= maxEntityCount)
                 {
-                    List<TR1Type> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1EntityUtilities.TranslateEntityAlias(e)));
+                    List<TR1Type> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1TypeUtilities.TranslateAlias(e)));
                     if (pool.Count > 0)
                     {
                         newEntityType = pool[_generator.Next(0, pool.Count)];
@@ -574,12 +574,12 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 // Non-level ending Larson is not restricted in ToQ, otherwise we adhere to the normal rules.
                 groupDifficulty = RandoDifficulty.NoRestrictions;
             }
-            RestrictedEnemyGroup enemyGroup = TR1EnemyUtilities.GetRestrictedEnemyGroup(level.Name, TR1EntityUtilities.TranslateEntityAlias(newEntityType), groupDifficulty);
+            RestrictedEnemyGroup enemyGroup = TR1EnemyUtilities.GetRestrictedEnemyGroup(level.Name, TR1TypeUtilities.TranslateAlias(newEntityType), groupDifficulty);
             if (enemyGroup != null)
             {
                 if (level.Data.Entities.ToList().FindAll(e => enemyGroup.Enemies.Contains((TR1Type)e.TypeID)).Count >= enemyGroup.MaximumCount)
                 {
-                    List<TR1Type> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1EntityUtilities.TranslateEntityAlias(e), groupDifficulty));
+                    List<TR1Type> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1TypeUtilities.TranslateAlias(e), groupDifficulty));
                     if (pool.Count > 0)
                     {
                         newEntityType = pool[_generator.Next(0, pool.Count)];
@@ -593,13 +593,13 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             if (difficulty == RandoDifficulty.Default)
             {
                 TRRoom currentRoom = level.Data.Rooms[currentEntity.Room];
-                if (currentRoom.AlternateRoom != -1 && level.Data.Rooms[currentRoom.AlternateRoom].ContainsWater && TR1EntityUtilities.IsWaterLandCreatureEquivalent(currentEntityType) && !TR1EntityUtilities.IsWaterLandCreatureEquivalent(newEntityType))
+                if (currentRoom.AlternateRoom != -1 && level.Data.Rooms[currentRoom.AlternateRoom].ContainsWater && TR1TypeUtilities.IsWaterLandCreatureEquivalent(currentEntityType) && !TR1TypeUtilities.IsWaterLandCreatureEquivalent(newEntityType))
                 {
-                    Dictionary<TR1Type, TR1Type> hybrids = TR1EntityUtilities.GetWaterEnemyLandCreatures();
+                    Dictionary<TR1Type, TR1Type> hybrids = TR1TypeUtilities.GetWaterEnemyLandCreatures();
                     List<TR1Type> pool = enemies.Available.FindAll(e => hybrids.ContainsKey(e) || hybrids.ContainsValue(e));
                     if (pool.Count > 0)
                     {
-                        newEntityType = TR1EntityUtilities.GetWaterEnemyLandCreature(pool[_generator.Next(0, pool.Count)]);
+                        newEntityType = TR1TypeUtilities.GetWaterEnemyLandCreature(pool[_generator.Next(0, pool.Count)]);
                     }
                 }
             }
@@ -613,9 +613,9 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
             if (newEntityType == TR1Type.AtlanteanEgg)
             {
-                List<TR1Type> allEggTypes = TR1EntityUtilities.GetAtlanteanEggEnemies();
+                List<TR1Type> allEggTypes = TR1TypeUtilities.GetAtlanteanEggEnemies();
                 List<TR1Type> spawnTypes = enemies.Available.FindAll(allEggTypes.Contains);
-                TR1Type spawnType = TR1EntityUtilities.TranslateEntityAlias(spawnTypes[_generator.Next(0, spawnTypes.Count)]);
+                TR1Type spawnType = TR1TypeUtilities.TranslateAlias(spawnTypes[_generator.Next(0, spawnTypes.Count)]);
 
                 int entityIndex = levelEntities.IndexOf(currentEntity);
                 Location eggLocation = _eggLocations[level.Name].Find(l => l.EntityIndex == entityIndex);
@@ -638,11 +638,11 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                             allEggTypes.Add(TR1Type.Adam);
                         }
 
-                        if (!allEggTypes.All(e => allModels.Contains(TR1EntityUtilities.TranslateEntityAlias(e))) && _generator.NextDouble() < 0.25)
+                        if (!allEggTypes.All(e => allModels.Contains(TR1TypeUtilities.TranslateAlias(e))) && _generator.NextDouble() < 0.25)
                         {
                             do
                             {
-                                spawnType = TR1EntityUtilities.TranslateEntityAlias(allEggTypes[_generator.Next(0, allEggTypes.Count)]);
+                                spawnType = TR1TypeUtilities.TranslateAlias(allEggTypes[_generator.Next(0, allEggTypes.Count)]);
                             }
                             while (allModels.Contains(spawnType));
                         }
@@ -698,7 +698,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             }
 
             // Make sure to convert back to the actual type
-            currentEntity.TypeID = (short)TR1EntityUtilities.TranslateEntityAlias(newEntityType);
+            currentEntity.TypeID = (short)TR1TypeUtilities.TranslateAlias(newEntityType);
 
             // #146 Ensure OneShot triggers are set for this enemy if needed
             TR1EnemyUtilities.SetEntityTriggers(level.Data, currentEntity);
@@ -752,7 +752,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     private static int GetEntityCount(TR1CombinedLevel level, TR1Type entityType)
     {
         int count = 0;
-        TR1Type translatedType = TR1EntityUtilities.TranslateEntityAlias(entityType);
+        TR1Type translatedType = TR1TypeUtilities.TranslateAlias(entityType);
         foreach (TREntity entity in level.Data.Entities)
         {
             TR1Type type = (TR1Type)entity.TypeID;
@@ -893,7 +893,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     private void AmendAtlanteanModels(TR1CombinedLevel level, EnemyRandomizationCollection enemies)
     {
         // If non-shooting grounded Atlanteans are present, we can just duplicate the model to make shooting Atlanteans
-        if (enemies.Available.Any(TR1EntityUtilities.GetEntityFamily(TR1Type.ShootingAtlantean_N).Contains))
+        if (enemies.Available.Any(TR1TypeUtilities.GetFamily(TR1Type.ShootingAtlantean_N).Contains))
         {
             List<TRModel> models = level.Data.Models.ToList();
             TRModel shooter = models.Find(m => m.ID == (uint)TR1Type.ShootingAtlantean_N);
@@ -980,7 +980,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         // Find out which gun we have for this level
         List<TREntity> levelEntities = level.Data.Entities.ToList();
-        List<TR1Type> weaponTypes = TR1EntityUtilities.GetWeaponPickups();
+        List<TR1Type> weaponTypes = TR1TypeUtilities.GetWeaponPickups();
         List<TREntity> levelWeapons = levelEntities.FindAll(e => weaponTypes.Contains((TR1Type)e.TypeID));
         TREntity weaponEntity = null;
         foreach (TREntity weapon in levelWeapons)
@@ -1005,7 +1005,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             return;
         }
 
-        List<TR1Type> allEnemies = TR1EntityUtilities.GetFullListOfEnemies();
+        List<TR1Type> allEnemies = TR1TypeUtilities.GetFullListOfEnemies();
         List<TREntity> levelEnemies = levelEntities.FindAll(e => allEnemies.Contains((TR1Type)e.TypeID));
         // #409 Eggs are excluded as they are not part of the cross-level enemy pool, so create copies of any
         // of these using their actual types so to ensure they are part of the difficulty calculation.
@@ -1045,7 +1045,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (ammoToGive > 0)
         {
             ammoToGive *= (uint)difficulty;
-            TR1Type ammoType = TR1EntityUtilities.GetWeaponAmmo(weaponType);
+            TR1Type ammoType = TR1TypeUtilities.GetWeaponAmmo(weaponType);
             level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(ammoType), ammoToGive);
 
             uint smallMediToGive = 0;
@@ -1274,7 +1274,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
     private void CloneEnemies(TR1CombinedLevel level)
     {
-        List<TR1Type> enemyTypes = TR1EntityUtilities.GetFullListOfEnemies();
+        List<TR1Type> enemyTypes = TR1TypeUtilities.GetFullListOfEnemies();
         List<TREntity> levelEntities = level.Data.Entities.ToList();
         List<TREntity> enemies = levelEntities.FindAll(e => enemyTypes.Contains((TR1Type)e.TypeID));
 
@@ -1411,7 +1411,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     EnemyRandomizationCollection enemies = new()
                     {
                         Available = _enemyMapping[level].EntitiesToImport,
-                        Water = TR1EntityUtilities.FilterWaterEnemies(_enemyMapping[level].EntitiesToImport)
+                        Water = TR1TypeUtilities.FilterWaterEnemies(_enemyMapping[level].EntitiesToImport)
                     };
 
                     _outer.RandomizeEnemies(level, enemies);

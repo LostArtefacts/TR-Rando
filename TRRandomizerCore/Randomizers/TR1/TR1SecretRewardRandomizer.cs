@@ -36,7 +36,7 @@ public class TR1SecretRewardRandomizer : BaseTR1Randomizer
 
         TRSecretMapping<TREntity> secretMapping = TRSecretMapping<TREntity>.Get(GetResourcePath(@"TR1\SecretMapping\" + level.Name + "-SecretMapping.json"));
 
-        List<TR1Type> stdItemTypes = TR1EntityUtilities.GetStandardPickupTypes();
+        List<TR1Type> stdItemTypes = TR1TypeUtilities.GetStandardPickupTypes();
         stdItemTypes.Remove(TR1Type.PistolAmmo_S_P); // Sprite/model not available
         stdItemTypes.Remove(TR1Type.Pistols_S_P); // A bit cruel as a reward?
 

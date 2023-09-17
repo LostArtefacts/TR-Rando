@@ -29,7 +29,7 @@ public static class TR1EnemyUtilities
                 _restrictedEnemyGameCountsTechnical.ContainsKey(entity) ||
                 _restrictedEnemyLevelCountsTechnical.ContainsKey(entity) ||
                 _restrictedEnemyLevelCountsDefault.ContainsKey(entity) ||
-                (GetRestrictedEnemyGroup(lvlName, TR1EntityUtilities.TranslateEntityAlias(entity), RandoDifficulty.DefaultOrNoRestrictions) != null);
+                (GetRestrictedEnemyGroup(lvlName, TR1TypeUtilities.TranslateAlias(entity), RandoDifficulty.DefaultOrNoRestrictions) != null);
         }
 
         return (_restrictedEnemyZonesTechnical.ContainsKey(lvlName) && _restrictedEnemyZonesTechnical[lvlName].ContainsKey(entity))
@@ -137,7 +137,7 @@ public static class TR1EnemyUtilities
         if (dict.ContainsKey(lvlName))
         {
             // if the dictionaries contain the enemy, the enemy is NOT supported
-            return !dict[lvlName].Contains(TR1EntityUtilities.TranslateEntityAlias(entity));
+            return !dict[lvlName].Contains(TR1TypeUtilities.TranslateAlias(entity));
         }
         // all enemies are supported by default
         return true;

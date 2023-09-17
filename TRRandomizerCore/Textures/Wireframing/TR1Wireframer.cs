@@ -63,10 +63,10 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
     protected override bool IsInteractableModel(TRModel model)
     {
         TR1Type type = (TR1Type)model.ID;
-        return TR1EntityUtilities.IsSwitchType(type)
-            || TR1EntityUtilities.IsKeyholeType(type)
-            || TR1EntityUtilities.IsSlotType(type)
-            || TR1EntityUtilities.IsPushblockType(type)
+        return TR1TypeUtilities.IsSwitchType(type)
+            || TR1TypeUtilities.IsKeyholeType(type)
+            || TR1TypeUtilities.IsSlotType(type)
+            || TR1TypeUtilities.IsPushblockType(type)
             || type == TR1Type.Barricade;
     }
 
@@ -163,7 +163,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
     protected override bool IsEnemyModel(TRModel model)
     {
         TR1Type id = (TR1Type)model.ID;
-        return TR1EntityUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
+        return TR1TypeUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
     }
 
     protected override bool IsEnemyPlaceholderModel(TRModel model)
@@ -323,7 +323,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
         foreach (TRModel model in level.Models)
         {
             TR1Type type = (TR1Type)model.ID;
-            if (!TR1EntityUtilities.IsDoorType(type))
+            if (!TR1TypeUtilities.IsDoorType(type))
             {
                 continue;
             }

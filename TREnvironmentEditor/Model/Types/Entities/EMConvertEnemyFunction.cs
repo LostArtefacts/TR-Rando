@@ -14,14 +14,14 @@ public class EMConvertEnemyFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        List<TR1Type> potentialTypes = TR1EntityUtilities.GetFullListOfEnemies();
+        List<TR1Type> potentialTypes = TR1TypeUtilities.GetFullListOfEnemies();
         if (NewEnemyType == EnemyType.Land)
         {
-            potentialTypes.RemoveAll(e => TR1EntityUtilities.IsWaterCreature(e));
+            potentialTypes.RemoveAll(e => TR1TypeUtilities.IsWaterCreature(e));
         }
         else
         {
-            potentialTypes.RemoveAll(e => !TR1EntityUtilities.IsWaterCreature(e));
+            potentialTypes.RemoveAll(e => !TR1TypeUtilities.IsWaterCreature(e));
         }
 
         if (Exclusions != null && Exclusions.Count > 0)

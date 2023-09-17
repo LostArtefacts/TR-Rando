@@ -292,7 +292,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             level.Data.Entities[doorIndex] = door;
 
             // If it's a trapdoor, we need to make a dummy trigger for it
-            if (TR1EntityUtilities.IsTrapdoor((TR1Type)door.TypeID))
+            if (TR1TypeUtilities.IsTrapdoor((TR1Type)door.TypeID))
             {
                 CreateTrapdoorTrigger(door, (ushort)doorIndex, level.Data);
             }
@@ -656,17 +656,17 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
     private static void SetPuzzleTypeName(TR1CombinedLevel level, TR1Type itemType, string name)
     {
-        if (TR1EntityUtilities.IsKeyType(itemType))
+        if (TR1TypeUtilities.IsKeyType(itemType))
         {
             PopulateScriptStrings(itemType - TR1Type.Key1_S_P, level.Script.Keys, "K");
             level.Script.Keys.Add(name);
         }
-        else if (TR1EntityUtilities.IsPuzzleType(itemType))
+        else if (TR1TypeUtilities.IsPuzzleType(itemType))
         {
             PopulateScriptStrings(itemType - TR1Type.Puzzle1_S_P, level.Script.Puzzles, "P");
             level.Script.Puzzles.Add(name);
         }
-        else if (TR1EntityUtilities.IsQuestType(itemType))
+        else if (TR1TypeUtilities.IsQuestType(itemType))
         {
             PopulateScriptStrings(itemType - TR1Type.Quest1_S_P, level.Script.Pickups, "Q");
             level.Script.Pickups.Add(name);
@@ -706,7 +706,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         foreach (TREntity otherEntity in level.Data.Entities)
         {
             TR1Type type = (TR1Type)otherEntity.TypeID;
-            if (secret.Location.Room == otherEntity.Room && (TR1EntityUtilities.IsTrapdoor(type) || TR1EntityUtilities.IsBridge(type) || type == TR1Type.FallingBlock))
+            if (secret.Location.Room == otherEntity.Room && (TR1TypeUtilities.IsTrapdoor(type) || TR1TypeUtilities.IsBridge(type) || type == TR1Type.FallingBlock))
             {
                 TRRoomSector otherSector = FDUtilities.GetRoomSector(otherEntity.X, otherEntity.Y, otherEntity.Z, otherEntity.Room, level.Data, floorData);
                 if (otherSector == sector)
@@ -935,8 +935,8 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
     internal class SecretProcessor : AbstractProcessorThread<TR1SecretRandomizer>
     {
-        private static readonly Dictionary<TR1Type, TR1Type> _secretModels = TR1EntityUtilities.GetSecretModels();
-        private static readonly Dictionary<TR1Type, TR1Type> _modelReplacements = TR1EntityUtilities.GetSecretReplacements();
+        private static readonly Dictionary<TR1Type, TR1Type> _secretModels = TR1TypeUtilities.GetSecretModels();
+        private static readonly Dictionary<TR1Type, TR1Type> _modelReplacements = TR1TypeUtilities.GetSecretReplacements();
 
         // Move this to Gamestring Rando once implemented
         private static readonly Dictionary<TR1Type, string> _pickupNames = new()
@@ -989,7 +989,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
 
                 TR1Type modelType = _outer.Settings.UseRandomSecretModels
                     ? availableTypes[_outer._generator.Next(0, availableTypes.Count)]
-                    : TR1EntityUtilities.GetBestLevelSecretModel(level.Name);
+                    : TR1TypeUtilities.GetBestLevelSecretModel(level.Name);
                 allocation.ImportModels.Add(modelType);
             }
         }
