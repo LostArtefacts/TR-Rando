@@ -6,7 +6,7 @@ public static class TR3TypeUtilities
 {
     public static readonly Dictionary<TR3Type, Dictionary<TR3Type, List<string>>> LevelAliases = new()
     {
-        [TR3Type.Lara] = new Dictionary<TR3Type, List<string>>
+        [TR3Type.Lara] = new()
         {
             [TR3Type.LaraIndia]
                 = TR3LevelNames.IndiaWithCutscenes,
@@ -19,9 +19,9 @@ public static class TR3TypeUtilities
             [TR3Type.LaraAntarc]
                 = TR3LevelNames.AntarcticaWithCutscenes,
             [TR3Type.LaraHome]
-                = new List<string> { TR3LevelNames.ASSAULT }
+                = new() { TR3LevelNames.ASSAULT }
         },
-        [TR3Type.LaraSkin_H] = new Dictionary<TR3Type, List<string>>
+        [TR3Type.LaraSkin_H] = new()
         {
             [TR3Type.LaraSkin_H_India]
                 = TR3LevelNames.IndiaWithCutscenes,
@@ -34,21 +34,21 @@ public static class TR3TypeUtilities
             [TR3Type.LaraSkin_H_Antarc]
                 = TR3LevelNames.AntarcticaWithCutscenes,
             [TR3Type.LaraSkin_H_Home]
-                = new List<string> { TR3LevelNames.ASSAULT }
+                = new() { TR3LevelNames.ASSAULT }
         },
-        [TR3Type.Cobra] = new Dictionary<TR3Type, List<string>>
+        [TR3Type.Cobra] = new()
         {
             [TR3Type.CobraIndia]
-                = new List<string> { TR3LevelNames.RUINS, TR3LevelNames.GANGES, TR3LevelNames.CAVES },
+                = new() { TR3LevelNames.RUINS, TR3LevelNames.GANGES, TR3LevelNames.CAVES },
             [TR3Type.CobraNevada]
-                = new List<string> { TR3LevelNames.NEVADA },
+                = new() { TR3LevelNames.NEVADA },
         },
-        [TR3Type.Dog] = new Dictionary<TR3Type, List<string>>
+        [TR3Type.Dog] = new()
         {
             [TR3Type.DogLondon] 
-                = new List<string> { TR3LevelNames.ALDWYCH },
+                = new() { TR3LevelNames.ALDWYCH },
             [TR3Type.DogNevada]
-                = new List<string> { TR3LevelNames.HSC, TR3LevelNames.HALLOWS }
+                = new() { TR3LevelNames.HSC, TR3LevelNames.HALLOWS }
         },
     };
 
@@ -62,7 +62,7 @@ public static class TR3TypeUtilities
             }
         }
 
-        return new List<TR3Type> { type };
+        return new() { type };
     }
 
     public static TR3Type TranslateAlias(TR3Type type)
@@ -109,15 +109,15 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetLaraTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.LaraIndia, TR3Type.LaraCoastal, TR3Type.LaraLondon, TR3Type.LaraNevada, TR3Type.LaraAntarc, TR3Type.LaraInvisible
         };
     }
 
-    public static List<TR3Type> GetListOfKeyTypes()
+    public static List<TR3Type> GetKeyTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Key1_P,
             TR3Type.Key2_P,
@@ -126,9 +126,9 @@ public static class TR3TypeUtilities
         };
     }
 
-    public static List<TR3Type> GetListOfPuzzleTypes()
+    public static List<TR3Type> GetPuzzleTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Puzzle1_P,
             TR3Type.Puzzle2_P,
@@ -137,38 +137,38 @@ public static class TR3TypeUtilities
         };
     }
 
-    public static List<TR3Type> GetListOfQuestTypes()
+    public static List<TR3Type> GetQuestTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Quest1_P,
             TR3Type.Quest2_P
         };
     }
 
-    public static List<TR3Type> GetListOfKeyItemTypes()
+    public static List<TR3Type> GetKeyItemTypes()
     {
-        return GetListOfKeyTypes().Concat(GetListOfPuzzleTypes()).Concat(GetListOfQuestTypes()).ToList();
+        return GetKeyTypes().Concat(GetPuzzleTypes()).Concat(GetQuestTypes()).ToList();
     }
 
     public static bool IsKeyType(TR3Type type)
     {
-        return GetListOfKeyTypes().Contains(type);
+        return GetKeyTypes().Contains(type);
     }
 
     public static bool IsPuzzleType(TR3Type type)
     {
-        return GetListOfPuzzleTypes().Contains(type);
+        return GetPuzzleTypes().Contains(type);
     }
 
     public static bool IsQuestType(TR3Type type)
     {
-        return GetListOfQuestTypes().Contains(type);
+        return GetQuestTypes().Contains(type);
     }
 
     public static bool IsKeyItemType(TR3Type type)
     {
-        return GetListOfKeyItemTypes().Contains(type);
+        return GetKeyItemTypes().Contains(type);
     }
 
     public static Dictionary<TR3Type, TR3Type> GetArtefactPickups()
@@ -186,7 +186,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetArtefactMenuModels()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Infada_M_H, TR3Type.OraDagger_M_H, TR3Type.EyeOfIsis_M_H, TR3Type.Element115_M_H
         };
@@ -221,7 +221,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetTrapdoorTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Trapdoor1, TR3Type.Trapdoor2, TR3Type.Trapdoor3
         };
@@ -229,7 +229,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetBridgeTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.BridgeFlat, TR3Type.BridgeTilt1, TR3Type.BridgeTilt2
         };
@@ -237,7 +237,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetStandardPickupTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Pistols_P,
             TR3Type.Shotgun_P,
@@ -280,7 +280,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetWeaponPickups()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Pistols_P,
             TR3Type.Shotgun_P,
@@ -360,7 +360,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetCandidateCrossLevelEnemies()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.BruteMutant,
             TR3Type.CobraIndia,
@@ -423,7 +423,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetWaterEnemies()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Croc,
             TR3Type.KillerWhale,
@@ -451,7 +451,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetKillableWaterEnemies()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Croc,
             TR3Type.ScubaSteve
@@ -528,7 +528,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetUnrenderedTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.AIAmbush_N,
             TR3Type.AICheck_N,
@@ -554,7 +554,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetSwitchTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.SmallWallSwitch,
             TR3Type.PushButtonSwitch,
@@ -570,7 +570,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetKeyholeTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Keyhole1,
             TR3Type.Keyhole2,
@@ -586,7 +586,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetSlotTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Slot1Empty,
             TR3Type.Slot2Empty,
@@ -606,7 +606,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetPushblockTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.PushableBlock1,
             TR3Type.PushableBlock2
@@ -620,7 +620,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> GetLightTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Light_N,
             TR3Type.Light2_N,
@@ -655,7 +655,7 @@ public static class TR3TypeUtilities
 
     public static List<TR3Type> DoorTypes()
     {
-        return new List<TR3Type>
+        return new()
         {
             TR3Type.Door1, TR3Type.Door2, TR3Type.Door3,
             TR3Type.Door4, TR3Type.Door5, TR3Type.Door6,
