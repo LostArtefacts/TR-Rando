@@ -901,7 +901,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             if (!Settings.RandomizeItems || Settings.RandoItemDifficulty == ItemDifficulty.Default)
             {
                 // The user is not specifically attempting one-item rando, so we can add anything as replacements
-                replacementPool = TR2TypeUtilities.GetListOfAmmoTypes();
+                replacementPool = TR2TypeUtilities.GetAmmoTypes();
             }
             else
             {

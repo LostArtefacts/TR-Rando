@@ -101,9 +101,9 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
             _spriteRandomizer = new ItemSpriteRandomizer<TR2Type>
             {
-                StandardItemTypes = TR2TypeUtilities.GetListOfGunTypes().Concat(TR2TypeUtilities.GetListOfAmmoTypes()).ToList(),
-                KeyItemTypes = TR2TypeUtilities.GetListOfKeyItemTypes(),
-                SecretItemTypes = TR2TypeUtilities.GetListOfSecretTypes(),
+                StandardItemTypes = TR2TypeUtilities.GetGunTypes().Concat(TR2TypeUtilities.GetAmmoTypes()).ToList(),
+                KeyItemTypes = TR2TypeUtilities.GetKeyItemTypes(),
+                SecretItemTypes = TR2TypeUtilities.GetSecretTypes(),
                 RandomizeKeyItemSprites = Settings.RandomizeKeyItemSprites,
                 RandomizeSecretSprites = Settings.RandomizeSecretSprites,
                 Mode = Settings.SpriteRandoMode
@@ -138,8 +138,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         bool SeraphInMonastery = false;
 
         //List of pickup items
-        List<TR2Type> stdItemTypes = TR2TypeUtilities.GetListOfGunTypes();
-        stdItemTypes.AddRange(TR2TypeUtilities.GetListOfAmmoTypes());
+        List<TR2Type> stdItemTypes = TR2TypeUtilities.GetGunTypes();
+        stdItemTypes.AddRange(TR2TypeUtilities.GetAmmoTypes());
 
         if (_levelInstance.Is(TR2LevelNames.MONASTERY))
         {
@@ -318,14 +318,14 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             List<TR2Type> targetents = new();
             if (Settings.RandomizeItemPositions)
             {
-                targetents.AddRange(TR2TypeUtilities.GetListOfGunTypes());
-                targetents.AddRange(TR2TypeUtilities.GetListOfAmmoTypes());
+                targetents.AddRange(TR2TypeUtilities.GetGunTypes());
+                targetents.AddRange(TR2TypeUtilities.GetAmmoTypes());
             }
 
             //And also key items...
             if (Settings.IncludeKeyItems)
             {
-                targetents.AddRange(TR2TypeUtilities.GetListOfKeyItemTypes());
+                targetents.AddRange(TR2TypeUtilities.GetKeyItemTypes());
             }
 
             if (targetents.Count == 0)
@@ -540,8 +540,8 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             return;
         }
 
-        List<TR2Type> stdItemTypes = TR2TypeUtilities.GetListOfGunTypes();
-        stdItemTypes.AddRange(TR2TypeUtilities.GetListOfAmmoTypes());
+        List<TR2Type> stdItemTypes = TR2TypeUtilities.GetGunTypes();
+        stdItemTypes.AddRange(TR2TypeUtilities.GetAmmoTypes());
 
         for (int i = 0; i < _levelInstance.Data.NumEntities; i++)
         {
@@ -645,7 +645,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         //Is there something in the unarmed level pistol location?
         if (_unarmedLevelPistolIndex != -1)
         {
-            List<TR2Type> replacementWeapons = TR2TypeUtilities.GetListOfGunTypes();
+            List<TR2Type> replacementWeapons = TR2TypeUtilities.GetGunTypes();
             replacementWeapons.Add(TR2Type.Pistols_S_P);
             TR2Type weaponType = replacementWeapons[_generator.Next(0, replacementWeapons.Count)];
 
@@ -764,7 +764,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void PopulateHSHCloset()
     {
-        List<TR2Type> replacementWeapons = TR2TypeUtilities.GetListOfGunTypes();
+        List<TR2Type> replacementWeapons = TR2TypeUtilities.GetGunTypes();
         if (_levelInstance.Script.RemovesWeapons)
         {
             replacementWeapons.Add(TR2Type.Pistols_S_P);
