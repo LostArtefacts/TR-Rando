@@ -155,16 +155,15 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
                 [TR2Type.GoldSecret_S_P] = goldLocation
             };
 
-            List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
             foreach (TR2Type secretType in secretMap.Keys)
             {
                 //Does the level contain an entity for this type?
-                TR2Entity secretEntity = Array.Find(_levelInstance.Data.Entities, ent => ent.TypeID == (short)secretType);
+                TR2Entity secretEntity = _levelInstance.Data.Entities.Find(ent => ent.TypeID == (short)secretType);
 
                 //If not, create a placeholder entity for now
                 if (secretEntity == null)
                 {
-                    ents.Add(secretEntity = new TR2Entity());
+                    _levelInstance.Data.Entities.Add(secretEntity = new());
                 }
 
                 // Move it to the new location and ensure it has the correct type set
@@ -179,9 +178,6 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
                 secretEntity.Angle = 0;
                 secretEntity.Flags = 0;
             }
-
-            _levelInstance.Data.Entities = ents.ToArray();
-            _levelInstance.Data.NumEntities = (uint)ents.Count;
 
             FixSecretTextures();
             CheckForSecretDamage(secretMap);
@@ -250,9 +246,6 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
                 }
             }
         }
-
-        _levelInstance.Data.NumEntities = (uint)ents.Count;
-        _levelInstance.Data.Entities = ents.ToArray();
 
         FixSecretTextures();
     }

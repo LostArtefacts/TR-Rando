@@ -221,16 +221,7 @@ public class TR2Level : TRLevelBase
     /// NumAnimatesTextures * 2 bytes
     /// </summary>
     public TRAnimatedTexture[] AnimatedTextures { get; set; }
-
-    /// <summary>
-    /// 4 bytes
-    /// </summary>
-    public uint NumEntities { get; set; }
-
-    /// <summary>
-    /// NumEntities * 24 bytes
-    /// </summary>
-    public TR2Entity[] Entities { get; set; }
+    public List<TR2Entity> Entities { get; set; }
     public List<byte> LightMap { get; set; }
 
     /// <summary>

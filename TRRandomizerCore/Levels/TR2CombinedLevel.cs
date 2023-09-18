@@ -109,16 +109,7 @@ public class TR2CombinedLevel
     public List<TR2Entity> GetEnemyEntities()
     {
         List<TR2Type> allEnemies = TR2TypeUtilities.GetFullListOfEnemies();
-        List<TR2Entity> levelEntities = new();
-        for (int i = 0; i < Data.NumEntities; i++)
-        {
-            TR2Entity entity = Data.Entities[i];
-            if (allEnemies.Contains((TR2Type)entity.TypeID))
-            {
-                levelEntities.Add(entity);
-            }
-        }
-        return levelEntities;
+        return Data.Entities.FindAll(e => allEnemies.Contains((TR2Type)e.TypeID));
     }
 
     public int GetMaximumEntityLimit()

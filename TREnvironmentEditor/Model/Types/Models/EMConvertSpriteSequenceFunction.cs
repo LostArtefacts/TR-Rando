@@ -48,7 +48,7 @@ public class EMConvertSpriteSequenceFunction : BaseEMFunction
         }
     }
 
-    private void UpdateSpriteEntities(TR2Entity[] entities)
+    private void UpdateSpriteEntities(IEnumerable<TR2Entity> entities)
     {
         foreach (TR2Entity entity in entities)
         {

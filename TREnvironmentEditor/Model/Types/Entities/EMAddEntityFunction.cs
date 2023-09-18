@@ -46,7 +46,7 @@ public class EMAddEntityFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR2Level level)
     {
-        if (level.NumEntities < _defaultEntityLimit)
+        if (level.Entities.Count < _defaultEntityLimit)
         {
             EMLevelData data = GetData(level);
             if (TargetRelocation != null)
@@ -67,10 +67,7 @@ public class EMAddEntityFunction : BaseEMFunction
                 }
             }
 
-            List<TR2Entity> entities = level.Entities.ToList();
-            entities.Add(CreateTR2Entity(data));
-            level.Entities = entities.ToArray();
-            level.NumEntities++;
+            level.Entities.Add(CreateTR2Entity(data));
         }
     }
 

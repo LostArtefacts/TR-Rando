@@ -33,7 +33,7 @@ public class EMConvertWheelDoorFunction : BaseEMFunction
         }.ApplyToLevel(level);
 
         // Make the door normal and match its lighting to another
-        TR2Entity otherDoor = Array.Find(level.Entities, e => e.TypeID == NewDoorType);
+        TR2Entity otherDoor = level.Entities.Find(e => e.TypeID == NewDoorType);
         new EMConvertEntityFunction
         {
             EntityIndex = DoorIndex,

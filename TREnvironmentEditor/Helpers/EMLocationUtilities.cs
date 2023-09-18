@@ -17,7 +17,7 @@ public static class EMLocationUtilities
     public static int GetContainedSecretEntity(this EMLocation location, TR2Level level, FDControl floorData)
     {
         TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
-        return Array.FindIndex(level.Entities, e =>
+        return level.Entities.FindIndex(e =>
             TR2TypeUtilities.IsSecretType((TR2Type)e.TypeID)
             && FDUtilities.GetRoomSector(e.X, e.Y, e.Z, e.Room, level, floorData) == sector
         );

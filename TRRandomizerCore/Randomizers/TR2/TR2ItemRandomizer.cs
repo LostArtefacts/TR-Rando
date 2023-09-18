@@ -277,15 +277,13 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void PlaceAllItems(List<Location> locations, TR2Type entityToAdd = TR2Type.LargeMed_S_P, bool transformToLevelSpace = true)
     {
-        List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-
         foreach (Location loc in locations)
         {
             Location copy = transformToLevelSpace ? SpatialConverters.TransformToLevelSpace(loc, _levelInstance.Data.Rooms[loc.Room].Info) : loc;
 
             if (_devRooms == null || _devRooms.Contains(copy.Room))
             {
-                ents.Add(new TR2Entity
+                _levelInstance.Data.Entities.Add(new()
                 {
                     TypeID = (short)entityToAdd,
                     Room = Convert.ToInt16(copy.Room),
@@ -299,9 +297,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 });
             }
         }
-
-        _levelInstance.Data.NumEntities = (uint)ents.Count;
-        _levelInstance.Data.Entities = ents.ToArray();
     }
 
     private void RepositionItems(List<Location> ItemLocs)
@@ -337,7 +332,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             ZonedLocationCollection ZonedLocations = new();
             ZonedLocations.PopulateZones(GetResourcePath(@"TR2\Zones\" + _levelInstance.Name + "-Zones.json"), ItemLocs, ZonePopulationMethod.KeyPuzzleQuestOnly);
 
-            for (int i = 0; i < _levelInstance.Data.Entities.Length; i++)
+            for (int i = 0; i < _levelInstance.Data.Entities.Count; i++)
             {
                 if (ItemFactory.IsItemLocked(_levelInstance.Name, i))
                 {
@@ -543,7 +538,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         List<TR2Type> stdItemTypes = TR2TypeUtilities.GetGunTypes();
         stdItemTypes.AddRange(TR2TypeUtilities.GetAmmoTypes());
 
-        for (int i = 0; i < _levelInstance.Data.NumEntities; i++)
+        for (int i = 0; i < _levelInstance.Data.Entities.Count; i++)
         {
             TR2Entity entity = _levelInstance.Data.Entities[i];
             TR2Type currentType = (TR2Type)entity.TypeID;
@@ -730,14 +725,11 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
     private void CopyEntity(TR2Entity entity, TR2Type newType)
     {
-        List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-        if (ents.Count < _levelInstance.GetMaximumEntityLimit())
+        if (_levelInstance.Data.Entities.Count < _levelInstance.GetMaximumEntityLimit())
         {
             TR2Entity copy = entity.Clone();
             copy.TypeID = (short)newType;
-            ents.Add(copy);
-            _levelInstance.Data.NumEntities++;
-            _levelInstance.Data.Entities = ents.ToArray();
+            _levelInstance.Data.Entities.Add(copy);
         }
     }
 
@@ -845,9 +837,9 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         List<TR2Entity> levelEntities = _levelInstance.Data.Entities.ToList();
         int entityLimit = _levelInstance.GetMaximumEntityLimit();
 
-        TR2Entity[] boatToMove = Array.FindAll(_levelInstance.Data.Entities, e => e.TypeID == (short)TR2Type.Boat);
+        List<TR2Entity> boatToMove = _levelInstance.Data.Entities.FindAll(e => e.TypeID == (short)TR2Type.Boat);
 
-        if (vehicles.Count == 0 || vehicles.Count - boatToMove.Length + levelEntities.Count > entityLimit)
+        if (vehicles.Count == 0 || vehicles.Count - boatToMove.Count + levelEntities.Count > entityLimit)
         {
             return;
         }
@@ -882,7 +874,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     location = RoomWaterUtilities.MoveToTheSurface(location, _levelInstance.Data);
                 }
 
-                if (boatToMove.Length == 0)
+                if (boatToMove.Count == 0)
                 {
                     //Creation new entity
                     levelEntities.Add(new TR2Entity
@@ -901,7 +893,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 else
                 {
                     //I am in a level with 1 or 2 boat(s) to move
-                    for (int i = 0; i < boatToMove.Length; i++)
+                    for (int i = 0; i < boatToMove.Count; i++)
                     {
                         if (i == 0) // for the first one i take the vehicle value
                         {
@@ -947,12 +939,6 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
 
                     }
                 }
-            }
-
-            if (levelEntities.Count > _levelInstance.Data.NumEntities)
-            {
-                _levelInstance.Data.Entities = levelEntities.ToArray();
-                _levelInstance.Data.NumEntities = (uint)levelEntities.Count;
             }
         }
         catch (PackingException)

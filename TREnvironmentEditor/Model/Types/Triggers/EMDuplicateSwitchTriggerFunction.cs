@@ -36,7 +36,7 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
     {
         EMLevelData data = GetData(level);
 
-        SetupLocations(data, level.Entities);
+        SetupLocations(data, level.Entities.ToArray()); // Temp until TR3 separated/updated
 
         // Duplicate the triggers to the switch's location
         base.ApplyToLevel(level);

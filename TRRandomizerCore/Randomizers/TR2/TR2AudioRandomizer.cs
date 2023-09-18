@@ -174,7 +174,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
     private static Dictionary<int, TR2Entity> GetSecretItems(TR2Level level)
     {
         Dictionary<int, TR2Entity> entities = new();
-        for (int i = 0; i < level.NumEntities; i++)
+        for (int i = 0; i < level.Entities.Count; i++)
         {
             if (TR2TypeUtilities.IsSecretType((TR2Type)level.Entities[i].TypeID))
             {

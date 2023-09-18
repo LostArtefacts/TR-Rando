@@ -617,16 +617,11 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
             //#45 - Check to see if any items are at the same location as the enemy.
             //If there are we need to ensure that the new random enemy type is one that can drop items.
-            List<TR2Entity> sharedItems = new(Array.FindAll
-            (
-                level.Data.Entities,
-                e =>
-                (
-                    e.X == currentEntity.X &&
-                    e.Y == currentEntity.Y &&
-                    e.Z == currentEntity.Z
-                )
-            ));
+            List<TR2Entity> sharedItems = level.Data.Entities.FindAll(e =>
+                e.X == currentEntity.X
+                && e.Y == currentEntity.Y
+                && e.Z == currentEntity.Z
+            );
 
             //Do multiple entities share one location?
             bool isPickupItem = false;
@@ -843,14 +838,11 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         // Did we add any new entities?
         if (newEntities.Count > 0)
         {
-            List<TR2Entity> levelEntities = level.Data.Entities.ToList();
-            levelEntities.AddRange(newEntities);
-            level.Data.Entities = levelEntities.ToArray();
-            level.Data.NumEntities = (uint)levelEntities.Count;
+            level.Data.Entities.AddRange(newEntities);
         }
 
         // Check in case there are too many skidoo drivers
-        if (Array.Find(level.Data.Entities, e => e.TypeID == (short)TR2Type.MercSnowmobDriver) != null)
+        if (level.Data.Entities.Find(e => e.TypeID == (short)TR2Type.MercSnowmobDriver) != null)
         {
             LimitSkidooEntities(level);
         }
@@ -909,17 +901,17 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 replacementPool = new List<TR2Type> { TR2Type.CameraTarget_N };
             }
 
-            TR2Entity[] skidMen;
+            List<TR2Entity> skidMen;
             for (int i = 0; i < skidooRemovalCount; i++)
             {
-                skidMen = Array.FindAll(level.Data.Entities, e => e.TypeID == (short)TR2Type.MercSnowmobDriver);
-                if (skidMen.Length == 0)
+                skidMen = level.Data.Entities.FindAll(e => e.TypeID == (short)TR2Type.MercSnowmobDriver);
+                if (skidMen.Count == 0)
                 {
                     break;
                 }
 
                 // Select a random Skidoo driver and convert him into something else
-                TR2Entity skidMan = skidMen[_generator.Next(0, skidMen.Length)];
+                TR2Entity skidMan = skidMen[_generator.Next(0, skidMen.Count)];
                 TR2Type newType = replacementPool[_generator.Next(0, replacementPool.Count)];
                 skidMan.TypeID = (short)newType;
 
@@ -945,7 +937,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 }
 
                 // Get rid of the old enemy's triggers
-                FDUtilities.RemoveEntityTriggers(level.Data, Array.IndexOf(level.Data.Entities, skidMan), floorData);
+                FDUtilities.RemoveEntityTriggers(level.Data, level.Data.Entities.IndexOf(skidMan), floorData);
             }
 
             floorData.WriteToLevel(level.Data);
