@@ -20,7 +20,7 @@ public class EMMoveSlotFunction : BaseEMFunction
         FDControl control = new();
         control.ParseFromLevel(level);
 
-        TREntity slot = level.Entities[EntityIndex];
+        TR1Entity slot = level.Entities[EntityIndex];
         TRRoomSector currentSector = FDUtilities.GetRoomSector(slot.X, slot.Y, slot.Z, slot.Room, level, control);
         short roomNumber = data.ConvertRoom(Location.Room);
         TRRoomSector newSector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, roomNumber, level, control);
@@ -111,7 +111,7 @@ public class EMMoveSlotFunction : BaseEMFunction
         }
     }
 
-    protected bool MoveSlot(FDControl control, TREntity slot, short roomNumber, TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
+    protected bool MoveSlot(FDControl control, TR1Entity slot, short roomNumber, TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
     {
         slot.X = Location.X;
         slot.Y = Location.Y;

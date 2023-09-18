@@ -30,7 +30,7 @@ public class EMModifyEntityFunction : BaseEMFunction
         ModifyEntity(level.Entities[data.ConvertEntity(EntityIndex)]);
     }
 
-    private void ModifyEntity(TREntity entity)
+    private void ModifyEntity(TR1Entity entity)
     {
         if (Invisible.HasValue)
         {

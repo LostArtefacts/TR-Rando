@@ -36,7 +36,7 @@ public class ItemFactory
         return _availableItems[lvl];
     }
 
-    public int GetNextIndex(string lvl, List<TREntity> allItems, bool allowLimitBreak = false)
+    public int GetNextIndex(string lvl, List<TR1Entity> allItems, bool allowLimitBreak = false)
     {
         return GetNextIndex(lvl, allItems.Count, allowLimitBreak);
     }
@@ -57,7 +57,7 @@ public class ItemFactory
         return (totalItemCount < _entityLimit || allowLimitBreak) ? totalItemCount : -1;
     }
 
-    public bool CanCreateItem(string lvl, List<TREntity> allItems, bool allowLimitBreak = false)
+    public bool CanCreateItem(string lvl, List<TR1Entity> allItems, bool allowLimitBreak = false)
     {
         return GetNextIndex(lvl, allItems, allowLimitBreak) != -1;
     }
@@ -74,9 +74,9 @@ public class ItemFactory
         return allItems.Count + count <= _entityLimit || allowLimitBreak;
     }
 
-    public TREntity CreateItem(string lvl, List<TREntity> allItems, Location location = null, bool allowLimitBreak = false)
+    public TR1Entity CreateItem(string lvl, List<TR1Entity> allItems, Location location = null, bool allowLimitBreak = false)
     {
-        TREntity item;
+        TR1Entity item;
         Queue<int> pool = GetItemPool(lvl);
         if (pool.Count > 0)
         {
@@ -86,7 +86,7 @@ public class ItemFactory
         {
             if (allItems.Count < _entityLimit || allowLimitBreak)
             {
-                allItems.Add(item = new TREntity());
+                allItems.Add(item = new TR1Entity());
             }
             else
             {

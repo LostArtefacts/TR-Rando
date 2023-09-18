@@ -31,8 +31,8 @@ public class EMConvertEnemyFunction : BaseEMFunction
         EMLevelData data = GetData(level);
         ConvertIndices(data);
 
-        TREntity enemyMatch = null;
-        List<TREntity> entities = level.Entities.ToList();
+        TR1Entity enemyMatch = null;
+        List<TR1Entity> entities = level.Entities.ToList();
         if (potentialTypes.Contains((TR1Type)PreferredType))
         {
             enemyMatch = entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(entities.IndexOf(e)));

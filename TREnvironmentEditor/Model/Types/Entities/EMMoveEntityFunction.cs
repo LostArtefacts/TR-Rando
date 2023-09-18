@@ -26,7 +26,7 @@ public class EMMoveEntityFunction : BaseEMFunction
         MoveEntity(level.Entities[data.ConvertEntity(EntityIndex)], data);
     }
 
-    private void MoveEntity(TREntity entity, EMLevelData data)
+    private void MoveEntity(TR1Entity entity, EMLevelData data)
     {
         entity.X = TargetLocation.X;
         entity.Y = TargetLocation.Y;

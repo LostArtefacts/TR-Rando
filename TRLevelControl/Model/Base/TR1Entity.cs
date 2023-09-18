@@ -2,7 +2,7 @@
 
 namespace TRLevelControl.Model;
 
-public class TREntity : ISerializableCompact, ICloneable
+public class TR1Entity : ISerializableCompact, ICloneable
 {
     public short TypeID { get; set; }
     
@@ -80,7 +80,7 @@ public class TREntity : ISerializableCompact, ICloneable
         return stream.ToArray();
     }
 
-    public TREntity Clone()
+    public TR1Entity Clone()
     {
         return new()
         {

@@ -34,7 +34,7 @@ public class EMClickFunction : BaseEMFunction
             // Move any entities that share the same floor sector up or down the relevant number of clicks
             if (FloorClicks.HasValue && !RetainItemPositions)
             {
-                foreach (TREntity entity in level.Entities)
+                foreach (TR1Entity entity in level.Entities)
                 {
                     if (entity.Room == location.Room)
                     {

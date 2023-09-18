@@ -246,7 +246,7 @@ public class TR1Wireframer : AbstractTRWireframer<TR1Type, TR1Level>
             return null;
         }
 
-        TREntity doorInstance = Array.Find(level.Entities, e => e.TypeID == doorModel.ID);
+        TR1Entity doorInstance = Array.Find(level.Entities, e => e.TypeID == doorModel.ID);
         if (doorInstance == null)
         {
             return null;

@@ -224,7 +224,7 @@ public class TR1Level : TRLevelBase
     /// <summary>
     /// NumEntities * 24 bytes
     /// </summary>
-    public TREntity[] Entities { get; set; }
+    public TR1Entity[] Entities { get; set; }
     public List<byte> LightMap { get; set; }
     public List<TRColour> Palette { get; set; }
 

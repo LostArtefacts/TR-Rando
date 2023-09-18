@@ -193,7 +193,7 @@ public class EMFloorFunction : BaseEMFunction, ITextureModifier
         AlterSectorBox(level, room, sectorIndex);
 
         // Move any entities that share the same floor sector up or down the relevant number of clicks
-        foreach (TREntity entity in level.Entities)
+        foreach (TR1Entity entity in level.Entities)
         {
             if (entity.Room == roomNumber)
             {

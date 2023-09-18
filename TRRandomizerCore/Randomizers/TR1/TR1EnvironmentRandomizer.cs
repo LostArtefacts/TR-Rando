@@ -234,7 +234,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
         if (anchorRoom == -1 && level.Is(TR1LevelNames.ATLANTIS))
         {
             // Extra check for OG Atlantis to ensure the script is configured properly.
-            TREntity baconLara = Array.Find(level.Data.Entities, e => e.TypeID == (short)TR1Type.Doppelganger);
+            TR1Entity baconLara = Array.Find(level.Data.Entities, e => e.TypeID == (short)TR1Type.Doppelganger);
             if (baconLara?.Room == 57)
             {
                 anchorRoom = 10;

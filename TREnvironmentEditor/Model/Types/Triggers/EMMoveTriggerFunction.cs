@@ -27,7 +27,7 @@ public class EMMoveTriggerFunction : BaseEMFunction
         }
         else if (EntityLocation.HasValue)
         {
-            TREntity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
+            TR1Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
             NewLocation = new EMLocation
             {
                 X = entity.X,

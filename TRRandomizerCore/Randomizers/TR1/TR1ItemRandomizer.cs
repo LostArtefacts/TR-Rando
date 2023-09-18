@@ -56,10 +56,10 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
     private static readonly int _ROTATION = -8192;
 
     // Track the pistols so they remain a weapon type and aren't moved
-    private TREntity _unarmedLevelPistols;
+    private TR1Entity _unarmedLevelPistols;
 
     // Secret reward items handled in separate class, so track the reward entities
-    private TRSecretMapping<TREntity> _secretMapping;
+    private TRSecretMapping<TR1Entity> _secretMapping;
 
     private List<Location> _locations;
     private ItemSpriteRandomizer<TR1Type> _spriteRandomizer;
@@ -80,7 +80,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             FindUnarmedLevelPistols(_levelInstance);
 
             _locations = GetItemLocationPool(_levelInstance);
-            _secretMapping = TRSecretMapping<TREntity>.Get(GetResourcePath(@"TR1\SecretMapping\" + _levelInstance.Name + "-SecretMapping.json"));
+            _secretMapping = TRSecretMapping<TR1Entity>.Get(GetResourcePath(@"TR1\SecretMapping\" + _levelInstance.Name + "-SecretMapping.json"));
 
             if (Settings.IncludeExtraPickups)
                 AddExtraPickups(_levelInstance);
@@ -121,8 +121,8 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
     {
         if (level.Script.RemovesWeapons)
         {
-            List<TREntity> pistolEntities = level.Data.Entities.ToList().FindAll(e => TR1TypeUtilities.IsWeaponPickup((TR1Type)e.TypeID));
-            foreach (TREntity pistols in pistolEntities)
+            List<TR1Entity> pistolEntities = level.Data.Entities.ToList().FindAll(e => TR1TypeUtilities.IsWeaponPickup((TR1Type)e.TypeID));
+            foreach (TR1Entity pistols in pistolEntities)
             {
                 int match = _pistolLocations[level.Name].FindIndex
                 (
@@ -157,7 +157,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         stdItemTypes.Remove(TR1Type.PistolAmmo_S_P);
 
         // Add what we can to the level. The locations and types may be further randomized depending on the selected options.
-        List<TREntity> entities = level.Data.Entities.ToList();
+        List<TR1Entity> entities = level.Data.Entities.ToList();
         for (int i = 0; i < _extraItemCounts[level.Name]; i++)
         {
             if (!ItemFactory.CanCreateItem(level.Name, entities))
@@ -165,7 +165,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
                 break;
             }
 
-            TREntity newItem = ItemFactory.CreateItem(level.Name, entities, _locations[_generator.Next(0, _locations.Count)]);
+            TR1Entity newItem = ItemFactory.CreateItem(level.Name, entities, _locations[_generator.Next(0, _locations.Count)]);
             newItem.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
         }
 
@@ -193,7 +193,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
                 continue;
             }
 
-            TREntity entity = level.Data.Entities[i];
+            TR1Entity entity = level.Data.Entities[i];
             TR1Type entityType = (TR1Type)entity.TypeID;
             
             if (entity == _unarmedLevelPistols)
@@ -246,7 +246,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         // Look for extra utility/ammo items and hide them
         for (int i = 0; i < level.Data.NumEntities; i++)
         {
-            TREntity ent = level.Data.Entities[i];
+            TR1Entity ent = level.Data.Entities[i];
             if (_secretMapping.RewardEntities.Contains(i) || ent == _unarmedLevelPistols)
             {
                 // Rewards and unarmed level weapons excluded
@@ -280,7 +280,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
                 continue;
             }
 
-            TREntity entity = level.Data.Entities[i];
+            TR1Entity entity = level.Data.Entities[i];
             // Move standard items only, excluding any unarmed level pistols, and reward items
             if (TR1TypeUtilities.IsStandardPickupType((TR1Type)entity.TypeID) && entity != _unarmedLevelPistols)
             {
@@ -318,7 +318,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             exclusions.AddRange(_excludedLocations[level.Name]);
         }
 
-        foreach (TREntity entity in level.Data.Entities)
+        foreach (TR1Entity entity in level.Data.Entities)
         {
             if (!TR1TypeUtilities.CanSharePickupSpace((TR1Type)entity.TypeID))
             {
@@ -359,7 +359,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
 
         for (int i = 0; i < level.Data.NumEntities; i++)
         {
-            TREntity entity = level.Data.Entities[i];
+            TR1Entity entity = level.Data.Entities[i];
             TR1Type type = (TR1Type)entity.TypeID;
             if (!TR1TypeUtilities.IsKeyItemType(type) || IsSecretItem(entity, i, level.Data, floorData))
             {
@@ -447,7 +447,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         _levelInstance.Data.SpriteTextures = _spriteRandomizer.Textures.ToArray();
     }
 
-    private static bool IsSecretItem(TREntity entity, int entityIndex, TR1Level level, FDControl floorData)
+    private static bool IsSecretItem(TR1Entity entity, int entityIndex, TR1Level level, FDControl floorData)
     {
         TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
         if (sector.FDIndex != 0)

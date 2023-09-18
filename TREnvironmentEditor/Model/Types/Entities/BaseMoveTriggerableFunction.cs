@@ -12,7 +12,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
     public EMLocation Location { get; set; }
     public List<EMLocation> TriggerLocations { get; set; }
 
-    protected void RepositionTriggerable(TREntity entity, TR1Level level)
+    protected void RepositionTriggerable(TR1Entity entity, TR1Level level)
     {
         EMLevelData data = GetData(level);
 

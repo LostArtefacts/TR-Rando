@@ -277,7 +277,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
 
         //Entities
         _level.NumEntities = reader.ReadUInt32();
-        _level.Entities = new TREntity[_level.NumEntities];
+        _level.Entities = new TR1Entity[_level.NumEntities];
 
         for (int i = 0; i < _level.NumEntities; i++)
         {
@@ -399,7 +399,7 @@ public class TR1LevelControl : TRLevelControlBase<TR1Level>
         foreach (TRAnimatedTexture texture in _level.AnimatedTextures) { writer.Write(texture.Serialize()); }
 
         writer.Write(_level.NumEntities);
-        foreach (TREntity entity in _level.Entities) { writer.Write(entity.Serialize()); }
+        foreach (TR1Entity entity in _level.Entities) { writer.Write(entity.Serialize()); }
 
         Debug.Assert(_level.LightMap.Count == TRConsts.LightMapSize);
         Debug.Assert(_level.Palette.Count == TRConsts.PaletteSize);

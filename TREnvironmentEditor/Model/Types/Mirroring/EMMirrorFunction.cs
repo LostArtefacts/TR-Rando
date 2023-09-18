@@ -608,7 +608,7 @@ public class EMMirrorFunction : BaseEMFunction
 
     private void MirrorEntities(TR1Level level)
     {
-        foreach (TREntity entity in level.Entities)
+        foreach (TR1Entity entity in level.Entities)
         {
             entity.X = FlipWorldX(entity.X);
             AdjustTR1EntityPosition(entity);
@@ -639,7 +639,7 @@ public class EMMirrorFunction : BaseEMFunction
         AdjustDoors(level.Entities.ToList().FindAll(e => TR3TypeUtilities.IsDoorType((TR3Type)e.TypeID)));
     }
 
-    private static void AdjustTR1EntityPosition(TREntity entity)
+    private static void AdjustTR1EntityPosition(TR1Entity entity)
     {
         entity.Angle *= -1;
 
@@ -909,14 +909,14 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private static void AdjustDoors(List<TREntity> doors)
+    private static void AdjustDoors(List<TR1Entity> doors)
     {
         // Double doors need to be swapped otherwise they open in the wrong direction.
         // Iterate backwards and try to find doors that are next to each other.
         // If found, swap their types.
         for (int i = doors.Count - 1; i >= 0; i--)
         {
-            TREntity door1 = doors[i];
+            TR1Entity door1 = doors[i];
             for (int j = doors.Count - 1; j >= 0; j--)
             {
                 if (j == i)
@@ -924,7 +924,7 @@ public class EMMirrorFunction : BaseEMFunction
                     continue;
                 }
 
-                TREntity door2 = doors[j];
+                TR1Entity door2 = doors[j];
 
                 if (AreDoubleDoors(door1, door2))
                 {
@@ -967,7 +967,7 @@ public class EMMirrorFunction : BaseEMFunction
         }
     }
 
-    private static bool AreDoubleDoors(TREntity door1, TREntity door2)
+    private static bool AreDoubleDoors(TR1Entity door1, TR1Entity door2)
     {
         // If the difference between X or Z position is one sector size, they share the same Y val,
         // and they are facing the same diretion, then they're double doors.

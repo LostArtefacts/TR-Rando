@@ -37,9 +37,9 @@ public class EMConvertModelFunction : BaseEMFunction
         }
     }
 
-    private void UpdateModelEntities(TREntity[] entities)
+    private void UpdateModelEntities(TR1Entity[] entities)
     {
-        foreach (TREntity entity in entities)
+        foreach (TR1Entity entity in entities)
         {
             if (entity.TypeID == OldModelID)
             {

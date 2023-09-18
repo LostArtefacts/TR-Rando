@@ -21,7 +21,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         Dictionary<short, SlotInfo> slotInfo = new();
         foreach (short entityIndex in EntityMap.Keys)
         {
-            TREntity entity = level.Entities[entityIndex];
+            TR1Entity entity = level.Entities[entityIndex];
             TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData);
             slotInfo[entityIndex] = new SlotInfo
             {
@@ -135,7 +135,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         floorData.Entries[slotInfo2.FDIndex].AddRange(slotInfo1.Triggers);
     }
 
-    private static void MoveSlot(TREntity entity, EMLocation location)
+    private static void MoveSlot(TR1Entity entity, EMLocation location)
     {
         entity.X = location.X;
         entity.Y = location.Y;
@@ -153,7 +153,7 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         entity.Angle = location.Angle;
     }
 
-    private static EMLocation GetLocation(TREntity entity)
+    private static EMLocation GetLocation(TR1Entity entity)
     {
         return new EMLocation
         {

@@ -51,7 +51,7 @@ public class EMMovePickupFunction : BaseEMFunction
         });
     }
 
-    private void MovePickups(List<TREntity> entities, EMLevelData data, Func<EMLocation, TRRoomSector> sectorGetter)
+    private void MovePickups(List<TR1Entity> entities, EMLevelData data, Func<EMLocation, TRRoomSector> sectorGetter)
     {
         // Store the sectors we are interested in
         Dictionary<TRRoomSector, EMLocation> sectors = new();
@@ -64,7 +64,7 @@ public class EMMovePickupFunction : BaseEMFunction
         // Scan for each entity type and if it's found, find its sector location. If it matches
         // any we are interested in, move the item to the new location. If we haven't defined a
         // manual target location, the one used to locate the sector will be used.
-        List<TREntity> matchingEntities;
+        List<TR1Entity> matchingEntities;
         if (Types == null || Types.Count == 0)
         {
             // We want to match anything and move it in this instance.
@@ -76,7 +76,7 @@ public class EMMovePickupFunction : BaseEMFunction
             matchingEntities = entities.FindAll(e => Types.Contains(e.TypeID));
         }
 
-        foreach (TREntity match in matchingEntities)
+        foreach (TR1Entity match in matchingEntities)
         {
             TRRoomSector matchSector = sectorGetter.Invoke(new EMLocation
             {

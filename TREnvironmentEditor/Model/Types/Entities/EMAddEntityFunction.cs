@@ -28,7 +28,7 @@ public class EMAddEntityFunction : BaseEMFunction
                 floorData.ParseFromLevel(level);
                 short room = data.ConvertRoom(Location.Room);
                 TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, room, level, floorData);
-                foreach (TREntity entity in level.Entities)
+                foreach (TR1Entity entity in level.Entities)
                 {
                     if (entity.Room == room && FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData) == sector)
                     {
@@ -40,7 +40,7 @@ public class EMAddEntityFunction : BaseEMFunction
                 }
             }
 
-            List<TREntity> entities = level.Entities.ToList();
+            List<TR1Entity> entities = level.Entities.ToList();
             entities.Add(CreateTREntity(data));
             level.Entities = entities.ToArray();
             level.NumEntities++;
@@ -108,9 +108,9 @@ public class EMAddEntityFunction : BaseEMFunction
         }
     }
 
-    private TREntity CreateTREntity(EMLevelData data)
+    private TR1Entity CreateTREntity(EMLevelData data)
     {
-        return new TREntity
+        return new TR1Entity
         {
             TypeID = TypeID,
             X = Location.X,

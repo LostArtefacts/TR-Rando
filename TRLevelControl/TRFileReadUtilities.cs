@@ -42,9 +42,9 @@ internal static class TRFileReadUtilities
         };
     }
 
-    public static TREntity ReadEntity(BinaryReader reader)
+    public static TR1Entity ReadEntity(BinaryReader reader)
     {
-        return new TREntity()
+        return new TR1Entity()
         {
             TypeID = reader.ReadInt16(),
             Room = reader.ReadInt16(),

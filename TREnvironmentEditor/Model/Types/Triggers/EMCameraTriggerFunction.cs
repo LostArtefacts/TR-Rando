@@ -46,7 +46,7 @@ public class EMCameraTriggerFunction : BaseEMFunction
         {
             foreach (int item in AttachToItems)
             {
-                TREntity attachToEntity = level.Entities[data.ConvertEntity(item)];
+                TR1Entity attachToEntity = level.Entities[data.ConvertEntity(item)];
                 TRRoomSector sector = FDUtilities.GetRoomSector(attachToEntity.X, attachToEntity.Y, attachToEntity.Z, data.ConvertRoom(attachToEntity.Room), level, control);
                 AttachToSector(sector, control, cameraIndex, data);
             }

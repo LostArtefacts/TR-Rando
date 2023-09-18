@@ -49,7 +49,7 @@ public class EMTriggerFunction : BaseEMFunction
 
         if (EntityLocation.HasValue)
         {
-            TREntity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
+            TR1Entity entity = level.Entities[data.ConvertEntity(EntityLocation.Value)];
             TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
             CreateTrigger(sector, control, triggerEntry);
         }

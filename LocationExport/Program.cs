@@ -149,7 +149,7 @@ class Program
             exclusions.AddRange(_allTR1Exclusions[lvl]);
         }
 
-        foreach (TREntity entity in level.Entities)
+        foreach (TR1Entity entity in level.Entities)
         {
             if (!TR1TypeUtilities.CanSharePickupSpace((TR1Type)entity.TypeID))
             {

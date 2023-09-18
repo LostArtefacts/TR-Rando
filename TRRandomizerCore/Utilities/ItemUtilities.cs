@@ -44,7 +44,7 @@ public static class ItemUtilities
         return defaultItem;
     }
 
-    public static void HideEntity(TREntity entity)
+    public static void HideEntity(TR1Entity entity)
     {
         // Move the item down, under the floor or into the ceiling of whatever is below
         entity.Y += 128;

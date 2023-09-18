@@ -31,7 +31,7 @@ public class EMReplaceTriggerActionParameterFunction : BaseEMFunction
         {
             foreach (int entityIndex in EntityLocations)
             {
-                TREntity entity = level.Entities[data.ConvertEntity(entityIndex)];
+                TR1Entity entity = level.Entities[data.ConvertEntity(entityIndex)];
                 TRRoomSector baseSector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, control);
                 ReplaceActionParameter(baseSector, control, action);
             }

@@ -10,7 +10,7 @@ public class EMAdjustEntityPositionFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        List<TREntity> entities = level.Entities.ToList().FindAll(e => e.TypeID == EntityType);
+        List<TR1Entity> entities = level.Entities.ToList().FindAll(e => e.TypeID == EntityType);
         AdjustEntities(entities);
     }
 
@@ -29,15 +29,15 @@ public class EMAdjustEntityPositionFunction : BaseEMFunction
         AdjustEntities(entities);
     }
 
-    private void AdjustEntities(List<TREntity> entities)
+    private void AdjustEntities(List<TR1Entity> entities)
     {
         foreach (int roomNumber in RoomMap.Keys)
         {
             foreach (short currentAngle in RoomMap[roomNumber].Keys)
             {
                 EMLocation relocation = RoomMap[roomNumber][currentAngle];
-                List<TREntity> matchingEntities = entities.FindAll(e => e.Room == roomNumber && e.Angle == currentAngle);
-                foreach (TREntity match in matchingEntities)
+                List<TR1Entity> matchingEntities = entities.FindAll(e => e.Room == roomNumber && e.Angle == currentAngle);
+                foreach (TR1Entity match in matchingEntities)
                 {
                     match.X += relocation.X;
                     match.Y += relocation.Y;

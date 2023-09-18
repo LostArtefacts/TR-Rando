@@ -180,7 +180,7 @@ public class DynamicTextureBuilder
             }
 
             // Find an entity of this type and check if it's a secret
-            TREntity keyInstance = Array.Find(level.Data.Entities, e => e.TypeID == (short)pickupType);
+            TR1Entity keyInstance = Array.Find(level.Data.Entities, e => e.TypeID == (short)pickupType);
             if (keyInstance != null)
             {
                 TRRoomSector sector = FDUtilities.GetRoomSector(keyInstance.X, keyInstance.Y, keyInstance.Z, keyInstance.Room, level.Data, floorData);

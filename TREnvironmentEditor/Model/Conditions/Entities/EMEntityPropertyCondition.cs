@@ -32,7 +32,7 @@ public class EMEntityPropertyCondition : BaseEMCondition
         return GetResult(level.Entities[EntityIndex]);
     }
 
-    private bool GetResult(TREntity entity)
+    private bool GetResult(TR1Entity entity)
     {
         bool result = true;
         if (EntityType.HasValue)
