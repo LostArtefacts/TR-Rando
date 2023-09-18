@@ -3,7 +3,6 @@ using System.Drawing;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Processors;
@@ -64,11 +63,11 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
         {
             LoadLevelInstance(lvl);
 
-            TextureMonitor<TREntities> monitor = TextureMonitor.GetMonitor(_levelInstance.Name);
+            TextureMonitor<TR1Type> monitor = TextureMonitor.GetMonitor(_levelInstance.Name);
             if (monitor != null && monitor.UseNightTextures)
             {
                 TR1TextureMapping mapping = GetMapping(_levelInstance);
-                using (TextureHolder<TREntities, TR1Level> holder = new(mapping, this))
+                using (TextureHolder<TR1Type, TR1Level> holder = new(mapping, this))
                 {
                     foreach (AbstractTextureSource source in holder.Variants.Keys)
                     {
@@ -227,7 +226,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
         }
     }
 
-    private void RedrawTargets(AbstractTextureMapping<TREntities, TR1Level> mapping, AbstractTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
+    private void RedrawTargets(AbstractTextureMapping<TR1Type, TR1Level> mapping, AbstractTextureSource source, string variant, Dictionary<TextureCategory, bool> options)
     {
         lock (_drawLock)
         {
@@ -235,7 +234,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
         }
     }
 
-    private void DrawReplacements(AbstractTextureMapping<TREntities, TR1Level> mapping)
+    private void DrawReplacements(AbstractTextureMapping<TR1Type, TR1Level> mapping)
     {
         lock (_drawLock)
         {
@@ -282,7 +281,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
         else
         {
             int minValue = IsWireframeLevel(level) ? 30 : 10;
-            TextureMonitor<TREntities> monitor = TextureMonitor.GetMonitor(level.Name);
+            TextureMonitor<TR1Type> monitor = TextureMonitor.GetMonitor(level.Name);
             if (monitor != null && monitor.UseNightTextures)
             {
                 minValue += 10;
@@ -298,7 +297,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
 
     internal class TextureProcessor : AbstractProcessorThread<TR1TextureRandomizer>
     {
-        private readonly Dictionary<TR1CombinedLevel, TextureHolder<TREntities, TR1Level>> _holders;
+        private readonly Dictionary<TR1CombinedLevel, TextureHolder<TR1Type, TR1Level>> _holders;
         private readonly TR1LandmarkImporter _landmarkImporter;
         private readonly TR1Wireframer _wireframer;
 
@@ -307,7 +306,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
         internal TextureProcessor(TR1TextureRandomizer outer)
             : base(outer)
         {
-            _holders = new Dictionary<TR1CombinedLevel, TextureHolder<TREntities, TR1Level>>();
+            _holders = new Dictionary<TR1CombinedLevel, TextureHolder<TR1Type, TR1Level>>();
             _landmarkImporter = new TR1LandmarkImporter
             {
                 IsCommunityPatch = _outer.ScriptEditor.Edition.IsCommunityPatch
@@ -349,7 +348,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
                 TR1TextureMapping mapping = _outer.GetMapping(level);
                 if (mapping != null)
                 {
-                    TextureHolder<TREntities, TR1Level> parentHolder = null;
+                    TextureHolder<TR1Type, TR1Level> parentHolder = null;
                     if (level.IsCutScene)
                     {
                         parentHolder = _holders[level.ParentLevel];
@@ -362,7 +361,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
                         [_outer._textureDatabase.GetDynamicSource("MainTheme")] = dynamicBuilder.Build(level)
                     };
 
-                    _holders[level] = new TextureHolder<TREntities, TR1Level>(mapping, _outer, parentHolder);
+                    _holders[level] = new TextureHolder<TR1Type, TR1Level>(mapping, _outer, parentHolder);
 
                     if (_outer.IsWireframeLevel(level))
                     {
@@ -440,7 +439,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
 
         private void ProcessLevel(TR1CombinedLevel level, Dictionary<TextureCategory, bool> options)
         {
-            TextureMonitor<TREntities> monitor = _outer.TextureMonitor.GetMonitor(level.Name);
+            TextureMonitor<TR1Type> monitor = _outer.TextureMonitor.GetMonitor(level.Name);
 
             bool isWireframe = _outer.IsWireframeLevel(level);
 
@@ -449,7 +448,7 @@ public class TR1TextureRandomizer : BaseTR1Randomizer, ITextureVariantHandler
             options[TextureCategory.Lara] = _outer._textureOptions[TextureCategory.Lara]
                 && (monitor == null || monitor.UseLaraOutfitTextures);
 
-            using (TextureHolder<TREntities, TR1Level> holder = _holders[level])
+            using (TextureHolder<TR1Type, TR1Level> holder = _holders[level])
             {
                 foreach (AbstractTextureSource source in holder.Variants.Keys)
                 {

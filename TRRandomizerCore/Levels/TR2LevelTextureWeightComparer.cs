@@ -6,8 +6,8 @@ public class TR2LevelTextureWeightComparer : IComparer<TR2CombinedLevel>
 {
     public int Compare(TR2CombinedLevel lvl1, TR2CombinedLevel lvl2)
     {
-        int enemyCount1 = TR2EntityUtilities.GetEnemyTypeDictionary()[lvl1.Name].Count;
-        int enemyCount2 = TR2EntityUtilities.GetEnemyTypeDictionary()[lvl2.Name].Count;
+        int enemyCount1 = TR2TypeUtilities.GetEnemyTypeDictionary()[lvl1.Name].Count;
+        int enemyCount2 = TR2TypeUtilities.GetEnemyTypeDictionary()[lvl2.Name].Count;
 
         int freeTiles1 = 16 - lvl1.Data.Images8.Count;
         int freeTiles2 = 16 - lvl2.Data.Images8.Count;

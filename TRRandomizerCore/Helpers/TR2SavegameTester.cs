@@ -1,6 +1,5 @@
 ﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Helpers;
 
@@ -46,15 +45,15 @@ public class TR2SavegameTester
     private static readonly int _flipmapStatus = 10 * sizeof(sbyte);
     private static readonly int _cdTrackStatus = 64 * sizeof(short);
 
-    private static readonly Dictionary<TR2Entities, int> _extraSizes = new()
+    private static readonly Dictionary<TR2Type, int> _extraSizes = new()
     {
-        [TR2Entities.RedSnowmobile]
+        [TR2Type.RedSnowmobile]
             = 4 * sizeof(int) + 3 * sizeof(short),
-        [TR2Entities.Boat]
+        [TR2Type.Boat]
             = 5 * sizeof(int) + 2 * sizeof(short),
-        [TR2Entities.Elevator]
+        [TR2Type.Elevator]
             = 2 * sizeof(int),
-        [TR2Entities.Lara]
+        [TR2Type.Lara]
             // Assume Lara has an active weapon, and that 5 flares are also active
             = 5 * sizeof(short)
             + 5 * (_sgSizes[SGFlags.Position] + sizeof(int))
@@ -86,63 +85,63 @@ public class TR2SavegameTester
         List<TR2Entity> entities = level.Entities.ToList();
         foreach (TR2Entity entity in level.Entities)
         {
-            TR2Entities type = (TR2Entities)entity.TypeID;
-            if (type == TR2Entities.MercSnowmobDriver)
+            TR2Type type = (TR2Type)entity.TypeID;
+            if (type == TR2Type.MercSnowmobDriver)
             {
-                entities.Add(new TR2Entity { TypeID = (short)TR2Entities.BlackSnowmob });
+                entities.Add(new TR2Entity { TypeID = (short)TR2Type.BlackSnowmob });
             }
-            else if (type == TR2Entities.MarcoBartoli)
+            else if (type == TR2Type.MarcoBartoli)
             {
-                entities.Add(new TR2Entity { TypeID = (short)TR2Entities.DragonFront_H });
-                entities.Add(new TR2Entity { TypeID = (short)TR2Entities.DragonBack_H });
-                entities.Add(new TR2Entity { TypeID = (short)TR2Entities.DragonExplosion1_H });
-                entities.Add(new TR2Entity { TypeID = (short)TR2Entities.DragonExplosion2_H });
-                entities.Add(new TR2Entity { TypeID = (short)TR2Entities.DragonExplosion3_H });
+                entities.Add(new TR2Entity { TypeID = (short)TR2Type.DragonFront_H });
+                entities.Add(new TR2Entity { TypeID = (short)TR2Type.DragonBack_H });
+                entities.Add(new TR2Entity { TypeID = (short)TR2Type.DragonExplosion1_H });
+                entities.Add(new TR2Entity { TypeID = (short)TR2Type.DragonExplosion2_H });
+                entities.Add(new TR2Entity { TypeID = (short)TR2Type.DragonExplosion3_H });
             }
-            else if (type == TR2Entities.Knifethrower)
+            else if (type == TR2Type.Knifethrower)
             {
                 // Assume each knifethrower has 2 active knives
                 for (int i = 0; i < 2; i++)
                 {
-                    entities.Add(new TR2Entity { TypeID = (short)TR2Entities.KnifeProjectile_H });
+                    entities.Add(new TR2Entity { TypeID = (short)TR2Type.KnifeProjectile_H });
                 }
             }
-            else if (type == TR2Entities.ScubaDiver)
+            else if (type == TR2Type.ScubaDiver)
             {
                 // Assume every Steve has fired 3 harpoons
                 for (int i = 0; i < 3; i++)
                 {
-                    entities.Add(new TR2Entity { TypeID = (short)TR2Entities.ScubaHarpoonProjectile_H });
+                    entities.Add(new TR2Entity { TypeID = (short)TR2Type.ScubaHarpoonProjectile_H });
                 }
             }
-            else if (type == TR2Entities.Lara)
+            else if (type == TR2Type.Lara)
             {
                 // Assume Lara has fired a grenade and 3 harpoons (imposssible, probably, but we are trying to be cautious)
-                entities.Add(new TR2Entity { TypeID = (short)TR2Entities.GrenadeProjectile_H });
+                entities.Add(new TR2Entity { TypeID = (short)TR2Type.GrenadeProjectile_H });
                 for (int i = 0; i < 3; i++)
                 {
-                    entities.Add(new TR2Entity { TypeID = (short)TR2Entities.HarpoonProjectile_H });
+                    entities.Add(new TR2Entity { TypeID = (short)TR2Type.HarpoonProjectile_H });
                 }
             }
         }
 
         foreach (TR2Entity entity in entities)
         {
-            TR2Entities type = (TR2Entities)entity.TypeID;
+            TR2Type type = (TR2Type)entity.TypeID;
             SGFlags saveFlags = SGFlags.None;
             
-            if (TR2EntityUtilities.IsEnemyType(type))
+            if (TR2TypeUtilities.IsEnemyType(type))
             {
                 saveFlags = type switch
                 {
-                    TR2Entities.MarcoBartoli => SGFlags.Animation | SGFlags.Flags,
-                    TR2Entities.BlackMorayEel
-                    or TR2Entities.YellowMorayEel => SGFlags.Animation | SGFlags.Flags | SGFlags.Hitpoints,
-                    TR2Entities.Winston => SGFlags.Animation | SGFlags.Flags | SGFlags.Position | SGFlags.Intelligence,
+                    TR2Type.MarcoBartoli => SGFlags.Animation | SGFlags.Flags,
+                    TR2Type.BlackMorayEel
+                    or TR2Type.YellowMorayEel => SGFlags.Animation | SGFlags.Flags | SGFlags.Hitpoints,
+                    TR2Type.Winston => SGFlags.Animation | SGFlags.Flags | SGFlags.Position | SGFlags.Intelligence,
                     _ => SGFlags.Animation | SGFlags.Flags | SGFlags.Hitpoints | SGFlags.Intelligence | SGFlags.Position,
                 };
             }
-            else if (TR2EntityUtilities.IsAnyPickupType(type))
+            else if (TR2TypeUtilities.IsAnyPickupType(type))
             {
                 saveFlags = SGFlags.Flags | SGFlags.Position;
             }
@@ -150,114 +149,114 @@ public class TR2SavegameTester
             {
                 switch (type)
                 {
-                    case TR2Entities.KnifeProjectile_H:
-                    case TR2Entities.ScubaHarpoonProjectile_H:
-                    case TR2Entities.HarpoonProjectile_H:
-                    case TR2Entities.GrenadeProjectile_H:
+                    case TR2Type.KnifeProjectile_H:
+                    case TR2Type.ScubaHarpoonProjectile_H:
+                    case TR2Type.HarpoonProjectile_H:
+                    case TR2Type.GrenadeProjectile_H:
                         saveFlags = SGFlags.Position;
                         break;
 
-                    case TR2Entities.Monk:
-                    case TR2Entities.AquaticMine:
-                    case TR2Entities.FlameEmitter_N:
-                    case TR2Entities.LavaAirParticleEmitter_N:
-                    case TR2Entities.Keyhole1:
-                    case TR2Entities.Keyhole2:
-                    case TR2Entities.Keyhole3:
-                    case TR2Entities.Keyhole4:
-                    case TR2Entities.PuzzleHole1:
-                    case TR2Entities.PuzzleHole2:
-                    case TR2Entities.PuzzleHole3:
-                    case TR2Entities.PuzzleHole4:
-                    case TR2Entities.PuzzleDone1:
-                    case TR2Entities.PuzzleDone2:
-                    case TR2Entities.PuzzleDone3:
-                    case TR2Entities.PuzzleDone4:
-                    case TR2Entities.Alarm_N:
-                    case TR2Entities.AlarmBell_N:
-                    case TR2Entities.BartoliHideoutClock_N:
-                    case TR2Entities.LaraCutscenePlacement_N:
-                    case TR2Entities.DragonExplosionEmitter_N:
-                    case TR2Entities.Discgun:
+                    case TR2Type.Monk:
+                    case TR2Type.AquaticMine:
+                    case TR2Type.FlameEmitter_N:
+                    case TR2Type.LavaAirParticleEmitter_N:
+                    case TR2Type.Keyhole1:
+                    case TR2Type.Keyhole2:
+                    case TR2Type.Keyhole3:
+                    case TR2Type.Keyhole4:
+                    case TR2Type.PuzzleHole1:
+                    case TR2Type.PuzzleHole2:
+                    case TR2Type.PuzzleHole3:
+                    case TR2Type.PuzzleHole4:
+                    case TR2Type.PuzzleDone1:
+                    case TR2Type.PuzzleDone2:
+                    case TR2Type.PuzzleDone3:
+                    case TR2Type.PuzzleDone4:
+                    case TR2Type.Alarm_N:
+                    case TR2Type.AlarmBell_N:
+                    case TR2Type.BartoliHideoutClock_N:
+                    case TR2Type.LaraCutscenePlacement_N:
+                    case TR2Type.DragonExplosionEmitter_N:
+                    case TR2Type.Discgun:
                         saveFlags = SGFlags.Flags;
                         break;
 
-                    case TR2Entities.Gondola:
-                    case TR2Entities.Helicopter:
-                    case TR2Entities.Minisub:
-                    case TR2Entities.OverheadPulleyHook:
-                    case TR2Entities.PowerSaw:
-                    case TR2Entities.UnderwaterPropeller:
-                    case TR2Entities.AirFan:
-                    case TR2Entities.AirplanePropeller:
-                    case TR2Entities.WallMountedKnifeBlade:
-                    case TR2Entities.BouncePad:
-                    case TR2Entities.SandbagOrBallsack:
-                    case TR2Entities.SwingingBoxOrBall:
-                    case TR2Entities.SlammingDoor:
-                    case TR2Entities.LavaBowl:
-                    case TR2Entities.TibetanBell:
-                    case TR2Entities.BreakableWindow1:
-                    case TR2Entities.BreakableWindow2:
-                    case TR2Entities.Drawbridge:
-                    case TR2Entities.SmallWallSwitch:
-                    case TR2Entities.PushButtonSwitch:
-                    case TR2Entities.WheelKnob:
-                    case TR2Entities.WallSwitch:
-                    case TR2Entities.UnderwaterSwitch:
-                    case TR2Entities.Door1:
-                    case TR2Entities.Door2:
-                    case TR2Entities.Door3:
-                    case TR2Entities.Door4:
-                    case TR2Entities.Door5:
-                    case TR2Entities.LiftingDoor1:
-                    case TR2Entities.LiftingDoor2:
-                    case TR2Entities.LiftingDoor3:
-                    case TR2Entities.Trapdoor1:
-                    case TR2Entities.Trapdoor2:
-                    case TR2Entities.Gong:
-                    case TR2Entities.ShotgunShowerAnimation_H:
-                    case TR2Entities.DetonatorBox:
+                    case TR2Type.Gondola:
+                    case TR2Type.Helicopter:
+                    case TR2Type.Minisub:
+                    case TR2Type.OverheadPulleyHook:
+                    case TR2Type.PowerSaw:
+                    case TR2Type.UnderwaterPropeller:
+                    case TR2Type.AirFan:
+                    case TR2Type.AirplanePropeller:
+                    case TR2Type.WallMountedKnifeBlade:
+                    case TR2Type.BouncePad:
+                    case TR2Type.SandbagOrBallsack:
+                    case TR2Type.SwingingBoxOrBall:
+                    case TR2Type.SlammingDoor:
+                    case TR2Type.LavaBowl:
+                    case TR2Type.TibetanBell:
+                    case TR2Type.BreakableWindow1:
+                    case TR2Type.BreakableWindow2:
+                    case TR2Type.Drawbridge:
+                    case TR2Type.SmallWallSwitch:
+                    case TR2Type.PushButtonSwitch:
+                    case TR2Type.WheelKnob:
+                    case TR2Type.WallSwitch:
+                    case TR2Type.UnderwaterSwitch:
+                    case TR2Type.Door1:
+                    case TR2Type.Door2:
+                    case TR2Type.Door3:
+                    case TR2Type.Door4:
+                    case TR2Type.Door5:
+                    case TR2Type.LiftingDoor1:
+                    case TR2Type.LiftingDoor2:
+                    case TR2Type.LiftingDoor3:
+                    case TR2Type.Trapdoor1:
+                    case TR2Type.Trapdoor2:
+                    case TR2Type.Gong:
+                    case TR2Type.ShotgunShowerAnimation_H:
+                    case TR2Type.DetonatorBox:
                         saveFlags = SGFlags.Animation | SGFlags.Flags;
                         break;
 
-                    case TR2Entities.Helicopter2:
-                    case TR2Entities.SpikyWall:
-                    case TR2Entities.SpikyCeiling:
-                    case TR2Entities.DragonExplosion1_H:
-                    case TR2Entities.DragonExplosion2_H:
-                    case TR2Entities.DragonExplosion3_H:
+                    case TR2Type.Helicopter2:
+                    case TR2Type.SpikyWall:
+                    case TR2Type.SpikyCeiling:
+                    case TR2Type.DragonExplosion1_H:
+                    case TR2Type.DragonExplosion2_H:
+                    case TR2Type.DragonExplosion3_H:
                         saveFlags = SGFlags.Flags | SGFlags.Position;
                         break;
 
-                    case TR2Entities.ZiplineHandle:
-                    case TR2Entities.RollingSpindle:
-                    case TR2Entities.DetatchableIcicles:
-                    case TR2Entities.StatueWithKnifeBlade:
-                    case TR2Entities.FallingBlock:
-                    case TR2Entities.FallingBlock2:
-                    case TR2Entities.LooseBoards:
-                    case TR2Entities.BouldersOrSnowballs:
-                    case TR2Entities.RollingStorageDrums:
-                    case TR2Entities.RollingBall:
-                    case TR2Entities.FallingCeilingOrSandbag:
-                    case TR2Entities.RedSnowmobile:
-                    case TR2Entities.Boat:
-                    case TR2Entities.Elevator:
-                    case TR2Entities.BlackSnowmob:
-                    case TR2Entities.DragonBack_H:
-                    case TR2Entities.PushBlock1:
-                    case TR2Entities.PushBlock2:
-                    case TR2Entities.PushBlock3:
-                    case TR2Entities.PushBlock4:
+                    case TR2Type.ZiplineHandle:
+                    case TR2Type.RollingSpindle:
+                    case TR2Type.DetatchableIcicles:
+                    case TR2Type.StatueWithKnifeBlade:
+                    case TR2Type.FallingBlock:
+                    case TR2Type.FallingBlock2:
+                    case TR2Type.LooseBoards:
+                    case TR2Type.BouldersOrSnowballs:
+                    case TR2Type.RollingStorageDrums:
+                    case TR2Type.RollingBall:
+                    case TR2Type.FallingCeilingOrSandbag:
+                    case TR2Type.RedSnowmobile:
+                    case TR2Type.Boat:
+                    case TR2Type.Elevator:
+                    case TR2Type.BlackSnowmob:
+                    case TR2Type.DragonBack_H:
+                    case TR2Type.PushBlock1:
+                    case TR2Type.PushBlock2:
+                    case TR2Type.PushBlock3:
+                    case TR2Type.PushBlock4:
                         saveFlags = SGFlags.Animation | SGFlags.Flags | SGFlags.Position;
                         break;
 
-                    case TR2Entities.Lara:
+                    case TR2Type.Lara:
                         saveFlags = SGFlags.Animation | SGFlags.Flags | SGFlags.Hitpoints | SGFlags.Position;
                         break;
 
-                    case TR2Entities.DragonFront_H:
+                    case TR2Type.DragonFront_H:
                         saveFlags = SGFlags.Animation | SGFlags.Flags | SGFlags.Hitpoints | SGFlags.Intelligence | SGFlags.Position;
                         break;
 

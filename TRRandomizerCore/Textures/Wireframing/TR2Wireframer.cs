@@ -2,7 +2,6 @@
 using TRFDControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Packing;
 using TRRandomizerCore.Utilities;
@@ -10,43 +9,43 @@ using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Textures;
 
-public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
+public class TR2Wireframer : AbstractTRWireframer<TR2Type, TR2Level>
 {
-    private static readonly List<TR2Entities> _laraEntities = new()
+    private static readonly List<TR2Type> _laraEntities = new()
     {
-        TR2Entities.Lara, TR2Entities.LaraPonytail_H, TR2Entities.LaraFlareAnim_H,
-        TR2Entities.LaraPistolAnim_H, TR2Entities.LaraShotgunAnim_H, TR2Entities.LaraAutoAnim_H,
-        TR2Entities.LaraUziAnim_H, TR2Entities.LaraM16Anim_H, TR2Entities.LaraHarpoonAnim_H,
-        TR2Entities.LaraGrenadeAnim_H, TR2Entities.LaraMiscAnim_H, TR2Entities.CameraTarget_N,
-        TR2Entities.FlameEmitter_N, TR2Entities.LaraCutscenePlacement_N, TR2Entities.DragonExplosionEmitter_N,
-        TR2Entities.BartoliHideoutClock_N, TR2Entities.SingingBirds_N, TR2Entities.WaterfallMist_N,
-        TR2Entities.DrippingWater_N, TR2Entities.LavaAirParticleEmitter_N, TR2Entities.AlarmBell_N, TR2Entities.DoorBell_N
+        TR2Type.Lara, TR2Type.LaraPonytail_H, TR2Type.LaraFlareAnim_H,
+        TR2Type.LaraPistolAnim_H, TR2Type.LaraShotgunAnim_H, TR2Type.LaraAutoAnim_H,
+        TR2Type.LaraUziAnim_H, TR2Type.LaraM16Anim_H, TR2Type.LaraHarpoonAnim_H,
+        TR2Type.LaraGrenadeAnim_H, TR2Type.LaraMiscAnim_H, TR2Type.CameraTarget_N,
+        TR2Type.FlameEmitter_N, TR2Type.LaraCutscenePlacement_N, TR2Type.DragonExplosionEmitter_N,
+        TR2Type.BartoliHideoutClock_N, TR2Type.SingingBirds_N, TR2Type.WaterfallMist_N,
+        TR2Type.DrippingWater_N, TR2Type.LavaAirParticleEmitter_N, TR2Type.AlarmBell_N, TR2Type.DoorBell_N
     };
 
-    private static readonly List<TR2Entities> _additionalEnemyEntities = new()
+    private static readonly List<TR2Type> _additionalEnemyEntities = new()
     {
-        TR2Entities.DragonFront_H, TR2Entities.DragonBack_H, TR2Entities.XianGuardSpearStatue, TR2Entities.XianGuardSwordStatue
+        TR2Type.DragonFront_H, TR2Type.DragonBack_H, TR2Type.XianGuardSpearStatue, TR2Type.XianGuardSwordStatue
     };
 
     private TRPalette16Control _paletteTracker;
 
-    protected override AbstractTexturePacker<TR2Entities, TR2Level> CreatePacker(TR2Level level)
+    protected override AbstractTexturePacker<TR2Type, TR2Level> CreatePacker(TR2Level level)
     {
         return new TR2TexturePacker(level);
     }
 
     protected override bool IsSkybox(TRModel model)
     {
-        return (TR2Entities)model.ID == TR2Entities.Skybox_H;
+        return (TR2Type)model.ID == TR2Type.Skybox_H;
     }
 
     protected override bool IsInteractableModel(TRModel model)
     {
-        TR2Entities type = (TR2Entities)model.ID;
-        return TR2EntityUtilities.IsSwitchType(type)
-            || TR2EntityUtilities.IsKeyholeType(type)
-            || TR2EntityUtilities.IsSlotType(type)
-            || TR2EntityUtilities.IsPushblockType(type);
+        TR2Type type = (TR2Type)model.ID;
+        return TR2TypeUtilities.IsSwitchType(type)
+            || TR2TypeUtilities.IsKeyholeType(type)
+            || TR2TypeUtilities.IsSlotType(type)
+            || TR2TypeUtilities.IsPushblockType(type);
     }
 
     protected override int GetBlackPaletteIndex(TR2Level level)
@@ -64,15 +63,15 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
         return level.Meshes;
     }
 
-    protected override Dictionary<TR2Entities, TRMesh[]> GetModelMeshes(TR2Level level)
+    protected override Dictionary<TR2Type, TRMesh[]> GetModelMeshes(TR2Level level)
     {
-        Dictionary<TR2Entities, TRMesh[]> modelMeshes = new();
+        Dictionary<TR2Type, TRMesh[]> modelMeshes = new();
         foreach (TRModel model in level.Models)
         {
             TRMesh[] meshes = GetModelMeshes(level, model);
             if (meshes != null)
             {
-                modelMeshes[(TR2Entities)model.ID] = meshes;
+                modelMeshes[(TR2Type)model.ID] = meshes;
             }
         }
         return modelMeshes;
@@ -131,13 +130,13 @@ public class TR2Wireframer : AbstractTRWireframer<TR2Entities, TR2Level>
 
     protected override bool IsLaraModel(TRModel model)
     {
-        return _laraEntities.Contains((TR2Entities)model.ID);
+        return _laraEntities.Contains((TR2Type)model.ID);
     }
 
     protected override bool IsEnemyModel(TRModel model)
     {
-        TR2Entities id = (TR2Entities)model.ID;
-        return TR2EntityUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
+        TR2Type id = (TR2Type)model.ID;
+        return TR2TypeUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
     }
 
     protected override void ResetUnusedTextures(TR2Level level)

@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Data;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model.Definitions;
@@ -8,7 +7,7 @@ using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Transport;
 
-public class TR3ModelImporter : AbstractTRModelImporter<TR3Entities, TR3Level, TR3ModelDefinition>
+public class TR3ModelImporter : AbstractTRModelImporter<TR3Type, TR3Level, TR3ModelDefinition>
 {
     public TR3ModelImporter()
     {
@@ -16,15 +15,15 @@ public class TR3ModelImporter : AbstractTRModelImporter<TR3Entities, TR3Level, T
         SortModels = true;
     }
 
-    protected override AbstractTextureImportHandler<TR3Entities, TR3Level, TR3ModelDefinition> CreateTextureHandler()
+    protected override AbstractTextureImportHandler<TR3Type, TR3Level, TR3ModelDefinition> CreateTextureHandler()
     {
         return new TR3TextureImportHandler();
     }
 
-    protected override List<TR3Entities> GetExistingModelTypes()
+    protected override List<TR3Type> GetExistingModelTypes()
     {
-        List<TR3Entities> existingEntities = new();
-        Level.Models.ToList().ForEach(m => existingEntities.Add((TR3Entities)m.ID));
+        List<TR3Type> existingEntities = new();
+        Level.Models.ToList().ForEach(m => existingEntities.Add((TR3Type)m.ID));
         return existingEntities;
     }
 
@@ -43,7 +42,7 @@ public class TR3ModelImporter : AbstractTRModelImporter<TR3Entities, TR3Level, T
 
         SoundTransportHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
 
-        Dictionary<TR3Entities, TR3Entities> aliasPriority = Data.AliasPriority ?? new Dictionary<TR3Entities, TR3Entities>();
+        Dictionary<TR3Type, TR3Type> aliasPriority = Data.AliasPriority ?? new Dictionary<TR3Type, TR3Type>();
 
         foreach (TR3ModelDefinition definition in standardDefinitions)
         {

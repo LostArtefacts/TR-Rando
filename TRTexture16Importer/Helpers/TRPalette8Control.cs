@@ -2,7 +2,6 @@
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 
 namespace TRTexture16Importer.Helpers;
 
@@ -14,7 +13,7 @@ public class TRPalette8Control : IDisposable
 
     public TR1Level Level { get; set; }
     public Dictionary<int, Bitmap> ChangedTiles { get; set; }
-    public List<TREntities> ObsoleteModels { get; set; }
+    public List<TR1Type> ObsoleteModels { get; set; }
 
     private List<Color> _palette, _predefinedPalette;
 
@@ -65,8 +64,8 @@ public class TRPalette8Control : IDisposable
 
         // Grab meshes we aren't interested in - but don't remove Lara's hips e.g. Atlantean spawns
         List<TRMesh> ignoredMeshes = new();
-        TRMesh[] laraMeshes = TRMeshUtilities.GetModelMeshes(Level, TREntities.Lara);
-        foreach (TREntities entity in ObsoleteModels)
+        TRMesh[] laraMeshes = TRMeshUtilities.GetModelMeshes(Level, TR1Type.Lara);
+        foreach (TR1Type entity in ObsoleteModels)
         {
             TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(Level, entity);
             if (meshes != null)

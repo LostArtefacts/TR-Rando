@@ -1,7 +1,6 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Transport;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -22,13 +21,13 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         {
             Level = level,
             ClearUnusedSprites = false,
-            EntitiesToImport = data.Select(m => (TREntities)m.ModelID),
+            EntitiesToImport = data.Select(m => (TR1Type)m.ModelID),
             DataFolder = @"Resources\TR1\Models",
             IgnoreGraphics = true
         };
         importer.Import();
 
-        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TREntities)modelID));
+        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID));
     }
 
     public override void ApplyToLevel(TR2Level level)
@@ -43,13 +42,13 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         {
             Level = level,
             ClearUnusedSprites = false,
-            EntitiesToImport = data.Select(m => (TR2Entities)m.ModelID),
+            EntitiesToImport = data.Select(m => (TR2Type)m.ModelID),
             DataFolder = @"Resources\TR2\Models",
             IgnoreGraphics = true
         };
         importer.Import();
 
-        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR2Entities)modelID));
+        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR2Type)modelID));
     }
 
     public override void ApplyToLevel(TR3Level level)
@@ -64,13 +63,13 @@ public class EMImportNonGraphicsModelFunction : BaseEMFunction
         {
             Level = level,
             ClearUnusedSprites = false,
-            EntitiesToImport = data.Select(m => (TR3Entities)m.ModelID),
+            EntitiesToImport = data.Select(m => (TR3Type)m.ModelID),
             DataFolder = @"Resources\TR3\Models",
             IgnoreGraphics = true
         };
         importer.Import();
 
-        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR3Entities)modelID));
+        RemapFaces(data, level.NumObjectTextures - 1, modelID => TRMeshUtilities.GetModelMeshes(level, (TR3Type)modelID));
     }
 
     private List<EMMeshTextureData> PrepareImportData(TRModel[] existingModels)

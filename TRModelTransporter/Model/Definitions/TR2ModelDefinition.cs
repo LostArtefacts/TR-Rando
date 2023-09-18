@@ -1,13 +1,12 @@
 ﻿using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Animations;
 using TRModelTransporter.Model.Sound;
 
 namespace TRModelTransporter.Model.Definitions;
 
-public class TR2ModelDefinition : AbstractTRModelDefinition<TR2Entities>
+public class TR2ModelDefinition : AbstractTRModelDefinition<TR2Type>
 {
-    public override TR2Entities Entity => (TR2Entities)Model.ID;
+    public override TR2Type Entity => (TR2Type)Model.ID;
     public Dictionary<int, TR2PackedAnimation> Animations { get; set; }
     public ushort[] AnimationFrames { get; set; }
     public TRCinematicFrame[] CinematicFrames { get; set; }

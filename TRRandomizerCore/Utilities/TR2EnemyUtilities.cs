@@ -6,7 +6,6 @@ using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Utilities;
 
@@ -27,7 +26,7 @@ public static class TR2EnemyUtilities
 
     // Similar to above, but allows for a collection to be resized if a specific
     // enemy model is chosen.
-    public static int GetTargetEnemyAdjustmentCount(string lvlName, TR2Entities enemy)
+    public static int GetTargetEnemyAdjustmentCount(string lvlName, TR2Type enemy)
     {
         if (_targetEnemyAdjustmentCount.ContainsKey(enemy) && _targetEnemyAdjustmentCount[enemy].ContainsKey(lvlName))
         {
@@ -40,8 +39,8 @@ public static class TR2EnemyUtilities
     {
         foreach (TR2Entity entityInstance in level.Data.Entities)
         {
-            TR2Entities entity = (TR2Entities)entityInstance.TypeID;
-            if (TR2EntityUtilities.IsWaterCreature(entity))
+            TR2Type entity = (TR2Type)entityInstance.TypeID;
+            if (TR2TypeUtilities.IsWaterCreature(entity))
             {
                 if (!level.CanPerformDraining(entityInstance.Room))
                 {
@@ -55,7 +54,7 @@ public static class TR2EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR2CombinedLevel level)
     {
-        TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR2EntityUtilities.IsEnemyType((TR2Entities)e.TypeID));
+        TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR2TypeUtilities.IsEnemyType((TR2Type)e.TypeID));
         foreach (TR2Entity entityInstance in enemies)
         {
             List<TR2Entity> sharedItems = new(Array.FindAll
@@ -73,13 +72,13 @@ public static class TR2EnemyUtilities
                 // Are any entities that are sharing a location a droppable pickup?
                 foreach (TR2Entity ent in sharedItems)
                 {
-                    TR2Entities EntType = (TR2Entities)ent.TypeID;
+                    TR2Type EntType = (TR2Type)ent.TypeID;
 
                     if
                     (
-                        TR2EntityUtilities.IsUtilityType(EntType) ||
-                        TR2EntityUtilities.IsGunType(EntType) ||
-                        TR2EntityUtilities.IsKeyItemType(EntType)
+                        TR2TypeUtilities.IsUtilityType(EntType) ||
+                        TR2TypeUtilities.IsGunType(EntType) ||
+                        TR2TypeUtilities.IsKeyItemType(EntType)
                     )
                     {
                         return true;
@@ -91,9 +90,9 @@ public static class TR2EnemyUtilities
         return false;
     }
 
-    public static bool IsEnemySupported(string lvlName, TR2Entities entity, RandoDifficulty difficulty, bool protectMonks)
+    public static bool IsEnemySupported(string lvlName, TR2Type entity, RandoDifficulty difficulty, bool protectMonks)
     {
-        if (lvlName == TR2LevelNames.HOME && TR2EntityUtilities.IsMonk(entity))
+        if (lvlName == TR2LevelNames.HOME && TR2TypeUtilities.IsMonk(entity))
         {
             // Monks are excluded from HSH by default unless the player is happy
             // with having to kill them.
@@ -113,25 +112,25 @@ public static class TR2EnemyUtilities
 
         return isEnemySupported;
     }
-    private static bool IsEnemySupported(string lvlName, TR2Entities entity, Dictionary<string, List<TR2Entities>> dict)
+    private static bool IsEnemySupported(string lvlName, TR2Type entity, Dictionary<string, List<TR2Type>> dict)
     {
         if (dict.ContainsKey(lvlName))
         {
             // if the dictionaries contain the enemy, the enemy is NOT supported
-            return !dict[lvlName].Contains(TR2EntityUtilities.TranslateEntityAlias(entity));
+            return !dict[lvlName].Contains(TR2TypeUtilities.TranslateAlias(entity));
         }
         // all enemies are supported by default
         return true;
     }
 
-    public static bool IsEnemyRequired(string lvlName, TR2Entities entity)
+    public static bool IsEnemyRequired(string lvlName, TR2Type entity)
     {
         return _requiredEnemies.ContainsKey(lvlName) && _requiredEnemies[lvlName].Contains(entity);
     }
 
-    public static List<TR2Entities> GetRequiredEnemies(string lvlName)
+    public static List<TR2Type> GetRequiredEnemies(string lvlName)
     {
-        List<TR2Entities> entities = new();
+        List<TR2Type> entities = new();
         if (_requiredEnemies.ContainsKey(lvlName))
         {
             entities.AddRange(_requiredEnemies[lvlName]);
@@ -140,10 +139,10 @@ public static class TR2EnemyUtilities
     }
 
     // this returns a set of ALLOWED rooms
-    public static Dictionary<TR2Entities, List<int>> GetRestrictedEnemyRooms(string lvlName, RandoDifficulty difficulty)
+    public static Dictionary<TR2Type, List<int>> GetRestrictedEnemyRooms(string lvlName, RandoDifficulty difficulty)
     {
         var technicallyAllowedRooms = GetRestrictedEnemyRooms(lvlName, _restrictedEnemyZonesTechnical);
-        var multiDict = new List<Dictionary<TR2Entities, List<int>>>() { technicallyAllowedRooms };
+        var multiDict = new List<Dictionary<TR2Type, List<int>>>() { technicallyAllowedRooms };
 
         // we need to merge dictionaries in order to get the complete set of allowed rooms, per level and per enemy
         if (difficulty == RandoDifficulty.Default)
@@ -157,14 +156,14 @@ public static class TR2EnemyUtilities
             return technicallyAllowedRooms;
         return null;
     }
-    private static Dictionary<TR2Entities, List<int>> GetRestrictedEnemyRooms(string lvlName, Dictionary<string, Dictionary<TR2Entities, List<int>>> restrictions)
+    private static Dictionary<TR2Type, List<int>> GetRestrictedEnemyRooms(string lvlName, Dictionary<string, Dictionary<TR2Type, List<int>>> restrictions)
     {
         if (restrictions.ContainsKey(lvlName))
             return restrictions[lvlName];
         return null;
     }
 
-    public static int GetRestrictedEnemyLevelCount(TR2Entities entity, RandoDifficulty difficulty)
+    public static int GetRestrictedEnemyLevelCount(TR2Type entity, RandoDifficulty difficulty)
     {
         // Remember that technical count is MAXIMUM allowed, and there may be overlap.
         // For example, maybe technically Dragon is allowed once, but an Easy difficulty might have that set to 0.
@@ -191,7 +190,7 @@ public static class TR2EnemyUtilities
         return _restrictedEnemyLevelCountsTechnical.Count;
     }
 
-    public static List<List<TR2Entities>> GetPermittedCombinations(string lvl, TR2Entities entity, RandoDifficulty difficulty)
+    public static List<List<TR2Type>> GetPermittedCombinations(string lvl, TR2Type entity, RandoDifficulty difficulty)
     {
         if (_specialEnemyCombinations.ContainsKey(lvl) && _specialEnemyCombinations[lvl].ContainsKey(entity))
         {
@@ -207,23 +206,23 @@ public static class TR2EnemyUtilities
         return null;
     }
 
-    public static Dictionary<TR2Entities, List<string>> PrepareEnemyGameTracker(bool docileBirdMonster, RandoDifficulty difficulty)
+    public static Dictionary<TR2Type, List<string>> PrepareEnemyGameTracker(bool docileBirdMonster, RandoDifficulty difficulty)
     {
-        Dictionary<TR2Entities, List<string>> tracker = new();
+        Dictionary<TR2Type, List<string>> tracker = new();
 
         if (difficulty == RandoDifficulty.Default)
         {
-            foreach (TR2Entities entity in _restrictedEnemyGameCountsDefault.Keys)
+            foreach (TR2Type entity in _restrictedEnemyGameCountsDefault.Keys)
             {
-                if (!docileBirdMonster || entity != TR2Entities.BirdMonster)
+                if (!docileBirdMonster || entity != TR2Type.BirdMonster)
                 {
                     tracker.Add(entity, new List<string>(_restrictedEnemyGameCountsDefault[entity]));
                 }
             }
         }
-        foreach (TR2Entities entity in _restrictedEnemyGameCountsTechnical.Keys)
+        foreach (TR2Type entity in _restrictedEnemyGameCountsTechnical.Keys)
         {
-            if (!docileBirdMonster || entity != TR2Entities.BirdMonster)
+            if (!docileBirdMonster || entity != TR2Type.BirdMonster)
             {
                 tracker.Add(entity, new List<string>(_restrictedEnemyGameCountsTechnical[entity]));
             }
@@ -232,7 +231,7 @@ public static class TR2EnemyUtilities
         // Pre-populate required enemies
         foreach (string level in _requiredEnemies.Keys)
         {
-            foreach (TR2Entities enemy in _requiredEnemies[level])
+            foreach (TR2Type enemy in _requiredEnemies[level])
             {
                 if (tracker.ContainsKey(enemy))
                 {
@@ -251,11 +250,11 @@ public static class TR2EnemyUtilities
             return EnemyDifficulty.VeryEasy;
         }
 
-        ISet<TR2Entities> enemyEntities = new HashSet<TR2Entities>();
-        enemies.ForEach(e => enemyEntities.Add((TR2Entities)e.TypeID));
+        ISet<TR2Type> enemyEntities = new HashSet<TR2Type>();
+        enemies.ForEach(e => enemyEntities.Add((TR2Type)e.TypeID));
 
         int weight = 0;
-        foreach (TR2Entities enemyEntity in enemyEntities)
+        foreach (TR2Type enemyEntity in enemyEntities)
         {
             EnemyDifficulty enemyDifficulty = EnemyDifficulty.Medium;
             foreach (EnemyDifficulty difficulty in _enemyDifficulties.Keys)
@@ -289,81 +288,81 @@ public static class TR2EnemyUtilities
     }
 
     // These enemies are unsupported due to technical reasons, NOT difficulty reasons.
-    private static readonly Dictionary<string, List<TR2Entities>> _unsupportedEnemiesTechnical = new()
+    private static readonly Dictionary<string, List<TR2Type>> _unsupportedEnemiesTechnical = new()
     {
         // #192 The Barkhang/Opera House freeze appears to be caused by dead floating water creatures, so they're all banished
         [TR2LevelNames.OPERA] =
-            new List<TR2Entities>
+            new List<TR2Type>
             {
-                TR2Entities.Barracuda, TR2Entities.BlackMorayEel, TR2Entities.ScubaDiver,
-                TR2Entities.Shark, TR2Entities.YellowMorayEel
+                TR2Type.Barracuda, TR2Type.BlackMorayEel, TR2Type.ScubaDiver,
+                TR2Type.Shark, TR2Type.YellowMorayEel
             },
         [TR2LevelNames.MONASTERY] =
-            new List<TR2Entities>
+            new List<TR2Type>
             {
-                TR2Entities.Barracuda, TR2Entities.BlackMorayEel, TR2Entities.ScubaDiver,
-                TR2Entities.Shark, TR2Entities.YellowMorayEel
+                TR2Type.Barracuda, TR2Type.BlackMorayEel, TR2Type.ScubaDiver,
+                TR2Type.Shark, TR2Type.YellowMorayEel
             },
         [TR2LevelNames.HOME] =
             // #148 Although we say here that the Doberman, MaskedGoons and StickGoons
             // aren't supported, this is only for cross-level purposes because we
             // are making placeholder entities to prevent breaking the kill counter.
-            new List<TR2Entities>
+            new List<TR2Type>
             {
-                TR2Entities.BlackMorayEel, TR2Entities.Doberman, TR2Entities.MaskedGoon1,
-                TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.MercSnowmobDriver,
-                TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick, TR2Entities.StickWieldingGoon1,
-                TR2Entities.StickWieldingGoon2, TR2Entities.Winston, TR2Entities.YellowMorayEel, TR2Entities.ShotgunGoon
+                TR2Type.BlackMorayEel, TR2Type.Doberman, TR2Type.MaskedGoon1,
+                TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.MercSnowmobDriver,
+                TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick, TR2Type.StickWieldingGoon1,
+                TR2Type.StickWieldingGoon2, TR2Type.Winston, TR2Type.YellowMorayEel, TR2Type.ShotgunGoon
             }
     };
 
-    private static readonly Dictionary<string, List<TR2Entities>> _unsupportedEnemiesDefault = new()
+    private static readonly Dictionary<string, List<TR2Type>> _unsupportedEnemiesDefault = new()
     {
         [TR2LevelNames.LAIR] =
-            new List<TR2Entities> { TR2Entities.MercSnowmobDriver },
+            new List<TR2Type> { TR2Type.MercSnowmobDriver },
         [TR2LevelNames.HOME] =
-            new List<TR2Entities> { TR2Entities.Spider, TR2Entities.Rat }
+            new List<TR2Type> { TR2Type.Spider, TR2Type.Rat }
     };
 
-    private static readonly Dictionary<string, List<TR2Entities>> _requiredEnemies = new()
+    private static readonly Dictionary<string, List<TR2Type>> _requiredEnemies = new()
     {
         [TR2LevelNames.CHICKEN] =
-            new List<TR2Entities> { TR2Entities.BirdMonster },  // #60 - Ice Palace chicken man must remain to avoid softlock.
+            new List<TR2Type> { TR2Type.BirdMonster },  // #60 - Ice Palace chicken man must remain to avoid softlock.
         [TR2LevelNames.LAIR] =
-            new List<TR2Entities> { TR2Entities.MarcoBartoli }, // #97 - Marco/Dragon to remain in the same place to trigger door opening
+            new List<TR2Type> { TR2Type.MarcoBartoli }, // #97 - Marco/Dragon to remain in the same place to trigger door opening
         [TR2LevelNames.HOME] =
-            new List<TR2Entities> { TR2Entities.ShotgunGoon }  // #62 - Avoid randomizing shotgun goon in HSH
+            new List<TR2Type> { TR2Type.ShotgunGoon }  // #62 - Avoid randomizing shotgun goon in HSH
     };
 
     // We restrict some enemies to specific rooms in levels, for example the dragon does not work well in small
     // rooms, and the likes of SnowmobDriver at the beginning of Bartoli's is practically impossible to pass.
-    private static readonly Dictionary<string, Dictionary<TR2Entities, List<int>>> _restrictedEnemyZonesDefault;
-    private static readonly Dictionary<string, Dictionary<TR2Entities, List<int>>> _restrictedEnemyZonesTechnical;
+    private static readonly Dictionary<string, Dictionary<TR2Type, List<int>>> _restrictedEnemyZonesDefault;
+    private static readonly Dictionary<string, Dictionary<TR2Type, List<int>>> _restrictedEnemyZonesTechnical;
 
     // This allows us to define specific combinations of enemies if the leader is chosen for the rando pool. For
     // example, the dragon in HSH will only work with 20 possible combinations.
-    private static readonly Dictionary<string, Dictionary<TR2Entities, Dictionary<RandoDifficulty, List<List<TR2Entities>>>>> _specialEnemyCombinations;
+    private static readonly Dictionary<string, Dictionary<TR2Type, Dictionary<RandoDifficulty, List<List<TR2Type>>>>> _specialEnemyCombinations;
 
     // We also limit the count for some - more than 1 dragon tends to cause crashes if they spawn close together.
     // Winston is an easter egg so maybe keep it low.
-    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyLevelCountsTechnical = new()
+    private static readonly Dictionary<TR2Type, int> _restrictedEnemyLevelCountsTechnical = new()
     {
-        [TR2Entities.MarcoBartoli] = 1,
-        [TR2Entities.Winston] = 2
+        [TR2Type.MarcoBartoli] = 1,
+        [TR2Type.Winston] = 2
     };
-    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyLevelCountsDefault = new()
+    private static readonly Dictionary<TR2Type, int> _restrictedEnemyLevelCountsDefault = new()
     {
-        [TR2Entities.MercSnowmobDriver] = 2,
+        [TR2Type.MercSnowmobDriver] = 2,
     };
 
     // These enemies are restricted a set number of times throughout the entire game.
-    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyGameCountsTechnical = new()
+    private static readonly Dictionary<TR2Type, int> _restrictedEnemyGameCountsTechnical = new()
     {
-        [TR2Entities.Winston] = 2,
+        [TR2Type.Winston] = 2,
     };
-    private static readonly Dictionary<TR2Entities, int> _restrictedEnemyGameCountsDefault = new()
+    private static readonly Dictionary<TR2Type, int> _restrictedEnemyGameCountsDefault = new()
     {
-        [TR2Entities.BirdMonster] = 3,
+        [TR2Type.BirdMonster] = 3,
     };
 
     // Predefined absolute limits for skidoo drivers
@@ -381,49 +380,49 @@ public static class TR2EnemyUtilities
 
     static TR2EnemyUtilities()
     {
-        _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Entities, List<int>>>>
+        _restrictedEnemyZonesDefault = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Type, List<int>>>>
         (
             File.ReadAllText(@"Resources\TR2\Restrictions\enemy_restrictions_default.json")
         );
-        _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Entities, List<int>>>>
+        _restrictedEnemyZonesTechnical = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Type, List<int>>>>
         (
             File.ReadAllText(@"Resources\TR2\Restrictions\enemy_restrictions_technical.json")
         );
-        _specialEnemyCombinations = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Entities, Dictionary<RandoDifficulty, List<List<TR2Entities>>>>>>
+        _specialEnemyCombinations = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<TR2Type, Dictionary<RandoDifficulty, List<List<TR2Type>>>>>>
         (
             File.ReadAllText(@"Resources\TR2\Restrictions\enemy_restrictions_special.json")
         );
     }
 
-    private static readonly Dictionary<EnemyDifficulty, List<TR2Entities>> _enemyDifficulties = new()
+    private static readonly Dictionary<EnemyDifficulty, List<TR2Type>> _enemyDifficulties = new()
     {
-        [EnemyDifficulty.VeryEasy] = new List<TR2Entities>
+        [EnemyDifficulty.VeryEasy] = new List<TR2Type>
         {
-            TR2Entities.Barracuda, TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick,
-            TR2Entities.Rat, TR2Entities.Spider, TR2Entities.Winston
+            TR2Type.Barracuda, TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick,
+            TR2Type.Rat, TR2Type.Spider, TR2Type.Winston
         },
-        [EnemyDifficulty.Easy] = new List<TR2Entities>
+        [EnemyDifficulty.Easy] = new List<TR2Type>
         {
-            TR2Entities.Crow, TR2Entities.Eagle, TR2Entities.ScubaDiver,
-            TR2Entities.YellowMorayEel
+            TR2Type.Crow, TR2Type.Eagle, TR2Type.ScubaDiver,
+            TR2Type.YellowMorayEel
         },
-        [EnemyDifficulty.Medium] = new List<TR2Entities>
+        [EnemyDifficulty.Medium] = new List<TR2Type>
         {
-            TR2Entities.Doberman, TR2Entities.GiantSpider, TR2Entities.Gunman1,
-            TR2Entities.Gunman2, TR2Entities.Knifethrower, TR2Entities.MaskedGoon1,
-            TR2Entities.MaskedGoon2, TR2Entities.MaskedGoon3, TR2Entities.Shark,
-            TR2Entities.StickWieldingGoon1, TR2Entities.StickWieldingGoon2, TR2Entities.TigerOrSnowLeopard,
-            TR2Entities.TRex
+            TR2Type.Doberman, TR2Type.GiantSpider, TR2Type.Gunman1,
+            TR2Type.Gunman2, TR2Type.Knifethrower, TR2Type.MaskedGoon1,
+            TR2Type.MaskedGoon2, TR2Type.MaskedGoon3, TR2Type.Shark,
+            TR2Type.StickWieldingGoon1, TR2Type.StickWieldingGoon2, TR2Type.TigerOrSnowLeopard,
+            TR2Type.TRex
         },
-        [EnemyDifficulty.Hard] = new List<TR2Entities>
+        [EnemyDifficulty.Hard] = new List<TR2Type>
         {
-            TR2Entities.BlackMorayEel, TR2Entities.FlamethrowerGoon, TR2Entities.Mercenary1,
-            TR2Entities.Mercenary2, TR2Entities.Mercenary3, TR2Entities.ShotgunGoon,
-            TR2Entities.XianGuardSpear, TR2Entities.XianGuardSword, TR2Entities.Yeti
+            TR2Type.BlackMorayEel, TR2Type.FlamethrowerGoon, TR2Type.Mercenary1,
+            TR2Type.Mercenary2, TR2Type.Mercenary3, TR2Type.ShotgunGoon,
+            TR2Type.XianGuardSpear, TR2Type.XianGuardSword, TR2Type.Yeti
         },
-        [EnemyDifficulty.VeryHard] = new List<TR2Entities>
+        [EnemyDifficulty.VeryHard] = new List<TR2Type>
         {
-            TR2Entities.BirdMonster, TR2Entities.MarcoBartoli, TR2Entities.MercSnowmobDriver
+            TR2Type.BirdMonster, TR2Type.MarcoBartoli, TR2Type.MercSnowmobDriver
         }
     };
 
@@ -463,9 +462,9 @@ public static class TR2EnemyUtilities
     };
 
     // Trigger a redim of the imported enemy count if one of these entities is selected
-    private static readonly Dictionary<TR2Entities, Dictionary<string, int>> _targetEnemyAdjustmentCount = new()
+    private static readonly Dictionary<TR2Type, Dictionary<string, int>> _targetEnemyAdjustmentCount = new()
     {
-        [TR2Entities.MarcoBartoli] = new Dictionary<string, int>
+        [TR2Type.MarcoBartoli] = new Dictionary<string, int>
         {
             [TR2LevelNames.VENICE] = -2,
             [TR2LevelNames.BARTOLI] = -2,
@@ -476,9 +475,9 @@ public static class TR2EnemyUtilities
         }
     };
 
-    public static List<TR2Entities> GetEnemyGuisers(TR2Entities entity)
+    public static List<TR2Type> GetEnemyGuisers(TR2Type entity)
     {
-        List<TR2Entities> entities = new();
+        List<TR2Type> entities = new();
         if (_enemyGuisers.ContainsKey(entity))
         {
             entities.AddRange(_enemyGuisers[entity]);
@@ -486,33 +485,33 @@ public static class TR2EnemyUtilities
         return entities;
     }
 
-    private static readonly Dictionary<TR2Entities, List<TR2Entities>> _enemyGuisers = new()
+    private static readonly Dictionary<TR2Type, List<TR2Type>> _enemyGuisers = new()
     {
-        [TR2Entities.BirdMonster] = new List<TR2Entities>
+        [TR2Type.BirdMonster] = new List<TR2Type>
         {
-            TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick
+            TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick
         }
     };
 
-    public static List<TR2Entities> GetFriendlyEnemies()
+    public static List<TR2Type> GetFriendlyEnemies()
     {
-        return new List<TR2Entities>(_friendlyEnemies);
+        return new List<TR2Type>(_friendlyEnemies);
     }
 
-    private static readonly List<TR2Entities> _friendlyEnemies = new()
+    private static readonly List<TR2Type> _friendlyEnemies = new()
     {
-        TR2Entities.Winston, TR2Entities.MonkWithKnifeStick, TR2Entities.MonkWithLongStick
+        TR2Type.Winston, TR2Type.MonkWithKnifeStick, TR2Type.MonkWithLongStick
     };
 
     // #146 Ensure Marco is spawned only once
-    private static readonly List<TR2Entities> _oneShotEnemies = new()
+    private static readonly List<TR2Type> _oneShotEnemies = new()
     {
-        TR2Entities.MarcoBartoli
+        TR2Type.MarcoBartoli
     };
 
     public static void SetEntityTriggers(TR2Level level, TR2Entity entity)
     {
-        if (_oneShotEnemies.Contains((TR2Entities)entity.TypeID))
+        if (_oneShotEnemies.Contains((TR2Type)entity.TypeID))
         {
             int entityID = level.Entities.ToList().IndexOf(entity);
 
@@ -529,11 +528,11 @@ public static class TR2EnemyUtilities
         }
     }
 
-    public static Dictionary<TR2Entities, TR2Entities> GetAliasPriority(string lvlName, List<TR2Entities> importEntities)
+    public static Dictionary<TR2Type, TR2Type> GetAliasPriority(string lvlName, List<TR2Type> importEntities)
     {
         // If the priorities map doesn't contain an entity we are trying to import as a key, TRModelTransporter
         // will assume it always has priority (e.g. BengalTiger replacing SnowLeopard).
-        Dictionary<TR2Entities, TR2Entities> priorities = new();
+        Dictionary<TR2Type, TR2Type> priorities = new();
 
         // If the dragon is being imported, we want the matching dagger cutscene to be available via misc anim
         // and the dagger model for the inventory. Otherwise, we need to ensure the existing misc anim matches
@@ -541,28 +540,28 @@ public static class TR2EnemyUtilities
         // HSH starting cutscene. For others we sacrifice the specific enemy death animations. So for example,
         // if XianGuardSpear is imported into Wreck, the existing misc anim will remain for the wheel door animation.
         // But if Marco is imported, the wheel door animation will also be sacrificed.
-        if (importEntities.Contains(TR2Entities.MarcoBartoli) && lvlName != TR2LevelNames.HOME)
+        if (importEntities.Contains(TR2Type.MarcoBartoli) && lvlName != TR2LevelNames.HOME)
         {
-            priorities[TR2Entities.Puzzle2_M_H] = TR2Entities.Puzzle2_M_H_Dagger;
-            priorities[TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_Xian;
+            priorities[TR2Type.Puzzle2_M_H] = TR2Type.Puzzle2_M_H_Dagger;
+            priorities[TR2Type.LaraMiscAnim_H] = TR2Type.LaraMiscAnim_H_Xian;
         }
         else
         {
             switch (lvlName)
             {
                 case TR2LevelNames.BARTOLI:
-                    priorities[TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_Venice;
+                    priorities[TR2Type.LaraMiscAnim_H] = TR2Type.LaraMiscAnim_H_Venice;
                     break;
                 case TR2LevelNames.RIG:
                 case TR2LevelNames.DA:
                 case TR2LevelNames.DORIA:
-                    priorities[TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_Unwater;
+                    priorities[TR2Type.LaraMiscAnim_H] = TR2Type.LaraMiscAnim_H_Unwater;
                     break;
                 case TR2LevelNames.CHICKEN:
-                    priorities[TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_Ice;
+                    priorities[TR2Type.LaraMiscAnim_H] = TR2Type.LaraMiscAnim_H_Ice;
                     break;
                 case TR2LevelNames.HOME:
-                    priorities[TR2Entities.LaraMiscAnim_H] = TR2Entities.LaraMiscAnim_H_HSH;
+                    priorities[TR2Type.LaraMiscAnim_H] = TR2Type.LaraMiscAnim_H_HSH;
                     break;
             }
         }

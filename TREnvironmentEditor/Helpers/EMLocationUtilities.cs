@@ -3,7 +3,6 @@ using TRFDControl.FDEntryTypes;
 using TRFDControl.Utilities;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 
 namespace TREnvironmentEditor.Helpers;
 
@@ -19,7 +18,7 @@ public static class EMLocationUtilities
     {
         TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
         return Array.FindIndex(level.Entities, e =>
-            TR2EntityUtilities.IsSecretType((TR2Entities)e.TypeID)
+            TR2TypeUtilities.IsSecretType((TR2Type)e.TypeID)
             && FDUtilities.GetRoomSector(e.X, e.Y, e.Z, e.Room, level, floorData) == sector
         );
     }

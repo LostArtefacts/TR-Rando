@@ -1,19 +1,18 @@
 ﻿using System.Drawing;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRTexture16Importer.Helpers;
 
 namespace TRTexture16Importer.Textures;
 
-public class TR3TextureMapping : AbstractTextureMapping<TR3Entities, TR3Level>
+public class TR3TextureMapping : AbstractTextureMapping<TR3Type, TR3Level>
 {
     private TRPalette16Control _paletteTracker;
 
     protected TR3TextureMapping(TR3Level level)
         : base(level) { }
 
-    public static TR3TextureMapping Get(TR3Level level, string mappingFilePrefix, TR3TextureDatabase database, Dictionary<StaticTextureSource<TR3Entities>, List<StaticTextureTarget>> predefinedMapping = null, List<TR3Entities> entitiesToIgnore = null, Dictionary<TR3Entities, TR3Entities> entityMap = null)
+    public static TR3TextureMapping Get(TR3Level level, string mappingFilePrefix, TR3TextureDatabase database, Dictionary<StaticTextureSource<TR3Type>, List<StaticTextureTarget>> predefinedMapping = null, List<TR3Type> entitiesToIgnore = null, Dictionary<TR3Type, TR3Type> entityMap = null)
     {
         string mapFile = Path.Combine(@"Resources\TR3\Textures\Mapping\", mappingFilePrefix + "-Textures.json");
         if (!File.Exists(mapFile))
@@ -43,7 +42,7 @@ public class TR3TextureMapping : AbstractTextureMapping<TR3Entities, TR3Level>
         return _paletteTracker.Import(colour);
     }
 
-    protected override TRMesh[] GetModelMeshes(TR3Entities entity)
+    protected override TRMesh[] GetModelMeshes(TR3Type entity)
     {
         return TRMeshUtilities.GetModelMeshes(_level, entity);
     }

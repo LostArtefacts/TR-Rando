@@ -2,7 +2,6 @@
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Utilities;
 
@@ -152,7 +151,7 @@ class Program
 
         foreach (TREntity entity in level.Entities)
         {
-            if (!TR1EntityUtilities.CanSharePickupSpace((TREntities)entity.TypeID))
+            if (!TR1TypeUtilities.CanSharePickupSpace((TR1Type)entity.TypeID))
             {
                 exclusions.Add(new Location
                 {
@@ -179,7 +178,7 @@ class Program
 
         foreach (TR2Entity entity in level.Entities)
         {
-            if (!TR3EntityUtilities.CanSharePickupSpace((TR3Entities)entity.TypeID))
+            if (!TR3TypeUtilities.CanSharePickupSpace((TR3Type)entity.TypeID))
             {
                 exclusions.Add(new Location
                 {

@@ -1,7 +1,6 @@
 ﻿using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
@@ -63,7 +62,7 @@ public class TR3NightModeRandomizer : BaseTR3Randomizer
         }
 
         // Notify the texture monitor that this level is now in night mode
-        TextureMonitor<TR3Entities> monitor = TextureMonitor.CreateMonitor(level.Name);
+        TextureMonitor<TR3Type> monitor = TextureMonitor.CreateMonitor(level.Name);
         monitor.UseNightTextures = true;
     }
 

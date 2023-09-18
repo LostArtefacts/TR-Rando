@@ -2,7 +2,7 @@
 using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
-using TRLevelControl.Model.Enums;
+using TRLevelControl.Model;
 
 namespace TRRandomizerCore.Processors;
 
@@ -41,7 +41,7 @@ public class TR2EnemyAdjuster : TR2LevelProcessor
 
         foreach (int enemyIndex in _enemyTargets[_levelInstance.Name])
         {
-            _levelInstance.Data.Entities[enemyIndex].TypeID = (short)TR2Entities.CameraTarget_N;
+            _levelInstance.Data.Entities[enemyIndex].TypeID = (short)TR2Type.CameraTarget_N;
             FDUtilities.RemoveEntityTriggers(_levelInstance.Data, enemyIndex, floorData);
         }
 

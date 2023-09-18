@@ -6,7 +6,6 @@ using TRGE.Core;
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Handlers;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
@@ -211,7 +210,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
         mapping?.Mirrored.ApplyToLevel(level.Data, picker.Options);
 
         // Notify the texture monitor that this level has been flipped
-        TextureMonitor<TREntities> monitor = TextureMonitor.CreateMonitor(level.Name);
+        TextureMonitor<TR1Type> monitor = TextureMonitor.CreateMonitor(level.Name);
         monitor.UseMirroring = true;
 
         if (ScriptEditor.Edition.IsCommunityPatch)
@@ -235,7 +234,7 @@ public class TR1EnvironmentRandomizer : BaseTR1Randomizer, IMirrorControl
         if (anchorRoom == -1 && level.Is(TR1LevelNames.ATLANTIS))
         {
             // Extra check for OG Atlantis to ensure the script is configured properly.
-            TREntity baconLara = Array.Find(level.Data.Entities, e => e.TypeID == (short)TREntities.Doppelganger);
+            TREntity baconLara = Array.Find(level.Data.Entities, e => e.TypeID == (short)TR1Type.Doppelganger);
             if (baconLara?.Room == 57)
             {
                 anchorRoom = 10;

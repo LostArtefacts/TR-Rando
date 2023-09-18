@@ -1,22 +1,21 @@
 ﻿using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Processors;
 
 public class TR2ModelAdjuster : TR2LevelProcessor
 {
-    private static readonly Dictionary<TR2Entities, TR2Entities> _modelRemap = new()
+    private static readonly Dictionary<TR2Type, TR2Type> _modelRemap = new()
     {
-        [TR2Entities.Puzzle2_M_H] = TR2Entities.Puzzle3_M_H,
-        [TR2Entities.PuzzleHole2] = TR2Entities.PuzzleHole3,
-        [TR2Entities.PuzzleDone2] = TR2Entities.PuzzleDone3
+        [TR2Type.Puzzle2_M_H] = TR2Type.Puzzle3_M_H,
+        [TR2Type.PuzzleHole2] = TR2Type.PuzzleHole3,
+        [TR2Type.PuzzleDone2] = TR2Type.PuzzleDone3
     };
 
-    private static readonly Dictionary<TR2Entities, TR2Entities> _spriteRemap = new()
+    private static readonly Dictionary<TR2Type, TR2Type> _spriteRemap = new()
     {
-        [TR2Entities.Puzzle2_S_P] = TR2Entities.Puzzle3_S_P
+        [TR2Type.Puzzle2_S_P] = TR2Type.Puzzle3_S_P
     };
 
     public void AdjustModels()
@@ -49,7 +48,7 @@ public class TR2ModelAdjuster : TR2LevelProcessor
 
         // Point the old models to the new ones, and any matching entities that are instances
         // of the old model, should also point to the new model type.
-        foreach (TR2Entities oldEntity in _modelRemap.Keys)
+        foreach (TR2Type oldEntity in _modelRemap.Keys)
         {
             TRModel model = models.Find(m => m.ID == (short)oldEntity);
             if (model != null)
@@ -65,7 +64,7 @@ public class TR2ModelAdjuster : TR2LevelProcessor
         }
 
         // Repeat for sprites
-        foreach (TR2Entities oldEntity in _spriteRemap.Keys)
+        foreach (TR2Type oldEntity in _spriteRemap.Keys)
         {
             TRSpriteSequence sprite = sprites.Find(s => s.SpriteID == (short)oldEntity);
             if (sprite != null)

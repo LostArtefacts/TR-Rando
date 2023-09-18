@@ -1,16 +1,15 @@
 ﻿using TRFDControl;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Packing;
 using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Textures;
 
-public class TR3LandmarkImporter : AbstractLandmarkImporter<TR3Entities, TR3Level>
+public class TR3LandmarkImporter : AbstractLandmarkImporter<TR3Type, TR3Level>
 {
     protected override int MaxTextures => 4096;
 
-    protected override AbstractTexturePacker<TR3Entities, TR3Level> CreatePacker(TR3Level level)
+    protected override AbstractTexturePacker<TR3Type, TR3Level> CreatePacker(TR3Level level)
     {
         return new TR3TexturePacker(level);
     }

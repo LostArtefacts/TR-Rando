@@ -3,7 +3,6 @@ using System.Drawing.Imaging;
 using System.Text;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
 using TRTexture16Importer.Helpers;
@@ -44,7 +43,7 @@ public static class HtmlExporter
         BuildLevelSelect(levelSel, lvlName, TR2LevelNames.AsOrderedList);
 
         StringBuilder skyboxInfo = new();
-        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR2Entities.Skybox_H), level.Palette16);
+        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR2Type.Skybox_H), level.Palette16);
         BuildSkyBox(skyboxInfo, skyColours);
 
         Write("TR2", lvlName, tiles, levelSel, skyboxInfo);
@@ -60,7 +59,7 @@ public static class HtmlExporter
         BuildLevelSelect(levelSel, lvlName, TR3LevelNames.AsOrderedList);
 
         StringBuilder skyboxInfo = new();
-        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR3Entities.Skybox_H), level.Palette16);
+        Dictionary<int, TRColour4> skyColours = GetSkyBoxColours(TRMeshUtilities.GetModelMeshes(level, TR3Type.Skybox_H), level.Palette16);
         BuildSkyBox(skyboxInfo, skyColours);
 
         Write("TR3", lvlName, tiles, levelSel, skyboxInfo);

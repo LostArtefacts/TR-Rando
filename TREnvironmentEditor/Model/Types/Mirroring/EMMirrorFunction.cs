@@ -3,7 +3,6 @@ using TRFDControl;
 using TRFDControl.FDEntryTypes;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -91,11 +90,11 @@ public class EMMirrorFunction : BaseEMFunction
             _worldWidth = Math.Max(_worldWidth, room.Info.X + SectorSize * room.NumXSectors);
         }
 
-        TR2Entity puna = Array.Find(level.Entities, e => e.TypeID == (short)TR3Entities.Puna);
+        TR2Entity puna = Array.Find(level.Entities, e => e.TypeID == (short)TR3Type.Puna);
         if (puna != null)
         {
             // Rebuild the world around Puna's Lizard
-            TR2Entity lizardMan = Array.Find(level.Entities, e => e.Room == puna.Room && e.TypeID == (short)TR3Entities.LizardMan);
+            TR2Entity lizardMan = Array.Find(level.Entities, e => e.Room == puna.Room && e.TypeID == (short)TR3Type.LizardMan);
             _xAdjustment = lizardMan.X - FlipWorldX(lizardMan.X);
         }
     }
@@ -615,7 +614,7 @@ public class EMMirrorFunction : BaseEMFunction
             AdjustTR1EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.ToList().FindAll(e => TR1EntityUtilities.IsDoorType((TREntities)e.TypeID)));
+        AdjustDoors(level.Entities.ToList().FindAll(e => TR1TypeUtilities.IsDoorType((TR1Type)e.TypeID)));
     }
 
     private void MirrorEntities(TR2Level level)
@@ -626,7 +625,7 @@ public class EMMirrorFunction : BaseEMFunction
             AdjustTR2EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.ToList().FindAll(e => TR2EntityUtilities.IsDoorType((TR2Entities)e.TypeID)));
+        AdjustDoors(level.Entities.ToList().FindAll(e => TR2TypeUtilities.IsDoorType((TR2Type)e.TypeID)));
     }
 
     private void MirrorEntities(TR3Level level)
@@ -637,19 +636,19 @@ public class EMMirrorFunction : BaseEMFunction
             AdjustTR3EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.ToList().FindAll(e => TR3EntityUtilities.IsDoorType((TR3Entities)e.TypeID)));
+        AdjustDoors(level.Entities.ToList().FindAll(e => TR3TypeUtilities.IsDoorType((TR3Type)e.TypeID)));
     }
 
     private static void AdjustTR1EntityPosition(TREntity entity)
     {
         entity.Angle *= -1;
 
-        switch ((TREntities)entity.TypeID)
+        switch ((TR1Type)entity.TypeID)
         {
-            case TREntities.Animating1:
-            case TREntities.Animating2:
-            case TREntities.Animating3:
-            case TREntities.AtlanteanEgg:
+            case TR1Type.Animating1:
+            case TR1Type.Animating2:
+            case TR1Type.Animating3:
+            case TR1Type.AtlanteanEgg:
                 switch (entity.Angle)
                 {
                     case _east:
@@ -666,7 +665,7 @@ public class EMMirrorFunction : BaseEMFunction
                         break;
                 }
                 break;
-            case TREntities.AdamEgg:
+            case TR1Type.AdamEgg:
                 switch (entity.Angle)
                 {
                     case _east:
@@ -683,8 +682,8 @@ public class EMMirrorFunction : BaseEMFunction
                         break;
                 }
                 break;
-            case TREntities.BridgeTilt1:
-            case TREntities.BridgeTilt2:
+            case TR1Type.BridgeTilt1:
+            case TR1Type.BridgeTilt2:
                 switch (entity.Angle)
                 {
                     case _south:
@@ -712,12 +711,12 @@ public class EMMirrorFunction : BaseEMFunction
             entity.Angle *= -1;
         }
 
-        switch ((TR2Entities)entity.TypeID)
+        switch ((TR2Type)entity.TypeID)
         {
             // These take up 2 tiles so need some fiddling
-            case TR2Entities.Elevator:
-            case TR2Entities.SpikyCeiling:
-            case TR2Entities.SpikyWall:
+            case TR2Type.Elevator:
+            case TR2Type.SpikyCeiling:
+            case TR2Type.SpikyWall:
                 switch (entity.Angle)
                 {
                     case _south:
@@ -734,7 +733,7 @@ public class EMMirrorFunction : BaseEMFunction
                         break;
                 }
                 break;
-            case TR2Entities.Gong: // case 0 applicable to IceCave
+            case TR2Type.Gong: // case 0 applicable to IceCave
                 switch (entity.Angle)
                 {
                     case _south:
@@ -752,7 +751,7 @@ public class EMMirrorFunction : BaseEMFunction
                 }
                 break;
 
-            case TR2Entities.StatueWithKnifeBlade:
+            case TR2Type.StatueWithKnifeBlade:
                 if (entity.Angle == _east)
                 {
                     entity.Angle = _west;
@@ -766,8 +765,8 @@ public class EMMirrorFunction : BaseEMFunction
                 break;
 
             // Bridge tilts need to be rotated
-            case TR2Entities.BridgeTilt1:
-            case TR2Entities.BridgeTilt2:
+            case TR2Type.BridgeTilt1:
+            case TR2Type.BridgeTilt2:
                 switch (entity.Angle)
                 {
                     case _south:
@@ -785,28 +784,28 @@ public class EMMirrorFunction : BaseEMFunction
                 }
                 break;
 
-            case TR2Entities.AirplanePropeller:
+            case TR2Type.AirplanePropeller:
                 if (entity.Angle == _west)
                 {
                     entity.Angle = _east;
                 }
                 break;
 
-            case TR2Entities.OverheadPulleyHook:
+            case TR2Type.OverheadPulleyHook:
                 if (entity.Angle == _south || entity.Angle == _north)
                 {
                     entity.Angle += _south;
                 }
                 break;
 
-            case TR2Entities.PowerSaw:
+            case TR2Type.PowerSaw:
                 if (entity.Angle == _north)
                 {
                     entity.X += SectorSize;
                 }
                 break;
 
-            case TR2Entities.Helicopter:
+            case TR2Type.Helicopter:
                 if (entity.Angle == _west)
                 {
                     entity.Angle = _north;
@@ -815,7 +814,7 @@ public class EMMirrorFunction : BaseEMFunction
                 }
                 break;
 
-            case TR2Entities.MarcoBartoli:
+            case TR2Type.MarcoBartoli:
                 // InitialiseBartoli in Dragon.c always shifts Bartoli as follows,
                 // so we need to move him 512 in the +X to avoid him ending up either
                 // OOB or in mid-air.
@@ -830,12 +829,12 @@ public class EMMirrorFunction : BaseEMFunction
         // Flip the angle - north and south remain, everything else moves appropriately
         entity.Angle *= -1;
 
-        switch ((TR3Entities)entity.TypeID)
+        switch ((TR3Type)entity.TypeID)
         {
             // These take up several tiles so need some fiddling
-            case TR3Entities.SpikyVertWallOrTunnelBorer:
-            case TR3Entities.SpikyWall:
-            case TR3Entities.SubwayTrain:
+            case TR3Type.SpikyVertWallOrTunnelBorer:
+            case TR3Type.SpikyWall:
+            case TR3Type.SubwayTrain:
                 switch (entity.Angle)
                 {
                     case _north:
@@ -853,7 +852,7 @@ public class EMMirrorFunction : BaseEMFunction
                 }
                 break;
 
-            case TR3Entities.Area51Swinger:
+            case TR3Type.Area51Swinger:
                 switch (entity.Angle)
                 {
                     case _north:
@@ -864,8 +863,8 @@ public class EMMirrorFunction : BaseEMFunction
                         break;
                 }
                 break;
-            case TR3Entities.BigMissile:
-            case TR3Entities.MovableBoom:
+            case TR3Type.BigMissile:
+            case TR3Type.MovableBoom:
                 switch (entity.Angle)
                 {
                     case _east:
@@ -875,9 +874,9 @@ public class EMMirrorFunction : BaseEMFunction
                 break;
 
             // Bridge tilts need to be rotated
-            case TR3Entities.BridgeTilt1:
-            case TR3Entities.BridgeTilt2:
-            case TR3Entities.FireBreathingDragonStatue:
+            case TR3Type.BridgeTilt1:
+            case TR3Type.BridgeTilt2:
+            case TR3Type.FireBreathingDragonStatue:
                 switch (entity.Angle)
                 {
                     case _north:
@@ -896,7 +895,7 @@ public class EMMirrorFunction : BaseEMFunction
                 break;
 
             // The Crash Site walls
-            case TR3Entities.DestroyableBoardedUpWall:
+            case TR3Type.DestroyableBoardedUpWall:
                 switch (entity.Angle)
                 {
                     case _east:
@@ -1122,7 +1121,7 @@ public class EMMirrorFunction : BaseEMFunction
         // these models aren't mirrored so the texture will end up being
         // upside down. Rotate the relevant mesh faces.
         MirrorDependentFaces(level.Models, textureReferences,
-            modelID => TRMeshUtilities.GetModelMeshes(level, (TREntities)modelID));
+            modelID => TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID));
     }
 
     private static void MirrorTextures(TR2Level level)

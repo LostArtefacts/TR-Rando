@@ -1,7 +1,6 @@
 ﻿using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 
 namespace TRRandomizerCore.Levels;
 
@@ -98,7 +97,7 @@ public class TR3CombinedLevel
     /// </summary>
     public bool HasSecrets => Script.NumSecrets > 0;
 
-    public bool HasVehicle => Data.Entities.Any(e => TR3EntityUtilities.IsVehicleType((TR3Entities)e.TypeID));
+    public bool HasVehicle => Data.Entities.Any(e => TR3TypeUtilities.IsVehicleType((TR3Type)e.TypeID));
 
     /// <summary>
     /// Get the adventure based on this level's name.
@@ -128,7 +127,7 @@ public class TR3CombinedLevel
         }
     }
 
-    public void RemoveModel(TR3Entities type)
+    public void RemoveModel(TR3Type type)
     {
         List<TRModel> models = Data.Models.ToList();
         if (models.Find(m => m.ID == (uint)type) is TRModel model)

@@ -1,7 +1,6 @@
 ﻿using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Secrets;
 
@@ -37,9 +36,9 @@ public class TR1SecretRewardRandomizer : BaseTR1Randomizer
 
         TRSecretMapping<TREntity> secretMapping = TRSecretMapping<TREntity>.Get(GetResourcePath(@"TR1\SecretMapping\" + level.Name + "-SecretMapping.json"));
 
-        List<TREntities> stdItemTypes = TR1EntityUtilities.GetStandardPickupTypes();
-        stdItemTypes.Remove(TREntities.PistolAmmo_S_P); // Sprite/model not available
-        stdItemTypes.Remove(TREntities.Pistols_S_P); // A bit cruel as a reward?
+        List<TR1Type> stdItemTypes = TR1TypeUtilities.GetStandardPickupTypes();
+        stdItemTypes.Remove(TR1Type.PistolAmmo_S_P); // Sprite/model not available
+        stdItemTypes.Remove(TR1Type.Pistols_S_P); // A bit cruel as a reward?
 
         for (int i = 0; i < level.Data.NumEntities; i++)
         {

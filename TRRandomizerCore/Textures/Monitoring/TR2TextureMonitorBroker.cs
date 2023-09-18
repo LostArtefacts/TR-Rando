@@ -1,28 +1,28 @@
 ﻿using TRLevelControl.Helpers;
-using TRLevelControl.Model.Enums;
+using TRLevelControl.Model;
 using TRTexture16Importer.Textures;
 
 namespace TRRandomizerCore.Textures;
 
-public class TR2TextureMonitorBroker : AbstractTextureMonitorBroker<TR2Entities>
+public class TR2TextureMonitorBroker : AbstractTextureMonitorBroker<TR2Type>
 {
-    private static readonly Dictionary<TR2Entities, TR2Entities> _expandedMonitorMap = new()
+    private static readonly Dictionary<TR2Type, TR2Type> _expandedMonitorMap = new()
     {
-        [TR2Entities.MercSnowmobDriver] = TR2Entities.RedSnowmobile,
-        [TR2Entities.FlamethrowerGoonOG] = TR2Entities.Flame_S_H,
-        [TR2Entities.FlamethrowerGoonTopixtor] = TR2Entities.Flame_S_H,
-        [TR2Entities.MarcoBartoli] = TR2Entities.Flame_S_H
+        [TR2Type.MercSnowmobDriver] = TR2Type.RedSnowmobile,
+        [TR2Type.FlamethrowerGoonOG] = TR2Type.Flame_S_H,
+        [TR2Type.FlamethrowerGoonTopixtor] = TR2Type.Flame_S_H,
+        [TR2Type.MarcoBartoli] = TR2Type.Flame_S_H
     };
 
-    protected override Dictionary<TR2Entities, TR2Entities> ExpandedMonitorMap => _expandedMonitorMap;
+    protected override Dictionary<TR2Type, TR2Type> ExpandedMonitorMap => _expandedMonitorMap;
 
-    protected override TextureDatabase<TR2Entities> CreateDatabase()
+    protected override TextureDatabase<TR2Type> CreateDatabase()
     {
         return new TR2TextureDatabase();
     }
 
-    protected override TR2Entities TranslateAlias(string lvlName, TR2Entities entity)
+    protected override TR2Type TranslateAlias(string lvlName, TR2Type entity)
     {
-        return TR2EntityUtilities.GetAliasForLevel(lvlName, entity);
+        return TR2TypeUtilities.GetAliasForLevel(lvlName, entity);
     }
 }

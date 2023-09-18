@@ -3,7 +3,6 @@ using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 
@@ -37,7 +36,7 @@ public class TR3StartPositionRandomizer : BaseTR3Randomizer
     private void RandomizeStartPosition(TR3CombinedLevel level)
     {
         List<TR2Entity> entities = level.Data.Entities.ToList();
-        TR2Entity lara = entities.Find(e => e.TypeID == (short)TR3Entities.Lara);
+        TR2Entity lara = entities.Find(e => e.TypeID == (short)TR3Type.Lara);
 
         // If we haven't defined anything for a level, Lara will just be rotated. This is most likely where there are
         // triggers just after Lara's starting spot, so we just skip them here.
@@ -50,7 +49,7 @@ public class TR3StartPositionRandomizer : BaseTR3Randomizer
                 {
                     entities.Add(new TR2Entity
                     {
-                        TypeID = (short)TR3Entities.Lara,
+                        TypeID = (short)TR3Type.Lara,
                         X = loc.X,
                         Y = loc.Y,
                         Z = loc.Z,

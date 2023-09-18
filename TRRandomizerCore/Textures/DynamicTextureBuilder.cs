@@ -3,7 +3,6 @@ using TRFDControl;
 using TRFDControl.Utilities;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Model.Textures;
@@ -18,44 +17,44 @@ namespace TRRandomizerCore.Textures;
 public class DynamicTextureBuilder
 {
     // Models whose mesh textures should be targeted
-    private static readonly List<TREntities> _modelIDs = new()
+    private static readonly List<TR1Type> _modelIDs = new()
     {
-        TREntities.Door1, TREntities.Door2, TREntities.Door3, TREntities.Door4,
-        TREntities.Door5, TREntities.Door6, TREntities.Door7, TREntities.Door8,
-        TREntities.Trapdoor1, TREntities.Trapdoor2, TREntities.Trapdoor3, TREntities.LiftingDoor,
-        TREntities.WallSwitch, TREntities.UnderwaterSwitch, TREntities.DamoclesSword,
-        TREntities.BridgeFlat, TREntities.BridgeTilt1, TREntities.BridgeTilt2,
-        TREntities.SwingingBlade, TREntities.PushBlock1, TREntities.PushBlock2,
-        TREntities.PushBlock3, TREntities.PushBlock4, TREntities.MovingBlock, TREntities.RollingBall,
-        TREntities.FallingBlock, TREntities.FallingCeiling1, TREntities.FallingCeiling2,
-        TREntities.DartEmitter, TREntities.Dart_H, TREntities.TeethSpikes, TREntities.Keyhole1,
-        TREntities.Keyhole2, TREntities.Keyhole3, TREntities.Keyhole4, TREntities.PuzzleHole1,
-        TREntities.PuzzleHole2, TREntities.PuzzleHole3, TREntities.PuzzleHole4,
-        TREntities.PuzzleDone1,TREntities.PuzzleDone2,TREntities.PuzzleDone3,TREntities.PuzzleDone4,
-        TREntities.Animating1, TREntities.Animating2, TREntities.Animating3,
-        TREntities.Motorboat, TREntities.Barricade, TREntities.ThorHammerBlock, TREntities.ThorHammerHandle,
-        TREntities.ThorLightning, TREntities.SlammingDoor, TREntities.CentaurStatue, TREntities.NatlasMineShack,
-        TREntities.ScionHolder, TREntities.AtlanteanLava, TREntities.AdamEgg, TREntities.AtlanteanEgg,
-        TREntities.ScionPiece3_S_P, TREntities.ScionPiece4_S_P, TREntities.Gunflare_H
+        TR1Type.Door1, TR1Type.Door2, TR1Type.Door3, TR1Type.Door4,
+        TR1Type.Door5, TR1Type.Door6, TR1Type.Door7, TR1Type.Door8,
+        TR1Type.Trapdoor1, TR1Type.Trapdoor2, TR1Type.Trapdoor3, TR1Type.LiftingDoor,
+        TR1Type.WallSwitch, TR1Type.UnderwaterSwitch, TR1Type.DamoclesSword,
+        TR1Type.BridgeFlat, TR1Type.BridgeTilt1, TR1Type.BridgeTilt2,
+        TR1Type.SwingingBlade, TR1Type.PushBlock1, TR1Type.PushBlock2,
+        TR1Type.PushBlock3, TR1Type.PushBlock4, TR1Type.MovingBlock, TR1Type.RollingBall,
+        TR1Type.FallingBlock, TR1Type.FallingCeiling1, TR1Type.FallingCeiling2,
+        TR1Type.DartEmitter, TR1Type.Dart_H, TR1Type.TeethSpikes, TR1Type.Keyhole1,
+        TR1Type.Keyhole2, TR1Type.Keyhole3, TR1Type.Keyhole4, TR1Type.PuzzleHole1,
+        TR1Type.PuzzleHole2, TR1Type.PuzzleHole3, TR1Type.PuzzleHole4,
+        TR1Type.PuzzleDone1,TR1Type.PuzzleDone2,TR1Type.PuzzleDone3,TR1Type.PuzzleDone4,
+        TR1Type.Animating1, TR1Type.Animating2, TR1Type.Animating3,
+        TR1Type.Motorboat, TR1Type.Barricade, TR1Type.ThorHammerBlock, TR1Type.ThorHammerHandle,
+        TR1Type.ThorLightning, TR1Type.SlammingDoor, TR1Type.CentaurStatue, TR1Type.NatlasMineShack,
+        TR1Type.ScionHolder, TR1Type.AtlanteanLava, TR1Type.AdamEgg, TR1Type.AtlanteanEgg,
+        TR1Type.ScionPiece3_S_P, TR1Type.ScionPiece4_S_P, TR1Type.Gunflare_H
     };
 
     // Enemy models whose mesh textures should be targeted
-    private static readonly List<TREntities> _enemyIDs = new()
+    private static readonly List<TR1Type> _enemyIDs = new()
     {
-        TREntities.Adam, TREntities.Missile2_H, TREntities.Missile3_H, TREntities.FlyingAtlantean,
-        TREntities.BandagedFlyer, TREntities.Centaur, TREntities.Mummy, TREntities.Doppelganger,
-        TREntities.TRex, TREntities.Raptor, TREntities.Cowboy
+        TR1Type.Adam, TR1Type.Missile2_H, TR1Type.Missile3_H, TR1Type.FlyingAtlantean,
+        TR1Type.BandagedFlyer, TR1Type.Centaur, TR1Type.Mummy, TR1Type.Doppelganger,
+        TR1Type.TRex, TR1Type.Raptor, TR1Type.Cowboy
     };
 
     // Sprite sequences that should be targeted
-    private static readonly List<TREntities> _spriteIDs = new()
+    private static readonly List<TR1Type> _spriteIDs = new()
     {
-        TREntities.LavaParticles_S_H, TREntities.Flame_S_H, TREntities.Explosion1_S_H,
-        TREntities.DartEffect_S_H, TREntities.WaterRipples1_S_H, TREntities.WaterRipples2_S_H,
-        TREntities.FontGraphics_S_H, TREntities.Ricochet_S_H, TREntities.Sparkles_S_H
+        TR1Type.LavaParticles_S_H, TR1Type.Flame_S_H, TR1Type.Explosion1_S_H,
+        TR1Type.DartEffect_S_H, TR1Type.WaterRipples1_S_H, TR1Type.WaterRipples2_S_H,
+        TR1Type.FontGraphics_S_H, TR1Type.Ricochet_S_H, TR1Type.Sparkles_S_H
     };
 
-    public TextureMonitor<TREntities> TextureMonitor { get; set; }
+    public TextureMonitor<TR1Type> TextureMonitor { get; set; }
     public bool RetainMainTextures { get; set; }
     public bool IsCommunityPatch { get; set; }
 
@@ -101,41 +100,41 @@ public class DynamicTextureBuilder
         }
 
         // Collect standard sprite sequences
-        foreach (TREntities spriteID in _spriteIDs)
+        foreach (TR1Type spriteID in _spriteIDs)
         {
             AddSpriteTextures(level.Data, spriteID, defaultSpriteTextures);
         }
 
         TRMesh hips = null;
-        List<TREntities> modelIDs = new(_modelIDs);
+        List<TR1Type> modelIDs = new(_modelIDs);
         if (level.IsCutScene)
         {
             // Cutscene actors vary between levels so we can't include all by default. These
             // are the only ones we want to change.
             if (level.Is(TR1LevelNames.MINES_CUT))
             {
-                modelIDs.Add(TREntities.CutsceneActor1); // ScionHolder
-                modelIDs.Add(TREntities.CutsceneActor3); // Scion
+                modelIDs.Add(TR1Type.CutsceneActor1); // ScionHolder
+                modelIDs.Add(TR1Type.CutsceneActor3); // Scion
             }
             else if (level.Is(TR1LevelNames.ATLANTIS_CUT))
             {
-                modelIDs.Add(TREntities.CutsceneActor2); // ScionHolder
-                modelIDs.Add(TREntities.CutsceneActor4); // Scion
+                modelIDs.Add(TR1Type.CutsceneActor2); // ScionHolder
+                modelIDs.Add(TR1Type.CutsceneActor4); // Scion
             }
         }
         else
         {
-            hips = TRMeshUtilities.GetModelMeshes(level.Data, TREntities.Lara)[0];
+            hips = TRMeshUtilities.GetModelMeshes(level.Data, TR1Type.Lara)[0];
             if (level.Is(TR1LevelNames.MIDAS))
             {
-                modelIDs.Add(TREntities.LaraMiscAnim_H);
-                modelIDs.Add(TREntities.LaraPonytail_H_U);
+                modelIDs.Add(TR1Type.LaraMiscAnim_H);
+                modelIDs.Add(TR1Type.LaraPonytail_H_U);
             }
         }
 
         // Collect all model mesh textures, provided none use the dummy mesh, otherwise
         // Lara will be partially re-textured.
-        foreach (TREntities modelID in modelIDs)
+        foreach (TR1Type modelID in modelIDs)
         {
             TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)modelID);
             if (model != null)
@@ -144,7 +143,7 @@ public class DynamicTextureBuilder
             }
         }
 
-        foreach (TREntities modelID in _enemyIDs)
+        foreach (TR1Type modelID in _enemyIDs)
         {
             TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)modelID);
             if (model != null)
@@ -171,8 +170,8 @@ public class DynamicTextureBuilder
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
-        Dictionary<TREntities, TREntities> keyItems = TR1EntityUtilities.GetKeyItemMap();
-        foreach (TREntities pickupType in keyItems.Keys)
+        Dictionary<TR1Type, TR1Type> keyItems = TR1TypeUtilities.GetKeyItemMap();
+        foreach (TR1Type pickupType in keyItems.Keys)
         {
             TRModel model = Array.Find(level.Data.Models, m => m.ID == (uint)keyItems[pickupType]);
             if (model == null)
@@ -226,21 +225,21 @@ public class DynamicTextureBuilder
 
     private void AddModelTextures(TR1Level level, TRModel model, TRMesh dummyMesh, ISet<int> textures, ISet<TRMesh> meshCollection)
     {
-        TREntities modelID = (TREntities)model.ID;
+        TR1Type modelID = (TR1Type)model.ID;
         if (TextureMonitor?.RemovedTextures?.Contains(modelID) ?? false)
         {
             // Don't include textures that may have been re-assigned to other imported models (e.g. enemies).
             return;
         }
 
-        if (modelID == TREntities.CentaurStatue && Array.Find(level.Entities, e => e.TypeID == model.ID) == null)
+        if (modelID == TR1Type.CentaurStatue && Array.Find(level.Entities, e => e.TypeID == model.ID) == null)
         {
             // Can happen in ToT if the centaur statue was "removed", in which case we don't want to
             // change any object textures that were repurposed for new enemies.
             return;
         }
 
-        if (modelID == TREntities.Cowboy && TRMeshUtilities.GetModelMeshes(level, TREntities.Cowboy)[2].NumTexturedRectangles > 0)
+        if (modelID == TR1Type.Cowboy && TRMeshUtilities.GetModelMeshes(level, TR1Type.Cowboy)[2].NumTexturedRectangles > 0)
         {
             // We only want to target LeoC's headless cowboy - in this case the cowboy is OG.
             return;
@@ -249,7 +248,7 @@ public class DynamicTextureBuilder
         TRMesh[] meshes = TRMeshUtilities.GetModelMeshes(level, model);
         List<TRMesh> excludedMeshes = new() { dummyMesh };
 
-        if (modelID == TREntities.Adam)
+        if (modelID == TR1Type.Adam)
         {                
             TR1ModelDefinition adam = new TR1ModelImporter
             {
@@ -272,7 +271,7 @@ public class DynamicTextureBuilder
                 }
             }
         }
-        else if ((modelID == TREntities.ScionPiece3_S_P || modelID == TREntities.ScionPiece4_S_P)
+        else if ((modelID == TR1Type.ScionPiece3_S_P || modelID == TR1Type.ScionPiece4_S_P)
             && meshes.Length == 1 && meshes[0].NumNormals != 123)
         {
             try
@@ -287,7 +286,7 @@ public class DynamicTextureBuilder
                 excludedMeshes.Add(meshes[0]);
             }
         }
-        else if (modelID == TREntities.LaraPonytail_H_U)
+        else if (modelID == TR1Type.LaraPonytail_H_U)
         {
             // For Midas "golden" hair, we only want the additional meshes that may have
             // been created by outfit rando.
@@ -385,7 +384,7 @@ public class DynamicTextureBuilder
             textures.Add(f.Texture);
     }
 
-    private static void AddSpriteTextures(TR1Level level, TREntities spriteID, ISet<int> textures)
+    private static void AddSpriteTextures(TR1Level level, TR1Type spriteID, ISet<int> textures)
     {
         TRSpriteSequence sequence = Array.Find(level.SpriteSequences, s => s.SpriteID == (int)spriteID);
         if (sequence != null)

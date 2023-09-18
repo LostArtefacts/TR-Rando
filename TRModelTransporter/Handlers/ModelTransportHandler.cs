@@ -1,22 +1,21 @@
 ﻿using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Definitions;
 
 namespace TRModelTransporter.Handlers;
 
 public class ModelTransportHandler
 {
-    public static void Export(TR1Level level, TR1ModelDefinition definition, TREntities entity)
+    public static void Export(TR1Level level, TR1ModelDefinition definition, TR1Type entity)
     {
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
 
-    public static void Export(TR2Level level, TR2ModelDefinition definition, TR2Entities entity)
+    public static void Export(TR2Level level, TR2ModelDefinition definition, TR2Type entity)
     {
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
 
-    public static void Export(TR3Level level, TR3ModelDefinition definition, TR3Entities entity)
+    public static void Export(TR3Level level, TR3ModelDefinition definition, TR3Type entity)
     {
         definition.Model = GetTRModel(level.Models, (short)entity);
     }
@@ -27,7 +26,7 @@ public class ModelTransportHandler
         return model ?? throw new ArgumentException($"The model for {entityID} could not be found.");
     }
 
-    public static void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TREntities, TREntities> aliasPriority, IEnumerable<TREntities> laraDependants)
+    public static void Import(TR1Level level, TR1ModelDefinition definition, Dictionary<TR1Type, TR1Type> aliasPriority, IEnumerable<TR1Type> laraDependants)
     {
         List<TRModel> levelModels = level.Models.ToList();
         int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
@@ -51,18 +50,18 @@ public class ModelTransportHandler
 
         if (laraDependants != null)
         {
-            if (definition.Entity == TREntities.Lara)
+            if (definition.Entity == TR1Type.Lara)
             {
                 ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
             }
-            else if (laraDependants.Contains((TREntities)definition.Model.ID))
+            else if (laraDependants.Contains((TR1Type)definition.Model.ID))
             {
-                ReplaceLaraDependants(levelModels, levelModels.Find(m => m.ID == (uint)TREntities.Lara), new short[] { (short)definition.Model.ID });
+                ReplaceLaraDependants(levelModels, levelModels.Find(m => m.ID == (uint)TR1Type.Lara), new short[] { (short)definition.Model.ID });
             }
         }
     }
 
-    public static void Import(TR2Level level, TR2ModelDefinition definition, Dictionary<TR2Entities, TR2Entities> aliasPriority, IEnumerable<TR2Entities> laraDependants)
+    public static void Import(TR2Level level, TR2ModelDefinition definition, Dictionary<TR2Type, TR2Type> aliasPriority, IEnumerable<TR2Type> laraDependants)
     {
         List<TRModel> levelModels = level.Models.ToList();
         int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
@@ -84,13 +83,13 @@ public class ModelTransportHandler
         // as these use Lara's hips as placeholders. This means we can avoid texture corruption in
         // TRView but it's also needed for the shower cutscene in HSH. If these entities are found,
         // their starting mesh and mesh tree indices are just remapped to Lara's.
-        if (definition.Entity == TR2Entities.Lara && laraDependants != null)
+        if (definition.Entity == TR2Type.Lara && laraDependants != null)
         {
             ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
         }
     }
 
-    public static void Import(TR3Level level, TR3ModelDefinition definition, Dictionary<TR3Entities, TR3Entities> aliasPriority, IEnumerable<TR3Entities> laraDependants, IEnumerable<TR3Entities> unsafeReplacements)
+    public static void Import(TR3Level level, TR3ModelDefinition definition, Dictionary<TR3Type, TR3Type> aliasPriority, IEnumerable<TR3Type> laraDependants, IEnumerable<TR3Type> unsafeReplacements)
     {
         List<TRModel> levelModels = level.Models.ToList();
         int i = levelModels.FindIndex(m => m.ID == (short)definition.Entity);
@@ -118,7 +117,7 @@ public class ModelTransportHandler
             }
         }
 
-        if (definition.Entity == TR3Entities.Lara && laraDependants != null)
+        if (definition.Entity == TR3Type.Lara && laraDependants != null)
         {
             ReplaceLaraDependants(levelModels, definition.Model, laraDependants.Select(e => (short)e));
         }

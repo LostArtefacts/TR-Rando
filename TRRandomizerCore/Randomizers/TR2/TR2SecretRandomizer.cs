@@ -3,7 +3,6 @@ using System.Diagnostics;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Utilities;
 using TRRandomizerCore.Zones;
@@ -149,15 +148,15 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
             jadeLocation = SpatialConverters.TransformToLevelSpace(jadeLocation, _levelInstance.Data.Rooms[jadeLocation.Room].Info);
             stoneLocation = SpatialConverters.TransformToLevelSpace(stoneLocation, _levelInstance.Data.Rooms[stoneLocation.Room].Info);
 
-            Dictionary<TR2Entities, Location> secretMap = new()
+            Dictionary<TR2Type, Location> secretMap = new()
             {
-                [TR2Entities.StoneSecret_S_P] = stoneLocation,
-                [TR2Entities.JadeSecret_S_P] = jadeLocation,
-                [TR2Entities.GoldSecret_S_P] = goldLocation
+                [TR2Type.StoneSecret_S_P] = stoneLocation,
+                [TR2Type.JadeSecret_S_P] = jadeLocation,
+                [TR2Type.GoldSecret_S_P] = goldLocation
             };
 
             List<TR2Entity> ents = _levelInstance.Data.Entities.ToList();
-            foreach (TR2Entities secretType in secretMap.Keys)
+            foreach (TR2Type secretType in secretMap.Keys)
             {
                 //Does the level contain an entity for this type?
                 TR2Entity secretEntity = Array.Find(_levelInstance.Data.Entities, ent => ent.TypeID == (short)secretType);
@@ -207,21 +206,21 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
         Queue<int> existingIndices = new();
         for (int i = 0; i < ents.Count; i++)
         {
-            if (TR2EntityUtilities.IsSecretType((TR2Entities)ents[i].TypeID))
+            if (TR2TypeUtilities.IsSecretType((TR2Type)ents[i].TypeID))
             {
                 existingIndices.Enqueue(i);
             }
         }
 
         //Add new entities
-        Dictionary<TR2Entities, List<Location>> secretMap = new()
+        Dictionary<TR2Type, List<Location>> secretMap = new()
         {
-            [TR2Entities.StoneSecret_S_P] = ZonedLocations.StoneZone,
-            [TR2Entities.JadeSecret_S_P] = ZonedLocations.JadeZone,
-            [TR2Entities.GoldSecret_S_P] = ZonedLocations.GoldZone
+            [TR2Type.StoneSecret_S_P] = ZonedLocations.StoneZone,
+            [TR2Type.JadeSecret_S_P] = ZonedLocations.JadeZone,
+            [TR2Type.GoldSecret_S_P] = ZonedLocations.GoldZone
         };
 
-        foreach (TR2Entities secretType in secretMap.Keys)
+        foreach (TR2Type secretType in secretMap.Keys)
         {
             foreach (Location loc in secretMap[secretType])
             {
@@ -264,8 +263,8 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
         {
             // Swap Stone and Jade textures - OG has them the wrong way around.
             // SpriteSequence offsets have to remain in order, so swap the texture targets instead.
-            TRSpriteSequence stoneSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == (int)TR2Entities.StoneSecret_S_P);
-            TRSpriteSequence jadeSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == (int)TR2Entities.JadeSecret_S_P);
+            TRSpriteSequence stoneSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == (int)TR2Type.StoneSecret_S_P);
+            TRSpriteSequence jadeSequence = Array.Find(_levelInstance.Data.SpriteSequences, s => s.SpriteID == (int)TR2Type.JadeSecret_S_P);
 
             TRSpriteTexture[] textures = _levelInstance.Data.SpriteTextures;
             (textures[jadeSequence.Offset], textures[stoneSequence.Offset]) 
@@ -304,12 +303,12 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
         }
     }
 
-    private void CheckForSecretDamage(Dictionary<TR2Entities, Location> secretMap)
+    private void CheckForSecretDamage(Dictionary<TR2Type, Location> secretMap)
     {
         uint easyDamageCount = 0;
         uint hardDamageCount = 0;
 
-        foreach (TR2Entities secretType in secretMap.Keys)
+        foreach (TR2Type secretType in secretMap.Keys)
         {
             Location location = secretMap[secretType];
             
@@ -330,8 +329,8 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
             // If its one of the firsts level I add one easy damage
             if (_levelInstance.Sequence < 2) easyDamageCount++;
 
-            _levelInstance.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Entities.LargeMed_S_P), hardDamageCount);
-            _levelInstance.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Entities.SmallMed_S_P), easyDamageCount);
+            _levelInstance.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Type.LargeMed_S_P), hardDamageCount);
+            _levelInstance.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR2Type.SmallMed_S_P), easyDamageCount);
         }
     }
 }

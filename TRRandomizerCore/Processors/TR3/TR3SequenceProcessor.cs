@@ -7,7 +7,6 @@ using TRFDControl.Utilities;
 using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Transport;
 using TRRandomizerCore.Editors;
 using TRRandomizerCore.Helpers;
@@ -21,16 +20,16 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 {
     private static readonly int _spikeHeightChange = -768;
 
-    private static readonly Dictionary<TR3Entities, TR3Entities> _artefactAssignment = new()
+    private static readonly Dictionary<TR3Type, TR3Type> _artefactAssignment = new()
     {
-        [TR3Entities.Infada_P] = TR3Entities.Key1_P,
-        [TR3Entities.OraDagger_P] = TR3Entities.Key2_P,
-        [TR3Entities.EyeOfIsis_P] = TR3Entities.Key3_P,
-        [TR3Entities.Element115_P] = TR3Entities.Key4_P,
-        [TR3Entities.Infada_M_H] = TR3Entities.Key1_M_H,
-        [TR3Entities.OraDagger_M_H] = TR3Entities.Key2_M_H,
-        [TR3Entities.EyeOfIsis_M_H] = TR3Entities.Key3_M_H,
-        [TR3Entities.Element115_M_H] = TR3Entities.Key4_M_H,
+        [TR3Type.Infada_P] = TR3Type.Key1_P,
+        [TR3Type.OraDagger_P] = TR3Type.Key2_P,
+        [TR3Type.EyeOfIsis_P] = TR3Type.Key3_P,
+        [TR3Type.Element115_P] = TR3Type.Key4_P,
+        [TR3Type.Infada_M_H] = TR3Type.Key1_M_H,
+        [TR3Type.OraDagger_M_H] = TR3Type.Key2_M_H,
+        [TR3Type.EyeOfIsis_M_H] = TR3Type.Key3_M_H,
+        [TR3Type.Element115_M_H] = TR3Type.Key4_M_H,
     };
 
     private static readonly Dictionary<TR3Adventure, int> _adventureStringSequences = new()
@@ -163,7 +162,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
             return;
         }
 
-        List<TR3Entities> upvImport = new() { TR3Entities.UPV };
+        List<TR3Type> upvImport = new() { TR3Type.UPV };
         TR3ModelImporter importer = new()
         {
             Level = level.Data,
@@ -184,7 +183,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
                 break;
             }
 
-            entity.TypeID = (short)TR3Entities.UPV;
+            entity.TypeID = (short)TR3Type.UPV;
         }
 
         level.Data.Entities = entities.ToArray();
@@ -192,34 +191,34 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
         // We can only have one vehicle type per level because LaraVehicleAnimation_H is tied to
         // each, so for the likes of Nevada, replace the quad with another UPV to fly into HSC.
-        List<TR2Entity> quads = entities.FindAll(e => e.TypeID == (short)TR3Entities.Quad);
+        List<TR2Entity> quads = entities.FindAll(e => e.TypeID == (short)TR3Type.Quad);
         foreach (TR2Entity quad in quads)
         {
-            quad.TypeID = (short)TR3Entities.UPV;
+            quad.TypeID = (short)TR3Type.UPV;
         }
 
         // If we're not randomizing enemies, we have to perform the monkey/tiger/vehicle crash
         // test here for the likes of Jungle.
         if (!Settings.RandomizeEnemies
-            && level.Data.Entities.Any(e => e.TypeID == (short)TR3Entities.Monkey)
-            && level.Data.Models.Any(m => m.ID == (uint)TR3Entities.Tiger))
+            && level.Data.Entities.Any(e => e.TypeID == (short)TR3Type.Monkey)
+            && level.Data.Models.Any(m => m.ID == (uint)TR3Type.Tiger))
         {
-            level.RemoveModel(TR3Entities.Tiger);
-            level.Data.Entities.Where(e => e.TypeID == (short)TR3Entities.Tiger)
+            level.RemoveModel(TR3Type.Tiger);
+            level.Data.Entities.Where(e => e.TypeID == (short)TR3Type.Tiger)
                 .ToList()
-                .ForEach(e => e.TypeID = (short)TR3Entities.Monkey);
+                .ForEach(e => e.TypeID = (short)TR3Type.Monkey);
         }
     }
 
     private static void AddColdLevelMedis(TR3CombinedLevel level)
     {
-        if (!level.Data.Entities.Any(e => e.TypeID == (short)TR3Entities.UPV))
+        if (!level.Data.Entities.Any(e => e.TypeID == (short)TR3Type.UPV))
         {
             return;
         }
         
         uint largeMediCount = _defaultColdMediCount;
-        uint smallMediCount = (uint)Math.Ceiling(level.Data.Entities.Where(e => e.TypeID == (short)TR3Entities.UnderwaterSwitch).Count() / 2d);
+        uint smallMediCount = (uint)Math.Ceiling(level.Data.Entities.Where(e => e.TypeID == (short)TR3Type.UnderwaterSwitch).Count() / 2d);
         if (smallMediCount > 0)
         {
             largeMediCount++;
@@ -230,8 +229,8 @@ public class TR3SequenceProcessor : TR3LevelProcessor
             smallMediCount *= 2;
         }
 
-        level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3Entities.LargeMed_P), largeMediCount);
-        level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3Entities.SmallMed_P), smallMediCount);
+        level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3Type.LargeMed_P), largeMediCount);
+        level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3Type.SmallMed_P), smallMediCount);
     }
 
     private static void AmendAntarctica(TR3CombinedLevel level)
@@ -255,8 +254,8 @@ public class TR3SequenceProcessor : TR3LevelProcessor
     private void ImportArtefactMenuModels(TR3CombinedLevel level)
     {
         List<TRModel> models = level.Data.Models.ToList();
-        List<TR3Entities> imports = new();
-        foreach (TR3Entities artefactMenuModel in TR3EntityUtilities.GetArtefactMenuModels())
+        List<TR3Type> imports = new();
+        foreach (TR3Type artefactMenuModel in TR3TypeUtilities.GetArtefactMenuModels())
         {
             if (models.Find(m => m.ID == (uint)artefactMenuModel) == null)
             {
@@ -284,9 +283,9 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         List<TRModel> models = level.Data.Models.ToList();
 
         // Add new duplicate models for keys, so secret rando doesn't replace the originals.
-        foreach (TR3Entities artefact in _artefactAssignment.Keys)
+        foreach (TR3Type artefact in _artefactAssignment.Keys)
         {
-            TR3Entities replacement = _artefactAssignment[artefact];
+            TR3Type replacement = _artefactAssignment[artefact];
             TRModel artefactModel = models.Find(m => m.ID == (uint)artefact);
             models.Add(new TRModel
             {
@@ -317,10 +316,10 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         for (int i = 0; i < level.Data.NumEntities; i++)
         {
             TR2Entity entity = level.Data.Entities[i];
-            TR3Entities type = (TR3Entities)entity.TypeID;
-            if (type == TR3Entities.AIPath_N || type == TR3Entities.AICheck_N)
+            TR3Type type = (TR3Type)entity.TypeID;
+            if (type == TR3Type.AIPath_N || type == TR3Type.AICheck_N)
             {
-                entity.TypeID = (short)TR3Entities.PistolAmmo_M_H;
+                entity.TypeID = (short)TR3Type.PistolAmmo_M_H;
                 entity.X = 66048;
                 entity.Y = 768;
                 entity.Z = 67072;
@@ -343,7 +342,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private static void AmendSouthPacificSpikes(TR3CombinedLevel level)
     {
-        short spikes = (short)TR3Entities.TeethSpikesOrBarbedWire;
+        short spikes = (short)TR3Type.TeethSpikesOrBarbedWire;
         List<TR2Entity> entities = level.Data.Entities.ToList().FindAll(e => e.TypeID == spikes);
         foreach (TR2Entity entity in entities)
         {
@@ -361,7 +360,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
     private static void AmendCrashSitePiranhas(TR3CombinedLevel level)
     {
         TR2Entity piranhas = Array.Find(
-            level.Data.Entities, e => e.TypeID == (short)TR3Entities.Piranhas_N && e.Room == 61);
+            level.Data.Entities, e => e.TypeID == (short)TR3Type.Piranhas_N && e.Room == 61);
         if (piranhas != null)
         {
             // Move them behind the gate, which is an unreachable room

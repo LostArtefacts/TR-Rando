@@ -1,17 +1,16 @@
 ﻿using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Transport;
 
 namespace TRModelTransporter.Utilities;
 
-public class MassTR3ModelExporter : AbstractMassTRModelExporter<TR3Entities, TR3Level, TR3ModelDefinition>
+public class MassTR3ModelExporter : AbstractMassTRModelExporter<TR3Type, TR3Level, TR3ModelDefinition>
 {
     public override List<string> LevelNames => TR3LevelNames.AsListWithAssault;
 
-    public override Dictionary<string, List<TR3Entities>> ExportTypes => _exportModelTypes;
+    public override Dictionary<string, List<TR3Type>> ExportTypes => _exportModelTypes;
 
     private readonly TR3LevelControl _reader;
 
@@ -20,7 +19,7 @@ public class MassTR3ModelExporter : AbstractMassTRModelExporter<TR3Entities, TR3
         _reader = new();
     }
 
-    protected override AbstractTRModelExporter<TR3Entities, TR3Level, TR3ModelDefinition> CreateExporter()
+    protected override AbstractTRModelExporter<TR3Type, TR3Level, TR3ModelDefinition> CreateExporter()
     {
         return new TR3ModelExporter();
     }
@@ -30,92 +29,92 @@ public class MassTR3ModelExporter : AbstractMassTRModelExporter<TR3Entities, TR3
         return _reader.Read(path);
     }
 
-    private static readonly Dictionary<string, List<TR3Entities>> _exportModelTypes = new()
+    private static readonly Dictionary<string, List<TR3Type>> _exportModelTypes = new()
     {
-        [TR3LevelNames.JUNGLE] = new List<TR3Entities>
+        [TR3LevelNames.JUNGLE] = new List<TR3Type>
         {
-            TR3Entities.LaraIndia, TR3Entities.Monkey, TR3Entities.Tiger, TR3Entities.Door1
+            TR3Type.LaraIndia, TR3Type.Monkey, TR3Type.Tiger, TR3Type.Door1
         },
-        [TR3LevelNames.RUINS] = new List<TR3Entities>
+        [TR3LevelNames.RUINS] = new List<TR3Type>
         {
-            TR3Entities.Shiva, TR3Entities.CobraIndia
+            TR3Type.Shiva, TR3Type.CobraIndia
         },
-        [TR3LevelNames.GANGES] = new List<TR3Entities>
+        [TR3LevelNames.GANGES] = new List<TR3Type>
         {
-            TR3Entities.Quad, TR3Entities.Vulture
+            TR3Type.Quad, TR3Type.Vulture
         },
-        [TR3LevelNames.CAVES] = new List<TR3Entities>
+        [TR3LevelNames.CAVES] = new List<TR3Type>
         {
-            TR3Entities.TonyFirehands, TR3Entities.Infada_P
+            TR3Type.TonyFirehands, TR3Type.Infada_P
         },
-        [TR3LevelNames.COASTAL] = new List<TR3Entities>
+        [TR3LevelNames.COASTAL] = new List<TR3Type>
         {
-            TR3Entities.LaraCoastal, TR3Entities.Croc, TR3Entities.TribesmanAxe, TR3Entities.TribesmanDart
+            TR3Type.LaraCoastal, TR3Type.Croc, TR3Type.TribesmanAxe, TR3Type.TribesmanDart
         },
-        [TR3LevelNames.CRASH] = new List<TR3Entities>
+        [TR3LevelNames.CRASH] = new List<TR3Type>
         {
-            TR3Entities.Compsognathus, TR3Entities.Mercenary, TR3Entities.Raptor, TR3Entities.Tyrannosaur
+            TR3Type.Compsognathus, TR3Type.Mercenary, TR3Type.Raptor, TR3Type.Tyrannosaur
         },
-        [TR3LevelNames.MADUBU] = new List<TR3Entities>
+        [TR3LevelNames.MADUBU] = new List<TR3Type>
         {
-            TR3Entities.Kayak, TR3Entities.LizardMan
+            TR3Type.Kayak, TR3Type.LizardMan
         },
-        [TR3LevelNames.PUNA] = new List<TR3Entities>
+        [TR3LevelNames.PUNA] = new List<TR3Type>
         {
-            TR3Entities.Puna, TR3Entities.OraDagger_P
+            TR3Type.Puna, TR3Type.OraDagger_P
         },
-        [TR3LevelNames.THAMES] = new List<TR3Entities>
+        [TR3LevelNames.THAMES] = new List<TR3Type>
         {
-            TR3Entities.LaraLondon, TR3Entities.Crow, TR3Entities.LondonGuard, TR3Entities.LondonMerc, TR3Entities.Rat
+            TR3Type.LaraLondon, TR3Type.Crow, TR3Type.LondonGuard, TR3Type.LondonMerc, TR3Type.Rat
         },
-        [TR3LevelNames.ALDWYCH] = new List<TR3Entities>
+        [TR3LevelNames.ALDWYCH] = new List<TR3Type>
         {
-            TR3Entities.Punk, TR3Entities.DogLondon
+            TR3Type.Punk, TR3Type.DogLondon
         },
-        [TR3LevelNames.LUDS] = new List<TR3Entities>
+        [TR3LevelNames.LUDS] = new List<TR3Type>
         {
-            TR3Entities.ScubaSteve, TR3Entities.UPV
+            TR3Type.ScubaSteve, TR3Type.UPV
         },
-        [TR3LevelNames.CITY] = new List<TR3Entities>
+        [TR3LevelNames.CITY] = new List<TR3Type>
         {
-            TR3Entities.SophiaLee, TR3Entities.EyeOfIsis_P
+            TR3Type.SophiaLee, TR3Type.EyeOfIsis_P
         },
-        [TR3LevelNames.NEVADA] = new List<TR3Entities>
+        [TR3LevelNames.NEVADA] = new List<TR3Type>
         {
-            TR3Entities.LaraNevada, TR3Entities.DamGuard, TR3Entities.CobraNevada
+            TR3Type.LaraNevada, TR3Type.DamGuard, TR3Type.CobraNevada
         },
-        [TR3LevelNames.HSC] = new List<TR3Entities>
+        [TR3LevelNames.HSC] = new List<TR3Type>
         {
-            TR3Entities.MPWithStick, TR3Entities.MPWithGun, TR3Entities.Prisoner, TR3Entities.DogNevada
+            TR3Type.MPWithStick, TR3Type.MPWithGun, TR3Type.Prisoner, TR3Type.DogNevada
         },
-        [TR3LevelNames.AREA51] = new List<TR3Entities>
+        [TR3LevelNames.AREA51] = new List<TR3Type>
         {
-            TR3Entities.KillerWhale, TR3Entities.MPWithMP5, TR3Entities.Element115_P
+            TR3Type.KillerWhale, TR3Type.MPWithMP5, TR3Type.Element115_P
         },
-        [TR3LevelNames.ANTARC] = new List<TR3Entities>
+        [TR3LevelNames.ANTARC] = new List<TR3Type>
         {
-            TR3Entities.LaraAntarc, TR3Entities.CrawlerMutantInCloset, TR3Entities.Boat, TR3Entities.RXRedBoi, TR3Entities.DogAntarc
+            TR3Type.LaraAntarc, TR3Type.CrawlerMutantInCloset, TR3Type.Boat, TR3Type.RXRedBoi, TR3Type.DogAntarc
         }
         ,
-        [TR3LevelNames.RXTECH] = new List<TR3Entities>
+        [TR3LevelNames.RXTECH] = new List<TR3Type>
         {
-            TR3Entities.Crawler, TR3Entities.RXTechFlameLad, TR3Entities.BruteMutant
+            TR3Type.Crawler, TR3Type.RXTechFlameLad, TR3Type.BruteMutant
         },
-        [TR3LevelNames.TINNOS] = new List<TR3Entities>
+        [TR3LevelNames.TINNOS] = new List<TR3Type>
         {
-            TR3Entities.TinnosMonster, TR3Entities.TinnosWasp, TR3Entities.Door4
+            TR3Type.TinnosMonster, TR3Type.TinnosWasp, TR3Type.Door4
         },
-        [TR3LevelNames.WILLIE] = new List<TR3Entities>
+        [TR3LevelNames.WILLIE] = new List<TR3Type>
         {
-            TR3Entities.Willie, TR3Entities.RXGunLad
+            TR3Type.Willie, TR3Type.RXGunLad
         },
-        [TR3LevelNames.HALLOWS] = new List<TR3Entities>
+        [TR3LevelNames.HALLOWS] = new List<TR3Type>
         {
             
         },
-        [TR3LevelNames.ASSAULT] = new List<TR3Entities>
+        [TR3LevelNames.ASSAULT] = new List<TR3Type>
         {
-            TR3Entities.LaraHome, TR3Entities.Winston, TR3Entities.WinstonInCamoSuit
+            TR3Type.LaraHome, TR3Type.Winston, TR3Type.WinstonInCamoSuit
         }
     };
 }

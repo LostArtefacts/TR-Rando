@@ -1,6 +1,5 @@
 ﻿using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -14,7 +13,7 @@ public class EMMirrorModelFunction : BaseEMFunction
         List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
-            TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TREntities)modelID);
+            TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR1Type)modelID);
             if (modelMeshes == null || modelMeshes.Length > 1)
             {
                 throw new NotSupportedException("Only models with single meshes can be mirrored.");
@@ -31,7 +30,7 @@ public class EMMirrorModelFunction : BaseEMFunction
         List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
-            TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR2Entities)modelID);
+            TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR2Type)modelID);
             if (modelMeshes == null || modelMeshes.Length > 1)
             {
                 throw new NotSupportedException("Only models with single meshes can be mirrored.");
@@ -48,7 +47,7 @@ public class EMMirrorModelFunction : BaseEMFunction
         List<TRMesh> meshes = new();
         foreach (uint modelID in ModelIDs)
         {
-            TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR3Entities)modelID);
+            TRMesh[] modelMeshes = TRMeshUtilities.GetModelMeshes(level, (TR3Type)modelID);
             if (modelMeshes == null || modelMeshes.Length > 1)
             {
                 throw new NotSupportedException("Only models with single meshes can be mirrored.");

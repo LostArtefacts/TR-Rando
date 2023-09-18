@@ -1,5 +1,4 @@
 ﻿using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Packing;
@@ -7,7 +6,7 @@ using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Handlers.Textures;
 
-public class TR1TextureImportHandler : AbstractTextureImportHandler<TREntities, TR1Level, TR1ModelDefinition>
+public class TR1TextureImportHandler : AbstractTextureImportHandler<TR1Type, TR1Level, TR1ModelDefinition>
 {
     public TRPalette8Control PaletteManager { get; set; }
 
@@ -15,7 +14,7 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TREntities, 
     {
         // Allow replacing the Explosion sequence in Vilcabamba (it's there but empty)
         List<TRSpriteSequence> sequences = _level.SpriteSequences.ToList();
-        TRSpriteSequence explosion = sequences.Find(s => s.SpriteID == (int)TREntities.Explosion1_S_H);
+        TRSpriteSequence explosion = sequences.Find(s => s.SpriteID == (int)TR1Type.Explosion1_S_H);
         if (explosion != null && explosion.NegativeLength == -1)
         {
             sequences.Remove(explosion);
@@ -40,7 +39,7 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TREntities, 
         _level.NumSpriteTextures = (uint)_level.SpriteTextures.Length;
     }
 
-    protected override AbstractTexturePacker<TREntities, TR1Level> CreatePacker()
+    protected override AbstractTexturePacker<TR1Type, TR1Level> CreatePacker()
     {
         return new TR1TexturePacker(_level)
         {
@@ -48,12 +47,12 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TREntities, 
         };
     }
 
-    protected override void ProcessRemovals(AbstractTexturePacker<TREntities, TR1Level> packer)
+    protected override void ProcessRemovals(AbstractTexturePacker<TR1Type, TR1Level> packer)
     {
-        List<TREntities> removals = new();
+        List<TR1Type> removals = new();
         if (_clearUnusedSprites)
         {
-            removals.Add(TREntities.Map_M_U);
+            removals.Add(TR1Type.Map_M_U);
         }
 
         if (_entitiesToRemove != null)
@@ -68,18 +67,18 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TREntities, 
         }
     }
 
-    private void RemoveUnusedSprites(AbstractTexturePacker<TREntities, TR1Level> packer)
+    private void RemoveUnusedSprites(AbstractTexturePacker<TR1Type, TR1Level> packer)
     {
-        List<TREntities> unusedItems = new()
+        List<TR1Type> unusedItems = new()
         {
-            TREntities.PistolAmmo_S_P,
-            TREntities.Map_M_U
+            TR1Type.PistolAmmo_S_P,
+            TR1Type.Map_M_U
         };
 
-        ISet<TREntities> allEntities = new HashSet<TREntities>();
+        ISet<TR1Type> allEntities = new HashSet<TR1Type>();
         for (int i = 0; i < _level.Entities.Length; i++)
         {
-            allEntities.Add((TREntities)_level.Entities[i].TypeID);
+            allEntities.Add((TR1Type)_level.Entities[i].TypeID);
         }
 
         for (int i = unusedItems.Count - 1; i >= 0; i--)
@@ -138,8 +137,8 @@ public class TR1TextureImportHandler : AbstractTextureImportHandler<TREntities, 
         _level.ResetUnusedTextures();
     }
 
-    protected override IEnumerable<TREntities> CollateWatchedTextures(IEnumerable<TREntities> watchedEntities, TR1ModelDefinition definition)
+    protected override IEnumerable<TR1Type> CollateWatchedTextures(IEnumerable<TR1Type> watchedEntities, TR1ModelDefinition definition)
     {
-        return new List<TREntities>();
+        return new List<TR1Type>();
     }
 }

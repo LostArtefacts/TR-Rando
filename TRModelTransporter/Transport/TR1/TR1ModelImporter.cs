@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Data;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Handlers.Textures;
@@ -10,7 +9,7 @@ using TRTexture16Importer.Helpers;
 
 namespace TRModelTransporter.Transport;
 
-public class TR1ModelImporter : AbstractTRModelImporter<TREntities, TR1Level, TR1ModelDefinition>
+public class TR1ModelImporter : AbstractTRModelImporter<TR1Type, TR1Level, TR1ModelDefinition>
 {
     public TRPalette8Control PaletteManager { get; set; }
 
@@ -27,15 +26,15 @@ public class TR1ModelImporter : AbstractTRModelImporter<TREntities, TR1Level, TR
         }
     }
 
-    protected override AbstractTextureImportHandler<TREntities, TR1Level, TR1ModelDefinition> CreateTextureHandler()
+    protected override AbstractTextureImportHandler<TR1Type, TR1Level, TR1ModelDefinition> CreateTextureHandler()
     {
         return new TR1TextureImportHandler();
     }
 
-    protected override List<TREntities> GetExistingModelTypes()
+    protected override List<TR1Type> GetExistingModelTypes()
     {
-        List<TREntities> existingEntities = new();
-        Level.Models.ToList().ForEach(m => existingEntities.Add((TREntities)m.ID));
+        List<TR1Type> existingEntities = new();
+        Level.Models.ToList().ForEach(m => existingEntities.Add((TR1Type)m.ID));
         return existingEntities;
     }
 
@@ -58,7 +57,7 @@ public class TR1ModelImporter : AbstractTRModelImporter<TREntities, TR1Level, TR
 
         SoundTransportHandler.Import(Level, standardDefinitions.Concat(soundOnlyDefinitions));
 
-        Dictionary<TREntities, TREntities> aliasPriority = Data.AliasPriority ?? new Dictionary<TREntities, TREntities>();
+        Dictionary<TR1Type, TR1Type> aliasPriority = Data.AliasPriority ?? new Dictionary<TR1Type, TR1Type>();
 
         foreach (TR1ModelDefinition definition in standardDefinitions)
         {

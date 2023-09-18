@@ -3,7 +3,6 @@ using System.Drawing.Drawing2D;
 using TRFDControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
 using TRModelTransporter.Packing;
@@ -12,36 +11,36 @@ using TRTexture16Importer.Helpers;
 
 namespace TRRandomizerCore.Textures;
 
-public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
+public class TR3Wireframer : AbstractTRWireframer<TR3Type, TR3Level>
 {
-    private static readonly List<TR3Entities> _laraEntities = new()
+    private static readonly List<TR3Type> _laraEntities = new()
     {
-        TR3Entities.Lara, TR3Entities.LaraPonytail_H, TR3Entities.LaraFlareAnimation_H,
-        TR3Entities.LaraPistolAnimation_H, TR3Entities.LaraShotgunAnimation_H, TR3Entities.LaraUziAnimation_H,
-        TR3Entities.LaraDeagleAnimation_H, TR3Entities.LaraMP5Animation_H, TR3Entities.LaraGrenadeAnimation_H,
-        TR3Entities.LaraRocketAnimation_H, TR3Entities.LaraExtraAnimation_H, TR3Entities.LaraSkin_H,
-        TR3Entities.LaraHarpoonAnimation_H, TR3Entities.LaraVehicleAnimation_H
+        TR3Type.Lara, TR3Type.LaraPonytail_H, TR3Type.LaraFlareAnimation_H,
+        TR3Type.LaraPistolAnimation_H, TR3Type.LaraShotgunAnimation_H, TR3Type.LaraUziAnimation_H,
+        TR3Type.LaraDeagleAnimation_H, TR3Type.LaraMP5Animation_H, TR3Type.LaraGrenadeAnimation_H,
+        TR3Type.LaraRocketAnimation_H, TR3Type.LaraExtraAnimation_H, TR3Type.LaraSkin_H,
+        TR3Type.LaraHarpoonAnimation_H, TR3Type.LaraVehicleAnimation_H
     };
 
-    private static readonly List<TR3Entities> _additionalEnemyEntities = new()
+    private static readonly List<TR3Type> _additionalEnemyEntities = new()
     {
-        TR3Entities.ShivaStatue, TR3Entities.MonkeyKeyMeshswap, TR3Entities.MonkeyMedMeshswap
+        TR3Type.ShivaStatue, TR3Type.MonkeyKeyMeshswap, TR3Type.MonkeyMedMeshswap
     };
 
     private TRPalette16Control _paletteTracker;
 
-    protected override AbstractTexturePacker<TR3Entities, TR3Level> CreatePacker(TR3Level level)
+    protected override AbstractTexturePacker<TR3Type, TR3Level> CreatePacker(TR3Level level)
     {
         return new TR3TexturePacker(level);
     }
 
     protected override bool IsInteractableModel(TRModel model)
     {
-        TR3Entities type = (TR3Entities)model.ID;
-        return TR3EntityUtilities.IsSwitchType(type)
-            || TR3EntityUtilities.IsKeyholeType(type)
-            || TR3EntityUtilities.IsSlotType(type)
-            || TR3EntityUtilities.IsPushblockType(type);
+        TR3Type type = (TR3Type)model.ID;
+        return TR3TypeUtilities.IsSwitchType(type)
+            || TR3TypeUtilities.IsKeyholeType(type)
+            || TR3TypeUtilities.IsSlotType(type)
+            || TR3TypeUtilities.IsPushblockType(type);
     }
 
     protected override int GetBlackPaletteIndex(TR3Level level)
@@ -59,15 +58,15 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
         return level.Meshes;
     }
 
-    protected override Dictionary<TR3Entities, TRMesh[]> GetModelMeshes(TR3Level level)
+    protected override Dictionary<TR3Type, TRMesh[]> GetModelMeshes(TR3Level level)
     {
-        Dictionary<TR3Entities, TRMesh[]> modelMeshes = new();
+        Dictionary<TR3Type, TRMesh[]> modelMeshes = new();
         foreach (TRModel model in level.Models)
         {
             TRMesh[] meshes = GetModelMeshes(level, model);
             if (meshes != null)
             {
-                modelMeshes[(TR3Entities)model.ID] = meshes;
+                modelMeshes[(TR3Type)model.ID] = meshes;
             }
         }
         return modelMeshes;
@@ -126,24 +125,24 @@ public class TR3Wireframer : AbstractTRWireframer<TR3Entities, TR3Level>
 
     protected override bool IsLaraModel(TRModel model)
     {
-        return _laraEntities.Contains((TR3Entities)model.ID);
+        return _laraEntities.Contains((TR3Type)model.ID);
     }
 
     protected override bool IsEnemyModel(TRModel model)
     {
-        TR3Entities id = (TR3Entities)model.ID;
-        return TR3EntityUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
+        TR3Type id = (TR3Type)model.ID;
+        return TR3TypeUtilities.IsEnemyType(id) || _additionalEnemyEntities.Contains(id);
     }
 
     protected override bool IsSkybox(TRModel model)
     {
-        return (TR3Entities)model.ID == TR3Entities.Skybox_H;
+        return (TR3Type)model.ID == TR3Type.Skybox_H;
     }
 
     protected override bool ShouldSolidifyModel(TRModel model)
     {
-        TR3Entities type = (TR3Entities)model.ID;
-        return TR3EntityUtilities.IsAnyPickupType(type) || TR3EntityUtilities.IsCrystalPickup(type);
+        TR3Type type = (TR3Type)model.ID;
+        return TR3TypeUtilities.IsAnyPickupType(type) || TR3TypeUtilities.IsCrystalPickup(type);
     }
 
     protected override void ResetUnusedTextures(TR3Level level)

@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Textures;
 
 namespace TextureExport.Types;
@@ -12,21 +11,21 @@ public static class DependencyExporter
         TR1TextureRemapGroup remapGroup = new();
         foreach (TRModel model in level.Models)
         {
-            remapGroup.CalculateDependencies(level, (TREntities)model.ID);
+            remapGroup.CalculateDependencies(level, (TR1Type)model.ID);
         }
 
-        foreach (TextureDependency<TREntities> dependency in remapGroup.Dependencies)
+        foreach (TextureDependency<TR1Type> dependency in remapGroup.Dependencies)
         {
             // We need to ensure Atlantean spawns are accounted for because these are null meshes
-            if (dependency.Entities.Contains(TREntities.FlyingAtlantean))
+            if (dependency.Entities.Contains(TR1Type.FlyingAtlantean))
             {
-                dependency.AddEntity(TREntities.ShootingAtlantean_N);
-                dependency.AddEntity(TREntities.NonShootingAtlantean_N);
+                dependency.AddEntity(TR1Type.ShootingAtlantean_N);
+                dependency.AddEntity(TR1Type.NonShootingAtlantean_N);
                 dependency.Entities.Sort();
             }
         }
 
-        remapGroup.Dependencies.Sort(delegate (TextureDependency<TREntities> d1, TextureDependency<TREntities> d2)
+        remapGroup.Dependencies.Sort(delegate (TextureDependency<TR1Type> d1, TextureDependency<TR1Type> d2)
         {
             if (d1.TileIndex == d2.TileIndex)
             {
@@ -49,7 +48,7 @@ public static class DependencyExporter
         TR2TextureRemapGroup remapGroup = new();
         foreach (TRModel model in level.Models)
         {
-            remapGroup.CalculateDependencies(level, (TR2Entities)model.ID);
+            remapGroup.CalculateDependencies(level, (TR2Type)model.ID);
         }
 
         string dir = @"TR2\Deduplication";
@@ -62,10 +61,10 @@ public static class DependencyExporter
         TR3TextureRemapGroup remapGroup = new();
         foreach (TRModel model in level.Models)
         {
-            remapGroup.CalculateDependencies(level, (TR3Entities)model.ID);
+            remapGroup.CalculateDependencies(level, (TR3Type)model.ID);
         }
 
-        remapGroup.Dependencies.Sort(delegate (TextureDependency<TR3Entities> d1, TextureDependency<TR3Entities> d2)
+        remapGroup.Dependencies.Sort(delegate (TextureDependency<TR3Type> d1, TextureDependency<TR3Type> d2)
         {
             if (d1.TileIndex == d2.TileIndex)
             {

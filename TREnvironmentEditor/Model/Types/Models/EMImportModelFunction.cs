@@ -1,6 +1,5 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Transport;
 
 namespace TREnvironmentEditor.Model.Types;
@@ -14,7 +13,7 @@ public class EMImportModelFunction : BaseEMFunction
         TR1ModelImporter importer = new(Tags?.Contains(EMTag.CommunityPatchOnly) ?? false)
         {
             Level = level,
-            EntitiesToImport = Models.Select(m => (TREntities)m),
+            EntitiesToImport = Models.Select(m => (TR1Type)m),
             DataFolder = @"Resources\TR1\Models"
         };
 
@@ -26,7 +25,7 @@ public class EMImportModelFunction : BaseEMFunction
         TR2ModelImporter importer = new()
         {
             Level = level,
-            EntitiesToImport = Models.Select(m => (TR2Entities)m),
+            EntitiesToImport = Models.Select(m => (TR2Type)m),
             DataFolder = @"Resources\TR2\Models"
         };
 
@@ -38,7 +37,7 @@ public class EMImportModelFunction : BaseEMFunction
         TR3ModelImporter importer = new()
         {
             Level = level,
-            EntitiesToImport = Models.Select(m => (TR3Entities)m),
+            EntitiesToImport = Models.Select(m => (TR3Type)m),
             DataFolder = @"Resources\TR3\Models"
         };
 

@@ -1,7 +1,6 @@
 ﻿using TRGE.Core;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
@@ -69,7 +68,7 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
         }
 
         // Notify the texture monitor that this level is now in night mode
-        TextureMonitor<TR2Entities> monitor = TextureMonitor.CreateMonitor(level.Name);
+        TextureMonitor<TR2Type> monitor = TextureMonitor.CreateMonitor(level.Name);
         monitor.UseNightTextures = true;
     }
 
@@ -98,12 +97,12 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
         List<TR2Entity> items = entities.Where
         (
             e =>
-                TR2EntityUtilities.IsAmmoType((TR2Entities)e.TypeID) ||
-                TR2EntityUtilities.IsGunType((TR2Entities)e.TypeID) ||
-                TR2EntityUtilities.IsUtilityType((TR2Entities)e.TypeID)
+                TR2TypeUtilities.IsAmmoType((TR2Type)e.TypeID) ||
+                TR2TypeUtilities.IsGunType((TR2Type)e.TypeID) ||
+                TR2TypeUtilities.IsUtilityType((TR2Type)e.TypeID)
         ).ToList();
 
-        foreach (TR2Entities entityToReplace in _entitiesToReplace.Keys)
+        foreach (TR2Type entityToReplace in _entitiesToReplace.Keys)
         {
             IEnumerable<TR2Entity> ents = entities.Where(e => e.TypeID == (short)entityToReplace);
             foreach (TR2Entity entity in ents)
@@ -135,9 +134,9 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
         }
     }
 
-    private static readonly Dictionary<TR2Entities, TR2Entities> _entitiesToReplace = new()
+    private static readonly Dictionary<TR2Type, TR2Type> _entitiesToReplace = new()
     {
-        [TR2Entities.SingingBirds_N] = TR2Entities.Flares_S_P // Birds don't sing at night
+        [TR2Type.SingingBirds_N] = TR2Type.Flares_S_P // Birds don't sing at night
     };
 
     private static readonly Dictionary<string, uint[]> _staticMeshesToHide = new()

@@ -1,5 +1,4 @@
 ﻿using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Data;
 using TRModelTransporter.Handlers;
 using TRModelTransporter.Model.Definitions;
@@ -7,19 +6,19 @@ using TRModelTransporter.Model.Textures;
 
 namespace TRModelTransporter.Transport;
 
-public class TR2ModelExporter : AbstractTRModelExporter<TR2Entities, TR2Level, TR2ModelDefinition>
+public class TR2ModelExporter : AbstractTRModelExporter<TR2Type, TR2Level, TR2ModelDefinition>
 {
     public TR2ModelExporter()
     {
         Data = new TR2DefaultDataProvider();
     }
 
-    protected override AbstractTextureExportHandler<TR2Entities, TR2Level, TR2ModelDefinition> CreateTextureHandler()
+    protected override AbstractTextureExportHandler<TR2Type, TR2Level, TR2ModelDefinition> CreateTextureHandler()
     {
         return new TR2TextureExportHandler();
     }
 
-    protected override TR2ModelDefinition CreateModelDefinition(TR2Level level, TR2Entities modelEntity)
+    protected override TR2ModelDefinition CreateModelDefinition(TR2Level level, TR2Type modelEntity)
     {
         TR2ModelDefinition definition = new()
         {
@@ -46,12 +45,12 @@ public class TR2ModelExporter : AbstractTRModelExporter<TR2Entities, TR2Level, T
     {
         switch (definition.Alias)
         {
-            case TR2Entities.FlamethrowerGoonTopixtor:
+            case TR2Type.FlamethrowerGoonTopixtor:
                 AmendDXtre3DTextures(definition);
                 AmendDXtre3DFlameTextures(definition);
                 break;
-            case TR2Entities.Gunman1TopixtorORC:
-            case TR2Entities.Gunman1TopixtorCAC:
+            case TR2Type.Gunman1TopixtorORC:
+            case TR2Type.Gunman1TopixtorCAC:
                 AmendDXtre3DTextures(definition);
                 break;
             default:
@@ -61,16 +60,16 @@ public class TR2ModelExporter : AbstractTRModelExporter<TR2Entities, TR2Level, T
 
     private static void AmendDXtre3DFlameTextures(TR2ModelDefinition definition)
     {
-        if (!definition.SpriteSequences.ContainsKey(TR2Entities.Flame_S_H))
+        if (!definition.SpriteSequences.ContainsKey(TR2Type.Flame_S_H))
         {
             return;
         }
 
         // Ensures the flame sprite is aligned to OG - required for texture monitoring
-        TRSpriteSequence seq = definition.SpriteSequences[TR2Entities.Flame_S_H];
+        TRSpriteSequence seq = definition.SpriteSequences[TR2Type.Flame_S_H];
         seq.Offset += 22;
 
-        Dictionary<int, List<IndexedTRSpriteTexture>> defaultSprites = definition.SpriteTextures[TR2Entities.Flame_S_H];
+        Dictionary<int, List<IndexedTRSpriteTexture>> defaultSprites = definition.SpriteTextures[TR2Type.Flame_S_H];
         foreach (int id in defaultSprites.Keys)
         {
             foreach (IndexedTRSpriteTexture sprite in defaultSprites[id])

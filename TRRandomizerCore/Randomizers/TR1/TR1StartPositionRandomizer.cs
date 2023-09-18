@@ -2,7 +2,6 @@
 using TRFDControl;
 using TRGE.Core;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Utilities;
@@ -37,7 +36,7 @@ public class TR1StartPositionRandomizer : BaseTR1Randomizer
     private void RandomizeStartPosition(TR1CombinedLevel level)
     {
         List<TREntity> entities = level.Data.Entities.ToList();
-        TREntity lara = entities.Find(e => e.TypeID == (short)TREntities.Lara);
+        TREntity lara = entities.Find(e => e.TypeID == (short)TR1Type.Lara);
 
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
@@ -53,7 +52,7 @@ public class TR1StartPositionRandomizer : BaseTR1Randomizer
                 {
                     entities.Add(new TREntity
                     {
-                        TypeID = (short)TREntities.Lara,
+                        TypeID = (short)TR1Type.Lara,
                         X = loc.X,
                         Y = loc.Y,
                         Z = loc.Z,

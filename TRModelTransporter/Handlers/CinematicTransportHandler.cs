@@ -1,12 +1,11 @@
 ﻿using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Definitions;
 
 namespace TRModelTransporter.Handlers;
 
 public class CinematicTransportHandler
 {
-    public static void Export(TR1Level level, TR1ModelDefinition definition, IEnumerable<TREntities> entityTypes)
+    public static void Export(TR1Level level, TR1ModelDefinition definition, IEnumerable<TR1Type> entityTypes)
     {
         List<TRCinematicFrame> frames = new();
         if (entityTypes != null && entityTypes.Contains(definition.Entity))
@@ -17,7 +16,7 @@ public class CinematicTransportHandler
         definition.CinematicFrames = frames.ToArray();
     }
 
-    public static void Export(TR2Level level, TR2ModelDefinition definition, IEnumerable<TR2Entities> entityTypes)
+    public static void Export(TR2Level level, TR2ModelDefinition definition, IEnumerable<TR2Type> entityTypes)
     {
         List<TRCinematicFrame> frames = new();
         if (entityTypes != null && entityTypes.Contains(definition.Entity))
@@ -28,7 +27,7 @@ public class CinematicTransportHandler
         definition.CinematicFrames = frames.ToArray();
     }
 
-    public static void Export(TR3Level level, TR3ModelDefinition definition, IEnumerable<TR3Entities> entityTypes)
+    public static void Export(TR3Level level, TR3ModelDefinition definition, IEnumerable<TR3Type> entityTypes)
     {
         List<TRCinematicFrame> frames = new();
         if (entityTypes != null && entityTypes.Contains(definition.Entity))

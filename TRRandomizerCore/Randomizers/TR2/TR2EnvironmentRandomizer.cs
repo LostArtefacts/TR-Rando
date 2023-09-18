@@ -4,7 +4,7 @@ using TREnvironmentEditor.Model;
 using TREnvironmentEditor.Model.Types;
 using TRGE.Core;
 using TRLevelControl.Helpers;
-using TRLevelControl.Model.Enums;
+using TRLevelControl.Model;
 using TRRandomizerCore.Helpers;
 using TRRandomizerCore.Levels;
 using TRRandomizerCore.Textures;
@@ -201,7 +201,7 @@ public class TR2EnvironmentRandomizer : BaseTR2Randomizer, IMirrorControl
         mapping?.Mirrored.ApplyToLevel(level.Data, picker.Options);
 
         // Notify the texture monitor that this level has been flipped
-        TextureMonitor<TR2Entities> monitor = TextureMonitor.CreateMonitor(level.Name);
+        TextureMonitor<TR2Type> monitor = TextureMonitor.CreateMonitor(level.Name);
         monitor.UseMirroring = true;
     }
 }

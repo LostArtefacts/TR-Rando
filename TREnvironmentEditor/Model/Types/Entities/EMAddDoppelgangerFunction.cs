@@ -1,6 +1,5 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 
 namespace TREnvironmentEditor.Model.Types;
 
@@ -12,7 +11,7 @@ public class EMAddDoppelgangerFunction : EMAddEntityFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        TypeID = (short)TREntities.Doppelganger;
+        TypeID = (short)TR1Type.Doppelganger;
         base.ApplyToLevel(level);
 
         EMLevelData data = GetData(level);

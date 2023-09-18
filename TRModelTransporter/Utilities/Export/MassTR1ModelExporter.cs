@@ -1,13 +1,12 @@
 ﻿using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Transport;
 
 namespace TRModelTransporter.Utilities;
 
-public class MassTR1ModelExporter : AbstractMassTRModelExporter<TREntities, TR1Level, TR1ModelDefinition>
+public class MassTR1ModelExporter : AbstractMassTRModelExporter<TR1Type, TR1Level, TR1ModelDefinition>
 {
     private static readonly List<string> _sourceLevels = TR1LevelNames.AsListWithAssault.Concat(new List<string>
     {
@@ -17,7 +16,7 @@ public class MassTR1ModelExporter : AbstractMassTRModelExporter<TREntities, TR1L
 
     public override List<string> LevelNames => _sourceLevels;
 
-    public override Dictionary<string, List<TREntities>> ExportTypes => _exportModelTypes;
+    public override Dictionary<string, List<TR1Type>> ExportTypes => _exportModelTypes;
 
     private readonly TR1LevelControl _reader;
 
@@ -26,7 +25,7 @@ public class MassTR1ModelExporter : AbstractMassTRModelExporter<TREntities, TR1L
         _reader = new();
     }
 
-    protected override AbstractTRModelExporter<TREntities, TR1Level, TR1ModelDefinition> CreateExporter()
+    protected override AbstractTRModelExporter<TR1Type, TR1Level, TR1ModelDefinition> CreateExporter()
     {
         return new TR1ModelExporter();
     }
@@ -36,75 +35,75 @@ public class MassTR1ModelExporter : AbstractMassTRModelExporter<TREntities, TR1L
         return _reader.Read(path);
     }
 
-    private static readonly Dictionary<string, List<TREntities>> _exportModelTypes = new()
+    private static readonly Dictionary<string, List<TR1Type>> _exportModelTypes = new()
     {
-        [TR1LevelNames.CAVES] = new List<TREntities>
+        [TR1LevelNames.CAVES] = new List<TR1Type>
         {
-            TREntities.Pistols_M_H, TREntities.Shotgun_M_H, TREntities.Magnums_M_H, TREntities.Uzis_M_H,
-            TREntities.Lara, TREntities.Bat, TREntities.Bear, TREntities.Wolf,
-            TREntities.FallingBlock, TREntities.DartEmitter, TREntities.WallSwitch, TREntities.LaraMiscAnim_H_General
+            TR1Type.Pistols_M_H, TR1Type.Shotgun_M_H, TR1Type.Magnums_M_H, TR1Type.Uzis_M_H,
+            TR1Type.Lara, TR1Type.Bat, TR1Type.Bear, TR1Type.Wolf,
+            TR1Type.FallingBlock, TR1Type.DartEmitter, TR1Type.WallSwitch, TR1Type.LaraMiscAnim_H_General
         },
-        [TR1LevelNames.VILCABAMBA] = new List<TREntities>
+        [TR1LevelNames.VILCABAMBA] = new List<TR1Type>
         {
-            TREntities.PushBlock1, TREntities.SwingingBlade, TREntities.Trapdoor1, TREntities.UnderwaterSwitch
+            TR1Type.PushBlock1, TR1Type.SwingingBlade, TR1Type.Trapdoor1, TR1Type.UnderwaterSwitch
         },
-        [TR1LevelNames.VALLEY] = new List<TREntities>
+        [TR1LevelNames.VALLEY] = new List<TR1Type>
         {
-            TREntities.TRex, TREntities.Raptor, TREntities.LaraPonytail_H_U
+            TR1Type.TRex, TR1Type.Raptor, TR1Type.LaraPonytail_H_U
         },
-        [TR1LevelNames.QUALOPEC] = new List<TREntities>
+        [TR1LevelNames.QUALOPEC] = new List<TR1Type>
         {
-            TREntities.Mummy, TREntities.RollingBall, TREntities.FallingCeiling1, TREntities.MovingBlock, TREntities.TeethSpikes
+            TR1Type.Mummy, TR1Type.RollingBall, TR1Type.FallingCeiling1, TR1Type.MovingBlock, TR1Type.TeethSpikes
         },
-        [TR1LevelNames.FOLLY] = new List<TREntities>
+        [TR1LevelNames.FOLLY] = new List<TR1Type>
         {
-            TREntities.CrocodileLand, TREntities.CrocodileWater, TREntities.Gorilla, TREntities.Lion, TREntities.Lioness,
-            TREntities.ThorHammerHandle, TREntities.ThorLightning, TREntities.DamoclesSword
+            TR1Type.CrocodileLand, TR1Type.CrocodileWater, TR1Type.Gorilla, TR1Type.Lion, TR1Type.Lioness,
+            TR1Type.ThorHammerHandle, TR1Type.ThorLightning, TR1Type.DamoclesSword
         },
-        [TR1LevelNames.COLOSSEUM] = new List<TREntities>
+        [TR1LevelNames.COLOSSEUM] = new List<TR1Type>
         {
             
         },
-        [TR1LevelNames.MIDAS] = new List<TREntities>
+        [TR1LevelNames.MIDAS] = new List<TR1Type>
         {
-            TREntities.PushBlock2
+            TR1Type.PushBlock2
         },
-        [TR1LevelNames.CISTERN] = new List<TREntities>
+        [TR1LevelNames.CISTERN] = new List<TR1Type>
         {
-            TREntities.RatLand, TREntities.RatWater
+            TR1Type.RatLand, TR1Type.RatWater
         },
-        [TR1LevelNames.TIHOCAN] = new List<TREntities>
+        [TR1LevelNames.TIHOCAN] = new List<TR1Type>
         {
-            TREntities.CentaurStatue, TREntities.Centaur, TREntities.Pierre, TREntities.ScionPiece_M_H,
-            TREntities.SlammingDoor
+            TR1Type.CentaurStatue, TR1Type.Centaur, TR1Type.Pierre, TR1Type.ScionPiece_M_H,
+            TR1Type.SlammingDoor
         },
-        [TR1LevelNames.KHAMOON] = new List<TREntities>
+        [TR1LevelNames.KHAMOON] = new List<TR1Type>
         {
-            TREntities.Panther
+            TR1Type.Panther
         },
-        [TR1LevelNames.OBELISK] = new List<TREntities>
+        [TR1LevelNames.OBELISK] = new List<TR1Type>
         {
-            TREntities.BandagedAtlantean
+            TR1Type.BandagedAtlantean
         },
-        [TR1LevelNames.SANCTUARY] = new List<TREntities>
+        [TR1LevelNames.SANCTUARY] = new List<TR1Type>
         {
-            TREntities.MeatyFlyer, TREntities.MeatyAtlantean, TREntities.ShootingAtlantean_N, TREntities.Larson
+            TR1Type.MeatyFlyer, TR1Type.MeatyAtlantean, TR1Type.ShootingAtlantean_N, TR1Type.Larson
         },
-        [TR1LevelNames.MINES] = new List<TREntities>
+        [TR1LevelNames.MINES] = new List<TR1Type>
         {
-            TREntities.CowboyOG, TREntities.Kold, TREntities.SkateboardKid
+            TR1Type.CowboyOG, TR1Type.Kold, TR1Type.SkateboardKid
         },
-        [TR1LevelNames.ATLANTIS] = new List<TREntities>
+        [TR1LevelNames.ATLANTIS] = new List<TR1Type>
         {
-            TREntities.Doppelganger, TREntities.AtlanteanEgg
+            TR1Type.Doppelganger, TR1Type.AtlanteanEgg
         },
-        [TR1LevelNames.PYRAMID] = new List<TREntities>
+        [TR1LevelNames.PYRAMID] = new List<TR1Type>
         {
-            TREntities.Adam, TREntities.AdamEgg, TREntities.Natla
+            TR1Type.Adam, TR1Type.AdamEgg, TR1Type.Natla
         },
-        ["LEOC.PHD"] = new List<TREntities>
+        ["LEOC.PHD"] = new List<TR1Type>
         {
-            TREntities.CowboyHeadless
+            TR1Type.CowboyHeadless
         }
     };
 }

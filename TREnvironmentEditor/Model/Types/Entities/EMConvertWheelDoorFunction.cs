@@ -1,6 +1,5 @@
 ﻿using TREnvironmentEditor.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 
 namespace TREnvironmentEditor.Model.Types;
 
@@ -20,7 +19,7 @@ public class EMConvertWheelDoorFunction : BaseEMFunction
     public override void ApplyToLevel(TR2Level level)
     {
         TR2Entity wheel = level.Entities[WheelIndex];
-        if (wheel.TypeID != (short)TR2Entities.WheelKnob)
+        if (wheel.TypeID != (short)TR2Type.WheelKnob)
         {
             // Something else has already converted this
             return;

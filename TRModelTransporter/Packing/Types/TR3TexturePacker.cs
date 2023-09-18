@@ -2,14 +2,13 @@
 using TRLevelControl;
 using TRLevelControl.Helpers;
 using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Textures;
 using TRTexture16Importer;
 
 namespace TRModelTransporter.Packing;
 
-public class TR3TexturePacker : AbstractTexturePacker<TR3Entities, TR3Level>
+public class TR3TexturePacker : AbstractTexturePacker<TR3Type, TR3Level>
 {
     private const int _maximumTiles = 32;
 
@@ -56,22 +55,22 @@ public class TR3TexturePacker : AbstractTexturePacker<TR3Entities, TR3Level>
         return textures;
     }
 
-    protected override TRMesh[] GetModelMeshes(TR3Entities modelEntity)
+    protected override TRMesh[] GetModelMeshes(TR3Type modelEntity)
     {
         return TRMeshUtilities.GetModelMeshes(Level, modelEntity);
     }
 
-    protected override TRSpriteSequence GetSpriteSequence(TR3Entities entity)
+    protected override TRSpriteSequence GetSpriteSequence(TR3Type entity)
     {
         return Level.SpriteSequences.ToList().Find(s => s.SpriteID == (int)entity);
     }
 
-    protected override IEnumerable<TR3Entities> GetAllModelTypes()
+    protected override IEnumerable<TR3Type> GetAllModelTypes()
     {
-        List<TR3Entities> modelIDs = new();
+        List<TR3Type> modelIDs = new();
         foreach (TRModel model in Level.Models)
         {
-            modelIDs.Add((TR3Entities)model.ID);
+            modelIDs.Add((TR3Type)model.ID);
         }
         return modelIDs;
     }

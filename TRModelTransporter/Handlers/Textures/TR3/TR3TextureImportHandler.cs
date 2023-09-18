@@ -1,12 +1,11 @@
 ﻿using TRLevelControl.Model;
-using TRLevelControl.Model.Enums;
 using TRModelTransporter.Helpers;
 using TRModelTransporter.Model.Definitions;
 using TRModelTransporter.Packing;
 
 namespace TRModelTransporter.Handlers;
 
-public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Entities, TR3Level, TR3ModelDefinition>
+public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Type, TR3Level, TR3ModelDefinition>
 {
     protected override IEnumerable<TRSpriteSequence> GetExistingSpriteSequences()
     {
@@ -30,17 +29,17 @@ public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Entities,
         _level.NumSpriteTextures = (uint)_level.SpriteTextures.Length;
     }
 
-    protected override AbstractTexturePacker<TR3Entities, TR3Level> CreatePacker()
+    protected override AbstractTexturePacker<TR3Type, TR3Level> CreatePacker()
     {
         return new TR3TexturePacker(_level);
     }
 
-    protected override void ProcessRemovals(AbstractTexturePacker<TR3Entities, TR3Level> packer)
+    protected override void ProcessRemovals(AbstractTexturePacker<TR3Type, TR3Level> packer)
     {
-        List<TR3Entities> removals = new();
+        List<TR3Type> removals = new();
         if (_clearUnusedSprites)
         {
-            removals.Add(TR3Entities.Map_H);
+            removals.Add(TR3Type.Map_H);
         }
 
         if (_entitiesToRemove != null)
@@ -55,24 +54,24 @@ public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Entities,
         }
     }
 
-    private void RemoveUnusedSprites(AbstractTexturePacker<TR3Entities, TR3Level> packer)
+    private void RemoveUnusedSprites(AbstractTexturePacker<TR3Type, TR3Level> packer)
     {
-        List<TR3Entities> unusedItems = new()
+        List<TR3Type> unusedItems = new()
         {
-            TR3Entities.PistolAmmo_M_H,
-            TR3Entities.Map_H,
-            TR3Entities.Disc_H
+            TR3Type.PistolAmmo_M_H,
+            TR3Type.Map_H,
+            TR3Type.Disc_H
         };
 
-        ISet<TR3Entities> allEntities = new HashSet<TR3Entities>();
+        ISet<TR3Type> allEntities = new HashSet<TR3Type>();
         for (int i = 0; i < _level.Entities.Length; i++)
         {
-            allEntities.Add((TR3Entities)_level.Entities[i].TypeID);
+            allEntities.Add((TR3Type)_level.Entities[i].TypeID);
         }
 
         for (int i = unusedItems.Count - 1; i >= 0; i--)
         {
-            if (unusedItems[i] != TR3Entities.Disc_H && allEntities.Contains(unusedItems[i]))
+            if (unusedItems[i] != TR3Type.Disc_H && allEntities.Contains(unusedItems[i]))
             {
                 unusedItems.RemoveAt(i);
             }
@@ -120,8 +119,8 @@ public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Entities,
         _level.ResetUnusedTextures();
     }
 
-    protected override IEnumerable<TR3Entities> CollateWatchedTextures(IEnumerable<TR3Entities> watchedEntities, TR3ModelDefinition definition)
+    protected override IEnumerable<TR3Type> CollateWatchedTextures(IEnumerable<TR3Type> watchedEntities, TR3ModelDefinition definition)
     {
-        return new List<TR3Entities>();
+        return new List<TR3Type>();
     }
 }
