@@ -37,7 +37,7 @@ public class EMConvertModelFunction : BaseEMFunction
         }
     }
 
-    private void UpdateModelEntities(TR1Entity[] entities)
+    private void UpdateModelEntities(List<TR1Entity> entities)
     {
         foreach (TR1Entity entity in entities)
         {

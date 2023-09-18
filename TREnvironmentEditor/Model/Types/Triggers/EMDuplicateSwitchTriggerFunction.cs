@@ -72,7 +72,7 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         control.WriteToLevel(level);
     }
 
-    private void SetupLocations(EMLevelData data, TR1Entity[] entities)
+    private void SetupLocations(EMLevelData data, List<TR1Entity> entities)
     {
         // Get a location for the switch we're interested in
         TR1Entity switchEntity = entities[data.ConvertEntity(NewSwitchIndex)];

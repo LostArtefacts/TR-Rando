@@ -40,7 +40,7 @@ public class TR1SecretRewardRandomizer : BaseTR1Randomizer
         stdItemTypes.Remove(TR1Type.PistolAmmo_S_P); // Sprite/model not available
         stdItemTypes.Remove(TR1Type.Pistols_S_P); // A bit cruel as a reward?
 
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             if (!secretMapping.RewardEntities.Contains(i))
             {

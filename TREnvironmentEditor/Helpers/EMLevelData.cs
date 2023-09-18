@@ -45,7 +45,7 @@ public class EMLevelData
         return new EMLevelData
         {
             NumCameras = level.NumCameras,
-            NumEntities = level.NumEntities,
+            NumEntities = (uint)level.Entities.Count, // Temp: change to int
             NumRooms = level.NumRooms
         };
     }

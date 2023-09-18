@@ -715,8 +715,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         if (level.Is(TR1LevelNames.TIHOCAN) && level.Data.Entities[82].TypeID != (short)TR1Type.Pierre)
         {
             // Add a guaranteed key at the end of the level. Item rando can reposition it.
-            List<TR1Entity> entities = level.Data.Entities.ToList();
-            entities.Add(new TR1Entity
+            level.Data.Entities.Add(new()
             {
                 TypeID = (short)TR1Type.Key1_S_P,
                 X = 30208,
@@ -725,8 +724,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 Room = 110,
                 Intensity = 6144
             });
-            level.Data.Entities = entities.ToArray();
-            level.Data.NumEntities++;
         }
 
         // Fix missing OG animation SFX
@@ -845,33 +842,32 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     {
         // We want to keep Adam's egg, but simulate something else hatching.
         // In hard mode, two enemies take his place.
-        List<TR1Entity> entities = level.Data.Entities.ToList();
         level.RemoveModel(TR1Type.Adam);
         
-        TR1Entity egg = entities.Find(e => e.TypeID == (short)TR1Type.AdamEgg);
-        TR1Entity lara = entities.Find(e => e.TypeID == (short)TR1Type.Lara);
+        TR1Entity egg = level.Data.Entities.Find(e => e.TypeID == (short)TR1Type.AdamEgg);
+        TR1Entity lara = level.Data.Entities.Find(e => e.TypeID == (short)TR1Type.Lara);
 
         EMAppendTriggerActionFunction trigFunc = new()
         {
-            Location = new EMLocation
+            Location = new()
             {
                 X = lara.X,
                 Y = lara.Y,
                 Z = lara.Z,
                 Room = lara.Room
             },
-            Actions = new List<EMTriggerAction>()
+            Actions = new()
         };
 
         int count = Settings.RandoEnemyDifficulty == RandoDifficulty.Default ? 1 : 2;
         for (int i = 0; i < count; i++)
         {
-            trigFunc.Actions.Add(new EMTriggerAction
+            trigFunc.Actions.Add(new()
             {
-                Parameter = (short)entities.Count
+                Parameter = (short)level.Data.Entities.Count
             });
 
-            entities.Add(new TR1Entity
+            level.Data.Entities.Add(new()
             {
                 TypeID = (short)TR1Type.Adam,
                 X = egg.X,
@@ -883,9 +879,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 Invisible = true
             });
         }
-
-        level.Data.Entities = entities.ToArray();
-        level.Data.NumEntities = (ushort)entities.Count;
 
         trigFunc.ApplyToLevel(level.Data);
     }
@@ -979,9 +972,8 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         // Find out which gun we have for this level
-        List<TR1Entity> levelEntities = level.Data.Entities.ToList();
         List<TR1Type> weaponTypes = TR1TypeUtilities.GetWeaponPickups();
-        List<TR1Entity> levelWeapons = levelEntities.FindAll(e => weaponTypes.Contains((TR1Type)e.TypeID));
+        List<TR1Entity> levelWeapons = level.Data.Entities.FindAll(e => weaponTypes.Contains((TR1Type)e.TypeID));
         TR1Entity weaponEntity = null;
         foreach (TR1Entity weapon in levelWeapons)
         {
@@ -1006,14 +998,14 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         List<TR1Type> allEnemies = TR1TypeUtilities.GetFullListOfEnemies();
-        List<TR1Entity> levelEnemies = levelEntities.FindAll(e => allEnemies.Contains((TR1Type)e.TypeID));
+        List<TR1Entity> levelEnemies = level.Data.Entities.FindAll(e => allEnemies.Contains((TR1Type)e.TypeID));
         // #409 Eggs are excluded as they are not part of the cross-level enemy pool, so create copies of any
         // of these using their actual types so to ensure they are part of the difficulty calculation.
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
-        for (int i = 0; i < levelEntities.Count; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
-            TR1Entity entity = levelEntities[i];
+            TR1Entity entity = level.Data.Entities[i];
             if ((entity.TypeID == (short)TR1Type.AtlanteanEgg || entity.TypeID == (short)TR1Type.AdamEgg)
                 && FDUtilities.GetEntityTriggers(floorData, i).Count > 0)
             {
@@ -1070,17 +1062,16 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         // Add the pistols as a pickup if the level is hard and there aren't any other pistols around
-        if (difficulty > EnemyDifficulty.Medium && levelWeapons.Find(e => e.TypeID == (short)TR1Type.Pistols_S_P) == null && ItemFactory.CanCreateItem(level.Name, levelEntities))
+        if (difficulty > EnemyDifficulty.Medium
+            && levelWeapons.Find(e => e.TypeID == (short)TR1Type.Pistols_S_P) == null
+            && ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
         {
-            TR1Entity pistols = ItemFactory.CreateItem(level.Name, levelEntities);
+            TR1Entity pistols = ItemFactory.CreateItem(level.Name, level.Data.Entities);
             pistols.TypeID = (short)TR1Type.Pistols_S_P;
             pistols.X = weaponEntity.X;
             pistols.Y = weaponEntity.Y;
             pistols.Z = weaponEntity.Z;
             pistols.Room = weaponEntity.Room;
-
-            level.Data.Entities = levelEntities.ToArray();
-            level.Data.NumEntities++;
         }
     }
 
@@ -1275,12 +1266,11 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     private void CloneEnemies(TR1CombinedLevel level)
     {
         List<TR1Type> enemyTypes = TR1TypeUtilities.GetFullListOfEnemies();
-        List<TR1Entity> levelEntities = level.Data.Entities.ToList();
-        List<TR1Entity> enemies = levelEntities.FindAll(e => enemyTypes.Contains((TR1Type)e.TypeID));
+        List<TR1Entity> enemies = level.Data.Entities.FindAll(e => enemyTypes.Contains((TR1Type)e.TypeID));
 
         // If Adam is still in his egg, clone the egg as well. Otherwise there will be separate
         // entities inside the egg that will have already been accounted for.
-        TR1Entity adamEgg = levelEntities.Find(e => e.TypeID == (short)TR1Type.AdamEgg);
+        TR1Entity adamEgg = level.Data.Entities.Find(e => e.TypeID == (short)TR1Type.AdamEgg);
         if (adamEgg != null
             && CodeBitsToAtlantean(adamEgg.CodeBits) == TR1Type.Adam
             && Array.Find(level.Data.Models, m => m.ID == (uint)TR1Type.Adam) != null)
@@ -1296,7 +1286,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         foreach (TR1Entity enemy in enemies)
         {
-            List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(floorData, levelEntities.IndexOf(enemy));
+            List<FDTriggerEntry> triggers = FDUtilities.GetEntityTriggers(floorData, level.Data.Entities.IndexOf(enemy));
             if (Settings.UseKillableClonePierres && enemy.TypeID == (short)TR1Type.Pierre)
             {
                 // Ensure OneShot, otherwise only ever one runaway Pierre
@@ -1310,12 +1300,12 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                     trigger.TrigActionList.Add(new()
                     {
                         TrigAction = FDTrigAction.Object,
-                        Parameter = (ushort)levelEntities.Count
+                        Parameter = (ushort)level.Data.Entities.Count
                     });
                 }
 
                 TR1Entity clone = enemy.Clone();
-                levelEntities.Add(clone);
+                level.Data.Entities.Add(clone);
 
                 if (enemy.TypeID != (short)TR1Type.AtlanteanEgg
                     && enemy.TypeID != (short)TR1Type.AdamEgg)
@@ -1326,8 +1316,6 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         floorData.WriteToLevel(level.Data);
-        level.Data.Entities = levelEntities.ToArray();
-        level.Data.NumEntities = (uint)levelEntities.Count;
     }
 
     internal class EnemyProcessor : AbstractProcessorThread<TR1EnemyRandomizer>

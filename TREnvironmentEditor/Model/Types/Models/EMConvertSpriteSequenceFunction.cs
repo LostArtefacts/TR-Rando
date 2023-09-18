@@ -37,7 +37,7 @@ public class EMConvertSpriteSequenceFunction : BaseEMFunction
         }
     }
 
-    private void UpdateSpriteEntities(TR1Entity[] entities)
+    private void UpdateSpriteEntities(List<TR1Entity> entities)
     {
         foreach (TR1Entity entity in entities)
         {

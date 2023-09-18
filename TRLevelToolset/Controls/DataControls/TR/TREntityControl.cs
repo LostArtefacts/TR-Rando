@@ -10,7 +10,7 @@ internal class TREntityControl : IDrawable
     {
         if (ImGui.TreeNodeEx("Entity Data", ImGuiTreeNodeFlags.OpenOnArrow))
         {
-            ImGui.Text("Entity count: " + IOManager.CurrentLevelAsTR1?.NumEntities);
+            ImGui.Text("Entity count: " + IOManager.CurrentLevelAsTR1?.Entities.Count);
 
             ImGui.TreePop();
         }

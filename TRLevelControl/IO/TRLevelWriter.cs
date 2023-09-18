@@ -107,4 +107,24 @@ public class TRLevelWriter : BinaryWriter
         Write(colour.Blue);
         Write(colour.Alpha);
     }
+
+    public void Write(IEnumerable<TR1Entity> entities)
+    {
+        foreach (TR1Entity entity in entities)
+        {
+            Write(entity);
+        }
+    }
+
+    public void Write(TR1Entity entity)
+    {
+        Write(entity.TypeID);
+        Write(entity.Room);
+        Write(entity.X);
+        Write(entity.Y);
+        Write(entity.Z);
+        Write(entity.Angle);
+        Write(entity.Intensity);
+        Write(entity.Flags);
+    }
 }

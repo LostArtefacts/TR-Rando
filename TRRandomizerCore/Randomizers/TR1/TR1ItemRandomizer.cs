@@ -157,20 +157,16 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         stdItemTypes.Remove(TR1Type.PistolAmmo_S_P);
 
         // Add what we can to the level. The locations and types may be further randomized depending on the selected options.
-        List<TR1Entity> entities = level.Data.Entities.ToList();
         for (int i = 0; i < _extraItemCounts[level.Name]; i++)
         {
-            if (!ItemFactory.CanCreateItem(level.Name, entities))
+            if (!ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
             {
                 break;
             }
 
-            TR1Entity newItem = ItemFactory.CreateItem(level.Name, entities, _locations[_generator.Next(0, _locations.Count)]);
+            TR1Entity newItem = ItemFactory.CreateItem(level.Name, level.Data.Entities, _locations[_generator.Next(0, _locations.Count)]);
             newItem.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
         }
-
-        level.Data.Entities = entities.ToArray();
-        level.Data.NumEntities = (uint)entities.Count;
     }
 
     public void RandomizeItemTypes(TR1CombinedLevel level)
@@ -183,9 +179,9 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         List<TR1Type> stdItemTypes = TR1TypeUtilities.GetStandardPickupTypes();
         stdItemTypes.Remove(TR1Type.PistolAmmo_S_P); // Sprite/model not available
 
-        bool hasPistols = Array.Find(level.Data.Entities, e => e.TypeID == (short)TR1Type.Pistols_S_P) != null;
+        bool hasPistols = level.Data.Entities.Find(e => e.TypeID == (short)TR1Type.Pistols_S_P) != null;
 
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             if (_secretMapping.RewardEntities.Contains(i))
             {
@@ -225,7 +221,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
                 entity.TypeID = (short)newType;
             }
 
-            hasPistols = Array.Find(level.Data.Entities, e => e.TypeID == (short)TR1Type.Pistols_S_P) != null;
+            hasPistols = level.Data.Entities.Find(e => e.TypeID == (short)TR1Type.Pistols_S_P) != null;
         }
     }
 
@@ -244,7 +240,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         }
 
         // Look for extra utility/ammo items and hide them
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR1Entity ent = level.Data.Entities[i];
             if (_secretMapping.RewardEntities.Contains(i) || ent == _unarmedLevelPistols)
@@ -272,7 +268,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             return;
         }
 
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             if (_secretMapping.RewardEntities.Contains(i)
                 || ItemFactory.IsItemLocked(_levelInstance.Name, i))
@@ -357,7 +353,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         FDControl floorData = new();
         floorData.ParseFromLevel(level.Data);
 
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR1Entity entity = level.Data.Entities[i];
             TR1Type type = (TR1Type)entity.TypeID;
@@ -425,7 +421,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         floorData.ParseFromLevel(_levelInstance.Data);
         foreach (TR1Type type in TR1TypeUtilities.GetKeyItemTypes())
         {
-            int typeInstanceIndex = Array.FindIndex(_levelInstance.Data.Entities, e => e.TypeID == (short)type);
+            int typeInstanceIndex = _levelInstance.Data.Entities.FindIndex(e => e.TypeID == (short)type);
             if (typeInstanceIndex != -1)
             {
                 if (IsSecretItem(_levelInstance.Data.Entities[typeInstanceIndex], typeInstanceIndex, _levelInstance.Data, floorData))

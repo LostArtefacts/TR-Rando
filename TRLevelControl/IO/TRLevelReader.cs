@@ -120,4 +120,29 @@ public class TRLevelReader : BinaryReader
         }
         return colours;
     }
+
+    public List<TR1Entity> ReadTR1Entities(long numEntities)
+    {
+        List<TR1Entity> entities = new();
+        for (int i = 0; i < numEntities; i++)
+        {
+            entities.Add(ReadTR1Entity());
+        }
+        return entities;
+    }
+
+    public TR1Entity ReadTR1Entity()
+    {
+        return new()
+        {
+            TypeID = ReadInt16(),
+            Room = ReadInt16(),
+            X = ReadInt32(),
+            Y = ReadInt32(),
+            Z = ReadInt32(),
+            Angle = ReadInt16(),
+            Intensity = ReadInt16(),
+            Flags = ReadUInt16()
+        };
+    }
 }
