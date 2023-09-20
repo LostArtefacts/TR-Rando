@@ -135,7 +135,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
     {
         if (level.Script.RemovesWeapons)
         {
-            List<TR3Entity> pistolEntities = level.Data.Entities.FindAll(e => e.TypeID == (short)TR3Type.Pistols_P);
+            List<TR3Entity> pistolEntities = level.Data.Entities.FindAll(e => e.TypeID == TR3Type.Pistols_P);
             foreach (TR3Entity pistols in pistolEntities)
             {
                 int match = _pistolLocations[level.Name].FindIndex
@@ -180,7 +180,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             {
                 do
                 {
-                    ent.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                    ent.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
                 }
                 while (!TR3TypeUtilities.IsWeaponPickup((TR3Type)ent.TypeID));
 
@@ -192,7 +192,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             }
             else if (TR3TypeUtilities.IsStandardPickupType(currentType))
             {
-                ent.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+                ent.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
             }
         }
     }

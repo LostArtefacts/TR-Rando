@@ -416,7 +416,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                     List<Location> paths = TR3EnemyUtilities.GetAIPathing(level.Name, entity, targetEntity.Room);
                     if (ItemFactory.CanCreateItems(level.Name, level.Data.Entities, paths.Count))
                     {
-                        targetEntity.TypeID = (short)TR3TypeUtilities.TranslateAlias(entity);
+                        targetEntity.TypeID = TR3TypeUtilities.TranslateAlias(entity);
 
                         // #146 Ensure OneShot triggers are set for this enemy if needed
                         TR3EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
@@ -428,7 +428,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                         foreach (Location path in paths)
                         {
                             TR3Entity pathItem = ItemFactory.CreateItem(level.Name, level.Data.Entities, path);
-                            pathItem.TypeID = (short)TR3Type.AIPath_N;
+                            pathItem.TypeID = TR3Type.AIPath_N;
                         }
                     }
                     else
@@ -491,7 +491,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             int maxEntityCount = TR3EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, Settings.RandoEnemyDifficulty);
             if (maxEntityCount != -1)
             {
-                if (level.Data.Entities.FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount && enemyPool.Count > maxEntityCount)
+                if (level.Data.Entities.FindAll(e => e.TypeID == newEntityType).Count >= maxEntityCount && enemyPool.Count > maxEntityCount)
                 {
                     TR3Type tmp = newEntityType;
                     while (newEntityType == tmp || TR3EnemyUtilities.IsEnemyRestricted(level.Name, newEntityType))
@@ -511,11 +511,11 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                 // as raptors.
                 if (!enemies.Available.Contains(TR3Type.Raptor))
                 {
-                    TR3Entity raptorSpawn = level.Data.Entities.Find(e => e.TypeID == (short)TR3Type.RaptorRespawnPoint_N && e.Room != 15);
+                    TR3Entity raptorSpawn = level.Data.Entities.Find(e => e.TypeID == TR3Type.RaptorRespawnPoint_N && e.Room != 15);
                     if (raptorSpawn != null)
                     {
-                        (targetEntity = raptorSpawn).TypeID = (short)TR3TypeUtilities.TranslateAlias(newEntityType);
-                        currentEntity.TypeID = (short)TR3Type.RaptorRespawnPoint_N;
+                        (targetEntity = raptorSpawn).TypeID = TR3TypeUtilities.TranslateAlias(newEntityType);
+                        currentEntity.TypeID = TR3Type.RaptorRespawnPoint_N;
                     }
                 }
             }
@@ -568,7 +568,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             }
             
             // Make sure to convert back to the actual type
-            targetEntity.TypeID = (short)TR3TypeUtilities.TranslateAlias(newEntityType);
+            targetEntity.TypeID = TR3TypeUtilities.TranslateAlias(newEntityType);
 
             // #146 Ensure OneShot triggers are set for this enemy if needed
             TR3EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
@@ -576,7 +576,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             // #291 Cobras don't seem to come back into reality when the
             // engine disables them when too many enemies are active, unless
             // invisible is false.
-            if (targetEntity.TypeID == (short)TR3Type.Cobra)
+            if (targetEntity.TypeID == TR3Type.Cobra)
             {
                 targetEntity.Invisible = false;
             }
@@ -631,9 +631,9 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
         if (difficulty > EnemyDifficulty.Easy)
         {
-            while (weaponEntity.TypeID == (short)TR3Type.Pistols_P)
+            while (weaponEntity.TypeID == TR3Type.Pistols_P)
             {
-                weaponEntity.TypeID = (short)weaponTypes[_generator.Next(0, weaponTypes.Count)];
+                weaponEntity.TypeID = weaponTypes[_generator.Next(0, weaponTypes.Count)];
             }
         }
 
@@ -666,10 +666,10 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         }
 
         // Add the pistols as a pickup if the level is hard and there aren't any other pistols around
-        if (difficulty > EnemyDifficulty.Medium && levelWeapons.Find(e => e.TypeID == (short)TR3Type.Pistols_P) == null && ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
+        if (difficulty > EnemyDifficulty.Medium && levelWeapons.Find(e => e.TypeID == TR3Type.Pistols_P) == null && ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
         {
             TR3Entity pistols = ItemFactory.CreateItem(level.Name, level.Data.Entities);
-            pistols.TypeID = (short)TR3Type.Pistols_P;
+            pistols.TypeID = TR3Type.Pistols_P;
             pistols.X = weaponEntity.X;
             pistols.Y = weaponEntity.Y;
             pistols.Z = weaponEntity.Z;

@@ -63,9 +63,9 @@ public class EMConvertSpriteSequenceFunction : BaseEMFunction
     {
         foreach (TR3Entity entity in entities)
         {
-            if (entity.TypeID == OldSpriteID)
+            if (entity.TypeID == (TR3Type)OldSpriteID)
             {
-                entity.TypeID = NewSpriteID;
+                entity.TypeID = (TR3Type)NewSpriteID;
             }
         }
     }

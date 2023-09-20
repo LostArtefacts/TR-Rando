@@ -219,7 +219,7 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
         // Do a global check for monkeys that may be sitting on more than one pickup.
         // This has to happen after item, enemy and environment rando to account for
         // any shifted, converted and added items.
-        List<TR3Entity> monkeys = level.Data.Entities.FindAll(e => e.TypeID == (short)TR3Type.Monkey);
+        List<TR3Entity> monkeys = level.Data.Entities.FindAll(e => e.TypeID == TR3Type.Monkey);
         foreach (TR3Entity monkey in monkeys)
         {
             List<TR3Entity> pickups = level.Data.Entities.FindAll(e =>

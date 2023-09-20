@@ -1,56 +1,22 @@
 ﻿namespace TRLevelControl.Model;
 
-public class TR3Entity
+public class TR3Entity : TREntity<TR3Type>, ICloneable
 {
-    public short TypeID { get; set; }
-    public short Room { get; set; }
-    public int X { get; set; }
-    public int Y { get; set; }
-    public int Z { get; set; }
-    public short Angle { get; set; }
     public short Intensity1 { get; set; }
     public short Intensity2 { get; set; }
-    public ushort Flags { get; set; }
 
-    public bool ClearBody
+    public TR3Entity Clone()
     {
-        get => (Flags & 0x8000) > 0;
-        set
-        {
-            if (value)
-            {
-                Flags |= 0x8000;
-            }
-            else
-            {
-                Flags = (ushort)(Flags & ~0x8000);
-            }
-        }
+        return (TR3Entity)MemberwiseClone();
     }
 
-    public bool Invisible
+    object ICloneable.Clone()
     {
-        get => (Flags & 0x100) > 0;
-        set
-        {
-            if (value)
-            {
-                Flags |= 0x100;
-            }
-            else
-            {
-                Flags = (ushort)(Flags & ~0x100);
-            }
-        }
+        return Clone();
     }
 
-    public ushort CodeBits
+    public override string ToString()
     {
-        get => (ushort)((Flags & 0x3E00) >> 9);
-        set
-        {
-            Flags = (ushort)(Flags & ~(Flags & 0x3E00));
-            Flags |= (ushort)(value << 9);
-        }
+        return $"{base.ToString()} Intensity1: {Intensity1} Intensity2: {Intensity2}";
     }
 }

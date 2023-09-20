@@ -25,7 +25,7 @@ public class EMAdjustEntityPositionFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        List<TR3Entity> entities = level.Entities.FindAll(e => e.TypeID == EntityType);
+        List<TR3Entity> entities = level.Entities.FindAll(e => (short)e.TypeID == EntityType);
         AdjustEntities(entities);
     }
 

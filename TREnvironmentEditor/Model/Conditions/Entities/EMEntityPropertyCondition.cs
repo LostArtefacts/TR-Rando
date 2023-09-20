@@ -137,11 +137,11 @@ public class EMEntityPropertyCondition : BaseEMCondition
         bool result = true;
         if (EntityType.HasValue)
         {
-            result &= entity.TypeID == EntityType.Value;
+            result &= (short)entity.TypeID == EntityType.Value;
         }
         if (EntityTypes != null)
         {
-            result &= EntityTypes.Contains(entity.TypeID);
+            result &= EntityTypes.Contains((short)entity.TypeID);
         }
         if (Invisible.HasValue)
         {

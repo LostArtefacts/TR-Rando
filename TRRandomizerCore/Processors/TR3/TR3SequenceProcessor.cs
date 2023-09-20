@@ -182,37 +182,37 @@ public class TR3SequenceProcessor : TR3LevelProcessor
                 break;
             }
 
-            entity.TypeID = (short)TR3Type.UPV;
+            entity.TypeID = TR3Type.UPV;
         }
 
         // We can only have one vehicle type per level because LaraVehicleAnimation_H is tied to
         // each, so for the likes of Nevada, replace the quad with another UPV to fly into HSC.
         level.Data.Entities
-            .FindAll(e => e.TypeID == (short)TR3Type.Quad)
-            .ForEach(e => e.TypeID = (short)TR3Type.UPV);
+            .FindAll(e => e.TypeID == TR3Type.Quad)
+            .ForEach(e => e.TypeID = TR3Type.UPV);
 
         // If we're not randomizing enemies, we have to perform the monkey/tiger/vehicle crash
         // test here for the likes of Jungle.
         if (!Settings.RandomizeEnemies
-            && level.Data.Entities.Any(e => e.TypeID == (short)TR3Type.Monkey)
-            && level.Data.Models.Any(m => m.ID == (uint)TR3Type.Tiger))
+            && level.Data.Entities.Any(e => e.TypeID == TR3Type.Monkey)
+            && level.Data.Models.Any(m => (TR3Type)m.ID == TR3Type.Tiger))
         {
             level.RemoveModel(TR3Type.Tiger);
-            level.Data.Entities.Where(e => e.TypeID == (short)TR3Type.Tiger)
+            level.Data.Entities.Where(e => e.TypeID == TR3Type.Tiger)
                 .ToList()
-                .ForEach(e => e.TypeID = (short)TR3Type.Monkey);
+                .ForEach(e => e.TypeID = TR3Type.Monkey);
         }
     }
 
     private static void AddColdLevelMedis(TR3CombinedLevel level)
     {
-        if (!level.Data.Entities.Any(e => e.TypeID == (short)TR3Type.UPV))
+        if (!level.Data.Entities.Any(e => e.TypeID == TR3Type.UPV))
         {
             return;
         }
         
         uint largeMediCount = _defaultColdMediCount;
-        uint smallMediCount = (uint)Math.Ceiling(level.Data.Entities.Where(e => e.TypeID == (short)TR3Type.UnderwaterSwitch).Count() / 2d);
+        uint smallMediCount = (uint)Math.Ceiling(level.Data.Entities.Where(e => e.TypeID == TR3Type.UnderwaterSwitch).Count() / 2d);
         if (smallMediCount > 0)
         {
             largeMediCount++;
@@ -290,7 +290,9 @@ public class TR3SequenceProcessor : TR3LevelProcessor
                 StartingMesh = artefactModel.StartingMesh
             });
 
-            level.Data.Entities.FindAll(e => e.TypeID == (short)artefact).ForEach(e => e.TypeID = (short)replacement);
+            level.Data.Entities
+                .FindAll(e => e.TypeID == artefact)
+                .ForEach(e => e.TypeID = replacement);
         }
 
         // Copy the artefact names into the keys
@@ -312,7 +314,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
             TR3Type type = (TR3Type)entity.TypeID;
             if (type == TR3Type.AIPath_N || type == TR3Type.AICheck_N)
             {
-                entity.TypeID = (short)TR3Type.PistolAmmo_M_H;
+                entity.TypeID = TR3Type.PistolAmmo_M_H;
                 entity.X = 66048;
                 entity.Y = 768;
                 entity.Z = 67072;
@@ -335,8 +337,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private static void AmendSouthPacificSpikes(TR3CombinedLevel level)
     {
-        short spikes = (short)TR3Type.TeethSpikesOrBarbedWire;
-        List<TR3Entity> entities = level.Data.Entities.FindAll(e => e.TypeID == spikes);
+        List<TR3Entity> entities = level.Data.Entities.FindAll(e => e.TypeID == TR3Type.TeethSpikesOrBarbedWire);
         foreach (TR3Entity entity in entities)
         {
             if (level.Is(TR3LevelNames.MADUBU) || entity.CodeBits == 31)
@@ -352,7 +353,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private static void AmendCrashSitePiranhas(TR3CombinedLevel level)
     {
-        TR3Entity piranhas = level.Data.Entities.Find(e => e.TypeID == (short)TR3Type.Piranhas_N && e.Room == 61);
+        TR3Entity piranhas = level.Data.Entities.Find(e => e.TypeID == TR3Type.Piranhas_N && e.Room == 61);
         if (piranhas != null)
         {
             // Move them behind the gate, which is an unreachable room

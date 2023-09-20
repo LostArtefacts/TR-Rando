@@ -371,7 +371,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 {
                     // This will either make a new entity or repurpose an old one
                     TR3Entity entity = ItemFactory.CreateItem(level.Name, level.Data.Entities, secret.Location, true);
-                    entity.TypeID = (short)secret.PickupType;
+                    entity.TypeID = secret.PickupType;
 
                     secretIndex++;
                     pickupIndex++;
@@ -452,7 +452,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             {
                 // This will either make a new entity or repurpose an old one
                 TR3Entity entity = ItemFactory.CreateItem(level.Name, level.Data.Entities, secret.Location);
-                entity.TypeID = (short)secret.PickupType;
+                entity.TypeID = secret.PickupType;
 
                 secret.SecretIndex++;
                 pickupIndex++;
@@ -544,7 +544,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 Location location = pool[_generator.Next(0, pool.Count)];
 
                 TR3Entity medi = ItemFactory.CreateItem(level.Name, level.Data.Entities, location, Settings.DevelopmentMode);
-                medi.TypeID = (short)TR3Type.LargeMed_P;
+                medi.TypeID = TR3Type.LargeMed_P;
             }
             else
             {

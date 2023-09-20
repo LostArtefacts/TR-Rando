@@ -50,7 +50,7 @@ public class EMMoveSecretFunction : EMMovePickupFunction
             int entityIndex = location.GetContainedSecretEntity(level, floorData);
             if (entityIndex != -1)
             {
-                Types.Add(level.Entities[entityIndex].TypeID);
+                Types.Add((short)level.Entities[entityIndex].TypeID);
             }
         }
 
