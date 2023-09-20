@@ -226,7 +226,7 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
                     e.X == monkey.X &&
                     e.Y == monkey.Y &&
                     e.Z == monkey.Z &&
-                    TR3TypeUtilities.IsAnyPickupType((TR3Type)e.TypeID)).ToList();
+                    TR3TypeUtilities.IsAnyPickupType(e.TypeID)).ToList();
 
             if (pickups.Count == 1)
             {
@@ -235,7 +235,7 @@ public class TR3EnvironmentRandomizer : BaseTR3Randomizer, IMirrorControl
 
             // Leave one item to drop, favouring key items. The others will be shifted
             // slightly so the monkey doesn't pick them up.
-            pickups.Sort((e1, e2) => TR3TypeUtilities.IsKeyItemType((TR3Type)e1.TypeID) ? 1 : -1);
+            pickups.Sort((e1, e2) => TR3TypeUtilities.IsKeyItemType(e1.TypeID) ? 1 : -1);
             for (int i = 0; i < pickups.Count - 1; i++)
             {
                 ++pickups[i].X;

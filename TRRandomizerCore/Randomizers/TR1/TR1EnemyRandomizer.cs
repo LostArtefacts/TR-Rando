@@ -373,7 +373,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     {
         List<TR1Type> allGameEnemies = TR1TypeUtilities.GetFullListOfEnemies();
         ISet<TR1Type> allLevelEnts = new SortedSet<TR1Type>();
-        level.Data.Entities.ForEach(e => allLevelEnts.Add((TR1Type)e.TypeID));
+        level.Data.Entities.ForEach(e => allLevelEnts.Add(e.TypeID));
         List<TR1Type> oldEntities = allLevelEnts.ToList().FindAll(e => allGameEnemies.Contains(e));
         return oldEntities;
     }
@@ -447,7 +447,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         // Get a list of current enemy entities
         List<TR1Type> allEnemies = TR1TypeUtilities.GetFullListOfEnemies();
-        List<TR1Entity> enemyEntities = level.Data.Entities.FindAll(e => allEnemies.Contains((TR1Type)e.TypeID));
+        List<TR1Entity> enemyEntities = level.Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
 
         RandoDifficulty difficulty = GetImpliedDifficulty();
 
@@ -524,7 +524,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 continue;
             }
 
-            TR1Type currentEntityType = (TR1Type)currentEntity.TypeID;
+            TR1Type currentEntityType = currentEntity.TypeID;
             TR1Type newEntityType = currentEntityType;
 
             // If it's an existing enemy that has to remain in the same spot, skip it
@@ -575,7 +575,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             RestrictedEnemyGroup enemyGroup = TR1EnemyUtilities.GetRestrictedEnemyGroup(level.Name, TR1TypeUtilities.TranslateAlias(newEntityType), groupDifficulty);
             if (enemyGroup != null)
             {
-                if (level.Data.Entities.FindAll(e => enemyGroup.Enemies.Contains((TR1Type)e.TypeID)).Count >= enemyGroup.MaximumCount)
+                if (level.Data.Entities.FindAll(e => enemyGroup.Enemies.Contains(e.TypeID)).Count >= enemyGroup.MaximumCount)
                 {
                     List<TR1Type> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1TypeUtilities.TranslateAlias(e), groupDifficulty));
                     if (pool.Count > 0)
@@ -750,7 +750,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         TR1Type translatedType = TR1TypeUtilities.TranslateAlias(entityType);
         foreach (TR1Entity entity in level.Data.Entities)
         {
-            TR1Type type = (TR1Type)entity.TypeID;
+            TR1Type type = entity.TypeID;
             if (type == translatedType)
             {
                 count++;
@@ -971,7 +971,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         // Find out which gun we have for this level
         List<TR1Type> weaponTypes = TR1TypeUtilities.GetWeaponPickups();
-        List<TR1Entity> levelWeapons = level.Data.Entities.FindAll(e => weaponTypes.Contains((TR1Type)e.TypeID));
+        List<TR1Entity> levelWeapons = level.Data.Entities.FindAll(e => weaponTypes.Contains(e.TypeID));
         TR1Entity weaponEntity = null;
         foreach (TR1Entity weapon in levelWeapons)
         {
@@ -996,7 +996,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
         }
 
         List<TR1Type> allEnemies = TR1TypeUtilities.GetFullListOfEnemies();
-        List<TR1Entity> levelEnemies = level.Data.Entities.FindAll(e => allEnemies.Contains((TR1Type)e.TypeID));
+        List<TR1Entity> levelEnemies = level.Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
         // #409 Eggs are excluded as they are not part of the cross-level enemy pool, so create copies of any
         // of these using their actual types so to ensure they are part of the difficulty calculation.
         FDControl floorData = new();
@@ -1030,7 +1030,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             }
         }
 
-        TR1Type weaponType = (TR1Type)weaponEntity.TypeID;
+        TR1Type weaponType = weaponEntity.TypeID;
         uint ammoToGive = TR1EnemyUtilities.GetStartingAmmo(weaponType);
         if (ammoToGive > 0)
         {
@@ -1264,7 +1264,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     private void CloneEnemies(TR1CombinedLevel level)
     {
         List<TR1Type> enemyTypes = TR1TypeUtilities.GetFullListOfEnemies();
-        List<TR1Entity> enemies = level.Data.Entities.FindAll(e => enemyTypes.Contains((TR1Type)e.TypeID));
+        List<TR1Entity> enemies = level.Data.Entities.FindAll(e => enemyTypes.Contains(e.TypeID));
 
         // If Adam is still in his egg, clone the egg as well. Otherwise there will be separate
         // entities inside the egg that will have already been accounted for.

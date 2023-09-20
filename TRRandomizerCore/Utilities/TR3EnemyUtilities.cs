@@ -158,7 +158,7 @@ public static class TR3EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR3CombinedLevel level)
     {
-        List<TR3Entity> enemies = level.Data.Entities.FindAll(e => TR3TypeUtilities.IsEnemyType((TR3Type)e.TypeID));
+        List<TR3Entity> enemies = level.Data.Entities.FindAll(e => TR3TypeUtilities.IsEnemyType(e.TypeID));
         foreach (TR3Entity entityInstance in enemies)
         {
             List<TR3Entity> sharedItems = level.Data.Entities.FindAll(e =>
@@ -171,7 +171,7 @@ public static class TR3EnemyUtilities
                 // Are any entities that are sharing a location a droppable pickup?
                 foreach (TR3Entity ent in sharedItems)
                 {
-                    if (TR3TypeUtilities.IsAnyPickupType((TR3Type)ent.TypeID))
+                    if (TR3TypeUtilities.IsAnyPickupType(ent.TypeID))
                     {
                         return true;
                     }
@@ -184,7 +184,7 @@ public static class TR3EnemyUtilities
 
     public static void SetEntityTriggers(TR3Level level, TR3Entity entity)
     {
-        if (_oneShotEnemies.Contains((TR3Type)entity.TypeID))
+        if (_oneShotEnemies.Contains(entity.TypeID))
         {
             int entityID = level.Entities.IndexOf(entity);
 
@@ -214,7 +214,7 @@ public static class TR3EnemyUtilities
             EnemyDifficulty enemyDifficulty = EnemyDifficulty.Medium;
             foreach (EnemyDifficulty difficulty in _enemyDifficulties.Keys)
             {
-                if (_enemyDifficulties[difficulty].Contains((TR3Type)enemyEntity.TypeID))
+                if (_enemyDifficulties[difficulty].Contains(enemyEntity.TypeID))
                 {
                     enemyDifficulty = difficulty;
                     break;

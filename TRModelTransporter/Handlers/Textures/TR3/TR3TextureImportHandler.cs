@@ -66,7 +66,7 @@ public class TR3TextureImportHandler : AbstractTextureImportHandler<TR3Type, TR3
         ISet<TR3Type> allEntities = new HashSet<TR3Type>();
         for (int i = 0; i < _level.Entities.Count; i++)
         {
-            allEntities.Add((TR3Type)_level.Entities[i].TypeID);
+            allEntities.Add(_level.Entities[i].TypeID);
         }
 
         for (int i = unusedItems.Count - 1; i >= 0; i--)

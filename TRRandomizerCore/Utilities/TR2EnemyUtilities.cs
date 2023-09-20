@@ -39,7 +39,7 @@ public static class TR2EnemyUtilities
     {
         foreach (TR2Entity entityInstance in level.Data.Entities)
         {
-            TR2Type entity = (TR2Type)entityInstance.TypeID;
+            TR2Type entity = entityInstance.TypeID;
             if (TR2TypeUtilities.IsWaterCreature(entity))
             {
                 if (!level.CanPerformDraining(entityInstance.Room))
@@ -54,7 +54,7 @@ public static class TR2EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR2CombinedLevel level)
     {
-        List<TR2Entity> enemies = level.Data.Entities.FindAll(e => TR2TypeUtilities.IsEnemyType((TR2Type)e.TypeID));
+        List<TR2Entity> enemies = level.Data.Entities.FindAll(e => TR2TypeUtilities.IsEnemyType(e.TypeID));
         foreach (TR2Entity entityInstance in enemies)
         {
             List<TR2Entity> sharedItems = level.Data.Entities.FindAll(e =>
@@ -67,7 +67,7 @@ public static class TR2EnemyUtilities
                 // Are any entities that are sharing a location a droppable pickup?
                 foreach (TR2Entity ent in sharedItems)
                 {
-                    TR2Type EntType = (TR2Type)ent.TypeID;
+                    TR2Type EntType = ent.TypeID;
 
                     if
                     (
@@ -246,7 +246,7 @@ public static class TR2EnemyUtilities
         }
 
         ISet<TR2Type> enemyEntities = new HashSet<TR2Type>();
-        enemies.ForEach(e => enemyEntities.Add((TR2Type)e.TypeID));
+        enemies.ForEach(e => enemyEntities.Add(e.TypeID));
 
         int weight = 0;
         foreach (TR2Type enemyEntity in enemyEntities)
@@ -506,7 +506,7 @@ public static class TR2EnemyUtilities
 
     public static void SetEntityTriggers(TR2Level level, TR2Entity entity)
     {
-        if (_oneShotEnemies.Contains((TR2Type)entity.TypeID))
+        if (_oneShotEnemies.Contains(entity.TypeID))
         {
             int entityID = level.Entities.IndexOf(entity);
 

@@ -172,7 +172,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             }
 
             TR3Entity ent = level.Data.Entities[i];
-            TR3Type currentType = (TR3Type)ent.TypeID;
+            TR3Type currentType = ent.TypeID;
             // If this is an unarmed level's pistols, make sure they're replaced with another weapon.
             // Similar case for the assault course, so that Lara can still shoot Winnie.
             if ((ent == _unarmedLevelPistols && Settings.GiveUnarmedItems)
@@ -182,12 +182,12 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 {
                     ent.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
                 }
-                while (!TR3TypeUtilities.IsWeaponPickup((TR3Type)ent.TypeID));
+                while (!TR3TypeUtilities.IsWeaponPickup(ent.TypeID));
 
                 if (level.IsAssault)
                 {
                     // Add some extra ammo too
-                    level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3TypeUtilities.GetWeaponAmmo((TR3Type)ent.TypeID)), 20);
+                    level.Script.AddStartInventoryItem(ItemUtilities.ConvertToScriptItem(TR3TypeUtilities.GetWeaponAmmo(ent.TypeID)), 20);
                 }
             }
             else if (TR3TypeUtilities.IsStandardPickupType(currentType))
@@ -203,7 +203,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         if (_unarmedLevelPistols != null)
         {
             // These will be excluded, but track their type before looking at other items.
-            oneOfEachType.Add((TR3Type)_unarmedLevelPistols.TypeID);
+            oneOfEachType.Add(_unarmedLevelPistols.TypeID);
         }
 
         // FD for removing crystal triggers if applicable.
@@ -220,7 +220,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 continue;
             }
 
-            TR3Type eType = (TR3Type)ent.TypeID;
+            TR3Type eType = ent.TypeID;
             if (TR3TypeUtilities.IsStandardPickupType(eType) || TR3TypeUtilities.IsCrystalPickup(eType))
             {
                 if (!oneOfEachType.Add(eType))
@@ -257,7 +257,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
             TR3Entity ent = level.Data.Entities[i];
             // Move standard items only, excluding any unarmed level pistols, and reward items
-            if (TR3TypeUtilities.IsStandardPickupType((TR3Type)ent.TypeID) && ent != _unarmedLevelPistols)
+            if (TR3TypeUtilities.IsStandardPickupType(ent.TypeID) && ent != _unarmedLevelPistols)
             {
                 Location location = locations[_generator.Next(0, locations.Count)];
                 ent.X = location.X;
@@ -287,7 +287,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
         foreach (TR3Entity entity in level.Data.Entities)
         {
-            if (!TR3TypeUtilities.CanSharePickupSpace((TR3Type)entity.TypeID))
+            if (!TR3TypeUtilities.CanSharePickupSpace(entity.TypeID))
             {
                 exclusions.Add(new Location
                 {
@@ -342,7 +342,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         foreach (TR3Entity ent in level.Data.Entities)
         {
             //Calculate its alias
-            TR3Type AliasedKeyItemID = (TR3Type)(ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name));
+            TR3Type AliasedKeyItemID = ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name);
 
             //Any special handling for key item entities
             switch (AliasedKeyItemID)
@@ -359,7 +359,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
             //Is entity one we are allowed/expected to move? (is the alias and base type correct?)
             if (_keyItemZones[level.Name].AliasedExpectedKeyItems.Contains(AliasedKeyItemID) &&
-                _keyItemZones[level.Name].BaseExpectedKeyItems.Contains((TR3Type)ent.TypeID))
+                _keyItemZones[level.Name].BaseExpectedKeyItems.Contains(ent.TypeID))
             {
                 do
                 {

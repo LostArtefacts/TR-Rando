@@ -158,7 +158,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             if (SeraphInMonastery)
             {
                 // Get all visible pickups in the level (there may be invisible ones if using OneItem mode)
-                List<TR2Entity> pickups = _levelInstance.Data.Entities.FindAll(e => !e.Invisible && stdItemTypes.Contains((TR2Type)e.TypeID));
+                List<TR2Entity> pickups = _levelInstance.Data.Entities.FindAll(e => !e.Invisible && stdItemTypes.Contains(e.TypeID));
                 List<TR2Entity> replacementCandidates = new(pickups);
 
                 // Eliminate any that share a tile with an enemy in case of pacifist runs/unable to find guns
@@ -170,7 +170,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     TRRoomSector pickupTile = FDUtilities.GetRoomSector(pickup.X, pickup.Y, pickup.Z, pickup.Room, _levelInstance.Data, floorData);
                     // Does an enemy share this tile? If so, remove it from the candidate list
                     if (_levelInstance.Data.Entities.Find(e => e != pickup
-                        && TR2TypeUtilities.IsEnemyType((TR2Type)e.TypeID)
+                        && TR2TypeUtilities.IsEnemyType(e.TypeID)
                         && FDUtilities.GetRoomSector(e.X, e.Y, e.Z, e.Room, _levelInstance.Data, floorData) == pickupTile) != null)
                     {
                         replacementCandidates.RemoveAt(i);
@@ -338,14 +338,14 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     continue;
                 }
 
-                if (targetents.Contains((TR2Type)_levelInstance.Data.Entities[i].TypeID) && (i != _unarmedLevelPistolIndex))
+                if (targetents.Contains(_levelInstance.Data.Entities[i].TypeID) && (i != _unarmedLevelPistolIndex))
                 {
                     Location RandomLocation = new();
                     bool FoundPossibleLocation = false;
 
-                    if (TR2TypeUtilities.IsKeyItemType((TR2Type)_levelInstance.Data.Entities[i].TypeID))
+                    if (TR2TypeUtilities.IsKeyItemType(_levelInstance.Data.Entities[i].TypeID))
                     {
-                        TR2Type type = (TR2Type)_levelInstance.Data.Entities[i].TypeID;
+                        TR2Type type = _levelInstance.Data.Entities[i].TypeID;
 
                         // Apply zoning for key items
                         switch (type)
@@ -540,7 +540,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         for (int i = 0; i < _levelInstance.Data.Entities.Count; i++)
         {
             TR2Entity entity = _levelInstance.Data.Entities[i];
-            TR2Type currentType = (TR2Type)entity.TypeID;
+            TR2Type currentType = entity.TypeID;
 
             if (i == _unarmedLevelPistolIndex)
             {
@@ -561,7 +561,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
         // look for extra utility/ammo items and hide them
         foreach (TR2Entity ent in _levelInstance.Data.Entities)
         {
-            TR2Type eType = (TR2Type)ent.TypeID;
+            TR2Type eType = ent.TypeID;
             if (TR2TypeUtilities.IsUtilityType(eType) ||
                 TR2TypeUtilities.IsGunType(eType))
             {
@@ -570,7 +570,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                     ItemUtilities.HideEntity(ent);
                 }
                 else
-                    oneOfEachType.Add((TR2Type)ent.TypeID);
+                    oneOfEachType.Add(ent.TypeID);
             }
         }
     }
@@ -778,7 +778,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                 continue;
             }
 
-            TR2Type entityType = (TR2Type)entity.TypeID;
+            TR2Type entityType = entity.TypeID;
             if (TR2TypeUtilities.IsGunType(entityType))
             {
                 entity.TypeID = replacementWeapon;
@@ -796,7 +796,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
             if (Settings.RandoItemDifficulty == ItemDifficulty.OneLimit)
             {
                 // look for extra utility/ammo items and hide them
-                TR2Type eType = (TR2Type)entity.TypeID;
+                TR2Type eType = entity.TypeID;
                 if (TR2TypeUtilities.IsUtilityType(eType) ||
                     TR2TypeUtilities.IsGunType(eType))
                 {
@@ -805,7 +805,7 @@ public class TR2ItemRandomizer : BaseTR2Randomizer
                         ItemUtilities.HideEntity(entity);
                     }
                     else
-                        oneOfEachType.Add((TR2Type)entity.TypeID);
+                        oneOfEachType.Add(entity.TypeID);
                 }
             }
         }

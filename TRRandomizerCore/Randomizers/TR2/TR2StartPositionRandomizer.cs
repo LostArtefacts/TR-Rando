@@ -47,7 +47,7 @@ public class TR2StartPositionRandomizer : BaseTR2Randomizer
         // or she may have to jump on the first frame to get it.
         if (!Settings.DevelopmentMode
             && level.Data.Entities.Find(e => e.Room == lara.Room
-            && TR2TypeUtilities.IsSecretType((TR2Type)e.TypeID)) != null)
+            && TR2TypeUtilities.IsSecretType(e.TypeID)) != null)
         {
             return;
         }

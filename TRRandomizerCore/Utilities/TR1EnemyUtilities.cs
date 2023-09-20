@@ -160,7 +160,7 @@ public static class TR1EnemyUtilities
 
     public static void SetEntityTriggers(TR1Level level, TR1Entity entity)
     {
-        if (_oneShotEnemies.Contains((TR1Type)entity.TypeID))
+        if (_oneShotEnemies.Contains(entity.TypeID))
         {
             int entityID = level.Entities.IndexOf(entity);
 
@@ -190,7 +190,7 @@ public static class TR1EnemyUtilities
             EnemyDifficulty enemyDifficulty = EnemyDifficulty.Medium;
             foreach (EnemyDifficulty difficulty in _enemyDifficulties.Keys)
             {
-                if (_enemyDifficulties[difficulty].Contains((TR1Type)enemyEntity.TypeID))
+                if (_enemyDifficulties[difficulty].Contains(enemyEntity.TypeID))
                 {
                     enemyDifficulty = difficulty;
                     break;

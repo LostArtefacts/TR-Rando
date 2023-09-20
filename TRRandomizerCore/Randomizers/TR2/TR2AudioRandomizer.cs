@@ -176,7 +176,7 @@ public class TR2AudioRandomizer : BaseTR2Randomizer
         Dictionary<int, TR2Entity> entities = new();
         for (int i = 0; i < level.Entities.Count; i++)
         {
-            if (TR2TypeUtilities.IsSecretType((TR2Type)level.Entities[i].TypeID))
+            if (TR2TypeUtilities.IsSecretType(level.Entities[i].TypeID))
             {
                 entities[i] = level.Entities[i];
             }

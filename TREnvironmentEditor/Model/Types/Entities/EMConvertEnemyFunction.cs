@@ -36,7 +36,7 @@ public class EMConvertEnemyFunction : BaseEMFunction
         {
             enemyMatch = level.Entities.Find(e => (short)e.TypeID == PreferredType && !EntityIndices.Contains(level.Entities.IndexOf(e)));
         }
-        enemyMatch ??= level.Entities.Find(e => potentialTypes.Contains((TR1Type)e.TypeID));
+        enemyMatch ??= level.Entities.Find(e => potentialTypes.Contains(e.TypeID));
 
         if (enemyMatch != null)
         {
@@ -74,7 +74,7 @@ public class EMConvertEnemyFunction : BaseEMFunction
         {
             enemyMatch = level.Entities.Find(e => (short)e.TypeID == PreferredType && !EntityIndices.Contains(level.Entities.IndexOf(e)));
         }
-        enemyMatch ??= level.Entities.Find(e => potentialTypes.Contains((TR2Type)e.TypeID));
+        enemyMatch ??= level.Entities.Find(e => potentialTypes.Contains(e.TypeID));
 
         if (enemyMatch != null)
         {
@@ -110,7 +110,7 @@ public class EMConvertEnemyFunction : BaseEMFunction
         {
             enemyMatch = level.Entities.Find(e => (short)e.TypeID == PreferredType && !EntityIndices.Contains(level.Entities.IndexOf(e)));
         }
-        enemyMatch ??= level.Entities.Find(e => potentialTypes.Contains((TR3Type)e.TypeID));
+        enemyMatch ??= level.Entities.Find(e => potentialTypes.Contains(e.TypeID));
 
         if (enemyMatch != null)
         {

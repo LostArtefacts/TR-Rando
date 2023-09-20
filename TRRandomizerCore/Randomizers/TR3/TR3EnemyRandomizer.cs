@@ -303,7 +303,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
     {
         List<TR3Type> allGameEnemies = TR3TypeUtilities.GetFullListOfEnemies();
         ISet<TR3Type> allLevelEnts = new SortedSet<TR3Type>();
-        level.Data.Entities.ForEach(e => allLevelEnts.Add((TR3Type)e.TypeID));
+        level.Data.Entities.ForEach(e => allLevelEnts.Add(e.TypeID));
         List<TR3Type> oldEntities = allLevelEnts.ToList().FindAll(e => allGameEnemies.Contains(e));
         return oldEntities;
     }
@@ -363,7 +363,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
     {
         // Get a list of current enemy entities
         List<TR3Type> allEnemies = TR3TypeUtilities.GetFullListOfEnemies();
-        List<TR3Entity> enemyEntities = level.Data.Entities.FindAll(e => allEnemies.Contains((TR3Type)e.TypeID));
+        List<TR3Entity> enemyEntities = level.Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
 
         // Keep track of any new entities added (e.g. Lizard for Puna)
         List<TR3Entity> newEntities = new();
@@ -444,7 +444,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
         foreach (TR3Entity currentEntity in enemyEntities)
         {
-            TR3Type currentEntityType = (TR3Type)currentEntity.TypeID;
+            TR3Type currentEntityType = currentEntity.TypeID;
             TR3Type newEntityType = currentEntityType;
 
             // If it's an existing enemy that has to remain in the same spot, skip it
@@ -463,7 +463,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                     e.X == currentEntity.X &&
                     e.Y == currentEntity.Y &&
                     e.Z == currentEntity.Z &&
-                    TR3TypeUtilities.IsAnyPickupType((TR3Type)e.TypeID)
+                    TR3TypeUtilities.IsAnyPickupType(e.TypeID)
             );
 
             if (pickupEntity != null)
@@ -601,7 +601,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
         // Find out which gun we have for this level
         List<TR3Type> weaponTypes = TR3TypeUtilities.GetWeaponPickups();
-        List<TR3Entity> levelWeapons = level.Data.Entities.FindAll(e => weaponTypes.Contains((TR3Type)e.TypeID));
+        List<TR3Entity> levelWeapons = level.Data.Entities.FindAll(e => weaponTypes.Contains(e.TypeID));
         TR3Entity weaponEntity = null;
         foreach (TR3Entity weapon in levelWeapons)
         {
@@ -626,7 +626,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         }
 
         List<TR3Type> allEnemies = TR3TypeUtilities.GetFullListOfEnemies();
-        List<TR3Entity> levelEnemies = level.Data.Entities.FindAll(e => allEnemies.Contains((TR3Type)e.TypeID));
+        List<TR3Entity> levelEnemies = level.Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
         EnemyDifficulty difficulty = TR3EnemyUtilities.GetEnemyDifficulty(levelEnemies);
 
         if (difficulty > EnemyDifficulty.Easy)
@@ -637,7 +637,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             }
         }
 
-        TR3Type weaponType = (TR3Type)weaponEntity.TypeID;
+        TR3Type weaponType = weaponEntity.TypeID;
         uint ammoToGive = TR3EnemyUtilities.GetStartingAmmo(weaponType);
         if (ammoToGive > 0)
         {

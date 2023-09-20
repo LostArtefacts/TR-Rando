@@ -604,7 +604,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
         foreach (TR2Entity currentEntity in enemyEntities)
         {
-            TR2Type currentEntityType = (TR2Type)currentEntity.TypeID;
+            TR2Type currentEntityType = currentEntity.TypeID;
             TR2Type newEntityType = currentEntityType;
             int enemyIndex = level.Data.Entities.IndexOf(currentEntity);
 
@@ -630,7 +630,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 
                 foreach (TR2Entity ent in sharedItems)
                 {
-                    TR2Type entType = (TR2Type)ent.TypeID;
+                    TR2Type entType = ent.TypeID;
 
                     isPickupItem = TR2TypeUtilities.IsUtilityType(entType) ||
                                    TR2TypeUtilities.IsGunType(entType) ||
@@ -947,7 +947,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
     {
         // Hard limit of 20 friendly enemies in trap-heavy levels to avoid freezing issues
         const int limit = 20;
-        List<TR2Entity> levelFriends = level.Data.Entities.FindAll(e => friends.Contains((TR2Type)e.TypeID));
+        List<TR2Entity> levelFriends = level.Data.Entities.FindAll(e => friends.Contains(e.TypeID));
         while (levelFriends.Count > limit)
         {
             TR2Entity entity = levelFriends[_generator.Next(0, levelFriends.Count)];

@@ -18,7 +18,7 @@ public static class EMLocationUtilities
     {
         TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, location.Room, level, floorData);
         return level.Entities.FindIndex(e =>
-            TR2TypeUtilities.IsSecretType((TR2Type)e.TypeID)
+            TR2TypeUtilities.IsSecretType(e.TypeID)
             && FDUtilities.GetRoomSector(e.X, e.Y, e.Z, e.Room, level, floorData) == sector
         );
     }

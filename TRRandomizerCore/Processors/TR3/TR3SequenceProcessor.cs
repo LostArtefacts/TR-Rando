@@ -311,7 +311,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR3Entity entity = level.Data.Entities[i];
-            TR3Type type = (TR3Type)entity.TypeID;
+            TR3Type type = entity.TypeID;
             if (type == TR3Type.AIPath_N || type == TR3Type.AICheck_N)
             {
                 entity.TypeID = TR3Type.PistolAmmo_M_H;

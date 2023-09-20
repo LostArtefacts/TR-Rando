@@ -109,7 +109,7 @@ public class TR2CombinedLevel
     public List<TR2Entity> GetEnemyEntities()
     {
         List<TR2Type> allEnemies = TR2TypeUtilities.GetFullListOfEnemies();
-        return Data.Entities.FindAll(e => allEnemies.Contains((TR2Type)e.TypeID));
+        return Data.Entities.FindAll(e => allEnemies.Contains(e.TypeID));
     }
 
     public int GetMaximumEntityLimit()
@@ -135,7 +135,7 @@ public class TR2CombinedLevel
         int count = 0;
         foreach (TR2Entity entity in Data.Entities)
         {
-            switch ((TR2Type)entity.TypeID)
+            switch (entity.TypeID)
             {
                 case TR2Type.MercSnowmobDriver:
                     count += 2;

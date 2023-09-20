@@ -289,7 +289,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             level.Data.Entities[doorIndex] = door;
 
             // If it's a trapdoor, we need to make a dummy trigger for it
-            if (TR1TypeUtilities.IsTrapdoor((TR1Type)door.TypeID))
+            if (TR1TypeUtilities.IsTrapdoor(door.TypeID))
             {
                 CreateTrapdoorTrigger(door, (ushort)doorIndex, level.Data);
             }
@@ -687,7 +687,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
         TRRoomSector sector = FDUtilities.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, (short)secret.Location.Room, level.Data, floorData);
         foreach (TR1Entity otherEntity in level.Data.Entities)
         {
-            TR1Type type = (TR1Type)otherEntity.TypeID;
+            TR1Type type = otherEntity.TypeID;
             if (secret.Location.Room == otherEntity.Room && (TR1TypeUtilities.IsTrapdoor(type) || TR1TypeUtilities.IsBridge(type) || type == TR1Type.FallingBlock))
             {
                 TRRoomSector otherSector = FDUtilities.GetRoomSector(otherEntity.X, otherEntity.Y, otherEntity.Z, otherEntity.Room, level.Data, floorData);

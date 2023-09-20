@@ -195,7 +195,7 @@ public class EMTriggerFunction : BaseEMFunction
     {
         foreach (TR2Entity entity in levelEntities)
         {
-            if (TR2TypeUtilities.IsEnemyType((TR2Type)entity.TypeID))
+            if (TR2TypeUtilities.IsEnemyType(entity.TypeID))
             {
                 entity.ClearBody = true;
             }

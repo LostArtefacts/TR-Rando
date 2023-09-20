@@ -125,7 +125,7 @@ public class TR2TextureImportHandler : AbstractTextureImportHandler<TR2Type, TR2
         ISet<TR2Type> allEntities = new HashSet<TR2Type>();
         for (int i = 0; i < _level.Entities.Count; i++)
         {
-            allEntities.Add((TR2Type)_level.Entities[i].TypeID);
+            allEntities.Add(_level.Entities[i].TypeID);
         }
 
         for (int i = unusedItems.Count - 1; i >= 0; i--)

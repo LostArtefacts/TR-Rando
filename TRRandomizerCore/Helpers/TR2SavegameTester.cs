@@ -85,7 +85,7 @@ public class TR2SavegameTester
         List<TR2Entity> entities = new(level.Entities);
         foreach (TR2Entity entity in level.Entities)
         {
-            TR2Type type = (TR2Type)entity.TypeID;
+            TR2Type type = entity.TypeID;
             if (type == TR2Type.MercSnowmobDriver)
             {
                 entities.Add(new() { TypeID = TR2Type.BlackSnowmob });
@@ -127,7 +127,7 @@ public class TR2SavegameTester
 
         foreach (TR2Entity entity in entities)
         {
-            TR2Type type = (TR2Type)entity.TypeID;
+            TR2Type type = entity.TypeID;
             SGFlags saveFlags = SGFlags.None;
             
             if (TR2TypeUtilities.IsEnemyType(type))

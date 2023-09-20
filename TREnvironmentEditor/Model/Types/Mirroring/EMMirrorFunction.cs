@@ -614,7 +614,7 @@ public class EMMirrorFunction : BaseEMFunction
             AdjustTR1EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.FindAll(e => TR1TypeUtilities.IsDoorType((TR1Type)e.TypeID)));
+        AdjustDoors(level.Entities.FindAll(e => TR1TypeUtilities.IsDoorType(e.TypeID)));
     }
 
     private void MirrorEntities(TR2Level level)
@@ -625,7 +625,7 @@ public class EMMirrorFunction : BaseEMFunction
             AdjustTR2EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.FindAll(e => TR2TypeUtilities.IsDoorType((TR2Type)e.TypeID)));
+        AdjustDoors(level.Entities.FindAll(e => TR2TypeUtilities.IsDoorType(e.TypeID)));
     }
 
     private void MirrorEntities(TR3Level level)
@@ -636,14 +636,14 @@ public class EMMirrorFunction : BaseEMFunction
             AdjustTR3EntityPosition(entity);
         }
 
-        AdjustDoors(level.Entities.FindAll(e => TR3TypeUtilities.IsDoorType((TR3Type)e.TypeID)));
+        AdjustDoors(level.Entities.FindAll(e => TR3TypeUtilities.IsDoorType(e.TypeID)));
     }
 
     private static void AdjustTR1EntityPosition(TR1Entity entity)
     {
         entity.Angle *= -1;
 
-        switch ((TR1Type)entity.TypeID)
+        switch (entity.TypeID)
         {
             case TR1Type.Animating1:
             case TR1Type.Animating2:
@@ -711,7 +711,7 @@ public class EMMirrorFunction : BaseEMFunction
             entity.Angle *= -1;
         }
 
-        switch ((TR2Type)entity.TypeID)
+        switch (entity.TypeID)
         {
             // These take up 2 tiles so need some fiddling
             case TR2Type.Elevator:
@@ -829,7 +829,7 @@ public class EMMirrorFunction : BaseEMFunction
         // Flip the angle - north and south remain, everything else moves appropriately
         entity.Angle *= -1;
 
-        switch ((TR3Type)entity.TypeID)
+        switch (entity.TypeID)
         {
             // These take up several tiles so need some fiddling
             case TR3Type.SpikyVertWallOrTunnelBorer:
