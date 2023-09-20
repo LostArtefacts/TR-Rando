@@ -17,7 +17,7 @@ public class EMConvertEntityFunction : BaseEMFunction
     public override void ApplyToLevel(TR2Level level)
     {
         EMLevelData data = GetData(level);
-        level.Entities[data.ConvertEntity(EntityIndex)].TypeID = NewEntityType;
+        level.Entities[data.ConvertEntity(EntityIndex)].TypeID = (TR2Type)NewEntityType;
     }
 
     public override void ApplyToLevel(TR3Level level)

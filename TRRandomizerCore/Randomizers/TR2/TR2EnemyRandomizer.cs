@@ -531,7 +531,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             {
                 newEntities.Add(new TR2Entity
                 {
-                    TypeID = (short)TR2Type.Doberman,
+                    TypeID = TR2Type.Doberman,
                     Room = 85,
                     X = 61919,
                     Y = 2560,
@@ -588,7 +588,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                         continue;
                     }
 
-                    targetEntity.TypeID = (short)TR2TypeUtilities.TranslateAlias(entity);
+                    targetEntity.TypeID = TR2TypeUtilities.TranslateAlias(entity);
 
                     // #146 Ensure OneShot triggers are set for this enemy if needed
                     TR2EnemyUtilities.SetEntityTriggers(level.Data, targetEntity);
@@ -729,7 +729,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             int maxEntityCount = TR2EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, difficulty);
             if (maxEntityCount != -1)
             {
-                if (level.Data.Entities.FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount && enemyPool.Count > totalRestrictionCount)
+                if (level.Data.Entities.FindAll(e => e.TypeID == newEntityType).Count >= maxEntityCount && enemyPool.Count > totalRestrictionCount)
                 {
                     TR2Type tmp = newEntityType;
                     while (newEntityType == tmp)
@@ -747,7 +747,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             }
 
             // Make sure to convert BengalTiger, StickWieldingGoonBandana etc back to their actual types
-            currentEntity.TypeID = (short)TR2TypeUtilities.TranslateAlias(newEntityType);
+            currentEntity.TypeID = TR2TypeUtilities.TranslateAlias(newEntityType);
 
             // #146 Ensure OneShot triggers are set for this enemy if needed. This currently only applies
             // to the dragon, which will be handled above in defined rooms, but the check should be made
@@ -761,7 +761,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         // MercSnowMobDriver relies on RedSnowmobile so it will be available in the model list
         if (!level.Is(TR2LevelNames.TIBET))
         {
-            TR2Entity mercDriver = level.Data.Entities.Find(e => e.TypeID == (short)TR2Type.MercSnowmobDriver);
+            TR2Entity mercDriver = level.Data.Entities.Find(e => e.TypeID == TR2Type.MercSnowmobDriver);
             if (mercDriver != null)
             {
                 short room, angle;
@@ -789,7 +789,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
                 newEntities.Add(new TR2Entity
                 {
-                    TypeID = (short)TR2Type.RedSnowmobile,
+                    TypeID = TR2Type.RedSnowmobile,
                     Room = room,
                     X = x,
                     Y = y,
@@ -803,7 +803,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         }
         else //For Tibet level 
         {
-            TR2Entity Skidoo = level.Data.Entities.Find(e => e.TypeID == (short)TR2Type.RedSnowmobile);
+            TR2Entity Skidoo = level.Data.Entities.Find(e => e.TypeID == TR2Type.RedSnowmobile);
 
             if (Skidoo != null)
             {
@@ -841,7 +841,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         }
 
         // Check in case there are too many skidoo drivers
-        if (level.Data.Entities.Find(e => e.TypeID == (short)TR2Type.MercSnowmobDriver) != null)
+        if (level.Data.Entities.Find(e => e.TypeID == TR2Type.MercSnowmobDriver) != null)
         {
             LimitSkidooEntities(level);
         }
@@ -872,7 +872,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         int skidooLimit = TR2EnemyUtilities.GetSkidooDriverLimit(level.Name);
 
         List<TR2Entity> enemies = level.GetEnemyEntities();
-        int normalEnemyCount = enemies.FindAll(e => e.TypeID != (short)TR2Type.MercSnowmobDriver).Count;
+        int normalEnemyCount = enemies.FindAll(e => e.TypeID != TR2Type.MercSnowmobDriver).Count;
         int skidooMenCount = enemies.Count - normalEnemyCount;
         int skidooRemovalCount = skidooMenCount - skidooMenCount / 2;
         if (skidooLimit > 0)
@@ -903,7 +903,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             List<TR2Entity> skidMen;
             for (int i = 0; i < skidooRemovalCount; i++)
             {
-                skidMen = level.Data.Entities.FindAll(e => e.TypeID == (short)TR2Type.MercSnowmobDriver);
+                skidMen = level.Data.Entities.FindAll(e => e.TypeID == TR2Type.MercSnowmobDriver);
                 if (skidMen.Count == 0)
                 {
                     break;
@@ -912,7 +912,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
                 // Select a random Skidoo driver and convert him into something else
                 TR2Entity skidMan = skidMen[_generator.Next(0, skidMen.Count)];
                 TR2Type newType = replacementPool[_generator.Next(0, replacementPool.Count)];
-                skidMan.TypeID = (short)newType;
+                skidMan.TypeID = newType;
 
                 if (TR2TypeUtilities.IsAnyPickupType(newType))
                 {
@@ -951,7 +951,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         while (levelFriends.Count > limit)
         {
             TR2Entity entity = levelFriends[_generator.Next(0, levelFriends.Count)];
-            entity.TypeID = (short)TR2TypeUtilities.TranslateAlias(pool[_generator.Next(0, pool.Count)]);
+            entity.TypeID = TR2TypeUtilities.TranslateAlias(pool[_generator.Next(0, pool.Count)]);
             levelFriends.Remove(entity);
         }
     }

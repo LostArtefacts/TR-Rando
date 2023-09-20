@@ -72,7 +72,7 @@ public class EMConvertEnemyFunction : BaseEMFunction
         TR2Entity enemyMatch = null;
         if (potentialTypes.Contains((TR2Type)PreferredType))
         {
-            enemyMatch = level.Entities.Find(e => e.TypeID == PreferredType && !EntityIndices.Contains(level.Entities.IndexOf(e)));
+            enemyMatch = level.Entities.Find(e => (short)e.TypeID == PreferredType && !EntityIndices.Contains(level.Entities.IndexOf(e)));
         }
         enemyMatch ??= level.Entities.Find(e => potentialTypes.Contains((TR2Type)e.TypeID));
 

@@ -118,11 +118,11 @@ public class TR2CombinedLevel
 
         // #153 The game creates a black skidoo for each skidoo driver when the level
         // is loaded, so there needs to be space in the entity array for these.
-        limit -= Data.Entities.FindAll(e => e.TypeID == (short)TR2Type.MercSnowmobDriver).Count;
+        limit -= Data.Entities.FindAll(e => e.TypeID == TR2Type.MercSnowmobDriver).Count;
 
         // If there is a dragon, we need an extra 7 slots for the front bones, 
         // back bones etc. This is going by what's seen in Dragon.c
-        if (Data.Entities.FindIndex(e => e.TypeID == (short)TR2Type.MarcoBartoli) != -1)
+        if (Data.Entities.Any(e => e.TypeID == TR2Type.MarcoBartoli))
         {
             limit -= 7;
         }

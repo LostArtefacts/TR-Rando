@@ -19,7 +19,7 @@ public class EMConvertWheelDoorFunction : BaseEMFunction
     public override void ApplyToLevel(TR2Level level)
     {
         TR2Entity wheel = level.Entities[WheelIndex];
-        if (wheel.TypeID != (short)TR2Type.WheelKnob)
+        if (wheel.TypeID != TR2Type.WheelKnob)
         {
             // Something else has already converted this
             return;
@@ -33,7 +33,7 @@ public class EMConvertWheelDoorFunction : BaseEMFunction
         }.ApplyToLevel(level);
 
         // Make the door normal and match its lighting to another
-        TR2Entity otherDoor = level.Entities.Find(e => e.TypeID == NewDoorType);
+        TR2Entity otherDoor = level.Entities.Find(e => e.TypeID == (TR2Type)NewDoorType);
         new EMConvertEntityFunction
         {
             EntityIndex = DoorIndex,

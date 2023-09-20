@@ -54,10 +54,10 @@ public class TR2ModelAdjuster : TR2LevelProcessor
             {
                 model.ID = (uint)_modelRemap[oldEntity];
 
-                List<TR2Entity> modelEntities = _levelInstance.Data.Entities.FindAll(e => e.TypeID == (short)oldEntity);
+                List<TR2Entity> modelEntities = _levelInstance.Data.Entities.FindAll(e => e.TypeID == oldEntity);
                 foreach (TR2Entity entity in modelEntities)
                 {
-                    entity.TypeID = (short)_modelRemap[oldEntity];
+                    entity.TypeID = _modelRemap[oldEntity];
                 }
             }
         }
@@ -70,10 +70,10 @@ public class TR2ModelAdjuster : TR2LevelProcessor
             {
                 sprite.SpriteID = (short)_spriteRemap[oldEntity];
 
-                List<TR2Entity> spriteEntities = _levelInstance.Data.Entities.FindAll(e => e.TypeID == (short)oldEntity);
+                List<TR2Entity> spriteEntities = _levelInstance.Data.Entities.FindAll(e => e.TypeID == oldEntity);
                 foreach (TR2Entity entity in spriteEntities)
                 {
-                    entity.TypeID = (short)_spriteRemap[oldEntity];
+                    entity.TypeID = _spriteRemap[oldEntity];
                 }
             }
         }

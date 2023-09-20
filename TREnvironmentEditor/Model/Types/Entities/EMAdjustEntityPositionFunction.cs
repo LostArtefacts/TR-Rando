@@ -19,7 +19,7 @@ public class EMAdjustEntityPositionFunction : BaseEMFunction
         // Example use case is rotating wall blades, which need various different angles across the levels after mirroring.
         // X, Y, Z in the target relocation will be relative to the current location; the angle will be the new angle.
 
-        List<TR2Entity> entities = level.Entities.FindAll(e => e.TypeID == EntityType);
+        List<TR2Entity> entities = level.Entities.FindAll(e => (short)e.TypeID == EntityType);
         AdjustEntities(entities);
     }
 

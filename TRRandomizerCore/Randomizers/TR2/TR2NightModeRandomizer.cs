@@ -101,11 +101,11 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
 
         foreach (TR2Type entityToReplace in _entitiesToReplace.Keys)
         {
-            IEnumerable<TR2Entity> ents = level.Entities.Where(e => e.TypeID == (short)entityToReplace);
+            IEnumerable<TR2Entity> ents = level.Entities.Where(e => e.TypeID == entityToReplace);
             foreach (TR2Entity entity in ents)
             {
                 TR2Entity item = items[_generator.Next(0, items.Count)];
-                entity.TypeID = (short)_entitiesToReplace[entityToReplace];
+                entity.TypeID = _entitiesToReplace[entityToReplace];
                 entity.Room = item.Room;
                 entity.X = item.X;
                 entity.Y = item.Y;

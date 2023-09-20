@@ -158,7 +158,7 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
             foreach (TR2Type secretType in secretMap.Keys)
             {
                 //Does the level contain an entity for this type?
-                TR2Entity secretEntity = _levelInstance.Data.Entities.Find(ent => ent.TypeID == (short)secretType);
+                TR2Entity secretEntity = _levelInstance.Data.Entities.Find(ent => ent.TypeID == secretType);
 
                 //If not, create a placeholder entity for now
                 if (secretEntity == null)
@@ -168,7 +168,7 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
 
                 // Move it to the new location and ensure it has the correct type set
                 Location location = secretMap[secretType];
-                secretEntity.TypeID = (short)secretType;
+                secretEntity.TypeID = secretType;
                 secretEntity.Room = (short)location.Room;
                 secretEntity.X = location.X;
                 secretEntity.Y = location.Y;
@@ -232,7 +232,7 @@ public class TR2SecretRandomizer : BaseTR2Randomizer, ISecretRandomizer
                         _levelInstance.Data.Entities.Add(entity = new());
                     }
 
-                    entity.TypeID = (short)secretType;
+                    entity.TypeID = secretType;
                     entity.Room = (short)copy.Room;
                     entity.X = copy.X;
                     entity.Y = copy.Y;

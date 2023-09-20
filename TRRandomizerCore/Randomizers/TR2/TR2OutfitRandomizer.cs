@@ -52,7 +52,7 @@ public class TR2OutfitRandomizer : BaseTR2Randomizer
             {
                 return lvl1.Sequence.CompareTo(lvl2.Sequence);
             });
-            _firstDragonLevel = levels.Find(l => l.Data.Entities.FindIndex(e => e.TypeID == (short)TR2Type.MarcoBartoli) != -1);
+            _firstDragonLevel = levels.Find(l => l.Data.Entities.FindIndex(e => e.TypeID == TR2Type.MarcoBartoli) != -1);
         }
 
         // Sort the levels so each thread has a fairly equal weight in terms of import cost/time
