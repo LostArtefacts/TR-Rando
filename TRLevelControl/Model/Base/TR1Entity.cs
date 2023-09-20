@@ -1,8 +1,6 @@
-﻿using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TR1Entity : ISerializableCompact, ICloneable
+public class TR1Entity : ICloneable
 {
     public short TypeID { get; set; }
     
@@ -60,24 +58,6 @@ public class TR1Entity : ISerializableCompact, ICloneable
             Flags = (ushort)(Flags & ~(Flags & 0x3E00));
             Flags |= (ushort)(value << 9);
         }
-    }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(TypeID);
-            writer.Write(Room);
-            writer.Write(X);
-            writer.Write(Y);
-            writer.Write(Z);
-            writer.Write(Angle);
-            writer.Write(Intensity);
-            writer.Write(Flags);
-        }
-
-        return stream.ToArray();
     }
 
     public TR1Entity Clone()

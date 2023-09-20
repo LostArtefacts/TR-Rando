@@ -1,9 +1,8 @@
 ﻿using System.Text;
-using TRLevelControl.Serialization;
 
 namespace TRLevelControl.Model;
 
-public class TR2Entity : ISerializableCompact, ICloneable
+public class TR2Entity : ICloneable
 {
     public short TypeID { get; set; }
 
@@ -80,25 +79,6 @@ public class TR2Entity : ISerializableCompact, ICloneable
         sb.Append(" Flags " + Flags.ToString("X4"));
 
         return sb.ToString();
-    }
-
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(TypeID);
-            writer.Write(Room);
-            writer.Write(X);
-            writer.Write(Y);
-            writer.Write(Z);
-            writer.Write(Angle);
-            writer.Write(Intensity1);
-            writer.Write(Intensity2);
-            writer.Write(Flags);
-        }
-
-        return stream.ToArray();
     }
 
     public TR2Entity Clone()

@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Numerics;
-using TREnvironmentEditor.Helpers;
 using TREnvironmentEditor.Model.Types;
 using TRFDControl;
 using TRFDControl.FDEntryTypes;

@@ -731,20 +731,4 @@ internal static class TR4FileReadUtilities
             HeightMinusOne = reader.ReadUInt32()
         };
     }
-
-    public static TR4Entity ReadEntity(BinaryReader reader)
-    {
-        return new TR4Entity()
-        {
-            TypeID = reader.ReadInt16(),
-            Room = reader.ReadInt16(),
-            X = reader.ReadInt32(),
-            Y = reader.ReadInt32(),
-            Z = reader.ReadInt32(),
-            Angle = reader.ReadInt16(),
-            Intensity = reader.ReadInt16(),
-            OCB = reader.ReadInt16(),
-            Flags = reader.ReadUInt16()
-        };
-    }
 }

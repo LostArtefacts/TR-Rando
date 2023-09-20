@@ -1,8 +1,6 @@
-﻿using TRLevelControl.Serialization;
+﻿namespace TRLevelControl.Model;
 
-namespace TRLevelControl.Model;
-
-public class TR4Entity : ISerializableCompact
+public class TR4Entity
 {
     public short TypeID { get; set; }
 
@@ -21,23 +19,4 @@ public class TR4Entity : ISerializableCompact
     public short OCB { get; set; }
 
     public ushort Flags { get; set; }
-    
-    public byte[] Serialize()
-    {
-        using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
-        {
-            writer.Write(TypeID);
-            writer.Write(Room);
-            writer.Write(X);
-            writer.Write(Y);
-            writer.Write(Z);
-            writer.Write(Angle);
-            writer.Write(Intensity);
-            writer.Write(OCB);
-            writer.Write(Flags);
-        }
-
-        return stream.ToArray();
-    }
 }

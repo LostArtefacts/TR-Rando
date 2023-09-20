@@ -329,22 +329,6 @@ internal static class TR2FileReadUtilities
         };
     }
 
-    public static TR2Entity ReadEntity(BinaryReader reader)
-    {
-        return new TR2Entity()
-        {
-            TypeID = reader.ReadInt16(),
-            Room = reader.ReadInt16(),
-            X = reader.ReadInt32(),
-            Y = reader.ReadInt32(),
-            Z = reader.ReadInt32(),
-            Angle = reader.ReadInt16(),
-            Intensity1 = reader.ReadInt16(),
-            Intensity2 = reader.ReadInt16(),
-            Flags = reader.ReadUInt16()
-        };
-    }
-
     public static TRCinematicFrame ReadCinematicFrame(BinaryReader reader)
     {
         return new TRCinematicFrame()
