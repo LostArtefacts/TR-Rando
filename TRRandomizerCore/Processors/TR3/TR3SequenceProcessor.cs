@@ -176,7 +176,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
         foreach (Location location in _upvLocations[level.Name])
         {
-            TR2Entity entity = ItemFactory.CreateItem(level.Name, level.Data.Entities, location);
+            TR3Entity entity = ItemFactory.CreateItem(level.Name, level.Data.Entities, location);
             if (entity == null)
             {
                 break;
@@ -273,7 +273,6 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private void AmendWillardBoss(TR3CombinedLevel level)
     {
-        List<TR2Entity> entities = level.Data.Entities.ToList();
         List<TRModel> models = level.Data.Models.ToList();
 
         // Add new duplicate models for keys, so secret rando doesn't replace the originals.
@@ -291,7 +290,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
                 StartingMesh = artefactModel.StartingMesh
             });
 
-            entities.FindAll(e => e.TypeID == (short)artefact).ForEach(e => e.TypeID = (short)replacement);
+            level.Data.Entities.FindAll(e => e.TypeID == (short)artefact).ForEach(e => e.TypeID = (short)replacement);
         }
 
         // Copy the artefact names into the keys
@@ -309,7 +308,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         // Hide the old Willie AI pathing
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
-            TR2Entity entity = level.Data.Entities[i];
+            TR3Entity entity = level.Data.Entities[i];
             TR3Type type = (TR3Type)entity.TypeID;
             if (type == TR3Type.AIPath_N || type == TR3Type.AICheck_N)
             {
@@ -337,8 +336,8 @@ public class TR3SequenceProcessor : TR3LevelProcessor
     private static void AmendSouthPacificSpikes(TR3CombinedLevel level)
     {
         short spikes = (short)TR3Type.TeethSpikesOrBarbedWire;
-        List<TR2Entity> entities = level.Data.Entities.ToList().FindAll(e => e.TypeID == spikes);
-        foreach (TR2Entity entity in entities)
+        List<TR3Entity> entities = level.Data.Entities.ToList().FindAll(e => e.TypeID == spikes);
+        foreach (TR3Entity entity in entities)
         {
             if (level.Is(TR3LevelNames.MADUBU) || entity.CodeBits == 31)
             {
@@ -353,7 +352,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private static void AmendCrashSitePiranhas(TR3CombinedLevel level)
     {
-        TR2Entity piranhas = level.Data.Entities.Find(e => e.TypeID == (short)TR3Type.Piranhas_N && e.Room == 61);
+        TR3Entity piranhas = level.Data.Entities.Find(e => e.TypeID == (short)TR3Type.Piranhas_N && e.Room == 61);
         if (piranhas != null)
         {
             // Move them behind the gate, which is an unreachable room

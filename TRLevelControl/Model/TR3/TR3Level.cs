@@ -221,7 +221,7 @@ public class TR3Level : TRLevelBase
     /// NumObjectTextures * 20 bytes
     /// </summary>
     public TRObjectTexture[] ObjectTextures { get; set; }
-    public List<TR2Entity> Entities { get; set; }
+    public List<TR3Entity> Entities { get; set; }
     public List<byte> LightMap { get; set; }
 
     /// <summary>

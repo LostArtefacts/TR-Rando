@@ -77,4 +77,28 @@ public class EMModifyEntityFunction : BaseEMFunction
             entity.Flags = Flags.Value;
         }
     }
+
+    private void ModifyEntity(TR3Entity entity)
+    {
+        if (Invisible.HasValue)
+        {
+            entity.Invisible = Invisible.Value;
+        }
+        if (ClearBody.HasValue)
+        {
+            entity.ClearBody = ClearBody.Value;
+        }
+        if (Intensity1.HasValue)
+        {
+            entity.Intensity1 = Intensity1.Value;
+        }
+        if (Intensity2.HasValue)
+        {
+            entity.Intensity2 = Intensity2.Value;
+        }
+        if (Flags.HasValue)
+        {
+            entity.Flags = Flags.Value;
+        }
+    }
 }

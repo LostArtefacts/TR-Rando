@@ -83,7 +83,7 @@ public class EMAddEntityFunction : BaseEMFunction
                 floorData.ParseFromLevel(level);
                 short room = data.ConvertRoom(Location.Room);
                 TRRoomSector sector = FDUtilities.GetRoomSector(Location.X, Location.Y, Location.Z, room, level, floorData);
-                foreach (TR2Entity entity in level.Entities)
+                foreach (TR3Entity entity in level.Entities)
                 {
                     if (entity.Room == room && FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, entity.Room, level, floorData) == sector)
                     {
@@ -95,13 +95,13 @@ public class EMAddEntityFunction : BaseEMFunction
                 }
             }
 
-            level.Entities.Add(CreateTR2Entity(data));
+            level.Entities.Add(CreateTR3Entity(data));
         }
     }
 
     private TR1Entity CreateTREntity(EMLevelData data)
     {
-        return new TR1Entity
+        return new()
         {
             TypeID = TypeID,
             X = Location.X,
@@ -116,7 +116,23 @@ public class EMAddEntityFunction : BaseEMFunction
 
     private TR2Entity CreateTR2Entity(EMLevelData data)
     {
-        return new TR2Entity
+        return new()
+        {
+            TypeID = TypeID,
+            X = Location.X,
+            Y = Location.Y,
+            Z = Location.Z,
+            Room = data.ConvertRoom(Location.Room),
+            Angle = Location.Angle,
+            Flags = Flags,
+            Intensity1 = Intensity ?? -1,
+            Intensity2 = Intensity ?? -1
+        };
+    }
+
+    private TR3Entity CreateTR3Entity(EMLevelData data)
+    {
+        return new()
         {
             TypeID = TypeID,
             X = Location.X,

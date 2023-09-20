@@ -290,7 +290,7 @@ public class TR3LevelControl : TRLevelControlBase<TR3Level>
 
         //Entities
         uint numEntities = reader.ReadUInt32();
-        _level.Entities = reader.ReadTR2Entities(numEntities);
+        _level.Entities = reader.ReadTR3Entities(numEntities);
 
         _level.LightMap = new(reader.ReadBytes(TRConsts.LightMapSize));
 

@@ -363,10 +363,10 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
     {
         // Get a list of current enemy entities
         List<TR3Type> allEnemies = TR3TypeUtilities.GetFullListOfEnemies();
-        List<TR2Entity> enemyEntities = level.Data.Entities.FindAll(e => allEnemies.Contains((TR3Type)e.TypeID));
+        List<TR3Entity> enemyEntities = level.Data.Entities.FindAll(e => allEnemies.Contains((TR3Type)e.TypeID));
 
         // Keep track of any new entities added (e.g. Lizard for Puna)
-        List<TR2Entity> newEntities = new();
+        List<TR3Entity> newEntities = new();
 
         // First iterate through any enemies that are restricted by room
         Dictionary<TR3Type, List<int>> enemyRooms = TR3EnemyUtilities.GetRestrictedEnemyRooms(level.Name, Settings.RandoEnemyDifficulty);
@@ -397,7 +397,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                 for (int i = 0; i < enemyCount; i++)
                 {
                     // Find an entity in one of the rooms that the new enemy is restricted to
-                    TR2Entity targetEntity = null;
+                    TR3Entity targetEntity = null;
                     do
                     {
                         int room = enemyRooms[entity][_generator.Next(0, enemyRooms[entity].Count)];
@@ -427,7 +427,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                         // Add the pathing if necessary
                         foreach (Location path in paths)
                         {
-                            TR2Entity pathItem = ItemFactory.CreateItem(level.Name, level.Data.Entities, path);
+                            TR3Entity pathItem = ItemFactory.CreateItem(level.Name, level.Data.Entities, path);
                             pathItem.TypeID = (short)TR3Type.AIPath_N;
                         }
                     }
@@ -442,7 +442,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             }
         }
 
-        foreach (TR2Entity currentEntity in enemyEntities)
+        foreach (TR3Entity currentEntity in enemyEntities)
         {
             TR3Type currentEntityType = (TR3Type)currentEntity.TypeID;
             TR3Type newEntityType = currentEntityType;
@@ -456,7 +456,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             List<TR3Type> enemyPool;
 
             // Check if the enemy drops an item
-            TR2Entity pickupEntity = level.Data.Entities.Find
+            TR3Entity pickupEntity = level.Data.Entities.Find
             (
                 e =>
                     e != currentEntity &&
@@ -501,7 +501,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                 }
             }
 
-            TR2Entity targetEntity = currentEntity;
+            TR3Entity targetEntity = currentEntity;
 
             if (level.Is(TR3LevelNames.CRASH) && currentEntity.Room == 15)
             {
@@ -511,7 +511,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
                 // as raptors.
                 if (!enemies.Available.Contains(TR3Type.Raptor))
                 {
-                    TR2Entity raptorSpawn = level.Data.Entities.ToList().Find(e => e.TypeID == (short)TR3Type.RaptorRespawnPoint_N && e.Room != 15);
+                    TR3Entity raptorSpawn = level.Data.Entities.Find(e => e.TypeID == (short)TR3Type.RaptorRespawnPoint_N && e.Room != 15);
                     if (raptorSpawn != null)
                     {
                         (targetEntity = raptorSpawn).TypeID = (short)TR3TypeUtilities.TranslateAlias(newEntityType);
@@ -601,9 +601,9 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
 
         // Find out which gun we have for this level
         List<TR3Type> weaponTypes = TR3TypeUtilities.GetWeaponPickups();
-        List<TR2Entity> levelWeapons = level.Data.Entities.FindAll(e => weaponTypes.Contains((TR3Type)e.TypeID));
-        TR2Entity weaponEntity = null;
-        foreach (TR2Entity weapon in levelWeapons)
+        List<TR3Entity> levelWeapons = level.Data.Entities.FindAll(e => weaponTypes.Contains((TR3Type)e.TypeID));
+        TR3Entity weaponEntity = null;
+        foreach (TR3Entity weapon in levelWeapons)
         {
             int match = _pistolLocations[level.Name].FindIndex
             (
@@ -626,7 +626,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         }
 
         List<TR3Type> allEnemies = TR3TypeUtilities.GetFullListOfEnemies();
-        List<TR2Entity> levelEnemies = level.Data.Entities.FindAll(e => allEnemies.Contains((TR3Type)e.TypeID));
+        List<TR3Entity> levelEnemies = level.Data.Entities.FindAll(e => allEnemies.Contains((TR3Type)e.TypeID));
         EnemyDifficulty difficulty = TR3EnemyUtilities.GetEnemyDifficulty(levelEnemies);
 
         if (difficulty > EnemyDifficulty.Easy)
@@ -668,7 +668,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
         // Add the pistols as a pickup if the level is hard and there aren't any other pistols around
         if (difficulty > EnemyDifficulty.Medium && levelWeapons.Find(e => e.TypeID == (short)TR3Type.Pistols_P) == null && ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
         {
-            TR2Entity pistols = ItemFactory.CreateItem(level.Name, level.Data.Entities);
+            TR3Entity pistols = ItemFactory.CreateItem(level.Name, level.Data.Entities);
             pistols.TypeID = (short)TR3Type.Pistols_P;
             pistols.X = weaponEntity.X;
             pistols.Y = weaponEntity.Y;

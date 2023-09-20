@@ -124,6 +124,32 @@ public class EMDuplicateSwitchTriggerFunction : EMDuplicateTriggerFunction
         };
     }
 
+    private void SetupLocations(EMLevelData data, List<TR3Entity> entities)
+    {
+        // Get a location for the switch we're interested in
+        TR3Entity switchEntity = entities[data.ConvertEntity(NewSwitchIndex)];
+        Locations = new List<EMLocation>
+        {
+            new EMLocation
+            {
+                X = switchEntity.X,
+                Y = switchEntity.Y,
+                Z = switchEntity.Z,
+                Room = data.ConvertRoom(switchEntity.Room)
+            }
+        };
+
+        // Get the location of the old switch
+        switchEntity = entities[data.ConvertEntity(OldSwitchIndex)];
+        BaseLocation = new EMLocation
+        {
+            X = switchEntity.X,
+            Y = switchEntity.Y,
+            Z = switchEntity.Z,
+            Room = data.ConvertRoom(switchEntity.Room)
+        };
+    }
+
     private void UpdateTriggers(EMLevelData data, FDControl control, Func<EMLocation, TRRoomSector> sectorGetter)
     {
         ushort newSwitchIndex = (ushort)data.ConvertEntity(NewSwitchIndex);

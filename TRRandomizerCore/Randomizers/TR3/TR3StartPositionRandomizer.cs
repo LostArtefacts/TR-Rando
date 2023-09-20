@@ -35,7 +35,7 @@ public class TR3StartPositionRandomizer : BaseTR3Randomizer
 
     private void RandomizeStartPosition(TR3CombinedLevel level)
     {
-        TR2Entity lara = level.Data.Entities.Find(e => e.TypeID == (short)TR3Type.Lara);
+        TR3Entity lara = level.Data.Entities.Find(e => e.TypeID == (short)TR3Type.Lara);
 
         // If we haven't defined anything for a level, Lara will just be rotated. This is most likely where there are
         // triggers just after Lara's starting spot, so we just skip them here.

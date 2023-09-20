@@ -133,7 +133,7 @@ public class EMAddStaticMeshFunction : BaseEMFunction
             {
                 bool sectorFree = true;
                 TRRoomSector sector = FDUtilities.GetRoomSector(location.X, location.Y, location.Z, roomNumber, level, control);
-                foreach (TR2Entity entity in level.Entities)
+                foreach (TR3Entity entity in level.Entities)
                 {
                     if (entity.Room == roomNumber)
                     {

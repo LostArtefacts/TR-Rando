@@ -131,4 +131,54 @@ public class EMEntityPropertyCondition : BaseEMCondition
         }
         return result;
     }
+
+    private bool GetResult(TR3Entity entity)
+    {
+        bool result = true;
+        if (EntityType.HasValue)
+        {
+            result &= entity.TypeID == EntityType.Value;
+        }
+        if (EntityTypes != null)
+        {
+            result &= EntityTypes.Contains(entity.TypeID);
+        }
+        if (Invisible.HasValue)
+        {
+            result &= entity.Invisible == Invisible.Value;
+        }
+        if (ClearBody.HasValue)
+        {
+            result &= entity.ClearBody == ClearBody.Value;
+        }
+        if (Intensity1.HasValue)
+        {
+            result &= entity.Intensity1 == Intensity1.Value;
+        }
+        if (Intensity2.HasValue)
+        {
+            result &= entity.Intensity2 == Intensity2.Value;
+        }
+        if (Flags.HasValue)
+        {
+            result &= entity.Flags == Flags.Value;
+        }
+        if (X.HasValue)
+        {
+            result &= entity.X == X.Value;
+        }
+        if (Y.HasValue)
+        {
+            result &= entity.Y == Y.Value;
+        }
+        if (Z.HasValue)
+        {
+            result &= entity.Z == Z.Value;
+        }
+        if (Room.HasValue)
+        {
+            result &= entity.Room == Room.Value;
+        }
+        return result;
+    }
 }

@@ -60,6 +60,14 @@ public static class ItemUtilities
         entity.Invisible = true;
     }
 
+    public static void HideEntity(TR3Entity entity)
+    {
+        // Move the item down, under the floor or into the ceiling of whatever is below
+        entity.Y += 128;
+        // Marking it invisible means it cannot be picked up, even if the new location can be reached.
+        entity.Invisible = true;
+    }
+
     private static readonly Dictionary<TR2Type, TR2Items> _tr2EntityToScriptItemMap = new()
     {
         [TR2Type.Pistols_S_P]

@@ -43,4 +43,13 @@ public class EMMoveEntityFunction : BaseEMFunction
         entity.Room = data.ConvertRoom(TargetLocation.Room);
         entity.Angle = TargetLocation.Angle;
     }
+
+    private void MoveEntity(TR3Entity entity, EMLevelData data)
+    {
+        entity.X = TargetLocation.X;
+        entity.Y = TargetLocation.Y;
+        entity.Z = TargetLocation.Z;
+        entity.Room = data.ConvertRoom(TargetLocation.Room);
+        entity.Angle = TargetLocation.Angle;
+    }
 }

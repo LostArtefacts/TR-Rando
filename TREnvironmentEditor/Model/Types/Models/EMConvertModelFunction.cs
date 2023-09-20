@@ -58,4 +58,15 @@ public class EMConvertModelFunction : BaseEMFunction
             }
         }
     }
+
+    private void UpdateModelEntities(IEnumerable<TR3Entity> entities)
+    {
+        foreach (TR3Entity entity in entities)
+        {
+            if (entity.TypeID == OldModelID)
+            {
+                entity.TypeID = (short)NewModelID;
+            }
+        }
+    }
 }

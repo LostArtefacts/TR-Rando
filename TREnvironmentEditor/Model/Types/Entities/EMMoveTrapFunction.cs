@@ -18,7 +18,7 @@ public class EMMoveTrapFunction : BaseMoveTriggerableFunction
 
     public override void ApplyToLevel(TR3Level level)
     {
-        TR2Entity trap = level.Entities[EntityIndex];
+        TR3Entity trap = level.Entities[EntityIndex];
         RepositionTriggerable(trap, level);
     }
 }

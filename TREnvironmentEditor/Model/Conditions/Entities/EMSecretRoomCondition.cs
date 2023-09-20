@@ -40,8 +40,7 @@ public class EMSecretRoomCondition : BaseEMCondition
 
     protected override bool Evaluate(TR3Level level)
     {
-        List<TR2Entity> levelEntities = level.Entities.ToList();
-        List<TR2Entity> roomEntities = levelEntities.FindAll(e => e.Room == RoomIndex);
+        List<TR3Entity> roomEntities = level.Entities.FindAll(e => e.Room == RoomIndex);
         if (roomEntities.Count > 0)
         {
             // It's difficult to tell if a particular model is being used for secret pickups,
@@ -58,7 +57,7 @@ public class EMSecretRoomCondition : BaseEMCondition
                  && trig.TrigActionList[1].TrigAction == FDTrigAction.SecretFound
             );
 
-            foreach (TR2Entity entity in roomEntities)
+            foreach (TR3Entity entity in roomEntities)
             {
                 TRRoomSector sector = FDUtilities.GetRoomSector(entity.X, entity.Y, entity.Z, RoomIndex, level, floorData);
                 if (sector.FDIndex == 0)
@@ -66,7 +65,7 @@ public class EMSecretRoomCondition : BaseEMCondition
                     continue;
                 }
                 
-                ushort entityIndex = (ushort)levelEntities.IndexOf(entity);
+                ushort entityIndex = (ushort)level.Entities.IndexOf(entity);
                 if (floorData.Entries[sector.FDIndex].Find(pred) is FDTriggerEntry trigger && trigger.TrigActionList[0].Parameter == entityIndex)
                 {
                     return true;

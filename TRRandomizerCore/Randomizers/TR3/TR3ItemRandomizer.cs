@@ -24,7 +24,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
     private static readonly int _ANY_ROOM_ALLOWED = 2048;  //Max rooms is 1024 - so this should never be possible.
 
     // Track the pistols so they remain a weapon type and aren't moved
-    private TR2Entity _unarmedLevelPistols;
+    private TR3Entity _unarmedLevelPistols;
 
     // Secret reward items handled in separate class, so track the reward entities
     private TRSecretMapping<TR2Entity> _secretMapping;
@@ -135,8 +135,8 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
     {
         if (level.Script.RemovesWeapons)
         {
-            List<TR2Entity> pistolEntities = level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)TR3Type.Pistols_P);
-            foreach (TR2Entity pistols in pistolEntities)
+            List<TR3Entity> pistolEntities = level.Data.Entities.FindAll(e => e.TypeID == (short)TR3Type.Pistols_P);
+            foreach (TR3Entity pistols in pistolEntities)
             {
                 int match = _pistolLocations[level.Name].FindIndex
                 (
@@ -171,7 +171,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 continue;
             }
 
-            TR2Entity ent = level.Data.Entities[i];
+            TR3Entity ent = level.Data.Entities[i];
             TR3Type currentType = (TR3Type)ent.TypeID;
             // If this is an unarmed level's pistols, make sure they're replaced with another weapon.
             // Similar case for the assault course, so that Lara can still shoot Winnie.
@@ -213,7 +213,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         // Look for extra utility/ammo items and hide them
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
-            TR2Entity ent = level.Data.Entities[i];
+            TR3Entity ent = level.Data.Entities[i];
             if ((_secretMapping != null && _secretMapping.RewardEntities.Contains(i)) || ent == _unarmedLevelPistols)
             {
                 // Rewards and unarmed level weapons excluded
@@ -255,7 +255,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
                 continue;
             }
 
-            TR2Entity ent = level.Data.Entities[i];
+            TR3Entity ent = level.Data.Entities[i];
             // Move standard items only, excluding any unarmed level pistols, and reward items
             if (TR3TypeUtilities.IsStandardPickupType((TR3Type)ent.TypeID) && ent != _unarmedLevelPistols)
             {
@@ -285,7 +285,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
             exclusions.AddRange(_excludedLocations[level.Name]);
         }
 
-        foreach (TR2Entity entity in level.Data.Entities)
+        foreach (TR3Entity entity in level.Data.Entities)
         {
             if (!TR3TypeUtilities.CanSharePickupSpace((TR3Type)entity.TypeID))
             {
@@ -339,7 +339,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         //Get all locations that have a KeyItemGroupID - e.g. intended for key items
         List<Location> levelLocations = _locations[level.Name].Where(i => i.KeyItemGroupID != 0).ToList();
 
-        foreach (TR2Entity ent in level.Data.Entities)
+        foreach (TR3Entity ent in level.Data.Entities)
         {
             //Calculate its alias
             TR3Type AliasedKeyItemID = (TR3Type)(ent.TypeID + ent.Room + GetLevelKeyItemBaseAlias(level.Name));

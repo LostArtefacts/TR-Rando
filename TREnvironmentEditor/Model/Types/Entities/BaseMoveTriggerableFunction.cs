@@ -78,7 +78,7 @@ public abstract class BaseMoveTriggerableFunction : BaseEMFunction
         control.WriteToLevel(level);
     }
 
-    protected void RepositionTriggerable(TR2Entity entity, TR3Level level)
+    protected void RepositionTriggerable(TR3Entity entity, TR3Level level)
     {
         EMLevelData data = GetData(level);
 

@@ -180,7 +180,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             };
             for (int i = 0; i < requiredDoors; i++)
             {
-                TR2Entity door = ItemFactory.CreateItem(level.Name, level.Data.Entities);
+                TR3Entity door = ItemFactory.CreateItem(level.Name, level.Data.Entities);
                 rewardRoom.DoorIndices.Add(level.Data.Entities.IndexOf(door));
             }
         }
@@ -190,14 +190,14 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
     private void ActualiseRewardRoom(TR3CombinedLevel level, TRSecretRoom<TR2Entity> placeholder)
     {
-        TRSecretMapping<TR2Entity> secretMapping = TRSecretMapping<TR2Entity>.Get(GetResourcePath(@"TR3\SecretMapping\" + level.Name + "-SecretMapping.json"));
+        TRSecretMapping<TR3Entity> secretMapping = TRSecretMapping<TR3Entity>.Get(GetResourcePath(@"TR3\SecretMapping\" + level.Name + "-SecretMapping.json"));
         if (secretMapping == null)
         {
             return;
         }
         
         // Are any rooms enforced based on level specifics?
-        TRSecretRoom<TR2Entity> rewardRoom = secretMapping.Rooms.Find(r => r.HasUsageCondition);
+        TRSecretRoom<TR3Entity> rewardRoom = secretMapping.Rooms.Find(r => r.HasUsageCondition);
         if (rewardRoom == null || !rewardRoom.UsageCondition.GetResult(level.Data))
         {
             do
@@ -215,7 +215,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         for (int i = 0; i < rewardRoom.DoorIndices.Count; i++)
         {
             int doorIndex = rewardRoom.DoorIndices[i];
-            TR2Entity door = rewardRoom.Doors[i];
+            TR3Entity door = rewardRoom.Doors[i];
             if (door.Room < 0)
             {
                 door.Room = roomIndex;
@@ -241,7 +241,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         int rewardPositionCount = rewardRoom.RewardPositions.Count;
         for (int i = 0; i < rewardEntities.Count; i++)
         {
-            TR2Entity item = level.Data.Entities[rewardEntities[i]];
+            TR3Entity item = level.Data.Entities[rewardEntities[i]];
             Location position = rewardRoom.RewardPositions[i % rewardPositionCount];
 
             item.X = position.X;
@@ -298,7 +298,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
         }
     }
 
-    private static void CreateTrapdoorTrigger(TR2Entity door, ushort doorIndex, TR3Level level)
+    private static void CreateTrapdoorTrigger(TR3Entity door, ushort doorIndex, TR3Level level)
     {
         FDControl floorData = new();
         floorData.ParseFromLevel(level);
@@ -370,7 +370,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 if (PlaceSecret(level, secret, floorData))
                 {
                     // This will either make a new entity or repurpose an old one
-                    TR2Entity entity = ItemFactory.CreateItem(level.Name, level.Data.Entities, secret.Location, true);
+                    TR3Entity entity = ItemFactory.CreateItem(level.Name, level.Data.Entities, secret.Location, true);
                     entity.TypeID = (short)secret.PickupType;
 
                     secretIndex++;
@@ -451,7 +451,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
             if (PlaceSecret(level, secret, floorData))
             {
                 // This will either make a new entity or repurpose an old one
-                TR2Entity entity = ItemFactory.CreateItem(level.Name, level.Data.Entities, secret.Location);
+                TR3Entity entity = ItemFactory.CreateItem(level.Name, level.Data.Entities, secret.Location);
                 entity.TypeID = (short)secret.PickupType;
 
                 secret.SecretIndex++;
@@ -543,7 +543,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
                 List<Location> pool = _unarmedLocations[level.Name];
                 Location location = pool[_generator.Next(0, pool.Count)];
 
-                TR2Entity medi = ItemFactory.CreateItem(level.Name, level.Data.Entities, location, Settings.DevelopmentMode);
+                TR3Entity medi = ItemFactory.CreateItem(level.Name, level.Data.Entities, location, Settings.DevelopmentMode);
                 medi.TypeID = (short)TR3Type.LargeMed_P;
             }
             else
@@ -643,7 +643,7 @@ public class TR3SecretRandomizer : BaseTR3Randomizer, ISecretRandomizer
 
         // Get the sector and check if it is shared with a trapdoor or bridge, as these won't work either.
         TRRoomSector sector = FDUtilities.GetRoomSector(secret.Location.X, secret.Location.Y, secret.Location.Z, (short)secret.Location.Room, level.Data, floorData);
-        foreach (TR2Entity otherEntity in level.Data.Entities)
+        foreach (TR3Entity otherEntity in level.Data.Entities)
         {
             TR3Type type = (TR3Type)otherEntity.TypeID;
             if (secret.Location.Room == otherEntity.Room && (TR3TypeUtilities.IsTrapdoor(type) || TR3TypeUtilities.IsBridge(type)))

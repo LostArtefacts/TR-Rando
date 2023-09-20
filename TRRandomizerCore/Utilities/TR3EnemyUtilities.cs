@@ -158,10 +158,10 @@ public static class TR3EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR3CombinedLevel level)
     {
-        List<TR2Entity> enemies = level.Data.Entities.FindAll(e => TR3TypeUtilities.IsEnemyType((TR3Type)e.TypeID));
-        foreach (TR2Entity entityInstance in enemies)
+        List<TR3Entity> enemies = level.Data.Entities.FindAll(e => TR3TypeUtilities.IsEnemyType((TR3Type)e.TypeID));
+        foreach (TR3Entity entityInstance in enemies)
         {
-            List<TR2Entity> sharedItems = level.Data.Entities.FindAll(e =>
+            List<TR3Entity> sharedItems = level.Data.Entities.FindAll(e =>
                 e.X == entityInstance.X
                 && e.Y == entityInstance.Y
                 && e.Z == entityInstance.Z
@@ -169,7 +169,7 @@ public static class TR3EnemyUtilities
             if (sharedItems.Count > 1)
             {
                 // Are any entities that are sharing a location a droppable pickup?
-                foreach (TR2Entity ent in sharedItems)
+                foreach (TR3Entity ent in sharedItems)
                 {
                     if (TR3TypeUtilities.IsAnyPickupType((TR3Type)ent.TypeID))
                     {
@@ -182,7 +182,7 @@ public static class TR3EnemyUtilities
         return false;
     }
 
-    public static void SetEntityTriggers(TR3Level level, TR2Entity entity)
+    public static void SetEntityTriggers(TR3Level level, TR3Entity entity)
     {
         if (_oneShotEnemies.Contains((TR3Type)entity.TypeID))
         {
@@ -201,7 +201,7 @@ public static class TR3EnemyUtilities
         }
     }
 
-    public static EnemyDifficulty GetEnemyDifficulty(List<TR2Entity> enemyEntities)
+    public static EnemyDifficulty GetEnemyDifficulty(List<TR3Entity> enemyEntities)
     {
         if (enemyEntities.Count == 0)
         {
@@ -209,7 +209,7 @@ public static class TR3EnemyUtilities
         }
 
         int weight = 0;
-        foreach (TR2Entity enemyEntity in enemyEntities)
+        foreach (TR3Entity enemyEntity in enemyEntities)
         {
             EnemyDifficulty enemyDifficulty = EnemyDifficulty.Medium;
             foreach (EnemyDifficulty difficulty in _enemyDifficulties.Keys)

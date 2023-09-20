@@ -172,6 +172,32 @@ public class TRLevelReader : BinaryReader
         };
     }
 
+    public List<TR3Entity> ReadTR3Entities(long numEntities)
+    {
+        List<TR3Entity> entities = new();
+        for (int i = 0; i < numEntities; i++)
+        {
+            entities.Add(ReadTR3Entity());
+        }
+        return entities;
+    }
+
+    public TR3Entity ReadTR3Entity()
+    {
+        return new()
+        {
+            TypeID = ReadInt16(),
+            Room = ReadInt16(),
+            X = ReadInt32(),
+            Y = ReadInt32(),
+            Z = ReadInt32(),
+            Angle = ReadInt16(),
+            Intensity1 = ReadInt16(),
+            Intensity2 = ReadInt16(),
+            Flags = ReadUInt16()
+        };
+    }
+
     public List<TR4Entity> ReadTR4Entities(long numEntities)
     {
         List<TR4Entity> entities = new();

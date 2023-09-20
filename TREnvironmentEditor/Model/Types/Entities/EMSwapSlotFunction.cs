@@ -96,8 +96,8 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
             return;
         }
 
-        TR2Entity slot1 = level.Entities[Slot1Index];
-        TR2Entity slot2 = level.Entities[Slot2Index];
+        TR3Entity slot1 = level.Entities[Slot1Index];
+        TR3Entity slot2 = level.Entities[Slot2Index];
 
         // We can only swap if the slots are corresponding done/not done types.
         // So for now, just check that one doesn't have any triggers
@@ -163,6 +163,30 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
     }
 
     private static void SwapSlots(TR2Entity slot1, TR2Entity slot2, EMLevelData data)
+    {
+        EMLocation temp = new()
+        {
+            X = slot1.X,
+            Y = slot1.Y,
+            Z = slot1.Z,
+            Room = slot1.Room,
+            Angle = slot1.Angle
+        };
+
+        slot1.X = slot2.X;
+        slot1.Y = slot2.Y;
+        slot1.Z = slot2.Z;
+        slot1.Room = data.ConvertRoom(slot2.Room);
+        slot1.Angle = slot2.Angle;
+
+        slot2.X = temp.X;
+        slot2.Y = temp.Y;
+        slot2.Z = temp.Z;
+        slot2.Room = data.ConvertRoom(temp.Room);
+        slot2.Angle = temp.Angle;
+    }
+
+    private static void SwapSlots(TR3Entity slot1, TR3Entity slot2, EMLevelData data)
     {
         EMLocation temp = new()
         {

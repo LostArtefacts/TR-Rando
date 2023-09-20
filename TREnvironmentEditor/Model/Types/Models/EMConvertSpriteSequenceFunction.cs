@@ -58,4 +58,15 @@ public class EMConvertSpriteSequenceFunction : BaseEMFunction
             }
         }
     }
+
+    private void UpdateSpriteEntities(IEnumerable<TR3Entity> entities)
+    {
+        foreach (TR3Entity entity in entities)
+        {
+            if (entity.TypeID == OldSpriteID)
+            {
+                entity.TypeID = NewSpriteID;
+            }
+        }
+    }
 }
