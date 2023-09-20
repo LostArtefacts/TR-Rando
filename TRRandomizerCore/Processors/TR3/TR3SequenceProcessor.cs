@@ -336,7 +336,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
     private static void AmendSouthPacificSpikes(TR3CombinedLevel level)
     {
         short spikes = (short)TR3Type.TeethSpikesOrBarbedWire;
-        List<TR3Entity> entities = level.Data.Entities.ToList().FindAll(e => e.TypeID == spikes);
+        List<TR3Entity> entities = level.Data.Entities.FindAll(e => e.TypeID == spikes);
         foreach (TR3Entity entity in entities)
         {
             if (level.Is(TR3LevelNames.MADUBU) || entity.CodeBits == 31)

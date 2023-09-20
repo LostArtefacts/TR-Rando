@@ -162,7 +162,7 @@ public static class TR1EnemyUtilities
     {
         if (_oneShotEnemies.Contains((TR1Type)entity.TypeID))
         {
-            int entityID = level.Entities.ToList().IndexOf(entity);
+            int entityID = level.Entities.IndexOf(entity);
 
             FDControl fdControl = new();
             fdControl.ParseFromLevel(level);

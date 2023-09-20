@@ -19,7 +19,7 @@ public class EMMovePickupFunction : BaseEMFunction
         FDControl control = new();
         control.ParseFromLevel(level);
 
-        MovePickups(level.Entities.ToList(), data, delegate (EMLocation location)
+        MovePickups(level.Entities, data, delegate (EMLocation location)
         {
             return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
         });
@@ -32,7 +32,7 @@ public class EMMovePickupFunction : BaseEMFunction
         FDControl control = new();
         control.ParseFromLevel(level);
 
-        MovePickups(level.Entities.ToList(), data, delegate (EMLocation location)
+        MovePickups(level.Entities, data, delegate (EMLocation location)
         {
             return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
         });
@@ -45,7 +45,7 @@ public class EMMovePickupFunction : BaseEMFunction
         FDControl control = new();
         control.ParseFromLevel(level);
 
-        MovePickups(level.Entities.ToList(), data, delegate (EMLocation location)
+        MovePickups(level.Entities, data, delegate (EMLocation location)
         {
             return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
         });

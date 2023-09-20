@@ -102,7 +102,7 @@ public class TR2StartPositionRandomizer : BaseTR2Randomizer
         // Spin the boat around too
         if (level.Is(TR2LevelNames.BARTOLI))
         {
-            TR2Entity boat = level.Data.Entities.ToList().Find(e => e.TypeID == (short)TR2Type.Boat);
+            TR2Entity boat = level.Data.Entities.Find(e => e.TypeID == (short)TR2Type.Boat);
             boat.Angle = lara.Angle;
         }
     }

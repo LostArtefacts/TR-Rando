@@ -10,7 +10,7 @@ public class EMAdjustEntityPositionFunction : BaseEMFunction
 
     public override void ApplyToLevel(TR1Level level)
     {
-        List<TR1Entity> entities = level.Entities.ToList().FindAll(e => e.TypeID == EntityType);
+        List<TR1Entity> entities = level.Entities.FindAll(e => e.TypeID == EntityType);
         AdjustEntities(entities);
     }
 
@@ -19,13 +19,13 @@ public class EMAdjustEntityPositionFunction : BaseEMFunction
         // Example use case is rotating wall blades, which need various different angles across the levels after mirroring.
         // X, Y, Z in the target relocation will be relative to the current location; the angle will be the new angle.
 
-        List<TR2Entity> entities = level.Entities.ToList().FindAll(e => e.TypeID == EntityType);
+        List<TR2Entity> entities = level.Entities.FindAll(e => e.TypeID == EntityType);
         AdjustEntities(entities);
     }
 
     public override void ApplyToLevel(TR3Level level)
     {
-        List<TR3Entity> entities = level.Entities.ToList().FindAll(e => e.TypeID == EntityType);
+        List<TR3Entity> entities = level.Entities.FindAll(e => e.TypeID == EntityType);
         AdjustEntities(entities);
     }
 

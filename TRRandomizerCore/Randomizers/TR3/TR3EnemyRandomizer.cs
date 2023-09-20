@@ -303,7 +303,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
     {
         List<TR3Type> allGameEnemies = TR3TypeUtilities.GetFullListOfEnemies();
         ISet<TR3Type> allLevelEnts = new SortedSet<TR3Type>();
-        level.Data.Entities.ToList().ForEach(e => allLevelEnts.Add((TR3Type)e.TypeID));
+        level.Data.Entities.ForEach(e => allLevelEnts.Add((TR3Type)e.TypeID));
         List<TR3Type> oldEntities = allLevelEnts.ToList().FindAll(e => allGameEnemies.Contains(e));
         return oldEntities;
     }
@@ -491,7 +491,7 @@ public class TR3EnemyRandomizer : BaseTR3Randomizer
             int maxEntityCount = TR3EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, Settings.RandoEnemyDifficulty);
             if (maxEntityCount != -1)
             {
-                if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount && enemyPool.Count > maxEntityCount)
+                if (level.Data.Entities.FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount && enemyPool.Count > maxEntityCount)
                 {
                     TR3Type tmp = newEntityType;
                     while (newEntityType == tmp || TR3EnemyUtilities.IsEnemyRestricted(level.Name, newEntityType))

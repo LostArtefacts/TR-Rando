@@ -82,7 +82,7 @@ public class TR2SavegameTester
         size += (int)level.NumCameras * _cameraSize;
 
         // Expand the entity list to simulate everything that could actually be present
-        List<TR2Entity> entities = level.Entities.ToList();
+        List<TR2Entity> entities = new(level.Entities);
         foreach (TR2Entity entity in level.Entities)
         {
             TR2Type type = (TR2Type)entity.TypeID;

@@ -373,7 +373,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
     {
         List<TR1Type> allGameEnemies = TR1TypeUtilities.GetFullListOfEnemies();
         ISet<TR1Type> allLevelEnts = new SortedSet<TR1Type>();
-        level.Data.Entities.ToList().ForEach(e => allLevelEnts.Add((TR1Type)e.TypeID));
+        level.Data.Entities.ForEach(e => allLevelEnts.Add((TR1Type)e.TypeID));
         List<TR1Type> oldEntities = allLevelEnts.ToList().FindAll(e => allGameEnemies.Contains(e));
         return oldEntities;
     }
@@ -447,8 +447,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
 
         // Get a list of current enemy entities
         List<TR1Type> allEnemies = TR1TypeUtilities.GetFullListOfEnemies();
-        List<TR1Entity> levelEntities = level.Data.Entities.ToList();
-        List<TR1Entity> enemyEntities = levelEntities.FindAll(e => allEnemies.Contains((TR1Type)e.TypeID));
+        List<TR1Entity> enemyEntities = level.Data.Entities.FindAll(e => allEnemies.Contains((TR1Type)e.TypeID));
 
         RandoDifficulty difficulty = GetImpliedDifficulty();
 
@@ -576,7 +575,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
             RestrictedEnemyGroup enemyGroup = TR1EnemyUtilities.GetRestrictedEnemyGroup(level.Name, TR1TypeUtilities.TranslateAlias(newEntityType), groupDifficulty);
             if (enemyGroup != null)
             {
-                if (level.Data.Entities.ToList().FindAll(e => enemyGroup.Enemies.Contains((TR1Type)e.TypeID)).Count >= enemyGroup.MaximumCount)
+                if (level.Data.Entities.FindAll(e => enemyGroup.Enemies.Contains((TR1Type)e.TypeID)).Count >= enemyGroup.MaximumCount)
                 {
                     List<TR1Type> pool = enemyPool.FindAll(e => !TR1EnemyUtilities.IsEnemyRestricted(level.Name, TR1TypeUtilities.TranslateAlias(e), groupDifficulty));
                     if (pool.Count > 0)
@@ -616,7 +615,7 @@ public class TR1EnemyRandomizer : BaseTR1Randomizer
                 List<TR1Type> spawnTypes = enemies.Available.FindAll(allEggTypes.Contains);
                 TR1Type spawnType = TR1TypeUtilities.TranslateAlias(spawnTypes[_generator.Next(0, spawnTypes.Count)]);
 
-                int entityIndex = levelEntities.IndexOf(currentEntity);
+                int entityIndex = level.Data.Entities.IndexOf(currentEntity);
                 Location eggLocation = _eggLocations[level.Name].Find(l => l.EntityIndex == entityIndex);
 
                 if (eggLocation != null || currentEntityType == newEntityType)

@@ -24,7 +24,7 @@ public class EMMoveEnemyFunction : BaseMoveTriggerableFunction
         // If the level has water creatures available, and we want to switch it, do so.
         if (AttemptWaterCreature)
         {
-            TR1Entity waterEnemy = level.Entities.ToList().Find(e => TR1TypeUtilities.IsWaterCreature((TR1Type)e.TypeID));
+            TR1Entity waterEnemy = level.Entities.Find(e => TR1TypeUtilities.IsWaterCreature((TR1Type)e.TypeID));
             if (waterEnemy != null)
             {
                 enemy.TypeID = waterEnemy.TypeID;
@@ -52,7 +52,7 @@ public class EMMoveEnemyFunction : BaseMoveTriggerableFunction
         // If the level has water creatures available, and we want to switch it, do so.
         if (AttemptWaterCreature)
         {
-            TR2Entity waterEnemy = level.Entities.ToList().Find(e => TR2TypeUtilities.IsWaterCreature((TR2Type)e.TypeID));
+            TR2Entity waterEnemy = level.Entities.Find(e => TR2TypeUtilities.IsWaterCreature((TR2Type)e.TypeID));
             if (waterEnemy != null)
             {
                 enemy.TypeID = waterEnemy.TypeID;

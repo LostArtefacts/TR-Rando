@@ -514,7 +514,6 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
 
         // Get a list of current enemy entities
         List<TR2Entity> enemyEntities = level.GetEnemyEntities();
-        List<TR2Entity> allEntities = level.Data.Entities.ToList();
 
         // Keep track of any new entities added (e.g. Skidoo)
         List<TR2Entity> newEntities = new();
@@ -607,7 +606,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         {
             TR2Type currentEntityType = (TR2Type)currentEntity.TypeID;
             TR2Type newEntityType = currentEntityType;
-            int enemyIndex = allEntities.IndexOf(currentEntity);
+            int enemyIndex = level.Data.Entities.IndexOf(currentEntity);
 
             // If it's an existing enemy that has to remain in the same spot, skip it
             if (TR2EnemyUtilities.IsEnemyRequired(level.Name, currentEntityType))
@@ -730,7 +729,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
             int maxEntityCount = TR2EnemyUtilities.GetRestrictedEnemyLevelCount(newEntityType, difficulty);
             if (maxEntityCount != -1)
             {
-                if (level.Data.Entities.ToList().FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount && enemyPool.Count > totalRestrictionCount)
+                if (level.Data.Entities.FindAll(e => e.TypeID == (short)newEntityType).Count >= maxEntityCount && enemyPool.Count > totalRestrictionCount)
                 {
                     TR2Type tmp = newEntityType;
                     while (newEntityType == tmp)
@@ -762,7 +761,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         // MercSnowMobDriver relies on RedSnowmobile so it will be available in the model list
         if (!level.Is(TR2LevelNames.TIBET))
         {
-            TR2Entity mercDriver = level.Data.Entities.ToList().Find(e => e.TypeID == (short)TR2Type.MercSnowmobDriver);
+            TR2Entity mercDriver = level.Data.Entities.Find(e => e.TypeID == (short)TR2Type.MercSnowmobDriver);
             if (mercDriver != null)
             {
                 short room, angle;
@@ -804,7 +803,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
         }
         else //For Tibet level 
         {
-            TR2Entity Skidoo = level.Data.Entities.ToList().Find(e => e.TypeID == (short)TR2Type.RedSnowmobile);
+            TR2Entity Skidoo = level.Data.Entities.Find(e => e.TypeID == (short)TR2Type.RedSnowmobile);
 
             if (Skidoo != null)
             {
@@ -948,7 +947,7 @@ public class TR2EnemyRandomizer : BaseTR2Randomizer
     {
         // Hard limit of 20 friendly enemies in trap-heavy levels to avoid freezing issues
         const int limit = 20;
-        List<TR2Entity> levelFriends = level.Data.Entities.ToList().FindAll(e => friends.Contains((TR2Type)e.TypeID));
+        List<TR2Entity> levelFriends = level.Data.Entities.FindAll(e => friends.Contains((TR2Type)e.TypeID));
         while (levelFriends.Count > limit)
         {
             TR2Entity entity = levelFriends[_generator.Next(0, levelFriends.Count)];

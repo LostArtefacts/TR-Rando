@@ -121,7 +121,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
     {
         if (level.Script.RemovesWeapons)
         {
-            List<TR1Entity> pistolEntities = level.Data.Entities.ToList().FindAll(e => TR1TypeUtilities.IsWeaponPickup((TR1Type)e.TypeID));
+            List<TR1Entity> pistolEntities = level.Data.Entities.FindAll(e => TR1TypeUtilities.IsWeaponPickup((TR1Type)e.TypeID));
             foreach (TR1Entity pistols in pistolEntities)
             {
                 int match = _pistolLocations[level.Name].FindIndex

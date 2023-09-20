@@ -90,11 +90,8 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
 
     private void HideDaytimeEntities(TR2Level level, string levelName)
     {
-        // Replace any entities that don't "make sense" at night
-        List<TR2Entity> entities = level.Entities.ToList();
-
         // A list of item locations to choose from
-        List<TR2Entity> items = entities.Where
+        List<TR2Entity> items = level.Entities.Where
         (
             e =>
                 TR2TypeUtilities.IsAmmoType((TR2Type)e.TypeID) ||
@@ -104,7 +101,7 @@ public class TR2NightModeRandomizer : BaseTR2Randomizer
 
         foreach (TR2Type entityToReplace in _entitiesToReplace.Keys)
         {
-            IEnumerable<TR2Entity> ents = entities.Where(e => e.TypeID == (short)entityToReplace);
+            IEnumerable<TR2Entity> ents = level.Entities.Where(e => e.TypeID == (short)entityToReplace);
             foreach (TR2Entity entity in ents)
             {
                 TR2Entity item = items[_generator.Next(0, items.Count)];
