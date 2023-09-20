@@ -41,9 +41,9 @@ public class EMConvertModelFunction : BaseEMFunction
     {
         foreach (TR1Entity entity in entities)
         {
-            if (entity.TypeID == OldModelID)
+            if (entity.TypeID == (TR1Type)OldModelID)
             {
-                entity.TypeID = (short)NewModelID;
+                entity.TypeID = (TR1Type)NewModelID;
             }
         }
     }

@@ -47,7 +47,7 @@ public class TR1SecretRewardRandomizer : BaseTR1Randomizer
                 continue;
             }
 
-            level.Data.Entities[i].TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+            level.Data.Entities[i].TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
         }
     }
 }

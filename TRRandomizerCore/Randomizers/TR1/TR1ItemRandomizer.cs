@@ -165,7 +165,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             }
 
             TR1Entity newItem = ItemFactory.CreateItem(level.Name, level.Data.Entities, _locations[_generator.Next(0, _locations.Count)]);
-            newItem.TypeID = (short)stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
+            newItem.TypeID = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
         }
     }
 
@@ -179,7 +179,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         List<TR1Type> stdItemTypes = TR1TypeUtilities.GetStandardPickupTypes();
         stdItemTypes.Remove(TR1Type.PistolAmmo_S_P); // Sprite/model not available
 
-        bool hasPistols = level.Data.Entities.Find(e => e.TypeID == (short)TR1Type.Pistols_S_P) != null;
+        bool hasPistols = level.Data.Entities.Any(e => e.TypeID == TR1Type.Pistols_S_P);
 
         for (int i = 0; i < level.Data.Entities.Count; i++)
         {
@@ -203,7 +203,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
                         entityType = stdItemTypes[_generator.Next(0, stdItemTypes.Count)];
                     }
                     while (!TR1TypeUtilities.IsWeaponPickup(entityType));
-                    entity.TypeID = (short)entityType;
+                    entity.TypeID = entityType;
                 }
             }
             else if (TR1TypeUtilities.IsStandardPickupType(entityType))
@@ -218,10 +218,10 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
                     }
                     while (!TR1TypeUtilities.IsWeaponPickup(newType) || newType == TR1Type.Pistols_S_P);
                 }
-                entity.TypeID = (short)newType;
+                entity.TypeID = newType;
             }
 
-            hasPistols = level.Data.Entities.Find(e => e.TypeID == (short)TR1Type.Pistols_S_P) != null;
+            hasPistols = level.Data.Entities.Any(e => e.TypeID == TR1Type.Pistols_S_P);
         }
     }
 
@@ -365,7 +365,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
             // Only move a key item if there is at least one location defined for it. Any triggers below the
             // item will be handled by default environment mods, so don't place an item in the same sector as a secret.
             // The only one we don't currently move is MinesFuseNearConveyor - potential FlipMap complications.
-            int itemID = 10000 + ((level.Script.OriginalSequence - 1) * 1000) + entity.TypeID + entity.Room;
+            int itemID = 10000 + ((level.Script.OriginalSequence - 1) * 1000) + (int)entity.TypeID + entity.Room;
             List<Location> pool = locations.FindAll(l => l.KeyItemGroupID == itemID);
             if (pool.Count > 0)
             {
@@ -421,7 +421,7 @@ public class TR1ItemRandomizer : BaseTR1Randomizer
         floorData.ParseFromLevel(_levelInstance.Data);
         foreach (TR1Type type in TR1TypeUtilities.GetKeyItemTypes())
         {
-            int typeInstanceIndex = _levelInstance.Data.Entities.FindIndex(e => e.TypeID == (short)type);
+            int typeInstanceIndex = _levelInstance.Data.Entities.FindIndex(e => e.TypeID == type);
             if (typeInstanceIndex != -1)
             {
                 if (IsSecretItem(_levelInstance.Data.Entities[typeInstanceIndex], typeInstanceIndex, _levelInstance.Data, floorData))

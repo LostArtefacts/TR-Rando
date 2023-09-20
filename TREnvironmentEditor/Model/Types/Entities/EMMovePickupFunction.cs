@@ -73,7 +73,7 @@ public class EMMovePickupFunction : BaseEMFunction
         else
         {
             // Only look for the types we are interested in.
-            matchingEntities = entities.FindAll(e => Types.Contains(e.TypeID));
+            matchingEntities = entities.FindAll(e => Types.Contains((short)e.TypeID));
         }
 
         foreach (TR1Entity match in matchingEntities)

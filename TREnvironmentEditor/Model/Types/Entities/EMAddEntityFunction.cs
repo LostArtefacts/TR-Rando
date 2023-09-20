@@ -103,7 +103,7 @@ public class EMAddEntityFunction : BaseEMFunction
     {
         return new()
         {
-            TypeID = TypeID,
+            TypeID = (TR1Type)TypeID,
             X = Location.X,
             Y = Location.Y,
             Z = Location.Z,

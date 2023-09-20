@@ -331,7 +331,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             if (rewardRoom.CameraTarget != null && ItemFactory.CanCreateItem(level.Name, level.Data.Entities))
             {
                 TR1Entity target = ItemFactory.CreateItem(level.Name, level.Data.Entities, rewardRoom.CameraTarget);
-                target.TypeID = (short)TR1Type.CameraTarget_N;
+                target.TypeID = TR1Type.CameraTarget_N;
                 cameraTarget = (ushort)level.Data.Entities.IndexOf(target);
             }
             else
@@ -440,7 +440,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                 {
                     // This will either make a new entity or repurpose an old one
                     TR1Entity entity = ItemFactory.CreateItem(level.Name, level.Data.Entities, secret.Location, true);
-                    entity.TypeID = (short)secret.PickupType;
+                    entity.TypeID = secret.PickupType;
 
                     secretIndex++;
                     pickupIndex++;
@@ -524,7 +524,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
             {
                 // This will either make a new entity or repurpose an old one
                 TR1Entity entity = ItemFactory.CreateItem(level.Name, level.Data.Entities, secret.Location);
-                entity.TypeID = (short)secret.PickupType;
+                entity.TypeID = secret.PickupType;
 
                 secret.SecretIndex++;
                 pickupIndex++;
@@ -620,7 +620,7 @@ public class TR1SecretRandomizer : BaseTR1Randomizer, ISecretRandomizer
                 Location location = pool[_generator.Next(0, pool.Count)];
 
                 TR1Entity medi = ItemFactory.CreateItem(level.Name, level.Data.Entities, location, Settings.DevelopmentMode);
-                medi.TypeID = (short)TR1Type.LargeMed_S_P;
+                medi.TypeID = TR1Type.LargeMed_S_P;
             }
             else if (ScriptEditor.Edition.IsCommunityPatch)
             {

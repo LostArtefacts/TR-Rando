@@ -307,7 +307,7 @@ public class TR1OutfitRandomizer : BaseTR1Randomizer
 
             importer.Import();
 
-            if (level.Data.Entities.Find(e => e.TypeID == (short)TR1Type.MidasHand_N) != null)
+            if (level.Data.Entities.Any(e => e.TypeID == TR1Type.MidasHand_N))
             {
                 CreateGoldenBraid(level);
             }

@@ -135,7 +135,7 @@ public class TRLevelReader : BinaryReader
     {
         return new()
         {
-            TypeID = ReadInt16(),
+            TypeID = (TR1Type)ReadInt16(),
             Room = ReadInt16(),
             X = ReadInt32(),
             Y = ReadInt32(),
