@@ -197,4 +197,30 @@ public class TRLevelReader : BinaryReader
             Flags = ReadUInt16()
         };
     }
+
+    public List<TR4AIEntity> ReadTR4AIEntities(long numEntities)
+    {
+        List<TR4AIEntity> entities = new();
+        for (int i = 0; i < numEntities; i++)
+        {
+            entities.Add(ReadTR4AIEntity());
+        }
+        return entities;
+    }
+
+    public TR4AIEntity ReadTR4AIEntity()
+    {
+        return new()
+        {
+            TypeID = ReadInt16(),
+            Room = ReadInt16(),
+            X = ReadInt32(),
+            Y = ReadInt32(),
+            Z = ReadInt32(),
+            OCB = ReadInt16(),
+            Flags = ReadUInt16(),
+            Angle = ReadInt16(),
+            Box = ReadInt16()
+        };
+    }
 }

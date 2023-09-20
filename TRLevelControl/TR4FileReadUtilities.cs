@@ -326,13 +326,8 @@ internal static class TR4FileReadUtilities
         lvl.LevelDataChunk.Entities = reader.ReadTR4Entities(numEntities);
 
         //AIObjects
-        lvl.LevelDataChunk.NumAIObjects = reader.ReadUInt32();
-        lvl.LevelDataChunk.AIObjects = new TR4AIObject[lvl.LevelDataChunk.NumAIObjects];
-
-        for (int i = 0; i < lvl.LevelDataChunk.NumAIObjects; i++)
-        {
-            lvl.LevelDataChunk.AIObjects[i] = TR4FileReadUtilities.ReadAIObject(reader);
-        }
+        numEntities = reader.ReadUInt32();
+        lvl.LevelDataChunk.AIEntities = reader.ReadTR4AIEntities(numEntities);
     }
 
     public static void PopulateDemoSoundSampleIndices(BinaryReader reader, TR4Level lvl)
@@ -750,21 +745,6 @@ internal static class TR4FileReadUtilities
             Intensity = reader.ReadInt16(),
             OCB = reader.ReadInt16(),
             Flags = reader.ReadUInt16()
-        };
-    }
-
-    public static TR4AIObject ReadAIObject(BinaryReader reader)
-    {
-        return new TR4AIObject()
-        {
-            TypeID = reader.ReadUInt16(),
-            Room = reader.ReadUInt16(),
-            X = reader.ReadInt32(),
-            Y = reader.ReadInt32(),
-            Z = reader.ReadInt32(),
-            OCB = reader.ReadInt16(),
-            Flags = reader.ReadUInt16(),
-            Angle = reader.ReadInt32()
         };
     }
 }

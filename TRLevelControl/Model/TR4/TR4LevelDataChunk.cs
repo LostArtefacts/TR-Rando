@@ -105,10 +105,7 @@ public class TR4LevelDataChunk : ISerializableCompact
 
     public TR4ObjectTexture[] ObjectTextures { get; set; }
     public List<TR4Entity> Entities { get; set; }
-
-    public uint NumAIObjects { get; set; }
-
-    public TR4AIObject[] AIObjects { get; set; }
+    public List<TR4AIEntity> AIEntities { get; set; }
 
     public ushort NumDemoData { get; set; }
 
@@ -292,12 +289,8 @@ public class TR4LevelDataChunk : ISerializableCompact
             writer.Write((uint)Entities.Count);
             writer.Write(Entities);
 
-            writer.Write(NumAIObjects);
-
-            foreach (TR4AIObject ai in AIObjects)
-            {
-                writer.Write(ai.Serialize());
-            }
+            writer.Write((uint)AIEntities.Count);
+            writer.Write(AIEntities);
 
             writer.Write(NumDemoData);
             writer.Write(DemoData);
