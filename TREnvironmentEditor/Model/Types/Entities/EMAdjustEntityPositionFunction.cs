@@ -29,53 +29,16 @@ public class EMAdjustEntityPositionFunction : BaseEMFunction
         AdjustEntities(entities);
     }
 
-    private void AdjustEntities(List<TR1Entity> entities)
+    private void AdjustEntities<T>(IEnumerable<TREntity<T>> entities)
+        where T : Enum
     {
         foreach (int roomNumber in RoomMap.Keys)
         {
             foreach (short currentAngle in RoomMap[roomNumber].Keys)
             {
                 EMLocation relocation = RoomMap[roomNumber][currentAngle];
-                List<TR1Entity> matchingEntities = entities.FindAll(e => e.Room == roomNumber && e.Angle == currentAngle);
-                foreach (TR1Entity match in matchingEntities)
-                {
-                    match.X += relocation.X;
-                    match.Y += relocation.Y;
-                    match.Z += relocation.Z;
-                    match.Angle = relocation.Angle;
-                }
-            }
-        }
-    }
-
-    private void AdjustEntities(List<TR2Entity> entities)
-    {
-        foreach (int roomNumber in RoomMap.Keys)
-        {
-            foreach (short currentAngle in RoomMap[roomNumber].Keys)
-            {
-                EMLocation relocation = RoomMap[roomNumber][currentAngle];
-                List<TR2Entity> matchingEntities = entities.FindAll(e => e.Room == roomNumber && e.Angle == currentAngle);
-                foreach (TR2Entity match in matchingEntities)
-                {
-                    match.X += relocation.X;
-                    match.Y += relocation.Y;
-                    match.Z += relocation.Z;
-                    match.Angle = relocation.Angle;
-                }
-            }
-        }
-    }
-
-    private void AdjustEntities(List<TR3Entity> entities)
-    {
-        foreach (int roomNumber in RoomMap.Keys)
-        {
-            foreach (short currentAngle in RoomMap[roomNumber].Keys)
-            {
-                EMLocation relocation = RoomMap[roomNumber][currentAngle];
-                List<TR3Entity> matchingEntities = entities.FindAll(e => e.Room == roomNumber && e.Angle == currentAngle);
-                foreach (TR3Entity match in matchingEntities)
+                IEnumerable<TREntity<T>> matchingEntities = entities.Where(e => e.Room == roomNumber && e.Angle == currentAngle);
+                foreach (TREntity<T> match in matchingEntities)
                 {
                     match.X += relocation.X;
                     match.Y += relocation.Y;

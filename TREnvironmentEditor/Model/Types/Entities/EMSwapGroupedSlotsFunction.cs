@@ -135,7 +135,8 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         floorData.Entries[slotInfo2.FDIndex].AddRange(slotInfo1.Triggers);
     }
 
-    private static void MoveSlot(TR1Entity entity, EMLocation location)
+    private static void MoveSlot<T>(TREntity<T> entity, EMLocation location)
+        where T : Enum
     {
         entity.X = location.X;
         entity.Y = location.Y;
@@ -144,49 +145,8 @@ public class EMSwapGroupedSlotsFunction : BaseEMFunction
         entity.Angle = location.Angle;
     }
 
-    private static void MoveSlot(TR2Entity entity, EMLocation location)
-    {
-        entity.X = location.X;
-        entity.Y = location.Y;
-        entity.Z = location.Z;
-        entity.Room = location.Room;
-        entity.Angle = location.Angle;
-    }
-
-    private static void MoveSlot(TR3Entity entity, EMLocation location)
-    {
-        entity.X = location.X;
-        entity.Y = location.Y;
-        entity.Z = location.Z;
-        entity.Room = location.Room;
-        entity.Angle = location.Angle;
-    }
-
-    private static EMLocation GetLocation(TR1Entity entity)
-    {
-        return new()
-        {
-            X = entity.X,
-            Y = entity.Y,
-            Z = entity.Z,
-            Room = entity.Room,
-            Angle = entity.Angle
-        };
-    }
-
-    private static EMLocation GetLocation(TR2Entity entity)
-    {
-        return new()
-        {
-            X = entity.X,
-            Y = entity.Y,
-            Z = entity.Z,
-            Room = entity.Room,
-            Angle = entity.Angle
-        };
-    }
-
-    private static EMLocation GetLocation(TR3Entity entity)
+    private static EMLocation GetLocation<T>(TREntity<T> entity)
+        where T : Enum
     {
         return new()
         {

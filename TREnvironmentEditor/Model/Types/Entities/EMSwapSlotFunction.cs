@@ -130,63 +130,12 @@ public class EMSwapSlotFunction : EMMoveSlotFunction
 
     private static bool SectorHasTriggers(TRRoomSector sector, FDControl control)
     {
-        if (sector.FDIndex != 0)
-        {
-            return control.Entries[sector.FDIndex].Find(e => e is FDTriggerEntry) != null;
-        }
-
-        return false;
+        return sector.FDIndex != 0
+            && control.Entries[sector.FDIndex].Any(e => e is FDTriggerEntry);
     }
 
-    private static void SwapSlots(TR1Entity slot1, TR1Entity slot2, EMLevelData data)
-    {
-        EMLocation temp = new()
-        {
-            X = slot1.X,
-            Y = slot1.Y,
-            Z = slot1.Z,
-            Room = slot1.Room,
-            Angle = slot1.Angle
-        };
-
-        slot1.X = slot2.X;
-        slot1.Y = slot2.Y;
-        slot1.Z = slot2.Z;
-        slot1.Room = data.ConvertRoom(slot2.Room);
-        slot1.Angle = slot2.Angle;
-
-        slot2.X = temp.X;
-        slot2.Y = temp.Y;
-        slot2.Z = temp.Z;
-        slot2.Room = data.ConvertRoom(temp.Room);
-        slot2.Angle = temp.Angle;
-    }
-
-    private static void SwapSlots(TR2Entity slot1, TR2Entity slot2, EMLevelData data)
-    {
-        EMLocation temp = new()
-        {
-            X = slot1.X,
-            Y = slot1.Y,
-            Z = slot1.Z,
-            Room = slot1.Room,
-            Angle = slot1.Angle
-        };
-
-        slot1.X = slot2.X;
-        slot1.Y = slot2.Y;
-        slot1.Z = slot2.Z;
-        slot1.Room = data.ConvertRoom(slot2.Room);
-        slot1.Angle = slot2.Angle;
-
-        slot2.X = temp.X;
-        slot2.Y = temp.Y;
-        slot2.Z = temp.Z;
-        slot2.Room = data.ConvertRoom(temp.Room);
-        slot2.Angle = temp.Angle;
-    }
-
-    private static void SwapSlots(TR3Entity slot1, TR3Entity slot2, EMLevelData data)
+    private static void SwapSlots<T>(TREntity<T> slot1, TREntity<T> slot2, EMLevelData data)
+        where T : Enum
     {
         EMLocation temp = new()
         {

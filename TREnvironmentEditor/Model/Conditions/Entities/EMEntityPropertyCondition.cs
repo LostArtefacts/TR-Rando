@@ -34,23 +34,7 @@ public class EMEntityPropertyCondition : BaseEMCondition
 
     private bool GetResult(TR1Entity entity)
     {
-        bool result = true;
-        if (EntityType.HasValue)
-        {
-            result &= (short)entity.TypeID == EntityType.Value;
-        }
-        if (EntityTypes != null)
-        {
-            result &= EntityTypes.Contains((short)entity.TypeID);
-        }
-        if (Invisible.HasValue)
-        {
-            result &= entity.Invisible == Invisible.Value;
-        }
-        if (ClearBody.HasValue)
-        {
-            result &= entity.ClearBody == ClearBody.Value;
-        }
+        bool result = GetResult<TR1Type>(entity);
         if (Intensity1.HasValue)
         {
             result &= entity.Intensity == Intensity1.Value;
@@ -59,48 +43,12 @@ public class EMEntityPropertyCondition : BaseEMCondition
         {
             result &= entity.Intensity == Intensity2.Value;
         }
-        if (Flags.HasValue)
-        {
-            result &= entity.Flags == Flags.Value;
-        }
-        if (X.HasValue)
-        {
-            result &= entity.X == X.Value;
-        }
-        if (Y.HasValue)
-        {
-            result &= entity.Y == Y.Value;
-        }
-        if (Z.HasValue)
-        {
-            result &= entity.Z == Z.Value;
-        }
-        if (Room.HasValue)
-        {
-            result &= entity.Room == Room.Value;
-        }
         return result;
     }
 
     private bool GetResult(TR2Entity entity)
     {
-        bool result = true;
-        if (EntityType.HasValue)
-        {
-            result &= (short)entity.TypeID == EntityType.Value;
-        }
-        if (EntityTypes != null)
-        {
-            result &= EntityTypes.Contains((short)entity.TypeID);
-        }
-        if (Invisible.HasValue)
-        {
-            result &= entity.Invisible == Invisible.Value;
-        }
-        if (ClearBody.HasValue)
-        {
-            result &= entity.ClearBody == ClearBody.Value;
-        }
+        bool result = GetResult<TR2Type>(entity);
         if (Intensity1.HasValue)
         {
             result &= entity.Intensity1 == Intensity1.Value;
@@ -108,40 +56,35 @@ public class EMEntityPropertyCondition : BaseEMCondition
         if (Intensity2.HasValue)
         {
             result &= entity.Intensity2 == Intensity2.Value;
-        }
-        if (Flags.HasValue)
-        {
-            result &= entity.Flags == Flags.Value;
-        }
-        if (X.HasValue)
-        {
-            result &= entity.X == X.Value;
-        }
-        if (Y.HasValue)
-        {
-            result &= entity.Y == Y.Value;
-        }
-        if (Z.HasValue)
-        {
-            result &= entity.Z == Z.Value;
-        }
-        if (Room.HasValue)
-        {
-            result &= entity.Room == Room.Value;
         }
         return result;
     }
 
     private bool GetResult(TR3Entity entity)
     {
+        bool result = GetResult<TR3Type>(entity);
+        if (Intensity1.HasValue)
+        {
+            result &= entity.Intensity1 == Intensity1.Value;
+        }
+        if (Intensity2.HasValue)
+        {
+            result &= entity.Intensity2 == Intensity2.Value;
+        }
+        return result;
+    }
+
+    private bool GetResult<T>(TREntity<T> entity)
+        where T : Enum
+    {
         bool result = true;
         if (EntityType.HasValue)
         {
-            result &= (short)entity.TypeID == EntityType.Value;
+            result &= EqualityComparer<T>.Default.Equals(entity.TypeID, (T)(object)(int)EntityType.Value);
         }
         if (EntityTypes != null)
         {
-            result &= EntityTypes.Contains((short)entity.TypeID);
+            result &= EntityTypes.Any(e => EqualityComparer<T>.Default.Equals(entity.TypeID, (T)(object)(int)e));
         }
         if (Invisible.HasValue)
         {
@@ -150,14 +93,6 @@ public class EMEntityPropertyCondition : BaseEMCondition
         if (ClearBody.HasValue)
         {
             result &= entity.ClearBody == ClearBody.Value;
-        }
-        if (Intensity1.HasValue)
-        {
-            result &= entity.Intensity1 == Intensity1.Value;
-        }
-        if (Intensity2.HasValue)
-        {
-            result &= entity.Intensity2 == Intensity2.Value;
         }
         if (Flags.HasValue)
         {

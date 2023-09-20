@@ -19,7 +19,7 @@ public class EMMovePickupFunction : BaseEMFunction
         FDControl control = new();
         control.ParseFromLevel(level);
 
-        MovePickups(level.Entities, data, delegate (EMLocation location)
+        MovePickups(level.Entities, data, location =>
         {
             return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
         });
@@ -32,7 +32,7 @@ public class EMMovePickupFunction : BaseEMFunction
         FDControl control = new();
         control.ParseFromLevel(level);
 
-        MovePickups(level.Entities, data, delegate (EMLocation location)
+        MovePickups(level.Entities, data, location =>
         {
             return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
         });
@@ -45,13 +45,14 @@ public class EMMovePickupFunction : BaseEMFunction
         FDControl control = new();
         control.ParseFromLevel(level);
 
-        MovePickups(level.Entities, data, delegate (EMLocation location)
+        MovePickups(level.Entities, data, location =>
         {
             return FDUtilities.GetRoomSector(location.X, location.Y, location.Z, data.ConvertRoom(location.Room), level, control);
         });
     }
 
-    private void MovePickups(List<TR1Entity> entities, EMLevelData data, Func<EMLocation, TRRoomSector> sectorGetter)
+    private void MovePickups<T>(IEnumerable<TREntity<T>> entities, EMLevelData data, Func<EMLocation, TRRoomSector> sectorGetter)
+        where T : Enum
     {
         // Store the sectors we are interested in
         Dictionary<TRRoomSector, EMLocation> sectors = new();
@@ -64,7 +65,7 @@ public class EMMovePickupFunction : BaseEMFunction
         // Scan for each entity type and if it's found, find its sector location. If it matches
         // any we are interested in, move the item to the new location. If we haven't defined a
         // manual target location, the one used to locate the sector will be used.
-        List<TR1Entity> matchingEntities;
+        IEnumerable<TREntity<T>> matchingEntities;
         if (Types == null || Types.Count == 0)
         {
             // We want to match anything and move it in this instance.
@@ -73,106 +74,10 @@ public class EMMovePickupFunction : BaseEMFunction
         else
         {
             // Only look for the types we are interested in.
-            matchingEntities = entities.FindAll(e => Types.Contains((short)e.TypeID));
+            matchingEntities = entities.Where(e => Types.Select(t => (T)(object)(int)t).Contains(e.TypeID));
         }
 
-        foreach (TR1Entity match in matchingEntities)
-        {
-            TRRoomSector matchSector = sectorGetter.Invoke(new EMLocation
-            {
-                X = match.X,
-                Y = match.Y,
-                Z = match.Z,
-                Room = match.Room
-            });
-
-            // MatchY means the defined sector location's Y val should be compared with the entity's Y val, for
-            // instances where an item may be in mid-air (i.e. underwater) and another may be on the floor below it.
-            if (sectors.ContainsKey(matchSector) && (!MatchY || sectors[matchSector].Y == match.Y))
-            {
-                EMLocation location = TargetLocation ?? sectors[matchSector];
-                match.X = location.X;
-                match.Y = location.Y;
-                match.Z = location.Z;
-                match.Room = data.ConvertRoom(location.Room);
-            }
-        }
-    }
-
-    private void MovePickups(List<TR2Entity> entities, EMLevelData data, Func<EMLocation, TRRoomSector> sectorGetter)
-    {
-        // Store the sectors we are interested in
-        Dictionary<TRRoomSector, EMLocation> sectors = new();
-        foreach (EMLocation location in SectorLocations)
-        {
-            TRRoomSector sector = sectorGetter.Invoke(location);
-            sectors[sector] = location;
-        }
-
-        // Scan for each entity type and if it's found, find its sector location. If it matches
-        // any we are interested in, move the item to the new location. If we haven't defined a
-        // manual target location, the one used to locate the sector will be used.
-        List<TR2Entity> matchingEntities;
-        if (Types == null || Types.Count == 0)
-        {
-            // We want to match anything and move it in this instance.
-            matchingEntities = entities;
-        }
-        else
-        {
-            // Only look for the types we are interested in.
-            matchingEntities = entities.FindAll(e => Types.Contains((short)e.TypeID));
-        }
-
-        foreach (TR2Entity match in matchingEntities)
-        {
-            TRRoomSector matchSector = sectorGetter.Invoke(new EMLocation
-            {
-                X = match.X,
-                Y = match.Y,
-                Z = match.Z,
-                Room = match.Room
-            });
-
-            // MatchY means the defined sector location's Y val should be compared with the entity's Y val, for
-            // instances where an item may be in mid-air (i.e. underwater) and another may be on the floor below it.
-            if (sectors.ContainsKey(matchSector) && (!MatchY || sectors[matchSector].Y == match.Y))
-            {
-                EMLocation location = TargetLocation ?? sectors[matchSector];
-                match.X = location.X;
-                match.Y = location.Y;
-                match.Z = location.Z;
-                match.Room = data.ConvertRoom(location.Room);
-            }
-        }
-    }
-
-    private void MovePickups(List<TR3Entity> entities, EMLevelData data, Func<EMLocation, TRRoomSector> sectorGetter)
-    {
-        // Store the sectors we are interested in
-        Dictionary<TRRoomSector, EMLocation> sectors = new();
-        foreach (EMLocation location in SectorLocations)
-        {
-            TRRoomSector sector = sectorGetter.Invoke(location);
-            sectors[sector] = location;
-        }
-
-        // Scan for each entity type and if it's found, find its sector location. If it matches
-        // any we are interested in, move the item to the new location. If we haven't defined a
-        // manual target location, the one used to locate the sector will be used.
-        List<TR3Entity> matchingEntities;
-        if (Types == null || Types.Count == 0)
-        {
-            // We want to match anything and move it in this instance.
-            matchingEntities = entities;
-        }
-        else
-        {
-            // Only look for the types we are interested in.
-            matchingEntities = entities.FindAll(e => Types.Contains((short)e.TypeID));
-        }
-
-        foreach (TR3Entity match in matchingEntities)
+        foreach (TREntity<T> match in matchingEntities)
         {
             TRRoomSector matchSector = sectorGetter.Invoke(new EMLocation
             {

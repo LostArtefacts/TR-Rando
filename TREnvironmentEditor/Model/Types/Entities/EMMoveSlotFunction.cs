@@ -111,53 +111,9 @@ public class EMMoveSlotFunction : BaseEMFunction
         }
     }
 
-    protected bool MoveSlot(FDControl control, TR1Entity slot, short roomNumber, TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
-    {
-        slot.X = Location.X;
-        slot.Y = Location.Y;
-        slot.Z = Location.Z;
-        slot.Room = roomNumber;
-        slot.Angle = Location.Angle;
-
-        if (newSector != currentSector && currentSector.FDIndex != 0)
-        {
-            MoveTriggers(control, currentSector, newSector);
-
-            if (currentFlipSector != null && newFlipSector != null && currentFlipSector.FDIndex != 0)
-            {
-                MoveTriggers(control, currentFlipSector, newFlipSector);
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    protected bool MoveSlot(FDControl control, TR2Entity slot, short roomNumber, TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
-    {
-        slot.X = Location.X;
-        slot.Y = Location.Y;
-        slot.Z = Location.Z;
-        slot.Room = roomNumber;
-        slot.Angle = Location.Angle;
-
-        if (newSector != currentSector && currentSector.FDIndex != 0)
-        {
-            MoveTriggers(control, currentSector, newSector);
-
-            if (currentFlipSector != null && newFlipSector != null && currentFlipSector.FDIndex != 0)
-            {
-                MoveTriggers(control, currentFlipSector, newFlipSector);
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    protected bool MoveSlot(FDControl control, TR3Entity slot, short roomNumber, TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
+    protected bool MoveSlot<T>(FDControl control, TREntity<T> slot, short roomNumber, 
+        TRRoomSector currentSector, TRRoomSector newSector, TRRoomSector currentFlipSector, TRRoomSector newFlipSector)
+        where T : Enum
     {
         slot.X = Location.X;
         slot.Y = Location.Y;

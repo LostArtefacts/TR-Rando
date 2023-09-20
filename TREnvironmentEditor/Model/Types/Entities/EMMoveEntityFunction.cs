@@ -26,25 +26,8 @@ public class EMMoveEntityFunction : BaseEMFunction
         MoveEntity(level.Entities[data.ConvertEntity(EntityIndex)], data);
     }
 
-    private void MoveEntity(TR1Entity entity, EMLevelData data)
-    {
-        entity.X = TargetLocation.X;
-        entity.Y = TargetLocation.Y;
-        entity.Z = TargetLocation.Z;
-        entity.Room = data.ConvertRoom(TargetLocation.Room);
-        entity.Angle = TargetLocation.Angle;
-    }
-
-    private void MoveEntity(TR2Entity entity, EMLevelData data)
-    {
-        entity.X = TargetLocation.X;
-        entity.Y = TargetLocation.Y;
-        entity.Z = TargetLocation.Z;
-        entity.Room = data.ConvertRoom(TargetLocation.Room);
-        entity.Angle = TargetLocation.Angle;
-    }
-
-    private void MoveEntity(TR3Entity entity, EMLevelData data)
+    private void MoveEntity<T>(TREntity<T> entity, EMLevelData data)
+        where T : Enum
     {
         entity.X = TargetLocation.X;
         entity.Y = TargetLocation.Y;
