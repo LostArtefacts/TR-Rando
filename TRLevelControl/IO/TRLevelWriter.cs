@@ -180,7 +180,7 @@ public class TRLevelWriter : BinaryWriter
 
     public void Write(TR4Entity entity)
     {
-        Write(entity.TypeID);
+        Write((short)entity.TypeID);
         Write(entity.Room);
         Write(entity.X);
         Write(entity.Y);
@@ -201,7 +201,7 @@ public class TRLevelWriter : BinaryWriter
 
     public void Write(TR4AIEntity entity)
     {
-        Write(entity.TypeID);
+        Write((short)entity.TypeID);
         Write(entity.Room);
         Write(entity.X);
         Write(entity.Y);
@@ -222,7 +222,7 @@ public class TRLevelWriter : BinaryWriter
 
     public void Write(TR5Entity entity)
     {
-        Write(entity.TypeID);
+        Write((short)entity.TypeID);
         Write(entity.Room);
         Write(entity.X);
         Write(entity.Y);
@@ -243,7 +243,7 @@ public class TRLevelWriter : BinaryWriter
 
     public void Write(TR5AIEntity entity)
     {
-        Write(entity.TypeID);
+        Write((short)entity.TypeID);
         Write(entity.Room);
         Write(entity.X);
         Write(entity.Y);
