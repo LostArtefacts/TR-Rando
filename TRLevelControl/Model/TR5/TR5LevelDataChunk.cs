@@ -103,8 +103,8 @@ public class TR5LevelDataChunk
     public uint NumObjectTextures { get; set; }
 
     public TR5ObjectTexture[] ObjectTextures { get; set; }
-    public List<TR4Entity> Entities { get; set; }
-    public List<TR4AIEntity> AIEntities { get; set; }
+    public List<TR5Entity> Entities { get; set; }
+    public List<TR5AIEntity> AIEntities { get; set; }
 
     public ushort NumDemoData { get; set; }
 

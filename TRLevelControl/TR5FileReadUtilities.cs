@@ -497,11 +497,11 @@ internal static class TR5FileReadUtilities
     {
         //Entities
         uint numEntities = reader.ReadUInt32();
-        lvl.LevelDataChunk.Entities = reader.ReadTR4Entities(numEntities);
+        lvl.LevelDataChunk.Entities = reader.ReadTR5Entities(numEntities);
 
         //AIObjects
         numEntities = reader.ReadUInt32();
-        lvl.LevelDataChunk.AIEntities = reader.ReadTR4AIEntities(numEntities);
+        lvl.LevelDataChunk.AIEntities = reader.ReadTR5AIEntities(numEntities);
     }
 
     public static void PopulateDemoSoundSampleIndices(BinaryReader reader, TR5Level lvl)
