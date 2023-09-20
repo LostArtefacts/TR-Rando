@@ -104,10 +104,7 @@ public class TR4LevelDataChunk : ISerializableCompact
     public uint NumObjectTextures { get; set; }
 
     public TR4ObjectTexture[] ObjectTextures { get; set; }
-
-    public uint NumEntities { get; set; }
-
-    public TR4Entity[] Entities { get; set; }
+    public List<TR4Entity> Entities { get; set; }
 
     public uint NumAIObjects { get; set; }
 
@@ -135,7 +132,7 @@ public class TR4LevelDataChunk : ISerializableCompact
     public byte[] Serialize()
     {
         using MemoryStream stream = new();
-        using (BinaryWriter writer = new(stream))
+        using (TRLevelWriter writer = new(stream))
         {
             writer.Write(Unused);
             writer.Write(NumRooms);
@@ -292,12 +289,8 @@ public class TR4LevelDataChunk : ISerializableCompact
                 writer.Write(otex.Serialize());
             }
 
-            writer.Write(NumEntities);
-
-            foreach (TR4Entity ent in Entities)
-            {
-                writer.Write(ent.Serialize());
-            }
+            writer.Write((uint)Entities.Count);
+            writer.Write(Entities);
 
             writer.Write(NumAIObjects);
 

@@ -127,7 +127,7 @@ public class TR4LevelControl : TRLevelControlBase<TR4Level>
         Debug.Assert(buffer.Length == lvl.LevelDataChunk.UncompressedSize);
 
         using MemoryStream stream = new(buffer, false);
-        using BinaryReader lvlChunkReader = new(stream);
+        using TRLevelReader lvlChunkReader = new(stream);
         TR4FileReadUtilities.PopulateRooms(lvlChunkReader, lvl);
         TR4FileReadUtilities.PopulateFloordata(lvlChunkReader, lvl);
         TR4FileReadUtilities.PopulateMeshes(lvlChunkReader, lvl);
