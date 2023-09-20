@@ -493,16 +493,11 @@ internal static class TR5FileReadUtilities
         };
     }
 
-    public static void PopulateEntitiesAndAI(BinaryReader reader, TR5Level lvl)
+    public static void PopulateEntitiesAndAI(TRLevelReader reader, TR5Level lvl)
     {
         //Entities
-        lvl.LevelDataChunk.NumEntities = reader.ReadUInt32();
-        lvl.LevelDataChunk.Entities = new TR4Entity[lvl.LevelDataChunk.NumEntities];
-
-        for (int i = 0; i < lvl.LevelDataChunk.NumEntities; i++)
-        {
-            lvl.LevelDataChunk.Entities[i] = TR4FileReadUtilities.ReadEntity(reader);
-        }
+        uint numEntities = reader.ReadUInt32();
+        lvl.LevelDataChunk.Entities = reader.ReadTR4Entities(numEntities);
 
         //AIObjects
         lvl.LevelDataChunk.NumAIObjects = reader.ReadUInt32();
