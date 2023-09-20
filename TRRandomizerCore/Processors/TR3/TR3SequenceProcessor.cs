@@ -174,10 +174,9 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
         importer.Import();
 
-        List<TR2Entity> entities = level.Data.Entities.ToList();
         foreach (Location location in _upvLocations[level.Name])
         {
-            TR2Entity entity = ItemFactory.CreateItem(level.Name, entities, location);
+            TR2Entity entity = ItemFactory.CreateItem(level.Name, level.Data.Entities, location);
             if (entity == null)
             {
                 break;
@@ -186,16 +185,11 @@ public class TR3SequenceProcessor : TR3LevelProcessor
             entity.TypeID = (short)TR3Type.UPV;
         }
 
-        level.Data.Entities = entities.ToArray();
-        level.Data.NumEntities = (uint)entities.Count;
-
         // We can only have one vehicle type per level because LaraVehicleAnimation_H is tied to
         // each, so for the likes of Nevada, replace the quad with another UPV to fly into HSC.
-        List<TR2Entity> quads = entities.FindAll(e => e.TypeID == (short)TR3Type.Quad);
-        foreach (TR2Entity quad in quads)
-        {
-            quad.TypeID = (short)TR3Type.UPV;
-        }
+        level.Data.Entities
+            .FindAll(e => e.TypeID == (short)TR3Type.Quad)
+            .ForEach(e => e.TypeID = (short)TR3Type.UPV);
 
         // If we're not randomizing enemies, we have to perform the monkey/tiger/vehicle crash
         // test here for the likes of Jungle.
@@ -313,7 +307,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
         AmendBossFight(level);
 
         // Hide the old Willie AI pathing
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR2Entity entity = level.Data.Entities[i];
             TR3Type type = (TR3Type)entity.TypeID;
@@ -359,8 +353,7 @@ public class TR3SequenceProcessor : TR3LevelProcessor
 
     private static void AmendCrashSitePiranhas(TR3CombinedLevel level)
     {
-        TR2Entity piranhas = Array.Find(
-            level.Data.Entities, e => e.TypeID == (short)TR3Type.Piranhas_N && e.Room == 61);
+        TR2Entity piranhas = level.Data.Entities.Find(e => e.TypeID == (short)TR3Type.Piranhas_N && e.Room == 61);
         if (piranhas != null)
         {
             // Move them behind the gate, which is an unreachable room

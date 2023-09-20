@@ -163,7 +163,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
     {
         List<TR3Type> stdItemTypes = TR3TypeUtilities.GetStandardPickupTypes();
 
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             if (_secretMapping != null && _secretMapping.RewardEntities.Contains(i))
             {
@@ -211,7 +211,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
         floorData.ParseFromLevel(level.Data);
 
         // Look for extra utility/ammo items and hide them
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             TR2Entity ent = level.Data.Entities[i];
             if ((_secretMapping != null && _secretMapping.RewardEntities.Contains(i)) || ent == _unarmedLevelPistols)
@@ -247,7 +247,7 @@ public class TR3ItemRandomizer : BaseTR3Randomizer
 
         List<Location> locations = GetItemLocationPool(level);
 
-        for (int i = 0; i < level.Data.NumEntities; i++)
+        for (int i = 0; i < level.Data.Entities.Count; i++)
         {
             if (_secretMapping.RewardEntities.Contains(i)
                 || ItemFactory.IsItemLocked(_levelInstance.Name, i))

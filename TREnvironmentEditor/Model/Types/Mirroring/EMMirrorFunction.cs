@@ -90,11 +90,11 @@ public class EMMirrorFunction : BaseEMFunction
             _worldWidth = Math.Max(_worldWidth, room.Info.X + SectorSize * room.NumXSectors);
         }
 
-        TR2Entity puna = Array.Find(level.Entities, e => e.TypeID == (short)TR3Type.Puna);
+        TR2Entity puna = level.Entities.Find(e => e.TypeID == (short)TR3Type.Puna);
         if (puna != null)
         {
             // Rebuild the world around Puna's Lizard
-            TR2Entity lizardMan = Array.Find(level.Entities, e => e.Room == puna.Room && e.TypeID == (short)TR3Type.LizardMan);
+            TR2Entity lizardMan = level.Entities.Find(e => e.Room == puna.Room && e.TypeID == (short)TR3Type.LizardMan);
             _xAdjustment = lizardMan.X - FlipWorldX(lizardMan.X);
         }
     }

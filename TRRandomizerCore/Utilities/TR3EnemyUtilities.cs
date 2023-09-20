@@ -158,17 +158,14 @@ public static class TR3EnemyUtilities
 
     public static bool IsDroppableEnemyRequired(TR3CombinedLevel level)
     {
-        TR2Entity[] enemies = Array.FindAll(level.Data.Entities, e => TR3TypeUtilities.IsEnemyType((TR3Type)e.TypeID));
+        List<TR2Entity> enemies = level.Data.Entities.FindAll(e => TR3TypeUtilities.IsEnemyType((TR3Type)e.TypeID));
         foreach (TR2Entity entityInstance in enemies)
         {
-            List<TR2Entity> sharedItems = new(Array.FindAll
-            (
-                level.Data.Entities,
-                e =>
-                    e.X == entityInstance.X &&
-                    e.Y == entityInstance.Y &&
-                    e.Z == entityInstance.Z
-            ));
+            List<TR2Entity> sharedItems = level.Data.Entities.FindAll(e =>
+                e.X == entityInstance.X
+                && e.Y == entityInstance.Y
+                && e.Z == entityInstance.Z
+            );
             if (sharedItems.Count > 1)
             {
                 // Are any entities that are sharing a location a droppable pickup?
